@@ -12,5 +12,6 @@ deploy:
   github_token: $GITHUB_TOKEN
   keep_history: true
   local_dir: build
+  fqdn: docs.128technology.com
   on:
     branch: master
