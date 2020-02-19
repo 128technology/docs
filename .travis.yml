@@ -14,6 +14,5 @@ deploy:
   keep_history: true
   local_dir: build
   fqdn: docs.128technology.com
-  github_url: github.com/128technology/docs
   on:
     branch: master
