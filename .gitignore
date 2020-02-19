@@ -2,8 +2,7 @@
 /node_modules
 
 # Production
-# commenting out /build, since production is hosted from source repo
-# /build
+/build
 
 # Generated files
 .docusaurus
