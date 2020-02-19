@@ -8,10 +8,12 @@ script:
   - npm run build
 deploy:
   provider: pages
+  target_branch: gh-pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   keep_history: true
   local_dir: build
   fqdn: docs.128technology.com
+  github_url: github.com/128technology/docs
   on:
     branch: master
