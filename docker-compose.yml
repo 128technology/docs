@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  docusaurus:
+    build: .
+    network_mode: "host"
+    volumes:
+      - ./docs:/app/docs
+      - ./src:/app/src
+      - ./static:/app/static
+    working_dir: /app/
