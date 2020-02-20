@@ -16,11 +16,12 @@ module.exports = {
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: '128t-docs', // Usually your repo name.
   themeConfig: {
+    disableDarkMode: true,
     navbar: {
       title: '',
       logo: {
         alt: '128 Technology Logo',
-        src: 'img/docs.png',
+        src: 'img/128t_black.png',
       },
       links: [
         {to: 'docs/doc1', label: 'Docs', position: 'left'},
@@ -28,7 +29,7 @@ module.exports = {
         {href: 'https://www.128technology.com/', label:'Company', position: 'left'},
         // Please keep GitHub link to the right for consistency.
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/128technology/docs',
           label: 'GitHub',
           position: 'right',
         },
