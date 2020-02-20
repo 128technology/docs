@@ -8,4 +8,6 @@ services:
       - ./docs:/app/docs
       - ./src:/app/src
       - ./static:/app/static
+      - ./docusaurus.config.js:/app/docusaurus.config.js
+      - ./sidebars.js:/app/sidebars.js
     working_dir: /app/

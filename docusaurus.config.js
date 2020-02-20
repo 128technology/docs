@@ -54,7 +54,7 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
+              label: 'Test',
               href: 'https://stackoverflow.com/questions/tagged/docusaurus',
             },
             {
@@ -66,10 +66,6 @@ module.exports = {
         {
           title: 'Social',
           items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
             {
               label: 'GitHub',
               href: 'https://github.com/facebook/docusaurus',
