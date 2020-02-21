@@ -9,7 +9,7 @@
 
 module.exports = {
   title: '128T Docs',
-  tagline: 'The documentation resource for the 128T Networking Platform',
+  tagline: 'The documentation source for the 128T Networking Platform',
   url: 'https://docs.128technology.com',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
@@ -24,15 +24,9 @@ module.exports = {
         src: 'img/128t_black.png',
       },
       links: [
-        {to: 'docs/doc1', label: 'Docs', position: 'left'},
-        {href: 'https://community.128technology.com/home', label: 'Interchange', position: 'left'},
-        {href: 'https://www.128technology.com/', label:'Company', position: 'left'},
-        // Please keep GitHub link to the right for consistency.
-        {
-          href: 'https://github.com/128technology/docs',
-          label: 'GitHub',
-          position: 'right',
-        },
+        {to: 'docs/doc1', label: 'Docs', position: 'right'},
+        {href: 'https://community.128technology.com/home', label: 'Interchange', position: 'right'},
+        {href: 'https://www.128technology.com/', label:'Company', position: 'right'},
       ],
     },
     footer: {
@@ -78,11 +72,6 @@ module.exports = {
           ],
         },
       ],
-      logo: {
-        alt: 'Facebook Open Source Logo',
-        src: 'img/oss_logo.png',
-        href: 'https://opensource.facebook.com/',
-      },
       // Please do not remove the credits, help to publicize Docusaurus :)
       copyright: `Copyright © ${new Date().getFullYear()} 128 Technology, Inc. Built with Docusaurus.`,
     },
