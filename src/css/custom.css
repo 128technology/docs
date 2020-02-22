@@ -24,6 +24,7 @@
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
   --ifm-color-secondary: #9C7C33;
+  --ifm-footer-background-color: #272526;
   --ifm-font-family-base: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --ifm-font-family-monospace: Hack, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
@@ -123,4 +124,9 @@ h1, h2, h3, h4 {
   font-family: Barlow-SemiBold, sans-serif;
   text-transform: uppercase;
   font-style: bold;
+}
+
+.footer {
+  background-color: #272526;
+  color: #ffffff;
 }
