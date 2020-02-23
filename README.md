@@ -5,12 +5,22 @@ markdown format.
 
 # Local Building and Testing
 
-##Run the local web server in docker
+## Run the local web server in Docker
 
-Ensure you have previously installed docker.
+Preview your docs from a local live-reloading web server running in docker!
 
-To run the local web server:
+### With `docker-compose`
+The simplest method to run the server is with `docker-compose`.
 
-Run `docker-compose up` and Compose starts and runs your entire app.
+1. Ensure you have installed `docker` and `docker-compose`.
+2. Run `docker-compose up` to build and start the server in a container.
 
-That's it. Point a browser to http://localhost:3000 to see the fruits of your labor
+### With `docker`
+Alternatively if you prefer, you can run the server just with `docker`.
+
+1. Ensure you have installed `docker`.
+2. Build the image with `docker image build -t 128t-docs .`
+3. Create the container with `docker create --name 128t-docs --publish 3000:3000 128t-docs`
+3. Run `docker start -a 128t-docs `
+
+That's it. Point a browser to http://localhost:3000 to see the fruits of your labor.
