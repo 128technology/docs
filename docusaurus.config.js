@@ -15,7 +15,7 @@ module.exports = {
         src: 'img/128t_black.png',
       },
       links: [
-        {to: 'docs/doc1', label: 'Docs', position: 'right'},
+        {to: 'docs/intro_getting_started', label: 'Docs', position: 'right'},
         {href: 'https://community.128technology.com/home', label: 'Interchange', position: 'right'},
         {href: 'https://www.128technology.com/', label:'Company', position: 'right'},
       ],

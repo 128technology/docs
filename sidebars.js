@@ -1,7 +1,5 @@
 module.exports = {
   "docs": {
-    "Docusaurus": ['doc1', 'doc2', 'doc3'],
-    "Features": ['mdx'],
     "About": [
       {
       	"type": "category",
@@ -24,31 +22,21 @@ module.exports = {
     "Concepts": [
       "concepts_glossary",
     ],
-    "Plugins": [
-      {
-      	"type": "doc",
-      	"id": "monitoring"
-      }
-    ],
     "Administration": [
       {
-      	"type": "category",
-      	"label": "Configuration",
-      	"items": [
-      	  "config_host_service"
-      	],
+        "type": "category",
+        "label": "Configuration",
+        "items": [
+          "config_host_service"
+        ],
       },
       {
-      	"type": "category",
-      	"label": "Troubleshooting",
-      	"items": [
-      	  "ts_services"
-      	],
+        "type": "category",
+        "label": "Troubleshooting",
+        "items": [
+          "ts_services"
+        ],
       },
-    ],
-    "APIs": [
-      "apis_rest",
-      "apis_netconf",
     ],
     "Events": [ "events" ],
     "Best Practics": [
@@ -56,6 +44,16 @@ module.exports = {
     ],
     "CLI Reference": [
       "cli_reference"
+    ],
+    "Plugins": [
+      {
+      	"type": "doc",
+      	"id": "monitoring_agent"
+      }
+    ],
+    "APIs": [
+      "apis_rest",
+      "apis_netconf",
     ],
   }
 };

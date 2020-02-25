@@ -1,8 +1,14 @@
 ---
+id: about_contributing
 title: Contributing
+sidebar_label: Contributing
 ---
 
 # How to contribute
+
+You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
+
+
 
 I'm really glad you're reading this, because we need volunteer developers to help this project come to fruition.
 
