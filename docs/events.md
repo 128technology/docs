@@ -99,7 +99,7 @@ Within the web client, the Event History link will bring you to a page where all
 
 ## Shelving Alarms
 
-When a 128T is put into “Maintenance Mode” all alarms for that 128T will be “shelved” so as to not bother the user. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI. The state of shelved alarms can be optionally viewed by issuing:
+When a 128T is put into “Maintenance Mode” all alarms for that 128T will be “shelved”. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI. The state of shelved alarms can be optionally viewed by issuing:
 
 ```
 admin@conductor1.nycsite1# show alarms shelved
