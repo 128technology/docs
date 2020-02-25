@@ -27,7 +27,7 @@ module.exports = {
         "type": "category",
         "label": "Configuration",
         "items": [
-          "config_host_service"
+          "config_audit_log"
         ],
       },
       {
