@@ -40,7 +40,7 @@ module.exports = {
     ],
     "Events": [ "events" ],
     "Best Practics": [
-      "bcp_conductor_design"
+      "bcp_conductor_deployment"
     ],
     "CLI Reference": [
       "cli_reference"
