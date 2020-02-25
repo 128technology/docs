@@ -6,26 +6,28 @@ module.exports = {
       {
       	"type": "category",
       	"label": "Release Notes",
-      	"items": [ "release_notes/4.2.0", "release_notes/4.2.1" ],
+      	"items": [
+          "release_notes/release_notes_4.2.0",
+          "release_notes/release_notes_4.2.1"
+        ],
       },
       {
       	"type": "doc",
-      	"id": "about/contributing"
+      	"id": "about_contributing"
       },
     ],
     "Introduction": [
-      "introduction/downloading",
-      "introduction/installation",
-      "introduction/getting_started",
+      "intro_downloading",
+      "intro_installation",
+      "intro_getting_started",
     ],
     "Concepts": [
-      "concepts/key_concepts",
-      "concepts/glossary",
+      "concepts_glossary",
     ],
     "Plugins": [
       {
       	"type": "doc",
-      	"id": "plugins/monitoring/monitoring"
+      	"id": "monitoring"
       }
     ],
     "Administration": [
@@ -33,27 +35,27 @@ module.exports = {
       	"type": "category",
       	"label": "Configuration",
       	"items": [
-      	  "administration/configuring/host_service"
+      	  "config_host_service"
       	],
       },
       {
       	"type": "category",
       	"label": "Troubleshooting",
       	"items": [
-      	  "administration/troubleshooting/services"
+      	  "ts_services"
       	],
       },
     ],
     "APIs": [
-      "apis/rest",
-      "apis/netconf",
+      "apis_rest",
+      "apis_netconf",
     ],
-    "Events": [ "events/events" ],
+    "Events": [ "events" ],
     "Best Practics": [
-      "best_practice/service"
+      "bcp_service"
     ],
     "CLI Reference": [
-      "cli_reference/cli_reference"
+      "cli_reference"
     ],
   }
 };
