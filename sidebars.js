@@ -27,6 +27,7 @@ module.exports = {
         "type": "category",
         "label": "Configuration",
         "items": [
+          "config_basics",
           "config_audit_log"
         ],
       },
