@@ -40,7 +40,9 @@ When deploying conductor on theInternet, 128 Technology recommends limiting acce
 
 128 Technology recommends enabling hyperthreading for systems operating as conductors, as it may improve performance.
 
-> **Note:** Because 128 Technology *does not* recommend hyperthreading for nodes running 128T software as a router, please be aware when repurposing a host from conductor to router that hyperthreading should be disabled.
+:::note
+Because 128 Technology *does not* recommend hyperthreading for nodes running 128T software as a router, please be aware when repurposing a host from conductor to router that hyperthreading should be disabled.
+:::
 
 ### About _Conductor Host Services_
 
@@ -89,7 +91,7 @@ This design is recommended when the majority of the router population uses one a
 Within each Linux host on the minority set of routers, use the following `firewall-cmd` command (all on one line):
 
 ```
-firewall-cmd --permanent --direct --add-rule ipv4 nat OUTPUT 0 -d <public IP> -j 
+firewall-cmd --permanent --direct --add-rule ipv4 nat OUTPUT 0 -d <public IP> -j
     DNAT --to-destination <private IP>
 ```
 
@@ -99,7 +101,9 @@ This command will set a persistent `firewalld` rule that will translate packets 
 
 Rather than use the built-in conductor services feature, you can "roll your own" conductor services by manually defining a conductor service. For the purposes of this example, we'll assume your conductor has two appearances: one on the public internet, and a second on a LAN. We'll need to define a `conductor` service that contains both IP addresses, and the various ports used for the routers to connect to it.
 
-> **Note:** It is possible to split the conductor service into separate services for each address, and set the `applies-to` for the service to the various populations. E.g., all of your data center routers can be in a `router-group` named "dc-routers" and your branch locations can be in a `router-group` named "branch". Then you can have a `service` defined for the local address with `applies-to` set to `dc-routers`, and a second `service` defined for the public address with `applies-to` set to `branch`.
+:::tip
+It is possible to split the conductor service into separate services for each address, and set the `applies-to` for the service to the various populations. E.g., all of your data center routers can be in a `router-group` named "dc-routers" and your branch locations can be in a `router-group` named "branch". Then you can have a `service` defined for the local address with `applies-to` set to `dc-routers`, and a second `service` defined for the public address with `applies-to` set to `branch`.
+:::
 
 Once the services are defined, you'll also need to create `service-route` configuration for each router, to reach the conductor service.
 
@@ -123,7 +127,9 @@ A critical design consideration when configuring 128T routers to talk to the con
 
 When using _Conductor Host Services_ to create your configuration for a router to reach the conductor, the 128T configuration generator will create all of the necessary infrastructure (within both 128T as well as the host platform) to connect to the conductor on the interfaces you've specified. It does so by creating a _KNI_ (Kernel Network Interface), which is a network interface that connects between the Linux kernel and the 128T software.
 
-> **Note:** You must also specify *conductor=true* on one of your network-interface configuration elements, in order for the 128T to recognize which egress path(s) to use.
+:::important
+You must also specify `conductor=true` on one of your network-interface configuration elements, in order for the 128T to recognize which egress path(s) to use.
+:::
 
 The KNI (named `kni254`) shuttles packets back and forth between the Linux processses (salt, secureCommunicationManager) and the 128T routing domain. Conductor Host Services will install specific, /32 routes to one or two conductor addresses, using the local KNI address (169.254.127.126) as its next-hop. Those will be sent "up" to the 128T routing domain, where they will match the generated `_conductor_` service(s), and follow the service-route out of the specified interface.
 
@@ -135,4 +141,6 @@ The term _in-band management_ in the context of conductor connectivity refers to
 
 Routing nodes are said to leverage _out-of-band management_ when they have a dedicated interface for the traffic to reach the conductor. Out-of-band management is generally only feasible when a conductor is colocated with the routing nodes, as is commonly the case at a head end data center.
 
-> **Note:** It is possible to have a dedicated out-of-band management interface on branch locations, but this connection will almost certainly ultimately ride over the same device's WAN connection to the conductor. I.e., the management traffic will egress one interface on the device and be sent back to another interface on the same device. As such, the in-band management model is more suitable, as it avoids unnecessary hops.
+:::note
+It is possible to have a dedicated out-of-band management interface on branch locations, but this connection will almost certainly ultimately ride over the same device's WAN connection to the conductor. I.e., the management traffic will egress one interface on the device and be sent back to another interface on the same device. As such, the in-band management model is more suitable, as it avoids unnecessary hops.
+:::
