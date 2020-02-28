@@ -13,26 +13,26 @@
 <link data-react-helmet="true" rel="shortcut icon" href="/img/favicon.ico">
 
 
-<link rel="stylesheet" href="/styles.e0de8951.css">
+<link rel="stylesheet" href="/styles.f2b01463.css">
 
 
-<link rel="preload" href="/styles.a8383c06.js" as="script">
+<link rel="preload" href="/styles.0a72a434.js" as="script">
 
-<link rel="preload" href="/runtime~main.9ac0eea5.js" as="script">
+<link rel="preload" href="/runtime~main.2c8ec45d.js" as="script">
 
-<link rel="preload" href="/main.6e84aa9a.js" as="script">
+<link rel="preload" href="/main.a2fb0cd4.js" as="script">
 
-<link rel="preload" href="/1.50eaf946.js" as="script">
+<link rel="preload" href="/1.88a98cff.js" as="script">
 
-<link rel="preload" href="/2.ac7d519b.js" as="script">
+<link rel="preload" href="/2.1e995791.js" as="script">
 
-<link rel="preload" href="/23.700f9a9e.js" as="script">
+<link rel="preload" href="/24.79a031e4.js" as="script">
 
 <link rel="preload" href="/20ac7829.b0b9995c.js" as="script">
 
-<link rel="preload" href="/17896441.f719fff5.js" as="script">
+<link rel="preload" href="/17896441.85957aa1.js" as="script">
 
-<link rel="preload" href="/e5498f89.e2fbee10.js" as="script">
+<link rel="preload" href="/e5498f89.49aeb647.js" as="script">
 
 </head>
 <body>
@@ -44,23 +44,23 @@
 </span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        path-mtu-discovery</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">            enabled  true</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">            interval 600</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        exit</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    exit</span></div></code></pre></div><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="notes-about-the-configuration"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#notes-about-the-configuration" title="Direct link to heading">#</a>Notes about the configuration</h2><p>A <a href="https://en.wikipedia.org/wiki/Carrier-grade_NAT">Carrier-grade NAT</a>, which is indistinguishable from an enterprise-grade (or consumer) NAT from a 128T configuration perspective, requires certain configuration considerations. First, as seen in the configuration fragment above, it is important to set the <code>peer-connectivity</code> to <code>outbound-only</code>. This will guarantee that any traffic originating at a peer and destined for the LTE device will be created &quot;inside out&quot; from the NAT&#x27;s perspective. (For more information on the outbound-only feature of the 128T product, read the reference manual.)</p><p>The <code>bfd</code> configuration is dilated to use <code>60000</code> milliseconds as its interval. This configuration is empirically observed to work on most U.S. LTE provider networks – the Carrier-grade NAT devices present in the United States typically use NAT bindings longer than one minute. This value may need adjustment in your local region, if you experience difficulties in establishing sessions toward 128T routers over LTE networks.</p><blockquote><p><strong>Note:</strong> These BFD keepalive messages are small and therefore do not consume much bandwidth. However, on interfaces where every byte counts against your monthly bandwidth allocation, it is important to keep these settings as conservative as you can to maintain a stable connection.</p></blockquote><p>Last, the <code>udp-transform</code> configuration element in the neighborhood is configured with its <code>mode</code> set to <code>always-transform</code>. Because we can presume that the Carrier-grade NAT exists, we do not need to test for it using our detection mechanism. This reduces unnecessary overhead on the path.</p></div></article><div class="margin-vert--xl"><div class="row"><div class="col"><a href="https://github.com/128technology/docs/tree/master/docs/bcp_lte_peering.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col text--right"><em><small>Last updated on <time datetime="2020-02-26T00:51:22.000Z" class="docLastUpdatedAt_1sqk">2/26/2020</time> by <strong>Michael Baj</strong></small></em></div></div></div><div class="margin-vert--lg"><nav class="pagination-nav"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/bcp_conductor_deployment"><h5 class="pagination-nav__link--sublabel">Previous</h5><h4 class="pagination-nav__link--label">« Conductor Deployment Patterns</h4></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/cli_reference"><h5 class="pagination-nav__link--sublabel">Next</h5><h4 class="pagination-nav__link--label">Reference »</h4></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_TbNY"><ul class="contents contents__left-border"><li><a href="#overview" class="contents__link">Overview</a></li><li><a href="#configuration-sample" class="contents__link">Configuration Sample</a></li><li><a href="#notes-about-the-configuration" class="contents__link">Notes about the configuration</a></li></ul></div></div></div></div></div></main></div></div><footer class="footer"><div class="container"><div class="text--center">Copyright © 2020 128 Technology, Inc.</div></div></footer>
 </div>
 
-<script src="/styles.a8383c06.js"></script>
+<script src="/styles.0a72a434.js"></script>
 
-<script src="/runtime~main.9ac0eea5.js"></script>
+<script src="/runtime~main.2c8ec45d.js"></script>
 
-<script src="/main.6e84aa9a.js"></script>
+<script src="/main.a2fb0cd4.js"></script>
 
-<script src="/1.50eaf946.js"></script>
+<script src="/1.88a98cff.js"></script>
 
-<script src="/2.ac7d519b.js"></script>
+<script src="/2.1e995791.js"></script>
 
-<script src="/23.700f9a9e.js"></script>
+<script src="/24.79a031e4.js"></script>
 
 <script src="/20ac7829.b0b9995c.js"></script>
 
-<script src="/17896441.f719fff5.js"></script>
+<script src="/17896441.85957aa1.js"></script>
 
-<script src="/e5498f89.e2fbee10.js"></script>
+<script src="/e5498f89.49aeb647.js"></script>
 
 
 </body>
