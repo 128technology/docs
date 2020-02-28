@@ -49,12 +49,6 @@
 }
 
 @font-face {
-  font-family: Barlow;
-  src: url('/font/Barlow-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-}
-
-@font-face {
   font-family: RbNo31-Black;
   src: url('/font/RBNo31-Black.ttf') format('truetype');
   font-weight: 900;
@@ -80,7 +74,7 @@
 
 @font-face {
   font-family: Barlow;
-  src: url('/font/Barlow-Medium.ttf') format('truetype');
+  src: url('/font/Barlow-Regular.ttf') format('truetype');
   font-style: normal;
 }
 
@@ -116,8 +110,16 @@ h1, h2, h3, h4 {
   font-family: Barlow-SemiBold, sans-serif;
 }
 
+h1 {
+  color: #39697C;
+}
+
+h2, h3, h4 {
+  color: #9C7C33;
+}
+
 .menu, .contents {
-  font-family: Barlow, sans-serif;
+  font-family: Barlow-SemiBold, sans-serif;
 }
 
 .navbar {
@@ -128,5 +130,12 @@ h1, h2, h3, h4 {
 
 .footer {
   background-color: #272526;
-  color: #ffffff;
+  color: #9C7C33;
+}
+
+.heroTitle {
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  font-size: 38px;
+  font-style: normal;
 }
