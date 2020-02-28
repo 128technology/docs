@@ -4,7 +4,9 @@ sidebar_label: LTE Peering
 ---
 It is quite common for 128T routers to use LTE interfaces as a "last resort" transport when primary circuits are down, congested, or experiencing issues. This document recommends various configuration settings to strike a balance between performance and bandwidth usage for LTE interfaces, to get the most benefit from them when peering over LTE.
 
-> **Note:** This document is intended for customers that use LTE interfaces as a last resort transport, not for those using it as a primary transport.
+:::note
+ This document is intended for customers that use LTE interfaces as a last resort transport, not for those using it as a primary transport.
+:::
 
 ## Overview
 
@@ -53,7 +55,8 @@ A [Carrier-grade NAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT), which is
 
 The `bfd` configuration is dilated to use `60000` milliseconds as its interval. This configuration is empirically observed to work on most U.S. LTE provider networks – the Carrier-grade NAT devices present in the United States typically use NAT bindings longer than one minute. This value may need adjustment in your local region, if you experience difficulties in establishing sessions toward 128T routers over LTE networks.
 
-> **Note:** These BFD keepalive messages are small and therefore do not consume much bandwidth. However, on interfaces where every byte counts against your monthly bandwidth allocation, it is important to keep these settings as conservative as you can to maintain a stable connection.
+:::important
+These BFD keepalive messages are small and therefore do not consume much bandwidth. However, on interfaces where every byte counts against your monthly bandwidth allocation, it is important to keep these settings as conservative as you can to maintain a stable connection.
+:::
 
 Last, the `udp-transform` configuration element in the neighborhood is configured with its `mode` set to `always-transform`. Because we can presume that the Carrier-grade NAT exists, we do not need to test for it using our detection mechanism. This reduces unnecessary overhead on the path.
-
