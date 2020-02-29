@@ -23,6 +23,11 @@ module.exports = {
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} 128 Technology, Inc.`,
     },
+    algolia: {
+      apiKey: '1ee0f6866243c8e25883eee3ce0708ce',
+      indexName: '128technology',
+      algoliaOptions: {},
+    },
   },
   presets: [
     [
