@@ -120,14 +120,15 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className={classnames('col col--4', styles.feature)}>
-                <p>With your 128T Networking Platform, you wield the tools to build your network around the services which matter.</p>
+                <p>Your 128T is an innovative software router built around the services which matter.</p>
 
-                <p>Deliver tunnel-free sessions with Secure Vector Routing.
+                <p>Deliver your sessions tunnel-free, with Secure Vector Routing.
                 Segment and secure your endpoints with network tenancy.
-                Automate using the APIs of a routing platform made with modern and inovative software.
-                This is your source for all the capabilities of 128T.</p>
+                Automate using the APIs of a routing platform made with modern software.
+                128T Docs is your guide to the platform's features and capabilities.
+                </p>
 
-                <p>Get started building services on the network that understands them, with 128T Docs.</p>
+                <p>Get started building services with a 128T router that understands them.</p>
               </div>
               <div className={classnames('col col--8', styles.feature)}>
                 <img src="/img/128t-components.png" alt="128T Networking Platform" />
