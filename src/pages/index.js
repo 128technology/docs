@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const features = [
   {
     title: <>About</>,
-    link: 'docs/about_contributing',
+    link: 'docs/CONTRIBUTING',
     description: (
       <>
         Release notes and docs contribution guidelines
