@@ -5,7 +5,7 @@ sidebar_label: LTE Peering
 It is quite common for 128T routers to use LTE interfaces as a "last resort" transport when primary circuits are down, congested, or experiencing issues. This document recommends various configuration settings to strike a balance between performance and bandwidth usage for LTE interfaces, to get the most benefit from them when peering over LTE.
 
 :::note
- This document is intended for customers that use LTE interfaces as a last resort transport, not for those using it as a primary transport.
+This document is intended for customers that use LTE interfaces as a last resort transport, not for those using it as a primary transport.
 :::
 
 ## Overview

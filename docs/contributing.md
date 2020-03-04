@@ -1,5 +1,4 @@
 ---
-id: about_contributing
 title: Contributing
 sidebar_label: Contributing
 ---

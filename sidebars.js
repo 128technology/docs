@@ -11,7 +11,7 @@ module.exports = {
       },
       {
       	"type": "doc",
-      	"id": "about_contributing"
+      	"id": "CONTRIBUTING"
       },
     ],
     "Introduction": [
@@ -35,7 +35,7 @@ module.exports = {
         "type": "category",
         "label": "Troubleshooting",
         "items": [
-          "ts_services"
+          "ts_connecting_to_routers"
         ],
       },
     ],

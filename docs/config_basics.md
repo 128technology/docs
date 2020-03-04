@@ -49,7 +49,9 @@ This basic workflow (configure, validate, commit) is the fundamental mechanism f
 
 To see the changes between the candidate and running configuration, use the `compare config` command within the PCLI. This takes two positional arguments, either of which may only be `candidate` or `running`. The output for the `compare config` command shows the diffs that exist between the two configurations. The ordering of the arguments is significant; issuing the command `compare config running candidate` will show the changes that have been made to the candidate configuration. The command `compare config candidate running` will show the set of changes that would need to be applied to restore the candidate configuration back to the running configuration.
 
-> **Note**: The output of `compare config candidate running` is formatted such that it can be copied and pasted back into the PCLI, to revert all changes and have the candidate be "reset" to the running configuration. Obviously, you can selectively copy/paste sections of this output back into the PCLI to revert only specific sets of changes. However, care must be taken when doing this, as the configuration is organized in a hierarchy with specific expectations around `exit`ing configuration blocks.
+:::note
+The output of `compare config candidate running` is formatted such that it can be copied and pasted back into the PCLI, to revert all changes and have the candidate be "reset" to the running configuration. Obviously, you can selectively copy/paste sections of this output back into the PCLI to revert only specific sets of changes. However, care must be taken when doing this, as the configuration is organized in a hierarchy with specific expectations around `exit`ing configuration blocks.
+:::
 
 ### Restoring the Candidate
 
@@ -63,4 +65,6 @@ The configuration can be backed up for the purposes of checkpointing working con
 
 In order to import a configuration that has once been exported execute the `import config <file-name>`.  Imported configurations get loaded into the candidate config.  This means that in order for the imported configuration to be applied to the system, a "commit" operation needs to be executed in order for it to become "running".
 
-> **Note:** When copying exported configurations onto a 128T platform, the file must be placed in `/etc/128technology/config-exports` 
+:::note
+When copying exported configurations onto a 128T platform, the file must be placed in `/etc/128technology/config-exports` 
+:::

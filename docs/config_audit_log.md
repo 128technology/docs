@@ -13,7 +13,9 @@ The configuration for audit logging is done within the `system > audit` branch w
 
 Here is a sample configuration showing the minimum required configuration to enable audit logging.
 
-> Note: configuration not related to audit logging has been filtered out for illustrative purposes.
+:::note
+Configuration not related to audit logging has been filtered out for illustrative purposes.
+:::
 
     admin@labsystem1.fiedler# show config running authority router fiedler system
     
