@@ -34,6 +34,12 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Features",
+        "items": [
+          "feature_dns_proxy",
+        ],
+      },      {
+        "type": "category",
         "label": "Troubleshooting",
         "items": [
           "ts_connecting_to_routers",
