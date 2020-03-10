@@ -21,6 +21,7 @@ module.exports = {
     ],
     "Concepts": [
       "concepts_glossary",
+      "concepts_management_connections"
     ],
     "Administration": [
       {
@@ -29,16 +30,11 @@ module.exports = {
         "items": [
           "config_basics",
           "config_audit_log",
+          "config_dns_proxy",
           "config_tenants",
         ],
       },
       {
-        "type": "category",
-        "label": "Features",
-        "items": [
-          "feature_dns_proxy",
-        ],
-      },      {
         "type": "category",
         "label": "Troubleshooting",
         "items": [
