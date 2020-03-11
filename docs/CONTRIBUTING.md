@@ -11,7 +11,7 @@ The 128 Technology documentation website is built using Docusaurus 2 to generate
 Technical writing is different from other styles of writing.  Markus Kazmierczak offers some great tips for how to write copy that is easy to follow where you learn as you go in his [blog](https://mkaz.blog/misc/notes-on-technical-writing/). We do our best to follow these principles thoughout our documentation.
 
 ## Testing
-Before posting a PR for submitting changes, it is best to first test your changes locally to ensure that all links, references and formatting appear the way you expect.  Have a look at the [README](../README.md) for instructions on how to test locally.
+Before posting a PR for submitting changes, it is best to first test your changes locally to ensure that all links, references and formatting appear the way you expect.  Have a look at the [README](https://github.com/128technology/docs) for instructions on how to test locally.
 
 ## Submitting changes
 Please open a [Pull Request](https://github.com/128technology/docs/pulls) with a clear list of what you've done. Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
