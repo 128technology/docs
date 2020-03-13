@@ -31,6 +31,16 @@ _Conductor Host Services_ refers to the built-in feature within the 128T softwar
 
 The Conductor Host Services feature forms the basis for the majority of the conductor design patterns described in this document, and should be leveraged whenever possible.
 
+#### In-Band Management
+The term _in-band management_ in the context of conductor connectivity refers to the use of a forwarding interface by a router node for reaching the conductor. I.e., there is no dedicated interface specifically for the conductor to "manage" the node. As most 128T deployments separate the remote sites from the conductor over a WAN, it is exceedingly common to leverage in-band management between a remote node and a conductor. For SDWAN deployments, in-band management is _strongly recommended_, for the branch locations. For head end systems that are colocated with the conductors, out-of-band management is preferable, assuming there are sufficent free interfaces on the chosen head end hardware platform.
+
+#### Out-of-Band Management
+Routing nodes are said to leverage _out-of-band management_ when they have a dedicated interface for the traffic to reach the conductor. Out-of-band management is generally only feasible when a conductor is colocated with the routing nodes, as is typically the case only at a head end data center.
+
+:::note
+It is possible to have a dedicated out-of-band management interface on branch locations, but this connection will almost certainly ultimately ride over the same device's WAN connection to the conductor. I.e., the management traffic will egress one interface on the device and be sent back to another interface on the same device. As such, the in-band management model is more suitable, as it avoids unnecessary hops.
+:::
+
 ## Universal Considerations
 This section contains information pertinent to all conductor deployments.
 
@@ -109,45 +119,25 @@ When deploying a conductor behind a firewall, open 930/TCP (used for NETCONF) an
 
 Because there is little difference from each deployed router's perspective between this and the previous design pattern, the configuration provided in Appendix A is representative of this design as well. All NAT awareness exists outside of the 128T's configuration.
 
-### Public Conductor Behind 128T
+### Conductor Behind 128T
 Oftentimes a conductor is hosted within a data center that has a 128T head end router at its edge. In these topologies, the design is a hybrid of the previous two (conductor behind NAT, split horizon conductor). From the remote routers' perspective (i.e., the branch locations not resident at this data center and other data center routers), the conductor is only reachable through the head end 128T router. That same 128T head end router will typically communicate with conductor using a private address.
 
 - The head end fronting the conductor must perform NAT/NAPT to forward 4505/TCP, 4506/TCP, and 930/TCP to the conductor on the data center LAN. The authority-wide `conductor-address` is an IP address that is resolved/routed to that head end router.
 - The head end router overrides the `conductor-address` with specific configuration to reference the local address.
+- The head end router uses `management-config-generated` set to `proxy` requests received on its WAN interface (from remote branch sites) to the internal conductor's address.
+
+####Remote Routers: to SVR or not to SVR?
+When deploying your conductor behind another 128T at a data center, it opens the possibility of using Secure Vector Routing to reach the conductor using peer paths between a branch and the data center. However, 128 Technology *does not recommend* using SVR between systems for several reasons:
+
+1. It exacerbates the Jekyll/Hyde problem (described below), by virtue of being both at the branch and the data center
+2. Certain upgrade workflows or maintenance activities will cause remote sites to toggle between SVR and natural routing, which is suboptimal
 
 A sample configuration is provided in Appendix B.
 
-## Configuration
-
-#### Using Conductor Host Services
-
-Despite the router population having multiple distinct targets for a single conductor, it is nevertheless possible to use authority-wide, fixed addresses in the 128T configuration, yet have the routers forward to different targets. This leverages the Linux _firewalld_ process.
-
-This design is recommended when the majority of the router population uses one address (typically a public address), and a minority of the router population access the same conductor at a second address (typically a private address). In this design, you should configure the authority-wide `conductor-address` as the address that is to be used by the majority of the routers. For the subset of routers that will use a second address, we'll perform a NAT function.
-
-Within each Linux host on the minority set of routers, use the following `firewall-cmd` command (all on one line):
-
-```
-firewall-cmd --permanent --direct --add-rule ipv4 nat OUTPUT 0 -d <public IP> -j 
-    DNAT --to-destination <private IP>
-```
-
-This command will set a persistent `firewalld` rule that will translate packets sent from `<public IP>` on output, and instead send them to `<private IP>`. The application(s) (i.e., `persistentDataManager` and `salt-minion`) will believe they're sending packets to `<public IP>`, but `firewalld` will rewrite them and send them to `<private IP>` instead.
-
-#### Manually Defining Conductor Services
-Rather than use the built-in conductor services feature, you can "roll your own" conductor services by manually defining a conductor service. For the purposes of this example, we'll assume your conductor has two appearances: one on the public internet, and a second on a LAN. We'll need to define a `conductor` service that contains both IP addresses, and the various ports used for the routers to connect to it.
-
-:::tip
-It is possible to split the conductor service into separate services for each address, and set the `applies-to` for the service to the various populations. E.g., all of your data center routers can be in a `router-group` named "dc-routers" and your branch locations can be in a `router-group` named "branch". Then you can have a `service` defined for the local address with `applies-to` set to `dc-routers`, and a second `service` defined for the public address with `applies-to` set to `branch`.
-:::
-
-Once the services are defined, you'll also need to create `service-route` configuration for each router, to reach the conductor service.
-
-##### Linux Configuration
-Each of the routers using the manually-defined conductor service will need to be initialized with the appropriate conductor address. (This will set the `/etc/128technology/global.init` and `/etc/salt/minion` files to their appropriate values.)
-
 ## Conductor Redundancy
-Most production deployments include redundant conductor nodes. When deployed as a highly available pair, conductor nodes are always run as _active/active_, with all managed routers connecting to both. Unlike highly available routers, there is no notion of interface takeover with conductors; each conductor node is given a unique IP address reachable by all devices at all times.
+Most production deployments include redundant conductor nodes. When deployed as a highly available pair, conductor nodes are always run as _active/active_, with all managed routers connecting to both. Unlike highly available routers, there is no notion of interface takeover with conductors; each conductor node is given a unique IP address reachable by all devices at all times. The two conductors that comprise a highly available pair will communicate with one another to synchronize state, such that it does not matter which conductor an administrator logs into to view metrics, alarms, etc.
+
+The two conductor nodes must therefore have IP reachability to one another. For conductor nodes that are physically adjacent to one another, a direct cable between them is the most common deployment style. When separating conductor nodes over any distance, ensure they have a route to reach one another that will not interfere with the connectivity to the nodes they manage.
 
 ### Geographic Redundancy
 Highly available conductors run as active/active, and have ongoing needs for state synchronization between one another. For this reason, 128 Technology requires that the network between geographically separated conductors have *latency of no more than 100ms*, and *packet loss no greater than 1%*.
@@ -165,20 +155,537 @@ You must also specify `conductor=true` on one of your network-interface configur
 
 The KNI (named `kni254`) shuttles packets back and forth between the Linux processses (salt, secureCommunicationManager) and the 128T routing domain. Conductor Host Services will install specific, /32 routes to one or two conductor addresses, using the local KNI address (169.254.127.126) as its next-hop. Those will be sent "up" to the 128T routing domain, where they will match the generated `_conductor_` service(s), and follow the service-route out of the specified interface.
 
-### In-Band Management
-The term _in-band management_ in the context of conductor connectivity refers to the use of a forwarding interface by a router node for reaching the conductor. I.e., there is no dedicated interface specifically for the conductor to "manage" the node. As most 128T deployments separate the remote sites from the conductor over a WAN, it is exceedingly common to leverage in-band management between a remote node and a conductor. For SDWAN deployments, in-band management is _strongly recommended_, for the branch locations. For head end systems that are colocated with the conductors, out-of-band management is preferable, assuming there are sufficent free interfaces on the chosen head end hardware platform.
+------
 
-### Out-of-Band Management
-Routing nodes are said to leverage _out-of-band management_ when they have a dedicated interface for the traffic to reach the conductor. Out-of-band management is generally only feasible when a conductor is colocated with the routing nodes, as is commonly the case at a head end data center.
+# Appendix A: Public Conductor
+
+```
+config
+
+    authority
+        conductor-address  192.0.2.2
+
+        remote-login
+
+        exit
+
+        router             datacenter
+            name                 datacenter
+            inter-node-security  internal
+
+            node                 node1
+                name              node1
+                asset-id          b77cefa0-b870-49bc-8b58-31d55bc56527
+                role              combo
+
+                device-interface  wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:01:00.0
+                    forwarding         true
+
+                    network-interface  wan0
+                        name        wan0
+                        global-id   2
+                        conductor   true
+                        source-nat  true
+
+                        address     203.0.113.2
+                            ip-address     203.0.113.2
+                            prefix-length  24
+                            gateway        203.0.113.1
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route        _conductor_1_route_1
+                name          _conductor_1_route_1
+                service-name  _conductor_1
+                generated     true
+
+                next-hop      node1 wan0
+                    node-name   node1
+                    interface   wan0
+                    gateway-ip  203.0.113.1
+                exit
+            exit
+        exit
+
+        router             branch1
+            name                 branch1
+            inter-node-security  internal
+
+            node                 node1
+                name              node1
+                asset-id          04822a5c-1f78-4d82-a442-bcb914c7fd99
+                role              combo
+
+                device-interface  wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:01:00.0
+
+                    network-interface  wan1
+                        name                   wan1
+                        global-id              3
+                        conductor              true
+                        inter-router-security  internal
+                        source-nat             true
+
+                        address                198.51.100.2
+                            ip-address     198.51.100.2
+                            prefix-length  24
+                            gateway        198.51.100.1
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route        _conductor_1_route_1
+                name          _conductor_1_route_1
+                service-name  _conductor_1
+                generated     true
+
+                next-hop      node1 wan1
+                    node-name   node1
+                    interface   wan1
+                    gateway-ip  198.51.100.1
+                exit
+            exit
+        exit
+
+        router             bernstein
+            name    bernstein
+
+            system
+                inactivity-timer  86400
+            exit
+
+            node    node1
+                name              node1
+
+                device-interface  wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:01:00.0
+                    forwarding         false
+
+                    network-interface  wan0
+                        name       wan0
+                        global-id  1
+                        type       shared
+
+                        address    192.0.2.2
+                            ip-address     192.0.2.2
+                            prefix-length  24
+                            gateway        192.0.2.1
+                        exit
+                    exit
+                exit
+            exit
+        exit
+
+        tenant             _internal_
+            name         _internal_
+            description  "Auto generated tenant for internal services"
+            generated    true
+        exit
+
+        service            _conductor_1
+            name                     _conductor_1
+            enabled                  true
+            scope                    private
+            tap-multiplexing         false
+
+            transport                icmp
+                protocol  icmp
+            exit
+
+            transport                tcp
+                protocol    tcp
+
+                port-range  443
+                    start-port  443
+                    end-port    443
+                exit
+
+                port-range  930
+                    start-port  930
+                    end-port    930
+                exit
+
+                port-range  4505
+                    start-port  4505
+                    end-port    4505
+                exit
+
+                port-range  4506
+                    start-port  4506
+                    end-port    4506
+                exit
+            exit
+            address                  192.0.2.2/32
+            access-policy-generated  true
+
+            access-policy            _internal_
+                source      _internal_
+                permission  allow
+            exit
+            service-policy           _conductor_
+            share-service-routes     false
+            source-nat               network-interface
+            application-type         generic
+            fqdn-resolution-type     v4
+            generated                true
+        exit
+
+        service-policy     _conductor_
+            name                         _conductor_
+            description                  "Auto generated service-policy for conductor services"
+            lb-strategy                  proportional
+            session-resiliency           none
+            path-quality-filter          false
+            best-effort                  true
+            max-loss                     0.5
+            max-latency                  250
+            max-jitter                   100
+            transport-state-enforcement  reset
+            generated                    true
+            ingress-source-nat           network-interface
+        exit
+    exit
+exit
+```
+
+## Notes on the Configuration
+
+1. The inclusion of `conductor-address` into the configuration generates the service `_conductor_1`. Each configuration can contain no more than two `conductor-address` values configured; a second `conductor-address` would create `_conductor_2`.
+
+2. In this configuration, each of the two sample routers (`datacenter` and `branch1`) use their WAN interface to reach the Conductor. This is done by setting `conductor` to `true` on the WAN interface.
+3. The interface used to reach the conductor must have `source-nat` set to `true`. (This is because the conductor connection is initiated by a process in Linux, which travels through `kni254` to reach the 128T's forwarding plane, and will have an unroutable source address: 169.254.127.127.)
+
+------
+
+# Appendix B: Conductor behind 128T
+
+```
+config
+
+    authority
+        conductor-address  203.0.113.2
+
+        remote-login
+
+        exit
+
+        router             datacenter
+            name                           datacenter
+            conductor-address              172.20.0.128
+            inter-node-security            internal
+
+            node                           node1
+                name              node1
+                asset-id          b77cefa0-b870-49bc-8b58-31d55bc56527
+                role              combo
+
+                device-interface  wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:01:00.0
+                    forwarding         true
+
+                    network-interface  wan0
+                        name        wan0
+                        global-id   2
+                        conductor   false
+                        tenant      internet
+                        source-nat  true
+
+                        address     203.0.113.2
+                            ip-address     203.0.113.2
+                            prefix-length  24
+                            gateway        203.0.113.1
+                        exit
+                    exit
+                exit
+
+                device-interface  lan
+                    name               lan
+                    type               ethernet
+                    pci-address        0000:02:00.0
+                    forwarding         true
+
+                    network-interface  lan0
+                        name        lan0
+                        global-id   4
+                        conductor   true
+                        source-nat  true
+
+                        address     172.20.0.1
+                            ip-address     172.20.0.1
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+
+            management-service-generation
+                service-route-type  paths-as-next-hop
+                proxy               true
+            exit
+
+            service-route                  _conductor_1_route_1
+                name          _conductor_1_route_1
+                service-name  _conductor_1
+                generated     true
+
+                next-hop      node1 lan0
+                    node-name       node1
+                    interface       lan0
+                    target-address  172.20.0.128
+                exit
+            exit
+
+            service-route                  _conductor_datacenter_1_route_1
+                name          _conductor_datacenter_1_route_1
+                service-name  _conductor_datacenter_1
+                generated     true
+
+                next-hop      node1 lan0
+                    node-name   node1
+                    interface   lan0
+                    gateway-ip  172.20.0.128
+                exit
+            exit
+        exit
+
+        router             branch1
+            name                 branch1
+            inter-node-security  internal
+
+            node                 node1
+                name              node1
+                asset-id          04822a5c-1f78-4d82-a442-bcb914c7fd99
+                role              combo
+
+                device-interface  wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:01:00.0
+
+                    network-interface  wan1
+                        name                   wan1
+                        global-id              3
+                        conductor              true
+                        inter-router-security  internal
+                        source-nat             true
+
+                        address                198.51.100.2
+                            ip-address     198.51.100.2
+                            prefix-length  24
+                            gateway        198.51.100.1
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route        _conductor_1_route_1
+                name          _conductor_1_route_1
+                service-name  _conductor_1
+                generated     true
+
+                next-hop      node1 wan1
+                    node-name   node1
+                    interface   wan1
+                    gateway-ip  198.51.100.1
+                exit
+            exit
+        exit
+
+        router             bernstein
+            name    bernstein
+
+            system
+                inactivity-timer  86400
+            exit
+
+            node    node1
+                name              node1
+
+                device-interface  wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:01:00.0
+                    forwarding         false
+
+                    network-interface  wan0
+                        name       wan0
+                        global-id  1
+                        type       shared
+
+                        address    192.0.2.2
+                            ip-address     192.0.2.2
+                            prefix-length  24
+                            gateway        192.0.2.1
+                        exit
+                    exit
+                exit
+            exit
+        exit
+
+        tenant             internet
+            name         internet
+            description  "Public internet"
+
+            member       internet
+                neighborhood  internet
+                address       0.0.0.0/0
+            exit
+        exit
+
+        tenant             _internal_
+            name         _internal_
+            description  "Auto generated tenant for internal services"
+            generated    true
+        exit
+
+        service            _conductor_1
+            name                     _conductor_1
+            enabled                  true
+            scope                    private
+            tap-multiplexing         false
+
+            transport                icmp
+                protocol  icmp
+            exit
+
+            transport                tcp
+                protocol    tcp
+
+                port-range  443
+                    start-port  443
+                    end-port    443
+                exit
+
+                port-range  930
+                    start-port  930
+                    end-port    930
+                exit
+
+                port-range  4505
+                    start-port  4505
+                    end-port    4505
+                exit
+
+                port-range  4506
+                    start-port  4506
+                    end-port    4506
+                exit
+            exit
+            address                  203.0.113.2/32
+            access-policy-generated  false
+
+            access-policy            _internal_
+                source      _internal_
+                permission  allow
+            exit
+
+            access-policy            internet
+                source      internet
+                permission  allow
+            exit
+            service-policy           _conductor_
+            share-service-routes     false
+            source-nat               network-interface
+            application-type         generic
+            fqdn-resolution-type     v4
+            generated                true
+        exit
+
+        service            _conductor_datacenter_1
+            name                     _conductor_datacenter_1
+
+            applies-to               router
+                type         router
+                router-name  datacenter
+            exit
+            enabled                  true
+            scope                    private
+            tap-multiplexing         false
+
+            transport                icmp
+                protocol  icmp
+            exit
+
+            transport                tcp
+                protocol    tcp
+
+                port-range  443
+                    start-port  443
+                    end-port    443
+                exit
+
+                port-range  930
+                    start-port  930
+                    end-port    930
+                exit
+
+                port-range  4505
+                    start-port  4505
+                    end-port    4505
+                exit
+
+                port-range  4506
+                    start-port  4506
+                    end-port    4506
+                exit
+            exit
+            address                  172.20.0.128/32
+            access-policy-generated  true
+
+            access-policy            _internal_
+                source      _internal_
+                permission  allow
+            exit
+            service-policy           _conductor_
+            share-service-routes     false
+            source-nat               network-interface
+            application-type         generic
+            fqdn-resolution-type     v4
+            generated                true
+        exit
+
+        service-policy     _conductor_
+            name                         _conductor_
+            description                  "Auto generated service-policy for conductor services"
+            lb-strategy                  proportional
+            session-resiliency           none
+            path-quality-filter          false
+            best-effort                  true
+            max-loss                     0.5
+            max-latency                  250
+            max-jitter                   100
+            transport-state-enforcement  reset
+            generated                    true
+            ingress-source-nat           network-interface
+        exit
+    exit
+exit
+```
+
+## Notes on the Configuration
+
+1. As in the previous example, the interfaces that have `conductor` set to `true` also require `source-nat` to be set to `true`.
+
+2. The datacenter router includes new configuration in the `management-service-generation` container; `proxy` is set to `true`, to forward requests received on its WAN interface to the conductor's private IP. The `paths-as-next-hop` value for `service-route-type` will generate one `service-route` to reach the conductor, with multiple next-hops for configurations with more than one conductor. The other choice, `paths-as-service-route` will generate multiple `service-route` configurations with a single next-hop apiece.
+
+3. In this design, the datacenter router reaches to the conductor using the `lan` interface. The global `conductor-address` is overridden by the router. (If there are two conductors configured at the authority level, any router that overrides the addresses must override both.)
+
+4. The datacenter's unique accesss create a unique service specific to it: `_conductor_datacenter_1`. It has the actual conductor's address configured and will match the requests arriving via `kni254`.
+
+5. The generated `_conductor_1` service will require that the `access-policy-generated` toggle be set to `false`, and that the `access-policy` contain a reference to the WAN interfaces of the remote site(s). In our case, we have the WAN interface of the `datacenter` router in an "internet" neighborhood (0.0.0.0/0), such that any inbound, non-SVR request on the WAN will be treated as sourced from the `internet` tenant. We've added an `access-policy` statement for allowing inbound access to the `internet` tenant.
 
 :::note
-It is possible to have a dedicated out-of-band management interface on branch locations, but this connection will almost certainly ultimately ride over the same device's WAN connection to the conductor. I.e., the management traffic will egress one interface on the device and be sent back to another interface on the same device. As such, the in-band management model is more suitable, as it avoids unnecessary hops.
+This tenancy design may require some tuning to fit into your environment. It is good practice to use tenancy on your WAN interfaces (in the form of neighborhood/membership, preferably). This gives you more control over the security of an interface. For example, we could have a tenant named `remote-sites` that contains the WAN IP addresses of the remote sites (presuming they're static addresses), and use that in our `_conductor_1` access-policy instead of `internet`. This would restrict inbound access. But for cases where branch offices use dynamic addressing (DHCP), this is not possible.
 :::
-
-
-### Split Horizon Conductor
-A "split horizon" conductor is one that has IP presence on more than one broadcast domain, and where it is contacted on multiple IP addresses by different subsets of the overall population. (E.g., when a conductor resides in a data center coresident with head end routers, and external routers address the conductor on a public IP address while the data center routers address it using a LAN or management IP address.)
-
-Because the 128T data model only refers to each conductor with a single address, in order to support split horizon deployments certain accommodations need to be made. When deploying a split horizon conductor, there are two options: use the 128T's native _Conductor Host Services_ using the public conductor's address (with some exceptions, as noted below), or manually define conductor services. Each of these will be defined further here.
-
-This design is *not recommended*.
