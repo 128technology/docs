@@ -3,6 +3,9 @@ This repository contains the source code for Docusaurus to render the look and f
 of 128 Technology product documentation as well as the documentation itself in
 markdown format.
 
+The product of "building" the markdown files into static HTML files are published
+to https://docs.128technology.com after PRs are merged into the master branch
+
 # Local Building and Testing
 
 ## Run the local web server in Docker

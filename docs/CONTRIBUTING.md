@@ -27,3 +27,8 @@ Did you find a typo or something that was incorrect and do not have the time to 
 * Open a new pull request with the patch.
 * Ensure the PR description clearly describes the changes as accurately as possible.
 * Your changes will be merged in and published once they have been reviewed and passes all CI tests.
+
+# Guidelines
+
+### Datamodel References
+When referring to paths in datamodel hierarcies, it is preferable to use a single right angle bracket to separate levels in the path.  For example: `authority > router > system > ntp`.  Even though `router` is a multi-instance leaf node in YANG and technically requires a key to refer to a specific instance, the instance ID is left out for brevity.

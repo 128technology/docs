@@ -21,7 +21,9 @@ module.exports = {
     ],
     "Concepts": [
       "concepts_glossary",
-      "concepts_management_connections"
+      "concepts_ha_theoryofoperation",
+      "concepts_interface_types",
+      "concepts_management_connections",
     ],
     "Administration": [
       {
@@ -31,6 +33,10 @@ module.exports = {
           "config_basics",
           "config_audit_log",
           "config_dns_proxy",
+          "config_ha",
+          "config_non_forwarding_ha_interfaces",
+          "config_adding_interfaces_to_ha_team",
+          "config_transition_standalone_to_ha",
           "config_tenants",
         ],
       },
