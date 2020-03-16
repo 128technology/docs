@@ -21,6 +21,7 @@ module.exports = {
     ],
     "Concepts": [
       "concepts_glossary",
+      "concepts_application_discovery",
       "concepts_ha_theoryofoperation",
       "concepts_interface_types",
       "concepts_management_connections",

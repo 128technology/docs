@@ -32,3 +32,6 @@ Did you find a typo or something that was incorrect and do not have the time to 
 
 ### Datamodel References
 When referring to paths in datamodel hierarcies, it is preferable to use a single right angle bracket to separate levels in the path.  For example: `authority > router > system > ntp`.  Even though `router` is a multi-instance leaf node in YANG and technically requires a key to refer to a specific instance, the instance ID is left out for brevity.
+
+* When referring to specific instances of a configuration value, the object in discussion should be called out as code by using backtics (e.g. `service-policy`)
+* When referring to a data model concept, it should be called in italicized format (e.g. _service-policy_)

@@ -109,7 +109,7 @@ config auth conductor-address [public address of conductor]
 config auth router r1 node n1 device-interface WAN network-interface WAN0 conductor true
 ```
 
-A sample configuration is provided in Appendix A.
+A sample configuration is provided in [Appendix A](#appendix-a-public-conductor).
 
 ### Public Conductor Behind NAT
 Another common model is a deployment where the conductor is behind a static NAT/firewall, which is forwarding to a private address assigned to the conductor. When placing the conductor behind a static NAT/firewall (effectively giving it a public IP address), be mindful of whether the NAT/firewall supports "hairpinning." (Hairpinning is when a device sends packets to the public IP address of a NAT that it sits behind.) This is because a conductor's salt-minion will connect to its own salt master, and will attempt to do so at the same IP address that all external minions connect to. If the NAT does not support hairpinning, then follow the steps outlined below in the section on _Split Horizon Conductor_.
@@ -117,7 +117,7 @@ Another common model is a deployment where the conductor is behind a static NAT/
 #### Port Forwarding
 When deploying a conductor behind a firewall, open 930/TCP (used for NETCONF) and 4505-4506/TCP (used for salt) to allow a conductor to communicate to managed routers. Open 443/TCP for the web UI, and 22/TCP for remote SSH.
 
-Because there is little difference from each deployed router's perspective between this and the previous design pattern, the configuration provided in Appendix A is representative of this design as well. All NAT awareness exists outside of the 128T's configuration.
+Because there is little difference from each deployed router's perspective between this and the previous design pattern, the configuration provided in [Appendix A](#appendix-a-public-conductor) is representative of this design as well. All NAT awareness exists outside of the 128T's configuration.
 
 ### Conductor Behind 128T
 Oftentimes a conductor is hosted within a data center that has a 128T head end router at its edge. In these topologies, the design is a hybrid of the previous two (conductor behind NAT, split horizon conductor). From the remote routers' perspective (i.e., the branch locations not resident at this data center and other data center routers), the conductor is only reachable through the head end 128T router. That same 128T head end router will typically communicate with conductor using a private address.
@@ -132,7 +132,7 @@ When deploying your conductor behind another 128T at a data center, it opens the
 1. It exacerbates the Jekyll/Hyde problem (described below), by virtue of being both at the branch and the data center
 2. Certain upgrade workflows or maintenance activities will cause remote sites to toggle between SVR and natural routing, which is suboptimal
 
-A sample configuration is provided in Appendix B.
+A sample configuration is provided in [Appendix B](#appendix-b-conductor-behind-128t).
 
 ## Conductor Redundancy
 Most production deployments include redundant conductor nodes. When deployed as a highly available pair, conductor nodes are always run as _active/active_, with all managed routers connecting to both. Unlike highly available routers, there is no notion of interface takeover with conductors; each conductor node is given a unique IP address reachable by all devices at all times. The two conductors that comprise a highly available pair will communicate with one another to synchronize state, such that it does not matter which conductor an administrator logs into to view metrics, alarms, etc.
