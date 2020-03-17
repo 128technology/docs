@@ -48,6 +48,7 @@ module.exports = {
         "label": "Troubleshooting",
         "items": [
           "ts_connecting_to_routers",
+          "ts_mac_uniqueness",
         ],
       },
     ],
