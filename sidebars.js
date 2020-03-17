@@ -25,6 +25,7 @@ module.exports = {
       "concepts_ha_theoryofoperation",
       "concepts_interface_types",
       "concepts_linux_host_networking",
+      "concepts_network_planes",
       "concepts_management_connections",
     ],
     "Administration": [
