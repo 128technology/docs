@@ -34,6 +34,7 @@ module.exports = {
           "config_basics",
           "config_audit_log",
           "config_dns_proxy",
+          "config_ldap",
           "config_ha",
           "config_non_forwarding_ha_interfaces",
           "config_adding_interfaces_to_ha_team",
