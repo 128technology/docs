@@ -57,6 +57,7 @@ module.exports = {
     "Best Practics": [
       "bcp_conductor_deployment",
       "bcp_lte_peering",
+      "bcp_service_and_service_policy_design",
     ],
     "CLI Reference": [
       "cli_reference",
