@@ -48,6 +48,8 @@ module.exports = {
         "type": "category",
         "label": "Troubleshooting",
         "items": [
+          "ts_applications",
+          "ts_ap_salt_minion",
           "ts_connecting_to_routers",
           "ts_mac_uniqueness",
         ],
@@ -58,6 +60,7 @@ module.exports = {
       "bcp_conductor_deployment",
       "bcp_lte_peering",
       "bcp_service_and_service_policy_design",
+      "bcp_trusted_ca_certificate",
     ],
     "CLI Reference": [
       "cli_reference",
