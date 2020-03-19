@@ -19,8 +19,9 @@ The monitoring agent at its core is designed to be able to push data to external
 ## Installation
 
 The 128T Monitoring Agent can be obtained from the official 128T software repository and is installed using the dnf utility:
-
-`dnf install 128T-monitoring-agent`
+```
+dnf install 128T-monitoring-agent
+```
 
 example:
 
