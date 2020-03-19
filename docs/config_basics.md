@@ -37,7 +37,7 @@ When the candidate and running configurations do not match (i.e., there are unco
 
 The initial asterisk character lets you know that there are changes.
 
-##Configuration Workflows
+## Configuration Workflows
 
 Unlike many traditional routers, the 128T Networking Platform contains a series of interdependent pieces of configuration – referred to as our *data model* – to inform its decisions on routing, forwarding, and policy enforcement. These interdependencies mean that the method of working with the 128T may be slightly different than you are accustomed to.
 
