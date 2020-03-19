@@ -50,6 +50,7 @@ module.exports = {
         "items": [
           "ts_applications",
           "ts_ap_salt_minion",
+          "ts_cpu_spikes",
           "ts_connecting_to_routers",
           "ts_mac_uniqueness",
         ],
