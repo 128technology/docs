@@ -1,6 +1,6 @@
 ---
-title: 'Templates'
-sidebar_label: 'Templates'
+title: 'Configuration Templates'
+sidebar_label: 'Configuration Templates'
 ---
 
 Configuration templates allow administrators to automate the configuration of top level resources (e.g. Routers, Tenants, Services, etc). There are two modes of templating configuration: **Basic** and **Advanced**. Basic mode is intended for simple templates that don't require complex logic. Advanced mode, on the other hand, exposes the full power of the underlying templating language to the administrator.
