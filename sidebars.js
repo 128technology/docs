@@ -45,6 +45,7 @@ module.exports = {
           "config_snmp",
           "config_snmp_metrics",
           "config_tenants",
+          "config_templates",
         ],
       },
       {
