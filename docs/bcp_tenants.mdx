@@ -3,7 +3,7 @@ title: Tenancy Design
 sidebar_label: Tenancy Design
 ---
 
-import Flowchart from 'react-simple-flowchart';
+import Flowchart from '../src/components/Flowchart';
 
 The *tenant* is one of the foundational data model elements within the 128T Session Smart router, and represents a consumer of network *services*. Tenancy is the logical partitioning of a network’s resources, done in the interest of restricting access to network services to only the users and groups for which they’re intended.
 
@@ -41,30 +41,27 @@ As new sessions arrive at a 128T router, the router will attempt to classify the
 
 Should none of these result in a definitive determination on the tenant of the source of this session request, the session is associated with the *global tenant* (see the section on "Special Tenants" for more information on the global tenant). Once the tenant has been identified – either as a specific tenant, or as the global tenant – this acts as a filter into the 128T router’s FIB. Only the routes associated with that tenant are available to that user group. While this somewhat resembles the way a legacy router uses VRFs to create separate RIBs and FIBs, the segment by *tenant* is pervasive among all routers within an Authority by design, and is applied ubiquitously among all varieties of networks: public IP space, private, cloud, IPv4, IPv6, etc.
 
-<div style={{overflowX: 'scroll'}}>
-  <Flowchart
-    options={{ scale: 0.7 }}
-    chartCode={`
-st=>start: Begin
-st=>start: Packet Arrives
-metadata=>condition: Packet has metadata?
-int=>condition: Interface has a tenant?
-nh=>condition: Neighborhood-based tenant?
-tm=>operation: Tenant taken from metadata
-ti=>operation: Tenant taken from interface
-th=>operation: Tenant taken from neighborhood
-global=>operation: Tenant assigned as "global"
-e=>end: Proceed to FIB lookup
-st->metadata
-metadata(no)->int
-metadata(yes,right)->tm->e
-int(yes,right)->ti->e
-int(no)->nh
-nh(yes,right)->th->e
-nh(no)->global->e
-`}
-  />
-</div>
+<Flowchart
+  chartCode={`
+    st=>start: Begin
+    st=>start: Packet Arrives
+    metadata=>condition: Packet has metadata?
+    int=>condition: Interface has a tenant?
+    nh=>condition: Neighborhood-based tenant?
+    tm=>operation: Tenant taken from metadata
+    ti=>operation: Tenant taken from interface
+    th=>operation: Tenant taken from neighborhood
+    global=>operation: Tenant assigned as "global"
+    e=>end: Proceed to FIB lookup
+    st->metadata
+    metadata(no)->int
+    metadata(yes,right)->tm->e
+    int(yes,right)->ti->e
+    int(no)->nh
+    nh(yes,right)->th->e
+    nh(no)->global->e
+  `}
+/>
 
 #### Viewing a Router's Tenancy
 
