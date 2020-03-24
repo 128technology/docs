@@ -27,6 +27,7 @@ module.exports = {
       "concepts_linux_host_networking",
       "concepts_network_planes",
       "concepts_management_connections",
+      "concepts_session_timer",
     ],
     "Administration": [
       {
@@ -65,6 +66,7 @@ module.exports = {
       "bcp_conductor_deployment",
       "bcp_lte_peering",
       "bcp_service_and_service_policy_design",
+      "bcp_tenants",
       "bcp_trusted_ca_certificate",
     ],
     "CLI Reference": [
