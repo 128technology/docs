@@ -73,8 +73,8 @@ module.exports = {
       "cli_reference",
     ],
     "Plugins": [
-      "monitoring_agent",
-      "gre_plugin"
+      "plugin_monitoring_agent",
+      "plugin_gre"
     ],
     "APIs": [
       "apis_rest",
