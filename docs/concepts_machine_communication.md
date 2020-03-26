@@ -1,6 +1,6 @@
 ---
 title: Intra- and Inter-System Communication
-sidebar_label: M2M Communication
+sidebar_label: Machine Communication
 ---
 This document lists the different communication channels between nodes within a router, between peering routers, and between routers and their conductor. This is to provide:
 

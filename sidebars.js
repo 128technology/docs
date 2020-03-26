@@ -15,8 +15,10 @@ module.exports = {
       },
     ],
     "Introduction": [
-      "intro_installation",
       "intro_getting_started",
+      "intro_installation",
+      "intro_ztp",
+      "intro_creating_bootable_iso",
     ],
     "Concepts": [
       "concepts_glossary",
@@ -25,7 +27,7 @@ module.exports = {
       "concepts_interface_types",
       "concepts_linux_host_networking",
       "concepts_network_planes",
-      "concepts_management_connections",
+      "concepts_machine_communication",
       "concepts_session_timer",
     ],
     "Administration": [
@@ -60,8 +62,12 @@ module.exports = {
         ],
       },
     ],
-    "Events": [ "events" ],
-    "Best Practics": [
+    "Events": [
+      "events_overview",
+      "events_alarms",
+      "events_events",
+    ],
+    "Best Practices": [
       "bcp_conductor_deployment",
       "bcp_lte_peering",
       "bcp_service_and_service_policy_design",
