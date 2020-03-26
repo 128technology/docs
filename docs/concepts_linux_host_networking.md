@@ -58,3 +58,73 @@ You must ensure you are in a position to access the Linux subsystem on a 128T ro
 sudo echo 0.0.0.0/0 via 169.254.127.126 dev kni254 metric 200 > /etc/sysconfig/network-scripts/route-kni254
   ```
 3. Start 128T software: `sudo systemctl start 128T`
+
+### KNI VLAN
+A `host` device-interface can be configured with a vlan-enabled network interface.  Doing so creates a unique linux interface that is managed for each network-interface, but only one underlying KNI will be created on the system. If there is no non-vlan network-interface on the device-interface, an implicit underlying “base” interface is instantiated for the KNI, and linux VLAN interfaces are stacked on it.
+
+Output reflecting KNI interfaces with a VLAN of 200 configured:
+
+```
+admin@t124-dut1.Fabric128# show device-interface
+Sat 2019-02-16 18:45:18 UTC
+
+========================================
+ t124-dut1:dev12
+========================================
+ Type:                host
+ Forwarding:          true
+ Mode:                host
+ MAC Address:         b2:9c:1f:9a:d9:7a
+
+ Admin Status:        up
+ Operational Status:  up
+ Redundancy Status:   non-redundant
+ Speed:               1000
+
+ in-octets:                        2816
+ in-unicast-pkts:                    38
+ in-errors:                           0
+ out-octets:                          0
+ out-unicast-pkts:                    0
+ out-errors:                          0
+
+ network-interfaces:
+   dev12:
+     base state:      good
+   dev12.200:
+     vlan state:      good
+
+Completed in 0.24 seconds
+```
+```
+admin@t124-dut1.Fabric128# show platform device-interfaces
+Sat 2019-02-16 18:45:56 UTC
+
+===============================================================
+ t124-dut1
+===============================================================
+ ----------------------------
+ Device Interface Information
+ ----------------------------
+
+ Name:                     dev12
+ Manufacturer:
+ Description:
+ Driver:
+ Driver Version:           unavailable
+ Speed:
+ PCI Address:
+ MAC Address:              be:0c:c2:1e:79:be
+ Firmware Version:         unavailable
+ Statistics Supported:     unavailable
+ Test Info Supported:      unavailable
+ EEPROM Access Supported:  unavailable
+ Register Dump Supported:  unavailable
+ network-interfaces:
+   dev12:
+     base info:            good
+   dev12.200:
+     vlan info:            good
+
+Completed in 1.29 seconds
+```
