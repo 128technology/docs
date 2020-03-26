@@ -15,7 +15,6 @@ module.exports = {
       },
     ],
     "Introduction": [
-      "intro_downloading",
       "intro_installation",
       "intro_getting_started",
     ],
