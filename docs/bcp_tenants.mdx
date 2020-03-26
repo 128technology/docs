@@ -43,7 +43,6 @@ Should none of these result in a definitive determination on the tenant of the s
 
 <Flowchart
   chartCode={`
-    st=>start: Begin
     st=>start: Packet Arrives
     metadata=>condition: Packet has metadata?
     int=>condition: Interface has a tenant?
@@ -97,7 +96,7 @@ It is not necessary for an administrator to explicitly create a “parent” ten
 
 Tenant hierarchies can have an unlimited number of tiers, although it is generally unnecessary to have more than two or three levels of parentage. For recommendations on tenancy and organizational tips, refer to the Tenant Strategies section below.
 
-## Tenant configuration
+## Tenant Configuration
 
 Each tenant configured on a 128T conductor is propagated to all managed assets, irrespective of whether that router has any configuration (via interface definition or neighborhood definition) to assign that tenant to inbound traffic. This is because a 128T router can receive Secure Vector Routing (SVR) sessions from a peer, identifying the origin as belonging to a permissible tenant.
 
