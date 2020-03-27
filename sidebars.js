@@ -1,6 +1,8 @@
 module.exports = {
   "docs": {
     "About": [
+      "about_128t",
+      "CONTRIBUTING",
       {
       	"type": "category",
       	"label": "Release Notes",
@@ -8,10 +10,6 @@ module.exports = {
           "release_notes/release_notes_4.2.0",
           "release_notes/release_notes_4.2.1",
         ],
-      },
-      {
-      	"type": "doc",
-      	"id": "CONTRIBUTING"
       },
     ],
     "Introduction": [
@@ -21,7 +19,6 @@ module.exports = {
       "intro_creating_bootable_iso",
     ],
     "Concepts": [
-      "concepts_glossary",
       "concepts_application_discovery",
       "concepts_ha_theoryofoperation",
       "concepts_interface_types",
@@ -29,6 +26,7 @@ module.exports = {
       "concepts_network_planes",
       "concepts_machine_communication",
       "concepts_session_timer",
+      "concepts_glossary",
     ],
     "Administration": [
       {

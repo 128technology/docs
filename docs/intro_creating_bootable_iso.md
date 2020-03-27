@@ -3,7 +3,7 @@ title: Creating a Bootable USB from ISO
 sidebar_label: Creating Bootable USB
 ---
 
-# Introduction
+## Introduction
 
 128 Technology distributes its software as a set of RPM packages, an ISO or a container.  The ISO is most commonly used to stage a system when it does not have an operating system or if the system is being repurposed as a 128T.
 
@@ -16,15 +16,15 @@ Currently 128 Technology makes available to its customers two ISOs for each soft
 2. **Interactive ISO**
    Installing from this ISO is done via a serial console or VGA. An interactive session is started which allows network interfaces, passwords, node name and role, conductor IP (if applicable) before the 128T software is started.
 
-# Windows
+## Windows
 
-## Prequisites
+### Prequisites
 
 - Install Rufus software https://rufus.akeo.ie/downloads/rufus-2.18.exe [^1]
 - Verify in system BIOS that the USB drive is listed in the boot priority properly
-[^1]: tested on version 2.18.1213 
+[^1]: tested on version 2.18.1213
 
-## Procedure
+### Procedure
 - Launch Rufus
 - Select the USB Device
 - Select "MBR partition scheme for BIOS or UEFI"
@@ -33,7 +33,7 @@ Currently 128 Technology makes available to its customers two ISOs for each soft
 - Select "Write in ISO image mode"
 - Click "OK"
 
-# OSX
+## OSX
 Creating a bootable ISO from OS is straightforward.  The only requirements are that you need administrative privileges to the system.
 
 Locate the USB volume name of the target drive (in this example, “disk2s1”) with the `diskutil` command.
@@ -48,12 +48,12 @@ sudo dd if=~/128T-OTP-4.2.4-1.el7.x86_64.iso of=/dev/rdisk2 bs=16384
 diskutil eject /dev/disk2s1
 ```
 
-# System Preparation
+## System Preparation
 
 - Ensure that the platform meets minimal 128T hardware requirements
 - BIOS configured to boot off from USB drive first
 
-# Further Resources
+## Further Resources
 
 Additional information on other available possible USB bootable creation tools can be found here as well:
 

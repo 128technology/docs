@@ -20,7 +20,7 @@ Basic configuration parameters are encoded within an encrypted file. For each no
 
 Upon node startup, the data is passed (through a Web browser interface) directly to the 128T node LAN IP interface address and decoded within the running node software. The node is dynamically configured with the correct addressing and Conductor assignment and restarted to download the final configuration.  Upon restart, the node establishes outbound connectivity with the Conductor and dynamically joins the 128T topology as a pending or fully managed asset.
 
-# Before you Begin
+## Before you Begin
 
 Ensure that you have met the following prerequisites:
 
@@ -35,11 +35,11 @@ This diagram is one possible topology for a standalone 128T deployed at the edge
 
 ![QuickStart network diagram](/img/intro_ztp_quickstart_network_diagram.png)
 
-# Procedure
+## Procedure
 
 The rest of this guide will walk you through setting up a typical standalone branch router leveraging the QuickStart capabilities of the 128T Networking Platform.
 
-## 128T Configuration
+### 128T Configuration
 
 The 128T router will need to be provisioned a priori on the conductor.  This procedure presumes you are familiar with the [concepts](concepts_glossary) and [configuration](config_basics) of the 128T platform.
 
@@ -95,7 +95,7 @@ A password is used to encrypt the contents of the QuickStart file.  This passwor
 
 ![QuickStart Success](/img/intro_ztp_quickstart_client_5.png)
 
-## Verifying Operation
+### Verifying Operation
 The 128T router will have connected to the conductor.  The Router page that was previously empty should now be populated with information about the system.  Go to the 128T Conductor UI to verify the process completed for this newly created 128T Router by accessing “Routers” -> “Router Name” -> “Node Name”
 - Verify “128T Processes” -> “All Processes Running”
 - Verify “Asset Status” -> “RUNNING”

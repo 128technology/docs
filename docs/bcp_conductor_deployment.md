@@ -157,7 +157,7 @@ The KNI (named `kni254`) shuttles packets back and forth between the Linux proce
 
 ------
 
-# Appendix A: Public Conductor
+## Appendix A: Public Conductor
 
 ```
 config
@@ -367,7 +367,7 @@ exit
 
 ------
 
-# Appendix B: Conductor behind 128T
+## Appendix B: Conductor behind 128T
 
 ```
 config
