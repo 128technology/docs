@@ -168,52 +168,6 @@ This feature is also useful for initiating many top level edits that need to ove
 
 While not enforced, the administrator is encouraged to follow the following naming convention for tag names that correspond to configuration: `field-name_{7 Random Characters from [A-Za-a0-9]}`. For example, a tag name for a router could look like: `name_bZ2h9e0`.
 
-## Conversion Between Modes
-
-When transitioning from basic to advanced mode or vice versa, data is retained and converted to the new mode. Basic mode can always be transitioned to advanced mode, but advanced mode cannot always be transitioned back to basic mode. The following conditions must be met for a template to be transitioned from advanced mode to basic mode:
-
-- The template body must start with:
-
-```
-{% for instance in instances %}
-{% editgroup %}
-```
-
-- The template body must end with:
-
-```
-{% endfor %}
-```
-
-- The JSON between the start and end segments of the body must be valid JSON.
-- The JSON between the start and end segments of the body must be structurally valid configuration. We will trim any unrecognized fields, but for example if a field is supposed to be an array and it is a string, the conversion will fail.
-- The variables pane of the template must contain valid JSON.
-- There must be an array of instances in the variables JSON.
-- Each instance must have a name and an optional variables object that maps tag names to the values that will be substituted in for them. For example:
-
-```
-{
-  "instances": [
-    {
-      "name": "Router1",
-      "variables": {
-        "name_IAPFNIn": "Router1"
-      }
-    },
-    {
-      "name": "Router2",
-      "variables": {
-        "name_IAPFNIn": "Router2"
-      }
-    }
-  ]
-}
-```
-
-:::tip
-The easiest way to quickly make modifications to the structure of a template body in basic mode is to switch to advanced mode, make the edits, and then switch back to basic mode.
-:::
-
 ### Operations
 
 Up until this point, all of the examples in this document have covered generated configurations that are merged into the existing configuration. In some deployments, the administrator may want to have a template that, for example, deletes configuration. The following syntax can be used to accomplish this in advanced mode:
@@ -292,6 +246,52 @@ Given the following variables:
 The above would insert router `Test1` after router `Test2`. 
 
 The `insert` property can have any of the following values: `first`, `last`, `before`, and `after`. If the list is of complex objects, like routers in the above example, the `keys` property must be specified for `before` and `after`. If instead the list was of simple strings like `["a", "b"]`, instead of `keys` you would specify a property called `value` which is a string to reference the item in the list that you want to target (e.g. `"value": "a"`).
+
+## Conversion Between Modes
+
+When transitioning from basic to advanced mode or vice versa, data is retained and converted to the new mode. Basic mode can always be transitioned to advanced mode, but advanced mode cannot always be transitioned back to basic mode. The following conditions must be met for a template to be transitioned from advanced mode to basic mode:
+
+- The template body must start with:
+
+```
+{% for instance in instances %}
+{% editgroup %}
+```
+
+- The template body must end with:
+
+```
+{% endfor %}
+```
+
+- The JSON between the start and end segments of the body must be valid JSON.
+- The JSON between the start and end segments of the body must be structurally valid configuration. We will trim any unrecognized fields, but for example if a field is supposed to be an array and it is a string, the conversion will fail.
+- The variables pane of the template must contain valid JSON.
+- There must be an array of instances in the variables JSON.
+- Each instance must have a name and an optional variables object that maps tag names to the values that will be substituted in for them. For example:
+
+```
+{
+  "instances": [
+    {
+      "name": "Router1",
+      "variables": {
+        "name_IAPFNIn": "Router1"
+      }
+    },
+    {
+      "name": "Router2",
+      "variables": {
+        "name_IAPFNIn": "Router2"
+      }
+    }
+  ]
+}
+```
+
+:::tip
+The easiest way to quickly make modifications to the structure of a template body in basic mode is to switch to advanced mode, make the edits, and then switch back to basic mode.
+:::
 
 ## Import / Export
 
