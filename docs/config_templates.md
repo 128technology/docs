@@ -214,6 +214,85 @@ When transitioning from basic to advanced mode or vice versa, data is retained a
 The easiest way to quickly make modifications to the structure of a template body in basic mode is to switch to advanced mode, make the edits, and then switch back to basic mode.
 :::
 
+### Operations
+
+Up until this point, all of the examples in this document have covered generated configurations that are merged into the existing configuration. In some deployments, the administrator may want to have a template that, for example, deletes configuration. The following syntax can be used to accomplish this in advanced mode:
+
+```
+{% for instance in instances %}
+{% editgroup %}
+{
+  "authority": {
+    "router": [
+      {
+        "_value": { "name": "{{instance.variables['name_aEayzmy']}}" },
+        "_operation": "delete"
+      }
+    ]
+  }
+}
+{% endfor %}
+```
+
+Given the following variables:
+
+```
+{
+  "instances": [
+    {
+      "name": "Test1",
+      "variables": {
+        "name_aEayzmy": "Test1"
+      }
+    }
+  ]
+}
+```
+
+In the above example, router `Test1` would be deleted from the candidate configuration upon running the generation step.
+
+The following values are supported for the `_operation` field: `merge`, `create`, `replace`, `delete`, and `remove`. 
+
+#### List Positioning
+
+In addition to the `_operation` property above, there is another property named `_position`. If, for example, you wanted to create a list item after another list item (e.g. if order matters) you could do the following:
+
+```
+{% for instance in instances %}
+{% editgroup %}
+{
+  "authority": {
+    "router": [
+      {
+        "_value": { "name": "{{instance.variables['name_aEayzmy']}}" },
+        "_operation": "create",
+        "_position": { "insert": "after", "keys": [{ "key": "name", "value": "Test2" }] }
+      }
+    ]
+  }
+}
+{% endfor %}
+```
+
+Given the following variables:
+
+```
+{
+  "instances": [
+    {
+      "name": "Test1",
+      "variables": {
+        "name_aEayzmy": "Test1"
+      }
+    }
+  ]
+}
+```
+
+The above would insert router `Test1` after router `Test2`. 
+
+The `insert` property can have any of the following values: `first`, `last`, `before`, and `after`. If the list is of complex objects, like routers in the above example, the `keys` property must be specified for `before` and `after`. If instead the list was of simple strings like `["a", "b"]`, instead of `keys` you would specify a property called `value` which is a string to reference the item in the list that you want to target (e.g. `"value": "a"`).
+
 ## Import / Export
 
 Templates support import and export functionality, both in basic and advanced mode. The **Import / Export** wizard can be opened by clicking the following button in the upper right corner of the page: ![templates_import_export_btn](/img/templates_import_export_btn.png)
