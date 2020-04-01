@@ -86,6 +86,18 @@ Within the web client, the Event History link will bring you to a page where all
 
 ![alarms_and_events_events_screenshot](/img/events_events_screenshot.png)
 
+In large deployments, there may be a large number of events on a conductor.  It may be difficult to wade through the pages of events if you know you are looking for a particular event within a window of time.  The `show events` command supports filtering events by time when specifying starting and ending time ranges.  The syntax for time follows the same format of the event timestamps.
+
+```
+show events alarm from 2020-03-30T22:00:00Z to 2020-03-30T23:59:59Z router burlma-corp
+```
+
+:::note
+Note the trailing `Z`.  Most systems are configured to be in UTC time.  If the trailing `Z` was absent, the time filter would be restricted to the local time zone
+:::
+
+show events alarm from 2020-03-30T22:00:00Z to 2020-03-30T23:59:59Z router AAPDENCOPOD4
+
 ## Contents of Alarms and Events
 
 | Field    | Description                                                  |
