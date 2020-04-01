@@ -14,9 +14,15 @@ module.exports = {
     ],
     "Introduction": [
       "intro_getting_started",
+      "intro_downloading_iso",
       "intro_installation",
+      "intro_installation_installer",
+      "intro_installation_bootable_media",
+      "intro_installation_aws",
       "intro_ztp",
-      "intro_creating_bootable_iso",
+      "intro_creating_bootable_usb",
+      "intro_upgrading",
+      "intro_rollback",
     ],
     "Concepts": [
       "concepts_application_discovery",
