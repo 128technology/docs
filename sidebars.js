@@ -55,6 +55,13 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "How To",
+        "items": [
+          "howto_trusted_ca_certificate",
+        ],
+      },
+      {
+        "type": "category",
         "label": "Troubleshooting",
         "items": [
           "ts_applications",
@@ -76,7 +83,6 @@ module.exports = {
       "bcp_lte_peering",
       "bcp_service_and_service_policy_design",
       "bcp_tenants",
-      "bcp_trusted_ca_certificate",
     ],
     "CLI Reference": [
       "cli_reference",
