@@ -57,6 +57,7 @@ module.exports = {
         "type": "category",
         "label": "How To",
         "items": [
+          "howto_bgp",
           "howto_trusted_ca_certificate",
         ],
       },
