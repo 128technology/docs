@@ -70,6 +70,7 @@ module.exports = {
           "ts_cpu_spikes",
           "ts_connecting_to_routers",
           "ts_forwarding_resource_pools",
+          "ts_logs",
           "ts_mac_uniqueness",
         ],
       },
