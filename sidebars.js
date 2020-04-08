@@ -48,6 +48,7 @@ module.exports = {
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
           "config_nat",
+          "config_ospf",
           "config_snmp",
           "config_snmp_metrics",
           "config_tenants",
