@@ -58,6 +58,7 @@ module.exports = {
         "label": "How To",
         "items": [
           "howto_bgp",
+          "howto_maintenance_mode",
           "howto_trusted_ca_certificate",
         ],
       },
