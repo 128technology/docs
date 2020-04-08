@@ -7,7 +7,11 @@ Logs 128T are stored in 4 principal locations: `/var/log/128technology/`, `/var/
 - `/var/log/128technology/`, as the name suggests, contains the majority of the logs related to 128T application processing.
 - 128T utilizes [Salt Stack](https://www.saltstack.com) for life cycle management and Dev Ops automation. Salt-related log files are contained within their default directory of `/var/log/salt/`.
 - The 128T-installer is a separate application that is used for installing and upgrading the 128T.  Any logs related to installation, initialization, upgrade, or rollback will be contained within the `/var/log/install128t/` directory.
-- The journal contains logs from the web server.  In order to view logs related to these processes, you can execute `journalctl -u <process>`, where the web server process name is `128TWeb`.
+- The journal contains logs from processes that are managed by systemd and not by the 128T process manager.  In order to view logs related to these processes, you can execute `journalctl -u <process>`. 128T-related processes that are managed by systemd are:
+  - `128TWeb`
+  - `nginx`
+  - `128TWebAuth`
+  - `mars`
 
 An example listing of the `/var/log/128technology/` directory can be seen here:
 
@@ -114,8 +118,6 @@ Mon 2018-09-10 20:10:28 UTC
 
 Completed in 0.10 seconds
 ```
-
-The `128TWeb` server process is not in the output of `show system processes` because the web server is managed by systemd and not by 128T's process manager.
 
 The log that is currently being written to is the log that does not have a number added to its name. For example, highway.log is the current highway log while highway.1.log is the most recently rotated highway log. 
 
