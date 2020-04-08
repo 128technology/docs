@@ -163,7 +163,7 @@ One must use a conductor for BGP over SVR as a manual configuration is unsupport
 :::
 
 :::note
-If the WAN interface of your 128T or the interface facing the 128T-BGP peer is already part of a neighborhood, then ensure that their topology type (`network-interface > neighborhoods > topology`) is such that it allows the routers to form peering relationships for the auto-generated peer service routes, e.g., `mesh-mesh`, `mesh-hub`, `mesh-spoke` or `hub-spoke`. More information on neighborhoods can be found in the [glossary](concepts_glossary#neighborhoods)
+If the WAN interface of your 128T or the interface facing the 128T-BGP peer is already part of a neighborhood, then ensure that their topology type (`network-interface > neighborhoods > topology`) is such that it allows the routers to form peering relationships for the auto-generated peer service routes, e.g., `mesh-mesh`, `mesh-hub`, `mesh-spoke` or `hub-spoke`. More information on neighborhoods can be found in the [glossary](concepts_glossary.md#neighborhoods)
 :::
 Next, configure a BGP instance with the router’s local AS and a router ID that matches the self-routing interface IP. For each BGP over SVR peer, use a neighbor address of the neighbor routing interface IP address. Next, configure the normal BGP peer configuration options such as the timers and address families that are needed. In address-family IPv4-unicast `next-hop-self` must be set to `true`.
 
