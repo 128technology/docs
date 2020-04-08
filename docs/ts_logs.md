@@ -10,6 +10,8 @@ Logs 128T are stored in 4 principal locations: `/var/log/128technology/`, `/var/
 - The journal contains logs from processes that are managed by systemd and not by the 128T process manager.  In order to view logs related to these processes, you can execute `journalctl -u <process>`. 128T-related processes that are managed by systemd are:
   - `128TWeb`
   - `nginx`
+  - `128TWebAuth`
+  - `mars`
 
 An example listing of the `/var/log/128technology/` directory can be seen here:
 
