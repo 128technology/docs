@@ -1,8 +1,11 @@
 ---
-title: 128T 4.0.1 Release Notes
-sidebar_label: 4.0.1
+title: 128T 4.0 Release Notes
+sidebar_label: '4.0'
 ---
-## Issues Fixed
+
+## Release 4.0.1
+
+### Issues Fixed
 
 - **I95-24556** Analytics log file now follows the same rotation scheme as the other log files on the system.
 
