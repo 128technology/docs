@@ -139,6 +139,7 @@ module.exports = {
             "items": [
               "release_notes/128t_release_notes_4.3.0",
               "release_notes/128t_release_notes_4.3.1",
+              "release_notes/128t_release_notes_4.3.2",
             ],
           },
         ],
