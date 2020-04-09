@@ -22,6 +22,7 @@ module.exports = {
       "concepts_interface_types",
       "concepts_linux_host_networking",
       "concepts_network_planes",
+      "concepts_metrics",
       "concepts_machine_communication",
       "concepts_session_timer",
       "concepts_glossary",
@@ -90,9 +91,8 @@ module.exports = {
       "plugin_monitoring_agent",
       "plugin_gre"
     ],
-    "APIs": [
-      "apis_rest",
-      "apis_netconf",
+    "REST APIs": [
+      "api_rest_4.2.0",
     ],
     "Release Notes": [
       {
