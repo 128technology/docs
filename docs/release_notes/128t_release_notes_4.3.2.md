@@ -21,7 +21,9 @@ Consult the [4.3.0 release notes Special Considerations](./release_notes/128t_re
 - **I95-33789** Forwarding core count incorrectly reported in GUI under Router -> Node -> Platform Information
   Until the system is upgraded to 4.3.2, this issue can be mitigated by using the PCLI version of the same command: `show platform cpu `
 
-- **I95-33938** REST API missing documentation reference to command to delete configuration backups.  The missing, and supported, API is  `DELETE /api/v1/config/export/:filename`
+- **I95-33845** security package updates
+  
+- **I95-33938** REST API missing documentation reference for the command to delete configuration backups.  The missing and supported API is  `DELETE /api/v1/config/export/:filename`
 
 - **I95-33979** Custom Reports in the GUI created with peer path metrics for jitter, latency, or loss are rendered as a line chart instead with a single value instead of one per path
 
@@ -45,7 +47,7 @@ Consult the [4.3.0 release notes Special Considerations](./release_notes/128t_re
   _**Symptom:**_ The following warning log is generated:
   
   ```
-Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to allocate ports for WayPoint; intf=5.0; local=172.27.233.47; remote=10.61.55.109
+Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to allocate ports for WayPoint; intf=5.0; local=192.0.2.100; remote=198.51.100.128
   ```
 
   Until the system is upgraded to 4.3.2, this issue can be mitigated by removing the corresponding adjacency configuration and adding it back.
@@ -62,9 +64,9 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
   Until the system is upgraded to 4.3.2, this issue can be mitigated by ensuring the system is configured at log level INFO, and if necessary, reduce the size of the service configuration.
 
-- **I95-34397** ARP caching and reverse mac learning is not triggered when ARP response takes longer than 1 second
+- **I95-34397** ARP caching and reverse MAC learning is not triggered when an ARP response takes longer than 1 second
 
-- **I95-34421** Lenovo onboard Intel X722 NIC is not recognized by 128T and can not used as a forwarding interface
+- **I95-34421** Lenovo onboard Intel X722 NIC is not recognized by 128T and cannot be used as a forwarding interface
 
 - **I95-34498** Erroneous centos-release-yum4 errors in `/var/log/salt/minion` log file
 
@@ -76,7 +78,7 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
   _**Conditions:**_ Automated Provisioner performs a software version query 
   
-- **I95-35477** Interface never becomes active when `shared-physical-address` is configured to be the same as the physical MAC
+- **I95-35477** Interface never becomes active when `shared-phys-address` is configured to be the same as the physical MAC
 
 - **I95-34645** Swagger API for "clone" and "move" operations are incorrect.  They are `/config/{configStore}/authority/district/{district}/clone` when they should be `/config/{configStore}/authority/district/clone`
 
