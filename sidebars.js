@@ -3,14 +3,6 @@ module.exports = {
     "About": [
       "about_128t",
       "CONTRIBUTING",
-      {
-      	"type": "category",
-      	"label": "Release Notes",
-      	"items": [
-          "release_notes/release_notes_4.2.0",
-          "release_notes/release_notes_4.2.1",
-        ],
-      },
     ],
     "Introduction": [
       "intro_getting_started",
@@ -101,5 +93,91 @@ module.exports = {
       "apis_rest",
       "apis_netconf",
     ],
-  }
+    "Release Notes": [
+      {
+        "type": "category",
+        "label": "128T",
+        "items": [
+          {
+            "type": "category",
+            "label": "4.0",
+            "items": [
+              "release_notes/128t_release_notes_4.0.1",
+            ],
+          },
+          {
+            "type": "category",
+            "label": "4.1",
+            "items": [
+              "release_notes/128t_release_notes_4.1.0",
+              "release_notes/128t_release_notes_4.1.1",
+              "release_notes/128t_release_notes_4.1.2",
+              "release_notes/128t_release_notes_4.1.3",
+              "release_notes/128t_release_notes_4.1.4",
+              "release_notes/128t_release_notes_4.1.5",
+              "release_notes/128t_release_notes_4.1.6",
+              "release_notes/128t_release_notes_4.1.7",
+              "release_notes/128t_release_notes_4.1.8",
+            ],
+          },
+          {
+            "type": "category",
+            "label": "4.2",
+            "items": [
+              "release_notes/128t_release_notes_4.2.0",
+              "release_notes/128t_release_notes_4.2.1",
+              "release_notes/128t_release_notes_4.2.2",
+              "release_notes/128t_release_notes_4.2.3",
+              "release_notes/128t_release_notes_4.2.4",
+              "release_notes/128t_release_notes_4.2.5",
+              "release_notes/128t_release_notes_4.2.6",
+            ],
+          },
+          {
+            "type": "category",
+            "label": "4.3",
+            "items": [
+              "release_notes/128t_release_notes_4.3.0",
+              "release_notes/128t_release_notes_4.3.1",
+            ],
+          },
+        ],
+      },
+      {
+        "type": "category",
+        "label": "128T Installer",
+        "items": [
+          "release_notes/128t_installer_release_notes_2.1.0",
+          "release_notes/128t_installer_release_notes_2.2.0",
+          "release_notes/128t_installer_release_notes_2.3.0",
+          "release_notes/128t_installer_release_notes_2.3.1",
+          "release_notes/128t_installer_release_notes_2.3.2",
+          "release_notes/128t_installer_release_notes_2.4.0",
+          "release_notes/128t_installer_release_notes_2.4.1",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "128T IPSEC Client",
+        "items": [
+          "release_notes/128t_ipsec_client_release_notes_1.0.1",
+          "release_notes/128t_ipsec_client_release_notes_2.0.1",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "128T SIP ALG",
+        "items": [
+          "release_notes/128t_sip_alg_release_notes_2.1.0",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "128T ZScaler",
+        "items": [
+          "release_notes/128t_zscaler_release_notes_1.1.2",
+        ],
+      },
+    ],
+  },
 };
