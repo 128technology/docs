@@ -81,7 +81,7 @@ const features = [
   },
   {
     title: <>APIs</>,
-    link: 'docs/apis_rest',
+    link: 'docs/api_rest_4.2.0',
     description: (
       <>
         Automate and integrate with the 128T APIs
