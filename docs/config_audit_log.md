@@ -33,7 +33,7 @@ Configuration not related to audit logging has been filtered out for illustrativ
             exit
         exit
     exit
-# Viewing the Audit Log
+## Viewing the Audit Log
 
 The only way at present to view the contents of the audit log is via the GUI (on the conductor or router as configured above).
 

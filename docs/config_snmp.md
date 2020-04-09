@@ -1,5 +1,5 @@
 ---
-title: SNMP
+title: Simple Network Management Protocol (SNMP)
 sidebar_label: SNMP
 ---
 
