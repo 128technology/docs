@@ -99,6 +99,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes/128t_release_notes_4.1",
           {
             "type": "category",
             "label": "4.0",
