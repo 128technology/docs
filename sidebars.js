@@ -24,6 +24,7 @@ module.exports = {
       "concepts_network_planes",
       "concepts_metrics",
       "concepts_machine_communication",
+      "concepts_pcli",
       "concepts_session_timer",
       "concepts_glossary",
     ],

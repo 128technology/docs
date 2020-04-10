@@ -1,0 +1,36 @@
+---
+title: 'Programmable Command Line Interface (PCLI)'
+sidebar_label: 'PCLI'
+---
+
+## About the PCLI
+
+The PCLI (an acronym for _Programmable Command Line Interface_) is one of the two primary human interfaces on the 128T router; this document will use the terms PCLI and CLI interchangeably. This document describes the set of PCLI commands supported by the 128T router. Each command listed below will show all mandatory and optional arguments, representative output from the PCLI where applicable, and version history.
+
+Note that all of the examples in this document will be run as the _admin_ role (as denoted by the prompt in this and other examples); however, each command will also indicate which user roles – either _user_ or _admin_ at the time of this writing – are eligible to run the command based upon that command&#39;s privileges. Note that unprivileged _user_ accounts will not only be unable to execute these commands, they will not "see" them in the PCLI as part of the help text, etc.
+
+Optional arguments are written in brackets (`[` `]`), and users may include or omit them as needed. Variable arguments (where users need to supply a value, rather than entering in the literal string shown in the syntax) are written in angle brackets (`<` `>`).
+
+```
+show stats packet-processing action failure [core <core>]
+```
+
+In this example, a user may include core information[^1]. If including core, the user must supply the literal string "core" and a value for the core, such as "0".
+
+[^1]: forwarding plan metrics are stored uniquely per worker `forwarding-core-count`.
+
+Braces, brackets, and pipes are often combined and nested to describe the complete grammar of the command line syntax for any given command.
+
+## The PCLI Prompt
+
+The PCLI will indicate that there are uncommitted configuration changes via a change to the prompt. When uncommitted changes exist, the prompt is prefixed with an asterisk ("\*"):
+
+```
+*admin@labsystem1.fiedler#
+*admin@labsystem1.fiedler# validate
+Candidate configuration is valid
+*admin@labsystem1.fiedler# commit
+Are you sure you want to commit the candidate config? [y/N]: y
+Configuration committed
+admin@labsystem1.fiedler#
+```
