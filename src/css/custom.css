@@ -36,6 +36,14 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
+/**
+Docusaurus default styling sets '.alert.alert--secondary' background-color to
+--ifm-color-secondary. This sets the value explicitly. See DOCS-10.
+**/
+.alert.alert--secondary {
+  --ifm-alert-background-color: #EBEDF0;
+}
+
 @font-face {
   font-family: RbNo31;
   src: url('/font/RBNo31-Light.ttf') format('truetype');
