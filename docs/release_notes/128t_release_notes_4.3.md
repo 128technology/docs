@@ -17,7 +17,7 @@ sidebar_label: 4.3
 
   _**Conditions:**_ Changing the object's key, in this case `device-interface > name` causes secure fields to be incorrectly converted to `(removed)`.
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by deleting the existing `device-interface` object and recreate it.
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by deleting the existing `device-interface` object and recreate it.
 ------
 - **I95-30011** HA router nodes may take upwards of 40 seconds to achieve quorum.
 
@@ -25,7 +25,7 @@ sidebar_label: 4.3
 
   _**Conditions:**_ The hostname of the platform cannot be resolved
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by setting the hostname of the node to a value that can be resolved or add an address for the system in `/etc/hosts`
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by setting the hostname of the node to a value that can be resolved or add an address for the system in `/etc/hosts`
 ------
 
 - **I95-31597** Configuring a static ARP entry within a `neighbor` configuration is not honored
@@ -35,9 +35,9 @@ sidebar_label: 4.3
 ------
 - **I95-32244** Cannot upgrade after software download completes
 
-  _**Conditions:**_ Managed router being upgraded via Conductor can intermittently fail due to transient network conditions, 4.2.5 will now perform multiple attempts to verify the download completed.
+  _**Conditions:**_ Managed router being upgraded via Conductor can intermittently fail due to transient network conditions, 4.3.2 will now perform multiple attempts to verify the download completed.
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by performing the Download operation again.
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by performing the Download operation again.
 ------
 - **I95-32509** Generated configuration objects are shown by default in GUI and PCLI
 ------
@@ -45,7 +45,7 @@ sidebar_label: 4.3
 ------
 - **I95-33024** Specifying a `metric` value within `advertise-default` of OSPF causes advertisements to be withdrawn
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by remove `metric` value from `advertise-default` configuration
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by remove `metric` value from `advertise-default` configuration
 ------
 - **I95-33174** Some LTE cards do not use the correct wireless bands for the AT&T network
 ------
@@ -59,7 +59,7 @@ sidebar_label: 4.3
 
   _**Symptom:**_ Existing traffic for some services are blackholed during upgrade
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by completing the upgrade of both nodes or restart non-upgraded 128T
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by completing the upgrade of both nodes or restart non-upgraded 128T
 ------
 - **I95-33506** File descriptors can leak upon incorrectly configuring a non-existent namespace within an interface type of `host`.
 
@@ -67,14 +67,15 @@ sidebar_label: 4.3
 
   _**Conditions:**_ Setting `network-namespace` to a value that does not exist on the host platform after committing configuration
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by removing the invalid configuration.
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by removing the invalid configuration.
 ------
 - **I95-33535** Interface name incorrectly allows for prefixed whitepace in configuration, resulting in failure to create interface.
 ------
 - **I95-33556** 128T may drop inbound SVR traffic when destination service address and port overlaps with interface (waypoint) address and wayport.
 
   _**Conditions:**_ `address` on a service matches that of the `network-interface` that participates in SVR AND `tenant` on the service matches the `tenant` on the `network-interface` depending on the service scope AND the `port-range` defined on the `network-interface` overlaps with `port-range` of the service.
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by changing the `port-range` on the neighborhood to a range that does not overlap with the service. In 4.2.5 a configuration validation has been added to detect such overlap and provide user with appropriate error message.
+
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by changing the `port-range` on the neighborhood to a range that does not overlap with the service. In 4.3.2 a configuration validation has been added to detect such overlap and provide user with appropriate error message.
 ------
 - **I95-33559** `send command download router all <version>` will report `% Error: Failed to execute the 'download-software' RPC: Request failed with error: TIMEOUT` even though the command completes successfully.
 
@@ -86,7 +87,7 @@ sidebar_label: 4.3
 
   _**Conditions:**_ highway process faults can leave an interface unbound to _any_ driver, resulting in the inability for the system to rebind to the interface.
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by issuing a `reboot` on the impacted system.
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by issuing a `reboot` on the impacted system.
 ------
 - **I95-33655** GUI Ping and Service Ping do not report incremental ICMP response messages; only the summary is produced when the command has completed.
 
@@ -102,7 +103,7 @@ sidebar_label: 4.3
 
   _**Symptom:**_ User is unable to login.
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by removing the user from one of the two LDAP groups.
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by removing the user from one of the two LDAP groups.
 ------
 - **I95-33710** Working configuration fails to validate after upgrade
 
@@ -110,7 +111,7 @@ sidebar_label: 4.3
 
   _**Conditions:**_ `device-interface` of type `host` will fail validation if a `management-vector` does not exist.
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by configuring a `management-vector` on the `network-interface`s that exist within the `device-interface`.
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by configuring a `management-vector` on the `network-interface`s that exist within the `device-interface`.
 ------
 - **I95-33759** GUI DHCP Client Lease table reports no leases while DHCP server has active client leases.
   Until the system is upgraded to 4.3.2, this issue can be mitigated by using the PCLI version of the same command: `show network-interface application node <node-name> name <interface-name>`
@@ -167,7 +168,7 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
   _**Conditions:**_ firewall is running on the host 128T platform
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by adding the interface `veth` to the `TRUSTED` firewalld zone
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by adding the interface `veth` to the `TRUSTED` firewalld zone
 ------
 - **I95-34135** CVE-2020-8597: A buffer overflow flaw was found in the ppp package
 ------
@@ -175,7 +176,7 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
   _**Conditions:**_ An existing range list is modified to include an overlapping range
 
-  Until the system is upgraded to 4.2.5, this issue can be mitigated by entering a unique range of values that do not overlap.
+  Until the system is upgraded to 4.3.2, this issue can be mitigated by entering a unique range of values that do not overlap.
 ------
 - **I95-34160** Standby node can leak traffic out of its redundant interface when the shared MAC is set to the same MAC as the physical MAC
 ------
@@ -201,7 +202,7 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
   _**Conditions:**_ When the centos rpmdb has been corrupted.
 
-  Until the system is upgraded to 4.2.5, run the following commands on the target asset `mv /var/lib/rpm/__db* /tmp; yum clean all; dnf clean all`
+  Until the system is upgraded to 4.3.2, run the following commands on the target asset `mv /var/lib/rpm/__db* /tmp; yum clean all; dnf clean all`
 ------
 - **I95-34371** Large FIBs can take excess of 30 seconds to load, causing the highway process to fault and restart
 
