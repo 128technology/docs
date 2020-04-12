@@ -55,6 +55,7 @@ module.exports = {
         "items": [
           "howto_bgp",
           "howto_conductor_migration",
+          "howto_lte",
           "howto_maintenance_mode",
           "howto_trusted_ca_certificate",
           "howto_tune_bfd",

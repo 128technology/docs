@@ -2,6 +2,12 @@
 title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
+## Release 4.3.3
+
+### New Features and Improvements
+
+- **I95-22789** Dual LTE Support
+  For information on how to configure the 128T with two LTE interfaces, please read the [How To: LTE](../howto_lte) guide.
 
 ## Release 4.3.2
 
