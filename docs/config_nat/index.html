@@ -16,23 +16,23 @@
 <link rel="stylesheet" href="/styles.7d43a3e9.css">
 
 
-<link rel="preload" href="/styles.fb261d32.js" as="script">
+<link rel="preload" href="/styles.f2b4486f.js" as="script">
 
-<link rel="preload" href="/runtime~main.91609546.js" as="script">
+<link rel="preload" href="/runtime~main.495ed16e.js" as="script">
 
-<link rel="preload" href="/main.66624d26.js" as="script">
+<link rel="preload" href="/main.8ba51e6d.js" as="script">
 
-<link rel="preload" href="/1.620dd09c.js" as="script">
+<link rel="preload" href="/1.6fd3e54f.js" as="script">
 
-<link rel="preload" href="/2.bf3d0642.js" as="script">
+<link rel="preload" href="/2.6c31914b.js" as="script">
 
-<link rel="preload" href="/83.dc3fb671.js" as="script">
+<link rel="preload" href="/84.b2761997.js" as="script">
 
 <link rel="preload" href="/20ac7829.73cfd23a.js" as="script">
 
-<link rel="preload" href="/17896441.4fb429be.js" as="script">
+<link rel="preload" href="/17896441.b4439569.js" as="script">
 
-<link rel="preload" href="/24fe8a40.d8a39252.js" as="script">
+<link rel="preload" href="/24fe8a40.5a5d216c.js" as="script">
 
 </head>
 <body>
@@ -50,23 +50,23 @@
 </span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">network-interface</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    name    test-lan</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    address</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        ip-address 192.168.10.1</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">        prefix-length 24</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">    egress-source-nat-pool dynamic-pool-1</span></div></code></pre></div><p>In the above example, the configured NAT pool can accommodate 254,000 combinations of IP and ports for source NAT as opposed to the default of 50,000. Each IP address in the 10.10.10.0/24 will accomodate 1000 ports performing source NAT. For example, traffic originating from an endpoint with IP address 192.168.100.100 and source port 16000 will be source NAT’d to IP address 10.10.10.1 with port 10000, etc. In the case where multiple IP and port range combinations are available, the 128T router will exhaust the first range before consuming the next. In the above example, the dynamic source NAT allocation will begin from 10.10.10.1 port 10000 and will consume all 1000 ports for incoming sessions until 10.10.10.1 port 11000. Once these ports are exhausted, we will use the next IP and ports in the range such as 10.10.10.2:10000 to 10.10.10.2:11000, and so on.</p><h3><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="shared-nat-pools"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#shared-nat-pools" title="Direct link to heading">#</a>Shared NAT pools</h3><p>In some scenarios, it is desirable to share the same NAT pool across services and interfaces. This feature accommodates the same NAT pool to be configured on different interfaces. For static NAT pools, no additional configuration considerations need to be made. However, for dynamic NAT pools, when the pool is shared across multiple <em>device-interfaces</em> and <em>network-interfaces</em>, there are some considerations that should be noted for failure and recovery. </p><u>Flow Move Considerations</u><p>Currently session migration is only supported for SVR sessions. This restriction exists because session migration of a non-SVR session is not guaranteed to terminate on the same server. As a result, the remote server might receive mid flow packets from a different source, resulting in undefined behavior.</p><u>Session Recovery Considerations</u><p>Shared NAT pools provisioned on a HA interface that encur a failover, the 128T software puts the interface in recovery mode to recover all sessions. At the end of the recovery period, all non-discovered ports as designed as free and are returned to the NAT pool.</p><h3><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="tenant-filtering"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#tenant-filtering" title="Direct link to heading">#</a>Tenant filtering</h3><p>The <em>nat-pool</em> configuration can optionally be provisioned with a list of tenants. When the configuration has <em>multiple</em> IP pools available, the <em>tenant</em> can be used to determine which IP pool will be selected for the source NAT. Absence of a tenant implies that the IP pool is valid for all traffic. The following rules will be applied in order to determine the selection of the NAT pool:</p><ul><li>The packet has a source tenant associated with it<ul><li>If more than one IP pool has matching tenant<ul><li>Static nat-pool: Only the first IP pool is used and hash is applied to create a session. The remainder of the matches are discarded</li><li>Dynamic nat-pool: Picks the first IP pool with available capacity.</li></ul></li><li>If a pool with no tenant is configured<ul><li>Static nat-pool: Same as above</li><li>Dynamic nat-pool: Same as above</li></ul></li><li>All IP pools have tenant configured but none of them match the source tenant<ul><li>Log the failure, increment stat and drop the packet</li></ul></li></ul></li><li>The packet has no source tenant associated with it<ul><li>At least one IP pool has no tenant configured to do the source NAT; otherwise this will result in the session being dropped.</li></ul></li></ul><p>The tenant matching rules will apply to sub-tenants as well. For example, if an IP pool allows tenant engineering; traffic with source tenant lab.engineering will also match the pool.</p></div></article><div class="margin-vert--xl"><div class="row"><div class="col"><a href="https://github.com/128technology/docs/tree/master/docs/config_nat.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col text--right"><em><small>Last updated on <time datetime="2020-03-20T19:28:52.000Z" class="docLastUpdatedAt_1sqk">3/20/2020</time></small></em></div></div></div><div class="margin-vert--lg"><nav class="pagination-nav"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/config_transition_standalone_to_ha"><h5 class="pagination-nav__link--sublabel">Previous</h5><h4 class="pagination-nav__link--label">« Transitioning a Conductor from Standalone to HA</h4></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/config_ospf"><h5 class="pagination-nav__link--sublabel">Next</h5><h4 class="pagination-nav__link--label">Open Shortest Path First (OSPF) »</h4></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_TbNY"><ul class="contents contents__left-border"><li><a href="#source-nat" class="contents__link">Source NAT</a></li><li><a href="#destination-nat" class="contents__link">Destination NAT</a></li><li><a href="#nat-pools" class="contents__link">NAT Pools</a><ul><li><a href="#static-nat-bindings" class="contents__link">Static NAT bindings</a></li><li><a href="#dynamic-nat-bindings" class="contents__link">Dynamic NAT bindings</a></li><li><a href="#shared-nat-pools" class="contents__link">Shared NAT pools</a></li><li><a href="#tenant-filtering" class="contents__link">Tenant filtering</a></li></ul></li></ul></div></div></div></div></div></main></div></div><footer class="footer"><div class="container"><div class="text--center"><div>Copyright © 2020 128 Technology, Inc.</div></div></div></footer>
 </div>
 
-<script src="/styles.fb261d32.js"></script>
+<script src="/styles.f2b4486f.js"></script>
 
-<script src="/runtime~main.91609546.js"></script>
+<script src="/runtime~main.495ed16e.js"></script>
 
-<script src="/main.66624d26.js"></script>
+<script src="/main.8ba51e6d.js"></script>
 
-<script src="/1.620dd09c.js"></script>
+<script src="/1.6fd3e54f.js"></script>
 
-<script src="/2.bf3d0642.js"></script>
+<script src="/2.6c31914b.js"></script>
 
-<script src="/83.dc3fb671.js"></script>
+<script src="/84.b2761997.js"></script>
 
 <script src="/20ac7829.73cfd23a.js"></script>
 
-<script src="/17896441.4fb429be.js"></script>
+<script src="/17896441.b4439569.js"></script>
 
-<script src="/24fe8a40.d8a39252.js"></script>
+<script src="/24fe8a40.5a5d216c.js"></script>
 
 
 </body>

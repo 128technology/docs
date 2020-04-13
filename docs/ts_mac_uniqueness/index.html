@@ -16,23 +16,23 @@
 <link rel="stylesheet" href="/styles.7d43a3e9.css">
 
 
-<link rel="preload" href="/styles.fb261d32.js" as="script">
+<link rel="preload" href="/styles.f2b4486f.js" as="script">
 
-<link rel="preload" href="/runtime~main.91609546.js" as="script">
+<link rel="preload" href="/runtime~main.495ed16e.js" as="script">
 
-<link rel="preload" href="/main.66624d26.js" as="script">
+<link rel="preload" href="/main.8ba51e6d.js" as="script">
 
-<link rel="preload" href="/1.620dd09c.js" as="script">
+<link rel="preload" href="/1.6fd3e54f.js" as="script">
 
-<link rel="preload" href="/2.bf3d0642.js" as="script">
+<link rel="preload" href="/2.6c31914b.js" as="script">
 
-<link rel="preload" href="/83.dc3fb671.js" as="script">
+<link rel="preload" href="/84.b2761997.js" as="script">
 
 <link rel="preload" href="/20ac7829.73cfd23a.js" as="script">
 
-<link rel="preload" href="/17896441.4fb429be.js" as="script">
+<link rel="preload" href="/17896441.b4439569.js" as="script">
 
-<link rel="preload" href="/edb447db.f8c62cbe.js" as="script">
+<link rel="preload" href="/edb447db.6bc08cba.js" as="script">
 
 </head>
 <body>
@@ -42,23 +42,23 @@
 </span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">=========== ============ ========= ============= ========== ==================== </span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> Router      Node          Device   Name          DHCP       Address</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">=========== ============ ========= ============= ========== ====================</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> AAP2035P3   AAP2035P3A         2   ha-fabric     disabled   169.254.255.0/31</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> AAP2035P3   AAP2035P3A         3   pos           disabled   10.120.135.1/25</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> AAP2035P3   AAP2035P3A         3   utility       disabled   10.120.135.161/27</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> AAP2035P3   AAP2035P3A         3   voice         disabled   10.120.135.193/27</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"> AAP2035P3   AAP2035P3A         4   DIA           v4         &lt;empty&gt;/32    </span></div></code></pre></div><p>As you can see here, the DIA interface has no IP address. Capturing packets on that interface (using a <code>len&gt;0</code> filter or equivalent) will confirm that the interface is sending DHCP requests. However, if the ISP has already issued a DHCP lease for the MAC address requesting an IP address, these requests may go unanswered.</p><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="the-resolution"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#the-resolution" title="Direct link to heading">#</a>The Resolution</h2><p>To avoid colliding MAC addresses within a domain, we must ensure each is unique. In one representative deployment, the enterprise uses four digit numbers to uniquely identify each location. Thus, we leveraged the last two octets of the <code>shared-phys-address</code> to insert this four digit identifier. For example, the store 1234 uses the MAC address <code>5a:1f:2b:57:12:34</code>, and the store 5678 uses the MAC address <code>5a:1f:2b:57:56:78</code>. While this does not guarantee that MAC addresses are unique within a domain (since another device could conceivably have one of those two addresses &quot;natively&quot;), the chances are far, far more remote.</p><p>To rectify the problem, we must change the <code>shared-phys-address</code> on both the A and B nodes in a router.</p><p>Additionally, for specific deployments where the two nodes in a router are not persistently connected to the same L2 interface at the same time, we recommend configuring Linux&#x27;s MAC address on that interface to match the one that will be used by the 128T software. (This is because we have observed certain business-class DIA circuits that will only issue one IP/MAC binding at a time, and if Linux has a different MAC than 128T, the host&#x27;s MAC may take a lease at the expense of 128T&#x27;s MAC.)</p><p>This is done by editing the <code>MACADDR</code> field within <code>/etc/sysconfig/network-scripts/ifcfg-&lt;ifname&gt;</code>. Ensure this matches the MAC configured within 128T&#x27;s configuration.</p><div class="admonition admonition-warning alert alert--danger"><div class="admonition-heading"><h5><div class="admonition-icon"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="16" viewBox="0 0 12 16"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg></div>warning</h5></div><div class="admonition-content"><p>This is NOT TO BE DONE for &quot;traditional&quot; high availability deployments where both interfaces are plugged into the same L2 broadcast domain at the same time. This is because stopping 128T on one node will cause Linux to ARP out for the MAC address, which will cause disruption to service for its counterpart that is still running.</p></div></div></div></article><div class="margin-vert--xl"><div class="row"><div class="col"><a href="https://github.com/128technology/docs/tree/master/docs/ts_mac_uniqueness.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col text--right"><em><small>Last updated on <time datetime="2020-03-17T19:08:17.000Z" class="docLastUpdatedAt_1sqk">3/17/2020</time></small></em></div></div></div><div class="margin-vert--lg"><nav class="pagination-nav"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/ts_logs"><h5 class="pagination-nav__link--sublabel">Previous</h5><h4 class="pagination-nav__link--label">« Understanding Logs on the 128T</h4></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/events_overview"><h5 class="pagination-nav__link--sublabel">Next</h5><h4 class="pagination-nav__link--label">Alarms and Events »</h4></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_TbNY"><ul class="contents contents__left-border"><li><a href="#the-symptoms" class="contents__link">The Symptoms</a></li><li><a href="#the-resolution" class="contents__link">The Resolution</a></li></ul></div></div></div></div></div></main></div></div><footer class="footer"><div class="container"><div class="text--center"><div>Copyright © 2020 128 Technology, Inc.</div></div></div></footer>
 </div>
 
-<script src="/styles.fb261d32.js"></script>
+<script src="/styles.f2b4486f.js"></script>
 
-<script src="/runtime~main.91609546.js"></script>
+<script src="/runtime~main.495ed16e.js"></script>
 
-<script src="/main.66624d26.js"></script>
+<script src="/main.8ba51e6d.js"></script>
 
-<script src="/1.620dd09c.js"></script>
+<script src="/1.6fd3e54f.js"></script>
 
-<script src="/2.bf3d0642.js"></script>
+<script src="/2.6c31914b.js"></script>
 
-<script src="/83.dc3fb671.js"></script>
+<script src="/84.b2761997.js"></script>
 
 <script src="/20ac7829.73cfd23a.js"></script>
 
-<script src="/17896441.4fb429be.js"></script>
+<script src="/17896441.b4439569.js"></script>
 
-<script src="/edb447db.f8c62cbe.js"></script>
+<script src="/edb447db.6bc08cba.js"></script>
 
 
 </body>

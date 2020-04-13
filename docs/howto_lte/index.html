@@ -16,23 +16,23 @@
 <link rel="stylesheet" href="/styles.7d43a3e9.css">
 
 
-<link rel="preload" href="/styles.fb261d32.js" as="script">
+<link rel="preload" href="/styles.f2b4486f.js" as="script">
 
-<link rel="preload" href="/runtime~main.91609546.js" as="script">
+<link rel="preload" href="/runtime~main.495ed16e.js" as="script">
 
-<link rel="preload" href="/main.66624d26.js" as="script">
+<link rel="preload" href="/main.8ba51e6d.js" as="script">
 
-<link rel="preload" href="/1.620dd09c.js" as="script">
+<link rel="preload" href="/1.6fd3e54f.js" as="script">
 
-<link rel="preload" href="/2.bf3d0642.js" as="script">
+<link rel="preload" href="/2.6c31914b.js" as="script">
 
-<link rel="preload" href="/83.dc3fb671.js" as="script">
+<link rel="preload" href="/84.b2761997.js" as="script">
 
 <link rel="preload" href="/20ac7829.73cfd23a.js" as="script">
 
-<link rel="preload" href="/17896441.4fb429be.js" as="script">
+<link rel="preload" href="/17896441.b4439569.js" as="script">
 
-<link rel="preload" href="/fb06d519.b6d36430.js" as="script">
+<link rel="preload" href="/fb06d519.2ba6d2bc.js" as="script">
 
 </head>
 <body>
@@ -49,23 +49,23 @@
 </span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">Configuration committed</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">*admin@SOL_SCM920420006.SOL_SCM920420006# q</span></div></code></pre></div><p>After the 128T shutdown, you’ll see that default route with metric 128 is set within linux.</p><div class="mdxCodeBlock_iHAB"><pre class="prism-code language-bash codeBlock_19pQ"><button type="button" aria-label="Copy code to clipboard" class="copyButton_1BYj">Copy</button><code class="codeBlockLines_2n9r" style="color:#bfc7d5;background-color:#292d3e"><div class="token-line" style="color:#bfc7d5"><span class="token punctuation" style="color:rgb(199, 146, 234)">[</span><span class="token plain">root@SOL_SCM920420006 ~</span><span class="token punctuation" style="color:rgb(199, 146, 234)">]</span><span class="token comment" style="color:rgb(105, 112, 152);font-style:italic"># systemctl stop 128T</span><span class="token plain"></span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain"></span><span class="token punctuation" style="color:rgb(199, 146, 234)">[</span><span class="token plain">root@SOL_SCM920420006 ~</span><span class="token punctuation" style="color:rgb(199, 146, 234)">]</span><span class="token comment" style="color:rgb(105, 112, 152);font-style:italic"># ip route</span><span class="token plain"></span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">default via </span><span class="token number" style="color:rgb(247, 140, 108)">172.17</span><span class="token plain">.0.1 dev enp4s0f0 proto static metric </span><span class="token number" style="color:rgb(247, 140, 108)">100</span><span class="token plain"></span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">default dev wwp0s21u1i8 scope </span><span class="token function" style="color:rgb(130, 170, 255)">link</span><span class="token plain"> metric </span><span class="token number" style="color:rgb(247, 140, 108)">128</span></div></code></pre></div><p>If you need to disable the default route, within the 128T configuration, you need to:</p><ul><li>set <code>default-route</code> to <em>false</em></li><li><strong>AND</strong> configure a not-empty <code>management-vector</code></li></ul></div></article><div class="margin-vert--xl"><div class="row"><div class="col"><a href="https://github.com/128technology/docs/tree/master/docs/howto_lte.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col text--right"><em><small>Last updated on <time datetime="2020-04-12T22:47:55.000Z" class="docLastUpdatedAt_1sqk">4/12/2020</time></small></em></div></div></div><div class="margin-vert--lg"><nav class="pagination-nav"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/howto_conductor_migration"><h5 class="pagination-nav__link--sublabel">Previous</h5><h4 class="pagination-nav__link--label">« Conductor Migration</h4></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/howto_maintenance_mode"><h5 class="pagination-nav__link--sublabel">Next</h5><h4 class="pagination-nav__link--label">Maintenance Mode »</h4></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_TbNY"><ul class="contents contents__left-border"><li><a href="#dual-lte" class="contents__link">Dual LTE</a><ul><li><a href="#prerequisites" class="contents__link">Prerequisites</a></li><li><a href="#hardware-identification" class="contents__link">Hardware Identification</a></li><li><a href="#configuration" class="contents__link">Configuration</a></li><li><a href="#troubleshooting" class="contents__link">Troubleshooting</a></li></ul></li><li><a href="#special-considerations" class="contents__link">Special Considerations</a></li></ul></div></div></div></div></div></main></div></div><footer class="footer"><div class="container"><div class="text--center"><div>Copyright © 2020 128 Technology, Inc.</div></div></div></footer>
 </div>
 
-<script src="/styles.fb261d32.js"></script>
+<script src="/styles.f2b4486f.js"></script>
 
-<script src="/runtime~main.91609546.js"></script>
+<script src="/runtime~main.495ed16e.js"></script>
 
-<script src="/main.66624d26.js"></script>
+<script src="/main.8ba51e6d.js"></script>
 
-<script src="/1.620dd09c.js"></script>
+<script src="/1.6fd3e54f.js"></script>
 
-<script src="/2.bf3d0642.js"></script>
+<script src="/2.6c31914b.js"></script>
 
-<script src="/83.dc3fb671.js"></script>
+<script src="/84.b2761997.js"></script>
 
 <script src="/20ac7829.73cfd23a.js"></script>
 
-<script src="/17896441.4fb429be.js"></script>
+<script src="/17896441.b4439569.js"></script>
 
-<script src="/fb06d519.b6d36430.js"></script>
+<script src="/fb06d519.2ba6d2bc.js"></script>
 
 
 </body>

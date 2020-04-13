@@ -16,23 +16,23 @@
 <link rel="stylesheet" href="/styles.7d43a3e9.css">
 
 
-<link rel="preload" href="/styles.fb261d32.js" as="script">
+<link rel="preload" href="/styles.f2b4486f.js" as="script">
 
-<link rel="preload" href="/runtime~main.91609546.js" as="script">
+<link rel="preload" href="/runtime~main.495ed16e.js" as="script">
 
-<link rel="preload" href="/main.66624d26.js" as="script">
+<link rel="preload" href="/main.8ba51e6d.js" as="script">
 
-<link rel="preload" href="/1.620dd09c.js" as="script">
+<link rel="preload" href="/1.6fd3e54f.js" as="script">
 
-<link rel="preload" href="/2.bf3d0642.js" as="script">
+<link rel="preload" href="/2.6c31914b.js" as="script">
 
-<link rel="preload" href="/83.dc3fb671.js" as="script">
+<link rel="preload" href="/84.b2761997.js" as="script">
 
 <link rel="preload" href="/20ac7829.73cfd23a.js" as="script">
 
-<link rel="preload" href="/17896441.4fb429be.js" as="script">
+<link rel="preload" href="/17896441.b4439569.js" as="script">
 
-<link rel="preload" href="/a528af12.8b4b95a9.js" as="script">
+<link rel="preload" href="/a528af12.6019d518.js" as="script">
 
 </head>
 <body>
@@ -45,23 +45,23 @@ The atop service was previously used to collect statistical information. The ser
 If the deployment uses the atop service beyond the requirements of the previous 128T software releases, it can remain. If the deployment does not use the atop service, the rpm can be removed and in so doing emails will no longer be sent to the root user email. An example of the emails sent is: <code>Failed to try-restart atop.service: Unit is masked.</code></li></ul><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="special-considerations"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#special-considerations" title="Direct link to heading">#</a>Special Considerations</h2><ul><li><p>Validation has been added to prevent issues when destination service address and port ranges overlap with interface (waypoint) address and wayport ranges. If your configuration has an overlapping port range prior to the upgrade, you will now receive a validation error. The configuration must be remediated in order to make any additional changes. (I95-33556)</p></li><li><p>Support has been added to provision management interfaces.  Typically, these are Linux interfaces that are not part of the 128T configuration. These interfaces are called non-forwarding interfaces. It is strongly recommended that non-forwarding interfaces now be configured within the 128T.  When the Conductors are upgraded to 4.2.X, the configuration validation will provide a warning when non-forwarding interfaces are not configured for 128T routers configured in a HA pair. If non-forwarding interfaces are configured prior to upgrading the Conductors to 4.2.X, the shared or fabric device interface type must be explicitly set.  DHCP however is not supported. Note: 4.1.5 does not raise a validation error if the interface had DHCP. (I95-30831)</p></li><li><p>When creating non-forwarding interfaces on pre 4.2.0 routers, these interfaces should not be configured with default routes until after upgrading the routers to 4.2.0 or greater. (I95-30940)</p></li><li><p>Support has been added to allow the 128T Software to automatically determine the number of CPU forwarding cores that the router will use. In previous releases the &quot;automatic/manual&quot; parameter was not available and the core count was defined in environment config or within the UI. If set within the environment config (local.init), 4.2.X will set core count to automatic and determine the number of cores to use. If set in the UI, this parameter will be set to manual and the existing UI value will be used. Note that if automatic is set and the core count is changed in the PCLI, the change will be accepted as valid configuration but the automatic parameter will override as the automatic parameter takes precedence over the value in the forwarding core count. (I95-30884)</p></li><li><p>Prior to 4.1.5, peering with routers that have the same IP addresses was not supported. In 4.1.5 or greater remote peers having the same IP address is now supported in one direction, with the use of &quot;outbound-only&quot;. 128T currently does not support ALL routers having the same IP address, the same IP address support is unidirectional. For example:</p><p>The following is supported:</p><div class="mdxCodeBlock_iHAB"><pre class="prism-code language-undefined codeBlock_19pQ"><button type="button" aria-label="Copy code to clipboard" class="copyButton_1BYj">Copy</button><code class="codeBlockLines_2n9r" style="color:#bfc7d5;background-color:#292d3e"><div class="token-line" style="color:#bfc7d5"><span class="token plain">      R1(172.16.1.1) --- peered --- R2 (192.168.1.1)</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">                |------- peered --- R3 (192.168.1.1)</span></div></code></pre></div><p>The following is not supported:</p><div class="mdxCodeBlock_iHAB"><pre class="prism-code language-undefined codeBlock_19pQ"><button type="button" aria-label="Copy code to clipboard" class="copyButton_1BYj">Copy</button><code class="codeBlockLines_2n9r" style="color:#bfc7d5;background-color:#292d3e"><div class="token-line" style="color:#bfc7d5"><span class="token plain">      R1(192.168.1.1) --- peered --- R2 (192.168.1.1)</span></div><div class="token-line" style="color:#bfc7d5"><span class="token plain">                 |------- peered --- R3 (192.168.1.1)</span></div></code></pre></div></li><li><p>On 128T nodes installed after July 1, 2019 on pre 4.2.X versions, Chrome running on MAC OSX Catalina does not consider the 128T self-signed web certificates valid. Apple has put out an advisory: <a href="https://support.apple.com/en-us/HT210176">https://support.apple.com/en-us/HT210176</a> . Once the node is upgraded to 4.2.X, create a new self-signed web cert in the PCLI <code>create certificate self-signed webserver</code> (I95-31672)</p></li></ul><h2><a aria-hidden="true" tabindex="-1" class="anchor enhancedAnchor_ZqCz" id="caveats"></a><a aria-hidden="true" tabindex="-1" class="hash-link" href="#caveats" title="Direct link to heading">#</a>Caveats</h2><ul><li><p><strong>I95-29592</strong> Conductor UI and/or PCLI may not update the asset software version correctly</p><p><em><strong>Symptom:</strong></em> The Conductor UI and/or the PCLI may not correctly reflect the software version running on the asset</p><p><em><strong>Conditions:</strong></em> After the asset has been upgraded</p><p><em><strong>Corrective Action:</strong></em> If the asset is not updated after ~5 minutes after an upgrade is performed, the salt-minion will need to be restarted on the respective node. This is done with the following command on the node as the root Linux user:</p><div class="mdxCodeBlock_iHAB"><pre class="prism-code language-undefined codeBlock_19pQ"><button type="button" aria-label="Copy code to clipboard" class="copyButton_1BYj">Copy</button><code class="codeBlockLines_2n9r" style="color:#bfc7d5;background-color:#292d3e"><div class="token-line" style="color:#bfc7d5"><span class="token plain">systemctl restart salt-minion</span></div></code></pre></div></li></ul><hr><ul><li><p><strong>I95-27808</strong> <code>sync peer addresses router force</code> from Conductor may not trigger router to send address information from peer</p><p><em><strong>Symptom:</strong></em> When performing the following command on the Conductor PCLI, <code>sync peer addresses router force</code> the router may not provide the peer address information</p><p><em><strong>Conditions:</strong></em> Unknown</p><p> <em><strong>Corrective Action:</strong></em> Perform the PCLI command on the router to update the information on the Conductor.</p></li></ul></div></article><div class="margin-vert--xl"><div class="row"><div class="col"><a href="https://github.com/128technology/docs/tree/master/docs/release_notes_128t_4.2.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col text--right"><em><small>Last updated on <time datetime="2020-04-13T00:43:31.000Z" class="docLastUpdatedAt_1sqk">4/13/2020</time></small></em></div></div></div><div class="margin-vert--lg"><nav class="pagination-nav"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/release_notes_128t_4.3"><h5 class="pagination-nav__link--sublabel">Previous</h5><h4 class="pagination-nav__link--label">« 128T 4.3 Release Notes</h4></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/release_notes_128t_4.1"><h5 class="pagination-nav__link--sublabel">Next</h5><h4 class="pagination-nav__link--label">128T 4.1 Release Notes »</h4></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_TbNY"><ul class="contents contents__left-border"><li><a href="#release-426" class="contents__link">Release 4.2.6</a><ul><li><a href="#issues-fixed" class="contents__link">Issues Fixed</a></li></ul></li><li><a href="#release-425" class="contents__link">Release 4.2.5</a><ul><li><a href="#issues-fixed-1" class="contents__link">Issues Fixed</a></li></ul></li><li><a href="#release-424" class="contents__link">Release 4.2.4</a><ul><li><a href="#issues-fixed-2" class="contents__link">Issues Fixed</a></li></ul></li><li><a href="#release-423" class="contents__link">Release 4.2.3</a><ul><li><a href="#issues-fixed-3" class="contents__link">Issues Fixed</a></li></ul></li><li><a href="#release-422" class="contents__link">Release 4.2.2</a><ul><li><a href="#issues-fixed-4" class="contents__link">Issues Fixed</a></li></ul></li><li><a href="#release-421" class="contents__link">Release 4.2.1</a><ul><li><a href="#issues-fixed-5" class="contents__link">Issues Fixed</a></li></ul></li><li><a href="#release-420" class="contents__link">Release 4.2.0</a><ul><li><a href="#new-features-and-improvements" class="contents__link">New Features and Improvements</a></li><li><a href="#issues-fixed-6" class="contents__link">Issues Fixed</a></li></ul></li><li><a href="#feature-deprecation" class="contents__link">Feature Deprecation</a></li><li><a href="#special-considerations" class="contents__link">Special Considerations</a></li><li><a href="#caveats" class="contents__link">Caveats</a></li></ul></div></div></div></div></div></main></div></div><footer class="footer"><div class="container"><div class="text--center"><div>Copyright © 2020 128 Technology, Inc.</div></div></div></footer>
 </div>
 
-<script src="/styles.fb261d32.js"></script>
+<script src="/styles.f2b4486f.js"></script>
 
-<script src="/runtime~main.91609546.js"></script>
+<script src="/runtime~main.495ed16e.js"></script>
 
-<script src="/main.66624d26.js"></script>
+<script src="/main.8ba51e6d.js"></script>
 
-<script src="/1.620dd09c.js"></script>
+<script src="/1.6fd3e54f.js"></script>
 
-<script src="/2.bf3d0642.js"></script>
+<script src="/2.6c31914b.js"></script>
 
-<script src="/83.dc3fb671.js"></script>
+<script src="/84.b2761997.js"></script>
 
 <script src="/20ac7829.73cfd23a.js"></script>
 
-<script src="/17896441.4fb429be.js"></script>
+<script src="/17896441.b4439569.js"></script>
 
-<script src="/a528af12.8b4b95a9.js"></script>
+<script src="/a528af12.6019d518.js"></script>
 
 
 </body>
