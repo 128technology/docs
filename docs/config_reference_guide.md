@@ -6,7 +6,7 @@ The *128T Configuration Guide* is for the network manager responsible for config
 
 This guide is a reference manual for the various commands and configuration elements associated with the 128T router. For CLI commands, it contains descriptions and representative examples (as applicable) to illustrate usage and expected output. For configuration elements, it defines the validation rules for each element's field (i.e., the range of valid input), a more verbose description of the purpose of the element and fields within it, as well as its overall intent and suggested use.
 
-This guide does not describe system messages, nor installation procedures. For updated information and access to the full set of documentation, please visit 128 Technology's website: <http://www.128technology.com/> or contact your sales representative.
+This guide does not describe system messages, nor installation procedures. For updated information and access to the full set of documentation, please visit 128 Technology's website: <http://docs.128technology.com/> or contact your sales representative.
 
 ## Documentation Feedback
 
@@ -18,7 +18,7 @@ This section contains a complete list of all of the configuration elements avail
 
 Each field, its data type, valid range (as applicable, if it deviates from its standard type), and a description of that field follows. References to other objects are noted as such. Fields that are mandatory are flagged. The term "key field" -- usually the "name" of a given element -- is what the 128T router uses as its "index" for that element, meaning it must be globally unique within a given system's configuration (and is how other elements will refer to it, as applicable).
 
-# access-policy
+# access-policy (service)
 
 Path:
 
@@ -28,21 +28,17 @@ Description:
 
 Access policies are a multiple instance sub-element within a service configuration. Conceptually akin to an access control list (ACL), access-policy objects are configured to explicitly grant or deny access to a service, and therefore service route, to the group of users specified by either an address block or a Qualified Service Name (QSN).
 
-+------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Element    | Type        | Description                                                                                                                                                                      |
-+------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| permission | enumeration | Valid values: allow, deny. Default: allow. This setting determines whether or not the address(es) or QSN defined in the "source" field should be allowed access to this service. |
-+------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| source     | source-spec | Key field. This field contains either an IP prefix, or a QSN, or a combination of the two, and represents the "user population" subjected to this access policy.                 |
-|            |             |                                                                                                                                                                                  |
-|            |             | Note that QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").                                                       |
-+------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Element | Type | Description |
+| ------- | ---- | ----------- |
+| permission | enumeration | Valid values: allow, deny. Default: allow. This setting determines whether or not the address(es) or QSN defined in the "source" field should be allowed access to this service.|
+| source | source-spec | Key field. This field contains either an IP prefix, or a QSN, or a combination of the two, and represents the "user population" subjected to this access policy.|
+> Note that QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
 
 Version History:
 
-Introduced in 1.0. Enhanced in 2.0, added the ability to specify a specific subnet within a tenant as a source (e.g., "tenantName\@192.168.1.0/24").
+Introduced in 1.0. Enhanced in 2.0, added the ability to specify a specific subnet within a tenant as a source (e.g., `tenantName@192.168.1.0/24`).
 
-# access-policy
+# access-policy (host-service)
 
 Path:
 
@@ -52,15 +48,11 @@ Description:
 
 Access policies are a multiple instance sub-element within a host-service configuration. Much as they're used within 128T defined services, when defined within *host-service* elements they explicitly grant or deny access to an underlying Linux service, to the group of users specified by either an address block or a Qualified Service Name (QSN).
 
-+------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Element    | Type        | Description                                                                                                                                                                      |
-+------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| permission | enumeration | Valid values: allow, deny. Default: allow. This setting determines whether or not the address(es) or QSN defined in the "source" field should be allowed access to this service. |
-+------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| source     | source-spec | Key field. This field contains either an IP prefix, or a QSN, or a combination of the two, and represents the "user population" subjected to this access policy.                 |
-|            |             |                                                                                                                                                                                  |
-|            |             | Note that QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").                                                       |
-+------------+-------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Element | Type | Description |
+| --- | --- | --- |
+| permission | enumeration | Valid values: allow, deny. Default: allow. This setting determines whether or not the address(es) or QSN defined in the "source" field should be allowed access to this service.|
+| source | source-spec | Key field. This field contains either an IP prefix, or a QSN, or a combination of the two, and represents the "user population" subjected to this access policy.|
+> Note that QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
 
 Version History:
 
@@ -76,14 +68,13 @@ Description:
 
 The *address* sub-element within a network-interface defines the IP address and its associated properties.
 
--------------------- ------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Element              Type          Description
-  gateway              address       The IP gateway for destinations that are not part of the subnet of this interface. This field is optional; a gateway may be learned through a routing protocol, for instance.
-  host-service         sub-element   Host services are node-specific services, such as enabling remote SSH access, HTTPS access, etc. to a specific platform on which 128T software is running.
-  ip-address           address       The IP address to assign to this interface.
-  prefix-length        uint8         The number of bits for the subnet mask on this interface. This is generally the number after the slash in CIDR notation; e.g., 24 is the prefix-length for the CIDR 192.168.1.128/24.
-  utility-ip-address   address       The *utility* address is a unique IP address assigned to a particular interface in a high availability pair. Unlike the *ip-address*, which is "owned" by the active interface in an interface pair and may migrate between two discrete systems, the utility-ip-address always remains fixed on a specific node, and ensures a unique target for that system irrespective of its role (active, standby).
--------------------- ------------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Element | Type | Description |
+| --- | --- | --- |
+| gateway | address | The IP gateway for destinations that are not part of the subnet of this interface. This field is optional; a gateway may be learned through a routing protocol, for instance. |
+| host-service | sub-element | Host services are node-specific services, such as enabling remote SSH access, HTTPS access, etc. to a specific platform on which 128T software is running. |
+| ip-address | address | The IP address to assign to this interface. |
+| prefix-length | uint8 |  The number of bits for the subnet mask on this interface. This is generally the number after the slash in CIDR notation; e.g., 24 is the prefix-length for the CIDR 192.168.1.128/24. |
+| utility-ip-address | address | The *utility* address is a unique IP address assigned to a particular interface in a high availability pair. Unlike the *ip-address*, which is "owned" by the active interface in an interface pair and may migrate between two discrete systems, the utility-ip-address always remains fixed on a specific node, and ensures a unique target for that system irrespective of its role (active, standby). |
 
 Version History:
 
@@ -99,20 +90,19 @@ Description:
 
 The *address-family* sub-element within each neighbor controls the behavior of the 128T router's interaction with its neighbor for the specified address-family (AFI/SAFI).
 
--------------------- ------------- -------------------------------------------------------------------------------------------------------------------------------------------------
-  Element              Type          Description
-  afi-safi             enumeration   Key field. Valid value: ipv4-unicast.
-  as-path-options      sub-element   This sub-element gives administrators the ability to manipulate the AS\_PATH attribute for this address-family.
-  next-hop-self        boolean       When true, sets this 128T router as the next hop for this neighbor for this address family.
-  prefix-limit         sub-element   This sub-element allows administrators to control the number of prefixes received from this neighbor.
-  remove-private-as    enumeration   Valid value: all. When set to "all", the 128T router will remove private AS numbers from updates sent to this neighbor for this address-family.
-  route-reflector      sub-element   This sub-element controls the behavior of the 128T router when acting as a route reflector for this neighbor.
-  send-default-route   boolean       When true, the 128T router will send its default route to its neighbor. Note that this will occur even if the route is not present in the RIB.
--------------------- ------------- -------------------------------------------------------------------------------------------------------------------------------------------------
+| Element |  Type |  Description |
+| --- | --- | --- |
+| afi-safi | enumeration | Key field. Valid value: ipv4-unicast.|
+|  as-path-options | sub-element | This sub-element gives administrators the ability to manipulate the AS\_PATH attribute for this address-family.|
+| next-hop-self | boolean | When true, sets this 128T router as the next hop for this neighbor for this address family.|
+| prefix-limit | sub-element  |This sub-element allows administrators to control the number of prefixes received from this neighbor. |
+| remove-private-as | enumeration | Valid value: all. When set to "all", the 128T router will remove private AS numbers from updates sent to this neighbor for this address-family. |
+| route-reflector | sub-element   This sub-element controls the behavior of the 128T router when acting as a route reflector for this neighbor. |
+| send-default-route | boolean | When true, the 128T router will send its default route to its neighbor. Note that this will occur even if the route is not present in the RIB.|
 
 Version History:
 
-Introduced in 1.0. Updated in documentation version 03: fixed description of send-default-route.
+Introduced in 1.0.
 
 # address-family (routing-protocol)
 
