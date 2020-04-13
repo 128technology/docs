@@ -370,7 +370,7 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
 ## Special Considerations
 
-If upgrading from 4.1 consult the [4.2.3 release notes Special Considerations](./release_notes/128t_release_notes_4.2.3.md#special-considerations) section
+If upgrading from 4.1 consult the [4.2.3 release notes Special Considerations](release_notes_128t_4.2.md#special-considerations) section
 
 ## Caveats
 
