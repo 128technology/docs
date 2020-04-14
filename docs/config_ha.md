@@ -65,7 +65,7 @@ Converting an existing router from standalone to HA will require downtime, and i
 
 Adding a second node is simply a matter of configuring another *node* container within the router. Eventually, this node will contain one or more *shared interfaces*, which will protect the router from failure modes if/when interfaces, links or a node fails. Configuring shared interfaces is covered later in this document.
 
-Follow the setps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces) in order to provision an interface to connect between peer 128T nodes.
+Follow the setps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer 128T nodes.
 
 ## Configuring the Shared Interface(s)
 A highly available router is comprised of exactly two routing nodes within the same _router_ container. (Configuring two routers, each comprised of one node, cannot be made highly available.) Additionally, as mentioned previously, these routers must have at least one shared interface in common.

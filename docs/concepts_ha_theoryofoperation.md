@@ -38,9 +38,9 @@ The _dual node high availability_ design is a longstanding deployment model supp
 #### Redundancy Link
 Configured within the 128T software (and implemented as a _team interface_ in Linux), this is typically implemented as a cross connect cable between two colocated systems. The "cross connect cable" is a logical concept and also includes connections between virtual machines. Also, the cross connect cable may be implemented between geographically diverse locations.
 
-For more information about configuring redundant interfaces see [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces).
+For more information about configuring redundant interfaces see [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md).
 
-The 128T configuration model only supports one redundancy link to be configured. However, it is possible to configure a second redundancy link manually. For instructions, refer to the guide [Adding Interfaces to HA Team Interface](config_adding_interfaces_to_ha_team) for configuring additional redundancy links.
+The 128T configuration model only supports one redundancy link to be configured. However, it is possible to configure a second redundancy link manually. For instructions, refer to the guide [Adding Interfaces to HA Team Interface](config_adding_interfaces_to_ha_team.md) for configuring additional redundancy links.
 
 #### About State Synchronization
 This state sharing occurs via a high-performance database that is available to both nodes. As sessions are established through a 128T node, the receiving node consults this database to determine whether this session had previously been established via its counterpart. If it does not find any information, it processes this session as new, and it inserts state information into the shared database. In this way, session continuity is preserved irrespective of which node is active at the outset of an established session.

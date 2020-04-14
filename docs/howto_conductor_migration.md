@@ -2,13 +2,13 @@
 title: Conductor Migration
 ---
 
-Before going through this document, it is beneficial to first understand the [best practices for deploying your conductor](bcp_conductor_deployment).
+Before going through this document, it is beneficial to first understand the [best practices for deploying your conductor](bcp_conductor_deployment.md).
 
 The purpose of this guide is to provide an overview and walkthrough the process of migrating the routers and their conductor configurations to a newly installed 128T Conductor
 
 ## Prerequisites
 
-This document presumes that the reader has already installed a new conductor and wants to migrate the routers in the network along with their configurations. If you have not yet setup your 128T nodes, you can follow the [installation guide](intro_installation) to walk you through that process.
+This document presumes that the reader has already installed a new conductor and wants to migrate the routers in the network along with their configurations. If you have not yet setup your 128T nodes, you can follow the [installation guide](intro_installation.md) to walk you through that process.
 
 ## Migration Process
 

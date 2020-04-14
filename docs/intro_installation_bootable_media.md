@@ -7,7 +7,7 @@ sidebar_label: Installing From ISO
 
 ## Installing from bootable Media
 
-Before you begin, you must first [obtain a 128T ISO](intro_downloading_iso). If you are planning on using a bootable USB device, follow the instructions for [creating a bootable USB](intro_creating_bootable_usb).
+Before you begin, you must first [obtain a 128T ISO](intro_downloading_iso.md). If you are planning on using a bootable USB device, follow the instructions for [creating a bootable USB](intro_creating_bootable_usb.md).
 
 ##### Creating a CDROM/DVD
 
