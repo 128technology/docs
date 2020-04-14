@@ -9,7 +9,7 @@ Learning routes from BGP simplifies enterprise configuration and integration wit
 
 ## Prerequisites
 
-This section presumes that the reader has a running 128T system and wants to add configuration to support and configure BGP. The running 128T system includes configuration for basic platform functionality (e.g., router, node, device-interface, network-interface) and basic routing configuration (e.g., tenants, services, etc.). Refer to the 128T [data model](concepts_glossary) and the [Configuration Guide](cli_reference) for a better understanding about 128T networking.
+This section presumes that the reader has a running 128T system and wants to add configuration to support and configure BGP. The running 128T system includes configuration for basic platform functionality (e.g., router, node, device-interface, network-interface) and basic routing configuration (e.g., tenants, services, etc.). Refer to the 128T [data model](concepts_glossary.md) and the [Configuration Guide](cli_reference.md) for a better understanding about 128T networking.
 
 ## BGP Configuration when peer is non-128T
 

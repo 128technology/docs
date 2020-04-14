@@ -7,7 +7,7 @@ sidebar_label: Installing From ISO
 
 ## Installing from bootable Media
 
-Before you begin, you must first [obtain a 128T ISO](intro_downloading_iso). If you are planning on using a bootable USB device, follow the instructions for [creating a bootable USB](intro_creating_bootable_usb).
+Before you begin, you must first [obtain a 128T ISO](intro_downloading_iso.md). If you are planning on using a bootable USB device, follow the instructions for [creating a bootable USB](intro_creating_bootable_usb.md).
 
 ##### Creating a CDROM/DVD
 
@@ -54,7 +54,7 @@ At this point, please remove the install media and select **Yes** to reboot the 
 
 #### Initialization of the Node
 
-The initialization of the new node will follow the standard process outlined in the [128T Installation Guide](intro_installation_installer). Please refer to that document for details on how to initialize your system.
+The initialization of the new node will follow the standard process outlined in the [128T Installation Guide](intro_installation_installer.md). Please refer to that document for details on how to initialize your system.
 
 ![Initializer](/img/intro_installation_bootable_media_initializer.png)
 

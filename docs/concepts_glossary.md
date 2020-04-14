@@ -82,7 +82,7 @@ If two Device Interfaces have the same `shared-phys-address` that means that the
 Network Interfaces tell your 128T which networks it is participating in. You can have multiple Network Interfaces per Device Interface. Network Interfaces have `global-id` that are used by the 128T software to identify which Network Interface to send traffic out of. If two Network Interfaces have the same `global-id` then they are treated as redundant for one another, or as a _shared interface_.
 
 :::note
-Do not assign a `global-id` to a network-interface on your own. Your 128T will generate a unique `global-id` for a standalone network-interface, and will automatically assign a common `global-id` for shared interfaces when it detects that they each reference a common `shared-phys-address`. For more information on shared interfaces, refer to the [High Availability Best Practices](concepts_ha_theoryofoperation) documentation.
+Do not assign a `global-id` to a network-interface on your own. Your 128T will generate a unique `global-id` for a standalone network-interface, and will automatically assign a common `global-id` for shared interfaces when it detects that they each reference a common `shared-phys-address`. For more information on shared interfaces, refer to the [High Availability Best Practices](concepts_ha_theoryofoperation.md) documentation.
 :::
 
 ```

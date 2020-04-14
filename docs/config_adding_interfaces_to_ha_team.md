@@ -4,7 +4,7 @@ sidebar_label: Adding Interfaces to HA Team Interface
 ---
 This guide provides a procedure for manually adding multiple interfaces to the HA sync team interface.
 
-For more information regarding non-forwarding interfaces please refer to this blog: [Configuring Non Forwarding Interfaces](config_non_forwarding_interfaces).
+For more information regarding non-forwarding interfaces please refer to this blog: [Configuring Non Forwarding Interfaces](config_non_forwarding_ha_interfaces.md).
 
 In order to configure the non forwarding interface used for HA sync, you must configure a non-forwarding interface of type `fabric`. The interface type of `fabric`indicates a direct link between HA peers. 128T will configure these Linux interfaces as a network team. Here is an example 128T configuration:
 

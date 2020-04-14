@@ -3,7 +3,7 @@ title: 'Command Line Reference'
 sidebar_label: 'Command Line Reference'
 ---
 
-This reference is better understood if you know the basics of how to operate the PCLI.  If you have not used the PCLI before, it is beneficial to first read [the basics about the PCLI](concepts_pcli) and the [basics of the configuration management](config_basics).
+This reference is better understood if you know the basics of how to operate the PCLI.  If you have not used the PCLI before, it is beneficial to first read [the basics about the PCLI](concepts_pcli.md) and the [basics of the configuration management](config_basics.md).
 
 ## clear
 
@@ -1629,7 +1629,7 @@ There are 0 shelved alarms
 Completed in 0.35 seconds
 ```
 
-A list of all alarms your 128T router is capable of generating and details about them can be found in the [Alarm Guide](events_alarms).
+A list of all alarms your 128T router is capable of generating and details about them can be found in the [Alarm Guide](events_alarms.md).
 
 #### Privileges Required
 
@@ -1988,7 +1988,7 @@ Available to _admin_ and _user_.
 #### Syntax
 
 ```
-show config candidate [authority [ router [ ...] ][verbose] [flat]
+show config candidate [authority [router [ ...] ][verbose] [flat]
 ```
 
 #### Description
@@ -2104,7 +2104,7 @@ Available to _admin_ and _user_.
 #### Syntax
 
 ```
-show config running [authority [ router [...] ][verbose] [flat]
+show config running [authority [router [...] ][verbose] [flat]
 ```
 
 #### Description
@@ -2324,7 +2324,7 @@ Available to _admin_ and _user_.
 #### Syntax
 
 ```
-show events alarm [ from <fromTime> ] [ to <toTime> ] [ rows <rows> ]
+show events alarm [from <fromTime>] [to <toTime>] [rows <rows>]
 ```
 
 #### Description

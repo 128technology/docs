@@ -5,7 +5,7 @@ sidebar_label: Non-forwarding HA Interfaces
 
 Non forwarding interfaces are used for several purposes, including HA peer node control traffic, reaching a 128T Conductor from a 128T Router, reaching managed 128T Routers from a 128T Conductor, management traffic and reaching the public internet.
 
-Before we get started, it is important to understand the [terminology relating to 128T interfaces](concepts_interface_types)
+Before we get started, it is important to understand the [terminology relating to 128T interfaces](concepts_interface_types.md)
 
 :::important
 Changing a forwarding interface to non forwarding and vice versa is not dynamically reconfigurable and requires a restart of the 128T node

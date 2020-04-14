@@ -37,7 +37,7 @@ Logically, 128T routers have at least two interfaces; in many deployments they r
 
 Though not a hard requirement, 128 Technology, recommends using a dedicated physical interface for management traffic whenever practical, to avoid commingling data plane traffic and management traffic.
 
-When configuring two software _nodes_ in a highly available router, each node requires a dedicated physical interface for synchronizing session data to its redundant peer. Each also generally have another, separate physical interface (referred to as a "fabric" interface) that is used to forward traffic between the nodes across a logical "backplane" between them. The fabric interface is not mandatory; refer to the [High Availability](config_ha) documentation for more information on configuration design for high availability deployments.
+When configuring two software _nodes_ in a highly available router, each node requires a dedicated physical interface for synchronizing session data to its redundant peer. Each also generally have another, separate physical interface (referred to as a "fabric" interface) that is used to forward traffic between the nodes across a logical "backplane" between them. The fabric interface is not mandatory; refer to the [High Availability](config_ha.md) documentation for more information on configuration design for high availability deployments.
 
 ## VMware ESXi and KVM Requirements
 VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0) are hypervisor environments. The following adjustments are required to run 128T Routing Software in these environments: 
@@ -46,7 +46,7 @@ VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0
 - Set network adapters to type e1000. As mentioned above, typical installations include a minimum of three network adapters for router deployments.
 - Separate the management interface, which is used for inter-component communication and out-of-band management, from the forwarding plane interfaces. 
 - Reserve a minimum of two network interfaces for production traffic.
-- Depending on your environment, set the 128T router node portgroup to either promiscuous or bridged mode when supporting one or more redundant interfaces. (For example, when you are defining and configuring a MAC address for each redundant interface.) For VMware ESXi, the portgroup mode should be set to _promiscuous_. For KVM libvirt, the portgroupo mode should be set to _bridged_. For more information, refer to the [High Availability](config_ha) guide.
+- Depending on your environment, set the 128T router node portgroup to either promiscuous or bridged mode when supporting one or more redundant interfaces. (For example, when you are defining and configuring a MAC address for each redundant interface.) For VMware ESXi, the portgroup mode should be set to _promiscuous_. For KVM libvirt, the portgroupo mode should be set to _bridged_. For more information, refer to the [High Availability](config_ha.md) guide.
 
 ## Operating System Requirements
 The 128T routing software supports CentOS 7.5 as its underlying operating system. 
@@ -100,9 +100,9 @@ PCI-to-port maps are available for commonly deployed hardware systems on our use
 
 Once you have identified the platform and determined it meets the minimum requirements, select the appropriate installation mechanism best suited for your needs
 
-- [Installing from 128T Installer](intro_installation_installer)
-- [Installing from bootable media](intro_installation_bootable_media)
-- [Installing on AWS](intro_installation_aws)
+- [Installing from 128T Installer](intro_installation_installer.md)
+- [Installing from bootable media](intro_installation_bootable_media.md)
+- [Installing on AWS](intro_installation_aws.md)
 
 ## Post Installation
 

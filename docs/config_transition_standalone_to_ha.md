@@ -37,7 +37,7 @@ exit
 ```
 
 
-The first step is to configure the second Conductor node. If you start with the same basic configuration for the second node then you will see warnings below when you attempt to validate. The first warning states that a non-forwarding interfaces between the Conductor nodes needs to be configured to establish connectivity. For more information regarding non-forwarding interfaces please refer to this blog: [Configuring Non Forwarding Interfaces](config_non_forwarding_ha_interfaces). The second warning states that 128T needs to be restarted after creating a new node.  This will be addressed later.
+The first step is to configure the second Conductor node. If you start with the same basic configuration for the second node then you will see warnings below when you attempt to validate. The first warning states that a non-forwarding interfaces between the Conductor nodes needs to be configured to establish connectivity. For more information regarding non-forwarding interfaces please refer to this blog: [Configuring Non Forwarding Interfaces](config_non_forwarding_ha_interfaces.md). The second warning states that 128T needs to be restarted after creating a new node.  This will be addressed later.
 
 ```
 admin@T104_DUT1.Conductor# configure authority router Conductor
