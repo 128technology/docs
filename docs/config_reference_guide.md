@@ -1,24 +1,9 @@
-## Audience
+---
+title: Configuration Element Reference
+sidebar_label: Element Reference
+---
 
-The *128T Configuration Guide* is for the network manager responsible for configuring the 128T router and 128T conductor. This guide assumes that readers are familiar with basic IP switching and routing concepts, and with the terminology associated with IP.
-
-## Purpose
-
-This guide is a reference manual for the various commands and configuration elements associated with the 128T router. For CLI commands, it contains descriptions and representative examples (as applicable) to illustrate usage and expected output. For configuration elements, it defines the validation rules for each element's field (i.e., the range of valid input), a more verbose description of the purpose of the element and fields within it, as well as its overall intent and suggested use.
-
-This guide does not describe system messages, nor installation procedures. For updated information and access to the full set of documentation, please visit 128 Technology's website: <http://docs.128technology.com/> or contact your sales representative.
-
-## Documentation Feedback
-
-We at 128 Technology welcome your feedback on our documentation. If you've found that information is unclear, inadequate, incorrect, or simply want to suggest improvements, we have several ways to get in touch. You may contact your 128 Technology customer representative, submit a ticket through our support portal, or email us directly at docs\@128technology.com.
-
-Configuration Element Reference
-
-This section contains a complete list of all of the configuration elements available in the 128T router, listed alphabetically. Each of the elements listed below contains the location of that element within the "configuration tree" -- i.e., the path through the configuration hierarchy.
-
-Each field, its data type, valid range (as applicable, if it deviates from its standard type), and a description of that field follows. References to other objects are noted as such. Fields that are mandatory are flagged. The term "key field" -- usually the "name" of a given element -- is what the 128T router uses as its "index" for that element, meaning it must be globally unique within a given system's configuration (and is how other elements will refer to it, as applicable).
-
-# access-policy (service)
+## access-policy (service)
 
 Path:
 
@@ -38,7 +23,7 @@ Version History:
 
 Introduced in 1.0. Enhanced in 2.0, added the ability to specify a specific subnet within a tenant as a source (e.g., `tenantName@192.168.1.0/24`).
 
-# access-policy (host-service)
+## access-policy (host-service)
 
 Path:
 
@@ -58,7 +43,7 @@ Version History:
 
 Introduced as part of the addition of *host-service* capabilities in 3.1.
 
-# address
+## address
 
 Path:
 
@@ -80,7 +65,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.1: added *host-service*.
 
-# address-family (neighbor)
+## address-family (neighbor)
 
 Path:
 
@@ -104,7 +89,7 @@ Version History:
 
 Introduced in 1.0.
 
-# address-family (routing-protocol)
+## address-family (routing-protocol)
 
 Path:
 
@@ -129,7 +114,7 @@ Version History:
 
 Introduced in 1.0.
 
-# adjacency
+## adjacency
 
 Path:
 
@@ -159,7 +144,7 @@ Version History:
 
 Introduced in 1.0. Updated in 2.0 to add various NAT handlers. Updated in 3.1: now supports hostnames in addition to IPv4 addresses in the *ip-address* field. Updated in 3.2: added *generated* and *vector* fields.
 
-# administrative
+## administrative
 
 Path:
 
@@ -177,7 +162,7 @@ Version History:
 
 Introduced in 3.2.
 
-# aggregate-address
+## aggregate-address
 
 Path:
 
@@ -197,7 +182,7 @@ Version History:
 
 Introduced in 1.0.
 
-# application-identification
+## application-identification
 
 Path:
 
@@ -215,7 +200,7 @@ Version History:
 
 Introduced in 3.2.
 
-# as-path-options
+## as-path-options
 
 Path:
 
@@ -233,7 +218,7 @@ Version History:
 
 Introduced in 1.0.
 
-# audit
+## audit
 
 Path:
 
@@ -253,7 +238,7 @@ Version History:
 
 Introduced in 3.2.
 
-# authority
+## authority
 
 Path:
 
@@ -283,7 +268,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.0: added *rekey-interval*. Updated in 3.1: added dscp-map, ipfix-collector elements. Updated in 3.2: added *dynamic-hostname* and *traffic-profile*.
 
-# best-effort
+## best-effort
 
 Path:
 
@@ -301,7 +286,7 @@ Version History:
 
 Introduced in version 3.2.
 
-# bfd (adjaency)
+## bfd (adjaency)
 
 Path:
 
@@ -326,7 +311,7 @@ Version History:
 
 Introduced within the adjacency element as of software version 3.1.
 
-# bfd (neighborhood)
+## bfd (neighborhood)
 
 Path:
 
@@ -351,7 +336,7 @@ Version History:
 
 Introduced in 3.1.
 
-# bfd (peer)
+## bfd (peer)
 
 Path:
 
@@ -376,7 +361,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.0: exposed *required-min-echo-interval* and *required-min-rx-interval*.
 
-# bfd (router)
+## bfd (router)
 
 Path:
 
@@ -400,7 +385,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.0 (exposed required-min-rx-interval, which was previously fixed at 500ms, and required-min-echo-interval).
 
-# confederation
+## confederation
 
 Path:
 
@@ -419,7 +404,7 @@ Version History:
 
 Introduced in 1.0.
 
-# default-route-distance
+## default-route-distance
 
 Path:
 
@@ -439,7 +424,7 @@ Version History:
 
 Introduced in 1.0.
 
-# device-interface
+## device-interface
 
 Path:
 
@@ -472,7 +457,7 @@ Version History:
 
 Introduced in 1.0. Updated for 1.1: hardware-name deprecated; interfaces are now known by their PCI address (pci-address added); shared-phys-address added in support of device interface redundancy. Updated in 3.0: added *transmit-cap*. Updated in 3.1: added *enabled*, *traffic-engineering* elements. Added enumeration values to *type*. Added configuration properties for PPPoE and LTE elements. Moved modes *host* and *bridged* to the enumeration for *type*. Updated in 3.2: added *name* to replace *id* as the unique key for the interface; moved *transmit-cap* to *traffic-engineering*.
 
-# dscp-map
+## dscp-map
 
 Path:
 
@@ -496,7 +481,7 @@ Version History:
 
 Introduced in 3.1. Updated in version 3.2, added *dscp-traffic-class*.
 
-# dscp-prioritization
+## dscp-prioritization
 
 Path:
 
@@ -515,7 +500,7 @@ Version History:
 
 Introduced in 3.1.
 
-# dscp-range
+## dscp-range
 
 Path:
 
@@ -535,7 +520,7 @@ Version History:
 
 Introduced in 3.1. Added as a sub-element of *dscp-traffic-class* in 3.2.0.
 
-# dscp-traffic-class
+## dscp-traffic-class
 
 Path:
 
@@ -554,7 +539,7 @@ Version History:
 
 Introduced in 3.2.
 
-# ebgp
+## ebgp
 
 Path:
 
@@ -572,7 +557,7 @@ Version History:
 
 Introduced in 1.0.
 
-# entitlement
+## entitlement
 
 Path:
 
@@ -592,7 +577,7 @@ Version History:
 
 Introduced in 1.1.
 
-# graceful-restart
+## graceful-restart
 
 Path:
 
@@ -611,7 +596,7 @@ Version History:
 
 Introduced in 1.0. Updated in version 3.1: added restart-time.
 
-# high
+## high
 
 Path:
 
@@ -629,7 +614,7 @@ Version History:
 
 Introduced in version 3.2.
 
-# host-service
+## host-service
 
 Path:
 
@@ -650,7 +635,7 @@ Version History:
 
 Introduced in 3.1.
 
-# ibgp
+## ibgp
 
 Path:
 
@@ -668,7 +653,7 @@ Version History:
 
 Introduced in 1.0.
 
-# inter-node
+## inter-node
 
 Path:
 
@@ -687,7 +672,7 @@ Version History:
 
 Introduced in 3.2.
 
-# inter-router
+## inter-router
 
 Path:
 
@@ -706,7 +691,7 @@ Version History:
 
 Introduced in 3.2.
 
-# ipfix-collector
+## ipfix-collector
 
 Path:
 
@@ -730,7 +715,7 @@ Version History:
 
 Introduced in 3.1. Updated in 3.2: added *tenant*.
 
-# load-balancing
+## load-balancing
 
 Path:
 
@@ -749,7 +734,7 @@ Version History:
 
 Introduced in 3.2.
 
-# log-category
+## log-category
 
 Path:
 
@@ -770,7 +755,7 @@ Version History:
 
 Introduced in 3.1.
 
-# low
+## low
 
 Path:
 
@@ -788,7 +773,7 @@ Version History:
 
 Introduced in version 3.2.
 
-# lte
+## lte
 
 Path:
 
@@ -806,7 +791,7 @@ Version History:
 
 Introduced in 3.1.
 
-# medium
+## medium
 
 Path:
 
@@ -824,7 +809,7 @@ Version History:
 
 Introduced in version 3.2.
 
-# member (redundancy-group)
+## member (redundancy-group)
 
 Path:
 
@@ -843,7 +828,7 @@ Version History:
 
 Introduced in 2.0. Updated in 3.2: changed device-id to refer to the device-interface's *name* rather than *id*.
 
-# member (tenant)
+## member (tenant)
 
 Path:
 
@@ -862,7 +847,7 @@ Version History:
 
 Introduced in 3.0.
 
-# metrics
+## metrics
 
 Path:
 
@@ -880,7 +865,7 @@ Version History:
 
 Introduced in 3.0. Updated in 3.2: revised range from 1-10.
 
-# multihop
+## multihop
 
 Path:
 
@@ -898,7 +883,7 @@ Version History:
 
 Introduced in 1.0.
 
-# neighbor (network-interface)
+## neighbor (network-interface)
 
 Path:
 
@@ -917,7 +902,7 @@ Version History:
 
 Introduced in 1.0.
 
-# neighbor (routing-protocol)
+## neighbor (routing-protocol)
 
 Path:
 
@@ -946,7 +931,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.0: removed *inbound-policy* and *outbound-policy* references. Updated in 3.2: added *neighbor-policy*.
 
-# neighbor-policy)
+## neighbor-policy)
 
 Path:
 
@@ -965,7 +950,7 @@ Version History:
 
 Introduced in 3.2.
 
-# neighborhood
+## neighborhood
 
 Path:
 
@@ -990,7 +975,7 @@ Version History:
 
 Introduced in 3.0. Updated in 3.1: added the ability to specify neighborhood-wide *bfd* properties. Updated in 3.2: added *external-nat-address*, *port-range*, *udp-transform*, and *vector* elements.
 
-# network
+## network
 
 Path:
 
@@ -1008,7 +993,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.0: removed *policy*.
 
-# network-interface
+## network-interface
 
 Path:
 
@@ -1046,7 +1031,7 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: deprecated "fabric-type" and replaced it with "type"; removed "gateway"; added global-id in support of network-interface redundancy. Updated in 2.0: "classify" renamed to "rewrite-dscp". Updated in 3.0: added *neighborhood*. Updated in 3.1: "auto" removed as an eligible value for *type*. Added *classify*, *dhcp*, *dscp-map*, and *prioritization-mode* configuration elements for features added in this software release. Updated in 3.2: added *hostname*, removed *enabled*.
 
-# next-hop (service-route)
+## next-hop (service-route)
 
 Path:
 
@@ -1066,7 +1051,7 @@ Version History:
 
 Introduced in 1.0.
 
-# next-hop (static-route)
+## next-hop (static-route)
 
 Path:
 
@@ -1085,7 +1070,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.0: removed *outgoing*. Updated in 3.2: added *distance*.
 
-# node
+## node
 
 Path:
 
@@ -1114,7 +1099,7 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: the *role* enumeration values changed to reflect the new element names. Updated in 3.0: added *conductor* to enumeration for *role*. Updated in 3.1: added *asset-id* as part of the Automated Provisioning feature introduced in software version 3.1. Updated in 3.2: added software-update-bandwidth, ssh-keepalive, asset-validation-enabled, forwarding-core-count.
 
-# ntp
+## ntp
 
 Path:
 
@@ -1132,7 +1117,7 @@ Version History:
 
 Introduced in 2.0.
 
-# peer
+## peer
 
 Path:
 
@@ -1156,7 +1141,7 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: core-address renamed to control-address, to reflect new 128T naming conventions. Updated in 2.0: added tenant, removed role. Updated in 3.0: removed unused fields, removed *tenant*. Updated in 3.2: removed id, added generated.
 
-# port-range
+## port-range
 
 Path:
 
@@ -1177,7 +1162,7 @@ Version History:
 
 Introduced in 2.0.
 
-# port-range (host-service)
+## port-range (host-service)
 
 Path:
 
@@ -1196,7 +1181,7 @@ Version History:
 
 Introduced in 3.1 as part of the *host-service* feature.
 
-# pppoe
+## pppoe
 
 Path:
 
@@ -1216,7 +1201,7 @@ Version History:
 
 Introduced in 3.1.
 
-# prefix-limit (neighbor)
+## prefix-limit (neighbor)
 
 Path:
 
@@ -1236,7 +1221,7 @@ Version History:
 
 Introduced in 1.0.
 
-# prefix-limit (routing-protocol)
+## prefix-limit (routing-protocol)
 
 Path:
 
@@ -1256,7 +1241,7 @@ Version History:
 
 Introduced in 1.0.
 
-# redundancy-group
+## redundancy-group
 
 Path:
 
@@ -1277,7 +1262,7 @@ Version History:
 
 Introduced in 2.0.
 
-# route-reflector
+## route-reflector
 
 Path:
 
@@ -1295,7 +1280,7 @@ Version History:
 
 Introduced in 1.0.
 
-# route-selection-options
+## route-selection-options
 
 Path:
 
@@ -1315,7 +1300,7 @@ Version History:
 
 Introduced in 1.0.
 
-# router
+## router
 
 Path:
 
@@ -1353,7 +1338,7 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: added "entitlement" sub-element. Updated in 3.0: removed *priority*, added *location-coordinates*. Updated in 3.1: added *group*. Updated in 3.2: added *application-classification*, *maintenance-mode*, and *udp-tranform*.
 
-# routing
+## routing
 
 Path:
 
@@ -1374,7 +1359,7 @@ Version History:
 
 Introduced in 1.0.
 
-# routing-protocol (bgp)
+## routing-protocol (bgp)
 
 Path:
 
@@ -1400,7 +1385,7 @@ Version History:
 
 Introduced in 1.0.
 
-# security
+## security
 
 Path:
 
@@ -1431,7 +1416,7 @@ Introduced in 1.0.
 
 Rearranged in 1.1. Eliminated unimplemented ciphers. Removed unnecessary modes for *encrypt* and *hmac* and set them as booleans. Moved *transport-state-enforcement [ ]{.underline}*to service-policy. Updated in 3.0: added *hmac-cipher*.
 
-# server (ntp)
+## server (ntp)
 
 Path:
 
@@ -1449,7 +1434,7 @@ Version History:
 
 Introduced in 2.0. Updated in 3.1: now supports hostnames in addition to IPv4 addresses.
 
-# server (syslog)
+## server (syslog)
 
 Path:
 
@@ -1468,7 +1453,7 @@ Version History:
 
 Introduced in 2.0. Updated in 3.1: added support for hostnames in the *ip-address* field.
 
-# server (webserver)
+## server (webserver)
 
 Path:
 
@@ -1487,7 +1472,7 @@ Version History:
 
 Introduced in 2.0.
 
-# service
+## service
 
 Path:
 
@@ -1517,7 +1502,7 @@ Version History:
 
 Introduced in 1.0. Updated in 2.0: added *transport* to replace the deprecated *protocol*. Updated in 3.0: removed *protocol*. Updated in 3.1: removed *id*. Updated in 3.2: added *application-name* and *share-service-routes*.
 
-# service-class
+## service-class
 
 Path:
 
@@ -1546,7 +1531,7 @@ Version History:
 
 Introduced in 1.0. Reorganized in 1.1: *max-jitter*, *max-latency*, *max-loss*, *path-quality-filter*, *qp-preference*, *required-qp* all moved to service-policy. Updated in 3.0: *priority* is no longer a reference, but maps to one of four hardcoded priorities. Updated in 3.2: added *traffic-class*.
 
-# service-policy
+## service-policy
 
 Path:
 
@@ -1577,7 +1562,7 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: many fields from service-class reorganized into service-policy; *transport-state-enforcement* moved from security to service-policy. Updated in 3.0: added *session-resiliency*. Updated in 3.1: added *min-mos*. Updated in 3.2: added *vector*.
 
-# service-route
+## service-route
 
 Path:
 
@@ -1602,7 +1587,7 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: renamed to *service-route* (was *service-agent*). Version 03: fixed old reference (*server-ip* should be *destination*). Updated in 3.0: added *peer*. Updated in 3.1: renamed *destination* as *nat-target*; removed *remote-tenant-id*. Updated in 3.2: added *generated*.
 
-# service-route-policy
+## service-route-policy
 
 Path:
 
@@ -1625,7 +1610,7 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: renamed to *service-route-policy* (was *service-agent-policy*).
 
-# services
+## services
 
 Path:
 
@@ -1643,7 +1628,7 @@ Version History:
 
 Introduced in 1.0. Updated in 2.0, removed most internal elements.
 
-# session-type
+## session-type
 
 Path:
 
@@ -1667,7 +1652,7 @@ Version History:
 
 Introduced in 1.0. Updated in 2.0: deprecated *protocol* in favor of *transport*. Updated in 3.0: removed *protocol*.
 
-# ssh-keepalive
+## ssh-keepalive
 
 Path:
 
@@ -1686,7 +1671,7 @@ Version History:
 
 Introduced in 3.2.
 
-# static-route
+## static-route
 
 Path:
 
@@ -1708,7 +1693,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.0: added *blackhole*, *distance*.
 
-# syslog
+## syslog
 
 Path:
 
@@ -1728,7 +1713,7 @@ Version History:
 
 Introduced in 2.0.
 
-# system
+## system
 
 Path:
 
@@ -1754,7 +1739,7 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: *ntp* added. Updated in 2.0: inactivity-timer, syslog added. Updated in 3.0: added *metrics*. Updated in 3.1: removed *location*, added *log-category*.
 
-# system (audit)
+## system (audit)
 
 Path:
 
@@ -1772,7 +1757,7 @@ Version History:
 
 Introduced in 3.2.
 
-# tenant
+## tenant
 
 Path:
 
@@ -1803,7 +1788,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.0: added *member*, removed (obsoleted) *address*. Updated in 3.1: removed *id*.
 
-# timers (neighbor)
+## timers (neighbor)
 
 Path:
 
@@ -1824,7 +1809,7 @@ Version History:
 
 Introduced in 1.0.
 
-# timers (routing-protocol)
+## timers (routing-protocol)
 
 Path:
 
@@ -1843,7 +1828,7 @@ Version History:
 
 Introduced in 1.0.
 
-# traffic
+## traffic
 
 Path:
 
@@ -1861,7 +1846,7 @@ Version History:
 
 Introduced in 3.2.
 
-# traffic-engineering
+## traffic-engineering
 
 Path:
 
@@ -1881,7 +1866,7 @@ Version History:
 
 The transmit-cap configuration field was previously located within the device-interface, and was moved to its own sub-element as of software version 3.1. Updated in 3.2: added *traffic-profile*.
 
-# traffic-profile
+## traffic-profile
 
 Path:
 
@@ -1903,7 +1888,7 @@ Version History:
 
 Introduced in version 3.2.
 
-# transport (BGP neighbor)
+## transport (BGP neighbor)
 
 Path:
 
@@ -1922,7 +1907,7 @@ Version History:
 
 Introduced in 1.0.
 
-# transport (host-service)
+## transport (host-service)
 
 Path:
 
@@ -1941,7 +1926,7 @@ Version History:
 
 Introduced in 3.1 as part of the *host-service* feature.
 
-# transport (service)
+## transport (service)
 
 Path:
 
@@ -1960,7 +1945,7 @@ Version History:
 
 Introduced in 2.0. Updated in 3.1: removed *any* as a valid enumeration value for "protocol".
 
-# transport (session-type)
+## transport (session-type)
 
 Path:
 
@@ -1979,7 +1964,7 @@ Version History:
 
 Introduced in 2.0. Updated in 3.1: removed *any* as a valid enumeration for protocol.
 
-# udp-transform
+## udp-transform
 
 Path:
 
@@ -1999,7 +1984,7 @@ Version History:
 
 Introduced in 3.2.
 
-# use-multiple-paths
+## use-multiple-paths
 
 Path:
 
@@ -2018,7 +2003,7 @@ Version History:
 
 Introduced in 1.0.
 
-# vector
+## vector
 
 Path:
 
@@ -2037,7 +2022,7 @@ Version History:
 
 Introduced in 3.2.
 
-# webserver
+## webserver
 
 Path:
 
@@ -2059,47 +2044,21 @@ Version History:
 
 Introduced in 1.0.
 
-Appendix A: Configuration Type Definitions
-
-This section describes the data types used within this document, for each of the field definitions for the Configuration Elements in the previous section.
+## Configuration Type Definitions
 
 The items here reflect the base definition for each data type; specific field definitions may limit input for a data type to a more restrictive range than the base definition would allow. For example, the session-high-water-mark field within a service-route-policy is defined as a uint8, yet is expressed in the configuration as a percentage -- which limits its input to values between 0 and 100. The specific field definitions listed in the Configuration Element Reference section of this document list the validation rules for the values, when applicable.
 
-| Data | Type | Description |
-| uint8 | An | unsigned, 8-bit integer. The range of an unsigned 8-bit integer is 0-255. |
-| uint16 | An | unsigned, 16-bit integer. The range of an unsigned 16-bit integer is 0-65,535. |
-| uint32 | An | unsigned, 32-bit integer. The range of an unsigned 32-bit integer is 0-4,294,967,295. |
-| string | A | sequence of up to 64 alphanumeric characters. |
-| source-spec | The | source-spec is used to represent *either* an IPv4 address or a Qualified Service Name (QSN). The 128T router validates a source-spec using the *address* type or the *string* type, as applicable. |
-| address | An | IPv4 address, ranging from 0.0.0.0 to 255.255.255.255. |
-| boolean | True | or false. |
-| CIDR | An | IPv4 address plus subnet mask, expressed in the form aaa.bbb.ccc.ddd/ee. |
-| base64 | A | binary-to-text encoding that represents binary data in ASCII format. The 128T router uses MIME's Base64 implementation. |
-| decimal64 | A | 64-bit positive real number. |
-| uint64 | An | unsigned, 64-bit integer. The range of an unsigned 64-bit integer is 0-18,446,744,073,709,551,615. |
-| geolocation | Geographic | coordinates in ISO-6709 format. |
-
-Appendix B: Configuration Validation Errors
-
-While configuring the 128T router, the CLI (and the GUI, as well as third party NETCONF interfaces) will perform validation on your input to ensure it meets the type(s) specified in the various sections throughout this document. When validation fails, the configuration interface will return error messages to alert you to the fact that your input has not been accepted. This section lists the error messages that the system can return, why the error was generated, and suggested corrective action (if any).
-
-| Error | Message | Description |
-| attribute | \[attribute\] | not allowed here                                This error occurs when trying to configure an attribute that does not exist. The CLI and GUI are not capable generating this error; it can only be generated by a third party NETCONF client. |
-| document | incompletely | matched                                           This error is typically generated when a request contains invalid XML (e.g., missing an end tag). The CLI and GUI are not capable of generating this error; it can only be generated by a third party client. |
-| Duplicate | key | \[name\]                                                  This error is generated when a third party client attempts to create an element with a key field that matches a pre-existing object with the same value in its key field. (The CLI and GUI cannot create duplicated key fields.) |
-| Duplicate | leaf-list | entry \[name\]                                      This error is generated when a third party client attempts to create a sub-element with a key field that matches a pre-existing object with the same value in its key field. (The CLI and GUI cannot create duplicated key fields.) |
-| Each | \[name\] | must have a unique value                                  This error is generated when two attributes are configured to the same value, but they are required to be unique. E.g., two VLANs on the same network-interface are both set to the same value. |
-| element | \[name\] | invalid                                                This error can occur for a variety of reasons; the response text will supply more details about what has failed; e.g., *does not meet constraints*, *invalid length*, *must be greater than \[value\]*. |
-| element | \[name\] | missing required attribute \[attribute\]               This error occurs when trying to create an element that has one or more mandatory attributes that have not been supplied. The CLI and GUI are not capable generating this error; it can only be generated by a third party NETCONF client. |
-| element | \[name\] | missing required element \[name\]                      This error occurs when trying to create an element that has one or more mandatory sub-elements that have not yet been created. |
-| element | \[name\] | not allowed here                                       This error occurs when trying to create an element at the wrong location of the configuration hierarchy. The CLI and GUI are not capable generating this error; it can only be generated by a third party NETCONF client. |
-| element | \[name\] | not allowed yet; missing required element \[name\]     This error occurs when trying to configure or modify an element that exists but the request is missing a key attribute (and the 128T system cannot discern which element to configure/modify). The CLI and GUI are not capable generating this error; it can only be generated by a third party NETCONF client. |
-| Field | \[name\] | may only be configured when \[attribute\] is \[value\]   This error is generated when an attribute is only configurable under a certain condition, and that attribute is configured but the condition is not met. E.g., the 'pci-address' attribute within the device-interface is only configurable when the *type* of that interface is set to 'ethernet'. If the pci-address attribute is set (or has been set) when the interface's *type* is set to 'kni', this validation error will occur. |
-| found | attribute | \[attribute\], but no attributes allowed here           This error occurs when trying to configure an attribute within an element that has no attributes. The CLI and GUI are not capable generating this error; it can only be generated by a third party NETCONF client. |
-| Found | fields | that are only valid when \[attribute\] is \[value\]        This error is generated when attributes are set when a specific condition is met, but that condition has been violated. E.g., when the type of the routing-protocol is set to 'bgp', various attributes are available to be configured; if these attributes are set, and the routing-protocol is later set to a value other than 'bgp', these dependent attributes are in violation. |
-| Reference | to | element \[name\] which does not exist                      This is generated when an object refers to another object within the configuration, but the referenced object has not yet been created. This condition must be rectified before the configuration can be committed. |
-| text | not | allowed here                                                   This error occurs when inserting text within an XML element that cannot contain text. The CLI and GUI are not capable generating this error; it can only be generated by a third party NETCONF client. |
-| unknown | element | \[name\]                                                This error occurs when trying to configure an element that does not exist in the 128T data model. The CLI and GUI are not capable of configuring unknown elements; this error can only be generated by a third party NETCONF client. |
-| value | of | attribute \[attribute\] is invalid                             This error occurs when trying to configure an attribute with a value that does not meet the validation criteria for the attribute. Refer to the pertinent section of this guide above for the valid criteria for the specific attribute. The CLI and GUI are not capable generating this error; it can only be generated by a third party NETCONF client. |
-
-[^1]: For more information on the management address assignation process, refer to the 128T Installation Guide.
+| Data Type | Description |
+| --- | --- |
+| uint8 | An unsigned, 8-bit integer. The range of an unsigned 8-bit integer is 0-255. |
+| uint16 | An unsigned, 16-bit integer. The range of an unsigned 16-bit integer is 0-65,535. |
+| uint32 | An unsigned, 32-bit integer. The range of an unsigned 32-bit integer is 0-4,294,967,295. |
+| string | A sequence of up to 64 alphanumeric characters. |
+| source-spec | The source-spec is used to represent *either* an IPv4 address or a Qualified Service Name (QSN). The 128T router validates a source-spec using the *address* type or the *string* type, as applicable. |
+| address | An IPv4 address, ranging from 0.0.0.0 to 255.255.255.255. |
+| boolean | True or false. |
+| CIDR | An IPv4 address plus subnet mask, expressed in the form aaa.bbb.ccc.ddd/ee. |
+| base64 | A binary-to-text encoding that represents binary data in ASCII format. The 128T router uses MIME's Base64 implementation. |
+| decimal64 | A 64-bit positive real number. |
+| uint64 | An unsigned, 64-bit integer. The range of an unsigned 64-bit integer is 0-18,446,744,073,709,551,615. |
+| geolocation | Geographic coordinates in ISO-6709 format. |
