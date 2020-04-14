@@ -27,7 +27,7 @@ Ensure that you have met the following prerequisites:
 - 128T Conductor operationally deployed and reachable by router
 - System installed with 128T software
   :::info
-  If do not have 128T already installed on a platform, you can follow [this procedure](intro_creating_bootable_iso.md)
+  If do not have 128T already installed on a platform, you can follow [this procedure](intro_creating_bootable_media.md)
   :::
 - 128T Router has one or more WAN links
 
