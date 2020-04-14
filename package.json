@@ -10,11 +10,13 @@
     "ci": "yarn lint && yarn prettier:diff",
     "lint": "eslint --cache \"**/*.js\"",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,md}\"",
-    "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,md}\""
+    "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,md}\"",
+    "check-links": "blcl -ro ./build/"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.48",
     "@docusaurus/preset-classic": "^2.0.0-alpha.48",
+    "broken-link-checker-local": "^0.2.1",
     "classnames": "^2.2.6",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",

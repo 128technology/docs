@@ -27,3 +27,22 @@ Alternatively if you prefer, you can run the server just with `docker`.
 4. Run `docker start -a 128t-docs `to start the container.
 
 That's it. Point a browser to http://localhost:3000 to see the fruits of your labor.
+
+## Adding additional NPM packages
+
+If you already have docker running, you will first need to stop docker:
+```
+docker-compose down
+```
+or
+```
+docker ps
+docker stop <container-hash>
+```
+finally
+```
+docker rmi docs_docusaurus
+```
+
+At this point, you can now install any needed npm modules.  The next time docker starts
+they will be added to the newly instantiated container.

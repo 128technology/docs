@@ -15,7 +15,7 @@ The first step is to acquire an ISO of the version of software that is intended 
 
 ### Prequisites
 
-- Install Rufus software https://rufus.akeo.ie/downloads/rufus-2.18.exe [^1]
+- Install Rufus software https://rufus.akeo.ie/downloads/ [^1]
 - Verify in system BIOS that the USB drive is listed in the boot priority properly
 [^1]: tested on version 2.18.1213
 

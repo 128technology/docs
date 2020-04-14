@@ -5,7 +5,7 @@ module.exports = {
   baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: '128technology', // Usually your GitHub org/user name.
-  projectName: '128t-docs', // Usually your repo name.
+  projectName: 'docs', // Usually your repo name.
   themeConfig: {
     disableDarkMode: true,
     navbar: {

@@ -14,9 +14,7 @@ Currently 128 Technology makes available to its customers 2 ISOs for each softwa
 
 ## Downloading the ISOs
 
-128 Technology ISOs are available to anyone with an active client certificate from our public yum servers located at:
-
-https://yum.128technology.com/isos
+128 Technology ISOs are available to anyone with an active client certificate from our public yum servers located at: `https://yum.128technology.com/isos`
 
 Your client certificate should have been provided to you via email and installed on your 128 Technology routers in order for them to download software updates from our yum servers.
 
