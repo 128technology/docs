@@ -54,7 +54,7 @@ At this point, please remove the install media and select **Yes** to reboot the 
 
 #### Initialization of the Node
 
-The initialization of the new node will follow the standard process outlined in the [128T Installation Guide](intro_installation_installer). Please refer to that document for details on how to initialize your system.
+The initialization of the new node will follow the standard process outlined in the [128T Installation Guide](intro_installation_installer.md). Please refer to that document for details on how to initialize your system.
 
 ![Initializer](/img/intro_installation_bootable_media_initializer.png)
 

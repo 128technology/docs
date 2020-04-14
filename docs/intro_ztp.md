@@ -41,7 +41,7 @@ The rest of this guide will walk you through setting up a typical standalone bra
 
 ### 128T Configuration
 
-The 128T router will need to be provisioned a priori on the conductor.  This procedure presumes you are familiar with the [concepts](concepts_glossary) and [configuration](config_basics) of the 128T platform.
+The 128T router will need to be provisioned a priori on the conductor.  This procedure presumes you are familiar with the [concepts](concepts_glossary.md) and [configuration](config_basics.md) of the 128T platform.
 
 When a router configuration has been added to the conductor, but the device has not yet connected, in place of device-specific information, QuickStart instructions will be displayed.
 

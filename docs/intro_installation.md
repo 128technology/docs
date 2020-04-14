@@ -46,7 +46,7 @@ VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0
 - Set network adapters to type e1000. As mentioned above, typical installations include a minimum of three network adapters for router deployments.
 - Separate the management interface, which is used for inter-component communication and out-of-band management, from the forwarding plane interfaces. 
 - Reserve a minimum of two network interfaces for production traffic.
-- Depending on your environment, set the 128T router node portgroup to either promiscuous or bridged mode when supporting one or more redundant interfaces. (For example, when you are defining and configuring a MAC address for each redundant interface.) For VMware ESXi, the portgroup mode should be set to _promiscuous_. For KVM libvirt, the portgroupo mode should be set to _bridged_. For more information, refer to the [High Availability](config_ha) guide.
+- Depending on your environment, set the 128T router node portgroup to either promiscuous or bridged mode when supporting one or more redundant interfaces. (For example, when you are defining and configuring a MAC address for each redundant interface.) For VMware ESXi, the portgroup mode should be set to _promiscuous_. For KVM libvirt, the portgroupo mode should be set to _bridged_. For more information, refer to the [High Availability](config_ha.md) guide.
 
 ## Operating System Requirements
 The 128T routing software supports CentOS 7.5 as its underlying operating system. 
@@ -100,9 +100,9 @@ PCI-to-port maps are available for commonly deployed hardware systems on our use
 
 Once you have identified the platform and determined it meets the minimum requirements, select the appropriate installation mechanism best suited for your needs
 
-- [Installing from 128T Installer](intro_installation_installer)
-- [Installing from bootable media](intro_installation_bootable_media)
-- [Installing on AWS](intro_installation_aws)
+- [Installing from 128T Installer](intro_installation_installer.md)
+- [Installing from bootable media](intro_installation_bootable_media.md)
+- [Installing on AWS](intro_installation_aws.md)
 
 ## Post Installation
 
