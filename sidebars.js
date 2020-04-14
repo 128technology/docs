@@ -18,6 +18,7 @@ module.exports = {
     ],
     "Concepts": [
       "concepts_application_discovery",
+      "concepts_appid",
       "concepts_ha_theoryofoperation",
       "concepts_interface_types",
       "concepts_linux_host_networking",
