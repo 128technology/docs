@@ -35,7 +35,6 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/128technology/docs/tree/master',
           showLastUpdateAuthor: false,
           showLastUpdateTime: true,
         },
