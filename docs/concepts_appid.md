@@ -1,3 +1,8 @@
+---
+title: Application Identification
+sidebar_label: Application Identification
+---
+
 ## Identifying Applications by Name
 
 The 128T Session Smart routing platform has several techniques by which it can associate inbound traffic to named applications. This is sometimes referred to as "Application Identification" (or "appID"), and the feature that allows administrators to define network policies using Fully Qualified Domain Names (FQDNs) instead of IP addresses.
@@ -12,7 +17,7 @@ The 128T router has three built-in techniques for affiliating named applications
 
 Generally, when configuring a `service` on a 128T router, administrators use the `address` field to identify the IP address(es)/CIDR block(s) that the 128T should use to match to inbound traffic. However, the `address` field will also accept hostnames, such as `www.128technology.com`. When a service uses a hostname in the `address` field, it is referred to as a *DNS-based service*.
 
-For every DNS-based service, the 128T will use its local DNS to resolve the hostnames; for every IP address that is returned the 128T will treat that as though it were configured in the `address` field, and install FIB entries accordingly. Here is a sample configuration for reference:
+For every DNS-based service, the 128T will use its local DNS to resolve the hostnames; for every IP address that is returned the 128T will treat that as though it were configured in the `address` field, and install FIB entries accordingly. It will also refresh these FIB entries based on the time-to-live (TTL) returned by the DNS server. Here is a sample configuration for reference:
 
 ```
 admin@labsystem1.fiedler# show config running authority service interchange
@@ -55,9 +60,11 @@ This technique relies on your 128T getting the same answers from DNS that your c
 
 ### AppID based on TLS
 
-The 128T router can also *learn about named destinations* by inspecting the traffic that goes to and from various destinations. This is done by inspecting the X.509 certificate sent by a server during the TLS handshake process. Importantly: *this presupposes that the 128T can route packets to that destination for the purposes of retrieving the server's certificate*. Thus, when using AppID based on TLS, it is important to ensure that there is a `service` and `service-route` capable of reaching that server in addition to the one you'll configure for the named application.
+The 128T router can also *learn about named destinations* by inspecting the traffic that traverses it. This is done by inspecting the X.509 certificate sent by a server during the TLS handshake process. Importantly: *this presupposes that the 128T can route packets to that destination for the purposes of retrieving the server's certificate*. Thus, when using AppID based on TLS, it is important to ensure that there is a `service` and `service-route` capable of reaching that server in addition to the one you'll configure for the named application.
 
-Within the `Server Hello` message sent by a server will be information about that certificate, which is always sent in cleartext. One such example is here:
+> Note: normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be.
+
+Within the `Server Hello` message sent by a server will include its X.509 certificate, which is decipherable by the client to include information about the server. One such example is here:
 
 ```
 [ptimmons@labsystem1 ~]$ openssl x509 -in /tmp/512b-rsa-example-cert.pem -text -noout
@@ -94,7 +101,136 @@ Certificate:
 
 > Note: this sample certificate was supplied by [FM4DD](http://www.fm4dd.com/openssl/certexamples.htm).
 
-About a third of the way through the output you can see that the *Common Name* (listed as `CN` in the `Subject` line) is `www.example.com`. This is what 128T will parse and subsequently retain as the "application name" for this destination.
+About a third of the way through the output you can see that the *Common Name* (listed as `CN` in the `Subject` line) is `www.example.com`. This is what 128T will parse and subsequently retain as the "application name" for this destination. Assuming this matches a configured `application-name` within a `service`, a FIB entry is installed with this server's IP address and associated with the `service`.
+
+To enable application identification based on TLS, configure the `application-identification` element within the `router` context as seen here:
+
+```
+admin@labsystem1.fiedler# show config running authority router burlington application-identification
+
+config
+
+    authority
+
+        router  burlington
+            name                        burlington
+
+            application-identification
+                mode  tls
+            exit
+        exit
+    exit
+exit
+```
+
+For reference, here's a `service` that would leverage the X.509 certificate shown above:
+
+```
+admin@labsystem1.fiedler# show config running authority service example
+
+config
+
+    authority
+
+        service  example
+            name                  example
+            description           "www.example.com website"
+            application-name      www.example.com
+
+            access-policy         trusted
+                source      trusted
+                permission  allow
+            exit
+            service-policy        NO-LTE
+            share-service-routes  false
+        exit
+    exit
+exit
+```
+
+Here we can see the `application-name` set to `www.example.com`, which matches the Common Name from the X.509 certificate in our example. Assuming we had a `service`/`service-route` capable of reaching `www.example.com` to begin with, the TLS handshake would see the server's X.509 certificate returned back to the client through the 128T. The 128T parses the certificate, recognizes `www.example.com` as belonging to the service named `example` and installs a FIB entry for it with the server's IP address.
+
+> Note: the `example` service needs to have its own `service-route` in order for traffic to be forwarded.
+
+With the TLS-based application identification technique, the `application-name` can include a wildcard such as `*.example.com`, which is not possible with the DNS-based approach. This gives administrators a bit more flexibility in defining which traffic to match to services when parsing the X.509 certificates.
 
 ### AppID using Modules
 
+The last, and arguably most powerful built-in technique for performing application identification is to use a *module* – effectively, a script that is resident on the 128T router's host operating system that will generate a JSON file that contains dynamic, ingestible routes. This is extremely flexible, but requires some programming expertise.
+
+Configuring application identification based on modules first requires that a router have the feature enabled:
+
+```
+admin@labsystem1.fiedler# show config running authority router becket application-identification
+
+config
+
+    authority
+
+        router  becket
+            name                        becket
+
+            application-identification
+                mode  module
+            exit
+        exit
+    exit
+exit
+```
+
+Next, scripts are placed on the router's filesystem at `/etc/128technology/application-modules/`. These scripts must produce JSON output stored at `/var/run/128technology/application-modules/`, which in turn will be consumed by the 128T router and installed as FIB entries.
+
+Each module has a name that is used to reference it in the configuration. For example, an application identification module named `ZOOM` will retrieve and process all of the IP addresses used for the Zoom videoconferencing service. The corresponding service looks like this:
+
+```
+admin@labsystem1.fiedler# show config running authority service ZOOM
+
+config
+
+    authority
+
+        service  ZOOM
+            name                  ZOOM
+
+            description           "Zoom meetings"
+            scope                 private
+            application-name      ZOOM
+
+            access-policy         trusted
+                source      trusted
+                permission  allow
+            exit
+            share-service-routes  false
+        exit
+    exit
+exit
+```
+
+The `application-name` is configured as it is with the `tls` variant of `application-identification`. In this case, however, it will read the contents of a JSON file to produce the FIB entries. An excerpt from the `ZOOM` module's output is here:
+
+```
+{
+  "duration": 86400,
+  "services": {
+    "ZOOM": [
+      {
+        "ip-prefix": "3.7.35.0/25"
+      },
+      {
+        "ip-prefix": "3.21.137.128/25"
+      },
+      {
+        "ip-prefix": "3.22.11.0/24"
+      },
+      ...
+    ]
+  },
+  "module-name": "zoom"
+}
+```
+
+> Note: in the case of this module, the script that generates the JSON is `/etc/128technology/application-modules/zoom.py`, the output is stored as `/var/run/128technology/application-modules/zoom.json`
+
+The `services` tag of `ZOOM` is what associates these IP prefixes to the service we've shown above. Each of these IP prefixes (which could have also included port ranges, but don't in this example) will create a FIB entry for the `ZOOM` service, and be given access and policy determinations based on the configuration we've set in our 128T.
+
+The 128T product ships with an Office365 module, and other modules can be found on [Interchange](https://community.128technology.com), our user community, as well as on Github. For more information on writing your own application identification module, refer to our developer documentation or our sample code.
