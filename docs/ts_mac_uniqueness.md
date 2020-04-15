@@ -20,23 +20,23 @@ If MAC addresses are not unique in a domain, this will lead to peculiar behavior
 When you see a DHCP-enabled interface that has an `<empty>` value for its address, this is a possible culprit. An example is below (output is truncated to fit the page):
 
 ```
-admin@AAP2035P3A.AAP2035P3# show network-interface node all
+admin@SOL2035P3A.SOL2035P3# show network-interface node all
 Thu 2019-05-09 13:23:49 UTC
 
 =========== ============ ========= ============= ========== ==================== 
  Router      Node          Device   Name          DHCP       Address
 =========== ============ ========= ============= ========== ====================
- AAP2035P3   AAP2035P3A         2   ha-fabric     disabled   169.254.255.0/31
- AAP2035P3   AAP2035P3A         3   pos           disabled   10.120.135.1/25
- AAP2035P3   AAP2035P3A         3   utility       disabled   10.120.135.161/27
- AAP2035P3   AAP2035P3A         3   voice         disabled   10.120.135.193/27
- AAP2035P3   AAP2035P3A         4   DIA           v4         <empty>/32    
+ SOL2035P3   SOL2035P3A         2   ha-fabric     disabled   169.254.255.0/31
+ SOL2035P3   SOL2035P3A         3   pos           disabled   10.120.135.1/25
+ SOL2035P3   SOL2035P3A         3   utility       disabled   10.120.135.161/27
+ SOL2035P3   SOL2035P3A         3   voice         disabled   10.120.135.193/27
+ SOL2035P3   SOL2035P3A         4   DIA           v4         <empty>/32    
 ```
 
 As you can see here, the DIA interface has no IP address. Capturing packets on that interface (using a `len>0` filter or equivalent) will confirm that the interface is sending DHCP requests. However, if the ISP has already issued a DHCP lease for the MAC address requesting an IP address, these requests may go unanswered.
 
 ## The Resolution
-To avoid colliding MAC addresses within a domain, we must ensure each is unique. In one representative deployment, the enterprise uses four digit numbers to uniquely identify each location. Thus, we leveraged the last two octets of the `shared-phys-address` to insert this four digit identifier. For example, the store 1234 uses the MAC address `5a:1f:2b:57:12:34`, and the store 5678 uses the MAC address `5a:1f:2b:57:56:78`. While this does not guarantee that MAC addresses are unique within a domain (since another device could conceivably have one of those two addresses "natively"), the chances are far, far more remote.
+To avoid colliding MAC addresses within a domain, we must ensure each is unique. In one representative deployment, the enterprise uses four digit numbers to uniquely identify each location. Thus, we leveraged the last two octets of the `shared-phys-address` to insert this four digit identifier. For example, the branch 1234 uses the MAC address `5a:1f:2b:57:12:34`, and the branch 5678 uses the MAC address `5a:1f:2b:57:56:78`. While this does not guarantee that MAC addresses are unique within a domain (since another device could conceivably have one of those two addresses "natively"), the chances are far, far more remote.
 
 To rectify the problem, we must change the `shared-phys-address` on both the A and B nodes in a router.
 
