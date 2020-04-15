@@ -7176,13 +7176,52 @@ Available to _admin_ only.
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
 
+
+## show udp-transform
+
+#### Syntax
+```
+show udp-transform [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+- **force**  Skip confirmation prompt
+- **node**   Node for which to display transform status
+- **router** Router for which to display transform status
+
+#### Description
+Display the status of UDP transform between peers.
+
+UDP transform, also known as the [firewall detector]](concepts_machine_communication.md#firewall-detector) is used to determine if stateful firewalls exist between 128T peers as certain firewalls may interfere with SVR.
+
+```
+admin@labsystem1.fiedler# show udp-transform router newton
+============= ============ ============ ========== =========================================
+ Router Name   Node Name    Peer         Status     Reason(s)
+============= ============ ============ ========== =========================================
+ newton        labsystem2   becket       enabled    TCP SYN; Mid-flow; TCP SYN Jumbo;
+                            becket       enabled    TCP SYN; TCP SYN Jumbo;
+                            burlington   enabled    TCP SYN; Mid-flow; TCP SYN Jumbo;
+```
+
 ## show user
 
 #### Syntax
 
 ```
-show user <username>
+show user [<username>]
 ```
+##### Positional Arguments
+- **username** The name of the account to display (default: &lt;current user&gt;)
+
+##### See Also
+- [create user](#create-user)
+- [delete user](#delete-user)
+- [edit prompt](#edit-prompt)
+- [edit user](#edit-user)
+- [restore prompt](#restore-prompt)
+- [restore users factory-default](#restore-users-factory-default)
+- [set password](#set-password)
 
 #### Description
 
@@ -7200,6 +7239,20 @@ admin@labsystem1.fiedler# show user jdeveloper
 
 admin@labsystem1.fiedler#
 ```
+If the 128T is configured to obtain user accounts from LDAP, the connectivity status of the LDAP server is displayed at the end of the output.
+```
+admin@labsystem1.fiedler# show user all
+
+============== ====================== ======= =============== =========
+ Username       Full Name              Roles   Features        Enabled
+============== ====================== ======= =============== =========
+ admin                                 admin   configure       true
+ user           user                   user    show-commands   true
+ jdeveloper     Joe Developer          admin   configure       true
+
+
+LDAP server is configured and online
+```
 
 #### Privileges Required
 
@@ -7210,14 +7263,23 @@ Available to _admin_ only.
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
+| 4.4.0   | LDAP status was added to `show user all` |
 
 ## sync
 
-## Syntax
+#### Syntax
 
 ```
-sync peer addresses
+sync peer addresses [force] [router <router>]
 ```
+
+##### Keyword Arguments
+- **force**   Skip confirmation prompt
+- **router**  The name of the router to synchronize
+
+##### See Also
+- [show dynamic-peer-update](#show-dynamic-peer-update)
+- [show stats dynamic-peer-update](#show-stats-dynamic-peer-update)
 
 #### Description
 
@@ -7241,6 +7303,33 @@ Available to _admin_.
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
 
+## time
+
+#### Syntax
+
+```
+time <command> [<command> ...]
+```
+
+##### Positional Arguments
+- **command** command to run and time
+
+#### Description
+
+When `time` preceeds another command, it will provide the total amount of wall clock time it takes for the operation to complete. Natively not all PCLI commands output the duration it takes to complete the operation.  The time command, much like the Linux version, provides this information.
+
+```
+Are you sure you want to commit the candidate config? [y/N]: y
+✔ Validating, then committing...
+Configuration committed
+
+admin@gouda.novigrad# time commit
+Wed 2020-04-15 15:50:26 UTC
+Are you sure you want to commit the candidate config? [y/N]: y
+✔ Validating, then committing...
+Configuration committed
+Completed in 4.86 seconds
+```
 
 ## top
 
@@ -7322,8 +7411,11 @@ Available to _admin_ and _user_.
 #### Syntax
 
 ```
-validate
+validate [router <router>]
 ```
+
+##### Keyword Arguments
+- **router** The name of the router on which to execute the validate operation (default: all)
 
 #### Description
 
@@ -7393,22 +7485,31 @@ Available to _admin_ only; _where_ is only available within configuration mode.
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 
-## write
+## write log message
 
 #### Syntax
 
 ```
-write log <message> [<process-name> <node-name>]
+write log message [force] [router <router>] [node <node>] <message> [<process-name>]
 ```
+
+##### Keyword Arguments
+- **force** Skip confirmation prompt
+- **node**  The node on which to log
+- **router** The router on which to log
+
+##### Positional Arguments
+- **message** The message to write to the log (messages with a space must be surrounded with quotes)
+- **process-name** The process to which to write a log message (the message will write to all process logs when no process is specified) (default: all)
 
 #### Description
 
-The `write` command lets administrators write messages into log files; this is typically used as a marker during troubleshooting exercises, to insert a string that can later be located to reference the onset of a test.
+The `write log message` command lets administrators write messages into log files; this is typically used as a marker during troubleshooting exercises, to insert a string that can later be located to reference the onset of a test.
 
 Note that `<message>` is a quoted string, as in the following example:
 
 ```
-admin@labsystem1.fiedler# write log "---- starting test here ----"
+admin@labsystem1.fiedler# write log message "---- starting test here ----"
 Log message successfully written
 admin@labsystem1.fiedler#
 ```
@@ -7429,8 +7530,64 @@ Mar 13 14:14:38.345 [USER| -- ] INFO  (stateMonitPoller) ---- starting test here
 
 Available to _admin_ only.
 
+##### See Also
+- [rotate log](#rotate)
+- [set log level](#set-log-level)
+- [write log snapshot](#write-log-snapshot)
+
 #### Version History
 
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
+
+## write log snapshot
+
+#### Syntax
+```
+write log snapshot [category <category>] [force] [router <router>] [node <node>] [<process-name>]
+```
+
+##### Keyword Arguments
+- **category**  The log category for which to write the snapshot. Default is all categories.
+- **force**     Skip confirmation prompt
+- **node**      The node on which to log
+- **router**    The router on which to log
+
+##### Positional Arguments
+- **process-name**  The process to write a snapshot (all processes will write a snapshot when no process is specified) (default: all)
+
+#### Description
+The `write log snapshot` command is debugging tool that outputs zookeeper state information related information to each respective process that utilizes zookeeper.
+
+```
+admin@gouda.novigrad# write log snapshot
+The snapshot was successfully written
+```
+
+```
+[root@novigrad ~]# less /var/log/128technology/persistentDataManager.log
+...
+Apr 14 17:23:43.538 [DATA| -- ] INFO  (persistentPoller) Zookeeper debug snapshot info:
+zk::Client:
+    clientID          = 0x1010444f3f60003
+    IO thread         = 0x8d432700
+    Completion thread = 0x8cc31700
+    Current state     = Connected (3)
+    Current server    = 127.0.0.1:2181
+    Servers           = 127.0.0.1:2181
+    History:
+        Apr 11 12:56:01.675 zk::Client::connectRequested
+        Apr 11 12:56:01.682 zk::Client::onConnect
+    zk::Node: event history for dead Nodes
+        History:
+================================================================================
+    PersistentDataZooKeeper for statePda
+    Reader recipes: 0
+    Writer recipes: 3
+    ...
+```
+##### See Also
+- [rotate log](#rotate)
+- [set log level](#set-log-level)
+- [write log message](#write-log-message)
