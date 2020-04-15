@@ -7050,18 +7050,33 @@ Available to _admin_ and _user_.
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 
+
 ## show system
 
-#### Syntax
+#### Usage
+```
+show system [force] [router <router>] [node <node>]
+```
 
-```
-show system [connectivity | processes | registry | version] [node <node>]
-```
+##### Keyword Arguments
+- **force**  Skip confirmation prompt
+- **node**   node for which to display system state
+- **router** router for which to display system state
+
+#### Subcommands
+- **connectivity** Display inter-node connection statuses
+- **processes**    Display a table summarizing the statuses of processes
+- **registry**     Shows registered services from the system services coordinator for the specified process, node or router
+- **services**     Display a table summarizing statuses of 128T systemd services
+- **version**      Show system version information
+
+##### See Also
+- [show alarms](#show-alarms)
 
 #### Description
-
 The _show system_ subcommand displays overall system health for the nodes that comprise your 128T router. It includes the state of the node ("starting" is displayed when the node is in the process of starting up and is not yet ready for handling traffic, "running" means the node is active, "offline" means the node is configured but not currently present), its role, software version, and uptime.
 
+#### Example
 ```
 admin@labsystem1.fiedler# show system
 Mon 2017-02-27 15:11:06 EST
@@ -7070,20 +7085,34 @@ Mon 2017-02-27 15:11:06 EST
  labsystem1
 ===============================
  Status:       running
- Version:      3.0.0
- Uptime:       0 days 20:58:28
+ Version:      4.3.2
+ Uptime:       4 days  6:17:31
  Role:         combo
  Alarm Count:  0
 
 Completed in 0.22 seconds
 ```
 
-The optional _node-name_ argument will only show information about the specified node.
 
-Adding the _processes_ argument will list the processes for all nodes in the cluster, and which processes on which nodes are considered _leaders_ (from a high availability standpoint).
+### show system connectivity
 
-The _connectivity_ argument displays the state of all connected systems. On a 128T Conductor, this is a convenient way to display all of the nodes that are connected, disconnected, or "unconfigured". (Note: when a node appears as _unconfigured_, it means that it is attempting to connect to the 128T conductor, but that conductor does not have any supporting configuration to supply to it.)
+#### Usage
+```
+show system connectivity [force] [router <router>] [node <node>]
+```
 
+#### Keyword Arguments
+- **force**   Skip confirmation prompt
+- **node**    node for which to display connection statuses
+- **router**  router for which to display connection statuses
+
+##### Subcommands
+- **internal** Displays inter-node secure communication connections
+
+#### Description
+The _connectivity_ subcommand displays the state of all connected systems. On a 128T Conductor, this is a convenient way to display all of the nodes that are connected, disconnected, or "unconfigured". (Note: when a node appears as _unconfigured_, it means that it is attempting to connect to the 128T conductor, but that conductor does not have any supporting configuration to supply to it.)
+
+#### Example
 ```
 admin@cnd1.conductor# show system connectivity
 Fri 2018-02-09 09:30:48 EST
@@ -7098,8 +7127,22 @@ Fri 2018-02-09 09:30:48 EST
 Completed in 0.20 seconds
 ```
 
-By adding the _internal_ flag to _show system connectivity internal_, the system will report all interprocess connections that are currently available on the system, as well as connections between a router and conductor (if applicable).
+### show system connectivity internal
 
+#### Usage
+```
+show system connectivity internal [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+- **force**   Skip confirmation prompt
+- **node**    node for which to display internal connections
+- **router**  router for which to display internal connections
+
+#### Description
+The _internal_ subcommand of _show system connectivity internal_ will report all interprocess connections that are currently available on the system, as well as connections between a router and conductor (if applicable).
+
+#### Example
 ```
 admin@cnd1.conductor# show system connectivity internal
 Fri 2018-02-09 09:31:38 EST
@@ -7115,63 +7158,301 @@ Fri 2018-02-09 09:31:38 EST
 Completed in 0.27 seconds
 ```
 
-The _registry_ argument shows the processes/services that have registered with the local system's "SSC" (system services coordinator). On a 128T Conductor, this will show all of the connected routers_ registered system processes/services.
 
-The _version_ argument displays more detailed information about the software build (number, date) that is running on your system.
+### show system processes
 
-#### Privileges Required
-
-Available to _admin_ and _user_.
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 2.0.0   | This feature was introduced |
-| 3.0.0   | Added _connectivity_ and _tunnels_ commands |
-| 3.1.0   | _show version_ was moved under _show system version_ |
-| 3.2.0   | _show system tunnels_ was renamed _show system connectivity internal_ |
-
-## show tenant
-
-#### Syntax
-
+#### Usage
 ```
-show tenant members [rows <number>] [router <router-name>] [node <nodename> ]
+show system processes [force] [router <router>] [node <node>]
 ```
+
+##### Keyword Arguments
+- **force**   Skip confirmation prompt
+- **node**    node for which to display statuses of processes
+- **router**  router for which to display statuses of processes
 
 #### Description
+The _processes_ subcommand will list the processes for all nodes in the cluster, and which processes on which nodes are considered _leaders_ (from a high availability standpoint).
 
+#### Example
+```
+admin@tp-cond-primary.tp-cond# show system processes router tp-colo
+Wed 2020-04-15 20:35:32 UTC
+
+=========================== ============================= ========= ========= =======
+ Node                        Process                       Status    Primary   Role
+=========================== ============================= ========= ========= =======
+ tp-colo-primary.tp-colo     accessManager                 running             combo
+ tp-colo-primary.tp-colo     analyticsReporter             running             combo
+ tp-colo-primary.tp-colo     applicationFrameworkManager   running             combo
+ tp-colo-primary.tp-colo     conflux                       running             combo
+ tp-colo-primary.tp-colo     databaseQueryCoordinator      running             combo
+ tp-colo-primary.tp-colo     dnsManager                    running   Y         combo
+ tp-colo-primary.tp-colo     dynamicPeerUpdateManager      running   Y         combo
+ tp-colo-primary.tp-colo     highway                       running             combo
+ tp-colo-primary.tp-colo     nodeMonitor                   running             combo
+ tp-colo-primary.tp-colo     persistentDataManager         running             combo
+ tp-colo-primary.tp-colo     redisServerManager            running   Y         combo
+ tp-colo-primary.tp-colo     routingManager                running   Y         combo
+ tp-colo-primary.tp-colo     secureCommunicationManager    running             combo
+ tp-colo-primary.tp-colo     securityKeyManager            running   Y         combo
+ tp-colo-primary.tp-colo     snmpTrapAgent                 running             combo
+ tp-colo-primary.tp-colo     stateMonitor                  running             combo
+ tp-colo-primary.tp-colo     systemServicesCoordinator     running             combo
+ tp-colo-secondary.tp-colo   accessManager                 running             combo
+ tp-colo-secondary.tp-colo   analyticsReporter             running             combo
+ tp-colo-secondary.tp-colo   applicationFrameworkManager   running             combo
+ tp-colo-secondary.tp-colo   conflux                       running             combo
+ tp-colo-secondary.tp-colo   databaseQueryCoordinator      running             combo
+ tp-colo-secondary.tp-colo   dnsManager                    running   N         combo
+ tp-colo-secondary.tp-colo   dynamicPeerUpdateManager      running   N         combo
+ tp-colo-secondary.tp-colo   highway                       running             combo
+ tp-colo-secondary.tp-colo   nodeMonitor                   running             combo
+ tp-colo-secondary.tp-colo   persistentDataManager         running             combo
+ tp-colo-secondary.tp-colo   redisServerManager            running   N         combo
+ tp-colo-secondary.tp-colo   routingManager                running   N         combo
+ tp-colo-secondary.tp-colo   secureCommunicationManager    running             combo
+ tp-colo-secondary.tp-colo   securityKeyManager            running   N         combo
+ tp-colo-secondary.tp-colo   snmpTrapAgent                 running             combo
+ tp-colo-secondary.tp-colo   stateMonitor                  running             combo
+ tp-colo-secondary.tp-colo   systemServicesCoordinator     running             combo
+
+Completed in 0.23 seconds
+```
+
+### show system registry
+
+#### Usage
+```
+show system registry [<router-name>] [<node-name>] [<process-name>]
+```
+
+##### Positional Arguments
+- **router-name**     The router from which to retrieve registered services (default: all)
+- **node-name**       The node from which to retrieve registered services (default: all)
+- **process-name**    The process from which to retrieve registered services (default: all)
+
+#### Description
+The _registry_ subcommand shows the processes/services that have registered with the local system's "SSC" (system services coordinator). On a 128T Conductor, this will show all of the connected routers_ registered system processes/services.
+
+#### Example
+```
+admin@tp-cond-primary.tp-cond# show system registry
+Wed 2020-04-15 20:39:35 UTC
+
+=========== ===================== ============================ ===============================
+ Router      Node                  Process                      Registered Service
+=========== ===================== ============================ ===============================
+ burl-corp   burl-corp-primary     all                          ALL
+ burl-corp   burl-corp-secondary   all                          ALL
+ tp-colo     tp-colo-primary       all                          ALL
+ tp-colo     tp-colo-secondary     all                          ALL
+ tp-cond     tp-cond-primary       accessManager                LOG
+ tp-cond     tp-cond-secondary     accessManager                LOG
+ tp-cond     tp-cond-primary       analyticsReporter            LOG
+ tp-cond     tp-cond-secondary     analyticsReporter            LOG
+ tp-cond     tp-cond-primary       automatedProvisioner         ASSET_STATE_SYNC
+ tp-cond     tp-cond-primary       automatedProvisioner         ASSET_MAINTENANCE
+ tp-cond     tp-cond-primary       automatedProvisioner         LOG
+ tp-cond     tp-cond-secondary     automatedProvisioner         ASSET_MAINTENANCE
+ tp-cond     tp-cond-secondary     automatedProvisioner         LOG
+ tp-cond     tp-cond-secondary     automatedProvisioner         AUTOMATED_PROVISIONING
+ tp-cond     tp-cond-primary       conflux                      LOG
+ tp-cond     tp-cond-secondary     conflux                      LOG
+ tp-cond     tp-cond-primary       databaseQueryCoordinator     STATS
+ tp-cond     tp-cond-primary       databaseQueryCoordinator     AUDIT
+ tp-cond     tp-cond-primary       databaseQueryCoordinator     ENTITLEMENT
+ tp-cond     tp-cond-primary       databaseQueryCoordinator     ANALYTICS
+ tp-cond     tp-cond-primary       databaseQueryCoordinator     LOG
+ tp-cond     tp-cond-secondary     databaseQueryCoordinator     ANALYTICS
+ tp-cond     tp-cond-secondary     databaseQueryCoordinator     ENTITLEMENT
+ tp-cond     tp-cond-secondary     databaseQueryCoordinator     STATS
+ tp-cond     tp-cond-secondary     databaseQueryCoordinator     LOG
+ tp-cond     tp-cond-secondary     databaseQueryCoordinator     AUDIT
+ tp-cond     tp-cond-primary       dnsManager                   DNS_RESOLUTION
+ tp-cond     tp-cond-primary       dnsManager                   LOG
+ tp-cond     tp-cond-secondary     dnsManager                   LOG
+ tp-cond     tp-cond-secondary     dnsManager                   DNS_RESOLUTION
+ tp-cond     tp-cond-primary       dynamicPeerUpdateManager     LOG
+ tp-cond     tp-cond-secondary     dynamicPeerUpdateManager     CONDUCTOR_SHOW_DYNAMIC_PEER
+ tp-cond     tp-cond-secondary     dynamicPeerUpdateManager     CONDUCTOR_DYNAMIC_PEER_UPDATE
+ tp-cond     tp-cond-secondary     dynamicPeerUpdateManager     LOG
+ tp-cond     tp-cond-primary       nodeMonitor                  GET_PCI_ADDRESSES
+ tp-cond     tp-cond-primary       nodeMonitor                  NODE_INFO
+ tp-cond     tp-cond-primary       nodeMonitor                  LDAP_INFO
+ ...
+```
+
+
+### show system services
+
+#### Usage
+```
+show system services [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **node**      node for which to display statuses
+- **router**    router for which to display statuses
+
+#### Description
+Most 128T processes are under the control of a process aptly named the _processManager_. Some services must exist outside of the control of the _processManager_ and are instead goverened by Linux's systemd. `show system services` displays a table summarizing statuses of 128T systemd services.
+
+#### Example
+```
+admin@tp-cond-primary.tp-cond# show system services
+Wed 2020-04-15 20:41:18 UTC
+
+========================= ============================== ==============
+ Node                      Service                        Active State
+========================= ============================== ==============
+ tp-cond-primary.tp-cond   128T-plugin-adapter.service    active
+ tp-cond-primary.tp-cond   128TWeb.service                active
+ tp-cond-primary.tp-cond   128TWebAuth.service            active
+ tp-cond-primary.tp-cond   auditd.service                 active
+ tp-cond-primary.tp-cond   mars.service                   active
+ tp-cond-primary.tp-cond   prank.service                  active
+ tp-cond-primary.tp-cond   t128-process-metrics.service   active
+ tp-cond-primary.tp-cond   tank.service                   active
+
+Completed in 0.11 seconds
+```
+
+### show system version
+
+#### Usage
+```
+show system version [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **node**      The node to show version information for
+- **router**    The router to show version information for
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+#### Description
+The _version_ argument displays more detailed information about the software build (number, date) that is running on your system.
+
+#### Example
+```
+admin@gouda.novigrad# show system version detail
+Wed 2020-04-15 20:49:21 UTC
+
+==============================================================
+ Node: gouda.novigrad
+==============================================================
+  Version:           4.3.2
+  Build Date:        2020-04-09T18:00:17Z
+  Build Machine:     releaseslave1.openstacklocal
+  Build User:        jenkins
+  Build Directory:   /i95code
+  Hash:              137944e030d9fdc2f7d6c037a32722e540ced67d
+  Package:           128T-4.3.2-1.el7
+
+Completed in 0.06 seconds
+```
+
+
+## show tenant members
+
+#### Usage
+```
+show tenant members [rows <rows>] [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+- **force**  Skip confirmation prompt
+- **node**   The node from which to retrieve tenant members
+- **router** The router from which to retrieve tenant members
+- **rows**   The number of tenant members to display at once [type: int or 'all'] (default: 50)
+
+#### Description
 The _show tenant_ subcommand displays the mapping logic that the 128T router uses for associating the _source IP address_ of inbound requests to tenant definitions – whether they be interface-based (i.e., a tenant has been configured on a network-interface) or member based (i.e., a prefix has been configured within a neighborhood).
 
-#### Privileges Required
+#### Example
+```
+admin@gouda.novigrad# show tenant members
+Wed 2020-04-15 19:10:00 UTC
 
+Node: gouda
+
+============ ========= =================== ================ =================== ==================== =============
+ Device I/F   VLAN ID   Network I/F         Network I/F IP   Source IP Prefix    Tenant               Source Type
+============ ========= =================== ================ =================== ==================== =============
+ lan                0   lan-interface       192.168.0.2      192.168.0.0/24      lanSubnet            PUBLIC
+ lan                0   lan-interface       192.168.0.2      192.168.0.32/32     MBP.lanSubnet        PUBLIC
+ lan             3000   lan-untrusted       172.16.0.1       0.0.0.0/0           untrustedLanSubnet   PUBLIC
+ wan                0   wan-interface       96.230.191.130   35.156.0.0/14       blacklist            PUBLIC
+ wan                0   wan-interface       96.230.191.130   217.0.0.0/8         blacklist            PUBLIC
+ wan                0   wan-interface       96.230.191.130   218.0.0.0/8         blacklist            PUBLIC
+ dh00000001         0   dhcp-server-gen-2   169.254.128.132  0.0.0.0/0           <global>             PUBLIC
+ kni254             0   controlKniIf        169.254.127.126  0.0.0.0/0           _internal_           PUBLIC
+ wan                0   wan-interface       96.230.191.130   220.0.0.0/8         blacklist            PUBLIC
+ wan                0   wan-interface       96.230.191.130   222.0.0.0/8         blacklist            PUBLIC
+
+Completed in 9.01 seconds
+```
+
+#### Privileges Required
 Available to _admin_ only.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
 
-## show top
 
-#### Syntax
+## show top sources
 
+#### Usage
 ```
-show top sources by [total-data | session-count] [rows <num>]
+show top sources [by <by>] [rows <rows>] [force] [router <router>] [node <node>]
 ```
+
+##### Keyword Arguments
+- **by**     total-data | session-count (default: total-data)
+- **force**  Skip confirmation prompt
+- **node**   The node from which to retrieve top sources
+- **router** The router from which to retrieve top sources
+- **rows**   The number of top sources to display [type: int] (default: 10)
 
 #### Description
-
 The _show top sources_ command will render a table displaying the highest consumers (by source address) of data or rote number of sessions.
 
-#### Privileges Required
+#### Example
+```
+admin@gouda.novigrad# show top sources
+Wed 2020-04-15 18:48:19 UTC
+Results from last 30 minutes
 
+Node: gouda
+
+============== =================== ============== =============== ===================
+ Source IP      Tenant              Total Data ▾   Session Count   Current Bandwidth
+============== =================== ============== =============== ===================
+ 192.168.0.23   lanSubnet                2.10 GB              62               0 bps
+ 192.168.0.25   lanSubnet                1.36 GB             238           3.44 Mbps
+ 192.168.0.32   MBP.lanSubnet          157.78 MB            1337          46.81 kbps
+ 192.168.0.53   lanSubnet               44.98 MB             856               0 bps
+ 192.168.0.72   lanSubnet               36.87 MB              91           9.60 kbps
+ 192.168.0.41   lanSubnet               32.19 MB             325               0 bps
+ 192.168.0.78   lanSubnet                5.83 MB              52             216 bps
+ 192.168.0.68   lanSubnet                3.80 MB             212               0 bps
+ 192.168.0.3    lanSubnet                2.34 MB             398          21.41 kbps
+ 192.168.0.5    lanSubnet                1.21 MB             150               0 bps
+
+
+Completed in 0.07 seconds
+```
+
+#### Privileges Required
 Available to _admin_ only.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
@@ -7179,8 +7460,7 @@ Available to _admin_ only.
 
 ## show udp-transform
 
-#### Syntax
-
+#### Usage
 ```
 show udp-transform [force] [router <router>] [node <node>]
 ```
@@ -7191,10 +7471,9 @@ show udp-transform [force] [router <router>] [node <node>]
 - **router** Router for which to display transform status
 
 #### Description
-Display the status of UDP transform between peers.
+A 128T router may need to transform TCP packets into UDP packets to enable SVR to traverse stateful firewalls. By default, the 128T router runs a [firewall detector]](concepts_machine_communication.md#firewall-detector) process over peer paths, and will dynamically enable UDP transform when necessary. (Administrators may also elect to enable UDP transform if they know there are stateful firewalls in the path.) This command shows whether a path has UDP transform enabled, and if so, which firewall detection tests triggered the feature to be enabled.
 
-UDP transform, also known as the [firewall detector]](concepts_machine_communication.md#firewall-detector) is used to determine if stateful firewalls exist between 128T peers as certain firewalls may interfere with SVR.
-
+#### Example
 ```
 admin@labsystem1.fiedler# show udp-transform router newton
 ============= ============ ============ ========== =========================================
@@ -7205,10 +7484,10 @@ admin@labsystem1.fiedler# show udp-transform router newton
                             burlington   enabled    TCP SYN; Mid-flow; TCP SYN Jumbo;
 ```
 
+
 ## show user
 
-#### Syntax
-
+#### Usage
 ```
 show user [<username>]
 ```
@@ -7225,9 +7504,9 @@ show user [<username>]
 - [set password](#set-password)
 
 #### Description
-
 The _show user_ subcommand displays the attributes for the specified user account (i.e., whether the account is enabled, the user&#39;s full name, and their role).
 
+#### Example
 ```
 admin@labsystem1.fiedler# show user jdeveloper
 
@@ -7256,20 +7535,18 @@ LDAP server is configured and online
 ```
 
 #### Privileges Required
-
 Available to _admin_ only.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 | 4.4.0   | LDAP status was added to `show user all` |
 
-## sync
 
-#### Syntax
+## sync peer addresses
 
+#### Usage
 ```
 sync peer addresses [force] [router <router>]
 ```
@@ -7283,9 +7560,9 @@ sync peer addresses [force] [router <router>]
 - [show stats dynamic-peer-update](#show-stats-dynamic-peer-update)
 
 #### Description
-
 This command will force a network element (or group of network elements) to synchronize any dynamically-learned IP addresses to its conductor. (The conductor will redistribute these dynamic addresses to other members of the Authority as necessary.)
 
+#### Example
 ```
 admin@cnd1.conductor# sync peer addresses
 Fri 2018-02-09 09:46:44 EST
@@ -7295,19 +7572,17 @@ Completed in 0.06 seconds
 ```
 
 #### Privileges Required
-
 Available to _admin_.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
 
+
 ## time
 
-#### Syntax
-
+#### Usage
 ```
 time <command> [<command> ...]
 ```
@@ -7316,9 +7591,9 @@ time <command> [<command> ...]
 - **command** command to run and time
 
 #### Description
-
 When `time` preceeds another command, it will provide the total amount of wall clock time it takes for the operation to complete. Natively not all PCLI commands output the duration it takes to complete the operation.  The time command, much like the Linux version, provides this information.
 
+#### Example
 ```
 Are you sure you want to commit the candidate config? [y/N]: y
 ✔ Validating, then committing...
@@ -7332,18 +7607,18 @@ Configuration committed
 Completed in 4.86 seconds
 ```
 
+
 ## top
 
-#### Syntax
-
+#### Usage
 ```
 top
 ```
 
 #### Description
-
 This command sets the focus of the PCLI prompt to the top level of the PCLI&#39;s hierarchy. It is used while in configuration mode to "jump" up out and back to the baseline prompt. It is only available within configuration mode.
 
+#### Example
 ```
 admin@labsystem1.fiedler# config authority router burlington
 admin@labsystem1.fiedler (router[name=burlington])# node combo1
@@ -7355,11 +7630,9 @@ admin@labsystem1.fiedler#
 ```
 
 #### Privileges Required
-
 Available to _admin_ and _user_.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
@@ -7367,18 +7640,19 @@ Available to _admin_ and _user_.
 
 ## up
 
-#### Syntax
-
+#### Usage
 ```
 up [<levels>]
 ```
 
 #### Description
-
 This command moves the administrative focus of the PCLI "up" the specified number of levels. When the optional &lt;levels&gt; argument is left off, it moves the focus up one level.
 
+:::note
 This command is only available while in configuration mode.
+:::
 
+#### Example
 ```
 admin@labsystem1.fiedler# config authority router burlington
 admin@labsystem1.fiedler (router[name=burlington])# node combo1
@@ -7398,19 +7672,17 @@ admin@labsystem1.fiedler (authority)#
 ```
 
 #### Privileges Required
-
 Available to _admin_ and _user_.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 
+
 ## validate
 
-#### Syntax
-
+#### Usage
 ```
 validate [router <router>]
 ```
@@ -7419,7 +7691,6 @@ validate [router <router>]
 - **router** The name of the router on which to execute the validate operation (default: all)
 
 #### Description
-
 This command validates the current candidate configuration to check for referential integrity among the various configuration objects, to check for the use of deprecated configuration elements, and to supply warnings when various configuration elements cannot be validated.
 
 Many configuration elements within the 128T router refer to other configuration elements by their _name_. If an administrator mistypes a name, or a referenced object is deleted without updating the source of that reference, this candidate configuration is said to be invalid. By using the validate command, administrators can ensure their configuration is valid prior to committing it to be the running configuration.
@@ -7432,8 +7703,9 @@ The `validate` command provides warnings when a configuration contains deprecate
 
 The `validate` command will also provide warnings when a configuration cannot be validated and requires administrative oversight.
 
-When validation fails, the administrator is notified via output to the CLI. The output from the `validate` command will identify the configuration that is failing validation:
+When validation fails, the administrator is notified via output to the CLI. The output from the `validate` command will identify the configuration that is failing validation.
 
+#### Example
 ```
 admin@node1.bernstein# validate
 ✖ Validating...
@@ -7447,27 +7719,26 @@ reported by router 'bernstein'
 ```
 
 #### Privileges Required
-
 Available to _admin_ and _user_.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 
+
 ## where
 
-#### Syntax
-
+#### Usage
 ```
 where
 ```
 
 #### Description
-
 This command returns the user&#39;s current position within the CLI hierarchy. When executed from the main CLI prompt, it returns nothing. When executed from within the configuration tree, it returns the user&#39;s current position within the tree.
 
+
+#### Example
 ```
 admin@labsystem1.fiedler# where
 admin@labsystem1.fiedler# conf auth router newton
@@ -7477,19 +7748,17 @@ admin@labsystem1.fiedler (router[name=newton])#
 ```
 
 #### Privileges Required
-
 Available to _admin_ only; _where_ is only available within configuration mode.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 
+
 ## write log message
 
-#### Syntax
-
+#### Usage
 ```
 write log message [force] [router <router>] [node <node>] <message> [<process-name>]
 ```
@@ -7504,11 +7773,9 @@ write log message [force] [router <router>] [node <node>] <message> [<process-na
 - **process-name** The process to which to write a log message (the message will write to all process logs when no process is specified) (default: all)
 
 #### Description
-
 The `write log message` command lets administrators write messages into log files; this is typically used as a marker during troubleshooting exercises, to insert a string that can later be located to reference the onset of a test.
 
-Note that `<message>` is a quoted string, as in the following example:
-
+#### Example
 ```
 admin@labsystem1.fiedler# write log message "---- starting test here ----"
 Log message successfully written
@@ -7528,7 +7795,6 @@ Mar 13 14:14:38.345 [USER| -- ] INFO  (stateMonitPoller) ---- starting test here
 ```
 
 #### Privileges Required
-
 Available to _admin_ only.
 
 ##### See Also
@@ -7537,14 +7803,14 @@ Available to _admin_ only.
 - [write log snapshot](#write-log-snapshot)
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 
+
 ## write log snapshot
 
-#### Syntax
+#### Usage
 ```
 write log snapshot [category <category>] [force] [router <router>] [node <node>] [<process-name>]
 ```
@@ -7561,6 +7827,7 @@ write log snapshot [category <category>] [force] [router <router>] [node <node>]
 #### Description
 The `write log snapshot` command is debugging tool that outputs zookeeper state information related information to each respective process that utilizes zookeeper.
 
+#### Example
 ```
 admin@gouda.novigrad# write log snapshot
 The snapshot was successfully written
@@ -7588,6 +7855,7 @@ zk::Client:
     Writer recipes: 3
     ...
 ```
+
 ##### See Also
 - [rotate log](#rotate)
 - [set log level](#set-log-level)
