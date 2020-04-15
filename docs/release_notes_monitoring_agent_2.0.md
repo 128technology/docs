@@ -6,11 +6,14 @@ sidebar_label: '2.0'
 
 # New Features and Improvements
 
-### MON-148 Top applications, sessions and sources input plugin
-To conflgure the new input plugin, please read the [Monitoring Agent Guide](plugin_monitoring_agent.md)
-
 ### MON-126 Automatically stage all 128T input configuration for easy of use ####
 The configuration for all 128T collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
+
+### MON-148 Top applications, sessions and sources input plugin
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#top-analytics-collector)
+
+### MON-164 Test monitoring-agent input configuration
+For verification of the data collected the user can use `monitoring-agent-cli generate` command to generate all the telegraf configuration. Subsequently, the user can run `monitoring-agent-cli test-input` to test a specific input. More details can be found in the [Testing And Validation section](plugin_monitoring_agent.md#testing-and-validation)
 
 ### MON-171 Update Telegraf to latest stable version 1.14.0 ####
 A new stable version of telegraf was released upstream with several new inputs such as execd, wireguard and others.
