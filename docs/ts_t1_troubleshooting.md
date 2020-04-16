@@ -396,9 +396,9 @@ Use the `journalctl` command and look for messages related to `wanpipe`:
 
 ```
 root@node1 log]# journalctl --since “2019-09-21 00:00:00” --until “2019-09-21 20:00:00” | grep wanpipe
-Sep 21 21:18:02 aapfl9343p1b kernel: __sdla_bus_read_4:1157: wanpipe PCI Error: Illegal Register read: 0x0040 = 0xFFFFFFFF
-Sep 21 21:18:02 aapfl9343p1b kernel: __sdla_bus_read_4:1157: wanpipe PCI Error: Illegal Register read: 0x0040 = 0xFFFFFFFF
-Sep 21 21:18:02 aapfl9343p1b kernel: __sdla_shark_te1_read_fe:567: wanpipe PCI Error: Illegal Register read: 0x40 = 0xFFFFFFFF
+Sep 21 21:18:02 node1 kernel: __sdla_bus_read_4:1157: wanpipe PCI Error: Illegal Register read: 0x0040 = 0xFFFFFFFF
+Sep 21 21:18:02 node1 kernel: __sdla_bus_read_4:1157: wanpipe PCI Error: Illegal Register read: 0x0040 = 0xFFFFFFFF
+Sep 21 21:18:02 node1 kernel: __sdla_shark_te1_read_fe:567: wanpipe PCI Error: Illegal Register read: 0x40 = 0xFFFFFFFF
 ```
 
 #### Confirm Layer3 PPP connection using ICMP
@@ -406,7 +406,7 @@ Sep 21 21:18:02 aapfl9343p1b kernel: __sdla_shark_te1_read_fe:567: wanpipe PCI E
 We'll use the old standby `ping` to make sure we can reach the PPP peer. Use the `ping` command, specifying the egress interface, and put in the service provider's Provider Edge (PE) IP address:
 
 ```
-admin@node1.router# ping node AAPVA0962P1B egress-interface t1 10.61.73.170
+admin@node1.router# ping node node1 egress-interface t1 10.61.73.170
 PING 10.61.73.170 56 bytes of data.
 Ping from 10.61.73.170 (10.61.73.170): icmp_seq=0 ttl=254 time=13.388ms
 Ping from 10.61.73.170 (10.61.73.170): icmp_seq=1 ttl=254 time=9.513ms
