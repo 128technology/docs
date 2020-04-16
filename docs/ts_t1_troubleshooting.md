@@ -9,7 +9,7 @@ The 128T software is often configured to leverage legacy T1/E1 circuits to conne
 
 ### Confirm Interface Status
 
-The PCLI command [`show device-interface`](https://docs.128technology.com/docs/cli_reference.md#show-device-interface) shows the status of the T1 interface, including its administrative status and its operational status. For functioning T1 interfaces, the interface state will be `up` both administratively and operationally.
+The PCLI command [`show device-interface`](cli_reference.md#show-device-interface) shows the status of the T1 interface, including its administrative status and its operational status. For functioning T1 interfaces, the interface state will be `up` both administratively and operationally.
 
 Here is an example from a healthy system:
 
@@ -112,7 +112,7 @@ For peers, it is important to identify if the issue affects *just one peer or al
 
 ## Circuit Troubleshooting
 
-The command [`show device-interface`](https://docs.128technology.com/docs/cli_reference.md#show-device-interface) will show the details of the T1 interface activity, including errors, alarms, and signal strength.
+The command [`show device-interface`](cli_reference.md#show-device-interface) will show the details of the T1 interface activity, including errors, alarms, and signal strength.
 
 Here is an example of a clean T1 circuit.
 
