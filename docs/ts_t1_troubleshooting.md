@@ -9,7 +9,7 @@ The 128T software is often configured to leverage legacy T1/E1 circuits to conne
 
 ### Confirm Interface Status
 
-The PCLI command `show device-interface` shows the status of the T1 interface, including its administrative status and its operational status. For functioning T1 interfaces, the interface state will be `up` both administratively and operationally.
+The PCLI command [`show device-interface`](https://docs.128technology.com/docs/cli_reference#show-device-interface) shows the status of the T1 interface, including its administrative status and its operational status. For functioning T1 interfaces, the interface state will be `up` both administratively and operationally.
 
 Here is an example of a working system.
 
@@ -35,7 +35,7 @@ The state of `unknown` represents a T1 that has *never successfully come online 
 
 ### Confirm Peer Status
 
-Typically, a site will have multiple upstream peers that it connects with over each available transport; for example, a branch location will connect to multiple head ends on its T1 circuit, its broadband circuit, an LTE connection, etc. These connections are referred to as "peer paths," and are periodically measured using BFD packets. If only one of the peer paths is down, or only one is flapping (repeatedly transitioning between up and down), the issue is most likely related to a downstream issue and not a T1 issue.
+Typically, a site will have multiple upstream peers that it connects with over any given transport circuit; for example, a branch location will connect to multiple head ends on each of its T1 circuit, its broadband circuit, LTE connection, etc. These individual connections are referred to as "peer paths," and are periodically measured using BFD packets. If some but not all of the peer paths are down on a given circuit, or only a subset are flapping (repeatedly transitioning between up and down), the issue is most likely related to a downstream issue and not a local T1 issue. As an additional point of investigation, it is encouraged to look at other branch locations that peer with the same head ends/peers to see if there is any correlation to down/flapping peer paths.
 
 Here is an example of a system with working peers:
 
@@ -54,7 +54,9 @@ admin@node1.router# show peers | egrep "Status|t1"
  ucaas-he1  node2   mpls-t1             203.0.113.102     up       unavailable   unavailable
 ```
 
-> Note: in some deployments there will be "standby" paths to router peers. These may show as either `down` or `standby` in the output of `show peers`. In the sample output above these are displayed as `standby` for the backup MPLS link.
+:::note
+In some deployments there will be "standby" paths to router peers. These may show as either `down` or `standby` in the output of `show peers`. In the sample output above these are displayed as `standby` for the backup MPLS link.
+:::
 
 Here is an example of a system with issues communicating to peers over the T1 circuit:
 
