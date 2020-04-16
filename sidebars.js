@@ -74,6 +74,7 @@ module.exports = {
           "ts_forwarding_resource_pools",
           "ts_logs",
           "ts_mac_uniqueness",
+          "ts_t1_troubleshooting",
         ],
       },
     ],
