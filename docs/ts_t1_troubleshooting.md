@@ -11,7 +11,7 @@ The 128T software is often configured to leverage legacy T1/E1 circuits to conne
 
 The PCLI command [`show device-interface`](https://docs.128technology.com/docs/cli_reference#show-device-interface) shows the status of the T1 interface, including its administrative status and its operational status. For functioning T1 interfaces, the interface state will be `up` both administratively and operationally.
 
-Here is an example of a working system.
+Here is an example from a healthy system:
 
 ```
 admin@node1.router# show device-interface node all summary  | egrep "Status|t1"
@@ -20,7 +20,7 @@ admin@node1.router# show device-interface node all summary  | egrep "Status|t1"
  node2:t1-carrier2 up             up                   non-redundant       fa:88:6a:46:20:a3
 ```
 
-Here is an example of a system with T1 problems:
+Here is an example from a system with T1 problems:
 
 ```
 admin@node1.router# show device-interface node all summary  | egrep "Status|t1"
@@ -58,7 +58,7 @@ admin@node1.router# show peers | egrep "Status|t1"
 In some deployments there will be "standby" paths to router peers. These may show as either `down` or `standby` in the output of `show peers`. In the sample output above these are displayed as `standby` for the backup MPLS link.
 :::
 
-Here is an example of a system with issues communicating to peers over the T1 circuit:
+Here is an example of a system with issues communicating to peers over its T1 circuit:
 
 ```
 admin@node1.router# show peers | egrep "Status|t1"
@@ -75,13 +75,15 @@ admin@node1.router# show peers | egrep "Status|t1"
  ucaas-he1  node2   mpls-t1             203.0.113.102     down     unavailable   unavailable
 ```
 
-## Build a Timeline
+### Build a Timeline
 
-[[TODO]]
+Based on when your monitoring system detects a failure, or your users report connectivity problems, start building a timeline of events. This is conventional wisdom in network troubleshooting: piece together the information from logs, event history, and alarms, to compile a timeline that can be traced back to the *trigger* of the problem. This is how we will arrive at the root cause of the issue.
 
 Log into the local router's PCLI to view active alarms and event history.
 
-> Note: the PCLI output is often very wide and may cause lines to wrap making it difficult to read on narrow screens. Ensure your screen is wide enough to prevent line wrap.
+:::note
+The PCLI output is often very wide and may cause lines to wrap making it difficult to read on narrow screens. Ensure your screen is wide enough to prevent line wrap.
+:::
 
 1. First, check the current system time from within the PCLI:
 
@@ -92,18 +94,17 @@ Mon Mar  9 11:19:41 EDT 2020
 
 2. Choose a timeframe (e.g., 24 hours) offset from the current time, and use the `show events alarm` command to list all T1 events that have occurred in that timeframe by passing the `from` argument. The timezone of the value passed to `from` in the example below is assumed to be the same as that of the system.
 
+```
+admin@node1.router# show events alarm from "2020-03-08 11:19" | grep t1
+```
 
-    admin@node1.router# show events alarm from "2020-03-08 11:19" | grep t1
+3. Compile each of these events into a timeline. Each event that is displayed will indicate in the `Event Type` column whether it is a new event (the type is `add`), or clearing a prior event (the type is `clear`). Furthermore, each event will fall into one of two Categories: `network-interface` or `peer`.
 
-1. Build a timeline. Each event that is displayed will indicate in the `Event Type` column whether it is a new event (the type is `add`), or clearing a prior event (the type is `clear`). Furthermore, each event will fall into one of two Categories: `network-interface` or `peer`.
+#### Interpreting the Data
 
-### How to Interpret the Data
-
-The `network-interface` category is when the interface transitions to up or down, either administratively (i.e., disabled or enabled by an administrator), or operationally (the physical circuit).
+The `network-interface` category is used when the interface transitions to up or down, either administratively (i.e., disabled or enabled by an administrator), or operationally (the physical circuit).
 
 The `peer` category reflects the ability for the 128T software to reach remote devices over that circuit.
-
-> Note: for more information on how 128T devices peer with one another, refer to our Peering guide.
 
 When a `network-interface` is down, either operationally or administratively, this will obviously impact all traffic on that interface. For circumstances when the `network-interface` is operationally down, proceed to the Circuit Troubleshooting section of this document.
 
@@ -111,7 +112,7 @@ For peers, it is important to identify if the issue affects *just one peer or al
 
 ## Circuit Troubleshooting
 
-The command `show device-interface` will show the details of the T1 interface activity, including errors, alarms, and signal strength.
+The command [`show device-interface`](https://docs.128technology.com/docs/cli_reference#show-device-interface) will show the details of the T1 interface activity, including errors, alarms, and signal strength.
 
 Here is an example of a clean T1 circuit.
 
@@ -151,7 +152,7 @@ Mon 2020-03-09 17:56:40 UTC
      TX-ERR:          0
      TX-OK:           254742784
      TX-OVR:          0
-     Alarms:
+     Alarms: 
  ***** w1g1: T1 Rx Alarms (Framer) *****
 
  ALOS:  OFF     | LOS:  OFF
@@ -168,207 +169,180 @@ Mon 2020-03-09 17:56:40 UTC
 
  AIS:   OFF     | YEL:  OFF
 
-
  ***** w1g1: T1 Performance Monitoring Counters *****
 
  Line Code Violation    : 0
  Bit Errors (CRC6/Ft/Fs)        : 0
  Out of Frame Errors    : 0
  Sync Errors            : 0
-
 
  Rx Level       : > -2.5db
 ```
 
 Here is an example of a misbehaving T1; note the section on Performance Monitoring Counters at the end of the output:
 
+```
+admin@node1.router# show device-interface node node1 name t1
+Mon 2020-03-09 17:50:14 UTC
 
-    admin@node1.router# show device-interface node node1 name t1
-    Mon 2020-03-09 17:50:14 UTC
-    
-    ======================================================
-     node1:t1
-    ======================================================
-     Type:                t1
-     Mode:                host
-     MAC Address:         f6:a0:e7:ea:39:0a
-    
-     Admin Status:        up
-     Operational Status:  up
-     Redundancy Status:   non-redundant
-     Speed:               1000
-    
-     in-octets:                    36727823
-     in-unicast-pkts:                233085
-     in-errors:                           0
-     out-octets:                   38634055
-     out-unicast-pkts:               229578
-     out-errors:                          0
-    
-     T1 State:
-         State:           up
-         Flags:           PPP, RUNNING, UP, NOARP
-         Iface:           w1g1ppp
-         MTU:             1500
-         RX-DRP:          9
-         RX-ERR:          0
-         RX-OK:           238562
-         RX-OVR:          0
-         TX-DRP:          0
-         TX-ERR:          0
-         TX-OK:           233929
-         TX-OVR:          0
-         Alarms:
-     ***** w1g1: T1 Rx Alarms (Framer) *****
-    
-     ALOS:  OFF     | LOS:  OFF
-     RED:   OFF     | AIS:  OFF
-     LOF:   OFF     | RAI:  OFF
-    
-     ***** w1g1: T1 Rx Alarms (LIU) *****
-    
-     Short Circuit: OFF
-     Open Circuit:  OFF
-     Loss of Signal:        OFF
-    
-     ***** w1g1: T1 Tx Alarms *****
-    
-     AIS:   OFF     | YEL:  OFF
+======================================================
+ node1:t1
+======================================================
+ Type:                t1
+ Mode:                host
+ MAC Address:         f6:a0:e7:ea:39:0a
 
+ Admin Status:        up
+ Operational Status:  up
+ Redundancy Status:   non-redundant
+ Speed:               1000
 
-​    
-​     ***** w1g1: T1 Performance Monitoring Counters *****
-​    
-​     Line Code Violation    : 0
-​     Bit Errors (CRC6/Ft/Fs)        : 284284
-​     Out of Frame Errors    : 349
-​     Sync Errors            : 1
+ in-octets:                    36727823
+ in-unicast-pkts:                233085
+ in-errors:                           0
+ out-octets:                   38634055
+ out-unicast-pkts:               229578
+ out-errors:                          0
 
+ T1 State:
+     State:           up
+     Flags:           PPP, RUNNING, UP, NOARP
+     Iface:           w1g1ppp
+     MTU:             1500
+     RX-DRP:          9
+     RX-ERR:          0
+     RX-OK:           238562
+     RX-OVR:          0
+     TX-DRP:          0
+     TX-ERR:          0
+     TX-OK:           233929
+     TX-OVR:          0
+     Alarms:
+***** w1g1: T1 Rx Alarms (Framer) *****
 
-​    
-​     Rx Level       : > -2.5db
+ ALOS:  OFF     | LOS:  OFF
+ RED:   OFF     | AIS:  OFF
+ LOF:   OFF     | RAI:  OFF
 
-> Note: the 128 Technology solution includes the Sangoma E1/T1 card for interfacing to MPLS networks. For more information on the Framer alarms, the LIU alarms, and the Tx alarms, refer to the [Sangoma Reference Guide](https://wiki.freepbx.org/pages/viewpage.action?pageId=57411508) for details.
+ ***** w1g1: T1 Rx Alarms (LIU) *****
 
-Output Highlights Follow of T1 Flapping Example
+ Short Circuit: OFF
+ Open Circuit:  OFF
+ Loss of Signal:        OFF
 
+ ***** w1g1: T1 Tx Alarms *****
 
-                From Linux prompt on Active T1 node run the following to confirm if T1 card is flapping, see timestamp format example
+ AIS:   OFF     | YEL:  OFF
 
+ ***** w1g1: T1 Performance Monitoring Counters *****
 
-                journalctl --since "START TIME" --until "END TIME" | grep wanpipe | grep -i connect
-                        NOTE: Can verify the uptime of BGP peers to see if impacted - BGP is primary via T1
-                        NOTE: Can also use historical alarm process outlined above for T1 up/down
+ Line Code Violation    : 0
+ Bit Errors (CRC6/Ft/Fs)        : 284284
+ Out of Frame Errors    : 349
+ Sync Errors            : 1
+   
+ Rx Level       : > -2.5db
+```
 
+:::note
+The 128 Technology solution includes the Sangoma E1/T1 card for interfacing to MPLS networks. For more information on the Framer alarms, the LIU alarms, and the Tx alarms, refer to the [Sangoma Reference Guide](https://wiki.freepbx.org/pages/viewpage.action?pageId=57411508) for details.
+:::
 
-[root@aappa8692p4b ~]# journalctl --since "2019-09-20 00:00" --until "2019-09-20 19:50" | grep wanpipe | grep -i connect
-Sep 20 18:50:23 aappa8692p4b kernel: wanpipe1: T1 disconnected!
-Sep 20 18:50:29 aappa8692p4b kernel: wanpipe1: T1 connected!
-Sep 20 18:50:37 aappa8692p4b kernel: wanpipe1: T1 disconnected!
-Sep 20 18:50:42 aappa8692p4b kernel: wanpipe1: T1 connected!
+#### Checking the Circuit Status
 
+From Linux prompt on the node where the T1 card is installed, use the following command to confirm if the T1 card is observing circuit flapping. For this we'll use the `journalctl` command, which shows log messages in the system's journal. We can restrict it to start and end times, and then pipe it to the `grep` command to filter out everything but the messages related to `wanpipe` (the Sangoma card).
 
-                Check T1 physical errors via how device-interface node <active t1 node> name <t1 for Node B, t1-backup for Node A)
+```
+journalctl --since "START TIME" --until "END TIME" | grep wanpipe | grep -i connect
+```
 
+Example:
+```
+[t128@node1 ~]$ journalctl --since "2019-09-20 00:00" --until "2019-09-20 23:55" | grep wanpipe | grep -i connect
+Sep 20 18:50:23 node1 kernel: wanpipe1: T1 disconnected!
+Sep 20 18:50:29 node1 kernel: wanpipe1: T1 connected!
+Sep 20 18:50:37 node1 kernel: wanpipe1: T1 disconnected!
+Sep 20 18:50:42 node1 kernel: wanpipe1: T1 connected!
+```
+In this example we can see that the T1 card (`wanpipe1`) is reporting circuit loss at 18:50:23, restored six seconds later, down again eight seconds after that, and restored again in five seconds. This is a classic example of a "flapping" circuit. This circuit behavior will affect all peers, and cause all traffic to be migrated off of the circuit. This should correspond to interface failures in the output of `show events alarm`.
 
-admin@AAPFL9145P1B.AAPFL9145P1# show device-interface node AAPFL9145P1B name t1
-                                <snip>
+These should be added to your troubleshooting timeline.
+
+#### Check for  T1 physical errors
+
+We'll use the command `show device-interface node <name> name <interfaceName>` to look at the error counters for the circuit.
+
+```
+admin@node1.router# show device-interface node node1 name t1
+...
  ***** w1g1: T1 Performance Monitoring Counters *****
  Line Code Violation    : 263653
  Bit Errors (CRC6/Ft/Fs)        : 1286
  Out of Frame Errors    : 230
  Sync Errors            : 17
+```
 
+Repeat this command several times to see if errors are incrementing, or if these counters are residual from an earlier incident.
 
-                Repeat command to see if errors are incrementing or have normalized
-admin@AAPFL9145P1B.AAPFL9145P1# show device-interface node AAPFL9145P1B name t1
-                                <snip>
+```
+admin@node1.router# show device-interface node node1 name t1
+...
  ***** w1g1: T1 Performance Monitoring Counters *****
  Line Code Violation    : 2732653
  Bit Errors (CRC6/Ft/Fs)        : 1386
  Out of Frame Errors    : 239
  Sync Errors            : 17
+```
 
+#### Clearing the Counters
+The 128T cannot reset Sangoma counters within its administrative interfaces. To clear the counters, you must follow these steps within the Linux host operating system.
 
-Run the following commands in Linux to clear T1 Performance Counters (NOTE Sync Errors Don’t Clear)
+:::note
+The **Sync Errors** counter cannot be cleared.
+:::
 
-Validate the t1 namespace via ip netns
-[root@aapnc4162p3b ~]# ip netns
+1. Use the command `ip netns` to identify the [Linux namespace](https://en.wikipedia.org/wiki/Linux_namespaces) used for the T1 interface. This will be of the format `t1-ns-<number>`.
+
+```
+[t128@node1 ~]$ ip netns
 t1-ns-5 (id: 1073741828)
 routingEngine
+```
 
+In this example, the T1 namespace is `t1-ns-5`.
 
+2. Clear the performance counters using the command `ip netns exec <t1 namespace> wanpipemon -i w1g1 -c fpm`
 
-
-Clear the performance counters via ip netns exec <t1 namespace> wanpipemon -i w1g1 -c fpm
-[root@aapnc4162p3b ~]# ip netns exec t1-ns-5 wanpipemon -i w1g1 -c fpm
+```
+[t128@node1 ~]$ sudo ip netns exec t1-ns-5 wanpipemon -i w1g1 -c fpm
 DSU/CSU Perfomance Monitoring counters were flushed.
 Performance monitoring counters flushed
-Output Highlights Follow of T1 Down Example
+```
 
+####  Confirm Presence of the Sangoma card
 
-        Check T1 physical errors via how device-interface node <active t1 node> name <t1 for Node B, t1-backup for Node A)
+Use the Linux command `lspci` to confirm that the card appears on the Linux system's PCI bus. Here is the expected result (note that the PCI address `04:04.0` may be different on your hardware platform):
 
-
-admin@AAPVA2290P4B.AAPVA2290P4# show device-interface name t1
-<snip>
- Operational Status:  unknown                        (T1 Operational state unknown or down)
- T1 State:
-     State:           down                                (T1 State down)
-<snip>        
- ***** w1g1: T1 Rx Alarms (Framer) *****                (T1 Rx Framer Alarms ON, e.g., Loss of Signal LOS, Loss of Frame, RED)
-
-
- ALOS:  OFF     | LOS:  ON
- RED:   ON      | AIS:  OFF
- LOF:   ON      | RAI:  OFF
-
-
- ***** w1g1: T1 Rx Alarms (LIU) *****                        (T1 Rx Line Alarms, e.g., LoS, Open)
-
-
- Short Circuit: OFF
- Open Circuit:  ON
- Loss of Signal:        ON
-
-
- ***** w1g1: T1 Tx Alarms *****                        (T1 Tx Alarms, e.g., AIS, Yellow)
-
-
- AIS:   OFF     | YEL:  ON
-
-
-
-
- ***** w1g1: T1 Performance Monitoring Counters *****        (T1 Rx Signal Level Down)
-
-
- Line Code Violation    : 0
- Bit Errors (CRC6/Ft/Fs)        : 0
- Out of Frame Errors    : 0
- Sync Errors            : 0
-
-
- Rx Level       : < -36db
-________________
-
-
-5. Confirm Health of T1 Card Health
-                
-           
-           
-           
-           
-           
-           
-                Output of healthy status of T1 Card
-
-
-[root@aapva0962p1b ~]# lspci | grep Sangoma
+```
+[root@node1 ~]# lspci | grep Sangoma
 04:04.0 Network controller: Sangoma Technologies Corp. A200/Remora FXO/FXS Analog AFT card
+```
 
+If the card is not present, this is the output:
 
-[root@aapva0962p1b ~]# wanrouter status
+```
+[root@node1 ~]# lspci | grep Sangoma
+[root@node1 ~]# 
+```
+
+This is indicative of a failure to the Sangoma card or the host machine.
+
+#### Confirm Status of the T1 Card
+
+Use the command `wanrouter status` to make sure the card is active and connected. The expected output should look something like this:
+
+```
+[root@node1 ~]# wanrouter status
 Devices currently active:
         Wanpipe1  Wanpipe Config:
 Device name | Protocol Map | Adapter  | IRQ | Slot/IO | If's | CLK | Baud rate |
@@ -378,44 +352,56 @@ wanpipe1    | N/A          | A101/1D/2/2D/4/4D/8/8D/16/16D| 22  | 4       | 1   
 Wanrouter Status:
 Device name | Protocol | Station | Status        |
 wanpipe1    | AFT TE1  | N/A     | Connected     |
+```
 
+If the card or drivers are malfunctioning, it will look like this:
 
-[root@aapva0962p1b ~]# wanrouter hwprobe
+```
+[root@node1 ~]# wanrouter status
+Router is stopped !
+[root@node1 ~]#
+```
+
+Failure in this scenario means that the T1 card is not loading properly. Try to restore connectivity to the card by powering off the entire host, waiting a short time, and powering it back on. If the failure persists, this system should be replaced.
+
+#### Confirm the System can Query the Device
+
+Use the command `wanrouter hwprobe` to confirm communication between the host operating system and the Sangoma card. Expected output:
+
+```
+[root@node1 ~]# wanrouter hwprobe
 -------------------------------
 | Wanpipe Hardware Probe Info |
 -------------------------------
 1 . AFT-A101-SH : SLOT=4 : BUS=4 : IRQ=22 : CPU=A : PORT=1 : HWEC=0 : V=40
 Sangoma Card Count: A101-2=1 
+```
 
+Failure output:
 
-Output of failed status of T1 Card        
-
-
-[root@aapfl9343p1b ~]# lspci | grep Sangoma
-<card not present in list>
-
-
-[root@aapfl9343p1b ~]# wanrouter status
-Router is stopped !
-
-
-[root@aapfl9343p1b ~]# wanrouter hwprobe
+```
+[root@node1 ~]# wanrouter hwprobe
 modprobe: ERROR: could not insert 'wanpipe': No such device
+```
 
+For failure cases, more information may be in the logfile `/var/log/wanrouter` and the system journal:
 
-root@aapfl9343p1b log]# cat /var/log/wanrouter
+```
+root@node1 log]# cat /var/log/wanrouter
 Tue Oct  1 09:07:52 UTC 2019: starting WAN router
 Loading driver wanpipe ... fail
+```
 
+Use the `journalctl` command and look for messages related to `wanpipe`:
 
-root@aapfl9343p1b log]# journalctl --since “2019-09-21 00:00:00” --until “2019-09-21 20:00:00” | grep wanpipe
+```
+root@node1 log]# journalctl --since “2019-09-21 00:00:00” --until “2019-09-21 20:00:00” | grep wanpipe
 Sep 21 21:18:02 aapfl9343p1b kernel: __sdla_bus_read_4:1157: wanpipe PCI Error: Illegal Register read: 0x0040 = 0xFFFFFFFF
 Sep 21 21:18:02 aapfl9343p1b kernel: __sdla_bus_read_4:1157: wanpipe PCI Error: Illegal Register read: 0x0040 = 0xFFFFFFFF
 Sep 21 21:18:02 aapfl9343p1b kernel: __sdla_shark_te1_read_fe:567: wanpipe PCI Error: Illegal Register read: 0x40 = 0xFFFFFFFF
-6. Confirm if Layer3 PPP connection is reachable via icmp
+```
 
-
-                Confirm the active t1 interface and obtain the IP address of the interface
+#### Confirm Layer3 PPP connection using ICMP
 
 
 admin@AAPVA0962P1A.AAPVA0962P1# show network-interface node all | grep t1
