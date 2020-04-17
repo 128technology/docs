@@ -7,19 +7,16 @@ The 128T GRE plugin can be used for creating IPv4 GRE tunnels between a 128T rou
 
 ## Installation ##
 
-The 128T-gre plugin is available in following versions:
-- 128T-gre-1.0.0: >= 128T-3.2.8, < 128T-4.3.0
-- 128T-gre-2.0.0: >= 128T-4.3.0
+The 128T GRE plugin can be obtained from the official 128T software repository. The following versions are available for corresponding 128T software version.
 
+| GRE Plugin | 128T |
+| --- | --- |
+| 128T-gre-1.0.4 | 128T >= 3.2.8; 128T < 4.3.0 |
+| 128T-gre-2.0.2 | 128T >= 4.3.0 |
+
+:::important
 It is recommended to use the conductor GUI > Plugins page for installing plugins. This allows the system to select the correct version of plugin based on the 128T version.
-
-```
-# dnf list 128T 128T-gre
-Last metadata expiration check: 5 days, 5:37:52 ago on Wed 18 Mar 2020 08:54:57 PM UTC.
-Installed Packages
-128T.x86_64         4.2.4-1.el7         @128tech-local-saved
-128T-gre.x86_64     1.0.0-1.el7         @128tech-local-saved
-```
+:::
 
 :::important
 After installing the plugin, the 128T service on the conductor should be restarted for the changes to take effect.
@@ -59,10 +56,9 @@ config
                     host  30.30.30.14
 
                     icmp-keep-alive
-                        enabled             true
                         link-test-interval  10
-                        number-of-retries          3
-                        retry-interval      1
+                        number-of-retries   5
+                        retry-interval      5
                     exit
                 exit
 
@@ -87,19 +83,18 @@ The GRE tunnels do not have an inherent mechanism to detect the availability of 
 
 ```
 icmp-keep-alive
-    enabled             true
     link-test-interval  10
-    number-of-retries          3
-    retry-interval      1
+    number-of-retries   5
+    retry-interval      5
 exit
 ```
 :::note
 The time interval for the attributes are in seconds.
 :::
 
-Every `link-test-interval` an icmp check is performed to determine the availability of the remote tunnel peer. When the peer does not respond, a new attempt is made after `retry-interval`. After sending the initial ping plus `number-of-retries` amount of ping requests, the peer is considered as down. In the above config, assuming an unresponsive peer, first ping is sent at 10 seconds, followed by 3 more pings at 1 second interval each. In total taking the system about 13 seconds and 4 pings to detect a peer as down. Once a peer is considered down, the next attempt to detect the tunnel liveliness is made after 10 seconds (or the `link-test-interval`).
+Every `link-test-interval` an icmp check is performed to determine the availability of the remote tunnel peer. For an unresponsive peer, a total of `number-of-retries + 1` icmp ping attempts will be made within the `retry-interval`. If the peer does not respond to any of these ping attempts, then its considered as down. In the above config, assuming an unresponsive peer, first ping is sent at 10 seconds, followed by 5 more pings at 1 second interval each. In total taking the system about 15 seconds and 6 pings to detect a peer as down. Once a peer is considered down, the next attempt to detect the tunnel liveliness is made after 10 seconds (or the `link-test-interval`).
 
-In the above example, the two tunnels `pri-tunnel` and `sec-tunnel` create two additional KNI interfaces called `gre-0` and `gre-1` respectively. When a tunnel is determined to be non-responsive, the corresponding `gre-x` interfaces are brought down. For example, in the above config, when the `pri-tunnel` goes down, the corresponding `gre-0` interfaces is brought down as well. The significance of this will be made clear in the next sections.
+In the above example, the two tunnels `pri-tunnel` and `sec-tunnel` create two additional KNI interfaces called `gre-0` and `gre-1` respectively. When a tunnel is determined to be non-responsive, the corresponding `gre-x` interface is brought down. For example, in the above config, when the `pri-tunnel` goes down, the corresponding `gre-0` interface is brought down as well. This allows for traffic to fail over to a secondary tunnel if available. More details on this will be explained later in the document.
 
 ### 128T services to transport over the tunnel ###
 Next step is to identify the the prefix or the subnet to be transported over the tunnel. In some cases, it might be desirable to transport all internet traffic through the tunnel, so the prefix could be as simple as 0.0.0.0/0. This can be done by capturing the prefix in a 128T service and setting the next-hop as the `gre-x` interfaces. As noted in the [previous section](#tunnelicmp_health_check_parameters), each destination on a given node corresponds to a `gre-x` inteface. By configuring the next-hop as the appropriate GRE interfaces, it allows the incoming traffic to be service-function chained to a GRE tunnel towards a WAN interface.
@@ -296,10 +291,10 @@ exit
 
 #### Static Source NAT considerations ####
 :::note
-For some of the KNI based interfaces such as PPPoE and LTE, the source nat may not be needed
+This section can be skipped for WAN interface types of PPPoE and LTE
 :::
 
-Please note that the `next-hop` is making use of a `shared-nat-pool` called `gre-dpdk2-nat-pool` for example. This nat-pool is necessary for performing a source nat of the GRE tunnel traffic depending on which egress interface are being used. 
+Please note that the `next-hop` is making use of a `shared-nat-pool` called `gre-dpdk2-nat-pool` for example. This nat-pool is necessary for performing a source nat of the GRE tunnel traffic depending on which egress interface are being used.
 
 :::note
 The `network-interface > source-nat` flag does not support GRE, hence the `shared-nat-pool` is required.
@@ -376,11 +371,67 @@ When the config and pillar data are successfully generated, a `t128-setup-gre` R
 journalctl -t /monitoring_script.par -t /init.par
 ```
 
-- For debugging the linux network namespace, here are some of the common commands:
+- For debugging the linux network namespace, here are some of the common commands along with the relevant output of how a healthy system would look like
+
+**ip netns pri-tunnel ip addr**
+
 ```
-# ip netns <name> ip addr
-# ip netns <name> ip route show table all
-# ip netns <name> ip rule list
+# ip netns pri-tunnel ip addr
+...
+
+4: pri-tunnel-t0@NONE: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1476 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/gre 169.254.132.2 peer 20.20.20.13
+    inet6 fe80::5efe:a9fe:8402/64 scope link
+       valid_lft forever preferred_lft forever
+108: pri-tunnel: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether ca:9f:53:9a:de:c2 brd ff:ff:ff:ff:ff:ff
+    inet 169.254.132.2/30 brd 169.254.132.3 scope global pri-tunnel
+       valid_lft forever preferred_lft forever
+    inet6 fe80::c89f:53ff:fe9a:dec2/64 scope link
+       valid_lft forever preferred_lft forever
+110: gre-0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 9e:20:89:e4:49:3f brd ff:ff:ff:ff:ff:ff
+    inet 169.254.132.10/30 brd 169.254.132.11 scope global gre-0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::9c20:89ff:fee4:493f/64 scope link
+       valid_lft forever preferred_lft forever
+```
+
+** ip netns pri-tunnel ip route show table all **
+
+```
+# ip netns pri-tunnel ip route show table all
+default via 169.254.132.9 dev gre-0 table 128
+default dev pri-tunnel-t0 scope link
+20.20.20.13 via 169.254.132.1 dev pri-tunnel
+169.254.0.0/16 dev pri-tunnel scope link metric 1108
+169.254.0.0/16 dev gre-0 scope link metric 1110
+169.254.132.0/30 dev pri-tunnel proto kernel scope link src 169.254.132.2
+169.254.132.8/30 dev gre-0 proto kernel scope link src 169.254.132.10
+```
+
+** ip netns pri-tunnel ip rule list **
+```
+# ip netns pri-tunnel ip rule list
+0:      from all lookup local
+32765:  from all iif pri-tunnel-t0 lookup 128
+32766:  from all lookup main
+32767:  from all lookup default
+```
+
+** ip netns exec pri-tunnel iptables -nvL **
+
+```
+# ip netns exec pri-tunnel iptables -nvL
+Chain INPUT (policy ACCEPT 13167 packets, 474K bytes)
+ pkts bytes target     prot opt in     out     source               destination
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 TCPMSS     tcp  --  pri-tunnel-t0 *       0.0.0.0/0            0.0.0.0/0            tcp flags:0x06/0x02 TCPMSS clamp to PMTU
+
+Chain OUTPUT (policy ACCEPT 14014 packets, 505K bytes)
+ pkts bytes target     prot opt in     out     source               destination
 ```
 
 ### Tunnel operation ###
