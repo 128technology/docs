@@ -86,7 +86,7 @@ admin@labsystem1.fiedler#
 If the validation step fails, the administrator will be notified, the commit step is not executed, and the existing running configuration will remain in place. The validator will get a list of all errors that must be addressed before the commit can be completed. There may also be warnings displayed in the event that the candidate configuration contains elements that are deprecated.
 
 ```
-*mbaj@burl-corp-primary.burl-corp# commit
+*admin@burl-corp-primary.burl-corp# commit
 ✖ Validating, then committing...
 % Error: Failed to commit:
 1. Service name "bar" does not exist
@@ -2543,16 +2543,962 @@ Available to _admin_ and _user_ accounts. Updated in 3.0, added _node_ keyword t
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 
-## show peers
 
-#### Syntax
+## show ospf
 
+#### Usage
 ```
-show peers [<peer-name>]
+show ospf [area <area-id>] [force] [router <router>] [<verbosity>]
 ```
+
+##### Keyword Arguments
+- **area**      the area to filter OSPF information for
+- **force**     Skip confirmation prompt
+- **router**    the router to request OSPF information from
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+##### Subcommands
+- **border-routers**    Show information about the OSPF border routers
+- **database**          Show OSPF database information
+- **interfaces**        Show information about the OSPF interfaces
+- **neighbors**         Show information about OSPF neighbors
+- **routes**            Show information about the OSPF routes
 
 #### Description
+Show general information about OSPF
 
+#### Example
+```
+admin@combo-east.ComboEast# show ospf
+Fri 2020-04-17 19:11:06 UTC
+
+=========== ============ ========== ============= ==================== ========= =========== =============
+ Router      Router ID    ABR Type   ASBR Router   External LSA Count   Area ID   Area Type   Area Border
+                                                                                              Router
+=========== ============ ========== ============= ==================== ========= =========== =============
+ ComboEast   172.16.4.2   cisco      true          1                    0.0.0.0
+ ComboEast   172.16.4.2   cisco      true          1                    0.0.0.1   normal
+
+Completed in 0.35 seconds
+```
+Specifying the argument _detail_ provides additional information
+```
+admin@combo-east.ComboEast# show ospf detail
+Fri 2020-04-17 19:11:14 UTC
+
+====================================================
+ Router: ComboEast
+====================================================
+  Router ID:                             172.16.4.2
+  Deferred Shutdown:                     0.0 s
+  RFC1583 Compatible:                    false
+  Stub Advertisement Enabled:            false
+  Opaque Capable:                        false
+  Post-Start Enabled:                    0.0 s
+  Pre-Shutdown Enabled:                  0.0 s
+  SPF Schedule Delay:                    0.0 s
+  Holdtime Minimum:                      50 ms
+  Holdtime Maximum:                      5000 ms
+  Holdtime Multiplier:                   1
+  SPF Last Executed:                     4m 16s ago
+  SPF Last Duration:                     0 ms
+  SPF Has Not Run:                       false
+  SPF Timer Due:                         0.0 s
+  LSA Minimum Interval:                  5.0 s
+  LSA Minimum Arrival:                   1.0 s
+  Write Multiplier:                      20
+  Refresh Timer:                         10.0 s
+  ABR Type:                              cisco
+  ASBR Router:                           true
+  External LSA Count:                    1
+  External LSA Checksum:                 0x00004aa4
+  Opaque AS LSA Count:                   0
+  Opaque AS LSA Checksum:                0x00000000
+  Attached Area Count:                   2
+  Adjacency Changes Logged:              false
+  Adjacency Changes Logged (all):        false
+  Area:
+    Area ID:                             0.0.0.0
+    Backbone:                            true
+    Interface Total Count:               1
+    Interface Active Count:              1
+    Fully Adjacent Neighbor Count:       1
+    Authentication:                      none
+    Passing Fully Virtual Adjacencies:   0
+    SPF Executed Count:                  8
+    LSA Count:                           5
+    LSA Router Count:                    2
+    LSA Router Checksum:                 0x00019ad4
+    LSA Network Count:                   1
+    LSA Network Checksum:                0x0000f755
+    LSA Summary Count:                   2
+    LSA Summary Checksum:                0x0000f3ad
+    LSA ASBR Count:                      0
+    LSA ASBR Checksum:                   0x00000000
+    LSA NSSA Count:                      0
+    LSA NSSA Checksum:                   0x00000000
+    LSA Opaque Link Count:               0
+    LSA Opaque Link Checksum:            0x00000000
+    LSA Opaque Area Count:               0
+    LSA Opaque Area Checksum:            0x00000000
+  Area:
+    Area ID:                             0.0.0.1
+    Area Type:                           normal
+    Backbone:                            false
+    No Summaries:                        false
+    Shortcutting Mode:                   default
+    S-bit Concensus:                     true
+    Interface Total Count:               1
+    Interface Active Count:              1
+    Fully Adjacent Neighbor Count:       0
+    Authentication:                      none
+    Passing Fully Virtual Adjacencies:   0
+    SPF Executed Count:                  3
+    LSA Count:                           3
+    LSA Router Count:                    1
+    LSA Router Checksum:                 0x000042bc
+    LSA Network Count:                   0
+    LSA Network Checksum:                0x00000000
+    LSA Summary Count:                   2
+    LSA Summary Checksum:                0x00014c4b
+    LSA ASBR Count:                      0
+    LSA ASBR Checksum:                   0x00000000
+    LSA NSSA Count:                      0
+    LSA NSSA Checksum:                   0x00000000
+    LSA Opaque Link Count:               0
+    LSA Opaque Link Checksum:            0x00000000
+    LSA Opaque Area Count:               0
+    LSA Opaque Area Checksum:            0x00000000
+
+Completed in 0.29 seconds
+```
+
+
+### show ospf border-routers
+
+#### Usage
+```
+show ospf border-routers [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    the router to request OSPF information from
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+#### Description
+Show information about the OSPF border routers
+
+#### Example
+```
+admin@combo-east.ComboEast# show ospf border-routers
+Fri 2020-04-17 19:12:20 UTC
+
+============= ================== ================
+ Router Name   Border Router ID   Routes (count)
+============= ================== ================
+ ComboEast     172.16.4.3         1
+
+Completed in 0.29 seconds
+```
+Specifying the argument _detail_ provides additional information
+```
+dmin@combo-east.ComboEast# show ospf border-routers detail
+Fri 2020-04-17 19:12:30 UTC
+
+========================================
+ Router: ComboEast
+========================================
+  Border Router:
+    Border Router ID:        172.16.4.3
+    Route:
+      Area ID:               0.0.0.0
+      Cost:                  10
+      Inter-Area:            false
+      ABR:                   true
+      ASBR:                  false
+      Path:
+        Via:                 172.16.3.3
+        Device Interface:    11
+        Network Interface:   intf11
+
+Completed in 0.33 seconds
+```
+
+
+### show ospf database
+```
+show ospf database [self-originate] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+- **force**             Skip confirmation prompt
+- **router**            the router to request OSPF information from
+- **self-originate**    retrieve only self-originated LSA information
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+##### Subcommands
+- **lsa**        Show OSPF database LSA information
+- **max-age**    Show OSPF LSAs which have reached maximum age
+
+#### Description
+Show OSPF database information
+
+#### Example
+```
+admin@combo-east.ComboEast# show ospf database
+Fri 2020-04-17 19:13:24 UTC
+
+=========== ============= ============= ============ ==================== ====== =================
+ Router      Area ID       Type          LSA ID       Advertising Router   Age    Sequence Number
+=========== ============= ============= ============ ==================== ====== =================
+ ComboEast   0.0.0.0       Router        172.16.4.2   172.16.4.2           386    0x80000006
+ ComboEast   0.0.0.0       Router        172.16.4.3   172.16.4.3           1120   0x80000005
+ ComboEast   0.0.0.0       Network       172.16.3.3   172.16.4.3           1121   0x80000001
+ ComboEast   0.0.0.0       Summary       172.16.1.0   172.16.4.2           421    0x80000002
+ ComboEast   0.0.0.0       Summary       172.16.2.0   172.16.4.3           1289   0x80000002
+ ComboEast   0.0.0.1       Router        172.16.4.2   172.16.4.2           381    0x80000005
+ ComboEast   0.0.0.1       Summary       172.16.2.0   172.16.4.2           421    0x80000001
+ ComboEast   0.0.0.1       Summary       172.16.3.0   172.16.4.2           421    0x80000001
+ ComboEast   unavailable   AS_External   12.0.0.1     172.16.4.2           386    0x80000001
+
+Completed in 0.39 seconds
+
+```
+Specifying the argument _detail_ provides additional information
+```
+admin@combo-east.ComboEast# show ospf database detail
+Fri 2020-04-17 19:13:37 UTC
+
+==============================================
+ Router: ComboEast
+==============================================
+  Area:
+    Area ID:                    0.0.0.0
+    LSA Type:
+      Type:                     Router
+      LSA:
+        LSA ID:                 172.16.4.2
+        Advertising Router:     172.16.4.2
+                                (self)
+        Age:                    398
+        Sequence Number:        0x80000006
+        Checksum:               0x0000d067
+        Link Count:             1
+      LSA:
+        LSA ID:                 172.16.4.3
+        Advertising Router:     172.16.4.3
+        Age:                    1133
+        Sequence Number:        0x80000005
+        Checksum:               0x0000ca6d
+        Link Count:             1
+    LSA Type:
+      Type:                     Network
+      LSA:
+        LSA ID:                 172.16.3.3
+        Advertising Router:     172.16.4.3
+        Age:                    1133
+        Sequence Number:        0x80000001
+        Checksum:               0x0000f755
+    LSA Type:
+      Type:                     Summary
+      LSA:
+        LSA ID:                 172.16.1.0
+        Advertising Router:     172.16.4.2
+                                (self)
+        Age:                    433
+        Sequence Number:        0x80000002
+        Checksum:               0x0000824f
+        Route IP Prefix:        172.16.1.0/24
+      LSA:
+        LSA ID:                 172.16.2.0
+        Advertising Router:     172.16.4.3
+        Age:                    1301
+        Sequence Number:        0x80000002
+        Checksum:               0x0000715e
+        Route IP Prefix:        172.16.2.0/24
+  Area:
+    Area ID:                    0.0.0.1
+    LSA Type:
+      Type:                     Router
+      LSA:
+        LSA ID:                 172.16.4.2
+        Advertising Router:     172.16.4.2
+                                (self)
+        Age:                    393
+        Sequence Number:        0x80000005
+        Checksum:               0x000042bc
+        Link Count:             1
+    LSA Type:
+      Type:                     Summary
+      LSA:
+        LSA ID:                 172.16.2.0
+        Advertising Router:     172.16.4.2
+                                (self)
+        Age:                    433
+        Sequence Number:        0x80000001
+        Checksum:               0x0000dde9
+        Route IP Prefix:        172.16.2.0/24
+      LSA:
+        LSA ID:                 172.16.3.0
+        Advertising Router:     172.16.4.2
+                                (self)
+        Age:                    433
+        Sequence Number:        0x80000001
+        Checksum:               0x00006e62
+        Route IP Prefix:        172.16.3.0/24
+  Area:
+    Area ID:                    unavailable
+    LSA Type:
+      Type:                     AS_External
+      LSA:
+        LSA ID:                 12.0.0.1
+        Advertising Router:     172.16.4.2
+                                (self)
+        Age:                    398
+        Sequence Number:        0x80000001
+        Checksum:               0x00004aa4
+        Route IP Prefix:        12.0.0.1/32
+        External Metric Type:   type-2
+        Route Tag:              0
+
+Completed in 0.34 seconds
+```
+
+
+### show ospf database lsa
+
+### Usage
+```
+show ospf database lsa [{origin <ip> | self-originate}] [lsa-id <id>] [force] [router <router>] lsa-type <type> [<verbosity>]
+```
+
+##### Keyword Arguments
+- **force**             Skip confirmation prompt
+- **lsa-id**            the Link State ID to retrieve
+- **lsa-type**          the LSA type to retrieve
+- **origin**            retrieve LSAs from this advertising router IP
+- **router**            the router to request OSPF information from
+- **self-originate**    retrieve only self-originated LSA information
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+#### Description
+Show OSPF database LSA information
+
+#### Example
+```
+admin@combo-east.ComboEast# show ospf database lsa lsa-type router
+Fri 2020-04-17 19:15:01 UTC
+
+=========== ========= ============ ========== =========== ============= ============
+ Router      Area ID   LSA ID       LSA Type   Flags       Metric        Link Count
+=========== ========= ============ ========== =========== ============= ============
+ ComboEast   0.0.0.0   172.16.4.2   Router     ABR, ASBR   unavailable   1
+ ComboEast   0.0.0.0   172.16.4.3   Router     ABR         unavailable   1
+ ComboEast   0.0.0.1   172.16.4.2   Router     ABR, ASBR   unavailable   1
+
+Completed in 0.33 seconds
+```
+Specifying the argument _detail_ provides additional information
+```
+admin@combo-east.ComboEast# show ospf database lsa lsa-type router detail
+Fri 2020-04-17 19:15:24 UTC
+
+====================================================
+ Router: ComboEast
+====================================================
+  Router ID:                172.16.4.2
+  Area:
+    Area ID:                0.0.0.0
+    LSA:
+      LSA ID:               172.16.4.2
+      Advertising Router:   172.16.4.2
+                            (self)
+      LSA Type:             Router
+      Age:                  506
+      Sequence Number:      0x80000006
+      Checksum:             0x0000d067
+      Length:               36 bytes
+      Translated:           false
+      Options:
+        - E
+      Flags:
+        - ABR
+        - ASBR
+      Metric:               unavailable
+      Link Count:           1
+      Link:
+        Link Type:          Transit
+        Link ID Type:       DesignatedRouterAddress
+        Link ID:            172.16.3.3
+        Data Type:          RouterInterfaceAddress
+        Data:               172.16.3.2
+        Metric:             10
+    LSA:
+      LSA ID:               172.16.4.3
+      Advertising Router:   172.16.4.3
+      LSA Type:             Router
+      Age:                  1240
+      Sequence Number:      0x80000005
+      Checksum:             0x0000ca6d
+      Length:               36 bytes
+      Translated:           false
+      Options:
+        - E
+      Flags:
+        - ABR
+      Metric:               unavailable
+      Link Count:           1
+      Link:
+        Link Type:          Transit
+        Link ID Type:       DesignatedRouterAddress
+        Link ID:            172.16.3.3
+        Data Type:          RouterInterfaceAddress
+        Data:               172.16.3.3
+        Metric:             10
+  Area:
+    Area ID:                0.0.0.1
+    LSA:
+      LSA ID:               172.16.4.2
+      Advertising Router:   172.16.4.2
+                            (self)
+      LSA Type:             Router
+      Age:                  501
+      Sequence Number:      0x80000005
+      Checksum:             0x000042bc
+      Length:               36 bytes
+      Translated:           false
+      Options:
+        - E
+      Flags:
+        - ABR
+        - ASBR
+      Metric:               unavailable
+      Link Count:           1
+      Link:
+        Link Type:          Stub
+        Link ID Type:       Net
+        Link ID:            172.16.1.0
+        Data Type:          NetworkMask
+        Data:               255.255.255.0
+        Metric:             10
+
+Completed in 0.40 seconds
+```
+```
+admin@combo-east.ComboEast# show ospf database lsa lsa-id 172.16.4.3 lsa-type router
+Fri 2020-04-17 19:16:25 UTC
+
+=========== ========= ============ ========== ======= ============= ============
+ Router      Area ID   LSA ID       LSA Type   Flags   Metric        Link Count
+=========== ========= ============ ========== ======= ============= ============
+ ComboEast   0.0.0.0   172.16.4.3   Router     ABR     unavailable   1
+
+Completed in 0.35 seconds
+```
+```
+admin@combo-east.ComboEast# show ospf database lsa lsa-id 172.16.4.3 lsa-type router detail
+Fri 2020-04-17 19:17:24 UTC
+
+====================================================
+ Router: ComboEast
+====================================================
+  Router ID:                172.16.4.2
+  Area:
+    Area ID:                0.0.0.0
+    LSA:
+      LSA ID:               172.16.4.3
+      Advertising Router:   172.16.4.3
+      LSA Type:             Router
+      Age:                  1359
+      Sequence Number:      0x80000005
+      Checksum:             0x0000ca6d
+      Length:               36 bytes
+      Translated:           false
+      Options:
+        - E
+      Flags:
+        - ABR
+      Metric:               unavailable
+      Link Count:           1
+      Link:
+        Link Type:          Transit
+        Link ID Type:       DesignatedRouterAddress
+        Link ID:            172.16.3.3
+        Data Type:          RouterInterfaceAddress
+        Data:               172.16.3.3
+        Metric:             10
+
+Completed in 0.26 seconds
+```
+
+
+### show ospf database max-age
+
+#### Usage
+```
+show ospf database max-age [force] [router <router>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    the router to request OSPF information from
+
+#### Description
+Show OSPF LSAs which have reached maximum age
+
+#### Example
+```
+admin@combo-east.ComboEast# show ospf database max-age
+Fri 2020-04-17 19:19:15 UTC
+
+=========== ========== ============= ======================= =================
+ Router      LSA ID     LSA Type      Advertising Router IP   Reference Count
+=========== ========== ============= ======================= =================
+ ComboEast   12.0.0.1   AS_External   172.16.4.2              4
+
+Completed in 0.34 seconds
+```
+```
+admin@combo-east.ComboEast# show ospf database self-originate
+Fri 2020-04-17 19:21:29 UTC
+
+=========== ========= ========= ============ ==================== ===== =================
+ Router      Area ID   Type      LSA ID       Advertising Router   Age   Sequence Number
+=========== ========= ========= ============ ==================== ===== =================
+ ComboEast   0.0.0.0   Router    172.16.4.2   172.16.4.2           148   0x80000007
+ ComboEast   0.0.0.0   Summary   172.16.1.0   172.16.4.2           906   0x80000002
+ ComboEast   0.0.0.1   Router    172.16.4.2   172.16.4.2           148   0x80000006
+ ComboEast   0.0.0.1   Summary   172.16.2.0   172.16.4.2           906   0x80000001
+ ComboEast   0.0.0.1   Summary   172.16.3.0   172.16.4.2           906   0x80000001
+
+Completed in 0.33 seconds
+```
+```
+admin@combo-east.ComboEast# show ospf database self-originate detail
+Fri 2020-04-17 19:21:39 UTC
+
+============================================
+ Router: ComboEast
+============================================
+  Area:
+    Area ID:                  0.0.0.0
+    LSA Type:
+      Type:                   Router
+      LSA:
+        LSA ID:               172.16.4.2
+        Advertising Router:   172.16.4.2
+                              (self)
+        Age:                  158
+        Sequence Number:      0x80000007
+        Checksum:             0x0000c870
+        Link Count:           1
+    LSA Type:
+      Type:                   Summary
+      LSA:
+        LSA ID:               172.16.1.0
+        Advertising Router:   172.16.4.2
+                              (self)
+        Age:                  915
+        Sequence Number:      0x80000002
+        Checksum:             0x0000824f
+        Route IP Prefix:      172.16.1.0/24
+  Area:
+    Area ID:                  0.0.0.1
+    LSA Type:
+      Type:                   Router
+      LSA:
+        LSA ID:               172.16.4.2
+        Advertising Router:   172.16.4.2
+                              (self)
+        Age:                  158
+        Sequence Number:      0x80000006
+        Checksum:             0x00003ac5
+        Link Count:           1
+    LSA Type:
+      Type:                   Summary
+      LSA:
+        LSA ID:               172.16.2.0
+        Advertising Router:   172.16.4.2
+                              (self)
+        Age:                  916
+        Sequence Number:      0x80000001
+        Checksum:             0x0000dde9
+        Route IP Prefix:      172.16.2.0/24
+      LSA:
+        LSA ID:               172.16.3.0
+        Advertising Router:   172.16.4.2
+                              (self)
+        Age:                  916
+        Sequence Number:      0x80000001
+        Checksum:             0x00006e62
+        Route IP Prefix:      172.16.3.0/24
+
+Completed in 0.32 seconds
+```
+```
+admin@combo-east.ComboEast# show ospf database lsa lsa-type router origin 172.16.4.3
+Fri 2020-04-17 19:25:03 UTC
+
+=========== ========= ============ ========== ======= ============= ============
+ Router      Area ID   LSA ID       LSA Type   Flags   Metric        Link Count
+=========== ========= ============ ========== ======= ============= ============
+ ComboEast   0.0.0.0   172.16.4.3   Router     ABR     unavailable   1
+
+Completed in 0.38 seconds
+```
+```
+admin@combo-east.ComboEast# show ospf database lsa lsa-type router origin 172.16.4.3 detail
+Fri 2020-04-17 19:25:12 UTC
+
+====================================================
+ Router: ComboEast
+====================================================
+  Router ID:                172.16.4.2
+  Area:
+    Area ID:                0.0.0.0
+    LSA:
+      LSA ID:               172.16.4.3
+      Advertising Router:   172.16.4.3
+      LSA Type:             Router
+      Age:                  144
+      Sequence Number:      0x80000006
+      Checksum:             0x0000c86e
+      Length:               36 bytes
+      Translated:           false
+      Options:
+        - E
+      Flags:
+        - ABR
+      Metric:               unavailable
+      Link Count:           1
+      Link:
+        Link Type:          Transit
+        Link ID Type:       DesignatedRouterAddress
+        Link ID:            172.16.3.3
+        Data Type:          RouterInterfaceAddress
+        Data:               172.16.3.3
+        Metric:             10
+
+Completed in 0.37 seconds
+```
+
+
+### show ospf interfaces
+
+#### Usage
+```
+show ospf interfaces [network-interface <name>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+- **force**                Skip confirmation prompt
+- **network-interface**    the network interface to fetch OSPF information for
+- **router**               the router to request OSPF information from
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+#### Description
+Show information about the OSPF interfaces
+
+#### Example
+```
+admin@combo-east.ComboEast# show ospf interfaces
+Fri 2020-04-17 19:29:52 UTC
+
+============= ================== =========== ======== ============ =========== ========= ===========
+ Router Name   Device Interface   Network     Status   IP Address   OSPF Type   Area ID   Area Type
+                                  Interface
+============= ================== =========== ======== ============ =========== ========= ===========
+ ComboEast     10                 intf10      up       172.16.1.2   Peer        0.0.0.1   normal
+                                                       /24
+ ComboEast     11                 intf11      up       172.16.3.2   Peer        0.0.0.0   normal
+                                                       /24
+
+Completed in 0.37 seconds
+```
+Specifying the argument _detail_ provides additional information
+```
+admin@combo-east.ComboEast# show ospf interfaces detail
+Fri 2020-04-17 19:30:06 UTC
+
+===============================================
+ Router: ComboEast
+===============================================
+  Interface:
+    Device Interface:            10
+    Network Interface:           intf10
+    Interface Index:             3
+    Status:                      up
+    MTU Size:                    1500 bytes
+    Bandwidth:                   10 Mbps
+    OSPF Enabled:                true
+    OSPF Running:                false
+    Flags:
+      - UP
+      - BROADCAST
+      - RUNNING
+      - MULTICAST
+    Address:
+      IP Address:                172.16.1.2/24
+      Broadcast IP Address:      unavailable
+      Unnumbered Interface:      false
+      V-Link Peer:               unavailable
+      MTU Mismatch Detection:    false
+      Router ID:                 172.16.4.2
+      OSPF Type:                 Peer
+      OSPF State:                DR
+      Area ID:                   0.0.0.1
+      Area Type:                 normal
+      Network Type:              BROADCAST
+      Cost:                      10
+      Transmit Delay:            1.0 s
+      Priority:                  1
+      BDR ID:                    unavailable
+      BDR Address:               unavailable
+      LSA Sequence:              0x00000000
+      Multicast Member (All):    true
+      Multicast Member (DR):     true
+      Timer Hello:               0.1 s
+      Timer Dead:                0.025 s
+      Timer Wait:                0.025 s
+      Timer Retransmit:          0.2 s
+      Timer Hello Due:           6.981 s
+      Timer Passive:             false
+      Neighbor Count:            0
+      Adjacent Neighbor Count:   0
+  Interface:
+    Device Interface:            11
+    Network Interface:           intf11
+    Interface Index:             4
+    Status:                      up
+    MTU Size:                    1500 bytes
+    Bandwidth:                   10 Mbps
+    OSPF Enabled:                true
+    OSPF Running:                false
+    Flags:
+      - UP
+      - BROADCAST
+      - RUNNING
+      - MULTICAST
+    Address:
+      IP Address:                172.16.3.2/24
+      Broadcast IP Address:      unavailable
+      Unnumbered Interface:      false
+      V-Link Peer:               unavailable
+      MTU Mismatch Detection:    false
+      Router ID:                 172.16.4.2
+      OSPF Type:                 Peer
+      OSPF State:                Backup
+      Area ID:                   0.0.0.0
+      Area Type:                 normal
+      Network Type:              BROADCAST
+      Cost:                      10
+      Transmit Delay:            1.0 s
+      Priority:                  1
+      BDR ID:                    172.16.4.2
+      BDR Address:               172.16.3.2
+      LSA Sequence:              0x00000000
+      Multicast Member (All):    true
+      Multicast Member (DR):     true
+      Timer Hello:               0.1 s
+      Timer Dead:                0.025 s
+      Timer Wait:                0.025 s
+      Timer Retransmit:          0.2 s
+      Timer Hello Due:           1.85 s
+      Timer Passive:             false
+      Neighbor Count:            1
+      Adjacent Neighbor Count:   1
+
+Completed in 0.32 seconds
+```
+
+
+### show ospf neighbors
+
+#### Usage
+```
+show ospf neighbors [network-interface <name>] [neighbor <ip>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+- **force**                Skip confirmation prompt
+- **neighbor**             the neighbor IP address for which to fetch OSPF information
+- **network-interface**    the network interface to fetch OSPF neighbor information for
+- **router**               the router to request OSPF information from
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+#### Description
+Show information about OSPF neighbors
+
+#### Example
+```
+admin@combo-east.ComboEast# show ospf neighbors
+Fri 2020-04-17 19:30:22 UTC
+
+============= ==================== ========== ======= ==================== =================== ===========
+ Router Name   Neighbor Router ID   Priority   State   Dead Timer Due (s)   Interface Address   Interface
+                                                                                                State
+============= ==================== ========== ======= ==================== =================== ===========
+ ComboEast     172.16.4.3           1          Full    31.302               172.16.3.2          DR
+
+Completed in 0.32 seconds
+```
+Specifying the argument _detail_ provides additional information
+```
+admin@combo-east.ComboEast# show ospf neighbors detail
+Fri 2020-04-17 19:30:36 UTC
+
+==============================================================
+ Router: ComboEast
+==============================================================
+  Neighbor:
+    Neighbor Router ID:                           172.16.4.3
+    Priority:                                     1
+    State:                                        Full
+    Dead Timer Due:                               37.832 s
+    Interface Address:                            172.16.3.2
+    Device Interface:                             11
+    Network Interface:                            intf11
+    Interface State:                              DR
+    Area ID:                                      0.0.0.0
+    Area Type:                                    normal
+    Database Summary List Count:                  0
+    LSA Request List Count:                       0
+    LSA Retransmission List Count:                0
+    State Change Count:                           6 changes
+    Last Progressive Change:                      35m 52s ago
+    Last Regressive Change:                       never
+    Last Regressive Change Reason:                NoEvent
+    Designated Router ID:                         172.16.3.3
+    Backup Designated Router ID:                  172.16.3.2
+    Options:
+      - E
+    Thread Inactivity Timer:                      true
+    Thread Database Description Retransmission:   false
+    Thread LSA Request Retransmission:            true
+    Thread LSA Update Retransmission:             true
+
+Completed in 0.30 seconds
+```
+
+
+### show ospf routes
+
+#### Usage
+```
+show ospf neighbors [network-interface <name>] [neighbor <ip>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+- **force**                Skip confirmation prompt
+- **neighbor**             the neighbor IP address for which to fetch OSPF information
+- **network-interface**    the network interface to fetch OSPF neighbor information for
+- **router**               the router to request OSPF information from
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+#### Description
+Show information about OSPF neighbors
+
+#### Example
+```
+admin@combo-east.ComboEast# show ospf routes
+Fri 2020-04-17 19:33:20 UTC
+
+============= =============== ============ ========= ====== ========= =======
+ Router Name   Route Prefix    Route Type   Area ID   Cost   Discard   Paths
+============= =============== ============ ========= ====== ========= =======
+ ComboEast     172.16.1.0/24   Network      0.0.0.1   10               1
+ ComboEast     172.16.2.0/24   Network      0.0.0.0   20               1
+ ComboEast     172.16.3.0/24   Network      0.0.0.0   10               1
+
+Completed in 0.40 seconds
+```
+Specifying the argument _detail_ provides additional information
+```
+admin@combo-east.ComboEast# show ospf routes detail
+Fri 2020-04-17 19:33:29 UTC
+
+===========================================
+ Router: ComboEast
+===========================================
+  Network Route:
+    Route Prefix:            172.16.1.0/24
+    Area ID:                 0.0.0.1
+    Cost:                    10
+    Inter-Area:              false
+    Intra-Area:              true
+    Path:
+      Device Interface:      10
+      Network Interface:     intf10
+  Network Route:
+    Route Prefix:            172.16.2.0/24
+    Area ID:                 0.0.0.0
+    Cost:                    20
+    Inter-Area:              true
+    Intra-Area:              false
+    Path:
+      Via:                   172.16.3.3
+      Device Interface:      11
+      Network Interface:     intf11
+  Network Route:
+    Route Prefix:            172.16.3.0/24
+    Area ID:                 0.0.0.0
+    Cost:                    10
+    Inter-Area:              false
+    Intra-Area:              true
+    Path:
+      Device Interface:      11
+      Network Interface:     intf11
+  No External Routes
+  Router:
+    Router ID:               172.16.4.3
+    Route:
+      Area ID:               0.0.0.0
+      Cost:                  10
+      Inter-Area:            false
+      ABR:                   true
+      ASBR:                  false
+      Path:
+        Via:                 172.16.3.3
+        Device Interface:    11
+        Network Interface:   intf11
+
+Completed in 0.35 seconds
+```
+
+## show peers
+
+#### Usage
+```
+show peers [name <name>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **name**      peer to display (if omitted, all will be displayed)
+- **router**    router on which to display peers
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+##### Subcommands
+- **hostnames**    Display resolved hostnames of peers
+
+#### Description
 The _show peers_ command displays properties of each of the "neighboring" 128T routers that the router in question has a peering association with.
 
 This command shows information on peering associations between 128T routers, not peering associations with BGP peers. For information on BGP peering statistics, refer to "show bgp" in this document.
@@ -2560,44 +3506,93 @@ This command shows information on peering associations between 128T routers, not
 For each peer it shows which interface the peer is reachable via, the destination IP address for which the peer is reached, the VLAN to use to reach it, and whether the peer is currently "up", "down", or "initializing".
 
 ```
-admin@labsystem1.fiedler# show peers
-Mon 2017-02-27 15:50:01 EST
+admin@tp-cond-primary.tp-cond# show peers router all
+Fri 2020-04-17 19:07:42 UTC
 
-=============== ===================== ===== ============== ====== ========
- Peer            Node                   If   Destination    Vlan   Status
-=============== ===================== ===== ============== ====== ========
- peerA           labsystem1             11   REDACTED          0   up
- peerA           labsystem2            211   REDACTED          0   down
- peerB           labsystem1             10   REDACTED       1002   init
- peerB           labsystem2            210   REDACTED       1002   init
- peerC           labsystem1             10   REDACTED       1002   up
- peerC           labsystem2            210   REDACTED       1002   down
+============================== ===================== ==================== ================ ========= ============= =============
+ Peer                           Node                  Network Interface    Destination      Status    Hostname      Path MTU
+============================== ===================== ==================== ================ ========= ============= =============
+ burl-corp -> brawny            burl-corp-secondary   lighttower           1.2.3.4          up        unavailable   unavailable
+ burl-corp -> seattle-site      burl-corp-secondary   lighttower           1.2.3.4          up        unavailable   unavailable
+ burl-corp -> tp-colo           burl-corp-primary     comcast              1.2.3.4          up        unavailable   unavailable
+ burl-corp -> tp-colo           burl-corp-primary     comcast              1.2.3.4          up        unavailable   unavailable
+ burl-corp -> tp-colo           burl-corp-secondary   lighttower           1.2.3.4          up        unavailable   unavailable
+ burl-corp -> tp-colo           burl-corp-secondary   lighttower           1.2.3.4          up        unavailable   unavailable
+ burl-corp -> tpn_router        burl-corp-secondary   lighttower           1.2.3.4          up        unavailable   unavailable
+ tp-colo -> imjustarouter       tp-colo-primary       public-lab-dmz-pri   1.2.3.4          up        unavailable   unavailable
+ tp-colo -> imjustarouter       tp-colo-secondary     public-lab-dmz-sec   1.2.3.4          standby   unavailable   unavailable
+ tp-colo -> mobile128T          tp-colo-primary       public-lab-dmz-pri   1.2.3.4          up        unavailable   unavailable
+ tp-colo -> mobile128T          tp-colo-secondary     public-lab-dmz-sec   1.2.3.4          standby   unavailable   unavailable
+ tp-colo -> brawny              tp-colo-primary       public-lab-dmz-pri   1.2.3.4          up        unavailable   unavailable
+ tp-colo -> brawny              tp-colo-secondary     public-lab-dmz-sec   1.2.3.4          standby   unavailable   unavailable
+ tp-colo -> burl-corp           tp-colo-primary       public-blended       1.2.3.4          up        unavailable   unavailable
+ tp-colo -> burl-corp           tp-colo-primary       public-blended       1.2.3.4          up        unavailable   unavailable
+ tp-colo -> burl-corp           tp-colo-secondary     public-comcast       1.2.3.4          up        unavailable   unavailable
+ tp-colo -> burl-corp           tp-colo-secondary     public-comcast       1.2.3.4          up        unavailable   unavailable
+ tp-colo -> tp-lab              tp-colo-primary       colo-lab-pri         1.2.3.4          up        unavailable   unavailable
+ tp-colo -> tp-lab              tp-colo-secondary     colo-lab-sec         1.2.3.4          standby   unavailable   unavailable
+ tp-lab -> tp-colo              tp-lab-primary        lab-colo-pri         1.2.3.4          standby   unavailable   unavailable
+ tp-lab -> tp-colo              tp-lab-secondary      lab-colo-sec         1.2.3.4          up        unavailable   unavailable
 
-Completed in 0.17 seconds
+Completed in 1.25 seconds
 ```
 
 #### Privileges Required
-
 Available to _admin_ and _user_ accounts.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.0.0   | This feature was introduced |
 
-## show platform
 
-#### Syntax
+### show peers hostnames
 
+#### Usage
 ```
-show platform [node <node-name>]
+show peers hostnames [force] [router <router>]
 ```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    router on which to display peer hostnames (default: all)
 
 #### Description
+Display resolved hostnames of peers
 
+```
+admin@tp-cond-primary.tp-cond# show peers hostnames router tp-lab
+Fri 2020-04-17 19:16:15 UTC
+
+=================== ======== ======================== ============
+ Peer                Router   Hostname                 IP Address
+=================== ======== ======================== ============
+ tp-lab -> tp-colo   tp-lab   nodea.router1.128t.com   1.2.3.4
+ tp-lab -> tp-colo   tp-lab   nodea.router1.128t.com   1.2.3.4
+
+Completed in 0.24 seconds
+```
+
+
+## show platform
+
+#### Usage
+```
+show platform [force] [router <router>] [node <node>] [<category>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **node**      node for which platform info will be displayed
+- **router**    router for which platform info will be displayed
+
+##### Positional Arguments
+- **category**    all | cpu | device-interfaces | disk | memory | operating-system | vendor (default: all)
+
+#### Description
 The _show platform_ command displays properties of the underlying platform upon which the 128T software is running. This can assist in finding PCI addresses and MAC addresses for the hardware in the system, as well as disk information, OS information, etc.
 
+#### Example
 ```
 admin@labsystem1.fiedler# show platform
 Mon 2017-02-27 16:00:20 EST
@@ -2622,29 +3617,41 @@ Mon 2017-02-27 16:00:20 EST
 ```
 
 #### Privileges Required
-
 Available to _admin_ and _user_ accounts.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.0.0   | This feature was introduced |
 
+
 ## show rib
 
-#### Syntax
+#### Usage
+```
+show rib [force] [router <router>] [<route>]
+```
 
-```
-show rib [<route>] | [summary]
-```
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    The name of the router for which to display RIB routes
+
+##### Positional Arguments
+- **route**    route ip-prefix [type: IP prefix]
+
+##### Subcommands
+- **bgp**          Show the BGP RIB routes from the routing manager
+- **connected**    Show the connected RIB routes from the routing manager
+- **ospf**         Show the OSPF RIB routes from the routing manager
+- **static**       Show the static RIB routes from the routing manager
+- **summary**      Show the current RIB summary from the routing manager
 
 #### Description
-
 The _show rib_ subcommand displays the contents of the 128T router&#39;s Routing Information Base (RIB). This is the complete list of connected, direct, and learned routes on the system. (Note that the output may be quite verbose.)
 
 When issuing the command without any arguments, the entire RIB is displayed.
 
+#### Example
 ```
 admin@labsystem1.fiedler# show rib
 Codes: K - kernel route, C - connected, S - static, R - RIP,
@@ -2659,7 +3666,6 @@ C>* 172.16.3.0/24 is directly connected, dpdk3
 ```
 
 When a specific route is given as an argument to the command, more detail is shown for that route:
-
 ```
 admin@labsystem1.fiedler# show rib 10.0.0.0/16 summary
 Routing entry for 10.0.0.0/16
@@ -2669,40 +3675,206 @@ Routing entry for 10.0.0.0/16
 admin@labsystem1.fiedler#
 ```
 
-The _show rib summary_ command outputs a concise table with statistics on the RIB:
 
+### show rib bgp
+
+#### Usage
 ```
-admin@labsystem1.fiedler# show rib summary
-Route Source         Routes               FIB  (vrf 0)
-connected            5                    5
-------
-Totals               5                    5
-
-admin@labsystem1.fiedler#
+show rib bgp [force] [router <router>]
 ```
 
-#### Privileges Required
-
-Available to _admin_ and _user_.
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 1.0.0   | This feature was introduced |
-
-## show security
-
-#### Syntax
-
-```
-show security key-status
-```
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    The name of the router for which to display the RIB summary
 
 #### Description
+The _show rib bgp_ subcommand displays the contents of the 128T router&#39;s Routing Information Base (RIB) filtered to show only those learned from BGP
 
+#### Example
+```
+admin@labsystem1.fiedler# show rib bgp
+Fri 2020-04-17 17:23:28 UTC
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       F - PBR,
+       > - selected route, * - FIB route
+
+B>  0.0.0.0/0 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                    via 172.2.34.23, g684 onlink, 2d10h30m
+B>  85.12.94.23/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                          via 172.2.34.23, g684 onlink, 2d10h30m
+B>  85.12.94.24/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                          via 172.2.34.23, g684 onlink, 2d10h30m
+B>  85.12.94.25/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                          via 172.2.34.23, g684 onlink, 2d10h30m
+B>  85.12.94.26/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                          via 172.2.34.23, g684 onlink, 2d10h30m
+B>  85.12.94.27/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                          via 172.2.34.23, g684 onlink, 2d10h30m
+B>  85.12.94.28/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                          via 172.2.34.23, g684 onlink, 2d10h30m
+B>  85.12.94.202/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                           via 172.2.34.23, g684 onlink, 2d10h30m
+B>  64.112.104.111/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                            via 172.2.34.23, g684 onlink, 2d10h30m
+B>  64.112.104.112/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                            via 172.2.34.23, g684 onlink, 2d10h30m
+B>  64.112.104.113/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                            via 172.2.34.23, g684 onlink, 2d10h30m
+B>  64.112.104.114/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
+  *                            via 172.2.34.23, g684 onlink, 2d10h30m
+...
+```
+
+### show rib connected
+
+#### Usage
+```
+show rib connected [force] [router <router>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    The name of the router for which to display the RIB summary
+
+#### Description
+The _show rib connected_ subcommand displays the contents of the 128T router&#39;s Routing Information Base (RIB) filtered to show only the connected routes
+
+#### Example
+```
+admin@gouda.novigrad# show rib connected
+Fri 2020-04-17 18:35:34 UTC
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       F - PBR,
+       > - selected route, * - FIB route
+
+C>* 96.230.191.0/24 is directly connected, g1, 6d05h38m
+C>* 169.254.127.126/31 is directly connected, g4294967294, 6d05h38m
+C>* 169.254.128.132/32 is directly connected, g5, 6d05h38m
+C>* 172.16.0.0/24 is directly connected, g4, 6d05h38m
+C>* 192.168.0.0/24 is directly connected, g2, 6d05h38m
+
+
+Completed in 0.22 seconds
+```
+
+
+### show rib ospf
+
+#### Usage
+```
+show rib ospf [force] [router <router>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    The name of the router for which to display the RIB summary
+
+#### Description
+The _show rib ospf_ subcommand displays the contents of the 128T router&#39;s Routing Information Base (RIB) filtered to show only those learned from OSPF
+
+#### Example
+```
+@combo-east.ComboEast# show rib ospf
+Fri 2020-04-17 19:10:07 UTC
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       F - PBR,
+       > - selected route, * - FIB route
+
+O   172.16.1.0/24 [110/10] is directly connected, g1, 00:03:46
+O>* 172.16.2.0/24 [110/20] via 172.16.3.3, g2, 00:15:15
+O   172.16.3.0/24 [110/10] is directly connected, g2, 00:15:25
+```
+
+
+### show rib static
+
+#### Usage
+```
+show rib static [force] [router <router>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    The name of the router for which to display the RIB summary
+
+#### Description
+The _show rib static_ subcommand displays the contents of the 128T router&#39;s Routing Information Base (RIB) filtered to show only static routes
+
+#### Example
+```
+admin@gouda.novigrad# show rib static
+Fri 2020-04-17 18:54:38 UTC
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       F - PBR,
+       > - selected route, * - FIB route
+
+S>* 1.1.1.1/32 [10/0] is directly connected, g1, 00:00:07
+S>* 10.10.10.10/32 [5/0] unreachable (blackhole), 00:01:24
+
+
+Completed in 0.31 seconds
+```
+
+
+### show rib summary
+
+#### Usage
+```
+show rib sumary [force] [router <router>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    The name of the router for which to display the RIB summary
+
+#### Description
+The _show rib summary_ command outputs a concise table with statistics on the RIB.
+
+#### Example
+```
+admin@gouda.novigrad# show rib summary
+Fri 2020-04-17 18:40:02 UTC
+IP Address Family
+Route Source         Routes               FIB  (vrf Default-IP-Routing-Table)
+kernel               9                    9
+connected            5                    5
+------
+Totals               14                   14
+
+IPv6 Address Family
+Route Source         Routes               FIB  (vrf Default-IP-Routing-Table)
+------
+Totals               0                    0
+
+
+Completed in 0.29 seconds
+```
+
+
+## show security key-status
+
+#### Usage
+```
+show security key-status [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **node**      node for which to display security key status
+- **router**    router for which to display security key status
+
+#### Description
 The _show security key-status_ subcommand displays information and statistics related to the 128T&#39;s security rekeying feature. It will indicate the current key index (which will be common among all routers managed by a 128T conductor) and relevant statistics on when the last rekey event occurred, when the next will occur, etc.
 
+#### Example
 ```
 admin@cnd1.conductor# show security key-status
 Wed 2018-02-07 12:46:20 EST
@@ -2723,26 +3895,35 @@ Completed in 0.17 seconds
 ```
 
 #### Privileges Required
-
 Available to _admin_ and _user_.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
 
+
 ## show sessions
 
-#### Syntax
+#### Usage
+```
+show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [router <router>] [node <node>]
+```
 
-```
-show sessions { [node <node-name>] [<rows>] | top bandwidth }
-```
+##### Keyword Arguments
+- **contains-service-name**     The partial substring match to show sessions for
+- **force**                     Skip confirmation prompt
+- **hierarchy-service-name**    The hierarchy root to show sessions for
+- **node**                      The node from which to retrieve session flows
+- **router**                    The router from which to retrieve session flows
+- **rows**                      The number of session flows to display at once [type: int or 'all'] (default: 50)
+- **service-name**              The exact service name to show sessions for
+
+##### Subcommands
+- **top**    &lt;bandwidth&gt;
 
 #### Description
-
-The _show sessions_ subcommand displays active sessions passing through the 128T router (or the node specified by the optional _node-name_ argument. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session.
+The _show sessions_ command displays active sessions passing through the 128T router (or the node specified by the optional _node-name_ argument. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session.
 
 The NAT IP and Port fields will be populated whenever a session is subject to source NAT (see _source-nat_ later in this reference guide for more information). It also shows the timeout value that will cause the session to expire if it remains idle for that number of seconds.
 
@@ -2752,47 +3933,78 @@ Various services and tenants may display with surrounding braces to indicate tha
 The contents of the table will vary based upon the software version in use. This applies when, for example, a conductor running a new software version requests session table data from routers running older software versions.
 :::
 
+#### Example
 ```
-admin@labsystem1.fiedler# show sessions
-Fri 2017-07-21 13:06:06 EDT
+admin@gouda.novigrad# show sessions
+Fri 2020-04-17 16:55:34 UTC
 
-Node: labsystem1
-================================ ========== ========== ========== ====== =======
- Session Id                       Service    Tenant     Dev Port   VLAN   Proto
-================================ ========== ========== ========== ====== =======
- 198b5f05-c62f-47a5-9d8d-d474cc   <Control   <unknown        255      0   TCP
- 198b5f05-c62f-47a5-9d8d-d474cc   <Control   <unknown         10      0   TCP
+Node: gouda
 
-Completed in 0.11 seconds
+====================================== ===== ============= =========== ========== ====== ======= ================= ========== ================= =========== ================= ========== =================== ========= =================
+ Session Id                             Dir   Service       Tenant      Dev Name   VLAN   Proto   Src IP            Src Port   Dest IP           Dest Port   NAT IP            NAT Port   Payload Encrypted   Timeout   Uptime
+====================================== ===== ============= =========== ========== ====== ======= ================= ========== ================= =========== ================= ========== =================== ========= =================
+ 01187fb8-765a-45e5-ae90-37d77f15e292   fwd   Internet      lanSubnet   lan           0   udp     192.168.0.28         44674   35.166.173.18          9930   96.230.191.130       19569   false                   154   0 days  0:00:28
+ 01187fb8-765a-45e5-ae90-37d77f15e292   rev   Internet      lanSubnet   wan           0   udp     35.166.173.18         9930   96.230.191.130        19569   0.0.0.0                  0   false                   154   0 days  0:00:28
+ 0859a4ae-bcff-4aa6-b812-79a5236a6c13   fwd   Internet      lanSubnet   lan           0   tcp     192.168.0.41         60843   17.249.171.246          443   96.230.191.130       51941   false                     2   0 days  0:00:10
+ 0859a4ae-bcff-4aa6-b812-79a5236a6c13   rev   Internet      lanSubnet   wan           0   tcp     17.249.171.246         443   96.230.191.130        51941   0.0.0.0                  0   false                     2   0 days  0:00:10
+ 146ebae5-822b-49e3-a0bf-b5329181b9d5   fwd   Internet      lanSubnet   lan           0   tcp     192.168.0.41         60838   17.248.185.112          443   96.230.191.130       53054   false                  1879   0 days  0:00:24
+ 146ebae5-822b-49e3-a0bf-b5329181b9d5   rev   Internet      lanSubnet   wan           0   tcp     17.248.185.112         443   96.230.191.130        53054   0.0.0.0                  0   false                  1879   0 days  0:00:24
+ 1ee1761c-a193-413c-889f-41fd61fe5242   fwd   Internet      lanSubnet   lan           0   udp     192.168.0.72         55723   208.67.222.222          443   96.230.191.130       22918   false                  1891   0 days  0:00:11
+ 1ee1761c-a193-413c-889f-41fd61fe5242   rev   Internet      lanSubnet   wan           0   udp     208.67.222.222         443   96.230.191.130        22918   0.0.0.0                  0   false                  1891   0 days  0:00:11
 ```
-
-The _top bandwidth_ arguments will list, in order, the top ten highest consumers of bandwidth among all active sessions. This is useful to understand the current utilization on your 128T network resources.
-
-```
-admin@labsystem1.fiedler# show sessions top bandwidth
-Fri 2017-07-21 13:13:42 EDT
-
-Node: labsystem1
-=========== ===================== =================== ========== ========================= =================
- Bandwidth   Source                Destination         Protocol   Service                   Tenant
-=========== ===================== =================== ========== ========================= =================
-​       0.0   192.168.254.2:59000   192.168.254.1:179   TCP        <ControlMessageService>   <unknownTenant>
-```
-
 #### Privileges Required
-
 Available to _admin_ and _user_.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 3.0.0   | Added _node_ keyword to enforce PCLI consistency |
 | 3.1.0   | Was _show flows_ - Substantially reformatted output |
 
-## show stats
 
+### show sessions top bandwidth
+
+#### Usage
+```
+show sessions top bandwidth [force] [router <router>] [<verbosity>]
+```
+##### Keyword Arguments
+- **force**     Skip confirmation prompt
+- **router**    router for which to display top sessions by bandwidth
+
+##### Positional Arguments
+- **verbosity**    detail | summary (default: summary)
+
+#### Description
+The _top bandwidth_ subcommand will list, in order, the top ten highest consumers of bandwidth among all active sessions. This is useful to understand the current utilization on your 128T network resources.
+
+#### Example
+```
+admin@gouda.novigrad# show sessions top bandwidth
+Fri 2020-04-17 16:59:01 UTC
+
+Node: gouda
+
+============= ==================== ==================== ========== ========== ===================
+   Bandwidth   Source               Destination          Protocol   Service    Tenant
+============= ==================== ==================== ========== ========== ===================
+ 695.50 kbps   192.168.0.32:59066   3.21.226.121:8801    udp        Internet   MikeMBP.lanSubnet
+ 343.72 kbps   192.168.0.72:61321   52.207.7.190:443     tcp        Internet   lanSubnet
+ 151.55 kbps   192.168.0.32:51109   3.21.226.121:8801    udp        Internet   MikeMBP.lanSubnet
+ 130.15 kbps   192.168.0.72:61320   54.174.137.247:443   tcp        Internet   lanSubnet
+   8.42 kbps   192.168.0.32:51417   3.21.226.121:8801    udp        Internet   MikeMBP.lanSubnet
+   7.74 kbps   192.168.0.72:51018   208.67.222.222:443   udp        Internet   lanSubnet
+   6.72 kbps   192.168.0.72:51015   208.67.222.222:443   udp        Internet   lanSubnet
+   6.49 kbps   192.168.0.32:55306   35.174.127.31:443    tcp        Internet   MikeMBP.lanSubnet
+   5.94 kbps   192.168.0.32:56504   3.21.226.121:443     tcp        Internet   MikeMBP.lanSubnet
+   3.27 kbps   192.168.0.68:64345   17.167.192.225:443   tcp        Internet   lanSubnet
+
+Completed in 0.10 seconds
+```
+
+## show stats
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -2925,7 +4137,7 @@ Available to _admin_ and _user_.
 | 1.1.0   | Made significant improvements to the ability to filter the data, summarize the data. Improved the output format for all stats tables. |
 
 ## show stats aggregate-session
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -2994,7 +4206,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | This feature was introduced |
 
 ## show stats arp
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3063,7 +4275,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats arp encapsulation
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3121,7 +4333,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats arp entries
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3157,7 +4369,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats arp queued
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3197,7 +4409,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats arp received
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3278,7 +4490,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats arp sent
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3316,7 +4528,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats bfd
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3339,7 +4551,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _by-peer-path_ statistics, and verbosity modifier |
 
 ## show stats bfd by-peer-path
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3383,7 +4595,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | This feature was introduced |
 
 ## show stats bfd neighbor
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3438,7 +4650,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | added statistics to count failover events (via _num-failover-events_) |
 
 ## show stats bfd received invalid
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3476,7 +4688,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats bfd received processed
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3512,7 +4724,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats bfd received total
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3548,7 +4760,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats bfd received valid
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 ```
 show stats bfd received valid packets [node <node-name>] [<verbosity>]
@@ -3583,7 +4795,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _node_ keyword and _verbosity_ specifiers |
 
 ## show stats cpu
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3623,7 +4835,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | This feature was introduced |
 
 ## show stats database
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3659,7 +4871,7 @@ Available to _admin_ and _user_.
 | 3.1.0   | This feature was introduced |
 
 ## show stats device-interface
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3699,7 +4911,7 @@ Available to _admin_ and _user_.
 | 1.1.0   | This feature was introduced |
 
 ## show stats disk
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3759,7 +4971,7 @@ Available to _admin_ and _user_. Updated in 3.0 to add _node_ keyword and _verbo
 | 3.0.0   | Added _show stats disk component_ |
 
 ## show stats dpi
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3781,7 +4993,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | This feature was introduced |
 
 ## show stats dynamic-peer-update
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3831,7 +5043,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | This feature was introduced |
 
 ## show stats external-protocols
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3889,7 +5101,7 @@ Available to _admin_ and _user_.
 | 1.1.0   | This feature was introduced |
 
 ## show stats external-protocols agent
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3943,7 +5155,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats external-protocols manager
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -3985,7 +5197,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats highway
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4029,7 +5241,7 @@ Available to _admin_ and _user_.
 | 1.0.0   | This feature was introduced |
 
 ## show stats highway action-event
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4075,7 +5287,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | This feature was introduced |
 
 ## show stats highway actions
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4114,7 +5326,7 @@ Available to _admin_ and _user_.
 | 1.0.0   | This feature was introduced |
 
 ## show stats highway firewall-detector
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4157,7 +5369,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats icmp
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4197,7 +5409,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats interface
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4247,7 +5459,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | Added _missed_ to _show stats interface received_ |
 
 ## show stats interface received
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4291,7 +5503,7 @@ Available to _admin_ and _user_.
 | 1.1.0   | This feature was introduced |
 
 ## show stats interface sent
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4333,7 +5545,7 @@ Available to _admin_ and _user_.
 | 1.1.0   | This feature was introduced |
 
 ## show stats ipfix
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4376,7 +5588,7 @@ Available to _admin_ and _user_.
 | 3.1.0   | This feature was introduced |
 
 ## show stats memory
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 ```
 show stats memory [{ capacity | used }] [node <node-name>] [<verbosity>]
@@ -4414,7 +5626,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added _verbosity_ argument  |
 
 ## show stats metrics
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4472,7 +5684,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | _pending-aggregations_ renamed to _collections-pending_; _collections-skipped_ added |
 
 ## show stats packet-capture
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4529,7 +5741,7 @@ Available to _admin_ and _user_.
 | 1.0.0   | This feature was introduced |
 
 ## show stats packet-processing
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4551,7 +5763,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced as a top-level category for many statistics that had been maintained elsewhere in earlier releases |
 
 ## show stats packet-processing action
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4578,7 +5790,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Formally "show packet-processing-action" |
 
 ## show stats packet-processing action failure
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4659,7 +5871,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats packet-processing action success
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4743,7 +5955,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats packet-processing classifier
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4771,7 +5983,7 @@ Available to _admin_ and _user_.
 | 1.0.0   | This feature was introduced |
 
 ## show stats packet-processing classifier received
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4829,7 +6041,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | added several more categories of classified packets |
 
 ## show stats packet-processing classifier sent
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4878,7 +6090,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | added several more categories of classified packets |
 
 ## show stats packet-processing enqueue
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4931,7 +6143,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | Reorganized statistics and renamed several categories |
 
 ## show stats packet-processing fib-action
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -4979,7 +6191,7 @@ Available to _admin_ and _user_.
 | 2.1.0   | Renamed. Was _show stats packet-processing fib-action-summary_ |
 
 ## show stats packet-processing flow-action
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5027,7 +6239,7 @@ Available to _admin_ and _user_.
 | 2.1.0   | Renamed. Was _show stats packet-processing flow-action-summary_ |
 
 ## show stats packet-processing fragmentation
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5071,7 +6283,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. Was _show stats fragmentation_ |
 
 ## show stats packet-processing fragmentation received
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5121,7 +6333,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. Was _show stats fragmentation received_ |
 
 ## show stats packet-processing fragmentation sent
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5166,7 +6378,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | added _ipv4-fabric-fragments_, _ipv6-fabric-fragments_ |
 
 ## show stats packet-processing lookup
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5188,7 +6400,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats packet-processing lookup access-policy-table
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5239,7 +6451,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. was _show stats access-policy-table_ |
 
 ## show stats packet-processing lookup fib-table
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5282,7 +6494,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. was _show stats fib-table_ |
 
 ## show stats packet-processing lookup flow-table
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5325,7 +6537,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. was _show stats flow-table_ |
 
 ## show stats packet-processing lookup icmp-table
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5373,7 +6585,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats packet-processing lookup tenant-table
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5420,7 +6632,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. was _show stats source-lookup-table_ |
 
 ## show stats packet-processing received
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5442,7 +6654,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats packet-processing received control-block-alloc-failure
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5482,7 +6694,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. Was _show stats control-block-pool-exhausted_ |
 
 ## show stats packet-processing received control-success
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5522,7 +6734,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. Was _show stats control-packets-received_ |
 
 ## show stats packet-processing received injected-success
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5563,7 +6775,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | Renamed. Was _show stats packet-processing received egress-success_ |
 
 ## show stats packet-processing received interface-standby-drop
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5602,7 +6814,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats packet-processing received interface-success
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5641,7 +6853,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats packet-processing sent
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5690,7 +6902,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | Added _interface-retry_ statistics |
 
 ## show stats process
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5743,7 +6955,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | This feature was introduced |
 
 ## show stats redis-server-manager
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5784,7 +6996,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | This feature was introduced |
 
 ## show stats redundancy
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5810,7 +7022,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats redundancy database-connection
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5865,7 +7077,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats redundancy port-initialization
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5924,7 +7136,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats redundancy port-list-records
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -5982,7 +7194,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats redundancy session-delete
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6019,7 +7231,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats redundancy session-errors
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6077,7 +7289,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats redundancy session-reads
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6130,7 +7342,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats redundancy session-reconstruction
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6177,7 +7389,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats redundancy session-refresh
-
+<!-- Not updated to 4.3 -->
 ####Syntax
 
 ```
@@ -6215,7 +7427,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats redundancy session-writes
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6255,7 +7467,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats registered-services
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6292,7 +7504,7 @@ Available to _admin_ and _user_.
 | 1.0.0   | This feature was introduced |
 
 ## show stats routing
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6334,7 +7546,7 @@ Available to _admin_ and _user_.
 | 3.1.0   | _show stats routing pending-route-updates_ deprecated |
 
 ## show stats routing-agent
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6378,7 +7590,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats service-area
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6403,7 +7615,7 @@ Available to _admin_ and _user_.
 | 3.1.0   | Added statistics regarding DHCP |
 
 ## show stats service-area dhcp
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6459,7 +7671,7 @@ Available to _admin_ and _user_.
 | 3.1.0   | This feature was introduced |
 
 ## show stats service-area received
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6534,7 +7746,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | Added many statistics       |
 
 ## show stats service-area sent
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6581,7 +7793,7 @@ Available to _admin_ and _user_.
 | 1.0.0   | This feature was introduced |
 
 ## show stats service-area session-install-errors
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6633,7 +7845,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Added statistics for _service-paths-unavailable_ |
 
 ## show stats session
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6670,7 +7882,7 @@ Available to _admin_ and _user_.
 | 3.0.0   | Reorganized all subcommands |
 
 ## show stats source-nat
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6718,7 +7930,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats ssc
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6758,7 +7970,7 @@ Available to _admin_ and _user_.
 | 1.0.0   | This feature was introduced |
 
 ## show stats traffic-eng
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6804,7 +8016,7 @@ Available to _admin_ and _user_.
 | 3.1.0   | Added statistics related to dropped packets and queue depths (part of the enhancements in this software related to traffic engineering) |
 
 ## show stats waypoint
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6853,7 +8065,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | This feature was introduced |
 
 ## show stats worker-core
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6898,7 +8110,7 @@ Available to _admin_ and _user_.
 | 3.2.0   | Removed statistics regarding traffic engineering (these have been moved to the _show stats traffic-eng_ hierarchy) |
 
 ## show stats worker-core aes
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6938,7 +8150,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. Was _show stats controller aes_ |
 
 ## show stats worker-core control-messages-sent
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -6976,7 +8188,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. Was _show stats controller control-messages-sent_ |
 
 ## show stats worker-core packet-processing-utilization
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
@@ -7014,7 +8226,7 @@ Available to _admin_ and _user_.
 | 2.0.0   | Renamed. Was part of _show stats controller core-utilization_ |
 
 ## show stats worker-core process-loop-exception
-
+<!-- Not updated to 4.3 -->
 #### Syntax
 
 ```
