@@ -41,7 +41,7 @@ Another note to make while enumerating site types is whether or not the site wil
 
 ### Define Applications
 
-Networks exist to deliver applications and services. Make a list of the applications the customer needs to deliver to these sites in order to conduct their business. For a retail store deployment, common functions are point of sale, inventory management, and voice services. The customer likely has their own names for these applications and an attempt should be made to use their vocabulary. During the deployment, if a branch is having a problem with one particular application and calls to request assistance, the name of the application that the branch personnel would use should ideally be in this list.
+Networks exist to deliver applications and services. Make a list of the applications the customer needs to deliver to these sites in order to conduct their business. For a retail store deployment, common functions are point of sale, inventory management, and voice services. The customer likely has their own names for these applications and every attempt should be made to use their vocabulary. During the deployment, if a branch is having a problem with one particular application and calls to request assistance, the name of the application that the branch personnel is calling about should be readily identifiable.
 
 When identifying applications with the customer, be sure to also probe for low level services required to deliver these applications. Services such as DNS, NTP, LDAP, etc should be accounted for as the business applications likely will not function without these services.
 
