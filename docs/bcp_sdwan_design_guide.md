@@ -41,17 +41,19 @@ Another note to make while enumerating site types is whether or not the site wil
 
 ### Define Applications
 
-Networks exist to deliver applications and services. Make a list of the applications the customer needs to deliver to these sites in order to conduct their business. For a retail store deployment, common functions are point of sale, inventory management, and voice services. The customer likely has their own names for these applications and every attempt should be made to use their vocabulary. During the deployment, if a branch is having a problem with one particular application and calls to request assistance, the name of the application that the branch personnel is calling about should be readily identifiable.
+Networks exist to deliver applications and services. Make a list of the applications the customer needs to deliver to these sites in order to conduct their business. For a retail store deployment, common functions are point of sale, inventory management, and voice services. The customer likely has their own names for these applications and every attempt should be made to use their vocabulary – referencing these names in the 128T data model makes them appear in output of `show sessions`, `show load-balancer`, charts in the GUI, etc. During the deployment, if a branch is having a problem with one particular application and calls to request assistance, the name of the application that the branch personnel is calling about will be readily identifiable.
 
-When identifying applications with the customer, be sure to also probe for low level services required to deliver these applications. Services such as DNS, NTP, LDAP, etc should be accounted for as the business applications likely will not function without these services.
+When identifying applications with the customer, be sure to also probe for low level services required to deliver these applications. Services such as DNS, NTP, LDAP, etc should be accounted for as the business applications likely will not function without these basic network services.
 
 For each application, be sure to note which site categories will *initiate* the application traffic (source) and which site categories will *terminate* (destination) the traffic for the application traffic. If sessions for this application are initiated bi-directionally, this should be noted as well. Be sure to note the business purpose of the application, if this is not already clear. This will help in the future during troubleshooting
 
-Be sure to include general Internet access, as this is often overlooked but needs to be defined as a service in the 128T data model. Please note whether the customer intends to backhaul this Internet traffic to any data center for security filtering or if they desire to perform local breakout of Internet. If local breakout is required, does this traffic need to pass through any local security devices first? Or does the customer have a cloud-based security stack they wish to leverage? If multiple \"Internet\" services (such as one for a segmented unsecured wifi network) exist, please enumerate those as well.
+Be sure to include general internet access, as this is often overlooked but needs to be defined as a service in the 128T data model. Please note whether the customer intends to backhaul internet traffic to a data center for security filtering or if they desire local breakout of internet. If local breakout is required, does this traffic need to pass through any local security devices first? Or does the customer have a cloud-based security stack they wish to leverage? If multiple \"Internet\" services (such as one for a segmented unsecured wifi network) exist, please enumerate those as well.
 
 Any services that need to traverse between sites of a particular category should be noted. As should any services that need to traverse between networks within the same site.
 
 Lastly, does the 128T router need to provide any direct services to clients such as DHCP server or DHCP relay?
+
+*See also: [Application Discovery](bcp_application_discovery.md)*
 
 ### Define Client Segmentation
 
@@ -64,6 +66,8 @@ A typical SD-WAN deployment has two or more WAN connections per location. These 
 ## High Level Design
 
 ### Conductor Design
+
+*Main article: [Conductor Deployment Patterns](bcp_conductor_deployment.md)*
 
 The conductor functions as the centralized management node for the deployment. All routers connect to conductor in order to receive configuration updates and all network operations personnel connect to conductor to manage the network. The conductor must be reachable by all 128T nodes within the authority. There are several popular options for conductor deployment. Often, the MSP will host the conductor in their own data centers where they also provide services to the end customer. At other times, public cloud instances are used for a deployment. If the end customer requires direct access to the conductor, it may also be placed in one of the customer data centers, however details of accessing this conductor for the MSP partner will need to be worked out.
 
