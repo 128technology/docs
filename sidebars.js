@@ -86,6 +86,7 @@ module.exports = {
     "Best Practices": [
       "bcp_conductor_deployment",
       "bcp_lte_peering",
+      "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",
       "bcp_tenants",
     ],
