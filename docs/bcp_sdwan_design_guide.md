@@ -53,7 +53,7 @@ Any services that need to traverse between sites of a particular category should
 
 Lastly, does the 128T router need to provide any direct services to clients such as DHCP server or DHCP relay?
 
-*See also: [Application Discovery](bcp_application_discovery.md)*
+*See also: [Application Discovery](concepts_application_discovery.md)*
 
 ### Define Client Segmentation
 
@@ -89,7 +89,7 @@ There are many considerations with a pod design. In the drawing above, the hando
 
 ### Tenancy Design
 
-*Main article: [Tenancy Design](bcp_tenants.md)*
+*Main article: [Tenancy Design](bcp_tenants.mdx)*
 
 From the discussion with the end customer on segmentation, the definition of tenants should be relatively straight forward. The goal is to create a list of global profiles that can be used for access policies to services. Conceptually, tenancy should not be tied to a location and should be a global construct available whenever we want to classify traffic to a profile when it enters the 128T fabric across the authority (though at times due to business logic defined by the customer, a tenant may reflect a location). At any point in the authority, when traffic ingresses into a 128T router, tenancy is applied. Typically this is done by assigning the tenant to the network-interface according to the purpose of the VLAN for which the 128T is the router. For example \"POS\" for point of sale, \"voice\" for telephony devices, and \"core\" for traffic coming from the customer\'s core network (if no further breakdown of tenancy is required for this traffic). The 128T router can also restrict ingress traffic into a tenant further by creating a neighborhood on the network interface. Neighborhoods serve multiple purposes and an additional discussion of neighborhoods will occur in an ensuing section. In the global tenant configuration, this neighborhood may be referenced as a \"member\" and then CIDR block ranges for source addresses can be defined within this member. In this manner, a shared neighborhood name can be configured on a common LAN network for a site category and the tenant configuration can be updated with the specific list of CIDR ranges that will be used to identify which source IP addresses belong to a particular tenant for traffic coming in on this interface.
 
@@ -217,35 +217,23 @@ In addition to LAN, WAN, HA sync, and fabric interfaces, additional consideratio
 
 For each site category, please add an entry for each physical interface connection. For HA routers indicate if this connection is on node A or B (for fully redundant interfaces be sure to include an entry for both nodes). Please indicate if the connection is WAN, LAN, HA sync, or fabric. Please describe the device it will connect to (customer L2 switch A, Broadband modem, or other 128T node are some examples). Please indicate the connection type required (ethernet, T1, or wireless). Add any additional comments necessary. For site categories that may have a variable number of connections (some sites with
 
-+---------------+----------+------------------------------------+--------------------+-----------------+----------+
-| Site Category | Node     | LAN, WAN, HA sync, fabric, or mgmt | Connects To Device | Connection Type | Comments |
-|               |          |                                    |                    |                 |          |
-|               | (A or B) |                                    |                    |                 |          |
-+===============+==========+====================================+====================+=================+==========+
-|               |          |                                    |                    |                 |          |
-+---------------+----------+------------------------------------+--------------------+-----------------+----------+
+| Site Category | Node (A or B) | LAN, WAN, HA sync, fabric, or mgmt | Connects To Device | Connection Type | Comments |
+| ------------- | ------------- | ---------------------------------- | ------------------ | --------------- | -------- |
+|               |               |                                    |                    |                 |          |
 
 ### Hardware Selection
 
 After determining the required number of connections, we can combine this data with the required max throughput to make a selection of the hardware required for each node at each site. In addition to ensuring the hardware provides a sufficient number of Ethernet ports, please also give thought to additional port requirements, such as a free PCI slot for supported T1 interfaces or usable USB ports for external LTE cards. It is recommended to use the same hardware for both nodes in an HA pair, but is not absolutely required should requirements dictate a need. Your 128T Sales Team can assist you in making this selection based on your requirements and our latest throughput testing. Please indicate the chosen hardware vendor and model in the last column.
 
-+---------------+----------+-----------------------+--------------------+-------------------+-------------------+
-| Site Category | Node     | Req\'d Max throughput | Required Eth ports | Additional Req\'s | Selected Hardware |
-|               |          |                       |                    |                   |                   |
-|               | (A or B) |                       |                    |                   |                   |
-+===============+==========+=======================+====================+===================+===================+
-|               |          |                       |                    |                   |                   |
-+---------------+----------+-----------------------+--------------------+-------------------+-------------------+
+| Site Category | Node (A or B) | Req\'d Max throughput | Required Eth ports | Additional Req\'s | Selected Hardware |
+| ------------- | ------------- | --------------------- | ------------------ | ----------------- | ----------------- |
+|               |               |                       |                    |                   |                   |
 
 Once hardware has been selected, please fill in the table below to map the physical interfaces to the hardware. The physical interface name is up to the network operator. Commonly the device interface name may refer to the physical port on the hardware for ease of communication with field services personnel. Another common convention is to name the device interface based on what it connects to or the role it performs (DIA, MPLS, WAN, LAN, FIREWALL, etc). Please indicate the device interface type in terms of the 128T data model (ethernet, t1, lte, host, bridged, etc). If the device is ethernet, be sure to include the PCI address mapping for the correct hardware. Lastly, in case the device interface name does not map to the physical port on the hardware, please be sure to include a \"port identifier\" to have some indication of which physical port this corresponds to. Ideally this value is the label for the interface visible on the hardware.
 
-+---------------+----------+-----------------------+-----------------------+-------------+-----------------+
-| Site Category | Node     | Device Interface name | Device Interface Type | PCI address | Port identifier |
-|               |          |                       |                       |             |                 |
-|               | (A or B) |                       |                       |             |                 |
-+===============+==========+=======================+=======================+=============+=================+
-|               |          |                       |                       |             |                 |
-+---------------+----------+-----------------------+-----------------------+-------------+-----------------+
+| Site Category | Node (A or B) | Device Interface name | Device Interface Type | PCI address | Port identifier |
+| ------------- | ------------- | --------------------- | --------------------- | ----------- | --------------- |
+|               |               |                       |                       |             |                 |
 
 ### Logical Topology
 
