@@ -53,7 +53,7 @@ clear bgp [{in | out | soft}] [force] [router <router>] <neighbor>
 - **neighbor**    neighbor ip-address [type: IP address or 'all']
 
 #### Description
-Clear one or all BGP neighbors
+Clear routes associated with one or all BGP neighbors.
 
 #### See Also
 - [show bgp](#show-bgp) Show the current BGP routes from the routing manager
@@ -83,7 +83,7 @@ clear context router
 ```
 
 #### Description
-Clear both the router context and node context
+Clear both the router context and node context.
 
 #### See Also
 - [clear context node](#clear-context-node) Clear only the node context
@@ -99,7 +99,7 @@ clear context stats start-time
 ```
 
 #### Description
-Clears the start time for show stats commands
+Clears the start time for show stats commands.
 
 
 ## clear events admin
@@ -110,7 +110,7 @@ clear events admin
 ```
 
 #### Description
-Clears admin event records
+Clears admin event records.
 
 
 ## clear events alarm
@@ -121,7 +121,7 @@ clear events alarm
 ```
 
 #### Description
-Clears alarm event records
+Clears alarm event records.
 
 
 ## clear events all
@@ -132,7 +132,7 @@ clear events all
 ```
 
 #### Description
-Clears all event records
+Clears all event records.
 
 
 ## clear events system
@@ -143,7 +143,7 @@ clear events system
 ```
 
 #### Description
-Clears system event records
+Clears system event records.
 
 
 ## clear events traffic
@@ -165,7 +165,7 @@ clear history
 ```
 
 #### Description
-Clear the PCLI's command history
+Clear the PCLI's command history.
 
 #### See Also
 - [show history](#show-history)    Show PCLI command history for the current user
@@ -184,6 +184,8 @@ commit [force] [validate-local]
 
 #### Description
 The `commit` command causes the 128T router to validate the candidate configuration, and then replace the running configuration with the candidate configuration (assuming it passes the validation step). It is used once a series of configuration changes have been made, and an administrator wishes to "activate" those configuration changes.
+
+When run from a 128T conductor, the conductor will first validate the configuration itself before distributing configuration to all of its managed routers for each of them to validate the configuration. After the managed routers have all reported the results of their validation, the commit activity takes place (assuming a successful validation). This distributed validation can be skipped by using the validate-local keyword argument.
 
 The `commit` command will prompt a user for confirmation, as this is a (potentially) service affecting command. By supplying the optional `force` keyword, the confirmation step is skipped:
 
@@ -357,8 +359,6 @@ config
 ...
 ```
 
-The full suite of components, and relationships among those components, within the configuration tree are described in the Configuration Elements Reference section of this document.
-
 #### Privileges Required
 Available to _admin_ only.
 
@@ -384,7 +384,6 @@ connect [force] [router <router>] [node <node>] [username <username>]
 
 #### Description
 Connect to a Managed Router.  For more information, read [Connecting to 128T Routers from Conductor](ts_connecting_to_routers.md).
-
 
 
 ## create certificate request webserver
@@ -555,7 +554,7 @@ Available to _admin_ only.
 
 #### Usage
 ```
-delete configexported [force] <name>
+delete config exported [force] <name>
 ```
 
 #### Description
@@ -602,6 +601,8 @@ delete flows [force] [router <router>] [node <node>]
 
 #### Description
 The _delete flows_ command clears all active flow data from this node. Administrators can specify which node to clear flow data from by adding the node name as an optional argument to the command.
+
+This command has been maintained for backward compatibility to older versions of software. The delete sessions command is preferred in versions newer than 3.2.0.
 
 :::warning
 This may be a service impacting operation.
@@ -2028,12 +2029,12 @@ This issues ICMP requests to the specified _destination-ip_, and offers the admi
 
 #### Example
 ```
-admin@labsystem1.fiedler# ping count 3 192.168.1.1
-PING 192.168.1.1 (192.168.1.1) 56 bytes of data.
-Ping from 192.168.1.1 (192.168.1.1): icmp_seq=0 ttl=10
-Ping from 192.168.1.1 (192.168.1.1): icmp_seq=1 ttl=10
-Ping from 192.168.1.1 (192.168.1.1): icmp_seq=2 ttl=10
-admin@labsystem1.fiedler#
+admin@gouda.novigrad# service-ping service-name Internet tenant lanSubnet source-ip 192.168.0.5 8.8.8.8
+PING 8.8.8.8 56 bytes of data.
+Ping from 8.8.8.8 (8.8.8.8): icmp_seq=0 ttl=57 time=22.296ms
+Ping from 8.8.8.8 (8.8.8.8): icmp_seq=1 ttl=57 time=11.303ms
+Ping from 8.8.8.8 (8.8.8.8): icmp_seq=2 ttl=57 time=10.516ms
+Ping from 8.8.8.8 (8.8.8.8): icmp_seq=3 ttl=57 time=10.428ms
 ```
 
 #### Privileges Required
@@ -3190,7 +3191,7 @@ show dhcp v6 [name <name>] [force] [router <router>] [node <node>] [<verbosity>]
 - **verbosity**    detail | summary (default: summary)
 
 #### Description
-Display dhcp lease info for network-interfaces
+Display DHCP lease info for network-interfaces
 
 #### Example
 ```
@@ -3580,7 +3581,7 @@ show network-interface application [name <name>] [node <node>]
 - **node**      node for which to display network-interface data
 
 #### Description
-The command _show network-interface application_ can be used to display information regarding DHCP client certificates when running a DHCP server on the respective _network-interface_.
+The command _show network-interface application_ can be used to display information regarding DHCP client reservations when running a DHCP server on the respective _network-interface_.
 
 #### Example
 ```
@@ -4653,6 +4654,7 @@ This command shows information on peering associations between 128T routers, not
 
 For each peer it shows which interface the peer is reachable via, the destination IP address for which the peer is reached, the VLAN to use to reach it, and whether the peer is currently "up", "down", or "initializing".
 
+#### Example
 ```
 admin@tp-cond-primary.tp-cond# show peers router all
 Fri 2020-04-17 19:07:42 UTC
@@ -4683,6 +4685,39 @@ Fri 2020-04-17 19:07:42 UTC
  tp-lab -> tp-colo              tp-lab-secondary      lab-colo-sec         1.2.3.4          up        unavailable   unavailable
 
 Completed in 1.25 seconds
+```
+The _detail_ option will show peer path statistics (loss, latency, jitter, calculated MOS, uptime) for each peer path.
+```
+admin@tp-cond-primary.tp-cond# show peers router all detail
+Wed 2020-04-22 20:58:38 UTC
+WARNING: Targeting router 'all' may take a long time. Continue anyway? [y/N]: y
+
+============================== ===================== ==================== ============= ========= ============= ============= ============= ============ ========= ======= =============
+ Peer                           Node                  Network Interface    Destination   Status    Hostname      Path MTU      Latency(ms)   Jitter(ms)   Loss(%)     MOS   Uptime
+============================== ===================== ==================== ============= ========= ============= ============= ============= ============ ========= ======= =============
+ burl-corp -> brawny            burl-corp-secondary   lighttower           1.2.3.4       down      unavailable   unavailable            22            1         0   0.439   unavailable
+ burl-corp -> seattle-site      burl-corp-secondary   lighttower           1.2.3.4       up        unavailable   unavailable            88            0         0   0.436   12d4h31m
+ burl-corp -> tp-colo           burl-corp-primary     comcast              1.2.3.4       up        unavailable   unavailable             8            0         0    0.44   12d4h31m
+ burl-corp -> tp-colo           burl-corp-primary     comcast              1.2.3.4       up        unavailable   unavailable             1            0         0    0.44   12d4h31m
+ burl-corp -> tp-colo           burl-corp-secondary   lighttower           1.2.3.4       up        unavailable   unavailable             7            0         0    0.44   12d4h31m
+ burl-corp -> tp-colo           burl-corp-secondary   lighttower           1.2.3.4       up        unavailable   unavailable             3            0         0    0.44   12d4h31m
+ burl-corp -> tpn_router        burl-corp-secondary   lighttower           1.2.3.4       up        unavailable   unavailable             1            0         0    0.44   12d4h31m
+ tp-colo -> imjustarouter       tp-colo-primary       public-lab-dmz-pri   1.2.3.4       up        unavailable   unavailable            19            1         0   0.439   1d0h46m
+ tp-colo -> imjustarouter       tp-colo-secondary     public-lab-dmz-sec   1.2.3.4       standby   unavailable   unavailable            17            0         0    0.44   unavailable
+ tp-colo -> mobile128T          tp-colo-primary       public-lab-dmz-pri   1.2.3.4       up        unavailable   unavailable            18            0         0    0.44   1d0h46m
+ tp-colo -> mobile128T          tp-colo-secondary     public-lab-dmz-sec   1.2.3.4       standby   unavailable   unavailable            19            0         0   0.439   unavailable
+ tp-colo -> brawny              tp-colo-primary       public-lab-dmz-pri   1.2.3.4       down      unavailable   unavailable            33            0         0   0.439   unavailable
+ tp-colo -> brawny              tp-colo-secondary     public-lab-dmz-sec   1.2.3.4       standby   unavailable   unavailable            22            0         0   0.439   unavailable
+ tp-colo -> burl-corp           tp-colo-primary       public-blended       1.2.3.4       up        unavailable   unavailable             8            0         0    0.44   0d12h41m
+ tp-colo -> burl-corp           tp-colo-primary       public-blended       1.2.3.4       up        unavailable   unavailable             7            0         0    0.44   1d0h46m
+ tp-colo -> burl-corp           tp-colo-secondary     public-comcast       1.2.3.4       up        unavailable   unavailable             1            0         0    0.44   1d0h57m
+ tp-colo -> burl-corp           tp-colo-secondary     public-comcast       1.2.3.4       up        unavailable   unavailable             2            0         0    0.44   0d10h2m
+ tp-colo -> tp-lab              tp-colo-primary       colo-lab-pri         1.2.3.4       up        unavailable   unavailable             0            0         0    0.44   1d0h46m
+ tp-colo -> tp-lab              tp-colo-secondary     colo-lab-sec         1.2.3.4       standby   unavailable   unavailable             0            0         0    0.44   unavailable
+ tp-lab -> tp-colo              tp-lab-primary        lab-colo-pri         1.2.3.4       standby   unavailable   unavailable             -            -         -       -   unavailable
+ tp-lab -> tp-colo              tp-lab-secondary      lab-colo-sec         1.2.3.4       up        unavailable   unavailable             0            0         0    0.44   1d0h46m
+
+Completed in 1.34 seconds
 ```
 
 #### Privileges Required
