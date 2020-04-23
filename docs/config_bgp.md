@@ -6,37 +6,45 @@ Learning routes from BGP simplifies enterprise configuration and integration wit
 
 ### Prerequisites
 
-This section presumes that the reader has a running 128T system and wants to add configuration to support BGP. The running 128T system should already include configuration for basic platform functionality (e.g., `router`, `node`, `device-interface`, `network-interface`) and basic 128T modeling configuration (e.g., tenants, services, etc.). Refer to the 128T data model and the Configuration Guide for a better understanding about the 128T networking.
+This section presumes that the reader has a running 128T system and wants to add configuration to support BGP. The running 128T system should already include configuration for basic platform functionality (e.g., `router`, `node`, `device-interface`, `network-interface`) and basic 128T modeling configuration (e.g., tenants, services, etc.). Refer to the [Element Reference](config_reference_guide.md) section of our documentation for a better understanding about basics of the 128T data model.
 
-**BGP Configuration when peer is non-128T:**
+### Peering with non-128T Routers
 
-The BGP configuration exists in the routing configuration container in the 128T data model. For any routing configuration, static or dynamic, a default routing instance called
+The BGP configuration exists in the [`routing`](config_reference_guide.md#routing) configuration container within the 128T data model. For any routing configuration, static or dynamic, a default routing instance called `default-instance` must be defined in the 128T configuration.
 
-, must be defined in the 128T configuration template.
-
-Assuming that the BGP is configured on the peering router with router ID as 1.1.1.1, as AS 6000 and the 128T router as the BGP peer, we can configure BGP on our 128T using the following commands:
+In this example we will assume that BGP is configured on the peering router with IP address 1.1.1.1, as autonomous system number (ASN) 6000. To peer the 128T router with this router, we can configure BGP on our 128T using the following commands:
 
 ```
-admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
-admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
+admin@branchoffice1.seattlesite1# config auth
+admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 
+admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
+```
+Every 128T router (in this case, the router named `seattlesite1`), contains all of its legacy routing protocol information within the `default-instance` routing container.
+```
+admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing-protocol bgp
+```
+Here we will enter into the BGP portion of the routing configuration model.
+```
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# local-as 100 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# router-id 1.1.1.128
+```
+This sets our local autonomous system number to 100, and sets the router ID to 1.1.1.128.
+```
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# address-family ipv4-unicast
 admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# exit
+```
+At least one `address-family` is required to be configured. These address families are also sometimes referred to as "AFI-SAFI" (pronounced "affy-saffy"), which is an Address Family Indicator plus Sub-Address Family Indicator. The most commonly configured `address-family` on the 128T router is by far `ipv4-unicast`. If your deployment uses other address families (e.g., IPv6) or routes multicast, you may also need to configure support for other address families.
+```
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# neighbor 1.1.1.1
 admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# neighbor-as 6000
 admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# address-family ipv4-unicast
 admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# next-hop-self true
-admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])#exit admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# exit
+admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])#exit
+admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# exit
 ```
+Last, we configure the `neighbor`. As stated in the example above, we've identified its IP address as `1.1.1.1` and its ASN as 6000. (Because this neighbor has a different ASN than the 128T, the 128T will recognize it as an eBGP peer rather than an iBGP peer.) We give it an `address-family` of `ipv4-unicast`, which lets the 128T know to exchange IPv4 unicast routes with the peer.
 
-Under the default routing instance, specify the routing protocol as BGP using
+Lastly, we set `next-hop-self` to `true.` During advertisement, non-directly connected routers need to learn how to reach an advertised route. To provide this information to the non-directly connected (as well as iBGP peers), next-hop-self command is used. This will cause the 128T to rewrite the `next-hop` information in the routes it advertises to this peer to be its own address.
 
-. Once inside the routing-protocol element, specify the Local-AS using
-
-and the router-ID using  					 					 					. Now, specify the address family as
-
-IPv4- Unicast.
- Next, we configure the neighbor by specifying the neighbor address using  					 					 					and
 
 the neighbor AS using  					 					 					. Under the neighbor element configure the address
 
