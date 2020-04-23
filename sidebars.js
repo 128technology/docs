@@ -35,6 +35,7 @@ module.exports = {
         "label": "Configuration",
         "items": [
           "config_basics",
+          "config_bgp",
           "config_reference_guide",
           "config_audit_log",
           "config_dns_proxy",
@@ -55,7 +56,6 @@ module.exports = {
         "type": "category",
         "label": "How To",
         "items": [
-          "howto_bgp",
           "howto_conductor_migration",
           "howto_lte",
           "howto_maintenance_mode",
