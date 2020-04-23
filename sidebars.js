@@ -87,6 +87,7 @@ module.exports = {
       "bcp_conductor_deployment",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
+      "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",
       "bcp_tenants",
     ],
