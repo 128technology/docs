@@ -46,7 +46,7 @@ exit
 ```
 
 ## LDAP User Account Requirements
-It is important to ensure that administrative users are configured on the LDAP server as being a member of a group called `128t-user` for read-only access to the configuration, or `128t-admin` for	 read-write access to configuration. These group names are case sensitive.
+It is important to ensure that administrative users are configured on the LDAP server as being a member of a group called `128t-user` for read-only access to the configuration, or `128t-admin` for read-write access to configuration. These group names are case sensitive.
 
 ## Implementation Notes
 - `show user` within the PCLI (and GUI's User management page) allows viewing LDAP users that have connected to 128T
@@ -54,6 +54,7 @@ It is important to ensure that administrative users are configured on the LDAP s
 - Having local 128T users with the same name as LDAP users is not supported.
 - The "admin" user is always authenticated locally;  any "admin" user in ldap is ignored
 - If the TLS certificates for LDAP servers are not from a CA recognized by openssl's CA bundle, trust for the certificate must be configured manually (in linux)
+- When the system is configured to use LDAP for user authentication, the status of the LDAP connection can be seen on the Users page of the GUI. This is a high level status of connectivity to retrieve user and group information based on the LDAP configuration.
 
 ## Debugging Issues Using LDAP
 For diagnosing connection status from linux
@@ -66,5 +67,5 @@ id -Gn <user-name>
 ```
 There is a minimum delay of 5 minutes from when a user's groups are retrieved before the server will be consulted again, so changes that are made on the server may appear to lag a bit.
 ```
-sss_cache -u <user> 
+sss_cache -u <user>
 ```

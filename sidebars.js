@@ -106,6 +106,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes_128t_4.4",
           "release_notes_128t_4.3",
           "release_notes_128t_4.2",
           "release_notes_128t_4.1",

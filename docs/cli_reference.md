@@ -972,11 +972,9 @@ admin@labsystem1.fiedler#
 ```
 
 #### Privileges Required
-
 Available to _admin_ only.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
@@ -990,6 +988,44 @@ Available to _admin_ only.
 - [show config exports](#show-config-exports)               Display configuration exports
 - [show config version](#show-config-version)               Display running configuration version
 - [show events config commit](#show-events-config-commit)   Shows events related to running config change
+
+
+## import iso
+
+#### Usage
+```
+import iso [force] [verbose] {hunt | filepath <filepath>}
+```
+
+##### Keyword Arguments
+- **filepath**    The absolute filepath to the ISO
+- **force**       Skip confirmation prompt
+- **hunt**        Find and import all ISOs from the filesystem
+- **verbose**     Increase log level verbosity
+
+#### Description
+Imports a 128T ISO to the local repository.
+
+#### Example
+```
+admin@conductor.Conductor# import iso hunt
+This command is resource intensive and can take a while. Are you sure? [y/N]: y
+Current Installer version: 2.5.0-0.20200326163206.snapshot
+Installer will run in non-interactive mode
+Refreshing DNF cache (this may take a few minutes)
+Cleaning DNF data: expire-cache
+Making the DNF cache
+Cleaning legacy local repos (this may take a few minutes)
+Installer will hunt for ISOs to import
+Importing packages for 128T-4.4.0-0.202004021313.release.el7.x86_64.rpm
+Installer complete
+Import success
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
 
 
 ## migrate

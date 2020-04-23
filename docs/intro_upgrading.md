@@ -3,9 +3,15 @@ title: Upgrading the 128T Networking Platform
 sidebar_label: Upgrading
 ---
 
+#### History
+
+| Release | Modification                                |
+| ------- | ------------------------------------------- |
+| 4.4.0   | Added instructions for upgrading from ISO   |
+
 Upgrading your 128T Routing Software follows a similar process as the initial installation and also uses the `install128t` application. Your 128T Router or Conductor must have internet access to download the latest software packages (128T routers can be configured to use the conductor as their software repository; please refer to the configuration section of the 128T documentation for instructions on configuring the Conductor-Hosted Repository). As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.
 
-#### Upgrading using the Interactive Installer
+## Upgrading using the Interactive Installer
 
 1. Launch a command prompt window.
 
@@ -28,7 +34,7 @@ Upgrading your 128T Routing Software follows a similar process as the initial in
    Your output may vary based upon the nature of the upgrade, occasion, various packages, and dependencies that 128T requires as part of the 128T Routing Software upgrade.
    :::
 
-#### Upgrading using Automated Provisioner (PCLI)
+## Upgrading using Automated Provisioner (PCLI)
 
 For routers managed by a 128T Conductor, upgrades can be initiated via the 128T Conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*.
 
@@ -47,7 +53,7 @@ As an administrator-level user, log into the Conductor's PCLI.
 
 The Automated Provisioner will upgrade both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
 
-#### Upgrading using Automated Provisioner (GUI)
+## Upgrading using Automated Provisioner (GUI)
 
 Similar to the process for upgrading using the PCLI, the Automated Provisioner upgrade process using the GUI is done in two stages: *download* and *upgrade*.
 
@@ -57,3 +63,15 @@ Similar to the process for upgrading using the PCLI, the Automated Provisioner u
 4. Once complete, click the Upgrade 128T icon again, and select the target software release from the Available Upgrades list. You will again be asked to confirm this operation.<br/>Result: the router will now begin the upgrade process.
 
 The Automated Provisioner will upgrade both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
+
+## Upgrading from an ISO
+
+Some network environments are configured to disallow access to the public internet.  In these environments, the 128T will not be able to access its public software repositories and therefore be unable to download any software updates. Typically an administrator will download software updates on a system in a DMZ and transfer the software onto the target platform once its integrity has been verified.
+
+The `import iso` command can be used to import packages contained within a 128T ISO onto a local yum repository, thereby allowing that 128T to be upgraded without contacting to 128 Technology servers.
+
+[import iso](cli_reference.md#import-iso) command allows user to specify the exact `filepath` to the ISO or specify `hunt` which will look everywhere on disk for a file that matches the pattern `128T*.iso` except for the following directories `/boot`, `/dev`, `/proc`, and `/sys` .
+
+This feature works on either Conductor or Routers. It can be combined with Conductor Hosted Repos feature where the ISO is imported on the Conductor and then Routers use the Conductor as the yum repository to download 128T packeges from.
+
+Once the local software repository has been updated to the software from the ISO, the upgrade can proceed using your preferred method above.
