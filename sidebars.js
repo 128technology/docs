@@ -38,6 +38,7 @@ module.exports = {
           "config_bgp",
           "config_reference_guide",
           "config_audit_log",
+          "config_dhcp",
           "config_dns_proxy",
           "config_ldap",
           "config_ha",
