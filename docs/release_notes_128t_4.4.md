@@ -13,11 +13,11 @@ sidebar_label: 4.4
 
 - **I95-25289** Honor storage-duration as retention policy
 
-- **I95-26013** Support for vendor-specific information in DHCP options
+- **I95-26013** [Support for vendor-specific information in DHCP options](config_dhcp.md#vendor-specific-information-dhcp-options)
 
 - **I95-26954** Reduced steady-state bandwidth usage for nodes at rest, resulting in improved performance and reduced network bandwidth
 
-- **I95-27874** Enable packet capture from CLI
+- **I95-27874** [Enable packet capture from CLI](ts_packet_capture.md)
 
 - **I95-28317** PCLI ctrl+z shortcut
 

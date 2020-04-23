@@ -386,6 +386,40 @@ connect [force] [router <router>] [node <node>] [username <username>]
 Connect to a Managed Router.  For more information, read [Connecting to 128T Routers from Conductor](ts_connecting_to_routers.md).
 
 
+## create capture-filter
+
+#### Usage
+```
+create capture-filter [node <node>] device-interface <device-interface> router <router> <capture-filter>
+```
+
+##### Keyword Arguments
+- **device-interface**    The device interface on which to create the capture filter
+- **node**                The node on which to remove the capture filter
+- **router**              The router on which to remove the capture filter
+
+##### Positional Arguments
+- **capture-filter**    The capture-filter to remove (Uses BPF syntax)
+
+#### Description
+Creates a capture-filter (following wireshark's capture filter syntax) which is enabled on the target node.
+
+#### Example
+```
+admin@tp-colo-primary.tp-colo# create capture-filter device-interface blended-5 "host 172.18.5.4"
+Successfully created capture-filter
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+#### See Also
+- [delete capture-filter](#delete-capture-filter) Deletes capture-filter from highway at the specified node
+- [show capture-filters](#show-capture-filters)   Show active capture-filters
+
+
 ## create certificate request webserver
 
 #### Usage
@@ -484,6 +518,40 @@ Available to _admin_ only.
 - [restore users factory-default](#restore-users-factory-default) Restore the user configuration to factory defaults
 - [set password](#set-password) Command to change a user's own password
 - [show user](#show-user) Command to show user accounts
+
+
+## delete capture-filter
+
+#### Usage
+```
+delete capture-filter [node <node>] device-interface <device-interface> router <router> <capture-filter>
+```
+
+##### Keyword Arguments
+- **device-interface**    The device interface on which to delete the capture filter
+- **node**                The node on which to remove the capture filter
+- **router**              The router on which to remove the capture filter
+
+##### Positional Arguments
+- **capture-filter**    The capture-filter to remove (Uses BPF syntax)
+
+#### Description
+Deletes the specified capture-filter on the specified node.
+
+#### Example
+```
+admin@tp-colo-primary.tp-colo# delete capture-filter device-interface blended-5 "host 172.18.5.4"
+Successfully deleted capture-filter
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+#### See Also
+- [create capture-filter](#create-capture-filter)    Creates capture-filter from highway at the specified node
+- [show capture-filters](#show-capture-filters)      Show active capture-filters
 
 
 ## delete (in config)
@@ -2722,6 +2790,44 @@ Node: gouda
 Completed in 0.09 seconds
 ```
 
+
+## show capture-filters
+
+#### Usage
+```
+show capture-filters [device-interface <device-interface>] [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+- **device-interface**    Device interface on which to show capture-filters (default: all)
+- **force**               Skip confirmation prompt. Only required when targeting all routers
+- **node**                The node on which to show capture-filters
+- **router**              The router on which to show capture-filters (default: all)
+
+#### Description
+Shows active capture-filters.
+
+#### Example
+```
+admin@tp-colo-primary.tp-colo# show capture-filters device-interface blended-5
+Thu 2020-04-23 20:28:05 UTC
+
+========= ================= ================ =================
+ Router    Node              Interface Name   Capture Filters
+========= ================= ================ =================
+ tp-colo   tp-colo-primary   blended-5        host 172.18.5.4
+
+Completed in 0.01 seconds
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+#### See Also
+- [create capture-filter](#create-capture-filter)    Creates capture-filter from highway at the specified node
+- [delete capture-filter](#delete-capture-filter)    Deletes capture-filter from highway at the specified node
 
 
 ## show certificate webserver

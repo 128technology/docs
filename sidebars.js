@@ -35,8 +35,10 @@ module.exports = {
         "label": "Configuration",
         "items": [
           "config_basics",
+          "config_bgp",
           "config_reference_guide",
           "config_audit_log",
+          "config_dhcp",
           "config_dns_proxy",
           "config_ldap",
           "config_ha",
@@ -55,7 +57,6 @@ module.exports = {
         "type": "category",
         "label": "How To",
         "items": [
-          "howto_bgp",
           "howto_conductor_migration",
           "howto_lte",
           "howto_maintenance_mode",
@@ -74,6 +75,7 @@ module.exports = {
           "ts_forwarding_resource_pools",
           "ts_logs",
           "ts_mac_uniqueness",
+          "ts_packet_capture",
           "ts_t1_troubleshooting",
         ],
       },
