@@ -7,6 +7,8 @@ sidebar_label: Monitoring Head End Routers
 
 While every network implementation has its own unique characteristics, there are some attributes that are common to all network topologies – particularly those built with the 128T Session Smart router. This Best Practices document lists some foundational metrics and data to monitor for system performance and health, and is intended as a baseline upon which network administrators can build.
 
+128 Technology provides a [Monitoring Agent plugin](plugin_monitoring_agent.md) that dramtically simplifies the data collection process. This is generally preferred to legacy data collection techniques (e.g., SNMP) as it is much more scalable and has a variety of flexible output formats.
+
 ### Platform Fundamentals
 
 Each 128T router is running on a computer, and that computer may be either physical or virtual. It is important to monitor various attributes of the underlying platform to ensure a healthy, stable platform. This includes:
