@@ -35,6 +35,7 @@ module.exports = {
         "label": "Configuration",
         "items": [
           "config_basics",
+          "config_bgp",
           "config_reference_guide",
           "config_audit_log",
           "config_dns_proxy",
