@@ -402,7 +402,7 @@ create capture-filter [node <node>] device-interface <device-interface> router <
 - **capture-filter**    The capture-filter to remove (Uses BPF syntax)
 
 #### Description
-Creates a capture-filter (following wireshark's capture filter syntax) which is enabled on the target node.
+Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface.
 
 #### Example
 ```
@@ -536,7 +536,7 @@ delete capture-filter [node <node>] device-interface <device-interface> router <
 - **capture-filter**    The capture-filter to remove (Uses BPF syntax)
 
 #### Description
-Deletes the specified capture-filter on the specified node.
+Deletes only those capture-filters that have been created with the _create capture-filter_ command on the specified node.
 
 #### Example
 ```
