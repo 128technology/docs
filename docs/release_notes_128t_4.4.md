@@ -37,7 +37,7 @@ sidebar_label: 4.4
 
 - **I95-32760** Selected Events remain highlighted when navigating the event page
 
-- **I95-32783** "show assets summary" enhancements
+- **I95-32783** ["show assets summary" enhancements](cli_reference.md#show-assets-summary)
 
 - **I95-33374** Address Latest Vulnerabilities 4.4
 

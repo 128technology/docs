@@ -2606,6 +2606,149 @@ Available to _admin_ only.
 - [show assets summary](#show-assets-summary)          A summary of assets connected to the automated provisioner
 
 
+## show assets errors
+
+#### Usage
+```
+show assets errors [force] [router <router>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt. Only required when targeting all routers
+- **router**    router for which to display assets summary (default: all)
+
+#### Description
+_show assets errors_ will display all assets with at least one automated provisioner related error.
+
+#### Example
+```
+admin@labsystem1.fiedler# show assets errors
+Fri 2017-07-21 15:41:54 UTC
+
+======== ========== =============== ========
+ Router   Node       Asset Id        Errors
+======== ========== =============== ========
+ Boston   Aquarium   Aquarium-1234        1
+ NYC      nyc        asset-10             2
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+
+## show assets software
+
+#### Usage
+```
+show assets software [force] [router <router>] [node <node>]
+```
+
+##### Keyword arguments:
+- **force**     Skip confirmation prompt. Only required when targeting all routers
+- **node**      node for which to display available software
+- **router**    router for which to display available software (default: all)
+
+#### Description
+Displays software related information for each managed asset.  In particular, it displays the current running version of software, any versions available for download, software versions that are currently being downloaded and those that have been downloaded which can be used to upgrade the platform.
+
+#### Example
+```
+admin@tp-cond-primary.tp-cond# show assets software
+Fri 2020-04-24 13:25:52 UTC
+
+=========== ===================== ================================== ========================================== ============= ============
+ Router      Node                  Installed                          Available                                  Downloading   Downloaded
+=========== ===================== ================================== ========================================== ============= ============
+ burl-corp   burl-corp-primary     4.2.6-1.el7                        4.3.0-1.el7
+                                                                      4.3.1-1.el7
+                                                                      4.3.2-1.el7
+                                                                      4.3.3-1.el7
+             burl-corp-secondary   4.2.6-1.el7                        4.3.0-1.el7
+                                                                      4.3.1-1.el7
+                                                                      4.3.2-1.el7
+                                                                      4.3.3-1.el7
+ tp-colo     tp-colo-primary       4.4.0-1.el7
+             tp-colo-secondary     4.4.0-1.el7
+ tp-cond     tp-cond-primary       4.4.0-1.el7
+             tp-cond-secondary     4.4.0-1.el7
+ tp-lab      tp-lab-primary        4.3.3-1.el7                        4.4.0-1.el7
+             tp-lab-secondary      4.3.3-1.el7                        4.4.0-1.el7
+
+Completed in 0.65 seconds
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 3.2.0   | This feature was introduced |
+
+#### See Also
+- [migrate](#migrate)                                  Migrate a 128T router to a new conductor
+- [send command download](#send-command-download)      Download 128T software on a router
+- [send command reconnect](#send-command-reconnect)    Attempt to reconnect an asset
+- [send command reconnect disconnected](#send-command-reconnect-disconnected)  Attempt to reconnect all disconnected assets
+- [send command restart](#send-command-restart)        Restart a 128T node
+- [send command rollback](#send-command-rollback)      Rollback a 128T router to the previously installed version
+- [send command start](#send-command-start)            Start a 128T node
+- [send command stop](#send-command-stop)              Stop a 128T node
+- [send command upgrade](#send-command-upgrade)        Upgrade a 128T node
+- [send command yum-cache-refresh](#send-command-yum-cache-refresh) Refresh the yum cache as well as the 128T software versions available for download and upgrade.
+- [show assets](#show-assets)                          Shows the automated provisioning status of 128T nodes
+- [show assets summary](#show-assets-summary)          A summary of assets connected to the automated provisioner
+
+
+## show assets summary
+
+#### Usage
+```
+show assets summary [force] [router <router>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt. Only required when targeting all routers
+- **router**    router for which to display assets summary (default: all)
+
+#### Description
+_show assets summary_ will display a total of all assets in each state.
+
+#### Example
+```
+admin@labsystem1.fiedler# show assets summary
+Fri 2017-07-21 15:41:54 UTC
+
+ =====================================
+  Summary of Assets
+ =====================================
+  total:                   5
+  pending:                 2
+  not-installed:           1
+  installed:               2
+
+  assets with errors:      2
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+#### See Also
+- [migrate](#migrate)                                  Migrate a 128T router to a new conductor
+- [send command download](#send-command-download)      Download 128T software on a router
+- [send command reconnect](#send-command-reconnect)    Attempt to reconnect an asset
+- [send command reconnect disconnected](#send-command-reconnect-disconnected)  Attempt to reconnect all disconnected assets
+- [send command restart](#send-command-restart)        Restart a 128T node
+- [send command rollback](#send-command-rollback)      Rollback a 128T router to the previously installed version
+- [send command start](#send-command-start)            Start a 128T node
+- [send command stop](#send-command-stop)              Stop a 128T node
+- [send command upgrade](#send-command-upgrade)        Upgrade a 128T node
+- [send command yum-cache-refresh](#send-command-yum-cache-refresh) Refresh the yum cache as well as the 128T software versions available for download and upgrade.
+- [show assets](#show-assets)                          Shows the automated provisioning status of 128T nodes
+- [show assets software](#show-assets-software)        Shows assets software information
+
+
 ## show bgp
 
 #### Usage

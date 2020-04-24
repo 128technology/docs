@@ -15,9 +15,9 @@ There are some caveats to note when using this functionality:
 
 Three CLI Commands have been added to perform these functions:
 
-- `create capture-filter`
-- `delete capture-filter`
-- `show capture-filter`
+- [create capture-filter](cli_reference.md#create-capture-filter)
+- [delete capture-filter](cli_reference.md#delete-capture-filter)
+- [show capture-filter](cli_reference.md#show-capture-filters)
 
 ### create capture-filter
 
