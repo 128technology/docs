@@ -536,7 +536,7 @@ delete capture-filter [node <node>] device-interface <device-interface> router <
 - **capture-filter**    The capture-filter to remove (Uses BPF syntax)
 
 #### Description
-Deletes only those capture-filters that have been created with the _create capture-filter_ command on the specified node.
+Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.)
 
 #### Example
 ```
@@ -2948,7 +2948,7 @@ show capture-filters [device-interface <device-interface>] [force] [router <rout
 - **router**              The router on which to show capture-filters (default: all)
 
 #### Description
-Shows active capture-filters.
+Shows all configured capture-filters, including static capture-filters that exist as part of the configuration s well as dynamic capture-filters (i.e., those created using the create capture-filter command).
 
 #### Example
 ```

@@ -8,10 +8,10 @@ Without this feature's functionality the only way to enable capture filters is t
 
 There are some caveats to note when using this functionality:
 
-- Creating or removing a capture filter in this way does not persistent and will not survive a reboot
+- Creating or removing a capture filter in this way does not persist and will not survive a reboot or restart of the 128T software
 - There is an interaction with configured capture filters when creating and removing capture filters manually
-  - If capture filters exist within the configuration and a configuration change happens **that does not change** capture filters, the configuration changes will not affect temporarily changed capture filters
-  - If capture filters exist within the configuration, and if a configuration change **happens to change** the capture filters for that device, all temporary changes will be overwritten by the configuration
+  - If capture filters exist within the configuration and a configuration change happens that does not impact static capture-filters, the configuration change will not affect dynamic capture-filters.
+  - If static capture-filters exist within the configuration, and if a configuration change modifies the static capture-filters, all dynamic capture-filters will be removed.
 
 Three CLI Commands have been added to perform these functions:
 
@@ -40,7 +40,7 @@ An example of creating a capture filter is below:
   capture-filter      The capture-filter to create (Uses BPF syntax)
 ```
 
-### remove capture-filter
+### delete capture-filter
 
 This command can be used to remove the temporarily added capture filters as well as temporarily removing any added through configuration.  The command will return an error if the capture filter is not present.
 
