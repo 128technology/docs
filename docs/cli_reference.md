@@ -2948,7 +2948,7 @@ show capture-filters [device-interface <device-interface>] [force] [router <rout
 - **router**              The router on which to show capture-filters (default: all)
 
 #### Description
-Shows all configured capture-filters, including static capture-filters that exist as part of the configuration s well as dynamic capture-filters (i.e., those created using the create capture-filter command).
+Shows all configured capture-filters, including static capture-filters that exist as part of the configuration as well as dynamic capture-filters (i.e., those created using the create capture-filter command).
 
 #### Example
 ```
