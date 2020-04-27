@@ -19,7 +19,7 @@ sidebar_label: 4.4
 
 - **I95-27874** [Enable packet capture from CLI](ts_packet_capture.md)
 
-- **I95-28317** PCLI ctrl+z shortcut
+- **I95-28317** [PCLI ctrl+z shortcut](concepts_pcli.md#ctrlz)
 
 - **I95-28801** 128T Conductor docker container
 
@@ -51,10 +51,11 @@ sidebar_label: 4.4
   _**Conditions:**_ Key field for configuration object contains a space
 ------
 - **I95-30517** `t128-salt` command produces deprecated warning
+  
   ```
   [WARNING ] /tmp/tmpigi2k61k/pip3/salt/salt/transport/ipc.py:292: DeprecationWarning: encoding is deprecated, Use raw=False instead.
-    self.unpacker = msgpack.Unpacker(encoding=encoding)
-
+  self.unpacker = msgpack.Unpacker(encoding=encoding)
+  
   [WARNING ] /tmp/tmpigi2k61k/pip3/salt/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
     ret = msgpack.loads(msg, use_list=True, ext_hook=ext_type_decoder, encoding=encoding)
   ```
@@ -62,6 +63,16 @@ sidebar_label: 4.4
 - **I95-32250** Traffic audit events can consume large amount of memory on a busy system
 ------
 - **I95-32707** Quickstart link does not appear after initial router config is created
+------
+- **I95-33302** Application ID modules may experience a delay or fail to update FIB
+
+  _**Symptom:**_ The following log message will be seen in the `highway.log` when application identification scripts fail to complete.
+
+  ```
+  ERROR (routingAgePoller) Timeout handler not keeping up
+  ```
+
+  _**Conditions:**_ Platforms at the minimum specified hardware requirements or lower may experience this behavior depending on the type and quantity of application modules loaded.
 ------
 - **I95-33325** OTP QuickStart fails on the first attempt, but works on subsequent attempt(s)
 ------
@@ -75,6 +86,19 @@ sidebar_label: 4.4
 ------
 - **I95-34437** Asset State not correctly reported
 ------
+- **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
+------
+- **I95-34753** ARP packet validation failure produces misleading log message.
+  
+  ```
+  WARN  (arpManagerTP    ) Base Exception: Invalid Icmp Header Format: no   NS option available.
+  ERROR (arpManagerTP    ) Caught unexpected exception
+  ```
+  Enhanced logging to indicate receiving interface during invalid ARP classification and add the packet to the `highwayExceptions.pcap`.
+------
+- **I95-34882** `show user` is missing from `search commands regex ".*"`
+------
+- **I95-35081** Long authority names can obscure "UP" navigation button with the configuration UI
 
 ## Special Considerations
 - Python has been upgraded from version 2 to version 3.  Any custom salt states that have been written that include python code, may need to be upgraded or rewritten in advance of the upgrading to 4.4. (I95-31073)
