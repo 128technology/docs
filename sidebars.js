@@ -95,6 +95,10 @@ module.exports = {
     "CLI Reference": [
       "cli_reference",
     ],
+    "Platforms": [
+      "platforms_azure",
+      "platforms_aws"
+    ],
     "Plugins": [
       "plugin_monitoring_agent",
       "plugin_gre"
