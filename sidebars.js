@@ -11,6 +11,8 @@ module.exports = {
       "intro_installation_installer",
       "intro_installation_bootable_media",
       "intro_installation_aws",
+      "intro_installation_quickstart_aws",
+      "intro_installation_quickstart_azure",
       "intro_ztp",
       "intro_creating_bootable_usb",
       "intro_upgrading",
@@ -94,10 +96,6 @@ module.exports = {
     ],
     "CLI Reference": [
       "cli_reference",
-    ],
-    "Platforms": [
-      "platforms_azure",
-      "platforms_aws"
     ],
     "Plugins": [
       "plugin_monitoring_agent",
