@@ -1,5 +1,5 @@
 ---
-title: QuickStart installatio in AWS
+title: QuickStart installation in AWS
 sidebar_label: QuickStart installation in AWS
 ---
 
@@ -25,7 +25,7 @@ Please click [here](https://aws.amazon.com/marketplace/pp/B07T6JM3FR) to go to t
 
 1. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 2. Click on the “Continue to Configuration” button.
-3. In the "Fulfillment Option" drop down box select "Cloudformation Template", select the template "Standalone Conductor", select the desired region and click on the "Continue to Launch" button.
+3. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Standalone Conductor", select the desired region and click on the "Continue to Launch" button.
 4. In the "Choose Action" box select "Launch CloudFormation" and click on the button "Launch".
 
 Answer the following 3 questions to launch the deployment of a 128T Conductor:
@@ -49,7 +49,7 @@ Please click [here](https://aws.amazon.com/marketplace/pp/B07T6JM3FR) to go to t
 
 1. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 2. Click on the “Continue to Configuration” button.
-3. In the "Fulfillment Option" drop down box select "Cloudformation Template", select the template "Standalone Conductor", select the desired region and click on the "Continue to Launch" button.
+3. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Standalone Conductor", select the desired region and click on the "Continue to Launch" button.
 4. In the "Choose Action" box select "Launch CloudFormation" and click on the button "Launch".
 5. Lastly copy to the clipboard the URL of the template located in the field "Amazon S3 URL".
 
@@ -74,6 +74,10 @@ The following infrastructure must exist in your Azure subscription:
     * This subnet should be reachable via SSH for administration purposes.
     * The interface of the 128T Conductor that is going to manage this router must be reachable from this subnet.
 
+:::important
+Please note that deploying 128 Technology Session Smart Routers without a valid certificate will be limited to deployments within the cloud only. If your use case requires the deployment of a 128T Router on your premises as well please contact 128 Technology directly [here](https://www.128technology.com/get-started).
+:::
+
 ### Deployment
 
 A 128T Session Smart Router can be deployed manually via the AWS Console or in an automated fashion using AWS CLI commands. This section describes both methods, please proceed to the method that better suits your needs.
@@ -84,7 +88,7 @@ Please click [here](https://aws.amazon.com/marketplace/pp/B07T7Y7RVQ) to go to t
 
 1. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 2. Click on the “Continue to Configuration” button.
-3. In the "Fulfillment Option" drop down box select "Cloudformation Template", select the template "Session Smart Router", select the desired region and click on the "Continue to Launch" button.
+3. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Session Smart Router", select the desired region and click on the "Continue to Launch" button.
 4. In the "Choose Action" box select "Launch CloudFormation" and click on the button "Launch".
 
 Answer the following 4 questions to launch the deployment of a 128T Session Smart Router:
@@ -107,7 +111,7 @@ Please click [here](https://aws.amazon.com/marketplace/pp/B07T7Y7RVQ) to go to t
 
 1. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 2. Click on the “Continue to Configuration” button.
-3. In the "Fulfillment Option" drop down box select "Cloudformation Template", select the template "Session Smart Router", select the desired region and click on the "Continue to Launch" button.
+3. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Session Smart Router", select the desired region and click on the "Continue to Launch" button.
 4. In the "Choose Action" box select "Launch CloudFormation" and click on the button "Launch".
 5. Lastly copy to the clipboard the URL of the template located in the field "Amazon S3 URL".
 

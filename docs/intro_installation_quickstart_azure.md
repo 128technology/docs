@@ -77,6 +77,10 @@ The following infrastructure must exist in your Azure subscription:
     * This subnet should be reachable via SSH for administration purposes.
     * The interface of the 128T Conductor that is going to manage this router must be reachable from this subnet.
 
+:::important
+Please note that deploying 128 Technology Session Smart Routers without a valid certificate will be limited to deployments within the cloud only. If your use case requires the deployment of a 128T Router on your premises as well please contact 128 Technology directly [here](https://www.128technology.com/get-started).
+:::
+
 ### Deployment
 
 A 128T Session Smart Router can be deployed manually via the Azure Portal or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods, please proceed to the method that better suits your needs.
