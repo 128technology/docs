@@ -21,7 +21,7 @@ A 128T Conductor can be deployed manually via the AWS Console or in an automated
 
 #### AWS Console
 
-Please click [here](https://aws.amazon.com/marketplace/pp/B07T6JM3FR?qid=1587856243129) to go to the Marketplace:
+Please click [here](https://aws.amazon.com/marketplace/pp/B07T6JM3FR) to go to the Marketplace:
 
 1. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 2. Click on the “Continue to Configuration” button.
@@ -45,7 +45,7 @@ Be sure to change the password that conforms to your business' password requirem
 
 #### AWS CLI
 
-Please click [here](https://aws.amazon.com/marketplace/pp/B07T6JM3FR?qid=1587856243129) to go to the Marketplace:
+Please click [here](https://aws.amazon.com/marketplace/pp/B07T6JM3FR) to go to the Marketplace:
 
 1. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 2. Click on the “Continue to Configuration” button.
@@ -80,7 +80,7 @@ A 128T Session Smart Router can be deployed manually via the AWS Console or in a
 
 #### AWS Console
 
-Please click [here](https://aws.amazon.com/marketplace/pp/B07T7Y7RVQ?qid=1587861920116) to go to the Marketplace:
+Please click [here](https://aws.amazon.com/marketplace/pp/B07T7Y7RVQ) to go to the Marketplace:
 
 1. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 2. Click on the “Continue to Configuration” button.
@@ -103,7 +103,7 @@ The deployment will be non interactive as the Zero Touch Provisioning (ZTP) meth
 
 #### AWS CLI
 
-Please click [here](https://aws.amazon.com/marketplace/pp/B07T7Y7RVQ?qid=1587861920116) to go to the Marketplace:
+Please click [here](https://aws.amazon.com/marketplace/pp/B07T7Y7RVQ) to go to the Marketplace:
 
 1. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 2. Click on the “Continue to Configuration” button.
