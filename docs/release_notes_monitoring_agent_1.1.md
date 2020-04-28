@@ -2,6 +2,24 @@
 title: 128T Monitoring Agent 1.1 Release Notes
 sidebar_label: 1.1
 ---
+## Release 1.1.1
+
+### Issues Fixed
+
+----
+- **MON-185** telegraf error when processing results from peer path input
+
+  _**Resolution:**_ The extra logging causing the problem was removed
+------
+- **MON-186** LTE metric collector not reporting any values
+
+  _**Resolution:**_ Updated the library imports and identifiers used to display the missing data
+------
+- **MON-188** The events inputs collector has invalid sample
+
+  _**Resolution:**_ Updated the sample and staged configuration example for events
+
+
 ## Release 1.1.0
 
 ### New Features and Improvements
