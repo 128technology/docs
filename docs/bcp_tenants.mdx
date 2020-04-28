@@ -44,14 +44,14 @@ Should none of these result in a definitive determination on the tenant of the s
 <Flowchart
   chartCode={`
     st=>start: Packet Arrives
-    metadata=>condition: Packet has metadata?
-    int=>condition: Interface has a tenant?
-    nh=>condition: Neighborhood-based tenant?
-    tm=>operation: Tenant taken from metadata
-    ti=>operation: Tenant taken from interface
-    th=>operation: Tenant taken from neighborhood
-    global=>operation: Tenant assigned as "global"
-    e=>end: Proceed to FIB lookup
+      metadata=>condition: Packet has metadata?
+      int=>condition: Interface has a tenant?
+      nh=>condition: Neighborhood-based tenant?
+      tm=>operation: Tenant taken from metadata
+      ti=>operation: Tenant taken from interface
+      th=>operation: Tenant taken from neighborhood
+      global=>operation: Tenant assigned as "global"
+      e=>end: Proceed to FIB lookup
     st->metadata
     metadata(no)->int
     metadata(yes,right)->tm->e

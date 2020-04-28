@@ -11,9 +11,27 @@ The goal of this guide is produce a bootable USB drive from a 128T ISO.
 
 The first step is to acquire an ISO of the version of software that is intended to be loaded onto the bootable USB media following the [download instructions](intro_downloading_iso.md).
 
+## Linux and OSX
+
+Creating a bootable ISO from OS is straightforward.  The only requirements are that you need administrative privileges to the system.
+
+Locate the USB volume name of the target drive (in this example, “disk2s1”) with the `diskutil` command.
+
+```
+diskutil list
+```
+
+Once you have identified the target USB device, ensure that you have ISO already copied onto the machine creating the bootable USB.  This example uses `128T-OTP-4.2.4-1.el7.x86_64.iso`
+
+```
+sudo diskutil unmount /dev/disk2s1
+sudo dd if=~/128T-OTP-4.2.4-1.el7.x86_64.iso of=/dev/rdisk2 bs=16384
+diskutil eject /dev/disk2s1
+```
+
 ## Windows
 
-### Prequisites
+### Prerequisites
 
 - Install Rufus software https://rufus.akeo.ie/downloads/ [^1]
 - Verify in system BIOS that the USB drive is listed in the boot priority properly
@@ -27,21 +45,6 @@ The first step is to acquire an ISO of the version of software that is intended 
 - Click "Start"
 - Select "Write in ISO image mode"
 - Click "OK"
-
-## OSX
-Creating a bootable ISO from OS is straightforward.  The only requirements are that you need administrative privileges to the system.
-
-Locate the USB volume name of the target drive (in this example, “disk2s1”) with the `diskutil` command.
-
-```
-diskutil list
-```
-Once you have identified the target USB device, ensure that you have ISO already copied onto the machine creating the bootable USB.  This example uses `128T-OTP-4.2.4-1.el7.x86_64.iso`
-```
-sudo diskutil unmount /dev/disk2s1
-sudo dd if=~/128T-OTP-4.2.4-1.el7.x86_64.iso of=/dev/rdisk2 bs=16384
-diskutil eject /dev/disk2s1
-```
 
 ## System Preparation
 

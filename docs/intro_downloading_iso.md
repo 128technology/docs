@@ -22,28 +22,60 @@ Your client certificate should have been provided to you via email and installed
 
 The ISO installation media is hosted on the same location as the 128T software packages, albeit in a different location.  The easiest means of acquiring the ISO is to use the `curl` command while specifying the certificate obtained from 128 Technology with a valid software license.
 
-```
-curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/128T-OTP-4.2.4-1.el7.x86_64.iso
+```bash
+curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/128T-<VERSION>.el7.x86_64.iso
 ```
 
-##### Verifying Install Media
+Where `<VERSION>` is replaced with the 128T version you are interested in.
+
+### Listing Available ISOs from the Command Line
+To see what ISOs are available for download, one can type the command below.  Egrep is used to filter the results to 4.2.*. 
+
+```html
+# curl --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/ | egrep '4\.2'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.0-2.el7.x86_64.iso">128T-4.2.0-2.el7.x86_64.iso</a></td><td align="right">2019-12-09 19:16  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.0-2.el7.x86_64.qcow2">128T-4.2.0-2.el7.x86_64.qcow2</a></td><td align="right">2020-01-22 20:05  </td><td align="right">5.2G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.1-1.el7.x86_64.iso">128T-4.2.1-1.el7.x86_64.iso</a></td><td align="right">2019-12-14 16:23  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.2-1.el7.x86_64.iso">128T-4.2.2-1.el7.x86_64.iso</a></td><td align="right">2019-12-21 00:21  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.3-1.el7.x86_64.iso">128T-4.2.3-1.el7.x86_64.iso</a></td><td align="right">2020-01-30 03:57  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.4-1.el7.v1.x86_64.iso">128T-4.2.4-1.el7.v1.x86_64.iso</a></td><td align="right">2020-02-14 22:05  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.5-2.el7.OTP.v1.x86_64.iso">128T-4.2.5-2.el7.OTP.v1.x86_64.iso</a></td><td align="right">2020-03-28 16:33  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.5-2.el7.v1.x86_64.iso">128T-4.2.5-2.el7.v1.x86_64.iso</a></td><td align="right">2020-03-28 19:05  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.6-1.el7.OTP.v1.x86_64.iso">128T-4.2.6-1.el7.OTP.v1.x86_64.iso</a></td><td align="right">2020-04-08 22:18  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-4.2.6-1.el7.v1.x86_64.iso">128T-4.2.6-1.el7.v1.x86_64.iso</a></td><td align="right">2020-04-09 02:50  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-OTP-4.2.0-1.el7.x86_64.iso">128T-OTP-4.2.0-1.el7.x86_64.iso</a></td><td align="right">2019-12-09 19:22  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-OTP-4.2.0-2.el7.x86_64.iso">128T-OTP-4.2.0-2.el7.x86_64.iso</a></td><td align="right">2019-12-09 19:28  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-OTP-4.2.1-1.el7.x86_64.iso">128T-OTP-4.2.1-1.el7.x86_64.iso</a></td><td align="right">2019-12-14 01:14  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-OTP-4.2.2-1.el.x86_64.iso">128T-OTP-4.2.2-1.el.x86_64.iso</a></td><td align="right">2019-12-20 17:22  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-OTP-4.2.3-1.el7.x86_64.iso">128T-OTP-4.2.3-1.el7.x86_64.iso</a></td><td align="right">2020-01-27 20:06  </td><td align="right">1.3G</td></tr>
+<tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-OTP-4.2.4-1.el7.x86_64.iso">128T-OTP-4.2.4-1.el7.x86_64.iso</a></td><td align="right">2020-02-14 19:17  </td><td align="right">1.3G</td></tr>
+100  8372    0  8372    0     0  12938      0 --:--:-- --:--:-- --:--:-- 12959
+```
+
+:::note
+There exists a One Touch Provisioning (OTP) and interactive ISO for the same version of software. Select the appropriate image for your needs.
+:::
+
+#### Verifying Install Media
 
 Each ISO file created by 128 Technology, Inc. has an accompanying checksum to ensure that the image has not been tampered with. The checksum file contains all the checksums for all hosted ISOs. The name of the checksum file is sha256sum.txt.
 
-```
+```bash
 curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/sha256sum.txt
 ```
 
 To verify the checksum, use sha256sum (Linux) or shasum (Macintosh), or the checksum tool of your choice:
 
-```
-sha256sum -c sha256sum.txt 128T-OTP-4.2.4-1.el7.x86_64.iso 2>&1 | grep OK
+```bash
+sha256sum -c sha256sum.txt 128T-OTP-4.2.6-1.el7.x86_64.iso 2>&1 | grep OK
 ```
 
 The output of the command should produce the result
 
 ```
-128T-OTP-4.2.4-1.el7.x86_64.iso: OK
+128T-OTP-4.2.6-1.el7.x86_64.iso: OK
 ```
 
 If the checksum validation fails, reattempt the download. If the error message persists after multiple attempts, please contact 128 Technology, Inc. immediately.
