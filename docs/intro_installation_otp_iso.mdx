@@ -31,7 +31,24 @@ The OTP installation process produces a system installed with 128T software with
       wbr=>subroutine: Write Bootstrap Report
       reb=>operation: Reboot
       e=>end: End
-    st(right)->bs->usb1(no, right)->def1(no)->smh
-    bs->smh
+    st->bs->usb1
+    usb1(no)->def1
+    usb1(yes)->es
+    def1(yes)->es
+    def1(no)->smh
+    es->smh
+    smh->sfd->usb2
+    usb2(no, right)->def2
+    usb2(yes, right)->aq
+    def2(yes)->aq
+    def2(no)->rest
+    rest(no)->aotpd
+    rest(yes)->aq->ist
+    aotpd->ist->pbs->usb3
+    usb3(yes)->es2
+    usb3(no)->def3
+    def3(yes)->es2->fin
+    def3(no)->fin
+    fin->wbr->reb->e
   `}
 />
