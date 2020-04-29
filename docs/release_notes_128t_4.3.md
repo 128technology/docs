@@ -2,6 +2,17 @@
 title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
+
+## Release 4.3.4
+
+### Issues Fixed
+
+- **I95-35138** A vulnerability in the SaltStack code allows for unauthenticated salt-minions to execute any script on the salt-master.
+  :::info
+  This fix is required only on the 128T Conductor.
+  :::
+
+
 ## Release 4.3.3
 
 ### New Features and Improvements
