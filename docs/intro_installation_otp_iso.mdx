@@ -11,20 +11,27 @@ The OTP installation process produces a system installed with 128T software with
 <Flowchart
   chartCode={`
     st=>start: Start
-    metadata=>condition: Packet has metadata?
-    int=>condition: Interface has a tenant?
-    nh=>condition: Neighborhood-based tenant?
-    tm=>operation: Tenant taken from metadata
-    ti=>operation: Tenant taken from interface
-    th=>operation: Tenant taken from neighborhood
-    global=>operation: Tenant assigned as "global"
-    e=>end: Proceed to FIB lookup
-    st->metadata
-    metadata(no)->int
-    metadata(yes,right)->tm->e
-    int(yes,right)->ti->e
-    int(no)->nh
-    nh(yes,right)->th->e
-    nh(no)->global->e
+      bs=>operation: Pre-Bootstrap Scriptlet
+      usb1=>condition: On USB?
+      def1=>condition: Default?
+      es=>inputoutput: Execute Scriptlet
+      smh=>operation: Set Minion ID\nSet Hostname\nSynchronize Clock
+      sfd=>operation: Set 128T Factory Defaults
+      usb2=>condition: On USB?
+      def2=>condition: Default?
+      rest=>condition: REST get?
+      aq=>inputoutput: Apply quickstart.txt
+      aotpd=>inputoutput: Apply OTP Defaults
+      ist=>operation: Setup IFCFG\nEnable salt-minion\nEnable 128T
+      pbs=>operation: Post-Bootstrap Scriptlet
+      usb3=>condition: On USB?
+      def3=>condition: Default?
+      es2=>inputoutput: Execute Scriptlet
+      fin=>operation: Finalize
+      wbr=>subroutine: Write Bootstrap Report
+      reb=>operation: Reboot
+      e=>end: End
+    st(right)->bs->usb1(no, right)->def1(no)->smh
+    bs->smh
   `}
 />
