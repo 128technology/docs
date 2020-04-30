@@ -50,8 +50,17 @@ sidebar_label: 4.4
 - **I95-16902** Tab-complete in PCLI does not quote strings with spaces in them
   _**Conditions:**_ Key field for configuration object contains a space
 ------
-- **I95-30517** `t128-salt` command produces deprecated warning
-
+- **I95-24957** `t128-salt` command produces an error when running. This error is cosmetic as the operation completes successfully.
+  ```
+  Exception ignored in: <generator object _stream_return at 0x7f45d0b66d58>
+Traceback (most recent call last):
+  File "/usr/lib/128technology/python/salt/venv/lib/python3.6/site-packages/salt/transport/tcp.py", line 1013, in _stream_return
+AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
+  ```
+------
+- **I95-28223** PCLI tab-completion incorrectly includes candidate configuration for `show device-interface <interface-name>`
+------
+- **I95-30517** `t128-salt` command produces deprecated warning. This warning is cosmetic as the operation completes successfully.
   ```
   [WARNING ] /tmp/tmpigi2k61k/pip3/salt/salt/transport/ipc.py:292: DeprecationWarning: encoding is deprecated, Use raw=False instead.
   self.unpacker = msgpack.Unpacker(encoding=encoding)
@@ -82,9 +91,15 @@ sidebar_label: 4.4
 ------
 - **I95-33983** User role can see a list of config exports by executing `show config exports`
 ------
+- **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
+  Until the system is upgraded to 4.4.0, this issue can be mitigated by rebooting the 128T.
+------
 - **I95-34334** Audit events are not triggered on download and version query timeouts.  Audit events have been added to provide clarity to the administrator in the event that downloads fail to complete.
 ------
 - **I95-34437** Asset State not correctly reported
+------
+- **I95-34629** On a system under high CPU load, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+  Until the system is upgraded to 4.4.0, this issue can be mitigated by attempting the commit again.
 ------
 - **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
 ------
@@ -96,9 +111,18 @@ sidebar_label: 4.4
   ```
   Enhanced logging to indicate receiving interface during invalid ARP classification and add the packet to the `highwayExceptions.pcap`.
 ------
+- **I95-34790** A HA router with over 500 peer paths and high rate of traffic, may result in some flows being black-holed during a node failover event.
+------
 - **I95-34882** `show user` is missing from `search commands regex ".*"`
 ------
+- **I95-35062** Non-permanent LTE failures are incorrectly displayed as a failure context in `show device-interface`
+------
 - **I95-35081** Long authority names can obscure "UP" navigation button with the configuration UI
+------
+- **I95-35093** `show asset <asset-id>` incorrectly continues to show `Currently Upgrading` version after completion of an upgrade.
+------
+- **I95-35088** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
+  Until the system is upgraded to 4.4.0, this issue can be mitigated by disabling rather than deleting the user.
 ------
 - **I95-35138** A vulnerability in the SaltStack code allows for unauthenticated salt-minions to execute any script on the salt-master.
   :::info
