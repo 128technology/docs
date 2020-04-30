@@ -98,7 +98,7 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
 ------
 - **I95-34437** Asset State not correctly reported
 ------
-- **I95-34629** On a system under high CPU load, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+- **I95-34629** During the initial window of a router to Conductor connection outage or as connectivity is established between HA peers, configuration commits may fail silently. Candidate configuration will remain uncommitted.
   Until the system is upgraded to 4.4.0, this issue can be mitigated by attempting the commit again.
 ------
 - **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
