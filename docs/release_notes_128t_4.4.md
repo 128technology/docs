@@ -51,11 +51,11 @@ sidebar_label: 4.4
   _**Conditions:**_ Key field for configuration object contains a space
 ------
 - **I95-30517** `t128-salt` command produces deprecated warning
-  
+
   ```
   [WARNING ] /tmp/tmpigi2k61k/pip3/salt/salt/transport/ipc.py:292: DeprecationWarning: encoding is deprecated, Use raw=False instead.
   self.unpacker = msgpack.Unpacker(encoding=encoding)
-  
+
   [WARNING ] /tmp/tmpigi2k61k/pip3/salt/salt/payload.py:149: DeprecationWarning: encoding is deprecated, Use raw=False instead.
     ret = msgpack.loads(msg, use_list=True, ext_hook=ext_type_decoder, encoding=encoding)
   ```
@@ -89,7 +89,7 @@ sidebar_label: 4.4
 - **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
 ------
 - **I95-34753** ARP packet validation failure produces misleading log message.
-  
+
   ```
   WARN  (arpManagerTP    ) Base Exception: Invalid Icmp Header Format: no   NS option available.
   ERROR (arpManagerTP    ) Caught unexpected exception
@@ -99,6 +99,11 @@ sidebar_label: 4.4
 - **I95-34882** `show user` is missing from `search commands regex ".*"`
 ------
 - **I95-35081** Long authority names can obscure "UP" navigation button with the configuration UI
+------
+- **I95-35138** A vulnerability in the SaltStack code allows for unauthenticated salt-minions to execute any script on the salt-master.
+  :::info
+  This fix is required only on the 128T Conductor.
+  :::
 
 ## Special Considerations
 - Python has been upgraded from version 2 to version 3.  Any custom salt states that have been written that include python code, may need to be upgraded or rewritten in advance of the upgrading to 4.4. (I95-31073)
@@ -115,3 +120,20 @@ sidebar_label: 4.4
   7. `averageBandwidth`, `traffic`, `sessions`, and `sessionArrivalRate` fields will be removed from `/serviceClass` response messages.
   8. `bandwidth`, `sessions` and `traffic`  fields have been deprecated in `/tenant` and `/tenant/{tenant}` response messages.
      (I95-25614)
+
+## Caveats
+
+- **I95-34941** _nodejs_ process can segfault during the upgrade of the 128T
+
+  _**Corrective Action:**_ No action required. The webserver will immediately restart.
+------
+- **I95-33560** When upgrading a HA conductor to version 4.4.0 or later there is a compatibility issue due to an upgrade of the asset provisioning software. This results in a reported asset error that will persist until the two nodes are upgraded to the same version.
+
+  _**Symptom:**_ This error is seen during the upgrade of an HA conductor pair to version 4.4.0 or later. An upgrade of a single standalone conductor node will not see this error. The following error will be reported by the node running software version earlier than 4.4.0:
+  ```
+"128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
+  ```
+  This error can be viewed by running the following PCLI command from either node: `show assets <asset-id>`. Where asset-id is the asset-id of the node running pre 4.4.0 version that has not yet been upgraded.
+
+  _**Corrective Action:**_ This error is transient and will only persist for the duration of the upgrade. The error it will not self-correct. Continue to upgrade the second conductor node. After upgrade, verify that there are no asset state errors.
+------
