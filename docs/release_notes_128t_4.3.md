@@ -11,6 +11,9 @@ sidebar_label: 4.3
   :::info
   This fix is required only on the 128T Conductor.
   :::
+------
+- **I95-31618** Upon initial plugin installation on a 128T, configuration for the plugin is not honored.
+  Until the system is upgraded to 4.3.4, this issue can be mitigated by committing the configuration again.
 
 
 ## Release 4.3.3
