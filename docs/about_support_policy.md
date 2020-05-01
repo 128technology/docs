@@ -36,7 +36,7 @@ For the purpose of the policy, the following definitions apply:
 
 ## Lifecycle Support Policy
 
-This lifecycle support policy covers the lifecycle milestones and maintenance and support phases for Software Releases of active products as well as products becoming end-of-life.
+This lifecycle support policy covers the lifecycle, milestones and maintenance and support phases for Software Releases of active products as well as products becoming end-of-life.
 
 ### Major Releases
 
