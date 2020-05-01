@@ -10,7 +10,7 @@ The 128 Technology Security Incident Response Team (SIRT) is responsible for res
 
 ## Reporting Suspected Security Vulnerability
 
-Individuals and Enterprises that are experiencing 128 Technology product security issues are strongly encouraged to contact 128 SIRT through email at 128sirtreport@128technology.com or open a case on the 128 Technology customer portal at https://community.128technology.com/support.
+Individuals and Enterprises that are experiencing 128 Technology product security issues are strongly encouraged to contact 128 SIRT through email at 128sirtreport@128technology.com or open a case on the 128 Technology customer portal at https://community.128technology.com.
 
 ## Receiving Suspected Security Vulnerability
 
