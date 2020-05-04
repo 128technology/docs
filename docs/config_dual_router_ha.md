@@ -5,4 +5,3 @@ There are several different high availability models possible with the 128T rout
 - An iBGP interface shared between the two devices in lieu of a "fabric" interface in the dual node deployment.
 - No `shared-phys-address` (and hence no shared interfaces) between the two devices. Interface protection in a dual router HA deployment is accomplished using traditional routing protocols.
 
-Testing 1, 2, 3.
