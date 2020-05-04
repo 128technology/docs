@@ -124,6 +124,8 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
 - **I95-35088** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
   Until the system is upgraded to 4.4.0, this issue can be mitigated by disabling rather than deleting the user.
 ------
+- **I95-35115** Aggregate bandwidth charts may not display data accurately
+------
 - **I95-35138** A vulnerability in the SaltStack code allows for unauthenticated salt-minions to execute any script on the salt-master.
   :::info
   This fix is required only on the 128T Conductor.
