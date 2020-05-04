@@ -250,11 +250,15 @@ The *authority* configuration element is the top-most level in the 128T router c
 
 | Element | Type | Description |
 | --- | --- | --- |
+| auto-install | boolean | When true, this will automatically install the 128T software onto an asset once it connects to the conductor. When false, software will not be installed automatically and will require administrative intervention. |
+| conductor-address | address | The IP address or hostname of your conductors. There can be at most two conductor addresses configured in an authority; note that the addresses here should be reachable by most/all of your authority's routers. (Routers that use different addresses to reach the same conductor can override this in their configuration.) |
 | dscp-map | sub-element | Lets administrators map the inbound DSCP values received in packet headers into priority values, for traffic engineering purposes. |
 | dynamic-hostname | string | This allows administrators to establish a templated pattern for how interfaces on routers will create "names" for their interfaces. These names, constructed using substitution variables in the dynamic-hostname syntax, can be used as (effectively) persistent labels for referring to the corresponding interface, rather than an IP address. This is particularly useful when an interface acquires its address using a dynamic protocol such as PPPoE or DHCP. Uses the following substitution variables: {interface-id} for Network Interface Global Identifier {router-name} for Router Name {authority-name} for Authority Name For example, \'interface-{interface-id}.{router-name}.{authority-name}\'. |
 | ipfix-collector | sub-element | Allows administrators to configure authority-wide IPFIX (IP Flow Information Export) collectors, for flow-by-flow/session-by-session information. |
+| ldap-server | sub-element | Configuration in support of an external authentication service for administrative logins. |
 | name | string | A text string that names the authority. This should be unique to an administrative domain, as devices that are configured with the same authority:name are presumed to be associated with each other. It is recommended that an authority name be something associated with an enterprise deploying the 128T router; e.g., "128technology". |
 | rekey-interval | union | Valid values: 1-720, or 'never' (default). The number of minutes between security key renegotiation events, when communicating with other 128T devices within an Authority. |
+| remote-login | sub-element | Governs whether routers within the authority will be reachable using the "remote login" feature. This lets administrators log into the PCLI or shell of a remote router from the conductor's PCLI or shell. |
 | router | sub-element | This is the branch of the configuration tree for defining all of the router-specific components and their properties. This includes things such as "nodes", the software instances that comprise the 128T router solution, routing policy, and traffic management attributes. |
 | security | sub-element | Multiple instance. The security elements represent security policies for governing how and when the 128T router encrypts and/or authenticates packets. |
 | service | sub-element | Multiple instance. These define the services that the 128T router is configured to deliver. |
@@ -467,9 +471,9 @@ Description:
 
 This element allows administrators to map the DSCP (Differentiated Services Code Point) values into 128T *traffic-class* values, which will subsequently affect their treatment from a traffic engineering standpoint. Many networks use DSCP marking within packet headers to convey a sense of relative priority of these packets as compared to others. Mapping these DSCP values into 128T traffic classes can place certain packets into queues that have more bandwidth, or have more scheduling time, etc.
 
--- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-|  | Versions | of 128T software prior to 3.2.0 only allowed mapping of DSCP values to *priority* values (using the dscp-prioritization element). As of 3.2.0, and going forward, the preferred method for mapping DSCP values into the traffic engineering subsystem is to use *dscp-traffic-class*. |
--- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+:::note
+Versions of 128T software prior to 3.2.0 only allowed mapping of DSCP values to *priority* values (using the `dscp-prioritization` element). As of 3.2.0, and going forward, the preferred method for mapping DSCP values into the traffic engineering subsystem is to use `dscp-traffic-class`.
+:::
 
 | Element | Type | Description |
 | --- | --- | --- |
@@ -695,7 +699,7 @@ Introduced in 3.2.
 
 Path:
 
-authority \> ipfix-collector
+authority > ipfix-collector
 
 Description:
 
@@ -714,6 +718,28 @@ This element contains information regarding externally reachable IPFIX (IP Flow 
 Version History:
 
 Introduced in 3.1. Updated in 3.2: added *tenant*.
+
+## ldap-server
+
+Path:
+
+authority > ldap-server
+
+Description:
+
+The `ldap-server` element lets you configure an external server that is used to authenticate administrative users.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| address | address | The address of the LDAP server. |
+| bind-type | enumeration | Valid values: anonymous, unauthenticated, password. This controls how the 128T routers will bind to the LDAP server. |
+| name | string | Key field. This is the name of the LDAP server configuration element. |
+| port | enumeration | Valid values: server-type-default or a L4 port (0-65535). This is the TCP port that the 128T will use when connecting to the LDAP server. When set to `server-type-default`, the 128T will use 3269 for global-catalog, 636 for LDAPS, and 389 for StartTLS. |
+| search-base | string | The search base defines the starting point for the search in the directory tree. For example, 128T might need to query the entire directory, in which case the search base must specify the root of the directory service. Or, 128T might need to query a specific organizational unit (OU) in the directory. Generally this is configured as a series of _Domain Components_, which are abbreviated "dc." |
+| server-type | enumeration | Valid values: global-catalog, ldaps, starttls. Default value: ldaps. LDAPS is LDAP wrapped in SSL, and is a non-standard (yet popular) implementation. StartTLS is instead built into the LDAP protocol itself. Consult your LDAP server's documentation to determine the server-type most appropriate for your deployment. |
+
+### See Also
+[Configuring LDAP](config_ldap.md)
 
 ## load-balancing
 
@@ -931,7 +957,7 @@ Version History:
 
 Introduced in 1.0. Updated in 3.0: removed *inbound-policy* and *outbound-policy* references. Updated in 3.2: added *neighbor-policy*.
 
-## neighbor-policy)
+## neighbor-policy
 
 Path:
 
@@ -1261,6 +1287,23 @@ The *redundancy-group* sub-element lets users specify device-interface elements 
 Version History:
 
 Introduced in 2.0.
+
+## remote-login
+
+Path:
+
+authority \> remote-login
+
+Description:
+
+The *remote-login* feature creates management connections between the conductor and the routers it manages, allowing administrators to remotely log into the PCLI (or a Linux shell) from the conductor's PCLI or Linux shell.
+
+| Element  | Type        | Description                                                  |
+| -------- | ----------- | ------------------------------------------------------------ |
+| enabled  | boolean     | Whether the remote-login feature is enabled for routers in this authority. |
+
+### See Also
+[Connecting to Routers](ts_connecting_to_routers.md)
 
 ## route-reflector
 
