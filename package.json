@@ -11,7 +11,7 @@
     "lint": "eslint --cache \"**/*.js\"",
     "prettier": "prettier --config .prettierrc --write \"**/*.{js,md}\"",
     "prettier:diff": "prettier --config .prettierrc --list-different \"**/*.{js,md}\"",
-    "check-links": "blcl -ro ./build/"
+    "check-links": "blcl -rog ./build/"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.48",
