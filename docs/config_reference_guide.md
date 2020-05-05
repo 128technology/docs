@@ -581,6 +581,22 @@ Version History:
 
 Introduced in 1.1.
 
+## filter
+
+Path:
+
+authority > routing > filter
+
+Description:
+
+This is where adminstrators configure  the 128T's implementation of *route filters*, which are sets of conditions for matching specific patterns in route advertisements (inbound or outbound). These are used in conjunction with [route policies](#policy) to manipulate those route advertisements.
+
+| Element | Type | Description |
+| --- | --- | ---|
+| name | string | Key field. The unique label assigned to this filter, used to reference it in other parts of the 128T router's configuration. |
+| rule | sub-element | The properties of the filter are configured in the `rule` sub-element. |
+| type | enumeration | Valid values: prefix-filter, as-path-filter, community-filter, extended-community-filter. This specifies which portion of a BGP message is to be parsed to find a match: `prefix-filter` will look for matches based on advertised prefixes, `as-path-filter` will look for matches based on the AS PATH, `community-filter` based on the BGP community, and `extended-community-filter` based on the extended BGP community attribute.
+
 ## graceful-restart
 
 Path:
@@ -1381,7 +1397,22 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: added "entitlement" sub-element. Updated in 3.0: removed *priority*, added *location-coordinates*. Updated in 3.1: added *group*. Updated in 3.2: added *application-classification*, *maintenance-mode*, and *udp-tranform*.
 
-## routing
+## routing (authority-wide)
+
+Path:
+
+authority > routing
+
+Description:
+
+The *routing* element within an authority lets administrators configure policies and filters that are available to every router managed by a 128T conductor.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| filter | sub-element | A field for containing human-readable information. Has no impact on packet forwarding. |
+| policy | sub-element | At this time, the 128T router only supports the BGPv4 routing protocol. |
+
+## routing (per-router)
 
 Path:
 
@@ -1394,7 +1425,7 @@ The *routing* element is a router-level container for all of the routing policie
 | Element | Type | Description |
 | --- | --- | --- |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
-| routing-protocol | sub-element | At this time, the 128T router only supports the BGPv4 routing protocol. |
+| routing-protocol | sub-element | At this time, the 128T router only supports the BGPv4 routing protocol as a sub-element. (OSPF is configured within a different branch of the hierarchy.) |
 | static-route | sub-element | Where administrators define static routes for their router. |
 | type | enumeration | Valid values: default-instance. At this time, the 128T router only supports the "default-instance" type. |
 
@@ -1428,6 +1459,27 @@ Version History:
 
 Introduced in 1.0.
 
+## rule
+
+Path:
+
+authority > routing > filter > rule
+
+Description:
+
+The `rule` sub-element within a [route filter](#filter) will describe the matching criteria for the filter; note, the rule will attempt to match the attributes specified in the filter's `type`.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| community | regex | When the filter's type is `community-filter`, this lets you configure a regular expression pattern for matching the community of interest. |
+| extended-community | regex | When the filter's type is `extended-community-filter`, this lets you configure a regular expression pattern for matching the BGP extended community attribute of interest. |
+| filter | enumeration | Valid values: accept, reject. This will accept or reject the rule based on its `name`. |
+| ge | uint8 | When the filter's type is `prefix-filter`, this lets you match prefixes greater than or equal to the prefix length specified. |
+| le | uint8 | When the filter's type is set to `prefix-filter`, this lets you match prefixes less than the length of the prefix specified. |
+| name | string | A unique identifier for this rule. |
+| prefix | address prefix | When the filter's type is set to `prefix-filter`, this allows you to specify the prefix of interest. |
+| as-path | regex | When the filter's type is set to `as-path-filter`, this allows you to specify a regex pattern to match the AS PATH in the BGP message. |
+
 ## security
 
 Path:
@@ -1451,6 +1503,7 @@ Generally, security policies are applied within routers, tenants, or services. W
 | hmac | boolean | Default: true. When true, the 128T router will insert an HMAC value into packets. |
 | hmac-cipher | enumeration | Valid values: sha1, sha256, sha256-128. The cipher used for generating the HMAC value inserted into metadata. |
 | hmac-key | string | The HMAC key for this security policy. |
+| hmac-mode | enumeration | Valid values: disabled, regular, time-based. Default: time-based. This governs whether and how the 128T router adds HMAC information to packets it transmits to an SVR peer. HMAC is used for peer-to-peer authentication of packets. When set to `disabled`, no HMAC is added to packets. When set to `regular`, a standard HMAC authentication pattern is included in all packets. When set to `time-based`, the HMAC authentication header will include timestamp information, as a replay attack mitigation. Note: including HMAC authentication headers in packets may impact performance. |
 | name | string | Key field. This is a unique name used by other configuration elements to refer to this security-policy. |
 
 Version History:
@@ -1823,6 +1876,7 @@ It is not necessary for an administrator to explicitly create a "parent" tenant 
 | Element | Type | Description |
 | --- | --- | --- |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
+| generated | boolean | This is set to `true` when the configuration element has been automatically generated by a conductor. In order to make changes to a generated element persist, this field must be set to `false`. |
 | member | sub-element | This replaces *address* in previous software versions, and lets administrators define address blocks within *neighborhoods* to describe tenant membership. |
 | name | string | Key field. It is an arbitrary, unique name that other configuration sections will refer to. |
 | security | reference | This is a reference to the default security-policy to use for traffic within this tenancy. Note that this will be used only when a more specific service-policy (e.g., one within a service) is not specified. |
