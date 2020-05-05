@@ -43,6 +43,38 @@ Version History:
 
 Introduced as part of the addition of *host-service* capabilities in 3.1.
 
+## action
+
+Path:
+
+authority > routing > policy > statement > action
+
+Description:
+
+The *action* configuration element lets administrators define actions to take within route policy `statement` configuration.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| type | enumeration | Key field. Valid values: set-aggregator, modify-as-path, set-atomic-aggregate, set-community, remove-community, set-extended-community, set-next-hop, set-local-preference, modify-metric, set-originator-id, set-origin, set-tag, set-bgp-weight, continue, call. This governs the remaining configurable options for the `action` as described below. |
+| add | uint32 | Configurable when `type` is `set-aggregator`. This will add the specified value to the route's metric. |
+| additive | presence | Configurable when `type` is `set-aggregator`. When present, the action will merge the community attribute values with those specified in the action. |
+| aggregator-address | ipv4-address | Configurable when `type` is `set-aggregator`. The IP address of the aggregator. |
+| as | uint32 (ASN) | Configurable when `type` is `set-aggregator`. The ASN of the aggregator. |
+| community-attribute | enumeration or string | Valid values: internet, local-AS, no-advertise, no-export, or a freeform community string written as `uint16:uint16`. This sets the community-attribute of the route. |
+| community-filter | reference | Configurable when `type` is `remove-community`. The filter (of type `community-filter`) that will match all of the community strings to remove. |
+| exclude | string | Configurable when `type` is `modify-as-path`. This is a space separated list of autonomous system numbers to exclude from the route advertisement. |
+| ip-address | ipv4-address | The new next-hop IP address to use for this route. |
+| none | presence | When present, will remove all communities from the route advertisement. |
+| peer-address | ipv4-address | Set the next-hop IP address of the route to that of the peer. |
+| policy | reference | Configurable when `type` is `call`. This references another policy, and will cause the current policy statement to "branch" to that referenced policy. |
+| prepend | string | Configurable when `type` is `modify-as-path`. This is a space separated list of autonomous system numbers to prepend to the route advertisement. |
+| set | uint32 | This will set the route metric to the configured value. |
+| statement | reference | Configurable when `type` is `continue`. This will progress on to the specified `statement`, which must be after the current statement. This lets you "jump over" intervening statements. |
+| subtract | uint32 | This will subtract the configured value from the route metric. |
+
+
+
+
 ## address
 
 Path:
@@ -595,7 +627,7 @@ This is where adminstrators configure  the 128T's implementation of *route filte
 | --- | --- | ---|
 | name | string | Key field. The unique label assigned to this filter, used to reference it in other parts of the 128T router's configuration. |
 | rule | sub-element | The properties of the filter are configured in the `rule` sub-element. |
-| type | enumeration | Valid values: prefix-filter, as-path-filter, community-filter, extended-community-filter. This specifies which portion of a BGP message is to be parsed to find a match: `prefix-filter` will look for matches based on advertised prefixes, `as-path-filter` will look for matches based on the AS PATH, `community-filter` based on the BGP community, and `extended-community-filter` based on the extended BGP community attribute.
+| type | enumeration | Valid values: prefix-filter, as-path-filter, community-filter, extended-community-filter. This specifies which portion of a BGP message is to be parsed to find a match: `prefix-filter` will look for matches based on advertised prefixes, `as-path-filter` will look for matches based on the AS PATH, `community-filter` based on the BGP community, and `extended-community-filter` based on the extended BGP community attribute. |
 
 ## graceful-restart
 
@@ -1183,6 +1215,21 @@ Version History:
 
 Introduced in 1.0. Updated in 1.1: core-address renamed to control-address, to reflect new 128T naming conventions. Updated in 2.0: added tenant, removed role. Updated in 3.0: removed unused fields, removed *tenant*. Updated in 3.2: removed id, added generated.
 
+## policy
+
+Path:
+
+authority > routing > policy
+
+Description:
+
+The *policy* element represents 128T's implementation of BGP route policies. A route policy lets administrators manipulate BGP messages based on criteria (as specified in `filter` configuration) to perform specific steps, each of which is contained within a `statement`.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| name | string | A unique identifier for this routing policy. This will be referenced by other configuration elements. |
+| statement | sub-element | The actions to be taken as a part of the routing policy. |
+
 ## port-range
 
 Path:
@@ -1471,6 +1518,7 @@ The `rule` sub-element within a [route filter](#filter) will describe the matchi
 
 | Element | Type | Description |
 | --- | --- | --- |
+| as-path | regex | When the filter's type is set to `as-path-filter`, this allows you to specify a regex pattern to match the AS PATH in the BGP message. |
 | community | regex | When the filter's type is `community-filter`, this lets you configure a regular expression pattern for matching the community of interest. |
 | extended-community | regex | When the filter's type is `extended-community-filter`, this lets you configure a regular expression pattern for matching the BGP extended community attribute of interest. |
 | filter | enumeration | Valid values: accept, reject. This will accept or reject the rule based on its `name`. |
@@ -1478,7 +1526,6 @@ The `rule` sub-element within a [route filter](#filter) will describe the matchi
 | le | uint8 | When the filter's type is set to `prefix-filter`, this lets you match prefixes less than the length of the prefix specified. |
 | name | string | A unique identifier for this rule. |
 | prefix | address prefix | When the filter's type is set to `prefix-filter`, this allows you to specify the prefix of interest. |
-| as-path | regex | When the filter's type is set to `as-path-filter`, this allows you to specify a regex pattern to match the AS PATH in the BGP message. |
 
 ## security
 
@@ -1788,6 +1835,29 @@ This is the sub-element that allows administrators to configure static routes, t
 Version History:
 
 Introduced in 1.0. Updated in 3.0: added *blackhole*, *distance*.
+
+## statement
+
+Path:
+
+authoritng > routing > policy > statement
+
+Description:
+
+The *statement* is the programmatic step of a routing policy. Routing policies are comprised of one or more statements, which combine to take action (e.g., accept or reject routes based on criteria, or modify routes). Each statement will evaluate all of its `condition` elements. If all conditions match (including the case where there are no `condition` elements configured), the `policy` for that statement will govern whether the policy will accept or reject that route.
+
+An `accept` will then execute each `action` in the statement and then terminate the policy returning, accept. A `reject` means do not execute the actions and terminate the policy returning reject.
+
+:::note
+If a policy reaches the end of the statement list and no statement has been executed there is an implicit reject.
+:::
+
+| Element | Type | Description |
+| --- | --- | --- |
+| action | sub-element | The action to take based when this statement is executed. |
+| condition | sub-element | The condition that must be satisfied in order to enforce the `policy` action of accept or reject. |
+| name | string | Key field. A unique name for this statement. |
+| policy | enumeration | Valid values: accept, reject. Governs whether the statement will `accept` or `reject`, typically based on a `condition`. |
 
 ## syslog
 
