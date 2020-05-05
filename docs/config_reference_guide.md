@@ -60,20 +60,24 @@ The *action* configuration element lets administrators define actions to take wi
 | additive | presence | Configurable when `type` is `set-aggregator`. When present, the action will merge the community attribute values with those specified in the action. |
 | aggregator-address | ipv4-address | Configurable when `type` is `set-aggregator`. The IP address of the aggregator. |
 | as | uint32 (ASN) | Configurable when `type` is `set-aggregator`. The ASN of the aggregator. |
+| bgp-weight | uint32 | Configurable when `type` is `set-bgp-weight`. The value to set for the BGP weight of the route. |
 | community-attribute | enumeration or string | Valid values: internet, local-AS, no-advertise, no-export, or a freeform community string written as `uint16:uint16`. This sets the community-attribute of the route. |
 | community-filter | reference | Configurable when `type` is `remove-community`. The filter (of type `community-filter`) that will match all of the community strings to remove. |
 | exclude | string | Configurable when `type` is `modify-as-path`. This is a space separated list of autonomous system numbers to exclude from the route advertisement. |
 | ip-address | ipv4-address | The new next-hop IP address to use for this route. |
+| local-preference | uint32 | Configurable when `type` is `set-local-preference`. This lets you specify the local preference value for the route. |
 | none | presence | When present, will remove all communities from the route advertisement. |
+| origin | ipv4-address | Configurable when `type` is `set-origin`. This sets the BGP origin for the route. |
+| originator-id | ipv4-address | Configurable when `type` is `set-originator-id`. This sets the originator ID for the route. |
 | peer-address | ipv4-address | Set the next-hop IP address of the route to that of the peer. |
 | policy | reference | Configurable when `type` is `call`. This references another policy, and will cause the current policy statement to "branch" to that referenced policy. |
 | prepend | string | Configurable when `type` is `modify-as-path`. This is a space separated list of autonomous system numbers to prepend to the route advertisement. |
+| route-target | string | Configurable when `type` is `set-extended-community`. The new extended-community route target, in one of several formats. |
 | set | uint32 | This will set the route metric to the configured value. |
+| site-of-origin | string | Configurable when `type` is `set-extended-community`. The new site-of-origin value for an extended-community, configurable in one of several formats. |
 | statement | reference | Configurable when `type` is `continue`. This will progress on to the specified `statement`, which must be after the current statement. This lets you "jump over" intervening statements. |
 | subtract | uint32 | This will subtract the configured value from the route metric. |
-
-
-
+| tag | uint32 | Configurable when `type` is `set-tag`. This sets the tag for the BGP route. |
 
 ## address
 
@@ -411,12 +415,13 @@ The *bfd* sub-element is used for configuring timers and behaviors associated wi
 | --- | --- | --- |
 | authentication-type | enumeration | Valid values: simple, sha256. This is the authentication type used in BFD packets sent to the other devices within the router. |
 | desired-tx-interval | uint32 | Valid values: 50-5000. Default: 1000. Configured in milliseconds, this represents the frequency with which BFD asynchronous control packets are sent by each node in a router to each other node within the same router. |
+| dscp | uint8 | Valid values: 0-63. The DSCP value to use for outbound BFD. |
 | link-test-interval | uint32 | Valid values: 1-86400. Default: 1. Configured in seconds. This determines the frequency with which a node will perform link tests with other nodes in the router, using BFD echo packets. |
 | link-test-length | uint8 | Default: 10. This is the number of packets sent in one link-test session between peers, used for determining latency and jitter. |
 | multiplier | uint8 | Valid values: 3-20. Default: 3. This represents the number of missed consecutive messages from a peer before treating that peer as unusable. |
-| required-min-echo-interval | uint32 | This represents the minimum interval, configured in milliseconds, between BFD *echo packets* (used for measuring link quality) that the nodes in this router are capable of supporting. |
 | required-min-rx-interval | uint32 | Default: 500. This represents the lowest inter-packet arrival interval (i.e., the fastest rate) at which this router can support asynchronous BFD packets. During negotiation with a BFD peer, this router will transmit packets at the higher of its desired-tx-interval and its peer's required-min-rx-interval. |
 | state | enumeration | Valid values: enabled, disabled. Default: enabled. When enabled, BFD is exchanged among all nodes within this router. |
+
 Version History:
 
 Introduced in 1.0. Updated in 3.0 (exposed required-min-rx-interval, which was previously fixed at 500ms, and required-min-echo-interval).
