@@ -50,7 +50,15 @@ If the _current_ GA version of software is 4.3.3, 4.X and the latest 3.X are sup
 
 128 Technology will provide maintenance services for minor releases for 6 months from the date the minor release becomes GA or three months after the GA of a subsequent minor release, whichever is longer. The last minor release of a major release stream shares the EOM date of the major release. The LDOS of a minor release is 6 months from its EOM date.
 
+### Lifecycle Support Policy in Action
+
 ![about_support_policy_1](/img/about_support_policy_1.png)
+
+The above figure illustrates the policy in action.  Major Release streams are shown releasing on an annual cadence (in practice release cadence is not fixed).  Each Major Release stream is comprised of an initial release (e.g. 1.0.0) followed multiple Minor (feature) Releases that are released on a more frequent basis. Minor releases are fully backward compatible and do not introduce major changes (e.g. architectural, compatibility, operating system) and as such, upgrades to feature releases of the same Major Release stream pose little risk.
+
+The illustration shows an effective Major Release maintenance lifespan of 2 years plus 6 months of post-maintenance support services. As the 128T policy commits to provide maintenance services for at least the 2 most recent Major Releases, the 1.X.X release stream (represented by Release 1.5.0, the last Minor Release of the stream) becomes EOM upon the GA of Release 3.0.
+
+The illustration also shows a minimum maintenance life of a Minor release (including the initial release of a Major Release stream) of 6 months plus an additional 6 months of support services (see 1.0.0 through 1.4.0).  The final Minor Release of a stream may have a significantly longer maintenance life aligned with our Major Release support policy.  For example, in the illustration, the final 1.X.X release, Minor Release 1.5.0 has a maintenance life of 18 months plus 6 months of support services.
 
 ### Extended Maintenance & Support
 
