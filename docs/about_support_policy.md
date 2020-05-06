@@ -54,7 +54,7 @@ If the _current_ GA version of software is 4.3.3, 4.X and the latest 3.X are sup
 
 ![about_support_policy_1](/img/about_support_policy_1.png)
 
-The above figure illustrates the policy in action.  Major Release streams are shown releasing on an annual cadence (in practice release cadence is not fixed).  Each Major Release stream is comprised of an initial release (e.g. 1.0.0) followed multiple Minor (feature) Releases that are released on a more frequent basis.
+The above figure illustrates the policy in action.  Major Release streams are shown releasing on an annual cadence (in practice release cadence is not fixed).  Each Major Release stream is comprised of an initial release (e.g. 1.0.0) followed multiple Minor (feature) Releases that are released on a more frequent basis. Minor releases do not introduce major changes (e.g. architectural, compatibility, operating system) and as such, upgrades to feature releases of the same Major Release stream pose little risk.
 
 The illustration shows an effective Major Release maintenance lifespan of 2 years plus 6 months of post-maintenance support services. As the 128T policy commits to provide maintenance services for at least the 2 most recent Major Releases, the 1.X.X release stream (represented by Release 1.5.0, the last Minor Release of the stream) becomes EOM upon the GA of Release 3.0.
 
