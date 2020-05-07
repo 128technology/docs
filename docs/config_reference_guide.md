@@ -208,9 +208,13 @@ Adjacencies are given an administrative *cost* that affects the routing plane, a
 | nat-keep-alive | sub-element | Governs whether the 128T will generate keepalive packets to remote peers. This is used when there is a NAT device between the two peers, and should be set on the device behind the NAT. |
 | path-mtu-discovery | sub-element | This controls the 128T's Path MTU Discovery (PMTUD) behavior for commuicating with the peer over this peer path. |
 | peer | reference | A reference to a configured peer (from router:peer). This is the name of the peer router to which this waypoint address belongs. |
+| peer-connectivity | enumeration | Valid values: bidirectional, outbound-only. This should be set to `outbound-only` if the adjacency is behind a NAT device. |
 | port-range | reference | A reference to a port range to limit the far-end "waypoint" range to a defined set. This is useful when working with peers that have strict firewall restrictions on which ports can be used for communicating between 128T routers. (By default, when this field is left unconfigured, the range is 16384-65535.) This field is only configurable when *peer* specifies another 128T element. |
+| post-encryption-padding | sub-element | Enables configuration of a feature to enable padding to encrypted packets, allowing SVR traffic to traverse strict firewalls that may filter certain types of traffic. |
 | qp-value | uint32 | An integer representing the quality points on the link between this node and its adjacent network element. Quality points are assigned to links from low values (representing bulk traffic links) to high values (representing managed, high-quality links). This is used in conjunction with a service's *service-class* when deciding on which path to use for a given service's traffic. |
+| session-optimization | sub-element | Governs whether session optimization should be enabled when communicating with the adjacency. |
 | source-nat-address | CIDR | Multiple instance. Each source-nat-address is set to the address and prefix of the far-end NAT between this adjacency, and the network-interface on this node used to reach that adjacency. For NATs that use a single address, the prefix should be set to /32. For NATs that use a pool, the prefix should be set accordingly. Note: extreme caution should be used when configuring 0.0.0.0/0 in an attempt to "wildcard" the source-nat-address; network-interface configuration elements that do not have tenants associated with them (or those that do, where the tenant has no configured prefixes) will potentially collide with this configuration and lead to undesirable behavior. |
+| udp-transform | sub-element | Controls whether UDP transformation should be enabled when communicating with the adjacency. This is used when there are strict firewalls (or other middleboxes) between the two SVR peers, that interfere with the SVR metadata exchange between the two 128T instances. |
 | vector | string | Multiple instance. This represents the list of *vector* labels (variable cost elements) to be used when calculating the shortest path to a route target. |
 
 Version History:
@@ -728,6 +732,7 @@ The *host* option is used within a service-route when it is necessary to send tr
 
 Path:
 
+authority > router > node > device-interface > network-interface > host-service
 authority \> router \> node \> device-interface \> network-interface \> address \> host-service
 
 Description:
@@ -738,7 +743,7 @@ Individual compute platforms that make up a 128T router may each "host" their ow
 | --- | --- | --- |
 | access-policy | sub-element | Selectively allows/denies access to the underlying host-service to collections of addresses. |
 | description | string | An optional textual description of the element, for configuration ease of readability. |
-| service-type | enumeration | Key field. Valid values: ssh, netconf, web, or custom. This identifies the underlying Linux service that will be bridged to the address on this specific node. |
+| service-type | enumeration | Key field. Valid values: ssh, netconf, web, dhcp-server or custom. This identifies the underlying Linux service that will be bridged to the address on this specific node. |
 | transport | sub-element | This is where port(s) and protocol(s) are defined, to match inbound packets to this host-service definition. Only configurable when service-type is *custom*. |
 
 Version History:
@@ -763,6 +768,21 @@ Version History:
 
 Introduced in 1.0.
 
+## inter-conductor-router-server
+
+Path:
+
+authority \> router \> node \> ssh-keepalive \> inter-conductor-router-server
+
+Description:
+
+This element contains configuration parameters related to SSH keepalive properties between this node and its conductor, where the router is the SSH server.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| interval | integer | Valid values: 1-10. Configured in seconds, the amount of idle time between keepalive messages. |
+| max-attempts | integer | Valid values: 1-20. The number of missed keepalive messages before a connection is declared dead and a reconnection attempt is initiated. |
+
 ## inter-node
 
 Path:
@@ -772,6 +792,25 @@ authority \> router \> node \> ssh-keepalive \> inter-node
 Description:
 
 This element contains configuration parameters related to SSH keepalive properties between this node and other nodes within the same 128T router.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| interval | integer | Valid values: 1-10. Configured in seconds, the amount of idle time between keepalive messages. |
+| max-attempts | integer | Valid values: 1-20. The number of missed keepalive messages before a connection is declared dead and a reconnection attempt is initiated. |
+
+Version History:
+
+Introduced in 3.2.
+
+## inter-node-server
+
+Path:
+
+authority \> router \> node \> ssh-keepalive \> inter-node-server
+
+Description:
+
+This element contains configuration parameters related to SSH keepalive properties between this node and other nodes within the same 128T router, specifically when the node is the SSH server for the transaction..
 
 | Element | Type | Description |
 | --- | --- | --- |
@@ -866,6 +905,19 @@ Version History:
 
 Introduced in 3.2.
 
+## local-login
+
+Path:
+
+authority > router > system > local-login
+
+Description:
+
+The *local-login* configuration lets administrators control the number of concurrent logins on the system and what actions to take if that limit is exceeded.
+
+| Element | Type | Description |
+| netconf | sub-element | Controls around the number of concurrent NETCONF sessions. |
+
 ## log-category
 
 Path:
@@ -922,6 +974,21 @@ This element contains information regarding the configuration attributes for dev
 Version History:
 
 Introduced in 3.1.
+
+## management-vector
+
+Path:
+
+authority > router > node > device-interface > network-interface > management-vector
+
+Description:
+
+The *management-vector* configuration is used to influence administrative preference over multiple possible paths for management traffic. This is typically used with the "Conductor Service" feature, wherein a 128T router sends traffic to its 128T conductor using the forwarding plane of the 128T, as opposed to a dedicated (Linux-managed) interface.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| name | string | The name of the vector label. This references vector labels configured elsewhere in the configuration. |
+| priority | uint32 | The value to ascribe to the vector. Lower costed vectors are preferred over higher costed vectors. |
 
 ## medium
 
@@ -1144,6 +1211,21 @@ Version History:
 
 Introduced in 3.0. Updated in 3.1: added the ability to specify neighborhood-wide *bfd* properties. Updated in 3.2: added *external-nat-address*, *port-range*, *udp-transform*, and *vector* elements.
 
+## netconf
+
+Path:
+
+authority > router > system > local-login > netconf
+
+Description:
+
+This lets an administrator control the number of concurrent NETCONF logins (each PCLI session consumes a NETCONF login).
+
+| Element | Type | Description |
+| --- | --- | --- |
+| session-limit | uint32 | Valid values: 0-100. Default: 4. The number of concurrent NETCONF logins permitted. |
+| session-limit-action | enumeration | Valid values: no-action, issue-warning. Default: issue-warning. To suppress the warning messages regarding concurrent logins, you can set this to `no-action`. |
+
 ## network
 
 Path:
@@ -1182,9 +1264,12 @@ The network-interface element represents a logical interface on a node.
 | dscp-map | reference | This specifies the particular dscp-map configuration (via its *name*) to use on this interface for inbound packets. A dscp-map represents a set of DSCP values that map to 128T priority values (0-3) to indicate the relative priority of the traffic within the 128T router's traffic engineering subsystem. |
 | enforced-mss | enumeration | Valid values: disabled, 64-8960. Default: disabled. When set to a value, the 128T will replace the advertised MSS in TCP packets it forwards out of this interface. This is typically done to avoid fragmentation. |
 | global-id | uint32 | This represents the "Global Interface ID" (a.k.a., the "GIID") of an interface. Two network-interface configurations on distinct nodes are configured to be redundant with each other through the use of a common GIID. |
+| host-service | sub-element | Allows for configuring "hosted services" (i.e., services provided by the node's Linux operating system) on this interface; this is configured at the `network-interface` level of the hierarchy (as opposed to the `address` level) when the interface uses a dynamic means of acquiring an IP address, such as DHCP. |
 | hostname | string | A hostname by which external parties can use DNS to resolve to this interface's IP address. |
 | icmp | enumeration | Valid values: drop, allow. Governs whether this interface will block ICMP requests or allow them. |
+| ingress-source-nat-pool | reference | The name of the `nat-pool` to use for traffic ingressing this interface. This will cause source NATting to be performed by the ingress 128T. |
 | inter-router-security | reference | A reference to a configured *security* element, used when exchanging packets/sessions with other 128T routers on this interface. |
+| management-vector | sub-element | The vector values to use for management traffic sent over this interface. |
 | mtu | uint32 | The maximum transmission unit (MTU) for packets sent by this interfaces. Packets larger than this MTU will be fragmented upon egress. |
 | name | string | Key field. The unique label assigned to this interface, used to reference it in other parts of the 128T router's configuration. |
 | neighbor | sub-element | Single instance. This lets administrators set the IP:MAC associations for a neighboring device. |
@@ -1281,6 +1366,7 @@ A *node* is a single software instance, one that comprises a whole or part of a 
 | name | string | Key field. The unique label assigned to this interface, used to reference it in other parts of the 128T router configuration. |
 | reachability-detection | sub-element | Controls how the 128T will do Layer 2 reachability detection to connected gateways. |
 | role | enumeration | Valid values: combo, conductor, control, slice. This defines the role of the node in the 128T router; combo is a single logical software deployment that behaves as both a Control and a Slice. For a standalone Control or Slice, select "control" or "slice", respectively. The "conductor" type refers to the 128T management platform. Note: only *combo* and *conductor* are supported at this time. |
+| ssh-keepalive | sub-element | Properties applied to the SSH sessions initiated by this node to other nodes, routers, and its conductor(s).|
 | software-update-bandwidth | union | Range 1-999999999999, or "unlimited." Default: unlimited. Configured in bits/second, this lets you govern the amount of bandwidth that this 128T node will use when retrieving software download images during its upgrade operation. This is useful on slower links, to avoid congestion with production traffic. |
 | ssh-keepalive | sub-element | Governs whether or not this system will support SSH keepalives. |
 | usage-reporter-enabled | boolean | When true, this node will report anonymous usage statistics back to 128 Technology, Inc. for continuous improvement of our software. |
@@ -1422,6 +1508,7 @@ Introduced in 3.1 as part of the *host-service* feature.
 
 Path:
 
+authority > router > node > device-interface > network-interface > adjacency > post-encryption-padding
 authority > router > node > device-interface > network-interface > neighborhood > post-encryption-padding
 
 Description:
@@ -1535,7 +1622,8 @@ Introduced in 2.0.
 
 Path:
 
-authority \> remote-login
+authority > remote-login
+authority > router > system > remote-login
 
 Description:
 
@@ -1547,6 +1635,21 @@ The *remote-login* feature creates management connections between the conductor 
 
 ### See Also
 [Connecting to Routers](ts_connecting_to_routers.md)
+
+## repository
+
+Path:
+
+authority > router > system > software-update > repository
+
+Description:
+
+This controls which repository or repositories a router will use to retrieve software updates and dependent packages.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| offline-mode | boolean | Default: false. Controls whether the router will only be able to retrieve software upgrade images via its conductor.|
+| source-type | enumeration | Valid values: conductor-only, prefer-conductor, internet-only. Default: internet-only. To use the conductor as a proxy server to reach the 128T public internet repository, set this to `conductor-only` or `prefer-conductor`. To reach it via the public internet and not use the conductor as a proxy, set it to `internet-only`.|
 
 ## route-reflector
 
@@ -1966,6 +2069,7 @@ Introduced in 1.0. Updated in 2.0, removed most internal elements.
 
 Path:
 
+authority > router > node > device-interface > network-interface > adjacency > session-optimization
 authority > router > node > device-interface > network-interface > neighborhood > session-optimization
 
 Description:
@@ -2018,6 +2122,20 @@ This is the configuration associated with the SNMP behavior of the 128T router, 
 | port | l4-port | Default: 161. The L4 port on which the 128T router listens for SNMP requests. |
 | version | enumeration | Default: v2c. The 128T router supports SNMPv2c only. |
 
+## software-update
+
+Path:
+
+authority > router > system > software-update
+
+Description:
+
+By default, a 128T router retrieves software from a public software repository hosted by 128 Technology. However, in some deployments access to the public internet may be restricted. The *software-update* configuration allows administrative controls over how and from where the 128T router will retrieve software.
+
+| Element | Type | Description | 
+| --- | --- | --- |
+| max-bandwidth | enumeration | Valid values: unlimited, 1-999999999999. This value is in bits/second. This represents the bandwidth limiter applied to software downloads. |
+| repository | sub-element | Which repository/repositories the 128T will use.|
 
 ## ssh-keepalive
 
@@ -2031,7 +2149,9 @@ The *ssh-keepalive* sub-element lets administrators control how often it sends k
 
 | Element | Type | Description |
 | --- | --- | --- |
+| inter-conductor-router-server | sub-element | The SSH keepalive parameters between this router and its conductor. |
 | inter-node | sub-element | The SSH keepalive parameters for other nodes within this router. |
+| inter-node-server | sub-element | The server-side SSH keepalive parameters for other nodes within this router. |
 | inter-router | sub-element | The SSH keepalive parameters for other routers within this authority. |
 
 Version History:
@@ -2118,11 +2238,14 @@ The *system* sub-element lets administrators configure system-wide properties fo
 | audit | sub-element | The router's properties for audit-type events. |
 | contact | string | The administrative contact for this 128T router deployment. |
 | inactivity-timer | uint32 | Valid values: 300-86400. The number of seconds that a CLI session can be inactive before the 128T router closes it. |
+| local-login | sub-element | Governs the behavior of the system around the number of concurrent local logins. |
 | log-category | sub-element | Allows administrators to selectively affect the logging verbosity of various 128T routing subsystems. |
 | log-level | enumeration | Valid values: debug, error, fatal, info, trace, warning. |
 | metrics | sub-element | For configuring aspects of the 128T router's data sampling for its analytics. |
 | ntp | sub-element | For configuring external NTP time sources. |
+| remote-login | sub-element | Whether the conductor will be able to remotely log in to this router. |
 | services | sub-element | Internal system services that the 128T router launches. |
+| software-update | sub-element | Affects how and where this router will retrieve software updates. |
 | syslog | sub-element | The 128T router's configuration for communication with external syslog services. |
 
 Version History:
@@ -2359,7 +2482,8 @@ Introduced in 2.0. Updated in 3.1: removed *any* as a valid enumeration for prot
 
 Path:
 
-authority \> router \> node \> device-interface \> network-interface \> neighborhood \> udp-transform\
+authority \> router \> node \> device-interface \> network-interface \> adjacency \> udp-transform
+authority \> router \> node \> device-interface \> network-interface \> neighborhood \> udp-transform
 authority \> router \> udp-transform
 
 Description:
