@@ -50,7 +50,7 @@ sidebar_label: 2.4
   ```
 
   To diagnose the problem, try running: `rpm -Va --nofiles --nodigest`.
-  If this is a corrupted RPMDB, running `rpm --rebuilddb` may fix the issue.
+  If this is a corrupted RPMDB, running `rpm --rebuilddb` may address the issue.
 
   _**Cause:**_ Installed version of the RPM's come from a later version of the Supported 128T OS version. 128T Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
 
