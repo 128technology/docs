@@ -57,7 +57,7 @@ The Bootstrapper will set 128T configuration via a Quickstart file that can be p
 1. The Quickstart file can be placed in the root of an attached USB drive. i.e. `/bootstrap.quickstart`<br/>The USB drive MUST be named "BOOTSTRAP" in all caps.
 
 2. If an attached USB drive is not found with the file in root, then the one-shot process will look for the Quickstart file `/etc/128technology/bootstrap.quickstart`.
-3. If no file source is present, the Bootstrapper will execute HTTP GET requests to the following endpoints in an attempt to download the Quickstart File from a server. The REST response is explained in [REST details](quickstart-file-via-rest).
+3. If no file source is present, the Bootstrapper will execute HTTP GET requests to the following endpoints in an attempt to download the Quickstart File from a server. The REST response is explained in [REST details](#quickstart-file-via-rest).
     1. `http://quickstart.128t-bootstrap/quickstart/<identifier>`
     2. `http://192.168.128.128/quickstart/<identifier>`
     > Where `<identifier>` will be the minion-id as determined by the algorithm discussed in the [above](#hostname-and-salt-minion-identifier) section. It will most likely be the system serial number.
