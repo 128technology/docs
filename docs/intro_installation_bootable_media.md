@@ -38,10 +38,6 @@ Note: selecting the wrong type of console may result in garbage characters being
 
 Use this option when running on hardware that has onboard graphics chipsets. This installs 128T using the GUI installer.
 
-##### CentOS Linux Only
-
-Selecting this option will only install the CentOS 7 Linux operating system. It uses a GUI installer.
-
 #### 128T Installation
 
 Once Linux is installed, the system will install the 128T software. Note that this may several minutes to complete. After the installation process has completed, the following screen is displayed:
