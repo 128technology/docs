@@ -1271,9 +1271,12 @@ The network-interface element represents a logical interface on a node.
 | inter-router-security | reference | A reference to a configured *security* element, used when exchanging packets/sessions with other 128T routers on this interface. |
 | management-vector | sub-element | The vector values to use for management traffic sent over this interface. |
 | mtu | uint32 | The maximum transmission unit (MTU) for packets sent by this interfaces. Packets larger than this MTU will be fragmented upon egress. |
+| multicast-listeners | enumeration | Valid values: disabled, automatic, enabled. Default: automatic. This controls whether the 128T will send IGMP/MLD queries on this interface. When set to `automatic`, the 128T will send IGMP/MLD queries based on whether there are any multicast services with tenant-based access policies. |
+| multicast-report-proxy | boolean | Default: false. When set to `true`, this 128T will forward IGMP and MLD joins/leaves/reports from valid multicast services via this network interface. (These originate on other network interfaces which allow multicast listeners.) |
 | name | string | Key field. The unique label assigned to this interface, used to reference it in other parts of the 128T router's configuration. |
 | neighbor | sub-element | Single instance. This lets administrators set the IP:MAC associations for a neighboring device. |
 | neighborhood | sub-element | This is where *neighborhood* labels are applied, to indicate connectivity to other 128T routers within the Authority. When two routers both have an interface within the same *neighborhood* (i.e., they share a common label), they are intended to be mutually reachable. |
+| off-subnet-arp-prefix | 
 | prioritization-mode | enumeration | Valid values: local, dscp. Default value: local. When set to *local*, the 128T router will use its local classification configuration to assign priorities to inbound flows (for traffic engineering purposes). When set to *dscp*, the 128T router will use inbound DSCP values to map to priorities (based on the *dscp-map* referenced in this element). |
 | qp-value | uint32 | The number of Quality Points that this interface can support. Used for route determination. |
 | rewrite-dscp | boolean | When true, packet classification is performed (to look for known/configured session-types, etc.). When false, the classification step is not performed. |
