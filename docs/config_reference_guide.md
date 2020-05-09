@@ -37,7 +37,10 @@ Access policies are a multiple instance sub-element within a service configurati
 | ------- | ---- | ----------- |
 | permission | enumeration | Valid values: allow, deny. Default: allow. This setting determines whether or not the address(es) or QSN defined in the "source" field should be allowed access to this service.|
 | source | source-spec | Key field. This field contains either an IP prefix, or a QSN, or a combination of the two, and represents the "user population" subjected to this access policy.|
-> Note that QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
+
+:::note
+QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
+:::
 
 Version History:
 
@@ -293,6 +296,24 @@ This sub-element lets the administrators set the behavior for the 128T router's 
 Version History:
 
 Introduced in 3.2.
+
+## applies-to
+
+Path:
+
+authority > service > applies-to
+
+Description:
+
+The *applies-to* filter on a service lets administrators constrain which routers or groups of routers will receive configuration for a given service. This is extremely valuable for reducing the volume of configuration sent to any given router, particularly for large deployments with many services, if it is known a priori that a given router will never need reachability to a service.
+
+For example, a service may exist at a branch site in a hub-and-spoke deployment, and there is only ever a need for reachability from devices at the hub location. Without constraining this service definition, by default all services are supplied to all routers within an authority; in this example, all branches would receive a definition of a service they will never need to reach -- creating unnecessary configuration, etc.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| group-name | string | Multiple instance. Available when `type` is `router-group`. This is the "group name" (label) for the service that is compared to the values for all router's `group`, to determine which routers should receive this service. |
+| router-name | reference | Multiple instance. Available when `type` is `router`. This specifies individual routers that should receive a copy of this service. |
+| type | enumeration | Valid values: authority, router, router-group. Default: authority. This controls whether the service should be applied to an individual router, a group of routers, or the entire population of routers (i.e., the "authority"). |
 
 ## area
 
@@ -905,7 +926,7 @@ Description:
 
 This defines the properties of a loopback interface to be used by the 128T's routing protocols (specifically, BGP). At present this `interface` is only used when configuring a system for the BGP over SVR (BGPoSVR) feature.
 
-| Element | Type | Description | 
+| Element | Type | Description |
 | --- | --- | --- |
 | enabled | boolean | Default: true. This controls whether the loopback interface is enabled or not. |
 | ip-address | ipv4-address | The IP address to be assigned to this interface. Note that this address must be unique such that no BGP speaker sees the same address from two different devices; but this address is not seen "on the wire," so it does not need to be routable otherwise. |
@@ -1134,6 +1155,24 @@ The *metrics* sub-element governs various aspects of the 128T router's data samp
 Version History:
 
 Introduced in 3.0. Updated in 3.2: revised range from 1-10.
+
+## multicast-sender-policy
+
+Path:
+
+authority > service > multicast-sender-policy
+
+Description:
+
+For *service* elements that refer to multicast addresses, this lets administrators control which sources of traffic can receive that multicast.
+
+| Element | Type | Description |
+| permission | enumeration | Valid values: allow, deny. Default: allow. Controls permissions for the specified `source`. |
+| source | source-spec | Key field. This field contains either an IP prefix, or a QSN, or a combination of the two, and represents the "user population" subjected to this access policy.|
+
+:::note
+QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
+:::
 
 ## multihop
 
@@ -1501,7 +1540,7 @@ The configuration in the *ospf* hierarchy is used to control the behavior of the
 | advertise-default | sub-element | Controls how/whether the 128T advertises the default route into OSPF, including metric values and type. |
 | area | sub-element | Multiple instance. A list of OSPF areas in which this 128T participates. The `area` sub-element is for configuring the properties of that OSPF area. |
 | instance | uint8 | Key field. A unique identifier for the OSPF instance. |
-| redistribute | sub-element | 
+| redistribute | sub-element | Controls which routes get redistributed into OSPF by this 128T. |
 | router-id | dotted-quad | As defined in RFC 2328, a 32-bit number expressed as a dotted quad (four octets separated by `.`, akin to an IPv4 address). |
 
 ## path-mtu-discovery
@@ -1691,6 +1730,23 @@ The *reachability-detection* feature will periodically refresh ARP entries and c
 | expired-refresh-count | uint8 | Valid values: 3-20. Default: 10. Represents the number of attempts to resolve an ARP before declaring it to be expired. |
 | expired-refresh-interval | uint32 | Valid values: 500-60000. Default: 500. Represents the retry frequency (in milliseconds) of ARPs in an expired state. |
 | gateway-refresh-interval | uint32 | Valid values: 1-86400. Default: 5. Represents the frequency in seconds that a gateway ARP entry is refreshed. |
+
+## redistribute
+
+Path:
+
+authority > router > routing > ospf > redistribute
+
+Description:
+
+The *redistribute* element allows administrators to control which sources of routes will get redistributed into OSPF by the 128T.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| metric | uint32 | Valid values: 0-16777214. This is the metric the 128T will use for routes it redistributes into OSPF. |
+| metric-type | enumeration | Valid values: type-1, type-2. Default: type-2. Controls whether the routes are redistributed as Type 1 or Type 2 routes. This affects how other routers will treat the advertisement. |
+| policy | reference | The `policy` that should get applied to routes that are redistributed. |
+| protocol | enumeration | Key field. Valid values: bgp, connected, service, static. This controls which types of routes the redistribution will include. The `service` value will control whether this router will advertise 128T's *service routes* into OSPF. |
 
 ## redundancy-group
 
@@ -2014,17 +2070,24 @@ The 128T router solution is deployed to facilitate the delivery of new applicati
 | Element | Type | Description |
 | --- | --- | --- |
 | access-policy | sub-element | This is a multiple instance sub-element that allows administrators to define groups of users (by address, address prefix, or QSN) that can be explicitly allowed or denied access to this service. See access-policy. |
+| access-policy-generated | boolean | Default: false. Controls whether the access-policy of this service was generated by the conductor at the time of commit. As with all other "generated" configuration, this is destroyed and regenerated with every commit. Therefore, to make any persistent changes to this service's generated `access-policy`, this field must be set to `false`. |
 | address | address | Multiple instance. When the 128T router receives packets matching the address(es) listed here, it considers those packets to be destined for this service and will follow its service routing logic. |
 | application-name | string | The value configured here will be matched against the Common Name learned via application classification techniques for application identification purposes. |
+| application-type | enumeration | Valid values: generic, dhcp-relay, dns-proxy, ftp-control, or ftp-data. Default: generic. Certain types of traffic require special treatment by the 128T. For example, when forwarding FTP traffic, the FTP protocol can exchange addresses that may not be reachable if there are NAT devices between the source and destination; thus, the use of `ftp-control` and `ftp-data` can look for, and replace, those unreachable addresses and act as an FTP Application Layer Gateway. See also: [DNS Proxy](config_dns_proxy.md). |
+| applies-to | sub-element | Controls which devices will receive copies of this `service` from the conductor when configuration is committed. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
 | enabled | boolean | When false, this service is administratively disabled. Packets addressed to this service's address(es) will not be processed. |
+| fqdn-resolution-type | enumeration | Valid values: v4, v6. Default: v4. This controls which type of DNS query will be issued when trying to resolve `address` values that are configured as hostnames. |
 | generated | boolean | Default: false. When a 128T conductor generates traffic it sets this field to `true`. In order to make any modifications to generated configuration elements, it is necessary to set the `generated` flag to `false` to have those changes persist. |
+| multicast-sender-policy | sub-element | This controls access to multicast services, i.e., which sources will have permission to participate in the multicast. |
 | name | string | Key field. The name of the service, and used as the key for other objects needing to reference this service. |
 | scope | enumeration | Valid values: public, private. |
 | security | reference | Refers to a configured *security* instance by its name. |
 | service-group | string | Optional. Placing a string here treats this service as belonging to a group with other services that share the same service-group string. This collection of services can be referred to en masse by the QSN that includes this service-group name. |
 | service-policy | reference | Refers to a configured service-policy instance by its name. |
 | share-service-routes | boolean | Default: true. When true, this will cause a conductor managing multiple routers in this router's Authority to create a service-route to point to any neighboring 128T router that contains a (non-peer) service-route for this service's traffic. |
+| source-nat | enumeration | Valid values: network-interface, disabled. Default: network-interface. This allows administrators to override the default source NAT treatment for traffic egressing a `network-interface` and prevent the 128T from applying any source NAT treatment to the packets. |
+| tap-multiplexing | boolean | Setting this to true will cause the 128T router to treat the sessions for this traffic differently than the default behavior. Traffic that matches a FIB entry for the service will create two local sessions: one that matches the forward flow and one that matches the reverse flow with the source and destination addresses flipped.  When the router sends this traffic over SVR to the remote router, it inserts a small piece of metadata into each packet which identifies whether it is for the forward or reverse flow.  This is used by the remote router to undo the NAT and ensure the IP address and port are replaced correctly with the original source or destination information.  The purpose of this is to ensure that both the forward and reverse flows are NATted to the same address and port combination over SVR, thus ensuring they follow the same path over the internet and do not arrive out of order at the capture receiver. |
 | tenant | reference | Refers to a configured *tenant* instance by its name. |
 | transport | sub-element | The transport protocol(s) and port(s) for the service. |
 
@@ -2073,8 +2136,10 @@ These are policy parameters that may be applied to service traffic to affect its
 
 | Element | Type | Description |
 | --- | --- | --- |
+| best-effort | boolean | Default: true. Typically, when paths are below the specified SLA (loss/jitter/latency/MOS), those paths will not be considered for forwarding traffic. This may not be desirable in situations where the primary goal would be to forward traffic when no path satisfies the specified SLA. When `true`, the 128T will continue to forward traffic if all paths fail SLA thresholds using the best path available (according to administrative preference). When `false`, this traffic will instead be dropped. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
 | generated | boolean | Default: false. The conductor will set this value to `true` when it generates the configuration based on other settings in the 128T. In order to modify generated configuration and have those settings persist, set `generated` to `false`. |
+| ingress-source-nat | enumeration | Valid values: network-interface, disabled. Default: network-interface. Disabling this attribute will prevent the 128T from using the `ingress-source-nat` value from the `network-interface`, and not perform any source NAT treatment at all. |
 | lb-strategy | enumeration | Valid values: hunt, proportional. This is the load balancing strategy to use for traffic that references this service-policy. |
 | max-jitter | uint32 | Default: 100. Configured in milliseconds, the maximum acceptable jitter for services that use this service-class. |
 | max-latency | uint32 | Default 250. Configured in milliseconds, the maximum acceptable latency for services that use this service class. |
@@ -2244,7 +2309,7 @@ Description:
 
 By default, a 128T router retrieves software from a public software repository hosted by 128 Technology. However, in some deployments access to the public internet may be restricted. The *software-update* configuration allows administrative controls over how and from where the 128T router will retrieve software.
 
-| Element | Type | Description | 
+| Element | Type | Description |
 | --- | --- | --- |
 | max-bandwidth | enumeration | Valid values: unlimited, 1-999999999999. This value is in bits/second. This represents the bandwidth limiter applied to software downloads. |
 | repository | sub-element | Which repository/repositories the 128T will use.|
