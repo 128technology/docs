@@ -239,6 +239,23 @@ Version History:
 
 Introduced in 3.2.
 
+## advertise-default
+
+Path:
+
+authority > router > routing > ospf > advertise-default
+
+Description:
+
+The *advertise-default* sub-element controls whether and how the 128T's OSPF routing stack will advertise the default route into OSPF.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| always | boolean | Default: false. Controls whether the 128T should advertise a default route into OSPF even if the default route doesn't exist in its routing table. |
+| metric | uint32 | Valid values: 0-16777214. The metric to use when advertising the default route into OSPF. |
+| metric-type | enumeration | Valid values: type-1, type-2. Default: type-2. Controls the type of metric redistributed into OSPF. Type 1 routes use metrics that include the sum of the internal OSPF cost and the external redistributed cost, and are preferred over Type 2 routes that only include the redistributed cost. |
+| policy | reference | A reference to a configured `policy` to apply to the default route. |
+
 ## aggregate-address
 
 Path:
@@ -276,6 +293,23 @@ This sub-element lets the administrators set the behavior for the 128T router's 
 Version History:
 
 Introduced in 3.2.
+
+## area
+
+Path:
+
+authority > router > routing > ospf > area
+
+Description:
+
+The *area* configuration element is where the properties of each OSPF area that the 128T is connected to are configured.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| id | area-id-type | Key field. Configured as a dotted quad (e.g., `0.0.0.1`). Areas are used to divide large routed networks into smaller subsets, to constrain route advertisements -- a set of network elements that have been administratively grouped together. |
+| interface | sub-element | Controls the properties of the interfaces on the 128T device that are in the OSPF area. |
+| summary-range | sub-element | Controls whether the 128T will summarize routes matching configured address/mask values. Note: this only applies to Area Border Routers (ABRs). |
+| type | enumeration | Valid values: normal, stub, nssa. Default: normal. Defines whether this area is a normal area, a stubby area, or a not-so-stubby-area (as specified in RFC 3101). |
 
 ## as-path-options
 
@@ -530,6 +564,7 @@ A *device-interface* is what maps a physical interface (the "hardware-name") to 
 | network-interface | sub-element | The list of network interfaces associated with this device interface. |
 | pci-address | string | The PCI bus address of the physical, or virtual interface as it is known by the underlying operating system. |
 | pppoe | sub-element | Container for properties related to the 128T router's support for PPP over Ethernet (PPPoE). This field is only configurable when the *type* of the interface is set to *pppoe*. |
+| promiscuous-mode | boolean | Default: false. When set to `true`, the 128T will accept and process packets that it receives that do not have its MAC address as the destination address. This is used in conjunction with the `tap-multiplexing` feature, when the 128T is the target of port-mirrored traffic that it needs to forward over SVR. |
 | shared-phys-address | string | The virtual MAC address that the interface will use (part of an interface's redundancy) |
 | strip-vlan | boolean | Default: false. Set this to *true* when the system needs to strip a VLAN tag on packets ingressing this router. (Common in some cloud deployment models.) |
 | target-interface | string | Only configurable when type is *kni* and mode is *bridged*. This is set to the name of the operating system's interface, which "bridges" this KNI interface to an interface known by the operating system. (This is used when setting up a 128T router in a cloud provider's network, for example.) |
@@ -839,6 +874,42 @@ This element contains configuration parameters related to SSH keepalive properti
 Version History:
 
 Introduced in 3.2.
+
+## interface (ospf)
+
+Path:
+
+authority > router > routing > ospf > area > interface
+
+Description:
+
+This sets the properties of the 128T interface within an OSPF area.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| cost | uint16 | Valid values: 1-65535. Default: 10. The cost advertised for this interface into OSPF. |
+| dead-interval | uint32 | Valid values: 1-2147483647. Default: 40. This controls the length of time the 128T will wait to receive hello packets from a neighbor before declaring it down. This value must be greater than hello-interval. |
+| hello-interval | uint16 | Valid values: 1-65535. Default: 10. The number of seconds between hello packets. |
+| interface | reference | The name of a `network-interface` on the 128T node that will be in the OSPF. |
+| node | reference | The name of the `node` on which the `network-interface` resides. |
+| passive | boolean | Default: false. When `true`, the interface's prefix will be advertised but no neighbor adjacencies will be formed. |
+| priority | uint8 | Valid values: 0-255. The router's priority. |
+
+## interface (routing)
+
+Path:
+
+authority > router > routing > interface
+
+Description:
+
+This defines the properties of a loopback interface to be used by the 128T's routing protocols (specifically, BGP). At present this `interface` is only used when configuring a system for the BGP over SVR (BGPoSVR) feature.
+
+| Element | Type | Description | 
+| --- | --- | --- |
+| enabled | boolean | Default: true. This controls whether the loopback interface is enabled or not. |
+| ip-address | ipv4-address | The IP address to be assigned to this interface. Note that this address must be unique such that no BGP speaker sees the same address from two different devices; but this address is not seen "on the wire," so it does not need to be routable otherwise. |
+| name | string | An arbitrary, unique name used to reference this interface throughout other parts of the routing configuration hierarchy. |
 
 ## ipfix-collector
 
@@ -1276,9 +1347,10 @@ The network-interface element represents a logical interface on a node.
 | name | string | Key field. The unique label assigned to this interface, used to reference it in other parts of the 128T router's configuration. |
 | neighbor | sub-element | Single instance. This lets administrators set the IP:MAC associations for a neighboring device. |
 | neighborhood | sub-element | This is where *neighborhood* labels are applied, to indicate connectivity to other 128T routers within the Authority. When two routers both have an interface within the same *neighborhood* (i.e., they share a common label), they are intended to be mutually reachable. |
-| off-subnet-arp-prefix | 
+| off-subnet-arp-prefix | ipv4-prefix | This is a multple instance element within a `network-interface`, that causes the 128T to send ARP replies with its own MAC address for address that fall within the IPv4 prefix(es) specified. |
 | prioritization-mode | enumeration | Valid values: local, dscp. Default value: local. When set to *local*, the 128T router will use its local classification configuration to assign priorities to inbound flows (for traffic engineering purposes). When set to *dscp*, the 128T router will use inbound DSCP values to map to priorities (based on the *dscp-map* referenced in this element). |
 | qp-value | uint32 | The number of Quality Points that this interface can support. Used for route determination. |
+| reverse-arp-mac-learning | boolean | Default: false. When `true`, the 128T will use the source MAC address of packets it receives to populate its ARP table for unresolved ARP entries. |
 | rewrite-dscp | boolean | When true, packet classification is performed (to look for known/configured session-types, etc.). When false, the classification step is not performed. |
 | source-nat | boolean | When set to "true", the 128T router will perform network address and port translation (NAPT) for all flows egressing the interface. When set to "false", the original IP:port are preserved. |
 | tenant | reference | When configured, all packets arriving on this interface are considered to be part of the named tenant. When empty, the tenant for ingress traffic will be determined using other techniques (matching the source table, derived from inbound metadata, matching a source prefix on a tenant's configuration, etc.). |
@@ -1365,8 +1437,10 @@ A *node* is a single software instance, one that comprises a whole or part of a 
 | device-interface | sub-element | Multiple instance. This list contains all of the physical devices that this node has configured. |
 | enabled | boolean | True or false (default: true). Setting this field to disabled will administratively disable the node from participating in the 128T router. |
 | forwarding-core-count | uint8 | The number of CPU cores that will be reserved on the underlying hardware platform for running 128T software. |
+| forwarding-core-mode | enumeration | Valid values: automatic,  manual. Default: automatic. When set to `automatic`, the 128T will assess the number of cores it will need to "isolate" (allocation exclusively) for packet forwarding. This is based on the number of cores available on the system. When set to `manual`, you can administratively specify the `forwarding-core-count` to override the algorithmically determined values. You can check the number of cores the system has allocated by using the command `show platform`. |
 | location | string | A text description of this node's physical location. Used as descriptive text, only. |
 | name | string | Key field. The unique label assigned to this interface, used to reference it in other parts of the 128T router configuration. |
+| power-saver | boolean | When `true`, 128T will intelligently reduce the CPU utilization during quiet periods, and dynamically ramp CPU utilization back up as traffic necessitates. This is recommended only on lower-end platforms with small traffic forwarding requirements. |
 | reachability-detection | sub-element | Controls how the 128T will do Layer 2 reachability detection to connected gateways. |
 | role | enumeration | Valid values: combo, conductor, control, slice. This defines the role of the node in the 128T router; combo is a single logical software deployment that behaves as both a Control and a Slice. For a standalone Control or Slice, select "control" or "slice", respectively. The "conductor" type refers to the 128T management platform. Note: only *combo* and *conductor* are supported at this time. |
 | ssh-keepalive | sub-element | Properties applied to the SSH sessions initiated by this node to other nodes, routers, and its conductor(s).|
@@ -1411,6 +1485,24 @@ The *ntp* sub-element (within the *system* configuration) lets administrators co
 Version History:
 
 Introduced in 2.0.
+
+## ospf
+
+Path:
+
+authority > router > routing > ospf
+
+Description:
+
+The configuration in the *ospf* hierarchy is used to control the behavior of the 128T's implementation of the OSPF (Open Shortest Path First) routing protocol. The 128T router supports OPSFv2.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| advertise-default | sub-element | Controls how/whether the 128T advertises the default route into OSPF, including metric values and type. |
+| area | sub-element | Multiple instance. A list of OSPF areas in which this 128T participates. The `area` sub-element is for configuring the properties of that OSPF area. |
+| instance | uint8 | Key field. A unique identifier for the OSPF instance. |
+| redistribute | sub-element | 
+| router-id | dotted-quad | As defined in RFC 2328, a 32-bit number expressed as a dotted quad (four octets separated by `.`, akin to an IPv4 address). |
 
 ## path-mtu-discovery
 
@@ -1725,6 +1817,7 @@ The router element serves as a container for holding the nodes of a single deplo
 | peer | sub-element | Each peer defines the properties of another router (within this router's authority, or not) for bridging/connecting to via STEP. |
 | redundancy-group | reference | A multiple instance sub-element for defining groups of interfaces that will all fail over in conjunction. (This supports what is known as a "shared fate" model of failover.) |
 | reverse-flow-enforcement | enumeration | Valid values: none, strict. Default: none. This configuration element determines whether or not the 128T router requires that the egress interface for a reverse flow is the same as the ingress interface for a forward flow. In practice, when set to "strict", a router will perform a uRPF (Unicast Reverse Path Forwarding) check on the reverse flow to see if the interfaces match. If they do not match, the session will not be established. |
+| router-group | string | Multiple instance. This defines which "groups" the router belongs to. Router groups are used for filtering the services that are pushed to a router by the conductor. Each service can specify which routers and/or router groups should receive a copy of that service, and for `router-group` distribution the group name is compared to the elements configured here. |
 | routing | sub-element | This is a single instance sub-element for defining this router's routing properties. |
 | service-route | sub-element | Multiple instance. The service-routes within this router are each defined as a sub-element within the router. |
 | service-route-policy | sub-element | Multiple instance. The policies for distributing traffic to service-routes are defined as policies local to this router. |
@@ -1763,7 +1856,9 @@ The *routing* element is a router-level container for all of the routing policie
 | Element | Type | Description |
 | --- | --- | --- |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
-| routing-protocol | sub-element | At this time, the 128T router only supports the BGPv4 routing protocol as a sub-element. (OSPF is configured within a different branch of the hierarchy.) |
+| interface | sub-element | Defines an internal loopback interface to be used with routing protocols. |
+| ospf | sub-element | Governs the 128T's routing behavior with regard to the OSPF protocol. |
+| routing-protocol | sub-element | The configuration hierarchy for BGPv4. |
 | static-route | sub-element | Where administrators define static routes for their router. |
 | type | enumeration | Valid values: default-instance. At this time, the 128T router only supports the "default-instance" type. |
 
@@ -2068,7 +2163,7 @@ Version History:
 
 Introduced in 1.0. Updated in 2.0, removed most internal elements.
 
-## session-optimization
+## session-optimization (adjacency/neighborhood)
 
 Path:
 
@@ -2081,6 +2176,20 @@ Controls whether session-optimization is enabled for connections egressing this 
 
 | Element | Type | Description |
 | mode | enumeration | Valid values: auto, never-on. Default: auto. By default the 128T will detect whether session-optimization needs to be enabled based on current network behavior (latency). To disable session-optimization, set this to `never-on`. |
+
+## session-optimization (device-interface)
+
+Path:
+
+authority > router > node > device-interface > session-optimization
+
+Description:
+
+This controls whether the 128T will attempt to detect when session-optimization is necessary for traffic egressing this `device-interface`.
+
+| Element | Type | Value |
+| --- | --- | --- |
+| enable-detection | boolean | Default: true. When `true`, the 128T will track latency for traffic on the interface to identify the need for session-optimization. When `false`, no session-optimization will occur for traffic on this interface. |
 
 ## session-type
 
@@ -2205,6 +2314,22 @@ If a policy reaches the end of the statement list and no statement has been exec
 | condition | sub-element | The condition that must be satisfied in order to enforce the `policy` action of accept or reject. |
 | name | string | Key field. A unique name for this statement. |
 | policy | enumeration | Valid values: accept, reject. Governs whether the statement will `accept` or `reject`, typically based on a `condition`. |
+
+## summary-range
+
+Path:
+
+authority > router > routing > ospf > area > summary-range
+
+Description:
+
+This controls whether the 128T will advertise summary routes into OSPF. This only applies when the 128T is acting as an Area Border Router (ABR).
+
+| Element | Type | Description |
+| --- | --- | --- |
+| advertise | boolean | Default: true. Controls whether 128T will advertise the specified prefix or not. |
+| prefix | ip-prefix | Specifies the summarization prefix to advertise. |
+| cost | uint32 | Valid values: 0-16777214. Specifies the cost of the summarized route. |
 
 ## syslog
 
