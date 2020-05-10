@@ -3,7 +3,7 @@ title: Using Saltstack at Scale With 128T
 sidebar_label: Saltstack at Scale With 128T
 ---
 
-## Introduction 
+## Introduction
 
 This guide is intended to provide methods for users to implement custom Saltstack functionality in a performant way that will not affect their ability to provision new systems at scale.
 
@@ -126,7 +126,7 @@ Interface {{ interface.name }}:
       - 8.8.4.4
 ```
 
-This approach quickly breaks down at scale. Each time a highstate is run the Salt Master needs to parse the pillar top file and decide which pillar files apply to each Salt Minion. The top file supports glob matching and is not always a simple 1:1 match from Salt Minion ID to pillar file, therefore the entire file needs to be parsed each time a highstate is performed. Next, the Salt Master encrypts the pillar data and sends it securely to each Salt Minion. These operations become extremely costly and profiling shows the Salt Master spends 95% of its compute time compiling pillar data if the pillar top file contains more than one thousand individual pillar files. The Salt Master becomes unable to process incoming minion requests and cannot communicate with more than ~250 minions concurrently. The Salt Masters' ten worker threads will saturate to 100% CPU usage and impact the performance of the rest of the 128T processes operating on the Conductor.
+This approach quickly breaks down at scale. Each time a highstate is run the Salt Master needs to parse the pillar top file and decide which pillar files apply to each Salt Minion. The top file supports glob matching and is not always a simple 1:1 match from Salt Minion ID to pillar file, therefore the entire file needs to be parsed each time a highstate is performed. Next, the Salt Master encrypts the pillar data and sends it securely to each Salt Minion. These operations become extremely costly and profiling shows the Salt Master spends 95% of its compute time compiling pillar data if the pillar top file contains more than one thousand individual pillar files. The Salt Master becomes unable to process incoming minion requests and cannot communicate with more than ~250 minions concurrently. The Salt Master's ten worker threads saturate to 100% CPU usage and impact the performance of the rest of the 128T processes operating on the Conductor.
 
 ## A Better Approach: Map Files
 
@@ -169,7 +169,7 @@ In this example the map files for each Salt Minion are named after the Salt Mini
 In this example the map files are formatted in YAML so the Salt state uses the `import_yaml` keyword to load the data. If the user chose to format their map files in JSON then the Salt state would use the `import_json` keyword instead.
 :::
 
-There is no need to manually sync the map file from the data directory on the Salt Master to the Salt Minions. Since the data files located at `/srv/salt/data` are placed within the Salt file roots `/srv/salt/` the Salt Minion can fetch them from the Salt Master automatically. Within the states the data file path is referenced as `data/` as seen in the first line of the example above because the Salt state's root directory is the Salt file roots.
+There is no need to manually sync the map file from the data directory on the Salt Master to the Salt Minions. Since the map files located at `/srv/salt/data` are placed within the Salt file roots `/srv/salt/` the Salt Minion can fetch them from the Salt Master automatically. Within the states the data file path is referenced as `data/` as seen in the first line of the example above because the Salt state's root directory is the Salt file roots.
 
 
 ## Conclusion
