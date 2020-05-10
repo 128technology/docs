@@ -3,7 +3,7 @@ title: Using Saltstack at Scale With 128T
 sidebar_label: Saltstack at Scale With 128T
 ---
 
-## Abstract
+## Introduction 
 
 This guide is intended to provide methods for users to implement custom Saltstack functionality in a performant way that will not affect their ability to provision new systems at scale.
 
@@ -15,7 +15,9 @@ This guide is not intended to teach the users how to use Saltstack. This documen
 
 ## Using Salt with 128T
 
-The 128T Conductor uses different Salt environments to logically separate the 128T specific Salt state and modules from any custom Salt modules implemented by the user. The locations for each environment are defined in the Salt Master configuration file on the Conductor located at `/etc/128technology/salt/master`:
+The 128T Conductor uses different Salt environments to logically separate the 128T specific Salt state and modules from any custom Salt modules implemented by the user. The locations for each environment are defined in the Salt Master configuration file on the Conductor.
+
+`/etc/128technology/salt/master`:
 ```
 file_roots:
   128T:
@@ -35,13 +37,17 @@ pillar_roots:
 ```
 
 
-The `128T` and `plugins` environments are managed by the Conductor and should not be touched. The `base` environment is left for the user to implement any custom Salt logic for their specific deployment. When a Salt Minion connects to the 128T Conductor the Salt Master will execute the Salt highstate for each Salt environment automatically. The highstate consists of the states listed in the `top.sls` for each environment. By default the `top.sls` for the `base` environment performs a dummy state meant to serve as an example to users:
+The `128T` and `plugins` environments are managed by the Conductor and should not be modified. The `base` environment is left for the user to implement any custom Salt logic for their specific deployment. When a Salt Minion connects to the 128T Conductor the Salt Master will execute the Salt highstate for each Salt environment automatically. The highstate consists of the states listed in the `top.sls` for each environment. By default the `top.sls` for the `base` environment performs a dummy state meant to serve as an example to users, but can be modified to perform states for the users specific deployment:
+
+`/srv/salt/top.sls`:
 ```
-[root@t101-dut1 ~]# cat /srv/salt/top.sls
 base:
   '*':
     - dummy
-[root@t101-dut1 ~]# cat /srv/salt/dummy.sls
+```
+
+`/srv/salt/dummy.sls`:
+```
 /dev/null:
   file.touch:
     - name: /dev/null
@@ -49,9 +55,9 @@ base:
 
 ## Using Salt Pillars
 
-Pillars are tree-like structures of data defined on the Salt Master and passed through to Salt Minions. They allow confidential, targeted data to be securely sent only to the relevant Salt Minion. Pillars are commonly used to store variable information for each Salt Minion, which are used when the Salt Minion renders a Salt state before executing it. Here is an example of a common approach for using Salt pillars:
+Pillars are tree-like structures of data defined on the Salt Master and passed through to Salt Minions. Salt pillars are intended to be used for confidential information as the information is encrypted and sent securely to the respective Salt Minion. The Salt Minion uses the pillar data assigned to its Minion ID to render Salt states before executing them. The following is an example of a common approach for using Salt pillars.
 
-The pillar top file defines which pillars apply to which Salt Minions (Note: The ellipsis is not part of the syntax, it serves to illustrate there are a large number of Salt Minions):
+The pillar top file defines which pillars apply to which Salt Minions:
 
 `/srv/pillar/top.sls`:
 ```
@@ -70,6 +76,9 @@ base:
   'Router999NodeB':
     - router999B
 ```
+:::note
+The ellipsis is not part of the syntax, it serves to illustrate there are a large number of Salt Minions
+:::
 
 Each pillar file defined above contains the variables for a specific Salt Minion:
 
@@ -110,22 +119,27 @@ Interface {{ interface.name }}:
     - enabled: True
     - type: eth
     - ipaddr: {{ interface.address }}
-    - netmask: {{ interface.address }}
+    - netmask: {{ interface.netmask }}
     - gateway: {{ interface.gateway }}
     - dns:
       - 8.8.8.8
       - 8.8.4.4
 ```
 
-This approach quickly breaks down at scale. Each time a highstate is run the Salt Master needs to parse the pillar top file and decide which pillar files apply to each Salt Minion. The top file supports glob matching and is not always a simple 1:1 matching from Salt Minion ID to pillar file, therefore the entire file needs to be parsed each time a highstate is performed. Next the Salt Master encrypts the pillar data and sends it to each Salt Minion. These operations become extremely costly and bring the Salt Master to a halt if the pillar top file contains 1000s of individual pillar files.
+This approach quickly breaks down at scale. Each time a highstate is run the Salt Master needs to parse the pillar top file and decide which pillar files apply to each Salt Minion. The top file supports glob matching and is not always a simple 1:1 match from Salt Minion ID to pillar file, therefore the entire file needs to be parsed each time a highstate is performed. Next, the Salt Master encrypts the pillar data and sends it securely to each Salt Minion. These operations become extremely costly and profiling shows the Salt Master spends 95% of its compute time compiling pillar data if the pillar top file contains more than one thousand individual pillar files. The Salt Master becomes unable to process incoming minion requests and cannot communicate with more than ~250 minions concurrently. The Salt Masters' ten worker threads will saturate to 100% CPU usage and impact the performance of the rest of the 128T processes operating on the Conductor.
 
 ## A Better Approach: Map Files
 
 Pillar files are best used only for sensitive data like passwords or SSH keys. Any other data should be converted to use map files instead. The swap from pillar files to map files is very simple.
 
 Move all pillar files from the pillar directory `/srv/pillar/` to a new data directory within the Salt file roots `/srv/salt/data` and rename the pillar files to have the extension matching their data type instead of the `.sls` extension:
+
+:::note
+In this example the map files for each Salt Minion contain contents formatted in YAML so the file extension becomes `.yaml`. Salt also supports map files formatted in JSON, which would result in the `.json` extension instead.
+:::
+
+`/srv/salt/data/`:
 ```
-[root@t101-dut1 ~]# ll /srv/salt/data/
 -rw-r--r-- 1 root root 473 May  6 23:06 common.yaml
 -rw-r--r-- 1 root root  74 May  6 23:06 router1A.yaml
 -rw-r--r-- 1 root root  74 May  6 23:06 router1B.yaml
@@ -144,20 +158,23 @@ Before:
 ```
 
 After:
-
-*Note*: In this example the map files for each Salt Minion are named after the Salt Minion ID. The first line uses the Salt Minion ID to form the file name.
 ```
-{%- set data_file = 'data/%s.yaml' % opts.id %}
-{%- import_yaml data_file as data %}
+{%- import_yaml 'data/%s.yaml' % opts.id as data %}
 {%- set configured_interfaces = data.get('configured_interfaces') %}
 ```
+:::note
+In this example the map files for each Salt Minion are named after the Salt Minion ID. The first line uses the Salt Minion ID to form the file name.
+:::
+:::note
+In this example the map files are formatted in YAML so the Salt state uses the `import_yaml` keyword to load the data. If the user chose to format their map files in JSON then the Salt state would use the `import_json` keyword instead.
+:::
 
 There is no need to manually sync the map file from the data directory on the Salt Master to the Salt Minions. Since the data files located at `/srv/salt/data` are placed within the Salt file roots `/srv/salt/` the Salt Minion can fetch them from the Salt Master automatically. Within the states the data file path is referenced as `data/` as seen in the first line of the example above because the Salt state's root directory is the Salt file roots.
 
 
 ## Conclusion
 
-With the Salt pillar approach the Salt Master renders the entire pillar top file and encrypts the pillar data each time it needs to perform highstate. With the map file approach the Salt Master simply executes the highstate and the Salt Minion will fetch the correct map file automatically and render the information locally, saving lots of CPU cycles on the Salt Master. The only downside with the map approach is that the data is not encrypted on the Salt Minion when the map file retrieved and cached locally, which is why the map approach should not be used for sensitive data.
+With the Salt pillar approach the Salt Master renders the entire pillar top file and encrypts the pillar data each time it needs to perform highstate. With the map file approach the Salt Master simply executes the highstate and the Salt Minion will fetch the correct map file automatically and render the information locally, saving lots of CPU cycles on the Salt Master. With either approach the data is retrieved over an encrypted SSH tunnel between Salt Minion and Salt Master. The only downside with the map approach is that the data is not encrypted on the Salt Minion when cached locally, which is why the map approach should not be used for sensitive data.
 
 Pillars can still be used at scale provided that the pillar top file is small. One example would be using Salt pillars to set the same root password on all managed 128T Routers:
 ```
