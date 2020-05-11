@@ -23,6 +23,7 @@ When using cloned images, the same exact hardware platform must be used.  Create
 This disk copy can then be used to quickly install platforms by copying the filesystem and 128T software from one platform to another. After the initial installation the platform will be powered off. At this point in time the platform is generic and not unique -- which is the proper time to create a disk clone of the hard drive.
 
 The following procedure must be followed:
+
 1. Platform is installed using ISO image which powers down on success
 2. Use Clonezilla or other Live USB to take a disk copy of the platform
 3. Distribute disk clone using USB, multicast, or other technique
@@ -33,6 +34,7 @@ The following procedure must be followed:
 ## Bootstrapping
 
 As mentioned above, the platform is generic after the initial installation and poweroff. However, once the platform is started again there is an automated script that does bootstrapping of the platform. This script is a one-shot service unit that only executes **once** during the first bootup. It will perform the following steps:
+
 1. Configure Hostname and Salt Minion Identifier
 2. Configure 128T and network interfaces
 3. Enable 128T and salt-minion service
@@ -47,6 +49,7 @@ It is worth noting that after the OS installation -- dhclient is configured acro
 ### Hostname and Salt Minion Identifier
 
 The hostname and salt minion identifier are set to the same value during the bootstrapping process.
+
 1. If the system serial number provisioned (which can be seen by `dmidecode --string system-serial-number`) this value will be used.
 2. Otherwise use the first MAC address found in the format of: `mac-<address>`
 
