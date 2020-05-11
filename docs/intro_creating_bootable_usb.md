@@ -11,7 +11,7 @@ The goal of this guide is produce a bootable USB drive from a 128T ISO.
 
 The first step is to acquire an ISO of the version of software that is intended to be loaded onto the bootable USB media following the [download instructions](intro_downloading_iso.md).
 
-## Linux and OSX
+## Linux and macOS
 
 Creating a bootable ISO from OS is straightforward.  The only requirements are that you need administrative privileges to the system.
 
