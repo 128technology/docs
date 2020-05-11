@@ -55,12 +55,12 @@ sidebar_label: 2.3
 
   ```
   Cancelling upgrade of the second node on the router due to failure on this node: Failed to install 128T-manifest-0:4.1.0.1.el7.centos-1.x86_64:
-        Error: transaction check vs depsolve:
-        iptables = 1.4.21-28.el7 is needed by iptables-services-1.4.21-28.el7.x86_64
+  Error: transaction check vs depsolve:
+  iptables = 1.4.21-28.el7 is needed by iptables-services-1.4.21-28.el7.x86_64
   ```
 
-  To diagnose the problem, try running: 'rpm -Va --nofiles --nodigest'.
-  You probably have corrupted RPMDB, running 'rpm --rebuilddb' might fix the issue."
+  To diagnose the problem, try running: `rpm -Va --nofiles --nodigest`.
+  If this is a corrupted RPMDB, running `rpm --rebuilddb` may address the issue.
 
   _**Cause:**_ Installed version of the RPM's come from a later version of the Supported 128T OS version. 128T Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
 
