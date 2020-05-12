@@ -11,6 +11,7 @@ module.exports = {
       "intro_installation_installer",
       "intro_installation_bootable_media",
       "intro_installation_aws",
+      "intro_installation_otp_iso",
       "intro_installation_quickstart_aws",
       "intro_installation_quickstart_azure",
       "intro_ztp",

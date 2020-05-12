@@ -1,4 +1,5 @@
 # 128T Docs
+
 This repository contains the source code for Docusaurus to render the look and feel
 of 128 Technology product documentation as well as the documentation itself in
 markdown format.
@@ -13,12 +14,14 @@ to https://docs.128technology.com after PRs are merged into the master branch
 Preview your docs from a local live-reloading web server running in docker!
 
 ### With `docker-compose`
+
 The simplest method to run the server is with `docker-compose`.
 
 1. Ensure you have installed `docker` and `docker-compose`.
 2. Run `docker-compose up` to build and start the server in a container.
 
 ### With `docker`
+
 Alternatively if you prefer, you can run the server just with `docker`.
 
 1. Ensure you have installed `docker`.

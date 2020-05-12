@@ -3,9 +3,7 @@ title: Installing From ISO
 sidebar_label: Installing From ISO
 ---
 
-
-
-## Installing from bootable Media
+## Installing from Bootable Media
 
 Before you begin, you must first [obtain a 128T ISO](intro_downloading_iso.md). If you are planning on using a bootable USB device, follow the instructions for [creating a bootable USB](intro_creating_bootable_usb.md).
 
@@ -40,27 +38,11 @@ Note: selecting the wrong type of console may result in garbage characters being
 
 Use this option when running on hardware that has onboard graphics chipsets. This installs 128T using the GUI installer.
 
-##### CentOS Linux Only
-
-Selecting this option will only install the CentOS 7 Linux operating system. It uses a GUI installer.
-
 #### 128T Installation
 
 Once Linux is installed, the system will install the 128T software. Note that this may several minutes to complete. After the installation process has completed, the following screen is displayed:
 
 ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
-
-At this point, please remove the install media and select **Yes** to reboot the system. Upon reboot, the system will begin the 128T initialization process.
-
-#### Initialization of the Node
-
-The initialization of the new node will follow the standard process outlined in the [128T Installation Guide](intro_installation_installer.md). Please refer to that document for details on how to initialize your system.
-
-![Initializer](/img/intro_installation_bootable_media_initializer.png)
-
-Once system initialization is complete, the user is prompted to start 128T prior to returning to a Linux login. (Choosing either Yes or No will return to a login prompt.)
-
-![Initialization Complete](/img/intro_installation_bootable_media_complete.png)
 
 ### Installation Notes
 
