@@ -2,6 +2,7 @@ module.exports = {
   "docs": {
     "About": [
       "about_128t",
+      "about_security_policy",
       "CONTRIBUTING",
     ],
     "Introduction": [
