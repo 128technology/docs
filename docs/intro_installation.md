@@ -5,6 +5,10 @@ sidebar_label: Installation
 ## Introduction
 Welcome to 128T - the first software-based routing solution designed to be both session-oriented and service-centric through the application of Secure Vector Routing. The purpose of this guide is to provide an overview and installation walkthrough for the 128T Router and 128T Conductor products into a Linux operating system environment. This product suite is collectively known as 128T Routing Software.
 
+:::info
+The installation guides are written to be version agnostic and are applicable for all current and future versions of software.
+:::
+
 ## Before You Begin
 Before you begin the installation configuration of 128T Routing Software, the following prerequisites must be met:
 - You must be familiar with Linux fundamentals, basic network addressing, and IP networking terminology. 

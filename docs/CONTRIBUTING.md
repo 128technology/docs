@@ -37,5 +37,55 @@ When referring to paths in datamodel hierarcies, it is preferable to use a singl
 * When referring to specific instances of a configuration value, the object in discussion should be called out as code by using backtics (e.g. `service-policy`)
 * When referring to a data model concept, it should be called in italicized format (e.g. _service-policy_)
 
-## Markdown Headers
+### Markdown Headers
 The right-hand table of contents is generated from `## heading 2` and `### heading 3`.  Headings `# heading 1` or `#### header 4` and higher are excluded. Keep this in mind when organizing your content. Use this to your advantage in how you want information to appear.
+
+### Callouts/admonitions
+In addition to the basic Markdown syntax, we use [remark-admonitions](https://github.com/elviswolcott/remark-admonitions) alongside MDX to add support for admonitions. Admonitions are wrapped by a set of 3 colons.
+
+The default keywords are `important`, `tip`, `note`, `warning`, and `danger`. Aliases for `info` => `important`, `success` => `tip`, `secondary` => `note` and `danger` =>`warning` also exist.
+
+Example:
+```
+:::note
+The content and title *can* include markdown.
+:::
+
+:::tip You can specify an optional title
+Heads up! Here's a pro-tip.
+:::
+
+:::info
+Useful information.
+:::
+
+:::caution
+Warning! You better pay attention!
+:::
+
+:::danger
+Danger danger, mayday!
+:::
+```
+:::note
+The content and title *can* include markdown.
+:::
+
+:::tip You can specify an optional title
+Heads up! Here's a pro-tip.
+:::
+
+:::info
+Useful information.
+:::
+
+:::caution
+Warning! You better pay attention!
+:::
+
+:::danger
+Danger danger, mayday!
+:::
+
+### Sidebar
+The content listed in the left-hand table of contents is _not_ automatically generated and is govered by the file `sidebars.js`. If you are adding new files, be sure to add it to this file as well. Release notes should always be ordered from newest to oldest.

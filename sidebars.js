@@ -11,6 +11,7 @@ module.exports = {
       "intro_installation_installer",
       "intro_installation_bootable_media",
       "intro_installation_aws",
+      "intro_installation_otp_iso",
       "intro_installation_quickstart_aws",
       "intro_installation_quickstart_azure",
       "intro_ztp",
@@ -91,6 +92,7 @@ module.exports = {
       "bcp_conductor_deployment",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
+      "bcp_salt_pillars",
       "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",
       "bcp_tenants",
@@ -121,6 +123,7 @@ module.exports = {
         "type": "category",
         "label": "128T Installer",
         "items": [
+          "release_notes_128t_installer_2.5",
           "release_notes_128t_installer_2.4",
           "release_notes_128t_installer_2.3",
           "release_notes_128t_installer_2.2",
