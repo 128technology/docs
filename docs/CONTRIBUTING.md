@@ -31,9 +31,13 @@ Before posting a PR for submitting changes, it is best to first test your change
     >
     > A paragraph describing what changed and its impact."
     ```
-6. Open a [Pull Request](https://github.com/128technology/docs/pulls) from your branch with a clear list of what you've done. Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
+6. Push your changes upstream
+    ```
+    git push origin <branch>
+    ```
+7. Open a [Pull Request](https://github.com/128technology/docs/pulls) from your branch with a clear list of what you've done. Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
 ![Creating a PR](/img/contributing_creating_pr.png)
-7. Once the PR has been merged, the branch will be automatically deleted from origin (online). It is likely that you no longer need your local branch anymore.  Remove your local branch:
+8. Once the PR has been merged, the branch will be automatically deleted from origin (online). It is likely that you no longer need your local branch anymore.  Remove your local branch:
     ```
     git branch -d <branch>
     ```
