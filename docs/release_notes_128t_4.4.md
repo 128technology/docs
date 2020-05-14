@@ -89,6 +89,14 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
 ------
 - **I95-33465** UI sometimes does not provide an indication that it is committing the configuration when importing from backup
 ------
+- **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
+  _**Conditions:**_ DHCP server is not running. The following log message can be seen:
+  ```
+init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
+init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip netns set dhcp-server-ns-1 1073742075" failed: RTNETLINK answers: No space left on device
+  ```
+  Until the system is upgraded to 4.4.0, this issue can be mitigated restarting the 128T process.
+------
 - **I95-33983** User role can see a list of config exports by executing `show config exports`
 ------
 - **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
@@ -103,8 +111,9 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
 ------
 - **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
 ------
+- **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T
+------
 - **I95-34753** ARP packet validation failure produces misleading log message.
-
   ```
   WARN  (arpManagerTP    ) Base Exception: Invalid Icmp Header Format: no   NS option available.
   ERROR (arpManagerTP    ) Caught unexpected exception
@@ -115,13 +124,19 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
 ------
 - **I95-34882** `show user` is missing from `search commands regex ".*"`
 ------
+- **I95-34968** Self-signed certificates created during initial installation of 128T are invalid
+------
+- **I95-35035** Significantly improved the performance of populating the FIB from configuration and dynamic routes
+------
 - **I95-35062** Non-permanent LTE failures are incorrectly displayed as a failure context in `show device-interface`
+------
+- **I95-35063** PCLI `replace` command uses "all" to skip prompts, rather than "force" as it should
 ------
 - **I95-35081** Long authority names can obscure "UP" navigation button with the configuration UI
 ------
 - **I95-35093** `show asset <asset-id>` incorrectly continues to show `Currently Upgrading` version after completion of an upgrade.
 ------
-- **I95-35088** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
+- **I95-35099** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
   Until the system is upgraded to 4.4.0, this issue can be mitigated by disabling rather than deleting the user.
 ------
 - **I95-35115** Aggregate bandwidth charts may not display data accurately
@@ -130,6 +145,18 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
   :::info
   This fix is required only on the 128T Conductor.
   :::
+------
+- **I95-35155** `show device-interface` output did not include duplex mode
+------
+- **I95-35163** Executing `tail` on `/var/log/install128t/installer.log` while associating an asset with the conductor for the first time will result in the node name not changing from its defaults
+------
+- **I95-35164** Downloading a new software image during an upgrade will incorrectly complete the upgrade if the download was successful before the upgrade has fully completed
+------
+- **I95-35188** Adding a tenant or changing the order of tenant in the configuration can lead to traffic being dropped upon session recovery
+  _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
+  Until the system is upgraded to 4.4.0, if the tenant configuration has changed and a HA node has takes over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
+------
+- **I95-35203**  `persistentDataManager` process can fault on shutdown of 128T
 
 ## Special Considerations
 - Python has been upgraded from version 2 to version 3.  Any custom salt states that have been written that include python code, may need to be upgraded or rewritten in advance of the upgrading to 4.4. (I95-31073)
