@@ -30,6 +30,13 @@
   --ifm-font-size-base: 15px;
 }
 
+.markdown {
+  --ifm-h1-vertical-rhythm-top: 2;
+  --ifm-h2-vertical-rhythm-top: 1;
+  --ifm-h3-vertical-rhythm-top: 1;
+  --ifm-heading-vertical-rhythm-top: 1;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgb(72, 77, 91);
   display: block;
@@ -126,6 +133,7 @@ h1 {
 h2, h3, h4 {
   color: #9C7C33;
 }
+
 
 .menu, .contents {
   font-family: Barlow-SemiBold, sans-serif;
