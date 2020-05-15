@@ -156,7 +156,9 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
   Until the system is upgraded to 4.4.0, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
 ------
-- **I95-35203**  `persistentDataManager` process can fault on shutdown of 128T
+- **I95-35203** `persistentDataManager` process can fault on shutdown of 128T
+------
+- **I95-35323** BGP over SVR does not work when both sides are using VLAN tags
 
 ## Special Considerations
 - Python has been upgraded from version 2 to version 3.  Any custom salt states that have been written that include python code, may need to be upgraded or rewritten in advance of the upgrading to 4.4. (I95-31073)
