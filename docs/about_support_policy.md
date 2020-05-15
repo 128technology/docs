@@ -6,7 +6,7 @@ description: 'This document defines the product lifecycle support policy for 128
 
 ## Overview and Definitions
 
-The _Lifecycle Policy_ establishes a clear and predictable policy for product maintenance, product support and product end-of-life of 128 Technology’s software products. The policy is intended to enable our customers and partners to align their deployment plans and understand service levels throughout the entire lifecycle of or software products.
+The _Lifecycle Policy_ establishes a clear and predictable policy for product maintenance, product support and product end-of-life of 128 Technology’s software products. The policy is intended to enable 128 Technology customers and partners to align their deployment plans and understand service levels throughout the entire lifecycle of or software products.
 
 For the purpose of the policy, the following definitions apply:
 
@@ -36,11 +36,11 @@ For the purpose of the policy, the following definitions apply:
 
 ## Lifecycle Support Policy
 
-This lifecycle support policy covers the lifecycle, milestones and maintenance and support phases for Software Releases of active products as well as products becoming end-of-life.
+This lifecycle support policy covers the lifecycle, milestones, maintenance and support phases for Software Releases of active products as well as products becoming end-of-life.
 
 ### Major Releases
 
-128 Technology will provide maintenance services for at least, the two most recent major releases (N and N-1). Maintenance services will be provided for at least one year from GA date of the all major releases. The N-2 release (and all minor releases that belong to it) reaches its EOM date upon the GA of a new major release. The LDOS of a major release is 6 months from its EOM date.
+128 Technology will provide maintenance services for at least the two most recent major releases (N and N-1). Maintenance services will be provided for at least one year from GA date of the all major releases. The N-2 release (and all minor releases that belong to it) reaches its EOM date upon the GA of a new major release. The LDOS of a major release is 6 months from its EOM date.
 
 :::tip Example
 If the _current_ GA version of software is 4.3.3, 4.X and the latest 3.X are supported under maintenance.
