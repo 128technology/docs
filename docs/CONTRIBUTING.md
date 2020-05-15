@@ -14,13 +14,36 @@ Technical writing is different from other styles of writing.  Markus Kazmierczak
 Before posting a PR for submitting changes, it is best to first test your changes locally to ensure that all links, references and formatting appear the way you expect.  Have a look at the [README](https://github.com/128technology/docs) for instructions on how to test locally.
 
 ### Submitting changes
-Please open a [Pull Request](https://github.com/128technology/docs/pulls) with a clear list of what you've done. Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
-
+1. Create a branch (typically based off of `master`) on the [docs GitHub page](https://github.com/128technology/docs).
+![Creating a branch from master](/img/contributing_creating_branches.png)
+2. On the machine where you are making your changes locally, update your repo to get the branch you just created.
+    ```
+    git fetch origin
+    ```
+3. Checkout the branch you just created
+    ```
+    git co <branch>
+    ```
+4. Make your changes.
+5. Commit your changes.
+    ```
     $ git commit -m "A brief summary of the commit
     >
     > A paragraph describing what changed and its impact."
+    ```
+6. Push your changes upstream
+    ```
+    git push origin <branch>
+    ```
+7. Open a [Pull Request](https://github.com/128technology/docs/pulls) from your branch with a clear list of what you've done. Always write a clear log message for your commits. One-line messages are fine for small changes, but bigger changes should look like this:
+![Creating a PR](/img/contributing_creating_pr.png)
+8. Once the PR has been merged, the branch will be automatically deleted from origin (online). It is likely that you no longer need your local branch anymore.  Remove your local branch:
+    ```
+    git branch -d <branch>
+    ```
 
 ## Issues
+
 ### Did you find something wrong?
 Did you find a typo or something that was incorrect and do not have the time to submit a PR yourself?  Do you have suggestions for new content? That's okay, we'll get to it.  Have a look at our [Issues](https://github.com/128technology/docs/issues) page first to see if someone else has already reported the same issue. When filling out an issue, please do your best to provide as much detail as possible.  We want to make sure that we are providing the highest quality documentation to you as possible.
 
