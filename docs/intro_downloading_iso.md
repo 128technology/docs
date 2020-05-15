@@ -29,8 +29,7 @@ curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/
 Where `<VERSION>` is replaced with the 128T version you are interested in.
 
 ### Listing Available ISOs from the Command Line
-To see what ISOs are available for download, one can type the command below.  Egrep is used to filter the results to 4.2.*. 
-
+To see what ISOs are available for download, one can type the command below.  Egrep is used to filter the results to 4.2.*.
 ```html
 # curl --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/ | egrep '4\.2'
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -53,7 +52,6 @@ To see what ISOs are available for download, one can type the command below.  Eg
 <tr><td valign="top"><img src="/icons/unknown.gif" alt="[   ]"></td><td><a href="128T-OTP-4.2.4-1.el7.x86_64.iso">128T-OTP-4.2.4-1.el7.x86_64.iso</a></td><td align="right">2020-02-14 19:17  </td><td align="right">1.3G</td></tr>
 100  8372    0  8372    0     0  12938      0 --:--:-- --:--:-- --:--:-- 12959
 ```
-
 :::note
 There exists a One Touch Provisioning (OTP) and interactive ISO for the same version of software. Select the appropriate image for your needs.
 :::
@@ -79,3 +77,68 @@ The output of the command should produce the result
 ```
 
 If the checksum validation fails, reattempt the download. If the error message persists after multiple attempts, please contact 128 Technology, Inc. immediately.
+
+### Downloading Using a Web Browser
+
+In order for the 128T certificate to be imported into a browser, it must first be transformed into the PFX format, using openssl from a Linux, Macintosh, or Windows 10 Subsystem for Linux shell.
+
+With your client certificate (i.e. 128T-0000XXX.pem) in the current directory, run the following command:
+
+```
+openssl pkcs12 -inkey 128T-0000XXX.pem -in 128T-0000XXX.pem -export -out 128T-0000XXX.pfx
+```
+
+With the client certificate transformed, you can now import it to your browser.  Once imported to your browser, the client certificate will allow you to browse and download from the folder located at `https://yum.128technology.com/isos`.
+
+![ISO Listing](/img/intro_downloading_iso_8.png)
+
+### Importing PFX File to Firefox
+
+Select Preferences from the menu at the upper right hand corner
+
+![Firefox Preferences](/img/intro_downloading_iso_1.png)
+
+Select Privacy and Security:
+
+![Firefox Security Settings](/img/intro_downloading_iso_2.png)
+
+Select View Certificates:
+
+![Firefox Certificate Settings](/img/intro_downloading_iso_3.png)
+
+Click the ‘Your Certificates’ TAB:
+
+![Firefox Certificate Manager](/img/intro_downloading_iso_4.png)
+
+And then click the Import button:
+
+![Import Certificate Finder](/img/intro_downloading_iso_5.png)
+
+Click [OPEN] to select the PFX form of the certificate, and a password prompt will be displayed:
+
+![Password Prompt](/img/intro_downloading_iso_6.png)
+
+No password is necessary to import the certificate, so just click OK:
+
+![Firefox Certificate Manager 2](/img/intro_downloading_iso_7.png)
+
+### Downloading ISOs in Windows using Microsoft Edge, Explorer, and Chrome Browsers:
+
+1. Navigate to “Control Panel” and search for “Manage user certificates”.
+2. Clicking on “Manage user certificates” will open the “certmgr.msi” utility.  Another option is to just open command line window and enter command: certmgr
+3. Open “Personal” folder and then - “Certificates” folder.
+
+![Manage User Certificates](/img/intro_downloading_iso_9.png)
+
+4. Go to the Action menu at the top, then “All Tasks”.  Choose “Import…”
+5. This will open “Certificate Import Wizard”.
+6. Click “Next” button in the wizard.
+7. Browse to the .PFX certificate file and upon selecting click “Next”.
+8. On the next screen, make sure “Place all certificate in the following store” radio button is selected, and the chosen certificate store is “Personal”:
+
+![Certificate Import Wizard](/img/intro_downloading_iso_10.png)
+
+9. Click “Next” again.
+10. Click “Finish”
+
+Now the certificate is provisioned in Windows, and you can use Edge, Explorer, or Chrome to navigate to the `https://yum.128technology.com/isos` web page, and download the desired ISO.

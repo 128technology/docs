@@ -27,6 +27,14 @@
   --ifm-footer-background-color: #272526;
   --ifm-font-family-base: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --ifm-font-family-monospace: Hack, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --ifm-font-size-base: 15px;
+}
+
+.markdown {
+  --ifm-h1-vertical-rhythm-top: 2;
+  --ifm-h2-vertical-rhythm-top: 1;
+  --ifm-h3-vertical-rhythm-top: 1;
+  --ifm-heading-vertical-rhythm-top: 1;
 }
 
 .docusaurus-highlight-code-line {
@@ -125,6 +133,7 @@ h1 {
 h2, h3, h4 {
   color: #9C7C33;
 }
+
 
 .menu, .contents {
   font-family: Barlow-SemiBold, sans-serif;

@@ -4,6 +4,7 @@ module.exports = {
       "about_128t",
       "about_releases",
       "about_support_policy",
+      "about_security_policy",
       "CONTRIBUTING",
     ],
     "Introduction": [
