@@ -111,7 +111,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
 ------
-- **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T
+- **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T router
 ------
 - **I95-34753** ARP packet validation failure produces misleading log message.
   ```
@@ -154,7 +154,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-35188** Adding a tenant or changing the order of tenant in the configuration can lead to traffic being dropped upon session recovery
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
-  Until the system is upgraded to 4.4.0, if the tenant configuration has changed and a HA node has takes over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
+  Until the system is upgraded to 4.4.0, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
 ------
 - **I95-35203**  `persistentDataManager` process can fault on shutdown of 128T
 
