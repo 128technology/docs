@@ -1,4 +1,7 @@
-# Session Policy Baseline Configuration
+---
+title: Service Policy Baseline Configurations
+sidebar_label: Service Policy Baseline Defaults
+---
 
 One of the most powerful aspects of the 128T data model in an SD-WAN deployment is the flexibility offered by a `service-policy`. Giving customers the ability to configure thresholds for when traffic should migrate from path to path based on current network status is a daunting task, however; most customers – and even application developers – are unaware of the sensitivity of their service to latency, loss, and jitter.
 
