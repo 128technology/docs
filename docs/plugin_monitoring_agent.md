@@ -394,6 +394,18 @@ Testing input t128_device_state
 > device-interface-state,device-interface=dpdk1-lan,host=t127-dut2.openstacklocal,router=router1 adminStatus="ADMIN_UP",enabled=true,operationalStatus="OPER_UP",redundancyStatus="NON_REDUNDANT" 1586933478000000000
 ```
 
+### Stopping Services
+
+The `monitorinag-agent-cli stop` command can be used to stop `128T-telegraf` services launched by the `configure` command.
+
+```console
+# monitoring-agent-cli stop
+Stopping telegraf service 128T-telegraf@t128_metrics.service
+Stopping telegraf service 128T-telegraf@t128_events.service
+Stopping telegraf service 128T-telegraf@t128_arp_state.service
+Stopping telegraf service 128T-telegraf@t128_device_state.service
+```
+
 ## 128T Collectors
 
 The 128T monitoring-agent comes pre-packaged with a set of collectors to assist in the monitoring of the 128T platform. Here are the various collectors and how to use them:
