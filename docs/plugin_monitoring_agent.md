@@ -22,55 +22,57 @@ The 128T Monitoring Agent can be obtained from the official 128T software reposi
 
 | Monitoring Agent            | 128T                        |
 | --------------------------- | --------------------------- |
-| 128T-monitoring-agent-1.1.1 | 128T >= 4.1.0; 128T < 4.3.0 |
-| 128T-monitoring-agent-2.0.1 | 128T >= 4.3.0               |
+| 128T-monitoring-agent-1.2.0 | 128T >= 4.1.0; 128T < 4.3.0 |
+| 128T-monitoring-agent-2.1.0 | 128T >= 4.3.0               |
 
 The agent can be install using dnf utility. For example.
 
 ```console
 # dnf install 128T-monitoring-agent
-Last metadata expiration check: 0:00:31 ago on Tue 28 Apr 2020 02:40:10 PM UTC.
+Last metadata expiration check: 0:00:08 ago on Mon 18 May 2020 08:30:20 PM UTC.
 Dependencies resolved.
-==============================================================================================================================================================================================================================================================
- Package                                                               Arch                                                   Version                                                   Repository                                                       Size
-==============================================================================================================================================================================================================================================================
+===========================================================================================================
+ Package                            Arch                Version                 Repository            Size
+===========================================================================================================
 Installing:
- 128T-monitoring-agent                                                 x86_64                                                 2.0.1-2                                                   plugins-staging                                                 5.0 M
+ 128T-monitoring-agent              x86_64              2.1.0-5                 128tech              7.0 M
 Installing dependencies:
- telegraf-128tech                                                      x86_64                                                 1.14.0-1                                                  128tech                                                          20 M
+ telegraf-128tech                   x86_64              1.14.2-1                128tech               20 M
 
 Transaction Summary
-==============================================================================================================================================================================================================================================================
+===========================================================================================================
 Install  2 Packages
 
-Total download size: 25 M
-Installed size: 92 M
+Total download size: 27 M
+Installed size: 101 M
 Is this ok [y/N]: y
 Downloading Packages:
-(1/2): 128T-monitoring-agent-2.0.1-2.x86_64.rpm                                                                                                                                                                                24 MB/s | 5.0 MB     00:00
-(2/2): telegraf-128tech-1.14.0-1.x86_64.rpm                                                                                                                                                                                    41 MB/s |  20 MB     00:00
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Total                                                                                                                                                                                                                          40 MB/s |  25 MB     00:00
+(1/2): 128T-monitoring-agent-2.1.0-5.rpm                                    19 MB/s | 7.0 MB     00:00
+(2/2): telegraf-128tech-1.14.2-1.x86_64.rpm                                 32 MB/s |  20 MB     00:00
+-----------------------------------------------------------------------------------------------------------
+Total                                                                       36 MB/s |  27 MB     00:00
 Running transaction check
 Transaction check succeeded.
 Running transaction test
 Transaction test succeeded.
 Running transaction
-  Preparing        :                                                                                                                                                                                                                                      1/1
-  Running scriptlet: telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     1/2
-  Installing       : telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     1/2
-  Running scriptlet: telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     1/2
+  Preparing        :                                                                                   1/1
+  Running scriptlet: telegraf-128tech-1.14.2-1.x86_64                                                  1/2
+  Installing       : telegraf-128tech-1.14.2-1.x86_64                                                  1/2
+  Running scriptlet: telegraf-128tech-1.14.2-1.x86_64                                                  1/2
 Created symlink from /etc/systemd/system/multi-user.target.wants/telegraf.service to /usr/lib/systemd/system/telegraf.service.
-  Installing       : 128T-monitoring-agent-2.0.1-2.x86_64                                                                                                                                                                                                 2/2
-  Running scriptlet: 128T-monitoring-agent-2.0.1-2.x86_64                                                                                                                                                                                                 2/2
-  Running scriptlet: telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     2/2
-  Running scriptlet: 128T-monitoring-agent-2.0.1-2.x86_64                                                                                                                                                                                                 2/2
+  Installing       : 128T-monitoring-agent-2.1.0-5.x86_64                                              2/2
+  Running scriptlet: 128T-monitoring-agent-2.1.0-5.x86_64                                              2/2
+Created symlink from /etc/systemd/system/128T.service.wants/128T-monitoring-agent.service to /usr/lib/systemd/system/128T-monitoring-agent.service.
+Created symlink from /etc/systemd/system/multi-user.target.wants/128T-monitoring-agent.service to /usr/lib/systemd/system/128T-monitoring-agent.service.
+  Running scriptlet: telegraf-128tech-1.14.2-1.x86_64                                                  2/2
+  Running scriptlet: 128T-monitoring-agent-2.1.0-5.x86_64                                              2/2
 Removed symlink /etc/systemd/system/multi-user.target.wants/telegraf.service.
-  Verifying        : 128T-monitoring-agent-2.0.1-2.x86_64                                                                                                                                                                                                 1/2
-  Verifying        : telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     2/2
+  Verifying        : 128T-monitoring-agent-2.1.0-5.x86_64                                              1/2
+  Verifying        : telegraf-128tech-1.14.2-1.x86_64                                                  2/2
 
 Installed:
-  128T-monitoring-agent.x86_64 2.0.1-2                                                                                            telegraf-128tech.x86_64 1.14.0-1
+  128T-monitoring-agent.x86_64 2.1.0-5                   telegraf-128tech.x86_64 1.14.2-1
 
 Complete!
 ```
