@@ -88,7 +88,7 @@ max-jitter           30
 
 #### Interactive Video
 
-For video traffic associated with VoIP sessions (videoconferencing), the only difference is the  recommended marking of the packets; for video, this is `MultimediaConferencing` which uses AF41 (Assured Forwarding).
+For video traffic associated with VoIP sessions (videoconferencing), the only difference is the recommended marking of the packets; for video, this is `MultimediaConferencing` which uses AF41 (Assured Forwarding).
 
 Baseline configuration:
 
