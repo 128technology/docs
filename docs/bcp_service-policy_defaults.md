@@ -3,11 +3,11 @@ title: Service Policy Baseline Configurations
 sidebar_label: Service Policy Baseline Defaults
 ---
 
-One of the most powerful aspects of the 128T data model in an SD-WAN deployment is the flexibility offered by a `service-policy`. Giving customers the ability to configure thresholds for when traffic should migrate from path to path based on current network status is a daunting task, however; most customers – and even application developers – are unaware of the sensitivity of their service to latency, loss, and jitter.
+One of the most powerful aspects of the 128T data model is the flexibility offered by a `service-policy`. Giving customers the ability to configure thresholds for when traffic should migrate from path to path based on current network status is a daunting task, however; most customers – and even application developers – are unaware of the sensitivity of their service to latency, loss, and jitter.
 
 This document recommends several base class `service-policy` definitions for common types of traffic. These can be used as sane starting points for configuring the 128T. Administrators should derive their own policies from these base definitions, adding in administrative preference for path selection using vectors.
 
-In the sections that follow within this document we will discuss the construction of the base class policies for various types of network services. The entire set of base class policies is provided at the end of this document.
+The entire set of proposed base class policies is provided at the end of this document in a format suitable for copy/paste into existing systems.
 
 ## Traffic Categories
 
