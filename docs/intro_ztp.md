@@ -13,12 +13,12 @@ In this deployment model, the 128T node is deployed into the production environm
 The simplest deployment of the 128 Technology ZTP solution is highly automated and leverages just two components, the 128T Conductor and at least one 128T SessionSmart&trade; Router. For many customers, the 128T platform is ordered and delivered as a pre-integrated, off-the-shelf solution through the 128T partner network. An image leveraging QuickStart provisioning can also be deployed into a VM or cloud environment, though consideration must be made to the mechanism of injecting the file. Virtual environments may be better suited for cloud automation tools to assist in automated, dynamic deployment.
 
 ## QuickStart Provisioning
-Basic configuration parameters are encoded within an encrypted file. For each node, a custom file is generated and minimally contains the following configuration encoded parameters:
+Basic configuration parameters are encoded within an encrypted file. For each node, a custom file can be exported from the Conductor and minimally contains the following configuration encoded parameters:
 - WAN IP address, subnet mask and gateway
 - Conductor IP address
 - Asset ID
 
-Upon node startup, the data is passed (through a Web browser interface) directly to the 128T node LAN IP interface address and decoded within the running node software. The node is dynamically configured with the correct addressing and Conductor assignment and restarted to download the final configuration.  Upon restart, the node establishes outbound connectivity with the Conductor and dynamically joins the 128T topology as a pending or fully managed asset.
+The file must be then be dragged and dropped through the 128T Web browser interface. The data is then decoded and applied to the 128T node as configuration automatically which  will dynamically configure the correct addressing and Conductor assignment. Once the 128T configuration has been applied, the node establishes outbound connectivity with the Conductor and dynamically joins the 128T topology as a pending or fully managed asset. When connection is established, it will download the latest configuration.
 
 ## Before you Begin
 
@@ -41,7 +41,7 @@ The rest of this guide will walk you through setting up a typical standalone bra
 
 ### 128T Configuration
 
-The 128T router will need to be provisioned a priori on the conductor.  This procedure presumes you are familiar with the [concepts](concepts_glossary.md) and [configuration](config_basics.md) of the 128T platform.
+The 128T router will need to be provisioned on the conductor.  This procedure presumes you are familiar with the [concepts](concepts_glossary.md) and [configuration](config_basics.md) of the 128T platform.
 
 When a router configuration has been added to the conductor, but the device has not yet connected, in place of device-specific information, QuickStart instructions will be displayed.
 
