@@ -437,16 +437,24 @@ The `name` becomes the name of the measurement in the context of influxdb format
 The event collector can be used for collecting and pushing events for various categories such as admin, alarm, system, traffic and provisioning as they occur on the system. The type of the event is available via a `tag` and can be used for filtering only specific events as desired. For example, the following configuration can be used for pushing just the `alarm` and `admin` event
 
 ```toml
-[[inputs.execd]]
+[[inputs.t128_events]]
   ## Create a stream of 128T events for alarm, audit etc. This information is useful for
   ## monitoring the health of the system.
-  command = "/usr/bin/eventCollector128t"
-  signal = "none"
-  data_format = "influx"
+
+  ## A (unique) file to use for index tracking. This tracking allows each
+  ## event to be produced once. By default, no tracking is used and events are
+  ## produced starting from the point telegraf is launched.
+  # index-file = "/var/lib/128t-monitoring/state/events.index"
+
+  ## The name of the log file to produce to /var/log/128t-monitoring/<log-name>.log
+  # log-name = "event_collector"
+
+  ## The TANK topic to consume. Should be "events" or "offline_events".
+  # topic = "events"
 
   ## input event filtering based on type (admin, alarm, system, traffic, provisioning)
   ## NOTE: For information on filtering severity refer to the output configuration example
-  [inputs.execd.tagpass]
+  [inputs.t128_events.tagpass]
   type = ["alarm", "admin"]
 ```
 
