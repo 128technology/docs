@@ -96,6 +96,7 @@ module.exports = {
       "bcp_salt_pillars",
       "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",
+      "bcp_service-policy_defaults",
       "bcp_tenants",
     ],
     "CLI Reference": [
