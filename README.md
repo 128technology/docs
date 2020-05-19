@@ -7,6 +7,8 @@ markdown format.
 The product of "building" the markdown files into static HTML files are published
 to https://docs.128technology.com after PRs are merged into the master branch
 
+If you are interested in contributing content to the repository, please first read through the [Contributing](https://docs.128technology.com/docs/CONTRIBUTING) guidelines.
+
 # Local Building and Testing
 
 ## Run the local web server in Docker
