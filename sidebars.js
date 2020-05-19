@@ -90,6 +90,7 @@ module.exports = {
       "events_events",
     ],
     "Best Practices": [
+      "bcp_att_avpn_configuration",
       "bcp_conductor_deployment",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
