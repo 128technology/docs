@@ -34,3 +34,40 @@ Are you sure you want to commit the candidate config? [y/N]: y
 Configuration committed
 admin@labsystem1.fiedler#
 ```
+
+## Shortcuts
+
+### &lt;ctrl&gt;+z
+
+Cisco CLI implements `<ctrl>+z`, which is a shortcut for `enter` + `top`
+
+`<ctrl>+z` on the 128T is an improvement over Cisco's CLI and is the equivalent to the following two actions:
+
+1. `<enter>` execute whatever is currently on the prompt line (if any)
+2. `top<enter>` exit the current menu and go to the root of the PCLI tree
+
+When the buffer is empty:
+
+```
+admin@node1.router1# configure authority router router1 <enter>
+admin@node1.router1 (router[name=router1])# <ctrl-z>
+admin@node1.router1#
+```
+
+With a valid command
+
+```
+admin@node1.router1# configure authority router router1 <enter>
+admin@node1.router1 (router[name=Fabric128])# validate <ctrl-z>
+✔ Validating...
+Candidate configuration is valid
+admin@node1.router1#
+```
+
+With an invalid command
+
+```
+admin@node1.router1 (router[name=router1])# bad <ctrl-z>
+Command 'bad' not found (use '?' for help)
+admin@node1.router1#
+```

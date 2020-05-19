@@ -79,6 +79,7 @@ module.exports = {
           "ts_forwarding_resource_pools",
           "ts_logs",
           "ts_mac_uniqueness",
+          "ts_packet_capture",
           "ts_t1_troubleshooting",
         ],
       },
@@ -95,6 +96,7 @@ module.exports = {
       "bcp_salt_pillars",
       "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",
+      "bcp_service-policy_defaults",
       "bcp_tenants",
     ],
     "CLI Reference": [
@@ -112,6 +114,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes_128t_4.4",
           "release_notes_128t_4.3",
           "release_notes_128t_4.2",
           "release_notes_128t_4.1",

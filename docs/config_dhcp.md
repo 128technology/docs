@@ -72,7 +72,91 @@ address-pool       192.168.0.20
 exit
 ```
 
+### Vendor-Specific Information DHCP Options
 
+Being deployed as a router requires the 128T platform to successfully interoperate with a myriad of network elements.  These elements can change from customer to customer and use case to use case.  To ensure interoperability between these network elements it can become necessary to support Options and Vendor Extensions on top of base functional support.
+
+The two supported Vendor-Specific Information are:
+
+1. Vendor-Specific Information Option [RFC 2132](https://tools.ietf.org/html/rfc2132#section-8.4)
+2. Vendor-Identifying Vendor-Specific Information Option [RFC 3925](https://tools.ietf.org/html/rfc3925#section-4)
+
+#### Configuration
+
+Two new configuration objects have added to the `dhcp-server` object: `vendor-specific-information` and `vendor-indentifying-vendor-specific-information`.
+
+An example `vendor-specific-information` DHCP option is shown below:
+
+- **Code 72**, AP Controller Type
+
+```
+ network-interface dhcp-server-intf
+     name dhcp-server-intf
+     ...
+     address 192.168.1.1
+         ...
+         host-service dhcp-server
+             service-type dhcp-server
+             server-name my-dhcp-server
+             max-lease-time 3600
+             address-pool 192.168.1.100
+                 ...
+                 vendor-specific-information 72
+                     code 72
+                     description AP Controller Type
+                     value 1
+                     encoded-type uint8
+                     quantity singular
+                 exit
+                 ...
+             exit
+         exit
+     exit
+ exit
+```
+
+An example of two `vendor-identifying vendor-specific information` DHCP options are shown below:
+
+- **Code 72**, Enterprise-Number 122 (SONY), PS Server Addresses
+- **Code 72**, Enterprise-Number 311 (Microsoft), Enable/Disable xBox Live
+
+```
+network-interface dhcp-server-intf
+     name dhcp-server-intf
+     ...
+     address 192.168.1.1
+         ...
+         host-service dhcp-server
+             service-type dhcp-server
+             server-name my-dhcp-server
+             max-lease-time 3600
+             address-pool 192.168.1.100
+                 ...
+                 vendor-identifying-vendor-specific-information 122 72
+                     description AP Controller addresses
+                     code 72
+                     enterprise-number 122
+                     description PS Server Addresses
+                     value 10.1.1.1
+                     value 10.1.1.2
+                     encoded-type ipv4-address
+                     quantity array
+                 exit
+                 vendor-identifying-vendor-specific-information 311 72
+                     description AP Controller addresses
+                     code 72
+                     enterprise-number 311
+                     description Enable/Disable xBox Live
+                     value false
+                     encoded-type boolean
+                     quantity singular
+                 exit
+                 ...
+             exit
+         exit
+     exit
+ exit
+```
 
 ## Troubleshooting
 
