@@ -26,7 +26,7 @@ For the purpose of the policy, the following definitions apply:
 
 **End-of-Life Notification (EOLN):** The EOLN is provided by 128 Technology to notify customers and partners that a product that is planned to reach it’s End-of-Life date in the near future.
 
-**The End-of-Life (EOL):** End-of-Life means that the product in question has reached the end of it’s “useful lifespan”. After the EOL date, 128 Technology will no longer provide support services for the product. In most cases the EOL date coincides with the Last Date of Support (LDOS) for the product.
+**The End-of-Life (EOL):** End-of-Life means that the product release in question has reached the end of it’s “useful lifespan”. After the EOL date, 128 Technology will no longer provide support services for the release of the product. In most cases the EOL date coincides with the Last Date of Support (LDOS) for the release of the product.
 
 **General Availability (GA):** Software is available for purchase, has proven to be reliable, free of critical bugs and is suitable for usage in production systems.
 
