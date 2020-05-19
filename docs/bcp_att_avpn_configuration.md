@@ -1,9 +1,16 @@
-# AT&T AVPN Configuration
+---
+title: AT&T AVPN Configuration
+sidebar_label: AT&T AVPN Configuration
+---
 
 This guide is for network engineers and architects using their 128T Session Smart router to connect to AT&T’s MPLS VPN (AVPN) service. It will cover:
 - Service class definitions for the various COS queues on the AT&T MPLS network
 - Strategies for mapping `service` configuration to the COS queues using `service-policy` elements
 - Guidelines for setting your `traffic-engineering` properties, to match the circuit profile of your AT&T MPLS link
+
+:::note
+While the techniques described here apply to any MPLS connection, they will be most valuable when engineering branch office (i.e., smaller) MPLS links, due to the higher likelihood of congestion.
+:::
 
 This document is intended to be a companion guide to the *AT&T Network-Based Class of Service Customer Router Configuration Guide*. At the time of this writing, the latest version is Release 4.0, December 2016.
 
@@ -111,7 +118,7 @@ config
             name           ATT-COS3
             description    "Time-sensitive mission-critical applications (AF21)"
             dscp           18
-            traffic-class  low
+            traffic-class  medium
         exit
     exit
 exit
@@ -221,34 +228,34 @@ The 128T router uses four traffic engineering queues for prioritizing egress tra
 
 ```mermaid
 graph LR
-voip-audio --> ATT-COS1
-id1(BFD, BGP) -.-> ATT-control
-voip-video --> ATT-COS2V
-voip-streaming --> ATT-COS2V
-voip-signaling --> ATT-COS2
-data-mission-critical --> ATT-COS2
-remote-desktop --> ATT-COS2
-management-interactive --> ATT-COS3
-management-m2m --> ATT-COS3
-data-interactive --> ATT-COS3
-data-best-effort --> ATT-COS4
-data-scavenger --> ATT-COS5
-video-streaming-scavenger --> ATT-COS5
-subgraph best-effort
-ATT-COS5
-end
-subgraph low
-ATT-COS4
-end
-subgraph medium
-ATT-COS2V
-ATT-COS2
-ATT-COS3
-end
-subgraph high
-ATT-COS1
-ATT-control
-end
+  voip-audio --> ATT-COS1
+  id1(BFD, BGP) -.-> ATT-control
+  voip-video --> ATT-COS2V
+  voip-streaming --> ATT-COS2V
+  voip-signaling --> ATT-COS2
+  data-mission-critical --> ATT-COS2
+  remote-desktop --> ATT-COS2
+  management-interactive --> ATT-COS3
+  management-m2m --> ATT-COS3
+  data-interactive --> ATT-COS3
+  data-best-effort --> ATT-COS4
+  data-scavenger --> ATT-COS5
+  video-streaming-scavenger --> ATT-COS5
+  subgraph best-effort
+  ATT-COS5
+  end
+  subgraph low
+  ATT-COS4
+  end
+  subgraph medium
+  ATT-COS2V
+  ATT-COS2
+  ATT-COS3
+  end
+  subgraph high
+  ATT-COS1
+  ATT-control
+  end
 ```
 
 Each AT&T AVPN circuit has a *profile* associated with it (referred to as a "COS Package"), that maps to bandwidth allocations for the various COS queues. These in turn need to be mapped to the four egress traffic engineering queues on the 128T. The COS Package from AT&T is expressed as a set of six numbers (corresponding to the queues), where the first number is the percentage of the circuit bandwidth allocated for COS1, and the remaining five numbers (which sum to 100%) represent the amount of *bandwidth remaining* from the bandwidth not used by COS1.
@@ -273,6 +280,10 @@ Example (simple COS profile for a 6COS model):
 |  5%  |  20%  | 20%  | 20%  | 20%  | 20%  |
 
 In this case, the `high` percentage is `5`. The `medium` class gets 60% (20% + 20% + 20%) of the remaining 95%, which is `57`. The `low` class gets 20% of the remaining 95%, which is `19`. And `best-effort` also gets 20%, which is `19`.
+
+:::note
+These values are merely starting points that should line up to the COS Profile of the AT&T AVPN circuit. Further tuning is left to the discretion of the network engineer.
+:::
 
 The `traffic-profile` would therefore look like this:
 
@@ -359,7 +370,7 @@ config authority service-class ATT-COS2 traffic-class  medium
 config authority service-class ATT-COS3 name           ATT-COS3
 config authority service-class ATT-COS3 description    "Time-sensitive mission-critical applications (AF21)"
 config authority service-class ATT-COS3 dscp           18
-config authority service-class ATT-COS3 traffic-class  low
+config authority service-class ATT-COS3 traffic-class medium
 config authority service-class ATT-COS4 name           ATT-COS4
 config authority service-class ATT-COS4 description    "Best effort (default)"
 config authority service-class ATT-COS4 dscp           0
