@@ -25,11 +25,11 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T router
 ------
-- **I95-34790** A HA router with over 500 peer paths and high rate of traffic, may result in some flows being black-holed during a node failover event
+- **I95-34790** Dual node HA routers with large numbers of peer paths (>500) may see some flows get blackholed after a node failover occurs.
 ------
 - **I95-34842** The configuration attribute `authority > router > node > device-interface > vrrp` has been removed from configuration in the GUI as the capability does not exist
 ------
-- **I95-34961** Utilizing QuickStart file to provision a router fails when ZScalar plugin has been installed on the Conductor
+- **I95-34961** Using a QuickStart file to provision a router fails if the ZScaler plugin is installed on the Conductor.
 ------
 - **I95-34968** Self-signed certificates created during initial installation of 128T are invalid
 ------
@@ -55,7 +55,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-35303** `persistentDataManager` process can fault on shutdown of 128T
 ------
-- **I95-35323** BGP over SVR does not work if both sides of the routers have vlan tagged interfaces
+- **I95-35323** BGP over SVR does not work if both sides of the routers have VLAN tagged interfaces
   Until the system is upgraded to 4.3.5, configure the outgoing SVR interfaces without vlans. At least one side of the BGP over SVR routers should not utilize VLAN tagging.
 
 

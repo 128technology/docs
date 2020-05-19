@@ -120,7 +120,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   ```
   Enhanced logging to indicate receiving interface during invalid ARP classification and add the packet to the `highwayExceptions.pcap`.
 ------
-- **I95-34790** A HA router with over 500 peer paths and high rate of traffic, may result in some flows being black-holed during a node failover event.
+- **I95-34790** Dual node HA routers with large numbers of peer paths (>500) may see some flows get blackholed after a node failover occurs.
 ------
 - **I95-34882** `show user` is missing from `search commands regex ".*"`
 ------
