@@ -386,6 +386,40 @@ connect [force] [router <router>] [node <node>] [username <username>]
 Connect to a Managed Router.  For more information, read [Connecting to 128T Routers from Conductor](ts_connecting_to_routers.md).
 
 
+## create capture-filter
+
+#### Usage
+```
+create capture-filter [node <node>] device-interface <device-interface> router <router> <capture-filter>
+```
+
+##### Keyword Arguments
+- **device-interface**    The device interface on which to create the capture filter
+- **node**                The node on which to remove the capture filter
+- **router**              The router on which to remove the capture filter
+
+##### Positional Arguments
+- **capture-filter**    The capture-filter to remove (Uses BPF syntax)
+
+#### Description
+Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface.
+
+#### Example
+```
+admin@tp-colo-primary.tp-colo# create capture-filter device-interface blended-5 "host 172.18.5.4"
+Successfully created capture-filter
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+#### See Also
+- [delete capture-filter](#delete-capture-filter) Deletes capture-filter from highway at the specified node
+- [show capture-filters](#show-capture-filters)   Show active capture-filters
+
+
 ## create certificate request webserver
 
 #### Usage
@@ -484,6 +518,40 @@ Available to _admin_ only.
 - [restore users factory-default](#restore-users-factory-default) Restore the user configuration to factory defaults
 - [set password](#set-password) Command to change a user's own password
 - [show user](#show-user) Command to show user accounts
+
+
+## delete capture-filter
+
+#### Usage
+```
+delete capture-filter [node <node>] device-interface <device-interface> router <router> <capture-filter>
+```
+
+##### Keyword Arguments
+- **device-interface**    The device interface on which to delete the capture filter
+- **node**                The node on which to remove the capture filter
+- **router**              The router on which to remove the capture filter
+
+##### Positional Arguments
+- **capture-filter**    The capture-filter to remove (Uses BPF syntax)
+
+#### Description
+Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.)
+
+#### Example
+```
+admin@tp-colo-primary.tp-colo# delete capture-filter device-interface blended-5 "host 172.18.5.4"
+Successfully deleted capture-filter
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+#### See Also
+- [create capture-filter](#create-capture-filter)    Creates capture-filter from highway at the specified node
+- [show capture-filters](#show-capture-filters)      Show active capture-filters
 
 
 ## delete (in config)
@@ -972,11 +1040,9 @@ admin@labsystem1.fiedler#
 ```
 
 #### Privileges Required
-
 Available to _admin_ only.
 
 #### Version History
-
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
@@ -990,6 +1056,44 @@ Available to _admin_ only.
 - [show config exports](#show-config-exports)               Display configuration exports
 - [show config version](#show-config-version)               Display running configuration version
 - [show events config commit](#show-events-config-commit)   Shows events related to running config change
+
+
+## import iso
+
+#### Usage
+```
+import iso [force] [verbose] {hunt | filepath <filepath>}
+```
+
+##### Keyword Arguments
+- **filepath**    The absolute filepath to the ISO
+- **force**       Skip confirmation prompt
+- **hunt**        Find and import all ISOs from the filesystem
+- **verbose**     Increase log level verbosity
+
+#### Description
+Imports a 128T ISO to the local repository.
+
+#### Example
+```
+admin@conductor.Conductor# import iso hunt
+This command is resource intensive and can take a while. Are you sure? [y/N]: y
+Current Installer version: 2.5.0-0.20200326163206.snapshot
+Installer will run in non-interactive mode
+Refreshing DNF cache (this may take a few minutes)
+Cleaning DNF data: expire-cache
+Making the DNF cache
+Cleaning legacy local repos (this may take a few minutes)
+Installer will hunt for ISOs to import
+Importing packages for 128T-4.4.0-0.202004021313.release.el7.x86_64.rpm
+Installer complete
+Import success
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
 
 
 ## migrate
@@ -2502,6 +2606,149 @@ Available to _admin_ only.
 - [show assets summary](#show-assets-summary)          A summary of assets connected to the automated provisioner
 
 
+## show assets errors
+
+#### Usage
+```
+show assets errors [force] [router <router>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt. Only required when targeting all routers
+- **router**    router for which to display assets summary (default: all)
+
+#### Description
+_show assets errors_ will display all assets with at least one automated provisioner related error.
+
+#### Example
+```
+admin@labsystem1.fiedler# show assets errors
+Fri 2017-07-21 15:41:54 UTC
+
+======== ========== =============== ========
+ Router   Node       Asset Id        Errors
+======== ========== =============== ========
+ Boston   Aquarium   Aquarium-1234        1
+ NYC      nyc        asset-10             2
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+
+## show assets software
+
+#### Usage
+```
+show assets software [force] [router <router>] [node <node>]
+```
+
+##### Keyword arguments:
+- **force**     Skip confirmation prompt. Only required when targeting all routers
+- **node**      node for which to display available software
+- **router**    router for which to display available software (default: all)
+
+#### Description
+Displays software related information for each managed asset.  In particular, it displays the current running version of software, any versions available for download, software versions that are currently being downloaded and those that have been downloaded which can be used to upgrade the platform.
+
+#### Example
+```
+admin@tp-cond-primary.tp-cond# show assets software
+Fri 2020-04-24 13:25:52 UTC
+
+=========== ===================== ================================== ========================================== ============= ============
+ Router      Node                  Installed                          Available                                  Downloading   Downloaded
+=========== ===================== ================================== ========================================== ============= ============
+ burl-corp   burl-corp-primary     4.2.6-1.el7                        4.3.0-1.el7
+                                                                      4.3.1-1.el7
+                                                                      4.3.2-1.el7
+                                                                      4.3.3-1.el7
+             burl-corp-secondary   4.2.6-1.el7                        4.3.0-1.el7
+                                                                      4.3.1-1.el7
+                                                                      4.3.2-1.el7
+                                                                      4.3.3-1.el7
+ tp-colo     tp-colo-primary       4.4.0-1.el7
+             tp-colo-secondary     4.4.0-1.el7
+ tp-cond     tp-cond-primary       4.4.0-1.el7
+             tp-cond-secondary     4.4.0-1.el7
+ tp-lab      tp-lab-primary        4.3.3-1.el7                        4.4.0-1.el7
+             tp-lab-secondary      4.3.3-1.el7                        4.4.0-1.el7
+
+Completed in 0.65 seconds
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 3.2.0   | This feature was introduced |
+
+#### See Also
+- [migrate](#migrate)                                  Migrate a 128T router to a new conductor
+- [send command download](#send-command-download)      Download 128T software on a router
+- [send command reconnect](#send-command-reconnect)    Attempt to reconnect an asset
+- [send command reconnect disconnected](#send-command-reconnect-disconnected)  Attempt to reconnect all disconnected assets
+- [send command restart](#send-command-restart)        Restart a 128T node
+- [send command rollback](#send-command-rollback)      Rollback a 128T router to the previously installed version
+- [send command start](#send-command-start)            Start a 128T node
+- [send command stop](#send-command-stop)              Stop a 128T node
+- [send command upgrade](#send-command-upgrade)        Upgrade a 128T node
+- [send command yum-cache-refresh](#send-command-yum-cache-refresh) Refresh the yum cache as well as the 128T software versions available for download and upgrade.
+- [show assets](#show-assets)                          Shows the automated provisioning status of 128T nodes
+- [show assets summary](#show-assets-summary)          A summary of assets connected to the automated provisioner
+
+
+## show assets summary
+
+#### Usage
+```
+show assets summary [force] [router <router>]
+```
+
+##### Keyword Arguments
+- **force**     Skip confirmation prompt. Only required when targeting all routers
+- **router**    router for which to display assets summary (default: all)
+
+#### Description
+_show assets summary_ will display a total of all assets in each state.
+
+#### Example
+```
+admin@labsystem1.fiedler# show assets summary
+Fri 2017-07-21 15:41:54 UTC
+
+ =====================================
+  Summary of Assets
+ =====================================
+  total:                   5
+  pending:                 2
+  not-installed:           1
+  installed:               2
+
+  assets with errors:      2
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+#### See Also
+- [migrate](#migrate)                                  Migrate a 128T router to a new conductor
+- [send command download](#send-command-download)      Download 128T software on a router
+- [send command reconnect](#send-command-reconnect)    Attempt to reconnect an asset
+- [send command reconnect disconnected](#send-command-reconnect-disconnected)  Attempt to reconnect all disconnected assets
+- [send command restart](#send-command-restart)        Restart a 128T node
+- [send command rollback](#send-command-rollback)      Rollback a 128T router to the previously installed version
+- [send command start](#send-command-start)            Start a 128T node
+- [send command stop](#send-command-stop)              Stop a 128T node
+- [send command upgrade](#send-command-upgrade)        Upgrade a 128T node
+- [send command yum-cache-refresh](#send-command-yum-cache-refresh) Refresh the yum cache as well as the 128T software versions available for download and upgrade.
+- [show assets](#show-assets)                          Shows the automated provisioning status of 128T nodes
+- [show assets software](#show-assets-software)        Shows assets software information
+
+
 ## show bgp
 
 #### Usage
@@ -2686,6 +2933,44 @@ Node: gouda
 Completed in 0.09 seconds
 ```
 
+
+## show capture-filters
+
+#### Usage
+```
+show capture-filters [device-interface <device-interface>] [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+- **device-interface**    Device interface on which to show capture-filters (default: all)
+- **force**               Skip confirmation prompt. Only required when targeting all routers
+- **node**                The node on which to show capture-filters
+- **router**              The router on which to show capture-filters (default: all)
+
+#### Description
+Shows all configured capture-filters, including static capture-filters that exist as part of the configuration as well as dynamic capture-filters (i.e., those created using the create capture-filter command).
+
+#### Example
+```
+admin@tp-colo-primary.tp-colo# show capture-filters device-interface blended-5
+Thu 2020-04-23 20:28:05 UTC
+
+========= ================= ================ =================
+ Router    Node              Interface Name   Capture Filters
+========= ================= ================ =================
+ tp-colo   tp-colo-primary   blended-5        host 172.18.5.4
+
+Completed in 0.01 seconds
+```
+
+#### Version History
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.4.0   | This feature was introduced |
+
+#### See Also
+- [create capture-filter](#create-capture-filter)    Creates capture-filter from highway at the specified node
+- [delete capture-filter](#delete-capture-filter)    Deletes capture-filter from highway at the specified node
 
 
 ## show certificate webserver
