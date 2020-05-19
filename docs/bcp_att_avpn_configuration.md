@@ -207,7 +207,7 @@ exit
 
 The 128T will use `service-policy` to indicate which sessions need to get marked and treated with the `session-type` configurations. Each `service` should have a corresponding `service-policy`, to ensure that the markings are applied and the correct `traffic-class` is used for traffic engineering.
 
-The base class `service-policy` configurations presented here are derived from the [BCP on Service Policy](bcp_service-policy_defaults).
+The base class `service-policy` configurations presented here are derived from the [BCP on Service Policy](bcp_service-policy_defaults.md).
 
 | Base `service-policy` | AVPN `service-class` |
 | --- | :-: |
