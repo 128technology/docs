@@ -11,9 +11,11 @@ This version of the plugin is compatible with any 128T version less than 4.3 and
 ### Issues Fixed
 - **PLUGIN-47** Created generic IPSEC client plugin to provide connectivity to remote IPSEC endpoints. This version supports a single client with up to two remote endpoints.
 
+
 ## Release 1.0.4
 
-## Issues Fixed
+### Issues Fixed
+
 - **PLUGIN-384** Added an MTU configuration option to the ipsec profile.
 - **PLUGIN-333** Fixed bug in using plugin-network where "left" field was always using the default ip prefix.
 - **PLUGIN-336** Fixed bug causing invalid neighborhood configuration generation.
