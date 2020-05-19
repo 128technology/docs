@@ -62,7 +62,7 @@ The illustration also shows a minimum maintenance life of a Minor release (inclu
 
 ### Extended Maintenance & Support
 
-Extended maintenance & support may be available for certain releases after EOM for a fee. In order to receive extended maintenance and support, you must also maintain active subscriptions for the products in question for the duration of the extended maintenance and support period.
+Extended maintenance and support may be available for certain releases after EOM. To request extended maintenance for a release, customers and partners should contact a 128 Technology sales representative. In order to receive Extended Maintenance and Support, you must also maintain active subscriptions for the products in question for the duration of the extended maintenance and support period.
 
 ### End-of-life products
 
