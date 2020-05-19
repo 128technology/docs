@@ -15,7 +15,7 @@ There are three standard ways of upgrading routers:
 The router upgrade process using the PCLI and the GUI is done in two stages: first, the software is downloaded, then it is installed. Using the `install128t` application steps through both of these processes.
 :::
 
-#### Upgrading using the Conductor's PCLI
+## Upgrading using the Conductor's PCLI
 
 For routers managed by a 128T Conductor, upgrades can be initiated via the 128T conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*.
 
@@ -34,7 +34,7 @@ As an administrator-level user, log into the conductor's PCLI.
 
 The conductor's _automated provisioner_ will upgrade both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
 
-#### Upgrading using the Conductor's GUI
+## Upgrading using the Conductor's GUI
 
 Similar to the process for upgrading using the PCLI, the GUI upgrade process using the GUI is done in two stages: *download* and *upgrade*.
 
@@ -45,7 +45,7 @@ Similar to the process for upgrading using the PCLI, the GUI upgrade process usi
 
 The Automated Provisioner will upgrade both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
 
-#### Upgrading using the Interactive Installer
+## Upgrading using the Interactive Installer
 
 1. Launch a Linux command prompt window on the node you wish to upgrade.
 
@@ -71,7 +71,7 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
    Your output may vary based upon the nature of the upgrade, occasion, various packages, and dependencies that 128T requires as part of the 128T Routing Software upgrade.
    :::
 
-#### Routers with Restricted Internet Access
+## Routers with Restricted Internet Access
 
 The standard upgrade workflow is for individual instances of 128T software to download software upgrades directly from mirror servers hosted and managed by 128 Technology on the public internet. Occasionally, 128T routers are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from conductor.
 
@@ -86,3 +86,11 @@ Because this is a router setting, your collection of routers can each use differ
 :::
 
 For routers that have no access to the internet, set the value of `repository` to `conductor-only`.
+
+The `import iso` command can be used to import packages contained within a 128T ISO onto a local yum repository, thereby allowing that 128T to be upgraded without contacting to 128 Technology servers.
+
+[import iso](cli_reference.md#import-iso) command allows user to specify the exact `filepath` to the ISO or specify `hunt` which will look everywhere on disk for a file that matches the pattern `128T*.iso` except for the following directories `/boot`, `/dev`, `/proc`, and `/sys` .
+
+This feature works on either Conductor or Routers. It can be combined with Conductor Hosted Repos feature where the ISO is imported on the Conductor and then Routers use the Conductor as the yum repository to download 128T packeges from.
+
+Once the local software repository has been updated to the software from the ISO, the upgrade can proceed using your preferred method.
