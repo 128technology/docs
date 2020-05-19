@@ -510,6 +510,31 @@ The `peerPathStateCollector128t` collector can be used for monitoring the up/dow
 
 ```
 
+### Arp State Collector
+
+The `arpStateCollector128t` collector can be used for monitoring the arp table status of a network interface configured on the node. The device interface name, network interface name, vlan, ip address, and destination mac will be found as tags and telegraf tagpass can be used to filter specific arp entries as needed. For example:
+
+```toml
+[[inputs.exec]]
+  ## Collect information about the 128T arp table.
+  ## This information is useful for monitoring interface's next hop reachability.
+  commands = ["/usr/bin/arpStateCollector128t"]
+
+  ## Timeout for the arp state collector to finish
+  timeout = "5s"
+
+  ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  data_format = "influx"
+
+  ## To filter on select device interfaces or network interfaces, you can use the `tagpass` and `tagdrop` concepts
+  ## from telegraf. For example:
+  ## [[inputs.exec.tagpass]]
+  ##     device-interface = ["wan1"]
+```
+
 ### LTE Collector
 
 The `lteMetricCollector128t` collector when run will scan the current node configuration for any 128T supported and configured LTE devices. This collector can be used for pushing the `signal-strength` and `carrier` information to the monitoring stack. For example:
