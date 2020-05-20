@@ -75,7 +75,7 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
 
 The standard upgrade workflow is for individual instances of 128T software to download software upgrades directly from mirror servers hosted and managed by 128 Technology on the public internet. Occasionally, 128T routers are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from conductor.
 
-Within a given router's configuration, at `router > system > software-update`, you can configure the `repository` setting to one of three values:
+Within a given router's configuration, at `router > system > software-update > repository`, you can configure the `source-type` setting to one of three values:
 
 - `conductor-only`: the router will retrieve software versions only from (or through) the conductor
 - `prefer-conductor`: the router will retrieve software versions from the conductor, and fall back to using the internet
@@ -85,7 +85,7 @@ Within a given router's configuration, at `router > system > software-update`, y
 Because this is a router setting, your collection of routers can each use different preferences. E.g., a router in on the internet can use 128 Technology's repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
 :::
 
-For routers that have no access to the internet, set the value of `repository` to `conductor-only`.
+For routers that have no access to the internet, at `router > system > software-update > repository > offline-mode` to `true`. This overrides the `source-type` leaf.
 
 The `import iso` command can be used to import packages contained within a 128T ISO onto a local yum repository, thereby allowing that 128T to be upgraded without contacting to 128 Technology servers.
 
