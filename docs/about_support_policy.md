@@ -24,9 +24,9 @@ For the purpose of the policy, the following definitions apply:
 
 **Last Date of Support (LDOS):** The Last Date of Support (LDOS) is the last date to receive 128 Technology Support services for a Software Release that is EOM.
 
-**End-of-Life Notification (EOLN):** The EOLN is provided by 128 Technology to notify customers and partners that a product that is planned to reach it’s End-of-Life date in the near future.
+**End-of-Life Notification (EOLN):** The EOLN is provided by 128 Technology to notify customers and partners that a product that is planned to reach its End-of-Life date in the near future.
 
-**The End-of-Life (EOL):** End-of-Life means that the product release in question has reached the end of it’s “useful lifespan”. After the EOL date, 128 Technology will no longer provide support services for the release of the product. In most cases the EOL date coincides with the Last Date of Support (LDOS) for the release of the product.
+**The End-of-Life (EOL):** End-of-Life means that the product release in question has reached the end of its “useful lifespan”. After the EOL date, 128 Technology will no longer provide support services for the release of the product. In most cases the EOL date coincides with the Last Date of Support (LDOS) for the release of the product.
 
 **General Availability (GA):** Software is available for purchase, has proven to be reliable, free of critical bugs and is suitable for usage in production systems.
 
