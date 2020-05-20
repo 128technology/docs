@@ -16,7 +16,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   Until the system is upgraded to 4.3.5, this issue can be mitigated restarting the 128T process.
 ------
 - **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
-  Until the system is upgraded to 4.3.5, this issue can be mitigated by rebooting the 128T.
+  Until the system is upgraded to 4.3.5, this issue can be mitigated by restart the 128T.
 ------
 - **I95-34629** During the initial window of a router to Conductor connection outage or as connectivity is established between HA peers, configuration commits may fail silently. Candidate configuration will remain uncommitted.
   Until the system is upgraded to 4.3.5, this issue can be mitigated by attempting the commit again.
@@ -46,7 +46,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-35155** `show device-interface` output did not include duplex mode
 ------
-- **I95-35188** Adding a tenant or changing the order of tenant in the configuration can lead to traffic being dropped upon session recovery
+- **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
   Until the system is upgraded to 4.3.5, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
 ------
