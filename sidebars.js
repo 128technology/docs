@@ -16,7 +16,7 @@ module.exports = {
       "intro_installation_aws",
       "intro_installation_otp_iso",
       "intro_installation_quickstart_aws",
-      "intro_installation_quickstart_azure",
+      "intro_installation_azure",
       "intro_ztp",
       "intro_creating_bootable_usb",
       "intro_upgrading",
@@ -92,6 +92,7 @@ module.exports = {
       "events_events",
     ],
     "Best Practices": [
+      "bcp_att_avpn_configuration",
       "bcp_conductor_deployment",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
