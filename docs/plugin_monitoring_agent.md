@@ -495,7 +495,7 @@ In versions 1.2.0, 2.1.0 and later, the `execd` input should be replaced by the 
   type = ["alarm", "admin"]
 ```
 
-### Device interface state collector
+### Device Interface State Collector
 
 The `deviceInterfaceStateCollector128t` collector can be used for monitoring the admin, oper and redundancy status of various device-interfaces configured on the node. The name is available as `device-interface` tag and telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
 
