@@ -28,9 +28,9 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-34790** Dual node HA routers with large numbers of peer paths (>500) may see some flows get blackholed after a node failover occurs.
 ------
 - **I95-34842** The configuration attribute `authority > router > node > device-interface > vrrp` has been removed from configuration in the GUI as the capability does not exist
- ------
+------
  - **I95-34961** Using a QuickStart file to provision a router fails if the ZScaler plugin is installed on the Conductor.
- ------
+------
  - **I95-34968** Self-signed certificates created during initial installation of 128T are invalid
 ------
 - **I95-35062** Non-permanent LTE failures are incorrectly displayed as a failure context in `show device-interface`
