@@ -34,30 +34,33 @@ The following image depicts a graphical representation of the infrastructure ele
 
 #### Azure Portal
 
-Please click [here](https://azuremarketplace.microsoft.com/en-ca/marketplace/apps/128technology.128technology_conductor_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy and click on the tab "Plans" as shown in the following picture:
+Please click [here](https://azuremarketplace.microsoft.com/en-ca/marketplace/apps/128technology.128technology_conductor_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy of the image and click on the tab "Plans" as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
 Lastly click on the "Launch" link of the template that better suits your needs.
 
 Answer the following 3 questions to launch the deployment of a 128T Conductor (additional information [here](#launch-the-template)):
-* What name do you want to give it? Provide it in the "Instance Name" field (for example: 128TConductor).
-* Where do you want to deploy it? Provide the location where the VNet exists in the "Location" field (for example: eastus. All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations)), the name of the VNet in the "Virtual Network Name" field (for example: 128T-VNet) and the name of a subnet in the "Control Subnet Name" field (for example: default).
-* Who is going to be the administrator? Provide an username (for example: t128) in the "Admin Username" field and the content of your public SSH key in the "Admin Public Key Data" field respectively.
+* What name do you want to give it?  
+Provide it in the "Instance Name" field (for example: 128TConductor).
+* Where do you want to deploy it?  
+Provide the location where the VNet exists in the "Location" field (for example: eastus. All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations)), the name of the VNet in the "Virtual Network Name" field (for example: 128T-VNet) and the name of a subnet in the "Control Subnet Name" field (for example: default).
+* Who is going to be the administrator?  
+Provide an username (for example: t128) in the "Admin Username" field and the content of your public SSH key in the "Admin Public Key Data" field respectively.
 
-Agree to the terms of use and conditions and lastly click on the "Purchase" button to launch the deployment.
+Agree to the terms of use and conditions of the deployment and lastly click on the "Purchase" button to launch the deployment.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
-Once the deployment completes information of the newly 128T Conductor deployment is provided in the Outputs tab placed on the left hand side. Click on the HTTPs URL to login to the 128T Conductor GUI (if the web browser used is Chrome and it does not trust the connection to the 128T Conductor GUI due to its self-signed certificate type: thisisunsafe). The credentials are "admin" for username and the name of the VM for the password. To login to the VM via SSH use the username and the SSH public key provided in the template.
+Once the deployment completes, information of the newly 128T Conductor deployment is provided in the Outputs tab placed on the left hand side. Click on the HTTPs URL to login to the 128T Conductor GUI (if the web browser used is Chrome and it does not trust the connection to the 128T Conductor GUI due to its self-signed certificate type: thisisunsafe). The credentials are "admin" for username and the name of the VM for the password. To login to the VM via SSH use the username and the SSH public key provided in the template.
 
 :::important
 Be sure to change the password that conforms to your business' password requirements and criteria.
-:::important
+:::
 
 #### Azure CLI or PowerShell
 
-Please click [here](https://azuremarketplace.microsoft.com/en-ca/marketplace/apps/128technology.128technology_conductor_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Please click [here](https://azuremarketplace.microsoft.com/en-ca/marketplace/apps/128technology.128technology_conductor_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
@@ -67,13 +70,13 @@ Click on the tab "Plans" as shown in the following picture:
 
 Lastly copy to the clipboard the URL of the template located in the field "URL" that better suits your needs.
 
-Create the parameters file, accept the terms of use and conditions and lastly launch the deployment with the corresponding Azure CLI or PowerShell commands making use of the URL of the template identified previously. For additional information please click [here](#launch-the-template).
+Create the parameters file, accept the terms of use and conditions of the image and lastly launch the deployment with the corresponding Azure CLI or PowerShell commands making use of the URL of the template identified previously. For additional information please click [here](#launch-the-template).
 
-Once the deployment completes information of the newly 128T Conductor deployment is provided in the Outputs section. Click on the HTTPs URL to login to the 128T Conductor GUI (if the web browser used is Chrome and it does not trust the connection to the 128T Conductor GUI due to its self-signed certificate type: thisisunsafe). The credentials are "admin" for username and the password is the name of the VM. To login to the VM via SSH use the username and the SSH public key provided in the template.
+Once the deployment completes, information of the newly 128T Conductor deployment is provided in the Outputs section. Click on the HTTPs URL to login to the 128T Conductor GUI (if the web browser used is Chrome and it does not trust the connection to the 128T Conductor GUI due to its self-signed certificate type: thisisunsafe). The credentials are "admin" for username and the password is the name of the VM. To login to the VM via SSH use the username and the SSH public key provided in the template.
 
 :::important
 Be sure to change the password that conforms to your business' password requirements and criteria.
-:::important
+:::
 
 ## 128T Session Smart Router Deployment
 
@@ -91,7 +94,7 @@ The following infrastructure must exist in your Azure subscription:
 
 :::important
 Please note that deploying 128 Technology Session Smart Routers without a valid certificate will be limited to deployments within the cloud only. If your use case requires the deployment of a 128T Router on your premises as well please contact 128 Technology directly [here](https://www.128technology.com/get-started).
-:::important
+:::
 
 ### Deployment
 
@@ -110,29 +113,33 @@ The following image depicts a graphical representation of the infrastructure ele
 
 #### Azure Portal
 
-Please click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128technology_router_100_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy and click on the tab "Plans" as shown in the following picture:
+Please click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128technology_router_100_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy of the image and click on the tab "Plans" as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
 Lastly click on the "Launch" link of the template that better suits your needs.
 
 Answer the following 4 questions to launch the deployment of a 128T Session Smart Router (additional information [here](#launch-the-template)):
-* What name do you want to give it? Provide it in the "Instance Name" field (for example: 128TRouter).
-* Where do you want to deploy it? Provide the location where the VNet exists in the "Location" field (for example: eastus. All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations)), the name of the VNet in the "Virtual Network Name" field (for example: 128T-VNet), the name of the availability set in the "Availability Set Name" field (for example: 128TRouterSet) and the name of the public, private and management subnets in the "Public Subnet Name", "Private Subnet Name" and "Management Subnet Name" fields respectively (for example: wan, lan and default).
-* Which 128T Conductor is going to manage it? Provide the IP address of the primary node of Conductor in the "Conductor Primary Control IP" field, and only if the Conductor is highly available then provide the IP address of the secondary node of Conductor in the "Conductor Secondary Control IP" field. Please check the public IP address assigned to the 128 Technology Conductor deployed in the previous section.
-* Who is going to be the administrator? Provide an username (for example: t128) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
+* What name do you want to give it?  
+Provide it in the "Instance Name" field (for example: 128TRouter).
+* Where do you want to deploy it?  
+Provide the location where the VNet exists in the "Location" field (for example: eastus. All available locations [here](https://azure.microsoft.com/en-us/global-infrastructure/locations)), the name of the VNet in the "Virtual Network Name" field (for example: 128T-VNet), the name of the availability set in the "Availability Set Name" field (for example: 128TRouterSet) and the name of the public, private and management subnets in the "Public Subnet Name", "Private Subnet Name" and "Management Subnet Name" fields respectively (for example: wan, lan and default).
+* Which 128T Conductor is going to manage it?  
+Provide the IP address of the primary node of Conductor in the "Conductor Primary Control IP" field, and only if the Conductor is highly available then provide the IP address of the secondary node of Conductor in the "Conductor Secondary Control IP" field. Please check the public IP address assigned to the 128 Technology Conductor deployed in the previous section.
+* Who is going to be the administrator?  
+Provide an username (for example: t128) and the content of your public SSH key in the "Admin Username" and "Admin Public Key Data" fields respectively.
 
-Agree to the terms of use and conditions and lastly click on the "Purchase" button to launch the deployment.
+Agree to the terms of use and conditions of the deployment and lastly click on the "Purchase" button to launch the deployment.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
-Once the deployment completes information of the newly 128T Session Smart Router deployment is provided in the Outputs tab placed on the left hand side. To login to the instance via SSH use the username and the SSH public key provided in the template.
+Once the deployment completes, information of the newly 128T Session Smart Router deployment is provided in the Outputs tab placed on the left hand side. To login to the instance via SSH use the username and the SSH public key provided in the template.
 
 The deployment will be non interactive as the Zero Touch Provisioning (ZTP) method will be triggered. The ZTP process will take 1-2 minutes to initialize. Please login to Conductor via HTTPs to associate the pending asset with the configuration of the router once the ZTP process is ready to start.
 
 #### Azure CLI or PowerShell
 
-Please click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128technology_router_100_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Please click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128technology_router_100_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
@@ -142,9 +149,9 @@ Click on the tab "Plans" as shown in the following picture:
 
 Lastly copy to the clipboard the URL of the template located in the field "URL" that better suits your needs.
 
-Create the parameters file, accept the terms of use and conditions and lastly launch the deployment with the corresponding Azure CLI or PowerShell commands making use of the URL of the template identified previously. For additional information please click [here](#launch-the-template).
+Create the parameters file, accept the terms of use and conditions of the image and lastly launch the deployment with the corresponding Azure CLI or PowerShell commands making use of the URL of the template identified previously. For additional information please click [here](#launch-the-template).
 
-Once the deployment completes information of the newly 128T Session Smart Router deployment is provided in the Outputs section. To login to the VM via SSH use the username and the SSH public key provided in the template.
+Once the deployment completes, information of the newly 128T Session Smart Router deployment is provided in the Outputs section. To login to the VM via SSH use the username and the SSH public key provided in the template.
 
 ### Network interfaces layout
 
@@ -187,9 +194,7 @@ This section describes in greater detail the different 128T images available in 
 The images available to deploy a 128T Conductor are the following:
 
 * 128 Technology Conductor. No certificate from 128 Technology is required to deploy this image, therefore it is the recommended image to use if a certificate from 128 Technology is not in your possession. The 128T software is billed hourly when running in addition to the cost of running the VM. For additional information about this image please visit the Marketplace [here](https://azuremarketplace.microsoft.com/en-ca/marketplace/apps/128technology.128technology_conductor_hourly).
-
 * 128T Networking Platform. A certificate from 128 Technology is required to install the software, therefore it is the recommended image to use if a certificate from 128 Technology is in your possession. There is no cost for running the 128T software, the cost of running the VM is the only cost. For more information about the image please visit the Marketplace [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128t_networking_platform).
-
 * Private. No certificate from 128 Technology is required to deploy this image. There is no cost for running the 128T software, the cost of running the VM is the only cost. Access to the 128 Technology software should have been provided to your Azure subscription as a result of a partnership agreement.
 
 A section for each of the images available discussed above is shown next. To start with the deployment, please proceed to the section of the image which better suits your requirements.
@@ -206,7 +211,7 @@ Once in the Marketplace type "128 Technology" in the search bar within the Marke
 
 Next click on the "128 Technology Conductor" offering:
 
-![128 Technology Conductor Hourly](/img/platforms_azure_marketplace_conductor_hourly.png)
+<img src="/img/platforms_azure_marketplace_conductor_hourly.png" alt="128 Technology Conductor Hourly" width="220" height="250" />
 
 ##### <u>128T Networking Platform (BYOL)</u>
 
@@ -220,7 +225,7 @@ Once in the Marketplace type "128 Technology" in the search bar within the Marke
 
 Next click on the "128T Networking Platform" offering:
 
-![128T Networking Platform](/img/platforms_azure_marketplace_networkingplatform_byol.png)
+<img src="/img/platforms_azure_marketplace_networkingplatform_byol.png" alt="128T Networking Platform" width="220" height="250" />
 
 ##### <u>Private</u>
 
@@ -234,16 +239,14 @@ Once your subscription id has been whitelisted the following banner will be show
 
 Click on it, and click on the "128 Technology Conductor" offering as shown next:
 
-![128 Technology Conductor Hourly](/img/platforms_azure_marketplace_conductor_private.png)
+<img src="/img/platforms_azure_marketplace_conductor_private.png" alt="128 Technology Conductor Private" width="220" height="250" />
 
 #### 128T Session Smart Router images
 
 The images available in the Azure Marketplace to deploy a 128T Session Smart Router are the following:
 
 * 128T Session Smart Router. No certificate from 128 Technology is required to deploy this image, therefore it is the recommended image to use if a 128 Technology certificate is not in your possession. The 128T software is billed hourly when running in addition to the cost of running the VM. For additional information about this image please visit the Marketplace [here](https://azuremarketplace.microsoft.com/en-ca/marketplace/apps/128technology.128technology_router_100_hourly).
-
 * 128T Networking Platform. A certificate from 128 Technology is required to install the software, therefore it is the recommended image to use if a 128 Technology certificate is in your possession. There is no cost for running the 128T software, the cost of running the VM is the only cost. For more information about the image please visit the Marketplace [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128t_networking_platform).
-
 * Private. No certificate from 128 Technology is required to deploy this image. There is no cost for running the 128T software, the cost of running the VM is the only cost. Access to the 128 Technology software should have been provided to your Azure subscription as a result of a partnership agreement.
 
 A section for each of the images available discussed above is shown next. To start with the deployment, please proceed to the section of the image which better suits your requirements.
@@ -260,7 +263,7 @@ Once in the Marketplace type "128 Technology" in the search bar within the Marke
 
 Next click on the "128T Session Smart Router" offering:
 
-![128 Technology Conductor Hourly](/img/platforms_azure_marketplace_router_hourly.png)
+<img src="/img/platforms_azure_marketplace_router_hourly.png" alt="128 Technology Session Smart Router Hourly" width="220" height="250" />
 
 ##### <u>128T Networking Platform (BYOL)</u>
 
@@ -274,7 +277,7 @@ Once in the Marketplace type "128 Technology" in the search bar within the Marke
 
 Next click on the "128T Networking Platform" offering:
 
-![128T Networking Platform](/img/platforms_azure_marketplace_networkingplatform_byol.png)
+<img src="/img/platforms_azure_marketplace_networkingplatform_byol.png" alt="128T Networking Platform" width="220" height="250" />
 
 ##### <u>Private</u>
 
@@ -288,11 +291,11 @@ Once your subscription id has been whitelisted the following banner will be show
 
 Click on it, and click on the "128T Session Smart Router offering as shown next:
 
-![128 Technology Conductor Hourly](/img/platforms_azure_marketplace_router_private.png)
+<img src="/img/platforms_azure_marketplace_router_private.png" alt="128 Technology Session Smart Router Private" width="220" height="250" />
 
 ### Agree to the terms of use and privacy policy
 
-To agree to the terms of use and privacy policy of the 128T image to be used. Click on the "Get it now" button as shown in the following image:
+To agree to the terms of use and privacy policy of the 128T image to be used, click on the "Get it now" button as shown in the following image:
 
 ![128 Technology Conductor Hourly](/img/platforms_azure_marketplace_getitnow.png)
 
@@ -348,7 +351,7 @@ As an additional note and only applicable when the chosen image is the 128T Netw
   * The management network must allow outbound access to the Internet so that the 128T installer can download the 128T software from the 128T YUM repositories available on the Internet.
 * Applicable when deploying a 128T Session Smart Router using the 128T Networking Platform image only:
   * If there is an existing 128T Conductor in the network and the intent is to perform a non interactive installation of a 128T Router (for example a ZTP installation) please make sure the certificate provided by 128 Technology has been imported and loaded in 128T Conductor before launching this template.
-:::important
+:::
 
 ### Launch the template
 
@@ -376,11 +379,11 @@ A description of the parameters of the template are listed in the following tabl
 | Admin Allowed CIDR   | It allows for restricting reachability to the control interface of the Conductor to a well known source IP address CIDR range for management purposes. It is common to set this field to 0.0.0.0/0 (accepting traffic from all source IP addresses) for now, as the source IP address/es where the Conductor will be administered from may not be known at this time. However, once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the 128T Conductor will be administered.                                                                                                                                                                                     |
 | Certificate SASURL   | Optional field and only applicable to BYOL images. The field Certificate SAS URL is optional even when deploying a BYOL image. If the field is not set the installation of the 128T software will be interactive and will commence after logging into the instance via SSH. On the other hand, if the field is set to a SAS URL that points to a valid 128 Technology certificate then the deployment will be performed in non interactive mode, in other words, the latest version of the 128T software will be installed as part of the deployment automatically on your behalf. Please note that installing the 128T software requires additional time. While the 128T software installs SSH access to the VM instance will be disabled, and it will be enabled once the 128T software installation completes. For additional information regarding how to obtain a SAS URL for your 128 Technology certificate please refer to [Certificate SAS URL](#certificate-sas-url).                                                                                                                          |
 
-Accept the terms and conditions ticking on the box I agree to the terms and conditions stated above.
+Accept the terms and conditions of the deployment ticking on the box "I agree to the terms and conditions stated above".
 
 Lastly click on the button Purchase to start the deployment.
 
-Once the deployment of the template completes information of the newly 128T Conductor deployment is provided in the tab Output placed at the left hand side.
+Once the deployment of the template completes, information of the newly 128T Conductor deployment is provided in the tab Output placed at the left hand side.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
@@ -395,7 +398,7 @@ When logging to the Linux instance via SSH make use of the username specified in
 When logging to the 128T application via CLI or HTTPs the username is "admin" and the password:
 * For Hourly and Private images the password is the name of the VM.
 * For BYOL images the password is the one that was specified during the interactive initialization process.
-:::important
+:::
 
 Alternatively, it is possible to launch the template programmatically. The PowerShell commands for each 128 Technology image are shown next, please run the commands corresponding to the image you want to use:
 
@@ -445,7 +448,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128technology_conductor_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128technology_conductor_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
@@ -503,7 +506,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128t_networking_platform) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128t_networking_platform) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
@@ -542,11 +545,11 @@ A description of the parameters of the template are listed in the following tabl
 | Admin Username       | Fill out the field Admin Username with the desired username to login to the VM (Linux) via SSH.                                                                              |
 | Admin Public Key Data| Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys).                                                                                                         |
 
-Accept the terms and conditions ticking on the box I agree to the terms and conditions stated above.
+Accept the terms and conditions of the deployment ticking on the box "I agree to the terms and conditions stated above".
 
 Lastly click on the button Purchase to start the deployment.
 
-Once the deployment of the template completes information of the newly 128T Session Smart Router deployment is provided in the tab Output placed at the left hand side.
+Once the deployment of the template completes, information of the newly 128T Session Smart Router deployment is provided in the tab Output placed at the left hand side.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
@@ -564,7 +567,7 @@ When logging to the Linux instance via SSH make use of the username specified in
 When logging to the 128T application via CLI or HTTPs the username is "admin" and the password will be:
 * For Hourly and Private images the password is the name of the VM.
 * For BYOL images the password is the one that was specified during the interactive initialization process.
-:::important
+:::
 
 Alternatively, it is possible to launch the template programmatically. The PowerShell commands for each 128 Technology image are shown next, please run the commands corresponding to the image you want to use:
 
@@ -632,7 +635,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128technology_router_100_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128technology_router_100_hourly) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
@@ -708,7 +711,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128t_networking_platform) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Click [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128t_networking_platform) to go to the Marketplace. Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
@@ -726,7 +729,7 @@ A SAS URL can be used to perform a deployment of a 128 Technolody Conductor usin
 
 :::important
 This section only applies when deploying a 128 Technology Conductor using the 128T Networking Platform image and the "Standalone Conductor" template.
-:::important
+:::
 
 The first step to create a SAS URL is to login to the [Azure Portal](https://portal.azure.com) and in the search bar at the top search for "Storage accounts" as shown in the following picture:
 
