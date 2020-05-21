@@ -13,7 +13,7 @@ sidebar_label: 4.2
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip netns set dhcp-server-ns-1 1073742075" failed: RTNETLINK answers: No space left on device
   ```
-  Until the system is upgraded to 4.2.8, this issue can be mitigated restarting the 128T process.
+  Until the system is upgraded to 4.2.8, this issue can be mitigated by restarting the 128T process.
 ------
 - **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
   Until the system is upgraded to 4.2.8, this issue can be mitigated by restarting the 128T.
