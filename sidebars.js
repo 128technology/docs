@@ -2,6 +2,8 @@ module.exports = {
   "docs": {
     "About": [
       "about_128t",
+      "about_releases",
+      "about_support_policy",
       "about_security_policy",
       "CONTRIBUTING",
     ],
@@ -14,7 +16,7 @@ module.exports = {
       "intro_installation_aws",
       "intro_installation_otp_iso",
       "intro_installation_quickstart_aws",
-      "intro_installation_quickstart_azure",
+      "intro_installation_azure",
       "intro_ztp",
       "intro_creating_bootable_usb",
       "intro_upgrading",
