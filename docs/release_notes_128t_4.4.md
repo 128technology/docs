@@ -95,7 +95,7 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip netns set dhcp-server-ns-1 1073742075" failed: RTNETLINK answers: No space left on device
   ```
-  Until the system is upgraded to 4.4.0, this issue can be mitigated restarting the 128T process.
+  Until the system is upgraded to 4.4.0, this issue can be mitigated by restarting the 128T process.
 ------
 - **I95-33983** User role can see a list of config exports by executing `show config exports`
 ------
