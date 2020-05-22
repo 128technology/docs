@@ -7,13 +7,13 @@ The 128T Monitoring Agent is an entity for collecting data from a node running 1
 
 The monitoring agent at its core is designed to be able to push data to external platforms. It currently leverages the [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) collection stack on every 128T router. However, the monitoring agent is designed with other tools and scale in mind. The monitoring agent is composed of the following:
 
-- **monitoring-agent-cli**  
+- **monitoring-agent-cli**
   Used for configuring and interacting with the underlying application
 
-- **collectors**  
+- **collectors**
   A set of inputs designed to collect data from several sources such as metrics, events etc.
 
-- **targets**  
+- **targets**
   A set of outputs for collecting and pushing the data to various data sinks such as external monitoring platforms, files on disk etc.
 
 ## Installation
@@ -112,8 +112,8 @@ The `enabled` field is meant as global toggle for applying the monitoring agent 
 
 `lib-directory` is the root directory for the Monitoring Agent. Other directores exist relative to it. This is useful when intending to isolate a set of Monitoring Agent elements from others.
 
-:::caution  
-It is unlikely `lib-directory` is necessary for typical use cases. Consider carefully before utilizing this feature.  
+:::caution
+It is unlikely `lib-directory` is necessary for typical use cases. Consider carefully before utilizing this feature.
 :::
 
 Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `${HOSTNAME}`, `${ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
@@ -169,8 +169,8 @@ files = ["stdout", "/tmp/metrics.out"]
 data_format = "influx"
 ```
 
-:::important  
-Users should not make changes to these files as they will be overwritten by the `monitoring-agent-cli configure` command.  
+:::important
+Users should not make changes to these files as they will be overwritten by the `monitoring-agent-cli configure` command.
 :::
 
 ### Samples
@@ -216,8 +216,8 @@ Path: `/var/lib/128t-monitoring/inputs/t128_metrics.conf`
     timeout = "15s"
 ```
 
-:::tip  
-Depending on the number of metrics you have enabled, you may need to increase the timeout to allow collection to complete. This can also influence your minimum polling interval.  
+:::tip
+Depending on the number of metrics you have enabled, you may need to increase the timeout to allow collection to complete. This can also influence your minimum polling interval.
 :::
 
 #### Linux System
@@ -309,8 +309,8 @@ In this example data is sent via syslog:
   default_sdid = "128T"
 ```
 
-:::important  
-For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages  
+:::important
+For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages
 :::
 
 ## Monitoring Agent CLI
@@ -469,8 +469,8 @@ The event collector can be used for collecting and pushing events for various ca
   type = ["alarm", "admin"]
 ```
 
-:::important  
-In versions 1.2.0, 2.1.0 and later, the `execd` input should be replaced by the more feature rich `t128_events` input type described below.  
+:::important
+In versions 1.2.0, 2.1.0 and later, the `execd` input should be replaced by the more feature rich `t128_events` input type described below.
 :::
 
 ```toml
@@ -566,10 +566,14 @@ The `arpStateCollector128t` collector can be used for monitoring the arp table s
   ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
   data_format = "influx"
 
-  ## To filter on select device interfaces or network interfaces, you can use the `tagpass` and `tagdrop` concepts
+  ## To filter on select properties of the arp entry, you can use the `tagpass` and `tagdrop` concepts
   ## from telegraf. For example:
   ## [[inputs.exec.tagpass]]
   ##     device-interface = ["wan1"]
+  ##     network-interface = ["wan1intf"]
+  ##     vlan = ["128"]
+  ##     ip-address = ["192.169.128.0"]
+  ##     destination-mac = ["00:0a:95:9d:68:16"]
 ```
 
 ### LTE Collector
