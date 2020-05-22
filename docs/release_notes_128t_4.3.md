@@ -37,6 +37,8 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-35062** Non-permanent LTE failures are incorrectly displayed as a failure context in `show device-interface`
 ------
+- **I95-35082** When a 128T is deployed behind a NAT firewall and has path MTU (PMTU) discovery enabled, SVR sessions established for outbound-only connections are set up with the configured interface MTU, not the discovered PMTU.
+------
 - **I95-35093** `show asset <asset-id>` incorrectly continues to show `Currently Upgrading` version after completion of an upgrade.
 ------
 - **I95-35099** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
@@ -57,6 +59,8 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-35323** BGP over SVR does not work if both sides of the routers have VLAN tagged interfaces
   Until the system is upgraded to 4.3.5, configure the outgoing SVR interfaces without vlans. At least one side of the BGP over SVR routers should not utilize VLAN tagging.
+------
+- **I95-35395** Enabled BGP router reflector `cluster-id` in configuration
 
 
 ## Release 4.3.4
