@@ -112,10 +112,6 @@ The `enabled` field is meant as global toggle for applying the monitoring agent 
 
 `lib-directory` is the root directory for the Monitoring Agent. Other directores exist relative to it. This is useful when intending to isolate a set of Monitoring Agent elements from others.
 
-:::caution
-It is unlikely `lib-directory` is necessary for typical use cases. Consider carefully before utilizing this feature.
-:::
-
 Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `${HOSTNAME}`, `${ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
 
 `sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration. It is recommended to configure the `push-interval` as a multiple of `sample-interval`.
@@ -456,24 +452,6 @@ The `name` becomes the name of the measurement in the context of influxdb format
 The event collector can be used for collecting and pushing events for various categories such as admin, alarm, system, traffic and provisioning as they occur on the system. The type of the event is available via a `tag` and can be used for filtering only specific events as desired. For example, the following configuration can be used for pushing just the `alarm` and `admin` event
 
 ```toml
-[[inputs.execd]]
-  ## Create a stream of 128T events for alarm, audit etc. This information is useful for
-  ## monitoring the health of the system.
-  command = "/usr/bin/eventCollector128t"
-  signal = "none"
-  data_format = "influx"
-
-  ## input event filtering based on type (admin, alarm, system, traffic, provisioning)
-  ## NOTE: For information on filtering severity refer to the output configuration example
-  [inputs.execd.tagpass]
-  type = ["alarm", "admin"]
-```
-
-:::important
-In versions 1.2.0, 2.1.0 and later, the `execd` input should be replaced by the more feature rich `t128_events` input type described below.
-:::
-
-```toml
 [[inputs.t128_events]]
   ## Create a stream of 128T events for alarm, audit etc. This information is useful for
   ## monitoring the health of the system.
@@ -492,6 +470,24 @@ In versions 1.2.0, 2.1.0 and later, the `execd` input should be replaced by the 
   ## input event filtering based on type (admin, alarm, system, traffic, provisioning)
   ## NOTE: For information on filtering severity refer to the output configuration example
   [inputs.t128_events.tagpass]
+  type = ["alarm", "admin"]
+```
+
+:::important
+In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.
+:::
+
+```toml
+[[inputs.execd]]
+  ## Create a stream of 128T events for alarm, audit etc. This information is useful for
+  ## monitoring the health of the system.
+  command = "/usr/bin/eventCollector128t"
+  signal = "none"
+  data_format = "influx"
+
+  ## input event filtering based on type (admin, alarm, system, traffic, provisioning)
+  ## NOTE: For information on filtering severity refer to the output configuration example
+  [inputs.execd.tagpass]
   type = ["alarm", "admin"]
 ```
 
