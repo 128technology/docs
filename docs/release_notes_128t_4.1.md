@@ -34,6 +34,8 @@ sidebar_label: 4.1
 - **I95-34310** Secure fields from the 128T configuration are in the commit audit events from config diff operations.
 ------
 - **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T router
+------
+- **I95-35377** RTP is not properly classified for subsequent 128T routers
 
 ## Release 4.1.9
 
