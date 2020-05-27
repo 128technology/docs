@@ -139,7 +139,9 @@ module.exports = {
         "type": "category",
         "label": "128T Monitoring Agent",
         "items": [
+          "release_notes_monitoring_agent_2.1",
           "release_notes_monitoring_agent_2.0",
+          "release_notes_monitoring_agent_1.2",
           "release_notes_monitoring_agent_1.1",
         ],
       },
