@@ -7,6 +7,8 @@ sidebar_label: 4.3
 
 ### Issues Fixed
 
+- **I95-35377** Additional metrics added to realize active traffic engineering behavior
+------
 - **I95-35394** salt-minion may fault during an upgrade or rollback operation. This issue does not impact the upgrade or rollback operations.
 ------
 - **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
