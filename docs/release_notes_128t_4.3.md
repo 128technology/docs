@@ -3,6 +3,16 @@ title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
 
+## Release 4.3.6
+
+### Issues Fixed
+
+- **I95-35394** salt-minion may fault during an upgrade or rollback operation. This issue does not impact the upgrade or rollback operations.
+------
+- **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
+  _**Conditions:**_ When the interface has an adjacency and Tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`
+
+
 ## Release 4.3.5
 
 ### Issues Fixed
