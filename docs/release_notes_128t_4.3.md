@@ -3,6 +3,15 @@ title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
 
+## Release 4.3.6
+
+### Issues Fixed
+
+- **I95-35377** Additional metrics added to realize active traffic engineering behavior
+------
+- **I95-35394** salt-minion may fault during an upgrade or rollback operation. This issue does not impact the upgrade or rollback operations.
+
+
 ## Release 4.3.5
 
 ### Issues Fixed
