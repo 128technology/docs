@@ -9,7 +9,7 @@ sidebar_label: 4.5
 
 - **I95-9955** Encrypt Security Keys in Configuration
 ------
-- **I95-12127** User-Defined Configuration Templates
+- **I95-1212, I95-34108** User-Defined Configuration Templates
 ------
 - **I95-16104** Management traffic over forwarding interface
 ------
@@ -39,9 +39,7 @@ sidebar_label: 4.5
 ------
 - **I95-33484** Silicom new platform testing
 ------
-- **I95-33776** Feature Request - Log username and timestamp of owner in config
-------
-- **I95-34108** Remove Config Objects Using Templates
+- **I95-33776** Log username and timestamp of owner in config
 
 ### Issues Fixed
 
