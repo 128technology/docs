@@ -7,6 +7,8 @@ sidebar_label: 4.2
 
 ### Issues Fixed
 
+- **I95-24681** Grammical improvements to HA initialization, providing more clarity around the use of specific IP addresses
+------
 - **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
   _**Conditions:**_ DHCP server is not running. The following log message can be seen:
   ```
@@ -35,6 +37,8 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-35062** Non-permanent LTE failures are incorrectly displayed as a failure context in `show device-interface`
 ------
+- **I95-35082** When a 128T is deployed behind a NAT firewall and has path MTU (PMTU) discovery enabled, SVR sessions established for outbound-only connections are set up with the configured interface MTU, not the discovered PMTU.
+------
 - **I95-35093** `show asset <asset-id>` incorrectly continues to show `Currently Upgrading` version after completion of an upgrade.
 ------
 - **I95-35099** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
@@ -47,7 +51,9 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
   Until the system is upgraded to 4.2.8, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
-
+------
+- **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
+  _**Conditions:**_ When the interface has an adjacency and Tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`
 
 ## Release 4.2.7
 
