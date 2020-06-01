@@ -7,7 +7,7 @@ sidebar_label: 4.2
 
 ### Issues Fixed
 
-- **I95-24681** Grammical improvements to HA initialization, providing more clarity around the use of specific IP addresses
+- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
 ------
 - **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
   _**Conditions:**_ DHCP server is not running. The following log message can be seen:
