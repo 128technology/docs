@@ -17,7 +17,7 @@ A quick recap:
 
 
 
-This example will configure an interface to be used to establish connectivity between HA peers. To configure a non-forwarding interface, set the `forwarding` flag to `false`. This examples uses a `device-interface` set to type `ethernet`.
+This example will configure an interface to be used to establish connectivity between HA peers. To configure a non-forwarding interface, set the `forwarding` flag to `false`. This example uses a `device-interface` set to type `ethernet`.
 
 ```
 node    T116_DUT1
