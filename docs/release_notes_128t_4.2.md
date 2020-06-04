@@ -9,6 +9,8 @@ sidebar_label: 4.2
 
 - **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
 ------
+- **I95-30610** RTP is not properly classified for subsequent 128T routers
+------
 - **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
   _**Conditions:**_ DHCP server is not running. The following log message can be seen:
   ```
@@ -52,8 +54,17 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
   Until the system is upgraded to 4.2.8, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
 ------
+- **I95-35205** LTE interfaces do not honor MTU settings set in the network
+  Until the system is upgraded to 4.3.5, the learned MTU value can be directly set within Linux
+------
+- **I95-35323** BGP over SVR does not work if both sides of the routers have VLAN tagged interfaces
+  Until the system is upgraded to 4.3.5, configure the outgoing SVR interfaces without vlans. At least one side of the BGP over SVR routers should not utilize VLAN tagging.
+------
 - **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
   _**Conditions:**_ When the interface has an adjacency and Tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`
+------
+- **I95-35602** The command `show network-interface` may result in a `Unhandled TypeError` in the PCLI when a PPPoE interface is down
+
 
 ## Release 4.2.7
 
