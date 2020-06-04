@@ -2536,6 +2536,15 @@ set config encryption [force] [router <router>] [node <node>]
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](#show-stats-config) | Metrics pertaining to the get-config RPC |
 
+#### Example
+
+```
+admin@node1.t128# set config encryption                                                                                                                                                     
+Are you sure you would like to enable configuration encryption? [y/N]: y                                                                                                                    
+✔ Encrypting configuration... 1/1 targets complete.
+Configuration was successfully encrypted.
+```
+
 #### Version History
 
 | Release | Modification                |
@@ -2559,6 +2568,15 @@ set config encryption disabled [force] [router <router>] [node <node>]
 | force | Skip confirmation prompt |
 | node | the node on which to disable config encryption (default: all) |
 | router | the router on which to disable config encryption (default: &lt;current router&gt;) |
+
+#### Example
+
+```
+admin@node1.t128# set config encryption disabled                                                                                                                                            
+Are you sure you would like to disable configuration encryption? [y/N]: y                                                                                                                   
+✔ Disabling configuration encryption... 1/1 targets complete.
+Configuration encryption was successfully disabled.
+```
 
 #### Version History
 
@@ -2671,6 +2689,13 @@ set dns resolution [router <router>] <hostname> <ip-address>
 | ------- | ----------- |
 | [`refresh dns resolutions`](#refresh-dns-resolutions) | Refresh DNS resolutions |
 | [`show dns resolutions`](#show-dns-resolutions) | show all entries in the DNS |
+
+#### Example
+
+```
+admin@node1.t128# set dns resolution my.router 1.2.3.4                                                                                                                                      
+Successfully set hostname resolution on node node1
+```
 
 #### Version History
 
@@ -4469,6 +4494,36 @@ show events config commit [flat] [from <from>] [to <to>] [force] [router <router
 | [`show config version`](#show-config-version) | Display running configuration version |
 | [`show stats config`](#show-stats-config) | Metrics pertaining to the get-config RPC |
 
+#### Example
+
+```
+admin@node1.t128# configure authority router t128 description "test router"                                                                                                                 
+*admin@node1.t128# commit                                                                                                                                                                   
+Are you sure you want to commit the candidate config? [y/N]: y                                                                                                                              
+✔ Validating, then committing...
+Configuration committed
+admin@node1.t128# show events config commit                                                                                                                                                
+Thu 2020-06-04 12:47:59 UTC
+✔ Retrieving configuration events...
+
+======================================================================
+ 2020-06-04T12:47:53.487Z admin changed running configuration on t128
+======================================================================
+
+config
+
+    authority
+
+        router  t128
+            name         t128
+            description  "test router"
+        exit
+    exit
+exit
+
+Completed in 0.09 seconds
+```
+
 #### Version History
 
 | Release | Modification                |
@@ -4493,6 +4548,26 @@ show events config encryption [from <from>] [to <to>] [force] [router <router>]
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
 | router | router for which to display config encryption events (default: &lt;current router&gt;) |
 | to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
+
+#### Example
+
+```
+admin@node1.t128# show events config encryption                                                                                                                                             
+Thu 2020-06-04 13:24:47 UTC
+✔ Retrieving configuration events...
+
+========================================================================
+ 2020-06-04T12:38:17.409Z root changed configuration encryption on t128
+========================================================================
+enable encryption
+
+========================================================================
+ 2020-06-04T12:39:37.930Z root changed configuration encryption on t128
+========================================================================
+disable encryption
+
+Completed in 0.08 seconds
+```
 
 #### Version History
 
