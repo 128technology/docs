@@ -7,7 +7,7 @@ sidebar_label: 4.5
 
 ### New Features and Improvements
 
-- **I95-9955** Encrypt Security Keys in Configuration
+- **I95-9955** Stronger security encryption for secure fields in configuration
 ------
 - **I95-1212, I95-34108** User-Defined Configuration Templates
 ------
