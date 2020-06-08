@@ -3,9 +3,9 @@ title: Microsoft 365
 sidebar_label: Microsoft 365
 ---
 
-128T optimizes Microsoft 365 sessions, allowing you to easily configure the associated services to be delivered using the recommended [network connectivity principles](https://docs.microsoft.com/en-us/office365/enterprise/office-365-network-connectivity-principles). It uses an [AppID module](/docs/concepts_appid/#appid-using-modules) for automatic discovery of Microsoft 365 endpoints, and simple service definition.
+128T optimizes Microsoft 365 sessions, allowing you to easily configure the associated services to be delivered using the recommended [network connectivity principles](https://docs.microsoft.com/en-us/office365/enterprise/office-365-network-connectivity-principles). It uses an [AppID module](concepts_appid/#appid-using-modules) for automatic discovery of Microsoft 365 endpoints, and simple service definition.
 
-:::note
+:::info
 Microsoft 365, or M365 is formerly known as Office 365, or O365.
 :::
 
@@ -100,24 +100,24 @@ exit
 With your services for Microsoft 365 added, the final step is to configure the services for which tenants can access Microsoft 365, security policies, routing, and optional service-policy.
 
 #### Access
-Define which of your [network tenants](/docs/config_tenants/#modeling-your-network-tenancy) are allowed to access Microsoft 365 services by adding them to the [service access policies](/docs/config_reference_guide/#access-policy-service).
+Define which of your [network tenants](config_tenants/#modeling-your-network-tenancy) are allowed to access Microsoft 365 services by adding them to the [service access policies](config_reference_guide/#access-policy-service).
 
 #### Security
-Configure the [security policy](/docs/config_reference_guide/#security) for the Microsoft 365 services.
+Configure the [security policy](config_reference_guide/#security) for the Microsoft 365 services.
 
 :::tip
 Microsoft 365 services are designed for direct Internet transport, with robust security and encryption built in to each application. As such, a security policy that disables router encryption is typically preferred.
 :::
 
 #### Routing
-Give the Microsoft 365 services appropriate [service routes](/docs/concepts_glossary/#service-routes) in your overall topology to designate possible routes.
+Give the Microsoft 365 services appropriate [service routes](concepts_glossary/#service-routes) in your overall topology to designate possible routes.
 
 :::tip
 In broadband connected branch router scenarios, the optimal route for M365 services will typically be directly out local broadband links. In this case, disabling the sharing of service-routes may be desirable in the service configuration.
 :::
 
 #### Service Policy
-By using [service policy](/docs/bcp_service_and_service_policy_design/#service-policy) associated with your Microsoft 365 services, you can set how your network should treat sessions. This includes QoS, path selection, and failover behavior for Microsoft 365. 
+By using [service policy](bcp_service_and_service_policy_design/#service-policy) associated with your Microsoft 365 services, you can set how your network should treat sessions. This includes QoS, path selection, and failover behavior for Microsoft 365. 
 
 ## Verifying Operation
 
