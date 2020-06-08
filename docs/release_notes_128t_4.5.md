@@ -13,9 +13,9 @@ sidebar_label: 4.5
 ------
 - **I95-16104** Management traffic over forwarding interface
 ------
-- **I95-23898** Provide a descriptive error response on a failed cli command
+- **I95-23898** Improved feedback on PCLI when invalid arguments are provided to command
 ------
-- **I95-28366** Migrate PCLI commands away from PDM to Web
+- **I95-28366** Greatly reduced memory consumption of PCLI, allowing many more concurrently users
 ------
 - **I95-29043** Route to nowhere impacting AP
 ------
