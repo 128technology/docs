@@ -1,6 +1,6 @@
 ---
 title: GRE Plugin
-sidebar_lable: GRE
+sidebar_label: GRE
 ---
 
 The 128T GRE plugin can be used for creating IPv4 GRE tunnels between a 128T router and a remote GRE tunnel destination. For services such as Zscaler, this provides better throughput compared to other tunneling mechanisms.
@@ -11,8 +11,8 @@ The 128T GRE plugin can be obtained from the official 128T software repository. 
 
 | GRE Plugin | 128T |
 | --- | --- |
-| 128T-gre-1.0.4 | 128T >= 3.2.8; 128T < 4.3.0 |
-| 128T-gre-2.0.2 | 128T >= 4.3.0 |
+| 128T-gre-1.1.0 | 128T >= 3.2.8; 128T < 4.3.0 |
+| 128T-gre-2.1.0 | 128T >= 4.3.0 |
 
 :::important
 It is recommended to use the conductor GUI > Plugins page for installing plugins. This allows the system to select the correct version of plugin based on the 128T version.
@@ -78,7 +78,7 @@ admin@node1.conductor1#
 
 In the above example, you will notice there are two tunnels configured on the router. Each `destination` represents a single tunnel interface and allows the user to configure an IPv4 address for the destination. The `enabled-node` configuration allows the user to control which 128T router node will be operating which tunnel. In addition the `enabled-node > tenant` can be used to apply a specific tenant for the GRE tunnel traffic. For each destination on each enabled-node, the 128T router creates a unique KNI interface and the configured tenant is applied to this interface.
 
-#### Tunnel ICMP health check parameters ####
+### Tunnel ICMP health check parameters ###
 The GRE tunnels do not have an inherent mechanism to detect the availability of remote peers.  As a result, the GRE plugin allows the user to configure ICMP probes to the destination. The configuration is enabled by default with the following settings:
 
 ```
@@ -95,6 +95,39 @@ The time interval for the attributes are in seconds.
 Every `link-test-interval` an icmp check is performed to determine the availability of the remote tunnel peer. For an unresponsive peer, a total of `number-of-retries + 1` icmp ping attempts will be made within the `retry-interval`. If the peer does not respond to any of these ping attempts, then its considered as down. In the above config, assuming an unresponsive peer, first ping is sent at 10 seconds, followed by 5 more pings at 1 second interval each. In total taking the system about 15 seconds and 6 pings to detect a peer as down. Once a peer is considered down, the next attempt to detect the tunnel liveliness is made after 10 seconds (or the `link-test-interval`).
 
 In the above example, the two tunnels `pri-tunnel` and `sec-tunnel` create two additional KNI interfaces called `gre-0` and `gre-1` respectively. When a tunnel is determined to be non-responsive, the corresponding `gre-x` interface is brought down. For example, in the above config, when the `pri-tunnel` goes down, the corresponding `gre-0` interface is brought down as well. This allows for traffic to fail over to a secondary tunnel if available. More details on this will be explained later in the document.
+
+#### ICMP health check to private address ####
+
+##### Version History
+
+| Release      | Modification                                    |
+| ------------ | ----------------------------------------------- |
+| 1.1.0, 2.1.0 | `icmp-keep-alive > address-type` was introduced |
+
+Some GRE tunnel providers require the endpoint to ping an internal private address to detect the tunnel liveliness. The `icmp-keep-alive > address-type` can be used to configure a private address for keep-alive detection. Consider the following example:
+
+```console
+gre
+    enabled         true
+    plugin-network  10.10.10.0/28
+
+    destination     pri-tunnel
+        name             pri-tunnel
+        host             20.20.20.13
+
+        icmp-keep-alive
+            address-type  custom
+            address       10.10.10.13
+        exit
+    exit
+exit
+```
+
+In the above configuration, the `address-type > custom` is used to set a private icmp-address of `10.10.10.13`. In doing so, the icmp-health check algorithm described [above](#tunnelicmp_health_check_parameters) will be run on the private address of `10.10.10.13` instead of the default `destination > host`. The behavior in terms of declaring the tunnel as down and continuous monitoring remains the same.
+
+:::important
+When using a private ICMP address, its important to also use an in-subnet address for the generated KNIs. This can be accomplished by configuring the appropriate `plugin-network` as illustrated in the example above.
+:::
 
 ### 128T services to transport over the tunnel ###
 Next step is to identify the the prefix or the subnet to be transported over the tunnel. In some cases, it might be desirable to transport all internet traffic through the tunnel, so the prefix could be as simple as 0.0.0.0/0. This can be done by capturing the prefix in a 128T service and setting the next-hop as the `gre-x` interfaces. As noted in the [previous section](#tunnelicmp_health_check_parameters), each destination on a given node corresponds to a `gre-x` inteface. By configuring the next-hop as the appropriate GRE interfaces, it allows the incoming traffic to be service-function chained to a GRE tunnel towards a WAN interface.
@@ -347,6 +380,30 @@ config
 exit
 ```
 
+### Other configuration
+
+#### MSS Clamping
+##### Version History
+
+| Release      | Modification                   |
+| ------------ | ------------------------------ |
+| 1.1.0, 2.1.0 | `enforced-mss` was introduced  |
+
+The TCP MSS (maximum segment size) is the amount of data that the interface is willing to accept in a single TCP segment. This option is negotiated by the client and server based on their local environments. However, tunneling adds extra overhead in terms of packet bytes so its important to be able to adjust the MSS (maximum segment-size) for TCP connections by the routers. By default, the `enforced-mss` is set to be `path-mtu` which allows us to automatically adjust the MSS based on the MTU of the tunnel interface. In addition, user can override the value to a static number as shown in the example below.
+
+```console
+gre
+    enabled         true
+    plugin-network  10.10.10.0/28
+
+    destination     dut3-tunnel
+        name             dut3-tunnel
+        host             20.20.20.13
+        enforced-mss     1300
+    exit
+exit
+```
+
 ## Debugging & Troubleshooting ##
 
 ### Config Generation ###
@@ -498,4 +555,4 @@ Tue 2020-03-24 03:22:37 UTC
 Completed in 0.07 seconds
 ```
 
-In addition, a `ping-monitor` service is started for each configured tunnel, the `systemctl status ping-monitor@<tunnel-name>` can be used to query the status of the ping service.
+In addition, a `ping-monitor` service is started for each configured tunnel, the `systemctl status ping-monitor-namespace@<tunnel-name>` can be used to query the status of the ping service.
