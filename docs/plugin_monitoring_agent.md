@@ -7,13 +7,13 @@ The 128T Monitoring Agent is an entity for collecting data from a node running 1
 
 The monitoring agent at its core is designed to be able to push data to external platforms. It currently leverages the [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) collection stack on every 128T router. However, the monitoring agent is designed with other tools and scale in mind. The monitoring agent is composed of the following:
 
-- **monitoring-agent-cli**
+- **monitoring-agent-cli**  
   Used for configuring and interacting with the underlying application
 
-- **collectors**
+- **collectors**  
   A set of inputs designed to collect data from several sources such as metrics, events etc.
 
-- **targets**
+- **targets**  
   A set of outputs for collecting and pushing the data to various data sinks such as external monitoring platforms, files on disk etc.
 
 ## Installation
@@ -493,7 +493,7 @@ In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen abo
 
 ### Device Interface State Collector
 
-The `deviceInterfaceStateCollector128t` collector can be used for monitoring the admin, oper and redundancy status of various device-interfaces configured on the node. The name is available as `device-interface` tag and telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
+The `deviceInterfaceStateCollector128t` collector can be used for monitoring the admin, oper and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
 
 ```toml
 [[inputs.exec]]
@@ -514,6 +514,7 @@ The `deviceInterfaceStateCollector128t` collector can be used for monitoring the
   ## from telegraf. For example:
   ## [[inputs.exec.tagpass]]
   ##     device-interface = ["wan1"]
+  ##     mac-address = ["00:0a:95:9d:68:16"]
 ```
 
 ### Peer Path State collector
