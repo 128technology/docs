@@ -3,6 +3,27 @@ title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
 
+## Release 4.3.7
+
+### Issues Fixed
+
+- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
+------
+- **I95-26276** Enabled OSPF authentication in configuration
+------
+- **I95-35172** DHCP Server configuration on network-interface is not real time configurable
+  Until the system is upgraded to 4.3.7, restarting the 128T will enable the DHCP server
+------
+- **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
+  _**Conditions:**_ When the interface has an adjacency and Tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`
+------
+- **I95-35602** The command `show network-interface` may result in a `Unhandled TypeError` in the PCLI when a PPPoE interface is down
+------
+- **I95-35633** Configuration edits within the GUI have been dramatically increased
+------
+- **I95-35644** Added support for `bgp route-reflector allow-outbound-policy`
+
+
 ## Release 4.3.6
 
 ### Issues Fixed
