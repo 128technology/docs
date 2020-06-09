@@ -22,8 +22,8 @@ The 128T Monitoring Agent can be obtained from the official 128T software reposi
 
 | Monitoring Agent            | 128T                        |
 | --------------------------- | --------------------------- |
-| 128T-monitoring-agent-1.2.0 | 128T >= 4.1.0; 128T < 4.3.0 |
-| 128T-monitoring-agent-2.1.0 | 128T >= 4.3.0               |
+| 128T-monitoring-agent-1.2.1 | 128T >= 4.1.0; 128T < 4.3.0 |
+| 128T-monitoring-agent-2.1.1 | 128T >= 4.3.0               |
 
 The agent can be install using dnf utility. For example.
 
@@ -492,6 +492,13 @@ In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen abo
 ```
 
 ### Device Interface State Collector
+
+#### Version History
+
+| Release      | Modification                     |
+| ------------ | -------------------------------- |
+| 1.2.1, 2.1.1 | `mac-address` tag was introduced |
+
 
 The `deviceInterfaceStateCollector128t` collector can be used for monitoring the admin, oper and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
 
