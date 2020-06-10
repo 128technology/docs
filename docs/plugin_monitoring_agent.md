@@ -28,7 +28,7 @@ The 128T Monitoring Agent can be obtained from the official 128T software reposi
 The agent can be install using dnf utility. For example.
 
 ```console
-dnf install -y 128T-monitoring-agent
+dnf install 128T-monitoring-agent
 Last metadata expiration check: 0:00:00 ago on Wed 10 Jun 2020 01:20:49 AM UTC.
 Dependencies resolved.
 =================================================================================
@@ -45,6 +45,7 @@ Install  2 Packages
 
 Total download size: 27 M
 Installed size: 101 M
+Is this ok [y/N]: y
 Downloading Packages:
 (1/2): 128T-monitoring-agent-2.1.1-1.rpm          20 MB/s | 7.0 MB     00:00
 (2/2): telegraf-128tech-1.14.3-1.x86_64.rpm       29 MB/s |  20 MB     00:00
