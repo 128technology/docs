@@ -33,9 +33,9 @@ sidebar_label: '2.1'
 
   _**Resolution**_ The configuration allows the user to disable an input. However, an input was being treated as enabled as long as it existed in the config. That configuration option is now honored.
 
-- **MON-225** Correct bug where the `t128_events` input occasionally missed or delayed events
+- **MON-225** `t128_events` input would occasionally drop or delayed events
 
-  _**Resolution**_ Update the telegraf dependency for improvements and bug fixes. Particularly, the `execd` input had a bug that occasionally caused the `t128_events` issue. The updates include a fix for that issue.
+  _**Resolution**_ Update the telegraf dependency to 1.14.3 as well as the `execd` input to better handle simultaneous events.
 
 ## Release 2.1.0
 
