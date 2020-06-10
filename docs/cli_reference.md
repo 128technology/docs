@@ -4369,7 +4369,7 @@ show entitlement [force] [router <router>]
 
 This command displays the bandwidth entitlement for your 128T router.
 
-The 128T Networking Platform calculates the Peak Router Bandwidth Capacity; this is the highest router bandwidth value of any 5 second interval over the specific license period. The Router Bandwidth is calculated based on the aggregate of sessions traversing the router. For more information on the specifics of the 128T entitlement, visit the [128 Technology website](https://www.128technology.com/entitlement).
+The 128T Networking Platform calculates the Peak Router Bandwidth Capacity; this is the highest router bandwidth value of any 5 second interval over the specific license period. The Router Bandwidth is calculated based on the aggregate of sessions traversing the router.
 
 #### Example
 
