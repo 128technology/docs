@@ -9,6 +9,10 @@ sidebar_label: '2.1'
 
 ---
 
+- **MON-225** Update telegraf dependency to 1.14.3
+
+---
+
 - **MON-227** Allow this version of the Monitoring Agent to be installed with 128T < 6.0.0 (previously < 5.0.0)
 
   The agent is now compatible with the upcoming 128T 5.X software.

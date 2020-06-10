@@ -9,6 +9,10 @@ sidebar_label: '1.2'
 
 ---
 
+- **MON-225** Update telegraf dependency to 1.14.3
+
+---
+
 - **MON-218** Expose MAC address in the device state input
 
   Allow better correlation between device and network interfaces.
