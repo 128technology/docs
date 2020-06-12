@@ -9,7 +9,7 @@ sidebar_label: 4.5
 
 - **I95-9955** Stronger security encryption for secure fields in configuration
 ------
-- **I95-1212, I95-34108** User-Defined Configuration Templates
+- **I95-1212, I95-34108** [Configuration Templates](config_templates.md)
 ------
 - **I95-16104** Management traffic over forwarding interface
 ------
@@ -17,7 +17,7 @@ sidebar_label: 4.5
 ------
 - **I95-28366** Greatly reduced memory consumption of PCLI, allowing many more concurrently users
 ------
-- **I95-29043** Route to nowhere impacting AP
+- **I95-29043** [Asset Connection Resiliency](config_asset_connection_resiliency.md)
 ------
 - **I95-30332** Custom menu for third-party application
 ------
@@ -25,7 +25,7 @@ sidebar_label: 4.5
 ------
 - **I95-32599** Ethernet over SVR
 ------
-- **I95-32783** `show assets summary` enhancements
+- **I95-32783** [`show assets summary` enhancements](cli_reference.md#show-assets-summary)
 ------
 - **I95-33004** Decommission WatchTower
 ------
