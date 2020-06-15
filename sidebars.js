@@ -65,6 +65,7 @@ module.exports = {
         "label": "How To",
         "items": [
           "howto_conductor_migration",
+          "howto_extend_gui_nav",
           "howto_lte",
           "howto_maintenance_mode",
           "howto_ms365",
@@ -109,7 +110,7 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_monitoring_agent",
-      "plugin_gre"
+      "plugin_gre",
     ],
     "REST APIs": [
       "api_rest_4.2.0",

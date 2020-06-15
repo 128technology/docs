@@ -19,7 +19,7 @@ sidebar_label: 4.5
 ------
 - **I95-29043** [Asset Connection Resiliency](config_asset_connection_resiliency.md)
 ------
-- **I95-30332** Custom menu for third-party application
+- **I95-30332** [Extensibility of GUI Navigation pane for 3rd party links](howto_extend_gui_nav.md)
 ------
 - **I95-31405** GUI "Proof Points" Page for illustrating advantages of SVR
 ------
