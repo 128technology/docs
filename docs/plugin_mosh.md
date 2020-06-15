@@ -1,4 +1,7 @@
-# Mosh Plugin
+---
+title: Mosh Plugin
+sidebar_label: Mosh
+---
 
 The Mosh plugin provides the ability to install the MObile SHell (MOSH)[https://mosh.org/] on 128T nodes.  Mosh is provided under GNU GPLv3.
 
