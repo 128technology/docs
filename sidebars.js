@@ -108,7 +108,8 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_monitoring_agent",
-      "plugin_gre"
+      "plugin_gre",
+      "plugin_mosh"
     ],
     "REST APIs": [
       "api_rest_4.2.0",
