@@ -5,6 +5,7 @@ module.exports = {
       "about_releases",
       "about_support_policy",
       "about_security_policy",
+      "about_svr_savings",
       "CONTRIBUTING",
     ],
     "Introduction": [

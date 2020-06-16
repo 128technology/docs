@@ -21,7 +21,7 @@ sidebar_label: 4.5
 ------
 - **I95-30332** [Extensibility of GUI Navigation pane for 3rd party links](howto_extend_gui_nav.md)
 ------
-- **I95-31405** GUI "Proof Points" Page for illustrating advantages of SVR
+- **I95-31405** [SVR Savings Proof Points](about_svr_savings.md)
 ------
 - **I95-32599** Ethernet over SVR
 ------
