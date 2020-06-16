@@ -39,7 +39,7 @@ sidebar_label: 4.5
 ------
 - **I95-33484** Silicom new platform testing
 ------
-- **I95-33776** Log username and timestamp of owner in config
+- **I95-33776** [`show config events`](cli_reference.md#show-events-config-commit) tracks configuration changes
 
 ### Issues Fixed
 
