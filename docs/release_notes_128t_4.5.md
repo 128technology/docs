@@ -27,8 +27,6 @@ sidebar_label: 4.5
 ------
 - **I95-32783** [`show assets summary` enhancements](cli_reference.md#show-assets-summary)
 ------
-- **I95-33004** Decommission WatchTower
-------
 - **I95-33174** LTE Band Management
 ------
 - **I95-33215** Audiocodes M800 watchdog integration
@@ -48,5 +46,8 @@ sidebar_label: 4.5
 - **I95-34112** rename "show config events" -> "show events config"
 
 ## Special Considerations
+
+- **I95-33004** RoadRunner Removed
+  The RoadRunner process collected anonymous information from the router and sent it to 128 Technology for storage and analysis. This helped inform and allows 128 Technology to support and improve the 128 Networking Platform. The anonymous data collection tool, RoadRunner has been removed from the product.
 
 ## Caveats
