@@ -2,13 +2,13 @@
 title: 128T Metadata
 ---
 
-The 128T routing system is a distributed service- and session-oriented forwarding system designed to connect endpoints to their services. As part of its operation, the 128T performs functions such as flow classification, route selection, load balancing, etc. upon receipt of a first packet from a new five tuple source. Before sending this packet another 128T, it inserts metadata, a series of TLVs which describe attributes of the session, into the payload of the packet. Likewise, in the reverse direction, the first packet from the egress 128T to ingress 128T will include metadata in the form of a different set of TLVs associated with decisions made on the egress 128T.
+As part of 128T's operation, it performs functions such as flow classification, route selection, load balancing, etc. upon receipt of a first packet from a new five tuple source. Before sending this packet another 128T, it inserts metadata, a series of TLVs which describe attributes of the session, into the payload of the packet. Likewise, in the reverse direction, the first reverse packet will include metadata in the form of a different set of TLVs associated with decisions made on the egress 128T.
 
 These metadata inclusions are supplied by and exchanged between nodes within a router when deployed as a HA pair; this is frequently referred to as _inter-node_ metadata.
 
 In a similar way, the 128T uses metadata when exchanging packets between 128T router instances. In these _inter-router_ applications, a 128T router will insert metadata (on egress) to another 128T router.
 
-Irrespective of whether it is being used between nodes or between routers, the function of the metadata is to convey information between these two nodes; the ingress node sends information about the originator of the packet, authentication information about itself, the tenant that the endpoint has been determined to be in, the destination service, etc. In turn, the egress node supplies information back to the ingress node to provide real-time utilization information about the service, any downstream load balancing decisions it has employed, etc.
+Irrespective of whether it is being used between nodes or between routers, the function of the metadata is to convey information between these two nodes; the ingress node sends information about the originator of the packet, authentication information about itself, the tenant that the endpoint has been determined to be in, the destination service, and a growing list of feature-specific parameters. In turn, the egress node supplies information back to the ingress node to provide real-time utilization information about the service, any downstream load balancing decisions it has employed, etc.
 
 ## Metadata Types
 
@@ -25,13 +25,17 @@ The 128T router inserts metadata only when transmitting a packet between two rou
 
 These two comprise what is known as the “metadata handshake” -- that is, the initiating router sends packets with metadata to the recipient router until it receives a reverse packet with metadata from that recipient. Likewise, the recipient continues to send metadata to the initiating router until it receives a packet without metadata. This is how two routers acknowledge receipt of metadata from their counterparts: the absence of metadata in a packet indicates that it has received metadata from its counterpart.
 
-3. Fragmented packets are being sent from a router to another router
-4. Packets are being transformed (to UDP) between nodes because the original protocol has no support for L4 port numbers (and hence, our waypoint logic cannot be used. i.e. ICMP)
+3. Fragmented packets are being sent from a 128T router to another 128T router
+4. Packets are being transformed to UDP between nodes because the original protocol has no support for L4 port numbers (and hence, SVR waypoint logic cannot be used. i.e. ICMP)
 5. Packets are being transformed to UDP from TCP between routers due to the detection of a protocol-strict firewall between them
 6. A NAT exists between two routers and a router detects that the NAT’s address has changed.  Detection is done using a BFD exchange (not edescribed in this document)
 7. BFD Metadata
 
-Metadata is always inserted directly after the L4 header of a packet. (Note that all packets between routers will have an L4 header, since the initiating router will insert one if one did not exist in the original packet.
+Metadata is always inserted directly after the L4 header of a packet.
+
+:::note
+All packets between routers will have an L4 header, since the initiating router will insert one if one did not exist in the original packet.
+:::
 
 ### Retriggering Metadata
 
@@ -39,7 +43,7 @@ There are a variety of reasons why metadata may need to be retriggered after the
 
 #### Existing Flow Recognition
 
-This method of retriggering metadata is intended to reopen the session on the next hop due to a variety of reasons such as detecting a source NAT change from a device in the middle via BFD, or the session for some reason no longer exists on the next hop router and needs to be reopened. Ultimately the next hop router is missing a flow entry associated with the flow table key (device interface, vlan, source ip, destination ip, source l4 port, destination l4 port, and protocol). Retriggering metadata in this scenario aims to recreate / revive a session which should have existed or is currently in  a defunct state on the next-hop node.
+This method of retriggering metadata is intended to reopen the session on the next hop due to a variety of reasons such as detecting a source NAT change from a device in the middle via BFD, or the session for some reason no longer exists on the next hop router and needs to be reopened. Ultimately the next hop router is missing a flow entry associated with the flow table key (device interface, VLAN, source IP, destination IP, source L4 port, destination L4 port, and protocol). Retriggering metadata in this scenario aims to recreate a session which should have existed or is currently in a stale state on the next-hop node.
 
 #### Existing Flow Modification
 
@@ -47,15 +51,15 @@ This form of metadata retriggering is a result router deciding that something ab
 
 This could be a result of:
 
-- switching out waypoints of an existing session due to change in security actions of the session. 
+- Switching waypoints for an existing session due to a change in security actions of the session.
 - The load balancer within the ingress router decided that there is a better SVR path to traverse for the session.
 - Existing characteristics of a session (such as its traffic classification) have changed which must be communicated to the next hop router.
 
 ## Metadata Versioning
 
-Metadata header contains a version field which dictates the version of the header format. For the foreseeable future, there is only version 1 which is associated with the initial format of the header.
+Metadata header contains a version field which dictates the version of the header format. Presently there is only version 1 which is associated with the initial format of the header.
 
-## Metadata application: load balancing
+## Metadata Application: Load Balancing
 
 Each router maintains local information about the utilization of all services which it contacts. This information is used to inform a router’s session forwarding logic, which determines the most appropriate egress router for a given ingress session. There are three main inputs into a router’s session forwarding algorithm:
 
@@ -63,29 +67,27 @@ Each router maintains local information about the utilization of all services wh
 - Path (or link) data, as learned through BFD. This includes real-time path measurement for latency and jitter, as well as real-time reporting of observed packet loss.
 - Router and service utilization data, as learned via metadata exchanges. As defined in this document, Routers exchange metadata with each other in order to (among other things) report on the active load for a given service, as well as their own load. This “service feedback” information is sent from the egress router to the ingress router, and affords the ability for the ingress router to make well-informed decisions for future sessions.
 
-This last bullet is the focus of the remainder of this section.
-
 ### Service Feedback
 
-With each new session that is established between two routers, the metadata from the egress router includes load information to describe that service’s current occupancy. This is based strictly on a count of the number of active sessions, but could be extended to use other attributes as metric data (e.g., bandwidth). These metrics are collectively referred to as “capacity criteria”; we have deferred implementing any capacity criteria aside from the number of active sessions.
+With each new session that is established between two routers, the metadata from the egress router includes load information to describe that service’s current occupancy. This is based strictly on a count of the number of active sessions, but could be extended to use other attributes as metric data (e.g., bandwidth). These metrics are collectively referred to as “capacity criteria”.
 
-By inserting this in metadata, the egress router can send real-time information back, in band, to the ingress router. This information can (and should) be time sensitive – after a period of time the information, if it is not refreshed by another session assignment (and hence more metadata from the egress router), this information is considered obsolete. With frequent exchanges between two specific routers, the ingress router will have nearly perfect load information on the egress router – even if that ingress router is not the only source of traffic to that egress router.
+By inserting capacity criteria in metadata, the egress router can send real-time information back, in band, to the ingress router. This information can (and should) be time sensitive – after a period of time the information, if it is not refreshed by another session assignment (and hence more metadata from the egress router), this information is considered obsolete. With frequent exchanges between two specific routers, the ingress router will have nearly perfect load information on the egress router – even if that ingress router is not the only source of traffic to that egress router.
 
 ## Metadata Application: High Availability
 
 At its essence, metadata represents state information that is exchanged between routers. In its most primitive use case, an ingress router sends pre-transform packet information to the egress router for it to “reconstitute” the original source and destination addresses and ports of the original inbound packet. This is performed with the first packet for every new session entering into a 128T fabric. This same technique is also employed on non-first packets for existing sessions if a router has determined that its counterpart is no longer reachable (due to network issues or system failure).
 
-After a router (which could have originally been the ingress or egress router of a session) detects that the adjacent peer it has been talking with has failed over or rebooted, an event is triggered for all flows destined to the newly active peer to restart metadata generation.  When BFD notices a state change with a connected peer indicative of a failover or reboot, it triggers an event for the datapath to handle. This event tells all flows generating metadata to do a one time check (when going through action processing) to see if their relevant peer has had a state change and is in need of metadata. If the event is relevant to the flow, metadata is enabled, otherwise the event is marked as observed and the existing metadata action state is unchanged.
+After a router (which could have originally been the ingress or egress router of a session) detects that the adjacent peer it has been talking with has failed over or rebooted, an event is triggered for all flows destined to the newly active peer to restart metadata generation.  When BFD notices a state change with a connected peer indicative of a failover or reboot, it triggers an event to reevaluate path selection for active sessions. This event tells all flows generating metadata to do a one time check (when going through action processing) to see if their relevant peer has had a state change and is in need of metadata. If the event is relevant to the flow, metadata is enabled, otherwise the event is marked as observed and the existing metadata action state is unchanged.
 
 ## Metadata Application: Workload Mobility
 
-Similar to the high availability scenario, network events may sometimes require session state to be moved among routers in a 128T fabric. The term workload mobility refers to the migration of a workload (virtual machine, container, etc.) from one location in a network to another; the challenge this presents to 128T is that not only does the configuration need to account for the change (i.e., a service-route’s egress interface moves), but sessions in progress may also need to move as a result. This document focuses on the migration of sessions; configuration changes are executed without any implications to metadata.
+Similar to the high availability scenario, network events may sometimes require session state to be moved among routers in a 128T fabric. The term workload mobility refers to the migration of a workload (virtual machine, container, etc.) from one location in a network to another; the challenge this presents to 128T is that not only does the configuration need to account for the change (i.e., a service-route’s egress interface moves), but sessions in progress may also need to move as a result.
 
 As with high availability, the use of metadata is critical to migrating a session from one router to another. In much the same way, when a (terminating) workload is moved to a new location, the ingress router will send packets for in-progress sessions to a new location, including brand new metadata to a new recipient.
 
 ## Metadata Composition
 
-Metadata that the 128T system can generate is an accumulation of attributes associated with a session being established or in certain circumstances per-packet attributes. This section contains the composition of each type of metadata, as well as the meaning of the individual fields. Below is an example of the format of metadata that will sit between the layer 4 header of a packet and its payload.  There exist both Header attributes as well as Payload attributes.  Header attributes are always guaranteed to be unencrypted.  Payload attributes may be encrypted depending on configured security policy.  Each attribute listed below will indicate whether it is a header attribute (unencrypted) or payload attribute (optionally encrypted).  There are presently no attributes that can exist in both sections.
+Metadata that the 128T system can generate is an accumulation of attributes associated with a session being established, or in certain circumstances per-packet attributes. Below is an example of the format of metadata that will sit between the layer 4 header of a packet and its payload.  There exist both _Header attributes_ as well as _Payload attributes_. Header attributes are always guaranteed to be unencrypted. Payload attributes may be encrypted depending on the configuration of a security policy.  Each attribute listed below will indicate whether it is a header attribute (unencrypted) or payload attribute (optionally encrypted).  Attributes can not exist in both sections.
 
 ```
  0                   1                   2                   3
@@ -127,22 +129,22 @@ Field representing the version of the metadata header. The current version of me
 
 ##### Header Length (12 bits)
 
-Length of the metadata header including any added optional attributes that are guaranteed to be unencrypted. The value of the number of bytes in the header.
+Length of the metadata header including any added optional attributes that are guaranteed to be unencrypted. The value of this field is the number of bytes in the header.
 
 ##### Payload Length (2 bytes)
 
-Length of data following the metadata header, not including the size of the header. This data could be encrypted.  The value of this field is the number of bytes in the payload.
+Length of data following the metadata header, not including the size of the header. This data could be encrypted. The value of this field is the number of bytes in the payload.
 
 ### False Positive Metadata
 
-Given that no byte sequence is truly unique in the payload of a packet, in the scenario where the original payload after the L4 header contained the same byte sequence as the cookie, false positive logic is enacted on the packet. If no metadata header has already been added to the packet, a false positive metadata header is added to the packet to indicate that the first eight bytes of the payload matches the cookie. The structure of a false positive metadata packet is one which has a metadata header length that is the same as the base header size as well as having zero payload length. The receiving side of a packet with false positive metadata will strip out the metadata header if the next hop of the packet is not expecting a metadata header. 
+Given that no byte sequence is truly unique in the payload of a packet, in the scenario where the original payload after the L4 header contains the same byte sequence as the cookie, false positive logic is enacted on the packet. If no metadata header has already been added to the packet, a false positive metadata header is added to the packet to indicate that the first eight bytes of the payload matches the cookie. The structure of a false positive metadata packet is one which has a metadata header length that is the same as the base header size as well as having zero payload length. The receiving side of a packet with false positive metadata will strip out the metadata header if the next hop of the packet is not expecting a metadata header.
 
 In the scenario where a router receives a false positive metadata header but intends to add metadata to the packet, the false positive metadata header is modified to contain the newly added attributes. Once attributes are added, the metadata header is no longer considered to be false positive.
 
 ### Guaranteed Unencrypted Attributes
 
-The metadata header contains a 12-bit field associated with the header length of the metadata header. The field represents the overall length of the header. Its base value is `0xC` which is the initial length of the metadata header.
-The value `0xC` comes from:
+The metadata header contains a 12 bit field associated with the header length of the metadata header. The field represents the overall length of the header. Its base value is `0xC` which is the initial length of the metadata header.
+The value `0xC` is derived from:
 
 ```
   64 bits  Cookie Length
@@ -153,14 +155,15 @@ The value `0xC` comes from:
 96 bits = 12 bytes decimal = 0xC hex
 ```
 
-Any value greater than `0xC` would indicate that there are optional attributes associated with this metadata header which are guaranteed to be unencrypted.
+Any value greater than `0xC` indicates additional attributes associated with this metadata header which are guaranteed to be unencrypted.
 
-An example of an optional attribute which would reside in the guaranteed unencrypted section of metadata would be per-packet fabric fragment attribute. This attribute is not associated with any session or encryption schema and as such must not be encrypted.
+An example of an optional attribute which would reside in the guaranteed unencrypted section of metadata would be per-packet fabric fragment attribute. This attribute is not associated with any session or encryption schema and as such, must not be encrypted.
 
 ### Contextually Encrypted Attributes (Payload attributes)
 
-The metadata header contains a two byte payload length field which is associated with attributes that could have been encrypted. As such, without context, iterating over and parsing the TLVs within this section of payload is undefined behavior as they could be encrypted.
+The metadata header contains a two byte payload length field which is associated with attributes that could be encrypted.
 
 ## Attributes
 
 Attributes are optionally included TLVs that are added to the metadata header. They can be added to either the guaranteed unencrypted section, or in the contextually encrypted section of the metadata header.  Each attribute will be marked with [header] or [payload] respectively to indicate in which metadata section it belongs.
+
