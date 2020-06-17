@@ -2,6 +2,8 @@
 title: 128T Monitoring Agent 2.0 Release Notes
 sidebar_label: '2.0'
 ---
+
+
 ## Release 2.0.1
 
 ### Issues Fixed

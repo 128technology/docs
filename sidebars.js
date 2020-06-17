@@ -67,6 +67,7 @@ module.exports = {
           "howto_conductor_migration",
           "howto_lte",
           "howto_maintenance_mode",
+          "howto_ms365",
           "howto_trusted_ca_certificate",
           "howto_tune_bfd",
         ],
@@ -108,7 +109,8 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_monitoring_agent",
-      "plugin_gre"
+      "plugin_gre",
+      "plugin_mosh"
     ],
     "REST APIs": [
       "api_rest_4.2.0",
@@ -140,7 +142,9 @@ module.exports = {
         "type": "category",
         "label": "128T Monitoring Agent",
         "items": [
+          "release_notes_monitoring_agent_2.1",
           "release_notes_monitoring_agent_2.0",
+          "release_notes_monitoring_agent_1.2",
           "release_notes_monitoring_agent_1.1",
         ],
       },

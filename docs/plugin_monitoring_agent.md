@@ -7,102 +7,114 @@ The 128T Monitoring Agent is an entity for collecting data from a node running 1
 
 The monitoring agent at its core is designed to be able to push data to external platforms. It currently leverages the [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) collection stack on every 128T router. However, the monitoring agent is designed with other tools and scale in mind. The monitoring agent is composed of the following:
 
-* **monitoring-agent-cli**<br/>
+- **monitoring-agent-cli**  
   Used for configuring and interacting with the underlying application
 
-* **collectors**<br/>
+- **collectors**  
   A set of inputs designed to collect data from several sources such as metrics, events etc.
 
-* **targets**<br/>
+- **targets**  
   A set of outputs for collecting and pushing the data to various data sinks such as external monitoring platforms, files on disk etc.
 
 ## Installation
 
 The 128T Monitoring Agent can be obtained from the official 128T software repository. The following versions of the **monitoring-agent** are available for corresponding 128T software version.
 
-| Monitoring Agent | 128T |
-| --- | --- |
-| 128T-monitoring-agent-1.1.1 | 128T >= 4.1.0; 128T < 4.3.0 |
-| 128T-monitoring-agent-2.0.1 | 128T >= 4.3.0 |
+| Monitoring Agent            | 128T                        |
+| --------------------------- | --------------------------- |
+| 128T-monitoring-agent-1.2.1 | 128T >= 4.1.0; 128T < 4.3.0 |
+| 128T-monitoring-agent-2.1.1 | 128T >= 4.3.0               |
 
 The agent can be install using dnf utility. For example.
-```
-# dnf install 128T-monitoring-agent
-Last metadata expiration check: 0:00:31 ago on Tue 28 Apr 2020 02:40:10 PM UTC.
+
+```console
+dnf install 128T-monitoring-agent
+Last metadata expiration check: 0:00:00 ago on Wed 10 Jun 2020 01:20:49 AM UTC.
 Dependencies resolved.
-==============================================================================================================================================================================================================================================================
- Package                                                               Arch                                                   Version                                                   Repository                                                       Size
-==============================================================================================================================================================================================================================================================
+=================================================================================
+ Package                      Arch          Version         Repository      Size
+=================================================================================
 Installing:
- 128T-monitoring-agent                                                 x86_64                                                 2.0.1-2                                                   plugins-staging                                                 5.0 M
+ 128T-monitoring-agent        x86_64        2.1.1-1         128tech        7.0 M
 Installing dependencies:
- telegraf-128tech                                                      x86_64                                                 1.14.0-1                                                  128tech                                                          20 M
+ telegraf-128tech             x86_64        1.14.3-1        128tech         20 M
 
 Transaction Summary
-==============================================================================================================================================================================================================================================================
+=================================================================================
 Install  2 Packages
 
-Total download size: 25 M
-Installed size: 92 M
+Total download size: 27 M
+Installed size: 101 M
 Is this ok [y/N]: y
 Downloading Packages:
-(1/2): 128T-monitoring-agent-2.0.1-2.x86_64.rpm                                                                                                                                                                                24 MB/s | 5.0 MB     00:00
-(2/2): telegraf-128tech-1.14.0-1.x86_64.rpm                                                                                                                                                                                    41 MB/s |  20 MB     00:00
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Total                                                                                                                                                                                                                          40 MB/s |  25 MB     00:00
+(1/2): 128T-monitoring-agent-2.1.1-1.rpm          20 MB/s | 7.0 MB     00:00
+(2/2): telegraf-128tech-1.14.3-1.x86_64.rpm       29 MB/s |  20 MB     00:00
+---------------------------------------------------------------------------------
+Total                                             37 MB/s |  27 MB     00:00
 Running transaction check
 Transaction check succeeded.
 Running transaction test
 Transaction test succeeded.
 Running transaction
-  Preparing        :                                                                                                                                                                                                                                      1/1
-  Running scriptlet: telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     1/2
-  Installing       : telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     1/2
-  Running scriptlet: telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     1/2
+  Preparing        :                                                         1/1
+  Running scriptlet: telegraf-128tech-1.14.3-1.x86_64                        1/2
+  Installing       : telegraf-128tech-1.14.3-1.x86_64                        1/2
+  Running scriptlet: telegraf-128tech-1.14.3-1.x86_64                        1/2
 Created symlink from /etc/systemd/system/multi-user.target.wants/telegraf.service to /usr/lib/systemd/system/telegraf.service.
-  Installing       : 128T-monitoring-agent-2.0.1-2.x86_64                                                                                                                                                                                                 2/2
-  Running scriptlet: 128T-monitoring-agent-2.0.1-2.x86_64                                                                                                                                                                                                 2/2
-  Running scriptlet: telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     2/2
-  Running scriptlet: 128T-monitoring-agent-2.0.1-2.x86_64                                                                                                                                                                                                 2/2
+  Installing       : 128T-monitoring-agent-2.1.1-1.x86_64                    2/2
+  Running scriptlet: 128T-monitoring-agent-2.1.1-1.x86_64                    2/2
+Created symlink from /etc/systemd/system/128T.service.wants/128T-monitoring-agent.service to /usr/lib/systemd/system/128T-monitoring-agent.service.
+Created symlink from /etc/systemd/system/multi-user.target.wants/128T-monitoring-agent.service to /usr/lib/systemd/system/128T-monitoring-agent.service.
+  Running scriptlet: telegraf-128tech-1.14.3-1.x86_64                        2/2
+  Running scriptlet: 128T-monitoring-agent-2.1.1-1.x86_64                    2/2
 Removed symlink /etc/systemd/system/multi-user.target.wants/telegraf.service.
-  Verifying        : 128T-monitoring-agent-2.0.1-2.x86_64                                                                                                                                                                                                 1/2
-  Verifying        : telegraf-128tech-1.14.0-1.x86_64                                                                                                                                                                                                     2/2
+  Verifying        : 128T-monitoring-agent-2.1.1-1.x86_64                    1/2
+  Verifying        : telegraf-128tech-1.14.3-1.x86_64                        2/2
 
 Installed:
-  128T-monitoring-agent.x86_64 2.0.1-2                                                                                            telegraf-128tech.x86_64 1.14.0-1
+  128T-monitoring-agent.x86_64 2.1.1-1      telegraf-128tech.x86_64 1.14.3-1
 
 Complete!
 ```
 
 ## Configuration
 
+### Version History
+
+| Release      | Modification                   |
+| ------------ | ------------------------------ |
+| 1.2.0, 2.1.0 | `lib-directory` was introduced |
+
 The monitoring agent has its own set of configurations and looks for inputs from specific directories on disk. By default, the configuration for the agent should be present in `/etc/128t-monitoring/config.yaml` and uses YAML format which looks something like this:
 
-```
+```yaml
 enabled: true
+lib-directory: /var/lib/128t-monitoring
 tags:
--  key: router
-   value: ${ROUTER}
+  - key: router
+    value: ${ROUTER}
 sample-interval: 60
 push-interval: 300
 inputs:
-- name: events
-- name: t128_metrics
-  include-outputs: [message_queue]
-- name: t128_device_state
-- name: t128_peer_path
-- name: lte_metric
-  exclude-outputs: [file]
+  - name: events
+  - name: t128_metrics
+    include-outputs: [message_queue]
+  - name: t128_device_state
+  - name: t128_peer_path
+  - name: lte_metric
+    exclude-outputs: [file]
 outputs:
-- name: file
-- name: message_queue
+  - name: file
+  - name: message_queue
 ```
 
-The `enabled` field is meant as global toggle for applying the monitoring agent functionality.  When set to `disabled` the monitoring agent will remain dormant on the 128T.
+The `enabled` field is meant as global toggle for applying the monitoring agent functionality. When set to `disabled` the monitoring agent will remain dormant on the 128T.
+
+`lib-directory` is the root directory for the Monitoring Agent. Other directores exist relative to it. This is useful when intending to isolate a set of Monitoring Agent elements from others.
 
 Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `${HOSTNAME}`, `${ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
 
-`sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration.  It is recommended to configure the `push-interval` as a multiple of `sample-interval`.
+`sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration. It is recommended to configure the `push-interval` as a multiple of `sample-interval`.
 
 The `inputs` represent a single unit of collection. This can be a combination of inputs available from `telegraf` as well as other inputs developed by 128T. The function and configuration of each of the 128T provided inputs can be found in subsequent sections. For `telegraf` inputs please refer to the [influx documentation online](https://docs.influxdata.com/telegraf/v1.13/plugins/plugin-list/#input-plugins). Each `input` can be a combination of one or more collectors and can contain other collector specific information. For each of the inputs, a user can also configure an `include-outputs` which is a list of outputs to send the collected information to. This allows the user to build a matrix of inputs and outputs and provides a granular control over which input should be sent to what output. Similarly, the user can also configure an `exclude-outputs` which will include all defined outputs except the one specified.
 
@@ -110,7 +122,7 @@ The `outputs` represent a data sink where the collected information is to be del
 
 ## Directory Structure
 
-The `monitoring-agent` uses a well-defined directory structure where it derives the inputs from various configuration. The following directories are especially important:
+The `monitoring-agent` uses a well-defined directory structure where it derives the inputs from various configuration. As described above, the base of the directory structure can be specified using the `lib-directory` configuration field. Directories exist relative to that one. The following directories are especially important:
 
 ### Inputs
 
@@ -132,7 +144,7 @@ The `config` directory contains the fully formed telegraf config files created b
 
 For example, the using the `t128_metrics` input and the `file` output in the examples section below will result in a configuration file such as:
 
-```
+```toml
 [global_tags]
 router = "lte-router"
 node = "lte-node"
@@ -175,7 +187,7 @@ This example configures the `t128_metrics` collector to gather a set of default 
 
 Path: `/var/lib/128t-monitoring/inputs/t128_metrics.conf`
 
-```
+```toml
 [[inputs.t128_metrics]]
     ## When configured, the metric collector input will pull KPIs from the 128T system
     ## running on the current node. Depending on the KPI, the information can be used for
@@ -210,7 +222,7 @@ This example gathers cpu, disk, and memory metrics from the linux host using nat
 
 Path: `/var/lib/128t-monitoring/inputs/system.conf`
 
-```
+```toml
 [[inputs.cpu]]
   ## Whether to report per-cpu stats or not
   percpu = true
@@ -236,7 +248,7 @@ Configuring the file output will write metrics to the local filesystem. This can
 
 Path: `/var/lib/128t-monitoring/outputs/file.conf`
 
-```
+```toml
 [[outputs.file]]
   ## Files to write to, "stdout" is a specially handled file.
   files = ["stdout", "/tmp/metrics.out"]
@@ -271,7 +283,7 @@ This example sends data to a kafka broker:
 
 `/var/lib/128t-monitoring/outputs/kafka.conf`
 
-```
+```toml
 [[outputs.kafka]]
   ## URLs of kafka brokers
   brokers = ["<ip>:9092"]
@@ -281,15 +293,13 @@ This example sends data to a kafka broker:
   data_format = "json"
 ```
 
-
-
 #### Syslog
 
 In this example data is sent via syslog:
 
 `/var/lib/128t-monitoring/outputs/syslog.conf`
 
-```
+```toml
 [[outputs.syslog]]
   address = "udp://<ip>:514"
   default_sdid = "128T"
@@ -311,7 +321,7 @@ The `monitoring-agent validate` command will ensure that the monitoring-agent co
 
 The `monitoring-agent-cli sample` command can be used to view the various collectors that are created as part of the 128T monitoring agent. The `list-available` command will simply show the set of available inputs (and outputs) that are packaged as part of the 128T monitoring-agent. These are in addition to the ones available natively via telegraf. For example:
 
-```
+```console
 # monitoring-agent-cli sample list-available
 inputs:
 - t128_device_state
@@ -324,7 +334,7 @@ inputs:
 
 The configuration for each of these inputs can be viewed via `monitoring-agent-cli sample view <plugin_name>` command such as:
 
-```
+```console
 # monitoring-agent-cli sample view t128_metrics
 [[inputs.t128_metrics]]
     ## When configured, the metric collector input will pull KPIs from the 128T system
@@ -348,10 +358,11 @@ The configuration for each of these inputs can be viewed via `monitoring-agent-c
     ##     peer_path = ["path1"]
 ```
 
-### Generate
+### Generation
+
 The `monitoring-agent-cli generate` command can be used to (re-)generate the telegraf configuration files. This command does not restart the telegraf services and is a good way to pre-stage configuration for testing.
 
-```
+```console
 # monitoring-agent-cli generate
 The command does not start/restart 128T-telegraf services but can still impact already running instances. Do you want to continue? [Y/n]: y
 Generating t128_top_analytics
@@ -362,9 +373,9 @@ Generating t128_device_state
 
 When the `monitoring-agent-cli configure` command is run, it will first validate and report any errors to the user. Once valid configuration is in place, the configure command does the following at a high level:
 
-* For each of the configured and enabled inputs, generate a telegraf config file in the `/var/lib/128t-monitoring/config` directory
+- For each of the configured and enabled inputs, generate a telegraf config file in the `/var/lib/128t-monitoring/config` directory
 
-* Launch an instance of the `128T-telegraf` service for each of the configured inputs which allows us to collect each input independently.
+- Launch an instance of the `128T-telegraf` service for each of the configured inputs which allows us to collect each input independently.
 
 At this point, each input will be running a telegraf instance and will allow the collection of inputs & outputs to run on the system.
 
@@ -372,8 +383,8 @@ At this point, each input will be running a telegraf instance and will allow the
 
 Once the Monitoring Agent has configured and started the `128T-telegraf`services, you can use the command `systemctl list-units 128T-telegraf*` to list them out.
 
-```
-#systemctl list-units 128T-telegraf*
+```console
+# systemctl list-units 128T-telegraf*
 UNIT                                    LOAD   ACTIVE SUB     DESCRIPTION
 128T-telegraf@events.service            loaded active running 128T telegraf service for events
 128T-telegraf@system.service            loaded active running 128T telegraf service for system
@@ -384,12 +395,24 @@ UNIT                                    LOAD   ACTIVE SUB     DESCRIPTION
 
 Additionally, its often useful to test the input configuration before full rollout. This can be easily accomplished by the `test-input` command.
 
-```
+```console
 # monitoring-agent-cli test-input t128_device_state
 Testing input t128_device_state
 2020-04-15T06:51:17Z I! Starting Telegraf 1.14.0
 2020-04-15T06:51:17Z D! [agent] Initializing plugins
 > device-interface-state,device-interface=dpdk1-lan,host=t127-dut2.openstacklocal,router=router1 adminStatus="ADMIN_UP",enabled=true,operationalStatus="OPER_UP",redundancyStatus="NON_REDUNDANT" 1586933478000000000
+```
+
+### Stopping Services
+
+The `monitorinag-agent-cli stop` command can be used to stop `128T-telegraf` services launched by the `configure` command.
+
+```console
+# monitoring-agent-cli stop
+Stopping telegraf service 128T-telegraf@t128_metrics.service
+Stopping telegraf service 128T-telegraf@t128_events.service
+Stopping telegraf service 128T-telegraf@t128_arp_state.service
+Stopping telegraf service 128T-telegraf@t128_device_state.service
 ```
 
 ## 128T Collectors
@@ -400,7 +423,7 @@ The 128T monitoring-agent comes pre-packaged with a set of collectors to assist 
 
 The `metricCollector128t` python executable is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The configuration file in a `TOML` definition of metrics and has the following format:
 
-```
+```toml
 [[metric]]
   name = "service"
   [metric.fields]
@@ -420,9 +443,41 @@ The `name` becomes the name of the measurement in the context of influxdb format
 
 ### Event Collector
 
+#### Version History
+
+| Release      | Modification                            |
+| ------------ | --------------------------------------- |
+| 1.2.0, 2.1.0 | `t128_events` input type was introduced |
+
 The event collector can be used for collecting and pushing events for various categories such as admin, alarm, system, traffic and provisioning as they occur on the system. The type of the event is available via a `tag` and can be used for filtering only specific events as desired. For example, the following configuration can be used for pushing just the `alarm` and `admin` event
 
+```toml
+[[inputs.t128_events]]
+  ## Create a stream of 128T events for alarm, audit etc. This information is useful for
+  ## monitoring the health of the system.
+
+  ## A (unique) file to use for index tracking. This tracking allows each
+  ## event to be produced once. By default, no tracking is used and events are
+  ## produced starting from the point telegraf is launched.
+  # index-file = "/var/lib/128t-monitoring/state/events.index"
+
+  ## The name of the log file to produce to /var/log/128t-monitoring/<log-name>.log
+  # log-name = "event_collector"
+
+  ## The TANK topic to consume. Should be "events" or "offline_events".
+  # topic = "events"
+
+  ## input event filtering based on type (admin, alarm, system, traffic, provisioning)
+  ## NOTE: For information on filtering severity refer to the output configuration example
+  [inputs.t128_events.tagpass]
+  type = ["alarm", "admin"]
 ```
+
+:::important
+In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.
+:::
+
+```toml
 [[inputs.execd]]
   ## Create a stream of 128T events for alarm, audit etc. This information is useful for
   ## monitoring the health of the system.
@@ -436,11 +491,18 @@ The event collector can be used for collecting and pushing events for various ca
   type = ["alarm", "admin"]
 ```
 
-### Device interface state collector
+### Device Interface State Collector
 
-The `deviceInterfaceStateCollector128t` collector can be used for monitoring the admin, oper and redundancy status of various device-interfaces configured on the node. The name is available as `device-interface` tag and telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
+#### Version History
 
-```
+| Release      | Modification                     |
+| ------------ | -------------------------------- |
+| 1.2.1, 2.1.1 | `mac-address` tag was introduced |
+
+
+The `deviceInterfaceStateCollector128t` collector can be used for monitoring the admin, oper and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
+
+```toml
 [[inputs.exec]]
   ## Collect information about the 128T device-interface admin, operational and
   ## redundancy status. This information is useful for monitoring the system health.
@@ -459,13 +521,14 @@ The `deviceInterfaceStateCollector128t` collector can be used for monitoring the
   ## from telegraf. For example:
   ## [[inputs.exec.tagpass]]
   ##     device-interface = ["wan1"]
+  ##     mac-address = ["00:0a:95:9d:68:16"]
 ```
 
 ### Peer Path State collector
 
 The `peerPathStateCollector128t` collector can be used for monitoring the up/down status of all the peer paths on the node. The various part of a peer-path such as `adjacentAddress` and `networkInterface` are available as tags which can be filtered. For example:
 
-```
+```toml
 [[inputs.exec]]
   ## Collect information about the 128T adjacency peer-path status. This information
   ## is useful to monitoring the secure WAN connectivity to the peers
@@ -488,11 +551,40 @@ The `peerPathStateCollector128t` collector can be used for monitoring the up/dow
 
 ```
 
+### Arp State Collector
+
+The `arpStateCollector128t` collector can be used for monitoring the arp table status of a network interface configured on the node. The device interface name, network interface name, vlan, ip address, and destination mac will be found as tags and telegraf tagpass can be used to filter specific arp entries as needed. For example:
+
+```toml
+[[inputs.exec]]
+  ## Collect information about the 128T arp table.
+  ## This information is useful for monitoring interface's next hop reachability.
+  commands = ["/usr/bin/arpStateCollector128t"]
+
+  ## Timeout for the arp state collector to finish
+  timeout = "5s"
+
+  ## Data format to consume.
+  ## Each data format has its own unique set of configuration options, read
+  ## more about them here:
+  ## https://github.com/influxdata/telegraf/blob/master/docs/DATA_FORMATS_INPUT.md
+  data_format = "influx"
+
+  ## To filter on select properties of the arp entry, you can use the `tagpass` and `tagdrop` concepts
+  ## from telegraf. For example:
+  ## [[inputs.exec.tagpass]]
+  ##     device-interface = ["wan1"]
+  ##     network-interface = ["wan1intf"]
+  ##     vlan = ["128"]
+  ##     ip-address = ["192.169.128.0"]
+  ##     destination-mac = ["00:0a:95:9d:68:16"]
+```
+
 ### LTE Collector
 
 The `lteMetricCollector128t` collector when run will scan the current node configuration for any 128T supported and configured LTE devices. This collector can be used for pushing the `signal-strength` and `carrier` information to the monitoring stack. For example:
 
-```
+```toml
 [[inputs.exec]]
   ## Collect the signal-strength and carrier information from configured LTE card(s) on
   ## the system. This information is useful for monitoring any fluctuations in carrier
@@ -510,9 +602,10 @@ The `lteMetricCollector128t` collector when run will scan the current node confi
 ```
 
 ### Top Analytics Collector
+
 The `topAnalyticsCollector128t` collector can be used for monitoring the top sources, top sessions and top applications on the router. The different aspects of each of these data sources are easily tunable using the input configuration.
 
-```
+```toml
 [[inputs.top_analytics]]
     # # By default all the data sources below are enabled along with their default properties.
     # [[inputs.top_analytics.sessions]]

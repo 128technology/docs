@@ -95,12 +95,12 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip netns set dhcp-server-ns-1 1073742075" failed: RTNETLINK answers: No space left on device
   ```
-  Until the system is upgraded to 4.4.0, this issue can be mitigated restarting the 128T process.
+  Until the system is upgraded to 4.4.0, this issue can be mitigated by restarting the 128T process.
 ------
 - **I95-33983** User role can see a list of config exports by executing `show config exports`
 ------
 - **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
-  Until the system is upgraded to 4.4.0, this issue can be mitigated by rebooting the 128T.
+  Until the system is upgraded to 4.4.0, this issue can be mitigated by restarting the 128T.
 ------
 - **I95-34334** Audit events are not triggered on download and version query timeouts.  Audit events have been added to provide clarity to the administrator in the event that downloads fail to complete.
 ------
@@ -120,7 +120,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   ```
   Enhanced logging to indicate receiving interface during invalid ARP classification and add the packet to the `highwayExceptions.pcap`.
 ------
-- **I95-34790** A HA router with over 500 peer paths and high rate of traffic, may result in some flows being black-holed during a node failover event.
+- **I95-34790** Dual node HA routers with large numbers of peer paths (>500) may see some flows get blackholed after a node failover occurs.
 ------
 - **I95-34882** `show user` is missing from `search commands regex ".*"`
 ------
@@ -152,7 +152,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-35164** Downloading a new software image during an upgrade will incorrectly complete the upgrade if the download was successful before the upgrade has fully completed
 ------
-- **I95-35188** Adding a tenant or changing the order of tenant in the configuration can lead to traffic being dropped upon session recovery
+- **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
   Until the system is upgraded to 4.4.0, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
 ------

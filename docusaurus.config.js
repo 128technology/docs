@@ -28,6 +28,11 @@ module.exports = {
       indexName: '128technology',
       algoliaOptions: {},
     },
+    googleAnalytics: {
+      trackingID: 'UA-167298415-2',
+      // Optional fields.
+      anonymizeIP: true, // Should IPs be anonymized?
+    },
   },
   presets: [
     [

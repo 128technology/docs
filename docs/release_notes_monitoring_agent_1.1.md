@@ -1,7 +1,9 @@
 ---
 title: 128T Monitoring Agent 1.1 Release Notes
-sidebar_label: 1.1
+sidebar_label: '1.1'
 ---
+
+
 ## Release 1.1.1
 
 ### Issues Fixed
