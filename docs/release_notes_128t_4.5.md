@@ -23,8 +23,6 @@ sidebar_label: 4.5
 ------
 - **I95-31405** [SVR Savings Proof Points](about_svr_savings.md)
 ------
-- **I95-32599** Ethernet over SVR
-------
 - **I95-32783** [`show assets summary` enhancements](cli_reference.md#show-assets-summary)
 ------
 - **I95-33174** LTE Band Management

@@ -1,5 +1,5 @@
 ---
-title: Secure Vector Routing Saving Proof Points
+title: Secure Vector Routing Savings Proof Points
 sidebar_label: SVR Savings
 description: 'Session Smart tunnel-free SD-WAN affords cost savings of 30-40% over traditional tunnel-based SD-WAN solutions.  The proof is in the pudding, as can be realized with the built-in proof points tool.'
 ---
