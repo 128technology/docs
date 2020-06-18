@@ -13,6 +13,8 @@ sidebar_label: 4.5
 ------
 - **I95-16104** Management traffic over forwarding interface
 ------
+- **I95-22304** Add support for re-running commands in PCLI history with "!"
+------
 - **I95-23898** Improved feedback on PCLI when invalid arguments are provided to command
 ------
 - **I95-28366** Greatly reduced memory consumption of PCLI, allowing many more concurrently users
@@ -32,6 +34,10 @@ sidebar_label: 4.5
 - **I95-33351** Optimize FIB port-range storage
 ------
 - **I95-33358** Create static host name mappings at router level
+------
+- **I95-33375** Address Latest Vulnerabilities 4.5
+------
+- **I95-33427** Per-Service Rate Limiting
 ------
 - **I95-33484** Silicom new platform testing
 ------
