@@ -2,7 +2,7 @@
 title: 128T Metadata
 ---
 
-As part of 128T's operation, it performs functions such as flow classification, route selection, load balancing, etc. upon receipt of a first packet from a new five tuple source. Before sending this packet another 128T, it inserts metadata, a series of TLVs which describe attributes of the session, into the payload of the packet. Likewise, in the reverse direction, the first reverse packet will include metadata in the form of a different set of TLVs associated with decisions made on the egress 128T.
+As part of 128T's operation, it performs functions such as flow classification, route selection, load balancing, etc. upon receipt of a first packet from a new five tuple source. Before sending this packet another 128T, it inserts metadata, a series of [TLVs](https://en.wikipedia.org/wiki/Type-length-value) which describe attributes of the session, into the payload of the packet. Likewise, in the reverse direction, the first reverse packet will include metadata in the form of a different set of TLVs associated with decisions made on the egress 128T.
 
 These metadata inclusions are supplied by and exchanged between nodes within a router when deployed as a HA pair; this is frequently referred to as _inter-node_ metadata.
 
@@ -14,7 +14,7 @@ Irrespective of whether it is being used between nodes or between routers, the f
 
 There are three main types of metadata in use within the 128T router:
 1. Session metadata. This is the ‘signaling exchange’ sent between routers. It occurs at the outset of a session, during a metadata handshake, and will reoccur when properties of the session change and need to be re-signaled.
-2. Per-packet metadata. This type of metadata is mostly associated with changes made to packets regardless of what session they are associated with. An example of this would be fabric fragmentation strategy which adds unencrypted metadata to a series of packets telling the egress node how to reassemble them.
+2. Per-packet metadata. This type of metadata is mostly associated with changes made to packets regardless of what session they are associated with. An example of this is when 128T needs to fragment packets destined for another 128T; in this case, it adds "fabric fragmentation" metadata to each of the pieces, telling the egress node how to reassemble them.
 3. BFD metadata. In a unique category unto itself, BFD metadata appears in every BFD packet exchanged between routers. It is a lightweight payload used to communicate service changes (e.g., when an active node fails and activity is resumed by a highly available counterpart), used as part of the BFD application to measure link quality.
 
 ## Metadata Insertion
@@ -28,7 +28,7 @@ These two comprise what is known as the “metadata handshake” -- that is, the
 3. Fragmented packets are being sent from a 128T router to another 128T router
 4. Packets are being transformed to UDP between nodes because the original protocol has no support for L4 port numbers (and hence, SVR waypoint logic cannot be used. i.e. ICMP)
 5. Packets are being transformed to UDP from TCP between routers due to the detection of a protocol-strict firewall between them
-6. A NAT exists between two routers and a router detects that the NAT’s address has changed.  Detection is done using a BFD exchange (not edescribed in this document)
+6. A NAT exists between two routers and a router detects that the NAT’s address has changed.  Detection is done using a BFD exchange (not described in this document)
 7. BFD Metadata
 
 Metadata is always inserted directly after the L4 header of a packet.
@@ -65,7 +65,6 @@ Each router maintains local information about the utilization of all services wh
 
 - The configuration of the fabric. This is where administrators define their preferences and requirements for session traffic. This includes application-based thresholds for the minimum viable link quality requirements (packet loss, jitter, latency), as well as the administrative preference for which path to use.
 - Path (or link) data, as learned through BFD. This includes real-time path measurement for latency and jitter, as well as real-time reporting of observed packet loss.
-- Router and service utilization data, as learned via metadata exchanges. As defined in this document, Routers exchange metadata with each other in order to (among other things) report on the active load for a given service, as well as their own load. This “service feedback” information is sent from the egress router to the ingress router, and affords the ability for the ingress router to make well-informed decisions for future sessions.
 
 ### Service Feedback
 
