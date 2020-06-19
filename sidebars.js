@@ -29,6 +29,7 @@ module.exports = {
       "concepts_interface_types",
       "concepts_linux_host_networking",
       "concepts_network_planes",
+      "concepts_metadata",
       "concepts_metrics",
       "concepts_machine_communication",
       "concepts_pcli",
