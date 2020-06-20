@@ -1,4 +1,7 @@
-## Configuring Dual Router High Availability
+---
+title: Configuring Dual Router High Availability
+sidebar_label: High Availability (Dual Router)
+---
 
 There are several different high availability models possible with the 128T routing software. This document covers *dual router high availability*, which is when two instances of the 128T software are each configured as separate routers (rather than as two nodes within a single router). This is characterized by:
 
