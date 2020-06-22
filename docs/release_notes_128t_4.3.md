@@ -3,6 +3,33 @@ title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
 
+## Release 4.3.8
+
+### Issues Fixed
+
+- **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
+------
+- **I95-35313** Startup delay of 128T when many peer paths exist
+------
+- **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T
+  Until the system is upgraded to 4.3.8, this issue can be mitigated by restarting the 128T.
+------
+- **I95-35563** Startup race condition can lead to LTE initialization failure
+  Until the system is upgraded to 4.3.8, this issue can be mitigated by restarting the 128T.
+------
+- **I95-36536** SNMP query for ifIndex of interface incorrectly returns
+  ```
+  No Such Object available on this agent at this OID
+  ```
+------
+- **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment
+------
+- **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route
+------
+- **I95-35786** Rare race condition during `rotate logs` PCLI command may cause applications to fault
+------
+- **I95-35866** Addressed latest CVEs
+
 ## Release 4.3.7
 
 ### Issues Fixed
