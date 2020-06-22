@@ -3,6 +3,40 @@ title: 128T 4.4 Release Notes
 sidebar_label: 4.4
 ---
 
+## Release 4.4.1
+
+### Issues Fixed
+
+- **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
+------
+- **I95-35038** Configuration Explorer within GUI can sometimes produce a "Something went wrong" message when searching or scrolling
+------
+- **I95-35313** Startup delay of 128T when many peer paths exist
+------
+- **I95-35354** Downloading a software image during or immediately prior to an upgrade will incorrectly complete the upgrade if the download was successful before the upgrade starts
+------
+- **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T
+  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
+------
+- **I95-35563** Startup race condition can lead to LTE initialization failure
+  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
+------
+- **I95-35584** User unable to login to UI after loading a new web certificate
+  Until the system is upgraded to 4.4.1, this issue can be mititaged by restarting the web server with the command `systemctl restart 128TWeb`
+------
+- **I95-36536** SNMP query for ifIndex of interface incorrectly returns
+  ```
+  No Such Object available on this agent at this OID
+  ```
+------
+- **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment
+------
+- **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route
+------
+- **I95-35786** Rare race condition during `rotate logs` PCLI command may cause applications to fault
+------
+- **I95-35866** Addressed latest CVEs
+
 ## Release 4.4.0
 
 ### New Features and Improvements
