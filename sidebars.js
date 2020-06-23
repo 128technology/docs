@@ -110,6 +110,7 @@ module.exports = {
       "cli_reference",
     ],
     "Plugins": [
+      "plugin_m800_watchdog",
       "plugin_monitoring_agent",
       "plugin_gre",
     ],

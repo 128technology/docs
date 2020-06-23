@@ -13,11 +13,11 @@ sidebar_label: 4.5
 ------
 - **I95-16104** Management traffic over forwarding interface
 ------
-- **I95-22304** Add support for re-running commands in PCLI history with "!"
+- **I95-22304** [Re-run commands in PCLI history with "!"](concepts_pcli.md#-run-previous-command)
 ------
 - **I95-23898** Improved feedback on PCLI when invalid arguments are provided to command
 ------
-- **I95-28366** Greatly reduced memory consumption of PCLI, allowing many more concurrently users
+- **I95-28366** Greatly reduced memory consumption of PCLI, allowing many more concurrent users
 ------
 - **I95-29043** [Asset Connection Resiliency](config_asset_connection_resiliency.md)
 ------
@@ -29,7 +29,7 @@ sidebar_label: 4.5
 ------
 - **I95-33174** LTE Band Management
 ------
-- **I95-33215** Audiocodes M800 watchdog integration
+- **I95-33215** [Audiocodes M800 watchdog](plugin_m800_watchdog.md)
 ------
 - **I95-33351** Optimize FIB port-range storage
 ------

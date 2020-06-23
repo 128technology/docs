@@ -71,3 +71,16 @@ admin@node1.router1 (router[name=router1])# bad <ctrl-z>
 Command 'bad' not found (use '?' for help)
 admin@node1.router1#
 ```
+
+### `!` (run previous command)
+
+`!` can be used to excute a previously executed command from the PCLI's history.
+:::note
+PCLI history can be seen by running `show history`.
+:::
+
+The `!` command offers three options:
+
+1. !! to re-run the last command run
+2. !&lt;number&gt; to re-run a specific command from the PCLI history. Negative numbers are supported to perform a reverse search of the history. (i.e., `!-1` = `!!`)
+3. !&lt;string&gt; to re-run the most recent substring match from the PCLI history (reverse search of history).
