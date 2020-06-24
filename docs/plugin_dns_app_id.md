@@ -3,9 +3,9 @@ title: DNS App Id Plugin
 sidebar_label: DNS App Id
 ---
 
-The DNS App ID plugin will rely on the DNS cache plugin for hostname resolution and to serve an API that the DNS App Id Plugin will rely on to identify application sessions based on IP addresses.
+The DNS App ID plugin will identify traffic passing through your 128T router by applying pattern matching to FQDN names. You can then configure 128T services and associate application names to influence routing policy. You can read more about 128T and its application identification concept [here](concepts_appid.md).
 
-Read more about the DNS Cache plugin [here](plugin_dns_cache.md).
+This plugin will rely on the [DNS Cache](plugin_dns_cache.md) plugin for hostname resolution.
 
 ## Installation
 
@@ -26,10 +26,9 @@ It is recommended to use the conductor GUI > Plugins page for installing plugins
 After installing the plugin, the 128T service on the conductor should be restarted for the changes to take effect.
 ::::
 
-
 ## Configuration
 
-In addition to the configuration snippet from the dns-cache plugin, add the below configuration:
+In addition to the configuration snippet from the [dns-cache](plugin_dns_cache.md) plugin, add the below configuration:
 ```
 configure
     authority
@@ -42,17 +41,13 @@ configure
                 custom-apps cnn
                     name cnn
                     patterns cnn.com
+                    patterns .*\\.cnn.com
                 exit
             exit
         exit
     exit
 exit
 ```
-
-## Use Cases
-To identify traffic passing through a 128T Router by applying pattern matching to fqdn names.
-
-You can then configure additional services and service-routes for the identified applications.
 
 ### Built-In Patterns
 
@@ -64,11 +59,31 @@ The plugin contains built in application patterns for Gmail, Google Drive, and W
 | Google Drive   | [link](https://support.google.com/a/answer/2589954?hl=en) |
 | Windows Update | [link 1](https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#211-connection-from-the-wsus-server-to-the-internet) [link 2](https://docs.microsoft.com/en-us/windows/deployment/update/windows-update-troubleshooting#device-cannot-access-update-files) |
 
+#### Example Built-in Pattern
+Below is the example pattern matching we apply to determine gmail applications.
+```
+    "name": "gmail",
+    "patterns": [
+      ".*\\.client-channel\\.google\\.com",
+      "accounts\\.google\\.com",
+      "apis\\.google\\.com",
+      "clients.*\\.google\\.com",
+      "contacts\\.google\\.com",
+      "hangouts\\.google\\.com",
+      ".*\\.googleusercontent\\.com",
+      "mail\\.google\\.com",
+      "www\\.google\\.com",
+      ".*\\.gstatic\\.com",
+      "ogs\\.google\\.com",
+      "play\\.google\\.com"
+    ]
+```
+
 ### Custom Patterns
-Shown in the above configuration snippet, you can also add your own custom applications and regex patterns to identify new applications passing through your router. The identification is dynamic so you just need to update the configuration on the Conductor to include new apps or patterns.
+Shown in the 128T configuration snippet, you can also add your own custom applications and regex patterns to identify new applications passing through your router. The identification is dynamic so you just need to update the configuration on the Conductor to include new apps or patterns.
 
 :::important
-If you configure invalid patterns, you will see the log message `invalid pattern for {name}, will never match!`. This means the pattern you configured is not a valid regex therefore the pattern matching will fail for the app {name} until the configuration is fixed.
+If you configure invalid regex patterns, you will see the log message `invalid pattern for {name}, will never match!`. This means the pattern you configured is not a valid regex therefore the pattern matching will fail for the app {name} until the configuration is fixed.
 ::::
 
 ## Troubleshooting

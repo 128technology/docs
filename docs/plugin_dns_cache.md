@@ -5,6 +5,8 @@ sidebar_label: DNS Cache
 
 The 128T-dns-cache plugin provides a DNS caching service on your 128T router by forwarding all traffic on a configured `ingress-service` and `tenant` to `dnsmasq`. By default it uses existing system configuration for nameserver resolution but supports optionally configuring custom server addresses.
 
+By enabling this plugin, you can provide DNS caching with fast resolution times to your network.
+
 ## Installation
 
 The following versions are available for corresponding 128T software versions:
@@ -41,16 +43,6 @@ config
             name wan
             security aes1
         exit
-        security aes1
-            name aes1
-            encryption-cipher ${AES_ENC_CYPHER}
-            hmac-cipher ${HMAC_CIPHER}
-            encryption-iv ${AES_ENC_IV}
-            encryption-key ${AES_ENC_KEY}
-            hmac-key ${HMAC_KEY_256}
-            encrypt ${ENC_ENABLED}
-            hmac ${HMAC_ENABLED}
-        exit
         service internet
             name internet
             security internal
@@ -86,33 +78,11 @@ config
                 source _internal_
             exit
         exit
-        router ${DUT1_ROUTER}
-            name ${DUT1_ROUTER}
-            location usa
-            inter-node-security internal
-            node ${DUT1_NODE_NAME}
-                name ${DUT1_NODE_NAME}
-                role conductor
-            exit
-        exit
         router ${DUT2_ROUTER}
             name ${DUT2_ROUTER}
-            location usa
-            inter-node-security internal
-            system
-                log-level ${DUT2_LOG_LEVEL}
-                log-category ATCS
-                    name ATCS
-                    log-level info
-                exit
-                log-category DATA
-                    name DATA
-                    log-level info
-                exit
-            exit
             node ${DUT2_NODE_NAME}
                 name ${DUT2_NODE_NAME}
-                role router
+                role combo
                 device-interface inband-mgmt
                     name inband-mgmt
                     pci-address ${DUT2_MGMT_PCI}
@@ -153,14 +123,19 @@ config
 exit
 ```
 
-
-## Use Cases
-To provide fast DNS name resolution for a LAN.
-
+To configure custom server addresses for dnsmasq, add the `addresses` field:
+```
+dns-cache
+    enabled          true
+    addresses        1.1.1.1
+    addresses        2.2.2.2
+    tenant           dns
+    ingress-service  dns
+exit
+```
 
 ## Thirdparty Software & Licenses
 - dnsmasq (GNU GPL v2, v3)
-
 
 ## Troubleshooting
 To verify that the services are running properly on the 128T router:

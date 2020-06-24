@@ -112,7 +112,7 @@ module.exports = {
       "plugin_gre",
       "plugin_mosh",
       "plugin_dns_cache",
-      "plugin_dns_app_id"
+      "plugin_dns_app_id",
     ],
     "REST APIs": [
       "api_rest_4.2.0",
