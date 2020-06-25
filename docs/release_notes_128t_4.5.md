@@ -37,7 +37,7 @@ sidebar_label: 4.5
 ------
 - **I95-33375** Address Latest Vulnerabilities 4.5
 ------
-- **I95-33427** Per-Service Rate Limiting
+- **I95-33427** [Per-Service Rate Limiting](config_rate_limiting.md)
 ------
 - **I95-33484** Silicom new platform testing
 ------

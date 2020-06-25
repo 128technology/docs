@@ -30,6 +30,7 @@ module.exports = {
       "concepts_interface_types",
       "concepts_linux_host_networking",
       "concepts_network_planes",
+      "concepts_metadata",
       "concepts_metrics",
       "concepts_machine_communication",
       "concepts_pcli",
@@ -55,6 +56,7 @@ module.exports = {
           "config_transition_standalone_to_ha",
           "config_nat",
           "config_ospf",
+          "config_rate_limiting",
           "config_snmp",
           "config_snmp_metrics",
           "config_tenants",
@@ -113,6 +115,7 @@ module.exports = {
       "plugin_m800_watchdog",
       "plugin_monitoring_agent",
       "plugin_gre",
+      "plugin_mosh",
     ],
     "REST APIs": [
       "api_rest_4.2.0",
