@@ -3,7 +3,9 @@ title: DNS Cache Plugin
 sidebar_label: DNS Cache
 ---
 
-The 128T-dns-cache plugin provides a DNS caching service on your 128T router by forwarding all traffic on a configured `ingress-service` and `tenant` to `dnsmasq`. By default it uses existing system configuration for nameserver resolution but supports optionally configuring custom server addresses.
+The 128T-dns-cache plugin provides a DNS caching service on your 128T router by forwarding all traffic on a configured `ingress-service` and `tenant` to `dnsmasq`. By default it uses existing system configuration for nameserver resolution but supports optionally configuring custom server addresses. The plugin is implemented as a service function chain (SFC) where the DNS traffic received on the ingress interface is detoured through a Kernel Network Interface (KNI) to be cached by `dnsmasq`. A typical flow of the packets for the plugin is illustrated below:
+
+lan-intf (lan-tenant) > `ingress-service` > `dnsmasq` > dns-kni (`tenant`) > egress-service > wan-intf
 
 By enabling this plugin, you can provide DNS caching with fast resolution times to your network.
 
