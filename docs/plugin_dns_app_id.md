@@ -28,7 +28,7 @@ After installing the plugin, the 128T service on the conductor should be restart
 
 ## Configuration
 
-In addition to the configuration snippet from the [dns-cache](plugin_dns_cache.md) plugin, add the below configuration:
+In addition to the configuration snippet from the [dns-cache](plugin_dns_cache.md) plugin, the below configuration shows an example of dns-app-id configuration:
 ```
 configure
     authority
@@ -59,31 +59,35 @@ The plugin contains built in application patterns for Gmail, Google Drive, and W
 | Google Drive   | [link](https://support.google.com/a/answer/2589954?hl=en) |
 | Windows Update | [link 1](https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#211-connection-from-the-wsus-server-to-the-internet) [link 2](https://docs.microsoft.com/en-us/windows/deployment/update/windows-update-troubleshooting#device-cannot-access-update-files) |
 
-#### Example Built-in Pattern
-Below is the example pattern matching we apply to determine gmail applications.
-```
-    "name": "gmail",
-    "patterns": [
-      ".*\\.client-channel\\.google\\.com",
-      "accounts\\.google\\.com",
-      "apis\\.google\\.com",
-      "clients.*\\.google\\.com",
-      "contacts\\.google\\.com",
-      "hangouts\\.google\\.com",
-      ".*\\.googleusercontent\\.com",
-      "mail\\.google\\.com",
-      "www\\.google\\.com",
-      ".*\\.gstatic\\.com",
-      "ogs\\.google\\.com",
-      "play\\.google\\.com"
-    ]
-```
+As you can see in the configuration snippet above, all you need to configure for the builtin-apps are the names of the apps you wish to include in our pattern matching. The values you can configure are `gmail`, `google-drive`, and `windows-update`.
+
 
 ### Custom Patterns
-Shown in the 128T configuration snippet, you can also add your own custom applications and regex patterns to identify new applications passing through your router. The identification is dynamic so you just need to update the configuration on the Conductor to include new apps or patterns.
+Also shown in the configuration snippet is the custom-app `cnn` that includes a list of patterns to be applied. Each pattern must be a valid regex that will be applied to a FQDN to identify the application. The identification is dynamic so you just need to update the configuration on the conductor to include new apps or patterns for your routers.
+
+#### Example
+This example shows our builtin gmail application's pattern matching configured as a custom-app. You should not use this example in production, but is intended to document how to build out complicated pattern matching for an application.
+
+```
+custom-apps gmail
+    name gmail
+    patterns .*\\.client-channel\\.google\\.com
+    patterns accounts\\.google\\.com
+    patterns apis\\.google\\.com
+    patterns clients.*\\.google\\.com
+    patterns contacts\\.google\\.com
+    patterns hangouts\\.google\\.com
+    patterns .*\\.googleusercontent\\.com
+    patterns mail\\.google\\.com
+    patterns www\\.google\\.com
+    patterns .*\\.gstatic\\.com
+    patterns ogs\\.google\\.com
+    patterns play\\.google\\.com
+exit
+```
 
 :::important
-If you configure invalid regex patterns, you will see the log message `invalid pattern for {name}, will never match!`. This means the pattern you configured is not a valid regex therefore the pattern matching will fail for the app {name} until the configuration is fixed.
+If you configure invalid regex patterns, you will see the log message `invalid pattern for {name}, will never match!`. This means the pattern you configured is not a valid regex therefore the pattern matching will fail for the app until the configuration is fixed.
 ::::
 
 ## Troubleshooting
