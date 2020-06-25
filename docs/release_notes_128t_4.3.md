@@ -17,18 +17,23 @@ sidebar_label: 4.3
 - **I95-35563** Startup race condition can lead to LTE initialization failure
   Until the system is upgraded to 4.3.8, this issue can be mitigated by restarting the 128T.
 ------
-- **I95-36536** SNMP query for ifIndex of interface incorrectly returns
+- **I95-35636** SNMP query for ifIndex of interface incorrectly returns
   ```
   No Such Object available on this agent at this OID
   ```
+------
+- **I95-35655** New metrics - RSRP, RSRQ, Active Band and Active Channel were added to (the existing) show device-interface PCLI command and lte-state script output for LTE interface.
 ------
 - **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment
 ------
 - **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route
 ------
-- **I95-35786** Rare race condition during `rotate logs` PCLI command may cause applications to fault
+- **I95-35781** Rare race condition during `rotate logs` PCLI command may cause applications to fault
 ------
 - **I95-35866** Addressed latest CVEs
+------
+- **I95-35885** For a dual LTE system, the setup for the second LTE modem resulted in 2 linux interfaces being created for the single device. (3 interfaces total would be seen for 2 LTE modems). 
+  Until the system is upgraded to 4.3.8, the issue can be mitigated by using the interface `wwp0s21u3i8`. The interface `wwp0s21u3i10` should not be used and will no longer be present after upgrading to 4.3.8.
 
 ## Release 4.3.7
 
