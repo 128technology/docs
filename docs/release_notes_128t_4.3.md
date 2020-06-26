@@ -32,7 +32,7 @@ sidebar_label: 4.3
 ------
 - **I95-35781** Rare race condition during `rotate logs` PCLI command may cause applications to fault
 ------
-- **I95-35866** Addressed latest CVEs
+- **I95-35866** Addressed latest CVEs (this requires the latest installer see I95-36033 below)
 ------
 - **I95-35885** Systems with two LTE interfaces would appear to have three LTE interfaces in Linux
 
@@ -543,3 +543,11 @@ systemctl restart salt-minion
   _**Conditions:**_ When nodes of a router or conductor pair are on different versions (for routers this is the short transition where the first node is upgraded and the second node is in the process of upgrading but still operational)
 
   _**Corrective Action:**_ NA, when both nodes are operational and on the 4.3 version the stats information on the router dialog will be provided. Stats can still be retrieved from the PCLI of the node while it is running.
+
+- **I95-36033** 4.3.8 does not enforce the 128T-installer-2.6.0 version that performes additional rpm updates for CVE's
+
+  _**Syptom:**_ RPM's installed by base CentOS that may have CVE corrections may not be updated.
+
+  _**Conditions:**_ When the 128T-installer is not updated to 2.6.0.
+
+  _**Corrective Action:**_ If manually installing, ensure the system is updated with the latest 128T-installer package. If upgrading via Conductor, ensure the conductor has access to the latest 128T-installer package.
