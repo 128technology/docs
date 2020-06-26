@@ -12,9 +12,11 @@ sidebar_label: 4.3
 - **I95-35313** Startup delay of 128T when many peer paths exist
 ------
 - **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T
+
   Until the system is upgraded to 4.3.8, this issue can be mitigated by restarting the 128T.
 ------
 - **I95-35563** Startup race condition can lead to LTE initialization failure
+
   Until the system is upgraded to 4.3.8, this issue can be mitigated by restarting the 128T.
 ------
 - **I95-35636** SNMP query for ifIndex of interface incorrectly returns
@@ -33,6 +35,7 @@ sidebar_label: 4.3
 - **I95-35866** Addressed latest CVEs
 ------
 - **I95-35885** Systems with two LTE interfaces would appear to have three LTE interfaces in Linux
+
   Until the system is upgraded to 4.3.8, the issue can be mitigated by using the interface `wwp0s21u3i8`. The interface `wwp0s21u3i10` should not be used and will no longer be present after upgrading to 4.3.8.
 
 ## Release 4.3.7
@@ -48,6 +51,7 @@ sidebar_label: 4.3
 - **I95-35172** Adding DHCP server instances requires a software restart
 ------
 - **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
+
   _**Conditions:**_ When the interface has an adjacency and tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`, resulting in traffic being dropped.
 ------
 - **I95-35602** The command `show network-interface` may result in a `Unhandled TypeError` in the PCLI when a PPPoE interface is down
@@ -71,6 +75,7 @@ sidebar_label: 4.3
 ### Issues Fixed
 
 - **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
+
   _**Conditions:**_ DHCP server is not running. The following log message can be seen:
   ```
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
@@ -112,6 +117,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35155** `show device-interface` output did not include duplex mode
 ------
 - **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
+
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
   Until the system is upgraded to 4.3.5, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
 ------
