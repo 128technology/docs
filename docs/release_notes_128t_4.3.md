@@ -32,7 +32,7 @@ sidebar_label: 4.3
 ------
 - **I95-35866** Addressed latest CVEs
 ------
-- **I95-35885** For a dual LTE system, the setup for the second LTE modem resulted in 2 linux interfaces being created for the single device. (3 interfaces total would be seen for 2 LTE modems).
+- **I95-35885** Systems with two LTE interfaces would appear to have three LTE interfaces in Linux
   Until the system is upgraded to 4.3.8, the issue can be mitigated by using the interface `wwp0s21u3i8`. The interface `wwp0s21u3i10` should not be used and will no longer be present after upgrading to 4.3.8.
 
 ## Release 4.3.7
