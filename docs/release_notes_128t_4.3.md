@@ -547,7 +547,7 @@ systemctl restart salt-minion
 ------
 - **I95-36033** 4.3.8 does not enforce the 128T-installer-2.6.0 version that performes additional rpm updates for CVE's
 
-  _**Syptom:**_ RPM's installed by base CentOS that may have CVE corrections may not be updated.
+  _**Syptom:**_ Deprecated RPM's installed by base CentOS that may have CVE corrections will not be removed.
 
   _**Conditions:**_ When the 128T-installer is not updated to 2.6.0.
 
