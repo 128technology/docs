@@ -17,7 +17,7 @@ Rate limiting can be configured for a particular service, by way of its associat
 There are two parameters that affect the shape of a flow:
 * `max-flow-rate` defined in bits/second, regulates the average rate of traffic.
   :::note
-  The flow rate is calculated on a sampling interval and some bursts may appear.
+  Rate is calculated on a interval relative to the arrival of flows. Some bursts may appear, but not greater than the configured `max-burst-rate`
   :::
 * `max-flow-burst` defined in bits/seconds, serves to minimize bursts of traffic within a flow.
 
@@ -103,17 +103,17 @@ exit
 
 To determine the number of packets meeting the rate limit check, execute the command on the PCLI:
 ```
-show stats packet-processing action success rate-limit-check debug
+show stats packet-processing action success rate-limit-check
 ```
 
 To determine the number of packets dropped as a result of exceeding flow rate check, execute the command on the PCLI:
 ```
-show stats packet-processing action failure rate-limit-check flow-rate-exceeded debug
+show stats packet-processing action failure rate-limit-check flow-rate-exceeded
 ```
 
 To determine the number of packets dropped as a result of exceeding shared flow rate check, execute the command on the PCLI:
 ```
-show stats packet-processing action failure rate-limit-check shared-rate-exceeded debug
+show stats packet-processing action failure rate-limit-check shared-rate-exceeded
 ```
 
 ### Caveats

@@ -27,7 +27,7 @@ sidebar_label: 4.5
 ------
 - **I95-32783** [`show assets summary` enhancements](cli_reference.md#show-assets-summary)
 ------
-- **I95-33174** LTE Band Management
+- **I95-33174** Carrier-specific automatic LTE Band Management
 ------
 - **I95-33215** [Audiocodes M800 watchdog](plugin_m800_watchdog.md)
 ------
