@@ -116,6 +116,8 @@ module.exports = {
       "plugin_monitoring_agent",
       "plugin_gre",
       "plugin_mosh",
+      "plugin_dns_cache",
+      "plugin_dns_app_id",
     ],
     "REST APIs": [
       "api_rest_4.2.0",
@@ -137,6 +139,7 @@ module.exports = {
         "type": "category",
         "label": "128T Installer",
         "items": [
+          "release_notes_128t_installer_2.6",
           "release_notes_128t_installer_2.5",
           "release_notes_128t_installer_2.4",
           "release_notes_128t_installer_2.3",
