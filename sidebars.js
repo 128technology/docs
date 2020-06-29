@@ -113,6 +113,7 @@ module.exports = {
       "plugin_mosh",
       "plugin_dns_cache",
       "plugin_dns_app_id",
+      "plugin_ipsec_client",
     ],
     "REST APIs": [
       "api_rest_4.2.0",
