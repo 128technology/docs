@@ -5,6 +5,8 @@ sidebar_label: 4.3
 
 ## Release 4.3.8
 
+Note: The minimum 128T-installer version of 2.6.0 is required for the 4.3.8 update. (rpm package: 128T-installer-2.6.0-1.x86_64.rpm)
+
 ### Issues Fixed
 
 - **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
