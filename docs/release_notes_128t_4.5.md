@@ -27,19 +27,17 @@ sidebar_label: 4.5
 ------
 - **I95-32783** [`show assets summary` enhancements](cli_reference.md#show-assets-summary)
 ------
-- **I95-33174** Carrier-specific automatic LTE Band Management
+- **I95-33174** Automatic LTE band management per carrier
 ------
 - **I95-33215** [Audiocodes M800 watchdog](plugin_m800_watchdog.md)
 ------
-- **I95-33351** Optimize FIB port-range storage
+- **I95-33351** Optimizations in FIB data structure allow for 20% additional entries
 ------
 - **I95-33358** Create static host name mappings at router level
 ------
-- **I95-33375** Address Latest Vulnerabilities 4.5
+- **I95-33375** Address latest security vulnerabilities
 ------
 - **I95-33427** [Per-Service Rate Limiting](config_rate_limiting.md)
-------
-- **I95-33484** Silicom new platform testing
 ------
 - **I95-33776** [`show config events`](cli_reference.md#show-events-config-commit) tracks configuration changes
 
