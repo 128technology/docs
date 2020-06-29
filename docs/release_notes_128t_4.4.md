@@ -5,6 +5,10 @@ sidebar_label: 4.4
 
 ## Release 4.4.1
 
+:::info
+The minimum 128T-installer version of 2.6.0 is required for the 4.4.1 update. (rpm package: 128T-installer-2.6.0-1.x86_64.rpm)
+:::
+
 ### Issues Fixed
 
 - **I95-33762** Unable to provision multiple DHCP servers per network interface on unmanaged, standalone router
