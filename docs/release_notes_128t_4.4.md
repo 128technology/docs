@@ -7,6 +7,8 @@ sidebar_label: 4.4
 
 ### Issues Fixed
 
+- **I95-33762** Unable to provision multiple DHCP servers per network interface on unmanaged, standalone router
+
 - **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
 ------
 - **I95-35038** Configuration Explorer within GUI can sometimes produce a "Something went wrong" message when searching or scrolling
@@ -33,9 +35,13 @@ sidebar_label: 4.4
 ------
 - **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route
 ------
-- **I95-35786** Rare race condition during `rotate logs` PCLI command may cause applications to fault
+- **I95-35781** Rare race condition during `rotate logs` PCLI command may cause applications to fault
 ------
 - **I95-35866** Addressed latest CVEs
+------
+- **I95-35885** Systems with two LTE interfaces would appear to have three LTE interfaces in Linux
+
+  Until the system is upgraded to 4.3.8, the issue can be mitigated by using the interface `wwp0s21u3i8`. The interface `wwp0s21u3i10` should not be used and will no longer be present after upgrading to 4.3.8.
 
 ## Release 4.4.0
 
