@@ -33,7 +33,7 @@ sidebar_label: 4.5
 ------
 - **I95-33351** Optimizations in FIB data structure allow for 20% additional entries
 ------
-- **I95-33358** Create static host name mappings at router level
+- **I95-33358** [Static Hostname Mappings](config_static_hostname_mapping.md)
 ------
 - **I95-33375** Address latest security vulnerabilities
 ------

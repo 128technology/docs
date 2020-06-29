@@ -59,6 +59,7 @@ module.exports = {
           "config_rate_limiting",
           "config_snmp",
           "config_snmp_metrics",
+          "config_static_hostname_mapping",
           "config_tenants",
           "config_templates",
         ],
