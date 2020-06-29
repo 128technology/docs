@@ -84,9 +84,9 @@ After the mapping has been configured:
 
 ```
 admin@test1.Fabric128# configure authority router Fabric128 static-hostname-mapping static-entry local.printer.service
-admin@test1.Fabric128 (static-entry[hostname=foo])# ip-address 192.168.0.123
-*admin@test1.Fabric128 (static-entry[hostname=foo])# commit
-*admin@test1.Fabric128 (static-entry[hostname=foo])# top
+admin@test1.Fabric128 (static-entry[hostname=local.printer.service])# ip-address 192.168.0.123
+*admin@test1.Fabric128 (static-entry[hostname=local.printer.service])# commit
+*admin@test1.Fabric128 (static-entry[hostname=local.printer.service])# top
 ```
 
 The output of `show dns resolutions` will show that the hostname now resolves to a valid address.
