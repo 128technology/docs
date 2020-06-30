@@ -3,11 +3,7 @@ title: IPSEC Client plugin
 sidebar_label: IPSEC Client
 ---
 
-The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPSEC endpoints through the 128T. It is possible to configure the plugin for each router to have multiple destination IPSEC endpoints and thus the 128T will failover between them.
-
-This is accomplished by performing a Service Function Chain (SFC) with Libreswan, a third-party IPSEC client.
-
-By enabling this plugin, you can provide IPSEC tunnel connectivity to third party providers from your 128T.
+The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPSEC endpoints through the 128T router. It is possible to configure the plugin for each router to have multiple destination IPSEC endpoints and thus the 128T will failover between them. This is accomplished by performing a Service Function Chain (SFC) with Libreswan, a third-party IPSEC client. By enabling this plugin, you can provide IPSEC tunnel connectivity to third party providers from your 128T.
 
 ## Installation
 
@@ -28,10 +24,10 @@ After installing the plugin, the 128T service on the conductor should be restart
 
 ## Configuration
 
+In the below configuration examples, there are two of each container. The first has all configuration elements explicitly configured with the defaults if applicable and the other is the bare minimum using all of the default values. The values enclosed in `<>` are fields that didn’t have default values specified by the plugin. If any of these optional, non-defaulted fields are not specified, then they will use the Libreswan defaults which can be found [here](https://libreswan.org/man/ipsec.conf.5.html). The values enclosed in `[]` are fields that didn't have default values specified by the plugin and will not be included in the generated 128T configuration.
+
 ### Profiles
 Profiles are reusable IPSEC settings that can be used across multiple nodes in a router and multiple IPSEC endpoint `remote`s.
-
-The below configuration has two profiles. One has all configuration elements shown and the other is the bare minimum using all of the default values. The only required fields are the `name` and `pre-shared-key`. The values enclosed in `<>` are fields that didn’t have default values specified by the plugin. If any of the optional, non-defaulted fields are not specified, then they will use the Libreswan defaults which can be found [here](https://libreswan.org/man/ipsec.conf.5.html).
 
 ```
 router
@@ -65,10 +61,12 @@ router
 exit
 ```
 
+:::note this plugin is limited to only be able to connect to ipsec endpoints that support pre-shared key authentication.
+:::
+
 ### Clients
 Clients are a collection of remote endpoints that will be switched between in the case of failures.
 
-The following configuration has two `remote`s. The first one has all configuration possibilities and the second has the minimum configuration needed. The values enclosed in `<>` are fields that didn’t have default values specified by the plugin and will use the Libreswan defaults which can be found [here](https://libreswan.org/man/ipsec.conf.5.html). The values enclosed in `[]` are fields that didn't have default values specified by the plugin and will not be included in the generated 128T configuration.
 ```
 node
     ipsec-client client1
@@ -94,35 +92,223 @@ node
 exit
 ```
 
-### Generated 128T Configuration
-A KNI per remote is created with the name of the `remote` and a single egress kni is created with the name of the `ipsec-client`.
+:::note Only one `ipsec-client` can be configured per node, but 2 `remote`s can be configured per client.
+:::
 
-### User-Responsible 128T Configuration
+### Generated 128T Configuration
+A KNI per remote is created with the name of the `remote` and a single egress KNI is created with the name of the `ipsec-client`.
+
+### User-Specific 128T Configuration
 To allow the maximum flexibility on getting the traffic into the plugin's network namespace and getting the traffic out, we rely on the user to configure those means (usually through services and service routes).
 
-You will need to have the IPSEC endpoint bound traffic sent into the KNIs with the names of the `remote`s. You can use builtin 128T failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down.
+You will need to have the IPSEC endpoint bound traffic sent into the KNIs with the names of the `remote`s. You can use builtin 128T failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down. You will also need to configure a way for the traffic to be routed towards the IPSEC endpoint after being encrypted. All of this traffic will be assigned to the `tenant` configured under `ipsec-client`.
 
-You will also need to configure a way for the traffic to be routed towards the IPSEC endpoint after being encrypted. All of this traffic will be assigned to the `tenant` configured under `ipsec-client`.
+### Complete Example Configuration
+
+Below is an example of a complete, but minimal configuration entered by the user.
+
+:::warning
+This example configuration is good for understand all of the pieces together, but should not be copied and pasted as is onto your system.
+:::
+
+```
+config
+    authority
+        tenant ipsec
+        exit
+
+        tenant lan
+        exit
+
+        service         cleartext
+            name            cleartext
+            address         1.1.1.0/24
+
+            access-policy   lan
+                source      lan
+                permission  allow
+            exit
+        exit
+
+        service         ipsec
+            name           ipsec
+            address        172.16.4.3
+
+            access-policy  ipsec
+                source      ipsec
+                permission  allow
+            exit
+        exit
+
+        router               router1
+            ipsec-profile         primary
+                name                 primary
+                pre-shared-key       somekey1
+            exit
+
+            ipsec-profile         secondary
+                name                 secondary
+                pre-shared-key       somekey2
+            exit
+
+            node node1
+                device-interface          lan
+                    name               lan
+
+                    network-interface  lanintf
+                        name          lanintf
+                        tenant        lan
+
+                        address       172.16.1.2
+                            ip-address     172.16.1.2
+                            prefix-length  24
+                            gateway        2.2.2.1
+                        exit
+                    exit
+                exit
+
+                device-interface          wan
+                    name               wan
+
+                    network-interface  wanintf
+                        name          wanintf
+
+                        address       172.16.3.2
+                            ip-address     172.16.3.2
+                            prefix-length  24
+                            gateway        172.16.3.5
+                        exit
+                    exit
+                exit
+
+                ipsec-client              client1
+                    name     client1
+                    enabled  true
+                    tenant   ipsec
+
+                    remote   rem1
+                        name     rem1
+                        host     172.16.4.3
+                        profile  primary
+                    exit
+
+                    remote   rem2
+                        name     rem2
+                        host     172.16.5.4
+                        profile  secondary
+                    exit
+                exit
+            exit
+
+            service-route         rem1
+                name          rem1
+                service-name  cleartext
+
+                next-hop      router1 rem1-intf
+                    node-name   router1
+                    interface   rem1-intf
+                    gateway-ip  169.254.129.6
+                exit
+            exit
+
+            service-route         rem2
+                name          rem2
+                service-name  cleartext
+
+                next-hop      router1 rem2-intf
+                    node-name   router1
+                    interface   rem2-intf
+                    gateway-ip  169.254.129.10
+                exit
+            exit
+
+            service-route         ipsec
+                name          ipsec
+                service-name  ipsec
+
+                next-hop      router1 wanintf
+                    node-name   router1
+                    interface   wanintf
+                    gateway-ip  172.16.3.5
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+and the plugin will generate the interfaces in the same commit:
+
+```
+config
+    authority
+        router router1
+            node node1
+                device-interface          client1
+                    name               client1
+                    description        "Auto-generated host interface for use with ipsec-client"
+                    type               host
+                    network-namespace  client1
+
+                    network-interface  client1-intf
+                        name       client1-intf
+                        type       external
+                        tenant     ipsec
+
+                        address    169.254.129.1
+                            ip-address     169.254.129.1
+                            prefix-length  30
+                            gateway        169.254.129.2
+                        exit
+                    exit
+                exit
+
+                device-interface          rem1
+                    name               rem1
+                    description        "Auto-generated host interface for use with ipsec-client"
+                    type               host
+                    network-namespace  client1
+
+                    network-interface  rem1-intf
+                        name       rem1-intf
+                        type       external
+                        tenant     _internal_
+
+                        address    169.254.129.5
+                            ip-address     169.254.129.5
+                            prefix-length  30
+                            gateway        169.254.129.6
+                        exit
+                    exit
+                exit
+
+                device-interface          rem2
+                    name               rem2
+                    description        "Auto-generated host interface for use with ipsec-client"
+                    type               host
+                    network-namespace  client1
+
+                    network-interface  rem2-intf
+                        name       rem2-intf
+                        type       external
+                        tenant     _internal_
+
+                        address    169.254.129.9
+                            ip-address     169.254.129.9
+                            prefix-length  30
+                            gateway        169.254.129.10
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
 
 ## Thirdparty Software & Licenses
 - Libreswan v3.23-5.el7_5 (GNU GPLv2)
-
-## Known Caveats or Limitations
-
-### Number of Clients
-Only one `ipsec-client` can be configured per node, but n `remote`s can be configured per client.
-
-### Scale
-It is known that plugins in general are limited in the scale that they can operate. Strain can be put on the conductor with a large amount of managed routers since a lot of work is being done on the conductor.
-
-### RPM Access
-The network scripts and other files are installed on the router as part of an rpm so the router will either need internet access or a conductor hosted repo will need to be setup. In 4.4, we support offline-mode where an ISO will need to be imported on the conductor.
-
-### Pre-Shared Key Only
-For now, this plugin is limited to only be able to connect to ipsec endpoints that support pre-shared key authentication.
-
-### Throughput
-It has not been tested how much traffic can be sent through this SFC flow and through Libreswan.
 
 
 ## Troubleshooting
@@ -139,7 +325,47 @@ Configuration and pillar generation logs can be found on the conductor under `/v
 Salt status can be found on the conductor by utilizing the PCLI’s `show assets` and `show assets <asset-id>` commands.
 
 ### PCLI Enhancements
-To check the status of the ipsec tunnels for given ingress kni, extra ipsec tunnel related output will be found in the `show device-interface` command.
+To check the status of the ipsec tunnels for given ingress KNI, extra ipsec tunnel related output will be found in the `show device-interface` command.
+
+Example output for a healthy tunnel:
+```
+admin@combo-west.RTR_WEST_COMBO# show device-interface name rem2
+Tue 2020-06-30 16:44:39 UTC
+
+=========================================================
+ combo-west:rem2
+=========================================================
+ Type:                host
+ Forwarding:          true
+ Mode:                host
+ MAC Address:         22:ee:4e:b6:37:a8
+
+ Admin Status:        up
+ Operational Status:  up
+ Redundancy Status:   non-redundant
+ Speed:               1000
+ Duplex:              full
+
+ in-octets:                        9992
+ in-unicast-pkts:                   161
+ in-errors:                           0
+ out-octets:                       6986
+ out-unicast-pkts:                  161
+ out-errors:                         11
+
+ IPSec:
+     Tunnel Status:   Up
+     Tunnel Details:
+         Name:        ipsec-client-tunnel-secondary-rem2
+         Remote id:   172.16.5.4
+         SA creation time:
+           2020-06-30 16:37:50
+         In bytes:    0
+         Out bytes:   336
+     SA Count:        1
+
+Completed in 0.12 seconds
+```
 
 ### Systemd Services
 To check the status of the ipsec client service on the router, you can run `show system services` which will show all 128T related services running on the specified node. The one for this plugin is named `128t-ipsec`.
@@ -148,4 +374,18 @@ To verify that the services are running properly on the 128T router:
 * `systemctl status 128t-ipsec@<client>.service`
 
 ### Failover Alarms
-If a tunnel goes down, we set the corresponding ingress kni to be operationally down. There will be an alarm created when this happens.
+If a tunnel goes down, we set the corresponding ingress KNI to be operationally down. There will be an alarm created when this happens.
+
+Example output when the tunnel for `rem1` goes down:
+
+```admin@combo-west.RTR_WEST_COMBO# show alarms
+Tue 2020-06-30 16:42:50 UTC
+
+============== ===================== ========== ============= =========== ==================================
+ ID             Time                  Severity   Source        Category    Message
+============== ===================== ========== ============= =========== ==================================
+ combo-west:8   2020-06-30 16:32:42   critical   unavailable   interface   Intf rem1 (4) operationally down
+
+There are 0 shelved alarms
+Completed in 0.10 seconds
+```
