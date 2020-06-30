@@ -3,7 +3,7 @@ title: Kernel Network Interfaces
 sidebar_label: Kernel Network Interfaces
 ---
 
-The DPDK kernel network interface (KNI) provides a way for the 128T Session Smart router to route traffic to the Linux OS for access to various USER space applications. KNI interface also provide a way for traffic originating in the Linux OS to be routed via the 128T Session Smart router. Every 128T router creates a KNI called `kni254` by default which is used to implement [in-band management access](concepts_linux_host_networking) to the router.
+The DPDK kernel network interface (KNI) provides a way for the 128T Session Smart router to route traffic to the Linux OS for access to various USER space applications. KNIs also provide a way for traffic originating in the Linux OS to be routed via the 128T Session Smart router. Every 128T router creates a KNI called `kni254` by default which is used to implement [in-band management access](concepts_linux_host_networking) to the router.
 
 
 ## Configuration
@@ -59,7 +59,7 @@ The above configuration, creates a KNI called `host-kni` in Linux which can be u
        valid_lft forever preferred_lft forever
 ```
 
-Users can also configure a `network-namespace` for the host KNI which is useful for isolating the host KNI into a namespace and is commonly how KNIs are used. Applications and plugins leverage the [scripting framework](#scripting-framework) in order to implement [SFC](plugin_intro#service-function-chaining). To simplify the adoption of this model and to speed up plugin development using this model, [a package with a set of namespace scripts](plugin_kni_namespace_scripts) is provided to simplify this process.
+Users can also configure a `network-namespace` for the host KNI which is useful for isolating the host KNI into a namespace and is commonly how KNIs are used. Applications and plugins leverage the [scripting framework](#scripting-framework) in order to implement [SFC](plugin_intro#service-function-chaining). To simplify the adoption of this model and to speed up plugin development using this model, [a utility with a set of namespace scripts](plugin_kni_namespace_scripts) is provided to simplify this process.
 
 
 ### Bridge KNI
@@ -244,9 +244,9 @@ The script will be terminated if it takes longer than 30 seconds to finish.
 :::
 
 ### Script command line arguments
-In order to provide actionable information for script to perform their automation, each of the scripts are provided with a set of command line arguments to reflect the configuration, specifically for the `host` and `bridged` types the following information is provided
+In order to provide actionable information for script to perform their automation, each of the scripts are provided with a set of command line arguments that reflects the 128T configuration, specifically for the `host` and `bridged` types the following information is provided
 
-Each script for the `host` type interface has the following arguments
+Each script for the `host` type is passed each of the following arguments
 
 | arguments | description  | example |
 | ----------| -------------| --------|
@@ -254,9 +254,9 @@ Each script for the `host` type interface has the following arguments
 | `--kni-ip=<kni-interface-ip>` | ip-address of the network-interface | 169.254.10.20 |
 | `--kni-prefix=<kni-interface-prefix>` | prefix-length of network-interface | 24 |
 | `--kni-gateway=<kni-interface-gateway>` | gateway of network-interface | 169.254.10.21 |
-| `--namespace=<namespace-name>` | Optional: network-namesapce if configured | None |
+| `--namespace=<namespace-name>` | Optional: If `network-namespace` is configured | None |
 
-Each script for the `bridged` type interface has the following arguments
+Each script for the `bridged` type is passed each of the following arguments
 
 | arguments | description  | example |
 | ----------| -------------| --------|

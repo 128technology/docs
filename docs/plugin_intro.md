@@ -14,7 +14,7 @@ sidebar_label: Introduction
 Plugins enable a variety of use cases to be implemented to enhance the 128T router experience. These plugins can range from something as simple as managing system settings on the router like the `128T-journal` plugin for managing systemd journal size to something more advanced such as `128T-ipsec-client` which allows for the creation and management of IPSec client tunnels on the 128T router. Regardless of the usage and the complexity of the plugin they follow a general workflow.
 
 ### Installation and management
-The 128T conductor GUI Plugins provides a dashboard to view and manage all available plugins. 
+The 128T conductor GUI provides a dashboard to view and manage all available plugins.
 
 ![128T Plugin Dasboard](/img/plugins_dashboard.png)
 
@@ -41,7 +41,7 @@ Installed plugin can be removed from the UI by using the `Uninstall` button on t
 ![128T Plugin Uninstall](/img/plugin_uninstall.gif)
 
 ### Enabling plugin-specific configuration
-The conductor provides extensibility APIs through which plugins can add plugin-specific configuration to the 128T conductor. This mechanism is especially useful for collecting various user inputs to drive the plugin behavior. For example, the [`128T-gre`](plugin_gre) uses the configuration to obtain tunnel configuration for the router. 
+The conductor provides extensibility APIs through which plugins can add plugin-specific configuration to the 128T conductor. This mechanism is especially useful for collecting various user inputs to drive the plugin behavior. For example, the [`128T-gre`](plugin_gre) uses the configuration to obtain tunnel configuration for the router.
 
 ![128T GRE configuration](/img/plugin_gre_config.gif)
 
