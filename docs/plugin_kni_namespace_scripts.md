@@ -3,9 +3,9 @@ title: Kernel Network Namespace Scripts
 sidebar_label: KNI Namespace Scripts
 ---
 
-As part of plugin development to extend the functionality of a 128T router, a very common model is to leverage [KNI (Kernel Network Interface)](concepts_kni) along with linux network namespaces. They allow for isolation of various networking components such as interfaces, routing table, iptables etc while running applications that leverage these networking namespaces. This is also very common method to deploy [Service Function Chaining](plugin_intro#service-function-chaining) within the product.
+As part of plugin development to extend the functionality of a 128T router, a very common model is to leverage [KNI (Kernel Network Interface)](concepts_kni) along with Linux network namespaces. They allow for isolation of various networking components such as interfaces, routing table, iptables, etc., while running applications that leverage these networking namespaces. This is also very common method to deploy [Service Function Chaining](plugin_intro#service-function-chaining) within the product.
 
-The goal of this package is to provide a set of scripts which do most of the mundane tasks when it comes to setting up the namespaces and associated environment.
+The goal of this package is to provide a set of scripts which do most of the tasks when it comes to setting up the namespaces and associated environment.
 
 ## Scripts
 The following scripts are part of the package and have a well-defined role as described [here](concepts_kni#script-types).
@@ -14,28 +14,28 @@ The following scripts are part of the package and have a well-defined role as de
 This script is invoked at the beginning of the KNI creation and is intended to do clean-up. In the current implementation this script will stop the configured [application](#application-definition) (if any).
 
 ### init
-The init script is responsible for the majority of the setup. The script performs the following high-level function today:
+The [init script](concepts_kni#init) is responsible for the majority of the setup. The script performs the following high-level function:
 
-- Create the configured network-namespace in linux as per 128T requirements.
+- Create the configured network-namespace in Linux as per 128T requirements.
 - Move and setup any configured target-interface into the namespace
-- Tune common parameters within the namespace such as ip-forwarding, arp-proxy etc.
+- Tune common parameters within the namespace such as ip-forwarding, arp-proxy, etc.
 - Start any configured application(s) within the namespace
 - Setup routes and iptable rules
 
 ### reinit
-The `reinit` script is called when the interface is deemed to be down for more than 10 seconds. For the sake of this implementation we simply symlink the `reinit` to `init` script
+The [reinit](concepts_kni#reinit) script is called when the interface is deemed to be down for more than 10 seconds. For the sake of this implementation we simply symlink the `reinit` to `init` script
 
 ### shutdown
-The `shutdown` script is called during final shutdown or deletion of the interface. This script will stop the configured [application](#application-definition) (if any) and delete the network namespace
+The [shutdown](concepts_kni#shutdown) script is called during 128T shutdown or deletion of the interface. This script will stop the configured [application](#application-definition) (if any) and delete the network namespace
 
 ### Installation
-The `t128-kni-namespace-scripts` package contains all the scripts mentioned [above](#scripts). Upon installation, these scripts in this package are placed under `/etc/128technology/plugins/network-scripts/default/kni_namespace/` with the right set of permissions and settings required for operation by 128T software.
+The `t128-kni-namespace-scripts` package contains all the scripts mentioned [above](#scripts). Upon installation, the scripts in this package are placed under `/etc/128technology/plugins/network-scripts/default/kni_namespace/` with the right set of permissions and settings required for operation by 128T router.
 
 
 ### Symlink To KNI scripts ##
-The package only contains a subset of the scripts provided by the [network-script design](concepts_kni#script-types). There are other scripts such as state, info, monitoring etc which are not covered in this package. As a result, the best practice is to symlink the host KNI scripts to the pre-packaged scripts listed [above](#scripts).
+The package only contains a subset of the scripts provided by the [network-script design](concepts_kni#script-types). There are other scripts such as state, info, monitoring, etc., which are not covered in this package. As a result, the best practice is to symlink the host KNI scripts to the pre-packaged scripts listed [above](#scripts).
 
-For example, for a configuration with a `host` kni called `test-sfc` configured on the node. The scripts above would be used as follows:
+For example, for a configuration with a `host` kni called `test-sfc` the scripts above would be used as follows:
 
 ```console
 # ll /etc/128technology/plugins/network-scripts/host/test-sfc/
@@ -47,7 +47,7 @@ lrwxrwxrwx 1 root root 72 Jan 21 04:09 startup -> /etc/128technology/plugins/net
 ```
 
 ## Configuration
-A simple YAML based configuration is used to control various aspects of the KNIs and namespaces that are driven through this scripts. The configuration file is optional and the scripts will still perform the basic tasks as described [above](#scripts). The scripts look a file called `<kni-name>.conf` under `/var/lib/128technology/kni/host/` which could look like this:
+A YAML based configuration is used to control various aspects of the KNIs and namespaces that are driven through this scripts. The configuration file is optional and the scripts will still perform the basic tasks as described [above](#scripts). The scripts looks for a file called `<kni-name>.conf` under `/var/lib/128technology/kni/host/`.
 
 ```yaml
 target-interface:
@@ -77,7 +77,7 @@ route-tables:
 The above example shows all the possible configuration. All of these configuration are optional and reasonable defaults are assumed. Each of the sections below discuss the options in more details.
 
 ### Variable Substitution
-The configuration supports basic variable substitutions which directly map to the arguments that are passed to the network-scripts by 128T router. The following keywords can be substituted in the config
+The configuration supports basic variable substitutions which directly map to the [arguments passed to the network-scripts](concepts_kni#script-command-line-arguments) by 128T router. The following keywords can be used in the config and will be substituted with the correct arguments at runtime.
 
 Consider the following configuration
 ```config
@@ -116,7 +116,7 @@ routing:
 ```
 
 ### Target Definition
-This configuration allows for another interface to be configured to be part of the namespace. This is usually an interface in linux which is used for forwarding the traffic through to an endpoint. Only a `single` target interface can be configured and it's optional. The following snippet should be pretty self explanatory.
+This configuration allows for another interface to be configured as part of the namespace. This is usually an interface in Linux which is used for forwarding the traffic through to an endpoint. Only a `single` target interface can be configured and it's optional. The following snippet shows an example of setting parameters for the `target-interface`.
 
 ```yaml
 target-interface:
@@ -130,10 +130,10 @@ target-interface:
 The `default-route` flag is used to set the target-interface as a `default` route with zero metric in the namespace making it the preferred choice for routing all traffic.
 
 ### Application Definition
-Any [SFC](plugin_intro#service-function-chaining) application will require some applications to run within the namespace to consume the KNI and other network resources. This configuration simply provides a list of commands to be run within the namespace.
+Any [SFC application](plugin_intro#service-function-chaining) will require some applications to run within the namespace to consume the KNI and other network resources. This configuration provides a list of commands to be run within the namespace.
 
 :::note
-The scripts will automatically append `ip netns exec` for every configured command
+The scripts will automatically append `ip netns exec` for every configured command.
 :::
 
 This configuration is optional. Consider this example:
@@ -145,7 +145,7 @@ application:
         - "ifdown test-tun0"
 ```
 
-In this case, the user can simply configure the logic to start & stop applications as needed.
+In this case, the user can configure the logic to start and stop applications as needed.
 
 ### Routing Definition
 It's useful to be able to influence the basic routing rules within the namespace. The `routing` config in its simplest form can be used to add routes to the default routing table. For most applications this is sufficient and acts as a way to create quick configuration of routes. For example
@@ -158,14 +158,14 @@ routing:
 The above example, will crete a single route table entry for the prefix `192.168.0.0/16`.
 
 :::note
-If a target interface is configured as default-route and no routing rules are specified, a default route for the said target will be added.
+If a target interface is configured as default-route and no routing rules are specified, a default route for the target will be added.
 :::
 
 :::note
 The `routing definition` section will override any other routes specified elsewhere in the config
 :::
 
-For a more advanced use case, such as tunneling or NAT,  a single routing table is not enough. For such applications, a `route-tables` definition can be used. The `route-tables` allow the user to do the following:
+For a more advanced use case, such as tunneling or NAT, a single routing table is not enough. For such applications, a `route-tables` definition can be used. The `route-tables` allow the user to do the following:
 * Create a new routing table in the namespace
 * Specify the conditions under which to use this routing table
 * Create rules to be used for this new table.
@@ -183,7 +183,7 @@ route-tables:
 
 ```
 
-The `default` keyword is used to create route entries for the default route table in linux. In the above example, the second entry for `gre` table will create a new table with the identifier `1024`. For each route-table, the user can configure the conditions and parameters for which the table can be used. These parameters translate to the options for the `ip rules add` command. The currently supported parameters include
+The `default` keyword is used to create route entries for the default route table in Linux. In the above example, the second entry for `gre` table will create a new table with the identifier `1024`. For each route-table, the user can configure the conditions and parameters for which the table can be used. These parameters translate to the options for the `ip rules add` command. The currently supported parameters include
 * ingress-interface (iif)
 * egress-interface (off)
 * from-prefix (from)
