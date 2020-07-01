@@ -128,4 +128,4 @@ config
 
 ### User Defined Services
 
-For any other service not defined by the default management services list, the user can configure a _service_ to best suit their needs. It is necessary to configure the [_internal_](bcp_tenants.md#the-internal-tenant) tenant within the `access-policy` of the service to allow traffic originating from the Linux host.
+For any other service not defined by the default management services list, the user can configure a _service_ to best suit their needs. It is necessary to configure the [_internal_](bcp_tenants.mdx#the-internal-tenant) tenant within the `access-policy` of the service to allow traffic originating from the Linux host.
