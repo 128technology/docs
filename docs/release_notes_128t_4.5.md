@@ -11,7 +11,7 @@ sidebar_label: 4.5
 ------
 - **I95-1212, I95-34108** [Configuration Templates](config_templates.md)
 ------
-- **I95-16104** Management traffic over forwarding interface
+- **I95-16104** [Management traffic over forwarding interface](config_management_over_forwarding.md)
 ------
 - **I95-22304** [Re-run commands in PCLI history with "!"](concepts_pcli.md#-run-previous-command)
 ------
