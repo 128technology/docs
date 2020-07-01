@@ -28,6 +28,7 @@ module.exports = {
       "concepts_appid",
       "concepts_ha_theoryofoperation",
       "concepts_interface_types",
+      "concepts_kni",
       "concepts_linux_host_networking",
       "concepts_network_planes",
       "concepts_metadata",
@@ -114,12 +115,14 @@ module.exports = {
       "cli_reference",
     ],
     "Plugins": [
+      "plugin_intro",
       "plugin_m800_watchdog",
       "plugin_monitoring_agent",
       "plugin_gre",
       "plugin_mosh",
       "plugin_dns_cache",
       "plugin_dns_app_id",
+      "plugin_kni_namespace_scripts"
     ],
     "REST APIs": [
       "api_rest_4.2.0",
