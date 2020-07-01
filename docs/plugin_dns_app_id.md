@@ -128,6 +128,6 @@ Sat 2020-03-28 03:28:43 UTC
 
 ## Release Notes
 
-Version `1.0.2-1` and `2.0.2-1` resolve:
+Version `1.0.2` and `2.0.2`:
 * Ensure the application restarts with 128T
 * Ensure 128T monitors new file changes
