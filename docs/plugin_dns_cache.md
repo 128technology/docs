@@ -132,3 +132,8 @@ To verify that the services are running properly on the 128T router:
 * `systemctl status 128T-dns-matcher.service`
 
 Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
+
+## Release Notes
+
+Version `1.0.1` and `2.0.1`:
+* Ensure the application restarts with 128T
