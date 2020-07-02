@@ -15,7 +15,7 @@ sidebar_label: 4.5
 ------
 - **I95-22304** [Re-run commands in PCLI history with "!"](concepts_pcli.md#-run-previous-command)
 ------
-- **I95-23898** Improved feedback on PCLI when invalid arguments are provided to command
+- **I95-23898** Improved feedback on PCLI when invalid arguments are provided to a command
 ------
 - **I95-28366** Greatly reduced memory consumption of PCLI, allowing many more concurrent users
 ------

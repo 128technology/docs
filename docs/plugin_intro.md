@@ -11,7 +11,7 @@ sidebar_label: Introduction
 
 
 ## Plugin Workflow
-Plugins enable a variety of use cases to be implemented to enhance the 128T router experience. These plugins can range from something as simple as managing system settings on the router like the `128T-journal` plugin for managing systemd journal size to something more advanced such as `128T-ipsec-client` which allows for the creation and management of IPSec client tunnels on the 128T router. Regardless of the usage and the complexity of the plugin they follow a general workflow.
+Plugins enable a variety of use cases to be implemented to enhance the 128T router experience. These plugins can range from something as simple as managing system settings on the router like the `128T-journal` plugin for managing systemd journal size to something more advanced such as `128T-ipsec-client` which allows for the creation and management of IPsec client tunnels on the 128T router. Regardless of the usage and the complexity of the plugin they follow a general workflow.
 
 ### Installation and management
 The 128T conductor GUI provides a dashboard to view and manage all available plugins.

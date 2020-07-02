@@ -6,7 +6,7 @@ Rate limiting, when configured, is applied to packets entering the data path pri
 
 ## Per-Flow Rate Limiting
 
-The 128T has the ability to apply rate limiting to individuals flows within a session for a service. This provides the ability to ensure that each flow to and from a service conforms to a specific "shape".  This can be particularly useful if the sessions of a service are used for high bandwidth applications such as downloading or uploading content.  Each flow can be restricted to use only a specific amount of bandwidth. This capability in turn can be used to limit the amount of traffic egressing the 128T, regulating the traffic entering the traffic scheduler.
+The 128T has the ability to apply rate limiting to individual flows within a session for a service. This provides the ability to ensure that each flow to and from a service conforms to a specific "shape".  This can be particularly useful if the sessions of a service are used for high bandwidth applications such as downloading or uploading content.  Each flow can be restricted to use only a specific amount of bandwidth. This capability in turn can be used to limit the amount of traffic egressing the 128T, regulating the traffic entering the traffic scheduler.
 
 Individual flow rate limiting, can prevent bad actors and lead to a more desirable overall system performance. Accurate rate limiting can be a bit of a black art to configure properly per flow, as it is highly dependent on the application.
 

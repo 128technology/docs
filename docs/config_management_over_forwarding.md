@@ -11,7 +11,7 @@ Depending on the nature and size of a deployment, the hardware platform may not 
 
 ## Benefits
 
-When utilizing a separate [non-forwarding](concepts_interface_types.md) interface for management traffic, packet forwarding is managed by Linux's routing table. Leveraging 128T's native routing capabilities for management traffic provides additional security, segmentation and advanced routing policy.
+When using a separate [non-forwarding](concepts_interface_types.md) interface for management traffic, packet forwarding is managed by Linux's routing table. Leveraging 128T's native routing capabilities for management traffic provides additional security, segmentation and advanced routing policy.
 
 When provisioning management traffic to traverse forwarding interfaces, those interfaces will continue to be available for management related functions (i.e. ssh) even when the 128T is not running, yet will still be protected by firewall rules that match the respective policy. This is particularly important during maintenance operations when the 128T software is taken off-line for an upgrade.
 
@@ -90,7 +90,7 @@ default dev wan1-intf scope link metric 20
 
 ### Utility Address
 
-Management interfaces can be configured for redundancy between nodes of a HA pair by provisioning `authority > router > node > device-interface > network-interface > utility-ip-address`. If the interface is redundant and management, a `utility-ip-address` is required on the network-interface. This address is assigned to the Linux interface when 128T is not running with the original MAC address, not the virtual `shared-phys-address` from 128T configuration. The `utility-ip-address` must be unique per router across the nodes.
+Management interfaces can be configured for redundancy between nodes of a HA pair by provisioning `authority > router > node > device-interface > network-interface > utility-ip-address`. If the interface is redundant and management, a `utility-ip-address` is required on the network-interface. This address is assigned to the Linux interface when 128T is not running with the original MAC address, not the virtual `shared-phys-address` from 128T configuration. The `utility-ip-address` must be unique per node across the router.
 
 
 ### Sample Configuration

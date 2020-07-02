@@ -66,7 +66,7 @@ The service configuration from above, in combination with this router-specific h
 
 ## Troubleshooting
 
-[`show dns resolutions`](cli_reference.md#show-dns-resolutions) can be used to display whether hostnames provisioned within the 128T configuration have been resolved, either through configuration, leveraging `static-hostname-mapping` or manual through the PCLI.
+[`show dns resolutions`](cli_reference.md#show-dns-resolutions) displays whether hostnames provisioned within the 128T configuration have been resolved, either through configuration, leveraging `static-hostname-mapping` or manual through the PCLI.
 
 This output from `show dns resolutions` is performed with the _service_ configured with an address of `local.printer.service` but does not yet have a `static-hostname-mapping` configured.
 ```
