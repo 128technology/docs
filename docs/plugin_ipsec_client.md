@@ -3,7 +3,7 @@ title: IPSEC Client plugin
 sidebar_label: IPSEC Client
 ---
 
-The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPSEC endpoints through the 128T router. It is possible to configure the plugin for each router to have multiple destination IPSEC endpoints and thus the 128T will failover between them. This is accomplished by performing a Service Function Chain (SFC) with Libreswan, a third-party IPSEC client. By enabling this plugin, you can provide IPSEC tunnel connectivity to third party providers from your 128T.
+The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPSEC endpoints through the 128T router. It is possible to configure the plugin for each router to have multiple destination IPSEC endpoints and thus the 128T will failover between them. This is accomplished by performing a [Service Function Chain (SFC)](plugin_intro#service-function-chaining) with Libreswan, a third-party IPSEC client. By enabling this plugin, you can provide IPSEC tunnel connectivity to third party providers from your 128T router.
 
 ## Installation
 
@@ -14,17 +14,13 @@ The following versions are available for corresponding 128T software versions:
 | 128T-ipsec-client-1.0.4 | 128T >= 3.2.8; 128T < 4.3.0 |
 | 128T-ipsec-client-2.0.4 | 128T >= 4.3.0               |
 
-:::important
-It is recommended to use the conductor GUI > Plugins page for installing plugins. This allows the system to select the correct version of plugin based on the 128T version.
+:::note
+The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
 :::
-
-:::important
-After installing the plugin, the 128T service on the conductor should be restarted for the changes to take effect.
-::::
 
 ## Configuration
 
-In the below configuration examples, there are two of each container. The first has all configuration elements explicitly configured with the defaults if applicable and the other is the bare minimum using all of the default values. The values enclosed in `<>` are fields that didn’t have default values specified by the plugin. If any of these optional, non-defaulted fields are not specified, then they will use the Libreswan defaults which can be found [here](https://libreswan.org/man/ipsec.conf.5.html). The values enclosed in `[]` are fields that didn't have default values specified by the plugin and will not be included in the generated 128T configuration.
+In the below configuration examples, there are two of each plugin configuration element. The first has all configuration elements explicitly configured with the defaults if applicable and the other is the bare minimum using all of the default values. The values enclosed in `<>` are fields that didn’t have default values specified by the plugin. If any of these optional, non-defaulted fields are unspecified, then they will use the Libreswan defaults which can be found [here](https://libreswan.org/man/ipsec.conf.5.html). The values enclosed in `[]` are fields that didn't have default values specified by the plugin and will not be included in the generated 128T configuration.
 
 ### Profiles
 Profiles are reusable IPSEC settings that can be used across multiple nodes in a router and multiple IPSEC endpoint `remote`s.
@@ -61,11 +57,12 @@ router
 exit
 ```
 
-:::note this plugin is limited to only be able to connect to ipsec endpoints that support pre-shared key authentication.
+:::note 
+This plugin can only connect to IPSEC endpoints that support pre-shared key authentication.
 :::
 
 ### Clients
-Clients are a collection of remote endpoints that will be switched between in the case of failures.
+Clients are a collection of remote endpoints which can be used for failover purposes.
 
 ```
 node
@@ -92,7 +89,8 @@ node
 exit
 ```
 
-:::note Only one `ipsec-client` can be configured per node, but 2 `remote`s can be configured per client.
+:::note 
+Only one `ipsec-client` can be configured per node, but two `remote`s can be configured per client.
 :::
 
 ### Generated 128T Configuration
@@ -101,14 +99,14 @@ A KNI per remote is created with the name of the `remote` and a single egress KN
 ### User-Specific 128T Configuration
 To allow the maximum flexibility on getting the traffic into the plugin's network namespace and getting the traffic out, we rely on the user to configure those means (usually through services and service routes).
 
-You will need to have the IPSEC endpoint bound traffic sent into the KNIs with the names of the `remote`s. You can use builtin 128T failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down. You will also need to configure a way for the traffic to be routed towards the IPSEC endpoint after being encrypted. All of this traffic will be assigned to the `tenant` configured under `ipsec-client`.
+You will need to have the IPSEC endpoint bound traffic sent into the KNIs with the names of the `remote`s. You can use builtin 128T failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down. You will also need to configure a way for the traffic to be routed towards the IPSEC endpoint after being encrypted. All of this encrypted traffic will be assigned to the `tenant` configured under `ipsec-client`.
 
 ### Complete Example Configuration
 
 Below is an example of a complete, but minimal configuration entered by the user.
 
 :::warning
-This example configuration is good for understand all of the pieces together, but should not be copied and pasted as is onto your system.
+This example configuration is good to understand all of the concepts but should not be used on a system as is.
 :::
 
 ```
@@ -237,7 +235,7 @@ config
 exit
 ```
 
-and the plugin will generate the interfaces in the same commit:
+Upon commit, the plugin will generate other configuration as shown below:
 
 ```
 config
@@ -325,7 +323,7 @@ Configuration and pillar generation logs can be found on the conductor under `/v
 Salt status can be found on the conductor by utilizing the PCLI’s `show assets` and `show assets <asset-id>` commands.
 
 ### PCLI Enhancements
-To check the status of the ipsec tunnels for given ingress KNI, extra ipsec tunnel related output will be found in the `show device-interface` command.
+To check the status of the IPSEC tunnels for a given ingress KNI, extra IPSEC tunnel related output will be found in the `show device-interface` command.
 
 Example output for a healthy tunnel:
 ```
@@ -367,14 +365,41 @@ Tue 2020-06-30 16:44:39 UTC
 Completed in 0.12 seconds
 ```
 
+Example output for a tunnel that is down:
+```
+========================================
+ combo-west:rem1
+========================================
+ Type:                host
+ Forwarding:          true
+ Mode:                host
+ MAC Address:         76:78:79:fc:eb:69
+
+ Admin Status:        up
+ Operational Status:  down
+ Redundancy Status:   non-redundant
+ Speed:               0
+ Duplex:              unknown
+
+ in-octets:                     1962932
+ in-unicast-pkts:                 32710
+ in-errors:                           0
+ out-octets:                    1373442
+ out-unicast-pkts:                32701
+ out-errors:                          6
+
+ IPSec:
+   Tunnel Status:     Down
+```
+
 ### Systemd Services
-To check the status of the ipsec client service on the router, you can run `show system services` which will show all 128T related services running on the specified node. The one for this plugin is named `128t-ipsec`.
+To check the status of the IPSEC client service on the router, you can run `show system services` which will show all 128T related services running on the specified node. The one for this plugin is named `128t-ipsec`.
 
 To verify that the services are running properly on the 128T router:
 * `systemctl status 128t-ipsec@<client>.service`
 
 ### Failover Alarms
-If a tunnel goes down, we set the corresponding ingress KNI to be operationally down. There will be an alarm created when this happens.
+If a tunnel goes down, we set the corresponding ingress KNI to be operationally down. An alarm will be created when this happens.
 
 Example output when the tunnel for `rem1` goes down:
 
