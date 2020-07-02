@@ -20,10 +20,11 @@ The monitoring agent at its core is designed to be able to push data to external
 
 The 128T Monitoring Agent can be obtained from the official 128T software repository. The following versions of the **monitoring-agent** are available for corresponding 128T software version.
 
-| Monitoring Agent            | 128T                        |
-| --------------------------- | --------------------------- |
-| 128T-monitoring-agent-1.2.1 | 128T >= 4.1.0; 128T < 4.3.0 |
-| 128T-monitoring-agent-2.1.1 | 128T >= 4.3.0               |
+| Monitoring Agent                | 128T                        |
+| ------------------------------- | --------------------------- |
+| **128T-monitoring-agent-3.0.0** | 128T >= 4.1.0               |
+| 128T-monitoring-agent-2.1.1     | 128T >= 4.3.0               |
+| 128T-monitoring-agent-1.2.1     | 128T >= 4.1.0; 128T < 4.3.0 |
 
 The agent can be install using dnf utility. For example.
 
@@ -81,9 +82,10 @@ Complete!
 
 ### Version History
 
-| Release      | Modification                   |
-| ------------ | ------------------------------ |
-| 1.2.0, 2.1.0 | `lib-directory` was introduced |
+| Release      | Modification                                                    |
+| ------------ | --------------------------------------------------------------- |
+| 3.0.0        | per input `sample-interval` and `push-interval` were introduced |
+| 1.2.0, 2.1.0 | `lib-directory` was introduced                                  |
 
 The monitoring agent has its own set of configurations and looks for inputs from specific directories on disk. By default, the configuration for the agent should be present in `/etc/128t-monitoring/config.yaml` and uses YAML format which looks something like this:
 
@@ -100,6 +102,8 @@ inputs:
   - name: t128_metrics
     include-outputs: [message_queue]
   - name: t128_device_state
+    sample-interval: 30
+    push-interval: 90
   - name: t128_peer_path
   - name: lte_metric
     exclude-outputs: [file]
@@ -114,7 +118,7 @@ The `enabled` field is meant as global toggle for applying the monitoring agent 
 
 Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `${HOSTNAME}`, `${ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
 
-`sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration. It is recommended to configure the `push-interval` as a multiple of `sample-interval`.
+`sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration. It is recommended to configure the `push-interval` as a multiple of `sample-interval`. These values can be overridden at the input level for finer control of agent's behavior.
 
 The `inputs` represent a single unit of collection. This can be a combination of inputs available from `telegraf` as well as other inputs developed by 128T. The function and configuration of each of the 128T provided inputs can be found in subsequent sections. For `telegraf` inputs please refer to the [influx documentation online](https://docs.influxdata.com/telegraf/v1.13/plugins/plugin-list/#input-plugins). Each `input` can be a combination of one or more collectors and can contain other collector specific information. For each of the inputs, a user can also configure an `include-outputs` which is a list of outputs to send the collected information to. This allows the user to build a matrix of inputs and outputs and provides a granular control over which input should be sent to what output. Similarly, the user can also configure an `exclude-outputs` which will include all defined outputs except the one specified.
 
@@ -142,7 +146,7 @@ Path: `/var/lib/128t-monitoring/config`
 
 The `config` directory contains the fully formed telegraf config files created by the monitoring agent. These file are generated based on the contents of `config.yaml` and the `inputs` and `outputs` directories.
 
-For example, the using the `t128_metrics` input and the `file` output in the examples section below will result in a configuration file such as:
+For example, using the `t128_events` input and the `file` output in the examples section below will result in a configuration file such as:
 
 ```toml
 [global_tags]
@@ -154,10 +158,13 @@ interval = 10
 flush_interval = 20
 
 [inputs]
-[[inputs.exec]]
-timeout = "15s"
-commands = [ "/usr/bin/metricCollector128t --config /etc/128t-monitoring/collectors/t128_metrics/default_config.toml",]
+[[inputs.execd]]
+command = [ "/usr/bin/eventCollector128t", "--log-name", "event_collector", "--topic", "events", "--index-file", "/tmp/events.index",]
+signal = "none"
 data_format = "influx"
+
+[inputs.execd.tagpass]
+type = [ "admin",]
 
 [outputs]
 [[outputs.file]]
@@ -165,8 +172,8 @@ files = ["stdout", "/tmp/metrics.out"]
 data_format = "influx"
 ```
 
-:::important
-Users should not make changes to these files as they will be overwritten by the `monitoring-agent-cli configure` command.
+:::important  
+Users should not make changes to these files as they will be overwritten by the `monitoring-agent-cli configure` command.  
 :::
 
 ### Samples
@@ -197,23 +204,23 @@ Path: `/var/lib/128t-monitoring/inputs/t128_metrics.conf`
     ## /etc/128t-monitoring/collectors/t128_metrics/default_config.toml will be used
     ## for monitoring. Here's a sample configuration on how to define custom metrics.
     ##
-    ## [[inputs.t128_metric.metric]]
-    ## name = "peer_path"
+    ## [[inputs.t128_metrics.metric]]
+    ## name = "service"
     ##
-    ## [inputs.t128_metric.metric.fields]
+    ## [inputs.t128_metrics.metric.fields]
     ## Refer to the 128T REST swagger documentation for the list of available metrics
     ##     key_name = "stats/<path_to_metric>"
-    ##     latency = "stats/bfd/peer-path/latency"
+    ##     packets-received = "stats/aggregate-session/service/packets-received"
     ##
-    ## [inputs.t128_metric.metric.parameters]
+    ## [inputs.t128_metrics.metric.parameters]
     ##     parameter_name = ["value1", "value2"]
-    ##     peer_path = ["path1"]
+    ##     service = ["service1"]
 
     timeout = "15s"
 ```
 
-:::tip
-Depending on the number of metrics you have enabled, you may need to increase the timeout to allow collection to complete. This can also influence your minimum polling interval.
+:::tip  
+Depending on the number of metrics you have enabled, you may need to increase the timeout to allow collection to complete. This can also influence your minimum polling interval.  
 :::
 
 #### Linux System
@@ -305,9 +312,46 @@ In this example data is sent via syslog:
   default_sdid = "128T"
 ```
 
-:::important
-For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages
+:::important  
+For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages  
 :::
+
+### Variable Replacement
+
+Within an **input** configuration, several variables have been made available for substitution.
+
+| Value             | Meaning                                      | Version Introduced |
+| ----------------- | -------------------------------------------- | ------------------ |
+| `${ROUTER}`       | The router name of the running 128T instance | 3.0.0              |
+| `${NODE}`         | The node name of the running 128T instance   | 3.0.0              |
+| `${128T_VERSION}` | The version of the running 128T instance     | 3.0.0              |
+
+An example of this would be (note that the `example` input does not exist).
+
+```console
+$ cat /var/lib/128t-monitoring/inputs/example.conf
+[[inputs.example]]
+  version = "${128T_VERSION}"
+
+$ monitoring-agent-cli generate --force
+Generating example
+
+$ cat /var/lib/128t-monitoring/config/example.conf
+[global_tags]
+host = "${HOSTNAME}"
+
+[agent]
+interval = 1
+flush_interval = 1
+
+[inputs]
+[[inputs.example]]
+version = "5.0.0"
+
+[outputs]
+[[outputs.file]]
+files = [ "/tmp/test.out",]
+```
 
 ## Monitoring Agent CLI
 
@@ -346,16 +390,16 @@ The configuration for each of these inputs can be viewed via `monitoring-agent-c
     ## for monitoring. Here's a sample configuration on how to define custom metrics.
     ##
     ## [[inputs.t128_metric.metric]]
-    ## name = "peer_path"
+    ## name = "service"
     ##
     ## [inputs.t128_metric.metric.fields]
     ## Refer to the 128T REST swagger documentation for the list of available metrics
     ##     key_name = "stats/<path_to_metric>"
-    ##     latency = "stats/bfd/peer-path/latency"
+    ##     packets-received = "stats/aggregate-session/service/packets-received"
     ##
     ## [inputs.t128_metric.metric.parameters]
     ##     parameter_name = ["value1", "value2"]
-    ##     peer_path = ["path1"]
+    ##     service = ["service1"]
 ```
 
 ### Generation
@@ -421,7 +465,7 @@ The 128T monitoring-agent comes pre-packaged with a set of collectors to assist 
 
 ### Metric collector
 
-The `metricCollector128t` python executable is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The configuration file in a `TOML` definition of metrics and has the following format:
+The `t128_metrics` input is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The configuration file in a `TOML` definition of metrics and has the following format:
 
 ```toml
 [[metric]]
@@ -440,6 +484,32 @@ The `metricCollector128t` python executable is responsible for collecting the co
 ```
 
 The `name` becomes the name of the measurement in the context of influxdb format. The `metric.fields` represent the various metrics to be collected. The `packets-received` in the above example will be field-name for the `stats/aggregate-session/service/packets-received` KPI which is the path of that KPI from the 128T REST API documentation. Finally, the `metric.parameters` can be used to configure key parameters such as `service` to be used for filtering the set of collected stats. In the above example, the metrics would be collected for all services but the `service` parameter can be used to specify a subset of services to monitor instead.
+
+A custom set of metrics can be collected by configuring the `t128_metrics` input as described in the sample. The configuration follows the same structure as the default file, but the metrics are nested under the input.
+
+```console
+# monitoring-agent-cli sample view t128_metrics
+[[inputs.t128_metrics]]
+    ## When configured, the metric collector input will pull KPIs from the 128T system
+    ## running on the current node. Depending on the KPI, the information can be used for
+    ## monitoring various aspects of the running system such as services, interfaces, errors etc.
+
+    ## By default, if no configuration is present, the set of metrics defined in
+    ## /etc/128t-monitoring/collectors/t128_metrics/default_config.toml will be used
+    ## for monitoring. Here's a sample configuration on how to define custom metrics.
+    ##
+    ## [[inputs.t128_metrics.metric]]
+    ## name = "service"
+    ##
+    ## [inputs.t128_metric.metrics.fields]
+    ## Refer to the 128T REST swagger documentation for the list of available metrics
+    ##     key_name = "stats/<path_to_metric>"
+    ##     packets-received = "stats/aggregate-session/service/packets-received"
+    ##
+    ## [inputs.t128_metric.metrics.parameters]
+    ##     parameter_name = ["value1", "value2"]
+    ##     service = ["service1"]
+```
 
 ### Event Collector
 
@@ -473,8 +543,8 @@ The event collector can be used for collecting and pushing events for various ca
   type = ["alarm", "admin"]
 ```
 
-:::important
-In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.
+:::important  
+In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.  
 :::
 
 ```toml
@@ -498,7 +568,6 @@ In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen abo
 | Release      | Modification                     |
 | ------------ | -------------------------------- |
 | 1.2.1, 2.1.1 | `mac-address` tag was introduced |
-
 
 The `deviceInterfaceStateCollector128t` collector can be used for monitoring the admin, oper and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
 
