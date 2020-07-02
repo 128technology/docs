@@ -115,6 +115,7 @@ module.exports = {
       "plugin_mosh",
       "plugin_dns_cache",
       "plugin_dns_app_id",
+      "plugin_loopback_static_routes",
       "plugin_kni_namespace_scripts"
     ],
     "REST APIs": [
