@@ -3,10 +3,10 @@ title: Loopback Static Routes Plugin
 sidebar_label: Loopback Static Routes
 ---
 
-The `128T-loopback-static-routes` plugin provides a way to manage the route table in Linux for the loopback interface called [`kni254`](concepts_kni) which is created by default on a 128T router. This is useful to set up the appropriate [host routing](concepts_linux_host_networking) for in-band management access via 128T Session Smart router in control of the wan interface.
+The `128T-loopback-static-routes` plugin provides a way to manage the route table in Linux for the loopback interface called [`kni254`](concepts_kni.md) which is created by default on a 128T router. This is useful to set up the appropriate [Linux host networking](concepts_linux_host_networking.md) when management traffic is traversing a forwarding interface managed by the 128T router.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 The plugin is designed to provide the following capabilities:
@@ -18,8 +18,8 @@ The plugin is designed to provide the following capabilities:
 ## Configuration
 The plugin aims to solve several different use cases when it comes to setting up the Linux host routing on a 128T router. The sections below explore each of the supported use cases and their configurations.
 
-### Make kni254 the default route in Linux
-When a 128T router is deployed at the edge of a network (such as a branch or a store), it typically does not have a dedicated management interface. In such scenarios, the traffic originating in Linux such as DNS, NTP, etc., has to be routed through the 128T platform. The [linux host networking](concepts_linux_host_networking#advanced-configuration) document describes the 128T configuration needed to accomplish this in details. The plugin configuration to set up the Linux routing to enable in-band management access is shown below.
+### Make kni254 the Default Route in Linux
+When a 128T router is deployed at the edge of a network (such as a branch or a store), it typically does not have a dedicated management interface. In such scenarios, the traffic originating in Linux such as DNS, NTP, etc., has to be routed through the 128T platform. The [linux host networking](concepts_linux_host_networking.md#advanced-configuration) document describes the 128T configuration needed to accomplish this in details. The plugin configuration to set up the Linux routing to enable in-band management access is shown below.
 
 ```config
 authority
@@ -35,11 +35,11 @@ authority
 The `metric` of zero will try to make this "the" default route in Linux. If the system has an out-of-band management interface and `kni254` is intended to be a backup default route choose a higher metric.
 :::
 
-### Automatically discover prefixes from services
-If you want to be selective about only allowing access to the configured services, the `learn-from-services` flag can be enabled to accomplish that. This allows the plugin to scan the running configuration for all 128T services that allow the `_internal_` tenant.
+### Automatically Discover Prefixes from Services
+The configuration attribute `learn-from-service`, when enabled, will selectively allow access to configured services. The `kni254` interface always belongs to the `_internal_` tenant and the plugin scans the running 128T configuration for the services that allow access to the `_internal_` tenant.
 
-:::info
-The `kni254` always belongs to the `_internal_` tenant and the plugin in this mode relies on services for which the `_internal_` tenant is allowed access.
+:::note
+The `learn-from-service` config can only be used when `default-route` is set to false.
 :::
 
 Consider the following example:
@@ -52,7 +52,7 @@ authority
             source      _internal_
             permission  allow
 
-    service _conductor_1_
+    service conductor_1
         address     172.16.101.10/32
         scope       private
         ...
@@ -72,10 +72,6 @@ authority
             metric                  128
 ```
 
-:::note
-The `learn-from-service` config can only be used when `default-route` is set to false.
-:::
-
 The configuration above will add a static route of `8.8.8.8/32` for the `dns` service and `172.16.101.10/32` for the `_conductor_1_` service. Since the `other_service` does not allow the `_internal_` tenant it will not be considered for adding the static routes towards `kni254`. All prefixes learned through this method will get the same configured metric in Linux. For example both the routes will get a metric of `128` in the above example.
 
 :::note
@@ -83,7 +79,7 @@ When the 128T router is running software version 4.3.0 or greater, the learning 
 :::
 
 ### Configuring static-route
-In addition to (or instead of) learning routes through service definition, the user can add other static prefixes to the configuration. In the example below, first route adds a `/32` with a metric of `100` and second route adds a `/16` with a metric of `200`
+In addition to, or instead of, learning routes through service definition, the user can add other static prefixes to the configuration. In the example below, first route adds a `/32` with a metric of `100` and second route adds a `/16` with a metric of `200`
 
 ```
 authority
@@ -107,12 +103,12 @@ authority
 The `static-route` config can only be used when `default-route` is set to false.
 :::
 
-:::note
+:::info
 A service or static-route with prefix `0.0.0.0/0` is the same as setting `default-route` to true for the plugin configuration.
 :::
 
 :::important
-Once the plugin is enabled, it will take over the management of the `route-kni254` file. This implies that when conductor services or other features such as management-over-forwarding are used its important to leave the `learn-from-services` flag set to true. Otherwise you could miss routing some of the traffic towards `kni254` and some services might not work as intended.
+Once the plugin is enabled, it will take over the management of the `/etc/sysconfig/network-scripts/route-kni254` file. This implies that when conductor services or other features such as management-over-forwarding are used its important to leave the `learn-from-services` flag set to true. Otherwise you could miss routing some of the traffic towards `kni254` and some services might not work as intended.
 :::
 
 

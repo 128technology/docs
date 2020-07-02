@@ -61,7 +61,7 @@ sudo echo 0.0.0.0/0 via 169.254.127.126 dev kni254 metric 200 > /etc/sysconfig/n
 
 
 :::info
-The [loopback-static-route plugin](plugin_loopback_static_routes#make-kni254-the-default-route-in-linux) can be installed and enabled on the 128T router to dynamically manage the Linux routes.
+The [loopback-static-route plugin](plugin_loopback_static_routes#make-kni254-the-default-route-in-linux) can be installed and enabled on the 128T router to dynamically manage Linux routes.
 :::
 
 ### KNI VLAN
