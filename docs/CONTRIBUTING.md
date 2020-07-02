@@ -61,7 +61,7 @@ Did you find a typo or something that was incorrect and do not have the time to 
 
 ### Hyperlinks
 
-Docusaurus is particular about how internal links are defined within the markdown in order to provide maximum browser support. While multiple formats are allowed, in practice only one approach has proven to provide the best results.
+Docusaurus is particular about how links are defined within markdown in order to provide support for most browsers. While multiple formats are allowed, in practice only one approach has proven to provide the best results.
 * External links require a full URL, including the scheme. `[External Link](https://github.com/128technology/docs/pulls)`
 * Links to images, or other static content start with a exclamation point `!` and require a relative path within the static directory. `![Image Description](/img/some_image.png)`
 * Links to resources within the site must contain the markdown file's extension (most often this is .md, but sometimes can be .mdx). `[link to another file](another_file.md)`
