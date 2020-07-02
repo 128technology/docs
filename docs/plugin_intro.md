@@ -55,7 +55,7 @@ In the 128T platform architecture, `salt` is used as communication mechanism bet
 * Trigger additional services or functions on the router such as systemd services etc.
 
 :::note
-Plugins rely on connectivity between the conductor and router to drive their logic. They also rely on the router to have access to the 128T RPM repository as either direct access over internet or by leveraging [conductor hosted repo](intro_upgrading#routers-with-restricted-internet-access).
+Plugins rely on connectivity between the conductor and router to drive their logic. They also rely on the router to have access to the 128T RPM repository as either direct access over internet or by leveraging [conductor hosted repo](intro_upgrading.md#routers-with-restricted-internet-access).
 :::
 
 ## Plugin Concepts
