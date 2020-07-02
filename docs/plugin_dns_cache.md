@@ -3,7 +3,7 @@ title: DNS Cache Plugin
 sidebar_label: DNS Cache
 ---
 
-The 128T-dns-cache plugin provides a DNS caching service on your 128T router by forwarding all traffic on a configured `ingress-service` and `tenant` to `dnsmasq`. By default it uses existing system configuration for nameserver resolution but supports optionally configuring custom server addresses. The plugin is implemented as a service function chain (SFC) where the DNS traffic received on the ingress interface is detoured through a Kernel Network Interface (KNI) to be cached by `dnsmasq`. A typical flow of the packets for the plugin is illustrated below:
+The 128T-dns-cache plugin provides a DNS caching service on your 128T router by forwarding all traffic on a configured `ingress-service` and `tenant` to [dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html). By default it uses existing system configuration for nameserver resolution but supports optionally configuring custom server addresses. The plugin is implemented as a service function chain (SFC) where the DNS traffic received on an ingress interface is detoured through a Kernel Network Interface (KNI) to be cached by `dnsmasq`. A typical flow of the packets for the plugin is illustrated below:
 
 lan-intf (lan-tenant) > `ingress-service` > `dnsmasq` > dns-kni (`tenant`) > egress-service > wan-intf
 
@@ -123,12 +123,17 @@ dns-cache
 exit
 ```
 
-## Thirdparty Software & Licenses
+## Third Party Software and Licenses
 - dnsmasq (GNU GPL v2, v3)
 
 ## Troubleshooting
 To verify that the services are running properly on the 128T router:
 * `systemctl status 128T-dns-cache-forwarder.service`
-* `systemctl status 128T-dns-matcher.service`
+* `systemctl status 128T-dns-cache-matcher.service`
 
 Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
+
+## Release Notes
+
+Version `1.0.1` and `2.0.1`:
+* Ensure the application restarts with 128T

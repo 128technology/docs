@@ -125,3 +125,9 @@ Sat 2020-03-28 03:28:43 UTC
  GoogleDrive                    0                9   2020-06-20 03:28:40   2020-06-20 03:28:40
  WindowsUpdate                  0                1   2020-06-20 03:28:40   2020-06-20 03:28:40
 ```
+
+## Release Notes
+
+Version `1.0.2` and `2.0.2`:
+* Ensure the application restarts with 128T
+* Ensure 128T monitors new file changes
