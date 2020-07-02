@@ -72,7 +72,7 @@ const features = [
   },
   {
     title: <>Plugins</>,
-    link: 'docs/plugin_monitoring_agent',
+    link: 'docs/plugin_intro',
     description: (
       <>
         Extend 128T functionality with plugins

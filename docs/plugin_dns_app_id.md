@@ -7,24 +7,9 @@ The DNS App ID plugin will identify traffic passing through your 128T router by 
 
 This plugin will rely on the [DNS Cache](plugin_dns_cache.md) plugin for hostname resolution.
 
-## Installation
-
-The following versions are available for corresponding 128T software versions:
-
-| DNS App Id | 128T |
-| --- | --- |
-| 128T-dns-app-id-1.0.0 | 128T >= 3.2.8; 128T < 4.3.0 |
-| 128T-dns-app-id-2.0.0 | 128T >= 4.3.0 |
-
-Installing this plugin will automatically install the required DNS Cache plugin too.
-
-:::important
-It is recommended to use the conductor GUI > Plugins page for installing plugins. This allows the system to select the correct version of plugin based on the 128T version.
+:::note
+The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
 :::
-
-:::important
-After installing the plugin, the 128T service on the conductor should be restarted for the changes to take effect.
-::::
 
 ## Configuration
 
@@ -140,3 +125,9 @@ Sat 2020-03-28 03:28:43 UTC
  GoogleDrive                    0                9   2020-06-20 03:28:40   2020-06-20 03:28:40
  WindowsUpdate                  0                1   2020-06-20 03:28:40   2020-06-20 03:28:40
 ```
+
+## Release Notes
+
+Version `1.0.2` and `2.0.2`:
+* Ensure the application restarts with 128T
+* Ensure 128T monitors new file changes

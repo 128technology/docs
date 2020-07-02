@@ -9,22 +9,9 @@ lan-intf (lan-tenant) > `ingress-service` > `dnsmasq` > dns-kni (`tenant`) > egr
 
 By enabling this plugin, you can provide DNS caching with fast resolution times to your network.
 
-## Installation
-
-The following versions are available for corresponding 128T software versions:
-
-| DNS Cache | 128T |
-| --- | --- |
-| 128T-dns-cache-1.0.0 | 128T >= 3.2.8; 128T < 4.3.0 |
-| 128T-dns-cache-2.0.0 | 128T >= 4.3.0 |
-
-:::important
-It is recommended to use the conductor GUI > Plugins page for installing plugins. This allows the system to select the correct version of plugin based on the 128T version.
+:::note
+The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
 :::
-
-:::important
-After installing the plugin, the 128T service on the conductor should be restarted for the changes to take effect.
-::::
 
 ## Configuration
 
@@ -145,3 +132,8 @@ To verify that the services are running properly on the 128T router:
 * `systemctl status 128T-dns-matcher.service`
 
 Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
+
+## Release Notes
+
+Version `1.0.1` and `2.0.1`:
+* Ensure the application restarts with 128T
