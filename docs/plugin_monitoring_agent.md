@@ -26,56 +26,14 @@ The 128T Monitoring Agent can be obtained from the official 128T software reposi
 | 128T-monitoring-agent-2.1.1     | 128T >= 4.3.0               |
 | 128T-monitoring-agent-1.2.1     | 128T >= 4.1.0; 128T < 4.3.0 |
 
-The agent can be install using dnf utility. For example.
+:::important  
+Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported 128T versions. It should be preferred for new installations and upgrades.  
+:::important
+
+The agent can be install using the `dnf` utility.
 
 ```console
 dnf install 128T-monitoring-agent
-Last metadata expiration check: 0:00:00 ago on Wed 10 Jun 2020 01:20:49 AM UTC.
-Dependencies resolved.
-=================================================================================
- Package                      Arch          Version         Repository      Size
-=================================================================================
-Installing:
- 128T-monitoring-agent        x86_64        2.1.1-1         128tech        7.0 M
-Installing dependencies:
- telegraf-128tech             x86_64        1.14.3-1        128tech         20 M
-
-Transaction Summary
-=================================================================================
-Install  2 Packages
-
-Total download size: 27 M
-Installed size: 101 M
-Is this ok [y/N]: y
-Downloading Packages:
-(1/2): 128T-monitoring-agent-2.1.1-1.rpm          20 MB/s | 7.0 MB     00:00
-(2/2): telegraf-128tech-1.14.3-1.x86_64.rpm       29 MB/s |  20 MB     00:00
----------------------------------------------------------------------------------
-Total                                             37 MB/s |  27 MB     00:00
-Running transaction check
-Transaction check succeeded.
-Running transaction test
-Transaction test succeeded.
-Running transaction
-  Preparing        :                                                         1/1
-  Running scriptlet: telegraf-128tech-1.14.3-1.x86_64                        1/2
-  Installing       : telegraf-128tech-1.14.3-1.x86_64                        1/2
-  Running scriptlet: telegraf-128tech-1.14.3-1.x86_64                        1/2
-Created symlink from /etc/systemd/system/multi-user.target.wants/telegraf.service to /usr/lib/systemd/system/telegraf.service.
-  Installing       : 128T-monitoring-agent-2.1.1-1.x86_64                    2/2
-  Running scriptlet: 128T-monitoring-agent-2.1.1-1.x86_64                    2/2
-Created symlink from /etc/systemd/system/128T.service.wants/128T-monitoring-agent.service to /usr/lib/systemd/system/128T-monitoring-agent.service.
-Created symlink from /etc/systemd/system/multi-user.target.wants/128T-monitoring-agent.service to /usr/lib/systemd/system/128T-monitoring-agent.service.
-  Running scriptlet: telegraf-128tech-1.14.3-1.x86_64                        2/2
-  Running scriptlet: 128T-monitoring-agent-2.1.1-1.x86_64                    2/2
-Removed symlink /etc/systemd/system/multi-user.target.wants/telegraf.service.
-  Verifying        : 128T-monitoring-agent-2.1.1-1.x86_64                    1/2
-  Verifying        : telegraf-128tech-1.14.3-1.x86_64                        2/2
-
-Installed:
-  128T-monitoring-agent.x86_64 2.1.1-1      telegraf-128tech.x86_64 1.14.3-1
-
-Complete!
 ```
 
 ## Configuration
@@ -326,7 +284,7 @@ Within an **input** configuration, several variables have been made available fo
 | `${NODE}`         | The node name of the running 128T instance   | 3.0.0              |
 | `${128T_VERSION}` | The version of the running 128T instance     | 3.0.0              |
 
-An example of this would be (note that the `example` input does not exist).
+An example of this would be:
 
 ```console
 $ cat /var/lib/128t-monitoring/inputs/example.conf
@@ -483,32 +441,36 @@ The `t128_metrics` input is responsible for collecting the configured metrics fr
     service = []
 ```
 
-The `name` becomes the name of the measurement in the context of influxdb format. The `metric.fields` represent the various metrics to be collected. The `packets-received` in the above example will be field-name for the `stats/aggregate-session/service/packets-received` KPI which is the path of that KPI from the 128T REST API documentation. Finally, the `metric.parameters` can be used to configure key parameters such as `service` to be used for filtering the set of collected stats. In the above example, the metrics would be collected for all services but the `service` parameter can be used to specify a subset of services to monitor instead.
+Each element of the configuration specifies an aspect of the [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v1.8/write_protocols/line_protocol_tutorial/) or the [128T REST API](api_rest_4.2.0.md).
+
+- **name**  
+  The line protocol measurement to be used for the output
+
+- **fields**  
+  What line protocol fields should exist in the output
+
+- **fields.key** (e.g. `packets-received`)  
+  A line protocol field key that should exist in the output
+
+- **fields.value** (e.g. `stats/aggregate-session/service/packets-received`)  
+  The 128T KPI providing the value for the associated field key. See the [128T REST API documentation](api_rest_4.2.0.md) for a full list. Note that the documentation prefixes the KPIs with `/router/{router}/`.
+
+- **parameters** (e.g. `service`)  
+  The 128T parameters that should be preserved as line protocol tags in the output. When a non-empty list of values is provided for a parameter, only KPIs with matching parameters will be included in the output.
 
 A custom set of metrics can be collected by configuring the `t128_metrics` input as described in the sample. The configuration follows the same structure as the default file, but the metrics are nested under the input.
 
-```console
-# monitoring-agent-cli sample view t128_metrics
+```toml
 [[inputs.t128_metrics]]
-    ## When configured, the metric collector input will pull KPIs from the 128T system
-    ## running on the current node. Depending on the KPI, the information can be used for
-    ## monitoring various aspects of the running system such as services, interfaces, errors etc.
+    [[inputs.t128_metrics.metric]]
+      name = "disk"
 
-    ## By default, if no configuration is present, the set of metrics defined in
-    ## /etc/128t-monitoring/collectors/t128_metrics/default_config.toml will be used
-    ## for monitoring. Here's a sample configuration on how to define custom metrics.
-    ##
-    ## [[inputs.t128_metrics.metric]]
-    ## name = "service"
-    ##
-    ## [inputs.t128_metric.metrics.fields]
-    ## Refer to the 128T REST swagger documentation for the list of available metrics
-    ##     key_name = "stats/<path_to_metric>"
-    ##     packets-received = "stats/aggregate-session/service/packets-received"
-    ##
-    ## [inputs.t128_metric.metrics.parameters]
-    ##     parameter_name = ["value1", "value2"]
-    ##     service = ["service1"]
+    [[inputs.t128_metrics.metric.fields]]
+      used = "stats/disk/used"
+      capacity = "stats/disk/capacity"
+
+    [[inputs.t128_metrics.metric.parameters]]
+      disk = ["/"]
 ```
 
 ### Event Collector
