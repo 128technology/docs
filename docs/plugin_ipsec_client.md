@@ -5,15 +5,6 @@ sidebar_label: IPSEC Client
 
 The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPSEC endpoints through the 128T router. It is possible to configure the plugin for each router to have multiple destination IPSEC endpoints and thus the 128T will failover between them. This is accomplished by performing a [Service Function Chain (SFC)](plugin_intro#service-function-chaining) with Libreswan, a third-party IPSEC client. By enabling this plugin, you can provide IPSEC tunnel connectivity to third party providers from your 128T router.
 
-## Installation
-
-The following versions are available for corresponding 128T software versions:
-
-| IPSEC Client            | 128T                        |
-| ----------------------- | --------------------------- |
-| 128T-ipsec-client-1.0.4 | 128T >= 3.2.8; 128T < 4.3.0 |
-| 128T-ipsec-client-2.0.4 | 128T >= 4.3.0               |
-
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
 :::
@@ -414,3 +405,36 @@ Tue 2020-06-30 16:42:50 UTC
 There are 0 shelved alarms
 Completed in 0.10 seconds
 ```
+
+## Release Notes
+
+### Release 2.0.4
+
+#### Issues Fixed
+
+- **PLUGIN-384** Added an MTU configuration option to the ipsec profile.
+- **PLUGIN-333** The `plugin-network` ip prefix setting in the configuration was ignored and would instead use the default ip prefix setting.
+- **PLUGIN-336** Using the `vector-name` configuration option would generate invalid configuration.
+- **PLUGIN-400** Added a local subnet configuration option and enhanced the remote subnet configuration option to allow a list of values.
+
+### Release 2.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-47** Created generic ipsec client plugin to provide connectivity to remote ipsec endpoints. This version supports a single client with up to two remote endpoints.
+
+### Release 1.0.4
+
+#### Issues Fixed
+
+- **PLUGIN-384** Added an MTU configuration option to the ipsec profile.
+- **PLUGIN-333** The `plugin-network` ip prefix setting in the configuration was ignored and would instead use the default ip prefix setting.
+- **PLUGIN-336** Using the `vector-name` configuration option would generate invalid configuration.
+- **PLUGIN-400** Added a local subnet configuration option and enhanced the remote subnet configuration option to allow a list of values.
+
+
+### Release 1.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-47** Created generic IPSEC client plugin to provide connectivity to remote IPSEC endpoints. This version supports a single client with up to two remote endpoints.

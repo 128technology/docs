@@ -157,14 +157,6 @@ module.exports = {
       },
       {
         "type": "category",
-        "label": "128T IPSEC Client",
-        "items": [
-          "release_notes_128t_ipsec_client_2.0",
-          "release_notes_128t_ipsec_client_1.0",
-        ],
-      },
-      {
-        "type": "category",
         "label": "128T SIP ALG",
         "items": [
           "release_notes_128t_sip_alg_2.1",

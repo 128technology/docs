@@ -128,6 +128,12 @@ Sat 2020-03-28 03:28:43 UTC
 
 ## Release Notes
 
-Version `1.0.2` and `2.0.2`:
-* Ensure the application restarts with 128T
-* Ensure 128T monitors new file changes
+### Release 1.0.2
+
+#### Issues Fixed
+- **PLUGIN-402** Ensure 128T monitors new file changes and applications restarts with 128T
+
+### Release 2.0.2
+
+#### Issues Fixed
+- **PLUGIN-402** Ensure 128T monitors new file changes and applications restarts with 128T
