@@ -1,18 +1,9 @@
 ---
-title: IPSEC Client plugin
-sidebar_label: IPSEC Client
+title: IPsec Client plugin
+sidebar_label: IPsec Client
 ---
 
-The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPSEC endpoints through the 128T router. It is possible to configure the plugin for each router to have multiple destination IPSEC endpoints and thus the 128T will failover between them. This is accomplished by performing a [Service Function Chain (SFC)](plugin_intro#service-function-chaining) with Libreswan, a third-party IPSEC client. By enabling this plugin, you can provide IPSEC tunnel connectivity to third party providers from your 128T router.
-
-## Installation
-
-The following versions are available for corresponding 128T software versions:
-
-| IPSEC Client            | 128T                        |
-| ----------------------- | --------------------------- |
-| 128T-ipsec-client-1.0.4 | 128T >= 3.2.8; 128T < 4.3.0 |
-| 128T-ipsec-client-2.0.4 | 128T >= 4.3.0               |
+The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPsec endpoints through the 128T router. It is possible to configure the plugin for each router to have multiple destination IPsec endpoints and thus the 128T will failover between them. This is accomplished by performing a [Service Function Chain (SFC)](plugin_intro#service-function-chaining) with Libreswan, a third-party IPsec client. By enabling this plugin, you can provide IPsec tunnel connectivity to third party providers from your 128T router.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
@@ -23,7 +14,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 In the below configuration examples, there are two of each plugin configuration element. The first has all configuration elements explicitly configured with the defaults if applicable and the other is the bare minimum using all of the default values. The values enclosed in `<>` are fields that didn’t have default values specified by the plugin. If any of these optional, non-defaulted fields are unspecified, then they will use the Libreswan defaults which can be found [here](https://libreswan.org/man/ipsec.conf.5.html). The values enclosed in `[]` are fields that didn't have default values specified by the plugin and will not be included in the generated 128T configuration.
 
 ### Profiles
-Profiles are reusable IPSEC settings that can be used across multiple nodes in a router and multiple IPSEC endpoint `remote`s.
+Profiles are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s.
 
 ```
 router
@@ -58,7 +49,7 @@ exit
 ```
 
 :::note 
-This plugin can only connect to IPSEC endpoints that support pre-shared key authentication.
+This plugin can only connect to IPsec endpoints that support pre-shared key authentication.
 :::
 
 ### Clients
@@ -99,7 +90,7 @@ A KNI per remote is created with the name of the `remote` and a single egress KN
 ### User-Specific 128T Configuration
 To allow the maximum flexibility on getting the traffic into the plugin's network namespace and getting the traffic out, we rely on the user to configure those means (usually through services and service routes).
 
-You will need to have the IPSEC endpoint bound traffic sent into the KNIs with the names of the `remote`s. You can use builtin 128T failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down. You will also need to configure a way for the traffic to be routed towards the IPSEC endpoint after being encrypted. All of this encrypted traffic will be assigned to the `tenant` configured under `ipsec-client`.
+You will need to have the IPsec endpoint bound traffic sent into the KNIs with the names of the `remote`s. You can use builtin 128T failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down. You will also need to configure a way for the traffic to be routed towards the IPsec endpoint after being encrypted. All of this encrypted traffic will be assigned to the `tenant` configured under `ipsec-client`.
 
 ### Complete Example Configuration
 
@@ -323,7 +314,7 @@ Configuration and pillar generation logs can be found on the conductor under `/v
 Salt status can be found on the conductor by utilizing the PCLI’s `show assets` and `show assets <asset-id>` commands.
 
 ### PCLI Enhancements
-To check the status of the IPSEC tunnels for a given ingress KNI, extra IPSEC tunnel related output will be found in the `show device-interface` command.
+To check the status of the IPsec tunnels for a given ingress KNI, extra IPsec tunnel related output will be found in the `show device-interface` command.
 
 Example output for a healthy tunnel:
 ```
@@ -393,7 +384,7 @@ Example output for a tunnel that is down:
 ```
 
 ### Systemd Services
-To check the status of the IPSEC client service on the router, you can run `show system services` which will show all 128T related services running on the specified node. The one for this plugin is named `128t-ipsec`.
+To check the status of the IPsec client service on the router, you can run `show system services` which will show all 128T related services running on the specified node. The one for this plugin is named `128t-ipsec`.
 
 To verify that the services are running properly on the 128T router:
 * `systemctl status 128t-ipsec@<client>.service`
@@ -414,3 +405,36 @@ Tue 2020-06-30 16:42:50 UTC
 There are 0 shelved alarms
 Completed in 0.10 seconds
 ```
+
+## Release Notes
+
+### Release 2.0.4
+
+#### Issues Fixed
+
+- **PLUGIN-384** Added an MTU configuration option to the ipsec profile.
+- **PLUGIN-333** The `plugin-network` ip prefix setting in the configuration was ignored and would instead use the default ip prefix setting.
+- **PLUGIN-336** Using the `vector-name` configuration option would generate invalid configuration.
+- **PLUGIN-400** Added a local subnet configuration option and enhanced the remote subnet configuration option to allow a list of values.
+
+### Release 2.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-47** Created generic ipsec client plugin to provide connectivity to remote ipsec endpoints. This version supports a single client with up to two remote endpoints.
+
+### Release 1.0.4
+
+#### Issues Fixed
+
+- **PLUGIN-384** Added an MTU configuration option to the ipsec profile.
+- **PLUGIN-333** The `plugin-network` ip prefix setting in the configuration was ignored and would instead use the default ip prefix setting.
+- **PLUGIN-336** Using the `vector-name` configuration option would generate invalid configuration.
+- **PLUGIN-400** Added a local subnet configuration option and enhanced the remote subnet configuration option to allow a list of values.
+
+
+### Release 1.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-47** Created generic IPsec client plugin to provide connectivity to remote IPsec endpoints. This version supports a single client with up to two remote endpoints.
