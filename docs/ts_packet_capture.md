@@ -2,7 +2,7 @@
 title: PCLI Packet Capture
 ---
 
-PCAPs are one of the most useful tools to debug traffic issues on a 128T Router(s) as well as wider networking issues.  Given those two factors, there’s often a need to quickly add or remove a capture filter without a need to make it persistent.
+PCAPs are one of the most useful tools to debug traffic issues on a 128T Router(s) as well as wider networking issues. The nature of troubleshooting is that it is transitory; once the problem has been identified, the system state should be restored to its previous state (or possibly with necessary modifications as a result of the troubleshooting exercise). This guide walks through the approaches for applying dynamic capture filters to the 128T Networking Platform.
 
 ## Packet Capture per Device Interface
 
@@ -104,11 +104,11 @@ There are four locations within the 128T wherein capturing packets will provide 
 3. Reverse flow of a session arriving on the egress interface
 4. Reverse flow of a session leaving the ingress interface
 
-When creating a selective capture filter on the LAN interface, sessions will be tagged with an action that will capture all packets for the session at each of the four points listed above. Additionally, [metadata](concepts_metadata.md) will indicate to subsequent 128T nodes/routers to enable the packet capture for this session. Each 128T node will install capture filters in each of the four capture points for the same session. A [pcap](https://www.tcpdump.org/pcap.html) file will be created on each node, containing the name of the service captured.
+When creating a selective capture filter on the LAN interface, sessions will be tagged with an action that will capture all packets for the session at each of the four points listed above. Additionally, [metadata](concepts_metadata.md) will indicate to subsequent 128T nodes/routers to enable the packet capture for this session. Each 128T node will install capture filters in each of the four capture points for the same session. A [PCAP](https://www.tcpdump.org/pcap.html) file will be created on each node, containing the name of the service captured.
 
 ![Typical Network Diagram](/img/ts_packet_capture_selective_capture.png)
 
-Referencing the above diagram, a capture on node1.routerA will create pcaps for a single session on each of the 12 points shown.
+Referencing the above diagram, a capture on node1.routerA will create PCAPs for a single session on each of the 12 points shown.
 
 #### Local Mode
 
@@ -231,7 +231,7 @@ The output from the show command will display currently enabled capture filters 
  east       1   0.0.0.0/0:0-65535   0.0.0.0/0:0-65535   icmp       unlimited                          0
 ```
 
-If you specify the service and capture ID via arguments, you will see details of the sessions being captured.  In the above example you can see that service “west” has an active session on capture `5`.  The detailed view can be seen below, where it show session “1640858e-fe6a-44cd-b38a-7d479a68418” is actively being captured:
+If you specify the service and capture ID via arguments, you will see details of the sessions being captured.  In the above example you can see that service “west” has an active session on capture `5`.  The detailed view can be seen below, where it shows session “1640858e-fe6a-44cd-b38a-7d479a68418” is actively being captured:
 
 ```
 >> show session-captures service west id 5
