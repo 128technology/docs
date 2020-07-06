@@ -28,7 +28,7 @@ The 128T Monitoring Agent can be obtained from the official 128T software reposi
 
 :::important  
 Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported 128T versions. It should be preferred for new installations and upgrades.  
-:::important
+:::
 
 The agent can be install using the `dnf` utility.
 
