@@ -115,7 +115,8 @@ module.exports = {
       "plugin_mosh",
       "plugin_dns_cache",
       "plugin_dns_app_id",
-      "plugin_kni_namespace_scripts"
+      "plugin_ipsec_client",
+      "plugin_kni_namespace_scripts",
     ],
     "REST APIs": [
       "api_rest_4.2.0",
