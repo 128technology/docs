@@ -135,5 +135,12 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 
 ## Release Notes
 
-Version `1.0.1` and `2.0.1`:
-* Ensure the application restarts with 128T
+### Release 1.0.1
+
+#### Issues Fixed
+- **PLUGIN-402** Ensure the application restarts with 128T
+
+### Release 2.0.1
+
+#### Issues Fixed
+- **PLUGIN-402** Ensure the application restarts with 128T
