@@ -3,7 +3,7 @@ title: Management Traffic over Forwarding Interfaces
 sidebar_label: Management over Forwarding
 ---
 
-Management traffic is any service that makes direct contact to another asset, either to retrieve or interface with the configuration and status of hardware components, the core operating system, features of user interfaces to the OS, or the business application, sometimes taking subsequent action to maintain or change configurations. All actions ultimately provide underlying support to the service being delivered by the managed resource to its users. Access is typically controlled via a set of privileges and will usually allow either modification and/or viewing of sensitive system configurations. Management traffic includes three categories: management, monitoring, and data backups and restores.
+Management traffic is any service that makes direct contact to another asset, either to retrieve or interface with the configuration and status of hardware components (conductor to router), the core operating system (NTP), features of user interfaces to the OS (DNS), or the business application, sometimes taking subsequent action to maintain or change configurations. All actions ultimately provide underlying support to the service being delivered by the managed resource to its users. Access is typically controlled via a set of privileges and will usually allow either modification and/or viewing of sensitive system configurations. Management traffic includes three categories: management, monitoring, and data backups and restores.
 
 Networking equipment's management traffic typically traverses a separate physical interface for the purposes of network isolation and policing.
 
@@ -20,15 +20,14 @@ When provisioning management traffic to traverse forwarding interfaces, those in
 One of the strengths of the 128T data model is to dynamically apply policy only as needed. As it relates to management traffic, service policy will only be created for those management applications provisioned. The list of applications natively supported are:
 
 * [Conductor traffic](concepts_machine_communication.md#router-to-conductor-connectivity). This works in tandem with [conductor services](bcp_conductor_deployment.md)
-* Web server access
-* PCLI access
-* DNS traffic for FQDN resolution
-* NTP
-* YUM
-* SSH
-* SNMP
-* Syslog
-* IPFIX
+* [Web server access](config_reference_guide.md#webserver)
+* [PCLI/SSH](config_reference_guide.md#address)
+* [DNS](#dns) traffic for FQDN resolution
+* [NTP](config_reference_guide.md#ntp)
+* [Software Updates](config_reference_guide#repository.md)
+* [SNMP](config_reference_guide.md#snmp-server)
+* [Syslog](config_reference_guide.md#syslog)
+* [IPFIX](config_reference_guide.md#syslog)
 
 ## Configuration
 
@@ -47,7 +46,7 @@ Each of the service and service-routes share one important attribute: they are c
 
 ### DNS
 
-DNS servers can be configured within `authority > dns-address` in one of two ways:
+DNS servers can be configured within `authority > router > dns-config > address` in one of two ways:
 
 * `automatic` - if the management interface is configured for DHCP, then the DNS server(s) learned through the DHCP lease are used
 * `static` - up to two DNS server addresses can be configured
@@ -58,7 +57,7 @@ DNS servers can be configured within `authority > dns-address` in one of two way
 If static DNS servers are configured and a network-interface is configured to obtain its address via DHCP, the DNS servers learned through the lease are ordered after the statically defined entries.
 
 :::note
-Configuring `dns-address` is required, however setting `dns-address` to `automatic` is only allowed when a management interface is enabled for DHCP.
+Configuring `dns-config > address` is required, however setting `dns-config > address` to `automatic` is only allowed when a management interface is enabled for DHCP.
 :::
 
 ### Management Vectors
@@ -90,7 +89,7 @@ default dev wan1-intf scope link metric 20
 
 ### Utility Address
 
-Management interfaces can be configured for redundancy between nodes of a HA pair by provisioning `authority > router > node > device-interface > network-interface > utility-ip-address`. If the interface is redundant and management, a `utility-ip-address` is required on the network-interface. This address is assigned to the Linux interface when 128T is not running with the original MAC address, not the virtual `shared-phys-address` from 128T configuration. The `utility-ip-address` must be unique per node across the router.
+Management interfaces can be configured for redundancy between nodes of a HA pair by provisioning `authority > router > node > device-interface > network-interface > address > utility-ip-address`. If the interface is redundant and management, a `utility-ip-address` is required on the network-interface. This address is assigned to the Linux interface when 128T is not running with the original MAC address, not the virtual `shared-phys-address` from 128T configuration. The `utility-ip-address` must be unique per node across the router.
 
 
 ### Sample Configuration
@@ -99,9 +98,11 @@ Management interfaces can be configured for redundancy between nodes of a HA pai
 config
     authority
         conductor-address  192.168.1.12
-        dns-address        automatic
         router             Router1
             name                      Router1
+            dns-config                automatic
+                mode              automatic
+            exit
             node                      Node1
                 name              Node1
                 device-interface  node1-mgmt
@@ -124,7 +125,15 @@ config
                     exit
                 exit
             exit
+        exit
+    exit
+exit
 ```
+
+:::important
+`router > node > device-interface > network-interface > source-nat` must be set to `true` when using management over forwarding since all management traffic will originate from `169.254.x.x`.
+`router > node > device-interface > network-interface > default-route` must also be set to `true` to ensure that linux uses the network interface as its preferred route for traffic originating from the host OS.
+:::
 
 ### User Defined Services
 
