@@ -116,6 +116,7 @@ module.exports = {
       "plugin_dns_cache",
       "plugin_dns_app_id",
       "plugin_ipsec_client",
+      "plugin_loopback_static_routes",
       "plugin_kni_namespace_scripts",
     ],
     "REST APIs": [
