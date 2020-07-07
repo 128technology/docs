@@ -155,7 +155,7 @@ routing:
     - "192.168.0.0/16 via 169.254.140.1 dev test"
 ```
 
-The above example, will crete a single route table entry for the prefix `192.168.0.0/16`.
+The above example, will create a single route table entry for the prefix `192.168.0.0/16`.
 
 :::note
 If a target interface is configured as default-route and no routing rules are specified, a default route for the target will be added.
