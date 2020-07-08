@@ -6,12 +6,12 @@ sidebar_label: 4.4
 ## Release 4.4.1
 
 :::info
-The minimum 128T-installer version of 2.6.0 is required for the 4.4.1 update. (rpm package: 128T-installer-2.6.0-1.x86_64.rpm)
+Upgrading to the 4.4.1 release requires version 2.6.0 or newer of the 128T installer. If you are upgrading a managed router using the conductor, the installer will be upgraded automatically. If you are upgrading a router or conductor manually, please ensure you meet the minimum installer requirements before starting.
 :::
 
 ### Issues Fixed
 
-- **I95-33403** REST APIs have been added for routing show commands
+- **I95-33403** REST APIs have been added for retrieving information about the 128T routing protocols
 ------
 - **I95-33762** Unable to provision multiple DHCP servers per network interface on unmanaged, standalone router
 ------
@@ -23,7 +23,7 @@ The minimum 128T-installer version of 2.6.0 is required for the 4.4.1 update. (r
 ------
 - **I95-35313** Startup delay of 128T when many peer paths exist
 ------
-- **I95-35354** Downloading a software image during or immediately prior to an upgrade will incorrectly complete the upgrade if the download was successful before the upgrade starts
+- **I95-35354** There exists an unlikely race condition wherein the successful return code of a download operation (that happens asynchronously) causes an upgrade in progress to terminate prematurely
 ------
 - **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T
   Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
@@ -34,7 +34,7 @@ The minimum 128T-installer version of 2.6.0 is required for the 4.4.1 update. (r
   Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
 ------
 - **I95-35584** User unable to login to UI after loading a new web certificate
-  Until the system is upgraded to 4.4.1, this issue can be mititaged by restarting the web server with the command `systemctl restart 128TWeb`
+  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the web server with the command `systemctl restart 128TWeb`
 ------
 - **I95-35636** SNMP query for ifIndex of interface incorrectly returns
   ```
