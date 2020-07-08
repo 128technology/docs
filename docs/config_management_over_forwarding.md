@@ -24,7 +24,7 @@ One of the strengths of the 128T data model is to dynamically apply policy only 
 * [PCLI/SSH](config_reference_guide.md#address)
 * [DNS](#dns) traffic for FQDN resolution
 * [NTP](config_reference_guide.md#ntp)
-* [Software Updates](config_reference_guide#repository.md)
+* [Software Updates](config_reference_guide.md#repository)
 * [SNMP](config_reference_guide.md#snmp-server)
 * [Syslog](config_reference_guide.md#syslog)
 * [IPFIX](config_reference_guide.md#syslog)
@@ -89,7 +89,7 @@ default dev wan1-intf scope link metric 20
 
 ### Utility Address
 
-Management interfaces can be configured for redundancy between nodes of a HA pair by provisioning `authority > router > node > device-interface > network-interface > address > utility-ip-address`. If the interface is redundant and management, a `utility-ip-address` is required on the network-interface. This address is assigned to the Linux interface when 128T is not running with the original MAC address, not the virtual `shared-phys-address` from 128T configuration. The `utility-ip-address` must be unique per node across the router.
+Management interfaces can be configured for redundancy between nodes of a HA pair by provisioning `authority > router > node > device-interface > shared-phys-address`. If the interface is redundant and management, a `authority > router > node > device-interface > network-interface > address > utility-ip-address` is required on the network-interface. This address is assigned to the Linux interface when 128T is not running with the original MAC address, not the virtual `shared-phys-address` from 128T configuration. The `utility-ip-address` must be unique per node across the router.
 
 
 ### Sample Configuration
