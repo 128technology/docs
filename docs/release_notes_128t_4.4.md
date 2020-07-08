@@ -11,9 +11,13 @@ The minimum 128T-installer version of 2.6.0 is required for the 4.4.1 update. (r
 
 ### Issues Fixed
 
+- **I95-33403** REST APIs have been added for routing show commands
+------
 - **I95-33762** Unable to provision multiple DHCP servers per network interface on unmanaged, standalone router
-
+------
 - **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
+------
+- **I95-34751** LTE certified to run on Verizon wireless networks
 ------
 - **I95-35038** Configuration Explorer within GUI can sometimes produce a "Something went wrong" message when searching or scrolling
 ------
@@ -24,16 +28,20 @@ The minimum 128T-installer version of 2.6.0 is required for the 4.4.1 update. (r
 - **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T
   Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
 ------
+- **I95-35517** [Selective Packet Capture](ts_packet_capture.md#selective-packet-capture)
+------
 - **I95-35563** Startup race condition can lead to LTE initialization failure
   Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
 ------
 - **I95-35584** User unable to login to UI after loading a new web certificate
   Until the system is upgraded to 4.4.1, this issue can be mititaged by restarting the web server with the command `systemctl restart 128TWeb`
 ------
-- **I95-36536** SNMP query for ifIndex of interface incorrectly returns
+- **I95-35636** SNMP query for ifIndex of interface incorrectly returns
   ```
   No Such Object available on this agent at this OID
   ```
+------
+- **I95-35655** RSRP and RSRQ values are now displayed in the output of `show device-interface` for LTE interfaces
 ------
 - **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment
 ------
@@ -45,7 +53,7 @@ The minimum 128T-installer version of 2.6.0 is required for the 4.4.1 update. (r
 ------
 - **I95-35885** Systems with two LTE interfaces would appear to have three LTE interfaces in Linux
 
-  Until the system is upgraded to 4.3.8, the issue can be mitigated by using the interface `wwp0s21u3i8`. The interface `wwp0s21u3i10` should not be used and will no longer be present after upgrading to 4.3.8.
+  Until the system is upgraded to 4.4.1, the issue can be mitigated by using the interface `wwp0s21u3i8`. The interface `wwp0s21u3i10` should not be used and will no longer be present after upgrading to 4.4.1.
 
 ## Release 4.4.0
 
