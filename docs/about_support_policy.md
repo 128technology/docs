@@ -67,3 +67,7 @@ Extended maintenance and support may be available for certain releases after EOM
 ### End-of-life products
 
 For products going EOL, 128 Technology will communicate an End-of-Life Notification (EOLN) at least 90 days prior to a product’s EOS date. EOS does not apply to incremental software releases of an active product. The EOM date will be at least 12 months from EOS. The LDOS (and effective EOL date) shall be at least one year from the EOM date.
+
+## CVEs
+
+128 Technology is committed to providing the highest quality software with each release.  In addition to creating new features and functions for the 128T Networking Platform, Critical Vulnerability Exposures (CVE) are continuously evaluated and addressed in accordance with our [security policy](about_security_policy.md). In many cases, CVEs exist in the operating system's libraries, binaries and kernel. Addressing these vulnerabilities requires upgrading direct or indirect dependences of the 128T from upstream repositories.  In some cases, this requires upgrading the kernel or even the version of OS distribution, which no longer qualifies as a patch and necessitates an increment to a minor or major version of software.
