@@ -303,7 +303,7 @@ Node: node1
 
 #### The Internal Tenant
 
-The internal tenant (named `_internet_`), is arguably the most useful of all of the special tenants. It is immutably assigned to the built-in Kernel NIC Interface (KNI) named `kni254`, which is used for communication to and from the Linux host operating system on the platform on which the 128T software is running.
+The internal tenant (named `_internal_`), is arguably the most useful of all of the special tenants. It is immutably assigned to the built-in Kernel NIC Interface (KNI) named `kni254`, which is used for communication to and from the Linux host operating system on the platform on which the 128T software is running.
 
 By adding an `access-policy` allowing (or denying) `_internal_` on your service, you can selectively permit processes running in Linux outbound network access. This is commonplace for "host originated" traffic, such as DNS queries, outbound SSH connections, SNMP traps, syslog, etc. The `_internal_` tenant is also critical to the success of *Conductor Host Services*, described in our documentation; this is because the outbound `salt-minion` and NETCONF requests destined for the conductor are initiated within the Linux host operating system.
 

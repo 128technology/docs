@@ -111,12 +111,13 @@ module.exports = {
     "Plugins": [
       "plugin_intro",
       "plugin_monitoring_agent",
-      "plugin_gre",
-      "plugin_mosh",
-      "plugin_dns_cache",
       "plugin_dns_app_id",
+      "plugin_dns_cache",
+      "plugin_gre",
       "plugin_ipsec_client",
       "plugin_loopback_static_routes",
+      "plugin_mosh",
+      "plugin_sip_alg",
       "plugin_kni_namespace_scripts",
     ],
     "REST APIs": [
