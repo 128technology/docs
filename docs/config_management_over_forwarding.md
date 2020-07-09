@@ -15,6 +15,10 @@ When using a separate [non-forwarding](concepts_interface_types.md) interface fo
 
 When provisioning management traffic to traverse forwarding interfaces, those interfaces will continue to be available for management related functions (i.e. ssh) even when the 128T is not running, yet will still be protected by firewall rules that match the respective policy. This is particularly important during maintenance operations when the 128T software is taken off-line for an upgrade.
 
+:::warning
+Once a forwarding interface is provisioned for management traffic, any existing OS configuration for that interface such as ifcfg and firewall rules will be overwritten to match the 128T configuration.
+:::
+
 ## Management Services
 
 One of the strengths of the 128T data model is to dynamically apply policy only as needed. As it relates to management traffic, service policy will only be created for those management applications provisioned. The list of applications natively supported are:
