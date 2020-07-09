@@ -3,9 +3,9 @@ title: SIP ALG Plugin
 sidebar_label: SIP ALG
 ---
 
-The Session Initiation Protocol (SIP)[^1] is a signaling protocol used for initiating, maintaining, and terminating real-time sessions that include voice, video and messaging applications. SIP is a text based protocol and exchanges IP address information within its messages as means to establishing a signaling and media sessions between endpoints. When the SIP clients are behind NAT this poses a particular challenge since the addresses in the SIP messages for such clients will be private IPs which are not reachable beyond the NAT boundaries.
+The Session Initiation Protocol (SIP)[^1] is a signaling protocol used for initiating, maintaining, and terminating real-time sessions that include voice, video and messaging applications. SIP is a text based protocol and exchanges IP address information within its messages as a means to establish signaling and media sessions between endpoints. When the SIP clients are behind NAT this poses a particular challenge since the addresses in the SIP messages for such clients will be private IPs which are not reachable beyond the NAT boundaries.
 
-When 128T router is present at the edge of the NAT boundary, it is capable of performing a Application Layer Gateway (ALG) for SIP protocol by doing packet inspection and re-writing the private IP address information in the SIP messages for both SIP headers and SDP (Session Description Protocol)[^2]. This enables both signaling and media traffic to traverse the NAT and makes the communication possible between the client behind the NAT and the remote SIP endpoint(s). The SIP ALG function can be enabled by installing and configuring the `128T-sip-alg` plugin.
+When 128T router is present at the edge of the NAT boundary, it is capable of performing a Application Layer Gateway (ALG) function for SIP protocol by doing packet inspection and re-writing the private IP address information in the SIP messages for both SIP headers and Session Description Protocol (SDP)[^2]. This enables both signaling and media traffic to traverse the NAT and makes the communication possible between the client behind the NAT and the remote SIP endpoint(s). The SIP ALG function can be enabled by installing and configuring the `128T-sip-alg` plugin.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
@@ -17,10 +17,10 @@ The sip-alg configuration can be enabled on a router. In order to configure `sip
 
 * Static IP mappings
 * Services for making inbound and outbound calls
-* Additional changes to the SDP to enable SIP inter working
+* Additional changes to the SDP to enable SIP interworking
 
 :::important
-The 128T sip-alg function currently only supports a scenario whereby all the SIP endpoints on the private network communicate via a SIP enabled PBX device.
+The 128T sip-alg function only supports a scenario whereby all the SIP endpoints on the private network communicate via a SIP enabled PBX device.
 :::
 
 The following configuration shows an example of what the configuration for a single PBX device would look like:
@@ -82,20 +82,20 @@ exit
 ```
 
 :::note
-The `128T-sip-alg` plugin supports multiple branch PBXs by letting the user configure multiple `sip-alg` instances on the router. There is a limit of 10 sip-alg configuration per router.
+The `128T-sip-alg` plugin supports multiple branch PBXs by letting the user configure multiple `sip-alg` instances on the router. There is a limit of 10 sip-alg configurations per router.
 :::
 
 ### Proxy IP and IP Mappings
 
-The `proxy-ip` represents a non-private address for the branch PBX that the remote endpoint (such as a data center server) can use for all inbound and outbound calls. The `ip-mappings` in turn provide the translation to the private IP address that can be used to reach the branch PBX. In the above example, the mappings are a way to indicate that any inbound calls on the `172.16.2.128` from the remote endpoint will be routed to the `192.168.2.128` address. This information is also useful for [fixing](#sip-message-changes) all the relevant IP addresses in the SIP messages. For the outbound calls, the `proxy-ip` is used to replace the private branch PBX IP address with a non-private address that represents the branch from the perspective of the data center.
+The `proxy-ip` represents a non-private address for the branch PBX that the remote endpoint (such as a data center server) can use for all inbound and outbound calls. The `ip-mappings` on the other hand provide the translation to the private IP address that can be used to reach the branch PBX. In the above example, the mappings are a way to indicate that any inbound calls on the `172.16.2.128` from the remote endpoint will be routed to the `192.168.2.128` address. This information is also useful for [fixing](#sip-message-changes) all the relevant IP addresses in the SIP messages. For the outbound calls, the `proxy-ip` is used to replace the private branch PBX IP address with a non-private address that represents the branch from the perspective of the data center.
 
 ### Inbound and Outbound Services
 
-The `sip-alg` plugin operates on the concept of [SFC](plugin_intro.md#service-function-chaining) where all traffic is routed using KNIs to Linux. The 128T router uses `kamailio`[^3] to then [fix all SIP messages](#sip-message-changes) and perform additional routing to manage both inbound and outbound calls. For each of the `inbound` and `outbound` call the plugin requires two services - an `ingress service` to route the traffic to the KNI and an `egress service` to route the traffic to the other SIP endpoint. The user is responsible for configuring the `egress service` and corresponding routes. The plugin automatically generates the `ingress service` and associated routes using the egress service and plugin configuration.
+The `sip-alg` plugin operates on the concept of [SFC](plugin_intro.md#service-function-chaining) where all traffic is routed using KNIs to and from Linux. The 128T router uses `kamailio`[^3] to then [fix all SIP messages](#sip-message-changes) and perform additional routing to manage both inbound and outbound calls. For each of the `inbound` and `outbound` calls the plugin requires two services - an `ingress service` to route the traffic to the KNI and an `egress service` to route the traffic to the other SIP endpoint. The user is responsible for configuring the `egress service` and corresponding routes. The plugin automatically generates the `ingress service` and associated routes using the egress service and plugin configuration.
 
 #### Outbound Service and Config Auto Generation
 
-The `outbound` service is used for initial registration between the branch PBX and the SIP server as well as making all outbound calls to remote endpoints. A typical flow for such calls start from the private lan network, routed via the 128T sip-alg function and the fixed up SIP messages are then routed over the wan interface to the remote endpoint. The user is responsible for configuring the egress service and the associated routing policies such as SVR etc. Consider the following example:
+The `outbound` service is used for initial registration between the branch PBX and the SIP server as well as making all outbound calls to remote endpoints. A typical call flow originates from the private LAN network, routed via the 128T sip-alg function that transforms the SIP messages, which are then routed over the WAN interface to the remote endpoint. Consider the following example:
 
 ```config
 authority
@@ -123,7 +123,7 @@ authority
 exit
 ```
 
-The service `sip-outbound-dc1` captures all SIP udp traffic towards port 5060 originating from the `_internal_` tenant. This is a special tenant associated with the SFC KNIs. The `sip-service > outbound` for the sip-alg configuration refers to this user configured service in the above example. In this process, the plugin will inherit all the address and transport configuration from this service and combined with the defined access-policy on the plugin will generate the configuration for SIP traffic received on the lan tenant.
+The service `sip-outbound-dc1` captures all SIP UDP traffic towards port 5060 originating from the [`_internal_` tenant](bcp_tenants.mdx#the-internal-tenant). This is a special tenant associated with the SFC KNIs. The `sip-service > outbound` for the sip-alg configuration refers to this user configured service in the above example. In this process, the plugin will inherit all the address and transport configuration from this _service_, combined with the defined _access-policy_ on the plugin, will generate the configuration for SIP traffic received on the lan tenant.
 
 :::note
 If the egress service has no transport configured, the plugin assumes the default SIP port of `5060` for both TCP and UDP.
@@ -163,7 +163,7 @@ admin@node1.router1#
 
 #### Inbound Service and Config Auto Generation
 
-The `inbound` service is used for processing all incoming calls to the branch PBX from the remote server. A typical flow for such calls start from the public wan network, routed via the 128T sip-alg function and the fixed up SIP messages are then routed over the lan interface to the branch PBX. The user is responsible for configuring the ingress service and the associated service-routes. Consider the following example:
+The `inbound` service is used for processing all incoming calls to the branch PBX from the remote server. A typical call flow originates from the public WAN network, routed via the 128T sip-alg function that transforms the SIP messages, which are then routed over the LAN interface to the branch PBX. The user is responsible for configuring the ingress service and the associated service-routes. Consider the following example:
 
 ```config
 authority
@@ -192,7 +192,7 @@ authority
 exit
 ```
 
-The service `sip-inbound-pbx` captures all SIP udp traffic towards port 5060 originating from the `_internal_` tenant. This is a special tenant associated with the SFC KNIs. The `sip-service > inbound` for the sip-alg configuration refers to this user configured service in the above example. In this process, the plugin will inherit all the address and transport configuration from this service and combined with the defined access-policy on the plugin will generate the configuration for SIP traffic received on the `datacenter` tenant.
+The service `sip-inbound-pbx` captures all SIP UDP traffic towards port 5060 originating from the [`_internal_` tenant](bcp_tenants.mdx#the-internal-tenant). This is a special tenant associated with the SFC KNIs. The `sip-service > inbound` for the sip-alg configuration refers to this user configured service in the above example. In this process, the plugin will inherit all the address and transport configuration from this _service_, combined with the defined _access-policy_ on the plugin, will generate the configuration for SIP traffic received on the `datacenter` tenant.
 
 :::note
 If the ingress service has no transport configured, the plugin assumes the default SIP port of `5060` for both TCP and UDP.
@@ -235,7 +235,7 @@ Some of the SDP options can include private IP addresses and pose additional cha
 
 ## SIP Message Changes
 
-The 128T `sip-alg` functionality is completely stateless and works by applying the NAT rules to every SIP message sent and received. The SIP stack, however, is aware of directionality and uses this information to fix the messages with the correct set of IP addresses.
+The 128T `sip-alg` functionality is completely stateless and works by applying NAT rules to every SIP message sent and received. The SIP stack, however, is aware of directionality and uses this information to fix the messages with the correct set of IP addresses.
 
 #### Outbound Call Changes
 
@@ -302,10 +302,10 @@ A few important aspects of the changes made to the original SIP INVITE are as fo
 Consider an inbound SIP call received from the server `172.16.2.102` on the `proxy-ip` representing the PBX.
 
 ```
-INVITE sip:service@172.16.2.128:5060 SIP/2.0
+INVITE sip:phone3@172.16.2.128:5060 SIP/2.0
 Via: SIP/2.0/UDP 172.16.2.102:5060;branch=z9hG4bK-3585-1-0
 From: sipp <sip:sipp@172.16.2.102:5060>;tag=3585SIPpTag001
-To: service <sip:service@172.16.2.128:5060>
+To: phone3 <sip:phone3@172.16.2.128:5060>
 Call-ID: 1-3585@172.16.2.102
 CSeq: 1 INVITE
 Contact: sip:sipp@172.16.2.102:5060
@@ -326,12 +326,12 @@ a=rtpmap:0 PCMU/8000
 The above message is sent to `kamailio` which in turn converts the public IPs to private addresses and forwards the message to the branch PBX. The new message will look as follows:
 
 ```
-INVITE sip:service@192.168.2.128:5060 SIP/2.0
+INVITE sip:phone3@192.168.2.128:5060 SIP/2.0
 Record-Route: <sip:172.16.2.128;lr;ftag=3585SIPpTag001>
 Via: SIP/2.0/UDP 172.16.2.128:5060;branch=z9hG4bK626e.01bb9cb7cd546e70477186f224a898da.0
 Via: SIP/2.0/UDP 172.16.2.102:5060;branch=z9hG4bK-3585-1-0
 From: sipp <sip:sipp@172.16.2.102:5060>;tag=3585SIPpTag001
-To: service <sip:service@192.168.2.128:5060>
+To: phone3 <sip:phone3@192.168.2.128:5060>
 Call-ID: 1-3585@172.16.2.102
 CSeq: 1 INVITE
 Contact: sip:sipp@172.16.2.102:5060
@@ -405,10 +405,13 @@ Hint: Some lines were ellipsized, use -l to show in full.
 
 The `kamailio` configuration can be found under `/etc/kamailio/kamailio.PBX.cfg` and should reflect the ip-mappings and other configuration from the plugin configuration.
 
+:::note
+Users should not make any manual changes to the `kamailio` config as it would get overwritten from the 128T conductor.
+:::
 
 ### Inspecting the sip-alg Namespace
 
-All of the `sip-alg` function including `kamailio` operate from within a network namespace. Some of the common commands and the expected outputs are shown below
+All of the `sip-alg` function, including `kamailio`, operate from within a network namespace. Some of the common commands and the expected outputs are shown below.
 
 The following example shows the KNI configuration and the default route on a running system
 ```
@@ -449,7 +452,8 @@ tcp        0      0 169.254.129.22:5060     0.0.0.0:*               LISTEN      
 tcp        0      0 169.254.129.18:5060     0.0.0.0:*               LISTEN      19098/kamailio
 ```
 
-Finally, the namespace is configured with a set of `iptables` rules to enable the static mapping from public to private. A typical set of rules look like below:
+Finally, the namespace is configured with a set of `iptables` rules to enable the static mapping from public to private. A typical set of rules can be seen below.
+
 ```
 # ip netns exec PBX iptables -t nat -nvL
 Chain PREROUTING (policy ACCEPT 0 packets, 0 bytes)
