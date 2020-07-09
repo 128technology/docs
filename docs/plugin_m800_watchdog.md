@@ -2,7 +2,7 @@
 title: M800 Watchdog
 ---
 
-The Audiocodes M800 platform is among 128 Technology's certified platforms. Of its capabilites, it supports a hardware watchdog which is enabled by way of a userspace application. The watchdog will monitor the responsiveness of the operating system and if there is no activity for a period of time, the system will perform a restart.
+The Audiocodes M800 platform is among 128 Technology's certified platforms. Of its capabilities, it supports a hardware watchdog which is enabled by way of a user space application. The watchdog will monitor the responsiveness of the operating system and if there is no activity for a period of time, the system will perform a restart.
 
 ## Installation
 
@@ -22,7 +22,7 @@ No configuration is necessary to activate this plugin.
 
 ## Troubleshooting
 
-The plugin is installed on the 128T as a linux service.  To confirm its operation, execute the command `systemctl status M800_watchdog`.
+The plugin is installed on the 128T as a Linux service.  To confirm its operation, execute the command `systemctl status M800_watchdog`.
 
 ```
 Feb 12 16:28:11 sol_acm800_dut1 systemd[1]: Started Watchdog for the Audiocodes M800 platform.

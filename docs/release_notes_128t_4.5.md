@@ -7,7 +7,7 @@ sidebar_label: 4.5
 
 ### New Features and Improvements
 
-- **I95-9955** Stronger security encryption for secure fields in configuration
+- **I95-9955** [Encryption of 128T Configuration](cli_reference.md#set-config-encryption)
 ------
 - **I95-1212, I95-34108** [Configuration Templates](config_templates.md)
 ------
@@ -51,5 +51,3 @@ sidebar_label: 4.5
 
 - **I95-33004** RoadRunner Removed
   The RoadRunner process collected anonymous information from the router and sent it to 128 Technology for storage and analysis. This helped inform and allows 128 Technology to support and improve the 128 Networking Platform. The anonymous data collection tool, RoadRunner has been removed from the product.
-
-## Caveats

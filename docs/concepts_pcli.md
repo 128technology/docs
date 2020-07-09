@@ -74,7 +74,7 @@ admin@node1.router1#
 
 ### `!` (run previous command)
 
-`!` can be used to excute a previously executed command from the PCLI's history.
+`!` can be used to execute a previously executed command from the PCLI's history.
 :::note
 PCLI history can be seen by running `show history`.
 :::

@@ -40,7 +40,7 @@ This means 40% additional bytes are required to carry IP packets that are otherw
 
 SD-WAN is commonly deployed on internet links, and if it is a low bandwidth link or if the link suffers from congestion, which if often the case, this will lead to performance degradation of the application.
 
-Packet size increase has a negative impact not only on bandwidth usage but also affects the transmission and queueing delay, thus affecting jitter and overall packet delay and the customer’s experience.
+Packet size increase has a negative impact not only on bandwidth usage but also affects the transmission and queuing delay, thus affecting jitter and overall packet delay and the customer’s experience.
 
 The problem of tunnels is only exaggerated in cloud deployments. The [economic benefits of SVR in the cloud](https://www.128technology.com/wp-content/uploads/2018/08/economic-benefits-of-session-smart-routing-in-sd-wan-and-cloud-networks-by-acg-research.pdf) are realized even more.
 
@@ -51,7 +51,7 @@ One of the biggest downsides to tunnels is that of the bandwidth overhead, but t
 
 ## Secure Vector Routing Savings Comparison Tool
 
-The GUI of the 128T offers a comparison tool to contrast different tunneling techniques and their bandwith overhead with that of SVR directly on the traffic traversing the 128T in its environment.
+The GUI of the 128T offers a comparison tool to contrast different tunneling techniques and their bandwidth overhead with that of SVR directly on the traffic traversing the 128T in its environment.
 
 ![SVR Savings](/img/about_svr_savings_1.png)
 
@@ -59,6 +59,6 @@ Clicking on the line graph will show the data points over time for your traffic,
 ![SVR Savings Graph](/img/about_svr_savings_2.png)
 
 :::info
-The tool can not account for differences in configured MTU within the network. If tunnel encapulation introduces fragmentation, the bandwith savings are greater as each fragemented packet incurrs additional encapsulation overhead.
+The tool can not account for differences in configured MTU within the network. If tunnel encapsulation introduces fragmentation, the bandwidth savings are greater as each fragmented packet incurs additional encapsulation overhead.
 :::
 

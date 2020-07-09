@@ -3,7 +3,7 @@ title: Asset Connection Resiliency
 sidebar_label: Asset Connection Resiliency
 ---
 
-128T provides path resiliency to a destination when mutiple paths exist between peering 128T routers. However, not every destination may not have another 128T peered in its path. Specifically, the Conductor may be deployed on the public Internet without a front-ended 128T.
+128T provides path resiliency to a destination when multiple paths exist between peering 128T routers. However, not every destination may not have another 128T peered in its path. Specifically, the Conductor may be deployed on the public Internet without a front-ended 128T.
 :::info
 Read the [BCP on Conductor Deployment](bcp_conductor_deployment.md) for recommendations on how to deploy a Conductor.
 :::
@@ -21,7 +21,7 @@ In order to avoid these intermittent failures, the 128T can optionally create a 
 [^1]: Salt does not have a way to configure different IP addresses for the publish and return ports.
 
 
-## Configuraiton
+## Configuration
 
 Asset connection resiliency is configured both at the `authority > asset-connection-resiliency` level (so as to apply to every router within an _authority_) as well as at the `router > asset-connection-resiliency` level (so as to provide an override to the value set at the _authority_). These SSH connections are unnecessary if the network topology already affords reliable salt connectivity.
 
