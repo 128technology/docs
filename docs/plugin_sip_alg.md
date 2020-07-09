@@ -71,7 +71,8 @@ authority
                         permission  allow
                     exit
 
-                    additional-prefix   192.168.2.128
+                    additional-address   192.168.2.128
+                    ingress-service-policy  custom
                 exit
             exit
 
@@ -123,7 +124,7 @@ authority
 exit
 ```
 
-The service `sip-outbound-dc1` captures all SIP UDP traffic towards port 5060 originating from the [`_internal_` tenant](bcp_tenants.mdx#the-internal-tenant). This is a special tenant associated with the SFC KNIs. The `sip-service > outbound` for the sip-alg configuration refers to this user configured service in the above example. In this process, the plugin will inherit all the address and transport configuration from this _service_, combined with the defined _access-policy_ on the plugin, will generate the configuration for SIP traffic received on the lan tenant.
+The service `sip-outbound-dc1` captures all SIP UDP traffic towards port 5060 originating from the [`_internal_` tenant](bcp_tenants.mdx#the-internal-tenant). This is a special tenant associated with the SFC KNIs. The `sip-service > outbound` for the sip-alg configuration refers to this user configured service in the above example. In this process, the plugin will inherit all the address and transport configuration from this _service_, combined with the defined _access-policy_ on the plugin, will generate the configuration for SIP traffic received on the lan tenant. The `ingress-service-policy` can be used to provide a custom policy to be applied to the generated service. More details on service policy design can be found [here](bcp_service_and_service_policy_design.md#service-policy)
 
 :::note
 If the egress service has no transport configured, the plugin assumes the default SIP port of `5060` for both TCP and UDP.
@@ -192,14 +193,14 @@ authority
 exit
 ```
 
-The service `sip-inbound-pbx` captures all SIP UDP traffic towards port 5060 originating from the [`_internal_` tenant](bcp_tenants.mdx#the-internal-tenant). This is a special tenant associated with the SFC KNIs. The `sip-service > inbound` for the sip-alg configuration refers to this user configured service in the above example. In this process, the plugin will inherit all the address and transport configuration from this _service_, combined with the defined _access-policy_ on the plugin, will generate the configuration for SIP traffic received on the `datacenter` tenant.
+The service `sip-inbound-pbx` captures all SIP UDP traffic towards port 5060 originating from the [`_internal_` tenant](bcp_tenants.mdx#the-internal-tenant). This is a special tenant associated with the SFC KNIs. The `sip-service > inbound` for the sip-alg configuration refers to this user configured service in the above example. In this process, the plugin will inherit all the address and transport configuration from this _service_, combined with the defined _access-policy_ on the plugin, will generate the configuration for SIP traffic received on the `datacenter` tenant. The `ingress-service-policy` can be used to provide a custom policy to be applied to the generated service. More details on service policy design can be found [here](bcp_service_and_service_policy_design.md#service-policy)
 
 :::note
 If the ingress service has no transport configured, the plugin assumes the default SIP port of `5060` for both TCP and UDP.
 :::
 
 :::note
-The `additional-prefix` configuration can be used to add the `proxy-ip` address to the generated service.
+The `additional-address` configuration can be used to add the `proxy-ip` address to the generated service.
 :::
 
 ![SIP ALG inbound call](/img/sip_alg_inbound_call.png)
