@@ -97,6 +97,7 @@ module.exports = {
     "Best Practices": [
       "bcp_att_avpn_configuration",
       "bcp_conductor_deployment",
+      "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
       "bcp_salt_pillars",
