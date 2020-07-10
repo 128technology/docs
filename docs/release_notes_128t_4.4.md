@@ -11,6 +11,8 @@ Upgrading to the 4.4.1 release requires version 2.6.0 or newer of the 128T insta
 
 ### Issues Fixed
 
+- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
+------
 - **I95-33403** REST APIs have been added for retrieving information about the 128T routing protocols
 ------
 - **I95-33762** Unable to provision multiple DHCP servers per network interface on unmanaged, standalone router
