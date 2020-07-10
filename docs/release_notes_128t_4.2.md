@@ -23,7 +23,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
   Until the system is upgraded to 4.2.8, this issue can be mitigated by restarting the 128T.
 ------
-- **I95-34629** During the initial window of a router conencting to an HA peer or the initial connection to the Conductor and a connection outage occurs, configuration commits may fail silently. The candidate configuration will remain uncommitted.
+- **I95-34629** During the initial window of a router connecting to its HA peer, or its connection to the Conductor while a connection outage occurs, configuration commits may fail silently. Candidate configuration will remain uncommitted.
 
   Until the system is upgraded to 4.2.8, this issue can be mitigated by attempting the commit again.
 ------
