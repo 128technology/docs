@@ -88,9 +88,11 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   Until the system is upgraded to 4.3.5, this issue can be mitigated by restarting the 128T.
 ------
 - **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
+
   Until the system is upgraded to 4.3.5, this issue can be mitigated by restarting the 128T.
 ------
-- **I95-34629** During the initial window of a router to Conductor connection outage or as connectivity is established between HA peers, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+- **I95-34629** During the initial window of a router connecting to its HA peer, or its connection to the Conductor while a connection outage occurs, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+
   Until the system is upgraded to 4.3.5, this issue can be mitigated by attempting the commit again.
 ------
 - **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
@@ -114,6 +116,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35093** `show asset <asset-id>` incorrectly continues to show `Currently Upgrading` version after completion of an upgrade.
 ------
 - **I95-35099** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
+
   Until the system is upgraded to 4.3.5, this issue can be mitigated by disabling rather than deleting the user.
 ------
 - **I95-35115** Aggregate bandwidth charts may not display data accurately
@@ -123,14 +126,17 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
 
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
+
   Until the system is upgraded to 4.3.5, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
 ------
 - **I95-35205** LTE interfaces do not honor MTU settings set in the network
+
   Until the system is upgraded to 4.3.5, the learned MTU value can be directly set within Linux
 ------
 - **I95-35303** `persistentDataManager` process can fault on shutdown of 128T
 ------
 - **I95-35323** BGP over SVR does not work if both sides of the routers have VLAN tagged interfaces
+
   Until the system is upgraded to 4.3.5, configure the outgoing SVR interfaces without vlans. At least one side of the BGP over SVR routers should not utilize VLAN tagging.
 ------
 - **I95-35395** Enabled BGP router reflector `cluster-id` in configuration
@@ -146,6 +152,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   :::
 ------
 - **I95-31618** Upon initial plugin installation on a 128T, configuration for the plugin is not honored.
+
   Until the system is upgraded to 4.3.4, this issue can be mitigated by committing the configuration again.
 
 
@@ -267,9 +274,11 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   Until the system is upgraded to 4.3.2, this issue can be mitigated by configuring a `management-vector` on the `network-interface`s that exist within the `device-interface`.
 ------
 - **I95-33759** GUI DHCP Client Lease table reports no leases while DHCP server has active client leases.
+
   Until the system is upgraded to 4.3.2, this issue can be mitigated by using the PCLI version of the same command: `show network-interface application node <node-name> name <interface-name>`
 ------
 - **I95-33789** Forwarding core count incorrectly reported in GUI under Router -> Node -> Platform Information
+
   Until the system is upgraded to 4.3.2, this issue can be mitigated by using the PCLI version of the same command: `show platform cpu `
 ------
 - **I95-33793** SVR fails to recover session on multi-hop inter-node failure
