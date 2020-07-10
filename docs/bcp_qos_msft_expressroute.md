@@ -25,4 +25,61 @@ It is possible that your factory default configuration has been administratively
 | Default | AF11 (10) | HighThroughputData | File transfer |
 | Default | CS0 (0) | Standard | Anything else |
 
+## Sample Configuration Excerpt
+
+The following example configuration excerpt illustrates the relationship between a `service`, a `service-policy`, and a `service-class`:
+
+```
+config
+
+    authority
+
+        service  Skype-Voice
+            name              Skype-Voice
+            description       "Skype voice traffic"
+            scope             private
+            security          my-encryption-policy
+            application-name  O365-Skype
+
+            access-policy     trusted
+                source      trusted
+                permission  allow
+            exit
+
+            access-policy     quarantine
+                source      quarantine
+                permission  deny
+            exit
+            service-policy    voip-audio
+        exit
+
+        service-policy  voip-audio
+            name                 voip-audio
+            description          "RTP/bearer audio"
+            service-class        Telephony
+            session-resiliency   failover
+            path-quality-filter  true
+            best-effort          true
+            max-loss             1
+            max-latency          150
+            max-jitter           30
+        exit
+
+        service-class  Telephony
+            name           Telephony
+            dscp           46
+            traffic-class  high
+        exit
+    exit
+exit
+```
+
+In this example, the `Skype-Voice` service leverages the built-in O365 application module for Skype and is given treatment according to the `voip-audio` policy. The `voip-audio` policy in turn references the `service-class` named `Telephony`, which will mark packets with DSCP 46 (a.k.a. EF).
+
+Given this configuration, as traffic arrives and is matched to the O365-Skype service, it will be marked as EF (46) on egress.
+
+:::note
+This marking is path independent, so even if this traffic does not use an ExpressRoute (if for example the ExpressRoute is temporarily unavailable), the packets will still be marked per the `service-class` assigned.
+:::
+
 [^1]: https://docs.microsoft.com/en-us/azure/expressroute/expressroute-qos
