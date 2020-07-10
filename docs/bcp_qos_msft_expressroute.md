@@ -76,7 +76,7 @@ exit
 
 In this example, the `Skype-Voice` service leverages the built-in O365 application module for Skype and is given treatment according to the `voip-audio` policy. The `voip-audio` policy in turn references the `service-class` named `Telephony`, which will mark packets with DSCP 46 (a.k.a. EF).
 
-Given this configuration, as traffic arrives and is matched to the O365-Skype service, it will be marked as EF (46) on egress.
+Given this configuration, as traffic arrives and is matched to the `Skype-Voice` service, it will be marked as EF (46) on egress.
 
 :::note
 This marking is path independent, so even if this traffic does not use an ExpressRoute (if for example the ExpressRoute is temporarily unavailable), the packets will still be marked per the `service-class` assigned.
