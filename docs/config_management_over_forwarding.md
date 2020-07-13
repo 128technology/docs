@@ -13,7 +13,7 @@ Depending on the nature and size of a deployment, the hardware platform may not 
 
 When using a separate [non-forwarding](concepts_interface_types.md) interface for management traffic, packet forwarding is managed by Linux's routing table. Leveraging 128T's native routing capabilities for management traffic provides additional security, segmentation and advanced routing policy.
 
-When provisioning management traffic to traverse forwarding interfaces, those interfaces will continue to be available for management related functions (i.e. ssh) even when the 128T is not running, yet will still be protected by firewall rules that match the respective policy. This is particularly important during maintenance operations when the 128T software is taken off-line for an upgrade.
+When provisioning management traffic to traverse forwarding interfaces, those interfaces will continue to be available for management related functions (e.g., ssh) even when the 128T is not running, yet will still be protected by firewall rules that match the respective policy. This is particularly important during maintenance operations when the 128T software is taken offline for an upgrade.
 
 :::warning
 Once a forwarding interface is provisioned for management traffic, any existing OS configuration for that interface such as ifcfg and firewall rules will be overwritten to match the 128T configuration.
@@ -35,7 +35,8 @@ One of the strengths of the 128T data model is to dynamically apply policy only 
 
 ## Configuration
 
-When enabled, a default route will be configured in Linux's routing table to send all traffic to the interface [`kni254`](concepts_kni.md), which is the pathway into the 128T packet forwarding engine. Once inside the 128T, a corresponding service and service-route need to exist in order to direct traffic to the appropriate destination. Services and corresponding service routes are automatically created for the applications listed [above](#management-services).
+When enabled, a default route will be configured in Linux's routing table to send all traffic to the interface [`kni254`](concepts_kni.md), which is the pathway into the 128T packet forwarding engine. Thus, standard 128T forwarding rules apply: any traffic originated by the host operating system that does not match a configured service will be dropped. Services and corresponding service routes are automatically created for the applications listed [above](#management-services).
+
 :::important
 Because a default route is added in Linux, all traffic not captured by a static route, will be sent to the 128T. This means that the traffic will either be dropped, or match an existing service and route.
 :::
@@ -58,7 +59,7 @@ DNS servers can be configured within `authority > router > dns-config > address`
   These addresses are assumed to be reachable via the configured management interface(s).
   :::
 
-If static DNS servers are configured and a network-interface is configured to obtain its address via DHCP, the DNS servers learned through the lease are ordered after the statically defined entries.
+If static DNS servers are configured and a network-interface is configured to obtain its address via DHCP, the DNS servers learned through the lease are ordered after any statically defined entries.
 
 :::note
 Configuring `dns-config > address` is required, however setting `dns-config > address` to `automatic` is only allowed when a management interface is enabled for DHCP.
@@ -136,7 +137,7 @@ exit
 
 :::important
 `router > node > device-interface > network-interface > source-nat` must be set to `true` when using management over forwarding since all management traffic will originate from `169.254.x.x`.
-`router > node > device-interface > network-interface > default-route` must also be set to `true` to ensure that linux uses the network interface as its preferred route for traffic originating from the host OS.
+`router > node > device-interface > network-interface > default-route` must also be set to `true` to ensure that Linux uses the network interface as its preferred route for traffic originating from the host OS.
 :::
 
 ### User Defined Services
