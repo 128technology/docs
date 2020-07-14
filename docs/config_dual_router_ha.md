@@ -9,7 +9,7 @@ There are several different high availability models possible with the 128T rout
 - No `shared-phys-address` (and hence no shared interfaces) between the two devices. Interface protection in a dual router HA deployment is accomplished using traditional routing protocols (Layer 3) rather than IP/MAC takeover (Layer 2).
 - No state synchronization between the two devices (and hence no "HA link"). While this improves  overall performance for the routers (since there is no overhead incurred due to state synchronization), the implication is that there are some capabilities not supported in this design. See Unsupported Features, below.
 
-Dual router high availability is recommended for large data center designs, where there can be a large volume of traffic, as this is where the performance savings for avoiding state synchronization is most notable.
+Dual router high availability is recommended for large data center designs where there will be a large volume of traffic, as this is where the performance savings of eliminating state synchronization are most notable.
 
 
 
@@ -19,5 +19,38 @@ Dual router high availability is recommended for large data center designs, wher
 
 When deploying two nodes in a dual router high availability deployment, several features that rely on synchronized state between nodes are no longer available.
 
-- Source NAT. 
+- Source NAT. When source NAT is enabled, a system will allocate ephemeral ports on its egress interface as sessions leave the 128T router. Because there is no state synchronization between the two nodes in this deployment model, these ephemeral ports are not shared. Thus, if the active node fails and traffic starts transiting its counterpart, the source NAT allocation on the newly active system will be different. This will impact application flows.
+
+
+
+... transport state enforcement
+
+
+
+## Design Overview
+
+Unlike a "traditional" dual node high availability design, in which two nodes compose a single router and use an out-of-band interface (the "sync interface") to synchronize state and a fabric interface to forward packets from one node to the other, the dual router trades these in for an inter-router iBGP connection for forwarding packets.
+
+:::note
+It is possible to configure multiple inter-router connections for added resiliency if there are spare physical connections available between the two routers.
+:::
+
+The sample topology we will discuss in this document is as follows:
+
+![dual-router-ha-diagrams](/Users/ptimmons/Downloads/dual-router-ha-diagrams.png)
+
+### Notes about the Topology
+
+In this sample exercise, each of the two routers (`routerA` and `routerB`) have two WAN interfaces and one LAN interface. Between them is an interconnect cable; for collocated routers, this can be a simple "crossover" cable between the two systems.
+
+### Routing Overview
+
+Unlike the dual node redundancy model, where the two devices harbor a single instance of the `routingManager` process, routing within the dual router redundancy model must be accomplished "by hand." This consists of two components:
+
+1. Each router uses BGPoSVR to exchange routes with the other
+2. For services that use `peer`-type service-routes to reach another 128T instance, these service-routes will need to include the complementary router as an additional `next-peer`. I.e., each router in the HA pair will point to the `next-peer` 128T as well as a `next-peer` for one another.
+
+## Sample Configuration
+
+Each of the two routers that comprise the highly available pair will be configured similarly. Here is our `routerA`:
 
