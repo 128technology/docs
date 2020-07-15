@@ -111,16 +111,16 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_intro",
-      "plugin_monitoring_agent",
+      "plugin_bgp_community_services"
       "plugin_dns_app_id",
       "plugin_dns_cache",
       "plugin_gre",
       "plugin_ipsec_client",
+      "plugin_kni_namespace_scripts",
       "plugin_loopback_static_routes",
+      "plugin_monitoring_agent",
       "plugin_mosh",
       "plugin_sip_alg",
-      "plugin_kni_namespace_scripts",
-      "plugin_bgp_community_services"
     ],
     "REST APIs": [
       "api_rest_4.2.0",
