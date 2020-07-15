@@ -3,18 +3,18 @@ title: Kernel Network Namespace Scripts
 sidebar_label: KNI Namespace Scripts
 ---
 
-As part of plugin development to extend the functionality of a 128T router, a very common model is to leverage [KNI (Kernel Network Interface)](concepts_kni) along with Linux network namespaces. They allow for isolation of various networking components such as interfaces, routing table, iptables, etc., while running applications that leverage these networking namespaces. This is also very common method to deploy [Service Function Chaining](plugin_intro.md#service-function-chaining) within the product.
+As part of plugin development to extend the functionality of a 128T router, a very common model is to leverage [KNI (Kernel Network Interface)](concepts_kni.md) along with Linux network namespaces. They allow for isolation of various networking components such as interfaces, routing table, iptables, etc., while running applications that leverage these networking namespaces. This is also very common method to deploy [Service Function Chaining](plugin_intro.md#service-function-chaining) within the product.
 
 The goal of this package is to provide a set of scripts which do most of the tasks when it comes to setting up the namespaces and associated environment.
 
 ## Scripts
-The following scripts are part of the package and have a well-defined role as described [here](concepts_kni#script-types).
+The following scripts are part of the package and have a well-defined role as described [here](concepts_kni.md#script-types).
 
 ### startup
 This script is invoked at the beginning of the KNI creation and is intended to do clean-up. In the current implementation this script will stop the configured [application](#application-definition) (if any).
 
 ### init
-The [init script](concepts_kni#init) is responsible for the majority of the setup. The script performs the following high-level function:
+The [init script](concepts_kni.md#init) is responsible for the majority of the setup. The script performs the following high-level function:
 
 - Create the configured network-namespace in Linux as per 128T requirements.
 - Move and setup any configured target-interface into the namespace
@@ -23,17 +23,17 @@ The [init script](concepts_kni#init) is responsible for the majority of the setu
 - Setup routes and iptable rules
 
 ### reinit
-The [reinit](concepts_kni#reinit) script is called when the interface is deemed to be down for more than 10 seconds. For the sake of this implementation we simply symlink the `reinit` to `init` script
+The [reinit](concepts_kni.md#reinit) script is called when the interface is deemed to be down for more than 10 seconds. For the sake of this implementation we simply symlink the `reinit` to `init` script
 
 ### shutdown
-The [shutdown](concepts_kni#shutdown) script is called during 128T shutdown or deletion of the interface. This script will stop the configured [application](#application-definition) (if any) and delete the network namespace
+The [shutdown](concepts_kni.md#shutdown) script is called during 128T shutdown or deletion of the interface. This script will stop the configured [application](#application-definition) (if any) and delete the network namespace
 
 ### Installation
 The `t128-kni-namespace-scripts` package contains all the scripts mentioned [above](#scripts). Upon installation, the scripts in this package are placed under `/etc/128technology/plugins/network-scripts/default/kni_namespace/` with the right set of permissions and settings required for operation by 128T router.
 
 
 ### Symlink To KNI scripts ##
-The package only contains a subset of the scripts provided by the [network-script design](concepts_kni#script-types). There are other scripts such as state, info, monitoring, etc., which are not covered in this package. As a result, the best practice is to symlink the host KNI scripts to the pre-packaged scripts listed [above](#scripts).
+The package only contains a subset of the scripts provided by the [network-script design](concepts_kni.md#script-types). There are other scripts such as state, info, monitoring, etc., which are not covered in this package. As a result, the best practice is to symlink the host KNI scripts to the pre-packaged scripts listed [above](#scripts).
 
 For example, for a configuration with a `host` kni called `test-sfc` the scripts above would be used as follows:
 
@@ -77,7 +77,7 @@ route-tables:
 The above example shows all the possible configuration. All of these configuration are optional and reasonable defaults are assumed. Each of the sections below discuss the options in more details.
 
 ### Variable Substitution
-The configuration supports basic variable substitutions which directly map to the [arguments passed to the network-scripts](concepts_kni#script-command-line-arguments) by 128T router. The following keywords can be used in the config and will be substituted with the correct arguments at runtime.
+The configuration supports basic variable substitutions which directly map to the [arguments passed to the network-scripts](concepts_kni.md#script-command-line-arguments) by 128T router. The following keywords can be used in the config and will be substituted with the correct arguments at runtime.
 
 Consider the following configuration
 ```config
