@@ -10,8 +10,6 @@ The BGP Community Services Plugin allows the 128T router to create services base
 One or more BGP community profile objects can be configured at the authority level of the configuration.  These profiles are then assigned to the individual routers.
 
 ### BGP Community Services Profile Configuration
-
-### Configure a BGP Community Services Profile
 An example configuration is shown below, which shows the standard community strings for [Microsoft Office 365 over ExpressRoute](https://docs.microsoft.com/en-us/office365/enterprise/bgp-communities-in-expressroute).  The `application-name` values are completely user configurable.  The `bgp-community` is a list object to allow for scenarios where you may want to associate multiple community strings with a single application.
 
 ```
@@ -45,7 +43,6 @@ config
     exit
 exit
 ```
-### Create Services for the applications
 In order to place prefixes learned for these applications in the FIB of a router, services must be created that reference the `application-name` values chosen above.  Example services that correspond to the previously configured `O365` profile are shown below.
 ```
 config
@@ -90,8 +87,6 @@ config
     exit
 exit
 ```
-
-### Assign BGP Community Services Profile to Router
 Before the router can leverage the application identification module for BGP community services, you must assign a profile to the router as shown below.
 ```
 config
@@ -214,4 +209,19 @@ The contents of this file should show a JSON mapping of the user defined applica
   "continue-file-watch": true,
   "services": {}
 }
+```
+
+## Azure Express Route O365 Profile Definition
+The output here is provided in `flat` format to facilitate copy/pasting into an existing 128T conductor or router.  This can be used to create a proile named `O365` which can be assigned to specific routers.  It will define application-names `ExchangeOnline`, `SharePointOnline`, `SkypeForBusiness`, and `OtherO365` which can each be used in the `application-name` field to define a service.
+
+```
+config authority bgp-community-services-profile O365 name O365
+config authority bgp-community-services-profile O365 application ExchangeOnline application-name ExchangeOnline
+config authority bgp-community-services-profile O365 application ExchangeOnline bgp-community 12076:5010
+config authority bgp-community-services-profile O365 application SharePointOnline application-name SharePointOnline
+config authority bgp-community-services-profile O365 application SharePointOnline bgp-community 12076:5020
+config authority bgp-community-services-profile O365 application SkypeForBusiness application-name SkypeForBusiness
+config authority bgp-community-services-profile O365 application SkypeForBusiness bgp-community 12076:5030
+config authority bgp-community-services-profile O365 application OtherO365 application-name OtherO365
+config authority bgp-community-services-profile O365 application OtherO365 bgp-community 12076:5100
 ```
