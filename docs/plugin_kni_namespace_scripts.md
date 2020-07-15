@@ -3,7 +3,7 @@ title: Kernel Network Namespace Scripts
 sidebar_label: KNI Namespace Scripts
 ---
 
-As part of plugin development to extend the functionality of a 128T router, a very common model is to leverage [KNI (Kernel Network Interface)](concepts_kni) along with Linux network namespaces. They allow for isolation of various networking components such as interfaces, routing table, iptables, etc., while running applications that leverage these networking namespaces. This is also very common method to deploy [Service Function Chaining](plugin_intro#service-function-chaining) within the product.
+As part of plugin development to extend the functionality of a 128T router, a very common model is to leverage [KNI (Kernel Network Interface)](concepts_kni) along with Linux network namespaces. They allow for isolation of various networking components such as interfaces, routing table, iptables, etc., while running applications that leverage these networking namespaces. This is also very common method to deploy [Service Function Chaining](plugin_intro.md#service-function-chaining) within the product.
 
 The goal of this package is to provide a set of scripts which do most of the tasks when it comes to setting up the namespaces and associated environment.
 
@@ -130,7 +130,7 @@ target-interface:
 The `default-route` flag is used to set the target-interface as a `default` route with zero metric in the namespace making it the preferred choice for routing all traffic.
 
 ### Application Definition
-Any [SFC application](plugin_intro#service-function-chaining) will require some applications to run within the namespace to consume the KNI and other network resources. This configuration provides a list of commands to be run within the namespace.
+Any [SFC application](plugin_intro.md#service-function-chaining) will require some applications to run within the namespace to consume the KNI and other network resources. This configuration provides a list of commands to be run within the namespace.
 
 :::note
 The scripts will automatically append `ip netns exec` for every configured command.
@@ -189,7 +189,7 @@ The `default` keyword is used to create route entries for the default route tabl
 * from-prefix (from)
 * to-prefix (to)
 
-:::note 
+:::note
 The rules defined under `routing` will be applied before any `route-tables`. Since the `route-tables` supersede the functionality of `routing` it is not recommended to use both in the same config.
 :::
 
