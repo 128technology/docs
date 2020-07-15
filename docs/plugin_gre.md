@@ -6,7 +6,7 @@ sidebar_label: GRE
 The 128T GRE plugin can be used for creating IPv4 GRE tunnels between a 128T router and a remote GRE tunnel destination. For services such as Zscaler, this provides better throughput compared to other tunneling mechanisms.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 ## Configuration
