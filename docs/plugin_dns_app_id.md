@@ -8,7 +8,7 @@ The DNS App ID plugin will identify traffic passing through your 128T router by 
 This plugin will rely on the [DNS Cache](plugin_dns_cache.md) plugin for hostname resolution.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 ## Configuration

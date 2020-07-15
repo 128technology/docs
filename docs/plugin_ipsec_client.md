@@ -3,10 +3,10 @@ title: IPsec Client plugin
 sidebar_label: IPsec Client
 ---
 
-The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPsec endpoints through the 128T router. It is possible to configure the plugin for each router to have multiple destination IPsec endpoints and thus the 128T will failover between them. This is accomplished by performing a [Service Function Chain (SFC)](plugin_intro#service-function-chaining) with Libreswan, a third-party IPsec client. By enabling this plugin, you can provide IPsec tunnel connectivity to third party providers from your 128T router.
+The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPsec endpoints through the 128T router. It is possible to configure the plugin for each router to have multiple destination IPsec endpoints and thus the 128T will failover between them. This is accomplished by performing a [Service Function Chain (SFC)](plugin_intro.md#service-function-chaining) with Libreswan, a third-party IPsec client. By enabling this plugin, you can provide IPsec tunnel connectivity to third party providers from your 128T router.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 ## Configuration
@@ -48,7 +48,7 @@ router
 exit
 ```
 
-:::note 
+:::note
 This plugin can only connect to IPsec endpoints that support pre-shared key authentication.
 :::
 
@@ -80,7 +80,7 @@ node
 exit
 ```
 
-:::note 
+:::note
 Only one `ipsec-client` can be configured per node, but two `remote`s can be configured per client.
 :::
 
@@ -302,7 +302,7 @@ exit
 
 ## Troubleshooting
 
-### Data Model 
+### Data Model
 If the data model doesn’t appear in the PCLI or GUI, make sure that you have restarted the 128T service.
 
 ### Logging
