@@ -54,3 +54,149 @@ Unlike the dual node redundancy model, where the two devices harbor a single ins
 
 Each of the two routers that comprise the highly available pair will be configured similarly. Here is our `routerA`:
 
+```
+admin@node1.bernstein# show config runn auth router routerA
+
+config
+
+    authority
+    
+        router  routerA
+            name                 routerA
+            router-group         headend-datacenter1
+            inter-node-security  internal
+    
+            node                 node1
+                name                  node1
+                asset-id              797b06cb-2187-406a-a933-4e93fc991fb0
+                description           "routerA standalone node"
+                role                  combo
+                forwarding-core-mode  automatic
+    
+                device-interface      eno1
+                    name               eno1
+                    type               ethernet
+                    pci-address        0000:00:01.0
+                    forwarding         true
+    
+                    network-interface  interrouter
+                        name                   interrouter
+                        global-id              10
+    
+                        neighborhood           dc1-interrouter
+                            name               dc1-interrouter
+                            peer-connectivity  bidirectional
+                            topology           mesh
+                        exit
+                        inter-router-security  unencrypted
+    
+                        address                169.254.1.28
+                            ip-address     169.254.1.28
+                            prefix-length  31
+                        exit
+                    exit
+                exit
+    
+                device-interface      eno2
+                    name               eno2
+                    description        "LAN interface"
+                    type               ethernet
+                    pci-address        0000:00:02.0
+                    forwarding         true
+    
+                    network-interface  lan
+                        name         lan
+                        global-id    11
+                        description  "Data center LAN"
+                        vlan         0
+    
+                        address      10.0.128.2
+                            ip-address     10.0.128.2
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+    
+                device-interface      eno3
+                    name               eno3
+                    description        "WAN interface 1"
+                    type               ethernet
+                    pci-address        0000:00:03.0
+                    forwarding         true
+    
+                    network-interface  wan1
+                        name         wan1
+                        global-id    12
+                        description  "WAN 1"
+                        vlan         0
+    
+                        address      198.51.100.2
+                            ip-address     198.51.100.2
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+    
+                device-interface      eno4
+                    name               eno4
+                    description        "WAN interface 2"
+                    type               ethernet
+                    pci-address        0000:00:04.0
+                    forwarding         true
+    
+                    network-interface  wan2
+                        name         wan2
+                        global-id    13
+                        description  "WAN 2"
+                        vlan         0
+    
+                        address      203.0.113.2
+                            ip-address     203.0.113.2
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+    
+            routing              default-instance
+                type              default-instance
+    
+                interface         lo1
+                    name        lo1
+                    ip-address  169.254.2.1
+                exit
+    
+                routing-protocol  bgp
+                    type       bgp
+                    local-as   64512
+                    router-id  169.254.2.1
+    
+                    neighbor   169.254.2.2
+                        neighbor-address  169.254.2.2
+                        neighbor-as       64512
+                        shutdown          false
+    
+                        timers
+                            connect-retry                   30
+                            minimum-advertisement-interval  30
+                        exit
+    
+                        transport
+                            passive-mode   false
+    
+                            local-address
+                                routing-interface  lo1
+                            exit
+                        exit
+    
+                        address-family    ipv4-unicast
+                            afi-safi       ipv4-unicast
+                            next-hop-self  true
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
