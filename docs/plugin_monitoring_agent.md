@@ -23,8 +23,6 @@ The 128T Monitoring Agent can be obtained from the official 128T software reposi
 | Monitoring Agent                | 128T                        |
 | ------------------------------- | --------------------------- |
 | **128T-monitoring-agent-3.0.0** | 128T >= 4.1.0               |
-| 128T-monitoring-agent-2.1.1     | 128T >= 4.3.0               |
-| 128T-monitoring-agent-1.2.1     | 128T >= 4.1.0; 128T < 4.3.0 |
 
 :::important  
 Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported 128T versions. It should be preferred for new installations and upgrades.  
@@ -660,3 +658,257 @@ The **top sessions** input above can be used to stream the view of the top 10 se
 The **top sources** input can be used to capture the list of source IP addresses by either **TOTAL_DATA** (default) or by **SESSION_COUNT**. In addition, the user can configure the maximum number of top data samples to collect as configured by the **max_rows** configuration above. Finally the **enabled** flag can be used to turn off the top sources collection is need be.
 
 The **top applications** input is useful when application identification in terms of module or tls have been configured on the router. By default, all the discovered sessions will be reported by the input. The user can tune the collection by setting up a search filter in the form of **filter** or eliminate the applications that have some minimum number of sessions via **min-session-count**. The **max-rows** will limit the reporting to the first N rows. The collection can be turned off by setting **enabled** to be false.
+
+## Release Notes
+
+### Release 3.0.0
+
+#### New Features and Improvements
+
+- **MON-230** Make 3.X version of the Monitoring agent compatible with 4.1.0 <= 128T < 6.0.0
+- **MON-233** Upgrade telegraf to 1.14.5
+- **MON-234** Improve metrics collection performance by creating a native Telegraf plugin
+- **MON-198** Provide sample and push interval overrides per input in the agent's config
+- **MON-246** Enable value substitution in telegraf configuration files
+
+#### Issues Fixed
+
+- **MON-280** Make the arp state collector compatible with 128T 5.X
+
+
+### Release 2.1.1
+
+#### New Features and Improvements
+
+- **MON-225** Update telegraf dependency to 1.14.3
+- **MON-227** Allow this version of the Monitoring Agent to be installed with 128T < 6.0.0 (previously < 5.0.0)
+- **MON-218** Expose MAC address in the device state input
+  - Allow better correlation between device and network interfaces.
+
+- **MON-210** Improve performance of several provided inputs
+  - Reduce the resource consumption as well as the time needed to collect data. In particular, the `t128_metrics` input has been significanly improved.
+
+#### Issues Fixed
+
+- **MON-205** Honor the input enable/disable flag in the agent's config
+
+  _**Resolution**_ The configuration allows the user to disable an input. However, an input was being treated as enabled as long as it existed in the config. That configuration option is now honored.
+
+- **MON-225** `t128_events` input would occasionally drop or delayed events
+
+  _**Resolution**_ Update the telegraf dependency to 1.14.3 as well as the `execd` input to better handle simultaneous events.
+
+### Release 2.1.0
+
+#### New Features and Improvements
+
+- **MON-184** Added stop command in cli to stop all associated Telegraf services.
+
+For help using this cli option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#stopping-services).
+
+- **MON-141** Added support for multiple logically seperate monitoring agent instances with the `lib-directory` config option.
+
+For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#configuration).
+
+- **MON-208** Update Telegraf to latest stable version 1.14.2.
+
+A new stable version of telegraf was released upstream. The main reason for upgrading was to get support for multiline lines.
+
+- **MON-194** Added arp state collector to collect state of the arp table.
+
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#arp-state-collector).
+
+- **MON-144** Added configuration option to enable tracking of index so that the event collector picks up where it left off in the case of a restart.
+
+For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#event-collector).
+
+#### Issues Fixed
+
+- **MON-195** Device state collector collects state from peer node on an HA router.
+
+  _**Resolution**_ The device state collector will now only request state from the local node.
+
+- **MON-181** Event collector excludes multiline events.
+
+  _**Resolution**_ The event collector will accumulate subsequent invalid lines and attempt to submit the accumulated line.
+
+
+### Release 2.0.1
+
+#### Issues Fixed
+
+- **MON-185** telegraf error when processing results from peer path input
+
+  _**Resolution:**_ The extra logging causing the problem was removed
+
+- **MON-186** LTE metric collector not reporting any values
+
+  _**Resolution:**_ Updated the library imports and identifiers used to display the missing data
+
+- **MON-188** The events inputs collector has invalid sample
+
+  _**Resolution:**_ Updated the sample and staged configuration example for events
+
+### Release 2.0.0
+
+#### New Features and Improvements
+- **MON-126** Automatically stage all 128T input configuration for easy of use
+
+The configuration for all 128T collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
+
+- **MON-148** Top applications, sessions and sources input plugin
+
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#top-analytics-collector)
+
+- **MON-164** Test monitoring-agent input configuration
+
+For verification of the data collected the user can use `monitoring-agent-cli generate` command to generate all the telegraf configuration. Subsequently, the user can run `monitoring-agent-cli test-input` to test a specific input. More details can be found in the [Testing And Validation section](plugin_monitoring_agent.md#testing-and-validation)
+
+- **MON-171** Update Telegraf to latest stable version 1.14.0 ####
+
+A new stable version of telegraf was released upstream with several new inputs such as execd, wireguard and others.
+
+- **MON-175** LTE metric collect will include SNR signal strength ####
+
+The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the 128T router.
+
+
+#### Issues Fixed
+- **MON-125** `t128_metrics` default bfd config doesn't work with 4.3
+
+  _**Resolution:**_ The new default config for metrics have the correct parameters for BFD metrics
+
+- **MON-146** Metric collector timing out with the default config on customer system
+
+  _**Resolution:**_ The metric configuration will now have a default timeout of 15 seconds.
+
+- **MON-160** sample agent-config has invalid tags
+
+  _**Resolution:**_ All the sample configurations now contain valid data
+
+- **MON-169** peer-path collector only captures 1 peer-path per node
+
+  _**Resolution:**_ All peer paths on the node will be reported by the peer-path collector
+
+- **MON-170** Default telegraf service (not 128T-telegraf) is enabled and running un-necessarily on the system
+
+  _**Resolution:**_ The system telegraf service will be stopped and disabled
+
+### Release 1.2.1
+
+#### New Features and Improvements
+
+- **MON-225** Update telegraf dependency to 1.14.3
+
+- **MON-218** Expose MAC address in the device state input
+
+Allow better correlation between device and network interfaces.
+
+- **MON-210** Improve performance of several provided inputs
+
+Reduce the resource consumption as well as the time needed to collect data. In particular, the `t128_metrics` input has been significanly improved.
+
+#### Issues Fixed
+
+- **MON-205** Honor the input enable/disable flag in the agent's config
+
+  _**Resolution**_ The configuration allows the user to disable an input. However, an input was being treated as enabled as long as it existed in the config. That configuration option is now honored.
+
+- **MON-225** `t128_events` input would occasionally drop or delayed events
+
+  _**Resolution**_ Update the telegraf dependency to 1.14.3 as well as the `execd` input to better handle simultaneous events.
+
+### Release 1.2.0
+
+#### New Features and Improvements
+
+- **MON-184** Added stop command in cli to stop all associated Telegraf services.
+
+For help using this cli option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#stopping-services).
+
+- **MON-141** Added support for multiple logically seperate monitoring agent instances with the `lib-directory` config option.
+
+For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#configuration).
+
+- **MON-208** Update Telegraf to latest stable version 1.14.2.
+
+A new stable version of telegraf was released upstream. The main reason for upgrading was to get support for multiline lines.
+
+- **MON-194** Added arp state collector to collect state of the arp table.
+
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#arp-state-collector).
+
+- **MON-144** Added configuration option to enable tracking of index so that the event collector picks up where it left off in the case of a restart.
+
+For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#event-collector).
+
+#### Issues Fixed
+
+- **MON-195** Device state collector collects state from peer node on an HA router.
+
+  _**Resolution**_ The device state collector will now only request state from the local node.
+
+- **MON-181** Event collector excludes multiline events.
+
+  _**Resolution**_ The event collector will accumulate subsequent invalid lines and attempt to submit the accumulated line.
+
+
+### Release 1.1.1
+
+#### Issues Fixed
+
+- **MON-185** telegraf error when processing results from peer path input
+
+  _**Resolution:**_ The extra logging causing the problem was removed
+
+- **MON-186** LTE metric collector not reporting any values
+
+  _**Resolution:**_ Updated the library imports and identifiers used to display the missing data
+
+- **MON-188** The events inputs collector has invalid sample
+
+  _**Resolution:**_ Updated the sample and staged configuration example for events
+
+
+### Release 1.1.0
+
+#### New Features and Improvements
+
+- **MON-126** Automatically stage all 128T input configuration for easy of use
+
+The configuration for all 128T collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
+
+- **MON-148** Top applications, sessions and sources input plugin
+
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#top-analytics-collector)
+
+- **MON-164** Test monitoring-agent input configuration
+
+For verification of the data collected the user can use `monitoring-agent-cli generate` command to generate all the telegraf configuration. Subsequently, the user can run `monitoring-agent-cli test-input` to test a specific input. More details can be found in the [Testing And Validation section](plugin_monitoring_agent.md#testing-and-validation)
+
+- **MON-171** Update Telegraf to latest stable version 1.14.0 ####
+
+A new stable version of telegraf was released upstream with several new inputs such as execd, wireguard and others.
+
+- **MON-175** LTE metric collect will include SNR signal strength ####
+
+The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the 128T router.
+
+
+#### Issues Fixed
+
+- **MON-146** Metric collector timing out with the default config on customer system
+
+  _**Resolution:**_ The metric configuration will now have a default timeout of 15 seconds.
+
+- **MON-160** sample agent-config has invalid tags
+
+  _**Resolution:**_ All the sample configurations now contain valid data
+
+- **MON-169** peer-path collector only captures 1 peer-path per node
+
+  _**Resolution:**_ All peer paths on the node will be reported by the peer-path collector
+
+- **MON-170** Default telegraf service (not 128T-telegraf) is enabled and running un-necessarily on the system
+
+  _**Resolution:**_ The system telegraf service will be stopped and disabled
