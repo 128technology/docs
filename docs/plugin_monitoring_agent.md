@@ -675,6 +675,8 @@ The **top applications** input is useful when application identification in term
 
 - **MON-280** Make the arp state collector compatible with 128T 5.X
 
+  _**Resolution**_ The arp state collector now dynamically handles data collection depending on the 128T version.
+
 
 ### Release 2.1.1
 
