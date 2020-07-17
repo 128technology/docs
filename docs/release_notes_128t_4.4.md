@@ -3,6 +3,110 @@ title: 128T 4.4 Release Notes
 sidebar_label: 4.4
 ---
 
+## Release 4.4.1
+
+:::info
+Upgrading to the 4.4.1 release requires version 2.6.0 or newer of the 128T installer. If you are upgrading a managed router using the conductor, the installer will be upgraded automatically. If you are upgrading a router or conductor manually, please ensure you meet the minimum installer requirements before starting.
+:::
+
+### Issues Fixed
+
+- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
+------
+- **I95-26276** Enabled OSPF authentication in configuration
+------
+- **I95-30610** RTP is not properly classified for subsequent 128T routers
+------
+- **I95-33403** REST APIs have been added for retrieving information about the 128T routing protocols
+------
+- **I95-33762** Unable to provision multiple DHCP servers per network interface on unmanaged, standalone router
+------
+- **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
+
+  _**Conditions:**_ DHCP server is not running. The following log message can be seen:
+  ```
+init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
+init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip netns set dhcp-server-ns-1 1073742075" failed: RTNETLINK answers: No space left on device
+  ```
+  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
+------
+- **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
+
+  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
+------
+- **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
+------
+- **I95-34751** LTE certified to run on Verizon wireless networks
+------
+- **I95-34842** The configuration attribute `authority > router > node > device-interface > vrrp` has been removed from configuration in the GUI as the capability does not exist
+------
+- **I95-34961** Using a QuickStart file to provision a router fails if the ZScaler plugin is installed on the Conductor.
+------
+- **I95-35038** Configuration Explorer within GUI can sometimes produce a "Something went wrong" message when searching or scrolling
+------
+- **I95-35082** When a 128T is deployed behind a NAT firewall and has path MTU (PMTU) discovery enabled, SVR sessions established for outbound-only connections are set up with the configured interface MTU, not the discovered PMTU.
+------
+- **I95-35172** Adding DHCP server instances requires a software restart
+------
+- **I95-35205** LTE interfaces do not honor MTU settings set in the network
+
+  Until the system is upgraded to 4.4.1, the learned MTU value can be directly set within Linux
+------
+- **I95-35303** `persistentDataManager` process can fault on shutdown of 128T
+------
+- **I95-35313** Startup delay of 128T when many peer paths exist
+------
+- **I95-35354** There exists an unlikely race condition wherein the successful return code of a download operation (that happens asynchronously) causes an upgrade in progress to terminate prematurely
+------
+- **I95-35377** Additional metrics added to realize active traffic engineering behavior
+------
+- **I95-35394** salt-minion may fault during an upgrade or rollback operation. This issue does not impact the upgrade or rollback operations.
+------
+- **I95-35395** Enabled BGP router reflector `cluster-id` in configuration
+------
+- **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
+
+  _**Conditions:**_ When the interface has an adjacency and tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`, resulting in traffic being dropped.
+------
+- **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T
+
+  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
+------
+- **I95-35517** [Selective Packet Capture](ts_packet_capture.md#selective-packet-capture)
+------
+- **I95-35563** Startup race condition can lead to LTE initialization failure
+
+  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the 128T.
+------
+- **I95-35584** User unable to login to UI after loading a new web certificate
+
+  Until the system is upgraded to 4.4.1, this issue can be mitigated by restarting the web server with the command `systemctl restart 128TWeb`
+------
+- **I95-35602** The command `show network-interface` may result in a `Unhandled TypeError` in the PCLI when a PPPoE interface is down
+------
+- **I95-35633** The GUI performance has been improved for configuration edit operations
+------
+- **I95-35636** SNMP query for ifIndex of interface incorrectly returns
+  ```
+  No Such Object available on this agent at this OID
+  ```
+------
+- **I95-35644** Added support for `bgp route-reflector allow-outbound-policy`
+------
+- **I95-35655** RSRP and RSRQ values are now displayed in the output of `show device-interface` for LTE interfaces
+------
+- **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment
+------
+- **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route
+------
+- **I95-35781** Rare race condition during `rotate logs` PCLI command may cause applications to fault
+------
+- **I95-35866** Addressed latest CVEs
+------
+- **I95-35885** Systems with two LTE interfaces would appear to have three LTE interfaces in Linux
+
+  Until the system is upgraded to 4.4.1, the issue can be mitigated by using the interface `wwp0s21u3i8`. The interface `wwp0s21u3i10` should not be used and will no longer be present after upgrading to 4.4.1.
+
 ## Release 4.4.0
 
 ### New Features and Improvements
@@ -90,6 +194,7 @@ AttributeError: 'NoneType' object has no attribute 'StreamClosedError'
 - **I95-33465** UI sometimes does not provide an indication that it is committing the configuration when importing from backup
 ------
 - **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
+
   _**Conditions:**_ DHCP server is not running. The following log message can be seen:
   ```
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
@@ -100,13 +205,15 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-33983** User role can see a list of config exports by executing `show config exports`
 ------
 - **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
+
   Until the system is upgraded to 4.4.0, this issue can be mitigated by restarting the 128T.
 ------
 - **I95-34334** Audit events are not triggered on download and version query timeouts.  Audit events have been added to provide clarity to the administrator in the event that downloads fail to complete.
 ------
 - **I95-34437** Asset State not correctly reported
 ------
-- **I95-34629** During the initial window of a router to Conductor connection outage or as connectivity is established between HA peers, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+- **I95-34629** During the initial window of a router connecting to its HA peer, or its connection to the Conductor while a connection outage occurs, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+
   Until the system is upgraded to 4.4.0, this issue can be mitigated by attempting the commit again.
 ------
 - **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
@@ -137,6 +244,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35093** `show asset <asset-id>` incorrectly continues to show `Currently Upgrading` version after completion of an upgrade.
 ------
 - **I95-35099** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
+
   Until the system is upgraded to 4.4.0, this issue can be mitigated by disabling rather than deleting the user.
 ------
 - **I95-35115** Aggregate bandwidth charts may not display data accurately
@@ -153,7 +261,9 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35164** Downloading a new software image during an upgrade will incorrectly complete the upgrade if the download was successful before the upgrade has fully completed
 ------
 - **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
+
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
+
   Until the system is upgraded to 4.4.0, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
 ------
 - **I95-35203** `persistentDataManager` process can fault on shutdown of 128T

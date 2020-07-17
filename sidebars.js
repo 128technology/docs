@@ -97,6 +97,7 @@ module.exports = {
     "Best Practices": [
       "bcp_att_avpn_configuration",
       "bcp_conductor_deployment",
+      "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
       "bcp_salt_pillars",
@@ -111,11 +112,14 @@ module.exports = {
     "Plugins": [
       "plugin_intro",
       "plugin_monitoring_agent",
-      "plugin_gre",
-      "plugin_mosh",
-      "plugin_dns_cache",
       "plugin_dns_app_id",
-      "plugin_kni_namespace_scripts"
+      "plugin_dns_cache",
+      "plugin_gre",
+      "plugin_ipsec_client",
+      "plugin_loopback_static_routes",
+      "plugin_mosh",
+      "plugin_sip_alg",
+      "plugin_kni_namespace_scripts",
     ],
     "REST APIs": [
       "api_rest_4.2.0",
@@ -153,14 +157,6 @@ module.exports = {
           "release_notes_monitoring_agent_2.0",
           "release_notes_monitoring_agent_1.2",
           "release_notes_monitoring_agent_1.1",
-        ],
-      },
-      {
-        "type": "category",
-        "label": "128T IPSEC Client",
-        "items": [
-          "release_notes_128t_ipsec_client_2.0",
-          "release_notes_128t_ipsec_client_1.0",
         ],
       },
       {

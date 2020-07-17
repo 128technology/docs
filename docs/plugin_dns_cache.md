@@ -10,7 +10,7 @@ lan-intf (lan-tenant) > `ingress-service` > `dnsmasq` > dns-kni (`tenant`) > egr
 By enabling this plugin, you can provide DNS caching with fast resolution times to your network.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 ## Configuration
@@ -135,5 +135,12 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 
 ## Release Notes
 
-Version `1.0.1` and `2.0.1`:
-* Ensure the application restarts with 128T
+### Release 1.0.1
+
+#### Issues Fixed
+- **PLUGIN-402** Ensure the application restarts with 128T
+
+### Release 2.0.1
+
+#### Issues Fixed
+- **PLUGIN-402** Ensure the application restarts with 128T

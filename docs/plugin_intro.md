@@ -11,14 +11,14 @@ sidebar_label: Introduction
 
 
 ## Plugin Workflow
-Plugins enable a variety of use cases to be implemented to enhance the 128T router experience. These plugins can range from something as simple as managing system settings on the router like the `128T-journal` plugin for managing systemd journal size to something more advanced such as `128T-ipsec-client` which allows for the creation and management of IPSec client tunnels on the 128T router. Regardless of the usage and the complexity of the plugin they follow a general workflow.
+Plugins enable a variety of use cases to be implemented to enhance the 128T router experience. These plugins can range from something as simple as managing system settings on the router like the `128T-journal` plugin for managing systemd journal size to something more advanced such as [`128T-ipsec-client`](plugin_ipsec_client.md) which allows for the creation and management of IPSec client tunnels on the 128T router. Regardless of the usage and the complexity of the plugin they follow a general workflow.
 
 ### Installation and management
 The 128T conductor GUI provides a dashboard to view and manage all available plugins.
 
 ![128T Plugin Dasboard](/img/plugins_dashboard.png)
 
-The dashboard above shows the available and installed plugins. The [`128T-dns-cache`](plugin_dns_cache) plugin in the dashboard above is available and ready to be installed on the conductor. The [`128T-gre`](plugin_gre) plugin shows a green icon meaning it has been installed and ready to be configured. The `128T-ipsec-client` plugin has an orange icon indicating that a new version of the plugin is available for installation, though the currently installed version is still actively being used by the conductor.
+The dashboard above shows the available and installed plugins. The [`128T-dns-cache`](plugin_dns_cache.md) plugin in the dashboard above is available and ready to be installed on the conductor. The [`128T-gre`](plugin_gre.md) plugin shows a green icon meaning it has been installed and ready to be configured. The [`128T-ipsec-client`](plugin_ipsec_client.md) plugin has an orange icon indicating that a new version of the plugin is available for installation, though the currently installed version is still actively being used by the conductor.
 
 :::important
 Upon installation, removal or upgrade of a plugin, the Conductor must be restarted for the changes to take effect.
@@ -41,7 +41,7 @@ Installed plugin can be removed from the UI by using the `Uninstall` button on t
 ![128T Plugin Uninstall](/img/plugin_uninstall.gif)
 
 ### Enabling plugin-specific configuration
-The conductor provides extensibility APIs through which plugins can add plugin-specific configuration to the 128T conductor. This mechanism is especially useful for collecting various user inputs to drive the plugin behavior. For example, the [`128T-gre`](plugin_gre) uses the configuration to obtain tunnel configuration for the router.
+The conductor provides extensibility APIs through which plugins can add plugin-specific configuration to the 128T conductor. This mechanism is especially useful for collecting various user inputs to drive the plugin behavior. For example, the [`128T-gre`](plugin_gre.md) uses the configuration to obtain tunnel configuration for the router.
 
 ![128T GRE configuration](/img/plugin_gre_config.gif)
 
@@ -55,14 +55,14 @@ In the 128T platform architecture, `salt` is used as communication mechanism bet
 * Trigger additional services or functions on the router such as systemd services etc.
 
 :::note
-Plugins rely on connectivity between the conductor and router to drive their logic. They also rely on the router to have access to the 128T RPM repository as either direct access over internet or by leveraging [conductor hosted repo](concepts_machine_communication#conductor-hosted-software-repository).
+Plugins rely on connectivity between the conductor and router to drive their logic. They also rely on the router to have access to the 128T RPM repository as either direct access over internet or by leveraging [conductor hosted repo](intro_upgrading.md#routers-with-restricted-internet-access).
 :::
 
 ## Plugin Concepts
-Some of the more advanced plugins such as `128T-ipsec-client` and [`128T-gre`](plugin_gre) rely on various extensibility features available on the router to perform their functions. Some of the commonly used concepts are as follows.
+Some of the more advanced plugins such as [`128T-ipsec-client`](plugin_ipsec_client.md) and [`128T-gre`](plugin_gre.md) rely on various extensibility features available on the router to perform their functions. Some of the commonly used concepts are as follows.
 
 ### KNI network scripts
-[The Kernel Network Interface (KNI)](https://doc.dpdk.org/guides/prog_guide/kernel_nic_interface.html) is a special interface which allows for communication between 128T router and the underlying operating system. Most common instance of KNI is the presence of a loopback interface called `kni254` on the system which is typically used to enable in-band management sessions on a 128T router. KNIs also provide an extensive set of [scripting functionality](plugin_kni_namespace_scripts) which can be used to drive additional applications on the system such as DNS masquerade, ipsec-client using libreswan, GRE stack in linux OS etc. A more detailed guide on KNI interface scripting can be found [here](concepts_kni).
+[The Kernel Network Interface (KNI)](https://doc.dpdk.org/guides/prog_guide/kernel_nic_interface.html) is a special interface which allows for communication between 128T router and the underlying operating system. Most common instance of KNI is the presence of a loopback interface called `kni254` on the system which is typically used to enable in-band management sessions on a 128T router. KNIs also provide an extensive set of [scripting functionality](plugin_kni_namespace_scripts.md) which can be used to drive additional applications on the system such as DNS masquerade, ipsec-client using libreswan, GRE stack in linux OS etc. A more detailed guide on KNI interface scripting can be found [here](concepts_kni.md).
 
 ### Service Function Chaining
 One of the most common use case for plugins is the notion of service function chaining whereby `ingress` traffic (typically from a lan interface) is routed through the linux OS to be passed through a `service function` which can be used to inspect, encapsulate, transform or provide additional functionality on the incoming traffic. Once the service function in linux is applied it will result in a new set of sessions being created towards the `egress` interfaces (typically towards a wan interface). Such a SFC function relies on the safe and reliable 128T Session Smart routing in both directions.
@@ -76,4 +76,4 @@ Consider appropriate tenancy for each side of the traffic (ingress vs egress) to
 :::
 
 ### Application Identification
-128T router have powerful application-based routing capabilities using [modules](concepts_appid#appid-using-modules) which can provide a name to ip-prefix mapping. As the documentation suggests, the module based approach requires programming expertise and as a result lends itself very well as a plugin. Several plugins utilize the app-id feature in the product to provide a meaningful user experience. The [`128T-dns-app-id`](plugin_dns_app_id) plugin, for example, combines both the SFC concept as described [above](#service-function-chaining) in order to learn and cache DNS records routed through the 128T platform as well as leveraging the learned information to provide named routing for applications such as GSuite, Gmail etc by leveraging application-id.
+128T router have powerful application-based routing capabilities using [modules](concepts_appid.md#appid-using-modules) which can provide a name to ip-prefix mapping. As the documentation suggests, the module based approach requires programming expertise and as a result lends itself very well as a plugin. Several plugins utilize the app-id feature in the product to provide a meaningful user experience. The [`128T-dns-app-id`](plugin_dns_app_id.md) plugin, for example, combines both the SFC concept as described [above](#service-function-chaining) in order to learn and cache DNS records routed through the 128T platform as well as leveraging the learned information to provide named routing for applications such as GSuite, Gmail etc by leveraging application-id.
