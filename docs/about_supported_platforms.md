@@ -2,9 +2,7 @@
 title: Platform Support Policy
 ---
 
-128 Technology provides a software-based networking solution that serves as the underlying framework for digital transformation. Because the software is abstracted from the underlying infrastructure, the same software-based solution can be deployed on bare metal servers, virtualized platforms, or in the public cloud, providing considerable deployment flexibility.
-
-In contrast to hardware-centric solutions, software provides scalability and agility because administrators can rapidly spin up, configure, and spin down software instances. Abstracting the underlying compute also simplifies deployment from a lifecycle management perspective because each router is treated in a similar manner.
+128 Technology provides a software-based networking solution that serves as the underlying framework for digital transformation. Because the software is abstracted from the underlying platform infrastructure, the same software-based solution can be flexibly deployed on bare metal servers, virtualized platforms, or in the public cloud, providing considerable deployment. In contrast to hardware-centric solutions, software provides scalability and agility by allowing administrators to rapidly spin up, configure, and spin down software instances. Abstraction of the underlying platform simplifies lifecycle management in a deployment because each router is treated in a similar manner.
 
 During initial deployment, the steps for zero-touch provisioning are the same whether routers are deployed on bare metal, a private OpenStack cloud, or in AWS. Within the management tool, the 128T Conductor, deployed assets are managed using the same interface, simplifying administrative workflows.
 
@@ -83,10 +81,17 @@ These are the minimum platform specifications for running the 128T software.
 
 ## Platform Support
 
-128 Technology will update the [Platform Compatibility Guide](marisa.please.provide) with new platform platforms that have been tested and certified. General Support for selected new platform technology (such as servers, processors, chipsets, and add-in cards) is based on 128 Technology's discretion.
+The support provided by 128 Technology 
 
-If a specific server, storage array, or device is not listed on the Systems Compatibility Guide, please contact 128 Technology to determine plans for supporting the platform combination for the 128T.
+### Support for 128T on Certified Platforms
 
+128 Technology will update the [Platform Compatibility Guide](marisa.please.provide) with new platforms that have been tested and certified. General Support for selected new platform technology (such as servers, processors, chipsets, and add-in cards) is based on 128 Technology's discretion.
+
+If a particular platform configuration is not listed on as a certified by the 128T Certification Program, please contact 128 Technology to determine plans for certification of the platform for the 128T.
+
+### Support for 128T on Compatible Platforms
 128 Technology will assist customers in problem analysis to determine whether or not the technical issue is related to the third-party platform or software.
 
 If the root cause is believed to originate from a third-party vendor's product for which 128 Technology does not maintain a cooperative support relationship, the customer is required to open a support request with the third-party vendor's support organization.
+
+### Support for 128T on Incompatible Platforms
