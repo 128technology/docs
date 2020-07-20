@@ -3,7 +3,7 @@ title: Asset Connection Resiliency
 sidebar_label: Asset Connection Resiliency
 ---
 
-128T provides path resiliency to a destination when multiple paths exist between peering 128T routers. However, not every destination may not have another 128T peered in its path. Specifically, the Conductor may be deployed on the public internet without a front-ended 128T.
+128T provides path resiliency to a destination when multiple paths exist between peering 128T routers. However, not every destination may not have another 128T peered in its path. Specifically, a 128T conductor may be deployed on the public internet without a front-ended 128T.
 :::info
 Read the [BCP on Conductor Deployment](bcp_conductor_deployment.md) for recommendations on how to deploy a Conductor.
 :::
