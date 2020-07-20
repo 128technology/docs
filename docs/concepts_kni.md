@@ -59,7 +59,7 @@ The above configuration, creates a KNI called `host-kni` in Linux which can be u
        valid_lft forever preferred_lft forever
 ```
 
-Users can also configure a `network-namespace` for the host KNI which is useful for isolating the host KNI into a namespace and is commonly how KNIs are used. Applications and plugins leverage the [scripting framework](#scripting-framework) in order to implement [SFC](plugin_intro#service-function-chaining). To simplify the adoption of this model and to speed up plugin development using this model, [a utility with a set of namespace scripts](plugin_kni_namespace_scripts) is provided to simplify this process.
+Users can also configure a `network-namespace` for the host KNI which is useful for isolating the host KNI into a namespace and is commonly how KNIs are used. Applications and plugins leverage the [scripting framework](#scripting-framework) in order to implement [SFC](plugin_intro.md#service-function-chaining). To simplify the adoption of this model and to speed up plugin development using this model, [a utility with a set of namespace scripts](plugin_kni_namespace_scripts.md) is provided to simplify this process.
 
 
 ### Bridge KNI
@@ -119,7 +119,7 @@ In this mode, the 128T router will create a Linux bridge (of the form `kni<globa
 
 
 ## Scripting Framework
-The KNI scripting framework provides a programmable interface to bring-up, initialize and monitor applications that are associated with KNIs. Several of the built in device types such as LTE, PPPoE and T1 all leverage this framework to implement majority of their functions. Other features in the product such as DHCP server and [plugins](plugin_intro#service-function-chaining) also leverage this scripting framework.
+The KNI scripting framework provides a programmable interface to bring-up, initialize and monitor applications that are associated with KNIs. Several of the built in device types such as LTE, PPPoE and T1 all leverage this framework to implement majority of their functions. Other features in the product such as DHCP server and [plugins](plugin_intro.md#service-function-chaining) also leverage this scripting framework.
 
 ### Directory structure
 The scripting framework scans for executable scripts in the `/etc/128technology/plugins/network-scripts` directory for each of the configured types. Each of the built in type has its own dedicated sub-directory called `lte`, `pppoe` and `t1` where the router stages the necessary scripts. For the `host` type interface, the software will look for scripts in a sub-directory by the name of the KNI interface under `/etc/128technology/plugins/network-scripts/host/`. For the `bridge` type interface, the software will look for a scripts in a sub-directory by the name of the `target-interface` under `/etc/128technology/plugins/network-scripts/bridged/`. From the above example, this will be `128technology/plugins/network-scripts/host/host-kni` and `/etc/128technology/plugins/network-scripts/bridged/dpdk3` respectively.

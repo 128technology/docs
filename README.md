@@ -29,7 +29,7 @@ Alternatively if you prefer, you can run the server just with `docker`.
 1. Ensure you have installed `docker`.
 2. Run `docker image build -t 128t-docs .` to build the image.
 3. Run `docker create --name 128t-docs --publish 3000:3000 128t-docs` to create the container.
-4. Run `docker start -a 128t-docs `to start the container.
+4. Run `docker start -a 128t-docs` to start the container.
 
 That's it. Point a browser to http://localhost:3000 to see the fruits of your labor.
 
