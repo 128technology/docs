@@ -20,70 +20,28 @@ The monitoring agent at its core is designed to be able to push data to external
 
 The 128T Monitoring Agent can be obtained from the official 128T software repository. The following versions of the **monitoring-agent** are available for corresponding 128T software version.
 
-| Monitoring Agent            | 128T                        |
-| --------------------------- | --------------------------- |
-| 128T-monitoring-agent-1.2.1 | 128T >= 4.1.0; 128T < 4.3.0 |
-| 128T-monitoring-agent-2.1.1 | 128T >= 4.3.0               |
+| Monitoring Agent                | 128T                        |
+| ------------------------------- | --------------------------- |
+| **128T-monitoring-agent-3.0.0** | 128T >= 4.1.0               |
 
-The agent can be install using dnf utility. For example.
+:::important  
+Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported 128T versions. It should be preferred for new installations and upgrades.  
+:::
+
+The agent can be install using the `dnf` utility.
 
 ```console
 dnf install 128T-monitoring-agent
-Last metadata expiration check: 0:00:00 ago on Wed 10 Jun 2020 01:20:49 AM UTC.
-Dependencies resolved.
-=================================================================================
- Package                      Arch          Version         Repository      Size
-=================================================================================
-Installing:
- 128T-monitoring-agent        x86_64        2.1.1-1         128tech        7.0 M
-Installing dependencies:
- telegraf-128tech             x86_64        1.14.3-1        128tech         20 M
-
-Transaction Summary
-=================================================================================
-Install  2 Packages
-
-Total download size: 27 M
-Installed size: 101 M
-Is this ok [y/N]: y
-Downloading Packages:
-(1/2): 128T-monitoring-agent-2.1.1-1.rpm          20 MB/s | 7.0 MB     00:00
-(2/2): telegraf-128tech-1.14.3-1.x86_64.rpm       29 MB/s |  20 MB     00:00
----------------------------------------------------------------------------------
-Total                                             37 MB/s |  27 MB     00:00
-Running transaction check
-Transaction check succeeded.
-Running transaction test
-Transaction test succeeded.
-Running transaction
-  Preparing        :                                                         1/1
-  Running scriptlet: telegraf-128tech-1.14.3-1.x86_64                        1/2
-  Installing       : telegraf-128tech-1.14.3-1.x86_64                        1/2
-  Running scriptlet: telegraf-128tech-1.14.3-1.x86_64                        1/2
-Created symlink from /etc/systemd/system/multi-user.target.wants/telegraf.service to /usr/lib/systemd/system/telegraf.service.
-  Installing       : 128T-monitoring-agent-2.1.1-1.x86_64                    2/2
-  Running scriptlet: 128T-monitoring-agent-2.1.1-1.x86_64                    2/2
-Created symlink from /etc/systemd/system/128T.service.wants/128T-monitoring-agent.service to /usr/lib/systemd/system/128T-monitoring-agent.service.
-Created symlink from /etc/systemd/system/multi-user.target.wants/128T-monitoring-agent.service to /usr/lib/systemd/system/128T-monitoring-agent.service.
-  Running scriptlet: telegraf-128tech-1.14.3-1.x86_64                        2/2
-  Running scriptlet: 128T-monitoring-agent-2.1.1-1.x86_64                    2/2
-Removed symlink /etc/systemd/system/multi-user.target.wants/telegraf.service.
-  Verifying        : 128T-monitoring-agent-2.1.1-1.x86_64                    1/2
-  Verifying        : telegraf-128tech-1.14.3-1.x86_64                        2/2
-
-Installed:
-  128T-monitoring-agent.x86_64 2.1.1-1      telegraf-128tech.x86_64 1.14.3-1
-
-Complete!
 ```
 
 ## Configuration
 
 ### Version History
 
-| Release      | Modification                   |
-| ------------ | ------------------------------ |
-| 1.2.0, 2.1.0 | `lib-directory` was introduced |
+| Release      | Modification                                                    |
+| ------------ | --------------------------------------------------------------- |
+| 3.0.0        | per input `sample-interval` and `push-interval` were introduced |
+| 1.2.0, 2.1.0 | `lib-directory` was introduced                                  |
 
 The monitoring agent has its own set of configurations and looks for inputs from specific directories on disk. By default, the configuration for the agent should be present in `/etc/128t-monitoring/config.yaml` and uses YAML format which looks something like this:
 
@@ -100,6 +58,8 @@ inputs:
   - name: t128_metrics
     include-outputs: [message_queue]
   - name: t128_device_state
+    sample-interval: 30
+    push-interval: 90
   - name: t128_peer_path
   - name: lte_metric
     exclude-outputs: [file]
@@ -114,7 +74,7 @@ The `enabled` field is meant as global toggle for applying the monitoring agent 
 
 Each of the `tags`, a collection of key/value pairs, are used to add meta information to the collected metrics. This data makes it easier to identify the origin, and to provide filtering by the collectors. By default, the agent includes the `${HOSTNAME}`, `${ROUTER}` and `${NODE}` tags to every collected input. The corresponding values are derived from the running system. The same config can ideally be used for each node in the authority, as their respective values are evaluated at runtime.
 
-`sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration. It is recommended to configure the `push-interval` as a multiple of `sample-interval`.
+`sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration. It is recommended to configure the `push-interval` as a multiple of `sample-interval`. These values can be overridden at the input level for finer control of agent's behavior.
 
 The `inputs` represent a single unit of collection. This can be a combination of inputs available from `telegraf` as well as other inputs developed by 128T. The function and configuration of each of the 128T provided inputs can be found in subsequent sections. For `telegraf` inputs please refer to the [influx documentation online](https://docs.influxdata.com/telegraf/v1.13/plugins/plugin-list/#input-plugins). Each `input` can be a combination of one or more collectors and can contain other collector specific information. For each of the inputs, a user can also configure an `include-outputs` which is a list of outputs to send the collected information to. This allows the user to build a matrix of inputs and outputs and provides a granular control over which input should be sent to what output. Similarly, the user can also configure an `exclude-outputs` which will include all defined outputs except the one specified.
 
@@ -142,7 +102,7 @@ Path: `/var/lib/128t-monitoring/config`
 
 The `config` directory contains the fully formed telegraf config files created by the monitoring agent. These file are generated based on the contents of `config.yaml` and the `inputs` and `outputs` directories.
 
-For example, the using the `t128_metrics` input and the `file` output in the examples section below will result in a configuration file such as:
+For example, using the `t128_events` input and the `file` output in the examples section below will result in a configuration file such as:
 
 ```toml
 [global_tags]
@@ -154,10 +114,13 @@ interval = 10
 flush_interval = 20
 
 [inputs]
-[[inputs.exec]]
-timeout = "15s"
-commands = [ "/usr/bin/metricCollector128t --config /etc/128t-monitoring/collectors/t128_metrics/default_config.toml",]
+[[inputs.execd]]
+command = [ "/usr/bin/eventCollector128t", "--log-name", "event_collector", "--topic", "events", "--index-file", "/tmp/events.index",]
+signal = "none"
 data_format = "influx"
+
+[inputs.execd.tagpass]
+type = [ "admin",]
 
 [outputs]
 [[outputs.file]]
@@ -165,8 +128,8 @@ files = ["stdout", "/tmp/metrics.out"]
 data_format = "influx"
 ```
 
-:::important
-Users should not make changes to these files as they will be overwritten by the `monitoring-agent-cli configure` command.
+:::important  
+Users should not make changes to these files as they will be overwritten by the `monitoring-agent-cli configure` command.  
 :::
 
 ### Samples
@@ -197,23 +160,23 @@ Path: `/var/lib/128t-monitoring/inputs/t128_metrics.conf`
     ## /etc/128t-monitoring/collectors/t128_metrics/default_config.toml will be used
     ## for monitoring. Here's a sample configuration on how to define custom metrics.
     ##
-    ## [[inputs.t128_metric.metric]]
-    ## name = "peer_path"
+    ## [[inputs.t128_metrics.metric]]
+    ## name = "service"
     ##
-    ## [inputs.t128_metric.metric.fields]
+    ## [inputs.t128_metrics.metric.fields]
     ## Refer to the 128T REST swagger documentation for the list of available metrics
     ##     key_name = "stats/<path_to_metric>"
-    ##     latency = "stats/bfd/peer-path/latency"
+    ##     packets-received = "stats/aggregate-session/service/packets-received"
     ##
-    ## [inputs.t128_metric.metric.parameters]
+    ## [inputs.t128_metrics.metric.parameters]
     ##     parameter_name = ["value1", "value2"]
-    ##     peer_path = ["path1"]
+    ##     service = ["service1"]
 
     timeout = "15s"
 ```
 
-:::tip
-Depending on the number of metrics you have enabled, you may need to increase the timeout to allow collection to complete. This can also influence your minimum polling interval.
+:::tip  
+Depending on the number of metrics you have enabled, you may need to increase the timeout to allow collection to complete. This can also influence your minimum polling interval.  
 :::
 
 #### Linux System
@@ -305,9 +268,46 @@ In this example data is sent via syslog:
   default_sdid = "128T"
 ```
 
-:::important
-For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages
+:::important  
+For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages  
 :::
+
+### Variable Replacement
+
+Within an **input** configuration, several variables have been made available for substitution.
+
+| Value             | Meaning                                      | Version Introduced |
+| ----------------- | -------------------------------------------- | ------------------ |
+| `${ROUTER}`       | The router name of the running 128T instance | 3.0.0              |
+| `${NODE}`         | The node name of the running 128T instance   | 3.0.0              |
+| `${128T_VERSION}` | The version of the running 128T instance     | 3.0.0              |
+
+An example of this would be:
+
+```console
+$ cat /var/lib/128t-monitoring/inputs/example.conf
+[[inputs.example]]
+  version = "${128T_VERSION}"
+
+$ monitoring-agent-cli generate --force
+Generating example
+
+$ cat /var/lib/128t-monitoring/config/example.conf
+[global_tags]
+host = "${HOSTNAME}"
+
+[agent]
+interval = 1
+flush_interval = 1
+
+[inputs]
+[[inputs.example]]
+version = "5.0.0"
+
+[outputs]
+[[outputs.file]]
+files = [ "/tmp/test.out",]
+```
 
 ## Monitoring Agent CLI
 
@@ -346,16 +346,16 @@ The configuration for each of these inputs can be viewed via `monitoring-agent-c
     ## for monitoring. Here's a sample configuration on how to define custom metrics.
     ##
     ## [[inputs.t128_metric.metric]]
-    ## name = "peer_path"
+    ## name = "service"
     ##
     ## [inputs.t128_metric.metric.fields]
     ## Refer to the 128T REST swagger documentation for the list of available metrics
     ##     key_name = "stats/<path_to_metric>"
-    ##     latency = "stats/bfd/peer-path/latency"
+    ##     packets-received = "stats/aggregate-session/service/packets-received"
     ##
     ## [inputs.t128_metric.metric.parameters]
     ##     parameter_name = ["value1", "value2"]
-    ##     peer_path = ["path1"]
+    ##     service = ["service1"]
 ```
 
 ### Generation
@@ -421,7 +421,7 @@ The 128T monitoring-agent comes pre-packaged with a set of collectors to assist 
 
 ### Metric collector
 
-The `metricCollector128t` python executable is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The configuration file in a `TOML` definition of metrics and has the following format:
+The `t128_metrics` input is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The configuration file in a `TOML` definition of metrics and has the following format:
 
 ```toml
 [[metric]]
@@ -439,7 +439,37 @@ The `metricCollector128t` python executable is responsible for collecting the co
     service = []
 ```
 
-The `name` becomes the name of the measurement in the context of influxdb format. The `metric.fields` represent the various metrics to be collected. The `packets-received` in the above example will be field-name for the `stats/aggregate-session/service/packets-received` KPI which is the path of that KPI from the 128T REST API documentation. Finally, the `metric.parameters` can be used to configure key parameters such as `service` to be used for filtering the set of collected stats. In the above example, the metrics would be collected for all services but the `service` parameter can be used to specify a subset of services to monitor instead.
+Each element of the configuration specifies an aspect of the [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v1.8/write_protocols/line_protocol_tutorial/) or the [128T REST API](api_rest_4.2.0.md).
+
+- **name**  
+  The line protocol measurement to be used for the output
+
+- **fields**  
+  What line protocol fields should exist in the output
+
+- **fields.key** (e.g. `packets-received`)  
+  A line protocol field key that should exist in the output
+
+- **fields.value** (e.g. `stats/aggregate-session/service/packets-received`)  
+  The 128T KPI providing the value for the associated field key. See the [128T REST API documentation](api_rest_4.2.0.md) for a full list. Note that the documentation prefixes the KPIs with `/router/{router}/`.
+
+- **parameters** (e.g. `service`)  
+  The 128T parameters that should be preserved as line protocol tags in the output. When a non-empty list of values is provided for a parameter, only KPIs with matching parameters will be included in the output.
+
+A custom set of metrics can be collected by configuring the `t128_metrics` input as described in the sample. The configuration follows the same structure as the default file, but the metrics are nested under the input.
+
+```toml
+[[inputs.t128_metrics]]
+    [[inputs.t128_metrics.metric]]
+      name = "disk"
+
+    [[inputs.t128_metrics.metric.fields]]
+      used = "stats/disk/used"
+      capacity = "stats/disk/capacity"
+
+    [[inputs.t128_metrics.metric.parameters]]
+      disk = ["/"]
+```
 
 ### Event Collector
 
@@ -473,8 +503,8 @@ The event collector can be used for collecting and pushing events for various ca
   type = ["alarm", "admin"]
 ```
 
-:::important
-In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.
+:::important  
+In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.  
 :::
 
 ```toml
@@ -498,7 +528,6 @@ In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen abo
 | Release      | Modification                     |
 | ------------ | -------------------------------- |
 | 1.2.1, 2.1.1 | `mac-address` tag was introduced |
-
 
 The `deviceInterfaceStateCollector128t` collector can be used for monitoring the admin, oper and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
 
@@ -629,3 +658,259 @@ The **top sessions** input above can be used to stream the view of the top 10 se
 The **top sources** input can be used to capture the list of source IP addresses by either **TOTAL_DATA** (default) or by **SESSION_COUNT**. In addition, the user can configure the maximum number of top data samples to collect as configured by the **max_rows** configuration above. Finally the **enabled** flag can be used to turn off the top sources collection is need be.
 
 The **top applications** input is useful when application identification in terms of module or tls have been configured on the router. By default, all the discovered sessions will be reported by the input. The user can tune the collection by setting up a search filter in the form of **filter** or eliminate the applications that have some minimum number of sessions via **min-session-count**. The **max-rows** will limit the reporting to the first N rows. The collection can be turned off by setting **enabled** to be false.
+
+## Release Notes
+
+### Release 3.0.0
+
+#### New Features and Improvements
+
+- **MON-230** Make 3.X version of the Monitoring agent compatible with 4.1.0 <= 128T < 6.0.0
+- **MON-233** Upgrade telegraf to 1.14.5
+- **MON-234** Improve metrics collection performance by creating a native Telegraf plugin
+- **MON-198** Provide sample and push interval overrides per input in the agent's config
+- **MON-246** Enable value substitution in telegraf configuration files
+
+#### Issues Fixed
+
+- **MON-280** Make the arp state collector compatible with 128T 5.X
+
+  _**Resolution**_ The arp state collector now dynamically handles data collection depending on the 128T version.
+
+
+### Release 2.1.1
+
+#### New Features and Improvements
+
+- **MON-225** Update telegraf dependency to 1.14.3
+- **MON-227** Allow this version of the Monitoring Agent to be installed with 128T < 6.0.0 (previously < 5.0.0)
+- **MON-218** Expose MAC address in the device state input
+  - Allow better correlation between device and network interfaces.
+
+- **MON-210** Improve performance of several provided inputs
+  - Reduce the resource consumption as well as the time needed to collect data. In particular, the `t128_metrics` input has been significanly improved.
+
+#### Issues Fixed
+
+- **MON-205** Honor the input enable/disable flag in the agent's config
+
+  _**Resolution**_ The configuration allows the user to disable an input. However, an input was being treated as enabled as long as it existed in the config. That configuration option is now honored.
+
+- **MON-225** `t128_events` input would occasionally drop or delayed events
+
+  _**Resolution**_ Update the telegraf dependency to 1.14.3 as well as the `execd` input to better handle simultaneous events.
+
+### Release 2.1.0
+
+#### New Features and Improvements
+
+- **MON-184** Added stop command in cli to stop all associated Telegraf services.
+
+For help using this cli option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#stopping-services).
+
+- **MON-141** Added support for multiple logically seperate monitoring agent instances with the `lib-directory` config option.
+
+For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#configuration).
+
+- **MON-208** Update Telegraf to latest stable version 1.14.2.
+
+A new stable version of telegraf was released upstream. The main reason for upgrading was to get support for multiline lines.
+
+- **MON-194** Added arp state collector to collect state of the arp table.
+
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#arp-state-collector).
+
+- **MON-144** Added configuration option to enable tracking of index so that the event collector picks up where it left off in the case of a restart.
+
+For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#event-collector).
+
+#### Issues Fixed
+
+- **MON-195** Device state collector collects state from peer node on an HA router.
+
+  _**Resolution**_ The device state collector will now only request state from the local node.
+
+- **MON-181** Event collector excludes multiline events.
+
+  _**Resolution**_ The event collector will accumulate subsequent invalid lines and attempt to submit the accumulated line.
+
+
+### Release 2.0.1
+
+#### Issues Fixed
+
+- **MON-185** telegraf error when processing results from peer path input
+
+  _**Resolution:**_ The extra logging causing the problem was removed
+
+- **MON-186** LTE metric collector not reporting any values
+
+  _**Resolution:**_ Updated the library imports and identifiers used to display the missing data
+
+- **MON-188** The events inputs collector has invalid sample
+
+  _**Resolution:**_ Updated the sample and staged configuration example for events
+
+### Release 2.0.0
+
+#### New Features and Improvements
+- **MON-126** Automatically stage all 128T input configuration for easy of use
+
+The configuration for all 128T collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
+
+- **MON-148** Top applications, sessions and sources input plugin
+
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#top-analytics-collector)
+
+- **MON-164** Test monitoring-agent input configuration
+
+For verification of the data collected the user can use `monitoring-agent-cli generate` command to generate all the telegraf configuration. Subsequently, the user can run `monitoring-agent-cli test-input` to test a specific input. More details can be found in the [Testing And Validation section](plugin_monitoring_agent.md#testing-and-validation)
+
+- **MON-171** Update Telegraf to latest stable version 1.14.0 ####
+
+A new stable version of telegraf was released upstream with several new inputs such as execd, wireguard and others.
+
+- **MON-175** LTE metric collect will include SNR signal strength ####
+
+The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the 128T router.
+
+
+#### Issues Fixed
+- **MON-125** `t128_metrics` default bfd config doesn't work with 4.3
+
+  _**Resolution:**_ The new default config for metrics have the correct parameters for BFD metrics
+
+- **MON-146** Metric collector timing out with the default config on customer system
+
+  _**Resolution:**_ The metric configuration will now have a default timeout of 15 seconds.
+
+- **MON-160** sample agent-config has invalid tags
+
+  _**Resolution:**_ All the sample configurations now contain valid data
+
+- **MON-169** peer-path collector only captures 1 peer-path per node
+
+  _**Resolution:**_ All peer paths on the node will be reported by the peer-path collector
+
+- **MON-170** Default telegraf service (not 128T-telegraf) is enabled and running un-necessarily on the system
+
+  _**Resolution:**_ The system telegraf service will be stopped and disabled
+
+### Release 1.2.1
+
+#### New Features and Improvements
+
+- **MON-225** Update telegraf dependency to 1.14.3
+
+- **MON-218** Expose MAC address in the device state input
+
+Allow better correlation between device and network interfaces.
+
+- **MON-210** Improve performance of several provided inputs
+
+Reduce the resource consumption as well as the time needed to collect data. In particular, the `t128_metrics` input has been significanly improved.
+
+#### Issues Fixed
+
+- **MON-205** Honor the input enable/disable flag in the agent's config
+
+  _**Resolution**_ The configuration allows the user to disable an input. However, an input was being treated as enabled as long as it existed in the config. That configuration option is now honored.
+
+- **MON-225** `t128_events` input would occasionally drop or delayed events
+
+  _**Resolution**_ Update the telegraf dependency to 1.14.3 as well as the `execd` input to better handle simultaneous events.
+
+### Release 1.2.0
+
+#### New Features and Improvements
+
+- **MON-184** Added stop command in cli to stop all associated Telegraf services.
+
+For help using this cli option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#stopping-services).
+
+- **MON-141** Added support for multiple logically seperate monitoring agent instances with the `lib-directory` config option.
+
+For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#configuration).
+
+- **MON-208** Update Telegraf to latest stable version 1.14.2.
+
+A new stable version of telegraf was released upstream. The main reason for upgrading was to get support for multiline lines.
+
+- **MON-194** Added arp state collector to collect state of the arp table.
+
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#arp-state-collector).
+
+- **MON-144** Added configuration option to enable tracking of index so that the event collector picks up where it left off in the case of a restart.
+
+For help configuring this option, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#event-collector).
+
+#### Issues Fixed
+
+- **MON-195** Device state collector collects state from peer node on an HA router.
+
+  _**Resolution**_ The device state collector will now only request state from the local node.
+
+- **MON-181** Event collector excludes multiline events.
+
+  _**Resolution**_ The event collector will accumulate subsequent invalid lines and attempt to submit the accumulated line.
+
+
+### Release 1.1.1
+
+#### Issues Fixed
+
+- **MON-185** telegraf error when processing results from peer path input
+
+  _**Resolution:**_ The extra logging causing the problem was removed
+
+- **MON-186** LTE metric collector not reporting any values
+
+  _**Resolution:**_ Updated the library imports and identifiers used to display the missing data
+
+- **MON-188** The events inputs collector has invalid sample
+
+  _**Resolution:**_ Updated the sample and staged configuration example for events
+
+
+### Release 1.1.0
+
+#### New Features and Improvements
+
+- **MON-126** Automatically stage all 128T input configuration for easy of use
+
+The configuration for all 128T collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
+
+- **MON-148** Top applications, sessions and sources input plugin
+
+To configure the new input plugin, please refer to the [Monitoring Agent Guide](plugin_monitoring_agent.md#top-analytics-collector)
+
+- **MON-164** Test monitoring-agent input configuration
+
+For verification of the data collected the user can use `monitoring-agent-cli generate` command to generate all the telegraf configuration. Subsequently, the user can run `monitoring-agent-cli test-input` to test a specific input. More details can be found in the [Testing And Validation section](plugin_monitoring_agent.md#testing-and-validation)
+
+- **MON-171** Update Telegraf to latest stable version 1.14.0 ####
+
+A new stable version of telegraf was released upstream with several new inputs such as execd, wireguard and others.
+
+- **MON-175** LTE metric collect will include SNR signal strength ####
+
+The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the 128T router.
+
+
+#### Issues Fixed
+
+- **MON-146** Metric collector timing out with the default config on customer system
+
+  _**Resolution:**_ The metric configuration will now have a default timeout of 15 seconds.
+
+- **MON-160** sample agent-config has invalid tags
+
+  _**Resolution:**_ All the sample configurations now contain valid data
+
+- **MON-169** peer-path collector only captures 1 peer-path per node
+
+  _**Resolution:**_ All peer paths on the node will be reported by the peer-path collector
+
+- **MON-170** Default telegraf service (not 128T-telegraf) is enabled and running un-necessarily on the system
+
+  _**Resolution:**_ The system telegraf service will be stopped and disabled
