@@ -53,7 +53,7 @@ sidebar_label: 4.5
 
   Until the system is upgraded to 4.5.0, this issue can be mitigated by restarting the 128T or by removing and recreating the bgp configuration
 ------
-- **I95-35193** Performing a Download of software may fail
+- **I95-35193** Performing a download of software may fail
   _**Conditions**_ 128T connection to the conductor is disconnected or restarted
 ------
 - **I95-35391** Selecting a specific line within a custom report graph does not always select the metric clicked
@@ -66,11 +66,11 @@ sidebar_label: 4.5
 ------
 - **I95-35799** When a route prefix that exactly matches the prefix of a configured service is removed, the route gets removed from the RIB but it may remain in the FIB and may still be used for establishing new sessions
 ------
-- **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command "send command yum-cache-refresh" has been updated to perform the rpmdb repair if the rpmdb is corrupted.
+- **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
 
   Until the system is upgraded to 128T 4.5.0 and 128T-installer 2.6.1, the issue can be mitigated by running the following linux commands:
   ```
-  rm -f /var/lib/rpm/__* 
+  rm -f /var/lib/rpm/__*
   rpm --rebuilddb
   ```
 ------
