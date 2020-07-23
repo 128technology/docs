@@ -266,7 +266,7 @@ Expand your current policies or service definitions to include IP destinations o
 
 #### Application Dependencies
 
-_Application dependencies_ are prerequisites that must be satisfied before an application transaction is successful. Most applications are dependent on DNS, for example – successfully resolving a domain name is a prerequisite for sending a HTTPS request to a web site on the Internet. But application dependencies can take all forms; some applications require a separate authentication transaction to a AAA server, some web sites need to transact to back end database servers, etc.
+_Application dependencies_ are prerequisites that must be satisfied before an application transaction is successful. Most applications are dependent on DNS, for example – successfully resolving a domain name is a prerequisite for sending a HTTPS request to a web site on the internet. But application dependencies can take all forms; some applications require a separate authentication transaction to a AAA server, some web sites need to transact to back end database servers, etc.
 
 While much of the application discovery process is focused on a client in a branch location accessing applications at a corporate data center or on the internet, creating a dependency map will not only help design the 128T configuration in an effective manner, it will greatly benefit post-deployment troubleshooting when the application is not performant or functioning properly. (E.g., if a point of sale device needs to authenticate to an LDAP server in one data center, but transact with back-end inventory management servers in another data center, it will be vital knowledge when troubleshooting a customer report with the POS.)
 

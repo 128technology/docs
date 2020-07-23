@@ -3,6 +3,12 @@ title: 128T Installer 2.6 Release Notes
 sidebar_label: 2.6
 ---
 
+## Release 2.6.1
+
+### New Features and Improvements
+
+- **IN-267** - Detect and correct corrupted linux rpmdb, rpmdb is used for linux package management.
+
 ## Release 2.6.0
 
 ### New Features and Improvements

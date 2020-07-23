@@ -48,7 +48,7 @@ Create another instance and save it as well. Now you should have two instances.
 
 ### Generating Configuration
 
-To generate configuration for instances, first select the instances you want to generate, or use the checkbox beside the **Add Instance** button to select them all: ![templates_select_all_instances](/img/templates_select_all_instances.png)
+To generate configuration for instances, first select the instances you want to generate, or use the check box beside the **Add Instance** button to select them all: ![templates_select_all_instances](/img/templates_select_all_instances.png)
 
 Now click the magic wand icon in the instances pane: ![templates_generate_btn](/img/templates_generate_btn.png)
 
@@ -210,7 +210,7 @@ Given the following variables:
 
 In the above example, router `Test1` would be deleted from the candidate configuration upon running the generation step.
 
-The following values are supported for the `_operation` field: `merge`, `create`, `replace`, `delete`, and `remove`. 
+The following values are supported for the `_operation` field: `merge`, `create`, `replace`, `delete`, and `remove`.
 
 #### List Positioning
 
@@ -248,7 +248,7 @@ Given the following variables:
 }
 ```
 
-The above would insert router `Test1` after router `Test2`. 
+The above would insert router `Test1` after router `Test2`.
 
 The `insert` property can have any of the following values: `first`, `last`, `before`, and `after`. If the list is of complex objects, like routers in the above example, the `keys` property must be specified for `before` and `after`. If instead the list was of simple strings like `["a", "b"]`, instead of `keys` you would specify a property called `value` which is a string to reference the item in the list that you want to target (e.g. `"value": "a"`).
 
