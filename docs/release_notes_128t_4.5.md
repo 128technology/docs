@@ -50,9 +50,10 @@ sidebar_label: 4.5
 - **I95-34112** Rename "show config events" -> "show events config"
 ------
 - **I95-33594** Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting
+
   Until the system is upgraded to 4.5.0, this issue can be mitigated by restarting the 128T or by removing and recreating the bgp configuration
 ------
-- **I95-35193** Download of software upgrade may fail
+- **I95-35193** Performing a Download of software may fail
   _**Conditions**_ 128T connection to the conductor is disconnected or restarted
 ------
 - **I95-35391** Selecting a specific line within a custom report graph does not always select the metric clicked
@@ -64,6 +65,14 @@ sidebar_label: 4.5
   ```
 ------
 - **I95-35799** When a route prefix that exactly matches the prefix of a configured service is removed, the route gets removed from the RIB but it may remain in the FIB and may still be used for establishing new sessions
+------
+- **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command "send command yum-cache-refresh" has been updated to perform the rpmdb repair if the rpmdb is corrupted.
+
+  Until the system is upgraded to 128T 4.5.0 and 128T-installer 2.6.1, the issue can be mitigated by running the following linux commands:
+  ```
+  rm -f /var/lib/rpm/__* 
+  rpm --rebuilddb
+  ```
 ------
 - **I95-35935** Configuring the same conductor-address in `router > conductor-address` on different routers will create invalid generated configuration
 ------
@@ -88,3 +97,20 @@ sidebar_label: 4.5
   The RoadRunner process collected anonymous information from the router and sent it to 128 Technology for storage and analysis. This helped inform and allows 128 Technology to support and improve the 128 Networking Platform. The anonymous data collection tool, RoadRunner has been removed from the product.
 -----
 - **I95-35629** The threshold for broadcast announcement for concurrent PCLI sessions has been increased from 4 to 10 as a result of I95-28366
+
+## Caveats
+
+- **I95-34941** _nodejs_ process can segfault during the upgrade of the 128T
+
+  _**Corrective Action:**_ No action required. The webserver will immediately restart.
+------
+- **I95-33560** When upgrading a HA conductor to version 4.4.0 or later there is a compatibility issue due to an upgrade of the asset provisioning software. This results in a reported asset error that will persist until the two nodes are upgraded to the same version.
+
+  _**Symptom:**_ This error is seen during the upgrade of an HA conductor pair to version 4.4.0 or later. An upgrade of a single standalone conductor node will not see this error. The following error will be reported by the node running software version earlier than 4.4.0:
+  ```
+"128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
+  ```
+  This error can be viewed by running the following PCLI command from either node: `show assets <asset-id>`. Where asset-id is the asset-id of the node running pre 4.4.0 version that has not yet been upgraded.
+
+  _**Corrective Action:**_ This error is transient and will only persist for the duration of the upgrade. The error it will not self-correct. Continue to upgrade the second conductor node. After upgrade, verify that there are no asset state errors.
+------
