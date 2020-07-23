@@ -2,11 +2,7 @@
 title: Platform Support Policy
 ---
 
-128 Technology provides a software-based networking solution that serves as the underlying framework for digital transformation. Because the software is abstracted from the underlying platform infrastructure, the same software-based solution can be flexibly deployed on bare metal servers, virtualized platforms, or in the public cloud, providing considerable deployment. In contrast to hardware-centric solutions, software provides scalability and agility by allowing administrators to rapidly spin up, configure, and spin down software instances. Abstraction of the underlying platform simplifies lifecycle management in a deployment because each router is treated in a similar manner.
-
-During initial deployment, the steps for zero-touch provisioning are the same whether routers are deployed on bare metal, a private OpenStack cloud, or in AWS. Within the management tool, the 128T Conductor, deployed assets are managed using the same interface, simplifying administrative workflows.
-
-For many customers, the scalability of software can also lead to considerable savings. Instead of purchasing hardware for peak capacity, an enterprise can create a new software router with application instances in the public cloud for periods of high demand, and then spin down the entire infrastructure when the demand subsides.
+128 Technology software is designed to be abstracted from the underlying platform infrastructure, for maximum deployment flexibility. Each platform provides different capabilities and characteristics with regard to performance, functionality, and operating environment. 128 Technology strongly reccomends that any combination of software and platform undergo a thorough certification process, and certain platforms are maintained within 128 Technology's own certification program. The following describes the levels of support for different platforms, and details the 128 Technology certification program.
 
 ## Terminology
 
@@ -20,7 +16,9 @@ For the purposes of describing the platform support policy, the following terms 
 
 ## 128T Certification Program
 
-128 Technology continuously works to maintain a platform abstraction in its software design. At the same time, there are often characteristics and optimizations that require platform-specific support. This support comes by way of a platform certification program which provides assurances of supportabilty of the 128T software. For example, the 128T software utilizes [DPDK](https://www.dpdk.org) for broad driver support, and in some cases specific firmware revisions need to be loaded prior to being able to fully utilize 128T's optimized packet forwarding capabilities.
+128 Technology continuously works to maintain a platform abstraction in its software design. At the same time, there are often characteristics and optimizations that require platform-specific support. This support comes by way of a platform certification program which provides assurances of performance and function of the 128T software. For example, the 128T software utilizes [DPDK](https://www.dpdk.org) for broad driver support, and in some cases specific firmware revisions need to be loaded prior to being able to fully utilize 128T's optimized packet forwarding capabilities.
+
+Inclusion in the 128T Certification Program is based a given platforms ability to continuously meet certain test and support criteria. New platforms are added to the program at 128 Technology's discretion. For details on how to get new platforms in to the 128T certification program, or further information regarding the program, please contact 128 Technology.
 
 ### 128T Certified Platform
 
@@ -33,21 +31,6 @@ The 128T Certification program provides certification done by 128 Technology for
 * Includes performance benchmarking
 * Supporting documentation as needed
 
-### 128T Compatible Platform
-
-The 128T Certification program provides a [compatible platform guide](marisa.please.provide) for platforms which are compatible.
-:::note
-128 Technology strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third party. See [platform support](#platform-support). 
-:::
-
-Compatible platforms have the following:
-* 128T software has run on the device successfully in at least one customer environment
-* No commitment to keep up with 3rd party supplier changes
-* No commitment to support device on future 128T versions
-* May require additional configuration upon implementation (vs. out of box experience)
-* Performance benchmarking not provided
-* Supporting documentation not provided
-
 ### LTE Certified
 
 LTE certification is a superset of [128T certification](#128t-certified-platform). Systems that contain an **onboard** LTE adapater are required to pass certification from the carrier.
@@ -59,13 +42,39 @@ certification is tied to a specific LTE card, hw platform, and 128T sw version
 :::
 * If certification is not present, SIM card acquisition may be difficult from carrier in large quantities
 
+## 128T Compatible Platform
+
+The 128T Certification program provides a [compatible platform guide](#128t-compatible-platforms-guide) for platforms which are compatible.
+:::note
+128 Technology strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third party. See [compatible platform support](#support-for-128t-on-compatible-platforms). 
+:::
+
+Compatible platforms have the following:
+* 128T software has run on the device successfully in at least one customer environment
+* No commitment to keep up with 3rd party supplier changes
+* No commitment to support device on future 128T versions
+* May require additional configuration upon implementation (vs. out of box experience)
+* Performance benchmarking not provided
+* Supporting documentation not provided
+
+### 128T Compatible Platforms Guide
+
+When selecting a compatible platform for a 128T router, the following provides some general guidance based on deployment use case.
+
+| Use | CPU | Memory | Disk | Network Interface |
+| --- | --- | --- | --- | --- |
+| Small Branch Office | 4 Intel cores | 8 GB ECC | 64 GB SSD | 4+ Physical NICs compatible with DPDK |
+| Medium Branch Office | 8 Intel cores | 16 GB ECC | 64+ GB SSD | 4+ Physical NICs compatible with DPDK |
+| Large Branch Office | 16 Intel cores | 32 GB ECC | 240+ GB SSD | 4+ Physical NICs compatible with DPDK |
+| Headend or Datacenter | 8+ Intel Xeon cores | 32 GB ECC | 240+ GB SSD | 5+ Physical NICs compatible with DPDK |
+
 ## Minimum Platform Specifications
 
 These are the minimum platform specifications for running the 128T software.
 
 ### Router
 
-* 4C Intel processor
+* 4C Intel x86 processor
 * 8GB ECC Memory
 * 64GB SSD
 * 2 DPDK enabled NIC ports (standalone)
@@ -79,19 +88,10 @@ These are the minimum platform specifications for running the 128T software.
 * 64GB SSD
 * 1 (1G) Management port
 
-## Platform Support
-
-The support provided by 128 Technology 
-
-### Support for 128T on Certified Platforms
-
-128 Technology will update the [Platform Compatibility Guide](marisa.please.provide) with new platforms that have been tested and certified. General Support for selected new platform technology (such as servers, processors, chipsets, and add-in cards) is based on 128 Technology's discretion.
-
-If a particular platform configuration is not listed on as a certified by the 128T Certification Program, please contact 128 Technology to determine plans for certification of the platform for the 128T.
-
 ### Support for 128T on Compatible Platforms
-128 Technology will assist customers in problem analysis to determine whether or not the technical issue is related to the third-party platform or software.
 
-If the root cause is believed to originate from a third-party vendor's product for which 128 Technology does not maintain a cooperative support relationship, the customer is required to open a support request with the third-party vendor's support organization.
+128 Technology will assist customers in problem analysis to determine whether or not the technical issue is related to the third-party platform or software. In order to isolate the issue, 128 Technology reserves the right to request that the third-party hardware or software be altered or removed. 128 Technology does not maintain the ability to test or reproduce issues found when running on compatible platorms, and reserves to right to request testing be done within a customer environment. If the root cause is believed to originate from a third-party vendor's product, the customer is required to open a support request with the third-party vendor's support organization.
 
 ### Support for 128T on Incompatible Platforms
+
+128 Technology provides no support, or commitments to functionality, stability, and performance of the 128T software on incompatible platforms.
