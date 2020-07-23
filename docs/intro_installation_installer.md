@@ -5,7 +5,7 @@ sidebar_label: Installing 128T
 
 ## Install Using 128T-installer
 
-The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the Internet to retrieve software applications and libraries. Please ensure the system can reach the public Internet prior to commencing. For offline installation instructions, follow the [instructions on installing from an ISO](intro_installation_bootable_media.md).
+The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions on installing from an ISO](intro_installation_bootable_media.md).
 
 1. Launch a Linux command prompt.
 2. Enter the command to install the Yum repository that corresponds to the 128T software installer.

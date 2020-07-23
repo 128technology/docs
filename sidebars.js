@@ -5,6 +5,7 @@ module.exports = {
       "about_releases",
       "about_support_policy",
       "about_security_policy",
+      "about_svr_savings",
       "CONTRIBUTING",
     ],
     "Introduction": [
@@ -42,6 +43,7 @@ module.exports = {
         "type": "category",
         "label": "Configuration",
         "items": [
+          "config_asset_connection_resiliency",
           "config_basics",
           "config_bgp",
           "config_reference_guide",
@@ -50,13 +52,16 @@ module.exports = {
           "config_dns_proxy",
           "config_ldap",
           "config_ha",
+          "config_management_over_forwarding",
           "config_non_forwarding_ha_interfaces",
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
           "config_nat",
           "config_ospf",
+          "config_rate_limiting",
           "config_snmp",
           "config_snmp_metrics",
+          "config_static_hostname_mapping",
           "config_tenants",
           "config_templates",
         ],
@@ -66,6 +71,7 @@ module.exports = {
         "label": "How To",
         "items": [
           "howto_conductor_migration",
+          "howto_extend_gui_nav",
           "howto_lte",
           "howto_maintenance_mode",
           "howto_ms365",
@@ -111,6 +117,7 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_intro",
+      "plugin_m800_watchdog",
       "plugin_monitoring_agent",
       "plugin_dns_app_id",
       "plugin_dns_cache",
@@ -129,6 +136,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes_128t_4.5",
           "release_notes_128t_4.4",
           "release_notes_128t_4.3",
           "release_notes_128t_4.2",

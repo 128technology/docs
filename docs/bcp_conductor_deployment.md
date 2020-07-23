@@ -98,7 +98,7 @@ This section enumerates the supported topologies for the 128T conductor. Strayin
 ### Public Conductor
 The most conventional deployment model is where the conductor is reachable on a public IPv4 address, and all managed nodes have direct access to it via one or more WAN connections. This is the simplest of all deployment schemes, as it allows you to leverage the global `conductor-address` fields within the 128T data model to unambiguously define the conductor targets across the entire population of router nodes.
 
-This design pattern is suitable for both public cloud deployments of the 128T conductor, as well as private cloud deployments where the 128T conductor co-resides alongside other 128T routers in a data center. 
+This design pattern is suitable for both public cloud deployments of the 128T conductor, as well as private cloud deployments where the 128T conductor co-resides alongside other 128T routers in a data center.
 
 This deployment model is recommended when possible.
 
