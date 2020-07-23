@@ -9,7 +9,7 @@ There are several different high availability models possible with the 128T rout
 - No `shared-phys-address` (and hence no shared interfaces) between the two devices. Interface protection in a dual router HA deployment is accomplished using traditional routing protocols (Layer 3) rather than IP/MAC takeover (Layer 2).
 - No state synchronization between the two devices (and hence no "HA link"). While this improves  overall performance for the routers (since there is no overhead incurred due to state synchronization), the implication is that there are some capabilities not supported in this design. See Unsupported Features, below.
 
-Dual router high availability is recommended for large data center designs where there will be a large volume of traffic, as this is where the performance savings of eliminating state synchronization are most notable.
+Dual router high availability is recommended for data center designs where there will be a large volume of traffic, as this is where the performance savings of eliminating state synchronization are most notable.
 
 
 
@@ -35,7 +35,7 @@ Unlike a "traditional" dual node high availability design, in which two nodes co
 It is possible to configure multiple inter-router connections for added resiliency if there are spare physical connections available between the two routers.
 :::
 
-The sample topology we will discuss in this document is as follows:
+The sample high level topology we will discuss in this document is as follows:
 
 ![dual-router-ha-diagrams](/Users/ptimmons/Downloads/dual-router-ha-diagrams.png)
 
@@ -45,10 +45,10 @@ In this sample exercise, each of the two routers (`routerA` and `routerB`) have 
 
 ### Routing Overview
 
-Unlike the dual node redundancy model, where the two devices harbor a single instance of the `routingManager` process, routing within the dual router redundancy model must be accomplished "by hand." This consists of two components:
+Unlike the dual node redundancy model, where the two devices collectively harbor a single instance of the `routingManager` process, routing within the dual router redundancy model must be accomplished "by hand;" i.e., discretely on each individual system. This consists of two components:
 
 1. Each router uses BGPoSVR to exchange routes with the other
-2. For services that use `peer`-type service-routes to reach another 128T instance, these service-routes will need to include the complementary router as an additional `next-peer`. I.e., each router in the HA pair will point to the `next-peer` 128T as well as a `next-peer` for one another.
+2. For services that use `peer`-type service-routes to reach another 128T instance, these service-routes will need to include the complementary router as an additional `next-peer`. I.e., each router in the HA pair will point to the `next-peer` 128T as well as a `next-peer` for one another
 
 ## Sample Configuration
 
