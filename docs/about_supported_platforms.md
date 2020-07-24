@@ -94,4 +94,4 @@ These are the minimum platform specifications for running the 128T software.
 
 ## Support for 128T on Incompatible Platforms
 
-128 Technology provides no support, or commitments to functionality, stability, and performance of the 128T software on incompatible platforms.
+128 Technology provides no support, and commitments to functionality, stability, or performance of the 128T software on incompatible platforms.
