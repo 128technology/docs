@@ -3,11 +3,11 @@ title: Kernel Network Interfaces
 sidebar_label: Kernel Network Interfaces
 ---
 
-The DPDK kernel network interface (KNI) provides a way for the 128T Session Smart router to route traffic to the Linux OS for access to various USER space applications. KNIs also provide a way for traffic originating in the Linux OS to be routed via the 128T Session Smart router. Every 128T router creates a KNI called `kni254` by default which is used to implement [in-band management access](concepts_linux_host_networking) to the router.
+The DPDK kernel network interface (KNI) provides a way for the 128T Session Smart router to route traffic to the Linux OS for access to various USER space applications. KNIs also provide a way for traffic originating in the Linux OS to be routed via the 128T Session Smart router. Every 128T router creates a KNI called `kni254` by default which is used to implement [in-band management access](concepts_linux_host_networking.md) to the router.
 
 
 ## Configuration
-There are several types of interfaces in the product that leverage KNIs such as [LTE](howto_lte), PPPoE and T1 are all implemented using KNIs under the covers. The 128T router also provides the ability to provision KNIs in various modes and provides an extensible scripting framework around them.
+There are several types of interfaces in the product that leverage KNIs such as [LTE](howto_lte.md), PPPoE and T1 are all implemented using KNIs under the covers. The 128T router also provides the ability to provision KNIs in various modes and provides an extensible scripting framework around them.
 
 ### Host KNI
 The `host` mode KNI creates a KNI in Linux with the name specified. The following configuration shows the example of such KNI
