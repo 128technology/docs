@@ -2,7 +2,7 @@
 title: Platform Support Policy
 ---
 
-128 Technology software is designed to be abstracted from the underlying platform infrastructure, for maximum deployment flexibility. Each platform provides different capabilities and characteristics with regard to performance, functionality, and operating environment. 128 Technology strongly reccomends that any combination of software and platform undergo a thorough certification process, and certain platforms are maintained within 128 Technology's own certification program. The following describes the levels of support for different platforms, and details the 128 Technology certification program.
+128 Technology software is designed to be abstracted from the underlying platform infrastructure, for maximum deployment flexibility. Each platform provides different capabilities and characteristics with regard to performance, functionality, and operating environment. 128 Technology strongly reccomends that any combination of software and platform undergo a thorough certification process, and certain platforms are maintained within 128 Technology's own certification program. The following describes the levels of support for platforms, and details the 128 Technology certification program.
 
 ## Terminology
 
@@ -88,10 +88,10 @@ These are the minimum platform specifications for running the 128T software.
 * 64GB SSD
 * 1 (1G) Management port
 
-### Support for 128T on Compatible Platforms
+## Support for 128T on Compatible Platforms
 
 128 Technology will assist customers in problem analysis to determine whether or not the technical issue is related to the third-party platform or software. In order to isolate the issue, 128 Technology reserves the right to request that the third-party hardware or software be altered or removed. 128 Technology does not maintain the ability to test or reproduce issues found when running on compatible platorms, and reserves to right to request testing be done within a customer environment. If the root cause is believed to originate from a third-party vendor's product, the customer is required to open a support request with the third-party vendor's support organization.
 
-### Support for 128T on Incompatible Platforms
+## Support for 128T on Incompatible Platforms
 
 128 Technology provides no support, or commitments to functionality, stability, and performance of the 128T software on incompatible platforms.
