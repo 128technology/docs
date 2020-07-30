@@ -283,7 +283,7 @@ The same steps can be used to bring `up` a path that is currently `down` by chan
 
 ## Troubleshooting
 
-### Checking the ICMP Probe Status
+### Checking the ICMP Probe and Agent Status
 The status of the ICMP probe for the various paths can be discovered by querying the path based KNI interfaces as shown below:
 
 ```
@@ -310,26 +310,25 @@ Thu 2020-07-30 04:50:21 UTC
  out-unicast-pkts:                92378
  out-errors:                          0
 
- ICMP Probe:
-     icmp-probe-internet-lte:
-       attempts:      42569
-       elapsed:       0.0032800519838929176
-       last_attempt:  1596084611.8880062
-       status:        up
+ ICMP:
+   Agent:
+     internet:
+       current-path:  broadband
+       paths:
+         broadband: up
+         lte:       up
+   Probe:
+       icmp-probe-internet-broadband:
+         attempts:    733
+         elapsed:     0.01019028015434742
+         last_attempt: 2020-07-30 18:39:31.779657
+         status:      up
 
 Completed in 0.07 seconds
 admin@node1.conductor1#
 ```
 
-### Check the Current Path Selection
-The `icmp-probe-agent` determines the state of the current path selection and can be queried to get this information. For example, the following command can be run on the router itself.
-
-```
-# curl --unix-socket /var/run/128technology/plugins/icmp-probe-agent.sock http://localhost/path-info
-{"internet": {"current-path": "lte", "paths": {"broadband": "down", "lte": "up"}}
-```
-
-The result of the path selection should also be reflected via application-id module changes and can be viewed as follows:
+The `icmp-probe-agent` determines the state of the current path selection and reports its status via the path KNIs as seen in the example above. The result of the path selection should also be reflected via application-id module changes and can be viewed as follows:
 
 ```shell
 admin@node1.conductor1# show application names router router1
@@ -813,5 +812,3 @@ exit
 Some of the key aspects of the auto-generated configuration are as follows:
 - Each of the generated service has an application-name of the form `icmp-{service}-{path}` as can be seen with `icmp-internet-broadband` and `icmp-internet-lte` in the above example. These application names determine which path is currently available for the service.
 - The generated KNIs each represent a unique path and are useful for performing the ICMP probe over those paths. The `broadband-icmp` and `lte-icmp` services are generated to assist with that.
-
-
