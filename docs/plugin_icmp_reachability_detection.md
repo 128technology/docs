@@ -3,7 +3,7 @@ title: ICMP Reachability Detection Plugin
 sidebar_label: ICMP Reachability Detection
 ---
 
-The ICMP reachability detection plugin is designed to solve the problem where upstream next-hop failures cause 128T to blackhole traffic for non-SVR services. When a 128T router is provisioned to send traffic towards operationally valid next-hop(s), one of those next-hops might be incapable of delivering the packets to the final destination due to upstream failures beyond simple link or arp failures causing the traffic being black holed. The ICMP reachability detection plugin solves this problem by pinging a destination for reachability and allowing new sessions to failover to alternate paths when the primary path is unreachable. The plugin can also be used to perform a similar probe end-to-end to a server over SVR and trigger a failover in the same manner.
+The ICMP reachability detection plugin is designed to solve the problem where upstream next-hop failures cause 128T to blackhole traffic for non-SVR services. When a 128T router is provisioned to send traffic towards operationally valid next-hop(s), one of those next-hops might be incapable of delivering the packets to the final destination due to upstream failures beyond simple link or ARP failures causing the traffic being blackholed. The ICMP reachability detection plugin solves this problem by pinging a destination for reachability and allowing new sessions to failover to alternate paths when the primary path is unreachable. The plugin can also be used to perform a similar probe end-to-end to a server over SVR and trigger a failover in the same manner.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -11,7 +11,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 
 
 ## Overview
-The plugin is designed to work with services that need a `hunt` based path prioritization. For example, if the router has two wan interfaces - broadband and lte, the plugin can be set up to use broadband as the primary path and lte as the secondary path. The plugin works by performing a continuous ICMP ping for the configured service(s) over each of the specified paths. A unique [application-id module](concepts_appid.md#appid-using-modules) based service is generated to represent each of the potential paths. When the primary path is reachable,the corresponding primary path service will be activated to route the sessions. In the event of the primary path failure, the secondary path service will be activated and all subsequent sessions will then be routed using the new service.
+ The plugin is designed to assist with failover for services that use a hunt based strategy, where traffic prefers one path over another during normal operations. (As opposed to a proportional distribution strategy which leverages multiple paths simultaneously.). If the router has two wan interfaces - broadband and LTE, the plugin can be set up to use broadband as the primary path and LTE as the secondary path. The plugin works by performing a continuous ICMP ping for the configured service(s) over each of the specified paths. A unique [application-id module](concepts_appid.md#appid-using-modules) based service is generated to represent each of the potential paths. When the primary path is reachable, the corresponding primary path service will be activated to route the sessions. In the event of the primary path failure, the secondary path service will be activated and all subsequent sessions will then be routed using the new service.
 
 ## Plugin Behavior
 At the core of the plugin is the `ping-monitor` utility which will be used to do a continuous ping to the destination over all available paths. The `icmp-probe-agent` will be notified of any path status changes by the `ping-monitor` to help make decisions on how to update the application module configuration. The `service-route > icmp-probe > vector-priority` will be used to sort the paths in logical order.
@@ -35,28 +35,27 @@ The application module JSON will be set up based on the `service > icmp-probe` c
 
 ### Sunny Day Scenario
 
-The diagram below shows two available paths - broadband and lte. In a sunny day scenario, the icmp probe plugin will perform continuous pings to the destination and report the status as up. In this case, the configured `service > icmp-probe > address` will be configured in the application module for broadband service. This in turn will trigger the 128T router to install the FIB entries for the `internet-broadband` service and all incoming sessions will be routed to the only available path for that service called `rte-internet-broadband`. This is essentially why the plugin can only operate in hunt mode.
+The diagram below shows two available paths - broadband and LTE. In a sunny day scenario, the plugin will perform continuous pings to the destination and report the status as up. In this case, the configured `service > icmp-probe > address` will be configured in the application module for broadband service. This in turn will trigger the 128T router to install the FIB entries for the `internet-broadband` service and all incoming sessions will be routed to the only available path for that service called `rte-internet-broadband`. This is essentially why the plugin can only operate in hunt mode.
 
 ![Sunny Day Scenario](/img/icmp_probe_sunny_day_scenario.png)
 
 ### Primary Path Failure Scenario
-The diagram below depicts the failure to ping the server over the broadband interface. This failure would typically cause the traffic to be black holed as the upstream ISP gateway is still reachable via ARP. The ICMP probe plugin, however, will detect the server ICMP failure and will in turn update the application module JSON for the LTE service with the configured `service > icmp-probe > address`. As a result of this, the 128T router will remove the FIB entries for the broadband service and replace it with FIB entries for the internet-lte service. All subsequent sessions will then be routed using the only available rte-internet-lte service route.
+The diagram below depicts the failure to ping the server over the broadband interface. This failure would typically cause the traffic to be blackholed as the upstream ISP gateway is still reachable via ARP. The ICMP probe plugin, however, will detect the server ICMP failure and will in turn update the application module JSON for the LTE service with the configured `service > icmp-probe > address`. As a result of this, the 128T router will remove the FIB entries for the broadband service and replace it with FIB entries for the internet-lte service. All subsequent sessions will then be routed using the only available rte-internet-lte service route.
 
 ![Primary Path Failure](/img/icmp_probe_primary_path_failover_scenario.png)
 
 ### Primary Path Recovery Scenario
-As soon as the primary path (broadband in the above example) is reachable, the ICMP probe process will update application module JSON with the `internet-brodband` service. This will cause the subsequent sessions to migrate back to the primary broadband interface. When the primary path comes up the system will wait `service > icmp-probe > hold-down` seconds before bringing it in service. This will act as a damper in case the path is flapping too frequently.
+As soon as the primary path (broadband in the above example) is reachable, the ICMP probe process will update application module JSON with the `internet-broadband` service. This will cause the subsequent sessions to migrate back to the primary broadband interface. When the primary path comes up the system will wait `service > icmp-probe > hold-down` seconds before bringing it in service. This will act as a damper in case the path is flapping too frequently.
 
 ### All Path Failures
 The `service-policy > best-effort` flag will determine the behavior of the `icmp-probe-agent` in the event where all paths are down. When `best-effort > false`, the agent will update the application module with a `dummy` service name which would cause all FIB entries associated with the service to be withdrawn and the client connections to be rejected with an ICMP unreachable. When `best-effort > true`, the agent will update the JSON with the primary path as defined by the vector-priority.
 
-
-
 ## Configuration
+
 For the plugin to operate we need to identify all the paths that can be used to reach the service. This is typically achieved by configuring a `service-route` on the router. The plugin configuration will leverage application-names and service-route to generate other relevant configurations.
 
 ### ICMP Probe Enablement
-The ICMP probe plugin functionality needs to be first enabled on the router for the rest of the configuration to work. The following simple configuration exists on the router level for this:
+The ICMP probe plugin is enabled on the target router as shown in the configuration excerpt below:
 
 ```config
 admin@node1.conductor1# show config running authority router router1 icmp-probe
@@ -83,7 +82,7 @@ exit
 
 
 ### Service Definition
-By setting the `service > application-name > icmp-probe` a `service` can be designated as a candidate for performing icmp probe based monitoring. For example:
+By setting the `service > application-name > icmp-probe` a `service` can be designated as a candidate for performing ICMP probe based monitoring. For example:
 
 ```config
 admin@node1.conductor1# show config running authority service internet
@@ -137,7 +136,7 @@ The `service > transport` can be configured to restrict the service to specific 
 
 The `service-route` configuration is used to identify unique paths for a given service along with configuring the rest of the ICMP probe settings. For example:
 
-```
+```config
 admin@node1.conductor1# show config running authority router router1 service-route internet-orig-broadband
 
 config
@@ -211,7 +210,7 @@ exit
 
 The following considerations should be made while configuring the service-route for the plugin:
 
-- Each unique path on the router should correspond to a unique value for `service route > next-hop > icmp-probe > path-name`. For example, if the router has two interfaces broadband and lte, each would be represented with a unique `path-name`.
+- Each unique path on the router should correspond to a unique value for `service route > next-hop > icmp-probe > path-name`. For example, if the router has two interfaces broadband and LTE, each would be represented with a unique `path-name`.
 - Each `service route > next-hop > icmp-probe > path-name` should represent a single path on the router. This will be used for generating KNIs, tenants and other configurations required to make the implementation work. Failure to do so will result in the auto config generation to fail.
 - The `service route > next-hop > icmp-probe > vector-priority` should reflect the order in which the paths are to be preferred for routing
 - When the `icmp-probe > probe-address` is not configured, the service should have a single /32 address for the probe to work. Failure to do so will result in the auto config generation to fail.
@@ -219,7 +218,7 @@ The following considerations should be made while configuring the service-route 
 
 
 :::note
-The plugin can support any number of paths to be monitored for activity. Each of th path must have a unique vector-priority associated with them to determine the preference order.
+The plugin can support any number of paths to be monitored for activity. Each of the path must have a unique vector-priority associated with them to determine the preference order.
 :::
 
 ## Triggering Manual Failover Or Recovery
