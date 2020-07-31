@@ -218,7 +218,7 @@ The following considerations should be made while configuring the service-route 
 
 
 :::note
-The plugin can support any number of paths to be monitored for activity. Each of the path must have a unique vector-priority associated with them to determine the preference order.
+The plugin can support any number of paths to be monitored for activity. Each of th path must have a unique vector-priority associated with them to determine the preference order.
 :::
 
 ## Triggering Manual Failover Or Recovery
