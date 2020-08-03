@@ -127,6 +127,7 @@ module.exports = {
       "plugin_mosh",
       "plugin_sip_alg",
       "plugin_kni_namespace_scripts",
+      "plugin_wireguard"
     ],
     "REST APIs": [
       "api_rest_4.2.0",
