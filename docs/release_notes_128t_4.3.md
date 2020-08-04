@@ -3,6 +3,12 @@ title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
 
+## Release 4.3.9
+
+### Issues Fixed
+
+- **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
+
 ## Release 4.3.8
 
 :::info
@@ -63,7 +69,6 @@ The minimum 128T-installer version of 2.6.0 is required for the 4.3.8 update. (r
 - **I95-35633** The GUI performance has been improved for configuration edit operations
 ------
 - **I95-35644** Added support for `bgp route-reflector allow-outbound-policy`
-
 
 ## Release 4.3.6
 
@@ -141,7 +146,6 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 ------
 - **I95-35395** Enabled BGP router reflector `cluster-id` in configuration
 
-
 ## Release 4.3.4
 
 ### Issues Fixed
@@ -154,7 +158,6 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-31618** Upon initial plugin installation on a 128T, configuration for the plugin is not honored.
 
   Until the system is upgraded to 4.3.4, this issue can be mitigated by committing the configuration again.
-
 
 ## Release 4.3.3
 
@@ -405,7 +408,6 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
 - **I95-34058, I95-34064** Session setup fails for outbound only when first packet exceeds MTU
 
-
 ## Release 4.3.0
 
 ### New Features and Improvements
@@ -451,7 +453,6 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 - **I95-32145** LTE Certification Enhancements
 
 - **I95-32456** Reverse Packet ARP Handling
-
 
 ### Issues Fixed
 
