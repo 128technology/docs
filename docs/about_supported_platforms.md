@@ -103,8 +103,10 @@ These are the minimum platform specifications for running the 128T software.
 * 4C Intel x86 processor
 * 8GB ECC Memory
 * 64GB SSD
-* 1 DPDK enabled NIC ports (standalone)
-* 4 DPDK enabled NIC ports (HA)
+* 1 DPDK enabled NIC port for standalone systems (two recommended)
+* 2 DPDK enabled NIC ports for HA systems (three recommended)
+* 1 dedicated NIC port for HA synchronization
+* (optional) 1 dedicated NIC port for out-of-band management
 
 ### Conductor
 
