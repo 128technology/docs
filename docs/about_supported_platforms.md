@@ -10,7 +10,7 @@ For the purposes of describing the platform support policy, the following terms 
 
 - ***Platform*** - A physical or virtual system, typically consisting of some amount of resources for compute, memory, disk, and networking. *Example*: A physical server, virtual machine, or public cloud virtual machine instance.
 - ***Certification*** - The process of testing to ensure that a specific combination of a 128T software version and platform build meet requirements for functionality, stability, and performance. *Example*: The [128T Certification Program](#128t-certification-program) provides certification of a set of platforms with 128T software.
-- ***Certified Platform*** - A platform that is currently in the 128T Certification Program as a [128T Certified Platform](#128t-certified-platform). *Example*: A specified build of Lenovo SR530 server is a certified platform.
+- ***Certified Platform*** - A platform that is currently in the 128T Certification Program as a [128T Certified Plus Platform](#128t-certified-plus-platform), or [128T Certified Platform](#128t-certified-platform). *Example*: A specified build of Lenovo SR530 server is a certified platform.
 - ***Compatible Platform*** - A platform that meets or exceeds [minimum platform specifications](#minimum-platform-specifications) and is known to be able to run 128T software. *Example*: A Compulabs fitlet2 with Intel Atom E3950, 8GB of memory, and 128GB of disk is a compatible platform.
 - ***Incompatible Platform*** - A platform that does not meet [minimum platform specifications](#minimum-platform-specifications) and is unlikely to run 128T software at acceptible levels of functionality, stability, performance, or at all. *Example*: The [Apollo Guidance Computer](https://en.wikipedia.org/wiki/Apollo_Guidance_Computer) is an incompatible platform.
 
@@ -18,22 +18,22 @@ For the purposes of describing the platform support policy, the following terms 
 
 128 Technology continuously works to maintain a platform abstraction in its software design. At the same time, there are often characteristics and optimizations that require platform-specific support. This support comes by way of a platform certification program which provides assurances of performance and function of the 128T software. For example, the 128T software utilizes [DPDK](https://www.dpdk.org) for broad driver support, and in some cases specific firmware revisions need to be loaded prior to being able to fully utilize 128T's optimized packet forwarding capabilities.
 
-Inclusion in the 128T Certification Program is based a given platforms ability to continuously meet certain test and support criteria. New platforms are added to the program at 128 Technology's discretion. For details on how to get new platforms in to the 128T certification program, or further information regarding the program, please contact 128 Technology.
+Inclusion in the 128T Certification Program is based on a given platforms ability to continuously meet certain test and support criteria. New platforms are added to the program at 128 Technology's discretion. For details on how to get new platforms in to the 128T certification program, or further information regarding the program, please contact 128 Technology.
 
-### 128T Certified Platform
+### 128T Certified Plus Platform
 
-The 128T Certification program provides certification done by 128 Technology for certain platforms. Certified platforms have the following:
+The 128T Certification program provides a designation of Certified Plus for certain platforms. Certified Plus platforms have the following:
 
 * 128T software is continuously tested on the platform for performance and functionality
-* May include commitment to support device on future 128T software versions (up to EOL date)
+* Complete build, including BIOS, DMI information, and labeling controlled by 128 Technology specification
 * May include commitment to keep up with 3rd party supply chain and engineering changes (end of life parts, BIOS changes, etc.)
-* Supplier relationship established, locked down bill of materials and BIOS
+* Supplier relationship established
 * Includes performance benchmarking
 * Supporting documentation as needed
 
-### LTE Certified
+#### LTE Certified
 
-LTE certification is a superset of [128T certification](#128t-certified-platform). Systems that contain an **onboard** LTE adapater are required to pass certification from the carrier.
+LTE certification is a superset of [128T Certified Plus](#128t-certified-plus-platform). Systems that contain an **onboard** LTE adapater are required to pass certification from the carrier.
 
 LTE certified platforms have the following:
 * Has obtained PTCRB (or GCF in Europe) and mobile-carrier specific certification in the specified platform
@@ -42,14 +42,25 @@ certification is tied to a specific LTE card, hw platform, and 128T sw version
 :::
 * If certification is not present, SIM card acquisition may be difficult from carrier in large quantities
 
-## 128T Compatible Platform
+### 128T Certified Platform
 
-The 128T Certification program provides a [compatible platform guide](#128t-compatible-platforms-guide) for platforms which are compatible.
+The 128T Certification program provides a designation of Certified for certain platforms. Certified platforms have the following:
+
+* At least one version of 128T software has been tested on the platform for performance and functionality
+* Supplier relationship established
+* Includes performance benchmarking
+* Supporting documentation as needed
+
+### 128T Qualified Platform
+
+The 128T Certification program provides a designation of Qualified for certain platforms. 
 :::note
-128 Technology strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third party. See [compatible platform support](#support-for-128t-on-compatible-platforms). 
+128 Technology strongly recommends certification for any build in a production deployment. When a qualified platform is used, certification should be done by the end operator or a third party. See [compatible platform support](#support-for-128t-on-compatible-platforms). 
 :::
 
-Compatible platforms have the following:
+Qualified platforms have the following:
+
+* Meets [minimum platform specifications](#minimum-platform-specifications)
 * 128T software has run on the device successfully in at least one customer environment
 * No commitment to keep up with 3rd party supplier changes
 * No commitment to support device on future 128T versions
@@ -57,7 +68,22 @@ Compatible platforms have the following:
 * Performance benchmarking not provided
 * Supporting documentation not provided
 
-### 128T Compatible Platforms Guide
+### 128T Compatible Platform
+
+The 128T Certification program provides a [compatible platform guide](#128t-compatible-platforms-guide) for platforms which are compatible.
+:::note
+128 Technology strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third party. See [compatible platform support](#support-for-128t-on-compatible-platforms). 
+:::
+
+Compatible platforms have the following:
+* Meets [minimum platform specifications](#minimum-platform-specifications)
+* No commitment to keep up with 3rd party supplier changes
+* No commitment to support device on future 128T versions
+* May require additional configuration upon implementation (vs. out of box experience)
+* Performance benchmarking not provided
+* Supporting documentation not provided
+
+#### 128T Compatible Platforms Guide
 
 When selecting a compatible platform for a 128T router, the following provides some general guidance based on deployment use case.
 
