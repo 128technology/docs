@@ -5,14 +5,18 @@ sidebar_label: 128T Releases
 
 | Version                                          | Release           | GA Date            | End of Maintenance | End of Support     |
 | ------------------------------------------------ | ----------------- | ------------------ | ------------------ | ------------------ |
+| [4.5.0](release_notes_128t_4.5.md#release-450)   | July 23, 2020     | November 23, 2020  | July 23, 2021      | November 23, 2021  |
+| [4.4.1](release_notes_128t_4.3.md#release-441)   | July 10, 2020     |                    | Not Applicable*    | September 19, 2021 |
 | [4.4.0](release_notes_128t_4.4.md#release-440)   | May 19, 2020      | September 19, 2020 | April 19, 2021     | September 19, 2021 |
-| [4.3.6](release_notes_128t_4.3.md#release-436)   | May 28, 2020      |                    | Not Applicable*    | June 8, 2021       |
-| [4.3.5](release_notes_128t_4.3.md#release-435)   | May 22, 2020      |                    | Not Applicable*    | June 8, 2021       |
-| [4.3.4](release_notes_128t_4.3.md#release-434)   | May 1, 2020       |                    | Not Applicable*    | June 8, 2021       |
-| [4.3.3](release_notes_128t_4.3.md#release-433)   | April 12, 2020    |                    | Not Applicable*    | June 8, 2021       |
-| [4.3.2](release_notes_128t_4.3.md#release-432)   | April 10, 2020    |                    | Not Applicable*    | June 8, 2021       |
-| [4.3.1](release_notes_128t_4.3.md#release-431)   | March 6, 2020     |                    | Not Applicable*    | June 8, 2021       |
-| [4.3.0](release_notes_128t_4.3.md#release-430)   | February 8, 2020  | June 8, 2020       | December 8, 2020   | June 8, 2021       |
+| [4.3.8](release_notes_128t_4.3.md#release-438)   | June 26, 2020     |                    | Not Applicable*    | June 26, 2021      |
+| [4.3.7](release_notes_128t_4.3.md#release-437)   | June 9, 2020      |                    | Not Applicable*    | June 26, 2021      |
+| [4.3.6](release_notes_128t_4.3.md#release-436)   | May 28, 2020      |                    | Not Applicable*    | June 26, 2021      |
+| [4.3.5](release_notes_128t_4.3.md#release-435)   | May 22, 2020      |                    | Not Applicable*    | June 26, 2021      |
+| [4.3.4](release_notes_128t_4.3.md#release-434)   | May 1, 2020       |                    | Not Applicable*    | June 26, 2021      |
+| [4.3.3](release_notes_128t_4.3.md#release-433)   | April 12, 2020    |                    | Not Applicable*    | June 26, 2021      |
+| [4.3.2](release_notes_128t_4.3.md#release-432)   | April 10, 2020    |                    | Not Applicable*    | June 26, 2021      |
+| [4.3.1](release_notes_128t_4.3.md#release-431)   | March 6, 2020     |                    | Not Applicable*    | June 26, 2021      |
+| [4.3.0](release_notes_128t_4.3.md#release-430)   | February 8, 2020  | June 26, 2020      | December 24, 2020  | June 26, 2021      |
 | [4.2.8](release_notes_128t_4.2.md#release-428)   | June 5, 2020      |                    | Not Applicable*    | April 8, 2021      |
 | [4.2.7](release_notes_128t_4.2.md#release-427)   | May 1, 2020       |                    | Not Applicable*    | April 8, 2021      |
 | [4.2.6](release_notes_128t_4.2.md#release-426)   | April 8, 2020     |                    | Not Applicable*    | April 8, 2021      |

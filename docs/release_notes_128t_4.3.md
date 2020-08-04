@@ -3,6 +3,45 @@ title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
 
+## Release 4.3.8
+
+:::info
+The minimum 128T-installer version of 2.6.0 is required for the 4.3.8 update. (rpm package: 128T-installer-2.6.0-1.x86_64.rpm)
+:::
+
+### Issues Fixed
+
+- **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
+------
+- **I95-35313** Startup delay of 128T when many peer paths exist
+------
+- **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T
+
+  Until the system is upgraded to 4.3.8, this issue can be mitigated by restarting the 128T.
+------
+- **I95-35563** Startup race condition can lead to LTE initialization failure
+
+  Until the system is upgraded to 4.3.8, this issue can be mitigated by restarting the 128T.
+------
+- **I95-35636** SNMP query for ifIndex of interface incorrectly returns
+  ```
+  No Such Object available on this agent at this OID
+  ```
+------
+- **I95-35655** New metrics - RSRP, RSRQ, Active Band and Active Channel were added to (the existing) show device-interface PCLI command and lte-state script output for LTE interface.
+------
+- **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment
+------
+- **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route
+------
+- **I95-35781** Rare race condition during `rotate logs` PCLI command may cause applications to fault
+------
+- **I95-35866** Addressed latest CVEs (this requires the latest installer see I95-36033 below)
+------
+- **I95-35885** Systems with two LTE interfaces would appear to have three LTE interfaces in Linux
+
+  Until the system is upgraded to 4.3.8, the issue can be mitigated by using the interface `wwp0s21u3i8`. The interface `wwp0s21u3i10` should not be used and will no longer be present after upgrading to 4.3.8.
+
 ## Release 4.3.7
 
 ### Issues Fixed
@@ -16,6 +55,7 @@ sidebar_label: 4.3
 - **I95-35172** Adding DHCP server instances requires a software restart
 ------
 - **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
+
   _**Conditions:**_ When the interface has an adjacency and tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`, resulting in traffic being dropped.
 ------
 - **I95-35602** The command `show network-interface` may result in a `Unhandled TypeError` in the PCLI when a PPPoE interface is down
@@ -39,6 +79,7 @@ sidebar_label: 4.3
 ### Issues Fixed
 
 - **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
+
   _**Conditions:**_ DHCP server is not running. The following log message can be seen:
   ```
 init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
@@ -47,9 +88,11 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   Until the system is upgraded to 4.3.5, this issue can be mitigated by restarting the 128T.
 ------
 - **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
+
   Until the system is upgraded to 4.3.5, this issue can be mitigated by restarting the 128T.
 ------
-- **I95-34629** During the initial window of a router to Conductor connection outage or as connectivity is established between HA peers, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+- **I95-34629** During the initial window of a router connecting to its HA peer, or its connection to the Conductor while a connection outage occurs, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+
   Until the system is upgraded to 4.3.5, this issue can be mitigated by attempting the commit again.
 ------
 - **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
@@ -73,6 +116,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35093** `show asset <asset-id>` incorrectly continues to show `Currently Upgrading` version after completion of an upgrade.
 ------
 - **I95-35099** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
+
   Until the system is upgraded to 4.3.5, this issue can be mitigated by disabling rather than deleting the user.
 ------
 - **I95-35115** Aggregate bandwidth charts may not display data accurately
@@ -80,15 +124,19 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35155** `show device-interface` output did not include duplex mode
 ------
 - **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
+
   _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
+
   Until the system is upgraded to 4.3.5, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
 ------
 - **I95-35205** LTE interfaces do not honor MTU settings set in the network
+
   Until the system is upgraded to 4.3.5, the learned MTU value can be directly set within Linux
 ------
 - **I95-35303** `persistentDataManager` process can fault on shutdown of 128T
 ------
 - **I95-35323** BGP over SVR does not work if both sides of the routers have VLAN tagged interfaces
+
   Until the system is upgraded to 4.3.5, configure the outgoing SVR interfaces without vlans. At least one side of the BGP over SVR routers should not utilize VLAN tagging.
 ------
 - **I95-35395** Enabled BGP router reflector `cluster-id` in configuration
@@ -104,6 +152,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   :::
 ------
 - **I95-31618** Upon initial plugin installation on a 128T, configuration for the plugin is not honored.
+
   Until the system is upgraded to 4.3.4, this issue can be mitigated by committing the configuration again.
 
 
@@ -225,9 +274,11 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
   Until the system is upgraded to 4.3.2, this issue can be mitigated by configuring a `management-vector` on the `network-interface`s that exist within the `device-interface`.
 ------
 - **I95-33759** GUI DHCP Client Lease table reports no leases while DHCP server has active client leases.
+
   Until the system is upgraded to 4.3.2, this issue can be mitigated by using the PCLI version of the same command: `show network-interface application node <node-name> name <interface-name>`
 ------
 - **I95-33789** Forwarding core count incorrectly reported in GUI under Router -> Node -> Platform Information
+
   Until the system is upgraded to 4.3.2, this issue can be mitigated by using the PCLI version of the same command: `show platform cpu `
 ------
 - **I95-33793** SVR fails to recover session on multi-hop inter-node failure
@@ -505,3 +556,12 @@ systemctl restart salt-minion
   _**Conditions:**_ When nodes of a router or conductor pair are on different versions (for routers this is the short transition where the first node is upgraded and the second node is in the process of upgrading but still operational)
 
   _**Corrective Action:**_ NA, when both nodes are operational and on the 4.3 version the stats information on the router dialog will be provided. Stats can still be retrieved from the PCLI of the node while it is running.
+
+------
+- **I95-36033** 4.3.8 does not enforce the 128T-installer-2.6.0 version that deprecates rpms for CVE corrections
+
+  _**Syptom:**_ Deprecated RPM's installed by base CentOS that may have CVE corrections will not be removed.
+
+  _**Conditions:**_ When the 128T-installer is not updated to 2.6.0.
+
+  _**Corrective Action:**_ If manually installing, ensure the system is updated with the latest 128T-installer package. If upgrading via Conductor, ensure the conductor has access to the latest 128T-installer package.
