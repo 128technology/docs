@@ -9,7 +9,7 @@ The wireguard plugin allows your 128T router to peer with other endpoints using 
 
 ## Wireguard Basics
 
-Wireguard operates using [cryptokey routing](https://www.wireguard.com/#cryptokey-routing), which provides device-to-edge security with a 128T service centric fabric. For any wireguard peer to securely communicate with another, a [Curve25519](https://tools.ietf.org/html/rfc7748) public/private keypair is generated, and each endpoint must must be configured minimally with the public key of the peer, and the prefixes that are allowed to be sent to the peer.
+Wireguard operates using [cryptokey routing](https://www.wireguard.com/#cryptokey-routing), which provides device-to-edge security with a 128T service centric fabric. For any wireguard peer to securely communicate with another, a [Curve25519](https://tools.ietf.org/html/rfc7748) public/private keypair is generated. Each endpoint wishing to form a peering relationship must be configured minimally with the public key of the peer, and the prefixes that are allowed to be sent to the peer.
 
 When a 128T router is configured for wireguard, it will generate a public key which can be configured in remote endpoints that are to peer with it. Additionally serivce prefixes that should be sent to the 128T router by a wireguard peer, can be configured as allowed IPs.
 
@@ -80,6 +80,8 @@ Each peer is assigned an address out of a `10.10.10.0/24` private network, which
 | p1 | `10.10.10.2` | `cScVKF4nTbdDcGoZgbkNMRFhSEC0dVqdufIBBnCNvCk=` |
 | p2 | `10.10.10.3` | `4uXibv7XeeTxYhc5clp0G4cIYicvY03RQGxLwDNCCEY=` |
 | p3 | `10.10.10.4` | `lqvXPuopoYfVcVgpUEtF8Y6BXn8n6YXXAhRGhS50vU8=` |
+
+### Profile Configuration
 
 The following config sets up profiles on each of the `dc1` and `dc2` routers, and provisions each peer.
 
@@ -221,6 +223,8 @@ Wed 2020-08-05 16:46:41 UTC
 Completed in 0.27 seconds
 ```
 
+### Remote Endpoint Configuration
+
 Now the remote peer endpoints can be configured to peer with the `dc1` and `dc2` routers at their respective interface addresses, and route the cooresponding service prefixes of `172.16.1.0/24` and `172.16.2.0/24` to each. For example, a wireguard config for peer `p1` might look like the following:
 :::tip
 See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
@@ -281,9 +285,11 @@ exit
 
 You have a remote device that needs to be accessed as an agent of a service in your 128T network. In this example use case you have a remote IoT device that hosts a `thing` service with address `128.128.128.128/32`, which must be accessed by a tenant `technician`. 
 
-A remote IoT device has a wireguard peer with a public key of `Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=`. It will be given an address of `10.10.10.5` from the private network, and it will peer with the 128T router `r1` on the  `1.1.1.1` network-interface address.
+A remote IoT device has a wireguard peer with a public key of `Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=`. It will be given an address of `10.10.10.2` from the private network, and it will peer with the 128T router `r1` on the  `1.1.1.1` network-interface address.
 
 ![Wireguard service agent](/img/plugin_wireguard_3.png)
+
+### Profile Configuration
 
 The following configuration sets up the wireguard profile, along with the IoT device wireguard peer:
 ```
@@ -301,7 +307,7 @@ config
         peer             iot-dev-1
           name        iot-dev-1
           public-key  Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=
-          allowed-ip  10.10.10.5/32
+          allowed-ip  10.10.10.2/32
         exit
       exit
     
@@ -319,11 +325,13 @@ config
 exit
 ```
 
+### Remote Endpoint Configuration
+
 The wireguard configuration on the IoT device might look like the following:
 ```
 [Interface]
 # IoT device
-Address = 10.10.10.5/32
+Address = 10.10.10.2/32
 PrivateKey = MEAtlWq4Ou7++yxjYGtTa85gzDj3mbbCy76J5oWPaG8=
 
 [Peer]
@@ -372,7 +380,7 @@ Wed 2020-08-05 23:33:02 UTC
    number of peers:   4
    peers:
        peer#1 - iot-dev-1:
-         allowed ips: 10.10.10.5/32
+         allowed ips: 10.10.10.2/32
          endpoint:    192.168.128.222:42948
          latest handshake: 21 seconds ago
          public key:  Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=
@@ -380,6 +388,8 @@ Wed 2020-08-05 23:33:02 UTC
 
 Completed in 0.25 seconds
 ```
+
+### Service Routing
 
 Finally the `thing` service must be routed to the remote wireguard peer. 
 
@@ -409,7 +419,7 @@ config
       service-route        static-thing
         name          static-thing
         service-name  thing
-        nat-target    10.10.10.5
+        nat-target    10.10.10.2
 
         next-hop      node1 wg-profile-1-intf
           node-name   node1
@@ -427,6 +437,52 @@ The `interface` and `gateway-ip` in this configuration are automatically generat
 
 With this configuration, sessions sent from the `technician` tenant to `128.128.128.128` will be given access as part of the `thing` service, and routed with a destination NAT to the wireguard interface of `10.10.10.5` on the IoT device peer.
 
-## Use Case: Remote Gateway
+## Use Case: Remote Access Gateway
 
-You have a remote device acting as a gateway for multiple different devices, which need to access services on the 128T fabric.
+You have a remote device acting as an access gateway for multiple different devices, which need to reach services on the 128T fabric.
+
+The access gateway device has a wireguard peer with a public key of `E7pAgPsJETaRCUF6rZTM2WtEJBQGW+Mdof93mSYN0Sw=`. It will host other devices on a `192.168.8.0/24` private network, and it will peer with the 128T router `r1` on the  `1.1.1.1` network-interface address.
+
+![Wireguard gateway](/img/plugin_wireguard_4.png)
+
+### Profile Configuration
+
+The following configuration sets up the wireguard profile, along with the access gateway wireguard peer:
+```
+config
+  authority
+    router             r1
+      wireguard-profile    wg-profile-1
+        name             wg-profile-1
+
+        private-network
+          neighborhood  remote
+          address       10.10.10.1/24
+        exit
+
+        peer             iot-dev-1
+          name        iot-dev-1
+          public-key  E7pAgPsJETaRCUF6rZTM2WtEJBQGW+Mdof93mSYN0Sw=
+          allowed-ip  192.168.8.0/24
+        exit
+      exit
+    
+      node                 node1
+        device-interface  eth1
+          network-interface  eth1-net
+            address     1.1.1.1
+              wireguard-profile wg-profile-1
+            exit
+          exit
+        exit
+      exit
+    exit
+  exit
+exit
+```
+
+### Remote Endpoint Configuration
+
+### Network Tenant for Devices
+
+## Debugging
