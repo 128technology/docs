@@ -26,7 +26,7 @@ The 128T Certification program provides a designation of Certified Plus for cert
 
 * 128T software is continuously tested on the platform for performance and functionality
 * Complete build, including BIOS, DMI information, and labeling controlled by 128 Technology specification
-* May include commitment to keep up with third-party supply chain and engineering changes (end of life parts, BIOS changes, etc.)
+* May include commitment to keep up with third-party supply chain and platform changes (end of life parts, BIOS changes, etc.)
 * Supplier relationship established
 * Includes performance benchmarking
 * Supporting documentation as needed
