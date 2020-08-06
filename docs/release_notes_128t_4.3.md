@@ -7,42 +7,42 @@ sidebar_label: 4.3
 
 ### Issues Fixed
 
-- **I95-32298** Setting the KNI interface created by IPsec plugin to administrative down does not result in interface being operationally down
+- **I95-32298** KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down"
 ------
-- **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled but adapative-encryption is set to true
+- **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled
 ------
-- **I95-33594** Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting
+- **I95-33594** Changing the `neighbor-as` of an existing BGP neighbor prevents it from connecting
 
-  Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the 128T or by removing and recreating the bgp configuration
+  Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the 128T or by removing and recreating the BGP configuration
 ------
-- **I95-35111** `No active NTP server` alarm incorrectly generated when connected to NTP server
+- **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server
 
   _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable
 ------
-- **I95-35331** When creating custom charts with multiple items, clicking on the discrete items selects a different value
+- **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend
 ------
-- **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
+- **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted Linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
 
-  Until the system is upgraded to 128T 4.3.9 and 128T-installer 2.6.1, the issue can be mitigated by running the following linux commands:
+  Until the system is upgraded to 128T 4.3.9 and 128T-installer 2.6.1, the issue can be mitigated by running the following Linux commands:
   ```
   rm -f /var/lib/rpm/__*
   rpm --rebuilddb
   ```
 ------
-- **I95-35793** Large responses from a DNS server may be rejected by 128. When this happens, FQDNs in the configuration remain unresolved.
+- **I95-35793** Large responses from a DNS server may be rejected by 128T. When this happens, provisioned FQDNs remain unresolved.
 
   _**Conditions:**_ The following log message can be seen:
   ```
   Jun 16 06:09:25.272 [DNS |DNSR] WARN (dnsManagerTP ) Failed to parse Ipv4Host (1) response for edge-global.plcm.vc: Message too long
   ```
 ------
-- **I95-35799** When a route prefix that exactly matches the prefix of a configured service is removed, the route gets removed from the RIB but it may remain in the FIB and may still be used for establishing new sessions
+- **I95-35799** When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions
 ------
-- **I95-35935** Configuring the same conductor-address in `router > conductor-address` on different routers will create invalid generated configuration
+- **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration
 ------
-- **I95-36012** The output of `show device-interface` displays the incorrect values for speed and duplex for LTE interfaces
+- **I95-36012** `show device-interface` displays incorrect values for speed and duplex for LTE interfaces
 ------
-- **I95-36109** Sessions may not reestablish properly on fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
+- **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
 ------
 - **I95-36149** Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault
 ------
@@ -52,15 +52,17 @@ sidebar_label: 4.3
   ```
   TypeError: heap argument must be a list
   ```
-  Until the system is upgraded to 4.5.0, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the linux shell. The salt-minion watchdog will also restart the salt-minion after one hour, if not manually restarted.
+  Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
 ------
-- **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process crash if a subsequent graceful-restart timeout occurs
+- **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs
 ------
-- **I95-36394** Autogenerated conductor service names that include a '.' cause a commit failure
+- **I95-36394** Auto-generated conductor service names that include a '.' will fail to commit configuration
 
- _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
+  _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
 ------
-- **I95-36574** 
+- **I95-36574** After a HA interface fail over, a session collision can occur between the recovered flow and an existing reverse flow. The recovered flow does not get setup properly and can cause the highway process to fault upon session expiry.
+
+  _**Conditions:**_ Symmetrical services must be configured that match both forward and reverse flows
 
 ## Release 4.3.8
 
