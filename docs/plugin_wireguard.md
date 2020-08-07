@@ -69,7 +69,7 @@ If you do not have a pre-defined tenant to use for wireguard endpoints, you can 
 
 ## Connecting Remote Endpoints
 
-You have devices that are remote from your 128T fabric, but you want to give them network tenancy and access to services. In this example use case, assume you have 2 datacenter routers `dc1` and `dc2`, hosting services for `172.16.1.0/24` and `172.16.2.0/24` respectively. You want your remote devices to connect directly to each datacenter for these services, and be given a tenant called `remote`. `dc1` has a network-interface address of `1.1.1.1`, and `dc2` has a network-interface address of `2.2.2.2` that will be used to allow wireguard peers to connect.
+You have devices that are remote from your 128T fabric, but you want to give them network tenancy and access to services. In this example use case, assume you have two datacenter routers `dc1` and `dc2`, hosting services for `172.16.1.0/24` and `172.16.2.0/24` respectively. You want your remote devices to connect directly to each datacenter for these services, and be given a tenant called `remote`. `dc1` has a network-interface address of `1.1.1.1`, and `dc2` has a network-interface address of `2.2.2.2` that will be used to allow wireguard peers to connect.
 
 ![Wireguard remote endpoints](/img/plugin_wireguard_2.png)
 
@@ -85,7 +85,7 @@ Each peer is assigned an address out of a `10.10.10.0/24` private network, which
 
 The following config sets up profiles on each of the `dc1` and `dc2` routers, and provisions each peer.
 
-**router dc1:**
+#### Router dc1
 ```
 config
   authority
@@ -130,7 +130,7 @@ config
   exit
 exit
 ```
-**router dc2:**
+#### Router dc2
 ```
 config
   authority
@@ -225,7 +225,7 @@ Completed in 0.27 seconds
 
 ### Remote Endpoint Configuration
 
-Now the remote peer endpoints can be configured to peer with the `dc1` and `dc2` routers at their respective interface addresses, and route the cooresponding service prefixes of `172.16.1.0/24` and `172.16.2.0/24` to each. For example, a wireguard config for peer `p1` might look like the following:
+Now the remote peer endpoints can be configured to peer with the `dc1` and `dc2` routers at their respective interface addresses, and route the corresponding service prefixes of `172.16.1.0/24` and `172.16.2.0/24` to each. For example, a wireguard config for peer `p1` might look like the following:
 :::tip
 See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
 :::
@@ -393,7 +393,7 @@ Completed in 0.25 seconds
 
 Finally the `thing` service must be routed to the remote wireguard peer. 
 
-**Service:**
+#### Service
 ```
 config
   authority
@@ -411,7 +411,7 @@ config
 exit
 ```
 
-**Service-route:**
+#### Service-route
 ```
 config
   authority
