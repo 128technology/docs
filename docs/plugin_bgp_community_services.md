@@ -5,6 +5,10 @@ sidebar_label: BGP Community Services
 
 The BGP Community Services Plugin allows the 128T router to create services based on the community strings of prefixes learned via BGP from remote routers.  The plugin allows you to configure a profile containing mappings of application names to community strings.  A router can be assigned one profile, which will allow it to create application identification information to associate learned prefixes to application names.  These application names can then be configured within a service definition in order to appropriately populate the router's FIB.
 
+:::note
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
+:::
+
 ## Configuration Snippet
 One or more BGP community profile objects can be configured at the authority level of the configuration.  These profiles are then assigned to the individual routers.
 
