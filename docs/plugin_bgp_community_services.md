@@ -169,7 +169,7 @@ Once the application identification module is setup correctly and a configuratio
 The contents of this file should show a JSON mapping of the user defined application names to a list of prefixes.  If the module had any difficulties producing the data, it should generate an error message that can be used to help in determining the reason for the failure.  The failure will also indicate which application and community string the module was processing when it encountered a failure.  This may be useful in determining if the failure happened initially with the first application/community or later in the processing of the dta.  Some examples are shown below.
 
 - This error indicates that the routingManager API was not available to be queried 
-```
+```json
 {
   "module-name": "bgp-community-services",
   "duration": 60,
@@ -180,7 +180,7 @@ The contents of this file should show a JSON mapping of the user defined applica
 ```
 
 - This error indicates that the routingManager API was available but returned an error
-```
+```json
 {
   "module-name": "bgp-community-services",
   "duration": 60,
@@ -191,7 +191,7 @@ The contents of this file should show a JSON mapping of the user defined applica
 ```
 
 - This error indicates that routingManager did not return the expected data.  Check to ensure BGP is configured correctly on the router
-```
+```json
 {
   "module-name": "bgp-community-services",
   "duration": 60,
@@ -202,7 +202,7 @@ The contents of this file should show a JSON mapping of the user defined applica
 ```
 
 - An empty result like this indicates that no match was found for the configured BGP community strings.  Please check the received prefixes to ensure you are getting the communitie strings you expect
-```
+```json
 {
   "module-name": "bgp-community-services",
   "duration": 60,
