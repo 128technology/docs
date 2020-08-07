@@ -7,15 +7,19 @@ The wireguard plugin allows your 128T router to peer with other endpoints using 
 
 ![Wireguard overview](/img/plugin_wireguard_1.png)
 
+:::note
+See instructions for [installing and managing](plugin_intro.md#installation-and-management) the plugins.
+:::
+
 ## Wireguard Basics
 
 Wireguard operates using [cryptokey routing](https://www.wireguard.com/#cryptokey-routing), which provides device-to-edge security with a 128T service centric fabric. For any wireguard peer to securely communicate with another, a [Curve25519](https://tools.ietf.org/html/rfc7748) public/private keypair is generated. Each endpoint wishing to form a peering relationship must be configured minimally with the public key of the peer, and the prefixes that are allowed to be sent to the peer.
 
-When a 128T router is configured for wireguard, it will generate a public key which can be configured in remote endpoints that are to peer with it. Additionally serivce prefixes that should be sent to the 128T router by a wireguard peer, can be configured as allowed IPs.
+When a 128T router is configured for wireguard, it will generate a public key which can be configured in remote endpoints that are to peer with it. Additionally service prefixes that should be sent to the 128T router by a wireguard peer, can be configured as allowed IPs. More information on wireguard configuration can be found [here](https://www.wireguard.com/quickstart/).
 
 ## Basic Configuration
 
-To configure your 128T router for wireguard peering, you first create a wireguard profile on the router. For example, the following defines a profile called `wg-profile-1`. For all wireguard endpoints associated with the profile, `10.10.10.0/24` addressing will be used for each wireguard interface, and the router wireguard instance will use `10.10.10.1`.:
+To configure your 128T router for wireguard peering, you first create a wireguard profile on the router. For example, the following defines a profile called `wg-profile-1`. Each wireguard endpoint will use a unique address from the prefix `10.10.10.0/24` as defined in the profile and the router wireguard instance will use the first address of `10.10.10.1`.:
 
 ```
 config
@@ -55,10 +59,6 @@ exit
 
 With the profile configured and set on an interface, the router will install the required components for wireguard peering.
 
-:::note
-The first time configuring the plugin for a router, it may take some time to install requisite packages. Be patient.
-:::
-
 ## Services and Tenants with Wireguard
 
 Configuration of a wireguard profile on a 128T router interface does **not** provide access to network services. It simply allows the endpoint to connect to the router using wireguard for secure transport, and all sessions will still be subject to the rules of [tenants and services](concepts_glossary.md#service-layer). To facilitate network tenancy being given to traffic coming from wireguard peers, a profile is configured with a neighborhood. The neighborhood in the wireguard profile will function as a named Layer 3 network, and used in defining [neighborhood based tenancy](bcp_tenants.mdx#per-neighborhood-tenancy) to provide access to services.
@@ -67,7 +67,7 @@ Configuration of a wireguard profile on a 128T router interface does **not** pro
 If you do not have a pre-defined tenant to use for wireguard endpoints, you can optionally configure a `tenant` in the profile, and one will be automatically generated for you.
 :::
 
-## Use Case: Remote Endpoints
+## Connecting Remote Endpoints
 
 You have devices that are remote from your 128T fabric, but you want to give them network tenancy and access to services. In this example use case, assume you have 2 datacenter routers `dc1` and `dc2`, hosting services for `172.16.1.0/24` and `172.16.2.0/24` respectively. You want your remote devices to connect directly to each datacenter for these services, and be given a tenant called `remote`. `dc1` has a network-interface address of `1.1.1.1`, and `dc2` has a network-interface address of `2.2.2.2` that will be used to allow wireguard peers to connect.
 
@@ -281,7 +281,7 @@ config
 exit
 ```
 
-## Use Case: Remote Service Agent
+## Remote Service Agent
 
 You have a remote device that needs to be accessed as an agent of a service in your 128T network. In this example use case you have a remote IoT device that hosts a `thing` service with address `128.128.128.128/32`, which must be accessed by a tenant `technician`. 
 
@@ -437,20 +437,105 @@ The `interface` and `gateway-ip` in this configuration are automatically generat
 
 With this configuration, sessions sent from the `technician` tenant to `128.128.128.128` will be given access as part of the `thing` service, and routed with a destination NAT to the wireguard interface of `10.10.10.5` on the IoT device peer.
 
-## Debugging
+## Troubleshooting
+
+#### Interface status
 
 To view the status of a wireguard interface, and its peers, use the following PCLI command:
 ```
 show device-interface router <router_name> name <profile_name>
 ```
 
+Example:
+```
+admin@node1.dev-conductor# show device-interface router r1 name wg-profile-1                                                                                                                                                                                   
+Fri 2020-08-07 13:35:22 UTC
+
+===================================================================
+ node1.r1:wg-profile-1
+===================================================================
+ Type:                host
+ Forwarding:          true
+ Mode:                host
+ MAC Address:         6a:ca:96:7b:e3:4c
+
+ Admin Status:        up
+ Operational Status:  up
+ Redundancy Status:   non-redundant
+ Speed:               1 Gb/s
+ Duplex:              full
+
+ in-octets:                     4349806
+ in-unicast-pkts:                 50978
+ in-errors:                           0
+ out-octets:                    4793736
+ out-unicast-pkts:                63193
+ out-errors:                          0
+
+ wireguard:
+   interface:
+     listening port:  12800
+     name:            wg0
+     public key:      lV8egtiC8AKNh+DawkSM6G8t4x6BMFCsz8m48ToxHyA=
+   number of peers:   5
+   peers:
+       peer#1 - iot-dev-1:
+         allowed ips: 10.10.10.5/32
+         endpoint:    192.168.128.222:42948
+         latest handshake:1 minute, 2 seconds ago
+         public key:  Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=
+         transfer:    368.22 KiB received, 177.72 KiB sent
+       peer#2 - p1:
+         allowed ips: 10.10.10.2/32, 192.168.8.0/24
+         endpoint:    192.168.128.30:58608
+         latest handshake:11 hours, 35 minutes, 38 seconds ago
+         public key:  cScVKF4nTbdDcGoZgbkNMRFhSEC0dVqdufIBBnCNvCk=
+         transfer:    775.50 KiB received, 771.83 KiB sent
+       peer#3 - p2:
+         allowed ips: 10.10.10.3/32
+         public key:  4uXibv7XeeTxYhc5clp0G4cIYicvY03RQGxLwDNCCEY=
+       peer#4 - p3:
+         allowed ips: 10.10.10.4/32
+         public key:  lqvXPuopoYfVcVgpUEtF8Y6BXn8n6YXXAhRGhS50vU8=
+
+```
+
+#### Interface and profile configuration logging
+
 Logging of new configuration sent to the router can be viewed in the Linux shell using the system journal.
 
-Interface and profile configuration logging:
 ```
 journalctl -u 128T-handle-wireguard-config
 ```
-Peer configuration logging:
+
+Example:
+```
+[t128@dev-fitlet ~]$ sudo journalctl -u 128T-handle-wireguard-config
+-- Logs begin at Sun 2012-01-01 00:37:26 UTC, end at Fri 2020-08-07 13:38:00 UTC. --
+Jul 30 02:06:25 dev-fitlet systemd[1]: Starting Handler for 128T wireguard config...
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote' does not exist
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote' created
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote/init' does not exist
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote/reinit' does not exist
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote/shutdown' does not exist
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote/startup' does not exist
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote/init' symlink to '/etc/128technology/plugins/network-scripts/default/kni_namespace/init' created
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote/reinit' symlink to '/etc/128technology/plugins/network-scripts/default/kni_namespace/reinit' created
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote/shutdown' symlink to '/etc/128technology/plugins/network-scripts/default/kni_namespace/shutdown' created
+Jul 30 02:06:25 dev-fitlet node[2602]: '/etc/128technology/plugins/network-scripts/host/remote/startup' symlink to '/etc/128technology/plugins/network-scripts/default/kni_namespace/startup' created
+```
+
+#### Peer configuration logging
+
+Looging of peer configuration handling can be viewed in the Linux shell using the system journal.
 ```
 journalctl -u 128T-handle-wireguard-peer-config@<profile_name>
+```
+
+Example:
+```
+[t128@dev-fitlet ~]$ sudo journalctl -u 128T-handle-wireguard-peer-config@wg-profile-1 
+-- Logs begin at Sun 2012-01-01 00:37:26 UTC, end at Fri 2020-08-07 13:36:42 UTC. --
+Aug 05 14:32:40 dev-fitlet systemd[1]: Starting Handler for wireguard peer and network config wg/profile/1...
+Aug 05 14:32:40 dev-fitlet node[32315]: '/etc/128technology/plugins/network-scripts/host/wg-profile-1/wg0.conf' written
 ```
