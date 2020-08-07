@@ -437,52 +437,20 @@ The `interface` and `gateway-ip` in this configuration are automatically generat
 
 With this configuration, sessions sent from the `technician` tenant to `128.128.128.128` will be given access as part of the `thing` service, and routed with a destination NAT to the wireguard interface of `10.10.10.5` on the IoT device peer.
 
-## Use Case: Remote Access Gateway
-
-You have a remote device acting as an access gateway for multiple different devices, which need to reach services on the 128T fabric.
-
-The access gateway device has a wireguard peer with a public key of `E7pAgPsJETaRCUF6rZTM2WtEJBQGW+Mdof93mSYN0Sw=`. It will host other devices on a `192.168.8.0/24` private network, and it will peer with the 128T router `r1` on the  `1.1.1.1` network-interface address.
-
-![Wireguard gateway](/img/plugin_wireguard_4.png)
-
-### Profile Configuration
-
-The following configuration sets up the wireguard profile, along with the access gateway wireguard peer:
-```
-config
-  authority
-    router             r1
-      wireguard-profile    wg-profile-1
-        name             wg-profile-1
-
-        private-network
-          neighborhood  remote
-          address       10.10.10.1/24
-        exit
-
-        peer             iot-dev-1
-          name        iot-dev-1
-          public-key  E7pAgPsJETaRCUF6rZTM2WtEJBQGW+Mdof93mSYN0Sw=
-          allowed-ip  192.168.8.0/24
-        exit
-      exit
-    
-      node                 node1
-        device-interface  eth1
-          network-interface  eth1-net
-            address     1.1.1.1
-              wireguard-profile wg-profile-1
-            exit
-          exit
-        exit
-      exit
-    exit
-  exit
-exit
-```
-
-### Remote Endpoint Configuration
-
-### Network Tenant for Devices
-
 ## Debugging
+
+To view the status of a wireguard interface, and it's peers, use the following PCLI command:
+```
+show device-interface router <router_name> name <profile_name>
+```
+
+Logging of new configuration sent to the router can be viewed in the Linux shell using the system journal.
+
+Interface and profile configuration logging:
+```
+journalctl -u 128T-handle-wireguard-config
+```
+Peer configuration logging:
+```
+journalctl -u 128T-handle-wireguard-peer-config@<profile_name>
+```
