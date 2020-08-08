@@ -10,7 +10,7 @@ lan-intf (lan-tenant) > `ingress-service` > `dnsmasq` > dns-kni (`tenant`) > egr
 By enabling this plugin, you can provide DNS caching with fast resolution times to your network.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 ## Configuration

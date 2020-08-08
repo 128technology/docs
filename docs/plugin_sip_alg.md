@@ -8,7 +8,7 @@ The Session Initiation Protocol (SIP)[^1] is a signaling protocol used for initi
 When 128T router is present at the edge of the NAT boundary, it is capable of performing a Application Layer Gateway (ALG) function for SIP protocol by doing packet inspection and re-writing the private IP address information in the SIP messages for both SIP headers and Session Description Protocol (SDP)[^2]. This enables both signaling and media traffic to traverse the NAT and makes the communication possible between the client behind the NAT and the remote SIP endpoint(s). The SIP ALG function can be enabled by installing and configuring the `128T-sip-alg` plugin.
 
 :::note
-The instructions for installing and managing the plugin can be found [here](plugin_intro#installation-and-management).
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 
