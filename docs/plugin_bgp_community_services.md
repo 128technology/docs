@@ -3,7 +3,7 @@ title: BGP Community Services Plugin
 sidebar_label: BGP Community Services
 ---
 
-The BGP Community Services Plugin allows the 128T router to create services based on the community strings of prefixes learned via BGP from remote routers. The plugin allows you to configure a profile containing mappings of application names to community strings. A router can be assigned one profile, which will allow it to create [application identification](concepts_appid.md) information to associate learned prefixes to application names. These application names can then be configured within a service definition in order to appropriately populate the router's FIB.
+The BGP Community Services Plugin allows the 128T router to create services based on the community strings of prefixes learned via BGP from remote routers. The plugin allows you to configure a profile containing mappings of application names to community strings. A router can be assigned one profile, which will allow it to create [application identification](concepts_appid.md) information to associate learned prefixes to application names. These application names can then be configured within a service definition in order to appropriately populate the routers FIB. The primary use case for this plugin was to identify Microsoft Office 365 application traffic for customers using ExpressRoute. However, there may be other use cases where it is desirable for prefixes identified by a BGP community string to be mapped into a service dynamically.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -123,9 +123,6 @@ config
 exit
 ```
 
-## Use Cases
-The primary use case for this plugin was to identify Microsoft Office 365 application traffic for customers using ExpressRoute. However, there may be other use cases where it is desirable for prefixes identified by a BGP community string to be mapped into a service dynamically.
-
 ## Troubleshooting
 
 ### Pillar Generation
@@ -151,14 +148,14 @@ If a BGP Community Services Profile has been assigned to the router, the 128T-bg
 
 - A symlink to the `bgp-community-services` executible should exist as shown below
 ```
-[root@t166-dut3 application-modules]# cd /etc/128technology/application-modules/
-[root@t166-dut3 application-modules]# ll
+# cd /etc/128technology/application-modules/
+# ll
 total 0
 drwxr-xr-x 2 root root 45 Jun 29 23:28 app_module_utils
 lrwxrwxrwx 1 root root 70 Jun 30 00:44 bgp-community-services -> /etc/128technology/application-modules/defaults/bgp-community-services
 drwxr-xr-x 2 root root 86 Jun 29 23:28 defaults
 lrwxrwxrwx 1 root root 21 Jun 29 20:30 office365.py -> defaults/office365.py
-[root@t166-dut3 application-modules]# 
+# 
 ```
 
 ### Application Identification Output
