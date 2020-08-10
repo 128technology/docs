@@ -106,7 +106,7 @@ Define which of your [network tenants](config_tenants.md#modeling-your-network-t
 Configure the [security policy](config_reference_guide.md#security) for the Microsoft 365 services.
 
 :::tip
-Microsoft 365 services are designed for direct Internet transport, with robust security and encryption built in to each application. As such, a security policy that disables router encryption is typically preferred.
+Microsoft 365 services are designed for direct internet transport, with robust security and encryption built in to each application. As such, a security policy that disables router encryption is typically preferred.
 :::
 
 #### Routing
@@ -130,7 +130,7 @@ You can verify the discovery by checking the "Applications Seen" on the router p
 
 #### CLI Example
 ```
-admin@node1.my-router# show application names                                                                                                                                                                                                                  
+admin@node1.my-router# show application names
 Mon 2020-06-08 03:03:49 UTC
 
 Node: node1

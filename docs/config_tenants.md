@@ -180,6 +180,10 @@ This configuration fragment establishes the user population within the subnet 17
 
 Irrespective of the number of levels of the tenant hierarchy, the same rule applies: children have access to services offered by their parents, but parents do not have access to services offered by their children.
 
+Assigning a tenant to a network-interface will also let you use membership to identify subtenants, however you cannot override a network-interface tenant with a different tenant tree.
+
+Referencing the example above, adding a member for `HQnetwork` in a different tenant "family" (such as `developer.acme`) will have no effect. The assignment of `engineering` to the network-interface strictly limits tenant affiliation to `engineering` and/or its children.
+
 ## The Global Tenant
 We've discussed two ways that tenancy can be determined on a 128T router: by assigning a tenant to an interface, or by creating neighborhood-based _tenant members_, that can use the source IP address within a neighborhood to glean tenancy. If neither of these rulesets apply – a packet arrives on an interface without a `tenant` assigned, and neither does it match a tenant's `member` definition for the neighborhood(s) on that interface – then the tenancy of that session is said to be assigned to the _global tenant_, which is also sometimes referred to as "tenantless."
 
