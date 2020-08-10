@@ -11,21 +11,17 @@ There are several different high availability models possible with the 128T rout
 
 Dual router high availability is recommended for data center designs where there will be a large volume of traffic, as this is where the performance savings of eliminating state synchronization are most notable.
 
-
-
-
-
 ## Unsupported Features
 
 When deploying two nodes in a dual router high availability deployment, several features that rely on synchronized state between nodes are no longer available.
 
 - Source NAT. When source NAT is enabled, a system will allocate ephemeral ports on its egress interface as sessions leave the 128T router. Because there is no state synchronization between the two nodes in this deployment model, these ephemeral ports are not shared. Thus, if the active node fails and traffic starts transiting its counterpart, the source NAT allocation on the newly active system will be different. This will impact application flows.
 
+## Design Constraints
 
+Due to the way that dual router high availability operates without state synchronization, in the event of a failure to one router in a pair, all traffic will be sent to the counterpart router (once routing converges). The now-active router does not have a shared database to reconstruct session state; it will receive mid-session packets (from the client's and server's perspectives) and need to construct its own state from these packets.
 
-... transport state enforcement
-
-
+For this reason, services that leverage a dual router HA pair must reference a `service-policy` that has `transport-state-enforcement allow` configured. Otherwise, mid-session TCP packets cause the 128T device to send a TCP RST to the sender.
 
 ## Design Overview
 
@@ -200,3 +196,10 @@ config
     exit
 exit
 ```
+
+### Information Sharing between Routers
+
+Unlike the *dual node high availability* design, in the dual router high availability design state is not synchronized between routers. Instead, the two devices exchange reachability information using iBGP; this is implemented on the 128T using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as seen in the sample configuration.
+
+In our sample configuration we use `device-interface eno1` as our iBGP link. The sample here uses [link-local IP addresses](https://en.wikipedia.org/wiki/Link-local_address), presuming that the two nodes are situated next to one another in the same data center. The `neighborhood dc1-interrouter` configuration, also provisioned on `routerB`, indicates to conductor that the two devices are mutually reachable. This hint (combined with the loopback interfaces) is what creates the peering relationship, the services, and the service-routes in support of BGPoSVR.
+
