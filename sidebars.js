@@ -122,6 +122,7 @@ module.exports = {
       "plugin_dns_app_id",
       "plugin_dns_cache",
       "plugin_gre",
+      "plugin_icmp_reachability_detection",
       "plugin_ipsec_client",
       "plugin_kni_namespace_scripts",
       "plugin_loopback_static_routes",
