@@ -8,7 +8,7 @@ The wireguard plugin allows your 128T router to peer with other endpoints using 
 ![Wireguard overview](/img/plugin_wireguard_1.png)
 
 :::note
-See instructions for [installing and managing](plugin_intro.md#installation-and-management) the plugins.
+See instructions for [installing and managing](plugin_intro.md#installation-and-management) plugins.
 :::
 
 ## Wireguard Basics
@@ -455,7 +455,7 @@ A profile describing an instance of wireguard on the router.
 | `description`        | string        | A description about the wireguard profile. |
 | `loopback-address`   | ipv4-prefix   | An internal address prefix for KNI connectivity between wireguard and the data plane. |
 | `port`               | l4-port       | The UDP port for the wireguard instance to recieve connections on. |
-| `inactivity-timeout` | uint32        | Inactivity timeout for wireguard sessions. By default this uses 180000 ms UDP timeout value. If customized to a non-default value, a new session-type will be automatically generated. |
+| `inactivity-timeout` | milliseconds  | Inactivity timeout for wireguard sessions. By default this uses 180000 ms UDP timeout value. If customized to a non-default value, a new session-type will be automatically generated. |
 | `service-class`      | string        | The service-class to associate with the generated session-type for this wireguard profile. Wireguard sessions arriving at the router will be given this service-class. |
 | `access-policy`      | access-policy | List of access policies for the wireguard service. Packets allowed by this access policy will additionally be subject to wireguard security validation. See [service access policy](config_reference_guide.md#access-policy-service). |
 
@@ -490,7 +490,7 @@ Set of allowed wireguard peers.
 | `name`                 | string    | Name identifier for the peer. |
 | `public-key`           | string    | The peer's base64 encoded 32 byte Curve25519 public wireguard key. |
 | `preshared-key`        | string    | The peer's optional base64 encoded 32 byte Curve25519 pre-shared wireguard key. |
-| `persistent-keepalive` | uint32    | Interval in seconds at which to send keepalive messages to the peer. Keepalives are optional. No configuration or a setting of '0' disables keepalives. |
+| `persistent-keepalive` | seconds   | Interval in seconds at which to send keepalive messages to the peer. Keepalives are optional. No configuration or a setting of '0' disables keepalives. |
 | `allowed-ip`           | ip prefix | The prefixes that are allowed to be sent to the peer. When the peer is an endpoint, typically the allowed-ip is the /32 of the peer's wireguard interface. If the peer is a gateway device, the allowed-ip list would include any prefixes reachable as services via the peer, or prefixes from which traffic may be sourced. |
 
 :::note
