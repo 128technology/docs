@@ -234,7 +234,7 @@ The 128T router uses four traffic engineering queues for prioritizing egress tra
     voip-audio --> ATT-COS1
     id1(BFD, BGP) -.-> ATT-control
     voip-video --> ATT-COS2V
-    voip-streaming --> ATT-COS2V
+    video-streaming --> ATT-COS2V
     voip-signaling --> ATT-COS2
     data-mission-critical --> ATT-COS2
     remote-desktop --> ATT-COS2
