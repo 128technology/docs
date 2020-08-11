@@ -15,11 +15,23 @@ sidebar_label: 4.3
 
   Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the 128T or by removing and recreating the BGP configuration
 ------
+- **I95-33989** Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`
+
+  _**Symptom:**_ The following can be seen in the PCLI output:
+  ```
+  ✖ Validating...
+  % Error: Candidate configuration is invalid:
+  1. A request of type validate is already in progress. The first request was started 13 seconds ago
+  ```
+  Until the system is upgraded to 4.3.9, this issue will resolve itself after the background tasks have completed
+------
 - **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server
 
   _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable
 ------
 - **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend
+------
+- **I95-35544** LTE SIM number (ICCID) is absent from the output of `show device interface` on LTE interfaces
 ------
 - **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted Linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
 
@@ -59,6 +71,13 @@ sidebar_label: 4.3
 - **I95-36394** Auto-generated conductor service names that include a '.' will fail to commit configuration
 
   _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
+------
+- **I95-36404** highway process fails to start on Ubuntu distributions
+
+  _**Symptom:**_ 128T will fail to initialize. The following can be seen within `highway.log`
+  ```
+  Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
+  ```
 ------
 - **I95-36574** After a HA interface fail over, a session collision can occur between the recovered flow and an existing reverse flow. The recovered flow does not get setup properly and can cause the highway process to fault upon session expiry.
 
@@ -583,6 +602,8 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 ## Special Considerations
 
 If upgrading from 4.1 consult the [4.2.3 release notes Special Considerations](release_notes_128t_4.2.md#special-considerations) section
+
+- **I95-36525** TLS 1.0 is no longer supported
 
 ## Caveats
 
