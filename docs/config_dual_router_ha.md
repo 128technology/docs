@@ -205,7 +205,9 @@ In our sample configuration we use `device-interface eno1` as our iBGP link. The
 
 ### Service Policy Configuration
 
+As mentioned in the [design constraints](#design-constraints) section, due to the fact that there is no shared state between the routers in a dual router HA deployment, when a router fails its counterpart will pick up all traffic for active sessions as soon as routing converges. This will result in mid-flow TCP packets arriving at the new router, and the default behavior for the 128T router is to reject all mid-flow TCP packets by sending a TCP RST back to the sender.
 
+This behavior is governed by the `transport-state-enforcement` field in the `service-policy`. Any service traffic that is conveyed to or from a system that is configured as a dual router HA deployment must have `transport-state-enforcement` set to `allow`, or else all TCP-based traffic will need to be restarted post-switchover. Below is an example `service-policy` showing the `transport-state-enforcement` set to `allow`:
 
 ```
 admin@labsystem1.fiedler# show config running authority service-policy data-mission-critical
@@ -226,4 +228,8 @@ config
     exit
 exit
 ```
+
+For more information on this setting, refer to the section on `transport-state-enforcement` in our [online documentation](config_reference_guide.md#service-policy).
+
+### Service Route Configuration
 
