@@ -64,7 +64,7 @@ sidebar_label: 4.5
   Jun 16 06:09:25.272 [DNS |DNSR] WARN (dnsManagerTP ) Failed to parse Ipv4Host (1) response for edge-global.plcm.vc: Message too long
   ```
 ------
-- **I95-35799** When a route prefix that exactly matches the prefix of a configured service is removed, the route gets removed from the RIB but it may remain in the FIB and may still be used for establishing new sessions
+- **I95-35799** When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions
 ------
 - **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
 
@@ -74,11 +74,11 @@ sidebar_label: 4.5
   rpm --rebuilddb
   ```
 ------
-- **I95-35935** Configuring the same conductor-address in `router > conductor-address` on different routers will create invalid generated configuration
+- **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration
 ------
-- **I95-36012** The output of `show device-interface` displays the incorrect values for speed and duplex for LTE interfaces
+- **I95-36012** `show device-interface` displays incorrect values for speed and duplex for LTE interfaces
 ------
-- **I95-36109** Sessions may not reestablish properly on fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
+- **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
 ------
 - **I95-36146** Non-PCLI commands, such as pagination responses, are incorrectly stored in command history
 ------
@@ -87,7 +87,7 @@ sidebar_label: 4.5
   ```
   TypeError: heap argument must be a list
   ```
-  Until the system is upgraded to 4.5.0, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the linux shell. The salt-minion watchdog will also restart the salt-minion after one hour, if not manually restarted.
+  Until the system is upgraded to 4.5.0, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
 ------
 - **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process crash if a subsequent graceful-restart timeout occurs
 
