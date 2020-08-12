@@ -365,6 +365,9 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-35323** BGP over SVR does not work when both sides are using VLAN tags
 
 ## Special Considerations
+
+- **I95-36525** TLS 1.0 is no longer supported
+------
 - Python has been upgraded from version 2 to version 3.  Any custom salt states that have been written that include python code, may need to be upgraded or rewritten in advance of the upgrading to 4.4. (I95-31073)
 ------
 - `show config exports` command is no longer available to a user with *user* privileges.  This command is only intended for those users with *administrator* privileges. (I95-33983)
