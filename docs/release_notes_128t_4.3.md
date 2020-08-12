@@ -7,6 +7,12 @@ sidebar_label: 4.3
 
 ### Issues Fixed
 
+- **I95-18807** Innocuous error produced in journal due to imudp module loaded by rsyslog daemon
+  _**Symptoms:**_ The following message can be seen in the journal
+  ```
+  rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
+  ```
+------
 - **I95-32298** KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down"
 ------
 - **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled
@@ -50,6 +56,8 @@ sidebar_label: 4.3
 ------
 - **I95-35799** When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions
 ------
+- **I95-35933** `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces
+------
 - **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration
 ------
 - **I95-36012** `show device-interface` displays incorrect values for speed and duplex for LTE interfaces
@@ -57,6 +65,8 @@ sidebar_label: 4.3
 - **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
 ------
 - **I95-36149** Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault
+------
+- **I95-36246** IMSI and MSISDN are absent from the output from `show platform` on systems with LTE interfaces
 ------
 - **I95-36283** The 128T router asset state is stuck on its current state
 
@@ -82,6 +92,10 @@ sidebar_label: 4.3
 - **I95-36574** After a HA interface fail over, a session collision can occur between the recovered flow and an existing reverse flow. The recovered flow does not get setup properly and can cause the highway process to fault upon session expiry.
 
   _**Conditions:**_ Symmetrical services must be configured that match both forward and reverse flows
+------
+- **I95-36632** Empty office365 metadata file results in HTTP 400 bad request error
+------
+- **I95-36638** Polling SNMP OID 1.3.6.1.2.1.1.2 returns `NET-SNMP-TC::linux` instead of `T128-MIB::t128NetworkingPlatform (1.3.6.1.4.1.45956.1)`
 
 ## Release 4.3.8
 
