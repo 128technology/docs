@@ -205,3 +205,25 @@ In our sample configuration we use `device-interface eno1` as our iBGP link. The
 
 ### Service Policy Configuration
 
+
+
+```
+admin@labsystem1.fiedler# show config running authority service-policy data-mission-critical
+
+config
+
+    authority
+
+        service-policy  data-mission-critical
+            name                         data-mission-critical
+            description                  "Mission-critical data"
+            service-class                MultimediaStreaming
+            path-quality-filter          true
+            best-effort                  true
+            max-latency                  250
+            transport-state-enforcement  allow
+        exit
+    exit
+exit
+```
+
