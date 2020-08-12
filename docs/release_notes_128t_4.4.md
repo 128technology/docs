@@ -5,16 +5,97 @@ sidebar_label: 4.4
 
 ## Release 4.4.2
 
-- **I95-18807**
+- **I95-18807** Innocuous error produced in journal due to imudp module loaded by rsyslog daemon
+
+  _**Symptoms:**_ The following message can be seen in the journal
+  ```
+  rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
+  ```
 ------
-- **I95-32298**
+- **I95-32298** KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down"
 ------
-- **I95-33471**
+- **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled
 ------
-- **I95-33594**
+- **I95-33594** Changing the `neighbor-as` of an existing BGP neighbor prevents it from connecting
+
+  Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the 128T or by removing and recreating the BGP configuration
 ------
-- **I95-33989**
------
+- **I95-33989** Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`
+
+  _**Symptom:**_ The following can be seen in the PCLI output:
+  ```
+  ✖ Validating...
+  % Error: Candidate configuration is invalid:
+  1. A request of type validate is already in progress. The first request was started 13 seconds ago
+  ```
+  Until the system is upgraded to 4.3.9, this issue will resolve itself after the background tasks have completed
+------
+- **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server
+
+  _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable
+------
+- **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend
+------
+- **I95-35544** LTE SIM number (ICCID) is absent from the output of `show device interface` on LTE interfaces
+------
+- **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted Linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
+
+  Until the system is upgraded to 128T 4.3.9 and 128T-installer 2.6.1, the issue can be mitigated by running the following Linux commands:
+  ```
+  rm -f /var/lib/rpm/__*
+  rpm --rebuilddb
+  ```
+------
+- **I95-35793** Large responses from a DNS server may be rejected by 128T. When this happens, provisioned FQDNs remain unresolved.
+
+  _**Conditions:**_ The following log message can be seen:
+  ```
+  Jun 16 06:09:25.272 [DNS |DNSR] WARN (dnsManagerTP ) Failed to parse Ipv4Host (1) response for edge-global.plcm.vc: Message too long
+  ```
+------
+- **I95-35799** When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions
+------
+- **I95-35933** `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces
+------
+- **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration
+------
+- **I95-36012** `show device-interface` displays incorrect values for speed and duplex for LTE interfaces
+------
+- **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
+------
+- **I95-36149** Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault
+------
+- **I95-36246** IMSI and MSISDN are absent from the output from `show platform` on systems with LTE interfaces
+------
+- **I95-36283** The 128T router asset state is stuck on its current state
+
+  _**Conditions:**_ The following log message can be seen:
+  ```
+  TypeError: heap argument must be a list
+  ```
+  Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
+------
+- **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs
+------
+- **I95-36394** Auto-generated conductor service names that include a '.' will fail to commit configuration
+
+  _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
+------
+- **I95-36404** highway process fails to start on Ubuntu distributions
+
+  _**Symptom:**_ 128T will fail to initialize. The following can be seen within `highway.log`
+  ```
+  Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
+  ```
+------
+- **I95-36574** After a HA interface fail over, a session collision can occur between the recovered flow and an existing reverse flow. The recovered flow does not get setup properly and can cause the highway process to fault upon session expiry.
+
+  _**Conditions:**_ Symmetrical services must be configured that match both forward and reverse flows
+------
+- **I95-36632** Empty office365 metadata file results in HTTP 400 bad request error
+------
+- **I95-36638** Polling SNMP OID 1.3.6.1.2.1.1.2 returns `NET-SNMP-TC::linux` instead of `T128-MIB::t128NetworkingPlatform (1.3.6.1.4.1.45956.1)`
+
 
 ## Release 4.4.1
 
