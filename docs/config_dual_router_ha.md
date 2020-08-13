@@ -233,3 +233,60 @@ For more information on this setting, refer to the section on `transport-state-e
 
 ### Service Route Configuration
 
+There are two considerations when constructing `service-route` configuration in a dual router HA environment:
+
+- Routing traffic from a router to a remote set of routers configured for dual router HA
+- Routing traffic from the dual router HA to other peers
+
+In both of these cases, the `service-route` will use the `next-peer` method.
+
+#### Routing to a Dual Router HA
+
+Below is an example `service-route` that would typify a branch router's path to a data center dual router HA pair:
+
+```
+            service-route         rte-datacenter-service-1
+                name          rte-datacenter-service-1
+                service-name  service-1
+                next-peer     routerA
+                next-peer     routerB
+            exit
+```
+
+In this example, the branch router's traffic matching `service-1` will have two possible peers it can leverage, `routerA` and `routerB`.
+
+:::note
+While it is possible to manually configure these yourself, the conductor will typically autogenerate these types of `service-route` elements on your behalf.
+:::
+
+#### Routing from a Dual Router HA
+
+Below is an example `service-route` that typifies a dual router HA system sending traffic to a branch site (using a [summary service](bcp_service_and_service_policy_design.md#summary-and-spoke-services)):
+
+```
+            service-route         rte-branch1-summary
+                name          rte-branch1-summary
+                service-name  branch1-summary
+                next-peer     branch1
+                next-peer     routerB
+            exit
+```
+
+This example would be found on `routerA`; note that while we still use `next-peer`, the hops are different. First is `branch1`, the target of our summary service. Second, however, is `routerB`. This is effectively a manually-created dual router HA version of a dual node HA's "fabric" path: `routerA` has a path to reach `branch1` via `routerB`.
+
+There will also be a corresponding `service-route` on `routerB` that looks slightly different:
+
+```
+            service-route         rte-branch1-summary
+                name          rte-branch1-summary
+                service-name  branch1-summary
+                next-peer     branch1
+                next-peer     routerA
+            exit
+```
+
+Here we see that `routerB` will "hop through" `routerA` to get to `branch1`, if its direct path to `branch1` is down. (I.e., all peer paths are unavailable.)
+
+:::note
+These `service-route` configuration elements will not be built for you by conductor, and must be manually created. (They are typically part of provisioning templates, such that as new routers are deployed the configuration templates will include these `service-route` elements for the new peers.)
+:::
