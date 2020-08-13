@@ -3,6 +3,86 @@ title: 128T 4.2 Release Notes
 sidebar_label: 4.2
 ---
 
+## Release 4.2.8
+
+### Issues Fixed
+
+- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
+------
+- **I95-30610** RTP is not properly classified for subsequent 128T routers
+------
+- **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
+  _**Conditions:**_ DHCP server is not running. The following log message can be seen:
+  ```
+init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
+init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip netns set dhcp-server-ns-1 1073742075" failed: RTNETLINK answers: No space left on device
+  ```
+  Until the system is upgraded to 4.2.8, this issue can be mitigated by restarting the 128T process.
+------
+- **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
+
+  Until the system is upgraded to 4.2.8, this issue can be mitigated by restarting the 128T.
+------
+- **I95-34629** During the initial window of a router connecting to its HA peer, or its connection to the Conductor while a connection outage occurs, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+
+  Until the system is upgraded to 4.2.8, this issue can be mitigated by attempting the commit again.
+------
+- **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
+------
+- **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T router
+------
+- **I95-34790** Dual node HA routers with large numbers of peer paths (>500) may see some flows get blackholed after a node failover occurs.
+------
+- **I95-34842** The configuration attribute `authority > router > node > device-interface > vrrp` has been removed from configuration in the GUI as the capability does not exist
+------
+- **I95-34961** Using a QuickStart file to provision a router fails if the ZScaler plugin is installed on the Conductor.
+------
+- **I95-34968** Self-signed certificates created during initial installation of 128T are invalid
+------
+- **I95-35062** Non-permanent LTE failures are incorrectly displayed as a failure context in `show device-interface`
+------
+- **I95-35082** When a 128T is deployed behind a NAT firewall and has path MTU (PMTU) discovery enabled, SVR sessions established for outbound-only connections are set up with the configured interface MTU, not the discovered PMTU.
+------
+- **I95-35093** `show asset <asset-id>` incorrectly continues to show `Currently Upgrading` version after completion of an upgrade.
+------
+- **I95-35099** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
+
+  Until the system is upgraded to 4.2.8, this issue can be mitigated by disabling rather than deleting the user.
+------
+- **I95-35115** Aggregate bandwidth charts may not display data accurately
+------
+- **I95-35155** `show device-interface` output did not include duplex mode
+------
+- **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
+
+  _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
+
+  Until the system is upgraded to 4.2.8, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
+------
+- **I95-35205** LTE interfaces do not honor MTU settings set in the network
+
+  Until the system is upgraded to 4.3.5, the learned MTU value can be directly set within Linux
+------
+- **I95-35323** BGP over SVR does not work if both sides of the routers have VLAN tagged interfaces
+
+  Until the system is upgraded to 4.3.5, configure the outgoing SVR interfaces without vlans. At least one side of the BGP over SVR routers should not utilize VLAN tagging.
+------
+- **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
+  _**Conditions:**_ When the interface has an adjacency and Tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`
+------
+- **I95-35602** The command `show network-interface` may result in a `Unhandled TypeError` in the PCLI when a PPPoE interface is down
+
+
+## Release 4.2.7
+
+### Issues Fixed
+
+- **I95-35138** A vulnerability in the SaltStack code allows for unauthenticated salt-minions to execute any script on the salt-master.
+  :::info
+  This fix is required only on the 128T Conductor.
+  :::
+
+
 ## Release 4.2.6
 
 :::note

@@ -17,7 +17,7 @@ A quick recap:
 
 
 
-This example will configure an interface to be used to establish connectivity between HA peers. To configure a non-forwarding interface, set the `forwarding` flag to `false`. This examples uses a `device-interface` set to type `ethernet`.
+This example will configure an interface to be used to establish connectivity between HA peers. To configure a non-forwarding interface, set the `forwarding` flag to `false`. This example uses a `device-interface` set to type `ethernet`.
 
 ```
 node    T116_DUT1
@@ -97,7 +97,7 @@ eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 5818989  bytes 1002306918 (955.8 MiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-        
+
 team-eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         inet 172.16.1.1  netmask 255.255.255.0  broadcast 172.16.1.255
         inet6 fe80::f816:3eff:fe4c:5ebe  prefixlen 64  scopeid 0x20<link>

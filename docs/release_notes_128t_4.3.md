@@ -2,6 +2,251 @@
 title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
+
+## Release 4.3.9
+
+### Issues Fixed
+
+- **I95-18807** Innocuous error produced in journal due to imudp module loaded by rsyslog daemon
+  _**Symptoms:**_ The following message can be seen in the journal
+  ```
+  rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
+  ```
+------
+- **I95-32298** KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down"
+------
+- **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled
+------
+- **I95-33594** Changing the `neighbor-as` of an existing BGP neighbor prevents it from connecting
+
+  Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the 128T or by removing and recreating the BGP configuration
+------
+- **I95-33989** Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`
+
+  _**Symptom:**_ The following can be seen in the PCLI output:
+  ```
+  ✖ Validating...
+  % Error: Candidate configuration is invalid:
+  1. A request of type validate is already in progress. The first request was started 13 seconds ago
+  ```
+  Until the system is upgraded to 4.3.9, this issue will resolve itself after the background tasks have completed
+------
+- **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server
+
+  _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable
+------
+- **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend
+------
+- **I95-35544** LTE SIM number (ICCID) is absent from the output of `show device interface` on LTE interfaces
+------
+- **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted Linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
+
+  Until the system is upgraded to 128T 4.3.9 and 128T-installer 2.6.1, the issue can be mitigated by running the following Linux commands:
+  ```
+  rm -f /var/lib/rpm/__*
+  rpm --rebuilddb
+  ```
+------
+- **I95-35793** Large responses from a DNS server may be rejected by 128T. When this happens, provisioned FQDNs remain unresolved.
+
+  _**Conditions:**_ The following log message can be seen:
+  ```
+  Jun 16 06:09:25.272 [DNS |DNSR] WARN (dnsManagerTP ) Failed to parse Ipv4Host (1) response for edge-global.plcm.vc: Message too long
+  ```
+------
+- **I95-35799** When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions
+------
+- **I95-35933** `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces
+------
+- **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration
+------
+- **I95-36012** `show device-interface` displays incorrect values for speed and duplex for LTE interfaces
+------
+- **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
+------
+- **I95-36149** Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault
+------
+- **I95-36246** IMSI and MSISDN are absent from the output from `show platform` on systems with LTE interfaces
+------
+- **I95-36283** The 128T router asset state is stuck on its current state
+
+  _**Conditions:**_ The following log message can be seen:
+  ```
+  TypeError: heap argument must be a list
+  ```
+  Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
+------
+- **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs
+------
+- **I95-36394** Auto-generated conductor service names that include a '.' will fail to commit configuration
+
+  _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
+------
+- **I95-36404** highway process fails to start on Ubuntu distributions
+
+  _**Symptom:**_ 128T running in a container will fail to initialize when the container is running on Ubuntu distributions. The following can be seen within `highway.log`
+  ```
+  Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
+  ```
+------
+- **I95-36574** After a HA interface fail over, a session collision can occur between the recovered flow and an existing reverse flow. The recovered flow does not get setup properly and can cause the highway process to fault upon session expiry.
+
+  _**Conditions:**_ Symmetrical services must be configured that match both forward and reverse flows
+------
+- **I95-36632** Empty office365 metadata file results in HTTP 400 bad request error
+------
+- **I95-36638** Polling SNMP OID 1.3.6.1.2.1.1.2 returns `NET-SNMP-TC::linux` instead of `T128-MIB::t128NetworkingPlatform (1.3.6.1.4.1.45956.1)`
+
+## Release 4.3.8
+
+:::info
+The minimum 128T-installer version of 2.6.0 is required for the 4.3.8 update. (rpm package: 128T-installer-2.6.0-1.x86_64.rpm)
+:::
+
+### Issues Fixed
+
+- **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
+------
+- **I95-35313** Startup delay of 128T when many peer paths exist
+------
+- **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T
+
+  Until the system is upgraded to 4.3.8, this issue can be mitigated by restarting the 128T.
+------
+- **I95-35563** Startup race condition can lead to LTE initialization failure
+
+  Until the system is upgraded to 4.3.8, this issue can be mitigated by restarting the 128T.
+------
+- **I95-35636** SNMP query for ifIndex of interface incorrectly returns
+  ```
+  No Such Object available on this agent at this OID
+  ```
+------
+- **I95-35655** New metrics - RSRP, RSRQ, Active Band and Active Channel were added to (the existing) show device-interface PCLI command and lte-state script output for LTE interface.
+------
+- **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment
+------
+- **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route
+------
+- **I95-35781** Rare race condition during `rotate logs` PCLI command may cause applications to fault
+------
+- **I95-35866** Addressed latest CVEs (this requires the latest installer see I95-36033 below)
+------
+- **I95-35885** Systems with two LTE interfaces would appear to have three LTE interfaces in Linux
+
+  Until the system is upgraded to 4.3.8, the issue can be mitigated by using the interface `wwp0s21u3i8`. The interface `wwp0s21u3i10` should not be used and will no longer be present after upgrading to 4.3.8.
+
+## Release 4.3.7
+
+### Issues Fixed
+
+- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
+------
+- **I95-26276** Enabled OSPF authentication in configuration
+------
+- **I95-30610** RTP is not properly classified for subsequent 128T routers
+------
+- **I95-35172** Adding DHCP server instances requires a software restart
+------
+- **I95-35401** SVR traffic would be dropped as a result of tenant members source type being incorrectly classified.
+
+  _**Conditions:**_ When the interface has an adjacency and tenant members are applied via neighborhoods and/or child tenants. The tenant table will show the source type as `PUBLIC` for that entry when it should show as `HYBRID`, resulting in traffic being dropped.
+------
+- **I95-35602** The command `show network-interface` may result in a `Unhandled TypeError` in the PCLI when a PPPoE interface is down
+------
+- **I95-35633** The GUI performance has been improved for configuration edit operations
+------
+- **I95-35644** Added support for `bgp route-reflector allow-outbound-policy`
+
+## Release 4.3.6
+
+### Issues Fixed
+
+- **I95-35377** Additional metrics added to realize active traffic engineering behavior
+------
+- **I95-35394** salt-minion may fault during an upgrade or rollback operation. This issue does not impact the upgrade or rollback operations.
+
+
+## Release 4.3.5
+
+### Issues Fixed
+
+- **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
+
+  _**Conditions:**_ DHCP server is not running. The following log message can be seen:
+  ```
+init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Running command ['/usr/sbin/ip', 'netns', 'set', 'dhcp-server-ns-1', '1073742075']
+init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip netns set dhcp-server-ns-1 1073742075" failed: RTNETLINK answers: No space left on device
+  ```
+  Until the system is upgraded to 4.3.5, this issue can be mitigated by restarting the 128T.
+------
+- **I95-34053** When configured to use LDAP, locally created user credentials and access are not honored for those users that already exist in LDAP.
+
+  Until the system is upgraded to 4.3.5, this issue can be mitigated by restarting the 128T.
+------
+- **I95-34629** During the initial window of a router connecting to its HA peer, or its connection to the Conductor while a connection outage occurs, configuration commits may fail silently. Candidate configuration will remain uncommitted.
+
+  Until the system is upgraded to 4.3.5, this issue can be mitigated by attempting the commit again.
+------
+- **I95-34716** Fixed a rare race condition crash on startup of the Automated Provisioner
+------
+- **I95-34744** highway process can fault when a DHCP server assigns the IP address 0.0.0.0 to the 128T router
+------
+- **I95-34790** Dual node HA routers with large numbers of peer paths (>500) may see some flows get blackholed after a node failover occurs.
+------
+- **I95-34842** The configuration attribute `authority > router > node > device-interface > vrrp` has been removed from configuration in the GUI as the capability does not exist
+------
+- **I95-34961** Using a QuickStart file to provision a router fails if the ZScaler plugin is installed on the Conductor.
+------
+- **I95-34968** Self-signed certificates created during initial installation of 128T are invalid
+------
+- **I95-35035** Significantly improved the performance of populating the FIB from configuration and dynamic routes
+------
+- **I95-35062** Non-permanent LTE failures are incorrectly displayed as a failure context in `show device-interface`
+------
+- **I95-35082** When a 128T is deployed behind a NAT firewall and has path MTU (PMTU) discovery enabled, SVR sessions established for outbound-only connections are set up with the configured interface MTU, not the discovered PMTU.
+------
+- **I95-35093** `show asset <asset-id>` incorrectly continues to show `Currently Upgrading` version after completion of an upgrade.
+------
+- **I95-35099** Removing a 128T user does not remove its Linux credentials, allowing the user to still login to Linux.
+
+  Until the system is upgraded to 4.3.5, this issue can be mitigated by disabling rather than deleting the user.
+------
+- **I95-35115** Aggregate bandwidth charts may not display data accurately
+------
+- **I95-35155** `show device-interface` output did not include duplex mode
+------
+- **I95-35188** Adding a tenant or changing the order of tenants in the configuration can lead to traffic being dropped upon session recovery
+
+  _**Conditions:**_ Configuration change is made to tenants while one node of a HA pair is offline.  After the configuration change, the node that was offline takes over as the primary for existing sessions.
+
+  Until the system is upgraded to 4.3.5, if the tenant configuration has changed and a HA node has taken over as active, the traffic that is being dropped can be cleared by performing a simultaneous reboot of both nodes.
+------
+- **I95-35205** LTE interfaces do not honor MTU settings set in the network
+
+  Until the system is upgraded to 4.3.5, the learned MTU value can be directly set within Linux
+------
+- **I95-35303** `persistentDataManager` process can fault on shutdown of 128T
+------
+- **I95-35323** BGP over SVR does not work if both sides of the routers have VLAN tagged interfaces
+
+  Until the system is upgraded to 4.3.5, configure the outgoing SVR interfaces without vlans. At least one side of the BGP over SVR routers should not utilize VLAN tagging.
+------
+- **I95-35395** Enabled BGP router reflector `cluster-id` in configuration
+
+## Release 4.3.4
+
+### Issues Fixed
+
+- **I95-35138** A vulnerability in the SaltStack code allows for unauthenticated salt-minions to execute any script on the salt-master.
+  :::info
+  This fix is required only on the 128T Conductor.
+  :::
+------
+- **I95-31618** Upon initial plugin installation on a 128T, configuration for the plugin is not honored.
+
+  Until the system is upgraded to 4.3.4, this issue can be mitigated by committing the configuration again.
+
 ## Release 4.3.3
 
 ### New Features and Improvements
@@ -120,9 +365,11 @@ sidebar_label: 4.3
   Until the system is upgraded to 4.3.2, this issue can be mitigated by configuring a `management-vector` on the `network-interface`s that exist within the `device-interface`.
 ------
 - **I95-33759** GUI DHCP Client Lease table reports no leases while DHCP server has active client leases.
+
   Until the system is upgraded to 4.3.2, this issue can be mitigated by using the PCLI version of the same command: `show network-interface application node <node-name> name <interface-name>`
 ------
 - **I95-33789** Forwarding core count incorrectly reported in GUI under Router -> Node -> Platform Information
+
   Until the system is upgraded to 4.3.2, this issue can be mitigated by using the PCLI version of the same command: `show platform cpu `
 ------
 - **I95-33793** SVR fails to recover session on multi-hop inter-node failure
@@ -249,7 +496,6 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
 - **I95-34058, I95-34064** Session setup fails for outbound only when first packet exceeds MTU
 
-
 ## Release 4.3.0
 
 ### New Features and Improvements
@@ -295,7 +541,6 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 - **I95-32145** LTE Certification Enhancements
 
 - **I95-32456** Reverse Packet ARP Handling
-
 
 ### Issues Fixed
 
@@ -372,6 +617,8 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
 If upgrading from 4.1 consult the [4.2.3 release notes Special Considerations](release_notes_128t_4.2.md#special-considerations) section
 
+- **I95-36525** TLS 1.0 is no longer supported
+
 ## Caveats
 
 - **I95-29592** Conductor UI and/or PCLI may not update the asset software version correctly
@@ -400,3 +647,12 @@ systemctl restart salt-minion
   _**Conditions:**_ When nodes of a router or conductor pair are on different versions (for routers this is the short transition where the first node is upgraded and the second node is in the process of upgrading but still operational)
 
   _**Corrective Action:**_ NA, when both nodes are operational and on the 4.3 version the stats information on the router dialog will be provided. Stats can still be retrieved from the PCLI of the node while it is running.
+
+------
+- **I95-36033** 4.3.8 does not enforce the 128T-installer-2.6.0 version that deprecates rpms for CVE corrections
+
+  _**Syptom:**_ Deprecated RPM's installed by base CentOS that may have CVE corrections will not be removed.
+
+  _**Conditions:**_ When the 128T-installer is not updated to 2.6.0.
+
+  _**Corrective Action:**_ If manually installing, ensure the system is updated with the latest 128T-installer package. If upgrading via Conductor, ensure the conductor has access to the latest 128T-installer package.

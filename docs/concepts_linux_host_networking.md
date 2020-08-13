@@ -10,7 +10,7 @@ When running on the host platform, the 128T has its own routing table in additio
 This document applies specifically to 128T routers. The 128T conductor does not require any special configuration to affect Linux host networking, since it does not forward packets using any technique other than Linux host networking to begin with.
 
 ## Basic Configuration
-To forward traffic between Linux and 128T, we will use an interface type known as a _Kernel Network Interface_, or KNI. This is used to connect userspace applications with kernel networking.
+To forward traffic between Linux and 128T, we will use an interface type known as a [_Kernel Network Interface_, or KNI](concepts_kni.md). This is used to connect userspace applications with kernel networking.
 
 By default, the 128T creates a KNI interface ("kni254") that is used to route packets to Linux as part of its _host-service_ configuration. (A host-service is configured on a network-interface, and is used to forward various traffic types such as SSH and HTTP/HTTPS to Linux applications.) This kni254 interface is, by default, only used for inbound traffic (from Linux to the 128T) for host-services. By following the steps below, we can leverage the kni254 interface to send outbound traffic to 128T.
 
@@ -58,6 +58,11 @@ You must ensure you are in a position to access the Linux subsystem on a 128T ro
 sudo echo 0.0.0.0/0 via 169.254.127.126 dev kni254 metric 200 > /etc/sysconfig/network-scripts/route-kni254
   ```
 3. Start 128T software: `sudo systemctl start 128T`
+
+
+:::info
+The [loopback-static-route plugin](plugin_loopback_static_routes.md#make-kni254-the-default-route-in-linux) can be installed and enabled on the 128T router to dynamically manage Linux routes.
+:::
 
 ### KNI VLAN
 A `host` device-interface can be configured with a vlan-enabled network interface.  Doing so creates a unique linux interface that is managed for each network-interface, but only one underlying KNI will be created on the system. If there is no non-vlan network-interface on the device-interface, an implicit underlying “base” interface is instantiated for the KNI, and linux VLAN interfaces are stacked on it.

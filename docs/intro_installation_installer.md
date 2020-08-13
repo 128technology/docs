@@ -5,7 +5,7 @@ sidebar_label: Installing 128T
 
 ## Install Using 128T-installer
 
-The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the Internet to retrieve software applications and libraries. Please ensure the system can reach the public Internet prior to commencing. For offline installation options, contact 128 Technology, Inc. or visit Interchange, our user community.
+The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions on installing from an ISO](intro_installation_bootable_media.md).
 
 1. Launch a Linux command prompt.
 2. Enter the command to install the Yum repository that corresponds to the 128T software installer.
@@ -34,9 +34,9 @@ sudo install128t
 6. When prompted, open the client certificate you received as part of your 128T purchase. Copy the entire contents, _including the Certificate and Private key information_, and paste it into the Client Certificate window of the install wizard.<br/>The content must begin with the line `-----BEGIN CERTIFICATE-----` and end with `-----END RSA PRIVATE KEY-----`.
 
 7. Press the **tab** key after pasting the client certificate to select the **OK** button, and hit **enter**.
-    
+  
   > This is performed more easily when accessing the target machine over SSH using terminal software, rather than interacting with the target machine directly. Alternatively, you can also store certificate as /etc/pki/128technology/release.pem to avoid having to copy and paste.
-    
+  
 8. From the Version Selection window, select your desired version from the list and select **OK** to continue.<br/>**Result:** the installation begins. This process may take several minutes to download and install.
 9. Press the **enter** key to select **OK** and close the installer. **Result:** upon completing the installation, the installer automatically launches the Initializer.
 

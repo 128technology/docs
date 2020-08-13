@@ -1,36 +1,23 @@
 ---
 title: GRE Plugin
-sidebar_lable: GRE
+sidebar_label: GRE
 ---
 
 The 128T GRE plugin can be used for creating IPv4 GRE tunnels between a 128T router and a remote GRE tunnel destination. For services such as Zscaler, this provides better throughput compared to other tunneling mechanisms.
 
-## Installation ##
-
-The 128T GRE plugin can be obtained from the official 128T software repository. The following versions are available for corresponding 128T software version.
-
-| GRE Plugin | 128T |
-| --- | --- |
-| 128T-gre-1.0.4 | 128T >= 3.2.8; 128T < 4.3.0 |
-| 128T-gre-2.0.2 | 128T >= 4.3.0 |
-
-:::important
-It is recommended to use the conductor GUI > Plugins page for installing plugins. This allows the system to select the correct version of plugin based on the 128T version.
+:::note
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
-:::important
-After installing the plugin, the 128T service on the conductor should be restarted for the changes to take effect.
-:::
-
-## Configuration ##
+## Configuration
 The GRE plugin can be configured on an individual router. In order to configure the tunnel, it is important to collect the following information up-front:
 - Remote tunnel information
 - Ingress traffic to be sent through the tunnel
 - WAN interfaces to be used for sending the tunnel traffic
 
-### Remote GRE tunnel information ###
+### Remote GRE tunnel information
 
-#### Tunnel information ####
+#### Tunnel information
 First and foremost, it is important to identify the address and other probe parameter for the remote GRE endpoints.
 
 ```
@@ -48,12 +35,12 @@ config
 
                 destination   pri-tunnel
                     name  pri-tunnel
-                    host  20.20.20.13
+                    host  192.168.20.13
                 exit
 
                 destination   sec-tunnel
                     name  sec-tunnel
-                    host  30.30.30.14
+                    host  192.168.30.14
 
                     icmp-keep-alive
                         link-test-interval  10
@@ -78,7 +65,7 @@ admin@node1.conductor1#
 
 In the above example, you will notice there are two tunnels configured on the router. Each `destination` represents a single tunnel interface and allows the user to configure an IPv4 address for the destination. The `enabled-node` configuration allows the user to control which 128T router node will be operating which tunnel. In addition the `enabled-node > tenant` can be used to apply a specific tenant for the GRE tunnel traffic. For each destination on each enabled-node, the 128T router creates a unique KNI interface and the configured tenant is applied to this interface.
 
-#### Tunnel ICMP health check parameters ####
+### Tunnel ICMP health check parameters
 The GRE tunnels do not have an inherent mechanism to detect the availability of remote peers.  As a result, the GRE plugin allows the user to configure ICMP probes to the destination. The configuration is enabled by default with the following settings:
 
 ```
@@ -96,7 +83,40 @@ Every `link-test-interval` an icmp check is performed to determine the availabil
 
 In the above example, the two tunnels `pri-tunnel` and `sec-tunnel` create two additional KNI interfaces called `gre-0` and `gre-1` respectively. When a tunnel is determined to be non-responsive, the corresponding `gre-x` interface is brought down. For example, in the above config, when the `pri-tunnel` goes down, the corresponding `gre-0` interface is brought down as well. This allows for traffic to fail over to a secondary tunnel if available. More details on this will be explained later in the document.
 
-### 128T services to transport over the tunnel ###
+#### ICMP health check to private address
+
+##### Version History
+
+| Release      | Modification                                    |
+| ------------ | ----------------------------------------------- |
+| 1.1.0, 2.1.0 | `icmp-keep-alive > address-type` was introduced |
+
+Some GRE tunnel providers require the endpoint to ping an internal private address to detect the tunnel liveliness. The `icmp-keep-alive > address-type` can be used to configure a private address for keep-alive detection. Consider the following example:
+
+```console
+gre
+    enabled         true
+    plugin-network  192.168.10.0/28
+
+    destination     pri-tunnel
+        name             pri-tunnel
+        host             192.168.20.13
+
+        icmp-keep-alive
+            address-type  custom
+            address       192.168.10.13
+        exit
+    exit
+exit
+```
+
+In the above configuration, the `address-type > custom` is used to set a private icmp-address of `192.168.10.13`. In doing so, the icmp-health check algorithm described [above](#tunnelicmp_health_check_parameters) will be run on the private address of `192.168.10.13` instead of the default `destination > host`. The behavior in terms of declaring the tunnel as down and continuous monitoring remains the same.
+
+:::important
+When using a private ICMP address, its important to also use an in-subnet address for the generated KNIs. This can be accomplished by configuring the appropriate `plugin-network` as illustrated in the example above.
+:::
+
+### 128T services to transport over the tunnel
 Next step is to identify the the prefix or the subnet to be transported over the tunnel. In some cases, it might be desirable to transport all internet traffic through the tunnel, so the prefix could be as simple as 0.0.0.0/0. This can be done by capturing the prefix in a 128T service and setting the next-hop as the `gre-x` interfaces. As noted in the [previous section](#tunnelicmp_health_check_parameters), each destination on a given node corresponds to a `gre-x` inteface. By configuring the next-hop as the appropriate GRE interfaces, it allows the incoming traffic to be service-function chained to a GRE tunnel towards a WAN interface.
 
 ```
@@ -108,7 +128,7 @@ config
 
         service  lan-svc
             name           lan-svc
-            address        10.10.10.0/24
+            address        192.168.10.0/24
 
             access-policy  lan
                 source  lan
@@ -166,9 +186,9 @@ config
 exit
 ```
 
-In the example above, all the `lan` tenant traffic in the `10.10.10.0/24` subnet will be sent to the `gre-0` and `gre-1` network interfaces. These `gre-x-intf` are auto generated by the conductor and correspond to the configured destination. In the above config, when the `gre-0` interface will be used as primary target for lan subnet while that tunnel is up. If the `pri-tunnel` goes down, all new sessions will automatically be routed to the `sec-tunnel` via the `gre-1` interface.
+In the example above, all the `lan` tenant traffic in the `192.168.10.0/24` subnet will be sent to the `gre-0` and `gre-1` network interfaces. These `gre-x-intf` are auto generated by the conductor and correspond to the configured destination. In the above config, when the `gre-0` interface will be used as primary target for lan subnet while that tunnel is up. If the `pri-tunnel` goes down, all new sessions will automatically be routed to the `sec-tunnel` via the `gre-1` interface.
 
-### WAN interfaces for sending the tunnel packets ###
+### WAN interfaces for sending the tunnel packets
 Another piece of configuration that is auto-generated is the service corresponding to the two configured tunnels. In the above example, the two tunnels `pri-tunnel` and `sec-tunnel` will trigger two auto-generated services, one for each of the destination. The generated service will look something like this:
 
 ```
@@ -193,7 +213,7 @@ config
             transport             icmp
                 protocol  icmp
             exit
-            address               20.20.20.13
+            address               192.168.20.13
 
             access-policy         _internal_
                 source      _internal_
@@ -226,7 +246,7 @@ config
             transport             icmp
                 protocol  icmp
             exit
-            address               30.30.30.14
+            address               192.168.30.14
 
             access-policy         _internal_
                 source      _internal_
@@ -289,7 +309,7 @@ config
 exit
 ```
 
-#### Static Source NAT considerations ####
+#### Static Source NAT considerations
 :::note
 This section can be skipped for WAN interface types of PPPoE and LTE
 :::
@@ -315,8 +335,8 @@ config
             nat-pool  gre-dpdk2-nat-pool
                 name          gre-dpdk2-nat-pool
 
-                address-pool  20.20.20.12/32
-                    address      20.20.20.12/32
+                address-pool  192.168.20.12/32
+                    address      192.168.20.12/32
                     tenant-name  _internal_
                 exit
             exit
@@ -337,8 +357,8 @@ config
             nat-pool  gre-dpdk3-nat-pool
                 name          gre-dpdk3-nat-pool
 
-                address-pool  30.30.30.12/32
-                    address      30.30.30.12/32
+                address-pool  192.168.30.12/32
+                    address      192.168.30.12/32
                     tenant-name  _internal_
                 exit
             exit
@@ -347,9 +367,33 @@ config
 exit
 ```
 
-## Debugging & Troubleshooting ##
+### Other configuration
 
-### Config Generation ###
+#### MSS Clamping
+##### Version History
+
+| Release      | Modification                   |
+| ------------ | ------------------------------ |
+| 1.1.0, 2.1.0 | `enforced-mss` was introduced  |
+
+The TCP MSS (maximum segment size) is the amount of data that the interface is willing to accept in a single TCP segment. This option is negotiated by the client and server based on their local environments. However, tunneling adds extra overhead in terms of packet bytes so its important to be able to adjust the MSS (maximum segment-size) for TCP connections by the routers. By default, the `enforced-mss` is set to be `path-mtu` which allows us to automatically adjust the MSS based on the MTU of the tunnel interface. In addition, user can override the value to a static number as shown in the example below.
+
+```console
+gre
+    enabled         true
+    plugin-network  192.168.10.0/28
+
+    destination     dut3-tunnel
+        name             dut3-tunnel
+        host             192.168.20.13
+        enforced-mss     1300
+    exit
+exit
+```
+
+## Debugging & Troubleshooting
+
+### Config Generation
 When the plugin is installed on the conductor, each commit triggers two scripts called `generate_confguration` and `generate_pillar` to auto-generate KNI, services etc and to generate pillar data for each router. Please check the following locations for debugging information.
 
 - Logs for the config and pillar generation for each commit can be found here
@@ -358,7 +402,7 @@ When the plugin is installed on the conductor, each commit triggers two scripts 
 /var/lib/128technology/plugins/pillar/gre/<router>.sls
 ```
 
-### GRE Tunnel not working on the router ###
+### GRE Tunnel not working on the router
 When the config and pillar data are successfully generated, a `t128-setup-gre` RPM is installed on the router itself. As part of this process, a script called `handle_gre_config` is executed which will create all the necessary config etc on the running system.
 
 - Logs for the config generation on the router can be found here
@@ -380,7 +424,7 @@ journalctl -t /monitoring_script.par -t /init.par
 ...
 
 4: pri-tunnel-t0@NONE: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1476 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/gre 169.254.132.2 peer 20.20.20.13
+    link/gre 169.254.132.2 peer 192.168.20.13
     inet6 fe80::5efe:a9fe:8402/64 scope link
        valid_lft forever preferred_lft forever
 108: pri-tunnel: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
@@ -403,7 +447,7 @@ journalctl -t /monitoring_script.par -t /init.par
 # ip netns pri-tunnel ip route show table all
 default via 169.254.132.9 dev gre-0 table 128
 default dev pri-tunnel-t0 scope link
-20.20.20.13 via 169.254.132.1 dev pri-tunnel
+192.168.20.13 via 169.254.132.1 dev pri-tunnel
 169.254.0.0/16 dev pri-tunnel scope link metric 1108
 169.254.0.0/16 dev gre-0 scope link metric 1110
 169.254.132.0/30 dev pri-tunnel proto kernel scope link src 169.254.132.2
@@ -434,7 +478,7 @@ Chain OUTPUT (policy ACCEPT 14014 packets, 505K bytes)
  pkts bytes target     prot opt in     out     source               destination
 ```
 
-### Tunnel operation ###
+### Tunnel operation
 The status of the tunnel and other data is available via the auto generated tunnel interfaces. Here's an example:
 
 ```
@@ -498,4 +542,4 @@ Tue 2020-03-24 03:22:37 UTC
 Completed in 0.07 seconds
 ```
 
-In addition, a `ping-monitor` service is started for each configured tunnel, the `systemctl status ping-monitor@<tunnel-name>` can be used to query the status of the ping service.
+In addition, a `ping-monitor` service is started for each configured tunnel, the `systemctl status ping-monitor-namespace@<tunnel-name>` can be used to query the status of the ping service.

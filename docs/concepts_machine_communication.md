@@ -34,9 +34,9 @@ Peering 128T routers requires a successful exchange of BFD packets in order to i
 :::
 
 ### BFD (Peer Path Detection)
-| Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
-| ------------- | ---------- | ---------------------- | ---------------------- | ---------------- | ------------------------------------------------------------ |
-| bidirectional | 1280/UDP   | 87                     | 89                     | 1s               | Frequency negotiated between devices by configuring `desired-tx-interval` and `required-min-rx-interval` settings. |
+| Direction     | Port/Proto | Default Interval | Notes                                                        |
+| ------------- | ---------- | ---------------- | ------------------------------------------------------------ |
+| bidirectional | 1280/UDP   | 1s               | Frequency negotiated between devices by configuring `desired-tx-interval` and `required-min-rx-interval` settings. Client and server payloads are variable length, typically greater than 90 bytes. This is due to the presence of peer-name. |
 
 [BFD](https://en.wikipedia.org/wiki/Bidirectional_Forwarding_Detection), or Bidirectional Forwarding Detection (as defined in [RFC 5880](https://tools.ietf.org/html/rfc5880)), is exchanged between 128T routers to detect SVR path availability. I.e., the successful, and continued exchange of BFD packets is a prerequisite for choosing that path to carry SVR traffic. For peer path detection, 128T uses the _asynchronous mode_ of BFD.
 
@@ -45,9 +45,9 @@ The peering status between 128T devices is viewable using the PCLI command `show
 The default timer values for BFD traffic are adequate for deployments where head end routers are managing 1,000 aggregate peer paths. For larger deployments, these values should be dilated.
 
 ### BFD (Path Quality)
-| Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
-| ------------- | ---------- | ---------------------- | ---------------------- | ---------------- | ------------------------------------------------------------ |
-| bidirectional | 1280/UDP   | 840                    | 880                    | 10s              | A ten (10) packet burst sent between 128T routers on each peer path. |
+| Direction     | Port/Proto | Default Interval | Notes                                                        |
+| ------------- | ---------- | ---------------- | ------------------------------------------------------------ |
+| bidirectional | 1280/UDP   | 10s              | A ten (10) packet burst sent between 128T routers on each peer path. Client and server payloads are variable length, typically greater than 90 bytes. This is due to the presence of peer-name.|
 
 Each 128T router will measure the path quality to its peer using the _echo mode_ of BFD. It does so by sending a burst of ten packets every ten seconds over each peer path. These packets are echoed back from the remote 128T instance and returned to the point of origin. This allows the transmitter to accurately measure round trip time, and calculate packet loss and jitter (variability in interpacket arrival times).
 
@@ -142,7 +142,7 @@ The status for the key exchange and rekeying process is shown in the output of t
 
 The asset keepalive messages are used to ensure persistent connectivity between a router's _minion_ and the corresponding _master_ running on its conductor(s). The asset's connection state is viewable using the `show assets` command within the PCLI on the conductor.
 
-### Shell `connect` 
+### Shell `connect`
 | Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval          | Notes                                                        |
 | ------------- | ---------- | ---------------------- | ---------------------- | ------------------------- | ------------------------------------------------------------ |
 | bidirectional | 930/TCP    | 104                    | 104                    | 20s (client), 5s (server) | Amount of data exchanged is largely dependent on administrator activity once connected to a remote router. |

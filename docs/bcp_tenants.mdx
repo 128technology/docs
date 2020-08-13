@@ -44,14 +44,14 @@ Should none of these result in a definitive determination on the tenant of the s
 <Flowchart
   chartCode={`
     st=>start: Packet Arrives
-    metadata=>condition: Packet has metadata?
-    int=>condition: Interface has a tenant?
-    nh=>condition: Neighborhood-based tenant?
-    tm=>operation: Tenant taken from metadata
-    ti=>operation: Tenant taken from interface
-    th=>operation: Tenant taken from neighborhood
-    global=>operation: Tenant assigned as "global"
-    e=>end: Proceed to FIB lookup
+      metadata=>condition: Packet has metadata?
+      int=>condition: Interface has a tenant?
+      nh=>condition: Neighborhood-based tenant?
+      tm=>operation: Tenant taken from metadata
+      ti=>operation: Tenant taken from interface
+      th=>operation: Tenant taken from neighborhood
+      global=>operation: Tenant assigned as "global"
+      e=>end: Proceed to FIB lookup
     st->metadata
     metadata(no)->int
     metadata(yes,right)->tm->e
@@ -72,8 +72,8 @@ Sun 2020-03-22 11:44:48 UTC
 
 Node: node1
 
-============ ========= ============== ================= ================== ================= 
- Device I/F   VLAN ID   Network I/F    Network I/F IP    Source IP Prefix   Tenant            
+============ ========= ============== ================= ================== =================
+ Device I/F   VLAN ID   Network I/F    Network I/F IP    Source IP Prefix   Tenant
 ============ ========= ============== ================= ================== =================
        eno1         0   internode      169.254.255.0     169.254.255.1/32   <fabric>
        eno2        10   lan10          10.20.20.1        0.0.0.0/0          pos.acme
@@ -100,7 +100,7 @@ Tenant hierarchies can have an unlimited number of tiers, although it is general
 
 Each tenant configured on a 128T conductor is propagated to all managed assets, irrespective of whether that router has any configuration (via interface definition or neighborhood definition) to assign that tenant to inbound traffic. This is because a 128T router can receive Secure Vector Routing (SVR) sessions from a peer, identifying the origin as belonging to a permissible tenant.
 
-For example, a branch router may segment its traffic into several, well-known tenants: employee workstations are in a tenant named `workstations.acme` and their VoIP phones are in a tenant named `voice.acme`. There are no employee workstations or VoIP phones at the corporate datacenter, but the head end router there needs to understand how to forward sessions for these traffic segments. Thus the head end is aware of the existence of these tenants for access control and traffic forwarding purposes.
+For example, a branch router may segment its traffic into several, well-known tenants: employee workstations are in a tenant named `workstations.acme` and their VoIP phones are in a tenant named `voice.acme`. There are no employee workstations or VoIP phones at the corporate data center, but the head end router there needs to understand how to forward sessions for these traffic segments. Thus the head end is aware of the existence of these tenants for access control and traffic forwarding purposes.
 
 ### Per-interface Tenancy
 
@@ -303,7 +303,7 @@ Node: node1
 
 #### The Internal Tenant
 
-The internal tenant (named `_internet_`), is arguably the most useful of all of the special tenants. It is immutably assigned to the built-in Kernel NIC Interface (KNI) named `kni254`, which is used for communication to and from the Linux host operating system on the platform on which the 128T software is running.
+The internal tenant (named `_internal_`), is arguably the most useful of all of the special tenants. It is immutably assigned to the built-in Kernel NIC Interface (KNI) named `kni254`, which is used for communication to and from the Linux host operating system on the platform on which the 128T software is running.
 
 By adding an `access-policy` allowing (or denying) `_internal_` on your service, you can selectively permit processes running in Linux outbound network access. This is commonplace for "host originated" traffic, such as DNS queries, outbound SSH connections, SNMP traps, syslog, etc. The `_internal_` tenant is also critical to the success of *Conductor Host Services*, described in our documentation; this is because the outbound `salt-minion` and NETCONF requests destined for the conductor are initiated within the Linux host operating system.
 

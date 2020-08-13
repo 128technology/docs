@@ -7,14 +7,25 @@ module.exports = {
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
-    disableDarkMode: true,
+    colorMode: {
+      // "light" | "dark"
+      defaultMode: 'light',
+
+      // Hides the switch in the navbar
+      // Useful if you want to support a single color mode
+      disableSwitch: true,
+
+      // Should we use the prefers-color-scheme media-query,
+      // using user system preferences, instead of the hardcoded defaultMode
+      respectPrefersColorScheme: false,
+    },
     navbar: {
-      title: '',
+      title: 'Technology',
       logo: {
         alt: '128 Technology Logo',
         src: 'img/128t_black.png',
       },
-      links: [
+      items: [
         {to: 'docs/intro_getting_started', label: 'Docs', position: 'right'},
         {href: 'https://community.128technology.com/home', label: 'Interchange', position: 'right'},
         {href: 'https://www.128technology.com/', label:'Company', position: 'right'},
@@ -27,6 +38,11 @@ module.exports = {
       apiKey: '1ee0f6866243c8e25883eee3ce0708ce',
       indexName: '128technology',
       algoliaOptions: {},
+    },
+    googleAnalytics: {
+      trackingID: 'UA-167298415-2',
+      // Optional fields.
+      anonymizeIP: true, // Should IPs be anonymized?
     },
   },
   presets: [
