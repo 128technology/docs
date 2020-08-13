@@ -7,9 +7,9 @@ There are several different high availability models possible with the 128T rout
 
 - An iBGP interface shared between the two devices in lieu of a "fabric" interface in the dual node deployment.
 - No `shared-phys-address` (and hence no shared interfaces) between the two devices. Interface protection in a dual router HA deployment is accomplished using traditional routing protocols (Layer 3) rather than IP/MAC takeover (Layer 2).
-- No state synchronization between the two devices (and hence no "HA link"). While this improves  overall performance for the routers (since there is no overhead incurred due to state synchronization), the implication is that there are some capabilities not supported in this design. See Unsupported Features, below.
+- No state synchronization between the two devices (and hence no "HA link"). While this improves overall performance for the routers (since there is no overhead incurred due to state synchronization), the implication is that there are some capabilities not supported in this design. See [Unsupported Features](#Unsupported-Features), below.
 
-Dual router high availability is recommended for data center designs where there will be a large volume of traffic, as this is where the performance savings of eliminating state synchronization are most notable.
+Dual router high availability is recommended for data center designs where there will be a large volume of traffic; the elimination of shared state synchronization yields a simpler design, benefitting critical infrastructure.
 
 ## Unsupported Features
 
@@ -25,7 +25,7 @@ For this reason, services that leverage a dual router HA pair must reference a `
 
 ## Design Overview
 
-Unlike a "traditional" dual node high availability design, in which two nodes compose a single router and use an out-of-band interface (the "sync interface") to synchronize state and a fabric interface to forward packets from one node to the other, the dual router trades these in for an inter-router iBGP connection for forwarding packets.
+Unlike a ["traditional" dual node high availability design](config_ha.md), in which two nodes compose a single router and use an out-of-band interface (the "sync interface") to synchronize state and a fabric interface to forward packets from one node to the other, the dual router trades these in for an inter-router iBGP connection for forwarding packets.
 
 :::note
 It is possible to configure multiple inter-router connections for added resiliency if there are spare physical connections available between the two routers.
@@ -33,7 +33,7 @@ It is possible to configure multiple inter-router connections for added resilien
 
 The sample high level topology we will discuss in this document is as follows:
 
-![dual-router-ha-diagrams](/Users/ptimmons/Downloads/dual-router-ha-diagrams.png)
+![dual-router-ha-diagrams](/img/config_dual-router-ha-diagrams.png)
 
 ### Notes about the Topology
 
@@ -43,8 +43,8 @@ In this sample exercise, each of the two routers (`routerA` and `routerB`) have 
 
 Unlike the dual node redundancy model, where the two devices collectively harbor a single instance of the `routingManager` process, routing within the dual router redundancy model must be accomplished "by hand;" i.e., discretely on each individual system. This consists of two components:
 
-1. Each router uses BGPoSVR to exchange routes with the other
-2. For services that use `peer`-type service-routes to reach another 128T instance, these service-routes will need to include the complementary router as an additional `next-peer`. I.e., each router in the HA pair will point to the `next-peer` 128T as well as a `next-peer` for one another
+1. Each router uses BGPoSVR to exchange routes with the other.
+2. For services that use `peer`-type service-routes to reach another 128T instance, these service-routes will need to include the complementary router as an additional `next-peer`. I.e., each router in the HA pair will point to the `next-peer` 128T as well as a `next-peer` for one another.
 
 ## Sample Configuration
 
@@ -199,7 +199,7 @@ exit
 
 ### Routing Configuration
 
-Unlike the *dual node high availability* design, in the dual router high availability design state is not synchronized between routers. Instead, the two devices exchange reachability information using iBGP; this is implemented on the 128T using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as seen in the sample configuration.
+Unlike the *dual node high availability* design, the dual router high availability design does not synchronize state between routers. Instead, the two devices exchange reachability information using iBGP; this is implemented on the 128T using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as seen in the sample configuration.
 
 In our sample configuration we use `device-interface eno1` as our iBGP link. The sample here uses [link-local IP addresses](https://en.wikipedia.org/wiki/Link-local_address), presuming that the two nodes are situated next to one another in the same data center. The `neighborhood dc1-interrouter` configuration, also provisioned on `routerB`, indicates to conductor that the two devices are mutually reachable. This hint (combined with the loopback interfaces) is what creates the peering relationship, the services, and the service-routes in support of BGPoSVR.
 
