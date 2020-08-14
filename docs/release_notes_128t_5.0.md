@@ -39,7 +39,11 @@ sidebar_label: 5.0
 ------
 - **I95-33395** Lazy PCLI
 ------
+- **I95-34217** Add explorer to graphiql to make finding fields easier
+------
 - **I95-34788** Add multiple config objects via REST
+------
+- **I95-34823** Add link to Docs on about page
 ------
 - **I95-35150** PCLI Clone Config
 ------
@@ -63,7 +67,55 @@ sidebar_label: 5.0
 ------
 - **I95-32016** If a router is not connected `show config out-of-sync` says it's out-of-date by 49 years
 ------
-- **I95-
+- **I95-33989** Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`
+
+  _**Symptom:**_ The following can be seen in the PCLI output:
+  ```
+  ✖ Validating...
+  % Error: Candidate configuration is invalid:
+  1. A request of type validate is already in progress. The first request was started 13 seconds ago
+  ```
+  Until the system is upgraded to 4.3.9, this issue will resolve itself after the background tasks have completed
+------
+- **I95-34065** Trim whitespace on config fields
+------
+- **I95-34078** Conductor Asset Status not correctly provided and should be like the routers asset status
+------
+- **I95-34448** Influx DB requires repair after flawed influx-sync
+------
+- **I95-34775** linux save-tech-suport does not output the archive location information and saved to current dir
+------
+- **I95-34908** GraphiQL: New sidebar throws 'getClientHeight' error
+------
+- **I95-35238** PCLI prompt shows incorrect location on key change
+------
+- **I95-35544** Integrated LTE device-interface output missing SIM number
+------
+- **I95-36212** Highstate after config not applied because previous highstate in progress
+------
+- **I95-36351** User without admin privileges cannot change its password
+------
+- **I95-36358** Software download hung for a long time after the installer update was performed.
+------
+- **I95-36404** sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory
+------
+- **I95-36416** GUI error when configuring dns-config
+------
+- **I95-36536** highway crash on session-capture delete
+------
+- **I95-36537** Selective Session Capture default should not be unlimited sesssions
+------
+- **I95-36554** In memory rate metrics reporting total rather than delta
+------
+- **I95-36591** Connected BGP route redistribution causes route cycling
+------
+- **I95-36608** Fix when statement for management
+------
+- **I95-36628** Bad checksum calculation when doing q-in-q
+------
+- **I95-36645** UI: Bytes converter does not handle values larger than Terabyte (TB)
+------
+- **I95-36646** SVR Savings: Page continues to refresh on its own, resets router selector on refresh
 
 ## Special Considerations
 
@@ -71,8 +123,14 @@ sidebar_label: 5.0
 ------
 - **I95-34983, I95-35892** Remove unused PCLI Commands
 ------
-- **I95-35609, I95-35761** Enhanced software delivery mechanism (Artifactory and changes to file naming)
+- **I95-35609** Enhanced software delivery mechanism (Artifactory and changes to file naming)
+------
+- **I95-35761** remove regex from PCLI search/replace
 ------
 - **I95-36096** "Safer" PCLI Logging
+------
+- **I95-36102** make `compare config` default to `compare config running candidate`
+------
+- **I95-36525** TLS 1.0 is no longer supported
 
 ## Caveats
