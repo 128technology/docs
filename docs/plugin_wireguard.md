@@ -234,9 +234,6 @@ See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on
 # p1
 Address = 10.10.10.2/32
 PrivateKey = kLbzfaAMMn1Nen3zZ+LreKCglYJuBgdvy/fFNgIZxHk=
-DNS = 1.1.1.1
-DNS = 8.8.8.8
-#PostUp = ip route add 96.93.108.35 via 192.168.128.1 dev office
 
 [Peer]
 # dc1
