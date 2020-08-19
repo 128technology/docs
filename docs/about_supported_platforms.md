@@ -95,7 +95,7 @@ When selecting a compatible platform for a 128T router, the following provides s
 | Large Branch Office | 16 Intel cores, single socket | 32 GB ECC | 240+ GB SLC SSD | 4+ Physical NICs compatible with DPDK |
 | Head-end or Data center | 8+ Intel Xeon cores, single socket | 32 GB ECC | 240+ GB SLC SSD | 5+ Physical NICs compatible with DPDK |
 
-##### BIOS Reccomendations
+#### Compatible Platform BIOS Reccomendations
 
 Platforms may have a varity of different features and capabilities configurable in the system BIOS. When running 128T on compatible platforms, the following a some BIOS settings reccomendations:
 * Hyperthreading disabled for platform operating as a router
