@@ -16,6 +16,7 @@ Dual router high availability is recommended for data center designs where there
 When deploying two nodes in a dual router high availability deployment, several features that rely on synchronized state between nodes are no longer available.
 
 - Source NAT. When source NAT is enabled, a system will allocate ephemeral ports on its egress interface as sessions leave the 128T router. Because there is no state synchronization between the two nodes in this deployment model, these ephemeral ports are not shared. Thus, if the active node fails and traffic starts transiting its counterpart, the source NAT allocation on the newly active system will be different. This will impact application flows.
+- Shared interfaces. A router node cannot perform gratuitous ARP takeover of an interface from another, distinct router node.
 
 ## Design Constraints
 
@@ -163,6 +164,7 @@ config
                 exit
     
                 routing-protocol  bgp
+                    description   "Dual router HA iBGP"
                     type       bgp
                     local-as   64512
                     router-id  169.254.2.1
@@ -202,6 +204,45 @@ exit
 Unlike the *dual node high availability* design, the dual router high availability design does not synchronize state between routers. Instead, the two devices exchange reachability information using iBGP; this is implemented on the 128T using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as seen in the sample configuration.
 
 In our sample configuration we use `device-interface eno1` as our iBGP link. The sample here uses [link-local IP addresses](https://en.wikipedia.org/wiki/Link-local_address), presuming that the two nodes are situated next to one another in the same data center. The `neighborhood dc1-interrouter` configuration, also provisioned on `routerB`, indicates to conductor that the two devices are mutually reachable. This hint (combined with the loopback interfaces) is what creates the peering relationship, the services, and the service-routes in support of BGPoSVR.
+
+This iBGP will also interact with other routing protocols to exchange reachability information with one another. For example, you may `redistribute ospf` into this iBGP, so that each device is aware of the other's reachability, as shown here:
+
+```
+                routing-protocol  bgp
+                    description   "Dual router HA iBGP"
+                    type          bgp
+                    local-as      64512
+                    router-id     169.254.2.1
+
+                    neighbor      169.254.2.2
+                        neighbor-address  169.254.2.2
+                        neighbor-as       64512
+                        shutdown          false
+
+                        timers
+                            connect-retry                   30
+                            minimum-advertisement-interval  30
+                        exit
+
+                        transport
+                            passive-mode   false
+
+                            local-address
+                                routing-interface  lo1
+                            exit
+                        exit
+
+                        address-family    ipv4-unicast
+                            afi-safi       ipv4-unicast
+                            next-hop-self  true
+                        exit
+                    exit
+
+                    redistribute  ospf
+                        protocol  ospf
+                    exit
+                exit
+```
 
 ### Service Policy Configuration
 
