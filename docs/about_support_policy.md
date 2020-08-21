@@ -1,6 +1,6 @@
 ---
 title: Product Software Lifecycle Support Policy
-sidebar_label: Support Policy
+sidebar_label: Software Support Policy
 description: 'This document defines the product lifecycle support policy for 128 Technology’s software products.  The policy includes both software maintenance, software support and end-of-life.'
 ---
 
