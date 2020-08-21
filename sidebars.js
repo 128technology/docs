@@ -51,6 +51,7 @@ module.exports = {
           "config_audit_log",
           "config_dhcp",
           "config_dns_proxy",
+          "config_dual_router_ha",
           "config_ldap",
           "config_ha",
           "config_management_over_forwarding",
