@@ -97,17 +97,17 @@ When selecting a compatible platform for a 128T router, the following provides s
 
 #### Compatible Platform BIOS Reccomendations
 
-Platforms may have a varity of different features and capabilities configurable in the system BIOS. When running 128T on compatible platforms, the following a some BIOS settings reccomendations:
+Platforms may have a varity of different features and capabilities configurable in the system BIOS. When running 128T on compatible platforms, the following are some BIOS settings reccomendations:
 * Hyperthreading disabled for platform operating as a router
 * Hyperthreading enabled for platform operating as a conductor
-* Lan bypass disabled
+* LAN bypass disabled
 * Wake on LAN disabled
 * Date time format: UTC format / GMT time zone
 * Power on setting: always on
 * Setup prompt timeout value: 3 seconds
-* Bboot mode: do not change manufacturer's settings (Legacy or UEFI accepted)
+* Boot mode: do not change manufacturer's settings (Legacy or UEFI accepted)
 * Boot order: HDD, USB, PXE
-* Watchdog time: enabled
+* Watchdog timer: enabled
 * Power profile: maximum performance
 * System version, release date, manufacturer's part number, and serial number set in DMI table
 
@@ -127,7 +127,7 @@ These are the minimum platform specifications for running the 128T Networking Pl
 * Hyperthreading disabled
 
 :::note
-Multi-socket platforms are not compatible for a router.
+Multi-socket platforms are not compatible with the 128T software when run as a router.
 :::
 
 ### Conductor
