@@ -478,3 +478,12 @@ The 128T supports four path quality metrics in its service-policy, all of which 
 The MOS value for a given path is a composite metric, computed based on loss, latency and jitter as its factors.
 :::
 
+### Transport State Enforcement
+
+Within the service-policy configuration is the [transport-state-enforcement](config_reference_guide.md#service-policy) parameter, which governs the behavior of the 128T's TCP state machine for processing inbound TCP packets. As a stateful networking device, the 128T's default behavior is to reject any mid-flow TCP packets (i.e., packets without the SYN flag set) unless it – or its paired node in a dual node HA router – participated in the TCP three-way handshake for that session. There are deployments where this behavior may be undesirable. 
+
+For example, when an environment includes systems that are deployed in a [*dual router HA*](config_dual_router_ha.md) configuration, any services used to send traffic to or from the dual router HA must reference a service-policy that has `transport-state-enforcement` set to `allow`.
+
+This is because the dual router HA deployment model specifically does not share information between the 128T instances comprising the HA pair; thus, a router may receive mid-flow TCP packets if its counterpart fails (or if routing converges to the other node for any reason, etc.). Without access to any shared state about the in-progress TCP session, if `transport-state-enforcement` is left to its default value, this TCP session would get rejected by the router.
+
+It is also reasonable to consider `transport-state-enforcement` for 128T instances deployed as transit routers. That is, when a router – even one deployed as a dual node HA pair – could receive traffic in the event of a failure somewhere else in the network. Consider a case where a branch office has two possible data centers it could leverage when sending traffic; if the primary data center becomes unreachable, then traffic may flow to the alternate data center, including packets associated with existing TCP sessions. Generally, for catastrophic failures such as disaster recovery sites, it is not unreasonable to expect that the network will "hang up" on existing TCP sessions to instigate a reconnection attempt by the client. (In fact, it often turns out to be *beneficial* to have the client(s) reconnect, to ensure consistency with application delivery, DPI, etc. at the new data center.)
