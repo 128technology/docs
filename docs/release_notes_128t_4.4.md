@@ -12,13 +12,13 @@ sidebar_label: 4.4
   rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
   ```
 ------
-- **I95-32298** KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down"
+- **I95-32594** Validation allows for mismatched adjacency security-policy with peer network-interface security-policy for cases where multiple network interfaces in a router have the same IP Address. Only the first one is considered for matching inter-router-security policy between the network interface and peer adjacency.
 ------
 - **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled
 ------
 - **I95-33594** Changing the `neighbor-as` of an existing BGP neighbor prevents it from connecting
 
-  Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the 128T or by removing and recreating the BGP configuration
+  Until the system is upgraded to 4.4.2, this issue can be mitigated by restarting the 128T or by removing and recreating the BGP configuration
 ------
 - **I95-33989** Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`
 
@@ -28,11 +28,15 @@ sidebar_label: 4.4
   % Error: Candidate configuration is invalid:
   1. A request of type validate is already in progress. The first request was started 13 seconds ago
   ```
-  Until the system is upgraded to 4.3.9, this issue will resolve itself after the background tasks have completed
+  Until the system is upgraded to 4.4.2, this issue will resolve itself after the background tasks have completed
 ------
 - **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server
 
   _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable
+------
+- **I95-35193** Performing a download of software may fail
+
+  _**Conditions**_ 128T connection to the conductor is disconnected or restarted
 ------
 - **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend
 ------
@@ -40,7 +44,7 @@ sidebar_label: 4.4
 ------
 - **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted Linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
 
-  Until the system is upgraded to 128T 4.3.9 and 128T-installer 2.6.1, the issue can be mitigated by running the following Linux commands:
+  Until the system is upgraded to 128T 4.4.2 and 128T-installer 2.6.1, the issue can be mitigated by running the following Linux commands:
   ```
   rm -f /var/lib/rpm/__*
   rpm --rebuilddb
@@ -67,13 +71,27 @@ sidebar_label: 4.4
 ------
 - **I95-36246** IMSI and MSISDN are absent from the output from `show platform` on systems with LTE interfaces
 ------
+- **I95-36182** systemd network service may be marked as failed on reboot if KNIs were configured. This issue is cosmetic in nature and does not produce any side effects to system operation.
+
+  _**Symptom:** The following can be seen during restart within the journal
+  ```
+  systemd[1]: Starting LSB: Bring up/down networking...
+  network[4650]: Bringing up loopback interface:  [  OK  ]
+  network[4650]: Bringing up interface dh00000001:  ERROR     : [/etc/sysconfig/network-scripts/ifup-eth] Device dh00000001 does not seem to be present, delaying initialization.
+  network[4650]: [FAILED]
+  ```
+------
 - **I95-36283** The 128T router asset state is stuck on its current state
 
   _**Conditions:**_ The following log message can be seen:
   ```
   TypeError: heap argument must be a list
   ```
-  Until the system is upgraded to 4.3.9, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
+  Until the system is upgraded to 4.4.2, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` on the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
+------
+- **I95-36341** Race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault
+------
+- **I95-36351** User without admin privileges can not change their password
 ------
 - **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs
 ------
@@ -88,14 +106,41 @@ sidebar_label: 4.4
   Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
   ```
 ------
+- **I95-36536** Manually deleting a session-capture filter can cause the highway process to fault
+------
+- **I95-36537** Dynamic session-captures are now created with a default session count of 100 instead of unlimited
+------
+- **I95-36564** Buffer queue depth allocation algorithm was inefficient causing latency in session setup
+------
 - **I95-36574** After a HA interface fail over, a session collision can occur between the recovered flow and an existing reverse flow. The recovered flow does not get setup properly and can cause the highway process to fault upon session expiry.
 
   _**Conditions:**_ Symmetrical services must be configured that match both forward and reverse flows
 ------
+- **I95-36591** Using connected route redistribution causes routes to be re-advertised or flapped, resulting in packet loss
+------
+- **I95-36604** Debug tables within the GUI do not honor the node selector
+------
 - **I95-36632** Empty office365 metadata file results in HTTP 400 bad request error
 ------
 - **I95-36638** Polling SNMP OID 1.3.6.1.2.1.1.2 returns `NET-SNMP-TC::linux` instead of `T128-MIB::t128NetworkingPlatform (1.3.6.1.4.1.45956.1)`
+------
+- **I95-36672** Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart
+------
+- **I95-36727** A non-forwarding, external (i.e. management) interface configured in 128T does not obtain a DHCP IP upon disconnecting and reconnecting the cable
+------
+- **I95-36770** Salt minion log file was not being properly rotated
+------
+- **I95-36841** TCP RST can cause the highway process to fault on a SVR path performing UDP transform
+------
+- **I95-36850** An asset's available and downloaded versions were incorrectly cleared when an upgrade or rollback is initiated
+------
+- **I95-36851** Currently downloading version in the asset state would persist after a download has completed
+------
+- **I95-36866** When adding an access policy in a service in the GUI, the tenant drop down list comes up empty on the first try
 
+  Until the system is upgraded to 4.4.2, this issue can be mitigated by canceling out and repeating the operation again. The list will be fully populated on subsequent attempts.
+------
+- **I95-36891** Exception thrown in PCLI when `CMD`+`right arrow` jumping past the end of an auto complete command
 
 ## Release 4.4.1
 
