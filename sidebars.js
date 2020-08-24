@@ -37,6 +37,7 @@ module.exports = {
       "concepts_machine_communication",
       "concepts_pcli",
       "concepts_session_timer",
+      "concepts_waypoint_ports",
       "concepts_glossary",
     ],
     "Administration": [
