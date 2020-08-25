@@ -166,7 +166,7 @@ config
     node                 node1
       device-interface  eth1
         network-interface  eth1-net
-          address     1.1.1.1
+          address     2.2.2.2
             wireguard-profile wg-profile-1
           exit
         exit
@@ -234,9 +234,6 @@ See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on
 # p1
 Address = 10.10.10.2/32
 PrivateKey = kLbzfaAMMn1Nen3zZ+LreKCglYJuBgdvy/fFNgIZxHk=
-DNS = 1.1.1.1
-DNS = 8.8.8.8
-#PostUp = ip route add 96.93.108.35 via 192.168.128.1 dev office
 
 [Peer]
 # dc1
@@ -435,7 +432,7 @@ exit
 The `interface` and `gateway-ip` in this configuration are automatically generated as part of the profile configuration on the router, and can be seen with `show network-interface`.
 :::
 
-With this configuration, sessions sent from the `technician` tenant to `128.128.128.128` will be given access as part of the `thing` service, and routed with a destination NAT to the wireguard interface of `10.10.10.5` on the IoT device peer.
+With this configuration, sessions sent from the `technician` tenant to `128.128.128.128` will be given access as part of the `thing` service, and routed with a destination NAT to the wireguard interface of `10.10.10.2` on the IoT device peer.
 
 ## Configuration Reference
 
@@ -473,7 +470,7 @@ A network to be associated with router the wireguard network-interface. This net
 | ----------------- | --------------- | ----------- |
 | `neighborhood`    | neighborhood-id | Neighborhood to be associated with the wireguard network. Addresses assigned to peers can be made members of an appropriate existing tenant based on this neighborhood. |
 | `tenant-name`     | string          | A tenant to be associated with addresses in the network. If configured, a tenant will be automatically generated with the addresses in the neighborhood set as members. If not configured, no tenant will be generated, and peer addresses in the network will need to be defined as members of existing tenants. |
-| `address`         | ip prefix       | The address and prefix associated with the wireguard profile. The wiregaurd interface created on the router will use the address defined, and other peers can send or receive sessions using the remaining addresses in the network. |
+| `address`         | ip prefix       | The address and prefix associated with the wireguard profile. The wireguard interface created on the router will use the address defined, and other peers can send or receive sessions using the remaining addresses in the network. |
 
 ### peer
 

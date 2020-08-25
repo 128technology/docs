@@ -37,6 +37,7 @@ module.exports = {
       "concepts_machine_communication",
       "concepts_pcli",
       "concepts_session_timer",
+      "concepts_waypoint_ports",
       "concepts_glossary",
     ],
     "Administration": [
@@ -51,6 +52,7 @@ module.exports = {
           "config_audit_log",
           "config_dhcp",
           "config_dns_proxy",
+          "config_dual_router_ha",
           "config_ldap",
           "config_ha",
           "config_management_over_forwarding",
