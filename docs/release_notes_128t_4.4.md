@@ -40,7 +40,7 @@ sidebar_label: 4.4
 ------
 - **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend
 ------
-- **I95-35544** LTE SIM number (ICCID) is absent from the output of `show device interface` on LTE interfaces
+- **I95-35544** LTE SIM number (ICCID) is absent from the output of `show device-interface` on LTE interfaces
 ------
 - **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted Linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
 
