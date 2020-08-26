@@ -84,7 +84,7 @@ After installing a 128T conductor, you can use ZTP to install your 128 routers
 13. On the the _Step 5: Add Tags_ page, click **Add Tags**.
 14. Click inside the Key column, select the following tags, and enter the tag definition in the Value column.
 - conductor-ip-primary: populate this with the IP address of your 128T conductor
-- asset-id: populate this with the asset identification you want to assign to the 128T router
+- asset-id: populate this with the asset identification you want to assign to the 128T router (optional)
 15. Click **Next: Configure Security Group**.
 16. On the _Step 6: Configure Security Group_ page, click **select an existing security group** and choose one from the list.
   > If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
