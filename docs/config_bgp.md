@@ -115,7 +115,7 @@ admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# redistribute conn
 
 This section contains various features supported by the 128T's BGP implementation.
 
-#### Configuring 128T as a Route Reflector Client
+#### Configuring 128T as a Route Reflector
 
 While configuring iBGP, you may need to enable the **Route Reflector** option to facilitate easy learning of routes. Your 128T can be configured as a route reflector client for a particular neighbor under the specific neighbor configuration.
 
