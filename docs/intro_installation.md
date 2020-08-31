@@ -1,6 +1,6 @@
 ---
 title: 128T Software Installation Guide
-sidebar_label: Installation
+sidebar_label: Installation Overview
 ---
 ## Introduction
 Welcome to 128T - the first software-based routing solution designed to be both session-oriented and service-centric through the application of Secure Vector Routing. The purpose of this guide is to provide an overview and installation walkthrough for the 128T Router and 128T Conductor products into a Linux operating system environment. This product suite is collectively known as 128T Routing Software.
@@ -10,7 +10,7 @@ The installation guides are written to be version agnostic and are applicable fo
 :::
 
 ## Before You Begin
-Before you begin the installation configuration of 128T Routing Software, the following prerequisites must be met:
+Before you begin the installation and configuration of 128T Routing Software, the following prerequisites must be met:
 - You must be familiar with Linux fundamentals, basic network addressing, and IP networking terminology. 
 - You must be a system administrator to perform the installation, and have root access to the target machine, or have an entry in /etc/sudoers allowing you to execute Linux shell commands as root (via sudo).
 - You must be a system administrator in order to configure the 128T Routing Software.
@@ -25,7 +25,7 @@ The 128T routing software runs on both bare metal servers and as a virtual machi
 The 128T routing software recommends a minimum of 4 CPU cores, 8GB of RAM, and at least 25GB of hard drive space.
 
 :::info
-Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analytical analysis of the traffic patterns and utilization of your 128T routing system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.128technology.com/) for hardware profile examples.
+Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your 128T routing system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.128technology.com/) for hardware profile examples.
 :::
 
 :::important
@@ -56,10 +56,10 @@ VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0
 The 128T routing software supports CentOS 7.5 as its underlying operating system. 
 
 ### CentOS
-When not installing from a 128T ISO, which includes a version of the CentOS operating system, the 128T routing software requires, at a minimum, an installation of CentOS 7.5. We recommend installing the minimal package that CentOS offers, as the 128T installer will fetch and install any additional dependencies during the installation process.
+When installing from a 128T ISO, CentOS 7.5 is included and automatically installed. Other (manual) installations require that CentOS 7.5 be installed. We recommend installing the minimal CentOS package, as the 128T installer will fetch and install any additional dependencies during the installation process.
 
 ## BIOS Recommendations
-In order to configure standard, off-the-shelf hardware to perform in line with traditional routing hardware, we recommend that you configure several BIOS settings to increase performance and resiliency.
+In order to configure standard, off-the-shelf hardware to perform in line with traditional routing hardware, we recommend that you configure the following BIOS settings to increase performance and resiliency.
 
 ### Enable Automatic Restart
 In the event of power disruption, the Automatic Restart setting in your system's BIOS can automatically restart your system once power is restored. As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [Interchange](https://community.128technology.com/) for commonly deployed 128T hardware platforms. Below are representative steps for common BIOS parameters:
@@ -110,7 +110,7 @@ Once you have identified the platform and determined it meets the minimum requir
 
 ## Post Installation
 
-On occasion, after installing your 128T Routing Software, you may want to stop or upgrade your software. The procedures for stopping and upgrading your software are intended for reference and are not required as part of your software installation or maintenance.
+After installing your 128T Routing Software you may want to stop or upgrade your software. The procedure for stopping the software is provided for reference and is not required as part of your software installation or maintenance.
 
 ### Stopping the 128T Routing Software
 Occasionally, you may need to stop the 128T software to perform maintenance on your system.
@@ -125,4 +125,4 @@ sudo systemctl stop 128T
 sudo systemct1 status 128T
   ```
 **Result**: The software is listed as _inactive (dead)_.
-4. Close the command prompt window.
+4. Close the Linux shell.
