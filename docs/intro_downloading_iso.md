@@ -86,29 +86,29 @@ With your client certificate (i.e. 128T-0000XXX.pem) in the current directory, r
 openssl pkcs12 -inkey 128T-0000XXX.pem -in 128T-0000XXX.pem -export -out 128T-0000XXX.pfx
 ```
 
-With the client certificate transformed, import it to your browser. The imported client certificate allows you to browse and download from the folder located at `https://yum.128technology.com/isos`.
+Import the transformed client certificate into your browser. The imported client certificate allows you to browse and download from the folder located at `https://yum.128technology.com/isos`.
 
 ![ISO Listing](/img/intro_downloading_iso_8.png)
 
 ### Importing PFX File to Firefox
 
-1. Open Firefox and select Preferences from the menu in the upper right corner.
+1. Open Firefox and select **Preferences** from the menu in the upper right corner.
 
 ![Firefox Preferences](/img/intro_downloading_iso_1.png)
 
-2. Select Privacy and Security:
+2. Select **Privacy and Security**:
 
 ![Firefox Security Settings](/img/intro_downloading_iso_2.png)
 
-3. Select View Certificates:
+3. Select **View Certificates**:
 
 ![Firefox Certificate Settings](/img/intro_downloading_iso_3.png)
 
-4. Select the ‘Your Certificates’ TAB:
+4. Select the **Your Certificates** tab:
 
 ![Firefox Certificate Manager](/img/intro_downloading_iso_4.png)
 
-5. Select the Import button:
+5. Select the **Import** button:
 
 ![Import Certificate Finder](/img/intro_downloading_iso_5.png)
 
@@ -116,28 +116,28 @@ With the client certificate transformed, import it to your browser. The imported
 
 ![Password Prompt](/img/intro_downloading_iso_6.png)
 
-7. No password is necessary to import the certificate, so click OK:
+7. No password is necessary to import the certificate, so click **OK**:
 
 ![Firefox Certificate Manager 2](/img/intro_downloading_iso_7.png)
 
 ### Downloading ISOs in Windows using Microsoft Edge, Explorer, and Chrome Browsers:
 
-1. Open the browser and navigate to “Control Panel”. 
-2. Search for “Manage user certificates”.
-3. Clicking on “Manage user certificates” will open the “certmgr.msi” utility.  Another option is to just open command line window and enter command: certmgr
-4. Open “Personal” folder and then - “Certificates” folder.
+1. Open the browser and navigate to the Control Panel. 
+2. Search for Manage user certificates.
+3. Select **Manage user certificates** to open the certmgr.msi utility. Another option is to open a command line window and enter the command: certmgr
+4. Open the Personal folder and then the Certificates folder.
 
 ![Manage User Certificates](/img/intro_downloading_iso_9.png)
 
-5. Go to the Action menu at the top, then “All Tasks”.  Choose “Import…”
-6. This will open “Certificate Import Wizard”.
-7. Click “Next” button in the wizard.
-8. Browse to the .PFX certificate file and upon selecting click “Next”.
-9. On the next screen, make sure “Place all certificate in the following store” radio button is selected, and the chosen certificate store is “Personal”:
+5. From the **Action** menu at the top of the window select **All Tasks**.  
+6. Choose **Import…** from the drop down. This opens the Certificate Import Wizard.
+7. Click **Next** button in the wizard.
+8. Browse to the .PFX certificate file, select the file and click **Next**.
+9. On the next screen verify that the **Place all certificate in the following store** radio button is selected, and the chosen certificate store is **Personal**:
 
 ![Certificate Import Wizard](/img/intro_downloading_iso_10.png)
 
-10. Click “Next” again.
-11. Click “Finish”
+10. Select **Next** again.
+11. Click **Finish**
 
-Now the certificate is provisioned in Windows. Use Edge, Explorer, or Chrome to navigate to the `https://yum.128technology.com/isos` web page and download the desired ISO.
+The certificate is provisioned in Windows. Use Edge, Explorer, or Chrome to navigate to the `https://yum.128technology.com/isos` web page and download the desired ISO.

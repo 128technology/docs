@@ -1,7 +1,8 @@
 ---
-title: Installing 128T
-sidebar_label: Installing 128T
+title: Manually Installing the 128T
+sidebar_label: Manually Installing the 128T
 ---
+This section describes the manual installation process for the 128T. For automated installation see Installing from the OTP ISO, or Installing from the Bootable ISO. 
 
 ## Install Using 128T-installer
 
@@ -69,12 +70,16 @@ The 128T Initializer is a complementary application to the installer that tunes 
    :::info
    This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilites of the 128T platform beyond the default settings for the target platform.
    :::
-6. On the **Password Setup** screen, create a password for the 128T Admin user. **Restriction:** The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
+
+6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
+
 7. On the **Anonymous Data Collection** screen, select either **Accept** or **Disable** to enable or disable the RoadRunner process that measures the health of your 128T router and components.
-8. Press the **Enter** key to select **OK**. </br>The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
+
+8. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
+
 9. When prompted, either reboot your system or start 128T.
    :::note
-   When installing the 128T software for the first time a system reboot is required.
+   If installing the 128T software for the first time, a system reboot is required.
    :::
 
 ### Verify Installation
