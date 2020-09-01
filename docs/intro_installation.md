@@ -19,7 +19,7 @@ Before you begin the installation and configuration of 128T Routing Software, yo
 The examples listed in this guide generally prefer running commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo.
 :::
 
-##Installation Methods
+## Installation Methods
 The 128T routing software offers the following installation methods to address your specific system. 
  - Interactive ISO
  - One Touch Provisioning (OTP) ISO Image
