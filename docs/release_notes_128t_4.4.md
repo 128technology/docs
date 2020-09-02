@@ -67,11 +67,20 @@ sidebar_label: 4.4
 ------
 - **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
 ------
+- **I95-36146** Pagination prompts are incorrectly stored in PCLI history
+------
 - **I95-36149** Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault
+------
+- **I95-36212** Fixed an issue where some Automated Provisioner actions would fail silently or return an error
+
+  _**Symptom:**_ The following message can be seen in the journal
+  ```
+  "state.highstate" is running as PID 29159 and was started at 2020, Jul 09 14:26:54.384868 with jid 20200709142654384868
+  ```
 ------
 - **I95-36246** IMSI and MSISDN are absent from the output from `show platform` on systems with LTE interfaces
 ------
-- **I95-36182** systemd network service may be marked as failed on reboot if KNIs were configured. This issue is cosmetic in nature and does not produce any side effects to system operation.
+- **I95-36281** systemd network service may be marked as failed on reboot if KNIs were configured. This issue is cosmetic in nature and does not produce any side effects to system operation.
 
   _**Symptom:** The following can be seen during restart within the journal
   ```
@@ -141,6 +150,11 @@ sidebar_label: 4.4
   Until the system is upgraded to 4.4.2, this issue can be mitigated by canceling out and repeating the operation again. The list will be fully populated on subsequent attempts.
 ------
 - **I95-36891** Exception thrown in PCLI when `CMD`+`right arrow` jumping past the end of an auto complete command
+------
+- **I95-37042** 128T process `prank` journal logs was incorrectly excluded from output of `save tech-support-info`
+------
+- **I95-37106** Initiating a download on an HA router may silently be ignored on one of the nodes if it was in "connected" state.
+
 
 ## Release 4.4.1
 
