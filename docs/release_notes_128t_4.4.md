@@ -12,7 +12,13 @@ sidebar_label: 4.4
   rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
   ```
 ------
+- **I95-32298** Admin down of KNI in t128-ipsec address space does not result in the interface state change to operationally down.
+------
 - **I95-32594** Validation allows for mismatched adjacency security-policy with peer network-interface security-policy for cases where multiple network interfaces in a router have the same IP address. Only the first one is considered for matching inter-router-security policy between the network interface and peer adjacency.
+
+  Until the system is upgraded to 4.4.2, this issue can be mitigated by manually checking the inter-router-security policy between the network interface and peer adjacency match.
+------
+- **I95-32660** Log files were only rotated daily which may result in larger then expected log file size for the following: saltmaster, radvd, influxdb_http, t128tuntap
 ------
 - **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled
 ------
@@ -42,7 +48,7 @@ sidebar_label: 4.4
 ------
 - **I95-35544** LTE SIM number (ICCID) is absent from the output of `show device-interface` on LTE interfaces
 ------
-- **I95-35873,I95-35679** Asset stuck in a connected state as a result of a corrupted Linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
+- **I95-35679,I95-35873** Asset stuck in a connected state as a result of a corrupted Linux rpmdb. The issue requires the system be updated to the 128T-installer version 2.6.1 (see [IN-267](release_notes_128t_installer_2.6.md#release-261). If the conductor is used to upgrade systems, the latest installer will be updated from the repository being used. If the systems do not have access to the 128T public repositories, the repository being used should be updated with the 128T-installer 2.6.1 version. With the correction of this issue, the PCLI command `send command yum-cache-refresh` has been updated to perform the rpmdb repair if the rpmdb is corrupted.
 
   Until the system is upgraded to 128T 4.4.2 and 128T-installer 2.6.1, the issue can be mitigated by running the following Linux commands:
   ```
@@ -104,6 +110,10 @@ sidebar_label: 4.4
 ------
 - **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs
 ------
+- **I95-36358, I95-36851** Currently downloading version in the asset state would persist after a download has completed.
+
+  Until the system is upgraded to 4.4.2, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` in the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
+------
 - **I95-36394** Auto-generated conductor service names that include a '.' will fail to commit configuration
 
   _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
@@ -115,9 +125,11 @@ sidebar_label: 4.4
   Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
   ```
 ------
-- **I95-36536** Manually deleting a session-capture filter can cause the highway process to fault
+- **I95-36536** Deleting a session-capture filter within the PCLI can cause the highway process to fault
 ------
 - **I95-36537** Dynamic session-captures are now created with a default session count of 100 instead of unlimited
+------
+- **I95-36554** In memory rate metrics reporting total when the delta should be reported.
 ------
 - **I95-36564** Buffer queue depth allocation algorithm was inefficient causing latency in session setup
 ------
@@ -143,15 +155,13 @@ sidebar_label: 4.4
 ------
 - **I95-36850** An asset's available and downloaded versions were incorrectly cleared when an upgrade or rollback is initiated
 ------
-- **I95-36851** Currently downloading version in the asset state would persist after a download has completed
-------
 - **I95-36866** When adding an access policy in a service in the GUI, the tenant drop down list comes up empty on the first try
 
   Until the system is upgraded to 4.4.2, this issue can be mitigated by canceling out and repeating the operation again. The list will be fully populated on subsequent attempts.
 ------
 - **I95-36891** Exception thrown in PCLI when `CMD`+`right arrow` jumping past the end of an auto complete command
 ------
-- **I95-37042** 128T process `prank` journal logs was incorrectly excluded from output of `save tech-support-info`
+- **I95-37042** 128T process `prank` journal log was incorrectly excluded from output of `save tech-support-info`
 ------
 - **I95-37106** Initiating a download on an HA router may silently be ignored on one of the nodes if it was in "connected" state.
 
