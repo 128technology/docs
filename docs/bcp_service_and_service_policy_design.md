@@ -410,7 +410,7 @@ exit
 This represents a standard, run of the mill "default route" service for basic internet traffic. Most deployments of the 128T software have something similar to this configured, along with the requisite `service-route` configuration to accompany them. Now consider this:
 
 ```
-admin@labsystem1.fiedler# show conf running authority service YOUTUBE.internet
+admin@labsystem1.fiedler# show conf running authority service ZOOM.internet
 
 config
     authority
