@@ -1,11 +1,7 @@
 ---
-Title: Configuring BGP
+title: Configuring BGP
 sidebar_label: BGP
 ---
-
-
-
-## Configuring BGP
 
 The Border Gateway Protocol (BGP) is a standard exterior gateway protocol developed for exchanging routing and reachability information between Autonomous Systems, a collection of IP routing prefixes managed by a single administrative entity. BGP makes routing decisions based on paths and network policies; although historically mainly seen in service provider networks, it is now gaining acceptance in large enterprise networks. BGP can also be used for routing within an autonomous system as an interior gateway protocol; when doing so it is referred to as iBGP.
 
