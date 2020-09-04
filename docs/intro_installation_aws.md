@@ -58,6 +58,10 @@ Follow the instructions as outlined in [Install the 128T Routing Software](#inst
 
 ## Install 128T From Amazon Web Services Using ZTP
 
+:::important
+Deploying a 128T router using Zero Touch Provisioning via tags is currently disabled. We are currently working on updating the AMIs in the marketplace to enable back the functionality.
+:::
+
 After installing a 128T conductor, you can use ZTP to install your 128 routers from Amazon Web Services.
 
 ### To install 128T from AWS using ZTP:
@@ -80,6 +84,7 @@ After installing a 128T conductor, you can use ZTP to install your 128 routers
 13. On the the _Step 5: Add Tags_ page, click **Add Tags**.
 14. Click inside the Key column, select the following tags, and enter the tag definition in the Value column.
 - conductor-ip-primary: populate this with the IP address of your 128T conductor
+- asset-id: populate this with the asset identification you want to assign to the 128T router (optional)
 15. Click **Next: Configure Security Group**.
 16. On the _Step 6: Configure Security Group_ page, click **select an existing security group** and choose one from the list.
   > If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
@@ -92,14 +97,14 @@ After installing a 128T conductor, you can use ZTP to install your 128 routers
 22. On the _Launch Status_ page, click **View Instances**.
 23. Connect and assign this router/instance to your 128T conductor either using the GUI or PCLI. **Result**: The router installs automatically.
 
-### Configure 128T Using AWS
+## Configure 128T Using AWS
 
 After  installing 128T using Amazon Web Services, you must then create and apply configuration elements. During the configuration process you'll set up the following:
 
 - Route Tables
 - Internet Gateways
 
-#### To configure a conductor or router on AWS:
+### To configure a conductor or router on AWS:
 
 1. Using AWS, navigate to the EC2 Dashboard pane and **Select Instances**. 
 2. On the _Description_ tab and next to the Security field, click **Launch Wizard**.
