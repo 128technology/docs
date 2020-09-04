@@ -14,8 +14,8 @@ module.exports = {
     ],
     "Installation":[ 
       "intro_installation",
-        "intro_system_reqs",
-        "intro_prepare_OS",
+      "intro_system_reqs",
+      "intro_prepare_OS",
       "intro_installation_installer",  
       
       "intro_downloading_iso",
