@@ -9,11 +9,9 @@ sidebar_label: Creating Bootable USB
 
 The goal of this guide is produce a bootable USB drive from a 128T ISO.
 
-**The first step is to acquire an ISO of the version of software that is intended to be loaded onto the bootable USB media following the [download instructions](intro_downloading_iso.md).**
-
 ## Linux and macOS
 
-CCreating a bootable ISO for Linux or the MacOS is straightforward. You must have administrative privileges to the system.
+Creating a bootable ISO from Linux or the MacOS is straightforward. You must have administrative privileges to the system.
 
 1. Download the ISO for the software version to be loaded onto the USB. Use the [download instructions](intro_downloading_iso.md). This example uses `128T-OTP-4.2.4-1.el7.x86_64.iso`
 
@@ -23,7 +21,7 @@ CCreating a bootable ISO for Linux or the MacOS is straightforward. You must hav
 diskutil list
 ```
 
-3. Use the command below to copy the ISO image onto the USB. This example uses `128T-OTP-4.2.4-1.el7.x86_64.iso`
+3. Use the command below to copy the ISO image onto the USB. 
 
 ```
 sudo diskutil unmount /dev/disk2s1

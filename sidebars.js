@@ -2,22 +2,20 @@ module.exports = {
   "docs": {
     "About": [
       "about_128t",
-      "about_svr_savings",
       "about_releases",
       "about_support_policy",
       "about_supported_platforms",
       "about_security_policy",
+      "about_svr_savings",
       "CONTRIBUTING",
     ],
     "Introduction": [
       "intro_getting_started",
-    ],
-    "Installation":[ 
       "intro_installation",
-      "intro_system_reqs",
-      "intro_prepare_OS",
-      "intro_installation_installer",  
-      
+        "intro_system_reqs",
+        "intro_prepare_OS",
+        "intro_installation_installer",
+
       "intro_downloading_iso",
       "intro_installation_bootable_media",
       "intro_creating_bootable_usb",
@@ -30,7 +28,7 @@ module.exports = {
       
       "intro_upgrading",
       "intro_rollback",
-      ],
+    ],
     "Concepts": [
       "concepts_application_discovery",
       "concepts_appid",

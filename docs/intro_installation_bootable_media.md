@@ -23,11 +23,11 @@ After imaging the ISO onto removable media, insert it into the target machine an
 
 #### Choose the Installation Type
 
-Upon boot, the user will be prompted with the following screen:
+Upon boot, you are prompted with the following screen:
 
 ![Boot Screen](/img/intro_installation_bootable_media_boot.png)
 
-Note: because not all hardware has video support, booting to console is the default (to account for the fact that a console user may not be able to select an option). The default option is selected after a 30 second timeout.
+Note: Because not all hardware has video support, booting to console is the default (to account for the fact that a console user may not be able to select an option). The default option is selected after a 30 second timeout.
 
 ##### 128T Router via Serial Console
 
@@ -40,7 +40,7 @@ Use this option when running on hardware that has onboard graphics chipsets. Thi
 
 #### 128T Installation
 
-Once Linux is installed, the system will install the 128T software. Note that this may several minutes to complete. After the installation process has completed, the following screen is displayed:
+Once Linux is installed, the system will install the 128T software. Note that this may take several minutes to complete. After the installation has completed, the following screen is displayed:
 
 ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
 
