@@ -5,25 +5,23 @@ sidebar_label: Creating Bootable USB
 
 ## Introduction
 
-128 Technology distributes its software as a set of RPM packages, an ISO, or a container. The ISO is most commonly used to stage a system when it does not have an operating system or if the system is being repurposed as a 128T.
+128 Technology distributes its software as a set of RPM packages, an ISO or a container.  The ISO is most commonly used to stage a system when it does not have an operating system or if the system is being repurposed as a 128T.
 
 The goal of this guide is produce a bootable USB drive from a 128T ISO.
 
-**The first step is to acquire an ISO of the version of software that is intended to be loaded onto the bootable USB media following the [download instructions](intro_downloading_iso.md).**
+The first step is to acquire an ISO of the version of software that is intended to be loaded onto the bootable USB media following the [download instructions](intro_downloading_iso.md).
 
 ## Linux and macOS
 
-CCreating a bootable ISO for Linux or the MacOS is straightforward. You must have administrative privileges to the system.
+Creating a bootable ISO from OS is straightforward.  The only requirements are that you need administrative privileges to the system.
 
-1. Download the ISO for the software version to be loaded onto the USB. Use the [download instructions](intro_downloading_iso.md). This example uses `128T-OTP-4.2.4-1.el7.x86_64.iso`
-
-2. Locate the USB volume name of the target drive (in this example, “disk2s1”) with the `diskutil` command.
+Locate the USB volume name of the target drive (in this example, “disk2s1”) with the `diskutil` command.
 
 ```
 diskutil list
 ```
 
-3. Use the command below to copy the ISO image onto the USB. This example uses `128T-OTP-4.2.4-1.el7.x86_64.iso`
+Once you have identified the target USB device, ensure that you have ISO already copied onto the machine creating the bootable USB.  This example uses `128T-OTP-4.2.4-1.el7.x86_64.iso`
 
 ```
 sudo diskutil unmount /dev/disk2s1
@@ -40,13 +38,13 @@ diskutil eject /dev/disk2s1
 [^1]: tested on version 2.18.1213
 
 ### Procedure
-1. Launch Rufus.
-2. Select the USB Device.
-3. Select **MBR partition scheme for BIOS or UEFI**.
-4. Select the 128T ISO.
-5. Click **Start**.
-6. Select **Write in ISO image mode**.
-7. Click **OK**.
+- Launch Rufus
+- Select the USB Device
+- Select "MBR partition scheme for BIOS or UEFI"
+- Select the 128T ISO
+- Click "Start"
+- Select "Write in ISO image mode"
+- Click "OK"
 
 ## System Preparation
 
@@ -55,6 +53,6 @@ diskutil eject /dev/disk2s1
 
 ## Further Resources
 
-Additional information on Bootable USB creation tools can be found here:
+Additional information on other available possible USB bootable creation tools can be found here as well:
 
 https://www.pcsteps.com/1461-create-linux-installation-usb-dvd/
