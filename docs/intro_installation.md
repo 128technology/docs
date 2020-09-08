@@ -30,8 +30,6 @@ The 128T routing software offers the following installation methods to address y
  	- Install using ZTP
  - Installation in Microsoft Azure	
 
-
-
 ## Post Installation
 
 After installing your 128T Routing Software you may want to stop or upgrade your software. The procedure for stopping the software is provided for reference and is not required as part of your software installation or maintenance.
