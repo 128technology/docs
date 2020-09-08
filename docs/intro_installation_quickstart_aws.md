@@ -1,6 +1,6 @@
 ---
-title: QuickStart installation in AWS
-sidebar_label: QuickStart installation in AWS
+title: QuickStart Installation in AWS
+sidebar_label: QuickStart Installation in AWS
 ---
 
 ## Introduction
