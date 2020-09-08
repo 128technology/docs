@@ -50,7 +50,7 @@ The 128T Initializer is a complementary application to the installer that tunes 
 
 #### To Initialize the 128T Node:
 
-1. In the 128T Initializer wizard screen select either a **Router** or **Conductor **role for the 128T node and press the **Enter** key to select **OK**.
+1. On the 128T Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the 128T node and press the **Enter** key to select **OK**.
 2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, Enter their administrative addresses here, and this node will retrieve its configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
 3. When asked _What kind of Router node is this?_, select from the following options:
 
