@@ -7,7 +7,7 @@ sidebar_label: 4.4
 
 ### Issues Fixed
 
-- **I95-18807** Innocuous error produced in journal due to imudp module loaded by rsyslog daemon.
+- **I95-18807** Removed a benign error displayed in journal due to imudp module loaded by rsyslog daemon.
 
   _**Symptoms:**_ The following message can be seen in the journal:
   ```
@@ -28,7 +28,7 @@ sidebar_label: 4.4
 
   Until the system is upgraded to 4.4.2, this issue can be mitigated by restarting the 128T or by removing and recreating the BGP configuration.
 ------
-- **I95-33989** Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`.
+- **I95-33989** Terminating a "validate" command with CTRL-c returns to the PCLI prompt but does not stop the in-progress validation. This prevents subsequent validation attempts until the in-progress validation completes in the background.
 
   _**Symptom:**_ The following can be seen in the PCLI output:
   ```
@@ -135,7 +135,7 @@ sidebar_label: 4.4
 ------
 - **I95-36564** Buffer queue depth allocation algorithm was inefficient causing latency in session setup.
 ------
-- **I95-36574** After a HA interface fail over, a session collision can occur between the recovered flow and an existing reverse flow. The recovered flow does not get setup properly and can cause the highway process to fault upon session expiry.
+- **I95-36574** After an HA interface fail over, a session collision can occur between the recovered flow and an existing reverse flow. The recovered flow does not get set up properly and can cause the highway process to fault upon session expiry.
 
   _**Conditions:**_ Symmetrical services must be configured that match both forward and reverse flows.
 ------
