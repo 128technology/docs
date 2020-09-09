@@ -5,7 +5,7 @@ sidebar_label: Creating Bootable USB
 
 ## Introduction
 
-128 Technology distributes its software as a set of RPM packages, an ISO, or a container. The ISO is most commonly used to stage a system when it does not have an operating system or if the system is being repurposed as a 128T.
+128 Technology distributes our software as a set of applications, an ISO, or a container. The ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as a 128T system.
 
 The goal of this guide is produce a bootable USB drive from a 128T ISO.
 
@@ -13,7 +13,7 @@ The goal of this guide is produce a bootable USB drive from a 128T ISO.
 
 Creating a bootable ISO from Linux or the MacOS is straightforward. You must have administrative privileges to the system.
 
-1. Download the ISO for the software version to be loaded onto the USB. Use the [download instructions](intro_downloading_iso.md). This example uses `128T-OTP-4.2.4-1.el7.x86_64.iso`
+1. Download the ISO for the software version to be loaded onto the USB. Use the [download instructions](intro_downloading_iso.md). 
 
 2. Locate the USB volume name of the target drive (in this example, “disk2s1”) with the `diskutil` command.
 
@@ -25,9 +25,10 @@ diskutil list
 
 ```
 sudo diskutil unmount /dev/disk2s1
-sudo dd if=~/128T-OTP-4.2.4-1.el7.x86_64.iso of=/dev/rdisk2 bs=16384
+sudo dd if=~/128T-<VERSION>.el7.x86_64.iso of=/dev/rdisk2 bs=16384
 diskutil eject /dev/disk2s1
 ```
+Where `<VERSION>` is replaced with the 128T version you are interested in.
 
 ## Windows
 

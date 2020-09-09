@@ -21,14 +21,13 @@ The examples listed in this guide generally prefer running commands as a non-roo
 
 ## Installation Methods
 The 128T routing software offers the following installation methods to address your specific system. 
- - Interactive ISO
- - One Touch Provisioning (OTP) ISO Image
- - Zero Touch Provisioning (ZTP) ISO Image
- - Manual Installer
+ - [Interactive ISO](intro_installation_bootable_media.md)
+ - [One Touch Provisioning (OTP) ISO Image](intro_installation_otp_iso.mdx)
+ - [Manual Installation](intro_installation_installer.md)
  - Installation from Amazon Web Services (AWS) Marketplace
- 	- Manual Installation
- 	- Install using ZTP
- - Installation in Microsoft Azure	
+ 	- [Manual Installation](intro_installation_quickstart_aws.md)
+ 	- [Install using ZTP](intro_ztp.md)
+ - [Installation in Microsoft Azure](intro_installation_azure.md)	
 
 ## Post Installation
 

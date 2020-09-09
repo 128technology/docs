@@ -21,7 +21,7 @@ module.exports = {
       "intro_creating_bootable_usb",
       "intro_installation_otp_iso",
       "intro_ztp",
-
+      
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
       "intro_installation_azure",  

@@ -27,12 +27,17 @@ Upon boot, you are prompted with the following screen:
 
 ![Boot Screen](/img/intro_installation_bootable_media_boot.png)
 
-Note: Because not all hardware has video support, booting to console is the default (to account for the fact that a console user may not be able to select an option). The default option is selected after a 30 second timeout.
+:::note
+Not all hardware has video support, therefore booting to console is the default (a console user may not be able to select an option). The default option is selected after a 30 second timeout.
+::: 
 
 ##### 128T Router via Serial Console
 
-Use this option when running on hardware with no video chipset. It uses /dev/ttyS0 as the serial console for interacting with the installer.
-Note: selecting the wrong type of console may result in garbage characters being displayed and the install hanging. If this is the case, reboot the target system and select the correct line for the target hardware.
+Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer.
+
+::: note
+Selecting the wrong type of console may result in garbage characters being displayed and the install hanging. If this is the case, reboot the target system and select the correct line for the target hardware.
+::: 
 
 ##### 128T Router with VGA Console
 

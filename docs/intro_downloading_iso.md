@@ -12,13 +12,13 @@ Currently 128 Technology makes available to its customers 2 ISOs for each softwa
 
 ## Downloading the ISOs
 
-128 Technology ISOs are available from our public yum servers located at: `https://yum.128technology.com/isos` to users with an active client certificate.
+128 Technology ISOs are available from our public yum servers located at: `https://yum.128technology.com/isos` to users with an active account.
 
-Your client certificate is provided to you via email, installed on your 128 Technology routers, and allows you to download software updates from our yum servers.
+Your client certificate is provided to you via email, installed on your 128 Technology routers and conductors, and allows you to download software updates from our yum servers.
 
 ### Downloading from the Command Line
 
-The ISO installation media is hosted at the same location as the 128T software packages, in the isos directory. To acquire the ISO, use the `curl` command. Specify the certificate obtained from 128 Technology with a valid software license.
+The ISO installation media is hosted at the same location as the 128T software packages, in the `isos` directory. To acquire the ISO, use the `curl` command. Specify the certificate obtained from 128 Technology with a valid software license.
 
 ```bash
 curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/128T-<VERSION>.el7.x86_64.iso
@@ -122,7 +122,7 @@ Import the transformed client certificate into your browser. The imported client
 
 ### Downloading ISOs in Windows using Microsoft Edge, Explorer, and Chrome Browsers:
 
-1. Open the browser and navigate to the Control Panel. 
+1. Open the browser and open the Settings page. 
 2. Search for Manage user certificates.
 3. Select **Manage user certificates** to open the certmgr.msi utility. Another option is to open a command line window and enter the command: certmgr
 4. Open the Personal folder and then the Certificates folder.
