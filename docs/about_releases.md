@@ -5,7 +5,7 @@ sidebar_label: 128T Releases
 
 | Version                                          | Release           | GA Date            | End of Maintenance | End of Support     |
 | ------------------------------------------------ | ----------------- | ------------------ | ------------------ | ------------------ |
-| [4.5.0](release_notes_128t_4.5.md#release-450)   | July 23, 2020     | November 23, 2020  | July 23, 2021      | November 23, 2021  |
+| [4.5.0](release_notes_128t_4.5.md#release-450)   | July 23, 2020     | October 15, 2020   | July 23, 2021      | October 15, 2021   |
 | [4.4.2](release_notes_128t_4.3.md#release-442)   | September 3, 2020 |                    | Not Applicable*    | September 19, 2021 |
 | [4.4.1](release_notes_128t_4.3.md#release-441)   | July 10, 2020     |                    | Not Applicable*    | September 19, 2021 |
 | [4.4.0](release_notes_128t_4.4.md#release-440)   | May 19, 2020      | September 19, 2020 | April 19, 2021     | September 19, 2021 |
