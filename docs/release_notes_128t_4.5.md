@@ -22,6 +22,8 @@ sidebar_label: 4.5
   rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
   ```
 ------
+- **I95-32660** Log files were only rotated daily which may result in larger then expected log file size for the following: saltmaster, radvd, influxdb_http, t128tuntap.
+------
 - **I95-33989** Terminating a "validate" command with CTRL-c returns to the PCLI prompt but does not stop the in-progress validation. This prevents subsequent validation attempts until the in-progress validation completes in the background.
 
   _**Symptom:**_ The following can be seen in the PCLI output:
@@ -32,9 +34,21 @@ sidebar_label: 4.5
   ```
   Until the system is upgraded to 4.5.1, this issue will resolve itself after the background tasks have completed.
 ------
+- **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled.
+------
+- **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.
+------
+- **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend.
+------
+- **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T.
+------
 - **I95-35544** LTE SIM number (ICCID) is absent from the output of `show device-interface` on LTE interfaces.
 ------
 - **I95-35933** `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces.
+------
+- **I95-36050** Race condition on HA Conductor may incorrectly report pending configuration changes when no changes exist
+
+  Until the system is upgraded to 4.5.1, this issue can be mitigated by applying a configuration change
 ------
 - **I95-36212** Fixed an issue where some Automated Provisioner actions would fail silently or return an error.
 
@@ -96,6 +110,8 @@ sidebar_label: 4.5
 ------
 - **I95-36779** Clarified template Import Error Message to properly indicate advanced mode templates can not be imported in basic mode
 ------
+- **I95-36780** SNMP Traps are incorrectly sent for routers in maintenance mode when peer path goes down
+------
 - **I95-36832** Erroneous restart required alarm raised during configuration change when restart is not needed
 ------
 - **I95-36841** TCP RST can cause the highway process to fault on a SVR path performing UDP transform.
@@ -112,12 +128,25 @@ sidebar_label: 4.5
 ------
 - **I95-36891** Exception thrown in PCLI when `CMD`+`right arrow` jumping past the end of an auto complete command
 ------
+- **I95-36927** Race condition can cause a fault in the highway process during session setup and configuration change removes BGP service route path
+------
 - **I95-37006** Peer path establishment may fail for waypoint interfaces that use DHCP (e.g., LTE) when upgrading from 4.4.x
+------
+- **I95-37021, I95-37026** Configuring overlapping session-types could cause the highway process to ignore the configuration change
 ------
 - **I95-37042** 128T process `prank` journal logs was incorrectly excluded from output of `save tech-support-info`
 ------
 - **I95-37106** Initiating a download on an HA router may silently be ignored on one of the nodes if it was in "connected" state.
-
+------
+- **I95-37131** Unable to perform SNMP query for table indices on 128T OIDs
+------
+- **I95-37168** Race condition can cause system fault when creating candidate configuration
+------
+- **I95-37217** Reverse metadata was not being updated properly when the service routes were of type `next-peer`, resulting in an inability to recover sessions upon node failover
+------
+- **I95-37220** 128T deployed behind a NAT may fail to recover a session after a node failure
+------
+- **I95-37226** Output of `show network-interface` on non-active HA node may result in empty address for interfaces
 
 ## Release 4.5.0
 
