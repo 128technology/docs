@@ -123,6 +123,42 @@ dns-cache
 exit
 ```
 
+### Redirecting and blocking domains
+
+##### Version History
+
+| Release      | Modification                                    |
+| ------------ | ----------------------------------------------- |
+| 1.1.0, 2.1.0 | `dns-cache > redirect-domains` and `dns-cache > block-domains` was introduced |
+
+For some deployments it is desirable to redirect some domains to a different upstream DNS server. As an example, the configuration can be used to redirect private domain names to an internal DNS server. The `dns-cache` plugin provides an ability to do that via the `redirect-domains` configuration as shown below:
+
+``` config
+config
+
+    authority
+
+        router  router1
+            name       router1
+
+            dns-cache
+                enabled true
+                tenant dns-cache-plugin
+                ingress-service dns-catcher
+
+                redirect-domains  www.some-private-domain.com
+                    domain   www.some-private-domain.com
+                    address  192.168.8.8
+                exit
+                block-domains     www.block-domain.com
+            exit
+        exit
+    exit
+exit
+```
+
+The `block-domains` configuration allows the DNS server to block those domains by replying back with NXDOMAIN reply indicating that the domain name doesn't exist.
+
 ## Third Party Software and Licenses
 - dnsmasq (GNU GPL v2, v3)
 
@@ -135,12 +171,21 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 
 ## Release Notes
 
-### Release 1.0.1
+### Release 1.1.0, 2.1.0
+
+#### New Features and Improvements
+
+- **PLUGIN-641** Provide support for redirecting and blocking domains
+
+Added support for redirecting domains to a different upstream domain server. In addition, added support for blocking domains that the user should not be able to access.
 
 #### Issues Fixed
-- **PLUGIN-402** Ensure the application restarts with 128T
 
-### Release 2.0.1
+- **PLUGIN-684** Apply the salt states more cleanly for first time installation
+
+  _**Resolution:**_ Make all the salt states dependent on a successful plugin router RPM installation. In addition, moved all the application configuration generation to the router.
+
+### Release 1.0.1, 2.0.1
 
 #### Issues Fixed
 - **PLUGIN-402** Ensure the application restarts with 128T
