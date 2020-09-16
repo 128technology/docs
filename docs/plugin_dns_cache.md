@@ -131,7 +131,7 @@ exit
 | ------------ | ----------------------------------------------- |
 | 1.1.0, 2.1.0 | `dns-cache > redirect-domains` and `dns-cache > block-domains` was introduced |
 
-For some deployments it is desirable to redirect some domains to a different upstream DNS server. As an example, the configuration can be used to redirect private domain names to an internal DNS server. The `dns-cache` plugin provides an ability to do that via the `redirect-domains` configuration as shown below:
+In some deployments you may want to redirect selected domains to a different upstream DNS server. For example, the `redirect-domains` configuration shown below can be used to redirect private domain names to an internal DNS server.
 
 ``` config
 config
@@ -157,7 +157,7 @@ config
 exit
 ```
 
-The `block-domains` configuration allows the DNS server to block those domains by replying back with NXDOMAIN reply indicating that the domain name doesn't exist.
+The `block-domains` configuration allows the DNS server to block those domains by replying back with NXDOMAIN indicating that the domain name doesn't exist.
 
 ## Third Party Software and Licenses
 - dnsmasq (GNU GPL v2, v3)
