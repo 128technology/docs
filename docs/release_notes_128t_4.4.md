@@ -112,7 +112,7 @@ sidebar_label: 4.4
 ------
 - **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs.
 ------
-- **I95-36358, I95-36851** Currently downloading version in the asset state would persist after a download has completed.
+- **I95-36358** Currently downloading version in the asset state would persist after a download has completed.
 
   Until the system is upgraded to 4.4.2, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` in the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
 ------
@@ -155,7 +155,7 @@ sidebar_label: 4.4
 ------
 - **I95-36841** TCP RST can cause the highway process to fault on a SVR path performing UDP transform.
 ------
-- **I95-36850** An asset's available and downloaded versions were incorrectly cleared when an upgrade or rollback is initiated.
+- **I95-36850, I95-36851** An asset's available and downloaded versions were incorrectly cleared when an upgrade or rollback is initiated.
 ------
 - **I95-36866** When adding an access policy in a service in the GUI, the tenant drop down list comes up empty on the first try.
 

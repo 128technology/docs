@@ -7,7 +7,7 @@ sidebar_label: 4.5
 
 ### New Features and Improvements
 
-- **I95-33193** "About This System" within GUI now displays additional information specific to installation type (e.g., ISO vs. RPM).
+- **I95-33193** "About This System" within the GUI will display additional information if it is a container ("128T-docker") or if installed with a 128T OTP ISO.
 ------
 - **I95-35319** "Managed Reports" (Custom Report factory defaults) are now shipped with the product.
 ------
@@ -24,6 +24,8 @@ sidebar_label: 4.5
 ------
 - **I95-32660** Log files were only rotated daily which may result in larger than expected log file size for the following: saltmaster, radvd, influxdb_http, t128tuntap.
 ------
+- **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled.
+------
 - **I95-33989** Terminating a "validate" command with CTRL-c returns to the PCLI prompt but does not stop the in-progress validation. This prevents subsequent validation attempts until the in-progress validation completes in the background.
 
   _**Symptom:**_ The following can be seen in the PCLI output:
@@ -34,9 +36,9 @@ sidebar_label: 4.5
   ```
   Until the system is upgraded to 4.5.1, this issue will resolve itself after the background tasks have completed.
 ------
-- **I95-33471** Adaptive encryption counters are incorrectly incremented when encryption is disabled and adaptive-encryption is enabled.
-------
 - **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.
+
+  _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable.
 ------
 - **I95-35331** A custom chart that contains multiple line charts selects the incorrect graph when clicking on the corresponding legend.
 ------
