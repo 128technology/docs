@@ -182,9 +182,9 @@ Added support for redirecting domains to a different upstream domain server. In 
 
 #### Issues Fixed
 
-- **PLUGIN-684** Apply the salt states more cleanly for first time installation
+- **PLUGIN-684** DNS cache plugin fails to apply configuration on initial installation
 
-  _**Resolution:**_ Make all the salt states dependent on a successful plugin router RPM installation. In addition, moved all the application configuration generation to the router.
+  _**Resolution:**_ Make config handling on the router dependent on a successful plugin router RPM installation.
 
 ### Release 1.0.1, 2.0.1
 
