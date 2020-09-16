@@ -129,9 +129,10 @@ exit
 
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
-| 1.1.0, 2.1.0 | `dns-cache > redirect-domains` and `dns-cache > block-domains` was introduced |
+| 1.1.0, 2.1.0 | `dns-cache > redirect-domains` and `dns-cache > block-domains` were introduced |
 
-In some deployments you may want to redirect selected domains to a different upstream DNS server. For example, the `redirect-domains` configuration shown below can be used to redirect private domain names to an internal DNS server.
+The DNS cache plugin will send all requests it processes to the list of servers provided in its configuration. Generally, these are configured as public DNS servers. However, many enterprises commonly host their own authoritative name server for their own domain (e.g., some-private-domain.com). The redirect-domains configuration lets administrators specify a distinct DNS server for a given domain, and 128T will use this when issuing queries for any host within that domain.
+
 
 ``` config
 config
@@ -146,11 +147,11 @@ config
                 tenant dns-cache-plugin
                 ingress-service dns-catcher
 
-                redirect-domains  www.some-private-domain.com
-                    domain   www.some-private-domain.com
+                redirect-domains  some-private-domain.com
+                    domain   some-private-domain.com
                     address  192.168.8.8
                 exit
-                block-domains     www.block-domain.com
+                block-domains     block-domain.com
             exit
         exit
     exit
