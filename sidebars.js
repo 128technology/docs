@@ -111,6 +111,7 @@ module.exports = {
     ],
     "Best Practices": [
       "bcp_att_avpn_configuration",
+      "bcp_using_128T_as_ntp_server",
       "bcp_conductor_deployment",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
