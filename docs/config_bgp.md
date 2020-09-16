@@ -1,11 +1,7 @@
 ---
-Title: Configuring BGP
+title: Configuring BGP
 sidebar_label: BGP
 ---
-
-
-
-## Configuring BGP
 
 The Border Gateway Protocol (BGP) is a standard exterior gateway protocol developed for exchanging routing and reachability information between Autonomous Systems, a collection of IP routing prefixes managed by a single administrative entity. BGP makes routing decisions based on paths and network policies; although historically mainly seen in service provider networks, it is now gaining acceptance in large enterprise networks. BGP can also be used for routing within an autonomous system as an interior gateway protocol; when doing so it is referred to as iBGP.
 
@@ -115,22 +111,26 @@ admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# redistribute conn
 
 This section contains various features supported by the 128T's BGP implementation.
 
-#### Configuring 128T as a Route Reflector Client
+#### Configuring 128T as a Route Reflector
 
-While configuring iBGP, you may need to enable the **Route Reflector** option to facilitate easy learning of routes. Your 128T can be configured as a route reflector client for a particular neighbor under the specific neighbor configuration.
+While configuring iBGP, you may need to enable the **Route Reflector** capability to facilitate easy learning of routes. Your 128T can be configured as a route reflector for a particular neighbor or more realistically a set of neighbors, also known as a route reflector client(s).  This can be configured in the route reflector router's BGP config, under the respective neighbor object.
 
 ```
 admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
 admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# neighbor 1.1.1.1
 ```
-In our example, the route reflector in our network is our neighbor `1.1.1.1`.
+In our example, the route reflector in our network is `branchoffice1` router, and our route reflector client is its neighbor `1.1.1.1`.
 ```
 admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# address-family ipv4-unicast
 admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# route-reflector client true
 admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# exit
 ```
-By setting `route-reflector client true`, we instruct the 128T to treat the neighbor as a route reflector.
+By setting `route-reflector client true`, we instruct the `branchoffice1` router to treat the neighbor as a route reflector client.
+
+There is one additional field which needs to be set in route reflector's BGP config, and that is `Client-ID`, which has the format of an IP address.  This can be set to anything unique in the AS, and can be the same as the `Router ID` field.
+
+When the route reflector sends routes to the clients, by default it doesn't modify the next-hop.  An outbound policy can be used to change the next-hop in these routes to that of the route reflector, if desired.  In such instances, another option, which is turned off by default, needs to be set in the route reflector's BGP config: `Route Reflector Allow Outbound Policy = TRUE`.
 
 #### BGP Confederations
 When configuring iBGP, the **Confederation** feature may come in handy when dealing with an enormous autonomous system. This feature allows you to break up the AS into smaller sub-autonomous systems. Confederation can be directly configured under the routing protocol element. Here, 65535 is the **confederation identifier AS number** and, 1100 and 2200 are the **member AS** numbers of that confederation AS.

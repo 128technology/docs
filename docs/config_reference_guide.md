@@ -1999,7 +1999,7 @@ Version History:
 
 Introduced in 1.0.
 
-Rearranged in 1.1. Eliminated unimplemented ciphers. Removed unnecessary modes for *encrypt* and *hmac* and set them as booleans. Moved *transport-state-enforcement [ ]{.underline}*to service-policy. Updated in 3.0: added *hmac-cipher*.
+Rearranged in 1.1. Eliminated unimplemented ciphers. Removed unnecessary modes for *encrypt* and *hmac* and set them as booleans. Moved *transport-state-enforcement* to service-policy. Updated in 3.0: added *hmac-cipher*.
 
 ## server (ntp)
 

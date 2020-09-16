@@ -372,6 +372,142 @@ Here we can see the python script `customsvc.py` file, which matches the `applic
 
 For more information on creating your own custom `application-module`, review the documentation and browse the articles on Interchange.
 
+### Hierarchical Services
+
+Introduced in the 5.0 release, *hierarchical services* allow you to create groupings of services that, like [hierarchical tenants](config_tenants.md#subtenant-hierarchies), inherit properties from one another.
+
+From a configuration standpoint, hierarchical services follow the same convention that other, hierarchically organized data model elements do within the 128T software: by using a `.` separator. They also follow the same principle of inheritance: "children" inherit the properties of the "parent."
+
+By way of example, consider the following configuration fragment:
+
+```
+admin@labsystem1.fiedler# show config running authority service internet
+
+config
+    authority
+        service  internet
+            name                  internet
+            description           "public internet"
+            scope                 private
+            security              internal
+            address               0.0.0.0/0
+
+            access-policy         guest
+                source      guest
+                permission  allow
+            exit
+
+            access-policy         trusted
+                source      trusted
+                permission  allow
+            exit
+            service-policy        data-best-effort
+        exit
+    exit
+exit
+```
+
+This represents a standard, run of the mill "default route" service for basic internet traffic. Most deployments of the 128T software have something similar to this configured, along with the requisite `service-route` configuration to accompany them. Now consider this:
+
+```
+admin@labsystem1.fiedler# show conf running authority service ZOOM.internet
+
+config
+    authority
+        service  ZOOM.internet
+            name                  ZOOM.internet
+            description           "Zoom video conferencing"
+
+            application-name      ZOOM
+
+            access-policy         guest
+                source      guest
+                permission  deny
+            exit
+
+            service-policy        voip-video
+            share-service-routes  false
+        exit
+    exit
+exit
+```
+
+Here is an example of a *hierarchical service*, designed to carry Zoom video conferencing traffic. There are several notable elements to discuss.
+
+1. The name contains a reference to a parent service. In our case, the parent is `internet`. Thus it will **inherit** its properties, unless they are overridden. For instance, if we do not configure a specific `service-route` for `ZOOM.internet`, it will follow the same routes that `internet` does. (This is a common use case, since there are typically only a handful of egress interfaces and/or peers to send traffic to.)
+2. The `access-policy` has been modified, and this one is blocks access by the `guest` tenant. Note that when configuring `access-policy` in a child tenant, it will always inherit the `access-policy` statements from the parent.
+3. The `service-policy` has been overridden. The parent tenant treats all traffic as `data-best-effort`, but Zoom traffic will get much better treatment.
+
+Hierarchical services are an excellent way to organize services to avoid a bloated configuration due to highly duplicated patterns of data. (E.g., all internet-based services will generally follow the same local breakout paths; by organizing them into a hierarchy you need to configure far fewer `service-route` elements.)
+
+#### Inherited Attributes of Hierarchical Services
+
+The following table lists the inheritable traits passed from a parent to child.
+
+| Attribute     | Notes                                                        |
+| ------------- | ------------------------------------------------------------ |
+| access-policy | Inherited. Can be augmented, but not overridden. |
+| multicast-sender-policy | Inherited. Can be augmented, but not overridden. |
+| security | Inherited. Can be overridden. |
+| service-group | Inherited. Can be overridden. |
+| service-policy | Inherited. Can be overridden. |
+| transport | Inherted. Can be overriden. |
+| applies-to | Inherited. Can be overridden. Note that a configuration is considered invalid if an orphan child exists on a router without its parent. |
+
+### Template Services
+
+Introduced in 5.0 along with hierarchical services, *template services* represent a service that exists solely to contain inheritable elements by its children. Notably, it has no `address` of its own – merely inheritable attributes. They exist to reduce configuration bloat due to repetition.
+
+Template services are characterized by an `application-type` set to `template`.
+
+Consider the following configuration fragment:
+
+```
+service           core
+    name             core
+    description      “Template service for core traffic”
+    application-type template
+    scope            private
+    security         internal
+    service-policy   data-best-effort
+    applies-to       headend
+    applies-to       branch
+
+    access-policy     lan
+        source         lan
+        permission     allow
+    exit
+    access-policy     wan
+        source         wan
+        permission     allow
+    exit
+exit
+
+service           branch-to-he.core
+    name           branch-to-he.core
+    description    “Forward business traffic to headend”
+    address        128.66.0.0/16
+    applies-to     branch
+exit
+
+service           voice.core
+    name             voice.core
+    description      “Voice traffic”
+    address          128.66.1.0/24
+    service-policy   voip-audio
+    applies-to       headend
+exit
+
+service           mgmt.core
+     name            mgmt.core
+     description     “Management traffic”
+     address         128.66.2.0/24
+     applies-to      headend
+exit
+```
+
+In this example, the `core` service exists to define the default `scope`, `security`, `service-policy`, and `access-policy`. The `branch-to-he.core` service exists only on branch routers and acts as a summary service, pushing all relevant traffic to the headend. The child service `voice.core` provides the appropriate address definitions for voice, as well as overriding the default `service-policy`. The `mgmt.core` child service provides the appropriate address definitions, but does not override the default service characteristics from `core`.
+
 ## Service Policy
 
 Each service can have a `service-policy` associated with it, to govern its behavior through various configurable attributes. This can influence the service's path selection and behavior in the event of path failures or path impairments as *administrative priorities*.
@@ -478,3 +614,12 @@ The 128T supports four path quality metrics in its service-policy, all of which 
 The MOS value for a given path is a composite metric, computed based on loss, latency and jitter as its factors.
 :::
 
+### Transport State Enforcement
+
+Within the service-policy configuration is the [transport-state-enforcement](config_reference_guide.md#service-policy) parameter, which governs the behavior of the 128T's TCP state machine for processing inbound TCP packets. As a stateful networking device, the 128T's default behavior is to reject any mid-flow TCP packets (i.e., packets without the SYN flag set) unless it – or its paired node in a dual node HA router – participated in the TCP three-way handshake for that session. There are deployments where this behavior may be undesirable. 
+
+For example, when an environment includes systems that are deployed in a [*dual router HA*](config_dual_router_ha.md) configuration, any services used to send traffic to or from the dual router HA must reference a service-policy that has `transport-state-enforcement` set to `allow`.
+
+This is because the dual router HA deployment model specifically does not share information between the 128T instances comprising the HA pair; thus, a router may receive mid-flow TCP packets if its counterpart fails (or if routing converges to the other node for any reason, etc.). Without access to any shared state about the in-progress TCP session, if `transport-state-enforcement` is left to its default value, this TCP session would get rejected by the router.
+
+It is also reasonable to consider `transport-state-enforcement` for 128T instances deployed as transit routers. That is, when a router – even one deployed as a dual node HA pair – could receive traffic in the event of a failure somewhere else in the network. Consider a case where a branch office has two possible data centers it could leverage when sending traffic; if the primary data center becomes unreachable, then traffic may flow to the alternate data center, including packets associated with existing TCP sessions. Generally, for catastrophic failures such as disaster recovery sites, it is not unreasonable to expect that the network will "hang up" on existing TCP sessions to instigate a reconnection attempt by the client. (In fact, it often turns out to be *beneficial* to have the client(s) reconnect, to ensure consistency with application delivery, DPI, etc. at the new data center.)

@@ -32,6 +32,8 @@ The 128T Certification program provides a designation of Certified Plus for cert
 * Includes performance benchmarking
 * Supporting documentation as needed
 
+For a list of platforms which are currently Certified Plus, see [Certified Platforms](about_certified_platforms.mdx).
+
 #### LTE Certified
 
 LTE certification is a superset of [128T Certified Plus](#128t-certified-plus-platform). Systems that contain an **onboard** LTE adapter are required to pass certification from the carrier.
@@ -51,6 +53,8 @@ The 128T Certification program provides a designation of Certified for certain p
 * Supplier relationship may be established
 * Includes performance benchmarking
 * Supporting documentation as needed
+
+For a list of platforms which are currently Certified, see [Certified Platforms](about_certified_platforms.mdx).
 
 ### 128T Qualified Platform
 
@@ -90,10 +94,26 @@ When selecting a compatible platform for a 128T router, the following provides s
 
 | Use | CPU | Memory | Disk | Network Interface |
 | --- | --- | --- | --- | --- |
-| Small Branch Office | 4 Intel cores | 8 GB ECC | 64 GB SSD | 4+ Physical NICs compatible with DPDK |
-| Medium Branch Office | 8 Intel cores | 16 GB ECC | 64+ GB SSD | 4+ Physical NICs compatible with DPDK |
-| Large Branch Office | 16 Intel cores | 32 GB ECC | 240+ GB SSD | 4+ Physical NICs compatible with DPDK |
-| Head-end or Data center | 8+ Intel Xeon cores | 32 GB ECC | 240+ GB SSD | 5+ Physical NICs compatible with DPDK |
+| Small Branch Office | 4 Intel cores, single socket | 8 GB ECC | 64 GB SLC SSD | 4+ Physical NICs compatible with DPDK |
+| Medium Branch Office | 8 Intel cores, single socket | 16 GB ECC | 64+ GB SLC SSD | 4+ Physical NICs compatible with DPDK |
+| Large Branch Office | 16 Intel cores, single socket | 32 GB ECC | 240+ GB SLC SSD | 4+ Physical NICs compatible with DPDK |
+| Head-end or Data center | 8+ Intel Xeon cores, single socket | 32 GB ECC | 240+ GB SLC SSD | 5+ Physical NICs compatible with DPDK |
+
+#### Compatible Platform BIOS Recommendations
+
+Platforms may have a variety of different features and capabilities configurable in the system BIOS. When running 128T on compatible platforms, the following are some BIOS settings recommendations:
+* Hyperthreading disabled for platform operating as a router
+* Hyperthreading enabled for platform operating as a conductor
+* LAN bypass disabled
+* Wake on LAN disabled
+* Date time format: UTC format / GMT time zone
+* Power on setting: always on
+* Setup prompt timeout value: 3 seconds
+* Boot mode: do not change manufacturer's settings (Legacy or UEFI accepted)
+* Boot order: HDD, USB, PXE
+* Watchdog timer: enabled
+* Power profile: maximum performance
+* System version, release date, manufacturer's part number, and serial number set in DMI table
 
 ## Minimum Platform Specifications
 
@@ -101,14 +121,18 @@ These are the minimum platform specifications for running the 128T Networking Pl
 
 ### Router
 
-* 4C Intel x86 processor
+* 4C Intel x86 processor, single socket
 * 8GB ECC Memory
-* 64GB SSD
+* 64GB SLC SSD
 * 1 DPDK enabled NIC port for standalone systems (two recommended)
 * 2 DPDK enabled NIC ports for HA systems (three recommended)
 * 1 dedicated NIC port for HA synchronization
 * (optional) 1 dedicated NIC port for out-of-band management
 * Hyperthreading disabled
+
+:::note
+Multi-socket platforms are not compatible with the 128T software when run as a router.
+:::
 
 ### Conductor
 
