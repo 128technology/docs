@@ -134,7 +134,7 @@ sidebar_label: 4.5
 ------
 - **I95-37021, I95-37026** Configuring overlapping session-types could cause the highway process to ignore the configuration change.
 ------
-- **I95-37042** 128T process `prank` journal logs was incorrectly excluded from output of `save tech-support-info`.
+- **I95-37042** 128T process `prank` journal logs were incorrectly excluded from output of `save tech-support-info`.
 ------
 - **I95-37106** Initiating a download on an HA router may silently be ignored on one of the nodes if it was in "connected" state.
 ------
