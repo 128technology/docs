@@ -19,7 +19,7 @@ There are two, somewhat complementary approaches to using a branch 128T as an NT
 
 This is straightforward configuration for both the end devices as well as for the 128T itself. In the example below, we will assume that the 128T's LAN IP address is `192.168.1.1`. Consider the following configuration excerpt:
 
-```
+```config {19,24-29}
 node  node1
     name              node1
     device-interface  lan
