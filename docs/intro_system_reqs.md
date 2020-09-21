@@ -1,6 +1,6 @@
 ---
-title: Hardware Requirements
-sidebar_label: Hardware Requirements
+title: System Requirements
+sidebar_label: System Requirements
 ---
 ## Hardware Requirements
 The 128T routing software runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments, the same CPU, memory, and storage specifications are required for comparable throughput.
@@ -19,12 +19,59 @@ When run as a virtual machine, CPU cores must be dedicated to the 128T router u
 128 Technology strongly recommends the use of ECC memory for all hardware platforms.
 :::
 
+## BIOS Recommendations
+In order to configure standard, off-the-shelf hardware to perform in line with traditional routing hardware, we recommend that you configure several BIOS settings to increase performance and resiliency.
+
+### Enable Automatic Restart
+In the event of power disruption, the Automatic Restart setting in your system's BIOS can automatically restart your system once power is restored. As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [Interchange](https://community.128technology.com/) for commonly deployed 128T hardware platforms. Below are representative steps for common BIOS parameters:
+
+#### To enable Automatic Restart:
+1. From the BIOS settings screen, select ACPI \> Power Settings.
+2. Change the Automatic Restart setting to On.
+3. Save the configuration and reboot your system. 
+
 ## Interface Requirements
 Logically, 128T routers have at least two interfaces; in many deployments they represent "LAN" and "WAN" interfaces. These may be separate physical interfaces, or they may be separate VLANs on a single physical interface. There is also typically a third interface used for management traffic.
 
 Though not a hard requirement, 128 Technology, recommends using a dedicated physical interface for management traffic whenever practical, to avoid commingling data plane traffic and management traffic.
 
 When configuring two software _nodes_ in a highly available router, each node requires a dedicated physical interface for synchronizing session data to its redundant peer. Each also generally have another, separate physical interface (referred to as a "fabric" interface) that is used to forward traffic between the nodes across a logical "backplane" between them. The fabric interface is not mandatory; refer to the [High Availability](config_ha.md) documentation for more information on configuration design for high availability deployments.
+
+### Assigning the System Interfaces
+Interfaces on host systems running as a 128T router, either bare metal or virtual deployment environments, are assigned for packet forwarding. At least one dedicated interface is required for packet forwarding.
+
+:::note
+Interface assignments are required only on software instances that are running as routers. Conductor nodes do not require interface assignments.
+:::
+
+:::info
+As mentioned in the section on Hardware Requirements, 128 Technology recommends using a separate interface for management traffic if possible.
+:::
+
+#### Identify Interface PCI Addresses
+Each Ethernet interface within a Linux system has a unique PCI address. This PCI address is used to bind the 128T router's configuration to the underlying hardware. During identification, be sure to record the PCI bus addresses for the individual interfaces.
+
+:::note
+Once the PCI addresses are configured for packet forwarding, the interfaces are no longer available to the Linux operating system. Incorrectly configuring the PCI addresses causes ssh connections and package installs to fail.
+:::
+
+#### To Identify PCI Addresses:
+1. Launch a command prompt window.
+2. Issue the command `lshw -c network -businfo`
+3. The PCI addresses are displayed in the tabular output in the column labeled Bus info. These addresses are also referenced in your 128T router's configuration, with the preceding pci@ omitted, to identify which interfaces you want the system to manage and use for packet forwarding.
+4. Record the PCI addresses you wish to use, and close the command prompt window.
+:::tip
+If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).
+:::
+:::note
+PCI-to-port maps are available for commonly deployed hardware systems on our user community, [Interchange](https://community.128technology.com/)
+:::
+
+Once you have identified the platform and determined it meets the minimum requirements, select the appropriate installation mechanism best suited for your needs
+
+- [Installing from 128T Installer](intro_installation_installer.md)
+- [Installing from bootable media](intro_installation_bootable_media.md)
+- [Installing on AWS](intro_installation_aws.md)
 
 ## VMware ESXi and KVM Requirements
 VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0) are hypervisor environments. The following adjustments are required to run 128T Routing Software in these environments: 

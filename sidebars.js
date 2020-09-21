@@ -13,7 +13,6 @@ module.exports = {
       "intro_getting_started",
       "intro_installation",
         "intro_system_reqs",
-        "intro_prepare_OS",
         
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
