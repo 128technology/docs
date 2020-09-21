@@ -19,6 +19,8 @@ sidebar_label: 4.5
 ------
 - **I95-37197** Config validation will now fail if you configure overlapping session-type ranges within the same protocol.
 ------
+- **I95-37269** Session may not be recovered correctly after path migration for outbound only connections
+------
 - **I95-37341** Support for Azure Accelerated Networking MT27710 ConnectX-4 LX Virtual Function device
 
 ## Release 4.5.1
