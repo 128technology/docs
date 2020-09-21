@@ -7,6 +7,10 @@ sidebar_label: Creating Bootable USB
 
 128 Technology distributes our software as a set of applications, an ISO, or a container. The ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as a 128T system.
 
+### Creating a CDROM/DVD
+
+Rather than writing the ISO to a USB stick, it may be preferable on systems with an onboard optical drive to write the ISO to CD/DVD/BlueRay. There are many tools available on all of the major platforms to write ISOs to optical discs, suck as K3b, Disco, etc.
+
 The goal of this guide is produce a bootable USB drive from a 128T ISO.
 
 ## Linux and macOS
