@@ -1167,6 +1167,7 @@ Description:
 For *service* elements that refer to multicast addresses, this lets administrators control which sources of traffic can receive that multicast.
 
 | Element | Type | Description |
+| ------- | ---- | ----------- |
 | permission | enumeration | Valid values: allow, deny. Default: allow. Controls permissions for the specified `source`. |
 | source | source-spec | Key field. This field contains either an IP prefix, or a QSN, or a combination of the two, and represents the "user population" subjected to this access policy.|
 
