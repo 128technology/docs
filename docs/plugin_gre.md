@@ -543,3 +543,12 @@ Completed in 0.07 seconds
 ```
 
 In addition, a `ping-monitor` service is started for each configured tunnel, the `systemctl status ping-monitor-namespace@<tunnel-name>` can be used to query the status of the ping service.
+
+## Release Notes
+
+### Release 1.1.2, 2.1.2
+
+#### Issues Fixed
+- **PLUGIN-677** GRE plugin doesn't start up correctly post reboot
+
+    _**Resolution**_ Implemented a config watcher service to handle startup conditions and dynamically apply configuration changes at runtime.

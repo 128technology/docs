@@ -32,6 +32,8 @@ The 128T Certification program provides a designation of Certified Plus for cert
 * Includes performance benchmarking
 * Supporting documentation as needed
 
+For a list of platforms which are currently Certified Plus, see [Certified Platforms](about_certified_platforms.mdx).
+
 #### LTE Certified
 
 LTE certification is a superset of [128T Certified Plus](#128t-certified-plus-platform). Systems that contain an **onboard** LTE adapter are required to pass certification from the carrier.
@@ -51,6 +53,8 @@ The 128T Certification program provides a designation of Certified for certain p
 * Supplier relationship may be established
 * Includes performance benchmarking
 * Supporting documentation as needed
+
+For a list of platforms which are currently Certified, see [Certified Platforms](about_certified_platforms.mdx).
 
 ### 128T Qualified Platform
 

@@ -123,6 +123,43 @@ dns-cache
 exit
 ```
 
+### Redirecting and blocking domains
+
+##### Version History
+
+| Release      | Modification                                    |
+| ------------ | ----------------------------------------------- |
+| 1.1.0, 2.1.0 | `dns-cache > redirect-domains` and `dns-cache > block-domains` were introduced |
+
+The DNS cache plugin will send all requests it processes to the list of servers provided in its configuration. Generally, these are configured as public DNS servers. However, many enterprises commonly host their own authoritative name server for their own domain (e.g., some-private-domain.com). The redirect-domains configuration lets administrators specify a distinct DNS server for a given domain, and 128T will use this when issuing queries for any host within that domain.
+
+
+``` config
+config
+
+    authority
+
+        router  router1
+            name       router1
+
+            dns-cache
+                enabled true
+                tenant dns-cache-plugin
+                ingress-service dns-catcher
+
+                redirect-domains  some-private-domain.com
+                    domain   some-private-domain.com
+                    address  192.168.8.8
+                exit
+                block-domains     block-domain.com
+            exit
+        exit
+    exit
+exit
+```
+
+The `block-domains` configuration allows the DNS server to block those domains by replying back with NXDOMAIN indicating that the domain name doesn't exist.
+
 ## Third Party Software and Licenses
 - dnsmasq (GNU GPL v2, v3)
 
@@ -135,12 +172,21 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 
 ## Release Notes
 
-### Release 1.0.1
+### Release 1.1.0, 2.1.0
+
+#### New Features and Improvements
+
+- **PLUGIN-641** Provide support for redirecting and blocking domains
+
+Added support for redirecting domains to a different upstream domain server. In addition, added support for blocking domains that the user should not be able to access.
 
 #### Issues Fixed
-- **PLUGIN-402** Ensure the application restarts with 128T
 
-### Release 2.0.1
+- **PLUGIN-684** DNS cache plugin fails to apply configuration on initial installation
+
+  _**Resolution:**_ Make config handling on the router dependent on a successful plugin router RPM installation.
+
+### Release 1.0.1, 2.0.1
 
 #### Issues Fixed
 - **PLUGIN-402** Ensure the application restarts with 128T
