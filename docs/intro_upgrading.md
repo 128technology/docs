@@ -15,6 +15,21 @@ There are three standard ways of upgrading routers:
 The router upgrade process using the PCLI and the GUI is done in two stages: first, the software is downloaded, then it is installed. Using the `install128t` application steps through both of these processes.
 :::
 
+### Stopping the 128T Routing Software
+Before upgrading the 128T Routing Software, use the following procedure to stop the the software.
+
+1. Launch a Linux shell window.
+2. Execute the command
+  ```
+sudo systemctl stop 128T
+  ```
+3. Verify that the software has stopped by executing the command
+  ```
+sudo systemct1 status 128T
+  ```
+**Result**: The software is listed as _inactive (dead)_.
+4. Close the Linux shell.
+
 ## Upgrading using the Conductor's PCLI
 
 For routers managed by a 128T Conductor, upgrades can be initiated via the 128T conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*.

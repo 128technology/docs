@@ -5,13 +5,32 @@ sidebar_label: Creating Bootable USB
 
 ## Introduction
 
-128 Technology distributes our software as a set of applications, an ISO, or a container. The ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as a 128T system.
+128 Technology distributes our software as a set of applications, an ISO, or a container. The ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as a 128T system. The goal of this guide is produce a bootable USB drive from a 128T ISO.
+
+### Bootable USB
+
+For small deployments or a proof of concept, each image can be loaded on to a bootable USB to install the operating system and 128T software. Follow the [instructions for installing from bootable media](intro_installation_bootable_media.md). After installation, the platform will power off.
+
+### Disk Cloning
+
+Another method that can be used to perform multiple installations quickly and efficiently is Disk Cloning. After the initial ISO installation and power off, the platform is generic and can be cloned to a bootable USB to create a master copy of that platform. 
+:::note
+When using cloned images, an identical hardware platform must be used. Create a new master image for each hardware variation.
+:::
+The cloned platform disk is then used to install the filesystem and 128T software on any number of other identical hardware platforms. 
+
+The high level steps are as follows:
+
+- The platform is installed using an ISO image which powers down on success.
+- Use Clonezilla or other Live USB to copy the platform on to bootable media.
+- Distribute the cloned disk using USB, multicast, or other technique.
+
+Refer to [Installing from an ISO](intro_installation_otp_iso.md) for installation information.
+
 
 ### Creating a CDROM/DVD
 
-Rather than writing the ISO to a USB stick, it may be preferable on systems with an onboard optical drive to write the ISO to CD/DVD/BlueRay. There are many tools available on all of the major platforms to write ISOs to optical discs, suck as K3b, Disco, etc.
-
-The goal of this guide is produce a bootable USB drive from a 128T ISO.
+For systems with an onboard optical drive, it may be preferable to write the ISO to a CD, DVD, or BlueRay disk. There are many tools available on the major platforms to write ISOs to optical discs, suck as K3b, Disco, etc. Those procedures are not addressed here. 
 
 ## Linux and macOS
 
@@ -36,11 +55,7 @@ Where `<VERSION>` is replaced with the 128T version you are interested in.
 
 ## Windows
 
-### Prerequisites
-
-- Install Rufus software https://rufus.akeo.ie/downloads/ [^1]
-- Verify in system BIOS that the USB drive is listed in the boot priority properly
-[^1]: tested on version 2.18.1213
+Before beginning, install the Rufus software https://rufus.akeo.ie/downloads/ on your Windows system. [^1]
 
 ### Procedure
 1. Launch Rufus.
@@ -51,13 +66,11 @@ Where `<VERSION>` is replaced with the 128T version you are interested in.
 6. Select **Write in ISO image mode**.
 7. Click **OK**.
 
-## System Preparation
-
-- Ensure that the platform meets minimal 128T hardware requirements
-- BIOS configured to boot off from USB drive first
-
 ## Further Resources
 
 Additional information on Bootable USB creation tools can be found here:
 
 https://www.pcsteps.com/1461-create-linux-installation-usb-dvd/
+
+[^1]: tested with version 2.18.1213
+

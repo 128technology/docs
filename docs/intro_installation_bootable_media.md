@@ -5,11 +5,10 @@ sidebar_label: Installing from Bootable Media
 
 This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading a 128T ISO](intro_downloading_iso.md)and [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
-### BIOS Configuration
+### Prerequisites
 
-It may be necessary to change the target system’s BIOS settings to allow booting from removable media. Consult your hardware vendor’s documentation (or pay close attention to the messages displayed during the boot sequence!) to enter into the BIOS to validate that it will boot from USB/CD-ROM/DVD, as necessary.
-
-![BIOS Screen](/img/intro_installation_bootable_media_bios.png)
+- Ensure that the platform you are installing on meets the 128T hardware requirements.
+- Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 
 ### Installing the ISO
 

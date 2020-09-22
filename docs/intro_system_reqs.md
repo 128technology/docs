@@ -22,6 +22,11 @@ When run as a virtual machine, CPU cores must be dedicated to the 128T router u
 ## BIOS Recommendations
 In order to configure standard, off-the-shelf hardware to perform in line with traditional routing hardware, we recommend that you configure several BIOS settings to increase performance and resiliency.
 
+### Boot Priority
+It may be necessary to change the target system’s BIOS settings to allow booting from removable media. Consult your hardware vendor’s documentation (or pay close attention to the messages displayed during the boot sequence) to verify that it will boot from a USB, CD, or DVD.
+
+![BIOS Screen](/img/intro_installation_bootable_media_bios.png)
+
 ### Enable Automatic Restart
 In the event of power disruption, the Automatic Restart setting in your system's BIOS can automatically restart your system once power is restored. As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [Interchange](https://community.128technology.com/) for commonly deployed 128T hardware platforms. Below are representative steps for common BIOS parameters:
 
@@ -60,6 +65,7 @@ Once the PCI addresses are configured for packet forwarding, the interfaces are 
 2. Issue the command `lshw -c network -businfo`
 3. The PCI addresses are displayed in the tabular output in the column labeled Bus info. These addresses are also referenced in your 128T router's configuration, with the preceding pci@ omitted, to identify which interfaces you want the system to manage and use for packet forwarding.
 4. Record the PCI addresses you wish to use, and close the command prompt window.
+
 :::tip
 If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).
 :::

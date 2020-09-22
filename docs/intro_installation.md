@@ -29,21 +29,5 @@ The 128T routing software offers the following installation methods to address y
  	- [Install using ZTP](intro_ztp.md)
  - [Installation in Microsoft Azure](intro_installation_azure.md)	
 
-## Post Installation
 
-After installing your 128T Routing Software you may want to stop or upgrade your software. The procedure for stopping the software is provided for reference and is not required as part of your software installation or maintenance.
 
-### Stopping the 128T Routing Software
-Occasionally, you may need to stop the 128T software to perform maintenance on your system.
-
-1. Launch a Linux shell window.
-2. Execute the command
-  ```
-sudo systemctl stop 128T
-  ```
-3. Verify that the software has stopped by executing the command
-  ```
-sudo systemct1 status 128T
-  ```
-**Result**: The software is listed as _inactive (dead)_.
-4. Close the Linux shell.
