@@ -19,22 +19,22 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 | name | description |
 | ---- | ----------- |
-| device-interface | the device interface on which to clear the ARP cache (default: all) |
+| device-interface | The device interface on which to clear the ARP cache (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| ip | the IP address for which to clear an ARP entry (must be specified after 'device-interface') [type: IP address] |
+| ip | The IP address for which to clear an ARP entry (must be specified after &#x27;device-interface&#x27;) [type: IP address] |
 | node | The name of the node |
 | router | The name of the router |
-| vlan | the VLAN on which to clear the ARP cache (must be specified after 'device-interface') [type: int] |
+| vlan | The VLAN on which to clear the ARP cache (must be specified after &#x27;device-interface&#x27;) [type: int] |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show arp`](#show-arp) | Shows current arps from the highway manager at the specified node. |
+| [`show arp`](#show-arp) | Shows the contents of the ARP table on the specified node. |
 
 #### Description
 
-The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from a 128T router or node's ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove.
+The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from a 128T router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove.
 
 #### Version History
 | Release | Modification                |
@@ -56,22 +56,22 @@ clear bgp [{in | out | soft}] [force] router <router> <neighbor>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| in | soft reset received BGP updates |
-| out | soft reset transmitted BGP updates |
+| in | Soft reset received BGP updates |
+| out | Soft reset transmitted BGP updates |
 | router | The name of the router for which to clear BGP neighbors |
-| soft | soft reset received and transmitted BGP updates |
+| soft | Soft reset received and transmitted BGP updates |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| neighbor | neighbor ip-address [type: IP address or 'all'] |
+| neighbor | neighbor ip-address [type: IP address or &#x27;all&#x27;] |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show bgp`](#show-bgp) | Show the current BGP routes from the routing manager. |
+| [`show bgp`](#show-bgp) | Displays information about the state of the BGP process on the 128T router. |
 
 ## clear context router
 
@@ -218,7 +218,7 @@ commit [force] [validate-local]
 
 #### Description
 
-The `commit` command causes the 128T router to validate the candidate configuration, and then replace the running configuration with the candidate configuration (assuming it passes the validation step). It is used once a series of configuration changes have been made, and an administrator wishes to "activate" those configuration changes.
+The `commit` command causes the 128T router to validate the candidate configuration, and then replace the running configuration with the candidate configuration (assuming it passes the validation step). It is used once a series of configuration changes have been made, and an administrator wishes to &quot;activate&quot; those configuration changes.
 
 When run from a 128T conductor, the conductor will first validate the configuration itself before distributing configuration to all of its managed routers for each of them to validate the configuration. After the managed routers have all reported the results of their validation, the commit activity takes place (assuming a successful validation). This distributed validation can be skipped by using the validate-local keyword argument.
 
@@ -310,7 +310,7 @@ compare config [<old>] [<new>]
 
 #### Description
 
-The `compare` command presents a list of differences between the two configurations specified as arguments on the command line. The one listed first influences the output in a very important way: the 128T router will return a list of configuration commands that will cause the configuration to be listed _first_ to be brought to parity with the one listed _second_. (Note: since the only editable configuration is the "candidate" configuration, the changes outlined by the _compare_ command cannot be directly applied to the "running" configuration.)
+The `compare` command presents a list of differences between the two configurations specified as arguments on the command line. The one listed first influences the output in a very important way: the 128T router will return a list of configuration commands that will cause the configuration to be listed _first_ to be brought to parity with the one listed _second_. (Note: since the only editable configuration is the &quot;candidate&quot; configuration, the changes outlined by the _compare_ command cannot be directly applied to the &quot;running&quot; configuration.)
 
 In the example below, the candidate and running configurations are identical save for a single _service-route_ that has been added to the candidate configuration.
 
@@ -409,7 +409,7 @@ config
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
-| 2.0.0   | command was renamed to `configure` from `config` |
+| 2.0.0   | Command was renamed to `configure` from `config` |
 
 
 ## `connect`
@@ -419,15 +419,15 @@ Connect to a Managed Router.  For more information, read [Connecting to 128T Rou
 #### Usage
 
 ```
-connect [node <node>] [username <username>] router <router>
+connect [username <username>] router <router> node <node>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| node | node to connect to |
-| router | router to connect to |
+| node | The node to connect to |
+| router | The router to connect to |
 | username | Username to use for login to the Managed Router (default: &lt;current user&gt;) |
 
 ## `create capture-filter`
@@ -437,7 +437,7 @@ Creates a capture-filter using BPF syntax (as used in wireshark) on the target i
 #### Usage
 
 ```
-create capture-filter [node <node>] device-interface <device-interface> router <router> <capture-filter>
+create capture-filter device-interface <device-interface> router <router> node <node> <capture-filter>
 ```
 
 ##### Keyword Arguments
@@ -458,7 +458,7 @@ create capture-filter [node <node>] device-interface <device-interface> router <
 
 | command | description |
 | ------- | ----------- |
-| [`delete capture-filter`](#delete-capture-filter) | Deletes capture-filter from highway at the specified node |
+| [`delete capture-filter`](#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
 | [`show capture-filters`](#show-capture-filters) | Show active capture-filters. |
 | [`show stats packet-capture`](#show-stats-packet-capture) | Stats pertaining to captured packets |
 
@@ -490,8 +490,8 @@ create certificate request webserver
 | command | description |
 | ------- | ----------- |
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
-| [`delete certificate webserver`](#delete-certificate-webserver) | Delete a certificates. |
-| [`import certificate webserver`](#import-certificate-webserver) | Import the webserver certificate |
+| [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
+| [`import certificate webserver`](#import-certificate-webserver) | Import a certificate to be used by the webserver. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
 
 #### Description
@@ -515,8 +515,8 @@ create certificate self-signed webserver
 | command | description |
 | ------- | ----------- |
 | [`create certificate request webserver`](#create-certificate-request-webserver) | Create a certificate signing request. |
-| [`delete certificate webserver`](#delete-certificate-webserver) | Delete a certificates. |
-| [`import certificate webserver`](#import-certificate-webserver) | Import the webserver certificate |
+| [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
+| [`import certificate webserver`](#import-certificate-webserver) | Import a certificate to be used by the webserver. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
 
 #### Description
@@ -567,7 +567,7 @@ create config autogenerated
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](#show-stats-config) | Metrics pertaining to the get-config RPC |
 
-### Description
+#### Description
 
 Force re-generation of all automatically generated configuration items. Both internal and plugin configuration generation is run when. Changes are staged into the candidate configuration.
 
@@ -580,7 +580,7 @@ Creates a session capture at the specified node and service.
 #### Usage
 
 ```
-create session-capture [source-ip <source-ip>] [source-port <source-port>] [destination-ip <destination-ip>] [destination-port <destination-port>] [protocol <protocol>] [session-count <session-count>] [packet-count <packet-count>] [local-only] [node <node>] service <service> router <router>
+create session-capture [source-ip <source-ip>] [source-port <source-port>] [destination-ip <destination-ip>] [destination-port <destination-port>] [protocol <protocol>] [session-count <session-count>] [packet-count <packet-count>] [local-only] service <service> router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -591,11 +591,11 @@ create session-capture [source-ip <source-ip>] [source-port <source-port>] [dest
 | destination-port | The destination port to match (can be a range) [type: port or port-range] (default: 0-65535) |
 | local-only | Session capture is local to the node |
 | node | The ingress node on which to create the session capture |
-| packet-count | The number of packets to capture per session, in each direction [type: 'unlimited' or positive int] (default: 100) |
-| protocol | The protocol to match (in decimal or by name, eg 'tcp') [type: string or uint8] (default: all) |
+| packet-count | The number of packets to capture per session, in each direction [type: &#x27;unlimited&#x27; or positive int] (default: 100) |
+| protocol | The protocol to match (in decimal or by name, eg &#x27;tcp&#x27;) [type: string or uint8] (default: all) |
 | router | The router on which to create the session capture |
 | service | The service on which to create the session capture |
-| session-count | The number of sessions to capture [type: 'unlimited' or positive int] (default: 100) |
+| session-count | The number of sessions to capture [type: &#x27;unlimited&#x27; or positive int] (default: 100) |
 | source-ip | The source IP address/prefix to match [type: IP prefix] (default: 0.0.0.0/0) |
 | source-port | The source port to match (can be a range) [type: port or port-range] (default: 0-65535) |
 
@@ -607,7 +607,7 @@ create session-capture [source-ip <source-ip>] [source-port <source-port>] [dest
 | [`delete session-capture by-id`](#delete-session-capture-by-id) | Deletes session-capture by capture-id from selected service. |
 | [`show session-captures`](#show-session-captures) | Show active session-captures. |
 
-### Description
+#### Description
 
 When destination or source IPs are not specified, any IP will be matched.
 
@@ -649,7 +649,7 @@ create user <username>
 
 #### Description
 
-The `create user` command allows administrators to create user accounts for user and/or administrative access to the 128T router&#39;s management port. Issuing the `create user &lt;username&gt;` launches an interactive session that prompts for the new user&#39;s full name, password, whether they are an administrative or basic user, and the enabled/disabled state of that user account.
+The `create user` command allows administrators to create user accounts for user and/or administrative access to the 128T router&#x27;s management port. Issuing the `create user &lt;username&gt;` launches an interactive session that prompts for the new user&#x27;s full name, password, whether they are an administrative or basic user, and the enabled/disabled state of that user account.
 
 :::note
 The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, and cannot contain any characters that repeat more than three times.
@@ -682,7 +682,7 @@ Deletes a capture-filter created using create capture-filter. (It will not delet
 #### Usage
 
 ```
-delete capture-filter [node <node>] device-interface <device-interface> router <router> <capture-filter>
+delete capture-filter device-interface <device-interface> router <router> node <node> <capture-filter>
 ```
 
 ##### Keyword Arguments
@@ -703,7 +703,7 @@ delete capture-filter [node <node>] device-interface <device-interface> router <
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](#create-capture-filter) | Creates capture-filter from highway at the specified node |
+| [`create capture-filter`](#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
 | [`show capture-filters`](#show-capture-filters) | Show active capture-filters. |
 | [`show stats packet-capture`](#show-stats-packet-capture) | Stats pertaining to captured packets |
 
@@ -772,12 +772,12 @@ delete certificate webserver [force]
 | ------- | ----------- |
 | [`create certificate request webserver`](#create-certificate-request-webserver) | Create a certificate signing request. |
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
-| [`import certificate webserver`](#import-certificate-webserver) | Import the webserver certificate |
+| [`import certificate webserver`](#import-certificate-webserver) | Import a certificate to be used by the webserver. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
 
 #### Description
 
-The _delete certificate webserver_ command allows administrators to delete certificates that are stored on the 128T router. Note that the 128T router will always prompt the administrator to confirm deletion (the "force" keyword is not allowed).
+The _delete certificate webserver_ command allows administrators to delete certificates that are stored on the 128T router. Note that the 128T router will always prompt the administrator to confirm deletion (the &quot;force&quot; keyword is not allowed).
 
 #### Example
 
@@ -813,7 +813,7 @@ delete config exported [force] <name>
 
 | name | description |
 | ---- | ----------- |
-| name | name of the exported configuration to delete |
+| name | Name of the exported configuration to delete |
 
 ##### See Also
 
@@ -833,7 +833,7 @@ delete config exported [force] <name>
 
 #### Description
 
-The _delete config_ command allows administrators to delete configurations from the 128T&#39;s filesystem that had previously been exported with the _export config_ command. The _force_ flag will skip the confirmation check without prompting the user.
+The _delete config_ command allows administrators to delete configurations from the 128T&#x27;s filesystem that had previously been exported with the _export config_ command. The _force_ flag will skip the confirmation check without prompting the user.
 
 #### Example
 
@@ -865,8 +865,8 @@ delete flows [force] [node <node>] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
-| node | the node from which to delete flow entries |
-| router | the router from which to delete flow entries |
+| node | The node from which to delete flow entries |
+| router | The router from which to delete flow entries |
 
 #### Description
 
@@ -898,7 +898,7 @@ Deletes session capture from selected service.
 #### Usage
 
 ```
-delete session-capture [source-ip <source-ip>] [source-port <source-port>] [destination-ip <destination-ip>] [destination-port <destination-port>] [protocol <protocol>] [session-count <session-count>] [packet-count <packet-count>] [local-only] [node <node>] service <service> router <router>
+delete session-capture [source-ip <source-ip>] [source-port <source-port>] [destination-ip <destination-ip>] [destination-port <destination-port>] [protocol <protocol>] [session-count <session-count>] [packet-count <packet-count>] [local-only] service <service> router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -909,11 +909,11 @@ delete session-capture [source-ip <source-ip>] [source-port <source-port>] [dest
 | destination-port | The destination port to match (can be a range) [type: port or port-range] (default: 0-65535) |
 | local-only | Session capture is local to the node |
 | node | The node on which to remove the session-capture filter |
-| packet-count | The number of packets to capture per session, in each direction [type: 'unlimited' or positive int] (default: 100) |
-| protocol | The protocol to match (in decimal or by name, eg 'tcp') [type: string or uint8] (default: all) |
+| packet-count | The number of packets to capture per session, in each direction [type: &#x27;unlimited&#x27; or positive int] (default: 100) |
+| protocol | The protocol to match (in decimal or by name, eg &#x27;tcp&#x27;) [type: string or uint8] (default: all) |
 | router | The router on which to remove the session-capture filter |
 | service | The service on which to create the session capture |
-| session-count | The number of sessions to capture [type: 'unlimited' or positive int] (default: 100) |
+| session-count | The number of sessions to capture [type: &#x27;unlimited&#x27; or positive int] (default: 100) |
 | source-ip | The source IP address/prefix to match [type: IP prefix] (default: 0.0.0.0/0) |
 | source-port | The source port to match (can be a range) [type: port or port-range] (default: 0-65535) |
 
@@ -938,7 +938,7 @@ Deletes session-capture by capture-id from selected service.
 #### Usage
 
 ```
-delete session-capture by-id [node <node>] service <service> router <router> <capture-id>
+delete session-capture by-id service <service> router <router> node <node> <capture-id>
 ```
 
 ##### Keyword Arguments
@@ -978,10 +978,10 @@ delete sessions [{session-id <session-id> | service-name <service-name>}] [force
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
-| node | the node from which to delete sessions |
-| router | the router from which to delete sessions |
-| service-name | the name of the service for which to delete all sessions |
-| session-id | the identifier of the session to be deleted |
+| node | The node from which to delete sessions |
+| router | The router from which to delete sessions |
+| service-name | The name of the service for which to delete all sessions |
+| session-id | The identifier of the session to be deleted |
 
 #### Description
 
@@ -1052,7 +1052,7 @@ edit prompt <format>
 
 | name | description |
 | ---- | ----------- |
-| format | format string for the prompt display |
+| format | Format string for the prompt display |
 
 ##### See Also
 
@@ -1078,9 +1078,9 @@ State Variables
 {node}      - Name of the connected node
 {router}    - Name of the connected router
 {context}   - Currently set context if one is set; empty otherwise
-{path}      - Full path to the current PCLI menu, separated by '/'
+{path}      - Full path to the current PCLI menu, separated by &#x27;/&#x27;
 {location}  - Name of current PCLI menu
-{privilege} - "#" if the current user has administrator privileges, else "&gt;"
+{privilege} - &quot;#&quot; if the current user has administrator privileges, else &quot;&gt;&quot;
 
 Conditional Variables
 =====================
@@ -1161,7 +1161,7 @@ edit user [<username>]
 
 | name | description |
 | ---- | ----------- |
-| username | the name of the account to modify (default: &lt;current user&gt;) |
+| username | The name of the account to modify (default: &lt;current user&gt;) |
 
 ##### See Also
 
@@ -1179,7 +1179,7 @@ edit user [<username>]
 
 The _edit user_ command enters a configuration subtree specific to administering user accounts. From within this subtree, administrators can change any of the attributes associated with a user account (full name, password, role, and enabled state). This is done in a "configuration-like" way, where commands are issued as _attribute value_.
 
-As with standard configuration, using the "?" command will list the options available for editing.
+As with standard configuration, using the &amp;quot;?&amp;quot; command will list the options available for editing.
 
 #### Example
 
@@ -1270,7 +1270,7 @@ export config <datastore> <export-name>
 | name | description |
 | ---- | ----------- |
 | datastore | running \| candidate |
-| export-name | a name consisting of alphanumeric characters or any of the following: . - _ |
+| export-name | A name consisting of alphanumeric characters or any of the following: . - _ |
 
 ##### See Also
 
@@ -1290,11 +1290,11 @@ export config <datastore> <export-name>
 
 #### Description
 
-The _export_ command takes a configuration from a previously created backup (via _create config backup_), from the candidate configuration, or from the 128T router&#39;s running configuration, and stores it as a file on the local filesystem. It can then be taken off, moved onto other systems, archived, etc.
+The _export_ command takes a configuration from a previously created backup (via _create config backup_), from the candidate configuration, or from the 128T router&#x27;s running configuration, and stores it as a file on the local filesystem. It can then be taken off, moved onto other systems, archived, etc.
 
 Exported files are stored in /etc/128technology/config-backups/ and are stored as GZIP compressed files.
 
-The _export_ command&#39;s complement, _import_ is used to reverse the process, taking a configuration archive and restoring it onto a system.
+The _export_ command&#x27;s complement, _import_ is used to reverse the process, taking a configuration archive and restoring it onto a system.
 
 #### Example
 
@@ -1314,7 +1314,7 @@ admin@labsystem1.fiedler#
 
 ## `import certificate webserver`
 
-Import a certificate to be used by the webserver
+Import a certificate to be used by the webserver.
 
 #### Usage
 
@@ -1328,7 +1328,7 @@ import certificate webserver
 | ------- | ----------- |
 | [`create certificate request webserver`](#create-certificate-request-webserver) | Create a certificate signing request. |
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
-| [`delete certificate webserver`](#delete-certificate-webserver) | Delete a certificates. |
+| [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
 | [`show certificate webserver`](#show-certificate-webserver) | Display the webserver certificate |
 
 #### Description
@@ -1370,7 +1370,7 @@ import config [force] <name>
 
 | name | description |
 | ---- | ----------- |
-| name | name of the configuration file to import |
+| name | Name of the configuration file to import |
 
 ##### See Also
 
@@ -1390,7 +1390,7 @@ import config [force] <name>
 
 #### Description
 
-This command takes a backup configuration (one that has been stored with the `export` command) and overwrites the current candidate configuration with its contents. Inclusion of the optional "force" keyword will skip the prompt for confirmation.
+This command takes a backup configuration (one that has been stored with the `export` command) and overwrites the current candidate configuration with its contents. Inclusion of the optional &quot;force&quot; keyword will skip the prompt for confirmation.
 
 #### Example
 
@@ -1463,14 +1463,14 @@ manage plugin install [node <node>] <name> [<version>]
 
 | name | description |
 | ---- | ----------- |
-| node | Node to remove on (default: all) |
+| node | Node to install on (default: all) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| name | name of plugin to install |
-| version | version of plugin to install (default: latest) |
+| name | Name of plugin to install |
+| version | Version of plugin to install (default: latest) |
 
 ##### See Also
 
@@ -1500,7 +1500,7 @@ manage plugin remove [node <node>] <name>
 
 | name | description |
 | ---- | ----------- |
-| name | name of plugin to be removed |
+| name | Name of plugin to be removed |
 
 ##### See Also
 
@@ -1524,10 +1524,10 @@ migrate [skip-validation] [force] conductor <address> [<address>] router <router
 
 | name | description |
 | ---- | ----------- |
-| conductor | the address(es) of the conductor node(s) to migrate to |
+| conductor | The address(es) of the conductor node(s) to migrate to |
 | force | Skip confirmation prompt |
-| router | router to migrate |
-| skip-validation | attempt to migrate the router without checking if migration is possible |
+| router | The router to migrate |
+| skip-validation | Attempt to migrate the router without checking if migration is possible |
 
 ##### See Also
 
@@ -1544,7 +1544,7 @@ migrate [skip-validation] [force] conductor <address> [<address>] router <router
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ## `ping`
 
@@ -1553,27 +1553,27 @@ Send an ICMP request through a network interface.
 #### Usage
 
 ```
-ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [egress-interface <egress-interface>] [gateway-ip <gateway-ip>] [router <router>] [node <node>] <destination-ip>
+ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [egress-interface <egress-interface>] [gateway-ip <gateway-ip>] router <router> node <node> <destination-ip>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| count | number of ping requests to send [type: int] (default: 4) |
-| egress-interface | network interface from which to ping |
-| gateway-ip | gateway IP address from which to ping [type: IP address] |
-| node | the node from which to send the ping request |
-| router | the router from which to send the ping request (default: &lt;current router&gt;) |
-| set-df-bit | set the IPv4 'Don't Fragment' bit on the request packet |
-| size | number of data bytes to send [type: int] (default: 56) |
-| timeout | time to wait for a response, in seconds [max: 10 seconds] [type: int] (default: 1) |
+| count | Number of ping requests to send [type: int] (default: 4) |
+| egress-interface | Network interface from which to ping |
+| gateway-ip | Gateway IP address from which to ping [type: IP address] |
+| node | The node from which to send the ping request |
+| router | The router from which to send the ping request |
+| set-df-bit | Set the IPv4 &#x27;Don&#x27;t Fragment&#x27; bit on the request packet |
+| size | Number of data bytes to send [type: int] (default: 56) |
+| timeout | Time to wait for a response, in seconds [max: 10 seconds] [type: int] (default: 1) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| destination-ip | destination IP of the ping request [type: IP address] |
+| destination-ip | Destination IP of the ping request [type: IP address] |
 
 #### Description
 
@@ -1606,6 +1606,10 @@ Quit the PCLI.
 quit
 ```
 
+#### Description
+
+This command logs the user out, and quits the PCLI.
+
 #### Version History
 
 | Release | Modification                |
@@ -1627,7 +1631,7 @@ refresh dns resolutions [hostname <hostname>] [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| hostname | the DNS hostname belonging to a node |
+| hostname | The DNS hostname belonging to a node |
 | router | The name of the router (default: &lt;current router&gt;) |
 
 ##### See Also
@@ -1639,7 +1643,7 @@ refresh dns resolutions [hostname <hostname>] [force] [router <router>]
 
 ## `release dhcp lease`
 
-Release the current DHCP lease for a specified network-interface
+Releases an active DHCP lease.
 
 #### Usage
 
@@ -1652,7 +1656,7 @@ release dhcp lease [force] network-interface <network-interface> router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| network-interface | the network interface on which to release the current DHCP lease |
+| network-interface | The network interface on which to release the current DHCP lease |
 | router | The name of the router |
 
 ##### See Also
@@ -1678,19 +1682,19 @@ repeat [beep] [exit-on-failure] [interval <interval>] <command> [<command> ...]
 
 | name | description |
 | ---- | ----------- |
-| beep | beep if the command fails to execute |
-| exit-on-failure | exit if the command fails to execute |
-| interval | seconds to wait between updates [type: int] (default: 2) |
+| beep | Beep if the command fails to execute |
+| exit-on-failure | Exit if the command fails to execute |
+| interval | Seconds to wait between updates [type: int] (default: 2) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| command | command to repeat |
+| command | Command to repeat |
 
 #### Description
 
-This command can be used to "watch" statistics over a specified period. In order to stop the _repeat_ command, the user must issue a `CTRL-C`.
+This command can be used to &quot;watch&quot; statistics over a specified period. In order to stop the _repeat_ command, the user must issue a `CTRL-C`.
 
 #### Example
 
@@ -1728,18 +1732,19 @@ replace config [force] <find> <replace>
 
 | name | description |
 | ---- | ----------- |
-| force | replace all matching data without prompts |
+| force | Replace all matching data without prompts |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| find | the text to find in the candidate configuration |
-| replace | the new value to replace 'find' with |
+| find | The text to find in the candidate configuration |
+| replace | The new value to replace &#x27;find&#x27; with |
 
 #### Description
 
-The _replace_ command is a powerful tool for making sweeping configuration changes, similar to a "find and replace" operation in a word processor. The _replace_ command has several optional arguments that affect how the replacement occurs; _case-sensitive_ will only match elements within the configuration that match the case supplied with the _query_ string. The _regex_ argument treats the query string as a regular expression. The _whole-word_ argument requires that the match be an entire word, rather than just a substring or partial match.
+The _replace_ command is a powerful tool for making sweeping configuration changes, similar to a &quot;find and replace&quot; operation in a word processor.
+The _replace_ command has several optional arguments that affect how the replacement occurs; _case-sensitive_ will only match elements within the configuration that match the case supplied with the _query_ string. The _regex_ argument treats the query string as a regular expression. The _whole-word_ argument requires that the match be an entire word, rather than just a substring or partial match.
 
 The user-supplied _query string_ and _replacement string_ are the matching text, and the replacement text, respectively.
 
@@ -1796,7 +1801,7 @@ restore config factory-default [force]
 
 #### Description
 
-This command removes all administrator-added configuration, and restores the basic configuration to all of the 128T router&#39;s factory default settings. The PCLI will prompt for confirmation before resetting the configuration, unless the optional _force_ modifier is added.
+This command removes all administrator-added configuration, and restores the basic configuration to all of the 128T router&#x27;s factory default settings. The PCLI will prompt for confirmation before resetting the configuration, unless the optional _force_ modifier is added.
 
 #### Example
 
@@ -1862,7 +1867,7 @@ Candidate configuration changes successfully discarded
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.1.0   | This feature was introduced |
-| 2.0.0   | previously named _restore config candidate_ |
+| 2.0.0   | Previously named _restore config candidate_ |
 
 ## `restore prompt`
 
@@ -1892,9 +1897,9 @@ restore prompt [force]
 | [`set password`](#set-password) | Change your password. |
 | [`show user`](#show-user) | Display information for user accounts. |
 
-### Description
+#### Description
 
-The _restore prompt_ command returns the PCLI's prompt to its factory default, in the event that an administrator has modified it.
+The _restore prompt_ command returns the PCLI&#x27;s prompt to its factory default, in the event that an administrator has modified it.
 
 #### Example
 
@@ -1939,7 +1944,6 @@ restore users factory-default [force]
 | [`set password`](#set-password) | Change your password. |
 | [`show user`](#show-user) | Display information for user accounts. |
 
-
 #### Description
 
 The _restore users factory-default_ command deletes all administratively created user accounts (i.e., all but the ones that are installed with the 128T routing software natively) and leaves the system with just the _admin_ and _user_ accounts.
@@ -1965,14 +1969,14 @@ rotate log [force] [router <router>] [node <node>] [<process-name>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node for which to rotate logfiles |
-| router | the router for which to rotate logfiles (default: &lt;current router&gt;) |
+| node | The node for which to rotate logfiles |
+| router | The router for which to rotate logfiles (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| process-name | the process for which to rotate logfiles (default: all) |
+| process-name | The process for which to rotate logfiles (default: all) |
 
 ##### See Also
 
@@ -1982,10 +1986,9 @@ rotate log [force] [router <router>] [node <node>] [<process-name>]
 | [`write log message`](#write-log-message) | Write a message to the log. |
 | [`write log snapshot`](#write-log-snapshot) | Write a snapshot to the log. |
 
-
 #### Description
 
-This command is used to rotate log files (i.e., close the current log file and open a new one) generated by the various processes that comprise the 128T router to rotate. The 128T router&#39;s log files, stored in `/var/log/128technology`, keep 25 prior logs for each process, space permitting. Files are rotated such that, for instance, pcli.log becomes pcli.1.log while pcli.1.log becomes pcli.2.log, and so on. The oldest log file for each process is removed.
+This command is used to rotate log files (i.e., close the current log file and open a new one) generated by the various processes that comprise the 128T router to rotate. The 128T router&#x27;s log files, stored in `/var/log/128technology`, keep 25 prior logs for each process, space permitting. Files are rotated such that, for instance, pcli.log becomes pcli.1.log while pcli.1.log becomes pcli.2.log, and so on. The oldest log file for each process is removed.
 
 The _rotate log_ command is useful prior to engaging in troubleshooting exercises, to help narrow down which files may contain items of interest. It is particularly useful when used in conjunction with the _write_ command, described elsewhere in this document.
 
@@ -2042,15 +2045,15 @@ save runtime-stats [force] [router <router>] [node <node>] <filename> [<process-
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | target node from which to gather runtime stats |
-| router | target router from which to gather runtime stats (default: &lt;current router&gt;) |
+| node | Target node from which to gather runtime stats |
+| router | Target router from which to gather runtime stats (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| filename | custom filename to store system information |
-| process-name | target process from which to gather runtime stats (default: all) |
+| filename | Custom filename to store system information |
+| process-name | Target process from which to gather runtime stats (default: all) |
 
 #### Example
 
@@ -2074,11 +2077,11 @@ save tech-support-info [<prefix>]
 
 | name | description |
 | ---- | ----------- |
-| prefix | custom file prefix to add the archive file |
+| prefix | Custom file prefix to add the archive file |
 
 #### Description
 
-This command packages statistics, logs and other diagnostic data, to exchange with 128 Technology&#39;s support team. The _tech-support-info_ command echoes the location where it stores the file when complete (`/var/log/128technology/tech-support-info.tar.gz`).
+This command packages statistics, logs and other diagnostic data, to exchange with 128 Technology&#x27;s support team. The _tech-support-info_ command echoes the location where it stores the file when complete (`/var/log/128technology/tech-support-info.tar.gz`).
 
 :::note
 This command collect a lot of data, and may take some time to complete.
@@ -2096,7 +2099,7 @@ Retrieving Tech Support Info...
 
 ## `search`
 
-Search for any PCLI command or configuration data from the current location in the command tree
+Search for any PCLI command or configuration data from the current location in the command tree.
 
 #### Usage
 
@@ -2104,19 +2107,11 @@ Search for any PCLI command or configuration data from the current location in t
 search <find>
 ```
 
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| case-sensitive | interpret the search query as case-sensitive |
-| regex | process the query as a regular expression |
-| whole-word | don't allow partial matches of words |
-
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| find | find all the matching text |
+| find | Find all the matching text |
 
 ##### Subcommands
 
@@ -2128,7 +2123,7 @@ search <find>
 
 #### Description
 
-The _search_ command and its various subcommands let users search through the 128T router&#39;s PCLI command tree, the configuration tree, and user-supplied configuration data to locate the information specified by the supplied _query_ string.
+The _search_ command and its various subcommands let users search through the 128T router&#x27;s PCLI command tree, the configuration tree, and user-supplied configuration data to locate the information specified by the supplied _find_ string.
 
 When omitting the optional filter, the _search_ command will return results for all of the types of information it can locate: commands, configuration attributes, and configuration data.
 
@@ -2167,7 +2162,7 @@ search commands <find>
 
 | name | description |
 | ---- | ----------- |
-| find | find all the matching text |
+| find | Find all the matching text |
 
 ## `search config`
 
@@ -2179,19 +2174,11 @@ Search all configuration data
 search config <find>
 ```
 
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| case-sensitive | interpret the search query as case-sensitive |
-| regex | process the query as a regular expression |
-| whole-word | don't allow partial matches of words |
-
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| find | find all the matching text |
+| find | Find all the matching text |
 
 ##### Subcommands
 
@@ -2237,7 +2224,7 @@ search config candidate <find>
 
 | name | description |
 | ---- | ----------- |
-| find | find all the matching text |
+| find | Find all the matching text |
 
 #### Example
 
@@ -2264,15 +2251,15 @@ search config running <find>
 
 | name | description |
 | ---- | ----------- |
-| case-sensitive | interpret the search query as case-sensitive |
-| regex | process the query as a regular expression |
-| whole-word | don't allow partial matches of words |
+| case-sensitive | Interpret the search query as case-sensitive |
+| regex | Process the query as a regular expression |
+| whole-word | Don't allow partial matches of words |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| find | find all the matching text |
+| find | Find all the matching text |
 
 #### Example
 
@@ -2299,7 +2286,7 @@ search config-attributes <find>
 
 | name | description |
 | ---- | ----------- |
-| find | find all the matching text |
+| find | Find all the matching text |
 
 #### Description
 The output of _search_ can be filtered by explicitly specifying _config-attributes_ configuration.
@@ -2365,15 +2352,15 @@ send command download [dry-run] [force] router <router> [<version>]
 
 | name | description |
 | ---- | ----------- |
-| dry-run | view version changes without command execution |
+| dry-run | View version changes without command execution |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | router on which to download software |
+| router | The router on which to download software |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| version | the version of 128T as semantic version and optionally a release identifier (e.g. "3.0.0" or "3.0.1-snapshot1"); if not provided, the latest is assumed |
+| version | The version of 128T as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
 
 ##### See Also
 
@@ -2390,9 +2377,9 @@ send command download [dry-run] [force] router <router> [<version>]
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
-### Description
+#### Description
 
 _send command_ is only available within the PCLI of a 128T Conductor.
 
@@ -2434,7 +2421,7 @@ send command reconnect [router <router>] [node <node>]
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ## `send command reconnect disconnected`
 
@@ -2467,7 +2454,7 @@ send command reconnect disconnected [force]
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ## `send command restart`
 
@@ -2476,7 +2463,7 @@ Restart a 128T node
 #### Usage
 
 ```
-send command restart [node <node>] [force] router <router>
+send command restart [force] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -2484,8 +2471,8 @@ send command restart [node <node>] [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
-| node | node to restart |
-| router | router to restart |
+| node | The node to restart |
+| router | The router to restart |
 
 ##### See Also
 
@@ -2502,9 +2489,9 @@ send command restart [node <node>] [force] router <router>
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
-### Description
+#### Description
 
 _send command_ is only available within the PCLI of a 128T Conductor.
 
@@ -2523,7 +2510,7 @@ send command rollback [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | router to rollback |
+| router | The router to rollback |
 
 ##### See Also
 
@@ -2540,9 +2527,9 @@ send command rollback [force] router <router>
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
-### Description
+#### Description
 
 _send command_ is only available within the PCLI of a 128T Conductor.
 
@@ -2553,7 +2540,7 @@ Start a 128T node
 #### Usage
 
 ```
-send command start [node <node>] [force] router <router>
+send command start [force] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -2561,8 +2548,8 @@ send command start [node <node>] [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
-| node | node to start |
-| router | router to start |
+| node | The node to start |
+| router | The router to start |
 
 ##### See Also
 
@@ -2579,9 +2566,9 @@ send command start [node <node>] [force] router <router>
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
-### Description
+#### Description
 
 _send command_ is only available within the PCLI of a 128T Conductor.
 
@@ -2592,7 +2579,7 @@ Stop a 128T node
 #### Usage
 
 ```
-send command stop [node <node>] [force] router <router>
+send command stop [force] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -2600,8 +2587,8 @@ send command stop [node <node>] [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
-| node | node to stop |
-| router | router to stop |
+| node | The node to stop |
+| router | The router to stop |
 
 ##### See Also
 
@@ -2618,9 +2605,9 @@ send command stop [node <node>] [force] router <router>
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
-### Description
+#### Description
 
 _send command_ is only available within the PCLI of a 128T Conductor.
 
@@ -2638,15 +2625,15 @@ send command upgrade [dry-run] [force] router <router> <version>
 
 | name | description |
 | ---- | ----------- |
-| dry-run | view version changes without command execution |
+| dry-run | View version changes without command execution |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | router to upgrade |
+| router | The router to upgrade |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| version | the version of 128T as semantic version and optionally a release identifier (e.g. "3.0.0" or "3.0.1-snapshot1"); if not provided, the latest is assumed |
+| version | The version of 128T as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
 
 ##### See Also
 
@@ -2663,9 +2650,9 @@ send command upgrade [dry-run] [force] router <router> <version>
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
-### Description
+#### Description
 
 _send command_ is only available within the PCLI of a 128T Conductor.
 
@@ -2684,7 +2671,7 @@ send command yum-cache-refresh [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | router to refresh |
+| router | The router to refresh |
 
 ##### See Also
 
@@ -2701,7 +2688,7 @@ send command yum-cache-refresh [force] router <router>
 | [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ## `service-ping`
 
@@ -2710,28 +2697,28 @@ Send an ICMP request using a service or tenant
 #### Usage
 
 ```
-service-ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [service-name <service-name>] [tenant <tenant>] [source-ip <source-ip>] [router <router>] [node <node>] <destination-ip>
+service-ping [count <count>] [size <size>] [timeout <timeout>] [set-df-bit] [service-name <service-name>] [tenant <tenant>] [source-ip <source-ip>] router <router> node <node> <destination-ip>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| count | number of ping requests to send [type: int] (default: 4) |
-| node | the node from which to send the ping request |
-| router | the router from which to send the ping request (default: &lt;current router&gt;) |
-| service-name | name of service which includes the destination trying to be reached; only required if service is ambiguous |
-| set-df-bit | set the IPv4 'Don't Fragment' bit on the request packet |
-| size | number of data bytes to send [type: int] (default: 56) |
+| count | Number of ping requests to send [type: int] (default: 4) |
+| node | The node from which to send the ping request |
+| router | The router from which to send the ping request |
+| service-name | Name of service which includes the destination trying to be reached; only required if service is ambiguous |
+| set-df-bit | Set the IPv4 &#x27;Don&#x27;t Fragment&#x27; bit on the request packet |
+| size | Number of data bytes to send [type: int] (default: 56) |
 | source-ip | IP from which to test whether traffic is allowed [type: IP address] |
-| tenant | name of source tenant for ICMP request (default is the global tenant) |
-| timeout | time to wait for a response, in seconds [max: 10 seconds] [type: int] (default: 1) |
+| tenant | Name of source tenant for ICMP request (default is the global tenant) |
+| timeout | Time to wait for a response, in seconds [max: 10 seconds] [type: int] (default: 1) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| destination-ip | destination IP of the ping request [type: IP address] |
+| destination-ip | Destination IP of the ping request [type: IP address] |
 
 #### Description
 
@@ -2771,8 +2758,8 @@ set config encryption [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
-| node | the node on which to disable config encryption (default: all) |
-| router | the router on which to set config encryption (default: &lt;current router&gt;) |
+| node | The node on which to disable config encryption (default: all) |
+| router | The router on which to set config encryption (default: &lt;current router&gt;) |
 
 ##### Subcommands
 
@@ -2799,8 +2786,8 @@ set config encryption [force] [router <router>] [node <node>]
 #### Example
 
 ```
-admin@node1.t128# set config encryption                                                                                                                                                     
-Are you sure you would like to enable configuration encryption? [y/N]: y                                                                                                                    
+admin@node1.t128# set config encryption
+Are you sure you would like to enable configuration encryption? [y/N]: y
 ✔ Encrypting configuration... 1/1 targets complete.
 Configuration was successfully encrypted.
 ```
@@ -2826,14 +2813,14 @@ set config encryption disabled [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
-| node | the node on which to disable config encryption (default: all) |
-| router | the router on which to disable config encryption (default: &lt;current router&gt;) |
+| node | The node on which to disable config encryption (default: all) |
+| router | The router on which to disable config encryption (default: &lt;current router&gt;) |
 
 #### Example
 
 ```
-admin@node1.t128# set config encryption disabled                                                                                                                                            
-Are you sure you would like to disable configuration encryption? [y/N]: y                                                                                                                   
+admin@node1.t128# set config encryption disabled
+Are you sure you would like to disable configuration encryption? [y/N]: y
 ✔ Disabling configuration encryption... 1/1 targets complete.
 Configuration encryption was successfully disabled.
 ```
@@ -2888,7 +2875,9 @@ Setting the context to a router is only available within the PCLI of a 128T Cond
 
 ##### Positional Arguments
 
-- **router**    the name of the router
+| name | description |
+| ---- | ----------- |
+| router | The name of the router |
 
 #### Example
 
@@ -2898,6 +2887,7 @@ admin@conductor1.labconductor# set context router beacon
 ```
 
 #### See Also
+
 - [clear context node](#clear-context-node) Clear only the node context
 - [clear context router](#clear-context-router) Clear both the router context and node context
 - [set context stats start-time](#set-context-stats-start-time) Set the start time for show stats commands
@@ -2911,19 +2901,25 @@ admin@conductor1.labconductor# set context router beacon
 ## set context stats start-time
 
 #### Usage
+
 ```
 set context start-time [<start-time>]
 ```
 
 ##### Positional Arguments
-- **start-time**    A timestamp string that can include date, time, or both. Special value "now" sets the start time point to the current time [type: timestamp or 'now'] (default: now)
+
+| name | description |
+| ---- | ----------- |
+| start-time | A timestamp string that can include date, time, or both. Special value "now" sets the start time point to the current time [type: timestamp or 'now'] (default: now) |
 
 #### Description
+
 _set context stats start-time_ lets administrators set a "zero time" for all statistics that the 128T has accumulated. While this _stats start-time_ context is set, all of the output for _show stats_ commands will reflect the accumulation of statistics since that time. This is very useful when troubleshooting issues, or after making configuration changes, to only show data relevant to the exercise at hand.
 
 The _set context stats start-time_ has a flexible parser and can accept many different forms of "time" strings that include date information, time information, or both. There&#39;s also a keyword "now" that sets the _stats start-time_ to the current 128T system clock. (The "now" behavior is the default, and thus the 128T will set the _stats start-time_ to the current clock time when no argument is supplied.)
 
 #### Example
+
 ```
 admin@cnd1.conductor# set context stats start-time
 Stats start time set to: 2018-02-07 10:41:58
@@ -2933,6 +2929,7 @@ Stats start time set to: 2017-12-25 00:00:00
 ```
 
 #### See Also
+
 - [clear context node](#clear-context-node) Clear only the node context
 - [clear context router](#clear-context-router) Clear both the router context and node context
 - [set context router](#set-context-router) Set the context to a different router
@@ -2970,13 +2967,13 @@ set dns resolution [router <router>] <hostname> <ip-address>
 
 | command | description |
 | ------- | ----------- |
-| [`refresh dns resolutions`](#refresh-dns-resolutions) | Refresh DNS resolutions |
+| [`refresh dns resolutions`](#refresh-dns-resolutions) | Refreshes all DNS resolutions configured on the platform. |
 | [`show dns resolutions`](#show-dns-resolutions) | Shows all DNS resolutions |
 
 #### Example
 
 ```
-admin@node1.t128# set dns resolution my.router 1.2.3.4                                                                                                                                      
+admin@node1.t128# set dns resolution my.router 1.2.3.4
 Successfully set hostname resolution on node node1
 ```
 
@@ -3002,15 +2999,15 @@ set log level [category <category>] [force] [router <router>] [node <node>] <lev
 | ---- | ----------- |
 | category | The log category for which to set the level (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node on which to set the corresponding process log level |
-| router | the router on which to set the corresponding process log level (default: &lt;current router&gt;) |
+| node | The node on which to set the corresponding process log level |
+| router | The router on which to set the corresponding process log level (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| level | the log level |
-| process-name | the process for which to set the log level (the log level will change for all processes when no process is specified) (default: all) |
+| level | The log level |
+| process-name | The process for which to set the log level (the log level will change for all processes when no process is specified) (default: all) |
 
 ##### Subcommands
 
@@ -3030,11 +3027,11 @@ set log level [category <category>] [force] [router <router>] [node <node>] <lev
 
 The _set log level_ command adjusts the degree to which the 128T router writes information into its log files. This is used to selectively turn up and down log verbosity for troubleshooting purposes.
 
-The optional &lt;process-name&gt; and &lt;node-name&gt; arguments, can selectively change only a specific 128T router&#39;s software process on a given node.
+The optional &lt;process-name&gt; and &lt;node-name&gt; arguments, can selectively change only a specific 128T router&#x27;s software process on a given node.
 
 The _level_ must be one of: fatal, error, warning, info, debug, and trace. These are listed in order of increasing verbosity. 128 Technology, Inc. generally recommends that systems be set to _info_ level by default under normal operating circumstances.
 
-As of software version 3.1, a new subcommand _set log level category_, allows administrators to collectively adjust groups of related functionality for specific troubleshooting exercises – instead of blindly adjusting the entire system&#39;s log level and potentially impacting performance.
+As of software version 3.1, a new subcommand _set log level category_, allows administrators to collectively adjust groups of related functionality for specific troubleshooting exercises – instead of blindly adjusting the entire system&#x27;s log level and potentially impacting performance.
 
 The category can be any of the following:
 
@@ -3046,8 +3043,8 @@ The category can be any of the following:
 | IPC | Interprocess Communications | The subsystem responsible for messaging between components within the 128T product. |
 | DATA | Metadata Database | Components related to the configuration and state databases. |
 | RTG | Routing | Components related to the routing engine. |
-| HWMC | "HighwayManager Control" | Control system for packet processing. |
-| FLC | "FastLane Control" | Control system for packet forwarding. |
+| HWMC | &quot;HighwayManager Control&quot; | Control system for packet processing. |
+| FLC | &quot;FastLane Control&quot; | Control system for packet forwarding. |
 | FPP | First Packet Processing | System for processing the initial packet of each new session. |
 | DISC | Discovery | Discovery-based components (except BFD). Today this is DHCP and ARP. |
 | LINK | Internode Link Detection | The subsystem for inter-node communication (today, BFD). |
@@ -3076,18 +3073,18 @@ set log level configured [category <category>] [force] [router <router>] [node <
 | ---- | ----------- |
 | category | The log category for which to reset the level. (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node on which to set the corresponding process log level |
-| router | router on which to set the corresponding process log level (default: &lt;current router&gt;) |
+| node | The node on which to set the corresponding process log level |
+| router | The router on which to set the corresponding process log level (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| process-name | the process for which to set the log level (default: all) |
+| process-name | The process for which to set the log level (default: all) |
 
 #### Description
 
-Will return the 128T router&#39;s logging behavior to the verbosity specified within the configuration, located at: `authority > router > system > log-level`. Alternatively, administrators can specify a log level to dynamically change all system processes to use.
+Will return the 128T router&#x27;s logging behavior to the verbosity specified within the configuration, located at: `authority &gt; router &gt; system &gt; log-level`. Alternatively, administrators can specify a log level to dynamically change all system processes to use.
 
 ## `set password`
 
@@ -3113,7 +3110,7 @@ set password
 
 #### Description
 
-The _set password_ command allows a PCLI user to change their password. As is typical with most password changing routines, as a security precaution the user must enter their current password before they&#39;re permitted to change it.
+The _set password_ command allows a PCLI user to change their password. As is typical with most password changing routines, as a security precaution the user must enter their current password before they&#x27;re permitted to change it.
 
 #### Version History
 
@@ -3181,7 +3178,7 @@ show alarms [shelved] [id <id>] [force] [router <router>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | id | ID for which to display alarm information |
-| router | router for which to display alarms (default: all) |
+| router | The router for which to display alarms (default: all) |
 | shelved | Display shelved alarms |
 
 ##### See Also
@@ -3218,7 +3215,7 @@ Completed in 0.35 seconds
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.1.0   | This feature was introduced |
-| 3.1.0   | previously allowed filtering by node, now the command shows all alarms. |
+| 3.1.0   | Previously allowed filtering by node, now the command shows all alarms. |
 
 ## `show application names`
 
@@ -3237,11 +3234,11 @@ show application names [rows <rows>] [force] [node <node>] router <router>
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The name of the node |
 | router | The name of the router |
-| rows | the number of application name entries to display at once [type: int or 'all'] (default: 50) |
+| rows | The number of application name entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 #### Description
 
-The _show application names_ subcommand shows all of the "application" names that the 128T has learned, or been configured to recognize, as part of its Application Classification feature.
+The _show application names_ subcommand shows all of the &quot;application&quot; names that the 128T has learned, or been configured to recognize, as part of its Application Classification feature.
 
 #### Example
 
@@ -3268,7 +3265,7 @@ Node: gouda
 
 ## `show arp`
 
-Shows current arps from the highway manager at the specified node.
+Shows the contents of the ARP table on the specified node.
 
 #### Usage
 
@@ -3281,9 +3278,9 @@ show arp [rows <rows>] [force] [node <node>] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node from which to retrieve arp entries |
-| router | the router from which to retrieve arp entries |
-| rows | the number of arps to display at once [type: int or 'all'] (default: 50) |
+| node | The node from which to retrieve arp entries |
+| router | The router from which to retrieve arp entries |
+| rows | The number of arps to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Subcommands
 
@@ -3299,7 +3296,7 @@ show arp [rows <rows>] [force] [node <node>] router <router>
 
 #### Description
 
-The _show arp_ subcommand displays the ARP table (MAC address to IP address binding) for a given node. The number of lines of output may be controlled through the use of the optional _rows_ attribute. When not present, the 128T router will default to displaying the first 50 rows of the specified node&#39;s ARP table.
+The _show arp_ subcommand displays the ARP table (MAC address to IP address binding) for a given node. The number of lines of output may be controlled through the use of the optional _rows_ attribute. When not present, the 128T router will default to displaying the first 50 rows of the specified node&#x27;s ARP table.
 
 #### Example
 
@@ -3326,7 +3323,7 @@ Completed in 0.07 seconds
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
-| 2.0.0   | added requirement for use of &#39;node&#39; keyword when specifying a node name. |
+| 2.0.0   | Added requirement for use of &#39;node&#39; keyword when specifying a node name. |
 
 ## `show arp proxy`
 
@@ -3344,10 +3341,10 @@ show arp proxy [name <name>] [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface for which to display proxy ARP info (default: all) |
-| node | node for which to display proxy ARP info |
-| router | router for which to display proxy ARP info (default: all) |
+| node | The node for which to display proxy ARP info |
+| router | The router for which to display proxy ARP info (default: all) |
 
-### Description
+#### Description
 
 Displays a list of all configured proxies, grouped by network interface.
 
@@ -3380,21 +3377,21 @@ show assets [force] [router <router>] [node <node>] [<id>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display assets |
-| router | router for which to display assets (default: all) |
+| node | The node for which to display assets |
+| router | The router for which to display assets (default: all) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| id | the asset id of the 128T node from which to retrieve the status |
+| id | The asset id of the 128T node from which to retrieve the status |
 
 ##### Subcommands
 
 | name | description |
 | ---- | ----------- |
 | software | Shows assets software information. |
-| summary | A summary of assets connected to the automated provisioner. |
+| summary | A summary of assets connected to the Conductor. |
 | errors | Shows the 128T nodes that have errors. |
 
 ##### See Also
@@ -3412,11 +3409,11 @@ show assets [force] [router <router>] [node <node>] [<id>]
 | [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-The _show assets_ command displays the automated provisioning status of the 128T nodes within an Authority. With 128T&#39;s automated provisioning feature set, each "asset" represents a platform into which the 128T software is installed, updated, managed, etc. The _show assets_ command allows administrators to see, at a glance, the state of all assets – including which software versions have been installed on which nodes, what their router and node identifiers are, etc.
+The _show assets_ command displays the automated provisioning status of the 128T nodes within an Authority. With 128T&#x27;s automated provisioning feature set, each &quot;asset&quot; represents a platform into which the 128T software is installed, updated, managed, etc. The _show assets_ command allows administrators to see, at a glance, the state of all assets – including which software versions have been installed on which nodes, what their router and node identifiers are, etc.
 
 #### Example
 
@@ -3470,13 +3467,13 @@ show assets errors [force] [router <router>] [<id>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | router for which to display assets summary (default: all) |
+| router | The router for which to display assets summary (default: all) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| id | the asset id of the 128T node from which to retrieve the status |
+| id | The asset id of the 128T node from which to retrieve the status |
 
 #### Description
 
@@ -3517,8 +3514,8 @@ show assets software [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display available software |
-| router | router for which to display available software (default: all) |
+| node | The node for which to display available software |
+| router | The router for which to display available software (default: all) |
 
 ##### See Also
 
@@ -3535,7 +3532,7 @@ show assets software [force] [router <router>] [node <node>]
 | [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
-| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the automated provisioner. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
@@ -3576,7 +3573,7 @@ Completed in 0.65 seconds
 
 ## `show assets summary`
 
-A summary of assets connected to the Conductor
+A summary of assets connected to the Conductor.
 
 #### Usage
 
@@ -3589,7 +3586,7 @@ show assets summary [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | router for which to display assets summary (default: all) |
+| router | The router for which to display assets summary (default: all) |
 
 ##### See Also
 
@@ -3608,7 +3605,7 @@ show assets summary [force] [router <router>]
 | [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 
-### Description
+#### Description
 
 _show assets summary_ will display a total of all assets in each state.
 
@@ -3637,7 +3634,7 @@ Fri 2017-07-21 15:41:54 UTC
 
 ## `show bgp`
 
-Displays information about the state of the BGP process on the 128T router
+Displays information about the state of the BGP process on the 128T router.
 
 #### Usage
 
@@ -3651,7 +3648,7 @@ show bgp [rows <rows>] [force] router <router> [<route>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | router | The name of the router for which to display BGP routes |
-| rows | the number of bgp entries to display at once [type: int or 'all'] (default: 50) |
+| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -3663,7 +3660,7 @@ show bgp [rows <rows>] [force] router <router> [<route>]
 
 | name | description |
 | ---- | ----------- |
-| neighbors | Show the current BGP neighbors from the routing manager. |
+| neighbors | Displays information about the state of the BGP neighbors on the 128T router. |
 | summary | Show the current BGP summary from the routing manager. |
 
 ##### See Also
@@ -3718,7 +3715,7 @@ Paths: (1 available, best #1, table Default-IP-Routing-Table)
 
 ## `show bgp neighbors`
 
-Show the current BGP neighbors from the routing manager.
+Displays information about the state of the BGP neighbors on the 128T router.
 
 #### Usage
 
@@ -3732,7 +3729,7 @@ show bgp neighbors [rows <rows>] [force] router <router> [<neighbor-ip>] [<optio
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | router | The name of the router for which to display BGP neighbors |
-| rows | the number of bgp entries to display at once [type: int or 'all'] (default: 50) |
+| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -3743,7 +3740,7 @@ show bgp neighbors [rows <rows>] [force] router <router> [<neighbor-ip>] [<optio
 
 #### Description
 
-The _show bgp neighbors_ command displays detailed information about each of the 128T router&#39;s BGP peers. By specifying a specific peer (through the optional argument _&lt;neighbor-ip&gt;_), administrators can view state information about one peer at a time. When specifying a specific neighbor, the output may include the routes shared with that peer by appending _advertised-route_ or received from that peer by appending _received-routes_.
+The _show bgp neighbors_ command displays detailed information about each of the 128T router&#x27;s BGP peers. By specifying a specific peer (through the optional argument _&lt;neighbor-ip&gt;_), administrators can view state information about one peer at a time. When specifying a specific neighbor, the output may include the routes shared with that peer by appending _advertised-route_ or received from that peer by appending _received-routes_.
 
 #### Example
 
@@ -3788,11 +3785,11 @@ show bgp summary [rows <rows>] [force] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | router | The name of the router for which to display the BGP summary |
-| rows | the number of bgp entries to display at once [type: int or 'all'] (default: 50) |
+| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 #### Description
 
-The _show bgp summary_ gives administrators a high-level summary table of the state of all of the 128T router&#39;s BGP peers.
+The _show bgp summary_ gives administrators a high-level summary table of the state of all of the 128T router&#x27;s BGP peers.
 
 It includes information on each BGP neighbor, including the version (V) of BGP that they are using (generally v4), the Autonomous System number (AS), the number of BGP messages sent and received (MsgSent, MsgRcvd), the table version (TblVer), etc.
 
@@ -3833,8 +3830,8 @@ show capacity [force] [node <node>] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node from which to retrieve capacities |
-| router | the router from which to retrieve capacities |
+| node | The node from which to retrieve capacities |
+| router | The router from which to retrieve capacities |
 
 #### Example
 
@@ -3880,8 +3877,8 @@ show capture-filters [device-interface <device-interface>] [force] [router <rout
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](#create-capture-filter) | Creates capture-filter from highway at the specified node |
-| [`delete capture-filter`](#delete-capture-filter) | Deletes capture-filter from highway at the specified node |
+| [`create capture-filter`](#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
+| [`delete capture-filter`](#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
 | [`show stats packet-capture`](#show-stats-packet-capture) | Stats pertaining to captured packets |
 
 #### Description
@@ -3924,8 +3921,8 @@ show certificate webserver
 | ------- | ----------- |
 | [`create certificate request webserver`](#create-certificate-request-webserver) | Create a certificate signing request. |
 | [`create certificate self-signed webserver`](#create-certificate-self-signed-webserver) | Create a self-signed certificate. |
-| [`delete certificate webserver`](#delete-certificate-webserver) | Delete a certificates. |
-| [`import certificate webserver`](#import-certificate-webserver) | Import the webserver certificate |
+| [`delete certificate webserver`](#delete-certificate-webserver) | Delete the webserver certificate. |
+| [`import certificate webserver`](#import-certificate-webserver) | Import a certificate to be used by the webserver. |
 
 #### Example
 
@@ -4059,6 +4056,10 @@ show config exports
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](#show-stats-config) | Metrics pertaining to the get-config RPC |
+
+#### Description
+
+This command lists the set of exported configurations that are stored on your 128T router. (Exported configurations are created with the _export config_ command, described in more detail later in this document.)
 
 #### Example
 
@@ -4272,9 +4273,9 @@ show device-interface [name <name>] [force] [node <node>] router <router> [<verb
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| name | device interface to display (if omitted, all will be displayed) (default: all) |
-| node | node for which to display device interfaces |
-| router | router for which to display device interfaces |
+| name | Device interface to display (if omitted, all will be displayed) (default: all) |
+| node | The node for which to display device interfaces |
+| router | The router for which to display device interfaces |
 
 ##### Positional Arguments
 
@@ -4336,15 +4337,15 @@ show dhcp mappings [rows <rows>] [force] [node <node>] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node from which to identify DHCP mappings |
-| router | the name of the router to show |
-| rows | the number of mappings to display at once [type: int or 'all'] (default: 50) |
+| node | The node from which to identify DHCP mappings |
+| router | The name of the router to show |
+| rows | The number of mappings to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`release dhcp lease`](#release-dhcp-lease) | Release the current DHCP lease. |
+| [`release dhcp lease`](#release-dhcp-lease) | Releases an active DHCP lease. |
 | [`show dhcp prefix-delegation`](#show-dhcp-prefix-delegation) | Show the prefix learned for prefix-delegation. |
 | [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
 | [`show dhcp v6`](#show-dhcp-v6) | Display dhcp lease info for network-interfaces. |
@@ -4382,8 +4383,8 @@ show dhcp prefix-delegation [group <group>] [force] [router <router>] [<verbosit
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| group | prefix-delegation group to display (if omitted, all will be displayed) |
-| router |  (default: &lt;current router&gt;) |
+| group | Prefix-delegation group to display (if omitted, all will be displayed) |
+| router | The name of the router to show (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
@@ -4395,7 +4396,7 @@ show dhcp prefix-delegation [group <group>] [force] [router <router>] [<verbosit
 
 | command | description |
 | ------- | ----------- |
-| [`release dhcp lease`](#release-dhcp-lease) | Release the current DHCP lease. |
+| [`release dhcp lease`](#release-dhcp-lease) | Releases an active DHCP lease. |
 | [`show dhcp mappings`](#show-dhcp-mappings) | Show each DHCP mapping from an interface to mapping/IP family/config types. |
 | [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
 | [`show dhcp v6`](#show-dhcp-v6) | Display dhcp lease info for network-interfaces. |
@@ -4430,8 +4431,8 @@ show dhcp v4 [name <name>] [force] [node <node>] router <router> [<verbosity>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface to display (default: all) |
-| node | node for which to display dhcp lease info |
-| router | router for which to display dhcp lease info |
+| node | The node for which to display dhcp lease info |
+| router | The router for which to display dhcp lease info |
 
 ##### Positional Arguments
 
@@ -4443,7 +4444,7 @@ show dhcp v4 [name <name>] [force] [node <node>] router <router> [<verbosity>]
 
 | command | description |
 | ------- | ----------- |
-| [`release dhcp lease`](#release-dhcp-lease) | Release the current DHCP lease. |
+| [`release dhcp lease`](#release-dhcp-lease) | Releases an active DHCP lease. |
 | [`show dhcp mappings`](#show-dhcp-mappings) | Show each DHCP mapping from an interface to mapping/IP family/config types. |
 | [`show dhcp prefix-delegation`](#show-dhcp-prefix-delegation) | Show the prefix learned for prefix-delegation. |
 | [`show dhcp v6`](#show-dhcp-v6) | Display dhcp lease info for network-interfaces. |
@@ -4507,8 +4508,8 @@ show dhcp v6 [name <name>] [force] [node <node>] router <router> [<verbosity>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface to display (default: all) |
-| node | node for which to display dhcp lease info |
-| router | router for which to display dhcp lease info |
+| node | The node for which to display dhcp lease info |
+| router | The router for which to display dhcp lease info |
 
 ##### Positional Arguments
 
@@ -4520,7 +4521,7 @@ show dhcp v6 [name <name>] [force] [node <node>] router <router> [<verbosity>]
 
 | command | description |
 | ------- | ----------- |
-| [`release dhcp lease`](#release-dhcp-lease) | Release the current DHCP lease. |
+| [`release dhcp lease`](#release-dhcp-lease) | Releases an active DHCP lease. |
 | [`show dhcp mappings`](#show-dhcp-mappings) | Show each DHCP mapping from an interface to mapping/IP family/config types. |
 | [`show dhcp prefix-delegation`](#show-dhcp-prefix-delegation) | Show the prefix learned for prefix-delegation. |
 | [`show dhcp v4`](#show-dhcp-v4) | Display dhcp lease info for network-interfaces. |
@@ -4554,9 +4555,9 @@ show dns resolutions [hostname <hostname>] [rows <rows>] [force] [router <router
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| hostname | the DNS hostname belonging to a node |
-| router | the name of the router holding the node with the DNS resolutions (default: &lt;current router&gt;) |
-| rows | the number of dns resolutions to display at once [type: int or 'all'] (default: 50) |
+| hostname | The DNS hostname belonging to a node |
+| router | The name of the router holding the node with the DNS resolutions (default: &lt;current router&gt;) |
+| rows | The number of dns resolutions to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -4568,7 +4569,7 @@ show dns resolutions [hostname <hostname>] [rows <rows>] [force] [router <router
 
 | command | description |
 | ------- | ----------- |
-| [`refresh dns resolutions`](#refresh-dns-resolutions) | Refresh DNS resolutions |
+| [`refresh dns resolutions`](#refresh-dns-resolutions) | Refreshes all DNS resolutions configured on the platform. |
 | [`set dns resolution`](#set-dns-resolution) | Sets a hostname resolution temporarily until the next time the node processes config |
 
 #### Description
@@ -4623,8 +4624,8 @@ show domain-categories [force] [node <node>] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display domain-name categories of active sessions |
-| router | router for which to display domain-name categories of active sessions |
+| node | The node for which to display domain-name categories of active sessions |
+| router | The router for which to display domain-name categories of active sessions |
 
 ##### See Also
 
@@ -4646,11 +4647,11 @@ show domain-names [category <category>] [rows <rows>] [force] [node <node>] rout
 
 | name | description |
 | ---- | ----------- |
-| category | category to show domain-names for |
+| category | Category to show domain-names for |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node from which to retrieve app-id domain-names |
-| router | the router from which to retrieve app-id domain-names |
-| rows | the number of domain-names to display at once [type: int or 'all'] (default: 50) |
+| node | The node from which to retrieve app-id domain-names |
+| router | The router from which to retrieve app-id domain-names |
+| rows | The number of domain-names to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -4679,7 +4680,7 @@ show dynamic-peer-update [force] [router <router>] [<table>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router |  (default: &lt;current router&gt;) |
+| router | Router for which to show dynamic peer update information (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
@@ -4712,8 +4713,6 @@ show entitlement [force] [router <router>]
 | router | The name of the router for which to display entitlement utilized. Conductor routers will show the entitlement utilized per project of all conducted routers. (default: &lt;current router&gt;) |
 
 #### Description
-
-This command displays the bandwidth entitlement for your 128T router.
 
 The 128T Networking Platform calculates the Peak Router Bandwidth Capacity; this is the highest router bandwidth value of any 5 second interval over the specific license period. The Router Bandwidth is calculated based on the aggregate of sessions traversing the router.
 
@@ -4755,8 +4754,8 @@ show events alarm [from <from>] [to <to>] [rows <rows>] [force] [router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] (default: 1970-01-01 00:00:00) |
-| router | the name of the router for which to display alarm events (default: &lt;current router&gt;) |
-| rows | the number of alarm events to display at once [type: int or 'all'] (default: 50) |
+| router | The name of the router for which to display alarm events (default: &lt;current router&gt;) |
+| rows | The number of alarm events to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
 
 ##### See Also
@@ -4815,7 +4814,7 @@ show events config commit [flat] [from <from>] [to <to>] [force] [router <router
 | flat | Display with full paths on each line instead of as a hierarchy |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo. [type: timestamp] |
-| router | router for which to display config commit events (default: &lt;current router&gt;) |
+| router | The router for which to display config commit events (default: &lt;current router&gt;) |
 | to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
 
 ##### Positional Arguments
@@ -4843,12 +4842,12 @@ show events config commit [flat] [from <from>] [to <to>] [force] [router <router
 #### Example
 
 ```
-admin@node1.t128# configure authority router t128 description "test router"                                                                                                                 
-*admin@node1.t128# commit                                                                                                                                                                   
-Are you sure you want to commit the candidate config? [y/N]: y                                                                                                                              
+admin@node1.t128# configure authority router t128 description "test router"
+*admin@node1.t128# commit
+Are you sure you want to commit the candidate config? [y/N]: y
 ✔ Validating, then committing...
 Configuration committed
-admin@node1.t128# show events config commit                                                                                                                                                
+admin@node1.t128# show events config commit
 Thu 2020-06-04 12:47:59 UTC
 ✔ Retrieving configuration events...
 
@@ -4892,13 +4891,13 @@ show events config encryption [from <from>] [to <to>] [force] [router <router>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
-| router | router for which to display config encryption events (default: &lt;current router&gt;) |
+| router | The router for which to display config encryption events (default: &lt;current router&gt;) |
 | to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
 
 #### Example
 
 ```
-admin@node1.t128# show events config encryption                                                                                                                                             
+admin@node1.t128# show events config encryption
 Thu 2020-06-04 13:24:47 UTC
 ✔ Retrieving configuration events...
 
@@ -4936,9 +4935,9 @@ show fib [rows <rows>] [force] [node <node>] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node from which to retrieve fib entries |
-| router | the router from which to retrieve fib entries |
-| rows | the number of fib nodes to display at once [type: int or 'all'] (default: 50) |
+| node | The node from which to retrieve fib entries |
+| router | The router from which to retrieve fib entries |
+| rows | The number of fib nodes to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 #### Description
 
@@ -5008,13 +5007,13 @@ show history [rows <rows>]
 
 | name | description |
 | ---- | ----------- |
-| rows | the number of recent commands to show [type: int or 'all'] |
+| rows | The number of recent commands to show [type: int or &#x27;all&#x27;] |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`clear history`](#clear-history) | Clear the PCLI's command history for this user. |
+| [`clear history`](#clear-history) | Clear the PCLI&#x27;s command history for this user. |
 
 #### Example
 
@@ -5057,9 +5056,9 @@ show load-balancer [service <service>] [agent <agent>] [force] [node <node>] rou
 
 #### Description
 
-The _show load-balancer_ command provides feedback on the 128T router&#39;s load balancing behavior, when configured to balance traffic (via a service-policy).
+The _show load-balancer_ command provides feedback on the 128T router&#x27;s load balancing behavior, when configured to balance traffic (via a service-policy).
 
-This command, when issued without any filters (agent, node, or service) will display all agents, nodes, and services that are subject to load balancing. (The output can be quite verbose.) These filters may be combined to "hone in" on specific agents/nodes/services selectively.
+This command, when issued without any filters (agent, node, or service) will display all agents, nodes, and services that are subject to load balancing. (The output can be quite verbose.) These filters may be combined to &quot;hone in&quot; on specific agents/nodes/services selectively.
 
 This command is extremely helpful for identifying why the 128T router selected specific destinations for its session-oriented traffic.
 
@@ -5101,7 +5100,7 @@ intf10.0 gateway 172.16.12.1
 
 ## `show lte`
 
-Display lte summary.
+Display LTE summary.
 
 #### Usage
 
@@ -5113,26 +5112,26 @@ show lte [device-interface <device-interface>] [force] [node <node>] router <rou
 
 | name | description |
 | ---- | ----------- |
-| device-interface | lte device interface (default: all) |
+| device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display lte data |
-| router | router for which to display lte data |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
 
 ##### Subcommands
 
 | name | description |
 | ---- | ----------- |
-| connection | Display lte connection. |
-| detail | Display lte detail. |
-| firmware | Display lte firmware. |
-| network | Display lte network. |
-| profile | Display lte profile. |
-| signal | Display lte signal. |
-| sim | Display lte sim. |
+| connection | Display LTE connection. |
+| detail | Display LTE detail. |
+| modem | Display LTE modem. |
+| network | Display LTE network. |
+| profile | Display LTE profile. |
+| signal | Display LTE signal. |
+| sim | Display LTE sim. |
 
 ## `show lte connection`
 
-Display lte connection.
+Display LTE connection.
 
 #### Usage
 
@@ -5144,14 +5143,14 @@ show lte connection [device-interface <device-interface>] [force] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| device-interface | lte device interface (default: all) |
+| device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display lte data |
-| router | router for which to display lte data |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
 
 ## `show lte detail`
 
-Display lte detail.
+Display LTE detail.
 
 #### Usage
 
@@ -5163,33 +5162,33 @@ show lte detail [device-interface <device-interface>] [force] [node <node>] rout
 
 | name | description |
 | ---- | ----------- |
-| device-interface | lte device interface (default: all) |
+| device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display lte data |
-| router | router for which to display lte data |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
 
-## `show lte firmware`
+## `show lte modem`
 
-Display lte firmware.
+Display LTE modem.
 
 #### Usage
 
 ```
-show lte firmware [device-interface <device-interface>] [force] [node <node>] router <router>
+show lte modem [device-interface <device-interface>] [force] [node <node>] router <router>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| device-interface | lte device interface (default: all) |
+| device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display lte data |
-| router | router for which to display lte data |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
 
 ## `show lte network`
 
-Display lte network.
+Display LTE network.
 
 #### Usage
 
@@ -5201,14 +5200,14 @@ show lte network [device-interface <device-interface>] [force] [node <node>] rou
 
 | name | description |
 | ---- | ----------- |
-| device-interface | lte device interface (default: all) |
+| device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display lte data |
-| router | router for which to display lte data |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
 
 ## `show lte profile`
 
-Display lte profile.
+Display LTE profile.
 
 #### Usage
 
@@ -5220,14 +5219,14 @@ show lte profile [device-interface <device-interface>] [force] [node <node>] rou
 
 | name | description |
 | ---- | ----------- |
-| device-interface | lte device interface (default: all) |
+| device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display lte data |
-| router | router for which to display lte data |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
 
 ## `show lte signal`
 
-Display lte signal.
+Display LTE signal.
 
 #### Usage
 
@@ -5239,14 +5238,14 @@ show lte signal [device-interface <device-interface>] [force] [node <node>] rout
 
 | name | description |
 | ---- | ----------- |
-| device-interface | lte device interface (default: all) |
+| device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display lte data |
-| router | router for which to display lte data |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
 
 ## `show lte sim`
 
-Display lte sim.
+Display LTE sim.
 
 #### Usage
 
@@ -5258,10 +5257,10 @@ show lte sim [device-interface <device-interface>] [force] [node <node>] router 
 
 | name | description |
 | ---- | ----------- |
-| device-interface | lte device interface (default: all) |
+| device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display lte data |
-| router | router for which to display lte data |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
 
 ## `show network-interface`
 
@@ -5279,8 +5278,8 @@ show network-interface [name <name>] [force] [node <node>] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface to display (if omitted, all will be displayed) |
-| node | node for which to display network-interface data |
-| router | router for which to display network-interface data |
+| node | The node for which to display network-interface data |
+| router | The router for which to display network-interface data |
 
 ##### Subcommands
 
@@ -5334,8 +5333,8 @@ show network-interface application [name <name>] [force] [node <node>] router <r
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface to display (default: all) |
-| node | node for which to display application data |
-| router | router for which to display application data |
+| node | The node for which to display application data |
+| router | The router for which to display application data |
 
 #### Description
 
@@ -5419,8 +5418,8 @@ show ntp [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node from which to retrieve ntp status |
-| router | the router from which to retrieve ntp status (default: &lt;current router&gt;) |
+| node | The node from which to retrieve ntp status |
+| router | The router from which to retrieve ntp status (default: &lt;current router&gt;) |
 
 #### Description
 
@@ -5472,9 +5471,9 @@ show ospf [area <area-id>] [force] router <router> [<verbosity>]
 
 | name | description |
 | ---- | ----------- |
-| area | the area to filter OSPF information for |
+| area | The area to filter OSPF information for |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | the router to request OSPF information from |
+| router | The router to request OSPF information from |
 
 ##### Positional Arguments
 
@@ -5614,7 +5613,7 @@ show ospf border-routers [force] router <router> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | the router to request OSPF information from |
+| router | The router to request OSPF information from |
 
 ##### Positional Arguments
 
@@ -5674,8 +5673,8 @@ show ospf database [self-originate] [force] router <router> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | the router to request OSPF information from |
-| self-originate | retrieve only self-originated LSA information |
+| router | The router to request OSPF information from |
+| self-originate | Retrieve only self-originated LSA information |
 
 ##### Positional Arguments
 
@@ -5827,11 +5826,11 @@ show ospf database lsa [{origin <ip> | self-originate}] [lsa-id <id>] [force] ls
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| lsa-id | the Link State ID to retrieve |
-| lsa-type | the LSA type to retrieve |
-| origin | retrieve LSAs from this advertising router IP |
-| router | the router to request OSPF information from |
-| self-originate | retrieve only self-originated LSA information |
+| lsa-id | The Link State ID to retrieve |
+| lsa-type | The LSA type to retrieve |
+| origin | Retrieve LSAs from this advertising router IP |
+| router | The router to request OSPF information from |
+| self-originate | Retrieve only self-originated LSA information |
 
 ##### Positional Arguments
 
@@ -6002,7 +6001,7 @@ show ospf database max-age [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | the router to request OSPF information from (default: &lt;current router&gt;) |
+| router | The router to request OSPF information from (default: &lt;current router&gt;) |
 
 #### Example
 
@@ -6156,8 +6155,8 @@ show ospf interfaces [network-interface <name>] [force] router <router> [<verbos
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| network-interface | the network interface to fetch OSPF information for |
-| router | the router to request OSPF information from |
+| network-interface | The network interface to fetch OSPF information for |
+| router | The router to request OSPF information from |
 
 ##### Positional Arguments
 
@@ -6293,9 +6292,9 @@ show ospf neighbors [network-interface <name>] [neighbor <ip>] [force] router <r
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| neighbor | the neighbor IP address for which to fetch OSPF information |
-| network-interface | the network interface to fetch OSPF neighbor information for |
-| router | the router to request OSPF information from |
+| neighbor | The neighbor IP address for which to fetch OSPF information |
+| network-interface | The network interface to fetch OSPF neighbor information for |
+| router | The router to request OSPF information from |
 
 ##### Positional Arguments
 
@@ -6370,7 +6369,7 @@ show ospf routes [force] router <router> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | the router to request OSPF information from |
+| router | The router to request OSPF information from |
 
 ##### Positional Arguments
 
@@ -6461,8 +6460,8 @@ show peers [name <name>] [force] router <router> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| name | peer to display (if omitted, all will be displayed) |
-| router | router on which to display peers |
+| name | Peer to display (default: all) |
+| router | The router on which to display peers |
 
 ##### Positional Arguments
 
@@ -6478,11 +6477,11 @@ show peers [name <name>] [force] router <router> [<verbosity>]
 
 #### Description
 
-The _show peers_ command displays properties of each of the "neighboring" 128T routers that the router in question has a peering association with.
+The _show peers_ command displays properties of each of the &quot;neighboring&quot; 128T routers that the router in question has a peering association with.
 
-This command shows information on peering associations between 128T routers, not peering associations with BGP peers. For information on BGP peering statistics, refer to "show bgp" in this document.
+This command shows information on peering associations between 128T routers, not peering associations with BGP peers. For information on BGP peering statistics, refer to &quot;show bgp&quot; in this document.
 
-For each peer it shows which interface the peer is reachable via, the destination IP address for which the peer is reached, the VLAN to use to reach it, and whether the peer is currently "up", "down", or "initializing".
+For each peer it shows which interface the peer is reachable via, the destination IP address for which the peer is reached, the VLAN to use to reach it, and whether the peer is currently &quot;up&quot;, &quot;down&quot;, or &quot;initializing&quot;.
 
 #### Example
 
@@ -6557,7 +6556,6 @@ Completed in 1.34 seconds
 | ------- | ----------------------------|
 | 3.0.0   | This feature was introduced |
 
-
 ## `show peers hostnames`
 
 Display resolved hostnames of peers
@@ -6573,7 +6571,7 @@ show peers hostnames [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | router on which to display peer hostnames (default: all) |
+| router | The router on which to display peer hostnames (default: all) |
 
 #### Example
 
@@ -6605,8 +6603,8 @@ show platform [force] [router <router>] [node <node>] [<category>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which platform info will be displayed |
-| router | router for which platform info will be displayed (default: &lt;current router&gt;) |
+| node | The node for which platform info will be displayed |
+| router | The router for which platform info will be displayed (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
@@ -6671,13 +6669,13 @@ show plugins available [node <node>] [<name>]
 
 | name | description |
 | ---- | ----------- |
-| node | Node to show (default: all) |
+| node | The node for which to display available plugins (default: all) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| name |  |
+| name | Name of plugin to show |
 
 ##### See Also
 
@@ -6701,7 +6699,7 @@ show plugins installed [node <node>]
 
 | name | description |
 | ---- | ----------- |
-| node | Node to show (default: all) |
+| node | The node for which to display installed plugins (default: all) |
 
 ##### See Also
 
@@ -6718,7 +6716,7 @@ Displays the contents of the 128T router&#39;s Routing Information Base (RIB)
 #### Usage
 
 ```
-show rib [rows <rows>] [force] [router <router>] [<route>]
+show rib [rows <rows>] [force] router <router> [<route>]
 ```
 
 ##### Keyword Arguments
@@ -6726,28 +6724,28 @@ show rib [rows <rows>] [force] [router <router>] [<route>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | The name of the router for which to display RIB routes (default: &lt;current router&gt;) |
-| rows | the number of rib entries to display at once [type: int or 'all'] (default: 50) |
+| router | The name of the router for which to display RIB routes |
+| rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| route | route ip-prefix [type: IP prefix] |
+| route | Route ip-prefix [type: IP prefix] |
 
 ##### Subcommands
 
 | name | description |
 | ---- | ----------- |
-| summary | Show the current RIB summary from the routing manager. |
-| connected | Show the connected RIB routes from the routing manager. |
-| static | Show the static RIB routes from the routing manager. |
-| bgp | Show the BGP RIB routes from the routing manager. |
-| ospf | Show the OSPF RIB routes from the routing manager. |
+| summary | Displays a summary of the Routing Information Base (RIB) |
+| connected | Displays the contents of the Routing Information Base (RIB) filtered to show only connected routes |
+| static | Displays the contents of the Routing Information Base (RIB) filtered to show only static routes |
+| bgp | Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from BGP |
+| ospf | Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from OSPF |
 
 #### Description
 
-The _show rib_ subcommand displays the contents of the 128T router&#39;s Routing Information Base (RIB). This is the complete list of connected, direct, and learned routes on the system. (Note that the output may be quite verbose.)
+The _show rib_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB). This is the complete list of connected, direct, and learned routes on the system. (Note that the output may be quite verbose.)
 
 When issuing the command without any arguments, the entire RIB is displayed.
 
@@ -6778,12 +6776,12 @@ admin@labsystem1.fiedler#
 
 ## `show rib bgp`
 
-Displays the contents of the 128T router&#39;s Routing Information Base (RIB) filtered to show only those learned from BGP
+Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from BGP
 
 #### Usage
 
 ```
-show rib bgp [rows <rows>] [force] [router <router>]
+show rib bgp [rows <rows>] [force] router <router>
 ```
 
 ##### Keyword Arguments
@@ -6791,12 +6789,12 @@ show rib bgp [rows <rows>] [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | The name of the router for which to display the RIB (default: &lt;current router&gt;) |
-| rows | the number of rib entries to display at once [type: int or 'all'] (default: 50) |
+| router | The name of the router for which to display the RIB |
+| rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 #### Description
 
-The _show rib bgp_ subcommand displays the contents of the 128T router's Routing Information Base (RIB) filtered to show only those learned from BGP.
+The _show rib bgp_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB) filtered to show only those learned from BGP.
 
 #### Example
 
@@ -6838,12 +6836,12 @@ B>  64.112.104.114/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
 
 ## `show rib connected`
 
-Displays the contents of the 128T router&#39;s Routing Information Base (RIB) filtered to show only the connected routes
+Displays the contents of the Routing Information Base (RIB) filtered to show only connected routes
 
 #### Usage
 
 ```
-show rib connected [rows <rows>] [force] [router <router>]
+show rib connected [rows <rows>] [force] router <router>
 ```
 
 ##### Keyword Arguments
@@ -6851,12 +6849,12 @@ show rib connected [rows <rows>] [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | The name of the router for which to display the RIB (default: &lt;current router&gt;) |
-| rows | the number of rib entries to display at once [type: int or 'all'] (default: 50) |
+| router | The name of the router for which to display the RIB |
+| rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 #### Description
 
-The _show rib connected_ subcommand displays the contents of the 128T router's Routing Information Base (RIB) filtered to show only the connected routes.
+The _show rib connected_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB) filtered to show only the connected routes.
 
 #### Example
 
@@ -6881,12 +6879,11 @@ Completed in 0.22 seconds
 
 ## `show rib ospf`
 
-Displays the contents of the 128T router&#39;s Routing Information Base (RIB) filtered to show only those learned from OSPF
-
+Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from OSPF
 #### Usage
 
 ```
-show rib ospf [rows <rows>] [force] [router <router>]
+show rib ospf [rows <rows>] [force] router <router>
 ```
 
 ##### Keyword Arguments
@@ -6894,12 +6891,12 @@ show rib ospf [rows <rows>] [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | The name of the router for which to display the RIB (default: &lt;current router&gt;) |
-| rows | the number of rib entries to display at once [type: int or 'all'] (default: 50) |
+| router | The name of the router for which to display the RIB |
+| rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 #### Description
 
-The _show rib ospf_ subcommand displays the contents of the 128T router's Routing Information Base (RIB) filtered to show only those learned from OSPF.
+The _show rib ospf_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB) filtered to show only those learned from OSPF.
 
 #### Example
 
@@ -6919,12 +6916,12 @@ O   172.16.3.0/24 [110/10] is directly connected, g2, 00:15:25
 
 ## `show rib static`
 
-Displays the contents of the 128T router&#39;s Routing Information Base (RIB) filtered to show only static routes
+Displays the contents of the Routing Information Base (RIB) filtered to show only static routes
 
 #### Usage
 
 ```
-show rib static [rows <rows>] [force] [router <router>]
+show rib static [rows <rows>] [force] router <router>
 ```
 
 ##### Keyword Arguments
@@ -6932,12 +6929,12 @@ show rib static [rows <rows>] [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | The name of the router for which to display the RIB (default: &lt;current router&gt;) |
-| rows | the number of rib entries to display at once [type: int or 'all'] (default: 50) |
+| router | The name of the router for which to display the RIB |
+| rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
-### Description
+#### Description
 
-The _show rib static_ subcommand displays the contents of the 128T router's Routing Information Base (RIB) filtered to show only static routes.
+The _show rib static_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB) filtered to show only static routes.
 
 #### Example
 
@@ -6959,12 +6956,12 @@ Completed in 0.31 seconds
 
 ## `show rib summary`
 
-Outputs a concise table with statistics on the RIB
+Displays a summary of the Routing Information Base (RIB)
 
 #### Usage
 
 ```
-show rib summary [rows <rows>] [force] [router <router>]
+show rib summary [rows <rows>] [force] router <router>
 ```
 
 ##### Keyword Arguments
@@ -6972,10 +6969,10 @@ show rib summary [rows <rows>] [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | The name of the router for which to display the RIB summary (default: &lt;current router&gt;) |
-| rows | the number of rib entries to display at once [type: int or 'all'] (default: 50) |
+| router | The name of the router for which to display the RIB summary |
+| rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
-### Description
+#### Description
 
 The _show rib summary_ command outputs a concise table with statistics on the RIB.
 
@@ -7014,12 +7011,12 @@ show security key-status [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display security key status |
-| router | router for which to display security key status (default: &lt;current router&gt;) |
+| node | The node for which to display security key status |
+| router | The router for which to display security key status (default: &lt;current router&gt;) |
 
 #### Description
 
-The _show security key-status_ subcommand displays information and statistics related to the 128T&#39;s security rekeying feature. It will indicate the current key index (which will be common among all routers managed by a 128T conductor) and relevant statistics on when the last rekey event occurred, when the next will occur, etc.
+The _show security key-status_ subcommand displays information and statistics related to the 128T&#x27;s security rekeying feature. It will indicate the current key index (which will be common among all routers managed by a 128T conductor) and relevant statistics on when the last rekey event occurred, when the next will occur, etc.
 
 #### Example
 
@@ -7055,22 +7052,22 @@ Displays service path information at the specified node.
 #### Usage
 
 ```
-show service-path [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [{rows <rows> | detail}] [node <node>] router <router>
+show service-path [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [{rows <rows> | detail}] router <router> node <node>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| contains-service-name | the partial substring match to show service path for |
-| detail | display detail info of service path |
-| hierarchy-service-name | the hierarchy root to show service path for |
-| node | node for which to display service path |
-| router | router for which to display service path |
-| rows | the number of service path to display at once [type: int or 'all'] (default: 50) |
-| service-name | the exact service name to show service path for |
+| contains-service-name | The partial substring match to show service path for |
+| detail | Display detail info of service path |
+| hierarchy-service-name | The hierarchy root to show service path for |
+| node | The node for which to display service path |
+| router | The router for which to display service path |
+| rows | The number of service path to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| service-name | The exact service name to show service path for |
 
-### Description
+#### Description
 
 The _show service-path_ command display active service paths passing through the 128T router. The output is useful for figuring out where sessions belonging to a particular service would egress, during troubleshooting. This command has multiple service filters allowing target to specific service or services. Output can be displayed in summary or in detail view with pagination support.
 
@@ -7088,7 +7085,7 @@ show session-captures [{id <id> | detail}] [service <service>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| detail | display session-captures in detail |
+| detail | Display session-captures in detail |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | id | The session-capture to show in detail [type: int] |
 | node | The node on which to show session-captures |
@@ -7105,7 +7102,7 @@ show session-captures [{id <id> | detail}] [service <service>] [force] [router <
 
 ## `show sessions`
 
-Displays active sessions passing through the 128T router
+Displays active sessions passing through the 128T router.
 
 #### Usage
 
@@ -7117,13 +7114,13 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 
 | name | description |
 | ---- | ----------- |
-| contains-service-name | the partial substring match to show sessions for |
+| contains-service-name | The partial substring match to show sessions for |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| hierarchy-service-name | the hierarchy root to show sessions for |
-| node | the node from which to retrieve session flows |
-| router | the router from which to retrieve session flows |
-| rows | the number of session flows to display at once [type: int or 'all'] (default: 50) |
-| service-name | the exact service name to show sessions for |
+| hierarchy-service-name | The hierarchy root to show sessions for |
+| node | The node from which to retrieve session flows |
+| router | The router from which to retrieve session flows |
+| rows | The number of session flows to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| service-name | The exact service name to show sessions for |
 
 ##### Subcommands
 
@@ -7174,7 +7171,7 @@ Node: gouda
 
 ## `show sessions top bandwidth`
 
-Display the top sessions ordered by bandwidth
+Display the top sessions ordered by bandwidth.
 
 #### Usage
 
@@ -7187,7 +7184,7 @@ show sessions top bandwidth [force] router <router> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | router for which to display top sessions by bandwidth |
+| router | The router for which to display top sessions by bandwidth |
 
 ##### Positional Arguments
 
@@ -7240,8 +7237,8 @@ show step lsdb [originator <originator-name>] [force] router <router> [<verbosit
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| originator | the STEP originating router |
-| router | the router to request STEP information from |
+| originator | The STEP originating router |
+| router | The router to request STEP information from |
 
 ##### Positional Arguments
 
@@ -7266,7 +7263,7 @@ show step routes [node <node-name>] [service <service-name>] [ip-prefix <prefix>
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | ip-prefix | STEP routes for this ip prefix [type: IP prefix] |
 | node | STEP routes on this node |
-| router | the router to request STEP information from |
+| router | The router to request STEP information from |
 | service | STEP routes for this service |
 
 ##### Positional Arguments
@@ -7277,7 +7274,7 @@ show step routes [node <node-name>] [service <service-name>] [ip-prefix <prefix>
 
 ## `show system`
 
-Display detailed system state
+Display detailed system state.
 
 #### Usage
 
@@ -7290,8 +7287,8 @@ show system [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display system state |
-| router | router for which to display system state (default: &lt;current router&gt;) |
+| node | The node for which to display system state |
+| router | The router for which to display system state (default: &lt;current router&gt;) |
 
 ##### Subcommands
 
@@ -7311,7 +7308,7 @@ show system [force] [router <router>] [node <node>]
 
 #### Description
 
-The _show system_ subcommand displays overall system health for the nodes that comprise your 128T router. It includes the state of the node ("starting" is displayed when the node is in the process of starting up and is not yet ready for handling traffic, "running" means the node is active, "offline" means the node is configured but not currently present), its role, software version, and uptime.
+The _show system_ subcommand displays overall system health for the nodes that comprise your 128T router. It includes the state of the node (&quot;starting&quot; is displayed when the node is in the process of starting up and is not yet ready for handling traffic, &quot;running&quot; means the node is active, &quot;offline&quot; means the node is configured but not currently present), its role, software version, and uptime.
 
 #### Example
 
@@ -7346,8 +7343,8 @@ show system connectivity [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display connection statuses |
-| router | router for which to display connection statuses (default: &lt;current router&gt;) |
+| node | The node for which to display connection statuses |
+| router | The router for which to display connection statuses (default: &lt;current router&gt;) |
 
 ##### Subcommands
 
@@ -7357,7 +7354,7 @@ show system connectivity [force] [router <router>] [node <node>]
 
 #### Description
 
-The _connectivity_ subcommand displays the state of all connected systems. On a 128T Conductor, this is a convenient way to display all of the nodes that are connected, disconnected, or "unconfigured". (Note: when a node appears as _unconfigured_, it means that it is attempting to connect to the 128T conductor, but that conductor does not have any supporting configuration to supply to it.)
+The _connectivity_ subcommand displays the state of all connected systems. On a 128T Conductor, this is a convenient way to display all of the nodes that are connected, disconnected, or &quot;unconfigured&quot;. (Note: when a node appears as _unconfigured_, it means that it is attempting to connect to the 128T conductor, but that conductor does not have any supporting configuration to supply to it.)
 
 #### Example
 
@@ -7390,8 +7387,8 @@ show system connectivity internal [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display internal connections |
-| router | router for which to display internal connections (default: &lt;current router&gt;) |
+| node | The node for which to display internal connections |
+| router | The router for which to display internal connections (default: &lt;current router&gt;) |
 
 #### Description
 
@@ -7429,8 +7426,8 @@ show system processes [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display statuses of processes |
-| router | router for which to display statuses of processes (default: &lt;current router&gt;) |
+| node | The node for which to display statuses of processes |
+| router | The router for which to display statuses of processes (default: &lt;current router&gt;) |
 
 ##### See Also
 
@@ -7503,9 +7500,9 @@ show system registry [<router-name>] [<node-name>] [<process-name>]
 
 | name | description |
 | ---- | ----------- |
-| router-name | the router from which to retrieve registered services (default: all) |
-| node-name | the node from which to retrieve registered services (default: all) |
-| process-name | the process from which to retrieve registered services (default: all) |
+| router-name | The router from which to retrieve registered services (default: all) |
+| node-name | The node from which to retrieve registered services (default: all) |
+| process-name | The process from which to retrieve registered services (default: all) |
 
 ##### See Also
 
@@ -7516,7 +7513,7 @@ show system registry [<router-name>] [<node-name>] [<process-name>]
 
 #### Description
 
-The _registry_ subcommand shows the processes/services that have registered with the local system's "SSC" (system services coordinator). On a 128T Conductor, this will show all of the connected routers_ registered system processes/services.
+The _registry_ subcommand shows the processes/services that have registered with the local system&#x27;s &quot;SSC&quot; (system services coordinator). On a 128T Conductor, this will show all of the connected routers_ registered system processes/services.
 
 #### Example
 
@@ -7582,12 +7579,12 @@ show system services [force] [router <router>] [node <node>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display statuses |
-| router | router for which to display statuses (default: &lt;current router&gt;) |
+| node | The node for which to display statuses |
+| router | The router for which to display statuses (default: &lt;current router&gt;) |
 
 #### Description
 
-Most 128T processes are under the control of a process aptly named the _processManager_. Some services must exist outside of the control of the _processManager_ and are instead goverened by Linux's systemd. `show system services` displays a table summarizing statuses of 128T systemd services.
+Most 128T processes are under the control of a process aptly named the _processManager_. Some services must exist outside of the control of the _processManager_ and are instead goverened by Linux&#x27;s systemd. `show system services` displays a table summarizing statuses of 128T systemd services.
 
 #### Example
 
@@ -7625,8 +7622,8 @@ show system version [force] [router <router>] [node <node>] [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node to show version information for |
-| router | the router to show version information for (default: &lt;current router&gt;) |
+| node | The node to show version information for |
+| router | The router to show version information for (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
@@ -7673,9 +7670,9 @@ show tenant members [rows <rows>] [force] [node <node>] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node from which to retrieve tenant members |
-| router | the router from which to retrieve tenant members |
-| rows | the number of tenant members to display at once [type: int or 'all'] (default: 50) |
+| node | The node from which to retrieve tenant members |
+| router | The router from which to retrieve tenant members |
+| rows | The number of tenant members to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 #### Description
 
@@ -7714,7 +7711,7 @@ Completed in 9.01 seconds
 
 ## `show top sources`
 
-Shows top sources (by source address) over the last 30 minutes at the specified node
+Shows top sources (by source address) over the last 30 minutes at the specified node.
 
 #### Usage
 
@@ -7728,9 +7725,9 @@ show top sources [by <by>] [rows <rows>] [force] [node <node>] router <router>
 | ---- | ----------- |
 | by | total-data \| session-count [type: metric] (default: total-data) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node from which to retrieve top sources |
-| router | the router from which to retrieve top sources |
-| rows | the number of top sources to display at once [type: int or 'all'] (default: 10) |
+| node | The node from which to retrieve top sources |
+| router | The router from which to retrieve top sources |
+| rows | The number of top sources to display at once [type: int or &#x27;all&#x27;] (default: 10) |
 
 #### Description
 
@@ -7784,8 +7781,8 @@ show udp-transform [force] [node <node>] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | Node for which to display transform status |
-| router | Router for which to display transform status |
+| node | The node for which to display transform status |
+| router | The router for which to display transform status |
 
 #### Description
 
@@ -7833,7 +7830,7 @@ show user [<username>]
 
 #### Description
 
-The _show user_ subcommand displays the attributes for the specified user account (i.e., whether the account is enabled, the user&#39;s full name, and their role).
+The _show user_ subcommand displays the attributes for the specified user account (i.e., whether the account is enabled, the user&#x27;s full name, and their role).
 
 #### Example
 
@@ -7929,11 +7926,11 @@ time <command> [<command> ...]
 
 | name | description |
 | ---- | ----------- |
-| command | command to run and time |
+| command | Command to run and time |
 
 #### Description
 
-When `time` preceeds another command, it will provide the total amount of wall clock time it takes for the operation to complete. Natively not all PCLI commands output the duration it takes to complete the operation.  The time command, much like the Linux version, provides this information.
+When `time` preceeds another command, it will provide the total amount of wall clock time it takes for the operation to complete. Natively not all PCLI commands output the duration it takes to complete the operation. The time command, much like the Linux version, provides this information.
 
 #### Example
 
@@ -8089,7 +8086,7 @@ where
 
 #### Description
 
-This command returns the user&#39;s current position within the CLI hierarchy. When executed from the main CLI prompt, it returns nothing. When executed from within the configuration tree, it returns the user&#39;s current position within the tree.
+This command returns the user&#x27;s current position within the CLI hierarchy. When executed from the main CLI prompt, it returns nothing. When executed from within the configuration tree, it returns the user&#x27;s current position within the tree.
 
 #### Example
 
@@ -8122,15 +8119,15 @@ write log message [force] [router <router>] [node <node>] <message> [<process-na
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node on which to log |
-| router | the router on which to log (default: &lt;current router&gt;) |
+| node | The node on which to log |
+| router | The router on which to log (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| message | the message to write to the log (messages with a space must be surrounded with quotes) |
-| process-name | the process to which to write a log message (default: all) |
+| message | The message to write to the log (messages with a space must be surrounded with quotes) |
+| process-name | The process to which to write a log message (default: all) |
 
 ##### See Also
 
@@ -8172,7 +8169,7 @@ Mar 13 14:14:38.345 [USER| -- ] INFO  (stateMonitPoller) ---- starting test here
 
 ## `write log snapshot`
 
-Write a snapshot of debug information to the log
+Write a snapshot to the log.
 
 #### Usage
 
@@ -8186,14 +8183,14 @@ write log snapshot [category <category>] [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | category | The log category for which to write the snapshot. (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | the node on which to log |
-| router | the router on which to log (default: &lt;current router&gt;) |
+| node | The node on which to log |
+| router | The router on which to log (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| process-name | the process to write a snapshot (default: all) |
+| process-name | The process to write a snapshot (default: all) |
 
 ##### See Also
 
