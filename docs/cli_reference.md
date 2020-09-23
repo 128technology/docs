@@ -7786,7 +7786,7 @@ show udp-transform [force] [node <node>] router <router>
 
 #### Description
 
-A 128T router may need to transform TCP packets into UDP packets to enable SVR to traverse stateful firewalls. By default, the 128T router runs a [firewall detector]](concepts_machine_communication.md#firewall-detector) process over peer paths, and will dynamically enable UDP transform when necessary. (Administrators may also elect to enable UDP transform if they know there are stateful firewalls in the path.) This command shows whether a path has UDP transform enabled, and if so, which firewall detection tests triggered the feature to be enabled.
+A 128T router may need to transform TCP packets into UDP packets to enable SVR to traverse stateful firewalls. By default, the 128T router runs a [firewall detector](concepts_machine_communication.md#firewall-detector) process over peer paths, and will dynamically enable UDP transform when necessary. (Administrators may also elect to enable UDP transform if they know there are stateful firewalls in the path.) This command shows whether a path has UDP transform enabled, and if so, which firewall detection tests triggered the feature to be enabled.
 
 #### Example
 
