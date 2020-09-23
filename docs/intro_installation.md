@@ -23,10 +23,10 @@ The examples listed in this guide generally prefer running commands as a non-roo
 The 128T routing software offers the following installation methods to address your specific system. 
  - [Interactive ISO](intro_installation_bootable_media.md)
  - [One Touch Provisioning (OTP) ISO Image](intro_installation_otp_iso.mdx)
+ 	- [ISO Quickstart](intro_ztp.md)
  - [Manual Installation](intro_installation_installer.md)
- - Installation from Amazon Web Services (AWS) Marketplace
- 	- [Manual Installation](intro_installation_quickstart_aws.md)
- 	- [Install using ZTP](intro_ztp.md)
+ - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws)
+ 	- [Amazon Web Services Quickstart](intro_installation_quickstart_aws.md)
  - [Installation in Microsoft Azure](intro_installation_azure.md)	
 
 
