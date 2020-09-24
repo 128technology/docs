@@ -17,21 +17,23 @@ In the event of power disruption, the Automatic Restart setting in your system's
 #### To enable Automatic Restart:
 1. From the BIOS settings screen, select ACPI \> Power Settings.
 2. Change the Automatic Restart setting to On.
-3. Save the configuration and reboot your system. 
+3. Save the configuration.
+4. Reboot your system. 
 
 ### Disable Secure Boot
-Secure Boot is a feature to verify the integrity of the system. As the kernel modules of 128T are not signed, the modules required by the drivers of the network interfaces cannot be loaded at runtime. The requirement is to disable the secure boot setting in the BIOS.
+Secure Boot verifies the integrity of the system. Because the kernel modules of the 128T are not signed, the modules required by the network interface drivers cannot be loaded at runtime. In order to allow the loading of the necessary drivers, the Secure Boot setting in the BIOS must be disabled. 
 
 :::note
-When running VMware ESXi release 6.7 (or newer) the secure boot setting in the BIOS must be disabled
+When running VMware ESXi release 6.7 (or newer) the Secure Boot setting in the BIOS must be disabled.
 :::
 
-As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [Interchange](https://community.128technology.com/) for commonly deployed 128T hardware platforms. Below are representative steps for common BIOS parameters:
-
 #### To disable Secure Boot:
-1. From the BIOS settings screen, select Boot.
+1. On the BIOS settings screen, select Boot.
 2. Change the Secure Boot setting to Off.
-3. Save the configuration and reboot your system.
+3. Save the configuration.
+4. Reboot your system.
+
+BIOS settings may vary between hardware vendors. Please consult your hardware documentation for specific instructions. Additional information for common deployments of 128T hardware platforms may be found on [Interchange](https://community.128technology.com/).
 
 ## Preparing the Operating System
 Before installing 128T Routing Software you must prepare your operating system according to 128 Technology's recommendations and guidelines.
