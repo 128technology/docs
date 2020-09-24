@@ -1,6 +1,6 @@
 ---
-title: Installing the Interacive ISO From Bootable Media
-sidebar_label: Installing the Interacive ISO from Bootable Media
+title: Installing the Interactive ISO From Bootable Media
+sidebar_label: Installing the Interactive ISO from Bootable Media
 ---
 
 This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading a 128T ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
