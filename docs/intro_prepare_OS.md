@@ -19,6 +19,20 @@ In the event of power disruption, the Automatic Restart setting in your system's
 2. Change the Automatic Restart setting to On.
 3. Save the configuration and reboot your system. 
 
+### Disable Secure Boot
+Secure Boot is a feature to verify the integrity of the system. As the kernel modules of 128T are not signed, the modules required by the drivers of the network interfaces cannot be loaded at runtime. The requirement is to disable the secure boot setting in the BIOS.
+
+:::note
+When running VMware ESXi release 6.7 (or newer) the secure boot setting in the BIOS must be disabled
+:::
+
+As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [Interchange](https://community.128technology.com/) for commonly deployed 128T hardware platforms. Below are representative steps for common BIOS parameters:
+
+#### To disable Secure Boot:
+1. From the BIOS settings screen, select Boot.
+2. Change the Secure Boot setting to Off.
+3. Save the configuration and reboot your system.
+
 ## Preparing the Operating System
 Before installing 128T Routing Software you must prepare your operating system according to 128 Technology's recommendations and guidelines.
 
