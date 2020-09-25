@@ -13,7 +13,7 @@ sidebar_label: '5.0'
 ------
 - **I95-15618** Auto completion now available on `clear arp` PCLI command
 ------
-- **I95-20757** Displaying alarm history within the PLCI via `show events alarm` now supports relative timestamps
+- **I95-20757** Displaying alarm history within the PCLI via `show events alarm` now supports relative timestamps
 ------
 - **I95-21776** Ethernet over Secure Vector Routing (EoSVR)
 ------
@@ -84,9 +84,9 @@ sidebar_label: '5.0'
 
 - **I95-12833** Provisioning deprecated configuration fields now prompts for confirmation
 ------
-- **I95-20718** CLI now produces a warning when creating configuration objects with the keywords ("delete", "force", "move", "clone", "all") as their name
+- **I95-20718** PCLI now produces a warning when creating configuration objects with the keywords ("delete", "force", "move", "clone", "all") as their name
 ------
-- **I95-34624** Remove AP driven install from 128T
+- **I95-34624** Remove Automated Provisioner driven install from 128T
 ------
 - **I95-34983, I95-35892** Remove unused PCLI Commands
 ------
