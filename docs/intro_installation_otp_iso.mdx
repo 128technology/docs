@@ -27,6 +27,7 @@ The general process for disk cloning is as follows:
 6. Verify the platform validation report.xs
 
 ## Installing 128T with the ISO
+Follow the [instructions](intro_installation_bootable_media.md) for installing the OTP ISO from bootable media. After installation, the platform will power off.
 
 ## Bootstrapping
 
@@ -98,7 +99,7 @@ The scriptlets must have executable permissions to be executed properly.
 Any stdout/stderr output generated from the scriptlets will be logged for you in `/var/log/128T-bootstrap/<scriptlet-name>-scriptlet.log`.
 
 ### Bootstrapping Flow Chart
-Below is a diagram of the procedure followed by the Bootstrapper software during first bootup of the platform. This occurs after the ISO installation when powered on for the first time.
+The diagram below shows the procedure the Bootstrap utility follows during the first bootup of the platform after the ISO installation has completed. 
 
 <Flowchart
   chartCode={`
@@ -163,11 +164,11 @@ The response must be URL-encoded, otherwise the client will not decode the data 
 The password data within the JSON is required if the QuickStart file was encrypted when exported from the 128T Conductor.
 
 ### Testing
-The bootstrap utility provides an entrypoint to test your own QuickStart Server. By executing the below command, the client will make requests to URLs and attempt to download and decode the QuickStart file. It will NOT apply the QuickStart to the platform - only test the process.
+The Bootstrap utility provides an entrypoint to test your QuickStart Server. By executing the below command, the client will make requests to URLs and attempt to download and decode the QuickStart file. It will NOT apply the QuickStart to the platform - only test the process.
 ```
 $ bootstrap128t rest-test -i <test-identifier>
 ```
-OR if you want to test a specific url:
+Or, if you want to test a specific url:
 ```
 $ bootstrap128t rest-test -i <test-identifier> --url <a-fully-qualified-url>
 ```
