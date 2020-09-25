@@ -41,9 +41,9 @@ sidebar_label: '5.0'
 ------
 - **I95-35150** PCLI Clone Configuration
 ------
-- **I95-35190** PCLI bulk paste configuration
+- **I95-35190** [PCLI bulk paste configuration](http://localhost:3000/docs/concepts_pcli.md#paste-config)
 ------
-- **I95-35741** PCLI plugin service commands
+- **I95-35741** [PCLI plugin service commands](http://localhost:3000/docs/cli_reference.md#manage-plugin-install)
 
 ### Issues Fixed
 
