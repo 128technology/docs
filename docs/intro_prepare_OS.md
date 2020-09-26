@@ -24,7 +24,7 @@ In the event of power disruption, the Automatic Restart setting in your system's
 Secure Boot verifies the integrity of the system. Because the kernel modules of the 128T are not signed, the modules required by the network interface drivers cannot be loaded at runtime. In order to allow the loading of the necessary drivers, the Secure Boot setting in the BIOS must be disabled. 
 
 :::note
-When deploying 128T on VMware ESXi release 6.7 (or newer), Secure Boot must be disabled when the Virtual Machine is created (New Virtual Machine wizard). To disable it, uncheck the box "Secure Boot (EFI boot only)" found in the tab "VM Options" within the "Customize hardware" section.  
+When deploying 128T on VMware ESXi release 6.7 (or newer), Secure Boot must be disabled when the Virtual Machine is created (New Virtual Machine wizard). To disable it, deselect the box "Secure Boot (EFI boot only)" found in the tab "VM Options" within the "Customize hardware" section.  
 :::
 
 #### To disable Secure Boot:
