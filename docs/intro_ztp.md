@@ -2,6 +2,7 @@
 title: Quick Start from a Bootable ISO
 sidebar_label: QuickStart from a Bootable ISO
 ---
+**This section will either be absorbed into a different chapter, or removed**
 
 128 Technology has a software-driven framework for rapid and dynamic deployment of network nodes across the enterprise using Zero Touch Provisioning (ZTP). The software was architected from the ground up to enable automated deployment across a large set of scenarios, including simple, repeatable branch deployments and dynamic, scalable data center/cloud deployments. The solution may be deployed with minimal configuration using the default 128T installation process, or customized and integrated with 3rd party tools.
 
@@ -37,7 +38,7 @@ This diagram is one possible topology for a standalone 128T deployed at the edge
 
 ## Procedure
 
-The rest of this guide will walk you through setting up a typical standalone branch router leveraging the QuickStart capabilities of the 128T Networking Platform.
+This guide walks you through setting up a typical standalone branch router, leveraging the QuickStart capabilities of the 128T Networking Platform.
 
 ### 128T Configuration
 

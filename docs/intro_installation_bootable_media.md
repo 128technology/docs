@@ -1,18 +1,19 @@
 ---
-title: Installing the Interactive ISO From Bootable Media
-sidebar_label: Installing the Interactive ISO from Bootable Media
+title: Installing From Bootable Media
+sidebar_label: Installing from Bootable Media
 ---
 
 This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading a 128T ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
-The following steps to install using the Interactive ISO provide the option to configure the system as either a Router or a Conductor. This section describes how to configure the 128T as a Conductor. To install complex router configurations, use the [One-Touch Provisioning (OTP) ISO](intro_installation_otp_iso.md).
+The steps in this section describe installing either ISO from bootable media. The section, [Initialize the 128T](#initialize-the-128t-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
+See [Installing Using the One Touch Provisioning ISO](intro_installation_otp_iso.md) for details to install complex router configurations **after** installing and configuring the Conductor. 
 
 ### Prerequisites
 
 - Ensure that the platform you are installing on meets the 128T hardware requirements.
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 
-### Installing the Interactive ISO
+### Installing the ISO
 
 After imaging the ISO onto removable media, insert it into the target machine and power it on.
 
@@ -44,7 +45,9 @@ After the Linux installation completes, the 128T software installation begins. N
 
 ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
 
-After shutting down the system and removing the bootable media, power the system to complete the installation process using the Initializer. 
+After shutting down the system, remove the bootable media. 
+If you installed the Interactive ISO powering up the system will start the Initializer. 
+If you installed using One Touch Provisioning, power the system up to complete the installation process. 
 
 ### Installation Notes
 
