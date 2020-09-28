@@ -3,21 +3,13 @@ title: Initializer Command Line Reference
 sidebar_label: Initializer Command Line Reference
 ---
 
-:::note
-
 This is a reference document for the 128T Initializer command line interface.
 For a guide to basic usage, see the initialization section of the
 [Manual Installation Guide](intro_installation_installer.md/#initialize-the-128t-node).
 
-:::
-
 ## Running the Initializer
 
-To start the Initializer, run the command:
-
-```sh
-initialize128t
-```
+To start the Initializer, run the `initialize128t` command.
 
 :::note
 
@@ -50,12 +42,8 @@ detect when 128T is running and exit with this message:
 128T is running; cannot launch Initializer
 ```
 
-To stop 128T in order to run the Initializer, use `systemctl` as root or
-`sudo systemctl`:
-
-```sh
-systemctl stop 128T
-```
+To stop 128T, follow the steps shown in the
+[Installation Guide](intro_installation.md#stopping-the-128t-routing-software).
 
 :::
 
@@ -68,7 +56,9 @@ Without any arguments, the Initializer will open a wizard interface to initializ
 initialize128t
 ```
 
-Follow the on-screen prompts to complete the initialization process.
+Follow the on-screen prompts to complete the initialization process. Step-by-step
+instructions for the Initializer wizard can be found in the
+[Installation Guide](intro_installation_installer#initialize-the-128t-node).
 
 ### Automated Mode
 

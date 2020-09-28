@@ -3,21 +3,13 @@ title: Installer Command Line Reference
 sidebar_label: Installer Command Line Reference
 ---
 
-:::note
-
 This is a reference document for the 128T Installer command line interface.
 To get started installing 128T with the Installer, see the
 [Manual Installation Guide](intro_installation_installer.md).
 
-:::
-
 ## Running the Installer
 
-To start the Installer, run the command:
-
-```sh
-install128t
-```
+To start the Installer, run the `install128t` command.
 
 :::note
 
@@ -68,6 +60,8 @@ install128t
 ```
 
 Follow the on-screen prompts to complete the installation and initialization process.
+Step-by-step instructions for the Installer wizard can be found in the
+[Installation Guide](intro_installation_installer#install-using-128t-installer).
 
 ### Automated Mode
 
