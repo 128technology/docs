@@ -164,7 +164,7 @@ install128t download --help
 ### `download`
 
 Download 128T software and save it to the local repository.
-After download, the software will be available for future installation and/or upgrades.
+After download, the software will be available for future installation and upgrades.
 
 ```sh
 install128t download
@@ -192,13 +192,13 @@ If no version is specified, the latest available version will be downloaded.
 ### `import`
 
 The `import` subcommand is used to save software from other locations to the
-local repository, after which it will be available for future installation and/or
+local repository, after which it will be available for future installation and
 upgrades.
 
 #### Automatically find and import ISO
 
-With this option, the Installer will attempt search the local filesystem for a
-128T ISO file, then mount it and save all of its software to the local repository.
+With this option, the Installer will attempt to search the local filesystem for
+a 128T ISO file, mount it, and save the contents to the local repository.
 
 ```sh
 install128t import --iso-hunt
