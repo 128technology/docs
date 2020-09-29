@@ -13,15 +13,13 @@ module.exports = {
     "Introduction": [
       "intro_getting_started",
       "intro_installation",
-        "intro_system_reqs",
+      "intro_system_reqs",
         
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
       "intro_installation_bootable_media",
       "intro_new_otp_iso_install",
-      "intro_installation_otp_iso",
-      "intro_ztp",
-      
+            
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
       "intro_installation_azure", 

@@ -3,6 +3,8 @@ title: Router Install from the Bootable ISO
 sidebar_label: Router Install from the Bootable ISO
 ---
 
+import Flowchart from '../src/components/Flowchart';
+
 128 Technology has a software-driven framework for rapid and dynamic deployment of network nodes across the enterprise using One Touch Provisioning (OTP). The software was architected from the ground up to enable automated deployment across a large set of scenarios, including simple, repeatable branch deployments and dynamic, scalable data center/cloud deployments. The solution may be deployed with minimal configuration using the default 128T installation process, or customized and integrated with 3rd party tools.
 
 An important aspect of the 128 Technology OTP solution is its flexibility. When the product is deployed using the standard 128T images, many customers appreciate the simplicity of enabling an enterprise-wide SessionSmart&trade; routing fabric without investing additional time to customize the deployment. Rapid deployment of session-enabled routing, security and network visibility is the key objective.
@@ -39,21 +41,14 @@ The general process for disk cloning is as follows:
 
 ## Before you Begin
 
-Ensure that you have met the following prerequisites:
-
-- 128T Conductor operationally deployed and reachable by router
-- System installed with 128T software
-  :::info
-  If do not have 128T already installed on a platform, you can follow [this procedure](intro_creating_bootable_usb.md)
-  :::
-- 128T Router has one or more WAN links
+Before beginning the Router installation, you must have a 128T Conductor operationally deployed and reachable by the router.
 
 This diagram is one possible topology for a standalone 128T deployed at the edge of the network.
 
 ![QuickStart network diagram](/img/intro_ztp_quickstart_network_diagram.png)
 
 ## Installing 128T with the ISO
-Follow the [instructions](intro_installation_bootable_media.md) for installing the OTP ISO from bootable media. After installation, the platform will power off.
+Follow the [instructions for installing the OTP ISO from bootable media](intro_installation_bootable_media.md). After installation, the platform will power off.
 
 ## Bootstrapping
 
@@ -65,7 +60,7 @@ The hostname and salt minion identifier are set to the same value during the boo
 
 If the system serial number is provisioned (seen by `dmidecode --string system-serial-number`) this value will be used. Otherwise use the first MAC address found in the format of: `mac-<address>`
 
-### 2. Configure 128T and network interfaces
+### 2. Configure the 128T and Network Interfaces
 
 The Bootstrapper sets the 128T configuration via the QuickStart file found in one of the following locations:
 
@@ -77,11 +72,11 @@ If no file source is present in either location, the Bootstrapper executes HTTP 
     1. `http://quickstart.128t-bootstrap.local/quickstart/<identifier>`
     2. `http://192.168.128.128/quickstart/<identifier>`
 
-Where `<identifier>` is the minion-id as determined by the algorithm discussed in [Configure Hostname and Salt Minion Identifier](#configure-hostname-and-salt-minion-identifier). Typically, it is the system serial number.
+The `<identifier>` is the minion-id as determined by the algorithm discussed in [Configure Hostname and Salt Minion Identifier](#configure-hostname-and-salt-minion-identifier). Typically, it is the system serial number.
 
 If none of the above are successful, the OTP defaults are used. This configures the DHCP client on the first ethernet port and a DHCP server listening on all other ports.
 
-### 3. Enable 128T and salt-minion service
+### 3. Enable 128T and Salt-Minion Service
 
 The quickstart file configures and enables the 128T Router and the associated salt-minion service.
 
@@ -115,18 +110,16 @@ It is important to note that after the OS installation the dhclient is configure
 :::
 
 ### Scriptlets
-In addition to the above steps, the Bootstrap utility supports executing pre- and post- scriptlets on a USB drive for further customisation of the platform. The scriptlets will be executed as the first step and last steps in the bootstrap process.
+In addition to the above steps, the Bootstrap utility supports executing pre- and post- scriptlets on a USB drive for further customization of the platform. The scriptlets will be executed as the first and last steps in the bootstrap process.
 
 The names and locations for the scriptlets are:
-* If scriptlet exists at the root of USB drive and is called “/pre-bootstrap”, it will be the first step.
-    * Otherwise, try to use /etc/128technology/pre-bootstrap.
-* If scriptlet exists at the root of USB drive and is called “/post-bootstrap”, it will be the last step. 
-    * Otherwise, try to use /etc/128technology/post-bootstrap.
+* If scriptlet exists at the root of USB drive and is called “/pre-bootstrap”, it will be the first step. Otherwise use /etc/128technology/pre-bootstrap.
+* If scriptlet exists at the root of USB drive and is called “/post-bootstrap”, it will be the last step. Otherwise use /etc/128technology/post-bootstrap.
 
 :::important
 The scriptlets must have executable permissions to be executed properly.
 :::
-Any stdout/stderr output generated from the scriptlets will be logged for you in `/var/log/128T-bootstrap/<scriptlet-name>-scriptlet.log`.
+Any stdout/stderr output generated from the scriptlets is logged in `/var/log/128T-bootstrap/<scriptlet-name>-scriptlet.log`.
 
 ### Bootstrapping Flow Chart
 The diagram below shows the procedure the Bootstrap utility follows during the first bootup of the platform after the ISO installation has completed. 
@@ -176,7 +169,7 @@ The diagram below shows the procedure the Bootstrap utility follows during the f
   `}
 />
 
-## QuickStart file via REST
+### QuickStart File via REST
 
 If no bootstrap file is present on the USB device or disk, the Bootstrapper will execute HTTP GET requests in an attempt to download the QuickStart file from a server.
 
@@ -194,7 +187,8 @@ The response must be URL-encoded, otherwise the client will not decode the data 
 The password data within the JSON is required if the QuickStart file was encrypted when exported from the 128T Conductor.
 
 ### Testing
-The Bootstrap utility provides an entrypoint to test your QuickStart Server. By executing the below command, the client will make requests to URLs and attempt to download and decode the QuickStart file. It will NOT apply the QuickStart to the platform - only test the process.
+
+The Bootstrap utility provides an entrypoint to test your QuickStart Server. By executing the command below, the client makes requests to URLs and attempts to download and decode the QuickStart file. It will NOT apply the QuickStart to the platform - only test the process.
 ```
 $ bootstrap128t rest-test -i <test-identifier>
 ```
