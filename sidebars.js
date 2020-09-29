@@ -5,6 +5,7 @@ module.exports = {
       "about_releases",
       "about_support_policy",
       "about_supported_platforms",
+      "about_certified_platforms",
       "about_security_policy",
       "about_svr_savings",
       "CONTRIBUTING",
@@ -109,6 +110,7 @@ module.exports = {
     ],
     "Best Practices": [
       "bcp_att_avpn_configuration",
+      "bcp_using_128T_as_ntp_server",
       "bcp_conductor_deployment",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",

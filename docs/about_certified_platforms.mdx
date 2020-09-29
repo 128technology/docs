@@ -1,0 +1,155 @@
+---
+title: Certified Platforms
+sidebar_label: Certified Platforms
+---
+
+export const certifiedPlatforms = {
+  lanner7573a : {
+    application : "Medium/Large Branch",
+    cpu : "8C (Atom)",
+    mem : "16GB",
+    interfaces : [
+      "Ethernet, 6 ports",
+      "LTE AT&T",
+      "LTE Verizon",
+      "T1"
+    ]
+  },
+  lanner7573b : {
+    application : "Small/Medium Branch",
+    cpu : "4C (Atom)",
+    mem : "8GB",
+    interfaces : [
+      "Ethernet, 6 ports",
+      "LTE AT&T",
+      "LTE Verizon",
+      "T1"
+    ]
+  },
+  lenovosr530 : {
+    application : "Small/Medium Datacenter",
+    cpu : "8-16C (Xeon Bronze-Silver)",
+    mem : "32-192GB",
+    interfaces : [
+      "Ethernet, 2-16 ports"
+    ]
+  },
+  lenovosr570 : {
+    application : "Large Datacenter",
+    cpu : "22C (Xeon Gold)",
+    mem : "128-192GB",
+    interfaces : [
+      "Ethernet, 2-16 ports"
+    ]
+  },
+  silicommadrid1u : {
+    application : "Medium/Large Branch",
+    cpu : "4-8C (Atom C3558-C3758)",
+    mem : "8-16GB",
+    interfaces : [
+      "Ethernet, 6-12 ports",
+      "LTE AT&T",
+      "T1"
+    ]
+  },
+  silicommadriddesktop : {
+    application : "Small/Medium Branch",
+    cpu : "4-8C (Atom C3558-C3758)",
+    mem : "8-16GB",
+    interfaces : [
+      "Ethernet, 6 ports",
+      "LTE AT&T"
+    ]
+  },
+  silicomrccve2 : {
+    application : "Small/Medium Branch",
+    cpu : "4C (Atom C2558)",
+    mem : "8GB",
+    interfaces : [
+      "Ethernet, 6 ports"
+    ]
+  }
+}
+
+export const Platform = ({id}) => (
+  <table>
+    <tbody>
+      <tr>
+        <td><b>Application</b></td>
+        <td>{certifiedPlatforms[id].application}</td>
+      </tr>
+      <tr>
+        <td><b>CPU</b></td>
+          <td>{certifiedPlatforms[id].cpu}</td>
+      </tr>
+      <tr>
+        <td><b>Memory</b></td>
+        <td>{certifiedPlatforms[id].mem}</td>
+      </tr>  
+      <tr>
+        <td><b>Interface Options</b></td>
+        <td>{ certifiedPlatforms[id].interfaces.map((iface, index) => <li key={index}>{ iface }</li>) }</td>
+      </tr>
+    </tbody>
+  </table>
+)
+
+128 Technology maintains platforms which have been certified to run 128T. For more details on certification, see the [platform support policy](about_supported_platforms.md#128t-certification-program).
+
+## Certified Plus
+
+The following platforms have the status of [Certified Plus](about_supported_platforms.md#128t-certified-plus-platform).
+
+### Silicom Madrid 1U
+
+![Silicom Madrid 1U](/img/about_certified_platforms_silicommadrid1u.png)
+
+<Platform id="silicommadrid1u"></Platform>
+
+### Silicom Madrid Desktop
+
+![Silicom Madrid Desktop](/img/about_certified_platforms_silicommadriddesktop.png)
+
+<Platform id="silicommadriddesktop"></Platform>
+
+### Silicom RCC-VE2
+
+![Silicom RCC-VE2](/img/about_certified_platforms_silicomrccve2.png)
+
+<Platform id="silicomrccve2"></Platform>
+
+### Lenovo SR530
+
+![Lenovo SR530](/img/about_certified_platforms_lenovosr530.png)
+
+<Platform id="lenovosr530"></Platform>
+
+### Lenovo SR570
+
+![Lenovo SR570](/img/about_certified_platforms_lenovosr570.png)
+
+<Platform id="lenovosr570"></Platform>
+
+### Lanner 7573A
+
+![Lanner 7573A](/img/about_certified_platforms_lanner7573a.png)
+
+<Platform id="lanner7573a"></Platform>
+
+### Lanner 7573B
+
+![Lanner 7573B](/img/about_certified_platforms_lanner7573b.png)
+
+<Platform id="lanner7573b"></Platform>
+
+## Certified
+
+The following platforms have the status of [Certified](about_supported_platforms.md#128t-certified-platform).
+
+* Advantech FWA-T011
+* AudioCodes M800C
+* HP DL360
+* Lanner NCA-1510B
+* Lanner NCA-1515B-WB1
+* Lanner 4010D
+* Lanner 4012A
