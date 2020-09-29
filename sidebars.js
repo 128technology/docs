@@ -18,6 +18,7 @@ module.exports = {
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
       "intro_installation_bootable_media",
+      "intro_new_otp_iso_install",
       "intro_installation_otp_iso",
       "intro_ztp",
       

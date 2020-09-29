@@ -8,7 +8,7 @@ The 128T routing software runs on both bare metal servers and as a virtual machi
 The 128T routing software recommends a minimum of 4 CPU cores, 8GB of RAM, and at least 25GB of hard drive space. See [certified platforms](about_certified_platforms.mdx) and the [platform support policy](about_supported_platforms.md) for more details.
 
 :::info
-Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analytical analysis of the traffic patterns and utilization of your 128T routing system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.128technology.com/) for hardware profile examples.
+Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your 128T routing system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.128technology.com/) for hardware profile examples.
 :::
 
 :::important
@@ -34,6 +34,21 @@ In the event of power disruption, the Automatic Restart setting in your system's
 1. From the BIOS settings screen, select ACPI \> Power Settings.
 2. Change the Automatic Restart setting to On.
 3. Save the configuration and reboot your system. 
+
+### Disable Secure Boot
+Secure Boot verifies the integrity of the system. Because the kernel modules of the 128T are not signed, the modules required by the network interface drivers cannot be loaded at runtime. In order to allow the loading of the necessary drivers, the Secure Boot setting in the BIOS must be disabled. 
+
+:::note
+When deploying 128T on VMware ESXi release 6.7 (or newer), Secure Boot must be disabled when the Virtual Machine is created (New Virtual Machine wizard).To disable it, deselect **Secure Boot (EFI boot only)** found on the **VM Options** tab within the **Customize Hardware** section.
+:::
+
+#### To disable Secure Boot:
+1. On the BIOS settings screen, select Boot.
+2. Change the Secure Boot setting to Off.
+3. Save the configuration.
+4. Reboot your system.
+
+BIOS settings may vary between hardware vendors. Please consult your hardware documentation for specific instructions. Additional information for common deployments of 128T hardware platforms may be found on [Interchange](https://community.128technology.com/).
 
 ## Interface Requirements
 Logically, 128T routers have at least two interfaces; in many deployments they represent "LAN" and "WAN" interfaces. These may be separate physical interfaces, or they may be separate VLANs on a single physical interface. There is also typically a third interface used for management traffic.
@@ -80,6 +95,8 @@ Once you have identified the platform and determined it meets the minimum requir
 - [Installing on AWS](intro_installation_aws.md)
 
 ## VMware ESXi and KVM Requirements
+When deploying 128T Routing Software on VMware ESXi release 6.7 (or newer), [Secure Boot must be disabled](#disable-secure-boot) when the Virtual Machine is created (New Virtual Machine wizard). To disable it, deselect **Secure Boot (EFI boot only)** found on the **VM Options** tab within the **Customize Hardware** section.
+
 VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0) are hypervisor environments. The following adjustments are required to run 128T Routing Software in these environments: 
 - Leverage core affinity to dedicate CPU cores to 128T software, instead of leveraging virtual CPUs.
 - Set the SCSI controller to LSI Logic SAS.
