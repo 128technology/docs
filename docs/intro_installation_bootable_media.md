@@ -6,7 +6,7 @@ sidebar_label: Installing from Bootable Media
 This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading a 128T ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
 The steps in this section describe installing either ISO from bootable media. The section, [Initialize the 128T](#initialize-the-128t-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
-See [Installing Using the One Touch Provisioning ISO](intro_installation_otp_iso.md) for details to install complex router configurations **after** installing and configuring the Conductor. 
+See [Installing Using the One Touch Provisioning ISO](intro_otp_iso_install.md) for details to install complex router configurations **after** installing and configuring the Conductor. 
 
 ### Prerequisites
 

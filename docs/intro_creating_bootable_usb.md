@@ -25,7 +25,7 @@ The high level steps are as follows:
 - Use Clonezilla or other Live USB to copy the platform on to bootable media.
 - Distribute the cloned disk using USB, multicast, or other technique.
 
-Refer to [Installing from an ISO](intro_installation_otp_iso.md) for installation information.
+Refer to [Installing from an ISO](intro_otp_iso_install.md) for installation information.
 
 
 ### Creating a CDROM/DVD
