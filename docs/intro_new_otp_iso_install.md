@@ -5,7 +5,7 @@ sidebar_label: Router Install from the Bootable ISO
 
 import Flowchart from '../src/components/Flowchart';
 
-128 Technology has a software-driven framework for rapid and dynamic deployment of network nodes across the enterprise using One Touch Provisioning (OTP). The software was architected from the ground up to enable automated deployment across a large set of scenarios, including simple, repeatable branch deployments and dynamic, scalable data center/cloud deployments. The solution may be deployed with minimal configuration using the default 128T installation process, or customized and integrated with 3rd party tools.
+128 Technology has a software-driven framework for rapid and dynamic deployment of network nodes across the enterprise using One Touch Provisioning (OTP). The software has been architected to enable automated deployment across a large set of scenarios, including simple, repeatable branch deployments and dynamic, scalable data center/cloud deployments. The solution may be deployed with minimal configuration using the default 128T installation process, or customized and integrated with 3rd party tools.
 
 An important aspect of the 128 Technology OTP solution is its flexibility. When the product is deployed using the standard 128T images, many customers appreciate the simplicity of enabling an enterprise-wide SessionSmart&trade; routing fabric without investing additional time to customize the deployment. Rapid deployment of session-enabled routing, security and network visibility is the key objective.
 

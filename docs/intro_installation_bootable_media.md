@@ -90,14 +90,16 @@ The 128T Initializer tunes your operating system, prepares the platform to run t
 
 5. The **Advanced** button allows you to specify the number of CPU cores to be allocated for running your 128T routing software.
    :::info
-   This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilites of the 128T platform beyond the default settings for the target platform.
+   This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilites of the 128T Router beyond the default settings for the target platform.
+   
+   The **Advanced** selection is only available when configuring a 128T Router. 
    :::
 
 6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
 
   ![Password Setup](/img/intro_install_initializer_password.png)
 
-7. On the **Anonymous Data Collection** screen, select either **Accept** or **Disable** to enable or disable the RoadRunner process that measures the health of your 128T router and components.
+7. If presented with the **Anonymous Data Collection** screen, select either **Accept** or **Disable** to enable or disable the process that measures the health of your 128T router and components.
 
 8. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
 

@@ -20,7 +20,7 @@ The examples listed in this guide generally prefer running commands as a non-roo
 :::
 
 ## Installation Process
-To properly deploy the 128 Technolgy system, you must first install and configure the Conductor. Once the Conductor is installed and configured, the router software can be installed on one or many systems using automated ISO process. 
+To properly deploy the 128 Technology system, you must first install and configure the Conductor. Once the Conductor is installed and configured, the router software can be installed on one or many systems using one of the processes below. 
 
 ## Installation Methods
 The 128T routing software offers the following installation methods to address your specific system. 
