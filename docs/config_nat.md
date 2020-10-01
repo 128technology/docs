@@ -65,7 +65,7 @@ Static desination network address translation can be performed by configuring a 
 NAT pools are a construct that allow for the use of IP and port ranges to be shared across one or more network-interfaces for either source or destination NATing capabilies.
 
 ### Static NAT bindings
-A static NAT binding can be configured by creating a `authority > router > nat-pool` object and assigning it to a network-interface.  The following rules and constraints will apply to this configuration:
+A static NAT binding can be configured by creating an `authority > router > nat-pool` object and assigning it to a network-interface.  The following rules and constraints will apply to this configuration:
 
 * The _nat-pool_ prefix is used to create a N:M mapping. Where each source IP (from ingress interface) is hashed to an IP address in the nat pool.
 * The static _nat-pool_ can only be configured as:
@@ -103,19 +103,18 @@ Currently session migration is only supported for SVR sessions. This restriction
 
 <u>Session Recovery Considerations</u>
 
-Shared NAT pools provisioned on a HA interface that encounters a failover, the 128T software puts the interface in recovery mode to recover all sessions. At the end of the recovery period, all non-discovered ports as designed as free and are returned to the NAT pool.
+For shared NAT pools provisioned on an HA interface that encounters a failover, the 128T software will put the interface into recovery mode to recover all sessions. At the end of the recovery period all non-discovered ports designed as free are returned to the NAT pool.
 
 ### Tenant filtering
 The _nat-pool_ configuration can optionally be provisioned with a list of tenants. When the configuration has _multiple_ IP pools available, the _tenant_ can be used to determine which IP pool will be selected for the source NAT. Absence of a tenant implies that the IP pool is valid for all traffic. The following rules will be applied in order to determine the selection of the NAT pool:
 
 * The packet has a source tenant associated with it
-  * If more than one IP pool has matching tenant
-    * Only the first IP pool is used and hash is applied to create a session. The remainder of the matches are discarded
+  * If more than one IP pool has a matching tenant, only the first IP pool is used and the hash is applied to create a session. The remainder of the matches are discarded
   * If a pool with no tenant is configured
     * Same as above
   * All IP pools have tenant configured but none of them match the source tenant
     * Log the failure, increment stat and drop the packet
 * The packet has no source tenant associated with it
-  * At least one IP pool has no tenant configured to do the source NAT; otherwise this will result in the session being dropped.
+  * At least one IP pool has no tenant configured to do the source NAT otherwise this will result in the session being dropped
 
-The tenant matching rules will apply to sub-tenants as well. For example, if an IP pool allows tenant engineering; traffic with source tenant lab.engineering will also match the pool.
+The tenant matching rules will apply to sub-tenants as well. For example, if an IP pool allows tenant engineering, then traffic with source tenant lab.engineering will also match the pool.
