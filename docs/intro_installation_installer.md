@@ -71,6 +71,8 @@ The 128T Initializer is a complementary application to the installer that tunes 
 5. The **Advanced** button allows you to specify the number of CPU cores to be allocated for running your 128T routing software.
    :::info
    This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilites of the 128T platform beyond the default settings for the target platform.
+
+   The **Advanced** selection is only available when configuring a 128T Router.
    :::
 
 6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
@@ -85,9 +87,9 @@ The 128T Initializer is a complementary application to the installer that tunes 
 
   ![Initializer Complete](/img/intro_install_initializer_complete.png)
 
-   :::note
-   If installing the 128T software for the first time, a system reboot is required.
-   :::
+:::note
+If installing the 128T software for the first time, a system reboot is required.
+:::
 
 ### Verify Installation
 

@@ -6,6 +6,9 @@ sidebar_label: Installing from Bootable Media
 This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading a 128T ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
 The steps in this section describe installing either ISO from bootable media. The section, [Initialize the 128T](#initialize-the-128t-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
+:::note
+The Conductor installation must be completed before installing a router or routers using the OTP ISO.
+:::
 See [Installing Using the One Touch Provisioning ISO](intro_otp_iso_install.md) for details to install complex router configurations **after** installing and configuring the Conductor. 
 
 ### Prerequisites
@@ -27,7 +30,7 @@ Upon boot, you are prompted with the following screen for the Linux installation
 Not all hardware has video support, therefore booting to console is the default (a console user may not be able to select an option). The default option is selected after a 30 second timeout.
 ::: 
 
-##### 128T Router via Serial Console
+##### 128T System via Serial Console
 
 Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer.
 
@@ -35,7 +38,7 @@ Use this option when running on hardware with no video chipset. It uses `/dev/tt
 Selecting the wrong type of console may result in garbage characters being displayed and the install hanging. If this is the case, reboot the target system and select the correct line for the target hardware.
 ::: 
 
-##### 128T Router with VGA Console
+##### 128T System with VGA Console
 
 Use this option when running on hardware that has onboard graphics chipsets. This installs 128T using the GUI installer.
 
@@ -113,7 +116,7 @@ The 128T Initializer tunes your operating system, prepares the platform to run t
 
 ### Verify Installation
 
-After installing the 128T Routing Software it is important to verify that the installation was completed successfully.
+After installing the 128T Software it is important to verify that the installation was completed successfully.
 
 #### To Verify the 128T Installation:
 
@@ -125,9 +128,13 @@ After installing the 128T Routing Software it is important to verify that the in
    sudo systemctl status 128T
    ```
 
-   **Result:** The service is listed as _Active (running)_.<br/>If the service is listed as _Inactive_, run the `sudo systemctl start 128T` command. This may take several minutes to fully launch the service.
+   **Result:** The service is listed as _Active (running)_.
 
-3. Once the service is listed as _Active_, log into the system as Admin using the system default password.<br/>**Result:** The installation is verified.
+   If the service is listed as _Inactive_, run the `sudo systemctl start 128T` command. This may take several minutes to fully launch the service.
+
+3. Once the service is listed as _Active_, log into the system as Admin using the system default password.
+
+   **Result:** The installation is verified.
 
 4. Close the command prompt window. 
 

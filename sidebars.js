@@ -10,20 +10,25 @@ module.exports = {
       "about_svr_savings",
       "CONTRIBUTING",
     ],
-    "Introduction": [
-      "intro_getting_started",
-      "intro_installation",
+    "Getting Started": [
+      "intro_getting_started",   
+     ],
+    "Deployment Considerations": [   
       "intro_system_reqs",
-        
+     ],
+    "Installation Process": [       
+      "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
-      "intro_installation_bootable_media",
+      "intro_installation_bootable_media", 
+      "intro_basic_conductor_config",
       "intro_otp_iso_install",
-            
+      "intro_basic_router_config",
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
       "intro_installation_azure", 
-
+    ],
+    "Supporting Information - Appendix":[
       "intro_installation_installer",
       "intro_upgrading",
       "intro_rollback",
