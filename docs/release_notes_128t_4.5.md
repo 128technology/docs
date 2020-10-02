@@ -3,7 +3,7 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
-## Release 4.5.1
+## Release 4.5.2
 
 ### Issues Fixed
 
@@ -21,7 +21,44 @@ sidebar_label: 4.5
 ------
 - **I95-37269** Session may not be recovered correctly after path migration for outbound only connections
 ------
+- **I95-37304** Terminating the 128T installer prior to completion can render the 128T unable to boot
+------
+- **I95-37308** Rollback can create multiple defunct salt-minion processes
+------
+- **I95-37325** Asset state may incorrectly state `connected` after node failover
+------
+- **I95-37338** When connection resiliency is enabled the salt-minion on managed routers can intermittently disconnect
+------
 - **I95-37341** Support for Azure Accelerated Networking MT27710 ConnectX-4 LX Virtual Function device
+------
+- **I95-37359** `reachability-detection tcp establishment` metric incorrectly increments `close-before-establishment`
+------
+- **I95-37402** Output of `show stats` is missing from tech-support-info
+------
+- **I95-37436** When a sub-tenant is removed from the configuration, and the sub-tenant has a parent tenant used in a service access-policy, the sub-tenant may remain in the FIB
+------
+- **I95-37442** Summary missing from PCLI `ping` and `service-ping`
+------
+- **I95-37477** Exception thrown in PCLI when issuing tab complete for `capture-filter` command
+------
+- **I95-37512** Starting the PCLI prior to the 128T starting may produce an error message
+
+  _**Symptom:**_ % Error: Unhandled ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response',))
+------
+- **I95-37513** Network interface cards that do not respond to physical stats may result in system lockup
+------
+- **I95-37518** Aborted configuration commit operation can result in system fault when processing traffic
+------
+- **I95-37523** Querying router asset state from the conductor can cause asset state to remain in current state perpetually
+------
+- **I95-37531** RTT reported by PCLI ping is incorrectly dividing result by 1000
+------
+- **I95-37550** Possible race condition causes next-hop ARP state to be incorrect between HA nodes of a router, potentially causing traffic to fail
+------
+- **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using unique value per router
+------
+- **I95-37597** Data structure for FIB has been redesigned to increase memory utilization by 45%
+
 
 ## Release 4.5.1
 
