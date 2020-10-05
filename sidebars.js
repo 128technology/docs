@@ -138,7 +138,6 @@ module.exports = {
       "plugin_gre",
       "plugin_icmp_reachability_detection",
       "plugin_ipsec_client",
-      "plugin_kni_namespace_scripts",
       "plugin_loopback_static_routes",
       "plugin_m800_watchdog",
       "plugin_monitoring_agent",
