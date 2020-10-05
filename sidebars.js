@@ -22,8 +22,10 @@ module.exports = {
       "intro_creating_bootable_usb",
       "intro_installation_bootable_media", 
       "intro_basic_conductor_config",
-      "intro_otp_iso_install",
       "intro_basic_router_config",
+      "intro_otp_iso_install",
+      ],
+    "Cloud Installations":[ 
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
       "intro_installation_azure", 

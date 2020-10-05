@@ -10,17 +10,21 @@ The Authority is where system-wide data is stored. Conceptually, the Authority r
 To complete a base configuration of the Conductor, name the Authority, and configure the web server as a service.
 
 ### Name the Authority
-
 1. Log in to the GUI for your Conductor.
-2. Select the Configuration menu.
+2. Select **Configuration**.
 3. Select Authority and change the Authority Name to a unique identifier for your system.
 4. Select **Validate** and then **Commit**.
 
 ### Configure the Web Server as a Service 
-1. From the Configuration menu, select Services.
+1. From the Configuration screem, select **Services**.
 2. Select **Add** and enter the name of the webserver for the service. 
 3. Set **Enabled** to True.
 4. Set **Scope** to Public.
 5. Enter the IP Address of the webserver in the Service Address field.
 6. Select **Validate** and then **Commit**.
 
+### Create the Tenant
+1.	Log in to the Conductor GUI.
+2.	Select Configuration.
+3.	Select Tenants, and create the tenant _dallas.corp_. 
+4.	Return to the top level. 

@@ -5,119 +5,60 @@ sidebar: Basic Router Configuration
 
 ## Basic Router Configuration
 
-128T Routers can learn routes through traditional means as well as through Secure Vector Routing. You can manually configure static routes into the RIB or you can set your 128T to do BGP Peering. You can also configure your 128T to use Route Filters and Policies to make changes or perform actions on routes based off of rules that you set. 
+128T Routers learn routes through Secure Vector Routing as well as through more traditional means. Static routes can be manually configured into the RIB, or you can set the 128T to do BGP Peering. Additionally, the 128T can be configured to use Route Filters and Policies to perform actions on routes. 
 
-In this lab, you will configure your 128T to route using BGP. You will connect three 128T Routers to a BGP router that they will learn their routes from. You will then use your 128T to advertise a BGP route to the BGP router. Lastly, you will create some Route Filters and Policies to change the behavior of the learned BGP routes. 
+## Configure a Router from the Conductor
+Using the Conductor, the following procedures guide you through a basic router configuration. 
 
-## Configure Branch Router in Conductor
+### Create the Router
+1.	Log in to the Conductor GUI.
+2.	Select Configuration.
+3.	In the Routers list, select ADD. 
+4.	Name the new router _dallasbr2_ and select SAVE. 
+	- Input the location coordinates: +32.7767-096.7970/. 
+	- Select **internal** for Inter-node Security Policy. 
+5. Scroll down to Nodes and select ADD next to Nodes. 
+	- Name the node, _node1_;select SAVE. 
+	- Select the Role of **Combo** for the node. 
+6.	Scroll down and select ADD next to Device Interfaces. 
+	- Name the Device Interface _wan1_; select SAVE.
+	- Select **Ethernet** for Device Interface Type.
+	- Enter the PCI address, _wan1_ under PCI Address.
+7.	Scroll down to Network Interfaces; select ADD. 
+	- Name it _wan1_ and select SAVE. 
+	- Select **external** for Type. 
+	- Set **internal** as the Security Policy. 
+8.	Scroll down to Interface Addresses; select ADD. 
+	- Enter 2.2.2.128 for the address; select SAVE. 
+	- Give the network interface a Prefix of 24. 
+	- Assign a Gateway of 2.2.2.1.  
+9.	Return to the Network Interface level (up one level).
+	- Scroll down to Neighborhoods; select ADD. 
+	- Select **internet** and SAVE.
+	- Under Basic Information, verify the Topology is **Spoke**. 
 
-1.	Log in to your assigned Onramp environment and select WEB GUI for Conductor
+### Configure the Node Interface	
+1.	Return to the Node level of the configuration (up three levels). 
+2.	Scroll down to Device Interfaces; select ADD. 
+	- Name the Device Interface _lan1_.
+	- Select **Ethernet** for Device Interface Type
+	- Enter the PCI address of _lan1_ under PCI Address
+5.	Scroll down to Network Interfaces; select ADD. 
+	- Name the interface _lan1_.  
+	- Select **External** for Type. 
+	- Assign dallas.corp as the Tenant. 
+7.	Scroll down to Interface Addresses; select ADD. 
+	- Enter the address 192.168.64.1. 
+	- Give the network interface a Prefix of 24. 
 
-2.	Username: admin
-Password: 128Tadmin
+### Verify and Commit the Configuration
+1.	Return to the dallasbr2 Router level (up four levels).
 
-3.	Select Configuration
+ 	:::note
+ 	Scroll down to the Service Routes and Verify the Service Routes that you have on the seabo1 Router. Why is this blank??
+ 	:::
+2.	Return to the Authority level (up one level) and click on the Authority tile. Verify 192.168.7.99 is configured as the Conductor Address.
+3.	 Select VALIDATE. When the validation passes, select COMMIT. 
 
-4.	Create a dallas.corp tenant. 
-
-5.	Go back to the top level and select ADD next to Routers. Name your new router dalbo2 and select SAVE. 
-
-6.	Input +32.7767-096.7970/ for Coordinates and select internal for Inter-node Security Policy. 
-
-7.	Select ADD next to Nodes. Give the node the name of node1 and select SAVE. 
-
-8.	Select the Role of combo for your Node. 
-
-9.	Select ADD next to Device Interfaces and give your Device Interface the name wan1
-
-10.	Select ethernet for Device Interface Type
-
-11.	Enter the PCI address of wan1 under PCI Address
-
-12.	Select ADD next to Network Interfaces and name it wan1. 
-
-13.	Select external for Type. Select internal as your Security Policy. 
-
-14.	Select ADD next to Interface Addresses and put in 2.2.2.128 for the address. 
-
-15.	Give your network interface a Prefix of 24 and a Gateway of 2.2.2.1.  
-
-16.	Go back up to the Network Interface level and select ADD next to Neighborhoods. Select internet. Make sure the Topology is spoke. 
-
-17.	Go back up to the Node level of your configuration. 
-
-18.	Select ADD next to Device Interfaces and give your Device Interface the name lan1
-
-19.	Select ethernet for Device Interface Type
-
-20.	Enter the PCI address of lan1 under PCI Address
-
-21.	Select ADD next to Network Interfaces and name it lan1.  
-
-22.	Select external for Type and assign dallas.corp as the Tenant. 
-
-23.	Select ADD next to Interface Addresses and put in 192.168.64.1 for the address. 
-
-24.	Give your network interface a Prefix of 24. 
-
-25.	Go back up to the dalbo2 Router level and make sure you have all the same Service Routes that you have on the seabo1 Router. 
-
-26.	Go back up to the Authority level and click on the Authority tile. Make sure you have 192.168.7.99 configured as your Conductor Address.
-
-27.	 Select VALIDATE and, if everything seems good, COMMIT. 
-
-The Conductor has now staged your Branch 2 Router. Now we will use OTP to deploy our Router. 
-
-
-Step 3:	Create QuickStart File
-
-1.	Log in to your assigned Onramp environment and select WEB GUI for Conductor
-
-2.	Username: admin
-Password: 128Tadmin
-
-3.	Select Routers select dalbo2
-
-4.	Under the Node section should be a QUICKSTART LINK. If it is not there, refresh the page. Click QUICKSTART LINK.
-
-5.	Copy the Password.
-
-6.	Select the Click here to download the QuickStart file. 
-
-
-Step 4:	Put QuickStart File on Branch 2 Router
-
-1.	Log in to your assigned Onramp environment and select WEB GUI for Branch 2 Router
-
-2.	Append /quick-start to the URL that appears.
-
-3.	Username: admin
-Password: 128Tadmin
-
-4.	Drag and Drop your QuickStart file.
-
-5.	Input your QuickStart Password 
-
-6.	Select PROCEED
-
-Your Router will now be configured and set up to be managed by your Conductor. This process will take a couple of minutes. Once you see Success! you have officially deployed a 128T Router using the OTP method. 
-
-7.	Log in to your Conductor and take a look at the Router menu. You should see that your Dallas Router completed installation. 
-
-You should now have 1 Conductor and 3 Routers deployed. All 3 of your Routers should have a wan1 internet path. 
-
-
-Step 5:	Verify Connectivity
-
-1.	Log in to Onramp and select OPEN CONSOLE for Branch 2 Client
-
-2.	Open Terminal Emulator and issue the following commands:
-
-$ ping server1
-$ ping server2
-$ ping server3-dnat
-
-3.	Open any of the Web Services
-
-If you get successful pings and web pages shows up in your browser, then you have connectivity to your webservers and you are now sending traffic using Secure Vector Routing! 
+The Conductor has now staged your Branch 2 Router. Next we will use OTP to deploy the Router. 
 
