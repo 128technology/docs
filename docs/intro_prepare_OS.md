@@ -17,7 +17,23 @@ In the event of power disruption, the Automatic Restart setting in your system's
 #### To enable Automatic Restart:
 1. From the BIOS settings screen, select ACPI \> Power Settings.
 2. Change the Automatic Restart setting to On.
-3. Save the configuration and reboot your system. 
+3. Save the configuration.
+4. Reboot your system. 
+
+### Disable Secure Boot
+Secure Boot verifies the integrity of the system. Because the kernel modules of the 128T are not signed, the modules required by the network interface drivers cannot be loaded at runtime. In order to allow the loading of the necessary drivers, the Secure Boot setting in the BIOS must be disabled. 
+
+:::note
+When deploying 128T on VMware ESXi release 6.7 (or newer), Secure Boot must be disabled when the Virtual Machine is created (New Virtual Machine wizard). To disable it, deselect the box "Secure Boot (EFI boot only)" found in the tab "VM Options" within the "Customize hardware" section.  
+:::
+
+#### To disable Secure Boot:
+1. On the BIOS settings screen, select Boot.
+2. Change the Secure Boot setting to Off.
+3. Save the configuration.
+4. Reboot your system.
+
+BIOS settings may vary between hardware vendors. Please consult your hardware documentation for specific instructions. Additional information for common deployments of 128T hardware platforms may be found on [Interchange](https://community.128technology.com/).
 
 ## Preparing the Operating System
 Before installing 128T Routing Software you must prepare your operating system according to 128 Technology's recommendations and guidelines.

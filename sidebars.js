@@ -13,20 +13,20 @@ module.exports = {
     "Introduction": [
       "intro_getting_started",
       "intro_installation",
-        "intro_system_reqs",
-        "intro_prepare_OS",
-        "intro_installation_installer",
+      "intro_system_reqs",
+      "intro_prepare_OS",
+      "intro_installation_installer",
 
       "intro_downloading_iso",
       "intro_installation_bootable_media",
       "intro_creating_bootable_usb",
       "intro_installation_otp_iso",
       "intro_ztp",
-      
+
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
-      "intro_installation_azure",  
-      
+      "intro_installation_azure",
+
       "intro_upgrading",
       "intro_rollback",
     ],
@@ -111,6 +111,7 @@ module.exports = {
     ],
     "Best Practices": [
       "bcp_att_avpn_configuration",
+      "bcp_using_128T_as_ntp_server",
       "bcp_conductor_deployment",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
@@ -123,6 +124,12 @@ module.exports = {
     ],
     "CLI Reference": [
       "cli_reference",
+    ],
+    "Installer/Initializer Reference": [
+      "installer_cli_reference",
+      "installer_preferences",
+      "initializer_cli_reference",
+      "initializer_preferences",
     ],
     "Plugins": [
       "plugin_intro",
