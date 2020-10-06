@@ -440,7 +440,7 @@ With this configuration, sessions sent from the `technician` tenant to `128.128.
 
 #### Path
 
-authority > router > system > wireguard-profile
+authority > router > wireguard-profile
 
 #### Description
 
@@ -460,7 +460,7 @@ A profile describing an instance of wireguard on the router.
 
 #### Path
 
-authority > router > system > wireguard-profile > private-network
+authority > router > wireguard-profile > private-network
 
 #### Description
 
@@ -476,7 +476,7 @@ A network to be associated with router the wireguard network-interface. This net
 
 #### Path
 
-authority > router > system > wireguard-profile > peer
+authority > router > wireguard-profile > peer
 
 #### Description
 
@@ -498,7 +498,7 @@ Disabled keepalives on the router does not mean keepalives cannot be generated b
 
 #### Path
 
-authority > router > system > wireguard-profile > peer > endpoint
+authority > router > wireguard-profile > peer > endpoint
 
 #### Description
 
