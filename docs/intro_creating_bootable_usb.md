@@ -66,7 +66,7 @@ Before beginning, install the Rufus software https://rufus.akeo.ie/downloads/ on
 6. Select **Write in ISO image mode**.
 7. Click **OK**.
 
-;;;note
+:::note
 The 128 Technology ISOs are desiged to be installed on both BIOS and uEFI partitions, however hardware support varies. Please check your hardware configuration requirements before specifying one or the other during install. 
 :::
 

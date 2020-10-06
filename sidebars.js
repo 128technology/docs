@@ -11,7 +11,7 @@ module.exports = {
       "CONTRIBUTING",
     ],
     "Getting Started": [
-      "intro_getting_started",   
+      "intro_getting_started",
      ],
     "Deployment Considerations": [   
       "intro_system_reqs",

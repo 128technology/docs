@@ -20,12 +20,15 @@ The examples listed in this guide generally prefer running commands as a non-roo
 :::
 
 ## Installation Process
-To properly deploy the 128 Technology system, you must first install and configure the Conductor. Once the Conductor is installed and configured, the router software can be installed on one or many systems using one of the processes below. 
+Installation is done from the 128T ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
+- [Download the ISOs](intro_downloading_iso.md)
+- [Create Bootable Media](intro_creating_bootable_usb.md)
+- [Perform the Interactive ISO installation](intro_installation_bootable_media.md) 
+- [Configure a Conductor](intro_basic_conductor_config.md)
+- [Create the Router configuration with the Conductor](intro_basic_router_config.md)
+- [Install and Reboot the Router using the OTP ISO](intro_installation_otp_iso.mdx)
 
-## Installation Methods
-The 128T routing software offers the following installation methods to address your specific system. 
- - [Interactive ISO](intro_installation_bootable_media.md)
- - [One Touch Provisioning (OTP) ISO Image](intro_installation_otp_iso.mdx)
+To install the 128T software on AWS or Azure, refer to: 
  - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws)
  	- [Amazon Web Services Quickstart](intro_installation_quickstart_aws.md)
  - [Installation in Microsoft Azure](intro_installation_azure.md)	
