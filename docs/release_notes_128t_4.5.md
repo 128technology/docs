@@ -55,10 +55,13 @@ sidebar_label: 4.5
 ------
 - **I95-37550** A possible race condition causes the next-hop ARP state to be incorrect between HA nodes of a router, potentially causing traffic to fail.
 ------
+- **I95-37576** Waypoints that are configured for `outbound-only` may experience one way traffic in session migration scenarios if the session on the public side expires, but the session on the private side still exists.
+
 - **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.
 ------
 - **I95-37597** Data structure for FIB has been redesigned to increase memory utilization by 45%.
-
+------
+- **I95-37617** Linux-based `save-tech-support-info` does not capture event history.
 
 ## Release 4.5.1
 
