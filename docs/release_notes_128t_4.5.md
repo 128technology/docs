@@ -21,9 +21,9 @@ sidebar_label: 4.5
 ------
 - **I95-37269** Session may not recover correctly after path migration for outbound only connections.
 ------
-- **I95-37304** Terminating the 128T installer prior to completion can render the 128T unable to boot.
+- **I95-37304** Automatic installation recovery procedure can inadvertenty terminate an in-process upgrade resulting in a 128T system not being able to boot.
 ------
-- **I95-37308** Rollback can create multiple defunct salt-minion processes.
+- **I95-37308** Upgrade to 4.5.1 or Rollback can create multiple defunct salt-minion processes.
 ------
 - **I95-37325** Asset state may incorrectly state `connected` after node failover.
 ------
@@ -61,7 +61,7 @@ sidebar_label: 4.5
 ------
 - **I95-37597** Data structure for FIB has been redesigned to increase memory utilization by 45%.
 ------
-- **I95-37617** Linux-based `save-tech-support-info` does not capture event history.
+- **I95-37617** Linux-based `save-tech-support-info` may not capture event history.
 
 ## Release 4.5.1
 
