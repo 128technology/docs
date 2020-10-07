@@ -3,14 +3,12 @@ title: Getting Started with the 128T Networking Platform
 sidebar_lable: Getting Started with the 128T Networking Platform
 ---
 ## Introduction
-
 The 128T Networking Platform is the first 100% software-defined, session-based distributed IP routing and network services platform designed from the ground-up with an application and service-centric context.  The platform consists of two primary components: the 128T Session Smart Router and the 128T Conductor. Together, they form a single logical control plane that is highly distributed, and a data plane that is truly session-aware. The 128T Networking Platform supports a wide range of deployment models scaling from a small branch office to a high capacity edge router to a hyper-scale software-defined data center.
 
 ## 128T Conductor
 The 128T Conductor is a centralized management and policy engine that provides orchestration, administration, zero-touch provisioning, monitoring, and analytics for distributed 128T Session Smart Routers – while maintaining a network-wide, multi-tenant service, and policy data model.
 
 ## 128T Session Smart Router
-
 The 128T Session Smart Router combines a service-centric control plane and a session-aware data plane to offer all IP routing tables, feature-rich policy management, advanced data collection, and analytics in addition to high-speed packet forwarding, classification, and security functions.
 
 ### Secure Vector Routing (SVR)
@@ -21,9 +19,6 @@ At the core of the SVR control plane is a service-based data model, which provid
 
 ### Routing with Words
 To simplify routing, addressing, and access control, SVR uses the concept of “Routing with Words.” This is where services are described and communicated across the network in plain language, and aligned with the principles of Named Data Networking. In place of routes solely defined by IP addresses and CIDR blocks, SVR uses a URL-like Qualified Service Name (QSN) where service-based routes are described by name and carry a hierarchical multi-tenancy context.
-
-## Service and Topology Exchange Protocol (STEP) 
-SVR defines the industry’s first control plane protocol designed specifically for service-based routing and topology: Service and Topology Exchange Protocol (STEP). STEP works to describe connectivity between all routers, exchanging details about each service and its status. In the simplest terms, STEP enables a truly global view of service, tenancy, and policy information. 
 
 ## Session-Aware Data Plane
 The session-aware data plane makes dynamic forwarding and policy decisions based on SVR’s distributed service-centric control plane, the unique attributes and policies of sessions, and real-time network monitoring. SVR-based routers, deployed at network edges, transform a stateless L2 fabric or L3 network data plane into one that is fully session-aware. This is made possible through the combination of three features: session detection and control, waypoint setting, and session-based signaling (metadata). A session-aware data plane creates end-to-end route vectors that are:

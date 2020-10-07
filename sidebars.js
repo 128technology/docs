@@ -10,7 +10,7 @@ module.exports = {
       "about_svr_savings",
       "CONTRIBUTING",
     ],
-    "Getting Started": [
+    "Introduction": [
       "intro_getting_started",
      ],
     "Deployment Considerations": [   
