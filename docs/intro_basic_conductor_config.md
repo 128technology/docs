@@ -25,7 +25,7 @@ To complete a base configuration of the Conductor, name the Authority, and confi
 
 ### Create the Tenant
 
-Tenancy is the logical partitioning of a network’s resources to restrict access to network services to only the users and groups for which they’re intended. Tenants are defined within an *authority*, and span each router within that authority. An example of how tenants are used would be to segregate two distinct user populations within an organization; e.g., "developers" from "administrators."
+Tenancy is the logical partitioning of a network’s resources to restrict access to network services to only the users and groups for which they’re intended. Tenants are defined within an *Authority*, and span each router within that authority. An example of how tenants are used would be to segregate two distinct user populations within an organization; e.g., "developers" from "administrators."
 In the steps below, we provide an example tenant name, _dallas.corp_, which is used in the [Basic Router Configuration](intro_basic_router_config.md) procedure that follows.
 
 1.	Log in to the Conductor GUI.

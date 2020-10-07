@@ -9,7 +9,7 @@ The steps in this section describe installing either ISO from bootable media. Th
 :::note
 The Conductor installation must be completed before installing a router or routers using the OTP ISO.
 :::
-See [Installing Using the One Touch Provisioning ISO](intro_otp_iso_install.md) for details to install complex router configurations **after** installing and configuring the Conductor. 
+See [Installing Using the One Touch Provisioning ISO](intro_otp_iso_install.mdx) for details to install complex router configurations **after** installing and configuring the Conductor. 
 
 ## Prerequisites
 
