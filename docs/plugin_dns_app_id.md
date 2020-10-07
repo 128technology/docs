@@ -172,12 +172,15 @@ Sat 2020-03-28 03:28:43 UTC
 
 ## Release Notes
 
-### Release 1.0.2
+### Release 1.1.0, 2.1.0
 
 #### Issues Fixed
-- **PLUGIN-402** Ensure 128T monitors new file changes and applications restarts with 128T
+- **PLUGIN-809** DNS app-id plugin installation fails due to dependency conflict
 
-### Release 2.0.2
+    _**Resolution**_ The 128T-dns-app-id-router RPM has been updated to accept all versions of 128T-dns-cache-router RPM.
+
+### Release 1.0.2, 2.0.2
 
 #### Issues Fixed
-- **PLUGIN-402** Ensure 128T monitors new file changes and applications restarts with 128T
+- **PLUGIN-402** Ensure 128T monitors new file changes and applications restarts with 128T.
+
