@@ -552,3 +552,14 @@ In addition, a `ping-monitor` service is started for each configured tunnel, the
 - **PLUGIN-677** GRE plugin doesn't start up correctly post reboot
 
     _**Resolution**_ Implemented a config watcher service to handle startup conditions and dynamically apply configuration changes at runtime.
+
+### Release 1.1.3, 2.1.3
+
+#### Issues Fixed
+- **PLUGIN-799** Pillar data for GRE tunnel is false by default
+
+    _**Resolution**_ Set the enabled key to true by default when generating the pillar data
+
+- **PLUGIN-479** Address range checking not valid for GRE tunnel
+
+    _**Resolution**_ Use non-strict mode when getting plugin network in config generation
