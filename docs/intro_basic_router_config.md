@@ -5,10 +5,10 @@ sidebar: Basic Router Configuration
 
 ## Basic Router Configuration
 
-128T Routers learn routes through Secure Vector Routing as well as through more traditional means. Static routes can be manually configured into the RIB, or you can set the 128T to do BGP Peering. Additionally, the 128T can be configured to use Route Filters and Policies to perform actions on routes. 
+128T Routers learn routes through Secure Vector Routing as well as through more traditional means. Static routes can be manually configured, or you can set the 128T to perform BGP Peering. Additionally, the 128T can be configured to use Route Filters and Policies to perform actions on routes. The steps below generate a basic router configuration on the conductor. This configuration becomes part of the quickstart file that is generated and automatically pulled into the Bootstrap process after the Router installation. 
 
 ## Configure a Router from the Conductor
-Using the Conductor, the following procedures guide you through a basic router configuration. 
+Using the Conductor, the following procedures guide you through a basic router configuration. The names and IP addresses used here are for example only, to provide continutity in the sample process. 
 
 ### Create the Router
 1.	Log in to the Conductor GUI.
@@ -57,8 +57,8 @@ Using the Conductor, the following procedures guide you through a basic router c
  	:::note
  	Scroll down to the Service Routes and Verify the Service Routes that you have on the seabo1 Router. Why is this blank??
  	:::
-2.	Return to the Authority level (up one level) and click on the Authority tile. Verify 192.168.7.99 is configured as the Conductor Address.
+2.	Return to the Authority level (up one level) and click on the Authority tile. Verify that there is a configured Conductor Address.
 3.	 Select VALIDATE. When the validation passes, select COMMIT. 
 
-The Conductor has now staged your Branch 2 Router. Next we will use OTP to deploy the Router. 
+The Conductor has now staged your Router. Next we will use OTP to deploy the Router. 
 

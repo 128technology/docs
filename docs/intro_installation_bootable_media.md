@@ -11,16 +11,16 @@ The Conductor installation must be completed before installing a router or route
 :::
 See [Installing Using the One Touch Provisioning ISO](intro_otp_iso_install.md) for details to install complex router configurations **after** installing and configuring the Conductor. 
 
-### Prerequisites
+## Prerequisites
 
 - Ensure that the platform you are installing on meets the 128T hardware requirements.
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 
-### Installing the ISO
+## Installing the ISO
 
 After imaging the ISO onto removable media, insert it into the target machine and power it on.
 
-#### Choose the Installation Type
+### Choose the Installation Type
 
 Upon boot, you are prompted with the following screen for the Linux installation:
 
@@ -30,7 +30,7 @@ Upon boot, you are prompted with the following screen for the Linux installation
 Not all hardware has video support, therefore booting to console is the default (a console user may not be able to select an option). The default option is selected after a 30 second timeout.
 ::: 
 
-##### 128T System via Serial Console
+#### 128T System via Serial Console
 
 Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer.
 
@@ -38,11 +38,11 @@ Use this option when running on hardware with no video chipset. It uses `/dev/tt
 Selecting the wrong type of console may result in garbage characters being displayed and the install hanging. If this is the case, reboot the target system and select the correct line for the target hardware.
 ::: 
 
-##### 128T System with VGA Console
+#### 128T System with VGA Console
 
 Use this option when running on hardware that has onboard graphics chipsets. This installs 128T using the GUI installer.
 
-#### 128T Installation
+### 128T Installation
 
 After the Linux installation completes, the 128T software installation begins. Note that this may take several minutes to complete. After the installation has completed, the following screen is displayed:
 
@@ -65,7 +65,7 @@ If you installed using One Touch Provisioning, power the system up to complete t
 
 2. GUI login via HTTPS is enabled by default on port 443.
 
-### Initialize the 128T Node
+## Initialize the 128T Node
 
 The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched after the installation reboot.
 
