@@ -558,7 +558,7 @@ In addition, a `ping-monitor` service is started for each configured tunnel, the
 #### Issues Fixed
 - **PLUGIN-799** Pillar data for GRE tunnel is false by default
 
-    _**Resolution**_ Set default to True (for "enabled" key) when generating gre pillar data
+    _**Resolution**_ Set the enabled key to true by default when generating the pillar data
 
 - **PLUGIN-479** Address range checking not valid for GRE tunnel
 
