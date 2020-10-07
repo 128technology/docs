@@ -556,10 +556,10 @@ In addition, a `ping-monitor` service is started for each configured tunnel, the
 ### Release 1.1.3, 2.1.3
 
 #### Issues Fixed
-- **PLUGIN-799** Pillar data for for GRE tunnel is false by default
+- **PLUGIN-799** Pillar data for GRE tunnel is false by default
 
-    _**Resolution**_ Set denabled default to True when generating gre pillar data
+    _**Resolution**_ Set default to True (for "enabled" key) when generating gre pillar data
 
 - **PLUGIN-479** Address range checking not valid for GRE tunnel
 
-    _**Resolution**_ Use non-strinct mode when getting plugin network in config generation
+    _**Resolution**_ Use non-strict mode when getting plugin network in config generation
