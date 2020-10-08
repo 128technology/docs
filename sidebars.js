@@ -130,6 +130,12 @@ module.exports = {
     "CLI Reference": [
       "cli_reference",
     ],
+    "Installer/Initializer Reference": [
+      "installer_cli_reference",
+      "installer_preferences",
+      "initializer_cli_reference",
+      "initializer_preferences",
+    ],
     "Plugins": [
       "plugin_intro",
       "plugin_dns_app_id",
@@ -137,7 +143,6 @@ module.exports = {
       "plugin_gre",
       "plugin_icmp_reachability_detection",
       "plugin_ipsec_client",
-      "plugin_kni_namespace_scripts",
       "plugin_loopback_static_routes",
       "plugin_m800_watchdog",
       "plugin_monitoring_agent",

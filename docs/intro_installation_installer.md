@@ -79,7 +79,7 @@ The 128T Initializer is a complementary application to the installer that tunes 
 
 ![Password Setup](/img/intro_install_initializer_password.png)
 
-7. On the **Anonymous Data Collection** screen, select either **Accept** or **Disable** to enable or disable the RoadRunner process that measures the health of your 128T router and components.
+7. On the **Anonymous Data Collection** screen, select either **Accept** or **Disable** to enable or disable the process that measures the health of your 128T router and components.
 
 8. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
 

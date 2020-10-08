@@ -5,7 +5,7 @@ sidebar: Basic Router Configuration
 
 ## Basic Router Configuration
 
-128T Routers learn routes through Secure Vector Routing as well as through more traditional means. Static routes can be manually configured, or you can set the 128T to perform BGP Peering. Additionally, the 128T can be configured to use Route Filters and Policies to perform actions on routes. The steps below generate a basic router configuration on the conductor. This configuration becomes part of the quickstart file that is generated and automatically pulled into the Bootstrap process after the Router installation. 
+Static routes can be manually configured, or you can set the 128T to perform BGP Peering. Additionally, the 128T can be configured to use Route Filters and Policies to perform actions on routes. The steps below generate a basic router configuration on the conductor. This configuration becomes part of the quickstart file that is generated and automatically pulled into the Bootstrap process after the Router installation. 
 
 ## Configure a Router from the Conductor
 Using the Conductor, the following procedures guide you through a basic router configuration. The names and IP addresses used here are for example only, to provide continutity in the sample process. 
@@ -29,7 +29,6 @@ Using the Conductor, the following procedures guide you through a basic router c
 3.	Scroll down to Network Interfaces; select ADD. 
 	- Name it _wan1_ and select SAVE. 
 	- Select **external** for Type. 
-	- Set **internal** as the Security Policy. 
 4.	Scroll down to Interface Addresses; select ADD. 
 	- Enter 2.2.2.128 for the address; select SAVE. 
 	- Give the network interface a Prefix of 24. 
