@@ -56,12 +56,18 @@ sidebar_label: 4.5
 - **I95-37550** A possible race condition causes the next-hop ARP state to be incorrect between HA nodes of a router, potentially causing traffic to fail.
 ------
 - **I95-37576** Waypoints that are configured for `outbound-only` may experience one way traffic in session migration scenarios if the session on the public side expires, but the session on the private side still exists.
-
+------
 - **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.
 ------
 - **I95-37597** Data structure for FIB has been redesigned to increase memory utilization by 45%.
 ------
 - **I95-37617** Linux-based `save-tech-support-info` may not capture event history.
+------
+- **I95-37693** A race condition exists when retransmitting BGP over SVR packets causing a fault in the highway.
+------
+- **I95-37696** Users that have not previously logged in are unable to login when configured to use LDAP.
+------
+- **I95-37697** LDAP authentication fails for users that contain a '.' in their name.
 
 ## Release 4.5.1
 
