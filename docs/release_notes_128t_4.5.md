@@ -329,3 +329,7 @@ sidebar_label: 4.5
 
   _**Corrective Action:**_ This error is transient and will only persist for the duration of the upgrade. The error will not self-correct. Continue to upgrade the second conductor node. After upgrade, verify that there are no asset state errors.
 ------
+- **I95-37687** PCLI configuration change flag '*' may persist in the active pcli session after a configuration commit operation
+
+  _**Corrective Action:**_ exiting and entering the PCLI after a commit will remove the flag.
+------
