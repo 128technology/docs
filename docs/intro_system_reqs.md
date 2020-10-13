@@ -88,14 +88,11 @@ If you are unsure which device maps to which physical port on your Linux system,
 PCI-to-port maps are available for commonly deployed hardware systems on our user community, [Interchange](https://community.128technology.com/)
 :::
 
-Once you have identified the platform and determined it meets the minimum requirements, select the appropriate installation mechanism best suited for your needs
-
-- [Installing from 128T Installer](intro_installation_installer.md)
-- [Installing from bootable media](intro_installation_bootable_media.md)
-- [Installing on AWS](intro_installation_aws.md)
-
 ## VMware ESXi and KVM Requirements
-When deploying 128T Routing Software on VMware ESXi release 6.7 (or newer), [Secure Boot must be disabled](#disable-secure-boot) when the Virtual Machine is created (New Virtual Machine wizard). To disable it, deselect **Secure Boot (EFI boot only)** found on the **VM Options** tab within the **Customize Hardware** section.
+When deploying 128T Routing Software on VMware ESXi release 6.7 (or newer), [Secure Boot must be disabled](#disable-secure-boot) when the Virtual Machine is created (New Virtual Machine wizard). 
+To disable Secure Boot on VMWare ESXi, deselect **Secure Boot (EFI boot only)** found on the **VM Options** tab within the **Customize Hardware** section.
+
+![New Virtual Machine Wizard](/img/intro_vmware_secureboot.png)
 
 VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0) are hypervisor environments. The following adjustments are required to run 128T Routing Software in these environments: 
 - Leverage core affinity to dedicate CPU cores to 128T software, instead of leveraging virtual CPUs.
@@ -104,3 +101,8 @@ VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0
 - Separate the management interface, which is used for inter-component communication and out-of-band management, from the forwarding plane interfaces. 
 - Reserve a minimum of two network interfaces for production traffic.
 - Depending on your environment, set the 128T router node portgroup to either promiscuous or bridged mode when supporting one or more redundant interfaces. (For example, when you are defining and configuring a MAC address for each redundant interface.) For VMware ESXi, the portgroup mode should be set to _promiscuous_. For KVM libvirt, the portgroupo mode should be set to _bridged_. For more information, refer to the [High Availability](config_ha.md) guide.
+
+## Next Steps
+Once you have identified the platform best suited for your needs, please refer to the [128T Software Installation Guide](intro_installation.md) for information about the install process. 
+
+

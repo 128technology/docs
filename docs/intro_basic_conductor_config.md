@@ -13,7 +13,25 @@ Use the steps below to complete a base configuration of the Conductor.
 1. Log in to the GUI for your Conductor.
 2. Select **Configuration**.
 3. Select Authority and change the Authority Name to a unique identifier for your system.
-4. Select **Validate** and then **Commit**.
+4. Select select VALIDATE and then COMMIT.
+
+### Create a Service
+The *service* configuration element is the cornerstone of the 128T data model. It is what allows administrators to describe eligible destinations for traffic, and subsequently define access controls, routing policy, and traffic treatment. 
+
+Each IP destination that will receive traffic must be configured as a *service*. A service can be defined as broadly as a netmask or as specific as a transport protocol and single port. This example creates a service representing the entire internet, as 0.0.0.0/0.
+
+1.	Log in to the Conductor GUI.
+2.	Select Configuration.
+3.	Scroll down to Services.
+4.	Select ADD next to Services.
+5.	Name the service *internet*, and select SAVE.
+6.	On the **Service** screen, verify that **Enabled** is set to *true*.
+7.  Set **Scope** to *public*.
+8.  Scroll down to Service Addresses and select ADD.
+9.  Enter the IP address 0.0.0.0/0, and select SAVE.
+10. At the top of the screen, select VALIDATE and then COMMIT. 
+
+For a more in-depth look at Services, please see [Service and Service Policy Design](bcp_service_and_service_policy_design.md).
 
 ### Create the Tenant
 
@@ -24,5 +42,7 @@ In the steps below, we provide an example tenant name, _dallas.corp_, which is u
 2.	Select Configuration.
 3.	Select Tenants, and create the tenant _dallas.corp_. 
 4.	Return to the top level. 
+5.	At the top of the screen, select VALIDATE and then COMMIT.
 
 For more information about Tenancy, please see [Tenancy Design](bcp_tenants.mdx).
+For more information about configuring and deploying conductors, please see [conductor Deployment](bcp_conductor_deployment.md).
