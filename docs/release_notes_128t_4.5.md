@@ -333,3 +333,4 @@ sidebar_label: 4.5
 
   _**Corrective Action:**_ exiting and entering the PCLI after a commit will remove the flag.
 ------
+- **I95-37752** A race condition exists wherein if a session is manually deleted through the `delete sessions` PCLI command, interim IPFIX record generation or HA session synchronization may cause the highway process to fault.
