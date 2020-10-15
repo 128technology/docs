@@ -56,11 +56,11 @@ sidebar_label: 4.3
 ------
 - **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.
 ------
-- **I95-37650** Clickjacking vulnerability exists if the application allows content to be loaded inside a frame of an attacker-controlled webpage.  
+- **I95-37650** The 128T web UI incorrectly supports being embedded as an iFrame within another page.  
 ------
 - **I95-37660** Outdated python-pip package exposes vulnerability to sniffing, cross-origin redirect, or injection attacks.
 ------
-- **I95-37680** nodeMonitor process may fault on shutdown.
+- **I95-37680** nodeMonitor process may fault on shutdown of 128T.
 
 
 ## Release 4.3.9
