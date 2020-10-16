@@ -7,8 +7,8 @@ sidebar_label: 2.6
 
 ### Issues Fixed
 
-- **IN-344** rpmdb corruption detection operation may fail on slower systems resulting in a node asset presisting in a connected state
-  _**Cause:**_ The rpm operation on lower end system may exceed the time defined, resulting in a False negative responce for a corrupted rpm database. An example of a lower end system is a 2 Core 4G system.
+- **IN-344** rpmdb corruption detection operation may fail on slower systems resulting in a node asset persisting in a connected state or an installation/upgrade may fail with a message of "Unable to repair RPM database" 
+  _**Cause:**_ The rpm operation on lower end systems may exceed the time defined, resulting in a false negative response for a corrupted rpm database. An example of a lower end system is a 2 Core 4G system.
 
 ## Release 2.6.2
 
