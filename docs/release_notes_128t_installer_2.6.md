@@ -3,9 +3,16 @@ title: 128T Installer 2.6 Release Notes
 sidebar_label: 2.6
 ---
 
+## Release 2.6.3
+
+### Issues Fixed
+
+- **IN-344** rpmdb corruption detection operation may fail on slower systems resulting in a node asset presisting in a connected state
+  _**Cause:**_ The rpm operation on lower end system may exceed the time defined, resulting in a False negative responce for a corrupted rpm database. An example of a lower end system is a 2 Core 4G system.
+
 ## Release 2.6.2
 
-### New Features and Improvements
+### Issues Fixed
 
 - **IN-332** - grub2-efi-x64 removed on upgrade to 128T version 4.4.2 or 4.5.1 if the conductor is running on non uEFI OS imaged hardware and the routers are running on uEFI OS imaged hardware.
 
