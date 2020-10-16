@@ -6,7 +6,7 @@ sidebar_lable: Getting Started with the 128T Networking Platform
 The 128T Networking Platform is the first 100% software-defined, session-based distributed IP routing and network services platform designed from the ground-up with an application and service-centric context.  The platform consists of two primary components: the 128T Session Smart Router and the 128T Conductor. Together, they form a single logical control plane that is highly distributed, and a data plane that is truly session-aware. The 128T Networking Platform supports a wide range of deployment models scaling from a small branch office to a high capacity edge router to a hyper-scale software-defined data center.
 
 ## 128T Conductor
-The 128T Conductor is a centralized management and policy engine that provides orchestration, administration, zero-touch provisioning, monitoring, and analytics for distributed 128T Session Smart Routers – while maintaining a network-wide, multi-tenant service, and policy data model.
+The 128T Conductor is a centralized management and policy engine that provides orchestration, administration, provisioning, monitoring, and analytics for distributed 128T Session Smart Routers – while maintaining a network-wide, multi-tenant service, and policy data model.
 
 ## 128T Session Smart Router
 The 128T Session Smart Router combines a service-centric control plane and a session-aware data plane to offer all IP routing tables, feature-rich policy management, advanced data collection, and analytics in addition to high-speed packet forwarding, classification, and security functions.
