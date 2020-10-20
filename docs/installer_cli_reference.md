@@ -34,10 +34,10 @@ version:
 
 ```sh
 $ install128t --version
-128T Installer 3.0.0
+128T Installer 2.6.2
 
 $ rpm -q 128T-installer
-128T-installer-3.0.0-1.x86_64
+128T-installer-2.6.2-1.x86_64
 ```
 
 When the Installer is used to install 128T for the first time, it will automatically
@@ -94,14 +94,13 @@ You can specify a preferences file with `-p`, but you can _also_ pass the
 preferences directly on the command line. For example:
 
 ```sh
-install128t -p '{"download": {"128T-version": "5.0.0"}}'
+install128t -p '{"download": {"128T-version": "4.5.2"}}'
 ```
 
 :::
 
 The specified preferences **must** be valid JSON (trailing commas are not allowed),
 and they must conform to the Installer preferences file schema.
-See the [full schema documentation](installer_preferences.md) for details.
 
 ### Install from RPM
 
@@ -113,8 +112,8 @@ In order to use this option, both a 128T RPM and the corresponding version of th
 
 ```sh
 $ ls /tmp/local-install/
-128T-5.0.0-1.el7.x86_64.rpm
-128T-manifest-5.0.0.1.el7-1.x86_64.rpm
+128T-4.5.2-1.el7.x86_64.rpm
+128T-manifest-4.5.2.1.el7-1.x86_64.rpm
 
 $ install128t --rpm-path /tmp/local-install/
 ```
@@ -135,7 +134,7 @@ a reinstallation (`Confirm Install`).
 <!-- markdownlint-disable line-length -->
 | Option | Description |
 |--------|-------------|
-| `-d`, `--dry-run` | Skip all steps that modify the system, e.g. downloading software or rebooting the system. This can be useful to validate a preference file without executing the operation specified in it.|
+| `-d`, `--dry-run` | Skip all steps that modify the system, e.g. downloading software or rebooting the system. This can be useful to validate a preference file without executing the operation specified in it. |
 | `-l LOG_LEVEL`, `--log-level LOG_LEVEL` | Change the log level the Installer runs with. Must be one of `ERROR`, `INFO`, `WARNING`, `DEBUG`. |
 | `--install-only` | If specified, the Installer will not run the Initializer when it completes a successful installation. **NOTE**: Use this option with care; 128T will be unable to start until it has been initialized. See the [Initializer documentation](initializer_cli_reference.md) for details on how to use it to manually initialize 128T. |
 <!-- markdownlint-enable line-length -->
@@ -173,7 +172,7 @@ install128t download
 The `--128T-version` option is used to specify a version to download:
 
 ```sh
-install128t download --128T-version 5.0.0
+install128t download --128T-version 4.5.2
 ```
 
 :::tip
@@ -225,78 +224,6 @@ install128t import --packages-path /tmp/packages
 ```
 
 -->
-
-### `repo`
-
-The `repo` subcommand is used to enable or disable 128T software repositories
-used for downloading 128T. Advanced users can use this subcommand to enable
-pre-release software or update software access credentials.
-
-:::tip
-
-`install128t repo` has several subcommands of its own, each of which may be passed
-the `-h`/`--help` option to display usage and options, like other subcommands.
-
-:::
-
-#### List Repositories
-
-The `repo list` subcommand shows the configured 128T software repositories. The `-a`/`--all`
-option may be be used to show disabled repositories as well as enabled repositories.
-
-```sh
-install128t repo list
-```
-
-#### Enable Repositories
-
-The `repo enable` subcommand is used to enable 128T software repositories.
-Multiple repositories may be specified to enable each of them. The name specified
-to this command should match the name in the `Repository` column of the
-`install128t repo list` command output.
-
-```sh
-install128t repo enable alpha beta
-```
-
-#### Disable Repositories
-
-The `repo disable` subcommand is used to disable 128T software repositories.
-
-Usage matches the `repo enable` command.
-
-```sh
-install128t repo disable alpha beta
-```
-
-#### Update Repository Authentication
-
-The `repo authenticate` subcommand is used to configure credentials for
-authenticating with 128T software repositories. To use this subcommand, you
-must specify both a username and a token for authentication.
-
-```sh
-install128t repo authenticate --username my_user --token 'example$token'
-```
-
-:::caution
-
-If your authentication token contains special characters, the shell may expand
-or interpret them. Enclose the token in single quotes (`'`) to prevent shell
-expansion.
-
-:::
-
-If the specified credentials are found to be invalid, the Installer will display
-an error message and exit, and the credentials will not be saved.
-
-:::note
-
-If the credentials cannot be checked (e.g. no Internet connection is available),
-the credentials will still be saved. They will be checked again, if possible,
-the next time the Installer is run.
-
-:::
 
 ## Uninstalling 128T
 
