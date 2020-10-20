@@ -34,10 +34,10 @@ version:
 
 ```sh
 $ install128t --version
-128T Installer 2.6.2
+128T Installer 2.6.3
 
 $ rpm -q 128T-installer
-128T-installer-2.6.2-1.x86_64
+128T-installer-2.6.3-1.x86_64
 ```
 
 When the Installer is used to install 128T for the first time, it will automatically
