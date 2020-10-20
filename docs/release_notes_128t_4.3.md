@@ -14,6 +14,8 @@ sidebar_label: 4.3
 ------
 - **I95-36341** Race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault.
 ------
+- **I95-36564** Higher pinned core count may result in large packet latency on session setup, when a burst of new sessions are being setup.
+------
 - **I95-36672** Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.
 ------
 - **I95-36727** A non-forwarding, external (i.e. management) interface configured in 128T does not obtain a DHCP IP upon disconnecting and reconnecting the cable.
