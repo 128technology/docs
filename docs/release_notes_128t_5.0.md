@@ -7,15 +7,15 @@ sidebar_label: '5.0'
 
 ### New Features and Improvements
 
-- **I95-9152** PCLI configuration help text now indicates which fields are required
+- **I95-9152** [PCLI configuration help text now identifies required fields](cli_reference.md#configure)
 ------
 - **I95-9242** Service and Topology Exchange Protocol (STEP)
 ------
-- **I95-15618** Auto completion now available on `clear arp` PCLI command
+- **I95-15618** [Auto completion now available on `clear arp` PCLI command](cli_reference.md#clear-arp)
 ------
-- **I95-20757** Displaying alarm history within the PCLI via `show events alarm` now supports relative timestamps
+- **I95-20757** [Displaying alarm history within the PCLI via `show events alarm` now supports relative timestamps.](cli_reference.md#show-events-alarm)
 ------
-- **I95-21776** Ethernet over Secure Vector Routing (EoSVR)
+- **I95-21776** Ethernet over Secure Vector Routing (EoSVR
 ------
 - **I95-22350** Hierarchical Services
 ------
@@ -39,23 +39,23 @@ sidebar_label: '5.0'
 ------
 - **I95-34823** About page includes link to online documentation
 ------
-- **I95-35150** PCLI Clone Configuration
+- **I95-35150** [PCLI Clone Configuration](cli_reference.md#clone)
 ------
 - **I95-35190** [PCLI bulk paste configuration](concepts_pcli.md#paste-config)
 ------
 - **I95-35741** [PCLI plugin service commands](cli_reference.md#manage-plugin-install)
 
-### Issues Fixed
+### Resolved Issues
 
-- **I95-29643** Changing the name of an existing configuration object to one that already exists merges the two objects
+- **I95-29643** Changing the name of an existing configuration object to one that already exists merges the two objects.
 ------
-- **I95-30670** Version mismatch alarm in HA pair is not generated when the salt minion is disconnected on one of the nodes in the pair
+- **I95-30670** Version mismatch alarm in HA pair is not generated when the salt minion is disconnected on one of the nodes in the pair.
 ------
-- **I95-32016** Output from `show config out-of-sync` displays `49 years` for disconnected routers
+- **I95-32016** Output from `show config out-of-sync` displays `49 years` for disconnected routers.
 ------
-- **I95-34065** Leading and trailing whitespace is now correctly trimmed from configuration input fields
+- **I95-34065** Leading and trailing whitespace is now correctly trimmed from configuration input fields.
 ------
-- **I95-34078** Conductor asset status is empty
+- **I95-34078** Conductor asset status is empty.
 ------
 - **I95-34448** Viewing "Event History" in GUI can result in an error dialog with the following content:
   ```
@@ -66,34 +66,34 @@ sidebar_label: '5.0'
     at https://1.2.3.4/main.98467ce8a2ab8ddd6c0c.js:41:211792
   ```
 ------
-- **I95-34775** Linux save-tech-support does not output the archive location information
+- **I95-34775** Linux save-tech-support does not output the archive location information.
 ------
-- **I95-34908** GraphiQL produces an error when collapsing the sidebar
+- **I95-34908** GraphiQL produces an error when collapsing the sidebar.
 ------
-- **I95-35020** PCLI command history was previously unbounded
+- **I95-35020** PCLI command history was previously unbounded.
 ------
-- **I95-35238** PCLI prompt shows incorrect location on when the object key has changed
+- **I95-35238** PCLI prompt shows incorrect location on when the object key has changed.
 ------
-- **I95-35722** PCLI warning message formatting is now consistent with error messages
+- **I95-35722** PCLI warning message formatting is now consistent with error messages.
 ------
-- **I95-36645** UI: Bytes converter does not handle values larger than Terabyte (TB)
+- **I95-36645** UI: Bytes converter does not handle values larger than Terabyte (TB).
 ------
-- **I95-36828** Unable to acquire logs through GUI when `remote-login` is disabled
+- **I95-36828** Unable to acquire logs through GUI when `remote-login` is disabled.
 
 ## Special Considerations
 
-- **I95-12833** Provisioning deprecated configuration fields now prompts for confirmation
+- **I95-12833** Provisioning deprecated configuration fields now prompts for confirmation.
 ------
-- **I95-20718** PCLI now produces a warning when creating configuration objects with the keywords ("delete", "force", "move", "clone", "all") as their name
+- **I95-20718** PCLI now produces a warning when creating configuration objects with the keywords ("delete", "force", "move", "clone", "all") as their name.
 ------
-- **I95-34624** Remove Automated Provisioner driven install from 128T
+- **I95-34624** Remove Automated Provisioner driven install from 128T.
 ------
-- **I95-34983, I95-35892** Remove unused PCLI Commands
+- **I95-34983, I95-35892** Remove unused PCLI Commands.
 ------
-- **I95-36096** PCLI sessions are now captured in their own respective log file
+- **I95-36096** PCLI sessions are now captured in their own respective log file.
 ------
-- **I95-36102** `compare config` now defaults to `compare config running candidate` when no additional arguments are supplied
+- **I95-36102** `compare config` now defaults to `compare config running candidate` when no additional arguments are supplied.
 ------
-- **I95-36525** TLS 1.0 is no longer supported
+- **I95-36525** TLS 1.0 is no longer supported.
 
 ## Caveats

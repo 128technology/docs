@@ -34,7 +34,7 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 #### Description
 
-The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from a 128T router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove.
+The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from a 128T router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove. The PCLI will auto-complete typed entries for improved accuracy. 
 
 #### Version History
 | Release | Modification                |
@@ -198,6 +198,42 @@ clear history
 | command | description |
 | ------- | ----------- |
 | [`show history`](#show-history) | Show PCLI command history for the current user. |
+
+## clone
+
+Clone the configuration of one router to create a new router with a new name and identical contents. 
+
+#### Usage
+
+```
+router [force] <name> <new-name>
+```
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | An identifier for the router |
+| new-name | The new value for the router name |
+
+#### Example
+```
+admin@conductor-east-1.RTR_EAST_CONDUCTOR# configure authority clone router Boston NewYork
+```
+
+#### Description
+The clone command duplicates the configuration data from the existing `Boston` router into a new router with the name `NewYork`, and stages it to the candidate configuration.
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.0.0   | This feature was introduced |
 
 ## `commit`
 
@@ -402,6 +438,21 @@ config
             location             usa
             description          "sample description"
 ...
+```
+#### Required Fields
+Some arguments and subcommands contain required fields for configuration. The `configure` help text now identifies required fields. For example:
+```
+...
+usage: inter-node-security [<security-ref>]
+
+The name of the security policy used for inter node communication between router interfaces
+
+positional arguments:
+security-ref    The value to set for this field
+
+security-ref (leafref) (required): This type is used by other entities that need to reference configured security policies. 
+
+Options: internal, aes1, or test
 ```
 
 #### Version History
@@ -4753,10 +4804,10 @@ show events alarm [from <from>] [to <to>] [rows <rows>] [force] [router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] (default: 1970-01-01 00:00:00) |
+| from | Only show events after the provided time. You can use the provided standard timestamps, such as 45m, 1d, or 1mo; or enter a value [type: timestamp] (default: 1970-01-01 00:00:00) |
 | router | The name of the router for which to display alarm events (default: &lt;current router&gt;) |
 | rows | The number of alarm events to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
+| to | Only show events before the provided time. You can use the provided standard timestamps, such as 45m, 1d, or 1mo; or enter a value [type: timestamp] |
 
 ##### See Also
 
