@@ -17,9 +17,9 @@ sidebar_label: '5.0'
 ------
 - **I95-21776** Ethernet over Secure Vector Routing (EoSVR
 ------
-- **I95-22350** Hierarchical Services
+- **I95-22350** [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services)
 ------
-- **I95-22789** Dual LTE Support
+- **I95-22789** Dual LTE Support - **this shows up as a new feature listed in the 4.3.3 Release notes, and is documented in the LTE topic in the How To guide. I expect this should be removed from the 5.0 list.**
 ------
 - **I95-24412** Dual PPPoE Support
 ------
