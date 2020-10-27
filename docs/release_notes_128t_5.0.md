@@ -7,7 +7,7 @@ sidebar_label: '5.0'
 
 ### New Features and Improvements
 
-- **I95-9152** [PCLI configuration help text now identifies required fields](cli_reference.md#configure)
+- **I95-9152** [PCLI configuration help text now identifies required fields](cli_reference.md#required-fields)
 ------
 - **I95-9242** Service and Topology Exchange Protocol (STEP)
 ------
@@ -15,21 +15,19 @@ sidebar_label: '5.0'
 ------
 - **I95-20757** [Displaying alarm history within the PCLI via `show events alarm` now supports relative timestamps.](cli_reference.md#show-events-alarm)
 ------
-- **I95-21776** Ethernet over Secure Vector Routing (EoSVR
-------
 - **I95-22350** [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services)
 ------
 - **I95-22789** Dual LTE Support - **this shows up as a new feature listed in the 4.3.3 Release notes, and is documented in the LTE topic in the How To guide. I expect this should be removed from the 5.0 list.**
 ------
 - **I95-24412** Dual PPPoE Support
 ------
-- **I95-27886** Packet Duplication for inter-node HA
+- **I95-27886** Packet Duplication for inter-node HA: Packet duplication over multiple inter-node links helps reduce packet loss during transmission. For protocols such as UDP that do not verify packet integrity, this helps ensure full transmission of traffic.
 ------
-- **I95-28531** Application Categorization
+- **I95-28531** Application Categorization: Application Identification/Categorization utilizes a database of traffic categories, such as “News”, “Social Media”, “Health”, “Sports”, etc. These categories can be assigned to services, which can then be prioritized, monitored for traffic levels, or blocked for security purposes. Each category is populated with a list of domain names associated with the type of traffic.
 ------
 - **I95-32558** In-line Flow Performance Monitoring
 ------
-- **I95-33376** Address Latest Vulnerabilities
+- **I95-33376** Address Latest Vulnerabilities: Security Vulnerability testing is ongoing, and fixes are in place for those identified issues. 
 ------
 - **I95-33395** Improved PCLI startup time by 60%
 ------
@@ -37,7 +35,7 @@ sidebar_label: '5.0'
 ------
 - **I95-34788** Support for bulk configuration edits via REST
 ------
-- **I95-34823** About page includes link to online documentation
+- **I95-34823** About page includes link to online documentation: The 128T GUI now includes a link to the online documentation set.
 ------
 - **I95-35150** [PCLI Clone Configuration](cli_reference.md#clone)
 ------
