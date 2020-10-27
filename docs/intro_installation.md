@@ -10,7 +10,7 @@ The installation guides are version agnostic and are applicable for all current 
 :::
 
 ## Before You Begin
-Before you begin the installation and configuration of 128T Routing Software, you must:
+Before you begin the installation and configuration of 128T Networking Plaform, you must:
 - Be familiar with Linux fundamentals, basic network addressing, and IP networking terminology. 
 - Be a system administrator to perform the installation and configuration.
 - Have root access to the target machine, or have an entry in /etc/sudoers allowing you to execute Linux shell commands as root (via sudo).

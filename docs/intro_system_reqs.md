@@ -3,9 +3,9 @@ title: System Requirements
 sidebar_label: System Requirements
 ---
 ## Hardware Requirements
-The 128T routing software runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments, the same CPU, memory, and storage specifications are required for comparable throughput.
+The 128T Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments, the same CPU, memory, and storage specifications are required for comparable throughput.
 
-The 128T routing software recommends a minimum of 4 CPU cores, 8GB of RAM, and at least 25GB of hard drive space. See [certified platforms](about_certified_platforms.mdx) and the [platform support policy](about_supported_platforms.md) for more details.
+The 128T Networking Platform requires a minimum of 4 CPU cores, 8GB of RAM, and at least 25GB of hard drive space. See [certified platforms](about_certified_platforms.mdx) and the [platform support policy](about_supported_platforms.md) for more details.
 
 :::info
 Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your 128T routing system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.128technology.com/) for hardware profile examples.

@@ -13,7 +13,7 @@ Use the steps below to complete a base configuration of the Conductor.
 1. Log in to the GUI for your Conductor.
 2. Select **Configuration**.
 3. Select Authority and change the Authority Name to a unique identifier for your system.
-4. Select select VALIDATE and then COMMIT.
+4. Select VALIDATE and then COMMIT.
 
 ### Create a Service
 The *service* configuration element is the cornerstone of the 128T data model. It is what allows administrators to describe eligible destinations for traffic, and subsequently define access controls, routing policy, and traffic treatment. 
@@ -40,7 +40,7 @@ In the steps below, we provide an example tenant name, _dallas.corp_, which is u
 
 1.	Log in to the Conductor GUI.
 2.	Select Configuration.
-3.	Select Tenants, and create the tenant _dallas.corp_. 
+3.	Select Tenants, and create the tenant _corp_. 
 4.	Return to the top level. 
 5.	At the top of the screen, select VALIDATE and then COMMIT.
 
