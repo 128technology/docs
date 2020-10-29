@@ -56,12 +56,18 @@ sidebar_label: 4.5
 - **I95-37550** A possible race condition causes the next-hop ARP state to be incorrect between HA nodes of a router, potentially causing traffic to fail.
 ------
 - **I95-37576** Waypoints that are configured for `outbound-only` may experience one way traffic in session migration scenarios if the session on the public side expires, but the session on the private side still exists.
-
+------
 - **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.
 ------
 - **I95-37597** Data structure for FIB has been redesigned to increase memory utilization by 45%.
 ------
 - **I95-37617** Linux-based `save-tech-support-info` may not capture event history.
+------
+- **I95-37693** A race condition exists when retransmitting BGP over SVR packets causing a fault in the highway.
+------
+- **I95-37696** Users that have not previously logged in are unable to login when configured to use LDAP.
+------
+- **I95-37697** LDAP authentication fails for users that contain a '.' in their name.
 
 ## Release 4.5.1
 
@@ -323,3 +329,8 @@ sidebar_label: 4.5
 
   _**Corrective Action:**_ This error is transient and will only persist for the duration of the upgrade. The error will not self-correct. Continue to upgrade the second conductor node. After upgrade, verify that there are no asset state errors.
 ------
+- **I95-37687** PCLI configuration change flag '*' may persist in the active pcli session after a configuration commit operation
+
+  _**Corrective Action:**_ exiting and entering the PCLI after a commit will remove the flag.
+------
+- **I95-37752** A race condition exists wherein if a session is manually deleted through the `delete sessions` PCLI command, interim IPFIX record generation or HA session synchronization may cause the highway process to fault.
