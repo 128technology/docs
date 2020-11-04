@@ -2,6 +2,41 @@
 title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
+## Release 4.3.11
+:::warning
+SSH Root Login has been disabled. 
+
+Upon installation, you must ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of management connectivity to the 128T Networking Platform. 
+:::
+
+### Resolved Issues
+
+- **I95-37225** Head End Routers disconnect from their Conductors.
+------
+
+------
+- **I95-35567 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
+------
+- **I95-37642** 128T GUI does not provide the option for a "User" to change their own password.
+------
+- **I95-37643 Vertical Privilege Escalation.** Account privileges have been reviewed and updates have been made to remediate this vulnerability. 
+------
+- **I95-37644 SQL Injection Vulnerability.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+------
+- **I95-37645 Improper Restriction of excessive authentication attempts.** The user is now locked out after three failed login attempts. 
+------
+- **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
+------
+- **I95-37647 Query String Parameter in HTTPS Request.** Any security vulnerability has been addressed.
+------
+- **I95-37650 Clickjacking Vulnerability.** The Graphical User Interface has been analyzed and any security vulnerabilities related to clickjacking have been resolved. 
+------
+- **I95-37651 Unrestricted File Upload.** Restrictions are in place that make it impossible to import or upload malicious files. 
+------
+- **I95-37652 SSH Follows Weak Security Practices.** Several fixes have been put in place to harden SSH access. Please see the warning regarding SSH Root Login at the top of this page.
+------
+
+
 ## Release 4.3.10
 
 ### Resolved Issues
