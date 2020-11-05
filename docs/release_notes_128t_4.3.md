@@ -13,15 +13,13 @@ Upon installation, you must ensure that there is at least one user on each 128T 
 
 - **I95-37225** Head End Routers disconnect from their Conductors.
 ------
-
-------
 - **I95-35567 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
 ------
 - **I95-37642** 128T GUI does not provide the option for a "User" to change their own password.
 ------
 - **I95-37643 Vertical Privilege Escalation.** Account privileges have been reviewed and updates have been made to remediate this vulnerability. 
 ------
-- **I95-37644 SQL Injection Vulnerability.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+- **I95-37644/I95-37809 SQL Injection Vulnerability.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
 ------
 - **I95-37645 Improper Restriction of excessive authentication attempts.** The user is now locked out after three failed login attempts. 
 ------
@@ -34,6 +32,14 @@ Upon installation, you must ensure that there is at least one user on each 128T 
 - **I95-37651 Unrestricted File Upload.** Restrictions are in place that make it impossible to import or upload malicious files. 
 ------
 - **I95-37652 SSH Follows Weak Security Practices.** Several fixes have been put in place to harden SSH access. Please see the warning regarding SSH Root Login at the top of this page.
+------
+- **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
+------
+- **I95-37746 A CentOS package version out of date.** Upgraded version of `libsolv` to resolve security vulnerabilities.
+------
+- **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
+------
+- **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
 ------
 
 
