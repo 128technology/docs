@@ -10,8 +10,9 @@ Upon installation, you must ensure that there is at least one user on each 128T 
 :::
 
 ### Resolved Issues
-
-- **I95-37225** Head End Routers disconnect from their Conductors.
+- **I95-37211 Webserver Quickstart Integration.** Several improvements have been made to the Quickstart process during the OTP ISO installation, including a significantly shorter run time.
+------
+- **I95-37225 Head End Routers disconnect from their Conductors.** Improved the handling of clock drift between multiple worker cores within the datapath.
 ------
 - **I95-35567 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
 ------
@@ -35,13 +36,30 @@ Upon installation, you must ensure that there is at least one user on each 128T 
 ------
 - **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
 ------
-- **I95-37746 A CentOS package version out of date.** Upgraded version of `libsolv` to resolve security vulnerabilities.
+- **I95-37746 A CentOS package version out of date.** Upgraded the version of `libsolv` to resolve security vulnerabilities.
 ------
 - **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
 ------
 - **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
 ------
-
+- **I95-37819 Ensure rsyslog default file permissions are configured.** The default file permissions for log files created by rsyslog are set. 
+------
+- **I95-37822 Ensure the noexec option is set on the /dev/shm partition.** The shared memory partition /dev/shm is configured with the noexec mount option during initialization.
+------
+- **I95-37823 Ensure the "sticky bit" is set correctly on all world-writable directories.** The bit is set to protect all world-writable directories.  
+------
+- **I95-37824 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
+------
+- **I95-37828 Ensure core dumps are restricted.** Coredump tuning has been updated with the latest security settings. 
+------
+- **I95-37830 Ensure permissions on /etc/crontab and related cron files are configured.** The permissions on cron files have been updated with the latest security settings.
+------
+- **I95-37831 The default umask setting on user-created files must be more restrictive.** The default umask setting has been updated to be more restrictive. 
+------
+- **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when connnecting to an HA Peer to update the environment configuration. 
+------
+- **I95-38008 Automated Provisioner race condition.** Resolved an issue causing a race condition when multiple events arrived at the same time.  
+------
 
 ## Release 4.3.10
 
