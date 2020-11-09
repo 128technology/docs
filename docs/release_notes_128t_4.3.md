@@ -16,7 +16,7 @@ Upon installation, you must ensure that there is at least one user on each 128T 
 ------
 - **I95-35567 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
 ------
-- **I95-37642** 128T GUI does not provide the option for a "User" to change their own password.
+- **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T GUI password from the web application GUI.
 ------
 - **I95-37643 Vertical Privilege Escalation.** Account privileges have been reviewed and updates have been made to remediate this vulnerability. 
 ------
