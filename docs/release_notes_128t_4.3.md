@@ -4,33 +4,33 @@ sidebar_label: 4.3
 ---
 ## Release 4.3.11
 :::warning
-SSH Root Login has been disabled. 
+SSH Root Login is not permitted. 
 
-Upon installation, you must ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of management connectivity to the 128T Networking Platform. 
+Upon installation, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information. 
 :::
 
 ### Resolved Issues
 - **I95-37211 Webserver Quickstart Integration.** Several improvements have been made to the Quickstart process during the OTP ISO installation, including a significantly shorter run time.
 ------
-- **I95-37225 Head End Routers disconnect from their Conductors.** Improved the handling of clock drift between multiple worker cores within the datapath.
+- **I95-37225 Routers disconnect from their Conductors.** Improved the handling of clock drift between multiple worker cores within the datapath.
 ------
 - **I95-35567 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
 ------
 - **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T GUI password from the web application GUI.
 ------
-- **I95-37643 Vertical Privilege Escalation.** Account privileges have been reviewed and updates have been made to remediate this vulnerability. 
+- **I95-37643 Accounts with the role of "user" have access to plugin REST API resources.** Account privileges have been reviewed and updates have been made to remediate this vulnerability. 
 ------
-- **I95-37644/I95-37809 SQL Injection Vulnerability.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+- **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
 ------
-- **I95-37645 Improper Restriction of excessive authentication attempts.** The user is now locked out after three failed login attempts. 
+- **I95-37645 Restriction of excessive authentication attempts.** The user is now locked out after three failed login attempts. 
 ------
 - **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
 ------
-- **I95-37647 Query String Parameter in HTTPS Request.** Any security vulnerability has been addressed.
+- **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
 ------
-- **I95-37650 Clickjacking Vulnerability.** The Graphical User Interface has been analyzed and any security vulnerabilities related to clickjacking have been resolved. 
+- **I95-37650 128T GUI is allowed to be placed within an i-frame.** The 128T GUI has been analyzed and any security vulnerabilities related to "clickjacking" have been resolved. 
 ------
-- **I95-37651 Unrestricted File Upload.** Restrictions are in place that make it impossible to import or upload malicious files. 
+- **I95-37651 Unrestricted File Upload.** Restrictions are in place that make it impossible to import or upload files that do not match tar.gz format. 
 ------
 - **I95-37652 SSH Follows Weak Security Practices.** Several fixes have been put in place to harden SSH access. Please see the warning regarding SSH Root Login at the top of this page.
 ------

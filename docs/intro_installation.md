@@ -16,11 +16,11 @@ Before you begin the installation and configuration of 128T Networking Plaform, 
 - Have an entry in /etc/sudoers allowing you to execute Linux shell commands as root (via sudo). Failure to do so may result in the loss of management connectivity to the router. 
 
 :::note
-The examples listed in this guide generally prefer running commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. The SSH Root login is no longer availble. 
+The examples listed in this guide generally prefer running commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 
 :::
 
 ### Regarding Upgrades
-Requirements for upgrades now include configuring a user with super user (sudo) privileges. The SSH Root login is no longer available. If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a default user is configured with sudo privileges. 
+[Requirements for upgrades](intro_upgrading.md) include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a default user is configured with sudo privileges. 
 
 ## Installation Process
 Installation is done from the 128T ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
