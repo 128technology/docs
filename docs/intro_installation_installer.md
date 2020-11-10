@@ -49,7 +49,7 @@ The 128T Initializer is a complementary application to the installer that tunes 
 1. On the 128T Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the 128T node and press the **Enter** key to select **OK**.
   ![128T Role](/img/intro_install_initializer_role.png)
 
-2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, Enter their administrative addresses here, and this node will retrieve its configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
+2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, enter their administrative addresses here, and this node will retrieve its configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
 3. When asked _What kind of Router node is this?_, select from the following options:
 
   ![Identify the Node](/img/intro_install_initializer_HASetup.png)
@@ -76,6 +76,9 @@ The 128T Initializer is a complementary application to the installer that tunes 
    :::
 
 6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
+  :::note
+  Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
+  :::
 
 ![Password Setup](/img/intro_install_initializer_password.png)
 

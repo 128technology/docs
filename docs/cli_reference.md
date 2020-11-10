@@ -2831,6 +2831,9 @@ set password
 #### Description
 
 The _set password_ command allows a PCLI user to change their password. As is typical with most password changing routines, as a security precaution the user must enter their current password before they&#39;re permitted to change it.
+:::note
+If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
+:::
 
 #### Version History
 
