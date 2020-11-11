@@ -22,7 +22,7 @@ Upon installation, ensure that there is at least one user on each 128T system th
 ------
 - **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
 ------
-- **I95-37645 Restriction of excessive authentication attempts.** The user is now locked out after six failed login attempts. 
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limitingloginattempts) 
 ------
 - **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
 ------
@@ -30,9 +30,9 @@ Upon installation, ensure that there is at least one user on each 128T system th
 ------
 - **I95-37650 128T GUI is allowed to be placed within an i-frame.** The 128T GUI has been analyzed and any security vulnerabilities related to "clickjacking" have been resolved. 
 ------
-- **I95-37651 Unrestricted File Upload.** Restrictions are in place that make it impossible to import or upload files that do not match tar.gz format. 
+- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
-- **I95-37652 SSH Follows Weak Security Practices.** Several fixes have been put in place to harden SSH access. Please see the warning regarding SSH Root Login at the top of this page.
+- **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
 ------
 - **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
 ------

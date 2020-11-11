@@ -56,8 +56,9 @@ module.exports = {
         "type": "category",
         "label": "Configuration",
         "items": [
-          "config_asset_connection_resiliency",
           "config_basics",
+          "config_access_mgmt",
+          "config_asset_connection_resiliency",
           "config_bgp",
           "config_reference_guide",
           "config_audit_log",
