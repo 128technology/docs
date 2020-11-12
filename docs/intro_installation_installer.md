@@ -2,11 +2,11 @@
 title: Manually Installing the 128T
 sidebar_label: Manually Installing the 128T
 ---
-This section describes the manual installation process for the 128T. For automated installation see Installing from the OTP ISO, or Installing from the Bootable ISO. 
+This section describes the manual installation process for the 128T. For automated installation see [Installing from Bootable Media](intro_installation_bootable_media.md). 
 
 ## Install Using 128T-installer
 
-The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions on installing from an ISO](intro_installation_bootable_media.md).
+The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md).
 
 1. Launch a Linux command prompt.
 2. Enter the command to install the Yum repository that corresponds to the 128T software installer.
@@ -20,8 +20,16 @@ sudo yum install http://yum.128technology.com/installer/repo.rpm
 ```
 sudo yum install 128T-installer
 ```
+:::note
+To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing a manual installation.
+:::
 
-4. Enter the command to launch the interactive installer wizard.
+4. Create a screen and attach to it.
+```
+screen -d -m -s <name-of-screen-session>
+screen -x <name-of-screen-session>
+```
+5. Enter the command to launch the interactive installer wizard.
 
 ```
 sudo install128t
@@ -40,7 +48,13 @@ The 128T installer splash screen appears.
   > This is performed more easily when accessing the target machine over SSH using terminal software, rather than interacting with the target machine directly. Alternatively, you can also store the certificate as /etc/pki/128technology/release.pem to avoid having to copy and paste.
   
 8. From the Version Selection window, select your desired version from the list and select **OK** to continue. The installation begins, and may take several minutes to download and install.
-9. Press the **Enter** key to select **OK** and close the installer. Upon completing the installation, the installer automatically launches the Initializer.
+9. Press the **Enter** key to select **OK** and close the installer. 
+10. Detach from the Screen utility.
+```
+ctrl+A
+D
+```
+Upon completing the installation, the installer automatically launches the Initializer.
 
 ### Initialize the 128T Node
 

@@ -33,6 +33,9 @@ Upon installation, ensure that there is at least one user on each 128T system th
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
 - **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
+:::note
+As part of the SSH hardening process, inactive SSH sessions will be logged out after 60 minutes. Please see [Access Management](config_access_mgmt.md) for additional information.
+:::
 ------
 - **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
 ------
