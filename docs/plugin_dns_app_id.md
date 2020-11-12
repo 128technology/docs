@@ -74,7 +74,7 @@ By enabling the `include-all-builtin-apps` configuration, the plugin will automa
 | ------------ | ----------------------------------------------- |
 | 1.2.0, 2.2.0 | Support for adding custom-apps at authority level was introduced |
 
-The plugin also allow the user to create their own definitions of applications by configuring a set of patterns to be used for matching the application. Each pattern must be a valid regex that will be applied to a FQDN to identify the application. The `authority > dns-app-id > custom-apps` config can be used to define patterns tha apply to all the routers with `dns-app-id` functionality enabled. Also shown in the configuration snippet is the custom-app `cnn` that includes a list of patterns to be applied at the router level. The identification is dynamic, so you just need to update the configuration on the conductor to include new apps or patterns for your routers. When `custom-apps` are configured at the authority and router level, the two lists are combined at runtime for that particular router. For example, if the user configured a custom-app called `zoom` on the authority and another app called `cnn` on the router, the router will contain both the applications.
+The plugin also allow the user to create their own definitions of applications by configuring a set of patterns to be used for matching the application. Each pattern must be a valid regex that will be applied to a FQDN to identify the application. The `authority > dns-app-id > custom-apps` config can be used to define patterns that apply to all the routers with `dns-app-id` functionality enabled. Also shown in the configuration snippet is the custom-app `cnn` that includes a list of patterns to be applied at the router level. The identification is dynamic, so you just need to update the configuration on the conductor to include new apps or patterns for your routers. When `custom-apps` are configured at the authority and router level, the two lists are combined at runtime for that particular router. For example, if the user configured a custom-app called `zoom` on the authority and another app called `cnn` on the router, the router will contain both the applications.
 
 :::note
 The `.` character bears special meaning within regular expressions, and matches *any single character*. Because hostnames contain literal `.` characters, in order to explicitly reference a dot separator, you must prefix it with **two** backslash characters. I.e., to have a pattern match the hostname `www.128technology.com`, you would type it into the PCLI as `www\\.128technology\\.com`. The PCLI will render the double backslash characters as a single backslash when you `show` the configuration.
@@ -137,7 +137,7 @@ exit
 | custom-apps > description | string | A human-readable description of the custom application. |
 | custom-apps > patterns | regex | A regular expression pattern for matching to DNS requests that the 128T processes. |
 
-See the [Appendix](#Appendix) section on what the config generation would look like.
+See the [Appendix](#appendix) section on what the config generation would look like.
 
 #### Manually associating with a Service
 
@@ -257,7 +257,7 @@ config
 exit
 ```
 
-The above configuration will use the `internet` service as a basis for auto generating services for all built in applications such as `google-drive`, `gmail` etc. Here's what the generated configuration will look like.
+The above configuration will use the `internet` service as a basis for auto generating services for all built in applications such as `google-drive`, `gmail`, etc. Here's what the generated configuration will look like.
 
 ```
 config
