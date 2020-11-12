@@ -23,8 +23,8 @@ From the terminal window:
 	- `sudo install128t`
 3. Respond to the interactive install questions as required.
 4. When the upgrace/installation process begins, you can safely detach from the Screen session. 
-	- `ctrl+A`
-	- `D`
+	- `ctrl+a`
+	- `d`
 
 For additional information about the manual installation process with Screen, please refer to [Manually Installing the 128T](intro_installation_installer.md).
 
@@ -46,4 +46,4 @@ The `config import` functionality has the following constraints:
 
 - A max file size of 25 MB – an error is displayed if the file size is too large.
 - One upload per user every 15 seconds.
-- Verification of the `*.gz` file format. This does not apply to uploading QuickStart files, Templates, and Custom Charts, as those files are verified before loading. 
+- Verification of the `*.gz` file format.  

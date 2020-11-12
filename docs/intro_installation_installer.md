@@ -51,8 +51,8 @@ The 128T installer splash screen appears.
 9. Press the **Enter** key to select **OK** and close the installer. 
 10. Detach from the Screen utility.
 ```
-ctrl+A
-D
+ctrl+a
+d
 ```
 Upon completing the installation, the installer automatically launches the Initializer.
 
