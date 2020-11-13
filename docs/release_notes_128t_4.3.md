@@ -57,6 +57,13 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37831 The default umask setting on user-created files must be more restrictive.** The default umask setting has been updated to be more restrictive. 
 ------
+- **I95-37841 Sessions would not revert back when at least one is configured for outbound-only.** Resolved an error condition where a session would not revert back to a preferred path when at least one of the paths was configured for outbound-only.
+
+  _**Symptoms:**_ When this condition has been encountered, message(s) similar to the following can be seen in the highway.log
+  ```
+  Error serializing local interface <port>.<vlan> to global-interface-id
+  ```
+------
 - **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration. 
 ------
 - **I95-37908 The routingEngine.log is not rotated.** Log rotation has been updated to rotate the routingEngine log file.
