@@ -99,6 +99,9 @@ The 128T Initializer tunes your operating system, prepares the platform to run t
    :::
 
 6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
+  :::note
+  Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
+  :::
 
   ![Password Setup](/img/intro_install_initializer_password.png)
 
