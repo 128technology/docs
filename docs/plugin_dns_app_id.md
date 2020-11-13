@@ -40,7 +40,7 @@ exit
 | Element | Type    | Description                                                  |
 | ------- | ------- | ------------------------------------------------------------ |
 | enabled | boolean | Default: true. Governs whether the DNS AppID behavior is enabled or not. |
-| include-all-builtin-apps | boolean | Default: false. Enabling this feature automatically includes all builtin apps including new one's the plugin adds due to upgrades |
+| include-all-builtin-apps | boolean | Default: false. Enabling this feature automatically includes all builtin apps including new one's the plugin adds due to upgrades. |
 | builtin-apps | string | Multiple instance object. This can reference any built-in application patterns contained within the version of the plugin you're running. |
 | custom-apps | subelement | Multiple instance object. Allows administrators to define custom patterns for matching applications. |
 | custom-apps > name | string | The name of the custom-app. This value will subsequently be configured within a `service > application-name` to give treatment to that application. |
@@ -53,7 +53,7 @@ exit
 
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
-| 1.2.0, 2.2.0 | `include-builtin-apps`was introduced |
+| 1.2.0, 2.2.0 | `include-builtin-apps` was introduced |
 
 The plugin contains built in application patterns for Gmail, Google Drive, and Windows Update. The patterns were generated from the following published documents:
 
@@ -63,7 +63,7 @@ The plugin contains built in application patterns for Gmail, Google Drive, and W
 | Google Drive   | [link](https://support.google.com/a/answer/2589954?hl=en) |
 | Windows Update | [link 1](https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#211-connection-from-the-wsus-server-to-the-internet) [link 2](https://docs.microsoft.com/en-us/windows/deployment/update/windows-update-troubleshooting#device-cannot-access-update-files) |
 
-By enabling the `include-all-builtin-apps` configuration, the plugin will automatically include all the available apps. This allows for new apps to be automatically included as new builtin apps are added over time. Alternatively, you can choose specific builtin-apps by name, as shown in the snippet above. The values you can configure are `gmail`, `google-drive`, and `windows-update`.
+By enabling the `include-all-builtin-apps` configuration, the plugin will automatically include all the available apps. This allows for new apps to be automatically included as new builtin apps are added over time. Alternatively, you can choose specific builtin apps by name, as shown in the snippet above. The values you can configure are `gmail`, `google-drive`, and `windows-update`.
 
 
 ### Custom Patterns
@@ -74,7 +74,7 @@ By enabling the `include-all-builtin-apps` configuration, the plugin will automa
 | ------------ | ----------------------------------------------- |
 | 1.2.0, 2.2.0 | Support for adding custom-apps at authority level was introduced |
 
-The plugin also allow the user to create their own definitions of applications by configuring a set of patterns to be used for matching the application. Each pattern must be a valid regex that will be applied to a FQDN to identify the application. The `authority > dns-app-id > custom-apps` config can be used to define patterns that apply to all the routers with `dns-app-id` functionality enabled. Also shown in the configuration snippet is the custom-app `cnn` that includes a list of patterns to be applied at the router level. The identification is dynamic, so you just need to update the configuration on the conductor to include new apps or patterns for your routers. When `custom-apps` are configured at the authority and router level, the two lists are combined at runtime for that particular router. For example, if the user configured a custom-app called `zoom` on the authority and another app called `cnn` on the router, the router will contain both the applications.
+The plugin also allows the user to create their own definitions of applications by configuring a set of patterns to be used for matching the application. Each pattern must be a valid regex that will be applied to a FQDN to identify the application. The `authority > dns-app-id > custom-apps` config can be used to define patterns that apply to all the routers with `dns-app-id` functionality enabled. Also shown in the configuration snippet is the custom-app `cnn` that includes a list of patterns to be applied at the router level. The identification is dynamic, so you just need to update the configuration on the conductor to include new apps or patterns for your routers. When `custom-apps` are configured at the authority and router level, the two lists are combined at runtime for that particular router. For example, if the user configured a custom-app called `zoom` on the authority and another app called `cnn` on the router, the router will contain both the applications.
 
 :::note
 The `.` character bears special meaning within regular expressions, and matches *any single character*. Because hostnames contain literal `.` characters, in order to explicitly reference a dot separator, you must prefix it with **two** backslash characters. I.e., to have a pattern match the hostname `www.128technology.com`, you would type it into the PCLI as `www\\.128technology\\.com`. The PCLI will render the double backslash characters as a single backslash when you `show` the configuration.
@@ -113,7 +113,7 @@ If you configure invalid regex patterns, you will see the log message `invalid p
 | ------------ | ----------------------------------------------- |
 | 1.2.0, 2.2.0 | This capability was introduced  |
 
-The `authority > dns-app-id` configuration allows the user to automatically generate services for the both builtin and custom applications.
+The `authority > dns-app-id` configuration allows the user to automatically generate services for both the builtin and custom applications.
 
 ``` config
 config
@@ -131,13 +131,13 @@ exit
 | Element | Type    | Description                                                  |
 | ------- | ------- | ------------------------------------------------------------ |
 | generate-services | boolean | Default: false. Governs whether to automatically generate services for applications. |
-| base-service | service-reference | The generated application service will inherit all the properties such as access-policy, service-policy, etc. from the base service |
+| base-service | service-reference | The generated application service will inherit all the properties such as access-policy, service-policy, etc, from the base service. |
 | custom-apps | subelement | Multiple instance object. Allows administrators to define custom patterns for matching applications. |
 | custom-apps > name | string | The name of the custom-app. This value will subsequently be configured within a `service > application-name` to give treatment to that application. |
 | custom-apps > description | string | A human-readable description of the custom application. |
 | custom-apps > patterns | regex | A regular expression pattern for matching to DNS requests that the 128T processes. |
 
-See the [Appendix](#appendix) section on what the config generation would look like.
+Refer to the [Appendix](#appendix) for an example of the config generation.
 
 #### Manually associating with a Service
 
@@ -330,7 +330,7 @@ exit
 
 #### New Features and Improvements
 
-- **PLUGIN-877** Add support for automatic builtin app inclusion, authority wide custom-apps and automatic service generation
+- **PLUGIN-877** Add support for automatic builtin app inclusion, authority wide custom-apps, and automatic service generation.
 
     - A new toggle for automatically including all builtin applications to keep up-to-date with new apps being added via plugin upgrades.
     - Created a new `dns-app-id` plugin at the authority level to provide means for adding `custom-apps` that apply to all routers in the config with `dns-app-id` enabled.
@@ -339,7 +339,7 @@ exit
 ### Release 1.1.0, 2.1.0
 
 #### Issues Fixed
-- **PLUGIN-809** DNS app-id plugin installation fails due to dependency conflict
+- **PLUGIN-809** DNS app-id plugin installation fails due to dependency conflict.
 
     _**Resolution**_ The 128T-dns-app-id-router RPM has been updated to accept all versions of 128T-dns-cache-router RPM.
 
