@@ -10,11 +10,11 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 :::
 
 ### Resolved Issues
-- **I95-35164** Downloading a new software image during an upgrade will incorrectly complete the upgrade if the download was successful before the upgrade has fully completed.
+- **I95-35164 Concurrent upgrade and download activity causes invalid upgrade.** The download of a new software image during an upgrade has been blocked. 
 ------
-- **I95-35354** There exists an unlikely race condition wherein the successful return code of a download operation (that happens asynchronously) causes an upgrade in progress to terminate prematurely.
+- **I95-35354 Unlikely race condition during asynchronous upgrade and download causes premature termination of upgrade.** The possibility of asynchronous download and upgrade/install has been removed and the race condition resolved.
 ------
-- **I95-35567,I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
+- **I95-35567, I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
 ------
 - **I95-37211 Webserver Quickstart Integration.** Several improvements have been made to the Quickstart process during the OTP ISO installation, including a significantly shorter run time.
 ------
@@ -61,11 +61,12 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration. 
 ------
-- **I95-37908 routingEngine.log not rotated.** Log rotation has been updated to rotate this log file.
+- **I95-37908 The routingEngine.log is not rotated.** Log rotation has been updated to rotate the routingEngine log file.
 ------
 - **I95-38008 Automated Provisioner race condition.** Resolved an issue causing a race condition when multiple events arrived at the same time.  
 ------
-- **I95-38078 CVE updates.** Addressed latest CVEs
+- **I95-38078 CVE updates.** Addressed latest CVEs.
+------ 
 
 ## Release 4.3.10
 
