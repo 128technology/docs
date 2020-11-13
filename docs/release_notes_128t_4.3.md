@@ -6,19 +6,21 @@ sidebar_label: 4.3
 :::warning
 SSH Root Login is not permitted. 
 
-Upon installation, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of remote management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information. 
+Before upgrading, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of remote management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information. 
 :::
 
 ### Resolved Issues
+- **I95-35164** Downloading a new software image during an upgrade will incorrectly complete the upgrade if the download was successful before the upgrade has fully completed.
+------
+- **I95-35354** There exists an unlikely race condition wherein the successful return code of a download operation (that happens asynchronously) causes an upgrade in progress to terminate prematurely.
+------
+- **I95-35567,I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
+------
 - **I95-37211 Webserver Quickstart Integration.** Several improvements have been made to the Quickstart process during the OTP ISO installation, including a significantly shorter run time.
 ------
 - **I95-37225 Routers disconnect from their Conductors.** Improved the handling of clock drift between multiple worker cores within the datapath.
 ------
-- **I95-35567 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
-------
 - **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
-------
-- **I95-37643 Accounts with the role of "user" have access to plugin REST API resources.** Account privileges have been reviewed and updates have been made to remediate this vulnerability. 
 ------
 - **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
 ------
@@ -27,8 +29,6 @@ Upon installation, ensure that there is at least one user on each 128T system th
 - **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
 ------
 - **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
-------
-- **I95-37650 128T GUI is allowed to be placed within an i-frame.** The 128T GUI has been analyzed and any security vulnerabilities related to "clickjacking" have been resolved. 
 ------
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
@@ -61,8 +61,11 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration. 
 ------
+- **I95-37908 routingEngine.log not rotated.** Log rotation has been updated to rotate this log file.
+------
 - **I95-38008 Automated Provisioner race condition.** Resolved an issue causing a race condition when multiple events arrived at the same time.  
 ------
+- **I95-38078 CVE updates.** Addressed latest CVEs
 
 ## Release 4.3.10
 
