@@ -2,11 +2,11 @@
 title: Manually Installing the 128T
 sidebar_label: Manually Installing the 128T
 ---
-This section describes the manual installation process for the 128T. For automated installation see Installing from the OTP ISO, or Installing from the Bootable ISO. 
+This section describes the manual installation process for the 128T. For automated installation see [Installing from Bootable Media](intro_installation_bootable_media.md). 
 
 ## Install Using 128T-installer
 
-The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions on installing from an ISO](intro_installation_bootable_media.md).
+The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md).
 
 1. Launch a Linux command prompt.
 2. Enter the command to install the Yum repository that corresponds to the 128T software installer.
@@ -20,8 +20,16 @@ sudo yum install http://yum.128technology.com/installer/repo.rpm
 ```
 sudo yum install 128T-installer
 ```
+:::note
+To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing a manual installation.
+:::
 
-4. Enter the command to launch the interactive installer wizard.
+4. Create a screen and attach to it.
+```
+screen -d -m -s <name-of-screen-session>
+screen -x <name-of-screen-session>
+```
+5. Enter the command to launch the interactive installer wizard.
 
 ```
 sudo install128t
@@ -40,7 +48,13 @@ The 128T installer splash screen appears.
   > This is performed more easily when accessing the target machine over SSH using terminal software, rather than interacting with the target machine directly. Alternatively, you can also store the certificate as /etc/pki/128technology/release.pem to avoid having to copy and paste.
   
 8. From the Version Selection window, select your desired version from the list and select **OK** to continue. The installation begins, and may take several minutes to download and install.
-9. Press the **Enter** key to select **OK** and close the installer. Upon completing the installation, the installer automatically launches the Initializer.
+9. Press the **Enter** key to select **OK** and close the installer. 
+10. Detach from the Screen utility.
+```
+ctrl+a
+d
+```
+Upon completing the installation, the installer automatically launches the Initializer.
 
 ### Initialize the 128T Node
 
@@ -49,7 +63,7 @@ The 128T Initializer is a complementary application to the installer that tunes 
 1. On the 128T Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the 128T node and press the **Enter** key to select **OK**.
   ![128T Role](/img/intro_install_initializer_role.png)
 
-2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, Enter their administrative addresses here, and this node will retrieve its configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
+2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, enter their administrative addresses here, and this node will retrieve its configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
 3. When asked _What kind of Router node is this?_, select from the following options:
 
   ![Identify the Node](/img/intro_install_initializer_HASetup.png)
@@ -76,6 +90,9 @@ The 128T Initializer is a complementary application to the installer that tunes 
    :::
 
 6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
+  :::note
+  Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
+  :::
 
 ![Password Setup](/img/intro_install_initializer_password.png)
 

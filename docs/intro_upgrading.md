@@ -15,6 +15,8 @@ There are three standard ways of upgrading routers:
 The router upgrade process using the PCLI and the GUI is done in two stages: first, the software is downloaded, then it is installed. Using the `install128t` application steps through both of these processes.
 :::
 
+Prerequisites for upgrades now include configuring a user with super user (sudo) privileges. **SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
+
 ### Stopping the 128T Routing Software
 Before upgrading the 128T Routing Software, use the following procedure to stop the the software.
 
