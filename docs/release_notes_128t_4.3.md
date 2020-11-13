@@ -39,8 +39,6 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
 ------
-- **I95-37746 A CentOS package version out of date.** Upgraded the version of `libsolv` to resolve security vulnerabilities.
-------
 - **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
 ------
 - **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
