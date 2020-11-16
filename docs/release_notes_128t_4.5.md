@@ -3,6 +3,115 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
+## Release 4.5.3
+
+### Resolved Issues
+
+- **I95-33959 Carry error message through from Mars through public REST API.**
+------
+- **I95-34975/I95-34977 CLI changes for `show session`.** The `show session` command has been enhanced to allow the display of a specific session by entering the session-ID. *need to add link to `show session` command and add "by session id" info.* **Feature??**
+------
+- **I95-35567, I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
+------
+- **I95-35674 Allow Plugin Pages to extend other plugin pages.** You can now use `baseId` to refer to another page that was created by another plugin. *need to add a link to the `baseID` command and add supporting info.* **Feature??**
+------
+- **I95-35987 Downloading exported config files does not preserve the file name.** The download process correctly preserves the file name. 
+------
+- **I95-36490 Provisional Down Interface state.** The `provisional-down` interface state has been added to allow an interface to be brought down for adminstrative purposes. *add CLI command for `provisional-down`* **Feature??**
+------
+- **I95-36500 `show-device interface` updates to display provisional status.** Updates made to the show device interface command. *document these in the PCLI sections*
+------
+- **I95-36910 Failed to setup IP address on linux interface when VLAN is configured.** 
+------
+- **I95-37211 Webserver Quickstart Integration.** Several improvements have been made to the Quickstart process during the OTP ISO installation, including a significantly shorter run time.
+------
+- **I95-37504 Mars returns nothing when expecting values.** (related to 33959?)
+------
+- **I95-37514 App-ID result is stuck pending if script is not executable.**
+------
+- **I95-37638 Double asset showing in cli.**
+------
+- **I95-37225 Routers disconnect from their Conductors.** Improved the handling of clock drift between multiple worker cores within the datapath.
+------
+- **I95-37535 Verify BGP routes and state changes triggered by provisional status changes on peering and non-peering interfaces.**
+------
+- **I95-37638 Duplicate Assets showing in CLI.** Resolved an issue where there were duplicate values in the output of `show assets`.
+------
+- **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
+------
+- **I95-37643 Accounts with the role of "user" have access to plugin REST API resources.** Account privileges have been reviewed and updates have been made to remediate this vulnerability. 
+------
+- **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+------
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limitingloginattempts) 
+------
+- **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
+------
+- **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
+------
+- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
+------
+- **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
+------
+- **I95-37752 Highway manager crash.**
+------
+- **I95-37791 Search 128T Crashes on unknown config.**
+------
+- **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
+------
+- **I95-37806 Unable to delete sesions when a service no longer exists**
+------
+- **I95-37819 Ensure rsyslog default file permissions are configured.** The default file permissions for log files created by rsyslog are set. 
+------
+- **I95-37822 Ensure the noexec option is set on the /dev/shm partition.** The shared memory partition /dev/shm is configured with the noexec mount option during initialization.
+------
+- **I95-37823 Ensure the "sticky bit" is set correctly on all world-writable directories.** The bit is set to protect all world-writable directories.  
+------
+- **I95-37824 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
+------
+- **I95-37826 Ensure permissions on bootloader config are configured.**
+------
+- **I95-37828 Ensure core dumps are restricted.** Coredump tuning has been updated with the latest security settings, and will not be collected on processes with privilege escalation. 
+------
+- **I95-37830 Ensure permissions on /etc/crontab and related cron files are configured.** The permissions on cron files have been updated with the latest security settings.
+------
+- **I95-37831 The default umask setting on user-created files must be more restrictive.** The default umask setting has been updated to be more restrictive. 
+------
+- **I95-37841 Sessions would not revert back when at least one is configured for outbound-only.** Resolved an error condition where a session would not revert back to a preferred path when at least one of the paths was configured for outbound-only.
+
+  _**Symptoms:**_ When this condition has been encountered, message(s) similar to the following can be seen in the highway.log
+  ```
+  Error serializing local interface <port>.<vlan> to global-interface-id
+  ```
+------
+- **I95-37842 Inter-router flow move failure for sessoins with same source/dest port (UDP/TCP/ICMP)**
+------
+- **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration. 
+------
+- **I95-37855 Configurable Way-point allocation.** **Feature??**
+------
+- **I95-37857 Configuration and Value implementation.**
+------
+-**I95-37860 Add Closed state to session.**
+------
+- **I95-37908 The routingEngine.log is not rotated.** Log rotation has been updated to rotate the routingEngine log file.
+------
+- **I95-38008 Automated Provisioner race condition.** Resolved an issue causing a race condition when multiple events arrived at the same time.  
+------
+- **I95-38012/I95-38013 Remediate CVE's for kernel-3.10.0-1127 and update kernel.**
+------
+- **I95-38045 Change signal codes to meaningful variables.** Signal code is more readable in test and the lib APIs.
+------
+**I95-38072 WANpipe-7.0.27 Kmod for kernel 3.10.0-1160.**
+------
+- **I95-38075 Make max-way-points dynamically reconfigurable without restarting the 128T.** `max-way-points` is now dynamically configurable. Please see `max way points` for more details.  **Feature??**
+------
+- **I95-38078 CVE updates.** Addressed latest CVEs.
+------ 
+- **I95-38119 Enty insertion into FIB causes issues with lookup returning a less specific match.**
+------
+- **I95-38139 Remove excessive logging when session is accessed and later deleted(?)**
+------
 ## Release 4.5.2
 
 ### Issues Fixed
