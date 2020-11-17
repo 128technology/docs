@@ -3,11 +3,41 @@ title: 128T 4.2 Release Notes
 sidebar_label: 4.2
 ---
 
+## Release 4.2.9
+
+### Resolved Issues
+
+- **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
+------
+- **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+------
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limitingloginattempts) 
+------
+- **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
+------
+- **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
+------
+- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
+------
+- **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
+------
+- **I95-37841 Sessions would not revert back when at least one is configured for outbound-only.** Resolved an error condition where a session would not revert back to a preferred path when at least one of the paths was configured for outbound-only.
+
+  _**Symptoms:**_ When this condition has been encountered, message(s) similar to the following can be seen in the highway.log
+  ```
+  Error serializing local interface <port>.<vlan> to global-interface-id
+  ```
+------
+- **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration.
+------
+- **I95-38100 Increase to the SSHD idle timeout.** Please see [Access Management](config_access_mgmt.md) for additional information. 
+------
+
 ## Release 4.2.8
 
-### Issues Fixed
+### Resolved Issues
 
-- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
+- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses.
 ------
 - **I95-30610** RTP is not properly classified for subsequent 128T routers
 ------
@@ -75,7 +105,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
 ## Release 4.2.7
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-35138** A vulnerability in the SaltStack code allows for unauthenticated salt-minions to execute any script on the salt-master.
   :::info
@@ -90,7 +120,7 @@ The 4.2.6 release is a superset of the 4.2.5 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-34068** SVR sessions fail to establish due to waypoint allocation failures after HA node failover.
   _**Symptom:**_ The following warning log is generated:
@@ -122,7 +152,7 @@ The 4.2.6 release is a superset of the 4.2.5 release. Features and corrections i
 The 4.2.5 release is a superset of the 4.2.4 release. Features and corrections in the 4.2.4 release are not provided in these release notes. Please refer to the [4.2.4 release notes](#release-424) for further information.
 :::
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-18857** Support for automatic loopback has been added to Sangoma T1 devices
 ------
@@ -287,7 +317,7 @@ The 4.2.4 release is a superset of the 4.2.3 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-30084** Empty BGP neighbor/transport/local-address prevents configuration from being committed
 ------
@@ -353,7 +383,7 @@ The 4.2.3 release is a superset of the 4.2.2 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-33264** Secondary HA node reboot may result in traffic no longer flowing through the fabric
 ------
@@ -367,7 +397,7 @@ The 4.2.2 release is a superset of the 4.2.1 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-32521** Packets continuously dropping on HA failover triggered by power outage
 ------
@@ -383,7 +413,7 @@ The 4.2.1 release is a superset of the 4.2.0 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-32264** In large deployments Automated provisioner can take an extended amount of time to transition a node to a "RUNNING" state
 ------
@@ -530,7 +560,7 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 ------
 - **I95-31454** Notifications have been added for Automated Provisioner events
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-19549** Configuration Generation will fail to generate a peer configuration if the peer name is not the same as the router name
 ------
