@@ -7,31 +7,88 @@ sidebar_label: 4.2
 
 ### Resolved Issues
 
-- **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
+- **I95-18807** Removed an error displayed in journal due to imudp module loaded by rsyslog daemon.
+
+  _**Symptoms:**_ The following message can be seen in the journal:
+  ```
+  rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
+  ```
 ------
-- **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+- **I95-32298 KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down".**
 ------
-- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limitingloginattempts) 
+- **I95-33594 Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting.**
 ------
-- **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
+- **I95-33989** Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`
+
+  _**Symptom:**_ The following can be seen in the PCLI output:
+  ```
+  ✖ Validating...
+  % Error: Candidate configuration is invalid:
+  1. A request of type validate is already in progress. The first request was started 13 seconds ago
+  ```
+  Until the system is upgraded to 4.2.9, this issue will resolve itself after the background tasks have completed.
 ------
-- **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
+- **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy.
+------
+- **I95-34650** In a multihop SVR scenario, the system may incorrectly attribute incoming packets as coming from a different peer path. This results in packet loss until the load-balancer learns of the loss and migrates the session.
+
+  _**Symptom:**_ `show peers` will show the physically disconnected peer as UP while in this state.
+------
+- **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server
+
+  _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable
+------
+- **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T.
+------
+- **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment.
+------
+- **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route
+------
+- **I95-35781** Rare race condition during `rotate logs` PCLI command may cause applications to fault
+------
+- **I95-35799** When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions
+------
+- **I95-35927** When deleting a VLAN network interface and simultaneously assigning its VLAN ID to the only other remaining network interface on the same device interface, future operational state changes on that interface may be ignored.
+------
+- **I95-35933** `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces
+------
+- **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration
+------
+- **I95-36012** `show device-interface` displays incorrect values for speed and duplex for LTE interfaces
+------
+- **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
+------
+- **I95-36149** Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault.
+------
+- **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs
+------
+- **I95-36394** Auto-generated conductor service names that include a '.' will fail to commit configuration
+
+  _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
+------
+- **I95-36525** TLS 1.0 is no longer supported.
+------
+- **I95-36632** Empty office365 metadata file results in HTTP 400 bad request error.
+------
+- **I95-36672** Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.
+------
+- **I95-36770** Salt minion log file was not being properly rotated.
+------
+- **I95-36841** TCP RST can cause the highway process to fault on a SVR path performing UDP transform.
+------
+- **I95-36873** Alarms generated by a router in an authority are incorrectly sent as SNMP traps from all other routers in the authority.
+------
+- **I95-36927** A race condition exists that can cause a fault in the highway process during session setup and configuration changes, that will remove the BGP service route path.
+------
+- **I95-37457** `show rib` and `show bgp` do not support more than one pagination session. 
+------
+- **I95-37650** The 128T web UI incorrectly supports being embedded as an iFrame within another page.  
 ------
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
 - **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
 ------
-- **I95-37841 Sessions would not revert back when at least one is configured for outbound-only.** Resolved an error condition where a session would not revert back to a preferred path when at least one of the paths was configured for outbound-only.
-
-  _**Symptoms:**_ When this condition has been encountered, message(s) similar to the following can be seen in the highway.log
-  ```
-  Error serializing local interface <port>.<vlan> to global-interface-id
-  ```
-------
 - **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration.
-------
-- **I95-38100 Increase to the SSHD idle timeout.** Please see [Access Management](config_access_mgmt.md) for additional information. 
-------
 
 ## Release 4.2.8
 
