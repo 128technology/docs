@@ -30,8 +30,6 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
 ------
-- **I95-37650**
-------
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
 - **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
@@ -41,15 +39,9 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
 ------
-- **I95-37680 nodeMonitor crash 4.5.2**
-------
 - **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
 ------
-- **I95-37791 Search 128T Crashes on unknown config.**
-------
 - **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
-------
-- **I95-37806 Unable to delete sesions when a service no longer exists**
 ------
 - **I95-37819 Ensure rsyslog default file permissions are configured.** The default file permissions for log files created by rsyslog are set. 
 ------
@@ -58,8 +50,6 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 - **I95-37823 Ensure the "sticky bit" is set correctly on all world-writable directories.** The bit is set to protect all world-writable directories.  
 ------
 - **I95-37824 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
-------
-- **I95-37825**
 ------
 - **I95-37828 Ensure core dumps are restricted.** Coredump tuning has been updated with the latest security settings, and will not be collected on processes with privilege escalation. 
 ------
@@ -74,20 +64,14 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
   Error serializing local interface <port>.<vlan> to global-interface-id
   ```
 ------
-- **I95-37842 Inter-router flow move failure for sessoins with same source/dest port (UDP/TCP/ICMP)**
-------
 - **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration. 
 ------
 - **I95-37908 The routingEngine.log is not rotated.** Log rotation has been updated to rotate the routingEngine log file.
 ------
 - **I95-38008 Automated Provisioner race condition.** Resolved an issue causing a race condition when multiple events arrived at the same time.  
 ------
-- **I95-38012/I95-38013 Remediate CVE's for kernel-3.10.0-1127 and update kernel.**
-------
 - **I95-38078 CVE updates.** Addressed latest CVEs.
 ------ 
-- **I95-38119 Enty insertion into FIB causes issues with lookup returning a less specific match.**
-
 
 ## Release 4.3.10
 

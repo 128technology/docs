@@ -25,13 +25,13 @@ sidebar_label: 4.5
 ------
 - **I95-37225 Routers disconnect from their Conductors.** Improved the handling of clock drift between multiple worker cores within the datapath.
 ------
-- **I95-37457**
+- **I95-37457 `show rib` and `show bgp` do not support more than one pagination session.**
 ------
 - **I95-37504 Mars returns nothing when expecting values.** (related to 33959?)
 ------
 - **I95-37514 App-ID result is stuck pending if script is not executable.**
 ------
-- **I95-37577**
+- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.**
 ------
 - **I95-37638 Duplicate Assets showing in CLI.** Resolved an issue where there were duplicate values in the output of `show assets`.
 ------
@@ -47,15 +47,15 @@ sidebar_label: 4.5
 ------
 - **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
 ------
-- **I95-37650**
+- **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.**
 ------
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
 - **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
 ------
-- **I95-37680 nodeMonitor crash 4.5.2**
+- **I95-37680 nodeMonitor process may fault on shutdown of 128T.** `nodeMonitor` no longer faults on 128T shutdown.
 ------
-- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.**
+- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.** The `delete sessions` command no longer creates a race condition. 
 ------
 - **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
 ------
@@ -63,7 +63,7 @@ sidebar_label: 4.5
 ------
 - **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets.
 ------
-- **I95-37806 Unable to delete sesions when a service no longer exists**
+- **I95-37806 Unable to delete sesions when a service no longer exists.** Services that no longer exist can now be deleted. 
 ------
 - **I95-37819 Ensure rsyslog default file permissions are configured.** The default file permissions for log files created by rsyslog are set. 
 ------
@@ -71,9 +71,9 @@ sidebar_label: 4.5
 ------
 - **I95-37823 Ensure the "sticky bit" is set correctly on all world-writable directories.** The bit is set to protect all world-writable directories.  
 ------
-- **I95-37825**
+- **I95-37824 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
 ------
-- **I95-37826 Ensure permissions on bootloader config are configured.**
+- **I95-37826 Ensure permissions on bootloader config are configured.** Bootloader config file permissions are appropriately set. 
 ------
 - **I95-37828 Ensure core dumps are restricted.** Coredump tuning has been updated with the latest security settings, and will not be collected on processes with privilege escalation.
 ------
@@ -81,7 +81,7 @@ sidebar_label: 4.5
 ------
 - **I95-37831 The default umask setting on user-created files must be more restrictive.** The default umask setting has been updated to be more restrictive. 
 ------
-- **I95-37842 Inter-router flow move failure for sessoins with same source/dest port (UDP/TCP/ICMP)**
+- **I95-37842 Inter-router flow move failure for sessions with same source/dest port (UDP/TCP/ICMP).** Inter-router flow movement now identifies session source when the source and destination port are the same. 
 ------
 - **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration. 
 ------
@@ -89,11 +89,11 @@ sidebar_label: 4.5
 ------
 - **I95-38008 Automated Provisioner race condition.** Resolved an issue causing a race condition when multiple events arrived at the same time.  
 ------
-- **I95-38012/I95-38013 Remediate CVE's for kernel-3.10.0-1127 and update kernel.**
+- **I95-38012/I95-38013 Remediate CVE's for kernel-3.10.0-1127 and update kernel.** Kernel updates have been made and are included in the release.
 ------
 - **I95-38078 CVE updates.** Addressed latest CVEs.
 ------
-- **I95-38119 Entry insertion into FIB causes issues with lookup returning a less specific match.**
+- **I95-38119 Entry insertion into FIB causes issues with lookup returning a less specific match.** A stronger lookup strategy has been implemented to provide accurate results.
 
 ## Release 4.5.2
 
