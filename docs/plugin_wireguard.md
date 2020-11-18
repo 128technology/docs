@@ -615,3 +615,12 @@ Example:
 Aug 05 14:32:40 dev-fitlet systemd[1]: Starting Handler for wireguard peer and network config wg/profile/1...
 Aug 05 14:32:40 dev-fitlet node[32315]: '/etc/128technology/plugins/network-scripts/host/wg-profile-1/wg0.conf' written
 ```
+
+
+## Release Notes
+
+### Release 1.1.0
+
+- **PLUGIN-863** Kernel upgrade to version `3.10.0-1127.18.2` or later would cause a kernel panic when using `wireguard`.
+
+    _**Resolution**_ Upgrade the `wireguard` kernel module to a newer version which prevents the kernel panic on boot.
