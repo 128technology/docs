@@ -80,6 +80,16 @@ sidebar_label: 4.2
 ------
 - **I95-37457** `show rib` and `show bgp` do not support more than one pagination session. 
 ------
+- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.** Naming issues have been resolved with LDAP authentication. 
+------
+- **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.
+------
+- **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
+------
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limitingloginattempts) 
+------
+- **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
+------
 - **I95-37650** The 128T web UI incorrectly supports being embedded as an iFrame within another page.  
 ------
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
