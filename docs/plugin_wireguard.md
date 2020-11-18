@@ -624,3 +624,10 @@ Aug 05 14:32:40 dev-fitlet node[32315]: '/etc/128technology/plugins/network-scri
 - **PLUGIN-863** Kernel upgrade to version `3.10.0-1127.18.2` or later would cause a kernel panic when using `wireguard`.
 
     _**Resolution**_ Upgrade the `wireguard` kernel module to a newer version which prevents the kernel panic on boot.
+
+#### Caveats
+- **PLUGIN-922** Wireguard kernel module doesn't work with `3.10.0-1160` and newer kernels.
+
+  _**Symptom:**_ - When upgrading from a 128T version with older kernel to a version with `3.10.0-1160` or newer kernel the wireguard kernel modules are not available and the wireguard peers will not come up as a result.
+
+  _**Corrective Action:** - Downgrade to the 128T version with the older kernel.
