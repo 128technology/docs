@@ -7,13 +7,13 @@ sidebar_label: 4.5
 
 ### New Features and Improvements
 
-- **I95-34975/I95-34977 CLI changes for `show session`.** The `show session` command has been enhanced to allow the display of a specific session by entering the session-ID. *need to add link to `show session` command and add "by session id" info.* **Featurette**
+- **I95-34924 CLI changes for `show sessions`.** The `show sessions` command has an additional subcommand `by-id` that will display a specific session by entering the session-ID. See [show sessions](cli_reference.md/#showsessions) for additional details.
 ------
-- **I95-36490 Provisional Down Interface state.** The `provisional-down` interface state has been added to allow an interface to be brought down for adminstrative purposes. *add CLI command for `provisional-down`* **Feature**
+- **I95-36122 Provisional Down Interface.** The `provisional-down` interface state has been added to allow an interface to be brought down for adminstrative purposes. *add CLI command for `provisional-down`* **Feature**
 ------
-- **I95-36500 `show device-interface` updates to display provisional status.** Updates made to the show device interface command. *document these in the PCLI sections with provisional examples*  **Featurette**
+- **Remove this but add the content to the feature above: `show device-interface` updates to display provisional status.** Updates made to the show device interface command. *document these in the PCLI sections with provisional examples*  **Featurette**
 ------
-- **I95-37855 Configurable Way-point allocation.** `max-way-points` is now dynamically configurable. Please see `max way points` for more details.  **Feature**
+- **I95-37855 / 38168 Configurable Way-point allocation.** `max-way-points` is now dynamically configurable. Please see `max way points` for more details.  **Feature** requires a reboot after configuring This feature does not honor dynamic reconfig. restart the 128t. 
 ------
 
 ### Resolved Issues
@@ -21,17 +21,17 @@ sidebar_label: 4.5
 ------
 - **I95-35987 Downloading exported config files does not preserve the file name.** The download process correctly preserves the file name. 
 ------
-- **I95-36910 Failed to setup IP address on linux interface when VLAN is configured.** 
+- **I95-36656 Asset-ID not included in Quickstart file.** Updates have been made to always include the Asset-ID in the quickstart file. 
+------
+- **I95-36910 Failed to setup IP address on linux interface when VLAN is configured.** IP addresses are now setup correctly. 
 ------
 - **I95-37225 Routers disconnect from their Conductors.** Improved the handling of clock drift between multiple worker cores within the datapath.
 ------
-- **I95-37457 `show rib` and `show bgp` do not support more than one pagination session.**
+- **I95-37457 `show rib` and `show bgp` do not support more than one pagination session.** Pagination issues have been resolved for `show rib` and `show bgp`. 
 ------
-- **I95-37504 Mars returns nothing when expecting values.** (related to 33959?)
+- **I95-37514 App-ID result is stuck pending if script is not executable.** App-ID results are no longer held pending. 
 ------
-- **I95-37514 App-ID result is stuck pending if script is not executable.**
-------
-- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.**
+- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.** Naming issues have been resolved with LDAP authentication. 
 ------
 - **I95-37638 Duplicate Assets showing in CLI.** Resolved an issue where there were duplicate values in the output of `show assets`.
 ------
@@ -39,7 +39,7 @@ sidebar_label: 4.5
 ------
 - **I95-37643 Accounts with the role of "user" have access to plugin REST API resources.** Account privileges have been reviewed and updates have been made to remediate this vulnerability. 
 ------
-- **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+- **I95-37644 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
 ------
 - **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limitingloginattempts) 
 ------
@@ -47,7 +47,7 @@ sidebar_label: 4.5
 ------
 - **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
 ------
-- **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.**
+- **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.** The 128T UI does not support embedded iFrames.
 ------
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
@@ -59,7 +59,7 @@ sidebar_label: 4.5
 ------
 - **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
 ------
-- **I95-37791 Search 128T Crashes on unknown config.**
+- **I95-37791 128T Search crashes on an unknown config.** This issue has been resolved, the 128T search no longer encounters issues with leftover plugins. 
 ------
 - **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets.
 ------
@@ -71,9 +71,7 @@ sidebar_label: 4.5
 ------
 - **I95-37823 Ensure the "sticky bit" is set correctly on all world-writable directories.** The bit is set to protect all world-writable directories.  
 ------
-- **I95-37824 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
-------
-- **I95-37826 Ensure permissions on bootloader config are configured.** Bootloader config file permissions are appropriately set. 
+- **I95-37825 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
 ------
 - **I95-37828 Ensure core dumps are restricted.** Coredump tuning has been updated with the latest security settings, and will not be collected on processes with privilege escalation.
 ------
@@ -89,9 +87,9 @@ sidebar_label: 4.5
 ------
 - **I95-38008 Automated Provisioner race condition.** Resolved an issue causing a race condition when multiple events arrived at the same time.  
 ------
-- **I95-38012/I95-38013 Remediate CVE's for kernel-3.10.0-1127 and update kernel.** Kernel updates have been made and are included in the release.
+- **I95-38012 Remediate CVE's for kernel-3.10.0-1127 and update kernel.** Kernel updates have been made and are included in the release.
 ------
-- **I95-38078 CVE updates.** Addressed latest CVEs.
+- **I95-38015/I95-38078 CVE updates.** Addressed latest CVEs.
 ------
 - **I95-38119 Entry insertion into FIB causes issues with lookup returning a less specific match.** A stronger lookup strategy has been implemented to provide accurate results.
 

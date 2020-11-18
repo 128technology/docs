@@ -6468,7 +6468,7 @@ Displays active sessions passing through the 128T router
 #### Usage
 
 ```
-show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [node <node>] router <router>
+show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [by-id] [node <node>] router <router>
 ```
 
 ##### Keyword Arguments
@@ -6487,11 +6487,12 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 
 | name | description |
 | ---- | ----------- |
+| by-id| &lt;session-id&gt; |
 | top | &lt;bandwidth&gt; |
 
 #### Description
 
-The _show sessions_ command displays active sessions passing through the 128T router (or the node specified by the optional _node-name_ argument. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session.
+The _show sessions_ command displays active sessions passing through the 128T router. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session. Additionally, you can specify the node using the optional _node-name_ argument, and the session-id using the _by-id_ subcommand. 
 
 The NAT IP and Port fields will be populated whenever a session is subject to source NAT (see _source-nat_ later in this reference guide for more information). It also shows the timeout value that will cause the session to expire if it remains idle for that number of seconds.
 
