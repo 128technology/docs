@@ -54,11 +54,9 @@ sidebar_label: 4.2
 ------
 - **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration
 ------
-- **I95-36012** `show device-interface` displays incorrect values for speed and duplex for LTE interfaces
-------
-- **I95-36109** Sessions may not reestablish properly on a fail-over between different routers to the same destination router (e.g., Session originates on R1 to R2. Later, the same session fails over to traverse R3 to R2)
-------
 - **I95-36149** Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault.
+------
+- **I95-36341** A race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault.
 ------
 - **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs
 ------
