@@ -7,82 +7,64 @@ sidebar_label: 4.2
 
 ### Resolved Issues
 
-- **I95-18807** Removed an error displayed in journal due to imudp module loaded by rsyslog daemon.
+- **I95-18807 An error displays in the journal due to imudp module loaded by rsyslog daemon.** The error condition has been resolved and the error no longer displays. 
+------
+- **I95-32298 KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down".** The KNI interfaces now transition smoothly. 
+------
+- **I95-33594 Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting.** The BGP neighbor now connects correctly.
+------
+- **I95-33989 Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`.** Resolved conflicting validation operation messaging. 
 
-  _**Symptoms:**_ The following message can be seen in the journal:
-  ```
-  rsyslogd[1337]: imudp: module loaded, but no listeners defined - no input will be gathered [v8.24.0 try http://www.rsyslog.com/e/2212 ]
-  ```
 ------
-- **I95-32298 KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down".**
+- **I95-34649 `best-effort` path handling for `proportional` load balancing is not honored by service-policy.** Path handling for `best effort` load balancing is handled correctly. 
 ------
-- **I95-33594 Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting.**
+- **I95-34650 In a multihop SVR scenario, the system may incorrectly attribute incoming packets as coming from a different peer path.** This has been resolved and no longer results in packet loss.
 ------
-- **I95-33989** Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`
-
-  _**Symptom:**_ The following can be seen in the PCLI output:
-  ```
-  ✖ Validating...
-  % Error: Candidate configuration is invalid:
-  1. A request of type validate is already in progress. The first request was started 13 seconds ago
-  ```
-  Until the system is upgraded to 4.2.9, this issue will resolve itself after the background tasks have completed.
+- **I95-35111 `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.** The error is no longer thrown when multiple NTP servers are configured and at least one is reachable.
 ------
-- **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy.
+- **I95-35406 Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T.** The shutdown race condition no longer occurs. 
 ------
-- **I95-34650** In a multihop SVR scenario, the system may incorrectly attribute incoming packets as coming from a different peer path. This results in packet loss until the load-balancer learns of the loss and migrates the session.
-
-  _**Symptom:**_ `show peers` will show the physically disconnected peer as UP while in this state.
+- **I95-35694 A `service-route` of type `host` results in an invalid service path during session establishment.** This issue has been resolved by adding a missing gateway-ip address to the process.  
 ------
-- **I95-35111** `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server
-
-  _**Conditions:**_ When multiple NTP servers are configured, at least one is reachable and at least one is not reachable
+- **I95-35701 Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route.** Configration validation no longer rejects the valid configuration. 
 ------
-- **I95-35406** Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T.
+- **I95-35781 Rare race condition during `rotate logs` PCLI command may cause applications to fault.** The `rotate logs` PCLI command no longer causes the race condition. 
 ------
-- **I95-35694** A `service-route` of type `host` results in an invalid service path during session establishment.
+- **I95-35799 When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions.** This issue has been resolved.
 ------
-- **I95-35701** Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route
+- **I95-35927 When deleting a VLAN network interface and simultaneously assigning its VLAN ID to the only other remaining network interface on the same device interface, future operational state changes on that interface may be ignored.** This issue has been resolved. 
 ------
-- **I95-35781** Rare race condition during `rotate logs` PCLI command may cause applications to fault
+- **I95-35933 `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces.** The correct speeds are now displayed for `show device-interface`. 
 ------
-- **I95-35799** When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions
+- **I95-35935 Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration.** The router-based conductor map has been separated from the global conductor map.
 ------
-- **I95-35927** When deleting a VLAN network interface and simultaneously assigning its VLAN ID to the only other remaining network interface on the same device interface, future operational state changes on that interface may be ignored.
+- **I95-36149 Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault.** Updated to verify the order of operations and prevent the fault.
 ------
-- **I95-35933** `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces
+- **I95-36341 A race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault.** The race condition has been resolved. 
 ------
-- **I95-35935** Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration
+- **I95-36356 Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs.** Changes to the BGP `graceful-restart restart-time` no longer cause a process fault.
 ------
-- **I95-36149** Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault.
+- **I95-36394 Auto-generated conductor service names that include a '.' will fail to commit configuration.** This issue has been resolved.
 ------
-- **I95-36341** A race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault.
+- **I95-36525 TLS 1.0 is no longer supported.**
 ------
-- **I95-36356** Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs
+- **I95-36632 Empty office365 metadata file results in HTTP 400 bad request error.** Office365 modules no longer generate bad requests. 
 ------
-- **I95-36394** Auto-generated conductor service names that include a '.' will fail to commit configuration
-
-  _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
+- **I95-36672 Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.** Traffic on the device interface is handled before deleting the filters. 
 ------
-- **I95-36525** TLS 1.0 is no longer supported.
+- **I95-36770 Salt minion log file was not being properly rotated.** The log file is now rotated correctly.
 ------
-- **I95-36632** Empty office365 metadata file results in HTTP 400 bad request error.
+- **I95-36841 TCP RST can cause the highway process to fault on a SVR path performing UDP transform.** TCP resets generate properly into SVR when UDP transform is enabled.
 ------
-- **I95-36672** Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.
+- **I95-36873 Alarms generated by a router in an authority are incorrectly sent as SNMP traps from all other routers in the authority.** Alarms from other routers are now correctly filtered.
 ------
-- **I95-36770** Salt minion log file was not being properly rotated.
+- **I95-36927 A race condition exists that can cause a fault in the highway process during session setup and configuration changes, that will remove the BGP service route path.** This race condition has been resolved. 
 ------
-- **I95-36841** TCP RST can cause the highway process to fault on a SVR path performing UDP transform.
+- **I95-37457 `show rib` and `show bgp` do not support more than one pagination session.** The  routing service agent show commands no longer cache the text output when there are more lines than requested.  
 ------
-- **I95-36873** Alarms generated by a router in an authority are incorrectly sent as SNMP traps from all other routers in the authority.
+- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.** Naming issues causing LDAP authentication failures have been resolved. 
 ------
-- **I95-36927** A race condition exists that can cause a fault in the highway process during session setup and configuration changes, that will remove the BGP service route path.
-------
-- **I95-37457** `show rib` and `show bgp` do not support more than one pagination session. 
-------
-- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.** Naming issues have been resolved with LDAP authentication. 
-------
-- **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.
+- **I95-37588 Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.** Resolved the issue where a managed router had the incorrect IP address.
 ------
 - **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
 ------
@@ -90,7 +72,7 @@ sidebar_label: 4.2
 ------
 - **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
 ------
-- **I95-37650** The 128T web UI incorrectly supports being embedded as an iFrame within another page.  
+- **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.** The 128T Web UI does not support iFrame embedding.
 ------
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
