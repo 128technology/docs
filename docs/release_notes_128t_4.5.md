@@ -7,13 +7,13 @@ sidebar_label: 4.5
 
 ### New Features and Improvements
 
-- **I95-34924 CLI changes for `show sessions`.** The `show sessions` command has an additional subcommand `by-id` that will display a specific session by entering the session-ID. See [show sessions](cli_reference.md/#showsessions) for additional details.
+- **I95-34924 CLI changes for `show sessions`.** The `show sessions` command has an additional subcommand `by-id` that will display a specific session by entering the session-ID. See [show sessions](cli_reference.md#show-sessions) for additional details.
 ------
-- **I95-36122 Provisional Down Interface.** The `provisional-down` interface state has been added to allow an interface to be brought down for adminstrative purposes. *add CLI command for `provisional-down`* **Feature**
+- **I95-36122 Provisional Down Interface.** The `provisional-down` interface state has been added to allow an interface to be brought down for adminstrative purposes. *add CLI command for `provisional-down`* 
 ------
-- **Remove this but add the content to the feature above: `show device-interface` updates to display provisional status.** Updates made to the show device interface command. *document these in the PCLI sections with provisional examples*  **Featurette**
+- **Remove this but add the content to the feature above: `show device-interface` updates to display provisional status.** Updates made to the show device interface command. *document these in the PCLI sections with provisional examples* 
 ------
-- **I95-37855 / 38168 Configurable Way-point allocation.** `max-way-points` is now dynamically configurable. Please see `max way points` for more details.  **Feature** requires a reboot after configuring This feature does not honor dynamic reconfig. restart the 128t. 
+- **I95-37855 Configurable Way-point allocation.** `max-way-points` is now dynamically configurable. Please see `max way points` for more details. 
 ------
 
 ### Resolved Issues
@@ -41,7 +41,7 @@ sidebar_label: 4.5
 ------
 - **I95-37644 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
 ------
-- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limitingloginattempts) 
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md#limiting-login-attempts) 
 ------
 - **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
 ------
@@ -49,7 +49,7 @@ sidebar_label: 4.5
 ------
 - **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.** The 128T UI does not support embedded iFrames.
 ------
-- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
+- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md#file-upload-limitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
 - **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
 ------

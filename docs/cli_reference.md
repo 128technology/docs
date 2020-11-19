@@ -6502,8 +6502,8 @@ Various services and tenants may display with surrounding braces to indicate tha
 The contents of the table will vary based upon the software version in use. This applies when, for example, a conductor running a new software version requests session table data from routers running older software versions.
 :::
 
-#### Example
-
+#### Examples
+`show sessions`
 ```
 admin@gouda.novigrad# show sessions
 Fri 2020-04-17 16:55:34 UTC
@@ -6522,7 +6522,67 @@ Node: gouda
  1ee1761c-a193-413c-889f-41fd61fe5242   fwd   Internet      lanSubnet   lan           0   udp     192.168.0.72         55723   208.67.222.222          443   96.230.191.130       22918   false                  1891   0 days  0:00:11
  1ee1761c-a193-413c-889f-41fd61fe5242   rev   Internet      lanSubnet   wan           0   udp     208.67.222.222         443   96.230.191.130        22918   0.0.0.0                  0   false                  1891   0 days  0:00:11
 ```
-
+`show sessions by-id`
+```
+admin@node1.seattle-site-01# show sessions by-id cea963be-be0b-4a9a-9368-7956b3975687                                                                                                                                                                          
+Thu 2020-11-12 18:49:01 UTC
+✔ Retrieving session information...
+============================================================================================================================================================================================================
+ seattle-site-01.node1    Session ID: cea963be-be0b-4a9a-9368-7956b3975687
+============================================================================================================================================================================================================
+ Service name:                      internet
+ Session source:                     SourceType: PUBLIC
+ Session type:                      HTTPS
+ Service class:                     Bronze
+ Source tenant:                     seattle-reid.field-eng.corp
+ Peer name:                         N/A
+ Inter node:                        N/A
+ Inter router:                      N/A
+ Ingress source nat:                N/A
+ Payload security policy:           encrypt-hmac-disabled
+ Common name info:                  N/A
+ Session keys:
+     Forward session key:           [discriminator 42949672960, tenant seattle-reid.field-eng.corp, peer <unknownPeer>, src ip 172.25.128.59, dest ip 23.45.228.49, src port 38562, dest port 443, proto 6]
+     Reverse session key:           [discriminator 42949672960, tenant seattle-reid.field-eng.corp, peer <unknownPeer>, src ip 23.45.228.49, dest ip 96.93.108.35, src port 443, dest port 61291, proto 6]
+ State info:
+     Session state:                 ESTABLISHED
+     Redundancy state:              SYNCED
+ Time info:
+     Start time:                    0 days  0:02:00
+     Ttl duration for database:     1900
+ Forward flows:
+     Key:                           [src ip 172.25.128.59, dest ip 23.45.228.49, src l4 port 38562, dest l4 port 443, proto 6, vlan 6, device port 3]
+     Direction:                     forward
+     Tcp state:                     Established
+     Packets received:              30
+     Packets sent:                  30
+     Decrypt security policy:       <empty>
+     Action list:                    DpiIngress TtlValidateIpv4 TcpStateMachine IpHeaderTransform EthernetHeaderTransform AppForward
+     Time to live:                  1781
+     Path index:                    0
+     Attributes:
+         Path key:                  NextHop : 1-1.0=96.93.108.38, destination Ip <empty>/128
+         Arp status:                Valid
+         Waypoint key:              <empty>
+         Source nat key:            dynamic source nat; address 96.93.108.35; port 61291; protocol tcp (6)
+         Metadata security policy:  <empty>
+ Reverse flows:
+     Key:                           [src ip 23.45.228.49, dest ip 96.93.108.35, src l4 port 443, dest l4 port 61291, proto 6, vlan 0, device port 1]
+     Direction:                     reverse
+     Tcp state:                     Established
+     Packets received:              31
+     Packets sent:                  31
+     Decrypt security policy:       <empty>
+     Action list:                    TtlValidateIpv4 TcpStateMachine DpiEgress IpHeaderTransform EthernetHeaderTransform AppForward
+     Time to live:                  1781
+     Path index:                    0
+     Attributes:
+         Path key:                  NextHop : 1-3.6=172.25.128.59, destination Ip 172.25.128.59/32
+         Arp status:                Valid
+         Waypoint key:              <empty>
+         Source nat key:            <empty>
+         Metadata security policy:  <empty>
+```
 #### Version History
 
 | Release | Modification                |
@@ -6530,6 +6590,7 @@ Node: gouda
 | 1.0.0   | This feature was introduced |
 | 3.0.0   | Added _node_ keyword to enforce PCLI consistency |
 | 3.1.0   | Was _show flows_ - Substantially reformatted output |
+| 4.5.3   | Added _by-id_ subcommand |
 
 ## `show sessions top bandwidth`
 
