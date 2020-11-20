@@ -4,6 +4,12 @@ sidebar_label: 4.2
 ---
 
 ## Release 4.2.9
+:::warning
+SSH Root Login is not permitted.
+
+Before upgrading, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of remote management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information.
+:::
+
 
 ### Resolved Issues
 
@@ -22,6 +28,8 @@ sidebar_label: 4.2
 - **I95-35111 `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.** The error is no longer thrown when multiple NTP servers are configured and at least one is reachable.
 ------
 - **I95-35406 Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T.** The shutdown race condition no longer occurs. 
+------
+- **I95-35567, I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
 ------
 - **I95-35694 A `service-route` of type `host` results in an invalid service path during session establishment.** This issue has been resolved by adding a missing gateway-ip address to the process.  
 ------
@@ -49,6 +57,11 @@ sidebar_label: 4.2
 ------
 - **I95-36632 Empty office365 metadata file results in HTTP 400 bad request error.** Office365 modules no longer generate bad requests. 
 ------
+- **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
+:::note
+As part of the SSH hardening process, inactive SSH sessions will be logged out after 60 minutes. Please see [Access Management](config_access_mgmt.md) for additional information.
+:::
+------
 - **I95-36672 Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.** Traffic on the device interface is handled before deleting the filters. 
 ------
 - **I95-36770 Salt minion log file was not being properly rotated.** The log file is now rotated correctly.
@@ -67,7 +80,11 @@ sidebar_label: 4.2
 ------
 - **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
 ------
+- **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+------
 - **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limiting-login-attempts) 
+------
+- **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
 ------
 - **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
 ------
