@@ -5,15 +5,20 @@ sidebar_label: 4.5
 
 ## Release 4.5.3
 
+:::warning
+SSH Root Login is not permitted. 
+
+Before upgrading, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of remote management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information. 
+:::
+
 ### New Features and Improvements
 
 - **I95-34924 CLI changes for `show sessions`.** The `show sessions` command has an additional subcommand `by-id` that will display a specific session by entering the session-ID. See [show sessions](cli_reference.md#show-sessions) for additional details.
 ------
-- **I95-36122 Provisional Down Interface.** The `provisional-down` interface state has been added to allow an interface to be brought down for adminstrative purposes. *add CLI command for `provisional-down`* 
+- **I95-36122 Provisional Down Interface.** The `provisional-down` interface state has been added to allow an interface to be brought down for adminstrative purposes. 
 ------
-- **Remove this but add the content to the feature above: `show device-interface` updates to display provisional status.** Updates made to the show device interface command. *document these in the PCLI sections with provisional examples* 
-------
-- **I95-37855 Configurable Way-point allocation.** `max-way-points` is now dynamically configurable. Please see `max way points` for more details. 
+- **I95-37855 Configurable waypoint allocation.** The `max-way-points` value is configurable at the adjacency level for each associated inter-router path. 
+The `max-inter-node-way-points` value is configurable at the router level for all inter-node paths. Please refer to [`max-inter-node-way-points`](config_reference_guide.md#max-inter-node-way-points) and [`max-way-points`](config_reference_guide.md#max-way-points) for more details. 
 ------
 
 ### Resolved Issues
@@ -50,6 +55,11 @@ sidebar_label: 4.5
 - **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.** The 128T UI does not support embedded iFrames.
 ------
 - **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md#file-upload-limitations) that make it impossible to import or upload files that do not match tar.gz format. 
+------
+- **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
+:::note
+As part of the SSH hardening process, inactive SSH sessions will be logged out after 60 minutes. Please see [Access Management](config_access_mgmt.md) for additional information.
+:::
 ------
 - **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
 ------
