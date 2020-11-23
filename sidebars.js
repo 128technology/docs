@@ -12,21 +12,26 @@ module.exports = {
     ],
     "Introduction": [
       "intro_getting_started",
-      "intro_installation",
+     ],
+    "Deployment Considerations": [   
       "intro_system_reqs",
-      "intro_prepare_OS",
-      "intro_installation_installer",
-
+     ],
+    "Installation Process": [       
+      "intro_installation",
       "intro_downloading_iso",
-      "intro_installation_bootable_media",
       "intro_creating_bootable_usb",
-      "intro_installation_otp_iso",
-      "intro_ztp",
-
+      "intro_installation_bootable_media", 
+      "intro_basic_conductor_config",
+      "intro_basic_router_config",
+      "intro_otp_iso_install",
+      ],
+    "Cloud Installations":[ 
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
-      "intro_installation_azure",
-
+      "intro_installation_azure", 
+    ],
+    "Supporting Information - Appendix":[
+      "intro_installation_installer",
       "intro_upgrading",
       "intro_rollback",
     ],
@@ -51,17 +56,18 @@ module.exports = {
         "type": "category",
         "label": "Configuration",
         "items": [
-          "config_asset_connection_resiliency",
           "config_basics",
+          "config_access_mgmt",
+          "config_asset_connection_resiliency",
           "config_bgp",
           "config_reference_guide",
           "config_audit_log",
           "config_dhcp",
           "config_dns_proxy",
-          "config_dual_router_ha",
           "config_ldap",
-          "config_ha",
           "config_management_over_forwarding",
+          "config_ha",
+          "config_dual_router_ha",
           "config_non_forwarding_ha_interfaces",
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",

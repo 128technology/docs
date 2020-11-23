@@ -225,7 +225,7 @@ The _priority_ value indicates, all things being otherwise equal, an administrat
 When configuring two redundancy-groups with the same _priority_ value, the 128T router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure – but is neither guaranteed to be non-revertive. For this reason, it is suggested that you configure redundancy-group elements with different _priority_ values.
 :::
 
-##Sample Configuration
+## Sample Configuration
 Below is a sample, minimal configuration which shows the inclusion of both a fabric interfaces as well as redundancy-groups.  This topology consists of 4 interfaces per node.  1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
 
     config

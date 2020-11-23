@@ -20,6 +20,11 @@ The Installer will detect non-root usage and exit with this message:
 You must run the Installer as root.
 ```
 
+:::note
+
+To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing an installation, upgrade or rollback.
+:::
+
 :::
 
 Use the `-h`/`--help` flag to display help information for the `install128t`
