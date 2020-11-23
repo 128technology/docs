@@ -20,7 +20,7 @@ To avoid SSH session timeout during installation, it is strongly recommended to 
    ```
 3. Enter the command to launch the interactive installer wizard.
    ```
-   install128t
+   sudo install128t
    ```
 
 4. Skip the step regarding the installation of a certificate by selecting *No* at the prompt.
