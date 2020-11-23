@@ -7,22 +7,38 @@ Occasionally you may want or need to revert to a previously running version of 1
 
 #### Rolling Back using the Interactive Installer
 
-1. As a Linux superuser (or as a Linux user with *sudoers* capability) run the Interactive Installer by issuing the command
+1. Launch a Linux command prompt window on the node you wish to upgrade.
 
+:::note
+To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing a manual installation.
+:::
+
+2. Create a screen and attach to it.
+   ```
+   screen -d -m -s <name-of-screen-session>
+   screen -x <name-of-screen-session>
+   ```
+3. Enter the command to launch the interactive installer wizard.
    ```
    install128t
    ```
 
-2. Skip the step regarding the installation of a certificate by selecting *No* at the prompt.
+4. Skip the step regarding the installation of a certificate by selecting *No* at the prompt.
 
-3. The Interactive Installer will determine that 128T software is already installed. In the dialog box, navigate to the item labeled Roll Back and press the space bar to select the item.
+5. The Interactive Installer will determine that 128T software is already installed. In the dialog box, navigate to the item labeled Roll Back and press the space bar to select the item.
    :::tip
    The version of software that will be running after executing the roll back function is displayed in the footer of the window.
    :::
 
-4. Navigate to the OK button and press `enter` to select it.
+6. Navigate to the OK button and press `enter` to select it.
 
-5. Follow the on-screen prompts to complete the Roll Back operation.
+7. Follow the on-screen prompts to complete the Roll Back operation.
+
+8. Detach from the Screen utility.
+   ```
+   ctrl+a
+   d
+   ```
 
 #### Rolling Back using Automated Provisioner
 
