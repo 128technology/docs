@@ -10,7 +10,7 @@ Occasionally you may want or need to revert to a previously running version of 1
 1. Launch a Linux command prompt window on the node you wish to upgrade.
 
 :::note
-To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing a manual installation.
+To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing an rollback in interactive mode.
 :::
 
 2. Create a screen and attach to it.
