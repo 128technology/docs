@@ -29,8 +29,6 @@ Schema for the preferences file used by the 128T Installer.
 | [rollback](#rollback)                     | `object`  | Optional | cannot be null | [Installer Preferences File](#rollback-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/rollback")                     |
 | [download](#download)                     | `object`  | Optional | cannot be null | [Installer Preferences File](#download-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/download")                     |
 | [import](#import)                         | `object`  | Optional | cannot be null | [Installer Preferences File](#import-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/import")                         |
-| [repository](#repository)                 | `object`  | Optional | cannot be null | [Installer Preferences File](#repository-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/repository")                 |
-| [authentication](#authentication)         | `object`  | Optional | cannot be null | [Installer Preferences File](#authentication-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/authentication")         |
 | [enable-128T](#enable-128T)               | `boolean` | Optional | cannot be null | [Installer Preferences File](#enable-128t "http&#x3A;//128technology.com/installerPreferencesFile#/properties/enable-128T")               |
 | [start-128T](#start-128T)                 | `boolean` | Optional | cannot be null | [Installer Preferences File](#start-128t "http&#x3A;//128technology.com/installerPreferencesFile#/properties/start-128T")                 |
 | [reboot-if-required](#reboot-if-required) | `boolean` | Optional | cannot be null | [Installer Preferences File](#reboot-if-required "http&#x3A;//128technology.com/installerPreferencesFile#/properties/reboot-if-required") |
@@ -104,36 +102,6 @@ Import a 128T ISO or packages directory into the local repository.
 #### import Type
 
 `object` ([Import](#import-schema))
-
-### repository
-
-Manage 128T software repositories.
-
-`repository`
-
-- is optional
-- cannot be null
-
-#### repository Type
-
-`object` ([Repository](#repository-schema))
-
-### authentication
-
-Authentication for downloading and installing 128T software.
-
-`authentication`
-
-- is optional
-- cannot be null
-
-#### authentication Type
-
-`object` ([Authentication](#authentication-schema))
-
-#### authentication Constraints
-
-**minimum number of properties**: the minimum number of properties for this object is: `1`
 
 ### enable-128T
 
@@ -339,7 +307,7 @@ Cleanly install 128T with the given options after wiping away any traces of prev
 
 ### yum-certificate
 
-Deprecated; use 'authentication.certificate' instead
+The contents of a yum certificate file to use for authenticating with the 128 yum repository. Required if a valid 128T certificate was not previously installed. Otherwise this will overwrite an existing certificate.
 
 `yum-certificate`
 
@@ -487,7 +455,7 @@ Upgrade 128T to a newer version.
 
 ### yum-certificate
 
-Deprecated; use 'authentication.certificate' instead.
+The contents of a yum certificate file to use for authenticating with the 128 yum repository. Required if 128T was not previously installed via the Installer. Otherwise this will overwrite an existing certificate.
 
 `yum-certificate`
 
@@ -653,7 +621,7 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 
 ### yum-certificate
 
-Deprecated; use 'authentication.yum-certificate' instead.
+The contents of a yum certificate file to use for authenticating with the 128 yum repository. Required if 128T was not previously installed via the Installer. Otherwise this will overwrite an existing certificate.
 
 `yum-certificate`
 
@@ -730,293 +698,3 @@ The path to package directory to be imported.
 #### packages-path Type
 
 `string`
-
-## Repository Schema
-
-```txt
-http://128technology.com/installerPreferencesFile#/properties/repository
-```
-
-Manage 128T software repositories.
-
-### repository Type
-
-`object` ([Repository](#repository-schema))
-
-## Repository Properties
-
-| Property            | Type     | Required | Nullable       | Defined by                                                                                                                                                                               |
-| :------------------ | -------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [enable](#enable)   | `object` | Optional | cannot be null | [Installer Preferences File](#enable-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/repository/properties/enable")   |
-| [disable](#disable) | `object` | Optional | cannot be null | [Installer Preferences File](#disable-schema "http&#x3A;//128technology.com/installerPreferencesFile#/properties/repository/properties/disable") |
-
-### enable
-
-Enable 128T software repositories. If a new authentication token is specified, an existing repository configuration will be updated to use the new token.
-
-`enable`
-
-- is optional
-- cannot be null
-
-#### enable Type
-
-`object` ([Enable](#enable-schema))
-
-### disable
-
-Disable 128T software repositories.
-
-`disable`
-
-- is optional
-- cannot be null
-
-#### disable Type
-
-`object` ([Disable](#disable-schema))
-
-## Enable Schema
-
-```txt
-http://128technology.com/installerPreferencesFile#/properties/repository/properties/enable
-```
-
-Enable 128T software repositories. If a new authentication token is specified, an existing repository configuration will be updated to use the new token.
-
-### enable Type
-
-`object` ([Enable](#enable-schema))
-
-## Enable Properties
-
-| Property                  | Type      | Required | Nullable       | Defined by                                                                                                                                                                                                                         |
-| :------------------------ | --------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [repos](#repos)           | `array`   | Optional | cannot be null | [Installer Preferences File](#repos "http&#x3A;//128technology.com/installerPreferencesFile#/properties/repository/properties/enable/properties/repos")           |
-| [persistent](#persistent) | `boolean` | Optional | cannot be null | [Installer Preferences File](#persistent "http&#x3A;//128technology.com/installerPreferencesFile#/properties/repository/properties/enable/properties/persistent") |
-
-### repos
-
-A list of 128T repositories to enable.
-
-`repos`
-
-- is optional
-- cannot be null
-
-#### repos Type
-
-an array of merged types ([Enabled Repo](#enabled-repo-schema))
-
-### persistent
-
-If false, enables the repo for this operation only. Does not apply to 'system' or 'legacy' repos (it will always be treated as false).
-
-`persistent`
-
-- is optional
-- cannot be null
-
-#### persistent Type
-
-`boolean`
-
-#### persistent Default Value
-
-The default value is:
-
-```json
-false
-```
-
-## Enabled Repo Schema
-
-```txt
-http://128technology.com/installerPreferencesFile#/properties/repository/properties/enable/properties/repos/items
-```
-
-A repository to enable.
-
-### items Type
-
-merged type ([Enabled Repo](#enabled-repo-schema))
-
-one (and only one) of
-
-- [Repository Type](#repository-type-schema "check type definition")
-- [System](#system-schema "check type definition")
-
-## System Schema
-
-```txt
-http://128technology.com/installerPreferencesFile#/properties/repository/properties/enable/properties/repos/items/oneOf/1
-```
-
-Allow the use of all configured and enabled RPM repositories.
-
-### System Type
-
-`string` ([System](#system-schema))
-
-### System Constraints
-
-**constant**: the value of this property must be equal to:
-
-```json
-"system"
-```
-
-## Disable Schema
-
-```txt
-http://128technology.com/installerPreferencesFile#/properties/repository/properties/disable
-```
-
-Disable 128T software repositories.
-
-### disable Type
-
-`object` ([Disable](#disable-schema))
-
-## Disable Properties
-
-| Property                  | Type      | Required | Nullable       | Defined by                                                                                                                                                                                                                           |
-| :------------------------ | --------- | -------- | -------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [repos](#repos)           | `array`   | Optional | cannot be null | [Installer Preferences File](#repos "http&#x3A;//128technology.com/installerPreferencesFile#/properties/repository/properties/disable/properties/repos")           |
-| [persistent](#persistent) | `boolean` | Optional | cannot be null | [Installer Preferences File](#persistent "http&#x3A;//128technology.com/installerPreferencesFile#/properties/repository/properties/disable/properties/persistent") |
-
-### repos
-
-A list of 128T repositories to disable.
-
-`repos`
-
-- is optional
-- cannot be null
-
-#### repos Type
-
-`string[]` ([Repository Type](#repository-type-schema))
-
-### persistent
-
-If false, disables the repo for this operation only. Does not apply to 'legacy' repo type (it will always be treated as false).
-
-`persistent`
-
-- is optional
-- cannot be null
-
-#### persistent Type
-
-`boolean`
-
-#### persistent Default Value
-
-The default value is:
-
-```json
-false
-```
-
-## Authentication Schema
-
-```txt
-http://128technology.com/installerPreferencesFile#/definitions/authentication
-```
-
-Authentication for downloading and installing 128T software.
-
-### authentication Type
-
-`object` ([Authentication](#authentication-schema))
-
-### authentication Constraints
-
-**minimum number of properties**: the minimum number of properties for this object is: `1`
-
-## Authentication Properties
-
-| Property                    | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                 |
-| :-------------------------- | -------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [username](#username)       | `string` | Optional | cannot be null | [Installer Preferences File](#username "http&#x3A;//128technology.com/installerPreferencesFile#/definitions/authentication/properties/username")       |
-| [token](#token)             | `string` | Optional | cannot be null | [Installer Preferences File](#token "http&#x3A;//128technology.com/installerPreferencesFile#/definitions/authentication/properties/token")             |
-| [certificate](#certificate) | `string` | Optional | cannot be null | [Installer Preferences File](#certificate "http&#x3A;//128technology.com/installerPreferencesFile#/definitions/authentication/properties/certificate") |
-
-### username
-
-Username for authentication.
-
-`username`
-
-- is optional
-- cannot be null
-
-#### username Type
-
-`string`
-
-#### username Constraints
-
-**minimum length**: the minimum number of characters for this string is: `1`
-
-### token
-
-API key to be used for authentication.
-
-`token`
-
-- is optional
-- cannot be null
-
-#### token Type
-
-`string`
-
-#### token Constraints
-
-**minimum length**: the minimum number of characters for this string is: `1`
-
-### certificate
-
-The contents of a certificate file to use for authenticating with the 128T RPM repository. If present, this will overwrite an existing certificate.
-
-`certificate`
-
-- is optional
-- cannot be null
-
-#### certificate Type
-
-`string`
-
-#### certificate Constraints
-
-**minimum length**: the minimum number of characters for this string is: `1`
-
-## Repository Type Schema
-
-```txt
-http://128technology.com/installerPreferencesFile#/definitions/repository-type
-```
-
-A 128T software repository.
-
-### repository-type Type
-
-`string` ([Repository Type](#repository-type-schema))
-
-### repository-type Constraints
-
-**enum**: the value of this property must be equal to one of the following values:
-
-| Value               | Explanation                                 |
-| :------------------ | ------------------------------------------- |
-| `"alpha"`           | 128T alpha software repository              |
-| `"beta"`            | 128T beta software repository               |
-| `"legacy"`          | 128T software repository for older releases |
-| `"prealpha"`        | 128T pre-alpha software repository          |
-| `"release"`         | 128T release software repository            |
-| `"plugins-alpha"`   | 128T alpha plugin repository                |
-| `"plugins-beta"`    | 128T beta plugin repository                 |
-| `"plugins-release"` | 128T release plugin repository              |
