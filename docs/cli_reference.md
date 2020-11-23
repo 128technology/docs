@@ -2841,6 +2841,60 @@ If a password is lost or forgotten and the account is inaccessible, the account 
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 
+
+## `set provisional-status`
+
+Set the provisional status of a specific interface to down, or returning it to the "up" state after taking it down. 
+
+#### Usage
+
+```
+set provisional-status [<node>] [<device>] <up/down>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | Identify the node where the device is located. |
+| device| Device on which the interface is located. |
+
+##### Subcommands
+
+| name | description |
+| ---- | ----------- |
+| Up/Down | Set the interface status to up or down. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show device-interface`](#show-device-interface) | Display detailed device interface information. |
+
+#### Description
+
+The `set provisional-status` command allows a specific interface to be brought down without a configuration change. This is useful in situations where you need to temporarily bring down a just device interface (i.e., to trigger an interface failover). 
+
+#### Example
+
+```
+admin@test1.Fabric128# set provisional-status node test1 10 down
+✔ Setting provisional status...
+Successfully set provisional status for device 10
+```
+```
+admin@test1.Fabric128# set provisional-status node test1 10 up
+✔ Setting provisional status...
+Successfully set provisional status for device 10
+```
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.5.3   | This feature was introduced |
+
+
 ## `shell`
 
 Execute a Unix shell command
@@ -3973,7 +4027,7 @@ Available to _admin_ and _user_.
 
 ## `show device-interface`
 
-Display detailed device interface information
+Display detailed device interface information.
 
 #### Usage
 
@@ -3985,7 +4039,7 @@ show device-interface [name <name>] [force] [router <router>] [node <node>] [<ve
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
 | name | device interface to display (if omitted, all will be displayed) |
 | node | node for which to display device interfaces |
 | router | router for which to display device interfaces (default: &lt;current router&gt;) |
@@ -4005,26 +4059,36 @@ Omitting all optional arguments will display detailed information on all device 
 #### Example
 
 ```
-admin@labsystem1.myRouter# show device-interface
-Fri 2016-12-09 11:14:58 EST
+admin@test1.Fabric128# show device-interface name 10
+Mon 2020-11-23 20:45:37 UTC
+
+✔ Retrieving device interface information...
 
 ========================================
- labsystem1.1
+ test1:10
 ========================================
  Type:                ethernet
- PCI Address:         0000:02:00.0
- MAC Address:         unavailable
+ Forwarding:          true
+ PCI Address:         0000:00:04.0
+ MAC Address:         fa:16:3e:16:42:6c
+
  Admin Status:        up
  Operational Status:  up
- Redundancy Status:   not-redundant
- in-octets:                    21234570
- in-unicast-pkts:                112463
+ Provisional Status:  up
+ Redundancy Status:   non-redundant
+ Speed:               1 Gb/s
+ Duplex:              full
+
+ in-octets:                           0
+ in-unicast-pkts:                     0
  in-errors:                           0
- out-octets:                    8991876
- out-unicast-pkts:                27786
+ out-octets:                          0
+ out-unicast-pkts:                    0
  out-errors:                          0
 
-Completed in 0.18 seconds
+ Plugin Info:         unavailable
+
+Completed in 0.17 seconds
 ```
 
 #### Version History
@@ -4034,6 +4098,7 @@ Completed in 0.18 seconds
 | 2.0.0   | This feature was introduced |
 | 3.0.0   | Added requirement for prepending keywords to the _device-interface-id_ and _node_ arguments to avoid command line ambiguity |
 | 3.2.0   | Device-interface is keyed by _name_ rather than _id_ |
+| 4.5.3   | Added support for Provisional Status |
 
 ## `show dhcp mappings`
 
