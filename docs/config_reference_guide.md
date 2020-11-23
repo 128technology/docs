@@ -1088,7 +1088,7 @@ Path:
 authority > router 
 
 Description:
-The *max-inter-node-way-points* field is configurable at the router level for all inter-node paths. Previously this number was set at 50,000 and was not configurable. Having access to more than 50,000 waypoints is useful in cases where sessions are failed over from the remote node. 
+The *max-inter-node-way-points* field is configurable at the router level for all inter-node paths. Previously this number was set at 50,000 and was not configurable. Having access to more than 50,000 waypoints is useful in cases where the number of concurrent sessions are greater than 50,000 and each of those sessions are required to survive a node failover. 
 
 :::note
 A router restart is required for this change to be applied.
@@ -1108,15 +1108,15 @@ Path:
 authority > router > device-interface > network-interface > adjacency
 
 Description:
-The *max-way-points* field is configurable at the adjacency/neighborhood level for each associated inter-router path. Previously this number was set at 50,000 and was not configurable. Having access to more than 50,000 waypoints is useful in cases where sessions are failed over from the remote node. 
-
-| Element | Type | Description |
-| --- | --- | --- |
-| value | string | Valid values: 50,000-1,000,000. |
+The *max-way-points* field is configurable at the adjacency/neighborhood level for each associated inter-router path. Previously this number was set at 50,000 and was not configurable. Having access to more than 50,000 waypoints is useful in cases where the number of concurrent sessions are greater than 50,000 and each of those sessions are required to survive a node failover. 
 
 :::note
 A router restart is required for this change to be applied.
 :::
+
+| Element | Type | Description |
+| --- | --- | --- |
+| value | string | Valid values: 50,000-1,000,000. |
 
 Version History:
 

@@ -15,7 +15,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 
 - **I95-34924 CLI changes for `show sessions`.** The `show sessions` command has an additional subcommand `by-id` that will display a specific session by entering the session-ID. See [show sessions](cli_reference.md#show-sessions) for additional details.
 ------
-- **I95-36122 Set interface provisional status.** The [`set provisional-status` interface state](cli_reference.md#set-provisional-status) has been added to allow an interface to be brought down for administrative purposes. [`show device-interface`](cli_reference.md#show-device-interface) has been updated to display the interface provisional status. Additionally, the provisional status can be controlled and queried through a [REST endpoint](api_rest_4.2.0.md). 
+- **I95-36122 Set interface provisional status.** The [`set provisional-status` interface state](cli_reference.md#set-provisional-status) has been added to allow an interface to be brought down for administrative purposes. [`show device-interface`](cli_reference.md#show-device-interface) has been updated to display the interface provisional status. 
 ------
 - **I95-37855 Configurable waypoint allocation.** The `max-way-points` value is configurable at the adjacency level for each associated inter-router path. 
 The `max-inter-node-way-points` value is configurable at the router level for all inter-node paths. Please refer to [`max-inter-node-way-points`](config_reference_guide.md#max-inter-node-way-points) and [`max-way-points`](config_reference_guide.md#max-way-points) for more details. 
