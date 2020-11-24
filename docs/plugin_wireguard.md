@@ -179,7 +179,7 @@ exit
 With this config committed, wireguard will be installed and set up on `dc1` and `dc2`, and it will generate a wireguard keypair automatically. Once the interface is fully installed, you can view the public wireguard key of the profile by using the CLI command `show device-interface router <router_name> name <profile_name>`. Example:
 
 ```
-admin@node1.dev-conductor# show device-interface router dc1 name wg-profile-1                                                                                                               
+admin@node1.dev-conductor# show device-interface router dc1 name wg-profile-1
 Wed 2020-08-05 16:46:41 UTC
 
 ===================================================================
@@ -280,7 +280,7 @@ exit
 
 ## Remote Service Agent
 
-You have a remote device that needs to be accessed as an agent of a service in your 128T network. In this example use case you have a remote IoT device that hosts a `thing` service with address `128.128.128.128/32`, which must be accessed by a tenant `technician`. 
+You have a remote device that needs to be accessed as an agent of a service in your 128T network. In this example use case you have a remote IoT device that hosts a `thing` service with address `128.128.128.128/32`, which must be accessed by a tenant `technician`.
 
 A remote IoT device has a wireguard peer with a public key of `Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=`. It will be given an address of `10.10.10.2` from the private network, and it will peer with the 128T router `r1` on the  `1.1.1.1` network-interface address.
 
@@ -307,7 +307,7 @@ config
           allowed-ip  10.10.10.2/32
         exit
       exit
-    
+
       node                 node1
         device-interface  eth1
           network-interface  eth1-net
@@ -345,7 +345,7 @@ The `PersistentKeepalive` in this wireguard configuration causes the peer to kee
 With the profile and peer configured on the 128T router `r1`, and wireguard configured on the remote IoT device, you can verify the device is keeping the connection alive by reviewing the `latest handshake` output of `show device-interface router <router_name> name <profile_name>`:
 
 ```
-admin@node1.dev-conductor# show device-interface router r1 name wg-profile-1                                                                                                                                                                                   
+admin@node1.dev-conductor# show device-interface router r1 name wg-profile-1
 Wed 2020-08-05 23:33:02 UTC
 
 ===================================================================
@@ -388,7 +388,7 @@ Completed in 0.25 seconds
 
 ### Service Routing
 
-Finally the `thing` service must be routed to the remote wireguard peer. 
+Finally the `thing` service must be routed to the remote wireguard peer.
 
 #### Service
 ```
@@ -524,7 +524,7 @@ show device-interface router <router_name> name <profile_name>
 
 Example:
 ```
-admin@node1.dev-conductor# show device-interface router r1 name wg-profile-1                                                                                                                                                                                   
+admin@node1.dev-conductor# show device-interface router r1 name wg-profile-1
 Fri 2020-08-07 13:35:22 UTC
 
 ===================================================================
@@ -610,8 +610,18 @@ journalctl -u 128T-handle-wireguard-peer-config@<profile_name>
 
 Example:
 ```
-[t128@dev-fitlet ~]$ sudo journalctl -u 128T-handle-wireguard-peer-config@wg-profile-1 
+[t128@dev-fitlet ~]$ sudo journalctl -u 128T-handle-wireguard-peer-config@wg-profile-1
 -- Logs begin at Sun 2012-01-01 00:37:26 UTC, end at Fri 2020-08-07 13:36:42 UTC. --
 Aug 05 14:32:40 dev-fitlet systemd[1]: Starting Handler for wireguard peer and network config wg/profile/1...
 Aug 05 14:32:40 dev-fitlet node[32315]: '/etc/128technology/plugins/network-scripts/host/wg-profile-1/wg0.conf' written
 ```
+
+
+## Release Notes
+
+### Release 1.1.0
+
+- **PLUGIN-863** A kernel panic condition occurs when running Wireguard with the kernel version `3.10.0-1127.18.2` or above.
+
+### Caveat
+- **PLUGIN-922** Wireguard does not work with the kernel version `3.10.0-1160` (and newer), which is installed with 128T versions 4.3.11 (and greater) and 4.5.3 (and greater).

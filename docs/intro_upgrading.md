@@ -66,7 +66,16 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
 
 1. Launch a Linux command prompt window on the node you wish to upgrade.
 
-2. Enter the command to launch the installer.
+   :::note
+   To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing an upgrade in interactive mode.
+   :::
+
+2. Create a screen and attach to it.
+   ```
+   screen -d -m -s <name-of-screen-session>
+   screen -x <name-of-screen-session>
+   ```
+3. Enter the command to launch the interactive installer wizard.
 
    ```
    sudo install128t
@@ -77,16 +86,22 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
    The `install128t` application will check to see if it has an update available, and will ask that you upgrade if it detects a newer version is available.
    :::
 
-3. Press the **enter** key to select **Begin** and start the installation wizard.
+4. Press the **enter** key to select **Begin** and start the installation wizard.
 
-4. When prompted, select **Upgrade**.<br/>**Result**: The application queries 128 Technology's software repository for new software.
+5. When prompted, select **Upgrade**.<br/>**Result**: The application queries 128 Technology's software repository for new software.
 
-5. Select the desired software version from the list of available options.
+6. Select the desired software version from the list of available options.
 
-6. Once the upgrade is complete, press the **enter** key to select **Yes** to start your software.
+7. Once the upgrade is complete, press the **enter** key to select **Yes** to start your software.
    :::note
    Your output may vary based upon the nature of the upgrade, occasion, various packages, and dependencies that 128T requires as part of the 128T Routing Software upgrade.
    :::
+   
+8. Detach from the Screen utility.
+   ```
+   ctrl+a
+   d
+   ```
 
 ## Routers with Restricted Internet Access
 
