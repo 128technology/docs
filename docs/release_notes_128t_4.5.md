@@ -3,9 +3,109 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
+## Release 4.5.3
+
+:::warning
+SSH Root Login is not permitted. 
+
+Before upgrading, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of remote management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information. 
+:::
+
+### New Features and Improvements
+
+- **I95-34924 CLI changes for `show sessions`.** The `show sessions` command has an additional subcommand `by-id` that will display a specific session by entering the session-ID. See [show sessions](cli_reference.md#show-sessions) for additional details.
+------
+- **I95-36122 Set interface provisional status.** The [`set provisional-status` interface state](cli_reference.md#set-provisional-status) has been added to allow an interface to be brought down for administrative purposes. [`show device-interface`](cli_reference.md#show-device-interface) has been updated to display the interface provisional status. 
+------
+- **I95-37855 Configurable waypoint allocation.** The `max-way-points` value is configurable at the adjacency level for each associated inter-router path. 
+The `max-inter-node-way-points` value is configurable at the router level for all inter-node paths. Please refer to [`max-inter-node-way-points`](config_reference_guide.md#max-inter-node-way-points) and [`max-way-points`](config_reference_guide.md#max-way-points) for more details. 
+------
+
+### Resolved Issues
+- **I95-35567, I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
+------
+- **I95-35987 Downloading exported config files does not preserve the file name.** The download process correctly preserves the file name. 
+------
+- **I95-36656 Asset-ID not included in Quickstart file.** Updates have been made to always include the Asset-ID in the quickstart file. 
+------
+- **I95-36910 Failed to setup IP address on linux interface when VLAN is configured.** IP addresses are now setup correctly. 
+------
+- **I95-37225 Routers disconnect from their Conductors.** Improved the handling of clock drift between multiple worker cores within the datapath.
+------
+- **I95-37457 `show rib` and `show bgp` do not support more than one pagination session.** Pagination issues have been resolved for `show rib` and `show bgp`. 
+------
+- **I95-37514 App-ID result is stuck pending if script is not executable.** App-ID results are no longer held pending. 
+------
+- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.** Naming issues have been resolved with LDAP authentication. 
+------
+- **I95-37638 Duplicate Assets showing in CLI.** Resolved an issue where there were duplicate values in the output of `show assets`.
+------
+- **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
+------
+- **I95-37643 Accounts with the role of "user" have access to plugin REST API resources.** Account privileges have been reviewed and updates have been made to remediate this vulnerability. 
+------
+- **I95-37644 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+------
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md#limiting-login-attempts) 
+------
+- **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
+------
+- **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
+------
+- **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.** The 128T UI does not support embedded iFrames.
+------
+- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md#file-upload-limitations) that make it impossible to import or upload files that do not match tar.gz format. 
+------
+- **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
+:::note
+As part of the SSH hardening process, inactive SSH sessions will be logged out after 60 minutes. Please see [Access Management](config_access_mgmt.md) for additional information.
+:::
+------
+- **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
+------
+- **I95-37680 nodeMonitor process may fault on shutdown of 128T.** `nodeMonitor` no longer faults on 128T shutdown.
+------
+- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.** The `delete sessions` command no longer creates a race condition. 
+------
+- **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
+------
+- **I95-37791 128T Search crashes on an unknown config.** This issue has been resolved, the 128T search no longer encounters issues with leftover plugins. 
+------
+- **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets.
+------
+- **I95-37806 Unable to delete sesions when a service no longer exists.** Services that no longer exist can now be deleted. 
+------
+- **I95-37819 Ensure rsyslog default file permissions are configured.** The default file permissions for log files created by rsyslog are set. 
+------
+- **I95-37822 Ensure the noexec option is set on the /dev/shm partition.** The shared memory partition /dev/shm is configured with the noexec mount option during initialization.
+------
+- **I95-37823 Ensure the "sticky bit" is set correctly on all world-writable directories.** The bit is set to protect all world-writable directories.  
+------
+- **I95-37825 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
+------
+- **I95-37828 Ensure core dumps are restricted.** Coredump tuning has been updated with the latest security settings, and will not be collected on processes with privilege escalation.
+------
+- **I95-37830 Ensure permissions on /etc/crontab and related cron files are configured.** The permissions on cron files have been updated with the latest security settings.
+------
+- **I95-37831 The default umask setting on user-created files must be more restrictive.** The default umask setting has been updated to be more restrictive. 
+------
+- **I95-37842 Inter-router flow move failure for sessions with same source/dest port (UDP/TCP/ICMP).** Inter-router flow movement now identifies session source when the source and destination port are the same. 
+------
+- **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration. 
+------
+- **I95-37908 The routingEngine.log is not rotated.** Log rotation has been updated to rotate the routingEngine log file.
+------
+- **I95-38008 Automated Provisioner race condition.** Resolved an issue causing a race condition when multiple events arrived at the same time.  
+------
+- **I95-38012 Remediate CVE's for kernel-3.10.0-1127 and update kernel.** Kernel updates have been made and are included in the release.
+------
+- **I95-38015/I95-38078 CVE updates.** Addressed latest CVEs.
+------
+- **I95-38119 Entry insertion into FIB causes issues with lookup returning a less specific match.** A stronger lookup strategy has been implemented to provide accurate results.
+
 ## Release 4.5.2
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-34650** In a multihop SVR scenario, the system may incorrectly attribute incoming packets as coming from a different peer path. This results in packet loss until the load-balancer learns of the loss and migrates the session.
 
@@ -79,7 +179,7 @@ sidebar_label: 4.5
 ------
 - **I95-36112** Q-in-Q VLAN stacking
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-18807** Removed a benign error displayed in journal due to imudp module loaded by rsyslog daemon.
 
@@ -254,7 +354,7 @@ sidebar_label: 4.5
 ------
 - **I95-33776** [`show config events`](cli_reference.md#show-events-config-commit) tracks configuration changes
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-32594** Validation allows for mismatched adjacency security-policy with peer network-interface security-policy for cases where multiple network interfaces in a router have the same IP Address. Only the first one is considered for matching inter-router-security policy between the network interface and peer adjacency.
 ------
@@ -319,7 +419,7 @@ sidebar_label: 4.5
 
   _**Corrective Action:**_ No action required. The webserver will immediately restart.
 ------
-- **I95-33560** When upgrading a HA conductor to version 4.4.0 or later there is a compatibility issue due to an upgrade of the asset provisioning software. This results in a reported asset error that will persist until the two nodes are upgraded to the same version.
+- **I95-33560** When upgrading an HA conductor to version 4.4.0 or later there is a compatibility issue due to an upgrade of the asset provisioning software. This results in a reported asset error that will persist until the two nodes are upgraded to the same version.
 
   _**Symptom:**_ This error is seen during the upgrade of an HA conductor pair to version 4.4.0 or later. An upgrade of a single standalone conductor node will not see this error. The following error will be reported by the node running software version earlier than 4.4.0:
   ```
@@ -329,8 +429,8 @@ sidebar_label: 4.5
 
   _**Corrective Action:**_ This error is transient and will only persist for the duration of the upgrade. The error will not self-correct. Continue to upgrade the second conductor node. After upgrade, verify that there are no asset state errors.
 ------
-- **I95-37687** PCLI configuration change flag '*' may persist in the active pcli session after a configuration commit operation
+- **I95-37687** PCLI configuration change flag `*` may persist in the active PCLI session after a configuration commit operation.
 
-  _**Corrective Action:**_ exiting and entering the PCLI after a commit will remove the flag.
+  _**Corrective Action:**_ Exit and re-enter the PCLI after a commit to remove the flag.
 ------
-- **I95-37752** A race condition exists wherein if a session is manually deleted through the `delete sessions` PCLI command, interim IPFIX record generation or HA session synchronization may cause the highway process to fault.
+- **I95-37752** A race condition exists when a session is manually deleted through the `delete sessions` PCLI command; interim IPFIX record generation or HA session synchronization may cause the highway process to fault.
