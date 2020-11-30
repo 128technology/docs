@@ -13,22 +13,22 @@ module.exports = {
     "Introduction": [
       "intro_getting_started",
      ],
-    "Deployment Considerations": [   
+    "Deployment Considerations": [
       "intro_system_reqs",
      ],
-    "Installation Process": [       
+    "Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
-      "intro_installation_bootable_media", 
+      "intro_installation_bootable_media",
       "intro_basic_conductor_config",
       "intro_basic_router_config",
       "intro_otp_iso_install",
       ],
-    "Cloud Installations":[ 
+    "Cloud Installations":[
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
-      "intro_installation_azure", 
+      "intro_installation_azure",
     ],
     "Supporting Information - Appendix":[
       "intro_installation_installer",
@@ -139,6 +139,7 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_intro",
+      "plugin_cloud_ha",
       "plugin_dns_app_id",
       "plugin_dns_cache",
       "plugin_gre",
