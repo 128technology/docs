@@ -1082,6 +1082,46 @@ The *management-vector* configuration is used to influence administrative prefer
 | name | string | The name of the vector label. This references vector labels configured elsewhere in the configuration. |
 | priority | uint32 | The value to ascribe to the vector. Lower costed vectors are preferred over higher costed vectors. |
 
+## max-inter-node-way-points
+
+Path:
+authority > router 
+
+Description:
+The *max-inter-node-way-points* field is configurable at the router level for all inter-node paths. Previously this number was set at 50,000 and was not configurable. Having access to more than 50,000 waypoints is useful in cases where the number of concurrent sessions are greater than 50,000 and each of those sessions are required to survive a node failover. 
+
+:::note
+A router restart is required for this change to be applied.
+:::
+
+| Element | Type | Description |
+| --- | --- | --- |
+| value | string | Valid values: 50,000-1,000,000. |
+
+Version History:
+
+Introduced in version 4.5.3
+
+## max-way-points
+
+Path:
+authority > router > device-interface > network-interface > adjacency
+
+Description:
+The *max-way-points* field is configurable at the adjacency/neighborhood level for each associated inter-router path. Previously this number was set at 50,000 and was not configurable. Having access to more than 50,000 waypoints is useful in cases where the number of concurrent sessions are greater than 50,000 and each of those sessions are required to survive a node failover. 
+
+:::note
+A router restart is required for this change to be applied.
+:::
+
+| Element | Type | Description |
+| --- | --- | --- |
+| value | string | Valid values: 50,000-1,000,000. |
+
+Version History:
+
+Introduced in version 4.5.3
+
 ## medium
 
 Path:

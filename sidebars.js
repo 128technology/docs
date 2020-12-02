@@ -12,21 +12,26 @@ module.exports = {
     ],
     "Introduction": [
       "intro_getting_started",
+     ],
+    "Deployment Considerations": [   
+      "intro_system_reqs",
+     ],
+    "Installation Process": [       
       "intro_installation",
-        "intro_system_reqs",
-        "intro_prepare_OS",
-        "intro_installation_installer",
-
       "intro_downloading_iso",
-      "intro_installation_bootable_media",
       "intro_creating_bootable_usb",
-      "intro_installation_otp_iso",
-      "intro_ztp",
-      
+      "intro_installation_bootable_media", 
+      "intro_basic_conductor_config",
+      "intro_basic_router_config",
+      "intro_otp_iso_install",
+      ],
+    "Cloud Installations":[ 
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
-      "intro_installation_azure",  
-      
+      "intro_installation_azure", 
+    ],
+    "Supporting Information - Appendix":[
+      "intro_installation_installer",
       "intro_upgrading",
       "intro_rollback",
     ],
@@ -51,8 +56,9 @@ module.exports = {
         "type": "category",
         "label": "Configuration",
         "items": [
-          "config_asset_connection_resiliency",
           "config_basics",
+          "config_access_mgmt",
+          "config_asset_connection_resiliency",
           "config_bgp",
           "config_reference_guide",
           "config_audit_log",
@@ -127,6 +133,12 @@ module.exports = {
     "CLI Reference": [
       "cli_reference",
     ],
+    "Installer/Initializer Reference": [
+      "installer_cli_reference",
+      "installer_preferences",
+      "initializer_cli_reference",
+      "initializer_preferences",
+    ],
     "Plugins": [
       "plugin_intro",
       "plugin_dns_app_id",
@@ -134,7 +146,6 @@ module.exports = {
       "plugin_gre",
       "plugin_icmp_reachability_detection",
       "plugin_ipsec_client",
-      "plugin_kni_namespace_scripts",
       "plugin_loopback_static_routes",
       "plugin_m800_watchdog",
       "plugin_monitoring_agent",

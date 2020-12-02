@@ -3162,12 +3162,69 @@ set password
 #### Description
 
 The _set password_ command allows a PCLI user to change their password. As is typical with most password changing routines, as a security precaution the user must enter their current password before they&#x27;re permitted to change it.
+:::note
+If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
+:::
 
 #### Version History
 
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
+
+
+## `set provisional-status`
+
+Set the provisional status of a specific interface to down, or returning it to the "up" state after taking it down. 
+
+#### Usage
+
+```
+set provisional-status [<node>] [<device>] <up/down>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | Identify the node where the device is located. |
+| device| Device on which the interface is located. |
+
+##### Subcommands
+
+| name | description |
+| ---- | ----------- |
+| Up/Down | Set the interface status to up or down. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show device-interface`](#show-device-interface) | Display detailed device interface information. |
+
+#### Description
+
+The `set provisional-status` command allows a specific interface to be brought down without a configuration change. This is useful in situations where you need to temporarily bring down a just device interface (i.e., to trigger an interface failover). 
+
+#### Example
+
+```
+admin@test1.Fabric128# set provisional-status node test1 10 down
+✔ Setting provisional status...
+Successfully set provisional status for device 10
+```
+```
+admin@test1.Fabric128# set provisional-status node test1 10 up
+✔ Setting provisional status...
+Successfully set provisional status for device 10
+```
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 4.5.3   | This feature was introduced |
+
 
 ## `shell`
 
@@ -4323,7 +4380,7 @@ show device-interface [name <name>] [force] [node <node>] router <router> [<verb
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
 | name | Device interface to display (if omitted, all will be displayed) (default: all) |
 | node | The node for which to display device interfaces |
 | router | The router for which to display device interfaces |
@@ -4343,26 +4400,36 @@ Omitting all optional arguments will display detailed information on all device 
 #### Example
 
 ```
-admin@labsystem1.myRouter# show device-interface
-Fri 2016-12-09 11:14:58 EST
+admin@test1.Fabric128# show device-interface name 10
+Mon 2020-11-23 20:45:37 UTC
+
+✔ Retrieving device interface information...
 
 ========================================
- labsystem1.1
+ test1:10
 ========================================
  Type:                ethernet
- PCI Address:         0000:02:00.0
- MAC Address:         unavailable
+ Forwarding:          true
+ PCI Address:         0000:00:04.0
+ MAC Address:         fa:16:3e:16:42:6c
+
  Admin Status:        up
  Operational Status:  up
- Redundancy Status:   not-redundant
- in-octets:                    21234570
- in-unicast-pkts:                112463
+ Provisional Status:  up
+ Redundancy Status:   non-redundant
+ Speed:               1 Gb/s
+ Duplex:              full
+
+ in-octets:                           0
+ in-unicast-pkts:                     0
  in-errors:                           0
- out-octets:                    8991876
- out-unicast-pkts:                27786
+ out-octets:                          0
+ out-unicast-pkts:                    0
  out-errors:                          0
 
-Completed in 0.18 seconds
+ Plugin Info:         unavailable
+
+Completed in 0.17 seconds
 ```
 
 #### Version History
@@ -4372,6 +4439,7 @@ Completed in 0.18 seconds
 | 2.0.0   | This feature was introduced |
 | 3.0.0   | Added requirement for prepending keywords to the _device-interface-id_ and _node_ arguments to avoid command line ambiguity |
 | 3.2.0   | Device-interface is keyed by _name_ rather than _id_ |
+| 4.5.3   | Added support for Provisional Status |
 
 ## `show dhcp mappings`
 
@@ -7158,7 +7226,7 @@ Displays active sessions passing through the 128T router.
 #### Usage
 
 ```
-show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [node <node>] router <router>
+show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [by-id] [node <node>] router <router>
 ```
 
 ##### Keyword Arguments
@@ -7177,11 +7245,12 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 
 | name | description |
 | ---- | ----------- |
+| by-id| &lt;session-id&gt; |
 | top | &lt;bandwidth&gt; |
 
 #### Description
 
-The _show sessions_ command displays active sessions passing through the 128T router (or the node specified by the optional _node-name_ argument. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session.
+The _show sessions_ command displays active sessions passing through the 128T router. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session. Additionally, you can specify the node using the optional _node-name_ argument, and the session-id using the _by-id_ subcommand. 
 
 The NAT IP and Port fields will be populated whenever a session is subject to source NAT (see _source-nat_ later in this reference guide for more information). It also shows the timeout value that will cause the session to expire if it remains idle for that number of seconds.
 
@@ -7191,8 +7260,8 @@ Various services and tenants may display with surrounding braces to indicate tha
 The contents of the table will vary based upon the software version in use. This applies when, for example, a conductor running a new software version requests session table data from routers running older software versions.
 :::
 
-#### Example
-
+#### Examples
+`show sessions`
 ```
 admin@gouda.novigrad# show sessions
 Fri 2020-04-17 16:55:34 UTC
@@ -7211,7 +7280,67 @@ Node: gouda
  1ee1761c-a193-413c-889f-41fd61fe5242   fwd   Internet      lanSubnet   lan           0   udp     192.168.0.72         55723   208.67.222.222          443   96.230.191.130       22918   false                  1891   0 days  0:00:11
  1ee1761c-a193-413c-889f-41fd61fe5242   rev   Internet      lanSubnet   wan           0   udp     208.67.222.222         443   96.230.191.130        22918   0.0.0.0                  0   false                  1891   0 days  0:00:11
 ```
-
+`show sessions by-id`
+```
+admin@node1.seattle-site-01# show sessions by-id cea963be-be0b-4a9a-9368-7956b3975687                                                                                                                                                                          
+Thu 2020-11-12 18:49:01 UTC
+✔ Retrieving session information...
+============================================================================================================================================================================================================
+ seattle-site-01.node1    Session ID: cea963be-be0b-4a9a-9368-7956b3975687
+============================================================================================================================================================================================================
+ Service name:                      internet
+ Session source:                     SourceType: PUBLIC
+ Session type:                      HTTPS
+ Service class:                     Bronze
+ Source tenant:                     seattle-reid.field-eng.corp
+ Peer name:                         N/A
+ Inter node:                        N/A
+ Inter router:                      N/A
+ Ingress source nat:                N/A
+ Payload security policy:           encrypt-hmac-disabled
+ Common name info:                  N/A
+ Session keys:
+     Forward session key:           [discriminator 42949672960, tenant seattle-reid.field-eng.corp, peer <unknownPeer>, src ip 172.25.128.59, dest ip 23.45.228.49, src port 38562, dest port 443, proto 6]
+     Reverse session key:           [discriminator 42949672960, tenant seattle-reid.field-eng.corp, peer <unknownPeer>, src ip 23.45.228.49, dest ip 96.93.108.35, src port 443, dest port 61291, proto 6]
+ State info:
+     Session state:                 ESTABLISHED
+     Redundancy state:              SYNCED
+ Time info:
+     Start time:                    0 days  0:02:00
+     Ttl duration for database:     1900
+ Forward flows:
+     Key:                           [src ip 172.25.128.59, dest ip 23.45.228.49, src l4 port 38562, dest l4 port 443, proto 6, vlan 6, device port 3]
+     Direction:                     forward
+     Tcp state:                     Established
+     Packets received:              30
+     Packets sent:                  30
+     Decrypt security policy:       <empty>
+     Action list:                    DpiIngress TtlValidateIpv4 TcpStateMachine IpHeaderTransform EthernetHeaderTransform AppForward
+     Time to live:                  1781
+     Path index:                    0
+     Attributes:
+         Path key:                  NextHop : 1-1.0=96.93.108.38, destination Ip <empty>/128
+         Arp status:                Valid
+         Waypoint key:              <empty>
+         Source nat key:            dynamic source nat; address 96.93.108.35; port 61291; protocol tcp (6)
+         Metadata security policy:  <empty>
+ Reverse flows:
+     Key:                           [src ip 23.45.228.49, dest ip 96.93.108.35, src l4 port 443, dest l4 port 61291, proto 6, vlan 0, device port 1]
+     Direction:                     reverse
+     Tcp state:                     Established
+     Packets received:              31
+     Packets sent:                  31
+     Decrypt security policy:       <empty>
+     Action list:                    TtlValidateIpv4 TcpStateMachine DpiEgress IpHeaderTransform EthernetHeaderTransform AppForward
+     Time to live:                  1781
+     Path index:                    0
+     Attributes:
+         Path key:                  NextHop : 1-3.6=172.25.128.59, destination Ip 172.25.128.59/32
+         Arp status:                Valid
+         Waypoint key:              <empty>
+         Source nat key:            <empty>
+         Metadata security policy:  <empty>
+```
 #### Version History
 
 | Release | Modification                |
@@ -7219,6 +7348,7 @@ Node: gouda
 | 1.0.0   | This feature was introduced |
 | 3.0.0   | Added _node_ keyword to enforce PCLI consistency |
 | 3.1.0   | Was _show flows_ - Substantially reformatted output |
+| 4.5.3   | Added _by-id_ subcommand |
 
 ## `show sessions top bandwidth`
 

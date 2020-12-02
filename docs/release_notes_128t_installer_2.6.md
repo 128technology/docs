@@ -3,6 +3,21 @@ title: 128T Installer 2.6 Release Notes
 sidebar_label: 2.6
 ---
 
+## Release 2.6.3
+
+### Issues Fixed
+
+- **IN-344** rpmdb corruption detection operation may fail on slower systems resulting in a node asset persisting in a connected state or an installation/upgrade may fail with a message of "Unable to repair RPM database" 
+  _**Cause:**_ The rpm operation on lower end systems may exceed the time defined, resulting in a false negative response for a corrupted rpm database. An example of a lower end system is a 2 Core 4G system.
+
+## Release 2.6.2
+
+### Issues Fixed
+
+- **IN-332** - grub2-efi-x64 removed on upgrade to 128T version 4.4.2 or 4.5.1 if the conductor is running on non uEFI OS imaged hardware and the routers are running on uEFI OS imaged hardware.
+
+   Until the systems are updated with the 128T-installer 2.6.2-1 version all upgrades should be performed by importing the 128T OTP ISO on the conductor for the targeted 128T upgrade version. Removal of grub2-efi-x64 rpm and a system reboot afterwards will result in a system that will not boot. Note: If the conductors have access to the public repos, the installer will be updated through the normal upgrade process. Additional information on the import process can be found here: [pcli import iso](cli_reference.md#import-iso) and [installer import](installer_cli_reference.md#import)
+
 ## Release 2.6.1
 
 ### New Features and Improvements
