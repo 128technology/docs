@@ -1,9 +1,9 @@
 ---
-title: Cloud HA plugin
+title: Cloud High Availability Plugin
 sidebar_label: Cloud HA
 ---
 
-The 128T-cloud-ha plugin provides HA functionality for 128Ts deployed in the cloud. HA for 128T routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin utilizes node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
+The 128T-cloud-ha plugin provides High Availability (HA) functionality for the 128T Networking Platform deployed in the cloud. HA for 128T routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin utilizes node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -21,7 +21,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 
  The router component can only be installed on versions of 128T which support provisional state on device interfaces. This is necessary for the plugin to be able to prevent asymmetrical routing.
  
- The versions of 128T that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of 128T that satisfy this requirement.
+ The versions of 128T that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time. Perform a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement, or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of 128T that satisfy this requirement.
 
 
 ## Plugin Behavior
@@ -30,26 +30,26 @@ The instructions for installing and managing the plugin can be found [here](plug
 
 ### Monitoring Agent
 
-The job of the Monitoring Agent is to produce and transmit health status messages. The monitoring agent collects the administrative status, operational status, and mac address of all of the configured `redundant-interface`s and `additional-interfaces` at an interval of 1 second. This health status is then sent via an HTTP POST to the ip address of the `cloud-ha` interface where the HA Agent is listening on port 12800.
+The job of the Monitoring Agent is to produce and transmit health status messages. The Monitoring Agent collects the administrative status, operational status, and mac address of all of the configured redundant interfaces and additional interfaces at one second intervals. The health status is then sent via an HTTP POST to the IP address of the `cloud-ha` interface where the HA Agent is listening on port 12800.
 
 ### HA Agent
 
-The job of the HA Agent is to process the health status from the the local Monitoring Agent and determine whether it considers itself healthy so that it can perform failover operations. For an interface to be healthy, it must be administratively and operationally up. For a node to be healthy, it must have at least one healthy `redundant-interface`. If there are `additional-interface`s configured, then the node must have at least one healthy `additional-interface`.
+The job of the HA Agent is to process the health status messages from the the local Monitoring Agent and determine the health status for performing failover operations. For an interface to be healthy, it must be administratively and operationally up. For a node to be healthy, it must have at least one healthy `redundant-interface`. If there are additional interfaces configured, then the node must have at least one healthy `additional-interface`.
 
-The following flow diagram summarizes the process that the HA Agent goes through driven by the Monitoring Agent and resulting in interactions with the API Agent.
+The following flow diagram summarizes the process followed by the HA Agent using information supplied by the Monitoring Agent, and resulting in interactions with the API Agent.
 
 ![HA Agent Flow Diagram](/img/cloud-ha-ha-agent-flow-diagram.png)
 
-The mode that an HA agent is running in is determined by the `priority` configured. A `priority` of 1 makes the node primary and a `priority` of 2 makes the node secondary.
+An HA Agent configured with a priority of 1 will be defined as the Primary node; a priority of 2 becomes the Secondary node. 
 
-* Primary: this node is preferred to become active except when the local node is unhealthy
-* Secondary: this node is preferred to become active only when the local node is healthy and the remote node is unhealthy or unreachable
+* Primary: This node is preferred to be active except when the local node is unhealthy.
+* Secondary: This node is preferred to become active only when the local node is healthy and the remote node is unhealthy or unreachable.
 
-The internal state machines wait for `up-holddown-timeout` seconds before considering a node healthy. If at any point during that wait, the HA Agent receives an unhealthy health status, the timeout will be reset and the node is considered unhealthy.
+The internal state machines wait for the value set in seconds in `up-holddown-timeout` before considering a node healthy. If at any point during that wait the HA Agent receives an unhealthy status, the timeout will be reset and the node is considered unhealthy.
 
-The internal state machines wait for `peer-reachability-timeout` after every health status before considering the node unreachable. The timer is reset if a health report is processed before the timeout expires.
+The internal state machines wait for the `peer-reachability-timeout` after every health status before considering the node unreachable. The timer is reset if a health report is processed before the timeout expires.
 
-When the HA Agent determines that the node must become active, it will hit the API Agent's appropriate REST endpoint with the first active redundant interface's mac address and the list of configured prefixes. The HA Agent will also change the provisional status of the configured `redundant-interface`s to be up if it is becoming active and down if it is becoming inactive.
+When the HA Agent determines that a node must become active, the first active redundant interface's mac address and the list of configured prefixes are sent to the API Agent's appropriate REST endpoint. The HA Agent changes the provisional status of the configured `redundant-interface` to **Up**. 
 
 ### API Agents
 
@@ -58,46 +58,47 @@ The job of the API Agent is to perform failover actions specific to the cloud pr
 
 #### Azure Loadbalancer
 
-A `solution-type` of `azure-lb` can be used to enable this API agent. This solution requires an [Azure Loadbalancer](azure-lb) to be configured using an HTTP probe on `probe-port` port with backend pools pointing towards the `redundant-interface`s. 
+A `solution-type` of `azure-lb` can be used to enable the Azure Loadbalancer API agent. This solution requires an [Azure Loadbalancer](azure-lb) to be configured using an HTTP probe on the `probe-port` with backend pools pointing towards the redundant interfaces. 
 
-The probe should look something like:
+Probe example:
 
 ![Azure Loadblancer Probe Configuration](/img/cloud-ha-azure-lb-probe-config.png)
 
-And the backend pools should look something like:
+Backend Pool example:
 
 ![Azure Loadblancer Backend Pool Configuration](/img/cloud-ha-azure-lb-backend-pool-config.png)
 
 
-The Azure Loadbalander will send a health probe to the redundant 128T's `redundant-interface`s. These probes will be routed through the `cloud-ha` interface and then through an nginx instance `128T-azure-lb-nginx` down to the Azure Loadbalancer API Agent. The Azure Loadbalancer API Agent will respond to the probes with a `200` status code when the current node is active and a `500` response code when its inactive. Most of the time, the probe to the inactive node will not be able to get into the 128T due to the `redundant-interface`s being set provisionally down.
+The Azure Loadbalancer sends a health probe to the redundant 128T's redundant interfaces. These probes are routed through the `cloud-ha` interface, through a `128T-azure-lb-nginx` instance, and down to the Azure Loadbalancer API Agent. 
 
+The Azure Loadbalancer API Agent responds to the probes with a `200` status code when the current node is active and a `500` code when its inactive. A probe to the inactive node will not reach the 128T when the redundant interfaces are set provisionally down.
 
 #### Azure VNET
 
-A `solution-type` of `azure-vnet` can be used to enable this API agent. It requires an Azure Route Table setup on the same VNET as the `redundant-interface`s. The Virtual Machines that these members are running on should be granted the following permissions in order for the route updates to work correctly:
+A `solution-type` of `azure-vnet` can be used to enable the Azure VNET API agent. It requires an Azure Route Table setup on the same VNET as the redundant interfaces. The Virtual Machines where these members are running must be granted the following permissions in order for the route updates to work correctly:
 
 * Microsoft.Network/routeTables/read
 * Microsoft.Network/networkInterfaces/read
 * Microsoft.Network/routeTables/routes/write
 * Microsoft.Compute/virtualMachines/read
 
-This agent will find all of the route tables within the VNET using the Azure REST APIs. When a `redundant-interface` becomes active, the agent will update the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's `redundant-interface` will now be inactive. There is no update to the route table needed when becoming inactive.
+The agent finds all of the route tables within the VNET using the Azure REST APIs. When a redundant interface becomes active, the agent updates the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's redundant interface will now be inactive. There is no update to the route table needed when becoming inactive.
 
 :::warning
-To prevent routing loops, the solution will not update the Azure Route Tables assigned to a Subnet that has an activating node's Network Interface.
+To prevent routing loops, the solution will not update the Azure Route Tables assigned to a subnet that has an activating node's Network Interface.
 :::
 
 ## Scenarios
 
 ### Both Healthy
 
-In the case where both members are healthy, the primary node is preferred, so it will become active and secondary node will become inactive. The `redundant-interface`s on the secondary node will be set provisionally down and the API Agent will take care of steering traffic towards the primary node.
+In the case where both members are healthy, the primary node is preferred and set to active. The secondary node is inactive. The redundant interface on the secondary node is set provisionally down and the API Agent steers traffic towards the primary node.
 
 ![both-healthy-scenario](/img/cloud-ha-both-healthy-scenario.png)
 
 ### Primary Failure
 
-In the case where the primary node becomes unhealthy such as the `redundant-interface`s become operationally down, then the Monitoring Agent will continually send unhealthy health statuses to the local HA Agent. It will be determined that the local node is unhealthy and thus the local HA agent will send an unhealthy message to the remote HA Agent and notify the internal state machine. Both nodes will have the same understanding that the primary node is unhealthy. The primary node will realize that it is no longer fit to process traffic and sees that the secondary node is fit, so it will become inactive. The secondary node conversely will realize that the primary node is not fit to process traffic and it will see that the local node is healthy so it will become active.
+When the **primary node** becomes unhealthy and the redundant interfaces are operationally down, the Monitoring Agent sends an unhealthy status to the local HA Agent. When the **local node** is deemed unhealthy, the local HA Agent sends an unhealthy message to the remote HA Agent, and notifies the internal state machine. When the **primary node** recognizes it is no longer fit to process traffic, it becomes inactive. The **secondary node** recognizes the primary node is not processing traffic, *and the local node is healthy(??)* so the secondary node becomes active.
 
 ![primary-failure-scenario](/img/cloud-ha-primary-failure-scenario.png)
 
