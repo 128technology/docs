@@ -4389,7 +4389,7 @@ show device-interface [name <name>] [force] [node <node>] router <router> [<verb
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail \| summary (default: detail) |
+| verbosity | detail | summary (default: detail) |
 
 #### Description
 
@@ -5267,6 +5267,14 @@ show lte connection [device-interface <device-interface>] [force] [node <node>] 
 | node | The node for which to display LTE data |
 | router | The router for which to display LTE data |
 
+#### Description
+
+This command queries the LTE devices and displays the following state info:
+
+- registration-status
+- connection-status 
+- netstat (tx, rx, tx-error, rx-error, etc)
+
 ## `show lte detail`
 
 Display LTE detail.
@@ -5285,6 +5293,36 @@ show lte detail [device-interface <device-interface>] [force] [node <node>] rout
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
 | router | The router for which to display LTE data |
+
+## `show lte firmware`
+
+Display lte firmware information.
+
+#### Usage
+
+```
+show lte firmwware [device-interface <device-interface>] [force] [node <node>] router <router>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-interface | LTE device interface (default: all) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
+
+#### Description
+
+This command queries the LTE devices and displays the following state info:
+
+- carrier-name
+- FW-version
+- IMEI
+- card-model
+- bands-supported
+- bands-enabled
 
 ## `show lte modem`
 
@@ -5362,6 +5400,15 @@ show lte signal [device-interface <device-interface>] [force] [node <node>] rout
 | node | The node for which to display LTE data |
 | router | The router for which to display LTE data |
 
+#### Description
+
+This command queries the LTE devices and displays the following state info:
+
+- rating
+- RSSI
+- SNR
+- carrier-name
+
 ## `show lte sim`
 
 Display LTE sim.
@@ -5380,6 +5427,44 @@ show lte sim [device-interface <device-interface>] [force] [node <node>] router 
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
 | router | The router for which to display LTE data |
+
+#### Description
+
+This command queries the LTE devices and displays the following state info:
+
+- ICCID
+- registration-status
+- carrier-name
+- carrier-mcc
+- carrier-mnc
+
+## `show lte summary`
+
+Display lte device summary.
+
+#### Usage
+
+```
+show lte summary [device-interface <device-interface>] [force] [node <node>] router <router>
+```
+#### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-interface | LTE device interface (default: all) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to display LTE data |
+| router | The router for which to display LTE data |
+
+#### Description
+
+This command queries the LTE devices and displays the following state info:
+
+- device-name
+- target-name
+- registration-status
+- connection-status (show IP if connected, otherwise, show previous error)
+- signal-strength (rating, RSSI, and SNR)
 
 ## `show network-interface`
 

@@ -1,6 +1,6 @@
 ---
-title: LTE
-sidebar_label: LTE
+title: LTE and Dual LTE Configuration
+sidebar_label: LTE and Dual LTE Configuration
 ---
 
 #### History
@@ -8,8 +8,9 @@ sidebar_label: LTE
 | Release | Modification                |
 | ------- | --------------------------- |
 | 4.3.3   | This feature was introduced |
+| 5.0.0   | Enhanced for Dual LTE |
 
-## Dual LTE
+## LTE Connectivity
 
 LTE connectivity is a valuable means of providing an alternate path for multi-path routing; either as a primary path in locations that have no access to circuits or as a path of last resort in the event that the primary circuit has failed.
 
@@ -49,14 +50,14 @@ From the output of `lsusb` above, the Sierra Wireless adapter (2nd LTE card), we
 
 ### Configuration
 
-Two new config fields have been added to the network-interface with this feature:
+Use the following configuration fields under network-interface to configure this feature:
 
 - **default-route**: enable/disable default-route via LTE interface in linux
 - **management-vector** contains the following two fields:
   - **name**: name of the vector
   - **priority**: the metric of default-route
 
-Below is an example config with two LTE modules configured. The first module has AT&T SIM and the second one has Verizon SIM. Both have default-route enabled; the AT&T interface has a metric of 300 and the Verizon interface has a metric of 500.
+Below is an example configuration with two LTE modules. The first module has an AT&T SIM and the second one has a Verizon SIM. Both have default-route enabled; the AT&T interface has a metric of 300 and the Verizon interface has a metric of 500.
 
 ```128T
 device-interface lte-dev-1
@@ -107,9 +108,9 @@ device-interface lte-dev-2
 exit
 ```
 
-When 128T is not running, both LTE interfaces will be returned to linux. Before this handover happens, a default-route will be added to each interface in linux as well as an associated metric to their default-route. This is a result of the _management-vector_ configuration defined above.
+When the 128T is not running, both LTE interfaces will be returned to linux. Before this handover happens, a default-route is added to each interface in linux as well as an associated metric to their default-route. This is a result of the _management-vector_ configuration defined above.
 
-After committing this configuration and shutting down 128T, the linux route table will look something like:
+After committing this configuration and shutting down 128T, the linux route table will look like:
 
 ```bash
 [root@SOL_SCM920420006 ~]# ip route
@@ -121,7 +122,7 @@ default dev wwp0s21u4i8 scope link metric 500
 172.17.0.0/16 dev enp4s0f0 proto kernel scope link src 172.17.200.166 metric 100
 ```
 
-This is the only configuration that is necessary to utilize both LTE adapters.  Once the configuration is committed, the LTE interfaces can be use for routing just like any other interface.
+This is the only configuration that is necessary to utilize both LTE adapters.  Once the configuration is committed, the LTE interfaces can be used for routing just like any other interface.
 
 ### Troubleshooting
 
@@ -178,7 +179,7 @@ Thu 2019-12-19 15:22:54 UTC
 
 Completed in 0.08 seconds
 ```
-In additional to the PCLI, standalone `qmicli` and `serial-command` scripts are also available for troubleshooting from the Linux shell:
+In addition to the PCLI, standalone `qmicli` and `serial-command` scripts are also available for troubleshooting from the Linux shell:
 
 `lte-state <interface-name>` returns a  JSON string that contains dynamic information regarding the LTE connection status, such as IP address, signal strength, carrier, etc.
 
@@ -186,9 +187,7 @@ In additional to the PCLI, standalone `qmicli` and `serial-command` scripts are 
 
 These scripts can be utilized through the salt infrastructure to remotely monitor the health of the interfaces.
 
-
-
-A new field, `usb-port` has been added to the output to `show device-interface`.  This is the USB device to which the LTE adapter is connected. While the majority of the communication between the 128T and the LTE module is over QMI, AT commands are used for certain operations, such as a card reset.
+The output of `show device-interface` includes `usb-port` to identify the device to which the LTE adapter is connected. While the majority of the communication between the 128T and the LTE module is over QMI, AT commands are used for certain operations, such as a card reset.
 
 To determine which devices support AT commands, scan the path `/sys/class/net/{interface}/device/../*/ttyUSB*/`.  With the information retrieved from the `ls` command, you can then create a serial connection to the device to issues AT commands.
 
@@ -199,7 +198,7 @@ To determine which devices support AT commands, scan the path `/sys/class/net/{i
 /sys/class/net/wwp0s21u4i8/device/../1-4:1.3/ttyUSB8/:driver  port_number  power  subsystem  tty  uevent
 ```
 
-`serial-command port <usb-port> <at-command>` to run AT commands. Issue the `ATQ0` command and check that an `OK` reply is returned.
+Use the `serial-command port <usb-port> <at-command>` to run AT commands. Issue the `ATQ0` command and check that an `OK` reply is returned.
 
 ```bash
 qmicli -d /dev/cdc-wdm0 --uim-get-card-status
@@ -215,12 +214,12 @@ lte-image-preference --interface=wwp0s21u1i8 set ATT
 
 ## Special Considerations
 
-Prior to 4.3.3, on a single LTE system, a default-route within linux with a metric of 128 was always added. For backward compatibility and consistency of default behavior, after upgrade to 4.3.3:
+Prior to 4.3.3, on a single LTE system, a default-route within linux with a metric of 128 was always added. For backward compatibility and consistency of default behavior, after an upgrade to 4.3.3:
 - A default-route with a metric of 128 will be added to the 128T configuration if:
   - default-route is not set **OR** set to false
   - **AND** management-vector is **NOT** configured
 
-A validation warning (as shown below) will be issued when these conditions have not been met.
+A validation warning (as shown below) is issued when these conditions have not been met.
 
 ```
 *admin@SOL_SCM920420006.SOL_SCM920420006# commit

@@ -5,6 +5,12 @@ sidebar_label: '5.0'
 
 ## Release 5.0.0
 
+:::warning
+SSH Root Login is not permitted. 
+
+Before upgrading, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of remote management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information. 
+:::
+
 ### New Features and Improvements
 
 - **I95-9152 [PCLI configuration help text identifies required fields](cli_reference.md#required-fields):** When using the PCLI configuration command, the required fields are now identified within the Help text. 
@@ -17,7 +23,7 @@ sidebar_label: '5.0'
 ------
 - **I95-22350 [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services)** allow you to create groupings of services that inherit properties from one another.
 ------
-- **I95-22789** Dual LTE Support - **this shows up as a new feature listed in the 4.3.3 Release notes, and is documented in the LTE topic in the How To guide. I expect this should be removed from the 5.0 list.**
+- **I95-22789 Dual LTE Support** Dual LTE support is valuable when connecting to two discrete wireless carriers when there is a need for an active/active LTE connection. For details, please see [LTE and Dual LTE Configuration](howto_lte.md).
 ------
 - **I95-24412 Dual PPPoE Support:** Multiple PPPoE devices can be configured on a single node to leverage all PPPoE broadband access available at the location. This provides multiple failover paths in case of an outage. 
 ------
