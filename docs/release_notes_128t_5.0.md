@@ -17,7 +17,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-9242 Service and Topology Exchange Protocol (STEP):** STEP facilitates the design and scale of new (and exisiting) networks by network administrators, and provides insight into service availablity across the network. STEP is designed for service exchange and reachability to those services used by routers to efficiently route packets for each service. 
 ------
-- **I95-15618 [Auto completion](cli_reference.md#clear-arp):** Auto completion is  now available on `clear arp` PCLI command.
+- **I95-15618 [Auto completion](cli_reference.md#clear-arp):** Auto completion is now available on the `clear arp` PCLI command.
 ------
 - **I95-20757 [Displaying alarm history](cli_reference.md#show-events-alarm):** Displaying the Alarm History within the PCLI using `show events alarm` now supports relative timestamps.
 ------
@@ -27,9 +27,19 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-24412 Dual PPPoE Support:** Multiple PPPoE devices can be configured on a single node to leverage all PPPoE broadband access available at the location. This provides multiple failover paths in case of an outage. 
 ------
+- **I95-25513 Display 128T, Installer, and Installer Repo Versions:** The GUI and CLI both display the software version, installer version, and installer repo versions. 
+------
 - **I95-27886 Packet Duplication for inter-node High Availability:** Packet duplication over multiple inter-node links helps reduce packet loss during transmission. For protocols such as UDP that do not verify packet integrity, this helps ensure full transmission of traffic.
 ------
 - **I95-28531 Application Categorization:** Application Identification/Categorization utilizes a database of traffic categories, such as “News”, “Social Media”, “Health”, “Sports”, etc. These categories can be assigned to services, which can then be prioritized, monitored for traffic levels, or blocked for security purposes. Each category is populated with a list of domain names associated with the type of traffic.
+------
+- **I95-31218 Configurable BFD Hold-Down Timer:**
+
+
+------
+- **I95-31754 PCLI Log Level:**
+
+
 ------
 - **I95-32558 In-line Flow Performance Monitoring:** Inline performance metrics have been enhanced to achieve a finer granularity than what is currently available via BFD. Statistics are now collected per path, priority, and protocol (TCP or UDP) level. Sessions can be forwarded using more granular SLA metrics. 
 ------
@@ -47,10 +57,19 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-35190 [PCLI bulk paste configuration](concepts_pcli.md#paste-config):** The PCLI detects configuration entered in bulk and accepts input in either show config native format or flat format.
 ------
+- **I95-35212 Adaptive Encryption Improvements:** 
+
+
+------
 - **I95-35741 [PCLI plugin service commands](cli_reference.md#manage-plugin-install):** Plugin installation and removal is handled through the PCLI. 
+
+- **I95-36876 `show assests software` includes Repository information:** The PCLI command `show assets software` includes the repository for each available software version. 
+------ 
 
 ### Resolved Issues
 
+- **I95-20718:** Keywords as Configuration Values - the PCLI now prevents the use of keywords as configuration values. 
+------
 - **I95-29643** Changing the name of an existing configuration object to one that already exists merges the two objects.
 ------
 - **I95-30670** Version mismatch alarm in HA pair is not generated when the salt minion is disconnected on one of the nodes in the pair.
@@ -80,9 +99,14 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-35722** PCLI warning message formatting is now consistent with error messages.
 ------
+- **I95-35892** Regex use during search and replace config negatively impacts performance. 
+------
 - **I95-36645** UI: Bytes converter does not handle values larger than Terabyte (TB).
 ------
 - **I95-36828** Unable to acquire logs through GUI when `remote-login` is disabled.
+------
+- **I95-37519** Updating session-types can cause erroneous config abort.
+------
 
 ## Special Considerations
 
