@@ -25,7 +25,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-22789 Dual LTE Support:** Dual LTE support is valuable when connecting to two discrete wireless carriers when there is a need for an active/active LTE connection. For details, please see [LTE and Dual LTE Configuration](howto_lte.md).
 ------
-- **I95-24412 Dual PPPoE Support:** Multiple PPPoE devices can be configured on a single node to leverage all PPPoE broadband access available at the location. This provides multiple failover paths in case of an outage. 
+- **I95-24412 Dual PPPoE Support: Multiple PPPoE devices can be configured on a single node to leverage all PPPoE broadband access available at the location. This provides multiple failover paths in case of an outage.** 
 ------
 - **I95-25513 Display 128T, Installer, and Installer Repo Versions:** The GUI and CLI both display the software version, installer version, and installer repo versions. 
 ------
@@ -110,7 +110,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-34983, I95-35892** Remove unused PCLI Commands.
 ------
-- **I95-36096** PCLI sessions are now captured in their own respective log file. To view PCLI logs, run `journalctl -u PCLILogger`.
+- **I95-36096** PCLI sessions are now captured in their own respective log file. To view PCLI logs, run `journalctl -u PCLILogger`. For additional information about accessing the PCLI logs, see [Understanding Logs](ts_logs.md).
 ------
 - **I95-36102** `compare config` now defaults to `compare config running candidate` when no additional arguments are supplied.
 ------
