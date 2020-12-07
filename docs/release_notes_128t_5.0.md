@@ -23,7 +23,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-22350 [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services)** allow you to create groupings of services that inherit properties from one another.
 ------
-- **I95-22789 Dual LTE Support** Dual LTE support is valuable when connecting to two discrete wireless carriers when there is a need for an active/active LTE connection. For details, please see [LTE and Dual LTE Configuration](howto_lte.md).
+- **I95-22789 Dual LTE Support:** Dual LTE support is valuable when connecting to two discrete wireless carriers when there is a need for an active/active LTE connection. For details, please see [LTE and Dual LTE Configuration](howto_lte.md).
 ------
 - **I95-24412 Dual PPPoE Support:** Multiple PPPoE devices can be configured on a single node to leverage all PPPoE broadband access available at the location. This provides multiple failover paths in case of an outage. 
 ------
@@ -33,13 +33,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-28531 Application Categorization:** Application Identification/Categorization utilizes a database of traffic categories, such as “News”, “Social Media”, “Health”, “Sports”, etc. These categories can be assigned to services, which can then be prioritized, monitored for traffic levels, or blocked for security purposes. Each category is populated with a list of domain names associated with the type of traffic.
 ------
-- **I95-31218 Configurable BFD Hold-Down Timer:**
-
-
-------
-- **I95-31754 PCLI Log Level:**
-
-
+- **I95-31218 Configurable BFD Hold-Down Timer:** BFD (Bidirectional Forwarding Detection) is used to detect path failures between routers. A configurable hold-down time in the BFD settings, shared at the router, peer, interface neighborhood, and adjacency levels, provides BFD damping functionality when links are unpredictable. 
 ------
 - **I95-32558 In-line Flow Performance Monitoring:** Inline performance metrics have been enhanced to achieve a finer granularity than what is currently available via BFD. Statistics are now collected per path, priority, and protocol (TCP or UDP) level. Sessions can be forwarded using more granular SLA metrics. 
 ------
@@ -57,12 +51,10 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-35190 [PCLI bulk paste configuration](concepts_pcli.md#paste-config):** The PCLI detects configuration entered in bulk and accepts input in either show config native format or flat format.
 ------
-- **I95-35212 Adaptive Encryption Improvements:** 
-
-
+- **I95-35212 Adaptive Encryption Improvements:** Most end hosts employ secure protocols such as TLS and IPSEC. Adaptive Encryption is aimed at identifying this already encrypted traffic and providing security for non-encrypted traffic by encrypting it through the 128T Router. This eliminates the performance penalty of encrypting traffic that is already encrypted.
 ------
 - **I95-35741 [PCLI plugin service commands](cli_reference.md#manage-plugin-install):** Plugin installation and removal is handled through the PCLI. 
-
+------
 - **I95-36876 `show assests software` includes Repository information:** The PCLI command `show assets software` includes the repository for each available software version. 
 ------ 
 
@@ -118,10 +110,8 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-34983, I95-35892** Remove unused PCLI Commands.
 ------
-- **I95-36096** PCLI sessions are now captured in their own respective log file.
+- **I95-36096** PCLI sessions are now captured in their own respective log file. To view PCLI logs, run `journalctl -u PCLILogger`.
 ------
 - **I95-36102** `compare config` now defaults to `compare config running candidate` when no additional arguments are supplied.
 ------
 - **I95-36525** TLS 1.0 is no longer supported.
-
-## Caveats
