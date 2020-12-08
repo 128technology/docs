@@ -71,6 +71,60 @@ In other words, "*if I don't receive a message in the amount of time that is my 
 
 If both router peers use the default settings above, you should expect to see them transmit async control mode messages every 1000ms, or 1s. If one or both peers do not receive an async control mode packet in 3x1000ms (3s), it will consider the peer to be "down."
 
+### Dampening
+
+BFD is used to detect path failures between routers. BFD notifies the load-balancer and other peer-path observers when there is packet loss between peering routers, or if the link fails. In many cases it becomes critical to minimize session failovers to prevent the session from oscillating between paths, to reduce unnecessary changes to routing tables, prevent consumption of valuable system resources, and avert needless convergence impact. 128T routers have a hold down timer that can be configured to prevent BFD from making immediate updates until the timer has expired. This method works well when the characteristic of the link is well known and a predetermined value can be assigned to the timer.
+
+In cases where link characteristics change or are unpredictable, the 128T router can dynamically adjust BFD notification periods and dampen excessive notifications to clients. This prevents unnecessary instability in the network, minimizing unnecessary failovers and flapping links. 
+
+BFD Dampening is enabled by default, and can be disabled by an administrator. 
+
+#### Parameters
+
+**Initial Hold Down Timer:** The minimum amount of time BFD must wait before beginning notifications. The default is 5 seconds, and can be configured to be any value lower than the **Maximum Hold Down Timer**.
+
+**Maximum Hold Down Timer:** The maximum amount of time that BFD must wait before it begins notifications. This timer only applies when BFD dampening is enabled. The default value for this is 3600 s (or 1 hour). The network administrator may configure this to be any value higher than the **Initial Hold Down Timer**.
+
+#### Operation
+
+Once you have provided the initial hold down timer and maximum hold down timer values, the 128T routers dynamically adjust the values to ensure that BFD flaps are not affecting the system. This prevents the effect of oscillations or flapping caused by BFD and underperforming (or volatile) links. It ensures stability of the entire network and reduces the events that the network administrator has to deal with. 
+
+
+| Element | Parent Configuration | Type | Values |
+| --- | --- | --- | --- |
+| hold-down-time | BFD (router, peer, neighborhood, adjacency) | Seconds | Default: 5 Range: 1-300 |
+| dampening | BFD (router, peer, neighborhood, adjacency) | Enumeration | Enabled/Disabled Default: Disabled |
+| maximum-hold-down-time | BFD (router, peer, neighborhood, adjacency) | Seconds | Default: 3600 (1 hour) Only configurable when damping is enabled. Must be greater than hold-down-time. |
+
+##### Example
+
+```
+config authority
+    router Router1
+        bfd
+            State enabled
+            Hold-down-time 10
+            Damping Enabled
+            Maximum-hold-down-time 60
+        Peer foo
+            Bfd
+                Hold-down-time 3
+                Damping disabled
+        Node bar
+            Device-interface dev1
+                Network-interface net1
+                    Neighborhood n1
+                        Bfd
+                            Hold-down-time 30
+                            Damping Enabled
+                            Maximum-hold-down-time 600
+                    Adjacenency 1.1.1.1 peer1
+                        Bfd
+                            Hold-down-time 300
+                            Damping Disabled
+```
+If dampening is disabled, the configured hold-down-time will be used with the current existing hold-down time logic.
+
 ### Echo Mode
 
 Echo mode messages are used between 128T router peers to measure path quality, including jitter, packet loss, and latency (JPL). Echo mode messages are transmitted from one router to its peer, which simply echoes them back to the originating router. In contrast to async control mode messages, which are conversations between peer BFD agents, echo mode messages are one routers' conversation with itself via its router peer.

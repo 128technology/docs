@@ -85,6 +85,13 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Security",
+        "items": [
+          "sec_adaptive_encrypt",
+        ],
+      },
+      {
+        "type": "category",
         "label": "How To",
         "items": [
           "howto_conductor_migration",
