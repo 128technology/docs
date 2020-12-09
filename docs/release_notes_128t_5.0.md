@@ -25,15 +25,13 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-22789 Dual LTE Support:** Dual LTE support is valuable when connecting to two discrete wireless carriers when there is a need for an active/active LTE connection. For details, please see [LTE and Dual LTE Configuration](howto_lte.md).
 ------
-- **I95-24412 Dual PPPoE Support: Multiple PPPoE devices can be configured on a single node to leverage all PPPoE broadband access available at the location. This provides multiple failover paths in case of an outage.** 
-------
 - **I95-25513 Display 128T, Installer, and Installer Repo Versions:** The GUI and CLI both display the software version, installer version, and installer repo versions. 
 ------
 - **I95-27886 Packet Duplication for Inter-Node High Availability:** Packet duplication over multiple inter-node links helps reduce packet loss during transmission. For protocols such as UDP that do not verify packet integrity, this helps ensure full transmission of traffic. See [service-policy](config_reference_guide.md/#service-policy) for usage information. 
 ------
 - **I95-28531 Application Categorization:** Application Identification/Categorization utilizes a database of traffic categories, such as “News”, “Social Media”, “Health”, “Sports”, etc. These categories can be assigned to services, which can then be prioritized, monitored for traffic levels, or blocked for security purposes. Each category is populated with a list of domain names associated with the type of traffic.
 ------
-- **I95-31218 [Configurable BFD Hold-Down Timer](howto_tune_bfd.md#dampening):** BFD (Bidirectional Forwarding Detection) is used to detect path failures between routers. A configurable hold-down time in the BFD settings, shared at the router, peer, interface neighborhood, and adjacency levels, provides BFD damping functionality when links are unpredictable. 
+- **I95-31218 [Configurable BFD Hold-Down Timer](howto_tune_bfd.md#dampening):** BFD (Bidirectional Forwarding Detection) is used to detect path failures between routers. A configurable hold-down time and dynamic-damping field in the [BFD settings](config_reference_guide.md#bfd-router), shared at the router, peer, interface neighborhood, and adjacency levels, provides BFD damping functionality when links are unpredictable. 
 ------
 - **I95-32558 In-line Flow Performance Monitoring:** Inline performance metrics have been enhanced to achieve a finer granularity than what is currently available via BFD. Statistics are now collected per path, traffic class, and protocol (TCP or UDP) level. Sessions can be forwarded using more granular SLA metrics. 
 ------
@@ -55,7 +53,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-35741 [PCLI plugin service commands](cli_reference.md#manage-plugin-install):** The plugin lifecycle can now be managed through the PCLI. 
 ------
-- **I95-36876 `show assests software` includes Repository information:** The PCLI command `show assets software` includes the repository for each available software version. 
+- **I95-36876 `show assests software` includes Repository information:** The PCLI command [`show assets software`](cli_reference.md/#show-assets-software) includes the repository for each available software version. 
 ------ 
 
 ### Resolved Issues
