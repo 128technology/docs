@@ -108,7 +108,7 @@ device-interface lte-dev-2
 exit
 ```
 
-When the 128T is not running, both LTE interfaces will be returned to linux. Before this handover happens, a default-route is added to each interface in linux as well as an associated metric to their default-route. This is a result of the _management-vector_ configuration defined above.
+When the 128T is not running, both LTE interfaces will be returned to linux. When this handover happens, a default-route is added to each interface in linux with an associated metric taken from the _management_vector_ priority. This is a result of the _management-vector_ configuration defined above.
 
 After committing this configuration and shutting down 128T, the linux route table will look like:
 

@@ -85,7 +85,7 @@ Simple BFD damping (hold-down timer) is enabled by default, and can be disabled 
 
 **Maximum Hold Down Timer:** The maximum amount of time that BFD must wait before it begins notifications. This timer only applies when BFD damping is enabled. The default value for this is 3600 s (or 1 hour). The network administrator may configure this to be any value higher than the initial`hold-down-time`.
 
-**Dynamic Damping:** Disabled by default. When enabled and the initial `hold-down-time` and `maximum-hold-down-time` values are configured, the 128T routers dynamically adjust the values to ensure that BFD flaps are not affecting the system. This prevents the effect of oscillations, or flapping, caused by BFD and underperforming (or volatile) links. It ensures stability of the entire network and reduces the events requiring the network administrator's attention.
+**Dynamic Damping:** Disabled by default. When enabled, the 128T router uses the `hold-down-time` and `maximum-hold-down-time` parameters to dynamically adjust the damping timer to ensure that excessive BFD flaps are not affecting the system negatively. This prevents the effect of oscillations, or flapping, caused by BFD and underperforming (or volatile) links. It ensures stability of the entire network and reduces the events requiring the network administrator's attention.
 
 | Element | Parent Configuration | Type | Values |
 | --- | --- | --- | --- |
