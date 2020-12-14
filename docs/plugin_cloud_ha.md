@@ -57,7 +57,7 @@ The job of the API Agent is to perform failover actions specific to the cloud pr
 
 #### Azure Loadbalancer
 
-A `solution-type` of `azure-lb` can be used to enable the Azure Loadbalancer API agent. This solution requires an [Azure Loadbalancer](azure-lb) to be configured using an HTTP probe on the `probe-port` with backend pools pointing towards the redundant interfaces. 
+A `solution-type` of `azure-lb` can be used to enable the Azure Loadbalancer API agent. This solution requires an [Azure Loadbalancer](https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview) to be configured using an HTTP probe on the `probe-port` with backend pools pointing towards the redundant interfaces. 
 
 Probe example:
 
@@ -279,8 +279,6 @@ If the `solution-type` of a group is `azure-lb`, then the plugin will generate s
 
 
 ## Troubleshooting
-
-For plugin troubleshooting in general, see the [troubleshooting docs](docs/TROUBLESHOOTING.md).
 
 ### Configuration Generation
 The `/var/log/128technology/persistentDataManager.log` file at trace level will hold whether the configuration generation was run as well as output and return code.
@@ -917,4 +915,3 @@ config
     exit
 exit
 ```
-[azure-lb]: https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview
