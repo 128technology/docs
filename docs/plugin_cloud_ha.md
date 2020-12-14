@@ -20,8 +20,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 ## Version Restrictions
 
  The router component can only be installed on versions of 128T which support provisional state on device interfaces. This is necessary for the plugin to be able to prevent asymmetrical routing.
- 
- The versions of 128T that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time. Perform a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement, or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of 128T that satisfy this requirement.
+ The versions of 128T that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of 128T that satisfy this requirement.
 
 
 ## Plugin Behavior
@@ -447,6 +446,19 @@ Tue 2020-10-09 16:42:50 UTC
 There are 0 shelved alarms
 Completed in 0.10 seconds
 ```
+
+### Router Version Incompatibility
+
+As mentioned in the `Version Restrictions` section, the router component of the plugin will only install on 128T versions which support the provisional device interface state. This will be apparent to the user if the router component is not being setup and `show assets` indicates an error similar to:
+
+```
+Error:
+    Problem: conflicting requests
+    - nothing provides 128T-device-interface-api(1.0) needed by 128T-cloud-ha-router-1.1.0-1.x86_64
+```
+
+The router will need to be upgraded to a compatible version. Compatible versions can be listed with  `dnf list --whatprovides 128T-device-interface-api(1.0)`.
+
 
 ## Appendix
 
