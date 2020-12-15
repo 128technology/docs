@@ -15,7 +15,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 
 - **I95-9152 [PCLI configuration help text identifies required fields](cli_reference.md#required-fields):** When using the PCLI configuration command, the required fields are now identified within the Help text. 
 ------
-- **I95-9242 Service and Topology Exchange Protocol (STEP):** STEP facilitates the design and scale of new (and exisiting) networks by network administrators, and provides insight into service availablity across the network. STEP is designed for service exchange and reachability to those services used by routers to efficiently route packets for each service. 
+- **I95-9242 [Service and Topology Exchange Protocol (STEP)](concepts_STEP.md):** STEP facilitates the design and scale of new (and exisiting) networks by network administrators, and provides insight into service availablity across the network. STEP is designed for service exchange and reachability to those services used by routers to efficiently route packets for each service. 
 ------
 - **I95-15618 [Auto completion](cli_reference.md#clear-arp):** Auto completion is now available on the `clear arp` PCLI command.
 ------
