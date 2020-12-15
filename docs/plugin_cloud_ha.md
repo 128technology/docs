@@ -164,6 +164,7 @@ authority
         up-holddown-timeout 2
         peer-reachability-timeout 10
         remote-health-network 169.254.180.0/24
+        health-interval 2
     exit
     cloud-redundandy-group group2
         name group2
@@ -173,17 +174,18 @@ authority
 exit
 ```
 
-| Element                   | Type            | Properties                                     | Description                                                                                   |     |
-| ------------------------- | --------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------- | --- |
-| name                      | string          | key                                            | The name of the group to be referenced in other places.                                       |     |
-| enabled                   | boolean         | default: true                                  | Whether the group is enabled.                                                                 |     |
-| solution-type             | enum            | required                                       | The solution to use on member nodes.  Value can be one of the values in #Supported Solutions. |     |
-| additional-branch-prefix  | list: ip-prefix |                                                | Additional ip prefixes that the member routers will control.                                  |     |
-| up-holddown-timeout       | int             | default: 2                                     | The number of seconds to wait before declaring a member up.                                   |     |
-| peer-reachability-timeout | int             | default: 10                                    | The number of seconds to wait before declaring a peer unreachable.                            |     |
-| remote-health-network     | ip-prefix       | default: 169.254.180.0/24                      | The ip prefix to use for inter-member health status messages.                                 |     |
-| include-peer-vnets        | boolean         | if: solution-type = azure-vnet, default: false | Whether to include peer VNETs as part of the route table discovery algorithm.                 |     |
-| probe-port                | port            | if: solution-type = azure-lb, default: 12801   | The port that the Azure Loadbalancer will be sending the HTTP probes on.                      |     |
+| Element                   | Type            | Properties                                     | Description                                                                                                                          |     |
+| ------------------------- | --------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| name                      | string          | key                                            | The name of the group to be referenced in other places.                                                                              |     |
+| enabled                   | boolean         | default: true                                  | Whether the group is enabled.                                                                                                        |     |
+| solution-type             | enum            | required                                       | The solution to use on member nodes.  Value can be one of the values in #Supported Solutions.                                        |     |
+| additional-branch-prefix  | list: ip-prefix |                                                | Additional ip prefixes that the member routers will control.                                                                         |     |
+| up-holddown-timeout       | int             | default: 2                                     | The number of seconds to wait before declaring a member up.                                                                          |     |
+| peer-reachability-timeout | int             | default: 10                                    | The number of seconds to wait before declaring a peer unreachable. This field must be at least twice the value of `health-interval`. |     |
+| health-interval           | int             | default: 2                                     | The interval in seconds for health reports to be collected.                                                                          |     |
+| remote-health-network     | ip-prefix       | default: 169.254.180.0/24                      | The ip prefix to use for inter-member health status messages.                                                                        |     |
+| include-peer-vnets        | boolean         | if: solution-type = azure-vnet, default: false | Whether to include peer VNETs as part of the route table discovery algorithm.                                                        |     |
+| probe-port                | port            | if: solution-type = azure-lb, default: 12801   | The port that the Azure Loadbalancer will be sending the HTTP probes on.                                                             |     |
 
 ### Membership
 
@@ -258,6 +260,7 @@ If the plugin configuration fails the validation below, the plugin will not prod
 
 * Priorities across all members in a group are unique.
 * IP Network fields such as `remote-health-network` and `cloud-redundancy-plugin-network` are validated to be an acceptable prefix size.
+* The `peer-reachabililty-timeout` for a group must be at least twice the amount of time as the `health-interval`.
 
 Please check `/var/log/128technology/plugins/cloud-ha-config-generation.log` on the Conductor for the errors causing the config to be invalid.
 
