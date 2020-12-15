@@ -78,10 +78,14 @@ A `solution-type` of `azure-vnet` can be used to enable the Azure VNET API agent
 
 * Microsoft.Network/routeTables/read
 * Microsoft.Network/networkInterfaces/read
-* Microsoft.Network/routeTables/routes/write
+* Microsoft.Network/routeTables/routes/*/write
+* Microsoft.Network/routeTables/routes/read
 * Microsoft.Compute/virtualMachines/read
+* Microsoft.Network/virtualNetworks/read
 
 The agent finds all of the route tables within the VNET using the Azure REST APIs. When a redundant interface becomes active, the agent updates the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's redundant interface will now be inactive. There is no update to the route table needed when becoming inactive.
+
+`Microsoft.Network/virtualNetworks/read` is only necessary when the plugin should discover and modify peer VNET route tables. This feature can be enabled by configuring `include-peer-vnets` to `true`.
 
 :::warning
 To prevent routing loops, the solution will not update the Azure Route Tables assigned to a subnet that has an activating node's Network Interface.
@@ -301,19 +305,15 @@ To check the state of the Cloud HA solution running on the router, the plugin ad
 
 #### State fields:
 
-| Field                    | When         | Description                                                                                                             |
-| ------------------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| is-active                |              | Whether the HA Agent considers itself active.                                                                           |
-| last-activity-change     |              | The timestamp of the last time the node called the became active or became inactive API on the API Agent.               |
-| first-active-interface   |              | The name of the first interface from the list of `redundant-interface`s that is healthy.                                |
-| first-active-mac-address |              | The mac address of the first interface from the list of `redundant-interface`s that is healthy.                         |
-| prefixes                 |              | The list of configured prefixes. See `Address Prefixes`.                                                                |
-| local-status             |              | The understood state of the local node.                                                                                 |
-| remote-status            |              | The understood state of the remote node.                                                                                |
-| solution-state           |              | The solution specific state.                                                                                            |
-| in-vnet-route-tables     | `azure-vnet` | A list of in-vnet route tables that the Azure VNET Agent would modify. The output is directly from the Azure REST APIs. |
-| solution-state/is-active | `azure-lb`   | Whether the Azure Loadbalancer Agent considers itself active.                                                           |
-| last-probe-hit           | `azure-lb`   | The timestamp of the last time that the Azure Loadbalancer Agent was hit with a probe.                                  |
+| Field                    | Description                                                                                               |
+| ------------------------ | --------------------------------------------------------------------------------------------------------- |
+| is-active                | Whether the HA Agent considers itself active.                                                             |
+| last-activity-change     | The timestamp of the last time the node called the became active or became inactive API on the API Agent. |
+| first-active-interface   | The name of the first interface from the list of `redundant-interface`s that is healthy.                  |
+| first-active-mac-address | The mac address of the first interface from the list of `redundant-interface`s that is healthy.           |
+| prefixes                 | The list of configured prefixes. See `Address Prefixes`.                                                  |
+| local-status             | The understood state of the local node.                                                                   |
+| remote-status            | The understood state of the remote node.                                                                  |
 
 Example output for the `azure-vnet` solution:
 ```
@@ -348,29 +348,6 @@ Example output for the `azure-vnet` solution:
      prefixes:
      local-status:    healthy
      remote-status:   healthy
-     solution-state:
-       in-vnet-route-tables:
-           id:        /subscriptions/<subscription-id>/resourceGroups/US_East_Eng/providers/Microsoft.Netwo
- rk/routeTables/BenTestRouteTable
-           location:  eastus
-           properties:
-             disableBgpRoutePropagation:True
-             routes:
-                 id:  /subscriptions/<subscription-id>/resourceGroups/US_EAST_ENG/providers/Microsoft.Netwo
- rk/routeTables/BenTestRouteTable/routes/test
-                 name:test
-                 properties:
-                   addressPrefix:1.2.3.4/32
-                   nextHopIpAddress:10.0.1.4
-                   nextHopType:VirtualAppliance
-                 id:  /subscriptions/<subscription-id>/resourceGroups/US_East_Eng/providers/Microsoft.Netwo
- rk/routeTables/BenTestRouteTable/routes/test2
-                 name:test2
-                 properties:
-                   addressPrefix:5.6.7.8/32
-                   nextHopIpAddress:10.0.1.8
-                   nextHopType:VirtualAppliance
-       solution:      azure-vnet
 
 Completed in 1.67 seconds
 ```
@@ -408,10 +385,6 @@ Example output for the `azure-lb` solution:
      prefixes:
      local-status:    healthy
      remote-status:   healthy
-     solution-state:
-       is-active:     False
-       last-probe-hit:Mon 2020-10-05 20:18:49 UTC
-       solution:      azure-lb
 
 Completed in 1.72 seconds
 ```
