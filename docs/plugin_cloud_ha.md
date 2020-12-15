@@ -260,7 +260,7 @@ If the plugin configuration fails the validation below, the plugin will not prod
 
 * Priorities across all members in a group are unique.
 * IP Network fields such as `remote-health-network` and `cloud-redundancy-plugin-network` are validated to be an acceptable prefix size.
-* The `peer-reachabililty-timeout` for a group must be at least twice the amount of time as the `health-interval`.
+* The `peer-reachability-timeout` for a group must be at least twice the amount of time as the `health-interval`.
 
 Please check `/var/log/128technology/plugins/cloud-ha-config-generation.log` on the Conductor for the errors causing the config to be invalid.
 
