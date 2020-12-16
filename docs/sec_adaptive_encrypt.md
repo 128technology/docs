@@ -39,13 +39,15 @@ If a packet is plain UDP, ICMP, or any other non-TCP and non-IPSEC protocol, it 
 Adaptive Encryption is enabled by a boolean in the [security-policy](config_reference_guide.md#security):
 
 ```
-leaf adaptive-encryption {
-                    type boolean;
-                    default true;
-                    description
-                    	"Prevent packets that are detected as encrypted from 
-                    	 being encrypted again as they pass through the router.";
-}
+ladmin@conductor-east-1.RTR_EAST_CONDUCTOR (security[name=aes1])# adaptive-encryption
+usage: adaptive-encryption [<boolean>]
+Prevent packets that are detected as encrypted from being encrypted again as they pass through the router.
+positional arguments:
+boolean    The value to set for this field
+boolean:
+--------
+A true or false value.
+Options: true or false
 ```
 
 A security-policy can be applied for multiple purposes. However, because adaptive-encryption only applies to payload encryption, **the adaptive encryption field only has meaning where the policy is configured on a service and encryption is also enabled.** If the same security-policy is configured on an interface, the field has no meaning.
