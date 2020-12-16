@@ -625,3 +625,7 @@ Aug 05 14:32:40 dev-fitlet node[32315]: '/etc/128technology/plugins/network-scri
 
 ### Caveat
 - **PLUGIN-922** Wireguard does not work with the kernel version `3.10.0-1160` (and newer), which is installed with 128T versions 4.3.11 (and greater) and 4.5.3 (and greater).
+
+### Release 1.2.0
+
+- **PLUGIN-922** Wireguard works with 128T versions 4.3.0 through 4.3.11, 4.5.0 through 4.5.3, and 5.0.0 which install one of the following kernel versions: `3.10.0-1062.9.1`, `3.10.0-1127.18.2`, `3.10.0-1160`, or `3.10.0-1160.6.1`.
