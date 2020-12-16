@@ -13,19 +13,19 @@ sidebar_label: 4.5
 ------
 - **I95-37774 Detached Flow Collision:** A rare case that allowed a flow collision with a detached flow. 
 ------
--**I95-38084 SNMP failure alarm after upgrade:** Resolved an issue where the snmpd service was starting before the configuration had been received causing the failure alarm.  
+- **I95-38084 SNMP failure alarm after upgrade:** Resolved an issue where the snmpd service was starting before the configuration had been received causing the failure alarm.  
 ------
 - **I95-38152 Access Policy field in GUI with wrong title:** Corrected the title in the Access Policy for Service field.
 ------
 - **I95-38175 Deleting an invalid interface from the router logs an error:** Resolved an issue where a non-forwarding interface would fail to be removed from Linux when deleted from configuration.
 ------
--**I95-38194 Conductor cannot see peer path stats in GUI:** Teh web server now makes an explicit version check to verify the correct data is sent. 
+- **I95-38194 Conductor cannot see peer path stats in GUI:** The web server now makes an explicit version check to verify the correct data is sent. 
 ------
-- **I95-38196 One way Audio issue:** Resolved a session collision issue resulting in a lost service path.
+- **I95-38196 Session Collision:** Resolved a situation that occurs when a flow is setup at the same time from both directions, the subsequent collision results in only one of the two flows being established.
 ------
-- **I95-39223 Using a question mark on a poorly written command dumps a stack trace:** Added checks against syntax in Command line commands. 
+- **I95-38223 Using a question mark on a command that does not exist creates a stack trace:** Added checks against syntax in Command line commands. 
 ------
-- **I95-38230 Support for off-subnet-reverse-arp-mac-learning:** A new flag has been added to the network interface to turn on this feature.
+- **I95-38230 [Support reverse arp learning for off subnet IPs](config_reference_guide.md#network-interface):** A flag has been added to allow the ARP entry for each of the reverse flows to use the source MAC from the incoming packet as the subnet source IP address.
 ------
 - **I95-38299 Not handling ICMP request with Zero as identifier:** ICMP packets with a value of 0 are now handled correctly. 
 
