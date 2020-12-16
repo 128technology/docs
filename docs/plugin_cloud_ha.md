@@ -3,7 +3,7 @@ title: Cloud High Availability Plugin
 sidebar_label: Cloud HA
 ---
 
-The 128T-cloud-ha plugin provides High Availability (HA) functionality for the 128T Networking Platform deployed in the cloud. HA for 128T routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin utilizes node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
+The 128T-cloud-ha plugin provides High Availability (HA) functionality for the 128T Networking Platform deployed in the cloud. HA for 128T routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin uses node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -19,7 +19,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 
 ## Version Restrictions
 
- The router component can only be installed on versions of 128T which support provisional state on device interfaces. This is necessary for the plugin to be able to prevent asymmetrical routing.
+ The router component can only be installed on versions of 128T which support [provisional state](release_notes_128t_4.5.md#new-features-and-improvements) on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
  The versions of 128T that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of 128T that satisfy this requirement.
 
 
@@ -88,7 +88,7 @@ The agent finds all of the route tables within the VNET using the Azure REST API
 `Microsoft.Network/virtualNetworks/read` is only necessary when the plugin should discover and modify peer VNET route tables. This feature can be enabled by configuring `include-peer-vnets` to `true`.
 
 :::warning
-To prevent routing loops, the solution will not update the Azure Route Tables assigned to a subnet that has an activating node's Network Interface.
+To prevent routing loops, the solution will not update the Azure Route Tables assigned to a subnet that has an activating node's _network interface_.
 :::
 
 ## Scenarios
@@ -101,7 +101,7 @@ In the case where both members are healthy, the primary node is preferred and se
 
 ### Primary Failure
 
-When the **primary node** becomes unhealthy and the redundant interfaces are operationally down, the Monitoring Agent sends an unhealthy status to the local HA Agent. When the **local node** is deemed unhealthy, the local HA Agent sends an unhealthy message to the remote HA Agent, and notifies the internal state machine. When the **primary node** recognizes it is no longer fit to process traffic, it becomes inactive. The **secondary node** recognizes the primary node is not processing traffic, *and the local node is healthy(??)* so the secondary node becomes active.
+When the **primary node** becomes unhealthy and the redundant interfaces are operationally down, the Monitoring Agent sends an unhealthy status to the local HA Agent. When the **local node** is deemed unhealthy, the local HA Agent sends an unhealthy message to the remote HA Agent, and notifies the internal state machine. When the **primary node** recognizes it is no longer fit to process traffic, it becomes inactive. The **secondary node** recognizes the primary node is not processing traffic, and the **seconary node** is healthy so the secondary node becomes active.
 
 ![primary-failure-scenario](/img/cloud-ha-primary-failure-scenario.png)
 
@@ -138,6 +138,20 @@ If the secondary node is shutdown while the primary is healthy, the primary HA A
 ### Split Brain
 
 This is slightly distinct from the Primary Shutdown or Secondary Shutdown because both nodes and HA Agents are up and running, but the peer link between the nodes is down. In this case, both HA Agents determine that the other HA Agent is unreachable. This is indistinguisable from the other node being shutdown, so both HA Agents will determine they are in the position to take control of traffic, so whichever node was not already active will become active. This means that both nodes will have their `redundant-interface`s provisionally up. For the `azure-vnet` solution, there will still only be one node that the route tables are pointing their routes towards due to the nature of the solution. For the `azure-lb` solution, both nodes will respond to the probes so traffic will be split according to the Azure Loadbalancer configuration. This situation can cause asymmetrical routing where if branch traffic comes in on the node that the solution is not pointed towards, then traffic will be sent into Azure through that node and come back in through the other node.
+
+The split brain scenario can be identified if the peers can't reach each other which will be captured with alarms:
+```
+# show alarms
+
+========================= ===================== ========== ======== =========== =======================================
+ ID                        Time                  Severity   Source   Category    Message
+========================= ===================== ========== ======== =========== =======================================
+ router.node:11            2020-12-16 05:40:40   CRITICAL   router2    PEER      Peer router2 is not reachable
+ router2.node2:10          2020-12-16 05:40:42   CRITICAL   router     PEER      Peer router is not reachable
+
+```
+
+Another indicator of a split brain scenario is having the `remote-status` be `unreachable` for the [state output](#state-fields) for both members.
 
 ![split-brain-scenario](/img/cloud-ha-split-brain-scenario.png)
 
@@ -225,8 +239,8 @@ exit
 | cloud-redundancy-plugin-network | ip-network      | default: 169.254.137.0/30 | The ip network to use for internal networking. This should only be configured when the default value conflicts with a different service in the configuration. |
 | cloud-redundancy-group          | reference       | required                  | The group that this member belongs to.                                                                                                                        |
 | priority                        | int             | min-value: 1, max-value:2 | The priority of the member where lower priority has higher preference.                                                                                        |
-| redundant-interface             | list: reference | min-number: 1             | The device interfaces that will be redundant with the `redundant-interfaces` on the peer members.                                                             |
-| additional-interface            | list: reference |                           | The device interfaces that will be considered for node health, but not considered for redundant operations.                                                   |
+| redundant-interface             | list: reference | min-number: 1             | The _device interfaces_ that will be redundant with the `redundant-interfaces` on the peer members.                                                           |
+| additional-interface            | list: reference |                           | The _device interfaces_ that will be considered for node health, but not considered for redundant operations.                                                 |
 | log-level/ha-agent              | log-level       | default: info             | The log level for the HA Agent.                                                                                                                               |
 | log-level/api-agent             | log-level       | default: info             | The log level for the active API Agent.                                                                                                                       |
 
@@ -256,7 +270,7 @@ To see a full blown configuration and the configuration it generates, look at `C
 
 ### Validation
 
-If the plugin configuration fails the validation below, the plugin will not produce any generated config and thus the plugin will fail to launch.
+The following criteria need to be met in order for the cloud-ha plugin to take effect for a specific group:
 
 * Priorities across all members in a group are unique.
 * IP Network fields such as `remote-health-network` and `cloud-redundancy-plugin-network` are validated to be an acceptable prefix size.
@@ -268,7 +282,7 @@ Please check `/var/log/128technology/plugins/cloud-ha-config-generation.log` on 
 
 The components that are assumed to be setup already:
 
-* There is at least one functioning forwarding device interface on each of the member nodes.
+* There is at least one functioning forwarding _device interface_ on each of the member nodes.
 * There is peering between member nodes if the member nodes are not under the same router.
 
 
@@ -295,7 +309,7 @@ Additional configuration validation is done without causing a traditional valida
 
 ```
 2020-10-09 19:54:21,190: ERROR - Validation errors occurred:
-Group group1 does not have unique priorities across members: {'BenTestRouter2 test2': '2', 'BenTestRouter test': '2'}
+Group group1 does not have unique priorities across members: {'node2 router2': '2', 'node1 router1': '2'}
 ```
 
 
@@ -306,7 +320,7 @@ The different services on the router all log to the files captured by the glob `
 ### PCLI Enhancements
 To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. This state information is also accessible from the 128T's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
 
-#### State fields:
+#### State Fields
 
 | Field                    | Description                                                                                               |
 | ------------------------ | --------------------------------------------------------------------------------------------------------- |
@@ -323,7 +337,7 @@ Example output for the `azure-vnet` solution:
 # show device-interface name cloud-ha
 
 ======================================================
- BenTestRouter.test:cloud-ha
+ node1.router1:cloud-ha
 ======================================================
  Type:                host
  Forwarding:          true
@@ -360,7 +374,7 @@ Example output for the `azure-lb` solution:
 # show device-interface name cloud-ha
 
 ======================================================
- BenTestRouter.test:cloud-ha
+ node1.router1:cloud-ha
 ======================================================
  Type:                host
  Forwarding:          true
