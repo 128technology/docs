@@ -101,7 +101,7 @@ In the case where both members are healthy, the primary node is preferred and se
 
 ### Primary Failure
 
-When the **primary node** becomes unhealthy and the redundant interfaces are operationally down, the Monitoring Agent sends an unhealthy status to the local HA Agent. When the **local node** is deemed unhealthy, the local HA Agent sends an unhealthy message to the remote HA Agent, and notifies the internal state machine. When the **primary node** recognizes it is no longer fit to process traffic, it becomes inactive. The **secondary node** recognizes the primary node is not processing traffic, and the **seconary node** is healthy so the secondary node becomes active.
+When the **primary node** becomes unhealthy and the redundant interfaces are operationally down, the Monitoring Agent sends an unhealthy status to the local HA Agent. When the **local node** is deemed unhealthy, the local HA Agent sends an unhealthy message to the remote HA Agent, and notifies the internal state machine. When the **primary node** recognizes it is no longer fit to process traffic, it becomes inactive. The **secondary node** recognizes the primary node is not processing traffic, and the **secondary node** is healthy so the secondary node becomes active.
 
 ![primary-failure-scenario](/img/cloud-ha-primary-failure-scenario.png)
 
