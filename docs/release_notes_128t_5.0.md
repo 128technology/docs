@@ -23,8 +23,6 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-22350 [Hierarchical Services](bcp_service_and_service_policy_design.md#hierarchical-services)** allow you to create groupings of services that inherit properties from one another.
 ------
-- **I95-22789 Dual LTE Support:** Dual LTE support is valuable when connecting to two discrete wireless carriers when there is a need for an active/active LTE connection. For details, please see [LTE and Dual LTE Configuration](howto_lte.md).
-------
 - **I95-25513 Display 128T, Installer, and Installer Repo Versions:** The GUI and CLI both display the software version, installer version, and installer repo versions. 
 ------
 - **I95-27886 Packet Duplication for Inter-Node High Availability:** Packet duplication over multiple inter-node links helps reduce packet loss during transmission. For protocols such as UDP that do not verify packet integrity, this helps ensure full transmission of traffic. See [service-policy](config_reference_guide.md/#service-policy) for usage information. 
@@ -55,6 +53,10 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-36876 `show assests software` includes Repository information:** The PCLI command [`show assets software`](cli_reference.md/#show-assets-software) includes the repository for each available software version. 
 ------ 
+- **I95-37192 Template Instance Input Helper:** Administrators can identify templated fields in the GUI and PCLI to guide users in the information to be entered. 
+------
+- **I95-38170 Updated path metrics for `show service-path`:** Latency, loss, and jitter metrics are displayed when they are available, even if performance monitor is not enabled for the path.   
+------
 
 ### Resolved Issues
 
@@ -95,7 +97,23 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-36828** Unable to acquire logs through GUI when `remote-login` is disabled.
 ------
+- **I95-36891** Upgrade and restart of 128T caused PCLI error state. 
+------
 - **I95-37519** Updating session-types can cause erroneous config abort.
+------
+- **I95-38084** Resolved an issue where the snmpd service was starting before the configuration had been received causing the failure alarm.
+------
+- **I95-38152** Corrected the title in the Access Policy for Service field.
+------
+- **I95-38175** Resolved an issue where a non-forwarding interface would fail to be removed from Linux when deleted from configuration.
+------
+- **I95-38196** Resolved a situation that occurs when a flow is setup at the same time from both directions, the subsequent collision results in only one of the two flows being established.
+------
+- **I95-38223** Using a question mark on a command that does not exist creates a stack trace. Added checks against syntax in Command line commands.
+------
+**I95-38259** Update the kernel to 3.10.0-1160.6.1 to address CESA-2020:5023 CVE.
+------
+- **I95-38395** Resolved an issue where a TCP FIN received before the data that proceeded it could cause a stuck flow.
 ------
 
 ## Special Considerations
