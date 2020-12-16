@@ -19,7 +19,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 
 ## Version Restrictions
 
- The router component can only be installed on versions of 128T which support [provisional state](release_notes_128t_4.5.md#new-features-and-improvements) on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
+ The router component can only be installed on versions of 128T which support provisional state on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
  The versions of 128T that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of 128T that satisfy this requirement.
 
 
