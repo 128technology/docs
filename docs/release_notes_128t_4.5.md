@@ -11,7 +11,7 @@ sidebar_label: 4.5
 ------
 - **I95-37192 Template Instance Input Helpers:** Added the ability to define input helper text for a given templated parameter, so that template consumers enter data appropriate to the input form.
 ------
-**I95-37774 Detached Flow Collision:** Resolved a rare case that allowed a flow collision with a detached flow that may result in an application fault.
+- **I95-37774 Detached Flow Collision:** Resolved a rare case that allowed a flow collision with a detached flow that may result in an application fault.
 ------
 - **I95-38084 SNMP failure alarm after upgrade:** Resolved an issue where the snmpd service was starting before the configuration had been received causing the failure alarm.  
 ------
