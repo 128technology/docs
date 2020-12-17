@@ -3644,7 +3644,11 @@ show assets software [force] [router <router>] [node <node>]
 
 #### Description
 
-Displays software related information for each managed asset. In particular, it displays the current running version of software, any versions available for download and the repository where they are located, software versions that are currently being downloaded and those that have been downloaded which can be used to upgrade the platform.
+Displays software related information for each managed asset. The following information is provided:
+- Current running version of software. 
+- Versions available for download and the repository where they are located. 
+- Software versions currently being downloaded.
+- Previously downloaded versions that can be used to upgrade the platform.
 
 #### Example
 

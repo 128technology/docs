@@ -7,6 +7,10 @@ Because networks are constantly changing, services and service reachability info
 
 Service and Topology Exchange Protocol (STEP) provides a way to achieve service availability through a central repository. STEP helps network administrators easily design and scale existing or new networks and provide insight into the service availability across the whole network.
 
+The **STEP Repository** is built upon a highly efficient and scalable in-memory database. There is no business logic in the STEP repository itself; all of the routing decisions (both client publishing routing data, and the client using the data to perform path computations) are performed on each router.
+
+Routers participating in a STEP-enabled network publish information about services, peer connections, and link state in a JSON encoded document called the STEP document. This information is used by all routers to intelligently route traffic to services and react to network changes. The STEP repository can also be used by service providers to advertise service information from their networks/authority.
+
 A router supporting STEP publishes a document to the STEP repository. To enable optimal routing decisions in the network, routers need to advertise the peer path SLA metrics in their STEP router document and publish that to the STEP repository. Much of the router document content is expected to be stable and only need occasional updates (such as the operational status of a peer path changing from “up” to “down” or vice versa). 
 
 However, the peer path metrics can change constantly, multiple times per minute. These loss, latency and jitter metrics are measured at every BFD link test interval (10 seconds by default), so advertising them frequently represents a scaling problem. In general, a router will update its router document and publish it as soon as a relevant change has occurred. But updating the peer path metrics requires a damping mechanism. This guide describes the processing pipeline that receives the raw metric update stream from BFD and transforms it into a manageable series of STEP router document updates. 

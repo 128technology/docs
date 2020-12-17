@@ -1489,6 +1489,7 @@ The network-interface element represents a logical interface on a node.
 | neighbor | sub-element | Single instance. This lets administrators set the IP:MAC associations for a neighboring device. |
 | neighborhood | sub-element | This is where *neighborhood* labels are applied, to indicate connectivity to other 128T routers within the Authority. When two routers both have an interface within the same *neighborhood* (i.e., they share a common label), they are intended to be mutually reachable. |
 | off-subnet-arp-prefix | ipv4-prefix | This is a multple instance element within a `network-interface`, that causes the 128T to send ARP replies with its own MAC address for address that fall within the IPv4 prefix(es) specified. |
+| off-subnet-reverse-arp-mac-learning | boolean | Default: False. When `true`, reverse arp learning for off-subnet IP addresses is supported. The reverse flow uses the source MAC address from the incoming packet as the subnet source IP address. |
 | prioritization-mode | enumeration | Valid values: local, dscp. Default value: local. When set to *local*, the 128T router will use its local classification configuration to assign priorities to inbound flows (for traffic engineering purposes). When set to *dscp*, the 128T router will use inbound DSCP values to map to priorities (based on the *dscp-map* referenced in this element). |
 | qp-value | uint32 | The number of Quality Points that this interface can support. Used for route determination. |
 | reverse-arp-mac-learning | boolean | Default: false. When `true`, the 128T will use the source MAC address of packets it receives to populate its ARP table for unresolved ARP entries. |
@@ -2481,6 +2482,50 @@ If a policy reaches the end of the statement list and no statement has been exec
 | condition | sub-element | The condition that must be satisfied in order to enforce the `policy` action of accept or reject. |
 | name | string | Key field. A unique name for this statement. |
 | policy | enumeration | Valid values: accept, reject. Governs whether the statement will `accept` or `reject`, typically based on a `condition`. |
+
+## step-peer-path-advertisement (adjacency)
+
+#### Path:
+
+authority > router > node > device-interface > network-interface > adjacency
+
+#### Description
+
+Sample size for calculating the weighted moving average of peer path metrics to be advertised into STEP.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| sla-metrics | sub-command | Defines sla-metrics as the metrics to be advertised. |
+| moving-average-sample-size| uint16 | Range 1-10000, default 3. Sample size for calculating the weighted moving average of peer path SLA metrics to be advertised into STEP. |
+| significance-threshold | string | Thresholds for peer path SLA metrics. Values above the threshold are considered significant enough to be advertised into STEP. | 
+| min-loss | decimal64 | Range 0-100. Default: 0.1. Sub-element of significance-threshold. The threshold of packet loss considered significant enough for advertising into STEP. | 
+| min-latency | uint32 | Units: Milliseconds. Default: 5. Sub-element of significance-threshold. The threshold latency value considered significant enough for advertising into STEP. |
+| min-jitter | uint32 | Units: Milliseconds. Default: 2. Sub-element of significance-threshold. The threshold jitter value considered significant enough for advertising into STEP. |
+| increase-report-delay | percentage | Specifies mappings of peer path SLA metrics increase to STEP reporting delay. |
+| percentage | uint16 | Units: percent. Largest percentage increase seen among all of the metric values. Sub-element of increase-report-delay. |
+| delay | uint32 | Units: seconds. Reporting delay for the given percentage increase. Sub-element of increase-report-delay. |
+| decrease-report-delay | percentage | Specifies mappings of peer path SLA metrics decrease to STEP reporting delay. |
+| percentage | uint16 | Units: percent. Largest percentage increase seen among all of the metric values. Sub-element of decrease-report-delay. |
+| delay | uint32 | Units: seconds. Reporting delay for the given percentage increase. Sub-element of decrease-report-delay. |
+
+If `sla-metrics-moving-average-sample-size` or `sla-metrics-significance-threshold` is not configured, the default values will be used. Likewise, if `sla-metrics-increase-report-delay` or `sla-metrics-decrease-report-delay` is not configured, the default configuration is in effect.
+
+## step-peer-path-advertisement (district)
+
+#### Path
+authority > router > district
+
+#### Description
+
+STEP peer path advertisement settings for SLA related metrics.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| update-rate-limit | unit32 | Units: Seconds. Default: 180. Range 1-86400. Rate limit interval between upating peer path SLA metric values advertised in STEP. |
+| minimum-update-interval | uint32 | Units: Seconds. Default: 30. Range 1-86400. Minimum (burst) interval in between updating peer path SLA metric values advertised in STEP. |
+| update-burst-size | uint8 | Default: 2. Range: 1-100. Limit on the number of peer path SLA metric value updates advertised in STEP at the minimum (burst) update interval. |
+
+Only the default-district parameters are in effect. If no district-settings are configured, or if any of the `step-peer-path-advertisement` values are not provided, the default values are used.
 
 ## summary-range
 

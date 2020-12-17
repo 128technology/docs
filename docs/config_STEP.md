@@ -3,16 +3,14 @@ title: Configuring Service and Topology Exchange Protocol (STEP)
 sidebar_label: Configuring Service and Topology Exchange Protocol (STEP)
 ---
 
-The **STEP Repository** is built upon a highly efficient and scalable in-memory database. There is no business logic in the STEP repository itself; all of the routing decisions (both client publishing routing data, and the client using the data to perform SPF) are performed on each router.
-
-Routers participating in a STEP-enabled network publish information about services, peer connections, and link state in a JSON encoded document called the STEP document. This information is used by all routers to intelligently route traffic to services and react to network changes. The STEP repository can also be used by service providers to advertise service information from their networks/authority. 
+Use the information in this section to enable routers to connect to the STEP repository on the conductor and build their STEP documents. Additionally, information about configuring reporting parameters, and using the show commands to view STEP details is provided. 
 
 ## Enable STEP
 
-The STEP repository is located on the Conductor, and the repository process runs by default. Using the `step-repo` command to assign the IP Address allows the routers to connect to it and build the STEP document. Use the following commands to enable the STEP repository on the Conductor. 
+The STEP repository is located on the Conductor, and the repository process runs by default. Using the `step-repo` command to assign the IP Address allows the routers to connect to the repository and build the STEP document. Use the following commands to enable the STEP repository on the Conductor. 
 ``` 
 config authority
-    step-repository 11.1.1.1
+    step-repo 11.1.1.1
         address 11.1.1.1
         description "STEP Repository on the Conductor"
     exit
@@ -159,4 +157,69 @@ config
             exit
 ```
 
-Only the default-district parameters have any effect. If no district-settings are configured, or if any of the step-peer-path-advertisement values are not provided, the default values will be used.
+Only the default district parameters have any effect. If no `district-settings` are configured, or if any of the `step-peer-path-advertisement` values are not provided, the default values will be used.
+
+## Configurable Parameters
+```
+step peer path advertisement
+    sla-metrics
+        moving average sample size
+        significance threshold
+            min-loss
+            min-latency
+            min-jitter
+        increase report delay
+            percentage
+            delay
+        decrease-report-delay
+            percentage
+            delay
+```
+See [step-peer-path-advertisement (adjacency)](config_reference_guide.md#step-peer-path-advertisement-adjacency) for configuration details. 
+```
+district-settings
+    default-district
+    district-name
+    step-peer-path-sla-metrics-advertisement
+        update-rate-limit
+        minimum-update-interval
+        update-burst-size        
+```
+See [step-peer-path-advertisement (district)](config_reference_guide.md#step-peer-path-advertisement-district) for configuration details.
+
+## Show Commands
+
+The following show commands provide a view into the STEP functionality.
+
+- `show step lsdb`
+```
+admin@T197_DUT5.Site5# show step lsdb
+Thu 2020-12-17 19:04:42 UTC
+
+Retrieving from 'Site5'...
+
+================== ===============
+ District           Originator
+================== ===============
+ default-district   Site4
+ default-district   Site5
+ default-district   Datacenter
+
+```
+For additional information, see [show step lsdb](cli_reference.md#show-step-lsdb).
+
+- `show step routes`
+```
+admin@T197_DUT5.Site5# show step routes
+Thu 2020-12-17 19:26:56 UTC
+
+Retrieving from 'T197_DUT5.Site5'...
+
+=========== ===================== =============
+ Node Name   Service               IP Prefix
+=========== ===================== =============
+ T197_DUT5   site4-LAN             10.4.0.0/16
+
+```
+For additional information, see [show step routes](cli_reference.md#show-step-routes). 
+
