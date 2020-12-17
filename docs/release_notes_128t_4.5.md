@@ -3,6 +3,32 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
+## Release 4.5.4
+
+### Resolved Issues
+
+- **I95-35919 Resolve SSH-related vulnerabilities:** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) 
+------
+- **I95-37192 Template Instance Input Helpers:** Added the ability to define input helper text for a given templated parameter, so that template consumers enter data appropriate to the input form.
+------
+- **I95-37774 Detached Flow Collision:** Resolved a rare case that allowed a flow collision with a detached flow that may result in an application fault.
+------
+- **I95-38084 SNMP failure alarm after upgrade:** Resolved an issue where the snmpd service was starting before the configuration had been received causing the failure alarm.  
+------
+- **I95-38152 Access Policy field in GUI with wrong title:** Corrected the title in the Access Policy for Service field.
+------
+- **I95-38175 Deleting an invalid interface from the router logs an error:** Resolved an issue where a non-forwarding interface would fail to be removed from Linux when deleted from configuration.
+------
+- **I95-38194 Conductor cannot see peer path stats in GUI:** The web server now makes an explicit version check to verify the correct data is sent. 
+------
+- **I95-38196 Session Collision:** Resolved a situation that occurs when a flow is setup at the same time from both directions, the subsequent collision results in only one of the two flows being established.
+------
+- **I95-38223 Using a question mark on a command that does not exist creates a stack trace:** Added checks against syntax in Command line commands. 
+------
+- **I95-38230 [Support reverse arp learning for off subnet IPs](config_reference_guide.md#network-interface):** A flag has been added to allow the ARP entry for each of the reverse flows to use the source MAC from the incoming packet as the subnet source IP address.
+------
+- **I95-38299 Not handling ICMP request with Zero as identifier:** ICMP packets with a value of 0 are now handled correctly. 
+
 ## Release 4.5.3
 
 :::warning
