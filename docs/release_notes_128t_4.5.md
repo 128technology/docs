@@ -7,7 +7,7 @@ sidebar_label: 4.5
 
 ### Resolved Issues
 
-- **I95-35919 Resolve SSH-related vulnerabilities:** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) 
+- **I95-35919 Resolve SSH-related vulnerabilities:** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) With these changes, upgrading a router changes the host key identifier. This results in the SSH message: WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED being displayed after the upgrade, as well as when a user connects to the system using the `ssh` command.
 ------
 - **I95-37192 Template Instance Input Helpers:** Added the ability to define input helper text for a given templated parameter, so that template consumers enter data appropriate to the input form.
 ------
