@@ -32,7 +32,7 @@ For additional information about the manual installation process with Screen, pl
 
 ### Additional Changes to SSH Parameters
 - The SSH login grace time is limited to waiting for one minute for a password to be entered.
-- SSH access is limited to users in the following admin groups: 
+- SSH access is limited to users in one of the following groups: 
 	- 128t
 	- 128t-admin
 	- 128t-user
