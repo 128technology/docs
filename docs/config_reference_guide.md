@@ -2510,6 +2510,11 @@ Update frequency and timeliness of the STEP peer path advertisement for the adja
 
 If `moving-average-sample-size` or `significance-threshold` is not configured, the default values will be used. Likewise, if `increase-report-delay` or `decrease-report-delay` is not configured, the default configuration is in effect.
 
+#### Version History:
+| Release | Modification |
+| ------- | ------------ |
+| 5.0.0   | Introduced   |
+
 ## step-peer-path-advertisement (neighborhood)
 
 #### Path:
@@ -2537,6 +2542,11 @@ Update frequency and timeliness of the STEP peer path advertisement for the neig
 
 If `moving-average-sample-size` or `significance-threshold` is not configured, the default values will be used. Likewise, if `increase-report-delay` or `decrease-report-delay` is not configured, the default configuration is in effect.
 
+#### Version History:
+| Release | Modification |
+| ------- | ------------ |
+| 5.0.0   | Introduced   |
+
 ## step-peer-path-sla-metrics-advertisement (district-setting)
 
 #### Path
@@ -2553,6 +2563,11 @@ STEP peer path advertisement settings for SLA related metrics.
 | update-burst-size | uint8 | Default: 2. Range: 1-100. Limit on the number of peer path SLA metric value updates advertised in STEP at the minimum (burst) update interval. |
 
 Only the default-district parameters are in effect. If no district-settings are configured, or if any of the `step-peer-path-advertisement` values are not provided, the default values are used.
+
+#### Version History:
+| Release | Modification |
+| ------- | ------------ |
+| 5.0.0   | Introduced   |
 
 ## summary-range
 
