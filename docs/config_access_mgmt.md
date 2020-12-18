@@ -12,6 +12,8 @@ To permit root access to the 128T system, ensure that there is at least one user
 Prerequisites for installation and upgrades now include configuring a super user in /etc/sudoers that is allowed to execute Linux shell commands as root (sudo privileges).
 During an upgrade, if the existing version allows SSH Root login, it will be disabled. When a system is installed using the OTP ISO, a "t128" user is automatically configured with sudo privileges. 
 
+
+
 ## SSH Idle Time
 Idle SSH sessions are logged out after 60 minutes of inactivity. When using the manual install process, it is strongly recommended to use the Screen utility to avoid an SSH session timeout. Screen allows you to disconnect from the terminal without interrupting the program being executed, circumventing any timeout and disconnection issues. Use the following procedure to perform the manual installation from Screen. 
 
@@ -28,8 +30,13 @@ From the terminal window:
 
 For additional information about the manual installation process with Screen, please refer to [Manually Installing the 128T](intro_installation_installer.md).
 
-### Addtitional Changes to SSH Parameters
+### Additional Changes to SSH Parameters
 - The SSH login grace time is limited to waiting for one minute for a password to be entered.
+- SSH access is limited to users in the following admin groups: 
+	- 128t
+	- 128t-admin
+	- 128t-user
+	- wheel
 - When creating a user with SSH privileges from the UI, that user must be assigned to an admin user group.
 
 ## Limiting Login Attempts
