@@ -2491,29 +2491,56 @@ authority > router > node > device-interface > network-interface > adjacency
 
 #### Description
 
-Sample size for calculating the weighted moving average of peer path metrics to be advertised into STEP.
+Update frequency and timeliness of the STEP peer path advertisement for the adjacency.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| sla-metrics | sub-command | Defines sla-metrics as the metrics to be advertised. |
+| sla-metrics | sub-command | Settings for SLA metrics advertisements. |
 | moving-average-sample-size| uint16 | Range 1-10000, default 3. Sample size for calculating the weighted moving average of peer path SLA metrics to be advertised into STEP. |
-| significance-threshold | string | Thresholds for peer path SLA metrics. Values above the threshold are considered significant enough to be advertised into STEP. | 
+| significance-threshold | configuration container | Includes the min-loss, min-latency and min-jitter attributes. | 
 | min-loss | decimal64 | Range 0-100. Default: 0.1. Sub-element of significance-threshold. The threshold of packet loss considered significant enough for advertising into STEP. | 
 | min-latency | uint32 | Units: Milliseconds. Default: 5. Sub-element of significance-threshold. The threshold latency value considered significant enough for advertising into STEP. |
 | min-jitter | uint32 | Units: Milliseconds. Default: 2. Sub-element of significance-threshold. The threshold jitter value considered significant enough for advertising into STEP. |
-| increase-report-delay | percentage | Specifies mappings of peer path SLA metrics increase to STEP reporting delay. |
+| increase-report-delay | configuration container | Sub-elements are percentage and delay. Multiple increase-report-delay statements may be configured. |
 | percentage | uint16 | Units: percent. Largest percentage increase seen among all of the metric values. Sub-element of increase-report-delay. |
 | delay | uint32 | Units: seconds. Reporting delay for the given percentage increase. Sub-element of increase-report-delay. |
-| decrease-report-delay | percentage | Specifies mappings of peer path SLA metrics decrease to STEP reporting delay. |
+| decrease-report-delay | configuration container | Sub-elements are percentage and delay. Multiple decrease-report-delay statements may be configured. |
 | percentage | uint16 | Units: percent. Largest percentage increase seen among all of the metric values. Sub-element of decrease-report-delay. |
 | delay | uint32 | Units: seconds. Reporting delay for the given percentage increase. Sub-element of decrease-report-delay. |
 
-If `sla-metrics-moving-average-sample-size` or `sla-metrics-significance-threshold` is not configured, the default values will be used. Likewise, if `sla-metrics-increase-report-delay` or `sla-metrics-decrease-report-delay` is not configured, the default configuration is in effect.
+If `moving-average-sample-size` or `significance-threshold` is not configured, the default values will be used. Likewise, if `increase-report-delay` or `decrease-report-delay` is not configured, the default configuration is in effect.
 
-## step-peer-path-advertisement (district)
+## step-peer-path-advertisement (neighborhood)
+
+#### Path:
+
+authority > router > node > device-interface > network-interface > neighborhood
+
+#### Description
+
+Update frequency and timeliness of the STEP peer path advertisement for the neighborhood.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| sla-metrics | sub-command | Settings for SLA metrics advertisements. |
+| moving-average-sample-size| uint16 | Range 1-10000, default 3. Sample size for calculating the weighted moving average of peer path SLA metrics to be advertised into STEP. |
+| significance-threshold | configuration container | Includes the min-loss, min-latency and min-jitter attributes. | 
+| min-loss | decimal64 | Range 0-100. Default: 0.1. Sub-element of significance-threshold. The threshold of packet loss considered significant enough for advertising into STEP. | 
+| min-latency | uint32 | Units: Milliseconds. Default: 5. Sub-element of significance-threshold. The threshold latency value considered significant enough for advertising into STEP. |
+| min-jitter | uint32 | Units: Milliseconds. Default: 2. Sub-element of significance-threshold. The threshold jitter value considered significant enough for advertising into STEP. |
+| increase-report-delay | configuration container | Sub-elements are percentage and delay. Multiple increase-report-delay statements may be configured. |
+| percentage | uint16 | Units: percent. Largest percentage increase seen among all of the metric values. Sub-element of increase-report-delay. |
+| delay | uint32 | Units: seconds. Reporting delay for the given percentage increase. Sub-element of increase-report-delay. |
+| decrease-report-delay | configuration container | Sub-elements are percentage and delay. Multiple decrease-report-delay statements may be configured. |
+| percentage | uint16 | Units: percent. Largest percentage increase seen among all of the metric values. Sub-element of decrease-report-delay. |
+| delay | uint32 | Units: seconds. Reporting delay for the given percentage increase. Sub-element of decrease-report-delay. |
+
+If `moving-average-sample-size` or `significance-threshold` is not configured, the default values will be used. Likewise, if `increase-report-delay` or `decrease-report-delay` is not configured, the default configuration is in effect.
+
+## step-peer-path-sla-metrics-advertisement (district-setting)
 
 #### Path
-authority > router > district
+authority > router > district-setting
 
 #### Description
 
@@ -2521,7 +2548,7 @@ STEP peer path advertisement settings for SLA related metrics.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| update-rate-limit | unit32 | Units: Seconds. Default: 180. Range 1-86400. Rate limit interval between upating peer path SLA metric values advertised in STEP. |
+| update-rate-limit | unit32 | Units: Seconds. Default: 180. Range 1-86400. Rate limit interval between updating peer path SLA metric values advertised in STEP. |
 | minimum-update-interval | uint32 | Units: Seconds. Default: 30. Range 1-86400. Minimum (burst) interval in between updating peer path SLA metric values advertised in STEP. |
 | update-burst-size | uint8 | Default: 2. Range: 1-100. Limit on the number of peer path SLA metric value updates advertised in STEP at the minimum (burst) update interval. |
 

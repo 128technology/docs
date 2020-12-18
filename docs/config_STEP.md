@@ -16,7 +16,7 @@ config authority
     exit
 ```
 
-### Configuring Weighted Moving Average (WMA) Parameters
+### Configuring Peer Path Advertisement Settings
 
 The weighted moving average and reporting delay parameters can be configured per neighborhood:
 
@@ -138,7 +138,7 @@ config
 ```
 Note that the effective values are those in the adjacency. The adjacency configuration may be auto-generated or manually configured. The values configured in the neighborhood have no direct effect on the router behavior, they only provide the input for instantiating adjacency objects.
 
-If `sla-metrics-moving-average-sample-size` or `sla-metrics-significance-threshold` is not configured, the default values will be used. Likewise, if `sla-metrics-increase-report-delay` or `sla-metrics-decrease-report-delay` is not configured, the default configuration is in effect.
+If `moving-average-sample-size` or `significance-threshold` is not configured, the default values will be used. Likewise, if `increase-report-delay` or `decrease-report-delay` is not configured, the default configuration is in effect.
 
 ### Router District Settings
 The rate limit parameters for peer path SLA updates to the STEP router document can be configured for each router. The router can use different values on a per-district basis:
