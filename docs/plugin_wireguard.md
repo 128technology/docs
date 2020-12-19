@@ -629,3 +629,6 @@ Aug 05 14:32:40 dev-fitlet node[32315]: '/etc/128technology/plugins/network-scri
 ### Release 1.2.0
 
 - **PLUGIN-922** 128T Wireguard solution will now be compatible with multiple kernel versions which cover a majority of 128T releases. The enhancement currently supports the following kernel versions: `3.10.0-1062.9.1`, `3.10.0-1127.18.2`, `3.10.0-1160`, and `3.10.0-1160.6.1`.
+
+### Caveat
+- **PLUGIN-987** Wireguard requires manual removal of the installed kmod-wireguard rpm before initiating a 128T rollback where the active kernel version changes.
