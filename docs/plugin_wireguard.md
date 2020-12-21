@@ -623,7 +623,7 @@ In some cases, its possible that the version of 128T router is not compatible wi
 Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[28707]: __main__ - Could not validate wireguard packages: Could not query package kmod-wireguard, Command '['rpm', '-q', 'kmod-wireguard']' returned non-zero exit status 1.
 ```
 
-In some upgrade and rollback scenarios, its possible that an older version of module is installed on the router but that version is not compatible. Typically in such scenarios, a new version will be installed by the conductor but in some scenarios a compatible version might not be available. The following log messages in the journal can help troubleshoot these errors.
+In some upgrade and rollback scenarios, its possible that an older version of the module is installed on the router but that version is not compatible. Typically in such scenarios, a new version will be installed by the conductor but in some scenarios a compatible version might not be available. The following log messages in the journal can help troubleshoot these errors.
 
 ```
 Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - Running startup check commands for ns: wg-profile-1
@@ -643,7 +643,7 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 
 ### Release 1.2.0
 
-- **PLUGIN-922** Support multiple kernel versions for 128T Wireguard plugin and allow for graceful upgrade and rollback of 128T software releases. The enhancement currently supports the following kernel versions: `3.10.0-1062.9.1`, `3.10.0-1127.18.2`, `3.10.0-1160`, and `3.10.0-1160.6.1`.
+- **PLUGIN-922** Support multiple kernel versions for 128T Wireguard plugin and allow for graceful upgrade and rollback of the 128T software releases. The enhancement currently supports the following kernel versions: `3.10.0-1062.9.1`, `3.10.0-1127.18.2`, `3.10.0-1160`, and `3.10.0-1160.6.1`.
 
 ### Caveat
 - **PLUGIN-987** The 128T wireguard plugin might cause the 128T rollback to when kernel version changes are incompatible. The following procedure can be applied to work around this limitation
