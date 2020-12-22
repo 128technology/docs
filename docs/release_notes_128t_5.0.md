@@ -51,15 +51,9 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-35741 [PCLI plugin service commands](cli_reference.md#manage-plugin-install):** The plugin lifecycle can now be managed through the PCLI. 
 ------
-- **I95-35919 Resolve SSH-related vulnerabilities:** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) 
-------
 - **I95-36876 `show assests software` includes Repository information:** The PCLI command [`show assets software`](cli_reference.md/#show-assets-software) includes the repository for each available software version. 
 ------ 
-- **I95-37192 Template Instance Input Helper:** Administrators can identify templated fields in the GUI and PCLI to guide users in the information to be entered. 
-------
 - **I95-38170 Updated path metrics for `show service-path`:** Latency, loss, and jitter metrics are displayed when they are available, even if performance monitor is not enabled for the path.   
-------
-- **I95-38230 [Support reverse arp learning for off subnet IPs](config_reference_guide.md#network-interface):** A flag has been added to allow the ARP entry for each of the reverse flows to use the source MAC from the incoming packet as the subnet source IP address.
 ------
 
 ### Resolved Issues
@@ -105,23 +99,9 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-37519** Updating session-types can cause erroneous config abort.
 ------
-- **I95-37774** Resolved a rare case that allowed a flow collision with a detached flow that may result in an application fault.
-------
 - **I95-38084** Resolved an issue where the snmpd service was starting before the configuration had been received causing the failure alarm.
 ------
-- **I95-38152** Corrected the title in the Access Policy for Service field.
-------
-- **I95-38175** Resolved an issue where a non-forwarding interface would fail to be removed from Linux when deleted from configuration.
-------
-- **I95-38194** The web server now makes an explicit version check to verify that the correct peer path stats data is sent to the GUI. 
-------
-- **I95-38196** Resolved a situation that occurs when a flow is setup at the same time from both directions, the subsequent collision results in only one of the two flows being established.
-------
-- **I95-38223** Using a question mark on a command that does not exist creates a stack trace. Added checks against syntax in Command line commands.
-------
 - **I95-38259** Update the kernel to 3.10.0-1160.6.1 to address CESA-2020:5023 CVE.
-------
-- **I95-38299** ICMP packets with a value of 0 are now handled correctly. 
 ------
 - **I95-38395** Resolved an issue where a TCP FIN received before the data that proceeded it could cause a stuck flow.
 ------
@@ -142,3 +122,9 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 - **I95-36102** `compare config` now defaults to `compare config running candidate` when no additional arguments are supplied.
 ------
 - **I95-36525** TLS 1.0 is no longer supported.
+
+## Caveats
+
+- **I95-35521** pcli may provide a validation error but does not provide the specific configuration in error.
+
+  _**Corrective Action:**_ If a validation error is provided, review the configuration of each sub list between the items identified in the error response provided. For example, the same vlan id cannot be used for different networks interfaces on the same device interface.
