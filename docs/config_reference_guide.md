@@ -2,19 +2,21 @@
 title: Configuration Element Reference
 sidebar_label: Element Reference
 ---
+This section is a reference guide for the elements of the User Interface.  
+
 
 ## access-control
 
-Path:
+#### Path:
 
 authority > router > system > services > snmp-server > access-control
 
-Description:
+#### Description:
 
-This is what governs access to the 128T's SNMP server. Each source that will be polling this device will need to be configured within its own `access-control`.
+**Access-Control** governs access to the 128T's SNMP server. Each source that polls this device must be configured within its own `access-control`.
 
 :::note
-If SNMP queries are traversing a KNI to reach the 128T's SNMP server, then the `access-control` will need to be 128T address for the KNI (e.g., for the build-in KNI254, this is 169.254.127.126). In this case, access control will be governed by the `host-service` on the ingress `network-interface`.
+If SNMP queries are traversing a KNI to reach the 128T's SNMP server, then the `access-control` setting must be the 128T address for the KNI (e.g., for the build-in KNI254, this is 169.254.127.126). In this case, access control is governed by the `host-service` on the ingress `network-interface`.
 :::
 
 | Element | Type | Description |
@@ -25,13 +27,13 @@ If SNMP queries are traversing a KNI to reach the 128T's SNMP server, then the `
 
 ## access-policy (service)
 
-Path:
+#### Path:
 
-authority \> service \> access-policy
+authority > service > access-policy
 
-Description:
+#### Description:
 
-Access policies are a multiple instance sub-element within a service configuration. Conceptually akin to an access control list (ACL), access-policy objects are configured to explicitly grant or deny access to a service, and therefore service route, to the group of users specified by either an address block or a Qualified Service Name (QSN).
+Service access policies are a multiple instance sub-element within a service configuration. Conceptually similar to an access control list (ACL), service access-policy objects are configured to explicitly grant or deny access to a service and a service route. The user or group of users are specified by an address block or a Qualified Service Name (QSN).
 
 | Element | Type | Description |
 | ------- | ---- | ----------- |
@@ -42,17 +44,21 @@ Access policies are a multiple instance sub-element within a service configurati
 QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
 :::
 
-Version History:
+#### Version History
 
-Introduced in 1.0. Enhanced in 2.0, added the ability to specify a specific subnet within a tenant as a source (e.g., `tenantName@192.168.1.0/24`).
+| Release | Modification |
+| ------- | ------------ |
+| 1.0.0   | This feature was introduced. |
+| 2.0.0	  | Added the ability to specify a specific subnet within a tenant as a source (e.g., `tenantName@192.168.1.0/24`). |
+
 
 ## access-policy (host-service)
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> address \> host-service \> access-policy
+authority > router > node > device-interface > network-interface > address > host-service > access-policy
 
-Description:
+#### Description:
 
 Access policies are a multiple instance sub-element within a host-service configuration. Much as they're used within 128T defined services, when defined within *host-service* elements they explicitly grant or deny access to an underlying Linux service, to the group of users specified by either an address block or a Qualified Service Name (QSN).
 
@@ -60,19 +66,24 @@ Access policies are a multiple instance sub-element within a host-service config
 | --- | --- | --- |
 | permission | enumeration | Valid values: allow, deny. Default: allow. This setting determines whether or not the address(es) or QSN defined in the "source" field should be allowed access to this service.|
 | source | source-spec | Key field. This field contains either an IP prefix, or a QSN, or a combination of the two, and represents the "user population" subjected to this access policy.|
-> Note that QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
 
-Version History:
+:::note
+QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
+:::
 
-Introduced as part of the addition of *host-service* capabilities in 3.1.
+#### Version History:
+| Release | Modification |
+| ------- | ------------ |
+| 3.1.0   | This feature was introduced as part of the addition of *host-service* capabilities. |
+
 
 ## action
 
-Path:
+#### Path:
 
 authority > routing > policy > statement > action
 
-Description:
+#### Description:
 
 The *action* configuration element lets administrators define actions to take within route policy `statement` configuration.
 
@@ -104,11 +115,11 @@ The *action* configuration element lets administrators define actions to take wi
 
 ## address
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> address
+authority > router > node > device-interface > network-interface > address
 
-Description:
+#### Description:
 
 The *address* sub-element within a network-interface defines the IP address and its associated properties.
 
@@ -120,48 +131,51 @@ The *address* sub-element within a network-interface defines the IP address and 
 | prefix-length | uint8 |  The number of bits for the subnet mask on this interface. This is generally the number after the slash in CIDR notation; e.g., 24 is the prefix-length for the CIDR 192.168.1.128/24. |
 | utility-ip-address | address | The *utility* address is a unique IP address assigned to a particular interface in a high availability pair. Unlike the *ip-address*, which is "owned" by the active interface in an interface pair and may migrate between two discrete systems, the utility-ip-address always remains fixed on a specific node, and ensures a unique target for that system irrespective of its role (active, standby). |
 
-Version History:
-
-Introduced in 1.0. Updated in 3.1: added *host-service*.
+#### Version History:
+| Release | Modification |
+| ------- | ------------ |
+| 1.0.0   | Introduced   |
+| 3.1.0   | Added *host-service*. |
 
 ## address-family (neighbor)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> neighbor \> address-family
+authority > router > routing > routing-protocol (bgp) > neighbor > address-family
 
-Description:
+#### Description:
 
 The *address-family* sub-element within each neighbor controls the behavior of the 128T router's interaction with its neighbor for the specified address-family (AFI/SAFI).
 
 | Element |  Type |  Description |
 | --- | --- | --- |
 | afi-safi | enumeration | Key field. Valid value: ipv4-unicast.|
-|  as-path-options | sub-element | This sub-element gives administrators the ability to manipulate the AS\_PATH attribute for this address-family.|
+|  as-path-options | sub-element | Gives administrators the ability to manipulate the AS\_PATH attribute for this address-family.|
 | next-hop-self | boolean | When true, sets this 128T router as the next hop for this neighbor for this address family.|
-| prefix-limit | sub-element  |This sub-element allows administrators to control the number of prefixes received from this neighbor. |
+| prefix-limit | sub-element  |Allows administrators to control the number of prefixes received from this neighbor. |
 | remove-private-as | enumeration | Valid value: all. When set to "all", the 128T router will remove private AS numbers from updates sent to this neighbor for this address-family. |
-| route-reflector | sub-element   This sub-element controls the behavior of the 128T router when acting as a route reflector for this neighbor. |
+| route-reflector | sub-element | Controls the behavior of the 128T router when acting as a route reflector for this neighbor. |
 | send-default-route | boolean | When true, the 128T router will send its default route to its neighbor. Note that this will occur even if the route is not present in the RIB.|
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| ------- | ------------ |
+| 1.0.0   | Introduced   |
 
 ## address-family (routing-protocol)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> address-family
+authority > router > routing > routing-protocol (bgp) > address-family
 
-Description:
+#### Description:
 
 The *address-family* sub-element controls the behavior of the 128T router's BGP tables, separated for each AFI/SAFI (Address Family Indicator, Subsequent Address Family Indicator). At this time, the 128T router supports IPv4 unicast address family only.
 
 | Element | Type | Description |
 | --- | --- | --- |
 | afi-safi | enumeration | Key field. Valid value: ipv4-unicast. |
-| (aggregate-address) | (sub-element) | (Multiple instance. Controls the 128T router's behavior regarding address aggregation.) |
+| aggregate-address | sub-element | Multiple instance. Controls the 128T router's behavior regarding address aggregation. |
 | default-route-distance | sub-element | Sets default values for various routes learned through BGP for this address family. |
 | graceful-restart | sub-element | The parameters and settings that control the 128T router's BGP graceful restart behavior. |
 | network | sub-element | Multiple instance. One of these elements is configured for each prefix that the 128T router should announce for this address family. |
@@ -169,17 +183,18 @@ The *address-family* sub-element controls the behavior of the 128T router's BGP 
 | send-default-route | boolean | When true, the 128T router will send its default-route to neighbors, if one exists in its RIB for this address-family. |
 | use-multiple-paths | sub-element | Allows administrators to set various parameters related to multiple path support for the same Network Layer Reachability Information (NLRI). |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| ------- | ------------ |
+| 1.0.0   | Introduced   |
 
 ## address-pool
 
-Path:
+#### Path:
 
 authority > router > nat-pool > address-pool
 
-Description:
+#### Description:
 
 The *address-pool* lets administrators replace one IP prefix with another as it forwards traffic. This can, for example, mask an entire CIDR block with another. As packets are forwarded, the least significant bits are replaced for traffic pertaining to that tenant with the prefix in the pool.
 
@@ -190,47 +205,51 @@ The *address-pool* lets administrators replace one IP prefix with another as it 
 
 ## adjacency
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> adjacency
+authority > router > node > device-interface > network-interface > adjacency
 
-Description:
+#### Description:
 
 An *adjacency* is a multiple instance element that allows administrators to define the set of adjacent routers reachable via a given network-interface. The adjacencies are referenced as *peers*, which contain the attributes (BFD properties, security policies) to be used when communicating with these adjacencies.
 
-Adjacencies are given an administrative *cost* that affects the routing plane, as well as a "quality point" assignment, that allows administrators to indicate path preference -- useful for ensuring that traffic flows to locations using links that meet service level agreement thresholds.
+Adjacencies are given an administrative *cost* that affects the routing plane. They are also given a "quality point" assignment allowing administrators to indicate path preference. This assignment is useful for ensuring that traffic flows to locations using links that meet service level agreement thresholds.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| bfd | sub-element | This controls the properties of the BFD protocol used as keepalive/heartbeat signaling between this, and a remote 128T routing node. |
-| cost | uint32 | Default: 0. This is the administrative cost of the link. |
-| external-nat-address | address | When this 128T node is deployed behind a NAT, this field specifies the address that the adjacency will direct its packets to. This is due to the nature of the 128T communications; even if the NAT rewrites the destination address to match the local, NATted IP address of the 128T router's interface, the metadata within various packets will still refer to a pre-NATted address. This field allows a 128T node to identify with the pre-NATted address, if it appears in metadata received from an adajacency. |
-| generated | boolean | Default value: false. This field is set to *true* when a 128T conductor generates configuration based on two 128T routers having interfaces in a common *neighborhood*. When this field is set to *true*, the 128T conductor will delete and regenerate this configuration element upon each *commit*. Thus, when an administrator wants to make persistent configuration changes to this object after it has been generated by a 128T conductor, it is important to manually change this field to *false*. |
-| inter-router-security | reference | This refers to a configured *security* element, used for encrypting and decrypting packets when transmitting/receiving them to an adjacency. |
-| ip-address | address | Key field. This is the IP address or hostname of the adjacent router, or *waypoint address* of the peer router. |
-| nat-keep-alive | sub-element | Governs whether the 128T will generate keepalive packets to remote peers. This is used when there is a NAT device between the two peers, and should be set on the device behind the NAT. |
-| path-mtu-discovery | sub-element | This controls the 128T's Path MTU Discovery (PMTUD) behavior for commuicating with the peer over this peer path. |
-| peer | reference | A reference to a configured peer (from router:peer). This is the name of the peer router to which this waypoint address belongs. |
-| peer-connectivity | enumeration | Valid values: bidirectional, outbound-only. This should be set to `outbound-only` if the adjacency is behind a NAT device. |
-| port-range | reference | A reference to a port range to limit the far-end "waypoint" range to a defined set. This is useful when working with peers that have strict firewall restrictions on which ports can be used for communicating between 128T routers. (By default, when this field is left unconfigured, the range is 16384-65535.) This field is only configurable when *peer* specifies another 128T element. |
-| post-encryption-padding | sub-element | Enables configuration of a feature to enable padding to encrypted packets, allowing SVR traffic to traverse strict firewalls that may filter certain types of traffic. |
-| qp-value | uint32 | An integer representing the quality points on the link between this node and its adjacent network element. Quality points are assigned to links from low values (representing bulk traffic links) to high values (representing managed, high-quality links). This is used in conjunction with a service's *service-class* when deciding on which path to use for a given service's traffic. |
+| bfd | sub-element | Controls the properties of the BFD protocol used as keepalive/heartbeat signaling between this, and a remote 128T routing node. |
+| cost | uint32 | Default: 0. The administrative cost of the link. |
+| external-nat-address | address | When the 128T node is deployed behind a NAT, this field specifies the address where the adjacency direct its packets. Due to the nature of the 128T communications, even if the NAT rewrites the destination address to match the local, NAT'ed IP address of the 128T router's interface, the metadata within various packets still refers to a pre-NAT'ed address. This field allows a 128T node to identify the pre-NAT'ed address when it appears in metadata received from an adajacency. |
+| generated | boolean | Default value: false. Set to *true* when a 128T conductor generates configuration based on two 128T routers having interfaces in a common *neighborhood*. When set to *true*, the 128T conductor will delete and regenerate this configuration element upon each *commit*. When an administrator makes persistent configuration changes to the object after it has been generated by a 128T conductor, you must manually change this field to *false*. |
+| inter-router-security | reference | Refers to a configured *security* element, used for encrypting and decrypting packets when transmitting/receiving them to an adjacency. |
+| ip-address | address | Key field. The IP address or hostname of the adjacent router, or *waypoint address* of the peer router. |
+| nat-keep-alive | sub-element | Governs whether the 128T will generate keepalive packets to remote peers. Used when there is a NAT device between the two peers, and should be set on the device behind the NAT. |
+| path-mtu-discovery | sub-element | Controls the 128T's Path MTU Discovery (PMTUD) behavior for commuicating with the peer over this peer path. |
+| peer | reference | A reference to a configured peer (from router:peer). The name of the peer router to which this waypoint address belongs. |
+| peer-connectivity | enumeration | Valid values: bidirectional, outbound-only. Set to `outbound-only` if the adjacency is behind a NAT device. |
+| port-range | reference | A reference to a port range to limit the far-end "waypoint" range to a defined set. Useful when working with peers that have strict firewall restrictions on which ports can be used for communicating between 128T routers. The default range is 16384-65535. This field is only configurable when *peer* specifies another 128T element. |
+| post-encryption-padding | sub-element | Enables padding of encrypted packets, allowing SVR traffic to traverse strict firewalls that may filter certain types of traffic. |
+| qp-value | uint32 | An integer representing the quality points on the link between this node and its adjacent network element. Quality points are assigned to links from low values (representing bulk traffic links) to high values (representing managed, high-quality links). Used in conjunction with a service's *service-class* when deciding which path to use for a given service's traffic. |
 | session-optimization | sub-element | Governs whether session optimization should be enabled when communicating with the adjacency. |
 | source-nat-address | CIDR | Multiple instance. Each source-nat-address is set to the address and prefix of the far-end NAT between this adjacency, and the network-interface on this node used to reach that adjacency. For NATs that use a single address, the prefix should be set to /32. For NATs that use a pool, the prefix should be set accordingly. Note: extreme caution should be used when configuring 0.0.0.0/0 in an attempt to "wildcard" the source-nat-address; network-interface configuration elements that do not have tenants associated with them (or those that do, where the tenant has no configured prefixes) will potentially collide with this configuration and lead to undesirable behavior. |
-| udp-transform | sub-element | Controls whether UDP transformation should be enabled when communicating with the adjacency. This is used when there are strict firewalls (or other middleboxes) between the two SVR peers, that interfere with the SVR metadata exchange between the two 128T instances. |
-| vector | string | Multiple instance. This represents the list of *vector* labels (variable cost elements) to be used when calculating the shortest path to a route target. |
+| udp-transform | sub-element | Controls whether UDP transformation should be enabled when communicating with the adjacency. Used when there are strict firewalls (or other middleboxes) between the two SVR peers, that interfere with the SVR metadata exchange between the two 128T instances. |
+| vector | string | Multiple instance. Represents the list of *vector* labels (variable cost elements) to be used when calculating the shortest path to a route target. |
 
-Version History:
-
-Introduced in 1.0. Updated in 2.0 to add various NAT handlers. Updated in 3.1: now supports hostnames in addition to IPv4 addresses in the *ip-address* field. Updated in 3.2: added *generated* and *vector* fields.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 2.0.0 | Added various NAT handlers. |
+| 3.1.0 | Supports hostnames in addition to IPv4 addresses in the *ip-address* field. |
+| 3.2.0 | Added *generated* and *vector* fields. |
 
 ## administrative
 
-Path:
+#### Path:
 
-authority \> router \> system \> audit \> administrative
+authority > router > system > audit > administrative
 
-Description:
+#### Description:
 
 This sub-element gives administrators the ability to administratively enable or disable administrative events.
 
@@ -238,17 +257,18 @@ This sub-element gives administrators the ability to administratively enable or 
 | --- | --- | --- |
 | enabled | boolean | Default: true. When false, the system will not register any administrative events. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## advertise-default
 
-Path:
+#### Path:
 
 authority > router > routing > ospf > advertise-default
 
-Description:
+#### Description:
 
 The *advertise-default* sub-element controls whether and how the 128T's OSPF routing stack will advertise the default route into OSPF.
 
@@ -261,11 +281,11 @@ The *advertise-default* sub-element controls whether and how the 128T's OSPF rou
 
 ## aggregate-address
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> address-family \> aggregate-address
+authority > router > routing > routing-protocol (bgp) > address-family > aggregate-address
 
-Description:
+#### Description:
 
 The *aggregate-address* sub-element affects the 128T router's BGP behavior when it aggregates prefixes; whether it advertises those routes as aggregates, and whether or not it
 
@@ -275,35 +295,37 @@ The *aggregate-address* sub-element affects the 128T router's BGP behavior when 
 | prefix | CIDR | Key field. The IP prefix upon which the as-set and summary-only behaviors operate on. |
 | summary-only | boolean | When *true*, the 128T router will advertise Network Layer Reachability Information (NLRI) in aggregate only. When false, the 128T router will not advertise aggregate NLRI. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## application-identification
 
-Path:
+#### Path:
 
-authority \> router \> application-identification
+authority > router > application-identification
 
-Description:
+#### Description:
 
 This sub-element lets the administrators set the behavior for the 128T router's application identification behavior.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| mode | enumeration | Valid values: module, tls. When set to *module*, the 128T router will use an external module for application classification. When set to *tls*, the system will inspect X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *module*, the 128T will expect classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules will be supplied by 128 Technology.) |
+| mode | enumeration | Valid values: module, tls. When set to *module*, the 128T router uses an external module for application classification. When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *module*, the 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## applies-to
 
-Path:
+#### Path:
 
 authority > service > applies-to
 
-Description:
+#### Description:
 
 The *applies-to* filter on a service lets administrators constrain which routers or groups of routers will receive configuration for a given service. This is extremely valuable for reducing the volume of configuration sent to any given router, particularly for large deployments with many services, if it is known a priori that a given router will never need reachability to a service.
 
@@ -317,46 +339,47 @@ For example, a service may exist at a branch site in a hub-and-spoke deployment,
 
 ## area
 
-Path:
+#### Path:
 
 authority > router > routing > ospf > area
 
-Description:
+#### Description:
 
 The *area* configuration element is where the properties of each OSPF area that the 128T is connected to are configured.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| id | area-id-type | Key field. Configured as a dotted quad (e.g., `0.0.0.1`). Areas are used to divide large routed networks into smaller subsets, to constrain route advertisements -- a set of network elements that have been administratively grouped together. |
+| id | area-id-type | Key field. Configured as a dotted quad (e.g., `0.0.0.1`). Areas are used to divide large routed networks into smaller subsets, to constrain route advertisements. Can be a set of network elements that have been administratively grouped together. |
 | interface | sub-element | Controls the properties of the interfaces on the 128T device that are in the OSPF area. |
-| summary-range | sub-element | Controls whether the 128T will summarize routes matching configured address/mask values. Note: this only applies to Area Border Routers (ABRs). |
+| summary-range | sub-element | Controls whether the 128T will summarize routes matching configured address/mask values. This only applies to Area Border Routers (ABRs). |
 | type | enumeration | Valid values: normal, stub, nssa. Default: normal. Defines whether this area is a normal area, a stubby area, or a not-so-stubby-area (as specified in RFC 3101). |
 
 ## as-path-options
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> neighbor \> address-family \> as-path-options
+authority > router > routing > routing-protocol (bgp) > neighbor > address-family > as-path-options
 
-Description:
+#### Description:
 
 This sub-element gives administrators the ability to manipulate the AS\_PATH attribute for this address-family.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| allow-own-as | uint8 | This value specifies the threshold of occurrences of the peer's AS that can occur within the AS\_PATH attribute before it is rejected. |
+| allow-own-as | uint8 | Specifies the threshold of occurrences of the peer's AS that can occur within the AS\_PATH attribute before it is rejected. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## audit
 
-Path:
+#### Path:
 
-authority \> router \> system \> audit
+authority > router > system > audit
 
-Description:
+#### Description:
 
 This sub-element gives administrators the ability to administratively enable or disable various event types.
 
@@ -366,17 +389,18 @@ This sub-element gives administrators the ability to administratively enable or 
 | system | sub-element | Controls whether or not the system registers various system events. |
 | traffic | sub-element | Controls whether or not the system registers various traffic-related events. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## authority
 
-Path:
+#### Path:
 
 authority
 
-Description:
+#### Description:
 
 The *authority* configuration element is the top-most level in the 128T router configuration hierarchy. Conceptually, an *authority* is a collection of instances of the 128T router, managed by a single administrative body.
 
@@ -400,35 +424,40 @@ The *authority* configuration element is the top-most level in the 128T router c
 | tenant | sub-element | Multiple instance. Tenants are authority-wide categories of users (user populations) that are grouped for the purpose of service advertisement, service delivery, and security policy enforcement. |
 | traffic-profile | sub-element | A container for sets of traffic profiles, to prioritize traffic using the 128T router's traffic engineering subsystem. |
 
-Version History:
-
-Introduced in 1.0. Updated in 3.0: added *rekey-interval*. Updated in 3.1: added dscp-map, ipfix-collector elements. Updated in 3.2: added *dynamic-hostname* and *traffic-profile*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 3.0.0 | Added *rekey-interval*. |
+| 3.1.0 | Added dscp-map, ipfix-collector elements. |
+| 3.2.0 | Added *dynamic-hostname* and *traffic-profile*. |
 
 ## best-effort
 
-Path:
+#### Path:
 
-authority \> traffic-profile \> best-effort
+authority > traffic-profile > best-effort
 
-Description:
+#### Description:
 
-This element has one configurable field, that lets administrators specify the guaranteed (minimum) bandwidth for best-effort traffic.
+This element has one configurable field allowing administrators to specify the guaranteed (minimum) bandwidth for best-effort traffic.
 
 | Element | Type | Description |
 | --- | --- | --- |
 | distribution | percentage | Valid values: 0-100. |
 
-Version History:
-
-Introduced in version 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## bfd (adjacency)
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> adjacency \> bfd
+authority > router > node > device-interface > network-interface > adjacency > bfd
 
-Description:
+#### Description:
 
 The *bfd* sub-element within an adjacency is used to dictate how 128T routing nodes send BFD messages to counterparts in other routers and/or authorities. These values may be unique on a per-adjacency basis, but the configured values apply to all exchanges with a specific peer irrespective of the number of nodes exchanging BFD on either "side".
 
@@ -443,17 +472,18 @@ The *bfd* sub-element within an adjacency is used to dictate how 128T routing no
 | required-min-rx-interval | uint32 | Default: 500. This represents the lowest inter-packet arrival interval (i.e., the fastest rate) at which this router can support asynchronous BFD packets. During negotiation with a BFD peer, this router will transmit packets at the higher of its desired-tx-interval and its peer's required-min-rx-interval. |
 | state | enumeration | Valid values: enabled, disabled. Default: enabled. When enabled, BFD will be exchanged with the peer router. |
 
-Version History:
-
-Introduced within the adjacency element as of software version 3.1.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced |
 
 ## bfd (neighborhood)
 
-Path:
+#### Path:
 
-authority \> router \> device-interface \> network-interface \> neighborhood \> bfd
+authority > router > device-interface > network-interface > neighborhood > bfd
 
-Description:
+#### Description:
 
 The *bfd* sub-element within a peer is used to dictate how 128T nodes send BFD messages to counterparts in other routers and/or authorities. These values may be unique on a per-peer basis, but the configured values apply to all exchanges with a specific peer irrespective of the number of nodes exchanging BFD on either "side."
 
@@ -468,17 +498,18 @@ The *bfd* sub-element within a peer is used to dictate how 128T nodes send BFD m
 | required-min-rx-interval | uint32 | Default: 500. This represents the lowest inter-packet arrival interval (i.e., the fastest rate) at which this router can support asynchronous BFD packets. During negotiation with a BFD peer, this router will transmit packets at the higher of its desired-tx-interval and its peer's required-min-rx-interval. |
 | state | enumeration | Valid values: enabled, disabled. Default: enabled. When enabled, BFD will be exchanged with the peer router. |
 
-Version History:
-
-Introduced in 3.1.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced |
 
 ## bfd (peer)
 
-Path:
+#### Path:
 
-authority \> router \> peer \> bfd
+authority > router > peer > bfd
 
-Description:
+#### Description:
 
 The *bfd* sub-element within a peer is used to dictate how routers send BFD messages to counterparts in other routers and/or authorities. These values may be unique on a per-peer basis, but the configured values apply to all exchanges with a specific peer irrespective of the number of routers exchanging BFD on either "side".
 
@@ -493,42 +524,49 @@ The *bfd* sub-element within a peer is used to dictate how routers send BFD mess
 | required-min-rx-interval | uint32 | Default: 500. This represents the lowest inter-packet arrival interval (i.e., the fastest rate) at which this router can support asynchronous BFD packets. During negotiation with a BFD peer, this router will transmit packets at the higher of its desired-tx-interval and its peer's required-min-rx-interval. |
 | state | enumeration | Valid values: enabled, disabled. Default: enabled. When enabled, BFD will be exchanged with the peer router. |
 
-Version History:
-
-Introduced in 1.0. Updated in 3.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 3.0.0 | Updated |
 
 ## bfd (router)
 
-Path:
+#### Path:
 
-authority \> router \> bfd
+authority > router > bfd
 
-Description:
+#### Description:
 
 The *bfd* sub-element is used for configuring timers and behaviors associated with the Bidirectional Forwarding Detection protocol for *nodes* within the *router*. All 128T router packet forwarding components will use BFD to report to one another, governed by these parameters.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| authentication-type | enumeration | Valid values: simple, sha256. This is the authentication type used in BFD packets sent to the other devices within the router. |
+| authentication-type | enumeration | Valid values: simple, sha256. The authentication type used in BFD packets sent to the other devices within the router. |
 | desired-tx-interval | uint32 | Valid values: 50-5000. Default: 1000. Configured in milliseconds, this represents the frequency with which BFD asynchronous control packets are sent by each node in a router to each other node within the same router. |
 | dscp | uint8 | Valid values: 0-63. The DSCP value to use for outbound BFD. |
-| link-test-interval | uint32 | Valid values: 1-86400. Default: 1. Configured in seconds. This determines the frequency with which a node will perform link tests with other nodes in the router, using BFD echo packets. |
-| link-test-length | uint8 | Default: 10. This is the number of packets sent in one link-test session between peers, used for determining latency and jitter. |
-| multiplier | uint8 | Valid values: 3-20. Default: 3. This represents the number of missed consecutive messages from a peer before treating that peer as unusable. |
-| required-min-rx-interval | uint32 | Default: 500. This represents the lowest inter-packet arrival interval (i.e., the fastest rate) at which this router can support asynchronous BFD packets. During negotiation with a BFD peer, this router will transmit packets at the higher of its desired-tx-interval and its peer's required-min-rx-interval. |
+| link-test-interval | uint32 | Valid values: 1-86400. Default: 1. Configured in seconds. Determines the frequency with which a node will perform link tests with other nodes in the router, using BFD echo packets. |
+| link-test-length | uint8 | Default: 10. The number of packets sent in one link-test session between peers, used for determining latency and jitter. |
+| multiplier | uint8 | Valid values: 3-20. Default: 3. The number of missed consecutive messages from a peer before treating that peer as unusable. |
+| required-min-rx-interval | uint32 | Default: 500. The lowest inter-packet arrival interval (i.e., the fastest rate) at which this router can support asynchronous BFD packets. During negotiation with a BFD peer, this router will transmit packets at the higher of its desired-tx-interval and its peer's required-min-rx-interval. |
 | state | enumeration | Valid values: enabled, disabled. Default: enabled. When enabled, BFD is exchanged among all nodes within this router. |
 
 Version History:
 
 Introduced in 1.0. Updated in 3.0 (exposed required-min-rx-interval, which was previously fixed at 500ms, and required-min-echo-interval).
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 3.0.0 | Exposed required-min-rx-interval, which was previously fixed at 500ms, and required-min-echo-interval. |
 
 ## confederation
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> confederation
+authority > router > routing > routing-protocol (bgp) > confederation
 
-Description:
+#### Description:
 
 This has the options for allowing administrators to specify the behavior of the 128T router when it is deployed into an autonomous system that is part of a BGP confederation.
 
@@ -543,11 +581,11 @@ Introduced in 1.0.
 
 ## default-route-distance
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> address-family \> default-route-distance
+authority > router > routing > routing-protocol (bgp) > address-family > default-route-distance
 
-Description:
+#### Description:
 
 The *default-route-distance* element contains configuration fields that allow administrators to set administrative distance/preference for routes received by the 128T router's BGP stack.
 
@@ -563,11 +601,11 @@ Introduced in 1.0.
 
 ## device-interface
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface
+authority > router > node > device-interface
 
-Description:
+#### Description:
 
 A *device-interface* is what maps a physical interface (the "hardware-name") to one or more logical interfaces (the "network-interface") on a node. Each node may have multiple device-interfaces, each of which may house many network-interfaces, limited only by the number of unique VLAN tags (4,094).
 
@@ -598,11 +636,11 @@ Introduced in 1.0. Updated for 1.1: hardware-name deprecated; interfaces are now
 
 ## dscp-map
 
-Path:
+#### Path:
 
-authority \> dscp-map
+authority > dscp-map
 
-Description:
+#### Description:
 
 This element allows administrators to map the DSCP (Differentiated Services Code Point) values into 128T *traffic-class* values, which will subsequently affect their treatment from a traffic engineering standpoint. Many networks use DSCP marking within packet headers to convey a sense of relative priority of these packets as compared to others. Mapping these DSCP values into 128T traffic classes can place certain packets into queues that have more bandwidth, or have more scheduling time, etc.
 
@@ -622,11 +660,11 @@ Introduced in 3.1. Updated in version 3.2, added *dscp-traffic-class*.
 
 ## dscp-prioritization
 
-Path:
+#### Path:
 
-authority \> dscp-map \> dscp-prioritzation
+authority > dscp-map > dscp-prioritzation
 
-Description:
+#### Description:
 
 This element allows administrators to associate ranges of DSCP values to one of four priority values that the 128T router uses to prioritize packets within its traffic engineering engine.
 
@@ -641,12 +679,12 @@ Introduced in 3.1.
 
 ## dscp-range
 
-Path:
+#### Path:
 
-authority \> dscp-map \> dscp-prioritzation \> dscp-range\
-authority \> dscp-map \> dscp-traffic-class \> dscp-range
+authority > dscp-map > dscp-prioritzation > dscp-range\
+authority > dscp-map > dscp-traffic-class > dscp-range
 
-Description:
+#### Description:
 
 This element allows administrators to define a range of DSCP values that will map to a DSCP priority assignment. There may be more than one DSCP range associated with a single priority, to account for discontinuous ranges of DSCP values (e.g., 10, 13-15, 17 would be configured as three *dscp-range* elements within a single dscp-prioritization).
 
@@ -661,11 +699,11 @@ Introduced in 3.1. Added as a sub-element of *dscp-traffic-class* in 3.2.0.
 
 ## dscp-traffic-class
 
-Path:
+#### Path:
 
-authority \> dscp-map \> dscp-traffic-class
+authority > dscp-map > dscp-traffic-class
 
-Description:
+#### Description:
 
 This element allows administrators to associate ranges of DSCP values to one of four traffic-class values that the 128T router uses to prioritize packets within its traffic engineering engine.
 
@@ -680,11 +718,11 @@ Introduced in 3.2.
 
 ## ebgp
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> address-family \> use-multiple-paths \> ebgp
+authority > router > routing > routing-protocol (bgp) > address-family > use-multiple-paths > ebgp
 
-Description:
+#### Description:
 
 This element contains configuration parameters related to the 128T router's multipath support for external BGP (eBGP).
 
@@ -698,11 +736,11 @@ Introduced in 1.0.
 
 ## entitlement
 
-Path:
+#### Path:
 
-authority \> router \> entitlement
+authority > router > entitlement
 
-Description:
+#### Description:
 
 The entitlement is where you apply keys you received from 128 Technology, to license your 128T router for carrying traffic.
 
@@ -718,11 +756,11 @@ Introduced in 1.1.
 
 ## filter
 
-Path:
+#### Path:
 
 authority > routing > filter
 
-Description:
+#### Description:
 
 This is where adminstrators configure  the 128T's implementation of *route filters*, which are sets of conditions for matching specific patterns in route advertisements (inbound or outbound). These are used in conjunction with [route policies](#policy) to manipulate those route advertisements.
 
@@ -734,11 +772,11 @@ This is where adminstrators configure  the 128T's implementation of *route filte
 
 ## graceful-restart
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> address-family \> graceful-restart
+authority > router > routing > routing-protocol (bgp) > address-family > graceful-restart
 
-Description:
+#### Description:
 
 This configuration element governs the behavior of the 128T router's support for BGP's graceful restart. It is a BGP extension that is used when peer connections are interrupted, and was designed to minimize the disruption to a system's BGP behavior upon reconnection to the (formerly) unreachable peer.
 
@@ -753,11 +791,11 @@ Introduced in 1.0. Updated in version 3.1: added restart-time.
 
 ## high
 
-Path:
+#### Path:
 
-authority \> traffic-profile \> high
+authority > traffic-profile > high
 
-Description:
+#### Description:
 
 This element has one configurable field, that lets administrators specify the guaranteed (minimum) bandwidth for high priority traffic.
 
@@ -771,11 +809,11 @@ Introduced in version 3.2.
 
 ## host
 
-Path:
+#### Path:
 
 authority > router > service-route > host
 
-Description:
+#### Description:
 
 The *host* option is used within a service-route when it is necessary to send traffic via the underlying Linux operating system.
 
@@ -786,12 +824,12 @@ The *host* option is used within a service-route when it is necessary to send tr
 
 ## host-service
 
-Path:
+#### Path:
 
 authority > router > node > device-interface > network-interface > host-service
-authority \> router \> node \> device-interface \> network-interface \> address \> host-service
+authority > router > node > device-interface > network-interface > address > host-service
 
-Description:
+#### Description:
 
 Individual compute platforms that make up a 128T router may each "host" their own services -- things such as remote access via SSH, HTTPS, etc. When an administrator wants to enable remote management of a specific node within a 128T router, a host-service element is required. When an administrator creates a host-service, the 128T router will "bridge" this service (defined by address, port, and protocol) to a corresponding application on the underlying Linux platform.
 
@@ -808,11 +846,11 @@ Introduced in 3.1.
 
 ## ibgp
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> address-family \> use-multiple-paths \> ibgp
+authority > router > routing > routing-protocol (bgp) > address-family > use-multiple-paths > ibgp
 
-Description:
+#### Description:
 
 This element contains configuration parameters related to the 128T router's multipath support for internal BGP (iBGP).
 
@@ -826,11 +864,11 @@ Introduced in 1.0.
 
 ## inter-conductor-router-server
 
-Path:
+#### Path:
 
-authority \> router \> node \> ssh-keepalive \> inter-conductor-router-server
+authority > router > node > ssh-keepalive > inter-conductor-router-server
 
-Description:
+#### Description:
 
 This element contains configuration parameters related to SSH keepalive properties between this node and its conductor, where the router is the SSH server.
 
@@ -841,11 +879,11 @@ This element contains configuration parameters related to SSH keepalive properti
 
 ## inter-node
 
-Path:
+#### Path:
 
-authority \> router \> node \> ssh-keepalive \> inter-node
+authority > router > node > ssh-keepalive > inter-node
 
-Description:
+#### Description:
 
 This element contains configuration parameters related to SSH keepalive properties between this node and other nodes within the same 128T router.
 
@@ -860,11 +898,11 @@ Introduced in 3.2.
 
 ## inter-node-server
 
-Path:
+#### Path:
 
-authority \> router \> node \> ssh-keepalive \> inter-node-server
+authority > router > node > ssh-keepalive > inter-node-server
 
-Description:
+#### Description:
 
 This element contains configuration parameters related to SSH keepalive properties between this node and other nodes within the same 128T router, specifically when the node is the SSH server for the transaction..
 
@@ -879,11 +917,11 @@ Introduced in 3.2.
 
 ## inter-router
 
-Path:
+#### Path:
 
-authority \> router \> node \> ssh-keepalive \> inter-router
+authority > router > node > ssh-keepalive > inter-router
 
-Description:
+#### Description:
 
 This element contains configuration parameters related to SSH keepalive properties between this node and other routers within the same 128T authority.
 
@@ -898,11 +936,11 @@ Introduced in 3.2.
 
 ## interface (ospf)
 
-Path:
+#### Path:
 
 authority > router > routing > ospf > area > interface
 
-Description:
+#### Description:
 
 This sets the properties of the 128T interface within an OSPF area.
 
@@ -918,11 +956,11 @@ This sets the properties of the 128T interface within an OSPF area.
 
 ## interface (routing)
 
-Path:
+#### Path:
 
 authority > router > routing > interface
 
-Description:
+#### Description:
 
 This defines the properties of a loopback interface to be used by the 128T's routing protocols (specifically, BGP). At present this `interface` is only used when configuring a system for the BGP over SVR (BGPoSVR) feature.
 
@@ -934,11 +972,11 @@ This defines the properties of a loopback interface to be used by the 128T's rou
 
 ## ipfix-collector
 
-Path:
+#### Path:
 
 authority > ipfix-collector
 
-Description:
+#### Description:
 
 This element contains information regarding externally reachable IPFIX (IP Flow Information eXport) collectors, for harvesting IPFIX data that is generated by the 128T router during its operation.
 
@@ -958,11 +996,11 @@ Introduced in 3.1. Updated in 3.2: added *tenant*.
 
 ## ldap-server
 
-Path:
+#### Path:
 
 authority > ldap-server
 
-Description:
+#### Description:
 
 The `ldap-server` element lets you configure an external server that is used to authenticate administrative users.
 
@@ -980,11 +1018,11 @@ The `ldap-server` element lets you configure an external server that is used to 
 
 ## load-balancing
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> load-balancing
+authority > router > node > device-interface > load-balancing
 
-Description:
+#### Description:
 
 The *load-balancing* element lets administrators configure thresholds for a device-interface to be considered eligible/ineligible for load balancing purposes. When the 128T load balancing algorithm is choosing destinations, it will not choose an interface that has exceeded its configured "high water mark" (expressed as a percentage) until traffic has quieted down on that interface below its "low water mark," also configured as a percentage..
 
@@ -999,11 +1037,11 @@ Introduced in 3.2.
 
 ## local-login
 
-Path:
+#### Path:
 
 authority > router > system > local-login
 
-Description:
+#### Description:
 
 The *local-login* configuration lets administrators control the number of concurrent logins on the system and what actions to take if that limit is exceeded.
 
@@ -1012,11 +1050,11 @@ The *local-login* configuration lets administrators control the number of concur
 
 ## log-category
 
-Path:
+#### Path:
 
-authority \> router \> system \> log-category
+authority > router > system > log-category
 
-Description:
+#### Description:
 
 The *log-category* element is what allows administrators to selectively increase/decrease the verbosity of logging for various subsystems within the 128T router. At times, during troubleshooting (and in particular, at the specific request of a member of the 128 Technology Customer Support team), you may need to selectively increase the logging verbosity of a particular subsystem to isolate a fault or routing issue. To increase logging across all subsystems may overwhelm the system's resources (and potentially mask the issue you're trying to troubleshoot), so these subsystems can affect only a small portion of the overall system's logging behavior.
 
@@ -1033,11 +1071,11 @@ Introduced in 3.1.
 
 ## low
 
-Path:
+#### Path:
 
-authority \> traffic-profile \> low
+authority > traffic-profile > low
 
-Description:
+#### Description:
 
 This element has one configurable field, that lets administrators specify the guaranteed (minimum) bandwidth for low priority traffic.
 
@@ -1051,11 +1089,11 @@ Introduced in version 3.2.
 
 ## lte
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> lte
+authority > router > node > device-interface > lte
 
-Description:
+#### Description:
 
 This element contains information regarding the configuration attributes for device-interfaces that support LTE (Long-Term Evolution), a 4G mobile communications standard. Note that this interface type requires that specific hardware is installed on your 128T routing element to communicate with the mobile network.
 
@@ -1069,11 +1107,11 @@ Introduced in 3.1.
 
 ## management-vector
 
-Path:
+#### Path:
 
 authority > router > node > device-interface > network-interface > management-vector
 
-Description:
+#### Description:
 
 The *management-vector* configuration is used to influence administrative preference over multiple possible paths for management traffic. This is typically used with the "Conductor Service" feature, wherein a 128T router sends traffic to its 128T conductor using the forwarding plane of the 128T, as opposed to a dedicated (Linux-managed) interface.
 
@@ -1124,11 +1162,11 @@ Introduced in version 4.5.3
 
 ## medium
 
-Path:
+#### Path:
 
-authority \> traffic-profile \> medium
+authority > traffic-profile > medium
 
-Description:
+#### Description:
 
 This element has one configurable field, that lets administrators specify the guaranteed (minimum) bandwidth for medium priority traffic.
 
@@ -1142,17 +1180,17 @@ Introduced in version 3.2.
 
 ## member (redundancy-group)
 
-Path:
+#### Path:
 
-authority \> router \> redundancy-group \> member
+authority > router > redundancy-group > member
 
-Description:
+#### Description:
 
 The *member* sub-element is configured for each member interface to share fate in a *redundancy-group*.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| device-id | string | Key field. The node's device-interface \> name to be a member of this redundancy-group. |
+| device-id | string | Key field. The node's device-interface > name to be a member of this redundancy-group. |
 | node | reference | Key field. A reference to a configured node's *name* field. |
 
 Version History:
@@ -1161,11 +1199,11 @@ Introduced in 2.0. Updated in 3.2: changed device-id to refer to the device-inte
 
 ## member (tenant)
 
-Path:
+#### Path:
 
-authority \> tenant \> member
+authority > tenant > member
 
-Description:
+#### Description:
 
 The *member* sub-element is configured to describe prefix-to-neighborhood mappings for membership to the tenant.
 
@@ -1180,11 +1218,11 @@ Introduced in 3.0.
 
 ## metrics
 
-Path:
+#### Path:
 
-authority \> router \> system \> metrics
+authority > router > system > metrics
 
-Description:
+#### Description:
 
 The *metrics* sub-element governs various aspects of the 128T router's data sampling for analytics purposes.
 
@@ -1198,11 +1236,11 @@ Introduced in 3.0. Updated in 3.2: revised range from 1-10.
 
 ## multicast-sender-policy
 
-Path:
+#### Path:
 
 authority > service > multicast-sender-policy
 
-Description:
+#### Description:
 
 For *service* elements that refer to multicast addresses, this lets administrators control which sources of traffic can receive that multicast.
 
@@ -1217,11 +1255,11 @@ QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g
 
 ## multihop
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> neighbor \> multihop
+authority > router > routing > routing-protocol (bgp) > neighbor > multihop
 
-Description:
+#### Description:
 
 The *multihop* sub-element lets administrators set properties related to the 128T router's eBGP multihop behavior when sending BGP messages to its neighbor.
 
@@ -1235,12 +1273,12 @@ Introduced in 1.0.
 
 ## nat-keep-alive
 
-Path:
+#### Path:
 
 authority > router > node > device-interface > network-interface > neighborhood > nat-keep-alive
 authority > router > node > device-interface > network-interface > adjacency > nat-keep-alive
 
-Description:
+#### Description:
 
 The *nat-keep-alive* function is used when a 128T is sitting behind a NAT device that has short time-to-live values for the NAT bindings it creates. When configured, the 128T will periodically generate small keepalive packets and send them to its peer to refresh the NAT pinhole on the intermediary NAT device. This can be configured for either UDP sessions, TCP sessions, or both.
 
@@ -1252,11 +1290,11 @@ The *nat-keep-alive* function is used when a 128T is sitting behind a NAT device
 
 ## nat-pool
 
-Path:
+#### Path:
 
 authority > router > nat-pool
 
-Description:
+#### Description:
 
 The *nat-pool* is used for masking one network range into another by changing the least significant bits.
 
@@ -1267,11 +1305,11 @@ The *nat-pool* is used for masking one network range into another by changing th
 
 ## neighbor (network-interface)
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> neighbor
+authority > router > node > device-interface > network-interface > neighbor
 
-Description:
+#### Description:
 
 The *neighbor* sub-element (within a network-interface) defines the IP-to-MAC binding for all directly connected neighbors that the network-interface is capable of reaching.
 
@@ -1286,11 +1324,11 @@ Introduced in 1.0.
 
 ## neighbor (routing-protocol)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> neighbor
+authority > router > routing > routing-protocol (bgp) > neighbor
 
-Description:
+#### Description:
 
 The *neighbor* sub-element defines the IP address and Autonomous System (AS) number for remote BGP peers to which this 128T router instance will peer.
 
@@ -1315,11 +1353,11 @@ Introduced in 1.0. Updated in 3.0: removed *inbound-policy* and *outbound-policy
 
 ## neighbor-policy
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> neighbor \> neighbor-policy
+authority > router > routing > routing-protocol (bgp) > neighbor > neighbor-policy
 
-Description:
+#### Description:
 
 The *neighbor-policy* sub-element defines how/whether certain types of routes get advertised to the applicable neighbor.
 
@@ -1334,11 +1372,11 @@ Introduced in 3.2.
 
 ## neighborhood
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> neighborhood
+authority > router > node > device-interface > network-interface > neighborhood
 
-Description:
+#### Description:
 
 The *neighborhood* multiple-instance sub-element describes the network connectivity between the interface on which this neighborhood is configured and other 128T routers that share the same neighborhood. (It merely describes the *intent* of connectivity; it does not guarantee that all links are up between the two interfaces, etc.) This is what a 128T router uses to construct a logical map of the network topology between all interfaces on all 128T routers within an Authority.
 
@@ -1364,11 +1402,11 @@ Introduced in 3.0. Updated in 3.1: added the ability to specify neighborhood-wid
 
 ## netconf
 
-Path:
+#### Path:
 
 authority > router > system > local-login > netconf
 
-Description:
+#### Description:
 
 This lets an administrator control the number of concurrent NETCONF logins (each PCLI session consumes a NETCONF login).
 
@@ -1379,11 +1417,11 @@ This lets an administrator control the number of concurrent NETCONF logins (each
 
 ## network
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> address-family \> network
+authority > router > routing > routing-protocol (bgp) > address-family > network
 
-Description:
+#### Description:
 
 The *network* multiple-instance sub-element describes the networks that this 128T router will advertise to the specified BGP peer(s).
 
@@ -1397,11 +1435,11 @@ Introduced in 1.0. Updated in 3.0: removed *policy*.
 
 ## network-interface
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface
+authority > router > node > device-interface > network-interface
 
-Description:
+#### Description:
 
 The network-interface element represents a logical interface on a node.
 
@@ -1428,6 +1466,7 @@ The network-interface element represents a logical interface on a node.
 | neighbor | sub-element | Single instance. This lets administrators set the IP:MAC associations for a neighboring device. |
 | neighborhood | sub-element | This is where *neighborhood* labels are applied, to indicate connectivity to other 128T routers within the Authority. When two routers both have an interface within the same *neighborhood* (i.e., they share a common label), they are intended to be mutually reachable. |
 | off-subnet-arp-prefix | ipv4-prefix | This is a multple instance element within a `network-interface`, that causes the 128T to send ARP replies with its own MAC address for address that fall within the IPv4 prefix(es) specified. |
+| off-subnet-reverse-arp-mac-learning | boolean | Default: False. When `true`, reverse arp learning for off-subnet IP addresses is supported. The reverse flow uses the source MAC address from the incoming packet as the subnet source IP address. |
 | prioritization-mode | enumeration | Valid values: local, dscp. Default value: local. When set to *local*, the 128T router will use its local classification configuration to assign priorities to inbound flows (for traffic engineering purposes). When set to *dscp*, the 128T router will use inbound DSCP values to map to priorities (based on the *dscp-map* referenced in this element). |
 | qp-value | uint32 | The number of Quality Points that this interface can support. Used for route determination. |
 | reverse-arp-mac-learning | boolean | Default: false. When `true`, the 128T will use the source MAC address of packets it receives to populate its ARP table for unresolved ARP entries. |
@@ -1443,11 +1482,11 @@ Introduced in 1.0. Updated in 1.1: deprecated "fabric-type" and replaced it with
 
 ## next-hop (service-route)
 
-Path:
+#### Path:
 
-authority \> router \> service-route \> next-hop
+authority > router > service-route > next-hop
 
-Description:
+#### Description:
 
 This specifies the next-hop for reaching a service-route.
 
@@ -1465,11 +1504,11 @@ Introduced in 1.0.
 
 ## next-hop (static-route)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> static-route \> next-hop
+authority > router > routing > static-route > next-hop
 
-Description:
+#### Description:
 
 This specifies the next-hop for an administratively-configured static route.
 
@@ -1484,11 +1523,11 @@ Introduced in 1.0. Updated in 3.0: removed *outgoing*. Updated in 3.2: added *di
 
 ## next-hop-interface
 
-Path:
+#### Path:
 
 authority > router > routing > static-route > next-hop-interface
 
-Description:
+#### Description:
 
 Allows administrators to set the egress interfaces to be used for reaching the next-hop.
 
@@ -1499,11 +1538,11 @@ Allows administrators to set the egress interfaces to be used for reaching the n
 
 ## node
 
-Path:
+#### Path:
 
-authority \> router \> node
+authority > router > node
 
-Description:
+#### Description:
 
 A *node* is a single software instance, one that comprises a whole or part of a 128T router or 128T conductor.
 
@@ -1534,11 +1573,11 @@ Introduced in 1.0. Updated in 1.1: the *role* enumeration values changed to refl
 
 ## notification-receiver
 
-Path:
+#### Path:
 
 authority > router > system > services > snmp-server > notification-receiver
 
-Description:
+#### Description:
 
 These are the SNMP notification receivers to which the 128T will send traps as events occur.
 
@@ -1550,11 +1589,11 @@ These are the SNMP notification receivers to which the 128T will send traps as e
 
 ## ntp
 
-Path:
+#### Path:
 
-authority \> router \> system \> ntp
+authority > router > system > ntp
 
-Description:
+#### Description:
 
 The *ntp* sub-element (within the *system* configuration) lets administrators configure information about the NTP servers within their management network. Configuring external NTP servers will cause all nodes within the 128T router to attempt to use them as a clock source.
 
@@ -1568,11 +1607,11 @@ Introduced in 2.0.
 
 ## ospf
 
-Path:
+#### Path:
 
 authority > router > routing > ospf
 
-Description:
+#### Description:
 
 The configuration in the *ospf* hierarchy is used to control the behavior of the 128T's implementation of the OSPF (Open Shortest Path First) routing protocol. The 128T router supports OPSFv2.
 
@@ -1586,13 +1625,13 @@ The configuration in the *ospf* hierarchy is used to control the behavior of the
 
 ## path-mtu-discovery
 
-Path:
+#### Path:
 
 authority > router > path-mtu-discovery
 authority > router > node > device-interface > network-interface > neighborhood > path-mtu-discovery
 authority > router > node > device-interface > network-interface > adjacency > path-mtu-discovery
 
-Description:
+#### Description:
 
 Each 128T that peers with another 128T can periodically perform a Path MTU Discovery (PMTUD) test to determine when/whether fragmentation is necessary. This element controls the behavior of the PMTUD testing.
 
@@ -1603,22 +1642,22 @@ Each 128T that peers with another 128T can periodically perform a Path MTU Disco
 
 ## peer
 
-Path:
+#### Path:
 
-authority \> router \> peer
+authority > router > peer
 
-Description:
+#### Description:
 
 A *peer* object models a remote router (in this system's *authority* or in a remote *authority*) that this 128T router will bridge to via STEP (the 128 Technology routing protocol) to share services.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| authority-name | string | This is the value configured as the *authority* \> *name* of the 128T router peer that this configuration element represents. |
+| authority-name | string | This is the value configured as the *authority* > *name* of the 128T router peer that this configuration element represents. |
 | bfd | sub-element | Defines the BFD properties and parameters to use with the peer router. |
 | description | string | Multiple instance. |
 | generated | boolean | Default value: false. This field is set to *true* when a 128T conductor generates configuration based on two 128T routers having interfaces in a common *neighborhood*. When this field is set to *true*, the 128T conductor will delete and regenerate this configuration element upon each *commit*. Thus, when an administrator wants to make persistent configuration changes to this object after it has been generated by a 128T conductor, it is important to manually change this field to *false*. |
 | name | string | Key field. An arbitrary name that represents the properties associated with the STEP bridge/connection to the peer router. This is typically set to be the name of the authority name or router name of the peer. |
-| router-name | string | This is the value configured as the *router \> name* of the 128T router peer router that this configuration element represents. |
+| router-name | string | This is the value configured as the *router > name* of the 128T router peer router that this configuration element represents. |
 
 Version History:
 
@@ -1626,11 +1665,11 @@ Introduced in 1.0. Updated in 1.1: core-address renamed to control-address, to r
 
 ## policy
 
-Path:
+#### Path:
 
 authority > routing > policy
 
-Description:
+#### Description:
 
 The *policy* element represents 128T's implementation of BGP route policies. A route policy lets administrators manipulate BGP messages based on criteria (as specified in `filter` configuration) to perform specific steps, each of which is contained within a `statement`.
 
@@ -1641,13 +1680,13 @@ The *policy* element represents 128T's implementation of BGP route policies. A r
 
 ## port-range
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> adjacency \> port‑range\
-authority \> router \> node \> device-interface \> network-interface \> neighborhood \> port‑range\
-authority \> service \> transport \> port-range
+authority > router > node > device-interface > network-interface > adjacency > port‑range\
+authority > router > node > device-interface > network-interface > neighborhood > port‑range\
+authority > service > transport > port-range
 
-Description:
+#### Description:
 
 When a 128T router sends *vectored sessions* to another 128T router (that is, when it uses its 128T-specific routing technique), the device transmitting the packet to its peer chooses the L4 ports for itself as well as for the far end. Occasionally, 128T routers are deployed behind firewalls with only specific ranges of ports allowed through; by default, the 128T router will choose ports between 16,384 and 65,535. The port-range attribute (within an adjacency) defines the start and end ports that a local 128T router instead of the defaults, to account for any firewall rules that may exist between this 128T router and the far end 128T router (protecting the latter).
 
@@ -1662,11 +1701,11 @@ Introduced in 2.0.
 
 ## port-range (host-service)
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> address \> host-service \> transport \> port-range
+authority > router > node > device-interface > network-interface > address > host-service > transport > port-range
 
-Description:
+#### Description:
 
 This is the range of ports (which may be as narrow as a single port) that are in use by the host-service that contains this sub-element.
 
@@ -1681,12 +1720,12 @@ Introduced in 3.1 as part of the *host-service* feature.
 
 ## post-encryption-padding
 
-Path:
+#### Path:
 
 authority > router > node > device-interface > network-interface > adjacency > post-encryption-padding
 authority > router > node > device-interface > network-interface > neighborhood > post-encryption-padding
 
-Description:
+#### Description:
 
 The *post-encryption-padding* feature will cause the 128T to pad encrypted packets that it sends to SVR peers, to avoid middleboxes that drop encrypted payloads. The receiving 128T device will strip the padding from the packet.
 
@@ -1696,11 +1735,11 @@ The *post-encryption-padding* feature will cause the 128T to pad encrypted packe
 
 ## pppoe
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> pppoe
+authority > router > node > device-interface > pppoe
 
-Description:
+#### Description:
 
 This is the container for the configurable attributes about a 128T router's support for PPPoE. The 128T router acts as a PPPoE client, and can retrieve information for this interface based upon the authentication protocol, password, and username elements configured here.
 
@@ -1716,11 +1755,11 @@ Introduced in 3.1.
 
 ## prefix-limit (neighbor)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> neighbor \> address-family \> prefix-limit
+authority > router > routing > routing-protocol (bgp) > neighbor > address-family > prefix-limit
 
-Description:
+#### Description:
 
 This configuration element governs the number of prefixes that will be accepted for this specific neighbor.
 
@@ -1736,11 +1775,11 @@ Introduced in 1.0.
 
 ## prefix-limit (routing-protocol)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> address-family \> prefix-limit
+authority > router > routing > routing-protocol (bgp) > address-family > prefix-limit
 
-Description:
+#### Description:
 
 This configuration element governs the number of prefixes that will be accepted for each BGP peer, for each address family.
 
@@ -1756,11 +1795,11 @@ Introduced in 1.0.
 
 ## reachability-detection
 
-Path:
+#### Path:
 
 authority > router > node > reachability-detection
 
-Description:
+#### Description:
 
 The *reachability-detection* feature will periodically refresh ARP entries and can provide indicators if a gateway becomes unreachable. This configuration element lets you govern the reachability properties for all interaces on a given node.
 
@@ -1774,11 +1813,11 @@ The *reachability-detection* feature will periodically refresh ARP entries and c
 
 ## redistribute
 
-Path:
+#### Path:
 
 authority > router > routing > ospf > redistribute
 
-Description:
+#### Description:
 
 The *redistribute* element allows administrators to control which sources of routes will get redistributed into OSPF by the 128T.
 
@@ -1791,11 +1830,11 @@ The *redistribute* element allows administrators to control which sources of rou
 
 ## redundancy-group
 
-Path:
+#### Path:
 
-authority \> router \> redundancy-group
+authority > router > redundancy-group
 
-Description:
+#### Description:
 
 The *redundancy-group* sub-element lets users specify device-interface elements (via their "id") that will share fate -- if any of them fail, the complements listed in the group will also be switched to their counterparts.
 
@@ -1812,12 +1851,12 @@ Introduced in 2.0.
 
 ## remote-login
 
-Path:
+#### Path:
 
 authority > remote-login
 authority > router > system > remote-login
 
-Description:
+#### Description:
 
 The *remote-login* feature creates management connections between the conductor and the routers it manages, allowing administrators to remotely log into the PCLI (or a Linux shell) from the conductor's PCLI or Linux shell.
 
@@ -1830,11 +1869,11 @@ The *remote-login* feature creates management connections between the conductor 
 
 ## repository
 
-Path:
+#### Path:
 
 authority > router > system > software-update > repository
 
-Description:
+#### Description:
 
 This controls which repository or repositories a router will use to retrieve software updates and dependent packages.
 
@@ -1845,11 +1884,11 @@ This controls which repository or repositories a router will use to retrieve sof
 
 ## route-reflector
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> neighbor \> address-family \> route-reflector
+authority > router > routing > routing-protocol (bgp) > neighbor > address-family > route-reflector
 
-Description:
+#### Description:
 
 This governs whether or not the 128T router should act as a route reflector for this neighbor, for this address family.
 
@@ -1863,11 +1902,11 @@ Introduced in 1.0.
 
 ## route-selection-options
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> route-selection-options
+authority > router > routing > routing-protocol (bgp) > route-selection-options
 
-Description:
+#### Description:
 
 A sub-element within the BGP configuration that governs how the 128T router performs its best path selection.
 
@@ -1883,11 +1922,11 @@ Introduced in 1.0.
 
 ## router
 
-Path:
+#### Path:
 
-authority \> router
+authority > router
 
-Description:
+#### Description:
 
 The *router* configuration element represents a 128T router or conductor; these are typically either one node (for standalone systems) or two nodes (for highly available systems).
 
@@ -1927,11 +1966,11 @@ Introduced in 1.0. Updated in 1.1: added "entitlement" sub-element. Updated in 3
 
 ## routing (authority-wide)
 
-Path:
+#### Path:
 
 authority > routing
 
-Description:
+#### Description:
 
 The *routing* element within an authority lets administrators configure policies and filters that are available to every router managed by a 128T conductor.
 
@@ -1942,11 +1981,11 @@ The *routing* element within an authority lets administrators configure policies
 
 ## routing (per-router)
 
-Path:
+#### Path:
 
-authority \> router \> routing
+authority > router > routing
 
-Description:
+#### Description:
 
 The *routing* element is a router-level container for all of the routing policies associated with a given 128T router deployment. Each routing element may have one and only one routing-instance.
 
@@ -1965,11 +2004,11 @@ Introduced in 1.0.
 
 ## routing-protocol (bgp)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp)
+authority > router > routing > routing-protocol (bgp)
 
-Description:
+#### Description:
 
 The *routing-protocol* configuration element contains configuration properties related to each routing protocol. The fields shown in this element will vary based on the *type* chosen. (At this time, the only valid type is "bgp".)
 
@@ -1991,11 +2030,11 @@ Introduced in 1.0.
 
 ## rule
 
-Path:
+#### Path:
 
 authority > routing > filter > rule
 
-Description:
+#### Description:
 
 The `rule` sub-element within a [route filter](#filter) will describe the matching criteria for the filter; note, the rule will attempt to match the attributes specified in the filter's `type`.
 
@@ -2012,11 +2051,11 @@ The `rule` sub-element within a [route filter](#filter) will describe the matchi
 
 ## security
 
-Path:
+#### Path:
 
-authority \> security
+authority > security
 
-Description:
+#### Description:
 
 This is a security policy that is attached to various other objects within the 128T router configuration hierarchy to govern how it interacts with its peers (within the router or inter-router). This includes the ciphers to use, when packets should be encrypted, when packets should include authentication information (so that a recipient may validate the sender), and which packets are considered permissible.
 
@@ -2026,7 +2065,7 @@ Generally, security policies are applied within routers, tenants, or services. W
 | --- | --- | --- |
 | adaptive-encryption | boolean | Default: true. When set to true, a router will not encrypt traffic that is already encrypted, irrespective of the setting of *encrypt* (below). E.g., if a session is already secured with IPsec or TLS, the 128T router will not re-encrypt this session, saving processing horsepower. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
-| encrypt | boolean | Default: true. This field affects whether information is encrypted when transmitted between 128T routers and/or 128T nodes. Depending on where this security policy is applied, it will affect whether a 128T router's metadata is encrypted (if applied to *router \> inter-node-security* or *peer \> inter-router-security*), or the payload of packets is encrypted (if applied to a *service* or *tenant*). |
+| encrypt | boolean | Default: true. This field affects whether information is encrypted when transmitted between 128T routers and/or 128T nodes. Depending on where this security policy is applied, it will affect whether a 128T router's metadata is encrypted (if applied to *router > inter-node-security* or *peer > inter-router-security*), or the payload of packets is encrypted (if applied to a *service* or *tenant*). |
 | encryption-cipher | enumeration | Valid values: aes-cbc-128, aes-cbc-256. Defaults to aes-cbc-128. |
 | encryption-iv | string | The initialization vector (IV) for encryption. |
 | encryption-key | string | The encryption key for this security policy. |
@@ -2044,11 +2083,11 @@ Rearranged in 1.1. Eliminated unimplemented ciphers. Removed unnecessary modes f
 
 ## server (ntp)
 
-Path:
+#### Path:
 
-authority \> router \> system \> ntp \> server
+authority > router > system > ntp > server
 
-Description:
+#### Description:
 
 This configuration defines external NTP timing sources that the 128T router's nodes will all attempt to clock from.
 
@@ -2062,11 +2101,11 @@ Introduced in 2.0. Updated in 3.1: now supports hostnames in addition to IPv4 ad
 
 ## server (syslog)
 
-Path:
+#### Path:
 
-authority \> router \> system \> syslog \> server
+authority > router > system > syslog > server
 
-Description:
+#### Description:
 
 This configuration defines external syslog servers that the 128T router will send syslog messages to.
 
@@ -2081,11 +2120,11 @@ Introduced in 2.0. Updated in 3.1: added support for hostnames in the *ip-addres
 
 ## server (webserver)
 
-Path:
+#### Path:
 
-authority \> router \> system \> services \> webserver \> server
+authority > router > system > services > webserver > server
 
-Description:
+#### Description:
 
 This configuration defines the listening address for running the 128T router's web GUI on a specific Control (or Combo) node.
 
@@ -2100,11 +2139,11 @@ Introduced in 2.0.
 
 ## service
 
-Path:
+#### Path:
 
-authority \> service
+authority > service
 
-Description:
+#### Description:
 
 The 128T router solution is deployed to facilitate the delivery of new applications; as such, the service configuration is at the heart of the 128T router data model. It is where you define the services (such as web services, database services, etc.) that reside within the authority's tenants, as well as the properties of, and policies to apply to those services.
 
@@ -2138,11 +2177,11 @@ Introduced in 1.0. Updated in 2.0: added *transport* to replace the deprecated *
 
 ## service-class
 
-Path:
+#### Path:
 
-authority \> service-class
+authority > service-class
 
-Description:
+#### Description:
 
 The service-class configuration is used to define the outbound treatment through the traffic engineering subsystem for sessions traversing a 128T router. The 128T router's term "service class" is used as defined in RFC 4594, "Configuration Guidelines for DiffServ Service Classes", which states:
 
@@ -2167,11 +2206,11 @@ Introduced in 1.0. Reorganized in 1.1: *max-jitter*, *max-latency*, *max-loss*, 
 
 ## service-policy
 
-Path:
+#### Path:
 
-authority \> service-policy
+authority > service-policy
 
-Description:
+#### Description:
 
 These are policy parameters that may be applied to service traffic to affect its packet marking, rate limiting, load balancing strategy, etc.
 
@@ -2201,11 +2240,11 @@ Introduced in 1.0. Updated in 1.1: many fields from service-class reorganized in
 
 ## service-route
 
-Path:
+#### Path:
 
-authority \> router \> service-route
+authority > router > service-route
 
-Description:
+#### Description:
 
 A service-route is a target route for handling traffic for a given service.
 
@@ -2228,11 +2267,11 @@ Introduced in 1.0. Updated in 1.1: renamed to *service-route* (was *service-agen
 
 ## service-route-policy
 
-Path:
+#### Path:
 
-authority \> router \> service-route-policy
+authority > router > service-route-policy
 
-Description:
+#### Description:
 
 Service agent policies are used to define the properties of individual service agents for things such as capacity and rate-limiting. This in turn affects the selection process for a 128T router when determining the most appropriate service agent for a new inbound session request.
 
@@ -2252,11 +2291,11 @@ Introduced in 1.0. Updated in 1.1: renamed to *service-route-policy* (was *servi
 
 ## services
 
-Path:
+#### Path:
 
-authority \> router \> system \> services
+authority > router > system > services
 
-Description:
+#### Description:
 
 This represents the set of system services offered by the 128T platform..
 
@@ -2271,12 +2310,12 @@ Introduced in 1.0. Updated in 2.0, removed most internal elements.
 
 ## session-optimization (adjacency/neighborhood)
 
-Path:
+#### Path:
 
 authority > router > node > device-interface > network-interface > adjacency > session-optimization
 authority > router > node > device-interface > network-interface > neighborhood > session-optimization
 
-Description:
+#### Description:
 
 Controls whether session-optimization is enabled for connections egressing this neighborhood.
 
@@ -2285,11 +2324,11 @@ Controls whether session-optimization is enabled for connections egressing this 
 
 ## session-optimization (device-interface)
 
-Path:
+#### Path:
 
 authority > router > node > device-interface > session-optimization
 
-Description:
+#### Description:
 
 This controls whether the 128T will attempt to detect when session-optimization is necessary for traffic egressing this `device-interface`.
 
@@ -2299,11 +2338,11 @@ This controls whether the 128T will attempt to detect when session-optimization 
 
 ## session-type
 
-Path:
+#### Path:
 
-authority \> session-type
+authority > session-type
 
-Description:
+#### Description:
 
 The *session-type* sub-element lets administrators specify custom applications, for classification purposes, based on their Layer 4 port and transport. The 128T router is shipped with a series of default classification types for well-known port/protocol combinations (e.g., TCP:80 is HTTP).
 
@@ -2324,11 +2363,11 @@ Introduced in 1.0. Updated in 2.0: deprecated *protocol* in favor of *transport*
 
 ## snmp-server
 
-Path:
+#### Path:
 
 authority > router > system > services > snmp-server
 
-Description:
+#### Description:
 
 This is the configuration associated with the SNMP behavior of the 128T router, including which systems should be capable of polling this system for data, and which systems will receive SNMP traps from this router.
 
@@ -2342,11 +2381,11 @@ This is the configuration associated with the SNMP behavior of the 128T router, 
 
 ## software-update
 
-Path:
+#### Path:
 
 authority > router > system > software-update
 
-Description:
+#### Description:
 
 By default, a 128T router retrieves software from a public software repository hosted by 128 Technology. However, in some deployments access to the public internet may be restricted. The *software-update* configuration allows administrative controls over how and from where the 128T router will retrieve software.
 
@@ -2357,11 +2396,11 @@ By default, a 128T router retrieves software from a public software repository h
 
 ## ssh-keepalive
 
-Path:
+#### Path:
 
-authority \> router \> node \> ssh-keepalive
+authority > router > node > ssh-keepalive
 
-Description:
+#### Description:
 
 The *ssh-keepalive* sub-element lets administrators control how often it sends keepalives on SSH connections and how many consecutive missed keepalives indicate a connection failure/reconnection attempt.
 
@@ -2378,11 +2417,11 @@ Introduced in 3.2.
 
 ## static-route
 
-Path:
+#### Path:
 
-authority \> router \> routing \> static-route
+authority > router > routing > static-route
 
-Description:
+#### Description:
 
 This is the sub-element that allows administrators to configure static routes, that will be entered into the 128T router's Routing Information Base (RIB).
 
@@ -2400,11 +2439,11 @@ Introduced in 1.0. Updated in 3.0: added *blackhole*, *distance*.
 
 ## statement
 
-Path:
+#### Path:
 
 authoritng > routing > policy > statement
 
-Description:
+#### Description:
 
 The *statement* is the programmatic step of a routing policy. Routing policies are comprised of one or more statements, which combine to take action (e.g., accept or reject routes based on criteria, or modify routes). Each statement will evaluate all of its `condition` elements. If all conditions match (including the case where there are no `condition` elements configured), the `policy` for that statement will govern whether the policy will accept or reject that route.
 
@@ -2423,11 +2462,11 @@ If a policy reaches the end of the statement list and no statement has been exec
 
 ## summary-range
 
-Path:
+#### Path:
 
 authority > router > routing > ospf > area > summary-range
 
-Description:
+#### Description:
 
 This controls whether the 128T will advertise summary routes into OSPF. This only applies when the 128T is acting as an Area Border Router (ABR).
 
@@ -2439,11 +2478,11 @@ This controls whether the 128T will advertise summary routes into OSPF. This onl
 
 ## syslog
 
-Path:
+#### Path:
 
-authority \> router \> system \> syslog
+authority > router > system > syslog
 
-Description:
+#### Description:
 
 The *syslog* sub-element lets administrators configure the 128T router's interaction with external syslog services.
 
@@ -2459,11 +2498,11 @@ Introduced in 2.0.
 
 ## system
 
-Path:
+#### Path:
 
-authority \> router \> system
+authority > router > system
 
-Description:
+#### Description:
 
 The *system* sub-element lets administrators configure system-wide properties for their 128T router deployment.
 
@@ -2488,11 +2527,11 @@ Introduced in 1.0. Updated in 1.1: *ntp* added. Updated in 2.0: inactivity-timer
 
 ## system (audit)
 
-Path:
+#### Path:
 
-authority \> router \> system \> audit \> system
+authority > router > system > audit > system
 
-Description:
+#### Description:
 
 This sub-element gives administrators the ability to administratively enable or disable system events.
 
@@ -2506,11 +2545,11 @@ Introduced in 3.2.
 
 ## tenant
 
-Path:
+#### Path:
 
-authority \> tenant
+authority > tenant
 
-Description:
+#### Description:
 
 Tenancy is the logical partitioning of a network's resources, done in the interest of restricting access to network services to only the users and groups for which they're intended. Tenants are defined within an *authority*, and can span one or more *routers* within that authority. I.e., the services made available to that tenant can exist anywhere within the authority, irrespective of router, and the 128T router propagates routing information throughout the tenant to advertise the service's availability irrespective of the client's location. Essentially, tenants are intended to provide complete network segregation. Traffic from one tenant will not be allowed to traverse through another tenant's network, unless explicitly configured to do so.
 
@@ -2538,11 +2577,11 @@ Introduced in 1.0. Updated in 3.0: added *member*, removed (obsoleted) *address*
 
 ## timers (neighbor)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> neighbor \> timers
+authority > router > routing > routing-protocol (bgp) > neighbor > timers
 
-Description:
+#### Description:
 
 This sub-element allows administrators to control various BGP timers used when connecting to a specific neighbor.
 
@@ -2559,11 +2598,11 @@ Introduced in 1.0.
 
 ## timers (routing-protocol)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> timers
+authority > router > routing > routing-protocol (bgp) > timers
 
-Description:
+#### Description:
 
 This sub-element allows administrators to control the default BGP timers the 128T router will use when connecting to any neighbor.
 
@@ -2578,11 +2617,11 @@ Introduced in 1.0.
 
 ## traffic
 
-Path:
+#### Path:
 
-authority \> router \> system \> audit \> traffic
+authority > router > system > audit > traffic
 
-Description:
+#### Description:
 
 This sub-element gives administrators the ability to administratively enable or disable traffic events.
 
@@ -2596,11 +2635,11 @@ Introduced in 3.2.
 
 ## traffic-engineering
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> traffic-engineering
+authority > router > node > device-interface > traffic-engineering
 
-Description:
+#### Description:
 
 This sub-element allows administrators to adjust properties of this device-interface related to traffic engineering.
 
@@ -2616,11 +2655,11 @@ The transmit-cap configuration field was previously located within the device-in
 
 ## traffic-profile
 
-Path:
+#### Path:
 
-authority \> traffic-profile
+authority > traffic-profile
 
-Description:
+#### Description:
 
 This sub-element allows administrators to adjust properties of how much guaranteed bandwidth is allocated for various traffic categories. Note that the values within best-effort, high, medium, and low are percentage values and must add up to 100 (percent).
 
@@ -2638,11 +2677,11 @@ Introduced in version 3.2.
 
 ## transport (BGP neighbor)
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> neighbor \> transport
+authority > router > routing > routing-protocol (bgp) > neighbor > transport
 
-Description:
+#### Description:
 
 This sub-element governs the transport protocol parameters for a BGP connection to this neighbor.
 
@@ -2657,11 +2696,11 @@ Introduced in 1.0.
 
 ## transport (host-service)
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> address \> host-service \> transport
+authority > router > node > device-interface > network-interface > address > host-service > transport
 
-Description:
+#### Description:
 
 This sub-element defines the port range and transport protocol for matching to inbound packets, to associate them with a configured *host-service*. Packets matching the *address* of a node's network-interface, as well as a port and protocol defined within this sub-element, will be bridged to a corresponding service on the underlying Linux platform.
 
@@ -2676,11 +2715,11 @@ Introduced in 3.1 as part of the *host-service* feature.
 
 ## transport (service)
 
-Path:
+#### Path:
 
-authority \> service \> transport
+authority > service > transport
 
-Description:
+#### Description:
 
 This sub-element defines the port range and transport protocol for the service.
 
@@ -2695,11 +2734,11 @@ Introduced in 2.0. Updated in 3.1: removed *any* as a valid enumeration value fo
 
 ## transport (session-type)
 
-Path:
+#### Path:
 
-authority \> session-type
+authority > session-type
 
-Description:
+#### Description:
 
 This sub-element defines the port range and transport protocol that are used to match inbound packets to the properties associated with a session-type.
 
@@ -2714,13 +2753,13 @@ Introduced in 2.0. Updated in 3.1: removed *any* as a valid enumeration for prot
 
 ## udp-transform
 
-Path:
+#### Path:
 
-authority \> router \> node \> device-interface \> network-interface \> adjacency \> udp-transform
-authority \> router \> node \> device-interface \> network-interface \> neighborhood \> udp-transform
-authority \> router \> udp-transform
+authority > router > node > device-interface > network-interface > adjacency > udp-transform
+authority > router > node > device-interface > network-interface > neighborhood > udp-transform
+authority > router > udp-transform
 
-Description:
+#### Description:
 
 This sub-element defines the port range and transport protocol that are used to match inbound packets to the properties associated with a session-type.
 
@@ -2736,11 +2775,11 @@ Introduced in 3.2.
 
 ## use-multiple-paths
 
-Path:
+#### Path:
 
-authority \> router \> routing \> routing-protocol (bgp) \> address-family \> use-multiple-paths
+authority > router > routing > routing-protocol (bgp) > address-family > use-multiple-paths
 
-Description:
+#### Description:
 
 The *use-multiple-paths* container has sub-elements for allowing administrators to configure the 128T router's behavior for multipath support for both eBGP and iBGP.
 
@@ -2755,11 +2794,11 @@ Introduced in 1.0.
 
 ## vector
 
-Path:
+#### Path:
 
-authority \> service-policy \> vector
+authority > service-policy > vector
 
-Description:
+#### Description:
 
 The *vector* sub-element lets administrators choose cost values for the vector labels that are assigned to neighborhoods on egress 128T forwarding interfaces. As part of the 128T's *secure vector routing* model, each vector can have a variable cost that is configured within the context of a service-policy, and these service-policy objects may have unique values for the same vectors -- effecting different traffic treatment over the same topology.
 
@@ -2774,11 +2813,11 @@ Introduced in 3.2.
 
 ## webserver
 
-Path:
+#### Path:
 
-authority \> router \> system \> services \> webserver
+authority > router > system > services > webserver
 
-Description:
+#### Description:
 
 The *webserver* element defines the address(es) and port upon which the 128T router's GUI listens. The 128T router's GUI is enabled by default, and will (by default) use the management address(es), on port 443.[^1] Thus, in the majority of deployment scenarios, this configuration is unused, despite the fact that the GUI is the primary mode of administrative interfacing with the 128T router.
 
