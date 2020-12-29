@@ -716,9 +716,12 @@ This element allows administrators to define a range of DSCP values that will ma
 | start-value | integer | Key field. Valid range: 0-63. The lower bound of the DSCP range. When only configuring a range of a single DSCP value, it is sufficient to only configure the *start-value* and leave the *end-value* unconfigured. |
 | end-value | integer | Valid range: 0-63 (and must be greater than start-value). The upper bound of the DSCP range. |
 
-Version History:
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced |
+| 3.2.0 | Added as a sub-element of *dscp-traffic-class* |
 
-Introduced in 3.1. Added as a sub-element of *dscp-traffic-class* in 3.2.0.
 
 ## dscp-traffic-class
 
@@ -735,9 +738,10 @@ This element allows administrators to associate ranges of DSCP values to one of 
 | traffic-class | enumeration | Valid values: high, medium, low, best-effort. This is the type of traffic to associate with the DSCP ranges configured in this element. |
 | dscp-range | sub-element | The range of DSCP values to map to the specified priority. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## ebgp
 
@@ -753,9 +757,10 @@ This element contains configuration parameters related to the 128T router's mult
 | --- | --- | --- |
 | maximum-paths | uint32 | Default: 1. The maximum number of parallel paths to consider when using multipath eBGP for this address family. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## entitlement
 
@@ -773,9 +778,10 @@ The entitlement is where you apply keys you received from 128 Technology, to lic
 | id | string | The entitlement string, supplied to you by 128 Technology. |
 | max-bandwidth | uint64 | The purchased bandwidth for your 128T router, expressed in *bytes per second*. |
 
-Version History:
-
-Introduced in 1.1.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.1.0 | Introduced |
 
 ## filter
 
@@ -808,9 +814,11 @@ This configuration element governs the behavior of the 128T router's support for
 | restart-time | uint16 | Valid values: 0-4096. Described as the "Restart Time" in RFC 4724, this is the estimated time for the local BGP speaker to restart a session. The 128T router will advertise this value with a BGP peer as part of its declared support for graceful restart. Per RFC 4724, the suggested default value is less than or equal to the hold-time value. |
 | stale-routes-time | uint16 | This is what RFC 4724 refers to as the "Selection\_Deferral\_Timer", and represents the upper bound on how long stale routes are retained by the 128T router after a BGP peering connection is restarted. If an EOR (End-of-RIB) marker is received from the peer before this timer expires, the stale routes are flushed. |
 
-Version History:
-
-Introduced in 1.0. Updated in version 3.1: added restart-time.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 3.1.0 | Added restart-time |
 
 ## high
 
@@ -826,9 +834,10 @@ This element has one configurable field, that lets administrators specify the gu
 | --- | --- | --- |
 | distribution | percentage | Valid values: 0-100. |
 
-Version History:
-
-Introduced in version 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## host
 
@@ -863,9 +872,10 @@ Individual compute platforms that make up a 128T router may each "host" their ow
 | service-type | enumeration | Key field. Valid values: ssh, netconf, web, dhcp-server or custom. This identifies the underlying Linux service that will be bridged to the address on this specific node. |
 | transport | sub-element | This is where port(s) and protocol(s) are defined, to match inbound packets to this host-service definition. Only configurable when service-type is *custom*. |
 
-Version History:
-
-Introduced in 3.1.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced |
 
 ## ibgp
 
@@ -881,9 +891,10 @@ This element contains configuration parameters related to the 128T router's mult
 | --- | --- | --- |
 | maximum-paths | uint32 | Default: 1. The maximum number of parallel paths to consider when using multipath iBGP for this address family. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## inter-conductor-router-server
 
@@ -915,9 +926,10 @@ This element contains configuration parameters related to SSH keepalive properti
 | interval | integer | Valid values: 1-10. Configured in seconds, the amount of idle time between keepalive messages. |
 | max-attempts | integer | Valid values: 1-20. The number of missed keepalive messages before a connection is declared dead and a reconnection attempt is initiated. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## inter-node-server
 
@@ -934,9 +946,10 @@ This element contains configuration parameters related to SSH keepalive properti
 | interval | integer | Valid values: 1-10. Configured in seconds, the amount of idle time between keepalive messages. |
 | max-attempts | integer | Valid values: 1-20. The number of missed keepalive messages before a connection is declared dead and a reconnection attempt is initiated. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## inter-router
 
@@ -953,9 +966,10 @@ This element contains configuration parameters related to SSH keepalive properti
 | interval | integer | Valid values: 1-10. Configured in seconds, the amount of idle time between keepalive messages from this node to other routers |
 | max-attempts | integer | Valid values: 1-20. The number of missed keepalive messages before a connection is declared dead and a reconnection attempt is initiated. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## interface (ospf)
 
@@ -1013,9 +1027,11 @@ This element contains information regarding externally reachable IPFIX (IP Flow 
 | sampling-percentage | enumeration | Valid values: *dynamic* (default) or a decimal value. This represents the percentage of traffic for which IPFIX traffic is generated and sent to the collector. (IPFIX records are rarely, if ever, collected on each flow in a networking device due to the volume of data this generates for both the sender and receiver.) When set to *dynamic* (or left at its default), the routers in the Authority will use a default algorithm for sampling based on the busyness of the system. For traffic volumes under 100Mbps, the system will generate IPFIX records for one in every 256 flows, up to 1Gbps, one in every 512 flows, up to 10Gbps, one in every 1,024 flows, up to 25Gbps, one in every 2,048 flows, and one in every 8,192 flows for traffic exceeding 25Gbps. |
 | tenant | list | The tenants for which this IPFIX collector will receive records. When no tenants are configured, all traffic will be eligible. |
 
-Version History:
-
-Introduced in 3.1. Updated in 3.2: added *tenant*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced |
+| 3.2.0 | Added *tenant* |
 
 ## ldap-server
 
@@ -1054,9 +1070,10 @@ The *load-balancing* element lets administrators configure thresholds for a devi
 | utilization-high-water-mark | percentage | Valid values: 0-100. The value, in percent, of the link's capacity beyond which the interface will no longer be used as an egress point for new session assignments. |
 | utilization-low-water-mark | percentage | Valid values: 0-100. The value, in percent, of the link's capacity before a previously declared ineligible link must fall below before it will be marked as an eligible path for new session assignments. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## local-login
 
@@ -1088,9 +1105,10 @@ These logging subsystems will generally only be tuned at the direct request from
 | name | enumeration | Valid values: ATCS, DATA, DISC, USER, FLC, HWMC, IPC, LINK, PLAT, RDB, RTG, TEST, UTIL. |
 | log-level | enumeration | Valid values (in increasing order of verbosity): fatal, error, warning, info, debug, trace. |
 
-Version History:
-
-Introduced in 3.1.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced |
 
 ## low
 
@@ -1106,9 +1124,10 @@ This element has one configurable field, that lets administrators specify the gu
 | --- | --- | --- |
 | distribution | percentage | Valid values: 0-100. |
 
-Version History:
-
-Introduced in version 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## lte
 
@@ -1124,9 +1143,10 @@ This element contains information regarding the configuration attributes for dev
 | --- | --- | --- |
 | apn-name | string | Mobile networks register devices using Access Point Names, abbreviated as "APN." The apn-name field is where you put the apn-name as specified to you by your mobile carrier. This will be used by the 128T router to connect to the LTE network. |
 
-Version History:
-
-Introduced in 3.1.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced |
 
 ## management-vector
 
@@ -1159,9 +1179,10 @@ A router restart is required for this change to be applied.
 | --- | --- | --- |
 | value | string | Valid values: 50,000-1,000,000. |
 
-Version History:
-
-Introduced in version 4.5.3
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 4.5.3 | Introduced |
 
 ## max-way-points
 
@@ -1179,9 +1200,10 @@ A router restart is required for this change to be applied.
 | --- | --- | --- |
 | value | string | Valid values: 50,000-1,000,000. |
 
-Version History:
-
-Introduced in version 4.5.3
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 4.5.3 | Introduced |
 
 ## medium
 
@@ -1197,9 +1219,10 @@ This element has one configurable field, that lets administrators specify the gu
 | --- | --- | --- |
 | distribution | percentage | Valid values: 0-100. |
 
-Version History:
-
-Introduced in version 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## member (redundancy-group)
 
@@ -1216,9 +1239,11 @@ The *member* sub-element is configured for each member interface to share fate i
 | device-id | string | Key field. The node's device-interface > name to be a member of this redundancy-group. |
 | node | reference | Key field. A reference to a configured node's *name* field. |
 
-Version History:
-
-Introduced in 2.0. Updated in 3.2: changed device-id to refer to the device-interface's *name* rather than *id*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
+| 3.2.0 | Changed device-id to refer to the device-interface's *name* rather than *id* |
 
 ## member (tenant)
 
@@ -1235,9 +1260,10 @@ The *member* sub-element is configured to describe prefix-to-neighborhood mappin
 | address | CIDR | Multiple instance. The CIDR block of addresses that -- within a neighborhood -- are said to belong to this tenant. |
 | neighborhood | string | Key field. The neighborhood for which the prefixes are to be treated as members of the tenant. |
 
-Version History:
-
-Introduced in 3.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.0.0 | Introduced |
 
 ## metrics
 
@@ -1253,9 +1279,11 @@ The *metrics* sub-element governs various aspects of the 128T router's data samp
 | --- | --- | --- |
 | sample-period | uint8 | Valid values: 1-60. Default is 5. Configured in seconds. |
 
-Version History:
-
-Introduced in 3.0. Updated in 3.2: revised range from 1-10.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.0.0 | Introduced |
+| 3.2.0 | Revised range from 1-10 |
 
 ## multicast-sender-policy
 
@@ -1290,9 +1318,10 @@ The *multihop* sub-element lets administrators set properties related to the 128
 | --- | --- | --- |
 | ttl | uint8 | The time-to-live (TTL) value to use when packets are sent to the neighbor. Only applicable when eBGP multihop is also enabled. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## nat-keep-alive
 
@@ -1341,9 +1370,10 @@ The *neighbor* sub-element (within a network-interface) defines the IP-to-MAC bi
 | ip-address | address | Key field. The IP address of the neighboring device. |
 | phys-address | phys-address | The MAC address of the neighboring device. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## neighbor (routing-protocol)
 
@@ -1370,9 +1400,12 @@ The *neighbor* sub-element defines the IP address and Autonomous System (AS) num
 | timers | sub-element | This sub-element controls timers associated with the BGP behavior when communicating with this neighbor. |
 | transport | sub-element | This sub-element controls transport layer behavior when communicating with this BGP neighbor. |
 
-Version History:
-
-Introduced in 1.0. Updated in 3.0: removed *inbound-policy* and *outbound-policy* references. Updated in 3.2: added *neighbor-policy*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 3.0.0 | Removed *inbound-policy* and *outbound-policy* references |
+| 3.2.0 | Added *neighbor-policy* |
 
 ## neighbor-policy
 
@@ -1389,9 +1422,10 @@ The *neighbor-policy* sub-element defines how/whether certain types of routes ge
 | outbound-policy-advertise | boolean | When false, this 128T will not advertise any routes to its BGP peer. |
 | transit-policy-advertise | boolean | When false, this 128T will not advertise any transit routes to its BGP peer. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## neighborhood
 
@@ -1419,9 +1453,12 @@ The *neighborhood* multiple-instance sub-element describes the network connectiv
 | udp-transform | sub-element | Configuration settings related to the 128T router's UDP transformation feature, which transforms L4 protocols to UDP in order to avoid middleboxes that filter/mangle/manage TCP sessions. |
 | vector | string | The vector (variable cost) that will be used for path selection when transmitting traffic that has a commensurate service-policy. |
 
-Version History:
-
-Introduced in 3.0. Updated in 3.1: added the ability to specify neighborhood-wide *bfd* properties. Updated in 3.2: added *external-nat-address*, *port-range*, *udp-transform*, and *vector* elements.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.0.0 | Introduced |
+| 3.1.0 | Added the ability to specify neighborhood-wide *bfd* properties |
+| 3.2.0 | Added *external-nat-address*, *port-range*, *udp-transform*, and *vector* elements |
 
 ## netconf
 
@@ -1452,9 +1489,11 @@ The *network* multiple-instance sub-element describes the networks that this 128
 | --- | --- | --- |
 | network-address | CIDR | Key field. |
 
-Version History:
-
-Introduced in 1.0. Updated in 3.0: removed *policy*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 3.0.0 | Removed *policy* |
 
 ## network-interface
 
@@ -1499,9 +1538,15 @@ The network-interface element represents a logical interface on a node.
 | type | enumeration | Valid values: fabric, external, shared. This enumeration is used by the 128T router to identify the interfaces it can use for inter-node (a.k.a. "fabric") traffic, or for interfaces that communicate with traditional networking equipment (a.k.a. "external"). When interfaces are used for both inter-node traffic as well as normal, ambient traffic the value "shared" should be used. |
 | vlan | uint16 | Valid values: 0-4094. The L2 VLAN tag to use when sending packets, and the L2 tag to expect when receiving packets. |
 
-Version History:
-
-Introduced in 1.0. Updated in 1.1: deprecated "fabric-type" and replaced it with "type"; removed "gateway"; added global-id in support of network-interface redundancy. Updated in 2.0: "classify" renamed to "rewrite-dscp". Updated in 3.0: added *neighborhood*. Updated in 3.1: "auto" removed as an eligible value for *type*. Added *classify*, *dhcp*, *dscp-map*, and *prioritization-mode* configuration elements for features added in this software release. Updated in 3.2: added *hostname*, removed *enabled*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | Deprecated "fabric-type" and replaced it with "type"; removed "gateway"; added global-id in support of network-interface redundancy |
+| 2.0.0 | *classify* renamed to *rewrite-dscp* |
+| 3.0.0 | Added *neighborhood* |
+| 3.1.0 | *auto* removed as an eligible value for *type*. Added *classify*, *dhcp*, *dscp-map*, and *prioritization-mode* configuration elements for features added in this software release. |
+| 3.2.0 | Added *hostname*, removed *enabled*. |
 
 ## next-hop (service-route)
 
@@ -1521,9 +1566,10 @@ This specifies the next-hop for reaching a service-route.
 | source-nat-pool | reference | The name of a configured [`nat-pool`](#nat-pool) to use when invoking this next-hop. |
 | target-address | address | The IPv4, IPv6, or hostname to be used as the destination address for this service-route. This will cause the 128T to perform a destination NAT. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## next-hop (static-route)
 
@@ -1540,9 +1586,12 @@ This specifies the next-hop for an administratively-configured static route.
 | ip-address | address | The IP address of the next hop. |
 | distance | uint8 | Valid values: 1-255. The administrative distance for this static-route; the higher the value, the less preferred. |
 
-Version History:
-
-Introduced in 1.0. Updated in 3.0: removed *outgoing*. Updated in 3.2: added *distance*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 3.0.0 | Removed *outgoing* | 
+| 3.2.0 | Added *distance* |
 
 ## next-hop-interface
 
@@ -1590,9 +1639,14 @@ A *node* is a single software instance, one that comprises a whole or part of a 
 | ssh-keepalive | sub-element | Governs whether or not this system will support SSH keepalives. |
 | usage-reporter-enabled | boolean | When true, this node will report anonymous usage statistics back to 128 Technology, Inc. for continuous improvement of our software. |
 
-Version History:
-
-Introduced in 1.0. Updated in 1.1: the *role* enumeration values changed to reflect the new element names. Updated in 3.0: added *conductor* to enumeration for *role*. Updated in 3.1: added *asset-id* as part of the Automated Provisioning feature introduced in software version 3.1. Updated in 3.2: added software-update-bandwidth, ssh-keepalive, asset-validation-enabled, forwarding-core-count.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | The *role* enumeration values changed to reflect the new element names | 
+| 3.0.0 | Added *conductor* to enumeration for *role* | 
+| 3.1.0 | Added *asset-id* as part of the Automated Provisioning feature | 
+| 3.2.0 | Added *software-update-bandwidth, ssh-keepalive, asset-validation-enabled, forwarding-core-count* |
 
 ## notification-receiver
 
@@ -1624,9 +1678,10 @@ The *ntp* sub-element (within the *system* configuration) lets administrators co
 | --- | --- | --- |
 | server | sub-element | The NTP server and its properties. |
 
-Version History:
-
-Introduced in 2.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
 
 ## ospf
 
@@ -1682,9 +1737,14 @@ A *peer* object models a remote router (in this system's *authority* or in a rem
 | name | string | Key field. An arbitrary name that represents the properties associated with the STEP bridge/connection to the peer router. This is typically set to be the name of the authority name or router name of the peer. |
 | router-name | string | This is the value configured as the *router > name* of the 128T router peer router that this configuration element represents. |
 
-Version History:
-
-Introduced in 1.0. Updated in 1.1: core-address renamed to control-address, to reflect new 128T naming conventions. Updated in 2.0: added tenant, removed role. Updated in 3.0: removed unused fields, removed *tenant*. Updated in 3.2: removed id, added generated.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | *core-address* renamed to *control-address*, to reflect new 128T naming conventions |
+| 2.0.0 | Added *tenant*, removed *role* | 
+| 3.0.0 | Removed unused fields, removed *tenant* | 
+| 3.2.0 | Removed *id*, added *generated* |
 
 ## policy
 
@@ -1705,8 +1765,8 @@ The *policy* element represents 128T's implementation of BGP route policies. A r
 
 #### Path:
 
-authority > router > node > device-interface > network-interface > adjacency > port‑range\
-authority > router > node > device-interface > network-interface > neighborhood > port‑range\
+authority > router > node > device-interface > network-interface > adjacency > port‑range
+authority > router > node > device-interface > network-interface > neighborhood > port‑range 
 authority > service > transport > port-range
 
 #### Description:
@@ -1718,9 +1778,10 @@ When a 128T router sends *vectored sessions* to another 128T router (that is, wh
 | end-port | l4-port | The ending port for the range. |
 | start-port | l4-port | Key field. Valid values: 1025-16383. The starting port for the range. |
 
-Version History:
-
-Introduced in 2.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
 
 ## port-range (host-service)
 
@@ -1737,9 +1798,10 @@ This is the range of ports (which may be as narrow as a single port) that are in
 | end-port | l4-port | The ending port for the range. |
 | start-port | l4-port | Key field. The starting port for the range. |
 
-Version History:
-
-Introduced in 3.1 as part of the *host-service* feature.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced as part of the *host-service* feature |
 
 ## post-encryption-padding
 
@@ -1772,9 +1834,10 @@ This is the container for the configurable attributes about a 128T router's supp
 | password | string | The password to use when communicating with the PPPoE server. |
 | user-name | string | The username to use when communicating with the PPPoE server. |
 
-Version History:
-
-Introduced in 3.1.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced |
 
 ## prefix-limit (neighbor)
 
@@ -1792,9 +1855,10 @@ This configuration element governs the number of prefixes that will be accepted 
 | restart-timer | uint16 | This controls the time (in seconds) after a connection is torn down with a peer due to excessive prefix limiting, before the 128T router will attempt to reconnect with the peer. |
 | shutdown-threshold-pct | uint8 | Valid values: 0-100. Expressed as a percentage (of max-prefixes), the threshold before the 128T router generates log messages warning that a peer is approaching its max-prefix limit. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## prefix-limit (routing-protocol)
 
@@ -1812,9 +1876,10 @@ This configuration element governs the number of prefixes that will be accepted 
 | restart-timer | uint16 | This controls the time (in seconds) after a connection is torn down with a peer due to excessive prefix limiting, before the 128T router will attempt to reconnect with the peer. |
 | shutdown-threshold-pct | uint8 | Valid values: 0-100. Expressed as a percentage (of max-prefixes), the threshold before the 128T router generates log messages warning that a peer is approaching its max-prefix limit. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## reachability-detection
 
@@ -1868,9 +1933,10 @@ The *redundancy-group* sub-element lets users specify device-interface elements 
 | name | string | Key field. This is a unique label used to identify the redundancy-group. |
 | priority | uint8 | Valid values: 0-100. A number to indicate the preference of this group relative to other groups. The higher the number, the more preferred. |
 
-Version History:
-
-Introduced in 2.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
 
 ## remote-login
 
@@ -1919,9 +1985,10 @@ This governs whether or not the 128T router should act as a route reflector for 
 | --- | --- | --- |
 | client | boolean | When true, the neighbor is considered a route reflector client for this address family. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## route-selection-options
 
@@ -1939,9 +2006,10 @@ A sub-element within the BGP configuration that governs how the 128T router perf
 | external-compare-router-id | boolean | When true, the ID of the peer is a criteria for selecting the active path for external BGP neighbors. |
 | ignore-as-path-length | boolean | Default: false. When true, the 128T router ignores the AS path length when choosing the best path. By default the 128T router will prefer paths with shorter lengths. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## router
 
@@ -1983,9 +2051,14 @@ The router element serves as a container for holding the nodes of a single deplo
 | system | sub-element | Single instance, a reference to this 128T router instance's system-wide properties. |
 | udp-transform | sub-element | The system settings for the 128T router's UDP transform function. |
 
-Version History:
-
-Introduced in 1.0. Updated in 1.1: added "entitlement" sub-element. Updated in 3.0: removed *priority*, added *location-coordinates*. Updated in 3.1: added *group*. Updated in 3.2: added *application-classification*, *maintenance-mode*, and *udp-tranform*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | Added *entitlement* sub-element | 
+| 3.0.0 | Removed *priority*, added *location-coordinates* | 
+| 3.1.0 | Added *group* | 
+| 3.2.0 | Added *application-classification*, *maintenance-mode*, and *udp-tranform* |
 
 ## routing (authority-wide)
 
@@ -2021,9 +2094,10 @@ The *routing* element is a router-level container for all of the routing policie
 | static-route | sub-element | Where administrators define static routes for their router. |
 | type | enumeration | Valid values: default-instance. At this time, the 128T router only supports the "default-instance" type. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## routing-protocol (bgp)
 
@@ -2047,9 +2121,10 @@ The *routing-protocol* configuration element contains configuration properties r
 | timers | sub-element | Global timers related to the 128T router's BGP behavior. |
 | type | enumeration | Valid value: bgp. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## rule
 
@@ -2098,11 +2173,12 @@ Generally, security policies are applied within routers, tenants, or services. W
 | hmac-mode | enumeration | Valid values: disabled, regular, time-based. Default: time-based. This governs whether and how the 128T router adds HMAC information to packets it transmits to an SVR peer. HMAC is used for peer-to-peer authentication of packets. When set to `disabled`, no HMAC is added to packets. When set to `regular`, a standard HMAC authentication pattern is included in all packets. When set to `time-based`, the HMAC authentication header will include timestamp information, as a replay attack mitigation. Note: including HMAC authentication headers in packets may impact performance. |
 | name | string | Key field. This is a unique name used by other configuration elements to refer to this security-policy. |
 
-Version History:
-
-Introduced in 1.0.
-
-Rearranged in 1.1. Eliminated unimplemented ciphers. Removed unnecessary modes for *encrypt* and *hmac* and set them as booleans. Moved *transport-state-enforcement* to service-policy. Updated in 3.0: added *hmac-cipher*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | Eliminated unimplemented ciphers. Removed unnecessary modes for *encrypt* and *hmac* and set them as booleans. Moved *transport-state-enforcement* to *service-policy*. |
+| 3.0.0 | Added *hmac-cipher*|
 
 ## server (ntp)
 
@@ -2118,9 +2194,11 @@ This configuration defines external NTP timing sources that the 128T router's no
 | --- | --- | --- |
 | ip-address | address | The IP address or hostname of the external NTP server. |
 
-Version History:
-
-Introduced in 2.0. Updated in 3.1: now supports hostnames in addition to IPv4 addresses.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
+| 3.1.0 | Supports hostnames in addition to IPv4 addresses |
 
 ## server (syslog)
 
@@ -2137,9 +2215,11 @@ This configuration defines external syslog servers that the 128T router will sen
 | ip-address | address | The IP address or hostname of the external syslog server. |
 | port | l4-port | The L4 (UDP) port that the syslog server is listening on; this is typically 514. |
 
-Version History:
-
-Introduced in 2.0. Updated in 3.1: added support for hostnames in the *ip-address* field.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
+| 3.1.0 | Added support for hostnames in the *ip-address* field |
 
 ## server (webserver)
 
@@ -2156,9 +2236,10 @@ This configuration defines the listening address for running the 128T router's w
 | ip-address | address | The IP address to use for binding the 128T router's webserver. (The port will be taken from the *webserver* element.) |
 | node-name | reference | Key field. The *name* field of the node that will use the IP address specified within this sub-element. |
 
-Version History:
-
-Introduced in 2.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
 
 ## service
 
@@ -2194,9 +2275,14 @@ The 128T router solution is deployed to facilitate the delivery of new applicati
 | tenant | reference | Refers to a configured *tenant* instance by its name. |
 | transport | sub-element | The transport protocol(s) and port(s) for the service. |
 
-Version History:
-
-Introduced in 1.0. Updated in 2.0: added *transport* to replace the deprecated *protocol*. Updated in 3.0: removed *protocol*. Updated in 3.1: removed *id*. Updated in 3.2: added *application-name* and *share-service-routes*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 2.0.0 | Added *transport* to replace the deprecated *protocol* | 
+| 3.0.0 | Removed *protocol* | 
+| 3.1.0 | Removed *id* | 
+| 3.2.0 | Added *application-name* and *share-service-routes* |
 
 ## service-class
 
@@ -2223,9 +2309,13 @@ The 128T router uses service classes to prioritize session flows through its tra
 | rate-limit | boolean | Default: false. When set to true, the 128T router will enforce the properties configured in max-flow-burst and max-flow-rate. |
 | traffic-class | enumeration | Valid values: high, medium, low, best-effort. Working in concert with the 128T's traffic engineering subsystem, this lets administrators determine which traffic queues the traffic that references this service class will use, and therefore how much guaranteed bandwidth will be reserved for that class. |
 
-Version History:
-
-Introduced in 1.0. Reorganized in 1.1: *max-jitter*, *max-latency*, *max-loss*, *path-quality-filter*, *qp-preference*, *required-qp* all moved to service-policy. Updated in 3.0: *priority* is no longer a reference, but maps to one of four hardcoded priorities. Updated in 3.2: added *traffic-class*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | *max-jitter*, *max-latency*, *max-loss*, *path-quality-filter*, *qp-preference*, *required-qp* all moved to service-policy |
+| 3.0.0 | *priority* is no longer a reference, but maps to one of four hardcoded priorities | 
+| 3.2.0 | added *traffic-class* |
 
 ## service-policy
 
@@ -2257,9 +2347,14 @@ These are policy parameters that may be applied to service traffic to affect its
 | transport-state-enforcement | enumeration | Valid values: allow, block, reset. Default: reset. This governs the behavior of a router's TCP state machine when receiving unexpected packets. When set to 'reset', if a router receives a TCP packet that does not match any session-in progress and the SYN flag is not set, or it receives a packet that does match a session in progress but it does not conform to the router's TCP state machine (e.g., the sequence number is outside the expected window), the router will send a RST back to the sender. Setting this field to 'allow' causes the router to pass non-SYN first packets and non-conforming packets (per the TCP state machine's expectations). The 'block' setting causes the router to silently discard non-SYN first packets and non-conformant packets (again, per the state machine). |
 | vector | sub-element | The vector sub-element is where administrators assign costs to vector labels (which are associated with neighborhoods on egress interfaces), to assist in choosing the most appropriate path for traffic that references this service-policy. Each service-policy can independently assign costs to these vector variables, and therefore the same topology of 128T routers can route distinct service traffic uniquely. |
 
-Version History:
-
-Introduced in 1.0. Updated in 1.1: many fields from service-class reorganized into service-policy; *transport-state-enforcement* moved from security to service-policy. Updated in 3.0: added *session-resiliency*. Updated in 3.1: added *min-mos*. Updated in 3.2: added *vector*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | Many fields from *service-class* reorganized into *service-policy*; *transport-state-enforcement* moved from *security* to *service-policy* | 
+| 3.0.0 | Added *session-resiliency* | 
+| 3.1.0 | Added *min-mos* |
+| 3.2.0 | Added *vector* |
 
 ## service-route
 
@@ -2284,9 +2379,14 @@ A service-route is a target route for handling traffic for a given service.
 | service-route-policy | reference | The service-route-policy to use when handling traffic for this service-route. |
 | use-learned-routes| N/A | When present, the 128T will consult its RIB for next-hop resolution. This configuration is typically used when you wish to use dynamic routing (which the 128T will do by default without a service-route), but also require a conductor to generate peer and adjacency configuration on behalf of this router (which requires a service-route) to share this service-route to other SVR peers. |
 
-Version History:
-
-Introduced in 1.0. Updated in 1.1: renamed to *service-route* (was *service-agent*). Version 03: fixed old reference (*server-ip* should be *destination*). Updated in 3.0: added *peer*. Updated in 3.1: renamed *destination* as *nat-target*; removed *remote-tenant-id*. Updated in 3.2: added *generated*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | Renamed to *service-route* (was *service-agent*). Version 03: fixed old reference (*server-ip* should be *destination*) |
+| 3.0.0 | Added *peer* |
+| 3.1.0 | Renamed *destination* as *nat-target*; removed *remote-tenant-id* |
+| 3.2.0 | Added *generated* |
 
 ## service-route-policy
 
@@ -2308,9 +2408,11 @@ Service agent policies are used to define the properties of individual service a
 | session-low-water-mark | uint8 | Expressed as a percentage. Valid values: 1-100. Percentage of maximum sessions below which the agent will be reconsidered for load balancing. The denominator for the percentage considers the max-sessions value configured in this policy. |
 | session-rate | enumeration | Valid values: unlimited, or uint32. This represents the maximum rate at which sessions can be sent to a service-route that references this service-route-policy. The configured value is expressed in sessions per second. When set to "unlimited", there will be no rate limiting of new session assignments that can be sent to service-routes configured with this service-route-policy. When configured with a numerical value, once the service-route using this service-route-policy reaches the configured rate limit threshold, no new sessions will be sent to it until the rate drops below the configured value. |
 
-Version History:
-
-Introduced in 1.0. Updated in 1.1: renamed to *service-route-policy* (was *service-agent-policy*).
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | Renamed to *service-route-policy* (was *service-agent-policy*) |
 
 ## services
 
@@ -2327,9 +2429,11 @@ This represents the set of system services offered by the 128T platform..
 | snmp-server | sub-element | The SNMP server(s) the 128T will communicate with. |
 | webserver | sub-element | The 128T router's web server. |
 
-Version History:
-
-Introduced in 1.0. Updated in 2.0, removed most internal elements.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 2.0.0 | Removed most internal elements |
 
 ## session-optimization (adjacency/neighborhood)
 
@@ -2380,9 +2484,12 @@ Administrators may also re-classify any of the defaults if the values are differ
 | timeout | uint64 | Expressed in milliseconds. The inactivity timer for sessions of this type; administrators can set this value to free 128T router resources if a protocol goes idle for an amount of time equal to this timeout value. |
 | transport | sub-element | The transport protocol and port(s) that are used to match inbound requests to this session-type. |
 
-Version History:
-
-Introduced in 1.0. Updated in 2.0: deprecated *protocol* in favor of *transport*. Updated in 3.0: removed *protocol*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced | 
+| 2.0.0 | deprecated *protocol* in favor of *transport* |
+| 3.0.0 | Removed *protocol* |
 
 ## snmp-server
 
@@ -2434,9 +2541,10 @@ The *ssh-keepalive* sub-element lets administrators control how often it sends k
 | inter-node-server | sub-element | The server-side SSH keepalive parameters for other nodes within this router. |
 | inter-router | sub-element | The SSH keepalive parameters for other routers within this authority. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## static-route
 
@@ -2456,9 +2564,11 @@ This is the sub-element that allows administrators to configure static routes, t
 | next-hop | sub-element | Specifies the next-hop for this static route. |
 | next-hop-interface | sub-element | Specifies the interface to be used to reach the next-hop. |
 
-Version History:
-
-Introduced in 1.0. Updated in 3.0: added *blackhole*, *distance*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 3.0.0 | Added *blackhole*, *distance* |
 
 ## statement
 
@@ -2601,9 +2711,10 @@ The *syslog* sub-element lets administrators configure the 128T router's interac
 | server | sub-element | The syslog server(s) that the 128T router will send messages to is/are configured here. |
 | severity | enumeration | Valid values: emergency, alert, critical, error, warning, notice, info, debug, trace. This sets the level at which messages will be sent to the syslog server. |
 
-Version History:
-
-Introduced in 2.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
 
 ## system
 
@@ -2630,9 +2741,14 @@ The *system* sub-element lets administrators configure system-wide properties fo
 | software-update | sub-element | Affects how and where this router will retrieve software updates. |
 | syslog | sub-element | The 128T router's configuration for communication with external syslog services. |
 
-Version History:
-
-Introduced in 1.0. Updated in 1.1: *ntp* added. Updated in 2.0: inactivity-timer, syslog added. Updated in 3.0: added *metrics*. Updated in 3.1: removed *location*, added *log-category*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 1.1.0 | *ntp* added |
+| 2.0.0 | Added *inactivity-timer* and  *syslog* |
+| 3.0.0 | Added *metrics* |
+| 3.1.0 | Removed *location*, added *log-category* |
 
 ## system (audit)
 
@@ -2648,9 +2764,10 @@ This sub-element gives administrators the ability to administratively enable or 
 | --- | --- | --- |
 | enabled | boolean | Default: true. When false, the system will not register any system events. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## tenant
 
@@ -2680,9 +2797,12 @@ It is not necessary for an administrator to explicitly create a "parent" tenant 
 | name | string | Key field. It is an arbitrary, unique name that other configuration sections will refer to. |
 | security | reference | This is a reference to the default security-policy to use for traffic within this tenancy. Note that this will be used only when a more specific service-policy (e.g., one within a service) is not specified. |
 
-Version History:
-
-Introduced in 1.0. Updated in 3.0: added *member*, removed (obsoleted) *address*. Updated in 3.1: removed *id*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
+| 3.0.0 | Added *member*, removed (obsoleted) *address* |
+| 3.1.0 | Removed *id* |
 
 ## timers (neighbor)
 
@@ -2701,9 +2821,10 @@ This sub-element allows administrators to control various BGP timers used when c
 | keepalive-interval | uint16 | The time interval (in seconds) that governs how often the 128T router sends keepalive messages to the neighbor. |
 | minimum-advertisement-interval | uint16 | Referred to as the MinRouteAdvertisementIntervalTimer by RFC 4721, this is the minimum time between UPDATE messages sent to the neighbor. It is used to reduce traffic to the neighbor when NLRI exhibits instability. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## timers (routing-protocol)
 
@@ -2720,9 +2841,10 @@ This sub-element allows administrators to control the default BGP timers the 128
 | hold-time | uint16 | The hold time is the amount of time a connection is considered active, when no messages (keepalive or otherwise) are received from a neighbor. This timer is reset upon each message received from a neighbor. The typical and recommended configuration is three times the keepalive-interval. |
 | keepalive-interval | uint16 | The time interval (in seconds) that governs how often the 128T router sends keepalive messages to a neighbor. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## traffic
 
@@ -2738,9 +2860,10 @@ This sub-element gives administrators the ability to administratively enable or 
 | --- | --- | --- |
 | enabled | boolean | Default: true. When false, the system will not register any traffic events. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## traffic-engineering
 
@@ -2758,9 +2881,11 @@ This sub-element allows administrators to adjust properties of this device-inter
 | traffic-profile | reference | This refers to a configured *traffic-profile* element used to adjust the relative percentages given for high, medium, low, and best-effort traffic classes. |
 | transmit-cap | enumeration | Valid values: *unlimited* or an integer from 0-999999999999. This sets the maximum transmission rate of this interface in bits per second (bps). |
 
-Version History:
-
-The transmit-cap configuration field was previously located within the device-interface, and was moved to its own sub-element as of software version 3.1. Updated in 3.2: added *traffic-profile*.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | The transmit-cap configuration field was previously located within the device-interface, and was moved to its own sub-element |
+| 3.2.0 | Added *traffic-profile* |
 
 ## traffic-profile
 
@@ -2780,9 +2905,10 @@ This sub-element allows administrators to adjust properties of how much guarante
 | low | sub-element | Sets the percentage of bandwidth reserved for low priority traffic. |
 | medium | sub-element | Sets the percentage of bandwidth reserved for medium priority traffic. |
 
-Version History:
-
-Introduced in version 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## transport (BGP neighbor)
 
@@ -2799,9 +2925,10 @@ This sub-element governs the transport protocol parameters for a BGP connection 
 | local-address | address | *or* reference   This is the local address to use for the BGP session with the neighbor. It may be an IPv4 address, or a reference to an interface configured on the 128T router. |
 | passive-mode | boolean | When set to *true*, the 128T router will wait for its neighbor to initiate a BGP peering connection. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## transport (host-service)
 
@@ -2818,9 +2945,10 @@ This sub-element defines the port range and transport protocol for matching to i
 | port-range | sub-element | The port(s) that the host-service uses. |
 | protocol | enumeration | Valid values: tcp, udp, icmp. The transport protocol(s) that the host-service uses. |
 
-Version History:
-
-Introduced in 3.1 as part of the *host-service* feature.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.1.0 | Introduced as part of the *host-service* feature |
 
 ## transport (service)
 
@@ -2837,9 +2965,11 @@ This sub-element defines the port range and transport protocol for the service.
 | port-range | sub-element | The port(s) that the service uses. |
 | protocol | enumeration | Valid values: tcp, udp, icmp. The transport protocol(s) that the service uses. |
 
-Version History:
-
-Introduced in 2.0. Updated in 3.1: removed *any* as a valid enumeration value for "protocol".
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
+| 3.1.0 | Removed *any* as a valid enumeration value for *protocol* |
 
 ## transport (session-type)
 
@@ -2856,9 +2986,11 @@ This sub-element defines the port range and transport protocol that are used to 
 | port-range | sub-element | The port(s) that the service uses. |
 | protocol | enumeration | Valid values: tcp, udp, icmp. The transport protocol(s) that the service uses. |
 
-Version History:
-
-Introduced in 2.0. Updated in 3.1: removed *any* as a valid enumeration for protocol.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 2.0.0 | Introduced |
+| 3.1.0 | Removed *any* as a valid enumeration value for *protocol* |
 
 ## udp-transform
 
@@ -2878,9 +3010,10 @@ This sub-element defines the port range and transport protocol that are used to 
 | mode | enumeration | Valid values: auto-detect, always-transform. Default: auto-detect. This governs whether the UDP transformation behavior is triggered upon detection of an interfering TCP middlebox or whether the UDP transformation should be applied even when no detection has occurred. |
 | nat-keep-alive-mode | boolean | Default: false. Governs whether this router will generate and transmit keepalive packets to SVR peers. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## use-multiple-paths
 
@@ -2897,9 +3030,10 @@ The *use-multiple-paths* container has sub-elements for allowing administrators 
 | ebgp | sub-element | This sub-element contains multipath parameters for external BGP (eBGP). |
 | ibgp | sub-element | This sub-element contains multipath parameters for internal BGP (iBGP). |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## vector
 
@@ -2916,9 +3050,10 @@ The *vector* sub-element lets administrators choose cost values for the vector l
 | name | string | The name associated with the vector. This must match a vector assigned to a neighborhood on a network-interface for it to have any impact on path selection. |
 | priority | union | (uint32, enumeration)   The priority field can either be an explicit cost, ranging from 1-999999, or one of two keywords: ordered or never. When set to ordered, the vector will have an *implicit cost*, based on its configured order. (The *vector* elements may be manually reordered via the web UI or the PCLI.) When using *ordered*, the cost will default to the power of 10 in its list order, starting with 0 (i.e., the costs for a list of ordered items will be 1, 10, 100, ...). When set to *never*, the interface with the vector will never be used for traffic referencing this service-policy. |
 
-Version History:
-
-Introduced in 3.2.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 3.2.0 | Introduced |
 
 ## webserver
 
@@ -2938,9 +3073,10 @@ Generally, this is only touched if an administrator wants to use either a nonsta
 | port | uint16 | The listening port for the 128T router's web server. |
 | server | sub-element | The *server* element binds the 128T router's GUI to specific nodes at specific addresses using a series of these configuration elements. |
 
-Version History:
-
-Introduced in 1.0.
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 1.0.0 | Introduced |
 
 ## Configuration Type Definitions
 
