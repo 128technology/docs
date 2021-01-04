@@ -91,15 +91,16 @@ config
 exit
 ```
 
-| Element | Type    | Description                                                  |
-| ------- | ------- | ------------------------------------------------------------ |
-| enabled | boolean | Default value: true. Governs whether the DNS cache is operationally enabled or not. |
-| name | 128T device name | Default value: `dns-cache`. This controls the name of the service function chain interface.|
-| addresses | IPv4 address | Multiple instance object. This will specify the upstream DNS resolvers to use, overriding the ones normally used by the Linux host operating system on the machine. |
-| ingress-service | reference | This refers to a configured `service` within the authority that will be used to "trap" inbound DNS requests, to divert them to dnsmasq. Generally, this is a service that has an address of 0.0.0.0/0 and restricted to UDP/53. |
-| plugin-network | CIDR | Default value: 169.254.141.128/30. This controls the IP addresses used for the internal SFC network to detour packets to and from the on-board DNS cache. This should only be changed if there is a conflict with another IP block in use on this same host system. |
-| tenant | reference | This is the tenant that will be assigned to the SFC interface (of type KNI). All packets leaving the DNS cache and heading toward an upstream DNS resolver will be associated with this tenant. For this reason, it is important that your 128T configuration also includes a `service` that allows this `tenant` to reach the upstream resolvers. Typically, this is an `internet` service (0.0.0.0/0). |
-| ingress-source-nat-pool | reference | This refers to a configured `source-nat-pool`, and will be used when forwarding the traffic through the DNS cache/service function chain. |
+| Element | Type    | Default | Description                                                  |
+| ------- | ------- | -------| ------------------------------------------------------------ |
+| enabled | boolean | true | Governs whether the DNS cache is operationally enabled or not. |
+| name | 128T device name | `dns-cache`| This controls the name of the service function chain interface.|
+| addresses | IPv4 address | N/A | Multiple instance object. This will specify the upstream DNS resolvers to use, overriding the ones normally used by the Linux host operating system on the machine. |
+| ingress-service | reference | N/A | This refers to a configured `service` within the authority that will be used to "trap" inbound DNS requests, to divert them to dnsmasq. Generally, this is a service that has an address of 0.0.0.0/0 and restricted to UDP/53. |
+| plugin-network | CIDR | 169.254.141.128/30 | This controls the IP addresses used for the internal SFC network to detour packets to and from the on-board DNS cache. This should only be changed if there is a conflict with another IP block in use on this same host system. |
+| tenant | reference | N/A | This is the tenant that will be assigned to the SFC interface (of type KNI). All packets leaving the DNS cache and heading toward an upstream DNS resolver will be associated with this tenant. For this reason, it is important that your 128T configuration also includes a `service` that allows this `tenant` to reach the upstream resolvers. Typically, this is an `internet` service (0.0.0.0/0). |
+| ingress-source-nat-pool | reference | N/A | This refers to a configured `source-nat-pool`, and will be used when forwarding the traffic through the DNS cache/service function chain. |
+| max-ttl | seconds | 1500 | The configured maximum TTL will be advertised to clients instead of the true TTL value if it is lower. The true TTL value is however kept in the cache to avoid flooding the upstream DNS servers. See [release notes for details](#release-120-220) |
 
 ### Notes about the Sample Configuration
 
@@ -171,6 +172,13 @@ To verify that the services are running properly on the 128T router:
 Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 
 ## Release Notes
+
+### Release 1.2.0, 2.2.0
+
+#### Issues Fixed
+- **PLUGIN-952** FIB entry for dns-app-id based applications was deleted before the advertised TTL causing traffic to be blackholed
+
+  _**Resolution:**_ The TTL value advertised to the clients is made configurable and is also set to 1500 seconds by default to match the internal DNS cache timers.
 
 ### Release 1.1.0, 2.1.0
 
