@@ -326,6 +326,13 @@ exit
 
 ## Release Notes
 
+### Release 2.2.1
+
+#### Issues Fixed
+- **PLUGIN-993** Automatic generation of services not working after upgrade
+
+    _**Resolution**_ Fix the config generation script to read the data from the file on disk instead of standard input.
+
 ### Release 1.2.0, 2.2.0
 
 #### New Features and Improvements
