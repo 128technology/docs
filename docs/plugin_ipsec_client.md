@@ -412,7 +412,7 @@ Completed in 0.10 seconds
 
 #### Issues Fixed
 
-- **PLUGIN-994** The `ipsec-client > remote-id` configuration not being used correctly when generating the libreswan config.
+- **PLUGIN-994** The `ipsec-client > remote-id` configuration is not being used correctly when generating the libreswan config.
 
 ### Release 1.0.4, 2.0.4
 
