@@ -151,6 +151,7 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_intro",
+      "plugin_bgp_community_services",
       "plugin_cloud_ha",
       "plugin_dns_app_id",
       "plugin_dns_cache",
@@ -162,7 +163,6 @@ module.exports = {
       "plugin_monitoring_agent",
       "plugin_mosh",
       "plugin_sip_alg",
-      "plugin_kni_namespace_scripts",
       "plugin_wireguard",
     ],
     "REST APIs": [
