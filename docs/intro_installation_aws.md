@@ -1,11 +1,9 @@
 ---
-title: Installing in AWS
-sidebar_label: Installing in AWS
+title: Installing from the AWS Marketplace
+sidebar_label: Installing from the AWS Marketplace
 ---
 
-## Install from AWS Marketplace
-
-Partnering with Amazon, you can install 128T conductors and routers using Amazon Web Services (AWS). AWS is a secure cloud platform that offers computing power, data storage, content delivery, flexibility, scalability, and reliability for software products. 
+Partnering with Amazon, you can install a 128T Conductor and a 128T Session Smart Router using Amazon Web Services (AWS). AWS is a secure cloud platform that offers computing power, data storage, content delivery, flexibility, scalability, and reliability for software products. 
 :::note
 For more information on Amazon Web Services, refer to the [AWS website](https://aws.amazon.com/what-is-aws/).
 :::

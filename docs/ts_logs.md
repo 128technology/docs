@@ -13,6 +13,7 @@ Logs 128T are stored in 4 principal locations: `/var/log/128technology/`, `/var/
   - `128TWebAuth`
   - `mars`
   - `salt-ssh`
+  - `PCLILogger`
 
 An example listing of the `/var/log/128technology/` directory can be seen here:
 

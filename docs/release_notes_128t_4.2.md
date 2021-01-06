@@ -3,11 +3,104 @@ title: 128T 4.2 Release Notes
 sidebar_label: 4.2
 ---
 
+## Release 4.2.9
+:::warning
+SSH Root Login is not permitted.
+
+Before upgrading, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of remote management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information.
+:::
+
+
+### Resolved Issues
+
+- **I95-18807 An error displays in the journal due to imudp module loaded by rsyslog daemon.** The error condition has been resolved and the error no longer displays. 
+------
+- **I95-32298 KNI interfaces created by the IPsec plugin do not transition to "operationally down" when being set to "administrative down".** The KNI interfaces now transition smoothly. 
+------
+- **I95-33594 Changing the `neighbor-as` of an existing bgp neighbor prevents it from connecting.** The BGP neighbor now connects correctly.
+------
+- **I95-33989 Incorrect error message reported within PCLI when trying to execute `validate` after a previous _validate_ was terminated with `CTRL+c`.** Resolved conflicting validation operation messaging. 
+------
+- **I95-34649 `best-effort` path handling for `proportional` load balancing is not honored by service-policy.** Path handling for `best effort` load balancing is handled correctly. 
+------
+- **I95-34650 In a multihop SVR scenario, the system may incorrectly attribute incoming packets as coming from a different peer path.** This has been resolved and no longer results in packet loss.
+------
+- **I95-35111 `No active NTP server` alarm erroneously generated when 128T can successfully reach a provisioned NTP server.** The error is no longer thrown when multiple NTP servers are configured and at least one is reachable.
+------
+- **I95-35406 Shutdown race condition may cause improper DHCP server clean up, causing DHCP server to fail on next start of 128T.** The shutdown race condition no longer occurs. 
+------
+- **I95-35567, I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
+------
+- **I95-35694 A `service-route` of type `host` results in an invalid service path during session establishment.** This issue has been resolved by adding a missing gateway-ip address to the process.  
+------
+- **I95-35701 Configuration validation incorrectly rejects valid config when a `service-route` references a service with both `applies-to` `authority` and `router-group` not matching the router of that service-route.** Configration validation no longer rejects the valid configuration. 
+------
+- **I95-35781 Rare race condition during `rotate logs` PCLI command may cause applications to fault.** The `rotate logs` PCLI command no longer causes the race condition. 
+------
+- **I95-35799 When a dynamic route is removed that exactly matches the prefix of a configured service, the route is removed from the RIB but it may remain in the FIB and still be used for establishing new sessions.** This issue has been resolved.
+------
+- **I95-35927 When deleting a VLAN network interface and simultaneously assigning its VLAN ID to the only other remaining network interface on the same device interface, future operational state changes on that interface may be ignored.** This issue has been resolved. 
+------
+- **I95-35933 `show device-interface` displays incorrect values for speed and duplex for PPPoE interfaces.** The correct speeds are now displayed for `show device-interface`. 
+------
+- **I95-35935 Configuring the same value for `router > conductor-address` on different routers will generate invalid configuration.** The router-based conductor map has been separated from the global conductor map.
+------
+- **I95-36149 Committing a configuration change to a device-interface capture-filter when actively capturing traffic on that interface can cause the highway process to fault.** Updated to verify the order of operations and prevent the fault.
+------
+- **I95-36341 A race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault.** The race condition has been resolved. 
+------
+- **I95-36356 Loading a configuration that changes the BGP graceful-restart restart-time may cause a highway process fault if a subsequent graceful-restart timeout occurs.** Changes to the BGP `graceful-restart restart-time` no longer cause a process fault.
+------
+- **I95-36394 Auto-generated conductor service names that include a '.' will fail to commit configuration.** This issue has been resolved.
+------
+- **I95-36525 TLS 1.0 is no longer supported.**
+------
+- **I95-36632 Empty office365 metadata file results in HTTP 400 bad request error.** Office365 modules no longer generate bad requests. 
+------
+- **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
+:::note
+As part of the SSH hardening process, inactive SSH sessions will be logged out after 60 minutes. Please see [Access Management](config_access_mgmt.md) for additional information.
+:::
+------
+- **I95-36672 Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.** Traffic on the device interface is handled before deleting the filters. 
+------
+- **I95-36770 Salt minion log file was not being properly rotated.** The log file is now rotated correctly.
+------
+- **I95-36841 TCP RST can cause the highway process to fault on a SVR path performing UDP transform.** TCP resets generate properly into SVR when UDP transform is enabled.
+------
+- **I95-36873 Alarms generated by a router in an authority are incorrectly sent as SNMP traps from all other routers in the authority.** Alarms from other routers are now correctly filtered.
+------
+- **I95-36927 A race condition exists that can cause a fault in the highway process during session setup while applying a configuration change that removes BGP over SVR service-route(s).** This race condition has been resolved. 
+------
+- **I95-37457 `show rib` and `show bgp` do not support more than one pagination session.** The  routing service agent show commands no longer cache the text output when there are more lines than requested.  
+------
+- **I95-37577 LDAP authentication fails for users that contain a '-' in their name.** Naming issues causing LDAP authentication failures have been resolved. 
+------
+- **I95-37588 Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.** Resolved the issue where a managed router had the incorrect IP address.
+------
+- **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
+------
+- **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+------
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limiting-login-attempts) 
+------
+- **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
+------
+- **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
+------
+- **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.** The 128T Web UI does not support iFrame embedding.
+------
+- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#file-upload-limitations) that make it impossible to import or upload files that do not match tar.gz format. 
+------
+- **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
+------
+- **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration.
+
 ## Release 4.2.8
 
-### Issues Fixed
+### Resolved Issues
 
-- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
+- **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses.
 ------
 - **I95-30610** RTP is not properly classified for subsequent 128T routers
 ------
@@ -75,7 +168,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
 ## Release 4.2.7
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-35138** A vulnerability in the SaltStack code allows for unauthenticated salt-minions to execute any script on the salt-master.
   :::info
@@ -90,7 +183,7 @@ The 4.2.6 release is a superset of the 4.2.5 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-34068** SVR sessions fail to establish due to waypoint allocation failures after HA node failover.
   _**Symptom:**_ The following warning log is generated:
@@ -122,7 +215,7 @@ The 4.2.6 release is a superset of the 4.2.5 release. Features and corrections i
 The 4.2.5 release is a superset of the 4.2.4 release. Features and corrections in the 4.2.4 release are not provided in these release notes. Please refer to the [4.2.4 release notes](#release-424) for further information.
 :::
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-18857** Support for automatic loopback has been added to Sangoma T1 devices
 ------
@@ -287,7 +380,7 @@ The 4.2.4 release is a superset of the 4.2.3 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-30084** Empty BGP neighbor/transport/local-address prevents configuration from being committed
 ------
@@ -353,7 +446,7 @@ The 4.2.3 release is a superset of the 4.2.2 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-33264** Secondary HA node reboot may result in traffic no longer flowing through the fabric
 ------
@@ -367,7 +460,7 @@ The 4.2.2 release is a superset of the 4.2.1 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-32521** Packets continuously dropping on HA failover triggered by power outage
 ------
@@ -383,7 +476,7 @@ The 4.2.1 release is a superset of the 4.2.0 release. Features and corrections i
 :::
 
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-32264** In large deployments Automated provisioner can take an extended amount of time to transition a node to a "RUNNING" state
 ------
@@ -530,7 +623,7 @@ The 4.2.0 software reserves address range 169.254.130.0/24 by default. This is f
 ------
 - **I95-31454** Notifications have been added for Automated Provisioner events
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-19549** Configuration Generation will fail to generate a peer configuration if the peer name is not the same as the router name
 ------

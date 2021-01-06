@@ -2,10 +2,143 @@
 title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
+## Release 4.3.11
+:::warning
+SSH Root Login is not permitted. 
+
+Before upgrading, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of remote management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information. 
+:::
+
+### Resolved Issues
+- **I95-35164 Concurrent upgrade and download activity causes invalid upgrade.** The download of a new software image during an upgrade has been blocked. 
+------
+- **I95-35354 Unlikely race condition during asynchronous upgrade and download causes premature termination of upgrade.** The possibility of asynchronous download and upgrade/install has been removed and the race condition resolved.
+------
+- **I95-35567, I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
+------
+- **I95-37211 Webserver Quickstart Integration.** Several improvements have been made to the Quickstart process during the OTP ISO installation, including a significantly shorter run time.
+------
+- **I95-37225 Routers disconnect from their Conductors.** Improved the handling of clock drift between multiple worker cores within the datapath.
+------
+- **I95-37642 A user cannot change their password from the 128T GUI.** A user can now change their 128T password from the web application GUI.
+------
+- **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
+------
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limitingloginattempts) 
+------
+- **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
+------
+- **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
+------
+- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
+------
+- **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
+:::note
+As part of the SSH hardening process, inactive SSH sessions will be logged out after 60 minutes. Please see [Access Management](config_access_mgmt.md) for additional information.
+:::
+------
+- **I95-37666 Excessive ARPs from Broadband modem causing a Link Down condition.** The per-pipe restrictions have been lifted and distributions for the application scheduler have been rebalanced. 
+------
+- **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
+------
+- **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
+------
+- **I95-37819 Ensure rsyslog default file permissions are configured.** The default file permissions for log files created by rsyslog are set. 
+------
+- **I95-37822 Ensure the noexec option is set on the /dev/shm partition.** The shared memory partition /dev/shm is configured with the noexec mount option during initialization.
+------
+- **I95-37823 Ensure the "sticky bit" is set correctly on all world-writable directories.** The bit is set to protect all world-writable directories.  
+------
+- **I95-37824 Ensure that AIDE (Advanced Intrusion Detection Evironment) is installed.** The AIDE package is installed and is a 128T dependency. 
+------
+- **I95-37828 Ensure core dumps are restricted.** Coredump tuning has been updated with the latest security settings, and will not be collected on processes with privilege escalation. 
+------
+- **I95-37830 Ensure permissions on /etc/crontab and related cron files are configured.** The permissions on cron files have been updated with the latest security settings.
+------
+- **I95-37831 The default umask setting on user-created files must be more restrictive.** The default umask setting has been updated to be more restrictive. 
+------
+- **I95-37841 Sessions would not revert back when at least one is configured for outbound-only.** Resolved an error condition where a session would not revert back to a preferred path when at least one of the paths was configured for outbound-only.
+
+  _**Symptoms:**_ When this condition has been encountered, message(s) similar to the following can be seen in the highway.log
+  ```
+  Error serializing local interface <port>.<vlan> to global-interface-id
+  ```
+------
+- **I95-37843 Require username and password when updating environmental configuration.** The initializer has been updated to require both a username and password when installing 128T and configuring it as the second peer in an HA configuration. 
+------
+- **I95-37908 The routingEngine.log is not rotated.** Log rotation has been updated to rotate the routingEngine log file.
+------
+- **I95-38008 Automated Provisioner race condition.** Resolved an issue causing a race condition when multiple events arrived at the same time.  
+------
+- **I95-38078 CVE updates.** Addressed latest CVEs.
+------ 
+
+## Release 4.3.10
+
+### Resolved Issues
+
+- **I95-34650** In a multihop SVR scenario, the system may incorrectly attribute incoming packets as coming from a different peer path. This results in packet loss until the load-balancer learns of the loss and migrates the session.
+
+  _**Symptom:**_ `show peers` will show the physically disconnected peer as UP while in this state.
+------
+- **I95-35927** When deleting a VLAN network interface and simultaneously assigning its VLAN ID to the only other remaining network interface on the same device interface, future operational state changes on that interface may be ignored.
+------
+- **I95-36341** Race condition can occur when receiving a BGP packet destined for the 128T during startup without a fully populated FIB, causing a system fault.
+------
+- **I95-36564** Higher pinned core count may result in large packet latency on session setup, when a burst of new sessions are being setup.
+------
+- **I95-36672** Deleting all session-capture filters on a _device-interface_ with active traffic can cause the highway process to restart.
+------
+- **I95-36727** A non-forwarding, external (i.e. management) interface configured in 128T does not obtain a DHCP IP upon disconnecting and reconnecting the cable.
+------
+- **I95-36770** Salt minion log file was not being properly rotated.
+------
+- **I95-36780** SNMP Traps are incorrectly sent for routers in maintenance mode when peer path goes down.
+------
+- **I95-36841** TCP RST can cause the highway process to fault on a SVR path performing UDP transform.
+------
+- **I95-36850** An asset's available and downloaded versions are incorrectly cleared when an upgrade or rollback is initiated.
+------
+- **I95-36873** Alarms generated by a router in an authority are incorrectly sent as SNMP traps from all other routers in the authority.
+------
+- **I95-36927** A race condition exists that can cause a fault in the highway process during session setup and configuration changes, that will remove the BGP service route path.
+------
+- **I95-37021, I95-37026** Configuring overlapping session-types could cause the highway process to ignore the configuration change.
+------
+- **I95-37042** 128T process `prank` journal logs were incorrectly excluded from output of `save tech-support-info`.
+------
+- **I95-37168** Race condition can cause system fault when creating candidate configuration.
+------
+- **I95-37197** Configuration validation will now fail if you configure overlapping session-type ranges within the same protocol.
+------
+- **I95-37304** Automatic installation recovery procedure can inadvertenty terminate an in-process upgrade resulting in a 128T system not being able to boot.
+------
+- **I95-37338** When connection resiliency is enabled, the salt-minion on managed routers can intermittently disconnect.
+------
+- **I95-37341** Support for Azure Accelerated Networking MT27710 ConnectX-4 LX Virtual Function device.
+------
+- **I95-37402** The output of `show stats` is missing from tech-support-info.
+------
+- **I95-37442** The summary is missing from PCLI `ping` and `service-ping`.
+------
+- **I95-37457** `show rib` and `show bgp` do not support more than one pagination session. 
+------
+- **I95-37513** Network interface cards that do not respond to physical stats may result in system lockup.
+------
+- **I95-37577** LDAP authentication fails for users that contain a '-' in their name.
+------
+- **I95-37588** Value for `configure > authority > router > system > software-update > repository > address` uses the first lexigraphically sorted router for all other routers in authority instead of using a unique value per router.
+------
+- **I95-37650** The 128T web UI incorrectly supports being embedded as an iFrame within another page.  
+------
+- **I95-37660** Outdated python-pip package exposes vulnerability to sniffing, cross-origin redirect, or injection attacks.
+------
+- **I95-37680** nodeMonitor process may fault on shutdown of 128T.
+
 
 ## Release 4.3.9
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-18807** Innocuous error produced in journal due to imudp module loaded by rsyslog daemon
   _**Symptoms:**_ The following message can be seen in the journal
@@ -103,7 +236,7 @@ sidebar_label: 4.3
 The minimum 128T-installer version of 2.6.0 is required for the 4.3.8 update. (rpm package: 128T-installer-2.6.0-1.x86_64.rpm)
 :::
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-34649** `best-effort` path handling for `proportional` load balancing is not honored by service-policy
 ------
@@ -138,7 +271,7 @@ The minimum 128T-installer version of 2.6.0 is required for the 4.3.8 update. (r
 
 ## Release 4.3.7
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-24681** Grammatical improvements to HA initialization, providing more clarity around the use of specific IP addresses
 ------
@@ -160,7 +293,7 @@ The minimum 128T-installer version of 2.6.0 is required for the 4.3.8 update. (r
 
 ## Release 4.3.6
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-35377** Additional metrics added to realize active traffic engineering behavior
 ------
@@ -169,7 +302,7 @@ The minimum 128T-installer version of 2.6.0 is required for the 4.3.8 update. (r
 
 ## Release 4.3.5
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-33842** Race condition on 128T startup, causing DHCP server to fail to start
 
@@ -236,7 +369,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
 ## Release 4.3.4
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-35138** A vulnerability in the SaltStack code allows for unauthenticated salt-minions to execute any script on the salt-master.
   :::info
@@ -256,7 +389,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
 ## Release 4.3.2
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-18857** Support for automatic loopback has been added to Sangoma T1 devices
 ------
@@ -492,7 +625,7 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
 ## Release 4.3.1
 
-### Issues Fixed
+### Resolved Issues
 
 - **I95-34058, I95-34064** Session setup fails for outbound only when first packet exceeds MTU
 

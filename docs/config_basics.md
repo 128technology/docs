@@ -1,6 +1,6 @@
 ---
 title: Configuration Management on the 128T
-sidebar_label: Basics
+sidebar_label: Configuration Management
 ---
 
 Configuration is what transforms your 128T software into a Session-Smart Router. The following sections describe the various configurations available to you on your 128T, the basics of the configuration workflow, and important things to consider when managing your 128T devices.

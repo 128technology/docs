@@ -84,3 +84,65 @@ The `!` command offers three options:
 1. !! to re-run the last command run
 2. !&lt;number&gt; to re-run a specific command from the PCLI history. Negative numbers are supported to perform a reverse search of the history. (i.e., `!-1` = `!!`)
 3. !&lt;string&gt; to re-run the most recent substring match from the PCLI history (reverse search of history).
+
+## Features
+
+### Paste Config
+
+When working across multiple systems, it is convenient to cut-and-paste snippets of one configuration and paste it directly into another 128T router. The PCLI detects configuration entered in bulk and accepts input in either `show config` native format or flat format. Invalid configuration is handled in the same fashion as it would be as if it were entered line by line.
+
+An example of copying a service from one system and pasting it to another can be seen below.
+
+```config
+admin@tp-colo-primary.tp-colo# show config running authority service internet_service
+
+config
+
+    authority
+
+        service  internet_service
+            name                  internet_service
+            enabled               true
+            scope                 private
+            security              no_encryption
+            address               0.0.0.0/0
+
+            access-policy         _internal_
+                source      _internal_
+                permission  allow
+            exit
+
+            access-policy         t128
+                source      t128
+                permission  allow
+            exit
+            service-policy        data-best-effort
+            share-service-routes  true
+        exit
+    exit
+exit
+
+...
+
+admin@tp-colo-secondary.tp-colo# config
+(config)> authority
+(authority)> service internet_service
+(service)> name internet_service
+(service)> enabled true
+(service)> scope private
+(service)> security no_encryption
+(service)> address 0.0.0.0/0
+(service)> access-policy linux
+(access-policy)> source linux
+(access-policy)> permission allow
+(access-policy)> exit
+(service)> access-policy t128
+(access-policy)> source t128
+(access-policy)> permission allow
+(access-policy)> exit
+(service)> service-policy data-best-effort
+(service)> share-service-routes true
+(service)> exit
+(authority)> exit
+(config)> exit
+```
