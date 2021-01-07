@@ -103,7 +103,7 @@ Customer shall also be responsible for the following:
 
 - Advise 128 Technology of any information 128 Technology may reasonably request about the execution of the Services throughout the delivery of Services. If third-party participation and cooperation is required in order for Customer to perform the Customer responsibilities, Customer shall be responsible for obtaining such participation and cooperation. Customer shall provide written notice to 128 Technology as soon as it becomes aware or has reason to believe that Customer will not meet one or more of the Customer responsibilities.
 
-·    Customer is not required to install every Update as it becomes available from 128 Technology. However, Customer acknowledges that in order to obtain Services for problems with a Software release that is not then supported by 128 Technology and which cannot be corrected by implementation of a preexisting workaround or problem resolution, installation of an Update may be necessary to address any such problems.
+- Customer is not required to install every Update as it becomes available from 128 Technology. However, Customer acknowledges that in order to obtain Services for problems with a Software release that is not then supported by 128 Technology and which cannot be corrected by implementation of a preexisting workaround or problem resolution, installation of an Update may be necessary to address any such problems.
 
 ## Scope
 
@@ -127,7 +127,7 @@ Services exclude support for the following:
 
 - Any other applicable exclusions set forth in the Subscription Contract
 
-## Error Priority Levels/Response Guidelines
+## Schedule I - Error Priority Levels/Response Guidelines
 
 In the event of an Error, Customer initially assigns a priority level to each Error as it is reported to 128 Technology, using the definition guidelines below. 128 Technology will use commercially reasonable efforts to adhere to the response and resolution targets specified below based on the priority level of an Error. 128 Technology reserves the right to update the priority level of an Error case as it deems appropriate – for example, after a Workaround has been made available.
 
