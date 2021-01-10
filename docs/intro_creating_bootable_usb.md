@@ -27,7 +27,7 @@ diskutil list
 
 ```
 sudo diskutil unmount /dev/disk2s1
-sudo dd if=~/128T-<VERSION>.el7.x86_64.iso of=/dev/disk2s1 bs=16384
+sudo dd if=~/128T-<VERSION>.el7.x86_64.iso of=/dev/rdisk2 bs=16384
 diskutil eject /dev/disk2s1
 ```
 Where `<VERSION>` is replaced with the 128T version you are interested in.
