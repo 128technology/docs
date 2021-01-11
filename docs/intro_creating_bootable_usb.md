@@ -51,7 +51,7 @@ The 128 Technology ISOs are desiged to be installed on both BIOS and uEFI partit
 
 ## Creating a CDROM/DVD
 
-For systems with an onboard optical drive, it may be preferable to write the ISO to a CD, DVD, or BlueRay disk. There are many tools available on the major platforms to write ISOs to optical discs, suck as K3b, Disco, etc. Those procedures are not addressed here. 
+For systems with an onboard optical drive, it may be preferable to write the ISO to a CD, DVD, or BlueRay disk. There are many tools available on the major platforms to write ISOs to optical discs, such as K3b, Disco, etc. Those procedures are not addressed here. 
 
 ## Disk Cloning
 
