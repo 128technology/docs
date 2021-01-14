@@ -8,7 +8,6 @@ module.exports = {
       "about_supported_platforms",
       "about_certified_platforms",
       "about_security_policy",
-      "about_license_entitlements",
       "about_services_description",
       "CONTRIBUTING",
     ],
