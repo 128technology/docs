@@ -12,7 +12,7 @@ const features = [
     link: 'docs/about_128t',
     description: (
       <>
-        Software Releases, policies, licensing, and contribution guidelines
+        Software Releases, policies, and contribution guidelines
       </>
     ),
   },
