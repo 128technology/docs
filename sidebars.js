@@ -2,13 +2,13 @@ module.exports = {
   "docs": {
     "About": [
       "about_128t",
+      "about_svr_savings",
       "about_releases",
       "about_support_policy",
       "about_supported_platforms",
       "about_certified_platforms",
       "about_security_policy",
       "about_services_description",
-      "about_svr_savings",
       "CONTRIBUTING",
     ],
     "Introduction": [

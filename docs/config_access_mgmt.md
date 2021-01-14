@@ -24,7 +24,7 @@ From the terminal window:
 2. Run the installer from the Screen session.
 	- `sudo install128t`
 3. Respond to the interactive install questions as required.
-4. When the upgrace/installation process begins, you can safely detach from the Screen session. 
+4. When the upgrade/installation process begins, you can safely detach from the Screen session. 
 	- `ctrl+a`
 	- `d`
 

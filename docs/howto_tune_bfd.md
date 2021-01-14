@@ -75,7 +75,7 @@ If both router peers use the default settings above, you should expect to see th
 
 BFD is used to detect path failures between routers. BFD notifies the load-balancer and other peer-path observers when there is packet loss between peering routers, or if the link fails. In many cases it becomes critical to minimize session failovers to prevent the session from oscillating between paths, to reduce unnecessary changes to routing tables, prevent consumption of valuable system resources, and avert needless convergence impact. 128T routers have a hold down timer that can be configured to prevent BFD from making immediate updates until the timer has expired. This method works well when the characteristic of the link is well known and a predetermined value can be assigned to the timer.
 
-In cases where link characteristics change or are unpredictable, the 128T router can dynamically adjust BFD notification periods and dampen excessive notifications to clients. This prevents unnecessary instability in the network, minimizing unnecessary failovers and flapping links. 
+In cases where link characteristics change or are unpredictable, the 128T router can dynamically adjust BFD notification periods and reduce excessive notifications to clients. This prevents unnecessary instability in the network, minimizing unnecessary failovers and flapping links. 
 
 Simple BFD damping (hold-down timer) is enabled by default, and can be disabled by an administrator. Dynamic BFD Damping is enabled by an administrator using the `dynamic-damping` configuration field. 
 
