@@ -162,6 +162,7 @@ module.exports = {
       "plugin_m800_watchdog",
       "plugin_monitoring_agent",
       "plugin_mosh",
+      "plugin_set_hostname",
       "plugin_sip_alg",
       "plugin_wireguard",
     ],
