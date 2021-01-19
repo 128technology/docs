@@ -2,7 +2,7 @@
 title: Set Hostname
 ---
 
-Set the system hostname of a 128T node to the default value of `node.router` or define a custom name.
+Set the system hostname of a 128T node to the default value of `node.router` or define a custom name. Where `node` and `router` are set to the respective values defined in 128T configuration.
 
 ## Installation
 
