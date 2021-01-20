@@ -153,27 +153,122 @@ Create the parameters file, accept the terms of use and conditions of the image 
 
 Once the deployment completes, information of the newly 128T Session Smart Router deployment is provided in the Outputs section. To login to the VM via SSH use the username and the SSH public key provided in the template.
 
-### Network interfaces layout
+### Network Interfaces Layout
 
-The "Session Smart Router" template deploys a VM for the 128T Session Smart Router with three network interfaces. The template attaches the network interfaces to the VM in the following order: Management, Public and Private, therefore the network interfaces are mapped as follows:
+The _Session Smart Router Template_ deploys a VM for the 128T Session Smart Router with three network interfaces. The template attaches the network interfaces to the VM in the following order: Management, Public, and Private. The network interfaces are mapped as follows:
 
 | Network interface name | Subnet           | 
 | ---------------------- | ---------------- |
-| eth3                   | Management       |
-| eth4                   | Public           |
-| eth5                   | Private          |
+| eth0                   | Management       |
+| eth1                   | Public           |
+| eth2                   | Private          |
 
-In order to configure the 128T Router is required to find the PCI address associated to each network interface, in the table above eth4 and eth5. To do so login via SSH to the VM corresponding to the 128T Session Smart Router as indicated in the Outputs section of the deployed template, and then run the following command:
+In earlier versions of the 128T Networking Platform software (pre-5.0), the 128T Router used the PCI addresses to map to the network interfaces. If you are installing an earlier version of the 128T Software, please see [PCI Address Association](#pci-address-association). 
+
+With the release of 5.0, network interfaces are mapped using the VMBus UUID. Use the following process to map the VMBus UUID to the network interfaces. 
+
+### Configuring a Device Interface with VMBus UUID
+
+The following are the high level steps to configure a device interface on a 128T router running in the Azure cloud.
+
+- Determine the Network Interface Layout 
+- Configure and Assign the VMBus UUID Identifier to a Device Interface
+- Verify Connectivity
+
+:::note
+If you are *upgrading* the 128T software from a version prior to 5.0, repeat this procedure for each router running on Azure.
+:::
+
+#### Determine the Network Interface Layout
+
+1. To configure the device interfaces, first identify the VMBus UUID address associated with each network interface on the Linux VM. 
+
+	a) Login via SSH to the VM corresponding to the 128T router. 
+
+	b) Run the following command in Linux:
+		`sudo dpdk-devbind.py --status`
+
+	In the VMBus devices section, the VMBus UUID is the first column (outlined below in red). The parameter `if` (outlined below in green) is the name of the associated network interface in Linux.
+
+	![VMBusDevices](/img/VMBusDevicesLinux.png)
+
+2. Determine the VMBus UUID to network interface mapping in Linux (and therefore subnet in Azure).
+
+	a) Login to the Azure portal. 
+
+	b) Click on the name of the VM of the router.
+
+	c) Select Networking under the Settings section on the left side of the interface.
+
+	![Settings Menu](/img/VMBusAzureUI1.png)
+	
+	d) The network interfaces attached to the VM are shown. 
+
+	![Azure Port UI](/img/VMBusAzureUI2.png)
+
+	From left to right, the interfaces are: Router-mgmt (management interface), Router-public (WAN interface), and Router-private (LAN interface). In Linux these interfaces are mapped to eth0, eth1, and eth2 respectively.
+
+3. Use the information gathered from the Azure portal (Router-mgmt, Router-public, Router-private) and the output from the `sudo dpdk-devbind.py --status` command to determine the VMBus UUID, as shown in the following table.
+
+| Network Interface Name (Linux) | Subnet | VMBus UUID |
+| ------ | ------ | ------ |
+| eth0 | mgmt | -4e97000d3a04 |
+| eth1 | public | -efd3000d3a04 |
+| eth2 | private | -e5e2000d3a04 |
+
+#### Assign the VMBus UUID Identifier to a Device Interface
+
+Assign the VMBus UUID to a device interface using the CLI.
+
+1. Login to the CLI on the Conductor. 
+2. Run the following commands to configure a device interface with a VMBus UUID on a router:
+
+```
+configure authority router <router name> node <node name> device-interface <device interface name>
+type ethernet
+forwarding true
+vmbus-uuid <device interface vmbus uuid>
+top
+```
+
+3. Repeat the steps above for each device interface and router running on Azure.
+
+4. Validate and commit the changes.
+```
+validate
+commit
+```
+
+#### Verify Connectivity
+
+1. Login via SSH to the VM of each router running on Azure. 
+
+2. Login to the 128T CLI.
+	
+	`su admin`
+
+3. Ping the gateway of each network interface.
+	
+	`ping <gateway IP address>`
+
+4. Azure gateways do not reply to ping, but you can verify connectivity by checking the ARP table on the 128T router. Use `show arp` to display the ARP table, and look for **valid** entries. 
+
+### PCI Address Association
+
+In order to configure the 128T Router using pre-5.0 software, each network interface must be mapped to the corresponding PCI address. Use the following steps to identify the correct PCI address for each ethernet port. 
+
+1. Log in via SSH to the VM corresponding to the 128T Session Smart Router as indicated in the Outputs section of the deployed template.
+2. Run the following command:
 
 ```
 sudo dpdk-devbind.py --status
 ```
 
-The relevant information is the first column and the parameter "if" of the "Network devices using kernel driver section" as shown in the following picture:
+The PCI address is the first column under **Network devices using kernel driver** shown in the image below. The corresponding network interfaces follow the **if** parameter. 
 
 ![DPDK PCI addresses](/img/platforms_azure_dpdk_pci.png)
 
-In the example shown above the output of the command indicates the PCI address mapping corresponding to each network interface as follows:
+The following table clarifies the PCI mapping to each network interface. 
 
 | Network interface name | Subnet           | PCI address  |
 | ---------------------- | ---------------- | ------------ |
@@ -181,7 +276,7 @@ In the example shown above the output of the command indicates the PCI address m
 | eth4                   | Public           | 8061:00:02.0 |
 | eth5                   | Private          | a994:00:02.0 |
 
-Later, when this managed 128T Router is being configured via its corresponding 128 Technology Conductor, please use the PCI addresses obtained to configure its device interfaces accordingly. In this example the PCI address for the "Public" interface (eth4) is "8061:00:02.0" and the PCI address for the "Private" interface (eth5) is "a994:00:02.0".
+When configuring the managed 128T Router via its corresponding Conductor, use the PCI addresses to configure each device interface.
 
 ## Annexes
 
