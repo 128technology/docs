@@ -163,15 +163,15 @@ The _Session Smart Router Template_ deploys a VM for the 128T Session Smart Rout
 | eth1                   | Public           |
 | eth2                   | Private          |
 
-In earlier versions of the 128T Networking Platform software (pre-5.0), the 128T Router used the PCI addresses to map to the network interfaces. If you are installing an earlier version of the 128T Software, please see [PCI Address Association](#pci-address-association). 
+In earlier versions of the 128T Networking Platform software (pre-5.0), the 128T Router used the PCI addresses to map to the device interfaces. If you are installing an earlier version of the 128T Software, please see [PCI Address Association](#pci-address-association). 
 
-With the release of 5.0, network interfaces are mapped using the VMBus UUID. Use the following process to map the VMBus UUID to the network interfaces. 
+With the release of 5.0, device interfaces are mapped using the VMBus UUID. Use the following process to map the VMBus UUID to the device interfaces. 
 
 ### Configuring a Device Interface with VMBus UUID
 
 The following are the high level steps to configure a device interface on a 128T router running in the Azure cloud.
 
-- Determine the Network Interface Layout 
+- Determine the Device Interface Layout 
 - Configure and Assign the VMBus UUID Identifier to a Device Interface
 - Verify Connectivity
 
@@ -179,20 +179,20 @@ The following are the high level steps to configure a device interface on a 128T
 If you are *upgrading* the 128T software from a version prior to 5.0, repeat this procedure for each router running on Azure.
 :::
 
-#### Determine the Network Interface Layout
+#### Determine the Device Interface Layout
 
-1. To configure the device interfaces, first identify the VMBus UUID address associated with each network interface on the Linux VM. 
+1. To configure the device interfaces, first identify the VMBus UUID address associated with each device interface on the Linux VM. 
 
 	a) Login via SSH to the VM corresponding to the 128T router. 
 
 	b) Run the following command in Linux:
 		`sudo dpdk-devbind.py --status`
 
-	In the VMBus devices section, the VMBus UUID is the first column (outlined below in red). The parameter `if` (outlined below in green) is the name of the associated network interface in Linux.
+	In the VMBus devices section, the VMBus UUID is the first column (outlined below in red). The parameter `if` (outlined below in green) is the name of the associated device interface in Linux.
 
 	![VMBusDevices](/img/VMBusDevicesLinux.png)
 
-2. Determine the VMBus UUID to network interface mapping in Linux (and therefore subnet in Azure).
+2. Determine the VMBus UUID to device interface mapping in Linux (and therefore subnet in Azure).
 
 	a) Login to the Azure portal. 
 
@@ -202,7 +202,7 @@ If you are *upgrading* the 128T software from a version prior to 5.0, repeat thi
 
 	![Settings Menu](/img/VMBusAzureUI1.png)
 	
-	d) The network interfaces attached to the VM are shown. 
+	d) The device interfaces attached to the VM are shown. 
 
 	![Azure Port UI](/img/VMBusAzureUI2.png)
 
@@ -210,7 +210,7 @@ If you are *upgrading* the 128T software from a version prior to 5.0, repeat thi
 
 3. Use the information gathered from the Azure portal (Router-mgmt, Router-public, Router-private) and the output from the `sudo dpdk-devbind.py --status` command to determine the VMBus UUID, as shown in the following table.
 
-| Network Interface Name (Linux) | Subnet | VMBus UUID |
+| Device Interface Name (Linux) | Subnet | VMBus UUID |
 | ------ | ------ | ------ |
 | eth0 | mgmt | -4e97000d3a04 |
 | eth1 | public | -efd3000d3a04 |
@@ -247,7 +247,7 @@ commit
 	
 	`su admin`
 
-3. Ping the gateway of each network interface.
+3. Ping the gateway of each device interface.
 	
 	`ping <gateway IP address>`
 
@@ -255,7 +255,7 @@ commit
 
 ### PCI Address Association
 
-In order to configure the 128T Router using pre-5.0 software, each network interface must be mapped to the corresponding PCI address. Use the following steps to identify the correct PCI address for each ethernet port. 
+In order to configure the 128T Router using pre-5.0 software, each device interface must be mapped to the corresponding PCI address. Use the following steps to identify the correct PCI address for each ethernet port. 
 
 1. Log in via SSH to the VM corresponding to the 128T Session Smart Router as indicated in the Outputs section of the deployed template.
 2. Run the following command:
