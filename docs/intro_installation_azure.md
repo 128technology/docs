@@ -165,7 +165,7 @@ The _Session Smart Router Template_ deploys a VM for the 128T Session Smart Rout
 
 In earlier versions of the 128T Networking Platform software (pre-5.0), the 128T Router used the PCI addresses to map to the device interfaces. If you are installing an earlier version of the 128T Software, please see [PCI Address Association](#pci-address-association). 
 
-With the release of 5.0, device interfaces are mapped using the VMBus UUID. Use the following process to map the VMBus UUID to the device interfaces. 
+With the release of 5.0, device interfaces are mapped using the VMBus UUID; use of the PCI addresses is no longer supported. Use the following process to map the VMBus UUID to the device interfaces. 
 
 ### Configuring a Device Interface with VMBus UUID
 
@@ -181,7 +181,7 @@ If you are *upgrading* the 128T software from a version prior to 5.0, repeat thi
 
 #### Determine the Device Interface Layout
 
-1. To configure the device interfaces, first identify the VMBus UUID address associated with each device interface on the Linux VM. 
+1. Identify the VMBus UUID address associated with each device interface on the Linux VM. 
 
 	a) Login via SSH to the VM corresponding to the 128T router. 
 
@@ -192,7 +192,7 @@ If you are *upgrading* the 128T software from a version prior to 5.0, repeat thi
 
 	![VMBusDevices](/img/VMBusDevicesLinux.png)
 
-2. Determine the VMBus UUID to device interface mapping in Linux (and therefore subnet in Azure).
+2. Identify the Azure mapping of each device interface.
 
 	a) Login to the Azure portal. 
 
@@ -206,7 +206,9 @@ If you are *upgrading* the 128T software from a version prior to 5.0, repeat thi
 
 	![Azure Port UI](/img/VMBusAzureUI2.png)
 
-	From left to right, the interfaces are: Router-mgmt (management interface), Router-public (WAN interface), and Router-private (LAN interface). In Linux these interfaces are mapped to eth0, eth1, and eth2 respectively.
+	From left to right, the interfaces are: **Router-mgmt** (management interface), **Router-public** (WAN interface), and **Router-private** (LAN interface). 
+
+	In this example, the _Session Smart Router Template_ assigned the Linux interfaces to eth0, eth1, and eth2 respectively.
 
 3. Use the information gathered from the Azure portal (Router-mgmt, Router-public, Router-private) and the output from the `sudo dpdk-devbind.py --status` command to determine the VMBus UUID, as shown in the following table.
 
@@ -292,47 +294,61 @@ The images available to deploy a 128T Conductor are the following:
 * 128T Networking Platform. A certificate from 128 Technology is required to install the software, therefore it is the recommended image to use if a certificate from 128 Technology is in your possession. There is no cost for running the 128T software, the cost of running the VM is the only cost. For more information about the image please visit the Marketplace [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128t_networking_platform).
 * Private. No certificate from 128 Technology is required to deploy this image. There is no cost for running the 128T software, the cost of running the VM is the only cost. Access to the 128 Technology software should have been provided to your Azure subscription as a result of a partnership agreement.
 
-A section for each of the images available discussed above is shown next. To start with the deployment, please proceed to the section of the image which better suits your requirements.
+A section for each of the images available discussed above is shown next. To begin the deployment, please refer to the section for the image that suits your requirements.
 
 ##### <u>128 Technology Conductor (Hourly)</u>
 
-To deploy the 128T Conductor using the 128 Technology Conductor (Hourly) image is to login to the [Azure Portal](https://portal.azure.com) and in the search bar at the top search for "Marketplace" as shown in the following picture:
+Deploy the 128T Conductor using the 128 Technology Conductor (Hourly) image: 
+
+1. Login to the [Azure Portal](https://portal.azure.com). 
+
+2. In the Search Bar enter **Marketplace** as shown below.
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-Once in the Marketplace type "128 Technology" in the search bar within the Marketplace and hit the Enter key as depicted in the following screenshot:
+3. Once in the Marketplace, type **128 Technology** in the Marketplace Search Bar and hit **Enter**.
 
 ![Search](/img/platforms_azure_marketplace_search.png)
 
-Next click on the "128 Technology Conductor" offering:
+4. Select the **128 Technology Conductor** offering.
 
 <img src="/img/platforms_azure_marketplace_conductor_hourly.png" alt="128 Technology Conductor Hourly" width="220" height="250" />
 
 ##### <u>128T Networking Platform (BYOL)</u>
 
-To deploy the 128T Conductor using the 128T Networking Platform (BYOL) image is to login to the [Azure Portal](https://portal.azure.com) and in the search bar at the top search for "Marketplace" as shown in the following picture:
+Deploy the 128T Conductor using the 128T Networking Platform (BYOL) image: 
+
+1. Login to the [Azure Portal](https://portal.azure.com). 
+
+2. In the Search Bar enter **Marketplace** as shown below.
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-Once in the Marketplace type "128 Technology" in the search bar within the Marketplace and hit the Enter key as depicted in the following screenshot:
+3. Once in the Marketplace, type **128 Technology** in the Marketplace Search Bar and hit **Enter**.
 
 ![Search](/img/platforms_azure_marketplace_search.png)
 
-Next click on the "128T Networking Platform" offering:
+4. Select the **128T Networking Platform** offering.
 
 <img src="/img/platforms_azure_marketplace_networkingplatform_byol.png" alt="128T Networking Platform" width="220" height="250" />
 
 ##### <u>Private</u>
 
-To deploy the 128T Conductor using the private image is to login to the [Azure Portal](https://portal.azure.com) and in the search bar at the top search for "Marketplace" as shown in the following picture:
+Deploy the 128T Conductor using the Private image:
+
+1. Login to the [Azure Portal](https://portal.azure.com). 
+
+2. In the Search Bar enter **Marketplace** as shown below.
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-Once your subscription id has been whitelisted the following banner will be shown in the Marketplace:
+3. Once your subscription ID has been whitelisted, the following banner will display:
 
 ![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
 
-Click on it, and click on the "128 Technology Conductor" offering as shown next:
+4. Click on the banner.
+
+5. Select the **128 Technology Conductor** offering.
 
 <img src="/img/platforms_azure_marketplace_conductor_private.png" alt="128 Technology Conductor Private" width="220" height="250" />
 
@@ -344,63 +360,75 @@ The images available in the Azure Marketplace to deploy a 128T Session Smart Rou
 * 128T Networking Platform. A certificate from 128 Technology is required to install the software, therefore it is the recommended image to use if a 128 Technology certificate is in your possession. There is no cost for running the 128T software, the cost of running the VM is the only cost. For more information about the image please visit the Marketplace [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/128technology.128t_networking_platform).
 * Private. No certificate from 128 Technology is required to deploy this image. There is no cost for running the 128T software, the cost of running the VM is the only cost. Access to the 128 Technology software should have been provided to your Azure subscription as a result of a partnership agreement.
 
-A section for each of the images available discussed above is shown next. To start with the deployment, please proceed to the section of the image which better suits your requirements.
+A section for each of the images available discussed above is shown next. To begin the deployment, please refer to the section for the image that suits your requirements.
 
 ##### <u>128T Session Smart Router (Hourly)</u>
 
-To deploy the 128T Session Smart Router using the 128T Session Smart Router (Hourly) image is to login to the [Azure Portal](https://portal.azure.com) and in the search bar at the top search for "Marketplace" as shown in the following picture:
+Deploy the 128T Session Smart Router using the 128T Session Smart Router (Hourly) image:
+
+1. Login to the [Azure Portal](https://portal.azure.com).
+
+2. In the Search Bar enter **Marketplace** as shown below.
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-Once in the Marketplace type "128 Technology" in the search bar within the Marketplace and hit the Enter key as depicted in the following screenshot:
+3. Once in the Marketplace, type **128 Technology** in the Marketplace Search Bar and hit **Enter**.
 
 ![Search](/img/platforms_azure_marketplace_search.png)
 
-Next click on the "128T Session Smart Router" offering:
+4. Select the **128 Technology Session Smart Router** offering.
 
 <img src="/img/platforms_azure_marketplace_router_hourly.png" alt="128 Technology Session Smart Router Hourly" width="220" height="250" />
 
 ##### <u>128T Networking Platform (BYOL)</u>
 
-To deploy the 128T Session Smart Router using the 128T Networking Platform (BYOL) image is to login to the [Azure Portal](https://portal.azure.com) and in the search bar at the top search for "Marketplace" as shown in the following picture:
+Deploy the 128T Session Smart Router using the 128T Networking Platform (BYOL) image:
+1. Login to the [Azure Portal](https://portal.azure.com).
+
+2. In the Search Bar enter **Marketplace** as shown below.
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-Once in the Marketplace type "128 Technology" in the search bar within the Marketplace and hit the Enter key as depicted in the following screenshot:
+3. Once in the Marketplace, type **128 Technology** in the Marketplace Search Bar and hit **Enter**.
 
 ![Search](/img/platforms_azure_marketplace_search.png)
 
-Next click on the "128T Networking Platform" offering:
+4. Select the **128T Networking Platform** offering.
 
 <img src="/img/platforms_azure_marketplace_networkingplatform_byol.png" alt="128T Networking Platform" width="220" height="250" />
 
 ##### <u>Private</u>
 
-To deploy the 128T Session Smart Router using the private image is to login to the [Azure Portal](https://portal.azure.com) and in the search bar at the top search for "Marketplace" as shown in the following picture:
+Deploy the 128T Session Smart Router using the Private image:
+1. Login to the [Azure Portal](https://portal.azure.com).
+
+ 2. In the Search Bar enter **Marketplace** as shown below.
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-Once your subscription id has been whitelisted the following banner will be shown in the Marketplace:
+3. Once your subscription ID has been whitelisted, the following banner will display:
 
 ![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
 
-Click on it, and click on the "128T Session Smart Router offering as shown next:
+4. Click on the banner.
+
+5. Select the **128 Technology Session Smart Router** offering.
 
 <img src="/img/platforms_azure_marketplace_router_private.png" alt="128 Technology Session Smart Router Private" width="220" height="250" />
 
-### Agree to the terms of use and privacy policy
+### Agree to the Terms of Use and the Privacy Policy
 
-To agree to the terms of use and privacy policy of the 128T image to be used, click on the "Get it now" button as shown in the following image:
+To agree to the Terms of Use and the Privacy Policy for the 128T image used, click on **GET IT NOW** as shown in the following image:
 
 ![128 Technology Conductor Hourly](/img/platforms_azure_marketplace_getitnow.png)
 
-Click on the button "Continue" in order to agree to the terms of use and privacy policy.
+Click on **Continue** in order to agree to the Terms of Use and the Privacy Policy.
 
-If you want to deploy the 128T software programmatically it is necessary to enable programmatic deployment and accept its terms of use as well. If programmatic deployment is desirable please click on the "Get started" button located under the "Create" button as shown in the image below:
+To deploy the 128T software programmatically, you must enable Programmatic Deployment and accept its Terms of Use. If Programmatic Deployment is desirable, please click on the **Get started** button located under the **Create** button as shown in the image below:
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
-Lastly, select the subscription you want to apply the changes to and click the "Save" button.
+Finally, select the subscription you want and click on **Save** to apply the changes.
 
 Alternatively, it is possible to accept the term of use and privacy policy programmatically. The PowerShell commands for each 128 Technology image are shown next, please run the commands corresponding to the image you want to use:
 
@@ -436,9 +464,9 @@ Get-AzureRmMarketplaceTerms `
 
 ### Load the template
 
-Once the term of use and privacy policy have been accepted click on the tab "Plan", the templates available will be listed.
+After the Terms of Use and the Privacy Policy have been accepted, select the **Plan** tab. The available templates are listed there.
 
-Click on the desired template, a new tab will be opened in the browser which will redirect you to its form. 
+When you select a template, a new tab opens in the browser that redirects you to the template. 
 
 :::important
 As an additional note and only applicable when the chosen image is the 128T Networking Platform, please be aware of the following conditions before using any of its templates:
@@ -448,9 +476,9 @@ As an additional note and only applicable when the chosen image is the 128T Netw
   * If there is an existing 128T Conductor in the network and the intent is to perform a non interactive installation of a 128T Router (for example a ZTP installation) please make sure the certificate provided by 128 Technology has been imported and loaded in 128T Conductor before launching this template.
 :::
 
-### Launch the template
+### Launch the Template
 
-This section describes how to fill out and launch the template via the portal and programmatically to deploy a 128 Technology Conductor as well as a 128T Session Smart Router.
+This section describes how to fill out and launch the template via the portal and programmatically deploy a 128 Technology Conductor and a 128T Session Smart Router.
 
 #### 128 Technology Conductor
 
@@ -474,11 +502,11 @@ A description of the parameters of the template are listed in the following tabl
 | Admin Allowed CIDR   | It allows for restricting reachability to the control interface of the Conductor to a well known source IP address CIDR range for management purposes. It is common to set this field to 0.0.0.0/0 (accepting traffic from all source IP addresses) for now, as the source IP address/es where the Conductor will be administered from may not be known at this time. However, once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the 128T Conductor will be administered.                                                                                                                                                                                     |
 | Certificate SASURL   | Optional field and only applicable to BYOL images. The field Certificate SAS URL is optional even when deploying a BYOL image. If the field is not set the installation of the 128T software will be interactive and will commence after logging into the instance via SSH. On the other hand, if the field is set to a SAS URL that points to a valid 128 Technology certificate then the deployment will be performed in non interactive mode, in other words, the latest version of the 128T software will be installed as part of the deployment automatically on your behalf. Please note that installing the 128T software requires additional time. While the 128T software installs SSH access to the VM instance will be disabled, and it will be enabled once the 128T software installation completes. For additional information regarding how to obtain a SAS URL for your 128 Technology certificate please refer to [Certificate SAS URL](#certificate-sas-url).                                                                                                                          |
 
-Accept the terms and conditions of the deployment ticking on the box "I agree to the terms and conditions stated above".
+Accept the Terms and Conditions of the deployment by ticking the box "I agree to the terms and conditions stated above".
 
-Lastly click on the button Purchase to start the deployment.
+Finally, click **Purchase** to start the deployment.
 
-Once the deployment of the template completes, information of the newly 128T Conductor deployment is provided in the tab Output placed at the left hand side.
+Once the deployment of the template is complete, information about the new 128T Conductor deployment is provided in the Output tab.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
 
