@@ -7,7 +7,7 @@ This document describes the process for deploying a Highly Available Conductor i
 
 ## Introduction
 
-128 Technology is committed to providing the highest quality software with each release. As such, Critical Vulnerability Exposures (CVE) are continuously addressed, and security and administration best practices are enforced. Allowing SSH Root login has been identified as a significant vulnerability and has been mitigated. Additionally, all public cloud providers enforce SSH key-based authentication instead of password-based authentication. As a result of this stricter security posture, the process to deploy a Highly Available 128T Conductor in the public cloud requires additional steps during the Installation/Initialization procedures. Use the following procedure to successfully deploy an HA Conductor in the cloud. 
+128 Technology is committed to providing the highest quality software with each release. As such, Critical Vulnerability Exposures (CVE) are continuously addressed, and security and administration best practices are enforced. Allowing SSH Root login has been identified as a significant vulnerability and has been mitigated. Additionally, all public cloud providers enforce SSH key-based authentication instead of password-based authentication. As a result of this stricter security posture, the process to deploy a Highly Available 128T Conductor in the public cloud requires additional steps during the Initialization procedure. Use the following procedure to successfully deploy an HA Conductor in the cloud. 
 
 To deploy a Conductor in High Availability, two VMs must be launched. In this document these are referred to as Node A and Node B.
 
