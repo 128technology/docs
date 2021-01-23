@@ -106,24 +106,12 @@ h2, h3, h4 {
   color: #84B135;
 }
 
-
-.menu, .contents {
-  /*font-family: Barlow-SemiBold, sans-serif;*/
-}
-
-.navbar {
-  /*font-family: Barlow-SemiBold, sans-serif;
-  text-transform: uppercase;
-  font-style: bold;*/
-}
-
 .footer {
   background-color: #272526;
   color: #0096A4;
 }
 
 .heroTitle {
-  /*font-family: "Barlow", sans-serif;*/
   font-weight: 400;
   font-size: 38px;
   font-style: normal;
