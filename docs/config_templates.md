@@ -305,14 +305,14 @@ The easiest way to quickly make modifications to the structure of a template bod
 
 ## Configuration Wizard
 
-In some scenarios, it may be desireable to have the best of both worlds between advanced mode and basic mode. Under the covers, the administrator needs the functionality of an advanced template, but also wants a form based mechanism for filling out the variables. This can be accomplished with the **Configuration Wizard**. To enable the **Configuration Wizard**, the administrator must define a [JSON Schema](https://json-schema.org/) for the template via the advanced view:
+In some scenarios, it may be desirable to have the best of both worlds between advanced mode and basic mode. Under the covers, the administrator needs the functionality of an advanced template, but also wants a form-based mechanism for filling out the variables. This can be accomplished with the **Configuration Wizard**. To enable the **Configuration Wizard**, the administrator must define a [JSON Schema](https://json-schema.org/) for the template via the advanced view:
 
 ![templates_define_schema](/img/templates_define_schema.png)
 
-Once an advanced template has a schema defined, clicking the template on the template index page brings the user to a form based page for filling out the template variables:
+Once an advanced template has a schema defined, clicking the template on the template index page brings the user to a form-based page for filling out the template variables:
 ![templates_form_wizard](/img/templates_form_wizard.png)
 
-Note that the user must click save at the bottom of the form page before proceeding to the generation step, otherwise their edits may be lost. The underlying advanced template can still be edited by clicking the `View / Modify` option on the templates index page.
+Note that the user must click **Save** at the bottom of the form page before proceeding to the generation step, otherwise their edits may be lost. The underlying advanced template can still be edited by clicking the `View / Modify` option on the templates index page.
 
 
 ## Import / Export
