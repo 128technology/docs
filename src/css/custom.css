@@ -15,7 +15,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #39697C;
+  --ifm-color-primary: #0096A4;
   --ifm-color-primary-dark: rgb(33, 175, 144);
   --ifm-color-primary-darker: rgb(31, 165, 136);
   --ifm-color-primary-darkest: rgb(26, 136, 112);
@@ -23,9 +23,9 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
-  --ifm-color-secondary: #9C7C33;
+  --ifm-color-secondary: #84B135;
   --ifm-footer-background-color: #272526;
-  --ifm-font-family-base: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --ifm-font-family-base: lato,Arial,Helvetica,sans-serif;
   --ifm-font-family-monospace: Hack, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
   --ifm-font-size-base: 15px;
 }
@@ -50,48 +50,6 @@ Docusaurus default styling sets '.alert.alert--secondary' background-color to
 **/
 .alert.alert--secondary {
   --ifm-alert-background-color: #EBEDF0;
-}
-
-@font-face {
-  font-family: RbNo31;
-  src: url('/font/RBNo31-Light.ttf') format('truetype');
-  font-weight: 300;
-}
-
-@font-face {
-  font-family: RbNo31-Black;
-  src: url('/font/RBNo31-Black.ttf') format('truetype');
-  font-weight: 900;
-}
-
-@font-face {
-  font-family: RbNo31-Black;
-  src: url('/font/RBNo31-Black.ttf') format('truetype');
-  font-weight: 900;
-}
-
-@font-face {
-  font-family: Montserrat;
-  src: url('/font/Montserrat-Light.ttf') format('truetype');
-  font-weight: 300,400,500,700;
-}
-
-@font-face {
-  font-family: Montserrat-Bold;
-  src: url('/font/Montserrat-SemiBold.ttf') format('truetype');
-  font-weight: 300,400,500,700;
-}
-
-@font-face {
-  font-family: Barlow-SemiBold;
-  src: url('/font/Barlow-SemiBold.ttf') format('truetype');
-  font-style: bold;
-}
-
-@font-face {
-  font-family: Barlow;
-  src: url('/font/Barlow-Regular.ttf') format('truetype');
-  font-style: normal;
 }
 
 @font-face {
@@ -122,36 +80,38 @@ Docusaurus default styling sets '.alert.alert--secondary' background-color to
   font-style: italic;
 }
 
+@font-face {
+  font-family: 'Lato';
+  src: url('/font/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('/font/Lato-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
 h1, h2, h3, h4 {
-  font-family: Barlow-SemiBold, sans-serif;
+  font-family: lato,Arial,Helvetica,sans-serif;
 }
 
 h1 {
-  color: #39697C;
+  color: #0096A4;
 }
 
 h2, h3, h4 {
-  color: #9C7C33;
-}
-
-
-.menu, .contents {
-  font-family: Barlow-SemiBold, sans-serif;
-}
-
-.navbar {
-  font-family: Barlow-SemiBold, sans-serif;
-  text-transform: uppercase;
-  font-style: bold;
+  color: #84B135;
 }
 
 .footer {
   background-color: #272526;
-  color: #9C7C33;
+  color: #0096A4;
 }
 
 .heroTitle {
-  font-family: "Barlow", sans-serif;
   font-weight: 400;
   font-size: 38px;
   font-style: normal;

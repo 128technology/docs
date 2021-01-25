@@ -108,10 +108,10 @@ function Home() {
   return (
     <Layout
       title={`Home`}
-      description="The source for documentation of the 128 Technology Networking Platform.">
+      description="The source for documentation of the 128T Session Smart Routing Platform.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <div className="heroTitle">128T Networking Platform</div>
+          <div className="heroTitle">Session Smart Router</div>
           <p className="hero__subtitle">Product Docs</p>
         </div>
       </header>
@@ -120,15 +120,15 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className={classnames('col col--4', styles.feature)}>
-                <p>The 128T Networking Platform is an innovative software router, built around the services that matter.</p>
+                <p>The 128T Session Smart platform is an innovative software router, built around the services that matter.</p>
 
                 <p>Deliver your sessions tunnel-free with Secure Vector Routing.
                 Segment and secure your endpoints with Network Tenancy.
                 Automate using the APIs of a routing platform developed with modern software.
-                The 128T Docs Repository is your guide to optimizing the 128T Networking Platform's features and capabilities.
+                This Docs Repository is your guide to optimizing the Session Smart Router's features and capabilities.
                 </p>
 
-                <p>Get started now building services using the 128T - the router that understands services.</p>
+                <p>Get started now building services with the 128T Session Smart Router.</p>
               </div>
               <div className={classnames('col col--8', styles.feature)}>
                 <img src="/img/128t-components.png" alt="128T Networking Platform" />
