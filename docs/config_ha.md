@@ -179,7 +179,7 @@ Fabric interfaces are not required for simple active/standby deployments where t
 ```
 
 ## Configuring Redundancy Groups
-Redundancy groups are sets of interfaces that _share fate_, such that if one of the interfaces in the group fails, mastership of all interfaces in the group will be relinquished to the counterpart node in the router. Redundancy groups are required when the two nodes in a router do not have a fabric interface between them; otherwise, you could end up in a situation where the active LAN interface is on node 1 and the active WAN interface is on node 2, with no way to transit packets from node 1 to node 2.
+Redundancy groups are sets of interfaces that _share fate_, such that if one of the interfaces in the group fails, leadership of all interfaces in the group will be relinquished to the counterpart node in the router. Redundancy groups are required when the two nodes in a router do not have a fabric interface between them; otherwise, you could end up in a situation where the active LAN interface is on node 1 and the active WAN interface is on node 2, with no way to transit packets from node 1 to node 2.
 
 While redundancy groups are most commonly found in legacy deployments (i.e., those that predate 128 Technology's introduction of the fabric interface), they are still useful in simple HA deployments. Furthermore, the redundancy group affords administrators the ability to assert a preference for which node is active in an HA pair in the "sunny day" scenario where no interfaces are administratively or operationally down.
 
