@@ -38,7 +38,7 @@ The access configuration lets you create a set of "allowlist" addresses allowed 
 
 The access configuration, configured within `access-control` in the `snmp-server` element, has three components:
 
-- **name**: a unique name given to the access configuration element (this is the "key" for the configuration, to uniquely identify a allowlisted SNMP source)
+- **name**: a unique name given to the access configuration element (this is the "key" for the configuration, to uniquely identify an allowlisted SNMP source)
 
 - **community**: the community string to expect in requests from the requesting SNMP agent, as an authentication mechanism
 
