@@ -42,7 +42,6 @@
        #- name: Test
        #  run: npm run check-links
        - name: Broken Link Checker Action
-         uses: actions/checkout@master
          uses: gaurav-nelson/github-action-markdown-link-check@v1
          with:
            use-verbose-mode: 'yes'
