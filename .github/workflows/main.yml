@@ -39,8 +39,12 @@
        - name: Build
          run: npm run build
        
-       - name: Test
-         run: npm run check-links
+       #- name: Test
+       #  run: npm run check-links
+       - name: Broken Link Checker Action
+         uses: technote-space/broken-link-checker-action@v1.1.3
+         TARGET: ./build/
+         RECURSIVE: true
 
        - name: Deploy
          uses: peaceiris/actions-gh-pages@v3
