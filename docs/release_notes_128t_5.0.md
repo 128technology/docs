@@ -31,6 +31,8 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-31218 [Configurable BFD Hold-Down Timer](howto_tune_bfd.md#damping):** BFD (Bidirectional Forwarding Detection) is used to detect path failures between routers. A configurable hold-down time and dynamic-damping field in the [BFD settings](config_reference_guide.md#bfd-router), shared at the router, peer, interface neighborhood, and adjacency levels, provides BFD damping functionality when links are unpredictable. 
 ------
+- **I95-32508 Binding Device Interface Identifiers in Azure:** Beginning with the release of 5.0.0, the VMBus UUID is used to identify the device interfaces on a router in Azure cloud deployments. Use of the PCI address is no longer supported. For the steps to identify and configure the VMBus UUID on each device interface, please refer to [Configuring a Device Interface with VMBus UUID](intro_installation_azure#configuring-a-device-interface-with-vmbus-uuid). Please note that for upgrades to version 5.0 and higher, the VMBus UUID must be manually configured on the device interfaces using this procedure. 
+------
 - **I95-32558 In-line Flow Performance Monitoring:** Inline performance metrics have been enhanced to achieve a finer granularity than what is currently available via BFD. Statistics are now collected per path, traffic class, and protocol (TCP or UDP) level. Sessions can be forwarded using more granular SLA metrics. 
 ------
 - **I95-33376 Address Latest Vulnerabilities:** Security Vulnerability testing is ongoing, and fixes are in place for identified issues. 

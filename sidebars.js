@@ -30,6 +30,7 @@ module.exports = {
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
+      "intro_initialize_HA_conductor",
     ],
     "Supporting Information - Appendix":[
       "intro_installation_installer",
