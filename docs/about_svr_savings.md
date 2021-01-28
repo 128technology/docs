@@ -10,7 +10,7 @@ Traditional SD-WAN solves the issues of WAN connectivity by creating virtual net
 
 Overlay-based SD-WAN creates a network transport that is heavyweight and less optimized; fragmentation is introduced; and scalability and security are negatively impacted. 128T Session Smart routers offer a tunnel-free SD-WAN solution, which is more native, lightweight and scalable, to implement than overlay-based SD-WAN.
 
-A tunnel, as defined according to [RFC 1853](https://tools.ietf.org/html/rfc1853), encapsulates original IP payload with a new IP header. The original IP header is maintained while a new one is added.
+A tunnel, as defined according to [RFC 1853](https://tools.ietf.org/rfc/rfc1853.txt), encapsulates original IP payload with a new IP header. The original IP header is maintained while a new one is added.
 
 ![Tunnel](/img/about_svr_savings_3.png)
 
