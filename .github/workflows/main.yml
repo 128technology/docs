@@ -13,14 +13,14 @@
        - master
 
  jobs:
-   deploy:
+   checks:
      runs-on: ubuntu-latest
 
      strategy:
        matrix:
          node-version: [12.x]
 
-     name: Build, Test and Deploy docs
+     name: Build and Test
 
      steps:
        - uses: actions/checkout@v2
@@ -53,6 +53,24 @@
            folder-path: 'docs'
            # check-modified-files-only: 'yes'
 
+   gh-release:
+     if: github.event_name != 'pull_request'
+     runs-on: ubuntu-latest
+
+     strategy:
+       matrix:
+         node-version: [12.x]
+
+     name: Release to GitHub Pages
+
+     steps:
+       - uses: actions/checkout@v2
+
+       - name: Setup Node ${{ matrix.node-version }}
+         uses: actions/setup-node@v1
+         with:
+           node-version: ${{ matrix.node-version }}
+        
        - name: Deploy
          if: github.event_name != 'pull_request'
          uses: peaceiris/actions-gh-pages@v3.7.3
