@@ -13,6 +13,9 @@
  jobs:
    deploy:
      runs-on: ubuntu-latest
+     defaults:
+       run:
+         working-directory: build
      strategy:
        matrix:
          node-version: [12.x]
@@ -50,7 +53,7 @@
            # check-modified-files-only: 'yes'
 
        - name: Deploy
-         uses: peaceiris/actions-gh-pages@v3
+         uses: peaceiris/actions-gh-pages@v3.7.3
          with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
            publish_dir: ./build
