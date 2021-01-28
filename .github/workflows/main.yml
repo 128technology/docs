@@ -11,8 +11,8 @@
    pull_request:
      branches:
        - master
-  env:
-    WORKDIR: build
+ env:
+   WORKDIR: build
   
  jobs:
    deploy:
