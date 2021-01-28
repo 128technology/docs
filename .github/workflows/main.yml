@@ -1,6 +1,6 @@
 # .github/workflows/main.yml
 
- name: github pages
+ name: GitHub Pages
 
  on:
    push:
@@ -20,7 +20,7 @@
        matrix:
          node-version: [12.x]
 
-     name: Test and deploy docs
+     name: Build, Test and Deploy docs
 
      steps:
        - uses: actions/checkout@v2
