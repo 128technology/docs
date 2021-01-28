@@ -1,4 +1,4 @@
-# .github/workflows/deploy.yml
+# .github/workflows/main.yml
 
  name: github pages
 
@@ -55,5 +55,5 @@
          uses: peaceiris/actions-gh-pages@v3.7.3
          with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
-           publish_dir: docs/docs/build
+           publish_dir: build
            cname: 'docs.128technology.com'
