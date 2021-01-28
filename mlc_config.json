@@ -10,7 +10,7 @@
       "replacement": "../static/img/"
     }
   ],
-  "timeout": "20s",
+  "timeout": "30s",
   "retryOn429": true,
   "retryCount": 5,
   "fallbackRetryDelay": "30s",
