@@ -9,5 +9,10 @@
       "pattern": "^/img/",
       "replacement": "../static/img/"
     }
-  ]
+  ],
+  "timeout": "20s",
+  "retryOn429": true,
+  "retryCount": 5,
+  "fallbackRetryDelay": "30s",
+  "aliveStatusCodes": [200, 206]
 }
