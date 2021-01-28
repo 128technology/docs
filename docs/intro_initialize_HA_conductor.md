@@ -13,7 +13,7 @@ To deploy a Conductor in High Availability, two VMs must be launched. In this do
 
 ## Deploying the Primary Node Conductor – Node A
 
-If the 128T software is not already installed on the Node A VM, launch the 128T installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer). After the installation is complete, the system will restart and the initializer will launch automatically.
+If the 128T software is not already installed on the Node A VM, launch the 128T installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer.md). After the installation is complete, the system will restart and the initializer will launch automatically.
 
 If the software is already installed, launch the initializer from the command line using `initialize128t`.
 
@@ -24,7 +24,7 @@ If the software is already installed, launch the initializer from the command li
 	![HA Setup](/img/CloudHA_NodeA1.png)
 
 3. Enter the IP address of Node A that will be used as the HA sync interface.
-4. Continue with step 4 in the [Initialize the 128T Node](intro_installation_bootable_media#initialize-the-128t-node) procedure. After the initialization is complete, reboot Node A as instructed.
+4. Continue with step 4 in the [Initialize the 128T Node](intro_installation_bootable_media.md#initialize-the-128t-node) procedure. After the initialization is complete, reboot Node A as instructed.
 
 	Once Node A has rebooted, you must perform the following steps to configure SSH key-based authentication. Please note the commands vary depending on the public cloud provider.
 
@@ -59,7 +59,7 @@ Node A is now ready to allow access to Node B in order to form the HA pair. The 
 
 ## Deploying the Secondary Node Conductor – Node B
 
-Log in to the Node B VM. If the 128T software is not already installed, launch the 128T installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer). After the installation is complete, the system will restart and the initializer will launch automatically.
+Log in to the Node B VM. If the 128T software is not already installed, launch the 128T installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer.md). After the installation is complete, the system will restart and the initializer will launch automatically.
 If the software is already installed, launch the initializer from the command line using `initialize128t.`
 
 1. On the 128T Initializer Wizard, use the space bar to select the Conductor role for the 128T node and press the Enter key to select OK.
