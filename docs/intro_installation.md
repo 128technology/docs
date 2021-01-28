@@ -32,7 +32,7 @@ Installation is done from the 128T ISOs, typically from a bootable image on a fl
 - [Install and Reboot the Router using the OTP ISO](intro_installation_otp_iso.mdx)
 
 To install the 128T software on AWS or Azure, refer to: 
- - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws)
+ - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)
  	- [Amazon Web Services Quickstart](intro_installation_quickstart_aws.md)
  - [Installation in Microsoft Azure](intro_installation_azure.md)	
 
