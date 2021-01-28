@@ -8,12 +8,8 @@ Set the system hostname of a 128T node to the default value of `node.router` or 
 
 The Set Hostname plugin is obtained from the official 128T software repository.
 
-:::important
-It is recommended to use the conductor GUI > Plugins page for installing plugins. This allows the system to select the correct version of plugin based on the 128T version.
-:::
-
-:::important
-After installing the plugin, the 128T service on the conductor should be restarted for the changes to take effect.
+:::note
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 ## Configuration
