@@ -1,4 +1,9 @@
 {
+  "ignorePatterns": [
+    {
+      "pattern": "^mailto:"
+    }
+  ],
   "replacementPatterns": [
     {
       "pattern": "^/img/",
