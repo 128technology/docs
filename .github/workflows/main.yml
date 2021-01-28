@@ -6,13 +6,20 @@
    push:
      branches:
        - master
+     paths:
+      - .github/workflows/main.yml
    pull_request:
      branches:
        - master
-
+  env:
+    WORKDIR: build
+  
  jobs:
    deploy:
      runs-on: ubuntu-latest
+     defaults:
+       run:
+         working-directory: build
      strategy:
        matrix:
          node-version: [12.x]
@@ -53,4 +60,4 @@
          uses: peaceiris/actions-gh-pages@v3.7.3
          with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
-           publish_dir: ./build
+           publish_dir: ./${{ env.WORKDIR }}/build
