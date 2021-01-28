@@ -516,7 +516,7 @@ http://128technology.com/initializerPreferencesFile#/definitions/ip-address/oneO
 
 ### IPv4 Address Constraints
 
-**IPv4**: the string must be an IPv4 address (dotted quad), according to [RFC 2673, section 3.2](https://tools.ietf.org/html/rfc2673 "check the specification")
+**IPv4**: the string must be an IPv4 address (dotted quad), according to [RFC 2673, section 3.2](https://tools.ietf.org/rfc/rfc2673.txt "check the specification")
 
 ## IPv6 Address Schema
 
@@ -530,7 +530,7 @@ http://128technology.com/initializerPreferencesFile#/definitions/ip-address/oneO
 
 ### IPv6 Address Constraints
 
-**IPv6**: the string must be an IPv6 address, according to [RFC 4291, section 2.2](https://tools.ietf.org/html/rfc4291 "check the specification")
+**IPv6**: the string must be an IPv6 address, according to [RFC 4291, section 2.2](https://tools.ietf.org/rfc/rfc4291.txt "check the specification")
 
 ## Conductor Node Schema
 
@@ -623,4 +623,4 @@ http://128technology.com/initializerPreferencesFile#/definitions/host/anyOf/1
 
 ### Hostname Constraints
 
-**hostname**: the string must be a hostname, according to [RFC 1123, section 2.1](https://tools.ietf.org/html/rfc1123 "check the specification")
+**hostname**: the string must be a hostname, according to [RFC 1123, section 2.1](https://tools.ietf.org/rfc/rfc1123.txt "check the specification")

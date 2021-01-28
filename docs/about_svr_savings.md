@@ -18,16 +18,16 @@ The advantage of a tunnel is to bridge portions of the network that have disjoin
 
 Although there are many kinds of tunnels, all have one thing in common: they add additional bytes to existing IP packets.
 
-GRE (defined in [RFC 2784](https://tools.ietf.org/html/rfc2784)) is very popular in the SD-WAN industry.
+GRE (defined in [RFC 2784](https://tools.ietf.org/rfc/rfc2784.txt)) is very popular in the SD-WAN industry.
 GRE Overhead = 8 (GRE bytes) + 20 (IP GRE Header) = 24 Bytes. Therefore, GRE adds 24 additional bytes to the packet size.
 
-IPsec with GRE: IPsec (defined in [RFC 6071](https://tools.ietf.org/html/rfc6071)) is a very popular way of creating encrypted tunnels in SD-WAN. IPsec enables authentication and encryption of IP packets. IPsec uses two main protocols, Authentication Header (AH) and Encapsulating Security Payload (ESP). These protocols authenticate (AH) and encrypt plus authenticate (ESP), respectively.
+IPsec with GRE: IPsec (defined in [RFC 6071](https://tools.ietf.org/rfc/rfc6071.txt)) is a very popular way of creating encrypted tunnels in SD-WAN. IPsec enables authentication and encryption of IP packets. IPsec uses two main protocols, Authentication Header (AH) and Encapsulating Security Payload (ESP). These protocols authenticate (AH) and encrypt plus authenticate (ESP), respectively.
 
 IPsec can be used in conjunction with GRE or VXLAN tunneling protocols. This means GRE header is added first, followed by the IPsec header.
 IPsec Overhead: 20 (IPsec Header) + 8 (ESP Header) + 8 (Init. Vector) + 2 (ESP Trailer) + 12 (ESP Auth.) = 50 Bytes
 Therefore, a total of 50 bytes are added additionally to MTU. This is in addition to the 24 bytes added by GRE.
 
-Virtual Extensible LAN (VXLAN): Although VXLAN (defined in [RFC 7348](https://tools.ietf.org/html/rfc7348)) is very popular in the data center world, it has found its way into the SD-WAN industry. Because VXLAN is a layer 2 encapsulation, it encapsulates the entire Ethernet frame.
+Virtual Extensible LAN (VXLAN): Although VXLAN (defined in [RFC 7348](https://tools.ietf.org/rfc/rfc7348.txt)) is very popular in the data center world, it has found its way into the SD-WAN industry. Because VXLAN is a layer 2 encapsulation, it encapsulates the entire Ethernet frame.
 VXLAN Overhead = 20 (Outer IP Header) + 8 (Outer UDP) + 8 (VXLAN Header) + 14 (Inner Ethernet Header) = 50 Bytes, which is 50 bytes extra as compared to the native IP packet.
 
 When an application uses a smaller packet size, adding tunnel overhead results in a very inefficient utilization of bandwidth. This is true about common applications, such as VoIP that uses a packet size of 60 bytes when utilizing G.729 codec.

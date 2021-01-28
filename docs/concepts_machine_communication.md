@@ -38,7 +38,7 @@ Peering 128T routers requires a successful exchange of BFD packets in order to i
 | ------------- | ---------- | ---------------- | ------------------------------------------------------------ |
 | bidirectional | 1280/UDP   | 1s               | Frequency negotiated between devices by configuring `desired-tx-interval` and `required-min-rx-interval` settings. Client and server payloads are variable length, typically greater than 90 bytes. This is due to the presence of peer-name. |
 
-[BFD](https://en.wikipedia.org/wiki/Bidirectional_Forwarding_Detection), or Bidirectional Forwarding Detection (as defined in [RFC 5880](https://tools.ietf.org/html/rfc5880)), is exchanged between 128T routers to detect SVR path availability. I.e., the successful, and continued exchange of BFD packets is a prerequisite for choosing that path to carry SVR traffic. For peer path detection, 128T uses the _asynchronous mode_ of BFD.
+[BFD](https://en.wikipedia.org/wiki/Bidirectional_Forwarding_Detection), or Bidirectional Forwarding Detection (as defined in [RFC 5880](https://tools.ietf.org/rfc/rfc5880.txt)), is exchanged between 128T routers to detect SVR path availability. I.e., the successful, and continued exchange of BFD packets is a prerequisite for choosing that path to carry SVR traffic. For peer path detection, 128T uses the _asynchronous mode_ of BFD.
 
 The peering status between 128T devices is viewable using the PCLI command `show peers`.
 
