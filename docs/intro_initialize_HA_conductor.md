@@ -59,7 +59,7 @@ Node A is now ready to allow access to Node B in order to form the HA pair. The 
 
 ## Deploying the Secondary Node Conductor – Node B
 
-Log in to the Node B VM. If the 128T software is not already installed, launch the 128T installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer). After the installation is complete, the system will restart and the initializer will launch automatically.
+Log in to the Node B VM. If the 128T software is not already installed, launch the 128T installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer.md). After the installation is complete, the system will restart and the initializer will launch automatically.
 If the software is already installed, launch the initializer from the command line using `initialize128t.`
 
 1. On the 128T Initializer Wizard, use the space bar to select the Conductor role for the 128T node and press the Enter key to select OK.
