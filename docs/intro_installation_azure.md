@@ -93,7 +93,7 @@ The following infrastructure must exist in your Azure subscription:
     * The interface of the 128T Conductor that is going to manage this router must be reachable from this subnet.
 
 :::important
-Please note that deploying 128 Technology Session Smart Routers without a valid certificate will be limited to deployments within the cloud only. If your use case requires the deployment of a 128T Router on your premises as well please contact 128 Technology directly [here](https://www.128technology.com/get-started).
+Please note that deploying 128 Technology Session Smart Routers without a valid certificate will be limited to deployments within the cloud only. If your use case requires the deployment of a 128T Router on your premises as well please contact 128 Technology.
 :::
 
 ### Deployment
@@ -342,7 +342,7 @@ Deploy the 128T Conductor using the Private image:
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-3. Once your subscription ID has been whitelisted, the following banner will display:
+3. Once your subscription ID has been allowlisted, the following banner will display:
 
 ![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
 
@@ -406,7 +406,7 @@ Deploy the 128T Session Smart Router using the Private image:
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-3. Once your subscription ID has been whitelisted, the following banner will display:
+3. Once your subscription ID has been allowlisted, the following banner will display:
 
 ![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
 

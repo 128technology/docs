@@ -34,15 +34,15 @@ The protocol configuration requires three settings: setting `enabled` to `true` 
 
 ### Access Configuration
 
-The access configuration lets you create a set of "whitelist" addresses allowed to interact with the 128T SNMP agent (i.e., to send GET requests to the 128T). This represents your SNMP management platform.
+The access configuration lets you create a set of "allowlist" addresses allowed to interact with the 128T SNMP agent (i.e., to send GET requests to the 128T). This represents your SNMP management platform.
 
 The access configuration, configured within `access-control` in the `snmp-server` element, has three components:
 
-- **name**: a unique name given to the access configuration element (this is the "key" for the configuration, to uniquely identify a whitelisted SNMP source)
+- **name**: a unique name given to the access configuration element (this is the "key" for the configuration, to uniquely identify an allowlisted SNMP source)
 
 - **community**: the community string to expect in requests from the requesting SNMP agent, as an authentication mechanism
 
-- **source**: the IP address of the whitelisted device
+- **source**: the IP address of the allowlisted device
 
 ```
 access-control         my-nms-platform
@@ -151,8 +151,8 @@ network-interface
                 permission  allow
             exit
 
-            access-policy  blacklist
-                source      blacklist
+            access-policy  blocklist
+                source      blocklist
                 permission  deny
             exit
         exit

@@ -85,7 +85,7 @@ This section is specifically geared toward end users that want to build their ow
 When deploying conductor on the internet, 128 Technology recommends limiting access to the system using *firewalld*. (The [*firewalld* system daemon](https://firewalld.org/) is a managed firewall application within Linux.) The basic premise is to restrict inbound access to the public-facing addresses to only allow ports 4505/TCP, 4506/TCP, and 930/TCP. This is generally done by:
 
 1. Creating a specific firewalld **zone**; e.g., `conductor`
-2. Creating a firewalld **service** for the conductor's salt master, containing TCP ports 4505, 4506; e.g., `salt-master`
+2. Creating a firewalld **service** for the conductor's salt-master, containing TCP ports 4505, 4506; e.g., `salt-master`
 3. Creating a firewalld **service** for the conductor's NETCONF connection, containing TCP port 930; e.g., `netconf`
 4. Adding the "salt-master" and "netconf" services to the `conductor` zone
 5. Set the public address to be in the `conductor` zone
@@ -112,7 +112,7 @@ config auth router r1 node n1 device-interface WAN network-interface WAN0 conduc
 A sample configuration is provided in [Appendix A](#appendix-a-public-conductor).
 
 ### Public Conductor Behind NAT
-Another common model is a deployment where the conductor is behind a static NAT/firewall, which is forwarding to a private address assigned to the conductor. When placing the conductor behind a static NAT/firewall (effectively giving it a public IP address), be mindful of whether the NAT/firewall supports "hairpinning." (Hairpinning is when a device sends packets to the public IP address of a NAT that it sits behind.) This is because a conductor's salt-minion will connect to its own salt master, and will attempt to do so at the same IP address that all external minions connect to. If the NAT does not support hairpinning, then follow the steps outlined below in the section on _Split Horizon Conductor_.
+Another common model is a deployment where the conductor is behind a static NAT/firewall, which is forwarding to a private address assigned to the conductor. When placing the conductor behind a static NAT/firewall (effectively giving it a public IP address), be mindful of whether the NAT/firewall supports "hairpinning." (Hairpinning is when a device sends packets to the public IP address of a NAT that it sits behind.) This is because a conductor's salt-minion will connect to its own salt-master, and will attempt to do so at the same IP address that all external minions connect to. If the NAT does not support hairpinning, then follow the steps outlined below in the section on _Split Horizon Conductor_.
 
 #### Port Forwarding
 When deploying a conductor behind a firewall, open 930/TCP (used for NETCONF) and 4505-4506/TCP (used for salt) to allow a conductor to communicate to managed routers. Open 443/TCP for the web UI, and 22/TCP for remote SSH.

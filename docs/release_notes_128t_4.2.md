@@ -422,7 +422,7 @@ The 4.2.4 release is a superset of the 4.2.3 release. Features and corrections i
 ------
 - **I95-33279** Path MTU discovery unresolvable when no ICMP is generated
 ------
-- **I95-33296** Removing a redundant interface and its corresponding redundancy-group within the same commit would abort the commit
+- **I95-33296** Removing a redundant interface and its corresponding redundancy-group within the same commit would terminate the commit
 ------
 - **I95-33441** Changing node name can cause the 128T to fault on shutdown due to a rare race condition
 ------
