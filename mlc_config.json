@@ -2,9 +2,6 @@
   "ignorePatterns": [
     {
       "pattern": "^mailto:"
-    },
-    {
-      "pattern": "^https://tools.ietf.org/html"
     }
   ],
   "replacementPatterns": [
