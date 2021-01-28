@@ -41,11 +41,11 @@
        - name: Build
          run: npm run build
        
-       #- name: Broken Link Checker Action
-       #  uses: gaurav-nelson/github-action-markdown-link-check@v1
-       #  with:
-       #    use-verbose-mode: 'yes'
-       #    folder-path: 'docs'
+       - name: Broken Link Checker Action
+         uses: gaurav-nelson/github-action-markdown-link-check@v1
+         with:
+           use-verbose-mode: 'yes'
+           folder-path: 'docs'
            # check-modified-files-only: 'yes'
 
        - name: Deploy
