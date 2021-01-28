@@ -104,12 +104,12 @@ In this mode, the 128T router will create a Linux bridge (of the form `kni<globa
 ```console
 # ip addr
 ...
-5: dpdk3: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master kni7_bridge state UP group default qlen 1000
+5: dpdk3: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast kni7_bridge state UP group default qlen 1000
     link/ether ee:43:6b:45:51:7e brd ff:ff:ff:ff:ff:ff
     inet6 fe80::ec43:6bff:fe45:517e/64 scope link
        valid_lft forever preferred_lft forever
 ...
-93: test-bridge: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast master kni7_bridge state UP group default qlen 1000
+93: test-bridge: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast kni7_bridge state UP group default qlen 1000
     link/ether ee:43:6b:45:51:7e brd ff:ff:ff:ff:ff:ff
 94: kni7_bridge: <BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
     link/ether ee:43:6b:45:51:7e brd ff:ff:ff:ff:ff:ff

@@ -66,7 +66,7 @@ install128t
 
 Follow the on-screen prompts to complete the installation and initialization process.
 Step-by-step instructions for the Installer wizard can be found in the
-[Installation Guide](intro_installation_installer#install-using-128t-installer).
+[Installation Guide](intro_installation_installer.md#install-using-128t-installer).
 
 ### Automated Mode
 

@@ -56,7 +56,7 @@ The 4.1.8 release is a superset of the 4.1.7 release. Features and corrections i
 
 - **I95-18857** Support for automatic loopback has been added to Sangoma T1 devices
 ------
-- **I95-33536** Fixed highway abort condition on shutdown with large number of peer paths
+- **I95-33536** Fixed highway terminate condition on shutdown with large number of peer paths
 
   _**Symptom:**_ highwayManager process aborts on shutdown or restart
 

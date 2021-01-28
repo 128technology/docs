@@ -6,7 +6,7 @@ sidebar_label: "AP: Salt Minion"
 This document describes the process for troubleshooting issues with Automated Provisioning (AP) using Salt.
 
 :::note
-The terms "master" and "conductor" are used interchangeably throughout this document. "Master" refers to the salt-master process running on conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting a 128T router. Minions are responsible for carrying out tasks on the host, given to it by the master.
+The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting a 128T router. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
 :::
 
 ## Symptoms
@@ -52,11 +52,11 @@ Mon 2019-08-26 19:45:12 EDT
 
 ## Root Cause
 
-At certain times some errors that are seen may be transient during periods of intermittent connectivity, or while the salt master corrects things found in the incorrect state on the minion. Errors that persist are often the result of issues with connectivity between the minion and conductor, or the minion timing out tying to complete tasks given to it by the master.
+At certain times some errors that are seen may be transient during periods of intermittent connectivity, or while the salt-master corrects things found in the incorrect state on the minion. Errors that persist are often the result of issues with connectivity between the minion and conductor, or the minion timing out tying to complete tasks given to it by the salt-master.
 
 ## Steps to Rectify
 
-Throughout the lifecycle of a 128T asset, some errors are normal and will clear on their own over time. The first steps are to ensure there is working connectivity between the minion and the master.
+Throughout the lifecycle of a 128T asset, some errors are normal and will clear on their own over time. The first steps are to ensure there is working connectivity between the minion and the salt-master.
 
 ### Diagnosing the issues
 
@@ -93,7 +93,7 @@ default via 169.254.127.126 dev kni254
 169.254.253.128/30 dev habr proto kernel scope link src 169.254.253.130 metric 425
 ```
 
-- Verify that the minion is successfully opening connections to the master on TCP port 4505 and 4506. For example, you can use the `ss` Linux utility to look for active sockets:
+- Verify that the minion is successfully opening connections to the salt-master on TCP port 4505 and 4506. For example, you can use the `ss` Linux utility to look for active sockets:
 
 ```
 [t128@host ~]$ sudo ss -ptn | grep -E '(4505|4506)'
@@ -101,7 +101,7 @@ ESTAB      0      162    169.254.127.127:39308              128.128.128.128:4506
 ESTAB      0      0      169.254.127.127:35024              128.128.128.128:4505                users:(("salt-minion",pid=5234,fd=19),("salt-minion",pid=5039,fd=19))
 ```
 :::note
-Connections on TCP port 4506 are transient, and only exist when the minion needs to report information back to the master. Seeing a none, or a varying number of connections being opened on TCP port 4506 is normal.
+Connections on TCP port 4506 are transient, and only exist when the minion needs to report information back to the salt-master. Seeing a none, or a varying number of connections being opened on TCP port 4506 is normal.
 :::
 
 - If you suspect network issues are impacting the minion's ability to function, you can further diagnose by verifying packets are flowing as expected on the wire using `tcpdump`. For example:
@@ -123,7 +123,7 @@ listening on any, link-type LINUX_SLL (Linux cooked), capture size 262144 bytes
 09:34:57.168641 IP 128.128.128.128.4506 > 169.254.127.127.39500: Flags [F.], seq 85, ack 500, win 219, options [nop,nop,TS val 2905330940 ecr 1874909798], length 0
 ```
 
-If the `salt-minion` does not appear to be attempting connections to master, or has healthy connections to conductor but continues to have persistent errors, you can try restarting `salt-minion`:
+If the `salt-minion` does not appear to be attempting connections to salt-master, or has healthy connections to conductor but continues to have persistent errors, you can try restarting `salt-minion`:
 
 ```
 sudo systemctl restart salt-minion

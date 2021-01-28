@@ -58,7 +58,7 @@ initialize128t
 
 Follow the on-screen prompts to complete the initialization process. Step-by-step
 instructions for the Initializer wizard can be found in the
-[Installation Guide](intro_installation_installer#initialize-the-128t-node).
+[Installation Guide](intro_installation_installer.md#initialize-the-128t-node).
 
 ### Automated Mode
 
