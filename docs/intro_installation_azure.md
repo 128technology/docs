@@ -342,7 +342,7 @@ Deploy the 128T Conductor using the Private image:
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-3. Once your subscription ID has been whitelisted, the following banner will display:
+3. Once your subscription ID has been allowlisted, the following banner will display:
 
 ![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
 
@@ -406,7 +406,7 @@ Deploy the 128T Session Smart Router using the Private image:
 
 ![Marketplace](/img/platforms_azure_portal_marketplace.png)
 
-3. Once your subscription ID has been whitelisted, the following banner will display:
+3. Once your subscription ID has been allowlisted, the following banner will display:
 
 ![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
 
