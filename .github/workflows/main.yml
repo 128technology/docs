@@ -41,14 +41,16 @@
        
        #- name: Test
        #  run: npm run check-links
-       - name: Broken Link Checker Action
-         uses: gaurav-nelson/github-action-markdown-link-check@v1
-         with:
-           use-verbose-mode: 'yes'
-           folder-path: 'docs'
+
+       #- name: Broken Link Checker Action
+       #  uses: gaurav-nelson/github-action-markdown-link-check@v1
+       #  with:
+       #    use-verbose-mode: 'yes'
+       #    folder-path: 'docs'
+           # check-modified-files-only: 'yes'
 
        - name: Deploy
          uses: peaceiris/actions-gh-pages@v3
          with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
-           publish_dir: build
+           publish_dir: ./build
