@@ -3,7 +3,7 @@ title: Tuning BFD Settings
 sidebar_label: Tuning BFD
 ---
 
-The BFD protocol is defined in [RFC 5880](https://www.google.com/url?q=https%3A%2F%2Ftools.ietf.org%2Fhtml%2Frfc5880&sa=D&sntz=1&usg=AFQjCNHL8lXLtB2Cn5e3P2dhlkzriL4JlA), which describes the basics of it's state machine. When two 128T routers are configured to be peered together, they will begin to send BFD packets to each other to establish peer reach-ability (UDP port 1280). The state will be "down" until a three-way BFD handshake occurs, in which case the state will transition to become "up."
+The BFD protocol is defined in [RFC 5880](https://tools.ietf.org/html/rfc5880), which describes the basics of it's state machine. When two 128T routers are configured to be peered together, they will begin to send BFD packets to each other to establish peer reach-ability (UDP port 1280). The state will be "down" until a three-way BFD handshake occurs, in which case the state will transition to become "up."
 
 Throughout the life cycle of the BFD peering relationship between 128T routers, two different kinds of BFD operating modes are used:
 
