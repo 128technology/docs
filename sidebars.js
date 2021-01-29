@@ -40,6 +40,7 @@ module.exports = {
     "Concepts": [
       "concepts_application_discovery",
       "concepts_appid",
+      "concepts_EthOverSVR",
       "concepts_ha_theoryofoperation",
       "concepts_interface_types",
       "concepts_kni",
