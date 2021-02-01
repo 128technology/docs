@@ -8,12 +8,8 @@ The Audiocodes M800 platform is among 128 Technology's certified platforms. Of i
 
 The M800 watchdog plugin is obtained from the official 128T software repository.
 
-:::important
-It is recommended to use the conductor GUI > Plugins page for installing plugins. This allows the system to select the correct version of plugin based on the 128T version.
-:::
-
-:::important
-After installing the plugin, the 128T service on the conductor should be restarted for the changes to take effect.
+:::note
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 ## Configuration

@@ -51,3 +51,4 @@ docker rmi docs_docusaurus
 
 At this point, you can now install any needed npm modules.  The next time docker starts
 they will be added to the newly instantiated container.
+
