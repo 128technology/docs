@@ -4,11 +4,12 @@ sidebar_lable: Learning VRF routes Via BGP
 ---
 
 128T uses the concept of Tenancy to provide L3 network segmentation. With the 5.1 release, support for learning VRF routes through BGP and the associated routing tables has been added.
+
 Virtual Routing and Forwarding (VRF) instances make it possible to maintain multiple routing tables with overlapping address spaces in one router. A single 128T router can support multiple VRF instances, and is able to establish BGP peering sessions within each VRF to receive and distribute VRF routes. When a 128T router is connected to more than one VPN, each VPN can become its own VRF, supporting overlapping addresses. This provides a much broader scope of L3 network paths.
 
 ## VRF Support
-To add VRF learning using BGP, add VRF objects to routing default-instance, and configure BGP as the routing protocol. This allows the 128T BGP instance to peer with a remote peer and learn routes for that particular VRF.
 
+To add VRF learning using BGP, add VRF objects to routing default-instance, and configure BGP as the routing protocol. This allows the 128T BGP instance to peer with a remote peer and learn routes for that particular VRF.
 
 ### Static Routes
 
@@ -22,7 +23,7 @@ When VRF static routes are redistributed into BGP (using redistribute static), o
 
 A 128T router does not have any VRF definitions associated with an interface. Instead, an interface can be assigned a tenant to denote all traffic coming from that interface to be classified as that tenant. The default behavior of a 128T router is to allow all tenants to access the global routing table.
 
-VRFs are a table of routes that are accessed by tenants. The VRF-Tenant mapping is used for redistributing connected routes and for mapping services. A tenant can only be mapped to one VRF - it can only use routes from one table. 
+VRFs are a table of routes that are accessed by tenants. The VRF-Tenant mapping is used for redistributing connected routes and for mapping services. A tenant can only be mapped to one VRF. 
 
 ### Subtenants
 
@@ -34,9 +35,9 @@ Service definitions remain the same, with prefixes/FQDN and access policies allo
 
 For information about configuring each of the following types of Service Mapping, please refer to the linked configuration procedure.
 
-Services with Different Tenants
-Single Service with multiple tenants associated with different VRFs
-Service with no tenant VRF association
+- [Services with Different Tenants](config_vrf_learning.md#services-with-different-tenants)
+- [Single Service with multiple tenants associated with different VRFs](config_vrf_learning.md#single-service-with-multiple-tenants-associated-with-different-vrfs)
+- [Service with no tenant VRF association](config_vrf_learning.md#service-with-no-tenant-vrf-association)
 
 ### Caveats 
 - BGP over SVR is not supported for the VRF BGP instances.  

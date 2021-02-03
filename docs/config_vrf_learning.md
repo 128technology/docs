@@ -1,6 +1,6 @@
 ---
-title: Configuring VRF Learning
-sidebar_lable: Configuring VRF Learning
+title: VRF Learning via BGP
+sidebar_lable: VRF Learning via BGP
 ---
 
 The following configuration procedures can be used to initiate VRF learning using BGP. 
@@ -8,6 +8,7 @@ The following configuration procedures can be used to initiate VRF learning usin
 ## Add VRF Objects 
 
 To add VRF learning using BGP, add VRF objects to routing default-instance, and configure BGP as the routing protocol. This allows the 128T BGP instance to peer with a remote peer and learn routes for that particular VRF.
+```
 router         Test
 	routing		default-instance
 		vrf		red
@@ -19,18 +20,19 @@ routing-protocol		bgp
  				neighbor
                     		neighbor-address  10.1.1.2
                     		neighbor-as       3000
-
+```
 In the example above, all routes learned via BGP will be installed within the VRF table Red. 
 
 ### VRF Support for Static Routes
 
 Static route configuration is configured in the respective VRF instance.
+```
 router         Test
     routing               default-instance
         vrf               red
             static-route      11.1.1.1/32 10
                 next-hop-interface  node1 wan5          
-
+```
 ### Redistributing Static Routes
 When VRF static routes are redistributed into BGP (using redistribute static), only the static routes within that VRF are redistributed into BGP. When BGP is configured outside a VRF directly under routing default-instance, the static routes from the global (default) route table are distributed. The static-route command is used to populate static routes in the respective VRF table.
 
@@ -43,6 +45,7 @@ Each Service prefix is matched against the routing table that corresponds to the
 
 ### Services with Different Tenants
 The VRF mapping below has a tenant per VRF, and there are 2 services; each with a different tenant access policy.
+```
 router         Test
     routing		default-instance
         vrf			red
@@ -57,6 +60,7 @@ Service  web
 Service  database
     address 10.1.1.0/24
     access-policy tenant eng
+```
 
 The prefix is the same for both the services, but service web is matched against the routes in VRF red, while service database is matched against routes in VRF blue. 
 FIB entries are installed for each tenant based on where the best match route is present in the respective VRF route table.
@@ -64,6 +68,7 @@ FIB entries are installed for each tenant based on where the best match route is
 ### Single Service with multiple tenants associated with different VRFs
 
 In this example the VRF mapping is the same but there is only one service with access to both tenants.
+```
 router         Test
     routing               default-instance
         vrf               red
@@ -74,6 +79,7 @@ Service  web
     address 10.1.1.0/24
     access-policy tenant finance
     access-policy tenant eng
+```
 
 With the VRF associations to a single service, the tenants (finance and eng) use the same prefix (10.1.1.0/24) but are looked up in different VRFs (red/finance, blue/eng). In this configuration the same service can lead to 2 different next hops for different tenants. 
 Note that in some special cases, this will not be supported initially (Please verify this)
