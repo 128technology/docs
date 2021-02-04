@@ -17,13 +17,14 @@ module.exports = {
 
       // Should we use the prefers-color-scheme media-query,
       // using user system preferences, instead of the hardcoded defaultMode
-      respectPrefersColorScheme: false,
+      respectPrefersColorScheme: true,
     },
     navbar: {
       title: 'Session Smart',
       logo: {
         alt: 'Juniper Logo',
         src: 'img/logo.svg',
+        srcDark: 'img/logo_dark.png'
       },
       items: [
         {to: 'docs/intro_getting_started', label: 'Docs', position: 'right'},
