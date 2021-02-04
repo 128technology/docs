@@ -122,6 +122,7 @@ module.exports = {
           "ts_mac_uniqueness",
           "ts_packet_capture",
           "ts_t1_troubleshooting",
+          "ts_troubleshooting_vrf",
         ],
       },
     ],
