@@ -18,6 +18,7 @@
   position: relative;
   overflow: hidden;
   background-color: #84B135;
+  color: #ffffff;
 }
 
 @media screen and (max-width: 966px) {
