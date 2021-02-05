@@ -7,7 +7,7 @@ sidebar_label: 4.5
 
 ### Resolved Issues
 
-- **I95-38833 BGP is not coming up on a WAN interface with Q-in-Q enabled:** Resolved an issue where a WAN interface with Q-in-Q enabled was incorrectly reading the VLAN tag from the outer VLAN header.
+- **I95-38833 Q-in-Q packets are not recognized when packets have non-zero DSCP value:** Resolved an issue where a WAN interface with Q-in-Q enabled was incorrectly reading the VLAN tag from the outer VLAN header.
 
 ## Release 4.5.4
 
