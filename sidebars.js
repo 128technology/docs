@@ -70,6 +70,7 @@ module.exports = {
           "config_dns_proxy",
           "config_ldap",
           "config_management_over_forwarding",
+          "config_EthoSVR",
 
           "config_ha",
           "config_dual_router_ha",
