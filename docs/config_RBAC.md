@@ -17,8 +17,28 @@ The default Admin role has access to all configuration options, and cannot be re
 
 At a high level, the process for creating access control is as follows. Each of the procedures are broken into deeper detail in individual sections. 
 
-- Create Resource Groups.
-- Populate Resource Groups with top-level items such as routers, tenants, and services. 
-- Create Roles.
+- Create Resource Groups
+- Create Roles
+- Assign Roles to Groups
+- Populate Resource Groups with resources; routers, tenants, and services
+
+- Create a Resource Group
+1. Under Administration, select Configuration.
+2. Under Configuration Home, select the Authority tile.
+3. In the Authority Settings window, scroll down to Resource Groups, and click ADD.
+4. Enter a name for the Resource Group, and click Save.
+5. Repeat this for as many Resource Groups as are required. 
+
+- Create a Role
+1. Scroll down to Access Management Roles.
+2. Click ADD.
+3. Name the new role. Use a name that identifies the role in some way, for example, EastCoast-Admin. 
+4. Assign the capabilities for each role. For example, user roles may only have read access to the resource, where an admin might have read and write access. Options are config-read, config-write, provisioning. 
+5. Repeat for additional roles.
+
 - Assign Roles to Groups.
+1. 
+
+- Populate Resource Groups with resources (routers, tenants, and services).
+
 - Assign Users to Roles and Groups. Users can be assigned to one or more groups, and have different roles in each group. 
