@@ -408,7 +408,13 @@ Completed in 0.10 seconds
 
 ## Release Notes
 
-### Release 2.0.4
+### Release 1.0.5, 2.0.5
+
+#### Issues Fixed
+
+- **PLUGIN-994** The `ipsec-client > remote-id` configuration is not being used correctly when generating the libreswan config.
+
+### Release 1.0.4, 2.0.4
 
 #### Issues Fixed
 
@@ -417,23 +423,7 @@ Completed in 0.10 seconds
 - **PLUGIN-336** Using the `vector-name` configuration option would generate invalid configuration.
 - **PLUGIN-400** Added a local subnet configuration option and enhanced the remote subnet configuration option to allow a list of values.
 
-### Release 2.0.1
-
-#### Issues Fixed
-
-- **PLUGIN-47** Created generic ipsec client plugin to provide connectivity to remote ipsec endpoints. This version supports a single client with up to two remote endpoints.
-
-### Release 1.0.4
-
-#### Issues Fixed
-
-- **PLUGIN-384** Added an MTU configuration option to the ipsec profile.
-- **PLUGIN-333** The `plugin-network` ip prefix setting in the configuration was ignored and would instead use the default ip prefix setting.
-- **PLUGIN-336** Using the `vector-name` configuration option would generate invalid configuration.
-- **PLUGIN-400** Added a local subnet configuration option and enhanced the remote subnet configuration option to allow a list of values.
-
-
-### Release 1.0.1
+### Release 1.0.1, 2.0.1
 
 #### Issues Fixed
 

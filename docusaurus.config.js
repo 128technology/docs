@@ -17,13 +17,14 @@ module.exports = {
 
       // Should we use the prefers-color-scheme media-query,
       // using user system preferences, instead of the hardcoded defaultMode
-      respectPrefersColorScheme: false,
+      respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Technology',
+      title: 'Session Smart',
       logo: {
-        alt: '128 Technology Logo',
-        src: 'img/128t_black.png',
+        alt: 'Juniper Logo',
+        src: 'img/logo.svg',
+        srcDark: 'img/logo_dark.png'
       },
       items: [
         {to: 'docs/intro_getting_started', label: 'Docs', position: 'right'},
@@ -32,7 +33,7 @@ module.exports = {
       ],
     },
     footer: {
-      copyright: `Copyright © ${new Date().getFullYear()} 128 Technology, Inc.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Juniper Networks, Inc.`,
     },
     algolia: {
       apiKey: '1ee0f6866243c8e25883eee3ce0708ce',

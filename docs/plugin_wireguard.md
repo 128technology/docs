@@ -616,19 +616,40 @@ Aug 05 14:32:40 dev-fitlet systemd[1]: Starting Handler for wireguard peer and n
 Aug 05 14:32:40 dev-fitlet node[32315]: '/etc/128technology/plugins/network-scripts/host/wg-profile-1/wg0.conf' written
 ```
 
+#### Wireguard not installed on the router
+In some cases, it is possible that the version of 128T router is not compatible with wireguard. In such a case you will see the log messages like below in the journal
+
+```
+Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[28707]: __main__ - Could not validate wireguard packages: Could not query package kmod-wireguard, Command '['rpm', '-q', 'kmod-wireguard']' returned non-zero exit status 1.
+```
+
+In some upgrade and rollback scenarios, it is possible that an older version of the module is installed on the router but that version is not compatible. Typically in such scenarios, a new version will be installed by the conductor but in some scenarios a compatible version might not be available. The following log messages in the journal can help troubleshoot these errors.
+
+```
+Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - Running startup check commands for ns: wg-profile-1
+Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - Executing command: ['/usr/libexec/wireguard/startup-check']
+Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[28707]: __main__ - Could not validate wireguard packages: Invalid kmod-wireguard for kernel version 3.10.0-1160.el7
+Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starting wg-profile-1: startup check error: Command '['/usr/libexec/wireguard/startup-check']' returned non-zero exit status 1.
+```
 
 ## Release Notes
+
+### Release 1.2.0
+
+- **PLUGIN-922** Support multiple kernel versions for 128T Wireguard plugin and allow for graceful upgrade and rollback of the 128T software releases. The enhancement currently supports the following kernel versions: `3.10.0-1062.9.1`, `3.10.0-1127.18.2`, `3.10.0-1160`, and `3.10.0-1160.6.1`.
+
+### Caveat
+- **PLUGIN-987** A 128T software downgrade might fail when the currently installed wireguard kernel module and the new kernel being downgraded to are not compatible. The following procedure may be used to work around this issue
+
+:::caution
+The process below will cause the wireguard tunnels to be torn down and the peers to disconnect. Please perform the operations during a maintenance window only.
+:::
+
+  - Create a backup of the current running configuration to be restored later.
+  - Before rolling back the 128T version, remove all references to `wireguard-profile` from `authority > router > device-interface > network-interface > address`. Once these changes are committed, the wireguard rpms will be removed from the router.
+  - Rollback the 128T software to the desired version.
+  - Restore the backup created in the first step. Once the changes are committed, the correct wireguard rpm's will be installed on the router.
 
 ### Release 1.1.0
 
 - **PLUGIN-863** A kernel panic condition occurs when running Wireguard with the kernel version `3.10.0-1127.18.2` or above.
-
-### Caveat
-- **PLUGIN-922** Wireguard does not work with the kernel version `3.10.0-1160` (and newer), which is installed with 128T versions 4.3.11 (and greater) and 4.5.3 (and greater).
-
-### Release 1.2.0
-
-- **PLUGIN-922** 128T Wireguard solution will now be compatible with multiple kernel versions which cover a majority of 128T releases. The enhancement currently supports the following kernel versions: `3.10.0-1062.9.1`, `3.10.0-1127.18.2`, `3.10.0-1160`, and `3.10.0-1160.6.1`.
-
-### Caveat
-- **PLUGIN-987** Wireguard requires manual removal of the installed kmod-wireguard rpm before initiating a 128T rollback where the active kernel version changes.

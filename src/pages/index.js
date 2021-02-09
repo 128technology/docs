@@ -12,7 +12,7 @@ const features = [
     link: 'docs/about_128t',
     description: (
       <>
-        Software Releases, policy and contribution guidelines
+        Software Releases, policies, and contribution guidelines
       </>
     ),
   },
@@ -108,10 +108,10 @@ function Home() {
   return (
     <Layout
       title={`Home`}
-      description="The source for documentation of the 128 Technology Networking Platform.">
+      description="The source for documentation of the 128T Session Smart Routing Platform.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <div className="heroTitle">128T Networking Platform</div>
+          <div className="heroTitle">Session Smart Router</div>
           <p className="hero__subtitle">Product Docs</p>
         </div>
       </header>
@@ -120,15 +120,15 @@ function Home() {
           <div className="container">
             <div className="row">
               <div className={classnames('col col--4', styles.feature)}>
-                <p>128T is an innovative software router built around the services which matter.</p>
+                <p>The 128T Session Smart platform is an innovative software router, built around the services that matter.</p>
 
-                <p>Deliver your sessions tunnel-free, with Secure Vector Routing.
-                Segment and secure your endpoints with network tenancy.
-                Automate using the APIs of a routing platform made with modern software.
-                128T Docs is your guide to the platform's features and capabilities.
+                <p>Deliver your sessions tunnel-free with Secure Vector Routing.
+                Segment and secure your endpoints with Network Tenancy.
+                Automate using the APIs of a routing platform developed with modern software.
+                This Docs Repository is your guide to optimizing the Session Smart Router's features and capabilities.
                 </p>
 
-                <p>Get started building services with a 128T router that understands them.</p>
+                <p>Get started now building services with the 128T Session Smart Router.</p>
               </div>
               <div className={classnames('col col--8', styles.feature)}>
                 <img src="/img/128t-components.png" alt="128T Networking Platform" />

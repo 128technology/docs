@@ -1,0 +1,21 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^mailto:"
+    },
+    {
+      "pattern": "^https://tools.ietf.org"
+    }
+  ],
+  "replacementPatterns": [
+    {
+      "pattern": "^/img/",
+      "replacement": "../static/img/"
+    }
+  ],
+  "timeout": "15s",
+  "retryOn429": true,
+  "retryCount": 5,
+  "fallbackRetryDelay": "30s",
+  "aliveStatusCodes": [200, 206]
+}

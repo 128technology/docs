@@ -2,33 +2,35 @@ module.exports = {
   "docs": {
     "About": [
       "about_128t",
+      "about_svr_savings",
       "about_releases",
       "about_support_policy",
       "about_supported_platforms",
       "about_certified_platforms",
       "about_security_policy",
-      "about_svr_savings",
+      "about_services_description",
       "CONTRIBUTING",
     ],
     "Introduction": [
       "intro_getting_started",
      ],
-    "Deployment Considerations": [   
+    "Deployment Considerations": [
       "intro_system_reqs",
      ],
-    "Installation Process": [       
+    "Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
-      "intro_installation_bootable_media", 
+      "intro_installation_bootable_media",
       "intro_basic_conductor_config",
       "intro_basic_router_config",
       "intro_otp_iso_install",
       ],
-    "Cloud Installations":[ 
+    "Cloud Installations":[
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
-      "intro_installation_azure", 
+      "intro_installation_azure",
+      "intro_initialize_HA_conductor",
     ],
     "Supporting Information - Appendix":[
       "intro_installation_installer",
@@ -48,6 +50,7 @@ module.exports = {
       "concepts_machine_communication",
       "concepts_pcli",
       "concepts_session_timer",
+      "concepts_STEP",
       "concepts_waypoint_ports",
       "concepts_glossary",
     ],
@@ -66,19 +69,29 @@ module.exports = {
           "config_dns_proxy",
           "config_ldap",
           "config_management_over_forwarding",
+
           "config_ha",
           "config_dual_router_ha",
           "config_non_forwarding_ha_interfaces",
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
+          
           "config_nat",
           "config_ospf",
           "config_rate_limiting",
           "config_snmp",
           "config_snmp_metrics",
           "config_static_hostname_mapping",
+          "config_STEP",
           "config_tenants",
           "config_templates",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Security",
+        "items": [
+          "sec_adaptive_encrypt",
         ],
       },
       {
@@ -139,6 +152,8 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_intro",
+      "plugin_bgp_community_services",
+      "plugin_cloud_ha",
       "plugin_dns_app_id",
       "plugin_dns_cache",
       "plugin_gre",
@@ -148,8 +163,8 @@ module.exports = {
       "plugin_m800_watchdog",
       "plugin_monitoring_agent",
       "plugin_mosh",
+      "plugin_set_hostname",
       "plugin_sip_alg",
-      "plugin_kni_namespace_scripts",
       "plugin_wireguard",
     ],
     "REST APIs": [
@@ -160,6 +175,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes_128t_5.0",
           "release_notes_128t_4.5",
           "release_notes_128t_4.4",
           "release_notes_128t_4.3",

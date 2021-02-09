@@ -51,13 +51,13 @@ The 128 Technology ISOs are desiged to be installed on both BIOS and uEFI partit
 
 ## Creating a CDROM/DVD
 
-For systems with an onboard optical drive, it may be preferable to write the ISO to a CD, DVD, or BlueRay disk. There are many tools available on the major platforms to write ISOs to optical discs, suck as K3b, Disco, etc. Those procedures are not addressed here. 
+For systems with an onboard optical drive, it may be preferable to write the ISO to a CD, DVD, or BlueRay disk. There are many tools available on the major platforms to write ISOs to optical discs, such as K3b, Disco, etc. Those procedures are not addressed here. 
 
 ## Disk Cloning
 
-Multiple installations can be performed quickly and efficiently using Disk Cloning. After the initial ISO installation and power off, the platform is generic and can be cloned to a bootable USB to create a master copy of that platform. 
+Multiple installations can be performed quickly and efficiently using Disk Cloning. After the initial ISO installation and power off, the platform is generic and can be cloned to a bootable USB to create a copy of that platform. 
 :::note
-When using cloned images, an identical hardware platform must be used. Create a new master image for each hardware variation.
+When using cloned images, an identical hardware platform must be used. Create a new image for each hardware variation.
 :::
 The cloned platform disk is then used to install the filesystem and 128T software on any number of other identical hardware platforms. 
 
