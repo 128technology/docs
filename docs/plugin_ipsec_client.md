@@ -412,9 +412,9 @@ Completed in 0.10 seconds
 
 ### Issues Fixed
 
-- **PLUGIN-1057** Ensure all critical ipsec-client directories are created during installation of the plugin.
-- **PLUGIN-1053** Added an inactive ipsec-client plugin state to allow seamless migration from zscaler. The inactive state is achieved by excluding `ipsec-client` from the configuration.
-- **PLUGIN-1046** Provide ipsec-client auto-upgrade capability while crossing the 128T version `4.3.0` boundary.
+- **PLUGIN-1057** Ensure all critical IPsec client directories are created during installation of the plugin.
+- **PLUGIN-1053** Added an inactive IPsec client plugin state to allow seamless migration from zscaler. The inactive state is achieved by excluding `ipsec-client` from the configuration.
+- **PLUGIN-1046** Provide IPsec client auto-upgrade capability while crossing the 128T version `4.3.0` boundary.
 
 ### Release 1.0.5, 2.0.5
 
@@ -435,4 +435,4 @@ Completed in 0.10 seconds
 
 #### Issues Fixed
 
-- **PLUGIN-47** Created generic IPsec client plugin to provide connectivity to remote IPsec endpoints. This version supports a single client with up to two remote endpoints.
+- **PLUGIN-47** Created generic IPsec client plugin to provide connectivity to remote ipsec endpoints. This version supports a single client with up to two remote endpoints.
