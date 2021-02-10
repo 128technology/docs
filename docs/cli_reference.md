@@ -7253,6 +7253,93 @@ Completed in 0.17 seconds
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
 
+## `show service`
+
+Displays run-time data of each service on a router.
+
+#### Usage
+
+```
+show service [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [{detail}] router <router> node <node>
+```
+#### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| contains-service-name | The partial substring match for which to display the service path |
+| detail | Display detail info of service path |
+| hierarchy-service-name | The hierarchy root for which to display the service path |
+| node | The node for which to display service path |
+| router | The router for which to display the service path |
+| service-name | The exact service name for which to display the service path |
+
+#### Example 1 Summary
+```
+show service
+
+Service         Prefixes           Transport        Access     Sessions    Service-Policy   State       Tx Bandwidth     Rx Bandwidth
+
+Web             10.0.0.0/8         Http, Https      Red, Blue     10          policy1       Excellent      1.2Kb/s         1.2Kb/s
+                11.0.0.0/8                                                                                                                           
+
+Database        12.0.0.1/32        TCP/8000         Blue          20          policy3       Degraded       3.4Kb/s         1.2Kb/s
+
+Internet        0.0.0.0/0          Http, Https      Green         10          policy2       Excellent      1.0Gb/s         2.2Kb/s
+
+Login           10.2.2.2/32        Ssh              Red, Green    2           policy2       Unavailable    1.0kb/s         4.2Kb/s
+
+SIP             10.2.3.3.0/24      SIP              Blue          0           None          Unavailable    0.0Kb/s         1.52Kb/s
+
+WAP             10.2.4.0/24        UDP[1000-1500]   Global        1           None          Excellent      1.2Kb/s         1.2Kb/s
+
+```
+The fields are defined as follows: 
+
+- Service: Name of Service.
+- Prefixes: List of prefixes associated with the service.
+- Transport: Protocol name (SIP, SSH, etc.), or raw protocol and port.
+- Access: List of configured access policies.
+- Sessions: Total number of sessions for this service.
+- Service-Policy: Name of service-policy associated with this service.
+- State: Indicates the quality of the service, whether it is excellent, degraded, or unavailable.
+- Bandwidth: Bandwidth consumed by the service.
+
+
+#### Example 2 Detail
+```
+show service service-name Web detail
+
+Service Web
+
+Prefix:          10.0.0.0/8, 11.0.0.0/8 
+Auto-generated : Yes (Router)
+Transport      : HTTP, HTTPS
+Access         : Red, Blue
+Sessions       : 10
+Service-Policy : policy1
+State          : Excellent
+Tx Bandwidth   : 1.2Kb/s
+Rx Bandwidth   : 1.2Kb/s
+Enabled        : Yes
+NextHop Type   : SVR, Local Service-Route
+Traffic Class  : HIgh, Low, Medium, Best-Effort
+Service-routes : web-route1, web-route2, peer-route2
+Service-Paths  : 
+   Node 1:
+     Up Paths: Peer1, Peer2, Lan1
+    Down Paths: Lan2
+   Node 2: 
+     Up Paths: Peer1, Peer2, Lan1
+     Down Paths: Lan2
+
+```
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.1.0   | Detail fields added: Enabled, NextHop Type, Traffic Class, Service Routes |
+
 ## `show service-path`
 
 Displays service path information at the specified node.
@@ -7267,17 +7354,117 @@ show service-path [{service-name <name> | hierarchy-service-name <name> | contai
 
 | name | description |
 | ---- | ----------- |
-| contains-service-name | The partial substring match to show service path for |
+| contains-service-name | The partial substring match for which to display the service path |
 | detail | Display detail info of service path |
-| hierarchy-service-name | The hierarchy root to show service path for |
+| hierarchy-service-name | The hierarchy root for which to display the service path |
 | node | The node for which to display service path |
-| router | The router for which to display service path |
-| rows | The number of service path to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| service-name | The exact service name to show service path for |
+| router | The router for which to display the service path |
+| rows | The number of service paths to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| service-name | The exact service name for which to display the service path |
 
 #### Description
 
-The _show service-path_ command display active service paths passing through the 128T router. The output is useful for figuring out where sessions belonging to a particular service would egress, during troubleshooting. This command has multiple service filters allowing target to specific service or services. Output can be displayed in summary or in detail view with pagination support.
+The _show service-path_ command displays active service paths passing through the 128T router. The output is useful in troubleshooing to determine where sessions belonging to a particular service would egress. The multiple service filters allow you to target a specific service or services. The output can be displayed as a summary or in a detail view with pagination support. When using the detail argument, in-path metrics are managed by the performance monitor when enabled. If the performance monitor is not enabled, the local metrics generated by BFD are used. 
+
+#### Example 1 Summary
+```
+show service-path
+
+Service    Service-route     Type              Destination  Next-Hop  Interface  Vector  Cost  Rate  Capacity        State
+
+Web        web-route1        service-agent     4.4.4.4      1.1.1.2     lan        red     10    1    200/3000       Up*
+Web        web-route1        service-agent     4.4.4.4      1.1.1.3     lan        red     10    1    200/3000       Up
+Web        web-route2        service-agent     5.5.5.5      2.2.2.2     lan       blue     20    2    50/unlimited   Down
+Login      <None>            BgpOverSVR        10.1.1.1     1.2.3.4     wan        red     10    3        -          Up
+Login      <None>            BgpOverSVR        11.1.1.1     1.2.3.4     wan        red     10    1        -          Up
+App1       <None>            Routed                -           -         -          -      -     -        -          -
+App1       learned-routed    Routed                -           -         -          -      -     -        -          -
+
+
+```
+#### Example 2 Detail
+```
+show service-path service-name web detail
+==============
+ Service: web
+==============
+  Service-Route:    web-route1
+  Type:                    service-agent
+  Destination:         4.4.4.4
+  Next-Hop:            1.1.1.2, Lan(Up)
+  Peer:                    unavailable
+  Path-Metrics:
+     High
+         TCP:  latency [5ms] loss [3] jitter [2ms]
+         TLS:  latency [3ms] loss [3] jitter [2ms]
+         UDP:  latency [4ms] loss [2] jitter [0ms]
+         ICMP: latency [3ms] loss [2] jitter [0ms]
+     Medium
+         TCP:  latency [200ms] loss [200] jitter [200ms] (Exceeds maximum latency of 100ms)
+         TLS:  latency [100ms] loss [100] jitter [100ms]
+         UDP:  latency [100ms] loss [100] jitter [100ms]
+         ICMP: latency [100ms] loss [100] jitter [100ms]
+     Low
+         TCP:  latency [0ms] loss [0] jitter [0ms]
+         TLS:  latency [0ms] loss [0] jitter [0ms]
+         UDP:  latency [0ms] loss [0] jitter [0ms]
+         ICMP: latency [0ms] loss [0] jitter [0ms]
+     Best-Effort
+         TCP:  latency [0ms] loss [0] jitter [0ms]
+         TLS:  latency [0ms] loss [0] jitter [0ms]
+         UDP:  latency [0ms] loss [0] jitter [0ms]
+         ICMP: latency [0ms] loss [0] jitter [0ms]
+  Vector:                   Red
+  Cost:                     10
+  Rate:                     1
+  Capacity:               200/3000
+  Index:                    17
+  Meets-SLA:           No
+  Reachability-Probes: N/A
+
+  Service-Route:    web-route1
+  Type:                    service-agent
+  Destination:         4.4.4.4
+  Next-Hop:            1.1.1.3, Lan(Down)[Gateway Arp unresolved)
+  Peer:                    unavailable
+  Path-Metrics:
+     High
+         TCP:  latency [0ms] loss [0] jitter [0ms]
+         TLS:  latency [0ms] loss [0] jitter [0ms]
+         UDP:  latency [0ms] loss [0] jitter [0ms]
+         ICMP: latency [0ms] loss [0] jitter [0ms]
+     Medium
+         TCP:  latency [0ms] loss [0] jitter [0ms]
+         TLS:  latency [0ms] loss [0] jitter [0ms]
+         UDP:  latency [0ms] loss [0] jitter [0ms]
+         ICMP: latency [0ms] loss [0] jitter [0ms]
+     Low
+         TCP:  latency [0ms] loss [0] jitter [0ms]
+         TLS:  latency [0ms] loss [0] jitter [0ms]
+         UDP:  latency [0ms] loss [0] jitter [0ms]
+         ICMP: latency [0ms] loss [0] jitter [0ms]
+     Best-Effort
+         TCP:  latency [0ms] loss [0] jitter [0ms]
+         TLS:  latency [0ms] loss [0] jitter [0ms]
+         UDP:  latency [0ms] loss [0] jitter [0ms]
+         ICMP: latency [0ms] loss [0] jitter [0ms]
+  Vector:                   Red
+  Cost:                      10
+  Rate:                      1
+  Capacity:               200/3000
+  Index:                    18
+  Meets-SLA:           Yes
+  Reachability-Probes: 
+               TestProbe1: Up
+               TestProbe2: Down
+
+```
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.1.0   | Detail fields added: Next-hop, Peer, Path-Metrics, Index, Meets-SLA, Reachability-Probes |
 
 ## `show session-captures`
 
