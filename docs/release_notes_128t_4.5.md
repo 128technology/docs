@@ -3,6 +3,12 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
+## Release 4.5.5
+
+### Resolved Issues
+
+- **I95-38833 Q-in-Q packets are not recognized when packets have non-zero DSCP value:** Resolved an issue where a WAN interface with Q-in-Q enabled was incorrectly reading the VLAN tag from the outer VLAN header.
+
 ## Release 4.5.4
 
 ### Resolved Issues
