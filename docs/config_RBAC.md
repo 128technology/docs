@@ -17,11 +17,11 @@ The default Admin role has access to all configuration options, and cannot be re
 
 - Create Resource Groups
 
-A Resource Group is the name that identifies a set of resources. Resources and Access Management Roles are assigned to a Resource Group.
+A Resource Group identifies a set of resources. One or more Resource Groups are assigned to an Access Management Role.
 
 - Create Access Management Roles
 
-An Access Management Role identifies the type of user in a Resource Group; typically named for the role (user or administrator), and some identification of the group (geographical, type of resource, office name, etc.). Roles are assigned capabilities or actions they can perform; read, write, and provision. 
+An Access Management Role identifies the type of user - administrator or user. Roles are assigned capabilities or actions they can perform; read, write, and provision. Provisioning allows users to perform software lifecycle management duties, such as download software, upgrade existing installations, etc.
 
 After the Access Management Role is created/named, the process is as follows:
 - Assign Cababilities to the Access Management Role. 
