@@ -5045,28 +5045,35 @@ Completed in 0.08 seconds
 
 ## `show fib`
 
-Shows current fib entries at the specified node
+Shows current fib entries at the specified node.
 
 #### Usage
 
 ```
-show fib [rows <rows>] [force] [node <node>] router <router>
+show fib service-name <name> | hierarchy-service-name <name> | contains-service-name <name>} prefix <prefix> source-address <source-IP> source-interface <interface-name> tenant <tenant-name> [{detail}] rows <rows>] [force] router <router> node <node>  
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| contains-service-name | Partial substring match to display FIB entries |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| heirarchy-service-name | Use the heirarchy root to filter FIB entries |
 | node | The node from which to retrieve fib entries |
+| prefix | Filter the results by prefix |
 | router | The router from which to retrieve fib entries |
 | rows | The number of fib nodes to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| service-name | Filter the results by the service name |
+| source-address | Show FIB results filtered by source-address |
+| source-interface | Show FIB results filtered by source-interface |
+| tenant | Show FIB results filtered by tenant |
 
 #### Description
 
 This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the &lt;node-name&gt; argument. The output may be limited to a specified number of rows by adding the optional _&lt;rows&gt;_ modifier at the end of the command.
 
-This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the &lt;rows&gt; modifier.
+This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the &lt;rows&gt; modifier. 
 
 #### Example
 
@@ -5115,6 +5122,7 @@ Capacity:    19051
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 3.0.0   | Added _node_ keyword to enforce PCLI consistency |
+| 5.1.0   | Added next hop details and the ability to filter by: service-name, heirarchy-service-name, contains-service-name, prefix, source-address, source-interface, and tenant. |
 
 ## `show history`
 
