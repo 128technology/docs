@@ -113,12 +113,17 @@ VRF serves as a routing table for each tenant to ensure that there is a route to
 ## Show Commands
 The following show commands have been extended to specify a `vrf-name`. For specific use examples, refer to the linked section in the Command Line Reference guide.
 
-```
-show bgp vrf <vrf-name> [<route>]
-show bgp summary vrf <vrf-name>
-show bgp neighbors vrf <vrf-name> [<neighbor-ip>] [<option>]
-show rib vrf <vrf-name> [<route>]
-show fib vrf <vrf-name>
-show vrf
-clear bgp vrf <vrf-name>  [{in | out | soft}] <neighbor>
-```
+[`show bgp`](cli_reference.md#show-bgp)
+
+[`show bgp neighbors`](cli_reference.md#show-bgp-neighbors)
+
+[`show bgp summary`](cli_reference.md#show-bgp-summary)
+
+[`show fib`](cli_reference.md#show-fib)
+
+[`show rib`](cli_reference.md#show-rib)
+
+[`show vrf`](cli_reference.md#show-vrf)
+
+[`clear bgp vrf`](cli_reference.md#clear-bgp)
+

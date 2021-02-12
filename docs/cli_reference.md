@@ -8153,12 +8153,9 @@ LDAP server is configured and online
 Displays details about all configured VRF's. 
 
 #### Usage
-
 ```
 show vrf <vrf-name>
-
 ```
-
 #### Description 
 
 Provides details about all configured VRF’s including the tenants, network-interfaces, and routing-interfaces in each VRF. Use to verify whether the configuration was specified correctly and resulted in the desired VRF state.
