@@ -1,11 +1,11 @@
 ---
 title: Troubleshooting VRF
-sidebar_lable: Troubleshooting VRF
+sidebar_label: Troubleshooting VRF
 ---
 
 ## Linux Kernel State
 
-Any configured VRF will be present as a VRF table in the Linux kernel within the routingEngine namespace. A VRF in the kernel is represented by a pseudo interface of type “vrf”. Any network interface associated with the VRF (via its tenant) is represented by a kernel interface that is linked to the vrf pseudo interface:
+Any configured VRF will be present as a VRF table in the Linux kernel within the routingEngine namespace. A VRF in the kernel is represented by a pseudo interface of type “vrf”. Any network interface associated with the VRF (via its tenant) is represented by a kernel interface that is linked to the VRF pseudo interface:
 ```
 [root@t190-dut2 ~]# ip netns exec routingEngine ip link show type vrf
 4: vrfA: <NOARP,MASTER,UP,LOWER_UP> mtu 65536 qdisc noqueue state UP mode DEFAULT group default qlen 1000

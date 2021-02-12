@@ -1,6 +1,6 @@
 ---
 title: VRF Learning via BGP
-sidebar_lable: VRF Learning via BGP
+sidebar_label: VRF Learning via BGP
 ---
 
 The following configuration procedures can be used to initiate VRF learning using BGP. 
@@ -41,7 +41,7 @@ When VRF static routes are redistributed into BGP (using `redistribute-static`),
 
 128T routers use Tenants to segment L3 traffic in the forwarding plane. VRF provides L3 segmentation at the routing layer. A 128T router does not have any VRF definitions associated with an interface. Instead, an interface can be assigned a tenant to denote all traffic coming from that interface to be classified as that tenant. The VRF-Tenant mapping is used for redistributing connected routes and for mapping services.
 
-Use the following example to create a basic configuration for mapping a tenant to a vrf:
+Use the following example to create a basic configuration for mapping a tenant to a VRF:
 ```
     router Test
         routing default-instance

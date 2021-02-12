@@ -1,6 +1,6 @@
 ---
 title: Learning VRF routes Via BGP
-sidebar_lable: Learning VRF routes Via BGP
+sidebar_label: Learning VRF routes Via BGP
 ---
 
 128T uses the concept of Tenancy to provide L3 network segmentation. With the 5.1 release, support for learning VRF routes through BGP and the associated routing tables has been added.
