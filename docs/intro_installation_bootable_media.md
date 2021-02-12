@@ -22,9 +22,13 @@ After imaging the ISO onto removable media, insert it into the target machine an
 
 ### Choose the Installation Type
 
-Upon boot, you are prompted with the following screen for the Linux installation:
+For earlier versions of 128T Software (prior to 5.0.0) upon boot you are prompted with the following screen for the Linux installation:
 
-![Boot Screen](/img/intro_installation_bootable_media_boot.png)
+![Boot Screen](/img/intro_install_LegacyInstall.png)
+
+Installations of 128T Version 5.0.0 and later will display the following Linux installation screen:
+
+![Nes Boot Screen](img/intro_install_OTPInstall_1.png)
 
 :::note
 Not all hardware has video support, therefore booting to console is the default (a console user may not be able to select an option). The default option is selected after a 30 second timeout.
