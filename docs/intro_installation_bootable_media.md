@@ -22,25 +22,25 @@ After imaging the ISO onto removable media, insert it into the target machine an
 
 ### Choose the Installation Type
 
-For earlier versions of 128T Software (prior to 5.0.0) upon boot you are prompted with the following screen for the Linux installation:
+Earlier versions of 128T Software (prior to 5.0.0) display the following Linux installation screen:
 
 ![Boot Screen](/img/intro_install_LegacyInstall.png)
 
-Installations of 128T Version 5.0.0 and later will display the following Linux installation screen:
+Installations of 128T Version 5.0.0 and later display the following Linux installation screen:
 
-![Nes Boot Screen](img/intro_install_OTPInstall_1.png)
+![New Boot Screen](/img/intro_install_OTPInstall_1.png)
 
 :::note
 Not all hardware has video support, therefore booting to console is the default (a console user may not be able to select an option). The default option is selected after a 30 second timeout.
+
+Selecting the wrong type of console (Serial or VGA) may result in garbage characters being displayed and the install hanging. If this is the case, reboot the target system and select the correct line for the target hardware.
 ::: 
 
 #### 128T System via Serial Console
 
-Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer.
+Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer. 
 
-:::note
-Selecting the wrong type of console may result in garbage characters being displayed and the install hanging. If this is the case, reboot the target system and select the correct line for the target hardware.
-::: 
+The serial screen size must be a minimum of 80x25, otherwise the output is not readable. If the output becomes unreadable, exit the console, reconnect, and use ^L to repaint the screen. 
 
 #### 128T System with VGA Console
 
