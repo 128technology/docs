@@ -7427,9 +7427,7 @@ show service-path service-name web detail
   Rate:                     1
   Capacity:               200/3000
   Index:                    17
-  Meets-SLA:           No
-  Reachability-Probes: N/A
-
+ 
   Service-Route:    web-route1
   Type:                    service-agent
   Destination:         4.4.4.4
@@ -7461,18 +7459,14 @@ show service-path service-name web detail
   Rate:                      1
   Capacity:               200/3000
   Index:                    18
-  Meets-SLA:           Yes
-  Reachability-Probes: 
-               TestProbe1: Up
-               TestProbe2: Down
-
+ 
 ```
 
 #### Version History
 
 | Release | Modification                |
 | ------- | ----------------------------|
-| 5.1.0   | Detail fields added: Next-hop, Peer, Path-Metrics, Index, Meets-SLA, Reachability-Probes |
+| 5.1.0   | Detail fields added: Next-hop, Peer, Path-Metrics, Index |
 
 ## `show session-captures`
 
