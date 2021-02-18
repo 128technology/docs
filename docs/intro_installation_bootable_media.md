@@ -22,13 +22,15 @@ After imaging the ISO onto removable media, insert it into the target machine an
 
 ### Choose the Installation Type
 
-Earlier versions of 128T Software (prior to 5.0.0) display the following Linux installation screen:
+Earlier versions of 128T Software (prior to 5.0.0) display the following Linux installation screen when booting to a serial console:
 
 ![Boot Screen](/img/intro_install_LegacyInstall.png)
 
-Installations of 128T Version 5.0.0 and later display the following Linux installation screen:
+Installations of 128T Version 5.0.0 and later display the following Linux installation screen when booting to a serial console:
 
 ![New Boot Screen](/img/intro_install_OTPInstall_1.png)
+
+Systems with VGA support will display the 128 Technology logo above the list of installation options. 
 
 :::note
 Not all hardware has video support, therefore booting to console is the default (a console user may not be able to select an option). The default option is selected after a 30 second timeout.
@@ -71,23 +73,31 @@ If you installed using One Touch Provisioning, power the system up to complete t
 
 ## Initialize the 128T Node
 
-The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched after the installation reboot.
+The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched after the installation reboot. The Serial console displays an initial screen (VGA console does not require this input).
+
+![Network Manager TUI](/img/Initializer_Serial1.png)
+
+Use the up or down keyboard arrows to select *Edit a connection*.
 
 1. On the 128T Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the 128T node and press the **Enter** key to select **OK**.
-  ![128T Role](/img/intro_install_initializer_role.png)
+
+  ![128T Role](/img/initializer_Serial2.png)
 
 2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, Enter their administrative addresses here, and this node will retrieve its configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
 3. When asked _What kind of Router node is this?_, select from the following options:
 
-  ![Identify the Node](/img/intro_install_initializer_HASetup.png)
+  ![Identify the Node](/img/initializer_Serial3.png)
 
 - **Standalone:** This router has no highly available peer, and is not currently planned for high availability.
 - **1st HA Node:** This router is the first node of a high availability pair. You will be prompted for the High Availability address of this node. Note: The address _must_ be reachable by the 2nd HA Node.
+
+  ![HA Address](/img/initializer_Serial4.png)
+
 - **2nd HA Node:** This router is the second node of a high availability pair, where the first node has been initialized. You will be prompted for the High Availability address of the first node.
 
 4. Enter the following system properties on the Node Info screen:
 
-   ![Node Information](/img/intro_install_initializer_nodeinfo.png)
+   ![Node Information](/img/initializer_Serial5.png)
 
 - **Node Name:** The unique name of the system within your 128T Router or Conductor, for example _labsystem1_. By default this field uses the Linux system's hostname.
   :::note
@@ -107,7 +117,7 @@ The 128T Initializer tunes your operating system, prepares the platform to run t
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
 
-  ![Password Setup](/img/intro_install_initializer_password.png)
+  ![Password Setup](/img/initializer_Serial6.png)
 
 7. If presented with the **Anonymous Data Collection** screen, select either **Accept** or **Disable** to enable or disable the process that measures the health of your 128T router and components.
 
