@@ -7268,37 +7268,42 @@ Displays run-time data of each service on a router.
 #### Usage
 
 ```
-show service [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [{detail}] router <router> node <node>
+show service [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [{detail}] router <router> node <node> [<verbosity>]
 ```
 #### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
 | contains-service-name | The partial substring match for which to display the service path |
-| detail | Display detail info of service path |
 | hierarchy-service-name | The hierarchy root for which to display the service path |
 | node | The node for which to display service path |
 | router | The router for which to display the service path |
 | service-name | The exact service name for which to display the service path |
 
+#### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | Display detailed information for the service |
+
 #### Example 1 Summary
 ```
 show service
 
-Service         Prefixes           Transport        Access     Sessions    Service-Policy   State       Tx Bandwidth     Rx Bandwidth
+Service         Prefixes           Transport        Access     Service-Policy   State         Sessions      Tx Bandwidth     Rx Bandwidth
 
-Web             10.0.0.0/8         Http, Https      Red, Blue     10          policy1       Excellent      1.2Kb/s         1.2Kb/s
+Web             10.0.0.0/8         Http, Https      Red, Blue    policy1       Excellent        10            1.2Kbps         1.2Kbps
                 11.0.0.0/8                                                                                                                           
 
-Database        12.0.0.1/32        TCP/8000         Blue          20          policy3       Degraded       3.4Kb/s         1.2Kb/s
+Database        12.0.0.1/32        TCP/8000         Blue         policy3       Degraded         20            3.4Kbps         1.2Kbps
 
-Internet        0.0.0.0/0          Http, Https      Green         10          policy2       Excellent      1.0Gb/s         2.2Kb/s
+Internet        0.0.0.0/0          Http, Https      Green        policy2       Excellent        10            1.0Gbps         2.2Kbps
 
-Login           10.2.2.2/32        Ssh              Red, Green    2           policy2       Unavailable    1.0kb/s         4.2Kb/s
+Login           10.2.2.2/32        Ssh              Red, Green   policy2       Unavailable       2            1.0kbps         4.2Kbps
 
-SIP             10.2.3.3.0/24      SIP              Blue          0           None          Unavailable    0.0Kb/s         1.52Kb/s
+SIP             10.2.3.3.0/24      SIP              Blue          None         Unavailable       0            0.0Kbps         1.52Kbps
 
-WAP             10.2.4.0/24        UDP[1000-1500]   Global        1           None          Excellent      1.2Kb/s         1.2Kb/s
+WAP             10.2.4.0/24        UDP[1000-1500]   Global        None         Excellent         1            1.2Kbps         1.2Kbps
 
 ```
 The fields are defined as follows: 
@@ -7323,23 +7328,24 @@ Prefix:          10.0.0.0/8, 11.0.0.0/8
 Auto-generated : Yes (Router)
 Transport      : HTTP, HTTPS
 Access         : Red, Blue
-Sessions       : 10
+
 Service-Policy : policy1
 State          : Excellent
-Tx Bandwidth   : 1.2Kb/s
-Rx Bandwidth   : 1.2Kb/s
+
 Enabled        : Yes
 NextHop Type   : SVR, Local Service-Route
 Traffic Class  : HIgh, Low, Medium, Best-Effort
-Service-routes : web-route1, web-route2, peer-route2
+Service-Routes : web-route1, web-route2, peer-route2
 Service-Paths  : 
    Node 1:
      Up Paths: Peer1, Peer2, Lan1
-    Down Paths: Lan2
+     Down Paths: Lan2
    Node 2: 
      Up Paths: Peer1, Peer2, Lan1
      Down Paths: Lan2
-
+Sessions       : 10
+Tx Bandwidth   : 1.2Kbps
+Rx Bandwidth   : 1.2Kbps
 ```
 
 #### Version History
@@ -7504,7 +7510,7 @@ Displays active sessions passing through the 128T router.
 #### Usage
 
 ```
-show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [by-id] [node <node>] router <router>
+show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [by-id] [node <node>] router <router> 
 ```
 
 ##### Keyword Arguments
