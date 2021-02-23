@@ -318,7 +318,7 @@ Display the differences between two configurations.
 #### Usage
 
 ```
-compare config [<old>] [<new>]
+compare config [<old>] [<new>] [<name>]
 ```
 
 ##### Positional Arguments
@@ -327,6 +327,7 @@ compare config [<old>] [<new>]
 | ---- | ----------- |
 | old | The original configuration against which differences should be computed (default: running) |
 | new | The updated configuration for which differences should be computed |
+| name | The name of an exported configuration file for which differences should be computed |
 
 ##### See Also
 
@@ -347,6 +348,8 @@ compare config [<old>] [<new>]
 #### Description
 
 The `compare` command presents a list of differences between the two configurations specified as arguments on the command line. The one listed first influences the output in a very important way: the 128T router will return a list of configuration commands that will cause the configuration to be listed _first_ to be brought to parity with the one listed _second_. (Note: since the only editable configuration is the &quot;candidate&quot; configuration, the changes outlined by the _compare_ command cannot be directly applied to the &quot;running&quot; configuration.)
+
+The _name_ argument identifies a previously exported configuration file to compare against the running, candidate, _or another exported configuration file._ This argument allows you to compare configurations **without** having to import the exported config into the candidate config for comparison. 
 
 In the example below, the candidate and running configurations are identical save for a single _service-route_ that has been added to the candidate configuration.
 
@@ -398,6 +401,7 @@ admin@labsystem1.fiedler#
 | Release | Modification                |
 | ------- | --------------------------- |
 | 2.0.0   | This feature was introduced |
+| 5.1.0   | Added the _name_ argument, allowing comparison between the running or candidate config and an exported config, or between two exported configurations. |
 
 ## configure
 
@@ -1361,6 +1365,27 @@ admin@labsystem1.fiedler#
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 | 3.1.0   | The location of the exported configuration changed |
+
+
+## `generate config`
+
+Generates and stages the configuration changes into the current candidate configuration.
+
+#### Usage 
+
+```
+generate config
+```
+
+#### Description
+
+Generates and stages the configuration changes into the current candidate configuration. This allows you to validate, inspect, make edits, and commit these changes as part of the work flow.
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.1.0   | This feature was introduced |
 
 
 ## `import certificate webserver`
@@ -4150,8 +4175,14 @@ Display configuration exports.
 #### Usage
 
 ```
-show config exports
+show config exports [<name>] [verbose] [flat]
 ```
+
+#### Description
+
+This command lists the set of exported configurations that are stored on your 128T router. 
+
+The _show config exports_ command has three optional flags: _name_, _verbose_ and _flat_. Use the _name_ flag to identify a specific configuration to display. Adding the _verbose_ flag will show the entire configuration. Adding the _flat_ flag will output the configuration as a series of individual, fully qualified configuration statements.
 
 ##### See Also
 
@@ -4169,20 +4200,61 @@ show config exports
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](#show-stats-config) | Metrics pertaining to the get-config RPC |
 
-#### Description
 
-This command lists the set of exported configurations that are stored on your 128T router. (Exported configurations are created with the _export config_ command, described in more detail later in this document.)
-
-#### Example
+#### Example 1
 
 ```
-admin@labsystem1.fiedler# export config candidate 201703021024am
-Successfully exported configuration: /etc/128technology/config-exports/201703021024am.gz
-admin@labsystem1.fiedler# show config exports
-Thu 2017-03-02 10:24:43 EST
-201703021024am.gz
+admin@conductor-east-1.RTR_EAST_CONDUCTOR# show config exports
+Mon 2021-02-22 15:19:28 EST
+✔ Retrieving exported configurations...
+======================= ====================== ================= ===================
+ Name                    Date Modified          Compressed Size   Uncompressed Size
+======================= ====================== ================= ===================
+ Arthur-C-Doyle.gz       2021-01-25T16:28:27Z            1.8 kB             18.1 kB
+ SherlockHolmes.gz       2021-01-25T16:04:29Z            1.8 kB             18.1 kB
+ DoctorWatson.gz         2021-01-25T16:06:27Z            1.8 kB             18.1 kB
 
 Completed in 0.22 seconds
+```
+
+#### Example 2 
+
+```
+admin@conductor-east-1.RTR_EAST_CONDUCTOR# show config exports DoctorWatson.gz flat
+Mon 2021-02-22 15:21:35 EST
+✔ Retrieving exported configurations...
+config authority router RTR_EAST_CONDUCTOR name            RTR_EAST_CONDUCTOR
+config authority router RTR_EAST_CONDUCTOR location        usa
+config authority router RTR_EAST_CONDUCTOR resource-group  east-admin
+config authority router RTR_EAST_CONDUCTOR system log-level  trace
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 name              conductor-east-1
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 device-interface fabric name               fabric
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 device-interface fabric type               ethernet
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 device-interface fabric pci-address        0000:00:04.0
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 device-interface fabric forwarding         false
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 device-interface fabric network-interface fabric name       fabric
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 device-interface fabric network-interface fabric global-id  22
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 device-interface fabric network-interface fabric type       fabric
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 device-interface fabric network-interface fabric address 172.16.3.1 ip-address     172.16.3.1
+config authority router RTR_EAST_CONDUCTOR node conductor-east-1 device-interface fabric network-interface fabric address 172.16.3.1 prefix-length  24
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 name              conductor-east-2
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 device-interface fabric name               fabric
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 device-interface fabric type               ethernet
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 device-interface fabric pci-address        0000:00:04.0
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 device-interface fabric forwarding         false
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 device-interface fabric network-interface fabric name       fabric
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 device-interface fabric network-interface fabric global-id  23
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 device-interface fabric network-interface fabric type       fabric
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 device-interface fabric network-interface fabric address 172.16.3.2 ip-address     172.16.3.2
+config authority router RTR_EAST_CONDUCTOR node conductor-east-2 device-interface fabric network-interface fabric address 172.16.3.2 prefix-length  24
+config authority resource-group east-admin name  east-admin
+config authority access-management role east-admin name            east-admin
+config authority access-management role east-admin capability      config-write
+config authority access-management role east-admin capability      config-read
+config authority access-management role east-admin resource-group  east-admin
+config authority access-management token expiration  1800
+Completed in 0.18 seconds
+admin@conductor-east-1.RTR_EAST_CONDUCTOR#
 ```
 
 #### Version History
@@ -4190,6 +4262,7 @@ Completed in 0.22 seconds
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.0.0   | This feature was introduced |
+| 5.1.0   | Added the _name_ flag, allowing you to identify a specific configuration to display. |
 
 ## `show config locally-modified`
 
