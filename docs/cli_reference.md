@@ -48,7 +48,7 @@ Clear routes associated with one or all BGP neighbors.
 #### Usage
 
 ```
-clear bgp [{in | out | soft}] [force] router <router> <neighbor>
+clear bgp vrf <vrf-name> [{in | out | soft}] [force] router <router> <neighbor>
 ```
 
 ##### Keyword Arguments
@@ -60,6 +60,7 @@ clear bgp [{in | out | soft}] [force] router <router> <neighbor>
 | out | Soft reset transmitted BGP updates |
 | router | The name of the router for which to clear BGP neighbors |
 | soft | Soft reset received and transmitted BGP updates |
+| vrf | Clears routes associated with one or all BGP neighbors in the specified VRF. |
 
 ##### Positional Arguments
 
@@ -3776,16 +3777,17 @@ Displays information about the state of the BGP process on the 128T router.
 #### Usage
 
 ```
-show bgp [rows <rows>] [force] router <router> [<route>]
+show bgp [rows <rows>] [force] router <router> vrf <vrf-name> [<route>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| router | The name of the router for which to display BGP routes |
-| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| router | The name of the router for which to display BGP routes. |
+| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50). |
+| vrf | Displays the BGP routes in the specified VRF instance. |
 
 ##### Positional Arguments
 
@@ -3849,6 +3851,7 @@ Paths: (1 available, best #1, table Default-IP-Routing-Table)
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
+| 5.1.0 | Added VFR support |
 
 ## `show bgp neighbors`
 
@@ -3857,7 +3860,7 @@ Displays information about the state of the BGP neighbors on the 128T router.
 #### Usage
 
 ```
-show bgp neighbors [rows <rows>] [force] router <router> [<neighbor-ip>] [<option>]
+show bgp neighbors [rows <rows>] [force] router <router> vrf <vrf-name> [<neighbor-ip>] [<option>]
 ```
 
 ##### Keyword Arguments
@@ -3867,6 +3870,7 @@ show bgp neighbors [rows <rows>] [force] router <router> [<neighbor-ip>] [<optio
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | router | The name of the router for which to display BGP neighbors |
 | rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | Displays information about the BGP neighbors in the specified VRF. |
 
 ##### Positional Arguments
 
@@ -3905,6 +3909,7 @@ link
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
+| 5.1.0 | Added VFR support |
 
 ## `show bgp summary`
 
@@ -3913,7 +3918,7 @@ Show the current BGP summary from the routing manager.
 #### Usage
 
 ```
-show bgp summary [rows <rows>] [force] router <router>
+show bgp summary [rows <rows>] [force] router <router> vrf <vrf-name>
 ```
 
 ##### Keyword Arguments
@@ -3923,6 +3928,7 @@ show bgp summary [rows <rows>] [force] router <router>
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | router | The name of the router for which to display the BGP summary |
 | rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | Displays a summary of the BGP state in the specified VRF instance. |
 
 #### Description
 
@@ -3951,6 +3957,7 @@ Total number of neighbors 3
 | Release | Modification                |
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
+| 5.1.0 | Added VFR support |
 
 ## `show capacity`
 
@@ -5141,6 +5148,7 @@ show fib service-name <name> | hierarchy-service-name <name> | contains-service-
 | source-address | Show FIB results filtered by source-address |
 | source-interface | Show FIB results filtered by source-interface |
 | tenant | Show FIB results filtered by tenant |
+| vrf | Displays all FIB entries with tenants that match the specified VRF. |
 
 #### Description
 
@@ -5195,7 +5203,8 @@ Capacity:    19051
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 3.0.0   | Added _node_ keyword to enforce PCLI consistency |
-| 5.1.0   | Added next hop details and the ability to filter by: service-name, hierarchy-service-name, contains-service-name, prefix, source-address, source-interface, and tenant. |
+| 5.1.0   | Added VFR support, next hop details and the ability to filter by: service-name, hierarchy-service-name, contains-service-name, prefix, source-address, source-interface, and tenant. |
+
 
 ## `show history`
 
@@ -7005,7 +7014,7 @@ Displays the contents of the 128T router&#39;s Routing Information Base (RIB)
 #### Usage
 
 ```
-show rib [rows <rows>] [force] router <router> [<route>]
+show rib [rows <rows>] [force] router <router> vrf <vrf-name> [<route>] 
 ```
 
 ##### Keyword Arguments
@@ -7015,6 +7024,7 @@ show rib [rows <rows>] [force] router <router> [<route>]
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | router | The name of the router for which to display RIB routes |
 | rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | Displays all routes learned in the specified VRF table. |
 
 ##### Positional Arguments
 
@@ -8405,6 +8415,42 @@ LDAP server is configured and online
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 | 4.4.0   | LDAP status was added to `show user all` |
+
+## `show vrf`
+
+Displays details about all configured VRF's. 
+
+#### Usage
+```
+show vrf <vrf-name>
+```
+#### Description 
+
+Provides details about all configured VRF’s including the tenants, network-interfaces, and routing-interfaces in each VRF. Use to verify whether the configuration was specified correctly and resulted in the desired VRF state.
+
+#### Example
+
+```
+show vrf
+Wed 2020-12-09 19:56:31 UTC
+
+Retrieving from 'ComboEast'...
+
+======= ========= ==================== ====================
+ Name    Tenants   Routing Interfaces   Network Interfaces
+======= ========= ==================== ====================
+ chips   chips     lo0-chips            combo-east 12-173
+ salsa   salsa     lo0-salsa
+ tacos   tacos                          combo-east 10-174
+
+Completed in 0.03 seconds
+```
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.1.0   | This feature was introduced |
 
 ## `sync peer addresses`
 
