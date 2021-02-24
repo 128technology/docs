@@ -81,6 +81,7 @@ module.exports = {
           "config_nat",
           "config_ospf",
           "config_rate_limiting",
+          "config_RBAC",
           "config_snmp",
           "config_snmp_metrics",
           "config_static_hostname_mapping",
