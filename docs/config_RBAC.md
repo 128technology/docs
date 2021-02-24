@@ -7,7 +7,7 @@ Role-Based Access Control provides a mechanism for an Administrator to create Ac
 
 ## Configuring Role-Based Access Control
 
-The default Administrator role (`admin`) has access to all configuration options, and cannot be removed. From this account, all roles and access are assigned. 
+The default Administrator role (`admin`) has access to all configuration options, and cannot be removed. From this built-in access role, all roles and access are assigned. 
 
 - Create Resource Groups
 
