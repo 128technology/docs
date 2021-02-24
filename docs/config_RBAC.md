@@ -3,23 +3,23 @@ title: Configuring Role-Based Access Control
 sidebar_label: Configuring Role-Based Access Control
 ---
 
-Role-Based Access Control provides a mechanism for an Administrator to create Access Management Roles that allow specific access to 128T resources such as routers, tenants, and services. 
+Role-Based Access Control provides a mechanism for an Administrator to create Access Management Roles that allow specific access to 128T resources such as routers, tenants, and services, as well as other Authority-level configuration objects. 
 
 ## Configuring Role-Based Access Control
 
-The default Administrator role has access to all configuration options, and cannot be removed. From this account, all roles and access are assigned. 
+The default Administrator role (`admin`) has access to all configuration options, and cannot be removed. From this account, all roles and access are assigned. 
 
 - Create Resource Groups
 
-	A Resource Group identifies a set of resources. One or more Resource Groups are assigned to an Access Management Role.
+	A Resource Group identifies a set of associated resources. One or more Resource Groups are assigned to an Access Management Role.
 
 - Assign Resource Groups to Authority-level Resources
 
-	Resource groups can be assigned to a top-level resource (Authority level) such as a router, a tenant, or a service. The process for assigning a resource group to a service is slightly different than assigning to a router or a tenant. 
+	Resource groups can be assigned to a top-level resource (Authority level) such as a router, a tenant, or a service. The process for assigning a resource group to a service or a service-policy is slightly different than assigning a resource group to a router or a tenant. 
 
 - Create Access Management Roles
 
-	An Access Management Role identifies the type of user - administrator or user. Roles are assigned capabilities or actions they can perform; read, write, and provision. Provisioning allows users to perform software lifecycle management duties, such as download software, upgrade existing installations, etc.
+	An Access Management Role identifies capabilities or actions a user can perform; config-read, config-write, and provision. Provisioning allows users to perform software lifecycle management duties, such as download software, upgrade existing installations, etc.
 
 	After the Access Management Role is created, the process is as follows:
 	- Assign Cababilities to the Access Management Role. 
@@ -48,7 +48,7 @@ The default Administrator role has access to all configuration options, and cann
 ### Assign Resource Groups to Authority-level Resources
 
 1. Under Administration, select Configuration.
-2. Select a resource; a router or a tenant.
+2. Select an Authority-level resource; for example, a router or a tenant.
 
 	![Resources](/img/config_RBAC_ARGtoResS2.png)
 
@@ -98,15 +98,15 @@ The default Administrator role has access to all configuration options, and cann
 
 	![Name the Role](/img/config_RBAC_AMRstep3.png)
 
-6. Assign the capabilities for each role. In the Capabilities panel, click ADD and select the capability from the drop down. For example, user roles may only have read access to the resource, where an admin might have read and write access. Options are config-read, config-write, provisioning. 
+6. Assign the capabilities for each Access Management Role. In the Capabilities panel, click ADD and select the capability from the drop down. For example, user roles may only have read access to the resource, where an admin might have read and write access. Options are config-read, config-write, provisioning. 
 
 	![Assign to a Group](/img/config_RBAC_AMRstep5.png)
 
-7. Assign the Access Management Role to a Resource Group or groups. In the Resource Groups panel, click ADD and select the Resource Group from the drop down. 
+7. Assign a Resource Group or groups to an Access Management Role. In the Resource Groups panel, click ADD and select the Resource Group from the drop down. 
 
 	![Resource Group](/img/config_RBAC_ARGSstep7.png)
 
-8. Select the specific resources accessible by the Access Management Role. In the Resources panel, click ADD and select resources from the drop down. 
+8. In some cases you may choose to make specific resources accessible to an Access Management Role. This is an optional setting. In the Resources panel, click ADD and select resources from the drop down. 
 
 	![Assign Role to Resources](/img/config_RBAC_AMRstep6.png)
 
@@ -125,7 +125,7 @@ Repeat this process for additional roles.
 	- Username: Minimum 9 characters, initial lowercase, and must be alphanumeric.
 	- Password: Minimum 9 characters, may not be a dictionary word, must contain alphanumeric and uppercase characters.
 	- Users full name.
-	- Select the Role or Roles of the user from the drop down.
+	- Users can have multiple roles; select the Role or Roles of the user from the drop down. 
 	- Click SAVE.
 
 	![New User Pane](/img/config_RBAC_CUARstep3.png)
