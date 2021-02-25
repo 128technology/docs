@@ -4454,7 +4454,11 @@ show device-interface [name <name>] [force] [node <node>] router <router> [<verb
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary (default: detail) |
+| detail (default) |  |
+| extended-statistics |  |
+| registers |  |
+| summary |  |
+| verbosity |  | 
 
 #### Description
 

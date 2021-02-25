@@ -104,6 +104,7 @@ module.exports = {
           "howto_conductor_migration",
           "howto_extend_gui_nav",
           "howto_lte",
+          "howto_config_PPPoE",
           "howto_maintenance_mode",
           "howto_ms365",
           "howto_trusted_ca_certificate",
