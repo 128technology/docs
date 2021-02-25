@@ -21,7 +21,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-24412 Dual PPPoE Per Node Support:** [Multiple PPPoE interfaces can be configured on a single node.](howto_config_PPPoE.md)
 ------
-- **I95-27678 Send Audit Events to SYSLOG Server(s):** Audit and alarm events can now be pushed to syslog and other services via the Monitoring Agent. 
+- **I95-27678 [Send Audit Events to a SYSLOG Server](howto_send_audit_events.md):** Audit and alarm events can now be pushed to syslog and other services via the Monitoring Agent.  
 ------
 - **I95-33016 Router and Node Page Dynamically Refresh Analytics and State:** Router and Node pages automatically refresh data at 30 second intervals. 
 ------

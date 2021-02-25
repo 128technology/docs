@@ -106,6 +106,7 @@ module.exports = {
           "howto_lte",
           "howto_config_PPPoE",
           "howto_maintenance_mode",
+          "howto_send_audit_events",
           "howto_ms365",
           "howto_trusted_ca_certificate",
           "howto_tune_bfd",
