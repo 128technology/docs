@@ -14,7 +14,7 @@ device-interface pppoe-dev-1
     target-interface dpdk3
     pppoe
         user-name user1
-        password exit33
+        password passw0rd1
         authentication-protocol chap
     exit
     network-interface pppoe-intf-1
@@ -28,7 +28,7 @@ device-interface pppoe-dev-2
     target-interface dpdk4
     pppoe
         user-name user2
-        password exit33
+        password passw0rd2
         authentication-protocol chap
     exit
     network-interface pppoe-intf-2
@@ -38,7 +38,7 @@ device-interface pppoe-dev-2
 exit
 ```
 
-In the event of a disconnection, the `failure` section of `show device-interface` displays the exit code the ppd-exit-reason. The example below shows an authentication failure.
+In the event of a disconnection, the `failure` section of `show device-interface` displays the `ppd-exit-code` and the `ppd-exit-reason`. The example below shows an authentication failure.
 
 ```
 *admin@test1.Fabric128# show device-interface name pppoe-new
@@ -75,7 +75,7 @@ Completed in 0.12 seconds
 
 ### Reconnection Timer
 
-In situations where there are several connection attempts (for example, consecutive authenication failures), logic is used to back off the reconnect attempts. Failure codes and the intervals between reconnection attempts are configurable. Use the JSON file `/var/lib/128technology/pppoe/{ppp<giid>}.init` to specify the exit codes and adjust interval times. The defaults are shown in the example below. 
+In situations where there are several connection attempts (for example, consecutive authenication failures), logic is used to back off the reconnect attempts on specific failure codes. Failure codes and the intervals between reconnection attempts are configurable. Use the JSON file `/var/lib/128technology/pppoe/{ppp<giid>}.init` to specify the exit codes and adjust interval times. The defaults are shown in the example below. 
 
 After the first authentication failure (for pppd exit code 19), the intervals between each subsequent reconnect attempt will be 60s (1min), 300s (5min), 600s (10min), 1200s (20min), 2400s (40min), and 3600s (1hr). If the reconnect attempts continue after the sixth failure, the same interval time is used (3600s).
 

@@ -51,96 +51,103 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-38682 CVE Medium: Rebuild Python:** Python has been updated to address vulnerabilities.
 ------
-- **I95-38920 MIB additions - router metadata:**
+- **I95-38920 MIB additions - router metadata:** The following fields have been added to the T128-SYSTEM MIB:
+	- Router Description
+	- Router Location
+	- Router Coordinates
+	- Node Description
+	- Node Location
 ------
 - **I95-39017 SR-IOV VLAN filtering:** VLAN filtering has been enabled for the SR-IOV virtual functions to support the NFX150 and NFX250 platforms.
 ------
 
 ### Resolved Issues
 
-- **I95-30812 kicked out of pcli with session timeout when actively running commands:**
+- **I95-30812 kicked out of pcli with session timeout when actively running commands:** PCLI sessions now recognize all activity. 
 ------
-- **I95-30883 Add Enumeration Description to Combo Dropdown in Edit Config Pages:** Do we even need to mention this??
+- **I95-30883 Add Enumeration Description to Combo Dropdown in Edit Config Pages:** GUI drop downs now display descriptions.
 ------
-- **I95-31882 inconsistency in "show alarm" output:**
+- **I95-31882 inconsistency in "show alarm" output:** The `show alarms` output message is now consistent for shelved alarms and active alarms.
 ------
-- **I95-33272 End port field validation accepts leading space:**
+- **I95-33272 End port field validation accepts leading space:** An issue where the PCLI accepted a leading space in some fields has been resolved. Validation now removes leading and trailing spaces for number types.
 ------
-- **I95-33526 No indication that a restore configuration operation has completed:**
+- **I95-33526 No indication that a restore configuration operation has completed:** Users are now directed to view the restored configuration, indicating that the operation has completed. 
 ------
-- **I95-33973 pcli suggesting commands not available in the config context:**
+- **I95-33973 PCLI suggesting commands not available in the config context:** This issue has been resolved. 
 ------
-- **I95-34443 Provisioner status in router dialog not matching the Asset status in router page:**
+- **I95-34443 Provisioner status in router dialog not matching the Asset status in router page:** Asset Reconciliation now takes place automatically every 1.5 minutes in the GUI to assure the states of all assets are correctly reflected in the UI.
 ------
-- **I95-35405 BGP over VLAN (non-SVR) not working:**
+- **I95-35405 BGP over VLAN (non-SVR) not working:** This issue has been resolved as part of I95-36341.
 ------
-- **I95-35521 Ambigious validation error:**
+- **I95-35521 Ambigious validation error:** Errors now more clearly identify the source of the error.
 ------
-- **I95-35646 wrong date for weekday in date picker:**
+- **I95-35646 Wrong date for weekday in date picker:** The date-picker logic has been updated to resolve this issue. 
 ------
-- **I95-35783 Bootstrap DHCP server not resilient to power loss or abrupt shutdown:**
+- **I95-35783 Bootstrap DHCP server not resilient to power loss or abrupt shutdown:** The handling of abrupt shutdowns has been strengthened.
 ------
-- **I95-36366 security keys are not automatically generated for unmanaged router:**
+- **I95-36053 High number of System Events on 128T Config chnages:** Added a filter to audit logs of type SERVICE-START and SERVICE-STOP based on service to filter just the required services.
 ------
-- **I95-36397 Auto Generated DHCP Server Interface Down:**
+- **I95-36366 Security keys are not automatically generated for unmanaged router:** Security keys are now automatically generated. 
 ------
-- **I95-36509 SSC drops validate message if managed router disconnects while message is in-flight:**
+- **I95-36397 / I95-36614 Auto Generated DHCP Server Interface Down:** Generate namespace ID with node specific namespace name for device interface to prevent namespace id collision.
 ------
-- **I95-36761 pcli configure bgp default-route-distance:** All three BGP default distances (ebgp, ibgp, and local) now have default settings.
+- **I95-36509 SSC drops validate message if managed router disconnects while message is in-flight:** This issue has been resolved.
 ------
-- **I95-37002 Help text on shared-mac parameter should be more explicit:**
+- **I95-36761 PCLI configure bgp default-route-distance:** All three BGP default distances (ebgp, ibgp, and local) now have default settings.
 ------
-- **I95-37095 Router Software not available through the GUI:**
+- **I95-37002 Help text on shared-mac parameter should be more explicit:** The description has been updated to provide additional information. 
 ------
-- **I95-37181 LTE Modem denied from network with 128T Service Running:**
+- **I95-37181 LTE Modem denied from network with 128T Service Running:** Resolved an issue where UDP packets larger than interface(network) MTU will cause Rx Error on the LTE interface, and resulted in denial of the LTE modem.
 ------
-- **I95-37699 Save tech support on scaled setup has corrupted zip file:**
+- **I95-37699 Save tech support on scaled setup has corrupted zip file:** Added a Limit Argument To PCLI show events and Tech Support to resolve this issue. 
 ------
-- **I95-37728 show rib summary hangs/return no data:**
+- **I95-37728 show rib summary hangs/return no data:**  Added support to proxy the routing engine endpoint in the web server, and provided support for the vrf argument in `show rib summary`.
 ------
-- **I95-37770 CVE Obfuscator consumes password as a command line argument:**
+- **I95-37770 CVE Obfuscator consumes password as a command line argument:** This issue has been resolved. 
 ------
-- **I95-37826 CIS Compliance: Ensure permissions on bootloader config are configured:**
+- **I95-37826 CIS Compliance: Ensure permissions on bootloader config are configured:** Appropriate permissions are set on bootloader config files.
 ------
-- **I95-37848 Properly handle jumbo UDP packet from LTE network:**
+- **I95-37848 Properly handle jumbo UDP packet from LTE network:** Resolved an issue where UDP packets larger than interface(network) MTU will cause Rx Error on the LTE interface.
 ------
-- **I95-37910 AWS c5.xlarge instance shows 2 cores in GUI:**
+- **I95-37910 AWS c5.xlarge instance shows 2 cores in GUI:** Custom Report charts now persist the displayed data even if an error occurs, specifically if internet connection drops or a node becomes unavailable. A small error indicator now appears above the chart, which can be hovered and displays the error.
 ------
-- **I95-37912 LDAP authentication does not work with RBAC:**
+- **I95-38378 Salt-minion config broken after enabling asset connection resiliency:** The minion config is now loaded on conductor migration operations at time of operation. 
 ------
-- **I95-38378 Salt-minion config broken after enabling asset connection resiliency:**
+- **I95-38389 PDM gets pegged at 100% which makes the GUI and PCLI inaccessible:** The config export process has been made more efficient to reduce the chance of a race condition. 
 ------
-- **I95-38389 PDM gets pegged at 100% which makes the GUI and PCLI inaccessible:**
+- **I95-38393 Minions Cannot Get Past Connected State:** Resolved an issue where assets could become stuck in Connected state.
 ------
-- **I95-38393 Minions Cannot Get Past Connected State:**
+- **I95-38458 Handle PCLI model files on the upgrade:** Resolved an issue where caching errors prevented 128T from starting. 
 ------
-- **I95-38458 CVS needs to handle pcli model files on the upgrade:**
+- **I95-38474 The `router > dns-config` does not account for the immutable bit on `/etc/resolv.conf`:** Resolved an issue with the DNS proxy not working due to the immutable bit set by ISO. 
 ------
-- **I95-38474 The `router > dns-config` does not account for the immutable bit on `/etc/resolv.conf`:**
+- **I95-38495 Duplicate link-layer-address configuration causes DHCP server to fail to start:** A configuration validation error is shown when duplicate link-layer-address are configured.
 ------
-- **I95-38495 Duplicate link-layer-address configuration causes DHCP server to fail to start:**
+- **I95-38500 CVE Medium: binutils (CESA-2018:3032), binutils (CESA-2019:2075):** Added binutils to deprecated packages.
 ------
-- **I95-38500 CVE Medium: binutils (CESA-2018:3032), binutils (CESA-2019:2075):**
+- **I95-38543 salt_master memory leak using up all conductor memory:** This issue has been resolved with an update to saltstack 3002.2.
 ------
-- **I95-38543 salt_master memory leak using up all conductor memory:**
+- **I95-38694 SNMP ifTable does not conform to correct IF-MIB representation of high speed interfaces:** The `ifSpeed` field in the legacy `ifTable` has been set to conform with the higher speed values. 
 ------
-- **I95-38694 SNMP ifTable does not conform to correct IF-MIB representation of high speed interfaces:**
+- **I95-38768 Advance DPDK submodule to pick up VMXNet3 Fix:** A fix has been applied to the ip header checksum and is now calculated via hardware offload.
 ------
-- **I95-38768 Advance DPDK submodule to pick up VMXNet3 Fix:** ???
+- **I95-38830 Fix when statement for device interface identifier:** Resolved a configuration problem wherein vmbus-uuid could not be configured unless forwarding was explicitly configured.
 ------
-- **I95-38830 Fix when statement for device interface identifier:**
+- **I95-38832 NETCONF Ending Deliminator Can Appear Over Buffer Packets:** Resolved an issue that resulted in unresponsive web and command line interfaces caused by certain configuration sizes.
 ------
-- **I95-38832 NETCONF Ending Deliminator Can Appear Over Buffer Packets:**
+- **I95-38963 Address sudo CVE-2021-3156:** Upgraded to later version.
 ------
-- **I95-38963 Address sudo CVE-2021-3156:**
+- **I95-38986 Template parse error is difficult to find:** Added additonal context to the error to help identify.
 ------
-- **I95-38986 Template parse error is difficult to find:**
+- **I95-39011 AP using almost 300% CPU, show assets plci command stuck after upgrade:** Resolved by increasing the timeout for local rpm queries. 
 ------
-- **I95-39011 AP using almost 300% CPU, show assets plci command stuck after upgrade:**
+- **I95-39036 dns-config=automatic should be allowed when using PPPoE:** Resolved an issue where management over pppoe interface does not allow dns-config mode to be configured.
 ------
-- **I95-39036 dns-config=automatic should be allowed when using PPPoE:**
+- **I95-39163 Long change propagation times in FIB entries due to large number of advertised routes** The routing agent implementation was improved to enable faster processing of configuration changes when there are services with a large port range.
 ------
-- **I95-39187 Use same time format in Alarms and Event History:**
+- **I95-39186 ISO interactive install not shutting down properly after install:** This issue has been resolved.  
+------
+- **I95-39187 Use same time format in Alarms and Event History:** Time format is now consistent between Alarms and Event History. 
 
 ### Caveats
 
