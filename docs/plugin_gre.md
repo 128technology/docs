@@ -546,12 +546,11 @@ In addition, a `ping-monitor` service is started for each configured tunnel, the
 
 ## Release Notes
 
-### Release 1.1.2, 2.1.2
+### Release 3.0.0
 
 #### Issues Fixed
-- **PLUGIN-677** GRE plugin doesn't start up correctly post reboot
 
-    _**Resolution**_ Implemented a config watcher service to handle startup conditions and dynamically apply configuration changes at runtime.
+- **PLUGIN-768** Support the GRE plugin in 128T versions `5.1.0` and greater.
 
 ### Release 1.1.3, 2.1.3
 
@@ -563,3 +562,11 @@ In addition, a `ping-monitor` service is started for each configured tunnel, the
 - **PLUGIN-479** Address range checking not valid for GRE tunnel
 
     _**Resolution**_ Use non-strict mode when getting plugin network in config generation
+
+### Release 1.1.2, 2.1.2
+
+#### Issues Fixed
+- **PLUGIN-677** GRE plugin doesn't start up correctly post reboot
+
+    _**Resolution**_ Implemented a config watcher service to handle startup conditions and dynamically apply configuration changes at runtime.
+

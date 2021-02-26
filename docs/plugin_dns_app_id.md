@@ -326,6 +326,12 @@ exit
 
 ## Release Notes
 
+### Release 3.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the DNS App ID plugin in 128T versions `5.1.0` and greater.
+
 ### Release 2.2.1
 
 #### Issues Fixed

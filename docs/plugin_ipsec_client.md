@@ -408,6 +408,12 @@ Completed in 0.10 seconds
 
 ## Release Notes
 
+### Release 3.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the IPSec client plugin in 128T versions `5.1.0` and greater.
+
 ### Release 1.0.6, 2.0.6
 
 ### Issues Fixed

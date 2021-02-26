@@ -33,3 +33,11 @@ Feb 12 16:28:14 sol_acm800_dut1 M800_watchdog[17848]: Watchdog thread signaled t
 Feb 12 16:28:14 sol_acm800_dut1 M800_watchdog[17848]: Joined with the watchdog thread
 Feb 12 16:28:14 sol_acm800_dut1 systemd[1]: Stopped Watchdog for the Audiocodes M800 platform.
 ```
+
+## Release Notes
+
+### Release 2.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the m800 Watchdog plugin in 128T versions `5.1.0` and greater.

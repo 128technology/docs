@@ -811,3 +811,11 @@ exit
 Some of the key aspects of the auto-generated configuration are as follows:
 - Each of the generated service has an application-name of the form `icmp-{service}-{path}` as can be seen with `icmp-internet-broadband` and `icmp-internet-lte` in the above example. These application names determine which path is currently available for the service.
 - The generated KNIs each represent a unique path and are useful for performing the ICMP probe over those paths. The `broadband-icmp` and `lte-icmp` services are generated to assist with that.
+
+## Release Notes
+
+### Release 3.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the ICMP Reachability Detection plugin in 128T versions `5.1.0` and greater.
