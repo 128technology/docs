@@ -20,9 +20,9 @@ The monitoring agent at its core is designed to be able to push data to external
 
 The 128T Monitoring Agent can be obtained from the official 128T software repository. The following versions of the **monitoring-agent** are available for corresponding 128T software version.
 
-| Monitoring Agent                | 128T                        |
-| ------------------------------- | --------------------------- |
-| **128T-monitoring-agent-3.0.0** | 128T >= 4.1.0               |
+| Monitoring Agent                | 128T          |
+| ------------------------------- | ------------- |
+| **128T-monitoring-agent-3.X.X** | 128T >= 4.1.0 |
 
 :::important  
 Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported 128T versions. It should be preferred for new installations and upgrades.  
@@ -40,12 +40,14 @@ dnf install 128T-monitoring-agent
 
 | Release      | Modification                                                    |
 | ------------ | --------------------------------------------------------------- |
+| 3.3.1        | `name` differentiator                                           |
 | 3.0.0        | per input `sample-interval` and `push-interval` were introduced |
 | 1.2.0, 2.1.0 | `lib-directory` was introduced                                  |
 
 The monitoring agent has its own set of configurations and looks for inputs from specific directories on disk. By default, the configuration for the agent should be present in `/etc/128t-monitoring/config.yaml` and uses YAML format which looks something like this:
 
 ```yaml
+name: user-agent
 enabled: true
 lib-directory: /var/lib/128t-monitoring
 tags:
@@ -67,6 +69,8 @@ outputs:
   - name: file
   - name: message_queue
 ```
+
+When using multiple instances of the Monitoring Agent, specify the `name` to uniquely identify each instance. Without this distinction, two inputs with the same name can colide (be started/stopped/reconfigured by both instances) even if they are listed in separate `config.yaml` files. This field may be ignored when using the default `config.yaml` file. In other cases, the name of the directory containing the config file will be used as the name if none is specified.
 
 The `enabled` field is meant as global toggle for applying the monitoring agent functionality. When set to `disabled` the monitoring agent will remain dormant on the 128T.
 
@@ -276,11 +280,12 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 Within an **input** configuration, several variables have been made available for substitution.
 
-| Value             | Meaning                                      | Version Introduced |
-| ----------------- | -------------------------------------------- | ------------------ |
-| `${ROUTER}`       | The router name of the running 128T instance | 3.0.0              |
-| `${NODE}`         | The node name of the running 128T instance   | 3.0.0              |
-| `${128T_VERSION}` | The version of the running 128T instance     | 3.0.0              |
+| Value             | Meaning                                           | Version Introduced |
+| ----------------- | ------------------------------------------------- | ------------------ |
+| `${ROUTER}`       | The router name of the running 128T instance      | 3.0.0              |
+| `${NODE}`         | The node name of the running 128T instance        | 3.0.0              |
+| `${128T_VERSION}` | The version of the running 128T instance          | 3.0.0              |
+| `${WEB_PORT}`     | A local port that can be used to access 128T APIs | 3.0.0              |
 
 An example of this would be:
 
@@ -525,11 +530,28 @@ In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen abo
 
 #### Version History
 
-| Release      | Modification                     |
-| ------------ | -------------------------------- |
-| 1.2.1, 2.1.1 | `mac-address` tag was introduced |
+| Release      | Modification                                                    |
+| ------------ | --------------------------------------------------------------- |
+| 3.3.1        | `t128_device_state` input type was introduced                   |
+| 3.3.1        | `provisional-status` tag was added (available in 128T >= 4.5.3) |
+| 1.2.1, 2.1.1 | `mac-address` tag was introduced                                |
 
-The `deviceInterfaceStateCollector128t` collector can be used for monitoring the admin, oper and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
+
+The `t128_device_state` input can be used for monitoring the admin, oper, provisional, and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
+
+```toml
+[[inputs.t128_device_state]]
+  ## To filter on select device interfaces, you can use the `tagpass` and `tagdrop` concepts
+  ## from telegraf. For example:
+  ## [inputs.t128_device_state.tagpass]
+  ##     device-interface = ["wan1"]
+  ##     mac-address = ["00:0a:95:9d:68:16"]
+```
+
+
+:::important  
+In versions 3.3.1 and later, the simplified `t128_device_state` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.  
+:::
 
 ```toml
 [[inputs.exec]]
@@ -582,7 +604,29 @@ The `peerPathStateCollector128t` collector can be used for monitoring the up/dow
 
 ### Arp State Collector
 
-The `arpStateCollector128t` collector can be used for monitoring the arp table status of a network interface configured on the node. The device interface name, network interface name, vlan, ip address, and destination mac will be found as tags and telegraf tagpass can be used to filter specific arp entries as needed. For example:
+#### Version History
+
+| Release | Modification                               |
+| ------- | ------------------------------------------ |
+| 3.3.1   | `t128_arp_state` input type was introduced |
+
+The `t128_arp_state` input can be used for monitoring the arp table status of a network interface configured on the node. The device interface name, network interface name, vlan, ip address, and destination mac will be found as tags and telegraf tagpass can be used to filter specific arp entries as needed. For example:
+
+```toml
+[[inputs.t128_arp_state]]
+  ## To filter on select properties of the arp entry, you can use the `tagpass` and `tagdrop` concepts
+  ## from telegraf. For example:
+  ## [inputs.t128_arp_state.tagpass]
+  ##     device-interface = ["wan1"]
+  ##     network-interface = ["wan1intf"]
+  ##     vlan = ["128"]
+  ##     ip-address = ["192.169.128.0"]
+  ##     destination-mac = ["00:0a:95:9d:68:16"]
+```
+
+:::important  
+In versions 3.3.1 and later, the simplified `t128_arp_state` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.  
+:::
 
 ```toml
 [[inputs.exec]]
@@ -659,7 +703,82 @@ The **top sources** input can be used to capture the list of source IP addresses
 
 The **top applications** input is useful when application identification in terms of module or tls have been configured on the router. By default, all the discovered sessions will be reported by the input. The user can tune the collection by setting up a search filter in the form of **filter** or eliminate the applications that have some minimum number of sessions via **min-session-count**. The **max-rows** will limit the reporting to the first N rows. The collection can be turned off by setting **enabled** to be false.
 
+### GraphQL Collector
+
+| Release | Modification                             |
+| ------- | ---------------------------------------- |
+| 3.3.1   | `t128_graphql` input type was introduced |
+
+The `t128_graphql` input can be used to retrieve data from a GraphQL API.
+
+```
+[[inputs.t128_graphql]]
+  ## collector_name = "t128-device-state"
+  ## base_url = "http://localhost:${WEB_PORT}/api/v1/graphql/"
+  ## unix_socket = ""
+  ## timeout = "10s"
+  ## entry_point = "allRouters(name:'${ROUTER}')/nodes/nodes(name:'${NODE}')/nodes/deviceInterfaces/nodes"
+
+  ## [inputs.t128_graphql.extract_fields]
+  ##   enabled = "enabled"
+
+  ## [inputs.t128_graphql.extract_tags]
+  ##   name = "name"
+  ##   type = "type"
+  ##   admin-status = "state/adminStatus"
+  ##   operational-status = "state/operationalStatus"
+  ##   provisional-status = "state/provisionalStatus"
+  ##   redundancy-status = "state/redundancyStatus"
+  ##   duplex = "state/duplex"
+  ##   speed = "state/speed"
+  ##   mac-address = "state/macAddress"
+```
+
+- **collector_name**  
+  A name for the collector which will be used as the measurement name of the produced data
+
+- **base_url**  
+  The URL of the GraphQL API
+
+- **unix_socket**  
+  The unix socket to use; the defualt empty string indicates no unix socket is being used
+
+- **timeout**  
+  A limit on the amount of time taken for a given request. If the timeout is hit, no data will be produced for the sample.
+
+- **entry_point**  
+  The path to a point in the graph relative to which `extract_fields` and `extract_tags` will be specified. This path may contain `(<key>:<value)` arguments corresponding to those in the GraphQL tree.
+
+- **extract_fields**  
+  Paths, relative to the `entry_point`, from which fields should be created. Each value MUST point to a leaf in the graph. The keys become the field names for the produced values. At least one field MUST be specified.
+
+- **extract_tags**  
+  Paths, relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. The keys become the tag names for the produced values. At least one tag MUST be specified.
+
+Note that `(<key>:<value>)` arguments are valid only on the `entry_point`. They MUST NOT be specified on `extract_fields` or `extract_tags`.
+
+It is possible for the relative paths of `extract_fields` and `extract_paths` to enter GraphQL lists. When that is the case, a separate line will be created for each entry in the list.
+
+When dealing with multiple child nodes, it is advised that each be handled in separate `t128_graphql` inputs.
+
 ## Release Notes
+
+### Release 3.3.1
+
+#### New Features and Improvements:
+
+- **MON-309** Upgrade telegraf to 1.17.2
+- **MON-306** Provide a `name` in the agent config to differentiate multiple Monitoring Agent instances
+- **MON-311** A `t128_graphql` input is now available
+- **MON-311** A dedicated `t128_device_state` input is now available
+- **MON-311** A dedicated `t128_arp_state` input is now available
+- **I95-38959** Improve `t128_metrics` performance with bulk retrieval
+
+#### Issues Fixed:
+
+- **MON-316** Correct default metrics bug where interface `received-missed` was collected from `stats/interface/received/error`
+
+  _**Resolution**_ Point `received-missed` to the correct `stats/interface/received/missed`
 
 ### Release 3.1.0
 
@@ -668,6 +787,10 @@ The **top applications** input is useful when application identification in term
 - **MON-297** The LTE collector will use the state file generated by 128T software where possible.
 
 #### Issues Fixed
+
+- **MON-300** Prevent the monitoring agent service from accidentally starting 128T service
+
+  _**Resolution**_ If 128T is not running, the MA will fail to start instead of starting 128T
 
 - **MON-294** LTE interfaces were not found in the 128T configuration
 
