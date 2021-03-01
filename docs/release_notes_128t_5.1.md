@@ -151,6 +151,10 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 
 ### Caveats
 
+- **I95-21775 BGP VRF Support:** 
+	- BGP and Multi-Protocol over SVR is not currently supported for the VRF BGP instances. 
+	- In order to exchange VRF routes via BGP, each VRF needs a separate BGP protocol instance and BGP session.
+
 - **I95-37050 Remove Deprecated API Fields:** 
 
 	- "averageBandwidth" and "traffic" fields have been removed from the `/router/{router}/node/{node}/deviceInterface` response message.

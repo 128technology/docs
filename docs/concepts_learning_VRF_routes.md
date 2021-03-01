@@ -1,9 +1,9 @@
 ---
-title: Learning VRF routes Via BGP
-sidebar_label: Learning VRF routes Via BGP
+title: Learning VRF Routes
+sidebar_label: Learning VRF Routes
 ---
 
-128T uses the concept of Tenancy to provide L3 network segmentation. With the 5.1 release, support for learning VRF routes through BGP and the associated routing tables has been added.
+128T uses the concept of Tenancy to provide L3 network segmentation. The 5.1 release brings support for learning VRF routes through BGP and the associated routing tables.
 
 Virtual Routing and Forwarding (VRF) instances make it possible to maintain multiple routing tables with overlapping address spaces in one router. A single 128T router can support multiple VRF instances, and is able to establish BGP peering sessions within each VRF to receive and distribute VRF routes. When a 128T router is connected to more than one VPN, each VPN can become its own VRF, supporting overlapping addresses. This provides a much broader scope of L3 network paths.
 
@@ -38,7 +38,3 @@ For information about configuring each of the following types of Service Mapping
 - [Services with Different Tenants](config_vrf_learning.md#services-with-different-tenants)
 - [Single Service with multiple tenants associated with different VRFs](config_vrf_learning.md#single-service-with-multiple-tenants-associated-with-different-vrfs)
 - [Service with no tenant VRF association](config_vrf_learning.md#service-with-no-tenant-vrf-association)
-
-### Caveats 
-- BGP over SVR is not currently supported for the VRF BGP instances.  
-- In order to exchange VRF routes via BGP, each VRF needs a separate BGP protocol instance and BGP session.
