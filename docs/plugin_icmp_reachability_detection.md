@@ -819,3 +819,4 @@ Some of the key aspects of the auto-generated configuration are as follows:
 #### Issues Fixed
 
 - **PLUGIN-768** Support the ICMP Reachability Detection plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-611** Add a plugin state endpoint with summary and detail verbosity. State information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-icmp-reachability-detection`

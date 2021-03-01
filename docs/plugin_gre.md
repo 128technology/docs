@@ -551,6 +551,7 @@ In addition, a `ping-monitor` service is started for each configured tunnel, the
 #### Issues Fixed
 
 - **PLUGIN-768** Support the GRE plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-611** Add a plugin state endpoint with summary and detail verbosity. State information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-gre`
 
 ### Release 1.1.3, 2.1.3
 
