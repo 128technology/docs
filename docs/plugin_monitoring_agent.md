@@ -18,11 +18,7 @@ The monitoring agent at its core is designed to be able to push data to external
 
 ## Installation
 
-The 128T Monitoring Agent can be obtained from the official 128T software repository. The following versions of the **monitoring-agent** are available for corresponding 128T software version.
-
-| Monitoring Agent                | 128T          |
-| ------------------------------- | ------------- |
-| **128T-monitoring-agent-3.X.X** | 128T >= 4.1.0 |
+The 128T Monitoring Agent can be obtained from the official 128T software repository. The latest 128T-monitoring-agent should always be used and is compatible with `128T >= 4.1.0`
 
 :::important  
 Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported 128T versions. It should be preferred for new installations and upgrades.  
@@ -40,7 +36,7 @@ dnf install 128T-monitoring-agent
 
 | Release      | Modification                                                    |
 | ------------ | --------------------------------------------------------------- |
-| 3.3.1        | `name` differentiator                                           |
+| 3.3.1        | runtime environment `name` was introduced                       |
 | 3.0.0        | per input `sample-interval` and `push-interval` were introduced |
 | 1.2.0, 2.1.0 | `lib-directory` was introduced                                  |
 
@@ -70,7 +66,7 @@ outputs:
   - name: message_queue
 ```
 
-When using multiple instances of the Monitoring Agent, specify the `name` to uniquely identify each instance. Without this distinction, two inputs with the same name can colide (be started/stopped/reconfigured by both instances) even if they are listed in separate `config.yaml` files. This field may be ignored when using the default `config.yaml` file. In other cases, the name of the directory containing the config file will be used as the name if none is specified.
+When multiple instances of the Monitoring Agent are running, two inputs with the same name can collide (be started/stopped/reconfigured by both instances) even if they are listed in separate `config.yaml` files. By default, the name of the directory containing the config file will be used as the name of the environment in order to distinguish them. Alternatively, the config `name` field can be explicitly specified to identify the unique environment.
 
 The `enabled` field is meant as global toggle for applying the monitoring agent functionality. When set to `disabled` the monitoring agent will remain dormant on the 128T.
 
@@ -778,7 +774,7 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 
 - **MON-316** Correct default metrics bug where interface `received-missed` was collected from `stats/interface/received/error`
 
-  _**Resolution**_ Point `received-missed` to the correct `stats/interface/received/missed`
+  _**Resolution**_ The default metrics configuraiton was updated to point `received-missed` to the correct `stats/interface/received/missed`
 
 ### Release 3.1.0
 
