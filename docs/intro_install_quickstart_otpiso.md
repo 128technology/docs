@@ -1,6 +1,6 @@
 ---
 title: Quickstart From the OTP ISO
-sidebar_label: Quickstartfrom the OTP ISP
+sidebar_label: Quickstartfrom the OTP ISO
 ---
 
 Use this procedure to set up a typical standalone branch router leveraging the QuickStart capabilities of the 128T Networking Platform.
