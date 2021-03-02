@@ -46,9 +46,13 @@ jobs:
           folder-path: 'docs'
 
       - name: Deploy
-        if: github.event_name != 'pull_request' || github.event_name == 'workflow_dispatch'
+        if: github.event_name != 'pull_request'
         uses: peaceiris/actions-gh-pages@v3.7.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build
           cname: 'docs.128technology.com'
+
+      - name: Event
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "Triggered by Workflow Action"
