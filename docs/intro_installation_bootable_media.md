@@ -1,15 +1,16 @@
 ---
-title: Installing From Bootable Media
-sidebar_label: Installing from Bootable Media
+title: Conductor Interactive Installation
+sidebar_label: Conductor Interactive Installation
 ---
 
 This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading a 128T ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
-The steps in this section describe installing either ISO from bootable media. The section, [Initialize the 128T](#initialize-the-128t-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
+The steps in this section describe the interactive Conductor installation from the ISO. The section, [Initialize the 128T](#initialize-the-128t-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
+
 :::note
 The Conductor installation must be completed before installing a router or routers using the OTP ISO.
 :::
-See [Installing Using the One Touch Provisioning ISO](intro_otp_iso_install.mdx) for details to install complex router configurations **after** installing and configuring the Conductor. 
+This same procedure may be used to install a router, or the procedure [Router Installation Using OTP](intro_otp_iso_install.mdx) can be used to install complex router configurations **after** installing and configuring the Conductor. 
 
 ## Prerequisites
 
@@ -22,27 +23,28 @@ After imaging the ISO onto removable media, insert it into the target machine an
 
 ### Choose the Installation Type
 
-Earlier versions of 128T Software (prior to 5.0.0) display the following Linux installation screen when booting to a serial console:
+Upon boot, the following screen is displayed. Not all hardware has video support, so booting to the serial console is the default. 
 
-![Boot Screen](/img/intro_install_LegacyInstall.png)
+To install using the Interactive Installation use the arrow keys to select either `Install 128T Routing Software Serial Console` or `Install 128T Routing Software VGA Console`. As noted earlier, this guide describes the installation process using the Interactive Installation, specifically using the VGA console. The process for a Conductor or a Router is the same. 
 
-Installations of 128T Version 5.0.0 and later display the following Linux installation screen when booting to a serial console:
+![VGA Boot with Interactive Install](/img/install_select_interactive.png)
 
-![New Boot Screen](/img/intro_install_OTPInstall_1.png)
+Differences for the Serial console are described in the Appendix. 
 
-Systems with VGA support will display the 128 Technology logo above the list of installation options. 
+To perform the installation using the OTP Installation, use the arrow keys to select either `OTP Install 128T Routing Software Serial Console` or `OTP Install 128T Routing Software VGA Console`. The OTP Installation for the serial or VGA console is described in the section [Router Installation Using OTP](intro_otp_iso_install.mdx).
 
 :::note
 Not all hardware has video support, therefore booting to console is the default (a console user may not be able to select an option). The default option is selected after a 30 second timeout.
 
 Selecting the wrong type of console (Serial or VGA) may result in garbage characters being displayed and the install hanging. If this is the case, reboot the target system and select the correct line for the target hardware.
 ::: 
+However, the procedure that follows here is the Interactive install on the VGA Console.
 
 #### 128T System via Serial Console
 
 Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer. 
 
-The serial screen size must be a minimum of 80x25, otherwise the output is not readable. If the output becomes unreadable, exit the console, reconnect, and use ^L to repaint the screen. 
+The serial screen size must be a minimum of 80x25, otherwise the output is not readable. If you encounter this issue, refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
 
 #### 128T System with VGA Console
 
@@ -54,30 +56,24 @@ After the Linux installation completes, the 128T software installation begins. N
 
 ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
 
-After shutting down the system, remove the bootable media. 
-If you installed the Interactive ISO powering up the system will start the Initializer. 
-If you installed using One Touch Provisioning, power the system up to complete the installation process. 
+Shut down the system and remove the bootable media. Then power the system up to complete the installation process. 
 
-### Installation Notes
+- GUI login via HTTPS is enabled by default on port 443.
 
-1. The following user accounts and passwords are created during the ISO installation process:
+- The following user accounts and passwords are created during the ISO installation process:
 
-   | Username | Password   |
-   | -------- | ---------- |
-   | root     | 128tRoutes |
-   | t128     | 128tRoutes |
+   | Username | Password   | Access Scope |
+   | -------- | ---------- | ------------ |
+   | root     | 128tRoutes | Linux account |
+   | t128     | 128tRoutes | Linux account |
+   | admin | 128Tadmin | 128T PCLI admin account |
+   | user | 128Tuser | 128T user PCLI account |
 
    It is *strongly recommended* that you change these passwords immediately.
 
-2. GUI login via HTTPS is enabled by default on port 443.
-
 ## Initialize the 128T Node
 
-The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched after the installation reboot. The Serial console displays an initial screen (VGA console does not require this input).
-
-![Network Manager TUI](/img/Initializer_Serial1.png)
-
-Use the up or down keyboard arrows to select *Edit a connection*.
+The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched after the installation reboot. 
 
 1. On the 128T Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the 128T node and press the **Enter** key to select **OK**.
 
@@ -155,6 +151,31 @@ After installing the 128T Software it is important to verify that the installati
 
 4. Close the command prompt window. 
 
+## Serial Console Installation Information
 
+Please note that Serial and UEFI consoles display differently. The following is the  installation screen when booting to a Serial console:
+
+![Boot Screen](/img/intro_install_LegacyInstall.png)
+
+The following is the  installation screen when booting to a UEFI console:
+
+![New Boot Screen](/img/intro_install_OTPInstall_1.png)
+
+### Serial Console Troubleshooting
+
+In order to avoid SSH session timeout during installation, it is strongly recommended to use the **Screen** utility when performing an installation. The serial screen size must be a minimum of 80x25, otherwise the output is not readable. 
+
+![Corrupt Serial Install Complete](/img/install_serial_corrupt.png)
+
+In cases where the **Screeen** output becomes unreadable, use the following procedure. 
+1. Type: `^a` (Ctrl-a)
+2. Type: `k`
+3. Type: `y` [for yes to exist screen]
+4. Reconnect with screen (i.e., Screen command could be “screen /dev/tty.usbserial-1430 115200” ).
+5. Type: `^l` (Ctrl-l) (lower case L) to repaint the screen. 
+
+![Resolved Serial Install Complete](/img/install_serial_resolved.png)
+
+Repeat these steps if the screen becomes unreadable at any time during the initialization process. 
 
 
