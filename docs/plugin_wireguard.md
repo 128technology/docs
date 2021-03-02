@@ -639,7 +639,7 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 #### Issues Fixed
 
 - **PLUGIN-1072** Allow wireguard to start when the required version of `kmod-wireguard` is installed along with versions not used by the active kernel.
-- **PLUGIN-611** Add a plugin state endpoint with summary and detail verbosity. State information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-wireguard`
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-wireguard`
 - **PLUGIN-768** Support the Wireguard plugin on conductors running 128T versions `5.1.0` and greater.
 
 ### Caveat

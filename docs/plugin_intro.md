@@ -79,19 +79,16 @@ Consider appropriate tenancy for each side of the traffic (ingress vs egress) to
 128T router have powerful application-based routing capabilities using [modules](concepts_appid.md#appid-using-modules) which can provide a name to ip-prefix mapping. As the documentation suggests, the module based approach requires programming expertise and as a result lends itself very well as a plugin. Several plugins utilize the app-id feature in the product to provide a meaningful user experience. The [`128T-dns-app-id`](plugin_dns_app_id.md) plugin, for example, combines both the SFC concept as described [above](#service-function-chaining) in order to learn and cache DNS records routed through the 128T platform as well as leveraging the learned information to provide named routing for applications such as GSuite, Gmail etc by leveraging application-id.
 
 ### Plugin Management
-The following PCLI commands are helpful for managing a suite of plugins on 128T. The commands are available for 128T conductors running 128T version `4.5.0` and greater.
+The following PCLI commands are helpful for managing a suite of plugins on 128T. The commands are available for conductors running 128T versions `4.5.0` and greater.
 
 #### Show Available Plugins
-Show available plugins by category using `show plugins available [node <node>] [category <category>]`. The supported categories are Application Classification, Cloud, Connectivity, Monitoring, Security, Unified Communications, Utility and Other. Show an overview of a plugin along with available versions using `show plugins available [node <node>] [name <plugin-name>]`
+Show available plugins by category using `show plugins available [node <node>] category <category>`. The supported categories are Application Classification, Cloud, Connectivity, Monitoring, Security, Unified Communications, Utility and Other. Show an overview of a plugin along with available versions using `show plugins available [node <node>] name <plugin-name>`
 
 #### Show Installed Plugins
 Show installed plugins using `show plugins installed [node <node>]`
 
 #### Show Plugin State
-Show the current state of a plugin using `show plugins state [router <router>] [node <node>] [{detail | summmary}] name <plugin-name>`. The verbosity of the state output can be set to `detail` or `summary`. Plugin state is supported in deployments with conductors and routers running 128T version `5.1.0` and greater and for the following plugins: 128T-wireguard, 128T-ipsec-client, 128T-gre, 128T-icmp-reachability-detection and 128T-dns-app-id.
+Show the current `detail` or `summary` state of a plugin using `show plugins state [router <router>] [node <node>] [{detail | summmary}] name <plugin-name>`. Plugin state is supported in deployments with conductors and routers running 128T versions `5.1.0` and greater. Some plugins do not support state data and will not give meaningful output from this command.
 
-#### Install a Plugin
-Install a plugin using `manage plugin install [node <node>] [name <plugin-name>]`
-
-#### Remove a Plugin
-Remove an installed plugin using `manage plugin remove [node <node>] [name <plugin-name>]`
+#### Install or Remove a Plugin
+Install/remove a plugin using `manage plugin {install | remove} [node <node>] name <plugin-name>`
