@@ -1,6 +1,6 @@
 ---
-title: Quickstart From the OTP ISO
-sidebar_label: Quickstartfrom the OTP ISO
+title: QuickStart From the OTP ISO
+sidebar_label: QuickStart from the OTP ISO
 ---
 
 Use this procedure to set up a typical standalone branch router leveraging the QuickStart capabilities of the 128T Networking Platform.
@@ -33,7 +33,7 @@ The *device host address* is the IP address that is assigned to the 128T router 
 
 A password is used to encrypt the contents of the QuickStart file.  This password will be required when applying the file to the target platform.
 
-<p align="center"><img src="/img/intro_ztp_quickstart_server_3.png" alt="QuickStart Link Generation"/></p>
+![QuickStart Link Generation](/img/intro_ztp_quickstart_server_3.png)
 
 - Copy the auto generated “Password” (this can be set to a different value)
 - Follow step 1 to download the QuickStart file locally by selecting the “Click Here” link
