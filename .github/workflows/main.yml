@@ -9,6 +9,7 @@ on:
   pull_request:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   build:
@@ -51,3 +52,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build
           cname: 'docs.128technology.com'
+
+      - name: Event
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "Triggered by Workflow Action"
