@@ -54,6 +54,8 @@ The `max-inter-node-way-points` value is configurable at the router level for al
 ------
 
 ### Resolved Issues
+- **I95-39044 OTP ISO bootstrap sets HA nodes with name of first node** The OTP bootstrap operation now updates the second node in an HA pair with the correct name. This correction has been applied to the v2 version of the 4.5.3 OTP ISO. This fix does not apply to the 4.5.4 nor the 4.5.5 OTP ISO at this time (03/01/2021).
+------
 - **I95-35567, I95-37833 Weak Password Policy.** New restrictions on password properties have been added to ensure strong passwords.
 ------
 - **I95-35987 Downloading exported config files does not preserve the file name.** The download process correctly preserves the file name. 
