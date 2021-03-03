@@ -5,15 +5,9 @@ sidebar_label: '5.1'
 
 ## Release 5.1.0
 
-:::warning
-SSH Root Login is not permitted. 
-
-Before upgrading, ensure that there is at least one user on each 128T system that has sudo privileges. Failure to do so may result in the loss of remote management connectivity to the 128T Networking Platform. Please see the [Installation Overview](intro_installation.md) for additional information. 
-:::
-
 ### New Features and Improvements 
 
-- **[I95-19132 Role-Based Access Control](config_RBAC.md):** Role-Based Access Control provides a mechanism for an Administrator to create Access Management Roles that allow specific access to 128T resources such as routers, tenants, and services, as well as other Authority-level configuration objects.  
+- **[I95-19132 Role-Based Access Control](config_RBAC.md):** Role-Based Access Control provides a mechanism for an Administrator to create Access Management Roles that allow specific access to 128T resources such as routers, tenants, services, and other Authority-level configuration objects, as well as actions such as install, upgrade, or download.  
 ------
 - **[I95-21775 BGP VRF Support:](concepts_learning_VRF_routes.md)** Support for learning VRF routes through BGP and the associated routing tables has been added. Virtual Routing and Forwarding (VRF) instances make it possible to maintain multiple routing tables with overlapping address spaces in one router.
 ------
@@ -45,11 +39,9 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-37663 GUI rebrand for managed service providers:** The Authority Settings now has a 'Theme' section that allows you to change the primary color, secondary color, and main icon of the GUI. 
 ------
-- **I95-38212 Conductor should have a "reboot" button in GUI:** Added a Restart button on each node page. Clicking the button opens a dialog which asks the user to confirm the (full system) restart. 
+- **I95-38212 Restart System button added to Node pages in GUI:** Added a Restart button on each node page. Clicking the button opens a dialog which asks the user to confirm the (full system) restart. 
 ------
 - **I95-38642 Form Based Template Instantiation:**  An administrator can now define a JSON Schema to create a template for variables so a user can fill out the variables in a simple form.
-------
-- **I95-38682 CVE Medium: Rebuild Python:** Python has been updated to address vulnerabilities.
 ------
 - **I95-38920 MIB additions - router metadata:** The following fields have been added to the T128-SYSTEM MIB:
 	- Router Description
@@ -63,11 +55,11 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 
 ### Resolved Issues
 
-- **I95-30812 kicked out of pcli with session timeout when actively running commands:** PCLI sessions now recognize all activity. 
+- **I95-30812 PCLI session terminated when actively running commands:** PCLI sessions now recognize all activity. 
 ------
 - **I95-30883 Add Enumeration Description to Combo Dropdown in Edit Config Pages:** GUI drop downs now display descriptions.
 ------
-- **I95-31882 inconsistency in "show alarm" output:** The `show alarms` output message is now consistent for shelved alarms and active alarms.
+- **I95-31882 Inconsistency in `show alarm` output:** The `show alarms` output message is now consistent for shelved alarms and active alarms.
 ------
 - **I95-33272 End port field validation accepts leading space:** An issue where the PCLI accepted a leading space in some fields has been resolved. Validation now removes leading and trailing spaces for number types.
 ------
@@ -126,6 +118,8 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 - **I95-38500 CVE Medium: binutils (CESA-2018:3032), binutils (CESA-2019:2075):** Added binutils to deprecated packages.
 ------
 - **I95-38543 salt_master memory leak using up all conductor memory:** This issue has been resolved with an update to saltstack 3002.2.
+------
+- **I95-38682 CVE Medium: Rebuild Python:** Python has been updated to address vulnerabilities.
 ------
 - **I95-38694 SNMP ifTable does not conform to correct IF-MIB representation of high speed interfaces:** The `ifSpeed` field in the legacy `ifTable` has been set to conform with the higher speed values. 
 ------
