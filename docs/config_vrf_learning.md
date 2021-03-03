@@ -10,14 +10,14 @@ The following configuration procedures can be used to initiate VRF learning usin
 To add VRF learning using BGP, add VRF objects to the `routing default-instance`, and configure BGP as the routing protocol. This allows the 128T BGP instance to peer with a remote peer and learn routes for the VRF.
 ```
 router         Test
-	routing		default-instance
-		vrf		red
-           	name              red
-            routing-protocol		bgp
-               	type                bgp
-                local-as  		    1
+    routing    default-instance
+        vrf    red
+            name    red
+            routing-protocol        bgp
+                type                bgp
+                local-as            1
                 router-id 10.1.1.1
- 				neighbor
+                neighbor
                     neighbor-address  10.1.1.2
                     neighbor-as       3000
 ```
@@ -111,7 +111,7 @@ A service with access to tenants that have no VRF association will default to th
 VRF serves as a routing table for each tenant to ensure that there is a route to the destination. Multiple tenants can have access to this VRF table via Services. If a service is not defined with a prefix that matches the routing table, no FIB entries are installed. 
 
 ## Show Commands
-The following show commands have been extended to specify a `vrf-name`. For specific use examples, refer to the linked section in the Command Line Reference guide.
+The following show commands have been extended to specify `vrf`. For specific use examples, refer to the linked section in the Command Line Reference guide.
 
 [`show bgp`](cli_reference.md#show-bgp)
 

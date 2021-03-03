@@ -69,37 +69,33 @@ sidebar_label: '5.1'
 ------
 - **I95-34443 Provisioner status in router dialog not matching the Asset status in router page:** Asset Reconciliation now takes place automatically every 1.5 minutes in the GUI to assure the states of all assets are correctly reflected in the UI.
 ------
-- **I95-35405 BGP over VLAN (non-SVR) not working:** This issue has been resolved as part of I95-36341.
-------
 - **I95-35521 Ambigious validation error:** Errors now more clearly identify the source of the error.
 ------
 - **I95-35646 Wrong date for weekday in date picker:** The date-picker logic has been updated to resolve this issue. 
 ------
 - **I95-35783 Bootstrap DHCP server not resilient to power loss or abrupt shutdown:** The handling of abrupt shutdowns has been strengthened.
 ------
-- **I95-36053 High number of System Events on 128T Config chnages:** Added a filter to audit logs of type SERVICE-START and SERVICE-STOP based on service to filter just the required services.
+- **I95-36053 High number of System Events on 128T Config changes:** Added a filter to audit logs of type SERVICE-START and SERVICE-STOP based on service to filter just the required services.
 ------
 - **I95-36366 Security keys are not automatically generated for unmanaged router:** Security keys are now automatically generated. 
 ------
 - **I95-36397 / I95-36614 Auto Generated DHCP Server Interface Down:** Generate namespace ID with node specific namespace name for device interface to prevent namespace id collision.
 ------
-- **I95-36509 SSC drops validate message if managed router disconnects while message is in-flight:** This issue has been resolved.
+- **I95-36509 Validation may be terminated or not execute if the 128T SSR experiences a disconnect from the conductor:** This issue has been resolved.
 ------
-- **I95-36761 PCLI configure bgp default-route-distance:** All three BGP default distances (ebgp, ibgp, and local) now have default settings.
+- **I95-36761 Configuring `default-route-distance` under bgp causes a fault in the PCLI:** This issue has been resolved by providing defaults for default BGP distances (ebgp, ibgp, and local).
 ------
 - **I95-37002 Help text on shared-mac parameter should be more explicit:** The description has been updated to provide additional information. 
 ------
-- **I95-37181 LTE Modem denied from network with 128T Service Running:** Resolved an issue where UDP packets larger than interface(network) MTU will cause Rx Error on the LTE interface, and resulted in denial of the LTE modem.
+- **I95-37181 LTE Modem denied from network with 128T Service Running:** Resolved an issue where UDP packets larger than the network-interface MTU causes Rx Error on the LTE interface, resulting in denial of the LTE modem.
 ------
-- **I95-37699 Save tech support on scaled setup has corrupted zip file:** Added a Limit Argument To PCLI show events and Tech Support to resolve this issue. 
+- **I95-37699 `save tech-support-info` may generate a corrupted zip file on systems that have greater than 10K alarms:** Added a `limit` argument to PCLI show events and Tech Support to resolve this issue.  
 ------
 - **I95-37728 show rib summary hangs/return no data:**  Added support to proxy the routing engine endpoint in the web server, and provided support for the vrf argument in `show rib summary`.
 ------
-- **I95-37770 CVE Obfuscator consumes password as a command line argument:** This issue has been resolved. 
+- **I95-37770 Password Obfuscator consumes password as a command line argument:** This issue has been resolved. 
 ------
-- **I95-37826 CIS Compliance: Ensure permissions on bootloader config are configured:** Appropriate permissions are set on bootloader config files.
-------
-- **I95-37848 Properly handle jumbo UDP packet from LTE network:** Resolved an issue where UDP packets larger than interface(network) MTU will cause Rx Error on the LTE interface.
+- **I95-37826 Ensure permissions on bootloader config are configured:** Appropriate permissions are set on bootloader config files.
 ------
 - **I95-37910 AWS c5.xlarge instance shows 2 cores in GUI:** Custom Report charts now persist the displayed data even if an error occurs, specifically if internet connection drops or a node becomes unavailable. A small error indicator now appears above the chart, which can be hovered and displays the error.
 ------
@@ -107,9 +103,9 @@ sidebar_label: '5.1'
 ------
 - **I95-38389 PDM gets pegged at 100% which makes the GUI and PCLI inaccessible:** The config export process has been made more efficient to reduce the chance of a race condition. 
 ------
-- **I95-38393 Minions Cannot Get Past Connected State:** Resolved an issue where assets could become stuck in Connected state.
+- **I95-38393 Router Cannot Get Past Connected State:** Resolved an issue where assets could become stuck in Connected state.
 ------
-- **I95-38458 Handle PCLI model files on the upgrade:** Resolved an issue where caching errors prevented 128T from starting. 
+- **I95-38458 PCLI fails to start after upgrade:** Resolved an issue where caching errors prevented 128T from starting. 
 ------
 - **I95-38474 The `router > dns-config` does not account for the immutable bit on `/etc/resolv.conf`:** Resolved an issue with the DNS proxy not working due to the immutable bit set by ISO. 
 ------
@@ -123,17 +119,17 @@ sidebar_label: '5.1'
 ------
 - **I95-38694 SNMP ifTable does not conform to correct IF-MIB representation of high speed interfaces:** The `ifSpeed` field in the legacy `ifTable` has been set to conform with the higher speed values. 
 ------
-- **I95-38768 Advance DPDK submodule to pick up VMXNet3 Fix:** A fix has been applied to the ip header checksum and is now calculated via hardware offload.
+- **I95-38768 VMXNet3 driver not functional:** A fix has been applied to the ip header checksum and is now calculated via hardware offload.
 ------
-- **I95-38830 Fix when statement for device interface identifier:** Resolved a configuration problem wherein vmbus-uuid could not be configured unless forwarding was explicitly configured.
+- **I95-38830 Validation error when device-interface type is set to vmbus-uuid and forwarding is disabled:** Resolved a configuration problem wherein vmbus-uuid could not be configured unless forwarding was explicitly configured.
 ------
-- **I95-38832 NETCONF Ending Deliminator Can Appear Over Buffer Packets:** Resolved an issue that resulted in unresponsive web and command line interfaces caused by certain configuration sizes.
+- **I95-38832 Intermittent PCLI command failure when issues queries against managed routers:** Resolved an issue that resulted in unresponsive web and command line interfaces caused by certain configuration sizes.
 ------
 - **I95-38963 Address sudo CVE-2021-3156:** Upgraded to later version.
 ------
 - **I95-38986 Template parse error is difficult to find:** Added additonal context to the error to help identify.
 ------
-- **I95-39011 AP using almost 300% CPU, show assets plci command stuck after upgrade:** Resolved by increasing the timeout for local rpm queries. 
+- **I95-39011 AutomatedProvisioner process consuming 300%:** Resolved by increasing the timeout for local rpm queries. 
 ------
 - **I95-39036 dns-config=automatic should be allowed when using PPPoE:** Resolved an issue where management over pppoe interface does not allow dns-config mode to be configured.
 ------

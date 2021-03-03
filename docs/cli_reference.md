@@ -48,7 +48,7 @@ Clear routes associated with one or all BGP neighbors.
 #### Usage
 
 ```
-clear bgp vrf <vrf-name> [{in | out | soft}] [force] router <router> <neighbor>
+clear bgp vrf [{in | out | soft}] [force] router <router> <neighbor>
 ```
 
 ##### Keyword Arguments
@@ -60,7 +60,7 @@ clear bgp vrf <vrf-name> [{in | out | soft}] [force] router <router> <neighbor>
 | out | Soft reset transmitted BGP updates |
 | router | The name of the router for which to clear BGP neighbors |
 | soft | Soft reset received and transmitted BGP updates |
-| vrf | Clears routes associated with one or all BGP neighbors in the specified VRF. |
+| vrf | Clears routes associated with one or all BGP neighbors in the VRF. |
 
 ##### Positional Arguments
 
@@ -3758,7 +3758,7 @@ Displays information about the state of the BGP process on the 128T router.
 #### Usage
 
 ```
-show bgp [rows <rows>] [force] router <router> vrf <vrf-name> [<route>]
+show bgp [rows <rows>] [force] router <router> vrf [<route>]
 ```
 
 ##### Keyword Arguments
@@ -3841,7 +3841,7 @@ Displays information about the state of the BGP neighbors on the 128T router.
 #### Usage
 
 ```
-show bgp neighbors [rows <rows>] [force] router <router> vrf <vrf-name> [<neighbor-ip>] [<option>]
+show bgp neighbors [rows <rows>] [force] router <router> vrf [<neighbor-ip>] [<option>]
 ```
 
 ##### Keyword Arguments
@@ -3899,7 +3899,7 @@ Show the current BGP summary from the routing manager.
 #### Usage
 
 ```
-show bgp summary [rows <rows>] [force] router <router> vrf <vrf-name>
+show bgp summary [rows <rows>] [force] router <router> vrf
 ```
 
 ##### Keyword Arguments
@@ -5115,7 +5115,7 @@ Shows current fib entries at the specified node.
 #### Usage
 
 ```
-show fib service-name <name> | hierarchy-service-name <name> | contains-service-name <name>} prefix <prefix> source-address <source-IP> source-interface <interface-name> tenant <tenant-name> [{detail}] rows <rows>] [force] router <router> node <node>  
+show fib service-name <name> | hierarchy-service-name <name> | contains-service-name <name>} prefix <prefix> source-address <source-IP> source-interface <interface-name> tenant <tenant-name> [{detail}] rows <rows>] [force] router <router> node <node> vrf 
 ```
 
 ##### Keyword Arguments
@@ -5133,7 +5133,7 @@ show fib service-name <name> | hierarchy-service-name <name> | contains-service-
 | source-address | Show FIB results filtered by source-address |
 | source-interface | Show FIB results filtered by source-interface |
 | tenant | Show FIB results filtered by tenant |
-| vrf | Displays all FIB entries with tenants that match the specified VRF. |
+| vrf | Displays all FIB entries with tenants that match the VRF. |
 
 #### Description
 
@@ -6999,7 +6999,7 @@ Displays the contents of the 128T router&#39;s Routing Information Base (RIB)
 #### Usage
 
 ```
-show rib [rows <rows>] [force] router <router> vrf <vrf-name> [<route>] 
+show rib [rows <rows>] [force] router <router> vrf [<route>] 
 ```
 
 ##### Keyword Arguments
@@ -7009,7 +7009,7 @@ show rib [rows <rows>] [force] router <router> vrf <vrf-name> [<route>]
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | router | The name of the router for which to display RIB routes |
 | rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| vrf | Displays all routes learned in the specified VRF table. |
+| vrf | Displays all routes learned in the VRF table. |
 
 ##### Positional Arguments
 
@@ -7329,98 +7329,6 @@ Completed in 0.17 seconds
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
 
-## `show service`
-
-Displays run-time data of each service on a router.
-
-#### Usage
-
-```
-show service [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [{detail}] router <router> node <node> [<verbosity>]
-```
-#### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| contains-service-name | The partial substring match for which to display the service path |
-| hierarchy-service-name | The hierarchy root for which to display the service path |
-| node | The node for which to display service path |
-| router | The router for which to display the service path |
-| service-name | The exact service name for which to display the service path |
-
-#### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| verbosity | Display detailed information for the service |
-
-#### Example 1 Summary
-```
-show service
-
-Service         Prefixes           Transport        Access     Service-Policy   State         Sessions      Tx Bandwidth     Rx Bandwidth
-
-Web             10.0.0.0/8         Http, Https      Red, Blue    policy1       Excellent        10            1.2Kbps         1.2Kbps
-                11.0.0.0/8                                                                                                                           
-
-Database        12.0.0.1/32        TCP/8000         Blue         policy3       Degraded         20            3.4Kbps         1.2Kbps
-
-Internet        0.0.0.0/0          Http, Https      Green        policy2       Excellent        10            1.0Gbps         2.2Kbps
-
-Login           10.2.2.2/32        Ssh              Red, Green   policy2       Unavailable       2            1.0kbps         4.2Kbps
-
-SIP             10.2.3.3.0/24      SIP              Blue          None         Unavailable       0            0.0Kbps         1.52Kbps
-
-WAP             10.2.4.0/24        UDP[1000-1500]   Global        None         Excellent         1            1.2Kbps         1.2Kbps
-
-```
-The fields are defined as follows: 
-
-- Service: Name of Service.
-- Prefixes: List of prefixes associated with the service.
-- Transport: Protocol name (SIP, SSH, etc.), or raw protocol and port.
-- Access: List of configured access policies.
-- Sessions: Total number of sessions for this service.
-- Service-Policy: Name of service-policy associated with this service.
-- State: Indicates the quality of the service, whether it is excellent, degraded, or unavailable.
-- Bandwidth: Bandwidth consumed by the service.
-
-
-#### Example 2 Detail
-```
-show service service-name Web detail
-
-Service Web
-
-Prefix:          10.0.0.0/8, 11.0.0.0/8 
-Auto-generated : Yes (Router)
-Transport      : HTTP, HTTPS
-Access         : Red, Blue
-
-Service-Policy : policy1
-State          : Excellent
-
-Enabled        : Yes
-NextHop Type   : SVR, Local Service-Route
-Traffic Class  : HIgh, Low, Medium, Best-Effort
-Service-Routes : web-route1, web-route2, peer-route2
-Service-Paths  : 
-   Node 1:
-     Up Paths: Peer1, Peer2, Lan1
-     Down Paths: Lan2
-   Node 2: 
-     Up Paths: Peer1, Peer2, Lan1
-     Down Paths: Lan2
-Sessions       : 10
-Tx Bandwidth   : 1.2Kbps
-Rx Bandwidth   : 1.2Kbps
-```
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 5.1.0   | Detail fields added: Enabled, NextHop Type, Traffic Class, Service Routes |
 
 ## `show service-path`
 
@@ -8407,11 +8315,11 @@ Displays details about all configured VRF's.
 
 #### Usage
 ```
-show vrf <vrf-name>
+show vrf [<verbosity>]
 ```
 #### Description 
 
-Provides details about all configured VRF’s including the tenants, network-interfaces, and routing-interfaces in each VRF. Use to verify whether the configuration was specified correctly and resulted in the desired VRF state.
+Provides details about all configured VRF’s including name, tenants, network-interfaces, and routing-interfaces in each VRF. Use to verify whether the configuration was specified correctly and resulted in the desired VRF state.
 
 #### Example
 
