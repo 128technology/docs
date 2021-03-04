@@ -644,7 +644,7 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 
 ### Caveat
 
-- **I95-38622** The plugin is not yet supported on routers running 128T versions `5.1.0` and greater.
+- **I95-38622** The plugin is not supported on routers running 128T version `5.1.0`.
 
 ### Release 1.2.0
 
