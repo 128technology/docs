@@ -34,7 +34,7 @@ Differences for the serial console are described in [Serial Console Installation
 To perform the installation using the OTP Installation, use the arrow keys to select either `OTP Install 128T Routing Software Serial Console` or `OTP Install 128T Routing Software VGA Console`. The OTP Installation for the serial or VGA console is described in the section [Router Installation Using OTP](intro_otp_iso_install.mdx).
 
 :::note
-Not all hardware has video support. Booting to the serial console is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 (anything smaller may result in abnormal navigation behavior.
+Not all hardware has video support. Booting to the serial console is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
 
 Selecting the wrong type of console (Serial or VGA) may result in garbage characters being displayed, and if left to continue will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 ::: 
@@ -45,7 +45,7 @@ The procedure that follows here is the Interactive Install on the VGA Console.
 
 Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer. 
 
-The expected Serial console default size is 80x25. If the terminal being used to connect to the console is less than row (80) X column (25), the display may appear that the user is unable to select the entries, or the display does not repaint correctly. If you encounter this issue, refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
+The expected Serial console default size is 80x25. If the terminal being used to connect to the console is less than row (80) X column (25), the display may appear that the user is unable to select the entries, or the display does not repaint correctly. For serial console issues please refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
 
 #### 128T System with VGA Console
 
@@ -74,6 +74,8 @@ Shut down the system and remove the bootable media. Then power the system up to 
 ## Initialize the 128T Node
 
 The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched after the installation reboot. 
+
+If you are installing a highly available Conductor on the cloud, please refer to [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md).
 
 1. On the 128T Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the 128T node and press the **Enter** key to select **OK**.
 
@@ -121,7 +123,7 @@ The 128T Initializer tunes your operating system, prepares the platform to run t
 
 5. The **Advanced** button allows you to specify the number of CPU cores to be allocated for running your 128T routing software. The **Advanced** selection is only available when configuring a 128T Router. 
    :::info
-   This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilites of the 128T Router beyond the default settings for the target platform.
+   This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilities of the 128T Router beyond the default settings for the target platform.
    :::
 
 6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
@@ -179,25 +181,25 @@ The following is the  installation screen when booting to a UEFI console:
 
 ### Serial Console Troubleshooting
 
-The serial screen size **must** be a minimum of 80x25, otherwise the output may not be readable, and the console navigation may have unintended consequences or may not appear to navigate at all. For example, the following may be seen during the installation process:
+- The serial screen size **must** be a minimum of 80x25, otherwise the output may not be readable, and the console navigation may have unintended consequences or may not appear to navigate at all. 
 
-![Corrupt Serial Install Complete](/img/install_serial_corrupt.png)
+- When performing an installation via the serial console, some systems do not interpret control characters that may be passed on the serial console line. For example, the following may be seen during the installation process:
 
-When performing an installation via the serial console, some systems do not interpret control characters that may be passed on the serial console line.
+  ![Corrupt Serial Install Complete](/img/install_serial_corrupt.png)
 
-In cases where the screen output becomes unreadable, use the following procedure. 
-1. Type: `^a` (Ctrl-a)
-2. Type: `k`
-3. Type: `y` [for yes to exist screen]
-4. Reconnect with screen (i.e., Screen command could be “screen /dev/tty.usbserial-1430 115200” ).
-5. Type: `^l` (Ctrl-l) (lower case L) to repaint the screen. 
+  In cases where the screen output becomes unreadable, use the following procedure. 
+  - Type: `^a` (Ctrl-a)
+  - Type: `k`
+  - Type: `y` [for yes to exist screen]
+  - Reconnect with screen (i.e., Screen command could be `screen /dev/tty.usbserial-1430 115200`).
+  - Type: `^l` (Ctrl-l) (lower case L) to repaint the screen. 
 
-:::note
-Repaint does not work on the initial boot screen when imaging a system. If the serial console is disconnected, it is recommended to restart the system and begin the imaging process again.
-:::
+  ![Resolved Serial Install Complete](/img/install_serial_resolved.png)
 
-![Resolved Serial Install Complete](/img/install_serial_resolved.png)
+  :::note
+  Repaint does not work on the initial boot screen when imaging a system. If the serial console is disconnected, it is recommended to restart the system and begin the imaging process again.
+  :::
 
-Repeat these steps if the screen becomes unreadable at any time during the initialization process. 
+  Repeat these steps if the screen becomes unreadable at any time during the initialization process. 
 
 
