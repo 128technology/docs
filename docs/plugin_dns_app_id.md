@@ -28,8 +28,8 @@ configure
                 builtin-apps windows-update
                 custom-apps cnn
                     name cnn
-                    patterns cnn.com
-                    patterns .*\\.cnn.com
+                    domain-name cnn.com
+                    domain-name .*.cnn.com
                 exit
             exit
         exit
@@ -45,7 +45,7 @@ exit
 | custom-apps | subelement | Multiple instance object. Allows administrators to define custom patterns for matching applications. |
 | custom-apps > name | string | The name of the custom-app. This value will subsequently be configured within a `service > application-name` to give treatment to that application. |
 | custom-apps > description | string | A human-readable description of the custom application. |
-| custom-apps > patterns | regex | A regular expression pattern for matching to DNS requests that the 128T processes. |
+| custom-apps > domin-name | string | A wildcard expression (POSIX.2 fnmatch) to match DNS requests that 128T processes. |
 
 ### Built-In Patterns
 
@@ -54,16 +54,18 @@ exit
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
 | 1.2.0, 2.2.0 | `include-builtin-apps` was introduced |
+| 1.3.0, 2.3.0 | Add `youtube` as builtin pattern |
 
-The plugin contains built in application patterns for Gmail, Google Drive, and Windows Update. The patterns were generated from the following published documents:
+The plugin contains built in application patterns for Gmail, Google Drive, Youtube, and Windows Update. The patterns were generated from the following published documents:
 
 | Application    | Document |
 | -------------- | --- |
 | Gmail        | [link](https://support.google.com/a/answer/9497877?hl=en) |
 | Google Drive   | [link](https://support.google.com/a/answer/2589954?hl=en) |
-| Windows Update | [link 1](https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#211-connection-from-the-wsus-server-to-the-internet) [link 2](https://docs.microsoft.com/en-us/windows/deployment/update/windows-update-troubleshooting#device-cannot-access-update-files) |
+| Windows Update | [link 1](https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#211-connection-from-the-wsus-server-to-the-internet) [link 2](https://docs.microsoft.com/en-us/windows/deployment/update/windows-update-troubleshooting#device-cannot-access-update-fWindows Updateiles) |
+| Youtube   | [link](https://www.netify.ai/resources/applications/youtube) |
 
-By enabling the `include-all-builtin-apps` configuration, the plugin will automatically include all the available apps. This allows for new apps to be automatically included as new builtin apps are added over time. Alternatively, you can choose specific builtin apps by name, as shown in the snippet above. The values you can configure are `gmail`, `google-drive`, and `windows-update`.
+By enabling the `include-all-builtin-apps` configuration, the plugin will automatically include all the available apps. This allows for new apps to be automatically included as new builtin apps are added over time. Alternatively, you can choose specific builtin apps by name, as shown in the snippet above. The values you can configure are `gmail`, `google-drive`, `youube` and `windows-update`.
 
 
 ### Custom Patterns
@@ -73,12 +75,12 @@ By enabling the `include-all-builtin-apps` configuration, the plugin will automa
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
 | 1.2.0, 2.2.0 | Support for adding custom-apps at authority level was introduced |
+| 1.3.0, 2.3.0 | deprecate `pattterns` in favor of `domain-name` for custom-apps |
 
 The plugin also allows the user to create their own definitions of applications by configuring a set of patterns to be used for matching the application. Each pattern must be a valid regex that will be applied to a FQDN to identify the application. The `authority > dns-app-id > custom-apps` config can be used to define patterns that apply to all the routers with `dns-app-id` functionality enabled. Also shown in the configuration snippet is the custom-app `cnn` that includes a list of patterns to be applied at the router level. The identification is dynamic, so you just need to update the configuration on the conductor to include new apps or patterns for your routers. When `custom-apps` are configured at the authority and router level, the two lists are combined at runtime for that particular router. For example, if the user configured a custom-app called `zoom` on the authority and another app called `cnn` on the router, the router will contain both the applications.
 
-:::note
-The `.` character bears special meaning within regular expressions, and matches *any single character*. Because hostnames contain literal `.` characters, in order to explicitly reference a dot separator, you must prefix it with **two** backslash characters. I.e., to have a pattern match the hostname `www.128technology.com`, you would type it into the PCLI as `www\\.128technology\\.com`. The PCLI will render the double backslash characters as a single backslash when you `show` the configuration.
-:::
+Each custom-app should use the `domain-name` instead of the deprecated `patterns` for identifying custom applications. It is POSIX.2 compliant with [fnmatch](https://pubs.opengroup.org/onlinepubs/9699919799/functions/fnmatch.html).
+
 
 #### Example
 This example shows our builtin `gmail` application's pattern matching configured as a custom-app. You should not use this example in production, but is intended to document how to build out complicated pattern matching for an application.
@@ -86,20 +88,27 @@ This example shows our builtin `gmail` application's pattern matching configured
 ```
 custom-apps gmail
     name gmail
-    patterns .*\\.client-channel\\.google\\.com
-    patterns accounts\\.google\\.com
-    patterns apis\\.google\\.com
-    patterns clients.*\\.google\\.com
-    patterns contacts\\.google\\.com
-    patterns hangouts\\.google\\.com
-    patterns .*\\.googleusercontent\\.com
-    patterns mail\\.google\\.com
-    patterns www\\.google\\.com
-    patterns .*\\.gstatic\\.com
-    patterns ogs\\.google\\.com
-    patterns play\\.google\\.com
+    domain-name .*.client-channel.google.com
+    domain-name accounts.google.com
+    domain-name apis.google.com
+    domain-name clients.*.google.com
+    domain-name contacts.google.com
+    domain-name hangouts.google.com
+    domain-name .*.googleusercontent.com
+    domain-name mail.google.com
+    domain-name www.google.com
+    domain-name .*.gstatic.com
+    domain-name ogs.google.com
+    domain-name play.google.com
 exit
 ```
+
+#### Deprecated Patterns
+The latest version is backwards compatabile with the `patterns` functionality however it is much more natural to use `domain-name`. Future releases will likely obsolete the `patterns` configuration field!
+
+:::note
+The `.` character bears special meaning within regular expressions, and matches *any single character*. Because hostnames contain literal `.` characters, in order to explicitly reference a dot separator, you must prefix it with **two** backslash characters. I.e., to have a pattern match the hostname `www.128technology.com`, you would type it into the PCLI as `www.128technology.com`. The PCLI will render the double backslash characters as a single backslash when you `show` the configuration.
+:::
 
 :::important
 If you configure invalid regex patterns, you will see the log message `invalid pattern for {name}, will never match!`. This means the pattern you configured is not a valid regex therefore the pattern matching will fail for the app until the configuration is fixed.
@@ -325,6 +334,12 @@ exit
 ```
 
 ## Release Notes
+
+### Release 1.3.0, 2.3.0, 3.0.0
+
+#### New Features and Improvements
+- Add youtube to builtins
+- Deprecate patterns in favor of domain-name for custom-apps
 
 ### Release 2.2.1
 
