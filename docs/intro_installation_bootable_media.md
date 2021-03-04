@@ -43,9 +43,7 @@ The procedure that follows here is the Interactive Install on the VGA Console.
 
 #### 128T System via Serial Console
 
-Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer. 
-
-The expected Serial console default size is 80x25. If the terminal being used to connect to the console is less than row (80) X column (25), the display may appear that the user is unable to select the entries, or the display does not repaint correctly. For serial console issues please refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
+Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer. For serial console issues please refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
 
 #### 128T System with VGA Console
 
@@ -180,8 +178,6 @@ The following is the  installation screen when booting to a UEFI console:
 ![New Boot Screen](/img/intro_install_OTPInstall_1.png)
 
 ### Serial Console Troubleshooting
-
-- The serial screen size **must** be a minimum of 80x25, otherwise the output may not be readable, and the console navigation may have unintended consequences or may not appear to navigate at all. 
 
 - When performing an installation via the serial console, some systems do not interpret control characters that may be passed on the serial console line. For example, the following may be seen during the installation process:
 
