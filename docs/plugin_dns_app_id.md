@@ -45,7 +45,7 @@ exit
 | custom-apps | subelement | Multiple instance object. Allows administrators to define custom patterns for matching applications. |
 | custom-apps > name | string | The name of the custom-app. This value will subsequently be configured within a `service > application-name` to give treatment to that application. |
 | custom-apps > description | string | A human-readable description of the custom application. |
-| custom-apps > domin-name | string | A wildcard expression (POSIX.2 fnmatch) to match DNS requests that 128T processes. |
+| custom-apps > domain-name | string | A wildcard expression (POSIX.2 fnmatch) to match DNS requests that 128T processes. |
 
 ### Built-In Patterns
 
@@ -65,7 +65,7 @@ The plugin contains built in application patterns for Gmail, Google Drive, Youtu
 | Windows Update | [link 1](https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#211-connection-from-the-wsus-server-to-the-internet) [link 2](https://docs.microsoft.com/en-us/windows/deployment/update/windows-update-troubleshooting#device-cannot-access-update-fWindows Updateiles) |
 | Youtube   | [link](https://www.netify.ai/resources/applications/youtube) |
 
-By enabling the `include-all-builtin-apps` configuration, the plugin will automatically include all the available apps. This allows for new apps to be automatically included as new builtin apps are added over time. Alternatively, you can choose specific builtin apps by name, as shown in the snippet above. The values you can configure are `gmail`, `google-drive`, `youube` and `windows-update`.
+By enabling the `include-all-builtin-apps` configuration, the plugin will automatically include all the available apps. This allows for new apps to be automatically included as new builtin apps are added over time. Alternatively, you can choose specific builtin apps by name, as shown in the snippet above. The values you can configure are `gmail`, `google-drive`, `youtube` and `windows-update`.
 
 
 ### Custom Patterns
@@ -75,7 +75,7 @@ By enabling the `include-all-builtin-apps` configuration, the plugin will automa
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
 | 1.2.0, 2.2.0 | Support for adding custom-apps at authority level was introduced |
-| 1.3.0, 2.3.0 | deprecate `pattterns` in favor of `domain-name` for custom-apps |
+| 1.3.0, 2.3.0 | deprecate `patterns` in favor of `domain-name` for custom-apps |
 
 The plugin also allows the user to create their own definitions of applications by configuring a set of patterns to be used for matching the application. Each pattern must be a valid regex that will be applied to a FQDN to identify the application. The `authority > dns-app-id > custom-apps` config can be used to define patterns that apply to all the routers with `dns-app-id` functionality enabled. Also shown in the configuration snippet is the custom-app `cnn` that includes a list of patterns to be applied at the router level. The identification is dynamic, so you just need to update the configuration on the conductor to include new apps or patterns for your routers. When `custom-apps` are configured at the authority and router level, the two lists are combined at runtime for that particular router. For example, if the user configured a custom-app called `zoom` on the authority and another app called `cnn` on the router, the router will contain both the applications.
 
