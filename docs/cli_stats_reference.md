@@ -5,6 +5,14 @@ sidebar_label: Show Stats Reference
 
 This reference is better understood if you know the basics of how to operate the PCLI.  If you have not used the PCLI before, it is beneficial to first read [the basics about the PCLI](concepts_pcli.md) and the [basics of the configuration management](config_basics.md).
 
+The _show stats_ command, and its myriad of subcommands, retrieve statistical data from various functions within the 128T router and return them to the user. Used for troubleshooting, debugging configuration, or just to monitor the health and well-being of the 128T router, these show commands provide a wealth of information and insight to users of the software.
+
+The _show stats_ command provides the ability to set a "zero point" for displaying statistical output using the _since_ command. The _since_ command takes either a timestamp as its argument (in ISO 8601 format), or the keyword _launch_, which shows statistics accumulated since the 128T routing software was launched. For more information on the zero point, refer to the section of this guide on _set context stats_.
+
+Generally speaking, the statistical data available via the 128T router's PCLI is organized into a tree-like hierarchy, with each subcommand potentially having its own series of subcommands. By omitting the (optional) subcommands, the 128T router will summarize all data from all possible subcommands and present it in a summary table; while this is very convenient to show a lot of potential data at a glance, it does incur additional processing overhead, and the retrieval of statistics may take an inordinately long time.
+
+Each of the various _show stats_ subcommands will be described in sections that follow.
+
 ## `show stats`
 
 The parent container for all metrics and metric groups

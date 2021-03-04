@@ -12,7 +12,7 @@ Clear the entire ARP cache or a subset if arguments are provided.
 #### Usage
 
 ```
-clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force] [node <node>] router <router>
+clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -23,6 +23,7 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | ip | The IP address for which to clear an ARP entry (must be specified after &#x27;device-interface&#x27;) [type: IP address] |
 | node | The name of the node |
+| resource-group | The name of the resource group |
 | router | The name of the router |
 | vlan | The VLAN on which to clear the ARP cache (must be specified after &#x27;device-interface&#x27;) [type: int] |
 
@@ -48,7 +49,7 @@ Clear routes associated with one or all BGP neighbors.
 #### Usage
 
 ```
-clear bgp vrf [{in | out | soft}] [force] router <router> <neighbor>
+clear bgp [{in | out | soft}] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} <neighbor>
 ```
 
 ##### Keyword Arguments
@@ -58,9 +59,10 @@ clear bgp vrf [{in | out | soft}] [force] router <router> <neighbor>
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | in | Soft reset received BGP updates |
 | out | Soft reset transmitted BGP updates |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to clear BGP neighbors |
 | soft | Soft reset received and transmitted BGP updates |
-| vrf | Clears routes associated with one or all BGP neighbors in the VRF. |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -699,12 +701,15 @@ create user <username>
 | command | description |
 | ------- | ----------- |
 | [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Description
 
@@ -925,6 +930,7 @@ delete flows [force] [node <node>] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt |
 | node | The node from which to delete flow entries |
+| resource-group | The name of the resource group |
 | router | The router from which to delete flow entries |
 
 #### Description
@@ -978,9 +984,9 @@ delete session-capture [source-ip <source-ip>] [source-port <source-port>] [dest
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| by-id | Deletes session-capture by capture-id from selected service. |
+| command | description |
+| ------- | ----------- |
+| [`by-id`](#delete-session-capture-by-id) | Deletes session-capture by capture-id from selected service. |
 
 ##### See Also
 
@@ -1029,7 +1035,7 @@ Delete all current sessions or a subset if arguments are provided.
 #### Usage
 
 ```
-delete sessions [{session-id <session-id> | service-name <service-name>}] [force] [node <node>] router <router>
+delete sessions [{session-id <session-id> | service-name <service-name>}] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -1038,6 +1044,7 @@ delete sessions [{session-id <session-id> | service-name <service-name>}] [force
 | ---- | ----------- |
 | force | Skip confirmation prompt |
 | node | The node from which to delete sessions |
+| resource-group | The name of the resource group |
 | router | The router from which to delete sessions |
 | service-name | The name of the service for which to delete all sessions |
 | session-id | The identifier of the session to be deleted |
@@ -1071,17 +1078,26 @@ delete user [force] <username>
 | ---- | ----------- |
 | username | the name of the account to delete |
 
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
+
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`create user`](#create-user) | Create a new user account interactively. |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Example
 
@@ -1119,11 +1135,14 @@ edit prompt <format>
 | ------- | ----------- |
 | [`create user`](#create-user) | Create a new user account interactively. |
 | [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit user`](#edit-user) | Modify an existing user account |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Description
 
@@ -1228,11 +1247,14 @@ edit user [<username>]
 | ------- | ----------- |
 | [`create user`](#create-user) | Create a new user account interactively. |
 | [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Description
 
@@ -1536,6 +1558,7 @@ manage plugin install [node <node>] <name> [<version>]
 | ------- | ----------- |
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
 | [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
+| [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
 ## `manage plugin remove`
@@ -1566,6 +1589,7 @@ manage plugin remove [node <node>] <name>
 | ------- | ----------- |
 | [`manage plugin install`](#manage-plugin-install) | Install a plugin on conductor. |
 | [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
+| [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
 ## `migrate`
@@ -1681,7 +1705,7 @@ Refreshes all DNS resolutions configured on the platform.
 #### Usage
 
 ```
-refresh dns resolutions [hostname <hostname>] [force] [router <router>]
+refresh dns resolutions [{router <router> | resource-group <resource-group>}] [hostname <hostname>] [force]
 ```
 
 ##### Keyword Arguments
@@ -1690,6 +1714,7 @@ refresh dns resolutions [hostname <hostname>] [force] [router <router>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | hostname | The DNS hostname belonging to a node |
+| resource-group | The name of the resource group |
 | router | The name of the router (default: &lt;current router&gt;) |
 
 ##### See Also
@@ -1706,7 +1731,7 @@ Releases an active DHCP lease.
 #### Usage
 
 ```
-release dhcp lease [force] network-interface <network-interface> router <router>
+release dhcp lease [force] [node <node>] {router <router> | resource-group <resource-group>} network-interface <network-interface>
 ```
 
 ##### Keyword Arguments
@@ -1715,6 +1740,8 @@ release dhcp lease [force] network-interface <network-interface> router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | network-interface | The network interface on which to release the current DHCP lease |
+| node | The name of the node (default: all) |
+| resource-group | The name of the resource group |
 | router | The name of the router |
 
 ##### See Also
@@ -1783,7 +1810,7 @@ Search for and replace configuration data that matches a specified pattern.
 #### Usage
 
 ```
-replace config [force] <find> <replace>
+replace config <find> <replace>
 ```
 
 ##### Keyword Arguments
@@ -1949,11 +1976,14 @@ restore prompt [force]
 | ------- | ----------- |
 | [`create user`](#create-user) | Create a new user account interactively. |
 | [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Description
 
@@ -1996,11 +2026,14 @@ restore users factory-default [force]
 | ------- | ----------- |
 | [`create user`](#create-user) | Create a new user account interactively. |
 | [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Description
 
@@ -2095,7 +2128,7 @@ Gathers runtime process stats and stores it in a logfile.
 #### Usage
 
 ```
-save runtime-stats [force] [router <router>] [node <node>] <filename> [<process-name>]
+save runtime-stats [{router <router> | resource-group <resource-group>}] [force] [node <node>] <filename> [<process-name>]
 ```
 
 ##### Keyword Arguments
@@ -2104,6 +2137,7 @@ save runtime-stats [force] [router <router>] [node <node>] <filename> [<process-
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | Target node from which to gather runtime stats |
+| resource-group | The name of the resource group |
 | router | Target router from which to gather runtime stats (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
@@ -2128,8 +2162,14 @@ Gather system information for technical support.
 #### Usage
 
 ```
-save tech-support-info [<prefix>]
+save tech-support-info [manifest <manifest>] [<prefix>]
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| manifest | The manifest describing the commands and logs to collect (default: summary) |
 
 ##### Positional Arguments
 
@@ -2140,6 +2180,8 @@ save tech-support-info [<prefix>]
 #### Description
 
 This command packages statistics, logs and other diagnostic data, to exchange with 128 Technology&#x27;s support team. The _tech-support-info_ command echoes the location where it stores the file when complete (`/var/log/128technology/tech-support-info.tar.gz`).
+
+New manifest files can be created and placed into `/etc/128technology/tech-support-manifests`. Each manifest contains a list of PCLI commands, shell commands, files, and systemd journal&#x27;s to collect.
 
 :::note
 This command collect a lot of data, and may take some time to complete.
@@ -2173,11 +2215,11 @@ search <find>
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| config | Search all configuration data |
-| commands | Search PCLI commands |
-| config-attributes | Search configuration attributes |
+| command | description |
+| ------- | ----------- |
+| [`commands`](#search-commands) | Search PCLI commands. |
+| [`config`](#search-config) | Search both config datastores for specific data. |
+| [`config-attributes`](#search-config-attributes) | Search configuration attributes. |
 
 #### Description
 
@@ -2208,7 +2250,7 @@ Configuration Attributes:
 
 ## `search commands`
 
-Search PCLI commands
+Search PCLI commands.
 
 #### Usage
 
@@ -2224,7 +2266,7 @@ search commands <find>
 
 ## `search config`
 
-Search all configuration data
+Search both config datastores for specific data.
 
 #### Usage
 
@@ -2240,10 +2282,10 @@ search config <find>
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| running | Search running configuration data |
-| candidate | Search candidate configuration data |
+| command | description |
+| ------- | ----------- |
+| [`candidate`](#search-config-candidate) | Search candidate configuration data |
+| [`running`](#search-config-running) | Search running configuration data |
 
 #### Description
 
@@ -2332,7 +2374,7 @@ admin@labsystem1.fiedler#
 
 ## `search config-attributes`
 
-Search configuration attributes
+Search configuration attributes.
 
 #### Usage
 
@@ -2403,7 +2445,7 @@ Download 128T software on a router
 #### Usage
 
 ```
-send command download [dry-run] [force] router <router> [<version>]
+send command download [dry-run] [force] {router <router> | resource-group <resource-group>} [<version>]
 ```
 
 ##### Keyword Arguments
@@ -2412,6 +2454,7 @@ send command download [dry-run] [force] router <router> [<version>]
 | ---- | ----------- |
 | dry-run | View version changes without command execution |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router on which to download software |
 
 ##### Positional Arguments
@@ -2460,9 +2503,9 @@ send command reconnect [router <router>] [node <node>]
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| disconnected | Attempt to reconnect all disconnected assets. |
+| command | description |
+| ------- | ----------- |
+| [`disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 
 ##### See Also
 
@@ -2560,7 +2603,7 @@ Rollback a 128T router to the previously installed version
 #### Usage
 
 ```
-send command rollback [force] router <router>
+send command rollback [force] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -2568,6 +2611,7 @@ send command rollback [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router to rollback |
 
 ##### See Also
@@ -2676,7 +2720,7 @@ Upgrade a 128T node
 #### Usage
 
 ```
-send command upgrade [dry-run] [force] router <router> <version>
+send command upgrade [dry-run] [force] {router <router> | resource-group <resource-group>} <version>
 ```
 
 ##### Keyword Arguments
@@ -2685,6 +2729,7 @@ send command upgrade [dry-run] [force] router <router> <version>
 | ---- | ----------- |
 | dry-run | View version changes without command execution |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router to upgrade |
 
 ##### Positional Arguments
@@ -2721,7 +2766,7 @@ Refresh the yum cache as well as the 128T software versions available for downlo
 #### Usage
 
 ```
-send command yum-cache-refresh [force] router <router>
+send command yum-cache-refresh [force] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -2729,6 +2774,7 @@ send command yum-cache-refresh [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router to refresh |
 
 ##### See Also
@@ -2808,7 +2854,7 @@ Sets the encryption key for the 128T configuration
 #### Usage
 
 ```
-set config encryption [force] [router <router>] [node <node>]
+set config encryption [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -2817,13 +2863,14 @@ set config encryption [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt |
 | node | The node on which to disable config encryption (default: all) |
+| resource-group | The name of the resource group |
 | router | The router on which to set config encryption (default: &lt;current router&gt;) |
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| disabled | Disables the encryption for the 128T configuration |
+| command | description |
+| ------- | ----------- |
+| [`disabled`](#set-config-encryption-disabled) | Disables the encryption for the 128T configuration |
 
 ##### See Also
 
@@ -2863,7 +2910,7 @@ Disables the encryption for the 128T configuration
 #### Usage
 
 ```
-set config encryption disabled [force] [router <router>] [node <node>]
+set config encryption disabled [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -2872,6 +2919,7 @@ set config encryption disabled [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt |
 | node | The node on which to disable config encryption (default: all) |
+| resource-group | The name of the resource group |
 | router | The router on which to disable config encryption (default: &lt;current router&gt;) |
 
 #### Example
@@ -3069,9 +3117,9 @@ set log level [category <category>] [force] [router <router>] [node <node>] <lev
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| configured | Reset the process log level to the configured system log level. |
+| command | description |
+| ------- | ----------- |
+| [`configured`](#set-log-level-configured) | Reset the process log level to the configured system log level. |
 
 ##### See Also
 
@@ -3094,19 +3142,28 @@ As of software version 3.1, a new subcommand _set log level category_, allows ad
 The category can be any of the following:
 
 | Category Name | Long Name | Description |
-| --- | --- | --- |
-| ATCS | Analytics | Components related to the 128T Analytics Engine |
-| PLAT | Platform | Components related to the underlying platform management. |
-| RDB | Redundancy Database | The subsystem responsible for synchronizing data between nodes. |
-| IPC | Interprocess Communications | The subsystem responsible for messaging between components within the 128T product. |
+| ------------- | --------- | ----------- |
+| ATCS | Analytics | Components related to the 128T Analytics Engine. |
 | DATA | Metadata Database | Components related to the configuration and state databases. |
-| RTG | Routing | Components related to the routing engine. |
-| HWMC | &quot;HighwayManager Control&quot; | Control system for packet processing. |
-| FLC | &quot;FastLane Control&quot; | Control system for packet forwarding. |
-| FPP | First Packet Processing | System for processing the initial packet of each new session. |
 | DISC | Discovery | Discovery-based components (except BFD). Today this is DHCP and ARP. |
+| USER | User | User-created log messages, generated via the &#x27;write&#x27; command. |
+| FLC | FastLane Control | Control system for packet forwarding. |
+| FLPP | First Packet Processing | System for processing the initial packet of each new session. |
+| HWMC | HighwayManager Control | Control system for packet processing. |
+| IPC | Interprocess Communications | The subsystem responsible for messaging between components within the 128T product. |
 | LINK | Internode Link Detection | The subsystem for inter-node communication (today, BFD). |
-| USER | User | User-created log messages, generated via the _write_ command. |
+| PLAT | Platform | Components related to the underlying platform management. |
+| PLUG | Plugin Components | Components related to plugin management. |
+| RDB | Redundancy Database | The subsystem responsible for synchronizing data between nodes. |
+| RTG | Routing | Components related to the routing engine. |
+| SESS | Session Startup | Components related to session setup. |
+| STEP | STEP | Components related to STEP. |
+| TEST | Test | Components related to testing. |
+| UTIL | Utility | Components related to utility libraries. |
+| DPDK | DPDK | Components related to DPDK. |
+| DNS | Domain Name System | Components related to DNS. |
+| PCLI | PCLI | All the PCLI&#x27;s log messages. |
+| BONS | Configuration Database | Components related to the configuration database. |
 
 #### Version History
 
@@ -3160,11 +3217,14 @@ set password
 | ------- | ----------- |
 | [`create user`](#create-user) | Create a new user account interactively. |
 | [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
+| [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Description
 
@@ -3187,21 +3247,22 @@ Set the provisional status of a specific interface to down, or returning it to t
 #### Usage
 
 ```
-set provisional-status [<node>] [<device>] <up/down>
+set provisional-status router <router> node <node> <name> <status>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| node | Identify the node where the device is located. |
-| device| Device on which the interface is located. |
+| node | The node on which to set the device&#x27;s provisional status |
+| router | The router on which to set the device&#x27;s provisional status |
 
-##### Subcommands
+##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| Up/Down | Set the interface status to up or down. |
+| name | Device interface on which to set the provisional status |
+| status | The desired provisional status for the device |
 
 ##### See Also
 
@@ -3284,7 +3345,7 @@ Display currently active or shelved alarms
 #### Usage
 
 ```
-show alarms [shelved] [id <id>] [force] [router <router>]
+show alarms [{router <router> | resource-group <resource-group>}] [shelved] [id <id>] [force]
 ```
 
 ##### Keyword Arguments
@@ -3293,6 +3354,7 @@ show alarms [shelved] [id <id>] [force] [router <router>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | id | ID for which to display alarm information |
+| resource-group | The name of the resource group |
 | router | The router for which to display alarms (default: all) |
 | shelved | Display shelved alarms |
 
@@ -3339,7 +3401,7 @@ Display application name entries.
 #### Usage
 
 ```
-show application names [rows <rows>] [force] [node <node>] router <router>
+show application names [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -3348,6 +3410,7 @@ show application names [rows <rows>] [force] [node <node>] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The name of the node |
+| resource-group | The name of the resource group |
 | router | The name of the router |
 | rows | The number of application name entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
@@ -3385,7 +3448,7 @@ Shows the contents of the ARP table on the specified node.
 #### Usage
 
 ```
-show arp [rows <rows>] [force] [node <node>] router <router>
+show arp [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -3394,14 +3457,15 @@ show arp [rows <rows>] [force] [node <node>] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node from which to retrieve arp entries |
+| resource-group | The name of the resource group |
 | router | The router from which to retrieve arp entries |
 | rows | The number of arps to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| proxy | Display proxy ARP info for network-interfaces. |
+| command | description |
+| ------- | ----------- |
+| [`proxy`](#show-arp-proxy) | Display proxy ARP info for network-interfaces. |
 
 ##### See Also
 
@@ -3447,7 +3511,7 @@ Display proxy ARP info for network-interfaces.
 #### Usage
 
 ```
-show arp proxy [name <name>] [force] [router <router>] [node <node>]
+show arp proxy [{router <router> | resource-group <resource-group>}] [name <name>] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3457,6 +3521,7 @@ show arp proxy [name <name>] [force] [router <router>] [node <node>]
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface for which to display proxy ARP info (default: all) |
 | node | The node for which to display proxy ARP info |
+| resource-group | The name of the resource group |
 | router | The router for which to display proxy ARP info (default: all) |
 
 #### Description
@@ -3484,7 +3549,7 @@ Shows the automated provisioning status of 128T nodes.
 #### Usage
 
 ```
-show assets [force] [router <router>] [node <node>] [<id>]
+show assets [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<id>]
 ```
 
 ##### Keyword Arguments
@@ -3493,6 +3558,7 @@ show assets [force] [router <router>] [node <node>] [<id>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display assets |
+| resource-group | The name of the resource group |
 | router | The router for which to display assets (default: all) |
 
 ##### Positional Arguments
@@ -3503,11 +3569,11 @@ show assets [force] [router <router>] [node <node>] [<id>]
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| software | Shows assets software information. |
-| summary | A summary of assets connected to the Conductor. |
-| errors | Shows the 128T nodes that have errors. |
+| command | description |
+| ------- | ----------- |
+| [`errors`](#show-assets-errors) | Shows the 128T nodes that have errors. |
+| [`software`](#show-assets-software) | Shows assets software information. |
+| [`summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ##### See Also
 
@@ -3574,7 +3640,7 @@ Shows the 128T nodes that have errors.
 #### Usage
 
 ```
-show assets errors [force] [router <router>] [<id>]
+show assets errors [{router <router> | resource-group <resource-group>}] [force] [<id>]
 ```
 
 ##### Keyword Arguments
@@ -3582,6 +3648,7 @@ show assets errors [force] [router <router>] [<id>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router for which to display assets summary (default: all) |
 
 ##### Positional Arguments
@@ -3621,7 +3688,7 @@ Shows assets software information.
 #### Usage
 
 ```
-show assets software [force] [router <router>] [node <node>]
+show assets software [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3630,6 +3697,7 @@ show assets software [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display available software |
+| resource-group | The name of the resource group |
 | router | The router for which to display available software (default: all) |
 
 ##### See Also
@@ -3697,7 +3765,7 @@ A summary of assets connected to the Conductor.
 #### Usage
 
 ```
-show assets summary [force] [router <router>]
+show assets summary [{router <router> | resource-group <resource-group>}] [force]
 ```
 
 ##### Keyword Arguments
@@ -3705,6 +3773,7 @@ show assets summary [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router for which to display assets summary (default: all) |
 
 ##### See Also
@@ -3758,17 +3827,18 @@ Displays information about the state of the BGP process on the 128T router.
 #### Usage
 
 ```
-show bgp [rows <rows>] [force] router <router> vrf [<route>]
+show bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<route>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
-| router | The name of the router for which to display BGP routes. |
-| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50). |
-| vrf | Displays the BGP routes in the specified VRF instance. |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The name of the router for which to display BGP routes |
+| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -3778,10 +3848,10 @@ show bgp [rows <rows>] [force] router <router> vrf [<route>]
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| neighbors | Displays information about the state of the BGP neighbors on the 128T router. |
-| summary | Show the current BGP summary from the routing manager. |
+| command | description |
+| ------- | ----------- |
+| [`neighbors`](#show-bgp-neighbors) | Displays information about the state of the BGP neighbors on the 128T router. |
+| [`summary`](#show-bgp-summary) | Show the current BGP summary from the routing manager. |
 
 ##### See Also
 
@@ -3841,7 +3911,7 @@ Displays information about the state of the BGP neighbors on the 128T router.
 #### Usage
 
 ```
-show bgp neighbors [rows <rows>] [force] router <router> vrf [<neighbor-ip>] [<option>]
+show bgp neighbors [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<neighbor-ip>] [<option>]
 ```
 
 ##### Keyword Arguments
@@ -3849,9 +3919,10 @@ show bgp neighbors [rows <rows>] [force] router <router> vrf [<neighbor-ip>] [<o
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display BGP neighbors |
 | rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| vrf | Displays information about the BGP neighbors in the specified VRF. |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -3899,7 +3970,7 @@ Show the current BGP summary from the routing manager.
 #### Usage
 
 ```
-show bgp summary [rows <rows>] [force] router <router> vrf
+show bgp summary [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -3907,9 +3978,10 @@ show bgp summary [rows <rows>] [force] router <router> vrf
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display the BGP summary |
 | rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| vrf | Displays a summary of the BGP state in the specified VRF instance. |
+| vrf | VRF name |
 
 #### Description
 
@@ -3947,7 +4019,7 @@ Shows current fib/flow/arp/action usage and capacities at the specified node.
 #### Usage
 
 ```
-show capacity [force] [node <node>] router <router>
+show capacity [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -3956,6 +4028,7 @@ show capacity [force] [node <node>] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node from which to retrieve capacities |
+| resource-group | The name of the resource group |
 | router | The router from which to retrieve capacities |
 
 #### Example
@@ -3986,7 +4059,7 @@ Show active capture-filters.
 #### Usage
 
 ```
-show capture-filters [device-interface <device-interface>] [force] [router <router>] [node <node>]
+show capture-filters [{router <router> | resource-group <resource-group>}] [device-interface <device-interface>] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -3996,6 +4069,7 @@ show capture-filters [device-interface <device-interface>] [force] [router <rout
 | device-interface | Device interface on which to show capture-filters (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node on which to show capture-filters |
+| resource-group | The name of the resource group |
 | router | The router on which to show capture-filters (default: all) |
 
 ##### See Also
@@ -4076,12 +4150,13 @@ Certificate:
 | 1.0.0   | This feature was introduced |
 
 
-## show config candidate
+## `show config candidate`
 
+Display candidate configuration data
 #### Usage
 
 ```
-show config candidate [authority [router [ ...] ][verbose] [flat]
+show config candidate [verbose] [flat]
 ```
 
 #### Description
@@ -4149,6 +4224,20 @@ config
 ...
 ```
 
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| flat | Display with full paths on each line instead of as a hierarchy |
+| verbose | Display all config data, including default values |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`authority`](#show-config-candidate-authority) | Show configuration data for `authority` |
+| [`generated`](#show-config-candidate-generated) | Show configuration data for `generated` |
+
 #### Version History
 
 | Release | Modification                |
@@ -4163,7 +4252,7 @@ Display configuration exports.
 #### Usage
 
 ```
-show config exports [<name>] [flat]
+show config exports [<name>] [<flat>]
 ```
 
 #### Description
@@ -4171,6 +4260,13 @@ show config exports [<name>] [flat]
 This command lists the set of exported configurations that are stored on your 128T router. 
 
 The _show config exports_ command has two optional flags: _name_ and _flat_. Use the _name_ flag to identify a specific configuration to display. Adding the _flat_ flag will output the configuration as a series of individual, fully qualified configuration statements.
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | The name of the exported configuration to display (default: all) |
+| flat | Display with full paths on each line instead of as a hierarchy. Only applicable when name is not &#x27;all&#x27; |
 
 ##### See Also
 
@@ -4254,7 +4350,7 @@ admin@conductor-east-1.RTR_EAST_CONDUCTOR#
 
 ## `show config locally-modified`
 
-Display all routers with a locally modified config version
+Display all routers with a locally modified config version.
 
 #### Usage
 
@@ -4264,7 +4360,7 @@ show config locally-modified
 
 ## `show config out-of-sync`
 
-Display all routers with a config version that is out of sync with the conductor
+Display all routers with a config version that is out of sync with the conductor.
 
 #### Usage
 
@@ -4272,12 +4368,14 @@ Display all routers with a config version that is out of sync with the conductor
 show config out-of-sync
 ```
 
-## show config running
+## `show config running`
+
+Display running configuration data
 
 #### Usage
 
 ```
-show config running [authority [router [...] ][verbose] [flat]
+show config running [verbose] [flat]
 ```
 
 #### Description
@@ -4326,6 +4424,20 @@ config
 ...
 ```
 
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| flat | Display with full paths on each line instead of as a hierarchy |
+| verbose | Display all config data, including default values |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`authority`](#show-config-running-authority) | Show configuration data for `authority` |
+| [`generated`](#show-config-running-generated) | Show configuration data for `generated` |
+
 #### Version History
 
 | Release | Modification                |
@@ -4349,6 +4461,7 @@ show config version [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router (default: &lt;current router&gt;) |
 
 ##### See Also
@@ -4517,7 +4630,7 @@ Show each DHCP mapping from an interface to mapping/IP family/config types.
 #### Usage
 
 ```
-show dhcp mappings [rows <rows>] [force] [node <node>] router <router>
+show dhcp mappings [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -4526,6 +4639,7 @@ show dhcp mappings [rows <rows>] [force] [node <node>] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node from which to identify DHCP mappings |
+| resource-group | The name of the resource group |
 | router | The name of the router to show |
 | rows | The number of mappings to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
@@ -4563,7 +4677,7 @@ Show the prefix learned for prefix-delegation.
 #### Usage
 
 ```
-show dhcp prefix-delegation [group <group>] [force] [router <router>] [<verbosity>]
+show dhcp prefix-delegation [group <group>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -4572,7 +4686,8 @@ show dhcp prefix-delegation [group <group>] [force] [router <router>] [<verbosit
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | group | Prefix-delegation group to display (if omitted, all will be displayed) |
-| router | The name of the router to show (default: &lt;current router&gt;) |
+| resource-group | The name of the resource group |
+| router | The name of the router to show |
 
 ##### Positional Arguments
 
@@ -4610,7 +4725,7 @@ Display dhcp lease info for network-interfaces.
 #### Usage
 
 ```
-show dhcp v4 [name <name>] [force] [node <node>] router <router> [<verbosity>]
+show dhcp v4 [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -4620,6 +4735,7 @@ show dhcp v4 [name <name>] [force] [node <node>] router <router> [<verbosity>]
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface to display (default: all) |
 | node | The node for which to display dhcp lease info |
+| resource-group | The name of the resource group |
 | router | The router for which to display dhcp lease info |
 
 ##### Positional Arguments
@@ -4687,7 +4803,7 @@ Display dhcp lease info for network-interfaces.
 #### Usage
 
 ```
-show dhcp v6 [name <name>] [force] [node <node>] router <router> [<verbosity>]
+show dhcp v6 [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -4697,6 +4813,7 @@ show dhcp v6 [name <name>] [force] [node <node>] router <router> [<verbosity>]
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface to display (default: all) |
 | node | The node for which to display dhcp lease info |
+| resource-group | The name of the resource group |
 | router | The router for which to display dhcp lease info |
 
 ##### Positional Arguments
@@ -4735,7 +4852,7 @@ Shows all DNS resolutions
 #### Usage
 
 ```
-show dns resolutions [hostname <hostname>] [rows <rows>] [force] [router <router>] [<verbosity>]
+show dns resolutions [{router <router> | resource-group <resource-group>}] [hostname <hostname>] [rows <rows>] [force] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -4744,6 +4861,7 @@ show dns resolutions [hostname <hostname>] [rows <rows>] [force] [router <router
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | hostname | The DNS hostname belonging to a node |
+| resource-group | The name of the resource group |
 | router | The name of the router holding the node with the DNS resolutions (default: &lt;current router&gt;) |
 | rows | The number of dns resolutions to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
@@ -4804,7 +4922,7 @@ Display app-id-v2 domain-name categories used by sessions
 #### Usage
 
 ```
-show domain-categories [force] [node <node>] router <router>
+show domain-categories [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -4813,6 +4931,7 @@ show domain-categories [force] [node <node>] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display domain-name categories of active sessions |
+| resource-group | The name of the resource group |
 | router | The router for which to display domain-name categories of active sessions |
 
 ##### See Also
@@ -4828,7 +4947,7 @@ Display app-id-v2 domain-names used by sessions
 #### Usage
 
 ```
-show domain-names [category <category>] [rows <rows>] [force] [node <node>] router <router> [<request-order>]
+show domain-names [category <category>] [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<request-order>]
 ```
 
 ##### Keyword Arguments
@@ -4838,6 +4957,7 @@ show domain-names [category <category>] [rows <rows>] [force] [node <node>] rout
 | category | Category to show domain-names for |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node from which to retrieve app-id domain-names |
+| resource-group | The name of the resource group |
 | router | The router from which to retrieve app-id domain-names |
 | rows | The number of domain-names to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
@@ -4860,7 +4980,7 @@ Display view of dynamic peer update on the conductor.
 #### Usage
 
 ```
-show dynamic-peer-update [force] [router <router>] [<table>]
+show dynamic-peer-update [{router <router> | resource-group <resource-group>}] [force] [<table>]
 ```
 
 ##### Keyword Arguments
@@ -4868,6 +4988,7 @@ show dynamic-peer-update [force] [router <router>] [<table>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | Router for which to show dynamic peer update information (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
@@ -4890,7 +5011,7 @@ Displays entitlement utilized.
 #### Usage
 
 ```
-show entitlement [force] [router <router>]
+show entitlement [{router <router> | resource-group <resource-group>}] [force]
 ```
 
 ##### Keyword Arguments
@@ -4898,6 +5019,7 @@ show entitlement [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display entitlement utilized. Conductor routers will show the entitlement utilized per project of all conducted routers. (default: &lt;current router&gt;) |
 
 #### Description
@@ -4933,7 +5055,7 @@ Show alarm events from the historical events database.
 #### Usage
 
 ```
-show events alarm [from <from>] [to <to>] [rows <rows>] [force] [router <router>]
+show events alarm [{router <router> | resource-group <resource-group>}] [from <from>] [to <to>] [rows <rows>] [limit <limit>] [force]
 ```
 
 ##### Keyword Arguments
@@ -4941,7 +5063,9 @@ show events alarm [from <from>] [to <to>] [rows <rows>] [force] [router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| from | Only show events after the provided time. You can use the provided standard timestamps, such as 45m, 1d, or 1mo; or enter a value [type: timestamp] (default: 1970-01-01 00:00:00) |
+| from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] (default: 1970-01-01 00:00:00) |
+| limit | The total number of alarm events to retrieve [type: int] |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display alarm events (default: &lt;current router&gt;) |
 | rows | The number of alarm events to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | to | Only show events before the provided time. You can use the provided standard timestamps, such as 45m, 1d, or 1mo; or enter a value [type: timestamp] |
@@ -4992,7 +5116,7 @@ Shows events related to running config change
 #### Usage
 
 ```
-show events config commit [flat] [from <from>] [to <to>] [force] [router <router>] [<verbosity>]
+show events config commit [{router <router> | resource-group <resource-group>}] [flat] [from <from>] [to <to>] [force] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -5002,6 +5126,7 @@ show events config commit [flat] [from <from>] [to <to>] [force] [router <router
 | flat | Display with full paths on each line instead of as a hierarchy |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo. [type: timestamp] |
+| resource-group | The name of the resource group |
 | router | The router for which to display config commit events (default: &lt;current router&gt;) |
 | to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
 
@@ -5070,7 +5195,7 @@ Shows events related to config encryption change
 #### Usage
 
 ```
-show events config encryption [from <from>] [to <to>] [force] [router <router>]
+show events config encryption [{router <router> | resource-group <resource-group>}] [from <from>] [to <to>] [force]
 ```
 
 ##### Keyword Arguments
@@ -5079,6 +5204,7 @@ show events config encryption [from <from>] [to <to>] [force] [router <router>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
+| resource-group | The name of the resource group |
 | router | The router for which to display config encryption events (default: &lt;current router&gt;) |
 | to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
 
@@ -5115,25 +5241,26 @@ Shows current fib entries at the specified node.
 #### Usage
 
 ```
-show fib service-name <name> | hierarchy-service-name <name> | contains-service-name <name>} prefix <prefix> source-address <source-IP> source-interface <interface-name> tenant <tenant-name> [{detail}] rows <rows>] [force] router <router> node <node> vrf 
+show fib [rows <rows>] [vrf <vrf>] [tenant <tenant>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<ip-prefix>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| contains-service-name | Partial substring match to display FIB entries |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| hierarchy-service-name | Use the hierarchy root to filter FIB entries |
 | node | The node from which to retrieve fib entries |
-| prefix | Filter the results by prefix |
+| resource-group | The name of the resource group |
 | router | The router from which to retrieve fib entries |
 | rows | The number of fib nodes to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| service-name | Filter the results by the service name |
-| source-address | Show FIB results filtered by source-address |
-| source-interface | Show FIB results filtered by source-interface |
-| tenant | Show FIB results filtered by tenant |
-| vrf | Displays all FIB entries with tenants that match the VRF. |
+| tenant | Tenant name |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ip-prefix | FIB IP prefix [type: IP prefix] |
 
 #### Description
 
@@ -5198,14 +5325,16 @@ Show PCLI command history for the current user.
 #### Usage
 
 ```
-show history [rows <rows>]
+show history [rows <rows>] [from <from>] [to <to>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| rows | The number of recent commands to show [type: int or &#x27;all&#x27;] |
+| from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
+| rows | The number of recent commands to show [type: int between 0 and 500 or &#x27;all&#x27;] (default: all) |
+| to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
 
 ##### See Also
 
@@ -5239,18 +5368,20 @@ Shows current load balancer agent entries from the highway manager at the specif
 #### Usage
 
 ```
-show load-balancer [service <service>] [agent <agent>] [force] [node <node>] router <router>
+show load-balancer [service <service>] [agent <agent>] [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| agent | Agent name to show. If unspecified, shows all agents. |
+| agent | Agent name to show. If unspecified, shows all agents. (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The name of the node |
-| router | The name of the router |
-| service | Service name to show. If unspecified, shows all services. |
+| node | node for which to display load balancer |
+| resource-group | The name of the resource group |
+| router | router for which to display load balancer |
+| rows | The number of load balance services to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| service | Service name to show. If unspecified, shows all services. (default: all) |
 
 #### Description
 
@@ -5303,7 +5434,7 @@ Display LTE summary.
 #### Usage
 
 ```
-show lte [device-interface <device-interface>] [force] [node <node>] router <router>
+show lte [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5313,19 +5444,20 @@ show lte [device-interface <device-interface>] [force] [node <node>] router <rou
 | device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
+| resource-group | The name of the resource group |
 | router | The router for which to display LTE data |
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| connection | Display LTE connection. |
-| detail | Display LTE detail. |
-| modem | Display LTE modem. |
-| network | Display LTE network. |
-| profile | Display LTE profile. |
-| signal | Display LTE signal. |
-| sim | Display LTE sim. |
+| command | description |
+| ------- | ----------- |
+| [`connection`](#show-lte-connection) | Display LTE connection. |
+| [`detail`](#show-lte-detail) | Display LTE detail. |
+| [`modem`](#show-lte-modem) | Display lte modem. |
+| [`network`](#show-lte-network) | Display LTE network. |
+| [`profile`](#show-lte-profile) | Display LTE profile. |
+| [`signal`](#show-lte-signal) | Display LTE signal. |
+| [`sim`](#show-lte-sim) | Display LTE sim. |
 
 ## `show lte connection`
 
@@ -5334,7 +5466,7 @@ Display LTE connection.
 #### Usage
 
 ```
-show lte connection [device-interface <device-interface>] [force] [node <node>] router <router>
+show lte connection [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5344,6 +5476,7 @@ show lte connection [device-interface <device-interface>] [force] [node <node>] 
 | device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
+| resource-group | The name of the resource group |
 | router | The router for which to display LTE data |
 
 #### Description
@@ -5361,7 +5494,7 @@ Display LTE detail.
 #### Usage
 
 ```
-show lte detail [device-interface <device-interface>] [force] [node <node>] router <router>
+show lte detail [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5371,6 +5504,7 @@ show lte detail [device-interface <device-interface>] [force] [node <node>] rout
 | device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
+| resource-group | The name of the resource group |
 | router | The router for which to display LTE data |
 
 ## `show lte firmware`
@@ -5410,7 +5544,7 @@ Display LTE modem.
 #### Usage
 
 ```
-show lte modem [device-interface <device-interface>] [force] [node <node>] router <router>
+show lte modem [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5420,6 +5554,7 @@ show lte modem [device-interface <device-interface>] [force] [node <node>] route
 | device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
+| resource-group | The name of the resource group |
 | router | The router for which to display LTE data |
 
 ## `show lte network`
@@ -5429,7 +5564,7 @@ Display LTE network.
 #### Usage
 
 ```
-show lte network [device-interface <device-interface>] [force] [node <node>] router <router>
+show lte network [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5439,6 +5574,7 @@ show lte network [device-interface <device-interface>] [force] [node <node>] rou
 | device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
+| resource-group | The name of the resource group |
 | router | The router for which to display LTE data |
 
 ## `show lte profile`
@@ -5448,7 +5584,7 @@ Display LTE profile.
 #### Usage
 
 ```
-show lte profile [device-interface <device-interface>] [force] [node <node>] router <router>
+show lte profile [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5458,6 +5594,7 @@ show lte profile [device-interface <device-interface>] [force] [node <node>] rou
 | device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
+| resource-group | The name of the resource group |
 | router | The router for which to display LTE data |
 
 ## `show lte signal`
@@ -5467,7 +5604,7 @@ Display LTE signal.
 #### Usage
 
 ```
-show lte signal [device-interface <device-interface>] [force] [node <node>] router <router>
+show lte signal [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5477,6 +5614,7 @@ show lte signal [device-interface <device-interface>] [force] [node <node>] rout
 | device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
+| resource-group | The name of the resource group |
 | router | The router for which to display LTE data |
 
 #### Description
@@ -5495,7 +5633,7 @@ Display LTE sim.
 #### Usage
 
 ```
-show lte sim [device-interface <device-interface>] [force] [node <node>] router <router>
+show lte sim [device-interface <device-interface>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5505,6 +5643,7 @@ show lte sim [device-interface <device-interface>] [force] [node <node>] router 
 | device-interface | LTE device interface (default: all) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display LTE data |
+| resource-group | The name of the resource group |
 | router | The router for which to display LTE data |
 
 #### Description
@@ -5552,7 +5691,7 @@ Display network-interface data for network-interface.
 #### Usage
 
 ```
-show network-interface [name <name>] [force] [node <node>] router <router>
+show network-interface [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5562,13 +5701,14 @@ show network-interface [name <name>] [force] [node <node>] router <router>
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface to display (if omitted, all will be displayed) |
 | node | The node for which to display network-interface data |
+| resource-group | The name of the resource group |
 | router | The router for which to display network-interface data |
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| application | Display application data info for network-interfaces. |
+| command | description |
+| ------- | ----------- |
+| [`application`](#show-network-interface-application) | Display application data info for network-interfaces. |
 
 #### Description
 
@@ -5607,7 +5747,7 @@ Display application data info for network-interfaces.
 #### Usage
 
 ```
-show network-interface application [name <name>] [force] [node <node>] router <router>
+show network-interface application [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -5617,6 +5757,7 @@ show network-interface application [name <name>] [force] [node <node>] router <r
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Network interface to display (default: all) |
 | node | The node for which to display application data |
+| resource-group | The name of the resource group |
 | router | The router for which to display application data |
 
 #### Description
@@ -5693,7 +5834,7 @@ Display ntp status from the node monitor at the specified node.
 #### Usage
 
 ```
-show ntp [force] [router <router>] [node <node>]
+show ntp [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -5702,6 +5843,7 @@ show ntp [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node from which to retrieve ntp status |
+| resource-group | The name of the resource group |
 | router | The router from which to retrieve ntp status (default: &lt;current router&gt;) |
 
 #### Description
@@ -5742,12 +5884,12 @@ The "Ref. ID" field is a four letter ASCII string assigned to the reference cloc
 
 ## `show ospf`
 
-Show general information about OSPF
+Show general information about OSPF.
 
 #### Usage
 
 ```
-show ospf [area <area-id>] [force] router <router> [<verbosity>]
+show ospf [rows <rows>] [area <area-id>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -5756,7 +5898,9 @@ show ospf [area <area-id>] [force] router <router> [<verbosity>]
 | ---- | ----------- |
 | area | The area to filter OSPF information for |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -5766,13 +5910,13 @@ show ospf [area <area-id>] [force] router <router> [<verbosity>]
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| border-routers | Show information about the OSPF border routers |
-| database | Show OSPF database information |
-| neighbors | Show information about OSPF neighbors |
-| interfaces | Show information about the OSPF interfaces |
-| routes | Show information about the OSPF routes |
+| command | description |
+| ------- | ----------- |
+| [`border-routers`](#show-ospf-border-routers) | Show information about the OSPF border routers. |
+| [`database`](#show-ospf-database) | Show OSPF database information. |
+| [`interfaces`](#show-ospf-interfaces) | Show information about the OSPF interfaces. |
+| [`neighbors`](#show-ospf-neighbors) | Show information about OSPF neighbors. |
+| [`routes`](#show-ospf-routes) | Show information about the OSPF routes. |
 
 #### Example
 
@@ -5883,12 +6027,12 @@ Completed in 0.29 seconds
 
 ## `show ospf border-routers`
 
-Show information about the OSPF border routers
+Show information about the OSPF border routers.
 
 #### Usage
 
 ```
-show ospf border-routers [force] router <router> [<verbosity>]
+show ospf border-routers [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -5896,7 +6040,9 @@ show ospf border-routers [force] router <router> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -5943,12 +6089,12 @@ Completed in 0.33 seconds
 
 ## `show ospf database`
 
-Show OSPF database information
+Show OSPF database information.
 
 #### Usage
 
 ```
-show ospf database [self-originate] [force] router <router> [<verbosity>]
+show ospf database [rows <rows>] [self-originate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -5956,7 +6102,9 @@ show ospf database [self-originate] [force] router <router> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | self-originate | Retrieve only self-originated LSA information |
 
 ##### Positional Arguments
@@ -5967,10 +6115,10 @@ show ospf database [self-originate] [force] router <router> [<verbosity>]
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| max-age | Show OSPF LSAs which have reached maximum age |
-| lsa | Show OSPF database LSA information |
+| command | description |
+| ------- | ----------- |
+| [`lsa`](#show-ospf-database-lsa) | Show OSPF database LSA information. |
+| [`max-age`](#show-ospf-database-max-age) | Show OSPF LSAs which have reached maximum age. |
 
 #### Example
 
@@ -6096,12 +6244,12 @@ Completed in 0.34 seconds
 
 ## `show ospf database lsa`
 
-Show OSPF database LSA information
+Show OSPF database LSA information.
 
 #### Usage
 
 ```
-show ospf database lsa [{origin <ip> | self-originate}] [lsa-id <id>] [force] lsa-type <type> router <router> [<verbosity>]
+show ospf database lsa [{origin <ip> | self-originate}] [rows <rows>] [lsa-id <id>] [force] {router <router> | resource-group <resource-group>} lsa-type <type> [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6112,7 +6260,9 @@ show ospf database lsa [{origin <ip> | self-originate}] [lsa-id <id>] [force] ls
 | lsa-id | The Link State ID to retrieve |
 | lsa-type | The LSA type to retrieve |
 | origin | Retrieve LSAs from this advertising router IP |
+| resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | self-originate | Retrieve only self-originated LSA information |
 
 ##### Positional Arguments
@@ -6271,12 +6421,12 @@ Completed in 0.26 seconds
 
 ## `show ospf database max-age`
 
-Show OSPF LSAs which have reached maximum age
+Show OSPF LSAs which have reached maximum age.
 
 #### Usage
 
 ```
-show ospf database max-age [force] [router <router>]
+show ospf database max-age [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6284,7 +6434,15 @@ show ospf database max-age [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| router | The router to request OSPF information from (default: &lt;current router&gt;) |
+| resource-group | The name of the resource group |
+| router | The router to request OSPF information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 #### Example
 
@@ -6425,12 +6583,12 @@ Completed in 0.37 seconds
 
 ## `show ospf interfaces`
 
-Show information about the OSPF interfaces
+Show information about the OSPF interfaces.
 
 #### Usage
 
 ```
-show ospf interfaces [network-interface <name>] [force] router <router> [<verbosity>]
+show ospf interfaces [rows <rows>] [network-interface <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6439,7 +6597,9 @@ show ospf interfaces [network-interface <name>] [force] router <router> [<verbos
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | network-interface | The network interface to fetch OSPF information for |
+| resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -6562,12 +6722,12 @@ Completed in 0.32 seconds
 
 ## `show ospf neighbors`
 
-Show information about OSPF neighbors
+Show information about OSPF neighbors.
 
 #### Usage
 
 ```
-show ospf neighbors [network-interface <name>] [neighbor <ip>] [force] router <router> [<verbosity>]
+show ospf neighbors [rows <rows>] [network-interface <name>] [neighbor <ip>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6577,7 +6737,9 @@ show ospf neighbors [network-interface <name>] [neighbor <ip>] [force] router <r
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | neighbor | The neighbor IP address for which to fetch OSPF information |
 | network-interface | The network interface to fetch OSPF neighbor information for |
+| resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -6639,12 +6801,12 @@ Completed in 0.30 seconds
 
 ## `show ospf routes`
 
-Show information about the OSPF routes
+Show information about the OSPF routes.
 
 #### Usage
 
 ```
-show ospf routes [force] router <router> [<verbosity>]
+show ospf routes [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6652,7 +6814,9 @@ show ospf routes [force] router <router> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -6735,15 +6899,17 @@ Display peer information.
 #### Usage
 
 ```
-show peers [name <name>] [force] router <router> [<verbosity>]
+show peers [name <name>] [dynamic-damping] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| dynamic-damping | display BFD dynamic-damping stats |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | name | Peer to display (default: all) |
+| resource-group | The name of the resource group |
 | router | The router on which to display peers |
 
 ##### Positional Arguments
@@ -6754,9 +6920,9 @@ show peers [name <name>] [force] router <router> [<verbosity>]
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| hostnames | Display resolved hostnames of peers |
+| command | description |
+| ------- | ----------- |
+| [`hostnames`](#show-peers-hostnames) | Display resolved hostnames of peers |
 
 #### Description
 
@@ -6846,7 +7012,7 @@ Display resolved hostnames of peers
 #### Usage
 
 ```
-show peers hostnames [force] [router <router>]
+show peers hostnames [{router <router> | resource-group <resource-group>}] [force]
 ```
 
 ##### Keyword Arguments
@@ -6854,6 +7020,7 @@ show peers hostnames [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router on which to display peer hostnames (default: all) |
 
 #### Example
@@ -6878,7 +7045,7 @@ Display platform information of nodes.
 #### Usage
 
 ```
-show platform [force] [router <router>] [node <node>] [<category>]
+show platform [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<category>]
 ```
 
 ##### Keyword Arguments
@@ -6887,6 +7054,7 @@ show platform [force] [router <router>] [node <node>] [<category>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which platform info will be displayed |
+| resource-group | resource group whose routers&#x27; platform info will be displayed |
 | router | The router for which platform info will be displayed (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
@@ -6945,20 +7113,16 @@ Shows latest verison of plugins available for install.
 #### Usage
 
 ```
-show plugins available [node <node>] [<name>]
+show plugins available [{name <name> | category <category>}] [node <node>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| node | The node for which to display available plugins (default: all) |
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
+| category | Filter plugins by category |
 | name | Name of plugin to show |
+| node | The node for which to display available plugins (default: all) |
 
 ##### See Also
 
@@ -6966,6 +7130,26 @@ show plugins available [node <node>] [<name>]
 | ------- | ----------- |
 | [`manage plugin install`](#manage-plugin-install) | Install a plugin on conductor. |
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
+| [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
+| [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
+
+## `show plugins categories`
+
+Shows all possible plugin categories.
+
+#### Usage
+
+```
+show plugins categories
+```
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`manage plugin install`](#manage-plugin-install) | Install a plugin on conductor. |
+| [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
+| [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
 ## `show plugins installed`
@@ -6975,13 +7159,14 @@ Shows installed plugins.
 #### Usage
 
 ```
-show plugins installed [node <node>]
+show plugins installed [category <category>] [node <node>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| category | Filter plugins by category |
 | node | The node for which to display installed plugins (default: all) |
 
 ##### See Also
@@ -6991,15 +7176,16 @@ show plugins installed [node <node>]
 | [`manage plugin install`](#manage-plugin-install) | Install a plugin on conductor. |
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
 | [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
+| [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 
-## `show rib`
+## `show plugins state`
 
-Displays the contents of the 128T router&#39;s Routing Information Base (RIB)
+Show plugin state data for a given plugin
 
 #### Usage
 
 ```
-show rib [rows <rows>] [force] router <router> vrf [<route>] 
+show plugins state [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<verbosity>] <plugin>
 ```
 
 ##### Keyword Arguments
@@ -7007,9 +7193,36 @@ show rib [rows <rows>] [force] router <router> vrf [<route>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| node | node for which to display plugin state data |
+| resource-group | The name of the resource group |
+| router | router for which to display plugin state data (default: all) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+| plugin | name of plugin to display state data for |
+
+## `show rib`
+
+Displays the contents of the Routing Information Base (RIB)
+
+#### Usage
+
+```
+show rib [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<route>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display RIB routes |
 | rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| vrf | Displays all routes learned in the VRF table. |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -7019,13 +7232,13 @@ show rib [rows <rows>] [force] router <router> vrf [<route>]
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| summary | Displays a summary of the Routing Information Base (RIB) |
-| connected | Displays the contents of the Routing Information Base (RIB) filtered to show only connected routes |
-| static | Displays the contents of the Routing Information Base (RIB) filtered to show only static routes |
-| bgp | Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from BGP |
-| ospf | Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from OSPF |
+| command | description |
+| ------- | ----------- |
+| [`bgp`](#show-rib-bgp) | Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from BGP. |
+| [`connected`](#show-rib-connected) | Displays the contents of the Routing Information Base (RIB) filtered to show only connected routes. |
+| [`ospf`](#show-rib-ospf) | Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from OSPF. |
+| [`static`](#show-rib-static) | Displays the contents of the Routing Information Base (RIB) filtered to show only static routes. |
+| [`summary`](#show-rib-summary) | Displays a summary of the Routing Information Base (RIB) |
 
 #### Description
 
@@ -7060,12 +7273,12 @@ admin@labsystem1.fiedler#
 
 ## `show rib bgp`
 
-Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from BGP
+Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from BGP.
 
 #### Usage
 
 ```
-show rib bgp [rows <rows>] [force] router <router>
+show rib bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -7073,8 +7286,10 @@ show rib bgp [rows <rows>] [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display the RIB |
 | rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 #### Description
 
@@ -7120,12 +7335,12 @@ B>  64.112.104.114/32 [20/0] via 172.2.34.23 (recursive), 2d10h30m
 
 ## `show rib connected`
 
-Displays the contents of the Routing Information Base (RIB) filtered to show only connected routes
+Displays the contents of the Routing Information Base (RIB) filtered to show only connected routes.
 
 #### Usage
 
 ```
-show rib connected [rows <rows>] [force] router <router>
+show rib connected [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -7133,8 +7348,10 @@ show rib connected [rows <rows>] [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display the RIB |
 | rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 #### Description
 
@@ -7163,11 +7380,12 @@ Completed in 0.22 seconds
 
 ## `show rib ospf`
 
-Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from OSPF
+Displays the contents of the Routing Information Base (RIB) filtered to show only those learned from OSPF.
+
 #### Usage
 
 ```
-show rib ospf [rows <rows>] [force] router <router>
+show rib ospf [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -7175,8 +7393,10 @@ show rib ospf [rows <rows>] [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display the RIB |
 | rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 #### Description
 
@@ -7200,12 +7420,12 @@ O   172.16.3.0/24 [110/10] is directly connected, g2, 00:15:25
 
 ## `show rib static`
 
-Displays the contents of the Routing Information Base (RIB) filtered to show only static routes
+Displays the contents of the Routing Information Base (RIB) filtered to show only static routes.
 
 #### Usage
 
 ```
-show rib static [rows <rows>] [force] router <router>
+show rib static [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -7213,8 +7433,10 @@ show rib static [rows <rows>] [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display the RIB |
 | rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 #### Description
 
@@ -7245,7 +7467,7 @@ Displays a summary of the Routing Information Base (RIB)
 #### Usage
 
 ```
-show rib summary [rows <rows>] [force] router <router>
+show rib summary [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -7253,8 +7475,10 @@ show rib summary [rows <rows>] [force] router <router>
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router for which to display the RIB summary |
 | rows | The number of rib entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 #### Description
 
@@ -7279,6 +7503,36 @@ Totals               0                    0
 
 Completed in 0.29 seconds
 ```
+## `show roles`
+
+Display all configured roles
+
+#### Usage
+
+```
+show roles [name <name>] [rows <rows>]
+```
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | role to display |
+| rows | The number of roles to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create user`](#create-user) | Create a new user account interactively. |
+| [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
+| [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
+| [`edit user`](#edit-user) | Modify an existing user account |
+| [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
+| [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
+| [`set password`](#set-password) | Change your password. |
+| [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 ## `show security key-status`
 
@@ -7287,7 +7541,7 @@ Display detailed security key status.
 #### Usage
 
 ```
-show security key-status [force] [router <router>] [node <node>]
+show security key-status [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -7296,6 +7550,7 @@ show security key-status [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display security key status |
+| resource-group | The name of the resource group |
 | router | The router for which to display security key status (default: &lt;current router&gt;) |
 
 #### Description
@@ -7457,7 +7712,7 @@ Show active session-captures.
 #### Usage
 
 ```
-show session-captures [{id <id> | detail}] [service <service>] [force] [router <router>] [node <node>]
+show session-captures [{id <id> | detail}] [{router <router> | resource-group <resource-group>}] [service <service>] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -7468,6 +7723,7 @@ show session-captures [{id <id> | detail}] [service <service>] [force] [router <
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | id | The session-capture to show in detail [type: int] |
 | node | The node on which to show session-captures |
+| resource-group | The name of the resource group |
 | router | The router on which to show session-captures (default: all) |
 | service | Service for which to show session-captures (default: all) |
 
@@ -7486,7 +7742,7 @@ Displays active sessions passing through the 128T router.
 #### Usage
 
 ```
-show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [by-id] [node <node>] router <router> 
+show sessions [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -7497,20 +7753,21 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | hierarchy-service-name | The hierarchy root to show sessions for |
 | node | The node from which to retrieve session flows |
+| resource-group | The name of the resource group |
 | router | The router from which to retrieve session flows |
 | rows | The number of session flows to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | service-name | The exact service name to show sessions for |
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| by-id| &lt;session-id&gt; |
-| top | &lt;bandwidth&gt; |
+| command | description |
+| ------- | ----------- |
+| [`by-id`](#show-sessions-by-id) | Show information of a session for a given Id |
+| [`top`](#show-sessions-top) | &lt;bandwidth&gt; |
 
 #### Description
 
-The _show sessions_ command displays active sessions passing through the 128T router. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session. Additionally, you can specify the node using the optional _node-name_ argument, and the session-id using the _by-id_ subcommand. 
+The _show sessions_ command displays active sessions passing through the 128T router (or the node specified by the optional _node-name_ argument. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session.
 
 The NAT IP and Port fields will be populated whenever a session is subject to source NAT (see _source-nat_ later in this reference guide for more information). It also shows the timeout value that will cause the session to expire if it remains idle for that number of seconds.
 
@@ -7520,7 +7777,7 @@ Various services and tenants may display with surrounding braces to indicate tha
 The contents of the table will vary based upon the software version in use. This applies when, for example, a conductor running a new software version requests session table data from routers running older software versions.
 :::
 
-#### Examples
+#### Example
 `show sessions`
 ```
 admin@gouda.novigrad# show sessions
@@ -7540,8 +7797,35 @@ Node: gouda
  1ee1761c-a193-413c-889f-41fd61fe5242   fwd   Internet      lanSubnet   lan           0   udp     192.168.0.72         55723   208.67.222.222          443   96.230.191.130       22918   false                  1891   0 days  0:00:11
  1ee1761c-a193-413c-889f-41fd61fe5242   rev   Internet      lanSubnet   wan           0   udp     208.67.222.222         443   96.230.191.130        22918   0.0.0.0                  0   false                  1891   0 days  0:00:11
 ```
-`show sessions by-id`
+## `show sessions by-id`
+
+Show information of a session for a given ID.
+
+#### Usage
 ```
+show sessions by-id [node <node>] router <router> <id> [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node on which to show show session by-id (default: all) |
+| router | The router on which to show session by-id |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| id | Unique identifier of a session to be displayed |
+| verbosity | detail |
+| summary | (default: detail) |
+
+#### Example
+
+```
+show sessions by-id
+
 admin@node1.seattle-site-01# show sessions by-id cea963be-be0b-4a9a-9368-7956b3975687                                                                                                                                                                          
 Thu 2020-11-12 18:49:01 UTC
 ✔ Retrieving session information...
@@ -7617,7 +7901,7 @@ Display the top sessions ordered by bandwidth.
 #### Usage
 
 ```
-show sessions top bandwidth [force] router <router> [<verbosity>]
+show sessions top bandwidth [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7625,6 +7909,7 @@ show sessions top bandwidth [force] router <router> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The router for which to display top sessions by bandwidth |
 
 ##### Positional Arguments
@@ -7662,6 +7947,9 @@ Node: gouda
 Completed in 0.10 seconds
 ```
 
+## `show stats`
+
+Please refer to the [Show Stats Reference](cli_stats_reference.md) for detailed information about `show stats`.
 
 ## `show step lsdb`
 
@@ -7670,7 +7958,7 @@ Show STEP link state database
 #### Usage
 
 ```
-show step lsdb [originator <originator-name>] [force] router <router> [<verbosity>]
+show step lsdb [rows <rows>] [originator <originator-name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7679,7 +7967,9 @@ show step lsdb [originator <originator-name>] [force] router <router> [<verbosit
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | originator | The STEP originating router |
+| resource-group | The name of the resource group |
 | router | The router to request STEP information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -7694,7 +7984,7 @@ Show STEP routes
 #### Usage
 
 ```
-show step routes [node <node-name>] [service <service-name>] [ip-prefix <prefix>] [force] router <router> [<verbosity>]
+show step routes [rows <rows>] [node <node-name>] [service <service-name>] [ip-prefix <prefix>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7704,7 +7994,9 @@ show step routes [node <node-name>] [service <service-name>] [ip-prefix <prefix>
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | ip-prefix | STEP routes for this ip prefix [type: IP prefix] |
 | node | STEP routes on this node |
+| resource-group | The name of the resource group |
 | router | The router to request STEP information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | service | STEP routes for this service |
 
 ##### Positional Arguments
@@ -7729,17 +8021,18 @@ show system [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display system state |
+| resource-group | The name of the resource group |
 | router | The router for which to display system state (default: &lt;current router&gt;) |
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| connectivity | Display inter-node connection statuses. |
-| services | Display a table summarizing statuses of 128T systemd services. |
-| processes | Display a table summarizing the statuses of processes. |
-| registry | Shows registered services from the system services coordinator for the specified process, node or router. |
-| version | Show system version information. |
+| command | description |
+| ------- | ----------- |
+| [`connectivity`](#show-system-connectivity) | Display inter-node connection statuses. |
+| [`processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`services`](#show-system-services) | Display a table summarizing statuses of 128T systemd services. |
+| [`version`](#show-system-version) | Show system version information. |
 
 ##### See Also
 
@@ -7776,7 +8069,7 @@ Display inter-node connection statuses.
 #### Usage
 
 ```
-show system connectivity [force] [router <router>] [node <node>]
+show system connectivity [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -7785,13 +8078,14 @@ show system connectivity [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display connection statuses |
+| resource-group | The name of the resource group |
 | router | The router for which to display connection statuses (default: &lt;current router&gt;) |
 
 ##### Subcommands
 
-| name | description |
-| ---- | ----------- |
-| internal | Displays inter-node secure communication connections. |
+| command | description |
+| ------- | ----------- |
+| [`internal`](#show-system-connectivity-internal) | Displays inter-node secure communication connections. |
 
 #### Description
 
@@ -7820,7 +8114,7 @@ Displays inter-node secure communication connections.
 #### Usage
 
 ```
-show system connectivity internal [force] [router <router>] [node <node>]
+show system connectivity internal [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -7829,6 +8123,7 @@ show system connectivity internal [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display internal connections |
+| resource-group | The name of the resource group |
 | router | The router for which to display internal connections (default: &lt;current router&gt;) |
 
 #### Description
@@ -7859,7 +8154,7 @@ Display a table summarizing the statuses of processes.
 #### Usage
 
 ```
-show system processes [force] [router <router>] [node <node>]
+show system processes [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -7868,6 +8163,7 @@ show system processes [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display statuses of processes |
+| resource-group | The name of the resource group |
 | router | The router for which to display statuses of processes (default: &lt;current router&gt;) |
 
 ##### See Also
@@ -8012,7 +8308,7 @@ Display a table summarizing statuses of 128T systemd services.
 #### Usage
 
 ```
-show system services [force] [router <router>] [node <node>]
+show system services [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -8021,6 +8317,7 @@ show system services [force] [router <router>] [node <node>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display statuses |
+| resource-group | The name of the resource group |
 | router | The router for which to display statuses (default: &lt;current router&gt;) |
 
 #### Description
@@ -8055,7 +8352,7 @@ Show system version information.
 #### Usage
 
 ```
-show system version [force] [router <router>] [node <node>] [<verbosity>]
+show system version [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -8064,6 +8361,7 @@ show system version [force] [router <router>] [node <node>] [<verbosity>]
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node to show version information for |
+| resource-group | The name of the resource group |
 | router | The router to show version information for (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
@@ -8103,7 +8401,7 @@ Shows the prefix-to-tenant associations by network-interface on the specified no
 #### Usage
 
 ```
-show tenant members [rows <rows>] [force] [node <node>] router <router>
+show tenant members [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -8112,6 +8410,7 @@ show tenant members [rows <rows>] [force] [node <node>] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node from which to retrieve tenant members |
+| resource-group | The name of the resource group |
 | router | The router from which to retrieve tenant members |
 | rows | The number of tenant members to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
@@ -8152,12 +8451,12 @@ Completed in 9.01 seconds
 
 ## `show top sources`
 
-Shows top sources (by source address) over the last 30 minutes at the specified node.
+Show top sources (by source address) over the last 30 minutes at the specified node.
 
 #### Usage
 
 ```
-show top sources [by <by>] [rows <rows>] [force] [node <node>] router <router>
+show top sources [by <by>] [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -8167,6 +8466,7 @@ show top sources [by <by>] [rows <rows>] [force] [node <node>] router <router>
 | by | total-data \| session-count [type: metric] (default: total-data) |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node from which to retrieve top sources |
+| resource-group | The name of the resource group |
 | router | The router from which to retrieve top sources |
 | rows | The number of top sources to display at once [type: int or &#x27;all&#x27;] (default: 10) |
 
@@ -8214,7 +8514,7 @@ Display the status of UDP transform between peers.
 #### Usage
 
 ```
-show udp-transform [force] [node <node>] router <router>
+show udp-transform [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -8223,6 +8523,7 @@ show udp-transform [force] [node <node>] router <router>
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display transform status |
+| resource-group | The name of the resource group |
 | router | The router for which to display transform status |
 
 #### Description
@@ -8257,17 +8558,26 @@ show user [<username>]
 | ---- | ----------- |
 | username | the name of the account to display (default: &lt;current user&gt;) |
 
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`activity`](#show-user-activity) | Show the most recent usage of 128T. |
+
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`create user`](#create-user) | Create a new user account interactively. |
 | [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Description
 
@@ -8309,17 +8619,74 @@ LDAP server is configured and online
 | 2.0.0   | This feature was introduced |
 | 4.4.0   | LDAP status was added to `show user all` |
 
-## `show vrf`
+## `show user activity`
 
-Displays details about all configured VRF's. 
+Show the most recent usage of 128T.
 
 #### Usage
+
 ```
-show vrf [<verbosity>]
+show user activity [verbose] [order-by <order-by>] [type <type>] [from <from>] [to <to>] [<username>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo. [type: timestamp] |
+| order-by | Sort the results by either username, time, and ip-address (default: username) |
+| to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
+| type | Filter the type of event (default: all) |
+| verbose | Display a more detailed view of the user activity |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| username | the name of the account to display (default: &lt;current user&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create user`](#create-user) | Create a new user account interactively. |
+| [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
+| [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
+| [`edit user`](#edit-user) | Modify an existing user account |
+| [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
+| [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
+| [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
+| [`show user`](#show-user) | Display information for user accounts. |
+
+## `show vrf`
+
+Show VRF name, tenants, and interfaces
+
+#### Usage
+
+```
+show vrf [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 #### Description 
 
 Provides details about all configured VRF’s including name, tenants, network-interfaces, and routing-interfaces in each VRF. Use to verify whether the configuration was specified correctly and resulted in the desired VRF state.
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The router to request VRF information from |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail |
+| summary | (default: summary) |
 
 #### Example
 
@@ -8352,7 +8719,7 @@ Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor.
 #### Usage
 
 ```
-sync peer addresses [force] [router <router>]
+sync peer addresses [{router <router> | resource-group <resource-group>}] [force]
 ```
 
 ##### Keyword Arguments
@@ -8360,6 +8727,7 @@ sync peer addresses [force] [router <router>]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
 | router | The name of the router to synchronize (default: &lt;current router&gt;) |
 
 ##### See Also
@@ -8424,78 +8792,35 @@ Configuration committed
 Completed in 4.86 seconds
 ```
 
-## top
+## `trace`
+
+Trace the HTTP API calls of another command, for troubleshooting purposes.
 
 #### Usage
 
 ```
-top
+trace [verbose] <command> [<command> ...]
 ```
 
-#### Description
-This command sets the focus of the PCLI prompt to the top level of the PCLI&#39;s hierarchy. It is used while in configuration mode to "jump" up out and back to the baseline prompt. It is only available within configuration mode.
+##### Keyword Arguments
 
-#### Example
+| name | description |
+| ---- | ----------- |
+| verbose |  |
 
-```
-admin@labsystem1.fiedler# config authority router burlington
-admin@labsystem1.fiedler (router[name=burlington])# node combo1
-admin@labsystem1.fiedler (node[name=combo1])# where
-config authority router burlington node combo1
-admin@labsystem1.fiedler (node[name=combo1])# top
-admin@labsystem1.fiedler# where
-admin@labsystem1.fiedler#
-```
+##### Positional Arguments
 
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 1.0.0   | This feature was introduced |
-
-## up
-
-#### Usage
-
-```
-up [<levels>]
-```
+| name | description |
+| ---- | ----------- |
+| command | Trace another command&#x27;s HTTP calls |
 
 #### Description
 
-This command moves the administrative focus of the PCLI "up" the specified number of levels. When the optional &lt;levels&gt; argument is left off, it moves the focus up one level.
+The `trace` command is used when attempting to determine what 128T services need to be inspected during troubleshooting.
 
-:::note
-This command is only available while in configuration mode.
-:::
 
-#### Example
 
-```
-admin@labsystem1.fiedler# config authority router burlington
-admin@labsystem1.fiedler (router[name=burlington])# node combo1
-admin@labsystem1.fiedler (node[name=combo1])# device-interface 11
-admin@labsystem1.fiedler (device-interface[id=11])# network-interface ext11
-admin@labsystem1.fiedler (network-interface[name=ext11])# where
-config authority router burlington node combo1 device-interface 11
-network-interface ext11
-admin@labsystem1.fiedler (network-interface[name=ext11])# up
-admin@labsystem1.fiedler (device-interface[id=11])# where
-config authority router burlington node combo1 device-interface 11
-admin@labsystem1.fiedler (device-interface[id=11])# up 3
-admin@labsystem1.fiedler (authority)# where
-config authority
 
-admin@labsystem1.fiedler (authority)#
-```
-
-#### Privileges Required
-Available to _admin_ and _user_.
-
-#### Version History
-| Release | Modification                |
-| ------- | ----------------------------|
-| 1.0.0   | This feature was introduced |
 
 ## `validate`
 
