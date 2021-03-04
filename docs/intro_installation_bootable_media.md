@@ -36,7 +36,7 @@ To perform the installation using the OTP Installation, use the arrow keys to se
 :::note
 Not all hardware has video support. Booting to the serial console is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
 
-Selecting the wrong type of console (Serial or VGA) may result in garbage characters being displayed, and if left to continue will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
+Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed, and if left to continue will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 ::: 
 
 The procedure that follows here is the Interactive Install on the VGA Console.
