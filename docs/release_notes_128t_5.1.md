@@ -11,7 +11,9 @@ sidebar_label: '5.1'
 ------
 - **[I95-21775 BGP VRF Support:](concepts_learning_VRF_routes.md)** Support for learning VRF routes through BGP and the associated routing tables has been added. Virtual Routing and Forwarding (VRF) instances make it possible to maintain multiple routing tables with overlapping address spaces in one router.
 ------
-- **I95-21776 Ethernet Over SVR Support:**
+- **[I95-21776 Ethernet Over SVR Support](concepts_EthOverSVR.md):** Ethernet Over SVR (EoSVR) is a proprietary 128 Technology protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between 128T routers with increased security and efficiency, without the overhead of IP packet encapsulation.
+------
+- **I95-23206 Custom Chart Legends:** This feature allows the user to assign a custom series name to each trace in the legend by hovering over the series name, and clicking on the displayed icon. The pop up dialog allows you to assign a name to the series.
 ------
 - **I95-24412 Dual PPPoE Per Node Support:** [Multiple PPPoE interfaces can be configured on a single node.](howto_config_PPPoE.md)
 ------
@@ -97,6 +99,8 @@ sidebar_label: '5.1'
 ------
 - **I95-37826 Ensure permissions on bootloader config are configured:** Appropriate permissions are set on bootloader config files.
 ------
+- **I95-37832 Ensure no world writable files exist:** Added software tools to avoid world writable files. 
+------
 - **I95-37910 AWS c5.xlarge instance shows 2 cores in GUI:** Custom Report charts now persist the displayed data even if an error occurs, specifically if internet connection drops or a node becomes unavailable. A small error indicator now appears above the chart, which can be hovered and displays the error.
 ------
 - **I95-38378 Salt-minion config broken after enabling asset connection resiliency:** The minion config is now loaded on conductor migration operations at time of operation. 
@@ -113,17 +117,23 @@ sidebar_label: '5.1'
 ------
 - **I95-38500 CVE Medium: binutils (CESA-2018:3032), binutils (CESA-2019:2075):** Added binutils to deprecated packages.
 ------
-- **I95-38543 salt_master memory leak using up all conductor memory:** This issue has been resolved with an update to saltstack 3002.2.
+- **I95-38543 salt_master memory leak using up all conductor memory:** This issue has been resolved with an update to saltstack 3002.2
+------
+- **I95-38666 Management Services and routes may not be generated for PPPoE** Resolved an issue where `management-over-forwarding` was not generating service or service-route config for PPPoE interfaces.
 ------
 - **I95-38682 CVE Medium: Rebuild Python:** Python has been updated to address vulnerabilities.
 ------
 - **I95-38694 SNMP ifTable does not conform to correct IF-MIB representation of high speed interfaces:** The `ifSpeed` field in the legacy `ifTable` has been set to conform with the higher speed values. 
+------
+- **I95-38728 Interface configuration on Azure** Resolved an issue where a module was not loaded by default, causing the interface configuration to fail. 
 ------
 - **I95-38768 VMXNet3 driver not functional:** A fix has been applied to the ip header checksum and is now calculated via hardware offload.
 ------
 - **I95-38830 Validation error when device-interface type is set to vmbus-uuid and forwarding is disabled:** Resolved a configuration problem wherein vmbus-uuid could not be configured unless forwarding was explicitly configured.
 ------
 - **I95-38832 Intermittent PCLI command failure when issues queries against managed routers:** Resolved an issue that resulted in unresponsive web and command line interfaces caused by certain configuration sizes.
+------
+- **I95-38919 Prevent DNF Corruption prior to Plugin Install:** Added corruption detection/remediation to plugin installation.
 ------
 - **I95-38963 Address sudo CVE-2021-3156:** Upgraded to later version.
 ------
@@ -138,6 +148,13 @@ sidebar_label: '5.1'
 - **I95-39186 ISO interactive install not shutting down properly after install:** This issue has been resolved.  
 ------
 - **I95-39187 Use same time format in Alarms and Event History:** Time format is now consistent between Alarms and Event History. 
+------
+- **I95-39190 CVE Medium: CESA-2021:0153 dnsmasq:** Upgraded dnsmasq to version 2.76-16.el7_9.1 as a remediation for CESA-2021:0153.
+------
+- **I95-39239 Event persistence gets stuck on a high number of events.** This issue has been resolved. 
+------
+- **I95-39278 CVE High/Medium: Saltstack Updates:** Update saltstack to 3002.5 to address Saltstack CVEs.
+------
 
 ### Caveats
 
