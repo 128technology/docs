@@ -15,7 +15,7 @@ sidebar_label: '5.1'
 ------
 - **I95-24412 Dual PPPoE Per Node Support:** [Multiple PPPoE interfaces can be configured on a single node.](howto_config_PPPoE.md)
 ------
-- **I95-27678 [Configurable Audit Events](config_audit_event.md):** Audit events such as traffic, admin and system can be configured with this features and also allows the persistence of those events to be turned on and off.
+- **I95-27678 [Configurable Audit Events](config_audit_event.md):** Audit events such as traffic, admin, and system can be configured with this feature. The persistence of those events is now configurable.
 ------
 - **I95-33016 Router and Node Page Dynamically Refresh Analytics and State:** Router and Node pages automatically refresh data at 30 second intervals. 
 ------
