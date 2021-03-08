@@ -29,7 +29,7 @@ Installation is done from the 128T ISOs, typically from a bootable image on a fl
 - [Perform the Interactive ISO installation](intro_installation_bootable_media.md) 
 - [Configure a Conductor](intro_basic_conductor_config.md)
 - [Create the Router configuration with the Conductor](intro_basic_router_config.md)
-- [Install and Reboot the Router using the OTP ISO](intro_installation_otp_iso.mdx)
+- [Install and Reboot the Router using the OTP ISO](intro_otp_iso_install.mdx)
 
 To install the 128T software on AWS or Azure, refer to: 
  - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)

@@ -8,6 +8,8 @@ Do not edit directly.
 -->
 <!-- markdownlint-disable line-length -->
 
+This document follows the conventions of [JSON Schema](https://json-schema.org). Some URLs may be used as [identifiers](https://json-schema.org/understanding-json-schema/structuring.html#the-id-property) rather than actual web resources.
+
 ## Initializer Preferences File Schema
 
 ```txt
