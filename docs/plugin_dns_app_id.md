@@ -29,7 +29,7 @@ configure
                 custom-apps cnn
                     name cnn
                     domain-name cnn.com
-                    domain-name .*.cnn.com
+                    domain-name *.cnn.com
                 exit
             exit
         exit
@@ -54,16 +54,16 @@ exit
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
 | 1.2.0, 2.2.0 | `include-builtin-apps` was introduced |
-| 1.3.0, 2.3.0 | Add `youtube` as builtin pattern |
+| 1.3.0, 2.3.0 | Add `YouTube` as builtin pattern |
 
-The plugin contains built in application patterns for Gmail, Google Drive, Youtube, and Windows Update. The patterns were generated from the following published documents:
+The plugin contains built in application patterns for Gmail, Google Drive, YouTube, and Windows Update. The patterns were generated from the following published documents:
 
 | Application    | Document |
 | -------------- | --- |
 | Gmail        | [link](https://support.google.com/a/answer/9497877?hl=en) |
 | Google Drive   | [link](https://support.google.com/a/answer/2589954?hl=en) |
 | Windows Update | [link 1](https://docs.microsoft.com/en-us/windows-server/administration/windows-server-update-services/deploy/2-configure-wsus#211-connection-from-the-wsus-server-to-the-internet) [link 2](https://docs.microsoft.com/en-us/windows/deployment/update/windows-update-troubleshooting#device-cannot-access-update-fWindows Updateiles) |
-| Youtube   | [link](https://www.netify.ai/resources/applications/youtube) |
+| YouTube   | [link](https://www.netify.ai/resources/applications/youtube) |
 
 By enabling the `include-all-builtin-apps` configuration, the plugin will automatically include all the available apps. This allows for new apps to be automatically included as new builtin apps are added over time. Alternatively, you can choose specific builtin apps by name, as shown in the snippet above. The values you can configure are `gmail`, `google-drive`, `youtube` and `windows-update`.
 
@@ -88,23 +88,23 @@ This example shows our builtin `gmail` application's pattern matching configured
 ```
 custom-apps gmail
     name gmail
-    domain-name .*.client-channel.google.com
+    domain-name *.client-channel.google.com
     domain-name accounts.google.com
     domain-name apis.google.com
     domain-name clients.*.google.com
     domain-name contacts.google.com
     domain-name hangouts.google.com
-    domain-name .*.googleusercontent.com
+    domain-name *.googleusercontent.com
     domain-name mail.google.com
     domain-name www.google.com
-    domain-name .*.gstatic.com
+    domain-name *.gstatic.com
     domain-name ogs.google.com
     domain-name play.google.com
 exit
 ```
 
 #### Deprecated Patterns
-The latest version is backwards compatabile with the `patterns` functionality however it is much more natural to use `domain-name`. Future releases will likely obsolete the `patterns` configuration field!
+The latest version is backwards compatabile with the `patterns` regex functionality for `custom-apps` however it is much more natural to use `domain-name`. In future releases, the `patterns` functionality will be obsoleted and removed.
 
 :::note
 The `.` character bears special meaning within regular expressions, and matches *any single character*. Because hostnames contain literal `.` characters, in order to explicitly reference a dot separator, you must prefix it with **two** backslash characters. I.e., to have a pattern match the hostname `www.128technology.com`, you would type it into the PCLI as `www.128technology.com`. The PCLI will render the double backslash characters as a single backslash when you `show` the configuration.
@@ -338,8 +338,8 @@ exit
 ### Release 1.3.0, 2.3.0, 3.0.0
 
 #### New Features and Improvements
-- Add youtube to builtins
-- Deprecate patterns in favor of domain-name for custom-apps
+- **PLUGIN-1077** Deprecate patterns in favor of domain-name for custom-apps
+- **PLUGIN-1078** Add YouTube to builtins
 
 ### Release 2.2.1
 
