@@ -2,8 +2,16 @@
 title: Troubleshooting VRF
 sidebar_label: Troubleshooting VRF
 ---
+The `show rib vrf` command can be used to check for the presence of VRF route entries.
+If expected VRF route entries are not present, the following steps may be used to troubleshoot the problem:
 
-## Linux Kernel State
+- The `show vrf` command will display all the VRFs that were created based on the running configuration. A missing or incorrect VRF entry is likely due to a configuration issue.
+
+- The `show bgp summary vrf` command displays an overview of the status of the BGP VRF peering sessions. Any non-established session can then be investigated further.
+
+- The `show network-interface` command can be used to check all interfaces associated with the VRF (via their tenant assignment). The BGP VRF peering might not be able to become established due to a down interface.
+
+### Linux Kernel State
 
 Any configured VRF will be present as a VRF table in the Linux kernel within the routingEngine namespace. A VRF in the kernel is represented by a pseudo interface of type “vrf”. Any network interface associated with the VRF (via its tenant) is represented by a kernel interface that is linked to the VRF pseudo interface:
 ```
