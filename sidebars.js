@@ -40,6 +40,7 @@ module.exports = {
     "Concepts": [
       "concepts_application_discovery",
       "concepts_appid",
+      "concepts_EthOverSVR",
       "concepts_ha_theoryofoperation",
       "concepts_interface_types",
       "concepts_kni",
@@ -71,6 +72,7 @@ module.exports = {
           "config_dns_proxy",
           "config_ldap",
           "config_management_over_forwarding",
+          "config_EthoSVR",
 
           "config_ha",
           "config_dual_router_ha",
