@@ -177,6 +177,7 @@ sidebar_label: '5.1'
 	- "bandwidth", "sessions" and "traffic" fields have been removed from `/tenant and /tenant/{tenant}` response message.
 
 	- The following endpoint has been removed entirely: `/router/{router}/node/{node}/networkInterface/byDeviceInterface`
-
+------
+- **I95-39406 Installer fails to update:** In some situations, such as an installer conflict, the Installer will fail to update, but the 5.1 software has downloaded and installed. 
 
 
