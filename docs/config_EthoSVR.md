@@ -58,7 +58,7 @@ In most cases the layer 2 services will be created automatically. However, there
 2. Scroll down to the **Service Route** panel and click ADD.
 3. Name the Service Route and click SAVE.
 4. Under **Service Route Information**, select the EoSVR service you created prevoiusly.
-5. Under **Service Route Type**, select the drop down, scroll down and select **Eosvr Bridge**. This service route type is generated when you create a new EoSVR service. 
+5. Under **Service Route Type**, select the drop down, scroll down and select **Eosvr Bridge**. 
 6. In the **To EoSVR Bridge** field, use the drop down to select the EoSVR Bridge you configured earlier. 
 7. Repeat the procedure for the second router configured for EoSVR. 
 
