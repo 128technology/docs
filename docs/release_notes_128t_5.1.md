@@ -11,7 +11,7 @@ sidebar_label: '5.1'
 ------
 - **[I95-21775 BGP VRF Support:](concepts_learning_VRF_routes.md)** Support for learning VRF routes through BGP and the associated routing tables has been added. Virtual Routing and Forwarding (VRF) instances make it possible to maintain multiple routing tables with overlapping address spaces in one router.
 ------
-- **I95-21776 [Ethernet Over SVR Support:](concepts_EthOverSVR.md)** Ethernet Over SVR (EoSVR) is a proprietary 128 Technology protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between 128T routers with increased security and efficiency, without the overhead of IP packet encapsulation.
+- **[I95-21776 Ethernet Over SVR Support:](concepts_EthOverSVR.md)** Ethernet Over SVR (EoSVR) is a proprietary 128 Technology protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between 128T routers with increased security and efficiency, without the overhead of IP packet encapsulation.
 ------
 - **I95-23206 Custom Chart Legends:** This feature allows the user to assign a custom series name to each trace in the legend by hovering over the series name, and clicking on the displayed icon. The pop up dialog allows you to assign a name to the series.
 ------
@@ -21,7 +21,7 @@ sidebar_label: '5.1'
 ------
 - **I95-33016 Router and Node Page Dynamically Refresh Analytics and State:** Router and Node pages automatically refresh data at 30 second intervals. 
 ------
-- **I95-33385 Implement dark-mode in GUI:** There is a switch in the User Profile under Preferences allowing a user to switch the display to "dark mode"; A black background with light text. 
+- **I95-33385 Implement dark-mode in GUI:** There is a switch in the User Profile under Preferences allowing a user to switch the display to "dark mode"; a black background with light text. 
 ------
 - **I95-34919 Show Commands for Services:** The [`show service path`](cli_reference.md#show-service-path) and [`show fib`](cli_reference.md#show-fib) commands have been enhanced to provide more granular path-related debugging. 
 ------
@@ -53,7 +53,6 @@ sidebar_label: '5.1'
 	- Node Location
 ------
 - **I95-39017 SR-IOV VLAN filtering:** VLAN filtering has been enabled for the SR-IOV virtual functions to support the NFX150 and NFX250 platforms.
-------
 
 ### Resolved Issues
 
@@ -93,7 +92,7 @@ sidebar_label: '5.1'
 ------
 - **I95-37699 `save tech-support-info` may generate a corrupted zip file on systems that have greater than 10K alarms:** Added a `limit` argument to PCLI show events and Tech Support to resolve this issue.  
 ------
-- **I95-37728 show rib summary hangs/return no data:**  Added support to proxy the routing engine endpoint in the web server, and provided support for the vrf argument in `show rib summary`.
+- **I95-37728 `show rib summary` hangs/return no data:** Added support to proxy the routing engine endpoint in the web server, and provided support for the vrf argument in `show rib summary`.
 ------
 - **I95-37770 Password Obfuscator consumes password as a command line argument:** This issue has been resolved. 
 ------
@@ -119,13 +118,13 @@ sidebar_label: '5.1'
 ------
 - **I95-38543 salt_master memory leak using up all conductor memory:** This issue has been resolved with an update to saltstack 3002.2
 ------
-- **I95-38666 Management Services and routes may not be generated for PPPoE** Resolved an issue where `management-over-forwarding` was not generating service or service-route config for PPPoE interfaces.
+- **I95-38666 Management Services and routes may not be generated for PPPoE:** Resolved an issue where `management-over-forwarding` was not generating service or service-route config for PPPoE interfaces.
 ------
 - **I95-38682 CVE Medium: Rebuild Python:** Python has been updated to address vulnerabilities.
 ------
 - **I95-38694 SNMP ifTable does not conform to correct IF-MIB representation of high speed interfaces:** The `ifSpeed` field in the legacy `ifTable` has been set to conform with the higher speed values. 
 ------
-- **I95-38728 Interface configuration on Azure** Resolved an issue where a module was not loaded by default, causing the interface configuration to fail. 
+- **I95-38728 Interface configuration on Azure:** Resolved an issue where a module was not loaded by default, causing the interface configuration to fail. 
 ------
 - **I95-38768 VMXNet3 driver not functional:** A fix has been applied to the ip header checksum and is now calculated via hardware offload.
 ------
@@ -143,25 +142,24 @@ sidebar_label: '5.1'
 ------
 - **I95-39036 dns-config=automatic should be allowed when using PPPoE:** Resolved an issue where management over pppoe interface does not allow dns-config mode to be configured.
 ------
-- **I95-39163 Long change propagation times in FIB entries due to large number of advertised routes** The routing agent implementation was improved to enable faster processing of configuration changes when there are services with a large port range.
+- **I95-39163 Long propagation times in FIB entries:** The routing agent implementation was improved to enable faster processing of configuration changes when there are services with a large port range.
 ------
-- **I95-39186 ISO interactive install not shutting down properly after install:** This issue has been resolved.  
+- **I95-39186 Interactive Install ISO not shutting down properly after install:** This issue has been resolved.  
 ------
 - **I95-39187 Use same time format in Alarms and Event History:** Time format is now consistent between Alarms and Event History. 
 ------
 - **I95-39190 CVE Medium: CESA-2021:0153 dnsmasq:** Upgraded dnsmasq to version 2.76-16.el7_9.1 as a remediation for CESA-2021:0153.
 ------
-- **I95-39239 Event persistence gets stuck on a high number of events.** This issue has been resolved. 
+- **I95-39239 Event persistence gets stuck on a high number of events:** This issue has been resolved. 
 ------
 - **I95-39278 CVE High/Medium: Saltstack Updates:** Update saltstack to 3002.5 to address Saltstack CVEs.
-------
 
 ### Caveats
 
 - **I95-21775 BGP VRF Support:** 
 	- BGP and Multi-Protocol over SVR is not currently supported for the VRF BGP instances. 
 	- In order to exchange VRF routes via BGP, each VRF needs a separate BGP protocol instance and BGP session.
-
+------
 - **I95-37050 Remove Deprecated API Fields:** 
 
 	- "averageBandwidth" and "traffic" fields have been removed from the `/router/{router}/node/{node}/deviceInterface` response message.
@@ -177,6 +175,8 @@ sidebar_label: '5.1'
 	- "bandwidth", "sessions" and "traffic" fields have been removed from `/tenant and /tenant/{tenant}` response message.
 
 	- The following endpoint has been removed entirely: `/router/{router}/node/{node}/networkInterface/byDeviceInterface`
+------
+- **I95-38622 5.1.0 Kernel upgrade required for supporting wireguard:** Support for the wireguard plugin is not available on a router with 5.1.0 installed. The wireguard plugin can be installed on a Conductor, provided that the Routers are running a version older than 5.1.0. 
 ------
 - **I95-39406 Installer fails to update:** In some situations, such as an installer conflict, the Installer will fail to update, but the 5.1 software has downloaded and installed. 
 
