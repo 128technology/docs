@@ -25,6 +25,7 @@ module.exports = {
       "intro_basic_conductor_config",
       "intro_basic_router_config",
       "intro_otp_iso_install",
+      "intro_install_quickstart_otpiso",
       ],
     "Cloud Installations":[
       "intro_installation_aws",
