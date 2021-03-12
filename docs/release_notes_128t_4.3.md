@@ -2,6 +2,12 @@
 title: 128T 4.3 Release Notes
 sidebar_label: 4.3
 ---
+## Release 4.3.12
+
+### Resolved Issues
+- **I95-39167 IP violations caused by un-natted packets:** REsolved an issue where ICMP unreachables are causing IP violations causing an unexpected disconnect.
+------
+
 ## Release 4.3.11
 :::warning
 SSH Root Login is not permitted. 
