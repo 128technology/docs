@@ -181,5 +181,7 @@ sidebar_label: '5.1'
 - **I95-38622 5.1.0 Kernel upgrade required for supporting wireguard:** Support for the wireguard plugin is not available on a router with 5.1.0 installed. The wireguard plugin can be installed on a Conductor, provided that the Routers are running a version older than 5.1.0. 
 ------
 - **I95-39406 Installer fails to update:** In some situations, such as an installer conflict, the Installer will fail to update, but the 5.1 software has downloaded and installed. 
+------
+- **I95-39416 Conductor Upgrade process does not update the GUI:** When running an upgrade on the conductor, the GUI does not update until the last few seconds of the installation, giving the impression that nothing is happening. The installation is working, and the software is being installed.  
 
 
