@@ -5,7 +5,7 @@ sidebar_label: 4.3
 ## Release 4.3.12
 
 ### Resolved Issues
-- **I95-39167 IP violations caused by un-natted packets:** Resolved an issue where ICMP unreachables on an LTE interface are causing IP violations causing an unexpected disconnect.
+- **I95-39167 IP violations caused by un-natted packets:** Resolved an issue where ICMP unreachables on an LTE interface are generating IP violations causing an unexpected disconnect.
 ------
 
 ## Release 4.3.11
