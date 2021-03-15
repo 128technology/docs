@@ -199,6 +199,7 @@ module.exports = {
         "type": "category",
         "label": "128T Installer",
         "items": [
+          "release_notes_128t_installer_2.7",
           "release_notes_128t_installer_2.6",
           "release_notes_128t_installer_2.5",
           "release_notes_128t_installer_2.4",
