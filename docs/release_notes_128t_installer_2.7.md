@@ -22,4 +22,4 @@ sidebar_label: 2.7
 - **IN-375:** When deploying in AWS, verify that the latest AWS CLI is being used. 
 ------
 - **IN-381:** If `tmux` has been installed on the system by another application, the version 2.7 Installer will have a conflict. 
-	- If the `tmux` package is already present on a system, perform `yum remove tmux`. Then use `yum upgrade 128T-installer` to install the new installer. Be careful to _only_ remove `tmux`; removing anything other than `tmux` may result in 128T operational or installation issues.  
+	- If the `tmux` package is already present on a system, perform `yum remove tmux`. Then use `yum install 128T-installer` to install the new installer. Be careful to _only_ remove `tmux`; removing anything other than `tmux` may result in 128T operational or installation issues.  
