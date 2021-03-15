@@ -63,7 +63,13 @@ Since 128T services are directional, it is important to be able to control the d
 
 Once the rate-limit-policy is defined, in order for it to be applied to a service, `aggregate-rate-limit-policy` must be defined in the `service-class`.
 
+:::note
+The `rate-limit` field in a `service-class` is only used when configuring *per-flow rate limiting*, it is not necessary to set this to `true` to enable *per-service rate limiting*.
+:::
+
+:::note
 Flow rate limiting and aggregate rate limiting can configured independently of each other. When both `rate-limit` and `aggregate-rate-limit-policy` are enabled in the `service-class`, flow rate limiting will be applied first, before aggregate rate limiting.
+:::
 
 Sample configuration:
 
@@ -83,7 +89,6 @@ exit
 
 service-class   rate-policy-class
     name                         rate-policy-class
-    rate-limit                   true
     aggregate-rate-limit-policy  rate-limiting
 exit
 
