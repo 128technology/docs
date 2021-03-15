@@ -57,7 +57,7 @@ sidebar_label: '5.1'
 - **I95-39017 SR-IOV VLAN filtering:** VLAN filtering has been enabled for the SR-IOV virtual functions to support the NFX150 and NFX250 platforms.
 ------
 :::note
-Please refer to the [**Caveats**](release_notes_128t_5.1#caveats) section for important information prior to installation.
+Please refer to the [**Caveats**](#caveats) section for important information prior to installation.
 :::
 
 ### Resolved Issues
@@ -162,8 +162,6 @@ Please refer to the [**Caveats**](release_notes_128t_5.1#caveats) section for im
 
 ### Caveats
 
-- **39483 Validate/Commit and Diff Endpoints not Filtered by RBAC:** In some cases, Role-Based Access Configuration (RBAC) may not filter errors and warnings generated during the Validate operation. The resulting errors and warnings are displayed to users who do not have access to resolve the issues. 
-------
 - **I95-39023 Conductor Upgrade process forces a log out from the GUI:** An issue has been identified that when upgrading the conductor, the user is logged out of the GUI, and presented with an error message when attempting to log back in. The installation is running, and does complete. Log in is again available after the system has restarted. 
 ------
 - **I95-39406 Installer Fails to Update:** In some situations, such as an installer conflict, the Installer will fail to update, but the 5.1 software has downloaded and installed. 
@@ -185,7 +183,3 @@ Please refer to the [**Caveats**](release_notes_128t_5.1#caveats) section for im
 	- "bandwidth", "sessions" and "traffic" fields have been removed from `/tenant and /tenant/{tenant}` response message.
 
 	- The following endpoint has been removed entirely: `/router/{router}/node/{node}/networkInterface/byDeviceInterface`
-------
-- **I95-21775 BGP VRF Support:** 
-	- BGP and Multi-Protocol over SVR is not currently supported for the VRF BGP instances. 
-	- In order to exchange VRF routes via BGP, each VRF needs a separate BGP protocol instance and BGP session.
