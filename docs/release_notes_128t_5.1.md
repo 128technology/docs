@@ -158,7 +158,7 @@ sidebar_label: '5.1'
 
 ### Caveats
 
-- **I95-39416 Conductor Upgrade process does not update the GUI:** When running an upgrade on the conductor, the GUI does not update until the last few seconds of the installation, giving the impression that nothing is happening. The installation is working, and the software is being installed.  
+- **I95-39023 Conductor Upgrade process forces a log out from the GUI:** An issue has been identified that when upgrading the conductor, the user is logged out of the GUI, and presented with an error message when attempting to log back in. The installation is running, and does complete. Log in is again available after the system has restarted. 
 ------
 - **I95-39406 Installer fails to update:** In some situations, such as an installer conflict, the Installer will fail to update, but the 5.1 software has downloaded and installed. 
 ------
