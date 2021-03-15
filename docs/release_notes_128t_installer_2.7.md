@@ -13,13 +13,13 @@ sidebar_label: 2.7
 
 - **IN-320 `createrepo` fails when upgrading:** The installer now uses unique temporary directories to hold temporary repodata instead of the default.
 ------
-- **IN-385 Retry Query Operations:** Added multiple retry operations when querying remote repositories during the installation process. 
+- **IN-385 Retry Query Operations:** Added the ability to perform multiple retry operations when querying remote repositories during the installation process. 
 
 ### Caveats
 
-- **IN-343** - Installation process may incorrectly identify a failed download.
+- **IN-343** - The installation process may incorrectly identify a failed download.
 ------
 - **IN-375:** When deploying in AWS, verify that the latest AWS CLI is being used. 
 ------
 - **IN-381:** If `tmux` has been installed on the system by another application, the version 2.7 Installer will have a conflict. 
-	- If the `tmux` package is present on a system already, perform `yum remove tmux`. Then install the new installer: `yum install 128T-installer`. Be careful to only remove `tmux`; removing anything other than `tmux` will cause the installation to fail.  
+	- If the `tmux` package is already present on a system, perform `yum remove tmux`. Then use `yum upgrade 128T-installer` to install the new installer. Be careful to _only_ remove `tmux`; removing anything other than `tmux` may result in 128T operational or installation issues.  
