@@ -55,6 +55,10 @@ sidebar_label: '5.1'
 	- Node Location
 ------
 - **I95-39017 SR-IOV VLAN filtering:** VLAN filtering has been enabled for the SR-IOV virtual functions to support the NFX150 and NFX250 platforms.
+------
+:::note
+Please refer to the [**Caveats**](release_notes_128t_5.1#caveats) section for important information prior to installation.
+:::
 
 ### Resolved Issues
 
@@ -154,15 +158,17 @@ sidebar_label: '5.1'
 ------
 - **I95-39239 Event persistence gets stuck on a high number of events:** This issue has been resolved. 
 ------
-- **I95-39278 CVE High/Medium: Saltstack Updates:** Update saltstack to 3002.5 to address Saltstack CVEs.
+- **I95-39278 CVE High/Medium: Saltstack Updates:** Updated saltstack to 3002.5 to address Saltstack CVEs.
 
 ### Caveats
 
+- **39483 Validate/Commit and Diff Endpoints not Filtered by RBAC:** In some cases, Role-Based Access Configuration (RBAC) may not filter errors and warnings generated during the Validate operation. The resulting errors and warnings are displayed to users who do not have access to resolve the issues. 
+------
 - **I95-39023 Conductor Upgrade process forces a log out from the GUI:** An issue has been identified that when upgrading the conductor, the user is logged out of the GUI, and presented with an error message when attempting to log back in. The installation is running, and does complete. Log in is again available after the system has restarted. 
 ------
-- **I95-39406 Installer fails to update:** In some situations, such as an installer conflict, the Installer will fail to update, but the 5.1 software has downloaded and installed. 
+- **I95-39406 Installer Fails to Update:** In some situations, such as an installer conflict, the Installer will fail to update, but the 5.1 software has downloaded and installed. 
 ------
-- **I95-38622 5.1.0 Kernel upgrade required for supporting wireguard:** Support for the wireguard plugin is not available on a router with 5.1.0 installed. The wireguard plugin can be installed on a Conductor, provided that the Routers are running a version older than 5.1.0. 
+- **I95-38622 5.1.0 Kernel Upgrade Required for Wireguard Support:** Support for the wireguard plugin is not available on a router with 5.1.0 installed. The wireguard plugin can be installed on a Conductor, provided that the Routers are running a version older than 5.1.0. 
 ------
 - **I95-37050 Remove Deprecated API Fields:** 
 
