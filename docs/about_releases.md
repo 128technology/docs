@@ -16,6 +16,7 @@ sidebar_label: 128T Releases
 | [4.4.2](release_notes_128t_4.3.md#release-442)   | September 3, 2020  |                    | Not Applicable*    | September 19, 2021 |
 | [4.4.1](release_notes_128t_4.3.md#release-441)   | July 10, 2020      |                    | Not Applicable*    | September 19, 2021 |
 | [4.4.0](release_notes_128t_4.4.md#release-440)   | May 19, 2020       |                    | April 19, 2021     | September 19, 2021 |
+| [4.3.12](release_notes_128t_4.3.md#release-4311) | March 12, 2021     |                    | Not Applicable*    | September 26, 2021 |
 | [4.3.11](release_notes_128t_4.3.md#release-4311) | November 13, 2020  |                    | Not Applicable*    | September 26, 2021 |
 | [4.3.10](release_notes_128t_4.3.md#release-4310) | October 20, 2020   |                    | Not Applicable*    | September 26, 2021 |
 | [4.3.9](release_notes_128t_4.3.md#release-439)   | August 12, 2020    |                    | Not Applicable*    | September 26, 2021 |
