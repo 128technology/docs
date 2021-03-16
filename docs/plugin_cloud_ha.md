@@ -905,3 +905,11 @@ config
     exit
 exit
 ```
+
+## Release Notes
+
+### Release 3.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the Cloud HA plugin in 128T versions `5.1.0` and greater.

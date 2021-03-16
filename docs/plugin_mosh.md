@@ -23,3 +23,11 @@ mosh
     enabled  true
 exit
 ```
+
+## Release Notes
+
+### Release 2.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the Mosh plugin in 128T versions `5.1.0` and greater.

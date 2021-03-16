@@ -173,6 +173,12 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 
 ## Release Notes
 
+### Release 3.1.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the DNS Cache plugin in 128T versions `5.1.0` and greater.
+
 ### Release 1.2.0, 2.2.0
 
 #### Issues Fixed

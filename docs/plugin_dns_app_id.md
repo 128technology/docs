@@ -326,6 +326,13 @@ exit
 
 ## Release Notes
 
+### Release 3.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the DNS App ID plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-dns-app-id`
+
 ### Release 2.2.1
 
 #### Issues Fixed

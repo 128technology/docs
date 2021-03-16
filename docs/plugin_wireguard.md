@@ -634,7 +634,21 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 
 ## Release Notes
 
+### Release 2.0.1, 1.2.1
+
+#### Issues Fixed
+
+- **PLUGIN-1072** Allow wireguard to start when the required version of `kmod-wireguard` is installed along with versions not used by the active kernel.
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-wireguard`
+- **PLUGIN-768** Support the Wireguard plugin on conductors running 128T versions `5.1.0` and greater.
+
+### Caveat
+
+- **I95-38622** The plugin is not supported on routers running 128T version `5.1.0`.
+
 ### Release 1.2.0
+
+#### Issues Fixed
 
 - **PLUGIN-922** Support multiple kernel versions for 128T Wireguard plugin and allow for graceful upgrade and rollback of the 128T software releases. The enhancement currently supports the following kernel versions: `3.10.0-1062.9.1`, `3.10.0-1127.18.2`, `3.10.0-1160`, and `3.10.0-1160.6.1`.
 
@@ -651,5 +665,7 @@ The process below will cause the wireguard tunnels to be torn down and the peers
   - Restore the backup created in the first step. Once the changes are committed, the correct wireguard rpm's will be installed on the router.
 
 ### Release 1.1.0
+
+#### Issues Fixed
 
 - **PLUGIN-863** A kernel panic condition occurs when running Wireguard with the kernel version `3.10.0-1127.18.2` or above.
