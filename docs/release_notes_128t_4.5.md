@@ -7,15 +7,15 @@ sidebar_label: 4.5
 
 ### Resolved Issues
 
-- **I95-37368 Allow Reset of Asset ID Field:** An asset-id can be reset from the Asset ID field in the GUI.
+- **I95-37368 Asset ID unable to be reset from GUI:** An asset-id can be reset from the Asset ID field in the GUI.
 ------
-- **I95-38378 Salt-minion config broken after enabling asset connection resiliency:** The salt-minion configuration file now loads at the time of a migration operation, to ensure the latest version of the configuration is available. 
+- **I95-38378 Router unable to establish connection to conductor after enabling asset connection resiliency:** The salt-minion configuration file now loads at the time of a migration operation, to ensure the latest version of the configuration is available. 
 ------
-- **I95-38815 Set Adjacency Hostnames as DPU on Config** Dynamic peer hostnames shared via DPU are now properly handled internally and no longer produce DNS queries.
+- **I95-38815 Dynamic addresses for adjacencies are not propagated on configuration changes:** Unresolved dynamic peer hostnames are now properly handled via DPU and no longer produce DNS queries.
 ------
 - **I95-38843 Highway crash shortly after upgrade to 4.5.4** Removed an unused component that was causing reverse key collisions for multi-hop scenarios. 
 ------
-- **I95-39106 DHCP alarms are not cleared when config is changed to static:** We now handle the resulting empty string in alarm code after an interface is made static. 
+- **I95-39106 DHCP alarms are not cleared when config is changed to static:** We now clear stale alarms from unresolved DHCP enabled interfaces when reconfigured to use static address. 
 ------
 - **I95-39121 Extended driver stats for WAN Assurance:** These extended stats are now available using the extended stats APIs:
 	- interface received undersize errors
@@ -31,7 +31,7 @@ sidebar_label: 4.5
 ------
 - **I95-39352 128T ISO boot logo has old 128T icon:** The splash screen has been updated to display the Juniper logo. 
 ------
-- **I95-39378 5.1 Container Conductor failed resulting in an un-usable PCLI and missing system stats:** This issue has been resolved. 
+- **I95-39378 PCLI may return partial or empty results from some commands:** This issue has been resolved. 
 
 ## Release 4.5.5
 
