@@ -16,7 +16,7 @@ If you are interested in contributing content to the repository, please first re
 Preview your docs from a local live-reloading web server running in docker!
 
 Some of the markdown files in the project are large and require increasing the amount of memory in docker. By default docker limits the amount of memory for each container to 2GB. This needs to be increased to 4GB in order for npm to compile the markdown files to html. In order to increase the memory, go to Docker > Preferences > Resources and move the slider to 4GB, as can be seen in the image below.
-![Docker Preferences](/img/readme_docker_preferences.gif)
+![Docker Preferences](/static/img/readme_docker_preferences.gif)
 
 ### With `docker-compose`
 
