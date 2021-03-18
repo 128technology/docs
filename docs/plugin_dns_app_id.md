@@ -75,7 +75,7 @@ By enabling the `include-all-builtin-apps` configuration, the plugin will automa
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
 | 1.2.0, 2.2.0 | Support for adding custom-apps at authority level was introduced |
-| 1.3.0, 2.3.0 | deprecate `patterns` in favor of `domain-name` for custom-apps |
+| 1.3.0, 2.3.0, 3.1.0 | deprecate `patterns` in favor of `domain-name` for custom-apps |
 
 The plugin also allows the user to create their own definitions of applications by configuring a set of patterns to be used for matching the application. Each pattern must be a valid regex that will be applied to a FQDN to identify the application. The `authority > dns-app-id > custom-apps` config can be used to define patterns that apply to all the routers with `dns-app-id` functionality enabled. Also shown in the configuration snippet is the custom-app `cnn` that includes a list of patterns to be applied at the router level. The identification is dynamic, so you just need to update the configuration on the conductor to include new apps or patterns for your routers. When `custom-apps` are configured at the authority and router level, the two lists are combined at runtime for that particular router. For example, if the user configured a custom-app called `zoom` on the authority and another app called `cnn` on the router, the router will contain both the applications.
 
@@ -120,7 +120,8 @@ If you configure invalid regex patterns, you will see the log message `invalid p
 
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
-| 1.2.0, 2.2.0 | This capability was introduced  |
+| 1.2.0, 2.2.0 | This capability was introduced                  |
+| 2.3.0, 3.0.0 | The generate-as-hierarchical-services capability was introduced |
 
 The `authority > dns-app-id` configuration allows the user to automatically generate services for both the builtin and custom applications.
 
@@ -140,6 +141,7 @@ exit
 | Element | Type    | Description                                                  |
 | ------- | ------- | ------------------------------------------------------------ |
 | generate-services | boolean | Default: false. Governs whether to automatically generate services for applications. |
+| generate-as-hierarchical-services | boolean | Default: false. Whether to auto generate services as hierarchical services. |
 | base-service | service-reference | The generated application service will inherit all the properties such as access-policy, service-policy, etc, from the base service. |
 | custom-apps | subelement | Multiple instance object. Allows administrators to define custom patterns for matching applications. |
 | custom-apps > name | string | The name of the custom-app. This value will subsequently be configured within a `service > application-name` to give treatment to that application. |
@@ -335,11 +337,12 @@ exit
 
 ## Release Notes
 
-### Release 1.3.0, 2.3.0, 3.0.1
+### Release 1.3.0, 2.3.0, 3.1.0
 
 #### New Features and Improvements
 - **PLUGIN-1077** Deprecate patterns in favor of domain-name for custom-apps
 - **PLUGIN-1078** Add YouTube to builtins
+- **PLUGIN-890** Add support to auto generate services as hierarchical services
 
 ### Release 3.0.0
 
