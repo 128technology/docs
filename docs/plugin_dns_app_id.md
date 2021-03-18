@@ -141,7 +141,7 @@ exit
 | Element | Type    | Description                                                  |
 | ------- | ------- | ------------------------------------------------------------ |
 | generate-services | boolean | Default: false. Governs whether to automatically generate services for applications. |
-| generate-as-hierarchical-services | boolean | Default: false. Whether to auto generate services as hierarchical services. |
+| generate-as-hierarchical-services | boolean | Default: false. Whether to auto generate services as [hierarchical services](bcp_service_and_service_policy_design.md#hierarchical-services). |
 | base-service | service-reference | The generated application service will inherit all the properties such as access-policy, service-policy, etc, from the base service. |
 | custom-apps | subelement | Multiple instance object. Allows administrators to define custom patterns for matching applications. |
 | custom-apps > name | string | The name of the custom-app. This value will subsequently be configured within a `service > application-name` to give treatment to that application. |
