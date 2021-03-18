@@ -52,3 +52,11 @@ exit
 
 ## Caveat
 Ensure your `PS1` shell variable includes `\H` instead of `\h` to view the full hostname otherwise in the `node.router` case you will only see the `node` component, but the system hostname will be accurate.
+
+## Release Notes
+
+### Release 3.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the Set Hostname plugin in 128T versions `5.1.0` and greater.

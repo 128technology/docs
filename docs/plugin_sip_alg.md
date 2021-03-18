@@ -476,3 +476,12 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 [^1]: https://en.wikipedia.org/wiki/Session_Initiation_Protocol
 [^2]: https://en.wikipedia.org/wiki/Session_Description_Protocol
 [^3]: https://www.kamailio.org/
+
+## Release Notes
+
+### Release 3.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the SIP ALG plugin in 128T versions `5.1.0` and greater.
+

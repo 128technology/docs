@@ -335,11 +335,18 @@ exit
 
 ## Release Notes
 
-### Release 1.3.0, 2.3.0, 3.0.0
+### Release 1.3.0, 2.3.0, 3.0.1
 
 #### New Features and Improvements
 - **PLUGIN-1077** Deprecate patterns in favor of domain-name for custom-apps
 - **PLUGIN-1078** Add YouTube to builtins
+
+### Release 3.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the DNS App ID plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-dns-app-id`
 
 ### Release 2.2.1
 

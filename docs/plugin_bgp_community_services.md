@@ -225,3 +225,11 @@ config authority bgp-community-services-profile O365 application SkypeForBusines
 config authority bgp-community-services-profile O365 application OtherO365 application-name OtherO365
 config authority bgp-community-services-profile O365 application OtherO365 bgp-community 12076:5100
 ```
+
+## Release Notes
+
+### Release 2.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the BGP Community Services plugin in 128T versions `5.1.0` and greater.

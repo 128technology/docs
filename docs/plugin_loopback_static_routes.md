@@ -142,3 +142,11 @@ The plugin updates the `/etc/sysconfig/network-scripts/route-kni254` file and ap
 192.168.1.6/32 via 169.254.127.126 dev kni254
 8.8.8.8/32 via 169.254.127.126 dev kni254
 ```
+
+## Release Notes
+
+### Release 4.0.0
+
+#### Issues Fixed
+
+- **PLUGIN-768** Support the Loopback Static Routes plugin in 128T versions `5.1.0` and greater.
