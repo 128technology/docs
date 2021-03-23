@@ -7,7 +7,7 @@ sidebar_label: Contributing
 
 You can help improve our guides or the API reference by making them more coherent, consistent, or readable, adding missing information, correcting factual errors, fixing typos, or bringing them up to date with the latest 128T software.
 
-The 128 Technology documentation website is built using Docusaurus 2 to generate its static content from markdown documents. When editing existing content, or authoring new content, it is best to learn from what already exists - these are the best examples. If you are looking to learn markdown or expand on your knowledge, [GitHub-flavored Markdown syntax](https://docusaurus.io/docs/en/doc-markdown) is a great resource.
+The 128 Technology documentation website is built using Docusaurus 2 to generate its static content from markdown documents. When editing existing content, or authoring new content, it is best to learn from what already exists - these are the best examples. If you are looking to learn markdown or expand on your knowledge, [GitHub-flavored Markdown syntax](https://daringfireball.net/projects/markdown/syntax) is a great resource.
 
 Technical writing is different from other styles of writing.  Markus Kazmierczak offers some great tips for how to write copy that is easy to follow where you learn as you go in his [blog](https://mkaz.blog/misc/notes-on-technical-writing/). We do our best to follow these principles throughout our documentation.
 
