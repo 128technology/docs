@@ -23,3 +23,12 @@ sidebar_label: 2.7
 ------
 - **IN-381:** If `tmux` has been installed on the system by another application, the version 2.7 Installer will have a conflict. 
 	- If the `tmux` package is already present on a system, perform `yum remove tmux`. Then use `yum install 128T-installer` to install the new installer. Be careful to _only_ remove `tmux`; removing anything other than `tmux` may result in 128T operational or installation issues.  
+------
+- **IN-398:** An active tmux session/server process prevents `install128t` from running, and displays the following error:
+   ```
+      Failed to create install128t session
+      No tmux session with name install128t found
+   ```
+   The following message may be logged in `/var/log/install128t/tmux_wrapper.log` : `protocol version mismatch (client 8, server 7)`. 
+
+   _**Corrective Action:**_ Terminate all active tmux sessions/server processes and perform the installation/upgrade operation again.
