@@ -56,6 +56,8 @@ sidebar_label: 4.5
 ------
 - **I95-38500 CVE Medium: binutils (CESA-2018:3032), binutils (CESA-2019:2075):** Added binutils to deprecated packages.
 ------
+- **I95-38649 CVE High: CentOS 7 : kernel (CESA-2020:5437):** Update Kernel to 3.10.0-1160.11.1.
+------
 - **I95-38666 Management Services and routes may not be generated for PPPoE:** Resolved an issue where `management-over-forwarding` was not generating service or service-route config for PPPoE interfaces.
 ------
 - **I95-38682 CVE Medium: Rebuild Python:** Python has been updated to address vulnerabilities.
@@ -80,6 +82,8 @@ sidebar_label: 4.5
 ------
 - **I95-39036 dns-config=automatic should be allowed when using PPPoE:** Resolved an issue where management over pppoe interface does not allow dns-config mode to be configured.
 ------
+- **I95-39069 Highway crash in one thread when another thread is being modified:** This issue has been resolved. 
+------
 - **I95-39106 DHCP alarms are not cleared when config is changed to static:** We now clear stale alarms from unresolved DHCP enabled interfaces when reconfigured to use static address. 
 ------
 - **I95-39121 Extended driver stats for WAN Assurance:** These extended stats are now available using the extended stats APIs:
@@ -94,7 +98,11 @@ sidebar_label: 4.5
 ------
 - **I95-39190 CVE Medium: CESA-2021:0153 dnsmasq:** Upgraded dnsmasq to version 2.76-16.el7_9.1 as a remediation for CESA-2021:0153.
 ------
+- **I95-39192 BFD not able to recover after one-off source-nat changes on both directions:** BFD Session code has been modified to recover in this scenario. 
+------
 - **I95-39239 Event persistence gets stuck on a high number of events:** This issue has been resolved. 
+------
+- **I95-39248 Session Migration failed due to Session Modification:** The update logic has been modified to handle a metadate update during the migration process. 
 ------
 - **I95-39269 Interface Stats on Router Page do not show why an interface is up/down:** The GUI now indicates whether an interface is Admin down or unplugged. 
 ------
@@ -103,6 +111,12 @@ sidebar_label: 4.5
 - **I95-39352 128T ISO boot logo has old 128T icon:** The splash screen has been updated to display the Juniper logo. 
 ------
 - **I95-39378 PCLI may return partial or empty results from some commands:** This issue has been resolved. 
+------
+- **I95-39446 Rate limit Not Enforced on Upload:** Rate limiting is now applied even if the packet is coming from another node/router.
+------
+- **I95-39486 Conductor installation does not update while performing the upgrade from the GUI:** Resolved an issue that during a conductor upgrade, the GUI was not updating until the last few seconds of the installation. The GUI now shows the install/upgrade progress. 
+------
+- **I95-39543 Out of order packets when traffic-eng is enabled in multicore environments:** Fixed occasional reorder issue when `traffic-eng` is enabled in a multicore environment
 
 ## Release 4.5.5
 
