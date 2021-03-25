@@ -31,7 +31,7 @@ Use the following procedures to configure a 128T network to use Ethernet Over SV
 
 ### Create a Service For Ethernet Over SVR
 
-In most cases the layer 2 services will be created automatically. However, there may be times when the service must be created manually, or modifying an existing service is necessary. Use the following procedure to create a service on each router for layer 2 traffic. For IP traffic, use the [Create a Service](intro_basic_conductor_config.md/#create-a-service) procedure.
+Use the following procedure to create a service on each router for layer 2 traffic. For IP traffic, use the [Create a Service](intro_basic_conductor_config/#create-a-service) procedure.
 
 1. On the Configuration home screen, scroll down to **Services** and click ADD.
 2. Name the service and click SAVE.
@@ -43,18 +43,11 @@ In most cases the layer 2 services will be created automatically. However, there
 8. Click ADD, select **UDP** from the drop down, and click SAVE. 
 9. In the **Service Transport: UDP** window, under **Port Ranges** click ADD.
 10. Set the **Start Port** to 1281 and click SAVE.
-11. Return to the Service Panel, and scroll down to the Service Addresses panel. 
-12. Click Add, and enter the IP address of the EthOverSVR interface (the LAN interface for the router for which you are currently configuring the service.)
-13. Create another service for the other router - perform the same steps, but in setp 6, choose the Peer router.
-14. Return to the Configuration home screen.
-
-### Assign the Service
-
-1. On the Configuration home screen, scroll down to **Services**. 
-2. Select the service you created first.
-3. Scroll down to **Service Addresses** and click ADD.
-4. Enter the IP address of the first EoSVR interface you created and click SAVE.
-5. Repeat for the second service using the second EoSVR interface you created. 
+11. Return to the Service Panel, and scroll down to the **Service Addresses** panel. 
+12. Click ADD, and enter the IP address of the EthOverSVR interface (the LAN interface for the router for which you are currently configuring the service.)
+13. Click SAVE.
+14. Create another service for the other router - perform the same steps, but in step 6, choose the Peer router.
+15. Return to the Configuration home screen.
 
 ### Assign the Service Route
 
@@ -69,7 +62,6 @@ In most cases the layer 2 services will be created automatically. However, there
 	![Service Route Type Next](/img/config_EthoSVR_ASR6.png)
 
 7. Repeat the procedure for the second router configured for EoSVR. 
-
 
 ### Peer List
 
