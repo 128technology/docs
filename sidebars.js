@@ -35,6 +35,7 @@ module.exports = {
     ],
     "Supporting Information - Appendix":[
       "intro_installation_installer",
+      "legacy_OTP_install",
       "intro_upgrading",
       "intro_rollback",
     ],

@@ -69,6 +69,10 @@ Shut down the system and remove the bootable media. Then power the system up to 
  
    It is *strongly recommended* that you change these passwords immediately.
 
+  :::note
+  The admin default password is only created during the OTP installation. There is no admin defaut for an interactive installation.
+  :::
+
 ## Initialize the 128T Node
 
 The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched after the installation reboot. 
