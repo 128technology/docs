@@ -634,6 +634,12 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 
 ## Release Notes
 
+### Release 2.0.2, 1.2.2
+
+#### Issues Fixed
+
+- **PLUGIN-1089** Add support for kernel version `3.10.0-1160.11.1`.
+
 ### Release 2.0.1, 1.2.1
 
 #### Issues Fixed
