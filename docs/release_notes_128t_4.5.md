@@ -20,7 +20,7 @@ sidebar_label: 4.5
 
 ### Resolved Issues
 
-- **I95-30812 PCLI session terminated when actively running commands:** PCLI sessions now recognize all activity.
+- **I95-30812 PCLI session terminated when actively running commands:** Prior to this change only the enter key would reset the PCLI activity timer. With this change, the `tab` and `?` operations will also reset the PCLI activity timer.
 ------
 - **I95-35521 Ambigious validation error:** Errors now more clearly identify the source of the error.
 ------
@@ -82,7 +82,7 @@ sidebar_label: 4.5
 ------
 - **I95-39036 dns-config=automatic should be allowed when using PPPoE:** Resolved an issue where management over pppoe interface does not allow dns-config mode to be configured.
 ------
-- **I95-39069 Highway crash in one thread when another thread is being modified:** This issue has been resolved. 
+- **I95-39069 Highway crash when committing configuration:** Resolved a Multi-threading race condition when processing multicast. 
 ------
 - **I95-39106 DHCP alarms are not cleared when config is changed to static:** We now clear stale alarms from unresolved DHCP enabled interfaces when reconfigured to use static address. 
 ------
@@ -102,7 +102,7 @@ sidebar_label: 4.5
 ------
 - **I95-39239 Event persistence gets stuck on a high number of events:** This issue has been resolved. 
 ------
-- **I95-39248 Session Migration failed due to Session Modification:** The update logic has been modified to handle a metadate update during the migration process. 
+- **I95-39248 Session Migration failed due to Session Modification:** The update logic has been modified to handle a metadata update during the migration process. 
 ------
 - **I95-39269 Interface Stats on Router Page do not show why an interface is up/down:** The GUI now indicates whether an interface is Admin down or unplugged. 
 ------
