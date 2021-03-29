@@ -5,11 +5,23 @@ sidebar_label: Downloading ISOs
 
 ## Introduction
 
-Currently 128 Technology makes the following ISO images available for each software release:
+128 Technology provides two workflows for the installation process:
 
-- **Interactive ISO:** Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the 128T software is started.
+- **Interactive:** Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the 128T software is started.
 
-- **One Touch ISO (OTP) ISO:** Sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router.
+- **One Touch Provisioning (OTP):** This is the preferred method of installation. Sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router.
+
+Prior to versions 4.5.6-1 and 5.0.0-1 v2 there were two separate ISO’s available:
+
+- 128T-4.5.5-1.el7.OTP.v1.x86_64.iso – OTP ISO
+- 128T-4.5.5-1.el7.v1.x86_64.iso - Interactive (Refer to [Installing Using the Pre-5.0 Interactive ISO](legacy_OTP_install.md) for additional information)
+
+With releases 4.5.6-1 and 5.0.0-1 v2 (and greater), we now provide a single ISO that supports both  the OTP and Interactive Installation workflows.
+
+- 128T-4.5.6-1.el7.OTP.v1.x86_64.iso
+- 128T-5.0.0-1.el7.OTP.v2.x86_64.iso
+
+The process for downloading an ISO remains the same. 
 
 ## Downloading an ISO
 
