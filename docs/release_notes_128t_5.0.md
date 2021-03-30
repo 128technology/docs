@@ -3,6 +3,33 @@ title: 128T 5.0 Release Notes
 sidebar_label: '5.0'
 ---
 
+## Release 5.0.1
+
+### New Features and Improvements
+
+- **I95-22789** Dual LTE Support
+  For information on how to configure the 128T with two LTE interfaces, please refer to the [How To: LTE](howto_lte.md) guide.
+------
+- **I95-24412 Dual PPPoE Per Node Support:** [Multiple PPPoE interfaces can be configured on a single node.](howto_config_PPPoE.md)
+------
+- **I95-39580 Reference Candidate Config Values in a Template:** Using the `fromconfig` tag in Advanced Mode, the user can now reference a value from the candidate configuration. For more information, see "Pulling Values from the Candidate Configuration." (link not live yet)
+
+### Resolved Issues
+
+- **I95-38543 salt_master memory leak using up all conductor memory:** This issue has been resolved with an update to saltstack 3002.2
+------
+- **I95-38728 Interface configuration on Azure:** Resolved an issue where a module was not loaded by default, causing the interface configuration to fail. 
+------
+- **I95-38830 Validation error when device-interface type is set to vmbus-uuid and forwarding is disabled:** Resolved a configuration problem wherein vmbus-uuid could not be configured unless forwarding was explicitly configured.
+------
+- **I95-39278 CVE High/Medium: Saltstack Updates:** Updated saltstack to 3002.5 to address Saltstack CVEs.
+------
+- **I95-39385 Configuration changes are incorrectly showing as pending:** Resolved an issue where the PCLI notifications were out of sync.
+------
+- **I95-39298 Support External NAT Addresses in the STEP Router tables:** Peer paths with external NAT configuration are now considered in STEP path computations.
+------
+- **I95-39492 GUI shows config changes "Ready to Commit" when there are not any pending config changes:** Resolved an issue where the PCLI notifications were out of sync causing incorrect notifications in the GUI.
+
 ## Release 5.0.0
 
 :::warning

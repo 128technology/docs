@@ -159,6 +159,8 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 - **I95-39239 Event persistence gets stuck on a high number of events:** This issue has been resolved. 
 ------
 - **I95-39278 CVE High/Medium: Saltstack Updates:** Updated saltstack to 3002.5 to address Saltstack CVEs.
+------
+- **I95-39385 Configuration changes are incorrectly showing as pending:** Resolved an issue where the PCLI notifications were out of sync.
 
 ### Caveats
 
