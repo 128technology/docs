@@ -54,7 +54,7 @@ exit
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
 | 1.2.0, 2.2.0 | `include-builtin-apps` was introduced |
-| 1.3.0, 2.3.0 | Add `YouTube` as builtin pattern |
+| 1.3.0, 2.3.0, 3.1.0 | Add `YouTube` as builtin pattern |
 
 The plugin contains built in application patterns for Gmail, Google Drive, YouTube, and Windows Update. The patterns were generated from the following published documents:
 
