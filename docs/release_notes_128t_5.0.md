@@ -12,7 +12,7 @@ sidebar_label: '5.0'
 ------
 - **I95-24412 Dual PPPoE Per Node Support:** [Multiple PPPoE interfaces can be configured on a single node.](howto_config_PPPoE.md)
 ------
-- **I95-39580 Reference Candidate Config Values in a Template:** Using the `fromconfig` tag in Advanced Mode, the user can now reference a value from the candidate configuration. For more information, see "Pulling Values from the Candidate Configuration." (link not live yet)
+- **I95-39580 Reference Candidate Config Values in a Template:** Using the `fromconfig` tag in Advanced Mode, the user can now reference a value from the candidate configuration. For more information, see [Pulling Values from the Candidate Configuration](config_templates.md#pulling-values-from-the-candidate-configuration).
 
 ### Resolved Issues
 
