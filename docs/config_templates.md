@@ -252,6 +252,50 @@ The above would insert router `Test1` after router `Test2`.
 
 The `insert` property can have any of the following values: `first`, `last`, `before`, and `after`. If the list is of complex objects, like routers in the above example, the `keys` property must be specified for `before` and `after`. If instead the list was of simple strings like `["a", "b"]`, instead of `keys` you would specify a property called `value` which is a string to reference the item in the list that you want to target (e.g. `"value": "a"`).
 
+### Pulling Values from the Candidate Configuration
+The `{% fromconfig path/to/a/config/value %}` tag allows you to extract a value from the candidate configuration and use it during configuration generation. 
+
+#### Referencing a Leaf
+For example, lets say you want a router's location to reference an existing router's location:
+```
+{
+  "authority": {
+    "router": [
+      {
+        "name": "{{name}}",
+        "location": "{% fromconfig authority/router/nameOfTheExistingRouter/location %}"
+      }
+    ]
+  }
+}
+```
+
+#### Referencing a Leaf List by Index
+For example, lets say that you want a router's description to be the first Conductor address defined at the authority level:
+```
+{
+  "authority": {
+    "router": [
+      {
+        "name": "{{name}}",
+        "location": "{% fromconfig authority/conductor-address[0] %}"
+      }
+    ]
+  }
+}
+```
+
+Some things to note about paths to leaf lists:
+ * Indices are zero-based, the first element in the leaf list has position 0.
+ * If you do not provide an index (e.g. `authority/conductor-address`) the first leaf list value will be used.
+
+
+The following rules apply to all paths:
+* If traversing a list with multiple keys, the keys should be in model order and separated by a comma.
+* Keys should be URL encoded, do not URL encode the comma for compound keys.
+* Leading and trailing slashes are ignored.
+* **Indices can only be used for leaf lists**, you cannot reference a list by index, only by key.
+
 ## Conversion Between Modes
 
 When transitioning from basic to advanced mode or vice versa, data is retained and converted to the new mode. Basic mode can always be transitioned to advanced mode, but advanced mode cannot always be transitioned back to basic mode. The following conditions must be met for a template to be transitioned from advanced mode to basic mode:
