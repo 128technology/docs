@@ -94,6 +94,8 @@ sidebar_label: 4.5
 ------
 - **I95-39163 Long propagation times in FIB entries:** The routing agent implementation was improved to enable faster processing of configuration changes when there are services with a large port range.
 ------
+- **I95-39167 IP violations caused by un-natted packets:** Resolved an issue where ICMP unreachables on an LTE interface are generating IP violations causing an unexpected disconnect.
+------
 - **I95-39189 CVE Medium: CESA-2020:5566 openssl:** The openssl package has been updated to the latest version. 
 ------
 - **I95-39190 CVE Medium: CESA-2021:0153 dnsmasq:** Upgraded dnsmasq to version 2.76-16.el7_9.1 as a remediation for CESA-2021:0153.
