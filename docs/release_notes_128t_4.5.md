@@ -322,7 +322,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
 ### New Features and Improvements
 
-- **I95-33193** "About This System" within the GUI will display additional information if it is a container ("128T-docker") or if installed with a 128T OTP ISO.
+- **I95-33193** "About This System" within the GUI will display additional information if it is installed with a 128T OTP ISO.
 ------
 - **I95-35319** "Managed Reports" (Custom Report factory defaults) are now shipped with the product.
 ------
@@ -387,6 +387,9 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 - **I95-36404** Highway process fails to start on Ubuntu distribution.
 
   _**Symptom:**_ 128T running in a container will fail to initialize when the container is running on Ubuntu distributions. The following can be seen within `highway.log`:
+
+  **Suggested Change: Symptom: The 128T will fail to initialize when running on Ubuntu distributions.**
+  
   ```
   Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
   ```

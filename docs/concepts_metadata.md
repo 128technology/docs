@@ -82,6 +82,8 @@ After a router (which could have originally been the ingress or egress router of
 
 Similar to the high availability scenario, network events may sometimes require session state to be moved among routers in a 128T fabric. The term workload mobility refers to the migration of a workload (virtual machine, container, etc.) from one location in a network to another; the challenge this presents to 128T is that not only does the configuration need to account for the change (i.e., a service-route’s egress interface moves), but sessions in progress may also need to move as a result.
 
+**Suggested Change: The term workload mobility refers to the migration of a workload from one location in a network to another;**
+
 As with high availability, the use of metadata is critical to migrating a session from one router to another. In much the same way, when a (terminating) workload is moved to a new location, the ingress router will send packets for in-progress sessions to a new location, including brand new metadata to a new recipient.
 
 ## Metadata Composition
