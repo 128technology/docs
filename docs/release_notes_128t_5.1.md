@@ -150,6 +150,8 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 ------
 - **I95-39163 Long propagation times in FIB entries:** The routing agent implementation was improved to enable faster processing of configuration changes when there are services with a large port range.
 ------
+- **I95-39167 IP violations caused by un-natted packets:** Resolved an issue where ICMP unreachables on an LTE interface are generating IP violations causing an unexpected disconnect.
+------
 - **I95-39186 Interactive Install ISO not shutting down properly after install:** This issue has been resolved.  
 ------
 - **I95-39187 Use same time format in Alarms and Event History:** Time format is now consistent between Alarms and Event History. 
