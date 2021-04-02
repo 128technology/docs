@@ -3,6 +3,15 @@ title: List of Releases
 sidebar_label: 128T Releases
 ---
 
+:::info
+Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically. 
+
+For example, issues resolved in `4.3.12`, which was released on 3/12/2021, are resolved in `4.5.6`, which was released on 3/26/2021 and also resolved in `5.1.0`, which was released on 3/15/2021, and so on.
+
+However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not addressed in `4.5.5` because `4.5.5` was released on 2/10/2021. Even though `4.5.5` is lexicographically higher than `4.3.12`, it is chronologically older than 4.3.12.
+:::
+
+
 | Version                                          | Release            | GA Date            | End of Maintenance | End of Support     |
 | ------------------------------------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
 | [5.1.0](release_notes_128t_5.1.md#release-5.1)   | March 15, 2021     |                    | April 16, 2021     | October 16, 2021   |
