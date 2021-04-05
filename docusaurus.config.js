@@ -1,8 +1,8 @@
 module.exports = {
   title: '128T Docs',
   tagline: 'The documentation source for the 128T Networking Platform',
-  url: 'https://docs.128technology.com',
-  baseUrl: '/',
+  url: 'https://uat.juniper.net',
+  baseUrl: '/documentation/us/en/software/session-smart-router/',
   favicon: 'img/favicon.ico',
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
