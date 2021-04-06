@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   title: '128T Docs',
   tagline: 'The documentation source for the 128T Networking Platform',
@@ -57,5 +59,8 @@ module.exports = {
         },
       },
     ],
+  ],
+  plugins: [
+    path.resolve(__dirname, './src/components/adobe-analytics-plugin')
   ],
 };
