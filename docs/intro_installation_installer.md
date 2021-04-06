@@ -20,6 +20,10 @@ sudo yum install http://yum.128technology.com/installer/repo.rpm
 ```
 sudo yum install 128T-installer
 ```
+
+:::warning
+need to update this with the fact that after 2.7.0 installer the note below is no longer needed
+:::
 :::note
 To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing a manual installation.
 :::
