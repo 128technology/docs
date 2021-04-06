@@ -39,11 +39,6 @@ module.exports = {
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} Juniper Networks, Inc.`,
     },
-    googleAnalytics: {
-      trackingID: 'UA-167298415-2',
-      // Optional fields.
-      anonymizeIP: true, // Should IPs be anonymized?
-    },
   },
   presets: [
     [
