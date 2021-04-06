@@ -65,7 +65,7 @@ Shut down the system and remove the bootable media. Then power the system up to 
    | -------- | ---------- | ------------ |
    | root     | 128tRoutes | Linux account |
    | t128     | 128tRoutes | Linux account |
-   | admin | 128Tadmin | 128T PCLI admin account * |
+   | admin | 128Tadmin | 128T PCLI admin account - see note below |
  
    It is *strongly recommended* that you change these passwords immediately.
 
@@ -73,17 +73,17 @@ Shut down the system and remove the bootable media. Then power the system up to 
   The admin default password is only created during the OTP installation. There is no admin defaut for an interactive installation.
   :::
 
-## Initial boot and nmtui
+## Initial Boot and nmtui
 
-When the system boots from the `Install 128T Routing Software...` installation work flow, the system asks if initial Linux Networking should be configured before the 128T Initializer is started:
+When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the 128T Initializer is started.
 
   ![128T start nmtui](/img/initializer_Serial0.png)
 
-If yes is selected this launches the CentOS nmtui application to perform an initial network interface setup
+Selecting `Yes` launches the CentOS NMTUI application to perform an initial network interface setup.
 
   ![128T nmtui started](/img/initializer_Serial1.png)
 
-See the nmtui user documentation for more details.
+Refer to the NMTUI user documentation for more details.
 
 ## Initialize the 128T Node
 
@@ -95,7 +95,7 @@ If you are installing a highly available Conductor on the cloud, please refer to
 
   ![128T Role](/img/initializer_Serial2.png)
 
-2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, Enter their administrative addresses here, and this node will retrieve its configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
+2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, enter the administrative addresses and the node will retrieve the configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
 3. When asked _What kind of Router/Conductor node is this?_, select from the following options:
 
   ![Identify the Node](/img/initializer_Serial3.png)
@@ -145,11 +145,11 @@ If you are installing a highly available Conductor on the cloud, please refer to
   If installing the 128T software for the first time, a system reboot is required.
   :::
 
-### Install second HA node for Conductor
+### Install a Second HA Node for the Conductor
 
-If there is a second node for Conductor HA, install the system with the same process from [Installing ISO](intro_installation_bootable_media.md#installing-the-iso) to [Initialize 128T](intro_installation_bootable_media.md#initialize-the-128t-node) step 2. From Step 2, perform the following:
+If there is a second node for Conductor HA, install the system using the same process beginning with [Installing the ISO](intro_installation_bootable_media.md#installing-the-iso) and ending at [Initialize 128T](intro_installation_bootable_media.md#initialize-the-128t-node) step 2. From Step 2, perform the following:
 
-1. When prompt for `What kind of Conductor node is this?` Select **2nd HA Node** option.
+1. When prompted for `What kind of Conductor node is this?` Select the **2nd HA Node** option.
 
   ![2nd HA Node Setup](/img/initializer_Serial4cHANode.png)
 
@@ -161,13 +161,13 @@ If there is a second node for Conductor HA, install the system with the same pro
 
   ![HA Peer Credentials](/img/initializer_Serial4eHAPeer.png)
 
-4. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
+4. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no **failures** are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
 
-5. After initialization process completes the setup the following screen will be presented, press enter on `Got it!`
+5. After the initialization process completes the setup, the following screen displays. Use the Enter key to select `Got it!`
 
   ![Peer Restart](/img/initializer_Serial7.png)
 
-6. When prompted, either reboot your system or start 128T.
+6. The Installer Status screen indicates success. Use the spacebar to either reboot your system or start 128T.
 
   ![Initializer Complete](/img/initializer_complete.png)
 
