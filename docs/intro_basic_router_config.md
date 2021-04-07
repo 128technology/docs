@@ -12,7 +12,7 @@ Using the Conductor, the following procedures guide you through a basic router c
 2.	Select Configuration.
 3.	In the Routers list, select ADD. 
 4.	Name the new router _dallasbr2_ and select SAVE. 
-	- Input the location coordinates: +32.7767-096.7970/. 
+	- Input the location _Coordinates_: +32.7767-096.7970/. 
 	- Select **internal** for Inter-node Security Policy. 
 
 ### Create the WAN Interface 
