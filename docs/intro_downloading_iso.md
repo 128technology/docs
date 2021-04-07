@@ -21,11 +21,13 @@ With releases 4.5.6-1 and 5.0.0-1 v2 (and greater), we now provide a single ISO 
 - 128T-4.5.6-1.el7.OTP.v1.x86_64.iso
 - 128T-5.0.0-1.el7.OTP.v2.x86_64.iso
 
-The process for downloading an ISO remains the same. 
+The 128T Software package is available for download using either an existing certificate, or a username and token. With the latest release of the 128T Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 is required. 
+
+Juniper highly recommends upgrading to 4.5.7, 5.0.1 or 5.1.1. These versions contain updates for using a username/token for software access. If a username/token is used and the 128T software is not upgraded, a manual process must be followed each time the username/token is changed. See [Manual Token Process](intro_installation_installer.md#manual-token-process) for more information.
 
 ## Downloading an ISO
 
-128 Technology ISOs are available from our public yum servers located at: `https://software.128technology.com/artifactory/list/generic-128t-images-release-local/` to users with an active account.
+128 Technology ISOs are available from our public yum servers located at: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/` to users with an active account.
 
 You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page. If your client certificate or token is currently installed on your 128 Technology routers and conductors, you can download software updates from our yum servers or the web page. 
 
@@ -95,7 +97,7 @@ The successful output of the command produces the result:
 
 If the checksum validation fails, reattempt the download. If the error message persists, please contact 128 Technology, Inc. immediately.
 
-### Downloading Using a Certificate and a Web Browser
+### Downloading from a Web Browser Using a Certificate
 
 In order for the 128T certificate to be imported into a browser, it must first be transformed into the PFX format. Use openssl from a Linux, Macintosh, or Windows 10 Subsystem for Linux shell.
 
