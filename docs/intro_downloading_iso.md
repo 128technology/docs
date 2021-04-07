@@ -25,23 +25,29 @@ The process for downloading an ISO remains the same.
 
 ## Downloading an ISO
 
-128 Technology ISOs are available from our public yum servers located at: `https://yum.128technology.com/isos` to users with an active account.
+128 Technology ISOs are available from our public yum servers located at: `https://software.128technology.com/artifactory/list/generic-128t-images-release-local/` to users with an active account.
 
-Your client certificate or token is provided to you and is installed on your 128 Technology routers and conductors, allowing you to download software updates from our yum servers.
+You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page. If your client certificate or token is currently installed on your 128 Technology routers and conductors, you can download software updates from our yum servers or the web page. 
 
 ### Downloading from the Command Line
 
-The ISO installation media is hosted at the same location as the 128T software packages, in the `isos` directory. To acquire the ISO, use the `curl` command. Specify the certificate obtained from 128 Technology with a valid software license.
+The ISO installation media is hosted at the same location as the 128T software packages, in the `isos` directory. To acquire the ISO, use the `curl` command. Specify the certificate or username and token obtained from 128 Technology with a valid software license.
 
+#### Certificate
 ```bash
 curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/128T-<VERSION>.el7.x86_64.iso
+```
+
+#### Username and Token
+```
+curl -O -u <username>:<token> https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/128T-<VERSION>.el7.x86_64.iso
 ```
 
 Where `<VERSION>` is replaced with the 128T version you are interested in.
 
 ### Listing Available ISOs from the Command Line
-To view ISOs available for download, type the command below. Here, egrep is used to filter the results to 4.2.*.
-```html
+To view ISOs available for download, type the command below. Here, egrep is used to filter the results to 4.2.x.
+```
 # curl --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/ | egrep '4\.2'
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -89,9 +95,13 @@ The successful output of the command produces the result:
 
 If the checksum validation fails, reattempt the download. If the error message persists, please contact 128 Technology, Inc. immediately.
 
-### Downloading Using a Web Browser
+### Downloading Using a Certificate and a Web Browser
 
 In order for the 128T certificate to be imported into a browser, it must first be transformed into the PFX format. Use openssl from a Linux, Macintosh, or Windows 10 Subsystem for Linux shell.
+
+:::note
+This procedure is not necessary if you have a username and token.
+:::
 
 With your client certificate (i.e. 128T-0000XXX.pem) in the current directory, run the following command:
 

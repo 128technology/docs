@@ -73,15 +73,15 @@ Shut down the system and remove the bootable media. Then power the system up to 
   The admin default password is only created during the OTP installation. There is no admin defaut for an interactive installation.
   :::
 
-## Initial Boot and nmtui
+## Initial Boot and NMTUI
 
 When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the 128T Initializer is started.
 
-  ![128T start nmtui](/img/initializer_Serial0.png)
+![128T start nmtui](/img/initializer_Serial0.png)
 
 Selecting `Yes` launches the CentOS NMTUI application to perform an initial network interface setup.
 
-  ![128T nmtui started](/img/initializer_Serial1.png)
+![128T nmtui started](/img/initializer_Serial1.png)
 
 Refer to the NMTUI user documentation for more details.
 
@@ -123,21 +123,16 @@ If you are installing a highly available Conductor on the cloud, please refer to
     :::
     - **Router/Conductor Name:** The name of the Router or Conductor system as a whole. When referring to a running 128T software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `conductor-node1.conductor`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
-5. The **Advanced** button allows you to specify the number of CPU cores to be allocated for running your 128T routing software. The **Advanced** selection is only available when configuring a 128T Router. 
-   :::info
-   This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilities of the 128T Router beyond the default settings for the target platform.
-   :::
-
-6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
+5. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
 
   ![Password Setup](/img/initializer_Serial6.png)
 
-7. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
+6. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
 
-8. When prompted, either reboot your system or start 128T.
+7. When prompted, either reboot your system or start 128T.
 
   ![Initializer Complete](/img/initializer_complete.png)
 
@@ -147,9 +142,9 @@ If you are installing a highly available Conductor on the cloud, please refer to
 
 ### Install a Second HA Node for the Conductor
 
-If there is a second node for Conductor HA, install the system using the same process beginning with [Installing the ISO](intro_installation_bootable_media.md#installing-the-iso) and ending at [Initialize 128T](intro_installation_bootable_media.md#initialize-the-128t-node) step 2. From Step 2, perform the following:
+If there is a second node for Conductor HA, install the system using the same process beginning with [Installing the ISO](intro_installation_bootable_media.md#installing-the-iso) and ending at [Initialize 128T](intro_installation_bootable_media.md#initialize-the-128t-node) step 2. From step 2, perform the following:
 
-1. When prompted for `What kind of Conductor node is this?` Select the **2nd HA Node** option.
+1. When prompted for `What kind of Conductor node is this?` Select the **2nd HA Node**.
 
   ![2nd HA Node Setup](/img/initializer_Serial4cHANode.png)
 
@@ -157,11 +152,11 @@ If there is a second node for Conductor HA, install the system using the same pr
 
   ![2nd HA Peer IP](/img/initializer_Serial4dHANode.png)
 
-3. Enter the **HA Peer Credentials**. This is a one time operation for the initialization of the second HA Node with the first HA Peer.  The `t128` user can be used for this operation.
+3. Enter the **HA Peer Credentials**. This is a one time operation for the initialization of the second HA Node with the first HA Peer. The `t128` user can be used for this operation.
 
   ![HA Peer Credentials](/img/initializer_Serial4eHAPeer.png)
 
-4. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no **failures** are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
+4. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no **failures** are present, you can choose to continue with the installation even if multiple warnings exist. For information about why a specific test may have failed or generated a warning, contact 128T technical support.
 
 5. After the initialization process completes the setup, the following screen displays. Use the Enter key to select `Got it!`
 

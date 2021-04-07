@@ -4,9 +4,15 @@ sidebar_label: Manually Installing the 128T
 ---
 This section describes the manual installation process for the 128T. For automated installation see [Installing from Bootable Media](intro_installation_bootable_media.md). 
 
-## Install Using 128T-installer
+## Install Using 128T-Installer
 
 The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md).
+
+The 128T Software package is available for download using either an existing certificate, or a username and token. With the latest release of the 128T Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 is required. 
+
+Juniper Highly recommends upgrading to 4.5.7, 5.0.1 or 5.1.1. These versions contain updates for using a username/token for software access. If a username/token is used and the 128T software is not upgraded, a manual process must be followed each time the username/token is changed. See Manual Token Process for more information.
+
+### Manually Installing using the 128T-Installer
 
 1. Launch a Linux command prompt.
 2. Enter the command to install the Yum repository that corresponds to the 128T software installer.
@@ -21,19 +27,16 @@ sudo yum install http://yum.128technology.com/installer/repo.rpm
 sudo yum install 128T-installer
 ```
 
-:::warning
-need to update this with the fact that after 2.7.0 installer the note below is no longer needed
-:::
 :::note
-To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing a manual installation.
+Beginning with Installer version 2.7.0, the use of the Screen utility is no longer necessary. However, for older versions of the Installer, it is strongly recommended to use the Screen utility when performing a manual installation to avoid SSH session timeout during installation. 
 :::
 
-4. Create a screen and attach to it.
+- Create a screen and attach to it.
 ```
 screen -d -m -s <name-of-screen-session>
 screen -x <name-of-screen-session>
 ```
-5. Enter the command to launch the interactive installer wizard.
+4. Enter the command to launch the Interactive Installer wizard.
 
 ```
 sudo install128t
@@ -45,24 +48,30 @@ The 128T installer splash screen appears.
 
   > To select a radio button option, navigate to the radio button using the arrow keys or **Tab** key and press the Space bar. Pressing the **Enter** key will execute the function highlighted at the bottom of the pane, typically _OK_ or _Back_. Additionally, you can navigate fields using the **Tab** key.
 
-6. When prompted, open the client certificate you received as part of your 128T purchase. Copy the entire contents, _including the Certificate and Private key information_, and paste it into the Client Certificate window of the install wizard.<br/>The content must begin with the line `-----BEGIN CERTIFICATE-----` and end with `-----END RSA PRIVATE KEY-----`.
+6. You will be asked to enter either the client certificate or the username and token you received as part of your 128T purchase.
 
-7. Press the **Tab** key after pasting the client certificate to select the **OK** button, and press **Enter**.
+  - **For the username and token**, enter your information (the username and token shown here are for demonstration only):
+    - Username: `MoNtYpYtHoN`
+    - Token: `a1rsp33dvel0city0fsparr0w`
+ 
+  - **For the client certificate**, copy the entire contents of the certificate, _including the Certificate and Private key information_, and paste it into the Client Certificate window of the install wizard.<br/>The content must begin with the line `-----BEGIN CERTIFICATE-----` and end with `-----END RSA PRIVATE KEY-----`.
+
+    This is performed more easily when accessing the target machine over SSH using terminal software, rather than interacting with the target machine directly. Alternatively, you can also store the certificate as /etc/pki/128technology/release.pem to avoid having to copy and paste.
+
+  - Press the **Tab** key after pasting the client certificate to select the **OK** button, and press **Enter**.
   
-  > This is performed more easily when accessing the target machine over SSH using terminal software, rather than interacting with the target machine directly. Alternatively, you can also store the certificate as /etc/pki/128technology/release.pem to avoid having to copy and paste.
-  
-8. From the Version Selection window, select your desired version from the list and select **OK** to continue. The installation begins, and may take several minutes to download and install.
-9. Press the **Enter** key to select **OK** and close the installer. 
-10. Detach from the Screen utility.
+7. From the Version Selection window, select your desired version from the list and select **OK** to continue. The installation begins, and may take several minutes to download and install.
+8. Press the **Enter** key to select **OK** and close the installer. 
+9. Detach from the Screen utility if used.
 ```
 ctrl+a
 d
 ```
-Upon completing the installation, the installer automatically launches the Initializer.
+Upon completing the installation, the Installer automatically launches the Initializer.
 
 ### Initialize the 128T Node
 
-The 128T Initializer is a complementary application to the installer that tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is automatically launched once the 128T Installation wizard is complete.
+The 128T Initializer is a complementary application to the Installer that tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is automatically launched once the 128T Installation wizard is complete.
 
 1. On the 128T Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the 128T node and press the **Enter** key to select **OK**.
   ![128T Role](/img/intro_install_initializer_role.png)
@@ -86,25 +95,18 @@ The 128T Initializer is a complementary application to the installer that tunes 
   :::
 - **Router/Conductor Name:** The name of the Router or Conductor system as a whole. When referring to a running 128T software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `labsystem1.boston`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
-5. The **Advanced** button allows you to specify the number of CPU cores to be allocated for running your 128T routing software.
-   :::info
-   This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilites of the 128T platform beyond the default settings for the target platform.
-
-   The **Advanced** selection is only available when configuring a 128T Router.
-   :::
-
-6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
+5. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
 
 ![Password Setup](/img/intro_install_initializer_password.png)
 
-7. On the **Anonymous Data Collection** screen, select either **Accept** or **Disable** to enable or disable the process that measures the health of your 128T router and components.
+6. On the **Anonymous Data Collection** screen, select either **Accept** or **Disable** to enable or disable the process that measures the health of your 128T router and components.
 
-8. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
+7. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
 
-9. When prompted, either reboot your system or start 128T.
+8. When prompted, either reboot your system or start 128T.
 
   ![Initializer Complete](/img/intro_install_initializer_complete.png)
 
@@ -131,3 +133,18 @@ After installing the 128T Routing Software it is important to verify that the in
 3. Once the service is listed as _Active_, log into the system as Admin using the system default password.<br/>**Result:** The installation is verified.
 
 4. Close the command prompt window.
+
+## Manual Token Process
+
+If a username/token is used and the 128T software is not upgraded to 4.5.7, 5.0.1 nor 5.1.1, the following will need to be run each time the username/token is changed:
+
+1. Update the username/token with the [`install128t repo authenticate -u <user> -t <token>`](installer_cli_reference.md#repo) process and run `yum makecache --assumeyes` on both conductors.
+
+2. On the primary conductor run the following commands:
+```
+ln -s /etc/pki/install128t/* /srv/salt/
+t128-salt -C '* and not L@<conductor 1 asset id>,<conductor 2 asset id>' cp.get_file salt://GPG-RPM-KEY-128T-RELEASE /etc/pki/install128t/GPG-RPM-KEY-128T-RELEASE
+t128-salt -C '* and not L@<conductor 1 asset id>,<conductor 2 asset id>' cp.get_file salt://GPG-RPM-KEY-128T-RELEASE-LEGACY /etc/pki/install128t/GPG-RPM-KEY-128T-RELEASE-LEGACY
+```
+
+
