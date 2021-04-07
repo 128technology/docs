@@ -15,10 +15,6 @@ Use the steps below to complete a base configuration of the Conductor.
 3. Select Authority and change the Authority Name to a unique identifier for your system.
 4. Select VALIDATE and then COMMIT.
 
-:::warning
-The section above needs additional data and guidance for setting up the asset ID and HA for the conductor
-:::
-
 ### Create a Service
 The *service* configuration element is the cornerstone of the 128T data model. It is what allows administrators to describe eligible destinations for traffic, and subsequently define access controls, routing policy, and traffic treatment. 
 
