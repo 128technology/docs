@@ -109,7 +109,7 @@ The standard upgrade workflow is for individual instances of 128T software to do
 
 Within a given router's configuration, at `router > system > software-update > repository`, you can configure the `source-type` setting to one of three values:
 
-- `conductor-only`: the router will retrieve software versions only from (or through) the conductor
+- `conductor-only`: the router will retrieve software versions only from the conductor (_conductor(s) will need internet access and routers will need to be able to resolve internet hosted repositories_)
 - `prefer-conductor`: the router will retrieve software versions from the conductor, and fall back to using the internet
 - `internet-only` (default): the router will use 128 Technology's publicly hosted repositories for retrieving sofwtare images
 
@@ -119,7 +119,7 @@ Because this is a router setting, your collection of routers can each use differ
 
 For routers that have no access to the internet, at `router > system > software-update > repository > offline-mode` to `true`. This overrides the `source-type` leaf.
 
-The `import iso` command can be used to import packages contained within a 128T ISO onto a local yum repository, thereby allowing that 128T to be upgraded without contacting to 128 Technology servers.
+The `import iso` command can be used to import packages contained within a 128T ISO onto a local yum repository, thereby allowing that 128T to be upgraded without contacting to 128 Technology servers. (_If using offline-mode for routers to access the software from the conductors, both conductors in an HA setup will need the iso imported before performing the upgrade_).
 
 [import iso](cli_reference.md#import-iso) command allows user to specify the exact `filepath` to the ISO or specify `hunt` which will look everywhere on disk for a file that matches the pattern `128T*.iso` except for the following directories `/boot`, `/dev`, `/proc`, and `/sys` .
 
