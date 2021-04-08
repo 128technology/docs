@@ -5,27 +5,21 @@ sidebar_label: Installer Command Line Reference
 
 This is a reference document for the 128T Installer command line interface.
 To get started installing 128T with the Installer, see the
-[Manual Installation Guide](intro_installation_installer.md).
-
-## Running the Installer
+[Conductor Interactive Installation](intro_installation_bootable_media).
 
 To start the Installer, run the `install128t` command.
 
 :::note
 
-`install128t` must always be run as the root user, or with `sudo install128t`.
-The Installer will detect non-root usage and exit with this message:
+`install128t` must always be run as the root user, or with `sudo install128t.` The Installer will detect non-root usage and exit with this message:
 
 ```txt
 You must run the Installer as root.
 ```
-
-:::note
-
-To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing an installation, upgrade or rollback.
 :::
 
-:::
+Beginning with Installer version 2.7.0, the use of the Screen utility is no longer necessary. However, for older versions of the Installer, it is strongly recommended to use the Screen utility when performing a manual installation to avoid SSH session timeout. 
+
 
 Use the `-h`/`--help` flag to display help information for the `install128t`
 command line:
@@ -55,7 +49,7 @@ After a successful run, the `install128t` process will exit with a return code
 of 0. If any error was encountered during the operation, the return code will
 be non-zero.
 
-### Interactive Mode
+## Interactive Mode
 
 Without any arguments, the Installer will open a wizard interface to install
 128T.
@@ -68,7 +62,7 @@ Follow the on-screen prompts to complete the installation and initialization pro
 Step-by-step instructions for the Installer wizard can be found in the
 [Installation Guide](intro_installation_installer.md#install-using-128t-installer).
 
-### Automated Mode
+## Automated Mode
 
 For more advanced use cases, preferences may be specified on the command line
 to perform an operation in an automated fashion, using the `-p`/`--preferences`
@@ -108,7 +102,7 @@ The specified preferences **must** be valid JSON (trailing commas are not allowe
 and they must conform to the Installer preferences file schema.
 See the [full schema documentation](installer_preferences.md) for details.
 
-### Install from RPM
+## Install from RPM
 
 To install or upgrade 128T directly from RPM files, use the `--rpm-path` option
 to specify a directory in which the RPM files are located.
@@ -135,7 +129,7 @@ a reinstallation (`Confirm Install`).
 
 :::
 
-### Options
+## Options
 
 <!-- markdownlint-disable line-length -->
 | Option | Description |
@@ -150,7 +144,7 @@ a reinstallation (`Confirm Install`).
     --web-certificate
 -->
 
-## Subcommands
+### Subcommands
 
 Besides using a preference file, `install128t` may also be used to perform other
 tasks directly from the command line, without using the interactive wizard interface.
@@ -324,3 +318,17 @@ Use `-h`/`--help` to see all available options.
 | `-c`, `--cleanup-only` | Do not uninstall 128T, but still delete associated data such as configuration. |
 | `-l`, `--keep-logs` | Do not remove 128T log files. |
 <!-- markdownlint-enable line-length -->
+
+## Manual Token Process
+
+If a username/token is used and the 128T software is not upgraded to 4.5.7, 5.0.1 nor 5.1.1, the following will need to be run each time the username/token is changed:
+
+1. Update the username/token with the [`install128t repo authenticate -u <user> -t <token>`](installer_cli_reference.md#repo) process and run `yum makecache --assumeyes` on both conductors.
+
+2. On the primary conductor run the following commands. Be sure to replace `<conductor 1 asset id>` and `<conductor 2 asset id>` with the appropriate conductor asset ID.
+```
+ln -s /etc/pki/install128t/* /srv/salt/
+t128-salt -C '* and not L@<conductor 1 asset id>,<conductor 2 asset id>' cp.get_file salt://GPG-RPM-KEY-128T-RELEASE /etc/pki/install128t/GPG-RPM-KEY-128T-RELEASE
+t128-salt -C '* and not L@<conductor 1 asset id>,<conductor 2 asset id>' cp.get_file salt://GPG-RPM-KEY-128T-RELEASE-LEGACY /etc/pki/install128t/GPG-RPM-KEY-128T-RELEASE-LEGACY
+cmd.run "dnf makecache --assumeyes; yum makecache --assumeyes"
+```
