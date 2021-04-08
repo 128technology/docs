@@ -412,7 +412,7 @@ Completed in 0.10 seconds
 
 #### Issues Fixed
 
-- **PLUGIN-1092** Fix local and remote subnet configuration option to allow a single value or a list of values.
+- **PLUGIN-1092** Added fix for local and remote subnet configuration option to allow a single value or a list of values.
 
 ### Release 3.0.0
 
