@@ -19,7 +19,7 @@ The monitoring agent at its core is designed to be able to push data to external
 ## Installation
 
 ### Plugin
-For deployments running 128T version `5.1.0` or greater on the conductor should install the monitoring agent plugin for configuration management.
+For deployments running 128T version `5.1.0` or greater on the conductor, install the monitoring agent plugin for configuration management.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -45,7 +45,7 @@ With the plugin installed, the configuration for the monitoring agent can be man
 
 - Configure the inputs
 - Configure the outputs
-- Create a agent config profile
+- Create an agent config profile
 - Reference the profile on the router
 
 #### Input Configuration
@@ -56,7 +56,7 @@ The monitoring agent plugin allows the user to configure a set of inputs to be c
 | ------- | -------     | ----------------------------------------------------------- |
 | name    | string      | The name of the input                                       |
 | type    | enumeration | The type of the input such as device-state, metrics etc     |
-| additional-config | toml-string | Additional telegraf configuration for the input not captured by the data model |
+| additional-config | multiline-toml-string | Additional telegraf configuration for the input not captured by the data model |
 | tags |  list | List of tags to be included for this particular input |
 | tags > tag | string | The name of the tag |
 | tags > node | - | Use the node name of the router as tag value | 
@@ -91,13 +91,13 @@ The output configuration provides information about the various data sink for th
 | Element | Type        | Description                                                 |
 | ------- | -------     | ----------------------------------------------------------- |
 | name    | string      | The name of the output                                      |
-| type    | enumeration | The type of the output such as kafka, syslog etc            | 
+| type    | enumeration | The type of the output such as Kafka, syslog etc            | 
 | push-jitter | uint32 | The amount of time to jitter sending of the data to the output | 
 | batch-size | uint32   | The maximum number of rows of data to send at once          | 
 | buffer-limit | uint32 | The maximum number of unsent metrics in the buffer          | 
 | data-format  | enumeration | The output data format for telegraf such as influx, json |
 | format      | string | When the data-format is other, the name of the output format supported by telegraf |
-| additional-config | toml-string | Additional telegraf configuration for the output not captured by the data model |
+| additional-config | multiline-toml-string | Additional telegraf configuration for the output not captured by the data model |
 
 Based on the selected type, additional type specific configuration will be configurable. Here's an example of a `custom-output` which allows the user to create a TOML telegraf configuration 
 
@@ -117,7 +117,7 @@ Enter toml for config (Press CTRL-D to finish):
 ```
 
 #### Agent Configuration
-The `agent-config` can be leveraged to create a monitoring profile by referencing the various inputs and outputs configured in the previous steps. This allows multiple profiles to be created and applies to different routers. The various configuration options for the `agent-config` as follows
+The `agent-config` can be leveraged to create a monitoring profile by referencing the various inputs and outputs configured in the previous steps. This allows multiple profiles to be created and applies to different routers. The various configuration options for the `agent-config` as follows:
 
 
 | Element | Type        | Description                                                 |
@@ -132,16 +132,16 @@ The `agent-config` can be leveraged to create a monitoring profile by referencin
 | tags > value | string | User specified value for the tag | 
 | variables | list | List of config variables which allows for customization on the running system |
 | variables > name | string | The name of the variable |
-| variables > query | string | The GraphQL query to be executed to determine the value of the variable |
-| input | list  | list of inputs to be included in the profile | 
+| variables > query | string | The [GraphQL query](#graphql-variables) to be executed to determine the value of the variable |
+| input | list  | List of inputs to be included in the profile | 
 | input > name | reference | Reference to the input configured above |
 | input > push-interval | uint32 | Override the push-interval for the specific input |
 | input > sample-interval | uint32 | Override the sample-interval for the specific input |
 | input > include-all-outputs | boolean | Default; true. When enabled, the input will be sent to all configured outputs |
 | input > output | reference | When `include-all-outputs` is false, configure a set of outputs to be used as data sink |
-| input > additional-config  | Additional Telegraf configuration not present in the datamodel such as preprocessors, aggregators etc |
+| input > additional-config | multiline-toml-string  | Additional Telegraf configuration not present in the datamodel such as preprocessors, aggregators etc |
 
-An example of the agent configuration looks as follows
+An example of the agent configuration looks as follows:
 
 ```
 config
@@ -185,7 +185,7 @@ config
                     name                 metrics
                     sample-interval      100s
                     include-all-outputs  false
-                    output               kafka
+                    output               Kafka
                 exit
             exit
         exit
@@ -194,7 +194,7 @@ exit
 ```
 
 #### Router configuration
-Once all the inputs, outputs and agent-config provisioned, the profile can be referenced on the individual routers. The monitoring config elements can be found under `authority > router > system > monitoring` 
+Once all the inputs, outputs and agent-config are provisioned, the profile can be referenced on the individual routers. The monitoring config elements can be found under `authority > router > system > monitoring` 
 
 | Element | Type        | Description                                                 |
 | ------- | -------     | ----------------------------------------------------------- |
@@ -400,7 +400,7 @@ Path: `/var/lib/128t-monitoring/inputs/system.conf`
 
 Configuring the file output will write metrics to the local filesystem. This can be useful for testing or as a backup data source in case network connectivity issues prevent data from reaching the intended collection endpoint.
 
-The file output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > file` are as follows
+The file output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > file` are as follows:
 
 | Element | Type        | Description                                                 |
 | ------- | ----------- | ----------------------------------------------------------- |
@@ -409,7 +409,8 @@ The file output is one of the built in available types for the monitoring agent 
 | rotation-max-size | uint32 | The file(s) will be rotated when it becomes larger than the configured size. |
 | rotation-max-archives | unit32 | The maximum number of archives to keep when the file(s) is rotated. |
 
-An example configuration for file output looks as follows
+An example configuration for file output looks as follows:
+
 ```config
 config
 
@@ -469,14 +470,14 @@ Path: `/var/lib/128t-monitoring/outputs/file.conf`
 
 #### Kafka
 
-The `kafka` output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > kafka` are as follows
+The `Kafka` output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > kafka` are as follows:
 
 | Element | Type        | Description                                                 |
 | ------- | ----------- | ----------------------------------------------------------- |
-| broker | list | List of kafka broker to communicate with                            |
-| broker > host | ip-address or domain name | The address or domain name for the kafka broker |
-| broker > port | l4-port | The port number for the kafka broker                      |
-| compression-codec | enumeration | The comperession codec to be used for communicating with Kafka |
+| broker | list | List of Kafka broker(s) to communicate with                            |
+| broker > host | ip-address or domain name | The address or domain name for the Kafka broker |
+| broker > port | l4-port | The port number for the Kafka broker                      |
+| compression-codec | enumeration | The compression codec to be used for communicating with Kafka |
 | max-retry | unit32 | The maximum number of times to retry before failing until the next push interval |
 | topic | string | The Kafka topic to produce messages for |
 
@@ -488,12 +489,12 @@ config
 
         monitoring
 
-            output  kafka
-                name               kafka
-                type               kafka
+            output  Kafka
+                name               Kafka
+                type               Kafka
                 data-format        json
 
-                kafka
+                Kafka
 
                     broker  192.168.1.7 9092
                         host  192.168.1.7
@@ -508,13 +509,13 @@ config
 exit
 ```
 
-This example sends data to a kafka broker:
+This example sends data to a Kafka broker:
 
-Path: `/var/lib/128t-monitoring/outputs/kafka.conf`
+Path: `/var/lib/128t-monitoring/outputs/Kafka.conf`
 
 ```toml
-[[outputs.kafka]]
-  ## URLs of kafka brokers
+[[outputs.Kafka]]
+  ## URLs of Kafka brokers
   brokers = ["<ip>:9092"]
   ## Kafka topic for producer messages
   topic = "telegraf"
@@ -524,7 +525,7 @@ Path: `/var/lib/128t-monitoring/outputs/kafka.conf`
 
 #### Syslog
 
-The `syslog` output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > syslog` are as follows
+The `syslog` output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > syslog` are as follows:
 
 | Element | Type        | Description                                                 |
 | ------- | ----------- | ----------------------------------------------------------- |
@@ -638,7 +639,7 @@ config
 exit
 ```
 
-When configuring the variables on the file system, the agent configuration can include the variables as follows
+When configuring the variables on the file system, the agent configuration can include the variables as follows:
 
 Path: `/etc/128t-monitoring/config.yaml`
 
@@ -762,8 +763,8 @@ Collecting t128_metrics and writing to outputs for input t128_metrics
 2021-04-08T02:49:46Z D! [sarama] client/brokers registered new broker #1001 at kafka_1:9092
 2021-04-08T02:49:46Z D! [sarama]  Successfully initialized new client
 2021-04-08T02:49:46Z D! [agent] Connecting outputs
-2021-04-08T02:49:46Z D! [agent] Attempting connection to [outputs.kafka]
-2021-04-08T02:49:46Z D! [agent] Successfully connected to outputs.kafka
+2021-04-08T02:49:46Z D! [agent] Attempting connection to [outputs.Kafka]
+2021-04-08T02:49:46Z D! [agent] Successfully connected to outputs.Kafka
 2021-04-08T02:49:46Z D! [agent] Starting service inputs
 2021-04-08T02:49:46Z D! [agent] Stopping service inputs
 2021-04-08T02:49:46Z D! [agent] Input channel closed
@@ -771,8 +772,8 @@ Collecting t128_metrics and writing to outputs for input t128_metrics
 2021-04-08T02:49:46Z D! [sarama] producer/broker/1001 starting up
 2021-04-08T02:49:46Z D! [sarama] producer/broker/1001 state change to [open] on test/0
 2021-04-08T02:49:46Z D! [sarama] Connected to broker at kafka_1:9092 (registered as #1001)
-2021-04-08T02:49:46Z D! [outputs.kafka] Wrote batch of 138 metrics in 8.298753ms
-2021-04-08T02:49:46Z D! [outputs.kafka] Buffer fullness: 0 / 10000 metrics
+2021-04-08T02:49:46Z D! [outputs.Kafka] Wrote batch of 138 metrics in 8.298753ms
+2021-04-08T02:49:46Z D! [outputs.Kafka] Buffer fullness: 0 / 10000 metrics
 2021-04-08T02:49:46Z D! [agent] Stopped Successfully
 ```
 
@@ -794,7 +795,7 @@ The 128T monitoring-agent comes pre-packaged with a set of collectors to assist 
 
 ### Metric collector
 
-The `t128_metrics` input is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The various configuration options available under `authority > monitoring > input > metrics` are as follows
+The `t128_metrics` input is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The various configuration options available under `authority > monitoring > input > metrics` are as follows:
 
 | Element | Type    | Description                                                  |
 | ------- | ------- | ------------------------------------------------------------ |
@@ -806,7 +807,7 @@ The `t128_metrics` input is responsible for collecting the configured metrics fr
 | filter > parameter | string | The name of the parameter being referenced        |
 | filter > value | leaf-list | The list of values to be included in the match     |
 
-An example configuration of the metrics input looks as follows
+An example configuration of the metrics input looks as follows:
 
 ```config
 config
@@ -901,7 +902,7 @@ A custom set of metrics can be collected by configuring the `t128_metrics` input
 | ------------ | --------------------------------------- |
 | 1.2.0, 2.1.0 | `t128_events` input type was introduced |
 
-The event collector can be used for collecting and pushing events for various categories such as admin, alarm, system, traffic and provisioning as they occur on the system. The type of the event is available via a `tag` and can be used for filtering only specific events as desired. For example, the following configuration can be used for pushing just the `alarm` and `admin` event. The various configuration options available under `authority > monitoring > input > event` are as follows
+The event collector can be used for collecting and pushing events for various categories such as admin, alarm, system, traffic and provisioning as they occur on the system. The type of the event is available via a `tag` and can be used for filtering only specific events as desired. For example, the following configuration can be used for pushing just the `alarm` and `admin` event. The various configuration options available under `authority > monitoring > input > event` are as follows:
 
 | Element | Type   | Default  | Description                                                  |
 | ------- | ------ | -------  | ------------------------------------------------------------ |
@@ -911,7 +912,11 @@ The event collector can be used for collecting and pushing events for various ca
 | traffic | boolean  | true     | Include traffic events generated by the system             |
 | provisioning | boolean  | true     | Include provisioning events generated by the system   |
 | system | boolean  | true     | Include system events generated by the system               |
-| track-index | boolean | true | Track event indexes such that it allows each event to be produced once when monitoring is restarted |
+| track-index | boolean | true | Enable best effort tracking of events generated while the output cannot be reached |
+
+:::note
+The events described above need to be enabled for the router under `authority > router > system > audit` for the event collector to be able to collect and push those events.
+:::
 
 An example configuration for events inputs is as below
 ```config
@@ -992,8 +997,7 @@ In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen abo
 | 1.2.1, 2.1.1 | `mac-address` tag was introduced                                |
 
 
-The `t128_device_state` input can be used for monitoring the admin, oper, provisional, and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. The various configuration options available under `authority > monitoring > input > device-interface` are as follows
-
+The `t128_device_state` input can be used for monitoring the admin, oper, provisional, and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. The various configuration options available under `authority > monitoring > input > device-interface` are as follows:
 
 | Element | Type    | Description                                                 |
 | ------- | ------- | ------------------------------------------------------------ |
@@ -1066,7 +1070,7 @@ In versions 3.3.1 and later, the simplified `t128_device_state` seen above shoul
 
 ### Peer Path State collector
 
-The `peerPathStateCollector128t` collector can be used for monitoring the up/down status of all the peer paths on the node. The various configuration options available under `authority > monitoring > input > peer-path` are as follows
+The `peerPathStateCollector128t` collector can be used for monitoring the up/down status of all the peer paths on the node. The various configuration options available under `authority > monitoring > input > peer-path` are as follows:
 
 
 | Element | Type    | Description                                                 |
@@ -1128,8 +1132,7 @@ When using the `TOML` definition shown below the various part of a peer-path suc
 | ------- | ------------------------------------------ |
 | 3.3.1   | `t128_arp_state` input type was introduced |
 
-The `t128_arp_state` input can be used for monitoring the arp table status of a network interface configured on the node. The various configuration options available under `authority > monitoring > input > arp` are as follows
-
+The `t128_arp_state` input can be used for monitoring the arp table status of a network interface configured on the node. The various configuration options available under `authority > monitoring > input > arp` are as follows:
 
 | Element | Type    | Description                                                 |
 | ------- | ------- | ------------------------------------------------------------ |
@@ -1223,10 +1226,9 @@ The `lteMetricCollector128t` collector when run will scan the current node confi
 
 ### Top Analytics Collector
 
-The `topAnalyticsCollector128t` collector can be used for monitoring the top sources, top sessions and top applications on the router. The different aspects of each of these data sources are easily tunable using the input configuration. The monitoring agent configuration provides a way to manage each of the top-sessions, top-sources and top-applications individually as follows
-
+The `topAnalyticsCollector128t` collector can be used for monitoring the top sources, top sessions and top applications on the router. The different aspects of each of these data sources are easily tunable using the input configuration. The monitoring agent configuration provides a way to manage each of the top-sessions, top-sources and top-applications individually as follows:
 #### Top Sessions
-The input type of `top-sessions` can be used to enable the top-sessions configuration. An example of such configuration is as follows
+The input type of `top-sessions` can be used to enable the top-sessions configuration. An example of such configuration is as follows:
 
 ```config
 config
@@ -1245,7 +1247,7 @@ exit
 ```
 
 #### Top Sources
-The `top-sources` input can be used to configure the various aspects of the top sources API on the system. The various configuration options available under `authority > monitoring > input > top-sources` are as follows
+The `top-sources` input can be used to configure the various aspects of the top sources API on the system. The various configuration options available under `authority > monitoring > input > top-sources` are as follows:
 
 
 | Element | Type    | Default | Description                                                 |
@@ -1277,13 +1279,12 @@ exit
 ```
 
 #### Top Applications
-The monitoring agent `top-applications` input can be used to configure various aspects of the API on the system. The various configuration options available under `authority > monitoring > input > top-applications` are as follows
-
+The monitoring agent `top-applications` input can be used to configure various aspects of the API on the system. The various configuration options available under `authority > monitoring > input > top-applications` are as follows:
 | Element | Type    | Default | Description                                                 |
 | ------- | ------- | ------- | ----------------------------------------------------------- |
 | max-rows | uint32 | 10      | The maximum number of rows to be collected per sample       |
 | min-session-count | uint32 | 1 | The minimum number of sessions for an application to be collected |
-| application-filter | string | - | Filter for only including specific applications in the collection |
+| application-filter | string | - | Restrict the applications to be included in the collection |
 
 An example of the top applications configuration is as follows:
 
@@ -1340,16 +1341,15 @@ The **top applications** input is useful when application identification in term
 | ------- | ---------------------------------------- |
 | 3.3.1   | `t128_graphql` input type was introduced |
 
-The `t128_graphql` input can be used to retrieve data from a GraphQL API. The various configuration options available under `authority > monitoring > input > graphql` are as follows
-
+The `t128_graphql` input can be used to retrieve data from a GraphQL API. The various configuration options available under `authority > monitoring > input > graphql` are as follows:
 | Element | Type    | Description                                                 |
 | ------- | ------- | ----------------------------------------------------------- |
 | query-entry-point | string | The path to a point in the graphQL tree from which fields and tags will be extracted. This path may contain (`<key>:<value>`) graphQL arguments such as (name:'${ROUTER}'). | 
 | extract-field | list | List of leaf nodes to be collected from query response as fields |  
-| extract-field > name | string | The name of the collection |
+| extract-field > name | string | The name of the field |
 | extract-field > value | string | The graphQL query path relative to the entry-point from which to extract the value | 
 | extract-tag | list | List of leaf nodes to be collected from query response as tags | 
-| extract-tag > name | string | The name of the collection |
+| extract-tag > name | string | The name of the tag |
 | extract-tag > value | string | The graphQL query path relative to the entry-point from which to extract the value | 
 
 An example configuration using can be seen as below
@@ -1444,6 +1444,16 @@ Note that `(<key>:<value>)` arguments are valid only on the `entry_point`. They 
 It is possible for the relative paths of `extract_fields` and `extract_paths` to enter GraphQL lists. When that is the case, a separate line will be created for each entry in the list.
 
 When dealing with multiple child nodes, it is advised that each be handled in separate `t128_graphql` inputs.
+
+## Monitoring Agent Plugin Notes
+
+## Release 2.0.0
+
+#### New Features and Improvements:
+ - **PLUGIN-667** Introduce a new monitoring agent plugin to better manage the monitoring agent through the GUI and PCLI. Some key highlights are:
+ * Support all the 128T developed collectors such as metrics, events, top-sessions, etc.
+ * Support the most commonly used outputs such as file, syslog, Kafka, etc.
+ * Support multi-line input fields for generic telegraf configuration with TOML syntax validation.
 
 ## Monitoring Agent Release Notes
 
