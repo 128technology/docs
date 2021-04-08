@@ -408,6 +408,12 @@ Completed in 0.10 seconds
 
 ## Release Notes
 
+### Release 3.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-1092** Fix local and remote subnet configuration option to allow a single value or a list of values.
+
 ### Release 3.0.0
 
 #### Issues Fixed
@@ -417,7 +423,7 @@ Completed in 0.10 seconds
 
 ### Release 1.0.6, 2.0.6
 
-### Issues Fixed
+#### Issues Fixed
 
 - **PLUGIN-1057** Ensure all critical IPsec client directories are created during installation of the plugin.
 - **PLUGIN-1053** Added an inactive IPsec client plugin state to allow seamless migration from zscaler. The inactive state is achieved by excluding `ipsec-client` from the configuration.
