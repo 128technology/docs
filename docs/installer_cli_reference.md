@@ -293,14 +293,10 @@ expansion.
 :::
 
 If the specified credentials are found to be invalid, the Installer will display
-an error message and exit, and the credentials will not be saved.
+an error message and exit, and the credentials will not be saved. To verify credential status, use the `install128t repo list` command. 
 
 :::note
-
-If the credentials cannot be checked (e.g. no Internet connection is available),
-the credentials will still be saved. They will be checked again, if possible,
-the next time the Installer is run.
-
+If the credentials cannot be checked (e.g. no Internet connection is available), the remote packages will appear unavailable (no upgrades available) but the credentials will still be saved. They will be checked again, if possible, the next time the Installer is run. 
 :::
 
 ## Uninstalling 128T
