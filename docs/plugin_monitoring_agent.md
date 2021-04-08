@@ -185,7 +185,7 @@ config
                     name                 metrics
                     sample-interval      100s
                     include-all-outputs  false
-                    output               Kafka
+                    output               kafka
                 exit
             exit
         exit
@@ -470,7 +470,7 @@ Path: `/var/lib/128t-monitoring/outputs/file.conf`
 
 #### Kafka
 
-The `Kafka` output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > kafka` are as follows:
+The `kafka` output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > kafka` are as follows:
 
 | Element | Type        | Description                                                 |
 | ------- | ----------- | ----------------------------------------------------------- |
@@ -489,12 +489,12 @@ config
 
         monitoring
 
-            output  Kafka
-                name               Kafka
-                type               Kafka
+            output  kafka
+                name               kafka
+                type               kafka
                 data-format        json
 
-                Kafka
+                kafka
 
                     broker  192.168.1.7 9092
                         host  192.168.1.7
@@ -511,11 +511,11 @@ exit
 
 This example sends data to a Kafka broker:
 
-Path: `/var/lib/128t-monitoring/outputs/Kafka.conf`
+Path: `/var/lib/128t-monitoring/outputs/kafka.conf`
 
 ```toml
-[[outputs.Kafka]]
-  ## URLs of Kafka brokers
+[[outputs.kafka]]
+  ## URLs of kafka brokers
   brokers = ["<ip>:9092"]
   ## Kafka topic for producer messages
   topic = "telegraf"
@@ -763,8 +763,8 @@ Collecting t128_metrics and writing to outputs for input t128_metrics
 2021-04-08T02:49:46Z D! [sarama] client/brokers registered new broker #1001 at kafka_1:9092
 2021-04-08T02:49:46Z D! [sarama]  Successfully initialized new client
 2021-04-08T02:49:46Z D! [agent] Connecting outputs
-2021-04-08T02:49:46Z D! [agent] Attempting connection to [outputs.Kafka]
-2021-04-08T02:49:46Z D! [agent] Successfully connected to outputs.Kafka
+2021-04-08T02:49:46Z D! [agent] Attempting connection to [outputs.kafka]
+2021-04-08T02:49:46Z D! [agent] Successfully connected to outputs.kafka
 2021-04-08T02:49:46Z D! [agent] Starting service inputs
 2021-04-08T02:49:46Z D! [agent] Stopping service inputs
 2021-04-08T02:49:46Z D! [agent] Input channel closed
@@ -772,8 +772,8 @@ Collecting t128_metrics and writing to outputs for input t128_metrics
 2021-04-08T02:49:46Z D! [sarama] producer/broker/1001 starting up
 2021-04-08T02:49:46Z D! [sarama] producer/broker/1001 state change to [open] on test/0
 2021-04-08T02:49:46Z D! [sarama] Connected to broker at kafka_1:9092 (registered as #1001)
-2021-04-08T02:49:46Z D! [outputs.Kafka] Wrote batch of 138 metrics in 8.298753ms
-2021-04-08T02:49:46Z D! [outputs.Kafka] Buffer fullness: 0 / 10000 metrics
+2021-04-08T02:49:46Z D! [outputs.kafka] Wrote batch of 138 metrics in 8.298753ms
+2021-04-08T02:49:46Z D! [outputs.kafka] Buffer fullness: 0 / 10000 metrics
 2021-04-08T02:49:46Z D! [agent] Stopped Successfully
 ```
 
@@ -1452,7 +1452,7 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 #### New Features and Improvements:
  - **PLUGIN-667** Introduce a new monitoring agent plugin to better manage the monitoring agent through the GUI and PCLI. Some key highlights are:
  * Support all the 128T developed collectors such as metrics, events, top-sessions, etc.
- * Support the most commonly used outputs such as file, syslog, Kafka, etc.
+ * Support the most commonly used outputs such as file, syslog, `Kafka`, etc.
  * Support multi-line input fields for generic telegraf configuration with TOML syntax validation.
 
 ## Monitoring Agent Release Notes
