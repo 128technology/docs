@@ -10,3 +10,7 @@ sidebar_label: 3.0
 - **Support for token-based software access**
 
 ### Resolved Issues
+
+### Caveats
+
+- **IN-418 Installer 3.0 first download attempt from conductor fails on router:** 
