@@ -5,7 +5,7 @@ sidebar_label: Installer Command Line Reference
 
 This is a reference document for the 128T Installer command line interface.
 To get started installing 128T with the Installer, see the
-[Conductor Interactive Installation](intro_installation_bootable_media).
+[Conductor Interactive Installation](intro_installation_bootable_media.md).
 
 To start the Installer, run the `install128t` command.
 
