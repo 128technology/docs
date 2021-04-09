@@ -322,16 +322,16 @@ Use `-h`/`--help` to see all available options.
 ## Manual Token Process
 
 :::note
-Updating the token SHOULD be performed during a maintenance window. Performing these operations on a large deployment may take an extended amount of time to complete.
+It is strongly recommended that you update the token during a maintenance window. Performing these operations on a large deployment may take an extended amount of time to complete.
 :::
 
-If the 128T conductors are ugpraded to 4.5.7, 5.0.1, 5.1.1 or greater and have the 3.0.0 installer or greater, use the following procedure to either add or update the username/token:
+If the 128T Conductors are ugpraded to 4.5.7, 5.0.1, 5.1.1, or greater, and have the 3.0.0 (or greater) Installer, use the following procedure to either add or update the username/token:
 
-1. Update the username/token with the [`install128t repo authenticate -u <user> -t <token>`](#repo) process on BOTH conductors
+1. Update the username/token with the [`install128t repo authenticate -u <user> -t <token>`](#repo) process on BOTH conductors.
 
-2. Restart the primary conductor with `systemctl restart 128T` and wait for the conductor to be fully operational (can be up to 5 minutes)
+2. Restart the primary conductor with `systemctl restart 128T` and wait for the conductor to be fully operational (can be up to 5 minutes).
 
-3. Restart the secondary conductor with `systemctl restart 128T` (After the routers return to a runing state the systems will be updated with the username/token)
+3. Restart the secondary conductor with `systemctl restart 128T` (After the routers return to a running state the systems will be updated with the username/token).
 
 
 If the 128T conductors are NOT upgraded to 4.5.7, 5.0.1, 5.1.1 or greater, the following steps must be taken to ADD the username/token:
