@@ -65,7 +65,7 @@ Shut down the system and remove the bootable media. Then power the system up to 
    | -------- | ---------- | ------------ |
    | root     | 128tRoutes | Linux account |
    | t128     | 128tRoutes | Linux account |
-   | admin | 128Tadmin | 128T PCLI admin account |
+   | admin | 128Tadmin | 128T PCLI admin account - see note below |
  
    It is *strongly recommended* that you change these passwords immediately.
 
@@ -73,9 +73,21 @@ Shut down the system and remove the bootable media. Then power the system up to 
   The admin default password is only created during the OTP installation. There is no admin defaut for an interactive installation.
   :::
 
+## Initial Boot and NMTUI
+
+When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the 128T Initializer is started.
+
+![128T NetManager TUI Start](/img/Initializer_Serial0.png)
+
+Selecting `Yes` launches the CentOS NMTUI application to perform an initial network interface setup.
+
+![128T NetManager TUI Option](/img/Initializer_Serial1.png)
+
+Refer to the NMTUI user documentation for more details.
+
 ## Initialize the 128T Node
 
-The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched after the installation reboot. 
+The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot for the `Install 128T Routing Software...` installation options.
 
 If you are installing a highly available Conductor on the cloud, please refer to [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md).
 
@@ -83,16 +95,16 @@ If you are installing a highly available Conductor on the cloud, please refer to
 
   ![128T Role](/img/initializer_Serial2.png)
 
-2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, Enter their administrative addresses here, and this node will retrieve its configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
+2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, enter the administrative addresses and the node will retrieve the configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
 3. When asked _What kind of Router/Conductor node is this?_, select from the following options:
 
   ![Identify the Node](/img/initializer_Serial3.png)
 
-- **Standalone:** This router has no highly available peer, and is not currently planned for high availability.
+- **Standalone:** This router/conductor has no highly available peer, and is not currently planned for high availability.
 
-- **1st HA Node:** This router is the first node of a high availability pair. You will be prompted to provide the local IP address for this node. The 2nd HA node will contact this node at the address provided to synchronize state. Note: The 1st Node IP address must be reachable by the 2nd HA Node.
+- **1st HA Node:** This router/conductor is the first node of a high availability pair. You will be prompted to provide the local IP address for this node. The 2nd HA node will contact this node at the address provided to synchronize state. Note: The 1st Node IP address must be reachable by the 2nd HA Node.
   
-- **2nd HA Node:** This router is the second node of a high availability pair, where the first node has been initialized. You will be prompted to provide the 1st Node IP address for this 2nd node that will be used to synchronize state. Note: The 2nd Node IP address must be reachable by the 1st HA Node.
+- **2nd HA Node:** This router/conductor is the second node of a high availability pair, where the first node has been initialized. You will be prompted to provide the 1st Node IP address for this 2nd node that will be used to synchronize state. Note: The 2nd Node IP address must be reachable by the 1st HA Node.
 
 4. The following steps configure a high availability conductor node. If you are not configuring HA, you will be presented with the **Node Info** screen in step 4b. 
 
@@ -111,35 +123,16 @@ If you are installing a highly available Conductor on the cloud, please refer to
     :::
     - **Router/Conductor Name:** The name of the Router or Conductor system as a whole. When referring to a running 128T software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `conductor-node1.conductor`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
-  c). The initializer returns you to the **HA Setup** screen to configure the second HA node. Select **2nd HA Node** if not already selected. 
-
-    ![2nd HA Node Setup](/img/initializer_Serial4cHANode.png)
-
-  d). Enter the **HA Address** and **Peer HA Address** for the second node. The HA Address is the local 2nd HA Node IP address, and the Peer HA Address is the 1st HA Node IP address.
-
-    ![2nd HA Peer IP](/img/initializer_Serial4dHANode.png)
-
-  e). Enter the **HA Peer Credentials**. This is a one time operation for the initialization of the second HA Node with the first HA Peer. 
-  
-    ![HA Peer Credentials](/img/initializer_Serial4eHAPeer.png)
-
-5. The **Advanced** button allows you to specify the number of CPU cores to be allocated for running your 128T routing software. The **Advanced** selection is only available when configuring a 128T Router. 
-   :::info
-   This is only recommended for experienced users. This setting is intended to optimize the forwarding capabilities of the 128T Router beyond the default settings for the target platform.
-   :::
-
-6. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, and cannot repeat characters more than 3 times.
+5. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
 
   ![Password Setup](/img/initializer_Serial6.png)
 
-7. If presented with the **Anonymous Data Collection** screen, select either **Accept** or **Disable** to enable or disable the process that measures the health of your 128T router and components.
+6. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
 
-8. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
-
-9. When prompted, either reboot your system or start 128T.
+7. When prompted, either reboot your system or start 128T.
 
   ![Initializer Complete](/img/initializer_complete.png)
 
@@ -147,11 +140,41 @@ If you are installing a highly available Conductor on the cloud, please refer to
   If installing the 128T software for the first time, a system reboot is required.
   :::
 
-### Verify Installation
+### Install a Second HA Node for the Conductor
+
+If there is a second node for Conductor HA, install the system using the same process beginning with [Installing the ISO](intro_installation_bootable_media.md#installing-the-iso) and ending at [Initialize 128T](intro_installation_bootable_media.md#initialize-the-128t-node) step 2. From step 2, perform the following:
+
+1. When prompted for `What kind of Conductor node is this?` Select the **2nd HA Node**.
+
+  ![2nd HA Node Setup](/img/initializer_Serial4cHANode.png)
+
+2. Enter the **HA Address** and **Peer HA Address** for the second node. The HA Address is the local 2nd HA Node IP address, and the Peer HA Address is the 1st HA Node IP address.
+
+  ![2nd HA Peer IP](/img/initializer_Serial4dHANode.png)
+
+3. Enter the **HA Peer Credentials**. This is a one time operation for the initialization of the second HA Node with the first HA Peer. The `t128` user can be used for this operation.
+
+  ![HA Peer Credentials](/img/initializer_Serial4eHAPeer.png)
+
+4. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no **failures** are present, you can choose to continue with the installation even if multiple warnings exist. For information about why a specific test may have failed or generated a warning, contact 128T technical support.
+
+5. After the initialization process completes the setup, the following screen displays. Use the Enter key to select `Got it!`
+
+  ![Peer Restart](/img/initializer_Serial7.png)
+
+6. The Installer Status screen indicates success. Use the spacebar to either reboot your system or start 128T.
+
+  ![Initializer Complete](/img/initializer_complete.png)
+
+  :::note
+  If installing the 128T software for a router, a system reboot may be required.
+  :::
+
+## Verify Installation
 
 After installing the 128T Software it is important to verify that the installation was completed successfully.
 
-#### To Verify the 128T Installation:
+### To Verify the 128T Installation:
 
 1. Launch a command prompt window.
 

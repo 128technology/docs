@@ -12,7 +12,7 @@ There are three standard ways of upgrading routers:
 - Manually upgrading a router by invoking the `install128t` application from the Linux shell
 
 :::note
-The router upgrade process using the PCLI and the GUI is done in two stages: first, the software is downloaded, then it is installed. Using the `install128t` application steps through both of these processes.
+The router upgrade process using the PCLI and the GUI is done in two stages: First, the software is downloaded, then it is installed. Using the `install128t` application steps through both of these processes.
 :::
 
 Prerequisites for upgrades now include configuring a user with super user (sudo) privileges. **SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
@@ -105,24 +105,31 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
 
 ## Routers with Restricted Internet Access
 
-The standard upgrade workflow is for individual instances of 128T software to download software upgrades directly from mirror servers hosted and managed by 128 Technology on the public internet. Occasionally, 128T routers are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from conductor.
+The standard upgrade workflow is for individual instances of 128T software to download software upgrades directly from mirror servers hosted and managed by 128 Technology on the public internet. Occasionally, 128T routers are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from a conductor.
 
 Within a given router's configuration, at `router > system > software-update > repository`, you can configure the `source-type` setting to one of three values:
 
-- `conductor-only`: the router will retrieve software versions only from (or through) the conductor
-- `prefer-conductor`: the router will retrieve software versions from the conductor, and fall back to using the internet
-- `internet-only` (default): the router will use 128 Technology's publicly hosted repositories for retrieving sofwtare images
+- `conductor-only`: The router retrieves software versions only from the conductor.
+
+  :::note 
+  The conductor(s) require internet access, and the routers must be able to resolve internet hosted repositories.
+  :::
+- `prefer-conductor`: The router will retrieve software versions from the conductor, and fall back to using the internet
+- `internet-only` (default): The router will use 128 Technology's publicly hosted repositories for retrieving sofwtare images
 
 :::note
-Because this is a router setting, your collection of routers can each use different preferences. E.g., a router in on the internet can use 128 Technology's repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
+Because this is a router setting, your collection of routers can each use different preferences. For example, a router on the internet can use a 128 Technology repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
 :::
 
-For routers that have no access to the internet, at `router > system > software-update > repository > offline-mode` to `true`. This overrides the `source-type` leaf.
+For routers that have no access to the internet, set `router > system > software-update > repository > offline-mode` to `true`. This overrides the `source-type` leaf.
 
-The `import iso` command can be used to import packages contained within a 128T ISO onto a local yum repository, thereby allowing that 128T to be upgraded without contacting to 128 Technology servers.
+The `import iso` command is used to import packages contained within a 128T ISO onto a local yum repository, allowing the 128T to be upgraded without connecting to 128 Technology servers. 
+:::note
+In an HA setup, when using offline-mode for routers to access the software from the conductors, the ISO must be imported to both conductors before performing the upgrade.
+:::
 
-[import iso](cli_reference.md#import-iso) command allows user to specify the exact `filepath` to the ISO or specify `hunt` which will look everywhere on disk for a file that matches the pattern `128T*.iso` except for the following directories `/boot`, `/dev`, `/proc`, and `/sys` .
+The [import iso](cli_reference.md#import-iso) command allows a user to specify the exact `filepath` to the ISO, or to specify `hunt` which searches the disk for a file that matches the pattern `128T*.iso` (except in the following directories `/boot`, `/dev`, `/proc`, and `/sys`).
 
-This feature works on either Conductor or Routers. It can be combined with Conductor Hosted Repos feature where the ISO is imported on the Conductor and then Routers use the Conductor as the yum repository to download 128T packeges from.
+This feature works on either the Conductor or the Routers. It can be combined with the Conductor Hosted Repos feature where the ISO is imported to the Conductor and then the Routers use the Conductor as the yum repository to download 128T packages.
 
-Once the local software repository has been updated to the software from the ISO, the upgrade can proceed using your preferred method.
+Once the local software repository has been updated with the software from the ISO, the upgrade can proceed using your preferred method.
