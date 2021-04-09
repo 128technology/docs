@@ -118,7 +118,10 @@ sidebar_label: 4.5
 ------
 - **I95-39486 Conductor installation does not update while performing the upgrade from the GUI:** Resolved an issue that during a conductor upgrade, the GUI was not updating until the last few seconds of the installation. The GUI now shows the install/upgrade progress. 
 ------
-- **I95-39543 Out of order packets when traffic-eng is enabled in multicore environments:** Fixed occasional reorder issue when `traffic-eng` is enabled in a multicore environment
+- **I95-39543 Out of order packets when traffic-eng is enabled in multicore environments:** Fixed occasional reorder issue when `traffic-eng` is enabled in a multicore environment.
+------
+- **I95-39793 Conductor fails to upgrade:**
+
 
 ## Release 4.5.5
 

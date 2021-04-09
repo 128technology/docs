@@ -14,6 +14,8 @@ sidebar_label: 2.7
 - **IN-320 `createrepo` fails when upgrading:** The installer now uses unique temporary directories to hold temporary repodata instead of the default.
 ------
 - **IN-385 Retry Query Operations:** Added the ability to perform multiple retry operations when querying remote repositories during the installation process. 
+------
+- **I95-39793 Conductor fails to upgrade:** 
 
 ### Caveats
 
