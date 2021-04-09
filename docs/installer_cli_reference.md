@@ -321,14 +321,22 @@ Use `-h`/`--help` to see all available options.
 
 ## Manual Token Process
 
-If a username/token is used and the 128T software is not upgraded to 4.5.7, 5.0.1 nor 5.1.1, the following will need to be run each time the username/token is changed:
+If a username/token is used and the 128T software is not upgraded to 4.5.7, 5.0.1, or 5.1.1, the following steps must be taken to add the token, and each time the username/token is changed:
 
-1. Update the username/token with the [`install128t repo authenticate -u <user> -t <token>`](installer_cli_reference.md#repo) process and run `yum makecache --assumeyes` on both conductors.
+1. Update the username/token with the [`install128t repo authenticate -u <user> -t <token>`](#repo) process and run `yum makecache --assumeyes` on both conductors.
 
-2. On the primary conductor run the following commands. Be sure to replace `<conductor 1 asset id>` and `<conductor 2 asset id>` with the appropriate conductor asset ID.
+2. For the first use of the token, run the following commands on the primary conductor. Be sure to replace `<conductor-1-asset-id>` and `<conductor-2-asset-id>` with the appropriate conductor asset ID.
 ```
-ln -s /etc/pki/install128t/* /srv/salt/
-t128-salt -C '* and not L@<conductor 1 asset id>,<conductor 2 asset id>' cp.get_file salt://GPG-RPM-KEY-128T-RELEASE /etc/pki/install128t/GPG-RPM-KEY-128T-RELEASE
-t128-salt -C '* and not L@<conductor 1 asset id>,<conductor 2 asset id>' cp.get_file salt://GPG-RPM-KEY-128T-RELEASE-LEGACY /etc/pki/install128t/GPG-RPM-KEY-128T-RELEASE-LEGACY
-cmd.run "dnf makecache --assumeyes; yum makecache --assumeyes"
+ln -s /etc/pki/install128t/GPG-RPM-KEY* /srv/salt
+t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cp.get_file salt://GPG-RPM-KEY-128T-RELEASE /etc/pki/install128t/GPG-RPM-KEY-128T-RELEASE
+t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cp.get_file salt://GPG-RPM-KEY-128T-RELEASE-LEGACY /etc/pki/install128t/GPG-RPM-KEY-128T-RELEASE-LEGACY
+cd /etc/yum.repos.d/
+for i in 128t-authenticated-*; do ln -s /etc/yum.repos.d/${i} /srv/salt/${i}; t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cp.get_file salt://${i} /etc/yum.repos.d/${i}; done
+t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cmd.run "dnf makecache --assumeyes; yum makecache --assumeyes"
+```
+3. To update the token after the initial token instance, run the following commands. Be sure to replace `<conductor-1-asset-id>` and `<conductor-2-asset-id>` with the appropriate conductor asset ID.
+```
+cd /etc/yum.repos.d/
+for i in 128t-authenticated-*; do t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cp.get_file salt://${i} /etc/yum.repos.d/${i}; done
+t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cmd.run "dnf makecache --assumeyes; yum makecache --assumeyes"
 ```
