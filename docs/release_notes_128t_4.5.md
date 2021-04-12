@@ -3,6 +3,22 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
+## Release 4.5.7
+
+### New Features and Improvements
+
+- **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.md). 
+
+### Resolved Issues
+
+- **I95-39650 Repository access tokens provisioned on the Conductor are not automatically distributed to its managed routers.** Access Tokens are now distributed to managed routers. 
+------
+- **I95-39649/BEL-42 Conductors/Routers on initial deployment not going to running state.** Resolved an issue where Conductors or Routers on initial deployment would not transition to a running state until a certificate was added.
+
+### Caveats
+
+- **I95-39798 Token Update and Available Version Update stuck on GPG key access:** In rare occasions the GPG key access may cause the token and version updates to hang, and block access to the software. To prevent this issue, log out of all open web and PCLI sessions before applying the token. 
+
 ## Release 4.5.6
 
 ### New Features and Improvements
