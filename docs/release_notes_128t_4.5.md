@@ -13,10 +13,7 @@ sidebar_label: 4.5
 
 - **I95-39650 Repository access tokens provisioned on the Conductor are not automatically distributed to its managed routers.** Access Tokens are now distributed to managed routers. 
 ------
-- **I95-39649/BEL-42 Routers not going to running state when no release.pem (certificate).** Routers using token-based software access for installation or upgrade no longer look for both the certificate and the token. 
-
-### Caveats
-
+- **I95-39649/BEL-42 Conductors/Routers on initial deployment not going to running state.** Resolved an issue where Conductors or Routers on initial deployment would not transition to a running state until a certificate was added.
 
 ## Release 4.5.6
 
