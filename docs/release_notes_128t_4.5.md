@@ -14,6 +14,8 @@ sidebar_label: 4.5
 - **I95-39650 Repository access tokens provisioned on the Conductor are not automatically distributed to its managed routers.** Access Tokens are now distributed to managed routers. 
 ------
 - **I95-39649/BEL-42 Conductors/Routers on initial deployment not going to running state.** Resolved an issue where Conductors or Routers on initial deployment would not transition to a running state until a certificate was added.
+------
+- **I95-39793 Conductor fails to self-upgrade:** This issue affected only 4.5.6-1 systems performing Conductor self-upgrade with Installer version 2.7.0 (or later). This issue has been resolved. 
 
 ### Caveats
 
