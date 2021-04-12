@@ -1342,6 +1342,7 @@ The **top applications** input is useful when application identification in term
 | 3.3.1   | `t128_graphql` input type was introduced |
 
 The `t128_graphql` input can be used to retrieve data from a GraphQL API. The various configuration options available under `authority > monitoring > input > graphql` are as follows:
+
 | Element | Type    | Description                                                 |
 | ------- | ------- | ----------------------------------------------------------- |
 | query-entry-point | string | The path to a point in the graphQL tree from which fields and tags will be extracted. This path may contain (`<key>:<value>`) graphQL arguments such as (name:'${ROUTER}'). | 
@@ -1437,7 +1438,7 @@ The `TOML` configuration for the GraphQL input can be seen below
   Paths, relative to the `entry_point`, from which fields should be created. Each value MUST point to a leaf in the graph. The keys become the field names for the produced values. At least one field MUST be specified.
 
 - **extract_tags**  
-  Paths, relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. The keys become the tag names for the produced values. At least one tag MUST be specified.
+  Paths, relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. The keys become the tag names for the produced values.
 
 Note that `(<key>:<value>)` arguments are valid only on the `entry_point`. They MUST NOT be specified on `extract_fields` or `extract_tags`.
 
