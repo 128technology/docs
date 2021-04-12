@@ -15,6 +15,10 @@ sidebar_label: '5.1'
 ------
 - **I95-39649/BEL-42 Conductors/Routers on initial deployment not going to running state.** Resolved an issue where Conductors or Routers on initial deployment would not transition to a running state until a certificate was added. 
 
+### Caveats
+
+- **I95-39798 Token Update and Available Version Update stuck on GPG key access:** In rare occasions the GPG key access may cause the token and version updates to hang, and block access to the software. To prevent this issue, log out of all open web and PCLI sessions before applying the token. 
+
 ## Release 5.1.0
 
 ### New Features and Improvements 
