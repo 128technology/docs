@@ -293,32 +293,6 @@ an error message and exit, and the credentials will not be saved. To verify cred
 If the credentials cannot be checked (e.g. no Internet connection is available), the remote packages will appear unavailable (no upgrades available) but the credentials will still be saved. They will be checked again, if possible, the next time the Installer is run. 
 :::
 
-## Uninstalling 128T
-
-:::warning
-
-This command stops and uninstalls 128T. It will also remove 128T data files,
-including configuration, logs, and more. Use with caution!
-
-:::
-
-The `erase128t` can be used to uninstall 128T. It is packaged with the Installer,
-but it is _not_ a subcommand of the `install128t` command.
-
-```sh
-erase128t
-```
-
-Use `-h`/`--help` to see all available options.
-
-<!-- markdownlint-disable line-length -->
-| Option | Description |
-|--------|-------------|
-| `-y`, `--assume-yes` | Skip confirmation prompts and run as if the answer was "yes". |
-| `-c`, `--cleanup-only` | Do not uninstall 128T, but still delete associated data such as configuration. |
-| `-l`, `--keep-logs` | Do not remove 128T log files. |
-<!-- markdownlint-enable line-length -->
-
 ## Manual Token Process
 
 :::note
@@ -358,3 +332,30 @@ cd /etc/yum.repos.d/
 for i in 128t-authenticated-*; do t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cp.get_file salt://${i} /etc/yum.repos.d/${i}; done
 t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cmd.run "dnf makecache --assumeyes; yum makecache --assumeyes"
 ```
+
+## Uninstalling 128T
+
+:::warning
+
+This command stops and uninstalls 128T. It will also remove 128T data files,
+including configuration, logs, and more. Use with caution!
+
+:::
+
+The `erase128t` can be used to uninstall 128T. It is packaged with the Installer,
+but it is _not_ a subcommand of the `install128t` command.
+
+```sh
+erase128t
+```
+
+Use `-h`/`--help` to see all available options.
+
+<!-- markdownlint-disable line-length -->
+| Option | Description |
+|--------|-------------|
+| `-y`, `--assume-yes` | Skip confirmation prompts and run as if the answer was "yes". |
+| `-c`, `--cleanup-only` | Do not uninstall 128T, but still delete associated data such as configuration. |
+| `-l`, `--keep-logs` | Do not remove 128T log files. |
+<!-- markdownlint-enable line-length -->
+
