@@ -3444,8 +3444,8 @@ The various columns are as follows:
 | ------ | ---------------------------------|
 | Application Name | The name of the identified application. |
 | Session Count | The number of active sessions for the application. | 
-| Ip Tuple Count | The number of address and ports associated with the application. |
-| Date Discovered | The time at which the router first learned this application. Restarting the router or deletion of the application will reset the time.  |
+| Ip Tuple Count | The number of addresses and ports associated with the application. |
+| Date Discovered | The time at which the router first learned this application. Restarting the router or deleting the application will reset the time.  |
 | Last Updated | The time at which the router updated the entries for the application. The time is updated when the ip tuple information associated with the application has changed.  |
 
 #### Version History
