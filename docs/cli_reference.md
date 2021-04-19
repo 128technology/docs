@@ -687,7 +687,7 @@ Create a new user account interactively.
 #### Usage
 
 ```
-create user <username>
+create user [<username>]
 ```
 
 ##### Positional Arguments
@@ -921,7 +921,7 @@ Clears all active flow data from this node.
 #### Usage
 
 ```
-delete flows [force] [node <node>] router <router>
+delete flows [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -1112,6 +1112,42 @@ Account 'jdeveloper' successfully deleted
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
+## `delete user tokens`
+
+Revoke API access tokens for a user.
+
+#### Usage
+
+```
+delete user tokens [force] <username>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| username | the name of the account to revoke API tokens for |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create user`](#create-user) | Create a new user account interactively. |
+| [`delete user`](#delete-user) | Delete a user account |
+| [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
+| [`edit user`](#edit-user) | Modify an existing user account |
+| [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
+| [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
+| [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
+| [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 ## `edit prompt`
 
@@ -1257,6 +1293,10 @@ edit user [<username>]
 | [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Description
+
+:::note
+The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, and cannot contain any characters that repeat more than three times.
+:::
 
 The _edit user_ command enters a configuration subtree specific to administering user accounts. From within this subtree, administrators can change any of the attributes associated with a user account (full name, password, role, and enabled state). This is done in a "configuration-like" way, where commands are issued as _attribute value_.
 
@@ -3242,7 +3282,7 @@ If a password is lost or forgotten and the account is inaccessible, the account 
 
 ## `set provisional-status`
 
-Set the provisional status of a specific interface to down, or returning it to the "up" state after taking it down. 
+Set the provisional status of a device-interface to down, or returning it to the "up" state after taking it down. 
 
 #### Usage
 
@@ -4453,7 +4493,7 @@ Display running configuration version.
 #### Usage
 
 ```
-show config version [force] [router <router>]
+show config version [{router <router> | resource-group <resource-group>}] [force]
 ```
 
 ##### Keyword Arguments
@@ -5241,19 +5281,26 @@ Shows current fib entries at the specified node.
 #### Usage
 
 ```
-show fib [rows <rows>] [vrf <vrf>] [tenant <tenant>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<ip-prefix>]
+show fib [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name> | match-service-name <name>}] [rows <rows>] [vrf <vrf>] [tenant <tenant>] [source-ip <source-ip>] [source-interface <source-interface>] [summary] [force] [node <node>] {router <router> | resource-group <resource-group>} [<ip-prefix>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
+| contains-service-name | The partial substring match to show for the fib |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| hierarchy-service-name | The hierarchy root to show for the fib |
+| match-service-name | The regex to match service names to show for the fib |
 | node | The node from which to retrieve fib entries |
 | resource-group | The name of the resource group |
 | router | The router from which to retrieve fib entries |
-| rows | The number of fib nodes to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| tenant | Tenant name |
+| rows | The number of fib nodes to display at once. Enter a number or `all` (default: 50). |
+| service-name | The exact service name to show for the fib |
+| source-interface | The incoming network-interface used to perform a source lookup |
+| source-ip | The incoming ip-address used to perform a source lookup [type: IP address] |
+| summary | show next-hop information as a count if summary |
+| tenant | The tenant name match to show for the fib |
 | vrf | VRF name |
 
 ##### Positional Arguments
@@ -5262,11 +5309,17 @@ show fib [rows <rows>] [vrf <vrf>] [tenant <tenant>] [force] [node <node>] {rout
 | ---- | ----------- |
 | ip-prefix | FIB IP prefix [type: IP prefix] |
 
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`lookup`](#show-fib-lookup) | Shows current fib entries at the specified node using incoming packet info |
+
 #### Description
 
-This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the &lt;node-name&gt; argument. The output may be limited to a specified number of rows by adding the optional _&lt;rows&gt;_ modifier at the end of the command.
+This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the `node-name` argument. The output may be limited to a specified number of rows by adding the optional `rows` modifier at the end of the command.
 
-This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the &lt;rows&gt; modifier. 
+This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the `rows` modifier. 
 
 #### Example
 
@@ -5315,8 +5368,44 @@ Capacity:    19051
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 3.0.0   | Added _node_ keyword to enforce PCLI consistency |
-| 5.1.0   | Added VFR support, next hop details and the ability to filter by: service-name, hierarchy-service-name, contains-service-name, prefix, source-address, source-interface, and tenant. |
+| 5.1.0   | Added next hop details, and the ability to filter by VFR, resource-group, and tenant. |
+| 5.2.0   | Added and the following arguments: service-name, hierarchy-service-name, contains-service-name, match-service-name, source-ip, and source-interface. |
 
+## `show fib lookup`
+
+Shows current FIB entries at the specified node using incoming packet info.
+
+#### Usage
+
+```
+show fib lookup [tenant <tenant>] [source-ip <source-ip>] [source-interface <source-interface>] [summary] [force] [node <node>] {router <router> | resource-group <resource-group>} destination-ip <destination-ip> destination-port <destination-port> protocol <protocol>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-ip | The incoming destination IP-address used to lookup fibs [type: IP address]. |
+| destination-port | The incoming destination port used to lookup the fib [type: port]. |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The node on which to find a fib entry. |
+| protocol | Name or number of the protocol used to lookup the fib [type: string or uint8]. |
+| resource-group | The name of the resource group. |
+| router | The router on which to find a fib entry. |
+| source-interface | The incoming network-interface used to perform a source lookup. |
+| source-ip | The incoming ip-address used to perform a source lookup [type: IP address]. |
+| summary | show next-hop information as a count if summary. |
+| tenant | The tenant name used to lookup the fib. |
+
+#### Description
+
+This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the `node-name` argument. The output may be limited to a specified number of rows by adding the optional `rows` modifier at the end of the command.
+
+This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the `rows` modifier.
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.2.0   | Introduced the command |
 
 ## `show history`
 
@@ -8012,7 +8101,7 @@ Display detailed system state.
 #### Usage
 
 ```
-show system [force] [router <router>] [node <node>]
+show system [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
