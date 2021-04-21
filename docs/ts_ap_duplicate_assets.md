@@ -23,7 +23,7 @@ The `salt-key` command referenced above can be accessed from the Linux shell wit
 
 ## Symptoms
 
-An asset whose has a duplicate asset ID error can be seen from the conductor CLI using the `show assets` command with a provided asset-id. For example:
+An asset that has a duplicate asset ID error can be seen from the conductor CLI using the `show assets` command with a provided asset-id. For example:
 ```
 admin@node1.conductor# show assets asset1
 Tue 2021-04-20 14:21:30 UTC
