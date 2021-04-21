@@ -7,8 +7,13 @@ sidebar_label: "AP: Duplicate Asset ID Error"
 
 This document describes the process for troubleshooting the duplicate asset ID error with Automated Provisioning (AP).
 
+Here are a few situations that may cause a duplicate asset ID:
+* 128T SSRs being cloned from staging and have not properly completed their initialization to obtain a unique ID
+* The same quickstart file being applied to multiple 128T SSRs
+* A user manually entering the same asset ID into the salt-minion ID file on multiple 128T SSRs
+
 :::note
-The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting a 128T router. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
+The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on the conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting a 128T router. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
 :::
 
 This document will reference salt keys and salt grains. Some good resources for these topics are:
@@ -78,13 +83,23 @@ asset4
 Rejected Keys:
 ```
 
-It is not always clear which situation is causing the duplicate asset ID error. If an asset is in the disconnected state and has a duplicate asset ID error then the conductor is unable to distinguish if the denied key is from the same salt-minion who is now disconnected, or the correct salt-minion is simply disconnected at the time when a new salt-minion tried to authenticate with a different public key and the same ID. However, if an asset is in any state where it is currently connected to the conductor (connected, installed, starting, running, stopped, etc.) and has a duplicate ID error then the user knows that they have a salt-minion with a duplicate ID trying to connect. But, they do not know if the asset currently connected is the correct asset, or if the asset with the denied key is the correct asset.
+:::note
+The `t128-salt` and `t128-salt-key` commands can only be executed by the `root` user at the Linux shell.
+:::
+
+There are multiple situations that may cause a duplicate asset ID error.
+
+1. A single salt-minion disconnected, had its key regenerated, and reconnected
+    * In this case, the asset will show as disconnected and have a duplicate asset ID error
+1. Two salt-minions with the same ID attempted to connect
+    * In this case, either the connected asset or the denied minion may be the correct one
+    * The correct asset may also be disconnected when another minion with the same ID connects, making it difficult to distinguish which situation caused the asset ID error
 
 ## Root Cause
 
 A denied key is a public key that is rejected automatically by the salt-master when the salt-minion tries to authenticate with its public key. A rejected key is a different state that indicates a user manually rejected a salt key. There are two different situations that can result in the salt-master denying a key:
 1. A salt-minion was rebuilt, reinstalled or the public/private key pair was wiped and new keys were automatically regenerated when the salt-minion service started. Now the minion's keys do not match the salt keys previously associated with the minion ID on the conductor.
-2. There are two salt-minions trying to authenticate with the same salt-minion ID.
+1. There are two salt-minions trying to authenticate with the same salt-minion ID.
 
 In the denied key state the salt-minion does not receive any communication from the salt-master. The conductor automatically creates a duplicate asset ID error when it detects that the salt-master has moved a salt key into the denied state.
 
@@ -124,17 +139,53 @@ If the conductor is in HA configuration then the salt keys need to be deleted fr
 
 The salt-minion may reach out again automatically and get accepted by the conductor if the asset ID matches an asset ID in the 128T configuration. If the salt-minion does not reach out then it needs to be restarted manually from the Linux command line with `systemctl restart salt-minion`.
 
-If the root cause was indeed a salt-minion that regenerated new keys and not two different salt-minions with the same ID, then this procedure will solve your problem and the asset will reconnect properly and no duplicate ID error will appear. If the duplicate asset ID error and the denied and accepted keys reappear then the user knows they are dealing with multiple salt-minions with the same minion ID.
+If the root cause was indeed a salt-minion that regenerated new keys (situation #1 above) and not two different salt-minions with different keys and the same ID (situation #2 above), then this procedure will solve your problem. The asset will reconnect properly and no duplicate ID error will appear. If the duplicate asset ID error and the denied and accepted keys reappear, then the user knows they are dealing with multiple salt-minions with the same minion ID.
 
 ### Rectifying Multiple Salt-Minions with the Same Minion ID
 
 If the user tried the procedure from the previous section and the duplicate ID error and denied keys have reappeared then the user is dealing with multiple salt-minions with the same ID. Unfortunately, the only course of action in this case is to track down the system with the improper ID. After tracking down the system the user simply needs to change the ID located at `/etc/salt/minion_id` and restart the salt minion with `systemctl restart salt-minion`. The denied key associated with the old salt-minion ID will be deleted by the conductor automatically after one minute when the old ID stops trying to authenticate.
 
-Tracking down the asset with the duplicate ID is not always easy. Since the salt-master automatically denies the authentication attempt from this bad actor, the conductor has no insight into the IP address or any other information about this asset. Secondly, the user does not know if the key that is currently denied belongs to the asset with the incorrect ID, or the correct one. Whichever system tries to authenticate first will get accepted and the other system will get denied. However, the user can use the salt command line to try and retrieve information from the asset who has been accepted to determine if this is the bad actor or the correct asset. For example, running the salt command `grains.items` will return a large amount of information about the system. Or the command `grains.get` can return specific pieces of information about the system. This might give the user a clue if the currently connected system has the correct minion ID. In the example below, the hostname grain retrieved was `asset10`, and if the customer is matching asset IDs to hostnames, then this may be a clue that this system is causing the duplicate ID error because the minion ID should be `asset10`:
+Tracking down the asset with the duplicate ID is not always easy. Since the salt-master automatically denies the authentication attempt from this bad actor, the conductor has no insight into the IP address or any other information about this asset. Secondly, the user does not know if the key that is currently denied belongs to the asset with the incorrect ID, or the correct one. Whichever system tries to authenticate first will get accepted and the other system will get denied.
+
+The user should start by trying to validate the currently connected router to ensure it is the correct one. The user can connect directly to the router's PCLI via the conductor's PCLI by using the `connect` command. This command allows the user to login to the router's PCLI directly. The user can then run any PCLI command which will help them validate the currently connected router. For example, connecting to the remote router and checking the network interface IP addresses:
+```
+admin@node1.conductor# connect router my-router node node1 username admin
+Connecting...
+The authenticity of host '[127.127.0.1]:16386 ([127.127.0.1]:16386)' can't be established.
+RSA key fingerprint is SHA256:NwG6NUitnfSNQyOXSjXkjU3jOen+zjPSL1ZNiU6JfYk.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '[127.127.0.1]:16386' (RSA) to the list of known hosts.
+admin@127.127.0.1's password:
+FIPS mode initialized. SSH client running in FIPS 140-2 mode
+Starting the PCLI...
+admin@node1.my-router#
+admin@node1.my-router# show network-interface
+Wed 2021-04-21 18:14:59 UTC
+
+=========== ====== ======== ======== ============ ====== ============= ========== ========== =============== ============== ========== ============== ============= ======
+ Router      Node   Device   Name     Forwarding   VLAN   Device Type   Type       DHCP       Address         Gateway        Hostname   Admin Status   Oper Status   GIID
+=========== ====== ======== ======== ============ ====== ============= ========== ========== =============== ============== ========== ============== ============= ======
+ my-router   node1      10   intf10   true            0   ethernet      external   disabled   172.16.1.2/24   172.16.1.201   --         up             up               1
+ my-router   node1      11   intf11   true            0   ethernet      external   disabled   172.16.3.2/24   172.16.3.3     --         up             up               2
+
+Completed in 0.16 seconds
+admin@node1.my-router#
+```
+
+The user can also use the salt command line from the conductor's Linux shell to try and retrieve information from the asset who has been accepted to determine if this is the bad actor or the correct asset. For example, running the salt command `grains.items` will return a large amount of information about the system. Or the command `grains.get` can return specific pieces of information about the system. This might give the user a clue if the currently connected system has the correct minion ID. In the example below, the hostname grain retrieved was `asset10`, and if the customer is matching asset IDs to hostnames, then this may be a clue that this system is causing the duplicate ID error because the minion ID should be `asset10`:
 ```
 [root@t227-dut1 ~]# t128-salt asset1 grains.get host
 asset1:
     asset10
 ```
 
-Unfortunately the user can only query information about the system with the key that is accepted. If the user thinks the system that is currently accepted has the correct minion ID, they could try deleting both accepted and denied keys again and hope that the bad actor connects first and gets accepted so they can query information about that system.
+Unfortunately the user can only query information about the system with the key that is accepted. If the user has validated that the currently connected system is the correct system, then they could try the following procedure to locate the bad actor:
+1. Login to the correct system's Linux shell directly and stop the salt-minion with `systemctl stop salt-minion`
+    * Only do this if the user can maintain connectivity to this system so they can start the salt-minion again after this situation is resolved
+1. Delete both the accepted and denied salt-keys on the conductor(s) with `t128-salt-key` as stated above
+1. Wait for the bad actor to connect successfully via salt
+1. Use `t128-salt '<asset-id>' file.write /etc/salt/minion_id "<new-asset-id>"` to remotely update the salt-minion ID file then restart the salt-minion remotely with `t128-salt '<asset-id>' service.restart salt-minion`
+1. Delete the accepted salt key from the conductor(s)
+1. Start the salt-minion on the correct system
+
+If this procedure does not work then the correct course of action is to deny both duplicate salt keys until the systems have been properly authenticated. Once the correct system is found, regenerate a new minion ID and keys for the authentic minion and keep the bad actor system's key denied until it can be claimed.
