@@ -111,7 +111,6 @@ Platforms may have a variety of different features and capabilities configurable
 * Setup prompt timeout value: 3 seconds
 * Boot mode: do not change manufacturer's settings (Legacy or UEFI accepted)
 * Boot order: HDD, USB, PXE
-* Watchdog timer: enabled
 * Power profile: maximum performance
 * System version, release date, manufacturer's part number, and serial number set in DMI table
 
