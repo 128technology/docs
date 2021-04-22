@@ -32,7 +32,6 @@ sidebar_label: 4.5
 - **I95-39881 GraphQL User Mutations have been Deprecated:** The "createUser", "modifyUser", and "deleteUser" GraphQL mutations are now deprecated. Please use their REST equivalents which are listed in the GraphQL "deprecationReason" for those mutations. 
 
 
-
 ## Release 4.5.7
 
 ### New Features and Improvements
