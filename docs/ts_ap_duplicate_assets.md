@@ -8,9 +8,9 @@ sidebar_label: "AP: Duplicate Asset ID Error"
 This document describes the process for troubleshooting the duplicate asset ID error with Automated Provisioning (AP).
 
 Here are a few situations that may cause a duplicate asset ID:
-* 128T SSRs being cloned from staging and have not properly completed their initialization to obtain a unique ID
-* The same quickstart file being applied to multiple 128T SSRs
-* A user manually entering the same asset ID into the salt-minion ID file on multiple 128T SSRs
+* 128T SSR has been cloned from staging and has not completed the initialization procedure, creating a unique ID
+* The same quickstart file has been applied to multiple 128T SSRs
+* A user has manually entered the same asset ID into the salt-minion ID file on multiple 128T SSRs
 
 :::note
 The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on the conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting a 128T router. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
