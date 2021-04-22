@@ -3,6 +3,72 @@ title: 128T 5.1 Release Notes
 sidebar_label: '5.1'
 ---
 
+## Release 5.1.2
+
+### New Features and Improvements
+
+### Resolved Issues
+- **I95-29583 Default Language Setting:** Changes to the default language are now saved per user, not per system.
+------
+- **I95-38758 Validate management-over-forwarding and default-route:** A missing default-route prevents the ifcfg from generating. A validation check has been put in place to verify that when management-over-forwarding is enabled, that the default route is set to true. 
+------
+- **I95-39245 Show detected domain names on the Applications Seen page:** Domain names are now displayed on the Applications Seen page in the GUI.
+------
+- **I95-39298 STEP Waypoint NAT Support:** When a resolved external NAT address is present in the adjacency configuration, it is used when advertising the peer path in the STEP router document.
+------
+- **I95-39374 Multi-core TE and Per-AdjacencyTE feature interaction:** Resolved an issue where it was possible for a packet on a non-scheduled adjacency to make it into the schedulerGroup when adjacency-only Traffic Engineering was enabled.
+------
+- **I95-39377 Provide progress while PCLI connects to 128T:** The system now provides progress to prevent users from attempting to use the PCLI before the system is fully operational. 
+------
+- **I95-39380 Inline performance monitoring causes metadata parsing errors:** Added validation for the presence of performance-monitoring profile when enabled.
+------
+- **I95-39406 Installer Update/software upgrade dependencies:** Upgrades from the Conductor now require an updated Installer before downloading and installing software to the Router. 
+------
+- **I95-39483 Validate/Commit And Diff Endpoints Not Filtered by RBAC:** RBAC has been added to Diff Orchestrator and RPCErrors.
+------
+- **I95-39492 The GUI displays configuration changes "Ready to Commit" when there are no pending config changes:** This issue has been resolved.
+------
+- **I95-39538 Periodic disruptions in service:** Resolved an issue in the HttpParser when parsing non-HTTP traffic.
+------
+- **I95-39544 Non-persistent template fields:** Fields filled in by a user are no longer persisted with the template. When a template is re-opened, the fields are blank and ready for new values.
+------
+- **I95-39580 Reference Candidate Config Values in a Template:** Using the `refconfig` tag in Advanced Mode allows you to reference a value from a running configuration. 
+------
+- **I95-39587 Duplicate entries in show commands on PCLI when using bulk-edit:** Resolved an issue with the use of bulk-edit in the PCLI.
+------
+- **I95-39602 Show peer path status under `show peers hostnames`:** Replaced redundant Router column with `Node`, and added a `Status` column.
+------
+- **I95-39632 Power Saver using stale data:** Resolved an issue with the power saver using stale data after the device-type changes between locked and lockless. 
+------
+- **I95-39639 Packet transmit fails when traffic-eng is enabled with multiple worker cores:**
+------
+- **I95-39641 `show device-interface extended-stats` command reported unavailable when the virtio device does not expose extended stats:** Resolved an issue with the show device-interface extended-statistics/registers command.
+------
+- **I95-39695 Delete Session feature not working:** Resolved an issue preventing this from working.
+------
+- **I95-39698 Alibaba Cloud with enhanced networking sometimes doesn't work:** Resolved an issue between Virtio and RSS causing an unbalanced queue.
+------
+- **I95- Remote router login ignores 'User' selection:**
+------
+- **I95-39711 PCLI unhandled error when exporting a config using a name that has already been used.** The PCLI now provides a clear error message describing the issue.
+------
+- **I95-39764 Per Adjacency Traffic Eng Crashing For Multiple Paths on Configuration:** Resolved an issue when receiving adjacencies with out of order path-indexes. 
+------
+- **I95-39782 The aggregate stats pull from highway logs provides more detail than necessary:** Reduced the unnecessary detail. 
+------
+- **I95-39796 Conductor and Authority missing from GUI on first login:** Added multiple retries to retrieve system data upon first login. 
+------
+- **I95-39798 Token update and available version update stuck on GPG key access:** The upgrade check has been modified to verify the token update. 
+------
+- **I95-39818 Conductor logging out when selecting a router mid-upgrade:** The conductor no longer logs out when it runs into the error. 
+------
+- **I95-39826 Management over forwarding pppoe generates v6 services or service-routes:** Resolved an issue where pppoe config generation is treated as a possible ipv6 address family interface.
+------
+- **I95-39855 `show stats` and APIs do not include units for each metric:** Units and short descriptions have been added for clarity. 
+------
+- **I95-39859 Conductor unable to display some PCLI commands after upgrade to 5.1:** This sisue has been resolved.
+
+
 ## Release 5.1.1
 
 ### New Features and Improvements
