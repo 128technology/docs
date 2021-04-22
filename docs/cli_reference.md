@@ -3433,6 +3433,71 @@ Completed in 0.35 seconds
 | ------- | ----------------------------|
 | 1.1.0   | This feature was introduced |
 | 3.1.0   | Previously allowed filtering by node, now the command shows all alarms. |
+## `show application modules registration`
+
+Display registered application-modules.
+
+#### Usage
+
+```
+show application modules registration [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show application modules status`](#show-application-modules-status) | Display &quot;applications&quot; provided by a module. |
+
+#### Description
+
+The _show application modules registration_ subcommand shows all of the modules that provide &quot;application&quot; names to 128T as part of its Application Classification feature.
+
+## `show application modules status`
+
+Display &quot;applications&quot; provided by a module.
+
+#### Usage
+
+```
+show application modules status [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>} name <name> [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| name | The module to get status for |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router |
+| rows | The number of application entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show application modules registration`](#show-application-modules-registration) | Display registered application-modules. |
+
+#### Description
+
+The _show application modules status_ subcommand shows all of &quot;application&quot; names and transport information of a module, along with some other debugging information.
 
 ## `show application names`
 
@@ -7673,6 +7738,35 @@ Completed in 0.17 seconds
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
 
+## `show service`
+
+Displays service information at the specified node.
+
+#### Usage
+
+```
+show service [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [node <node>] router <router> [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| contains-service-name | The partial substring match to show service info for |
+| hierarchy-service-name | The hierarchy root to show service info for |
+| node | The node for which to display service info (default: all) |
+| router | The router for which to display service info |
+| service-name | The exact service name to show service info for |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+#### Description
+
+The _show service_ command display active service information from the 128T router. This command has multiple service filters allowing target to specific service or services. Output can be displayed in summary or in detail view.
 
 ## `show service-path`
 
@@ -8715,7 +8809,7 @@ Show the most recent usage of 128T.
 #### Usage
 
 ```
-show user activity [verbose] [order-by <order-by>] [type <type>] [from <from>] [to <to>] [<username>]
+show user activity [from <from>] [to <to>] [rows <rows>] [<username>]
 ```
 
 ##### Keyword Arguments
@@ -8723,10 +8817,9 @@ show user activity [verbose] [order-by <order-by>] [type <type>] [from <from>] [
 | name | description |
 | ---- | ----------- |
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo. [type: timestamp] |
-| order-by | Sort the results by either username, time, and ip-address (default: username) |
+| rows | The number of events to display at once [type: int] (default: 50) |
 | to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
-| type | Filter the type of event (default: all) |
-| verbose | Display a more detailed view of the user activity |
+
 
 ##### Positional Arguments
 
