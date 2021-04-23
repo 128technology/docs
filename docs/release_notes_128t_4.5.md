@@ -5,23 +5,25 @@ sidebar_label: 4.5
 
 ## Release 4.5.8
 
+### New Features
+
+- **I95-39544 Non-persistent template fields:** You now have the option to create non-persistent template input parameters, allowing the template to create unique instances per instantiation.
+------
+- **I95-39580 Reference Candidate Config Values in a Template:** Using a custom tag in Advanced Mode allows you to reference a value from a candidate configuration. For details about using this tag in Advanced Mode, refer to [Pulling Values from the Candidate Configuration](config_templates.md).
+
 ### Resolved Issues
 
-- **I95-38758 Validate management-over-forwarding and default-route:** A missing default-route prevents the ifcfg from generating. A validation check has been put in place to verify that when management-over-forwarding is enabled, that the default route is set to true. 
-------
-- **I95-39544 Non-persistent template fields:** Fields filled in by a user are no longer persisted with the template. When a template is re-opened, the fields are blank and ready for new values.
-------
-- **I95-39580 Reference Candidate Config Values in a Template:** Using the `refconfig` tag in Advanced Mode allows you to reference a value from a running configuration. 
+- **I95-38758 Validate management-over-forwarding and default-route:** Not supplying a default-route prevents the ifcfg file from being generated. A validation check has been put in place to verify that the default route is set to true. 
 ------
 - **I95-39602 Show peer path status under `show peers hostnames`:** Replaced redundant Router column with `Node`, and added a `Status` column.
 ------
-- **I95-39632 Power Saver using stale data:** Resolved an issue with the power saver using stale data after the device-type changes between locked and lockless. 
+- **I95-39632 Toggling traffic engineering causes power saver to fail:** Resolved an issue that causes power saver to fail on muti-core systems when traffic engineering is toggled. 
 ------
 - **I95-39698 Alibaba Cloud with enhanced networking sometimes doesn't work:** Resolved an issue between Virtio and RSS causing an unbalanced queue.
 ------
-- **I95-39788 Inconsistent services after modifying certain service configs:** Changes made to properly handle service modifications for special services.
+- **I95-39788 Inconsistent services after modifying certain service configs:** The system's underlying service configurations may have been in an inconsistent state when modifying a dhcp-relay or template application-type service.
 ------
-- **I95-39798 Token update and available version update stuck on GPG key access:** The upgrade check has been modified to verify the token update. 
+- **I95-39798 Version update check may get stuck on GPG key access when using an access token:** The software upgrade version check has been modified to support access tokens. 
 ------
 - **I95-39826 Management over forwarding pppoe generates v6 services or service-routes:** Resolved an issue where pppoe config generation is treated as a possible ipv6 address family interface.
 ------
