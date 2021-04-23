@@ -13,10 +13,10 @@ module.exports = {
     ],
     "Introduction": [
       "intro_getting_started",
-     ],
+    ],
     "Deployment Considerations": [
       "intro_system_reqs",
-     ],
+    ],
     "Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
@@ -25,25 +25,29 @@ module.exports = {
       "intro_basic_conductor_config",
       "intro_basic_router_config",
       "intro_otp_iso_install",
-      ],
-    "Cloud Installations":[
+      "intro_install_quickstart_otpiso",
+    ],
+    "Cloud Installations": [
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
       "intro_initialize_HA_conductor",
     ],
-    "Supporting Information - Appendix":[
+    "Supporting Information - Appendix": [
       "intro_installation_installer",
+      "legacy_OTP_install",
       "intro_upgrading",
       "intro_rollback",
     ],
     "Concepts": [
       "concepts_application_discovery",
       "concepts_appid",
+      "concepts_EthOverSVR",
       "concepts_ha_theoryofoperation",
       "concepts_interface_types",
       "concepts_kni",
       "concepts_linux_host_networking",
+      "concepts_learning_VRF_routes",
       "concepts_network_planes",
       "concepts_metadata",
       "concepts_metrics",
@@ -63,22 +67,25 @@ module.exports = {
           "config_access_mgmt",
           "config_asset_connection_resiliency",
           "config_bgp",
+          "config_vrf_learning",
           "config_reference_guide",
-          "config_audit_log",
+          "config_audit_event",
           "config_dhcp",
           "config_dns_proxy",
           "config_ldap",
           "config_management_over_forwarding",
+          "config_EthoSVR",
 
           "config_ha",
           "config_dual_router_ha",
           "config_non_forwarding_ha_interfaces",
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
-          
+
           "config_nat",
           "config_ospf",
           "config_rate_limiting",
+          "config_RBAC",
           "config_snmp",
           "config_snmp_metrics",
           "config_static_hostname_mapping",
@@ -101,6 +108,7 @@ module.exports = {
           "howto_conductor_migration",
           "howto_extend_gui_nav",
           "howto_lte",
+          "howto_config_PPPoE",
           "howto_maintenance_mode",
           "howto_ms365",
           "howto_trusted_ca_certificate",
@@ -112,6 +120,7 @@ module.exports = {
         "label": "Troubleshooting",
         "items": [
           "ts_applications",
+          "ts_ap_duplicate_assets",
           "ts_ap_salt_minion",
           "ts_cpu_spikes",
           "ts_connecting_to_routers",
@@ -120,6 +129,7 @@ module.exports = {
           "ts_mac_uniqueness",
           "ts_packet_capture",
           "ts_t1_troubleshooting",
+          "ts_troubleshooting_vrf",
         ],
       },
     ],
@@ -143,6 +153,7 @@ module.exports = {
     ],
     "CLI Reference": [
       "cli_reference",
+      "cli_stats_reference",
     ],
     "Installer/Initializer Reference": [
       "installer_cli_reference",
@@ -166,6 +177,7 @@ module.exports = {
       "plugin_set_hostname",
       "plugin_sip_alg",
       "plugin_wireguard",
+      "plugin_kni_namespace_scripts",
     ],
     "REST APIs": [
       "api_rest_4.2.0",
@@ -175,6 +187,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes_128t_5.1",
           "release_notes_128t_5.0",
           "release_notes_128t_4.5",
           "release_notes_128t_4.4",
@@ -188,6 +201,8 @@ module.exports = {
         "type": "category",
         "label": "128T Installer",
         "items": [
+          "release_notes_128t_installer_3.0",
+          "release_notes_128t_installer_2.7",
           "release_notes_128t_installer_2.6",
           "release_notes_128t_installer_2.5",
           "release_notes_128t_installer_2.4",

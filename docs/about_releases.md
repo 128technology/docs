@@ -3,9 +3,24 @@ title: List of Releases
 sidebar_label: 128T Releases
 ---
 
+:::info
+Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically. 
+
+For example, issues resolved in `4.3.12`, which was released on 3/12/2021, are resolved in `4.5.6`, which was released on 3/26/2021 and also resolved in `5.1.0`, which was released on 3/15/2021, and so on.
+
+However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not addressed in `4.5.5` because `4.5.5` was released on 2/10/2021. Even though `4.5.5` is lexicographically higher than `4.3.12`, it is chronologically older than 4.3.12.
+:::
+
+
 | Version                                          | Release            | GA Date            | End of Maintenance | End of Support     |
 | ------------------------------------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+| [5.1.1](release_notes_128t_5.1.md#release-511)   | April 12, 2021     |                    | Not Applicable*    | October 15, 2021   |
+| [5.1.0](release_notes_128t_5.1.md#release-5.1)   | March 15, 2021     |                    | April 16, 2021     | October 16, 2021   |
+| [5.0.1](release_notes_128t_5.0.md#release-501)   | April 12, 2021     |                    | Not Applicable*    | October 15, 2021   |
 | [5.0.0](release_notes_128t_5.0.md#release-5.0)   | December 18, 2020  |                    | April 16, 2021     | October 16, 2021   |
+| [4.5.7](release_notes_128t_4.5.md#release-457)   | April 12, 2021     |                    | Not Applicable*    | October 15, 2021   |
+| [4.5.6](release_notes_128t_4.5.md#release-456)   | March 26, 2021     |                    | Not Applicable*    | October 15, 2021   |
+| [4.5.5](release_notes_128t_4.5.md#release-455)   | February 10, 2021  |                    | Not Applicable*    | October 15, 2021   |
 | [4.5.4](release_notes_128t_4.5.md#release-454)   | December 16, 2020  |                    | Not Applicable*    | October 15, 2021   |
 | [4.5.3](release_notes_128t_4.5.md#release-453)   | November 25, 2020  |                    | Not Applicable*    | October 15, 2021   |
 | [4.5.2](release_notes_128t_4.5.md#release-452)   | October 13, 2020   |                    | Not Applicable*    | October 15, 2021   |
@@ -14,6 +29,7 @@ sidebar_label: 128T Releases
 | [4.4.2](release_notes_128t_4.3.md#release-442)   | September 3, 2020  |                    | Not Applicable*    | September 19, 2021 |
 | [4.4.1](release_notes_128t_4.3.md#release-441)   | July 10, 2020      |                    | Not Applicable*    | September 19, 2021 |
 | [4.4.0](release_notes_128t_4.4.md#release-440)   | May 19, 2020       |                    | April 19, 2021     | September 19, 2021 |
+| [4.3.12](release_notes_128t_4.3.md#release-4311) | March 12, 2021     |                    | Not Applicable*    | September 26, 2021 |
 | [4.3.11](release_notes_128t_4.3.md#release-4311) | November 13, 2020  |                    | Not Applicable*    | September 26, 2021 |
 | [4.3.10](release_notes_128t_4.3.md#release-4310) | October 20, 2020   |                    | Not Applicable*    | September 26, 2021 |
 | [4.3.9](release_notes_128t_4.3.md#release-439)   | August 12, 2020    |                    | Not Applicable*    | September 26, 2021 |
