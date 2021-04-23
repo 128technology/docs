@@ -21,18 +21,26 @@ With releases 4.5.6-1 and 5.0.0-1 v2 (and greater), we now provide a single ISO 
 - 128T-4.5.6-1.el7.OTP.v1.x86_64.iso
 - 128T-5.0.0-1.el7.OTP.v2.x86_64.iso
 
-The process for downloading an ISO remains the same. 
+The 128T Software package is available from our public servers located at: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/` using the username and token provided to you. The username/token simplifies access and does not require the conversion process used for the certificate. With the latest release of the 128T Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 is required. 
+
+Juniper highly recommends upgrading your Conductor to 4.5.7, 5.0.1, or 5.1.1. These versions contain updates for using a username/token for software access. If a username/token is used and the 128T software is not upgraded, a manual process must be followed each time the username/token is changed. See the [Manual Token Process](installer_cli_reference.md#manual-token-process) for more information.
 
 ## Downloading an ISO
 
-128 Technology ISOs are available from our public yum servers located at: `https://yum.128technology.com/isos` to users with an active account.
+128 Technology ISOs are available from our public servers located at: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/` to users with an active account.
 
-Your client certificate or token is provided to you and is installed on your 128 Technology routers and conductors, allowing you to download software updates from our yum servers.
+You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page. If your client certificate or token is currently installed on your 128 Technology routers and conductors, you can download software updates from our yum servers or the web page. 
 
 ### Downloading from the Command Line
 
-The ISO installation media is hosted at the same location as the 128T software packages, in the `isos` directory. To acquire the ISO, use the `curl` command. Specify the certificate obtained from 128 Technology with a valid software license.
+The ISO installation media is hosted at the same location as the 128T software packages, in the `isos` directory. To acquire the ISO, use the `curl` command. Specify the certificate or username and token obtained from 128 Technology with a valid software license.
 
+#### Username and Token
+```
+curl -O -u <username>:<token> https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/128T-<VERSION>.el7.x86_64.iso
+```
+
+#### Certificate
 ```bash
 curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/128T-<VERSION>.el7.x86_64.iso
 ```
@@ -40,8 +48,8 @@ curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/
 Where `<VERSION>` is replaced with the 128T version you are interested in.
 
 ### Listing Available ISOs from the Command Line
-To view ISOs available for download, type the command below. Here, egrep is used to filter the results to 4.2.*.
-```html
+To view ISOs available for download, type the command below. Here, egrep is used to filter the results to 4.2.x.
+```
 # curl --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/ | egrep '4\.2'
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
@@ -69,29 +77,28 @@ Select the appropriate image for your needs.
 
 #### Verifying Install Media
 
-Each ISO file created by 128 Technology, Inc. has an accompanying checksum to ensure that the image has not been tampered with. The checksum file contains all the checksums for all hosted ISOs. The name of the checksum file is sha256sum.txt.
+Each ISO image has corresponding checksum to ensure that the image has not been tampered withor corrupted on transfer. The checksum file contains all the checksums for all hosted ISOs. The name of the checksum file is sha256sum.txt.
 
-```bash
-curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/sha256sum.txt
-```
+To verify the ISO image, run the following command and check the output with the contents of the associated .sha256sum file:
 
-To verify the checksum, use sha256sum (Linux) or shasum (Macintosh), or the checksum tool of your choice:
-
-```bash
-sha256sum -c sha256sum.txt 128T-OTP-4.2.6-1.el7.x86_64.iso 2>&1 | grep OK
-```
+- Linux: `sha256sum <iso_file>`
+- OSX: `shasum -a 256 <iso_file>`
 
 The successful output of the command produces the result:
 
 ```
-128T-OTP-4.2.6-1.el7.x86_64.iso: OK
+128T-OTP-4.5.7-1.el7.x86_64.iso: OK
 ```
 
-If the checksum validation fails, reattempt the download. If the error message persists, please contact 128 Technology, Inc. immediately.
+If the checksum validation fails, re-attempt the download. If the error message persists, please contact technical support immediately.
 
-### Downloading Using a Web Browser
+### Downloading from a Web Browser Using a Certificate
 
 In order for the 128T certificate to be imported into a browser, it must first be transformed into the PFX format. Use openssl from a Linux, Macintosh, or Windows 10 Subsystem for Linux shell.
+
+:::note
+This procedure is not necessary if you have a username and token.
+:::
 
 With your client certificate (i.e. 128T-0000XXX.pem) in the current directory, run the following command:
 

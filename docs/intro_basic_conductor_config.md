@@ -40,7 +40,7 @@ In the steps below, we provide an example tenant name, _corp_, which is used in 
 
 1.	Log in to the Conductor GUI.
 2.	Select Configuration.
-3.	Select Tenants, and create the tenant _corp_. 
+3.	Select ADD next to Tenants, enter name _corp_ and select SAVE. 
 4.	Return to the top level. 
 5.	At the top of the screen, select VALIDATE and then COMMIT.
 

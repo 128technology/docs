@@ -1,6 +1,6 @@
 ---
 title: 128T Monitoring Agent
-sidebar_label: Monitoring
+sidebar_label: Monitoring Agent
 ---
 
 The 128T Monitoring Agent is an entity for collecting data from a node running 128T software and to push it to a collector. It is capable of collecting the data from several sources such as metrics, events etc. The current mechanism of monitoring a 128T router involves performing REST or GraphQL queries from the conductor. At scale, this can become inefficient and be problematic in terms of the performance of the conductor. Additionally it is important to interact with 3rd party monitoring platforms as means for organizations to collect, analyze and report using various KPIs available from 128T software and other application in the network.
@@ -18,6 +18,14 @@ The monitoring agent at its core is designed to be able to push data to external
 
 ## Installation
 
+### Plugin
+For deployments running 128T version `5.1.0` or greater on the conductor, install the monitoring agent plugin for configuration management.
+
+:::note
+The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
+:::
+
+### Manual installation
 The 128T Monitoring Agent can be obtained from the official 128T software repository. The latest 128T-monitoring-agent should always be used and is compatible with `128T >= 4.1.0`
 
 :::important  
@@ -32,7 +40,190 @@ dnf install 128T-monitoring-agent
 
 ## Configuration
 
-### Version History
+### Plugin Configuration
+With the plugin installed, the configuration for the monitoring agent can be managed via the conductor. The general workflow for creating the configuration is as follows:
+
+- Configure the inputs
+- Configure the outputs
+- Create an agent config profile
+- Reference the profile on the router
+
+#### Input Configuration
+The monitoring agent plugin allows the user to configure a set of inputs to be captured to monitor the routers. The configuration can be found under `config > authority > monitoring > input`. The configuration will depend on the type of input selected and here are the common fields that apply to all the inputs
+
+
+| Element | Type        | Description                                                 |
+| ------- | -------     | ----------------------------------------------------------- |
+| name    | string      | The name of the input                                       |
+| type    | enumeration | The type of the input such as device-state, metrics etc     |
+| additional-config | multiline-toml-string | Additional telegraf configuration for the input not captured by the data model |
+| tags |  list | List of tags to be included for this particular input |
+| tags > tag | string | The name of the tag |
+| tags > node | - | Use the node name of the router as tag value | 
+| tags > router | - | Use the router name of the router as tag value | 
+| tags > value | string | User specified value for the tag | 
+
+Based on the selected type, additional type specific configuration will be configurable. Here's an example of a `custom-input` which allows the user to create a TOML telegraf configuration.
+
+```config
+admin@node1.conductor1#
+admin@node1.conductor1# configure authority monitoring input cpu
+admin@node1.conductor1 (input[name=cpu])# type custom-input
+*admin@node1.conductor1 (input[name=cpu])# config
+Enter toml for config (Press CTRL-D to finish):
+[[inputs.cpu]]
+  ## Whether to report per-cpu stats or not
+  percpu = true
+  ## Whether to report total system cpu stats or not
+  totalcpu = true
+  ## If true, collect raw CPU time metrics.
+  collect_cpu_time = false
+  ## If true, compute and report the sum of all non-idle CPU states.
+  report_active = false
+
+
+*admin@node1.conductor1 (input[name=cpu])#
+```
+
+#### Output configuration
+The output configuration provides information about the various data sink for the inputs. The monitoring configuration provides specific output types for convenience as well as a `custom-output` type for specifying any telegraf supported output definition. The common fields are as follows:
+
+| Element | Type        | Description                                                 |
+| ------- | -------     | ----------------------------------------------------------- |
+| name    | string      | The name of the output                                      |
+| type    | enumeration | The type of the output such as Kafka, syslog etc            | 
+| push-jitter | uint32 | The amount of time to jitter sending of the data to the output | 
+| batch-size | uint32   | The maximum number of rows of data to send at once          | 
+| buffer-limit | uint32 | The maximum number of unsent metrics in the buffer          | 
+| data-format  | enumeration | The output data format for telegraf such as influx, json |
+| format      | string | When the data-format is other, the name of the output format supported by telegraf |
+| additional-config | multiline-toml-string | Additional telegraf configuration for the output not captured by the data model |
+
+Based on the selected type, additional type specific configuration will be configurable. Here's an example of a `custom-output` which allows the user to create a TOML telegraf configuration 
+
+```config
+*admin@node1.conductor1# configure authority monitoring output http
+*admin@node1.conductor1 (output[name=http])# type custom-output
+*admin@node1.conductor1 (output[name=http])#
+*admin@node1.conductor1 (output[name=http])# config
+Enter toml for config (Press CTRL-D to finish):
+# A plugin that can transmit metrics over HTTP
+[[outputs.http]]
+  ## URL is the address to send metrics to
+  url = "http://127.0.0.1:8080/telegraf"
+
+
+*admin@node1.conductor1 (output[name=http])#
+```
+
+#### Agent Configuration
+The `agent-config` can be leveraged to create a monitoring profile by referencing the various inputs and outputs configured in the previous steps. This allows multiple profiles to be created and applies to different routers. The various configuration options for the `agent-config` as follows:
+
+
+| Element | Type        | Description                                                 |
+| ------- | -------     | ----------------------------------------------------------- |
+| name    | string      | The name of the agent configuration profile                 | 
+| push-interval | interval | The frequency with which to send data to the output(s)     |
+| sample-interval | interval | The frequency with which to collect data from the input(s) |
+| tags |  list | List of tags to be included for this particular input |
+| tags > tag | string | The name of the tag |
+| tags > node | - | Use the node name of the router as tag value | 
+| tags > router | - | Use the router name of the router as tag value | 
+| tags > value | string | User specified value for the tag | 
+| variables | list | List of config variables which allows for customization on the running system |
+| variables > name | string | The name of the variable |
+| variables > query | string | The [GraphQL query](#graphql-variables) to be executed to determine the value of the variable |
+| input | list  | List of inputs to be included in the profile | 
+| input > name | reference | Reference to the input configured above |
+| input > push-interval | uint32 | Override the push-interval for the specific input |
+| input > sample-interval | uint32 | Override the sample-interval for the specific input |
+| input > include-all-outputs | boolean | Default; true. When enabled, the input will be sent to all configured outputs |
+| input > output | reference | When `include-all-outputs` is false, configure a set of outputs to be used as data sink |
+| input > additional-config | multiline-toml-string  | Additional Telegraf configuration not present in the datamodel such as preprocessors, aggregators etc |
+
+An example of the agent configuration looks as follows:
+
+```
+config
+
+    authority
+
+        monitoring
+
+            agent-config  my-agent
+                name             my-agent
+
+                tags             custom
+                    tag    custom
+                    value  custom1
+                exit
+
+                tags             router
+                    tag     router
+                    router
+                exit
+                sample-interval  10s
+                push-interval    30s
+
+                input            device-state
+                    name                 device-state
+                    include-all-outputs  false
+                    output               syslog
+                exit
+
+                input            events
+                    name                 events
+                    push-interval        1s
+                    include-all-outputs  true
+                exit
+
+                input            graph
+                    name  graph
+                exit
+
+                input            metrics
+                    name                 metrics
+                    sample-interval      100s
+                    include-all-outputs  false
+                    output               kafka
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+#### Router configuration
+Once all the inputs, outputs and agent-config are provisioned, the profile can be referenced on the individual routers. The monitoring config elements can be found under `authority > router > system > monitoring` 
+
+| Element | Type        | Description                                                 |
+| ------- | -------     | ----------------------------------------------------------- |
+| enabled | boolean     | Enable or disable the Monitoring Agent                      |
+| agent-config | reference | The agent-config that should apply to this router        |
+
+Here's an example of the router configuration
+
+```
+config
+
+    authority
+
+        router  router1
+            name    router1
+
+            system
+
+                monitoring
+                    enabled       true
+                    agent-config  my-agent
+                exit
+            exit
+        exit
+    exit
+exit
+```
+### File based configuration 
+#### Version History
 
 | Release      | Modification                                                    |
 | ------------ | --------------------------------------------------------------- |
@@ -209,6 +400,43 @@ Path: `/var/lib/128t-monitoring/inputs/system.conf`
 
 Configuring the file output will write metrics to the local filesystem. This can be useful for testing or as a backup data source in case network connectivity issues prevent data from reaching the intended collection endpoint.
 
+The file output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > file` are as follows:
+
+| Element | Type        | Description                                                 |
+| ------- | ----------- | ----------------------------------------------------------- |
+| file    | list        | Either `stdout` or absolute path to file on disk            |
+| rotation-interval | duration | The file(s) will be rotated at the specified interval |
+| rotation-max-size | uint32 | The file(s) will be rotated when it becomes larger than the configured size. |
+| rotation-max-archives | unit32 | The maximum number of archives to keep when the file(s) is rotated. |
+
+An example configuration for file output looks as follows:
+
+```config
+config
+
+    authority
+
+        monitoring
+
+            output  file
+                name  file
+                type  file
+
+                file
+                    file                   stdout
+                    file                   /tmp/foobar
+                    rotation-interval      12h
+                    rotation-max-size      100
+                    rotation-max-archives  5
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+The monitoring configuration corresponds to the following telegraf configuration.
+
 Path: `/var/lib/128t-monitoring/outputs/file.conf`
 
 ```toml
@@ -242,9 +470,48 @@ Path: `/var/lib/128t-monitoring/outputs/file.conf`
 
 #### Kafka
 
-This example sends data to a kafka broker:
+The `kafka` output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > kafka` are as follows:
 
-`/var/lib/128t-monitoring/outputs/kafka.conf`
+| Element | Type        | Description                                                 |
+| ------- | ----------- | ----------------------------------------------------------- |
+| broker | list | List of Kafka broker(s) to communicate with                            |
+| broker > host | ip-address or domain name | The address or domain name for the Kafka broker |
+| broker > port | l4-port | The port number for the Kafka broker                      |
+| compression-codec | enumeration | The compression codec to be used for communicating with Kafka |
+| max-retry | unit32 | The maximum number of times to retry before failing until the next push interval |
+| topic | string | The Kafka topic to produce messages for |
+
+Here's an example monitoring config for `kafka` output
+```
+config
+
+    authority
+
+        monitoring
+
+            output  kafka
+                name               kafka
+                type               kafka
+                data-format        json
+
+                kafka
+
+                    broker  192.168.1.7 9092
+                        host  192.168.1.7
+                        port  9092
+                    exit
+                    topic   test
+                exit
+                additional-config  (text/toml)
+            exit
+        exit
+    exit
+exit
+```
+
+This example sends data to a Kafka broker:
+
+Path: `/var/lib/128t-monitoring/outputs/kafka.conf`
 
 ```toml
 [[outputs.kafka]]
@@ -258,9 +525,42 @@ This example sends data to a kafka broker:
 
 #### Syslog
 
+The `syslog` output is one of the built in available types for the monitoring agent plugin. The various configuration options available under `authority > monitoring > output > syslog` are as follows:
+
+| Element | Type        | Description                                                 |
+| ------- | ----------- | ----------------------------------------------------------- |
+| address | uri         | The URL to the syslog server. For example tcp://127.0.0.1:8094 |
+| default-severity-code | uint8 | Default severity code to be used when severity_code metric field is not present |
+| default-facility-code | uint8 | Default severity code to be used when severity_code metric field is not present |
+| sdid    | string      | The default Syslog SDID to be used for fields and tags      |
+| tcp-keep-alive-period | duration | Period between TCP keep alive probes             |
+
+Here's an example monitoring plugin config for `syslog` output
+```config
+config
+
+    authority
+
+        monitoring
+
+            output  syslog
+                name    syslog
+                type    syslog
+
+                syslog
+                    address                tcp://localhost:514
+                    default-severity-code  3
+                    default-facility-code  20
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
 In this example data is sent via syslog:
 
-`/var/lib/128t-monitoring/outputs/syslog.conf`
+Path: `/var/lib/128t-monitoring/outputs/syslog.conf`
 
 ```toml
 [[outputs.syslog]]
@@ -274,6 +574,12 @@ For syslog output, not specifying the `default_sdid` parameter can result in emp
 
 ### Variable Replacement
 
+#### Version History
+| Release      | Modification                                                    |
+| ------------ | --------------------------------------------------------------- |
+| 3.3.3        | GraphQL based variables were introduced                         |
+
+#### Builtin variables
 Within an **input** configuration, several variables have been made available for substitution.
 
 | Value             | Meaning                                           | Version Introduced |
@@ -310,6 +616,41 @@ version = "5.0.0"
 files = [ "/tmp/test.out",]
 ```
 
+#### GraphQL variables
+The new variable substitution scheme allows for GraphQL based queries to be executed on the router to obtain useful information to be included as tags. For example, the scheme can be used to periodically send the entitlements information or use a config description field as a tag for some inputs. The monitoring agent plugin provides a mechanism to configure such variables as shown in in the example below
+
+```config
+config
+
+    authority
+
+        monitoring
+
+            agent-config  my-agent
+                name             my-agent
+
+                variables        entitlement
+                    variable  entitlement
+                    query     allRouters(name:${ROUTER})/nodes/entitlement/id
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+When configuring the variables on the file system, the agent configuration can include the variables as follows:
+
+Path: `/etc/128t-monitoring/config.yaml`
+
+```yaml
+enabled: true
+variables:
+  - name: ENTITLEMENT
+    query: allRouters(name:"${ROUTER}")/nodes/entitlement/id
+  - name: DESCRIPTION
+    query: allRouters(name:"${ROUTER}")/nodes/nodes(name:"${NODE}")/nodes/deviceInterfaces(name:"10")/nodes/description
+```
 ## Monitoring Agent CLI
 
 The `monitoring-agent-cli` is a utility for validating and executing the configuration for the monitoring-agent. The various components of the CLI as follows:
@@ -404,6 +745,38 @@ Testing input t128_device_state
 > device-interface-state,device-interface=dpdk1-lan,host=t127-dut2.openstacklocal,router=router1 adminStatus="ADMIN_UP",enabled=true,operationalStatus="OPER_UP",redundancyStatus="NON_REDUNDANT" 1586933478000000000
 ```
 
+#### Version History
+
+| Release      | Modification                            |
+| ------------ | --------------------------------------- |
+| 3.4.0       | `run-once` CLI command was introduced |
+In order to run an input to the configured outputs end-to-end just once for validation, testing and debugging purposes, the `run-once` command can be used. This will execute the configured inputs and produce data to the outputs as specified in the monitoring agent configuration file.
+
+```console
+# monitoring-agent-cli run-once t128_metrics
+Collecting t128_metrics and writing to outputs for input t128_metrics
+2021-04-08T02:49:46Z I! Starting Telegraf 1.17.4
+2021-04-08T02:49:46Z D! [agent] Initializing plugins
+2021-04-08T02:49:46Z D! [sarama]  Initializing new client
+2021-04-08T02:49:46Z D! [sarama] client/metadata fetching metadata for all topics from broker 192.168.1.7:9092
+2021-04-08T02:49:46Z D! [sarama] Connected to broker at 192.168.1.7:9092 (unregistered)
+2021-04-08T02:49:46Z D! [sarama] client/brokers registered new broker #1001 at kafka_1:9092
+2021-04-08T02:49:46Z D! [sarama]  Successfully initialized new client
+2021-04-08T02:49:46Z D! [agent] Connecting outputs
+2021-04-08T02:49:46Z D! [agent] Attempting connection to [outputs.kafka]
+2021-04-08T02:49:46Z D! [agent] Successfully connected to outputs.kafka
+2021-04-08T02:49:46Z D! [agent] Starting service inputs
+2021-04-08T02:49:46Z D! [agent] Stopping service inputs
+2021-04-08T02:49:46Z D! [agent] Input channel closed
+2021-04-08T02:49:46Z I! [agent] Hang on, flushing any cached metrics before shutdown
+2021-04-08T02:49:46Z D! [sarama] producer/broker/1001 starting up
+2021-04-08T02:49:46Z D! [sarama] producer/broker/1001 state change to [open] on test/0
+2021-04-08T02:49:46Z D! [sarama] Connected to broker at kafka_1:9092 (registered as #1001)
+2021-04-08T02:49:46Z D! [outputs.kafka] Wrote batch of 138 metrics in 8.298753ms
+2021-04-08T02:49:46Z D! [outputs.kafka] Buffer fullness: 0 / 10000 metrics
+2021-04-08T02:49:46Z D! [agent] Stopped Successfully
+```
+
 ### Stopping Services
 
 The `monitorinag-agent-cli stop` command can be used to stop `128T-telegraf` services launched by the `configure` command.
@@ -422,7 +795,56 @@ The 128T monitoring-agent comes pre-packaged with a set of collectors to assist 
 
 ### Metric collector
 
-The `t128_metrics` input is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The configuration file in a `TOML` definition of metrics and has the following format:
+The `t128_metrics` input is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The various configuration options available under `authority > monitoring > input > metrics` are as follows:
+
+| Element | Type    | Description                                                  |
+| ------- | ------- | ------------------------------------------------------------ |
+| use-default-config | boolean | Whether to use the set of builtin metrics as recommended by 128T router for monitoring |
+| metric | list | List of metrics                                                  |
+| metric > name | string | The desired name of the metric to include in the telegraf |
+| metric > id | metric-id | The ID of the metric as it exists in the REST API     |
+| filter | list | List of parameter values that should be included in the output  |
+| filter > parameter | string | The name of the parameter being referenced        |
+| filter > value | leaf-list | The list of values to be included in the match     |
+
+An example configuration of the metrics input looks as follows:
+
+```config
+config
+
+    authority
+
+        monitoring
+
+            input  bandwidth-metrics
+                name     bandwidth-metrics
+                type     metrics
+
+                metrics
+                    use-default-config  false
+
+                    metric              internet-rx-bandwidth stats/aggregate-session/service/bandwidth-received
+                        name  internet-rx-bandwidth
+                        id    stats/aggregate-session/service/bandwidth-received
+                    exit
+
+                    metric              internet-tx-bandwidth stats/aggregate-session/service/bandwidth-received
+                        name  internet-tx-bandwidth
+                        id    stats/aggregate-session/service/bandwidth-received
+                    exit
+
+                    filter              service
+                        parameter  service
+                        value      internet
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+The configuration file in a `TOML` definition of metrics has the following format:
 
 ```toml
 [[metric]]
@@ -480,7 +902,49 @@ A custom set of metrics can be collected by configuring the `t128_metrics` input
 | ------------ | --------------------------------------- |
 | 1.2.0, 2.1.0 | `t128_events` input type was introduced |
 
-The event collector can be used for collecting and pushing events for various categories such as admin, alarm, system, traffic and provisioning as they occur on the system. The type of the event is available via a `tag` and can be used for filtering only specific events as desired. For example, the following configuration can be used for pushing just the `alarm` and `admin` event
+The event collector can be used for collecting and pushing events for various categories such as admin, alarm, system, traffic and provisioning as they occur on the system. The type of the event is available via a `tag` and can be used for filtering only specific events as desired. For example, the following configuration can be used for pushing just the `alarm` and `admin` event. The various configuration options available under `authority > monitoring > input > event` are as follows:
+
+| Element | Type   | Default  | Description                                                  |
+| ------- | ------ | -------  | ------------------------------------------------------------ |
+| admin | boolean  | true     | Include admin events generated by the system                 |
+| audit | boolean  | true     | Include audit events generated by the system                 |
+| alarm | boolean  | true     | Include alarm events generated by the system                 |
+| traffic | boolean  | true     | Include traffic events generated by the system             |
+| provisioning | boolean  | true     | Include provisioning events generated by the system   |
+| system | boolean  | true     | Include system events generated by the system               |
+| track-index | boolean | true | Enable best effort tracking of events generated while the output cannot be reached |
+
+:::note
+The events described above need to be enabled for the router under `authority > router > system > audit` for the event collector to be able to collect and push those events.
+:::
+
+An example configuration for events inputs is as below
+```config
+config
+
+    authority
+
+        monitoring
+
+            input  events
+                name               events
+                type               events
+
+                event
+                    admin         true
+                    audit         false
+                    alarm         true
+                    traffic       false
+                    provisioning  false
+                    system        false
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+The configuration file in a `TOML` definition of event collector has the following format:
 
 ```toml
 [[inputs.t128_events]]
@@ -533,7 +997,40 @@ In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen abo
 | 1.2.1, 2.1.1 | `mac-address` tag was introduced                                |
 
 
-The `t128_device_state` input can be used for monitoring the admin, oper, provisional, and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
+The `t128_device_state` input can be used for monitoring the admin, oper, provisional, and redundancy status of various device-interfaces configured on the node. The device interface name is available as the `device-interface` tag and the mac address is available as the `mac-address` tag. The various configuration options available under `authority > monitoring > input > device-interface` are as follows:
+
+| Element | Type    | Description                                                 |
+| ------- | ------- | ------------------------------------------------------------ |
+| interface | leaf-list | Device interface names to be included in the collection. Empty list implies all configured interfaces are collected | 
+
+The example configuration for `device-interface` collector is as shown below
+```config
+config
+
+    authority
+
+        monitoring
+
+            input  device-state
+                name              device-state
+
+                tags              my-tag
+                    tag    my-tag
+                    value  my-value
+                exit
+
+                type              device-interface
+
+                device-interface
+                    interface  wan1
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+The `TOML` definition of the configuration looks as below. Telegraf `tagpass` can be used to filter specific interfaces as needed. For example:
 
 ```toml
 [[inputs.t128_device_state]]
@@ -573,7 +1070,36 @@ In versions 3.3.1 and later, the simplified `t128_device_state` seen above shoul
 
 ### Peer Path State collector
 
-The `peerPathStateCollector128t` collector can be used for monitoring the up/down status of all the peer paths on the node. The various part of a peer-path such as `adjacentAddress` and `networkInterface` are available as tags which can be filtered. For example:
+The `peerPathStateCollector128t` collector can be used for monitoring the up/down status of all the peer paths on the node. The various configuration options available under `authority > monitoring > input > peer-path` are as follows:
+
+
+| Element | Type    | Description                                                 |
+| ------- | ------- | ------------------------------------------------------------ |
+| network-interface | leaf-list | Network interface names to be included in the collection. Empty list implies all configured interfaces are collected | 
+| peer-router | leaf-list | Peer routers to be included in the collection. Empty list implies all configured peer routers are collected | 
+
+The example configuration for `device-interface` collector is as shown below
+```config
+config
+
+    authority
+
+        monitoring
+
+            input  peer-paths
+                name       peer-paths
+                type       peer-path
+
+                peer-path
+                    network-interface  dpdk3
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+When using the `TOML` definition shown below the various part of a peer-path such as `adjacentAddress` and `networkInterface` are available as tags which can be filtered. For example:
 
 ```toml
 [[inputs.exec]]
@@ -606,7 +1132,35 @@ The `peerPathStateCollector128t` collector can be used for monitoring the up/dow
 | ------- | ------------------------------------------ |
 | 3.3.1   | `t128_arp_state` input type was introduced |
 
-The `t128_arp_state` input can be used for monitoring the arp table status of a network interface configured on the node. The device interface name, network interface name, vlan, ip address, and destination mac will be found as tags and telegraf tagpass can be used to filter specific arp entries as needed. For example:
+The `t128_arp_state` input can be used for monitoring the arp table status of a network interface configured on the node. The various configuration options available under `authority > monitoring > input > arp` are as follows:
+
+| Element | Type    | Description                                                 |
+| ------- | ------- | ------------------------------------------------------------ |
+| device-interface | leaf-list | Device interface names to be included in the collection. Empty list implies all configured interfaces are collected | 
+| network-interface | leaf-list | Network interface names to be included in the collection. Empty list implies all configured interfaces are collected | 
+
+The example configuration for `arp` collector is as shown below
+```config
+config
+
+    authority
+
+        monitoring
+
+            input  arp-state
+                name  arp-state
+                type  arp
+
+                arp
+                    device-interface  dpdk3
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+The device interface name, network interface name, vlan, ip address, and destination mac will be found as tags and telegraf tagpass can be used to filter specific arp entries as needed. For example:
 
 ```toml
 [[inputs.t128_arp_state]]
@@ -672,8 +1226,90 @@ The `lteMetricCollector128t` collector when run will scan the current node confi
 
 ### Top Analytics Collector
 
-The `topAnalyticsCollector128t` collector can be used for monitoring the top sources, top sessions and top applications on the router. The different aspects of each of these data sources are easily tunable using the input configuration.
+The `topAnalyticsCollector128t` collector can be used for monitoring the top sources, top sessions and top applications on the router. The different aspects of each of these data sources are easily tunable using the input configuration. The monitoring agent configuration provides a way to manage each of the top-sessions, top-sources and top-applications individually as follows:
+#### Top Sessions
+The input type of `top-sessions` can be used to enable the top-sessions configuration. An example of such configuration is as follows:
 
+```config
+config
+
+    authority
+
+        monitoring
+
+            input  top-sessions
+                name  top-sessions
+                type  top-sessions
+            exit
+        exit
+    exit
+exit
+```
+
+#### Top Sources
+The `top-sources` input can be used to configure the various aspects of the top sources API on the system. The various configuration options available under `authority > monitoring > input > top-sources` are as follows:
+
+
+| Element | Type    | Default | Description                                                 |
+| ------- | ------- | ------- | ----------------------------------------------------------- |
+| max-rows | uint32 | 10      | The maximum number of rows to be collected per sample       |
+| category | enumeration | total-data | Controls how the top sources are determined. Options are `session-count` and `total-data` |
+
+An example configuration is as follows:
+
+```config
+config
+
+    authority
+
+        monitoring
+
+            input  top-sources
+                name         top-sources
+                type         top-sources
+
+                top-sources
+                    max-rows  10
+                    category  session-count
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+#### Top Applications
+The monitoring agent `top-applications` input can be used to configure various aspects of the API on the system. The various configuration options available under `authority > monitoring > input > top-applications` are as follows:
+| Element | Type    | Default | Description                                                 |
+| ------- | ------- | ------- | ----------------------------------------------------------- |
+| max-rows | uint32 | 10      | The maximum number of rows to be collected per sample       |
+| min-session-count | uint32 | 1 | The minimum number of sessions for an application to be collected |
+| application-filter | string | - | Restrict the applications to be included in the collection |
+
+An example of the top applications configuration is as follows:
+
+```config
+config
+
+    authority
+
+        monitoring
+
+            input  top-apps
+                name              top-apps
+                type              top-applications
+
+                top-applications
+                    max-rows           10
+                    min-session-count  5
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+The `top_analytics` collector allows a simple `TOML` configuration as below to capture the various top measurements on the system.
 ```toml
 [[inputs.top_analytics]]
     # # By default all the data sources below are enabled along with their default properties.
@@ -705,9 +1341,62 @@ The **top applications** input is useful when application identification in term
 | ------- | ---------------------------------------- |
 | 3.3.1   | `t128_graphql` input type was introduced |
 
-The `t128_graphql` input can be used to retrieve data from a GraphQL API.
+The `t128_graphql` input can be used to retrieve data from a GraphQL API. The various configuration options available under `authority > monitoring > input > graphql` are as follows:
 
+| Element | Type    | Description                                                 |
+| ------- | ------- | ----------------------------------------------------------- |
+| query-entry-point | string | The path to a point in the graphQL tree from which fields and tags will be extracted. This path may contain (`<key>:<value>`) graphQL arguments such as (name:'${ROUTER}'). | 
+| extract-field | list | List of leaf nodes to be collected from query response as fields |  
+| extract-field > name | string | The name of the field |
+| extract-field > value | string | The graphQL query path relative to the entry-point from which to extract the value | 
+| extract-tag | list | List of leaf nodes to be collected from query response as tags | 
+| extract-tag > name | string | The name of the tag |
+| extract-tag > value | string | The graphQL query path relative to the entry-point from which to extract the value | 
+
+An example configuration using can be seen as below
 ```
+config
+
+    authority
+
+        monitoring
+
+            input  graph
+                name     graph
+                type     graphql
+
+                graphql
+                    query-entry-point  allRouters(name:'${ROUTER}')/nodes/nodes(name:'${NODE}')/nodes/deviceInterfaces/nodes
+
+                    extract-field      enabled
+                        name   enabled
+                        value  enabled
+                    exit
+
+                    extract-tag        name
+                        name   name
+                        value  name
+                    exit
+
+                    extract-tag        type
+                        name   type
+                        value  type
+                    exit
+
+                    extract-tag        admin-status
+                        name   admin-status
+                        value  state/adminStatus
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+The `TOML` configuration for the GraphQL input can be seen below
+
+```toml
 [[inputs.t128_graphql]]
   ## collector_name = "t128-device-state"
   ## base_url = "http://localhost:${WEB_PORT}/api/v1/graphql/"
@@ -749,7 +1438,7 @@ The `t128_graphql` input can be used to retrieve data from a GraphQL API.
   Paths, relative to the `entry_point`, from which fields should be created. Each value MUST point to a leaf in the graph. The keys become the field names for the produced values. At least one field MUST be specified.
 
 - **extract_tags**  
-  Paths, relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. The keys become the tag names for the produced values. At least one tag MUST be specified.
+  Paths, relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. The keys become the tag names for the produced values.
 
 Note that `(<key>:<value>)` arguments are valid only on the `entry_point`. They MUST NOT be specified on `extract_fields` or `extract_tags`.
 
@@ -757,7 +1446,28 @@ It is possible for the relative paths of `extract_fields` and `extract_paths` to
 
 When dealing with multiple child nodes, it is advised that each be handled in separate `t128_graphql` inputs.
 
-## Release Notes
+## Monitoring Agent Plugin Notes
+
+## Release 2.0.0
+
+#### New Features and Improvements:
+ - **PLUGIN-667** Introduce a new monitoring agent plugin to better manage the monitoring agent through the GUI and PCLI. Some key highlights are:
+ * Support all the 128T developed collectors such as metrics, events, top-sessions, etc.
+ * Support the most commonly used outputs such as file, syslog, `Kafka`, etc.
+ * Support multi-line input fields for generic telegraf configuration with TOML syntax validation.
+
+## Monitoring Agent Release Notes
+
+### Release 3.4.0
+
+#### New Features and Improvements:
+
+- **MON-337** Create an ability to run specified input once on demand for testing and debugging
+
+#### Issues Fixed:
+- **MON-328** Monitoring agent failed to setup the environment in some installations
+
+  _**Resolution**_ The script to setup the environment is run every time the monitoring agent service restarts to ensure the correct environment setup
 
 ### Release 3.3.1
 
@@ -774,7 +1484,7 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 
 - **MON-316** Correct default metrics bug where interface `received-missed` was collected from `stats/interface/received/error`
 
-  _**Resolution**_ The default metrics configuraiton was updated to point `received-missed` to the correct `stats/interface/received/missed`
+  _**Resolution**_ The default metrics configuration was updated to point `received-missed` to the correct `stats/interface/received/missed`
 
 ### Release 3.1.0
 
