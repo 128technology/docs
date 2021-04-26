@@ -75,6 +75,7 @@ module.exports = {
           "config_ldap",
           "config_management_over_forwarding",
           "config_EthoSVR",
+          "config_service_health",
 
           "config_ha",
           "config_dual_router_ha",

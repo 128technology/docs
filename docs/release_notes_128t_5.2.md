@@ -7,6 +7,8 @@ sidebar_label: '5.2'
 
 ### New Features and Improvements
 
+- **I95-61 Service Health Learning and Fault Avoidance:** In-path metrics and heuristics are now able to be used for server reachability and to determine network health. See [Service Health Learning](config_service_health.md) for more information.  
+
 - **I95-37296 Native 128T Support for GRE:**
 ------
 - **I95-37459 Show Commands for Services:** The [show fib](cli_reference.md#show-fib) and [show fib lookup](cli_reference.md#show-fib-lookup)commands have been enhanced to provide more granular path-related debugging.
@@ -17,7 +19,8 @@ sidebar_label: '5.2'
 -----
 - **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md/#service-policy) has been enhanced to include values that allow the the router to select the best path based on the current latency/MoS values of the paths. 
 ------
-
+- **I95-39544 Non-persistent template fields:** You now have the option to create non-persistent template input parameters, allowing the template to create unique instances per instantiation.
+------
 - **I95-39580 Reference Candidate Config Values in a Template:** Using a custom tag in Advanced Mode allows you to reference a value from a candidate configuration. For details about using this tag in Advanced Mode, refer to [Pulling Values from the Candidate Configuration](config_templates.md).
 
 ### Resolved Issues
@@ -46,14 +49,11 @@ sidebar_label: '5.2'
 ------
 - **I95-39538 Periodic disruptions in service:** Resolved an issue in the HttpParser for application identification when parsing malformed HTTP traffic.
 ------
-
-
-
-
-
-
-
-
+- **I95-39555 Active interface  out-of-sync with the leadership status for the underlying device interface:** Resolved an issue when both nodes of an HA router start 128T at a similar time, the active node for a redundant interface is not determined correctly, resulting in a failure to forward traffic.
+------
+- **I95-39558 After setting a custom favicon, clearing the icon does not reset to the default:** This issue has been resolved. 
+------
+- **I95-39568 Error when running "compare config running candidate" after adding second domain-server:** Resolved an issue where a user-ordered list was not being parsed properly.
 ------
 - **I95-39587 Duplicate entries in show commands on PCLI when using bulk-edit:** Resolved an issue with the use of bulk-edit in the PCLI.
 ------
@@ -75,6 +75,3 @@ sidebar_label: '5.2'
 ------
 - **I95-39796 Conductor and Authority missing from GUI on first login:** Added multiple retries to retrieve system data upon first login. 
 ------
-
-
-
