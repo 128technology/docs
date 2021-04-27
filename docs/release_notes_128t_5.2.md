@@ -8,15 +8,27 @@ sidebar_label: '5.2'
 ### New Features and Improvements
 
 - **I95-61 Service Health Learning and Fault Avoidance:** In-path metrics and heuristics are now able to be used for server reachability and to determine network health. See [Service Health Learning](config_service_health.md) for more information.  
-
+------
+- **I95-17681 Pre- and Post-Login Banners:** Pre- and post-login banners can be configured by selecting Configuration, clicking on the Authority tile, and scrolling down to the Web Messages field. 
+------
+- **I95-21631 Customized Tables:** Support has been added for user customizable tables in the Custom Reports view of the GUI. Tables can have multiple metrics and display sum, average, min or max values across the selected time range.
+------
+- **I95-33451 Support Persistence for In-Memory Metrics:** 
+------
 - **I95-37296 Native 128T Support for GRE:**
 ------
 - **I95-37459 Show Commands for Services:** The [show fib](cli_reference.md#show-fib) and [show fib lookup](cli_reference.md#show-fib-lookup)commands have been enhanced to provide more granular path-related debugging.
 ------
-- **I95-37510 Change AppId modules to be run as systemd unit:**
+- **I95-37510 Change AppId modules to be run as systemd unit:** The AppId manager now can handle the module execution as a as systemd unit instead of subprocess. Use Rest APIs to propagate module registrations and results with AppId manager. 
 ------
 - **I95-38081 Automatic generation of MSS Value:** The [network-interface configuration object](config_reference_guide.md#network-interface) now has an automatic option for the enforced-mss value. This automatically calculates the MSS of the network interface from the interface session MTU.
------
+------
+- **I95-38303 `show application modules` added:** [`show application modules status`](cli_reference.md/#show-application-modules-status) displays application names and transport information of a module. [`show application modules registration`](cli_reference.md/#show-application-modules-registration) displays registered application modules. 
+------
+- **I95-38514 View User Activity:** Added a user activity table to the GUI on the Users page, as well as adding a new [PCLI command `show user activity`](cli_reference.md/#show-user-activity).
+------
+- **I95-38968 128T as VNF on Juniper NFX:** Please refer to the [Deploying Branch SSR SD-WAN Router Using NFX Series NextGen uCPE](https://www.juniper.net/documentation/us/en/software/nce/ssr-nfx/topics/example/ssr-nfx-ucpe-example.html) document for configuration details. 
+------
 - **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md/#service-policy) has been enhanced to include values that allow the the router to select the best path based on the current latency/MoS values of the paths. 
 ------
 - **I95-39544 Non-persistent template fields:** You now have the option to create non-persistent template input parameters, allowing the template to create unique instances per instantiation.
@@ -27,13 +39,11 @@ sidebar_label: '5.2'
 
 - **I95-29583 Default Language Setting:** Changes to the default language are now saved per user, not per system.
 ------
-- **I95-37101 PCLI Updates for `show since` command:**
+- **I95-37101 PCLI Updates for `show stats since` command:** The PCLI notes inconsistencies in data between current values and historical ones to indicate when the data may not be accurate.
 ------
 - **I95-38510 Security mismatch on HA nodes dropping internode traffic:**
 ------
 - **I95-39298 STEP Waypoint NAT Support:** When a resolved external NAT address is present in the adjacency configuration, it is used when advertising the peer path in the STEP router document.
-------
-- **I95-38303 `show application modules` added:** ADD LINK HERE AND SUPPORTING INFO.
 ------
 - **I95-39374 Multi-core Traffic Engineering and Per-Adjacency Traffic Engineering feature interaction:** Resolved an issue where it was possible for a packet on a non-scheduled adjacency to make it into the schedulerGroup when adjacency-only Traffic Engineering was enabled.
 ------
@@ -49,7 +59,7 @@ sidebar_label: '5.2'
 ------
 - **I95-39538 Periodic disruptions in service:** Resolved an issue in the HttpParser for application identification when parsing malformed HTTP traffic.
 ------
-- **I95-39555 Active interface  out-of-sync with the leadership status for the underlying device interface:** Resolved an issue when both nodes of an HA router start 128T at a similar time, the active node for a redundant interface is not determined correctly, resulting in a failure to forward traffic.
+- **I95-39555 Active interface out-of-sync with the leadership status for the underlying device interface:** Resolved an issue when both nodes of an HA router start 128T at a similar time, the active node for a redundant interface is not determined correctly, resulting in a failure to forward traffic.
 ------
 - **I95-39558 After setting a custom favicon, clearing the icon does not reset to the default:** This issue has been resolved. 
 ------
@@ -75,3 +85,8 @@ sidebar_label: '5.2'
 ------
 - **I95-39796 Conductor and Authority missing from GUI on first login:** Added multiple retries to retrieve system data upon first login. 
 ------
+
+## Caveats
+
+- **I95-26627 Prevent static route interface next hops with the same global id:** If two interfaces with the same global id are an HA pair, only one should be permitted as a static route next hop. If the configuration is committed and one of the interfaces is deleted, FRR will delete the entire static route. 
+

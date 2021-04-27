@@ -3456,15 +3456,15 @@ show application modules registration [force] [node <node>] {router <router> | r
 
 | command | description |
 | ------- | ----------- |
-| [`show application modules status`](#show-application-modules-status) | Display &quot;applications&quot; provided by a module. |
+| [`show application modules status`](#show-application-modules-status) | Display applications provided by a module. |
 
 #### Description
 
-The _show application modules registration_ subcommand shows all of the modules that provide &quot;application&quot; names to 128T as part of its Application Classification feature.
+The _show application modules registration_ subcommand shows all of the modules that provide application names to 128T as part of its Application Classification feature.
 
 ## `show application modules status`
 
-Display &quot;applications&quot; provided by a module.
+Display applications provided by a module.
 
 #### Usage
 
@@ -3497,7 +3497,7 @@ show application modules status [rows <rows>] [force] [node <node>] {router <rou
 
 #### Description
 
-The _show application modules status_ subcommand shows all of &quot;application&quot; names and transport information of a module, along with some other debugging information.
+The _show application modules status_ subcommand shows all of application names and transport information of a module, as well as other debugging information.
 
 ## `show application names`
 
@@ -3521,7 +3521,7 @@ show application names [rows <rows>] [force] [node <node>] {router <router> | re
 
 #### Description
 
-The _show application names_ subcommand shows all of the &quot;application&quot; names that the 128T has learned, or been configured to recognize, as part of its Application Classification feature.
+The _show application names_ subcommand shows all of the application names that the 128T has learned, or been configured to recognize, as part of its Application Classification feature.
 
 #### Example
 
