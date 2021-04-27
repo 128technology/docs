@@ -29,6 +29,8 @@ sidebar_label: 4.5
 ------
 - **I95-39826 Management over forwarding pppoe generates v6 services or service-routes:** Resolved an issue where pppoe config generation is treated as a possible ipv6 address family interface.
 ------
+- **I95-39855 `show stats` usage missing units:** With this change the `show stats` usage help text includes units
+------
 - **I95-39890 Unable to establish GRE session:** Resolved an issue with occasional fastlane lockups when using the Retransmission-with-DPI feature.
 
 ### Deprecated Features
