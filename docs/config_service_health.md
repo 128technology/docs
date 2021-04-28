@@ -15,13 +15,13 @@ A unique advantage of Session Smart Routing is that it can understand patterns a
 - Per destination (/32 address only)
 - Per traffic-class (high, medium, low, best-effort)
 
-In the absence of dynamic protocols in the network (or when the route convergence times are too high), the system collects statistics along the dimensions mentioned above. Some of the metrics collected are:
+The Session Smart Router (SSR) collects key performance metrics to assist in making load balancing decisions, such as:
 
 - Number of TCP connection errors
 - Number of UDP failures due to ICMP unreachable
 - Time to first data packet for TCP and TLS
 
-Service Health Learning provides the ability to gather route data (Detection Mode), and enforce (Enforcement Mode) path selection based on this data. 
+Service Health Learning can operate in a detection mode to gather the metrics listed above, and then enforce path selection based on the experienced values.
 
 ## Detection Mode
 
