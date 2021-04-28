@@ -15,11 +15,11 @@ sidebar_label: '5.2'
 ------
 - **I95-33451 Support Persistence for In-Memory Metrics:** 
 ------
-- **I95-37296 Native 128T Support for GRE:**
+- **I95-37296 Native 128T Support for GRE:** Native support (non-plugin) is availble for GRE Tunneling, providing better operformance. For more information, see [Native GRE Tunnels](config_gre_tunnels.md).
 ------
 - **I95-37459 Show Commands for Services:** The [show fib](cli_reference.md#show-fib) and [show fib lookup](cli_reference.md#show-fib-lookup)commands have been enhanced to provide more granular path-related debugging.
 ------
-- **I95-37510 Change AppId modules to be run as systemd unit:** The AppId manager now can handle the module execution as a as systemd unit instead of subprocess. Use Rest APIs to propagate module registrations and results with AppId manager. 
+- **I95-37510 [AppID Modules](concepts_appid.md#appid-using-modules) can be run as systemd unit:** The AppId manager now can handle the module execution as systemd unit instead of subprocess, in addition to the existing script-based method. Use Rest APIs to propagate module registrations and results with AppId manager. 
 ------
 - **I95-38081 Automatic generation of MSS Value:** The [network-interface configuration object](config_reference_guide.md#network-interface) now has an automatic option for the enforced-mss value. This automatically calculates the MSS of the network interface from the interface session MTU.
 ------

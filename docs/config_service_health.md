@@ -27,8 +27,6 @@ Service Health Learning can operate in a detection mode to gather the metrics li
 
 Detection Mode is configured on the service-route, and allows you to gather statistics based on the traffic profiles as described in [Session Establishment Metrics](concepts_metrics.md/#session-establishment-metrics). This mode defines the criteria the 128T router uses to apply load balancing decisions. Detection mode allows you to visualize the current network and understand the necessary configuration for enforcement. 
 
-**How does the user really use this information? There is no mention of reports or show commands.**
-
 ### Configure Detection Mode
 
 Detection Mode is configured per service-route, and gathers statistics using [Session Establishment Metrics](concepts_metrics.md/#session-establishment-metrics). 
