@@ -251,7 +251,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37680 nodeMonitor process may fault on shutdown of 128T.** `nodeMonitor` no longer faults on 128T shutdown.
 ------
-- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.** The `delete sessions` command no longer creates a race condition. 
+- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.** The `delete sessions` command no longer creates a race condition. (Interim IPFIX record generation or HA session synchronization could also cause trigger the same fault, and is also addressed by this fix.)
 ------
 - **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
 ------
@@ -612,7 +612,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
   _**Symptom:**_ This error is seen during the upgrade of an HA conductor pair to version 4.4.0 or later. An upgrade of a single standalone conductor node will not see this error. The following error will be reported by the node running software version earlier than 4.4.0:
   ```
-"128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
+  "128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
   ```
   This error can be viewed by running the following PCLI command from either node: `show assets <asset-id>`. Where asset-id is the asset-id of the node running pre 4.4.0 version that has not yet been upgraded.
 

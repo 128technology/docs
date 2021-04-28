@@ -6,7 +6,7 @@ sidebar_label: "AP: Salt Minion"
 This document describes the process for troubleshooting issues with Automated Provisioning (AP) using Salt.
 
 :::note
-The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting a 128T router. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
+The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on the conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting a 128T router. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
 :::
 
 ## Symptoms
