@@ -33,6 +33,22 @@ sidebar_label: 4.5
 ------
 - **I95-39890 Unable to establish GRE session:** Resolved an issue with occasional fastlane lockups when using the Retransmission-with-DPI feature.
 
+### Caveats
+
+- **I95-39985 Template save error:** When creating persistent fields on an **existing** template in Advanced Mode, a validation error appears and the template changes are not saved. 
+_**Workaround:**_ There are two workarounds. 
+
+You can either; use GraphQL to set `persistInput` on each template to `true` to resolve the issue for that template. 
+
+OR
+
+1. Copy the contents of the variables pane to your clipboard.
+2. Open the Settings dropdown.
+3. Click “Persist Input” to disable the option.
+4. Click “Proceed” in the warning modal.
+5. Open the Settings menu and click “Persist Input” again to turn it back on.
+6. Paste your variables back into the variables pane and save the template. This template should no longer encounter the issue.
+
 ### Deprecated Features
 
 - **I95-39881 GraphQL User Mutations have been Deprecated:** The "createUser", "modifyUser", and "deleteUser" GraphQL mutations are now deprecated. Please use their REST equivalents which are listed in the GraphQL "deprecationReason" for those mutations. 
