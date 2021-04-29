@@ -13,7 +13,9 @@ sidebar_label: '5.2'
 ------
 - **I95-21631 Customized Tables:** Support has been added for user customizable tables in the Custom Reports view of the GUI. Tables can have multiple metrics and display sum, average, min or max values across the selected time range.
 ------
-- **I95-33451 Support Persistence for In-Memory Metrics:** 
+- **I95-33451 Support Persistence for [In-Memory Metrics](concepts_metricsmd#in-memory-metrics):** In-memory metrics can be configured so that only metrics matching a filter are persisted (for example, only those for a particular peer path). A metric can be persisted for a specific retention time; 1 hour, 1 day, or 6 months.
+------
+- **I95-36657 Improve Packet throughput of KNI-based Interfaces:** KNI buffer performance has been enhanced to handle large bursts of traffic. 
 ------
 - **I95-37296 Native 128T Support for GRE:** Native support (non-plugin) is availble for GRE Tunneling, providing better operformance. For more information, see [Native GRE Tunnels](config_gre_tunnels.md).
 ------
@@ -34,6 +36,8 @@ sidebar_label: '5.2'
 - **I95-39544 Non-persistent template fields:** You now have the option to create non-persistent template input parameters, allowing the template to create unique instances per instantiation.
 ------
 - **I95-39580 Reference Candidate Config Values in a Template:** Using a custom tag in Advanced Mode allows you to reference a value from a candidate configuration. For details about using this tag in Advanced Mode, refer to [Pulling Values from the Candidate Configuration](config_templates.md).
+------
+- **I95-39602 Additional detail for `show peers hostnames`:** The `show peer hostnames` command now displays additional supporting information: Node, Destination IP address, and Status. 
 
 ### Resolved Issues
 

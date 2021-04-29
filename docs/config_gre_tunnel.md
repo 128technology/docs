@@ -3,22 +3,22 @@ title: Native GRE Tunnels
 sidebar_label: Native GRE Tunnels
 ---
 
-Generic Routing Encapsulation (GRE) is a lightweight tunneling protocol that encapsulates L3 and above in an L3 and GRE header. The 128T Networking Platform now supports both a GRE plugin as well as native GRE tunnels. 
+Generic Routing Encapsulation (GRE) is a lightweight tunneling protocol that encapsulates L3 traffic in an L3 and GRE header. The 128T Networking Platform now supports both a GRE plugin as well as native GRE tunnels. 
 
 :::note
 This is not an SVR feature. No GRE tunnels will be created to send packets between peered 128T routers. However, a packet coming from SVR can egress into a GRE tunnel, and vice versa.
 :::
 
-## Sending Packets To The Tunnel
+## Sending Packets
 
-When a GRE tunnel is configured, sessions are set up to and from the tunnel. A first packet arriving at the 128T is sent to the service area. If the GRE tunnel is configured as a possible path for the service, the load balancer has the option of choosing the tunnel as the packet’s next hop.
+When a GRE tunnel is configured, sessions are set up to and from the tunnel. The first packet arriving at the 128T is sent to the service area. If the GRE tunnel is configured as a possible path for the service, the load balancer has the option of choosing the tunnel as the packet’s next hop.
 
-When the tunnel is selcted as the next hop the session sets up normally, but a `tunnel_add` action is populated on the forward flow. This action adds the appropriate headers for the tunnel. When a packet reaches the end of the action chain, it is properly encapsulated and ready to go into the tunnel.
+When the tunnel is selcted as the next hop the session sets up normally, and a `tunnel_add` action is populated on the forward flow. This action adds the appropriate headers for the tunnel. When a packet reaches the end of the action chain, it is properly encapsulated and ready to go into the tunnel.
 
-## Receiving Packets From The Tunnel
+## Receiving Packets
 
 When a GRE tunnel is configured, a static flow is created matching the IP addresses of the GRE tunnel. This static flow receives all traffic coming from that tunnel.
-The `tunnel remove` action is added and strips off the tunnel headers and forwards the packet to the normal lookup path. If a session exists, the packet gets a second flow hit and is processed by the corresponding flow. If the session for this packet does not yet exist, it is sent to the service area, where one will be created.
+The `tunnel_remove` action is added to strip off the tunnel headers and forward the packet to the normal lookup path. If a session exists, the packet is processed by the corresponding flow. If the session for this packet does not yet exist, it is sent to the service area where a session is created.
 
 ## Configuration
 
@@ -26,28 +26,165 @@ Use the following information to configure a GRE tunnel.
 
 ### Interface Configuration
 
-Network-interfaces can now be configured as gre-tunnels. These interfaces are virtual interfaces, which must share a vlan tag with a non-virtual interface. The shared vlan tag indicates which non-virtual interface the tunnel is associated with.
+Network-interfaces can be configured as gre-tunnels. These interfaces are virtual interfaces, which must share a vlan tag with a non-virtual interface. The shared vlan tag indicates which non-virtual interface the tunnel is associated with.
 
-
-1. Select the router 
-2. Scroll down and select the Node
-3. Select the Device interface.
-4. Scroll down to Network interfaces and click ADD
-5. Enter a name for the device interface and click SAVE
+#### Configuration from the GUI
+The following procedure describes configuring a GRE Tunnel using the GUI. 
+1. Under Configuration, select the Router.
+2. Scroll down and select the Node.
+3. Select the Device Interface.
+4. Scroll down to Network Interfaces and click ADD.
+5. Enter a name for the device interface and click SAVE.
 6. Under Type, select GRE Tunnel.
-7. Under network interface tunnel settings, choose either inherited or custom. The source is the IP address of the start the tunnel. It can be inherited from the associated non-virtual network interface, or configured explicitly using ‘custom’.
+7. Under Network Interface Tunnel Settings, choose either Inherited or Custom. The Source is the IP address of the start the tunnel. It can be inherited from the associated non-virtual network interface, or configured explicitly using Custom.
 8. Add the Destination IP address for the tunnel. 
+9. Click Validate and Commit.
+
+#### PCLI Configuration
+The following example configuration describes using the PCLI to configure a GRE Tunnel.
+Router and node configuration are provided for context:
+```
+router    Router128
+    name           Router128
+    location       usa
+  
+    system
+        log-level     trace
+
+        log-category  ATCS
+            name       ATCS
+            log-level  info
+        exit
+
+        log-category  DATA
+            name       DATA
+            log-level  info
+        exit
+    exit
+
+    node           test1
+        name              test1
+        enabled           true
+
+        device-interface  ETH
+            name               ETH
+            type               ethernet
+            pci-address        0000:00:04.0
+            capture-filter     len>0
+
+            network-interface  eth
+                name       eth
+                global-id  1
+                tenant     red
+
+                address    172.16.1.1
+                    ip-address     172.16.1.1
+                    prefix-length  24
+                    gateway        172.16.1.201
+                exit
+            exit
+        exit
+
+```
+1. Create a device interface `GRE`.
+```
+    device-interface  GRE
+            name               GRE
+            type               ethernet
+            pci-address        0000:00:06.0
+            capture-filter     len>0
+```
+2. Create a non-tunnel interface, `base`. 
+```
+            network-interface  base
+                name       base
+                global-id  2
+                tenant     red
+
+                address    172.16.3.1
+                    ip-address     172.16.3.1
+                    prefix-length  24
+                exit
+            exit
+```
+3. Create a tunnel interface, `tunnel`. This is the virtual interface representing the tunnel. Set the type field to `gre-tunnel`.
+```
+            network-interface  tunnel
+                name       tunnel
+                global-id  3
+                type       gre-tunnel
+                tenant     red
+```
+Please note that in this configuration, the `base` interface and the gre-tunnel interface `tunnel` share the same vlan. For this to work, they must be on a single device-interface. 
+
+4. Create the tunnel container with a destination of the IP address for the destination of the tunnel. The source identifies how the local IP address is obtained. Setting it to `network-interface` acquires the address from `network-interface-base`.
+```
+                tunnel
+                    destination  172.16.3.2
+
+                    source
+                        network-interface
+                    exit
+                exit
+            exit
+        exit
+
+        device-interface  HOST
+            name               HOST
+            type               host
+
+            network-interface  host
+                name       host
+                global-id  4
+                tenant     red
+ 
+                address    172.16.1.101
+                    ip-address     172.16.1.101
+                    prefix-length  24
+                    gateway        172.16.1.201
+                exit
+            exit
+        exit
+    exit
+```
+5. Create two service-routes for the tunnel, an outbound and inbound.
+```
+    service-route  gre-outbound
+        name          gre-outbound
+        service-name  gre-outbound
+```
+6. Be sure to specify the virtual tunnel interface as the outbound service-route interface. 
+```
+        next-hop      test1 tunnel
+            node-name   test1
+            interface   tunnel
+            gateway-ip  172.16.3.2
+        exit
+    exit
+
+    service-route  gre-inbound
+        name          gre-inbound
+        service-name  gre-inbound
+
+        next-hop      test1 eth
+            node-name  test1
+            interface  eth
+        exit
+    exit
+exit
+
+```
 
 ### Tunnel Statistics
 
 The following tunnel encapsulation statistics provide details on encapsulation and decapsulation success, as well as failure modes.
 
-- stats packet-processing action success tunnel gre encapsulate
+- [`stats packet-processing action success tunnel gre encapsulate`](cli_stats_reference.md/#show-stats-packet-processing-action-success-tunnel-gre-encapsulate)
 
-- stats packet-processing action success tunnel gre decapsulate
+- [`stats packet-processing action success tunnel gre decapsulate`](cli_stats_reference.md/#show-stats-packet-processing-action-success-tunnel-gre-decapsulate)
 
-- stats packet-processing action failure tunnel gre decapsulate: This will be seen in cases where the 128T is receiving malformed packets.
+- [`stats packet-processing action failure tunnel gre decapsulate`](cli_stats_reference.md/#show-stats-packet-processing-action-failure-tunnel-gre-decapsulate): This will be seen in cases where the 128T is receiving malformed packets.
 
-- stats packet-processing action failure tunnel invalid-entry: Only seen when a session is trying to send into a tunnel that no longer exists.  
+- [`stats packet-processing action failure tunnel invalid-entry`](cli_stats_reference.md/#show-stats-packet-processing-action-failure-tunnel-invalid-entry): Only seen when a session is trying to send into a tunnel that no longer exists.  
 
 
