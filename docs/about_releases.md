@@ -14,11 +14,13 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 
 | Version                                          | Release            | GA Date            | End of Maintenance | End of Support     |
 | ------------------------------------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+
 | [5.2.0](release_notes_128t_5.2.md#release-5.2)   | April 30, 2021     |                    | Not Applicable*    | Not Applicable*    |
 | [5.1.1](release_notes_128t_5.1.md#release-511)   | April 12, 2021     |                    | Not Applicable*    | Not Applicable*    |
 | [5.1.0](release_notes_128t_5.1.md#release-5.1)   | March 15, 2021     |                    | Not Applicable*    | Not Applicable*    |
 | [5.0.1](release_notes_128t_5.0.md#release-501)   | April 12, 2021     |                    | Not Applicable*    | Not Applicable*    |
 | [5.0.0](release_notes_128t_5.0.md#release-5.0)   | December 18, 2020  |                    | Not Applicable*    | Not Applicable*    |
+| [4.5.8](release_notes_128t_4.5.md#release-458)   | April 28, 2021     |                    | Not Applicable*    | October 15, 2021   |
 | [4.5.7](release_notes_128t_4.5.md#release-457)   | April 12, 2021     |                    | Not Applicable*    | October 15, 2021   |
 | [4.5.6](release_notes_128t_4.5.md#release-456)   | March 26, 2021     |                    | Not Applicable*    | October 15, 2021   |
 | [4.5.5](release_notes_128t_4.5.md#release-455)   | February 10, 2021  |                    | Not Applicable*    | October 15, 2021   |

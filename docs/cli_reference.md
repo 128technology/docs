@@ -3531,14 +3531,27 @@ Wed 2020-04-22 16:06:43 UTC
 
 Node: gouda
 
-========================= =============== ================ ===================== =====================
- Application Name          Session Count   Ip Tuple Count   Date Discovered       Last Updated
-========================= =============== ================ ===================== =====================
- *.1.nflxso.net                        0               18   2020-04-11 15:35:01   2020-04-22 01:38:15
- *.128technology.com                   0                1   2020-04-12 15:11:09   2020-04-12 15:11:12
- *.adcolony.com                        0              199   2020-04-11 15:05:44   2020-04-22 13:15:27
- *.adobe.com                           0                6   2020-04-11 18:36:26   2020-04-20 20:09:57
+================== =============== ================ ===================== =====================
+ Application Name   Session Count   Ip Tuple Count   Date Discovered       Last Updated
+================== =============== ================ ===================== =====================
+ O365-Skype                     6                5   2021-04-14 09:20:09   2021-04-14 09:20:09
+ O365-Exchange                  5               16   2021-04-14 09:20:09   2021-04-14 09:20:09
+ O365-Common                    0               25   2021-04-14 09:20:09   2021-04-14 09:20:09
+ O365-SharePoint                0                5   2021-04-14 09:20:09   2021-04-14 09:20:09
+ dropbox                        0               65   2021-04-14 13:37:49   2021-04-14 13:37:49
+ gmail                          0               17   2021-04-14 13:58:09   2021-04-14 13:58:09
+ google-drive                   0               27   2021-04-14 13:58:09   2021-04-14 13:58:09
 ```
+
+The various columns are as follows:
+
+| Column | Description                      | 
+| ------ | ---------------------------------|
+| Application Name | The name of the identified application. |
+| Session Count | The number of active sessions for the application. | 
+| Ip Tuple Count | The number of addresses and ports associated with the application. |
+| Date Discovered | The time at which the router first learned this application. Restarting the router or deleting the application will reset the time.  |
+| Last Updated | The time at which the router updated the entries for the application. The time is updated when the ip tuple information associated with the application has changed.  |
 
 #### Version History
 
