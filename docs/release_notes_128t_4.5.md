@@ -3,6 +3,57 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
+## Release 4.5.8
+
+### New Features
+
+- **I95-39544 Non-persistent template fields:** You now have the option to create non-persistent template input parameters, allowing the template to create unique instances per instantiation.
+------
+- **I95-39580 Reference Candidate Config Values in a Template:** Using a custom tag in Advanced Mode allows you to reference a value from a candidate configuration. For details about using this tag in Advanced Mode, refer to [Pulling Values from the Candidate Configuration](config_templates.md).
+
+### Resolved Issues
+
+- **I95-38758 Validate management-over-forwarding and default-route:** Not supplying a default-route prevents the ifcfg file from being generated. A validation check has been put in place to verify that the default route is set to true. 
+------
+- **I95-38525 BGP over SVR does not fail active sessions between SVR peers:** Existing sessions do not move to the next peer for bgp over SVR based transport. With this change, existing sessions will move to the new peer.
+------
+- **I95-39602 Show peer path status under `show peers hostnames`:** Replaced redundant Router column with `Node`, and added a `Status` column.
+------
+- **I95-39632 Toggling traffic engineering causes power saver to fail:** Resolved an issue that causes power saver to fail on muti-core systems when traffic engineering is toggled. 
+------
+- **I95-39698 Alibaba Cloud with enhanced networking sometimes doesn't work:** Resolved an issue between Virtio and RSS causing an unbalanced queue.
+------
+- **I95-39788 Inconsistent services after modifying certain service configs:** The system's underlying service configurations may have been in an inconsistent state when modifying a dhcp-relay or template application-type service.
+------
+- **I95-39798 Version update check may get stuck on GPG key access when using an access token:** The software upgrade version check has been modified to support access tokens. 
+------
+- **I95-39826 Management over forwarding pppoe generates v6 services or service-routes:** Resolved an issue where pppoe config generation is treated as a possible ipv6 address family interface.
+------
+- **I95-39855 `show stats` usage missing units:** With this change the `show stats` usage help text includes units
+------
+- **I95-39890 Unable to establish GRE session:** Resolved an issue with occasional fastlane lockups when using the Retransmission-with-DPI feature.
+
+### Caveats
+
+- **I95-39985 Template save error:** When creating persistent fields on an **existing** template in Advanced Mode, a validation error appears and the template changes are not saved. 
+_**Workaround:**_ There are two workarounds. 
+
+You can either; use GraphQL to set `persistInput` on each template to `true` to resolve the issue for that template. 
+
+OR
+
+1. Copy the contents of the variables pane to your clipboard.
+2. Open the Settings dropdown.
+3. Click “Persist Input” to disable the option.
+4. Click “Proceed” in the warning modal.
+5. Open the Settings menu and click “Persist Input” again to turn it back on.
+6. Paste your variables back into the variables pane and save the template. This template should no longer encounter the issue.
+
+### Deprecated Features
+
+- **I95-39881 GraphQL User Mutations have been Deprecated:** The "createUser", "modifyUser", and "deleteUser" GraphQL mutations are now deprecated. Please use their REST equivalents which are listed in the GraphQL "deprecationReason" for those mutations. 
+
+
 ## Release 4.5.7
 
 ### New Features and Improvements
@@ -251,7 +302,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37680 nodeMonitor process may fault on shutdown of 128T.** `nodeMonitor` no longer faults on 128T shutdown.
 ------
-- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.** The `delete sessions` command no longer creates a race condition. 
+- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.** The `delete sessions` command no longer creates a race condition. (Interim IPFIX record generation or HA session synchronization could also cause trigger the same fault, and is also addressed by this fix.)
 ------
 - **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
 ------
@@ -609,7 +660,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
   _**Symptom:**_ This error is seen during the upgrade of an HA conductor pair to version 4.4.0 or later. An upgrade of a single standalone conductor node will not see this error. The following error will be reported by the node running software version earlier than 4.4.0:
   ```
-"128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
+  "128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
   ```
   This error can be viewed by running the following PCLI command from either node: `show assets <asset-id>`. Where asset-id is the asset-id of the node running pre 4.4.0 version that has not yet been upgraded.
 
