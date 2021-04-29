@@ -201,7 +201,7 @@ Scripts are placed on the router's filesystem at `/etc/128technology/application
 Beginning with the 5.2 release, `systemd` may be used to manage the execution of application identification modules. JSON output is posted to highway via a REST API instead of being written to disk.
 
 Using this approach, modules are registered by creating a file at `/etc/128technology/application-modules/services/<module-name>`. This file lists the systemd units of the module and specifies if and how 128T should interact with them.
-- `reload-service`: When the highway process starts, reload the systemd unit. This is a signal to POST the JSON to highway again as module data is not saved through restarts or crashes.
+- `reload-service`: When the highway process starts, reload the systemd unit. This is a signal to POST the JSON to highway again as module data is not saved through process restarts.
 - `stop-on-shutdown`: Stop the systemd unit when 128T is shutting down.
 
 Modules must be registered in order for 128T to accept the POST of JSON module data.
