@@ -34,11 +34,19 @@ sidebar_label: '5.1'
 ------
 - **I95-39538 Periodic disruptions in service:** Resolved an issue in the HttpParser for application identification when parsing malformed HTTP traffic.
 ------
+- **I95-39555 Active interface out-of-sync with the leadership status for the underlying device interface:** Resolved an issue when both nodes of an HA router start 128T at a similar time, the active node for a redundant interface is not determined correctly, resulting in a failure to forward traffic.
+------
+- **I95-39558 After setting a custom favicon, clearing the icon does not reset to the default:** This issue has been resolved. 
+------
+- **I95-39568 Error when running "compare config running candidate" after adding second domain-server:** Resolved an issue where a user-ordered list was not being parsed properly.
+------
 - **I95-39587 Duplicate entries in show commands on PCLI when using bulk-edit:** Resolved an issue with the use of bulk-edit in the PCLI.
 ------
 - **I95-39602 Show peer path status under `show peers hostnames`:** Replaced redundant Router column with `Node`, and added a `Status` column.
 ------
 - **I95-39632 Toggling traffic engineering causes power saver to fail:** Resolved an issue that causes power saver to fail on muti-core systems when traffic engineering is toggled. 
+------
+- **I95-39639 Packet transmit fails when Traffic Engineering is enabled with multiple worker cores.** This issue has been resolved.
 ------
 - **I95-39641 `show device-interface extended-stats` command reported unavailable when the virtio device does not expose extended stats:** Resolved an issue with the show device-interface extended-statistics/registers command.
 ------
@@ -52,7 +60,11 @@ sidebar_label: '5.1'
 ------
 - **I95-39764 Per Adjacency Traffic Engineering Crashing For Multiple Paths on Configuration:** Resolved an issue when receiving adjacencies with out of order path-indexes. 
 ------
+- **I05-39780 Hugepage tool incorrectly calculates hugepages based on Tenant table:** Revised the scaling of the Hugepage tool. 
+------
 - **I95-39782 The aggregate stats pull from highway logs provides more detail than necessary:** Reduced the unnecessary detail. 
+------
+- **I95-39792 Import ISO command results in terminal launch not working:** Resolved a conflict between an ISO upgrade and invoking a terminal window at the same time. 
 ------
 - **I95-39796 Conductor and Authority missing from GUI on first login:** Added multiple retries to retrieve system data upon first login. 
 ------
@@ -65,6 +77,13 @@ sidebar_label: '5.1'
 - **I95-39855 `show stats` and APIs do not include units for each metric:** Units and short descriptions have been added for clarity. 
 ------
 - **I95-39859 Conductor unable to display some PCLI commands after upgrade to 5.1:** This issue has been resolved.
+------
+- **I95-39936 http response aspaginatedjson
+------
+- **I95-39985 Template save error:** Resolved an issue where creating persistent fields on an **existing** template in Advanced Mode generated a validation error and the template changes were not saved. 
+------
+- **I95-39992 AuthClient request queue fills up with lots of concurrent requests:** Resolved an issue with using authenticated REST APIs when under heavy load. 
+
 
 ## Release 5.1.1
 
