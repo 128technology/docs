@@ -78,12 +78,11 @@ sidebar_label: '5.1'
 ------
 - **I95-39859 Conductor unable to display some PCLI commands after upgrade to 5.1:** This issue has been resolved.
 ------
-- **I95-39936 http response aspaginatedjson
+- **I95-39936 Pagination for the output of `show fib` does not work correctly:** Pagination headers are now handled correctly, and pagination is supported in the `show fib` output. 
 ------
 - **I95-39985 Template save error:** Resolved an issue where creating persistent fields on an **existing** template in Advanced Mode generated a validation error and the template changes were not saved. 
 ------
-- **I95-39992 AuthClient request queue fills up with lots of concurrent requests:** Resolved an issue with using authenticated REST APIs when under heavy load. 
-
+- **I95-39992 AuthClient request queue fills up with concurrent requests:** Resolved an issue with using authenticated REST APIs when under heavy load. 
 
 ## Release 5.1.1
 
