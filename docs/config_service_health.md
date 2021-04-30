@@ -74,30 +74,34 @@ In Enforcement Mode, you define a traffic profile using the parameters from Dete
 
 ### Configure Enforcement Mode
 
-It is easiest to use the service routes configured in Detection Mode and simply enable Reachability Detection Enforcement. 
+It is easiest to use the Service Routes configured in Detection Mode and simply enable Reachability Detection Enforcement. 
 
-1. Under Authority, select a router.
+1. Under Authority, select a Router.
 2. Scroll down to Service Routes.
 3. Select the Service Route.
-4. Under Reachability Detection Settings, Enable Reachability Detection Enforcement.
-5. Define the Enforcement detection window (time). The detection-window (default 5s) determines how often the stats will be aggregated in terms of min, max and median. 
-6. Define an Enforcement Hold-down time. This determines how long the path stays down upon determining it is unusable. 
-7. If you have previously configured a reachability profile, select the appropriate profile.
-8. Click Validate, and then Commit.  
+4. Under Reachability Detection Settings, enable Reachability Detection Enforcement.
+5. Define the Enforcement Detection Window (time). The `detection-window` (default 5s) determines how often the stats will be aggregated in terms of min, max, and median. 
+6. Define an Enforcement Hold-Down time. This determines how long the path stays down upon determining it is unusable. 
+7. If you have previously configured a Reachability Profile, select the appropriate profile. If there is no existing Reachability Detection Profile, use the procedure below.
+8. Scroll to Reachability Detection Enforcement Probes and click ADD.
+9. Enter a name for the probe and click SAVE.
+10. In the Probe Type window, select a probe type from the drop-down. The default probe type is an ICMP probe. 
+11. Click Validate, and then Commit.  
 
-If you have not created a reachability detection profile, use this procedure to do so. 
+#### Creating a Reachability Detection Profile 
 
 1. Go to the Router level (up one level).
 2. Scroll down to Reachability Profile, and click ADD.
 3. Under Protocol, click ADD.
-4. Select the protocol type from the drop-down(tcp, tls, udp) and click SAVE.
-under the protocol class label, click ADD.
-5. Select a traffic class ID and click SAVE. The traffic-class configuration allows you to configure different treatments for different classes of traffic for the same service.  
-6. In the `time-to-establishment.label` field, set enabled to true and define the max and mean times as necessary. The time-to-establishment allows you to configure a max and a mean time for a session to be established as defined for the protocol. 
-7. Return to the Router level.
-8. Select the Service Route.
-9. Scroll down to Reachability Detection settings, and in the Reachability Detection Enforcement Profile, select the Reachability Profile you just created. 
-10. Click Validate, and then Commit.   
+4. Select the Protocol type from the drop-down (tcp, tls, udp) and click SAVE.
+5. Under the protocol class label, click ADD.
+6. Select a traffic class ID and click SAVE. The traffic-class configuration allows you to configure different treatments for different classes of traffic for the same service.  
+7. In the Acceptable Error Threshold field, set the threshold.
+8. In the `time-to-establishment.label` field, set Enabled to true. Define the max and mean times as necessary. This configures the time allowed to establish a session for the protocol. 
+9. Return to the Router level.
+10. Select the Service Route where the Enforcement settings will be in affect.
+11. Scroll down to Reachability Detection settings. In the Reachability Detection Enforcement Profile select the Reachability Profile you just created. 
+12. Click Validate, and then Commit.   
 
 The following is an example Enforcement configuration with a Reachability Profile entered from the PCLI.
 
@@ -160,6 +164,12 @@ authority
                 hold-down             60
                 reachability-profile  profile-1
                 probe-type            always
+                    probe               foo
+                        name                foo
+                        enabled             true
+                        icmp-probe-profile  icmp-profile-0
+                    exit
+                exit
             exit
         exit
     exit
@@ -197,7 +207,7 @@ router > traffic-profile
    	     enabled	false
 ```
 - `traffic-profile` allows the user to configure enforcement parameters for tcp, udp and tls. 
--  `traffic-class` allows the user to configure different treatments for different classes of traffic for the same service. The same default values (as described below) apply to all the classes. 
+- `traffic-class` allows the user to configure different treatments for different classes of traffic for the same service. The same default values (as described below) apply to all the classes. 
 - `acceptable-error-threshold` (expressed in percentage) is the amount of errors acceptable on the path before taking it offline. For TCP, this includes the session closed before establishment, any ICMP error that constitutes destination unreachable, and session timeout before establishment. For UDP, this includes the destination unreachable class of ICMP errors.
 - `time-to-establishment` allows the user to configure a max and a mean time for a session to be established as defined for the protocol within the configured detection-window. The following table describes the default values.
 
@@ -215,7 +225,7 @@ Once a profile is configured, the above defaults are enforced. To turn off the s
 
 ### Health Probes
 
-An extensibility API has been provided to perform layer 3 to layer 7 health checks for the service. This provides an ICMP probe as described below, TCP and TLS probes to inspect the reachability of the server, and a set of application specific probes (HTTP, TLS, SIP, etc.) to determine the health of the application server. The two main aspects are:
+An ICMP probe, as described below is built into the system, providing the health probe method. Other application specific probes (HTTP, TLS, SIP, etc.) are made possible with external plugins utilizing the REST API added for this feature. The two main aspects are:
 
 - Load-balancer API to declare select paths as down
 - Mechanism to report activity or inactivity over a path to an external application
@@ -224,12 +234,13 @@ An extensibility API has been provided to perform layer 3 to layer 7 health chec
 
 The reachability manager provides a REST API for setting, getting, and deleting probe state. Note that the state is cleared when the probe-type becomes disabled. 
 
-If any probe sets state to down for the service-path, the path is marked as down. The path may still periodically become up to allow organic traffic for one interval as it exits the hold-down period. Each service-path has a pointer back to the manager state. This can be seen through the `show service-path` command.
+If any probe sets state to down for the service-path, the path is marked as down. The path may still periodically become up to allow organic traffic for one interval as it exits the hold-down period. This can be seen through the `show service-path` command.
 
 For the REST API, either (service-route + service) or (network-interface) must be given. Network-interface may map to more than one service-route. One service-route may map to multiple service-paths.
 
-### ICMP Probe Profile
-The default probe provided is an ICMP based health probe to detect the liveliness of the remote endpoint. Below is a sample config:
+### ICMP Probe
+
+The default probe is an ICMP based health probe to detect the liveliness of the remote endpoint. Below is a sample config:
 
 The probe-name for the REST API is `128T-icmp-probe`.
 
@@ -363,26 +374,3 @@ show service-path
                TestProbe1: Up
                TestProbe2: Down
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

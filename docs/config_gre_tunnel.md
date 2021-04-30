@@ -165,8 +165,8 @@ The following tunnel encapsulation statistics provide details on encapsulation a
 
 - [`stats packet-processing action success tunnel gre decapsulate`](cli_stats_reference.md/#show-stats-packet-processing-action-success-tunnel-gre-decapsulate)
 
-- [`stats packet-processing action failure tunnel gre decapsulate`](cli_stats_reference.md/#show-stats-packet-processing-action-failure-tunnel-gre-decapsulate): This will be seen in cases where the 128T is receiving malformed packets.
+- [`stats packet-processing action failure tunnel gre decapsulate`](cli_stats_reference.md/#show-stats-packet-processing-action-failure-tunnel-gre-decapsulate): The decapsulate failure indicates that the packets entering from the tunnel either were not tunneled properly, or are otherwise malformed.
 
-- [`stats packet-processing action failure tunnel invalid-entry`](cli_stats_reference.md/#show-stats-packet-processing-action-failure-tunnel-invalid-entry): Only seen when a session is trying to send into a tunnel that no longer exists.  
+- [`stats packet-processing action failure tunnel invalid-entry`](cli_stats_reference.md/#show-stats-packet-processing-action-failure-tunnel-invalid-entry): The `invalid-entry` stat should be 0; it indicates a system error with propagating the tunnel configuration.
 
 
