@@ -5,16 +5,9 @@ sidebar_label: '5.1'
 
 ## Release 5.1.2
 
-### New Features and Improvements
-
-- **I95-39544 Non-persistent template fields:** You now have the option to create non-persistent template input parameters, allowing the template to create unique instances per instantiation.
-------
-- **I95-39580 Reference Candidate Config Values in a Template:** Using a custom tag in Advanced Mode allows you to reference a value from a candidate configuration. For details about using this tag in Advanced Mode, refer to [Pulling Values from the Candidate Configuration](config_templates.md).
-
 ### Resolved Issues
+
 - **I95-29583 Default Language Setting:** Changes to the default language are now saved per user, not per system.
-------
-- **I95-38758 Validate management-over-forwarding and default-route:** Not supplying a default-route prevents the ifcfg file from being generated. A validation check has been put in place to verify that the default route is set to true. 
 ------
 - **I95-39245 Show detected domain names on the Applications Seen page:** Domain names are now displayed on the Applications Seen page in the GUI.
 ------
@@ -42,17 +35,11 @@ sidebar_label: '5.1'
 ------
 - **I95-39587 Duplicate entries in show commands on PCLI when using bulk-edit:** Resolved an issue with the use of bulk-edit in the PCLI.
 ------
-- **I95-39602 Show peer path status under `show peers hostnames`:** Replaced redundant Router column with `Node`, and added a `Status` column.
-------
-- **I95-39632 Toggling traffic engineering causes power saver to fail:** Resolved an issue that causes power saver to fail on muti-core systems when traffic engineering is toggled. 
-------
 - **I95-39639 Packet transmit fails when Traffic Engineering is enabled with multiple worker cores.** This issue has been resolved.
 ------
 - **I95-39641 `show device-interface extended-stats` command reported unavailable when the virtio device does not expose extended stats:** Resolved an issue with the show device-interface extended-statistics/registers command.
 ------
 - **I95-39695 Delete Session feature not working:** Resolved an issue with the Session Details dialog.
-------
-- **I95-39698 Alibaba Cloud with enhanced networking sometimes doesn't work:** Resolved an issue between Virtio and RSS causing an unbalanced queue.
 ------
 - **I95-39701 Remote router login ignores 'User' selection:** Resolved an issue where a parameter name mismatch caused the current user to be ignored.
 ------
@@ -68,13 +55,7 @@ sidebar_label: '5.1'
 ------
 - **I95-39796 Conductor and Authority missing from GUI on first login:** Added multiple retries to retrieve system data upon first login. 
 ------
-- **I95-39798 Version update check may get stuck on GPG key access when using an access token:** The software upgrade version check has been modified to support access tokens. 
-------
 - **I95-39818 Conductor logging out when selecting a router mid-upgrade:** The conductor no longer logs out when it runs into the error. 
-------
-- **I95-39826 Management over forwarding pppoe generates v6 services or service-routes:** Resolved an issue where pppoe config generation is treated as a possible ipv6 address family interface.
-------
-- **I95-39855 `show stats` and APIs do not include units for each metric:** Units and short descriptions have been added for clarity. 
 ------
 - **I95-39859 Conductor unable to display some PCLI commands after upgrade to 5.1:** This issue has been resolved.
 ------
