@@ -6,19 +6,18 @@ sidebar_label: Native GRE Tunnels
 Generic Routing Encapsulation (GRE) is a lightweight tunneling protocol that encapsulates L3 traffic in an L3 and GRE header. The 128T Networking Platform now supports both a GRE plugin as well as native GRE tunnels. 
 
 :::note
-This is not an SVR feature. No GRE tunnels will be created to send packets between peered 128T routers. However, a packet coming from SVR can egress into a GRE tunnel, and vice versa.
+This is not an SVR feature. GRE tunnels are not created to send packets between peered 128T routers. However, a packet coming from SVR can egress into a GRE tunnel, and vice versa.
 :::
 
 ## Sending Packets
 
-When a GRE tunnel is configured, sessions are set up to and from the tunnel. The first packet arriving at the 128T is sent to the service area. If the GRE tunnel is configured as a possible path for the service, the load balancer has the option of choosing the tunnel as the packet’s next hop.
+When a GRE tunnel is configured, sessions are set up to and from the endpoints. With a GRE tunnel configured as a possible path for the service, the load balancer has the option of choosing the tunnel as the packet’s next hop.
 
-When the tunnel is selcted as the next hop the session sets up normally, and a `tunnel_add` action is populated on the forward flow. This action adds the appropriate headers for the tunnel. When a packet reaches the end of the action chain, it is properly encapsulated and ready to go into the tunnel.
+When the tunnel is selcted as the next hop the session sets up normally, and the the appropriate headers are added for the tunnel. 
 
 ## Receiving Packets
 
-When a GRE tunnel is configured, a static flow is created matching the IP addresses of the GRE tunnel. This static flow receives all traffic coming from that tunnel.
-The `tunnel_remove` action is added to strip off the tunnel headers and forward the packet to the normal lookup path. If a session exists, the packet is processed by the corresponding flow. If the session for this packet does not yet exist, it is sent to the service area where a session is created.
+On the receiving end, a static flow is created to receive all traffic coming from that tunnel. When a GRE encapsulated packet arrives, the tunnel headers are removed and the packet is forwarded to the normal lookup path. If a session exists, the packet is processed by the corresponding flow. If the session for this packet does not yet exist, a session is created.
 
 ## Configuration
 
@@ -125,23 +124,6 @@ Please note that in this configuration, the `base` interface and the gre-tunnel 
                     source
                         network-interface
                     exit
-                exit
-            exit
-        exit
-
-        device-interface  HOST
-            name               HOST
-            type               host
-
-            network-interface  host
-                name       host
-                global-id  4
-                tenant     red
- 
-                address    172.16.1.101
-                    ip-address     172.16.1.101
-                    prefix-length  24
-                    gateway        172.16.1.201
                 exit
             exit
         exit
