@@ -77,6 +77,7 @@ module.exports = {
           "config_EthoSVR",
           "config_service_health",
           "config_gre_tunnel",
+          "config_in-memory_metrics",
 
           "config_ha",
           "config_dual_router_ha",
