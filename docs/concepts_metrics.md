@@ -15,7 +15,7 @@ It is not recommended to change the sample-period.  Increasing the value reduces
 ### In Memory Metrics
 By default, not all metrics are persisted to disk and subject to downsampling. When executing `show stats` commands utilizing the `since` argument, the command will report that the requested data will be unavailable.
 
-However, in-memory metrics can be configured so that only metrics matching a filter are persisted (for example, only those for a particular peer path). This is useful when specific metrics are used for evaluation. A metric can be persisted for a specific retention time; 1 hour, 1 day, or 6 months. 
+In-memory metrics can be configured so that only metrics matching a filter are persisted. For more information refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md).
 
 Care should be taken to avoid overloading the system with the metrics. Many metrics are currently in-memory because of the heavy load they introduce to the system if they were all persisted. 
 

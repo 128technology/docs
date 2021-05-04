@@ -22,7 +22,7 @@ When using filters, the parameters and values must be relevant for all metrics i
 Example of Simple Grouping with Filtering:
 
 ```
-Config
+config
     authority
         metrics-profile  device-interface
             name    device-interface
@@ -64,7 +64,7 @@ Retention values are not configurable. The list below indicates the configuratio
 - intermediate
 - long
 
-Specifying an in-memory value is useful to make an otherwise persisted metric in-memory only.  
+The current implementation of the `in-memory` retention value is limited.  
 
 #### Example Profile: Native Output 
 
@@ -96,12 +96,8 @@ The following example provides a sample configuration that makes use of several 
 - Multiple metrics in the same profile
 - Filtered profile (peer-metrics)
 - Unfiltered profile (events)
-- Multiple profiles for the same router (RTR_EAST_COMBO)
-- Different retention targets for different profiles (RTR_EAST_COMBO)
-
-:::note
-When configuring multiple profiles on a single router, the retention values for each profile must increase in both duration and interval from short to long. When a retention is enabled, all preceding retention values must also be enabled.
-:::
+- Multiple profiles for the same router (MyRouter)
+- Different retention targets for different profiles (MyRouter)
 
 ```
 config
