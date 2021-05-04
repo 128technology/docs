@@ -3,7 +3,19 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
+:::info
+Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
+
+If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
+
+Alternatively, refer to the [List of Releases](about_releases.md) page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+:::
+
 ## Release 4.5.8
+
+**Release Date:** April 28, 2021 
+
+**Includes changes from:** [Version 4.5.7](release_notes_128t_4.5.md#release-457) and [Version 4.5.6](release_notes_128t_4.5.md#release-456).
 
 ### New Features
 
@@ -53,8 +65,11 @@ OR
 
 - **I95-39881 GraphQL User Mutations have been Deprecated:** The "createUser", "modifyUser", and "deleteUser" GraphQL mutations are now deprecated. Please use their REST equivalents which are listed in the GraphQL "deprecationReason" for those mutations. 
 
-
 ## Release 4.5.7
+
+**Release Date:** April 12, 2021 
+
+**Includes changes from:** Only includes support for Installer 3.0.
 
 ### New Features and Improvements
 

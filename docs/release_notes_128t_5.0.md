@@ -3,7 +3,18 @@ title: 128T 5.0 Release Notes
 sidebar_label: '5.0'
 ---
 
+:::info
+Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
+
+If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
+
+Alternatively, refer to the [List of Releases](about_releases.md) page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+:::
+
 ## Release 5.0.1
+**Release Date:** April 12, 2021 
+
+**Includes changes from:** Only includes support for Installer 3.0.
 
 ### New Features and Improvements
 
@@ -20,6 +31,9 @@ sidebar_label: '5.0'
 - **I95-39798 Token Update and Available Version Update stuck on GPG key access:** In rare occasions the GPG key access may cause the token and version updates to hang, and block access to the software. To prevent this issue, log out of all open web and PCLI sessions before applying the token. 
 
 ## Release 5.0.0
+**Release Date:** December 18, 2020
+
+**Includes changes from:** [Version 4.5.4 December 16, 2020](release_notes_128t_4.5.md#release-454)  
 
 :::warning
 SSH Root Login is not permitted. 
