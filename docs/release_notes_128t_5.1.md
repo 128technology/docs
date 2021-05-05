@@ -3,7 +3,18 @@ title: 128T 5.1 Release Notes
 sidebar_label: '5.1'
 ---
 
+:::info
+Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
+
+If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
+
+Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+:::
+
 ## Release 5.1.2
+**Release Date:** April 30, 2021 
+
+**Includes changes from:** [Version 4.5.8 April 28, 2021](release_notes_128t_4.5.md#release-458).
 
 ### Resolved Issues
 
@@ -66,6 +77,7 @@ sidebar_label: '5.1'
 - **I95-39992 AuthClient request queue fills up with concurrent requests:** Resolved an issue with using authenticated REST APIs when under heavy load. 
 
 ## Release 5.1.1
+**Release Date:** April 12, 2021
 
 ### New Features and Improvements
 
@@ -82,6 +94,10 @@ sidebar_label: '5.1'
 - **I95-39798 Token Update and Available Version Update stuck on GPG key access:** In rare occasions the GPG key access may cause the token and version updates to hang, and block access to the software. To prevent this issue, log out of all open web and PCLI sessions before applying the token. 
 
 ## Release 5.1.0
+
+**Release Date:** April 12, 2021
+
+**Includes changes from:** [Version 4.5.5 February 10, 2021](release_notes_128t_4.5.md#release-455)
 
 ### New Features and Improvements 
 
