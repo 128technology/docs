@@ -15,7 +15,7 @@ sidebar_label: 4.5
 
 - **I95-38758 Validate management-over-forwarding and default-route:** Not supplying a default-route prevents the ifcfg file from being generated. A validation check has been put in place to verify that the default route is set to true. 
 ------
-- **I95-38525 BGP over SVR does not fail active sessions between SVR peers:** Existing sessions do not move to the next peer for bgp over SVR based transport. With this change, existing sessions will move to the new peer.
+- **I95-39525 BGP over SVR does not fail active sessions between SVR peers:** Existing sessions do not move to the next peer for bgp over SVR based transport. With this change, existing sessions will move to the new peer.
 ------
 - **I95-39602 Show peer path status under `show peers hostnames`:** Replaced redundant Router column with `Node`, and added a `Status` column.
 ------
