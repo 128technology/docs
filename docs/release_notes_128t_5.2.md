@@ -17,11 +17,11 @@ sidebar_label: '5.2'
 ------
 - **I95-36657 Improve Packet throughput of KNI-based Interfaces:** KNI buffer performance has been enhanced to handle large bursts of traffic. 
 ------
-- **I95-37296 Native 128T Support for GRE:** Native support (non-plugin) is availble for GRE Tunneling, providing better operformance. For more information, see [Native GRE Tunnels](config_gre_tunnel.md).
+- **I95-37296 Native 128T Support for GRE:** Native support (non-plugin) is availble for GRE Tunneling, providing better performance. For more information, see [Native GRE Tunnels](config_gre_tunnel.md).
 ------
 - **I95-37459 Show Commands for Services:** The [show fib](cli_reference.md#show-fib) and [show fib lookup](cli_reference.md#show-fib-lookup)commands have been enhanced to provide more granular path-related debugging.
 ------
-- **I95-37510 [AppID Modules](concepts_appid.md#appid-using-modules) can be run as systemd unit:** The AppId manager now can handle the module execution as systemd unit instead of subprocess, in addition to the existing script-based method. Use Rest APIs to propagate module registrations and results with AppId manager. 
+- **I95-37510 [AppID Modules](concepts_appid.md#appid-using-modules) can be run as systemd unit:** The AppId manager now can handle the module execution as systemd unit instead of subprocess, in addition to the existing script-based method. Use REST APIs to propagate module registrations and results with AppId manager. 
 ------
 - **I95-38081 Automatic generation of MSS Value:** The [network-interface configuration object](config_reference_guide.md#network-interface) now has an automatic option for the enforced-mss value. This automatically calculates the MSS of the network interface from the interface session MTU.
 ------
@@ -45,7 +45,7 @@ sidebar_label: '5.2'
 ------
 - **I95-37101 PCLI Updates for `show stats since` command:** The PCLI notes inconsistencies in data between current values and historical ones to indicate when the data may not be accurate.
 ------
-- **I95-38510 Security mismatch on HA nodes dropping internode traffic:**
+- **I95-38510 Security mismatch on HA nodes dropping internode traffic:**  Resolved an issue where dynamically reconfiguring inter-node-security may cause all internode traffic to be dropped.
 ------
 - **I95-39298 STEP Waypoint NAT Support:** When a resolved external NAT address is present in the adjacency configuration, it is used when advertising the peer path in the STEP router document.
 ------

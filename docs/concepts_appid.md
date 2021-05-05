@@ -194,11 +194,11 @@ exit
 
 #### Script-Based Module Setup
 
-Scripts are placed on the router's filesystem at `/etc/128technology/application-modules/`. These scripts produce a JSON output stored at `/var/run/128technology/application-modules/`, which in turn is consumed by the 128T router and installed as FIB entries.
+Scripts are placed on the router's filesystem at `/etc/128technology/application-modules/`. These scripts produce a JSON output stored at `/var/run/128technology/application-modules/`, which in turn is processed by the 128T router and installed as FIB entries.
 
 #### Systemd-Based Module Setup
 
-Beginning with the 5.2 release, `systemd` may be used to manage the execution of application identification modules. JSON output is posted to highway via a REST API instead of being written to disk.
+Beginning with the 5.2 release, `systemd` may be used to manage the execution of application identification modules. JSON output produced by the module is passed directly to the highway REST API instead of being written to disk.
 
 Using this approach, modules are registered by creating a file at `/etc/128technology/application-modules/services/<module-name>`. This file lists the systemd units of the module and specifies if and how 128T should interact with them.
 - `reload-service`: When the highway process starts, reload the systemd unit. This is a signal to POST the JSON to highway again as module data is not saved through process restarts.
@@ -221,6 +221,8 @@ In the following example, a systemd timer unit is used to periodically invoke th
     }
 ]
 ```
+
+For more information about using timers with the systemd service, refer to [ArchLinux systemd/Timers](https://wiki.archlinux.org/title/Systemd/Timers).
 
 #### Viewing Modules
 
