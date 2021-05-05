@@ -221,13 +221,6 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
   _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5
 ------
-- **I95-36404** highway process fails to start on Ubuntu distributions
-
-  _**Symptom:**_ 128T running in a container will fail to initialize when the container is running on Ubuntu distributions. The following can be seen within `highway.log`
-  ```
-  Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
-  ```
-------
 - **I95-36574** After a HA interface fail over, a session collision can occur between the recovered flow and an existing reverse flow. The recovered flow does not get setup properly and can cause the highway process to fault upon session expiry.
 
   _**Conditions:**_ Symmetrical services must be configured that match both forward and reverse flows

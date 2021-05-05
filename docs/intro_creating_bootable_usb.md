@@ -5,7 +5,7 @@ sidebar_label: Creating Bootable USB
 
 ## Introduction
 
-128 Technology distributes our software as a set of applications, an ISO, or a container. The ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as a 128T system. The goal of this guide is produce a bootable USB drive from a 128T ISO.
+128 Technology distributes our software as a set of applications or an ISO. The ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as a 128T system. The goal of this guide is produce a bootable USB drive from a 128T ISO.
 
 ## Bootable USB
 

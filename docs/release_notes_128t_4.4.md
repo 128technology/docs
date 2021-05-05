@@ -120,13 +120,6 @@ sidebar_label: 4.4
 
   _**Conditions:**_ Conductor version is on >= 4.5 and router version is < 4.5.
 ------
-- **I95-36404** Highway process fails to start on Ubuntu distribution.
-
-  _**Symptom:**_ 128T running in a container will fail to initialize when the container is running on Ubuntu distributions. The following can be seen within `highway.log`.
-  ```
-  Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
-  ```
-------
 - **I95-36536** Deleting a session-capture filter within the PCLI can cause the highway process to fault.
 ------
 - **I95-36537** Dynamic session-captures are now created with a default session count of 100 instead of unlimited.
@@ -289,8 +282,6 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 - **I95-27874** [Enable packet capture from CLI](ts_packet_capture.md)
 
 - **I95-28317** [PCLI ctrl+z shortcut](concepts_pcli.md#ctrlz)
-
-- **I95-28801** 128T Conductor docker container.
 
 - **I95-31073** salt-minion upgraded to 2019.2.0, increasing capability and stability.
 
