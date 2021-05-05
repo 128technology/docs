@@ -37,8 +37,6 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-38514 View User Activity:** Added a user activity table to the GUI on the Users page, as well as adding a new [PCLI command `show user activity`](cli_reference.md/#show-user-activity).
 ------
-- **I95-38968 128T as VNF on Juniper NFX:** Please refer to the [Deploying Branch SSR SD-WAN Router Using NFX Series NextGen uCPE](https://www.juniper.net/documentation/us/en/software/nce/ssr-nfx/topics/example/ssr-nfx-ucpe-example.html) document for configuration details. 
-------
 - **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md/#service-policy) has been enhanced to include values that allow the the router to select the best path based on the current latency/MoS values of the paths. 
 ------
 - **I95-39544 Non-persistent template fields:** You now have the option to create non-persistent template input parameters, allowing the template to create unique instances per instantiation.
