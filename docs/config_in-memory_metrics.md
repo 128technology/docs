@@ -1,9 +1,9 @@
 ---
 title: Configuring In-Memory Metrics
-sidebar_label: Configuring In-Memory Metrics
+sidebar_label: In-Memory Metrics
 ---
 
-Support for persisting 128T metrics from memory allows you historical access to longer term system measurements.
+Support for persisting in-memory 128T metrics allows you historical access to longer term system measurements. The feature also provides greater control over which combinations of those in-memory metrics should be persisted and for how long.
 
 ## Metrics Profile
 
@@ -23,28 +23,47 @@ Example of Simple Grouping with Filtering:
 
 ```
 config
+
     authority
-        metrics-profile  device-interface
-            name    device-interface
 
-            metric  /stats/aggregate-session/device-interface/bandwidth
-                id  /stats/aggregate-session/device-interface/bandwidth
+        metrics-profile  internet-reachability-metrics
+            name    internet-reachability-metrics
+
+            metric  /stats/highway/destination-reachability/icmp/time-to-establishment/max
+                id           /stats/highway/destination-reachability/icmp/time-to-establishment/max
+                description  "Max ICMP time to establish"
             exit
 
-            metric  /stats/aggregate-session/device-interface/session-count
-                id  /stats/aggregate-session/device-interface/session-count
+            metric  /stats/highway/destination-reachability/tcp/time-to-establishment/max
+                id           /stats/highway/destination-reachability/tcp/time-to-establishment/max
+                description  "Max TCP time to establish"
             exit
 
-            filter  device-interface
-                parameter  device-interface
-                value      intf1
+            metric  /stats/highway/destination-reachability/icmp/time-to-establishment/mean
+                id           /stats/highway/destination-reachability/icmp/time-to-establishment/mean
+                description  "Avg ICMP time to establish"
+            exit
+
+            metric  /stats/highway/destination-reachability/tcp/time-to-establishment/mean
+                id           /stats/highway/destination-reachability/tcp/time-to-establishment/mean
+                description  "Avg TCP time to establish"
+            exit
+
+            filter  service
+                parameter  service
+                value      internet
+            exit
+
+            filter  traffic-class
+                parameter  traffic-class
+                value      best-effort
             exit
         exit
     exit
 exit
 ```
 
-When the above profile is referenced by a router, the bandwidth and session count is persisted only for device-interface `intf1`. Assuming other profiles are not referenced, no other in-memory metrics are stored historically. These metrics are available as time-series from the GraphQL API or in the GUI.
+When the above profile is referenced by a router, the various reachability metrics are persisted but only for the `internet` service and `best-effort` traffic-class. These metrics are available as time-series from the GraphQL API or in the GUI.
 
 ### Profile References
 
@@ -68,7 +87,7 @@ The current implementation of the `in-memory` retention value is limited.
 
 #### Example Profile: Native Output 
 
-The following example configuration takes metrics specified in the `device-interface` profile and stores them through the **intermediate** retention time period.
+The following example configuration takes metrics specified in the `internet-reachability-metrics` profile and stores them through the **intermediate** retention time period.
 
 ```
 configure
@@ -77,8 +96,8 @@ configure
             name MyRouter
             system
                 metrics
-                    profile  device-interface
-                        name       device-interface
+                    profile  internet-reachability-metrics
+                        name       internet-reachability-metrics
                         retention  intermediate
                     exit
                 exit
