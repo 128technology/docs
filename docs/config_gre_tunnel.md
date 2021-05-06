@@ -45,22 +45,7 @@ Router and node configuration are provided for context:
 ```
 router    Router128
     name           Router128
-    location       usa
-  
-    system
-        log-level     trace
-
-        log-category  ATCS
-            name       ATCS
-            log-level  info
-        exit
-
-        log-category  DATA
-            name       DATA
-            log-level  info
-        exit
-    exit
-
+    location       usa  
     node           test1
         name              test1
         enabled           true
@@ -129,14 +114,11 @@ Please note that in this configuration, the `base` interface and the gre-tunnel 
         exit
     exit
 ```
-5. Create two service-routes for the tunnel, an outbound and inbound.
+5. Create two service-routes for the tunnel, an outbound and inbound. Be sure to specify the virtual tunnel interface as the outbound service-route interface.
 ```
     service-route  gre-outbound
         name          gre-outbound
         service-name  gre-outbound
-```
-6. Be sure to specify the virtual tunnel interface as the outbound service-route interface. 
-```
         next-hop      test1 tunnel
             node-name   test1
             interface   tunnel
