@@ -49,30 +49,10 @@ router    Router128
     node           test1
         name              test1
         enabled           true
-
-        device-interface  ETH
-            name               ETH
-            type               ethernet
-            pci-address        0000:00:04.0
-            capture-filter     len>0
-
-            network-interface  eth
-                name       eth
-                global-id  1
-                tenant     red
-
-                address    172.16.1.1
-                    ip-address     172.16.1.1
-                    prefix-length  24
-                    gateway        172.16.1.201
-                exit
-            exit
-        exit
-
 ```
 1. Create a device interface `GRE`.
 ```
-    device-interface  GRE
+        device-interface  GRE
             name               GRE
             type               ethernet
             pci-address        0000:00:06.0

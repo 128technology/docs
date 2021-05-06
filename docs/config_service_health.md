@@ -3,11 +3,11 @@ title: Service Health Learning and Fault Avoidance
 sidebar_label: Service Health Learning and Fault Avoidance
 ---
 
-When an interface is operationally down, or ARP requests to the next-hop gateway are not consistently returned, the path in question will be removed from routing decisions. In concert with dynamic routing protocols such as BGP, network software is able to determine the best path to the destination. However in some deployments, routers can be pre-configured with all potentially available transports, or lacking in dynamic routing protocols to determine if the path to the final destination is available on a given route. As a result, the path selected by the router might effectively black-hole traffic. 
+When an interface is operationally down, or ARP requests to the next-hop gateway are not consistently returned, the path in question will be removed from routing decisions. In concert with dynamic routing protocols such as BGP, network software is able to determine the best path to the destination. However in some deployments, routers can be pre-configured with all potentially available transports, or lacking in dynamic routing protocols to determine if the path to the final destination is available on a given route. As a result, the path selected by the router might effectively black-hole traffic.
 
 A unique advantage of Session Smart Routing is that it can understand patterns and characteristics of the underlying traffic passing through the system. These heuristics can then be leveraged on a number of different parameters in order to make more intelligent routing and load balancing decisions.
 
-- Per Service 
+- Per Service
 - Per Path
 - Per transport and application such as TCP, UDP, TLS etc
 - Per destination (/32 address only)
@@ -23,11 +23,11 @@ Service Health Learning can operate in a detection mode to gather the metrics li
 
 ## Detection Mode
 
-Detection Mode is configured on the service-route, and allows you to gather statistics based on the traffic profiles as described in [Session Establishment Metrics](concepts_metrics.md/#session-establishment-metrics). This mode defines the criteria the 128T router uses to apply load balancing decisions. Detection mode allows you to visualize the current network and understand the necessary configuration for enforcement. 
+Detection Mode is configured on the service-route, and allows you to gather statistics based on the traffic profiles as described in [Session Establishment Metrics](concepts_metrics.md/#session-establishment-metrics). This mode defines the criteria the 128T router uses to apply load balancing decisions. Detection mode allows you to visualize the current network and understand the necessary configuration for enforcement.
 
 ### Configure Detection Mode
 
-Detection Mode is configured per service-route, and gathers statistics using [Session Establishment Metrics](concepts_metrics.md/#session-establishment-metrics). 
+Detection Mode is configured per service-route, and gathers statistics using [Session Establishment Metrics](concepts_metrics.md/#session-establishment-metrics).
 
 To enable Detection Mode:
 
@@ -36,8 +36,7 @@ To enable Detection Mode:
 3. Click ADD.
 4. Enter a Name for the new Service Route, and click SAVE.
 5. Choose the Service Name.
-6. Choose the Service Route Type and the Peer (if necessary). 
-7. Under Reachablitily Detection Settings, click Enable.
+6. Choose the Service Route Type and the Peer (if necessary).
 
 The following is an example configuration from the PCLI.
 ```
@@ -65,43 +64,43 @@ authority
 exit
 ```
 
-Reachability Detection is now enabled and will gather service route information. Configure as many detection settings as necessary to gather information about the network connectivity. 
+Reachability Detection is now enabled and will gather service route information. Configure as many detection settings as necessary to gather information about the network connectivity.
 The next step is to set Enforcement Mode parameters for load balancing.
 
 ## Enforcement Mode
 
-In Enforcement Mode, you define a traffic profile using the parameters from Detection Mode to apply criteria that determines the health of a path and subsequent selection by the load balancer. 
+In Enforcement Mode, you define a traffic profile using the parameters from Detection Mode to apply criteria that determines the health of a path and subsequent selection by the load balancer.
 
 ### Configure Enforcement Mode
 
-It is easiest to use the Service Routes configured in Detection Mode and simply enable Reachability Detection Enforcement. 
+It is easiest to use the Service Routes configured in Detection Mode and simply enable Reachability Detection Enforcement.
 
 1. Under Authority, select a Router.
 2. Scroll down to Service Routes.
 3. Select the Service Route.
 4. Under Reachability Detection Settings, enable Reachability Detection Enforcement.
-5. Define the Enforcement Detection Window (time). The `detection-window` (default 5s) determines how often the stats will be aggregated in terms of min, max, and median. 
-6. Define an Enforcement Hold-Down time. This determines how long the path stays down upon determining it is unusable. 
+5. Define the Enforcement Detection Window (time). The `detection-window` (default 5s) determines how often the stats will be aggregated in terms of min, max, and median.
+6. Define an Enforcement Hold-Down time. This determines how long the path stays down upon determining it is unusable.
 7. If you have previously configured a Reachability Profile, select the appropriate profile. If there is no existing Reachability Detection Profile, use the procedure below.
 8. Scroll to Reachability Detection Enforcement Probes and click ADD.
 9. Enter a name for the probe and click SAVE.
-10. In the Probe Type window, select a probe type from the drop-down. The default probe type is an ICMP probe. 
-11. Click Validate, and then Commit.  
+10. In the Probe Type window, select a probe type from the drop-down. The default probe type is an ICMP probe.
+11. Click Validate, and then Commit.
 
-#### Creating a Reachability Detection Profile 
+#### Creating a Reachability Detection Profile
 
 1. Go to the Router level (up one level).
 2. Scroll down to Reachability Profile, and click ADD.
 3. Under Protocol, click ADD.
 4. Select the Protocol type from the drop-down (tcp, tls, udp) and click SAVE.
 5. Under the protocol class label, click ADD.
-6. Select a traffic class ID and click SAVE. The traffic-class configuration allows you to configure different treatments for different classes of traffic for the same service.  
+6. Select a traffic class ID and click SAVE. The traffic-class configuration allows you to configure different treatments for different classes of traffic for the same service.
 7. In the Acceptable Error Threshold field, set the threshold.
-8. In the `time-to-establishment.label` field, set Enabled to true. Define the max and mean times as necessary. This configures the time allowed to establish a session for the protocol. 
+8. In the `time-to-establishment.label` field, set Enabled to true. Define the max and mean times as necessary. This configures the time allowed to establish a session for the protocol.
 9. Return to the Router level.
 10. Select the Service Route where the Enforcement settings will be in affect.
-11. Scroll down to Reachability Detection settings. In the Reachability Detection Enforcement Profile select the Reachability Profile you just created. 
-12. Click Validate, and then Commit.   
+11. Scroll down to Reachability Detection settings. In the Reachability Detection Enforcement Profile select the Reachability Profile you just created.
+12. Click Validate, and then Commit.
 
 The following is an example Enforcement configuration with a Reachability Profile entered from the PCLI.
 
@@ -178,7 +177,7 @@ exit
 
 ### Traffic Profile
 
-When a traffic profile is configured, it allows for the enforcement of path characteristics. 
+When a traffic profile is configured, it allows for the enforcement of path characteristics.
 ```
 router > traffic-profile
 	name	profile1
@@ -207,7 +206,7 @@ router > traffic-profile
    	     enabled	false
 ```
 - `traffic-profile` allows the user to configure enforcement parameters for tcp, udp and tls. 
-- `traffic-class` allows the user to configure different treatments for different classes of traffic for the same service. The same default values (as described below) apply to all the classes. 
+- `traffic-class` allows the user to configure different treatments for different classes of traffic for the same service. The same default values (as described below) apply to all the classes.
 - `acceptable-error-threshold` (expressed in percentage) is the amount of errors acceptable on the path before taking it offline. For TCP, this includes the session closed before establishment, any ICMP error that constitutes destination unreachable, and session timeout before establishment. For UDP, this includes the destination unreachable class of ICMP errors.
 - `time-to-establishment` allows the user to configure a max and a mean time for a session to be established as defined for the protocol within the configured detection-window. The following table describes the default values.
 
@@ -221,7 +220,7 @@ router > traffic-profile
 | - max | milliseconds | 500 ms | 0 ms |
 | - mean | milliseconds | 250 ms | 0 ms |
 
-Once a profile is configured, the above defaults are enforced. To turn off the specific enforcement, configure an appropriate value as listed above. 
+Once a profile is configured, the above defaults are enforced. To turn off the specific enforcement, configure an appropriate value as listed above.
 
 ### Health Probes
 
@@ -232,7 +231,7 @@ An ICMP probe, as described below is built into the system, providing the health
 
 #### Health Probes REST API
 
-The reachability manager provides a REST API for setting, getting, and deleting probe state. Note that the state is cleared when the probe-type becomes disabled. 
+The reachability manager provides a REST API for setting, getting, and deleting probe state. Note that the state is cleared when the probe-type becomes disabled.
 
 If any probe sets state to down for the service-path, the path is marked as down. The path may still periodically become up to allow organic traffic for one interval as it exits the hold-down period. This can be seen through the `show service-path` command.
 
@@ -278,13 +277,13 @@ The following table describes the configuration values above:
 
 If any of the addresses listed in the profile do not meet the SLA requirements, all service-routes referencing this profile are marked as down.
 
-Stats are available for number of failed-to-send, response-timeout, and ping success in total, and for ping exceeded-by-max-loss, exceeded-by-max-latency, and exceeded-by-mean-latency. 
+Stats are available for number of failed-to-send, response-timeout, and ping success in total, and for ping exceeded-by-max-loss, exceeded-by-max-latency, and exceeded-by-mean-latency.
 
 Ping state will be detected for each unique combination of probe-profile, service-name, and tenant.
 
-If an ICMP probe fails to send requests, the PCLI service-ping command, highway, and service-area logs can be used to debug. If `service-ping service-name <service-name> tenant <tenant> <address>` succeeds where the service-name matches the service-route and tenant matches the network-interface tenant from the next-hop, then the ICMP probe will be able to send a ping. For the FIB lookup to succeed, the service needs to allow transport icmp, and the tenant needs to allow a source of 127.0.0.1/32 for the neighborhood the interface is in.
+If an ICMP probe fails to send requests, the PCLI ping command and highway logs can be used to debug. If `ping node <node-name> egress-interface <intf-name> gateway <gateway-ip> <address>` succeeds where the node and egress-interface match the service-route next-hop and the gateway is from the routing FIB or the interface gateway, then the ICMP probe will be able to send a ping.
 
-Probe-interval and probe-duration should be tuned so that probe-interval + probe-duration are less than the detection-window allowing the ping to run to completion within the detection window. If the ping interval is longer, when the path is declared down, is held-down, and is brought up for one window, the probe may say the path is down and the service-path will be brought down again, bouncing the path repeatedly.
+Probe-interval and probe-duration should be tuned so that probe-interval + probe-duration is less than the detection-window, allowing the ping to run to completion within the detection window. If the ping interval is longer, when the path is declared down, is held-down, and is brought up for one window, the probe may say the path is down and the service-path will be brought down again, bouncing the path repeatedly.
 
 ### Custom Health Probe Plugins
 
@@ -303,11 +302,11 @@ The algorithm for tracking errors, establishment times, etc. is run on a per-ser
 
 An algorithm is used to flag and recover path failures.
 - The enforcement algorithm calculates the health of each path based on the profile at the configured detection interval.
-- When any of the configured thresholds are exceeded, the path is flagged as unusable. The first test to fail causes the path to be taken out of consideration from the load balancer. 
+- When any of the configured thresholds are exceeded, the path is flagged as unusable. The first test to fail causes the path to be taken out of consideration from the load balancer.
 - Once the path is deemed to be not healthy: The subsequent sessions are used for routing. In the event that none of the paths are healthy, the best-effort algorithm picks one of the paths for routing sessions. This can be disabled by turning off best-effort configuration in the service-policy.
 
 :::note
-When a path becomes unavailable, all the existing sessions  continue to be routed over this path. Since this is non-SVR changing a destination or path might have unintended consequences.
+When a path becomes unavailable, all the existing sessions continue to be routed over this path. Since this is non-SVR, changing a destination or path might have unintended consequences.
 :::
 
 The path is kept down for the configured hold-down time before being put back in service. At that time, the tracking and enforcement algorithm restarts.
@@ -321,7 +320,7 @@ Alarms and events:
 
 Show commands:
 - `show stats` command can be used for capturing the “current” snapshot of the relevant stats.
-- The Meets-SLA field has been added to the `show load-balancer` command to indicate the result of the reachability detection. 
+- The Meets-SLA field has been added to the `show load-balancer` command to indicate the result of the reachability detection.
 
 ```
 ======== ========= ====== ======= ====== ========= ======== ===== ===========
@@ -330,7 +329,7 @@ Show commands:
  router         0    N/A      up   0.7%     250ms    100ms   2.0         Yes
 ```
 - The `show service-path` output indicates when a non-SVR path is no longer in-service and why. 
-Two fields have been added to the show command: Meets-SLA and Reachability-Probes. Meets-SLA indicates if a service agent meets or satisfies SLA as a result of reachability detection. Reachability-Probes shows the probes status from reachability detection. 
+Two fields have been added to the show command: Meets-SLA and Reachability-Probes. Meets-SLA indicates if a service agent meets or satisfies SLA as a result of reachability detection. Reachability-Probes shows the probes status from reachability detection.
 
 ```
 show service-path
@@ -370,7 +369,7 @@ show service-path
   Capacity:               200/3000
   Index:                    18
   Meets-SLA:           Yes
-  Reachability-Probes: 
+  Reachability-Probes:
                TestProbe1: Up
                TestProbe2: Down
 ```
