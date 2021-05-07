@@ -52,9 +52,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-38510 Security mismatch on HA nodes dropping internode traffic:**  Resolved an issue where dynamically reconfiguring inter-node-security may cause all internode traffic to be dropped.
 ------
-- **I95-39602 Show peer path status under `show peers hostnames`:** Replaced redundant Router column with `Node`, and added a `Status` column.
-------
-- **I95-39632 Toggling traffic engineering causes power saver to fail:** Resolved an issue that causes power saver to fail on muti-core systems when traffic engineering is toggled. 
+- **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing.
 ------
 - **I95-39811 Not showing TCP and UDP endpoints:** Resolved an issue where the service was not displaying Office 365 endpoints. 
 ------
@@ -69,6 +67,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-39982 module registration removal not refreshing services:** App-ID services now refresh correctly. 
 ------
 - **I95-40036 Attempting to save Configurations that are too large:** The Data Manager log an error when a configuration to be saved is larger than the buffer. 
+------
+- **I95-40060 `show session captures` not displaying active captures:** Updated the query argument to correctly display session captures for all services.
 
 ## Caveats
 
