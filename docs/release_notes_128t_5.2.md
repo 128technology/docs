@@ -37,14 +37,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39303 `show application modules` added:** [`show application modules status`](cli_reference.md/#show-application-modules-status) displays application names and transport information of a module. [`show application modules registration`](cli_reference.md/#show-application-modules-registration) displays registered application modules. 
 ------
-- **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md/#service-policy) has been enhanced to include values that allow the the router to select the best path based on the current latency/MoS values of the paths. 
+- **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md/#service-policy) has been enhanced to include values that allow the router to select the best path based on the current latency/MoS values of the paths. 
 ------
-- **I95-39544 Non-persistent template fields:** You now have the option to create non-persistent template input parameters, allowing the template to create unique instances per instantiation.
-------
-- **I95-39580 Reference Candidate Config Values in a Template:** Using a custom tag in Advanced Mode allows you to reference a value from a candidate configuration. For details about using this tag in Advanced Mode, refer to [Pulling Values from the Candidate Configuration](config_templates.md).
-------
-- **I95-39602 Additional detail for `show peers hostnames`:** The `show peer hostnames` command now displays additional supporting information: Node, Destination IP address, and Status. 
-
 ### Resolved Issues
 
 ------
@@ -66,7 +60,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39982 module registration removal not refreshing services:** App-ID services now refresh correctly. 
 ------
-- **I95-40036 Attempting to save Configurations that are too large:** The Data Manager log an error when a configuration to be saved is larger than the buffer. 
+- **I95-40036 Attempting to save Configurations that are too large:** The Data Manager logs an error when a configuration to be saved is larger than the buffer. 
 ------
 - **I95-40060 `show session captures` not displaying active captures:** Updated the query argument to correctly display session captures for all services.
 

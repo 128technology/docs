@@ -27,7 +27,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39525 BGP over SVR does not fail active sessions between SVR peers:** Existing sessions do not move to the next peer for bgp over SVR based transport. With this change, existing sessions will move to the new peer.
 ------
-- **I95-39602 Show peer path status under `show peers hostnames`:** Replaced redundant Router column with `Node`, and added a `Status` column.
+- **I95-39602 Additional detail for `show peers hostnames`:** The `show peer hostnames` command now displays additional supporting information: Node, Destination IP address, and Status.
 ------
 - **I95-39632 Toggling traffic engineering causes power saver to fail:** Resolved an issue that causes power saver to fail on muti-core systems when traffic engineering is toggled. 
 ------
