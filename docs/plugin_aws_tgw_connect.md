@@ -79,14 +79,14 @@ exit
 
 ## Restrictions
 
-* Due to the nature of tagging a specific `address` under the `network-interface`, this plugin only supports peering over a static IP addressed interface.
+* Due to the nature of tagging a specific `address` under the `network-interface`, this plugin only supports peering over an interface with a static IP address.
 
 ## Troubleshooting
 
 ### Configuration Generation
 
 The `/var/log/128technology/persistentDataManager.log` file at trace level will hold whether the configuration generation was run as well as output and return code.
-Configuration generation logs can be found on the conductor under `/var/**log**/128technology/plugins/cloud-ha-config-generation.log`.
+Configuration generation logs can be found on the conductor under `/var/**log**/128technology/plugins/aws-transit-gateway-connect-generate-configuration.log`.
 
 ### Helpful Commands
 
