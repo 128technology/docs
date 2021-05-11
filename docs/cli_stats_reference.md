@@ -7326,6 +7326,7 @@ show stats bfd [since <since>] [force] [router <router>] [node <node>] [<verbosi
 | [`link-down`](#show-stats-bfd-link-down) | Stats tracking BFD link down event |
 | [`link-up`](#show-stats-bfd-link-up) | The number of link-ups on the peer path. |
 | [`local-source-nat-change`](#show-stats-bfd-local-source-nat-change) | The number of local source nat changes on the peer path. |
+| [`local-source-nat-reset`](#show-stats-bfd-local-source-nat-reset) | The number of local source nat resets on the peer path. |
 | [`neighbor`](#show-stats-bfd-neighbor) | Stats pertaining to BFD Neighbor |
 | [`received-invalid`](#show-stats-bfd-received-invalid) | Stats pertaining to invalid BFD packets received |
 
@@ -7648,6 +7649,7 @@ show stats bfd by-peer-path [peer-name <peer-name>] [peer-host <peer-host>] [dev
 | command | description |
 | ------- | ----------- |
 | [`async`](#show-stats-bfd-by-peer-path-async) | Stats pertaining to BFD async mode per peer path |
+| [`average-latency`](#show-stats-bfd-by-peer-path-average-latency) | Rolling average latency in milliseconds for the 128T peer path. |
 | [`dynamic-damping`](#show-stats-bfd-by-peer-path-dynamic-damping) | Stats pertaining to Dynamic BFD Damping |
 | [`echo`](#show-stats-bfd-by-peer-path-echo) | Stats pertaining to BFD echo mode per peer path |
 | [`jitter`](#show-stats-bfd-by-peer-path-jitter) | Jitter in milliseconds for the 128T peer path. |
@@ -7655,6 +7657,7 @@ show stats bfd by-peer-path [peer-name <peer-name>] [peer-host <peer-host>] [dev
 | [`link-down`](#show-stats-bfd-by-peer-path-link-down) | Stats tracking BFD link down event per peer path |
 | [`link-up`](#show-stats-bfd-by-peer-path-link-up) | The number of link-ups on the peer path. |
 | [`local-source-nat-change`](#show-stats-bfd-by-peer-path-local-source-nat-change) | The number of local source nat changes on the peer path. |
+| [`local-source-nat-reset`](#show-stats-bfd-by-peer-path-local-source-nat-reset) | The number of local source nat resets on the peer path. |
 | [`loss`](#show-stats-bfd-by-peer-path-loss) | Packet loss percentange for the 128T peer path. |
 | [`mos`](#show-stats-bfd-by-peer-path-mos) | MOS value calculated for the 128T peer path. |
 | [`neighbor`](#show-stats-bfd-by-peer-path-neighbor) | Stats pertaining to BFD Neighbor |
@@ -7967,7 +7970,43 @@ show stats bfd by-peer-path async sent success [peer-name <peer-name>] [peer-hos
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show stats packet-processing action failure bfd`](#show-stats-packet-processing-action-failure-bfd) | Statistics for &#x27;bfd&#x27; |
+| [`show stats packet-processing action success bfd`](#show-stats-packet-processing-action-success-bfd) | Statistics for &#x27;bfd&#x27; |
+
+## `show stats bfd by-peer-path average-latency`
+
+Rolling average latency in milliseconds for the 128T peer path.
+
+#### Usage
+
+```
+show stats bfd by-peer-path average-latency [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8646,7 +8685,43 @@ show stats bfd by-peer-path local-source-nat-change [peer-name <peer-name>] [pee
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show stats packet-processing action failure bfd`](#show-stats-packet-processing-action-failure-bfd) | Statistics for &#x27;bfd&#x27; |
+| [`show stats packet-processing action success bfd`](#show-stats-packet-processing-action-success-bfd) | Statistics for &#x27;bfd&#x27; |
+
+## `show stats bfd by-peer-path local-source-nat-reset`
+
+The number of local source nat resets on the peer path.
+
+#### Usage
+
+```
+show stats bfd by-peer-path local-source-nat-reset [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9343,7 +9418,39 @@ show stats bfd local-source-nat-change [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show stats packet-processing action failure bfd`](#show-stats-packet-processing-action-failure-bfd) | Statistics for &#x27;bfd&#x27; |
+| [`show stats packet-processing action success bfd`](#show-stats-packet-processing-action-success-bfd) | Statistics for &#x27;bfd&#x27; |
+
+## `show stats bfd local-source-nat-reset`
+
+The number of local source nat resets on the peer path.
+
+#### Usage
+
+```
+show stats bfd local-source-nat-reset [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -13770,6 +13877,7 @@ show stats highway destination-reachability icmp time-to-establishment [service 
 | command | description |
 | ------- | ----------- |
 | [`max`](#show-stats-highway-destination-reachability-icmp-time-to-establishment-max) | A windowed maximum of the time in milliseconds for establishment |
+| [`mean`](#show-stats-highway-destination-reachability-icmp-time-to-establishment-mean) | A windowed mean of the time in milliseconds for establishment |
 | [`min`](#show-stats-highway-destination-reachability-icmp-time-to-establishment-min) | A windowed minimum of the time in milliseconds for establishment |
 
 ## `show stats highway destination-reachability icmp time-to-establishment max`
@@ -13799,7 +13907,36 @@ show stats highway destination-reachability icmp time-to-establishment max [serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability icmp time-to-establishment mean`
+
+A windowed mean of the time in milliseconds for establishment
+
+#### Usage
+
+```
+show stats highway destination-reachability icmp time-to-establishment mean [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability icmp time-to-establishment min`
 
@@ -14019,6 +14156,7 @@ show stats highway destination-reachability tcp time-to-establishment [service <
 | command | description |
 | ------- | ----------- |
 | [`max`](#show-stats-highway-destination-reachability-tcp-time-to-establishment-max) | A windowed maximum of the time in milliseconds for establishment |
+| [`mean`](#show-stats-highway-destination-reachability-tcp-time-to-establishment-mean) | A windowed mean of the time in milliseconds for establishment |
 | [`min`](#show-stats-highway-destination-reachability-tcp-time-to-establishment-min) | A windowed minimum of the time in milliseconds for establishment |
 
 ## `show stats highway destination-reachability tcp time-to-establishment max`
@@ -14048,7 +14186,36 @@ show stats highway destination-reachability tcp time-to-establishment max [servi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability tcp time-to-establishment mean`
+
+A windowed mean of the time in milliseconds for establishment
+
+#### Usage
+
+```
+show stats highway destination-reachability tcp time-to-establishment mean [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tcp time-to-establishment min`
 
@@ -14267,6 +14434,7 @@ show stats highway destination-reachability tls time-to-establishment [service <
 | command | description |
 | ------- | ----------- |
 | [`max`](#show-stats-highway-destination-reachability-tls-time-to-establishment-max) | A windowed maximum of the time in milliseconds for establishment |
+| [`mean`](#show-stats-highway-destination-reachability-tls-time-to-establishment-mean) | A windowed mean of the time in milliseconds for establishment |
 | [`min`](#show-stats-highway-destination-reachability-tls-time-to-establishment-min) | A windowed minimum of the time in milliseconds for establishment |
 
 ## `show stats highway destination-reachability tls time-to-establishment max`
@@ -14296,7 +14464,36 @@ show stats highway destination-reachability tls time-to-establishment max [servi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability tls time-to-establishment mean`
+
+A windowed mean of the time in milliseconds for establishment
+
+#### Usage
+
+```
+show stats highway destination-reachability tls time-to-establishment mean [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tls time-to-establishment min`
 
@@ -14457,6 +14654,7 @@ show stats highway destination-reachability udp time-to-establishment [service <
 | command | description |
 | ------- | ----------- |
 | [`max`](#show-stats-highway-destination-reachability-udp-time-to-establishment-max) | A windowed maximum of the time in milliseconds for establishment |
+| [`mean`](#show-stats-highway-destination-reachability-udp-time-to-establishment-mean) | A windowed mean of the time in milliseconds for establishment |
 | [`min`](#show-stats-highway-destination-reachability-udp-time-to-establishment-min) | A windowed minimum of the time in milliseconds for establishment |
 
 ## `show stats highway destination-reachability udp time-to-establishment max`
@@ -14486,7 +14684,36 @@ show stats highway destination-reachability udp time-to-establishment max [servi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability udp time-to-establishment mean`
+
+A windowed mean of the time in milliseconds for establishment
+
+#### Usage
+
+```
+show stats highway destination-reachability udp time-to-establishment mean [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability udp time-to-establishment min`
 
@@ -14868,8 +15095,257 @@ show stats icmp [since <since>] [force] [router <router>] [node <node>] [<verbos
 
 | command | description |
 | ------- | ----------- |
+| [`reachability-probe`](#show-stats-icmp-reachability-probe) | Stats related to the ICMP reachability probe |
 | [`received`](#show-stats-icmp-received) | Statistics for &#x27;received&#x27; |
 | [`sent`](#show-stats-icmp-sent) | Statistics for &#x27;sent&#x27; |
+
+## `show stats icmp reachability-probe`
+
+Stats related to the ICMP reachability probe
+
+#### Usage
+
+```
+show stats icmp reachability-probe [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`request`](#show-stats-icmp-reachability-probe-request) | The number of ICMP Destination Unreachable Messages dropped |
+| [`sla`](#show-stats-icmp-reachability-probe-sla) | ICMP Reachability Probe SLA |
+
+## `show stats icmp reachability-probe request`
+
+The number of ICMP Destination Unreachable Messages dropped
+
+#### Usage
+
+```
+show stats icmp reachability-probe request [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`failure`](#show-stats-icmp-reachability-probe-request-failure) | The number of ICMP probe echo request packets not sent because of some error setting up the session |
+| [`success`](#show-stats-icmp-reachability-probe-request-success) | The number of ICMP probe echo requests that received a reply within the timeout |
+| [`timeout`](#show-stats-icmp-reachability-probe-request-timeout) | The number of ICMP probe echo requests sent that timed out waiting for a response |
+
+## `show stats icmp reachability-probe request failure`
+
+The number of ICMP probe echo request packets not sent because of some error setting up the session
+
+#### Usage
+
+```
+show stats icmp reachability-probe request failure [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats icmp reachability-probe request success`
+
+The number of ICMP probe echo requests that received a reply within the timeout
+
+#### Usage
+
+```
+show stats icmp reachability-probe request success [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats icmp reachability-probe request timeout`
+
+The number of ICMP probe echo requests sent that timed out waiting for a response
+
+#### Usage
+
+```
+show stats icmp reachability-probe request timeout [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats icmp reachability-probe sla`
+
+ICMP Reachability Probe SLA
+
+#### Usage
+
+```
+show stats icmp reachability-probe sla [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`exceeded-by-max-latency`](#show-stats-icmp-reachability-probe-sla-exceeded-by-max-latency) | The number of ICMP probe intervals whose maximum latency exceeds the profile SLA |
+| [`exceeded-by-max-loss`](#show-stats-icmp-reachability-probe-sla-exceeded-by-max-loss) | The number of ICMP probe intervals whose maximum percent lost exceeds the profile SLA |
+| [`exceeded-by-mean-latency`](#show-stats-icmp-reachability-probe-sla-exceeded-by-mean-latency) | The number of ICMP probe intervals whose mean latency exceeds the profile SLA |
+
+## `show stats icmp reachability-probe sla exceeded-by-max-latency`
+
+The number of ICMP probe intervals whose maximum latency exceeds the profile SLA
+
+#### Usage
+
+```
+show stats icmp reachability-probe sla exceeded-by-max-latency [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats icmp reachability-probe sla exceeded-by-max-loss`
+
+The number of ICMP probe intervals whose maximum percent lost exceeds the profile SLA
+
+#### Usage
+
+```
+show stats icmp reachability-probe sla exceeded-by-max-loss [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats icmp reachability-probe sla exceeded-by-mean-latency`
+
+The number of ICMP probe intervals whose mean latency exceeds the profile SLA
+
+#### Usage
+
+```
+show stats icmp reachability-probe sla exceeded-by-mean-latency [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp received`
 
@@ -15407,8 +15883,12 @@ show stats interface received [port <port>] [since <since>] [force] [router <rou
 | [`buffer-allocation-failure`](#show-stats-interface-received-buffer-allocation-failure) | The number of receive buffer allocation failures |
 | [`bytes`](#show-stats-interface-received-bytes) | The number of bytes received on interface |
 | [`error`](#show-stats-interface-received-error) | The number of receive errors detected by interface |
+| [`fcs-error`](#show-stats-interface-received-fcs-error) | The number of packets dropped because they fail frame check validation |
 | [`missed`](#show-stats-interface-received-missed) | The number of packets dropped or discarded by the interface |
+| [`overrun-error`](#show-stats-interface-received-overrun-error) | The number of packets dropped because of queue overruns |
+| [`oversize-error`](#show-stats-interface-received-oversize-error) | The number of packets dropped because they are oversized |
 | [`packets`](#show-stats-interface-received-packets) | The number of packets received on interface |
+| [`undersize-error`](#show-stats-interface-received-undersize-error) | The number of packets dropped because they are undersized |
 | [`utilization`](#show-stats-interface-received-utilization) | The current percentage of total received bandwidth by the interface |
 
 ## `show stats interface received buffer-allocation-failure`
@@ -15487,7 +15967,33 @@ show stats interface received error [port <port>] [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats interface received fcs-error`
+
+The number of packets dropped because they fail frame check validation
+
+#### Usage
+
+```
+show stats interface received fcs-error [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface received missed`
 
@@ -15513,7 +16019,59 @@ show stats interface received missed [port <port>] [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats interface received overrun-error`
+
+The number of packets dropped because of queue overruns
+
+#### Usage
+
+```
+show stats interface received overrun-error [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats interface received oversize-error`
+
+The number of packets dropped because they are oversized
+
+#### Usage
+
+```
+show stats interface received oversize-error [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface received packets`
 
@@ -15539,7 +16097,33 @@ show stats interface received packets [port <port>] [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats interface received undersize-error`
+
+The number of packets dropped because they are undersized
+
+#### Usage
+
+```
+show stats interface received undersize-error [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface received utilization`
 
@@ -19170,7 +19754,128 @@ show stats packet-processing action failure ttl-validate [core <core>] [port <po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure tunnel`
+
+Statistics for &#x27;tunnel&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action failure tunnel [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`gre`](#show-stats-packet-processing-action-failure-tunnel-gre) | Statistics for &#x27;gre&#x27; |
+| [`invalid-entry`](#show-stats-packet-processing-action-failure-tunnel-invalid-entry) | Packets failed to be encapsulated into the tunnel because the tunnel entry was invalid |
+
+## `show stats packet-processing action failure tunnel gre`
+
+Statistics for &#x27;gre&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action failure tunnel gre [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`decapsulate`](#show-stats-packet-processing-action-failure-tunnel-gre-decapsulate) | Packets failed to be decapsulated from a GRE tunnel |
+
+## `show stats packet-processing action failure tunnel gre decapsulate`
+
+Packets failed to be decapsulated from a GRE tunnel
+
+#### Usage
+
+```
+show stats packet-processing action failure tunnel gre decapsulate [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure tunnel invalid-entry`
+
+Packets failed to be encapsulated into the tunnel because the tunnel entry was invalid
+
+#### Usage
+
+```
+show stats packet-processing action failure tunnel invalid-entry [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure udp-transform`
 
@@ -22606,7 +23311,128 @@ show stats packet-processing action success ttl-validate [core <core>] [port <po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success tunnel`
+
+Statistics for &#x27;tunnel&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action success tunnel [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`gre`](#show-stats-packet-processing-action-success-tunnel-gre) | Statistics for &#x27;gre&#x27; |
+
+## `show stats packet-processing action success tunnel gre`
+
+Statistics for &#x27;gre&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action success tunnel gre [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`decapsulate`](#show-stats-packet-processing-action-success-tunnel-gre-decapsulate) | Packets successfully decapsulated from a GRE tunnel |
+| [`encapsulate`](#show-stats-packet-processing-action-success-tunnel-gre-encapsulate) | Packets successfully encapsulated into a GRE tunnel |
+
+## `show stats packet-processing action success tunnel gre decapsulate`
+
+Packets successfully decapsulated from a GRE tunnel
+
+#### Usage
+
+```
+show stats packet-processing action success tunnel gre decapsulate [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success tunnel gre encapsulate`
+
+Packets successfully encapsulated into a GRE tunnel
+
+#### Usage
+
+```
+show stats packet-processing action success tunnel gre encapsulate [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform`
 
@@ -22986,6 +23812,7 @@ show stats packet-processing classifier received [core <core>] [port <port>] [si
 | command | description |
 | ------- | ----------- |
 | [`arp`](#show-stats-packet-processing-classifier-received-arp) | The number of packets received and classified as ARP |
+| [`broadcast`](#show-stats-packet-processing-classifier-received-broadcast) | The number of broadcast packets received |
 | [`broadcast-mac-allowed`](#show-stats-packet-processing-classifier-received-broadcast-mac-allowed) | The number of packets with broadcast destination mac allowed |
 | [`broadcast-mac-discards`](#show-stats-packet-processing-classifier-received-broadcast-mac-discards) | The number of packets with broadcast destination mac discards |
 | [`dhcp`](#show-stats-packet-processing-classifier-received-dhcp) | The number of packets received and classified as DHCP |
@@ -22994,6 +23821,7 @@ show stats packet-processing classifier received [core <core>] [port <port>] [si
 | [`exception`](#show-stats-packet-processing-classifier-received-exception) | The number of exceptions caught while classifying packets |
 | [`fragmented-icmp-discards`](#show-stats-packet-processing-classifier-received-fragmented-icmp-discards) | The number of fragmented ICMP packets discarded |
 | [`fragmented-icmpv6-discards`](#show-stats-packet-processing-classifier-received-fragmented-icmpv6-discards) | The number of fragmented ICMPv6 packets discarded |
+| [`gre`](#show-stats-packet-processing-classifier-received-gre) | The number of packets received and classified as GRE |
 | [`icmp`](#show-stats-packet-processing-classifier-received-icmp) | The number of packets received and classified as ICMP |
 | [`icmp-ttl-discards`](#show-stats-packet-processing-classifier-received-icmp-ttl-discards) | The number of ICMP packets dropped due to TTL expiration |
 | [`icmp-unknown-type-discards`](#show-stats-packet-processing-classifier-received-icmp-unknown-type-discards) | The number of ICMP packets with unknown type discarded |
@@ -23013,6 +23841,7 @@ show stats packet-processing classifier received [core <core>] [port <port>] [si
 | [`ipv6-fragmented`](#show-stats-packet-processing-classifier-received-ipv6-fragmented) | The number of packets received and classified as IPv6 fragments |
 | [`is-is`](#show-stats-packet-processing-classifier-received-is-is) | The number of packets received and classified as IS-IS |
 | [`lacp`](#show-stats-packet-processing-classifier-received-lacp) | The number of packets received and classified as LACP |
+| [`multicast`](#show-stats-packet-processing-classifier-received-multicast) | The number of multicast packets received |
 | [`ndp`](#show-stats-packet-processing-classifier-received-ndp) | The number of packets received and classified as NDP |
 | [`non-ip-protocol-allowed`](#show-stats-packet-processing-classifier-received-non-ip-protocol-allowed) | The number of non-IP packets allowed |
 | [`ospf`](#show-stats-packet-processing-classifier-received-ospf) | The number of packets received and classified as OSPF |
@@ -23025,6 +23854,7 @@ show stats packet-processing classifier received [core <core>] [port <port>] [si
 | [`total`](#show-stats-packet-processing-classifier-received-total) | The total number of packets received |
 | [`tunnel`](#show-stats-packet-processing-classifier-received-tunnel) | The number of packets received and classified as tunneled |
 | [`udp`](#show-stats-packet-processing-classifier-received-udp) | The number of packets received and classified as UDP |
+| [`unicast`](#show-stats-packet-processing-classifier-received-unicast) | The number of unicast packets received |
 | [`unknown-layer-3-protocol-discards`](#show-stats-packet-processing-classifier-received-unknown-layer-3-protocol-discards) | The number of packets that were unable to be classified and were dropped |
 | [`vlan`](#show-stats-packet-processing-classifier-received-vlan) | The number of packets received having a VLAN tag |
 | [`vrrp`](#show-stats-packet-processing-classifier-received-vrrp) | The number of packets received and classified as VRRP |
@@ -23054,7 +23884,34 @@ show stats packet-processing classifier received arp [core <core>] [port <port>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier received broadcast`
+
+The number of broadcast packets received
+
+#### Usage
+
+```
+show stats packet-processing classifier received broadcast [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received broadcast-mac-allowed`
 
@@ -23270,7 +24127,34 @@ show stats packet-processing classifier received fragmented-icmpv6-discards [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier received gre`
+
+The number of packets received and classified as GRE
+
+#### Usage
+
+```
+show stats packet-processing classifier received gre [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received icmp`
 
@@ -23956,7 +24840,34 @@ show stats packet-processing classifier received lacp [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier received multicast`
+
+The number of multicast packets received
+
+#### Usage
+
+```
+show stats packet-processing classifier received multicast [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received ndp`
 
@@ -24280,7 +25191,34 @@ show stats packet-processing classifier received udp [core <core>] [port <port>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier received unicast`
+
+The number of unicast packets received
+
+#### Usage
+
+```
+show stats packet-processing classifier received unicast [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received unknown-layer-3-protocol-discards`
 
@@ -24395,8 +25333,10 @@ show stats packet-processing classifier sent [core <core>] [port <port>] [since 
 | command | description |
 | ------- | ----------- |
 | [`arp`](#show-stats-packet-processing-classifier-sent-arp) | The number of ARP packets sent |
+| [`broadcast`](#show-stats-packet-processing-classifier-sent-broadcast) | The number of broadcast packets sent |
 | [`dhcp`](#show-stats-packet-processing-classifier-sent-dhcp) | The number of DHCP packets sent |
 | [`dhcpv6`](#show-stats-packet-processing-classifier-sent-dhcpv6) | The number of DHCPv6 packets sent |
+| [`gre`](#show-stats-packet-processing-classifier-sent-gre) | The number of GRE packets sent |
 | [`icmp`](#show-stats-packet-processing-classifier-sent-icmp) | The number of ICMP packets sent |
 | [`icmpv6`](#show-stats-packet-processing-classifier-sent-icmpv6) | The number of ICMPv6 packets sent |
 | [`igmp`](#show-stats-packet-processing-classifier-sent-igmp) | The number of IGMP packets sent |
@@ -24408,6 +25348,7 @@ show stats packet-processing classifier sent [core <core>] [port <port>] [since 
 | [`ipv6-fragmented`](#show-stats-packet-processing-classifier-sent-ipv6-fragmented) | The number of IPv6 fragments sent |
 | [`is-is`](#show-stats-packet-processing-classifier-sent-is-is) | The number of IS-IS packets sent |
 | [`lacp`](#show-stats-packet-processing-classifier-sent-lacp) | The number of LACP packets sent |
+| [`multicast`](#show-stats-packet-processing-classifier-sent-multicast) | The number of multicast packets sent |
 | [`ndp`](#show-stats-packet-processing-classifier-sent-ndp) | The number of NDP packets sent |
 | [`ospf`](#show-stats-packet-processing-classifier-sent-ospf) | The number of OSPF packets sent |
 | [`other-layer-3-protocol`](#show-stats-packet-processing-classifier-sent-other-layer-3-protocol) | The number of packets sent that did not fall into one of the other counted network-layer types |
@@ -24419,6 +25360,7 @@ show stats packet-processing classifier sent [core <core>] [port <port>] [since 
 | [`total`](#show-stats-packet-processing-classifier-sent-total) | The total number of packets that have been sent |
 | [`tunnel`](#show-stats-packet-processing-classifier-sent-tunnel) | The number of tunneled packets sent |
 | [`udp`](#show-stats-packet-processing-classifier-sent-udp) | The number of UDP packets sent |
+| [`unicast`](#show-stats-packet-processing-classifier-sent-unicast) | The number of unicast packets sent |
 | [`vlan`](#show-stats-packet-processing-classifier-sent-vlan) | The number of packets sent with a VLAN tag |
 | [`vrrp`](#show-stats-packet-processing-classifier-sent-vrrp) | The number of VRRP packets sent |
 
@@ -24447,7 +25389,34 @@ show stats packet-processing classifier sent arp [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier sent broadcast`
+
+The number of broadcast packets sent
+
+#### Usage
+
+```
+show stats packet-processing classifier sent broadcast [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent dhcp`
 
@@ -24501,7 +25470,34 @@ show stats packet-processing classifier sent dhcpv6 [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier sent gre`
+
+The number of GRE packets sent
+
+#### Usage
+
+```
+show stats packet-processing classifier sent gre [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent icmp`
 
@@ -24798,7 +25794,34 @@ show stats packet-processing classifier sent lacp [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier sent multicast`
+
+The number of multicast packets sent
+
+#### Usage
+
+```
+show stats packet-processing classifier sent multicast [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent ndp`
 
@@ -25095,7 +26118,34 @@ show stats packet-processing classifier sent udp [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier sent unicast`
+
+The number of unicast packets sent
+
+#### Usage
+
+```
+show stats packet-processing classifier sent unicast [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent vlan`
 

@@ -7,13 +7,17 @@ The system samples data every 5 seconds.  The sampling interval is configurable 
 :::note
 It is not recommended to change the sample-period.  Increasing the value reduces the resolution of the information collected.  Decreasing the value will create a greater computational load on the system. The software has been tuned to operate optimally at a sampling interval of 5 seconds.
 :::
-The full resolution of 5 second sampled data is kept for 1 hour.<br/>
-Every five minutes, the sampled data is aggregated.  The 5 minute values are kept for a day.<br/>
-Every hour the 5 minute values are aggregated.  The 1 hour values are kept for 6 months.<br/>
-After 6 months, the data is purged from disk.<br/>
+- The full resolution of 5 second sampled data is kept for 1 hour.
+- Every five minutes, the sampled data is aggregated.  The 5 minute values are kept for a day.
+- Every hour the 5 minute values are aggregated.  The 1 hour values are kept for 6 months.
+- After 6 months, the data is purged from disk.
 
 ### In Memory Metrics
-Not all metrics are persisted to disk and subject to downsampling. When executing `show stats` commands utilizing the _since_ argument, the command will report that the requested data will be unavailable.
+By default, not all metrics are persisted to disk and subject to downsampling. When executing `show stats` commands utilizing the `since` argument, the command will report that the requested data will be unavailable.
+
+In-memory metrics can be configured so that only metrics matching a filter are persisted. For more information refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md).
+
+Care should be taken to avoid overloading the system with the metrics. Many metrics are currently in-memory because of the heavy load they introduce to the system if they were all persisted. 
 
 An Example of `show stats` command using a `since` argument is shown below:
 

@@ -182,7 +182,7 @@ config
     authority
 
         router  becket
-            name                        becket
+            name    becket
 
             application-identification
                 mode  module
@@ -192,9 +192,45 @@ config
 exit
 ```
 
-Next, scripts are placed on the router's filesystem at `/etc/128technology/application-modules/`. These scripts must produce JSON output stored at `/var/run/128technology/application-modules/`, which in turn will be consumed by the 128T router and installed as FIB entries.
+#### Script-Based Module Setup
 
-Each module has a name that is used to reference it in the configuration. For example, an application identification module named `ZOOM` will retrieve and process all of the IP addresses used for the Zoom videoconferencing service. The corresponding service looks like this:
+Scripts are placed on the router's filesystem at `/etc/128technology/application-modules/`. These scripts produce a JSON output stored at `/var/run/128technology/application-modules/`, which in turn is processed by the 128T router and installed as FIB entries.
+
+#### Systemd-Based Module Setup
+
+Beginning with the 5.2 release, `systemd` may be used to manage the execution of application identification modules. JSON output produced by the module is passed directly to the highway REST API instead of being written to disk.
+
+Using this approach, modules are registered by creating a file at `/etc/128technology/application-modules/services/<module-name>`. This file lists the systemd units of the module and specifies if and how 128T should interact with them.
+- `reload-service`: When the highway process starts, reload the systemd unit. This is a signal to POST the JSON to highway again as module data is not saved through process restarts.
+- `stop-on-shutdown`: Stop the systemd unit when 128T is shutting down.
+
+Modules must be registered in order for 128T to accept the POST of JSON module data.
+
+In the following example, a systemd timer unit is used to periodically invoke the main service/script, which does the work of gathering module data. Both are stopped on shutdown, but only the timer unit needs to fire again on restart of 128T.
+```
+[
+    {
+        "service-name": "office365.timer",
+        "reload-service": true,
+        "stop-on-shutdown": true
+    },
+    {
+        "service-name": "office365.service",
+        "reload-service": false,
+        "stop-on-shutdown": true
+    }
+]
+```
+
+For more information about using timers with the systemd service, refer to [ArchLinux systemd/Timers](https://wiki.archlinux.org/title/Systemd/Timers).
+
+#### Viewing Modules
+
+Beginning with the 5.2 release, module registration and detailed module status (including a full list of ip-prefix/ports/protocol) can be accessed via a REST API or from the CLI. Please refer to the API documentation available from the GUI, and the [`show application modules status`](cli_reference.md/#show-application-modules-status) and [`show application modules registration`](cli_reference.md/#show-application-modules-registration) for full details.
+
+#### Referencing Modules in Configuration
+
+Each module produces a list of service names that are used to reference it in the configuration through the `application-name` list. For example, an application identification module named `zoom` will retrieve and process all of the IP addresses used for the `ZOOM` videoconferencing service. The corresponding service looks like this:
 
 ```
 admin@labsystem1.fiedler# show config running authority service ZOOM
@@ -220,7 +256,7 @@ config
 exit
 ```
 
-The `application-name` is configured as it is with the `tls` variant of `application-identification`. In this case, however, it will read the contents of a JSON file to produce the FIB entries. An excerpt from the `ZOOM` module's output is here:
+The `application-name` is configured as it is with the `tls` variant of `application-identification`. In this case, however, it will read the contents of a JSON file to produce the FIB entries. Below is an excerpt from the `zoom` module's output:
 
 ```
 {

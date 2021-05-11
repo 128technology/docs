@@ -88,7 +88,7 @@ The 128T software has a number of built-in tools to help faciliate the applicati
 
 ##### 128T's Session Table
 
-The 128T maintains a list of all active sessions for all traffic it is forwarding, and makes that available to administrators via the PCLI command `show sessions`. (The data is also available via the 128T's GUI.) This contains a lot of the information identified in the [Pertinent Application Data](#pertinent-application-data) section.
+The 128T maintains a list of all active sessions for all traffic it is forwarding, and makes that available to administrators via the PCLI command `show sessions` and in the GUI in the Sessions view. Much of the data identified in the [Pertinent Application Data](#pertinent-application-data) section is available in the Session Table. 
 
 If you have set the tenancy of your lab system using the technique mentioned in the [Establishing a Lab Environment](#establishing-a-lab-environment) section, it becomes easy to filter the session table using `grep`, as in:
 
