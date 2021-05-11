@@ -11,7 +11,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 
 ## Version Restrictions
 
- The router configuration that is generated is only compatible with 128T versions which have native GRE support (128T >= 5.2.0). 
+ The router configuration that is generated is only compatible with 128T versions which have [native GRE support](config_gre_tunnel.md) (128T >= 5.2.0). 
 
 
 ### Terms
@@ -29,19 +29,24 @@ Transit Gateway Connect Terms:
 
 ### Approach
 
-The user is required to configure the Transit Gateway, the Transport Transit Gateway Attachment, and the Transit Gateway Connect Attachment. Also the user needs to configure the route tables to transport the 128T GRE traffic to the Transit Gateway network interface.
+Configure the following components, in order:
 
-The plugin interacts with the AWS APIs to find if there already exists a connect peer that applies to the given node. Matching is based on the network interface ip address and the Connect Peer's peer address. If none exist, then the plugin creates one on behalf of the user. The plugin will choose the first `available` state Transit Gateway Connect Attachment to create the Transit Gateway Connect Peer on. 
+* [Transit Gateway](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-getting-started.html)
+* [Transport Transit Gateway Attachment](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-vpc-attachments.html)
+* [Transit Gateway Connect Attachment](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html)
+* Additionally, the routing tables must be configured to transport the GRE traffic to the Transit Gateway network interface.
 
-This logic collects the necessary data for the plugin to generate the appropriate BGP and GRE config to connect to it.
+The plugin interacts with the AWS APIs to identify an existing "Connect Peer" that applies to the given node. Matching is based on the network interface IP address and the Connect Peer's peer address. If there is no existing Connect Peer, the plugin creates one on behalf of the user. The plugin chooses the first `available` Transit Gateway Connect Attachment to create the Transit Gateway Connect Peer. 
+
+This logic collects the necessary data for the plugin to generate the appropriate BGP and GRE configuration for connection.
 
 ## Setup Credentials on the Conductor
 
-The conductor needs some setup to be able to query and create AWS objects. On each conductor node, follow the steps:
+Use the following steps to configure the Conductor to query and create AWS objects. On each Conductor node:
 1. [Install](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html) the AWS CLI if not already installed.
 2. [Configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) AWS CLI using `aws configure`. Be sure to specify the credentials, and `json` for the `output`.
-3. Try running `aws ec2 describe-transit-gateway-connect-peers`.
-   * If it prints out some json, then you are done
+3. Run the following: `aws ec2 describe-transit-gateway-connect-peers`.
+   * If the configuration is successful, it will print json.
 4. [Update](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-upgrade) the AWS CLI to the latest version available and then try step 3 again.
 
 ## Configuration Snippet
