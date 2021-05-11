@@ -75,6 +75,9 @@ module.exports = {
           "config_ldap",
           "config_management_over_forwarding",
           "config_EthoSVR",
+          "config_service_health",
+          "config_gre_tunnel",
+          "config_in-memory_metrics",
 
           "config_ha",
           "config_dual_router_ha",
@@ -188,6 +191,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes_128t_5.2",
           "release_notes_128t_5.1",
           "release_notes_128t_5.0",
           "release_notes_128t_4.5",
