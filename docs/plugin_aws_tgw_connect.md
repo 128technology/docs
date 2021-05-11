@@ -46,7 +46,7 @@ Use the following steps to configure the Conductor to query and create AWS objec
 1. [Install](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html) the AWS CLI if not already installed.
 2. [Configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) AWS CLI using `aws configure`. Be sure to specify the credentials, and `json` for the `output`.
 3. Run the following: `aws ec2 describe-transit-gateway-connect-peers`.
-   * If the configuration is successful, it will print json.
+   * If the configuration is valid a json response is printed.
 4. [Update](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-upgrade) the AWS CLI to the latest version available and then try step 3 again.
 
 ## Configuration Snippet
