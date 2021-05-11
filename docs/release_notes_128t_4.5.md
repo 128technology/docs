@@ -3,7 +3,17 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
+:::info
+Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
+
+If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
+
+Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+:::
+
 ## Release 4.5.8
+
+**Release Date:** April 28, 2021 
 
 ### New Features
 
@@ -17,7 +27,7 @@ sidebar_label: 4.5
 ------
 - **I95-39525 BGP over SVR does not fail active sessions between SVR peers:** Existing sessions do not move to the next peer for bgp over SVR based transport. With this change, existing sessions will move to the new peer.
 ------
-- **I95-39602 Show peer path status under `show peers hostnames`:** Replaced redundant Router column with `Node`, and added a `Status` column.
+- **I95-39602 Additional detail for `show peers hostnames`:** The `show peer hostnames` command now displays additional supporting information: Node, Destination IP address, and Status.
 ------
 - **I95-39632 Toggling traffic engineering causes power saver to fail:** Resolved an issue that causes power saver to fail on muti-core systems when traffic engineering is toggled. 
 ------
@@ -53,8 +63,9 @@ OR
 
 - **I95-39881 GraphQL User Mutations have been Deprecated:** The "createUser", "modifyUser", and "deleteUser" GraphQL mutations are now deprecated. Please use their REST equivalents which are listed in the GraphQL "deprecationReason" for those mutations. 
 
-
 ## Release 4.5.7
+
+**Release Date:** April 12, 2021 
 
 ### New Features and Improvements
 
@@ -410,7 +421,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
 ### New Features and Improvements
 
-- **I95-33193** "About This System" within the GUI will display additional information if it is a container ("128T-docker") or if installed with a 128T OTP ISO.
+- **I95-33193** "About This System" within the GUI will display additional information if it is installed with a 128T OTP ISO.
 ------
 - **I95-35319** "Managed Reports" (Custom Report factory defaults) are now shipped with the product.
 ------
@@ -471,13 +482,6 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 - **I95-36358** Currently downloading version in the asset state would persist after a download has completed.
 
   Until the system is upgraded to 4.5.1, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` in the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
-------
-- **I95-36404** Highway process fails to start on Ubuntu distribution.
-
-  _**Symptom:**_ 128T running in a container will fail to initialize when the container is running on Ubuntu distributions. The following can be seen within `highway.log`:
-  ```
-  Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
-  ```
 ------
 - **I95-36416** Navigating to the DNS Config page under a router in GUI edit configuration results in error.
 

@@ -51,9 +51,7 @@ The 128T installer splash screen appears.
 6. You will be asked to enter either the client certificate or the username and token you received as part of your 128T purchase.
   If your login credentials are not available, select the `Skip` button. 
 
-  - **For the username and token**, enter your information (the username and token shown here are for demonstration only):
-    - Username: `MoNtYpYtHoN`
-    - Token: `a1rsp33dvel0city0fsparr0w`
+  - **For the username and token**, enter your username and token information.
  
   - **For the client certificate**, copy the entire contents of the certificate, _including the Certificate and Private key information_, and paste it into the Client Certificate window of the install wizard.<br/>The content must begin with the line `-----BEGIN CERTIFICATE-----` and end with `-----END RSA PRIVATE KEY-----`.
 
