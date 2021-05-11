@@ -17,14 +17,14 @@ The instructions for installing and managing the plugin can be found [here](plug
 ### Terms
 
 General Terms:
-* Transit Gateway - A cloud router which connects VPCs and on-premise networks through a cental hub.
-* Virtual Private Cloud (VPC) - A logically isolated virtual network in AWS where you can put resources.
-* Transit Gateway Attachment - A way for the Transit Gateway to attach to a certain type of network.
+* Transit Gateway - A cloud router which connects VPCs and on-premise networks through a central hub.
+* Virtual Private Cloud (VPC) - A logically isolated virtual network in AWS where resources exist.
+* Transit Gateway Attachment - How the Transit Gateway attaches to a network.
 
 Transit Gateway Connect Terms:
 * Transit Gateway Connect - A logical unit containing the Connect Attachment, Transport Attachment, a Connect VPC, and the 128T.
-* Transit Gateway Connect Attachment - A new type of Transit Gateway Attachment that operates on top of one of the existing Transport Transit Gateway Attachments.
-* Transport Transit Gateway Attachment - An attachment that you can create a Connect Attachment on top of. Must be either of type VPC or VPN.
+* Transit Gateway Connect Attachment - A new type of Transit Gateway Attachment which operates on top of an existing Transport Transit Gateway Attachments.
+* Transport Transit Gateway Attachment - An attachment on top of which a Connect Attachment is created. Must be either of type VPC or VPN.
 * Transit Gateway Connect Peer - A peer that communicates over GRE and with BGP to the Transit Gateway Connect. In our case, this is a 128T.
 
 ### Approach
@@ -42,11 +42,11 @@ The conductor needs some setup to be able to query and create AWS objects. On ea
 2. [Configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) AWS CLI using `aws configure`. Be sure to specify the credentials, and `json` for the `output`.
 3. Try running `aws ec2 describe-transit-gateway-connect-peers`.
    * If it prints out some json, then you are done
-4. [Update](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-upgrade) the aws cli to the latest version available and then try step 3 again.
+4. [Update](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-upgrade) the AWS CLI to the latest version available and then try step 3 again.
 
 ## Configuration Snippet
 
-To determine which nodes/interfaces are to be used to connect to the transit gateway, the plugin configuration datamodel needs a tagging mechanism on the `network-interface`'s `address` to let the plugin know which interfaces should try to connect.
+To determine which nodes/interfaces are to be used to connect to the transit gateway, the plugin configuration datamodel needs a tagging mechanism on the `network-interface`'s `address` to let the plugin know which interfaces are to be used for peering.
 
 ```
 router
@@ -85,12 +85,12 @@ exit
 
 ### Configuration Generation
 
-The `/var/log/128technology/persistentDataManager.log` file at trace level will hold whether the configuration generation was run as well as output and return code.
+The `/var/log/128technology/persistentDataManager.log` file at trace level will show whether the configuration generation was run, as well as output and return code.
 Configuration generation logs can be found on the conductor under `/var/**log**/128technology/plugins/aws-transit-gateway-connect-generate-configuration.log`.
 
 ### Helpful Commands
 
-After the configuration is generated, the BGP peering status can be queried on the 128T side with the following commands for the router:
+After the configuration is generated, the BGP peering status can be queried on the 128T side using the following commands on the router:
 
 * `show bgp`
 * `show bgp neighbors`
@@ -117,7 +117,7 @@ With the example configuration and the following AWS TGW connect peer
 The following config will be generated:
 
 :::note
-The `base` device-interface already had existed.
+The `base` device-interface already exists and the `gre` network-interface is generated under the `base` device-interface.
 :::
 
 ```
