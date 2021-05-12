@@ -23,7 +23,7 @@ General Terms:
 
 Transit Gateway Connect Terms:
 * Transit Gateway Connect - A logical unit containing the Connect Attachment, Transport Attachment, a Connect VPC, and the 128T.
-* Transit Gateway Connect Attachment - A new type of Transit Gateway Attachment which operates on top of an existing Transport Transit Gateway Attachments.
+* Transit Gateway Connect Attachment - A new type of Transit Gateway Attachment which operates on top of an existing Transport Transit Gateway Attachment.
 * Transport Transit Gateway Attachment - An attachment on top of which a Connect Attachment is created. Must be either of type VPC or VPN.
 * Transit Gateway Connect Peer - A peer that communicates over GRE and with BGP to the Transit Gateway Connect. In our case, this is a 128T.
 
