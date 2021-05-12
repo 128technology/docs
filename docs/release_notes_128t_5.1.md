@@ -11,6 +11,33 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 5.1.3
+**Release Date:** May 14, 2021
+
+**Includes changes from:** [Version 5.2 May 10, 2021](release_notes_128t_5.2.md).
+
+### New Features
+
+- **I95-40046 Support for BGP over SVR on VRF:** BGP over SVR is now supported on BGP instances inside a VRF.
+
+### Resolved Issues
+
+- **I95-39509 Service Configuration has Empty Access Policy List:** Resolved an issue where the Access Policy list was not showing any items in the drop-down.
+------
+- **I95-39683 After changing the configuration, the `diff` operation shows no changes:** Resolved an issue where the `show events config commit` was not returning any changes.
+------
+- **I95-39852 Sync System clock to the Hardware clock with NTP:** The hardware clock now synchronizes with the NTP server. 
+------
+- **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. 
+------
+- **I95-39953 IPFIX Export Loop:** Resolved a race condition causing the IPFIX collector to get into an infinite loop exporting interim records.
+------
+- **I95-39986 Mellanox driver discarding large segmented packets:** Resolved an issue where the Mellanox driver was discarding large segmented packets and reporting them as errors. 
+------
+- **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 90000.
+------
+- **I95-40032 `show device-interface speed` returns incorrect value for virtio devices:**  Resolved a comparison error causing `show device-interface` to display the wrong speed. 
+
 ## Release 5.1.2
 **Release Date:** April 30, 2021 
 
