@@ -269,6 +269,118 @@ admin@branchoffice1.seattlesite1#
 As shown in the header, the routes that start with **B** are contributed by BGP.
 :::
 
+## VRF BGP Over SVR
+
+The establishment of a BGP session over SVR is achieved by the conductor auto-generating the necessary services and service-routes. The introduction of the VRF feature allows for configuring BGP instances within a VRF, and establishing BGP sessions with neighbors within the same VRF. 
+
+When configuring VRFs, there can be multiple BGP instances configured on one router, each one expecting to communicate via a separate VRF routing table. The result is that the generated routing-stack service-route needs to indicate which VRF table to direct the BGP session to.
+
+When VRFs have overlapping address space, the conductor needs additional information to determine which two BGP instances are meant to peer with each other. By explicitly disabling the auto-generation of BGP services and service-routes for any configured BGP neighbor, it is possible to establish BGP sessions that use routing interfaces (aka “loopback” interfaces) for communication without also using SVR.
+
+Other supported use cases include the ability to establish BGP over SVR sessions with each side residing in a different VRF. The typical scenario is a VPN architecture where one router is a CPE device on a customer site without any explicit VRF configuration. It connects to another router at the VPN provider which has a VRF configured for this customer and a BGP instance inside that VRF: 
+
+![BGP Instance inside VRF](/img/config_BGPoSVRinVRF.png)
+
+In this example, the BGP instance configured in the default VRF on a CPE router needs to establish a session with a VRF BGP instance in the VPN provider’s router. To enable the generation of appropriate BGP service and service-route configuration objects, some additional BGP neighbor configuration is required.
+
+### Configuration Example
+
+The following example is based on the VPN provider scenario illustrated above: **router A** (the VPN Provider) represents a core router with a BGP instance inside a VRF peered with **router B’s** (Customer Y) BGP instance inside the default VRF.
+```
+authority
+    router A
+        routing default-instance
+            vrf vrfA
+                interface loopback-vrfA
+                    ip-address 10.0.0.10
+                exit
+                routing-protocol bgp
+                    local-as 500
+                    router-id 10.0.0.10
+                    neighbor 10.0.0.11
+                        neighbor-as 500
+                        transport
+                            bgp-service-generation
+                                neighbor-vrf default
+                            exit
+                            local-address
+                                routing-interface loopback-vrfA
+                            exit
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+    router B
+        routing default-instance
+            interface loopback
+                 ip-address 10.0.0.11
+            exit
+            routing-protocol bgp
+                local-as 500
+                router-id 10.0.0.11
+                neighbor 10.0.0.10
+                    neighbor-as 500
+                    transport
+                        bgp-service-generation
+                            neighbor-vrf vrfA
+                        exit
+                        local-address
+                            routing-interface loopback
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+
+```
+
+#### BGP Service Generation
+
+The `bgp-service-generation` configuration object is available in a BGP neighbor’s `transport` settings. For neighbors specified in the default routing instance or specified inside a VRF, the following choices are available:
+
+- `disabled `: Do not generate BGP service or service-routes.
+- `neighbor-vrf (<vrf-name>|default) `: Name of the neighbor’s VRF in which the peer BGP instance resides. Can be “default” to specify the default VRF.
+- `same-neighbor-vrf `: (Default) Generate the BGP service if there is a matching peer with a BGP instance within the same VRF. Explicitly specifying this is equivalent to not configuring any `bgp-service-generation` statement.
+
+#### Routing-Stack Service-Route
+
+A service-route of type `routing-stack` can be directed to a specific VRF:
+```
+authority
+    router
+        service-route <service-route-name>
+            service-name <service-name>
+            routing-stack
+            routing-stack-vrf <vrf-name>
+```
+The existing `routing-stack` statement directs the session into the `routingEngine` network namespace used by the routing engine. The optional `routing-stack-vrf <vrf-name>` statement specifies the desired VRF within the `routingEngine` namespace. The `vrf-name` parameter is a reference to an existing VRF in the same router. If no `routing-stack-vrf` is specified, the target of the service-route is the default VRF.
+
+Service-routes of type `routing-stack` are automatically generated by the conductor for use with an auto-generated BGP service. Manually creating this type of service-route is not supported.
+
+#### Generated Services and Tenants
+
+More than one access-policy can be specified in a service; a service is generated for each unique routing-interface and VRF tuple for a given router. Because multiple peering relationships may exist using that service, the access-policy lists all tenants associated with the BGP neighbors using that service for peering. All tenants used in these access-policy statements appear as generated tenants in the configuration, one for each VRF in use.
+
+For a BGP neighbor residing in the default VRF, the generated BGP service remains the same, and the tenant associated with this BGP neighbor in the default VRF is named `bgp_speaker`.
+
+For a BGP neighbor residing in a non-default VRF, the generated BGP service is named `bgp_<router-name>_<vrf-name>_<vrf-routing-interface-name>`. The associated tenant is named `_<vrf-name>._vrf_bgp_speaker_`.
+
+### Troubleshooting
+
+If expected BGP services or service-routes are not auto-generated, use the log messages on the conductor to troubleshoot. Each BGP service and service-route that is generated or skipped for config generation results in a debug level log message. These messages are written to `persistentDataManager.log` with category RTG and sub-category CFG.
+
+If all expected configuration has been generated, but a BGP over SVR session does not come up, then all available tools for debugging traffic problems also apply to BGP sessions:
+
+- show fib
+- show service-path
+- show sessions
+
+Additionally, use the `show rib {vrf <vrf-name>}` command to verify the BGP neighbor is reachable and its kernel route entry is not superseded by another, higher priority entry in the RIB. 
+
 ## Routing Features
 
 This section contains various features supported by the 128T's BGP implementation.
