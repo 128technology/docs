@@ -18,7 +18,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ### New Features
 
-- **I95-40046 Support for BGP over SVR on VRF:** BGP over SVR is now supported on BGP instances inside a VRF.
+- **I95-40046 Support for [BGP over SVR on VRF](config_bgp.md#vrf-bgp-over-svr):** BGP over SVR is now supported on BGP instances inside a VRF.
 
 ### Resolved Issues
 
