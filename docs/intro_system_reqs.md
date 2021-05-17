@@ -97,10 +97,11 @@ To disable Secure Boot on VMWare ESXi, deselect **Secure Boot (EFI boot only)** 
 VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0) are hypervisor environments. The following adjustments are required to run 128T Routing Software in these environments: 
 - Leverage core affinity to dedicate CPU cores to 128T software, instead of leveraging virtual CPUs.
 - Set the SCSI controller to LSI Logic SAS.
-- Set network adapters to type e1000. As mentioned above, typical installations include a minimum of three network adapters for router deployments.
+- For VMWare ESXi deployments, set network adapters to type e1000. 
+- For KVM deployments, set the network adapters to type Virtio. 
 - Separate the management interface, which is used for inter-component communication and out-of-band management, from the forwarding plane interfaces. 
 - Reserve a minimum of two network interfaces for production traffic.
-- Depending on your environment, set the 128T router node portgroup to either promiscuous or bridged mode when supporting one or more redundant interfaces. (For example, when you are defining and configuring a MAC address for each redundant interface.) For VMware ESXi, the portgroup mode should be set to _promiscuous_. For KVM libvirt, the portgroupo mode should be set to _bridged_. For more information, refer to the [High Availability](config_ha.md) guide.
+- Depending on your environment, set the 128T router node portgroup to either promiscuous or bridged mode when supporting one or more redundant interfaces. (For example, when you are defining and configuring a MAC address for each redundant interface.) For VMware ESXi, the portgroup mode should be set to _promiscuous_. For KVM libvirt, the portgroup mode should be set to _bridged_. For more information, refer to the [High Availability](config_ha.md) guide.
 
 ## Next Steps
 Once you have identified the platform best suited for your needs, please refer to the [128T Software Installation Guide](intro_installation.md) for information about the install process. 

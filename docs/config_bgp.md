@@ -1,6 +1,6 @@
 ---
 title: Configuring BGP
-sidebar_label: BGP
+sidebar_label: Configuring BGP
 ---
 
 The Border Gateway Protocol (BGP) is a standard exterior gateway protocol developed for exchanging routing and reachability information between Autonomous Systems, a collection of IP routing prefixes managed by a single administrative entity. BGP makes routing decisions based on paths and network policies; although historically mainly seen in service provider networks, it is now gaining acceptance in large enterprise networks. BGP can also be used for routing within an autonomous system as an interior gateway protocol; when doing so it is referred to as iBGP.
@@ -15,7 +15,9 @@ This section presumes that the reader has a running 128T system and wants to add
 
 The BGP configuration exists in the [`routing`](config_reference_guide.md#routing) configuration container within the 128T data model. For any routing configuration, static or dynamic, a default routing instance called `default-instance` must be defined in the 128T configuration.
 
-In this example we will assume that BGP is configured on the peering router with IP address 1.1.1.1, as autonomous system number (ASN) 6000. To peer the 128T router with this router, we can configure BGP on our 128T using the following commands:
+In this example we will assume that BGP is configured on the peering router with IP address 1.1.1.1, as autonomous system number (ASN) 6000. 
+
+1. To peer the 128T router with this router, configure BGP on our 128T using the following commands:
 
 ```
 admin@branchoffice1.seattlesite1# config auth
@@ -26,16 +28,24 @@ Every 128T router (in this case, the router named `seattlesite1`), contains all 
 ```
 admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing-protocol bgp
 ```
-Here we will enter into the BGP portion of the routing configuration model.
+
+2. Enter into the BGP portion of the routing configuration model; set the local autonomous system number to 100, and set the router ID to 1.1.1.128.
+
 ```
-admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# local-as 100 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# router-id 1.1.1.128
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# local-as 100
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# router-id 1.1.1.128
 ```
-This sets our local autonomous system number to 100, and sets the router ID to 1.1.1.128.
+
+3. Configure the `address-family` using `ipv4-unicast`. At least one `address-family`must be configured, and typically is set as `ipv4-unicast`. If your deployment uses other address families (e.g., IPv6) or routes multicast, you may also need to configure support for other address families.
+
 ```
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# address-family ipv4-unicast
 admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# exit
 ```
-At least one `address-family` is required to be configured. These address families are also sometimes referred to as "AFI-SAFI" (pronounced "affy-saffy"), which is an Address Family Indicator plus Sub-Address Family Indicator. The most commonly configured `address-family` on the 128T router is by far `ipv4-unicast`. If your deployment uses other address families (e.g., IPv6) or routes multicast, you may also need to configure support for other address families.
+Address families are also sometimes referred to as "AFI-SAFI" (pronounced "affy-saffy"), which is an Address Family Indicator plus Sub-Address Family Indicator. 
+
+4. Configure the `neighbor`. In the example here, we've identified its IP address as `1.1.1.1` and its ASN as 6000. (Because this neighbor has a different ASN than the 128T, the 128T will recognize it as an eBGP peer rather than an iBGP peer.) An `address-family` of `ipv4-unicast`, lets the 128T know to exchange IPv4 unicast routes with the peer.
+
 ```
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# neighbor 1.1.1.1
 admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# neighbor-as 6000
@@ -44,15 +54,14 @@ admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# next-h
 admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])#exit
 admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# exit
 ```
-Last, we configure the `neighbor`. As stated in the example above, we've identified its IP address as `1.1.1.1` and its ASN as 6000. (Because this neighbor has a different ASN than the 128T, the 128T will recognize it as an eBGP peer rather than an iBGP peer.) We give it an `address-family` of `ipv4-unicast`, which lets the 128T know to exchange IPv4 unicast routes with the peer.
 
-Lastly, we set `next-hop-self` to `true.` During advertisement, non-directly connected routers need to learn how to reach an advertised route. To provide this information to the non-directly connected (as well as iBGP peers), next-hop-self command is used. This will cause the 128T to rewrite the `next-hop` information in the routes it advertises to this peer to be its own address.
+5. Set `next-hop-self` to `true.` During advertisement, non-directly connected routers need to learn how to reach an advertised route. To provide this information to the non-directly connected (as well as iBGP peers), next-hop-self command is used. This will cause the 128T to rewrite the `next-hop` information in the routes it advertises to this peer to be its own address.
 
 :::note
 In the example above, we've set our router's AS to 100. This will apply to all neighbors as the "default" AS it will advertise. You can override this on a per-neighbor basis by setting `local-as` within the `neighbor` configuration to a different value. However, *you must not configure the same value within the neighbor as you've already set in your global configuration*. This may cause issues when attempting to establish a peering relationship.
 :::
 
-Use the `exit` command several times to return to the `routing-protocol` level of the configuration hierarchy, and issue the `show` command. Your configuration should look something like this:
+6. Use the `exit` command several times to return to the `routing-protocol` level of the configuration hierarchy, and issue the `show` command. Your configuration should look something like this:
 
 ```
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# show
@@ -78,8 +87,8 @@ exit
 
 ### Advertising Routes
 There are two ways to advertise routes into BGP:
-1. Using `network` statements to identify the prefixes you want to advertise
-2. Redistributing routes learned through other IGP or from configuration
+- Using `network` statements to identify the prefixes you want to advertise
+- Redistributing routes learned through other IGP or from configuration
 
 #### Using the `network` Statement
 To advertise routes to BGP, configure the network to be advertised under the address-family of the router. You may also apply a policy to the advertised route using  					 					 					command.
@@ -107,69 +116,39 @@ admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing-proto
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# redistribute connected
 ```
 
-### Routing Features
+## BGP over SVR (BGPoSVR)
+Use BGP over SVR when peering with a 128T to gain the benefit of Secure Vector Routing for all BGP traffic flowing to-and-from the 128T peers. 
 
-This section contains various features supported by the 128T's BGP implementation.
+This procedure assumes that the 128T system is configured for basic platform functionality. Refer to the configuration example below for context.
 
-#### Configuring 128T as a Route Reflector
+To configure BGP over SVR:
 
-While configuring iBGP, you may need to enable the **Route Reflector** capability to facilitate easy learning of routes. Your 128T can be configured as a route reflector for a particular neighbor or more realistically a set of neighbors, also known as a route reflector client(s).  This can be configured in the route reflector router's BGP config, under the respective neighbor object.
-
-```
-admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
-admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
-admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# neighbor 1.1.1.1
-```
-In our example, the route reflector in our network is `branchoffice1` router, and our route reflector client is its neighbor `1.1.1.1`.
-```
-admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# address-family ipv4-unicast
-admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# route-reflector client true
-admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# exit
-```
-By setting `route-reflector client true`, we instruct the `branchoffice1` router to treat the neighbor as a route reflector client.
-
-There is one additional field which needs to be set in route reflector's BGP config, and that is `Client-ID`, which has the format of an IP address.  This can be set to anything unique in the AS, and can be the same as the `Router ID` field.
-
-When the route reflector sends routes to the clients, by default it doesn't modify the next-hop.  An outbound policy can be used to change the next-hop in these routes to that of the route reflector, if desired.  In such instances, another option, which is turned off by default, needs to be set in the route reflector's BGP config: `Route Reflector Allow Outbound Policy = TRUE`.
-
-#### BGP Confederations
-When configuring iBGP, the **Confederation** feature may come in handy when dealing with an enormous autonomous system. This feature allows you to break up the AS into smaller sub-autonomous systems. Confederation can be directly configured under the routing protocol element. Here, 65535 is the **confederation identifier AS number** and, 1100 and 2200 are the **member AS** numbers of that confederation AS.
-
-```
-admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
-admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
-admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation identifier 65535
-admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation member-as 1100
-admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation member-as 2200
-admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# exit
-```
-
-#### BGP over SVR (BGPoSVR)
-BGP over SVR can be used when peering with a 128T. This provides the benefit of Secure Vector Routing for all BGP traffic flowing to-and-from the 128T peers. To configure BGP over SVR, ensure that the running 128T system has configuration for basic platform functionality.
-
-Next, we need to configure a *routing interface*, which is similar to a loopback interface on traditional routers. Unlike normal loopback BGP peering, this IP address does not need to be routable on the transport network as it will never see the wire. BGP peering will be created on this interface. The conductor will then trigger on this and configure a few more pieces (autogenerated) to activate BGP over SVR, such as:
+1. Configure a *routing interface*. This is similar to a loopback interface on traditional routers. 
+Unlike normal loopback BGP peering, this IP address does not need to be routable on the transport network because it will never see the wire. BGP peering is created on this interface. The conductor triggers on this and autogenerates the following components to activate BGP over SVR:
 
 - _bgp_speaker_ tenant
 - Auto-generated BGP services and service routes
 - Router Peers
 
-These BGP connections will then be protected by SVR, and able to flexibly migrate between SVR paths.
+These BGP connections are protected by SVR, and able to migrate between SVR paths.
 
 :::note
 You must use a conductor to configure BGP over SVR; manually configuring the various pieces between two routers is not supported.
 :::
 
 :::note
-If the interface facing the BGPoSVR peer is already part of a neighborhood, then ensure that the two routers' interface topology types (`network-interface >neighborhood > topology`) are configured such that it allows the routers to form peering relationships for the auto-generated peer service routes; e.g., mesh-mesh, mesh-hub, mesh-spoke or hub-spoke.
+If the interface facing the BGPoSVR peer is already part of a neighborhood, then ensure that the two routers' interface topology types (`network-interface >neighborhood > topology`) are configured allowing the routers to form peering relationships for the auto-generated peer service routes; e.g., mesh-mesh, mesh-hub, mesh-spoke or hub-spoke.
 :::
 
-Next, configure a BGP instance with the router’s local AS and a router-id which matches the routing interface's IP. For each BGP over SVR peer, use a neighbor address of the neighbor's routing interface IP address. Next, configure the normal BGP peer configuration options such as the timers and address families that are needed. In address-family IPv4-unicast, `next-hop-self` must be set to `true`.
+2. Configure a BGP instance with the router’s local AS and a router-id that matches the routing interface's IP. For each BGP over SVR peer, use a neighbor address of the neighbor's routing interface IP address. 
+
+3. Configure the BGP peer configuration options such as the timers and address families. In address-family IPv4-unicast, `next-hop-self` must be set to `true`.
 
 :::note
 When configuring BGPoSVR with an eBGP peer, you must set `multihop ttl` to at least `2`.
 :::
 
-##### Configuration Template:
+#### Configuration Example:
 ```
 config
     authority
@@ -208,7 +187,7 @@ config
 exit
 ```
 
-##### Sample Configuration:
+#### Sample Configuration:
 ```
 admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
 admin@branchoffice1.seattlesite1 (routing[type=default-instance])# interface bgp-int-seattle
@@ -234,7 +213,7 @@ admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=10.128.128.1])# exit
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# exit admin@branchoffice1.seattlesite1 (routing[type=default-instance])# exit admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# exit admin@branchoffice1.seattlesite1 (authority)# exit admin@branchoffice1.seattlesite1#
 ```
 
-#### Verifying the BGP Configuration
+### Verifying the BGP Configuration
 Use `show bgp` to see the overview of the BGP routing process on the 128T:
 
 ```
@@ -259,7 +238,7 @@ Origin codes:  i - IGP, e - EGP, ? - incomplete
 Displayed  7 routes and 7 total paths
 ```
 
-In addition to the output from `show bgp`, you will now see contributions to the RIB from BGP in the output of `show rib`.
+In addition to the output from `show bgp`, the contributions to the RIB from BGP are visible in the output of `show rib`.
 
 ```
 admin@branchoffice1.seattlesite1# show rib
@@ -288,5 +267,154 @@ admin@branchoffice1.seattlesite1#
 ```
 
 :::note
-As shown in the header, the routes that start with `B` are contributed by BGP.
+As shown in the header, the routes that start with **B** are contributed by BGP.
 :::
+
+## VRF BGP Over SVR
+
+The establishment of a BGP session over SVR is achieved by the conductor auto-generating the necessary services and service-routes. The introduction of the VRF feature allows for configuring BGP instances within a VRF, and establishing BGP sessions with neighbors within the same VRF. 
+
+When configuring VRFs, there can be multiple BGP instances configured on one router, each one expecting to communicate via a separate VRF routing table. The result is that the generated routing-stack service-route needs to indicate which VRF table to direct the BGP session to.
+
+By explicitly disabling the auto-generation of BGP services and service-routes for any configured BGP neighbor, it is possible to establish BGP sessions that use routing interfaces (aka “loopback” interfaces) for communication without also using SVR.
+
+Other supported use cases include the ability to establish BGP over SVR sessions with each side residing in a different VRF. The typical scenario is a VPN architecture where one router is a CPE device on a customer site without any explicit VRF configuration. It connects to another router at the VPN provider which has a VRF configured for this customer and a BGP instance inside that VRF: 
+
+![BGP Instance inside VRF](/img/config_BGPoSVRinVRF.png)
+
+In this example, the BGP instance configured in the default VRF on a CPE router needs to establish a session with a VRF BGP instance in the VPN provider’s router. To enable the generation of appropriate BGP service and service-route configuration objects, and in cases where the VRF's have overlapping address space, some additional BGP neighbor configuration is required.
+
+### Configuration Example
+
+The following example is based on the VPN provider scenario illustrated above: **router A** (the VPN Provider) represents a core router with a BGP instance inside a VRF peered with **router B’s** (Customer Y) BGP instance inside the default VRF.
+```
+authority
+    router A
+        routing default-instance
+            vrf vrfA
+                interface loopback-vrfA
+                    ip-address 10.0.0.10
+                exit
+                routing-protocol bgp
+                    local-as 500
+                    router-id 10.0.0.10
+                    neighbor 10.0.0.11
+                        neighbor-as 500
+                        transport
+                            bgp-service-generation
+                                neighbor-vrf default
+                            exit
+                            local-address
+                                routing-interface loopback-vrfA
+                            exit
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+    router B
+        routing default-instance
+            interface loopback
+                 ip-address 10.0.0.11
+            exit
+            routing-protocol bgp
+                local-as 500
+                router-id 10.0.0.11
+                neighbor 10.0.0.10
+                    neighbor-as 500
+                    transport
+                        bgp-service-generation
+                            neighbor-vrf vrfA
+                        exit
+                        local-address
+                            routing-interface loopback
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+
+```
+
+#### BGP Service Generation
+
+The `bgp-service-generation` configuration object is available in a BGP neighbor’s `transport` settings. For neighbors specified in the default routing instance or specified inside a VRF, the following choices are available:
+
+- `disabled `: Do not generate BGP service or service-routes.
+- `neighbor-vrf (<vrf-name>|default) `: Name of the neighbor’s VRF in which the peer BGP instance resides. Can be “default” to specify the default VRF.
+- `same-neighbor-vrf `: (Default) Generate the BGP service if there is a matching peer with a BGP instance within the same VRF. Explicitly specifying this is equivalent to not configuring any `bgp-service-generation` statement.
+
+#### Routing-Stack Service-Route
+
+A service-route of type `routing-stack` can be directed to a specific VRF:
+```
+authority
+    router
+        service-route <service-route-name>
+            service-name <service-name>
+            routing-stack
+            routing-stack-vrf <vrf-name>
+```
+The existing `routing-stack` statement directs the session into the `routingEngine` network namespace used by the routing engine. The optional `routing-stack-vrf <vrf-name>` statement specifies the desired VRF within the `routingEngine` namespace. The `vrf-name` parameter is a reference to an existing VRF in the same router. If no `routing-stack-vrf` is specified, the target of the service-route is the default VRF.
+
+Service-routes of type `routing-stack` are automatically generated by the conductor for use with an auto-generated BGP service. Manually creating this type of service-route is not supported.
+
+#### Generated Services and Tenants
+
+More than one access-policy can be specified in a service; a service is generated for each unique routing-interface and VRF tuple for a given router. Because multiple peering relationships may exist using that service, the access-policy lists all tenants associated with the BGP neighbors using that service for peering. All tenants used in these access-policy statements appear as generated tenants in the configuration, one for each VRF in use.
+
+For a BGP neighbor residing in the default VRF, the generated BGP service  is named `_bgp_<router-name>_<routing-interface-name>`, and the tenant associated with this BGP neighbor in the default VRF is named `_bgp_speaker_`.
+
+For a BGP neighbor residing in a non-default VRF, the generated BGP service is named `_bgp_<router-name>_<vrf-name>_<vrf-routing-interface-name>`. The associated tenant is named `_<vrf-name>._vrf_bgp_speaker_`.
+
+### Troubleshooting
+
+If expected BGP services or service-routes are not auto-generated, use the log messages on the conductor to troubleshoot. Each BGP service and service-route that is generated or skipped for config generation results in a debug level log message. These messages are written to `persistentDataManager.log` with category RTG and sub-category CFG.
+
+If all expected configuration has been generated, but a BGP over SVR session does not come up, then all available tools for debugging traffic problems also apply to BGP sessions:
+
+- show fib
+- show service-path
+- show sessions
+
+Additionally, use the `show rib {vrf <vrf-name>}` command to verify the BGP neighbor is reachable and its kernel route entry is not superseded by another, higher priority entry in the RIB. 
+
+## Routing Features
+
+This section contains various features supported by the 128T's BGP implementation.
+
+### Configuring 128T as a Route Reflector
+
+While configuring iBGP, you may need to enable the **Route Reflector** capability to facilitate easy learning of routes. Your 128T can be configured as a route reflector for a particular neighbor or more realistically a set of neighbors, also known as a route reflector client(s). This can be configured in the route reflector router's BGP config, under the respective neighbor object.
+
+```
+admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
+admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# neighbor 1.1.1.1
+```
+In our example, the route reflector in our network is `branchoffice1` router, and our route reflector client is its neighbor `1.1.1.1`.
+```
+admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# address-family ipv4-unicast
+admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# route-reflector client true
+admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# exit
+```
+By setting `route-reflector client true`, we instruct the `branchoffice1` router to treat the neighbor as a route reflector client.
+
+There is one additional field which needs to be set in route reflector's BGP config, and that is `Client-ID`, which has the format of an IP address. This can be set to anything unique in the AS, and can be the same as the `Router ID` field.
+
+When the route reflector sends routes to the clients, by default it doesn't modify the next-hop. An outbound policy can be used to change the next-hop in these routes to that of the route reflector, if desired. In such instances, another option, which is turned off by default, needs to be set in the route reflector's BGP config: `Route Reflector Allow Outbound Policy = TRUE`.
+
+### BGP Confederations
+When configuring iBGP, the **Confederation** feature may be helpful when dealing with an enormous autonomous system. This feature allows you to break up the AS into smaller sub-autonomous systems. Confederation can be directly configured under the routing protocol element. Here, 65535 is the **confederation identifier AS number** and, 1100 and 2200 are the **member AS** numbers of that confederation AS.
+
+```
+admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
+admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation identifier 65535
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation member-as 1100
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation member-as 2200
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# exit
+```
