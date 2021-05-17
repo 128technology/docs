@@ -36,7 +36,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39986 Mellanox driver discarding large segmented packets:** Resolved an issue where the Mellanox driver was discarding large segmented packets and reporting them as errors. 
 ------
-- **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 90000.
+- **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 9000.
 ------
 - **I95-40032 `show device-interface speed` returns incorrect value for virtio devices:**  Resolved a comparison error causing `show device-interface` to display the wrong speed. 
 
