@@ -11,6 +11,42 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 4.5.9
+
+**Release Date:** May 21, 2021
+
+**Includes Resolved Issues from:** [Version 5.2.0 May 10, 2021](release_notes_128t_5.2.md), and [Version 5.1.3 May 17, 2021](release_notes_128t_5.1.md). 
+
+_How do we best handle this; these are chronologically earlier, but numerically later, and in a different branch. Do we call out 5.2 and 5.1.3? or do we leave them in the list below? (Each issue is noted where it came from and I will remove the numbers.) This is, I believe, is how PT was suggesting we do it when the fixes are in other chronologically earlier but numerically higher branches._ 
+
+### New Features
+
+- **I95-40161 Improved organization of the network-interface GUI:** The flow of the GUI for network-interface configuration has been improved to be more intuitive and have a more natural flow. 
+
+### Resolved Issues
+
+- **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing. **(5.2 Release Notes)**
+------
+- **I95-39659 NatPort Allocation issues:** Resolved an issue where pending queries for port key database were cleared unintentionally.
+------- 
+- **I95-39780 Hugepage tool incorrectly calculates hugepages based on Tenant table:** Revised the scaling of the Hugepage tool. **(5.1.2 Release Notes)**
+------
+- **I95-39852 Synchronize Hardware clock to NTP Server:** Resolved an issue where the hardware and system clocks were not synchronized.
+------
+- **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. **(5.1.3 Releae Notes)**
+------
+- **I95-39953 IPFIX Export Loop:** Resolved a race condition causing the IPFIX collector to get into an infinite loop exporting interim records. **(5.1.3 Release Notes)**
+------
+- **I95-39985 Template save error:** Resolved an issue where creating persistent fields on an **existing** template in Advanced Mode generated a validation error and the template changes were not saved. **(5.1.2 Release Notes)**
+------
+- **I95-39986 Mellanox driver discarding large segmented packets:** Resolved an issue where the Mellanox driver was discarding large segmented packets and reporting them as errors. **(5.1.3 Release Notes)**
+------
+- **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 9000. **(5.1.3 Release Notes)**
+------
+- **I95-40096 Missing Data in the Permutations Report:** Resolved an issue with the way incomplete samples were recorded in the Permutations Report.
+------
+- **I95-40123 PortKeyDatabase accidentally clearing queries:** Resolved an issue where pending queries for port key database were cleared unintentionally. 
+
 ## Release 4.5.8
 
 **Release Date:** April 28, 2021 
