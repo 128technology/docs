@@ -29,7 +29,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-37459 Show Commands for Services:** The [show fib](cli_reference.md#show-fib) and [show fib lookup](cli_reference.md#show-fib-lookup) commands have been enhanced to provide more granular path-related debugging.
 ------
-- **I95-37510 [AppID Modules](concepts_appid.md#appid-using-modules) can be run as systemd units:** Support for module execution as a systemd unit in addition to the existing script-based method, and the use of REST APIs to propagate module registrations and results.
+- **I95-37510 [AppID Modules](concepts_appid.md#appid-using-modules) can be run as systemd units:** Added support for module execution as a systemd unit in addition to the existing script-based method, and the use of REST APIs to propagate module registrations and results.
 ------
 - **I95-38081 Automatic generation of MSS Value:** The [network-interface configuration object](config_reference_guide.md#network-interface) now has an automatic option for the enforced-mss value. This automatically calculates the MSS of the network interface from the interface session MTU.
 ------
@@ -66,5 +66,5 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ## Caveats
 
-- **I95-26627 Prevent static route interface next hops with the same global id:** in HA configurations with a shared interface, only one node in the pair should be configured as a static route next hop. Othrewise, deleting the shared interface from one node will also cause the static route to be deleted.
+- **I95-26627 Prevent static route interface next hops with the same global ID:** In HA configurations with a shared interface, only one node in the pair should be configured as a static route next hop. Othrewise, deleting the shared interface from one node will also cause the static route to be deleted.
 
