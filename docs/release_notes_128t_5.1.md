@@ -22,15 +22,11 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ### Resolved Issues
 
-- **I95-39477 Validation error on conductor non-forwarding interfaces in different subnets:** Resolved an issue when HA Conductor non-forwarding fabric interfaces are configured in different subnets on each node.
-------
 - **I95-39509 Service Configuration has Empty Access Policy List:** Resolved an issue where the Access Policy list was not showing any items in the drop-down.
 ------
 - **I95-39683 After changing the configuration, the `diff` operation shows no changes:** Resolved an issue where the `show events config commit` was not returning any changes.
 ------
 - **I95-39852 Sync System clock to the Hardware clock with NTP:** The hardware clock now synchronizes with the NTP server. 
-------
-- **I95-39854 Mgmt over DHCP interface no active after 128T shutdown:** Resolved an issue where on 128T shutdown the management interface over forwarding dhcp is not started.
 ------
 - **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. 
 ------
