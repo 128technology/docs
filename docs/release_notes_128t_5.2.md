@@ -27,9 +27,9 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-37296 Native 128T Support for GRE:** Native support (non-plugin) is availble for GRE Tunneling, providing better performance. For more information, see [Native GRE Tunnels](config_gre_tunnel.md).
 ------
-- **I95-37459 Show Commands for Services:** The [show fib](cli_reference.md#show-fib) and [show fib lookup](cli_reference.md#show-fib-lookup) commands have been enhanced to provide more granular path-related debugging.
+- **I95-37459 Show Commands for Services:** The [show fib](cli_reference.md#show-fib) and [show fib lookup](cli_reference.md#show-fib-lookup)commands have been enhanced to provide more granular path-related debugging.
 ------
-- **I95-37510 [AppID Modules](concepts_appid.md#appid-using-modules) can be run as systemd units:** Support for module execution as a systemd unit in addition to the existing script-based method, and the use of REST APIs to propagate module registrations and results.
+- **I95-37510 [AppID Modules](concepts_appid.md#appid-using-modules) can be run as systemd unit:** The AppId manager now can handle the module execution as systemd unit instead of subprocess, in addition to the existing script-based method. Use REST APIs to propagate module registrations and results with AppId manager. 
 ------
 - **I95-38081 Automatic generation of MSS Value:** The [network-interface configuration object](config_reference_guide.md#network-interface) now has an automatic option for the enforced-mss value. This automatically calculates the MSS of the network interface from the interface session MTU.
 ------
@@ -37,7 +37,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39303 `show application modules` added:** [`show application modules status`](cli_reference.md/#show-application-modules-status) displays application names and transport information of a module. [`show application modules registration`](cli_reference.md/#show-application-modules-registration) displays registered application modules. 
 ------
-- **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md/#service-policy) has been enhanced to include values that allow the router to select the best path based on the current latency/MOS values of the paths. 
+- **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md/#service-policy) has been enhanced to include values that allow the router to select the best path based on the current latency/MoS values of the paths. 
 ------
 ### Resolved Issues
 
@@ -48,7 +48,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing.
 ------
-- **I95-39811 Office365 module not including TCP and UDP ports:** Resolved an issue where the AppID module was not including port and protocol data.
+- **I95-39811 Not showing TCP and UDP endpoints:** Resolved an issue where the service was not displaying Office 365 endpoints. 
 ------
 - **I95-39817 General CPU Stats not showing in Conductor UI after upgrade:** Resolved an issue where stats were not captured. 
 ------
@@ -66,5 +66,5 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ## Caveats
 
-- **I95-26627 Prevent static route interface next hops with the same global id:** in HA configurations with a shared interface, only one node in the pair should be configured as a static route next hop. Othrewise, deleting the shared interface from one node will also cause the static route to be deleted.
+- **I95-26627 Prevent static route interface next hops with the same global id:** If two interfaces with the same global id are an HA pair, only one should be permitted as a static route next hop. If the configuration is committed and one of the interfaces is deleted, FRR will delete the entire static route. 
 
