@@ -14,15 +14,13 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ## Release 5.1.3
 **Release Date:** May 14, 2021
 
-**Includes changes from:** [Version 5.2 May 10, 2021](release_notes_128t_5.2.md).
-
 ### New Features
 
 - **I95-40046 Support for [BGP over SVR on VRF](config_bgp.md#vrf-bgp-over-svr):** BGP over SVR is now supported on BGP instances inside a VRF.
 
 ### Resolved Issues
 
-- **I95-39477 Validation error on conductor non-forwarding interfaces in different subnets:** Resolved an issue when HA Conductor non-forwarding fabric interfaces are configured in different subnets on each node.
+- **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing.
 ------
 - **I95-39509 Service Configuration has Empty Access Policy List:** Resolved an issue where the Access Policy list was not showing any items in the drop-down.
 ------
@@ -30,7 +28,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39852 Sync System clock to the Hardware clock with NTP:** The hardware clock now synchronizes with the NTP server. 
 ------
-- **I95-39854 Mgmt over DHCP interface no active after 128T shutdown:** Resolved an issue where on 128T shutdown the management interface over forwarding dhcp is not started.
+- **I95-39854 Management over Forwarding not bringing up Eth0 on shutdown:** Resolved an issue preventing devices from unbinding cleanly.
 ------
 - **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. 
 ------
