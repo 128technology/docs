@@ -31,13 +31,13 @@ _How do we best handle this; these are chronologically earlier, but numerically 
 ------
 - **I95-39659 NatPort Allocation issues:** Resolved an issue where pending queries for port key database were cleared unintentionally.
 ------- 
-- **I95-39761 Influx process not releasing memory:** Resolved an issue where influx would not release unneeded memory resulting in task restarts
+- **I95-39761 Influx process not releasing memory:** Resolved an issue where influx would not release unneeded memory resulting in task restarts.
 ------- 
 - **I95-39780 Hugepage tool incorrectly calculates hugepages based on Tenant table:** Revised the scaling of the Hugepage tool. **(5.1.2 Release Notes)**
 ------
 - **I95-39852 Synchronize Hardware clock to NTP Server:** Resolved an issue where the hardware and system clocks were not synchronized.
 ------
-- **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. **(5.1.3 Releae Notes)**
+- **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. **(5.1.3 Release Notes)**
 ------
 - **I95-39953 IPFIX Export Loop:** Resolved a race condition causing the IPFIX collector to get into an infinite loop exporting interim records. **(5.1.3 Release Notes)**
 ------
@@ -48,6 +48,10 @@ _How do we best handle this; these are chronologically earlier, but numerically 
 - **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 9000. **(5.1.3 Release Notes)**
 ------
 - **I95-40096 Missing Data in the Permutations Report:** Resolved an issue with the way incomplete samples were recorded in the Permutations Report.
+------
+- **I95-40133 Increase the Conductor Self-upgrade Timeout:** In some cases, the timeout for the Conductor self-upgrade was not long enough, causing a webserver timeout. The upgrade timeout has been increased to prevent this issue. 
+------
+- **I95-40147 HMAC Digest Compare Failures causing poor performance:** Resolved an issue with the HmacContext verification process. 
 
 ## Release 4.5.8
 
