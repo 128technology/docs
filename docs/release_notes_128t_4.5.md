@@ -25,9 +25,13 @@ _How do we best handle this; these are chronologically earlier, but numerically 
 
 ### Resolved Issues
 
+- **I95-39308, I95-39970, I95-40123 PortKeyDatabase accidentally clearing queries:** Resolved an issue where pending queries for port key database were cleared unintentionally. 
+------
 - **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing. **(5.2 Release Notes)**
 ------
 - **I95-39659 NatPort Allocation issues:** Resolved an issue where pending queries for port key database were cleared unintentionally.
+------- 
+- **I95-39761 Influx process not releasing memory:** Resolved an issue where influx would not release unneeded memory resulting in task restarts
 ------- 
 - **I95-39780 Hugepage tool incorrectly calculates hugepages based on Tenant table:** Revised the scaling of the Hugepage tool. **(5.1.2 Release Notes)**
 ------
@@ -44,8 +48,6 @@ _How do we best handle this; these are chronologically earlier, but numerically 
 - **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 9000. **(5.1.3 Release Notes)**
 ------
 - **I95-40096 Missing Data in the Permutations Report:** Resolved an issue with the way incomplete samples were recorded in the Permutations Report.
-------
-- **I95-40123 PortKeyDatabase accidentally clearing queries:** Resolved an issue where pending queries for port key database were cleared unintentionally. 
 
 ## Release 4.5.8
 
