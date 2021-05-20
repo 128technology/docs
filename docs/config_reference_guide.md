@@ -1086,6 +1086,7 @@ authority > router > system > local-login
 The *local-login* configuration lets administrators control the number of concurrent logins on the system and what actions to take if that limit is exceeded.
 
 | Element | Type | Description |
+| --- | --- | --- |
 | netconf | sub-element | Controls around the number of concurrent NETCONF sessions. |
 
 ## log-category
@@ -1474,6 +1475,10 @@ This lets an administrator control the number of concurrent NETCONF logins (each
 | --- | --- | --- |
 | session-limit | uint32 | Valid values: 0-100. Default: 4. The number of concurrent NETCONF logins permitted. |
 | session-limit-action | enumeration | Valid values: no-action, issue-warning. Default: issue-warning. To suppress the warning messages regarding concurrent logins, you can set this to `no-action`. |
+
+:::note
+The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been moved to REST API controls, with no loss of functionality.
+:::
 
 ## network
 
