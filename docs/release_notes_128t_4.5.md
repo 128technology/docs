@@ -11,6 +11,42 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 4.5.9
+
+**Release Date:** May 20, 2021
+
+### New Features
+
+- **I95-40161 Improved organization of the network-interface GUI:** The flow of the GUI for network-interface configuration has been improved to be more intuitive and have a more natural flow. 
+
+### Resolved Issues
+
+- **I95-39308, I95-39659, I95-39970, I95-40123 PortKeyDatabase accidentally clearing queries:** Resolved an issue where pending queries for port key database were cleared unintentionally. 
+------
+- **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing.
+------
+- **I95-39761 Influx process not releasing memory:** Resolved an issue where influx would not release unneeded memory resulting in task restarts.
+------- 
+- **I95-39780 Hugepage tool incorrectly calculates hugepages based on Tenant table:** Revised the scaling of the Hugepage tool.
+------
+- **I95-39852 Synchronize Hardware clock to NTP Server:** Resolved an issue where the hardware and system clocks were not synchronized.
+------
+- **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. 
+------
+- **I95-39953 IPFIX Export Loop:** Resolved a race condition causing the IPFIX collector to get into an infinite loop exporting interim records.
+------
+- **I95-39985 Template save error:** Resolved an issue where creating persistent fields on an **existing** template in Advanced Mode generated a validation error and the template changes were not saved.
+------
+- **I95-39986 Mellanox driver discarding large segmented packets:** Resolved an issue where the Mellanox driver was discarding large segmented packets and reporting them as errors.
+------
+- **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 9000. 
+------
+- **I95-40096 Missing Data in the Permutations Report:** Resolved an issue with the way incomplete samples were recorded in the Permutations Report.
+------
+- **I95-40133 Increase the Conductor Self-upgrade Timeout:** In some cases, the timeout for the Conductor self-upgrade was not long enough, causing a webserver timeout. The upgrade timeout has been increased to prevent this issue. 
+------
+- **I95-40147 HMAC Digest Compare Failures causing poor performance:** Resolved an issue with the HmacContext verification process. 
+
 ## Release 4.5.8
 
 **Release Date:** April 28, 2021 
