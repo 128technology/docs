@@ -21,12 +21,10 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ### Resolved Issues
 
-- **I95-39308, I95-39970, I95-40123 PortKeyDatabase accidentally clearing queries:** Resolved an issue where pending queries for port key database were cleared unintentionally. 
+- **I95-39308, I95-39659, I95-39970, I95-40123 PortKeyDatabase accidentally clearing queries:** Resolved an issue where pending queries for port key database were cleared unintentionally. 
 ------
 - **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing.
 ------
-- **I95-39659 NatPort Allocation issues:** Resolved an issue where pending queries for port key database were cleared unintentionally.
-------- 
 - **I95-39761 Influx process not releasing memory:** Resolved an issue where influx would not release unneeded memory resulting in task restarts.
 ------- 
 - **I95-39780 Hugepage tool incorrectly calculates hugepages based on Tenant table:** Revised the scaling of the Hugepage tool.
