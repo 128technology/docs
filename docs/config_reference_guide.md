@@ -1089,6 +1089,10 @@ The *local-login* configuration lets administrators control the number of concur
 | --- | --- | --- |
 | netconf | sub-element | Controls around the number of concurrent NETCONF sessions. |
 
+:::note
+>>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls, with no loss of functionality.
+:::
+
 ## log-category
 
 #### Path:
@@ -1477,7 +1481,7 @@ This lets an administrator control the number of concurrent NETCONF logins (each
 | session-limit-action | enumeration | Valid values: no-action, issue-warning. Default: issue-warning. To suppress the warning messages regarding concurrent logins, you can set this to `no-action`. |
 
 :::note
-The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been moved to REST API controls, with no loss of functionality.
+>>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls, with no loss of functionality.
 :::
 
 ## network

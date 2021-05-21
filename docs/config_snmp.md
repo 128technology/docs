@@ -7,7 +7,7 @@ Simple Network Management Protocol (SNMP) is an internet standard protocol for c
 
 [^1]: https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol
 
-The 128T implementation of SNMP relies on the *snmpd* process running within the host operating system. All configuration for SNMP, however, is done within the 128T's data model via its administrative interfaces (e.g., PCLI, GUI, NETCONF, etc.).
+The 128T implementation of SNMP relies on the *snmpd* process running within the host operating system. All configuration for SNMP, however, is done within the 128T's data model via its administrative interfaces (e.g., PCLI, GUI, REST, etc.).
 
 ## MIB Definitions
 128T provdes MIB files that describe the 128T SNMP objects and traps available on the 128T device and how they are encoded. For ease of use, these are installed on the device itself in this location
@@ -167,6 +167,10 @@ The 128T MIB Database tree is structured as shown in the following diagram:
 ![MIB layout](/img/config_snmp_mib_layout.png)
 
 Note that the SNMP MIB objects only support read-only access (eg: GET, GETNEXT). To configure or alter the system it is necessary to use user-interfaces like PCLI or Web GUI or  configuration APIs (eg: NETCONF).
+
+:::note
+>>> The `netconf` configuration API is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls, with no loss of functionality.
+:::
 
 The MIBs are described individually below.
 

@@ -92,6 +92,10 @@ When deploying conductor on the internet, 128 Technology recommends limiting acc
 
 128 Technology has developed some salt states to assist with these common configuration steps. Refer to our [public Github repo](https://github.com/128technology/salt-states/blob/master/setup-firewalld-t128-zone.sls) for some samples you can use to tune your system accordingly.
 
+:::note
+>>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls, with no loss of functionality.
+:::
+
 ## Design Patterns
 This section enumerates the supported topologies for the 128T conductor. Straying from one of these  designs may be possible, but should be avoided unless absolutely necessary.
 
@@ -122,7 +126,7 @@ Because there is little difference from each deployed router's perspective betwe
 ### Conductor Behind 128T
 Oftentimes a conductor is hosted within a data center that has a 128T head end router at its edge. In these topologies, the design is a hybrid of the previous two (conductor behind NAT, split horizon conductor). From the remote routers' perspective (i.e., the branch locations not resident at this data center and other data center routers), the conductor is only reachable through the head end 128T router. That same 128T head end router will typically communicate with conductor using a private address.
 
-- The head end fronting the conductor must perform NAT/NAPT to forward 4505/TCP, 4506/TCP, and 930/TCP to the conductor on the data center LAN. The authority-wide `conductor-address` is an IP address that is resolved/routed to that head end router.
+- The head end fronting the conductor must perform NAT/NAPT to forward 4505-4506/TCP (used for salt), and 930/TCP (used for NETCONF in versions prior to 5.3) to the conductor on the data center LAN. The authority-wide `conductor-address` is an IP address that is resolved/routed to that head end router.
 - The head end router overrides the `conductor-address` with specific configuration to reference the local address.
 - The head end router uses `management-config-generated` set to `proxy` requests received on its WAN interface (from remote branch sites) to the internal conductor's address.
 
