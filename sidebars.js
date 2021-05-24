@@ -95,6 +95,7 @@ module.exports = {
           "config_STEP",
           "config_tenants",
           "config_templates",
+          "config_transport_encryption",
         ],
       },
       {
