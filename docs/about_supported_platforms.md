@@ -94,13 +94,13 @@ When selecting a compatible platform for a 128T router, the following provides s
 
 | Use | CPU | Memory | Disk | Network Interface |
 | --- | --- | --- | --- | --- |
-| Small Branch Office | 4 Intel cores, single socket | 8 GB ECC | 128 MLC GB SSD | 4+ Physical NICs compatible with DPDK |
-| Medium Branch Office | 8 Intel cores, single socket | 16 GB ECC | 128+ MLC GB SSD | 4+ Physical NICs compatible with DPDK |
-| Large Branch Office | 16 Intel cores, single socket | 32 GB ECC | 240+ GB MLC SSD | 4+ Physical NICs compatible with DPDK |
-| Head-end or Data center | 8+ Intel Xeon cores, single socket | 32 GB ECC | 240+ GB MLC SSD | 5+ Physical NICs compatible with DPDK |
+| Small Branch Office | 4 Intel cores, single socket | 8 GB ECC | 128 MLC* GB SSD | 4+ Physical NICs compatible with DPDK |
+| Medium Branch Office | 8 Intel cores, single socket | 16 GB ECC | 128+ MLC* GB SSD | 4+ Physical NICs compatible with DPDK |
+| Large Branch Office | 16 Intel cores, single socket | 32 GB ECC | 240+ GB MLC* SSD | 4+ Physical NICs compatible with DPDK |
+| Head-end or Data center | 8+ Intel Xeon cores, single socket | 32 GB ECC | 240+ GB MLC* SSD | 5+ Physical NICs compatible with DPDK |
 
 :::note
-SSD Endurance is important, all drives to be used should have reasonable minimum TBW rating for production deployments.
+\* MLC drives are recomended where possible. SSD Endurance is important, all drives to be used should have a reasonable minimum TBW rating for production deployments.
 :::
 
 #### Compatible Platform BIOS Recommendations
@@ -116,6 +116,7 @@ Platforms may have a variety of different features and capabilities configurable
 * Boot mode: do not change manufacturer's settings (Legacy or UEFI accepted)
 * Boot order: HDD, USB, PXE
 * Watchdog timer: disabled
+* Secure Boot: disabled
 * Power profile: maximum performance
 * System version, release date, manufacturer's part number, and serial number set in DMI table
 
