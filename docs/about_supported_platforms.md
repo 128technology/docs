@@ -94,10 +94,14 @@ When selecting a compatible platform for a 128T router, the following provides s
 
 | Use | CPU | Memory | Disk | Network Interface |
 | --- | --- | --- | --- | --- |
-| Small Branch Office | 4 Intel cores, single socket | 8 GB ECC | 64 GB SLC SSD | 4+ Physical NICs compatible with DPDK |
-| Medium Branch Office | 8 Intel cores, single socket | 16 GB ECC | 64+ GB SLC SSD | 4+ Physical NICs compatible with DPDK |
-| Large Branch Office | 16 Intel cores, single socket | 32 GB ECC | 240+ GB SLC SSD | 4+ Physical NICs compatible with DPDK |
-| Head-end or Data center | 8+ Intel Xeon cores, single socket | 32 GB ECC | 240+ GB SLC SSD | 5+ Physical NICs compatible with DPDK |
+| Small Branch Office | 4 Intel cores, single socket | 8 GB ECC | 128 MLC GB SSD | 4+ Physical NICs compatible with DPDK |
+| Medium Branch Office | 8 Intel cores, single socket | 16 GB ECC | 128+ MLC GB SSD | 4+ Physical NICs compatible with DPDK |
+| Large Branch Office | 16 Intel cores, single socket | 32 GB ECC | 240+ GB MLC SSD | 4+ Physical NICs compatible with DPDK |
+| Head-end or Data center | 8+ Intel Xeon cores, single socket | 32 GB ECC | 240+ GB MLC SSD | 5+ Physical NICs compatible with DPDK |
+
+:::note
+SSD Endurance is important, all drives to be used should have reasonable minimum TBW rating for production deployments.
+:::
 
 #### Compatible Platform BIOS Recommendations
 
@@ -123,7 +127,7 @@ These are the minimum platform specifications for running the 128T Networking Pl
 
 * 4C Intel x86 processor, single socket
 * 8GB ECC Memory
-* 64GB SLC SSD
+* 128GB SSD
 * 1 DPDK enabled NIC port for standalone systems (two recommended)
 * 2 DPDK enabled NIC ports for HA systems (three recommended)
 * 1 dedicated NIC port for HA synchronization
@@ -138,7 +142,7 @@ Multi-socket platforms are not compatible with the 128T software when run as a r
 
 * 4C Intel processor
 * 8GB ECC Memory
-* 64GB SSD
+* 128GB SSD
 * 1 (1G) Management port
 * Hyperthreading enabled
 
