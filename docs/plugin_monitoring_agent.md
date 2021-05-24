@@ -1458,6 +1458,18 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 
 ## Monitoring Agent Release Notes
 
+### Release 3.4.2
+
+#### New Features and Improvements:
+
+- **WAN-116** Allow any topic in the events input
+
+#### Issues Fixed:
+- **I95-39979** Monitoring agent sending the same metrics multiple times when using the kafka output
+
+  _**Resolution**_ The kafka output was enhanced to include a batch retry mechanism where it will try up to `max_batch_retry` times to push the buffered metrics during the push interval. The kafka output will only try to resend metrics which failed to be sent from the previous batch retry.
+
+
 ### Release 3.4.0
 
 #### New Features and Improvements:
