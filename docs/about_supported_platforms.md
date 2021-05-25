@@ -105,7 +105,7 @@ When selecting a compatible platform for a 128T router, the following provides s
 
 #### Compatible Platform BIOS Recommendations
 
-Platforms may have a variety of different features and capabilities configurable in the system BIOS. When running 128T on compatible platforms, the following are some BIOS settings recommendations:
+Platforms may have a variety of different features and capabilities configurable in the system BIOS. When running 128T on compatible platforms, the following are the recommended BIOS settings:
 * Hyperthreading disabled for platform operating as a router
 * Hyperthreading enabled for platform operating as a conductor
 * LAN bypass disabled
@@ -117,6 +117,7 @@ Platforms may have a variety of different features and capabilities configurable
 * Boot order: HDD, USB, PXE
 * Watchdog timer: disabled
 * Secure Boot: disabled
+* Serial Port Baud Rate: 115200/8-n-1 (To be used for console installation)
 * Power profile: maximum performance
 * System version, release date, manufacturer's part number, and serial number set in DMI table
 
