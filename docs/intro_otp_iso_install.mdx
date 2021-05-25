@@ -56,14 +56,14 @@ To install the Router using the OTP workflow (this is the preferred method), use
 ![VGA Boot with OTP Install](/img/install_select_OTP.png)
 
 :::note
-Not all hardware has video support. Booting to the serial console is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
+Not all hardware has video support. Booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
 
 Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed, and if left to continue will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 ::: 
 
 #### 128T System via Serial Console
 
-Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer. For serial console issues please refer to [Serial Console Troubleshooting](intro_installation_bootable_media.md#serial-console-troubleshooting).
+Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. For serial console issues please refer to [Serial Console Troubleshooting](intro_installation_bootable_media.md#serial-console-troubleshooting).
 
 #### 128T System with VGA Console
 
