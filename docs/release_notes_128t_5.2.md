@@ -39,6 +39,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md/#service-policy) has been enhanced to include values that allow the router to select the best path based on the current latency/MOS values of the paths. 
 ------
+
 ### Resolved Issues
 
 ------
