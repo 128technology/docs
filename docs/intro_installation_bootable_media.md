@@ -23,7 +23,7 @@ After imaging the ISO onto removable media, insert it into the target machine an
 
 ### Choose the Installation Type
 
-Upon boot, the following screen is displayed. Not all hardware has video support, so booting to the serial console is the default. 
+Upon boot, the following screen is displayed. Not all hardware has video support, so booting to the serial console (115200 baud) is the default. 
 
 To install using the Interactive Installation, use the arrow keys to select either `Install 128T Routing Software Serial Console` or `Install 128T Routing Software VGA Console`. As noted earlier, this guide describes the installation process using the Interactive Installation, specifically using the VGA console. The process for a Conductor or a Router is the same. 
 
@@ -34,7 +34,7 @@ Differences for the serial console are described in [Serial Console Installation
 To perform the installation using the OTP Installation, use the arrow keys to select either `OTP Install 128T Routing Software Serial Console` or `OTP Install 128T Routing Software VGA Console`. The OTP Installation for the serial or VGA console is described in the section [Router Installation Using OTP](intro_otp_iso_install.mdx).
 
 :::note
-Not all hardware has video support. Booting to the serial console is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
+Not all hardware has video support. Booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
 
 Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed, and if left to continue will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 ::: 
@@ -43,7 +43,7 @@ The procedure that follows here is the Interactive Install on the VGA Console.
 
 #### 128T System via Serial Console
 
-Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` as the serial console for interacting with the installer. For serial console issues please refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
+Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. For serial console issues please refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
 
 #### 128T System with VGA Console
 
@@ -206,6 +206,7 @@ The following is the  installation screen when booting to a UEFI console:
 
 ### Serial Console Troubleshooting
 
+- Default baud rate for serial console access is 115200/8-n-1
 - When performing an installation via the serial console, some systems do not interpret control characters that may be passed on the serial console line. For example, the following may be seen during the installation process:
 
   ![Corrupt Serial Install Complete](/img/install_serial_corrupt.png)
