@@ -56,7 +56,6 @@ router    Router128
             name               GRE
             type               ethernet
             pci-address        0000:00:06.0
-            capture-filter     len>0
 ```
 2. Create a non-tunnel interface, `base`. 
 ```
@@ -112,7 +111,7 @@ Please note that in this configuration, the `base` interface and the gre-tunnel 
 
         next-hop      test1 eth
             node-name  test1
-            interface  eth
+            interface  base
         exit
     exit
 exit
