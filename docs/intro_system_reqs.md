@@ -69,7 +69,9 @@ As mentioned in the section on Hardware Requirements, 128 Technology recommends 
 :::
 
 #### Identify Interface PCI Addresses
-Each Ethernet interface within a Linux system has a unique PCI address. This PCI address is used to bind the 128T router's configuration to the underlying hardware. During identification, be sure to record the PCI bus addresses for the individual interfaces.
+Each Ethernet interface within a Linux system has a unique PCI address. This PCI address is used to bind the 128T router's configuration to the underlying hardware. Session Smart Routing (SSR) functionality is dependent upon immutable PCI addresses. If the PCI address for a connection changes, the interface cannot deploy SSR. 
+
+Use the procedure below to identify PCI addresses. During identification, be sure to record the PCI bus addresses for the individual interfaces.
 
 :::note
 Once the PCI addresses are configured for packet forwarding, the interfaces are no longer available to the Linux operating system. Incorrectly configuring the PCI addresses causes ssh connections and package installs to fail.
@@ -80,6 +82,28 @@ Once the PCI addresses are configured for packet forwarding, the interfaces are 
 2. Issue the command `lshw -c network -businfo`
 3. The PCI addresses are displayed in the tabular output in the column labeled Bus info. These addresses are also referenced in your 128T router's configuration, with the preceding pci@ omitted, to identify which interfaces you want the system to manage and use for packet forwarding.
 4. Record the PCI addresses you wish to use, and close the command prompt window.
+
+After identification, verify that the PCI address is immutable using one of the following procedures.
+
+#### Verify Immutability of the PCI Address:
+
+Reboot the DUT:
+1. Run `lshw -c network -businfo` 
+2. Record the output. 
+3. Reboot the DUT and run `lshw -c network -businfo` again.
+
+If any PCI address changes, the DUT is disqualified.
+
+Connect to a PCI slot: 
+1. Run `lshw -c network -businfo` 
+2. Record the output. 
+3. Shutdown the DUT
+4. Plug in a NIC 
+5. Boot the DUT
+6. Run `lshw -c network -businfo` 
+7. Record the output. 
+
+If any PCI address for any interfaces change, this disqualifies the DUT.
 
 :::tip
 If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).

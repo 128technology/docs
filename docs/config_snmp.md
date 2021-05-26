@@ -7,7 +7,7 @@ Simple Network Management Protocol (SNMP) is an internet standard protocol for c
 
 [^1]: https://en.wikipedia.org/wiki/Simple_Network_Management_Protocol
 
-The 128T implementation of SNMP relies on the *snmpd* process running within the host operating system. All configuration for SNMP, however, is done within the 128T's data model via its administrative interfaces (e.g., PCLI, GUI, REST, etc.).
+The 128T implementation of SNMP relies on the *snmpd* process running within the host operating system. All configuration for SNMP, however, is done within the 128T's data model via its administrative interfaces (e.g., PCLI, GUI, etc.).
 
 ## MIB Definitions
 128T provdes MIB files that describe the 128T SNMP objects and traps available on the 128T device and how they are encoded. For ease of use, these are installed on the device itself in this location
@@ -194,7 +194,7 @@ The t128AlarmNotification definition defines the alarm trap sent out by the syst
 
 The 128T-METRICS-MIB provides SNMP access to the expansive set of metrics provided by the 128T product which are exposed via the t128MetricsTable.
 
-Each row of the metrics table is keyed by two objects, the t128MetricAlias and the t128MetricIndex. The t128MetricAlias is an arbitrary string of up to 64 characters long that represents a description of the metric. When read from the table, this alias also includes a metric instance suffix which in the most common case will be "_0". For example the default CPU utlization metric has an alias "cpuUtilization" will be returned as "cpuUtilization_0". In addition to the alias the t128MetricIndex key represents a unique series of a metric.
+Each row of the metrics table is keyed by two objects, the t128MetricAlias and the t128MetricIndex. The t128MetricAlias is an arbitrary string of up to 64 characters long that represents a description of the metric. When read from the table, this alias also includes a metric instance suffix which in the most common case will be "_0_". For example the default CPU utlization metric has an alias "cpuUtilization" will be returned as "cpuUtilization_0". In addition to the alias the t128MetricIndex key represents a unique series of a metric.
 
 The values contained in each row are the t128MetricValue and t128MetricContributors objects. The t128MetricValue is simply the current value of the metric. The unique parameters that identify each data series are referred to as "contributors". For the CPU metric the contributors are router, node and core and the t128MetricContributors object will contain a string representation of these values so that each row can be correlated with the correct metric data series.
 
