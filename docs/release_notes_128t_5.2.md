@@ -64,6 +64,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-40036 Attempting to save Configurations that are too large:** The Data Manager logs an error when a configuration to be saved is larger than the buffer. 
 ------
 - **I95-40060 `show session captures` not displaying active captures:** Updated the query argument to correctly display session captures for all services.
+------
+- **I95-40208 Quickstart not setting the minion_id to the hardware identifier when the value is blank:** Previously, if the Quickstart configuration did not have a value for the `minion_id`, the `minion_id` would not be set to the hardware identifier. This has been corrected in the `128T-5.2.0-1.el7.OTP.v2.x86_64.iso` ISO.
 
 ## Caveats
 
