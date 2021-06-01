@@ -3,7 +3,7 @@ title: System Requirements
 sidebar_label: System Requirements
 ---
 ## Hardware Requirements
-The 128T Networking Platform runs on both baremetal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required for comparable throughput.
+The 128T Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required for comparable throughput.
 
 The 128T Networking Platform requires a minimum of 4 CPU cores, 8GB of RAM, and at least 25GB of hard drive space. See [Certified Platforms](about_certified_platforms.mdx) and the [Platform Support Policy](about_supported_platforms.md) for more details.
 
@@ -58,7 +58,7 @@ Though not a hard requirement, it is recommended to use a dedicated physical int
 When configuring two software _nodes_ in a highly available router, each node requires a dedicated physical interface for synchronizing session data to its redundant peer. Each also generally have another, separate physical interface (referred to as a "fabric" interface) that is used to forward traffic between the nodes across a logical backplane between them. The fabric interface is not mandatory; refer to the [High Availability](config_ha.md) documentation for more information on configuration design for high availability deployments.
 
 ### Assigning the System Interfaces
-Interfaces on host systems running as a 128T router, either baremetal or virtual deployment environments, are assigned for packet forwarding. At least one dedicated interface is required for packet forwarding.
+Interfaces on host systems running as a 128T router, either bare metal or virtual deployment environments, are assigned for packet forwarding. At least one dedicated interface is required for packet forwarding.
 
 :::note
 Interface assignments are required only on software instances that are running as routers. Conductor nodes do not require interface assignments.
