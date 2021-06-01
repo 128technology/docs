@@ -46,6 +46,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-40133 Increase the Conductor Self-upgrade Timeout:** In some cases, the timeout for the Conductor self-upgrade was not long enough, causing a webserver timeout. The upgrade timeout has been increased to prevent this issue. 
 ------
 - **I95-40147 HMAC Digest Compare Failures causing poor performance:** Resolved an issue with the HmacContext verification process. 
+------
+- **I95-40208 Quickstart not setting the minion_id to the hardware identifier when the value is blank:** Previously, if the Quickstart configuration did not have a value for the `minion_id`, the `minion_id` would not be set to the hardware identifier. This has been corrected in the `128T-4.5.9-1.el7.OTP.v2.x86_64.iso` ISO.
 
 ## Release 4.5.8
 
