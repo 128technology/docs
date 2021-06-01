@@ -69,7 +69,7 @@ As mentioned in [Hardware Requirements](#hardware-requirements), it is recommend
 :::
 
 #### Identify Interface PCI Addresses
-Each Ethernet interface within a Linux system has a unique PCI address. This PCI address is used to bind the 128T router's configuration to the underlying hardware. Session Smart Routing (SSR) functionality is dependent upon immutable PCI addresses. If the PCI address for an interface changes, the interface cannot deploy SSR. 
+Each Ethernet interface within a Linux system has a unique PCI address. This PCI address is used in the router's configuration to access the underlying hardware. Session Smart Routing (SSR) functionality is dependent upon immutable PCI addresses. If the PCI address for an interface changes, the interface may no longer be accessible. 
 
 Use the procedure below to identify PCI addresses. During identification, be sure to record the PCI bus addresses for the individual interfaces.
 
@@ -87,23 +87,24 @@ After identification, verify that the PCI address is immutable using one of the 
 
 #### Verify Immutability of the PCI Address:
 
-Reboot the DUT:
-1. Run `lshw -c network -businfo` 
+Reboot the system:
+1. Run `lshw -c network -businfo`. 
 2. Record the output. 
-3. Reboot the DUT and run `lshw -c network -businfo` again.
+3. Reboot the system and run `lshw -c network -businfo` again.
 
-If any PCI address changes, the DUT is disqualified.
+If any PCI address changes, the system is disqualified.
 
 Connect an additional PCI card (if possible): 
-1. Run `lshw -c network -businfo` 
+1. Run `lshw -c network -businfo`. 
 2. Record the output. 
-3. Shutdown the DUT
-4. Plug in a NIC 
-5. Boot the DUT
-6. Run `lshw -c network -businfo` 
+3. Shutdown the system.
+4. Plug in a NIC.
+5. Boot the system.
+6. Run `lshw -c network -businfo`. 
 7. Record the output. 
 
-If any PCI address for any interfaces change, this disqualifies the DUT.
+If a PCI address for an interfaces change, the system will be disqualified. Examples of a PCI address changing are; after an OS reboot, or a BIOS setting change after the system is imaged. 
+
 
 :::tip
 If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).
@@ -129,5 +130,3 @@ VMware ESXi (5.5, 6.0, and 6.5) and KVM (2.1.3) with libvirt (1.2.9.3 and 3.2.0)
 
 ## Next Steps
 Once you have identified the platform best suited for your needs, please refer to the [128T Software Installation Guide](intro_installation.md) for information about the install process. 
-
-

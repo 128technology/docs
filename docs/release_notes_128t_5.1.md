@@ -39,6 +39,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 9000.
 ------
 - **I95-40032 `show device-interface speed` returns incorrect value for virtio devices:**  Resolved a comparison error causing `show device-interface` to display the wrong speed. 
+------
+**I95-40208 Quickstart not setting the minion_id to the hardware identifier when the value is blank:** Previously, if the Quickstart configuration did not have a value for the `minion_id`, the `minion_id` would not be set to the hardware identifier. This has been corrected in the `128T-5.1.3-1.el7.OTP.v2.x86_64.iso` ISO.
 
 ## Release 5.1.2
 **Release Date:** April 30, 2021 
