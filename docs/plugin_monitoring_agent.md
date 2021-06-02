@@ -1448,6 +1448,11 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 
 ## Monitoring Agent Plugin Notes
 
+## Release 2.0.1
+
+#### New Features and Improvements:
+ - **MON-352** Updated the plugin to use the latest monitoring agent version [`3.4.2`](plugin_monitoring_agent.md#release-342).
+
 ## Release 2.0.0
 
 #### New Features and Improvements:
@@ -1457,6 +1462,18 @@ When dealing with multiple child nodes, it is advised that each be handled in se
  * Support multi-line input fields for generic telegraf configuration with TOML syntax validation.
 
 ## Monitoring Agent Release Notes
+
+### Release 3.4.2
+
+#### New Features and Improvements:
+
+- **WAN-116** Allow any topic in the events input.
+
+#### Issues Fixed:
+- **I95-39979** Monitoring agent sending the same metrics multiple times when using the kafka output.
+
+  _**Resolution**_ The kafka output was enhanced to include a batch retry mechanism where it will try up to `max_batch_retry` times (default of `5`) to push the buffered metrics during the push interval. The kafka output will only try to resend metrics which failed to be sent from the previous batch retry.
+
 
 ### Release 3.4.0
 
