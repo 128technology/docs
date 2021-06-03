@@ -17,7 +17,7 @@ There are several things to be mindful of before configuring HA; the two nodes m
 
 For High Availability (HA) configurations, all configuration edit and commit operations must be done on **only** one node. A severe, but very rare race condition may occur if changes to the configuration are made concurrently on both nodes of the HA configuration; the generated configuration will be lost upon commit. This applies to all methods of editing: PCLI, Web GUI, or external API’s (NETCONF or REST). 
 
-![Edit HA Configuration](img/config_HA_interactive.gif)
+![Edit HA Configuration](/img/config_HA_interactive.gif)
 
 To avoid this situation, designate one node as the edit node. For example, in an HA configuration with two nodes, DataCenter Node A and DataCenter Node B, designate DataCenter Node A as the edit node. All configuration changes are made on Node A. All other commands can be run on Node B, but no configuration changes or commits, whether from the GUI, PCLI, or an API, are made from Node B.
 
