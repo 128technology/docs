@@ -13,6 +13,16 @@ The two 128T router nodes that make up a high availability pair must be collocat
 ## Before You Begin
 There are several things to be mindful of before configuring HA; the two nodes must be informed that they are part of a high availability set, and they must have a dedicated interface between themselves for synchronizing state information about active sessions. These steps will be covered in this section.
 
+### Configuration Change Operations
+
+For High Availability (HA) configurations, all configuration edit and commit operations must be done on **only** one node. A severe, but very rare race condition may occur if changes to the configuration are made concurrently on both nodes of the HA configuration; the generated configuration will be lost upon commit. This applies to all methods of editing: PCLI, Web GUI, or external API’s (NETCONF or REST). 
+
+![Edit HA Configuration](/img/config_HA_interactive.gif)
+
+To avoid this situation, designate one node as the edit node. For example, in an HA configuration with two nodes, DataCenter Node A and DataCenter Node B, designate DataCenter Node A as the edit node. All configuration changes are made on Node A. All other commands can be run on Node B, but no configuration changes or commits, whether from the GUI, PCLI, or an API, are made from Node B.
+
+This issue is resolved in release 5.3.0, but affects all prior releases. 
+
 ### Clock Synchronization
 Because highly available nodes synchronize time-series data, it is critical that the two nodes that comprise an HA pair have synchronized clocks. It is sufficient to manually synchronize the clocks until 128T software is installed, after which point NTP (Network Time Protocol) can be used to automatically synchronize the clocks.
 
