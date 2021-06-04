@@ -11,6 +11,20 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 4.5.10
+
+**Release Date:** June 9, 2021
+
+### New Features
+
+- **I95-40411 Network Filters for in-product templating:** Added the `network_hosts` template filter allowing you to expand the IPv4 and IPv6 address ranges.
+
+### Resolved Issues
+
+- **I95-39249 Validation Warning when services collide:** Additional warnings are now provided during configuration validation when two services have overlapping protocol specifications.
+------
+- **I95-39436 Waypoint Allocation Issue:** Resolved an issue where pending queries for port key database were cleared unintentionally.
+
 ## Release 4.5.9
 
 **Release Date:** May 20, 2021
