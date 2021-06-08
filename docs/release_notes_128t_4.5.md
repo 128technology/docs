@@ -21,11 +21,13 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ### Resolved Issues
 
-- **I95-40111 New flows not processed until system restart:** Resolved an issue with application schedulers causing a lockup, preventing new flows from being processed.
-------
 - **I95-39249 Validation Warning when services collide:** Additional warnings are now provided during configuration validation when two services have overlapping protocol specifications.
 ------
 - **I95-39436 Waypoint Allocation Issue:** Resolved an issue where pending queries for port key database were cleared unintentionally.
+------
+- **I95-40111 New flows not processed until system restart:** Resolved an issue with application schedulers causing a lockup, preventing new flows from being processed.
+------
+- **I95-40529 Duplicate Session ID causing a race condition in BFD:** Created a synchronized block to protect session IDs, and improved resiliency for BFD sessions.
 
 ## Release 4.5.9
 
