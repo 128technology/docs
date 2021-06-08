@@ -13,11 +13,11 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ## Release 4.5.10
 
-**Release Date:** June 9, 2021
+**Release Date:** June 8, 2021
 
 ### New Features
 
-- **I95-40411 Network Filters for in-product templating:** Added the `network_hosts` template filter allowing you to expand the IPv4 and IPv6 address ranges.
+- **I95-40411 Network Filters for in-product templating:** The `network_hosts` template filter has been added, allowing you to expand the IPv4 and IPv6 address ranges.
 
 ### Resolved Issues
 
