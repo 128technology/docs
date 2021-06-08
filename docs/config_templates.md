@@ -9,6 +9,7 @@ sidebar_label: 'Configuration Templates'
 | ------- | ------------------------------------------- |
 | 4.5.0   | This feature was introduced into 128T-4.5.0 |
 | 4.5.5   | Configuration Wizard was added              |
+| 4.5.10  | network_hosts filter was added              |
 Configuration templates allow administrators to automate the configuration of top level resources (e.g. Routers, Tenants, Services, etc). There are two modes of templating configuration: **Basic** and **Advanced**. Basic mode is intended for simple templates that don't require complex logic. Advanced mode, on the other hand, exposes the full power of the underlying templating language to the administrator.
 
 ## Creating a Template
@@ -69,7 +70,7 @@ Any changes made to the template body pane or variables pane must be saved by cl
 The body of a configuration template is written in the [Liquid](https://shopify.github.io/liquid/) templating language. Please refer to the [Liquid documentation](https://shopify.github.io/liquid/basics/introduction/) for the specifics of the language. 
 
 :::note
-The 128T Networking Platform supports several custom tags in Liquid (e.g. `{% editGroup $}`) that would not be parsable by other Liquid evaluators.
+The 128T Networking Platform supports several custom tags and filters in Liquid (e.g. `{% editGroup $}`) that would not be parsable by other Liquid evaluators.
 :::
 
 ### The `{% editGroup $}` Tag
@@ -296,6 +297,34 @@ The following rules apply to all paths:
 * Keys should be URL encoded, do not URL encode the comma for compound keys.
 * Leading and trailing slashes are ignored.
 * **Indices can only be used for leaf lists**, you cannot reference a list by index, only by key.
+
+### Additional Filters
+The following filters are available in addition to the built-in filters provided by Liquid.
+
+#### The `network_hosts` Filter
+The `network_hosts` filter can be used for expanding IPv4 or IPv6 blocks as follows: 
+
+```
+{% assign addresses = exampleBlock | network_hosts %}
+```
+
+where `exampleBlock` is `192.168.0.1/30` will produce the following addresses:
+
+```
+["192.168.0.0", "192.168.0.1", "192.168.0.2", "192.168.0.3"]
+```
+
+They could then be looped over like so:
+
+```
+{% for address in addresses %}
+  {
+    "ipAddress": "{{address}}"
+  }{%- if forloop.last == false -%},{%- endif %}
+{% endfor %}
+```
+
+
 
 ## Conversion Between Modes
 
