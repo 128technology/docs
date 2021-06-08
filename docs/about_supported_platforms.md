@@ -138,6 +138,8 @@ These are the minimum platform specifications for running the 128T Networking Pl
 
 :::note
 Multi-socket platforms are not compatible with the 128T software when run as a router.
+
+If hyperthreading is enabled on a router, the packet routing performance will be negatively impacted.
 :::
 
 ### Conductor
