@@ -1348,10 +1348,10 @@ The `t128_graphql` input can be used to retrieve data from a GraphQL API. The va
 | query-entry-point | string | The path to a point in the graphQL tree from which fields and tags will be extracted. This path may contain (`<key>:<value>`) graphQL arguments such as (name:'${ROUTER}'). | 
 | extract-field | list | List of leaf nodes to be collected from query response as fields |  
 | extract-field > name | string | The name of the field |
-| extract-field > value | string | The graphQL query path relative to the entry-point from which to extract the value | 
+| extract-field > value | string | The graphQL query path from which to extract the value. The path can be relative to the entry-point or absolute. If the path is abolute, it cannot diverge from the entry point path and must exclude graphQL arguments | 
 | extract-tag | list | List of leaf nodes to be collected from query response as tags | 
 | extract-tag > name | string | The name of the tag |
-| extract-tag > value | string | The graphQL query path relative to the entry-point from which to extract the value | 
+| extract-tag > value | string | The graphQL query path from which to extract the value. The path can be relative to the entry-point or absolute. If the path is abolute, it cannot diverge from the entry point path and must exclude graphQL arguments | 
 
 An example configuration using can be seen as below
 ```
@@ -1371,6 +1371,16 @@ config
                     extract-field      enabled
                         name   enabled
                         value  enabled
+                    exit
+
+                    extract-field      interface-count
+                        name   interface-count
+                        value  allRouters/nodes/nodes/nodes/deviceInterfaces/totalCount
+                    exit
+
+                    extract-tag        router-name
+                        name   router-name
+                        value  allRouters/nodes/name
                     exit
 
                     extract-tag        name
@@ -1406,6 +1416,7 @@ The `TOML` configuration for the GraphQL input can be seen below
 
   ## [inputs.t128_graphql.extract_fields]
   ##   enabled = "enabled"
+  ##   interface-count = "allRouters/nodes/nodes/nodes/deviceInterfaces/totalCount    # absolute path
 
   ## [inputs.t128_graphql.extract_tags]
   ##   name = "name"
@@ -1417,6 +1428,7 @@ The `TOML` configuration for the GraphQL input can be seen below
   ##   duplex = "state/duplex"
   ##   speed = "state/speed"
   ##   mac-address = "state/macAddress"
+  ##   router-name = "allRouters/nodes/name"    # absolute path
 ```
 
 - **collector_name**  
@@ -1435,10 +1447,10 @@ The `TOML` configuration for the GraphQL input can be seen below
   The path to a point in the graph relative to which `extract_fields` and `extract_tags` will be specified. This path may contain `(<key>:<value)` arguments corresponding to those in the GraphQL tree.
 
 - **extract_fields**  
-  Paths, relative to the `entry_point`, from which fields should be created. Each value MUST point to a leaf in the graph. The keys become the field names for the produced values. At least one field MUST be specified.
+  Paths, absolute or relative to the `entry_point`, from which fields should be created. Each value MUST point to a leaf in the graph. If the path is absolute, it MUST NOT diverge from the `entry_point` and MUST exclude graphQL argument. The keys become the field names for the produced values. At least one field MUST be specified.
 
 - **extract_tags**  
-  Paths, relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. The keys become the tag names for the produced values.
+  Paths, absolute or relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. If the path is absolute, it MUST NOT diverge from the `entry_point` and MUST exclude graphQL argument. The keys become the tag names for the produced values.
 
 Note that `(<key>:<value>)` arguments are valid only on the `entry_point`. They MUST NOT be specified on `extract_fields` or `extract_tags`.
 
@@ -1457,6 +1469,17 @@ When dealing with multiple child nodes, it is advised that each be handled in se
  * Support multi-line input fields for generic telegraf configuration with TOML syntax validation.
 
 ## Monitoring Agent Release Notes
+
+### Release 3.5.0
+
+#### New Features and Improvements:
+
+- **MON-337** Support absolute paths to `extract_fields` and `extract_tags` in `t128_graphql` collector
+
+#### Issues Fixed:
+- **MON-354** `t128_device_state` collector has incorrect tags and fields for 128T versions < 4.5.3
+
+  _**Resolution**_ Adjust some tags and fields in the `t128_device_state` collector for 128T versions < 4.5.3
 
 ### Release 3.4.0
 
