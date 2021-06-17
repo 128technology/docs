@@ -2457,6 +2457,7 @@ authority > router > node > device-interface > network-interface > neighborhood 
 Controls whether session-optimization is enabled for connections egressing this neighborhood.
 
 | Element | Type | Description |
+| --- | --- | --- | 
 | mode | enumeration | Valid values: auto, never-on. Default: auto. By default the 128T will detect whether session-optimization needs to be enabled based on current network behavior (latency). To disable session-optimization, set this to `never-on`. |
 
 ## session-optimization (device-interface)
