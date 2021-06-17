@@ -81,8 +81,8 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-35741 [PCLI plugin service commands](cli_reference.md#manage-plugin-install):** The plugin lifecycle can now be managed through the PCLI. 
 ------
-- **I95-36876 `show assests software` includes Repository information:** The PCLI command [`show assets software`](cli_reference.md/#show-assets-software) includes the repository for each available software version. 
------- 
+- **I95-36876 `show assets software` includes Repository information:** The PCLI command [`show assets software`](cli_reference.md/#show-assets-software) includes the repository for each available software version. 
+------
 - **I95-38170 Updated path metrics for `show service-path`:** Latency, loss, and jitter metrics are displayed when they are available, even if performance monitor is not enabled for the path.   
 ------
 
