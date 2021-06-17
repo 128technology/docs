@@ -3,11 +3,147 @@ title: 128T 4.5 Release Notes
 sidebar_label: 4.5
 ---
 
+:::info
+Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
+
+If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
+
+Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+:::
+
+## Release 4.5.10
+
+**Release Date:** June 8, 2021
+
+### New Features
+
+- **I95-40411 Network Filters for in-product templating:** The `network_hosts` template filter has been added, allowing you to expand the IPv4 and IPv6 address ranges.
+
+### Resolved Issues
+
+- **I95-39249 Validation Warning when services collide:** Additional warnings are now provided during configuration validation when two services have overlapping protocol specifications.
+------
+- **I95-39436 Waypoint Allocation Issue:** Resolved an issue where pending queries for port key database were cleared unintentionally.
+------
+- **I95-40111 New flows not processed until system restart:** Resolved an issue with application schedulers causing a lockup, preventing new flows from being processed.
+------
+- **I95-40529 Duplicate Session ID causing a race condition in BFD:** Created a synchronized block to protect session IDs, and improved resiliency for BFD sessions.
+
+## Release 4.5.9
+
+**Release Date:** May 20, 2021
+
+### New Features
+
+- **I95-40161 Improved organization of the network-interface GUI:** The flow of the GUI for network-interface configuration has been improved to be more intuitive and have a more natural flow. 
+
+### Resolved Issues
+
+- **I95-39308, I95-39659, I95-39970, I95-40123 PortKeyDatabase accidentally clearing queries:** Resolved an issue where pending queries for port key database were cleared unintentionally. 
+------
+- **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing.
+------
+- **I95-39761 Influx process not releasing memory:** Resolved an issue where influx would not release unneeded memory resulting in task restarts.
+------- 
+- **I95-39780 Hugepage tool incorrectly calculates hugepages based on Tenant table:** Revised the scaling of the Hugepage tool.
+------
+- **I95-39852 Synchronize Hardware clock to NTP Server:** Resolved an issue where the hardware and system clocks were not synchronized.
+------
+- **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. 
+------
+- **I95-39953 IPFIX Export Loop:** Resolved a race condition causing the IPFIX collector to get into an infinite loop exporting interim records.
+------
+- **I95-39985 Template save error:** Resolved an issue where creating persistent fields on an **existing** template in Advanced Mode generated a validation error and the template changes were not saved.
+------
+- **I95-39986 Mellanox driver discarding large segmented packets:** Resolved an issue where the Mellanox driver was discarding large segmented packets and reporting them as errors.
+------
+- **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 9000. 
+------
+- **I95-40096 Missing Data in the Permutations Report:** Resolved an issue with the way incomplete samples were recorded in the Permutations Report.
+------
+- **I95-40133 Increase the Conductor Self-upgrade Timeout:** In some cases, the timeout for the Conductor self-upgrade was not long enough, causing a webserver timeout. The upgrade timeout has been increased to prevent this issue. 
+------
+- **I95-40147 HMAC Digest Compare Failures causing poor performance:** Resolved an issue with the HmacContext verification process. 
+------
+- **I95-40208 Quickstart not setting the minion_id to the hardware identifier when the value is blank:** Previously, if the Quickstart configuration did not have a value for the `minion_id`, the `minion_id` would not be set to the hardware identifier. This has been corrected in the `128T-4.5.9-1.el7.OTP.v2.x86_64.iso` ISO.
+
+## Release 4.5.8
+
+**Release Date:** April 28, 2021 
+
+### New Features
+
+- **I95-39544 Non-persistent template fields:** You now have the option to create non-persistent template input parameters, allowing the template to create unique instances per instantiation.
+------
+- **I95-39580 Reference Candidate Config Values in a Template:** Using a custom tag in Advanced Mode allows you to reference a value from a candidate configuration. For details about using this tag in Advanced Mode, refer to [Pulling Values from the Candidate Configuration](config_templates.md).
+
+### Resolved Issues
+
+- **I95-38758 Validate management-over-forwarding and default-route:** Not supplying a default-route prevents the ifcfg file from being generated. A validation check has been put in place to verify that the default route is set to true. 
+------
+- **I95-39525 BGP over SVR does not fail active sessions between SVR peers:** Existing sessions do not move to the next peer for bgp over SVR based transport. With this change, existing sessions will move to the new peer.
+------
+- **I95-39602 Additional detail for `show peers hostnames`:** The `show peer hostnames` command now displays additional supporting information: Node, Destination IP address, and Status.
+------
+- **I95-39632 Toggling traffic engineering causes power saver to fail:** Resolved an issue that causes power saver to fail on muti-core systems when traffic engineering is toggled. 
+------
+- **I95-39698 Alibaba Cloud with enhanced networking sometimes doesn't work:** Resolved an issue between Virtio and RSS causing an unbalanced queue.
+------
+- **I95-39788 Inconsistent services after modifying certain service configs:** The system's underlying service configurations may have been in an inconsistent state when modifying a dhcp-relay or template application-type service.
+------
+- **I95-39798 Version update check may get stuck on GPG key access when using an access token:** The software upgrade version check has been modified to support access tokens. 
+------
+- **I95-39826 Management over forwarding pppoe generates v6 services or service-routes:** Resolved an issue where pppoe config generation is treated as a possible ipv6 address family interface.
+------
+- **I95-39855 `show stats` usage missing units:** With this change the `show stats` usage help text includes units
+------
+- **I95-39890 Unable to establish GRE session:** Resolved an issue with occasional fastlane lockups when using the Retransmission-with-DPI feature.
+
+### Caveats
+
+- **I95-39985 Template save error:** When creating persistent fields on an **existing** template in Advanced Mode, a validation error appears and the template changes are not saved. 
+_**Workaround:**_ There are two workarounds. 
+
+You can either; use GraphQL to set `persistInput` on each template to `true` to resolve the issue for that template. 
+
+OR
+
+1. Copy the contents of the variables pane to your clipboard.
+2. Open the Settings dropdown.
+3. Click “Persist Input” to disable the option.
+4. Click “Proceed” in the warning modal.
+5. Open the Settings menu and click “Persist Input” again to turn it back on.
+6. Paste your variables back into the variables pane and save the template. This template should no longer encounter the issue.
+
+### Deprecated Features
+
+- **I95-39881 GraphQL User Mutations have been Deprecated:** The "createUser", "modifyUser", and "deleteUser" GraphQL mutations are now deprecated. Please use their REST equivalents which are listed in the GraphQL "deprecationReason" for those mutations. 
+
+## Release 4.5.7
+
+**Release Date:** April 12, 2021 
+
+### New Features and Improvements
+
+- **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.md). 
+
+### Resolved Issues
+
+- **I95-39650 Repository access tokens provisioned on the Conductor are not automatically distributed to its managed routers.** Access Tokens are now distributed to managed routers. 
+------
+- **I95-39649/BEL-42 Conductors/Routers on initial deployment not going to running state.** Resolved an issue where Conductors or Routers on initial deployment would not transition to a running state until a certificate was added.
+------
+- **I95-39793 Conductor fails to self-upgrade:** This issue affected only 4.5.6-1 systems performing Conductor self-upgrade with Installer version 2.7.0 (or later). This issue has been resolved. 
+
+### Caveats
+
+- **I95-39798 Token Update and Available Version Update stuck on GPG key access:** In rare occasions the GPG key access may cause the token and version updates to hang, and block access to the software. To prevent this issue, log out of all open web and PCLI sessions before applying the token. 
+
 ## Release 4.5.6
 
 ### New Features and Improvements
 
-- **[I95-35051 Provide a way to generate & stage all auto-generated configuration](cli_reference.md#create-config-autogenerated):** The `create-config autogenerated` command has been added, which forces re-generation of all automatically generated configuration items, and stages the configuration changes into the current candidate configuration. This command serves only to aid in debugging, and allows you to validate, inspect, and make edits, without committing the changes.
+- **[I95-35051 Provide a way to generate & stage all auto-generated configuration](cli_reference.md#create-config-autogenerated):** The `create config autogenerated` command has been added, which forces re-generation of all automatically generated configuration items, and stages the configuration changes into the current candidate configuration. This command serves only to aid in debugging, and allows you to validate, inspect, and make edits, without committing the changes.
 ------
 - **I95-38642 Form Based Template Instantiation:**  An administrator can now define a JSON Schema to create a template for variables so a user can fill out the variables in a simple form.
 ------
@@ -118,7 +254,24 @@ sidebar_label: 4.5
 ------
 - **I95-39486 Conductor installation does not update while performing the upgrade from the GUI:** Resolved an issue that during a conductor upgrade, the GUI was not updating until the last few seconds of the installation. The GUI now shows the install/upgrade progress. 
 ------
-- **I95-39543 Out of order packets when traffic-eng is enabled in multicore environments:** Fixed occasional reorder issue when `traffic-eng` is enabled in a multicore environment
+- **I95-39543 Out of order packets when traffic-eng is enabled in multicore environments:** Fixed occasional reorder issue when `traffic-eng` is enabled in a multicore environment.
+------
+
+### Caveats
+
+- **I95-39793 Conductor fails to self-upgrade:** This issue affects only 4.5.6-1 systems performing conductor self-upgrade with Installer version 2.7.0 (or later). Released versions of 128T prior or after 4.5.6-1 are not affected.
+
+The following error is displayed:
+```
+/usr/bin/nice: /usr/lib/128T-installer/install128t.par: No such file or directory
+Failed to upgrade 128T!
+```
+The recommended course of action is to perform a manual interactive upgrade of the conductor using the following command from the linux prompt:
+```
+sudo install128t
+```
+Please refer to [Manually Installing the 128T](intro_installation_installer.md) for that process. 
+
 
 ## Release 4.5.5
 
@@ -216,7 +369,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37680 nodeMonitor process may fault on shutdown of 128T.** `nodeMonitor` no longer faults on 128T shutdown.
 ------
-- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.** The `delete sessions` command no longer creates a race condition. 
+- **I95-37752 A race condition exists when a session is manually deleted through the `delete sessions` PCLI command.** The `delete sessions` command no longer creates a race condition. (Interim IPFIX record generation or HA session synchronization could also cause trigger the same fault, and is also addressed by this fix.)
 ------
 - **I95-37777 Adding SNMP configuration may cause webserver to be inaccessible.** This issue has been resolved; adding SNMP configurations no longer impacts the Webserver. 
 ------
@@ -324,7 +477,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
 ### New Features and Improvements
 
-- **I95-33193** "About This System" within the GUI will display additional information if it is a container ("128T-docker") or if installed with a 128T OTP ISO.
+- **I95-33193** "About This System" within the GUI will display additional information if it is installed with a 128T OTP ISO.
 ------
 - **I95-35319** "Managed Reports" (Custom Report factory defaults) are now shipped with the product.
 ------
@@ -385,13 +538,6 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 - **I95-36358** Currently downloading version in the asset state would persist after a download has completed.
 
   Until the system is upgraded to 4.5.1, this issue can be mitigated by restarting the salt-minion service by executing `systemctl restart salt-minion` in the Linux shell. If not manually restarted, the salt-minion watchdog will also restart the salt-minion after one hour.
-------
-- **I95-36404** Highway process fails to start on Ubuntu distribution.
-
-  _**Symptom:**_ 128T running in a container will fail to initialize when the container is running on Ubuntu distributions. The following can be seen within `highway.log`:
-  ```
-  Execute StdErr was ‘sysctl: cannot stat /proc/sys/net/ipv6/conf/default/optimistic_dad: No such file or directory’
-  ```
 ------
 - **I95-36416** Navigating to the DNS Config page under a router in GUI edit configuration results in error.
 
@@ -574,7 +720,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 
   _**Symptom:**_ This error is seen during the upgrade of an HA conductor pair to version 4.4.0 or later. An upgrade of a single standalone conductor node will not see this error. The following error will be reported by the node running software version earlier than 4.4.0:
   ```
-"128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
+  "128T highstate: ["Rendering SLS '128T:reverse_ssh' failed: Jinja variable 'dict object' has no attribute 'iteritems'"]"
   ```
   This error can be viewed by running the following PCLI command from either node: `show assets <asset-id>`. Where asset-id is the asset-id of the node running pre 4.4.0 version that has not yet been upgraded.
 

@@ -3,7 +3,7 @@ title: Tuning BFD Settings
 sidebar_label: Tuning BFD
 ---
 
-The BFD protocol is defined in [RFC 5880](https://tools.ietf.org/html/rfc5880), which describes the basics of it's state machine. When two 128T routers are configured to be peered together, they will begin to send BFD packets to each other to establish peer reach-ability (UDP port 1280). The state will be "down" until a three-way BFD handshake occurs, in which case the state will transition to become "up."
+The BFD protocol is defined in [RFC 5880](https://tools.ietf.org/html/rfc5880), which describes the basics of its state machine. When two 128T routers are configured to be peered together, they will begin to send BFD packets to each other over each peer path in order to establish peer reachability (using UDP port 1280). The state will be "down" until a three-way BFD handshake occurs, in which case the state will transition to become "up."
 
 Throughout the life cycle of the BFD peering relationship between 128T routers, two different kinds of BFD operating modes are used:
 
@@ -39,7 +39,7 @@ required-min-rx-interval
 multiplier
 ```
 
-These settings are used in a negotiation between two 128T peers. They are used in determining precisely when each router should send, and expect to receive async control mode messages. They are also used in determining the length of time that must pass without receiving messages from a peer, before that peer is deemed to be "down."
+These settings are used in a negotiation between two 128T peers over a given peer path. They are used in determining precisely when each router should send, and expect to receive async control mode messages. They are also used in determining the length of time that must pass without receiving messages from a peer, before that peer is deemed to be "down."
 
 The below setting on a 128T router communicates to its peer how often (in milliseconds) the router wishes to transmit BFD async mode packets:
 
@@ -49,7 +49,7 @@ desired-tx-interval
 
 In other words, "*I'd like to send to you at this interval.*"
 
-The below setting on a 128T router communicates to it's peer the minimum interval (in milliseconds) between BFD async mode packets that it is capable of receiving:
+The below setting on a 128T router communicates to its peer the minimum interval (in milliseconds) between BFD async mode packets that it is capable of receiving:
 
 ```
 required-min-rx-interval
@@ -65,11 +65,11 @@ The below setting goes into a calculation for a 128T router to determine how lon
 multiplier
 ```
 
-Initially this time is effectively the `multiplier` times the router's own `required-min-rx-interval`. However, once the router has learned the `desired-tx-interval` of its peer, it will then understand the interval it should expect to receive messages from the peer. At that point, it will take the greater of either it's own `required-min-rx-interval`, or the peer's `desired-tx-interval` it has learned, and multiply that value by its `multiplier` to become the length of time without receiving messages before it deems the peer down.
+Initially this time is effectively the `multiplier` times the router's own `required-min-rx-interval`. However, once the router has learned the `desired-tx-interval` of its peer, it will then understand the interval it should expect to receive messages from the peer. At that point, it will take the greater of either its own `required-min-rx-interval`, or the peer's `desired-tx-interval` it has learned, and multiply that value by its `multiplier` to become the length of time without receiving messages before it deems the peer path down. The multiplier therefore represents the number of consecutive, missed async BFD messages before deeming the peer path down.
 
-In other words, "*if I don't receive a message in the amount of time that is my multiplier times either my configured `required-min-rx-interval`, or my peer's `desired-tx-interval` that I've learned (whichever is greater), I'll deem the peer to be down.*"
+In other words, "*if I don't receive a message in the amount of time that is my multiplier times either my configured `required-min-rx-interval`, or my peer's `desired-tx-interval` that I've learned (whichever is greater), I'll deem the peer path to be down.*"
 
-If both router peers use the default settings above, you should expect to see them transmit async control mode messages every 1000ms, or 1s. If one or both peers do not receive an async control mode packet in 3x1000ms (3s), it will consider the peer to be "down."
+If both router peers use the default settings above, you should expect to see them transmit async control mode messages every 1000ms, or 1s. If one or both peers do not receive an async control mode packet in 3x1000ms (3s), it will consider the peer path to be "down."
 
 ### Damping
 
@@ -83,7 +83,7 @@ Simple BFD damping (hold-down timer) is enabled by default, and can be disabled 
 
 **Initial Hold Down Timer:** The minimum amount of time BFD must wait before beginning notifications. The default is 5 seconds, and can be configured to be any value lower than the `maximum-hold-down-time`. The hold-down-timer will not accept a value of 0. 
 
-**Maximum Hold Down Timer:** The maximum amount of time that BFD must wait before it begins notifications. This timer only applies when BFD damping is enabled. The default value for this is 3600 s (or 1 hour). The network administrator may configure this to be any value higher than the initial`hold-down-time`.
+**Maximum Hold Down Timer:** The maximum amount of time that BFD must wait before it begins notifications. This timer only applies when BFD damping is enabled. The default value for this is 3600s (or 1 hour). The network administrator may configure this to be any value higher than the initial`hold-down-time`.
 
 **Dynamic Damping:** Disabled by default. When enabled, the 128T router uses the `hold-down-time` and `maximum-hold-down-time` parameters to dynamically adjust the damping timer to ensure that excessive BFD flaps are not affecting the system negatively. This prevents the effect of oscillations, or flapping, caused by BFD and underperforming (or volatile) links. It ensures stability of the entire network and reduces the events requiring the network administrator's attention.
 
@@ -99,32 +99,32 @@ Simple BFD damping (hold-down timer) is enabled by default, and can be disabled 
 config authority
     router Router1
         bfd
-            State enabled
-            Hold-down-time 10
-            Damping Enabled
-            Maximum-hold-down-time 60
-        Peer foo
-            Bfd
-                Hold-down-time 3
-                Damping disabled
-        Node bar
-            Device-interface dev1
-                Network-interface net1
-                    Neighborhood n1
-                        Bfd
-                            Hold-down-time 30
-                            Damping Enabled
-                            Maximum-hold-down-time 600
-                    Adjacenency 1.1.1.1 peer1
-                        Bfd
-                            Hold-down-time 300
-                            Damping Disabled
+            state enabled
+            hold-down-time 10
+            damping enabled
+            maximum-hold-down-time 60
+        peer foo
+            bfd
+                hold-down-time 3
+                damping disabled
+        node bar
+            device-interface dev1
+                network-interface net1
+                    neighborhood n1
+                        bfd
+                            hold-down-time 30
+                            damping Enabled
+                            maximum-hold-down-time 600
+                    adjacenency 1.1.1.1 peer1
+                        bfd
+                            hold-down-time 300
+                            damping Disabled
 ```
 If damping is disabled, the configured `hold-down-time` will be used with the current existing `hold-down-time` logic. For additional information, see [BFD Router](config_reference_guide.md#bfd-router) in the Configuration Element Reference Guide.
 
 ### Echo Mode
 
-Echo mode messages are used between 128T router peers to measure path quality, including jitter, packet loss, and latency (JPL). Echo mode messages are transmitted from one router to its peer, which simply echoes them back to the originating router. In contrast to async control mode messages, which are conversations between peer BFD agents, echo mode messages are one routers' conversation with itself via its router peer.
+Echo mode messages are used between 128T router peers to measure path quality, including jitter, packet loss, and latency (JPL). Echo mode messages are transmitted from one router to its peer, which simply echoes them back to the originating router. In contrast to async control mode messages, which are conversations between peer BFD agents, echo mode messages are one router's conversation with itself via its router peer, over a specific peer path.
 
 The below sets how often (in seconds) a 128T router will perform a test of path quality using BFD echo mode messages:
 
@@ -144,7 +144,7 @@ The below sets the minimum amount of time between echo packets that a particular
 required-min-echo-interval
 ```
 
-If both router peers use the default settings above, you should expect to see each router independently perform echo mode tests every 10s, consisting of 10 echo mode packets sent to its peer in rapid succession. Upon receipt, the peer will echo them back to the originating router, which will measure JPL.
+If both router peers use the default settings above, you should expect to see each router independently perform echo mode tests every 10s, consisting of 10 echo mode packets sent to its peer in rapid succession, for each peer path it has established with that peer. Upon receipt, the peer will echo them back to the originating router, which will measure JPL.
 
 
 ### Visibility into BFD
@@ -155,13 +155,15 @@ Visibility into the status of the BFD async control mode can be seen as "up" or 
 show peers
 ```
 
+By adding `detail` to the command (i.e., `show peers detail`) you can see the current JPL statistics for each peer path.
+
 Visibility into the measured results of BFD echo mode can be seen on a per service-route basis using the one below. This shows data from a running average of multiple successive echo mode tests:
 
 ```
 show load-balancer
 ```
 
-On a per-peer basis, this command shows results from echo mode measurements, however, this is NOT the same running average as data seen in `show load-balancer`  it is simply the raw data resulting from the last time a test was performed:
+On a per-peer path basis, this command shows results from echo mode measurements, however, this is NOT the same running average as data seen in `show load-balancer`  it is simply the raw data resulting from the last time a test was performed:
 
 ```
 show stats bfd by-peer-path

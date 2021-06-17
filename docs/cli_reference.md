@@ -687,7 +687,7 @@ Create a new user account interactively.
 #### Usage
 
 ```
-create user <username>
+create user [<username>]
 ```
 
 ##### Positional Arguments
@@ -921,7 +921,7 @@ Clears all active flow data from this node.
 #### Usage
 
 ```
-delete flows [force] [node <node>] router <router>
+delete flows [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -1112,6 +1112,42 @@ Account 'jdeveloper' successfully deleted
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
+## `delete user tokens`
+
+Revoke API access tokens for a user.
+
+#### Usage
+
+```
+delete user tokens [force] <username>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| username | the name of the account to revoke API tokens for |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create user`](#create-user) | Create a new user account interactively. |
+| [`delete user`](#delete-user) | Delete a user account |
+| [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
+| [`edit user`](#edit-user) | Modify an existing user account |
+| [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
+| [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
+| [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
+| [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 ## `edit prompt`
 
@@ -1257,6 +1293,10 @@ edit user [<username>]
 | [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
 
 #### Description
+
+:::note
+The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, and cannot contain any characters that repeat more than three times.
+:::
 
 The _edit user_ command enters a configuration subtree specific to administering user accounts. From within this subtree, administrators can change any of the attributes associated with a user account (full name, password, role, and enabled state). This is done in a "configuration-like" way, where commands are issued as _attribute value_.
 
@@ -3242,7 +3282,7 @@ If a password is lost or forgotten and the account is inaccessible, the account 
 
 ## `set provisional-status`
 
-Set the provisional status of a specific interface to down, or returning it to the "up" state after taking it down. 
+Set the provisional status of a device-interface to down, or returning it to the "up" state after taking it down. 
 
 #### Usage
 
@@ -3393,6 +3433,71 @@ Completed in 0.35 seconds
 | ------- | ----------------------------|
 | 1.1.0   | This feature was introduced |
 | 3.1.0   | Previously allowed filtering by node, now the command shows all alarms. |
+## `show application modules registration`
+
+Display registered application-modules.
+
+#### Usage
+
+```
+show application modules registration [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show application modules status`](#show-application-modules-status) | Display applications provided by a module. |
+
+#### Description
+
+The _show application modules registration_ subcommand shows all of the modules that provide application names to 128T as part of its Application Classification feature.
+
+## `show application modules status`
+
+Display applications provided by a module.
+
+#### Usage
+
+```
+show application modules status [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>} name <name> [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| name | The module to get status for |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router |
+| rows | The number of application entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show application modules registration`](#show-application-modules-registration) | Display registered application-modules. |
+
+#### Description
+
+The _show application modules status_ subcommand shows all of application names and transport information of a module, as well as other debugging information.
 
 ## `show application names`
 
@@ -3416,7 +3521,7 @@ show application names [rows <rows>] [force] [node <node>] {router <router> | re
 
 #### Description
 
-The _show application names_ subcommand shows all of the &quot;application&quot; names that the 128T has learned, or been configured to recognize, as part of its Application Classification feature.
+The _show application names_ subcommand shows all of the application names that the 128T has learned, or been configured to recognize, as part of its Application Classification feature.
 
 #### Example
 
@@ -3426,14 +3531,27 @@ Wed 2020-04-22 16:06:43 UTC
 
 Node: gouda
 
-========================= =============== ================ ===================== =====================
- Application Name          Session Count   Ip Tuple Count   Date Discovered       Last Updated
-========================= =============== ================ ===================== =====================
- *.1.nflxso.net                        0               18   2020-04-11 15:35:01   2020-04-22 01:38:15
- *.128technology.com                   0                1   2020-04-12 15:11:09   2020-04-12 15:11:12
- *.adcolony.com                        0              199   2020-04-11 15:05:44   2020-04-22 13:15:27
- *.adobe.com                           0                6   2020-04-11 18:36:26   2020-04-20 20:09:57
+================== =============== ================ ===================== =====================
+ Application Name   Session Count   Ip Tuple Count   Date Discovered       Last Updated
+================== =============== ================ ===================== =====================
+ O365-Skype                     6                5   2021-04-14 09:20:09   2021-04-14 09:20:09
+ O365-Exchange                  5               16   2021-04-14 09:20:09   2021-04-14 09:20:09
+ O365-Common                    0               25   2021-04-14 09:20:09   2021-04-14 09:20:09
+ O365-SharePoint                0                5   2021-04-14 09:20:09   2021-04-14 09:20:09
+ dropbox                        0               65   2021-04-14 13:37:49   2021-04-14 13:37:49
+ gmail                          0               17   2021-04-14 13:58:09   2021-04-14 13:58:09
+ google-drive                   0               27   2021-04-14 13:58:09   2021-04-14 13:58:09
 ```
+
+The various columns are as follows:
+
+| Column | Description                      | 
+| ------ | ---------------------------------|
+| Application Name | The name of the identified application. |
+| Session Count | The number of active sessions for the application. | 
+| Ip Tuple Count | The number of addresses and ports associated with the application. |
+| Date Discovered | The time at which the router first learned this application. Restarting the router or deleting the application will reset the time.  |
+| Last Updated | The time at which the router updated the entries for the application. The time is updated when the ip tuple information associated with the application has changed.  |
 
 #### Version History
 
@@ -4453,7 +4571,7 @@ Display running configuration version.
 #### Usage
 
 ```
-show config version [force] [router <router>]
+show config version [{router <router> | resource-group <resource-group>}] [force]
 ```
 
 ##### Keyword Arguments
@@ -5241,19 +5359,26 @@ Shows current fib entries at the specified node.
 #### Usage
 
 ```
-show fib [rows <rows>] [vrf <vrf>] [tenant <tenant>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<ip-prefix>]
+show fib [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name> | match-service-name <name>}] [rows <rows>] [vrf <vrf>] [tenant <tenant>] [source-ip <source-ip>] [source-interface <source-interface>] [summary] [force] [node <node>] {router <router> | resource-group <resource-group>} [<ip-prefix>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
+| contains-service-name | The partial substring match to show for the fib |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| hierarchy-service-name | The hierarchy root to show for the fib |
+| match-service-name | The regex to match service names to show for the fib |
 | node | The node from which to retrieve fib entries |
 | resource-group | The name of the resource group |
 | router | The router from which to retrieve fib entries |
-| rows | The number of fib nodes to display at once [type: int or &#x27;all&#x27;] (default: 50) |
-| tenant | Tenant name |
+| rows | The number of fib nodes to display at once. Enter a number or `all` (default: 50). |
+| service-name | The exact service name to show for the fib |
+| source-interface | The incoming network-interface used to perform a source lookup |
+| source-ip | The incoming ip-address used to perform a source lookup [type: IP address] |
+| summary | show next-hop information as a count if summary |
+| tenant | The tenant name match to show for the fib |
 | vrf | VRF name |
 
 ##### Positional Arguments
@@ -5262,11 +5387,17 @@ show fib [rows <rows>] [vrf <vrf>] [tenant <tenant>] [force] [node <node>] {rout
 | ---- | ----------- |
 | ip-prefix | FIB IP prefix [type: IP prefix] |
 
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`lookup`](#show-fib-lookup) | Shows current fib entries at the specified node using incoming packet info |
+
 #### Description
 
-This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the &lt;node-name&gt; argument. The output may be limited to a specified number of rows by adding the optional _&lt;rows&gt;_ modifier at the end of the command.
+This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the `node-name` argument. The output may be limited to a specified number of rows by adding the optional `rows` modifier at the end of the command.
 
-This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the &lt;rows&gt; modifier. 
+This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the `rows` modifier. 
 
 #### Example
 
@@ -5315,8 +5446,44 @@ Capacity:    19051
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 3.0.0   | Added _node_ keyword to enforce PCLI consistency |
-| 5.1.0   | Added VFR support, next hop details and the ability to filter by: service-name, hierarchy-service-name, contains-service-name, prefix, source-address, source-interface, and tenant. |
+| 5.1.0   | Added next hop details, and the ability to filter by VFR, resource-group, and tenant. |
+| 5.2.0   | Added and the following arguments: service-name, hierarchy-service-name, contains-service-name, match-service-name, source-ip, and source-interface. |
 
+## `show fib lookup`
+
+Shows current FIB entries at the specified node using incoming packet info.
+
+#### Usage
+
+```
+show fib lookup [tenant <tenant>] [source-ip <source-ip>] [source-interface <source-interface>] [summary] [force] [node <node>] {router <router> | resource-group <resource-group>} destination-ip <destination-ip> destination-port <destination-port> protocol <protocol>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-ip | The incoming destination IP-address used to lookup fibs [type: IP address]. |
+| destination-port | The incoming destination port used to lookup the fib [type: port]. |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The node on which to find a fib entry. |
+| protocol | Name or number of the protocol used to lookup the fib [type: string or uint8]. |
+| resource-group | The name of the resource group. |
+| router | The router on which to find a fib entry. |
+| source-interface | The incoming network-interface used to perform a source lookup. |
+| source-ip | The incoming ip-address used to perform a source lookup [type: IP address]. |
+| summary | show next-hop information as a count if summary. |
+| tenant | The tenant name used to lookup the fib. |
+
+#### Description
+
+This command shows the Forwarding Information Base (FIB) entries on the node that is specified by the `node-name` argument. The output may be limited to a specified number of rows by adding the optional `rows` modifier at the end of the command.
+
+This command can generate a large quantity of output on a busy system, and it is advised that administrators exercise caution when issuing this command without the `rows` modifier.
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.2.0   | Introduced the command |
 
 ## `show history`
 
@@ -7584,6 +7751,35 @@ Completed in 0.17 seconds
 | ------- | ----------------------------|
 | 3.2.0   | This feature was introduced |
 
+## `show service`
+
+Displays service information at the specified node.
+
+#### Usage
+
+```
+show service [{service-name <name> | hierarchy-service-name <name> | contains-service-name <name>}] [node <node>] router <router> [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| contains-service-name | The partial substring match to show service info for |
+| hierarchy-service-name | The hierarchy root to show service info for |
+| node | The node for which to display service info (default: all) |
+| router | The router for which to display service info |
+| service-name | The exact service name to show service info for |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+#### Description
+
+The _show service_ command display active service information from the 128T router. This command has multiple service filters allowing target to specific service or services. Output can be displayed in summary or in detail view.
 
 ## `show service-path`
 
@@ -8012,7 +8208,7 @@ Display detailed system state.
 #### Usage
 
 ```
-show system [force] [router <router>] [node <node>]
+show system [{router <router> | resource-group <resource-group>}] [force] [node <node>]
 ```
 
 ##### Keyword Arguments
@@ -8626,7 +8822,7 @@ Show the most recent usage of 128T.
 #### Usage
 
 ```
-show user activity [verbose] [order-by <order-by>] [type <type>] [from <from>] [to <to>] [<username>]
+show user activity [from <from>] [to <to>] [rows <rows>] [<username>]
 ```
 
 ##### Keyword Arguments
@@ -8634,10 +8830,9 @@ show user activity [verbose] [order-by <order-by>] [type <type>] [from <from>] [
 | name | description |
 | ---- | ----------- |
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo. [type: timestamp] |
-| order-by | Sort the results by either username, time, and ip-address (default: username) |
+| rows | The number of events to display at once [type: int] (default: 50) |
 | to | Only show events before the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] |
-| type | Filter the type of event (default: all) |
-| verbose | Display a more detailed view of the user activity |
+
 
 ##### Positional Arguments
 

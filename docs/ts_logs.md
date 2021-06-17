@@ -5,7 +5,7 @@ sidebar_label: Logs
 Logs 128T are stored in 4 principal locations: `/var/log/128technology/`, `/var/log/install128t/`, `/var/log/salt/` and in the journal.
 
 - `/var/log/128technology/`, as the name suggests, contains the majority of the logs related to 128T application processing.
-- 128T utilizes [Salt Stack](https://www.saltstack.com) for life cycle management and Dev Ops automation. Salt-related log files are contained within their default directory of `/var/log/salt/`.
+- 128T utilizes [Salt Stack](https://docs.saltproject.io) for life cycle management and Dev Ops automation. Salt-related log files are contained within their default directory of `/var/log/salt/`.
 - The 128T-installer is a separate application that is used for installing and upgrading the 128T.  Any logs related to installation, initialization, upgrade, or rollback will be contained within the `/var/log/install128t/` directory.
 - The journal contains logs from processes that are managed by systemd and not by the 128T process manager.  In order to view logs related to these processes, you can execute `journalctl -u <process>`. 128T-related processes that are managed by systemd are:
   - `128TWeb`

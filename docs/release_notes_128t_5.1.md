@@ -3,7 +3,134 @@ title: 128T 5.1 Release Notes
 sidebar_label: '5.1'
 ---
 
+:::info
+Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
+
+If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
+
+Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+:::
+
+## Release 5.1.3
+**Release Date:** May 14, 2021
+
+### New Features
+
+- **I95-40046 Support for [BGP over SVR on VRF](config_bgp.md#vrf-bgp-over-svr):** BGP over SVR is now supported on BGP instances inside a VRF.
+
+### Resolved Issues
+
+- **I95-39477 Configuration validation failure when conductor non-forwarding fabric interfaces are configured in different subnets:** Updated to display a warning to the user to correct the issue, rather than failing.
+------
+- **I95-39509 Service Configuration has Empty Access Policy List:** Resolved an issue where the Access Policy list was not showing any items in the drop-down.
+------
+- **I95-39683 After changing the configuration, the `diff` operation shows no changes:** Resolved an issue where the `show events config commit` was not returning any changes.
+------
+- **I95-39852 Sync System clock to the Hardware clock with NTP:** The hardware clock now synchronizes with the NTP server. 
+------
+- **I95-39854 Management over Forwarding not bringing up Eth0 on shutdown:** Resolved an issue preventing devices from unbinding cleanly.
+------
+- **I95-39887 Router deployments taking longer than expected to complete:** Resolved an issue where assets take a long time to transition out of the connected state. 
+------
+- **I95-39953 IPFIX Export Loop:** Resolved a race condition causing the IPFIX collector to get into an infinite loop exporting interim records.
+------
+- **I95-39986 Mellanox driver discarding large segmented packets:** Resolved an issue where the Mellanox driver was discarding large segmented packets and reporting them as errors. 
+------
+- **I95-40000 LTE Module Reset overwrites the LTE interface MTU:** The LTE target interface MTU is now persisted at 9000.
+------
+- **I95-40032 `show device-interface speed` returns incorrect value for virtio devices:** Resolved a comparison error causing `show device-interface` to display the wrong speed. 
+------
+- **I95-40208 Quickstart not setting the minion_id to the hardware identifier when the value is blank:** Previously, if the Quickstart configuration did not have a value for the `minion_id`, the `minion_id` would not be set to the hardware identifier. This has been corrected in the `128T-5.1.3-1.el7.OTP.v2.x86_64.iso` ISO.
+------
+- **I95-40489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the `128T-5.1.3-1.el7.OTP.v3.x86_64.iso` ISO.
+
+## Release 5.1.2
+**Release Date:** April 30, 2021 
+
+**Includes changes from:** [Version 4.5.8 April 28, 2021](release_notes_128t_4.5.md#release-458).
+
+### Resolved Issues
+
+- **I95-29583 Default Language Setting:** Changes to the default language are now saved per user, not per system.
+------
+- **I95-39245 Show detected domain names on the Applications Seen page:** Domain names are now displayed on the Applications Seen page in the GUI.
+------
+- **I95-39298 STEP Waypoint NAT Support:** When a resolved external NAT address is present in the adjacency configuration, it is used when advertising the peer path in the STEP router document.
+------
+- **I95-39374 Multi-core TE and Per-AdjacencyTE feature interaction:** Resolved an issue where it was possible for a packet on a non-scheduled adjacency to make it into the schedulerGroup when adjacency-only Traffic Engineering was enabled.
+------
+- **I95-39377 Provide progress while PCLI connects to 128T:** The system now provides progress to prevent users from attempting to use the PCLI before the system is fully operational. 
+------
+- **I95-39380 Inline performance monitoring causes metadata parsing errors:** Added validation for the presence of performance-monitoring profile when enabled.
+------
+- **I95-39406 Installer Update/software upgrade dependencies:** Upgrades from the Conductor now require an updated Installer before downloading and installing software to the Router. 
+------
+- **I95-39483 Validate/Commit And Diff Endpoints Not Filtered by RBAC:** Validate, Commit and diff operations now honor RBAC settings.
+------
+- **I95-39492 The GUI displays configuration changes "Ready to Commit" when there are no pending config changes:** This issue has been resolved.
+------
+- **I95-39538 Periodic disruptions in service:** Resolved an issue in the HttpParser for application identification when parsing malformed HTTP traffic.
+------
+- **I95-39555 Active interface out-of-sync with the leadership status for the underlying device interface:** Resolved an issue when both nodes of an HA router start 128T at a similar time, the active node for a redundant interface is not determined correctly, resulting in a failure to forward traffic.
+------
+- **I95-39558 After setting a custom favicon, clearing the icon does not reset to the default:** This issue has been resolved. 
+------
+- **I95-39568 Error when running "compare config running candidate" after adding second domain-server:** Resolved an issue where a user-ordered list was not being parsed properly.
+------
+- **I95-39587 Duplicate entries in show commands on PCLI when using bulk-edit:** Resolved an issue with the use of bulk-edit in the PCLI.
+------
+- **I95-39639 Packet transmit fails when Traffic Engineering is enabled with multiple worker cores.** This issue has been resolved.
+------
+- **I95-39641 `show device-interface extended-stats` command reported unavailable when the virtio device does not expose extended stats:** Resolved an issue with the show device-interface extended-statistics/registers command.
+------
+- **I95-39695 Delete Session feature not working:** Resolved an issue with the Session Details dialog.
+------
+- **I95-39701 Remote router login ignores 'User' selection:** Resolved an issue where a parameter name mismatch caused the current user to be ignored.
+------
+- **I95-39711 PCLI unhandled error when exporting a config using a name that has already been used.** The PCLI now provides a clear error message describing the issue.
+------
+- **I95-39764 Per Adjacency Traffic Engineering Crashing For Multiple Paths on Configuration:** Resolved an issue when receiving adjacencies with out of order path-indexes. 
+------
+- **I95-39780 Hugepage tool incorrectly calculates hugepages based on Tenant table:** Revised the scaling of the Hugepage tool. 
+------
+- **I95-39782 The aggregate stats pull from highway logs provides more detail than necessary:** Reduced the unnecessary detail. 
+------
+- **I95-39792 Import ISO command results in terminal launch not working:** Resolved a conflict between an ISO upgrade and invoking a terminal window at the same time. 
+------
+- **I95-39796 Conductor and Authority missing from GUI on first login:** Added multiple retries to retrieve system data upon first login. 
+------
+- **I95-39818 Conductor logging out when selecting a router mid-upgrade:** The conductor no longer logs out when it runs into the error. 
+------
+- **I95-39859 Conductor unable to display some PCLI commands after upgrade to 5.1:** This issue has been resolved.
+------
+- **I95-39936 Pagination for the output of `show fib` does not work correctly:** Pagination headers are now handled correctly, and pagination is supported in the `show fib` output. 
+------
+- **I95-39985 Template save error:** Resolved an issue where creating persistent fields on an **existing** template in Advanced Mode generated a validation error and the template changes were not saved. 
+------
+- **I95-39992 AuthClient request queue fills up with concurrent requests:** Resolved an issue with using authenticated REST APIs when under heavy load. 
+
+## Release 5.1.1
+**Release Date:** April 12, 2021
+
+### New Features and Improvements
+
+- **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.md). 
+
+### Resolved Issues
+
+- **I95-39650 Repository access tokens provisioned on the Conductor are not automatically distributed to its managed routers.** Access Tokens are now distributed to managed routers. 
+------
+- **I95-39649/BEL-42 Conductors/Routers on initial deployment not going to running state.** Resolved an issue where Conductors or Routers on initial deployment would not transition to a running state until a certificate was added. 
+
+### Caveats
+
+- **I95-39798 Token Update and Available Version Update stuck on GPG key access:** In rare occasions the GPG key access may cause the token and version updates to hang, and block access to the software. To prevent this issue, log out of all open web and PCLI sessions before applying the token. 
+
 ## Release 5.1.0
+
+**Release Date:** April 12, 2021
+
+**Includes changes from:** [Version 4.5.5 February 10, 2021](release_notes_128t_4.5.md#release-455)
 
 ### New Features and Improvements 
 
@@ -25,7 +152,7 @@ sidebar_label: '5.1'
 ------
 - **I95-34919 Show Commands for Services:** The [`show service path`](cli_reference.md#show-service-path) and [`show fib`](cli_reference.md#show-fib) commands have been enhanced to provide more granular path-related debugging. 
 ------
-- **[I95-35051 Provide a way to generate & stage all auto-generated configuration](cli_reference.md#create-config-autogenerated):** The `create-config autogenerated` command has been added, which forces re-generation of all automatically generated configuration items, and stages the configuration changes into the current candidate configuration. This command serves only to aid in debugging, and allows you to validate, inspect, and make edits, without committing the changes.
+- **[I95-35051 Provide a way to generate & stage all auto-generated configuration](cli_reference.md#create-config-autogenerated):** The `create config autogenerated` command has been added, which forces re-generation of all automatically generated configuration items, and stages the configuration changes into the current candidate configuration. This command serves only to aid in debugging, and allows you to validate, inspect, and make edits, without committing the changes.
 ------
 - **I95-35952 PCLI support for multi-line fields:** Configurations with multi-line input fields are restricted to a single line when displayed. 
 ------

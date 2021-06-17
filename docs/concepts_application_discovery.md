@@ -88,7 +88,7 @@ The 128T software has a number of built-in tools to help faciliate the applicati
 
 ##### 128T's Session Table
 
-The 128T maintains a list of all active sessions for all traffic it is forwarding, and makes that available to administrators via the PCLI command `show sessions`. (The data is also available via the 128T's GUI.) This contains a lot of the information identified in the [Pertinent Application Data](#pertinent-application-data) section.
+The 128T maintains a list of all active sessions for all traffic it is forwarding, and makes that available to administrators via the PCLI command `show sessions` and in the GUI in the Sessions view. Much of the data identified in the [Pertinent Application Data](#pertinent-application-data) section is available in the Session Table. 
 
 If you have set the tenancy of your lab system using the technique mentioned in the [Establishing a Lab Environment](#establishing-a-lab-environment) section, it becomes easy to filter the session table using `grep`, as in:
 
@@ -114,7 +114,7 @@ A variant on the packet-capture technique described previously is to apply a fil
 
 Apply a capture-filter on the LAN-side `device-interface`, and set the filter to `udp port 53`. Because DNS transactions are small (two packets), and because they are infrequent, this filter can be left in place for a long time before the capture file is harvested.
 
-After running tests, retrieve the file from the system for post-processing. We have had success using the `dnsanon` tool to extract the contents of a PCAP file into a text file containing the DNS queries. The `dnsanon` tool can be found at https://ant.isi.edu/software/dnsanon/.
+After running tests, retrieve the file from the system for post-processing. We have had success using the `dnsanon` tool to extract the contents of a PCAP file into a text file containing the DNS queries. 
 
 :::note
 The `dnsanon` tool is open source software and not supported by 128 Technology. Use at your own risk.

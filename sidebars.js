@@ -13,10 +13,10 @@ module.exports = {
     ],
     "Introduction": [
       "intro_getting_started",
-     ],
+    ],
     "Deployment Considerations": [
       "intro_system_reqs",
-     ],
+    ],
     "Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
@@ -26,14 +26,14 @@ module.exports = {
       "intro_basic_router_config",
       "intro_otp_iso_install",
       "intro_install_quickstart_otpiso",
-      ],
-    "Cloud Installations":[
+    ],
+    "Cloud Installations": [
       "intro_installation_aws",
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
       "intro_initialize_HA_conductor",
     ],
-    "Supporting Information - Appendix":[
+    "Supporting Information - Appendix": [
       "intro_installation_installer",
       "legacy_OTP_install",
       "intro_upgrading",
@@ -69,19 +69,22 @@ module.exports = {
           "config_bgp",
           "config_vrf_learning",
           "config_reference_guide",
-          "config_audit_event",          
+          "config_audit_event",
           "config_dhcp",
           "config_dns_proxy",
           "config_ldap",
           "config_management_over_forwarding",
           "config_EthoSVR",
+          "config_service_health",
+          "config_gre_tunnel",
+          "config_in-memory_metrics",
 
           "config_ha",
           "config_dual_router_ha",
           "config_non_forwarding_ha_interfaces",
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
-          
+
           "config_nat",
           "config_ospf",
           "config_rate_limiting",
@@ -120,6 +123,7 @@ module.exports = {
         "label": "Troubleshooting",
         "items": [
           "ts_applications",
+          "ts_ap_duplicate_assets",
           "ts_ap_salt_minion",
           "ts_cpu_spikes",
           "ts_connecting_to_routers",
@@ -163,6 +167,7 @@ module.exports = {
     "Plugins": [
       "plugin_intro",
       "plugin_bgp_community_services",
+      "plugin_aws_tgw_connect",
       "plugin_cloud_ha",
       "plugin_dns_app_id",
       "plugin_dns_cache",
@@ -186,6 +191,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes_128t_5.2",
           "release_notes_128t_5.1",
           "release_notes_128t_5.0",
           "release_notes_128t_4.5",
@@ -200,6 +206,7 @@ module.exports = {
         "type": "category",
         "label": "128T Installer",
         "items": [
+          "release_notes_128t_installer_3.0",
           "release_notes_128t_installer_2.7",
           "release_notes_128t_installer_2.6",
           "release_notes_128t_installer_2.5",

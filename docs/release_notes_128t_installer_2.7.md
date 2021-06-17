@@ -32,3 +32,17 @@ sidebar_label: 2.7
    The following message may be logged in `/var/log/install128t/tmux_wrapper.log` : `protocol version mismatch (client 8, server 7)`. 
 
    _**Corrective Action:**_ Terminate all active tmux sessions/server processes and perform the installation/upgrade operation again.
+
+------
+- **I95-39793 Conductor fails to self-upgrade:** This issue affects only 4.5.6-1 systems performing conductor self-upgrade with Installer version 2.7.0 (or later). Released versions of 128T prior or after 4.5.6-1 are not affected.
+
+The following error is displayed:
+```
+/usr/bin/nice: /usr/lib/128T-installer/install128t.par: No such file or directory
+Failed to upgrade 128T!
+```
+The recommended course of action is to perform a manual interactive upgrade of the conductor using the following command from the linux prompt:
+```
+sudo install128t
+``` 
+Please refer to [Manually Installing the 128T](intro_installation_installer.md) for that process. 

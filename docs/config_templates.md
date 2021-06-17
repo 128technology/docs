@@ -8,6 +8,8 @@ sidebar_label: 'Configuration Templates'
 | Release | Modification                                |
 | ------- | ------------------------------------------- |
 | 4.5.0   | This feature was introduced into 128T-4.5.0 |
+| 4.5.5   | Configuration Wizard was added              |
+| 4.5.10  | network_hosts filter was added              |
 Configuration templates allow administrators to automate the configuration of top level resources (e.g. Routers, Tenants, Services, etc). There are two modes of templating configuration: **Basic** and **Advanced**. Basic mode is intended for simple templates that don't require complex logic. Advanced mode, on the other hand, exposes the full power of the underlying templating language to the administrator.
 
 ## Creating a Template
@@ -68,7 +70,7 @@ Any changes made to the template body pane or variables pane must be saved by cl
 The body of a configuration template is written in the [Liquid](https://shopify.github.io/liquid/) templating language. Please refer to the [Liquid documentation](https://shopify.github.io/liquid/basics/introduction/) for the specifics of the language. 
 
 :::note
-The 128T Networking Platform supports several custom tags in Liquid (e.g. `{% editGroup $}`) that would not be parsable by other Liquid evaluators.
+The 128T Networking Platform supports several custom tags and filters in Liquid (e.g. `{% editGroup $}`) that would not be parsable by other Liquid evaluators.
 :::
 
 ### The `{% editGroup $}` Tag
@@ -252,7 +254,83 @@ The above would insert router `Test1` after router `Test2`.
 
 The `insert` property can have any of the following values: `first`, `last`, `before`, and `after`. If the list is of complex objects, like routers in the above example, the `keys` property must be specified for `before` and `after`. If instead the list was of simple strings like `["a", "b"]`, instead of `keys` you would specify a property called `value` which is a string to reference the item in the list that you want to target (e.g. `"value": "a"`).
 
+### Pulling Values from the Candidate Configuration
+The `{% fromconfig path/to/a/config/value %}` tag allows you to extract a value from the candidate configuration and use it during configuration generation. 
+
+#### Referencing a Leaf
+For example, lets say you want a router's location to reference an existing router's location:
+```
+{
+  "authority": {
+    "router": [
+      {
+        "name": "{{name}}",
+        "location": "{% fromconfig authority/router/nameOfTheExistingRouter/location %}"
+      }
+    ]
+  }
+}
+```
+
+#### Referencing a Leaf List by Index
+For example, lets say that you want a router's description to be the first Conductor address defined at the authority level:
+```
+{
+  "authority": {
+    "router": [
+      {
+        "name": "{{name}}",
+        "location": "{% fromconfig authority/conductor-address[0] %}"
+      }
+    ]
+  }
+}
+```
+
+Some things to note about paths to leaf lists:
+ * Indices are zero-based, the first element in the leaf list has position 0.
+ * If you do not provide an index (e.g. `authority/conductor-address`) the first leaf list value will be used.
+
+
+The following rules apply to all paths:
+* If traversing a list with multiple keys, the keys should be in model order and separated by a comma.
+* Keys should be URL encoded, do not URL encode the comma for compound keys.
+* Leading and trailing slashes are ignored.
+* **Indices can only be used for leaf lists**, you cannot reference a list by index, only by key.
+
+### Additional Filters
+The following filters are available in addition to the built-in filters provided by Liquid.
+
+#### The `network_hosts` Filter
+The `network_hosts` filter can be used for expanding IPv4 or IPv6 blocks as follows: 
+
+```
+{% assign addresses = exampleBlock | network_hosts %}
+```
+
+where `exampleBlock` is `192.168.0.1/30` will produce the following addresses:
+
+```
+["192.168.0.0", "192.168.0.1", "192.168.0.2", "192.168.0.3"]
+```
+
+They could then be looped over like so:
+
+```
+{% for address in addresses %}
+  {
+    "ipAddress": "{{address}}"
+  }{%- if forloop.last == false -%},{%- endif %}
+{% endfor %}
+```
+
+
+
 ## Conversion Between Modes
+
+:::caution
+If you have a schema defined in advanced mode, it will be lost when converting to basic mode.
+:::
 
 When transitioning from basic to advanced mode or vice versa, data is retained and converted to the new mode. Basic mode can always be transitioned to advanced mode, but advanced mode cannot always be transitioned back to basic mode. The following conditions must be met for a template to be transitioned from advanced mode to basic mode:
 
@@ -297,6 +375,18 @@ When transitioning from basic to advanced mode or vice versa, data is retained a
 :::tip
 The easiest way to quickly make modifications to the structure of a template body in basic mode is to switch to advanced mode, make the edits, and then switch back to basic mode.
 :::
+
+## Configuration Wizard
+
+In some scenarios, it may be desirable to have the best of both worlds between advanced mode and basic mode. Under the covers, the administrator needs the functionality of an advanced template, but also wants a form-based mechanism for filling out the variables. This can be accomplished with the **Configuration Wizard**. To enable the **Configuration Wizard**, the administrator must define a [JSON Schema](https://json-schema.org/) for the template via the advanced view:
+
+![templates_define_schema](/img/templates_define_schema.png)
+
+Once an advanced template has a schema defined, clicking the template on the template index page brings the user to a form-based page for filling out the template variables:
+![templates_form_wizard](/img/templates_form_wizard.png)
+
+Note that the user must click **Save** at the bottom of the form page before proceeding to the generation step, otherwise their edits may be lost. The underlying advanced template can still be edited by clicking the `View / Modify` option on the templates index page.
+
 
 ## Import / Export
 
