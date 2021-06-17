@@ -1460,6 +1460,11 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 
 ## Monitoring Agent Plugin Notes
 
+## Release 2.0.2
+
+#### New Features and Improvements:
+ - **PLUGIN-1163** Updated the plugin to use the latest monitoring agent version [`3.5.0`](plugin_monitoring_agent.md#release-350).
+
 ## Release 2.0.1
 
 #### New Features and Improvements:
