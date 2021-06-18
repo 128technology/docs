@@ -1483,7 +1483,7 @@ The processors operates on fields separately for series that passes through it. 
 
 When there is no value to produce, the processor will exclude the field. If the field name matches its source field, that field is removed. This can be a way of dropping lines as Telegraf will remove a line that has no fields (it isn't a valid line). For example, when watching for state changes on lines that have a single field, the original line will be dropped. This can be used to turn a polling mechanism into a means of notification.
 
-Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](plugin_monitoring_agent.md#Input Configuration). Here are some example of the `TOML` configuration.
+Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](plugin_monitoring_agent.md#input-configuration). Here are some example of the `TOML` configuration.
 
 State Change:
 
