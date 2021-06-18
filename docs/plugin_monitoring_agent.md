@@ -1458,6 +1458,60 @@ It is possible for the relative paths of `extract_fields` and `extract_paths` to
 
 When dealing with multiple child nodes, it is advised that each be handled in separate `t128_graphql` inputs.
 
+
+## 128T Processors
+
+### Transform Processor
+
+| Release | Modification                                   |
+| ------- | ---------------------------------------------- |
+| 3.3.1   | `t128_transform` was introduced                |
+| 3.5.0   | `state-change` transform option was introduced |
+| 3.5.0   | `previous_fields` wre introduced               |
+
+The `t128_transform` processor can be used to compute a diff or rate from fields passing throught it. Alternatively, it can be used to detect a change in state for a field.
+
+| Element         | Type                | Description                                                                                                                                                                 |
+| --------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| transform       | string              | The transform to perform - `rate`, `diff`, or `state-change`                                                                                                                |
+| expiration      | duration            | If no value has been seen for this amount of time, begin again as if it is the first value. For `state-change` retransmit the current state.                                |
+| remove-original | bool                | Remove the original field (**NOT LINE**) in the case that the field is renamed.                                                                                             |
+| fields          | dict[string:string] | A mapping of `new-field = existing-field` where the new field is the computed transform of the existing field. If the names are the same, the field will be replaced.       |
+| previous_fields | dict[string:string] | Optionally include a field indicating the previous observed value. Specify as `previous-field = new-field` such that the previous indicates the prior value of `new-field`. |
+
+The processors operates on fields separately for series that passes through it. For example, there may be multiple metrics passing through with a `value` field. The processor will distinguish between them using the tags and measurement name to identify each.
+
+When there is no value to produce, the processor will exclude the field. If the field name matches its source field, that field is removed. This can be a way of dropping lines as Telegraf will remove a line that has no fields (it isn't a valid line). For example, when watching for state changes on lines that have a single field, the original line will be dropped. This can be used to turn a polling mechanism into a means of notification.
+
+Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](plugin_monitoring_agent.md#Input Configuration). Here are some example of the `TOML` configuration.
+
+State Change:
+
+```toml
+[[processors.t128_transform]]
+    transform = "state-change"
+
+    [processors.t128_transform.fields]
+        "state" = "state"
+
+    [processors.t128_transform.previous_fields]
+        "previous-state" = "state"
+```
+
+Diff:
+
+```toml
+[[processors.t128_transform]]
+    transform = "diff"
+    remove-original = true
+    expiration = 30s
+
+    [processors.t128_transform.fields]
+        "delta" = "counter"
+```
+
+For this diff case, the transform will compute the delta from a "counter" field. No delta can be computed from a single point, so it will wait till the second observed value to produce the diff. If no values of observed for more than thirty seconds, it will start computing again as if it hadn't yet seen any values.
+
 ## Monitoring Agent Plugin Notes
 
 ## Release 2.0.2
@@ -1485,6 +1539,7 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 #### New Features and Improvements:
 
 - **MON-337** Support absolute paths to `extract_fields` and `extract_tags` in `t128_graphql` collector
+- **MON-359** Add `state-change` transform type and `previous_fields` to the `t128_transform`
 
 #### Issues Fixed:
 - **MON-354** `t128_device_state` collector has incorrect tags and fields for 128T versions < 4.5.3
@@ -1525,6 +1580,7 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 - **MON-311** A dedicated `t128_device_state` input is now available
 - **MON-311** A dedicated `t128_arp_state` input is now available
 - **I95-38959** Improve `t128_metrics` performance with bulk retrieval
+- **I95-38915** Create the `t128_transform` processor
 
 #### Issues Fixed:
 
