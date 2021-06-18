@@ -1343,15 +1343,15 @@ The **top applications** input is useful when application identification in term
 
 The `t128_graphql` input can be used to retrieve data from a GraphQL API. The various configuration options available under `authority > monitoring > input > graphql` are as follows:
 
-| Element               | Type   | Description                                                                                                                                                                                                             |
-| --------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| query-entry-point     | string | The path to a point in the graphQL tree from which fields and tags will be extracted. This path may contain (`<key>:<value>`) graphQL arguments such as (name:'${ROUTER}').                                             |
-| extract-field         | list   | List of leaf nodes to be collected from query response as fields                                                                                                                                                        |
-| extract-field > name  | string | The name of the field                                                                                                                                                                                                   |
-| extract-field > value | string | The graphQL query path from which to extract the value. The path can be relative to the entry-point or absolute. If the path is abolute, it cannot diverge from the entry point path and must exclude graphQL arguments |
-| extract-tag           | list   | List of leaf nodes to be collected from query response as tags                                                                                                                                                          |
-| extract-tag > name    | string | The name of the tag                                                                                                                                                                                                     |
-| extract-tag > value   | string | The graphQL query path from which to extract the value. The path can be relative to the entry-point or absolute. If the path is abolute, it cannot diverge from the entry point path and must exclude graphQL arguments |
+| Element               | Type   | Description                                                                                                                                                                                                              |
+| --------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| query-entry-point     | string | The path to a point in the graphQL tree from which fields and tags will be extracted. This path may contain (`<key>:<value>`) graphQL arguments such as (name:'${ROUTER}').                                              |
+| extract-field         | list   | List of leaf nodes to be collected from query response as fields                                                                                                                                                         |
+| extract-field > name  | string | The name of the field                                                                                                                                                                                                    |
+| extract-field > value | string | The graphQL query path from which to extract the value. The path can be relative to the entry-point or absolute. If the path is absolute, it cannot diverge from the entry point path and must exclude graphQL arguments |
+| extract-tag           | list   | List of leaf nodes to be collected from query response as tags                                                                                                                                                           |
+| extract-tag > name    | string | The name of the tag                                                                                                                                                                                                      |
+| extract-tag > value   | string | The graphQL query path from which to extract the value. The path can be relative to the entry-point or absolute. If the path is absolute, it cannot diverge from the entry point path and must exclude graphQL arguments |
 
 An example configuration using can be seen as below
 ```
@@ -1444,13 +1444,13 @@ The `TOML` configuration for the GraphQL input can be seen below
   A limit on the amount of time taken for a given request. If the timeout is hit, no data will be produced for the sample.
 
 - **entry_point**  
-  The path to a point in the graph relative to which `extract_fields` and `extract_tags` will be specified. This path may contain `(<key>:<value)` arguments corresponding to those in the GraphQL tree.
+  The path to a point in the graph relative to which `extract_fields` and `extract_tags` will be specified. This path may contain `(<key>:<value>)` arguments corresponding to those in the GraphQL tree.
 
 - **extract_fields**  
   Paths, absolute or relative to the `entry_point`, from which fields should be created. Each value MUST point to a leaf in the graph. If the path is absolute, it MUST NOT diverge from the `entry_point` and MUST exclude graphQL argument. The keys become the field names for the produced values. At least one field MUST be specified.
 
 - **extract_tags**  
-  Paths, absolute or relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. If the path is absolute, it MUST NOT diverge from the `entry_point` and MUST exclude graphQL argument. The keys become the tag names for the produced values.
+  Paths, absolute or relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. If the path is absolute, it MUST NOT diverge from the `entry_point` and MUST exclude the `(<key>:<value>)` arguments which are allowed in the `entry_point`. The keys become the tag names for the produced values.
 
 Note that `(<key>:<value>)` arguments are valid only on the `entry_point`. They MUST NOT be specified on `extract_fields` or `extract_tags`.
 
