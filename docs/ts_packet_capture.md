@@ -1,8 +1,15 @@
 ---
-title: PCLI Packet Capture
+title: Packet Capture
+sidebar_label: Packet Capture
 ---
 
 PCAPs are one of the most useful tools to debug traffic issues on a 128T Router(s) as well as wider networking issues. The nature of troubleshooting is that it is transitory; once the problem has been identified, the system state should be restored to its previous state (or possibly with necessary modifications as a result of the troubleshooting exercise). This guide walks through the approaches for applying dynamic capture filters to the 128T Networking Platform.
+
+Packet capture can be initiated from both the PCLI and from the user interface. 
+
+## Packet Capture in the GUI
+
+Packet capture in the SSR GUI is labelled Session Capture and is accessed from the Tools menu. 
 
 ## Packet Capture per Device Interface
 
