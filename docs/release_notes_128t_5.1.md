@@ -20,9 +20,9 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular. 
 ------
-- **I95-38445 GUI Session Capture:** The feature from the CLI is now part of the GUI. 
+- **I95-38445 GUI Session Capture:** Added pages to the user interface that allow you to view and configure capture information.  
 ------
-- **I95-39293 GUI Plugin Commands:** New page that allows users to run commands that are bundled with the installed plugins. 
+- **I95-39293 and I95-40139 GUI Plugin Details and Commands:** Added pages to the user interface that allow you to run the commands that are bundled with the installed plugins. 
 ------
 - **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, and collapses the router configuration into a single tier with devices/interfaces configurable on the same screen. 
 ------
@@ -33,8 +33,6 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-39713 Access policy object screen has incorrect heading text:** The heading for an Access Policy setting has been changed to display the correct heading text.
 ------
 - **I95-39954 Conductor Service Generation Service Policy cannot be set:** Resolved a management-service-generation validation error. 
-------
-- **I95-40139 Add Plugin Details:** Added a Details page for plugins showing plugin state as well as any commands associated with the plugin.
 ------
 - **I95-40144 EoSVR with outbound only sessions showing errors:** Resolved an issue where EoSVR with outbound only sessions may show errors when fpm is turned on, and will not contribute to fpm data.
 ------
