@@ -11,6 +11,73 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 5.1.4
+**Release Date:** June 23, 2021
+
+### New Features
+
+- **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
+------
+- **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular. 
+------
+- **I95-38445 GUI Session Capture:** The feature from the CLI is now part of the GUI. 
+------
+- **I95-39293 GUI Plugin Commands:** New page that allows users to run commands that are bundled with the installed plugins. 
+------
+- **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, and collapses the router configuration into a single tier with devices/interfaces configurable on the same screen. 
+------
+- **I95-40532 Added Tenant prefix support on network interface:** Provides a simpler way to configure the tenant prefixes on a per branch basis.
+
+### Resolved Issues
+
+- **I95-39713 Access policy object screen has incorrect heading text:** The heading for an Access Policy setting has been changed to display the correct heading text.
+------
+- **I95-39954 Conductor Service Generation Service Policy cannot be set:** Resolved a management-service-generation validation error. 
+------
+- **I95-40139 Add Plugin Details:** Added a Details page for plugins showing plugin state as well as any commands associated with the plugin.
+------
+- **I95-40144 EoSVR with outbound only sessions showing errors:** Resolved an issue where EoSVR with outbound only sessions may show errors when fpm is turned on, and will not contribute to fpm data.
+------
+- **I95-40158 Missing namespace argument:** Added a missing namespace argument.
+------
+- **I95-40239 CVE-2021-26937:** This vulnerability has been resolved.
+------
+- **I95-40241 RHSA-2020:1180:** Fixed RHSA-2020:1180 by deprecating package ImageMagick.
+------
+- **I95-40242 CESA-2021:0856 advisory:** This vulnerability has been resolved. 
+------
+- **I95-40304 Allow for duplicate domain names:** When same domain name appears for multiple categories the system will preserve the first such entry and ignore the rest.
+------
+- **I95-40334 `show service-path` shows bgposvr for an EoSVR interface:** Resolved the issue where ethernet-over-svr routes would be displayed as bgp-over-svr in the output. 
+------
+- **I95-40349 Improve Session Not Found Message:** The message is now more user-friendly. 
+------
+- **I95-40380 RoutersPage facet selector doesn't work without a search value present:** Removed a condition causing the facets to be ignored when the search bar is empty.
+------
+- **I95-40407 Conductor cli complains that it is a managed router:** This issue has been resolved. 
+------
+-**I95-40429 Unable to make local router changes in 5.1 software:** Resolved an issue where any local changes were overwritten immediately, rather than when the configuration on the conductor was committed.
+------
+- **I95-40435 Loss of HA headend after configuration changes to spoke:** Resoved an issue where configuration changes to traffic-engineering when HA is enabled force the interface into standby mode.
+------
+- **I95-40460 The Download Quickstart link in Firefox does not download the file:** This issue has been resolved. 
+------
+- **I95-40473 API Username not being recorded:** Resolved an issue where the "modify_user" event was omitting the "fullName" modified field.
+------
+- **I9540489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the 128T-5.1.3-1.el7.OTP.v3.x86_64.iso ISO.
+------
+- **I95-40477 Import certificate webserver doesn't copy the private key:** This issue has been resolved.
+------
+- **I95-40669 Reverse SSH config file only generated if remote login enabled:** The reverse SSH config file is now generated correctly. 
+------
+- **I95-40682 the GUI login page keeps focus on whichever element was last selected:** Login page will now focus username field after invalid login.
+------
+- **I95-40690 Update cloud templates:** The templates have been updated. 
+------
+- **I95-40709 Add timestamp to runtime stats log file:** The timestamp has been added.
+------
+- **I95-40721 CESA-2021:0856:** This vulnerability has been addressed. 
+
 ## Release 5.1.3
 **Release Date:** May 14, 2021
 
