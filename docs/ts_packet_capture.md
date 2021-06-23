@@ -6,7 +6,7 @@ PCAPs are one of the most useful tools to debug traffic issues on a 128T Router(
 
 Packet capture can be initiated from the PCLI or from the user interface. 
 
-![Session Capture Selection](/img/session_capture_menu.png)
+![Session Capture Selection](/img/ts_session_capture_menu.png)
 
 The Session Capture Window displays:
 
