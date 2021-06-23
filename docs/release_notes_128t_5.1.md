@@ -22,9 +22,9 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-38445 [GUI Session Capture](ts_packet_capture.md#session-capture-in-the-gui):** Added pages to the user interface that allow you to view and configure capture information.  
 ------
-- **I95-39293 and I95-40139 GUI Plugin Details and Commands:** Added pages to the user interface that allow you to run the commands that are bundled with the installed plugins. 
+- **I95-39293 and I95-40139 GUI Plugin Details and Commands:** Added pages to the user interface that allow you to [run the commands that are bundled with the installed plugins](plugin_intro.md#installation-and-management). 
 ------
-- **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, and collapses the router configuration into a single tier with devices/interfaces configurable on the same screen. 
+- **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields,or display all configuration options. 
 ------
 - **I95-40532 Added Tenant prefix support on network interface:** Provides a simpler way to configure the tenant prefixes on a per branch basis.
 
@@ -46,11 +46,11 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40304 Allow for duplicate domain names:** When same domain name appears for multiple categories the system will preserve the first such entry and ignore the rest.
 ------
-- **I95-40334 `show service-path` shows bgposvr for an EoSVR interface:** Resolved the issue where ethernet-over-svr routes would be displayed as bgp-over-svr in the output. 
+- **I95-40334 `show service-path` shows BGPoSVR for an EoSVR interface:** Resolved the issue where ethernet-over-svr routes would be displayed as bgp-over-svr in the output. 
 ------
 - **I95-40349 Improve Session Not Found Message:** The message is now more user-friendly. 
 ------
-- **I95-40380 RoutersPage facet selector doesn't work without a search value present:** Removed a condition causing the facets to be ignored when the search bar is empty.
+- **I95-40380 Routers Page facet selector requires a search value:** Removed a condition causing the facets to be ignored when the search bar is empty.
 ------
 - **I95-40407 Conductor cli complains that it is a managed router:** This issue has been resolved. 
 ------
@@ -68,7 +68,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40669 Reverse SSH config file only generated if remote login enabled:** The reverse SSH config file is now generated correctly. 
 ------
-- **I95-40682 the GUI login page keeps focus on whichever element was last selected:** Login page will now focus username field after invalid login.
+- **I95-40682 GUI login page keeps focus on the last selected element:** The Login page now focuses on the username field after an invalid login.
 ------
 - **I95-40690 Update cloud templates:** The templates have been updated. 
 ------
