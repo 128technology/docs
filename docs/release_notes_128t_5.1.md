@@ -34,7 +34,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39954 Conductor Service Generation Service Policy cannot be set:** Resolved a management-service-generation validation error. 
 ------
-- **I95-40144 EoSVR with outbound only sessions showing errors:** Resolved an issue where EoSVR with outbound only sessions may show errors when fpm is turned on, and will not contribute to fpm data.
+- **I95-40144 EoSVR with outbound only sessions showing errors:** Resolved an issue where EoSVR with outbound only sessions may show errors when FPM is turned on, and will not contribute to FPM data.
 ------
 - **I95-40158 Missing namespace argument:** Added a missing namespace argument.
 ------
