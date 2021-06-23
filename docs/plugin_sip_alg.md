@@ -485,3 +485,10 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 - **PLUGIN-768** Support the SIP ALG plugin in 128T versions `5.1.0` and greater.
 
+### Release 3.1.1
+
+#### Issues Fixed
+
+- **PLUGIN-756** Fix overwriting of DSCP values in router config
+- **PLUGIN-1131** Configurable log level
+- **PLUGIN-1164** Continue building bonsai transactions on a router error
