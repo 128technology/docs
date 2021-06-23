@@ -1,22 +1,13 @@
 ---
-title: PCLI Packet Capture
+title: Packet Capture
+sidebar_label: Packet Capture
 ---
 
-PCAPs are one of the most useful tools to debug traffic issues on a 128T Router(s) as well as wider networking issues. The nature of troubleshooting is that it is transitory; once the problem has been identified, the system state should be restored to its previous state (or possibly with necessary modifications as a result of the troubleshooting exercise). This guide walks through the approaches for applying dynamic capture filters to the 128T Networking Platform.
+PCAPs are one of the most useful tools to debug traffic issues on the 128T Router, as well as wider networking issues. The nature of troubleshooting is that it is transitory; once the problem has been identified, the system state should be restored to its previous state (or possibly with necessary modifications as a result of the troubleshooting exercise). This guide walks through the approaches for applying dynamic capture filters to the 128T Networking Platform.
 
-Packet capture can be initiated from the PCLI or from the user interface. 
+Packet capture information can be viewed and configured from both the PCLI and the [user interface](#packet-capture-in-the-gui). 
 
-![Session Capture Selection](/img/ts_session_capture_menu.png)
-
-The Session Capture Window displays:
-
-![Session Capture Window](/img/ts_create_session_capture.png)
-
-## Packet Capture in the GUI
-
-Packet capture in the SSR GUI is labelled Session Capture and is accessed from the Tools menu. 
-
-## Packet Capture per Device Interface
+## PCLI Packet Capture per Device Interface
 
 Enabling packet capture through configuration, while useful for defining filters that will survive a reboot, can pose challenges while debugging. Pending configuration changes may exist, requiring reverting the configuration so as to apply a capture filter. Thankfully there exists a dynamic way to apply capture filters to a device interface that does not require making configuration changes.
 
@@ -271,3 +262,17 @@ Mon 2020-06-08 11:32:57 EDT
       1640858e-fe6a-44cd-b38a-7d479a68418
     remaining:        unlimited
 ```
+
+## Session Capture in the GUI
+
+Packet capture in the GUI is labelled **Session Capture** and is accessed from the Tools menu. 
+
+![Session Capture Window](/img/ts_session_capture_window.png)
+
+Select a row to display the Details window for the capture. Selecting the PCAP FILE button brings you to the Logs page and displays the PCAP file, allowing you to select and download data. The capture can also be deleted from the Session Capture Details window. 
+
+![Session Capture Details](/img/ts_session_capture_details.png)
+
+To configure Session Capture, click the CREATE button to open the Create Session Capture window. Enter or select a router, and specify the information to capture. 
+
+![Create Session Capture](/img/ts_create_session_capture.png)

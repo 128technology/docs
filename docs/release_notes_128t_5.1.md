@@ -20,7 +20,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular. 
 ------
-- **I95-38445 GUI Session Capture:** Added pages to the user interface that allow you to view and configure capture information.  
+- **I95-38445 [GUI Session Capture](ts_packet_capture.md#session-capture-in-the-gui):** Added pages to the user interface that allow you to view and configure capture information.  
 ------
 - **I95-39293 and I95-40139 GUI Plugin Details and Commands:** Added pages to the user interface that allow you to run the commands that are bundled with the installed plugins. 
 ------
