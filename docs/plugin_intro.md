@@ -47,8 +47,6 @@ Commands that are bundled with installed plugins may be run from the GUI using t
 
 Use the Commands tab to execute commands available for the individual plugins. 
 
-![Plugin Commands Tab](/img/plugin_commands_tab.png)
-
 ### Enabling plugin-specific configuration
 The conductor provides extensibility APIs through which plugins can add plugin-specific configuration to the 128T conductor. This mechanism is especially useful for collecting various user inputs to drive the plugin behavior. For example, the [`128T-gre`](plugin_gre.md) uses the configuration to obtain tunnel configuration for the router.
 

@@ -12,7 +12,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 :::
 
 ## Release 5.1.4
-**Release Date:** June 23, 2021
+**Release Date:** June 25, 2021
 
 ### New Features
 
