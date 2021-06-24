@@ -1,6 +1,6 @@
 ---
-title: Domain-Based Web Filtering
-sidebar: Domain-Based Web Filtering
+title: Configuring Domain-Based Web Filtering
+sidebar: Configuring Domain-Based Web Filtering
 ---
 
 Domain-Based Web Filtering is the ability to categorize internet traffic based on the domain name or domain-name-category. This provides the option for users to create generic services for a broad range of domains that fall into a category such as “Sports” (i.e.; ESPN.com, NFL.com, NHL.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Each category is pre-populated with a list of domains associated with the traffic type. Domain-learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category, or add new categories if necessary. 
