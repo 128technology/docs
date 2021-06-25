@@ -12,7 +12,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 :::
 
 ## Release 5.1.4
-**Release Date:** June 25, 2021
+**Release Date:** June 29, 2021
 
 ### New Features
 
@@ -24,15 +24,15 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39293 and I95-40139 GUI Plugin Details and Commands:** Added pages to the user interface that allow you to [run the commands that are bundled with the installed plugins](plugin_intro.md#installation-and-management). 
 ------
-- **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields,or display all configuration options. 
+- **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, or display all configuration options. 
 ------
 - **I95-40532 Added Tenant prefix support on network interface:** Provides a simpler way to configure the tenant prefixes on a per branch basis.
 
 ### Resolved Issues
 
-- **I95-39713 Access policy object screen has incorrect heading text:** The heading for an Access Policy setting has been changed to display the correct heading text.
+- **I95-39713 Access policy object screen has incorrect heading text:** The heading for the access policy setting has been changed to display the correct heading text.
 ------
-- **I95-39954 Conductor Service Generation Service Policy cannot be set:** Resolved a management-service-generation validation error. 
+- **I95-39954 Conductor Service Generation Service Policy cannot be set:** Resolved a `management-service-generation` validation error. 
 ------
 - **I95-40144 EoSVR with outbound only sessions showing errors:** Resolved an issue where EoSVR with outbound only sessions may show errors when FPM is turned on, and will not contribute to FPM data.
 ------
@@ -40,13 +40,13 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40239 CVE-2021-26937:** This vulnerability has been resolved.
 ------
-- **I95-40241 RHSA-2020:1180:** Fixed RHSA-2020:1180 by deprecating package ImageMagick.
+- **I95-40241 RHSA-2020:1180:** Resolved RHSA-2020:1180 by deprecating package ImageMagick.
 ------
 - **I95-40242 CESA-2021:0856 advisory:** This vulnerability has been resolved. 
 ------
-- **I95-40304 Allow for duplicate domain names:** When same domain name appears for multiple categories the system will preserve the first such entry and ignore the rest.
+- **I95-40304 Allow for duplicate domain names:** When the same domain name appears for multiple categories, the system will preserve the first such entry and ignore the rest.
 ------
-- **I95-40334 `show service-path` shows BGPoSVR for an EoSVR interface:** Resolved the issue where ethernet-over-svr routes would be displayed as bgp-over-svr in the output. 
+- **I95-40334 `show service-path` shows BGPoSVR for an EoSVR interface:** Resolved the issue where `ethernet-over-svr` routes would be displayed as `bgp-over-svr` in the output. 
 ------
 - **I95-40349 Improve Session Not Found Message:** The message is now more user-friendly. 
 ------
@@ -54,7 +54,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40407 Conductor cli complains that it is a managed router:** This issue has been resolved. 
 ------
--**I95-40429 Unable to make local router changes in 5.1 software:** Resolved an issue where any local changes were overwritten immediately, rather than when the configuration on the conductor was committed.
+- **I95-40429 Unable to make local router changes in 5.1 software:** Resolved an issue where any local changes were overwritten immediately, rather than when the configuration on the conductor was committed.
 ------
 - **I95-40435 Loss of HA headend after configuration changes to spoke:** Resoved an issue where configuration changes to traffic-engineering when HA is enabled force the interface into standby mode.
 ------
@@ -62,7 +62,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40473 API Username not being recorded:** Resolved an issue where the "modify_user" event was omitting the "fullName" modified field.
 ------
-- **I9540489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the 128T-5.1.3-1.el7.OTP.v3.x86_64.iso ISO.
+- **I95-40489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the 128T-5.1.3-1.el7.OTP.v3.x86_64.iso ISO.
 ------
 - **I95-40477 Import certificate webserver doesn't copy the private key:** This issue has been resolved.
 ------
