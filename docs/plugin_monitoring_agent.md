@@ -1469,7 +1469,7 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 | 3.5.0   | `state-change` transform option was introduced |
 | 3.5.0   | `previous_fields` wre introduced               |
 
-The `t128_transform` processor can be used to compute a diff or rate from fields passing throught it. Alternatively, it can be used to detect a change in state for a field.
+The `t128_transform` processor can be used to compute a diff or rate from fields passing through it. Alternatively, it can be used to detect a change in state for a field.
 
 | Element         | Type                | Description                                                                                                                                                                 |
 | --------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1479,11 +1479,11 @@ The `t128_transform` processor can be used to compute a diff or rate from fields
 | fields          | dict[string:string] | A mapping of `new-field = existing-field` where the new field is the computed transform of the existing field. If the names are the same, the field will be replaced.       |
 | previous_fields | dict[string:string] | Optionally include a field indicating the previous observed value. Specify as `previous-field = new-field` such that the previous indicates the prior value of `new-field`. |
 
-The processors operates on fields separately for series that passes through it. For example, there may be multiple metrics passing through with a `value` field. The processor will distinguish between them using the tags and measurement name to identify each.
+The processor operates on each field separately. For example, multiple metrics may pass through with a `value` field. The processor will distinguish between them using the tags and measurement name.
 
-When there is no value to produce, the processor will exclude the field. If the field name matches its source field, that field is removed. This can be a way of dropping lines as Telegraf will remove a line that has no fields (it isn't a valid line). For example, when watching for state changes on lines that have a single field, the original line will be dropped. This can be used to turn a polling mechanism into a means of notification.
+When there is no value to produce, the processor excludes the field. If the field name matches the source field, the field is removed. If the line is no longer valid, for example, if it has no fields, Telegraf will remove it, effectively dropping the line. When watching for state changes on lines that have a single field, the original line will be dropped. In this way, a polling mechanism can be turned into a means of notification.
 
-Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](plugin_monitoring_agent.md#input-configuration). Here are some example of the `TOML` configuration.
+Processors are not currently exposed explicitly in the plugin config, but they can be achieved through an input's [additional config](plugin_monitoring_agent.md#input-configuration). Here are some examples of the `TOML` configuration.
 
 State Change:
 
@@ -1510,7 +1510,7 @@ Diff:
         "delta" = "counter"
 ```
 
-For this diff case, the transform will compute the delta from a "counter" field. No delta can be computed from a single point, so it will wait till the second observed value to produce the diff. If no values of observed for more than thirty seconds, it will start computing again as if it hadn't yet seen any values.
+For this diff case, the transform will compute the delta from a "counter" field. No delta can be computed from a single point, so the processor waits until the second observed value to produce the diff. If no values are observed for more than thirty seconds, the processor will begin computing again.
 
 ## Monitoring Agent Plugin Notes
 
