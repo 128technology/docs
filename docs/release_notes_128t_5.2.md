@@ -10,6 +10,59 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 5.2.1
+**Release Date:** June 30. 2021
+Contains fixes from: Release 5.1.4, June 28, 2021
+
+###  New Features and Improvements
+
+
+------
+- **I95-36244 Handle names in application-id JSON:**
+------
+
+
+
+### Resolved Issues
+
+- **I95-19871:**
+------
+- **I95-39159 IPSEC SALT:**
+------
+- **I95-39834 Stop Tracking:**
+------
+- **I95-40075/I95-40134:**
+------
+- **I95-40124:**
+------
+- **I95-40168:**
+------
+- **I95-40185:**
+------
+- **I95-40189:**
+------
+- **I95-40191:**
+------
+- **I95-40288:**
+------
+- **I95-40290:**
+------
+- **I95-40296:**
+------
+- **I95-40432:**
+------
+- **I95-40433:**
+------
+- **I95-40496:**
+------
+- **I95-40888:**
+------
+- **I95-40950:**
+------
+- **I95-40963:**
+
+
+
 ## Release 5.2.0
 **Release Date:** May 10, 2021
 
