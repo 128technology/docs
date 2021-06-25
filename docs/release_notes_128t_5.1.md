@@ -30,6 +30,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ### Resolved Issues
 
+- **I95-39249 Validation Warning when services collide:** Additional warnings are now provided during configuration validation when two services have overlapping protocol specifications.
+------
 - **I95-39713 Access policy object screen has incorrect heading text:** The heading for the access policy setting has been changed to display the correct heading text.
 ------
 - **I95-39954 Conductor Service Generation Service Policy cannot be set:** Resolved a `management-service-generation` validation error. 
