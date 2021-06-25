@@ -54,7 +54,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40407 Conductor cli complains that it is a managed router:** This issue has been resolved. 
 ------
-- **I95-40429 Unable to make local router changes in 5.1 software:** Resolved an issue where any local changes were overwritten immediately, rather than when the configuration on the conductor was committed.
+- **I95-40429 Unable to make local router changes:** Resolved an issue where any local changes were overwritten immediately, rather than when the configuration on the conductor was committed.
 ------
 - **I95-40435 Loss of HA headend after configuration changes to spoke:** Resoved an issue where configuration changes to traffic-engineering when HA is enabled force the interface into standby mode.
 ------
