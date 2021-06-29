@@ -12,7 +12,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 :::
 
 ## Release 5.1.4
-**Release Date:** June 29, 2021
+**Release Date:** July 1, 2021
 
 ### New Features
 
@@ -62,7 +62,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40460 The Download Quickstart link in Firefox does not download the file:** This issue has been resolved. 
 ------
-- **I95-40473 API Username not being recorded:** Resolved an issue where the "modify_user" event was omitting the "fullName" modified field.
+- **I95-40473 API Username not being recorded:** Resolved an issue where the `modify_user` event was omitting the `fullName` modified field.
 ------
 - **I95-40489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the 128T-5.1.3-1.el7.OTP.v3.x86_64.iso ISO.
 ------
@@ -77,6 +77,12 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-40709 Add timestamp to runtime stats log file:** The timestamp has been added.
 ------
 - **I95-40721 CESA-2021:0856:** This vulnerability has been addressed. 
+
+### Caveats
+
+- **I95-39457 ServiceSecurityCheck validator should check for next-peer in service-route:** A missing validation check on `next-peer` service routes allows the configuration to be committed without presenting an error, preventing the establishment of an SVR session. This issue has been resolved in an upcoming release (5.3.0).
+
+	**_Resolution:_** Manually configure a security policy on each service with a `peer` and `next-peer` service route. 
 
 ## Release 5.1.3
 **Release Date:** May 14, 2021
