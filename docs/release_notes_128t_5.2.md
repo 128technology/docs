@@ -18,7 +18,7 @@ Contains fixes from: [Release 5.1.4, June 28, 2021]
 
 - **I95-35414 Refresh actions now available for individual sections on the Router Page:**The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
 ------
-- **I95-36244 Handle names in application-id JSON:**
+- **I95-36244 Handle names in application-id JSON:** The application-module json output common-name object now includes a list of referenced common-names, in addition to the transport-information list.  
 ------
 - **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular.
 ------
