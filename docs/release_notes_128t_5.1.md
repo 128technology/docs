@@ -54,7 +54,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40380 Routers Page facet selector requires a search value:** Removed a condition causing the facets to be ignored when the search bar is empty.
 ------
-- **I95-40407 Conductor cli complains that it is a managed router:** This issue has been resolved. 
+- **I95-40407 Conductor CLI complains that it is a managed router:** This issue has been resolved. 
 ------
 - **I95-40429 Unable to make local router changes:** Resolved an issue where any local changes were overwritten immediately, rather than when the configuration on the conductor was committed.
 ------
@@ -66,7 +66,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40489 ISO missing 128T-minion-connector rpm:** The 128T-minion-connector plugin rpm was not included in the 5.1 OTP ISO. This has been corrected in the 128T-5.1.3-1.el7.OTP.v3.x86_64.iso ISO.
 ------
-- **I95-40477 Import certificate webserver doesn't copy the private key:** This issue has been resolved.
+- **I95-40577 Import certificate webserver not copying the private key:** This issue has been resolved.
 ------
 - **I95-40669 Reverse SSH config file only generated if remote login enabled:** The reverse SSH config file is now generated correctly. 
 ------
