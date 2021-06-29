@@ -11,8 +11,9 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 :::
 
 ## Release 5.2.1
-**Release Date:** June 30. 2021
-Contains fixes from: [Release 5.1.4, June 28, 2021]
+**Release Date:** July 6, 2021
+
+Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#release-514)
 
 ###  New Features and Improvements
 
