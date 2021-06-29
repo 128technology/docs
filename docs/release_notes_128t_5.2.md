@@ -40,17 +40,8 @@ Contains fixes from: [Release 5.1.4, June 28, 2021]
 ------
 - **I95-40191 Office365 service failing on bootup:** This issue has been resolved.
 ------
-- **I95-40432:**
-------
-- **I95-40433:**
-------
 - **I95-40888`show application modules status` generating an unhandled error:** Resolved an issue with `show application modules status` causing unandled errors.
 ------
-- **I95-40950:**
-------
-- **I95-40963 Restrictive name requirement for `management-vector`:** The `management-vector` name was incorrectly required for all interfaces. Updates made to only require it for `management-over-forwarding` interfaces.
-
-
 
 ## Release 5.2.0
 **Release Date:** May 10, 2021

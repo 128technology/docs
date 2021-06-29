@@ -40,6 +40,13 @@ Installed plugin can be removed from the UI by using the `Uninstall` button on t
 
 ![128T Plugin Uninstall](/img/plugin_uninstall.gif)
 
+#### Running Plugin Commands
+Commands that are bundled with installed plugins may be run from the GUI using the Plugin Commands interface. Selecting Plugins from the Administration menu opens the Plugin State tab, which shows the state of any currently installed plugins. 
+
+![Plugins State Tab](/img/plugin_state_tab.png)
+
+Use the Commands tab to execute commands available for the individual plugins. 
+
 ### Enabling plugin-specific configuration
 The conductor provides extensibility APIs through which plugins can add plugin-specific configuration to the 128T conductor. This mechanism is especially useful for collecting various user inputs to drive the plugin behavior. For example, the [`128T-gre`](plugin_gre.md) uses the configuration to obtain tunnel configuration for the router.
 
