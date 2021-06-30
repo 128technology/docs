@@ -814,6 +814,27 @@ Some of the key aspects of the auto-generated configuration are as follows:
 
 ## Release Notes
 
+### Release 3.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-1170**  Config generation for the plugin failing in the Bonsai mode
+
+  _**Resolution:**_ Correctly handle the config generation for routers where the ICMP plugin is not enabled during bonsai config generation
+
+- **PLUGIN-1088**  ICMP plugin keeps pinging in the background even when disabled
+
+  _**Resolution:**_ When the plugin is disabled the relevant systemd services are stopped and the router components are uninstalled.
+
+### Release 2.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-1088**  ICMP plugin keeps pinging in the background even when disabled
+
+  _**Resolution:**_ When the plugin is disabled the relevant systemd services are stopped and the router components are uninstalled.
+
+
 ### Release 3.0.0
 
 #### Issues Fixed
