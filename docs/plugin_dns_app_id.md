@@ -337,6 +337,12 @@ exit
 
 ## Release Notes
 
+### Release 2.3.1, 3.1.1
+
+#### Issues Fixed
+
+- **PLUGIN-1099** Fixed an incorrect pattern for matching YouTube application
+
 ### Release 1.3.0, 2.3.0, 3.1.0
 
 #### New Features and Improvements
