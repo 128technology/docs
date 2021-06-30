@@ -408,6 +408,18 @@ Completed in 0.10 seconds
 
 ## Release Notes
 
+### Release 1.0.7, 2.0.7, 2.1.0, 3.0.2
+
+#### Issues Fixed
+
+- **PLUGIN-1092** IPSec left and right subnet configuration does not always work correctly
+
+  _**Resolution:**_ The non-default left and right subnet configuration is correctly translated to corresponding libreswan configuration.
+
+- **PLUGIN-1103** IPSec remote host does not appear as link on the GUI
+
+  _**Resolution:**_ The GUI presentation model was updated to include the missing key field.
+
 ### Release 3.0.1
 
 #### Issues Fixed
