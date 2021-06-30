@@ -3,9 +3,9 @@ title: Configuring Domain-Based Web Filtering
 sidebar: Configuring Domain-Based Web Filtering
 ---
 
-Domain-Based Web Filtering is the ability to categorize internet traffic based on the domain name or domain-name-category. This provides the option for users to create generic services for a broad range of domains that fall into a category such as “Sports” (i.e.; ESPN.com, NFL.com, NHL.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Each category is pre-populated with a list of domains associated with the traffic type. Domain-learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category, or add new categories if necessary. 
+Domain-Based Web Filtering is the ability to categorize internet traffic based on the domain name or a domain category. This provides the option for users to create generic services for a broad range of domains that fall into a category such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Each category is pre-populated with a list of domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category. 
 
-Categories can be assigned to services, providing the ability to filter content based on an entire category; for example, denying access to all domains in the Adult category. Services can also be assigned to individual domains, and filtering performed in a more targeted manner. 
+Service can be defined based on categories, to filter a broad set of related domains. Services can also be assigned to individual domains, and filtering performed in a more targeted manner. 
 
 ## Configuring Domain-Based Web Filtering from the User Interface
 
@@ -20,7 +20,7 @@ To allow the dynamic learning of domain categories, enable the feature on the Ba
 
 ![Generate Application Identification Categories](/img/dbwf_gen_categories.png)
 
-The procedure to configure domain-based web filtering is provided below.
+
 
 ## Show Commands
 
@@ -56,7 +56,7 @@ To enable Domain-based Web Filtering, you must configure a broader service under
 The high level steps for configuring Domain based web filtering are:
 
 - Create a parent service
-- reate a child service to filter
+- Create a child service to filter
 - Configure a Tenant
 - Create an access policy on the child service to filter traffic 
 
@@ -96,11 +96,9 @@ The child service classifies the traffic and provides the option to filter diffe
 1.	In the Services window, select ADD.
 2.	Name the first service `netflix.internet`
 3.	On the Service screen, verify that Enabled is set to **true**.
-4.	Set Scope to **public**.
-5.	Set share service routes to **true**.
-6.	Set generate application identification categories to **true**.
-7.	Scroll down to Domain Name and enter the domain name using a wildcard to allow identification of all domain names; `*.netflix.com`.
-8.	In the Domain Name Category field, click ADD and select/add the domain category, Entertainment.
+4.	Set share service routes to **true**.
+5.	Scroll down to Domain Name and enter the domain name using a wildcard to allow identification of all domain names; `*.netflix.com`.
+6.	In the Domain Name Category field, click ADD and select/add the domain category, Entertainment.
 
 #### Create the second service, the one to be filtered 
 1.	In the Services panel, select ADD.
@@ -178,6 +176,6 @@ Learning mode is used to gather statistics about a domain or category. You can s
 
 *Where are the Learning Mode statistics/information available?* 
 
-If Learning Mode is not enabled, statistics are only gathered for categories/domains that are identified in an access-policy.
+If Learning Mode is not enabled, statistics are only gathered for categories/domains that are configured in a service.
 
-*Please validate the accuracy of the statement above.* 
+
