@@ -65,6 +65,6 @@ module.exports = {
   ],
   plugins: [
     path.resolve(__dirname, './src/components/adobe-analytics-plugin'),
-    './src/plugins/release-notes-api.js
+    './src/plugins/release-notes-api.js',
   ],
 };
