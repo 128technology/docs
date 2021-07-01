@@ -12,7 +12,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 :::
 
 ## Release 5.1.4
-**Release Date:** July 1, 2021
+**Release Date:** July 2, 2021
 
 ### New Features
 
@@ -35,6 +35,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-39713 Access policy object screen has incorrect heading text:** The heading for the access policy setting has been changed to display the correct heading text.
 ------
 - **I95-39954 Conductor Service Generation Service Policy cannot be set:** Resolved a `management-service-generation` validation error. 
+------
+- **I95-40111 New flows not processed until system restart:** Resolved an issue with application schedulers causing a lockup, preventing new flows from being processed.
 ------
 - **I95-40144 EoSVR with outbound only sessions showing errors:** Resolved an issue where EoSVR with outbound only sessions may show errors when FPM is turned on, and will not contribute to FPM data.
 ------
