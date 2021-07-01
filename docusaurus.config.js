@@ -28,12 +28,20 @@ module.exports = {
       logo: {
         alt: 'Juniper Logo',
         src: 'img/logo.svg',
-        srcDark: 'img/logo_dark.png'
+        srcDark: 'img/logo_dark.png',
       },
       items: [
         {to: 'docs/intro_getting_started', label: 'Docs', position: 'right'},
-        {href: 'https://community.128technology.com/home', label: 'Interchange', position: 'right'},
-        {href: 'https://www.128technology.com/', label:'Company', position: 'right'},
+        {
+          href: 'https://community.128technology.com/home',
+          label: 'Interchange',
+          position: 'right',
+        },
+        {
+          href: 'https://www.128technology.com/',
+          label: 'Company',
+          position: 'right',
+        },
       ],
     },
     footer: {
@@ -56,6 +64,7 @@ module.exports = {
     ],
   ],
   plugins: [
-    path.resolve(__dirname, './src/components/adobe-analytics-plugin')
+    path.resolve(__dirname, './src/components/adobe-analytics-plugin'),
+    './src/plugins/release-notes-api.js
   ],
 };

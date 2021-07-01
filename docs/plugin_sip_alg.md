@@ -479,6 +479,22 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 2.4.0, 3.1.1
+
+#### New Features and Improvements
+- **PLUGIN-756** Provide support for DSCP marking on transformed packets
+
+The feature adds support for configuring `sip-alg > dscp` to specify the TOS marking to be used for the packets transformed by the SIP ALG plugin, allowing the traffic to be prioritized appropriately on the egress.
+
+#### Issues Fixed
+- **PLUGIN-1131** The default log-level for the plugin on the router is too high
+
+  _**Resolution:**_ Reduce the log level by default and allow the appropriate log level to be configured for debugging and troubleshooting as needed.
+
+- **PLUGIN-756** Missing `access-policy > permission` for the SIP ALG configuration caused config to fail
+
+  _**Resolution:**_ The logic for service config generation now defaults to the appropriate permission when user does not configure it
+
 ### Release 3.0.0
 
 #### Issues Fixed
