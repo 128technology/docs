@@ -93,7 +93,7 @@ When deploying conductor on the internet, 128 Technology recommends limiting acc
 128 Technology has developed some salt states to assist with these common configuration steps. Refer to our [public Github repo](https://github.com/128technology/salt-states/blob/master/setup-firewalld-t128-zone.sls) for some samples you can use to tune your system accordingly.
 
 :::note
->>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls, with no loss of functionality.
+>>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls in versions 5.1 and later, with no loss of functionality.
 :::
 
 ## Design Patterns
