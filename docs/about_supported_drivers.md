@@ -7,409 +7,450 @@ The following list represents the drivers supported for use with the SSR softwar
 
 The names below are linked to sections providing a list of the supported drivers.
 
-- Advanced Micro Devices
-- Amazon
-- Aquantia Corp.
-- Atomic Rules
-- Broadcom
-- Cavium
-- Chelsio Communications
-- Cisco Systems
-- Freescale Semiconductor
+- [Advanced Micro Devices](#advanced-micro-devices)
+- [Amazon](#amazon)
+- [Aquantia Corp.](#aquantia-corp)
+- [Atomic Rules](#atomic-rules)
+- [Broadcom](#broadcom)
+- [Cavium](#cavium)
+- [Chelsio Communications](#chelsio-communications)
+- [Cisco](#cisco)
+- [Freescale Semiconductor](#freescale-semiconductor)
 - [Intel Corporation](#intel-corporation)
-- Mellanox Technologies
-- Netronome Systems
-- QLogic Corp
-- Red Hat
-- Solarflare Communications
-- VMWare
-- Other
+- [Mellanox Technologies](#mellanox)
+- [Netronome Systems](#netronome)
+- [QLogic Corp](#qlogic)
+- [Red Hat](#red-hat)
+- [Solarflare Communications](#solarflare)
+- [VMWare](#vmware)
+- [Other](#other)
 
 ## Advanced Micro Devices
 
-PMD NAME: net_axgbe
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- Advanced Micro Devices, Inc. [AMD] (1022) : Unknown Device (1458) (All Subdevices)
- Advanced Micro Devices, Inc. [AMD] (1022) : Unknown Device (1459) (All Subdevices)
+### Driver: net_axgbe
+#### Dependencies: 
+- igb_uio 
+- uio_pci_generic 
+- vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Advanced Micro Devices, Inc. (AMD 1022) | Unknown Device (1458) | | All | |
+| | Unknown Device (1459) | All |
 
 ## Amazon
 
-PMD NAME: net_ena
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- Amazon.com, Inc. (1d0f) : Elastic Network Adapter (ENA) (ec20) (All Subdevices)
- Amazon.com, Inc. (1d0f) : Unknown Device (ec21) (All Subdevices)
+### Driver: net_ena
+#### Dependencies: 
+- igb_uio 
+- uio_pci_generic 
+- vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Amazon.com, Inc. (1d0f) | Elastic Network Adapter (ENA) (ec20) | All |
+| | Unknown Device (ec21) | All |
 
 ## Aquantia Corp
 
-PMD NAME: net_atlantic
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic
-PMD HW SUPPORT:
- Aquantia Corp. (1d6a) : Unknown Device (1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (d100) (All Subdevices)
- Aquantia Corp. (1d6a) : AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d107) (All Subdevices)
- Aquantia Corp. (1d6a) : AQC108 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d108) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (d109) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (7b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (8b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (9b1) (All Subdevices)
- Aquantia Corp. (1d6a) : AQC111 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (11b1) (All Subdevices)
- Aquantia Corp. (1d6a) : AQC112 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (12b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (80b1) (All Subdevices)
- Aquantia Corp. (1d6a) : AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (87b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (88b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (89b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (91b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (92b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (51b1) (All Subdevices)
- Aquantia Corp. (1d6a) : Unknown Device (52b1) (All Subdevices)
+### Driver: net_atlantic
+#### Dependencies: 
+- igb_uio 
+- uio_pci_generic
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Aquantia Corp. (1d6a) | Unknown Device (1) | All |
+| | Unknown Device (d100) | All |
+| | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d107) | All |
+| | AQC108 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d108) | All |
+| | Unknown Device (d109) | All |
+| | Unknown Device (b1) | All |
+| | Unknown Device (7b1) | All |
+| | Unknown Device (8b1) | All |
+| | Unknown Device (9b1) | All |
+| | AQC111 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (11b1) | All |
+| | AQC112 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (12b1) | All |
+| | Unknown Device (80b1) | All |
+| | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (87b1) | All |
+| | Unknown Device (88b1) | All |
+| | Unknown Device (89b1) | All |
+| | Unknown Device (91b1) | All |
+| | Unknown Device (92b1) | All |
+| | Unknown Device (51b1) | All |
+| | Unknown Device (52b1) | All |
 
 ## Atomic Rules
 
-PMD NAME: net_ark
-PMD PARAMETERS: `Pkt_gen=<filename> Pkt_chkr=<filename> Pkt_dir=<bitmap>`
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic 
-PMD HW SUPPORT:
- Atomic Rules LLC (1d6c) : AR-ARKA-FX0 Arkville 32B DPDK Data Mover (100d) (All Subdevices)
- Atomic Rules LLC (1d6c) : AR-ARKA-FX1 Arkville 64B DPDK Data Mover (100e) (All Subdevices)
+### Driver: net_ark
+#### Parameters: `Pkt_gen=<filename> Pkt_chkr=<filename> Pkt_dir=<bitmap>`
+#### Dependencies: 
+- igb_uio 
+- io_pci_generic 
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+|Atomic Rules LLC (1d6c) | AR-ARKA-FX0 Arkville 32B DPDK Data Mover (100d) | All |
+| | AR-ARKA-FX1 Arkville 64B DPDK Data Mover (100e) | All |
 
 ## Broadcom
 
-PMD NAME: net_bnxt
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- Broadcom Limited (14e4) : BCM5745X NetXtreme-E RDMA Virtual Function (1606) (All Subdevices)
- Broadcom Limited (14e4) : BCM5745X NetXtreme-E Ethernet Virtual Function (1609) (All Subdevices)
- Broadcom Limited (14e4) : BCM57454 NetXtreme-E 10Gb/25Gb/40Gb/50Gb/100Gb Ethernet (1614) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme-E RDMA Virtual Function (16c1) (All Subdevices)
- Broadcom Limited (14e4) : BCM57301 NetXtreme-C 10Gb Ethernet Controller (16c8) (All Subdevices)
- Broadcom Limited (14e4) : BCM57302 NetXtreme-C 10Gb/25Gb Ethernet Controller (16c9) (All Subdevices)
- Broadcom Limited (14e4) : BCM57304 NetXtreme-C 10Gb/25Gb/40Gb/50Gb Ethernet Controller (16ca) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme-C Ethernet Virtual Function (16cb) (All Subdevices)
- Broadcom Limited (14e4) : Unknown Device (16cd) (All Subdevices)
- Broadcom Limited (14e4) : BCM57402 NetXtreme-E 10Gb Ethernet Controller (16d0) (All Subdevices)
- Broadcom Limited (14e4) : BCM57404 NetXtreme-E 10Gb/25Gb Ethernet Controller (16d1) (All Subdevices)
- Broadcom Limited (14e4) : BCM57406 NetXtreme-E 10GBASE-T Ethernet Controller (16d2) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme-E Ethernet Virtual Function (16d3) (All Subdevices)
- Broadcom Limited (14e4) : BCM57402 NetXtreme-E Ethernet Partition (16d4) (All Subdevices)
- Broadcom Limited (14e4) : BCM57407 NetXtreme-E 10GBase-T Ethernet Controller (16d5) (All Subdevices)
- Broadcom Limited (14e4) : BCM57404 NetXtreme-E Ethernet Partition (16e7) (All Subdevices)
- Broadcom Limited (14e4) : BCM57406 NetXtreme-E Ethernet Partition (16e8) (All Subdevices)
- Broadcom Limited (14e4) : BCM57407 NetXtreme-E 25Gb Ethernet Controller (16e9) (All Subdevices)
- Broadcom Limited (14e4) : Unknown Device (16ea) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme-E Ethernet Virtual Function (16dc) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme-C Ethernet Virtual Function (16e1) (All Subdevices)
- Broadcom Limited (14e4) : BCM57314 NetXtreme-C 10Gb/25Gb/40Gb/50Gb RDMA Ethernet Controller (16df) (All Subdevices)
- Broadcom Limited (14e4) : BCM57417 NetXtreme-E Ethernet Partition (16cc) (All Subdevices)
- Broadcom Limited (14e4) : BCM57311 NetXtreme-C 10Gb RDMA Ethernet Controller (16ce) (All Subdevices)
- Broadcom Limited (14e4) : BCM57312 NetXtreme-C 10Gb/25Gb RDMA Ethernet Controller (16cf) (All Subdevices)
- Broadcom Limited (14e4) : BCM57412 NetXtreme-E 10Gb RDMA Ethernet Controller (16d6) (All Subdevices)
- Broadcom Limited (14e4) : BCM57414 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16d7) (All Subdevices)
- Broadcom Limited (14e4) : BCM57416 NetXtreme-E Dual-Media 10G RDMA Ethernet Controller (16d8) (All Subdevices)
- Broadcom Limited (14e4) : BCM57417 NetXtreme-E 10GBASE-T RDMA Ethernet Controller (16d9) (All Subdevices)
- Broadcom Limited (14e4) : BCM57412 NetXtreme-E Ethernet Partition (16de) (All Subdevices)
- Broadcom Limited (14e4) : Unknown Device (16e0) (All Subdevices)
- Broadcom Limited (14e4) : BCM57417 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16e2) (All Subdevices)
- Broadcom Limited (14e4) : BCM57416 NetXtreme-E 10Gb RDMA Ethernet Controller (16e3) (All Subdevices)
- Broadcom Limited (14e4) : Unknown Device (16e4) (All Subdevices)
- Broadcom Limited (14e4) : BCM57414 NetXtreme-E Ethernet Partition (16ec) (All Subdevices)
- Broadcom Limited (14e4) : BCM57416 NetXtreme-E Ethernet Partition (16ee) (All Subdevices)
- Broadcom Limited (14e4) : Unknown Device (d802) (All Subdevices)
- Broadcom Limited (14e4) : Unknown Device (d804) (All Subdevices)
- Broadcom Limited (14e4) : Unknown Device (16f0) (All Subdevices)
- Broadcom Limited (14e4) : Unknown Device (d800) (All Subdevices)
+### Driver: net_bnxt
+#### Dependencies: 
+- igb_uio 
+- uio_pci_generic 
+- vfio-pci
 
- PMD NAME: net_bnx2xvf
-PMD KMOD DEPENDENCIES: * igb_uio | vfio-pci
-PMD HW SUPPORT:
- Broadcom Limited (14e4) : NetXtreme II BCM57800 1/10 Gigabit Ethernet Virtual Function (16a9) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme II BCM57810 10 Gigabit Ethernet Virtual Function (16af) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme II BCM57811 10-Gigabit Ethernet Virtual Function (163f) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme II BCM57840 10/20 Gigabit Ethernet Virtual Function (16ad) (All Subdevices)
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Broadcom Limited (14e4) | BCM5745X NetXtreme-E RDMA Virtual Function (1606) | All |
+| | BCM5745X NetXtreme-E Ethernet Virtual Function (1609) | All |
+| | BCM57454 NetXtreme-E 10Gb/25Gb/40Gb/50Gb/100Gb Ethernet (1614) | All |
+| | NetXtreme-E RDMA Virtual Function (16c1) | All |
+| | BCM57301 NetXtreme-C 10Gb Ethernet Controller (16c8) | All |
+| | BCM57302 NetXtreme-C 10Gb/25Gb Ethernet Controller (16c9) | All |
+| | BCM57304 NetXtreme-C 10Gb/25Gb/40Gb/50Gb Ethernet Controller (16ca) | All |
+| | NetXtreme-C Ethernet Virtual Function (16cb) | All |
+| | Unknown Device (16cd) | All |
+| | BCM57402 NetXtreme-E 10Gb Ethernet Controller (16d0) | All |
+| | BCM57404 NetXtreme-E 10Gb/25Gb Ethernet Controller (16d1) | All |
+| | BCM57406 NetXtreme-E 10GBASE-T Ethernet Controller (16d2) | All |
+| | NetXtreme-E Ethernet Virtual Function (16d3) | All |
+| | BCM57402 NetXtreme-E Ethernet Partition (16d4) | All |
+| | BCM57407 NetXtreme-E 10GBase-T Ethernet Controller (16d5) | All |
+| | BCM57404 NetXtreme-E Ethernet Partition (16e7) | All |
+| | BCM57406 NetXtreme-E Ethernet Partition (16e8) | All |
+| | BCM57407 NetXtreme-E 25Gb Ethernet Controller (16e9) | All |
+| | Unknown Device (16ea) | All |
+| | NetXtreme-E Ethernet Virtual Function (16dc) | All |
+| | NetXtreme-C Ethernet Virtual Function (16e1) | All |
+| | BCM57314 NetXtreme-C 10Gb/25Gb/40Gb/50Gb RDMA Ethernet Controller (16df) | All |
+| | BCM57417 NetXtreme-E Ethernet Partition (16cc) | All |
+| | BCM57311 NetXtreme-C 10Gb RDMA Ethernet Controller (16ce) | All |
+| | BCM57312 NetXtreme-C 10Gb/25Gb RDMA Ethernet Controller (16cf) | All |
+| | BCM57412 NetXtreme-E 10Gb RDMA Ethernet Controller (16d6) | All |
+| | BCM57414 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16d7) | All |
+| | BCM57416 NetXtreme-E Dual-Media 10G RDMA Ethernet Controller (16d8) | All |
+| | BCM57417 NetXtreme-E 10GBASE-T RDMA Ethernet Controller (16d9) | All |
+| | BCM57412 NetXtreme-E Ethernet Partition (16de) | All |
+| | Unknown Device (16e0) | All |
+| | BCM57417 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16e2) | All |
+| | BCM57416 NetXtreme-E 10Gb RDMA Ethernet Controller (16e3) | All |
+| | Unknown Device (16e4) | All |
+| | BCM57414 NetXtreme-E Ethernet Partition (16ec) | All |
+| | BCM57416 NetXtreme-E Ethernet Partition (16ee) | All |
+| | Unknown Device (d802) | All |
+| | Unknown Device (d804) | All |
+| | Unknown Device (16f0) | All |
+| | Unknown Device (d800) | All |
 
-PMD NAME: net_bnx2x
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- Broadcom Limited (14e4) : NetXtreme II BCM57800 1/10 Gigabit Ethernet (168a) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme II BCM57711 10-Gigabit PCIe (164f) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme II BCM57810 10 Gigabit Ethernet (168e) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme II BCM57811 10-Gigabit Ethernet (163d) (All Subdevices)
- Broadcom Limited (14e4) : NetXtreme II BCM57840 10/20 Gigabit Ethernet (168d) (All Subdevices)
- Broadcom Limited (14e4) : BCM57840 NetXtreme II 10 Gigabit Ethernet (16a1) (All Subdevices)
- Broadcom Limited (14e4) : BCM57840 NetXtreme II 10/20-Gigabit Ethernet (16a2) (All Subdevices)
+### Driver: net_bnx2xvf
+#### Dependencies: 
+- igb_uio 
+- vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Broadcom Limited (14e4) | NetXtreme II BCM57800 1/10 Gigabit Ethernet Virtual Function (16a9) | All |
+| | NetXtreme II BCM57810 10 Gigabit Ethernet Virtual Function (16af) | All |
+| | NetXtreme II BCM57811 10-Gigabit Ethernet Virtual Function (163f) | All |
+| | NetXtreme II BCM57840 10/20 Gigabit Ethernet Virtual Function (16ad) | All |
+
+### Driver: net_bnx2x
+#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Broadcom Limited (14e4) | NetXtreme II BCM57800 1/10 Gigabit Ethernet (168a) | All |
+| | NetXtreme II BCM57711 10-Gigabit PCIe (164f) | All |
+| | NetXtreme II BCM57810 10 Gigabit Ethernet (168e) | All |
+| | NetXtreme II BCM57811 10-Gigabit Ethernet (163d) | All |
+| | NetXtreme II BCM57840 10/20 Gigabit Ethernet (168d) | All |
+| | BCM57840 NetXtreme II 10 Gigabit Ethernet (16a1) | All |
+| | BCM57840 NetXtreme II 10/20-Gigabit Ethernet (16a2) | All |
 
 ## Cavium
 
-PMD NAME: net_liovf
-PMD KMOD DEPENDENCIES: * igb_uio | vfio-pci
-PMD HW SUPPORT:
- Cavium, Inc. (177d) : CN23XX [LiquidIO II] SRIOV Virtual Function (9712) (All Subdevices)
+### Driver: net_liovf
+#### Dependencies: * igb_uio | vfio-pci
 
-PMD NAME: net_thunderx
-PMD PARAMETERS: `skip_data_bytes=<int>`
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- Cavium, Inc. (177d) : Unknown Device (11) (Unknown Subdevice)
- Cavium, Inc. (177d) : THUNDERX Network Interface Controller virtual function (a034) (Unknown Subdevice)
- Cavium, Inc. (177d) : THUNDERX Network Interface Controller virtual function (a034) (Unknown Subdevice)
- Cavium, Inc. (177d) : THUNDERX Network Interface Controller virtual function (a034) (Unknown Subdevice)
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Cavium, Inc. (177d) | CN23XX [LiquidIO II] SRIOV Virtual Function (9712) | All |
 
-PMD NAME: compress_octeonx
-PMD HW SUPPORT:
- Cavium, Inc. (177d) : THUNDERX ZIP virtual function (a037) (All Subdevices)
+### Driver: net_thunderx
+Parameters:  `skip_data_bytes=<int>`
+#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
 
-PMD NAME: event_skeleton_pci
-PMD HW SUPPORT:
- Cavium, Inc. (177d) : Unknown Device (1) (All Subdevices)
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Cavium, Inc. (177d) | Unknown Device (11) (Unknown Subdevice)
+| | THUNDERX Network Interface Controller virtual function (a034) (Unknown Subdevice)
+| | THUNDERX Network Interface Controller virtual function (a034) (Unknown Subdevice)
+| | THUNDERX Network Interface Controller virtual function (a034) (Unknown Subdevice)
+
+### Driver: compress_octeonx
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Cavium, Inc. (177d) | THUNDERX ZIP virtual function (a037) | All |
+
+### Driver: event_skeleton_pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Cavium, Inc. (177d) | Unknown Device (1) | All |
 
 ## Chelsio Communications
 
-PMD NAME: net_cxgbe
-PMD PARAMETERS: keep_ovlan=<0|1> force_link_up=<0|1> 
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- Chelsio Communications Inc (1425) : Unknown Device (5400) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-CR Unified Wire Ethernet Controller (5401) (All Subdevices)
- Chelsio Communications Inc (1425) : T522-CR Unified Wire Ethernet Controller (5402) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-CR Unified Wire Ethernet Controller (5403) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-BCH Unified Wire Ethernet Controller (5404) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-BCH Unified Wire Ethernet Controller (5405) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-CH Unified Wire Ethernet Controller (5406) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-SO Unified Wire Ethernet Controller (5407) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-CX Unified Wire Ethernet Controller (5408) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-BT Unified Wire Ethernet Controller (5409) (All Subdevices)
- Chelsio Communications Inc (1425) : T504-BT Unified Wire Ethernet Controller (540a) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-CR Unified Wire Ethernet Controller (540d) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-LP-CR Unified Wire Ethernet Controller (540e) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-LP-CR Unified Wire Ethernet Controller (5410) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-LL-CR Unified Wire Ethernet Controller (5411) (All Subdevices)
- Chelsio Communications Inc (1425) : T560-CR Unified Wire Ethernet Controller (5412) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-CHR Unified Wire Ethernet Controller (5413) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-SO-CR Unified Wire Ethernet Controller (5414) (All Subdevices)
- Chelsio Communications Inc (1425) : T502-BT Unified Wire Ethernet Controller (5415) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-OCP-SO Unified Wire Ethernet Controller (5416) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-OCP-SO Unified Wire Ethernet Controller (5417) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-BT Unified Wire Ethernet Controller (5418) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (5419) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (541a) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (541b) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5080 Unified Wire Ethernet Controller (5480) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5081 Unified Wire Ethernet Controller (5481) (All Subdevices)
- Chelsio Communications Inc (1425) : T504-5082 Unified Wire Ethernet Controller (5482) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5083 Unified Wire Ethernet Controller (5483) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5084 Unified Wire Ethernet Controller (5484) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5085 Unified Wire Ethernet Controller (5485) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5086 Unified Wire Ethernet Controller (5486) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5087 Unified Wire Ethernet Controller (5487) (All Subdevices)
- Chelsio Communications Inc (1425) : T570-5088 Unified Wire Ethernet Controller (5488) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-5089 Unified Wire Ethernet Controller (5489) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5090 Unified Wire Ethernet Controller (5490) (All Subdevices)
- Chelsio Communications Inc (1425) : T522-5091 Unified Wire Ethernet Controller (5491) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-5092 Unified Wire Ethernet Controller (5492) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5093 Unified Wire Ethernet Controller (5493) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5094 Unified Wire Ethernet Controller (5494) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5095 Unified Wire Ethernet Controller (5495) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5096 Unified Wire Ethernet Controller (5496) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-5097 Unified Wire Ethernet Controller (5497) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5098 Unified Wire Ethernet Controller (5498) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5099 Unified Wire Ethernet Controller (5499) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-509A Unified Wire Ethernet Controller (549a) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-509B Unified Wire Ethernet Controller (549b) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-509C Unified Wire Ethernet Controller (549c) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-509D Unified Wire Ethernet Controller (549d) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-509E Unified Wire Ethernet Controller (549e) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-509F Unified Wire Ethernet Controller (549f) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-50A0 Unified Wire Ethernet Controller (54a0) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-50A1 Unified Wire Ethernet Controller (54a1) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A2 Unified Wire Ethernet Controller (54a2) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A3 Unified Wire Ethernet Controller (54a3) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-50A4 Unified Wire Ethernet Controller (54a4) (All Subdevices)
- Chelsio Communications Inc (1425) : T522-50A5 Unified Wire Ethernet Controller (54a5) (All Subdevices)
- Chelsio Communications Inc (1425) : T522-50A6 Unified Wire Ethernet Controller (54a6) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A7 Unified Wire Ethernet Controller (54a7) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A8 Unified Wire Ethernet Controller (54a8) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A9 Unified Wire Ethernet Controller (54a9) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50AA Unified Wire Ethernet Controller (54aa) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-50AB Unified Wire Ethernet Controller (54ab) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-50AC Unified Wire Ethernet Controller (54ac) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (54ad) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (54ae) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (54af) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (54b0) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-CR Unified Wire Ethernet Controller (6401) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-SO-CR Unified Wire Ethernet Controller (6402) (All Subdevices)
- Chelsio Communications Inc (1425) : T6425-CR Unified Wire Ethernet Controller (6403) (All Subdevices)
- Chelsio Communications Inc (1425) : T6425-SO-CR Unified Wire Ethernet Controller (6404) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-OCP-SO Unified Wire Ethernet Controller (6405) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-OCP-SO Unified Wire Ethernet Controller (6406) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-LP-CR Unified Wire Ethernet Controller (6407) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-SO-CR Unified Wire Ethernet Controller (6408) (All Subdevices)
- Chelsio Communications Inc (1425) : T6210-BT Unified Wire Ethernet Controller (6409) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-CR Unified Wire Ethernet Controller (640d) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-LL-CR Unified Wire Ethernet Controller (6411) (All Subdevices)
- Chelsio Communications Inc (1425) : T61100-OCP-SO Unified Wire Ethernet Controller (6414) (All Subdevices)
- Chelsio Communications Inc (1425) : T6201-BT Unified Wire Ethernet Controller (6415) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-6080 Unified Wire Ethernet Controller (6480) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-6081 Unified Wire Ethernet Controller (6481) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-6082 Unified Wire Ethernet Controller (6482) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-6083 Unified Wire Ethernet Controller (6483) (All Subdevices)
- Chelsio Communications Inc (1425) : T64100-6084 Unified Wire Ethernet Controller (6484) (All Subdevices)
- Chelsio Communications Inc (1425) : T6240-6085 Unified Wire Ethernet Controller (6485) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-6086 Unified Wire Ethernet Controller (6486) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-6087 Unified Wire Ethernet Controller (6487) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (6488) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (6489) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (648a) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (648b) (All Subdevices)
+### Driver: net_cxgbe
+#### Parameters: keep_ovlan=<0|1> force_link_up=<0|1> 
+#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
 
-PMD NAME: net_cxgbevf
-PMD KMOD DEPENDENCIES: * igb_uio | vfio-pci
-PMD HW SUPPORT:
- Chelsio Communications Inc (1425) : Unknown Device (5800) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-CR Unified Wire Ethernet Controller [VF] (5801) (All Subdevices)
- Chelsio Communications Inc (1425) : T522-CR Unified Wire Ethernet Controller [VF] (5802) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-CR Unified Wire Ethernet Controller [VF] (5803) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-BCH Unified Wire Ethernet Controller [VF] (5804) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-BCH Unified Wire Ethernet Controller [VF] (5805) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-CH Unified Wire Ethernet Controller [VF] (5806) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-SO Unified Wire Ethernet Controller [VF] (5807) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-CX Unified Wire Ethernet Controller [VF] (5808) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-BT Unified Wire Ethernet Controller [VF] (5809) (All Subdevices)
- Chelsio Communications Inc (1425) : T504-BT Unified Wire Ethernet Controller [VF] (580a) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-CR Unified Wire Ethernet Controller [VF] (580d) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-LP-CR Unified Wire Ethernet Controller [VF] (580e) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-LP-CR Unified Wire Ethernet Controller [VF] (5810) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-LL-CR Unified Wire Ethernet Controller [VF] (5811) (All Subdevices)
- Chelsio Communications Inc (1425) : T560-CR Unified Wire Ethernet Controller [VF] (5812) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-CHR Unified Wire Ethernet Controller [VF] (5813) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-SO-CR Unified Wire Ethernet Controller [VF] (5814) (All Subdevices)
- Chelsio Communications Inc (1425) : T502-BT Unified Wire Ethernet Controller [VF] (5815) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-OCP-SO Unified Wire Ethernet Controller [VF] (5816) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-OCP-SO Unified Wire Ethernet Controller [VF] (5817) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-BT Unified Wire Ethernet Controller [VF] (5818) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (5819) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (581a) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (581b) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5080 Unified Wire Ethernet Controller [VF] (5880) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5081 Unified Wire Ethernet Controller [VF] (5881) (All Subdevices)
- Chelsio Communications Inc (1425) : T504-5082 Unified Wire Ethernet Controller [VF] (5882) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5083 Unified Wire Ethernet Controller [VF] (5883) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5084 Unified Wire Ethernet Controller [VF] (5884) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5085 Unified Wire Ethernet Controller [VF] (5885) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5086 Unified Wire Ethernet Controller [VF] (5886) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5087 Unified Wire Ethernet Controller [VF] (5887) (All Subdevices)
- Chelsio Communications Inc (1425) : T570-5088 Unified Wire Ethernet Controller [VF] (5888) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-5089 Unified Wire Ethernet Controller [VF] (5889) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5090 Unified Wire Ethernet Controller [VF] (5890) (All Subdevices)
- Chelsio Communications Inc (1425) : T522-5091 Unified Wire Ethernet Controller [VF] (5891) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-5092 Unified Wire Ethernet Controller [VF] (5892) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5093 Unified Wire Ethernet Controller [VF] (5893) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5094 Unified Wire Ethernet Controller [VF] (5894) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-5095 Unified Wire Ethernet Controller [VF] (5895) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5096 Unified Wire Ethernet Controller [VF] (5896) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-5097 Unified Wire Ethernet Controller [VF] (5897) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5098 Unified Wire Ethernet Controller [VF] (5898) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-5099 Unified Wire Ethernet Controller [VF] (5899) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-509A Unified Wire Ethernet Controller [VF] (589a) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-509B Unified Wire Ethernet Controller [VF] (589b) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-509C Unified Wire Ethernet Controller [VF] (589c) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-509D Unified Wire Ethernet Controller [VF] (589d) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-509E Unified Wire Ethernet Controller [VF] (589e) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-509F Unified Wire Ethernet Controller [VF] (589f) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-50A0 Unified Wire Ethernet Controller [VF] (58a0) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-50A1 Unified Wire Ethernet Controller [VF] (58a1) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A2 Unified Wire Ethernet Controller [VF] (58a2) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A3 Unified Wire Ethernet Controller [VF] (58a3) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-50A4 Unified Wire Ethernet Controller [VF] (58a4) (All Subdevices)
- Chelsio Communications Inc (1425) : T522-50A5 Unified Wire Ethernet Controller [VF] (58a5) (All Subdevices)
- Chelsio Communications Inc (1425) : T522-50A6 Unified Wire Ethernet Controller [VF] (58a6) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A7 Unified Wire Ethernet Controller [VF] (58a7) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A8 Unified Wire Ethernet Controller [VF] (58a8) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50A9 Unified Wire Ethernet Controller [VF] (58a9) (All Subdevices)
- Chelsio Communications Inc (1425) : T580-50AA Unified Wire Ethernet Controller [VF] (58aa) (All Subdevices)
- Chelsio Communications Inc (1425) : T520-50AB Unified Wire Ethernet Controller [VF] (58ab) (All Subdevices)
- Chelsio Communications Inc (1425) : T540-50AC Unified Wire Ethernet Controller [VF] (58ac) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (58ad) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (58ae) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (58af) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (58b0) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-CR Unified Wire Ethernet Controller [VF] (6801) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-SO-CR Unified Wire Ethernet Controller [VF] (6802) (All Subdevices)
- Chelsio Communications Inc (1425) : T6425-CR Unified Wire Ethernet Controller [VF] (6803) (All Subdevices)
- Chelsio Communications Inc (1425) : T6425-SO-CR Unified Wire Ethernet Controller [VF] (6804) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-OCP-SO Unified Wire Ethernet Controller [VF] (6805) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-OCP-SO Unified Wire Ethernet Controller [VF] (6806) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-LP-CR Unified Wire Ethernet Controller [VF] (6807) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-SO-CR Unified Wire Ethernet Controller [VF] (6808) (All Subdevices)
- Chelsio Communications Inc (1425) : T6210-BT Unified Wire Ethernet Controller [VF] (6809) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-CR Unified Wire Ethernet Controller [VF] (680d) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-LL-CR Unified Wire Ethernet Controller [VF] (6811) (All Subdevices)
- Chelsio Communications Inc (1425) : T61100-OCP-SO Unified Wire Ethernet Controller [VF] (6814) (All Subdevices)
- Chelsio Communications Inc (1425) : T6201-BT Unified Wire Ethernet Controller [VF] (6815) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-6080 Unified Wire Ethernet Controller [VF] (6880) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-6081 Unified Wire Ethernet Controller [VF] (6881) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-6082 Unified Wire Ethernet Controller [VF] (6882) (All Subdevices)
- Chelsio Communications Inc (1425) : T62100-6083 Unified Wire Ethernet Controller [VF] (6883) (All Subdevices)
- Chelsio Communications Inc (1425) : T64100-6084 Unified Wire Ethernet Controller [VF] (6884) (All Subdevices)
- Chelsio Communications Inc (1425) : T6240-6085 Unified Wire Ethernet Controller [VF] (6885) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-6086 Unified Wire Ethernet Controller [VF] (6886) (All Subdevices)
- Chelsio Communications Inc (1425) : T6225-6087 Unified Wire Ethernet Controller [VF] (6887) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (6888) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (6889) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (688a) (All Subdevices)
- Chelsio Communications Inc (1425) : Unknown Device (688b) (All Subdevices)
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Chelsio Communications Inc (1425) | Unknown Device (5400) | All |
+| | T520-CR Unified Wire Ethernet Controller (5401) | All |
+| | T522-CR Unified Wire Ethernet Controller (5402) | All |
+| | T540-CR Unified Wire Ethernet Controller (5403) | All |
+| | T520-BCH Unified Wire Ethernet Controller (5404) | All |
+| | T540-BCH Unified Wire Ethernet Controller (5405) | All |
+| | T540-CH Unified Wire Ethernet Controller (5406) | All |
+| | T520-SO Unified Wire Ethernet Controller (5407) | All |
+| | T520-CX Unified Wire Ethernet Controller (5408) | All |
+| | T520-BT Unified Wire Ethernet Controller (5409) | All |
+| | T504-BT Unified Wire Ethernet Controller (540a) | All |
+| | T580-CR Unified Wire Ethernet Controller (540d) | All |
+| | T540-LP-CR Unified Wire Ethernet Controller (540e) | All |
+| | T580-LP-CR Unified Wire Ethernet Controller (5410) | All |
+| | T520-LL-CR Unified Wire Ethernet Controller (5411) | All |
+| | T560-CR Unified Wire Ethernet Controller (5412) | All |
+| | T580-CHR Unified Wire Ethernet Controller (5413) | All |
+| | T580-SO-CR Unified Wire Ethernet Controller (5414) | All |
+| | T502-BT Unified Wire Ethernet Controller (5415) | All |
+| | T580-OCP-SO Unified Wire Ethernet Controller (5416) | All |
+| | T520-OCP-SO Unified Wire Ethernet Controller (5417) | All |
+| | T540-BT Unified Wire Ethernet Controller (5418) | All |
+| | Unknown Device (5419) | All |
+| | Unknown Device (541a) | All |
+| | Unknown Device (541b) | All |
+| | T540-5080 Unified Wire Ethernet Controller (5480) | All |
+| | T540-5081 Unified Wire Ethernet Controller (5481) | All |
+| | T504-5082 Unified Wire Ethernet Controller (5482) | All |
+| | T540-5083 Unified Wire Ethernet Controller (5483) | All |
+| | T540-5084 Unified Wire Ethernet Controller (5484) | All |
+| | T580-5085 Unified Wire Ethernet Controller (5485) | All |
+| | T580-5086 Unified Wire Ethernet Controller (5486) | All |
+| | T580-5087 Unified Wire Ethernet Controller (5487) | All |
+| | T570-5088 Unified Wire Ethernet Controller (5488) | All |
+| | T520-5089 Unified Wire Ethernet Controller (5489) | All |
+| | T540-5090 Unified Wire Ethernet Controller (5490) | All |
+| | T522-5091 Unified Wire Ethernet Controller (5491) | All |
+| | T520-5092 Unified Wire Ethernet Controller (5492) | All |
+| | T580-5093 Unified Wire Ethernet Controller (5493) | All |
+| | T540-5094 Unified Wire Ethernet Controller (5494) | All |
+| | T540-5095 Unified Wire Ethernet Controller (5495) | All |
+| | T580-5096 Unified Wire Ethernet Controller (5496) | All |
+| | T520-5097 Unified Wire Ethernet Controller (5497) | All |
+| | T580-5098 Unified Wire Ethernet Controller (5498) | All |
+| | T580-5099 Unified Wire Ethernet Controller (5499) | All |
+| | T520-509A Unified Wire Ethernet Controller (549a) | All |
+| | T540-509B Unified Wire Ethernet Controller (549b) | All |
+| | T520-509C Unified Wire Ethernet Controller (549c) | All |
+| | T540-509D Unified Wire Ethernet Controller (549d) | All |
+| | T520-509E Unified Wire Ethernet Controller (549e) | All |
+| | T540-509F Unified Wire Ethernet Controller (549f) | All |
+| | T540-50A0 Unified Wire Ethernet Controller (54a0) | All |
+| | T540-50A1 Unified Wire Ethernet Controller (54a1) | All |
+| | T580-50A2 Unified Wire Ethernet Controller (54a2) | All |
+| | T580-50A3 Unified Wire Ethernet Controller (54a3) | All |
+| | T540-50A4 Unified Wire Ethernet Controller (54a4) | All |
+| | T522-50A5 Unified Wire Ethernet Controller (54a5) | All |
+| | T522-50A6 Unified Wire Ethernet Controller (54a6) | All |
+| | T580-50A7 Unified Wire Ethernet Controller (54a7) | All |
+| | T580-50A8 Unified Wire Ethernet Controller (54a8) | All |
+| | T580-50A9 Unified Wire Ethernet Controller (54a9) | All |
+| | T580-50AA Unified Wire Ethernet Controller (54aa) | All |
+| | T520-50AB Unified Wire Ethernet Controller (54ab) | All |
+| | T540-50AC Unified Wire Ethernet Controller (54ac) | All |
+| | Unknown Device (54ad) | All |
+| | Unknown Device (54ae) | All |
+| | Unknown Device (54af) | All |
+| | Unknown Device (54b0) | All |
+| | T6225-CR Unified Wire Ethernet Controller (6401) | All |
+| | T6225-SO-CR Unified Wire Ethernet Controller (6402) | All |
+| | T6425-CR Unified Wire Ethernet Controller (6403) | All |
+| | T6425-SO-CR Unified Wire Ethernet Controller (6404) | All |
+| | T6225-OCP-SO Unified Wire Ethernet Controller (6405) | All |
+| | T62100-OCP-SO Unified Wire Ethernet Controller (6406) | All |
+| | T62100-LP-CR Unified Wire Ethernet Controller (6407) | All |
+| | T62100-SO-CR Unified Wire Ethernet Controller (6408) | All |
+| | T6210-BT Unified Wire Ethernet Controller (6409) | All |
+| | T62100-CR Unified Wire Ethernet Controller (640d) | All |
+| | T6225-LL-CR Unified Wire Ethernet Controller (6411) | All |
+| | T61100-OCP-SO Unified Wire Ethernet Controller (6414) | All |
+| | T6201-BT Unified Wire Ethernet Controller (6415) | All |
+| | T6225-6080 Unified Wire Ethernet Controller (6480) | All |
+| | T62100-6081 Unified Wire Ethernet Controller (6481) | All |
+| | T6225-6082 Unified Wire Ethernet Controller (6482) | All |
+| | T62100-6083 Unified Wire Ethernet Controller (6483) | All |
+| | T64100-6084 Unified Wire Ethernet Controller (6484) | All |
+| | T6240-6085 Unified Wire Ethernet Controller (6485) | All |
+| | T6225-6086 Unified Wire Ethernet Controller (6486) | All |
+| | T6225-6087 Unified Wire Ethernet Controller (6487) | All |
+| | Unknown Device (6488) | All |
+| | Unknown Device (6489) | All |
+| | Unknown Device (648a) | All |
+| | Unknown Device (648b) | All |
+
+### Driver: net_cxgbevf
+#### Dependencies: * igb_uio | vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Chelsio Communications Inc (1425) | Unknown Device (5800) | All |
+| | T520-CR Unified Wire Ethernet Controller [VF] (5801) | All |
+| | T522-CR Unified Wire Ethernet Controller [VF] (5802) | All |
+| | T540-CR Unified Wire Ethernet Controller [VF] (5803) | All |
+| | T520-BCH Unified Wire Ethernet Controller [VF] (5804) | All |
+| | T540-BCH Unified Wire Ethernet Controller [VF] (5805) | All |
+| | T540-CH Unified Wire Ethernet Controller [VF] (5806) | All |
+| | T520-SO Unified Wire Ethernet Controller [VF] (5807) | All |
+| | T520-CX Unified Wire Ethernet Controller [VF] (5808) | All |
+| | T520-BT Unified Wire Ethernet Controller [VF] (5809) | All |
+| | T504-BT Unified Wire Ethernet Controller [VF] (580a) | All |
+| | T580-CR Unified Wire Ethernet Controller [VF] (580d) | All |
+| | T540-LP-CR Unified Wire Ethernet Controller [VF] (580e) | All |
+| | T580-LP-CR Unified Wire Ethernet Controller [VF] (5810) | All |
+| | T520-LL-CR Unified Wire Ethernet Controller [VF] (5811) | All |
+| | T560-CR Unified Wire Ethernet Controller [VF] (5812) | All |
+| | T580-CHR Unified Wire Ethernet Controller [VF] (5813) | All |
+| | T580-SO-CR Unified Wire Ethernet Controller [VF] (5814) | All |
+| | T502-BT Unified Wire Ethernet Controller [VF] (5815) | All |
+| | T580-OCP-SO Unified Wire Ethernet Controller [VF] (5816) | All |
+| | T520-OCP-SO Unified Wire Ethernet Controller [VF] (5817) | All |
+| | T540-BT Unified Wire Ethernet Controller [VF] (5818) | All |
+| | Unknown Device (5819) | All |
+| | Unknown Device (581a) | All |
+| | Unknown Device (581b) | All |
+| | T540-5080 Unified Wire Ethernet Controller [VF] (5880) | All |
+| | T540-5081 Unified Wire Ethernet Controller [VF] (5881) | All |
+| | T504-5082 Unified Wire Ethernet Controller [VF] (5882) | All |
+| | T540-5083 Unified Wire Ethernet Controller [VF] (5883) | All |
+| | T540-5084 Unified Wire Ethernet Controller [VF] (5884) | All |
+| | T580-5085 Unified Wire Ethernet Controller [VF] (5885) | All |
+| | T580-5086 Unified Wire Ethernet Controller [VF] (5886) | All |
+| | T580-5087 Unified Wire Ethernet Controller [VF] (5887) | All |
+| | T570-5088 Unified Wire Ethernet Controller [VF] (5888) | All |
+| | T520-5089 Unified Wire Ethernet Controller [VF] (5889) | All |
+| | T540-5090 Unified Wire Ethernet Controller [VF] (5890) | All |
+| | T522-5091 Unified Wire Ethernet Controller [VF] (5891) | All |
+| | T520-5092 Unified Wire Ethernet Controller [VF] (5892) | All |
+| | T580-5093 Unified Wire Ethernet Controller [VF] (5893) | All |
+| | T540-5094 Unified Wire Ethernet Controller [VF] (5894) | All |
+| | T540-5095 Unified Wire Ethernet Controller [VF] (5895) | All |
+| | T580-5096 Unified Wire Ethernet Controller [VF] (5896) | All |
+| | T520-5097 Unified Wire Ethernet Controller [VF] (5897) | All |
+| | T580-5098 Unified Wire Ethernet Controller [VF] (5898) | All |
+| | T580-5099 Unified Wire Ethernet Controller [VF] (5899) | All |
+| | T520-509A Unified Wire Ethernet Controller [VF] (589a) | All |
+| | T540-509B Unified Wire Ethernet Controller [VF] (589b) | All |
+| | T520-509C Unified Wire Ethernet Controller [VF] (589c) | All |
+| | T540-509D Unified Wire Ethernet Controller [VF] (589d) | All |
+| | T520-509E Unified Wire Ethernet Controller [VF] (589e) | All |
+| | T540-509F Unified Wire Ethernet Controller [VF] (589f) | All |
+| | T540-50A0 Unified Wire Ethernet Controller [VF] (58a0) | All |
+| | T540-50A1 Unified Wire Ethernet Controller [VF] (58a1) | All |
+| | T580-50A2 Unified Wire Ethernet Controller [VF] (58a2) | All |
+| | T580-50A3 Unified Wire Ethernet Controller [VF] (58a3) | All |
+| | T540-50A4 Unified Wire Ethernet Controller [VF] (58a4) | All |
+| | T522-50A5 Unified Wire Ethernet Controller [VF] (58a5) | All |
+| | T522-50A6 Unified Wire Ethernet Controller [VF] (58a6) | All |
+| | T580-50A7 Unified Wire Ethernet Controller [VF] (58a7) | All |
+| | T580-50A8 Unified Wire Ethernet Controller [VF] (58a8) | All |
+| | T580-50A9 Unified Wire Ethernet Controller [VF] (58a9) | All |
+| | T580-50AA Unified Wire Ethernet Controller [VF] (58aa) | All |
+| | T520-50AB Unified Wire Ethernet Controller [VF] (58ab) | All |
+| | T540-50AC Unified Wire Ethernet Controller [VF] (58ac) | All |
+| | Unknown Device (58ad) | All |
+| | Unknown Device (58ae) | All |
+| | Unknown Device (58af) | All |
+| | Unknown Device (58b0) | All |
+| | T6225-CR Unified Wire Ethernet Controller [VF] (6801) | All |
+| | T6225-SO-CR Unified Wire Ethernet Controller [VF] (6802) | All |
+| | T6425-CR Unified Wire Ethernet Controller [VF] (6803) | All |
+| | T6425-SO-CR Unified Wire Ethernet Controller [VF] (6804) | All |
+| | T6225-OCP-SO Unified Wire Ethernet Controller [VF] (6805) | All |
+| | T62100-OCP-SO Unified Wire Ethernet Controller [VF] (6806) | All |
+| | T62100-LP-CR Unified Wire Ethernet Controller [VF] (6807) | All |
+| | T62100-SO-CR Unified Wire Ethernet Controller [VF] (6808) | All |
+| | T6210-BT Unified Wire Ethernet Controller [VF] (6809) | All |
+| | T62100-CR Unified Wire Ethernet Controller [VF] (680d) | All |
+| | T6225-LL-CR Unified Wire Ethernet Controller [VF] (6811) | All |
+| | T61100-OCP-SO Unified Wire Ethernet Controller [VF] (6814) | All |
+| | T6201-BT Unified Wire Ethernet Controller [VF] (6815) | All |
+| | T6225-6080 Unified Wire Ethernet Controller [VF] (6880) | All |
+| | T62100-6081 Unified Wire Ethernet Controller [VF] (6881) | All |
+| | T6225-6082 Unified Wire Ethernet Controller [VF] (6882) | All |
+| | T62100-6083 Unified Wire Ethernet Controller [VF] (6883) | All |
+| | T64100-6084 Unified Wire Ethernet Controller [VF] (6884) | All |
+| | T6240-6085 Unified Wire Ethernet Controller [VF] (6885) | All |
+| | T6225-6086 Unified Wire Ethernet Controller [VF] (6886) | All |
+| | T6225-6087 Unified Wire Ethernet Controller [VF] (6887) | All |
+| | Unknown Device (6888) | All |
+| | Unknown Device (6889) | All |
+| | Unknown Device (688a) | All |
+| | Unknown Device (688b) | All |
 
 ## Cisco
 
-PMD NAME: net_enic
-PMD PARAMETERS: disable-overlay=0|1 enable-avx2-rx=0|1 ig-vlan-rewrite=trunk|untag|priority|pass
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- Cisco Systems Inc (1137) : Unknown Device (43) (All Subdevices)
- Cisco Systems Inc (1137) : Unknown Device (71) (All Subdevices)
+### Driver: net_enic
+#### Parameters: disable-overlay=0|1 enable-avx2-rx=0|1 ig-vlan-rewrite=trunk|untag|priority|pass
+#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Cisco Systems Inc (1137) | Unknown Device (43) | All |
+|  | Unknown Device (71) | All |
 
 ## Freescale Semiconductor
 
-PMD NAME: net_enetc
-PMD KMOD DEPENDENCIES: * vfio-pci
-PMD HW SUPPORT:
- Freescale Semiconductor Inc (1957) : Unknown Device (e100) (All Subdevices)
- Freescale Semiconductor Inc (1957) : Unknown Device (ef00) (All Subdevices)
+### Driver: net_enetc
+#### Dependencies: * vfio-pci
 
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Freescale Semiconductor Inc (1957) | Unknown Device (e100) | All |
+|  | Unknown Device (ef00) | All |
 
 ## Intel Corporation
 
 ### Driver: net_ixgbe_vf
-
 #### Dependencies:  
 - igb_uio
 - vfio-pci
 
-| Device | Subdevice |
-| --- | --- |
-| 82599 Ethernet Controller Virtual Function (10ed) | All |
-| 82599 Virtual Function (152e) | All |
-| X540 Ethernet Controller Virtual Function (1515)) | All |
-| X540 Virtual Function (1530)) | All |
-| X550 Virtual Function (1564)) | All |
-| X550 Virtual Function (1565)) | All |
-| X553 Virtual Function (15c5) ) | All |
-| X553 Virtual Function (15b4) ) | All |
-| Ethernet Connection X552 Virtual Function (15a8) ) | All |
-| X552 Virtual Function (15a9) ) | All |
-
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Intel Corporation (8086) | 82599 Ethernet Controller Virtual Function (10ed) | All |
+| | 82599 Virtual Function (152e) | All |
+| | X540 Ethernet Controller Virtual Function (1515) | All |
+| | X540 Virtual Function (1530) | All |
+| | X550 Virtual Function (1564) | All |
+| | X550 Virtual Function (1565) | All |
+| | X553 Virtual Function (15c5) | All |
+| | X553 Virtual Function (15b4) | All |
+| | Ethernet Connection X552 Virtual Function (15a8) | All |
+| | X552 Virtual Function (15a9) | All |
 
 ### Driver: net_ixgbe
-
 #### Dependencies: 
 - igb_uio 
 - uio_pci_generic 
 - vfio-pci
 
 | Device | Subdevice |
-| --- | --- |
+| --- | --- | 
 | 82598 10GbE PCI-Express Ethernet Controller (10b6) | All |
 | 82598EB Gigabit BX Network Connection (1508) | All |
 | 82598EB 10-Gigabit AF Dual Port Network Connection (10c6) | All |
@@ -458,7 +499,6 @@ PMD HW SUPPORT:
 | Ethernet Connection X552 10 GbE Backplane (15aa) | All |
 | Ethernet Connection X552 10 GbE Backplane (15ab) | All |
 
-
 ### Driver: qat
 
 | Device | Subdevice |
@@ -470,7 +510,6 @@ PMD HW SUPPORT:
 | Unknown Device (18a1) | All |
 
 ### Driver: net_e1000_igb_vf
-
 #### Dependencies: 
 - igb_uio 
 - vfio-pci
@@ -483,7 +522,6 @@ PMD HW SUPPORT:
 | I350 Virtual Function (152f) | All |
 
 ### Driver: net_e1000_igb
-
 #### Dependencies: 
 - igb_uio 
 - uio_pci_generic 
@@ -531,7 +569,6 @@ PMD HW SUPPORT:
 | Unknown Device (440) | All |
 
 ### Driver: net_e1000_em
-
 #### Dependencies: 
 - igb_uio 
 - uio_pci_generic 
@@ -586,9 +623,7 @@ PMD HW SUPPORT:
 | Ethernet Connection (7) I219-V (15bc) | All |
 
 ### Driver: net_ice
-
 #### Parameters: `max_queue_pair_num=<int>`
-
 #### Dependencies: 
 - igb_uio 
 - uio_pci_generic 
@@ -601,9 +636,7 @@ PMD HW SUPPORT:
 | Unknown Device (1593) | All |
 
 ### Driver: net_i40e
-
 #### Parameters: `enable_floating_veb=1floating_veb_list=<string>queue-num-per-vf=1|2|4|8|16support-multi-driver=1use-latest-supported-vec=0|1`
-
 #### Dependencies: 
 - igb_uio 
 - uio_pci_generic 
@@ -635,7 +668,6 @@ PMD HW SUPPORT:
 | Unknown Device (d58) | All |
 
 ### Driver: net_i40e_vf
-
 #### Dependencies: 
 - igb_uio 
 - vfio-pci
@@ -648,7 +680,6 @@ PMD HW SUPPORT:
 | Ethernet Virtual Function 700 Series (37cd) | All |
 
 ### Driver: net_iavf
-
 #### Dependencies: 
 - igb_uio 
 - vfio-pci
@@ -658,7 +689,6 @@ PMD HW SUPPORT:
 | Ethernet Adaptive Virtual Function (1889) | All |
 
 ### Driver: net_fm10k
-
 #### Dependencies: 
 - igb_uio 
 - uio_pci_generic 
@@ -672,216 +702,306 @@ PMD HW SUPPORT:
 
 ## Mellanox
 
-PMD NAME: net_mlx5
-PMD KMOD DEPENDENCIES: * ib_uverbs & mlx5_core & mlx5_ib
-PMD HW SUPPORT:
- Mellanox Technologies (15b3) : MT27700 Family [ConnectX-4] (1013) (All Subdevices)
- Mellanox Technologies (15b3) : MT27700 Family [ConnectX-4 Virtual Function] (1014) (All Subdevices)
- Mellanox Technologies (15b3) : MT27710 Family [ConnectX-4 Lx] (1015) (All Subdevices)
- Mellanox Technologies (15b3) : MT27710 Family [ConnectX-4 Lx Virtual Function] (1016) (All Subdevices)
- Mellanox Technologies (15b3) : MT27800 Family [ConnectX-5] (1017) (All Subdevices)
- Mellanox Technologies (15b3) : MT27800 Family [ConnectX-5 Virtual Function] (1018) (All Subdevices)
- Mellanox Technologies (15b3) : MT28800 Family [ConnectX-5 Ex] (1019) (All Subdevices)
- Mellanox Technologies (15b3) : MT28800 Family [ConnectX-5 Ex Virtual Function] (101a) (All Subdevices)
- Mellanox Technologies (15b3) : MT416842 BlueField integrated ConnectX-5 network controller (a2d2) (All Subdevices)
- Mellanox Technologies (15b3) : MT416842 BlueField multicore SoC family VF (a2d3) (All Subdevices)
- Mellanox Technologies (15b3) : MT28908 Family [ConnectX-6] (101b) (All Subdevices)
- Mellanox Technologies (15b3) : MT28908 Family [ConnectX-6 Virtual Function] (101c) (All Subdevices)
+### Driver: net_mlx5
+#### Dependencies: * ib_uverbs & mlx5_core & mlx5_ib
 
-PMD NAME: net_mlx4
-PMD KMOD DEPENDENCIES: * ib_uverbs & mlx4_en & mlx4_core & mlx4_ib
-PMD HW SUPPORT:
- Mellanox Technologies (15b3) : MT27500 Family [ConnectX-3] (1003) (All Subdevices)
- Mellanox Technologies (15b3) : MT27520 Family [ConnectX-3 Pro] (1007) (All Subdevices)
- Mellanox Technologies (15b3) : MT27500/MT27520 Family [ConnectX-3/ConnectX-3 Pro Virtual Function] (1004) (All Subdevices)
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Mellanox Technologies (15b3) | MT27700 Family [ConnectX-4] (1013) | All |
+| | MT27700 Family [ConnectX-4 Virtual Function] (1014) | All |
+| | MT27710 Family [ConnectX-4 Lx] (1015) | All |
+| | MT27710 Family [ConnectX-4 Lx Virtual Function] (1016) | All |
+| | MT27800 Family [ConnectX-5] (1017) | All |
+| | MT27800 Family [ConnectX-5 Virtual Function] (1018) | All |
+| | MT28800 Family [ConnectX-5 Ex] (1019) | All |
+| | MT28800 Family [ConnectX-5 Ex Virtual Function] (101a) | All |
+| | MT416842 BlueField integrated ConnectX-5 network controller (a2d2) | All |
+| | MT416842 BlueField multicore SoC family VF (a2d3) | All |
+| | MT28908 Family [ConnectX-6] (101b) | All |
+| | MT28908 Family [ConnectX-6 Virtual Function] (101c) | All |
+
+### Driver: net_mlx4
+#### Dependencies: * ib_uverbs & mlx4_en & mlx4_core & mlx4_ib
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Mellanox Technologies (15b3) | MT27500 Family [ConnectX-3] (1003) | All |
+| | MT27520 Family [ConnectX-3 Pro] (1007) | All |
+| | MT27500/MT27520 Family [ConnectX-3/ConnectX-3 Pro Virtual Function] (1004) | All |
 
 ## Netronome
 
-PMD NAME: net_nfp_vf
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio
-PMD HW SUPPORT:
- Netronome Systems, Inc. (19ee) : Unknown Device (6003) (All Subdevices)
+### Driver: net_nfp_vf
+#### Dependencies: * igb_uio | uio_pci_generic | vfio
 
-PMD NAME: net_nfp_pf
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio
-PMD HW SUPPORT:
- Netronome Systems, Inc. (19ee) : Unknown Device (4000) (All Subdevices)
- Netronome Systems, Inc. (19ee) : Unknown Device (6000) (All Subdevices)
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Netronome Systems, Inc. (19ee) | Unknown Device (6003) | All |
 
-##QLogic
+### Driver: net_nfp_pf
+#### Dependencies: * igb_uio | uio_pci_generic | vfio
 
-PMD NAME: net_qede_vf
-PMD KMOD DEPENDENCIES: * igb_uio | vfio-pci
-PMD HW SUPPORT:
- QLogic Corp. (1077) : Unknown Device (1630) (All Subdevices)
- QLogic Corp. (1077) : FastLinQ QL45000 Series Gigabit Ethernet Controller (SR-IOV VF) (1664) (All Subdevices)
- QLogic Corp. (1077) : FastLinQ QL41000 Series Gigabit Ethernet Controller (SR-IOV VF) (8090) (All Subdevices)
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Netronome Systems, Inc. (19ee) | Unknown Device (4000) | All |
+| | Unknown Device (6000) | All |
 
-PMD NAME: net_qede
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- QLogic Corp. (1077) : FastLinQ QL45000 Series 40GbE Controller (1634) (All Subdevices)
- QLogic Corp. (1077) : Unknown Device (1629) (All Subdevices)
- QLogic Corp. (1077) : FastLinQ QL45000 Series 40GbE Controller (1634) (All Subdevices)
- QLogic Corp. (1077) : FastLinQ QL45000 Series 25GbE Controller (1656) (All Subdevices)
- QLogic Corp. (1077) : FastLinQ QL45000 Series 100GbE Controller (1644) (All Subdevices)
- QLogic Corp. (1077) : FastLinQ QL45000 Series 50GbE Controller (1654) (All Subdevices)
- QLogic Corp. (1077) : FastLinQ QL41000 Series 10/25/40/50GbE Controller (8070) (All Subdevices)
- QLogic Corp. (1077) : Unknown Device (8071) (All Subdevices)
- QLogic Corp. (1077) : Unknown Device (8072) (All Subdevices)
- QLogic Corp. (1077) : Unknown Device (8073) (All Subdevices)
+## QLogic
+
+### Driver: net_qede_vf
+#### Dependencies: * igb_uio | vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| QLogic Corp. (1077) | Unknown Device (1630) | All |
+| | FastLinQ QL45000 Series Gigabit Ethernet Controller (SR-IOV VF) (1664) | All |
+| | FastLinQ QL41000 Series Gigabit Ethernet Controller (SR-IOV VF) (8090) | All |
+
+### Driver: net_qede
+#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| QLogic Corp. (1077) | FastLinQ QL45000 Series 40GbE Controller (1634) | All |
+| | Unknown Device (1629) | All |
+| | FastLinQ QL45000 Series 40GbE Controller (1634) | All |
+| | FastLinQ QL45000 Series 25GbE Controller (1656) | All |
+| | FastLinQ QL45000 Series 100GbE Controller (1644) | All |
+| | FastLinQ QL45000 Series 50GbE Controller (1654) | All |
+| | FastLinQ QL41000 Series 10/25/40/50GbE Controller (8070) | All |
+| | Unknown Device (8071) | All |
+| | Unknown Device (8072) | All |
+| | Unknown Device (8073) | All |
 
 ## Red Hat
 
-PMD NAME: net_ifcvf
-PMD KMOD DEPENDENCIES: * vfio-pci
-PMD HW SUPPORT:
- Red Hat, Inc. (1af4) : Virtio network device (1041) (Unknown Subdevice)
+### Driver: net_ifcvf
+#### Dependencies: * vfio-pci
 
-PMD NAME: net_virtio
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- Red Hat, Inc. (1af4) : Virtio network device (1000) (All Subdevices)
- Red Hat, Inc. (1af4) : Virtio network device (1041) (All Subdevices)
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Red Hat, Inc. (1af4) | Virtio network device (1041) (Unknown Subdevice)
 
-PMD NAME: net_avp
-PMD HW SUPPORT:
- Red Hat, Inc. (1af4) : Inter-VM shared memory (1110) (Unknown Subdevice)
+### Driver: net_virtio
+#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Red Hat, Inc. (1af4) | Virtio network device (1000) | All |
+| | Virtio network device (1041) | All |
+
+### Driver: net_avp
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Red Hat, Inc. (1af4) | Inter-VM shared memory (1110) (Unknown Subdevice)
 
 ## Solarflare
 
-PMD NAME: net_sfc_efx
+### Driver: net_sfc_efx
 #### Parameters: `rx_datapath=[efx|ef10|ef10_essb] tx_datapath=[efx|ef10|ef10_simple] perf_profile=[auto|throughput|low-latency] fw_variant=[dont-care|full-feature|ultra-low-latency|capture-packed-stream|dpdk] rxd_wait_timeout_ns=<long> stats_update_period_ms=<long>`
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- Solarflare Communications (1924) : Unknown Device (903) (All Subdevices)
- Solarflare Communications (1924) : SFC9120 10G Ethernet Controller (Virtual Function) (1903) (All Subdevices)
- Solarflare Communications (1924) : Unknown Device (923) (All Subdevices)
- Solarflare Communications (1924) : SFC9140 10/40G Ethernet Controller (Virtual Function) (1923) (All Subdevices)
- Solarflare Communications (1924) : Unknown Device (a03) (All Subdevices)
- Solarflare Communications (1924) : SFC9220 10/40G Ethernet Controller (Virtual Function) (1a03) (All Subdevices)
- Solarflare Communications (1924) : Unknown Device (b03) (All Subdevices)
- Solarflare Communications (1924) : SFC9250 10/25/40/50/100G Ethernet Controller (Virtual Function) (1b03) (All Subdevices)
+#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| Solarflare Communications (1924) | Unknown Device (903) | All |
+| | SFC9120 10G Ethernet Controller (Virtual Function) (1903) | All |
+| | Unknown Device (923) | All |
+| | SFC9140 10/40G Ethernet Controller (Virtual Function) (1923) | All |
+| | Unknown Device (a03) | All |
+| | SFC9220 10/40G Ethernet Controller (Virtual Function) (1a03) | All |
+| | Unknown Device (b03) | All |
+| | SFC9250 10/25/40/50/100G Ethernet Controller (Virtual Function) (1b03) | All |
 
 ## VMWare
 
-PMD NAME: net_vmxnet3
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
-PMD HW SUPPORT:
- VMware (15ad) : Unknown Device (7b0) (All Subdevices)
+### Driver: net_vmxnet3
+#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
+
+| Vendor ID | Device | Subdevice |
+| --- | --- | --- |
+| VMware (15ad) | Unknown Device (7b0) | All |
 
 ## Other
 
-PMD NAME: dpaa2_dpci
---
-PMD NAME: net_pcap
-#### Parameters: `rx_pcap=<string> tx_pcap=<string> rx_iface=<ifc> rx_iface_in=<ifc> tx_iface=<ifc> iface=<ifc> phy_mac=<int>`
---
-PMD NAME: event_sw
-PMD PARAMETERS: `numa_node=<int> sched_quanta=<int>credit_quanta=<int>`
---
-PMD NAME: crypto_virtio
---
-PMD NAME: net_dpaa2
-PMD PARAMETERS: `drv_loopback=<int>`
---
-PMD NAME: dpdmux
---
-PMD NAME: net_tun
-PMD PARAMETERS: `iface=<string>` 
---
-PMD NAME: net_tap
-PMD PARAMETERS: `iface=<string> mac=fixed|xx:xx:xx:xx:xx:xx remote=<string>`
---
-PMD NAME: net_bonding
-PMD PARAMETERS: `slave=<ifc> primary=<ifc> mode=[0-6] xmit_policy=[l2 | l23 | l34] agg_mode=[count | stable | bandwidth] socket_id=<int> mac=<mac addr> lsc_poll_period_ms=<int> up_delay=<int> down_delay=<int>`
---
-PMD NAME: ipn3ke_cfg
-PMD PARAMETERS: `afu=<string> fpga_acc=<string>i40e_pf=<string>`
---
-PMD NAME: net_ipn3ke_afu
---
-PMD NAME: net_failsafe
-PMD PARAMETERS: `dev(<ifc>),exec(<shell command>),fd(<fd number>),mac=mac_addr,hotplug_poll=u64`
---
-PMD NAME: net_kni
-PMD PARAMETERS: `no_request_thread=<int>`
---
-PMD NAME: net_ring
-PMD PARAMETERS: nodeaction=name:node:action(ATTACH|CREATE)
---
-PMD NAME: crypto_caam_jr
-PMD PARAMETERS: `max_nb_queue_pairs=<int>socket_id=<int>`
---
-PMD NAME: net_softnic
-PMD PARAMETERS: `firmware=<string> conn_port=<uint16> cpu_id=<uint32> tm_n_queues=<uint32> tm_qsize0=<uint32> tm_qsize1=<uint32> tm_qsize2=<uint32> tm_qsize3=<uint32>`
---
-PMD NAME: net_dpaa
---
-PMD NAME: crypto_null
-PMD PARAMETERS: `max_nb_queue_pairs=<int> socket_id=<int>`
---
-PMD NAME: event_dsw
---
-PMD NAME: dpcon
---
-PMD NAME: event_dpaa2
---
-PMD NAME: event_dpaa1
-PMD PARAMETERS: `disable_intr=<int>`
---
-PMD NAME: net_null
-PMD PARAMETERS: `size=<int> copy=<int>`
---
-PMD NAME: net_virtio_user
-PMD PARAMETERS: `path=<path> mac=<mac addr> cq=<int> queue_size=<int> queues=<int> iface=<string> server=<0|1> mrg_rxbuf=<0|1> in_order=<0|1> packed_vq=<0|1>`
---
-PMD NAME: net_af_packet
-PMD PARAMETERS: `iface=<string> qpairs=<int> blocksz=<int> framesz=<int> framecnt=<int> qdisc_bypass=<0|1>`
---
-PMD NAME: crypto_dpaa_sec
---
-PMD NAME: event_opdl
-PMD PARAMETERS: `numa_node=<int>do_validation=<int>self_test=<int>`
---
-PMD NAME: dpaa2_qdma
-PMD PARAMETERS: `no_prefetch=<int>` 
---
-PMD NAME: ifpga_rawdev_cfg
-PMD PARAMETERS: `ifpga=<string> port=<int> afu_bts=<path>`
---
-PMD NAME: ifpga_rawdev_pci_driver
-PMD KMOD DEPENDENCIES: * igb_uio | uio_pci_generic | vfio-pci
---
-PMD NAME: event_skeleton
---
-PMD NAME: net_netvsc
-PMD KMOD DEPENDENCIES: * uio_hv_generic
---
-PMD NAME: event_octeontx
---
-PMD NAME: octeontx_ssovf
---
-PMD NAME: octeontx_ssowvf
---
-PMD NAME: octeontx_timvf
---
-PMD NAME: net_vhost
-PMD PARAMETERS: `iface=<ifc> queues=<int> client=<0|1> dequeue-zero-copy=<0|1> iommu-support=<0|1> postcopy-support=<0|1>`
---
-PMD NAME: octeontx_pkovf
---
-PMD NAME: octeontx_pkivf
---
-PMD NAME: net_octeontx
-PMD PARAMETERS: `nr_port=<int>`
---
-PMD NAME: rawdev_skeleton
---
-PMD NAME: net_vdev_netvsc
-PMD PARAMETERS: `iface=<string> mac=<string> force=<int> ignore=<int>`
---
-PMD NAME: crypto_dpaa2_sec
---
-PMD NAME: baseband_null
-PMD PARAMETERS: `max_nb_queues=<int> socket_id=<int>`
+### Driver: dpaa2_dpci
+
+### Driver: net_pcap
+
+Parameters: `rx_pcap=<string> tx_pcap=<string> rx_iface=<ifc> rx_iface_in=<ifc> tx_iface=<ifc> iface=<ifc> phy_mac=<int>`
+
+
+### Driver: event_sw
+
+Parameters:  `numa_node=<int> sched_quanta=<int>credit_quanta=<int>`
+
+
+### Driver: crypto_virtio
+
+
+### Driver: net_dpaa2
+
+Parameters:  `drv_loopback=<int>`
+
+
+### Driver: dpdmux
+
+
+### Driver: net_tun
+
+Parameters:  `iface=<string>` 
+
+
+### Driver: net_tap
+
+Parameters:  `iface=<string> mac=fixed|xx:xx:xx:xx:xx:xx remote=<string>`
+
+
+### Driver: net_bonding
+
+Parameters:  `slave=<ifc> primary=<ifc> mode=[0-6] xmit_policy=[l2 | l23 | l34] agg_mode=[count | stable | bandwidth] socket_id=<int> mac=<mac addr> lsc_poll_period_ms=<int> up_delay=<int> down_delay=<int>`
+
+
+### Driver: ipn3ke_cfg
+
+Parameters:  `afu=<string> fpga_acc=<string>i40e_pf=<string>`
+
+
+### Driver: net_ipn3ke_afu
+
+
+### Driver: net_failsafe
+
+Parameters:  `dev(<ifc>),exec(<shell command>),fd(<fd number>),mac=mac_addr,hotplug_poll=u64`
+
+
+### Driver: net_kni
+
+Parameters:  `no_request_thread=<int>`
+
+
+### Driver: net_ring
+
+Parameters:  nodeaction=name:node:action(ATTACH|CREATE)
+
+
+### Driver: crypto_caam_jr
+
+Parameters:  `max_nb_queue_pairs=<int>socket_id=<int>`
+
+
+### Driver: net_softnic
+
+Parameters:  `firmware=<string> conn_port=<uint16> cpu_id=<uint32> tm_n_queues=<uint32> tm_qsize0=<uint32> tm_qsize1=<uint32> tm_qsize2=<uint32> tm_qsize3=<uint32>`
+
+
+### Driver: net_dpaa
+
+
+### Driver: crypto_null
+
+Parameters:  `max_nb_queue_pairs=<int> socket_id=<int>`
+
+
+### Driver: event_dsw
+
+
+### Driver: dpcon
+
+
+### Driver: event_dpaa2
+
+
+### Driver: event_dpaa1
+
+Parameters:  `disable_intr=<int>`
+
+
+### Driver: net_null
+
+Parameters:  `size=<int> copy=<int>`
+
+
+### Driver: net_virtio_user
+
+Parameters:  `path=<path> mac=<mac addr> cq=<int> queue_size=<int> queues=<int> iface=<string> server=<0|1> mrg_rxbuf=<0|1> in_order=<0|1> packed_vq=<0|1>`
+
+
+### Driver: net_af_packet
+
+Parameters:  `iface=<string> qpairs=<int> blocksz=<int> framesz=<int> framecnt=<int> qdisc_bypass=<0|1>`
+
+
+### Driver: crypto_dpaa_sec
+
+
+### Driver: event_opdl
+
+Parameters:  `numa_node=<int>do_validation=<int>self_test=<int>`
+
+
+### Driver: dpaa2_qdma
+
+Parameters:  `no_prefetch=<int>` 
+
+
+### Driver: ifpga_rawdev_cfg
+
+Parameters:  `ifpga=<string> port=<int> afu_bts=<path>`
+
+
+### Driver: ifpga_rawdev_pci_driver
+
+#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
+
+
+### Driver: event_skeleton
+
+
+### Driver: net_netvsc
+
+#### Dependencies: * uio_hv_generic
+
+
+### Driver: event_octeontx
+
+
+### Driver: octeontx_ssovf
+
+
+### Driver: octeontx_ssowvf
+
+
+### Driver: octeontx_timvf
+
+
+### Driver: net_vhost
+
+Parameters:  `iface=<ifc> queues=<int> client=<0|1> dequeue-zero-copy=<0|1> iommu-support=<0|1> postcopy-support=<0|1>`
+
+
+### Driver: octeontx_pkovf
+
+
+### Driver: octeontx_pkivf
+
+
+### Driver: net_octeontx
+
+Parameters:  `nr_port=<int>`
+
+
+### Driver: rawdev_skeleton
+
+
+### Driver: net_vdev_netvsc
+
+Parameters:  `iface=<string> mac=<string> force=<int> ignore=<int>`
+
+
+### Driver: crypto_dpaa2_sec
+
+
+### Driver: baseband_null
+
+Parameters:  `max_nb_queues=<int> socket_id=<int>`
