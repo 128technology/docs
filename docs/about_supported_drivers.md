@@ -1,13 +1,10 @@
 ---
-title: Supported Drivers
-sidebar_label: Supported Drivers
+title: Supported NICs and Drivers
+sidebar_label: Supported NICs and Drivers
 ---
 
-The following list represents the drivers supported for use with the SSR software. 
+Use the links below to identify supported NICs and drivers for use with the SSR software.
 
-The names below are linked to sections providing a list of the supported drivers.
-
-- [Advanced Micro Devices](#advanced-micro-devices)
 - [Amazon](#amazon)
 - [Aquantia Corp.](#aquantia-corp)
 - [Atomic Rules](#atomic-rules)
@@ -18,131 +15,71 @@ The names below are linked to sections providing a list of the supported drivers
 - [Freescale Semiconductor](#freescale-semiconductor)
 - [Intel Corporation](#intel-corporation)
 - [Mellanox Technologies](#mellanox)
-- [Netronome Systems](#netronome)
 - [QLogic Corp](#qlogic)
 - [Red Hat](#red-hat)
 - [Solarflare Communications](#solarflare)
 - [VMWare](#vmware)
-- [Other](#other)
-
-## Advanced Micro Devices
-
-### Driver: net_axgbe
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic 
-- vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Advanced Micro Devices, Inc. (AMD 1022) | Unknown Device (1458) | | All | |
-| | Unknown Device (1459) | All |
 
 ## Amazon
 
-### Driver: net_ena
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic 
-- vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Amazon.com, Inc. (1d0f) | Elastic Network Adapter (ENA) (ec20) | All |
-| | Unknown Device (ec21) | All |
+| NIC | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Amazon.com, Inc. (1d0f) | Elastic Network Adapter (ENA) (ec20) | net_ena | 4.5.0 - 5.3.0 | 
 
 ## Aquantia Corp
 
-### Driver: net_atlantic
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic
+| NIC | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Aquantia Corp. (1d6a) | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d107) | net_atlantic | 4.5.0 - 5.3.0 |
+| | AQC108 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d108) | net_atlantic | 4.5.0 - 5.3.0 |
+| | AQC111 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (11b1) | net_atlantic | 4.5.0 - 5.3.0 |
+| | AQC112 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (12b1) | net_atlantic | 4.5.0 - 5.3.0 |
+| | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (87b1) | net_atlantic | 4.5.0 - 5.3.0 |
 
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Aquantia Corp. (1d6a) | Unknown Device (1) | All |
-| | Unknown Device (d100) | All |
-| | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d107) | All |
-| | AQC108 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d108) | All |
-| | Unknown Device (d109) | All |
-| | Unknown Device (b1) | All |
-| | Unknown Device (7b1) | All |
-| | Unknown Device (8b1) | All |
-| | Unknown Device (9b1) | All |
-| | AQC111 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (11b1) | All |
-| | AQC112 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (12b1) | All |
-| | Unknown Device (80b1) | All |
-| | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (87b1) | All |
-| | Unknown Device (88b1) | All |
-| | Unknown Device (89b1) | All |
-| | Unknown Device (91b1) | All |
-| | Unknown Device (92b1) | All |
-| | Unknown Device (51b1) | All |
-| | Unknown Device (52b1) | All |
 
 ## Atomic Rules
 
-### Driver: net_ark
-#### Parameters: `Pkt_gen=<filename> Pkt_chkr=<filename> Pkt_dir=<bitmap>`
-#### Dependencies: 
-- igb_uio 
-- io_pci_generic 
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-|Atomic Rules LLC (1d6c) | AR-ARKA-FX0 Arkville 32B DPDK Data Mover (100d) | All |
-| | AR-ARKA-FX1 Arkville 64B DPDK Data Mover (100e) | All |
+| NIC | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+|Atomic Rules LLC (1d6c) | AR-ARKA-FX0 Arkville 32B DPDK Data Mover (100d) | net_ark | 4.5.0 - 5.3.0 |
+| | AR-ARKA-FX1 Arkville 64B DPDK Data Mover (100e) | net_ark | 4.5.0 - 5.3.0 |
 
 ## Broadcom
 
-### Driver: net_bnxt
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic 
-- vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Broadcom Limited (14e4) | BCM5745X NetXtreme-E RDMA Virtual Function (1606) | All |
-| | BCM5745X NetXtreme-E Ethernet Virtual Function (1609) | All |
-| | BCM57454 NetXtreme-E 10Gb/25Gb/40Gb/50Gb/100Gb Ethernet (1614) | All |
-| | NetXtreme-E RDMA Virtual Function (16c1) | All |
-| | BCM57301 NetXtreme-C 10Gb Ethernet Controller (16c8) | All |
-| | BCM57302 NetXtreme-C 10Gb/25Gb Ethernet Controller (16c9) | All |
-| | BCM57304 NetXtreme-C 10Gb/25Gb/40Gb/50Gb Ethernet Controller (16ca) | All |
-| | NetXtreme-C Ethernet Virtual Function (16cb) | All |
-| | Unknown Device (16cd) | All |
-| | BCM57402 NetXtreme-E 10Gb Ethernet Controller (16d0) | All |
-| | BCM57404 NetXtreme-E 10Gb/25Gb Ethernet Controller (16d1) | All |
-| | BCM57406 NetXtreme-E 10GBASE-T Ethernet Controller (16d2) | All |
-| | NetXtreme-E Ethernet Virtual Function (16d3) | All |
-| | BCM57402 NetXtreme-E Ethernet Partition (16d4) | All |
-| | BCM57407 NetXtreme-E 10GBase-T Ethernet Controller (16d5) | All |
-| | BCM57404 NetXtreme-E Ethernet Partition (16e7) | All |
-| | BCM57406 NetXtreme-E Ethernet Partition (16e8) | All |
-| | BCM57407 NetXtreme-E 25Gb Ethernet Controller (16e9) | All |
-| | Unknown Device (16ea) | All |
-| | NetXtreme-E Ethernet Virtual Function (16dc) | All |
-| | NetXtreme-C Ethernet Virtual Function (16e1) | All |
-| | BCM57314 NetXtreme-C 10Gb/25Gb/40Gb/50Gb RDMA Ethernet Controller (16df) | All |
-| | BCM57417 NetXtreme-E Ethernet Partition (16cc) | All |
-| | BCM57311 NetXtreme-C 10Gb RDMA Ethernet Controller (16ce) | All |
-| | BCM57312 NetXtreme-C 10Gb/25Gb RDMA Ethernet Controller (16cf) | All |
-| | BCM57412 NetXtreme-E 10Gb RDMA Ethernet Controller (16d6) | All |
-| | BCM57414 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16d7) | All |
-| | BCM57416 NetXtreme-E Dual-Media 10G RDMA Ethernet Controller (16d8) | All |
-| | BCM57417 NetXtreme-E 10GBASE-T RDMA Ethernet Controller (16d9) | All |
-| | BCM57412 NetXtreme-E Ethernet Partition (16de) | All |
-| | Unknown Device (16e0) | All |
-| | BCM57417 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16e2) | All |
-| | BCM57416 NetXtreme-E 10Gb RDMA Ethernet Controller (16e3) | All |
-| | Unknown Device (16e4) | All |
-| | BCM57414 NetXtreme-E Ethernet Partition (16ec) | All |
-| | BCM57416 NetXtreme-E Ethernet Partition (16ee) | All |
-| | Unknown Device (d802) | All |
-| | Unknown Device (d804) | All |
-| | Unknown Device (16f0) | All |
-| | Unknown Device (d800) | All |
+| NIC | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Broadcom Limited (14e4) | BCM5745X NetXtreme-E RDMA Virtual Function (1606) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM5745X NetXtreme-E Ethernet Virtual Function (1609) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57454 NetXtreme-E 10Gb/25Gb/40Gb/50Gb/100Gb Ethernet (1614) | net_bnxt | 4.5.0 - 5.3.0 |
+| | NetXtreme-E RDMA Virtual Function (16c1) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57301 NetXtreme-C 10Gb Ethernet Controller (16c8) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57302 NetXtreme-C 10Gb/25Gb Ethernet Controller (16c9) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57304 NetXtreme-C 10Gb/25Gb/40Gb/50Gb Ethernet Controller (16ca) | net_bnxt | 4.5.0 - 5.3.0 |
+| | NetXtreme-C Ethernet Virtual Function (16cb) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57402 NetXtreme-E 10Gb Ethernet Controller (16d0) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57404 NetXtreme-E 10Gb/25Gb Ethernet Controller (16d1) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57406 NetXtreme-E 10GBASE-T Ethernet Controller (16d2) | net_bnxt | 4.5.0 - 5.3.0 |
+| | NetXtreme-E Ethernet Virtual Function (16d3) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57402 NetXtreme-E Ethernet Partition (16d4) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57407 NetXtreme-E 10GBase-T Ethernet Controller (16d5) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57404 NetXtreme-E Ethernet Partition (16e7) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57406 NetXtreme-E Ethernet Partition (16e8) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57407 NetXtreme-E 25Gb Ethernet Controller (16e9) | net_bnxt | 4.5.0 - 5.3.0 |
+| | NetXtreme-E Ethernet Virtual Function (16dc) | net_bnxt | 4.5.0 - 5.3.0 |
+| | NetXtreme-C Ethernet Virtual Function (16e1) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57314 NetXtreme-C 10Gb/25Gb/40Gb/50Gb RDMA Ethernet Controller (16df) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57417 NetXtreme-E Ethernet Partition (16cc) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57311 NetXtreme-C 10Gb RDMA Ethernet Controller (16ce) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57312 NetXtreme-C 10Gb/25Gb RDMA Ethernet Controller (16cf) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57412 NetXtreme-E 10Gb RDMA Ethernet Controller (16d6) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57414 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16d7) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57416 NetXtreme-E Dual-Media 10G RDMA Ethernet Controller (16d8) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57417 NetXtreme-E 10GBASE-T RDMA Ethernet Controller (16d9) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57412 NetXtreme-E Ethernet Partition (16de) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57417 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16e2) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57416 NetXtreme-E 10Gb RDMA Ethernet Controller (16e3) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57414 NetXtreme-E Ethernet Partition (16ec) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57416 NetXtreme-E Ethernet Partition (16ee) | net_bnxt | 4.5.0 - 5.3.0 |
 
 ### Driver: net_bnx2xvf
 #### Dependencies: 
@@ -184,22 +121,15 @@ Parameters:  `skip_data_bytes=<int>`
 
 | Vendor ID | Device | Subdevice |
 | --- | --- | --- |
-| Cavium, Inc. (177d) | Unknown Device (11) (Unknown Subdevice)
-| | THUNDERX Network Interface Controller virtual function (a034) (Unknown Subdevice)
-| | THUNDERX Network Interface Controller virtual function (a034) (Unknown Subdevice)
-| | THUNDERX Network Interface Controller virtual function (a034) (Unknown Subdevice)
+| Cavium, Inc. (177d) | THUNDERX Network Interface Controller virtual function (a034) | (Unknown Subdevice) |
+| | THUNDERX Network Interface Controller virtual function (a034) | (Unknown Subdevice) |
+| | THUNDERX Network Interface Controller virtual function (a034) | (Unknown Subdevice) |
 
 ### Driver: compress_octeonx
 
 | Vendor ID | Device | Subdevice |
 | --- | --- | --- |
 | Cavium, Inc. (177d) | THUNDERX ZIP virtual function (a037) | All |
-
-### Driver: event_skeleton_pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Cavium, Inc. (177d) | Unknown Device (1) | All |
 
 ## Chelsio Communications
 
@@ -729,23 +659,6 @@ Parameters:  `skip_data_bytes=<int>`
 | | MT27520 Family [ConnectX-3 Pro] (1007) | All |
 | | MT27500/MT27520 Family [ConnectX-3/ConnectX-3 Pro Virtual Function] (1004) | All |
 
-## Netronome
-
-### Driver: net_nfp_vf
-#### Dependencies: * igb_uio | uio_pci_generic | vfio
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Netronome Systems, Inc. (19ee) | Unknown Device (6003) | All |
-
-### Driver: net_nfp_pf
-#### Dependencies: * igb_uio | uio_pci_generic | vfio
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Netronome Systems, Inc. (19ee) | Unknown Device (4000) | All |
-| | Unknown Device (6000) | All |
-
 ## QLogic
 
 ### Driver: net_qede_vf
@@ -769,9 +682,6 @@ Parameters:  `skip_data_bytes=<int>`
 | | FastLinQ QL45000 Series 100GbE Controller (1644) | All |
 | | FastLinQ QL45000 Series 50GbE Controller (1654) | All |
 | | FastLinQ QL41000 Series 10/25/40/50GbE Controller (8070) | All |
-| | Unknown Device (8071) | All |
-| | Unknown Device (8072) | All |
-| | Unknown Device (8073) | All |
 
 ## Red Hat
 
@@ -822,186 +732,3 @@ Parameters:  `skip_data_bytes=<int>`
 | --- | --- | --- |
 | VMware (15ad) | Unknown Device (7b0) | All |
 
-## Other
-
-### Driver: dpaa2_dpci
-
-### Driver: net_pcap
-
-Parameters: `rx_pcap=<string> tx_pcap=<string> rx_iface=<ifc> rx_iface_in=<ifc> tx_iface=<ifc> iface=<ifc> phy_mac=<int>`
-
-
-### Driver: event_sw
-
-Parameters:  `numa_node=<int> sched_quanta=<int>credit_quanta=<int>`
-
-
-### Driver: crypto_virtio
-
-
-### Driver: net_dpaa2
-
-Parameters:  `drv_loopback=<int>`
-
-
-### Driver: dpdmux
-
-
-### Driver: net_tun
-
-Parameters:  `iface=<string>` 
-
-
-### Driver: net_tap
-
-Parameters:  `iface=<string> mac=fixed|xx:xx:xx:xx:xx:xx remote=<string>`
-
-
-### Driver: net_bonding
-
-Parameters:  `slave=<ifc> primary=<ifc> mode=[0-6] xmit_policy=[l2 | l23 | l34] agg_mode=[count | stable | bandwidth] socket_id=<int> mac=<mac addr> lsc_poll_period_ms=<int> up_delay=<int> down_delay=<int>`
-
-
-### Driver: ipn3ke_cfg
-
-Parameters:  `afu=<string> fpga_acc=<string>i40e_pf=<string>`
-
-
-### Driver: net_ipn3ke_afu
-
-
-### Driver: net_failsafe
-
-Parameters:  `dev(<ifc>),exec(<shell command>),fd(<fd number>),mac=mac_addr,hotplug_poll=u64`
-
-
-### Driver: net_kni
-
-Parameters:  `no_request_thread=<int>`
-
-
-### Driver: net_ring
-
-Parameters:  nodeaction=name:node:action(ATTACH|CREATE)
-
-
-### Driver: crypto_caam_jr
-
-Parameters:  `max_nb_queue_pairs=<int>socket_id=<int>`
-
-
-### Driver: net_softnic
-
-Parameters:  `firmware=<string> conn_port=<uint16> cpu_id=<uint32> tm_n_queues=<uint32> tm_qsize0=<uint32> tm_qsize1=<uint32> tm_qsize2=<uint32> tm_qsize3=<uint32>`
-
-
-### Driver: net_dpaa
-
-
-### Driver: crypto_null
-
-Parameters:  `max_nb_queue_pairs=<int> socket_id=<int>`
-
-
-### Driver: event_dsw
-
-
-### Driver: dpcon
-
-
-### Driver: event_dpaa2
-
-
-### Driver: event_dpaa1
-
-Parameters:  `disable_intr=<int>`
-
-
-### Driver: net_null
-
-Parameters:  `size=<int> copy=<int>`
-
-
-### Driver: net_virtio_user
-
-Parameters:  `path=<path> mac=<mac addr> cq=<int> queue_size=<int> queues=<int> iface=<string> server=<0|1> mrg_rxbuf=<0|1> in_order=<0|1> packed_vq=<0|1>`
-
-
-### Driver: net_af_packet
-
-Parameters:  `iface=<string> qpairs=<int> blocksz=<int> framesz=<int> framecnt=<int> qdisc_bypass=<0|1>`
-
-
-### Driver: crypto_dpaa_sec
-
-
-### Driver: event_opdl
-
-Parameters:  `numa_node=<int>do_validation=<int>self_test=<int>`
-
-
-### Driver: dpaa2_qdma
-
-Parameters:  `no_prefetch=<int>` 
-
-
-### Driver: ifpga_rawdev_cfg
-
-Parameters:  `ifpga=<string> port=<int> afu_bts=<path>`
-
-
-### Driver: ifpga_rawdev_pci_driver
-
-#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
-
-
-### Driver: event_skeleton
-
-
-### Driver: net_netvsc
-
-#### Dependencies: * uio_hv_generic
-
-
-### Driver: event_octeontx
-
-
-### Driver: octeontx_ssovf
-
-
-### Driver: octeontx_ssowvf
-
-
-### Driver: octeontx_timvf
-
-
-### Driver: net_vhost
-
-Parameters:  `iface=<ifc> queues=<int> client=<0|1> dequeue-zero-copy=<0|1> iommu-support=<0|1> postcopy-support=<0|1>`
-
-
-### Driver: octeontx_pkovf
-
-
-### Driver: octeontx_pkivf
-
-
-### Driver: net_octeontx
-
-Parameters:  `nr_port=<int>`
-
-
-### Driver: rawdev_skeleton
-
-
-### Driver: net_vdev_netvsc
-
-Parameters:  `iface=<string> mac=<string> force=<int> ignore=<int>`
-
-
-### Driver: crypto_dpaa2_sec
-
-
-### Driver: baseband_null
-
-Parameters:  `max_nb_queues=<int> socket_id=<int>`
