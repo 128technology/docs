@@ -11,15 +11,15 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 :::
 
 ## Release 5.2.1
-**Release Date:** July 9, 2021
+**Release Date:** July 16, 2021
 
 Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#release-514)
 
 ###  New Features and Improvements
 
-- **I95-35414 Refresh actions now available for individual sections on the Router Page:**The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
+- **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
 ------
-- **I95-36244 Handle names in application-id JSON:** The application-module json output common-name object now includes a list of referenced common-names, in addition to the transport-information list.  
+- **I95-36224 Handle names in application-id JSON:** The application-module json output `common-name object` now includes a list of referenced common-names, in addition to the transport-information list.
 ------
 - **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular.
 ------
@@ -31,7 +31,7 @@ Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#re
 
 - **I95-19871 Unknown session-type mismatched:** When a session-type does not have a match, the `Unclassified` service-class is used when it is available.**
 ------
-- **I95-40075/I95-40134 Use gateway from service route for interface ping gateway:** the `service-route next-hop gateway-ip` will be used for ICMP ping reachability probe if so configured. If no IP is configured, then the `fib-route gateway` will be used, and finally the `network-interface gateway` will be used.
+- **I95-40075/I95-40134 Use gateway from service route for interface ping gateway:** The `service-route next-hop gateway-ip` will be used for ICMP ping reachability probe if so configured. If no IP is configured, then the `fib-route gateway` will be used, and finally the `network-interface gateway` will be used.
 ------
 - **I95-40124 GRE Interface not inherting teneancy from parent:** The GRE Interface now inherts teneancy and neighborhood configuration from parent.
 ------
