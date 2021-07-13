@@ -3,13 +3,30 @@ title: Supported NICs and Drivers
 sidebar_label: Supported NICs and Drivers
 ---
 
-Use the linux command `lspci -nn` to obtain the PCI device label, and the vendor:device combo. For example:
+The Session Smart Router / 128T supports a number of NICs and Drivers. If you know the Device Name and Device ID you can search the Vendor lists here. To identify the NIC information, use the linux command `lspci -nn` to obtain the PCI device name, device ID, vendor name, and vendor ID. 
+
+From the linux shell run:
 ```
+lspci-nn
+
 00:03.0 Ethernet controller [0200]: Intel Corporation 82540EM Gigabit Ethernet Controller [8086:100e] (rev 03)
 ```
+The Vendor ID and Device ID are represented in the example above as [8086:100e]. To make searching the list easier, use the device name and ID. In this example:
 
+- Device name: 82540EM Gigabit Ethernet Controller
+- Device ID: 100e
 
-Use the links below to identify supported NICs and drivers for use with the SSR software.
+Additionally, the vendor name and ID is helpful to identify the NIC. 
+- Vendor name: Intel Corp.
+- Vendor ID: 8086
+
+Searching for the device ID 100e will return two results from different vendors. Searching for the device name `82540EM Gigabit Ethernet Controller` returns the following: 
+
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Intel Corporation (8086) | 82540EM Gigabit Ethernet Controller (100e) | net_e1000_em | 4.5.0 - 5.3.0 |
+
+Use the links below to browse the list of a specific vendor.
 
 - [Amazon](#amazon)
 - [Aquantia Corp.](#aquantia-corp)
@@ -17,24 +34,21 @@ Use the links below to identify supported NICs and drivers for use with the SSR 
 - [Broadcom](#broadcom)
 - [Cavium](#cavium)
 - [Chelsio Communications](#chelsio-communications)
-- [Cisco](#cisco)
-- [Freescale Semiconductor](#freescale-semiconductor)
 - [Intel Corporation](#intel-corporation)
 - [Mellanox Technologies](#mellanox)
 - [QLogic Corp](#qlogic)
 - [Red Hat](#red-hat)
 - [Solarflare Communications](#solarflare)
-- [VMWare](#vmware)
 
 ## Amazon
 
-| NIC | Device ID | Driver | Supported SSR/128T Version |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
 | --- | --- | --- | --- |
 | Amazon.com, Inc. (1d0f) | Elastic Network Adapter (ENA) (ec20) | net_ena | 4.5.0 - 5.3.0 | 
 
 ## Aquantia Corp
 
-| NIC | Device ID | Driver | Supported SSR/128T Version |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
 | --- | --- | --- | --- |
 | Aquantia Corp. (1d6a) | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d107) | net_atlantic | 4.5.0 - 5.3.0 |
 | | AQC108 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d108) | net_atlantic | 4.5.0 - 5.3.0 |
@@ -44,7 +58,7 @@ Use the links below to identify supported NICs and drivers for use with the SSR 
 
 ## Atomic Rules
 
-| NIC | Device ID | Driver | Supported SSR/128T Version |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
 | --- | --- | --- | --- |
 |Atomic Rules LLC (1d6c) | AR-ARKA-FX0 Arkville 32B DPDK Data Mover (100d) | net_ark | 4.5.0 - 5.3.0 |
 | | AR-ARKA-FX1 Arkville 64B DPDK Data Mover (100e) | net_ark | 4.5.0 - 5.3.0 |
@@ -99,28 +113,13 @@ Use the links below to identify supported NICs and drivers for use with the SSR 
 
 ## Cavium
 
-### Driver: net_liovf
-#### Dependencies: * igb_uio | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Cavium, Inc. (177d) | CN23XX [LiquidIO II] SRIOV Virtual Function (9712) | All |
-
-### Driver: net_thunderx
-Parameters:  `skip_data_bytes=<int>`
-#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Cavium, Inc. (177d) | THUNDERX Network Interface Controller virtual function (a034) | (Unknown Subdevice) |
-| | THUNDERX Network Interface Controller virtual function (a034) | (Unknown Subdevice) |
-| | THUNDERX Network Interface Controller virtual function (a034) | (Unknown Subdevice) |
-
-### Driver: compress_octeonx
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Cavium, Inc. (177d) | THUNDERX ZIP virtual function (a037) | All |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Cavium, Inc. (177d) |	CN23XX [LiquidIO II] SRIOV Virtual Function (9712) | net_liovf | 4.5.0 - 5.3.0 |
+| | THUNDERX Network Interface Controller virtual function (a034) |	net_thunderx | 4.5.0 - 5.3.0
+| | THUNDERX Network Interface Controller virtual function (a034) |	net_thunderx | 4.5.0 - 5.3.0 |
+| | THUNDERX Network Interface Controller virtual function (a034) | net_thunderx | 4.5.0 - 5.3.0 |
+| | THUNDERX ZIP virtual function (a037) | compress_octeonx	| 4.5.0 - 5.3.0 |
 
 ## Chelsio Communications
 
@@ -289,403 +288,218 @@ Parameters:  `skip_data_bytes=<int>`
 | | T6425-SO-CR Unified Wire Ethernet Controller (6404) | net_cxgbe | 4.5.0 - 5.3.0 |
 | | T6425-SO-CR Unified Wire Ethernet Controller [VF] (6804) | net_cxgbevf | 4.5.0 - 5.3.0 |
 
-## Cisco
-
-### Driver: net_enic
-#### Parameters: disable-overlay=0|1 enable-avx2-rx=0|1 ig-vlan-rewrite=trunk|untag|priority|pass
-#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Cisco Systems Inc (1137) | Unknown Device (43) | All |
-|  | Unknown Device (71) | All |
-
-## Freescale Semiconductor
-
-### Driver: net_enetc
-#### Dependencies: * vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Freescale Semiconductor Inc (1957) | Unknown Device (e100) | All |
-|  | Unknown Device (ef00) | All |
-
 ## Intel Corporation
 
-### Driver: net_ixgbe_vf
-#### Dependencies:  
-- igb_uio
-- vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Intel Corporation (8086) | 82599 Ethernet Controller Virtual Function (10ed) | All |
-| | 82599 Virtual Function (152e) | All |
-| | X540 Ethernet Controller Virtual Function (1515) | All |
-| | X540 Virtual Function (1530) | All |
-| | X550 Virtual Function (1564) | All |
-| | X550 Virtual Function (1565) | All |
-| | X553 Virtual Function (15c5) | All |
-| | X553 Virtual Function (15b4) | All |
-| | Ethernet Connection X552 Virtual Function (15a8) | All |
-| | X552 Virtual Function (15a9) | All |
-
-### Driver: net_ixgbe
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic 
-- vfio-pci
-
-| Device | Subdevice |
-| --- | --- | 
-| 82598 10GbE PCI-Express Ethernet Controller (10b6) | All |
-| 82598EB Gigabit BX Network Connection (1508) | All |
-| 82598EB 10-Gigabit AF Dual Port Network Connection (10c6) | All |
-| 82598EB 10-Gigabit AF Network Connection (10c7) | All |
-| 82598EB 10-Gigabit AT Network Connection (10c8) | All |
-| 82598EB 10-Gigabit AT2 Server Adapter (150b) | All |
-| 82598EB 10-Gigabit Dual Port Network Connection (10db) | All |
-| 82598EB 10-Gigabit AT CX4 Network Connection (10dd) | All |
-| 82598EB 10-Gigabit AT CX4 Network Connection (10ec) | All |
-| 82598EB 10-Gigabit AF Dual Port Network Connection (10f1) | All |
-| 82598EB 10-Gigabit AF Dual Port Network Connection (10e1) | All |
-| 82598EB 10-Gigabit AF Network Connection (10f4) | All |
-| 10 Gigabit BR KX4 Dual Port Network Connection (10f7) | All |
-| Ethernet X520 10GbE Dual Port KX4 Mezz (1514) | All |
-| 82599ES 10 Gigabit Network Connection (1517) | All |
-| 82599 10 Gigabit Dual Port Backplane Connection (10f8) | All |
-| 82599 10 Gigabit Dual Port Network Connection (10f9) | All |
-| 82599ES 10-Gigabit SFI/SFP+ Network Connection (10fb) | All |
-| 82599 10 Gigabit Dual Port Backplane Connection with FCoE (152a) | All |
-| 82599 10 Gigabit Dual Port Network Connection with FCoE (1529) | All |
-| Ethernet Express Module X520-P2 (1507) | All |
-| Ethernet 10G 2P X520 Adapter (154d) | All |
-| Ethernet Server Adapter X520-4 (154a) | All |
-| Ethernet Converged Network Adapter X520-Q1 (1558) | All |
-| 82599 10 Gigabit Network Connection (1557) | All |
-| 82599 10 Gigabit Dual Port Network Connection (10fc) | All |
-| 82599 10 Gigabit TN Network Connection (151c) | All |
-| Ethernet Controller 10-Gigabit X540-AT2 (1528) | All |
-| Ethernet Controller X540 (1560) | All |
-| Ethernet Connection X552 10 GbE SFP+ (15ac) | All |
-| Ethernet Connection X552/X557-AT 10GBASE-T (15ad) | All |
-| Ethernet Connection X552 1000BASE-T (15ae) | All |
-| Ethernet Controller 10G X550T (1563) | All |
-| Ethernet Controller 10G X550T (15d1) | All |
-| Ethernet Connection X553 Backplane (15c2) | All |
-| Ethernet Connection X553 Backplane (15c3) | All |
-| Ethernet Connection X553 10 GbE SFP+ (15c4) | All |
-| Ethernet Connection X553 1GbE (15c6) | All |
-| Ethernet Connection X553 1GbE (15c7) | All |
-| Ethernet Connection X553/X557-AT 10GBASE-T (15c8) | All |
-| Unknown Device (15ca) | All |
-| Unknown Device (15cc) | All |
-| Ethernet Connection X553 10 GbE SFP+ (15ce) | All |
-| Ethernet Connection X553 1GbE (15e4) | All |
-| Ethernet Connection X553 1GbE (15e5) | All |
-| Ethernet Connection X552 10 GbE Backplane (15aa) | All |
-| Ethernet Connection X552 10 GbE Backplane (15ab) | All |
-
-### Driver: qat
-
-| Device | Subdevice |
-| --- | --- |
-| Unknown Device (443) | All |
-| Unknown Device (37c9) | All |
-| Unknown Device (19e3) | All |
-| Unknown Device (6f55) | All |
-| Unknown Device (18a1) | All |
-
-### Driver: net_e1000_igb_vf
-#### Dependencies: 
-- igb_uio 
-- vfio-pci
-
-| Device | Subdevice |
-| --- | --- |
-| 82576 Virtual Function (10ca) | All |
-| Unknown Device (152d) | All |
-| I350 Ethernet Controller Virtual Function (1520) | All |
-| I350 Virtual Function (152f) | All |
-
-### Driver: net_e1000_igb
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic 
-- vfio-pci
-
-| Device | Subdevice |
-| --- | --- |
-| 82576 Gigabit Network Connection (10c9) | All |
-| 82576 Gigabit Network Connection (10e6) | All |
-| 82576 Gigabit Network Connection (10e7) | All |
-| 82576 Gigabit Network Connection (10e8) | All |
-| 82576 Gigabit Network Connection (1526) | All |
-| 82576NS Gigabit Network Connection (150a) | All |
-| 82576NS SerDes Gigabit Network Connection (1518) | All |
-| 82576 Gigabit Backplane Connection (150d) | All |
-| 82575EB Gigabit Network Connection (10a7) | All |
-| 82575EB Gigabit Backplane Connection (10a9) | All |
-| 82575GB Gigabit Network Connection (10d6) | All |
-| 82580 Gigabit Network Connection (150e) | All |
-| 82580 Gigabit Fiber Network Connection (150f) | All |
-| 82580 Gigabit Backplane Connection (1510) | All |
-| 82580 Gigabit SFP Connection (1511) | All |
-| 82580 Gigabit Network Connection (1516) | All |
-| 82580 Gigabit Fiber Network Connection (1527) | All |
-| I350 Gigabit Network Connection (1521) | All |
-| I350 Gigabit Fiber Network Connection (1522) | All |
-| I350 Gigabit Backplane Connection (1523) | All |
-| I350 Gigabit Connection (1524) | All |
-| Unknown Device (1546) | All |
-| I210 Gigabit Network Connection (1533) | All |
-| Unknown Device (1534) | All |
-| Unknown Device (1535) | All |
-| I210 Gigabit Fiber Network Connection (1536) | All |
-| I210 Gigabit Backplane Connection (1537) | All |
-| I210 Gigabit Network Connection (1538) | All |
-| I210 Gigabit Network Connection (157b) | All |
-| I210 Gigabit Backplane Connection (157c) | All |
-| I211 Gigabit Network Connection (1539) | All |
-| Ethernet Connection I354 1.0 GbE Backplane (1f40) | All |
-| Ethernet Connection I354 (1f41) | All |
-| Ethernet Connection I354 2.5 GbE Backplane (1f45) | All |
-| Unknown Device (438) | All |
-| Unknown Device (43a) | All |
-| Unknown Device (43c) | All |
-| Unknown Device (440) | All |
-
-### Driver: net_e1000_em
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic 
-- vfio-pci
-
-| Device | Subdevice |
-| --- | --- |
-| 82540EM Gigabit Ethernet Controller (100e) | All |
-| 82545EM Gigabit Ethernet Controller (Copper) (100f) | All |
-| 82545EM Gigabit Ethernet Controller (Fiber) (1011) | All |
-| 82546EB Gigabit Ethernet Controller (Copper) (1010) | All |
-| 82546EB Gigabit Ethernet Controller (Fiber) (1012) | All |
-| 82546EB Gigabit Ethernet Controller (101d) | All |
-| 82571EB Gigabit Ethernet Controller (105e) | All |
-| 82571EB Gigabit Ethernet Controller (105f) | All |
-| 82571EB Gigabit Ethernet Controller (1060) | All |
-| 82571EB Dual Port Gigabit Mezzanine Adapter (10d9) | All |
-| 82571EB Quad Port Gigabit Mezzanine Adapter (10da) | All |
-| 82571EB Gigabit Ethernet Controller (10a4) | All |
-| 82571PT Gigabit PT Quad Port Server ExpressModule (10d5) | All |
-| 82571EB Gigabit Ethernet Controller (Fiber) (10a5) | All |
-| 82571EB Gigabit Ethernet Controller (Copper) (10bc) | All |
-| 82572EI Gigabit Ethernet Controller (Copper) (107d) | All |
-| 82572EI Gigabit Ethernet Controller (Fiber) (107e) | All |
-| 82572EI Gigabit Ethernet Controller (107f) | All |
-| 82572EI Gigabit Ethernet Controller (Copper) (10b9) | All |
-| 82573L Gigabit Ethernet Controller (109a) | All |
-| 82574L Gigabit Network Connection (10d3) | All |
-| 82574L Gigabit Network Connection (10f6) | All |
-| 82583V Gigabit Network Connection (150c) | All |
-| 82579LM Gigabit Network Connection (Lewisville) (1502) | All |
-| Ethernet Connection I217-LM (153a) | All |
-| Ethernet Connection I217-V (153b) | All |
-| Ethernet Connection I218-LM (155a) | All |
-| Ethernet Connection I218-V (1559) | All |
-| Ethernet Connection (2) I218-LM (15a0) | All |
-| Ethernet Connection (2) I218-V (15a1) | All |
-| Ethernet Connection (3) I218-LM (15a2) | All |
-| Ethernet Connection (3) I218-V (15a3) | All |
-| Ethernet Connection I219-LM (156f) | All |
-| Ethernet Connection I219-V (1570) | All |
-| Ethernet Connection (2) I219-LM (15b7) | All |
-| Ethernet Connection (2) I219-V (15b8) | All |
-| Ethernet Connection (3) I219-LM (15b9) | All |
-| Ethernet Connection (4) I219-LM (15d7) | All |
-| Ethernet Connection (4) I219-V (15d8) | All |
-| Ethernet Connection (5) I219-LM (15e3) | All |
-| Ethernet Connection (5) I219-V (15d6) | All |
-| Ethernet Connection (6) I219-LM (15bd) | All |
-| Ethernet Connection (6) I219-V (15be) | All |
-| Ethernet Connection (7) I219-LM (15bb) | All |
-| Ethernet Connection (7) I219-V (15bc) | All |
-
-### Driver: net_ice
-#### Parameters: `max_queue_pair_num=<int>`
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic 
-- vfio-pci
-
-| Device | Subdevice |
-| --- | --- |
-| Unknown Device (1591) | All |
-| Unknown Device (1592) | All |
-| Unknown Device (1593) | All |
-
-### Driver: net_i40e
-#### Parameters: `enable_floating_veb=1floating_veb_list=<string>queue-num-per-vf=1|2|4|8|16support-multi-driver=1use-latest-supported-vec=0|1`
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic 
-- vfio-pci
-
-| Device | Subdevice |
-| --- | --- |
-| Ethernet Controller X710 for 10GbE SFP+ (1572) | All |
-| Unknown Device (1574) | All |
-| Ethernet Controller XL710 for 40GbE backplane (1580) | All |
-| Ethernet Controller X710 for 10GbE backplane (1581) | All |
-| Ethernet Controller XL710 for 40GbE QSFP+ (1583) | All |
-| Ethernet Controller XL710 for 40GbE QSFP+ (1584) | All |
-| Ethernet Controller X710 for 10GbE QSFP+ (1585) | All |
-| Ethernet Controller X710 for 10GBASE-T (1586) | All |
-| Ethernet Controller XL710 for 20GbE backplane (1587) | All |
-| Ethernet Controller XL710 for 20GbE backplane (1588) | All |
-| Ethernet Controller X710/X557-AT 10GBASE-T (1589) | All |
-| Ethernet Controller XXV710 for 25GbE backplane (158a) | All |
-| Ethernet Controller XXV710 for 25GbE SFP28 (158b) | All |
-| Unknown Device (374c) | All |
-| Ethernet Connection X722 for 10GbE backplane (37ce) | All |
-| Ethernet Connection X722 for 10GbE QSFP+ (37cf) | All |
-| Ethernet Connection X722 for 10GbE SFP+ (37d0) | All |
-| Ethernet Connection X722 for 1GbE (37d1) | All |
-| Ethernet Connection X722 for 10GBASE-T (37d2) | All |
-| Ethernet Connection X722 for 10GbE SFP+ (37d3) | All |
-| Unknown Device (cf8) | All |
-| Unknown Device (d58) | All |
-
-### Driver: net_i40e_vf
-#### Dependencies: 
-- igb_uio 
-- vfio-pci
-
-| Device | Subdevice |
-| --- | --- |
-| Ethernet Virtual Function 700 Series (154c) | All |
-| Ethernet Virtual Function 700 Series (1571) | All |
-| Unknown Device (374d) | All |
-| Ethernet Virtual Function 700 Series (37cd) | All |
-
-### Driver: net_iavf
-#### Dependencies: 
-- igb_uio 
-- vfio-pci
-
-| Device | Subdevice |
-| --- | --- |
-| Ethernet Adaptive Virtual Function (1889) | All |
-
-### Driver: net_fm10k
-#### Dependencies: 
-- igb_uio 
-- uio_pci_generic 
-- vfio-pci
-
-| Device | Subdevice |
-| --- | --- |
-| Ethernet Switch FM10000 Host Interface (15a4) | All |
-| Ethernet SDI Adapter (15d0) | All |
-| Ethernet Switch FM10000 Host Virtual Interface (15a5) | All |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Intel Corporation (8086) | 10 Gigabit BR KX4 Dual Port Network Connection (10f7) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82540EM Gigabit Ethernet Controller (100e) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82545EM Gigabit Ethernet Controller (Copper) (100f) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82545EM Gigabit Ethernet Controller (Fiber) (1011) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82546EB Gigabit Ethernet Controller (101d) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82546EB Gigabit Ethernet Controller (Copper) (1010) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82546EB Gigabit Ethernet Controller (Fiber) (1012) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82571EB Dual Port Gigabit Mezzanine Adapter (10d9) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82571EB Gigabit Ethernet Controller (105e) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82571EB Gigabit Ethernet Controller (105f) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82571EB Gigabit Ethernet Controller (1060) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82571EB Gigabit Ethernet Controller (10a4) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82571EB Gigabit Ethernet Controller (Copper) (10bc) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82571EB Gigabit Ethernet Controller (Fiber) (10a5) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82571EB Quad Port Gigabit Mezzanine Adapter (10da) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82571PT Gigabit PT Quad Port Server ExpressModule (10d5) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82572EI Gigabit Ethernet Controller (107f) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82572EI Gigabit Ethernet Controller (Copper) (107d) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82572EI Gigabit Ethernet Controller (Copper) (10b9) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82572EI Gigabit Ethernet Controller (Fiber) (107e) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82573L Gigabit Ethernet Controller (109a) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82574L Gigabit Network Connection (10d3) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82574L Gigabit Network Connection (10f6) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82575EB Gigabit Backplane Connection (10a9) | net_e1000_igb	| 4.5.0 - 5.3.0
+| | 82575EB Gigabit Network Connection (10a7) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | 82575GB Gigabit Network Connection (10d6) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | 82576 Gigabit Backplane Connection (150d) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | 82576 Gigabit Network Connection (10c9) | net_e1000_igb	| 4.5.0 - 5.3.0 |
+| | 82576 Gigabit Network Connection (10e6) | net_e1000_igb	| 4.5.0 - 5.3.0 |
+| | 82576 Gigabit Network Connection (10e7) | net_e1000_igb	| 4.5.0 - 5.3.0 |
+| | 82576 Gigabit Network Connection (10e8) | net_e1000_igb	| 4.5.0 - 5.3.0 |
+| | 82576 Gigabit Network Connection (1526) | net_e1000_igb	| 4.5.0 - 5.3.0 |
+| | 82576 Virtual Function (10ca) | net_e1000_igb_vf | 4.5.0 - 5.3.0 |
+| | 82576NS Gigabit Network Connection (150a) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | 82576NS SerDes Gigabit Network Connection (1518) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | 82579LM Gigabit Network Connection (Lewisville) (1502) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82580 Gigabit Backplane Connection (1510) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | 82580 Gigabit Fiber Network Connection (150f) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | 82580 Gigabit Fiber Network Connection (1527) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | 82580 Gigabit Network Connection (150e) | net_e1000_igb	| 4.5.0 - 5.3.0
+| | 82580 Gigabit Network Connection (1516) | net_e1000_igb	| 4.5.0 - 5.3.0
+| | 82580 Gigabit SFP Connection (1511) | net_e1000_igb	| 4.5.0 - 5.3.0
+| | 82583V Gigabit Network Connection (150c) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | 82598 10GbE PCI-Express Ethernet Controller (10b6) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit AF Dual Port Network Connection (10c6) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit AF Dual Port Network Connection (10e1) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit AF Dual Port Network Connection (10f1) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit AF Network Connection (10c7) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit AF Network Connection (10f4) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit AT CX4 Network Connection (10dd) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit AT CX4 Network Connection (10ec) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit AT Network Connection (10c8) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit AT2 Server Adapter (150b) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB 10-Gigabit Dual Port Network Connection (10db) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82598EB Gigabit BX Network Connection (1508) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82599 10 Gigabit Dual Port Backplane Connection (10f8) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82599 10 Gigabit Dual Port Backplane Connection with FCoE (152a) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82599 10 Gigabit Dual Port Network Connection (10f9) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82599 10 Gigabit Dual Port Network Connection (10fc) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82599 10 Gigabit Dual Port Network Connection with FCoE (1529) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82599 10 Gigabit Network Connection (1557) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82599 10 Gigabit TN Network Connection (151c) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82599 Ethernet Controller Virtual Function (10ed) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
+| | 82599 Virtual Function (152e) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
+| | 82599ES 10 Gigabit Network Connection (1517) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | 82599ES 10-Gigabit SFI/SFP+ Network Connection (10fb) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet 10G 2P X520 Adapter (154d) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Adaptive Virtual Function (1889) | net_iavf | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (2) I218-LM (15a0) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (2) I218-V (15a1) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (2) I219-LM (15b7) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (2) I219-V (15b8) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (3) I218-LM (15a2) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (3) I218-V (15a3) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (3) I219-LM (15b9) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (4) I219-LM (15d7) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (4) I219-V (15d8) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (5) I219-LM (15e3) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (5) I219-V (15d6) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (6) I219-LM (15bd) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (6) I219-V (15be) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (7) I219-LM (15bb) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection (7) I219-V (15bc) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection I217-LM (153a) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection I217-V (153b) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection I218-LM (155a) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection I218-V (1559) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection I219-LM (156f) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection I219-V (1570) | net_e1000_em | 4.5.0 - 5.3.0 |
+| | Ethernet Connection I354 (1f41) | net_e1000_igb	| 4.5.0 - 5.3.0
+| | Ethernet Connection I354 1.0 GbE Backplane (1f40) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | Ethernet Connection I354 2.5 GbE Backplane (1f45) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X552 10 GbE Backplane (15aa) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X552 10 GbE Backplane (15ab) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X552 10 GbE SFP+ (15ac) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X552 1000BASE-T (15ae) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X552 Virtual Function (15a8) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X552/X557-AT 10GBASE-T (15ad) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X553 10 GbE SFP+ (15c4) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X553 10 GbE SFP+ (15ce) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X553 1GbE (15c6) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X553 1GbE (15c7) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X553 1GbE (15e4) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X553 1GbE (15e5) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X553 Backplane (15c2) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X553 Backplane (15c3) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X553/X557-AT 10GBASE-T (15c8) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X722 for 10GBASE-T (37d2) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X722 for 10GbE backplane (37ce) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X722 for 10GbE QSFP+ (37cf) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X722 for 10GbE SFP+ (37d0) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X722 for 10GbE SFP+ (37d3) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Connection X722 for 1GbE (37d1) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller 10-Gigabit X540-AT2 (1528) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Controller 10G X550T (1563) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Controller 10G X550T (15d1) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Controller X540 (1560) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Controller X710 for 10GBASE-T (1586) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller X710 for 10GbE backplane (1581) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller X710 for 10GbE QSFP+ (1585) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller X710 for 10GbE SFP+ (1572) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller X710/X557-AT 10GBASE-T (1589) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller XL710 for 20GbE backplane (1587) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller XL710 for 20GbE backplane (1588) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller XL710 for 40GbE backplane (1580) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller XL710 for 40GbE QSFP+ (1583) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller XL710 for 40GbE QSFP+ (1584) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller XXV710 for 25GbE backplane (158a) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Controller XXV710 for 25GbE SFP28 (158b) | net_i40e | 4.5.0 - 5.3.0 |
+| | Ethernet Converged Network Adapter X520-Q1 (1558) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Express Module X520-P2 (1507) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet SDI Adapter (15d0) | net_fm10k	| 4.5.0 - 5.3.0 |
+| | Ethernet Server Adapter X520-4 (154a) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | Ethernet Switch FM10000 Host Interface (15a4) | net_fm10k | 4.5.0 - 5.3.0 |
+| | Ethernet Switch FM10000 Host Virtual Interface (15a5) | net_fm10k | 4.5.0 - 5.3.0 |
+| | Ethernet Virtual Function 700 Series (154c) | net_i40e_vf | 4.5.0 - 5.3.0 |
+| | Ethernet Virtual Function 700 Series (1571) | net_i40e_vf | 4.5.0 - 5.3.0 |
+| | Ethernet Virtual Function 700 Series (37cd) | net_i40e_vf | 4.5.0 - 5.3.0 |
+| | Ethernet X520 10GbE Dual Port KX4 Mezz (1514) | net_ixgbe | 4.5.0 - 5.3.0 |
+| | I210 Gigabit Backplane Connection (1537) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | I210 Gigabit Backplane Connection (157c) | net_e1000_igb	| 4.5.0 - 5.3.0
+| | I210 Gigabit Fiber Network Connection (1536) | net_e1000_igb	| 4.5.0 - 5.3.0
+| | I210 Gigabit Network Connection (1533) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | I210 Gigabit Network Connection (1538) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | I210 Gigabit Network Connection (157b) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | I211 Gigabit Network Connection (1539) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | I350 Ethernet Controller Virtual Function (1520) | net_e1000_igb_vf | 4.5.0 - 5.3.0 |
+| | I350 Gigabit Backplane Connection (1523) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | I350 Gigabit Connection (1524) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | I350 Gigabit Fiber Network Connection (1522) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | I350 Gigabit Network Connection (1521) | net_e1000_igb | 4.5.0 - 5.3.0 |
+| | I350 Virtual Function (152f) | net_e1000_igb_vf | 4.5.0 - 5.3.0 |
+| | X540 Ethernet Controller Virtual Function (1515) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
+| | X540 Virtual Function (1530) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
+| | X550 Virtual Function (1564) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
+| | X550 Virtual Function (1565) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
+| | X552 Virtual Function (15a9) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
+| | X553 Virtual Function (15b4) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
+| | X553 Virtual Function (15c5) | net_ixgbe_vf | 4.5.0 - 5.3.0 |
 
 ## Mellanox
 
-### Driver: net_mlx5
-#### Dependencies: * ib_uverbs & mlx5_core & mlx5_ib
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Mellanox Technologies (15b3) | MT27700 Family [ConnectX-4] (1013) | All |
-| | MT27700 Family [ConnectX-4 Virtual Function] (1014) | All |
-| | MT27710 Family [ConnectX-4 Lx] (1015) | All |
-| | MT27710 Family [ConnectX-4 Lx Virtual Function] (1016) | All |
-| | MT27800 Family [ConnectX-5] (1017) | All |
-| | MT27800 Family [ConnectX-5 Virtual Function] (1018) | All |
-| | MT28800 Family [ConnectX-5 Ex] (1019) | All |
-| | MT28800 Family [ConnectX-5 Ex Virtual Function] (101a) | All |
-| | MT416842 BlueField integrated ConnectX-5 network controller (a2d2) | All |
-| | MT416842 BlueField multicore SoC family VF (a2d3) | All |
-| | MT28908 Family [ConnectX-6] (101b) | All |
-| | MT28908 Family [ConnectX-6 Virtual Function] (101c) | All |
-
-### Driver: net_mlx4
-#### Dependencies: * ib_uverbs & mlx4_en & mlx4_core & mlx4_ib
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Mellanox Technologies (15b3) | MT27500 Family [ConnectX-3] (1003) | All |
-| | MT27520 Family [ConnectX-3 Pro] (1007) | All |
-| | MT27500/MT27520 Family [ConnectX-3/ConnectX-3 Pro Virtual Function] (1004) | All |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Mellanox Technologies (15b3) | MT27500 Family [ConnectX-3] (1003) | net_mlx4 | 4.5.0 - 5.3.0 |
+| | MT27500/MT27520 Family [ConnectX-3/ConnectX-3 Pro Virtual Function] (1004) | net_mlx4 | 4.5.0 - 5.3.0 |
+| | MT27520 Family [ConnectX-3 Pro] (1007) | net_mlx4 | 4.5.0 - 5.3.0 |
+| | MT27700 Family [ConnectX-4 Virtual Function] (1014) | net_mlx5	| 4.5.0 - 5.3.0 |
+| | MT27700 Family [ConnectX-4] (1013) | net_mlx5 | 4.5.0 - 5.3.0 |
+| | MT27710 Family [ConnectX-4 Lx Virtual Function] (1016) | net_mlx5 | 4.5.0 - 5.3.0 |
+| | MT27710 Family [ConnectX-4 Lx] (1015) | net_mlx5 | 4.5.0 - 5.3.0 |
+| | MT27800 Family [ConnectX-5 Virtual Function] (1018) | net_mlx5	| 4.5.0 - 5.3.0 |
+| | MT27800 Family [ConnectX-5] (1017) | net_mlx5	| 4.5.0 - 5.3.0 |
+| | MT28800 Family [ConnectX-5 Ex Virtual Function] (101a) | net_mlx5 | 4.5.0 - 5.3.0 |
+| | MT28800 Family [ConnectX-5 Ex] (1019) | net_mlx5 | 4.5.0 - 5.3.0 |
+| | MT28908 Family [ConnectX-6 Virtual Function] (101c) | net_mlx5	| 4.5.0 - 5.3.0 |
+| | MT28908 Family [ConnectX-6] (101b) | net_mlx5	| 4.5.0 - 5.3.0 |
+| | MT416842 BlueField integrated ConnectX-5 network controller (a2d2) | net_mlx5	| 4.5.0 - 5.3.0 |
+| | MT416842 BlueField multicore SoC family VF (a2d3) | net_mlx5 | 4.5.0 - 5.3.0 | |
 
 ## QLogic
 
-### Driver: net_qede_vf
-#### Dependencies: * igb_uio | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| QLogic Corp. (1077) | Unknown Device (1630) | All |
-| | FastLinQ QL45000 Series Gigabit Ethernet Controller (SR-IOV VF) (1664) | All |
-| | FastLinQ QL41000 Series Gigabit Ethernet Controller (SR-IOV VF) (8090) | All |
-
-### Driver: net_qede
-#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| QLogic Corp. (1077) | FastLinQ QL45000 Series 40GbE Controller (1634) | All |
-| | Unknown Device (1629) | All |
-| | FastLinQ QL45000 Series 40GbE Controller (1634) | All |
-| | FastLinQ QL45000 Series 25GbE Controller (1656) | All |
-| | FastLinQ QL45000 Series 100GbE Controller (1644) | All |
-| | FastLinQ QL45000 Series 50GbE Controller (1654) | All |
-| | FastLinQ QL41000 Series 10/25/40/50GbE Controller (8070) | All |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| QLogic Corp. (1077) | FastLinQ QL41000 Series 10/25/40/50GbE Controller (8070) | net_qede	| 4.5.0 - 5.3.0 |
+| | FastLinQ QL41000 Series Gigabit Ethernet Controller (SR-IOV VF) (8090) | net_qede_vf	| 4.5.0 - 5.3.0 |
+| | FastLinQ QL45000 Series 100GbE Controller (1644) | net_qede	| 4.5.0 - 5.3.0 |
+| | FastLinQ QL45000 Series 25GbE Controller (1656) | net_qede	| 4.5.0 - 5.3.0 |
+| | FastLinQ QL45000 Series 40GbE Controller (1634) | net_qede	| 4.5.0 - 5.3.0 |
+| | FastLinQ QL45000 Series 40GbE Controller (1634) | net_qede	| 4.5.0 - 5.3.0 |
+| | FastLinQ QL45000 Series 50GbE Controller (1654) | net_qede	| 4.5.0 - 5.3.0 |
+| | FastLinQ QL45000 Series Gigabit Ethernet Controller (SR-IOV VF) (1664) | net_qede_vf	| 4.5.0 - 5.3.0 |
 
 ## Red Hat
 
-### Driver: net_ifcvf
-#### Dependencies: * vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Red Hat, Inc. (1af4) | Virtio network device (1041) (Unknown Subdevice)
-
-### Driver: net_virtio
-#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Red Hat, Inc. (1af4) | Virtio network device (1000) | All |
-| | Virtio network device (1041) | All |
-
-### Driver: net_avp
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Red Hat, Inc. (1af4) | Inter-VM shared memory (1110) (Unknown Subdevice)
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Red Hat, Inc. (1af4) |Inter-VM shared memory (1110) | net_avp	| 4.5.0 - 5.3.0 |
+| | Virtio network device (1000) | net_virtio | 4.5.0 - 5.3.0 |
+| | Virtio network device (1041) | net_ifcvf | 4.5.0 - 5.3.0 |
+| | Virtio network device (1041) | net_virtio | 4.5.0 - 5.3.0 |
 
 ## Solarflare
 
-### Driver: net_sfc_efx
-#### Parameters: `rx_datapath=[efx|ef10|ef10_essb] tx_datapath=[efx|ef10|ef10_simple] perf_profile=[auto|throughput|low-latency] fw_variant=[dont-care|full-feature|ultra-low-latency|capture-packed-stream|dpdk] rxd_wait_timeout_ns=<long> stats_update_period_ms=<long>`
-#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Solarflare Communications (1924) | Unknown Device (903) | All |
-| | SFC9120 10G Ethernet Controller (Virtual Function) (1903) | All |
-| | Unknown Device (923) | All |
-| | SFC9140 10/40G Ethernet Controller (Virtual Function) (1923) | All |
-| | Unknown Device (a03) | All |
-| | SFC9220 10/40G Ethernet Controller (Virtual Function) (1a03) | All |
-| | Unknown Device (b03) | All |
-| | SFC9250 10/25/40/50/100G Ethernet Controller (Virtual Function) (1b03) | All |
-
-## VMWare
-
-### Driver: net_vmxnet3
-#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| VMware (15ad) | Unknown Device (7b0) | All |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Solarflare CommuVendor IDations (1924) | SFC9120 10G Ethernet Controller (Virtual Function) (1903) | net_sfc_efx | 4.5.0 - 5.3.0 |
+| | SFC9140 10/40G Ethernet Controller (Virtual Function) (1923) | net_sfc_efx | 4.5.0 - 5.3.0 |
+| | SFC9220 10/40G Ethernet Controller (Virtual Function) (1a03) | net_sfc_efx | 4.5.0 - 5.3.0 |
+| | SFC9250 10/25/40/50/100G Ethernet Controller (Virtual Function) (1b03) | net_sfc_efx | 4.5.0 - 5.3.0 |
 
