@@ -7,7 +7,7 @@ Creating domain-based services allow users to create generic services for a broa
 
 Services can be defined based on categories to filter a broad set of related domains. Services can also be assigned to individual domains, and filtering performed in a more targeted manner. 
 
-## Configuring Domain-Based Web Filtering
+## Configuring Domain-based Services
 
 Filtering is configured from the GUI, using the Domain Name and Domain Name Category fields. 
 ![Configuration Fields](/img/dbwf_config_fields.png)
@@ -54,11 +54,11 @@ To specify a Domain Name Category in the GUI, enter one of the names above into 
 
 The category and domain lists are generated on config. As new categories and domains are added, the config is updated, but the entire list is not regenerated. 
 
-## Configuring Domain-based Web Filtering
+## Configuring Domain-based Services
 
-To enable Domain-based Web Filtering, you must configure a broader service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+To enable Domain-based Services, you must configure a broader service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
 
-The high level steps for configuring Domain based web filtering are:
+The high level steps for configuring Domain-based Services are:
 
 - Create a parent service
 - Create a child service to filter
