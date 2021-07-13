@@ -3,6 +3,12 @@ title: Supported NICs and Drivers
 sidebar_label: Supported NICs and Drivers
 ---
 
+Use the linux command `lspci -nn` to obtain the PCI device label, and the vendor:device combo. For example:
+```
+00:03.0 Ethernet controller [0200]: Intel Corporation 82540EM Gigabit Ethernet Controller [8086:100e] (rev 03)
+```
+
+
 Use the links below to identify supported NICs and drivers for use with the SSR software.
 
 - [Amazon](#amazon)
@@ -36,7 +42,6 @@ Use the links below to identify supported NICs and drivers for use with the SSR 
 | | AQC112 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (12b1) | net_atlantic | 4.5.0 - 5.3.0 |
 | | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (87b1) | net_atlantic | 4.5.0 - 5.3.0 |
 
-
 ## Atomic Rules
 
 | NIC | Device ID | Driver | Supported SSR/128T Version |
@@ -44,67 +49,53 @@ Use the links below to identify supported NICs and drivers for use with the SSR 
 |Atomic Rules LLC (1d6c) | AR-ARKA-FX0 Arkville 32B DPDK Data Mover (100d) | net_ark | 4.5.0 - 5.3.0 |
 | | AR-ARKA-FX1 Arkville 64B DPDK Data Mover (100e) | net_ark | 4.5.0 - 5.3.0 |
 
-## Broadcom
+## Broadcom	
 
-| NIC | Device ID | Driver | Supported SSR/128T Version |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
 | --- | --- | --- | --- |
-| Broadcom Limited (14e4) | BCM5745X NetXtreme-E RDMA Virtual Function (1606) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM5745X NetXtreme-E Ethernet Virtual Function (1609) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57454 NetXtreme-E 10Gb/25Gb/40Gb/50Gb/100Gb Ethernet (1614) | net_bnxt | 4.5.0 - 5.3.0 |
-| | NetXtreme-E RDMA Virtual Function (16c1) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57301 NetXtreme-C 10Gb Ethernet Controller (16c8) | net_bnxt | 4.5.0 - 5.3.0 |
+| Broadcom Limited (14e4) | BCM57301 NetXtreme-C 10Gb Ethernet Controller (16c8) | net_bnxt	| 4.5.0 - 5.3.0 |
 | | BCM57302 NetXtreme-C 10Gb/25Gb Ethernet Controller (16c9) | net_bnxt | 4.5.0 - 5.3.0 |
 | | BCM57304 NetXtreme-C 10Gb/25Gb/40Gb/50Gb Ethernet Controller (16ca) | net_bnxt | 4.5.0 - 5.3.0 |
-| | NetXtreme-C Ethernet Virtual Function (16cb) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57402 NetXtreme-E 10Gb Ethernet Controller (16d0) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57404 NetXtreme-E 10Gb/25Gb Ethernet Controller (16d1) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57406 NetXtreme-E 10GBASE-T Ethernet Controller (16d2) | net_bnxt | 4.5.0 - 5.3.0 |
-| | NetXtreme-E Ethernet Virtual Function (16d3) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57402 NetXtreme-E Ethernet Partition (16d4) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57407 NetXtreme-E 10GBase-T Ethernet Controller (16d5) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57404 NetXtreme-E Ethernet Partition (16e7) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57406 NetXtreme-E Ethernet Partition (16e8) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57407 NetXtreme-E 25Gb Ethernet Controller (16e9) | net_bnxt | 4.5.0 - 5.3.0 |
-| | NetXtreme-E Ethernet Virtual Function (16dc) | net_bnxt | 4.5.0 - 5.3.0 |
-| | NetXtreme-C Ethernet Virtual Function (16e1) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57314 NetXtreme-C 10Gb/25Gb/40Gb/50Gb RDMA Ethernet Controller (16df) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57417 NetXtreme-E Ethernet Partition (16cc) | net_bnxt | 4.5.0 - 5.3.0 |
 | | BCM57311 NetXtreme-C 10Gb RDMA Ethernet Controller (16ce) | net_bnxt | 4.5.0 - 5.3.0 |
 | | BCM57312 NetXtreme-C 10Gb/25Gb RDMA Ethernet Controller (16cf) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57314 NetXtreme-C 10Gb/25Gb/40Gb/50Gb RDMA Ethernet Controller (16df) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57402 NetXtreme-E 10Gb Ethernet Controller (16d0) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57402 NetXtreme-E Ethernet Partition (16d4) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57404 NetXtreme-E 10Gb/25Gb Ethernet Controller (16d1) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57404 NetXtreme-E Ethernet Partition (16e7) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57406 NetXtreme-E 10GBASE-T Ethernet Controller (16d2) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57406 NetXtreme-E Ethernet Partition (16e8) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57407 NetXtreme-E 10GBase-T Ethernet Controller (16d5) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57407 NetXtreme-E 25Gb Ethernet Controller (16e9) | net_bnxt | 4.5.0 - 5.3.0 |
 | | BCM57412 NetXtreme-E 10Gb RDMA Ethernet Controller (16d6) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57414 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16d7) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57416 NetXtreme-E Dual-Media 10G RDMA Ethernet Controller (16d8) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57417 NetXtreme-E 10GBASE-T RDMA Ethernet Controller (16d9) | net_bnxt | 4.5.0 - 5.3.0 |
 | | BCM57412 NetXtreme-E Ethernet Partition (16de) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57417 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16e2) | net_bnxt | 4.5.0 - 5.3.0 |
-| | BCM57416 NetXtreme-E 10Gb RDMA Ethernet Controller (16e3) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57414 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16d7) | net_bnxt | 4.5.0 - 5.3.0 |
 | | BCM57414 NetXtreme-E Ethernet Partition (16ec) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57416 NetXtreme-E 10Gb RDMA Ethernet Controller (16e3) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57416 NetXtreme-E Dual-Media 10G RDMA Ethernet Controller (16d8) | net_bnxt | 4.5.0 - 5.3.0 |
 | | BCM57416 NetXtreme-E Ethernet Partition (16ee) | net_bnxt | 4.5.0 - 5.3.0 |
-
-### Driver: net_bnx2xvf
-#### Dependencies: 
-- igb_uio 
-- vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Broadcom Limited (14e4) | NetXtreme II BCM57800 1/10 Gigabit Ethernet Virtual Function (16a9) | All |
-| | NetXtreme II BCM57810 10 Gigabit Ethernet Virtual Function (16af) | All |
-| | NetXtreme II BCM57811 10-Gigabit Ethernet Virtual Function (163f) | All |
-| | NetXtreme II BCM57840 10/20 Gigabit Ethernet Virtual Function (16ad) | All |
-
-### Driver: net_bnx2x
-#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Broadcom Limited (14e4) | NetXtreme II BCM57800 1/10 Gigabit Ethernet (168a) | All |
-| | NetXtreme II BCM57711 10-Gigabit PCIe (164f) | All |
-| | NetXtreme II BCM57810 10 Gigabit Ethernet (168e) | All |
-| | NetXtreme II BCM57811 10-Gigabit Ethernet (163d) | All |
-| | NetXtreme II BCM57840 10/20 Gigabit Ethernet (168d) | All |
-| | BCM57840 NetXtreme II 10 Gigabit Ethernet (16a1) | All |
-| | BCM57840 NetXtreme II 10/20-Gigabit Ethernet (16a2) | All |
+| | BCM57417 NetXtreme-E 10Gb/25Gb RDMA Ethernet Controller (16e2) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57417 NetXtreme-E 10GBASE-T RDMA Ethernet Controller (16d9) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57417 NetXtreme-E Ethernet Partition (16cc) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57454 NetXtreme-E 10Gb/25Gb/40Gb/50Gb/100Gb Ethernet (1614) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM5745X NetXtreme-E Ethernet Virtual Function (1609) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM5745X NetXtreme-E RDMA Virtual Function (1606) | net_bnxt | 4.5.0 - 5.3.0 |
+| | BCM57711 NetXtreme II 10-Gigabit PCIe (164f) | net_bnx2x | 4.5.0 - 5.3.0 |
+| | BCM57800 NetXtreme II 1/10 Gigabit Ethernet (168a) | net_bnx2x | 4.5.0 - 5.3.0 |
+| | BCM57800 NetXtreme II 1/10 Gigabit Ethernet Virtual Function (16a9) | net_bnx2xvf | 4.5.0 - 5.3.0 |
+| | BCM57810 NetXtreme II 10 Gigabit Ethernet (168e) | net_bnx2x | 4.5.0 - 5.3.0
+| | BCM57810 NetXtreme II 10 Gigabit Ethernet Virtual Function (16af) | net_bnx2xvf | 4.5.0 - 5.3.0 |
+| | BCM57811 NetXtreme II 10-Gigabit Ethernet (163d) | net_bnx2x | 4.5.0 - 5.3.0
+| | BCM57811 NetXtreme II 10-Gigabit Ethernet Virtual Function (163f) | net_bnx2xvf | 4.5.0 - 5.3.0 |
+| | BCM57840 NetXtreme II 10 Gigabit Ethernet (16a1) | net_bnx2x | 4.5.0 - 5.3.0 |
+| | BCM57840 NetXtreme II 10/20 Gigabit Ethernet (168d) | net_bnx2x | 4.5.0 - 5.3.0 |
+| | BCM57840 NetXtreme II 10/20 Gigabit Ethernet Virtual Function (16ad) | net_bnx2xvf | 4.5.0 - 5.3.0 |
+| | BCM57840 NetXtreme II 10/20-Gigabit Ethernet (16a2) | net_bnx2x | 4.5.0 - 5.3.0 |
+| | NetXtreme-C Ethernet Virtual Function (16cb) | net_bnxt | 4.5.0 - 5.3.0 |
+| | NetXtreme-C Ethernet Virtual Function (16e1) | net_bnxt | 4.5.0 - 5.3.0 |
+| | NetXtreme-E Ethernet Virtual Function (16d3) | net_bnxt | 4.5.0 - 5.3.0 |
+| | NetXtreme-E Ethernet Virtual Function (16dc) | net_bnxt | 4.5.0 - 5.3.0 |
+| | NetXtreme-E RDMA Virtual Function (16c1) | net_bnxt | 4.5.0 - 5.3.0 |
 
 ## Cavium
 
@@ -133,204 +124,170 @@ Parameters:  `skip_data_bytes=<int>`
 
 ## Chelsio Communications
 
-### Driver: net_cxgbe
-#### Parameters: keep_ovlan=<0|1> force_link_up=<0|1> 
-#### Dependencies: * igb_uio | uio_pci_generic | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Chelsio Communications Inc (1425) | Unknown Device (5400) | All |
-| | T520-CR Unified Wire Ethernet Controller (5401) | All |
-| | T522-CR Unified Wire Ethernet Controller (5402) | All |
-| | T540-CR Unified Wire Ethernet Controller (5403) | All |
-| | T520-BCH Unified Wire Ethernet Controller (5404) | All |
-| | T540-BCH Unified Wire Ethernet Controller (5405) | All |
-| | T540-CH Unified Wire Ethernet Controller (5406) | All |
-| | T520-SO Unified Wire Ethernet Controller (5407) | All |
-| | T520-CX Unified Wire Ethernet Controller (5408) | All |
-| | T520-BT Unified Wire Ethernet Controller (5409) | All |
-| | T504-BT Unified Wire Ethernet Controller (540a) | All |
-| | T580-CR Unified Wire Ethernet Controller (540d) | All |
-| | T540-LP-CR Unified Wire Ethernet Controller (540e) | All |
-| | T580-LP-CR Unified Wire Ethernet Controller (5410) | All |
-| | T520-LL-CR Unified Wire Ethernet Controller (5411) | All |
-| | T560-CR Unified Wire Ethernet Controller (5412) | All |
-| | T580-CHR Unified Wire Ethernet Controller (5413) | All |
-| | T580-SO-CR Unified Wire Ethernet Controller (5414) | All |
-| | T502-BT Unified Wire Ethernet Controller (5415) | All |
-| | T580-OCP-SO Unified Wire Ethernet Controller (5416) | All |
-| | T520-OCP-SO Unified Wire Ethernet Controller (5417) | All |
-| | T540-BT Unified Wire Ethernet Controller (5418) | All |
-| | Unknown Device (5419) | All |
-| | Unknown Device (541a) | All |
-| | Unknown Device (541b) | All |
-| | T540-5080 Unified Wire Ethernet Controller (5480) | All |
-| | T540-5081 Unified Wire Ethernet Controller (5481) | All |
-| | T504-5082 Unified Wire Ethernet Controller (5482) | All |
-| | T540-5083 Unified Wire Ethernet Controller (5483) | All |
-| | T540-5084 Unified Wire Ethernet Controller (5484) | All |
-| | T580-5085 Unified Wire Ethernet Controller (5485) | All |
-| | T580-5086 Unified Wire Ethernet Controller (5486) | All |
-| | T580-5087 Unified Wire Ethernet Controller (5487) | All |
-| | T570-5088 Unified Wire Ethernet Controller (5488) | All |
-| | T520-5089 Unified Wire Ethernet Controller (5489) | All |
-| | T540-5090 Unified Wire Ethernet Controller (5490) | All |
-| | T522-5091 Unified Wire Ethernet Controller (5491) | All |
-| | T520-5092 Unified Wire Ethernet Controller (5492) | All |
-| | T580-5093 Unified Wire Ethernet Controller (5493) | All |
-| | T540-5094 Unified Wire Ethernet Controller (5494) | All |
-| | T540-5095 Unified Wire Ethernet Controller (5495) | All |
-| | T580-5096 Unified Wire Ethernet Controller (5496) | All |
-| | T520-5097 Unified Wire Ethernet Controller (5497) | All |
-| | T580-5098 Unified Wire Ethernet Controller (5498) | All |
-| | T580-5099 Unified Wire Ethernet Controller (5499) | All |
-| | T520-509A Unified Wire Ethernet Controller (549a) | All |
-| | T540-509B Unified Wire Ethernet Controller (549b) | All |
-| | T520-509C Unified Wire Ethernet Controller (549c) | All |
-| | T540-509D Unified Wire Ethernet Controller (549d) | All |
-| | T520-509E Unified Wire Ethernet Controller (549e) | All |
-| | T540-509F Unified Wire Ethernet Controller (549f) | All |
-| | T540-50A0 Unified Wire Ethernet Controller (54a0) | All |
-| | T540-50A1 Unified Wire Ethernet Controller (54a1) | All |
-| | T580-50A2 Unified Wire Ethernet Controller (54a2) | All |
-| | T580-50A3 Unified Wire Ethernet Controller (54a3) | All |
-| | T540-50A4 Unified Wire Ethernet Controller (54a4) | All |
-| | T522-50A5 Unified Wire Ethernet Controller (54a5) | All |
-| | T522-50A6 Unified Wire Ethernet Controller (54a6) | All |
-| | T580-50A7 Unified Wire Ethernet Controller (54a7) | All |
-| | T580-50A8 Unified Wire Ethernet Controller (54a8) | All |
-| | T580-50A9 Unified Wire Ethernet Controller (54a9) | All |
-| | T580-50AA Unified Wire Ethernet Controller (54aa) | All |
-| | T520-50AB Unified Wire Ethernet Controller (54ab) | All |
-| | T540-50AC Unified Wire Ethernet Controller (54ac) | All |
-| | Unknown Device (54ad) | All |
-| | Unknown Device (54ae) | All |
-| | Unknown Device (54af) | All |
-| | Unknown Device (54b0) | All |
-| | T6225-CR Unified Wire Ethernet Controller (6401) | All |
-| | T6225-SO-CR Unified Wire Ethernet Controller (6402) | All |
-| | T6425-CR Unified Wire Ethernet Controller (6403) | All |
-| | T6425-SO-CR Unified Wire Ethernet Controller (6404) | All |
-| | T6225-OCP-SO Unified Wire Ethernet Controller (6405) | All |
-| | T62100-OCP-SO Unified Wire Ethernet Controller (6406) | All |
-| | T62100-LP-CR Unified Wire Ethernet Controller (6407) | All |
-| | T62100-SO-CR Unified Wire Ethernet Controller (6408) | All |
-| | T6210-BT Unified Wire Ethernet Controller (6409) | All |
-| | T62100-CR Unified Wire Ethernet Controller (640d) | All |
-| | T6225-LL-CR Unified Wire Ethernet Controller (6411) | All |
-| | T61100-OCP-SO Unified Wire Ethernet Controller (6414) | All |
-| | T6201-BT Unified Wire Ethernet Controller (6415) | All |
-| | T6225-6080 Unified Wire Ethernet Controller (6480) | All |
-| | T62100-6081 Unified Wire Ethernet Controller (6481) | All |
-| | T6225-6082 Unified Wire Ethernet Controller (6482) | All |
-| | T62100-6083 Unified Wire Ethernet Controller (6483) | All |
-| | T64100-6084 Unified Wire Ethernet Controller (6484) | All |
-| | T6240-6085 Unified Wire Ethernet Controller (6485) | All |
-| | T6225-6086 Unified Wire Ethernet Controller (6486) | All |
-| | T6225-6087 Unified Wire Ethernet Controller (6487) | All |
-| | Unknown Device (6488) | All |
-| | Unknown Device (6489) | All |
-| | Unknown Device (648a) | All |
-| | Unknown Device (648b) | All |
-
-### Driver: net_cxgbevf
-#### Dependencies: * igb_uio | vfio-pci
-
-| Vendor ID | Device | Subdevice |
-| --- | --- | --- |
-| Chelsio Communications Inc (1425) | Unknown Device (5800) | All |
-| | T520-CR Unified Wire Ethernet Controller [VF] (5801) | All |
-| | T522-CR Unified Wire Ethernet Controller [VF] (5802) | All |
-| | T540-CR Unified Wire Ethernet Controller [VF] (5803) | All |
-| | T520-BCH Unified Wire Ethernet Controller [VF] (5804) | All |
-| | T540-BCH Unified Wire Ethernet Controller [VF] (5805) | All |
-| | T540-CH Unified Wire Ethernet Controller [VF] (5806) | All |
-| | T520-SO Unified Wire Ethernet Controller [VF] (5807) | All |
-| | T520-CX Unified Wire Ethernet Controller [VF] (5808) | All |
-| | T520-BT Unified Wire Ethernet Controller [VF] (5809) | All |
-| | T504-BT Unified Wire Ethernet Controller [VF] (580a) | All |
-| | T580-CR Unified Wire Ethernet Controller [VF] (580d) | All |
-| | T540-LP-CR Unified Wire Ethernet Controller [VF] (580e) | All |
-| | T580-LP-CR Unified Wire Ethernet Controller [VF] (5810) | All |
-| | T520-LL-CR Unified Wire Ethernet Controller [VF] (5811) | All |
-| | T560-CR Unified Wire Ethernet Controller [VF] (5812) | All |
-| | T580-CHR Unified Wire Ethernet Controller [VF] (5813) | All |
-| | T580-SO-CR Unified Wire Ethernet Controller [VF] (5814) | All |
-| | T502-BT Unified Wire Ethernet Controller [VF] (5815) | All |
-| | T580-OCP-SO Unified Wire Ethernet Controller [VF] (5816) | All |
-| | T520-OCP-SO Unified Wire Ethernet Controller [VF] (5817) | All |
-| | T540-BT Unified Wire Ethernet Controller [VF] (5818) | All |
-| | Unknown Device (5819) | All |
-| | Unknown Device (581a) | All |
-| | Unknown Device (581b) | All |
-| | T540-5080 Unified Wire Ethernet Controller [VF] (5880) | All |
-| | T540-5081 Unified Wire Ethernet Controller [VF] (5881) | All |
-| | T504-5082 Unified Wire Ethernet Controller [VF] (5882) | All |
-| | T540-5083 Unified Wire Ethernet Controller [VF] (5883) | All |
-| | T540-5084 Unified Wire Ethernet Controller [VF] (5884) | All |
-| | T580-5085 Unified Wire Ethernet Controller [VF] (5885) | All |
-| | T580-5086 Unified Wire Ethernet Controller [VF] (5886) | All |
-| | T580-5087 Unified Wire Ethernet Controller [VF] (5887) | All |
-| | T570-5088 Unified Wire Ethernet Controller [VF] (5888) | All |
-| | T520-5089 Unified Wire Ethernet Controller [VF] (5889) | All |
-| | T540-5090 Unified Wire Ethernet Controller [VF] (5890) | All |
-| | T522-5091 Unified Wire Ethernet Controller [VF] (5891) | All |
-| | T520-5092 Unified Wire Ethernet Controller [VF] (5892) | All |
-| | T580-5093 Unified Wire Ethernet Controller [VF] (5893) | All |
-| | T540-5094 Unified Wire Ethernet Controller [VF] (5894) | All |
-| | T540-5095 Unified Wire Ethernet Controller [VF] (5895) | All |
-| | T580-5096 Unified Wire Ethernet Controller [VF] (5896) | All |
-| | T520-5097 Unified Wire Ethernet Controller [VF] (5897) | All |
-| | T580-5098 Unified Wire Ethernet Controller [VF] (5898) | All |
-| | T580-5099 Unified Wire Ethernet Controller [VF] (5899) | All |
-| | T520-509A Unified Wire Ethernet Controller [VF] (589a) | All |
-| | T540-509B Unified Wire Ethernet Controller [VF] (589b) | All |
-| | T520-509C Unified Wire Ethernet Controller [VF] (589c) | All |
-| | T540-509D Unified Wire Ethernet Controller [VF] (589d) | All |
-| | T520-509E Unified Wire Ethernet Controller [VF] (589e) | All |
-| | T540-509F Unified Wire Ethernet Controller [VF] (589f) | All |
-| | T540-50A0 Unified Wire Ethernet Controller [VF] (58a0) | All |
-| | T540-50A1 Unified Wire Ethernet Controller [VF] (58a1) | All |
-| | T580-50A2 Unified Wire Ethernet Controller [VF] (58a2) | All |
-| | T580-50A3 Unified Wire Ethernet Controller [VF] (58a3) | All |
-| | T540-50A4 Unified Wire Ethernet Controller [VF] (58a4) | All |
-| | T522-50A5 Unified Wire Ethernet Controller [VF] (58a5) | All |
-| | T522-50A6 Unified Wire Ethernet Controller [VF] (58a6) | All |
-| | T580-50A7 Unified Wire Ethernet Controller [VF] (58a7) | All |
-| | T580-50A8 Unified Wire Ethernet Controller [VF] (58a8) | All |
-| | T580-50A9 Unified Wire Ethernet Controller [VF] (58a9) | All |
-| | T580-50AA Unified Wire Ethernet Controller [VF] (58aa) | All |
-| | T520-50AB Unified Wire Ethernet Controller [VF] (58ab) | All |
-| | T540-50AC Unified Wire Ethernet Controller [VF] (58ac) | All |
-| | Unknown Device (58ad) | All |
-| | Unknown Device (58ae) | All |
-| | Unknown Device (58af) | All |
-| | Unknown Device (58b0) | All |
-| | T6225-CR Unified Wire Ethernet Controller [VF] (6801) | All |
-| | T6225-SO-CR Unified Wire Ethernet Controller [VF] (6802) | All |
-| | T6425-CR Unified Wire Ethernet Controller [VF] (6803) | All |
-| | T6425-SO-CR Unified Wire Ethernet Controller [VF] (6804) | All |
-| | T6225-OCP-SO Unified Wire Ethernet Controller [VF] (6805) | All |
-| | T62100-OCP-SO Unified Wire Ethernet Controller [VF] (6806) | All |
-| | T62100-LP-CR Unified Wire Ethernet Controller [VF] (6807) | All |
-| | T62100-SO-CR Unified Wire Ethernet Controller [VF] (6808) | All |
-| | T6210-BT Unified Wire Ethernet Controller [VF] (6809) | All |
-| | T62100-CR Unified Wire Ethernet Controller [VF] (680d) | All |
-| | T6225-LL-CR Unified Wire Ethernet Controller [VF] (6811) | All |
-| | T61100-OCP-SO Unified Wire Ethernet Controller [VF] (6814) | All |
-| | T6201-BT Unified Wire Ethernet Controller [VF] (6815) | All |
-| | T6225-6080 Unified Wire Ethernet Controller [VF] (6880) | All |
-| | T62100-6081 Unified Wire Ethernet Controller [VF] (6881) | All |
-| | T6225-6082 Unified Wire Ethernet Controller [VF] (6882) | All |
-| | T62100-6083 Unified Wire Ethernet Controller [VF] (6883) | All |
-| | T64100-6084 Unified Wire Ethernet Controller [VF] (6884) | All |
-| | T6240-6085 Unified Wire Ethernet Controller [VF] (6885) | All |
-| | T6225-6086 Unified Wire Ethernet Controller [VF] (6886) | All |
-| | T6225-6087 Unified Wire Ethernet Controller [VF] (6887) | All |
-| | Unknown Device (6888) | All |
-| | Unknown Device (6889) | All |
-| | Unknown Device (688a) | All |
-| | Unknown Device (688b) | All |
+| Vendor ID | Device ID | Driver | Supported SSR/128T Version |
+| --- | --- | --- | --- |
+| Chelsio Communications Inc (1425) | T502-BT Unified Wire Ethernet Controller (5415) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T502-BT Unified Wire Ethernet Controller [VF] (5815) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T504-5082 Unified Wire Ethernet Controller (5482) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T504-5082 Unified Wire Ethernet Controller [VF] (5882) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T504-BT Unified Wire Ethernet Controller (540a) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T504-BT Unified Wire Ethernet Controller [VF] (580a) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-5089 Unified Wire Ethernet Controller (5489) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-5089 Unified Wire Ethernet Controller [VF] (5889) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-5092 Unified Wire Ethernet Controller (5492) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-5092 Unified Wire Ethernet Controller [VF] (5892) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-5097 Unified Wire Ethernet Controller (5497) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-5097 Unified Wire Ethernet Controller [VF] (5897) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-509A Unified Wire Ethernet Controller (549a) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-509A Unified Wire Ethernet Controller [VF] (589a) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-509C Unified Wire Ethernet Controller (549c) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-509C Unified Wire Ethernet Controller [VF] (589c) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-509E Unified Wire Ethernet Controller (549e) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-509E Unified Wire Ethernet Controller [VF] (589e) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-50AB Unified Wire Ethernet Controller (54ab) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-50AB Unified Wire Ethernet Controller [VF] (58ab) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-BCH Unified Wire Ethernet Controller (5404) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-BCH Unified Wire Ethernet Controller [VF] (5804) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-BT Unified Wire Ethernet Controller (5409) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-BT Unified Wire Ethernet Controller [VF] (5809) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-CR Unified Wire Ethernet Controller (5401) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-CR Unified Wire Ethernet Controller [VF] (5801) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-CX Unified Wire Ethernet Controller (5408) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-CX Unified Wire Ethernet Controller [VF] (5808) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-LL-CR Unified Wire Ethernet Controller (5411) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-LL-CR Unified Wire Ethernet Controller [VF] (5811) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-OCP-SO Unified Wire Ethernet Controller (5417) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-OCP-SO Unified Wire Ethernet Controller [VF] (5817) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T520-SO Unified Wire Ethernet Controller (5407) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T520-SO Unified Wire Ethernet Controller [VF] (5807) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T522-5091 Unified Wire Ethernet Controller (5491) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T522-5091 Unified Wire Ethernet Controller [VF] (5891) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T522-50A5 Unified Wire Ethernet Controller (54a5) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T522-50A5 Unified Wire Ethernet Controller [VF] (58a5) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T522-50A6 Unified Wire Ethernet Controller (54a6) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T522-50A6 Unified Wire Ethernet Controller [VF] (58a6) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T522-CR Unified Wire Ethernet Controller (5402) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T522-CR Unified Wire Ethernet Controller [VF] (5802) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-5080 Unified Wire Ethernet Controller (5480) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-5080 Unified Wire Ethernet Controller [VF] (5880) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-5081 Unified Wire Ethernet Controller (5481) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-5081 Unified Wire Ethernet Controller [VF] (5881) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-5083 Unified Wire Ethernet Controller (5483) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-5083 Unified Wire Ethernet Controller [VF] (5883) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-5084 Unified Wire Ethernet Controller (5484) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-5084 Unified Wire Ethernet Controller [VF] (5884) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-5090 Unified Wire Ethernet Controller (5490) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-5090 Unified Wire Ethernet Controller [VF] (5890) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-5094 Unified Wire Ethernet Controller (5494) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-5094 Unified Wire Ethernet Controller [VF] (5894) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-5095 Unified Wire Ethernet Controller (5495) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-5095 Unified Wire Ethernet Controller [VF] (5895) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-509B Unified Wire Ethernet Controller (549b) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-509B Unified Wire Ethernet Controller [VF] (589b) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-509D Unified Wire Ethernet Controller (549d) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-509D Unified Wire Ethernet Controller [VF] (589d) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-509F Unified Wire Ethernet Controller (549f) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-509F Unified Wire Ethernet Controller [VF] (589f) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-50A0 Unified Wire Ethernet Controller (54a0) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-50A0 Unified Wire Ethernet Controller [VF] (58a0) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-50A1 Unified Wire Ethernet Controller (54a1) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-50A1 Unified Wire Ethernet Controller [VF] (58a1) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-50A4 Unified Wire Ethernet Controller (54a4) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-50A4 Unified Wire Ethernet Controller [VF] (58a4) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-50AC Unified Wire Ethernet Controller (54ac) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-50AC Unified Wire Ethernet Controller [VF] (58ac) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-BCH Unified Wire Ethernet Controller (5405) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-BCH Unified Wire Ethernet Controller [VF] (5805) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-BT Unified Wire Ethernet Controller (5418) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-BT Unified Wire Ethernet Controller [VF] (5818) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-CH Unified Wire Ethernet Controller (5406) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-CH Unified Wire Ethernet Controller [VF] (5806) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-CR Unified Wire Ethernet Controller (5403) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-CR Unified Wire Ethernet Controller [VF] (5803) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T540-LP-CR Unified Wire Ethernet Controller (540e) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T540-LP-CR Unified Wire Ethernet Controller [VF] (580e) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T560-CR Unified Wire Ethernet Controller (5412) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T560-CR Unified Wire Ethernet Controller [VF] (5812) | net_cxgbevf	
+| | T570-5088 Unified Wire Ethernet Controller (5488) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T570-5088 Unified Wire Ethernet Controller [VF] (5888) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-5085 Unified Wire Ethernet Controller (5485) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-5085 Unified Wire Ethernet Controller [VF] (5885) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-5086 Unified Wire Ethernet Controller (5486) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-5086 Unified Wire Ethernet Controller [VF] (5886) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-5087 Unified Wire Ethernet Controller (5487) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-5087 Unified Wire Ethernet Controller [VF] (5887) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-5093 Unified Wire Ethernet Controller (5493) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-5093 Unified Wire Ethernet Controller [VF] (5893) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-5096 Unified Wire Ethernet Controller (5496) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-5096 Unified Wire Ethernet Controller [VF] (5896) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-5098 Unified Wire Ethernet Controller (5498) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-5098 Unified Wire Ethernet Controller [VF] (5898) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-5099 Unified Wire Ethernet Controller (5499) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-5099 Unified Wire Ethernet Controller [VF] (5899) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-50A2 Unified Wire Ethernet Controller (54a2) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-50A2 Unified Wire Ethernet Controller [VF] (58a2) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-50A3 Unified Wire Ethernet Controller (54a3) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-50A3 Unified Wire Ethernet Controller [VF] (58a3) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-50A7 Unified Wire Ethernet Controller (54a7) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-50A7 Unified Wire Ethernet Controller [VF] (58a7) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-50A8 Unified Wire Ethernet Controller (54a8) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-50A8 Unified Wire Ethernet Controller [VF] (58a8) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-50A9 Unified Wire Ethernet Controller (54a9) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-50A9 Unified Wire Ethernet Controller [VF] (58a9) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-50AA Unified Wire Ethernet Controller (54aa) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-50AA Unified Wire Ethernet Controller [VF] (58aa) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-CHR Unified Wire Ethernet Controller (5413) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-CHR Unified Wire Ethernet Controller [VF] (5813) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-CR Unified Wire Ethernet Controller (540d) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-CR Unified Wire Ethernet Controller [VF] (580d) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-LP-CR Unified Wire Ethernet Controller (5410) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-LP-CR Unified Wire Ethernet Controller [VF] (5810) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-OCP-SO Unified Wire Ethernet Controller (5416) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-OCP-SO Unified Wire Ethernet Controller [VF] (5816) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T580-SO-CR Unified Wire Ethernet Controller (5414) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T580-SO-CR Unified Wire Ethernet Controller [VF] (5814) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T61100-OCP-SO Unified Wire Ethernet Controller (6414) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T61100-OCP-SO Unified Wire Ethernet Controller [VF] (6814) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6201-BT Unified Wire Ethernet Controller (6415) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6201-BT Unified Wire Ethernet Controller [VF] (6815) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6210-BT Unified Wire Ethernet Controller (6409) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6210-BT Unified Wire Ethernet Controller [VF] (6809) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T62100-6081 Unified Wire Ethernet Controller (6481) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T62100-6081 Unified Wire Ethernet Controller [VF] (6881) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T62100-6083 Unified Wire Ethernet Controller (6483) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T62100-6083 Unified Wire Ethernet Controller [VF] (6883) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T62100-CR Unified Wire Ethernet Controller (640d) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T62100-CR Unified Wire Ethernet Controller [VF] (680d) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T62100-LP-CR Unified Wire Ethernet Controller (6407) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T62100-LP-CR Unified Wire Ethernet Controller [VF] (6807) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T62100-OCP-SO Unified Wire Ethernet Controller (6406) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T62100-OCP-SO Unified Wire Ethernet Controller [VF] (6806) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T62100-SO-CR Unified Wire Ethernet Controller (6408) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T62100-SO-CR Unified Wire Ethernet Controller [VF] (6808) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6225-6080 Unified Wire Ethernet Controller (6480) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6225-6080 Unified Wire Ethernet Controller [VF] (6880) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6225-6082 Unified Wire Ethernet Controller (6482) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6225-6082 Unified Wire Ethernet Controller [VF] (6882) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6225-6086 Unified Wire Ethernet Controller (6486) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6225-6086 Unified Wire Ethernet Controller [VF] (6886) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6225-6087 Unified Wire Ethernet Controller (6487) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6225-6087 Unified Wire Ethernet Controller [VF] (6887) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6225-CR Unified Wire Ethernet Controller (6401) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6225-CR Unified Wire Ethernet Controller [VF] (6801) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6225-LL-CR Unified Wire Ethernet Controller (6411) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6225-LL-CR Unified Wire Ethernet Controller [VF] (6811) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6225-OCP-SO Unified Wire Ethernet Controller (6405) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6225-OCP-SO Unified Wire Ethernet Controller [VF] (6805) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6225-SO-CR Unified Wire Ethernet Controller (6402) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6225-SO-CR Unified Wire Ethernet Controller [VF] (6802) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6240-6085 Unified Wire Ethernet Controller (6485) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6240-6085 Unified Wire Ethernet Controller [VF] (6885) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T64100-6084 Unified Wire Ethernet Controller (6484) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T64100-6084 Unified Wire Ethernet Controller [VF] (6884) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6425-CR Unified Wire Ethernet Controller (6403) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6425-CR Unified Wire Ethernet Controller [VF] (6803) | net_cxgbevf | 4.5.0 - 5.3.0 |
+| | T6425-SO-CR Unified Wire Ethernet Controller (6404) | net_cxgbe | 4.5.0 - 5.3.0 |
+| | T6425-SO-CR Unified Wire Ethernet Controller [VF] (6804) | net_cxgbevf | 4.5.0 - 5.3.0 |
 
 ## Cisco
 
