@@ -1,28 +1,15 @@
 ---
-title: Configuring Domain-Based Services
-sidebar: Configuring Domain-Based Services
+title: Configuring Domain-based Web Filtering/Routing
+sidebar: Configuring Domain-based Web Filtering/Routing
 ---
 
-Creating domain-based services allow users to create generic services for a broad range of domains that fall into a category such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category. 
+Configuring Domain-based Web Filtering allow users to create generic services for a broad range of domains that fall into a categories such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category. 
 
 Services can be defined based on categories to filter a broad set of related domains. Services can also be assigned to individual domains, and filtering performed in a more targeted manner. 
 
-## Configuring Domain-based Services
+## Domain Categories
 
-Filtering is configured from the GUI, using the Domain Name and Domain Name Category fields. 
-![Configuration Fields](/img/dbwf_config_fields.png)
-
-The domain name category field is pre-populated with a default list of categories. Select from the existing categories for each service, or configure specific categories and add domains manually. 
-
-**How does this process work? I have 5.2 installed and did not see the default categories. I created categories, but even after adding them, they do not show up in the drop down to be used for other Services.**
-
-To allow the dynamic learning of domain categories, enable the feature on the Basic Information screen for the service. 
-
-![Generate Application Identification Categories](/img/dbwf_gen_categories.png)
-
-## Default Categories
-
-Use the `show domain-categories` command to display the list in the CLI. The data is stored in the /etc/128technology/application-categories directory. The default categories available for filtering are:
+Use the `show domain-categories` command to display a list of categories in the CLI. The data is stored in the /etc/128technology/application-categories directory. The default categories available are:
 
 ```
 Node: node1
@@ -50,18 +37,28 @@ Node: node1
  Technology                   13                   6
 ```
 
-To specify a Domain Name Category in the GUI, enter one of the names above into the Domain Name Category field. Active categories and domains are displayed on the Applications Seen page. Adding a new category or domain in the GUI writes the information to the directory, and is added to the master list. 
+To specify a Domain Name Category in the GUI, enter a category name into the Domain Name Category field. 
 
-The category and domain lists are generated on config. As new categories and domains are added, the config is updated, but the entire list is not regenerated. 
+![Configuration Fields](/img/dbwf_config_fields.png)
 
-## Configuring Domain-based Services
+Active categories and domains are displayed on the Applications Seen page available on the Routers page, using the link in the top right corner. 
 
-To enable Domain-based Services, you must configure a broader service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+![Select Applications Seen](/img/dbwf_appl_seen.png)
 
-The high level steps for configuring Domain-based Services are:
+Adding a new category or domain writes the information to the directory, and is added to the master list. The category and domain lists are generated when the configuration is committed. As new categories and domains are added, the configuration is updated, but the entire list is not regenerated. 
+
+Use the Generate Application Idenfication Categories toggle to generate a set of child services for each category. 
+
+![Generate Application Identification Categories](/img/dbwf_gen_categories.png)
+
+## Configuring Domain-based Web Filtering
+
+To enable Domain-based Web Filtering, you must configure a broader service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+
+The high level steps for configuring Domain-based Web Filtering are:
 
 - Create a parent service
-- Create a child service to filter
+- Create the child service to be filtered
 - Configure a Tenant
 - Create an access policy on the child service to filter traffic 
 
@@ -129,22 +126,14 @@ exit
 ```
 
 ### Configure the Tenant
-A tenant must be configured in order to create an Access Policy.
-
-1.	Select Conductor under Authority.
-2.	Select Configuration.
-3.	Under Tenants, select ADD.
-4.	Give the new Tenant the same name as the access policy you will use to restrict the service, adult.internet *(why does this have to have the same name as the access policy??)*.
-5.	Add a description if necessary to identify the tenant.
-6.	Click Validate.
-7.	Return to the Configuration Home screen.
+A tenant must be configured in order to create an Access Policy. If you have not already configured a tenant for the service, refer to [Create the Tenant](intro_basic_conductor_config.md#create-the-tenant) in the Conductor Configuration documentation.
 
 ### Create the Access Policy
 
-Create an access policy on a service to deny (filter) traffic from the indicated domain or category.
+Configure the access-policy to deny the relevant tenants.
 
-1.	Scroll down to services
-2.	Select adult.internet
+1.	Scroll down to services.
+2.	Select adult.internet.
 3.	In the Basic Information panel, set the Tenant to adult.internet.
 4.	Scroll down to Access Policies and click ADD.
 5.	In the Source field, enter adult.internet (name of the service).
@@ -156,11 +145,11 @@ Create an access policy on a service to deny (filter) traffic from the indicated
 ```
 config
     authority
-        service    sports.internet
-            name                  sports.internet
-            domain-name-category  Sports
-            access-policy         interior.remusers.t128
-                source      interior.remusers.t128
+        service    adult.internet
+            name                  adult.internet
+            domain-name-category  Adult
+            access-policy         adult.internet
+                source      adult.internet
                 permission  deny
             exit
             access-policy         home
@@ -268,7 +257,4 @@ Node: node1
 Completed in 0.08 seconds
 ```
 
-Domain names are displayed on the Applications Seen page available on the Routers page, using the link in the top right corner. 
-
-![Select Applications Seen](/img/dbwf_appl_seen.png)
 
