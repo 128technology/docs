@@ -114,7 +114,7 @@ A variant on the packet-capture technique described previously is to apply a fil
 
 Apply a capture-filter on the LAN-side `device-interface`, and set the filter to `udp port 53`. Because DNS transactions are small (two packets), and because they are infrequent, this filter can be left in place for a long time before the capture file is harvested.
 
-After running tests, retrieve the file from the system for post-processing. We have had success using the `dnsanon` tool to extract the contents of a PCAP file into a text file containing the DNS queries. 
+After running tests, retrieve the file from the system for post-processing. We have had success using the `dnsanon` tool to extract the contents of a PCAP file into a text file containing the DNS queries. The `dnsanon` tool can be found at https://ant.isi.edu/software/dnsanon/.
 
 :::note
 The `dnsanon` tool is open source software and not supported by 128 Technology. Use at your own risk.

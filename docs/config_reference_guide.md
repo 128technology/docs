@@ -1063,7 +1063,9 @@ authority > router > node > device-interface > load-balancing
 
 #### Description:
 
-The *load-balancing* element lets administrators configure thresholds for a device-interface to be considered eligible/ineligible for load balancing purposes. When the 128T load balancing algorithm is choosing destinations, it will not choose an interface that has exceeded its configured "high water mark" (expressed as a percentage) until traffic has quieted down on that interface below its "low water mark," also configured as a percentage..
+The *load-balancing* element lets administrators configure thresholds for a device-interface to be considered eligible/ineligible for load balancing purposes. When the 128T load balancing algorithm is choosing destinations, it will not choose an interface that has exceeded its configured "high water mark" (expressed as a percentage) until traffic has quieted down on that interface below its "low water mark," also configured as a percentage. 
+
+In order for the utilization based load-balancing to take effect, the device interface must have `traffic-engineering enabled true`. When the device-interface has a `traffic-engineering transmit-cap` set, the utilization percentages defined will be based on the rate defined in the `transmit-cap`. If no `transmit-cap` is set, it will be based on the set or negotiated [link settings](#device-interface).
 
 | Element | Type | Description |
 | --- | --- | --- |
