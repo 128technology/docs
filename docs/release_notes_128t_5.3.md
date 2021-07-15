@@ -88,3 +88,17 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-40682 GUI login page keeps focus on the last selected element:** The Login page now focuses on the username field after an invalid login.
 ------
 - **I95-40888`show application modules status` generating an unhandled error:** Resolved an issue with `show application modules status` causing unhandled errors.
+------
+- **I95-41116 Authentication Error after Upgrade:** Resolved an issue where performing an upgrade, then a rollback, then upgrade, blocked validation. 
+------
+- **I95-41275 Synchronization unable to complete:** Resolved an issue where a previous failure prevents synchronization. 
+
+## Caveats
+
+
+
+
+
+
+
+
