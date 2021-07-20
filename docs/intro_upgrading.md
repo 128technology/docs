@@ -27,7 +27,7 @@ sudo systemctl stop 128T
   ```
 3. Verify that the software has stopped by executing the command
   ```
-sudo systemct1 status 128T
+sudo systemctl status 128T
   ```
 **Result**: The software is listed as _inactive (dead)_.
 4. Close the Linux shell.
