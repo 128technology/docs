@@ -10,6 +10,40 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 5.2.1
+**Release Date:** July 20, 2021
+
+Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#release-514)
+
+###  New Features and Improvements
+
+- **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
+------
+- **I95-36224 Handle names in application-id JSON:** The application-module json output `common-name object` now includes a list of referenced common-names, in addition to the transport-information list.
+------
+- **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular.
+------
+- **I95-38445 GUI Session Capture:** Added pages to the user interface that allow you to view and configure capture information.
+------
+- **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, or display all configuration options.
+
+### Resolved Issues
+
+- **I95-19871 Unknown session-type mismatched:** When a session-type does not have a match, the `Unclassified` service-class is used when it is available.**
+------
+- **I95-40075/I95-40134 Use gateway from service route for interface ping gateway:** The `service-route next-hop gateway-ip` will be used for ICMP ping reachability probe if so configured. If no IP is configured, then the `fib-route gateway` will be used, and finally the `network-interface gateway` will be used.
+------
+- **I95-40124 GRE Interface not inherting teneancy from parent:** The GRE Interface now inherts teneancy and neighborhood configuration from parent.
+------
+- **I95-40168 `show udp-transform` not providing result details:** The `show udp-tranform` reason field now provides correct details.
+------
+- **I95-40185 Duration type assignment values are not being set correctly:** This issue has been resolved by ensuring that fields using duration type always use default values.
+------
+- **I95-40191 Office365 service failing on bootup:** This issue has been resolved.
+------
+- **I95-40888`show application modules status` generating an unhandled error:** Resolved an issue with `show application modules status` causing unandled errors.
+------
+
 ## Release 5.2.0
 **Release Date:** May 10, 2021
 
