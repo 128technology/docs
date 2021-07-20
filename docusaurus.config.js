@@ -1,8 +1,12 @@
+const path = require('path');
+
 module.exports = {
   title: '128T Docs',
   tagline: 'The documentation source for the 128T Networking Platform',
-  url: 'https://docs.128technology.com',
-  baseUrl: '/',
+  //url: 'https://docs.128technology.com',
+  url: 'https://uat.juniper.net',
+  //baseUrl: '/',
+  baseUrl: '/documentation/us/en/software/session-smart-router/',
   favicon: 'img/favicon.ico',
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
@@ -43,16 +47,6 @@ module.exports = {
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} Juniper Networks, Inc.`,
     },
-    algolia: {
-      apiKey: '1ee0f6866243c8e25883eee3ce0708ce',
-      indexName: '128technology',
-      algoliaOptions: {},
-    },
-    googleAnalytics: {
-      trackingID: 'UA-167298415-2',
-      // Optional fields.
-      anonymizeIP: true, // Should IPs be anonymized?
-    },
   },
   presets: [
     [
@@ -69,5 +63,8 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['./src/plugins/release-notes-api.js'],
+  plugins: [
+    path.resolve(__dirname, './src/components/adobe-analytics-plugin'),
+    './src/plugins/release-notes-api.js',
+  ],
 };
