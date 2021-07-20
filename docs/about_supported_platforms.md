@@ -127,7 +127,7 @@ These are the minimum platform specifications for running the 128T Networking Pl
 
 ### Router
 
-* 4C Intel x86 processor, single socket
+* Intel 4 Core x86 processor, single socket
 * 8GB ECC Memory
 * 128GB SSD
 * 1 DPDK enabled NIC port for standalone systems (two recommended)
@@ -142,7 +142,7 @@ Multi-socket platforms are not compatible with the 128T software when run as a r
 
 ### Conductor
 
-* 4C Intel processor
+* Intel 4 Core x86 processor
 * 8GB ECC Memory
 * 128GB SSD
 * 1 (1G) Management port
