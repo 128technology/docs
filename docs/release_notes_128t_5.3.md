@@ -33,9 +33,7 @@ Before upgrading to version 5.3.0, please review the [5.3.0 Upgrade Consideratio
 
 ### Resolved Issues
 
-:::info
-**IMPORTANT** 
-
+:::important
 - **I95-39457 ServiceSecurityCheck validator should check for next-peer in service-route:** A missing validation check on `next-peer` service routes allows the configuration to be committed without presenting an error, preventing the establishment of an SVR session. This issue has been resolved in 5.3.0.
 
 	**_To reconcile pre-5.3.0 configurations:_** Manually configure a security policy on each service with a `peer` and `next-peer` service route. 
