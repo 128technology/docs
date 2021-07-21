@@ -37,6 +37,7 @@ module.exports = {
     "Supporting Information - Appendix": [
       "intro_installation_installer",
       "legacy_OTP_install",
+      "intro_upgrade_considerations",
       "intro_upgrading",
       "intro_rollback",
     ],
@@ -192,6 +193,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes_128t_5.3",
           "release_notes_128t_5.2",
           "release_notes_128t_5.1",
           "release_notes_128t_5.0",
