@@ -94,7 +94,3 @@ Before upgrading to version 5.3.0, please review the [5.3.0 Upgrade Consideratio
 - **I95-41116 Authentication Error after Upgrade:** Resolved an issue where performing an upgrade, then a rollback, then upgrade, blocked validation. 
 ------
 - **I95-41275 Synchronization unable to complete:** Resolved an issue where a previous failure prevents synchronization. 
-
-## Caveats
-
-
