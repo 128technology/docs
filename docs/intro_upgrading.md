@@ -4,7 +4,7 @@ sidebar_label: Upgrading
 ---
 
 :::note
-If you are upgrading to version 5.3.0 of the SSR/128T software, please refer to the [5.3.0 Upgrade Considerations](intro_upgrade_considerations.md) before proceeding.
+If you are upgrading to version 5.3 of the SSR/128T software, please refer to the [5.3 Upgrade Considerations](intro_upgrade_considerations.md) before proceeding.
 :::
 
 Your 128T router or conductor must have internet access to download the latest software packages; for deployments where the 128T router does not have internet access, you can use the 128T conductor as a repository (or proxy) to retrieve software images. As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.

@@ -27,9 +27,9 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40532 Added Tenant prefix support on network interface:** This provides a simpler way to configure the tenant prefixes on a per branch basis.
 
-:::important
-Before upgrading to version 5.3.0, please review the [5.3.0 Upgrade Considerations](intro_upgrade_considerations.md) page. Several modifications have been made to the process for verifying configurations, which will impact existing configurations. 
-:::
+### Upgrade Considerations
+
+**Before upgrading to version 5.3.0, please review the [5.3.0 Upgrade Considerations](intro_upgrade_considerations.md) page. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.**
 
 ### Resolved Issues
 

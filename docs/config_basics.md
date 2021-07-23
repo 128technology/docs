@@ -69,9 +69,11 @@ Within the GUI, there is a button in the navigation bar near the top of the wind
 
 ### Import/Export
 
-The configuration can be backed up for the purposes of checkpointing working configurations or for the puposes of replicating configuration to another system for archival/auditing or for replicating the same configuration on another 128T. It is a useful practice to export the configuration prior to a system upgrade. Either the candidate or running configuration can be backed up by executing `export config running <export-name>`.
+Use the `export config` command to save the candidate or running configuration. It is strongly recommended to frequently save the candidate configuration as a checkpoint for changes to be committed. In earlier releases the candidate configuration was stored on disk and would persist through product reboots. Beginning with 5.3, the candidate configuration is not saved to disk and will not persistent through reboot.
 
-In order to import a configuration that has once been exported execute the `import config <file-name>`. Imported configurations get loaded into the candidate config. To apply the imported configuration to the system, a "commit" operation must be executed for it to become "running".
+The running configuration can be exported as a working configuration, or for replicating the same configuration on another 128T, or for replicating the configuration to another system for archival/auditing. It is a useful practice to export the configuration prior to a system upgrade. The candidate or running configuration is backed up by executing `export config candidate <export-name>` or `export config running <export-name>`.
+
+To import a configuration that has been exported, execute the `import config <file-name>`. Imported configurations are loaded into the candidate config. To apply the imported configuration to the system, a **Commit** operation must be executed for it to become the running config.
 
 :::note
 When copying exported configurations onto a 128T platform, the file must be placed in `/etc/128technology/config-exports` 
