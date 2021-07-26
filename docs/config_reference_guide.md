@@ -71,6 +71,12 @@ Access policies are a multiple instance sub-element within a host-service config
 QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
 :::
 
+:::note
+When adding IP prefixes to an `access-policy` within a `host-service`, take note of the fact that the syntax can be affected by whether or not there is a `tenant` assigned to the `network-interface` within which the `host-service` is configured. Specifically, if there is a `tenant` configured on the `network-interface`, any `access-policy` that refers to an IP prefix (such as `192.168.1.0/24`) *is presumed to be within that tenant*. I.e., the `access-policy` will behave as though `192.168.1.0/24@tenant-name` was configured in the `access-policy`.
+
+When tenancy is determined through other means (e.g., via `neighborhood` membership), the `access-policy` can make no such assumption, and any `tenant` references must be explicitly identified. Configuring IP prefixes within an `access-policy` on a `network-interface` with no `tenant` assigned presumes that the prefix falls within the `<global>` tenant namespace.
+:::
+
 #### Version History:
 | Release | Modification |
 | ------- | ------------ |
