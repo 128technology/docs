@@ -11,7 +11,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 :::
 
 ## Release 5.3.0
-**Release Date:** July 9, 2021
+**Release Date:** August 5, 2021
 
 ### New Features and Improvements
 

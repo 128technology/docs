@@ -24,7 +24,7 @@ Services with a peer-service route must have security configured. If there is no
 
 #### Stricter validations have been added to InterfaceRedundancyCheck: 
 
-When configuring redundant interfaces, **all** configured fields must be identical. This requirement was loosely enforced prior to version 5.3 through configuration checks, and allowed invalid configurations to be accepted. With the stricter checks in version 5.3, errors may appear in previously valid configurations. These configurations should be updated immediately after upgrade to ensure correct operation of the redundant interfaces during failover.
+When configuring redundant interfaces, **all** configured fields must be identical. This requirement was loosely enforced prior to version 5.3 through configuration checks, and allowed invalid configurations to be accepted. Stricter checks have been added in version 5.3, causing errors to appear in previously valid configurations. To avoid any configuration issues, it is highly recommended to correct the errors **as well as perform a manual comparison of the redundant interfaces** immediately after upgrade to ensure correct operation during failover.
 
 #### Committing changes to a configuration during an upgrade is not permitted: 
 
