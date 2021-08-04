@@ -119,16 +119,24 @@ A sample configuration is provided in [Appendix A](#appendix-a-public-conductor)
 Another common model is a deployment where the conductor is behind a static NAT/firewall, which is forwarding to a private address assigned to the conductor. When placing the conductor behind a static NAT/firewall (effectively giving it a public IP address), be mindful of whether the NAT/firewall supports "hairpinning." (Hairpinning is when a device sends packets to the public IP address of a NAT that it sits behind.) This is because a conductor's salt-minion will connect to its own salt-master, and will attempt to do so at the same IP address that all external minions connect to. If the NAT does not support hairpinning, then follow the steps outlined below in the section on _Split Horizon Conductor_.
 
 #### Port Forwarding
-When deploying a conductor behind a firewall, open 830/TCP (used for NETCONF in versions prior to 5.3) and 4505-4506/TCP (used for salt) to allow a conductor to communicate to managed routers. Open 443/TCP for the web UI, and 22/TCP for remote SSH.
+When deploying a conductor behind a firewall, open 930/TCP and 4505-4506/TCP (used for salt) to allow a conductor to communicate to managed routers. Open 443/TCP for the web UI, and 22/TCP for remote SSH.
+
+:::note
+If you are using a version earlier than 5.3 and managing the conductor using NETCONF, it may also be necessary to open port 830/TCP.
+:::
 
 Because there is little difference from each deployed router's perspective between this and the previous design pattern, the configuration provided in [Appendix A](#appendix-a-public-conductor) is representative of this design as well. All NAT awareness exists outside of the 128T's configuration.
 
 ### Conductor Behind 128T
 Oftentimes a conductor is hosted within a data center that has a 128T head end router at its edge. In these topologies, the design is a hybrid of the previous two (conductor behind NAT, split horizon conductor). From the remote routers' perspective (i.e., the branch locations not resident at this data center and other data center routers), the conductor is only reachable through the head end 128T router. That same 128T head end router will typically communicate with conductor using a private address.
 
-- The head end fronting the conductor must perform NAT/NAPT to forward 4505-4506/TCP (used for salt), and 830/TCP (used for NETCONF in versions prior to 5.3) to the conductor on the data center LAN. The authority-wide `conductor-address` is an IP address that is resolved/routed to that head end router.
+- The head end fronting the conductor must perform NAT/NAPT to forward 4505-4506/TCP (used for salt), and 930/TCP to the conductor on the data center LAN. The authority-wide `conductor-address` is an IP address that is resolved/routed to that head end router.
 - The head end router overrides the `conductor-address` with specific configuration to reference the local address.
 - The head end router uses `management-config-generated` set to `proxy` requests received on its WAN interface (from remote branch sites) to the internal conductor's address.
+
+:::note
+If you are using a version earlier than 5.3 and managing the conductor using NETCONF, it may also be necessary to open port 830/TCP.
+:::
 
 #### Remote Routers: to SVR or not to SVR?
 When deploying your conductor behind another 128T at a data center, it opens the possibility of using Secure Vector Routing to reach the conductor using peer paths between a branch and the data center. However, 128 Technology *does not recommend* using SVR between systems for several reasons:
