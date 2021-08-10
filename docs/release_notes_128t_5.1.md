@@ -22,21 +22,21 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39236/I95-40804/I95-41531 Session capture to produce unique pcap files:** A capture tag has been added to the session-capture feature. If a session-capture is created with a tag, that tag is used to name the pcaps throughout the topology, instead of the service name. Users are now able to initiate this capture from the Services page in the GUI and the command line.
 ------
-- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the weighted cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md/#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
+- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md/#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
 ------
-- **I95-40335 Support running KVM on the host:** Addressed deprecated-packages dependency conflicts with kvm, and updated the minimum allowed version of libX11 to address CVE-2020-14363.
+- **I95-40335 Support running KVM on the host:** KVM packages and corresponding dependencies have been added to the SSR distribution.
 ------
 - **I95-40776 GUI self diagnostics for client connectivity:** A client connectivity error now diplays a dialog with several steps intended to help the user diagnose issues.
 
 ### Resolved Issues
 
-- **I95-36099 Time range selection for analytics in the GUI is difficult to use:** Now using the native implementation for date-time.
+- **I95-36099 Time range selection for analytics in the GUI is difficult to use:** Replaced with browser-native date-time selector.
 ------
 - **I95-38731 Mars systemd service fails to start after too many restarts:** This issue has been resolved.
 ------
 - **I95-40009 Not responding to ARP request from source 0.0.0.0. on a DHCP interface:** The SSR now responds to ARP requests from source 0.0.0.0.
 ------
-- **I95-40016 Adaptive Encryption cause packet drop on HA fabric:** Resolved an `Adaptive encryption out of order` modification error causing packet drop on HA fabric.
+- **I95-40016 Flow-migration with adapative-encryption may cause packet drops:** Resolved an `Adaptive encryption out of order` modification error causing packet drop on HA fabric.
 ------
 - **I95-40035 Jute maxbuffer limit for running/candidate configurations:** Created an alarm when the zookeeper jute buffer exceeds a threshold (75%) and an alert to change the system environment config.
 ------
@@ -44,7 +44,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40624 Occasional failures in time-based HMAC:** This issue has been resolved.
 ------
-- **I95-40894 Firewall pinhole test:** Added an acceptable loss of packets threshold for FirewallPinhole tests.
+- **I95-40894 Firewall pinhole false-positives:** Added an acceptable loss of packets threshold for Firewall Pinhole tests.
 ------
 - **I95-40936 Cannot `select all` in the GUI Session Capture screen:** GUI Session Capture table now has a **select all** checkbox in the header of the checkbox column.
 ------
