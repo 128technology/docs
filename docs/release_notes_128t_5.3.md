@@ -15,6 +15,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ### New Features and Improvements
 
+- **I95-31910 Configuration Performance Improvements:** Enhanced the configuration management subsystem, dramatically increasing the speed of config validation, edit, and commit operations. These improvements are most noticeable on large scale deployments on conductors managing over 1,000 routers.
+------
 - **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
 ------
 - **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular. 
