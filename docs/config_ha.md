@@ -23,6 +23,16 @@ To avoid this situation, designate one node as the edit node. For example, in an
 
 This issue is resolved in release 5.3.0, but affects all prior releases. 
 
+### Exporting the Candidate Configuration
+
+The Candidate configuration is not synchronized between nodes and is not stored on disk.
+
+Configuration changes are always made to a candidate configuration. In earlier releases the candidate configuration was stored on disk and would persist through product reboots. Beginning with 5.3, the candidate configuration is not saved to disk and will not persistent through reboot. 
+
+Additionally, the candidate configuration is no longer synchronized between HA nodes. Beginning with 5.3, only the running configuration is synchronized between nodes. 
+
+It is recommended that you use the [`export config`](cli_reference.md/#export-config) command to save your configuration changes while working, especially if you are performing multiple changes. Changes to the running configuration are only be made when the configuration is committed.  
+
 ### Clock Synchronization
 Because highly available nodes synchronize time-series data, it is critical that the two nodes that comprise an HA pair have synchronized clocks. It is sufficient to manually synchronize the clocks until 128T software is installed, after which point NTP (Network Time Protocol) can be used to automatically synchronize the clocks.
 
@@ -126,10 +136,10 @@ C>* 192.0.2.0/24 is directly connected, g1, 00:46:05
 The _g1_ value in the line above refers to the interface assigned with global-id value 1.
 
 ### Network Interface Consistency
-When configuring shared interfaces, it is crucial that the network-interface elements within a shared device-interface are mirror images of one another. This is to prevent any behavioral changes when ownership of a shared interface changes from one node to its counterpart. The configuration validation step will prevent committing configuration changes when the network-interface elements are not identical.
+When configuring shared interfaces, it is crucial that the network-interface elements within a shared device-interface are identical. This is to prevent any behavioral changes when ownership of a shared interface changes from one node to its counterpart. The configuration validation step prevents committing configuration changes when the network-interface elements are not identical.
 
 ### Confirming that Interfaces are Shared
-Once you've configured two device-interface elements on individual nodes within a router for high availability, the `show device-interface summary` command will identify which devices are redundant (shared) within the pair, as well as whether the interface is _active_ or _standby_ (or _non-redundant_, for interfaces that do not have a counterpart).
+Once you have configured two device-interface elements on individual nodes within a router for high availability, the `show device-interface summary` command will identify which devices are redundant (shared) within the pair, as well as whether the interface is _active_ or _standby_ (or _non-redundant_, for interfaces that do not have a counterpart).
 
 ```
 admin@node1.router1# show device-interface summary

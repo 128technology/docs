@@ -35,7 +35,7 @@ show stats [since <since>] [force] [router <router>] [<verbosity>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -108,7 +108,7 @@ show stats access-policy [since <since>] [force] [router <router>] [node <node>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -139,7 +139,7 @@ show stats access-policy meter [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats active-sources`
 
@@ -164,7 +164,7 @@ show stats active-sources [since <since>] [force] [router <router>] [node <node>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session`
 
@@ -188,7 +188,7 @@ show stats aggregate-session [since <since>] [force] [router <router>] [<verbosi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -226,40 +226,40 @@ show stats aggregate-session by-device-interface [device-interface <device-inter
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`bandwidth`](#show-stats-aggregate-session-by-device-interface-bandwidth) | Total bandwidth of active sessions |
-| [`bandwidth-received`](#show-stats-aggregate-session-by-device-interface-bandwidth-received) | Total received bandwidth |
-| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-tcp) | Total TCP bandwidth received |
-| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-udp) | Total UDP bandwidth received |
-| [`bandwidth-tcp`](#show-stats-aggregate-session-by-device-interface-bandwidth-tcp) | Total TCP bandwidth |
-| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted) | Total sent bandwidth |
-| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-tcp) | Total TCP bandwidth sent |
-| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-udp) | Total UDP bandwidth sent |
-| [`bandwidth-udp`](#show-stats-aggregate-session-by-device-interface-bandwidth-udp) | Total UDP bandwidth |
-| [`packets`](#show-stats-aggregate-session-by-device-interface-packets) | Total packets |
-| [`packets-received`](#show-stats-aggregate-session-by-device-interface-packets-received) | Total packets received of active sessions |
-| [`packets-received-tcp`](#show-stats-aggregate-session-by-device-interface-packets-received-tcp) | Total TCP packets received of active sessions |
-| [`packets-received-udp`](#show-stats-aggregate-session-by-device-interface-packets-received-udp) | Total UDP packets received of active sessions |
-| [`packets-tcp`](#show-stats-aggregate-session-by-device-interface-packets-tcp) | Total TCP packets of active sessions |
-| [`packets-transmitted`](#show-stats-aggregate-session-by-device-interface-packets-transmitted) | Total packets sent of active sessions |
-| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-tcp) | Total TCP packets sent of active sessions |
-| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-udp) | Total UDP packets sent of active sessions |
-| [`packets-udp`](#show-stats-aggregate-session-by-device-interface-packets-udp) | Total UDP packets of active sessions |
-| [`session-arrival-rate`](#show-stats-aggregate-session-by-device-interface-session-arrival-rate) | Rate of arrival for new sessions per unit time |
+| [`bandwidth`](#show-stats-aggregate-session-by-device-interface-bandwidth) | Total bandwidth of active sessions (bytes per second) |
+| [`bandwidth-received`](#show-stats-aggregate-session-by-device-interface-bandwidth-received) | Total received bandwidth (bytes per second) |
+| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-tcp) | Total TCP bandwidth received (bytes per second) |
+| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-udp) | Total UDP bandwidth received (bytes per second) |
+| [`bandwidth-tcp`](#show-stats-aggregate-session-by-device-interface-bandwidth-tcp) | Total TCP bandwidth (bytes per second) |
+| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted) | Total sent bandwidth (bytes per second) |
+| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-tcp) | Total TCP bandwidth sent (bytes per second) |
+| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-udp) | Total UDP bandwidth sent (bytes per second) |
+| [`bandwidth-udp`](#show-stats-aggregate-session-by-device-interface-bandwidth-udp) | Total UDP bandwidth (bytes per second) |
+| [`packets`](#show-stats-aggregate-session-by-device-interface-packets) | Total packets (packets per second) |
+| [`packets-received`](#show-stats-aggregate-session-by-device-interface-packets-received) | Total packets received of active sessions (packets per second) |
+| [`packets-received-tcp`](#show-stats-aggregate-session-by-device-interface-packets-received-tcp) | Total TCP packets received of active sessions (packets per second) |
+| [`packets-received-udp`](#show-stats-aggregate-session-by-device-interface-packets-received-udp) | Total UDP packets received of active sessions (packets per second) |
+| [`packets-tcp`](#show-stats-aggregate-session-by-device-interface-packets-tcp) | Total TCP packets of active sessions (packets per second) |
+| [`packets-transmitted`](#show-stats-aggregate-session-by-device-interface-packets-transmitted) | Total packets sent of active sessions (packets per second) |
+| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-tcp) | Total TCP packets sent of active sessions (packets per second) |
+| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-udp) | Total UDP packets sent of active sessions (packets per second) |
+| [`packets-udp`](#show-stats-aggregate-session-by-device-interface-packets-udp) | Total UDP packets of active sessions (packets per second) |
+| [`session-arrival-rate`](#show-stats-aggregate-session-by-device-interface-session-arrival-rate) | Rate of arrival for new sessions per unit time (sessions per second) |
 | [`session-count`](#show-stats-aggregate-session-by-device-interface-session-count) | Total number of active sessions |
-| [`session-departure-rate`](#show-stats-aggregate-session-by-device-interface-session-departure-rate) | Rate of departure for terminated sessions per unit time |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions) | Total TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions |
+| [`session-departure-rate`](#show-stats-aggregate-session-by-device-interface-session-departure-rate) | Rate of departure for terminated sessions per unit time (session departures per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions) | Total TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions (retransmissions per second) |
 
 ## `show stats aggregate-session by-device-interface bandwidth`
 
-Total bandwidth of active sessions
+Total bandwidth of active sessions (bytes per second)
 
 #### Usage
 
@@ -280,11 +280,11 @@ show stats aggregate-session by-device-interface bandwidth [device-interface <de
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface bandwidth-received`
 
-Total received bandwidth
+Total received bandwidth (bytes per second)
 
 #### Usage
 
@@ -305,11 +305,11 @@ show stats aggregate-session by-device-interface bandwidth-received [device-inte
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-tcp`
 
-Total TCP bandwidth received
+Total TCP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -330,11 +330,11 @@ show stats aggregate-session by-device-interface bandwidth-received-tcp [device-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-udp`
 
-Total UDP bandwidth received
+Total UDP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -355,11 +355,11 @@ show stats aggregate-session by-device-interface bandwidth-received-udp [device-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface bandwidth-tcp`
 
-Total TCP bandwidth
+Total TCP bandwidth (bytes per second)
 
 #### Usage
 
@@ -380,11 +380,11 @@ show stats aggregate-session by-device-interface bandwidth-tcp [device-interface
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted`
 
-Total sent bandwidth
+Total sent bandwidth (bytes per second)
 
 #### Usage
 
@@ -405,11 +405,11 @@ show stats aggregate-session by-device-interface bandwidth-transmitted [device-i
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-tcp`
 
-Total TCP bandwidth sent
+Total TCP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -430,11 +430,11 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-tcp [devi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-udp`
 
-Total UDP bandwidth sent
+Total UDP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -455,11 +455,11 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-udp [devi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface bandwidth-udp`
 
-Total UDP bandwidth
+Total UDP bandwidth (bytes per second)
 
 #### Usage
 
@@ -480,11 +480,11 @@ show stats aggregate-session by-device-interface bandwidth-udp [device-interface
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface packets`
 
-Total packets
+Total packets (packets per second)
 
 #### Usage
 
@@ -505,11 +505,11 @@ show stats aggregate-session by-device-interface packets [device-interface <devi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface packets-received`
 
-Total packets received of active sessions
+Total packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -530,11 +530,11 @@ show stats aggregate-session by-device-interface packets-received [device-interf
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface packets-received-tcp`
 
-Total TCP packets received of active sessions
+Total TCP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -555,11 +555,11 @@ show stats aggregate-session by-device-interface packets-received-tcp [device-in
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface packets-received-udp`
 
-Total UDP packets received of active sessions
+Total UDP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -580,11 +580,11 @@ show stats aggregate-session by-device-interface packets-received-udp [device-in
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface packets-tcp`
 
-Total TCP packets of active sessions
+Total TCP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -605,11 +605,11 @@ show stats aggregate-session by-device-interface packets-tcp [device-interface <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface packets-transmitted`
 
-Total packets sent of active sessions
+Total packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -630,11 +630,11 @@ show stats aggregate-session by-device-interface packets-transmitted [device-int
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface packets-transmitted-tcp`
 
-Total TCP packets sent of active sessions
+Total TCP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -655,11 +655,11 @@ show stats aggregate-session by-device-interface packets-transmitted-tcp [device
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface packets-transmitted-udp`
 
-Total UDP packets sent of active sessions
+Total UDP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -680,11 +680,11 @@ show stats aggregate-session by-device-interface packets-transmitted-udp [device
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface packets-udp`
 
-Total UDP packets of active sessions
+Total UDP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -705,11 +705,11 @@ show stats aggregate-session by-device-interface packets-udp [device-interface <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface session-arrival-rate`
 
-Rate of arrival for new sessions per unit time
+Rate of arrival for new sessions per unit time (sessions per second)
 
 #### Usage
 
@@ -730,7 +730,7 @@ show stats aggregate-session by-device-interface session-arrival-rate [device-in
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface session-count`
 
@@ -755,11 +755,11 @@ show stats aggregate-session by-device-interface session-count [device-interface
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface session-departure-rate`
 
-Rate of departure for terminated sessions per unit time
+Rate of departure for terminated sessions per unit time (session departures per second)
 
 #### Usage
 
@@ -780,11 +780,11 @@ show stats aggregate-session by-device-interface session-departure-rate [device-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions`
 
-Total TCP data retransmissions of active sessions
+Total TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -805,11 +805,11 @@ show stats aggregate-session by-device-interface tcp-retransmissions [device-int
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-received`
 
-Total reverse TCP data retransmissions of active sessions
+Total reverse TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -830,11 +830,11 @@ show stats aggregate-session by-device-interface tcp-retransmissions-received [d
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-transmitted`
 
-Total forward TCP data retransmissions of active sessions
+Total forward TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -855,7 +855,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-transmitted
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface`
 
@@ -880,40 +880,40 @@ show stats aggregate-session by-network-interface [network-interface <network-in
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`bandwidth`](#show-stats-aggregate-session-by-network-interface-bandwidth) | Total bandwidth of active sessions |
-| [`bandwidth-received`](#show-stats-aggregate-session-by-network-interface-bandwidth-received) | Total received bandwidth |
-| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-network-interface-bandwidth-received-tcp) | Total TCP bandwidth received |
-| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-network-interface-bandwidth-received-udp) | Total UDP bandwidth received |
-| [`bandwidth-tcp`](#show-stats-aggregate-session-by-network-interface-bandwidth-tcp) | Total TCP bandwidth |
-| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-network-interface-bandwidth-transmitted) | Total sent bandwidth |
-| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-network-interface-bandwidth-transmitted-tcp) | Total TCP bandwidth sent |
-| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-network-interface-bandwidth-transmitted-udp) | Total UDP bandwidth sent |
-| [`bandwidth-udp`](#show-stats-aggregate-session-by-network-interface-bandwidth-udp) | Total UDP bandwidth |
-| [`packets`](#show-stats-aggregate-session-by-network-interface-packets) | Total packets |
-| [`packets-received`](#show-stats-aggregate-session-by-network-interface-packets-received) | Total packets received of active sessions |
-| [`packets-received-tcp`](#show-stats-aggregate-session-by-network-interface-packets-received-tcp) | Total TCP packets received of active sessions |
-| [`packets-received-udp`](#show-stats-aggregate-session-by-network-interface-packets-received-udp) | Total UDP packets received of active sessions |
-| [`packets-tcp`](#show-stats-aggregate-session-by-network-interface-packets-tcp) | Total TCP packets of active sessions |
-| [`packets-transmitted`](#show-stats-aggregate-session-by-network-interface-packets-transmitted) | Total packets sent of active sessions |
-| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-network-interface-packets-transmitted-tcp) | Total TCP packets sent of active sessions |
-| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-network-interface-packets-transmitted-udp) | Total UDP packets sent of active sessions |
-| [`packets-udp`](#show-stats-aggregate-session-by-network-interface-packets-udp) | Total UDP packets of active sessions |
-| [`session-arrival-rate`](#show-stats-aggregate-session-by-network-interface-session-arrival-rate) | Rate of arrival for new sessions per unit time |
+| [`bandwidth`](#show-stats-aggregate-session-by-network-interface-bandwidth) | Total bandwidth of active sessions (bytes per second) |
+| [`bandwidth-received`](#show-stats-aggregate-session-by-network-interface-bandwidth-received) | Total received bandwidth (bytes per second) |
+| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-network-interface-bandwidth-received-tcp) | Total TCP bandwidth received (bytes per second) |
+| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-network-interface-bandwidth-received-udp) | Total UDP bandwidth received (bytes per second) |
+| [`bandwidth-tcp`](#show-stats-aggregate-session-by-network-interface-bandwidth-tcp) | Total TCP bandwidth (bytes per second) |
+| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-network-interface-bandwidth-transmitted) | Total sent bandwidth (bytes per second) |
+| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-network-interface-bandwidth-transmitted-tcp) | Total TCP bandwidth sent (bytes per second) |
+| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-network-interface-bandwidth-transmitted-udp) | Total UDP bandwidth sent (bytes per second) |
+| [`bandwidth-udp`](#show-stats-aggregate-session-by-network-interface-bandwidth-udp) | Total UDP bandwidth (bytes per second) |
+| [`packets`](#show-stats-aggregate-session-by-network-interface-packets) | Total packets (packets per second) |
+| [`packets-received`](#show-stats-aggregate-session-by-network-interface-packets-received) | Total packets received of active sessions (packets per second) |
+| [`packets-received-tcp`](#show-stats-aggregate-session-by-network-interface-packets-received-tcp) | Total TCP packets received of active sessions (packets per second) |
+| [`packets-received-udp`](#show-stats-aggregate-session-by-network-interface-packets-received-udp) | Total UDP packets received of active sessions (packets per second) |
+| [`packets-tcp`](#show-stats-aggregate-session-by-network-interface-packets-tcp) | Total TCP packets of active sessions (packets per second) |
+| [`packets-transmitted`](#show-stats-aggregate-session-by-network-interface-packets-transmitted) | Total packets sent of active sessions (packets per second) |
+| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-network-interface-packets-transmitted-tcp) | Total TCP packets sent of active sessions (packets per second) |
+| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-network-interface-packets-transmitted-udp) | Total UDP packets sent of active sessions (packets per second) |
+| [`packets-udp`](#show-stats-aggregate-session-by-network-interface-packets-udp) | Total UDP packets of active sessions (packets per second) |
+| [`session-arrival-rate`](#show-stats-aggregate-session-by-network-interface-session-arrival-rate) | Rate of arrival for new sessions per unit time (sessions per second) |
 | [`session-count`](#show-stats-aggregate-session-by-network-interface-session-count) | Total number of active sessions |
-| [`session-departure-rate`](#show-stats-aggregate-session-by-network-interface-session-departure-rate) | Rate of departure for terminated sessions per unit time |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions) | Total TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions |
+| [`session-departure-rate`](#show-stats-aggregate-session-by-network-interface-session-departure-rate) | Rate of departure for terminated sessions per unit time (session departures per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions) | Total TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions (retransmissions per second) |
 
 ## `show stats aggregate-session by-network-interface bandwidth`
 
-Total bandwidth of active sessions
+Total bandwidth of active sessions (bytes per second)
 
 #### Usage
 
@@ -934,11 +934,11 @@ show stats aggregate-session by-network-interface bandwidth [network-interface <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface bandwidth-received`
 
-Total received bandwidth
+Total received bandwidth (bytes per second)
 
 #### Usage
 
@@ -959,11 +959,11 @@ show stats aggregate-session by-network-interface bandwidth-received [network-in
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface bandwidth-received-tcp`
 
-Total TCP bandwidth received
+Total TCP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -984,11 +984,11 @@ show stats aggregate-session by-network-interface bandwidth-received-tcp [networ
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface bandwidth-received-udp`
 
-Total UDP bandwidth received
+Total UDP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -1009,11 +1009,11 @@ show stats aggregate-session by-network-interface bandwidth-received-udp [networ
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface bandwidth-tcp`
 
-Total TCP bandwidth
+Total TCP bandwidth (bytes per second)
 
 #### Usage
 
@@ -1034,11 +1034,11 @@ show stats aggregate-session by-network-interface bandwidth-tcp [network-interfa
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted`
 
-Total sent bandwidth
+Total sent bandwidth (bytes per second)
 
 #### Usage
 
@@ -1059,11 +1059,11 @@ show stats aggregate-session by-network-interface bandwidth-transmitted [network
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted-tcp`
 
-Total TCP bandwidth sent
+Total TCP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -1084,11 +1084,11 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-tcp [net
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted-udp`
 
-Total UDP bandwidth sent
+Total UDP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -1109,11 +1109,11 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-udp [net
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface bandwidth-udp`
 
-Total UDP bandwidth
+Total UDP bandwidth (bytes per second)
 
 #### Usage
 
@@ -1134,11 +1134,11 @@ show stats aggregate-session by-network-interface bandwidth-udp [network-interfa
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface packets`
 
-Total packets
+Total packets (packets per second)
 
 #### Usage
 
@@ -1159,11 +1159,11 @@ show stats aggregate-session by-network-interface packets [network-interface <ne
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface packets-received`
 
-Total packets received of active sessions
+Total packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -1184,11 +1184,11 @@ show stats aggregate-session by-network-interface packets-received [network-inte
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface packets-received-tcp`
 
-Total TCP packets received of active sessions
+Total TCP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -1209,11 +1209,11 @@ show stats aggregate-session by-network-interface packets-received-tcp [network-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface packets-received-udp`
 
-Total UDP packets received of active sessions
+Total UDP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -1234,11 +1234,11 @@ show stats aggregate-session by-network-interface packets-received-udp [network-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface packets-tcp`
 
-Total TCP packets of active sessions
+Total TCP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -1259,11 +1259,11 @@ show stats aggregate-session by-network-interface packets-tcp [network-interface
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface packets-transmitted`
 
-Total packets sent of active sessions
+Total packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -1284,11 +1284,11 @@ show stats aggregate-session by-network-interface packets-transmitted [network-i
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface packets-transmitted-tcp`
 
-Total TCP packets sent of active sessions
+Total TCP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -1309,11 +1309,11 @@ show stats aggregate-session by-network-interface packets-transmitted-tcp [netwo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface packets-transmitted-udp`
 
-Total UDP packets sent of active sessions
+Total UDP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -1334,11 +1334,11 @@ show stats aggregate-session by-network-interface packets-transmitted-udp [netwo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface packets-udp`
 
-Total UDP packets of active sessions
+Total UDP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -1359,11 +1359,11 @@ show stats aggregate-session by-network-interface packets-udp [network-interface
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface session-arrival-rate`
 
-Rate of arrival for new sessions per unit time
+Rate of arrival for new sessions per unit time (sessions per second)
 
 #### Usage
 
@@ -1384,7 +1384,7 @@ show stats aggregate-session by-network-interface session-arrival-rate [network-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface session-count`
 
@@ -1409,11 +1409,11 @@ show stats aggregate-session by-network-interface session-count [network-interfa
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface session-departure-rate`
 
-Rate of departure for terminated sessions per unit time
+Rate of departure for terminated sessions per unit time (session departures per second)
 
 #### Usage
 
@@ -1434,11 +1434,11 @@ show stats aggregate-session by-network-interface session-departure-rate [networ
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions`
 
-Total TCP data retransmissions of active sessions
+Total TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -1459,11 +1459,11 @@ show stats aggregate-session by-network-interface tcp-retransmissions [network-i
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-received`
 
-Total reverse TCP data retransmissions of active sessions
+Total reverse TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -1484,11 +1484,11 @@ show stats aggregate-session by-network-interface tcp-retransmissions-received [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-transmitted`
 
-Total forward TCP data retransmissions of active sessions
+Total forward TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -1509,7 +1509,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-transmitte
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node`
 
@@ -1534,41 +1534,41 @@ show stats aggregate-session by-node [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`bandwidth`](#show-stats-aggregate-session-by-node-bandwidth) | Total bandwidth of active sessions |
-| [`bandwidth-received`](#show-stats-aggregate-session-by-node-bandwidth-received) | Total received bandwidth |
-| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-node-bandwidth-received-tcp) | Total TCP bandwidth received |
-| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-node-bandwidth-received-udp) | Total UDP bandwidth received |
-| [`bandwidth-tcp`](#show-stats-aggregate-session-by-node-bandwidth-tcp) | Total TCP bandwidth |
-| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-node-bandwidth-transmitted) | Total sent bandwidth |
-| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-node-bandwidth-transmitted-tcp) | Total TCP bandwidth sent |
-| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-node-bandwidth-transmitted-udp) | Total UDP bandwidth sent |
-| [`bandwidth-udp`](#show-stats-aggregate-session-by-node-bandwidth-udp) | Total UDP bandwidth |
-| [`gross-entitlement`](#show-stats-aggregate-session-by-node-gross-entitlement) | Total bandwidth of sessions, gross input for entitlement |
-| [`packets`](#show-stats-aggregate-session-by-node-packets) | Total packets |
-| [`packets-received`](#show-stats-aggregate-session-by-node-packets-received) | Total packets received of active sessions |
-| [`packets-received-tcp`](#show-stats-aggregate-session-by-node-packets-received-tcp) | Total TCP packets received of active sessions |
-| [`packets-received-udp`](#show-stats-aggregate-session-by-node-packets-received-udp) | Total UDP packets received of active sessions |
-| [`packets-tcp`](#show-stats-aggregate-session-by-node-packets-tcp) | Total TCP packets of active sessions |
-| [`packets-transmitted`](#show-stats-aggregate-session-by-node-packets-transmitted) | Total packets sent of active sessions |
-| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-node-packets-transmitted-tcp) | Total TCP packets sent of active sessions |
-| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-node-packets-transmitted-udp) | Total UDP packets sent of active sessions |
-| [`packets-udp`](#show-stats-aggregate-session-by-node-packets-udp) | Total UDP packets of active sessions |
-| [`session-arrival-rate`](#show-stats-aggregate-session-by-node-session-arrival-rate) | Rate of arrival for new sessions per unit time |
+| [`bandwidth`](#show-stats-aggregate-session-by-node-bandwidth) | Total bandwidth of active sessions (bytes per second) |
+| [`bandwidth-received`](#show-stats-aggregate-session-by-node-bandwidth-received) | Total received bandwidth (bytes per second) |
+| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-node-bandwidth-received-tcp) | Total TCP bandwidth received (bytes per second) |
+| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-node-bandwidth-received-udp) | Total UDP bandwidth received (bytes per second) |
+| [`bandwidth-tcp`](#show-stats-aggregate-session-by-node-bandwidth-tcp) | Total TCP bandwidth (bytes per second) |
+| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-node-bandwidth-transmitted) | Total sent bandwidth (bytes per second) |
+| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-node-bandwidth-transmitted-tcp) | Total TCP bandwidth sent (bytes per second) |
+| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-node-bandwidth-transmitted-udp) | Total UDP bandwidth sent (bytes per second) |
+| [`bandwidth-udp`](#show-stats-aggregate-session-by-node-bandwidth-udp) | Total UDP bandwidth (bytes per second) |
+| [`gross-entitlement`](#show-stats-aggregate-session-by-node-gross-entitlement) | Total bandwidth of sessions, gross input for entitlement (bytes per second) |
+| [`packets`](#show-stats-aggregate-session-by-node-packets) | Total packets (packets per second) |
+| [`packets-received`](#show-stats-aggregate-session-by-node-packets-received) | Total packets received of active sessions (packets per second) |
+| [`packets-received-tcp`](#show-stats-aggregate-session-by-node-packets-received-tcp) | Total TCP packets received of active sessions (packets per second) |
+| [`packets-received-udp`](#show-stats-aggregate-session-by-node-packets-received-udp) | Total UDP packets received of active sessions (packets per second) |
+| [`packets-tcp`](#show-stats-aggregate-session-by-node-packets-tcp) | Total TCP packets of active sessions (packets per second) |
+| [`packets-transmitted`](#show-stats-aggregate-session-by-node-packets-transmitted) | Total packets sent of active sessions (packets per second) |
+| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-node-packets-transmitted-tcp) | Total TCP packets sent of active sessions (packets per second) |
+| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-node-packets-transmitted-udp) | Total UDP packets sent of active sessions (packets per second) |
+| [`packets-udp`](#show-stats-aggregate-session-by-node-packets-udp) | Total UDP packets of active sessions (packets per second) |
+| [`session-arrival-rate`](#show-stats-aggregate-session-by-node-session-arrival-rate) | Rate of arrival for new sessions per unit time (sessions per second) |
 | [`session-count`](#show-stats-aggregate-session-by-node-session-count) | Total number of active sessions |
-| [`session-departure-rate`](#show-stats-aggregate-session-by-node-session-departure-rate) | Rate of departure for terminated sessions per unit time |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-node-tcp-retransmissions) | Total TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-node-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-node-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions |
+| [`session-departure-rate`](#show-stats-aggregate-session-by-node-session-departure-rate) | Rate of departure for terminated sessions per unit time (session departures per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-node-tcp-retransmissions) | Total TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-node-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-node-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions (retransmissions per second) |
 
 ## `show stats aggregate-session by-node bandwidth`
 
-Total bandwidth of active sessions
+Total bandwidth of active sessions (bytes per second)
 
 #### Usage
 
@@ -1589,11 +1589,11 @@ show stats aggregate-session by-node bandwidth [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node bandwidth-received`
 
-Total received bandwidth
+Total received bandwidth (bytes per second)
 
 #### Usage
 
@@ -1614,11 +1614,11 @@ show stats aggregate-session by-node bandwidth-received [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node bandwidth-received-tcp`
 
-Total TCP bandwidth received
+Total TCP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -1639,11 +1639,11 @@ show stats aggregate-session by-node bandwidth-received-tcp [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node bandwidth-received-udp`
 
-Total UDP bandwidth received
+Total UDP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -1664,11 +1664,11 @@ show stats aggregate-session by-node bandwidth-received-udp [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node bandwidth-tcp`
 
-Total TCP bandwidth
+Total TCP bandwidth (bytes per second)
 
 #### Usage
 
@@ -1689,11 +1689,11 @@ show stats aggregate-session by-node bandwidth-tcp [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node bandwidth-transmitted`
 
-Total sent bandwidth
+Total sent bandwidth (bytes per second)
 
 #### Usage
 
@@ -1714,11 +1714,11 @@ show stats aggregate-session by-node bandwidth-transmitted [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node bandwidth-transmitted-tcp`
 
-Total TCP bandwidth sent
+Total TCP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -1739,11 +1739,11 @@ show stats aggregate-session by-node bandwidth-transmitted-tcp [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node bandwidth-transmitted-udp`
 
-Total UDP bandwidth sent
+Total UDP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -1764,11 +1764,11 @@ show stats aggregate-session by-node bandwidth-transmitted-udp [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node bandwidth-udp`
 
-Total UDP bandwidth
+Total UDP bandwidth (bytes per second)
 
 #### Usage
 
@@ -1789,11 +1789,11 @@ show stats aggregate-session by-node bandwidth-udp [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node gross-entitlement`
 
-Total bandwidth of sessions, gross input for entitlement
+Total bandwidth of sessions, gross input for entitlement (bytes per second)
 
 #### Usage
 
@@ -1814,11 +1814,11 @@ show stats aggregate-session by-node gross-entitlement [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node packets`
 
-Total packets
+Total packets (packets per second)
 
 #### Usage
 
@@ -1839,11 +1839,11 @@ show stats aggregate-session by-node packets [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node packets-received`
 
-Total packets received of active sessions
+Total packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -1864,11 +1864,11 @@ show stats aggregate-session by-node packets-received [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node packets-received-tcp`
 
-Total TCP packets received of active sessions
+Total TCP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -1889,11 +1889,11 @@ show stats aggregate-session by-node packets-received-tcp [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node packets-received-udp`
 
-Total UDP packets received of active sessions
+Total UDP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -1914,11 +1914,11 @@ show stats aggregate-session by-node packets-received-udp [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node packets-tcp`
 
-Total TCP packets of active sessions
+Total TCP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -1939,11 +1939,11 @@ show stats aggregate-session by-node packets-tcp [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node packets-transmitted`
 
-Total packets sent of active sessions
+Total packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -1964,11 +1964,11 @@ show stats aggregate-session by-node packets-transmitted [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node packets-transmitted-tcp`
 
-Total TCP packets sent of active sessions
+Total TCP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -1989,11 +1989,11 @@ show stats aggregate-session by-node packets-transmitted-tcp [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node packets-transmitted-udp`
 
-Total UDP packets sent of active sessions
+Total UDP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -2014,11 +2014,11 @@ show stats aggregate-session by-node packets-transmitted-udp [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node packets-udp`
 
-Total UDP packets of active sessions
+Total UDP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -2039,11 +2039,11 @@ show stats aggregate-session by-node packets-udp [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node session-arrival-rate`
 
-Rate of arrival for new sessions per unit time
+Rate of arrival for new sessions per unit time (sessions per second)
 
 #### Usage
 
@@ -2064,7 +2064,7 @@ show stats aggregate-session by-node session-arrival-rate [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node session-count`
 
@@ -2089,11 +2089,11 @@ show stats aggregate-session by-node session-count [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node session-departure-rate`
 
-Rate of departure for terminated sessions per unit time
+Rate of departure for terminated sessions per unit time (session departures per second)
 
 #### Usage
 
@@ -2114,11 +2114,11 @@ show stats aggregate-session by-node session-departure-rate [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node tcp-retransmissions`
 
-Total TCP data retransmissions of active sessions
+Total TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -2139,11 +2139,11 @@ show stats aggregate-session by-node tcp-retransmissions [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node tcp-retransmissions-received`
 
-Total reverse TCP data retransmissions of active sessions
+Total reverse TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -2164,11 +2164,11 @@ show stats aggregate-session by-node tcp-retransmissions-received [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-node tcp-retransmissions-transmitted`
 
-Total forward TCP data retransmissions of active sessions
+Total forward TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -2189,7 +2189,7 @@ show stats aggregate-session by-node tcp-retransmissions-transmitted [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service`
 
@@ -2214,40 +2214,40 @@ show stats aggregate-session by-service [service <service>] [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`bandwidth`](#show-stats-aggregate-session-by-service-bandwidth) | Total bandwidth of active sessions |
-| [`bandwidth-received`](#show-stats-aggregate-session-by-service-bandwidth-received) | Total received bandwidth |
-| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-service-bandwidth-received-tcp) | Total TCP bandwidth received |
-| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-service-bandwidth-received-udp) | Total UDP bandwidth received |
-| [`bandwidth-tcp`](#show-stats-aggregate-session-by-service-bandwidth-tcp) | Total TCP bandwidth |
-| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-service-bandwidth-transmitted) | Total sent bandwidth |
-| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-service-bandwidth-transmitted-tcp) | Total TCP bandwidth sent |
-| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-service-bandwidth-transmitted-udp) | Total UDP bandwidth sent |
-| [`bandwidth-udp`](#show-stats-aggregate-session-by-service-bandwidth-udp) | Total UDP bandwidth |
-| [`packets`](#show-stats-aggregate-session-by-service-packets) | Total packets |
-| [`packets-received`](#show-stats-aggregate-session-by-service-packets-received) | Total packets received of active sessions |
-| [`packets-received-tcp`](#show-stats-aggregate-session-by-service-packets-received-tcp) | Total TCP packets received of active sessions |
-| [`packets-received-udp`](#show-stats-aggregate-session-by-service-packets-received-udp) | Total UDP packets received of active sessions |
-| [`packets-tcp`](#show-stats-aggregate-session-by-service-packets-tcp) | Total TCP packets of active sessions |
-| [`packets-transmitted`](#show-stats-aggregate-session-by-service-packets-transmitted) | Total packets sent of active sessions |
-| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-service-packets-transmitted-tcp) | Total TCP packets sent of active sessions |
-| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-service-packets-transmitted-udp) | Total UDP packets sent of active sessions |
-| [`packets-udp`](#show-stats-aggregate-session-by-service-packets-udp) | Total UDP packets of active sessions |
-| [`session-arrival-rate`](#show-stats-aggregate-session-by-service-session-arrival-rate) | Rate of arrival for new sessions per unit time |
+| [`bandwidth`](#show-stats-aggregate-session-by-service-bandwidth) | Total bandwidth of active sessions (bytes per second) |
+| [`bandwidth-received`](#show-stats-aggregate-session-by-service-bandwidth-received) | Total received bandwidth (bytes per second) |
+| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-service-bandwidth-received-tcp) | Total TCP bandwidth received (bytes per second) |
+| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-service-bandwidth-received-udp) | Total UDP bandwidth received (bytes per second) |
+| [`bandwidth-tcp`](#show-stats-aggregate-session-by-service-bandwidth-tcp) | Total TCP bandwidth (bytes per second) |
+| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-service-bandwidth-transmitted) | Total sent bandwidth (bytes per second) |
+| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-service-bandwidth-transmitted-tcp) | Total TCP bandwidth sent (bytes per second) |
+| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-service-bandwidth-transmitted-udp) | Total UDP bandwidth sent (bytes per second) |
+| [`bandwidth-udp`](#show-stats-aggregate-session-by-service-bandwidth-udp) | Total UDP bandwidth (bytes per second) |
+| [`packets`](#show-stats-aggregate-session-by-service-packets) | Total packets (packets per second) |
+| [`packets-received`](#show-stats-aggregate-session-by-service-packets-received) | Total packets received of active sessions (packets per second) |
+| [`packets-received-tcp`](#show-stats-aggregate-session-by-service-packets-received-tcp) | Total TCP packets received of active sessions (packets per second) |
+| [`packets-received-udp`](#show-stats-aggregate-session-by-service-packets-received-udp) | Total UDP packets received of active sessions (packets per second) |
+| [`packets-tcp`](#show-stats-aggregate-session-by-service-packets-tcp) | Total TCP packets of active sessions (packets per second) |
+| [`packets-transmitted`](#show-stats-aggregate-session-by-service-packets-transmitted) | Total packets sent of active sessions (packets per second) |
+| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-service-packets-transmitted-tcp) | Total TCP packets sent of active sessions (packets per second) |
+| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-service-packets-transmitted-udp) | Total UDP packets sent of active sessions (packets per second) |
+| [`packets-udp`](#show-stats-aggregate-session-by-service-packets-udp) | Total UDP packets of active sessions (packets per second) |
+| [`session-arrival-rate`](#show-stats-aggregate-session-by-service-session-arrival-rate) | Rate of arrival for new sessions per unit time (sessions per second) |
 | [`session-count`](#show-stats-aggregate-session-by-service-session-count) | Total number of active sessions |
-| [`session-departure-rate`](#show-stats-aggregate-session-by-service-session-departure-rate) | Rate of departure for terminated sessions per unit time |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-tcp-retransmissions) | Total TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions |
+| [`session-departure-rate`](#show-stats-aggregate-session-by-service-session-departure-rate) | Rate of departure for terminated sessions per unit time (session departures per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-tcp-retransmissions) | Total TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions (retransmissions per second) |
 
 ## `show stats aggregate-session by-service bandwidth`
 
-Total bandwidth of active sessions
+Total bandwidth of active sessions (bytes per second)
 
 #### Usage
 
@@ -2268,11 +2268,11 @@ show stats aggregate-session by-service bandwidth [service <service>] [since <si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service bandwidth-received`
 
-Total received bandwidth
+Total received bandwidth (bytes per second)
 
 #### Usage
 
@@ -2293,11 +2293,11 @@ show stats aggregate-session by-service bandwidth-received [service <service>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service bandwidth-received-tcp`
 
-Total TCP bandwidth received
+Total TCP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -2318,11 +2318,11 @@ show stats aggregate-session by-service bandwidth-received-tcp [service <service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service bandwidth-received-udp`
 
-Total UDP bandwidth received
+Total UDP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -2343,11 +2343,11 @@ show stats aggregate-session by-service bandwidth-received-udp [service <service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service bandwidth-tcp`
 
-Total TCP bandwidth
+Total TCP bandwidth (bytes per second)
 
 #### Usage
 
@@ -2368,11 +2368,11 @@ show stats aggregate-session by-service bandwidth-tcp [service <service>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service bandwidth-transmitted`
 
-Total sent bandwidth
+Total sent bandwidth (bytes per second)
 
 #### Usage
 
@@ -2393,11 +2393,11 @@ show stats aggregate-session by-service bandwidth-transmitted [service <service>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service bandwidth-transmitted-tcp`
 
-Total TCP bandwidth sent
+Total TCP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -2418,11 +2418,11 @@ show stats aggregate-session by-service bandwidth-transmitted-tcp [service <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service bandwidth-transmitted-udp`
 
-Total UDP bandwidth sent
+Total UDP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -2443,11 +2443,11 @@ show stats aggregate-session by-service bandwidth-transmitted-udp [service <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service bandwidth-udp`
 
-Total UDP bandwidth
+Total UDP bandwidth (bytes per second)
 
 #### Usage
 
@@ -2468,11 +2468,11 @@ show stats aggregate-session by-service bandwidth-udp [service <service>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service packets`
 
-Total packets
+Total packets (packets per second)
 
 #### Usage
 
@@ -2493,11 +2493,11 @@ show stats aggregate-session by-service packets [service <service>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service packets-received`
 
-Total packets received of active sessions
+Total packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -2518,11 +2518,11 @@ show stats aggregate-session by-service packets-received [service <service>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service packets-received-tcp`
 
-Total TCP packets received of active sessions
+Total TCP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -2543,11 +2543,11 @@ show stats aggregate-session by-service packets-received-tcp [service <service>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service packets-received-udp`
 
-Total UDP packets received of active sessions
+Total UDP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -2568,11 +2568,11 @@ show stats aggregate-session by-service packets-received-udp [service <service>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service packets-tcp`
 
-Total TCP packets of active sessions
+Total TCP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -2593,11 +2593,11 @@ show stats aggregate-session by-service packets-tcp [service <service>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service packets-transmitted`
 
-Total packets sent of active sessions
+Total packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -2618,11 +2618,11 @@ show stats aggregate-session by-service packets-transmitted [service <service>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service packets-transmitted-tcp`
 
-Total TCP packets sent of active sessions
+Total TCP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -2643,11 +2643,11 @@ show stats aggregate-session by-service packets-transmitted-tcp [service <servic
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service packets-transmitted-udp`
 
-Total UDP packets sent of active sessions
+Total UDP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -2668,11 +2668,11 @@ show stats aggregate-session by-service packets-transmitted-udp [service <servic
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service packets-udp`
 
-Total UDP packets of active sessions
+Total UDP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -2693,11 +2693,11 @@ show stats aggregate-session by-service packets-udp [service <service>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service session-arrival-rate`
 
-Rate of arrival for new sessions per unit time
+Rate of arrival for new sessions per unit time (sessions per second)
 
 #### Usage
 
@@ -2718,7 +2718,7 @@ show stats aggregate-session by-service session-arrival-rate [service <service>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service session-count`
 
@@ -2743,11 +2743,11 @@ show stats aggregate-session by-service session-count [service <service>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service session-departure-rate`
 
-Rate of departure for terminated sessions per unit time
+Rate of departure for terminated sessions per unit time (session departures per second)
 
 #### Usage
 
@@ -2768,11 +2768,11 @@ show stats aggregate-session by-service session-departure-rate [service <service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service tcp-retransmissions`
 
-Total TCP data retransmissions of active sessions
+Total TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -2793,11 +2793,11 @@ show stats aggregate-session by-service tcp-retransmissions [service <service>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service tcp-retransmissions-received`
 
-Total reverse TCP data retransmissions of active sessions
+Total reverse TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -2818,11 +2818,11 @@ show stats aggregate-session by-service tcp-retransmissions-received [service <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service tcp-retransmissions-transmitted`
 
-Total forward TCP data retransmissions of active sessions
+Total forward TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -2843,7 +2843,7 @@ show stats aggregate-session by-service tcp-retransmissions-transmitted [service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class`
 
@@ -2868,40 +2868,40 @@ show stats aggregate-session by-service-class [service-class <service-class>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`bandwidth`](#show-stats-aggregate-session-by-service-class-bandwidth) | Total bandwidth of active sessions |
-| [`bandwidth-received`](#show-stats-aggregate-session-by-service-class-bandwidth-received) | Total received bandwidth |
-| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-service-class-bandwidth-received-tcp) | Total TCP bandwidth received |
-| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-service-class-bandwidth-received-udp) | Total UDP bandwidth received |
-| [`bandwidth-tcp`](#show-stats-aggregate-session-by-service-class-bandwidth-tcp) | Total TCP bandwidth |
-| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-service-class-bandwidth-transmitted) | Total sent bandwidth |
-| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-service-class-bandwidth-transmitted-tcp) | Total TCP bandwidth sent |
-| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-service-class-bandwidth-transmitted-udp) | Total UDP bandwidth sent |
-| [`bandwidth-udp`](#show-stats-aggregate-session-by-service-class-bandwidth-udp) | Total UDP bandwidth |
-| [`packets`](#show-stats-aggregate-session-by-service-class-packets) | Total packets |
-| [`packets-received`](#show-stats-aggregate-session-by-service-class-packets-received) | Total packets received of active sessions |
-| [`packets-received-tcp`](#show-stats-aggregate-session-by-service-class-packets-received-tcp) | Total TCP packets received of active sessions |
-| [`packets-received-udp`](#show-stats-aggregate-session-by-service-class-packets-received-udp) | Total UDP packets received of active sessions |
-| [`packets-tcp`](#show-stats-aggregate-session-by-service-class-packets-tcp) | Total TCP packets of active sessions |
-| [`packets-transmitted`](#show-stats-aggregate-session-by-service-class-packets-transmitted) | Total packets sent of active sessions |
-| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-service-class-packets-transmitted-tcp) | Total TCP packets sent of active sessions |
-| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-service-class-packets-transmitted-udp) | Total UDP packets sent of active sessions |
-| [`packets-udp`](#show-stats-aggregate-session-by-service-class-packets-udp) | Total UDP packets of active sessions |
-| [`session-arrival-rate`](#show-stats-aggregate-session-by-service-class-session-arrival-rate) | Rate of arrival for new sessions per unit time |
+| [`bandwidth`](#show-stats-aggregate-session-by-service-class-bandwidth) | Total bandwidth of active sessions (bytes per second) |
+| [`bandwidth-received`](#show-stats-aggregate-session-by-service-class-bandwidth-received) | Total received bandwidth (bytes per second) |
+| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-service-class-bandwidth-received-tcp) | Total TCP bandwidth received (bytes per second) |
+| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-service-class-bandwidth-received-udp) | Total UDP bandwidth received (bytes per second) |
+| [`bandwidth-tcp`](#show-stats-aggregate-session-by-service-class-bandwidth-tcp) | Total TCP bandwidth (bytes per second) |
+| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-service-class-bandwidth-transmitted) | Total sent bandwidth (bytes per second) |
+| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-service-class-bandwidth-transmitted-tcp) | Total TCP bandwidth sent (bytes per second) |
+| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-service-class-bandwidth-transmitted-udp) | Total UDP bandwidth sent (bytes per second) |
+| [`bandwidth-udp`](#show-stats-aggregate-session-by-service-class-bandwidth-udp) | Total UDP bandwidth (bytes per second) |
+| [`packets`](#show-stats-aggregate-session-by-service-class-packets) | Total packets (packets per second) |
+| [`packets-received`](#show-stats-aggregate-session-by-service-class-packets-received) | Total packets received of active sessions (packets per second) |
+| [`packets-received-tcp`](#show-stats-aggregate-session-by-service-class-packets-received-tcp) | Total TCP packets received of active sessions (packets per second) |
+| [`packets-received-udp`](#show-stats-aggregate-session-by-service-class-packets-received-udp) | Total UDP packets received of active sessions (packets per second) |
+| [`packets-tcp`](#show-stats-aggregate-session-by-service-class-packets-tcp) | Total TCP packets of active sessions (packets per second) |
+| [`packets-transmitted`](#show-stats-aggregate-session-by-service-class-packets-transmitted) | Total packets sent of active sessions (packets per second) |
+| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-service-class-packets-transmitted-tcp) | Total TCP packets sent of active sessions (packets per second) |
+| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-service-class-packets-transmitted-udp) | Total UDP packets sent of active sessions (packets per second) |
+| [`packets-udp`](#show-stats-aggregate-session-by-service-class-packets-udp) | Total UDP packets of active sessions (packets per second) |
+| [`session-arrival-rate`](#show-stats-aggregate-session-by-service-class-session-arrival-rate) | Rate of arrival for new sessions per unit time (sessions per second) |
 | [`session-count`](#show-stats-aggregate-session-by-service-class-session-count) | Total number of active sessions |
-| [`session-departure-rate`](#show-stats-aggregate-session-by-service-class-session-departure-rate) | Rate of departure for terminated sessions per unit time |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions) | Total TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions |
+| [`session-departure-rate`](#show-stats-aggregate-session-by-service-class-session-departure-rate) | Rate of departure for terminated sessions per unit time (session departures per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions) | Total TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions (retransmissions per second) |
 
 ## `show stats aggregate-session by-service-class bandwidth`
 
-Total bandwidth of active sessions
+Total bandwidth of active sessions (bytes per second)
 
 #### Usage
 
@@ -2922,11 +2922,11 @@ show stats aggregate-session by-service-class bandwidth [service-class <service-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class bandwidth-received`
 
-Total received bandwidth
+Total received bandwidth (bytes per second)
 
 #### Usage
 
@@ -2947,11 +2947,11 @@ show stats aggregate-session by-service-class bandwidth-received [service-class 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class bandwidth-received-tcp`
 
-Total TCP bandwidth received
+Total TCP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -2972,11 +2972,11 @@ show stats aggregate-session by-service-class bandwidth-received-tcp [service-cl
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class bandwidth-received-udp`
 
-Total UDP bandwidth received
+Total UDP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -2997,11 +2997,11 @@ show stats aggregate-session by-service-class bandwidth-received-udp [service-cl
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class bandwidth-tcp`
 
-Total TCP bandwidth
+Total TCP bandwidth (bytes per second)
 
 #### Usage
 
@@ -3022,11 +3022,11 @@ show stats aggregate-session by-service-class bandwidth-tcp [service-class <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted`
 
-Total sent bandwidth
+Total sent bandwidth (bytes per second)
 
 #### Usage
 
@@ -3047,11 +3047,11 @@ show stats aggregate-session by-service-class bandwidth-transmitted [service-cla
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted-tcp`
 
-Total TCP bandwidth sent
+Total TCP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -3072,11 +3072,11 @@ show stats aggregate-session by-service-class bandwidth-transmitted-tcp [service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted-udp`
 
-Total UDP bandwidth sent
+Total UDP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -3097,11 +3097,11 @@ show stats aggregate-session by-service-class bandwidth-transmitted-udp [service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class bandwidth-udp`
 
-Total UDP bandwidth
+Total UDP bandwidth (bytes per second)
 
 #### Usage
 
@@ -3122,11 +3122,11 @@ show stats aggregate-session by-service-class bandwidth-udp [service-class <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class packets`
 
-Total packets
+Total packets (packets per second)
 
 #### Usage
 
@@ -3147,11 +3147,11 @@ show stats aggregate-session by-service-class packets [service-class <service-cl
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class packets-received`
 
-Total packets received of active sessions
+Total packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -3172,11 +3172,11 @@ show stats aggregate-session by-service-class packets-received [service-class <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class packets-received-tcp`
 
-Total TCP packets received of active sessions
+Total TCP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -3197,11 +3197,11 @@ show stats aggregate-session by-service-class packets-received-tcp [service-clas
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class packets-received-udp`
 
-Total UDP packets received of active sessions
+Total UDP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -3222,11 +3222,11 @@ show stats aggregate-session by-service-class packets-received-udp [service-clas
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class packets-tcp`
 
-Total TCP packets of active sessions
+Total TCP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -3247,11 +3247,11 @@ show stats aggregate-session by-service-class packets-tcp [service-class <servic
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class packets-transmitted`
 
-Total packets sent of active sessions
+Total packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -3272,11 +3272,11 @@ show stats aggregate-session by-service-class packets-transmitted [service-class
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class packets-transmitted-tcp`
 
-Total TCP packets sent of active sessions
+Total TCP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -3297,11 +3297,11 @@ show stats aggregate-session by-service-class packets-transmitted-tcp [service-c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class packets-transmitted-udp`
 
-Total UDP packets sent of active sessions
+Total UDP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -3322,11 +3322,11 @@ show stats aggregate-session by-service-class packets-transmitted-udp [service-c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class packets-udp`
 
-Total UDP packets of active sessions
+Total UDP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -3347,11 +3347,11 @@ show stats aggregate-session by-service-class packets-udp [service-class <servic
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class session-arrival-rate`
 
-Rate of arrival for new sessions per unit time
+Rate of arrival for new sessions per unit time (sessions per second)
 
 #### Usage
 
@@ -3372,7 +3372,7 @@ show stats aggregate-session by-service-class session-arrival-rate [service-clas
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class session-count`
 
@@ -3397,11 +3397,11 @@ show stats aggregate-session by-service-class session-count [service-class <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class session-departure-rate`
 
-Rate of departure for terminated sessions per unit time
+Rate of departure for terminated sessions per unit time (session departures per second)
 
 #### Usage
 
@@ -3422,11 +3422,11 @@ show stats aggregate-session by-service-class session-departure-rate [service-cl
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions`
 
-Total TCP data retransmissions of active sessions
+Total TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -3447,11 +3447,11 @@ show stats aggregate-session by-service-class tcp-retransmissions [service-class
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-received`
 
-Total reverse TCP data retransmissions of active sessions
+Total reverse TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -3472,11 +3472,11 @@ show stats aggregate-session by-service-class tcp-retransmissions-received [serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-transmitted`
 
-Total forward TCP data retransmissions of active sessions
+Total forward TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -3497,7 +3497,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-transmitted [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group`
 
@@ -3522,40 +3522,40 @@ show stats aggregate-session by-service-group [service-group <service-group>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`bandwidth`](#show-stats-aggregate-session-by-service-group-bandwidth) | Total bandwidth of active sessions |
-| [`bandwidth-received`](#show-stats-aggregate-session-by-service-group-bandwidth-received) | Total received bandwidth |
-| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-service-group-bandwidth-received-tcp) | Total TCP bandwidth received |
-| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-service-group-bandwidth-received-udp) | Total UDP bandwidth received |
-| [`bandwidth-tcp`](#show-stats-aggregate-session-by-service-group-bandwidth-tcp) | Total TCP bandwidth |
-| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-service-group-bandwidth-transmitted) | Total sent bandwidth |
-| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-service-group-bandwidth-transmitted-tcp) | Total TCP bandwidth sent |
-| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-service-group-bandwidth-transmitted-udp) | Total UDP bandwidth sent |
-| [`bandwidth-udp`](#show-stats-aggregate-session-by-service-group-bandwidth-udp) | Total UDP bandwidth |
-| [`packets`](#show-stats-aggregate-session-by-service-group-packets) | Total packets |
-| [`packets-received`](#show-stats-aggregate-session-by-service-group-packets-received) | Total packets received of active sessions |
-| [`packets-received-tcp`](#show-stats-aggregate-session-by-service-group-packets-received-tcp) | Total TCP packets received of active sessions |
-| [`packets-received-udp`](#show-stats-aggregate-session-by-service-group-packets-received-udp) | Total UDP packets received of active sessions |
-| [`packets-tcp`](#show-stats-aggregate-session-by-service-group-packets-tcp) | Total TCP packets of active sessions |
-| [`packets-transmitted`](#show-stats-aggregate-session-by-service-group-packets-transmitted) | Total packets sent of active sessions |
-| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-service-group-packets-transmitted-tcp) | Total TCP packets sent of active sessions |
-| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-service-group-packets-transmitted-udp) | Total UDP packets sent of active sessions |
-| [`packets-udp`](#show-stats-aggregate-session-by-service-group-packets-udp) | Total UDP packets of active sessions |
-| [`session-arrival-rate`](#show-stats-aggregate-session-by-service-group-session-arrival-rate) | Rate of arrival for new sessions per unit time |
+| [`bandwidth`](#show-stats-aggregate-session-by-service-group-bandwidth) | Total bandwidth of active sessions (bytes per second) |
+| [`bandwidth-received`](#show-stats-aggregate-session-by-service-group-bandwidth-received) | Total received bandwidth (bytes per second) |
+| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-service-group-bandwidth-received-tcp) | Total TCP bandwidth received (bytes per second) |
+| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-service-group-bandwidth-received-udp) | Total UDP bandwidth received (bytes per second) |
+| [`bandwidth-tcp`](#show-stats-aggregate-session-by-service-group-bandwidth-tcp) | Total TCP bandwidth (bytes per second) |
+| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-service-group-bandwidth-transmitted) | Total sent bandwidth (bytes per second) |
+| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-service-group-bandwidth-transmitted-tcp) | Total TCP bandwidth sent (bytes per second) |
+| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-service-group-bandwidth-transmitted-udp) | Total UDP bandwidth sent (bytes per second) |
+| [`bandwidth-udp`](#show-stats-aggregate-session-by-service-group-bandwidth-udp) | Total UDP bandwidth (bytes per second) |
+| [`packets`](#show-stats-aggregate-session-by-service-group-packets) | Total packets (packets per second) |
+| [`packets-received`](#show-stats-aggregate-session-by-service-group-packets-received) | Total packets received of active sessions (packets per second) |
+| [`packets-received-tcp`](#show-stats-aggregate-session-by-service-group-packets-received-tcp) | Total TCP packets received of active sessions (packets per second) |
+| [`packets-received-udp`](#show-stats-aggregate-session-by-service-group-packets-received-udp) | Total UDP packets received of active sessions (packets per second) |
+| [`packets-tcp`](#show-stats-aggregate-session-by-service-group-packets-tcp) | Total TCP packets of active sessions (packets per second) |
+| [`packets-transmitted`](#show-stats-aggregate-session-by-service-group-packets-transmitted) | Total packets sent of active sessions (packets per second) |
+| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-service-group-packets-transmitted-tcp) | Total TCP packets sent of active sessions (packets per second) |
+| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-service-group-packets-transmitted-udp) | Total UDP packets sent of active sessions (packets per second) |
+| [`packets-udp`](#show-stats-aggregate-session-by-service-group-packets-udp) | Total UDP packets of active sessions (packets per second) |
+| [`session-arrival-rate`](#show-stats-aggregate-session-by-service-group-session-arrival-rate) | Rate of arrival for new sessions per unit time (sessions per second) |
 | [`session-count`](#show-stats-aggregate-session-by-service-group-session-count) | Total number of active sessions |
-| [`session-departure-rate`](#show-stats-aggregate-session-by-service-group-session-departure-rate) | Rate of departure for terminated sessions per unit time |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions) | Total TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions |
+| [`session-departure-rate`](#show-stats-aggregate-session-by-service-group-session-departure-rate) | Rate of departure for terminated sessions per unit time (session departures per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions) | Total TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions (retransmissions per second) |
 
 ## `show stats aggregate-session by-service-group bandwidth`
 
-Total bandwidth of active sessions
+Total bandwidth of active sessions (bytes per second)
 
 #### Usage
 
@@ -3576,11 +3576,11 @@ show stats aggregate-session by-service-group bandwidth [service-group <service-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group bandwidth-received`
 
-Total received bandwidth
+Total received bandwidth (bytes per second)
 
 #### Usage
 
@@ -3601,11 +3601,11 @@ show stats aggregate-session by-service-group bandwidth-received [service-group 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group bandwidth-received-tcp`
 
-Total TCP bandwidth received
+Total TCP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -3626,11 +3626,11 @@ show stats aggregate-session by-service-group bandwidth-received-tcp [service-gr
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group bandwidth-received-udp`
 
-Total UDP bandwidth received
+Total UDP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -3651,11 +3651,11 @@ show stats aggregate-session by-service-group bandwidth-received-udp [service-gr
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group bandwidth-tcp`
 
-Total TCP bandwidth
+Total TCP bandwidth (bytes per second)
 
 #### Usage
 
@@ -3676,11 +3676,11 @@ show stats aggregate-session by-service-group bandwidth-tcp [service-group <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted`
 
-Total sent bandwidth
+Total sent bandwidth (bytes per second)
 
 #### Usage
 
@@ -3701,11 +3701,11 @@ show stats aggregate-session by-service-group bandwidth-transmitted [service-gro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted-tcp`
 
-Total TCP bandwidth sent
+Total TCP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -3726,11 +3726,11 @@ show stats aggregate-session by-service-group bandwidth-transmitted-tcp [service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted-udp`
 
-Total UDP bandwidth sent
+Total UDP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -3751,11 +3751,11 @@ show stats aggregate-session by-service-group bandwidth-transmitted-udp [service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group bandwidth-udp`
 
-Total UDP bandwidth
+Total UDP bandwidth (bytes per second)
 
 #### Usage
 
@@ -3776,11 +3776,11 @@ show stats aggregate-session by-service-group bandwidth-udp [service-group <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group packets`
 
-Total packets
+Total packets (packets per second)
 
 #### Usage
 
@@ -3801,11 +3801,11 @@ show stats aggregate-session by-service-group packets [service-group <service-gr
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group packets-received`
 
-Total packets received of active sessions
+Total packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -3826,11 +3826,11 @@ show stats aggregate-session by-service-group packets-received [service-group <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group packets-received-tcp`
 
-Total TCP packets received of active sessions
+Total TCP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -3851,11 +3851,11 @@ show stats aggregate-session by-service-group packets-received-tcp [service-grou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group packets-received-udp`
 
-Total UDP packets received of active sessions
+Total UDP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -3876,11 +3876,11 @@ show stats aggregate-session by-service-group packets-received-udp [service-grou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group packets-tcp`
 
-Total TCP packets of active sessions
+Total TCP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -3901,11 +3901,11 @@ show stats aggregate-session by-service-group packets-tcp [service-group <servic
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group packets-transmitted`
 
-Total packets sent of active sessions
+Total packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -3926,11 +3926,11 @@ show stats aggregate-session by-service-group packets-transmitted [service-group
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group packets-transmitted-tcp`
 
-Total TCP packets sent of active sessions
+Total TCP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -3951,11 +3951,11 @@ show stats aggregate-session by-service-group packets-transmitted-tcp [service-g
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group packets-transmitted-udp`
 
-Total UDP packets sent of active sessions
+Total UDP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -3976,11 +3976,11 @@ show stats aggregate-session by-service-group packets-transmitted-udp [service-g
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group packets-udp`
 
-Total UDP packets of active sessions
+Total UDP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -4001,11 +4001,11 @@ show stats aggregate-session by-service-group packets-udp [service-group <servic
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group session-arrival-rate`
 
-Rate of arrival for new sessions per unit time
+Rate of arrival for new sessions per unit time (sessions per second)
 
 #### Usage
 
@@ -4026,7 +4026,7 @@ show stats aggregate-session by-service-group session-arrival-rate [service-grou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group session-count`
 
@@ -4051,11 +4051,11 @@ show stats aggregate-session by-service-group session-count [service-group <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group session-departure-rate`
 
-Rate of departure for terminated sessions per unit time
+Rate of departure for terminated sessions per unit time (session departures per second)
 
 #### Usage
 
@@ -4076,11 +4076,11 @@ show stats aggregate-session by-service-group session-departure-rate [service-gr
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions`
 
-Total TCP data retransmissions of active sessions
+Total TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -4101,11 +4101,11 @@ show stats aggregate-session by-service-group tcp-retransmissions [service-group
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-received`
 
-Total reverse TCP data retransmissions of active sessions
+Total reverse TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -4126,11 +4126,11 @@ show stats aggregate-session by-service-group tcp-retransmissions-received [serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-transmitted`
 
-Total forward TCP data retransmissions of active sessions
+Total forward TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -4151,7 +4151,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-transmitted [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route`
 
@@ -4176,40 +4176,40 @@ show stats aggregate-session by-service-route [service-route <service-route>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`bandwidth`](#show-stats-aggregate-session-by-service-route-bandwidth) | Total bandwidth of active sessions |
-| [`bandwidth-received`](#show-stats-aggregate-session-by-service-route-bandwidth-received) | Total received bandwidth |
-| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-service-route-bandwidth-received-tcp) | Total TCP bandwidth received |
-| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-service-route-bandwidth-received-udp) | Total UDP bandwidth received |
-| [`bandwidth-tcp`](#show-stats-aggregate-session-by-service-route-bandwidth-tcp) | Total TCP bandwidth |
-| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-service-route-bandwidth-transmitted) | Total sent bandwidth |
-| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-service-route-bandwidth-transmitted-tcp) | Total TCP bandwidth sent |
-| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-service-route-bandwidth-transmitted-udp) | Total UDP bandwidth sent |
-| [`bandwidth-udp`](#show-stats-aggregate-session-by-service-route-bandwidth-udp) | Total UDP bandwidth |
-| [`packets`](#show-stats-aggregate-session-by-service-route-packets) | Total packets |
-| [`packets-received`](#show-stats-aggregate-session-by-service-route-packets-received) | Total packets received of active sessions |
-| [`packets-received-tcp`](#show-stats-aggregate-session-by-service-route-packets-received-tcp) | Total TCP packets received of active sessions |
-| [`packets-received-udp`](#show-stats-aggregate-session-by-service-route-packets-received-udp) | Total UDP packets received of active sessions |
-| [`packets-tcp`](#show-stats-aggregate-session-by-service-route-packets-tcp) | Total TCP packets of active sessions |
-| [`packets-transmitted`](#show-stats-aggregate-session-by-service-route-packets-transmitted) | Total packets sent of active sessions |
-| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-service-route-packets-transmitted-tcp) | Total TCP packets sent of active sessions |
-| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-service-route-packets-transmitted-udp) | Total UDP packets sent of active sessions |
-| [`packets-udp`](#show-stats-aggregate-session-by-service-route-packets-udp) | Total UDP packets of active sessions |
-| [`session-arrival-rate`](#show-stats-aggregate-session-by-service-route-session-arrival-rate) | Rate of arrival for new sessions per unit time |
+| [`bandwidth`](#show-stats-aggregate-session-by-service-route-bandwidth) | Total bandwidth of active sessions (bytes per second) |
+| [`bandwidth-received`](#show-stats-aggregate-session-by-service-route-bandwidth-received) | Total received bandwidth (bytes per second) |
+| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-service-route-bandwidth-received-tcp) | Total TCP bandwidth received (bytes per second) |
+| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-service-route-bandwidth-received-udp) | Total UDP bandwidth received (bytes per second) |
+| [`bandwidth-tcp`](#show-stats-aggregate-session-by-service-route-bandwidth-tcp) | Total TCP bandwidth (bytes per second) |
+| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-service-route-bandwidth-transmitted) | Total sent bandwidth (bytes per second) |
+| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-service-route-bandwidth-transmitted-tcp) | Total TCP bandwidth sent (bytes per second) |
+| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-service-route-bandwidth-transmitted-udp) | Total UDP bandwidth sent (bytes per second) |
+| [`bandwidth-udp`](#show-stats-aggregate-session-by-service-route-bandwidth-udp) | Total UDP bandwidth (bytes per second) |
+| [`packets`](#show-stats-aggregate-session-by-service-route-packets) | Total packets (packets per second) |
+| [`packets-received`](#show-stats-aggregate-session-by-service-route-packets-received) | Total packets received of active sessions (packets per second) |
+| [`packets-received-tcp`](#show-stats-aggregate-session-by-service-route-packets-received-tcp) | Total TCP packets received of active sessions (packets per second) |
+| [`packets-received-udp`](#show-stats-aggregate-session-by-service-route-packets-received-udp) | Total UDP packets received of active sessions (packets per second) |
+| [`packets-tcp`](#show-stats-aggregate-session-by-service-route-packets-tcp) | Total TCP packets of active sessions (packets per second) |
+| [`packets-transmitted`](#show-stats-aggregate-session-by-service-route-packets-transmitted) | Total packets sent of active sessions (packets per second) |
+| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-service-route-packets-transmitted-tcp) | Total TCP packets sent of active sessions (packets per second) |
+| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-service-route-packets-transmitted-udp) | Total UDP packets sent of active sessions (packets per second) |
+| [`packets-udp`](#show-stats-aggregate-session-by-service-route-packets-udp) | Total UDP packets of active sessions (packets per second) |
+| [`session-arrival-rate`](#show-stats-aggregate-session-by-service-route-session-arrival-rate) | Rate of arrival for new sessions per unit time (sessions per second) |
 | [`session-count`](#show-stats-aggregate-session-by-service-route-session-count) | Total number of active sessions |
-| [`session-departure-rate`](#show-stats-aggregate-session-by-service-route-session-departure-rate) | Rate of departure for terminated sessions per unit time |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions) | Total TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions |
+| [`session-departure-rate`](#show-stats-aggregate-session-by-service-route-session-departure-rate) | Rate of departure for terminated sessions per unit time (session departures per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions) | Total TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions (retransmissions per second) |
 
 ## `show stats aggregate-session by-service-route bandwidth`
 
-Total bandwidth of active sessions
+Total bandwidth of active sessions (bytes per second)
 
 #### Usage
 
@@ -4230,11 +4230,11 @@ show stats aggregate-session by-service-route bandwidth [service-route <service-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route bandwidth-received`
 
-Total received bandwidth
+Total received bandwidth (bytes per second)
 
 #### Usage
 
@@ -4255,11 +4255,11 @@ show stats aggregate-session by-service-route bandwidth-received [service-route 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route bandwidth-received-tcp`
 
-Total TCP bandwidth received
+Total TCP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -4280,11 +4280,11 @@ show stats aggregate-session by-service-route bandwidth-received-tcp [service-ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route bandwidth-received-udp`
 
-Total UDP bandwidth received
+Total UDP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -4305,11 +4305,11 @@ show stats aggregate-session by-service-route bandwidth-received-udp [service-ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route bandwidth-tcp`
 
-Total TCP bandwidth
+Total TCP bandwidth (bytes per second)
 
 #### Usage
 
@@ -4330,11 +4330,11 @@ show stats aggregate-session by-service-route bandwidth-tcp [service-route <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted`
 
-Total sent bandwidth
+Total sent bandwidth (bytes per second)
 
 #### Usage
 
@@ -4355,11 +4355,11 @@ show stats aggregate-session by-service-route bandwidth-transmitted [service-rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted-tcp`
 
-Total TCP bandwidth sent
+Total TCP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -4380,11 +4380,11 @@ show stats aggregate-session by-service-route bandwidth-transmitted-tcp [service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted-udp`
 
-Total UDP bandwidth sent
+Total UDP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -4405,11 +4405,11 @@ show stats aggregate-session by-service-route bandwidth-transmitted-udp [service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route bandwidth-udp`
 
-Total UDP bandwidth
+Total UDP bandwidth (bytes per second)
 
 #### Usage
 
@@ -4430,11 +4430,11 @@ show stats aggregate-session by-service-route bandwidth-udp [service-route <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route packets`
 
-Total packets
+Total packets (packets per second)
 
 #### Usage
 
@@ -4455,11 +4455,11 @@ show stats aggregate-session by-service-route packets [service-route <service-ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route packets-received`
 
-Total packets received of active sessions
+Total packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -4480,11 +4480,11 @@ show stats aggregate-session by-service-route packets-received [service-route <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route packets-received-tcp`
 
-Total TCP packets received of active sessions
+Total TCP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -4505,11 +4505,11 @@ show stats aggregate-session by-service-route packets-received-tcp [service-rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route packets-received-udp`
 
-Total UDP packets received of active sessions
+Total UDP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -4530,11 +4530,11 @@ show stats aggregate-session by-service-route packets-received-udp [service-rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route packets-tcp`
 
-Total TCP packets of active sessions
+Total TCP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -4555,11 +4555,11 @@ show stats aggregate-session by-service-route packets-tcp [service-route <servic
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route packets-transmitted`
 
-Total packets sent of active sessions
+Total packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -4580,11 +4580,11 @@ show stats aggregate-session by-service-route packets-transmitted [service-route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route packets-transmitted-tcp`
 
-Total TCP packets sent of active sessions
+Total TCP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -4605,11 +4605,11 @@ show stats aggregate-session by-service-route packets-transmitted-tcp [service-r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route packets-transmitted-udp`
 
-Total UDP packets sent of active sessions
+Total UDP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -4630,11 +4630,11 @@ show stats aggregate-session by-service-route packets-transmitted-udp [service-r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route packets-udp`
 
-Total UDP packets of active sessions
+Total UDP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -4655,11 +4655,11 @@ show stats aggregate-session by-service-route packets-udp [service-route <servic
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route session-arrival-rate`
 
-Rate of arrival for new sessions per unit time
+Rate of arrival for new sessions per unit time (sessions per second)
 
 #### Usage
 
@@ -4680,7 +4680,7 @@ show stats aggregate-session by-service-route session-arrival-rate [service-rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route session-count`
 
@@ -4705,11 +4705,11 @@ show stats aggregate-session by-service-route session-count [service-route <serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route session-departure-rate`
 
-Rate of departure for terminated sessions per unit time
+Rate of departure for terminated sessions per unit time (session departures per second)
 
 #### Usage
 
@@ -4730,11 +4730,11 @@ show stats aggregate-session by-service-route session-departure-rate [service-ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions`
 
-Total TCP data retransmissions of active sessions
+Total TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -4755,11 +4755,11 @@ show stats aggregate-session by-service-route tcp-retransmissions [service-route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-received`
 
-Total reverse TCP data retransmissions of active sessions
+Total reverse TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -4780,11 +4780,11 @@ show stats aggregate-session by-service-route tcp-retransmissions-received [serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-transmitted`
 
-Total forward TCP data retransmissions of active sessions
+Total forward TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -4805,7 +4805,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-transmitted [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant`
 
@@ -4830,40 +4830,40 @@ show stats aggregate-session by-tenant [tenant <tenant>] [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`bandwidth`](#show-stats-aggregate-session-by-tenant-bandwidth) | Total bandwidth of active sessions |
-| [`bandwidth-received`](#show-stats-aggregate-session-by-tenant-bandwidth-received) | Total received bandwidth |
-| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-tenant-bandwidth-received-tcp) | Total TCP bandwidth received |
-| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-tenant-bandwidth-received-udp) | Total UDP bandwidth received |
-| [`bandwidth-tcp`](#show-stats-aggregate-session-by-tenant-bandwidth-tcp) | Total TCP bandwidth |
-| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-tenant-bandwidth-transmitted) | Total sent bandwidth |
-| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-tenant-bandwidth-transmitted-tcp) | Total TCP bandwidth sent |
-| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-tenant-bandwidth-transmitted-udp) | Total UDP bandwidth sent |
-| [`bandwidth-udp`](#show-stats-aggregate-session-by-tenant-bandwidth-udp) | Total UDP bandwidth |
-| [`packets`](#show-stats-aggregate-session-by-tenant-packets) | Total packets |
-| [`packets-received`](#show-stats-aggregate-session-by-tenant-packets-received) | Total packets received of active sessions |
-| [`packets-received-tcp`](#show-stats-aggregate-session-by-tenant-packets-received-tcp) | Total TCP packets received of active sessions |
-| [`packets-received-udp`](#show-stats-aggregate-session-by-tenant-packets-received-udp) | Total UDP packets received of active sessions |
-| [`packets-tcp`](#show-stats-aggregate-session-by-tenant-packets-tcp) | Total TCP packets of active sessions |
-| [`packets-transmitted`](#show-stats-aggregate-session-by-tenant-packets-transmitted) | Total packets sent of active sessions |
-| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-tenant-packets-transmitted-tcp) | Total TCP packets sent of active sessions |
-| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-tenant-packets-transmitted-udp) | Total UDP packets sent of active sessions |
-| [`packets-udp`](#show-stats-aggregate-session-by-tenant-packets-udp) | Total UDP packets of active sessions |
-| [`session-arrival-rate`](#show-stats-aggregate-session-by-tenant-session-arrival-rate) | Rate of arrival for new sessions per unit time |
+| [`bandwidth`](#show-stats-aggregate-session-by-tenant-bandwidth) | Total bandwidth of active sessions (bytes per second) |
+| [`bandwidth-received`](#show-stats-aggregate-session-by-tenant-bandwidth-received) | Total received bandwidth (bytes per second) |
+| [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-tenant-bandwidth-received-tcp) | Total TCP bandwidth received (bytes per second) |
+| [`bandwidth-received-udp`](#show-stats-aggregate-session-by-tenant-bandwidth-received-udp) | Total UDP bandwidth received (bytes per second) |
+| [`bandwidth-tcp`](#show-stats-aggregate-session-by-tenant-bandwidth-tcp) | Total TCP bandwidth (bytes per second) |
+| [`bandwidth-transmitted`](#show-stats-aggregate-session-by-tenant-bandwidth-transmitted) | Total sent bandwidth (bytes per second) |
+| [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-tenant-bandwidth-transmitted-tcp) | Total TCP bandwidth sent (bytes per second) |
+| [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-tenant-bandwidth-transmitted-udp) | Total UDP bandwidth sent (bytes per second) |
+| [`bandwidth-udp`](#show-stats-aggregate-session-by-tenant-bandwidth-udp) | Total UDP bandwidth (bytes per second) |
+| [`packets`](#show-stats-aggregate-session-by-tenant-packets) | Total packets (packets per second) |
+| [`packets-received`](#show-stats-aggregate-session-by-tenant-packets-received) | Total packets received of active sessions (packets per second) |
+| [`packets-received-tcp`](#show-stats-aggregate-session-by-tenant-packets-received-tcp) | Total TCP packets received of active sessions (packets per second) |
+| [`packets-received-udp`](#show-stats-aggregate-session-by-tenant-packets-received-udp) | Total UDP packets received of active sessions (packets per second) |
+| [`packets-tcp`](#show-stats-aggregate-session-by-tenant-packets-tcp) | Total TCP packets of active sessions (packets per second) |
+| [`packets-transmitted`](#show-stats-aggregate-session-by-tenant-packets-transmitted) | Total packets sent of active sessions (packets per second) |
+| [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-tenant-packets-transmitted-tcp) | Total TCP packets sent of active sessions (packets per second) |
+| [`packets-transmitted-udp`](#show-stats-aggregate-session-by-tenant-packets-transmitted-udp) | Total UDP packets sent of active sessions (packets per second) |
+| [`packets-udp`](#show-stats-aggregate-session-by-tenant-packets-udp) | Total UDP packets of active sessions (packets per second) |
+| [`session-arrival-rate`](#show-stats-aggregate-session-by-tenant-session-arrival-rate) | Rate of arrival for new sessions per unit time (sessions per second) |
 | [`session-count`](#show-stats-aggregate-session-by-tenant-session-count) | Total number of active sessions |
-| [`session-departure-rate`](#show-stats-aggregate-session-by-tenant-session-departure-rate) | Rate of departure for terminated sessions per unit time |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions) | Total TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions |
+| [`session-departure-rate`](#show-stats-aggregate-session-by-tenant-session-departure-rate) | Rate of departure for terminated sessions per unit time (session departures per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions) | Total TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-received) | Total reverse TCP data retransmissions of active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-transmitted) | Total forward TCP data retransmissions of active sessions (retransmissions per second) |
 
 ## `show stats aggregate-session by-tenant bandwidth`
 
-Total bandwidth of active sessions
+Total bandwidth of active sessions (bytes per second)
 
 #### Usage
 
@@ -4884,11 +4884,11 @@ show stats aggregate-session by-tenant bandwidth [tenant <tenant>] [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant bandwidth-received`
 
-Total received bandwidth
+Total received bandwidth (bytes per second)
 
 #### Usage
 
@@ -4909,11 +4909,11 @@ show stats aggregate-session by-tenant bandwidth-received [tenant <tenant>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant bandwidth-received-tcp`
 
-Total TCP bandwidth received
+Total TCP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -4934,11 +4934,11 @@ show stats aggregate-session by-tenant bandwidth-received-tcp [tenant <tenant>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant bandwidth-received-udp`
 
-Total UDP bandwidth received
+Total UDP bandwidth received (bytes per second)
 
 #### Usage
 
@@ -4959,11 +4959,11 @@ show stats aggregate-session by-tenant bandwidth-received-udp [tenant <tenant>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant bandwidth-tcp`
 
-Total TCP bandwidth
+Total TCP bandwidth (bytes per second)
 
 #### Usage
 
@@ -4984,11 +4984,11 @@ show stats aggregate-session by-tenant bandwidth-tcp [tenant <tenant>] [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted`
 
-Total sent bandwidth
+Total sent bandwidth (bytes per second)
 
 #### Usage
 
@@ -5009,11 +5009,11 @@ show stats aggregate-session by-tenant bandwidth-transmitted [tenant <tenant>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted-tcp`
 
-Total TCP bandwidth sent
+Total TCP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -5034,11 +5034,11 @@ show stats aggregate-session by-tenant bandwidth-transmitted-tcp [tenant <tenant
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted-udp`
 
-Total UDP bandwidth sent
+Total UDP bandwidth sent (bytes per second)
 
 #### Usage
 
@@ -5059,11 +5059,11 @@ show stats aggregate-session by-tenant bandwidth-transmitted-udp [tenant <tenant
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant bandwidth-udp`
 
-Total UDP bandwidth
+Total UDP bandwidth (bytes per second)
 
 #### Usage
 
@@ -5084,11 +5084,11 @@ show stats aggregate-session by-tenant bandwidth-udp [tenant <tenant>] [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant packets`
 
-Total packets
+Total packets (packets per second)
 
 #### Usage
 
@@ -5109,11 +5109,11 @@ show stats aggregate-session by-tenant packets [tenant <tenant>] [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant packets-received`
 
-Total packets received of active sessions
+Total packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -5134,11 +5134,11 @@ show stats aggregate-session by-tenant packets-received [tenant <tenant>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant packets-received-tcp`
 
-Total TCP packets received of active sessions
+Total TCP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -5159,11 +5159,11 @@ show stats aggregate-session by-tenant packets-received-tcp [tenant <tenant>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant packets-received-udp`
 
-Total UDP packets received of active sessions
+Total UDP packets received of active sessions (packets per second)
 
 #### Usage
 
@@ -5184,11 +5184,11 @@ show stats aggregate-session by-tenant packets-received-udp [tenant <tenant>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant packets-tcp`
 
-Total TCP packets of active sessions
+Total TCP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -5209,11 +5209,11 @@ show stats aggregate-session by-tenant packets-tcp [tenant <tenant>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant packets-transmitted`
 
-Total packets sent of active sessions
+Total packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -5234,11 +5234,11 @@ show stats aggregate-session by-tenant packets-transmitted [tenant <tenant>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant packets-transmitted-tcp`
 
-Total TCP packets sent of active sessions
+Total TCP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -5259,11 +5259,11 @@ show stats aggregate-session by-tenant packets-transmitted-tcp [tenant <tenant>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant packets-transmitted-udp`
 
-Total UDP packets sent of active sessions
+Total UDP packets sent of active sessions (packets per second)
 
 #### Usage
 
@@ -5284,11 +5284,11 @@ show stats aggregate-session by-tenant packets-transmitted-udp [tenant <tenant>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant packets-udp`
 
-Total UDP packets of active sessions
+Total UDP packets of active sessions (packets per second)
 
 #### Usage
 
@@ -5309,11 +5309,11 @@ show stats aggregate-session by-tenant packets-udp [tenant <tenant>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant session-arrival-rate`
 
-Rate of arrival for new sessions per unit time
+Rate of arrival for new sessions per unit time (sessions per second)
 
 #### Usage
 
@@ -5334,7 +5334,7 @@ show stats aggregate-session by-tenant session-arrival-rate [tenant <tenant>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant session-count`
 
@@ -5359,11 +5359,11 @@ show stats aggregate-session by-tenant session-count [tenant <tenant>] [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant session-departure-rate`
 
-Rate of departure for terminated sessions per unit time
+Rate of departure for terminated sessions per unit time (session departures per second)
 
 #### Usage
 
@@ -5384,11 +5384,11 @@ show stats aggregate-session by-tenant session-departure-rate [tenant <tenant>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions`
 
-Total TCP data retransmissions of active sessions
+Total TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -5409,11 +5409,11 @@ show stats aggregate-session by-tenant tcp-retransmissions [tenant <tenant>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-received`
 
-Total reverse TCP data retransmissions of active sessions
+Total reverse TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -5434,11 +5434,11 @@ show stats aggregate-session by-tenant tcp-retransmissions-received [tenant <ten
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-transmitted`
 
-Total forward TCP data retransmissions of active sessions
+Total forward TCP data retransmissions of active sessions (retransmissions per second)
 
 #### Usage
 
@@ -5459,7 +5459,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-transmitted [tenant <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats app-id`
 
@@ -5484,7 +5484,7 @@ show stats app-id [since <since>] [force] [router <router>] [node <node>] [<verb
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -5518,7 +5518,7 @@ show stats app-id domain-database [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -5550,7 +5550,7 @@ show stats app-id domain-database domain-count [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats app-id domain-database updates`
 
@@ -5575,7 +5575,7 @@ show stats app-id domain-database updates [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats app-id domain-lookup`
 
@@ -5600,7 +5600,7 @@ show stats app-id domain-lookup [since <since>] [force] [router <router>] [node 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -5634,7 +5634,7 @@ show stats app-id domain-lookup hit [service <service>] [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats app-id domain-lookup miss`
 
@@ -5660,7 +5660,7 @@ show stats app-id domain-lookup miss [service <service>] [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats app-id domain-lookup service-not-applicable`
 
@@ -5685,7 +5685,7 @@ show stats app-id domain-lookup service-not-applicable [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats app-id refreshes`
 
@@ -5710,7 +5710,7 @@ show stats app-id refreshes [since <since>] [force] [router <router>] [node <nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats app-id retries`
 
@@ -5735,7 +5735,7 @@ show stats app-id retries [since <since>] [force] [router <router>] [node <node>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats application-framework`
 
@@ -5760,7 +5760,7 @@ show stats application-framework [network-interface <network-interface>] [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -5795,7 +5795,7 @@ show stats application-framework init [network-interface <network-interface>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats application-framework shutdown`
 
@@ -5820,7 +5820,7 @@ show stats application-framework shutdown [network-interface <network-interface>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats application-framework start`
 
@@ -5845,7 +5845,7 @@ show stats application-framework start [network-interface <network-interface>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats application-framework state`
 
@@ -5870,7 +5870,7 @@ show stats application-framework state [network-interface <network-interface>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats application-framework stop`
 
@@ -5895,7 +5895,7 @@ show stats application-framework stop [network-interface <network-interface>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp`
 
@@ -5920,7 +5920,7 @@ show stats arp [since <since>] [force] [router <router>] [node <node>] [<verbosi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -5955,7 +5955,7 @@ show stats arp encapsulation [since <since>] [force] [router <router>] [node <no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -5986,7 +5986,7 @@ show stats arp encapsulation sent [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -6018,7 +6018,7 @@ show stats arp encapsulation sent failure [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp encapsulation sent success`
 
@@ -6043,7 +6043,7 @@ show stats arp encapsulation sent success [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp entries`
 
@@ -6068,7 +6068,7 @@ show stats arp entries [since <since>] [force] [router <router>] [node <node>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp queued`
 
@@ -6093,7 +6093,7 @@ show stats arp queued [since <since>] [force] [router <router>] [node <node>] [<
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -6125,7 +6125,7 @@ show stats arp queued failure [since <since>] [force] [router <router>] [node <n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -6157,7 +6157,7 @@ show stats arp queued failure drop [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp queued failure queue-full`
 
@@ -6182,7 +6182,7 @@ show stats arp queued failure queue-full [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp queued packets`
 
@@ -6207,7 +6207,7 @@ show stats arp queued packets [since <since>] [force] [router <router>] [node <n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received`
 
@@ -6232,7 +6232,7 @@ show stats arp received [since <since>] [force] [router <router>] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -6271,7 +6271,7 @@ show stats arp received arp-reply [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received arp-request`
 
@@ -6296,7 +6296,7 @@ show stats arp received arp-request [since <since>] [force] [router <router>] [n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received errors`
 
@@ -6321,7 +6321,7 @@ show stats arp received errors [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -6357,7 +6357,7 @@ show stats arp received errors arp-reply [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received errors arp-request`
 
@@ -6382,7 +6382,7 @@ show stats arp received errors arp-request [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received errors neighbor-advertisement`
 
@@ -6407,7 +6407,7 @@ show stats arp received errors neighbor-advertisement [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received errors neighbor-solicit`
 
@@ -6432,7 +6432,7 @@ show stats arp received errors neighbor-solicit [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received errors processing`
 
@@ -6457,7 +6457,7 @@ show stats arp received errors processing [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received errors unknown-type`
 
@@ -6482,7 +6482,7 @@ show stats arp received errors unknown-type [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received gratuitous-arp`
 
@@ -6507,7 +6507,7 @@ show stats arp received gratuitous-arp [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received neighbor-advertisement`
 
@@ -6532,7 +6532,7 @@ show stats arp received neighbor-advertisement [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received neighbor-solicit`
 
@@ -6557,7 +6557,7 @@ show stats arp received neighbor-solicit [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received off-subnet-arp-request`
 
@@ -6582,7 +6582,7 @@ show stats arp received off-subnet-arp-request [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received off-subnet-neighbor-solicit`
 
@@ -6607,7 +6607,7 @@ show stats arp received off-subnet-neighbor-solicit [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp received unsolicited-neighbor-advertisement`
 
@@ -6632,7 +6632,7 @@ show stats arp received unsolicited-neighbor-advertisement [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent`
 
@@ -6657,7 +6657,7 @@ show stats arp sent [since <since>] [force] [router <router>] [node <node>] [<ve
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -6689,7 +6689,7 @@ show stats arp sent failure [since <since>] [force] [router <router>] [node <nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -6728,7 +6728,7 @@ show stats arp sent failure allocation [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent failure arp-reply`
 
@@ -6753,7 +6753,7 @@ show stats arp sent failure arp-reply [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent failure arp-request`
 
@@ -6778,7 +6778,7 @@ show stats arp sent failure arp-request [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent failure gratuitous-arp`
 
@@ -6803,7 +6803,7 @@ show stats arp sent failure gratuitous-arp [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent failure multicast-listener-report`
 
@@ -6828,7 +6828,7 @@ show stats arp sent failure multicast-listener-report [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent failure neighbor-advertisement`
 
@@ -6853,7 +6853,7 @@ show stats arp sent failure neighbor-advertisement [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent failure neighbor-solicit`
 
@@ -6878,7 +6878,7 @@ show stats arp sent failure neighbor-solicit [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent failure standby`
 
@@ -6903,7 +6903,7 @@ show stats arp sent failure standby [since <since>] [force] [router <router>] [n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent failure unsolicited-neighbor-advertisement`
 
@@ -6928,7 +6928,7 @@ show stats arp sent failure unsolicited-neighbor-advertisement [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent success`
 
@@ -6953,7 +6953,7 @@ show stats arp sent success [since <since>] [force] [router <router>] [node <nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -6992,7 +6992,7 @@ show stats arp sent success arp-reply [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent success arp-request`
 
@@ -7017,7 +7017,7 @@ show stats arp sent success arp-request [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent success gratuitous-arp`
 
@@ -7042,7 +7042,7 @@ show stats arp sent success gratuitous-arp [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent success in-subnet-proxy`
 
@@ -7067,7 +7067,7 @@ show stats arp sent success in-subnet-proxy [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent success multicast-listener-report`
 
@@ -7092,7 +7092,7 @@ show stats arp sent success multicast-listener-report [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent success neighbor-advertisement`
 
@@ -7117,7 +7117,7 @@ show stats arp sent success neighbor-advertisement [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent success neighbor-solicit`
 
@@ -7142,7 +7142,7 @@ show stats arp sent success neighbor-solicit [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent success off-subnet-proxy`
 
@@ -7167,7 +7167,7 @@ show stats arp sent success off-subnet-proxy [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats arp sent success unsolicited-neighbor-advertisement`
 
@@ -7192,7 +7192,7 @@ show stats arp sent success unsolicited-neighbor-advertisement [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats audit`
 
@@ -7220,7 +7220,7 @@ show stats audit [collector <collector>] [type <type>] [subtype <subtype>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7254,7 +7254,7 @@ show stats audit events [collector <collector>] [type <type>] [subtype <subtype>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7288,7 +7288,7 @@ show stats audit events produced [collector <collector>] [type <type>] [subtype 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats bfd`
 
@@ -7313,7 +7313,7 @@ show stats bfd [since <since>] [force] [router <router>] [node <node>] [<verbosi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7360,7 +7360,7 @@ show stats bfd async [since <since>] [force] [router <router>] [node <node>] [<v
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7399,7 +7399,7 @@ show stats bfd async received [since <since>] [force] [router <router>] [node <n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7438,7 +7438,7 @@ show stats bfd async received miss [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -7470,7 +7470,7 @@ show stats bfd async received success [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -7502,7 +7502,7 @@ show stats bfd async sent [since <since>] [force] [router <router>] [node <node>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7542,7 +7542,7 @@ show stats bfd async sent arp-failure [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -7574,7 +7574,7 @@ show stats bfd async sent buffer-allocation-failure [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -7606,7 +7606,7 @@ show stats bfd async sent success [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -7642,7 +7642,7 @@ show stats bfd by-peer-path [peer-name <peer-name>] [peer-host <peer-host>] [dev
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7659,7 +7659,7 @@ show stats bfd by-peer-path [peer-name <peer-name>] [peer-host <peer-host>] [dev
 | [`local-source-nat-change`](#show-stats-bfd-by-peer-path-local-source-nat-change) | The number of local source nat changes on the peer path. |
 | [`local-source-nat-reset`](#show-stats-bfd-by-peer-path-local-source-nat-reset) | The number of local source nat resets on the peer path. |
 | [`loss`](#show-stats-bfd-by-peer-path-loss) | Packet loss percentange for the 128T peer path. |
-| [`mos`](#show-stats-bfd-by-peer-path-mos) | MOS value calculated for the 128T peer path. |
+| [`mos`](#show-stats-bfd-by-peer-path-mos) | MOS value calculated for the 128T peer path. (hundreths of a decimal) |
 | [`neighbor`](#show-stats-bfd-by-peer-path-neighbor) | Stats pertaining to BFD Neighbor |
 
 ##### See Also
@@ -7696,7 +7696,7 @@ show stats bfd by-peer-path async [peer-name <peer-name>] [peer-host <peer-host>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7739,7 +7739,7 @@ show stats bfd by-peer-path async received [peer-name <peer-name>] [peer-host <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7782,7 +7782,7 @@ show stats bfd by-peer-path async received miss [peer-name <peer-name>] [peer-ho
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -7818,7 +7818,7 @@ show stats bfd by-peer-path async received success [peer-name <peer-name>] [peer
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -7854,7 +7854,7 @@ show stats bfd by-peer-path async sent [peer-name <peer-name>] [peer-host <peer-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -7898,7 +7898,7 @@ show stats bfd by-peer-path async sent arp-failure [peer-name <peer-name>] [peer
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -7934,7 +7934,7 @@ show stats bfd by-peer-path async sent buffer-allocation-failure [peer-name <pee
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8042,7 +8042,7 @@ show stats bfd by-peer-path dynamic-damping [peer-name <peer-name>] [peer-host <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -8085,7 +8085,7 @@ show stats bfd by-peer-path dynamic-damping current-hold-down-time [peer-name <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8121,7 +8121,7 @@ show stats bfd by-peer-path dynamic-damping hold-down-link-flaps [peer-name <pee
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8157,7 +8157,7 @@ show stats bfd by-peer-path echo [peer-name <peer-name>] [peer-host <peer-host>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -8200,7 +8200,7 @@ show stats bfd by-peer-path echo received [peer-name <peer-name>] [peer-host <pe
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8236,7 +8236,7 @@ show stats bfd by-peer-path echo sent [peer-name <peer-name>] [peer-host <peer-h
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -8280,7 +8280,7 @@ show stats bfd by-peer-path echo sent arp-failure [peer-name <peer-name>] [peer-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8316,7 +8316,7 @@ show stats bfd by-peer-path echo sent buffer-allocation-failure [peer-name <peer
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8352,7 +8352,7 @@ show stats bfd by-peer-path echo sent success [peer-name <peer-name>] [peer-host
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8388,7 +8388,7 @@ show stats bfd by-peer-path jitter [peer-name <peer-name>] [peer-host <peer-host
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8424,7 +8424,7 @@ show stats bfd by-peer-path latency [peer-name <peer-name>] [peer-host <peer-hos
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8460,7 +8460,7 @@ show stats bfd by-peer-path link-down [peer-name <peer-name>] [peer-host <peer-h
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -8505,7 +8505,7 @@ show stats bfd by-peer-path link-down local-oper-down [peer-name <peer-name>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8541,7 +8541,7 @@ show stats bfd by-peer-path link-down remote-admin-down [peer-name <peer-name>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8577,7 +8577,7 @@ show stats bfd by-peer-path link-down remote-down [peer-name <peer-name>] [peer-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8613,7 +8613,7 @@ show stats bfd by-peer-path link-down timer-expiry [peer-name <peer-name>] [peer
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8649,7 +8649,7 @@ show stats bfd by-peer-path link-up [peer-name <peer-name>] [peer-host <peer-hos
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8757,7 +8757,7 @@ show stats bfd by-peer-path loss [peer-name <peer-name>] [peer-host <peer-host>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8768,7 +8768,7 @@ show stats bfd by-peer-path loss [peer-name <peer-name>] [peer-host <peer-host>]
 
 ## `show stats bfd by-peer-path mos`
 
-MOS value calculated for the 128T peer path.
+MOS value calculated for the 128T peer path. (hundreths of a decimal)
 
 #### Usage
 
@@ -8793,7 +8793,7 @@ show stats bfd by-peer-path mos [peer-name <peer-name>] [peer-host <peer-host>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8829,7 +8829,7 @@ show stats bfd by-peer-path neighbor [peer-name <peer-name>] [peer-host <peer-ho
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -8872,7 +8872,7 @@ show stats bfd by-peer-path neighbor failover [peer-name <peer-name>] [peer-host
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8908,7 +8908,7 @@ show stats bfd by-peer-path neighbor source-nat-change [peer-name <peer-name>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -8940,7 +8940,7 @@ show stats bfd dynamic-damping [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -8978,7 +8978,7 @@ show stats bfd dynamic-damping hold-down-link-flaps [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9010,7 +9010,7 @@ show stats bfd echo [since <since>] [force] [router <router>] [node <node>] [<ve
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -9049,7 +9049,7 @@ show stats bfd echo received [since <since>] [force] [router <router>] [node <no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9081,7 +9081,7 @@ show stats bfd echo sent [since <since>] [force] [router <router>] [node <node>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -9121,7 +9121,7 @@ show stats bfd echo sent arp-failure [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9153,7 +9153,7 @@ show stats bfd echo sent buffer-allocation-failure [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9185,7 +9185,7 @@ show stats bfd echo sent success [since <since>] [force] [router <router>] [node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9217,7 +9217,7 @@ show stats bfd link-down [since <since>] [force] [router <router>] [node <node>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -9258,7 +9258,7 @@ show stats bfd link-down local-oper-down [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9290,7 +9290,7 @@ show stats bfd link-down remote-admin-down [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9322,7 +9322,7 @@ show stats bfd link-down remote-down [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9354,7 +9354,7 @@ show stats bfd link-down timer-expiry [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9386,7 +9386,7 @@ show stats bfd link-up [since <since>] [force] [router <router>] [node <node>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9482,7 +9482,7 @@ show stats bfd neighbor [since <since>] [force] [router <router>] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -9521,7 +9521,7 @@ show stats bfd neighbor failover [since <since>] [force] [router <router>] [node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9553,7 +9553,7 @@ show stats bfd neighbor source-nat-change [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9585,7 +9585,7 @@ show stats bfd received-invalid [since <since>] [force] [router <router>] [node 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -9633,7 +9633,7 @@ show stats bfd received-invalid authentication-field [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9665,7 +9665,7 @@ show stats bfd received-invalid detect-multiple [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9697,7 +9697,7 @@ show stats bfd received-invalid discriminator [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9729,7 +9729,7 @@ show stats bfd received-invalid header-large [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9761,7 +9761,7 @@ show stats bfd received-invalid header-small [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9793,7 +9793,7 @@ show stats bfd received-invalid header-version [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9825,7 +9825,7 @@ show stats bfd received-invalid local-discriminator [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9857,7 +9857,7 @@ show stats bfd received-invalid metadata [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9889,7 +9889,7 @@ show stats bfd received-invalid packet-length [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9921,7 +9921,7 @@ show stats bfd received-invalid payload-small [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9953,7 +9953,7 @@ show stats bfd received-invalid session [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -9985,7 +9985,7 @@ show stats config [since <since>] [force] [router <router>] [node <node>] [<verb
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -9997,17 +9997,17 @@ show stats config [since <since>] [force] [router <router>] [node <node>] [<verb
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
-| [`show config exports`](#show-config-exports) | Display configuration exports. |
-| [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
+| [`show events config commit`](cli_reference.md#show-events-config-commit) | Shows events related to running config change |
 
 ## `show stats config cache`
 
@@ -10032,7 +10032,7 @@ show stats config cache [since <since>] [force] [router <router>] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -10045,21 +10045,21 @@ show stats config cache [since <since>] [force] [router <router>] [node <node>] 
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
-| [`show config exports`](#show-config-exports) | Display configuration exports. |
-| [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
+| [`show events config commit`](cli_reference.md#show-events-config-commit) | Shows events related to running config change |
 
 ## `show stats config cache hits`
 
-The count of hits on the configuration&#x27;s cache
+The count of hits on the configuration cache
 
 #### Usage
 
@@ -10080,23 +10080,23 @@ show stats config cache hits [since <since>] [force] [router <router>] [node <no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
-| [`show config exports`](#show-config-exports) | Display configuration exports. |
-| [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
+| [`show events config commit`](cli_reference.md#show-events-config-commit) | Shows events related to running config change |
 
 ## `show stats config cache misses`
 
@@ -10121,23 +10121,23 @@ show stats config cache misses [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`compare config`](#compare-config) | Display the differences between two configurations. |
-| [`create config autogenerated`](#create-config-autogenerated) | Run configuration generation. |
-| [`delete config exported`](#delete-config-exported) | Delete an exported configuration from disk. |
-| [`export config`](#export-config) | Export a copy of the current running or candidate config. |
-| [`import config`](#import-config) | Import a configuration as the candidate config. |
-| [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
-| [`show config exports`](#show-config-exports) | Display configuration exports. |
-| [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
+| [`compare config`](cli_reference.md#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](cli_reference.md#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](cli_reference.md#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](cli_reference.md#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](cli_reference.md#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](cli_reference.md#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](cli_reference.md#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](cli_reference.md#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`show config exports`](cli_reference.md#show-config-exports) | Display configuration exports. |
+| [`show config version`](cli_reference.md#show-config-version) | Display running configuration version. |
+| [`show events config commit`](cli_reference.md#show-events-config-commit) | Shows events related to running config change |
 
 ## `show stats conflux`
 
@@ -10163,7 +10163,7 @@ show stats conflux [pipeline <pipeline>] [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -10198,18 +10198,18 @@ show stats conflux batches [pipeline <pipeline>] [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`latency`](#show-stats-conflux-batches-latency) | Amortized amount of time Conflux buffers a batch |
+| [`latency`](#show-stats-conflux-batches-latency) | Amortized amount of time Conflux buffers a batch (us) |
 | [`write`](#show-stats-conflux-batches-write) | Metrics tracking Conflux batch writes |
 
 ## `show stats conflux batches latency`
 
-Amortized amount of time Conflux buffers a batch
+Amortized amount of time Conflux buffers a batch (us)
 
 #### Usage
 
@@ -10231,7 +10231,7 @@ show stats conflux batches latency [pipeline <pipeline>] [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux batches write`
 
@@ -10257,19 +10257,19 @@ show stats conflux batches write [pipeline <pipeline>] [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-conflux-batches-write-duration) | Amortized duration of Conflux batch writes to the database |
+| [`duration`](#show-stats-conflux-batches-write-duration) | Amortized duration of Conflux batch writes to the database (us) |
 | [`failure`](#show-stats-conflux-batches-write-failure) | Number of batches Conflux failed to write |
 | [`success`](#show-stats-conflux-batches-write-success) | Number of batches Conflux wrote successfully |
 
 ## `show stats conflux batches write duration`
 
-Amortized duration of Conflux batch writes to the database
+Amortized duration of Conflux batch writes to the database (us)
 
 #### Usage
 
@@ -10291,7 +10291,7 @@ show stats conflux batches write duration [pipeline <pipeline>] [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux batches write failure`
 
@@ -10317,7 +10317,7 @@ show stats conflux batches write failure [pipeline <pipeline>] [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux batches write success`
 
@@ -10343,7 +10343,7 @@ show stats conflux batches write success [pipeline <pipeline>] [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux gaps`
 
@@ -10369,7 +10369,7 @@ show stats conflux gaps [pipeline <pipeline>] [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -10402,7 +10402,7 @@ show stats conflux gaps detected [pipeline <pipeline>] [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux gaps resolution`
 
@@ -10428,7 +10428,7 @@ show stats conflux gaps resolution [pipeline <pipeline>] [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -10461,7 +10461,7 @@ show stats conflux gaps resolution retry [pipeline <pipeline>] [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux gaps resolution success`
 
@@ -10487,7 +10487,7 @@ show stats conflux gaps resolution success [pipeline <pipeline>] [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux messages`
 
@@ -10514,7 +10514,7 @@ show stats conflux messages [pipeline <pipeline>] [source <source>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -10548,7 +10548,7 @@ show stats conflux messages read [pipeline <pipeline>] [source <source>] [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux messages write`
 
@@ -10575,7 +10575,7 @@ show stats conflux messages write [pipeline <pipeline>] [source <source>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -10609,7 +10609,7 @@ show stats conflux messages write failure [pipeline <pipeline>] [source <source>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux messages write success`
 
@@ -10636,7 +10636,7 @@ show stats conflux messages write success [pipeline <pipeline>] [source <source>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream`
 
@@ -10663,22 +10663,22 @@ show stats conflux stream [pipeline <pipeline>] [source <source>] [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`continue`](#show-stats-conflux-stream-continue) | Number of times a stream was continued after receiving a response or error |
-| [`delay`](#show-stats-conflux-stream-delay) | Number of times a stream was delayed because of connection issues |
-| [`end`](#show-stats-conflux-stream-end) | Number of times a stream was ended |
-| [`requests`](#show-stats-conflux-stream-requests) | Number of requests made to the TANK server |
+| [`continue`](#show-stats-conflux-stream-continue) | Number of times a stream was continued after receiving a response or error (count) |
+| [`delay`](#show-stats-conflux-stream-delay) | Number of times a stream was delayed because of connection issues (count) |
+| [`end`](#show-stats-conflux-stream-end) | Number of times a stream was ended (count) |
+| [`requests`](#show-stats-conflux-stream-requests) | Number of requests made to the TANK server (count) |
 | [`responses`](#show-stats-conflux-stream-responses) | The counts of responses and errors |
-| [`start`](#show-stats-conflux-stream-start) | Number of times a stream was started |
+| [`start`](#show-stats-conflux-stream-start) | Number of times a stream was started (count) |
 
 ## `show stats conflux stream continue`
 
-Number of times a stream was continued after receiving a response or error
+Number of times a stream was continued after receiving a response or error (count)
 
 #### Usage
 
@@ -10701,11 +10701,11 @@ show stats conflux stream continue [pipeline <pipeline>] [source <source>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream delay`
 
-Number of times a stream was delayed because of connection issues
+Number of times a stream was delayed because of connection issues (count)
 
 #### Usage
 
@@ -10728,11 +10728,11 @@ show stats conflux stream delay [pipeline <pipeline>] [source <source>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream end`
 
-Number of times a stream was ended
+Number of times a stream was ended (count)
 
 #### Usage
 
@@ -10755,11 +10755,11 @@ show stats conflux stream end [pipeline <pipeline>] [source <source>] [since <si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream requests`
 
-Number of requests made to the TANK server
+Number of requests made to the TANK server (count)
 
 #### Usage
 
@@ -10782,7 +10782,7 @@ show stats conflux stream requests [pipeline <pipeline>] [source <source>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream responses`
 
@@ -10809,19 +10809,19 @@ show stats conflux stream responses [pipeline <pipeline>] [source <source>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`empty`](#show-stats-conflux-stream-responses-empty) | Number of valid responses with no data |
+| [`empty`](#show-stats-conflux-stream-responses-empty) | Number of valid responses with no data (count) |
 | [`error`](#show-stats-conflux-stream-responses-error) | The counts of the various types of error responses |
-| [`nonempty`](#show-stats-conflux-stream-responses-nonempty) | Number of valid responses with data |
+| [`nonempty`](#show-stats-conflux-stream-responses-nonempty) | Number of valid responses with data (count) |
 
 ## `show stats conflux stream responses empty`
 
-Number of valid responses with no data
+Number of valid responses with no data (count)
 
 #### Usage
 
@@ -10844,7 +10844,7 @@ show stats conflux stream responses empty [pipeline <pipeline>] [source <source>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream responses error`
 
@@ -10871,7 +10871,7 @@ show stats conflux stream responses error [pipeline <pipeline>] [source <source>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -10906,7 +10906,7 @@ show stats conflux stream responses error boundary [pipeline <pipeline>] [source
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream responses error connection`
 
@@ -10933,7 +10933,7 @@ show stats conflux stream responses error connection [pipeline <pipeline>] [sour
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream responses error other`
 
@@ -10960,11 +10960,11 @@ show stats conflux stream responses error other [pipeline <pipeline>] [source <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream responses nonempty`
 
-Number of valid responses with data
+Number of valid responses with data (count)
 
 #### Usage
 
@@ -10987,11 +10987,11 @@ show stats conflux stream responses nonempty [pipeline <pipeline>] [source <sour
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats conflux stream start`
 
-Number of times a stream was started
+Number of times a stream was started (count)
 
 #### Usage
 
@@ -11014,7 +11014,7 @@ show stats conflux stream start [pipeline <pipeline>] [source <source>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats cpu`
 
@@ -11040,7 +11040,7 @@ show stats cpu [core <core>] [since <since>] [force] [router <router>] [node <no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11052,7 +11052,7 @@ show stats cpu [core <core>] [since <since>] [force] [router <router>] [node <no
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -11080,13 +11080,13 @@ show stats cpu utilization [core <core>] [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -11113,7 +11113,7 @@ show stats database [since <since>] [force] [router <router>] [node <node>] [<ve
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11144,7 +11144,7 @@ show stats database memory-consumed [since <since>] [force] [router <router>] [n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats device-interface`
 
@@ -11169,7 +11169,7 @@ show stats device-interface [since <since>] [force] [router <router>] [node <nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11201,7 +11201,7 @@ show stats device-interface message-failure [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats device-interface message-success`
 
@@ -11226,7 +11226,7 @@ show stats device-interface message-success [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats disk`
 
@@ -11251,7 +11251,7 @@ show stats disk [since <since>] [force] [router <router>] [node <node>] [<verbos
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11265,7 +11265,7 @@ show stats disk [since <since>] [force] [router <router>] [node <node>] [<verbos
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -11293,13 +11293,13 @@ show stats disk by-component [component <component>] [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -11327,13 +11327,13 @@ show stats disk capacity [disk <disk>] [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -11361,13 +11361,13 @@ show stats disk used [disk <disk>] [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats memory`](#show-stats-memory) | Memory usage information |
 
@@ -11394,7 +11394,7 @@ show stats dpi [since <since>] [force] [router <router>] [node <node>] [<verbosi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11426,7 +11426,7 @@ show stats dpi parsed [since <since>] [force] [router <router>] [node <node>] [<
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11458,7 +11458,7 @@ show stats dpi parsed failure [since <since>] [force] [router <router>] [node <n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11489,7 +11489,7 @@ show stats dpi parsed failure tls [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats dpi parsed success`
 
@@ -11514,7 +11514,7 @@ show stats dpi parsed success [since <since>] [force] [router <router>] [node <n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11545,7 +11545,7 @@ show stats dpi parsed success tls [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats dpi received`
 
@@ -11570,7 +11570,7 @@ show stats dpi received [since <since>] [force] [router <router>] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11602,7 +11602,7 @@ show stats dpi received failure [since <since>] [force] [router <router>] [node 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11635,7 +11635,7 @@ show stats dpi received failure capacity-exceeded [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats dpi received failure no-session`
 
@@ -11660,7 +11660,7 @@ show stats dpi received failure no-session [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats dpi received failure too-many-segments`
 
@@ -11685,7 +11685,7 @@ show stats dpi received failure too-many-segments [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats dpi received success`
 
@@ -11710,7 +11710,7 @@ show stats dpi received success [since <since>] [force] [router <router>] [node 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11743,7 +11743,7 @@ show stats dpi received success add [since <since>] [force] [router <router>] [n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats dpi received success duplicate`
 
@@ -11768,7 +11768,7 @@ show stats dpi received success duplicate [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats dpi received success ready-to-parse`
 
@@ -11793,7 +11793,7 @@ show stats dpi received success ready-to-parse [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats dynamic-peer-update`
 
@@ -11818,7 +11818,7 @@ show stats dynamic-peer-update [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11833,8 +11833,8 @@ show stats dynamic-peer-update [since <since>] [force] [router <router>] [node <
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update connection`
 
@@ -11859,7 +11859,7 @@ show stats dynamic-peer-update connection [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -11873,8 +11873,8 @@ show stats dynamic-peer-update connection [since <since>] [force] [router <route
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update connection first-conductor-connect`
 
@@ -11899,14 +11899,14 @@ show stats dynamic-peer-update connection first-conductor-connect [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update connection first-server-connect`
 
@@ -11931,14 +11931,14 @@ show stats dynamic-peer-update connection first-server-connect [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update connection last-conductor-disconnect`
 
@@ -11963,14 +11963,14 @@ show stats dynamic-peer-update connection last-conductor-disconnect [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update leadership`
 
@@ -11995,7 +11995,7 @@ show stats dynamic-peer-update leadership [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12008,8 +12008,8 @@ show stats dynamic-peer-update leadership [since <since>] [force] [router <route
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update leadership lost`
 
@@ -12034,14 +12034,14 @@ show stats dynamic-peer-update leadership lost [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update leadership won`
 
@@ -12066,14 +12066,14 @@ show stats dynamic-peer-update leadership won [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests`
 
@@ -12098,7 +12098,7 @@ show stats dynamic-peer-update requests [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12111,8 +12111,8 @@ show stats dynamic-peer-update requests [since <since>] [force] [router <router>
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests received`
 
@@ -12137,7 +12137,7 @@ show stats dynamic-peer-update requests received [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12151,8 +12151,8 @@ show stats dynamic-peer-update requests received [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests received push`
 
@@ -12177,14 +12177,14 @@ show stats dynamic-peer-update requests received push [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests received sync`
 
@@ -12209,14 +12209,14 @@ show stats dynamic-peer-update requests received sync [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests received sync-peer-addresses`
 
@@ -12241,14 +12241,14 @@ show stats dynamic-peer-update requests received sync-peer-addresses [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests sent`
 
@@ -12273,7 +12273,7 @@ show stats dynamic-peer-update requests sent [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12286,8 +12286,8 @@ show stats dynamic-peer-update requests sent [since <since>] [force] [router <ro
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests sent push`
 
@@ -12312,14 +12312,14 @@ show stats dynamic-peer-update requests sent push [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update requests sent sync`
 
@@ -12344,14 +12344,14 @@ show stats dynamic-peer-update requests sent sync [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses`
 
@@ -12376,7 +12376,7 @@ show stats dynamic-peer-update responses [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12388,8 +12388,8 @@ show stats dynamic-peer-update responses [since <since>] [force] [router <router
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received`
 
@@ -12414,7 +12414,7 @@ show stats dynamic-peer-update responses received [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12429,8 +12429,8 @@ show stats dynamic-peer-update responses received [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received not-found`
 
@@ -12455,14 +12455,14 @@ show stats dynamic-peer-update responses received not-found [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received other-failure`
 
@@ -12487,14 +12487,14 @@ show stats dynamic-peer-update responses received other-failure [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received success`
 
@@ -12519,14 +12519,14 @@ show stats dynamic-peer-update responses received success [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats dynamic-peer-update responses received time-out`
 
@@ -12551,14 +12551,14 @@ show stats dynamic-peer-update responses received time-out [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show dynamic-peer-update`](#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
-| [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
+| [`show dynamic-peer-update`](cli_reference.md#show-dynamic-peer-update) | Display view of dynamic peer update on the conductor. |
+| [`sync peer addresses`](cli_reference.md#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
 ## `show stats external-protocols`
 
@@ -12583,7 +12583,7 @@ show stats external-protocols [since <since>] [force] [router <router>] [node <n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12615,7 +12615,7 @@ show stats external-protocols agent [since <since>] [force] [router <router>] [n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12648,7 +12648,7 @@ show stats external-protocols agent channel-messages [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12680,7 +12680,7 @@ show stats external-protocols agent channel-messages received [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent channel-messages sent`
 
@@ -12705,7 +12705,7 @@ show stats external-protocols agent channel-messages sent [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors`
 
@@ -12730,7 +12730,7 @@ show stats external-protocols agent errors [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -12774,7 +12774,7 @@ show stats external-protocols agent errors bgp-over-svr-drops [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors classify-drop`
 
@@ -12799,7 +12799,7 @@ show stats external-protocols agent errors classify-drop [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors early-inbound`
 
@@ -12824,7 +12824,7 @@ show stats external-protocols agent errors early-inbound [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors early-outbound`
 
@@ -12849,7 +12849,7 @@ show stats external-protocols agent errors early-outbound [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors fastlane-not-ready-drop`
 
@@ -12874,7 +12874,7 @@ show stats external-protocols agent errors fastlane-not-ready-drop [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors global-interface-lookup-drop`
 
@@ -12899,7 +12899,7 @@ show stats external-protocols agent errors global-interface-lookup-drop [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors illegal-ethernet-drop`
 
@@ -12924,7 +12924,7 @@ show stats external-protocols agent errors illegal-ethernet-drop [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors illegal-external-protocols-channel-message`
 
@@ -12949,7 +12949,7 @@ show stats external-protocols agent errors illegal-external-protocols-channel-me
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors illegal-ip-drop`
 
@@ -12974,7 +12974,7 @@ show stats external-protocols agent errors illegal-ip-drop [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors inbound-drop`
 
@@ -12999,7 +12999,7 @@ show stats external-protocols agent errors inbound-drop [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors inbound-from-internal-interface-drop`
 
@@ -13024,7 +13024,7 @@ show stats external-protocols agent errors inbound-from-internal-interface-drop 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors outbound-drop`
 
@@ -13049,7 +13049,7 @@ show stats external-protocols agent errors outbound-drop [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors outbound-l2-resolution-reply-drop`
 
@@ -13074,7 +13074,7 @@ show stats external-protocols agent errors outbound-l2-resolution-reply-drop [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent errors session-collision`
 
@@ -13099,7 +13099,7 @@ show stats external-protocols agent errors session-collision [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent packets`
 
@@ -13124,7 +13124,7 @@ show stats external-protocols agent packets [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13157,7 +13157,7 @@ show stats external-protocols agent packets inbound [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent packets outbound`
 
@@ -13182,7 +13182,7 @@ show stats external-protocols agent packets outbound [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols agent packets secure-vector-routed`
 
@@ -13207,7 +13207,7 @@ show stats external-protocols agent packets secure-vector-routed [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols manager`
 
@@ -13232,7 +13232,7 @@ show stats external-protocols manager [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13265,7 +13265,7 @@ show stats external-protocols manager channel-messages [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13297,7 +13297,7 @@ show stats external-protocols manager channel-messages received [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols manager channel-messages sent`
 
@@ -13322,7 +13322,7 @@ show stats external-protocols manager channel-messages sent [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols manager errors`
 
@@ -13347,7 +13347,7 @@ show stats external-protocols manager errors [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13382,7 +13382,7 @@ show stats external-protocols manager errors early-inbound [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols manager errors early-outbound`
 
@@ -13407,7 +13407,7 @@ show stats external-protocols manager errors early-outbound [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols manager errors illegal-external-protocols-channel-message`
 
@@ -13432,7 +13432,7 @@ show stats external-protocols manager errors illegal-external-protocols-channel-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols manager errors inbound-drop`
 
@@ -13457,7 +13457,7 @@ show stats external-protocols manager errors inbound-drop [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols manager errors outbound-drop`
 
@@ -13482,7 +13482,7 @@ show stats external-protocols manager errors outbound-drop [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols manager packets`
 
@@ -13507,7 +13507,7 @@ show stats external-protocols manager packets [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13539,7 +13539,7 @@ show stats external-protocols manager packets inbound [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats external-protocols manager packets outbound`
 
@@ -13564,7 +13564,7 @@ show stats external-protocols manager packets outbound [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway`
 
@@ -13589,7 +13589,7 @@ show stats highway [since <since>] [force] [router <router>] [node <node>] [<ver
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13623,7 +13623,7 @@ show stats highway action-event [since <since>] [force] [router <router>] [node 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13655,7 +13655,7 @@ show stats highway action-event send-success [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway action-event send-timeout`
 
@@ -13680,7 +13680,7 @@ show stats highway action-event send-timeout [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway actions`
 
@@ -13705,7 +13705,7 @@ show stats highway actions [since <since>] [force] [router <router>] [node <node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13736,7 +13736,7 @@ show stats highway actions action-meter [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability`
 
@@ -13765,7 +13765,7 @@ show stats highway destination-reachability [service <service>] [network-interfa
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13803,7 +13803,7 @@ show stats highway destination-reachability icmp [service <service>] [network-in
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13841,7 +13841,7 @@ show stats highway destination-reachability icmp established [service <service>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability icmp time-to-establishment`
 
@@ -13870,7 +13870,7 @@ show stats highway destination-reachability icmp time-to-establishment [service 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -13965,7 +13965,7 @@ show stats highway destination-reachability icmp time-to-establishment min [serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability icmp timeout-before-establishment`
 
@@ -13994,7 +13994,7 @@ show stats highway destination-reachability icmp timeout-before-establishment [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability icmp unreachable`
 
@@ -14023,7 +14023,7 @@ show stats highway destination-reachability icmp unreachable [service <service>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tcp`
 
@@ -14052,7 +14052,7 @@ show stats highway destination-reachability tcp [service <service>] [network-int
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -14091,7 +14091,7 @@ show stats highway destination-reachability tcp close-before-establishment [serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tcp established`
 
@@ -14120,7 +14120,7 @@ show stats highway destination-reachability tcp established [service <service>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tcp time-to-establishment`
 
@@ -14149,7 +14149,7 @@ show stats highway destination-reachability tcp time-to-establishment [service <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -14244,7 +14244,7 @@ show stats highway destination-reachability tcp time-to-establishment min [servi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tcp timeout-before-establishment`
 
@@ -14273,7 +14273,7 @@ show stats highway destination-reachability tcp timeout-before-establishment [se
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tcp unreachable`
 
@@ -14302,7 +14302,7 @@ show stats highway destination-reachability tcp unreachable [service <service>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tls`
 
@@ -14331,7 +14331,7 @@ show stats highway destination-reachability tls [service <service>] [network-int
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -14369,7 +14369,7 @@ show stats highway destination-reachability tls close-before-establishment [serv
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tls established`
 
@@ -14398,7 +14398,7 @@ show stats highway destination-reachability tls established [service <service>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tls time-to-establishment`
 
@@ -14427,7 +14427,7 @@ show stats highway destination-reachability tls time-to-establishment [service <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -14522,7 +14522,7 @@ show stats highway destination-reachability tls time-to-establishment min [servi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability tls timeout-before-establishment`
 
@@ -14551,7 +14551,7 @@ show stats highway destination-reachability tls timeout-before-establishment [se
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability udp`
 
@@ -14580,7 +14580,7 @@ show stats highway destination-reachability udp [service <service>] [network-int
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -14618,7 +14618,7 @@ show stats highway destination-reachability udp established [service <service>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability udp time-to-establishment`
 
@@ -14647,7 +14647,7 @@ show stats highway destination-reachability udp time-to-establishment [service <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -14742,7 +14742,7 @@ show stats highway destination-reachability udp time-to-establishment min [servi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability udp timeout-before-establishment`
 
@@ -14771,7 +14771,7 @@ show stats highway destination-reachability udp timeout-before-establishment [se
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway destination-reachability udp unreachable`
 
@@ -14800,7 +14800,7 @@ show stats highway destination-reachability udp unreachable [service <service>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway firewall-detector`
 
@@ -14825,7 +14825,7 @@ show stats highway firewall-detector [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -14864,7 +14864,7 @@ show stats highway firewall-detector discovery-packet-dropped [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway firewall-detector discovery-timeout`
 
@@ -14889,7 +14889,7 @@ show stats highway firewall-detector discovery-timeout [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway firewall-detector duplicate-context-detected`
 
@@ -14914,7 +14914,7 @@ show stats highway firewall-detector duplicate-context-detected [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway firewall-detector reply-received`
 
@@ -14939,7 +14939,7 @@ show stats highway firewall-detector reply-received [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway firewall-detector reply-sent`
 
@@ -14964,7 +14964,7 @@ show stats highway firewall-detector reply-sent [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway firewall-detector request-received`
 
@@ -14989,7 +14989,7 @@ show stats highway firewall-detector request-received [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway firewall-detector request-sent`
 
@@ -15014,7 +15014,7 @@ show stats highway firewall-detector request-sent [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway firewall-detector tcp-reset-received`
 
@@ -15039,7 +15039,7 @@ show stats highway firewall-detector tcp-reset-received [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats highway firewall-detector unknown-received`
 
@@ -15064,7 +15064,7 @@ show stats highway firewall-detector unknown-received [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp`
 
@@ -15089,7 +15089,7 @@ show stats icmp [since <since>] [force] [router <router>] [node <node>] [<verbos
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -15370,7 +15370,7 @@ show stats icmp received [since <since>] [force] [router <router>] [node <node>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -15402,7 +15402,7 @@ show stats icmp received failure [since <since>] [force] [router <router>] [node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -15433,7 +15433,7 @@ show stats icmp received failure destination-unreachable [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp received success`
 
@@ -15458,7 +15458,7 @@ show stats icmp received success [since <since>] [force] [router <router>] [node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -15489,7 +15489,7 @@ show stats icmp received success destination-unreachable [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp sent`
 
@@ -15514,7 +15514,7 @@ show stats icmp sent [since <since>] [force] [router <router>] [node <node>] [<v
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -15546,7 +15546,7 @@ show stats icmp sent failure [since <since>] [force] [router <router>] [node <no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -15579,7 +15579,7 @@ show stats icmp sent failure destination-unreachable-packet-too-big [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp sent failure echo-reply`
 
@@ -15604,7 +15604,7 @@ show stats icmp sent failure echo-reply [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp sent failure echo-reply-drop`
 
@@ -15629,7 +15629,7 @@ show stats icmp sent failure echo-reply-drop [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp sent success`
 
@@ -15654,7 +15654,7 @@ show stats icmp sent success [since <since>] [force] [router <router>] [node <no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -15690,7 +15690,7 @@ show stats icmp sent success destination-unreachable-net-unreachable [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp sent success destination-unreachable-not-required`
 
@@ -15715,7 +15715,7 @@ show stats icmp sent success destination-unreachable-not-required [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp sent success destination-unreachable-packet-too-big`
 
@@ -15740,7 +15740,7 @@ show stats icmp sent success destination-unreachable-packet-too-big [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp sent success destination-unreachable-reassembly-time-exceeded`
 
@@ -15765,7 +15765,7 @@ show stats icmp sent success destination-unreachable-reassembly-time-exceeded [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp sent success destination-unreachable-time-exceeded`
 
@@ -15790,7 +15790,7 @@ show stats icmp sent success destination-unreachable-time-exceeded [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats icmp sent success echo-reply`
 
@@ -15815,7 +15815,7 @@ show stats icmp sent success echo-reply [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface`
 
@@ -15841,7 +15841,7 @@ show stats interface [port <port>] [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -15874,7 +15874,7 @@ show stats interface received [port <port>] [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -15915,7 +15915,7 @@ show stats interface received buffer-allocation-failure [port <port>] [since <si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface received bytes`
 
@@ -15941,7 +15941,7 @@ show stats interface received bytes [port <port>] [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface received error`
 
@@ -16149,7 +16149,7 @@ show stats interface received utilization [port <port>] [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface sent`
 
@@ -16175,7 +16175,7 @@ show stats interface sent [port <port>] [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -16210,7 +16210,7 @@ show stats interface sent bytes [port <port>] [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface sent error`
 
@@ -16236,7 +16236,7 @@ show stats interface sent error [port <port>] [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface sent packets`
 
@@ -16262,7 +16262,7 @@ show stats interface sent packets [port <port>] [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats interface sent utilization`
 
@@ -16288,7 +16288,7 @@ show stats interface sent utilization [port <port>] [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats ipfix`
 
@@ -16313,21 +16313,21 @@ show stats ipfix [since <since>] [force] [router <router>] [node <node>] [<verbo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`record-export-rate`](#show-stats-ipfix-record-export-rate) | Rate of records exported per unit time |
-| [`time-per-export`](#show-stats-ipfix-time-per-export) | Average time spent generating IPFIX records per record export |
-| [`time-per-session`](#show-stats-ipfix-time-per-session) | Average time spent generating IPFIX records per session in existence |
-| [`total-generation-time`](#show-stats-ipfix-total-generation-time) | Total time spent generating IPFIX records |
+| [`record-export-rate`](#show-stats-ipfix-record-export-rate) | Rate of records exported per unit time (records per second) |
+| [`time-per-export`](#show-stats-ipfix-time-per-export) | Average time spent generating IPFIX records per record export (us) |
+| [`time-per-session`](#show-stats-ipfix-time-per-session) | Average time spent generating IPFIX records per session in existence (us) |
+| [`total-generation-time`](#show-stats-ipfix-total-generation-time) | Total time spent generating IPFIX records (us) |
 | [`total-records`](#show-stats-ipfix-total-records) | Total number of records exported |
 
 ## `show stats ipfix record-export-rate`
 
-Rate of records exported per unit time
+Rate of records exported per unit time (records per second)
 
 #### Usage
 
@@ -16348,11 +16348,11 @@ show stats ipfix record-export-rate [since <since>] [force] [router <router>] [n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats ipfix time-per-export`
 
-Average time spent generating IPFIX records per record export
+Average time spent generating IPFIX records per record export (us)
 
 #### Usage
 
@@ -16373,11 +16373,11 @@ show stats ipfix time-per-export [since <since>] [force] [router <router>] [node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats ipfix time-per-session`
 
-Average time spent generating IPFIX records per session in existence
+Average time spent generating IPFIX records per session in existence (us)
 
 #### Usage
 
@@ -16398,11 +16398,11 @@ show stats ipfix time-per-session [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats ipfix total-generation-time`
 
-Total time spent generating IPFIX records
+Total time spent generating IPFIX records (us)
 
 #### Usage
 
@@ -16423,7 +16423,7 @@ show stats ipfix total-generation-time [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats ipfix total-records`
 
@@ -16448,7 +16448,7 @@ show stats ipfix total-records [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats memory`
 
@@ -16473,7 +16473,7 @@ show stats memory [since <since>] [force] [router <router>] [node <node>] [<verb
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -16486,7 +16486,7 @@ show stats memory [since <since>] [force] [router <router>] [node <node>] [<verb
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 
@@ -16513,13 +16513,13 @@ show stats memory capacity [since <since>] [force] [router <router>] [node <node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 
@@ -16546,13 +16546,13 @@ show stats memory used [since <since>] [force] [router <router>] [node <node>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show platform`](#show-platform) | Display platform information of nodes. |
+| [`show platform`](cli_reference.md#show-platform) | Display platform information of nodes. |
 | [`show stats cpu`](#show-stats-cpu) | CPU utilization information |
 | [`show stats disk`](#show-stats-disk) | Disk usage information |
 
@@ -16580,22 +16580,22 @@ show stats metrics [process <process>] [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`active-metrics`](#show-stats-metrics-active-metrics) | The number of metrics that exist in the process |
-| [`collections-pending`](#show-stats-metrics-collections-pending) | The number of metric aggregations pending |
-| [`collections-skipped`](#show-stats-metrics-collections-skipped) | The number of metric collections skipped for performance reasons. |
-| [`per-collection-latency`](#show-stats-metrics-per-collection-latency) | Time taken to gather all metrics per collection |
-| [`per-metric-latency`](#show-stats-metrics-per-metric-latency) | Amortized time taken per metric, per collection |
-| [`read-metric-latency`](#show-stats-metrics-read-metric-latency) | Amortized time take per metric per read |
+| [`active-metrics`](#show-stats-metrics-active-metrics) | The number of metrics that exist in the process (active metrics) |
+| [`collections-pending`](#show-stats-metrics-collections-pending) | The number of metric aggregations pending (pending aggregations) |
+| [`collections-skipped`](#show-stats-metrics-collections-skipped) | The number of metric collections skipped for performance reasons. (collection skips) |
+| [`per-collection-latency`](#show-stats-metrics-per-collection-latency) | Time taken to gather all metrics per collection (us) |
+| [`per-metric-latency`](#show-stats-metrics-per-metric-latency) | Amortized time taken per metric, per collection (us) |
+| [`read-metric-latency`](#show-stats-metrics-read-metric-latency) | Amortized time take per metric per read (us) |
 
 ## `show stats metrics active-metrics`
 
-The number of metrics that exist in the process
+The number of metrics that exist in the process (active metrics)
 
 #### Usage
 
@@ -16617,11 +16617,11 @@ show stats metrics active-metrics [process <process>] [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats metrics collections-pending`
 
-The number of metric aggregations pending
+The number of metric aggregations pending (pending aggregations)
 
 #### Usage
 
@@ -16643,11 +16643,11 @@ show stats metrics collections-pending [process <process>] [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats metrics collections-skipped`
 
-The number of metric collections skipped for performance reasons.
+The number of metric collections skipped for performance reasons. (collection skips)
 
 #### Usage
 
@@ -16669,11 +16669,11 @@ show stats metrics collections-skipped [process <process>] [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats metrics per-collection-latency`
 
-Time taken to gather all metrics per collection
+Time taken to gather all metrics per collection (us)
 
 #### Usage
 
@@ -16695,11 +16695,11 @@ show stats metrics per-collection-latency [process <process>] [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats metrics per-metric-latency`
 
-Amortized time taken per metric, per collection
+Amortized time taken per metric, per collection (us)
 
 #### Usage
 
@@ -16721,11 +16721,11 @@ show stats metrics per-metric-latency [process <process>] [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats metrics read-metric-latency`
 
-Amortized time take per metric per read
+Amortized time take per metric per read (us)
 
 #### Usage
 
@@ -16747,7 +16747,7 @@ show stats metrics read-metric-latency [process <process>] [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats mtu-discovery`
 
@@ -16772,7 +16772,7 @@ show stats mtu-discovery [since <since>] [force] [router <router>] [node <node>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -16809,7 +16809,7 @@ show stats mtu-discovery peer-path [peer-name <peer-name>] [peer-host <peer-host
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -16845,7 +16845,7 @@ show stats mtu-discovery peer-path received [peer-name <peer-name>] [peer-host <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats mtu-discovery peer-path sent`
 
@@ -16874,7 +16874,7 @@ show stats mtu-discovery peer-path sent [peer-name <peer-name>] [peer-host <peer
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -16911,7 +16911,7 @@ show stats mtu-discovery peer-path sent arp-failure [peer-name <peer-name>] [pee
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats mtu-discovery peer-path sent buffer-allocation-failure`
 
@@ -16940,7 +16940,7 @@ show stats mtu-discovery peer-path sent buffer-allocation-failure [peer-name <pe
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats mtu-discovery peer-path sent success`
 
@@ -16969,7 +16969,7 @@ show stats mtu-discovery peer-path sent success [peer-name <peer-name>] [peer-ho
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats mtu-discovery received`
 
@@ -16994,7 +16994,7 @@ show stats mtu-discovery received [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats mtu-discovery sent`
 
@@ -17019,7 +17019,7 @@ show stats mtu-discovery sent [since <since>] [force] [router <router>] [node <n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -17052,7 +17052,7 @@ show stats mtu-discovery sent arp-failure [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats mtu-discovery sent buffer-allocation-failure`
 
@@ -17077,7 +17077,7 @@ show stats mtu-discovery sent buffer-allocation-failure [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats mtu-discovery sent success`
 
@@ -17102,7 +17102,7 @@ show stats mtu-discovery sent success [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-capture`
 
@@ -17129,7 +17129,7 @@ show stats packet-capture [core <core>] [port <port>] [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -17142,9 +17142,9 @@ show stats packet-capture [core <core>] [port <port>] [since <since>] [force] [r
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
-| [`delete capture-filter`](#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
-| [`show capture-filters`](#show-capture-filters) | Show active capture-filters. |
+| [`create capture-filter`](cli_reference.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
+| [`delete capture-filter`](cli_reference.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
+| [`show capture-filters`](cli_reference.md#show-capture-filters) | Show active capture-filters. |
 
 ## `show stats packet-capture success`
 
@@ -17171,15 +17171,15 @@ show stats packet-capture success [core <core>] [port <port>] [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
-| [`delete capture-filter`](#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
-| [`show capture-filters`](#show-capture-filters) | Show active capture-filters. |
+| [`create capture-filter`](cli_reference.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
+| [`delete capture-filter`](cli_reference.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
+| [`show capture-filters`](cli_reference.md#show-capture-filters) | Show active capture-filters. |
 
 ## `show stats packet-capture write-failure`
 
@@ -17206,15 +17206,15 @@ show stats packet-capture write-failure [core <core>] [port <port>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`create capture-filter`](#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
-| [`delete capture-filter`](#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
-| [`show capture-filters`](#show-capture-filters) | Show active capture-filters. |
+| [`create capture-filter`](cli_reference.md#create-capture-filter) | Creates a capture-filter using BPF syntax (as used in wireshark) on the target interface. |
+| [`delete capture-filter`](cli_reference.md#delete-capture-filter) | Deletes a capture-filter created using create capture-filter. (It will not delete filters committed as part of the configuration.) |
+| [`show capture-filters`](cli_reference.md#show-capture-filters) | Show active capture-filters. |
 
 ## `show stats packet-processing`
 
@@ -17240,7 +17240,7 @@ show stats packet-processing [core <core>] [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -17281,7 +17281,7 @@ show stats packet-processing action [core <core>] [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -17314,7 +17314,7 @@ show stats packet-processing action failure [core <core>] [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -17337,6 +17337,7 @@ show stats packet-processing action failure [core <core>] [since <since>] [force
 | [`tcp-proxy`](#show-stats-packet-processing-action-failure-tcp-proxy) | Statistics for &#x27;tcp-proxy&#x27; |
 | [`tcp-state`](#show-stats-packet-processing-action-failure-tcp-state) | Statistics for &#x27;tcp-state&#x27; |
 | [`ttl-validate`](#show-stats-packet-processing-action-failure-ttl-validate) | The number of packets dropped due to expired TTL |
+| [`tunnel`](#show-stats-packet-processing-action-failure-tunnel) | Statistics for &#x27;tunnel&#x27; |
 | [`udp-transform`](#show-stats-packet-processing-action-failure-udp-transform) | Statistics for &#x27;udp-transform&#x27; |
 
 ## `show stats packet-processing action failure aes`
@@ -17364,7 +17365,7 @@ show stats packet-processing action failure aes [core <core>] [port <port>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -17409,7 +17410,7 @@ show stats packet-processing action failure aes data-normalization [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes decryption-exception`
 
@@ -17436,7 +17437,7 @@ show stats packet-processing action failure aes decryption-exception [core <core
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes encryption-exception`
 
@@ -17463,7 +17464,7 @@ show stats packet-processing action failure aes encryption-exception [core <core
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes get-data-length`
 
@@ -17490,7 +17491,7 @@ show stats packet-processing action failure aes get-data-length [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes iv-append`
 
@@ -17517,7 +17518,7 @@ show stats packet-processing action failure aes iv-append [core <core>] [port <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes iv-generation`
 
@@ -17544,7 +17545,7 @@ show stats packet-processing action failure aes iv-generation [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes iv-seed`
 
@@ -17571,7 +17572,7 @@ show stats packet-processing action failure aes iv-seed [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes metadata-decryption`
 
@@ -17598,7 +17599,7 @@ show stats packet-processing action failure aes metadata-decryption [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes metadata-encryption`
 
@@ -17625,7 +17626,7 @@ show stats packet-processing action failure aes metadata-encryption [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes no-context-found`
 
@@ -17652,7 +17653,7 @@ show stats packet-processing action failure aes no-context-found [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes payload-decryption`
 
@@ -17679,7 +17680,7 @@ show stats packet-processing action failure aes payload-decryption [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes payload-encryption`
 
@@ -17706,7 +17707,7 @@ show stats packet-processing action failure aes payload-encryption [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure aes set-data-length`
 
@@ -17733,7 +17734,7 @@ show stats packet-processing action failure aes set-data-length [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure bfd`
 
@@ -17760,7 +17761,7 @@ show stats packet-processing action failure bfd [core <core>] [port <port>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -17806,7 +17807,7 @@ show stats packet-processing action failure bfd decode [core <core>] [port <port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -17840,7 +17841,7 @@ show stats packet-processing action failure bfd echo-init [core <core>] [port <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -17874,7 +17875,7 @@ show stats packet-processing action failure bfd empty-metadata [core <core>] [po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -17908,7 +17909,7 @@ show stats packet-processing action failure bfd empty-payload [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -17942,7 +17943,7 @@ show stats packet-processing action failure bfd fragmented-mtu-discovery [core <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -17976,7 +17977,7 @@ show stats packet-processing action failure bfd invalid-header [core <core>] [po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -18010,7 +18011,7 @@ show stats packet-processing action failure bfd metadata-parse [core <core>] [po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -18043,7 +18044,7 @@ show stats packet-processing action failure dpi [core <core>] [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -18075,7 +18076,7 @@ show stats packet-processing action failure dpi ftp [core <core>] [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -18110,7 +18111,7 @@ show stats packet-processing action failure dpi ftp parse-failed [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure dpi ftp pinhole-miss`
 
@@ -18137,7 +18138,7 @@ show stats packet-processing action failure dpi ftp pinhole-miss [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure dpi ftp pinhole-timeout`
 
@@ -18163,7 +18164,7 @@ show stats packet-processing action failure dpi ftp pinhole-timeout [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure ethernet-header-transform`
 
@@ -18190,7 +18191,7 @@ show stats packet-processing action failure ethernet-header-transform [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -18224,7 +18225,7 @@ show stats packet-processing action failure ethernet-header-transform arp-table-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure ethernet-header-transform packet-expansion`
 
@@ -18251,7 +18252,7 @@ show stats packet-processing action failure ethernet-header-transform packet-exp
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure flow-move`
 
@@ -18278,7 +18279,7 @@ show stats packet-processing action failure flow-move [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -18311,7 +18312,7 @@ show stats packet-processing action failure flow-move disable-forward-metadata-d
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure hmac`
 
@@ -18338,7 +18339,7 @@ show stats packet-processing action failure hmac [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -18347,6 +18348,7 @@ show stats packet-processing action failure hmac [core <core>] [port <port>] [si
 | [`allocation`](#show-stats-packet-processing-action-failure-hmac-allocation) | The number of packets dropped because the memory for the HMAC could not be allocated |
 | [`cannot-find-digest`](#show-stats-packet-processing-action-failure-hmac-cannot-find-digest) | The number of packets dropped because the HMAC digest could not be found |
 | [`context-not-found`](#show-stats-packet-processing-action-failure-hmac-context-not-found) | The number of packets dropped because the HMAC context could not be found |
+| [`context-reinitialized`](#show-stats-packet-processing-action-failure-hmac-context-reinitialized) | The number of times the HMAC context was reinitialized due to successive failures |
 | [`digest-calculation`](#show-stats-packet-processing-action-failure-hmac-digest-calculation) | The number of packets dropped due to a HMAC digest calculation failure |
 | [`digest-compare`](#show-stats-packet-processing-action-failure-hmac-digest-compare) | The number of packets dropped because the HMAC digest didn&#x27;t match the calculated value |
 | [`opposite-flow-not-found`](#show-stats-packet-processing-action-failure-hmac-opposite-flow-not-found) | The number of enable-metadata packets dropped because the opposite flow could not be found |
@@ -18376,7 +18378,7 @@ show stats packet-processing action failure hmac allocation [core <core>] [port 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure hmac cannot-find-digest`
 
@@ -18403,7 +18405,7 @@ show stats packet-processing action failure hmac cannot-find-digest [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure hmac context-not-found`
 
@@ -18430,7 +18432,34 @@ show stats packet-processing action failure hmac context-not-found [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure hmac context-reinitialized`
+
+The number of times the HMAC context was reinitialized due to successive failures
+
+#### Usage
+
+```
+show stats packet-processing action failure hmac context-reinitialized [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure hmac digest-calculation`
 
@@ -18457,7 +18486,7 @@ show stats packet-processing action failure hmac digest-calculation [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure hmac digest-compare`
 
@@ -18484,7 +18513,7 @@ show stats packet-processing action failure hmac digest-compare [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure hmac opposite-flow-not-found`
 
@@ -18511,7 +18540,7 @@ show stats packet-processing action failure hmac opposite-flow-not-found [core <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure ip-header-transform`
 
@@ -18538,7 +18567,7 @@ show stats packet-processing action failure ip-header-transform [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -18573,7 +18602,7 @@ show stats packet-processing action failure ip-header-transform icmp-translation
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure ip-header-transform ipv6-to-ipv4-mapping`
 
@@ -18600,7 +18629,7 @@ show stats packet-processing action failure ip-header-transform ipv6-to-ipv4-map
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure ip-header-transform l4-translation`
 
@@ -18627,7 +18656,7 @@ show stats packet-processing action failure ip-header-transform l4-translation [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure keep-alive`
 
@@ -18654,7 +18683,7 @@ show stats packet-processing action failure keep-alive [core <core>] [port <port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -18687,7 +18716,7 @@ show stats packet-processing action failure keep-alive buffer-allocation [core <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata`
 
@@ -18714,7 +18743,7 @@ show stats packet-processing action failure metadata [core <core>] [port <port>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -18756,7 +18785,7 @@ show stats packet-processing action failure metadata add [core <core>] [port <po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata cached-attributes-not-found`
 
@@ -18783,7 +18812,7 @@ show stats packet-processing action failure metadata cached-attributes-not-found
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata enable-metadata-flow-miss`
 
@@ -18810,7 +18839,7 @@ show stats packet-processing action failure metadata enable-metadata-flow-miss [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata get-length`
 
@@ -18837,7 +18866,7 @@ show stats packet-processing action failure metadata get-length [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata invalid-type`
 
@@ -18864,7 +18893,7 @@ show stats packet-processing action failure metadata invalid-type [core <core>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata invalidate-for-enable-metadata`
 
@@ -18891,7 +18920,7 @@ show stats packet-processing action failure metadata invalidate-for-enable-metad
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata not-present`
 
@@ -18918,7 +18947,7 @@ show stats packet-processing action failure metadata not-present [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata received-unknown-forced-drop-reason`
 
@@ -18945,7 +18974,7 @@ show stats packet-processing action failure metadata received-unknown-forced-dro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata reverse-buffer-allocation`
 
@@ -18972,7 +19001,7 @@ show stats packet-processing action failure metadata reverse-buffer-allocation [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure metadata turn-off-buffer-allocation`
 
@@ -18999,7 +19028,7 @@ show stats packet-processing action failure metadata turn-off-buffer-allocation 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure multiplexor`
 
@@ -19026,7 +19055,7 @@ show stats packet-processing action failure multiplexor [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -19059,7 +19088,7 @@ show stats packet-processing action failure multiplexor untag-discards [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure padding`
 
@@ -19086,7 +19115,7 @@ show stats packet-processing action failure padding [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -19119,7 +19148,7 @@ show stats packet-processing action failure padding invalid-packet-length [core 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure path-metrics`
 
@@ -19146,7 +19175,7 @@ show stats packet-processing action failure path-metrics [core <core>] [port <po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -19180,7 +19209,7 @@ show stats packet-processing action failure path-metrics sent-correlated-data [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure path-metrics sent-unidirectional-reply`
 
@@ -19207,7 +19236,7 @@ show stats packet-processing action failure path-metrics sent-unidirectional-rep
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure rate-limit-check`
 
@@ -19234,7 +19263,7 @@ show stats packet-processing action failure rate-limit-check [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -19268,7 +19297,7 @@ show stats packet-processing action failure rate-limit-check flow-rate-exceeded 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure rate-limit-check shared-rate-exceeded`
 
@@ -19295,7 +19324,7 @@ show stats packet-processing action failure rate-limit-check shared-rate-exceede
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure retransmission-handler`
 
@@ -19322,7 +19351,7 @@ show stats packet-processing action failure retransmission-handler [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -19361,7 +19390,7 @@ show stats packet-processing action failure retransmission-handler buffer-alloca
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure retransmission-handler capacity-exceeded`
 
@@ -19388,7 +19417,7 @@ show stats packet-processing action failure retransmission-handler capacity-exce
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure retransmission-handler deleted-flow-discards`
 
@@ -19415,7 +19444,7 @@ show stats packet-processing action failure retransmission-handler deleted-flow-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure retransmission-handler invalid-acknowledgement-attribute`
 
@@ -19442,7 +19471,7 @@ show stats packet-processing action failure retransmission-handler invalid-ackno
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure retransmission-handler invalid-packet-length`
 
@@ -19469,7 +19498,7 @@ show stats packet-processing action failure retransmission-handler invalid-packe
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure retransmission-handler reclassify`
 
@@ -19496,7 +19525,7 @@ show stats packet-processing action failure retransmission-handler reclassify [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure retransmission-handler timeout-discards`
 
@@ -19523,7 +19552,7 @@ show stats packet-processing action failure retransmission-handler timeout-disca
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure tcp-proxy`
 
@@ -19550,7 +19579,7 @@ show stats packet-processing action failure tcp-proxy [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -19585,7 +19614,7 @@ show stats packet-processing action failure tcp-proxy buffer-allocation [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure tcp-proxy inbound-discards`
 
@@ -19612,7 +19641,7 @@ show stats packet-processing action failure tcp-proxy inbound-discards [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure tcp-proxy sessions-timed-out`
 
@@ -19639,7 +19668,7 @@ show stats packet-processing action failure tcp-proxy sessions-timed-out [core <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure tcp-state`
 
@@ -19666,7 +19695,7 @@ show stats packet-processing action failure tcp-state [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -19700,7 +19729,7 @@ show stats packet-processing action failure tcp-state illegal-flag-combination [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure tcp-state invalid-state-transition`
 
@@ -19727,7 +19756,7 @@ show stats packet-processing action failure tcp-state invalid-state-transition [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure ttl-validate`
 
@@ -19902,7 +19931,7 @@ show stats packet-processing action failure udp-transform [core <core>] [port <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -19936,7 +19965,7 @@ show stats packet-processing action failure udp-transform layer2-decapsulated [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action failure udp-transform layer2-encapsulated`
 
@@ -19963,7 +19992,7 @@ show stats packet-processing action failure udp-transform layer2-encapsulated [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success`
 
@@ -19989,7 +20018,7 @@ show stats packet-processing action success [core <core>] [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -20016,6 +20045,7 @@ show stats packet-processing action success [core <core>] [since <since>] [force
 | [`tcp-proxy`](#show-stats-packet-processing-action-success-tcp-proxy) | Statistics for &#x27;tcp-proxy&#x27; |
 | [`tcp-state`](#show-stats-packet-processing-action-success-tcp-state) | Number of packets validated by the TCP state machine |
 | [`ttl-validate`](#show-stats-packet-processing-action-success-ttl-validate) | The number of packets with valid TTL |
+| [`tunnel`](#show-stats-packet-processing-action-success-tunnel) | Statistics for &#x27;tunnel&#x27; |
 | [`udp-transform`](#show-stats-packet-processing-action-success-udp-transform) | Statistics for &#x27;udp-transform&#x27; |
 
 ## `show stats packet-processing action success aes`
@@ -20043,7 +20073,7 @@ show stats packet-processing action success aes [core <core>] [port <port>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -20082,7 +20112,7 @@ show stats packet-processing action success aes metadata-decryption [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success aes metadata-encryption`
 
@@ -20109,7 +20139,7 @@ show stats packet-processing action success aes metadata-encryption [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success aes metadata-false-positive-detected`
 
@@ -20136,7 +20166,7 @@ show stats packet-processing action success aes metadata-false-positive-detected
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success aes no-metadata`
 
@@ -20163,7 +20193,7 @@ show stats packet-processing action success aes no-metadata [core <core>] [port 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success aes no-payload`
 
@@ -20190,7 +20220,7 @@ show stats packet-processing action success aes no-payload [core <core>] [port <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success aes payload-decryption`
 
@@ -20217,7 +20247,7 @@ show stats packet-processing action success aes payload-decryption [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success aes payload-encryption`
 
@@ -20244,7 +20274,7 @@ show stats packet-processing action success aes payload-encryption [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success bfd`
 
@@ -20271,7 +20301,7 @@ show stats packet-processing action success bfd [core <core>] [port <port>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -20316,7 +20346,7 @@ show stats packet-processing action success bfd async-discarded [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -20350,7 +20380,7 @@ show stats packet-processing action success bfd async-processed [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -20384,7 +20414,7 @@ show stats packet-processing action success bfd echo-request-processed [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -20418,7 +20448,7 @@ show stats packet-processing action success bfd echo-response-processed [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -20452,7 +20482,7 @@ show stats packet-processing action success bfd mtu-discovery-requests [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -20486,7 +20516,7 @@ show stats packet-processing action success bfd remote-session-requested [core <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
@@ -20520,7 +20550,7 @@ show stats packet-processing action success detour [core <core>] [port <port>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi`
 
@@ -20546,7 +20576,7 @@ show stats packet-processing action success dpi [core <core>] [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -20583,7 +20613,7 @@ show stats packet-processing action success dpi diverted-for-encryption [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi ftp`
 
@@ -20609,7 +20639,7 @@ show stats packet-processing action success dpi ftp [core <core>] [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -20645,7 +20675,7 @@ show stats packet-processing action success dpi ftp data-port-detected [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi ftp pinhole-closed`
 
@@ -20671,7 +20701,7 @@ show stats packet-processing action success dpi ftp pinhole-closed [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi ftp pinhole-hit`
 
@@ -20698,7 +20728,7 @@ show stats packet-processing action success dpi ftp pinhole-hit [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi ftp pinhole-opened`
 
@@ -20724,7 +20754,7 @@ show stats packet-processing action success dpi ftp pinhole-opened [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi http`
 
@@ -20751,7 +20781,7 @@ show stats packet-processing action success dpi http [core <core>] [port <port>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -20785,7 +20815,7 @@ show stats packet-processing action success dpi http copied-for-domain-learning 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi http diverted-for-domain-reclassification`
 
@@ -20812,7 +20842,7 @@ show stats packet-processing action success dpi http diverted-for-domain-reclass
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi tls`
 
@@ -20839,7 +20869,7 @@ show stats packet-processing action success dpi tls [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -20875,7 +20905,7 @@ show stats packet-processing action success dpi tls client-hello [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi tls copied-for-domain-learning`
 
@@ -20902,7 +20932,7 @@ show stats packet-processing action success dpi tls copied-for-domain-learning [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi tls diverted-for-domain-reclassification`
 
@@ -20929,7 +20959,7 @@ show stats packet-processing action success dpi tls diverted-for-domain-reclassi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi tls server-certificate`
 
@@ -20956,7 +20986,7 @@ show stats packet-processing action success dpi tls server-certificate [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success dpi unencrypted`
 
@@ -20983,7 +21013,7 @@ show stats packet-processing action success dpi unencrypted [core <core>] [port 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success drop`
 
@@ -21010,7 +21040,7 @@ show stats packet-processing action success drop [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success duplicate-detector`
 
@@ -21037,7 +21067,7 @@ show stats packet-processing action success duplicate-detector [core <core>] [po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -21071,7 +21101,7 @@ show stats packet-processing action success duplicate-detector allow [core <core
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success duplicate-detector deny`
 
@@ -21098,7 +21128,7 @@ show stats packet-processing action success duplicate-detector deny [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success ethernet-header-transform`
 
@@ -21125,7 +21155,7 @@ show stats packet-processing action success ethernet-header-transform [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success flow-move`
 
@@ -21152,7 +21182,7 @@ show stats packet-processing action success flow-move [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -21186,7 +21216,7 @@ show stats packet-processing action success flow-move detected [core <core>] [po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success flow-move packets-enqueued`
 
@@ -21213,7 +21243,7 @@ show stats packet-processing action success flow-move packets-enqueued [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success forward`
 
@@ -21240,7 +21270,7 @@ show stats packet-processing action success forward [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -21273,7 +21303,7 @@ show stats packet-processing action success forward to-wire [core <core>] [port 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success hmac`
 
@@ -21300,7 +21330,7 @@ show stats packet-processing action success hmac [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -21337,7 +21367,7 @@ show stats packet-processing action success hmac append-no-payload [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success hmac digest-added`
 
@@ -21364,7 +21394,7 @@ show stats packet-processing action success hmac digest-added [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success hmac digest-removed`
 
@@ -21391,7 +21421,7 @@ show stats packet-processing action success hmac digest-removed [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success hmac not-required`
 
@@ -21418,7 +21448,7 @@ show stats packet-processing action success hmac not-required [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success hmac validate-no-payload`
 
@@ -21445,7 +21475,7 @@ show stats packet-processing action success hmac validate-no-payload [core <core
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success ip-header-transform`
 
@@ -21472,7 +21502,7 @@ show stats packet-processing action success ip-header-transform [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success keep-alive`
 
@@ -21498,7 +21528,7 @@ show stats packet-processing action success keep-alive [core <core>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -21534,7 +21564,7 @@ show stats packet-processing action success keep-alive sent-tcp [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success keep-alive sent-udp`
 
@@ -21561,7 +21591,7 @@ show stats packet-processing action success keep-alive sent-udp [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success keep-alive sessions-closed`
 
@@ -21587,7 +21617,7 @@ show stats packet-processing action success keep-alive sessions-closed [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success keep-alive sessions-opened`
 
@@ -21613,7 +21643,7 @@ show stats packet-processing action success keep-alive sessions-opened [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata`
 
@@ -21640,7 +21670,7 @@ show stats packet-processing action success metadata [core <core>] [port <port>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -21687,7 +21717,7 @@ show stats packet-processing action success metadata add-false-positive-correcti
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata add-not-required`
 
@@ -21714,7 +21744,7 @@ show stats packet-processing action success metadata add-not-required [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata added`
 
@@ -21741,7 +21771,7 @@ show stats packet-processing action success metadata added [core <core>] [port <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata inline-modify`
 
@@ -21768,7 +21798,7 @@ show stats packet-processing action success metadata inline-modify [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -21803,7 +21833,7 @@ show stats packet-processing action success metadata inline-modify detected [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata inline-modify request-sent`
 
@@ -21830,7 +21860,7 @@ show stats packet-processing action success metadata inline-modify request-sent 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata inline-modify response-sent`
 
@@ -21857,7 +21887,7 @@ show stats packet-processing action success metadata inline-modify response-sent
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata invalidate-for-enable-metadata`
 
@@ -21884,7 +21914,7 @@ show stats packet-processing action success metadata invalidate-for-enable-metad
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata propagate-not-required`
 
@@ -21911,7 +21941,7 @@ show stats packet-processing action success metadata propagate-not-required [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata received-disable-forward-metadata`
 
@@ -21938,7 +21968,7 @@ show stats packet-processing action success metadata received-disable-forward-me
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata received-enable-metadata`
 
@@ -21965,7 +21995,7 @@ show stats packet-processing action success metadata received-enable-metadata [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata received-keep-alive`
 
@@ -21992,7 +22022,7 @@ show stats packet-processing action success metadata received-keep-alive [core <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata remove-false-positive-correction`
 
@@ -22019,7 +22049,7 @@ show stats packet-processing action success metadata remove-false-positive-corre
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata remove-not-required`
 
@@ -22046,7 +22076,7 @@ show stats packet-processing action success metadata remove-not-required [core <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata removed`
 
@@ -22073,7 +22103,7 @@ show stats packet-processing action success metadata removed [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata right-lane-sent`
 
@@ -22100,7 +22130,7 @@ show stats packet-processing action success metadata right-lane-sent [core <core
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata sent-disable-forward-metadata`
 
@@ -22127,7 +22157,7 @@ show stats packet-processing action success metadata sent-disable-forward-metada
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success metadata updated`
 
@@ -22154,7 +22184,7 @@ show stats packet-processing action success metadata updated [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success multiplexor`
 
@@ -22181,7 +22211,7 @@ show stats packet-processing action success multiplexor [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -22215,7 +22245,7 @@ show stats packet-processing action success multiplexor tagged [core <core>] [po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success multiplexor untagged`
 
@@ -22242,7 +22272,7 @@ show stats packet-processing action success multiplexor untagged [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success padding`
 
@@ -22269,7 +22299,7 @@ show stats packet-processing action success padding [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -22303,7 +22333,7 @@ show stats packet-processing action success padding added [core <core>] [port <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success padding removed`
 
@@ -22330,7 +22360,7 @@ show stats packet-processing action success padding removed [core <core>] [port 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success path-metrics`
 
@@ -22357,7 +22387,7 @@ show stats packet-processing action success path-metrics [core <core>] [port <po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -22397,7 +22427,7 @@ show stats packet-processing action success path-metrics add-not-required [core 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success path-metrics remove-dropped`
 
@@ -22424,7 +22454,7 @@ show stats packet-processing action success path-metrics remove-dropped [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success path-metrics remove-not-present`
 
@@ -22451,7 +22481,7 @@ show stats packet-processing action success path-metrics remove-not-present [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success path-metrics removed`
 
@@ -22478,7 +22508,7 @@ show stats packet-processing action success path-metrics removed [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success path-metrics sent-correlated-data`
 
@@ -22505,7 +22535,7 @@ show stats packet-processing action success path-metrics sent-correlated-data [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success path-metrics sent-unidirectional-reply`
 
@@ -22532,7 +22562,7 @@ show stats packet-processing action success path-metrics sent-unidirectional-rep
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success path-metrics with-metadata-added`
 
@@ -22559,7 +22589,7 @@ show stats packet-processing action success path-metrics with-metadata-added [co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success path-metrics without-metadata-added`
 
@@ -22586,7 +22616,7 @@ show stats packet-processing action success path-metrics without-metadata-added 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success rate-limit-check`
 
@@ -22613,7 +22643,7 @@ show stats packet-processing action success rate-limit-check [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler`
 
@@ -22639,7 +22669,7 @@ show stats packet-processing action success retransmission-handler [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -22682,7 +22712,7 @@ show stats packet-processing action success retransmission-handler accepted [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler acknowledged`
 
@@ -22709,7 +22739,7 @@ show stats packet-processing action success retransmission-handler acknowledged 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler acknowledgement-received`
 
@@ -22736,7 +22766,7 @@ show stats packet-processing action success retransmission-handler acknowledgeme
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler acknowledgement-sent`
 
@@ -22763,7 +22793,7 @@ show stats packet-processing action success retransmission-handler acknowledgeme
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler bypassed`
 
@@ -22790,7 +22820,7 @@ show stats packet-processing action success retransmission-handler bypassed [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler cached`
 
@@ -22817,7 +22847,7 @@ show stats packet-processing action success retransmission-handler cached [core 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler duplicate-discards`
 
@@ -22844,7 +22874,7 @@ show stats packet-processing action success retransmission-handler duplicate-dis
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler outstanding-retransmission-packets`
 
@@ -22870,7 +22900,7 @@ show stats packet-processing action success retransmission-handler outstanding-r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler retransmissions-sent`
 
@@ -22897,7 +22927,7 @@ show stats packet-processing action success retransmission-handler retransmissio
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler sessions-closed`
 
@@ -22923,7 +22953,7 @@ show stats packet-processing action success retransmission-handler sessions-clos
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success retransmission-handler sessions-opened`
 
@@ -22949,7 +22979,7 @@ show stats packet-processing action success retransmission-handler sessions-open
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy`
 
@@ -22975,7 +23005,7 @@ show stats packet-processing action success tcp-proxy [core <core>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -23017,7 +23047,7 @@ show stats packet-processing action success tcp-proxy acknowledgement-received [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy acknowledgement-sent`
 
@@ -23044,7 +23074,7 @@ show stats packet-processing action success tcp-proxy acknowledgement-sent [core
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy data-packets-transmitted`
 
@@ -23071,7 +23101,7 @@ show stats packet-processing action success tcp-proxy data-packets-transmitted [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy data-transmitted`
 
@@ -23098,7 +23128,7 @@ show stats packet-processing action success tcp-proxy data-transmitted [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy outstanding-proxy-packets`
 
@@ -23124,7 +23154,7 @@ show stats packet-processing action success tcp-proxy outstanding-proxy-packets 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy retransmissions-sent`
 
@@ -23151,7 +23181,7 @@ show stats packet-processing action success tcp-proxy retransmissions-sent [core
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy retransmitted-data-sent`
 
@@ -23178,7 +23208,7 @@ show stats packet-processing action success tcp-proxy retransmitted-data-sent [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy sessions-closed`
 
@@ -23204,7 +23234,7 @@ show stats packet-processing action success tcp-proxy sessions-closed [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy sessions-opened`
 
@@ -23230,7 +23260,7 @@ show stats packet-processing action success tcp-proxy sessions-opened [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-proxy sessions-reset`
 
@@ -23257,7 +23287,7 @@ show stats packet-processing action success tcp-proxy sessions-reset [core <core
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success tcp-state`
 
@@ -23284,7 +23314,7 @@ show stats packet-processing action success tcp-state [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success ttl-validate`
 
@@ -23459,7 +23489,7 @@ show stats packet-processing action success udp-transform [core <core>] [port <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -23501,7 +23531,7 @@ show stats packet-processing action success udp-transform decapsulated [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform encapsulated`
 
@@ -23528,7 +23558,7 @@ show stats packet-processing action success udp-transform encapsulated [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform icmp-payload-decapsulated`
 
@@ -23555,7 +23585,7 @@ show stats packet-processing action success udp-transform icmp-payload-decapsula
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform icmp-payload-encapsulated`
 
@@ -23582,7 +23612,7 @@ show stats packet-processing action success udp-transform icmp-payload-encapsula
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform icmp-payload-tcp-decoded`
 
@@ -23609,7 +23639,7 @@ show stats packet-processing action success udp-transform icmp-payload-tcp-decod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform icmp-payload-tcp-encoded`
 
@@ -23636,7 +23666,7 @@ show stats packet-processing action success udp-transform icmp-payload-tcp-encod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform layer2-decapsulated`
 
@@ -23663,7 +23693,7 @@ show stats packet-processing action success udp-transform layer2-decapsulated [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform layer2-encapsulated`
 
@@ -23690,7 +23720,7 @@ show stats packet-processing action success udp-transform layer2-encapsulated [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform tcp-decoded`
 
@@ -23717,7 +23747,7 @@ show stats packet-processing action success udp-transform tcp-decoded [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing action success udp-transform tcp-encoded`
 
@@ -23744,7 +23774,7 @@ show stats packet-processing action success udp-transform tcp-encoded [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier`
 
@@ -23771,7 +23801,7 @@ show stats packet-processing classifier [core <core>] [port <port>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -23805,7 +23835,7 @@ show stats packet-processing classifier received [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -23938,7 +23968,7 @@ show stats packet-processing classifier received broadcast-mac-allowed [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received broadcast-mac-discards`
 
@@ -23965,7 +23995,7 @@ show stats packet-processing classifier received broadcast-mac-discards [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received dhcp`
 
@@ -23992,7 +24022,7 @@ show stats packet-processing classifier received dhcp [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received dhcpv6`
 
@@ -24019,7 +24049,7 @@ show stats packet-processing classifier received dhcpv6 [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received discards`
 
@@ -24046,7 +24076,7 @@ show stats packet-processing classifier received discards [core <core>] [port <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received exception`
 
@@ -24073,7 +24103,7 @@ show stats packet-processing classifier received exception [core <core>] [port <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received fragmented-icmp-discards`
 
@@ -24100,7 +24130,7 @@ show stats packet-processing classifier received fragmented-icmp-discards [core 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received fragmented-icmpv6-discards`
 
@@ -24181,7 +24211,7 @@ show stats packet-processing classifier received icmp [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received icmp-ttl-discards`
 
@@ -24208,7 +24238,7 @@ show stats packet-processing classifier received icmp-ttl-discards [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received icmp-unknown-type-discards`
 
@@ -24235,7 +24265,7 @@ show stats packet-processing classifier received icmp-unknown-type-discards [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received icmpv6`
 
@@ -24262,7 +24292,7 @@ show stats packet-processing classifier received icmpv6 [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received icmpv6-hop-limit-discards`
 
@@ -24289,7 +24319,7 @@ show stats packet-processing classifier received icmpv6-hop-limit-discards [core
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received icmpv6-link-local-discards`
 
@@ -24316,7 +24346,7 @@ show stats packet-processing classifier received icmpv6-link-local-discards [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received icmpv6-unknown-type-discards`
 
@@ -24343,7 +24373,7 @@ show stats packet-processing classifier received icmpv6-unknown-type-discards [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received igmp`
 
@@ -24370,7 +24400,7 @@ show stats packet-processing classifier received igmp [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -24408,7 +24438,7 @@ show stats packet-processing classifier received igmp invalid [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received igmp leave`
 
@@ -24435,7 +24465,7 @@ show stats packet-processing classifier received igmp leave [core <core>] [port 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received igmp query`
 
@@ -24462,7 +24492,7 @@ show stats packet-processing classifier received igmp query [core <core>] [port 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received igmp report`
 
@@ -24489,7 +24519,7 @@ show stats packet-processing classifier received igmp report [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received igmp report-v3`
 
@@ -24516,7 +24546,7 @@ show stats packet-processing classifier received igmp report-v3 [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received igmp total`
 
@@ -24543,7 +24573,7 @@ show stats packet-processing classifier received igmp total [core <core>] [port 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received invalid-header-length`
 
@@ -24570,7 +24600,7 @@ show stats packet-processing classifier received invalid-header-length [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received invalid-ipv6`
 
@@ -24597,7 +24627,7 @@ show stats packet-processing classifier received invalid-ipv6 [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received invalid-length`
 
@@ -24624,7 +24654,7 @@ show stats packet-processing classifier received invalid-length [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received ipv4`
 
@@ -24651,7 +24681,7 @@ show stats packet-processing classifier received ipv4 [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received ipv4-fabric-fragmented`
 
@@ -24678,7 +24708,7 @@ show stats packet-processing classifier received ipv4-fabric-fragmented [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received ipv4-fragmented`
 
@@ -24705,7 +24735,7 @@ show stats packet-processing classifier received ipv4-fragmented [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received ipv6`
 
@@ -24732,7 +24762,7 @@ show stats packet-processing classifier received ipv6 [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received ipv6-fabric-fragmented`
 
@@ -24759,7 +24789,7 @@ show stats packet-processing classifier received ipv6-fabric-fragmented [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received ipv6-fragmented`
 
@@ -24786,7 +24816,7 @@ show stats packet-processing classifier received ipv6-fragmented [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received is-is`
 
@@ -24813,7 +24843,7 @@ show stats packet-processing classifier received is-is [core <core>] [port <port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received lacp`
 
@@ -24894,7 +24924,7 @@ show stats packet-processing classifier received ndp [core <core>] [port <port>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received non-ip-protocol-allowed`
 
@@ -24921,7 +24951,7 @@ show stats packet-processing classifier received non-ip-protocol-allowed [core <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received ospf`
 
@@ -24948,7 +24978,7 @@ show stats packet-processing classifier received ospf [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received other-layer-4-protocol`
 
@@ -24975,7 +25005,7 @@ show stats packet-processing classifier received other-layer-4-protocol [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received q-in-q`
 
@@ -25002,7 +25032,7 @@ show stats packet-processing classifier received q-in-q [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received router-advertisement`
 
@@ -25029,7 +25059,7 @@ show stats packet-processing classifier received router-advertisement [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received sctp`
 
@@ -25056,7 +25086,7 @@ show stats packet-processing classifier received sctp [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received spanning-tree-discards`
 
@@ -25083,7 +25113,7 @@ show stats packet-processing classifier received spanning-tree-discards [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received tcp`
 
@@ -25110,7 +25140,7 @@ show stats packet-processing classifier received tcp [core <core>] [port <port>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received total`
 
@@ -25137,7 +25167,7 @@ show stats packet-processing classifier received total [core <core>] [port <port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received tunnel`
 
@@ -25164,7 +25194,7 @@ show stats packet-processing classifier received tunnel [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received udp`
 
@@ -25245,7 +25275,7 @@ show stats packet-processing classifier received unknown-layer-3-protocol-discar
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received vlan`
 
@@ -25272,7 +25302,7 @@ show stats packet-processing classifier received vlan [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier received vrrp`
 
@@ -25299,7 +25329,7 @@ show stats packet-processing classifier received vrrp [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent`
 
@@ -25326,7 +25356,7 @@ show stats packet-processing classifier sent [core <core>] [port <port>] [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -25443,7 +25473,7 @@ show stats packet-processing classifier sent dhcp [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent dhcpv6`
 
@@ -25524,7 +25554,7 @@ show stats packet-processing classifier sent icmp [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent icmpv6`
 
@@ -25551,7 +25581,7 @@ show stats packet-processing classifier sent icmpv6 [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent igmp`
 
@@ -25578,7 +25608,7 @@ show stats packet-processing classifier sent igmp [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent ipv4`
 
@@ -25605,7 +25635,7 @@ show stats packet-processing classifier sent ipv4 [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent ipv4-fabric-fragmented`
 
@@ -25632,7 +25662,7 @@ show stats packet-processing classifier sent ipv4-fabric-fragmented [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent ipv4-fragmented`
 
@@ -25659,7 +25689,7 @@ show stats packet-processing classifier sent ipv4-fragmented [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent ipv6`
 
@@ -25686,7 +25716,7 @@ show stats packet-processing classifier sent ipv6 [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent ipv6-fabric-fragmented`
 
@@ -25713,7 +25743,7 @@ show stats packet-processing classifier sent ipv6-fabric-fragmented [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent ipv6-fragmented`
 
@@ -25740,7 +25770,7 @@ show stats packet-processing classifier sent ipv6-fragmented [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent is-is`
 
@@ -25767,7 +25797,7 @@ show stats packet-processing classifier sent is-is [core <core>] [port <port>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent lacp`
 
@@ -25848,7 +25878,7 @@ show stats packet-processing classifier sent ndp [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent ospf`
 
@@ -25875,7 +25905,7 @@ show stats packet-processing classifier sent ospf [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent other-layer-3-protocol`
 
@@ -25902,7 +25932,7 @@ show stats packet-processing classifier sent other-layer-3-protocol [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent other-layer-4-protocol`
 
@@ -25929,7 +25959,7 @@ show stats packet-processing classifier sent other-layer-4-protocol [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent q-in-q`
 
@@ -25956,7 +25986,7 @@ show stats packet-processing classifier sent q-in-q [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent router-advertisement`
 
@@ -25983,7 +26013,7 @@ show stats packet-processing classifier sent router-advertisement [core <core>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent sctp`
 
@@ -26010,7 +26040,7 @@ show stats packet-processing classifier sent sctp [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent tcp`
 
@@ -26037,7 +26067,7 @@ show stats packet-processing classifier sent tcp [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent total`
 
@@ -26064,7 +26094,7 @@ show stats packet-processing classifier sent total [core <core>] [port <port>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent tunnel`
 
@@ -26091,7 +26121,7 @@ show stats packet-processing classifier sent tunnel [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent udp`
 
@@ -26172,7 +26202,7 @@ show stats packet-processing classifier sent vlan [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing classifier sent vrrp`
 
@@ -26199,7 +26229,7 @@ show stats packet-processing classifier sent vrrp [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing dhcp`
 
@@ -26226,7 +26256,7 @@ show stats packet-processing dhcp [core <core>] [port <port>] [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -26262,7 +26292,7 @@ show stats packet-processing dhcp discarded [core <core>] [port <port>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing dhcp forward-to-derived-interface`
 
@@ -26289,7 +26319,7 @@ show stats packet-processing dhcp forward-to-derived-interface [core <core>] [po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing dhcp forward-to-originating-interface`
 
@@ -26316,7 +26346,7 @@ show stats packet-processing dhcp forward-to-originating-interface [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing dhcp received-for-internal-application`
 
@@ -26343,7 +26373,7 @@ show stats packet-processing dhcp received-for-internal-application [core <core>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing enqueue`
 
@@ -26369,7 +26399,7 @@ show stats packet-processing enqueue [core <core>] [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -26405,7 +26435,7 @@ show stats packet-processing enqueue to-deferred-ring-failure [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing enqueue to-deferred-ring-success`
 
@@ -26432,7 +26462,7 @@ show stats packet-processing enqueue to-deferred-ring-success [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing enqueue to-worker-core-failure`
 
@@ -26458,7 +26488,7 @@ show stats packet-processing enqueue to-worker-core-failure [core <core>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing enqueue to-worker-core-success`
 
@@ -26484,7 +26514,7 @@ show stats packet-processing enqueue to-worker-core-success [core <core>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fib-action`
 
@@ -26511,7 +26541,7 @@ show stats packet-processing fib-action [core <core>] [port <port>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -26546,7 +26576,7 @@ show stats packet-processing fib-action exception [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fib-action failure`
 
@@ -26573,7 +26603,7 @@ show stats packet-processing fib-action failure [core <core>] [port <port>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fib-action success`
 
@@ -26600,7 +26630,7 @@ show stats packet-processing fib-action success [core <core>] [port <port>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing flow-action`
 
@@ -26627,7 +26657,7 @@ show stats packet-processing flow-action [core <core>] [port <port>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -26662,7 +26692,7 @@ show stats packet-processing flow-action exception [core <core>] [port <port>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing flow-action failure`
 
@@ -26689,7 +26719,7 @@ show stats packet-processing flow-action failure [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing flow-action success`
 
@@ -26716,7 +26746,7 @@ show stats packet-processing flow-action success [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation`
 
@@ -26743,7 +26773,7 @@ show stats packet-processing fragmentation [core <core>] [port <port>] [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -26777,7 +26807,7 @@ show stats packet-processing fragmentation received [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -26818,7 +26848,7 @@ show stats packet-processing fragmentation received duplicate-first-fragment [co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation received duplicate-last-fragment`
 
@@ -26845,7 +26875,7 @@ show stats packet-processing fragmentation received duplicate-last-fragment [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation received failure-to-reassemble`
 
@@ -26872,7 +26902,7 @@ show stats packet-processing fragmentation received failure-to-reassemble [core 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation received fragment-chains-discarded`
 
@@ -26899,7 +26929,7 @@ show stats packet-processing fragmentation received fragment-chains-discarded [c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation received fragment-chains-exceeded`
 
@@ -26926,7 +26956,7 @@ show stats packet-processing fragmentation received fragment-chains-exceeded [co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation received fragment-chains-timeout`
 
@@ -26953,7 +26983,7 @@ show stats packet-processing fragmentation received fragment-chains-timeout [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation received incomplete-fragments`
 
@@ -26980,7 +27010,7 @@ show stats packet-processing fragmentation received incomplete-fragments [core <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation received invalid-length-first-fragment`
 
@@ -27007,7 +27037,7 @@ show stats packet-processing fragmentation received invalid-length-first-fragmen
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation received successfully-reassembled`
 
@@ -27034,7 +27064,7 @@ show stats packet-processing fragmentation received successfully-reassembled [co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent`
 
@@ -27061,7 +27091,7 @@ show stats packet-processing fragmentation sent [core <core>] [port <port>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -27103,7 +27133,7 @@ show stats packet-processing fragmentation sent fragment-creation-failure [core 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent ipv4-dont-fragment-drop`
 
@@ -27130,7 +27160,7 @@ show stats packet-processing fragmentation sent ipv4-dont-fragment-drop [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent ipv4-fabric-fragments`
 
@@ -27157,7 +27187,7 @@ show stats packet-processing fragmentation sent ipv4-fabric-fragments [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent ipv4-non-fabric-fragments`
 
@@ -27184,7 +27214,7 @@ show stats packet-processing fragmentation sent ipv4-non-fabric-fragments [core 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent ipv4-packets-fragmented`
 
@@ -27211,7 +27241,7 @@ show stats packet-processing fragmentation sent ipv4-packets-fragmented [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent ipv6-fabric-fragments`
 
@@ -27238,7 +27268,7 @@ show stats packet-processing fragmentation sent ipv6-fabric-fragments [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent ipv6-mtu-exceeded-drop`
 
@@ -27265,7 +27295,7 @@ show stats packet-processing fragmentation sent ipv6-mtu-exceeded-drop [core <co
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent ipv6-non-fabric-fragments`
 
@@ -27292,7 +27322,7 @@ show stats packet-processing fragmentation sent ipv6-non-fabric-fragments [core 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent ipv6-packets-fragmented`
 
@@ -27319,7 +27349,7 @@ show stats packet-processing fragmentation sent ipv6-packets-fragmented [core <c
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing fragmentation sent unknown-l2-version`
 
@@ -27346,7 +27376,7 @@ show stats packet-processing fragmentation sent unknown-l2-version [core <core>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup`
 
@@ -27373,7 +27403,7 @@ show stats packet-processing lookup [core <core>] [port <port>] [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -27415,7 +27445,7 @@ show stats packet-processing lookup access-policy-table [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -27451,7 +27481,7 @@ show stats packet-processing lookup access-policy-table allow [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup access-policy-table deny`
 
@@ -27478,7 +27508,7 @@ show stats packet-processing lookup access-policy-table deny [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup access-policy-table failure`
 
@@ -27505,7 +27535,7 @@ show stats packet-processing lookup access-policy-table failure [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup access-policy-table miss`
 
@@ -27532,7 +27562,7 @@ show stats packet-processing lookup access-policy-table miss [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup fib-table`
 
@@ -27559,7 +27589,7 @@ show stats packet-processing lookup fib-table [core <core>] [port <port>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -27595,7 +27625,7 @@ show stats packet-processing lookup fib-table deny [core <core>] [port <port>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup fib-table failure`
 
@@ -27622,7 +27652,7 @@ show stats packet-processing lookup fib-table failure [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup fib-table hit`
 
@@ -27649,7 +27679,7 @@ show stats packet-processing lookup fib-table hit [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup fib-table miss`
 
@@ -27676,7 +27706,7 @@ show stats packet-processing lookup fib-table miss [core <core>] [port <port>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup flow-table`
 
@@ -27703,7 +27733,7 @@ show stats packet-processing lookup flow-table [core <core>] [port <port>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -27738,7 +27768,7 @@ show stats packet-processing lookup flow-table hit [core <core>] [port <port>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup flow-table invalidated`
 
@@ -27765,7 +27795,7 @@ show stats packet-processing lookup flow-table invalidated [core <core>] [port <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup flow-table miss`
 
@@ -27792,7 +27822,7 @@ show stats packet-processing lookup flow-table miss [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup icmp-table`
 
@@ -27819,7 +27849,7 @@ show stats packet-processing lookup icmp-table [core <core>] [port <port>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -27853,7 +27883,7 @@ show stats packet-processing lookup icmp-table ipv4 [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -27887,7 +27917,7 @@ show stats packet-processing lookup icmp-table ipv4 allow [core <core>] [port <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup icmp-table ipv4 deny`
 
@@ -27914,7 +27944,7 @@ show stats packet-processing lookup icmp-table ipv4 deny [core <core>] [port <po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup icmp-table ipv6`
 
@@ -27941,7 +27971,7 @@ show stats packet-processing lookup icmp-table ipv6 [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -27975,7 +28005,7 @@ show stats packet-processing lookup icmp-table ipv6 allow [core <core>] [port <p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup icmp-table ipv6 deny`
 
@@ -28002,7 +28032,7 @@ show stats packet-processing lookup icmp-table ipv6 deny [core <core>] [port <po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup q-in-q-invalid-vlan`
 
@@ -28029,7 +28059,7 @@ show stats packet-processing lookup q-in-q-invalid-vlan [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup sent-enable-metadata-allocation-failure`
 
@@ -28056,7 +28086,7 @@ show stats packet-processing lookup sent-enable-metadata-allocation-failure [cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup sent-enable-metadata-capacity-failure`
 
@@ -28083,7 +28113,7 @@ show stats packet-processing lookup sent-enable-metadata-capacity-failure [core 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup sent-enable-metadata-hmac-failure`
 
@@ -28110,7 +28140,7 @@ show stats packet-processing lookup sent-enable-metadata-hmac-failure [core <cor
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup sent-enable-metadata-success`
 
@@ -28137,7 +28167,7 @@ show stats packet-processing lookup sent-enable-metadata-success [core <core>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup tenant-table`
 
@@ -28164,7 +28194,7 @@ show stats packet-processing lookup tenant-table [core <core>] [port <port>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -28199,7 +28229,7 @@ show stats packet-processing lookup tenant-table failure [core <core>] [port <po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup tenant-table hit`
 
@@ -28226,7 +28256,7 @@ show stats packet-processing lookup tenant-table hit [core <core>] [port <port>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing lookup tenant-table miss`
 
@@ -28253,7 +28283,7 @@ show stats packet-processing lookup tenant-table miss [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing received`
 
@@ -28280,7 +28310,7 @@ show stats packet-processing received [core <core>] [port <port>] [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -28317,7 +28347,7 @@ show stats packet-processing received control-success [core <core>] [port <port>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing received injected-success`
 
@@ -28344,7 +28374,7 @@ show stats packet-processing received injected-success [core <core>] [port <port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing received interface-standby`
 
@@ -28371,7 +28401,7 @@ show stats packet-processing received interface-standby [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing received interface-standby-drop`
 
@@ -28398,7 +28428,7 @@ show stats packet-processing received interface-standby-drop [core <core>] [port
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing received interface-success`
 
@@ -28425,7 +28455,7 @@ show stats packet-processing received interface-success [core <core>] [port <por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing sent`
 
@@ -28452,7 +28482,7 @@ show stats packet-processing sent [core <core>] [port <port>] [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -28490,7 +28520,7 @@ show stats packet-processing sent interface-failure [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing sent interface-retry`
 
@@ -28517,7 +28547,7 @@ show stats packet-processing sent interface-retry [core <core>] [port <port>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing sent interface-standby`
 
@@ -28544,7 +28574,7 @@ show stats packet-processing sent interface-standby [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing sent interface-standby-drop`
 
@@ -28571,7 +28601,7 @@ show stats packet-processing sent interface-standby-drop [core <core>] [port <po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing sent interface-success`
 
@@ -28598,7 +28628,7 @@ show stats packet-processing sent interface-success [core <core>] [port <port>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats packet-processing sent interface-unconfigured-drop`
 
@@ -28625,7 +28655,7 @@ show stats packet-processing sent interface-unconfigured-drop [core <core>] [por
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree`
 
@@ -28651,7 +28681,7 @@ show stats path-tree [process <process>] [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -28684,7 +28714,7 @@ show stats path-tree client [process <process>] [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -28718,7 +28748,7 @@ show stats path-tree client received [process <process>] [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -28752,19 +28782,19 @@ show stats path-tree client received notifications [process <process>] [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-client-received-notifications-duration) | Average time to process Notifications on the client |
-| [`error`](#show-stats-path-tree-client-received-notifications-error) | The number of invalid or malformed notification messages received |
-| [`total`](#show-stats-path-tree-client-received-notifications-total) | The number of notification messages received successfully |
+| [`duration`](#show-stats-path-tree-client-received-notifications-duration) | Average time to process Notifications on the client (microseconds) |
+| [`error`](#show-stats-path-tree-client-received-notifications-error) | The number of invalid or malformed notification messages received (count) |
+| [`total`](#show-stats-path-tree-client-received-notifications-total) | The number of notification messages received successfully (count) |
 
 ## `show stats path-tree client received notifications duration`
 
-Average time to process Notifications on the client
+Average time to process Notifications on the client (microseconds)
 
 #### Usage
 
@@ -28786,11 +28816,11 @@ show stats path-tree client received notifications duration [process <process>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree client received notifications error`
 
-The number of invalid or malformed notification messages received
+The number of invalid or malformed notification messages received (count)
 
 #### Usage
 
@@ -28812,11 +28842,11 @@ show stats path-tree client received notifications error [process <process>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree client received notifications total`
 
-The number of notification messages received successfully
+The number of notification messages received successfully (count)
 
 #### Usage
 
@@ -28838,7 +28868,7 @@ show stats path-tree client received notifications total [process <process>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree client received responses`
 
@@ -28864,19 +28894,19 @@ show stats path-tree client received responses [process <process>] [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-client-received-responses-duration) | Average time to process transaction responses on the client |
-| [`error`](#show-stats-path-tree-client-received-responses-error) | The number of invalid or malformed transaction response messages received |
-| [`total`](#show-stats-path-tree-client-received-responses-total) | The number of transaction response messages received successfully |
+| [`duration`](#show-stats-path-tree-client-received-responses-duration) | Average time to process transaction responses on the client (microseconds) |
+| [`error`](#show-stats-path-tree-client-received-responses-error) | The number of invalid or malformed transaction response messages received (count) |
+| [`total`](#show-stats-path-tree-client-received-responses-total) | The number of transaction response messages received successfully (count) |
 
 ## `show stats path-tree client received responses duration`
 
-Average time to process transaction responses on the client
+Average time to process transaction responses on the client (microseconds)
 
 #### Usage
 
@@ -28898,11 +28928,11 @@ show stats path-tree client received responses duration [process <process>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree client received responses error`
 
-The number of invalid or malformed transaction response messages received
+The number of invalid or malformed transaction response messages received (count)
 
 #### Usage
 
@@ -28924,11 +28954,11 @@ show stats path-tree client received responses error [process <process>] [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree client received responses total`
 
-The number of transaction response messages received successfully
+The number of transaction response messages received successfully (count)
 
 #### Usage
 
@@ -28950,7 +28980,7 @@ show stats path-tree client received responses total [process <process>] [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree client received unknown`
 
@@ -28976,17 +29006,17 @@ show stats path-tree client received unknown [process <process>] [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`total`](#show-stats-path-tree-client-received-unknown-total) | The number of unknown message types received |
+| [`total`](#show-stats-path-tree-client-received-unknown-total) | The number of unknown message types received (count) |
 
 ## `show stats path-tree client received unknown total`
 
-The number of unknown message types received
+The number of unknown message types received (count)
 
 #### Usage
 
@@ -29008,7 +29038,7 @@ show stats path-tree client received unknown total [process <process>] [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree client sent`
 
@@ -29034,7 +29064,7 @@ show stats path-tree client sent [process <process>] [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -29066,18 +29096,18 @@ show stats path-tree client sent requests [process <process>] [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`error`](#show-stats-path-tree-client-sent-requests-error) | The number of transaction request messages that could not be sent |
-| [`total`](#show-stats-path-tree-client-sent-requests-total) | The number of transaction request messages sent successfully |
+| [`error`](#show-stats-path-tree-client-sent-requests-error) | The number of transaction request messages that could not be sent (count) |
+| [`total`](#show-stats-path-tree-client-sent-requests-total) | The number of transaction request messages sent successfully (count) |
 
 ## `show stats path-tree client sent requests error`
 
-The number of transaction request messages that could not be sent
+The number of transaction request messages that could not be sent (count)
 
 #### Usage
 
@@ -29099,11 +29129,11 @@ show stats path-tree client sent requests error [process <process>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree client sent requests total`
 
-The number of transaction request messages sent successfully
+The number of transaction request messages sent successfully (count)
 
 #### Usage
 
@@ -29125,7 +29155,7 @@ show stats path-tree client sent requests total [process <process>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree client transactions`
 
@@ -29151,17 +29181,17 @@ show stats path-tree client transactions [process <process>] [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`server-latency`](#show-stats-path-tree-client-transactions-server-latency) | Average latency for the server to process/respond-to transactions |
+| [`server-latency`](#show-stats-path-tree-client-transactions-server-latency) | Average latency for the server to process/respond-to transactions (microseconds) |
 
 ## `show stats path-tree client transactions server-latency`
 
-Average latency for the server to process/respond-to transactions
+Average latency for the server to process/respond-to transactions (microseconds)
 
 #### Usage
 
@@ -29183,7 +29213,7 @@ show stats path-tree client transactions server-latency [process <process>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server`
 
@@ -29209,7 +29239,7 @@ show stats path-tree server [process <process>] [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -29243,7 +29273,7 @@ show stats path-tree server received [process <process>] [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -29275,20 +29305,20 @@ show stats path-tree server received requests [process <process>] [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`average`](#show-stats-path-tree-server-received-requests-average) | The number of transaction request messages received successfully |
-| [`error`](#show-stats-path-tree-server-received-requests-error) | The number of invalid or malformed transaction request messages received |
-| [`ignored`](#show-stats-path-tree-server-received-requests-ignored) | The number of transaction request messages received but were ignored due to invalid session state |
-| [`total`](#show-stats-path-tree-server-received-requests-total) | The number of transaction request messages received successfully |
+| [`average`](#show-stats-path-tree-server-received-requests-average) | The number of transaction request messages received successfully (count) |
+| [`error`](#show-stats-path-tree-server-received-requests-error) | The number of invalid or malformed transaction request messages received (count) |
+| [`ignored`](#show-stats-path-tree-server-received-requests-ignored) | The number of transaction request messages received but were ignored due to invalid session state (count) |
+| [`total`](#show-stats-path-tree-server-received-requests-total) | The number of transaction request messages received successfully (count) |
 
 ## `show stats path-tree server received requests average`
 
-The number of transaction request messages received successfully
+The number of transaction request messages received successfully (count)
 
 #### Usage
 
@@ -29311,11 +29341,11 @@ show stats path-tree server received requests average [process <process>] [clien
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server received requests error`
 
-The number of invalid or malformed transaction request messages received
+The number of invalid or malformed transaction request messages received (count)
 
 #### Usage
 
@@ -29337,11 +29367,11 @@ show stats path-tree server received requests error [process <process>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server received requests ignored`
 
-The number of transaction request messages received but were ignored due to invalid session state
+The number of transaction request messages received but were ignored due to invalid session state (count)
 
 #### Usage
 
@@ -29363,11 +29393,11 @@ show stats path-tree server received requests ignored [process <process>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server received requests total`
 
-The number of transaction request messages received successfully
+The number of transaction request messages received successfully (count)
 
 #### Usage
 
@@ -29389,7 +29419,7 @@ show stats path-tree server received requests total [process <process>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server sent`
 
@@ -29415,7 +29445,7 @@ show stats path-tree server sent [process <process>] [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -29447,18 +29477,18 @@ show stats path-tree server sent responses [process <process>] [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`error`](#show-stats-path-tree-server-sent-responses-error) | The number of transaction response messages that could not be sent |
-| [`total`](#show-stats-path-tree-server-sent-responses-total) | The number of transaction response messages sent successfully |
+| [`error`](#show-stats-path-tree-server-sent-responses-error) | The number of transaction response messages that could not be sent (count) |
+| [`total`](#show-stats-path-tree-server-sent-responses-total) | The number of transaction response messages sent successfully (count) |
 
 ## `show stats path-tree server sent responses error`
 
-The number of transaction response messages that could not be sent
+The number of transaction response messages that could not be sent (count)
 
 #### Usage
 
@@ -29480,11 +29510,11 @@ show stats path-tree server sent responses error [process <process>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server sent responses total`
 
-The number of transaction response messages sent successfully
+The number of transaction response messages sent successfully (count)
 
 #### Usage
 
@@ -29506,7 +29536,7 @@ show stats path-tree server sent responses total [process <process>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions`
 
@@ -29532,7 +29562,7 @@ show stats path-tree server transactions [process <process>] [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -29572,19 +29602,19 @@ show stats path-tree server transactions connect [process <process>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-server-transactions-connect-duration) | Average time to process/respond-to Connect transactions |
-| [`error`](#show-stats-path-tree-server-transactions-connect-error) | The number of Connect transactions that could not be processed successfully |
-| [`processed`](#show-stats-path-tree-server-transactions-connect-processed) | The number of successfully processed Connect transactions |
+| [`duration`](#show-stats-path-tree-server-transactions-connect-duration) | Average time to process/respond-to Connect transactions (microseconds) |
+| [`error`](#show-stats-path-tree-server-transactions-connect-error) | The number of Connect transactions that could not be processed successfully (count) |
+| [`processed`](#show-stats-path-tree-server-transactions-connect-processed) | The number of successfully processed Connect transactions (count) |
 
 ## `show stats path-tree server transactions connect duration`
 
-Average time to process/respond-to Connect transactions
+Average time to process/respond-to Connect transactions (microseconds)
 
 #### Usage
 
@@ -29606,11 +29636,11 @@ show stats path-tree server transactions connect duration [process <process>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions connect error`
 
-The number of Connect transactions that could not be processed successfully
+The number of Connect transactions that could not be processed successfully (count)
 
 #### Usage
 
@@ -29632,11 +29662,11 @@ show stats path-tree server transactions connect error [process <process>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions connect processed`
 
-The number of successfully processed Connect transactions
+The number of successfully processed Connect transactions (count)
 
 #### Usage
 
@@ -29658,7 +29688,7 @@ show stats path-tree server transactions connect processed [process <process>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions disconnect`
 
@@ -29684,19 +29714,19 @@ show stats path-tree server transactions disconnect [process <process>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-server-transactions-disconnect-duration) | Average time to process/respond-to Disconnect transactions |
-| [`error`](#show-stats-path-tree-server-transactions-disconnect-error) | The number of Disconnect transactions that could not be processed successfully |
-| [`processed`](#show-stats-path-tree-server-transactions-disconnect-processed) | The number of successfully processed Disconnect transactions |
+| [`duration`](#show-stats-path-tree-server-transactions-disconnect-duration) | Average time to process/respond-to Disconnect transactions (microseconds) |
+| [`error`](#show-stats-path-tree-server-transactions-disconnect-error) | The number of Disconnect transactions that could not be processed successfully (count) |
+| [`processed`](#show-stats-path-tree-server-transactions-disconnect-processed) | The number of successfully processed Disconnect transactions (count) |
 
 ## `show stats path-tree server transactions disconnect duration`
 
-Average time to process/respond-to Disconnect transactions
+Average time to process/respond-to Disconnect transactions (microseconds)
 
 #### Usage
 
@@ -29718,11 +29748,11 @@ show stats path-tree server transactions disconnect duration [process <process>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions disconnect error`
 
-The number of Disconnect transactions that could not be processed successfully
+The number of Disconnect transactions that could not be processed successfully (count)
 
 #### Usage
 
@@ -29744,11 +29774,11 @@ show stats path-tree server transactions disconnect error [process <process>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions disconnect processed`
 
-The number of successfully processed Disconnect transactions
+The number of successfully processed Disconnect transactions (count)
 
 #### Usage
 
@@ -29770,7 +29800,7 @@ show stats path-tree server transactions disconnect processed [process <process>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions list`
 
@@ -29796,19 +29826,19 @@ show stats path-tree server transactions list [process <process>] [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-server-transactions-list-duration) | Average time to process/respond-to List transactions |
-| [`error`](#show-stats-path-tree-server-transactions-list-error) | The number of List transactions that could not be processed successfully |
-| [`processed`](#show-stats-path-tree-server-transactions-list-processed) | The number of successfully processed List transactions |
+| [`duration`](#show-stats-path-tree-server-transactions-list-duration) | Average time to process/respond-to List transactions (microseconds) |
+| [`error`](#show-stats-path-tree-server-transactions-list-error) | The number of List transactions that could not be processed successfully (count) |
+| [`processed`](#show-stats-path-tree-server-transactions-list-processed) | The number of successfully processed List transactions (count) |
 
 ## `show stats path-tree server transactions list duration`
 
-Average time to process/respond-to List transactions
+Average time to process/respond-to List transactions (microseconds)
 
 #### Usage
 
@@ -29830,11 +29860,11 @@ show stats path-tree server transactions list duration [process <process>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions list error`
 
-The number of List transactions that could not be processed successfully
+The number of List transactions that could not be processed successfully (count)
 
 #### Usage
 
@@ -29856,11 +29886,11 @@ show stats path-tree server transactions list error [process <process>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions list processed`
 
-The number of successfully processed List transactions
+The number of successfully processed List transactions (count)
 
 #### Usage
 
@@ -29882,7 +29912,7 @@ show stats path-tree server transactions list processed [process <process>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions ping`
 
@@ -29908,19 +29938,19 @@ show stats path-tree server transactions ping [process <process>] [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-server-transactions-ping-duration) | Average time to process/respond-to Ping transactions |
-| [`error`](#show-stats-path-tree-server-transactions-ping-error) | The number of Ping transactions that could not be processed successfully |
-| [`processed`](#show-stats-path-tree-server-transactions-ping-processed) | The number of successfully processed Ping transactions |
+| [`duration`](#show-stats-path-tree-server-transactions-ping-duration) | Average time to process/respond-to Ping transactions (microseconds) |
+| [`error`](#show-stats-path-tree-server-transactions-ping-error) | The number of Ping transactions that could not be processed successfully (count) |
+| [`processed`](#show-stats-path-tree-server-transactions-ping-processed) | The number of successfully processed Ping transactions (count) |
 
 ## `show stats path-tree server transactions ping duration`
 
-Average time to process/respond-to Ping transactions
+Average time to process/respond-to Ping transactions (microseconds)
 
 #### Usage
 
@@ -29942,11 +29972,11 @@ show stats path-tree server transactions ping duration [process <process>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions ping error`
 
-The number of Ping transactions that could not be processed successfully
+The number of Ping transactions that could not be processed successfully (count)
 
 #### Usage
 
@@ -29968,11 +29998,11 @@ show stats path-tree server transactions ping error [process <process>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions ping processed`
 
-The number of successfully processed Ping transactions
+The number of successfully processed Ping transactions (count)
 
 #### Usage
 
@@ -29994,7 +30024,7 @@ show stats path-tree server transactions ping processed [process <process>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions publish`
 
@@ -30020,19 +30050,19 @@ show stats path-tree server transactions publish [process <process>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-server-transactions-publish-duration) | Average time to process/respond-to Publish transactions |
-| [`error`](#show-stats-path-tree-server-transactions-publish-error) | The number of Publish transactions that could not be processed successfully |
-| [`processed`](#show-stats-path-tree-server-transactions-publish-processed) | The number of successfully processed Publish transactions |
+| [`duration`](#show-stats-path-tree-server-transactions-publish-duration) | Average time to process/respond-to Publish transactions (microseconds) |
+| [`error`](#show-stats-path-tree-server-transactions-publish-error) | The number of Publish transactions that could not be processed successfully (count) |
+| [`processed`](#show-stats-path-tree-server-transactions-publish-processed) | The number of successfully processed Publish transactions (count) |
 
 ## `show stats path-tree server transactions publish duration`
 
-Average time to process/respond-to Publish transactions
+Average time to process/respond-to Publish transactions (microseconds)
 
 #### Usage
 
@@ -30054,11 +30084,11 @@ show stats path-tree server transactions publish duration [process <process>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions publish error`
 
-The number of Publish transactions that could not be processed successfully
+The number of Publish transactions that could not be processed successfully (count)
 
 #### Usage
 
@@ -30080,11 +30110,11 @@ show stats path-tree server transactions publish error [process <process>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions publish processed`
 
-The number of successfully processed Publish transactions
+The number of successfully processed Publish transactions (count)
 
 #### Usage
 
@@ -30106,7 +30136,7 @@ show stats path-tree server transactions publish processed [process <process>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions read`
 
@@ -30132,19 +30162,19 @@ show stats path-tree server transactions read [process <process>] [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-server-transactions-read-duration) | Average time to process/respond-to Read transactions |
-| [`error`](#show-stats-path-tree-server-transactions-read-error) | The number of Read transactions that could not be processed successfully |
-| [`processed`](#show-stats-path-tree-server-transactions-read-processed) | The number of successfully processed Read transactions |
+| [`duration`](#show-stats-path-tree-server-transactions-read-duration) | Average time to process/respond-to Read transactions (microseconds) |
+| [`error`](#show-stats-path-tree-server-transactions-read-error) | The number of Read transactions that could not be processed successfully (count) |
+| [`processed`](#show-stats-path-tree-server-transactions-read-processed) | The number of successfully processed Read transactions (count) |
 
 ## `show stats path-tree server transactions read duration`
 
-Average time to process/respond-to Read transactions
+Average time to process/respond-to Read transactions (microseconds)
 
 #### Usage
 
@@ -30166,11 +30196,11 @@ show stats path-tree server transactions read duration [process <process>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions read error`
 
-The number of Read transactions that could not be processed successfully
+The number of Read transactions that could not be processed successfully (count)
 
 #### Usage
 
@@ -30192,11 +30222,11 @@ show stats path-tree server transactions read error [process <process>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions read processed`
 
-The number of successfully processed Read transactions
+The number of successfully processed Read transactions (count)
 
 #### Usage
 
@@ -30218,7 +30248,7 @@ show stats path-tree server transactions read processed [process <process>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions remove`
 
@@ -30244,19 +30274,19 @@ show stats path-tree server transactions remove [process <process>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-server-transactions-remove-duration) | Average time to process/respond-to Remove transactions |
-| [`error`](#show-stats-path-tree-server-transactions-remove-error) | The number of Remove transactions that could not be processed successfully |
-| [`processed`](#show-stats-path-tree-server-transactions-remove-processed) | The number of successfully processed Remove transactions |
+| [`duration`](#show-stats-path-tree-server-transactions-remove-duration) | Average time to process/respond-to Remove transactions (microseconds) |
+| [`error`](#show-stats-path-tree-server-transactions-remove-error) | The number of Remove transactions that could not be processed successfully (count) |
+| [`processed`](#show-stats-path-tree-server-transactions-remove-processed) | The number of successfully processed Remove transactions (count) |
 
 ## `show stats path-tree server transactions remove duration`
 
-Average time to process/respond-to Remove transactions
+Average time to process/respond-to Remove transactions (microseconds)
 
 #### Usage
 
@@ -30278,11 +30308,11 @@ show stats path-tree server transactions remove duration [process <process>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions remove error`
 
-The number of Remove transactions that could not be processed successfully
+The number of Remove transactions that could not be processed successfully (count)
 
 #### Usage
 
@@ -30304,11 +30334,11 @@ show stats path-tree server transactions remove error [process <process>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions remove processed`
 
-The number of successfully processed Remove transactions
+The number of successfully processed Remove transactions (count)
 
 #### Usage
 
@@ -30330,7 +30360,7 @@ show stats path-tree server transactions remove processed [process <process>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions unsubscribe`
 
@@ -30356,19 +30386,19 @@ show stats path-tree server transactions unsubscribe [process <process>] [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-server-transactions-unsubscribe-duration) | Average time to process/respond-to Unsubscribe transactions |
-| [`error`](#show-stats-path-tree-server-transactions-unsubscribe-error) | The number of Unsubscribe transactions that could not be processed successfully |
-| [`processed`](#show-stats-path-tree-server-transactions-unsubscribe-processed) | The number of successfully processed Unsubscribe transactions |
+| [`duration`](#show-stats-path-tree-server-transactions-unsubscribe-duration) | Average time to process/respond-to Unsubscribe transactions (microseconds) |
+| [`error`](#show-stats-path-tree-server-transactions-unsubscribe-error) | The number of Unsubscribe transactions that could not be processed successfully (count) |
+| [`processed`](#show-stats-path-tree-server-transactions-unsubscribe-processed) | The number of successfully processed Unsubscribe transactions (count) |
 
 ## `show stats path-tree server transactions unsubscribe duration`
 
-Average time to process/respond-to Unsubscribe transactions
+Average time to process/respond-to Unsubscribe transactions (microseconds)
 
 #### Usage
 
@@ -30390,11 +30420,11 @@ show stats path-tree server transactions unsubscribe duration [process <process>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions unsubscribe error`
 
-The number of Unsubscribe transactions that could not be processed successfully
+The number of Unsubscribe transactions that could not be processed successfully (count)
 
 #### Usage
 
@@ -30416,11 +30446,11 @@ show stats path-tree server transactions unsubscribe error [process <process>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions unsubscribe processed`
 
-The number of successfully processed Unsubscribe transactions
+The number of successfully processed Unsubscribe transactions (count)
 
 #### Usage
 
@@ -30442,7 +30472,7 @@ show stats path-tree server transactions unsubscribe processed [process <process
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions update`
 
@@ -30468,19 +30498,19 @@ show stats path-tree server transactions update [process <process>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`duration`](#show-stats-path-tree-server-transactions-update-duration) | Average time to process/respond-to Update transactions |
-| [`error`](#show-stats-path-tree-server-transactions-update-error) | The number of Update transactions that could not be processed successfully |
-| [`processed`](#show-stats-path-tree-server-transactions-update-processed) | The number of successfully processed Update transactions |
+| [`duration`](#show-stats-path-tree-server-transactions-update-duration) | Average time to process/respond-to Update transactions (microseconds) |
+| [`error`](#show-stats-path-tree-server-transactions-update-error) | The number of Update transactions that could not be processed successfully (count) |
+| [`processed`](#show-stats-path-tree-server-transactions-update-processed) | The number of successfully processed Update transactions (count) |
 
 ## `show stats path-tree server transactions update duration`
 
-Average time to process/respond-to Update transactions
+Average time to process/respond-to Update transactions (microseconds)
 
 #### Usage
 
@@ -30502,11 +30532,11 @@ show stats path-tree server transactions update duration [process <process>] [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions update error`
 
-The number of Update transactions that could not be processed successfully
+The number of Update transactions that could not be processed successfully (count)
 
 #### Usage
 
@@ -30528,11 +30558,11 @@ show stats path-tree server transactions update error [process <process>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats path-tree server transactions update processed`
 
-The number of successfully processed Update transactions
+The number of successfully processed Update transactions (count)
 
 #### Usage
 
@@ -30554,7 +30584,7 @@ show stats path-tree server transactions update processed [process <process>] [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats performance-monitoring`
 
@@ -30585,7 +30615,7 @@ show stats performance-monitoring [peer-name <peer-name>] [peer-host <peer-host>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -30622,7 +30652,7 @@ show stats performance-monitoring peer-path [peer-name <peer-name>] [peer-host <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -30631,7 +30661,7 @@ show stats performance-monitoring peer-path [peer-name <peer-name>] [peer-host <
 | [`jitter`](#show-stats-performance-monitoring-peer-path-jitter) | Jitter in milliseconds for the 128T peer path. |
 | [`latency`](#show-stats-performance-monitoring-peer-path-latency) | Latency in milliseconds for the 128T peer path. |
 | [`loss`](#show-stats-performance-monitoring-peer-path-loss) | Packet loss percentange for the 128T peer path. |
-| [`mos`](#show-stats-performance-monitoring-peer-path-mos) | MOS value calculated for the 128T peer path. |
+| [`mos`](#show-stats-performance-monitoring-peer-path-mos) | MOS value calculated for the 128T peer path. (hundreths of a decimal) |
 
 ## `show stats performance-monitoring peer-path jitter`
 
@@ -30662,7 +30692,7 @@ show stats performance-monitoring peer-path jitter [peer-name <peer-name>] [peer
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats performance-monitoring peer-path latency`
 
@@ -30693,7 +30723,7 @@ show stats performance-monitoring peer-path latency [peer-name <peer-name>] [pee
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats performance-monitoring peer-path loss`
 
@@ -30724,11 +30754,11 @@ show stats performance-monitoring peer-path loss [peer-name <peer-name>] [peer-h
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats performance-monitoring peer-path mos`
 
-MOS value calculated for the 128T peer path.
+MOS value calculated for the 128T peer path. (hundreths of a decimal)
 
 #### Usage
 
@@ -30755,7 +30785,7 @@ show stats performance-monitoring peer-path mos [peer-name <peer-name>] [peer-ho
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats process`
 
@@ -30781,7 +30811,7 @@ show stats process [process-name <process-name>] [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -30795,7 +30825,7 @@ show stats process [process-name <process-name>] [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process cpu`
 
@@ -30821,7 +30851,7 @@ show stats process cpu [process-name <process-name>] [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -30833,7 +30863,7 @@ show stats process cpu [process-name <process-name>] [since <since>] [force] [ro
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process cpu usage`
 
@@ -30859,13 +30889,13 @@ show stats process cpu usage [process-name <process-name>] [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory`
 
@@ -30891,24 +30921,24 @@ show stats process memory [process-name <process-name>] [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`rss`](#show-stats-process-memory-rss) | Resident memory used per process |
-| [`vsz`](#show-stats-process-memory-vsz) | Virtual memory used per process |
+| [`rss`](#show-stats-process-memory-rss) | Resident memory used per process (bytes) |
+| [`vsz`](#show-stats-process-memory-vsz) | Virtual memory used per process (bytes) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory rss`
 
-Resident memory used per process
+Resident memory used per process (bytes)
 
 #### Usage
 
@@ -30930,17 +30960,17 @@ show stats process memory rss [process-name <process-name>] [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory vsz`
 
-Virtual memory used per process
+Virtual memory used per process (bytes)
 
 #### Usage
 
@@ -30962,13 +30992,13 @@ show stats process memory vsz [process-name <process-name>] [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process queue`
 
@@ -30995,7 +31025,7 @@ show stats process queue [process-name <process-name>] [queue-name <queue-name>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -31007,7 +31037,7 @@ show stats process queue [process-name <process-name>] [queue-name <queue-name>]
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process queue depth`
 
@@ -31034,13 +31064,13 @@ show stats process queue depth [process-name <process-name>] [queue-name <queue-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats redis-server-manager`
 
@@ -31065,7 +31095,7 @@ show stats redis-server-manager [since <since>] [force] [router <router>] [node 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -31098,7 +31128,7 @@ show stats redis-server-manager redis-server-inactives [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redis-server-manager redis-server-network-flaps`
 
@@ -31123,7 +31153,7 @@ show stats redis-server-manager redis-server-network-flaps [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redis-server-manager redis-session-expirations`
 
@@ -31148,7 +31178,7 @@ show stats redis-server-manager redis-session-expirations [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy`
 
@@ -31173,7 +31203,7 @@ show stats redundancy [since <since>] [force] [router <router>] [node <node>] [<
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -31213,7 +31243,7 @@ show stats redundancy database-connection [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -31249,7 +31279,7 @@ show stats redundancy database-connection active-connections [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy database-connection client-disconnect`
 
@@ -31274,7 +31304,7 @@ show stats redundancy database-connection client-disconnect [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy database-connection connect`
 
@@ -31299,7 +31329,7 @@ show stats redundancy database-connection connect [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy database-connection error-disconnect`
 
@@ -31324,7 +31354,7 @@ show stats redundancy database-connection error-disconnect [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy database-connection errors`
 
@@ -31349,7 +31379,7 @@ show stats redundancy database-connection errors [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy database-connection failed-connect`
 
@@ -31374,7 +31404,7 @@ show stats redundancy database-connection failed-connect [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-initialization`
 
@@ -31399,7 +31429,7 @@ show stats redundancy port-initialization [since <since>] [force] [router <route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -31437,7 +31467,7 @@ show stats redundancy port-initialization marker-query-pending [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-initialization marker-record-found`
 
@@ -31462,7 +31492,7 @@ show stats redundancy port-initialization marker-record-found [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-initialization marker-record-not-found`
 
@@ -31487,7 +31517,7 @@ show stats redundancy port-initialization marker-record-not-found [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-initialization marker-record-read-empty`
 
@@ -31512,7 +31542,7 @@ show stats redundancy port-initialization marker-record-read-empty [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-initialization marker-record-read-error`
 
@@ -31537,7 +31567,7 @@ show stats redundancy port-initialization marker-record-read-error [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-initialization marker-record-write`
 
@@ -31562,7 +31592,7 @@ show stats redundancy port-initialization marker-record-write [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-initialization marker-record-write-empty`
 
@@ -31587,7 +31617,7 @@ show stats redundancy port-initialization marker-record-write-empty [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-initialization pending-queries`
 
@@ -31612,7 +31642,7 @@ show stats redundancy port-initialization pending-queries [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-list-records`
 
@@ -31637,7 +31667,7 @@ show stats redundancy port-list-records [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -31675,7 +31705,7 @@ show stats redundancy port-list-records list-record-found [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-list-records list-record-not-found`
 
@@ -31700,7 +31730,7 @@ show stats redundancy port-list-records list-record-not-found [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-list-records list-record-parse-error`
 
@@ -31725,7 +31755,7 @@ show stats redundancy port-list-records list-record-parse-error [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-list-records list-record-pop-errors`
 
@@ -31750,7 +31780,7 @@ show stats redundancy port-list-records list-record-pop-errors [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-list-records list-record-pop-failures`
 
@@ -31775,7 +31805,7 @@ show stats redundancy port-list-records list-record-pop-failures [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-list-records list-record-pop-pending`
 
@@ -31800,7 +31830,7 @@ show stats redundancy port-list-records list-record-pop-pending [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-list-records list-record-pop-success`
 
@@ -31825,7 +31855,7 @@ show stats redundancy port-list-records list-record-pop-success [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy port-list-records list-record-push`
 
@@ -31850,7 +31880,7 @@ show stats redundancy port-list-records list-record-push [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-delete`
 
@@ -31875,7 +31905,7 @@ show stats redundancy session-delete [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors`
 
@@ -31900,7 +31930,7 @@ show stats redundancy session-errors [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -31940,7 +31970,7 @@ show stats redundancy session-errors cache-timeouts [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors decode-failures`
 
@@ -31965,7 +31995,7 @@ show stats redundancy session-errors decode-failures [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors fib-lookup-error`
 
@@ -31990,7 +32020,7 @@ show stats redundancy session-errors fib-lookup-error [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors invalid-buffer-received`
 
@@ -32015,7 +32045,7 @@ show stats redundancy session-errors invalid-buffer-received [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors invalid-session-key`
 
@@ -32040,7 +32070,7 @@ show stats redundancy session-errors invalid-session-key [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors new-session-creation-failure`
 
@@ -32065,7 +32095,7 @@ show stats redundancy session-errors new-session-creation-failure [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors session-not-found`
 
@@ -32090,7 +32120,7 @@ show stats redundancy session-errors session-not-found [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors session-update-failures`
 
@@ -32115,7 +32145,7 @@ show stats redundancy session-errors session-update-failures [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors source-lookup-error`
 
@@ -32140,7 +32170,7 @@ show stats redundancy session-errors source-lookup-error [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-errors unsupported-feature`
 
@@ -32165,7 +32195,7 @@ show stats redundancy session-errors unsupported-feature [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reads`
 
@@ -32190,7 +32220,7 @@ show stats redundancy session-reads [since <since>] [force] [router <router>] [n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -32228,7 +32258,7 @@ show stats redundancy session-reads create-new-session [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reads net-unreachable-sent`
 
@@ -32253,7 +32283,7 @@ show stats redundancy session-reads net-unreachable-sent [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reads query-pending`
 
@@ -32278,7 +32308,7 @@ show stats redundancy session-reads query-pending [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reads query-result-not-found`
 
@@ -32303,7 +32333,7 @@ show stats redundancy session-reads query-result-not-found [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reads query-result-success`
 
@@ -32328,7 +32358,7 @@ show stats redundancy session-reads query-result-success [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reads query-result-timeout`
 
@@ -32353,7 +32383,7 @@ show stats redundancy session-reads query-result-timeout [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reads session-key-mismatch`
 
@@ -32378,7 +32408,7 @@ show stats redundancy session-reads session-key-mismatch [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reads tcp-reset-sent`
 
@@ -32403,7 +32433,7 @@ show stats redundancy session-reads tcp-reset-sent [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reconstruction`
 
@@ -32428,7 +32458,7 @@ show stats redundancy session-reconstruction [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -32462,7 +32492,7 @@ show stats redundancy session-reconstruction created-inter-node-service-paths [s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reconstruction created-inter-router-service-paths`
 
@@ -32487,7 +32517,7 @@ show stats redundancy session-reconstruction created-inter-router-service-paths 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reconstruction created-local-service-paths`
 
@@ -32512,7 +32542,7 @@ show stats redundancy session-reconstruction created-local-service-paths [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-reconstruction diverted-to-external-protocol-agent`
 
@@ -32537,7 +32567,7 @@ show stats redundancy session-reconstruction diverted-to-external-protocol-agent
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-refresh`
 
@@ -32562,7 +32592,7 @@ show stats redundancy session-refresh [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-writes`
 
@@ -32587,7 +32617,7 @@ show stats redundancy session-writes [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -32620,7 +32650,7 @@ show stats redundancy session-writes errors [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -32652,7 +32682,7 @@ show stats redundancy session-writes errors encode-failures [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-writes errors errors-from-database`
 
@@ -32677,7 +32707,7 @@ show stats redundancy session-writes errors errors-from-database [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-writes write-request-sent`
 
@@ -32702,7 +32732,7 @@ show stats redundancy session-writes write-request-sent [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy session-writes write-request-success`
 
@@ -32727,7 +32757,7 @@ show stats redundancy session-writes write-request-success [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp`
 
@@ -32752,7 +32782,7 @@ show stats redundancy vrrp [since <since>] [force] [router <router>] [node <node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -32792,7 +32822,7 @@ show stats redundancy vrrp advertisements-dropped [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp advertisements-received`
 
@@ -32817,7 +32847,7 @@ show stats redundancy vrrp advertisements-received [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp advertisements-sent`
 
@@ -32842,7 +32872,7 @@ show stats redundancy vrrp advertisements-sent [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp become-backup`
 
@@ -32867,7 +32897,7 @@ show stats redundancy vrrp become-backup [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp become-master`
 
@@ -32892,7 +32922,7 @@ show stats redundancy vrrp become-master [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp become-master-failure`
 
@@ -32917,7 +32947,7 @@ show stats redundancy vrrp become-master-failure [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp received-invalid`
 
@@ -32942,7 +32972,7 @@ show stats redundancy vrrp received-invalid [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp received-invalid-ttl`
 
@@ -32967,7 +32997,7 @@ show stats redundancy vrrp received-invalid-ttl [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp received-invalid-type`
 
@@ -32992,7 +33022,7 @@ show stats redundancy vrrp received-invalid-type [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redundancy vrrp received-invalid-version`
 
@@ -33017,7 +33047,7 @@ show stats redundancy vrrp received-invalid-version [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats registered-services`
 
@@ -33042,7 +33072,7 @@ show stats registered-services [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33057,7 +33087,7 @@ show stats registered-services [since <since>] [force] [router <router>] [node <
 | command | description |
 | ------- | ----------- |
 | [`show stats ssc`](#show-stats-ssc) | Metrics pertaining to the SSC |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats registered-services local`
 
@@ -33082,14 +33112,14 @@ show stats registered-services local [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats ssc`](#show-stats-ssc) | Metrics pertaining to the SSC |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats registered-services remote`
 
@@ -33114,14 +33144,14 @@ show stats registered-services remote [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats ssc`](#show-stats-ssc) | Metrics pertaining to the SSC |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats registered-services total`
 
@@ -33146,14 +33176,14 @@ show stats registered-services total [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats ssc`](#show-stats-ssc) | Metrics pertaining to the SSC |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats routing`
 
@@ -33179,7 +33209,7 @@ show stats routing [process <process>] [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33213,7 +33243,7 @@ show stats routing errors [process <process>] [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33245,7 +33275,7 @@ show stats routing errors connection [process <process>] [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing route-updates`
 
@@ -33271,7 +33301,7 @@ show stats routing route-updates [process <process>] [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33304,7 +33334,7 @@ show stats routing route-updates received [process <process>] [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33342,7 +33372,7 @@ show stats routing route-updates received add [process <process>] [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing route-updates received clear-fib`
 
@@ -33368,7 +33398,7 @@ show stats routing route-updates received clear-fib [process <process>] [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing route-updates received delete`
 
@@ -33394,7 +33424,7 @@ show stats routing route-updates received delete [process <process>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing route-updates received end-of-fib`
 
@@ -33420,7 +33450,7 @@ show stats routing route-updates received end-of-fib [process <process>] [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing route-updates received i-am-active`
 
@@ -33446,7 +33476,7 @@ show stats routing route-updates received i-am-active [process <process>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing route-updates received i-am-standby`
 
@@ -33472,7 +33502,7 @@ show stats routing route-updates received i-am-standby [process <process>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing route-updates received total`
 
@@ -33498,7 +33528,7 @@ show stats routing route-updates received total [process <process>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing route-updates sent`
 
@@ -33524,7 +33554,7 @@ show stats routing route-updates sent [process <process>] [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33556,7 +33586,7 @@ show stats routing route-updates sent total [process <process>] [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing routes`
 
@@ -33582,7 +33612,7 @@ show stats routing routes [process <process>] [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing-agent`
 
@@ -33607,7 +33637,7 @@ show stats routing-agent [since <since>] [force] [router <router>] [node <node>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33642,7 +33672,7 @@ show stats routing-agent add-route [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing-agent delete-route`
 
@@ -33667,7 +33697,7 @@ show stats routing-agent delete-route [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing-agent fib-install-errors`
 
@@ -33692,7 +33722,7 @@ show stats routing-agent fib-install-errors [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing-agent fib-meter`
 
@@ -33717,7 +33747,7 @@ show stats routing-agent fib-meter [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats routing-agent install-route`
 
@@ -33742,7 +33772,7 @@ show stats routing-agent install-route [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area`
 
@@ -33767,7 +33797,7 @@ show stats service-area [since <since>] [force] [router <router>] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33801,7 +33831,7 @@ show stats service-area dhcp [since <since>] [force] [router <router>] [node <no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33834,7 +33864,7 @@ show stats service-area dhcp unknown-dropped-packets [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4`
 
@@ -33859,7 +33889,7 @@ show stats service-area dhcp v4 [since <since>] [force] [router <router>] [node 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33891,7 +33921,7 @@ show stats service-area dhcp v4 client [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33932,7 +33962,7 @@ show stats service-area dhcp v4 client ack [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -33965,7 +33995,7 @@ show stats service-area dhcp v4 client ack dropped-packets [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client ack processed-packets`
 
@@ -33990,7 +34020,7 @@ show stats service-area dhcp v4 client ack processed-packets [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client ack sent-packets`
 
@@ -34015,7 +34045,7 @@ show stats service-area dhcp v4 client ack sent-packets [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client decline`
 
@@ -34040,7 +34070,7 @@ show stats service-area dhcp v4 client decline [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -34073,7 +34103,7 @@ show stats service-area dhcp v4 client decline dropped-packets [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client decline processed-packets`
 
@@ -34098,7 +34128,7 @@ show stats service-area dhcp v4 client decline processed-packets [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client decline sent-packets`
 
@@ -34123,7 +34153,7 @@ show stats service-area dhcp v4 client decline sent-packets [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client discover`
 
@@ -34148,7 +34178,7 @@ show stats service-area dhcp v4 client discover [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -34181,7 +34211,7 @@ show stats service-area dhcp v4 client discover dropped-packets [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client discover processed-packets`
 
@@ -34206,7 +34236,7 @@ show stats service-area dhcp v4 client discover processed-packets [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client discover sent-packets`
 
@@ -34231,7 +34261,7 @@ show stats service-area dhcp v4 client discover sent-packets [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client dropped-packets`
 
@@ -34256,7 +34286,7 @@ show stats service-area dhcp v4 client dropped-packets [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client nack`
 
@@ -34281,7 +34311,7 @@ show stats service-area dhcp v4 client nack [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -34314,7 +34344,7 @@ show stats service-area dhcp v4 client nack dropped-packets [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client nack processed-packets`
 
@@ -34339,7 +34369,7 @@ show stats service-area dhcp v4 client nack processed-packets [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client nack sent-packets`
 
@@ -34364,7 +34394,7 @@ show stats service-area dhcp v4 client nack sent-packets [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client offer`
 
@@ -34389,7 +34419,7 @@ show stats service-area dhcp v4 client offer [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -34422,7 +34452,7 @@ show stats service-area dhcp v4 client offer dropped-packets [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client offer processed-packets`
 
@@ -34447,7 +34477,7 @@ show stats service-area dhcp v4 client offer processed-packets [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client offer sent-packets`
 
@@ -34472,7 +34502,7 @@ show stats service-area dhcp v4 client offer sent-packets [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client processed-packets`
 
@@ -34497,7 +34527,7 @@ show stats service-area dhcp v4 client processed-packets [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client release`
 
@@ -34522,7 +34552,7 @@ show stats service-area dhcp v4 client release [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -34555,7 +34585,7 @@ show stats service-area dhcp v4 client release dropped-packets [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client release processed-packets`
 
@@ -34580,7 +34610,7 @@ show stats service-area dhcp v4 client release processed-packets [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client release sent-packets`
 
@@ -34605,7 +34635,7 @@ show stats service-area dhcp v4 client release sent-packets [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client request`
 
@@ -34630,7 +34660,7 @@ show stats service-area dhcp v4 client request [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -34663,7 +34693,7 @@ show stats service-area dhcp v4 client request dropped-packets [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client request processed-packets`
 
@@ -34688,7 +34718,7 @@ show stats service-area dhcp v4 client request processed-packets [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client request sent-packets`
 
@@ -34713,7 +34743,7 @@ show stats service-area dhcp v4 client request sent-packets [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client sent-packets`
 
@@ -34738,7 +34768,7 @@ show stats service-area dhcp v4 client sent-packets [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client unknown`
 
@@ -34763,7 +34793,7 @@ show stats service-area dhcp v4 client unknown [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -34796,7 +34826,7 @@ show stats service-area dhcp v4 client unknown dropped-packets [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client unknown processed-packets`
 
@@ -34821,7 +34851,7 @@ show stats service-area dhcp v4 client unknown processed-packets [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 client unknown sent-packets`
 
@@ -34846,7 +34876,7 @@ show stats service-area dhcp v4 client unknown sent-packets [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 relay`
 
@@ -34871,7 +34901,7 @@ show stats service-area dhcp v4 relay [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -34903,7 +34933,7 @@ show stats service-area dhcp v4 relay received [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -34938,7 +34968,7 @@ show stats service-area dhcp v4 relay received invalid-packets [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 relay received invalid-request-packets`
 
@@ -34963,7 +34993,7 @@ show stats service-area dhcp v4 relay received invalid-request-packets [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 relay received invalid-response-packets`
 
@@ -34988,7 +35018,7 @@ show stats service-area dhcp v4 relay received invalid-response-packets [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 relay received request-packets`
 
@@ -35013,7 +35043,7 @@ show stats service-area dhcp v4 relay received request-packets [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 relay received response-packets`
 
@@ -35038,7 +35068,7 @@ show stats service-area dhcp v4 relay received response-packets [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 relay transmitted`
 
@@ -35063,7 +35093,7 @@ show stats service-area dhcp v4 relay transmitted [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35095,7 +35125,7 @@ show stats service-area dhcp v4 relay transmitted request-packets [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v4 relay transmitted response-packets`
 
@@ -35120,7 +35150,7 @@ show stats service-area dhcp v4 relay transmitted response-packets [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6`
 
@@ -35145,7 +35175,7 @@ show stats service-area dhcp v6 [since <since>] [force] [router <router>] [node 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35177,7 +35207,7 @@ show stats service-area dhcp v6 client [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35212,7 +35242,7 @@ show stats service-area dhcp v6 client client-request [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35244,7 +35274,7 @@ show stats service-area dhcp v6 client client-request received-from-application 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client client-request sent-to-fast-lane`
 
@@ -35269,7 +35299,7 @@ show stats service-area dhcp v6 client client-request sent-to-fast-lane [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client router-advertisement`
 
@@ -35294,7 +35324,7 @@ show stats service-area dhcp v6 client router-advertisement [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35327,7 +35357,7 @@ show stats service-area dhcp v6 client router-advertisement dropped-from-applica
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client router-advertisement received-from-fast-lane`
 
@@ -35352,7 +35382,7 @@ show stats service-area dhcp v6 client router-advertisement received-from-fast-l
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client router-advertisement sent-to-application`
 
@@ -35377,7 +35407,7 @@ show stats service-area dhcp v6 client router-advertisement sent-to-application 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client router-solicitation`
 
@@ -35402,7 +35432,7 @@ show stats service-area dhcp v6 client router-solicitation [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35434,7 +35464,7 @@ show stats service-area dhcp v6 client router-solicitation received-from-applica
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client router-solicitation sent-to-fast-lane`
 
@@ -35459,7 +35489,7 @@ show stats service-area dhcp v6 client router-solicitation sent-to-fast-lane [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client server-reply`
 
@@ -35484,7 +35514,7 @@ show stats service-area dhcp v6 client server-reply [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35517,7 +35547,7 @@ show stats service-area dhcp v6 client server-reply dropped-from-application [si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client server-reply received-from-fast-lane`
 
@@ -35542,7 +35572,7 @@ show stats service-area dhcp v6 client server-reply received-from-fast-lane [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client server-reply sent-to-application`
 
@@ -35567,7 +35597,7 @@ show stats service-area dhcp v6 client server-reply sent-to-application [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 client unknown-dropped-from-application`
 
@@ -35592,7 +35622,7 @@ show stats service-area dhcp v6 client unknown-dropped-from-application [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 router-advertisement-server`
 
@@ -35617,7 +35647,7 @@ show stats service-area dhcp v6 router-advertisement-server [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35652,7 +35682,7 @@ show stats service-area dhcp v6 router-advertisement-server client-request [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35683,7 +35713,7 @@ show stats service-area dhcp v6 router-advertisement-server client-request dropp
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 router-advertisement-server router-advertisement`
 
@@ -35708,7 +35738,7 @@ show stats service-area dhcp v6 router-advertisement-server router-advertisement
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35740,7 +35770,7 @@ show stats service-area dhcp v6 router-advertisement-server router-advertisement
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 router-advertisement-server router-advertisement sent-to-fast-lane`
 
@@ -35765,7 +35795,7 @@ show stats service-area dhcp v6 router-advertisement-server router-advertisement
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 router-advertisement-server router-solicitation`
 
@@ -35790,7 +35820,7 @@ show stats service-area dhcp v6 router-advertisement-server router-solicitation 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35823,7 +35853,7 @@ show stats service-area dhcp v6 router-advertisement-server router-solicitation 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 router-advertisement-server router-solicitation received-from-fast-lane`
 
@@ -35848,7 +35878,7 @@ show stats service-area dhcp v6 router-advertisement-server router-solicitation 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 router-advertisement-server router-solicitation sent-to-application`
 
@@ -35873,7 +35903,7 @@ show stats service-area dhcp v6 router-advertisement-server router-solicitation 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 router-advertisement-server server-reply`
 
@@ -35898,7 +35928,7 @@ show stats service-area dhcp v6 router-advertisement-server server-reply [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -35929,7 +35959,7 @@ show stats service-area dhcp v6 router-advertisement-server server-reply dropped
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area dhcp v6 router-advertisement-server unknown-dropped-from-application`
 
@@ -35954,7 +35984,7 @@ show stats service-area dhcp v6 router-advertisement-server unknown-dropped-from
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received`
 
@@ -35979,7 +36009,7 @@ show stats service-area received [since <since>] [force] [router <router>] [node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -36051,7 +36081,7 @@ show stats service-area received adaptive-encryption-modify-packets [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received application-identification-classification-update`
 
@@ -36076,7 +36106,7 @@ show stats service-area received application-identification-classification-updat
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received application-identification-modify-for-deny-packets`
 
@@ -36101,7 +36131,7 @@ show stats service-area received application-identification-modify-for-deny-pack
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received application-identification-modify-packets`
 
@@ -36126,7 +36156,7 @@ show stats service-area received application-identification-modify-packets [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received collision-modify-packets`
 
@@ -36151,7 +36181,7 @@ show stats service-area received collision-modify-packets [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received dropped-icmp-request-packet-blackhole`
 
@@ -36176,7 +36206,7 @@ show stats service-area received dropped-icmp-request-packet-blackhole [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received dropped-icmp-request-packet-no-egress`
 
@@ -36201,7 +36231,7 @@ show stats service-area received dropped-icmp-request-packet-no-egress [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received dropped-ingress-interface-not-found`
 
@@ -36226,7 +36256,7 @@ show stats service-area received dropped-ingress-interface-not-found [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received dropped-packets`
 
@@ -36251,7 +36281,7 @@ show stats service-area received dropped-packets [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received dropped-tap-multiplex-recovery-packets`
 
@@ -36276,7 +36306,7 @@ show stats service-area received dropped-tap-multiplex-recovery-packets [since <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received duplicate-reverse-metadata-packets`
 
@@ -36301,7 +36331,7 @@ show stats service-area received duplicate-reverse-metadata-packets [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received empty-reverse-metadata-packets`
 
@@ -36326,7 +36356,7 @@ show stats service-area received empty-reverse-metadata-packets [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received existing-flows`
 
@@ -36351,7 +36381,7 @@ show stats service-area received existing-flows [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received existing-session`
 
@@ -36376,7 +36406,7 @@ show stats service-area received existing-session [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received existing-session-reverse-metadata-packets`
 
@@ -36401,7 +36431,7 @@ show stats service-area received existing-session-reverse-metadata-packets [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received external-protocol-agent-packets`
 
@@ -36426,7 +36456,7 @@ show stats service-area received external-protocol-agent-packets [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received fabric-packets`
 
@@ -36451,7 +36481,7 @@ show stats service-area received fabric-packets [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received fib-bad-shared-mem-entry`
 
@@ -36476,7 +36506,7 @@ show stats service-area received fib-bad-shared-mem-entry [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received flow-bad-shared-mem-entry`
 
@@ -36501,7 +36531,7 @@ show stats service-area received flow-bad-shared-mem-entry [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received flow-expired-reverse-metadata-packets`
 
@@ -36526,7 +36556,7 @@ show stats service-area received flow-expired-reverse-metadata-packets [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received flow-move-packets`
 
@@ -36551,7 +36581,7 @@ show stats service-area received flow-move-packets [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received hierarchical-service-validation`
 
@@ -36576,7 +36606,7 @@ show stats service-area received hierarchical-service-validation [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -36608,7 +36638,7 @@ show stats service-area received hierarchical-service-validation failure [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -36644,7 +36674,7 @@ show stats service-area received hierarchical-service-validation failure access-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received hierarchical-service-validation failure missing-forward-session-key`
 
@@ -36669,7 +36699,7 @@ show stats service-area received hierarchical-service-validation failure missing
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received hierarchical-service-validation failure missing-source-tenant`
 
@@ -36694,7 +36724,7 @@ show stats service-area received hierarchical-service-validation failure missing
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received hierarchical-service-validation failure service-not-found`
 
@@ -36719,7 +36749,7 @@ show stats service-area received hierarchical-service-validation failure service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received hierarchical-service-validation failure service-not-related`
 
@@ -36744,7 +36774,7 @@ show stats service-area received hierarchical-service-validation failure service
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received hierarchical-service-validation failure total`
 
@@ -36769,7 +36799,7 @@ show stats service-area received hierarchical-service-validation failure total [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received hierarchical-service-validation success`
 
@@ -36794,7 +36824,7 @@ show stats service-area received hierarchical-service-validation success [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received invalid-reverse-flow-modify`
 
@@ -36819,7 +36849,7 @@ show stats service-area received invalid-reverse-flow-modify [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received invalid-reverse-metadata-packets`
 
@@ -36844,7 +36874,7 @@ show stats service-area received invalid-reverse-metadata-packets [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received mid-flow-modify-packets`
 
@@ -36869,7 +36899,7 @@ show stats service-area received mid-flow-modify-packets [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received no-fib-entry`
 
@@ -36894,7 +36924,7 @@ show stats service-area received no-fib-entry [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received non-fabric-packets`
 
@@ -36919,7 +36949,7 @@ show stats service-area received non-fabric-packets [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received packets-with-stale-flow-hit`
 
@@ -36944,7 +36974,7 @@ show stats service-area received packets-with-stale-flow-hit [since <since>] [fo
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received packets-with-stale-reverse-metadata`
 
@@ -36969,7 +36999,7 @@ show stats service-area received packets-with-stale-reverse-metadata [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received reverse-metadata-process-failure`
 
@@ -36994,7 +37024,7 @@ show stats service-area received reverse-metadata-process-failure [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received session-collision-change-direction`
 
@@ -37019,7 +37049,7 @@ show stats service-area received session-collision-change-direction [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received session-collision-ignore-drop`
 
@@ -37044,7 +37074,7 @@ show stats service-area received session-collision-ignore-drop [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received session-collision-ignored`
 
@@ -37069,7 +37099,7 @@ show stats service-area received session-collision-ignored [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received session-collision-same-direction`
 
@@ -37094,7 +37124,7 @@ show stats service-area received session-collision-same-direction [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received session-ignored-reverse-metadata-packets`
 
@@ -37119,7 +37149,7 @@ show stats service-area received session-ignored-reverse-metadata-packets [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received session-updated-reverse-metadata-packets`
 
@@ -37144,7 +37174,7 @@ show stats service-area received session-updated-reverse-metadata-packets [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received source-lookup-bad-shared-mem-entry`
 
@@ -37169,7 +37199,7 @@ show stats service-area received source-lookup-bad-shared-mem-entry [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received update-flow-with-peer-failure`
 
@@ -37194,7 +37224,7 @@ show stats service-area received update-flow-with-peer-failure [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received update-flow-with-peer-success`
 
@@ -37219,7 +37249,7 @@ show stats service-area received update-flow-with-peer-success [since <since>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received update-session-with-peer-failure`
 
@@ -37244,7 +37274,7 @@ show stats service-area received update-session-with-peer-failure [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received update-session-with-peer-success`
 
@@ -37269,7 +37299,7 @@ show stats service-area received update-session-with-peer-success [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received valid-reverse-metadata-packets`
 
@@ -37294,7 +37324,7 @@ show stats service-area received valid-reverse-metadata-packets [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area sent`
 
@@ -37319,7 +37349,7 @@ show stats service-area sent [since <since>] [force] [router <router>] [node <no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -37354,7 +37384,7 @@ show stats service-area sent arp-resolve-failure [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area sent arp-resolve-pending`
 
@@ -37379,7 +37409,7 @@ show stats service-area sent arp-resolve-pending [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area sent arp-resolve-success`
 
@@ -37404,7 +37434,7 @@ show stats service-area sent arp-resolve-success [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area sent success`
 
@@ -37429,7 +37459,7 @@ show stats service-area sent success [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area sent tcp-reset-for-adaptive-encryption-failure`
 
@@ -37454,7 +37484,7 @@ show stats service-area sent tcp-reset-for-adaptive-encryption-failure [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area session-install-errors`
 
@@ -37479,7 +37509,7 @@ show stats service-area session-install-errors [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -37516,7 +37546,7 @@ show stats service-area session-install-errors duplicate-reverse-flow [since <si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area session-install-errors fib-lookup`
 
@@ -37541,7 +37571,7 @@ show stats service-area session-install-errors fib-lookup [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area session-install-errors gateway-lookup-failure`
 
@@ -37566,7 +37596,7 @@ show stats service-area session-install-errors gateway-lookup-failure [since <si
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area session-install-errors invalid-packet`
 
@@ -37591,7 +37621,7 @@ show stats service-area session-install-errors invalid-packet [since <since>] [f
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area session-install-errors service-paths-unavailable`
 
@@ -37616,7 +37646,7 @@ show stats service-area session-install-errors service-paths-unavailable [since 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area session-install-errors urpf-check-failure`
 
@@ -37641,7 +37671,7 @@ show stats service-area session-install-errors urpf-check-failure [since <since>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area session-install-errors waypoint-allocation`
 
@@ -37666,7 +37696,7 @@ show stats service-area session-install-errors waypoint-allocation [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats session`
 
@@ -37691,7 +37721,7 @@ show stats session [since <since>] [force] [router <router>] [node <node>] [<ver
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -37728,7 +37758,7 @@ show stats session active [since <since>] [force] [router <router>] [node <node>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats session add`
 
@@ -37753,7 +37783,7 @@ show stats session add [since <since>] [force] [router <router>] [node <node>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats session added-existing`
 
@@ -37778,7 +37808,7 @@ show stats session added-existing [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats session duplicate-session-id`
 
@@ -37803,7 +37833,7 @@ show stats session duplicate-session-id [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats session flow`
 
@@ -37828,7 +37858,7 @@ show stats session flow [since <since>] [force] [router <router>] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -37861,7 +37891,7 @@ show stats session flow active [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats session flow add`
 
@@ -37886,7 +37916,7 @@ show stats session flow add [since <since>] [force] [router <router>] [node <nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -37917,7 +37947,7 @@ show stats session flow add failure [since <since>] [force] [router <router>] [n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats session flow remove`
 
@@ -37942,7 +37972,7 @@ show stats session flow remove [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -37973,7 +38003,7 @@ show stats session flow remove failure [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats session max-remove-timeout-exceeded`
 
@@ -37998,7 +38028,7 @@ show stats session max-remove-timeout-exceeded [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats session remove`
 
@@ -38023,7 +38053,7 @@ show stats session remove [since <since>] [force] [router <router>] [node <node>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-nat`
 
@@ -38048,7 +38078,7 @@ show stats source-nat [since <since>] [force] [router <router>] [node <node>] [<
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -38087,7 +38117,7 @@ show stats source-nat active-tables [since <since>] [force] [router <router>] [n
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-nat allocate-ports-for-db`
 
@@ -38112,7 +38142,7 @@ show stats source-nat allocate-ports-for-db [since <since>] [force] [router <rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-nat giid-transition-to-active`
 
@@ -38137,7 +38167,7 @@ show stats source-nat giid-transition-to-active [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-nat giid-transition-to-inactive`
 
@@ -38162,7 +38192,7 @@ show stats source-nat giid-transition-to-inactive [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-nat inactive-tables`
 
@@ -38187,7 +38217,7 @@ show stats source-nat inactive-tables [since <since>] [force] [router <router>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-nat reinitialize-ports-in-db`
 
@@ -38212,7 +38242,7 @@ show stats source-nat reinitialize-ports-in-db [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-nat release-ports-to-db-failure`
 
@@ -38237,7 +38267,7 @@ show stats source-nat release-ports-to-db-failure [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-nat release-ports-to-db-success`
 
@@ -38262,7 +38292,7 @@ show stats source-nat release-ports-to-db-success [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-nat reserved-ports`
 
@@ -38287,7 +38317,7 @@ show stats source-nat reserved-ports [since <since>] [force] [router <router>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats source-tenant`
 
@@ -38312,7 +38342,7 @@ show stats source-tenant [since <since>] [force] [router <router>] [node <node>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -38343,7 +38373,7 @@ show stats source-tenant meter [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats ssc`
 
@@ -38368,7 +38398,7 @@ show stats ssc [since <since>] [force] [router <router>] [node <node>] [<verbosi
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -38386,7 +38416,7 @@ show stats ssc [since <since>] [force] [router <router>] [node <node>] [<verbosi
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc clients`
 
@@ -38411,7 +38441,7 @@ show stats ssc clients [since <since>] [force] [router <router>] [node <node>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -38425,7 +38455,7 @@ show stats ssc clients [since <since>] [force] [router <router>] [node <node>] [
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc clients connects`
 
@@ -38450,14 +38480,14 @@ show stats ssc clients connects [since <since>] [force] [router <router>] [node 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc clients disconnects`
 
@@ -38482,14 +38512,14 @@ show stats ssc clients disconnects [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc operations`
 
@@ -38514,7 +38544,7 @@ show stats ssc operations [since <since>] [force] [router <router>] [node <node>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -38528,7 +38558,7 @@ show stats ssc operations [since <since>] [force] [router <router>] [node <node>
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc operations compressions`
 
@@ -38553,14 +38583,14 @@ show stats ssc operations compressions [since <since>] [force] [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc operations decompressions`
 
@@ -38585,14 +38615,14 @@ show stats ssc operations decompressions [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received`
 
@@ -38617,7 +38647,7 @@ show stats ssc received [since <since>] [force] [router <router>] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -38631,7 +38661,7 @@ show stats ssc received [since <since>] [force] [router <router>] [node <node>] 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service`
 
@@ -38657,7 +38687,7 @@ show stats ssc received by-service [service <service>] [since <since>] [force] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -38675,7 +38705,7 @@ show stats ssc received by-service [service <service>] [since <since>] [force] [
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service deregistrations`
 
@@ -38701,14 +38731,14 @@ show stats ssc received by-service deregistrations [service <service>] [since <s
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service publishes`
 
@@ -38734,14 +38764,14 @@ show stats ssc received by-service publishes [service <service>] [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service registration-updates`
 
@@ -38767,14 +38797,14 @@ show stats ssc received by-service registration-updates [service <service>] [sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service registrations`
 
@@ -38800,14 +38830,14 @@ show stats ssc received by-service registrations [service <service>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service requests`
 
@@ -38833,14 +38863,14 @@ show stats ssc received by-service requests [service <service>] [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received by-service responses`
 
@@ -38866,14 +38896,14 @@ show stats ssc received by-service responses [service <service>] [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors`
 
@@ -38898,7 +38928,7 @@ show stats ssc received errors [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -38919,7 +38949,7 @@ show stats ssc received errors [since <since>] [force] [router <router>] [node <
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors bad-request-responses`
 
@@ -38944,14 +38974,14 @@ show stats ssc received errors bad-request-responses [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors invalid-message`
 
@@ -38976,14 +39006,14 @@ show stats ssc received errors invalid-message [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors invalid-request`
 
@@ -39008,14 +39038,14 @@ show stats ssc received errors invalid-request [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors no-client-transaction`
 
@@ -39040,14 +39070,14 @@ show stats ssc received errors no-client-transaction [since <since>] [force] [ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors no-endpoints-found`
 
@@ -39072,14 +39102,14 @@ show stats ssc received errors no-endpoints-found [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors response-not-ready`
 
@@ -39104,14 +39134,14 @@ show stats ssc received errors response-not-ready [since <since>] [force] [route
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors server-error-responses`
 
@@ -39136,14 +39166,14 @@ show stats ssc received errors server-error-responses [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors unknown-message-type`
 
@@ -39168,14 +39198,14 @@ show stats ssc received errors unknown-message-type [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc received errors unknown-ssc-request`
 
@@ -39200,14 +39230,14 @@ show stats ssc received errors unknown-ssc-request [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc sessions`
 
@@ -39232,7 +39262,7 @@ show stats ssc sessions [since <since>] [force] [router <router>] [node <node>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -39245,7 +39275,7 @@ show stats ssc sessions [since <since>] [force] [router <router>] [node <node>] 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc sessions active`
 
@@ -39270,14 +39300,14 @@ show stats ssc sessions active [since <since>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions`
 
@@ -39302,7 +39332,7 @@ show stats ssc transactions [since <since>] [force] [router <router>] [node <nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -39317,7 +39347,7 @@ show stats ssc transactions [since <since>] [force] [router <router>] [node <nod
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions client-transactions`
 
@@ -39342,14 +39372,14 @@ show stats ssc transactions client-transactions [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions errors`
 
@@ -39374,7 +39404,7 @@ show stats ssc transactions errors [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -39387,7 +39417,7 @@ show stats ssc transactions errors [since <since>] [force] [router <router>] [no
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions errors insertion-failures`
 
@@ -39412,14 +39442,14 @@ show stats ssc transactions errors insertion-failures [since <since>] [force] [r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transactions server-transactions`
 
@@ -39444,14 +39474,14 @@ show stats ssc transactions server-transactions [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted`
 
@@ -39476,7 +39506,7 @@ show stats ssc transmitted [since <since>] [force] [router <router>] [node <node
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -39494,7 +39524,7 @@ show stats ssc transmitted [since <since>] [force] [router <router>] [node <node
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted by-service`
 
@@ -39520,7 +39550,7 @@ show stats ssc transmitted by-service [service <service>] [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -39534,7 +39564,7 @@ show stats ssc transmitted by-service [service <service>] [since <since>] [force
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted by-service publishes`
 
@@ -39560,14 +39590,14 @@ show stats ssc transmitted by-service publishes [service <service>] [since <sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted by-service requests`
 
@@ -39593,14 +39623,14 @@ show stats ssc transmitted by-service requests [service <service>] [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted completed-responses`
 
@@ -39625,14 +39655,14 @@ show stats ssc transmitted completed-responses [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted errors`
 
@@ -39657,7 +39687,7 @@ show stats ssc transmitted errors [since <since>] [force] [router <router>] [nod
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -39670,7 +39700,7 @@ show stats ssc transmitted errors [since <since>] [force] [router <router>] [nod
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted errors write-failures`
 
@@ -39695,14 +39725,14 @@ show stats ssc transmitted errors write-failures [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted local-responses`
 
@@ -39727,14 +39757,14 @@ show stats ssc transmitted local-responses [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted publish-on-registrations`
 
@@ -39759,14 +39789,14 @@ show stats ssc transmitted publish-on-registrations [since <since>] [force] [rou
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats ssc transmitted retransmitted-responses`
 
@@ -39791,14 +39821,14 @@ show stats ssc transmitted retransmitted-responses [since <since>] [force] [rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats traffic-eng`
 
@@ -39823,7 +39853,7 @@ show stats traffic-eng [since <since>] [force] [router <router>] [node <node>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -39855,18 +39885,19 @@ show stats traffic-eng device-interface [since <since>] [force] [router <router>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
 | [`common`](#show-stats-traffic-eng-device-interface-common) | Stats pertaining to both device interface and peer path traffic engineering |
-| [`dequeue-cycle-count`](#show-stats-traffic-eng-device-interface-dequeue-cycle-count) | The current dequeue cycle count in traffic engineering |
-| [`enqueue-cycle-count`](#show-stats-traffic-eng-device-interface-enqueue-cycle-count) | The current enqueue cycle count in traffic engineering |
+| [`dequeue-cycle-count`](#show-stats-traffic-eng-device-interface-dequeue-cycle-count) | The current dequeue cycle count in traffic engineering (cycles) |
+| [`enqueue-cycle-count`](#show-stats-traffic-eng-device-interface-enqueue-cycle-count) | The current enqueue cycle count in traffic engineering (cycles) |
 | [`packets-queued`](#show-stats-traffic-eng-device-interface-packets-queued) | The current number of packets queued for this device interface |
 | [`peer-path`](#show-stats-traffic-eng-device-interface-peer-path) | Stats pertaining to peer path traffic engineering |
 | [`per-traffic-class`](#show-stats-traffic-eng-device-interface-per-traffic-class) | Stats pertaining to device port traffic engineering per traffic class |
+| [`scheduler-reset`](#show-stats-traffic-eng-device-interface-scheduler-reset) | The number of times the scheduler has been reset |
 
 ## `show stats traffic-eng device-interface common`
 
@@ -39893,7 +39924,7 @@ show stats traffic-eng device-interface common [core <core>] [port <port>] [sinc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -39928,7 +39959,7 @@ show stats traffic-eng device-interface common schedule-failure [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface common schedule-success`
 
@@ -39955,7 +39986,7 @@ show stats traffic-eng device-interface common schedule-success [core <core>] [p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface common tracked-buffers`
 
@@ -39982,11 +40013,11 @@ show stats traffic-eng device-interface common tracked-buffers [core <core>] [po
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface dequeue-cycle-count`
 
-The current dequeue cycle count in traffic engineering
+The current dequeue cycle count in traffic engineering (cycles)
 
 #### Usage
 
@@ -40008,11 +40039,11 @@ show stats traffic-eng device-interface dequeue-cycle-count [port <port>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface enqueue-cycle-count`
 
-The current enqueue cycle count in traffic engineering
+The current enqueue cycle count in traffic engineering (cycles)
 
 #### Usage
 
@@ -40034,7 +40065,7 @@ show stats traffic-eng device-interface enqueue-cycle-count [port <port>] [since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface packets-queued`
 
@@ -40060,7 +40091,7 @@ show stats traffic-eng device-interface packets-queued [port <port>] [since <sin
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path`
 
@@ -40089,20 +40120,21 @@ show stats traffic-eng device-interface peer-path [peer-name <peer-name>] [peer-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`dequeue-cycle-count`](#show-stats-traffic-eng-device-interface-peer-path-dequeue-cycle-count) | The current dequeue cycle count in traffic engineering for this peer path |
-| [`enqueue-cycle-count`](#show-stats-traffic-eng-device-interface-peer-path-enqueue-cycle-count) | The current enqueue cycle count in traffic engineering for this peer path |
+| [`dequeue-cycle-count`](#show-stats-traffic-eng-device-interface-peer-path-dequeue-cycle-count) | The current dequeue cycle count in traffic engineering for this peer path (cycles) |
+| [`enqueue-cycle-count`](#show-stats-traffic-eng-device-interface-peer-path-enqueue-cycle-count) | The current enqueue cycle count in traffic engineering for this peer path (cycles) |
 | [`packets-queued`](#show-stats-traffic-eng-device-interface-peer-path-packets-queued) | The current number of packets queued in traffic engineering for this peer path |
 | [`per-traffic-class`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class) | Stats pertaining to peer path traffic engineering per traffic class |
+| [`scheduler-reset`](#show-stats-traffic-eng-device-interface-peer-path-scheduler-reset) | The number of times the scheduler has been reset |
 
 ## `show stats traffic-eng device-interface peer-path dequeue-cycle-count`
 
-The current dequeue cycle count in traffic engineering for this peer path
+The current dequeue cycle count in traffic engineering for this peer path (cycles)
 
 #### Usage
 
@@ -40127,11 +40159,11 @@ show stats traffic-eng device-interface peer-path dequeue-cycle-count [peer-name
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path enqueue-cycle-count`
 
-The current enqueue cycle count in traffic engineering for this peer path
+The current enqueue cycle count in traffic engineering for this peer path (cycles)
 
 #### Usage
 
@@ -40156,7 +40188,7 @@ show stats traffic-eng device-interface peer-path enqueue-cycle-count [peer-name
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path packets-queued`
 
@@ -40185,7 +40217,7 @@ show stats traffic-eng device-interface peer-path packets-queued [peer-name <pee
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class`
 
@@ -40215,7 +40247,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class [peer-name <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -40229,10 +40261,10 @@ show stats traffic-eng device-interface peer-path per-traffic-class [peer-name <
 | [`dequeue-max-latency-drop-packets`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-dequeue-max-latency-drop-packets) | The number of packets scheduled for transmission that were dropped due to excessive latency for this peer path |
 | [`dequeue-success-bytes`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-dequeue-success-bytes) | The number of bytes successfully dequeued from the scheduler for transmission for this peer path |
 | [`dequeue-success-packets`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-dequeue-success-packets) | The number of packets successfully dequeued from the scheduler for transmission for this peer path |
-| [`schedule-failure-bandwidth`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-schedule-failure-bandwidth) | Traffic bandwidth dropped by the scheduler for this peer path |
+| [`schedule-failure-bandwidth`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-schedule-failure-bandwidth) | Traffic bandwidth dropped by the scheduler for this peer path (bytes per second) |
 | [`schedule-failure-bytes`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-schedule-failure-bytes) | The number of bytes failed to be scheduled for transmission due to bandwidth oversubscription for this peer path |
 | [`schedule-failure-packets`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-schedule-failure-packets) | The number of packets failed to scheduled for transmission due to bandwidth oversubscription for this peer path |
-| [`schedule-success-bandwidth`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-schedule-success-bandwidth) | Traffic bandwidth successfully scheduled for transmission for this peer path |
+| [`schedule-success-bandwidth`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-schedule-success-bandwidth) | Traffic bandwidth successfully scheduled for transmission for this peer path (bytes per second) |
 | [`schedule-success-bytes`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-schedule-success-bytes) | The number of bytes successfully scheduled for transmission for this peer path |
 | [`schedule-success-packets`](#show-stats-traffic-eng-device-interface-peer-path-per-traffic-class-schedule-success-packets) | The number of packets successfully scheduled for transmission for this peer path |
 
@@ -40264,7 +40296,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class buffer-capac
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class buffer-capacity-exceeded-packets`
 
@@ -40294,7 +40326,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class buffer-capac
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-aqm-drop-bytes`
 
@@ -40324,7 +40356,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-aqm-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-aqm-drop-packets`
 
@@ -40354,7 +40386,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-aqm-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-max-latency-drop-bytes`
 
@@ -40384,7 +40416,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-max-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-max-latency-drop-packets`
 
@@ -40414,7 +40446,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-max-
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-success-bytes`
 
@@ -40444,7 +40476,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-succ
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-success-packets`
 
@@ -40474,11 +40506,11 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-succ
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-failure-bandwidth`
 
-Traffic bandwidth dropped by the scheduler for this peer path
+Traffic bandwidth dropped by the scheduler for this peer path (bytes per second)
 
 #### Usage
 
@@ -40504,7 +40536,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-fai
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-failure-bytes`
 
@@ -40534,7 +40566,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-fai
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-failure-packets`
 
@@ -40564,11 +40596,11 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-fai
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-success-bandwidth`
 
-Traffic bandwidth successfully scheduled for transmission for this peer path
+Traffic bandwidth successfully scheduled for transmission for this peer path (bytes per second)
 
 #### Usage
 
@@ -40594,7 +40626,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-suc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-success-bytes`
 
@@ -40624,7 +40656,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-suc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-success-packets`
 
@@ -40654,7 +40686,36 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-suc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats traffic-eng device-interface peer-path scheduler-reset`
+
+The number of times the scheduler has been reset
+
+#### Usage
+
+```
+show stats traffic-eng device-interface peer-path scheduler-reset [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class`
 
@@ -40681,7 +40742,7 @@ show stats traffic-eng device-interface per-traffic-class [port <port>] [traffic
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -40695,10 +40756,10 @@ show stats traffic-eng device-interface per-traffic-class [port <port>] [traffic
 | [`dequeue-max-latency-drop-packets`](#show-stats-traffic-eng-device-interface-per-traffic-class-dequeue-max-latency-drop-packets) | The number of packets scheduled for transmission that were dropped due to excessive latency |
 | [`dequeue-success-bytes`](#show-stats-traffic-eng-device-interface-per-traffic-class-dequeue-success-bytes) | The number of bytes successfully dequeued from the scheduler for transmission |
 | [`dequeue-success-packets`](#show-stats-traffic-eng-device-interface-per-traffic-class-dequeue-success-packets) | The number of packets successfully dequeued from the scheduler for transmission |
-| [`schedule-failure-bandwidth`](#show-stats-traffic-eng-device-interface-per-traffic-class-schedule-failure-bandwidth) | Traffic bandwidth dropped by the scheduler |
+| [`schedule-failure-bandwidth`](#show-stats-traffic-eng-device-interface-per-traffic-class-schedule-failure-bandwidth) | Traffic bandwidth dropped by the scheduler (bytes per second) |
 | [`schedule-failure-bytes`](#show-stats-traffic-eng-device-interface-per-traffic-class-schedule-failure-bytes) | The number of bytes failed to be scheduled for transmission due to bandwidth oversubscription |
 | [`schedule-failure-packets`](#show-stats-traffic-eng-device-interface-per-traffic-class-schedule-failure-packets) | The number of packets failed to scheduled for transmission due to bandwidth oversubscription |
-| [`schedule-success-bandwidth`](#show-stats-traffic-eng-device-interface-per-traffic-class-schedule-success-bandwidth) | Traffic bandwidth successfully scheduled for transmission |
+| [`schedule-success-bandwidth`](#show-stats-traffic-eng-device-interface-per-traffic-class-schedule-success-bandwidth) | Traffic bandwidth successfully scheduled for transmission (bytes per second) |
 | [`schedule-success-bytes`](#show-stats-traffic-eng-device-interface-per-traffic-class-schedule-success-bytes) | The number of bytes successfully scheduled for transmission |
 | [`schedule-success-packets`](#show-stats-traffic-eng-device-interface-per-traffic-class-schedule-success-packets) | The number of packets successfully scheduled for transmission |
 
@@ -40727,7 +40788,7 @@ show stats traffic-eng device-interface per-traffic-class buffer-capacity-exceed
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class buffer-capacity-exceeded-packets`
 
@@ -40754,7 +40815,7 @@ show stats traffic-eng device-interface per-traffic-class buffer-capacity-exceed
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class dequeue-aqm-drop-bytes`
 
@@ -40781,7 +40842,7 @@ show stats traffic-eng device-interface per-traffic-class dequeue-aqm-drop-bytes
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class dequeue-aqm-drop-packets`
 
@@ -40808,7 +40869,7 @@ show stats traffic-eng device-interface per-traffic-class dequeue-aqm-drop-packe
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class dequeue-max-latency-drop-bytes`
 
@@ -40835,7 +40896,7 @@ show stats traffic-eng device-interface per-traffic-class dequeue-max-latency-dr
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class dequeue-max-latency-drop-packets`
 
@@ -40862,7 +40923,7 @@ show stats traffic-eng device-interface per-traffic-class dequeue-max-latency-dr
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class dequeue-success-bytes`
 
@@ -40889,7 +40950,7 @@ show stats traffic-eng device-interface per-traffic-class dequeue-success-bytes 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class dequeue-success-packets`
 
@@ -40916,11 +40977,11 @@ show stats traffic-eng device-interface per-traffic-class dequeue-success-packet
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class schedule-failure-bandwidth`
 
-Traffic bandwidth dropped by the scheduler
+Traffic bandwidth dropped by the scheduler (bytes per second)
 
 #### Usage
 
@@ -40943,7 +41004,7 @@ show stats traffic-eng device-interface per-traffic-class schedule-failure-bandw
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class schedule-failure-bytes`
 
@@ -40970,7 +41031,7 @@ show stats traffic-eng device-interface per-traffic-class schedule-failure-bytes
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class schedule-failure-packets`
 
@@ -40997,11 +41058,11 @@ show stats traffic-eng device-interface per-traffic-class schedule-failure-packe
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class schedule-success-bandwidth`
 
-Traffic bandwidth successfully scheduled for transmission
+Traffic bandwidth successfully scheduled for transmission (bytes per second)
 
 #### Usage
 
@@ -41024,7 +41085,7 @@ show stats traffic-eng device-interface per-traffic-class schedule-success-bandw
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class schedule-success-bytes`
 
@@ -41051,7 +41112,7 @@ show stats traffic-eng device-interface per-traffic-class schedule-success-bytes
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng device-interface per-traffic-class schedule-success-packets`
 
@@ -41078,7 +41139,33 @@ show stats traffic-eng device-interface per-traffic-class schedule-success-packe
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats traffic-eng device-interface scheduler-reset`
+
+The number of times the scheduler has been reset
+
+#### Usage
+
+```
+show stats traffic-eng device-interface scheduler-reset [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application`
 
@@ -41105,7 +41192,7 @@ show stats traffic-eng internal-application [core <core>] [internal-application 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -41114,6 +41201,7 @@ show stats traffic-eng internal-application [core <core>] [internal-application 
 | [`per-traffic-class`](#show-stats-traffic-eng-internal-application-per-traffic-class) | Stats pertaining to application traffic engineering per traffic class |
 | [`schedule-failure`](#show-stats-traffic-eng-internal-application-schedule-failure) | The number of packets failed to be scheduled in traffic engineering |
 | [`schedule-success`](#show-stats-traffic-eng-internal-application-schedule-success) | The number of packets successfully scheduled in traffic engineering |
+| [`scheduler-reset`](#show-stats-traffic-eng-internal-application-scheduler-reset) | The number of times scheduler has been reset |
 | [`sent-retry`](#show-stats-traffic-eng-internal-application-sent-retry) | The number of packet send retry attempts to the internal application |
 | [`sent-success`](#show-stats-traffic-eng-internal-application-sent-success) | The number of packets successfully sent to the internal application |
 | [`sent-timeout`](#show-stats-traffic-eng-internal-application-sent-timeout) | The number of packets dropped due to excess scheduling latency for the internal application |
@@ -41144,7 +41232,7 @@ show stats traffic-eng internal-application per-traffic-class [core <core>] [int
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -41183,7 +41271,7 @@ show stats traffic-eng internal-application per-traffic-class buffer-capacity-ex
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application per-traffic-class dequeue-aqm-drop-packets`
 
@@ -41211,7 +41299,7 @@ show stats traffic-eng internal-application per-traffic-class dequeue-aqm-drop-p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application per-traffic-class dequeue-max-latency-drop-packets`
 
@@ -41239,7 +41327,7 @@ show stats traffic-eng internal-application per-traffic-class dequeue-max-latenc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application per-traffic-class dequeue-success-packets`
 
@@ -41267,7 +41355,7 @@ show stats traffic-eng internal-application per-traffic-class dequeue-success-pa
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application per-traffic-class schedule-failure-packets`
 
@@ -41295,7 +41383,7 @@ show stats traffic-eng internal-application per-traffic-class schedule-failure-p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application per-traffic-class schedule-success-packets`
 
@@ -41323,7 +41411,7 @@ show stats traffic-eng internal-application per-traffic-class schedule-success-p
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application schedule-failure`
 
@@ -41350,7 +41438,7 @@ show stats traffic-eng internal-application schedule-failure [core <core>] [inte
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application schedule-success`
 
@@ -41377,7 +41465,34 @@ show stats traffic-eng internal-application schedule-success [core <core>] [inte
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats traffic-eng internal-application scheduler-reset`
+
+The number of times scheduler has been reset
+
+#### Usage
+
+```
+show stats traffic-eng internal-application scheduler-reset [core <core>] [internal-application <internal-application>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| internal-application | The internal application queue name for which this metric was generated (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application sent-retry`
 
@@ -41404,7 +41519,7 @@ show stats traffic-eng internal-application sent-retry [core <core>] [internal-a
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application sent-success`
 
@@ -41431,7 +41546,7 @@ show stats traffic-eng internal-application sent-success [core <core>] [internal
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-eng internal-application sent-timeout`
 
@@ -41458,7 +41573,7 @@ show stats traffic-eng internal-application sent-timeout [core <core>] [internal
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-export`
 
@@ -41483,7 +41598,7 @@ show stats traffic-export [since <since>] [force] [router <router>] [node <node>
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -41517,7 +41632,7 @@ show stats traffic-export enqueue-failure [core <core>] [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-export rate-limit-exceeded`
 
@@ -41542,7 +41657,7 @@ show stats traffic-export rate-limit-exceeded [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-export transmit`
 
@@ -41567,7 +41682,7 @@ show stats traffic-export transmit [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -41600,7 +41715,7 @@ show stats traffic-export transmit batches [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-export transmit failure`
 
@@ -41625,7 +41740,7 @@ show stats traffic-export transmit failure [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats traffic-export transmit success`
 
@@ -41650,7 +41765,7 @@ show stats traffic-export transmit success [since <since>] [force] [router <rout
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint`
 
@@ -41675,7 +41790,7 @@ show stats waypoint [since <since>] [force] [router <router>] [node <node>] [<ve
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -41715,7 +41830,7 @@ show stats waypoint active-inter-router-tables [since <since>] [force] [router <
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint allocate-ports-for-default-range-tables`
 
@@ -41740,7 +41855,7 @@ show stats waypoint allocate-ports-for-default-range-tables [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint allocate-ports-for-range-based-tables`
 
@@ -41765,7 +41880,7 @@ show stats waypoint allocate-ports-for-range-based-tables [since <since>] [force
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint giid-transition-to-active`
 
@@ -41790,7 +41905,7 @@ show stats waypoint giid-transition-to-active [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint giid-transition-to-inactive`
 
@@ -41815,7 +41930,7 @@ show stats waypoint giid-transition-to-inactive [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint inactive-inter-router-tables`
 
@@ -41840,7 +41955,7 @@ show stats waypoint inactive-inter-router-tables [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint reinitialize-ports-in-db`
 
@@ -41865,7 +41980,7 @@ show stats waypoint reinitialize-ports-in-db [since <since>] [force] [router <ro
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint release-ports-to-db-failure`
 
@@ -41890,7 +42005,7 @@ show stats waypoint release-ports-to-db-failure [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint release-ports-to-db-success`
 
@@ -41915,7 +42030,7 @@ show stats waypoint release-ports-to-db-success [since <since>] [force] [router 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats waypoint reserved-ports`
 
@@ -41940,7 +42055,7 @@ show stats waypoint reserved-ports [since <since>] [force] [router <router>] [no
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats worker-core`
 
@@ -41965,7 +42080,7 @@ show stats worker-core [since <since>] [force] [router <router>] [node <node>] [
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -42001,7 +42116,7 @@ show stats worker-core aes [core <core>] [since <since>] [force] [router <router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -42033,7 +42148,7 @@ show stats worker-core aes context [core <core>] [since <since>] [force] [router
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -42066,7 +42181,7 @@ show stats worker-core aes context create [core <core>] [since <since>] [force] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -42099,7 +42214,7 @@ show stats worker-core aes context create failure [core <core>] [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats worker-core aes context create success`
 
@@ -42125,7 +42240,7 @@ show stats worker-core aes context create success [core <core>] [since <since>] 
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats worker-core aes context destroy`
 
@@ -42151,7 +42266,7 @@ show stats worker-core aes context destroy [core <core>] [since <since>] [force]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ##### Subcommands
 
@@ -42184,7 +42299,7 @@ show stats worker-core aes context destroy failure [core <core>] [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats worker-core aes context destroy success`
 
@@ -42210,7 +42325,7 @@ show stats worker-core aes context destroy success [core <core>] [since <since>]
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats worker-core caching-loop-exception`
 
@@ -42236,7 +42351,7 @@ show stats worker-core caching-loop-exception [core <core>] [since <since>] [for
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats worker-core control-messages-sent`
 
@@ -42262,7 +42377,7 @@ show stats worker-core control-messages-sent [core <core>] [since <since>] [forc
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats worker-core packet-processing-utilization`
 
@@ -42288,7 +42403,7 @@ show stats worker-core packet-processing-utilization [core <core>] [since <since
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats worker-core process-loop-exception`
 
@@ -42313,4 +42428,4 @@ show stats worker-core process-loop-exception [since <since>] [force] [router <r
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail | summary | debug (default: detail) |
+| verbosity | detail \| summary \| debug (default: detail) |
