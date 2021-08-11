@@ -12,7 +12,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 :::
 
 ## Release 5.1.5
-**Release Date:** August 12, 2021
+**Release Date:** August 13, 2021
 
 ### New Features
 
@@ -41,6 +41,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-40035 Jute maxbuffer limit for running/candidate configurations:** Created an alarm when the zookeeper jute buffer exceeds a threshold (75%) and an alert to change the system environment config.
 ------
 - **I95-40060 `show session captures` not displaying active captures:** Updated the query argument to correctly display session captures for all services.
+------
+- **I95-40468 Session Optimization incompatability with Application ID:** Resolved an incompatibility between Application Identification and Session Optimization.
 ------
 - **I95-40624 Occasional failures in time-based HMAC:** This issue has been resolved.
 ------
