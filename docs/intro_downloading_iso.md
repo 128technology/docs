@@ -23,7 +23,7 @@ With releases 4.5.6-1 and 5.0.0-1 v2 (and greater), we now provide a single ISO 
 
 ### Installer Considerations
 
-The username/token simplifies access and does not require the conversion process used for the certificate. With release 2.7 of the **128T Installer**, both a certificate or username/token can be used for installation. However, if you are using only a username/token for software access, Installer 3.0.0 is required. 
+The username/token simplifies access and does not require the conversion process used for the certificate. With the latest release of the 128T Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 or greater is required. 128T/SSR software version 5.3 and greater accept **only** the username and token for software access. 
 
 :::note
 Do not uninstall old versions of the 128T Installer. Later versions of the 128T Installer have dependencies on the earlier versions, and uninstalling them may cause issues for rollback operations. 
