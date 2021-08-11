@@ -12,7 +12,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 :::
 
 ## Release 5.1.5
-**Release Date:** August 11, 2021
+**Release Date:** August 12, 2021
 
 ### New Features
 
@@ -69,6 +69,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-41518 `Enabled` switch is not styled/themed properly when creating a new template:** The **Enabled** switch is now colored with the appropriate styles.
 ------
 - **I95-41556 High number of AP download events:** Fixed an issue where both nodes in an HA Conductor were generating duplicate provisioning events. Added asset ID and a request ID to all provisioning events and the version to download and upgrade provisioning events.
+------
+- **I95-41581 Upgrading an HA router may result in an incomplete FIB:** Upgrading an HA router from release 4.5 (or earlier) to 5.1 (or later) may result in an incomplete FIB on the 4.5 router node for service prefixes that are not matching any RIB entries. The same can occur for a software version rollback in the reverse direction.
 
 ## Release 5.1.4
 **Release Date:** July 7, 2021
