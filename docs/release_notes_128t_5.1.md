@@ -24,8 +24,6 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md/#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
 ------
-- **I95-40335 Support running KVM on the host:** KVM packages and corresponding dependencies have been added to the SSR distribution.
-------
 - **I95-40776 GUI self diagnostics for client connectivity:** A client connectivity error now diplays a dialog with several steps intended to help the user diagnose issues.
 
 ### Resolved Issues
@@ -38,7 +36,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40016 Flow-migration with adapative-encryption may cause packet drops:** Resolved an `Adaptive encryption out of order` modification error causing packet drop on HA fabric.
 ------
-- **I95-40035 Jute maxbuffer limit for running/candidate configurations:** Created an alarm when the zookeeper jute buffer exceeds a threshold (75%) and an alert to change the system environment config.
+- **I95-40035/I95-40030 Jute maxbuffer limit for running/candidate configurations:** Created an alarm when the zookeeper jute buffer exceeds a threshold (75%) and an alert to change the system environment config.
 ------
 - **I95-40060 `show session captures` not displaying active captures:** Updated the query argument to correctly display session captures for all services.
 ------
