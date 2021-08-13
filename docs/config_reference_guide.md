@@ -416,6 +416,7 @@ The *authority* configuration element is the top-most level in the 128T router c
 | --- | --- | --- |
 | auto-install | boolean | When true, this will automatically install the 128T software onto an asset once it connects to the conductor. When false, software will not be installed automatically and will require administrative intervention. |
 | conductor-address | address | The IP address or hostname of your conductors. There can be at most two conductor addresses configured in an authority; note that the addresses here should be reachable by most/all of your authority's routers. (Routers that use different addresses to reach the same conductor can override this in their configuration.) |
+| currency | string | Indicates local monetary currency used in the system. Default is `USD`. |
 | dscp-map | sub-element | Lets administrators map the inbound DSCP values received in packet headers into priority values, for traffic engineering purposes. |
 | dynamic-hostname | string | This allows administrators to establish a templated pattern for how interfaces on routers will create "names" for their interfaces. These names, constructed using substitution variables in the dynamic-hostname syntax, can be used as (effectively) persistent labels for referring to the corresponding interface, rather than an IP address. This is particularly useful when an interface acquires its address using a dynamic protocol such as PPPoE or DHCP. Uses the following substitution variables: {interface-id} for Network Interface Global Identifier {router-name} for Router Name {authority-name} for Authority Name For example, \'interface-{interface-id}.{router-name}.{authority-name}\'. |
 | ipfix-collector | sub-element | Allows administrators to configure authority-wide IPFIX (IP Flow Information Export) collectors, for flow-by-flow/session-by-session information. |
@@ -1528,6 +1529,9 @@ The network-interface element represents a logical interface on a node.
 | --- | --- | --- |
 | address | sub-element | The IP address assigned to this network-interface, and its various properties. |
 | adjacency | sub-element | This multiple-instance sub-element references neighboring routers. |
+| billing-rate | decimal64 | Indicates the amount billed for the interface. Measured per day for `metered`, and per byte for `flat`. See [authority](#authority) to set `currency` type. |
+| billing-type | enumeration | Indicates the billing type associated with the interface: `none` - default, no billing is associated with the interface; `flat` - the network interface is billed flat amount over a period of time; `metered` - the network interface is billed flat amount based on data usage. See [authority](#authority) to set `currency` type. |
+| carrier | string | Indicates the carrier associated with the network-interface. |
 | conductor | boolean | Default: false. Governs whether this interface should be used to reach the router's conductor. Reference [Conductor Deployment Patterns](bcp_conductor_deployment.md). |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
 | dhcp | enumeration | Valid values: disabled, v4. Default value: disabled. When set to v4, this interface will attempt to acquire an IPv4 address using DHCP (Dynamic Host Configuration Protocol). When disabled, the address on the interface should be administratively set to a static IP. |
