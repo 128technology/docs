@@ -3,9 +3,11 @@ title: Configuring WAN Assurance
 sidebar_label: Configuring WAN Assurance
 ---
 
-The process defined in this document can be used to onboard 128T SSR’s to the MIST cloud. Since 128T can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding. 
+Use the following process to onboard 128T SSR’s to the MIST cloud. Since 128T can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding. 
 
+:::Important
 Configuring WAN Assurance requires Administrator level priviledges on all platforms, SSR/128T and MIST. 
+:::
 
 High Level Steps:
 Install the MIST WAN Assurance Plugin on the Conductor
@@ -13,27 +15,37 @@ create an account on the MIST portal.
 Create Sites
 
 
-## Enable WAN Assurance on the Conductor
+## Enable WAN Assurance on the Conductor - GUI
 
-1. Install the Mist WAN Assurance plugin onto the Conductor. Use the plugin workflow from the GUI (process link here); or run the following command from the PCLI:
-2. `admin@node1.conductor1# manage plugin install 128T-mist-wan-assurance latest`
-3. Restart the conductor.
+Using the plugin installation workflow, install the Mist WAN Assurance plugin onto the Conductor.
+
+![128T Plugin Installation](/img/plugin_install.gif)
+
+ or run the following command from the PCLI:
+
+`admin@node1.conductor1# manage plugin install 128T-mist-wan-assurance latest`
+
+When the process is complete, restart the conductor.
 
 
-Conductor On-boarding instructions
+Conductor On-boarding instructions - GUI
 
-1. Create an account on the [MIST portal](https://integration.mistsys.com/). **Does the user do this or is this and Admin function? What kind of account?**
+1. Create an account on the [MIST portal](https://integration.mistsys.com/). **What kind of account? Steps to complete needed. Parameters for creating the account.**
 
-2. Create an organization for the authority and sites per physical location for on-boarding 128T SSRs. **(Is this done on the SSR/128T system or is this part of the MIST Portal Config?)**
+2. Create an organization for the authority and sites per physical location for on-boarding 128T SSRs. 
+**(Is this done on the SSR/128T system or is this part of the MIST Portal Config?) Need details about the "Organization" - what is it, what does it reference, what is the purpose, where can I find more info?**
 
-Log in to the MIST portal as the Administrator to access the registration code for the organization. This allows additional on-boarding of 128T routers from the conductor. 
+3. Log in to the MIST portal to access the registration code for the organization (requires Administrator priviledges). (not sure what this means - "This allows additional on-boarding of 128T routers from the conductor.") 
 
-* Go to the following location on the MIST portal
-	Gateways > Inventory > Adopt Gateways > Session Smart Router (SSR)
-There has to be another step in here. 
+ - On the MIST portal, go to:
+	**Gateways > Inventory > Adopt Gateways > Session Smart Router (SSR)** 
+    There has to be another step in here. Does the user select something? Is there a dialog that appears with a button? 
 
-* Click on “Copy to Clipboard”  
-* Login to the conductor PCLI as admin user and paste the snippet there 
+ - Click on “Copy to Clipboard”. 
+
+ - Return to the SSR/128T and login to the conductor PCLI as an admin. **CLI>**
+
+ - Paste the registration code **(the example below is not clear. Do they paste the reg-code from the main login command? Or do they navigate through commands to mist-wan-assurance and paste the reg code?)**
     
     
 ```
@@ -46,7 +58,9 @@ There has to be another step in here.
     *admin@node1.conductor1#
     *admin@node1.conductor1#
     *admin@node1.conductor1# compare config running candidate
+```
     
+```
     config
     
         authority
@@ -60,7 +74,11 @@ There has to be another step in here.
     *admin@node1.conductor1#
     
 ```
-NOTE: In order to use the GUI workflow, simply copy the text after registration-code and configure the value (paste the text?) under Configuration > Authority > Mist WAN Assurance > Registration Code.
+**CLI^**
+
+**GUI>**
+To use the GUI workflow, simply copy the text after registration-code and configure the value (paste the text?) under Configuration > Authority > Mist WAN Assurance > Registration Code.
+
 
 IMPORTANT: The default mode of operation is to enable WAN Assurance on all connected routers. If this is not desired please refer to the Skipping specific routers section.
 
