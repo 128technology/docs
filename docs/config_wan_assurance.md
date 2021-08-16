@@ -6,14 +6,15 @@ sidebar_label: Configuring WAN Assurance
 Use the following process to onboard 128T SSR’s to the MIST cloud. Since 128T can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding. 
 
 :::important
-Configuring WAN Assurance requires Administrator level priviledges on all platforms, SSR/128T and MIST. 
+Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR/128T and MIST. 
 :::
 
 High Level Steps:
-- Install the MIST WAN Assurance Plugin on the Conductor
-- create an account on the MIST portal.
-- Create Sites
-
+- Install the MIST WAN Assurance Plugin on the Conductor.
+- Create an account on the MIST portal.
+- Create Sites.
+- Register the Conductor with Mist.
+- Assign routers to a Site.
 
 ## Install the MIST WAN Assurance Plugin on the Conductor - GUI
 
@@ -25,31 +26,35 @@ Using the plugin installation workflow, install the Mist WAN Assurance plugin on
 
 `admin@node1.conductor1# manage plugin install 128T-mist-wan-assurance latest`
 
-When the process is complete, restart the conductor.
+When the process is complete, restart the conductor. From the PCLI, run 
 
+`systemctl restart 128T`
+
+In the GUI, select **Restart > Conductor**. 
 
 ## Enable WAN Assurance on the Conductor - GUI
 
-**Skip this text initally; ask about it below, and suggest moving it here. IMPORTANT: Please ensure the assets are in the running state before performing this operation (what operation? The onboarding?). Once committed, the installation and enablement process can take anywhere for 5 to 30 minutes to complete.**
-
 1. Create an account on the [MIST portal](https://integration.mistsys.com/). **What kind of account? Steps to complete needed. Parameters for creating the account.**
 
-2. Create an organization for the authority and sites per physical location for on-boarding 128T SSRs. 
-**( part of the MIST Portal Config) Need details about the "Organization" - what is it, what does it reference, what is the purpose, where can I find more info?**
+2. Create an organization for the authority. **Need details about the "Organization" - what is it, what does it reference, what is the purpose, where can I find more info?**
 
-3. Log in to the MIST portal to access the registration code for the organization (requires Administrator priviledges). (not sure what this means - "This allows additional on-boarding of 128T routers from the conductor.") 
+3. Create one Site per physical location for on-boarding 128T SSRs. 
+    The **Site** is a key concept for MIST Assurance features. Some general recommendations for creating sites are:
+    * Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites.
+    * Other devices from the Juniper stack such as MIST APs, Switches, SRX, etc., should be onboarded and assigned to the same site as SSR when possible. This is important because it provides a clean topology view of all devices running within a site.
+    *Issue: There is no information about how to create a Site in this doc (or I haven’t found it yet). But it is made clear how important the concept of a site is. I need information about how to create a site, or how a site is created if it is done automatically.* 
+
+4. Log in to the MIST portal to access the registration code for the organization (requires Administrator privileges). (not sure what this means - "This allows additional on-boarding of 128T routers from the conductor.") 
 
  - On the MIST portal, go to:
 	**Gateways > Inventory > Adopt Gateways > Session Smart Router (SSR)** 
     There has to be another step in here. Does the user select something? Is there a dialog that appears with a button? 
 
- - Click on “Copy to Clipboard”. 
+ - Click on **Copy to Clipboard**. 
 
- - Return to the SSR/128T and login to the conductor PCLI as an admin. **CLI>**
+5. Return to the SSR/128T and login to the conductor PCLI as an admin. 
 
- - Paste the registration code **(the example below is not clear. Do they paste the reg-code immediately after logging in? Or do they navigate through commands to mist-wan-assurance and paste the reg code?)**
-    
-    
+6. Paste the registration code into the PCLI. **(the example below is not clear. Do they paste the reg-code immediately after logging in? Or do they navigate through commands to mist-wan-assurance and paste the reg code?)**
 ```
     admin@node1.conductor1# configure authority mist-wan-assurance registration-code eyJ0eX
     AiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRj
@@ -76,72 +81,54 @@ When the process is complete, restart the conductor.
     *admin@node1.conductor1#
     
 ```
-**CLI^**
 
-**GUI>**
-To use the GUI workflow, copy the text registration-code from the MIST portal (info above) and paste it under Configuration > Authority > Mist WAN Assurance > Registration Code.
-**GUI^**
+   To enter the registration code in the SSR/128T GUI, copy the text registration-code from the MIST portal (info above) and paste it under Configuration > Authority > Mist WAN Assurance > Registration Code.
 
-IMPORTANT: The default mode of operation is to enable WAN Assurance on all connected routers. If this is not desired please refer to the Skipping specific routers section.
+   Committing the registration code will enable WAN Assurance on all connected routers. If this is not desired, please refer to the Skipping specific routers section before committing the registration code information to the configuration.
 
-**Should there be a section here about configuring WAN Assurance on one/all routers? And should Skipping be included here rather than in a separate section?**
-
-
-**Suggest moving this before the first step of the process. 
-IMPORTANT: Please ensure the assets are in the running state before performing this operation **(what operation? The onboarding?)**. Once committed, the installation and enablement process can take anywhere for 5 to 30 minutes to complete.
-
-Once satisfied with the configuration proceed to commit from the PCLI or GUI. 
-**Not sure what Configuration they are committing here. The registration? Or are they configuring WAN Assurance?**
-
-### Skipping specific routers
-
-If some routers need to be skipped from the MIST on-boarding, they can opt out of the process. To do so, change the authority > router > mist-wan-assurance > enabled to false and the conductor will skip over all the nodes (in case of HA) for that router. 
-
-If the system was previously on-boarded, the configuration will work to stop sending the telemetry data to the cloud. **(this statement seems disjointed; need more information about this)**
-
-:::note
-This setting **(which setting? Disabling WAN Assurance/skipping?)** will not automatically release the router from the cloud. The instructions to do that are in the Releasing a router section.
-:::
+7. Commit the registration code to the configuration.
 
 ### On-Boarding Routers
 
-Registration (automatic)
-
-Once a valid registration code is committed, the conductor sends instructions to all the connected routers to self-onboard to the MIST cloud. The routers go through an automated process and do not require any user interaction.
+Once a valid registration code is committed registration is automatic. The conductor sends instructions to all connected routers to self-onboard to the MIST cloud. The following process is automated and the routers do not require any user interaction.
 
 * Conductor transfers the registration-code and installs the necessary software on each connected router.
-* Each router connects/reaches out to the pre-determined MIST terminator (as dictated by the registration-code) and presents unique identifying information to the cloud.
-* When the MIST cloud completes the on-boarding, it will provide the router with a unique identification and new keys to send additional telemetry information. ***each router is provided with a unique ID, and new keys for additional telemetry information.*** (is the router using the new keys to send the telemetry info to the MIST cloud? Or is the MIST cloud providing new keys that some other device uses to send additional telemetry info? What are these new keys, who gets them, who uses them, what is the telemetry info, who is sending and receiving?) 
+* Each router connects to the pre-determined MIST terminator (as dictated by the registration-code) and presents unique identifying information to the cloud.
+* When the MIST cloud completes the on-boarding, ***each router is provided with a unique ID, and new keys for additional telemetry information.*** 
 
-## Creating Site Assignments (MIST) **Creating a Site**
+(CLARIFICATION PLEASE: Is the router using the new keys to send the telemetry info to the MIST cloud? Or is the MIST cloud providing new keys that some other device uses to send additional telemetry info? What are these new keys, who gets them, who uses them, what is the telemetry info, who is sending and receiving?) 
 
-The **Site** is a key concept for MIST Assurance features. Some general recommendations for creating sites are:
-* Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites.
-* Other devices from the Juniper stack such as MIST APs, Switches, SRX, etc., should be onboarded and assigned to the same site as SSR when possible. This is important because it provides a clean topology view of all devices running within a site.
-Issue: There is no information about how to create a Site in this doc (or I haven’t found it yet). But it is made clear how important the concept of a site is. I need information about how to create a site, or how a site is created if it is done automatically. 
+### Skipping Specific Routers
+
+**A router or routers can be skipped during the Mist On-boarding process. Change *authority > router > mist-wan-assurance > enabled* to false. The Conductor will skip the router and associated nodes (if it is an HA router).** 
+
+**For a system that is currently on-board, setting mist-wan-assurnace to false will prevent telemetry data from being sent to the cloud.**  
+
+:::note
+Disabling WAN Assurance does not automatically release the router from the cloud. See Releasing a Router for more information.
+:::
 
 ### Site Assignment (MIST)
 
-Once the automatic (onboarding) process above is complete, each router is displayed on the MIST inventory under Gateway > Inventory. The router is listed as Unassigned, and the name of the router can be used to identify and assign the router to the appropriate site. 
+Once the onboarding process is complete, each router is displayed on the MIST inventory under Gateway > Inventory. The router is listed as Unassigned, and must be assigned to the appropriate site.
 
-**The router name often identifies the appropriate site for assigning the router.** or simply **Assign the router to the appropriate site. Often the router name indicates the appropriate site.**
-￼
-### Site assignment workflow: 
+:::note
+Sites must have already been created - there is no option to create a site in the drop down.
+:::
 
-* Select the Unassigned router
-* Click on the More drop-down on the upper right corner
+1. Select the Unassigned router.
+2. Click on the **More** drop down on the upper right corner.
+3. Select **Assign to Site**.
+4. Select the site from the drop down.
+5. Click on **Assign to Site**.
 
-* Select Assign to Site
-* Select the site in the drop down (NOTE: The site needs to be already created as there is no option to create a site in the drop down)
-* Click on Assign to Site
+Once the site assignment is complete, the information is relayed back to the corresponding 128T router, and the router begins streaming the telemetry data to the cloud.
 
-Once the site assignment is completed, the information is relayed back to the corresponding 128T router, and the router begins streaming the telemetry data to the cloud.
-
-## New WAN Assurance features (128T)
+## SSR/128T WAN Assurance Features
 
 ### Topology Mapping
 
-The 128T Router can be configured to receive LLDP packets from LAN interfaces. This information is useful for creating a local site level topology view as shown below (where is the site level topology shown?) Use the following code example to enable the LLDP receive mode on LAN interfaces.
+The SSR/128T Router can be configured to receive LLDP packets from LAN interfaces. This information is useful for creating a local site level topology view. Use the following code example to enable the LLDP receive mode on LAN interfaces.
 
 `configure authority router <router> node <node> device-interface <lan-intf> lldp mode receive-only`
 
@@ -151,8 +138,8 @@ Once on-boarding is complete, the router begins streaming telemetry data. Data a
 
 ### Application Insights & SLE
 
-To provide insights into the application, services, and some SLE functionality, enable `session-record`. It is recommended to enable session records for all the 128T services to provide a broad look at the application use. 
-
+To provide insights into the application, services, and some SLE functionality, enable `session-record`. It is recommended to enable session records for all the SSR/128T services to provide a broad look at the application use. 
+```
 1    authority
 2        service             internet
 3            name            internet
@@ -170,21 +157,27 @@ To provide insights into the application, services, and some SLE functionality, 
 15                enabled  true
 16            exit
 17        exit
+```
 
-## Moving a router
-There are two steps to moving a router; releasing and re-onboarding. 
+## Moving a Router
+
+There are two steps to moving a router; releasing and re-onboarding. (why would you need to move a router? Where are you moving it from and to?)
 
 ### Releasing a router
 
 If the device needs to be removed from the organization, or released for other reasons, use the following process. 
 
-1. On the MIST UI
+1. From the MIST GUI:
 
-* Go to Gateways > Inventory > Select the router
-* Click on More and select Release
-* Click on Release to confirm the final step
+* Go to Gateways > Inventory.
+* Select the router.
+* Click on **More**.
+* Select **Release**.
+* Click on **Release** to confirm.
 
 2. On the 128T conductor
+
+**There is no information in the existing docs for this section.** 
 
 After a few minutes the router will be released and stop sending the data to the MIST cloud. Once that process is completed,  disable the router by following the instructions here.
 
@@ -192,7 +185,7 @@ After a few minutes the router will be released and stop sending the data to the
 
 ### Re-Onboarding a router
 
-To re-onboard a router without doing a full ISO re-initialization, the additional steps needs to be taken in order to unrelease the router and trigger the on-boarding process again. 
+To re-onboard a router without doing a full ISO re-initialization, use the following steps to trigger the on-boarding process again. 
 
 From the conductor shell:
 
@@ -207,7 +200,3 @@ In the GUI:
 3. Set the router context: select the router and node from the drop down lists.
 
 4. Click **Execute**.
-
-
-
-￼￼

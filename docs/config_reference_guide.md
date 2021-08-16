@@ -2124,6 +2124,7 @@ The *routing-protocol* configuration element contains configuration properties r
 | address-family | sub-element | A container for the behaviors, timers, and attributes related to each address family (AFI/SAFI) on the 128T router. |
 | confederation | sub-element | This configuration sub-element controls the 128T router's behavior when it is within an autonomous system that is part of a BGP confederation. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
+| graceful-restart | sub-element | Provides the ability to be configured as disabled, helper mode (default), or enabled. `graceful-restart` mode on BGP neighbors can be configured differently than on the BGP instance. |
 | local-as | uint32 | The local autonomous system number of this 128T router. |
 | neighbor | sub-element | Multiple instance. |
 | route-selection-options | sub-element | This is a set of configuration options that control how the 128T router chooses the best path. |
