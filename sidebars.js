@@ -6,6 +6,7 @@ module.exports = {
       "about_releases",
       "about_support_policy",
       "about_supported_platforms",
+      "about_supported_drivers",
       "about_certified_platforms",
       "about_security_policy",
       "about_services_description",
@@ -36,6 +37,7 @@ module.exports = {
     "Supporting Information - Appendix": [
       "intro_installation_installer",
       "legacy_OTP_install",
+      "intro_upgrade_considerations",
       "intro_upgrading",
       "intro_rollback",
     ],
@@ -192,6 +194,7 @@ module.exports = {
         "type": "category",
         "label": "128T",
         "items": [
+          "release_notes_128t_5.3",
           "release_notes_128t_5.2",
           "release_notes_128t_5.1",
           "release_notes_128t_5.0",

@@ -245,7 +245,7 @@ Commit the candidate config as the new running config.
 #### Usage
 
 ```
-commit [force] [validate-local]
+commit [force] [validate-router-all]
 ```
 
 ##### Keyword Arguments
@@ -253,13 +253,13 @@ commit [force] [validate-local]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
-| validate-local | Only validate the configuration on the Conductor |
+| validate-router-all | Distribute config to each managed router for validation and wait for results before committing |
 
 #### Description
 
 The `commit` command causes the 128T router to validate the candidate configuration, and then replace the running configuration with the candidate configuration (assuming it passes the validation step). It is used once a series of configuration changes have been made, and an administrator wishes to &quot;activate&quot; those configuration changes.
 
-When run from a 128T conductor, the conductor will first validate the configuration itself before distributing configuration to all of its managed routers for each of them to validate the configuration. After the managed routers have all reported the results of their validation, the commit activity takes place (assuming a successful validation). This distributed validation can be skipped by using the validate-local keyword argument.
+When run from a 128T conductor, the conductor only validates the configuration itself locally before committing the configuration and then distributing it to all managed routers. If the user wishes, the conductor has the ability to distribute the configuration to all managed routers for each of them to validate it and report the results of their validation before the commit takes place (assuming a successful validation). This operation is much slower than local validation because the conductor must wait for all routers to report their results and some may be unreachable or timeout. The user may request a distributed validation by using the `validate-router-all` keyword.
 
 The `commit` command will prompt a user for confirmation, as this is a (potentially) service affecting command. By supplying the optional `force` keyword, the confirmation step is skipped:
 
@@ -641,7 +641,7 @@ Creates a session capture at the specified node and service.
 #### Usage
 
 ```
-create session-capture [source-ip <source-ip>] [source-port <source-port>] [destination-ip <destination-ip>] [destination-port <destination-port>] [protocol <protocol>] [session-count <session-count>] [packet-count <packet-count>] [local-only] service <service> router <router> node <node>
+create session-capture [source-ip <source-ip>] [source-port <source-port>] [destination-ip <destination-ip>] [destination-port <destination-port>] [protocol <protocol>] [session-count <session-count>] [packet-count <packet-count>] [local-only] [tag <tag>] service <service> router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -659,6 +659,7 @@ create session-capture [source-ip <source-ip>] [source-port <source-port>] [dest
 | session-count | The number of sessions to capture [type: &#x27;unlimited&#x27; or positive int] (default: 100) |
 | source-ip | The source IP address/prefix to match [type: IP prefix] (default: 0.0.0.0/0) |
 | source-port | The source port to match (can be a range) [type: port or port-range] (default: 0-65535) |
+| tag | An optional custom name for the session capture pcap files |
 
 ##### See Also
 
@@ -963,7 +964,7 @@ Deletes session capture from selected service.
 #### Usage
 
 ```
-delete session-capture [source-ip <source-ip>] [source-port <source-port>] [destination-ip <destination-ip>] [destination-port <destination-port>] [protocol <protocol>] [session-count <session-count>] [packet-count <packet-count>] [local-only] service <service> router <router> node <node>
+delete session-capture [source-ip <source-ip>] [source-port <source-port>] [destination-ip <destination-ip>] [destination-port <destination-port>] [protocol <protocol>] [session-count <session-count>] [packet-count <packet-count>] [local-only] [tag <tag>] service <service> router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -981,6 +982,7 @@ delete session-capture [source-ip <source-ip>] [source-port <source-port>] [dest
 | session-count | The number of sessions to capture [type: &#x27;unlimited&#x27; or positive int] (default: 100) |
 | source-ip | The source IP address/prefix to match [type: IP prefix] (default: 0.0.0.0/0) |
 | source-port | The source port to match (can be a range) [type: port or port-range] (default: 0-65535) |
+| tag | An optional custom name for the session capture pcap files |
 
 ##### Subcommands
 
@@ -1018,7 +1020,7 @@ delete session-capture by-id service <service> router <router> node <node> <capt
 
 | name | description |
 | ---- | ----------- |
-| capture-id | The session-capture to remove. [type: int] |
+| capture-id | The session-capture to remove. |
 
 ##### See Also
 
@@ -2244,8 +2246,14 @@ Search for any PCLI command or configuration data from the current location in t
 #### Usage
 
 ```
-search <find>
+search [limit <limit>] <find>
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| limit | limit the maximum number of results [type: int] |
 
 ##### Positional Arguments
 
@@ -2295,8 +2303,14 @@ Search PCLI commands.
 #### Usage
 
 ```
-search commands <find>
+search commands [limit <limit>] <find>
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| limit | limit the maximum number of results [type: int] |
 
 ##### Positional Arguments
 
@@ -2311,8 +2325,14 @@ Search both config datastores for specific data.
 #### Usage
 
 ```
-search config <find>
+search config [limit <limit>] <find>
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| limit | limit the maximum number of results [type: int] |
 
 ##### Positional Arguments
 
@@ -2357,8 +2377,14 @@ Search candidate configuration data
 #### Usage
 
 ```
-search config candidate <find>
+search config candidate [limit <limit>] <find>
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| limit | limit the maximum number of results [type: int] |
 
 ##### Positional Arguments
 
@@ -2384,7 +2410,7 @@ Search running configuration data
 #### Usage
 
 ```
-search config running <find>
+search config running [limit <limit>] <find>
 ```
 
 ##### Keyword Arguments
@@ -2392,6 +2418,7 @@ search config running <find>
 | name | description |
 | ---- | ----------- |
 | case-sensitive | Interpret the search query as case-sensitive |
+| limit | limit the maximum number of results [type: int] |
 | regex | Process the query as a regular expression |
 | whole-word | Don't allow partial matches of words |
 
@@ -2419,8 +2446,14 @@ Search configuration attributes.
 #### Usage
 
 ```
-search config-attributes <find>
+search config-attributes [limit <limit>] <find>
 ```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| limit | limit the maximum number of results [type: int] |
 
 ##### Positional Arguments
 
