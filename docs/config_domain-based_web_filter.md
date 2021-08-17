@@ -3,7 +3,7 @@ title: Configuring Domain-based Web Filtering/Routing
 sidebar: Configuring Domain-based Web Filtering/Routing
 ---
 
-Configuring Domain-based Web Filtering allow users to create generic services for a broad range of domains that fall into a categories such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category. 
+Configuring Domain-based Web Filtering allows users to create generic services for a broad range of domains that fall into a categories such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category. 
 
 Services can be defined based on categories to filter a broad set of related domains. Services can also be assigned to individual domains, and filtering performed in a more targeted manner. 
 
@@ -45,7 +45,7 @@ Active categories and domains are displayed on the Applications Seen page availa
 
 ![Select Applications Seen](/img/dbwf_appl_seen.png)
 
-Adding a new category or domain writes the information to the directory, and is added to the master list. The category and domain lists are generated when the configuration is committed. As new categories and domains are added, the configuration is updated, but the entire list is not regenerated. 
+Adding a new category or domain enters the information to the master list. The category and domain lists are generated when the configuration is committed. As new categories and domains are added, the configuration is updated, but the entire list is not regenerated. 
 
 Use the Generate Application Idenfication Categories toggle to generate a set of child services for each category. 
 
@@ -53,7 +53,7 @@ Use the Generate Application Idenfication Categories toggle to generate a set of
 
 ## Configuring Domain-based Web Filtering
 
-To enable Domain-based Web Filtering, you must configure a broader service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+To enable Domain-based Web Filtering, you must configure a parent-level service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
 
 The high level steps for configuring Domain-based Web Filtering are:
 
@@ -166,7 +166,7 @@ exit
 
 Learning mode is used to gather statistics about a domain or category. You can select the type of information to be gathered; Modules, HTTPS, TLS, or All. 
 
-If Learning Mode is not enabled, statistics are only gathered for categories/domains that are configured in a service.
+If Learning Mode is disabled, statistics are only gathered for categories/domains that are configured in a service.
 
 ## Show Commands
 
