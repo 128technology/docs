@@ -76,6 +76,7 @@ module.exports = {
           "config_dns_proxy",
           "config_ldap",
           "config_management_over_forwarding",
+          "config_domain-based_web_filter",
           "config_EthoSVR",
           "config_service_health",
           "config_gre_tunnel",
