@@ -11,6 +11,67 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 5.1.5
+**Release Date:** August 13, 2021
+
+### New Features
+
+- **I95-31265 Software Management Button on Router Page:** Users are now able to upgrade a single router from the Router Page using a button located at the top of the Router Page.
+------
+- **I95-35347 Add hostname to GUI DHCP lease table:** A Hostname column has been added to the GUI in the DHCP Server Table for DHCP Leases.
+------
+- **I95-39236/I95-40804/I95-41531 Session capture to produce unique pcap files:** A capture tag has been added to the session-capture feature. If a session-capture is created with a tag, that tag is used to name the pcaps throughout the topology, instead of the service name. Users are now able to initiate this capture from the Services page in the GUI and the command line.
+------
+- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md/#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
+------
+- **I95-40776 GUI self diagnostics for client connectivity:** A client connectivity error now diplays a dialog with several steps intended to help the user diagnose issues.
+
+### Resolved Issues
+
+- **I95-36099 Time range selection for analytics in the GUI is difficult to use:** Replaced with browser-native date-time selector.
+------
+- **I95-38731 Mars systemd service fails to start after too many restarts:** This issue has been resolved.
+------
+- **I95-40009 Not responding to ARP request from source 0.0.0.0. on a DHCP interface:** The SSR now responds to ARP requests from source 0.0.0.0.
+------
+- **I95-40016 Flow-migration with adapative-encryption may cause packet drops:** Resolved an `Adaptive encryption out of order` modification error causing packet drop on HA fabric.
+------
+- **I95-40035/I95-40030 Jute maxbuffer limit for running/candidate configurations:** Created an alarm when the zookeeper jute buffer exceeds a threshold (75%) and an alert to change the system environment config.
+------
+- **I95-40060 `show session captures` not displaying active captures:** Updated the query argument to correctly display session captures for all services.
+------
+- **I95-40468 Session Optimization incompatability with Application ID:** Resolved an incompatibility between Application Identification and Session Optimization.
+------
+- **I95-40624 Occasional failures in time-based HMAC:** This issue has been resolved.
+------
+- **I95-40894 Firewall pinhole false-positives:** Added an acceptable loss of packets threshold for Firewall Pinhole tests.
+------
+- **I95-40936 Cannot `select all` in the GUI Session Capture screen:** GUI Session Capture table now has a **select all** checkbox in the header of the checkbox column.
+------
+- **I95-41006 `show top sources` command is unable to show more than 50 rows:** This issue has been resolved. 
+------
+- **I95-41105 Race condition causes peer path status to be down:** This issue has been resolved. 
+------
+- **I95-41194 Log generated on the conductor is missing output of some commands:** The `show alarms` command now uses the local router name in save-tech-support-info.
+------
+- **I95-41198 Add loading indicator to plugin details page:** A spinner has been added and fields are disabled during loading. 
+------
+- **I95-41214 GUI Table visual issues:** All tables now use the full height of their container.
+------
+- **I95-41227 Vulnerability Report Issues:** All identified CVE's have been addressed.
+------
+- **I95-41235 Router state indicator is not consistent across pages:** Resolved an issue where the Status Indicator was always showing unknown.
+------
+- **I95-41270 show dhcp v6 and prefix-delegation commands not working:** This issue has been resolved. 
+------
+- **I95-41364 Juniper and Customer logo overlap:** Customer logos are fully resolved before loading. 
+------
+- **I95-41518 `Enabled` switch is not styled/themed properly when creating a new template:** The **Enabled** switch is now colored with the appropriate styles.
+------
+- **I95-41556 High number of AP download events:** Fixed an issue where both nodes in an HA Conductor were generating duplicate provisioning events. Added asset ID and a request ID to all provisioning events and the version to download and upgrade provisioning events.
+------
+- **I95-41581 Upgrading an HA router may result in an incomplete FIB:** Upgrading an HA router from release 4.5 (or earlier) to 5.1 (or later) may result in an incomplete FIB on the 4.5 router node for service prefixes that are not matching any RIB entries. The same can occur for a software version rollback in the reverse direction.
+
 ## Release 5.1.4
 **Release Date:** July 7, 2021
 
