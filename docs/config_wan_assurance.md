@@ -91,19 +91,13 @@ Committing the registration code will enable WAN Assurance on all connected rout
 
 ### On-Boarding Routers
 
-Once a valid registration code is committed registration is automatic. The conductor sends instructions to all connected routers to self-onboard to the MIST cloud. The following process is automated and the routers do not require any user interaction.
-
-* The Conductor transfers the registration-code and installs the necessary software on each connected router.
-* Each router connects to the pre-determined MIST terminator (as dictated by the registration-code) and presents unique identifying information to the cloud.
-* When the MIST cloud completes the on-boarding, ***each router is provided with a unique ID, and new keys for additional telemetry information.*** 
-
-(CLARIFICATION FOR ABOVE PLEASE: Is the router using the new keys to send the telemetry info to the MIST cloud? Or is the MIST cloud providing new keys that some other device uses to send additional telemetry info? What are these new keys, who gets them, who uses them, what is the telemetry info, who is sending and receiving?) 
+Once a valid registration code is committed, registration is automatic. The conductor sends instructions to all connected routers to self-onboard to the MIST cloud. The  process is automated and the routers do not require any user interaction.
 
 ### Skipping Specific Routers
 
 A router or routers can be skipped during the Mist On-boarding process. Change *authority > router > mist-wan-assurance > enabled* to `false`. The Conductor will skip the router and associated nodes (if it is an HA router).
 
-For a system that is currently on-board, setting `mist-wan-assurance` to `false` will prevent telemetry data from being sent to the cloud. 
+For a system that has completed the on-boarding process, setting `mist-wan-assurance` to `false` will prevent telemetry data from being sent to the cloud. 
 
 :::note
 Disabling WAN Assurance does not automatically release the router from the cloud. See Releasing a Router for more information.
@@ -111,7 +105,7 @@ Disabling WAN Assurance does not automatically release the router from the cloud
 
 ### Site Assignment (MIST)
 
-Once the onboarding process is complete, each router is displayed on the MIST inventory page under **Organization > Inventory**. Select Gateways on the top of the page to see a list of the routers and status. The router is listed as Unassigned, and must be assigned to the appropriate site.
+Once the SSR/128T portion of the onboarding process is complete, each router is displayed on the MIST inventory page under **Organization > Inventory**. Select Gateways on the top of the page to see a list of the routers and status. The router is listed as Unassigned, and must be assigned to the appropriate site.
 
 :::note
 Sites must have already been created - there is no option to create a site in the drop down.

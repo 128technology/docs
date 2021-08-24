@@ -98,13 +98,17 @@ Retention Defaults
 | intermediate | Enabled: true | 5 minutes | 1 day |
 | long | Enabled: true | 1 hour | 180 days |
 
+:::note
+Increasing the retention duration and/or decreasing the interval from the defaults has the potential to impact system overhead and should be carefully considered.
+:::
+
 The following example shows metrics retention configured only for short retention with the default values:
 
 ```
 configure
     authority
-        router           MyRouter
-            router  MyRouter 
+        router        MyRouter
+            name   MyRouter 
                 system
                     metrics
                         retention 
