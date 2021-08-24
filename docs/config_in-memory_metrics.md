@@ -71,7 +71,7 @@ Once a profile is configured on the Authority, it is availble to the routers, an
 
 ### Profile Retention
 
-Profile Retention can be configured as any of three values: **short**, **intermediate**, and **long**. 
+Profile Retention can be configured as any of four values: **in-memory**, **short**, **intermediate**, and **long**. 
 
 The current implementation of the **in-memory** retention value is limited. 
 
@@ -94,12 +94,43 @@ Retention Defaults
 
 | Retention | State | Interval | Duration |
 | --- | --- | --- | --- |
-| short | Enabled: true | 5 seconds | hour
+| short | Enabled: true | 5 seconds | 1 hour |
 | intermediate | Enabled: true | 5 minutes | 1 day |
 | long | Enabled: true | 1 hour | 180 days |
 
+The following example shows metrics retention configured only for short retention with the default values:
 
-#### Example Profile: Native Output 
+```
+configure
+    authority
+        router           MyRouter
+            router  MyRouter 
+                system
+                    metrics
+                        retention 
+                            short
+                                enabled true
+                                interval 5s
+                                duration 1h
+                            intermediate 
+                                enabled false  
+                                interval 5m
+                                duration 1d
+                            long
+                                enabled false  
+                                interval 1h
+                                duration 180d
+                            exit
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+#### Example Profile 
 
 The following example configuration takes metrics specified in the `internet-reachability-metrics` profile and stores them through the **intermediate** retention time period.
 
@@ -113,10 +144,6 @@ configure
                     profile  internet-reachability-metrics
                         name       internet-reachability-metrics
                         retention  intermediate
-                            enabled    true 
-                            interval   5m
-                            duration   1d
-                        exit    
                     exit
                 exit
             exit
@@ -171,19 +198,11 @@ config
                     profile  events
                         name       events
                         retention  long
-                            enabled   true
-                            interval  1h
-                            duration  180d
-                         exit   
                     exit
 
                     profile  peer-metrics
                         name       peer-metrics
                         retention  short
-                            enabled   true
-                            interval  5s
-                            duration  1h
-                        exit
                     exit
                 exit
             exit
@@ -196,11 +215,7 @@ config
                     profile  events
                         name       events
                         retention  long
-                            enabled   true
-                            interval  1h
-                            duration  180d
-                         exit   
-                    exit
+                     exit
                 exit
             exit
         exit
