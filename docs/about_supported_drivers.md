@@ -3,7 +3,38 @@ title: Supported NICs and Drivers
 sidebar_label: Supported NICs and Drivers
 ---
 
-The Session Smart Router / 128T supports a number of NICs and Drivers. If you know the Device Name and Device ID you can search the Vendor lists here. To identify the NIC information, use the linux command `lspci -nn` to obtain the PCI device name, device ID, vendor name, and vendor ID. 
+The Session Smart Router / 128T supports the following certified NICs and Drivers:
+
+## Intel
+
+| Device ID | Driver | SSR/128T Version Introduced |
+| --- | --- | --- |
+| Ethernet 10G 2P X520 Adapter (154d) | net_ixgbe | 4.5.0 |
+| Ethernet Converged Network Adapter X520-Q1 (1558) | net_ixgbe | 4.5.0 |
+| Ethernet Express Module X520-P2 (1507) | net_ixgbe | 4.5.0 |
+| Ethernet Server Adapter X520-4 (154a) | net_ixgbe | 4.5.0 |
+| Ethernet X520 10GbE Dual Port KX4 Mezz (1514) | net_ixgbe | 4.5.0 |
+| Ethernet Controller X710 for 10GBASE-T (1586) | net_i40e | 4.5.0 |
+| Ethernet Controller X710 for 10GbE backplane (1581) | net_i40e | 4.5.0 |
+| Ethernet Controller X710 for 10GbE QSFP+ (1585) | net_i40e | 4.5.0 |
+| Ethernet Controller X710 for 10GbE SFP+ (1572) | net_i40e | 4.5.0 |
+| Ethernet Controller X710/X557-AT 10GBASE-T (1589) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 20GbE backplane (1587) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 20GbE backplane (1588) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 40GbE backplane (1580) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 40GbE QSFP+ (1583) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 40GbE QSFP+ (1584) | net_i40e | 4.5.0 |
+| Ethernet Controller XXV710 for 25GbE backplane (158a) | net_i40e | 4.5.0 |
+| Ethernet Controller XXV710 for 25GbE SFP28 (158b) | net_i40e | 4.5.0 |
+
+## Mellanox 
+
+| Device ID | Driver | SSR/128T Version Introduced |
+| --- | --- | --- |
+| MT28800 Family [ConnectX-5 Ex Virtual Function] (101a) | net_mlx5 | 4.5.0 |
+| MT28800 Family [ConnectX-5 Ex] (1019) | net_mlx5 | 4.5.0 |
+
+To identify your NIC information, use the linux command `lspci -nn` to obtain the PCI device name, device ID, vendor name, and vendor ID. 
 
 From the linux shell run:
 ```
@@ -11,7 +42,19 @@ lspci-nn
 
 00:03.0 Ethernet controller [0200]: Intel Corporation 82540EM Gigabit Ethernet Controller [8086:100e] (rev 03)
 ```
-The Vendor ID and Device ID are represented in the example above as [8086:100e]. To make searching the list easier, use the device name and ID. In this example:
+The Vendor ID and Device ID are represented in the example above as [8086:100e].
+
+## Additional NICs and Drivers
+
+Additional NICs and drivers may work with the SSR/128T, but have not been fully tested by Juniper/128 Technology, and may not fully support all features of the SSR/128T. The list below includes those devices that may support the SSR/128T, but have not been tested by Juniper/128 Technology. 
+
+### Unsupported NICs and Drivers
+
+:::warning
+The following list of NICs and drivers have not been tested for use with the SSR/128T. No guarantees are made regarding their performance or usability. Using an unsupported device is done so at your own risk.
+:::
+
+If you know the Device Name and Device ID you can search the Vendor lists here. To make searching the list easier, use the device name and ID. In this example:
 
 - Device name: 82540EM Gigabit Ethernet Controller
 - Device ID: 100e
