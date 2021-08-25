@@ -13,7 +13,7 @@ Transport based encryption does not change how packets are encrypted, it simply 
 
 ## Configuration
 
-To provide control on transport based encryption, use the following command and options:
+To provide control on transport based encryption, use the following configuration options:
 
 `payload-encryption-override`: Enforces transport based encryption using the following options.
 - `enable-encryption`: Enable encryption of the payload even when the security-policy associated with the service is set to `encrypt=false`. If the payload is already encrypted by another 128T, send it out as is. 
@@ -44,5 +44,5 @@ Transport based encryption can be disabled through config if encryption problems
 
 - `show sessions` displays the field “Payload Encrypted” to indicate if the session is being encrypted.
 - `show session by-id` includes the field “Payload Encryption” to show the encryption status of the session.
-- `show peers` shows the encryption status of peers.
+- `show peers detail` shows the peers configuration.
 

@@ -10,27 +10,10 @@ Configuring WAN Assurance requires Administrator level privileges on all platfor
 :::
 
 High Level Steps:
-- Install the MIST WAN Assurance Plugin on the Conductor.
 - Create an account on the MIST portal.
 - Create Sites.
 - Register the Conductor with Mist.
 - Assign routers to a Site.
-
-## Install the MIST WAN Assurance Plugin on the Conductor
-
-Using the plugin installation workflow, install the Mist WAN Assurance plugin onto the Conductor.
-
-![Mist WAN Assurance Plugin Installation](/img/mist_wa_install.gif)
-
- or run the following command from the PCLI:
-
-`admin@node1.conductor1# manage plugin install 128T-mist-wan-assurance latest`
-
-When the process is complete, restart the conductor. From the PCLI, run 
-
-`systemctl restart 128T`
-
-In the GUI, select **Restart > Conductor**. 
 
 ## Enable WAN Assurance on the Conductor
 
@@ -62,7 +45,7 @@ This procedure assumes you do not already have an account, organization, or site
     AiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRj
     NGIwNzAiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1
     fdXJsIjoid3NzOi8vZXAtdGVybWluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjIyNzQ2MT
-    c1LCJleHAiOjE2NTQyODIxNzV9.iDobxHQzKZkJyTd98jUoVFZrZet7ElvPQdsCdDFfAN0
+    c1LCJleHAiOjE2NTQyODIxNzV9.iBul1W1nk!3JyTd98jUoVFZrZet7ElvPQdsCdDFfAN0
     admin@node1.conductor1#
     *admin@node1.conductor1#
     *admin@node1.conductor1#
