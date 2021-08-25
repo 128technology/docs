@@ -44,11 +44,9 @@ lspci-nn
 ```
 The Vendor ID and Device ID are represented in the example above as [8086:100e].
 
-## Additional NICs and Drivers
+## Unsupported NICs and Drivers
 
 Additional NICs and drivers may work with the SSR/128T, but have not been fully tested by Juniper/128 Technology, and may not fully support all features of the SSR/128T. The list below includes those devices that may support the SSR/128T, but have not been tested by Juniper/128 Technology. 
-
-### Unsupported NICs and Drivers
 
 :::warning
 The following list of NICs and drivers have not been tested for use with the SSR/128T. No guarantees are made regarding their performance or usability. Using an unsupported device is done so at your own risk.
