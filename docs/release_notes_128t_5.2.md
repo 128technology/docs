@@ -10,6 +10,30 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 5.2.2
+**Release Date:** August 24, 2021
+Contains fixes from: [Release 5.1.5, August 13, 2021](release_notes_128t_5.1.md#release-515)
+
+### New Features
+
+- **I95-26075 Generate PCAP directly from Session table:** A button has been added to both the Session Debug table and the Top Sessions table that allows the user to create a PCAP file containing the specific row data from each table.
+
+### Resolved Issues
+
+- **I95-41481 Reachability metrics actions are not available for TLS modify scenarios:** Reachability stats for app-id session updates have been added. 
+------
+- **I95-41617 In some rare cases the GUI may enter a re-render loop:** Resolved an issue where the value provided by `usePreLoginData` was being used to determine if the application should re-render.
+------
+- **I95-41652 Misspelled parameter in the Influx setup template:** This issue has been resolved. 
+------
+- **I95-41689 Limited search on FIB table:** Restore FIB filtering query parameters.
+------
+- **I95-41704 Node processes using excessive CPU during upgrade:** Changes made to initiate Swagger generation only when a file is updated or changed.
+
+### Caveats
+
+- **I95-40335 Package dependency conflicts:** 5.2.2 supports the `vrsx-sfc` plugin. With this plugin, upgrading to 5.3.0 is not supported. If the system is upgraded to 5.3.0 with this plugin installed, the plugin dependencies will be removed and the features provided with this plugin will no longer function.
+
 ## Release 5.2.1
 **Release Date:** July 20, 2021
 
