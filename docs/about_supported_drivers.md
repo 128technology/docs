@@ -2,8 +2,40 @@
 title: Supported NICs and Drivers
 sidebar_label: Supported NICs and Drivers
 ---
+## Certified NICs and Drivers
 
-The Session Smart Router / 128T supports a number of NICs and Drivers. If you know the Device Name and Device ID you can search the Vendor lists here. To identify the NIC information, use the linux command `lspci -nn` to obtain the PCI device name, device ID, vendor name, and vendor ID. 
+The following NICs and drivers have been tested and are certified by Juniper / 128 Technology for use with the Session Smart Router / 128T.
+
+### Intel
+
+| Device ID | Driver | SSR/128T Version Introduced |
+| --- | --- | --- |
+| Ethernet 10G 2P X520 Adapter (154d) | net_ixgbe | 4.5.0 |
+| Ethernet Converged Network Adapter X520-Q1 (1558) | net_ixgbe | 4.5.0 |
+| Ethernet Express Module X520-P2 (1507) | net_ixgbe | 4.5.0 |
+| Ethernet Server Adapter X520-4 (154a) | net_ixgbe | 4.5.0 |
+| Ethernet X520 10GbE Dual Port KX4 Mezz (1514) | net_ixgbe | 4.5.0 |
+| Ethernet Controller X710 for 10GBASE-T (1586) | net_i40e | 4.5.0 |
+| Ethernet Controller X710 for 10GbE backplane (1581) | net_i40e | 4.5.0 |
+| Ethernet Controller X710 for 10GbE QSFP+ (1585) | net_i40e | 4.5.0 |
+| Ethernet Controller X710 for 10GbE SFP+ (1572) | net_i40e | 4.5.0 |
+| Ethernet Controller X710/X557-AT 10GBASE-T (1589) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 20GbE backplane (1587) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 20GbE backplane (1588) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 40GbE backplane (1580) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 40GbE QSFP+ (1583) | net_i40e | 4.5.0 |
+| Ethernet Controller XL710 for 40GbE QSFP+ (1584) | net_i40e | 4.5.0 |
+| Ethernet Controller XXV710 for 25GbE backplane (158a) | net_i40e | 4.5.0 |
+| Ethernet Controller XXV710 for 25GbE SFP28 (158b) | net_i40e | 4.5.0 |
+
+### Mellanox 
+
+| Device ID | Driver | SSR/128T Version Introduced |
+| --- | --- | --- |
+| MT28800 Family [ConnectX-5 Ex Virtual Function] (101a) | net_mlx5 | 4.5.0 |
+| MT28800 Family [ConnectX-5 Ex] (1019) | net_mlx5 | 4.5.0 |
+
+To identify your NIC information, use the linux command `lspci -nn` to obtain the PCI device name, device ID, vendor name, and vendor ID. 
 
 From the linux shell run:
 ```
@@ -11,7 +43,31 @@ lspci-nn
 
 00:03.0 Ethernet controller [0200]: Intel Corporation 82540EM Gigabit Ethernet Controller [8086:100e] (rev 03)
 ```
-The Vendor ID and Device ID are represented in the example above as [8086:100e]. To make searching the list easier, use the device name and ID. In this example:
+The Vendor ID and Device ID are represented in the example above as [8086:100e].
+
+## Compatible NICs and Drivers
+
+Additional NICs and drivers may be compatible with the SSR/128T, but have not been fully tested by Juniper/128 Technology, and may not fully support all features of the SSR/128T. 
+
+:::note
+128 Technology strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third-party. See [Compatible Platform Support](about_supported_platforms.md#support-for-128t-on-compatible-platforms).
+:::
+
+Compatible platforms have the following characteristics:
+* Meets [minimum platform specifications](about_supported_platforms.md#minimum-platform-specifications)
+* No commitment to keep up with third-party supplier changes
+* No commitment to support device on future 128T versions
+* May require additional configuration upon implementation (vs. out of box experience)
+* Performance benchmarking not provided
+* Supporting documentation not provided
+
+See [128T Compatible Platforms](about_supported_platforms.md#128t-compatible-platform) for additional definitions and requirements for compatible platforms. 
+
+The list below includes those devices that are compatible with the SSR/128T, but have not been tested by Juniper/128 Technology. 
+
+### Searching the List
+
+If you know the Device Name and Device ID you can search the Vendor lists here. To make searching the list easier, use the device name and ID. In this example:
 
 - Device name: 82540EM Gigabit Ethernet Controller
 - Device ID: 100e
@@ -40,13 +96,13 @@ Use the links below to browse the list of a specific vendor.
 - [Red Hat](#red-hat)
 - [Solarflare Communications](#solarflare)
 
-## Amazon
+### Amazon
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
 | Amazon.com, Inc. (1d0f) | Elastic Network Adapter (ENA) (ec20) | net_ena | 4.5.0 | 
 
-## Aquantia Corp
+### Aquantia Corp
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
@@ -56,14 +112,14 @@ Use the links below to browse the list of a specific vendor.
 | | AQC112 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (12b1) | net_atlantic | 4.5.0 |
 | | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (87b1) | net_atlantic | 4.5.0 |
 
-## Atomic Rules
+### Atomic Rules
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
 |Atomic Rules LLC (1d6c) | AR-ARKA-FX0 Arkville 32B DPDK Data Mover (100d) | net_ark | 4.5.0 |
 | | AR-ARKA-FX1 Arkville 64B DPDK Data Mover (100e) | net_ark | 4.5.0 |
 
-## Broadcom	
+### Broadcom	
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
@@ -111,7 +167,7 @@ Use the links below to browse the list of a specific vendor.
 | | NetXtreme-E Ethernet Virtual Function (16dc) | net_bnxt | 4.5.0 |
 | | NetXtreme-E RDMA Virtual Function (16c1) | net_bnxt | 4.5.0 |
 
-## Cavium
+### Cavium
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
@@ -121,7 +177,7 @@ Use the links below to browse the list of a specific vendor.
 | | THUNDERX Network Interface Controller virtual function (a034) | net_thunderx | 4.5.0 |
 | | THUNDERX ZIP virtual function (a037) | compress_octeonx	| 4.5.0 |
 
-## Chelsio Communications
+### Chelsio Communications
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
@@ -288,7 +344,7 @@ Use the links below to browse the list of a specific vendor.
 | | T6425-SO-CR Unified Wire Ethernet Controller (6404) | net_cxgbe | 4.5.0 |
 | | T6425-SO-CR Unified Wire Ethernet Controller [VF] (6804) | net_cxgbevf | 4.5.0 |
 
-## Intel Corporation
+### Intel Corporation
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
@@ -452,7 +508,7 @@ Use the links below to browse the list of a specific vendor.
 | | X553 Virtual Function (15b4) | net_ixgbe_vf | 4.5.0 |
 | | X553 Virtual Function (15c5) | net_ixgbe_vf | 4.5.0 |
 
-## Mellanox
+### Mellanox
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
@@ -472,7 +528,7 @@ Use the links below to browse the list of a specific vendor.
 | | MT416842 BlueField integrated ConnectX-5 network controller (a2d2) | net_mlx5	| 4.5.0 |
 | | MT416842 BlueField multicore SoC family VF (a2d3) | net_mlx5 | 4.5.0 | |
 
-## QLogic
+### QLogic
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
@@ -485,7 +541,7 @@ Use the links below to browse the list of a specific vendor.
 | | FastLinQ QL45000 Series 50GbE Controller (1654) | net_qede	| 4.5.0 |
 | | FastLinQ QL45000 Series Gigabit Ethernet Controller (SR-IOV VF) (1664) | net_qede_vf	| 4.5.0 |
 
-## Red Hat
+### Red Hat
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
@@ -494,7 +550,7 @@ Use the links below to browse the list of a specific vendor.
 | | Virtio network device (1041) | net_ifcvf | 4.5.0 |
 | | Virtio network device (1041) | net_virtio | 4.5.0 |
 
-## Solarflare
+### Solarflare
 
 | Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
 | --- | --- | --- | --- |
