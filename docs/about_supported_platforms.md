@@ -10,7 +10,7 @@ For the purposes of describing the platform support policy, the following terms 
 
 - ***Platform*** - A physical or virtual system, typically consisting of some amount of resources for compute, memory, disk, and networking. _Example_: A physical server, virtual machine, or public cloud virtual machine instance.
 - ***Certification*** - The process of testing to ensure that a specific combination of a 128T Networking Platform software version and platform build meet requirements for functionality, stability, and performance. _Example_: The [128T Certification Program](#128t-certification-program) provides certification of a set of platforms with 128T Networking Platform software.
-- ***Certified Platform*** - A platform that is currently in the 128T Certification Program as a [128T Certified Plus Platform](#128t-certified-plus-platform), or [128T Certified Platform](#128t-certified-platform). _Example_: A specified build of Lenovo SR530 server is a certified platform.
+- ***Certified Platform*** - A platform that is currently in the 128T Certification Program as a [128T Certified Plus Platform](#128t-certified-plus-platform), or [128T Certified Platform](#128t-certified-platform).
 - ***Qualified Platform*** - A platform that meets or exceeds [minimum platform specifications](#minimum-platform-specifications) and is known to be able to run 128T Networking Platform software. _Example_: A CompuLab fitlet2 with Intel Atom E3950, 8GB of memory, and 128GB of disk is a qualified platform.
 - ***Compatible Platform*** - A platform that meets or exceeds [minimum platform specifications](#minimum-platform-specifications). _Example_: A platform with Intel Xeon D-1518, 8GB of memory, and 128GB of disk is a compatible platform.
 - ***Incompatible Platform*** - A platform that does not meet [minimum platform specifications](#minimum-platform-specifications) and is unlikely to run 128T Networking Platform software at acceptable levels of functionality, stability, performance, or at all. _Example_: The [Apollo Guidance Computer](https://en.wikipedia.org/wiki/Apollo_Guidance_Computer) is an incompatible platform.
@@ -53,8 +53,6 @@ The 128T Certification program provides a designation of Certified for certain p
 * Supplier relationship may be established
 * Includes performance benchmarking
 * Supporting documentation as needed
-
-For a list of platforms which are currently Certified, see [Certified Platforms](about_certified_platforms.mdx).
 
 ### 128T Qualified Platform
 
