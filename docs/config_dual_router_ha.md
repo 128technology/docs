@@ -270,7 +270,7 @@ config
 exit
 ```
 
-For more information on this setting, refer to the section on `transport-state-enforcement` in our [online documentation](config_reference_guide.md#service-policy).
+For more information on this setting, refer to the section on `transport-state-enforcement` under [`service-policy`](config_reference_guide.md#service-policy).
 
 ### Service Route Configuration
 
