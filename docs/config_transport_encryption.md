@@ -30,6 +30,12 @@ config authority
 				adjacency 1.1.1.1 peer1
 					payload-encryption-override enable-encryption
 					generated false
+					exit
+        exit
+      exit
+    exit
+  exit
+exit
 ```
 
 ### Failover
@@ -44,5 +50,5 @@ Transport based encryption can be disabled through config if encryption problems
 
 - `show sessions` displays the field “Payload Encrypted” to indicate if the session is being encrypted.
 - `show session by-id` includes the field “Payload Encryption” to show the encryption status of the session.
-- `show peers detail` shows the peers configuration.
+
 

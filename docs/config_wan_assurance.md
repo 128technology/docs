@@ -3,14 +3,15 @@ title: Configuring WAN Assurance
 sidebar_label: Configuring WAN Assurance
 ---
 
-Use the following process to onboard 128T SSR’s to the MIST cloud. Since 128T can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding. 
+Use the following process to onboard Session Smart Routers (SSR) to the MIST cloud. Since SSN software can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding. 
 
 :::important
-Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR/128T and MIST. 
+Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR and MIST. 
 :::
 
 High Level Steps:
 - Create an account on the MIST portal.
+- Add your Organization.
 - Create Sites.
 - Register the Conductor with Mist.
 - Assign routers to a Site.
@@ -23,23 +24,54 @@ This procedure assumes you do not already have an account, organization, or site
 
 2. Create an organization for the authority. 
 
-3. Create one Site per physical location for on-boarding 128T SSRs. 
-    The **Site** is a key concept for MIST Assurance features. Some general recommendations for creating sites are:
-    * Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites.
-    * Other devices from the Juniper stack such as MIST APs, Switches, SRX, etc., should be onboarded and assigned to the same site as the SSR when possible. This provides a clean topology view of all devices running within a site.
+- From the Mist menu on the left, select **Organization**, and select **Settings** from the menu.
 
-    *Issue: There is no information about how to create a Site in this doc (or I haven’t found it yet). But it is made clear how important the concept of a site is. I need information about how to create a site, or how a site is created if it is done automatically. I also was not able to find site creation info in the Mist documenation.* 
+    ![Organization Settings](/img/wan_org_settings.png)
 
-4. Access the registration code for the organization. (not sure what this means - "This allows additional on-boarding of 128T routers from the conductor.") 
+- In the Create Organization panel, enter a name for the Organization. 
 
- - On the MIST portal, go to Organization > Inventory.
- - In the Inventory panel, click on the **Gateways** selection on the top of the screen.
- - Click on the Adopt Gateways button in the top right corner. The Gateway Adoption dialog appears with a CLI command to adopt a gateway. This includes the registration code.
- - Click on **Copy to Clipboard**. 
+    ![Organization Panel](/img/wan_create_org.png)
 
-5. Return to the SSR/128T and login to the conductor PCLI as an admin. 
+    For additional information about creating an Organization, please refer to the Mist [Organization Config documentation](https://www.mist.com/documentation/category/organization-config/).
 
-6. Paste the registration code into the PCLI. **(the example below is not clear. Do they paste the reg-code immediately after logging in? Or do they navigate through commands to mist-wan-assurance and paste the reg code?)**
+3. Create one Site for each physical location for on-boarding 128T SSRs. 
+
+    Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites. Other devices from the Juniper stack such as MIST APs, Switches, SRX, etc., should be onboarded and assigned to the same site as the SSR when possible. This provides a clean topology view of all devices running within a site.
+    
+- From the Mist menu on the left, select **Organization** and select **Site Configuration** from the menu.
+
+    ![Site Configuration](/img/wan_org_site_config.png)
+
+- In the Sites List, click on the **Create Site** button.
+
+    ![Site Button](/img/wan_create_site_button.png)
+
+- Use the New Site panel to configure a site. 
+
+    ![New Site Panel](/img/wan_new_site.png)
+    
+    For information about the fields used to create a site, please refer to the Mist [Site Configuration documenation](https://www.mist.com/documentation/category/site-configuration/). 
+
+4. Access the registration code for the organization. 
+
+- From the Mist menu on the left, select **Organization > Inventory**.
+
+    ![Inventory Menu](/img/wan_inventory.png)
+
+- In the Inventory panel, click on the **Gateways** selection on the top of the screen.
+
+    ![Inventory panel](/img/wan_inventory_panel.png)
+
+- Click on the Adopt Gateways button in the top right corner. The Gateway Adoption dialog appears, displaying the registration code.
+
+    ![Gateway Adoption](/img/wan_registration_code.png)
+
+- Click on **Copy to Clipboard**. 
+
+5. Return to the SSR and login to the conductor PCLI as an admin. 
+
+6. Paste the registration code into the PCLI. 
+
 ```
     admin@node1.conductor1# configure authority mist-wan-assurance registration-code eyJ0eX
     AiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRj
@@ -52,7 +84,7 @@ This procedure assumes you do not already have an account, organization, or site
     *admin@node1.conductor1# compare config running candidate
 ```
 
- To enter the registration code in the SSR/128T GUI, copy the text registration-code from the MIST portal (info above) and paste it under Configuration > Authority > Mist WAN Assurance > Registration Code.
+To enter the registration code in the SSR GUI, copy the text registration-code from the MIST portal (info above) and paste it under **Configuration > Authority > Mist WAN Assurance > Registration Code**.
     
 ```
     config
@@ -68,7 +100,7 @@ This procedure assumes you do not already have an account, organization, or site
     *admin@node1.conductor1#
     
 ```
-Committing the registration code will enable WAN Assurance on all connected routers. If this is not desired, please refer to the Skipping specific routers section before committing the registration code information to the configuration.
+Committing the registration code enables WAN Assurance on all connected routers. If you only want WAN Assurance enabled on certain routers, please refer to [Skipping Specific Routers](#skipping-specific-routers) before committing the registration code information to the configuration.
 
 7. Commit the registration code to the configuration.
 
@@ -102,11 +134,11 @@ Sites must have already been created - there is no option to create a site in th
 
 Once the site assignment is complete, the information is relayed back to the corresponding 128T router, and the router begins streaming the telemetry data to the cloud.
 
-## SSR/128T WAN Assurance Features
+## SSR WAN Assurance Features
 
 ### Topology Mapping
 
-The SSR/128T Router can be configured to receive LLDP packets from LAN interfaces. This information is useful for creating a local site level topology view. Use the following code example to enable the LLDP receive mode on LAN interfaces.
+The SSR can be configured to receive LLDP packets from LAN interfaces. This information is useful for creating a local site level topology view. Use the following code example to enable the LLDP receive mode on LAN interfaces.
 
 `configure authority router <router> node <node> device-interface <lan-intf> lldp mode receive-only`
 
