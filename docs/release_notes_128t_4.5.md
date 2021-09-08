@@ -11,6 +11,38 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 4.5.11
+
+**Release Date:** September 7, 2021
+
+### New Features
+
+- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md/#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
+
+## Resolved Issues
+
+- **I95-40035/I95-40030 Jute maxbuffer limit for running/candidate configurations:** Created an alarm when the zookeeper jute buffer exceeds a threshold (75%), and an alert to change the system environment configuration.
+------
+- **I95-40239 CVE-2021-26937:** This vulnerability has been resolved.
+------
+- **I95-40241 RHSA-2020:1180:** Resolved RHSA-2020:1180 by deprecating package ImageMagick.
+------
+- **I95-40242 CESA-2021:0856 advisory:** This vulnerability has been resolved. 
+------
+- **I95-40624 Occasional failures in time-based HMAC:** This issue has been resolved.
+------
+- **I95-41070 Socket Hangs while validating configuration:** Validation checks now handle services with no address in `ServicePortRanges`.
+------
+- **I95-41105 Race condition causes peer path status to be down:** This issue has been resolved. 
+------
+- **I95-41194 Log generated on the conductor is missing output of some commands:** The `show alarms` command now uses the local router name in `save-tech-support-info`.
+------
+- **I95-41227 Authentication Bypass Vulnerability:** The bypass vulnerability has been addressed.
+------
+- **I95-41412 Intermittent traffic drop:** Resolved an issue with compression code, resulting in invalid packets being discarded.
+------
+- **I95-41972 Automated Provisioner throws exception during show assets:** Resolved an issue with multiple aggregations when persisting in-memory metrics. 
+
 ## Release 4.5.10
 
 **Release Date:** June 8, 2021
