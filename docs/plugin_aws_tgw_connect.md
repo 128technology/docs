@@ -45,9 +45,6 @@ This logic collects the necessary data for the plugin to generate the appropriat
 Use the following steps to configure the Conductor to query and create AWS objects. On each Conductor node:
 1. [Install](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html) the AWS CLI if not already installed.
 2. [Configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html) AWS CLI using `aws configure`. Be sure to specify the credentials, and `json` for the `output`.
-3. Run the following: `aws ec2 describe-transit-gateway-connect-peers`.
-   * If the configuration is valid a json response is printed.
-4. [Update](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html#cliv2-linux-upgrade) the AWS CLI to the latest version available and then try step 3 again.
 
 ## Configuration Snippet
 
@@ -234,3 +231,13 @@ router
     exit
 exit
 ```
+
+## Release Notes
+
+### Release 1.1.1
+
+#### Issues Fixed
+
+- **PLUGIN-1311** Commit on conductor could take up to 2 minutes to complete with plugin installed when conductor is not runnning inside AWS, even if the plugin was unconfigured.
+
+- **PLUGIN-1343** Unnecessary additional steps needed to set up AWS CLI to utilize TGW Connect APIs.
