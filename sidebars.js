@@ -82,6 +82,7 @@ module.exports = {
           "config_gre_tunnel",
           "config_in-memory_metrics",
           "config_wan_assurance",
+          "config_transport_encryption",
 
           "config_ha",
           "config_dual_router_ha",
@@ -149,6 +150,7 @@ module.exports = {
       "bcp_att_avpn_configuration",
       "bcp_using_128T_as_ntp_server",
       "bcp_conductor_deployment",
+      "bcp_per-adjacency_traffic_engineering",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",

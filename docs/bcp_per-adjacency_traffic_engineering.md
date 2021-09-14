@@ -3,11 +3,11 @@ title: Per Adjacency Traffic Engineering
 sidebar_label: Per Adjacency Traffic Engineering
 ---
 
-While traffic loss in a network is inevitable, where it drops can have a major impact on perceived quality of service. Loss due to an entity with configured transmit caps between instances of 128T should be avoided as much as possible.  
+While traffic loss in a network is inevitable, where it drops can have a major impact on perceived quality of service. Loss due to an entity with configured transmit caps between instances of the SSN/128T should be avoided as much as possible.  
 
-## Overview
+## Overview 
 
-Per-adjacency traffic engineering provides targeted traffic engineering for both directions on a bandwidth restricted link between two 128T instances. Traffic engineering on the device interface continues to be associated with the upload rate of a connected link; the `transmit-cap`. Traffic engineering at the adjacency level is associated with the download limit of the adjacent 128T instance; the `recieve-cap`.  
+Per-adjacency traffic engineering provides targeted traffic engineering for both directions on a bandwidth restricted link between two 128T instances. Traffic engineering on the device interface continues to be associated with the upload rate of a connected link; the `transmit-cap`. Traffic engineering at the adjacency level is associated with the download limit of the adjacent 128T instance; the `receive-cap`.  
 
 For example, in the following hub and spoke diagram the Datacenter router has 5 adjacencies off of the individual device interface with a transmit-cap upload speed configured at 50Mb. The adjacent branch routers have 10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb configured as their device interface transmit caps. With such a large transmit-cap at the Datacenter, traffic rates exceeding the allowed download speeds (10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb) on each of the paths to the branch routers will result in traffic being dropped by the ISP. 
 

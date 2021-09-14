@@ -7,9 +7,9 @@ Providing a secure transport system for traffic often requires enabling encrypti
  
 Transport based encryption does not change how packets are encrypted, it simply provides more control points for enabling payload encryption. This provides flexibility when expanding your network from a legacy, all-private VPN MPLS network to include more modern communication technologies, such as wireless LTE connections. By retaining the service level payload encryption setting as disabled and enabling the transport level payload encryption at the new LTE link, traffic is encrypted on the public link maintaining the necessary security. 
 
-- Transport based encryption only applies to the services that have security policy defined but encryption turned off.
+- Transport based encryption only applies to the services that have a security policy defined but encryption turned off.
 - Payload encryption happens on the first router where the override is enabled (irrespective of the number of hops and payload override configuration) and decryption happens on the last hop.
-- Adaptive encryption does not apply to transport based encryption.
+- [Adaptive encryption](sec_adaptive_encrypt.md) does not apply to transport based encryption.
 
 ## Configuration
 
@@ -38,13 +38,51 @@ config authority
 exit
 ```
 
-### Failover
+### Validating the Configuration
+
+The compatibility of `payload-encryption-override` settings is checked at the corresponding peers. If `enable-encryption` is selected at one adjacency, the adjacency at the corresponding peer should also select `enable-encryption` for `payload-encryption-override`. If this has not been done, a pair of error messages are displayed during the validation step. 
+
+```
+*admin@conductor-east-1.RTR_EAST_CONDUCTOR (adjacency[ip-address=172.16.4.3][peer=RTR_CENTRAL_COMBO])# validate
+✖ Validating...
+% Error: Candidate configuration is invalid:
+1. payload-encryption-override is not compatible with corresponding peer (RTR_EAST_COMBO) network-interface 'intf11' address '172.16.4.2' ('disable-override' != 'enable-encryption')
+
+    config
+        authority
+            router RTR_CENTRAL_COMBO
+                node combo-central-1
+                    device-interface 11
+                        network-interface intf11
+                            adjacency 172.16.4.2 RTR_EAST_COMBO
+                                peer
+
+2. payload-encryption-override is not compatible with corresponding peer (RTR_CENTRAL_COMBO) network-interface 'intf11' address '172.16.4.3' ('enable-encryption' != 'disable-override')
+
+    config
+        authority
+            router RTR_EAST_COMBO
+                node combo-east-1
+                    device-interface 11
+                        network-interface intf11
+                            adjacency 172.16.4.3 RTR_CENTRAL_COMBO
+                                peer
+
+```
+
+A packet duplication warning message is displayed when the session resiliency of a service policy is discovered with a potential peer path `payload-encryption-override` to `enable-encryption`. 
+
+```
+All of the packet duplication paths for service 'west' that potentially go through peer 'RTR_WEST_COMBO' (service-route 'to-west') might be overridden to enable-encryption.
+```
+
+## Failover
 
 If a session fails over to a different link, the session’s encryption is changed accordingly based on the transport based encryption setting.
 
 ![Transport Encryption](/img/config_transport_encryption.png)
 
-Transport based encryption can be disabled through config if encryption problems occur, such as the platform being under-powered, packet decryption issues due to configuration errors, etc.
+Transport based encryption can be disabled through the configuration if encryption problems occur, such as the platform being under-powered, packet decryption issues due to configuration errors, etc.
 
 ### Troubleshooting
 
