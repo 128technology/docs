@@ -241,3 +241,5 @@ exit
 - **PLUGIN-1311** Commit on conductor could take up to 2 minutes to complete with plugin installed when conductor is not runnning inside AWS, even if the plugin was unconfigured.
 
 - **PLUGIN-1343** Unnecessary additional steps needed to set up AWS CLI to utilize TGW Connect APIs.
+
+- **PLUGIN-1322** Assets would become stuck in connected state after uninstalling plugin.
