@@ -106,7 +106,7 @@ Committing the registration code enables WAN Assurance on all connected routers.
 
 ### On-Boarding Routers
 
-Once a valid registration code is committed, registration is automatic. The conductor sends instructions to all connected routers to self-onboard to the MIST cloud. The  process is automated and the routers do not require any user interaction.
+Once a valid registration code is committed, registration is automatic. The conductor sends instructions to all connected routers to self-onboard to the MIST cloud. The process is automated and the routers do not require any user interaction.
 
 ### Skipping Specific Routers
 
@@ -177,13 +177,13 @@ To provide insights into the application, services, and some SLE functionality, 
 
 ## Moving a Router
 
-There are two steps to moving a router; releasing and re-onboarding. (why would you need to move a router? Where are you moving it from and to?)
+In a situation where a router needs to be moved from one organization to another or physically relocated the router must be released and then re-onboarded. 
 
-### Releasing a router
+### Releasing a Router
 
-If the device needs to be removed from the organization, or released for other reasons, use the following process. 
+The router must be released from both MIST and the SSN conductor. To release a router, use the following process. 
 
-#### From the MIST GUI:
+1. From the MIST GUI:
 
 * Go to **Organization > Inventory**.
 * Select the checkbox next to the router.
@@ -191,7 +191,7 @@ If the device needs to be removed from the organization, or released for other r
 * Select **Release**.
 * Click on **Release** to confirm.
 
-#### On the 128T conductor
+2. On the SSN conductor, you can perform a release from either the conductor shell or the GUI.
 
 From the conductor shell:
 
@@ -199,21 +199,26 @@ From the conductor shell:
 
 In the GUI:
 
-1. In the Tools menu, select Plugin Commands
+ 1. In the Tools menu, select Plugin Commands.
 
-2. In the Plugin Commands pane, select the plugin command (top right corner) **release mist agent**.
+ 2. In the Plugin Commands pane, select the plugin command (top right corner) **release mist agent**.
 
-3. Set the router context: select the router and node from the drop down lists.
+ ![Plugins Context Menu](img/wana_release_mist.png)
 
-4. Click **Execute**.
+ 3. Select the router and node from the drop down lists.
 
-After a few minutes the router will be released and stop sending the data to the MIST cloud. Once that process is completed,  disable the router by following the instructions here.
+ ![Plugin Release Context](img/wana_release_mwa_context.png)
 
-**going to need this to be explained; the link takes me back to onboarding, not anything related to disabling.**
+ 4. Click **Execute**.
 
-### Re-Onboarding a router
+After a few minutes the router will be released and stop sending the data to the MIST cloud. Once that process is completed, disable the Mist WAN Assurance plugin on the router.
 
-To re-onboard a router without doing a full ISO re-initialization, use the following steps to trigger the on-boarding process again. 
+![Disable MWA Plugin](img/wana_disabled.png) 
 
-**Need the steps. The ones that were here are for releasing the the router, not re-onboarding.**
+### Re-Onboarding a Router
+
+To re-onboard a router, re-enable the plugin on the router. This triggers a reload of the registration code and the on-boarding process. 
+
+![Enable MWA Plugin](img/wana_enbled.png)
+
 
