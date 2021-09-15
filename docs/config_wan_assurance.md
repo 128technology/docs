@@ -203,22 +203,22 @@ In the GUI:
 
  2. In the Plugin Commands pane, select the plugin command (top right corner) **release mist agent**.
 
- ![Plugins Context Menu](img/wana_release_mist.png)
+ ![Plugins Context Menu](/img/wana_release_mist.png)
 
  3. Select the router and node from the drop down lists.
 
- ![Plugin Release Context](img/wana_release_mwa_context.png)
+ ![Plugin Release Context](/img/wana_release_mwa_context.png)
 
  4. Click **Execute**.
 
 After a few minutes the router will be released and stop sending the data to the MIST cloud. Once that process is completed, disable the Mist WAN Assurance plugin on the router.
 
-![Disable MWA Plugin](img/wana_disabled.png) 
+![Disable MWA Plugin](/img/wana_disabled_mwa.png) 
 
 ### Re-Onboarding a Router
 
 To re-onboard a router, re-enable the plugin on the router. This triggers a reload of the registration code and the on-boarding process. 
 
-![Enable MWA Plugin](img/wana_enbled.png)
+![Enable MWA Plugin](/img/wana_enabled_mwa.png)
 
 
