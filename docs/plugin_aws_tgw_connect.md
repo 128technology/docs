@@ -11,8 +11,11 @@ The instructions for installing and managing the plugin can be found [here](plug
 
 ## Version Restrictions
 
- The router configuration that is generated is only compatible with 128T versions which have [native GRE support](config_gre_tunnel.md) (128T >= 5.2.0). 
+ The router configuration that is generated is only compatible with 128T versions which have [native GRE support](config_gre_tunnel.md) (128T >= 5.2.0).
 
+:::warning
+The plugin is designed to operate on an AWS conductor. Installing the plugin on a non AWS environment can cause delay with config commits for up to 5 seconds. Please refer to the link [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify_ec2_instances.html) on how to identify EC2 linux instances.
+:::
 
 ### Terms
 
@@ -36,7 +39,7 @@ Configure the following components, in order:
 * [Transit Gateway Connect Attachment](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html)
 * Additionally, the routing tables must be configured to transport the GRE traffic to the Transit Gateway network interface.
 
-The plugin interacts with the AWS APIs to identify an existing "Connect Peer" that applies to the given node. Matching is based on the network interface IP address and the Connect Peer's peer address. If there is no existing Connect Peer, the plugin creates one on behalf of the user. The plugin chooses the first `available` Transit Gateway Connect Attachment to create the Transit Gateway Connect Peer. 
+The plugin interacts with the AWS APIs to identify an existing "Connect Peer" that applies to the given node. Matching is based on the network interface IP address and the Connect Peer's peer address. If there is no existing Connect Peer, the plugin creates one on behalf of the user. The plugin chooses the first `available` Transit Gateway Connect Attachment to create the Transit Gateway Connect Peer.
 
 This logic collects the necessary data for the plugin to generate the appropriate BGP and GRE configuration for connection.
 
@@ -98,14 +101,14 @@ After the configuration is generated, the BGP peering status can be queried on t
 * `show bgp neighbors`
 * `show bgp summary`
 
-On the AWS Portal, under `VPC` > `Transit Gateway Attachments` > `<your connect attachments>` > `Connect peers`, there will be entries for the 128T as a connect peer and the BGP status. 
+On the AWS Portal, under `VPC` > `Transit Gateway Attachments` > `<your connect attachments>` > `Connect peers`, there will be entries for the 128T as a connect peer and the BGP status.
 
 
 ## Appendix
 
 ### Example Configuration Generation
 
-With the example configuration and the following AWS TGW connect peer 
+With the example configuration and the following AWS TGW connect peer
 
 | Field        | Value          |
 | ------------ | -------------- |
