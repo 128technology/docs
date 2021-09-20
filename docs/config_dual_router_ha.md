@@ -24,9 +24,12 @@ Due to the way that dual router high availability operates without state synchro
 
 For this reason, services that leverage a dual router HA pair must reference a `service-policy` that has `transport-state-enforcement allow` configured. Otherwise, mid-session TCP packets cause the 128T device to send a TCP RST to the sender.
 
+<!-- With the addition of `vrrp` commands, routers are now able to sync through a shared interface.
+Additionally, the use of the `service-route failover` configuration allows the existing service route configuration to fail over to the backup router with existing sessions intact. No TCP RST required.-->
+
 ## Design Overview
 
-Unlike a ["traditional" dual node high availability design](config_ha.md), in which two nodes compose a single router and use an out-of-band interface (the "sync interface") to synchronize state and a fabric interface to forward packets from one node to the other, the dual router trades these in for an inter-router iBGP connection for forwarding packets.
+Unlike a [dual node high availability design](config_ha.md), in which two nodes compose a single router and use an out-of-band interface (the "sync interface") to synchronize state and a fabric interface to forward packets from one node to the other, the dual router trades these in for an inter-router iBGP connection for forwarding packets.
 
 :::note
 It is possible to configure multiple inter-router connections for added resiliency if there are spare physical connections available between the two routers.
