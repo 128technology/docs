@@ -25,7 +25,10 @@ Due to the way that dual router high availability operates without state synchro
 For this reason, services that leverage a dual router HA pair must reference a `service-policy` that has `transport-state-enforcement allow` configured. Otherwise, mid-session TCP packets cause the 128T device to send a TCP RST to the sender.
 
 <!-- With the addition of `vrrp` commands, routers are now able to sync through a shared interface.
-Additionally, the use of the `service-route failover` configuration allows the existing service route configuration to fail over to the backup router with existing sessions intact. No TCP RST required.-->
+Additionally, the use of the `service-route failover` configuration allows the existing service route configuration to fail over to the backup router with existing sessions intact. No TCP RST required.
+
+
+-->
 
 ## Design Overview
 
@@ -48,7 +51,7 @@ In this sample exercise, each of the two routers (`routerA` and `routerB`) have 
 Unlike the dual node redundancy model, where the two devices collectively harbor a single instance of the `routingManager` process, routing within the dual router redundancy model must be accomplished "by hand;" i.e., discretely on each individual system. This consists of two components:
 
 1. Each router uses BGPoSVR to exchange routes with the other.
-2. For services that use `peer`-type service-routes to reach another 128T instance, these service-routes will need to include the complementary router as an additional `next-peer`. I.e., each router in the HA pair will point to the `next-peer` 128T as well as a `next-peer` for one another.
+2. For services that use `peer-type service-routes` to reach another 128T instance, these service-routes will need to include the complementary router as an additional `next-peer`. Meaning each router in the HA pair will point to the `next-peer` 128T as well as a `next-peer` for one another.
 
 ## Sample Configuration
 
@@ -205,6 +208,8 @@ exit
 ### Routing Configuration
 
 Unlike the *dual node high availability* design, the dual router high availability design does not synchronize state between routers. Instead, the two devices exchange reachability information using iBGP; this is implemented on the 128T using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as seen in the sample configuration.
+
+<!-- Is this still true or can they now synchronize state because the config using vrrp is different? -->
 
 In our sample configuration we use `device-interface eno1` as our iBGP link. The sample here uses [link-local IP addresses](https://en.wikipedia.org/wiki/Link-local_address), presuming that the two nodes are situated next to one another in the same data center. The `neighborhood dc1-interrouter` configuration, also provisioned on `routerB`, indicates to conductor that the two devices are mutually reachable. This hint (combined with the loopback interfaces) is what creates the peering relationship, the services, and the service-routes in support of BGPoSVR.
 
