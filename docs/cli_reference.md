@@ -35,7 +35,7 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 #### Description
 
-The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from a SSR router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove. The PCLI will auto-complete typed entries for improved accuracy. 
+The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from an SSR router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove. The PCLI will auto-complete typed entries for improved accuracy. 
 
 #### Version History
 | Release | Modification                |
@@ -259,7 +259,7 @@ commit [force] [validate-router-all]
 
 The `commit` command causes the SSR router to validate the candidate configuration, and then replace the running configuration with the candidate configuration (assuming it passes the validation step). It is used once a series of configuration changes have been made, and an administrator wishes to &quot;activate&quot; those configuration changes.
 
-When run from a SSR conductor, the conductor only validates the configuration itself locally before committing the configuration and then distributing it to all managed routers. If the user wishes, the conductor has the ability to distribute the configuration to all managed routers for each of them to validate it and report the results of their validation before the commit takes place (assuming a successful validation). This operation is much slower than local validation because the conductor must wait for all routers to report their results and some may be unreachable or timeout. The user may request a distributed validation by using the `validate-router-all` keyword.
+When run from an SSR conductor, the conductor only validates the configuration itself locally before committing the configuration and then distributing it to all managed routers. If the user wishes, the conductor has the ability to distribute the configuration to all managed routers for each of them to validate it and report the results of their validation before the commit takes place (assuming a successful validation). This operation is much slower than local validation because the conductor must wait for all routers to report their results and some may be unreachable or timeout. The user may request a distributed validation by using the `validate-router-all` keyword.
 
 The `commit` command will prompt a user for confirmation, as this is a (potentially) service affecting command. By supplying the optional `force` keyword, the confirmation step is skipped:
 
@@ -1683,7 +1683,7 @@ manage plugin remove [node <node>] <name>
 
 ## `migrate`
 
-Migrate a SSR router to a new conductor. For more details on the SSR rotuer migration read the [How to: Conductor Migration](howto_conductor_migration.md).
+Migrate an SSR router to a new conductor. For more details on the SSR rotuer migration read the [How to: Conductor Migration](howto_conductor_migration.md).
 
 #### Usage
 
@@ -1707,11 +1707,11 @@ migrate [skip-validation] [force] conductor <address> [<address>] router <router
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -2589,7 +2589,7 @@ send command download [dry-run] [force] {router <router> | resource-group <resou
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
@@ -2636,11 +2636,11 @@ send command reconnect [router <router>] [node <node>]
 | [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -2701,14 +2701,14 @@ send command restart [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -2716,11 +2716,11 @@ send command restart [force] router <router> node <node>
 
 #### Description
 
-_send command_ is only available within the PCLI of a SSR Conductor.
+_send command_ is only available within the PCLI of an SSR Conductor.
 
 ## `send command rollback`
 
-Rollback a SSR router to the previously installed version
+Rollback an SSR router to the previously installed version
 
 #### Usage
 
@@ -2740,14 +2740,14 @@ send command rollback [force] {router <router> | resource-group <resource-group>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -2755,11 +2755,11 @@ send command rollback [force] {router <router> | resource-group <resource-group>
 
 #### Description
 
-_send command_ is only available within the PCLI of a SSR Conductor.
+_send command_ is only available within the PCLI of an SSR Conductor.
 
 ## `send command start`
 
-Start a SSR node
+Start an SSR node
 
 #### Usage
 
@@ -2779,14 +2779,14 @@ send command start [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -2794,11 +2794,11 @@ send command start [force] router <router> node <node>
 
 #### Description
 
-_send command_ is only available within the PCLI of a SSR Conductor.
+_send command_ is only available within the PCLI of an SSR Conductor.
 
 ## `send command stop`
 
-Stop a SSR node
+Stop an SSR node
 
 #### Usage
 
@@ -2818,14 +2818,14 @@ send command stop [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -2833,11 +2833,11 @@ send command stop [force] router <router> node <node>
 
 #### Description
 
-_send command_ is only available within the PCLI of a SSR Conductor.
+_send command_ is only available within the PCLI of an SSR Conductor.
 
 ## `send command upgrade`
 
-Upgrade a SSR node
+Upgrade an SSR node
 
 #### Usage
 
@@ -2864,14 +2864,14 @@ send command upgrade [dry-run] [force] {router <router> | resource-group <resour
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -2879,7 +2879,7 @@ send command upgrade [dry-run] [force] {router <router> | resource-group <resour
 
 #### Description
 
-_send command_ is only available within the PCLI of a SSR Conductor.
+_send command_ is only available within the PCLI of an SSR Conductor.
 
 ## `send command yum-cache-refresh`
 
@@ -2903,15 +2903,15 @@ send command yum-cache-refresh [force] {router <router> | resource-group <resour
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
@@ -3780,15 +3780,15 @@ show assets [{router <router> | resource-group <resource-group>}] [force] [node 
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
@@ -3905,15 +3905,15 @@ show assets software [{router <router> | resource-group <resource-group>}] [forc
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
@@ -3981,15 +3981,15 @@ show assets summary [{router <router> | resource-group <resource-group>}] [force
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
 | [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a SSR node |
-| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a SSR node |
-| [`send command stop`](#send-command-stop) | Stop a SSR node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -4776,7 +4776,7 @@ show device-interface [name <name>] [force] [node <node>] router <router> [<verb
 
 #### Description
 
-This command displays detailed information about device interface(s) (i.e., physical ports) on a SSR router node. The optional command line arguments allow a user to reduce the set of information to a specific set of interfaces on a given node, or a specific interface on a specific node.
+This command displays detailed information about device interface(s) (i.e., physical ports) on an SSR router node. The optional command line arguments allow a user to reduce the set of information to a specific set of interfaces on a given node, or a specific interface on a specific node.
 
 Omitting all optional arguments will display detailed information on all device interfaces defined within the SSR router.
 
@@ -7815,7 +7815,7 @@ show security key-status [{router <router> | resource-group <resource-group>}] [
 
 #### Description
 
-The _show security key-status_ subcommand displays information and statistics related to the SSR&#x27;s security rekeying feature. It will indicate the current key index (which will be common among all routers managed by a SSR conductor) and relevant statistics on when the last rekey event occurred, when the next will occur, etc.
+The _show security key-status_ subcommand displays information and statistics related to the SSR&#x27;s security rekeying feature. It will indicate the current key index (which will be common among all routers managed by an SSR conductor) and relevant statistics on when the last rekey event occurred, when the next will occur, etc.
 
 #### Example
 
@@ -8378,7 +8378,7 @@ show system connectivity [{router <router> | resource-group <resource-group>}] [
 
 #### Description
 
-The _connectivity_ subcommand displays the state of all connected systems. On a SSR Conductor, this is a convenient way to display all of the nodes that are connected, disconnected, or &quot;unconfigured&quot;. (Note: when a node appears as _unconfigured_, it means that it is attempting to connect to the SSR conductor, but that conductor does not have any supporting configuration to supply to it.)
+The _connectivity_ subcommand displays the state of all connected systems. On an SSR Conductor, this is a convenient way to display all of the nodes that are connected, disconnected, or &quot;unconfigured&quot;. (Note: when a node appears as _unconfigured_, it means that it is attempting to connect to the SSR conductor, but that conductor does not have any supporting configuration to supply to it.)
 
 #### Example
 
@@ -8539,7 +8539,7 @@ show system registry [<router-name>] [<node-name>] [<process-name>]
 
 #### Description
 
-The _registry_ subcommand shows the processes/services that have registered with the local system&#x27;s &quot;SSC&quot; (system services coordinator). On a SSR Conductor, this will show all of the connected routers_ registered system processes/services.
+The _registry_ subcommand shows the processes/services that have registered with the local system&#x27;s &quot;SSC&quot; (system services coordinator). On an SSR Conductor, this will show all of the connected routers_ registered system processes/services.
 
 #### Example
 
@@ -9147,7 +9147,7 @@ The `validate` command will also provide warnings when a configuration cannot be
 
 When validation fails, the administrator is notified via output to the CLI. The output from the `validate` command will identify the configuration that is failing validation.
 
-When run from a SSR conductor, the conductor only validates the configuration itself locally. If the user wishes, the conductor has the ability to distribute the configuration to all managed routers for each of them to validate it and report the results of their validation. This operation is much slower than local validation because the conductor must wait for all routers to report their results and some may be unreachable or timeout. The user may request a distributed validation by executing `validate router all`.
+When run from an SSR conductor, the conductor only validates the configuration itself locally. If the user wishes, the conductor has the ability to distribute the configuration to all managed routers for each of them to validate it and report the results of their validation. This operation is much slower than local validation because the conductor must wait for all routers to report their results and some may be unreachable or timeout. The user may request a distributed validation by executing `validate router all`.
 
 :::note
 validation occurs automatically whenever the commit command is run; this standalone command allows administrators to check for validity without requiring that the configuration is committed immediately.
