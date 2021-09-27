@@ -35,7 +35,7 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 #### Description
 
-The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from a 128T router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove. The PCLI will auto-complete typed entries for improved accuracy. 
+The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from a SSR router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove. The PCLI will auto-complete typed entries for improved accuracy. 
 
 #### Version History
 | Release | Modification                |
@@ -74,7 +74,7 @@ clear bgp [{in | out | soft}] [vrf <vrf>] [force] {router <router> | resource-gr
 
 | command | description |
 | ------- | ----------- |
-| [`show bgp`](#show-bgp) | Displays information about the state of the BGP process on the 128T router. |
+| [`show bgp`](#show-bgp) | Displays information about the state of the BGP process on the SSR router. |
 
 ## clear context router
 
@@ -257,9 +257,9 @@ commit [force] [validate-router-all]
 
 #### Description
 
-The `commit` command causes the 128T router to validate the candidate configuration, and then replace the running configuration with the candidate configuration (assuming it passes the validation step). It is used once a series of configuration changes have been made, and an administrator wishes to &quot;activate&quot; those configuration changes.
+The `commit` command causes the SSR router to validate the candidate configuration, and then replace the running configuration with the candidate configuration (assuming it passes the validation step). It is used once a series of configuration changes have been made, and an administrator wishes to &quot;activate&quot; those configuration changes.
 
-When run from a 128T conductor, the conductor only validates the configuration itself locally before committing the configuration and then distributing it to all managed routers. If the user wishes, the conductor has the ability to distribute the configuration to all managed routers for each of them to validate it and report the results of their validation before the commit takes place (assuming a successful validation). This operation is much slower than local validation because the conductor must wait for all routers to report their results and some may be unreachable or timeout. The user may request a distributed validation by using the `validate-router-all` keyword.
+When run from a SSR conductor, the conductor only validates the configuration itself locally before committing the configuration and then distributing it to all managed routers. If the user wishes, the conductor has the ability to distribute the configuration to all managed routers for each of them to validate it and report the results of their validation before the commit takes place (assuming a successful validation). This operation is much slower than local validation because the conductor must wait for all routers to report their results and some may be unreachable or timeout. The user may request a distributed validation by using the `validate-router-all` keyword.
 
 The `commit` command will prompt a user for confirmation, as this is a (potentially) service affecting command. By supplying the optional `force` keyword, the confirmation step is skipped:
 
@@ -392,7 +392,7 @@ admin@labsystem1.fiedler#
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
@@ -553,7 +553,7 @@ create certificate request webserver
 
 #### Description
 
-The `create certificate request webserver` generates a certificate-request, which is then sent to a Certificate Authority. The 128T router will, through a series of interactive prompts, request information from the administrator to generate either the request or certificate, as appropriate.
+The `create certificate request webserver` generates a certificate-request, which is then sent to a Certificate Authority. The SSR router will, through a series of interactive prompts, request information from the administrator to generate either the request or certificate, as appropriate.
 
 The certificate created by the `create certificate` command stores its output file at `/etc/128technology/pki/`.
 
@@ -578,7 +578,7 @@ create certificate self-signed webserver
 
 #### Description
 
-The `create certificate self-signed webserver` generates a self-signed certificate which is used for the local webserver. The 128T router will, through a series of interactive prompts, request information from the administrator to generate either the request or certificate, as appropriate.
+The `create certificate self-signed webserver` generates a self-signed certificate which is used for the local webserver. The SSR router will, through a series of interactive prompts, request information from the administrator to generate either the request or certificate, as appropriate.
 
 #### Example
 
@@ -622,7 +622,7 @@ Forces re-generation of all automatically generated configuration items, and sta
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
@@ -705,16 +705,17 @@ create user [<username>]
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user's configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
 | [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 #### Description
 
-The `create user` command allows administrators to create user accounts for user and/or administrative access to the 128T router&#x27;s management port. Issuing the `create user &lt;username&gt;` launches an interactive session that prompts for the new user&#x27;s full name, password, whether they are an administrative or basic user, and the enabled/disabled state of that user account.
+The `create user` command allows administrators to create user accounts for user and/or administrative access to the SSR router&#x27;s management port. Issuing the `create user &lt;username&gt;` launches an interactive session that prompts for the new user&#x27;s full name, password, whether they are an administrative or basic user, and the enabled/disabled state of that user account.
 
 :::note
 The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, and cannot contain any characters that repeat more than three times.
@@ -842,7 +843,7 @@ delete certificate webserver [force]
 
 #### Description
 
-The _delete certificate webserver_ command allows administrators to delete certificates that are stored on the 128T router. Note that the 128T router will always prompt the administrator to confirm deletion (the &quot;force&quot; keyword is not allowed).
+The _delete certificate webserver_ command allows administrators to delete certificates that are stored on the SSR router. Note that the SSR router will always prompt the administrator to confirm deletion (the &quot;force&quot; keyword is not allowed).
 
 #### Example
 
@@ -890,7 +891,7 @@ delete config exported [force] <name>
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
@@ -898,7 +899,7 @@ delete config exported [force] <name>
 
 #### Description
 
-The _delete config_ command allows administrators to delete configurations from the 128T&#x27;s filesystem that had previously been exported with the _export config_ command. The _force_ flag will skip the confirmation check without prompting the user.
+The _delete config_ command allows administrators to delete configurations from the SSR's filesystem that had previously been exported with the _export config_ command. The _force_ flag will skip the confirmation check without prompting the user.
 
 #### Example
 
@@ -1094,12 +1095,13 @@ delete user [force] <username>
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
 | [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 #### Example
 
@@ -1144,12 +1146,13 @@ delete user tokens [force] <username>
 | [`delete user`](#delete-user) | Delete a user account |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
 | [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 ## `edit prompt`
 
@@ -1175,12 +1178,13 @@ edit prompt <format>
 | [`delete user`](#delete-user) | Delete a user account |
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
 | [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 #### Description
 
@@ -1279,6 +1283,12 @@ edit user [<username>]
 | ---- | ----------- |
 | username | The name of the account to modify (default: &lt;current user&gt;) |
 
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
+
 ##### See Also
 
 | command | description |
@@ -1287,12 +1297,13 @@ edit user [<username>]
 | [`delete user`](#delete-user) | Delete a user account |
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
 | [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 #### Description
 
@@ -1351,6 +1362,42 @@ admin@labsystem1.fiedler#
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 
+## `edit user mode`
+
+Edit the current user&#x27;s configuration mode.
+
+#### Usage
+
+```
+edit user mode <value>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| value | basic \| advanced |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`create user`](#create-user) | Create a new user account interactively. |
+| [`delete user`](#delete-user) | Delete a user account |
+| [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
+| [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
+| [`edit user`](#edit-user) | Modify an existing user account |
+| [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
+| [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
+| [`set password`](#set-password) | Change your password. |
+| [`show roles`](#show-roles) | Display all configured roles |
+| [`show user`](#show-user) | Display information for user accounts. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
+
+#### Description
+
+Advanced mode exposes additional configuration elements for editing and viewing.
+
 ## exit (in config)
 
 The _exit_ command moves your focus to the PCLI home.
@@ -1405,7 +1452,7 @@ export config <datastore> <export-name>
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
@@ -1413,7 +1460,7 @@ export config <datastore> <export-name>
 
 #### Description
 
-The _export_ command takes a configuration from a previously created backup (via _create config backup_), from the candidate configuration, or from the 128T router&#x27;s running configuration, and stores it as a file on the local filesystem. It can then be taken off, moved onto other systems, archived, etc.
+The _export_ command takes a configuration from a previously created backup (via _create config backup_), from the candidate configuration, or from the SSR router&#x27;s running configuration, and stores it as a file on the local filesystem. It can then be taken off, moved onto other systems, archived, etc.
 
 Exported files are stored in /etc/128technology/config-backups/ and are stored as GZIP compressed files.
 
@@ -1504,7 +1551,7 @@ import config [force] <name>
 | [`export config`](#export-config) | Export a copy of the current running or candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
@@ -1531,7 +1578,7 @@ admin@labsystem1.fiedler#
 
 ## `import iso`
 
-Import 128T ISO to the local repository
+Import SSR ISO to the local repository
 
 #### Usage
 
@@ -1636,7 +1683,7 @@ manage plugin remove [node <node>] <name>
 
 ## `migrate`
 
-Migrate a 128T router to a new conductor. For more details on the 128T rotuer migration read the [How to: Conductor Migration](howto_conductor_migration.md).
+Migrate a SSR router to a new conductor. For more details on the SSR rotuer migration read the [How to: Conductor Migration](howto_conductor_migration.md).
 
 #### Usage
 
@@ -1657,16 +1704,16 @@ migrate [skip-validation] [force] conductor <address> [<address>] router <router
 
 | command | description |
 | ------- | ----------- |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
@@ -1920,7 +1967,7 @@ restore config factory-default [force]
 | [`export config`](#export-config) | Export a copy of the current running or candidate config. |
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
@@ -1928,7 +1975,7 @@ restore config factory-default [force]
 
 #### Description
 
-This command removes all administrator-added configuration, and restores the basic configuration to all of the 128T router&#x27;s factory default settings. The PCLI will prompt for confirmation before resetting the configuration, unless the optional _force_ modifier is added.
+This command removes all administrator-added configuration, and restores the basic configuration to all of the SSR router&#x27;s factory default settings. The PCLI will prompt for confirmation before resetting the configuration, unless the optional _force_ modifier is added.
 
 #### Example
 
@@ -1970,7 +2017,7 @@ restore config running [force]
 | [`export config`](#export-config) | Export a copy of the current running or candidate config. |
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
@@ -2021,11 +2068,12 @@ restore prompt [force]
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
 | [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 #### Description
 
@@ -2071,15 +2119,16 @@ restore users factory-default [force]
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`set password`](#set-password) | Change your password. |
 | [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 #### Description
 
-The _restore users factory-default_ command deletes all administratively created user accounts (i.e., all but the ones that are installed with the 128T routing software natively) and leaves the system with just the _admin_ and _user_ accounts.
+The _restore users factory-default_ command deletes all administratively created user accounts (i.e., all but the ones that are installed with the SSR routing software natively) and leaves the system with just the _admin_ and _user_ accounts.
 
 #### Version History
 
@@ -2121,7 +2170,7 @@ rotate log [force] [router <router>] [node <node>] [<process-name>]
 
 #### Description
 
-This command is used to rotate log files (i.e., close the current log file and open a new one) generated by the various processes that comprise the 128T router to rotate. The 128T router&#x27;s log files, stored in `/var/log/128technology`, keep 25 prior logs for each process, space permitting. Files are rotated such that, for instance, pcli.log becomes pcli.1.log while pcli.1.log becomes pcli.2.log, and so on. The oldest log file for each process is removed.
+This command is used to rotate log files (i.e., close the current log file and open a new one) generated by the various processes that comprise the SSR router to rotate. The SSR router&#x27;s log files, stored in `/var/log/128technology`, keep 25 prior logs for each process, space permitting. Files are rotated such that, for instance, pcli.log becomes pcli.1.log while pcli.1.log becomes pcli.2.log, and so on. The oldest log file for each process is removed.
 
 The _rotate log_ command is useful prior to engaging in troubleshooting exercises, to help narrow down which files may contain items of interest. It is particularly useful when used in conjunction with the _write_ command, described elsewhere in this document.
 
@@ -2271,7 +2320,7 @@ search [limit <limit>] <find>
 
 #### Description
 
-The _search_ command and its various subcommands let users search through the 128T router&#x27;s PCLI command tree, the configuration tree, and user-supplied configuration data to locate the information specified by the supplied _find_ string.
+The _search_ command and its various subcommands let users search through the SSR router&#x27;s PCLI command tree, the configuration tree, and user-supplied configuration data to locate the information specified by the supplied _find_ string.
 
 When omitting the optional filter, the _search_ command will return results for all of the types of information it can locate: commands, configuration attributes, and configuration data.
 
@@ -2513,7 +2562,7 @@ Configuration Attributes:
 
 ## `send command download`
 
-Download 128T software on a router
+Download SSR software on a router
 
 #### Usage
 
@@ -2534,28 +2583,28 @@ send command download [dry-run] [force] {router <router> | resource-group <resou
 
 | name | description |
 | ---- | ----------- |
-| version | The version of 128T as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
+| version | The version of SSR as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of a 128T Conductor.
+_send command_ is only available within the PCLI of an SSR Conductor.
 
 ## `send command reconnect`
 
@@ -2584,16 +2633,16 @@ send command reconnect [router <router>] [node <node>]
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
@@ -2617,22 +2666,22 @@ send command reconnect disconnected [force]
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate an SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart an SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback an SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 ## `send command restart`
 
-Restart a 128T node
+Restart an SSR node
 
 #### Usage
 
@@ -2652,26 +2701,26 @@ send command restart [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of a 128T Conductor.
+_send command_ is only available within the PCLI of a SSR Conductor.
 
 ## `send command rollback`
 
-Rollback a 128T router to the previously installed version
+Rollback a SSR router to the previously installed version
 
 #### Usage
 
@@ -2691,26 +2740,26 @@ send command rollback [force] {router <router> | resource-group <resource-group>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of a 128T Conductor.
+_send command_ is only available within the PCLI of a SSR Conductor.
 
 ## `send command start`
 
-Start a 128T node
+Start a SSR node
 
 #### Usage
 
@@ -2730,26 +2779,26 @@ send command start [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of a 128T Conductor.
+_send command_ is only available within the PCLI of a SSR Conductor.
 
 ## `send command stop`
 
-Stop a 128T node
+Stop a SSR node
 
 #### Usage
 
@@ -2769,26 +2818,26 @@ send command stop [force] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of a 128T Conductor.
+_send command_ is only available within the PCLI of a SSR Conductor.
 
 ## `send command upgrade`
 
-Upgrade a 128T node
+Upgrade a SSR node
 
 #### Usage
 
@@ -2809,32 +2858,32 @@ send command upgrade [dry-run] [force] {router <router> | resource-group <resour
 
 | name | description |
 | ---- | ----------- |
-| version | The version of 128T as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
+| version | The version of SSR as semantic version and optionally a release identifier (e.g. &quot;3.0.0&quot; or &quot;3.0.1-snapshot1&quot;); if not provided, the latest is assumed |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-_send command_ is only available within the PCLI of a 128T Conductor.
+_send command_ is only available within the PCLI of a SSR Conductor.
 
 ## `send command yum-cache-refresh`
 
-Refresh the yum cache as well as the 128T software versions available for download and upgrade.
+Refresh the yum cache as well as the SSR software versions available for download and upgrade.
 
 #### Usage
 
@@ -2854,16 +2903,16 @@ send command yum-cache-refresh [force] {router <router> | resource-group <resour
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
@@ -2922,7 +2971,7 @@ Ping from 8.8.8.8 (8.8.8.8): icmp_seq=3 ttl=57 time=10.428ms
 
 ## `set config encryption`
 
-Sets the encryption key for the 128T configuration
+Sets the encryption key for the SSR configuration
 
 #### Usage
 
@@ -2943,7 +2992,7 @@ set config encryption [{router <router> | resource-group <resource-group>}] [for
 
 | command | description |
 | ------- | ----------- |
-| [`disabled`](#set-config-encryption-disabled) | Disables the encryption for the 128T configuration |
+| [`disabled`](#set-config-encryption-disabled) | Disables the encryption for the SSR configuration |
 
 ##### See Also
 
@@ -2978,7 +3027,7 @@ Configuration was successfully encrypted.
 
 ## `set config encryption disabled`
 
-Disables the encryption for the 128T configuration
+Disables the encryption for the SSR configuration
 
 #### Usage
 
@@ -3204,9 +3253,9 @@ set log level [category <category>] [force] [router <router>] [node <node>] <lev
 
 #### Description
 
-The _set log level_ command adjusts the degree to which the 128T router writes information into its log files. This is used to selectively turn up and down log verbosity for troubleshooting purposes.
+The _set log level_ command adjusts the degree to which the SSR router writes information into its log files. This is used to selectively turn up and down log verbosity for troubleshooting purposes.
 
-The optional &lt;process-name&gt; and &lt;node-name&gt; arguments, can selectively change only a specific 128T router&#x27;s software process on a given node.
+The optional &lt;process-name&gt; and &lt;node-name&gt; arguments, can selectively change only a specific SSR router&#x27;s software process on a given node.
 
 The _level_ must be one of: fatal, error, warning, info, debug, and trace. These are listed in order of increasing verbosity. 128 Technology, Inc. generally recommends that systems be set to _info_ level by default under normal operating circumstances.
 
@@ -3272,7 +3321,7 @@ set log level configured [category <category>] [force] [router <router>] [node <
 
 #### Description
 
-Will return the 128T router&#x27;s logging behavior to the verbosity specified within the configuration, located at: `authority &gt; router &gt; system &gt; log-level`. Alternatively, administrators can specify a log level to dynamically change all system processes to use.
+Will return the SSR router&#x27;s logging behavior to the verbosity specified within the configuration, located at: `authority &gt; router &gt; system &gt; log-level`. Alternatively, administrators can specify a log level to dynamically change all system processes to use.
 
 ## `set password`
 
@@ -3293,11 +3342,12 @@ set password
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 #### Description
 
@@ -3493,7 +3543,7 @@ show application modules registration [force] [node <node>] {router <router> | r
 
 #### Description
 
-The _show application modules registration_ subcommand shows all of the modules that provide application names to 128T as part of its Application Classification feature.
+The _show application modules registration_ subcommand shows all of the modules that provide application names to SSR as part of its Application Classification feature.
 
 ## `show application modules status`
 
@@ -3554,7 +3604,7 @@ show application names [rows <rows>] [force] [node <node>] {router <router> | re
 
 #### Description
 
-The _show application names_ subcommand shows all of the application names that the 128T has learned, or been configured to recognize, as part of its Application Classification feature.
+The _show application names_ subcommand shows all of the application names that the SSR has learned, or been configured to recognize, as part of its Application Classification feature.
 
 #### Example
 
@@ -3626,7 +3676,7 @@ show arp [rows <rows>] [force] [node <node>] {router <router> | resource-group <
 
 #### Description
 
-The _show arp_ subcommand displays the ARP table (MAC address to IP address binding) for a given node. The number of lines of output may be controlled through the use of the optional _rows_ attribute. When not present, the 128T router will default to displaying the first 50 rows of the specified node&#x27;s ARP table.
+The _show arp_ subcommand displays the ARP table (MAC address to IP address binding) for a given node. The number of lines of output may be controlled through the use of the optional _rows_ attribute. When not present, the SSR router will default to displaying the first 50 rows of the specified node&#x27;s ARP table.
 
 #### Example
 
@@ -3695,7 +3745,7 @@ Completed in 0.08 seconds
 
 ## `show assets`
 
-Shows the automated provisioning status of 128T nodes.
+Shows the automated provisioning status of SSR nodes.
 
 #### Usage
 
@@ -3716,13 +3766,13 @@ show assets [{router <router> | resource-group <resource-group>}] [force] [node 
 
 | name | description |
 | ---- | ----------- |
-| id | The asset id of the 128T node from which to retrieve the status |
+| id | The asset id of the SSR node from which to retrieve the status |
 
 ##### Subcommands
 
 | command | description |
 | ------- | ----------- |
-| [`errors`](#show-assets-errors) | Shows the 128T nodes that have errors. |
+| [`errors`](#show-assets-errors) | Shows the SSR nodes that have errors. |
 | [`software`](#show-assets-software) | Shows assets software information. |
 | [`summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
@@ -3730,22 +3780,22 @@ show assets [{router <router> | resource-group <resource-group>}] [force] [node 
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
 
-The _show assets_ command displays the automated provisioning status of the 128T nodes within an Authority. With 128T&#x27;s automated provisioning feature set, each &quot;asset&quot; represents a platform into which the 128T software is installed, updated, managed, etc. The _show assets_ command allows administrators to see, at a glance, the state of all assets – including which software versions have been installed on which nodes, what their router and node identifiers are, etc.
+The _show assets_ command displays the automated provisioning status of the SSR nodes within an Authority. With SSR&#x27;s automated provisioning feature set, each &quot;asset&quot; represents a platform into which the SSR software is installed, updated, managed, etc. The _show assets_ command allows administrators to see, at a glance, the state of all assets – including which software versions have been installed on which nodes, what their router and node identifiers are, etc.
 
 #### Example
 
@@ -3786,7 +3836,7 @@ Completed in 0.19 seconds
 
 ## `show assets errors`
 
-Shows the 128T nodes that have errors.
+Shows the SSR nodes that have errors.
 
 #### Usage
 
@@ -3806,7 +3856,7 @@ show assets errors [{router <router> | resource-group <resource-group>}] [force]
 
 | name | description |
 | ---- | ----------- |
-| id | The asset id of the 128T node from which to retrieve the status |
+| id | The asset id of the SSR node from which to retrieve the status |
 
 #### Description
 
@@ -3855,17 +3905,17 @@ show assets software [{router <router> | resource-group <resource-group>}] [forc
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
 #### Description
@@ -3931,17 +3981,17 @@ show assets summary [{router <router> | resource-group <resource-group>}] [force
 
 | command | description |
 | ------- | ----------- |
-| [`migrate`](#migrate) | Migrate a 128T router to a new conductor |
-| [`send command download`](#send-command-download) | Download 128T software on a router |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
 | [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
 | [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
-| [`send command restart`](#send-command-restart) | Restart a 128T node |
-| [`send command rollback`](#send-command-rollback) | Rollback a 128T router to the previously installed version |
-| [`send command start`](#send-command-start) | Start a 128T node |
-| [`send command stop`](#send-command-stop) | Stop a 128T node |
-| [`send command upgrade`](#send-command-upgrade) | Upgrade a 128T node |
-| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the 128T software versions available for download and upgrade. |
-| [`show assets`](#show-assets) | Shows the automated provisioning status of 128T nodes. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 
 #### Description
@@ -3973,7 +4023,7 @@ Fri 2017-07-21 15:41:54 UTC
 
 ## `show bgp`
 
-Displays information about the state of the BGP process on the 128T router.
+Displays information about the state of the BGP process on the SSR router.
 
 #### Usage
 
@@ -4001,7 +4051,7 @@ show bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <re
 
 | command | description |
 | ------- | ----------- |
-| [`neighbors`](#show-bgp-neighbors) | Displays information about the state of the BGP neighbors on the 128T router. |
+| [`neighbors`](#show-bgp-neighbors) | Displays information about the state of the BGP neighbors on the SSR router. |
 | [`summary`](#show-bgp-summary) | Show the current BGP summary from the routing manager. |
 
 ##### See Also
@@ -4012,7 +4062,7 @@ show bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <re
 
 #### Description
 
-The _show bgp_ command and associated subcommands display information about the state of the BGP process on the 128T router. Each of these subcommands will be described in more detail in the sections that follow.
+The _show bgp_ command and associated subcommands display information about the state of the BGP process on the SSR router. Each of these subcommands will be described in more detail in the sections that follow.
 
 #### Example
 
@@ -4057,7 +4107,7 @@ Paths: (1 available, best #1, table Default-IP-Routing-Table)
 
 ## `show bgp neighbors`
 
-Displays information about the state of the BGP neighbors on the 128T router.
+Displays information about the state of the BGP neighbors on the SSR router.
 
 #### Usage
 
@@ -4084,7 +4134,7 @@ show bgp neighbors [rows <rows>] [vrf <vrf>] [force] {router <router> | resource
 
 #### Description
 
-The _show bgp neighbors_ command displays detailed information about each of the 128T router&#x27;s BGP peers. By specifying a specific peer (through the optional argument _&lt;neighbor-ip&gt;_), administrators can view state information about one peer at a time. When specifying a specific neighbor, the output may include the routes shared with that peer by appending _advertised-route_ or received from that peer by appending _received-routes_.
+The _show bgp neighbors_ command displays detailed information about each of the SSR router&#x27;s BGP peers. By specifying a specific peer (through the optional argument _&lt;neighbor-ip&gt;_), administrators can view state information about one peer at a time. When specifying a specific neighbor, the output may include the routes shared with that peer by appending _advertised-route_ or received from that peer by appending _received-routes_.
 
 #### Example
 
@@ -4136,7 +4186,7 @@ show bgp summary [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-g
 
 #### Description
 
-The _show bgp summary_ gives administrators a high-level summary table of the state of all of the 128T router&#x27;s BGP peers.
+The _show bgp summary_ gives administrators a high-level summary table of the state of all of the SSR router&#x27;s BGP peers.
 
 It includes information on each BGP neighbor, including the version (V) of BGP that they are using (generally v4), the Autonomous System number (AS), the number of BGP messages sent and received (MsgSent, MsgRcvd), the table version (TblVer), etc.
 
@@ -4430,7 +4480,7 @@ The _show config exports_ command has two optional flags: _name_ and _flat_. Use
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -4626,14 +4676,14 @@ show config version [{router <router> | resource-group <resource-group>}] [force
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Description
 
-This command displays the version number of the running configuration on the 128T router. This version number is auto-generated, and is the UNIX timestamp when the configuration is committed. (As a consequence, you should expect that successive commits to the same configuration will increment the version by more than one. This is a change in behavior from pre-2.0 software, which used a monotonically incrementing integer to represent the configuration version.)
+This command displays the version number of the running configuration on the SSR router. This version number is auto-generated, and is the UNIX timestamp when the configuration is committed. (As a consequence, you should expect that successive commits to the same configuration will increment the version by more than one. This is a change in behavior from pre-2.0 software, which used a monotonically incrementing integer to represent the configuration version.)
 
 #### Example
 
@@ -4726,9 +4776,9 @@ show device-interface [name <name>] [force] [node <node>] router <router> [<verb
 
 #### Description
 
-This command displays detailed information about device interface(s) (i.e., physical ports) on a 128T router node. The optional command line arguments allow a user to reduce the set of information to a specific set of interfaces on a given node, or a specific interface on a specific node.
+This command displays detailed information about device interface(s) (i.e., physical ports) on a SSR router node. The optional command line arguments allow a user to reduce the set of information to a specific set of interfaces on a given node, or a specific interface on a specific node.
 
-Omitting all optional arguments will display detailed information on all device interfaces defined within the 128T router.
+Omitting all optional arguments will display detailed information on all device interfaces defined within the SSR router.
 
 #### Example
 
@@ -5131,7 +5181,7 @@ Display view of dynamic peer update on the conductor.
 #### Usage
 
 ```
-show dynamic-peer-update [{router <router> | resource-group <resource-group>}] [force] [<table>]
+show dynamic-peer-update [{router <router> | resource-group <resource-group>}] [rows <rows>] [force] [<table>]
 ```
 
 ##### Keyword Arguments
@@ -5140,7 +5190,8 @@ show dynamic-peer-update [{router <router> | resource-group <resource-group>}] [
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | resource-group | The name of the resource group |
-| router | Router for which to show dynamic peer update information (default: &lt;current router&gt;) |
+| router | Router for which to show dynamic peer update information (default: all) |
+| rows | The number of hostnames to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 
 ##### Positional Arguments
 
@@ -5175,7 +5226,7 @@ show entitlement [{router <router> | resource-group <resource-group>}] [force]
 
 #### Description
 
-The 128T Networking Platform calculates the Peak Router Bandwidth Capacity; this is the highest router bandwidth value of any 5 second interval over the specific license period. The Router Bandwidth is calculated based on the aggregate of sessions traversing the router.
+The SSR Networking Platform calculates the Peak Router Bandwidth Capacity; this is the highest router bandwidth value of any 5 second interval over the specific license period. The Router Bandwidth is calculated based on the aggregate of sessions traversing the router.
 
 #### Example
 
@@ -5229,7 +5280,7 @@ show events alarm [{router <router> | resource-group <resource-group>}] [from <f
 
 #### Description
 
-The _show events alarm_ command displays various event records that the 128T collects during operation. As of software version 3.1, the only event type that is capable of being shown is the alarm history.
+The _show events alarm_ command displays various event records that the SSR collects during operation. As of software version 3.1, the only event type that is capable of being shown is the alarm history.
 
 The output can be optionally restricted to specific time windows using the `from` and `to` qualifiers. Because this command can generate a lot of output, the `rows` limiter is particularly useful on busy systems.
 
@@ -5298,7 +5349,7 @@ show events config commit [{router <router> | resource-group <resource-group>}] 
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
-| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the 128T configuration |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -5585,11 +5636,11 @@ show load-balancer [service <service>] [agent <agent>] [rows <rows>] [force] [no
 
 #### Description
 
-The _show load-balancer_ command provides feedback on the 128T router&#x27;s load balancing behavior, when configured to balance traffic (via a service-policy).
+The _show load-balancer_ command provides feedback on the SSR router&#x27;s load balancing behavior, when configured to balance traffic (via a service-policy).
 
 This command, when issued without any filters (agent, node, or service) will display all agents, nodes, and services that are subject to load balancing. (The output can be quite verbose.) These filters may be combined to &quot;hone in&quot; on specific agents/nodes/services selectively.
 
-This command is extremely helpful for identifying why the 128T router selected specific destinations for its session-oriented traffic.
+This command is extremely helpful for identifying why the SSR router selected specific destinations for its session-oriented traffic.
 
 #### Example
 
@@ -5912,7 +5963,7 @@ show network-interface [name <name>] [force] [node <node>] {router <router> | re
 
 #### Description
 
-The _show network-interface_, a counterpart to _show device-interface_, shows information and statistics relevant to the logical interfaces configured on your 128T networking platform.
+The _show network-interface_, a counterpart to _show device-interface_, shows information and statistics relevant to the logical interfaces configured on your SSR networking platform.
 
 The _show network-interface_ command will show router, node, and device names, as well as the network-interface name and basic information about each interface.
 
@@ -6089,7 +6140,7 @@ Show general information about OSPF.
 #### Usage
 
 ```
-show ospf [rows <rows>] [area <area-id>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf [rows <rows>] [vrf <vrf>] [area <area-id>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6101,6 +6152,7 @@ show ospf [rows <rows>] [area <area-id>] [force] {router <router> | resource-gro
 | resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -6232,7 +6284,7 @@ Show information about the OSPF border routers.
 #### Usage
 
 ```
-show ospf border-routers [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf border-routers [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6243,6 +6295,7 @@ show ospf border-routers [rows <rows>] [force] {router <router> | resource-group
 | resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -6294,7 +6347,7 @@ Show OSPF database information.
 #### Usage
 
 ```
-show ospf database [rows <rows>] [self-originate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf database [rows <rows>] [vrf <vrf>] [self-originate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6306,6 +6359,7 @@ show ospf database [rows <rows>] [self-originate] [force] {router <router> | res
 | router | The router to request OSPF information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | self-originate | Retrieve only self-originated LSA information |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -6449,7 +6503,7 @@ Show OSPF database LSA information.
 #### Usage
 
 ```
-show ospf database lsa [{origin <ip> | self-originate}] [rows <rows>] [lsa-id <id>] [force] {router <router> | resource-group <resource-group>} lsa-type <type> [<verbosity>]
+show ospf database lsa [{origin <ip> | self-originate}] [rows <rows>] [vrf <vrf>] [lsa-id <id>] [force] {router <router> | resource-group <resource-group>} lsa-type <type> [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6464,6 +6518,7 @@ show ospf database lsa [{origin <ip> | self-originate}] [rows <rows>] [lsa-id <i
 | router | The router to request OSPF information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | self-originate | Retrieve only self-originated LSA information |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -6626,7 +6681,7 @@ Show OSPF LSAs which have reached maximum age.
 #### Usage
 
 ```
-show ospf database max-age [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf database max-age [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6637,6 +6692,7 @@ show ospf database max-age [rows <rows>] [force] {router <router> | resource-gro
 | resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -6788,7 +6844,7 @@ Show information about the OSPF interfaces.
 #### Usage
 
 ```
-show ospf interfaces [rows <rows>] [network-interface <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf interfaces [rows <rows>] [vrf <vrf>] [network-interface <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6800,6 +6856,7 @@ show ospf interfaces [rows <rows>] [network-interface <name>] [force] {router <r
 | resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -6927,7 +6984,7 @@ Show information about OSPF neighbors.
 #### Usage
 
 ```
-show ospf neighbors [rows <rows>] [network-interface <name>] [neighbor <ip>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf neighbors [rows <rows>] [vrf <vrf>] [network-interface <name>] [neighbor <ip>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -6940,6 +6997,7 @@ show ospf neighbors [rows <rows>] [network-interface <name>] [neighbor <ip>] [fo
 | resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -7006,7 +7064,7 @@ Show information about the OSPF routes.
 #### Usage
 
 ```
-show ospf routes [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+show ospf routes [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -7017,6 +7075,7 @@ show ospf routes [rows <rows>] [force] {router <router> | resource-group <resour
 | resource-group | The name of the resource group |
 | router | The router to request OSPF information from |
 | rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
 
 ##### Positional Arguments
 
@@ -7126,9 +7185,9 @@ show peers [name <name>] [dynamic-damping] [force] {router <router> | resource-g
 
 #### Description
 
-The _show peers_ command displays properties of each of the &quot;neighboring&quot; 128T routers that the router in question has a peering association with.
+The _show peers_ command displays properties of each of the &quot;neighboring&quot; SSR routers that the router in question has a peering association with.
 
-This command shows information on peering associations between 128T routers, not peering associations with BGP peers. For information on BGP peering statistics, refer to &quot;show bgp&quot; in this document.
+This command shows information on peering associations between SSR routers, not peering associations with BGP peers. For information on BGP peering statistics, refer to &quot;show bgp&quot; in this document.
 
 For each peer it shows which interface the peer is reachable via, the destination IP address for which the peer is reached, the VLAN to use to reach it, and whether the peer is currently &quot;up&quot;, &quot;down&quot;, or &quot;initializing&quot;.
 
@@ -7261,7 +7320,7 @@ show platform [{router <router> | resource-group <resource-group>}] [force] [nod
 
 | name | description |
 | ---- | ----------- |
-| category | all \| cpu \| device-interfaces \| disk \| memory \| operating-system \| vendor (default: all) |
+| category | all \| cpu \| device-interfaces \| disk \| fan-speeds \| memory \| operating-system \| temperatures \| vendor (default: all) |
 
 ##### See Also
 
@@ -7273,7 +7332,7 @@ show platform [{router <router> | resource-group <resource-group>}] [force] [nod
 
 #### Description
 
-The _show platform_ command displays properties of the underlying platform upon which the 128T software is running. This can assist in finding PCI addresses and MAC addresses for the hardware in the system, as well as disk information, OS information, etc.
+The _show platform_ command displays properties of the underlying platform upon which the SSR software is running. This can assist in finding PCI addresses and MAC addresses for the hardware in the system, as well as disk information, OS information, etc.
 
 #### Example
 
@@ -7442,7 +7501,7 @@ show rib [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <re
 
 #### Description
 
-The _show rib_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB). This is the complete list of connected, direct, and learned routes on the system. (Note that the output may be quite verbose.)
+The _show rib_ subcommand displays the contents of the SSR router&#x27;s Routing Information Base (RIB). This is the complete list of connected, direct, and learned routes on the system. (Note that the output may be quite verbose.)
 
 When issuing the command without any arguments, the entire RIB is displayed.
 
@@ -7493,7 +7552,7 @@ show rib bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group
 
 #### Description
 
-The _show rib bgp_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB) filtered to show only those learned from BGP.
+The _show rib bgp_ subcommand displays the contents of the SSR router&#x27;s Routing Information Base (RIB) filtered to show only those learned from BGP.
 
 #### Example
 
@@ -7555,7 +7614,7 @@ show rib connected [rows <rows>] [vrf <vrf>] [force] {router <router> | resource
 
 #### Description
 
-The _show rib connected_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB) filtered to show only the connected routes.
+The _show rib connected_ subcommand displays the contents of the SSR router&#x27;s Routing Information Base (RIB) filtered to show only the connected routes.
 
 #### Example
 
@@ -7600,7 +7659,7 @@ show rib ospf [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-grou
 
 #### Description
 
-The _show rib ospf_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB) filtered to show only those learned from OSPF.
+The _show rib ospf_ subcommand displays the contents of the SSR router&#x27;s Routing Information Base (RIB) filtered to show only those learned from OSPF.
 
 #### Example
 
@@ -7640,7 +7699,7 @@ show rib static [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-gr
 
 #### Description
 
-The _show rib static_ subcommand displays the contents of the 128T router&#x27;s Routing Information Base (RIB) filtered to show only static routes.
+The _show rib static_ subcommand displays the contents of the SSR router&#x27;s Routing Information Base (RIB) filtered to show only static routes.
 
 #### Example
 
@@ -7728,11 +7787,12 @@ show roles [name <name>] [rows <rows>]
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
 | [`show user`](#show-user) | Display information for user accounts. |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 ## `show security key-status`
 
@@ -7755,7 +7815,7 @@ show security key-status [{router <router> | resource-group <resource-group>}] [
 
 #### Description
 
-The _show security key-status_ subcommand displays information and statistics related to the 128T&#x27;s security rekeying feature. It will indicate the current key index (which will be common among all routers managed by a 128T conductor) and relevant statistics on when the last rekey event occurred, when the next will occur, etc.
+The _show security key-status_ subcommand displays information and statistics related to the SSR&#x27;s security rekeying feature. It will indicate the current key index (which will be common among all routers managed by a SSR conductor) and relevant statistics on when the last rekey event occurred, when the next will occur, etc.
 
 #### Example
 
@@ -7812,7 +7872,7 @@ show service [{service-name <name> | hierarchy-service-name <name> | contains-se
 
 #### Description
 
-The _show service_ command display active service information from the 128T router. This command has multiple service filters allowing target to specific service or services. Output can be displayed in summary or in detail view.
+The _show service_ command display active service information from the SSR router. This command has multiple service filters allowing target to specific service or services. Output can be displayed in summary or in detail view.
 
 ## `show service-path`
 
@@ -7838,7 +7898,7 @@ show service-path [{service-name <name> | hierarchy-service-name <name> | contai
 
 #### Description
 
-The `show service-path` command displays active service paths passing through the 128T router. This simplifies troubleshooting, allowing you to determine where sessions belonging to a particular service would egress. Multiple service filters allow you to target a specific service or services. Output can be displayed as a summary or in a detail view with pagination support. When using the `detail` argument, in-path metrics are managed by the performance monitor when enabled. If the performance monitor is not enabled, the local metrics generated by BFD are used. 
+The `show service-path` command displays active service paths passing through the SSR router. This simplifies troubleshooting, allowing you to determine where sessions belonging to a particular service would egress. Multiple service filters allow you to target a specific service or services. Output can be displayed as a summary or in a detail view with pagination support. When using the `detail` argument, in-path metrics are managed by the performance monitor when enabled. If the performance monitor is not enabled, the local metrics generated by BFD are used. 
 
 #### Example 1 Summary
 ```
@@ -7966,7 +8026,7 @@ show session-captures [{id <id> | detail}] [{router <router> | resource-group <r
 
 ## `show sessions`
 
-Displays active sessions passing through the 128T router.
+Displays active sessions passing through the SSR router.
 
 #### Usage
 
@@ -7996,7 +8056,7 @@ show sessions [{service-name <name> | hierarchy-service-name <name> | contains-s
 
 #### Description
 
-The _show sessions_ command displays active sessions passing through the 128T router (or the node specified by the optional _node-name_ argument. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session.
+The _show sessions_ command displays active sessions passing through the SSR router (or the node specified by the optional _node-name_ argument. The output from the command shows the sessions internal ID (useful for searching through log files), the service, tenant, and source/destination IP information for each active session.
 
 The NAT IP and Port fields will be populated whenever a session is subject to source NAT (see _source-nat_ later in this reference guide for more information). It also shows the timeout value that will cause the session to expire if it remains idle for that number of seconds.
 
@@ -8260,7 +8320,7 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 | [`connectivity`](#show-system-connectivity) | Display inter-node connection statuses. |
 | [`processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
 | [`registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
-| [`services`](#show-system-services) | Display a table summarizing statuses of 128T systemd services. |
+| [`services`](#show-system-services) | Display a table summarizing statuses of SSR systemd services. |
 | [`version`](#show-system-version) | Show system version information. |
 
 ##### See Also
@@ -8271,7 +8331,7 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 
 #### Description
 
-The _show system_ subcommand displays overall system health for the nodes that comprise your 128T router. It includes the state of the node (&quot;starting&quot; is displayed when the node is in the process of starting up and is not yet ready for handling traffic, &quot;running&quot; means the node is active, &quot;offline&quot; means the node is configured but not currently present), its role, software version, and uptime.
+The _show system_ subcommand displays overall system health for the nodes that comprise your SSR router. It includes the state of the node (&quot;starting&quot; is displayed when the node is in the process of starting up and is not yet ready for handling traffic, &quot;running&quot; means the node is active, &quot;offline&quot; means the node is configured but not currently present), its role, software version, and uptime.
 
 #### Example
 
@@ -8318,7 +8378,7 @@ show system connectivity [{router <router> | resource-group <resource-group>}] [
 
 #### Description
 
-The _connectivity_ subcommand displays the state of all connected systems. On a 128T Conductor, this is a convenient way to display all of the nodes that are connected, disconnected, or &quot;unconfigured&quot;. (Note: when a node appears as _unconfigured_, it means that it is attempting to connect to the 128T conductor, but that conductor does not have any supporting configuration to supply to it.)
+The _connectivity_ subcommand displays the state of all connected systems. On a SSR Conductor, this is a convenient way to display all of the nodes that are connected, disconnected, or &quot;unconfigured&quot;. (Note: when a node appears as _unconfigured_, it means that it is attempting to connect to the SSR conductor, but that conductor does not have any supporting configuration to supply to it.)
 
 #### Example
 
@@ -8479,7 +8539,7 @@ show system registry [<router-name>] [<node-name>] [<process-name>]
 
 #### Description
 
-The _registry_ subcommand shows the processes/services that have registered with the local system&#x27;s &quot;SSC&quot; (system services coordinator). On a 128T Conductor, this will show all of the connected routers_ registered system processes/services.
+The _registry_ subcommand shows the processes/services that have registered with the local system&#x27;s &quot;SSC&quot; (system services coordinator). On a SSR Conductor, this will show all of the connected routers_ registered system processes/services.
 
 #### Example
 
@@ -8532,7 +8592,7 @@ Wed 2020-04-15 20:39:35 UTC
 
 ## `show system services`
 
-Display a table summarizing statuses of 128T systemd services.
+Display a table summarizing statuses of SSR systemd services.
 
 #### Usage
 
@@ -8551,7 +8611,7 @@ show system services [{router <router> | resource-group <resource-group>}] [forc
 
 #### Description
 
-Most 128T processes are under the control of a process aptly named the _processManager_. Some services must exist outside of the control of the _processManager_ and are instead goverened by Linux&#x27;s systemd. `show system services` displays a table summarizing statuses of 128T systemd services.
+Most SSR processes are under the control of a process aptly named the _processManager_. Some services must exist outside of the control of the _processManager_ and are instead goverened by Linux&#x27;s systemd. `show system services` displays a table summarizing statuses of SSR systemd services.
 
 #### Example
 
@@ -8645,7 +8705,7 @@ show tenant members [rows <rows>] [force] [node <node>] {router <router> | resou
 
 #### Description
 
-The _show tenant_ subcommand displays the mapping logic that the 128T router uses for associating the _source IP address_ of inbound requests to tenant definitions – whether they be interface-based (i.e., a tenant has been configured on a network-interface) or member based (i.e., a prefix has been configured within a neighborhood).
+The _show tenant_ subcommand displays the mapping logic that the SSR router uses for associating the _source IP address_ of inbound requests to tenant definitions – whether they be interface-based (i.e., a tenant has been configured on a network-interface) or member based (i.e., a prefix has been configured within a neighborhood).
 
 #### Example
 
@@ -8743,7 +8803,7 @@ Display the status of UDP transform between peers.
 #### Usage
 
 ```
-show udp-transform [force] [node <node>] {router <router> | resource-group <resource-group>}
+show udp-transform [peer <peer>] [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -8752,12 +8812,13 @@ show udp-transform [force] [node <node>] {router <router> | resource-group <reso
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | node | The node for which to display transform status |
+| peer | Only display udp-transforms for a single peer (default: all) |
 | resource-group | The name of the resource group |
 | router | The router for which to display transform status |
 
 #### Description
 
-A 128T router may need to transform TCP packets into UDP packets to enable SVR to traverse stateful firewalls. By default, the 128T router runs a [firewall detector](concepts_machine_communication.md#firewall-detector) process over peer paths, and will dynamically enable UDP transform when necessary. (Administrators may also elect to enable UDP transform if they know there are stateful firewalls in the path.) This command shows whether a path has UDP transform enabled, and if so, which firewall detection tests triggered the feature to be enabled.
+An SSR router may need to transform TCP packets into UDP packets to enable SVR to traverse stateful firewalls. By default, the SSR router runs a [firewall detector](concepts_machine_communication.md#firewall-detector) process over peer paths, and will dynamically enable UDP transform when necessary. (Administrators may also elect to enable UDP transform if they know there are stateful firewalls in the path.) This command shows whether a path has UDP transform enabled, and if so, which firewall detection tests triggered the feature to be enabled.
 
 #### Example
 
@@ -8791,7 +8852,7 @@ show user [<username>]
 
 | command | description |
 | ------- | ----------- |
-| [`activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 ##### See Also
 
@@ -8802,11 +8863,12 @@ show user [<username>]
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
 | [`show roles`](#show-roles) | Display all configured roles |
-| [`show user activity`](#show-user-activity) | Show the most recent usage of 128T. |
+| [`show user activity`](#show-user-activity) | Show the most recent usage of SSR. |
 
 #### Description
 
@@ -8850,7 +8912,7 @@ LDAP server is configured and online
 
 ## `show user activity`
 
-Show the most recent usage of 128T.
+Show the most recent usage of SSR.
 
 #### Usage
 
@@ -8882,6 +8944,7 @@ show user activity [from <from>] [to <to>] [rows <rows>] [<username>]
 | [`delete user tokens`](#delete-user-tokens) | Revoke API access tokens for a user. |
 | [`edit prompt`](#edit-prompt) | Allows the user to specify a custom format for the PCLI prompt. |
 | [`edit user`](#edit-user) | Modify an existing user account |
+| [`edit user mode`](#edit-user-mode) | Edit the current user&#x27;s configuration mode. |
 | [`restore prompt`](#restore-prompt) | Restore the PCLI prompt to the factory default. |
 | [`restore users factory-default`](#restore-users-factory-default) | Restore the user configuration to factory defaults. |
 | [`set password`](#set-password) | Change your password. |
@@ -9044,7 +9107,7 @@ trace [verbose] <command> [<command> ...]
 
 #### Description
 
-The `trace` command is used when attempting to determine what 128T services need to be inspected during troubleshooting.
+The `trace` command is used when attempting to determine what SSR services need to be inspected during troubleshooting.
 
 
 
@@ -9064,13 +9127,13 @@ validate [router <router>]
 
 | name | description |
 | ---- | ----------- |
-| router | The name of the router (default: all) |
+| router | The name of the router (default: &lt;current router&gt;) |
 
 #### Description
 
 This command validates the current candidate configuration to check for referential integrity among the various configuration objects, to check for the use of deprecated configuration elements, and to supply warnings when various configuration elements cannot be validated.
 
-Many configuration elements within the 128T router refer to other configuration elements by their _name_. If an administrator mistypes a name, or a referenced object is deleted without updating the source of that reference, this candidate configuration is said to be invalid. By using the validate command, administrators can ensure their configuration is valid prior to committing it to be the running configuration.
+Many configuration elements within the SSR router refer to other configuration elements by their _name_. If an administrator mistypes a name, or a referenced object is deleted without updating the source of that reference, this candidate configuration is said to be invalid. By using the validate command, administrators can ensure their configuration is valid prior to committing it to be the running configuration.
 
 :::note
 validation occurs automatically whenever the commit command is run; this standalone
@@ -9078,11 +9141,17 @@ command allows administrators to check for validity without requiring that the
 configuration is committed immediately.
 :::
 
-The `validate` command provides warnings when a configuration contains deprecated elements - elements that are scheduled for removal in a future release of the 128T software. This is to give administrators the opportunity to replace the impacted configuration stanzas with their replacement.
+The `validate` command provides warnings when a configuration contains deprecated elements - elements that are scheduled for removal in a future release of the SSR software. This is to give administrators the opportunity to replace the impacted configuration stanzas with their replacement.
 
 The `validate` command will also provide warnings when a configuration cannot be validated and requires administrative oversight.
 
 When validation fails, the administrator is notified via output to the CLI. The output from the `validate` command will identify the configuration that is failing validation.
+
+When run from a SSR conductor, the conductor only validates the configuration itself locally. If the user wishes, the conductor has the ability to distribute the configuration to all managed routers for each of them to validate it and report the results of their validation. This operation is much slower than local validation because the conductor must wait for all routers to report their results and some may be unreachable or timeout. The user may request a distributed validation by executing `validate router all`.
+
+:::note
+validation occurs automatically whenever the commit command is run; this standalone command allows administrators to check for validity without requiring that the configuration is committed immediately.
+:::
 
 #### Example
 
