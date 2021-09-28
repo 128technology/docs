@@ -1,6 +1,6 @@
 ---
-title: Configuring High Availability (128T Router)
-sidebar_label: High Availability
+title: Configuring Dual Node High Availability
+sidebar_label: Dual Node High Availability
 ---
 
 This document contains the steps required for configuring support for high availability (HA) on a 128T router. Unlike traditional routers, where deploying high availability involved deploying two separate routers and using a protocol such as VRRP or HSRP to provide failover protection, the 128T deploys software instances (referred to as "nodes") in pairs, but are collectively referred to as a single, logical router.
@@ -77,22 +77,22 @@ Completed in 0.19 seconds
 ```
 
 ## Migrating from Standalone to HA
-For an established standalone router of one node, converting it to be highly available requires configuring a second node within the 128T configuration (PCLI or GUI) at the outset.
+For an established standalone router of one node, converting it to be highly available requires configuring a second node within the 128T configuration (PCLI or GUI).
 
 :::note
 Converting an existing router from standalone to HA will require downtime, and is therefore only to be undertaken during a maintenance window, as applicable.
 :::
 
-Adding a second node is simply a matter of configuring another *node* container within the router. Eventually, this node will contain one or more *shared interfaces*, which will protect the router from failure modes if/when interfaces, links or a node fails. Configuring shared interfaces is covered later in this document.
+Adding a second node requires configuring another *node* container within the router. This node will contain one or more *shared interfaces*, which will protect the router from failure modes when interfaces, links, or a node fails. Configuring shared interfaces is covered later in this document.
 
 Follow the setps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer 128T nodes.
 
 ## Configuring the Shared Interface(s)
 A highly available router is comprised of exactly two routing nodes within the same _router_ container. (Configuring two routers, each comprised of one node, cannot be made highly available.) Additionally, as mentioned previously, these routers must have at least one shared interface in common.
 
-Configuring the basic properties of the two nodes is described elsewhere in this documentation. For high availability, the crucial step is identifying to the 128T the interfaces that are to be shared between them. This is done by establishing a common Layer 2 address, known as a MAC address, that is maintained by the active node in the pair. (I.e., when node1 of the pair has active control over the interface, it will respond to ARP requests for the addresses on that interface with the shared MAC address, whereas node2 will not.) The configuration element for this MAC address is the _shared-phys-address_, within the device-interface element.
+Configuring the basic properties of the two nodes is described elsewhere in this documentation. For high availability, the crucial step is identifying to the 128T the interfaces that are to be shared between them. This is done by establishing a common Layer 2 address, known as a MAC address, that is maintained by the active node in the pair. For example, when node1 of the pair has active control over the interface, it responds to ARP requests for the addresses on the interface with the shared MAC address, whereas node2 will not.) The configuration element for this MAC address is the _shared-phys-address_, within the device-interface element.
 
-The shared-phys-address is simply a series of six octets, where the only requirement is that it is unique on a given broadcast domain. (The 128T Conductor also enforces that the shared-phys-address be unique among all routers within an Authority.) There are no hardfast rules for creating "globally unique" MAC addresses; there are, however, many websites available that will generate random values. Again, since these MAC addresses are only used on a broadcast domain, they do not need to be globally unique to suit the 128T router's needs. Irrespective of how you choose to generate the value, the shared-phys-address is configured using the format "00:00:00:00:00:00."
+The shared-phys-address is simply a series of six octets, where the only requirement is that it is unique on a given broadcast domain. (The 128T Conductor also enforces that the shared-phys-address be unique among all routers within an Authority.) There are no hard and fast rules for creating "globally unique" MAC addresses; there are, however, many websites available that will generate random values. Again, since these MAC addresses are only used on a broadcast domain, they do not need to be globally unique to suit the 128T router's needs. Irrespective of how you choose to generate the value, the shared-phys-address is configured using the format "00:00:00:00:00:00."
 
 Configuring the same shared-phys-address on two different interfaces (one per node in the high availability pair) informs the 128T that you wish to have the interfaces protect one another. This in turn causes the 128T to assign all corresponding pairs of network-interfaces that belong to this shared interface the same common _global ID_. (I.e., each network-interface on a node will have a unique global ID, but each counterpart network-interface on a highly available node will have the same global ID.) The global ID is an internal identifier, used by the 128T, to refer to the shared interface.
 
@@ -245,9 +245,12 @@ The _priority_ value indicates, all things being otherwise equal, an administrat
 When configuring two redundancy-groups with the same _priority_ value, the 128T router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure – but is neither guaranteed to be non-revertive. For this reason, it is suggested that you configure redundancy-group elements with different _priority_ values.
 :::
 
+**Suggest adding a section here about vector and priority configured on the Service Policy. Also need to find a way to add info for Multiple Next Hops.**
+
 ## Sample Configuration
 Below is a sample, minimal configuration which shows the inclusion of both a fabric interfaces as well as redundancy-groups.  This topology consists of 4 interfaces per node.  1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
 
+```
     config
     
         authority
@@ -284,6 +287,13 @@ Below is a sample, minimal configuration which shows the inclusion of both a fab
                         enabled              true
                         forwarding           true
                         shared-phys-address  00:00:5e:00:00:00
+
+                        **vrrp
+                            enabled                 true
+                            vrid                    128
+                            priority                100
+                            advertisement-interval  250
+                        exit**
     
                         network-interface    vlan0
                             name                   vlan0
@@ -311,6 +321,13 @@ Below is a sample, minimal configuration which shows the inclusion of both a fab
                         enabled              true
                         forwarding           true
                         shared-phys-address  00:00:5e:00:00:01
+
+                        **vrrp
+                            enabled                 true
+                            vrid                    128
+                            priority                100
+                            advertisement-interval  250
+                        exit**
     
                         network-interface    vlan100
                             name                   vlan100
@@ -377,6 +394,13 @@ Below is a sample, minimal configuration which shows the inclusion of both a fab
                         enabled              true
                         forwarding           true
                         shared-phys-address  00:00:5e:00:00:00
+
+                        **vrrp
+                            enabled                 true
+                            vrid                    128
+                            priority                99
+                            advertisement-interval  250
+                        exit**
     
                         network-interface    vlan0
                             name                   vlan0
@@ -404,6 +428,13 @@ Below is a sample, minimal configuration which shows the inclusion of both a fab
                         enabled              true
                         forwarding           true
                         shared-phys-address  00:00:5e:00:00:01
+
+                        **vrrp
+                            enabled                 true
+                            vrid                    128
+                            priority                99
+                            advertisement-interval  250
+                        exit**
     
                         network-interface    vlan100
                             name                   vlan100
@@ -490,6 +521,7 @@ Below is a sample, minimal configuration which shows the inclusion of both a fab
                 service-route         rte_default-route
                     name          rte_default-route
                     service-name  default-route
+                    **enable-failover    true**
     
                     next-hop      node1 vlan0
                         node-name  node1
@@ -506,3 +538,4 @@ Below is a sample, minimal configuration which shows the inclusion of both a fab
             exit
         exit
     exit
+```
