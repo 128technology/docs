@@ -9,7 +9,7 @@ When a packet arrives at the SSN on a DSCP-aware interface, the traffic is assum
 
 ## Configuration
 
-![DSCP Steering button](/img/dscp_steering1.png.png)
+![DSCP Steering button](/img/dscp_steering1.png)
 
 ![DSCP Steering Info](/img/dscp_steering2.png)
 

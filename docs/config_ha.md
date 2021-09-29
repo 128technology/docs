@@ -3,7 +3,7 @@ title: Configuring Dual Node High Availability
 sidebar_label: Dual Node High Availability
 ---
 
-This document contains the steps required for configuring support for high availability (HA) on a 128T router. Unlike traditional routers, where deploying high availability involved deploying two separate routers and using a protocol such as VRRP or HSRP to provide failover protection, the 128T deploys software instances (referred to as "nodes") in pairs, but are collectively referred to as a single, logical router.
+This document contains the steps required for configuring support for high availability (HA) on a single 128T router. Unlike traditional routers, where deploying high availability involves deploying two separate routers and using a protocol such as VRRP or HSRP to provide failover protection, the 128T deploys software instances (referred to as "nodes") in pairs, but are collectively referred to as a single, logical router.
 
 ## Requirements
 Configuring high availability requires that two 128T routing nodes have at least one device-interface that is shared between them (referred to in this document as a _shared interface_). Shared interfaces are configured on both nodes, but are active on only one node at a time. These shared interfaces **must** be in the same L2 broadcast domain; this is because the 128T uses gratuitous ARP messages to announce an interface failover, so that it may receive packets in place of its counterpart.
@@ -88,11 +88,11 @@ Adding a second node requires configuring another *node* container within the ro
 Follow the setps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer 128T nodes.
 
 ## Configuring the Shared Interface(s)
-A highly available router is comprised of exactly two routing nodes within the same _router_ container. (Configuring two routers, each comprised of one node, cannot be made highly available.) Additionally, as mentioned previously, these routers must have at least one shared interface in common.
+A highly available router is comprised of exactly two routing nodes within the same _router_ container. (Configuring two routers, each comprised of one node, cannot be made highly available.) Additionally, the routers must have at least one shared interface in common.
 
-Configuring the basic properties of the two nodes is described elsewhere in this documentation. For high availability, the crucial step is identifying to the 128T the interfaces that are to be shared between them. This is done by establishing a common Layer 2 address, known as a MAC address, that is maintained by the active node in the pair. For example, when node1 of the pair has active control over the interface, it responds to ARP requests for the addresses on the interface with the shared MAC address, whereas node2 will not.) The configuration element for this MAC address is the _shared-phys-address_, within the device-interface element.
+Configuring the basic properties of the two nodes is described elsewhere in this documentation. For high availability, the crucial step is identifying the interfaces that are to be shared between them. This is done by establishing a common Layer 2 address, known as a MAC address, that is maintained by the active node in the pair. For example, when node1 of the pair has active control over the interface, it responds to ARP requests for the addresses on the interface with the shared MAC address, whereas node2 will not. The configuration element for this MAC address is the _shared-phys-address_, within the device-interface element.
 
-The shared-phys-address is simply a series of six octets, where the only requirement is that it is unique on a given broadcast domain. (The 128T Conductor also enforces that the shared-phys-address be unique among all routers within an Authority.) There are no hard and fast rules for creating "globally unique" MAC addresses; there are, however, many websites available that will generate random values. Again, since these MAC addresses are only used on a broadcast domain, they do not need to be globally unique to suit the 128T router's needs. Irrespective of how you choose to generate the value, the shared-phys-address is configured using the format "00:00:00:00:00:00."
+The shared-phys-address is simply a series of six octets, that is unique on a given broadcast domain. (The 128T Conductor also enforces that the shared-phys-address be unique among all routers within an Authority.) There are no hard and fast rules for creating "globally unique" MAC addresses; there are, however, many websites available that will generate random values. Again, since these MAC addresses are only used on a broadcast domain, they do not need to be globally unique to suit the 128T router's needs. The shared-phys-address is configured using the format "00:00:00:00:00:00."
 
 Configuring the same shared-phys-address on two different interfaces (one per node in the high availability pair) informs the 128T that you wish to have the interfaces protect one another. This in turn causes the 128T to assign all corresponding pairs of network-interfaces that belong to this shared interface the same common _global ID_. (I.e., each network-interface on a node will have a unique global ID, but each counterpart network-interface on a highly available node will have the same global ID.) The global ID is an internal identifier, used by the 128T, to refer to the shared interface.
 
@@ -199,11 +199,11 @@ Fabric interfaces are not required for simple active/standby deployments where t
 ```
 
 ## Configuring Redundancy Groups
-Redundancy groups are sets of interfaces that _share fate_, such that if one of the interfaces in the group fails, leadership of all interfaces in the group will be relinquished to the counterpart node in the router. Redundancy groups are required when the two nodes in a router do not have a fabric interface between them; otherwise, you could end up in a situation where the active LAN interface is on node 1 and the active WAN interface is on node 2, with no way to transit packets from node 1 to node 2.
+Redundancy groups are sets of interfaces that _share fate_, such that if one of the interfaces in the group fails, leadership of all interfaces in the group will be relinquished to the counterpart node in the router. Redundancy groups are required when the two nodes in a router do not have a fabric interface between them. If this were the case, the potential exists for a situation where the active LAN interface is on node 1 and the active WAN interface is on node 2, with no way to transmit packets from node 1 to node 2.
 
 While redundancy groups are most commonly found in legacy deployments (i.e., those that predate 128 Technology's introduction of the fabric interface), they are still useful in simple HA deployments. Furthermore, the redundancy group affords administrators the ability to assert a preference for which node is active in an HA pair in the "sunny day" scenario where no interfaces are administratively or operationally down.
 
-Generally, you will configure two nodes that each has a set of forwarding interfaces (for illustrative purposes, assume an interface on an internal network named _lan_ and an interface on an external network named _wan_). Each node will require a _redundancy-group_ that contains its pair of internal and external interfaces, as is seen in the following example:
+Generally, you will configure two nodes that each have a set of forwarding interfaces (for illustrative purposes, assume an interface on an internal network named _lan_ and an interface on an external network named _wan_). Each node requires a _redundancy-group_ that containing a pair of internal and external interfaces, as is seen in the following example:
 
 ```
 redundancy-group      grp-node1
@@ -239,16 +239,121 @@ exit
 
 In this example, our two redundant nodes (node1 and node2) each have two interfaces contained within part of the `redundancy-group`. Note that each group collects the interfaces for a node, _not interfaces that share a global-id_.
 
-The _priority_ value indicates, all things being otherwise equal, an administrative preference for which group should be active. When configuring two redundancy-groups with differing _priority_ values, the failover of the systems is said to be “revertive” – that is, the group with the higher priority will be active unless it experiences a failure, but when that failure is restored it will become active again.
+It is considered a best practice to configure different priority values on each redundancy group. The `priority` value indicates, all things being otherwise equal, which group is active, or primary. When configuring redundancy-groups the failover of the systems is “revertive”; the group with the higher priority is active unless it experiences a failure. When that failure is restored it becomes active again.
 
 :::note
-When configuring two redundancy-groups with the same _priority_ value, the 128T router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure – but is neither guaranteed to be non-revertive. For this reason, it is suggested that you configure redundancy-group elements with different _priority_ values.
+ If two redundancy-groups are configured with the same _priority_ value, the 128T router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure. 
 :::
 
-**Suggest adding a section here about vector and priority configured on the Service Policy. Also need to find a way to add info for Multiple Next Hops.**
+## Configuration for Failover
+To facilitate a seamless failover, these additional items should be configured.
+
+#### On the `service-route`:
+
+- `enable-failover` 
+to allow existing sessions to failover between the nodes test-1 and test-2. `enable-failover` is configured on both the service-routes `test-1_intf13_route-0` and `test-2_intf113_route-0`. Any generated peer service-routes will inherit this property as well. 
+
+```
+service-route             test-1_intf13_route-0
+                name                    test-1_intf13_route-0
+                service-name            east-0
+                vector                  primary
+                enable-failover         true
+                next-hop                test-1 intf13
+                    node-name   test-1
+                    interface   intf13
+                    gateway-ip  172.16.4.4
+                exit
+                reachability-detection
+                    enabled               true
+                    enforcement           true
+                    detection-window      10
+                    hold-down             60
+                    reachability-profile  profile-1
+                    probe-type            always
+                    probe                 foo
+                        name                foo
+                        enabled             true
+                        icmp-probe-profile  icmp-profile-0
+                    exit
+                exit
+            exit
+            service-route             test-2_intf113_route-0
+                name                    test-2_intf113_route-0
+                service-name            east-0
+                vector                  secondary
+                enable-failover         true
+                next-hop                test-2 intf113
+                    node-name   test-2
+                    interface   intf113
+                    gateway-ip  172.16.4.5
+                exit
+                reachability-detection
+                    enabled               true
+                    enforcement           true
+                    detection-window      10
+                    hold-down             60
+                    reachability-profile  profile-1
+                    probe-type            always
+                    probe                 foo
+                        name                foo
+                        enabled             true
+                        icmp-probe-profile  icmp-profile-0
+                    exit
+                exit
+            exit
+
+```
+
+- `vector` - configurable on the service route, 
+```
+service-route
+    name    wan1-route
+    service-name wan-service
+      vector red
+      priority 100
+    next-hop
+        node        node1
+        interface   wan1-intf
+
+```
+and on a single or multiple next hops within the `service-route`.
+    ```
+    service-route
+    name    wan1-route
+    service-name wan-service
+    next-hop
+        vector      red
+        node        node1
+        interface   wan1-intf
+    next-hop
+        vector      blue
+        node        node1
+        interface   wan2-int
+
+    ```
+
+#### On the `service-policy`:
+
+- The `priority` value of the `vector`
+
+```
+service-policy  netcat-policy
+            name                 netcat-policy
+            service-class        netcat-class
+            lb-strategy          hunt
+            vector               red
+                name      red
+                priority  100
+            exit
+            vector               blue
+                name      blue
+                priority  90
+
+```
 
 ## Sample Configuration
-Below is a sample, minimal configuration which shows the inclusion of both a fabric interfaces as well as redundancy-groups.  This topology consists of 4 interfaces per node.  1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
+Below is a sample minimal configuration using both a fabric interface as well as redundancy-groups. This topology consists of 4 interfaces per node. 1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
 
 ```
     config
