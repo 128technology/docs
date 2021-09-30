@@ -1,9 +1,9 @@
 ---
 title: Configuring Dual Router High Availability
-sidebar_label: High Availability (Dual Router)
+sidebar_label: Dual Router High Availability
 ---
 
-There are several different high availability models possible with the 128T routing software. This document covers *dual router high availability*, which is when two instances of the 128T software are each configured as separate routers (rather than as two nodes within a single router). This is characterized by:
+There are different high availability models possible with the 128T routing software. This document covers *dual router high availability* - two instances of the 128T software are each configured as separate routers (rather than as two nodes within a single router). This is characterized by:
 
 - An iBGP interface shared between the two devices in lieu of a "fabric" interface in the dual node deployment.
 - No `shared-phys-address` (and hence no shared interfaces) between the two devices. Interface protection in a dual router HA deployment is accomplished using traditional routing protocols (Layer 3) rather than IP/MAC takeover (Layer 2).
@@ -18,17 +18,13 @@ When deploying two nodes in a dual router high availability deployment, several 
 - Source NAT. When source NAT is enabled, a system will allocate ephemeral ports on its egress interface as sessions leave the 128T router. Because there is no state synchronization between the two nodes in this deployment model, these ephemeral ports are not shared. Thus, if the active node fails and traffic starts transiting its counterpart, the source NAT allocation on the newly active system will be different. This will impact application flows.
 - Shared interfaces. A router node cannot perform gratuitous ARP takeover of an interface from another, distinct router node.
 
+**With VRRP isn't the above statement (and all references to the lack of a shared interface) incorrect? Doesn't there have to be a shared interface between the two so that state information can be synch'ed??**
+
 ## Design Constraints
 
 Due to the way that dual router high availability operates without state synchronization, in the event of a failure to one router in a pair, all traffic will be sent to the counterpart router (once routing converges). The now-active router does not have a shared database to reconstruct session state; it will receive mid-session packets (from the client's and server's perspectives) and need to construct its own state from these packets.
 
 For this reason, services that leverage a dual router HA pair must reference a `service-policy` that has `transport-state-enforcement allow` configured. Otherwise, mid-session TCP packets cause the 128T device to send a TCP RST to the sender.
-
-<!-- With the addition of `vrrp` commands, routers are now able to sync through a shared interface.
-Additionally, the use of the `service-route failover` configuration allows the existing service route configuration to fail over to the backup router with existing sessions intact. No TCP RST required.
-
-
--->
 
 ## Design Overview
 
@@ -38,13 +34,15 @@ Unlike a [dual node high availability design](config_ha.md), in which two nodes 
 It is possible to configure multiple inter-router connections for added resiliency if there are spare physical connections available between the two routers.
 :::
 
+**Why don't we require this????**
+
 The sample high level topology we will discuss in this document is as follows:
 
 ![dual-router-ha-diagrams](/img/config_dual-router-ha-diagrams.png)
 
 ### Notes about the Topology
 
-In this sample exercise, each of the two routers (`routerA` and `routerB`) have two WAN interfaces and one LAN interface. Between them is an interconnect cable; for collocated routers, this can be a simple "crossover" cable between the two systems.
+In this sample exercise, each of the two routers (`routerA` and `routerB`) have two WAN interfaces and one LAN interface. Between them is an interconnect cable; for collocated routers, this is a simple "crossover" cable between the two systems. **(Is there a management interface used for this?)**
 
 ### Routing Overview
 
@@ -207,13 +205,12 @@ exit
 
 ### Routing Configuration
 
-Unlike the *dual node high availability* design, the dual router high availability design does not synchronize state between routers. Instead, the two devices exchange reachability information using iBGP; this is implemented on the 128T using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as seen in the sample configuration.
+<!-- Unlike the *dual node high availability* design,--> 
+The dual router high availability design does not synchronize *state* between routers. Instead, the two devices exchange **reachability** information using iBGP. This is implemented on the 128T using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as shown in the sample configuration.
 
-<!-- Is this still true or can they now synchronize state because the config using vrrp is different? -->
+In our sample configuration we use `device-interface eno1` as our iBGP link. The sample uses [link-local IP addresses](https://en.wikipedia.org/wiki/Link-local_address), presuming that the two nodes are located next to one another in the same data center. The `neighborhood dc1-interrouter` configuration is provisioned on `routerB`, and indicates to conductor that the two devices are mutually reachable. These pieces combined with the loopback interfaces are what creates the peering relationship, the services, and the service-routes in support of BGPoSVR.
 
-In our sample configuration we use `device-interface eno1` as our iBGP link. The sample here uses [link-local IP addresses](https://en.wikipedia.org/wiki/Link-local_address), presuming that the two nodes are situated next to one another in the same data center. The `neighborhood dc1-interrouter` configuration, also provisioned on `routerB`, indicates to conductor that the two devices are mutually reachable. This hint (combined with the loopback interfaces) is what creates the peering relationship, the services, and the service-routes in support of BGPoSVR.
-
-This iBGP will also interact with other routing protocols to exchange reachability information with one another. For example, you may `redistribute ospf` into this iBGP, so that each device is aware of the other's reachability, as shown here:
+The iBGP also interacts with other routing protocols to exchange reachability information with one another. For example, you may `redistribute ospf` into this iBGP, so that each device is aware of the other's reachability, as shown here:
 
 ```
                 routing-protocol  bgp
@@ -337,5 +334,5 @@ There will also be a corresponding `service-route` on `routerB` that looks sligh
 Here we see that `routerB` will "hop through" `routerA` to get to `branch1`, if its direct path to `branch1` is down. (I.e., all peer paths are unavailable.)
 
 :::note
-These `service-route` configuration elements will not be built for you by conductor, and must be manually created. (They are typically part of provisioning templates, such that as new routers are deployed the configuration templates will include these `service-route` elements for the new peers.)
+These `service-route` configuration elements are not be built by the conductor, and must be manually created. (They are typically part of provisioning templates. As new routers are deployed the configuration templates will include these `service-route` elements for the new peers.)
 :::

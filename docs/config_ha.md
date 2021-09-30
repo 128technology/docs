@@ -239,7 +239,7 @@ exit
 
 In this example, our two redundant nodes (node1 and node2) each have two interfaces contained within part of the `redundancy-group`. Note that each group collects the interfaces for a node, _not interfaces that share a global-id_.
 
-It is considered a best practice to configure different priority values on each redundancy group. The `priority` value indicates, all things being otherwise equal, which group is active, or primary. When configuring redundancy-groups the failover of the systems is “revertive”; the group with the higher priority is active unless it experiences a failure. When that failure is restored it becomes active again.
+It is considered a best practice to configure different priority values on each redundancy group. The group with the higher `priority` value is active, or primary. When configuring redundancy-groups the failover of the systems is “revertive”; the group with the higher priority is active unless it experiences a failure. When that failure is restored it becomes active again.
 
 :::note
  If two redundancy-groups are configured with the same _priority_ value, the 128T router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure. 
@@ -248,13 +248,14 @@ It is considered a best practice to configure different priority values on each 
 ## Configuration for Failover
 To facilitate a seamless failover, these additional items should be configured.
 
-#### On the `service-route`:
+#### `enable-failover` on the `service-route`:
 
-- `enable-failover` 
-to allow existing sessions to failover between the nodes test-1 and test-2. `enable-failover` is configured on both the service-routes `test-1_intf13_route-0` and `test-2_intf113_route-0`. Any generated peer service-routes will inherit this property as well. 
+Service routes are used to influence traffic destinations for services. Service Route redundancy allows the configuration of redundancy groups containing service routes located on separate nodes within a single router. Session migration (which includes both existing and new sessions) upon failover to a standby node or router can now be achieved seamlessly. 
+
+To enable existing sessions to failover between the nodes, `enable-failover` is configured on both the service-routes `test-1_intf13_route-0` and `test-2_intf113_route-0`. Any generated peer service-routes will inherit this property as well. 
 
 ```
-service-route             test-1_intf13_route-0
+            service-route             test-1_intf13_route-0
                 name                    test-1_intf13_route-0
                 service-name            east-0
                 vector                  primary
@@ -305,7 +306,9 @@ service-route             test-1_intf13_route-0
 
 ```
 
-- `vector` - configurable on the service route, 
+To define the primary and standby nodes in the HA configuration, configure a vector on the service route and a priority on the service policy. 
+
+- `vector` - configured on the service route 
 ```
 service-route
     name    wan1-route
@@ -317,25 +320,8 @@ service-route
         interface   wan1-intf
 
 ```
-and on a single or multiple next hops within the `service-route`.
-    ```
-    service-route
-    name    wan1-route
-    service-name wan-service
-    next-hop
-        vector      red
-        node        node1
-        interface   wan1-intf
-    next-hop
-        vector      blue
-        node        node1
-        interface   wan2-int
 
-    ```
-
-#### On the `service-policy`:
-
-- The `priority` value of the `vector`
+- The `priority` value of the `vector` defined in the `service-policy`:
 
 ```
 service-policy  netcat-policy
@@ -351,6 +337,22 @@ service-policy  netcat-policy
                 priority  90
 
 ```
+
+The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availablity. 
+    ```
+    service-route
+    name    wan1-route
+    service-name wan-service
+    next-hop
+        vector      red
+        node        node1
+        interface   wan1-intf
+    next-hop
+        vector      blue
+        node        node1
+        interface   wan2-int
+
+    ```
 
 ## Sample Configuration
 Below is a sample minimal configuration using both a fabric interface as well as redundancy-groups. This topology consists of 4 interfaces per node. 1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
@@ -626,6 +628,7 @@ Below is a sample minimal configuration using both a fabric interface as well as
                 service-route         rte_default-route
                     name          rte_default-route
                     service-name  default-route
+
                     **enable-failover    true**
     
                     next-hop      node1 vlan0
