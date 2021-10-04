@@ -83,6 +83,7 @@ module.exports = {
           "config_in-memory_metrics",
           "config_wan_assurance",
           "config_transport_encryption",
+          "config_dscp_steering",
 
           "config_ha",
           "config_dual_router_ha",

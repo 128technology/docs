@@ -205,7 +205,6 @@ exit
 
 ### Routing Configuration
 
-<!-- Unlike the *dual node high availability* design,--> 
 The dual router high availability design does not synchronize *state* between routers. Instead, the two devices exchange **reachability** information using iBGP. This is implemented on the 128T using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as shown in the sample configuration.
 
 In our sample configuration we use `device-interface eno1` as our iBGP link. The sample uses [link-local IP addresses](https://en.wikipedia.org/wiki/Link-local_address), presuming that the two nodes are located next to one another in the same data center. The `neighborhood dc1-interrouter` configuration is provisioned on `routerB`, and indicates to conductor that the two devices are mutually reachable. These pieces combined with the loopback interfaces are what creates the peering relationship, the services, and the service-routes in support of BGPoSVR.
