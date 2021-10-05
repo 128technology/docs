@@ -13,7 +13,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ## Release 5.1.6
 
-**Release Date:** September 30, 2021
+**Release Date:** October 6, 2021
 
 ### New Features
 
@@ -50,6 +50,10 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-42225 `show-udp-transform` output garbled:** Resolved an issue where the output contained multiple semicolons.
 ------
 - **I95-42248 Download error when updating installer:** Resolved an error where a download failed because the download operation failed to update the installer when the Conductor reset the connection.
+
+### Caveats
+
+- **I95-41574 Conductor Rollback:** In a high availability configuration where 5.1.6 has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
 
 ## Release 5.1.5
 **Release Date:** August 13, 2021
