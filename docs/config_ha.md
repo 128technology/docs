@@ -250,6 +250,10 @@ It is considered a best practice to configure different priority values on each 
 ## High Availability Using VRRP
 To facilitate a seamless failover, you can now configure VRRP on an internode HA setup, and when it fails over the sessions are preserved. When it is used in a dual-node situation failover happens very fast. When used with service route failover, the failover is seamless because there is no rebuilding of the session tables. 
 
+```language
+
+```
+
 ## Service Route Failover
 
 #### `enable-failover` on the `service-route`:
@@ -358,8 +362,10 @@ The vector and the associated priority can then be assigned to one or more next 
 
     ```
 
-## Sample Configuration
-Below is a sample minimal configuration using both a fabric interface as well as redundancy-groups. This topology consists of 4 interfaces per node. 1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
+## Sample Configuration 
+Below is a sample, minimal configuration for which shows the inclusion of both a fabric interfaces as well as redundancy-groups. This topology consists of 4 interfaces per node.  1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
+
+This is an example of a pre-5.4 configuration using the shared-mac failover. 
 
 ```
     config
@@ -398,13 +404,6 @@ Below is a sample minimal configuration using both a fabric interface as well as
                         enabled              true
                         forwarding           true
                         shared-phys-address  00:00:5e:00:00:00
-
-                        **vrrp
-                            enabled                 true
-                            vrid                    128
-                            priority                100
-                            advertisement-interval  250
-                        exit**
     
                         network-interface    vlan0
                             name                   vlan0
@@ -432,13 +431,6 @@ Below is a sample minimal configuration using both a fabric interface as well as
                         enabled              true
                         forwarding           true
                         shared-phys-address  00:00:5e:00:00:01
-
-                        **vrrp
-                            enabled                 true
-                            vrid                    128
-                            priority                100
-                            advertisement-interval  250
-                        exit**
     
                         network-interface    vlan100
                             name                   vlan100
@@ -505,13 +497,6 @@ Below is a sample minimal configuration using both a fabric interface as well as
                         enabled              true
                         forwarding           true
                         shared-phys-address  00:00:5e:00:00:00
-
-                        **vrrp
-                            enabled                 true
-                            vrid                    128
-                            priority                99
-                            advertisement-interval  250
-                        exit**
     
                         network-interface    vlan0
                             name                   vlan0
@@ -539,13 +524,6 @@ Below is a sample minimal configuration using both a fabric interface as well as
                         enabled              true
                         forwarding           true
                         shared-phys-address  00:00:5e:00:00:01
-
-                        **vrrp
-                            enabled                 true
-                            vrid                    128
-                            priority                99
-                            advertisement-interval  250
-                        exit**
     
                         network-interface    vlan100
                             name                   vlan100
@@ -632,8 +610,6 @@ Below is a sample minimal configuration using both a fabric interface as well as
                 service-route         rte_default-route
                     name          rte_default-route
                     service-name  default-route
-
-                    **enable-failover    true**
     
                     next-hop      node1 vlan0
                         node-name  node1
@@ -650,4 +626,4 @@ Below is a sample minimal configuration using both a fabric interface as well as
             exit
         exit
     exit
-```
+    ```
