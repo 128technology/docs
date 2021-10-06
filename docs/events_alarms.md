@@ -56,6 +56,19 @@ sidebar_label: Alarms
 
 | Field     | Data                                                         |
 | --------- | ------------------------------------------------------------ |
+| Category  | bgp_neighbor                                                     |
+| Severity  | major                                                        |
+| Message   | Neighbor `<ipaddress>` failed to reach the ESTABLISHED state. |
+| Threshold | Issued when the BGP neighbor is not in the ESTABLISHED state. Clears when the BGP neighbor returns to the ESTABLISHED state. |
+
+| Cause                                                        | Troubleshooting Step                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 1. The remote IP address is not reachable due to some network connectivity problem. <br />2. The remote router is not configured to accept a BGP connection. <br />3. The OPEN message exchange fails. | Use the command `show bgp neighbors` and review the content for misconfiguration, state machine connection status, and disconnect failures. |
+
+------
+
+| Field     | Data                                                         |
+| --------- | ------------------------------------------------------------ |
 | Category  | giid                                                         |
 | Severity  | major                                                        |
 | Message   | DHCP address for interface [`<interface name>`] has not been resolved |
