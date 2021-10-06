@@ -88,6 +88,8 @@ Adding a second node requires configuring another *node* container within the ro
 Follow the setps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer 128T nodes.
 
 ## Configuring the Shared Interface(s)
+For systems configured prior to release 5.4, Dual Node High Availability is configured using a shared MAC interface, and is described below. For systems configured on release 5.4 and later, High Availability can be configured using VRRP. See [High Availability Using VRRP](#high-availability-using-vrrp) for information about using VRRP for dual-node failover.
+
 A highly available router is comprised of exactly two routing nodes within the same _router_ container. (Configuring two routers, each comprised of one node, cannot be made highly available.) Additionally, the routers must have at least one shared interface in common.
 
 Configuring the basic properties of the two nodes is described elsewhere in this documentation. For high availability, the crucial step is identifying the interfaces that are to be shared between them. This is done by establishing a common Layer 2 address, known as a MAC address, that is maintained by the active node in the pair. For example, when node1 of the pair has active control over the interface, it responds to ARP requests for the addresses on the interface with the shared MAC address, whereas node2 will not. The configuration element for this MAC address is the _shared-phys-address_, within the device-interface element.
@@ -245,8 +247,10 @@ It is considered a best practice to configure different priority values on each 
  If two redundancy-groups are configured with the same _priority_ value, the 128T router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure. 
 :::
 
-## Configuration for Failover
-To facilitate a seamless failover, these additional items should be configured.
+## High Availability Using VRRP
+To facilitate a seamless failover, you can now configure VRRP on an internode HA setup, and when it fails over the sessions are preserved. When it is used in a dual-node situation failover happens very fast. When used with service route failover, the failover is seamless because there is no rebuilding of the session tables. 
+
+## Service Route Failover
 
 #### `enable-failover` on the `service-route`:
 
