@@ -11,6 +11,50 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 5.1.6
+
+**Release Date:** October 6, 2021
+
+### New Features
+
+- **I95-26075 Generate PCAP directly from Session table:** A button has been added to both the Session Debug table and the Top Sessions table that allows the user to create a PCAP file containing the specific row data from each table.
+------
+- **I95-41457 OSPF VRF:** Multiple independent OSPF configurations are supported (zero or one per VRF), as well as on the default VRF. The `show ospf` commands accept an optional `vrf name` arguement, and display the `vrf name` column appropriately. 
+------
+- **I95-41905 Download Tech Support Info to the About page:** A button has been added to the Info page in the GUI that generates and downloads a zip file containing the Tech Support information. 
+
+### Resolved Issues
+
+- **I95-39113 Show Resources assigned to each Resource Group:** The Resource Group configuration page in the GUI now displays a list of the resources associated with the Resource Group.
+------
+- **I95-39967 Vulnerability Report Issues:** All identified CVE's have been addressed.
+------
+- **I95-40128 Performance Monitoring Erroneously Measuring Loss:** Resolved an issue where the first packets on a new flow were not being properly accounted for when collecting path metrics. 
+------
+- **I95-41702 Upgrade button on Router page not working:** This issue has been resolved. 
+------
+- **I95-41703 Sorting issue on Router page:** Resolved an issue with grouping routers on the Router page.
+------
+- **I95-41704 Node processes using excessive CPU during upgrade:** Changes made to initiate Swagger generation only when a file is updated or changed.
+------
+- **I95-41855 Automated Provisioner timeout conflict:** Resolved an issue where the Automated Provisioner would send duplicate highstate requests during the connected state, which could cause highstate failures.
+------
+- **I95-41899 MOS score displayed incorrectly:** Scores are now calculated and displayed correctly.
+------
+- **I95-42059 SSH local port forwarding tunnels can get restarted and fail to bind:** This issue has been resolved.
+------
+- **I95-42104 Conductor was showing no pending changes on the GUI after upgrade:** Resolved an issue with a missing API call.
+------
+- **I95-42138 Issue during reverse domain lookups:** Lookups now handle reverse domain input more elegantly. 
+------
+- **I95-42225 `show-udp-transform` output garbled:** Resolved an issue where the output contained multiple semicolons.
+------
+- **I95-42248 Download error when updating installer:** Resolved an error where a download failed because the download operation failed to update the installer when the Conductor reset the connection.
+
+### Caveats
+
+- **I95-41574 Conductor Rollback:** In a high availability configuration where 5.1.6 has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
+
 ## Release 5.1.5
 **Release Date:** August 13, 2021
 
