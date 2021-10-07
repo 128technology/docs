@@ -19,7 +19,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 - **I95-26075 Generate PCAP directly from Session table:** A button has been added to both the Session Debug table and the Top Sessions table that allows the user to create a PCAP file containing the specific row data from each table.
 ------
-- **I95-41457 OSPF VRF:** Multiple independent OSPF configurations are supported (zero or one per VRF), as well as on the default VRF. The `show ospf` commands accept an optional `vrf name` arguement, and display the `vrf name` column appropriately. 
+- **I95-41457 OSPF VRF:** Multiple independent OSPF configurations are supported (zero or one per VRF), as well as on the default VRF. The `show ospf` commands accept an optional `vrf name` argument, and display the `vrf name` column appropriately. 
 ------
 - **I95-41905 Download Tech Support Info to the About page:** A button has been added to the Info page in the GUI that generates and downloads a zip file containing the Tech Support information. 
 
@@ -57,7 +57,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-42248 Download error when updating installer:** Resolved an error where a download failed because the download operation failed to update the installer when the Conductor reset the connection.
 ------
-- **I95-42293 Upgrading from 4.5.x to 5.1.x causing a validation error with VRF:** A new authority configuration option backwards-compatible-vrf-bgp-tenants is available for enabling the VRF BGP-over-SVR feature while routers running an older software release are still present.
+- **I95-42293 Upgrading from 4.5.x to 5.1.x causing a validation error with VRF:** A new authority configuration option `backwards-compatible-vrf-bgp-tenants` is available for enabling the VRF BGP-over-SVR feature while routers running an older software release are still present.
 ------
 - **I95-42408 Firewall Detector fails to restart timer if auto-detect timeout is greater than 30 seconds:** Firewall detector has been updated to handle timers greater than 30 seconds.
 ------
@@ -98,7 +98,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40060 `show session captures` not displaying active captures:** Updated the query argument to correctly display session captures for all services.
 ------
-- **I95-40468 Session Optimization incompatability with Application ID:** Resolved an incompatibility between Application Identification and Session Optimization.
+- **I95-40468 Session Optimization incompatibility with Application ID:** Resolved an incompatibility between Application Identification and Session Optimization.
 ------
 - **I95-40624 Occasional failures in time-based HMAC:** This issue has been resolved.
 ------
@@ -179,7 +179,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40429 Unable to make local router changes:** Resolved an issue where any local changes were overwritten immediately, rather than when the configuration on the conductor was committed.
 ------
-- **I95-40435 Loss of HA headend after configuration changes to spoke:** Resoved an issue where configuration changes to traffic-engineering when HA is enabled force the interface into standby mode.
+- **I95-40435 Loss of HA headend after configuration changes to spoke:** Resolved an issue where configuration changes to traffic-engineering when HA is enabled force the interface into standby mode.
 ------
 - **I95-40460 The Download Quickstart link in Firefox does not download the file:** This issue has been resolved. 
 ------
@@ -397,7 +397,7 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 ------
 - **I95-34443 Provisioner status in router dialog not matching the Asset status in router page:** Asset Reconciliation now takes place automatically every 1.5 minutes in the GUI to assure the states of all assets are correctly reflected in the UI.
 ------
-- **I95-35521 Ambigious validation error:** Errors now more clearly identify the source of the error.
+- **I95-35521 Ambiguous validation error:** Errors now more clearly identify the source of the error.
 ------
 - **I95-35646 Wrong date for weekday in date picker:** The date-picker logic has been updated to resolve this issue. 
 ------
@@ -463,7 +463,7 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 ------
 - **I95-38963 Address sudo CVE-2021-3156:** Upgraded to later version.
 ------
-- **I95-38986 Template parse error is difficult to find:** Added additonal context to the error to help identify.
+- **I95-38986 Template parse error is difficult to find:** Added additional context to the error to help identify.
 ------
 - **I95-39011 AutomatedProvisioner process consuming 300%:** Resolved by increasing the timeout for local rpm queries. 
 ------
