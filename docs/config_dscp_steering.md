@@ -3,7 +3,7 @@ title: Configuring DSCP Steering
 sidebar_label: Configuring DSCP Steering
 ---
 
-When traffic is tunneled through an encryption tunnel such as IPSec, every flow within that tunnel looks the same. DSCP packet steering allows the classification of traffic based upon the known DSCP values. 
+When traffic is traversing an encrypted tunnel such as IPSec, every flow within that tunnel shares the same layer 3 headers, making them difficult if not impossible to disambiguate the flows from each other. 
 
 When the tunnel endpoint encrypts traffic, it can set a DSCP value representative of the traffic within the tunnel. When the traffic reaches the SSR, the DSCP value can be used as both a representation of traffic engineering priority, and path priority.
 
