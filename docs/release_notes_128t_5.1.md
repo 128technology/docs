@@ -35,7 +35,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-41369 TCP sessions are not established when adaptive encryption is enabled on a router in Azure:** Resolved an issue where the Firewall detector was not identifying links that require UDP transform. 
 ------
-- **I95-41634 `show udp-transform` not displaying the network interface of each peer path:** The `show upd-transform` command has been updated to fully display peer path info on the network interface. 
+- **I95-41634 `show udp-transform` not displaying the network interface of each peer path:** The `show udp-transform` command has been updated to fully display peer path info on the network interface. 
 ------
 - **I95-41702 Upgrade button on Router page not working:** This issue has been resolved. 
 ------
