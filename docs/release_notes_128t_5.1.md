@@ -31,6 +31,12 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40128 Performance Monitoring Erroneously Measuring Loss:** Resolved an issue where the first packets on a new flow were not being properly accounted for when collecting path metrics. 
 ------
+- **I95-41109 GO REST API Handlers contain extra information:** The GO REST API journals have been pared down to provide relevant information. 
+------
+- **I95-41369 TCP sessions are not established when adaptive encryption is enabled on a router in Azure:** Resolved an issue where the Firewall detector was not identifying links that require UDP transform. 
+------
+- **I95-41634 `show udp-transform` not displaying the network interface of each peer path:** The `show upd-transform` command has been updated to fully display peer path info on the network interface. 
+------
 - **I95-41702 Upgrade button on Router page not working:** This issue has been resolved. 
 ------
 - **I95-41703 Sorting issue on Router page:** Resolved an issue with grouping routers on the Router page.
@@ -50,6 +56,14 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-42225 `show-udp-transform` output garbled:** Resolved an issue where the output contained multiple semicolons.
 ------
 - **I95-42248 Download error when updating installer:** Resolved an error where a download failed because the download operation failed to update the installer when the Conductor reset the connection.
+------
+- **I95-42293 Upgrading from 4.5.x to 5.1.x causing a validation error with VRF:** A new authority configuration option backwards-compatible-vrf-bgp-tenants is available for enabling the VRF BGP-over-SVR feature while routers running an older software release are still present.
+------
+- **I95-42408 Firewall Detector fails to restart timer if auto-detect timeout is greater than 30 seconds:** Firewall detector has been updated to handle timers greater than 30 seconds.
+------
+- **I95-42411 Rare Race condition upon Re-installation:** Resolved an issue where files were not being completely removed on uninstall and re-install. 
+------
+- **I95-42465 Conflux consuming high CPU resources:** Conflux now gracefully handles gap resolution of non-metrics topics.  
 
 ### Caveats
 
