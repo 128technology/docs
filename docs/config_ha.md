@@ -3,12 +3,20 @@ title: Configuring Dual Node High Availability
 sidebar_label: Dual Node High Availability
 ---
 
-This document contains the steps required for configuring support for high availability (HA) on a single 128T router. Unlike traditional routers, where deploying high availability involves deploying two separate routers and using a protocol such as VRRP or HSRP to provide failover protection, the 128T deploys software instances (referred to as "nodes") in pairs, but are collectively referred to as a single, logical router.
+This document contains the steps for configuring support for high availability (HA) on a single SSR router. Unlike traditional routers, the SSR deploys software instances (referred to as "nodes") in pairs, but are collectively referred to as a single, logical router. These nodes are easily confWith the release of the 5.4 software, there are two methods available to configure high availability. 
+
+The SSR provides significant flexibility for high availability configurations. Like traditional routers, the SSR software can be deployed as a single router instance on multiple platforms, and have High Availability configured in a dual router configuration. The SSR can also deploy multiple software instances (nodes) within the same single installation, and provide high availability across router nodes. 
+
+This document contains the steps for configuring support for configuration of dual or multi-node high availability. 
+
+Within this deployment model, there are two significant options to be addressed, which begin with the questions, do you need stateful failover, or do you need stateless failover?
+
+Stateful failover can be implemented using either VRRP or a shared MAC interface. 
 
 ## Requirements
-Configuring high availability requires that two 128T routing nodes have at least one device-interface that is shared between them (referred to in this document as a _shared interface_). Shared interfaces are configured on both nodes, but are active on only one node at a time. These shared interfaces **must** be in the same L2 broadcast domain; this is because the 128T uses gratuitous ARP messages to announce an interface failover, so that it may receive packets in place of its counterpart.
+Configuring high availability requires that two SSR routing nodes have at least one device-interface that is shared between them (referred to in this document as a _shared interface_). Shared interfaces are configured on both nodes, but are active on only one node at a time. These shared interfaces **must** be in the same L2 broadcast domain; this is because the SSR uses gratuitous ARP messages to announce an interface failover, so that it may receive packets in place of its counterpart.
 
-The two 128T router nodes that make up a high availability pair must be collocated due to latency sensitivities for the information that they synchronize between themselves.
+The two SSR router nodes that make up a high availability pair must be collocated due to latency sensitivities for the information that they synchronize between themselves.
 
 ## Before You Begin
 There are several things to be mindful of before configuring HA; the two nodes must be informed that they are part of a high availability set, and they must have a dedicated interface between themselves for synchronizing state information about active sessions. These steps will be covered in this section.
@@ -34,9 +42,9 @@ Additionally, the candidate configuration is no longer synchronized between HA n
 It is recommended that you use the [`export config`](cli_reference.md/#export-config) command to save your configuration changes while working, especially if you are performing multiple changes. Changes to the running configuration are only be made when the configuration is committed.  
 
 ### Clock Synchronization
-Because highly available nodes synchronize time-series data, it is critical that the two nodes that comprise an HA pair have synchronized clocks. It is sufficient to manually synchronize the clocks until 128T software is installed, after which point NTP (Network Time Protocol) can be used to automatically synchronize the clocks.
+Because highly available nodes synchronize time-series data, it is critical that the two nodes that comprise an HA pair have synchronized clocks. It is sufficient to manually synchronize the clocks until SSR software is installed, after which point NTP (Network Time Protocol) can be used to automatically synchronize the clocks.
 
-Within the 128T configuration, you should configure NTP servers within `authority > router > system > ntp`.
+Within the SSR configuration, you should configure NTP servers within `authority > router > system > ntp`.
 
 ### Confirm NTP
 To confirm that you have NTP configured, use the command `show config running` as shown here:
@@ -77,7 +85,7 @@ Completed in 0.19 seconds
 ```
 
 ## Migrating from Standalone to HA
-For an established standalone router of one node, converting it to be highly available requires configuring a second node within the 128T configuration (PCLI or GUI).
+For an established standalone router of one node, converting it to be highly available requires configuring a second node within the SSR configuration (PCLI or GUI).
 
 :::note
 Converting an existing router from standalone to HA will require downtime, and is therefore only to be undertaken during a maintenance window, as applicable.
@@ -85,7 +93,7 @@ Converting an existing router from standalone to HA will require downtime, and i
 
 Adding a second node requires configuring another *node* container within the router. This node will contain one or more *shared interfaces*, which will protect the router from failure modes when interfaces, links, or a node fails. Configuring shared interfaces is covered later in this document.
 
-Follow the setps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer 128T nodes.
+Follow the setps in [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md) in order to provision an interface to connect between peer SSR nodes.
 
 ## Configuring the Shared Interface(s)
 For systems configured prior to release 5.4, Dual Node High Availability is configured using a shared MAC interface, and is described below. For systems configured on release 5.4 and later, High Availability can be configured using VRRP. See [High Availability Using VRRP](#high-availability-using-vrrp) for information about using VRRP for dual-node failover.
@@ -94,12 +102,12 @@ A highly available router is comprised of exactly two routing nodes within the s
 
 Configuring the basic properties of the two nodes is described elsewhere in this documentation. For high availability, the crucial step is identifying the interfaces that are to be shared between them. This is done by establishing a common Layer 2 address, known as a MAC address, that is maintained by the active node in the pair. For example, when node1 of the pair has active control over the interface, it responds to ARP requests for the addresses on the interface with the shared MAC address, whereas node2 will not. The configuration element for this MAC address is the _shared-phys-address_, within the device-interface element.
 
-The shared-phys-address is simply a series of six octets, that is unique on a given broadcast domain. (The 128T Conductor also enforces that the shared-phys-address be unique among all routers within an Authority.) There are no hard and fast rules for creating "globally unique" MAC addresses; there are, however, many websites available that will generate random values. Again, since these MAC addresses are only used on a broadcast domain, they do not need to be globally unique to suit the 128T router's needs. The shared-phys-address is configured using the format "00:00:00:00:00:00."
+The shared-phys-address is simply a series of six octets, that is unique on a given broadcast domain. (The SSR Conductor also enforces that the shared-phys-address be unique among all routers within an Authority.) There are no hard and fast rules for creating "globally unique" MAC addresses; there are, however, many websites available that will generate random values. Again, since these MAC addresses are only used on a broadcast domain, they do not need to be globally unique to suit the SSR router's needs. The shared-phys-address is configured using the format "00:00:00:00:00:00."
 
-Configuring the same shared-phys-address on two different interfaces (one per node in the high availability pair) informs the 128T that you wish to have the interfaces protect one another. This in turn causes the 128T to assign all corresponding pairs of network-interfaces that belong to this shared interface the same common _global ID_. (I.e., each network-interface on a node will have a unique global ID, but each counterpart network-interface on a highly available node will have the same global ID.) The global ID is an internal identifier, used by the 128T, to refer to the shared interface.
+Configuring the same shared-phys-address on two different interfaces (one per node in the high availability pair) informs the SSR that you wish to have the interfaces protect one another. This in turn causes the SSR to assign all corresponding pairs of network-interfaces that belong to this shared interface the same common _global ID_. (I.e., each network-interface on a node will have a unique global ID, but each counterpart network-interface on a highly available node will have the same global ID.) The global ID is an internal identifier, used by the SSR, to refer to the shared interface.
 
 ### About the Global ID
-Each network-interface within a 128T configuration has a global ID assigned to it. The term "global" refers to the value being global across two nodes of a router; it is not uniquely global across an Authority. Each router within an authority can share the same global ID.  When two nodes share an interface for high availability, each network-interface pair, one per node, that fails over to another network-interface on the paired node is assigned the same global ID.
+Each network-interface within a SSR configuration has a global ID assigned to it. The term "global" refers to the value being global across two nodes of a router; it is not uniquely global across an Authority. Each router within an authority can share the same global ID.  When two nodes share an interface for high availability, each network-interface pair, one per node, that fails over to another network-interface on the paired node is assigned the same global ID.
 
 ```
 admin@node1.router1 (device-interface[name=wan])# show
@@ -244,125 +252,10 @@ In this example, our two redundant nodes (node1 and node2) each have two interfa
 It is considered a best practice to configure different priority values on each redundancy group. The group with the higher `priority` value is active, or primary. When configuring redundancy-groups the failover of the systems is “revertive”; the group with the higher priority is active unless it experiences a failure. When that failure is restored it becomes active again.
 
 :::note
- If two redundancy-groups are configured with the same _priority_ value, the 128T router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure. 
+ If two redundancy-groups are configured with the same _priority_ value, the SSR router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure. 
 :::
 
-## High Availability Using VRRP
-To facilitate a seamless failover, you can now configure VRRP on an internode HA setup, and when it fails over the sessions are preserved. When it is used in a dual-node situation failover happens very fast. When used with service route failover, the failover is seamless because there is no rebuilding of the session tables. 
-
-```language
-
-```
-
-## Service Route Failover
-
-#### `enable-failover` on the `service-route`:
-
-Service routes are used to influence traffic destinations for services. Service Route redundancy allows the configuration of redundancy groups containing service routes located on separate nodes within a single router. Session migration (which includes both existing and new sessions) upon failover to a standby node or router can now be achieved seamlessly. 
-
-To enable existing sessions to failover between the nodes, `enable-failover` is configured on both the service-routes `test-1_intf13_route-0` and `test-2_intf113_route-0`. Any generated peer service-routes will inherit this property as well. 
-
-```
-            service-route             test-1_intf13_route-0
-                name                    test-1_intf13_route-0
-                service-name            east-0
-                vector                  primary
-                enable-failover         true
-                next-hop                test-1 intf13
-                    node-name   test-1
-                    interface   intf13
-                    gateway-ip  172.16.4.4
-                exit
-                reachability-detection
-                    enabled               true
-                    enforcement           true
-                    detection-window      10
-                    hold-down             60
-                    reachability-profile  profile-1
-                    probe-type            always
-                    probe                 foo
-                        name                foo
-                        enabled             true
-                        icmp-probe-profile  icmp-profile-0
-                    exit
-                exit
-            exit
-            service-route             test-2_intf113_route-0
-                name                    test-2_intf113_route-0
-                service-name            east-0
-                vector                  secondary
-                enable-failover         true
-                next-hop                test-2 intf113
-                    node-name   test-2
-                    interface   intf113
-                    gateway-ip  172.16.4.5
-                exit
-                reachability-detection
-                    enabled               true
-                    enforcement           true
-                    detection-window      10
-                    hold-down             60
-                    reachability-profile  profile-1
-                    probe-type            always
-                    probe                 foo
-                        name                foo
-                        enabled             true
-                        icmp-probe-profile  icmp-profile-0
-                    exit
-                exit
-            exit
-
-```
-
-To define the primary and standby nodes in the HA configuration, configure a vector on the service route and a priority on the service policy. 
-
-- `vector` - configured on the service route 
-```
-service-route
-    name    wan1-route
-    service-name wan-service
-      vector red
-      priority 100
-    next-hop
-        node        node1
-        interface   wan1-intf
-
-```
-
-- The `priority` value of the `vector` defined in the `service-policy`:
-
-```
-service-policy  netcat-policy
-            name                 netcat-policy
-            service-class        netcat-class
-            lb-strategy          hunt
-            vector               red
-                name      red
-                priority  100
-            exit
-            vector               blue
-                name      blue
-                priority  90
-
-```
-
-The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availablity. 
-    ```
-    service-route
-    name    wan1-route
-    service-name wan-service
-    next-hop
-        vector      red
-        node        node1
-        interface   wan1-intf
-    next-hop
-        vector      blue
-        node        node1
-        interface   wan2-int
-
-    ```
-
-## Sample Configuration 
+## Shared-MAC Failover Sample Configuration 
 Below is a sample, minimal configuration for which shows the inclusion of both a fabric interfaces as well as redundancy-groups. This topology consists of 4 interfaces per node.  1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
 
 This is an example of a pre-5.4 configuration using the shared-mac failover. 
@@ -627,3 +520,186 @@ This is an example of a pre-5.4 configuration using the shared-mac failover.
         exit
     exit
     ```
+
+## High Availability Using VRRP
+
+To facilitate a seamless failover, you can now configure VRRP on a dual node HA configuration. This reduces failover time and when configured with service-route failover, the sessions are preserved. 
+
+Configure VRRP on the wan and lan interfaces of node 1. In this example Node 1 is set as the active node (set with the higher priority), and Node 2 is configured as the standby node. 
+
+```
+node                  node1
+                    name              node1
+                    description       "Node 1 of HA pair"
+    
+                    device-interface  wan
+                        name                 wan
+                        description          "WAN interface, port 0"
+                        type                 ethernet
+                        pci-address          0000:00:14.0
+                        link-settings        auto
+                        enabled              true
+                        forwarding           true
+
+                        vrrp
+                            enabled                 true
+                            vrid                    128
+                            priority                100
+                            advertisement-interval  250
+                        exit
+
+```
+
+
+```
+device-interface  lan
+                        name                 lan
+                        description          "LAN interface, port 1"
+                        type                 ethernet
+                        pci-address          0000:00:14.1
+                        link-settings        auto
+                        enabled              true
+                        forwarding           true
+                        
+                        vrrp
+                            enabled                 true
+                            vrid                    128
+                            priority                100
+                            advertisement-interval  250
+                        exit
+
+```
+Node 2 lan and wan interfaces are configured similarly, however the priority is lower to indicate it is the standby node. 
+
+```
+node                  node2
+                    name              node2
+                    description       "Node 2 of the HA pair"
+    
+                    device-interface  wan
+                        name                 wan
+                        description          "WAN interface, port 0"
+                        type                 ethernet
+                        pci-address          0000:00:14.0
+                        link-settings        auto
+                        enabled              true
+                        forwarding           true
+                       
+                        vrrp
+                            enabled                 true
+                            vrid                    128
+                            priority                99
+                            advertisement-interval  250
+                        exit
+
+```
+
+
+## Service Route Failover
+
+#### `enable-failover` on the `service-route`:
+
+Service routes are used to influence traffic destinations for services. By enabling failover on the service route the failover will include the existing sessions, eliminating the lag time previously encounterd as those sessions were re-established. 
+
+To enable existing sessions to failover between the nodes, `enable-failover` is configured on both the service-routes `test-1_intf13_route-0` and `test-2_intf113_route-0`. Any generated peer service-routes will inherit this property as well. 
+
+```
+            service-route             test-1_intf13_route-0
+                name                    test-1_intf13_route-0
+                service-name            east-0
+                vector                  primary
+                enable-failover         true
+                next-hop                test-1 intf13
+                    node-name   test-1
+                    interface   intf13
+                    gateway-ip  172.16.4.4
+                exit
+                reachability-detection
+                    enabled               true
+                    enforcement           true
+                    detection-window      10
+                    hold-down             60
+                    reachability-profile  profile-1
+                    probe-type            always
+                    probe                 foo
+                        name                foo
+                        enabled             true
+                        icmp-probe-profile  icmp-profile-0
+                    exit
+                exit
+            exit
+            service-route             test-2_intf113_route-0
+                name                    test-2_intf113_route-0
+                service-name            east-0
+                vector                  secondary
+                enable-failover         true
+                next-hop                test-2 intf113
+                    node-name   test-2
+                    interface   intf113
+                    gateway-ip  172.16.4.5
+                exit
+                reachability-detection
+                    enabled               true
+                    enforcement           true
+                    detection-window      10
+                    hold-down             60
+                    reachability-profile  profile-1
+                    probe-type            always
+                    probe                 foo
+                        name                foo
+                        enabled             true
+                        icmp-probe-profile  icmp-profile-0
+                    exit
+                exit
+            exit
+
+```
+
+To define the primary and standby **nodes** in the HA configuration, configure a vector on the service route and a priority on the service policy. 
+
+- `vector` - configured on the service route 
+```
+service-route
+    name    wan1-route
+    service-name wan-service
+      vector red
+      priority 100
+    next-hop
+        node        node1
+        interface   wan1-intf
+
+```
+
+- The `priority` value of the `vector` defined in the `service-policy`:
+
+```
+service-policy  netcat-policy
+            name                 netcat-policy
+            service-class        netcat-class
+            lb-strategy          hunt
+            vector               red
+                name      red
+                priority  100
+            exit
+            vector               blue
+                name      blue
+                priority  90
+
+```
+
+The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availablity. 
+    ```
+    service-route
+    name    wan1-route
+    service-name wan-service
+    next-hop
+        vector      red
+        node        node1
+        interface   wan1-intf
+    next-hop
+        vector      blue
+        node        node1
+        interface   wan2-int
+
+    ```
+
