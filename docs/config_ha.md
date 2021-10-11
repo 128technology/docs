@@ -3,15 +3,11 @@ title: Configuring Dual Node High Availability
 sidebar_label: Dual Node High Availability
 ---
 
-This document contains the steps for configuring support for high availability (HA) on a single SSR router. Unlike traditional routers, the SSR deploys software instances (referred to as "nodes") in pairs, but are collectively referred to as a single, logical router. These nodes are easily confWith the release of the 5.4 software, there are two methods available to configure high availability. 
+The SSR provides significant flexibility for high availability configurations. The SSR can deploy multiple software instances (referred to as nodes) within the same single installation, providing high availability across router nodes. And like traditional routers, the SSR software can be deployed as a single router instance on multiple platforms, with high availability configured in a dual router configuration.  
 
-The SSR provides significant flexibility for high availability configurations. Like traditional routers, the SSR software can be deployed as a single router instance on multiple platforms, and have High Availability configured in a dual router configuration. The SSR can also deploy multiple software instances (nodes) within the same single installation, and provide high availability across router nodes. 
+This document contains the steps for configuring support for configuration of dual or multi-node high availability. In addtion to the shared MAC interface method of dual node high availability, the  release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
 
-This document contains the steps for configuring support for configuration of dual or multi-node high availability. 
-
-Within this deployment model, there are two significant options to be addressed, which begin with the questions, do you need stateful failover, or do you need stateless failover?
-
-Stateful failover can be implemented using either VRRP or a shared MAC interface. 
+With each of these deployment models in version 5.4, there are two significant options to be addressed, which begin with the questions; Do you need stateful failover, or do you need stateless failover? A new service route parameter, [`enable-failover`](#service-route-failover), provides stateful failover on either a VRRP or a shared MAC interface. 
 
 ## Requirements
 Configuring high availability requires that two SSR routing nodes have at least one device-interface that is shared between them (referred to in this document as a _shared interface_). Shared interfaces are configured on both nodes, but are active on only one node at a time. These shared interfaces **must** be in the same L2 broadcast domain; this is because the SSR uses gratuitous ARP messages to announce an interface failover, so that it may receive packets in place of its counterpart.
@@ -255,10 +251,245 @@ It is considered a best practice to configure different priority values on each 
  If two redundancy-groups are configured with the same _priority_ value, the SSR router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure. 
 :::
 
+## Service Route Failover
+Only available with SSR Version 5.4.
+
+#### `enable-failover` on the `service-route`:
+
+Service routes are used to influence traffic destinations for services. By enabling failover on the service route, failover includes the existing sessions, eliminating the lag time previously encounterd as those sessions were re-established. 
+
+Service route failover is not exclusive to vrrp configurations and can be configured with shared-interface failover using the same structure as shown below.
+
+To enable existing sessions to failover between the nodes, `enable-failover` is configured on both the service-routes `test-1_intf13_route-0` and `test-2_intf113_route-0`. Any generated peer service-routes will inherit this property as well. 
+
+```
+            service-route             test-1_intf13_route-0
+                name                    test-1_intf13_route-0
+                service-name            east-0
+                vector                  primary
+                enable-failover         true
+                next-hop                test-1 intf13
+                    node-name   test-1
+                    interface   intf13
+                    gateway-ip  172.16.4.4
+                exit
+                reachability-detection
+                    enabled               true
+                    enforcement           true
+                    detection-window      10
+                    hold-down             60
+                    reachability-profile  profile-1
+                    probe-type            always
+                    probe                 foo
+                        name                foo
+                        enabled             true
+                        icmp-probe-profile  icmp-profile-0
+                    exit
+                exit
+            exit
+            service-route             test-2_intf113_route-0
+                name                    test-2_intf113_route-0
+                service-name            east-0
+                vector                  secondary
+                enable-failover         true
+                next-hop                test-2 intf113
+                    node-name   test-2
+                    interface   intf113
+                    gateway-ip  172.16.4.5
+                exit
+                reachability-detection
+                    enabled               true
+                    enforcement           true
+                    detection-window      10
+                    hold-down             60
+                    reachability-profile  profile-1
+                    probe-type            always
+                    probe                 foo
+                        name                foo
+                        enabled             true
+                        icmp-probe-profile  icmp-profile-0
+                    exit
+                exit
+            exit
+
+```
+
+### Using `vector` to Define the Primary Node
+
+The use of a `vector` is not exclusive to vrrp configurations and can be configured with shared-interface failover using the same structure as shown below.
+
+To define the primary and standby **nodes** in the HA configuration, configure a `vector` on the `service-route` and a priority on the `service-policy`. 
+
+- `vector` - configured on the service route 
+```
+service-route
+    name            wan1-route
+    service-name    wan-service
+      vector        red
+      priority      100
+    next-hop
+        node        node1
+        interface   wan1-intf
+
+```
+
+- The `priority` value of the `vector` defined in the `service-policy`:
+
+```
+service-policy  netcat-policy
+            name                 netcat-policy
+            service-class        netcat-class
+            lb-strategy          hunt
+            vector               red
+                name             red
+                priority         100
+            exit
+            vector               blue
+                name             blue
+                priority         90
+
+```
+
+The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availablity. 
+    ```
+    service-route
+    name    wan1-route
+    service-name wan-service
+    next-hop
+        vector      red
+        node        node1
+        interface   wan1-intf
+    next-hop
+        vector      blue
+        node        node1
+        interface   wan2-int
+
+    ```
+
+## High Availability Using VRRP
+
+To facilitate a seamless failover, you can now configure VRRP on a dual node HA configuration. This reduces failover time and when configured with service-route failover, the sessions are preserved. 
+
+Configure VRRP on the `wan` and `lan` interfaces of node 1. In this example Node 1 is set as the active node (set with the higher priority), and Node 2 is configured as the standby node. 
+
+```
+                node                  node1
+                    name              node1
+                    description       "Node 1 of HA pair"
+    
+                    device-interface  wan
+                        name                 wan
+                        description          "WAN interface, port 0"
+                        type                 ethernet
+                        pci-address          0000:00:14.0
+                        link-settings        auto
+                        enabled              true
+                        forwarding           true
+
+                        vrrp
+                            enabled                 true
+                            vrid                    128
+                            priority                100
+                            advertisement-interval  250
+                        exit
+
+                        network-interface    vlan0
+                            name                   vlan0
+                            global-id              1
+
+```
+
+```
+                    device-interface  lan
+                        name                 lan
+                        description          "LAN interface, port 1"
+                        type                 ethernet
+                        pci-address          0000:00:14.1
+                        link-settings        auto
+                        enabled              true
+                        forwarding           true
+                        
+                        vrrp
+                            enabled                 true
+                            vrid                    95
+                            priority                100
+                            advertisement-interval  250
+                        exit
+
+                        network-interface    vlan100
+                            name                   vlan100
+                            global-id              2
+                            vlan                   100
+                            type                   external
+                            inter-router-security  internal
+
+```
+
+Node 2 lan and wan interfaces are configured similarly, however the priority is lower to indicate it is the standby node. 
+
+```
+                node                  node2
+                    name              node2
+                    description       "Node 2 of the HA pair"
+    
+                    device-interface  wan
+                        name                 wan
+                        description          "WAN interface, port 0"
+                        type                 ethernet
+                        pci-address          0000:00:14.0
+                        link-settings        auto
+                        enabled              true
+                        forwarding           true
+                       
+                        vrrp
+                            enabled                 true
+                            vrid                    128
+                            priority                99
+                            advertisement-interval  250
+                        exit
+
+                        network-interface    vlan0
+                            name                   vlan0
+                            global-id              1
+
+```
+
+```
+                    device-interface  lan
+                        name                 lan
+                        description          "LAN interface, port 1"
+                        type                 ethernet
+                        pci-address          0000:00:14.1
+                        link-settings        auto
+                        enabled              true
+                        forwarding           true
+                        
+                        vrrp
+                            enabled                 true
+                            vrid                    95
+                            priority                99
+                            advertisement-interval  250
+                        exit
+    
+                        network-interface    vlan100
+                            name                   vlan100
+                            global-id              2
+                            vlan                   100
+                            type                   external
+                            inter-router-security  internal
+
+```
+
+### Configuration Considerations
+
+- VRRP can be enabled only on one of the vlans, but the state of VRRP run on that vlan affects the whole device interface. The vrrp vlan will default to `vlan 0`, but is user configurable to a different vlan.
+- VRRP cannot be enabled on a vlan that has DHCP.
+- If DHCP needs to be supported on a VRRP enabled device interface, then VRRP must be enabled on another vlan with a static IP.
+
 ## Shared-MAC Failover Sample Configuration 
 Below is a sample, minimal configuration for which shows the inclusion of both a fabric interfaces as well as redundancy-groups. This topology consists of 4 interfaces per node.  1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
 
-This is an example of a pre-5.4 configuration using the shared-mac failover. 
+This is an example of a **pre-5.4 configuration** using the shared-mac failover. 
 
 ```
     config
@@ -501,9 +732,9 @@ This is an example of a pre-5.4 configuration using the shared-mac failover.
                 exit
     
                 service-route         rte_default-route
-                    name          rte_default-route
-                    service-name  default-route
-    
+                    name              rte_default-route
+                    service-name      default-route
+                    
                     next-hop      node1 vlan0
                         node-name  node1
                         interface  vlan0
@@ -519,187 +750,5 @@ This is an example of a pre-5.4 configuration using the shared-mac failover.
             exit
         exit
     exit
-    ```
-
-## High Availability Using VRRP
-
-To facilitate a seamless failover, you can now configure VRRP on a dual node HA configuration. This reduces failover time and when configured with service-route failover, the sessions are preserved. 
-
-Configure VRRP on the wan and lan interfaces of node 1. In this example Node 1 is set as the active node (set with the higher priority), and Node 2 is configured as the standby node. 
-
 ```
-node                  node1
-                    name              node1
-                    description       "Node 1 of HA pair"
-    
-                    device-interface  wan
-                        name                 wan
-                        description          "WAN interface, port 0"
-                        type                 ethernet
-                        pci-address          0000:00:14.0
-                        link-settings        auto
-                        enabled              true
-                        forwarding           true
-
-                        vrrp
-                            enabled                 true
-                            vrid                    128
-                            priority                100
-                            advertisement-interval  250
-                        exit
-
-```
-
-
-```
-device-interface  lan
-                        name                 lan
-                        description          "LAN interface, port 1"
-                        type                 ethernet
-                        pci-address          0000:00:14.1
-                        link-settings        auto
-                        enabled              true
-                        forwarding           true
-                        
-                        vrrp
-                            enabled                 true
-                            vrid                    128
-                            priority                100
-                            advertisement-interval  250
-                        exit
-
-```
-Node 2 lan and wan interfaces are configured similarly, however the priority is lower to indicate it is the standby node. 
-
-```
-node                  node2
-                    name              node2
-                    description       "Node 2 of the HA pair"
-    
-                    device-interface  wan
-                        name                 wan
-                        description          "WAN interface, port 0"
-                        type                 ethernet
-                        pci-address          0000:00:14.0
-                        link-settings        auto
-                        enabled              true
-                        forwarding           true
-                       
-                        vrrp
-                            enabled                 true
-                            vrid                    128
-                            priority                99
-                            advertisement-interval  250
-                        exit
-
-```
-
-
-## Service Route Failover
-
-#### `enable-failover` on the `service-route`:
-
-Service routes are used to influence traffic destinations for services. By enabling failover on the service route the failover will include the existing sessions, eliminating the lag time previously encounterd as those sessions were re-established. 
-
-To enable existing sessions to failover between the nodes, `enable-failover` is configured on both the service-routes `test-1_intf13_route-0` and `test-2_intf113_route-0`. Any generated peer service-routes will inherit this property as well. 
-
-```
-            service-route             test-1_intf13_route-0
-                name                    test-1_intf13_route-0
-                service-name            east-0
-                vector                  primary
-                enable-failover         true
-                next-hop                test-1 intf13
-                    node-name   test-1
-                    interface   intf13
-                    gateway-ip  172.16.4.4
-                exit
-                reachability-detection
-                    enabled               true
-                    enforcement           true
-                    detection-window      10
-                    hold-down             60
-                    reachability-profile  profile-1
-                    probe-type            always
-                    probe                 foo
-                        name                foo
-                        enabled             true
-                        icmp-probe-profile  icmp-profile-0
-                    exit
-                exit
-            exit
-            service-route             test-2_intf113_route-0
-                name                    test-2_intf113_route-0
-                service-name            east-0
-                vector                  secondary
-                enable-failover         true
-                next-hop                test-2 intf113
-                    node-name   test-2
-                    interface   intf113
-                    gateway-ip  172.16.4.5
-                exit
-                reachability-detection
-                    enabled               true
-                    enforcement           true
-                    detection-window      10
-                    hold-down             60
-                    reachability-profile  profile-1
-                    probe-type            always
-                    probe                 foo
-                        name                foo
-                        enabled             true
-                        icmp-probe-profile  icmp-profile-0
-                    exit
-                exit
-            exit
-
-```
-
-To define the primary and standby **nodes** in the HA configuration, configure a vector on the service route and a priority on the service policy. 
-
-- `vector` - configured on the service route 
-```
-service-route
-    name    wan1-route
-    service-name wan-service
-      vector red
-      priority 100
-    next-hop
-        node        node1
-        interface   wan1-intf
-
-```
-
-- The `priority` value of the `vector` defined in the `service-policy`:
-
-```
-service-policy  netcat-policy
-            name                 netcat-policy
-            service-class        netcat-class
-            lb-strategy          hunt
-            vector               red
-                name      red
-                priority  100
-            exit
-            vector               blue
-                name      blue
-                priority  90
-
-```
-
-The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availablity. 
-    ```
-    service-route
-    name    wan1-route
-    service-name wan-service
-    next-hop
-        vector      red
-        node        node1
-        interface   wan1-intf
-    next-hop
-        vector      blue
-        node        node1
-        interface   wan2-int
-
-    ```
 
