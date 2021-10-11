@@ -116,8 +116,6 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-41214 GUI Table visual issues:** All tables now use the full height of their container.
 ------
-- **I95-41227 Vulnerability Report Issues:** All identified CVE's have been addressed.
-------
 - **I95-41235 Router state indicator is not consistent across pages:** Resolved an issue where the Status Indicator was always showing unknown.
 ------
 - **I95-41270 show dhcp v6 and prefix-delegation commands not working:** This issue has been resolved. 
