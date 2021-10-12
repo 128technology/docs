@@ -84,13 +84,6 @@ module.exports = {
           "config_wan_assurance",
           "config_transport_encryption",
           "config_dscp_steering",
-
-          "config_ha",
-          "config_dual_router_ha",
-          "config_non_forwarding_ha_interfaces",
-          "config_adding_interfaces_to_ha_team",
-          "config_transition_standalone_to_ha",
-
           "config_nat",
           "config_ospf",
           "config_rate_limiting",
@@ -101,6 +94,18 @@ module.exports = {
           "config_STEP",
           "config_tenants",
           "config_templates",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "High Availability",
+        "items": [
+         "config_ha",
+          "config_dual_router_ha",
+          "config_ha_vrrp",
+          "config_non_forwarding_ha_interfaces",
+          "config_adding_interfaces_to_ha_team",
+          "config_transition_standalone_to_ha",
         ],
       },
       {

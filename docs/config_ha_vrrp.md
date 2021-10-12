@@ -1,0 +1,732 @@
+---
+title: Configuring Stateful Dual Router High Availability and VRRP
+sidebar_label: Stateful Dual Router High Availability and VRRP
+---
+
+The release of the 5.4 software includes VRRP as a configuration option, as well as a new service route parameter, `enable-failover`, that provides stateful failover on both the dual router and the dual node HA configuration. Configuring high availability now can begin with the questions; Do you need stateful failover, or do you need stateless failover? 
+
+The following sample configuration provides context for using vrrp and enabling service route failover to provide a stateful failover on a dual router high availability configuration. 
+
+## Configure the Primary Router
+
+Identify the primary router, and configure the following settings.
+
+- Peer
+- VRRP and priority on the interfaces
+- Enable failover and set priority on the service routes
+
+The configuration for the secondary router will be similar but not identical. 
+
+### Assign the Peer
+On the primary router, assign the peer router to which the primary will failover. 
+
+```
+config
+    authority
+        remote-login
+        exit
+        router          router-a
+            name                  router-a
+            location              "router-a Philadephia"
+            location-coordinates  +39.9526-75.1652/
+            inter-node-security   internal
+
+            peer                router-b
+                name            router-b
+                authority-name  Authority128
+                router-name     router-b
+```
+
+### Configure VRRP
+
+Configure node1 on router-a with the following interfaces:
+- lan
+- wan
+- far (this is the interrouter communication link)
+
+Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring the higher priority (100) on the lan and wan interfaces, router-a is identified as the primary router (set with the higher priority). We will configure router-b as the secondary router.
+
+```
+			node                  node1
+                name                      node1
+                asset-id                  f1305f6b-44c3-4b1e-b887-7376efc974d7
+                role                      combo
+                asset-validation-enabled  false
+
+                device-interface          lan
+                    name               lan
+                    type               ethernet
+                    pci-address        0000:00:04.0
+                    capture-filter     len>0
+
+                    vrrp
+                        enabled                 true
+                        vrid                    128
+                        priority                100
+                        advertisement-interval  250
+                    exit
+
+                    network-interface  lan
+                        name          lan
+                        global-id     1
+                        tenant        red
+                        rewrite-dscp  false
+                        source-nat    false
+                        qp-value      30
+                        mtu           1500
+
+                        address       172.16.1.2
+                            ip-address     172.16.1.2
+                            prefix-length  24
+                        exit
+                        address       172.16.1.111
+                            ip-address     172.16.1.111
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+
+                device-interface          wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:00:05.0
+                    capture-filter     len>0
+
+                    vrrp
+                        enabled                 true
+                        vrid                    128
+                        priority                100
+                        advertisement-interval  250
+                    exit
+
+                    network-interface  wan
+                        name                   wan
+                        global-id              3
+                        inter-router-security  aes1
+                        rewrite-dscp           false
+                        source-nat             false
+                        qp-value               30
+                        mtu                    1500
+
+                        address                172.16.2.111
+                            ip-address     172.16.2.111
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+
+                device-interface          far
+                    name               far
+                    type               ethernet
+                    pci-address        0000:00:06.0
+
+                    network-interface  far
+                        name                   far
+                        global-id              2
+
+                        neighborhood           peer
+                            name               peer
+                            peer-connectivity  bidirectional
+                            topology           mesh
+                            vector             peer
+                        exit
+                        inter-router-security  aes1
+                        rewrite-dscp           false
+                        source-nat             false
+                        qp-value               30
+                        mtu                    1500
+
+                        address                172.16.3.2
+                            ip-address     172.16.3.2
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+```
+### Enable Service Route Failover
+
+To preserve session state from the primary router to the secondary router, configure the following service routes. Set `enable-failover` to true.
+
+```
+			service-route        local-route
+                name             local-route
+                service-name     traffic
+                vector           local-vrrp
+                enable-failover  true
+
+                next-hop         node1 wan
+                    node-name    node1
+                    interface    wan
+                exit
+            exit
+
+            service-route        peer-route
+                name             peer-route
+                service-name     traffic
+                vector           peer
+                enable-failover  true
+                next-peer        router-b
+            exit
+```
+
+You must also assign a vector to the service route, and then assign a priority to the vector in the service policy. This priority determines the primary and secondary routers in the HA configuration. 
+
+```
+		service-policy      poc-policy
+            name            poc-policy
+            service-class   Standard
+
+            vector          local-vrrp
+                name        local-vrrp
+                priority    100
+            exit
+
+            vector          peer
+                name        peer
+                priority    97
+            exit
+
+            session-resiliency    revertible-failover
+            peer-path-resiliency  true
+            path-quality-filter   true
+            max-loss              0.5
+            max-latency           250
+            max-jitter            100
+        exit
+```
+
+Configuring session resiliency allows the secondary router to fail back to the primary router once service has been restored. The max-loss, max-latency, and max-jitter settings will determine at what point failover happens. 
+
+## Configure the Secondary Router
+
+Identify the secondary router, and configure the following settings.
+
+- Peer
+- VRRP and priority on the interfaces
+- Enable failover and set priority on the service routes
+
+The differences for the secondary router are the priority values and vrid's. 
+
+### Assign the Peer
+On the secondary router, assign the peer router to which the secondary router will failover when service to the primary router has been restored. 
+
+```
+		router          router-b
+            name                  router-b
+            location              "router-b New York"
+            location-coordinates  +40.7128-074.0059/
+            inter-node-security   internal
+
+            peer                  router-a
+                name            router-a
+                authority-name  Authority128
+                router-name     router-a
+            exit
+```
+### Configure VRRP
+
+Configure node1 on router-b with the following interfaces:
+- lan
+- wan
+- far (this is the interrouter communication link)
+
+Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring the lower priority (97) on the lan and wan interfaces, router-b is identified as the secondary router. It is advised to set a different vrid on the secondary router, to avoid confusion. In this example, we use 95.
+
+```
+node                  node1
+                name                      node1
+                asset-id                  8100f73d-2071-47c3-86cb-07eba002b698
+                role                      combo
+                asset-validation-enabled  false
+
+                device-interface          lan
+                    name               lan
+                    type               ethernet
+                    pci-address        0000:00:04.0
+                    capture-filter     len>0
+
+                    vrrp
+                        enabled                 true
+                        vrid                    95
+                        priority                97
+                        advertisement-interval  250
+                    exit
+
+                    network-interface  lan
+                        name          lan
+                        global-id     4
+                        tenant        red
+                        rewrite-dscp  false
+                        source-nat    false
+                        qp-value      30
+                        mtu           1500
+
+                        address       172.16.1.3
+                            ip-address     172.16.1.3
+                            prefix-length  24
+                        exit
+
+                        address       172.16.1.111
+                            ip-address     172.16.1.111
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+
+                device-interface          wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:00:05.0
+                    capture-filter     len>0
+
+                    vrrp
+                        enabled                 true
+                        vrid                    95
+                        priority                97
+                        advertisement-interval  250
+                    exit
+
+                    network-interface  wan
+                        name                   wan
+                        global-id              6
+                        inter-router-security  aes1
+                        rewrite-dscp           false
+                        source-nat             false
+                        qp-value               30
+                        mtu                    1500
+
+                        address                172.16.2.111
+                            ip-address         172.16.2.111
+                            prefix-length      24
+                        exit
+                    exit
+                exit
+
+                device-interface       far
+                    name               far
+                    type               ethernet
+                    pci-address        0000:00:06.0
+
+                    network-interface  far
+                        name                   far
+                        global-id              5
+
+                        neighborhood           peer
+                            name               peer
+                            peer-connectivity  bidirectional
+                            topology           mesh
+                            vector             peer
+                        exit
+                        inter-router-security  aes1
+                        rewrite-dscp           false
+                        source-nat             false
+                        qp-value               30
+                        mtu                    1500
+
+                        address                172.16.3.3
+                            ip-address         172.16.3.3
+                            prefix-length      24
+                        exit
+                    exit
+                exit
+            exit
+```
+### Enable Service Route Failover
+
+To preserve session state between routers, configure the following service routes. Set `enable-failover` to true.
+
+```
+			service-route        local-route
+                name             local-route
+                service-name     traffic
+                vector           local-vrrp
+                enable-failover  true
+
+                next-hop         node1 wan
+                    node-name    node1
+                    interface    wan
+                exit
+            exit
+
+            service-route        peer-route
+                name             peer-route
+                service-name     traffic
+                vector           peer
+                enable-failover  true
+                next-peer        router-a
+            exit
+```
+
+Assign a vector to the service route, and then assign a priority to the vector in the service policy. The priority determines the primary and secondary routers in the HA configuration. 
+
+```
+		service-policy      poc-policy
+            name            poc-policy
+            service-class   Standard
+
+            vector          local-vrrp
+                name        local-vrrp
+                priority    100
+            exit
+
+            vector          peer
+                name        peer
+                priority    97
+            exit
+
+            session-resiliency    revertible-failover
+            peer-path-resiliency  true
+            path-quality-filter   true
+            max-loss              0.5
+            max-latency           250
+            max-jitter            100
+        exit
+```
+
+Configuring session resiliency allows the secondary router to fail back to the primary router once service has been restored. The max-loss, max-latency, and max-jitter settings will determine at what point failover happens. 
+
+## Sample Stateful VRRP Configuration
+
+The steps above illustrate the differences in a high availability configuration, but do not comprise a full config. The full sample configuration is provided below for your reference. 
+
+```
+config
+    authority
+        remote-login
+        exit
+        router          router-a
+            name                  router-a
+            location              "router-a Philadephia"
+            location-coordinates  +39.9526-75.1652/
+            inter-node-security   internal
+
+            peer                router-b
+                name            router-b
+                authority-name  Authority128
+                router-name     router-b
+            exit
+            system
+                log-level  trace
+            exit
+            node                  node1
+                name                      node1
+                asset-id                  f1305f6b-44c3-4b1e-b887-7376efc974d7
+                role                      combo
+                asset-validation-enabled  false
+
+                device-interface          lan
+                    name               lan
+                    type               ethernet
+                    pci-address        0000:00:04.0
+                    capture-filter     len>0
+
+                    vrrp
+                        enabled                 true
+                        vrid                    128
+                        priority                100
+                        advertisement-interval  250
+                    exit
+                    network-interface  lan
+                        name          lan
+                        global-id     1
+                        tenant        red
+                        rewrite-dscp  false
+                        source-nat    false
+                        qp-value      30
+                        mtu           1500
+
+                        address       172.16.1.2
+                            ip-address     172.16.1.2
+                            prefix-length  24
+                        exit
+                        address       172.16.1.111
+                            ip-address     172.16.1.111
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+                device-interface          wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:00:05.0
+                    capture-filter     len>0
+
+                    vrrp
+                        enabled                 true
+                        vrid                    128
+                        priority                100
+                        advertisement-interval  250
+                    exit
+
+                    network-interface  wan
+                        name                   wan
+                        global-id              3
+                        inter-router-security  aes1
+                        rewrite-dscp           false
+                        source-nat             false
+                        qp-value               30
+                        mtu                    1500
+
+                        address                172.16.2.111
+                            ip-address     172.16.2.111
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+
+                device-interface          far
+                    name               far
+                    type               ethernet
+                    pci-address        0000:00:06.0
+
+                    network-interface  far
+                        name                   far
+                        global-id              2
+
+                        neighborhood           peer
+                            name               peer
+                            peer-connectivity  bidirectional
+                            topology           mesh
+                            vector             peer
+                        exit
+                        inter-router-security  aes1
+                        rewrite-dscp           false
+                        source-nat             false
+                        qp-value               30
+                        mtu                    1500
+
+                        address                172.16.3.2
+                            ip-address     172.16.3.2
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route         local-route
+                name             local-route
+                service-name     traffic
+                vector           local-vrrp
+                enable-failover  true
+
+                next-hop         combo wan
+                    node-name  combo
+                    interface  wan
+                exit
+            exit
+
+            service-route         peer-route
+                name             peer-route
+                service-name     traffic
+                vector           peer
+                enable-failover  true
+                next-peer        router-b
+            exit
+        exit
+
+        router          router-b
+            name                  router-b
+            location              "router-b New York"
+            location-coordinates  +40.7128-074.0059/
+            inter-node-security   internal
+
+            peer                  router-a
+                name            router-a
+                authority-name  Authority128
+                router-name     router-a
+            exit
+
+            system
+                log-level  trace
+            exit
+
+            node                  node1
+                name                      node1
+                asset-id                  8100f73d-2071-47c3-86cb-07eba002b698
+                role                      combo
+                asset-validation-enabled  false
+
+                device-interface          lan
+                    name               lan
+                    type               ethernet
+                    pci-address        0000:00:04.0
+                    capture-filter     len>0
+
+                    vrrp
+                        enabled                 true
+                        vrid                    128
+                        priority                99
+                        advertisement-interval  250
+                    exit
+
+                    network-interface  lan
+                        name          lan
+                        global-id     4
+                        tenant        red
+                        rewrite-dscp  false
+                        source-nat    false
+                        qp-value      30
+                        mtu           1500
+
+                        address       172.16.1.3
+                            ip-address     172.16.1.3
+                            prefix-length  24
+                        exit
+
+                        address       172.16.1.111
+                            ip-address     172.16.1.111
+                            prefix-length  24
+                        exit
+                    exit
+                exit
+
+                device-interface          wan
+                    name               wan
+                    type               ethernet
+                    pci-address        0000:00:05.0
+                    capture-filter     len>0
+
+                    vrrp
+                        enabled                 true
+                        vrid                    128
+                        priority                99
+                        advertisement-interval  250
+                    exit
+
+                    network-interface  wan
+                        name                   wan
+                        global-id              6
+                        inter-router-security  aes1
+                        rewrite-dscp           false
+                        source-nat             false
+                        qp-value               30
+                        mtu                    1500
+
+                        address                172.16.2.111
+                            ip-address         172.16.2.111
+                            prefix-length      24
+                        exit
+                    exit
+                exit
+
+                device-interface       far
+                    name               far
+                    type               ethernet
+                    pci-address        0000:00:06.0
+
+                    network-interface  far
+                        name                   far
+                        global-id              5
+
+                        neighborhood           peer
+                            name               peer
+                            peer-connectivity  bidirectional
+                            topology           mesh
+                            vector             peer
+                        exit
+                        inter-router-security  aes1
+                        rewrite-dscp           false
+                        source-nat             false
+                        qp-value               30
+                        mtu                    1500
+
+                        address                172.16.3.3
+                            ip-address         172.16.3.3
+                            prefix-length      24
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route        local-route
+                name             local-route
+                service-name     traffic
+                vector           local-vrrp
+                enable-failover  true
+
+                next-hop         combo wan
+                    node-name    combo
+                    interface    wan
+                exit 
+            exit
+
+            service-route         peer-route
+                name             peer-route
+                service-name     traffic
+                vector           peer
+                enable-failover  true
+                next-peer        router-a
+            exit
+        exit
+
+        security        aes1
+            name               aes1
+            hmac-cipher        sha256
+            hmac-key           (removed)
+            encryption-cipher  aes-cbc-256
+            encryption-key     (removed)
+            encryption-iv      (removed)
+            encrypt            false
+            hmac               false
+        exit
+
+        service         traffic
+            name            traffic
+            service-group   all
+            description     "traffic service for all"
+            enabled         true
+            tenant          red
+            scope           private
+            security        aes1
+
+            transport       udp
+                protocol    udp
+
+                port-range  443
+                    start-port  443
+                exit
+            exit
+            address         172.16.2.0/24
+
+            access-policy   172.16.1.0/24
+                source      172.16.1.0/24
+                permission  allow
+            exit
+            service-policy  poc-policy
+        exit
+
+        service-policy      poc-policy
+            name            poc-policy
+            service-class   Standard
+
+            vector          local-vrrp
+                name        local-vrrp
+                priority    100
+            exit
+
+            vector          peer
+                name        peer
+                priority    97
+            exit
+
+            session-resiliency    revertible-failover
+            peer-path-resiliency  true
+            path-quality-filter   true
+            max-loss              0.5
+            max-latency           250
+            max-jitter            100
+        exit
+
+        session-type    ping
+            name           ping
+            service-class  Standard
+
+            transport      icmp
+                protocol  icmp
+            exit
+        exit
+    exit
+exit
+
+```
