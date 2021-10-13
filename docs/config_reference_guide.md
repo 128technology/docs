@@ -320,7 +320,8 @@ This sub-element lets the administrators set the behavior for the 128T router's 
 
 | Element | Type | Description |
 | --- | --- | --- |
-| mode | enumeration | Valid values: module, tls. When set to *module*, the 128T router uses an external module for application classification. When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *module*, the 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) |
+| mode | enumeration | Valid values: module, tls, http, all. When set to *module*, the 128T router uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *http*, the SSR will learn applications via HTTP host name parsing. The option *all* will provide the broadest application learning results. |
+
 
 #### Version History:
 | Release | Modification |

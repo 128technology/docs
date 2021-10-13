@@ -5,7 +5,7 @@ sidebar_label: Dual Node High Availability
 
 The SSR provides significant flexibility for high availability configurations. The SSR can deploy multiple software instances (referred to as nodes) within the same single installation, providing high availability across router nodes. And like traditional routers, the SSR software can also be deployed as a single router instance on multiple platforms, with high availability configured in a dual router configuration.  
 
-This document contains the steps for configuring support for configuration of dual or multi-node high availability. In addtion to the shared MAC interface method of dual node high availability, the release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
+This document contains the steps for configuring support for configuration of dual-node high availability. In addtion to the shared MAC interface method of dual node high availability, the release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
 
 With each of these deployment models in version 5.4, there are two significant options to be addressed, which begin with the questions; Do you need stateful failover, or do you need stateless failover? A new service route parameter introduced in version 5.4, [`enable-failover`](#service-route-failover), provides stateful failover on either a VRRP or a shared MAC interface. 
 

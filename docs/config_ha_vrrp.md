@@ -384,7 +384,26 @@ Assign a vector to the service route, and then assign a priority to the vector i
         exit
 ```
 
-Configuring session resiliency allows the secondary router to fail back to the primary router once service has been restored. The max-loss, max-latency, and max-jitter settings will determine at what point failover happens. 
+Configuring session resiliency allows the secondary router to fail back to the primary router once service has been restored. The max-loss, max-latency, and max-jitter settings determine at what point failover happens. 
+
+### Show Command for VRRP Status
+
+VRRP redundancy status (vrrp-active/standby) is displayed in the `show device-interface` output.
+
+```
+========================================
+ test1:10
+========================================
+ Type:                ethernet
+ Forwarding:          true
+ PCI Address:         0000:00:04.0
+ MAC Address:         fa:16:3e:96:e3:ef
+
+ Admin Status:        up
+ Operational Status:  up
+ Provisional Status:  up
+ Redundancy Status:   vrrp-active
+```
 
 ## Sample Stateful VRRP Configuration
 
