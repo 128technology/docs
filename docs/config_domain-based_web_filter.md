@@ -169,12 +169,18 @@ Learning mode is used to gather statistics about a domain or category. You can s
 To configure Learning Mode via the GUI:
 1. Select a router.
 2. Scroll down to Router Settings and click Application Identification Settings.
-[Application ID Setting Button](/img/config_app_learning1.png)
+
+![Application ID Setting Button](/img/config_app_learning1.png)
+
 3. Set `enabled` to `true`.
-[App ID Basic Info](/img/config_app_learning2.png)
+
+![App ID Basic Info](/img/config_app_learning2.png)
+
 4. Under Application Identification, select ADD.
 5. Select a type of application to identify. In most cases, selecting `all` will provide the best data set.
-[App Id Dropdown](/img/config_app_learning3.png)
+
+![App Id Dropdown](/img/config_app_learning3.png)
+
 6. Validate and Commit the changes. 
 
 If Learning Mode is disabled, statistics are only gathered for categories/domains that are configured in a service.
