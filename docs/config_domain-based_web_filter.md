@@ -51,6 +51,12 @@ Use the Generate Application Idenfication Categories toggle to generate a set of
 
 ![Generate Application Identification Categories](/img/dbwf_gen_categories.png)
 
+### Auto-Update the Domain List
+
+Application Identification is configured to automatically download updated domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel for each router. 
+
+![Application Data Updates](/img/dbwf_app-id_updates.png)
+
 ## Configuring Domain-based Web Filtering
 
 To enable Domain-based Web Filtering, you must configure a parent-level service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 

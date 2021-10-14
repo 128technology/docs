@@ -321,12 +321,17 @@ This sub-element lets the administrators set the behavior for the 128T router's 
 | Element | Type | Description |
 | --- | --- | --- |
 | mode | enumeration | Valid values: module, tls, http, all. When set to *module*, the 128T router uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *http*, the SSR will learn applications via HTTP host name parsing. The option *all* will provide the broadest application learning results. |
+| auto-update | configuration container | Default is enabled. Enables automatic update of application-identification domain dataset.  Contains configurable sub-elements. |  
+| update-time | uint8 | Range is 0-23. Default is 2 AM. Set the (local) time to update app-id dataset. |
+| update-jitter | uint8 | Range is 0-30. Default is 15. The max random jitter applied to the update-time. |
+| update-frequency | eumumeration | Default is weekly. Choose Daily, Weekly, or Monthly. |  
 
 
 #### Version History:
 | Release | Modification |
 | --- | --- |
 | 3.2.0 | Introduced |
+| 5.4.0 | Added auto-update option |
 
 ## applies-to
 
