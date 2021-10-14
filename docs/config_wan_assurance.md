@@ -20,6 +20,8 @@ High Level Steps:
 
 This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist Wan Assurance.
 
+For detailed information about Mist WAN Assurance, please refer to the [Mist WAN Assurance documentation](https://www.juniper.net/us/en/products/cloud-services/wan-assurance.html). 
+
 1. Create an account on the [MIST portal](https://integration.mistsys.com/). 
 
 2. Create an organization for the authority. 
