@@ -17,7 +17,6 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 | --- | --- |
 | Release 5.1 | [5.1.6](release_notes_128t_5.1.md#release-516) |
 | Release 4.5 | [4.5.11](release_notes_128t_4.5.md#release-4511) |
-| Release 4.3 | [4.3.12](release_notes_128t_4.3.md#release-4312) |
 
 ## Limited Availability 
 
