@@ -7,7 +7,7 @@ The following configuration procedures can be used to initiate VRF learning usin
 
 ## Add VRF Objects 
 
-To add VRF learning using BGP, add VRF objects to the `routing default-instance`, and configure BGP as the routing protocol. This allows the 128T BGP instance to peer with a remote peer and learn routes for the VRF.
+To add VRF learning using BGP, add VRF objects to the `routing default-instance`, and configure BGP as the routing protocol. This allows the SSR BGP instance to peer with a remote peer and learn routes for the VRF.
 ```
 router         Test
     routing    default-instance
@@ -39,7 +39,7 @@ When VRF static routes are redistributed into BGP (using `redistribute-static`),
 
 ### Tenant to VRF Mapping
 
-128T routers use Tenants to segment L3 traffic in the forwarding plane. VRF provides L3 segmentation at the routing layer. A 128T router does not have any VRF definitions associated with an interface. Instead, an interface can be assigned a tenant to denote all traffic coming from that interface to be classified as that tenant. The VRF-Tenant mapping is used for redistributing connected routes and for mapping services.
+SSR routers use Tenants to segment L3 traffic in the forwarding plane. VRF provides L3 segmentation at the routing layer. An SSR router does not have any VRF definitions associated with an interface. Instead, an interface can be assigned a tenant to denote all traffic coming from that interface to be classified as that tenant. The VRF-Tenant mapping is used for redistributing connected routes and for mapping services.
 
 Use the following example to create a basic configuration for mapping a tenant to a VRF:
 ```

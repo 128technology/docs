@@ -1,11 +1,31 @@
 ---
-title: VRF Learning via OSPF
-sidebar_label: VRF Learning via OSPF
+title: VRF Learning
+sidebar_label: VRF Learning
 ---
 
-The following configuration procedures can be used to initiate VRF learning using OSPF. 
+The following configuration procedures can be used to initiate VRF learning using static routes, BGP, and OSPF. Configuration can take place at the global/default VRF level, or inside a VRF container. 
 
-## Add VRF Objects 
+With VRF, you have the ability to have multiple, independent instances of both BGP and OSPF. When you are managing multiple networks, VRF learning via provides the ability learn and isolate these networks from one another, so that traffic destined for an internal private IP address does not get routed to a different network.  
+
+## Add VRF Objects Using BGP
+
+To add VRF learning using BGP, add VRF objects to the `routing default-instance`, and configure BGP as the routing protocol. This allows the SSR BGP instance to peer with a remote peer and learn routes for the VRF.
+```
+router         Test
+    routing    default-instance
+        vrf    red
+            name    red
+            routing-protocol        bgp
+                type                bgp
+                local-as            1
+                router-id 10.1.1.1
+                neighbor
+                    neighbor-address  10.1.1.2
+                    neighbor-as       3000
+```
+In the example above, all routes learned via BGP will be installed within the VRF table Red. 
+
+## Add VRF Objects Using OSPF
 
 To add VRF learning using OSPF, add VRF objects to the `routing default-instance`, and configure an OSPF instance with the `instance-id` of 1. This allows the SSR OSPF instance to dynamically learn and advertise routes to other routers by way of Link State Advertisements (LSAs). 
 ```
@@ -89,21 +109,22 @@ router         Test
 ```
 ### Redistributing Static Routes
 
-When VRF static routes are redistributed into OSPF (using `redistribute-static`), only the static routes within that VRF are redistributed into OSPF. When OSPF is configured outside a VRF directly under `routing default-instance`, the static routes from the global (default) route table are distributed. The `static-route` command is used to populate static routes in the respective VRF table.
+When VRF static routes are redistributed into BGP (using `redistribute-static`), only the static routes within that VRF are redistributed into BGP. When BGP is configured outside a VRF directly under `routing default-instance`, the static routes from the global (default) route table are distributed. The `static-route` command is used to populate static routes in the respective VRF table.
 
 ### Tenant to VRF Mapping
 
-SSR routers use Tenants to segment L3 traffic in the forwarding plane. VRF provides L3 segmentation at the routing layer. An SSR router does not have any VRF definitions associated with a network interface. Instead, network interfaces are configured with names matching tenants in a VRF. If the network interface tenant does not match any explicitly configured VRF's, then the network interface belongs to the global/default VRF.
+The following information pertains to tenant to VRF mapping using static routes, BGP, or OSPF.
+
+SSR routers use Tenants to segment L3 traffic in the forwarding plane. VRF provides L3 segmentation at the routing layer. An SSR router does not have any VRF definitions associated with a network interface. Instead, network interfaces are configured with names matching tenants in a VRF. If the network interface tenant does not match any explicitly configured VRF's, then the network interface belongs to the global/default VRF. Keep in mind that a tenant can only be mapped to one VRF.
 
 For example, an VRF can have a tenant-name `128`. This would match network-interfaces with a tenant of `engineeering.128` and a network-interface with a tenant of `finance.128`.
 
-In the following example, all traffic coming from the interface is classified as that tenant. Using vrf "blue" as a reference, the tenant-name "eng" must exist on lan2 and the VRF. The VRF-Tenant mapping is used for redistributing connected routes and for mapping services.
-
+In the following example, all traffic coming from the interface is classified as that tenant. Using vrf `blue` as a reference, the tenant-name `eng` must exist on lan2 and the VRF. The VRF-Tenant mapping is used for redistributing connected routes and for mapping services.
 ```
     router Test
         routing default-instance
-            vrf blue
-                tenant-name eng
+            vrf red
+                tenant-name finance
 ```
 ```
             network-interface  lan
@@ -137,7 +158,6 @@ In the following example, all traffic coming from the interface is classified as
                         ip-address     11.11.2.210
                         prefix-length  29
 ```
-A tenant can only be mapped to one VRF.
 
 ## Service Mapping
 
@@ -151,7 +171,7 @@ router         Test
     routing		default-instance
         vrf			red
             tenant-name		finance
-        vrf         blue
+        vrf               	blue
             tenant-name		eng
     
 Service  web
@@ -202,6 +222,16 @@ VRF serves as a routing table for each tenant to ensure that there is a route to
 ## Show Commands
 The following show commands have been extended to specify `vrf`. For specific use examples, refer to the linked section in the Command Line Reference guide.
 
+#### BGP
+
+[`show bgp`](cli_reference.md#show-bgp)
+
+[`show bgp neighbors`](cli_reference.md#show-bgp-neighbors)
+
+[`show bgp summary`](cli_reference.md#show-bgp-summary)
+
+#### OSPF
+
 [`show ospf`](cli_reference.md#show-ospf)
 
 [`show ospf neighbors`](cli_reference.md#show-ospf-neighbors)
@@ -212,8 +242,13 @@ The following show commands have been extended to specify `vrf`. For specific us
 
 [`show ospf database`](cli_reference.md#show-ospf-database)
 
+
+
 [`show fib`](cli_reference.md#show-fib)
 
 [`show rib`](cli_reference.md#show-rib)
 
 [`show vrf`](cli_reference.md#show-vrf)
+
+[`clear bgp vrf`](cli_reference.md#clear-bgp)
+
