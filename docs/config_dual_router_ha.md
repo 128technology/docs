@@ -1,15 +1,15 @@
 ---
-title: Configuring Dual Router High Availability
-sidebar_label: Dual Router High Availability
+title: Configuring Dual Router High Availability using iBGP
+sidebar_label: Dual Router High Availability using iBGP
 ---
 
 The SSR provides significant flexibility for high availability configurations. Like traditional routers, the SSR software can be deployed as a single router instance on multiple platforms, with high availability configured in a dual router configuration. Additionally, the SSR can deploy multiple software instances (referred to as nodes) within the same single installation, providing high availability across router nodes.  
 
-The release of the 5.4 software includes [VRRP as a configuration option](config_ha_vrrp.md) as well as a new service route parameter, `enable-failover`, that provides stateful failover on both the dual router and the dual node HA configuration. For configuration options using VRRP with stateful behavior, please refer to [Configuring Stateful Dual Router High Availability and VRRP](config_ha_vrrp.md)
+The release of the 5.4 software includes [VRRP as a configuration option](config_ha_vrrp.md) as well as a new service route parameter, `enable-failover`, that provides stateful failover on the dual node HA configuration. For configuration options using VRRP, please refer to [Configuring Dual Router High Availability and VRRP](config_ha_vrrp.md)
 
 ## Dual Router High Availability
 
-This document covers dual router high availability - two instances of the SSR software each configured as separate routers. This is characterized by:
+This document covers dual router high availability using iBGP - two instances of the SSR software each configured as separate routers. This is characterized by:
 
 - An iBGP interface shared between the two devices in lieu of a "fabric" interface in the dual node deployment.
 - No `shared-phys-address` (and hence no shared interfaces) between the two devices. Interface protection in a dual router HA deployment is accomplished using traditional routing protocols (Layer 3) rather than IP/MAC takeover (Layer 2).

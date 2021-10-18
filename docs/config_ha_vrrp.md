@@ -1,11 +1,11 @@
 ---
-title: Configuring Stateful Dual Router High Availability and VRRP
-sidebar_label: Stateful Dual Router High Availability and VRRP
+title: Configuring Dual Router High Availability and VRRP
+sidebar_label: Dual Router High Availability and VRRP
 ---
 
-The release of the 5.4 software includes VRRP as a configuration option, as well as a new service route parameter, `enable-failover`, that provides stateful failover on both the dual router and the dual node HA configuration. Configuring high availability now can begin with the questions; Do you need stateful failover, or do you need stateless failover? 
+The release of the 5.4 software includes VRRP as a configuration option, as well as a new service route parameter, `enable-failover`, to provide failover on both the dual router and the dual node HA configuration. 
 
-The following sample configuration provides context for using vrrp and enabling service route failover to provide a stateful failover on a dual router high availability configuration. 
+The following sample configuration provides context for using vrrp and enabling service route failover to provide failover on a dual router high availability configuration. 
 
 ## Configure the Primary Router
 
@@ -42,9 +42,9 @@ config
 Configure node1 on router-a with the following interfaces:
 - lan
 - wan
-- far (this is the interrouter communication link)
+- far (the inter-router communication link)
 
-Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring the higher priority (100) on the lan and wan interfaces, router-a is identified as the primary router (set with the higher priority). We will configure router-b as the secondary router.
+Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring VRRP on `router-a` with a higher priority (100), `router-a` is identified as the primary router. We will configure `router-b` as the secondary router.
 
 ```
 			node                  node1
@@ -146,7 +146,7 @@ Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring 
 ```
 ### Enable Service Route Failover
 
-To preserve session state from the primary router to the secondary router, configure the following service routes. Set `enable-failover` to true.
+Set `enable-failover` to true. This will enable failover between service routes on router-a.  
 
 ```
 			service-route        local-route
@@ -170,7 +170,7 @@ To preserve session state from the primary router to the secondary router, confi
             exit
 ```
 
-You must also assign a vector to the service route, and then assign a priority to the vector in the service policy. This priority determines the primary and secondary routers in the HA configuration. 
+Assign a vector to the service route, and then assign a priority to the vector in the service policy. This priority determines service route preference, with the higher priority being the preferred route. 
 
 ```
 		service-policy      poc-policy
@@ -196,7 +196,7 @@ You must also assign a vector to the service route, and then assign a priority t
         exit
 ```
 
-Configuring session resiliency allows the secondary router to fail back to the primary router once service has been restored. The max-loss, max-latency, and max-jitter settings will determine at what point failover happens. 
+Configuring session resiliency allows the traffic to fail back to the primary service route once the service route is operational again. The max-loss, max-latency, and max-jitter settings will determine at what point failover happens. 
 
 ## Configure the Secondary Router
 
@@ -231,7 +231,8 @@ Configure node1 on router-b with the following interfaces:
 - wan
 - far (this is the interrouter communication link)
 
-Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring the lower priority (97) on the lan and wan interfaces, router-b is identified as the secondary router. It is advised to set a different vrid on the secondary router, to avoid confusion. In this example, we use 95.
+Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring the lower priority (97) on the lan and wan interfaces, router-b is identified as the secondary router. On a dual router HA setup, the vrids must be the same on the two redundant/VRRP devices - `router-a` and `router-b` `lan` device interfaces must have the same vrid, as well as each `wan` device interface vrid being the same.
+NOTE: `lan` devices and `wan` devices can have the same vrid as they are on different networks/broadcast domains. It is recommended to use different vrids to avoid confustion. In this example, we use 95.
 
 ```
 node                  node1
@@ -358,7 +359,7 @@ To preserve session state between routers, configure the following service route
             exit
 ```
 
-Assign a vector to the service route, and then assign a priority to the vector in the service policy. The priority determines the primary and secondary routers in the HA configuration. 
+Assign a vector to the service route, and then assign a priority to the vector in the service policy. This priority determines service route preference, with the higher priority being the preferred route. 
 
 ```
 		service-policy      poc-policy
@@ -384,7 +385,7 @@ Assign a vector to the service route, and then assign a priority to the vector i
         exit
 ```
 
-Configuring session resiliency allows the secondary router to fail back to the primary router once service has been restored. The max-loss, max-latency, and max-jitter settings determine at what point failover happens. 
+Configuring session resiliency allows the traffic to fail back to the primary service route once the service route is operational again. The max-loss, max-latency, and max-jitter settings will determine at what point failover happens.
 
 ### Show Command for VRRP Status
 
@@ -405,7 +406,7 @@ VRRP redundancy status (vrrp-active/standby) is displayed in the `show device-in
  Redundancy Status:   vrrp-active
 ```
 
-## Sample Stateful VRRP Configuration
+## Sample VRRP Configuration
 
 The steps above illustrate the differences in a high availability configuration, but do not comprise a full config. The full sample configuration is provided below for your reference. 
 
