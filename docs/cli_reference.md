@@ -4458,7 +4458,7 @@ show config exports [<name>] [<flat>]
 
 #### Description
 
-This command lists the set of exported configurations that are stored on your 128T router. 
+This command lists the set of exported configurations that are stored on your SSR router. 
 
 The _show config exports_ command has two optional flags: _name_ and _flat_. Use the _name_ flag to identify a specific configuration to display. Adding the _flat_ flag will output the configuration as a series of individual, fully qualified configuration statements.
 
@@ -5250,27 +5250,29 @@ The asterisk next to the date indicates the current month and therefore a partia
 | ------- | ----------------------------|
 | 1.1.0   | This feature was introduced |
 
-## `show events alarm`
+## `show events`
 
-Show alarm events from the historical events database.
+Show events from the historical events database.
 
 #### Usage
 
 ```
-show events alarm [{router <router> | resource-group <resource-group>}] [from <from>] [to <to>] [rows <rows>] [limit <limit>] [force]
+show events [{router <router> | resource-group <resource-group>}] [from <from>] [to <to>] [type <type>] [flat] [rows <rows>] [limit <limit>] [force] [<verbosity>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| flat | Display configuration with full paths on each line instead of as a hierarchy. Only applicable for &#x27;admin.running_config_change&#x27; events. |
 | force | Skip confirmation prompt. Only required when targeting all routers |
 | from | Only show events after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] (default: 1970-01-01 00:00:00) |
-| limit | The total number of alarm events to retrieve [type: int] |
+| limit | The total number of events to retrieve [type: int] |
 | resource-group | The name of the resource group |
-| router | The name of the router for which to display alarm events (default: &lt;current router&gt;) |
-| rows | The number of alarm events to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| router | The name of the router for which to display events (default: &lt;current router&gt;) |
+| rows | The number of events to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | to | Only show events before the provided time. You can use the provided standard timestamps, such as 45m, 1d, or 1mo; or enter a value [type: timestamp] |
+| type | Filter events based on the event type and subtype |
 
 ##### See Also
 
@@ -5280,9 +5282,24 @@ show events alarm [{router <router> | resource-group <resource-group>}] [from <f
 
 #### Description
 
-The _show events alarm_ command displays various event records that the SSR collects during operation. As of software version 3.1, the only event type that is capable of being shown is the alarm history.
+The _show events_ command displays various event records that the SSR collects during operation. 
 
 The output can be optionally restricted to specific time windows using the `from` and `to` qualifiers. Because this command can generate a lot of output, the `rows` limiter is particularly useful on busy systems.
+
+Categories can be enabled or disabled individually in `config &gt; authority &gt; router &gt; audit`. There are five main top-level categories that can be filtered using the `type` argument.
+
+* admin: A catch-all category for events that are triggered by a user&#x27;s action.
+
+* alarm: A historical record of &#x27;show alarms&#x27; including a unique event each time an alarm was created and cleared.
+
+* system: A catch-all category for events that the system creates itself.
+
+* traffic: A record of whether traffic was allowed or denied. By default this is disabled.
+
+* provisioning: A historical record of `show assets` including unique events for each internal state transition.
+
+Additional filtering can be done by specifying a dot (.) followed by a subtype. For example, `type admin.running_config_change` will only show configuration change events, while `type system.ntp_adjustment` will only display NTP adjustment events.
+The output can be optionally restricted to specific time windows using the `from` and `to` qualifiers. Because this command can generate a lot of output, the `rows` and `limit` limiters are particularly useful on busy systems.
 
 #### Example
 
@@ -5304,6 +5321,12 @@ Fri 2017-07-21 11:59:51 EDT
 
 Completed in 0.11 seconds
 ```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 #### Version History
 
@@ -7815,7 +7838,7 @@ show security key-status [{router <router> | resource-group <resource-group>}] [
 
 #### Description
 
-The _show security key-status_ subcommand displays information and statistics related to the SSR&#x27;s security rekeying feature. It will indicate the current key index (which will be common among all routers managed by an SSR conductor) and relevant statistics on when the last rekey event occurred, when the next will occur, etc.
+The _show security key-status_ subcommand displays information and statistics related to the SSR's security rekeying feature. It will indicate the current key index (which will be common among all routers managed by an SSR conductor) and relevant statistics on when the last rekey event occurred, when the next will occur, etc.
 
 #### Example
 
@@ -8209,7 +8232,7 @@ show sessions top bandwidth [force] {router <router> | resource-group <resource-
 
 #### Description
 
-The _top bandwidth_ subcommand will list, in order, the top ten highest consumers of bandwidth among all active sessions. This is useful to understand the current utilization on your 128T network resources.
+The `top bandwidth` subcommand will list, in order, the top ten highest consumers of bandwidth among all active sessions. This is useful to understand the current utilization on your SSR network resources.
 
 #### Example
 
