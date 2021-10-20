@@ -11,6 +11,123 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 5.1.6
+
+**Release Date:** October 6, 2021
+
+### New Features
+
+- **I95-26075 Generate PCAP directly from Session table:** A button has been added to both the Session Debug table and the Top Sessions table that allows the user to create a PCAP file containing the specific row data from each table.
+------
+- **I95-41457 OSPF VRF:** Multiple independent OSPF configurations are supported (zero or one per VRF), as well as on the default VRF. The `show ospf` commands accept an optional `vrf name` argument, and display the `vrf name` column appropriately. 
+------
+- **I95-41905 Download Tech Support Info to the About page:** A button has been added to the Info page in the GUI that generates and downloads a zip file containing the Tech Support information. 
+
+### Resolved Issues
+
+- **I95-39113 Show Resources assigned to each Resource Group:** The Resource Group configuration page in the GUI now displays a list of the resources associated with the Resource Group.
+------
+- **I95-39967 Vulnerability Report Issues:** All identified CVE's have been addressed.
+------
+- **I95-40128 Performance Monitoring Erroneously Measuring Loss:** Resolved an issue where the first packets on a new flow were not being properly accounted for when collecting path metrics. 
+------
+- **I95-41109 GO REST API Handlers contain extra information:** The GO REST API journals have been pared down to provide relevant information. 
+------
+- **I95-41369 TCP sessions are not established when adaptive encryption is enabled on a router in Azure:** Resolved an issue where the Firewall detector was not identifying links that require UDP transform. 
+------
+- **I95-41634 `show udp-transform` not displaying the network interface of each peer path:** The `show udp-transform` command has been updated to fully display peer path info on the network interface. 
+------
+- **I95-41702 Upgrade button on Router page not working:** This issue has been resolved. 
+------
+- **I95-41703 Sorting issue on Router page:** Resolved an issue with grouping routers on the Router page.
+------
+- **I95-41704 Node processes using excessive CPU during upgrade:** Changes made to initiate Swagger generation only when a file is updated or changed.
+------
+- **I95-41855 Automated Provisioner timeout conflict:** Resolved an issue where the Automated Provisioner would send duplicate highstate requests during the connected state, which could cause highstate failures.
+------
+- **I95-41899 MOS score displayed incorrectly:** Scores are now calculated and displayed correctly.
+------
+- **I95-42059 SSH local port forwarding tunnels can get restarted and fail to bind:** This issue has been resolved.
+------
+- **I95-42104 Conductor was showing no pending changes on the GUI after upgrade:** Resolved an issue with a missing API call.
+------
+- **I95-42138 Issue during reverse domain lookups:** Lookups now handle reverse domain input more elegantly. 
+------
+- **I95-42225 `show-udp-transform` output garbled:** Resolved an issue where the output contained multiple semicolons.
+------
+- **I95-42248 Download error when updating installer:** Resolved an error where a download failed because the download operation failed to update the installer when the Conductor reset the connection.
+------
+- **I95-42293 Upgrading from 4.5.x to 5.1.x causing a validation error with VRF:** A new authority configuration option `backwards-compatible-vrf-bgp-tenants` is available for enabling the VRF BGP-over-SVR feature while routers running an older software release are still present.
+------
+- **I95-42408 Firewall Detector fails to restart timer if auto-detect timeout is greater than 30 seconds:** Firewall detector has been updated to handle timers greater than 30 seconds.
+------
+- **I95-42411 Rare Race condition upon Re-installation:** Resolved an issue where files were not being completely removed on uninstall and re-install. 
+------
+- **I95-42465 Conflux consuming high CPU resources:** Conflux now gracefully handles gap resolution of non-metrics topics.  
+
+### Caveats
+
+- **I95-41574 Conductor Rollback:** In a high availability configuration where 5.1.6 has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
+
+## Release 5.1.5
+**Release Date:** August 13, 2021
+
+### New Features
+
+- **I95-31265 Software Management Button on Router Page:** Users are now able to upgrade a single router from the Router Page using a button located at the top of the Router Page.
+------
+- **I95-35347 Add hostname to GUI DHCP lease table:** A Hostname column has been added to the GUI in the DHCP Server Table for DHCP Leases.
+------
+- **I95-39236/I95-40804/I95-41531 Session capture to produce unique pcap files:** A capture tag has been added to the session-capture feature. If a session-capture is created with a tag, that tag is used to name the pcaps throughout the topology, instead of the service name. Users are now able to initiate this capture from the Services page in the GUI and the command line.
+------
+- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md/#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
+------
+- **I95-40776 GUI self diagnostics for client connectivity:** A client connectivity error now diplays a dialog with several steps intended to help the user diagnose issues.
+
+### Resolved Issues
+
+- **I95-36099 Time range selection for analytics in the GUI is difficult to use:** Replaced with browser-native date-time selector.
+------
+- **I95-38731 Mars systemd service fails to start after too many restarts:** This issue has been resolved.
+------
+- **I95-40009 Not responding to ARP request from source 0.0.0.0. on a DHCP interface:** The SSR now responds to ARP requests from source 0.0.0.0.
+------
+- **I95-40016 Flow-migration with adapative-encryption may cause packet drops:** Resolved an `Adaptive encryption out of order` modification error causing packet drop on HA fabric.
+------
+- **I95-40035/I95-40030 Jute maxbuffer limit for running/candidate configurations:** Created an alarm when the zookeeper jute buffer exceeds a threshold (75%) and an alert to change the system environment config.
+------
+- **I95-40060 `show session captures` not displaying active captures:** Updated the query argument to correctly display session captures for all services.
+------
+- **I95-40468 Session Optimization incompatibility with Application ID:** Resolved an incompatibility between Application Identification and Session Optimization.
+------
+- **I95-40624 Occasional failures in time-based HMAC:** This issue has been resolved.
+------
+- **I95-40894 Firewall pinhole false-positives:** Added an acceptable loss of packets threshold for Firewall Pinhole tests.
+------
+- **I95-40936 Cannot `select all` in the GUI Session Capture screen:** GUI Session Capture table now has a **select all** checkbox in the header of the checkbox column.
+------
+- **I95-41006 `show top sources` command is unable to show more than 50 rows:** This issue has been resolved. 
+------
+- **I95-41105 Race condition causes peer path status to be down:** This issue has been resolved. 
+------
+- **I95-41194 Log generated on the conductor is missing output of some commands:** The `show alarms` command now uses the local router name in save-tech-support-info.
+------
+- **I95-41198 Add loading indicator to plugin details page:** A spinner has been added and fields are disabled during loading. 
+------
+- **I95-41214 GUI Table visual issues:** All tables now use the full height of their container.
+------
+- **I95-41235 Router state indicator is not consistent across pages:** Resolved an issue where the Status Indicator was always showing unknown.
+------
+- **I95-41270 show dhcp v6 and prefix-delegation commands not working:** This issue has been resolved. 
+------
+- **I95-41364 Juniper and Customer logo overlap:** Customer logos are fully resolved before loading. 
+------
+- **I95-41518 `Enabled` switch is not styled/themed properly when creating a new template:** The **Enabled** switch is now colored with the appropriate styles.
+------
+- **I95-41556 High number of AP download events:** Fixed an issue where both nodes in an HA Conductor were generating duplicate provisioning events. Added asset ID and a request ID to all provisioning events and the version to download and upgrade provisioning events.
+------
+- **I95-41581 Upgrading an HA router may result in an incomplete FIB:** Upgrading an HA router from release 4.5 (or earlier) to 5.1 (or later) may result in an incomplete FIB on the 4.5 router node for service prefixes that are not matching any RIB entries. The same can occur for a software version rollback in the reverse direction.
+
 ## Release 5.1.4
 **Release Date:** July 7, 2021
 
@@ -60,7 +177,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40429 Unable to make local router changes:** Resolved an issue where any local changes were overwritten immediately, rather than when the configuration on the conductor was committed.
 ------
-- **I95-40435 Loss of HA headend after configuration changes to spoke:** Resoved an issue where configuration changes to traffic-engineering when HA is enabled force the interface into standby mode.
+- **I95-40435 Loss of HA headend after configuration changes to spoke:** Resolved an issue where configuration changes to traffic-engineering when HA is enabled force the interface into standby mode.
 ------
 - **I95-40460 The Download Quickstart link in Firefox does not download the file:** This issue has been resolved. 
 ------
@@ -278,7 +395,7 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 ------
 - **I95-34443 Provisioner status in router dialog not matching the Asset status in router page:** Asset Reconciliation now takes place automatically every 1.5 minutes in the GUI to assure the states of all assets are correctly reflected in the UI.
 ------
-- **I95-35521 Ambigious validation error:** Errors now more clearly identify the source of the error.
+- **I95-35521 Ambiguous validation error:** Errors now more clearly identify the source of the error.
 ------
 - **I95-35646 Wrong date for weekday in date picker:** The date-picker logic has been updated to resolve this issue. 
 ------
@@ -344,7 +461,7 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 ------
 - **I95-38963 Address sudo CVE-2021-3156:** Upgraded to later version.
 ------
-- **I95-38986 Template parse error is difficult to find:** Added additonal context to the error to help identify.
+- **I95-38986 Template parse error is difficult to find:** Added additional context to the error to help identify.
 ------
 - **I95-39011 AutomatedProvisioner process consuming 300%:** Resolved by increasing the timeout for local rpm queries. 
 ------
