@@ -10,6 +10,7 @@ sidebar_label: 'Configuration Templates'
 | 4.5.0   | This feature was introduced into 128T-4.5.0 |
 | 4.5.5   | Configuration Wizard was added              |
 | 4.5.10  | network_hosts filter was added              |
+| 5.4.0   | Template Globals was added                  |
 Configuration templates allow administrators to automate the configuration of top level resources (e.g. Routers, Tenants, Services, etc). There are two modes of templating configuration: **Basic** and **Advanced**. Basic mode is intended for simple templates that don't require complex logic. Advanced mode, on the other hand, exposes the full power of the underlying templating language to the administrator.
 
 ## Creating a Template
@@ -324,7 +325,48 @@ They could then be looped over like so:
 {% endfor %}
 ```
 
+### Global Variables
+Global template variables allow you to define a set of variables that can be accessed from any advanced mode template. The global variables are defined via a free-form JSON blob, they can be accessed by clicking the following icon on the template index page:
+![templates_generate_btn](/img/templates_globals_btn.png)
 
+That will bring you to the global variables editor:
+![templates_generate_btn](/img/templates_globals_editor.png)
+
+Global variables are merged with any local variables defined on the template. It is important to avoid name collisions between global and local variables, or encapsulate all global variables in an object to reduce the likelihood of a collision:
+```
+{
+  "globals": {
+    "iCantCollideWithLocalVariablesNow": "foo"
+  }
+}
+```
+
+You can reference global variables just as if they were local variables, no special syntax is required.
+
+#### Dynamic Paths to Global Variables
+Sometimes it may be beneficial to use a local variable in the path to a global variable. For example, say your global variables have a map of site name to IP address:
+```
+{
+  "ipMap": {
+    "Site1_IP": "192.168.1.1"
+  }
+}
+``` 
+
+And lets say your local variables contain a site name, for example:
+```
+    "SiteName": "Site1"
+``` 
+
+You can use the replace filter in Liquid to build the key in the lookup map:
+```
+{% assign lookupKey = '%1_IP' | replace:'%1',SiteName %}
+```
+
+Then you can assign the IP from global map to a local variable:
+```
+{% assign localIP = ipMap[lookupKey] %}
+```
 
 ## Conversion Between Modes
 
