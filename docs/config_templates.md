@@ -3,14 +3,6 @@ title: 'Configuration Templates'
 sidebar_label: 'Configuration Templates'
 ---
 
-#### History
-
-| Release | Modification                                |
-| ------- | ------------------------------------------- |
-| 4.5.0   | This feature was introduced into 128T-4.5.0 |
-| 4.5.5   | Configuration Wizard was added              |
-| 4.5.10  | network_hosts filter was added              |
-| 5.4.0   | Template Globals was added                  |
 Configuration templates allow administrators to automate the configuration of top level resources (e.g. Routers, Tenants, Services, etc). There are two modes of templating configuration: **Basic** and **Advanced**. Basic mode is intended for simple templates that don't require complex logic. Advanced mode, on the other hand, exposes the full power of the underlying templating language to the administrator.
 
 ## Creating a Template
@@ -21,7 +13,11 @@ On the templates page you will see a list of your current templates, or a button
 
 Next fill out the information for your template and click **Save**: ![templates_new](/img/templates_new.png)
 
-You will now be returned to the list of templates and see your newly created template. If you click into it, you will see the message "_Template is empty, copy configuration into the template to populate it._". Follow the steps in [Copying Configuration into Template](#copying-configuration-into-a-template) to learn how to populate it with configuration.
+### Adding Help for a Template
+
+The Help field allows you to add help information to your configuration template. This is optional, and can be simple user instructions or detailed steps. Enter text, or use Markdown to format the text. Click **Save** when you are done. 
+
+You are returned to the list of templates to see your newly created template. Cicking into the template displays the message "_Template is empty, copy configuration into the template to populate it._". Follow the steps in [Copying Configuration into Template](#copying-configuration-into-a-template) to learn how to populate it with configuration.
 
 ## Copying Configuration into a Template
 
@@ -437,3 +433,13 @@ Templates support import and export functionality, both in basic and advanced mo
 ## Backing Up Templates / Storage Mechanism
 
 Templates are stored on disk as JSON in the following location: `/etc/128technology/sync/templates.json`. This file can be backed up, restored, or edited. While the 128T Networking Platform does watch this file for changes and updates it's state, it is not recommended to edit this file directly as a means to configure templates.
+
+
+#### History
+
+| Release | Modification                                |
+| ------- | ------------------------------------------- |
+| 4.5.0   | This feature was introduced into 128T-4.5.0 |
+| 4.5.5   | Configuration Wizard was added              |
+| 4.5.10  | network_hosts filter was added              |
+| 5.4.0   | Template Globals and User-defined Help were added |
