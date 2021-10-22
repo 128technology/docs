@@ -320,6 +320,35 @@ They could then be looped over like so:
   }{%- if forloop.last == false -%},{%- endif %}
 {% endfor %}
 ```
+#### The `network_prefix` Filter
+The `network_prefix` filter takes a string representation of a network in CIDR format and returns the prefix as a number:
+
+`'192.168.1.0/24'` produces `24`
+
+#### The `usable_ips` Filter
+The `usable_ips` filter takes a string representation of a network in CIDR format and returns an array of usable IPs in the network. The network and broadcast addresses are not present in the array:
+
+`'192.168.1.0/24'` produces `['192.168.1.1, 192.168.1.2, ..., '192.168.1.254']`
+
+#### The `mask_to_prefix_length` Filter
+The `mask_to_prefix_length` filter takes a netmask and returns the CIDR prefix length:
+
+`'255.255.255.0'` produces `24`
+
+#### The `prefix_length_to_mask` Filter
+The `prefix_length_to_mask` filter takes a CIDR prefix length and returns the netmask:
+
+`24` produces `'255.255.255.0'`
+
+#### The `network_address` Filter
+The `network_address` filter takes a string representation of an IP in CIDR format and returns its network address:
+
+`'192.168.1.10/24'` produces `'192.168.1.0/24'`
+
+Then you can assign the IP from global map to a local variable:
+```
+{% assign localIP = ipMap[lookupKey] %}
+```
 
 ### Global Variables
 Global template variables allow you to define a set of variables that can be accessed from any advanced mode template. The global variables are defined via a free-form JSON blob, they can be accessed by clicking the following icon on the template index page:
@@ -357,11 +386,6 @@ And lets say your local variables contain a site name, for example:
 You can use the replace filter in Liquid to build the key in the lookup map:
 ```
 {% assign lookupKey = '%1_IP' | replace:'%1',SiteName %}
-```
-
-Then you can assign the IP from global map to a local variable:
-```
-{% assign localIP = ipMap[lookupKey] %}
 ```
 
 ## Conversion Between Modes
