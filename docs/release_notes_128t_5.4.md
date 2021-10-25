@@ -39,15 +39,23 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40192 Chinese GUI is now supported:**
 ------
+- **I95-40558 OSPF `show` commands:** Several new `show ospf` and `show ospf database` commands have been added. 
+------ 
 - **I95-40679 Show DPU command pagination:** Pagination has been added to the `show dpu` command to better present the volume of information.
 ------
-- **I95-41093 Show Commit time:** The GUI now displays the time of the last/current commit operation.
+- **I95-41016 WAN Assurance:** 
 ------
-- **I95-42107 User defined Help for Templates:** When defining templates, adminstrators can provide help text for the template that will display for the user completing the templated configuration. For more information, see [Adding Help]
+- **I95-41093 Show Commit time:** The GUI now displays the time of the last commit operation.
+------
+- **I95-41418 User Mode accessible from the PCLI:** The `edit user mode` command is now availble in the PCLI. This command sets the configuration mode for both the PCLI and GUI. Setting this field to `advanced` allows the user to view and configure fields that are normally hidden. 
+------
+- **I95-41457 VRF Learning via OSPF:** VRF can now learn via OSPF as well as BGP. For more information, see [VRF Learning.](config_vrf_learning.md)
+------
 - **I95-41724 Software Versions provided in Dropdown:**
 ------
-- **I95-42278 Template filters for use with Subnets:** Filters have been added for use with CIDR formatting. 
+- **I95-42107 User defined Help for Templates:** When defining templates, adminstrators can provide help text for the template that will display for the user completing the templated configuration. For more information, see [Adding Help for a Template.](config_templates.md/#adding-help-for-a-template)
 ------
+- **I95-42278 Template filters for use with Subnets:** Filters have been added for use with CIDR formatting. 
 - **I95-42445 Upload Template Schema:** The ability to upload template schema through an API using the GUI. For additional information see [Configuring Templates.](config_templates.md)
 ------
 
