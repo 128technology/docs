@@ -10,7 +10,16 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Upgrade Considerations
+
+**Before upgrading please review the [Upgrade Considerations](intro_upgrade_considerations.md) page. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.**
+------
+- **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
+------
+- **I95-42624 Upgrade Installer:** Before **upgrading** to version 5.4, update the Installer version for the software to Installer version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
+
 ## Release 5.4.0
+
 **Release Date:** November 3, 2021
 
 ### New Features and Improvements
@@ -39,6 +48,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-40192 Chinese GUI is now supported:**
 ------
+- **I95-40436 Updated Application ID Domain Data:** Updates to the built in domain data
+------
 - **I95-40558 OSPF `show` commands:** Several new `show ospf` and `show ospf database` commands have been added. 
 ------ 
 - **I95-40679 Show DPU command pagination:** Pagination has been added to the `show dpu` command to better present the volume of information.
@@ -56,6 +67,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-42107 User defined Help for Templates:** When defining templates, adminstrators can provide help text for the template that will display for the user completing the templated configuration. For more information, see [Adding Help for a Template.](config_templates.md/#adding-help-for-a-template)
 ------
 - **I95-42278 Template filters for use with Subnets:** Filters have been added for use with CIDR formatting. 
+------
 - **I95-42445 Upload Template Schema:** The ability to upload template schema through an API using the GUI. For additional information see [Configuring Templates.](config_templates.md)
 ------
 

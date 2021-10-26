@@ -31,7 +31,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ### Upgrade Considerations
 
-**Before upgrading to version 5.3.0, please review the [5.3.0 Upgrade Considerations](intro_upgrade_considerations.md) page. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.**
+**Before upgrading to version 5.3.0 or higher, please review the [Upgrade Considerations](intro_upgrade_considerations.md) page. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.**
 
 ### Resolved Issues
 

@@ -1,16 +1,16 @@
 ---
-title: 128T Software Installation Guide
+title: SSR Software Installation Guide
 sidebar_label: Installation Overview
 ---
 ## Introduction
-Welcome to 128T - the first software-based routing solution designed to be both session-oriented and service-centric through the application of Secure Vector Routing. The purpose of this guide is to provide an overview and installation walkthrough for the 128T Router and 128T Conductor products into a Linux operating system environment. This product suite is collectively known as 128T Routing Software.
+Welcome to SSR - the first software-based routing solution designed to be both session-oriented and service-centric through the application of Secure Vector Routing. The purpose of this guide is to provide an overview and installation walkthrough for the SSR Router and SSR Conductor products into a Linux operating system environment. This product suite is collectively known as SSR Routing Software.
 
 :::info
 The installation guides are version agnostic and are applicable for all current and future versions of software.
 :::
 
 ## Before You Begin
-Before you begin the installation and configuration of 128T Networking Plaform, you must:
+Before you begin the installation and configuration of SSR Networking Plaform, you must:
 - Be familiar with Linux fundamentals, basic network addressing, and IP networking terminology. 
 - Be a system administrator to perform the installation and configuration.
 - Have an entry in /etc/sudoers allowing you to execute Linux shell commands as root (via sudo). Failure to do so may result in the loss of remote management connectivity to the router. 
@@ -22,8 +22,18 @@ The examples listed in this guide generally prefer running commands as a non-roo
 ### Regarding Upgrades
 [Prerequisites for upgrades](intro_upgrading.md) include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
 
+### Version Dependencies
+
+The conductor Major.Minor version must be greater than or equal to the router version. The router version can not exceed the conductors major.minor version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) contract can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support contract *may* work, but are not guaranteed to do so.  
+
+Examples:
+- Conductor running version 5.3.0, managing Routers running version 5.1.1: Supported.
+- Conductor running version 5.2.0, managing Routers running version 5.2.2: Supported.
+- Conductor running version 5.2.1, managing Routers running version 4.5.13: Supported.
+- Conductor running version 4.5.13, managing Routers running version 4.2.9: Not supported, but may work.
+
 ## Installation Process
-Installation is done from the 128T ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
+Installation is done from the SSR ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
 - [Download the ISOs](intro_downloading_iso.md)
 - [Create Bootable Media](intro_creating_bootable_usb.md)
 - [Perform the Interactive ISO installation](intro_installation_bootable_media.md) 
@@ -31,7 +41,7 @@ Installation is done from the 128T ISOs, typically from a bootable image on a fl
 - [Create the Router configuration with the Conductor](intro_basic_router_config.md)
 - [Install and Reboot the Router using the OTP ISO](intro_otp_iso_install.mdx)
 
-To install the 128T software on AWS or Azure, refer to: 
+To install the SSR software on AWS or Azure, refer to: 
  - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)
  	- [Amazon Web Services Quickstart](intro_installation_quickstart_aws.md)
  - [Installation in Microsoft Azure](intro_installation_azure.md)	
