@@ -3,9 +3,10 @@ title: Configuring Dual Router High Availability and VRRP
 sidebar_label: Dual Router High Availability and VRRP
 ---
 
-The release of the 5.4 software includes VRRP as a configuration option, as well as a new service route parameter, `enable-failover`, to provide failover on both the dual router and the dual node HA configuration. 
+The release of the 5.4 software includes VRRP as a configuration option, as well as a new service route parameter, `enable-failover`, to provide failover across multiple service-routes that have this flag set. 
 
 The following sample configuration provides context for using vrrp and enabling service route failover to provide failover on a dual router high availability configuration. 
+
 
 ## Configure the Primary Router
 
@@ -44,7 +45,7 @@ Configure node1 on router-a with the following interfaces:
 - wan
 - far (the inter-router communication link)
 
-Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring VRRP on `router-a` with a higher priority (100), `router-a` is identified as the primary router. We will configure `router-b` as the secondary router.
+Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring `router-a` with a higher VRRP priority (100), `router-a` is identified as the primary router. We will configure `router-b` as the secondary router.
 
 ```
 			node                  node1
@@ -172,6 +173,10 @@ Set `enable-failover` to true. This will enable failover between service routes 
 
 Assign a vector to the service route, and then assign a priority to the vector in the service policy. This priority determines service route preference, with the higher priority being the preferred route. 
 
+:::note
+Vector priority is assigned in descending order; the lowest number has the highest priority. To assign vector `local-vrrp` the highest priority, it is assigned a value of 1. Vector `peer` has a **lower priority** of 10.  
+:::
+
 ```
 		service-policy      poc-policy
             name            poc-policy
@@ -179,12 +184,12 @@ Assign a vector to the service route, and then assign a priority to the vector i
 
             vector          local-vrrp
                 name        local-vrrp
-                priority    100
+                priority    1
             exit
 
             vector          peer
                 name        peer
-                priority    97
+                priority    10
             exit
 
             session-resiliency    revertible-failover
@@ -196,7 +201,7 @@ Assign a vector to the service route, and then assign a priority to the vector i
         exit
 ```
 
-Configuring session resiliency allows the traffic to fail back to the primary service route once the service route is operational again. The max-loss, max-latency, and max-jitter settings will determine at what point failover happens. 
+Configuring session resiliency allows the traffic to fail back to the primary service route once the service-route is operational again. The max-loss, max-latency, and max-jitter settings will determine at what point failover happens. 
 
 ## Configure the Secondary Router
 
@@ -229,10 +234,12 @@ On the secondary router, assign the peer router to which the secondary router wi
 Configure node1 on router-b with the following interfaces:
 - lan
 - wan
-- far (this is the interrouter communication link)
+- far (this is the inter-router communication link)
 
-Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring the lower priority (97) on the lan and wan interfaces, router-b is identified as the secondary router. On a dual router HA setup, the vrids must be the same on the two redundant/VRRP devices - `router-a` and `router-b` `lan` device interfaces must have the same vrid, as well as each `wan` device interface vrid being the same.
-NOTE: `lan` devices and `wan` devices can have the same vrid as they are on different networks/broadcast domains. It is recommended to use different vrids to avoid confustion. In this example, we use 95.
+Activate VRRP on the `wan` and `lan` device interfaces of node1. Configuring a lower VRRP priority (97) on the `lan` and `wan` interfaces of router-b, identifies router-b as the secondary router. On a dual router HA setup, the vrids must be the same on the two redundant/VRRP devices - `router-a` and `router-b` `lan` device interfaces must have the same vrid, as well as each `wan` device interface vrid being the same.
+
+:::note
+ `lan` devices and `wan` devices can have the same vrid because they are on different networks/broadcast domains. However, it is recommended to use different vrids on the secondary router to avoid confusion. In this example, we use 95.
 
 ```
 node                  node1
@@ -361,6 +368,10 @@ To preserve session state between routers, configure the following service route
 
 Assign a vector to the service route, and then assign a priority to the vector in the service policy. This priority determines service route preference, with the higher priority being the preferred route. 
 
+:::note
+Vector priority is assigned in descending order; the lowest number has the highest priority. To assign vector `local-vrrp` the highest priority, it is assigned a value of 1. Vector `peer` has a **lower priority** of 10.  
+:::
+
 ```
 		service-policy      poc-policy
             name            poc-policy
@@ -368,12 +379,12 @@ Assign a vector to the service route, and then assign a priority to the vector i
 
             vector          local-vrrp
                 name        local-vrrp
-                priority    100
+                priority    1
             exit
 
             vector          peer
                 name        peer
-                priority    97
+                priority    10
             exit
 
             session-resiliency    revertible-failover
@@ -722,12 +733,12 @@ config
 
             vector          local-vrrp
                 name        local-vrrp
-                priority    100
+                priority    1
             exit
 
             vector          peer
                 name        peer
-                priority    97
+                priority    10
             exit
 
             session-resiliency    revertible-failover
