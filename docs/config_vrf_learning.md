@@ -135,7 +135,7 @@ In the following example, all traffic coming from the interface is classified as
                     name      LAN
                     topology  mesh
                     exit
-                tenant                               eng
+                tenant                               finance
                     inter-router-security                internal
 
                     address                              10.11.2.210
