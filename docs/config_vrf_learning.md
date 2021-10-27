@@ -143,6 +143,12 @@ In the following example, all traffic coming from the interface is classified as
                         prefix-length  29
 ```
 ```
+    router Test
+        routing default-instance
+            vrf blue
+                tenant-name eng
+```
+```
             network-interface  lan2
                 name                                 lan2
                 global-id                            90
@@ -242,7 +248,7 @@ The following show commands have been extended to specify `vrf`. For specific us
 
 [`show ospf database`](cli_reference.md#show-ospf-database)
 
-
+#### Other Show Commands
 
 [`show fib`](cli_reference.md#show-fib)
 

@@ -16,14 +16,14 @@ There are three standard ways of upgrading routers:
 - Manually upgrading a router by invoking the `install128t` application from the Linux shell
 
 :::note
-The router upgrade process using the PCLI and the GUI is done in two stages: First, the software is downloaded, then it is installed. Using the `install128t` application steps through both of these processes.
+The router upgrade process using the PCLI and the GUI is done in two stages: First, the software is downloaded, then it is installed. Use the `install128t` application steps through both of these processes.
 :::
 
 Prerequisites for upgrades now include configuring a user with super user (sudo) privileges. **SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
 
 ### Version Dependencies
 
-The conductor Major.Minor version must be greater than or equal to the router version. The router version can not exceed the conductors major.minor version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) contract can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support contract *may* work, but are not guaranteed to do so.  
+The conductor `major.minor` version must be greater than or equal to the router version. The router version can not exceed the conductors `major.minor` version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support *may* work, but are not guaranteed to do so.  
 
 Examples:
 - Conductor running version 5.3.0, managing Routers running version 5.1.1: Supported.
@@ -52,9 +52,9 @@ The conductor's _automated provisioner_ will upgrade both nodes in a high availa
 
 ## Upgrading using the Conductor's GUI
 
-Similar to the process for upgrading using the PCLI, the GUI upgrade process using the GUI is done in two stages: *download* and *upgrade*.
+Similar to the process for upgrading using the PCLI, the upgrade process using the GUI is done in two stages: *download* and *upgrade*.
 
-1. Navigate to the Router page in the Conductor's UI. Routers that have available upgrades will indicate as such using a blue upgrade badge in the router list.
+1. Navigate to the Router page in the Conductor's GUI. Routers that have available upgrades will indicate as such using an upgrade badge in the router list.
 2. Click on the Upgrade SSR icon (the arrow within a circle) next to your router. Result: a list of upgrade and download options appears. This list is filterable if the list of available options grows large.
 3. Click on the target release in the Available Downloads section of the list. You will be asked to confirm the operation.<br/>Result: the SSR will begin downloading the software. Click on the router in the router list to monitor its progress.
 4. Once complete, click the Upgrade SSR icon again, and select the target software release from the Available Upgrades list. You will again be asked to confirm this operation.<br/>Result: the router will now begin the upgrade process.
@@ -104,7 +104,7 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
 
 ## Routers with Restricted Internet Access
 
-The standard upgrade workflow is for individual instances of SSR software to download software upgrades directly from mirror servers hosted and managed by 128 Technology on the public internet. Occasionally, SSR routers are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from a conductor.
+The standard upgrade workflow is for individual instances of SSR software to download software upgrades directly from mirror servers hosted and managed by Juniper on the public internet. Occasionally, SSR routers are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from a conductor.
 
 Within a given router's configuration, at `router > system > software-update > repository`, you can configure the `source-type` setting to one of three values:
 
@@ -114,10 +114,10 @@ Within a given router's configuration, at `router > system > software-update > r
   The conductor(s) require internet access, and the routers must be able to resolve internet hosted repositories.
   :::
 - `prefer-conductor`: The router will retrieve software versions from the conductor, and fall back to using the internet
-- `internet-only` (default): The router will use 128 Technology's publicly hosted repositories for retrieving sofwtare images
+- `internet-only` (default): The router will use Juniper's publicly hosted repositories for retrieving sofwtare images
 
 :::note
-Because this is a router setting, your collection of routers can each use different preferences. For example, a router on the internet can use a 128 Technology repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
+Because this is a router setting, your collection of routers can each use different preferences. For example, a router on the internet can use a Juniper repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
 :::
 
 For routers that have no access to the internet, set `router > system > software-update > repository > offline-mode` to `true`. This overrides the `source-type` leaf.
