@@ -9,6 +9,10 @@ sidebar_label: '3.1'
 
 - **Installer upgrade to support SSR Release 5.4.0**
 
+### Caveats
+
+**Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
+
 ### Resolved Issues
 
 - **IN-365 Installer tries to delete users from groups:** The installer no longer tries to delete users from groups even if they don't exist. 
