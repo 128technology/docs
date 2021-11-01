@@ -16,7 +16,7 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ------
 - **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
-- **I95-42624 Upgrade Installer:** Before **upgrading** to version 5.4, update the Installer version for the software to Installer version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
+- **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
 ------
 - **Upgrade ICMP Reachability Plugin:** If you are running the ICMP Reachability plugin, it must be upraded to version 3.0.3 or higher **before** upgrading the Conductor to SSR Version 5.4.0.
 ------
