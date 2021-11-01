@@ -3,17 +3,17 @@ title: Per Adjacency Traffic Engineering
 sidebar_label: Per Adjacency Traffic Engineering
 ---
 
-Packet loss due to congestion in networks, particularly over WAN links, is inevitable. Depending on where drops occur, it can have a major impact on perceived quality of experience. Packet loss due to exceeding transmit caps between instances of SSR should be avoided. Per-adjacency traffic engineering can be enabled to regulate the amount of upload and download rates between peers.  
+Packet loss due to congestion in networks, particularly over WAN links, is inevitable. Depending on where drops occur, it can have a major impact on perceived quality of experience. Packet loss due to exceeding transmit caps between instances of SSR should be avoided. Per-adjacency traffic engineering can be enabled to regulate the upload and download rates between peers.  
 
 ## Overview 
 
 Per-adjacency traffic engineering provides targeted traffic engineering for both directions on a bandwidth restricted link between two SSR instances. Traffic engineering on the device interface continues to be associated with the upload rate of a connected link; the `transmit-cap`. Traffic engineering at the adjacency level is associated with the download limit of the adjacent SSR instance; the `receive-cap`.  
 
-For example, in the following hub and spoke diagram the Datacenter router has 5 adjacencies off of the individual device interface with a transmit-cap upload speed configured at 50Mb. The adjacent branch routers have 10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb configured as their device interface transmit caps. With such a large transmit-cap at the Datacenter, traffic rates exceeding the allowed download speeds (10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb) on each of the paths to the branch routers will result in traffic being dropped by the ISP. 
+For example, in the following hub and spoke diagram the Datacenter router has 5 adjacencies off of the individual device interface with a `transmit-cap` upload speed configured at 50Mb. The adjacent branch routers have 10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb configured as their device interface transmit caps. With such a large `transmit-cap` at the Datacenter, traffic rates exceeding the allowed download speeds (10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb) on each of the paths to the branch routers will result in traffic being dropped by the ISP. 
 
 ![Hub and Spoke Network](/img/per_adjacency_example.png)
 
-**Per-adjacency traffic engineering allows you to automatically identify the adjacent path and it’s receive cap, and limit the rate of traffic destined for that path.** With a receive cap configured for each adjacency, traffic does not exceed the receive-cap associated with the adjacency, and is not dropped by the ISP. 
+Per-adjacency traffic engineering allows you to automatically identify the adjacent path and the `receive-cap`, and limit the rate of traffic destined for that path. With a `receive-cap` configured for each adjacency, traffic does not exceed the `receive-cap` associated with the adjacency, and is not dropped by the ISP. 
 
 ### Auto-Configuration via Neighborhoods
 
@@ -21,7 +21,7 @@ For example, in the following hub and spoke diagram the Datacenter router has 5 
 Per adjacency traffic-engineering is limited to spoke nodes in a hub and spoke topology. 
 :::
 
-Typically, adjacencies are automatically configured via [neighborhoods](concepts_glossary.md/#neighborhoods). All nodes in a neighborhood share layer 3 connectivity. Between any two nodes we can form a pair of adjacencies, one on each router, which describes their peering. When the adjacencies are automatically created, the spoke’s neighborhood receive-cap is inspected by the neighborhood Hub router. It creates an adjacency with a transmit-cap matching the spoke’s receive-cap. 
+Typically, adjacencies are automatically configured via [neighborhoods](concepts_glossary.md/#neighborhoods). All nodes in a neighborhood share layer 3 connectivity. Between any two nodes we can form a pair of adjacencies, one on each router, which describes their peering. When the adjacencies are automatically created, the spoke’s neighborhood `receive-cap` is inspected by the neighborhood Hub router. It creates an adjacency with a `transmit-cap` matching the spoke’s `receive-cap`. 
 
 :::note 
 In order to generate the adjacencies correctly, configure a `receive-cap` on the neighborhood of the network interface with limited receive capabilities.
