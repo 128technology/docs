@@ -96,6 +96,8 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 
 ## Resolved Issues
 
+- **I95-23613 Incorrectly logging missing xml and Json config files as an error:** This is not an error, but a valid case where configFileReader is still able to read factory defaults. The logging category has been changed to Info.
+------
 
 
 
