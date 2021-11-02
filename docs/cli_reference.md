@@ -2093,6 +2093,27 @@ admin@gouda.novigrad#
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.1.0   | This feature was introduced |
+## `restore system factory-default`
+
+Restore the system to factory defaults.
+
+#### Usage
+
+```
+restore system factory-default [force] [router <router>] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+#### Description
+
+Once initiated, the system will begin to stop all running processes and restore the system to the factory default configuration. Once the process has been completed, the system will reboot.
 
 ## `restore users factory-default`
 

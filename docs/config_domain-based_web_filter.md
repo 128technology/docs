@@ -57,6 +57,8 @@ Application Identification is configured to automatically download updated domai
 
 ![Application Data Updates](/img/dbwf_app-id_updates.png)
 
+For additional information, see [application-identification.](config_reference_guide.md/#application-identification)
+
 ## Configuring Domain-based Web Filtering
 
 To enable Domain-based Web Filtering, you must configure a parent-level service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
