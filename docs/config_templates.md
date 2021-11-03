@@ -17,11 +17,39 @@ Next fill out the information for your template and click **Save**: ![templates_
 
 The Help field allows you to add help information to your configuration template. This is optional, and can be simple user instructions or detailed steps. Enter text, or use Markdown to format the text. Click **Save** when you are done. 
 
-You are returned to the list of templates to see your newly created template. Cicking into the template displays the message "_Template is empty, copy configuration into the template to populate it._". Follow the steps in [Copying Configuration into Template](#copying-configuration-into-a-template) to learn how to populate it with configuration.
+You are returned to the list of templates to see your newly created template. Cicking into the template displays the message "_Template is empty, copy configuration into the template to populate it._". Follow the steps in [Copying Configuration into a Template](#copying-configuration-into-a-template) to populate the template.
 
 ## Copying Configuration into a Template
 
-Instead of starting a template from scratch, it is often useful to copy existing or new configuration objects into the template body. The following button on top-level configuration object's pages can be used to copy the object into an existing template: ![templates_copy](/img/templates_copy.png)
+Instead of starting a template from scratch, it is often useful to copy existing or new configuration objects into the template body. The following button on top-level configuration object's pages can be used to copy the object into an existing template: 
+
+![templates_copy](/img/templates_copy.png)
+
+## Default Templates
+
+Beginning with SSR Version 5.4.0, a default Standalone Branch configuration template has been provided to streamline the configuration process. This template provides a basic configuration for a list of Juniper supported hardware. 
+
+![Default Templates](/img/config_templates_default.png)
+
+To use the default template: 
+
+1. Click on the **Copy to User Templates** button.
+
+![Copy Template](/img/config_templates_copy.png)
+
+2. Assign a name to the template. The name can contain alpha-numeric characters, underscore, and hyphen.
+
+![Name Template](/img/config_templates_nametemplate.png)
+
+3. Click the **Copy** button. The template appears in the Configuration Wizard window. 
+
+![Template Configuration Wizard](/img/config_templates_wizard.png)
+
+4. Enter the name, description, and location for the router.
+
+5. Select the device that will power the router. Select one from the drop down. For additional information about the devices, click the help button (?) in the upper right corner of the window. 
+
+5. Once the configuration template is complete, click the **Generate Configuration** button in the top right corner of the panel, next to the help button. 
 
 ## Basic Mode
 

@@ -61,7 +61,7 @@ Before upgrading please review the [Upgrade Considerations](intro_upgrade_consid
 ------
 - **I95-36272 Service Route Redundancy and Vectors:** Using a new `enable-failover` command, service routes can now failover to a secondary service route. Using a `vector` value, primary and secondary service routes can be established. Additionally, secondary `next-hop` routes can be defined. For more information, see `enable-failover`. 
 ------
-- **I95-38790 Default Templates:** A limited number of pre-set configuration templates have been added to facilitate an easier user experience. For information, please see [Default Templates].
+- **I95-38790 Default Templates:** A default Standalone Branch configuration template has been provided to streamline the configuration process. This template provides a basic configuration for a list of Juniper supported hardware.  For information, please see [Default Templates](config_templates.md#default-templates).
 ------
 - **I95-38244 Router Page search enhanced:** Searches on the Routers page can now be targeted to specific columns using the search selector. 
 ------
