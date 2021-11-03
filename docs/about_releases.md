@@ -29,7 +29,7 @@ However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not ad
 
 | Version                                          | Release Date       | End of Maintenance | End of Support     |
 | ------------------------------------------------ | ------------------ | ------------------ | ------------------ |
-| [5.1.6](release_notes_128t_5.1.md#release-516)   | October 6, 2021    | October 24, 2021   | May 24, 2022       |
+| [5.1.6](release_notes_128t_5.1.md#release-516)   | October 27, 2021   | October 24, 2021   | May 24, 2022       |
 | [4.5.11](release_notes_128t_4.5.md#release-4511) | September 7, 2021  | April 15, 2021     | October 15, 2021   |
 | [5.2.2](release_notes_128t_5.2.md#release-522)   | August 24, 2021    | November 10, 2021  | May 10, 2022       |
 | [5.1.5](release_notes_128t_5.1.md#release-515)   | August 13, 2021    | October 24, 2021   | May 24, 2022       |
