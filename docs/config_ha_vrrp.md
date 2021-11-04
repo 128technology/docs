@@ -3,10 +3,9 @@ title: Configuring Dual Router High Availability and VRRP
 sidebar_label: Dual Router High Availability and VRRP
 ---
 
-The release of the 5.4 software includes VRRP as a configuration option, as well as a new service route parameter, `enable-failover`, to provide failover across multiple service-routes that have this flag set. 
+The release of the 5.4 software includes VRRP as a configuration option, as well as a new service route parameter, [`enable-failover`](#enable-service-route-failover), to provide failover across multiple service-routes that have this flag set. 
 
 The following sample configuration provides context for using vrrp and enabling service route failover to provide failover on a dual router high availability configuration. 
-
 
 ## Configure the Primary Router
 

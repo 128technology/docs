@@ -59,7 +59,7 @@ Before upgrading please review the [Upgrade Considerations](intro_upgrade_consid
 ------
 - **I95-35654 Improved Upgrade Workflow (GUI):** Added `Select Operation` to the router upgrade workflow, allowing users to see which versions are available based on the desired operation (either Download or Upgrade).
 ------
-- **I95-36272 Service Route Redundancy and Vectors:** Using a new `enable-failover` command, service routes can now failover to a secondary service route. Using a `vector` value, primary and secondary service routes can be established. Additionally, secondary `next-hop` routes can be defined. For more information, see `enable-failover`. 
+- **I95-36272 [Service Route Redundancy and Vectors](config_ha.md#service-route-redundancy):** Using a new `enable-failover` command, service routes can now failover to a secondary service route. Using a `vector` value, primary and secondary service routes can be established. Additionally, secondary `next-hop` routes can be defined. 
 ------
 - **I95-38790 Default Templates:** A default Standalone Branch configuration template has been provided to streamline the configuration process. This template provides a basic configuration for a list of Juniper supported hardware.  For information, please see [Default Templates](config_templates.md#default-templates).
 ------

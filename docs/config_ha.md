@@ -7,7 +7,7 @@ The SSR provides significant flexibility for high availability configurations. T
 
 This document contains the steps for configuring support for configuration of dual-node high availability. In addtion to the shared MAC interface method of dual node high availability, the release of the 5.4 software includes [VRRP as a configuration option](#high-availability-using-vrrp). 
 
-With each of these deployment models in version 5.4, there are two significant options to be addressed, which begin with the questions; Do you need stateful failover, or do you need stateless failover? A new service route parameter introduced in version 5.4, [`enable-failover`](#service-route-failover), provides stateful failover on either a VRRP or a shared MAC interface. 
+A new service route parameter introduced in version 5.4, [`enable-failover`](#service-route-redundancy), provides stateful failover on the dual node HA configuration.
 
 ## Requirements
 Configuring high availability in a shared-interface configuration requires that two SSR routing nodes have at least one device-interface that is shared between them. Shared interfaces are configured on both nodes, but are active on only one node at a time. These shared interfaces **must** be in the same L2 broadcast domain; this is because the SSR uses gratuitous ARP messages to announce an interface failover, so that it may receive packets in place of its counterpart.
@@ -255,16 +255,14 @@ It is considered a best practice to configure different priority values on each 
  If two redundancy-groups are configured with the same _priority_ value, the SSR router will select an active member using an internal election algorithm, which is not guaranteed to be revertive in the event of a failure. 
 :::
 
-## Service Route Failover
-Only available with SSR Version 5.4.
+## Service Route Redundancy
+Available with SSR Version 5.4 and higher.
 
 #### `enable-failover` on the `service-route`:
 
-Service routes are used to influence traffic destinations for services. By enabling failover on the service route, failover includes the existing sessions, eliminating the lag time previously encounterd as those sessions were re-established. 
+Service routes are used to influence traffic destinations for services. By enabling failover on the service route, failover includes the existing sessions, eliminating the lag time previously encountered as those sessions were re-established. Service route redundancy is not exclusive to dual node, high availability configurations. It is configured as shown below.
 
 To enable existing sessions to failover between the nodes, `enable-failover` is configured on both the service-routes `test-1_intf13_route-0` and `test-2_intf113_route-0`. Any generated peer service-routes will inherit this property as well. 
-
-Service route failover is not exclusive to shared mac or vrrp configurations. It is configured using the structure shown below.
 
 ```
             service-route             test-1_intf13_route-0
@@ -320,7 +318,7 @@ Service route failover is not exclusive to shared mac or vrrp configurations. It
 
 ### Using `vector` to Define the Primary Node
 
-The use of a `vector` is not exclusive to shared mac or vrrp configurations. It is configured using the structure shown below.
+The use of a `vector` is not exclusive to dual node, high availability configurations. It is configured as shown below.
 
 To define the primary and standby **nodes** in the HA configuration, configure a `vector` on the `service-route` and a priority on the `service-policy`. 
 
@@ -357,16 +355,16 @@ service-policy  netcat-policy
 The vector and the associated priority can then be assigned to one or more next hops within the service route, providing a primary and secondary path for failover and high availablity. 
     ```
     service-route
-    name    wan1-route
-    service-name wan-service
-    next-hop
-        vector      red
-        node        node1
-        interface   wan1-intf
-    next-hop
-        vector      blue
-        node        node1
-        interface   wan2-int
+        name    wan1-route
+        service-name wan-service
+        next-hop
+            vector      red
+            node        node1
+            interface   wan1-intf
+        next-hop
+            vector      blue
+            node        node1
+            interface   wan2-int
 
     ```
 
