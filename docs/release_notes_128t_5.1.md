@@ -11,6 +11,16 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+## Release 5.1.6-2
+
+**Release Date:** October 27, 2021
+This release replaces the existing `5.1.6-1` release.
+
+### Resolved Issues
+
+- **I95-42990 Upgrade may cause a kernel panic:** Package order dependancy created a situation where upgrades from earlier versions of software may result in a kernel panic. Addressed package order dependencies.
+
+
 ## Release 5.1.6
 
 **Release Date:** October 6, 2021
@@ -115,8 +125,6 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 - **I95-41198 Add loading indicator to plugin details page:** A spinner has been added and fields are disabled during loading. 
 ------
 - **I95-41214 GUI Table visual issues:** All tables now use the full height of their container.
-------
-- **I95-41227 Vulnerability Report Issues:** All identified CVE's have been addressed.
 ------
 - **I95-41235 Router state indicator is not consistent across pages:** Resolved an issue where the Status Indicator was always showing unknown.
 ------
