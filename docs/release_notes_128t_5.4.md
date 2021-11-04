@@ -161,3 +161,11 @@ traffic failures:** Updated the exception to include error string and source loc
 - **I95-43028 Downloaded software for the router does not show up on secondary conductor:** Resolved this issue so that full output is delivered to all nodes.
 ------
 - **I95-43135 Rare Race condition in an HA configuration:** Resolved a rare race condition that may occur if an `export config` command is run during a failover. 
+
+## Caveats
+
+- **I95-42973 `show config running generated` not displaying configuration:** At the time of release, the following commands were not displaying the configuration. 
+	- `show config running generated`
+	- `show config running candidate generated`
+This is being addressed, and will be resolved in an upcoming point release. 
+
