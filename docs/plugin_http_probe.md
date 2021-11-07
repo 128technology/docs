@@ -42,8 +42,8 @@ config
 
     authority
 
-        router  t102-dut3
-            name                t102-dut3
+        router  my-router
+            name                my-router
 
             http-probe-profile  http-probe-1
                 name               http-probe-1
@@ -137,8 +137,8 @@ config
 
     authority
 
-        router  t102-dut3
-            name           t102-dut3
+        router  my-router
+            name           my-router
 
             service-route  test-app-route-1
                 name                    test-app-route-1
@@ -203,3 +203,78 @@ Each service-route is designed to probe a unique URL for that server and monitor
 When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, its possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
 :::
 
+
+## Troubleshooting
+
+### Checking the probe status
+The `show service-path` command can be used to view the current status of the probe and to view how the load balancer is interpreting the current status. For example:
+
+```
+admin@node1.conductor1# show service-path router my-router node node1 service-name test-app
+Sun 2021-11-07 03:19:33 UTC
+Node: node1.my-router Page 1
+
+========== ================== =============== =============== ============ =========== ======== ====== ====== ========== ==========
+ Service    Service-Route      Type            Destination     Next-Hop     Interface   Vector   Cost   Rate   Capacity   State
+========== ================== =============== =============== ============ =========== ======== ====== ====== ========== ==========
+ test-app   test-app-route-1   service-agent   172.16.2.5/32   172.16.2.5   wan-bb      path1     100      0   0/100      Up(Up)
+ test-app   test-app-route-2   service-agent   172.16.3.5/32   172.16.3.5   wan-lte     path2     100      0   0/100      Up(Down)
+
+Completed in 0.05 seconds
+admin@node1.conductor1#admin@node1.conductor1#
+```
+
+In addition, the status of the probe's running in linux can be found by inspecting the `128T-http-probe-status-change-notifier@<probe-name>.service`. For example,
+
+```
+# systemctl status 128T-http-probe-status-change-notifier@http-probe-2.service -l
+● 128T-http-probe-status-change-notifier@http-probe-2.service - HTTP Monitor Status change observer for destination http-probe-2
+   Loaded: loaded (/usr/lib/systemd/system/128T-http-probe-status-change-notifier@.service; static; vendor preset: disabled)
+   Active: inactive (dead) since Sun 2021-11-07 03:22:43 UTC; 8s ago
+  Process: 24823 ExecStart=/usr/libexec/128T-http-probe/scripts/loadbalancer_cli --probe-name ${NAME} determine-status --status ${STATUS} --code ${CODE} (code=exited, status=0/SUCCESS)
+ Main PID: 24823 (code=exited, status=0/SUCCESS)
+
+Nov 07 03:22:42 my-router.openstacklocal systemd[1]: Starting HTTP Monitor Status change observer for destination http-probe-2...
+Nov 07 03:22:43 my-router.openstacklocal loadbalancer_cli[24823]: Determine status for probe http-probe-2 with status down and code 0
+Nov 07 03:22:43 my-router.openstacklocal loadbalancer_cli[24823]: Skipping service-route test-app-route-1 with profile {'validStatusCode': [202, 200], 'probeDuration': 5, 'numberOfAttempts': 4, 'probeInterval': 10, 'name': 'http-probe-1', 'url': 'http://172.16.2.5:5060/'}
+Nov 07 03:22:43 my-router.openstacklocal loadbalancer_cli[24823]: Processing service-route test-app-route-2 with profile {'validStatusCode': [202, 200], 'probeDuration': 5, 'numberOfAttempts': 4, 'probeInterval': 10, 'name': 'http-probe-2', 'url': 'http://172.16.3.5:5061/'}
+Nov 07 03:22:43 my-router.openstacklocal loadbalancer_cli[24823]: http-probe-2: Setting service-path test-app-route-2 for service test-app as down
+Nov 07 03:22:43 my-router.openstacklocal systemd[1]: Started HTTP Monitor Status change observer for destination http-probe-2.
+```
+
+## Triggering Manual Failover Or Recovery
+In some situations, it might be desirable to forcefully trigger a failover or recovery for an otherwise healthy path. In the above example, the primary `http-probe-1` can be brought down by doing the following:
+
+- Stop the http-monitor service for the path instance
+
+```bash
+# systemctl stop http-monitor@http-probe-1.service
+```
+
+- Edit the `/var/run/128technology/plugins/http_monitor/{probe-name}.state` and set the `STATUS=down`
+
+```bash
+# echo "STATUS=down" >> /var/run/128technology/plugins/http_monitor/http-probe-1.state
+
+# systemctl status 128T-http-probe-status-change-notifier@http-probe-1.service -l
+● 128T-http-probe-status-change-notifier@http-probe-1.service - HTTP Monitor Status change observer for destination http-probe-1
+   Loaded: loaded (/usr/lib/systemd/system/128T-http-probe-status-change-notifier@.service; static; vendor preset: disabled)
+   Active: inactive (dead) since Sun 2021-11-07 03:27:34 UTC; 45s ago
+  Process: 29533 ExecStart=/usr/libexec/128T-http-probe/scripts/loadbalancer_cli --probe-name ${NAME} determine-status --status ${STATUS} --code ${CODE} (code=exited, status=0/SUCCESS)
+ Main PID: 29533 (code=exited, status=0/SUCCESS)
+
+Nov 07 03:27:34 my-router.openstacklocal systemd[1]: Starting HTTP Monitor Status change observer for destination http-probe-1...
+Nov 07 03:27:34 my-router.openstacklocal loadbalancer_cli[29533]: Determine status for probe http-probe-1 with status down and code 200
+Nov 07 03:27:34 my-router.openstacklocal loadbalancer_cli[29533]: Processing service-route test-app-route-1 with profile {'validStatusCode': [202, 200], 'probeDuration': 5, 'numberOfAttempts': 4, 'probeInterval': 10, 'name': 'http-probe-1', 'url': 'http://172.16.2.5:5060/'}
+Nov 07 03:27:34 my-router.openstacklocal loadbalancer_cli[29533]: http-probe-1: Setting service-path test-app-route-1 for service test-app as down
+Nov 07 03:27:34 my-router.openstacklocal loadbalancer_cli[29533]: Skipping service-route test-app-route-2 with profile {'validStatusCode': [202, 200], 'probeDuration': 5, 'numberOfAttempts': 4, 'probeInterval': 10, 'name': 'http-probe-2', 'url': 'http://172.16.3.5:5061/'}
+Nov 07 03:27:34 my-router.openstacklocal systemd[1]: Started HTTP Monitor Status change observer for destination http-probe-1.
+```
+
+:::tip
+The same steps can be used to bring `up` a path that is currently `down` by changing `STATUS=up` in the steps above.
+:::
+
+:::tip
+Additional debugging can be turned on for the `http-monitor` instance by setting `LOG_LEVEL=DEBUG` in `/var/run/128technology/plugins/http_monitor/{probe-name}.conf` config file
+:::
