@@ -2,7 +2,7 @@
 title: HTTP Probe Reachability Detection Plugin
 sidebar_label: HTTP Probe Reachability Detection
 ---
-The http-probe plugin is designed to leverage the reachability detection APIs that were introduced in the 128T router as of 5.2.0 version of software. More documentation on the core product feature can be found [here](https://docs.128technology.com/docs/config_service_health/)
+The http-probe plugin is designed to leverage the reachability detection APIs that were introduced in the 128T router as of 5.2.0 version of software. More documentation on the core product feature can be found [here](config_service_health.md)
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).

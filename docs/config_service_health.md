@@ -57,7 +57,7 @@ authority
 
             reachability-detection
                 enabled           true
-                enforcement       false               
+                enforcement       false
             exit
         exit
     exit
@@ -173,7 +173,7 @@ authority
         exit
     exit
 exit
-``` 
+```
 
 ### Traffic Profile
 
@@ -187,7 +187,7 @@ router > traffic-profile
               traffic-class high
               enabled true
               acceptable-error-threshold	5
-              time-to-establishment	
+              time-to-establishment
     	            enabled	true
 	            max	      100
 	            mean	      50
@@ -195,25 +195,25 @@ router > traffic-profile
               traffic-class best-effort
               enabled true
               acceptable-error-threshold	10
-              time-to-establishment	
+              time-to-establishment
     	            enabled	true
 	            max	      500
 	            mean	      250
 	protocol udp
           protocol udp
           acceptable-error-threshold	20
-          time-to-establishment	
+          time-to-establishment
    	     enabled	false
 ```
-- `traffic-profile` allows the user to configure enforcement parameters for tcp, udp and tls. 
+- `traffic-profile` allows the user to configure enforcement parameters for tcp, udp and tls.
 - `traffic-class` allows the user to configure different treatments for different classes of traffic for the same service. The same default values (as described below) apply to all the classes.
 - `acceptable-error-threshold` (expressed in percentage) is the amount of errors acceptable on the path before taking it offline. For TCP, this includes the session closed before establishment, any ICMP error that constitutes destination unreachable, and session timeout before establishment. For UDP, this includes the destination unreachable class of ICMP errors.
 - `time-to-establishment` allows the user to configure a max and a mean time for a session to be established as defined for the protocol within the configured detection-window. The following table describes the default values.
 
 | Config | Type | Default Value | How to disable? |
 | ------ | ---- | ------------- | --------------- |
-| acceptable-error-threshold | percentage | 25% | 0% | 
-| traffic-class | 
+| acceptable-error-threshold | percentage | 25% | 0% |
+| traffic-class |
 | enabled | boolean | true | false |
 | time-to-establishment |
 | - enabled | boolean | true | false |
@@ -224,7 +224,7 @@ Once a profile is configured, the above defaults are enforced. To turn off the s
 
 ### Health Probes
 
-An ICMP probe, as described below is built into the system, providing the health probe method. Other application specific probes (HTTP, TLS, SIP, etc.) are made possible with external plugins utilizing the REST API added for this feature. The two main aspects are:
+An ICMP probe, as described below is built into the system, providing the health probe method. Other application specific probes ([HTTP, TLS](plugin_http_probe.md), SIP, etc.) are made possible with external plugins utilizing the REST API added for this feature. The two main aspects are:
 
 - Load-balancer API to declare select paths as down
 - Mechanism to report activity or inactivity over a path to an external application
@@ -250,7 +250,7 @@ icmp-probe-profile
     number-of-attempts		5
     probe-duration		1s
     probe-address             8.8.8.8
-    probe-address             9.9.9.9 
+    probe-address             9.9.9.9
     sla-metrics
         max-loss	10%
         latency
@@ -268,7 +268,7 @@ The following table describes the configuration values above:
 | probe-interval | uint32 (seconds) range: 1-3600 | default: 10 | Duration (in seconds) of how often to perform a link test to the destination. |
 | number-of-attempts | uint8 range: 1-20 | default: 4 | Number of consecutive ICMP ping requests to be sent within the probe-duration before deciding that destination is unreachable. |
 | probe-duration | uint8 (seconds) range: 1-10 | default: 1	| Duration (in seconds) within which to reach the destination. Each attempt will be made in probe-duration / number-of-attempts interval. |
-| sla-metrics | 
+| sla-metrics |
 | max-loss | uint8 (percent) | default: 10%	| The amount of acceptable loss on the link. The loss will be determined by sending number-of-attempts ICMP requests and waiting the probe-duration to get the replies back. |
 | latency > max	| milliseconds | default: 250 | Maximum acceptable latency based on the ping test. |
 | latency > mean | milliseconds	| default: 100 | The average latency on a path based on the ping test. |
@@ -287,7 +287,7 @@ Probe-interval and probe-duration should be tuned so that probe-interval + probe
 
 ### Custom Health Probe Plugins
 
-The extensibility APIs described above enable plugins to be developed for performing additional probes using TCP, TLS, HTTP, SIP etc. The plugin workflow for these types of probes would be as follows:
+The extensibility APIs described above enable plugins to be developed for performing additional probes using TCP, [TLS, HTTP](plugin_http_probe.md), SIP etc. The plugin workflow for these types of probes would be as follows:
 - Augment the service-route > reachability-detection > probe choice statement to plugin specific probe configuration. In general, there is no restriction enforced on what and how many plugins run a reachability check in parallel.
 - The probe plugin operates independently to determine if the path is up or down. Based on the specific business logic, the plugin triggers the path down using the load balancer APIs.
 - The probe plugin uses the probe-status REST API to set service-paths up or down.
@@ -328,7 +328,7 @@ Show commands:
 ======== ========= ====== ======= ====== ========= ======== ===== ===========
  router         0    N/A      up   0.7%     250ms    100ms   2.0         Yes
 ```
-- The `show service-path` output indicates when a non-SVR path is no longer in-service and why. 
+- The `show service-path` output indicates when a non-SVR path is no longer in-service and why.
 Two fields have been added to the show command: Meets-SLA and Reachability-Probes. Meets-SLA indicates if a service agent meets or satisfies SLA as a result of reachability detection. Reachability-Probes shows the probes status from reachability detection.
 
 ```
