@@ -19,7 +19,7 @@ For HTTPS probes, the client will allow self-signed certificates for inspecting 
 :::
 
 ## Configuration Snippet
-The plugin leverages the existing 128T reachability detection and enforcement configuration found at the service-route. The plugin introduces a new `http-probe` profile which can be configured at the router.
+The plugin leverages the existing 128T reachability detection and enforcement configuration within the service-route on the router.
 
 ### HTTP Profile configuration
 * Config Path: authority > router[name] > http-probe-profile
@@ -36,8 +36,7 @@ The plugin leverages the existing 128T reachability detection and enforcement co
 | valid-status-code | list | at least 1 value required | The list of valid status codes to be expected from the server |
 
 * Example:
-```config
-admin@node1.conductor1# show config running authority router t102-dut3 http-probe-profile http-probe-1
+```config {9-14}
 
 config
 
@@ -55,8 +54,6 @@ config
         exit
     exit
 exit
-
-admin@node1.conductor1#
 ```
 
 ### Service route configuration
@@ -71,22 +68,19 @@ The following fields should be enabled for the probe based detection to work. Th
 | --    | --      | --          | --                                      |
 | enforcement | boolean | true | Toggle the configuration to be enabled for the reachability enforcement to take effect. |
 | probe-type | enumeration | always | For probe based reachability detection to take effect the probe-type must be set to `always`. |
-| hold-down | uint32 | probe-duration * 2 | The `hold-down` time is the amount of time in seconds that the path is kept out-of-service when path is determined to be down. If this value is shorter than the probe-interval, then the paths may come online sooner than desired. Hence the recommended setting is at least twice the probe-interval in order for the path to remain down via API calls |
-
+| hold-down | uint32 | probe-duration * 2 | The `hold-down` time is the amount of time in seconds that the path is kept out-of-service when path transitions from down to up. |
 | probe > probe-type | enumeration | http-probe | The probe-type must be set to `http-probe` in order to leverage the http(s) based probing |
 | probe > http-probe-profile | reference | - | Reference to a previously configured http-probe-profile on the router |
 
 :::warning
-The `reachability-detection > probe` configuration allows for multiple probes of various types to be configured. The behavior of the feature with multiple path probes remains untested at this point.
+The `reachability-detection > probe` configuration allows for multiple probes of various types to be configured. All the probes for a given service-route must be up for the route to be considered as up.
 :::
 
 
 ### Probe reachability
-At this time, the plugin does generate any configuration to ensure the reachability of the probe traffic to the destination. The user must configure the appropriate services and routes for this purpose. The probe will be originated in the default linux environment. In case of inband management, the probe traffic will be associated with the `_internal_` tenant so care must be taken to allow the tenant when creating such config. As a reference the following configuration represents a service and route to reach one of the HTTP probes in this document.
+The router should have a distinct path for the probe traffic. It is recommended that the user create dedicated services and service routes for this purpose. At this time, the plugin does not generate any configuration to ensure the reachability of the probe traffic to the destination. The probe will be originated in the default linux environment. In case of in-band management, the probe traffic will be associated with the `_internal_` tenant so care must be taken to allow the tenant when creating such config. As a reference the following configuration represents a service and route to reach one of the HTTP probes in this document.
 
 ```
-admin@node1.conductor1# show config running authority service http-probe-1
-
 config
 
     authority
@@ -109,11 +103,24 @@ config
             exit
             share-service-routes  false
         exit
+
+        router  my-router
+            name           my-router
+
+            service-route  http-probe-rte-1
+                name          http-probe-rte-1
+                service-name  http-probe-1
+
+                next-hop      node1 wan
+                    node-name  node1
+                    interface  wan
+                exit
+            exit
+        exit
+
     exit
 exit
 ```
-
-In addition, the service-route or other routing configuration must be created on the router for enabling a successful probe via the plugin.
 
 ## Use Cases
 
@@ -121,13 +128,11 @@ In addition, the service-route or other routing configuration must be created on
 One of the primary use cases of the plugin would be to monitor the internet or some other service reachability by pinging a HTTP server over a give service path. This is very much similar in concept to the native ICMP probe functionality that exist in the product.
 
 ### Proportional Load balancing via destination NATs
-In this use case, a particular service or workflow is designed to be load balanced across several upstream servers by doing a proportional or round-robin load balancing along with dest nat. In this use case, the 128T http-probe plugin can be used to monitor the service status of each of those upstream servers to determine if the particular server should be in service or not from routing perspective. The following configuration snippet builds on the example above to demonstrate this scenario
+In this use case, a particular service or workflow is designed to be load balanced across several upstream servers by doing a proportional load balancing along with dest nat. In this use case, the 128T http-probe plugin can be used to monitor the service status of each of those upstream servers to determine if the particular server should be in service or not from routing perspective. The following configuration snippet builds on the example above to demonstrate this scenario
 
-In this example, both `test-app-route-1` and `test-app-route-2` are equal cost routes used for proportional loadbalancing.
+In this example, both `test-app-route-1` and `test-app-route-2` are equal cost routes used for proportional load balancing.
 
 ```config
-admin@node1.conductor1# show config running authority router t102-dut3 service-route test-app-route-1
-
 config
 
     authority
@@ -159,20 +164,6 @@ config
                     exit
                 exit
             exit
-        exit
-    exit
-exit
-
-
-admin@node1.conductor1#
-admin@node1.conductor1# show config running authority router t102-dut3 service-route test-app-route-2
-
-config
-
-    authority
-
-        router  t102-dut3
-            name           t102-dut3
 
             service-route  test-app-route-2
                 name                    test-app-route-2
@@ -192,10 +183,6 @@ config
                     reachability-profile  dummy
                     probe-type            always
 
-                    probe                 test
-                        name  test
-                    exit
-
                     probe                 probe2
                         name                probe2
                         http-probe-profile  http-probe-2
@@ -213,13 +200,6 @@ admin@node1.conductor1#
 Each service-route is designed to probe a unique URL for that server and monitors the health of the service at the TCP socket level as well as the HTTP stack. When one of the server cannot be reached or responds with a non successful status code such as 504 etc, the service path is taken out of service.
 
 :::warning
-When all the service routes associated with the same service are down, the system operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, its possible that sessions are routed to paths that are down purely from a probe perspective. However, as soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions.
+When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, its possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
 :::
 
-## Troubleshooting
-
-### &#x1F6A7; Under Construction &#x1F6A7;
-
-### Triggering manual failover and failback
-
-### &#x1F6A7; Under Construction &#x1F6A7;
