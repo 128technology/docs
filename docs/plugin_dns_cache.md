@@ -174,7 +174,7 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 ## Release Notes
 
 :::warning
-The plugin must be updated to version 3.2.1 or later prior to upgrading the conductor to SSR version 5.4.0.
+The plugin must be updated to version 3.2.1 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
 ### Release 3.2.1

@@ -18,7 +18,7 @@ Before upgrading please review the [Upgrade Considerations](intro_upgrade_consid
 ------
 - **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
 ------
-- **Upgrade ICMP Reachability Plugin:** If you are running the ICMP Reachability plugin, it must be upraded to version 3.0.3 or higher **before** upgrading the Conductor to SSR Version 5.4.0.
+- **Plugin Upgrades:** If you are running with plugins, please review the instructions **before** [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 ------
 
 ## Release 5.4.0

@@ -35,7 +35,7 @@ Committing configuration changes is not allowed when the system is in a "mixed v
 
 
 ### Plugin Config Generation changes
-The config generation for plugins have been adapted to work with the improved config handling available in 5.3 and higher. When upgrading from 4.x version of conductor, no action is required to take advantage of this new functionality. However, when upgrading from 5.1 or 5.2 to the latest 5.3 or higher, the following plugins must be updated prior to upgrading the 128T conductor.
+The config generation for plugins have been adapted to work with the improved config handling available in 5.3 and higher. When upgrading from 4.x version of conductor, no action is required to take advantage of this new functionality. However, when upgrading from 5.1 or 5.2 to the latest 5.3 or higher, the following plugins must be updated prior to upgrading the 128T conductor. Instructions on upgrading the plugins can be found [here](plugin_intro.md#upgrading-an-existing-plugin)
 
 | Plugin | Version |
 | ------ | ------- |
@@ -43,3 +43,4 @@ The config generation for plugins have been adapted to work with the improved co
 | dns-app-id | [>=3.1.3](plugin_dns_app_id.md#release-notes) |
 | ha-sync-redundancy | [>=1.1.0](plugin_ha_sync_redundancy.md#release-notes) |
 | icmp-reachability-detection | [>=3.0.3](plugin_icmp_reachability_detection.md#release-notes) |
+| wireguard | [>-2.0.3](plugin_wireguard.md#release-notes) |
