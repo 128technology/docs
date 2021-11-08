@@ -814,6 +814,34 @@ Some of the key aspects of the auto-generated configuration are as follows:
 
 ## Release Notes
 
+:::warning
+The plugin must be updated to version 3.0.3 or later prior to upgrading the conductor to SSR version 5.4.0.
+:::
+### Release 3.0.3
+
+#### Issues Fixed
+
+- **PLUGIN-1322** Plugins do not clean up the the salt states on uninstall
+
+    _**Resolution:**_ Each plugin RPM now manages their dependencies to ensure proper clean up on uninstall
+
+- **PLUGIN-1378** Plugin config generation was failing to remove certain elements from XML
+
+    _**Resolution:**_ Handle the case for missing elements before attempting to remove them. In addition, ensure that the failure for config generation on one router doesn't affect the rest of the routers.
+
+- **PLUGIN-1383** Plugin generated services do not work when module mode is not configured
+
+    _**Resolution:**_ The plugin will auto generate the application-identification module mode when possible to ensure the plugin generated services operate correctly.
+
+- **PLUGIN-1419** Invalid service config generated for the config director mode
+
+    _**Resolution:**_ The plugin correctly generates the application-name field for generated services to conform to the config director type validation.
+
+- **PLUGIN-1322** The plugin state command doesn't show correct information
+
+    _**Resolution**_ The plugin state command output was improved for both summary and detail mode to show correct information.
+
+
 ### Release 3.0.1
 
 #### Issues Fixed
