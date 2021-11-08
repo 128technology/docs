@@ -337,6 +337,10 @@ exit
 
 ## Release Notes
 
+:::warning
+The plugin must be updated to version 3.1.3 or later prior to upgrading the conductor to SSR version 5.4.0.
+:::
+
 ### Release 3.1.3
 
 #### Issues Fixed
