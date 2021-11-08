@@ -815,7 +815,7 @@ Some of the key aspects of the auto-generated configuration are as follows:
 ## Release Notes
 
 :::warning
-The plugin must be updated to version 3.0.3 or later prior to upgrading the conductor to 128T version 5.4.0.
+The plugin must be updated to version 3.0.3 or later prior to upgrading the conductor to SSR version 5.4.0.
 :::
 ### Release 3.0.3
 
@@ -823,7 +823,7 @@ The plugin must be updated to version 3.0.3 or later prior to upgrading the cond
 
 - **PLUGIN-1322** Plugins do not clean up the the salt states on uninstall
 
-    _**Resolution:**_ Each plugin RPM will be owner of he respective salt directory so that it gets cleaned up on uninstall.
+    _**Resolution:**_ Each plugin RPM now manages their dependencies to ensure proper clean up on uninstall
 
 - **PLUGIN-1378** Plugin config generation was failing to remove certain elements from XML
 
