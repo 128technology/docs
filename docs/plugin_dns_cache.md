@@ -173,6 +173,18 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 
 ## Release Notes
 
+### Release 3.2.1
+
+#### Issues Fixed
+
+- **PLUGIN-1461**  Config generation for the plugin failing in the Bonsai mode
+
+  _**Resolution:**_ Correctly handle the config generation for routers where the DNS cache plugin is not enabled during bonsai config generation
+
+- **PLUGIN-1367**  DNS cache services constantly fail on system startup
+
+  _**Resolution:**_ The DNS cache systemd services will be deferred until the 128T services are running and stable.
+
 ### Release 3.1.0
 
 #### Issues Fixed
