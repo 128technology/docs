@@ -337,6 +337,22 @@ exit
 
 ## Release Notes
 
+:::warning
+The plugin must be updated to version 3.1.3 or later prior to upgrading the conductor to SSR version 5.4.0.
+:::
+
+### Release 3.1.3
+
+#### Issues Fixed
+
+- **PLUGIN-1461**  Config generation for the plugin failing in the Bonsai mode
+
+  _**Resolution:**_ Correctly handle the config generation for routers where the plugin is not enabled during bonsai config generation
+
+- **PLUGIN-1226**  DNS App Id state script takes too long to execute
+
+  _**Resolution:**_ Optimized the execution of the script by simplifying some of the plugin router components.
+
 ### Release 2.3.1, 3.1.1
 
 #### Issues Fixed
