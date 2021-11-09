@@ -175,6 +175,7 @@ module.exports = {
       "plugin_dns_app_id",
       "plugin_dns_cache",
       "plugin_gre",
+      "plugin_ha_sync_redundancy",
       "plugin_icmp_reachability_detection",
       "plugin_ipsec_client",
       "plugin_loopback_static_routes",
@@ -210,6 +211,7 @@ module.exports = {
         "type": "category",
         "label": "128T Installer",
         "items": [
+          "release_notes_128t_installer_3.1",
           "release_notes_128t_installer_3.0",
           "release_notes_128t_installer_2.7",
           "release_notes_128t_installer_2.6",
