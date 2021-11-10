@@ -23,7 +23,7 @@ Before upgrading please review the [Upgrade Considerations](intro_upgrade_consid
 
 ## Release 5.4.0
 
-**Release Date:** November 5, 2021
+**Release Date:** November 12, 2021
 
 ### New Features and Improvements
 
