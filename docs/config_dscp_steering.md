@@ -13,7 +13,7 @@ DSCP traffic steering must be configured at both the `service` level and the `ne
 
 ### Service Configuration
 
-A DSCP value or range can be configured at the Service level. The dscp-aware services are configured in a hierarchy, with the parent service configured without a DSCP value, and the children service are configured with a DSCP value.
+A DSCP value or range can be configured at the Service level. DSCP aware services are configured in a hierarchy; the parent service is configured without a DSCP value, and each child service is configured with a DSCP value.
 
 The following configuration splits the tunnel across 3 services: the traffic with `dscp` value 14 is handled by the high-priority service; the traffic with `dscp` values from 26 to 28 is handled by the low-priority service. The remaining traffic falls back into the tunnel service.
 
