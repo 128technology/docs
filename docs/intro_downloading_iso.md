@@ -189,30 +189,20 @@ The certificate is provisioned in Windows. Use Edge, Explorer, or Chrome to navi
 
 ## Deployment using QCOW2
 
-The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage format for virtual disks. The SSR qcow2 is a virtual hard disk image pre-installed with the SSR ISO. It includes cloud-init packages to support OpenStack VM deployments, Amazon extensions to support AWS, and Microsoft extensions to support Azure. 
+The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage format for virtual disks. The SSR qcow2 is a virtual hard disk image pre-installed with the SSR ISO. It includes cloud-init packages to support OpenStack VM deployments. However, cloud-init is only used for linux network provisioning, and any operations beyond bootstrapping the OS layer are not supported. 
 
-Download the qcow2 image, and depending upon your environment, choose the appropriate method to deploy. The SSR qcow2 image is available here:
+Download the qcow2 image using the link below:
 
 - https://technology128t.jfrog.io/ui/repos/tree/General/generic-128t-images-release-local
-or 
-- https://software.128technology.com/ui/packages 
 
-To deploy the SSR, use your management tool (OpenStack, vCenter, Oracle VMM, etc.) to load the image into your virtual environment, or deploy it directly from the hypervisor. The VM then boots using the pre-installed software.
+Use the OpenStack management tool to load the image into your virtual environment, or deploy it directly from the hypervisor. The VM then boots using the pre-installed software.
 
-The steps used for deployment vary depending on the hypervisor used for the environment, and the management tool. For example, qcow2 can be deployed directly to a KVM hypervisor, or it can be deployed via KVM that is being managed as part of an OpenStack cluster. It is recommended that you refer to your hypervisor’s documentation for supporting information.
+The steps used for deployment vary depending on the hypervisor used for the environment and the management tool. For example, qcow2 can be deployed directly to a KVM hypervisor, or it can be deployed via KVM that is being managed as part of an OpenStack cluster. It is recommended that you refer to your hypervisor’s documentation for supporting information.
 
 Supported Hypervisors
-**The following are suggested Hypervisors. Please provide guidance.**
 
 - KVM
-- VMware ESXi
-- Microsoft Windows Hyper-V
-- Oracle Virtualbox
-- Citrix Xen 
 
 Supported Management Environments
-**The following are suggested managment tools. Please provide guidance.**
 
-- Oracle VMM
 - OpenStack
-- vCenter
