@@ -107,8 +107,6 @@ Before upgrading please review the [Upgrade Considerations](intro_upgrade_consid
 ------
 - **I95-39357 Issues when DHCP configured for non-forwarding fabric interface:** Users are now prevented from configuring DHCP on a non-forwarding fabric interface.
 ------
-- **I95-39372 Session-ID detail not displaying time correctly:** The time display in the Session Detail dialog is now displayed in familiar formats.
-------
 - **I95-39931 Missing validation for service hierarchy:** Added validation around hierarchical services that requires child services to be at least as specific as their parents.
 ------
 - **I95-40210 Streamline GUI Autocomplete:** Updated the autocomplete feature to improve usability.
@@ -131,13 +129,9 @@ Before upgrading please review the [Upgrade Considerations](intro_upgrade_consid
 ------
 - **I95-42310 Cannot delete a Conductor address in the Authority using the GUI:** This issue has been resoved.
 ------
-- **I95-42372 Rename aggregate traffic metrics "error" to "dropped":** Traffic metrics have been renamed. 
-------
 - **I95-42396 Highway crash after receiving a bad packet:** Resolved an issue in the DPDK internal storage space.
 ------
 - **I95-42441 AP downloads taking too long:** Resolved an issue where a download request would timeout if too many routers were requested at once. 
-------
-- **I95-42497 Upgraded version of `libsolv`:** `libsolv` has been upgraded to resolve security vulnerabilities.
 ------
 - **I95-42563 Attempting to open Help (?) for Adjacency fails:** An issue with the help traceback has been resolved. 
 ------
@@ -147,20 +141,23 @@ Before upgrading please review the [Upgrade Considerations](intro_upgrade_consid
 ------
 - **I95-42649 `delete grant access` for access management role not working:** This issue has been resolved.
 ------
-- **I95-42686 Add commit progress updates to GUI:** After committing configuration changes, a progress bar appears, indicating commit progress.
-------
 - **I95-42702 Newly created users not being saved:** Resolved an issue where the user datastore was not being written to disk on edits.
 ------
 - **I95-42779 ICMP Probe not detecting interface is UP causing Probe to fail:** Resolved an issue where IcmpProbeManager hangs on an invalid node id.
 ------
 - **I95-42840 Post upgrade peer path flap:** Resolved an issue where keep-alive packets were not processed on the same flow. 
 ------
-- **I95-42897 Occasional uninformative "Base Exception: Failed to get random bytes" accompanying
-traffic failures:** Updated the exception to include error string and source location.
+- **I95-42897 Occasional uninformative "Base Exception: Failed to get random bytes" accompanying traffic failures:** Updated the exception to include error string and source location.
 ------
 - **I95-43028 Downloaded software for the router does not show up on secondary conductor:** Resolved this issue so that full output is delivered to all nodes.
 ------
+- **I95-43083 5.1.6 ISO missing Rescue Boot Image:** Replacing packages that were removed during upgrade. 
+------
 - **I95-43135 Rare Race condition in an HA configuration:** Resolved a rare race condition that may occur if an `export config` command is run during a failover. 
+------
+- **I95-43194 GraphQL Type Supports Proto Primitive:** Incorrect integer types causing an error. This issue has been resolved. 
+------
+- **I95-43244 Reverse Packet injection on Affinity Mismatch:** Resolved an issue where a reverse packet was being injected into a flow with no flow affinity. 
 
 ## Caveats
 

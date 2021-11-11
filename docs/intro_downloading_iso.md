@@ -189,7 +189,7 @@ The certificate is provisioned in Windows. Use Edge, Explorer, or Chrome to navi
 
 ## Deployment using QCOW2
 
-The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage format for virtual disks. The SSR qcow2 is a virtual hard disk image pre-installed with the SSR ISO. It includes cloud-init packages to support OpenStack VM deployments. However, cloud-init is only used for linux network provisioning, and any operations beyond bootstrapping the OS layer are not supported. 
+The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage format for virtual disks. The SSR qcow2 is a virtual hard disk image pre-installed with the SSR ISO. It includes cloud-init packages for linux network provisioning and for disk volume dynamic expansion on first boot to support OpenStack VM deployments. Any operations beyond bootstrapping the OS layer are not supported. 
 
 Download the qcow2 image using the link below:
 
