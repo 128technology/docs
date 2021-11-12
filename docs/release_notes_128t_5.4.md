@@ -5,21 +5,22 @@ sidebar_label: '5.4'
 :::info
 Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
 
-If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
+If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR Software is provided.
 
-Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
 ### Upgrade Considerations
 
-Before upgrading please review the [Upgrade Considerations](intro_upgrade_considerations.md) page. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
+:::important
+Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) page. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
+:::
 
 - **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
 - **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
 ------
-- **Plugin Upgrades:** If you are running with plugins, please review the instructions **before** [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
-------
+- **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-config-generation-changes) for additional information.  
 
 ## Release 5.4.0
 
@@ -101,7 +102,7 @@ Before upgrading please review the [Upgrade Considerations](intro_upgrade_consid
 
 - **I95-23613 Incorrectly logging missing xml and Json config files as an error:** The logging category has been changed to Info.
 ------
-- **I95-35068 Not getting past the Starting state when a bad configuration is stored:** This issue has been resoved.
+- **I95-35068 Not getting past the Asset Starting state when a bad configuration is stored:** This issue has been resoved.
 ------
 - **I95-38729 Unbinding devices:** VMBus devices are now released at startup.
 ------
@@ -151,7 +152,7 @@ Before upgrading please review the [Upgrade Considerations](intro_upgrade_consid
 ------
 - **I95-43028 Downloaded software for the router does not show up on secondary conductor:** Resolved this issue so that full output is delivered to all nodes.
 ------
-- **I95-43083 5.1.6 ISO missing Rescue Boot Image:** Replacing packages that were removed during upgrade. 
+- **I95-43083 ISO missing Rescue Boot Image:** Replacing packages that were removed during upgrade. 
 ------
 - **I95-43135 Rare Race condition in an HA configuration:** Resolved a rare race condition that may occur if an `export config` command is run during a failover. 
 ------

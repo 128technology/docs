@@ -642,9 +642,9 @@ The plugin must be updated to version 2.0.3 or later prior to [upgrading the con
 
 #### Issues Fixed
 
-- **PLUGIN-1443**  Config generation for the plugin failing in the Bonsai mode
+- **PLUGIN-1443**  Config generation for the plugin failing
 
-  _**Resolution:**_ Correctly handle the config generation for routers where the DNS cache plugin is not enabled during bonsai config generation
+  _**Resolution:**_ Correctly handle the config generation for routers where the DNS cache plugin is not enabled during config generation
 
 - **PLUGIN-1220**  Add support for kernel version `3.10.0-1160.21.1`.
 

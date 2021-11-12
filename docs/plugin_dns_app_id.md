@@ -3,7 +3,7 @@ title: DNS App Id Plugin
 sidebar_label: DNS App Id
 ---
 
-The DNS App ID plugin identifies traffic passing through your 128T router by applying pattern matching to hostnames contained in DNS requests it processes. You can then configure 128T services for these hostnames, and associate application names to influence routing policy. You can read more about 128T and its application identification concept [here](concepts_appid.md).
+The DNS App ID plugin identifies traffic passing through your SSR router by applying pattern matching to hostnames contained in DNS requests it processes. You can then configure SSR services for these hostnames, and associate application names to influence routing policy. You can read more about SSR and its application identification concept [here](concepts_appid.md).
 
 This plugin relies on the [DNS Cache](plugin_dns_cache.md) plugin for hostname resolution.
 
@@ -45,7 +45,7 @@ exit
 | custom-apps | subelement | Multiple instance object. Allows administrators to define custom patterns for matching applications. |
 | custom-apps > name | string | The name of the custom-app. This value will subsequently be configured within a `service > application-name` to give treatment to that application. |
 | custom-apps > description | string | A human-readable description of the custom application. |
-| custom-apps > domain-name | string | A wildcard expression (POSIX.2 fnmatch) to match DNS requests that 128T processes. |
+| custom-apps > domain-name | string | A wildcard expression (POSIX.2 fnmatch) to match DNS requests that SSR processes. |
 
 ### Built-In Patterns
 
@@ -146,13 +146,13 @@ exit
 | custom-apps | subelement | Multiple instance object. Allows administrators to define custom patterns for matching applications. |
 | custom-apps > name | string | The name of the custom-app. This value will subsequently be configured within a `service > application-name` to give treatment to that application. |
 | custom-apps > description | string | A human-readable description of the custom application. |
-| custom-apps > patterns | regex | A regular expression pattern for matching to DNS requests that the 128T processes. |
+| custom-apps > patterns | regex | A regular expression pattern for matching to DNS requests that the SSR processes. |
 
 Refer to the [Appendix](#appendix) for an example of the config generation.
 
 #### Manually associating with a Service
 
-When auto-generation is not an option, the user can configure the appropriate application services explicitly. Because the DNS AppID uses the same mechanism as a standard 128T [AppID module](concepts_appid.md#appid-using-modules), you'll reference the application using the `application-name` field within a `service` configuration. In the `application-name` field, use the `custom-apps > name` field as your key as shown here:
+When auto-generation is not an option, the user can configure the appropriate application services explicitly. Because the DNS AppID uses the same mechanism as a standard SSR [AppID module](concepts_appid.md#appid-using-modules), you'll reference the application using the `application-name` field within a `service` configuration. In the `application-name` field, use the `custom-apps > name` field as your key as shown here:
 
 ```
 admin@labsystem1.fiedler# show config running authority service cnn
@@ -345,9 +345,9 @@ The plugin must be updated to version 3.1.3 or later prior to [upgrading the con
 
 #### Issues Fixed
 
-- **PLUGIN-1461**  Config generation for the plugin failing in the Bonsai mode
+- **PLUGIN-1461**  Config generation for the plugin failing
 
-  _**Resolution:**_ Correctly handle the config generation for routers where the plugin is not enabled during bonsai config generation
+  _**Resolution:**_ Correctly handle the config generation for routers where the plugin is not enabled during config generation
 
 - **PLUGIN-1226**  DNS App Id state script takes too long to execute
 
@@ -370,7 +370,7 @@ The plugin must be updated to version 3.1.3 or later prior to [upgrading the con
 
 #### Issues Fixed
 
-- **PLUGIN-768** Support the DNS App ID plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the DNS App ID plugin in SSR versions `5.1.0` and greater.
 - **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-dns-app-id`
 
 ### Release 2.2.1
@@ -400,5 +400,5 @@ The plugin must be updated to version 3.1.3 or later prior to [upgrading the con
 ### Release 1.0.2, 2.0.2
 
 #### Issues Fixed
-- **PLUGIN-402** Ensure 128T monitors new file changes and applications restarts with 128T.
+- **PLUGIN-402** Ensure SSR monitors new file changes and applications restarts with SSR.
 

@@ -236,6 +236,6 @@ The plugin must be updated to version 1.1.0 or later prior to [upgrading the con
 
 #### Issues Fixed
 
-- **PLUGIN-1451**  Config generation for the plugin failing in the Bonsai mode
+- **PLUGIN-1451**  Config generation for the plugin failing
 
-  _**Resolution:**_ Correctly handle the config generation for routers where the plugin is not enabled during bonsai config generation
+  _**Resolution:**_ Correctly handle the config generation for routers where the plugin is not enabled during config generation

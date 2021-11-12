@@ -4,8 +4,8 @@ sidebar_label: Upgrade Considerations
 ---
 Before upgrading to **version 5.3 and higher**, please review the following information.
 
-### Config Validation Changes
-Several modifications have been made to the verification process for configurations. As a result, configurations that were valid in earlier versions of the SSR/128T software may now present configuration errors. The information below provides an awareness of what to look for and address.
+### Configuration Validation Changes
+Several modifications have been made to the verification process for configurations. As a result, configurations that were valid in earlier versions of the SSR software may now present configuration errors. The information below provides an awareness of what to look for and address.
 
 The following configuration validation checks may present errors in previously valid configurations:
 
@@ -34,8 +34,11 @@ When configuring redundant interfaces, **all** configured fields must be identic
 Committing configuration changes is not allowed when the system is in a "mixed version" state that may occur during an upgrade. For example, if one node of an HA pair is at 4.5.3 and an upgrade to 5.3 (or higher) has been performed on the other node, do not attempt to commit a configuration change until both nodes are updated to the new release.
 
 
-### Plugin Config Generation changes
-The config generation for plugins have been adapted to work with the improved config handling available in 5.3 and higher. When upgrading from 4.x version of conductor, no action is required to take advantage of this new functionality. However, when upgrading from 5.1 or 5.2 to the latest 5.3 or higher, the following plugins must be updated prior to upgrading the 128T conductor. Instructions on upgrading the plugins can be found [here](plugin_intro.md#upgrading-an-existing-plugin)
+### Plugin Configuration Generation Changes
+
+The configuration generation for plugins have been adapted to work with the improved configuration handling available in 5.3 and higher. When upgrading from a 4.x version of conductor, no action is required to take advantage of this new functionality. 
+
+However, when upgrading from 5.1 or 5.2 to version 5.3 or higher, the following plugins must be updated **prior to upgrading** the SSR conductor. Please see [Upgrading an Existing Plugin](plugin_intro.md#upgrading-an-existing-plugin) for instructions.
 
 | Plugin | Version |
 | ------ | ------- |
@@ -43,4 +46,4 @@ The config generation for plugins have been adapted to work with the improved co
 | dns-app-id | [>=3.1.3](plugin_dns_app_id.md#release-notes) |
 | ha-sync-redundancy | [>=1.1.0](plugin_ha_sync_redundancy.md#release-notes) |
 | icmp-reachability-detection | [>=3.0.3](plugin_icmp_reachability_detection.md#release-notes) |
-| wireguard | [>-2.0.3](plugin_wireguard.md#release-notes) |
+| wireguard | [>=2.0.3](plugin_wireguard.md#release-notes) |
