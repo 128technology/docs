@@ -61,7 +61,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-32508 Binding Device Interface Identifiers in Azure:** Beginning with the release of 5.0.0, the VMBus UUID is used to identify the device interfaces on a router in Azure cloud deployments. Use of the PCI address is no longer supported. For the steps to identify and configure the VMBus UUID on each device interface, please refer to [Configuring a Device Interface with VMBus UUID](intro_installation_azure.md#configuring-a-device-interface-with-vmbus-uuid). Please note that for upgrades to version 5.0 and higher, the VMBus UUID must be manually configured on the device interfaces using this procedure. 
 ------
-- **I95-32558 In-line Flow Performance Monitoring:** Inline performance metrics have been enhanced to achieve a finer granularity than what is currently available via BFD. Statistics are now collected per path, traffic class, and protocol (TCP or UDP) level. Sessions can be forwarded using more granular SLA metrics. 
+- **I95-32558 [In-line Flow Performance Monitoring](config_flow_perf_mon.md):** Inline performance metrics have been enhanced to achieve a finer granularity than what is currently available via BFD. Statistics are now collected per path, traffic class, and protocol (TCP or UDP) level. Sessions can be forwarded using more granular SLA metrics. 
 ------
 - **I95-33376 Address Latest Vulnerabilities:** Security Vulnerability testing is ongoing, and fixes are in place for identified issues. 
 ------

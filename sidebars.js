@@ -81,6 +81,7 @@ module.exports = {
           "config_service_health",
           "config_gre_tunnel",
           "config_in-memory_metrics",
+          "config_flow_perf_mon",
 
           "config_ha",
           "config_dual_router_ha",

@@ -1769,6 +1769,28 @@ A *peer* object models a remote router (in this system's *authority* or in a rem
 | 3.0.0 | Removed unused fields, removed *tenant* | 
 | 3.2.0 | Removed *id*, added *generated* |
 
+## performance-monitoring-profile
+
+#### Path
+
+authority > performance monitoring profile
+
+#### Description
+
+The inline flow performance profile provides flow statistics collected on a per path, traffic class, and protocol (TCP or UDP) level.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| name | string | The name of the performance monitoring profile. |
+| marking-count | uint16 | The number of packets to mark within a given interval. |
+| interval-duration | uint32 | The duration of a packet marking interval in milliseconds. | monitor-only | enumeration | Valid values: true/false. Default is true. Collect statistics without influencing packet processing features. |
+| resource-group | string | Associate this performance monitoring profile with a top-level resource-group. |
+
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 5.0.0 | Introduced |
+
 ## policy
 
 #### Path:

@@ -1,0 +1,110 @@
+---
+title: Inline Flow Performance Monitoring
+sidebar_label: Inline Flow Performance Monitoring
+---
+
+Inline Flow Performance Monitoring complements BFD in measuring peer paths between two SSR devices. To provide this additional level of detail, the initiating router adds a small amount of metadata to a sample number of packets. This metadata indicates that metrics are collected per path, traffic class, and protocol (TCP or UDP). The receiving router reads the metadata and returns the data to the intiating router. The configurable fields include:
+
+- `name`: The name of the performance monitoring profile.
+- `marking-count`: The number of packets to mark within a given interval.
+- `interval-duration`: The duration of a packet marking interval in milliseconds.
+- `monitor-only`: Collect statistics without influencing packet processing features.
+- `resource-group`: Associate this performance monitoring profile with a top-level resource-group.
+
+Additional information is available at [`performance-monitoring-profile`.](config_reference_guide.md/#performance-monitoring-profile)
+
+The data returned is organized by traffic class (high/medium/low/best-effort) and protocol (TDP, UDP), giving more granular data on the performance of a link - not just through synthetic traffic (BFD), but by piggybacking onto actual user traffic.
+
+## Configuration
+
+#### From the command line:
+
+```
+config
+
+    authority
+
+        performance-monitoring-profile  wan-assurance-monitoring-profile
+            name               wan-assurance-monitoring-profile
+            marking-count      100
+            interval-duration  10000
+            monitor-only       true
+        exit
+    exit
+exit
+```
+#### From the GUI:
+
+1. From the Authority level, scroll down to Performance Monitoring Profiles, and click ADD.
+
+![Performance Monitoring Profiles](/img/config_ifpm1.png)
+
+2. Enter a name for the profile.
+
+![New Profile Name](/img/config_ifpm2.png)
+
+3. Configure monitoring values, or accept the defaults to gather a baseline.
+
+![Monitoring Profile Intervals](/img/config_ifpm3.png)
+
+4. Assign the profile to a Resource Group. **(add info here why this is an option)**
+
+5. Validate and Commit the configuration changes.
+
+Additionally, ensure that the profile is applied to your peer paths. This is generally configured through **router > node > device-interface > network-interface > neighborhood**. Apply the profile to both sides of the SVR peer path.
+
+
+### Show Commands
+
+Use `show stats performance-monitoring` to view the results.
+
+```
+admin@labsystem1.fiedler# show stats performance-monitoring router all force
+Tue 2021-11-09 11:19:51 EST
+✔ Retrieving statistics...
+
+Highway Manager Performance Monitoring Stats
+--------------------------------------------
+
+=================== =========== ======== =========== ================ ============= ====== =============== ========== ============
+ Metric              Router      Node     Peer-name   Peer-host        Device-name   Vlan   Traffic-class   Protocol        Value
+=================== =========== ======== =========== ================ ============= ====== =============== ========== ============
+ peer-path jitter    natick      flutie   greyhaven   10.65.228.68     enp1s0f3         0   low             udp                21
+                                 flutie   greyhaven   10.65.228.68     enp1s0f3         0   medium          udp                12
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   low             udp                 4
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   medium          udp                51
+                                 flutie   westfield   10.0.0.41        enp1s0f3         0   medium          udp                 0
+                     westfield   monty    natick      108.20.166.32    enp1s0           0   medium          udp                 1
+                                 monty    natick      108.49.110.151   enp1s0           0   medium          udp                 0
+ peer-path latency   natick      flutie   greyhaven   10.65.228.68     enp1s0f3         0   low             udp                78
+                                 flutie   greyhaven   10.65.228.68     enp1s0f3         0   medium          udp                64
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   low             udp                45
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   medium          udp               113
+                                 flutie   westfield   10.0.0.41        enp1s0f3         0   medium          udp                18
+                     westfield   monty    natick      108.20.166.32    enp1s0           0   medium          udp                15
+                                 monty    natick      108.49.110.151   enp1s0           0   medium          udp                 0
+ peer-path loss      natick      flutie   greyhaven   10.65.228.68     enp1s0f3         0   low             udp                 0
+                                 flutie   greyhaven   10.65.228.68     enp1s0f3         0   medium          udp                 0
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   low             udp                 0
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   medium          udp                 0
+                                 flutie   westfield   10.0.0.41        enp1s0f3         0   medium          udp                 0
+                     westfield   monty    natick      108.20.166.32    enp1s0           0   medium          udp                 0
+                                 monty    natick      108.49.110.151   enp1s0           0   medium          udp               100
+ peer-path mos       natick      flutie   greyhaven   10.65.228.68     enp1s0f3         0   low             udp               434
+                                 flutie   greyhaven   10.65.228.68     enp1s0f3         0   medium          udp               436
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   low             udp               438
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   medium          udp               412
+                                 flutie   westfield   10.0.0.41        enp1s0f3         0   medium          udp               440
+                     westfield   monty    natick      108.20.166.32    enp1s0           0   medium          udp               440
+                                 monty    natick      108.49.110.151   enp1s0           0   medium          udp               100
+ peer-path updated   natick      flutie   greyhaven   10.65.228.68     enp1s0f3         0   low             udp        1636474788
+                                 flutie   greyhaven   10.65.228.68     enp1s0f3         0   medium          udp        1636216599
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   low             udp        1636474188
+                                 flutie   greyhaven   192.168.2.101    enp1s0f3         0   medium          udp        1636216603
+                                 flutie   westfield   10.0.0.41        enp1s0f3         0   medium          udp        1636466059
+                     westfield   monty    natick      108.20.166.32    enp1s0           0   medium          udp        1636466059
+                                 monty    natick      108.49.110.151   enp1s0           0   medium          udp        1636025768​
+
+
+```
+
