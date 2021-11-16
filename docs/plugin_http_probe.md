@@ -9,9 +9,9 @@ The instructions for installing and managing the plugin can be found [here](plug
 :::
 
 ## Overview
-Once installed and configured properly, the plugin will do the following operations on the router
+Once installed and configured properly, the plugin will do the following operations on the router.
 
-* Launch as set of HTTP(s) monitor services which will ping the configured HTTP or HTTPs URL at the configured frequency
+* Launch a set of HTTP(s) monitor services which will probe the configured HTTP or HTTPs URL at the configured frequency
 * Periodically update the load-balancer APIs with the up/down status on service-paths associated with the http-probes
 
 :::note
@@ -69,7 +69,7 @@ The following fields should be enabled for the probe based detection to work. Th
 | enforcement | boolean | true | Toggle the configuration to be enabled for the reachability enforcement to take effect. |
 | probe-type | enumeration | always | For probe based reachability detection to take effect the probe-type must be set to `always`. |
 | hold-down | uint32 | probe-duration * 2 | The `hold-down` time is the amount of time in seconds that the path is kept out-of-service when path transitions from down to up. |
-| probe > probe-type | enumeration | http-probe | The probe-type must be set to `http-probe` in order to leverage the http(s) based probing |
+| probe > probe-type | enumeration | http-probe | The probe-type must be set to `http-probe` in order to leverage the HTTP(s) based probing |
 | probe > http-probe-profile | reference | - | Reference to a previously configured http-probe-profile on the router |
 
 :::warning
@@ -125,10 +125,10 @@ exit
 ## Use Cases
 
 ### Path selection
-One of the primary use cases of the plugin would be to monitor the internet or some other service reachability by pinging a HTTP server over a give service path. This is very much similar in concept to the native ICMP probe functionality that exist in the product.
+One of the primary use cases of the plugin would be to monitor the internet or some other service reachability by pinging an HTTP server over a given service path. This is very much similar in concept to the native ICMP probe functionality that exists in the product.
 
 ### Proportional Load balancing via destination NATs
-In this use case, a particular service or workflow is designed to be load balanced across several upstream servers by doing a proportional load balancing along with dest nat. In this use case, the 128T http-probe plugin can be used to monitor the service status of each of those upstream servers to determine if the particular server should be in service or not from routing perspective. The following configuration snippet builds on the example above to demonstrate this scenario
+In this use case, a particular service or workflow is designed to be load balanced across several upstream servers by doing a proportional load balancing along with destination NAT. In this use case, the 128T http-probe plugin can be used to monitor the service status of each of those upstream servers to determine if the particular server should be in service or not from routing perspective. The following configuration snippet builds on the example above to demonstrate this scenario.
 
 In this example, both `test-app-route-1` and `test-app-route-2` are equal cost routes used for proportional load balancing.
 
@@ -197,7 +197,7 @@ admin@node1.conductor1#
 
 ```
 
-Each service-route is designed to probe a unique URL for that server and monitors the health of the service at the TCP socket level as well as the HTTP stack. When one of the server cannot be reached or responds with a non successful status code such as 504 etc, the service path is taken out of service.
+Each service-route is designed to probe a unique URL for that servers and monitors the health of the service at the TCP socket level as well as the HTTP stack. When one of the servers cannot be reached or responds with a unsuccessful status code (e.g. 404, 504 etc) the service path is taken out of service.
 
 :::warning
 When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, its possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
@@ -224,7 +224,7 @@ Completed in 0.05 seconds
 admin@node1.conductor1#admin@node1.conductor1#
 ```
 
-In addition, the status of the probe's running in linux can be found by inspecting the `128T-http-probe-status-change-notifier@<probe-name>.service`. For example,
+In addition, the probe's running status in linux can be found by inspecting the `128T-http-probe-status-change-notifier@<probe-name>.service`. For example,
 
 ```
 # systemctl status 128T-http-probe-status-change-notifier@http-probe-2.service -l
