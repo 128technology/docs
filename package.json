@@ -21,7 +21,8 @@
     "mermaid": "^8.8.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-simple-flowchart": "^1.2.2"
+    "react-simple-flowchart": "^1.2.2",
+    "react-table": "^7.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
