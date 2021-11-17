@@ -487,45 +487,30 @@ export const columns = [
     Header: "Release Date",
     accessor: "releaseDate",
     className: "pester-data-table left",
-    sortType: (a, b) => {
-                            var a1 = new Date(a).getTime();
-                            var b1 = new Date(b).getTime();
-                            if(a1<b1)
-                              return 1;
-                            else if(a1<b1)
-                              return -1;
-                            else
-                              return 0;
-                          }
+    sortType: DateSort
   },
   {
     Header: "End of Maintenance",
     accessor: "endOfMaintenance",
     className: "pester-data-table",
-    sortType: (a, b) => {
-                            var a1 = new Date(a).getTime();
-                            var b1 = new Date(b).getTime();
-                            if(a1<b1)
-                              return 1;
-                            else if(a1<b1)
-                              return -1;
-                            else
-                              return 0;
-                          }
+    sortType: DateSort
   },
   {
     Header: "End of Support",
     accessor: "endOfSupport",
     className: "pester-data-table",
-    sortType: (a, b) => {
-                            var a1 = new Date(a).getTime();
-                            var b1 = new Date(b).getTime();
-                            if(a1<b1)
-                              return 1;
-                            else if(a1<b1)
-                              return -1;
-                            else
-                              return 0;
-                          }
+    sortType: DateSort
   },
 ];
+
+function DateSort(a, b)
+{
+  var a1 = new Date(a).getTime();
+  var b1 = new Date(b).getTime();
+  if(a1<b1)
+    return 1;
+  else if(a1<b1)
+    return -1;
+  else
+    return 0;
+}
