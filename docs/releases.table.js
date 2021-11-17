@@ -1,9 +1,17 @@
 import React from "react";
 
 // ----------------------------------------------------------------------------
-// Please respect chronological (date) order when adding new entries.
+// Please respect chronological release date order when adding new entries.
+// New entries should be placed at the top.
 // ----------------------------------------------------------------------------
 export const releases = [
+  {
+    version: '5.4.0',
+    url:'release_notes_128t_5.4#release-54',
+    releaseDate: 'November 18, 2021',
+    endOfMaintenance: 'May 18, 2022',
+    endOfSupport: 'November 18, 2022',
+  },
   {
     version: '5.1.6',
     url:'release_notes_128t_5.1#release-516',
