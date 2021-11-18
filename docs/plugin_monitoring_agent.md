@@ -1534,7 +1534,7 @@ For this diff case, the transform will compute the delta from a "counter" field.
 
 ## Monitoring Agent Release Notes
 
-### Release 3.5.0
+### Release 3.6.1
 
 #### New Features and Improvements:
 
@@ -1545,6 +1545,10 @@ For this diff case, the transform will compute the delta from a "counter" field.
 - **MON-354** `t128_device_state` collector has incorrect tags and fields for 128T versions < 4.5.3
 
   _**Resolution**_ Adjust some tags and fields in the `t128_device_state` collector for 128T versions < 4.5.3
+
+- **MON-383** Allow double backslash in telegraf input
+
+  _**Resolution**_ Modify the TOML parsing logic to allow double backslashes
 
 
 ### Release 3.4.2
