@@ -78,6 +78,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-40436 Updated Application ID Domain Data:** Application Identification can be configured to automatically download updated domain and application datatsets daily, weekly (default), or monthly. For more information, see [Auto Update the Domain List](config_domain-based_web_filter.md/#auto-update-the-domain-list).
 ------
+ - **I95-40438 Support for Lenovo X722:** Upgrades to the DPDK version now provide support for the Lenovo Ethernet Connection X722 for 10GbE SFP+. 
+------
 - **I95-40558 OSPF `show` commands:** Several new `show ospf` and `show ospf database` commands have been added. 
 ------ 
 - **I95-40679 Show DPU command pagination:** Pagination has been added to the `show dpu` command to better present the volume of information.
@@ -119,8 +121,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-40210 Streamline GUI Autocomplete:** Updated the autocomplete feature to improve usability.
 ------
 - **I95-40360 Processes should not log to journal if they already log to file:** Adjusted thresholds for logging to syslog.
-------
- - **I95-40438 Support for Lenovo X722:** Upgrades to the DPDK version now provide support for the Lenovo Ethernet Connection X722 for 10GbE SFP+. 
 ------
 - **I95-40923 Interface Redundancy Check Failing:** The Interface Redundancy Check has been updated to account for default values being present.
 ------
