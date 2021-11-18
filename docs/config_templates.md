@@ -3,14 +3,6 @@ title: 'Configuration Templates'
 sidebar_label: 'Configuration Templates'
 ---
 
-#### History
-
-| Release | Modification                                |
-| ------- | ------------------------------------------- |
-| 4.5.0   | This feature was introduced into 128T-4.5.0 |
-| 4.5.5   | Configuration Wizard was added              |
-| 4.5.10  | network_hosts filter was added              |
-| 5.4.0   | Template Globals was added                  |
 Configuration templates allow administrators to automate the configuration of top level resources (e.g. Routers, Tenants, Services, etc). There are two modes of templating configuration: **Basic** and **Advanced**. Basic mode is intended for simple templates that don't require complex logic. Advanced mode, on the other hand, exposes the full power of the underlying templating language to the administrator.
 
 ## Creating a Template
@@ -21,11 +13,43 @@ On the templates page you will see a list of your current templates, or a button
 
 Next fill out the information for your template and click **Save**: ![templates_new](/img/templates_new.png)
 
-You will now be returned to the list of templates and see your newly created template. If you click into it, you will see the message "_Template is empty, copy configuration into the template to populate it._". Follow the steps in [Copying Configuration into Template](#copying-configuration-into-a-template) to learn how to populate it with configuration.
+### Adding Help for a Template
+
+The Help field allows you to add help information to your configuration template. This is optional, and can be simple user instructions or detailed steps. Enter text, or use Markdown to format the text. Click **Save** when you are done. 
+
+You are returned to the list of templates to see your newly created template. Cicking into the template displays the message "_Template is empty, copy configuration into the template to populate it._". Follow the steps in [Copying Configuration into a Template](#copying-configuration-into-a-template) to populate the template.
 
 ## Copying Configuration into a Template
 
-Instead of starting a template from scratch, it is often useful to copy existing or new configuration objects into the template body. The following button on top-level configuration object's pages can be used to copy the object into an existing template: ![templates_copy](/img/templates_copy.png)
+Instead of starting a template from scratch, it is often useful to copy existing or new configuration objects into the template body. The following button on top-level configuration object's pages can be used to copy the object into an existing template: 
+
+![templates_copy](/img/templates_copy.png)
+
+## Default Templates
+
+Beginning with SSR Version 5.4.0, a default Standalone Branch configuration template has been provided to streamline the configuration process. This template provides a basic configuration for a list of Juniper supported hardware. 
+
+![Default Templates](/img/config_templates_default.png)
+
+To use the default template: 
+
+1. Click on the **Copy to User Templates** button.
+
+![Copy Template](/img/config_templates_copy.png)
+
+2. Assign a name to the template. The name can contain alpha-numeric characters, underscore, and hyphen.
+
+![Name Template](/img/config_templates_nametemplate.png)
+
+3. Click the **Copy** button. The template appears in the Configuration Wizard window. 
+
+![Template Configuration Wizard](/img/config_templates_wizard.png)
+
+4. Enter the name, description, and location for the router.
+
+5. Select the device that will power the router. Select one from the drop down. For additional information about the devices, click the help button (?) in the upper right corner of the window. 
+
+5. Once the configuration template is complete, click the **Generate Configuration** button in the top right corner of the panel, next to the help button. 
 
 ## Basic Mode
 
@@ -324,6 +348,35 @@ They could then be looped over like so:
   }{%- if forloop.last == false -%},{%- endif %}
 {% endfor %}
 ```
+#### The `network_prefix` Filter
+The `network_prefix` filter takes a string representation of a network in CIDR format and returns the prefix as a number:
+
+`'192.168.1.0/24'` produces `24`
+
+#### The `usable_ips` Filter
+The `usable_ips` filter takes a string representation of a network in CIDR format and returns an array of usable IPs in the network. The network and broadcast addresses are not present in the array:
+
+`'192.168.1.0/24'` produces `['192.168.1.1, 192.168.1.2, ..., '192.168.1.254']`
+
+#### The `mask_to_prefix_length` Filter
+The `mask_to_prefix_length` filter takes a netmask and returns the CIDR prefix length:
+
+`'255.255.255.0'` produces `24`
+
+#### The `prefix_length_to_mask` Filter
+The `prefix_length_to_mask` filter takes a CIDR prefix length and returns the netmask:
+
+`24` produces `'255.255.255.0'`
+
+#### The `network_address` Filter
+The `network_address` filter takes a string representation of an IP in CIDR format and returns its network address:
+
+`'192.168.1.10/24'` produces `'192.168.1.0/24'`
+
+Then you can assign the IP from global map to a local variable:
+```
+{% assign localIP = ipMap[lookupKey] %}
+```
 
 ### Global Variables
 Global template variables allow you to define a set of variables that can be accessed from any advanced mode template. The global variables are defined via a free-form JSON blob, they can be accessed by clicking the following icon on the template index page:
@@ -363,11 +416,11 @@ You can use the replace filter in Liquid to build the key in the lookup map:
 {% assign lookupKey = '%1_IP' | replace:'%1',SiteName %}
 ```
 
+
 Then you can assign the IP from global map to a local variable:
 ```
 {% assign localIP = ipMap[lookupKey] %}
 ```
-
 ## Conversion Between Modes
 
 :::caution
@@ -437,3 +490,13 @@ Templates support import and export functionality, both in basic and advanced mo
 ## Backing Up Templates / Storage Mechanism
 
 Templates are stored on disk as JSON in the following location: `/etc/128technology/sync/templates.json`. This file can be backed up, restored, or edited. While the 128T Networking Platform does watch this file for changes and updates it's state, it is not recommended to edit this file directly as a means to configure templates.
+
+
+#### History
+
+| Release | Modification                                |
+| ------- | ------------------------------------------- |
+| 4.5.0   | This feature was introduced into 128T-4.5.0 |
+| 4.5.5   | Configuration Wizard was added              |
+| 4.5.10  | network_hosts filter was added              |
+| 5.4.0   | Template Globals and User-defined Help were added |

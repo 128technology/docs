@@ -320,12 +320,18 @@ This sub-element lets the administrators set the behavior for the 128T router's 
 
 | Element | Type | Description |
 | --- | --- | --- |
-| mode | enumeration | Valid values: module, tls. When set to *module*, the 128T router uses an external module for application classification. When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *module*, the 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) |
+| mode | enumeration | Valid values: module, tls, http, all. When set to *module*, the 128T router uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *http*, the SSR will learn applications via HTTP host name parsing. The option *all* will provide the broadest application learning results. |
+| auto-update | configuration container | Default is enabled. Enables automatic update of application-identification domain dataset.  Contains configurable sub-elements. |  
+| update-time | uint8 | Range is 0-23. Default is 2 AM. Set the (local) time to update app-id dataset. |
+| update-jitter | uint8 | Range is 0-30. Default is 15. The max random jitter applied to the update-time. |
+| update-frequency | eumumeration | Default is weekly. Choose Daily, Weekly, or Monthly. |  
+
 
 #### Version History:
 | Release | Modification |
 | --- | --- |
 | 3.2.0 | Introduced |
+| 5.4.0 | Added auto-update option |
 
 ## applies-to
 
@@ -2137,6 +2143,7 @@ The *routing-protocol* configuration element contains configuration properties r
 | address-family | sub-element | A container for the behaviors, timers, and attributes related to each address family (AFI/SAFI) on the 128T router. |
 | confederation | sub-element | This configuration sub-element controls the 128T router's behavior when it is within an autonomous system that is part of a BGP confederation. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
+| graceful-restart | sub-element | Provides the ability to be configured as disabled, helper mode (default), or enabled. `graceful-restart` mode on BGP neighbors can be configured differently than on the BGP instance. |
 | local-as | uint32 | The local autonomous system number of this 128T router. |
 | neighbor | sub-element | Multiple instance. |
 | route-selection-options | sub-element | This is a set of configuration options that control how the 128T router chooses the best path. |
