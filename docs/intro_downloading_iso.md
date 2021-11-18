@@ -26,10 +26,10 @@ With releases 4.5.6-1 and 5.0.0-1 v2 (and greater), we now provide a single ISO 
 The newer installation process uses a username and token that is provided with the software license. The username/token simplifies access and does not require the conversion process used for the certificate. With the latest releases of the Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 or greater is required. SSR software version 5.3 and greater accept **only** the username and token for software access. 
 
 :::note
-Do not uninstall old versions of the 128T/SSR Installer. Later versions of the Installer have dependencies on the earlier versions, and uninstalling them may cause issues for for upgrade and/or rollback operations. 
+Do not uninstall old versions of the 128T/SSR Installer. Later versions of the Installer have dependencies on the earlier versions, and uninstalling them may cause issues for upgrade and/or rollback operations. 
 :::
 
-Juniper requires upgrading your Conductor to a minimum 4.5.7, 5.0.1, or 5.1.1 before use of the username and token software access can be used (upgrading to the latest patch release for your deployed version is always recommended). These versions contain updates for using a username/token for software access. If a username/token is used and the SSR software is not upgraded, a manual process must be followed each time the username/token is changed. Before using a manual process for upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) the [**Rolling Back Software**](intro_rollback.md) documentation, then review the [Manual Token Process](installer_cli_reference.md#manual-token-process) for more information.
+Juniper requires upgrading your Conductor to a minimum 4.5.7, 5.0.1, or 5.1.1 version before the username and token software access can be used (upgrading to the latest patch release for your deployed version is always recommended). These versions contain updates for using a username/token for software access. If a username/token is used and the SSR software is not upgraded, a manual process must be followed each time the username/token is changed. Before using a manual process for upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) the [**Rolling Back Software**](intro_rollback.md) documentation, then review the [Manual Token Process](installer_cli_reference.md#manual-token-process) for more information.
 
 ## Downloading an ISO
 
@@ -37,9 +37,9 @@ The SSR Software packages are available from our public servers using the userna
 
 For versions prior to release 5.3, use: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/`. 
 
-For versions 5.3 and later, use `https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/<Major>.<Minor>`. 
+For versions 5.3 and later, use `https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/<Major>.<Minor>/`. 
 
-You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page. If your client certificate or token is currently installed on your 128T/SSR routers and conductors, you can download software updates from our yum servers or the web page. 
+You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page. If your client certificate or token is currently installed on your SSR routers and conductors, you can download software updates from our yum servers or the web page. 
 
 ### Downloading from the Command Line
 
