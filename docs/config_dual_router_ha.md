@@ -1,9 +1,15 @@
 ---
-title: Configuring Dual Router High Availability
-sidebar_label: High Availability (Dual Router)
+title: Configuring Dual Router High Availability using iBGP
+sidebar_label: Dual Router High Availability using iBGP
 ---
 
-There are several different high availability models possible with the 128T routing software. This document covers *dual router high availability*, which is when two instances of the 128T software are each configured as separate routers (rather than as two nodes within a single router). This is characterized by:
+The SSR provides significant flexibility for high availability configurations. Like traditional routers, the SSR software can be deployed as a single router instance on multiple platforms, with high availability configured in a dual router configuration. Additionally, the SSR can deploy multiple software instances (referred to as nodes) within the same single installation, providing high availability across router nodes.  
+
+The release of the 5.4 software includes [VRRP as a configuration option](config_ha_vrrp.md) as well as a new service route parameter, [`enable-failover`](config_ha.md/#service-route-redundancy), that provides stateful failover on the dual node HA configuration. For configuration options using VRRP, please refer to [Configuring Dual Router High Availability and VRRP](config_ha_vrrp.md)
+
+## Dual Router High Availability
+
+This document covers dual router high availability using iBGP - two instances of the SSR software each configured as separate routers. This is characterized by:
 
 - An iBGP interface shared between the two devices in lieu of a "fabric" interface in the dual node deployment.
 - No `shared-phys-address` (and hence no shared interfaces) between the two devices. Interface protection in a dual router HA deployment is accomplished using traditional routing protocols (Layer 3) rather than IP/MAC takeover (Layer 2).
@@ -15,18 +21,18 @@ Dual router high availability is recommended for data center designs where there
 
 When deploying two nodes in a dual router high availability deployment, several features that rely on synchronized state between nodes are no longer available.
 
-- Source NAT. When source NAT is enabled, a system will allocate ephemeral ports on its egress interface as sessions leave the 128T router. Because there is no state synchronization between the two nodes in this deployment model, these ephemeral ports are not shared. Thus, if the active node fails and traffic starts transiting its counterpart, the source NAT allocation on the newly active system will be different. This will impact application flows.
+- Source NAT. When source NAT is enabled, a system will allocate ephemeral ports on its egress interface as sessions leave the SSR router. Because there is no state synchronization between the two nodes in this deployment model, these ephemeral ports are not shared. Thus, if the active node fails and traffic starts transiting its counterpart, the source NAT allocation on the newly active system will be different. This will impact application flows.
 - Shared interfaces. A router node cannot perform gratuitous ARP takeover of an interface from another, distinct router node.
 
 ## Design Constraints
 
-Due to the way that dual router high availability operates without state synchronization, in the event of a failure to one router in a pair, all traffic will be sent to the counterpart router (once routing converges). The now-active router does not have a shared database to reconstruct session state; it will receive mid-session packets (from the client's and server's perspectives) and need to construct its own state from these packets.
+Due to the way that dual router high availability operates without state synchronization, in the event of a failure to one router in a pair, all traffic will be sent to the counterpart router (once routing converges). The now-active router does not have a shared database to reconstruct session state; it will receive mid-session packets (from the client's and server's perspectives) and need to set up forwarding state.
 
-For this reason, services that leverage a dual router HA pair must reference a `service-policy` that has `transport-state-enforcement allow` configured. Otherwise, mid-session TCP packets cause the 128T device to send a TCP RST to the sender.
+For this reason, services that leverage a dual router HA pair must reference a `service-policy` that has `transport-state-enforcement allow` configured for TCP packets. Otherwise, mid-session TCP packets cause the SSR device to send a TCP RST to the sender.
 
 ## Design Overview
 
-Unlike a ["traditional" dual node high availability design](config_ha.md), in which two nodes compose a single router and use an out-of-band interface (the "sync interface") to synchronize state and a fabric interface to forward packets from one node to the other, the dual router trades these in for an inter-router iBGP connection for forwarding packets.
+Dual router high availability uses an inter-router iBGP connection to forward packets.
 
 :::note
 It is possible to configure multiple inter-router connections for added resiliency if there are spare physical connections available between the two routers.
@@ -38,14 +44,14 @@ The sample high level topology we will discuss in this document is as follows:
 
 ### Notes about the Topology
 
-In this sample exercise, each of the two routers (`routerA` and `routerB`) have two WAN interfaces and one LAN interface. Between them is an interconnect cable; for collocated routers, this can be a simple "crossover" cable between the two systems.
+In this sample configuration, each of the two routers (`routerA` and `routerB`) have two WAN interfaces and one LAN interface. Between them is an interconnect cable; for collocated routers, this is a simple "crossover" cable between the two systems.
 
 ### Routing Overview
 
-Unlike the dual node redundancy model, where the two devices collectively harbor a single instance of the `routingManager` process, routing within the dual router redundancy model must be accomplished "by hand;" i.e., discretely on each individual system. This consists of two components:
+Routing within the dual router redundancy model must be accomplished "by hand;" i.e., discretely on each individual system. This consists of two components:
 
 1. Each router uses BGPoSVR to exchange routes with the other.
-2. For services that use `peer`-type service-routes to reach another 128T instance, these service-routes will need to include the complementary router as an additional `next-peer`. I.e., each router in the HA pair will point to the `next-peer` 128T as well as a `next-peer` for one another.
+2. For services that use `peer-type service-routes` to reach another SSR instance, these service-routes will need to include the complementary router as an additional `next-peer`. Meaning each router in the HA pair will point to the `next-peer` SSR as well as a `next-peer` for one another.
 
 ## Sample Configuration
 
@@ -201,11 +207,11 @@ exit
 
 ### Routing Configuration
 
-Unlike the *dual node high availability* design, the dual router high availability design does not synchronize state between routers. Instead, the two devices exchange reachability information using iBGP; this is implemented on the 128T using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as seen in the sample configuration.
+The dual router high availability design does not synchronize *state* between routers. Instead, the two devices exchange **reachability** information using iBGP. This is implemented on the SSR using [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) (BGPoSVR), as shown in the sample configuration.
 
-In our sample configuration we use `device-interface eno1` as our iBGP link. The sample here uses [link-local IP addresses](https://en.wikipedia.org/wiki/Link-local_address), presuming that the two nodes are situated next to one another in the same data center. The `neighborhood dc1-interrouter` configuration, also provisioned on `routerB`, indicates to conductor that the two devices are mutually reachable. This hint (combined with the loopback interfaces) is what creates the peering relationship, the services, and the service-routes in support of BGPoSVR.
+In our sample configuration we use `device-interface eno1` as our iBGP link. The sample uses [link-local IP addresses](https://en.wikipedia.org/wiki/Link-local_address), presuming that the two nodes are located next to one another in the same data center. The `neighborhood dc1-interrouter` configuration is provisioned on `routerB`, and indicates to conductor that the two devices are mutually reachable. These pieces combined with the loopback interfaces are what creates the peering relationship, the services, and the service-routes in support of BGPoSVR.
 
-This iBGP will also interact with other routing protocols to exchange reachability information with one another. For example, you may `redistribute ospf` into this iBGP, so that each device is aware of the other's reachability, as shown here:
+The iBGP also interacts with other routing protocols to exchange reachability information with one another. For example, you may `redistribute ospf` into this iBGP, so that each device is aware of the other's reachability, as shown here:
 
 ```
                 routing-protocol  bgp
@@ -246,7 +252,7 @@ This iBGP will also interact with other routing protocols to exchange reachabili
 
 ### Service Policy Configuration
 
-As mentioned in the [design constraints](#design-constraints) section, due to the fact that there is no shared state between the routers in a dual router HA deployment, when a router fails its counterpart will pick up all traffic for active sessions as soon as routing converges. This will result in mid-flow TCP packets arriving at the new router, and the default behavior for the 128T router is to reject all mid-flow TCP packets by sending a TCP RST back to the sender.
+As mentioned in the [design constraints](#design-constraints) section, due to the fact that there is no shared state between the routers in a dual router HA deployment, when a router fails its counterpart will pick up all traffic for active sessions as soon as routing converges. This will result in mid-flow TCP packets arriving at the new router, and the default behavior for the SSR router is to reject all mid-flow TCP packets by sending a TCP RST back to the sender.
 
 This behavior is governed by the `transport-state-enforcement` field in the `service-policy`. Any service traffic that is conveyed to or from a system that is configured as a dual router HA deployment must have `transport-state-enforcement` set to `allow`, or else all TCP-based traffic will need to be restarted post-switchover. Below is an example `service-policy` showing the `transport-state-enforcement` set to `allow`:
 
@@ -270,7 +276,7 @@ config
 exit
 ```
 
-For more information on this setting, refer to the section on `transport-state-enforcement` in our [online documentation](config_reference_guide.md#service-policy).
+For more information on this setting, refer to the section on `transport-state-enforcement` under [`service-policy`](config_reference_guide.md#service-policy).
 
 ### Service Route Configuration
 
@@ -329,5 +335,5 @@ There will also be a corresponding `service-route` on `routerB` that looks sligh
 Here we see that `routerB` will "hop through" `routerA` to get to `branch1`, if its direct path to `branch1` is down. (I.e., all peer paths are unavailable.)
 
 :::note
-These `service-route` configuration elements will not be built for you by conductor, and must be manually created. (They are typically part of provisioning templates, such that as new routers are deployed the configuration templates will include these `service-route` elements for the new peers.)
+These `service-route` configuration elements are not be built by the conductor, and must be manually created. (They are typically part of provisioning templates. As new routers are deployed the configuration templates will include these `service-route` elements for the new peers.)
 :::

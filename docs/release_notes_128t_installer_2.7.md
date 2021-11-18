@@ -41,8 +41,4 @@ The following error is displayed:
 /usr/bin/nice: /usr/lib/128T-installer/install128t.par: No such file or directory
 Failed to upgrade 128T!
 ```
-The recommended course of action is to perform a manual interactive upgrade of the conductor using the following command from the linux prompt:
-```
-sudo install128t
-``` 
-Please refer to [Manually Installing the 128T](intro_installation_installer.md) for that process. 
+The recommended course of action is to perform a manual interactive upgrade of the conductor. Please refer to [Upgrading Using the Interactive Installer](intro_upgrading.md/#upgrading-using-the-interactive-installer) for that process.  

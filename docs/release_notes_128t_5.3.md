@@ -13,6 +13,14 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 ## Release 5.3.0
 **Release Date:** August 6, 2021
 
+### Upgrade Considerations
+
+:::important
+Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
+:::
+
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+
 ### New Features and Improvements
 
 - **I95-31910 Configuration Performance Improvements:** Enhanced the configuration management subsystem, dramatically increasing the speed of config validation, edit, and commit operations. These improvements are most noticeable on large scale deployments on conductors managing over 1,000 routers.
@@ -28,10 +36,6 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 - **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, or display all configuration options. 
 ------
 - **I95-40532 Added Tenant prefix support on network interface:** This provides a simpler way to configure the tenant prefixes on a per branch basis.
-
-### Upgrade Considerations
-
-**Before upgrading to version 5.3.0, please review the [5.3.0 Upgrade Considerations](intro_upgrade_considerations.md) page. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.**
 
 ### Resolved Issues
 
