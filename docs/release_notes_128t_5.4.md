@@ -16,11 +16,11 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
-- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 ------
 - **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
-- **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
+- **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-config-generation-changes) for additional information.  
 
@@ -106,15 +106,23 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-35068 Not getting past the Asset Starting state when a bad configuration is stored:** This issue has been resoved.
 ------
-- **I95-38729 Unbinding devices:** VMBus devices are now released at startup.
+- **I95-38729/I95-41374 Unbinding devices:** VMBus devices are now released at startup.
 ------
 - **I95-39357 Issues when DHCP configured for non-forwarding fabric interface:** Users are now prevented from configuring DHCP on a non-forwarding fabric interface.
 ------
 - **I95-39931 Missing validation for service hierarchy:** Added validation around hierarchical services that requires child services to be at least as specific as their parents.
 ------
+- **I95-40013 `reverse-flow-enforcement` breaks `management-over-forwarding` in HA:** Modifications have been made to `reverse-flow-enforcement` to resolve this issue.
+------
+ -**I95-40177/I95-41517 Selecting "Differences" in the "Explore Configuration" GUI tab causes web to crash** Resolved an underlying issue where generating a configuration with an unnamed Tenant was allowed. 
+------
 - **I95-40210 Streamline GUI Autocomplete:** Updated the autocomplete feature to improve usability.
 ------
 - **I95-40360 Processes should not log to journal if they already log to file:** Adjusted thresholds for logging to syslog.
+------
+ - **I95-40438 Support for Lenovo X722:** Upgrades to the DPDK version now provide support for the Lenovo Ethernet Connection X722 for 10GbE SFP+. 
+------
+- **I95-40923 Interface Redundancy Check Failing:** The Interface Redundancy Check has been updated to account for default values being present.
 ------
 - **I95-41319 Reachability metrics not updating:** The reachability metrics for the min & max time to establishment now reset and report correctly.
 ------
@@ -152,6 +160,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-42897 Occasional uninformative "Base Exception: Failed to get random bytes" accompanying traffic failures:** Updated the exception to include error string and source location.
 ------
+- **I95-43205 Changes to ssh key permissions create problems:** This issue has been resolved. 
+------
 - **I95-43028 Downloaded software for the router does not show up on secondary conductor:** Resolved this issue so that full output is delivered to all nodes.
 ------
 - **I95-43083 ISO missing Rescue Boot Image:** Replacing packages that were removed during upgrade. 
@@ -161,6 +171,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-43194 GraphQL Type Supports Proto Primitive:** Incorrect integer types causing an error. This issue has been resolved. 
 ------
 - **I95-43244 Reverse Packet injection on Affinity Mismatch:** Resolved an issue where a reverse packet was being injected into a flow with no flow affinity. 
+------
+- **I95-43311 Validation of MSS value not working:** Updated the validation logic to allow for enforced-mss value. 
 
 ## Caveats
 

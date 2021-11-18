@@ -8,7 +8,7 @@ Before upgrading to **version 5.3 or 5.4 and higher**, please review the followi
 Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 
 ### Rollback Considerations
-Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
 ## Configuration Validation Changes
 Several modifications have been made to the verification process for configurations. As a result, configurations that were valid in earlier versions of the SSR software may now present configuration errors. The information below provides an awareness of what to look for and address.
