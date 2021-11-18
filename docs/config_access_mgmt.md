@@ -12,8 +12,6 @@ To permit root access to the 128T system, ensure that there is at least one user
 Prerequisites for installation and upgrades now include configuring a super user in /etc/sudoers that is allowed to execute Linux shell commands as root (sudo privileges).
 During an upgrade, if the existing version allows SSH Root login, it will be disabled. When a system is installed using the OTP ISO, a "t128" user is automatically configured with sudo privileges. 
 
-
-
 ## SSH Idle Time
 Idle SSH sessions are logged out after 60 minutes of inactivity. When using the manual install process, it is strongly recommended to use the Screen utility to avoid an SSH session timeout. Screen allows you to disconnect from the terminal without interrupting the program being executed, circumventing any timeout and disconnection issues. Use the following procedure to perform the manual installation from Screen. 
 
@@ -21,10 +19,12 @@ From the terminal window:
 1. Create a screen and attach to it.
 	- `screen-d -m -s <name-of-screen-session>`
 	- `screen -x <name-of-screen-session>`
-2. Run the installer from the Screen session.
+2. Shut down the salt-minion.
+	- `sudo systemctl stop salt-minion`
+3. Run the installer from the Screen session.
 	- `sudo install128t`
-3. Respond to the interactive install questions as required.
-4. When the upgrade/installation process begins, you can safely detach from the Screen session. 
+4. Respond to the interactive install questions as required.
+5. When the upgrade/installation process begins, you can safely detach from the Screen session. 
 	- `ctrl+a`
 	- `d`
 
