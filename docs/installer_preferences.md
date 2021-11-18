@@ -72,6 +72,8 @@ Upgrade 128T to a newer version.
 
 Roll back to the previous installation of 128T. This is only possible if 128T was installed or upgraded with the Installer.
 
+Before perfroming a rollback, please refer to [Rolling Back Software](intro_rollback.md) for important details about the rollback operation.
+
 `rollback`
 
 - is optional
