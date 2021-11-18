@@ -416,6 +416,11 @@ You can use the replace filter in Liquid to build the key in the lookup map:
 {% assign lookupKey = '%1_IP' | replace:'%1',SiteName %}
 ```
 
+
+Then you can assign the IP from global map to a local variable:
+```
+{% assign localIP = ipMap[lookupKey] %}
+```
 ## Conversion Between Modes
 
 :::caution
