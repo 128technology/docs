@@ -132,7 +132,7 @@ Highway Manager Performance Monitoring Stats
 
 #### I am experiencing 100% loss on one node when traffic is flowing:
 
-Verify that the peering node has FPM enabled on its peer path. If not, the peering node will not collect and respond to FPM data analytics queries.
+Verify that the peer router has FPM enabled on its peer path. If not, the peer router will not collect and respond to FPM data analytics queries.
 
 #### I am seeing infrequent FPM analytics updates when generating test traffic using tools like Iperf:
 
