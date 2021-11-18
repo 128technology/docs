@@ -71,7 +71,7 @@ module.exports = {
           "config_bgp",
           "config_ospf",
           "config_dscp_steering",
-          "config_vrf_learning",        
+          "config_vrf_learning",
           "config_reference_guide",
           "config_audit_event",
           "config_dhcp",
@@ -232,20 +232,6 @@ module.exports = {
           "release_notes_128t_installer_2.3",
           "release_notes_128t_installer_2.2",
           "release_notes_128t_installer_2.1",
-        ],
-      },
-      {
-        "type": "category",
-        "label": "SSR SIP ALG",
-        "items": [
-          "release_notes_128t_sip_alg_2.1",
-        ],
-      },
-      {
-        "type": "category",
-        "label": "SSR ZScaler",
-        "items": [
-          "release_notes_128t_zscaler_1.1",
         ],
       },
     ],
