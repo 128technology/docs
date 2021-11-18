@@ -116,7 +116,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-40013 `reverse-flow-enforcement` breaks `management-over-forwarding` in HA:** Modifications have been made to `reverse-flow-enforcement` to resolve this issue.
 ------
- -**I95-40177/I95-41517 Selecting "Differences" in the "Explore Configuration" GUI tab causes web to crash** Resolved an underlying issue where generating a configuration with an unnamed Tenant was allowed. 
+ - **I95-40177/I95-41517 Selecting "Differences" in the "Explore Configuration" GUI tab causes web to crash** Resolved an underlying issue where generating a configuration with an unnamed Tenant was allowed.
 ------
 - **I95-40210 Streamline GUI Autocomplete:** Updated the autocomplete feature to improve usability.
 ------
