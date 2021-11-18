@@ -69,7 +69,8 @@ module.exports = {
           "config_access_mgmt",
           "config_asset_connection_resiliency",
           "config_bgp",
-          "config_vrf_learning",
+          "config_ospf",
+          "config_vrf_learning",        
           "config_reference_guide",
           "config_audit_event",
           "config_dhcp",
@@ -81,15 +82,10 @@ module.exports = {
           "config_service_health",
           "config_gre_tunnel",
           "config_in-memory_metrics",
-
-          "config_ha",
-          "config_dual_router_ha",
-          "config_non_forwarding_ha_interfaces",
-          "config_adding_interfaces_to_ha_team",
-          "config_transition_standalone_to_ha",
-
+          "config_wan_assurance",
+          "config_transport_encryption",
+          "config_dscp_steering",
           "config_nat",
-          "config_ospf",
           "config_rate_limiting",
           "config_RBAC",
           "config_snmp",
@@ -98,6 +94,18 @@ module.exports = {
           "config_STEP",
           "config_tenants",
           "config_templates",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "High Availability",
+        "items": [
+         "config_ha",
+          "config_dual_router_ha",
+          "config_ha_vrrp",
+          "config_non_forwarding_ha_interfaces",
+          "config_adding_interfaces_to_ha_team",
+          "config_transition_standalone_to_ha",
         ],
       },
       {
@@ -148,6 +156,7 @@ module.exports = {
       "bcp_att_avpn_configuration",
       "bcp_using_128T_as_ntp_server",
       "bcp_conductor_deployment",
+      "bcp_per-adjacency_traffic_engineering",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
@@ -193,8 +202,9 @@ module.exports = {
     "Release Notes": [
       {
         "type": "category",
-        "label": "128T",
+        "label": "SSR",
         "items": [
+          "release_notes_128t_5.4",
           "release_notes_128t_5.3",
           "release_notes_128t_5.2",
           "release_notes_128t_5.1",
@@ -209,7 +219,7 @@ module.exports = {
       },
       {
         "type": "category",
-        "label": "128T Installer",
+        "label": "SSR Installer",
         "items": [
           "release_notes_128t_installer_3.1",
           "release_notes_128t_installer_3.0",
@@ -224,14 +234,14 @@ module.exports = {
       },
       {
         "type": "category",
-        "label": "128T SIP ALG",
+        "label": "SSR SIP ALG",
         "items": [
           "release_notes_128t_sip_alg_2.1",
         ],
       },
       {
         "type": "category",
-        "label": "128T ZScaler",
+        "label": "SSR ZScaler",
         "items": [
           "release_notes_128t_zscaler_1.1",
         ],
