@@ -2,7 +2,7 @@
 title: HTTP Probe Reachability Detection Plugin
 sidebar_label: HTTP Probe Reachability Detection
 ---
-The http-probe plugin is designed to leverage the reachability detection APIs that were introduced in the 128T router as of 5.2.0 version of software. More documentation on the core product feature can be found [here](config_service_health.md)
+The http-probe plugin is designed to leverage the reachability detection APIs that were introduced in the SSR as of 5.2.0 version of software. More documentation on the core product feature can be found [here](config_service_health.md)
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -19,7 +19,7 @@ For HTTPS probes, the client will allow self-signed certificates for inspecting 
 :::
 
 ## Configuration Snippet
-The plugin leverages the existing 128T reachability detection and enforcement configuration within the service-route on the router.
+The plugin leverages the existing SSR reachability detection and enforcement configuration within the service-route on the router.
 
 ### HTTP Profile configuration
 * Config Path: authority > router[name] > http-probe-profile
@@ -128,7 +128,7 @@ exit
 One of the primary use cases of the plugin would be to monitor the internet or some other service reachability by pinging an HTTP server over a given service path. This is very much similar in concept to the native ICMP probe functionality that exists in the product.
 
 ### Proportional Load balancing via destination NATs
-In this use case, a particular service or workflow is designed to be load balanced across several upstream servers by doing a proportional load balancing along with destination NAT. In this use case, the 128T http-probe plugin can be used to monitor the service status of each of those upstream servers to determine if the particular server should be in service or not from routing perspective. The following configuration snippet builds on the example above to demonstrate this scenario.
+In this use case, a particular service or workflow is designed to be load balanced across several upstream servers by doing a proportional load balancing along with destination NAT. In this use case, the SSR http-probe plugin can be used to monitor the service status of each of those upstream servers to determine if the particular server should be in service or not from routing perspective. The following configuration snippet builds on the example above to demonstrate this scenario.
 
 In this example, both `test-app-route-1` and `test-app-route-2` are equal cost routes used for proportional load balancing.
 
@@ -200,7 +200,7 @@ admin@node1.conductor1#
 Each service-route is designed to probe a unique URL for that servers and monitors the health of the service at the TCP socket level as well as the HTTP stack. When one of the servers cannot be reached or responds with a unsuccessful status code (e.g. 404, 504 etc) the service path is taken out of service.
 
 :::warning
-When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, its possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
+When all the service routes associated with the same service are down, the default system behavior is to operates in a `best-effort` mode in which the physical link and L2 connectivity is used to determine the health of the path. In this case, it's possible that sessions are routed to paths that are down from a probe perspective. As soon as one of the paths comes back in service, the load balancer will start using that path for all subsequent new sessions. The `best-effort` flag can be set to false for the associated service-policy to disable this behavior.
 :::
 
 
