@@ -20,7 +20,10 @@ The examples listed in this guide generally prefer running commands as a non-roo
 :::
 
 ### Regarding Upgrades
-[Prerequisites for upgrades](intro_upgrading.md) include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
+
+Please refer to [Upgrade Considerations](intro_upgrade_considerations.md) before upgrading. Additional prerequisites include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
+
+For full details and instructions refer to [Upgrading the SSR Networking Platform.](intro_upgrading.md)
 
 ### Version Dependencies
 

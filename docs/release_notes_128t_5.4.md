@@ -13,9 +13,11 @@ Alternatively, refer to the **[List of Releases](about_releases.md)** page for r
 ### Upgrade Considerations
 
 :::important
-Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) page. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
+Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+------
 - **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
 - **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 

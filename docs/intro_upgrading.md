@@ -31,6 +31,27 @@ Examples:
 - Conductor running version 5.2.1, managing Routers running version 4.5.13: Supported.
 - Conductor running version 4.5.13, managing Routers running version 4.2.9: Not supported, but may work.
 
+### Stopping the 128T Routing Software
+
+Before upgrading the 128T Routing Software, use the following procedure to stop the the software.
+
+1. Launch a Linux shell window.
+2. Execute the command: 
+
+   `sudo systemctl stop 128T`
+
+3. Verify that the software has stopped by executing the command:
+
+   `sudo systemctl status 128T`
+
+   Result: The software is listed as inactive (dead).
+
+4. Stop the salt-minion.
+
+   `sudo systemctl stop salt-minion`
+   
+5. Close the Linux shell.
+
 ## Upgrading using the Conductor's PCLI
 
 For routers managed by an SSR Conductor, upgrades can be initiated via the SSR conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*.
@@ -74,7 +95,12 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
    screen -d -m -s <name-of-screen-session>
    screen -x <name-of-screen-session>
    ```
-3. Enter the command to launch the interactive installer wizard.
+3. Shut down the salt-minion on the target node using the following command:
+
+   ```
+   sudo systemctl stop salt-minion
+   ```
+4. Enter the command to launch the interactive installer wizard.
 
    ```
    sudo install128t
@@ -85,18 +111,18 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
    The `install128t` application will check to see if it has an update available, and will ask that you upgrade if it detects a newer version is available.
    :::
 
-4. Press the **enter** key to select **Begin** and start the installation wizard.
+5. Press the **enter** key to select **Begin** and start the installation wizard.
 
-5. When prompted, select **Upgrade**.<br/>**Result**: The application queries 128 Technology's software repository for new software.
+6. When prompted, select **Upgrade**.<br/>**Result**: The application queries 128 Technology's software repository for new software.
 
-6. Select the desired software version from the list of available options.
+7. Select the desired software version from the list of available options.
 
-7. Once the upgrade is complete, press the **enter** key to select **Yes** to start your software.
+8. Once the upgrade is complete, press the **enter** key to select **Yes** to start your software.
    :::note
    Your output may vary based upon the nature of the upgrade, occasion, various packages, and dependencies that SSR requires as part of the SSR Routing Software upgrade.
    :::
    
-8. Detach from the Screen utility.
+9. Detach from the Screen utility.
    ```
    ctrl+a
    d

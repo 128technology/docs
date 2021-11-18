@@ -202,7 +202,7 @@ module.exports = {
     "Release Notes": [
       {
         "type": "category",
-        "label": "128T",
+        "label": "SSR",
         "items": [
           "release_notes_128t_5.4",
           "release_notes_128t_5.3",
@@ -219,7 +219,7 @@ module.exports = {
       },
       {
         "type": "category",
-        "label": "128T Installer",
+        "label": "SSR Installer",
         "items": [
           "release_notes_128t_installer_3.1",
           "release_notes_128t_installer_3.0",
@@ -234,14 +234,14 @@ module.exports = {
       },
       {
         "type": "category",
-        "label": "128T SIP ALG",
+        "label": "SSR SIP ALG",
         "items": [
           "release_notes_128t_sip_alg_2.1",
         ],
       },
       {
         "type": "category",
-        "label": "128T ZScaler",
+        "label": "SSR ZScaler",
         "items": [
           "release_notes_128t_zscaler_1.1",
         ],
