@@ -3,13 +3,13 @@ title: Learning VRF Routes
 sidebar_label: Learning VRF Routes
 ---
 
-128T uses the concept of Tenancy to provide L3 network segmentation. The 5.1 release brings support for learning VRF routes through BGP and the associated routing tables.
+SSR uses the concept of Tenancy to provide L3 network segmentation. The 5.1 release brings support for learning VRF routes through BGP and the associated routing tables.
 
-Virtual Routing and Forwarding (VRF) instances make it possible to maintain multiple routing tables with overlapping address spaces in one router. A single 128T router can support multiple VRF instances, and is able to establish BGP peering sessions within each VRF to receive and distribute VRF routes. When a 128T router is connected to more than one VPN, each VPN can become its own VRF, supporting overlapping addresses. This provides a much broader scope of L3 network paths.
+Virtual Routing and Forwarding (VRF) instances make it possible to maintain multiple routing tables with overlapping address spaces in one router. A single SSR router can support multiple VRF instances, and is able to establish BGP peering sessions within each VRF to receive and distribute VRF routes. When an SSR router is connected to more than one VPN, each VPN can become its own VRF, supporting overlapping addresses. This provides a much broader scope of L3 network paths.
 
 ## VRF Support
 
-To add VRF learning using BGP, add VRF objects to routing default-instance, and configure BGP as the routing protocol. This allows the 128T BGP instance to peer with a remote peer and learn routes for that particular VRF.
+To add VRF learning using BGP, add VRF objects to routing default-instance, and configure BGP as the routing protocol. This allows the SSR BGP instance to peer with a remote peer and learn routes for that particular VRF.
 
 ### Static Routes
 
@@ -19,9 +19,9 @@ When VRF static routes are redistributed into BGP (using `redistribute static`),
 
 ### Tenant to VRF Mapping
 
-128T routers use Tenants to segment L3 traffic in the forwarding plane. VRF provides L3 segmentation at the routing layer. A set of routes associated with a VRF are accessible only to interfaces that have that particular VRF enabled. 
+SSR routers use Tenants to segment L3 traffic in the forwarding plane. VRF provides L3 segmentation at the routing layer. A set of routes associated with a VRF are accessible only to interfaces that have that particular VRF enabled. 
 
-A 128T router does not have any VRF definitions associated with an interface. Instead, an interface can be assigned a tenant to denote all traffic coming from that interface to be classified as that tenant. The default behavior of a 128T router is to allow all tenants to access the global routing table.
+An SSR router does not have any VRF definitions associated with an interface. Instead, an interface can be assigned a tenant to denote all traffic coming from that interface to be classified as that tenant. The default behavior of an SSR router is to allow all tenants to access the global routing table.
 
 VRFs are a table of routes that are accessed by tenants. The VRF-Tenant mapping is used for redistributing connected routes and for mapping services. A tenant can only be mapped to one VRF. 
 

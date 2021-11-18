@@ -10,6 +10,72 @@ If you do not see an issue listed below, it may have been resolved in another re
 Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
+### Upgrade Considerations
+
+:::important
+Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
+:::
+
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+
+## Release 5.2.2
+**Release Date:** August 24, 2021
+Contains fixes from: [Release 5.1.5, August 13, 2021](release_notes_128t_5.1.md#release-515)
+
+### New Features
+
+- **I95-26075 Generate PCAP directly from Session table:** A button has been added to both the Session Debug table and the Top Sessions table that allows the user to create a PCAP file containing the specific row data from each table.
+
+### Resolved Issues
+
+- **I95-41481 Reachability metrics actions are not available for TLS modify scenarios:** Reachability stats for app-id session updates have been added. 
+------
+- **I95-41617 In some rare cases the GUI may enter a re-render loop:** Resolved an issue where the value provided by `usePreLoginData` was being used to determine if the application should re-render.
+------
+- **I95-41652 Misspelled parameter in the Influx setup template:** This issue has been resolved. 
+------
+- **I95-41689 Limited search on FIB table:** Restore FIB filtering query parameters.
+------
+- **I95-41704 Node processes using excessive CPU during upgrade:** Changes made to initiate Swagger generation only when a file is updated or changed.
+
+### Caveats
+
+- **I95-40335 Package dependency conflicts:** 5.2.2 supports the `vrsx-sfc` plugin. With this plugin, upgrading to 5.3.0 is not supported. If the system is upgraded to 5.3.0 with this plugin installed, the plugin dependencies will be removed and the features provided with this plugin will no longer function.
+
+## Release 5.2.1
+**Release Date:** July 20, 2021
+
+Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#release-514)
+
+###  New Features and Improvements
+
+- **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
+------
+- **I95-36224 Handle names in application-id JSON:** The application-module json output `common-name object` now includes a list of referenced common-names, in addition to the transport-information list.
+------
+- **I95-38244 The Routers Page is easier to Search:** Added a column selector and a search matching system to make the search function more granular.
+------
+- **I95-38445 GUI Session Capture:** Added pages to the user interface that allow you to view and configure capture information.
+------
+- **I95-40458 Added the ability to toggle between Advanced and Basic Configuration mode:** Added the option to limit the main configuration screen to the most frequently used fields, or display all configuration options.
+
+### Resolved Issues
+
+- **I95-19871 Unknown session-type mismatched:** When a session-type does not have a match, the `Unclassified` service-class is used when it is available.**
+------
+- **I95-40075/I95-40134 Use gateway from service route for interface ping gateway:** The `service-route next-hop gateway-ip` will be used for ICMP ping reachability probe if so configured. If no IP is configured, then the `fib-route gateway` will be used, and finally the `network-interface gateway` will be used.
+------
+- **I95-40124 GRE Interface not inherting teneancy from parent:** The GRE Interface now inherts teneancy and neighborhood configuration from parent.
+------
+- **I95-40168 `show udp-transform` not providing result details:** The `show udp-tranform` reason field now provides correct details.
+------
+- **I95-40185 Duration type assignment values are not being set correctly:** This issue has been resolved by ensuring that fields using duration type always use default values.
+------
+- **I95-40191 Office365 service failing on bootup:** This issue has been resolved.
+------
+- **I95-40888`show application modules status` generating an unhandled error:** Resolved an issue with `show application modules status` causing unandled errors.
+------
+
 ## Release 5.2.0
 **Release Date:** May 10, 2021
 

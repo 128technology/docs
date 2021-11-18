@@ -6,9 +6,13 @@ This section describes the manual installation process for the 128T. For automat
 
 ## Install Using 128T-Installer
 
-The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md).
+The 128T router software installer package is hosted in the 128 Technology software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md). If you are performing an upgrade, see [Upgrading the SSR Networking Platform](intro_upgrading.md) for upgrade instructions. 
 
 The 128T Software package is available from our public servers located at: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/` using the username and token provided to you. The username/token simplifies access and does not require the conversion process used for the certificate. With the latest release of the 128T Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 is required. 
+
+:::note
+Do not uninstall old versions of the 128T Installer. Later versions of the 128T Installer have dependencies on the earlier versions, and uninstalling them may cause issues for rollback operations. 
+:::
 
 Juniper highly recommends upgrading your Conductor to 4.5.7, 5.0.1, or 5.1.1. These versions contain updates for using a username/token for software access. If a username/token is used and the 128T software is not upgraded, a manual process must be followed each time the username/token is changed. See the [Manual Token Process](installer_cli_reference.md#manual-token-process) for more information.
 

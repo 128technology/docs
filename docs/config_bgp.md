@@ -382,6 +382,43 @@ If all expected configuration has been generated, but a BGP over SVR session doe
 
 Additionally, use the `show rib {vrf <vrf-name>}` command to verify the BGP neighbor is reachable and its kernel route entry is not superseded by another, higher priority entry in the RIB. 
 
+## BGP Graceful Restart
+
+Users can now configure `graceful-restart` as disabled, rather than helper mode or full graceful restart. Additionally, the graceful restart mode on BGP neighbors can be configured differently than on the BGP instance. Historically there was no separate neighbor configuration. The graceful restart mode must be explicitly enabled, otherwise the default mode is **helper**. 
+
+Example New Data Model Objects
+```
+routing-protocol     bgp
+    local-as         65    
+    graceful-restart        
+        mode             enable       
+        restart-time     150       
+        stale-routes-time    150        
+    …        
+    neighbor     172.16.0.1            
+        neighbor-as    66           
+        graceful-restart               
+            mode         disable
+```
+
+
+### Show Command and Troubleshooting
+
+Use the `show bgp neighbors` command to verify graceful restart is configured as expected. Graceful restart is part of BGP capabilities negotiation.  When the BGP peering session is established, the command output includes the negotiated graceful restart:
+```
+Graceful Restart Capability: advertised
+Graceful restart information:
+    Local GR Mode: Helper*
+    Remote GR Mode: Disable
+    R bit: False
+Timers:
+    Configured Restart Time(sec): 120
+    Received Restart Time(sec): 0
+```
+
+If the BGP peering session does not form, use packet capture to view the local BGP protocol traffic from the linux shell: 
+`ip netns exec routingEngine tcpdump -i any -v "tcp port 179”`
+
 ## Routing Features
 
 This section contains various features supported by the 128T's BGP implementation.

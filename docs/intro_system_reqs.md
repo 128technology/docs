@@ -3,9 +3,9 @@ title: System Requirements
 sidebar_label: System Requirements
 ---
 ## Hardware Requirements
-The 128T Networking Platform runs on both baremetal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required for comparable throughput.
+The 128T Networking Platform runs on both bare metal servers and as a virtual machine within hypervisor environments. For virtual environments the same CPU, memory, and storage specifications are required for comparable throughput.
 
-The 128T Networking Platform requires a minimum of 4 CPU cores, 8GB of RAM, and at least 25GB of hard drive space. See [Certified Platforms](about_certified_platforms.mdx) and the [Platform Support Policy](about_supported_platforms.md) for more details.
+Please review the router and conductor [minimum requirements](about_supported_platforms.md#minimum-platform-specifications). See [Certified Platforms](about_certified_platforms.mdx) and the [Platform Support Policy](about_supported_platforms.md) for more details.
 
 :::info
 Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your 128T routing system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.128technology.com/) for hardware profile examples.
@@ -58,7 +58,7 @@ Though not a hard requirement, it is recommended to use a dedicated physical int
 When configuring two software _nodes_ in a highly available router, each node requires a dedicated physical interface for synchronizing session data to its redundant peer. Each also generally have another, separate physical interface (referred to as a "fabric" interface) that is used to forward traffic between the nodes across a logical backplane between them. The fabric interface is not mandatory; refer to the [High Availability](config_ha.md) documentation for more information on configuration design for high availability deployments.
 
 ### Assigning the System Interfaces
-Interfaces on host systems running as a 128T router, either baremetal or virtual deployment environments, are assigned for packet forwarding. At least one dedicated interface is required for packet forwarding.
+Interfaces on host systems running as a 128T router, either bare metal or virtual deployment environments, are assigned for packet forwarding. At least one dedicated interface is required for packet forwarding.
 
 :::note
 Interface assignments are required only on software instances that are running as routers. Conductor nodes do not require interface assignments.
@@ -104,6 +104,7 @@ Connect an additional PCI card (if possible):
 7. Record the output. 
 
 If a PCI address for an interfaces change, the system will be disqualified. Examples of a PCI address changing are; after an OS reboot, or a BIOS setting change after the system is imaged. 
+
 
 :::tip
 If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).

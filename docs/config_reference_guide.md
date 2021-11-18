@@ -71,6 +71,14 @@ Access policies are a multiple instance sub-element within a host-service config
 QSNs are entered without the qsn:// scheme, using only dotted name notation (e.g., "engineering.128technology").
 :::
 
+:::note
+When adding IP prefixes to an `access-policy` within a `host-service`, take note of the fact that the syntax can be affected by whether or not there is a `tenant` assigned to the `network-interface` within which the `host-service` is configured. Specifically, if there is a `tenant` configured on the `network-interface`, any `access-policy` that refers to an IP prefix (such as `192.168.1.0/24`) *is presumed to be within that tenant*. I.e., the `access-policy` will behave as though `192.168.1.0/24@tenant-name` was configured in the `access-policy`.
+
+When tenancy is determined through other means (e.g., via `neighborhood` membership), the `access-policy` can make no such assumption, and any `tenant` references must be explicitly identified. Configuring IP prefixes within an `access-policy` on a `network-interface` with no `tenant` assigned presumes that the prefix falls within the `<global>` tenant namespace.
+
+More information on configuring tenancy via `network-interface` or via `neighborhood` membership can be found in the [Administration section of our documentation](config_tenants.md).
+:::
+
 #### Version History:
 | Release | Modification |
 | ------- | ------------ |
@@ -312,12 +320,18 @@ This sub-element lets the administrators set the behavior for the 128T router's 
 
 | Element | Type | Description |
 | --- | --- | --- |
-| mode | enumeration | Valid values: module, tls. When set to *module*, the 128T router uses an external module for application classification. When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *module*, the 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) |
+| mode | enumeration | Valid values: module, tls, http, all. When set to *module*, the 128T router uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *http*, the SSR will learn applications via HTTP host name parsing. The option *all* will provide the broadest application learning results. |
+| auto-update | configuration container | Default is enabled. Enables automatic update of application-identification domain dataset.  Contains configurable sub-elements. |  
+| update-time | uint8 | Range is 0-23. Default is 2 AM. Set the (local) time to update app-id dataset. |
+| update-jitter | uint8 | Range is 0-30. Default is 15. The max random jitter applied to the update-time. |
+| update-frequency | eumumeration | Default is weekly. Choose Daily, Weekly, or Monthly. |  
+
 
 #### Version History:
 | Release | Modification |
 | --- | --- |
 | 3.2.0 | Introduced |
+| 5.4.0 | Added auto-update option |
 
 ## applies-to
 
@@ -408,6 +422,7 @@ The *authority* configuration element is the top-most level in the 128T router c
 | --- | --- | --- |
 | auto-install | boolean | When true, this will automatically install the 128T software onto an asset once it connects to the conductor. When false, software will not be installed automatically and will require administrative intervention. |
 | conductor-address | address | The IP address or hostname of your conductors. There can be at most two conductor addresses configured in an authority; note that the addresses here should be reachable by most/all of your authority's routers. (Routers that use different addresses to reach the same conductor can override this in their configuration.) |
+| currency | string | Indicates local monetary currency used in the system. Default is `USD`. |
 | dscp-map | sub-element | Lets administrators map the inbound DSCP values received in packet headers into priority values, for traffic engineering purposes. |
 | dynamic-hostname | string | This allows administrators to establish a templated pattern for how interfaces on routers will create "names" for their interfaces. These names, constructed using substitution variables in the dynamic-hostname syntax, can be used as (effectively) persistent labels for referring to the corresponding interface, rather than an IP address. This is particularly useful when an interface acquires its address using a dynamic protocol such as PPPoE or DHCP. Uses the following substitution variables: {interface-id} for Network Interface Global Identifier {router-name} for Router Name {authority-name} for Authority Name For example, \'interface-{interface-id}.{router-name}.{authority-name}\'. |
 | ipfix-collector | sub-element | Allows administrators to configure authority-wide IPFIX (IP Flow Information Export) collectors, for flow-by-flow/session-by-session information. |
@@ -1063,7 +1078,9 @@ authority > router > node > device-interface > load-balancing
 
 #### Description:
 
-The *load-balancing* element lets administrators configure thresholds for a device-interface to be considered eligible/ineligible for load balancing purposes. When the 128T load balancing algorithm is choosing destinations, it will not choose an interface that has exceeded its configured "high water mark" (expressed as a percentage) until traffic has quieted down on that interface below its "low water mark," also configured as a percentage..
+The *load-balancing* element lets administrators configure thresholds for a device-interface to be considered eligible/ineligible for load balancing purposes. When the 128T load balancing algorithm is choosing destinations, it will not choose an interface that has exceeded its configured "high water mark" (expressed as a percentage) until traffic has quieted down on that interface below its "low water mark," also configured as a percentage. 
+
+In order for the utilization based load-balancing to take effect, the device interface must have `traffic-engineering enabled true`. When the device-interface has a `traffic-engineering transmit-cap` set, the utilization percentages defined will be based on the rate defined in the `transmit-cap`. If no `transmit-cap` is set, it will be based on the set or negotiated [link settings](#device-interface).
 
 | Element | Type | Description |
 | --- | --- | --- |
@@ -1086,7 +1103,12 @@ authority > router > system > local-login
 The *local-login* configuration lets administrators control the number of concurrent logins on the system and what actions to take if that limit is exceeded.
 
 | Element | Type | Description |
+| --- | --- | --- |
 | netconf | sub-element | Controls around the number of concurrent NETCONF sessions. |
+
+:::note
+>>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls, with no loss of functionality.
+:::
 
 ## log-category
 
@@ -1475,6 +1497,10 @@ This lets an administrator control the number of concurrent NETCONF logins (each
 | session-limit | uint32 | Valid values: 0-100. Default: 4. The number of concurrent NETCONF logins permitted. |
 | session-limit-action | enumeration | Valid values: no-action, issue-warning. Default: issue-warning. To suppress the warning messages regarding concurrent logins, you can set this to `no-action`. |
 
+:::note
+>>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls, with no loss of functionality.
+:::
+
 ## network
 
 #### Path:
@@ -1509,6 +1535,9 @@ The network-interface element represents a logical interface on a node.
 | --- | --- | --- |
 | address | sub-element | The IP address assigned to this network-interface, and its various properties. |
 | adjacency | sub-element | This multiple-instance sub-element references neighboring routers. |
+| billing-rate | decimal64 | Indicates the amount billed for the interface. Measured per day for `metered`, and per byte for `flat`. See [authority](#authority) to set `currency` type. |
+| billing-type | enumeration | Indicates the billing type associated with the interface: `none` - default, no billing is associated with the interface; `flat` - the network interface is billed flat amount over a period of time; `metered` - the network interface is billed flat amount based on data usage. See [authority](#authority) to set `currency` type. |
+| carrier | string | Indicates the carrier associated with the network-interface. |
 | conductor | boolean | Default: false. Governs whether this interface should be used to reach the router's conductor. Reference [Conductor Deployment Patterns](bcp_conductor_deployment.md). |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
 | dhcp | enumeration | Valid values: disabled, v4. Default value: disabled. When set to v4, this interface will attempt to acquire an IPv4 address using DHCP (Dynamic Host Configuration Protocol). When disabled, the address on the interface should be administratively set to a static IP. |
@@ -2114,6 +2143,7 @@ The *routing-protocol* configuration element contains configuration properties r
 | address-family | sub-element | A container for the behaviors, timers, and attributes related to each address family (AFI/SAFI) on the 128T router. |
 | confederation | sub-element | This configuration sub-element controls the 128T router's behavior when it is within an autonomous system that is part of a BGP confederation. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
+| graceful-restart | sub-element | Provides the ability to be configured as disabled, helper mode (default), or enabled. `graceful-restart` mode on BGP neighbors can be configured differently than on the BGP instance. |
 | local-as | uint32 | The local autonomous system number of this 128T router. |
 | neighbor | sub-element | Multiple instance. |
 | route-selection-options | sub-element | This is a set of configuration options that control how the 128T router chooses the best path. |
@@ -2448,6 +2478,7 @@ authority > router > node > device-interface > network-interface > neighborhood 
 Controls whether session-optimization is enabled for connections egressing this neighborhood.
 
 | Element | Type | Description |
+| --- | --- | --- | 
 | mode | enumeration | Valid values: auto, never-on. Default: auto. By default the 128T will detect whether session-optimization needs to be enabled based on current network behavior (latency). To disable session-optimization, set this to `never-on`. |
 
 ## session-optimization (device-interface)

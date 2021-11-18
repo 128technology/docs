@@ -1,9 +1,13 @@
 ---
-title: Upgrading the 128T Networking Platform
+title: Upgrading the SSR Networking Platform
 sidebar_label: Upgrading
 ---
 
-Your 128T router or conductor must have internet access to download the latest software packages; for deployments where the 128T router does not have internet access, you can use the 128T conductor as a repository (or proxy) to retrieve software images. As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.
+:::note
+If you are upgrading to version 5.3 or higher of the SSR software, please refer to the [Upgrade Considerations](intro_upgrade_considerations.md) before proceeding.
+:::
+
+Your SSR router or conductor must have internet access to download the latest software packages; for deployments where the SSR router does not have internet access, you can use the SSR conductor as a repository (or proxy) to retrieve software images. As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.
 
 There are three standard ways of upgrading routers:
 
@@ -12,29 +16,45 @@ There are three standard ways of upgrading routers:
 - Manually upgrading a router by invoking the `install128t` application from the Linux shell
 
 :::note
-The router upgrade process using the PCLI and the GUI is done in two stages: First, the software is downloaded, then it is installed. Using the `install128t` application steps through both of these processes.
+The router upgrade process using the PCLI and the GUI is done in two stages: First, the software is downloaded, then it is installed. Use the `install128t` application steps through both of these processes.
 :::
 
 Prerequisites for upgrades now include configuring a user with super user (sudo) privileges. **SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
 
+### Version Dependencies
+
+The conductor `major.minor` version must be greater than or equal to the router version. The router version can not exceed the conductors `major.minor` version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support *may* work, but are not guaranteed to do so.  
+
+Examples:
+- Conductor running version 5.3.0, managing Routers running version 5.1.1: Supported.
+- Conductor running version 5.2.0, managing Routers running version 5.2.2: Supported.
+- Conductor running version 5.2.1, managing Routers running version 4.5.13: Supported.
+- Conductor running version 4.5.13, managing Routers running version 4.2.9: Not supported, but may work.
+
 ### Stopping the 128T Routing Software
+
 Before upgrading the 128T Routing Software, use the following procedure to stop the the software.
 
 1. Launch a Linux shell window.
-2. Execute the command
-  ```
-sudo systemctl stop 128T
-  ```
-3. Verify that the software has stopped by executing the command
-  ```
-sudo systemct1 status 128T
-  ```
-**Result**: The software is listed as _inactive (dead)_.
-4. Close the Linux shell.
+2. Execute the command: 
+
+   `sudo systemctl stop 128T`
+
+3. Verify that the software has stopped by executing the command:
+
+   `sudo systemctl status 128T`
+
+   Result: The software is listed as inactive (dead).
+
+4. Stop the salt-minion.
+
+   `sudo systemctl stop salt-minion`
+   
+5. Close the Linux shell.
 
 ## Upgrading using the Conductor's PCLI
 
-For routers managed by a 128T Conductor, upgrades can be initiated via the 128T conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*.
+For routers managed by an SSR Conductor, upgrades can be initiated via the SSR conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*.
 
 As an administrator-level user, log into the conductor's PCLI.
 
@@ -53,12 +73,12 @@ The conductor's _automated provisioner_ will upgrade both nodes in a high availa
 
 ## Upgrading using the Conductor's GUI
 
-Similar to the process for upgrading using the PCLI, the GUI upgrade process using the GUI is done in two stages: *download* and *upgrade*.
+Similar to the process for upgrading using the PCLI, the upgrade process using the GUI is done in two stages: *download* and *upgrade*.
 
-1. Navigate to the Router page in the Conductor's UI. Routers that have available upgrades will indicate as such using a blue upgrade badge in the router list.
-2. Click on the Upgrade 128T icon (the arrow within a circle) next to your router. Result: a list of upgrade and download options appears. This list is filterable if the list of available options grows large.
-3. Click on the target release in the Available Downloads section of the list. You will be asked to confirm the operation.<br/>Result: the 128T will begin downloading the software. Click on the router in the router list to monitor its progress.
-4. Once complete, click the Upgrade 128T icon again, and select the target software release from the Available Upgrades list. You will again be asked to confirm this operation.<br/>Result: the router will now begin the upgrade process.
+1. Navigate to the Router page in the Conductor's GUI. Routers that have available upgrades will indicate as such using an upgrade badge in the router list.
+2. Click on the Upgrade SSR icon (the arrow within a circle) next to your router. Result: a list of upgrade and download options appears. This list is filterable if the list of available options grows large.
+3. Click on the target release in the Available Downloads section of the list. You will be asked to confirm the operation.<br/>Result: the SSR will begin downloading the software. Click on the router in the router list to monitor its progress.
+4. Once complete, click the Upgrade SSR icon again, and select the target software release from the Available Upgrades list. You will again be asked to confirm this operation.<br/>Result: the router will now begin the upgrade process.
 
 The Automated Provisioner will upgrade both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
 
@@ -75,29 +95,34 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
    screen -d -m -s <name-of-screen-session>
    screen -x <name-of-screen-session>
    ```
-3. Enter the command to launch the interactive installer wizard.
+3. Shut down the salt-minion on the target node using the following command:
+
+   ```
+   sudo systemctl stop salt-minion
+   ```
+4. Enter the command to launch the interactive installer wizard.
 
    ```
    sudo install128t
    ```
 
-   **Result**:  The 128T splash screen appears.
+   **Result**:  The SSR splash screen appears.
    :::note
    The `install128t` application will check to see if it has an update available, and will ask that you upgrade if it detects a newer version is available.
    :::
 
-4. Press the **enter** key to select **Begin** and start the installation wizard.
+5. Press the **enter** key to select **Begin** and start the installation wizard.
 
-5. When prompted, select **Upgrade**.<br/>**Result**: The application queries 128 Technology's software repository for new software.
+6. When prompted, select **Upgrade**.<br/>**Result**: The application queries 128 Technology's software repository for new software.
 
-6. Select the desired software version from the list of available options.
+7. Select the desired software version from the list of available options.
 
-7. Once the upgrade is complete, press the **enter** key to select **Yes** to start your software.
+8. Once the upgrade is complete, press the **enter** key to select **Yes** to start your software.
    :::note
-   Your output may vary based upon the nature of the upgrade, occasion, various packages, and dependencies that 128T requires as part of the 128T Routing Software upgrade.
+   Your output may vary based upon the nature of the upgrade, occasion, various packages, and dependencies that SSR requires as part of the SSR Routing Software upgrade.
    :::
    
-8. Detach from the Screen utility.
+9. Detach from the Screen utility.
    ```
    ctrl+a
    d
@@ -105,7 +130,7 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
 
 ## Routers with Restricted Internet Access
 
-The standard upgrade workflow is for individual instances of 128T software to download software upgrades directly from mirror servers hosted and managed by 128 Technology on the public internet. Occasionally, 128T routers are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from a conductor.
+The standard upgrade workflow is for individual instances of SSR software to download software upgrades directly from mirror servers hosted and managed by Juniper on the public internet. Occasionally, SSR routers are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from a conductor.
 
 Within a given router's configuration, at `router > system > software-update > repository`, you can configure the `source-type` setting to one of three values:
 
@@ -115,21 +140,21 @@ Within a given router's configuration, at `router > system > software-update > r
   The conductor(s) require internet access, and the routers must be able to resolve internet hosted repositories.
   :::
 - `prefer-conductor`: The router will retrieve software versions from the conductor, and fall back to using the internet
-- `internet-only` (default): The router will use 128 Technology's publicly hosted repositories for retrieving sofwtare images
+- `internet-only` (default): The router will use Juniper's publicly hosted repositories for retrieving sofwtare images
 
 :::note
-Because this is a router setting, your collection of routers can each use different preferences. For example, a router on the internet can use a 128 Technology repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
+Because this is a router setting, your collection of routers can each use different preferences. For example, a router on the internet can use a Juniper repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
 :::
 
 For routers that have no access to the internet, set `router > system > software-update > repository > offline-mode` to `true`. This overrides the `source-type` leaf.
 
-The `import iso` command is used to import packages contained within a 128T ISO onto a local yum repository, allowing the 128T to be upgraded without connecting to 128 Technology servers. 
+The `import iso` command is used to import packages contained within an SSR ISO onto a local yum repository, allowing the SSR to be upgraded without connecting to 128 Technology servers. 
 :::note
 In an HA setup, when using offline-mode for routers to access the software from the conductors, the ISO must be imported to both conductors before performing the upgrade.
 :::
 
 The [import iso](cli_reference.md#import-iso) command allows a user to specify the exact `filepath` to the ISO, or to specify `hunt` which searches the disk for a file that matches the pattern `128T*.iso` (except in the following directories `/boot`, `/dev`, `/proc`, and `/sys`).
 
-This feature works on either the Conductor or the Routers. It can be combined with the Conductor Hosted Repos feature where the ISO is imported to the Conductor and then the Routers use the Conductor as the yum repository to download 128T packages.
+This feature works on either the Conductor or the Routers. It can be combined with the Conductor Hosted Repos feature where the ISO is imported to the Conductor and then the Routers use the Conductor as the yum repository to download SSR packages.
 
 Once the local software repository has been updated with the software from the ISO, the upgrade can proceed using your preferred method.

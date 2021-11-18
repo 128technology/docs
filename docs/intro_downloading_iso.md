@@ -21,13 +21,23 @@ With releases 4.5.6-1 and 5.0.0-1 v2 (and greater), we now provide a single ISO 
 - 128T-4.5.6-1.el7.OTP.v1.x86_64.iso
 - 128T-5.0.0-1.el7.OTP.v2.x86_64.iso
 
-The 128T Software package is available from our public servers located at: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/` using the username and token provided to you. The username/token simplifies access and does not require the conversion process used for the certificate. With the latest release of the 128T Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 is required. 
+### Installer Considerations
+
+The username/token simplifies access and does not require the conversion process used for the certificate. With the latest release of the 128T Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 or greater is required. 128T/SSR software version 5.3 and greater accept **only** the username and token for software access. 
+
+:::note
+Do not uninstall old versions of the 128T Installer. Later versions of the 128T Installer have dependencies on the earlier versions, and uninstalling them may cause issues for rollback operations. 
+:::
 
 Juniper highly recommends upgrading your Conductor to 4.5.7, 5.0.1, or 5.1.1. These versions contain updates for using a username/token for software access. If a username/token is used and the 128T software is not upgraded, a manual process must be followed each time the username/token is changed. See the [Manual Token Process](installer_cli_reference.md#manual-token-process) for more information.
 
 ## Downloading an ISO
 
-128 Technology ISOs are available from our public servers located at: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/` to users with an active account.
+The 128T Software packages are available from our public servers using the username and token provided to you. 
+
+For versions prior to release 5.3, use: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/`. 
+
+For version 5.3 and later, use `https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/`. 
 
 You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page. If your client certificate or token is currently installed on your 128 Technology routers and conductors, you can download software updates from our yum servers or the web page. 
 
@@ -84,11 +94,26 @@ To verify the ISO image, run the following command and check the output with the
 - Linux: `sha256sum <iso_file>`
 - OSX: `shasum -a 256 <iso_file>`
 
-The successful output of the command produces the result:
+Both commands generate the checksum of the file. For example:
 
 ```
-128T-OTP-4.5.7-1.el7.x86_64.iso: OK
+sha256sum 128T-5.1.3-1.el7.OTP.v3.x86_64.iso 
+443f4fa3f0862e5712af16bf3f245ced06e09a957800a641e35f74d225f29d14 128T-5.1.3-1.el7.OTP.v3.x86_64.iso
 ```
+To verify the checksum, run the following command to compare it against the checksum provided in the download.
+- Linux:
+```
+sha256sum -c sha256sum.txt 2>&1 | grep 128T-5.1.3-1.el7.OTP.v3.x86_64.iso
+128T-5.1.3-1.el7.OTP.v3.x86_64.iso: OK
+```
+- OSX:
+```
+shasum -a 256 -c sha256sum.txt 2>&1 | grep 128T-5.1.3-1.el7.OTP.v3.x86_64.iso
+128T-5.1.3-1.el7.OTP.v3.x86_64.iso: OK
+```
+:::note
+Ommitting the `grep` will generate validation errors for missing ISO's (ones that were not downloaded), and obscure the valid ISO. 
+:::
 
 If the checksum validation fails, re-attempt the download. If the error message persists, please contact technical support immediately.
 
@@ -161,3 +186,23 @@ Import the transformed client certificate into your browser. The imported client
 11. Click **Finish**
 
 The certificate is provisioned in Windows. Use Edge, Explorer, or Chrome to navigate to the `https://yum.128technology.com/isos` web page and download the desired ISO.
+
+## Deployment using QCOW2
+
+The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage format for virtual disks. The SSR qcow2 is a virtual hard disk image pre-installed with the SSR ISO. It includes cloud-init packages for linux network provisioning and for disk volume dynamic expansion on first boot to support OpenStack VM deployments. Any operations beyond bootstrapping the OS layer are not supported. 
+
+Download the qcow2 image using the link below:
+
+- https://technology128t.jfrog.io/ui/repos/tree/General/generic-128t-images-release-local
+
+Use the OpenStack management tool to load the image into your virtual environment, or deploy it directly from the hypervisor. The VM then boots using the pre-installed software.
+
+The steps used for deployment vary depending on the hypervisor used for the environment and the management tool. For example, qcow2 can be deployed directly to a KVM hypervisor, or it can be deployed via KVM that is being managed as part of an OpenStack cluster. It is recommended that you refer to your hypervisor’s documentation for supporting information.
+
+Supported Hypervisors
+
+- KVM
+
+Supported Management Environments
+
+- OpenStack
