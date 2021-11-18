@@ -8,7 +8,7 @@ Issues resolved in a release are merged into subsequent releases chronologically
 
 If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
 
-Alternatively, refer to the **[List of Releases](about_releases.md)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
 ## Release 4.5.11
@@ -298,12 +298,7 @@ The following error is displayed:
 /usr/bin/nice: /usr/lib/128T-installer/install128t.par: No such file or directory
 Failed to upgrade 128T!
 ```
-The recommended course of action is to perform a manual interactive upgrade of the conductor using the following command from the linux prompt:
-```
-sudo install128t
-```
-Please refer to [Manually Installing the 128T](intro_installation_installer.md) for that process. 
-
+The recommended course of action is to perform a manual interactive upgrade of the conductor. Please refer to [Upgrading Using the Interactive Installer](intro_upgrading.md/#upgrading-using-the-interactive-installer) for that process. 
 
 ## Release 4.5.5
 

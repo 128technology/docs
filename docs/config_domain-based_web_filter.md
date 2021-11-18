@@ -51,6 +51,14 @@ Use the Generate Application Idenfication Categories toggle to generate a set of
 
 ![Generate Application Identification Categories](/img/dbwf_gen_categories.png)
 
+### Auto-Update the Domain List
+
+Application Identification is configured to automatically download updated domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel for each router. 
+
+![Application Data Updates](/img/dbwf_app-id_updates.png)
+
+For additional information, see [application-identification.](config_reference_guide.md/#application-identification)
+
 ## Configuring Domain-based Web Filtering
 
 To enable Domain-based Web Filtering, you must configure a parent-level service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
@@ -165,6 +173,23 @@ exit
 ## Configuring Learning Mode
 
 Learning mode is used to gather statistics about a domain or category. You can select the type of information to be gathered; Modules, HTTPS, TLS, or All. 
+
+To configure Learning Mode via the GUI:
+1. Select a router.
+2. Scroll down to Router Settings and click Application Identification Settings.
+
+![Application ID Setting Button](/img/config_app_learning1.png)
+
+3. Set `enabled` to `true`.
+
+![App ID Basic Info](/img/config_app_learning2.png)
+
+4. Under Application Identification, select ADD.
+5. Select a type of application to identify. In most cases, selecting `all` will provide the best data set.
+
+![App Id Dropdown](/img/config_app_learning3.png)
+
+6. Validate and Commit the changes. 
 
 If Learning Mode is disabled, statistics are only gathered for categories/domains that are configured in a service.
 
