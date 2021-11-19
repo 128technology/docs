@@ -1598,10 +1598,10 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 
 ## Monitoring Agent Plugin Notes
 
-## Release 2.0.2
+## Release 2.0.3
 
 #### New Features and Improvements:
- - **PLUGIN-1163** Updated the plugin to use the latest monitoring agent version [`3.5.0`](plugin_monitoring_agent.md#release-350).
+ - **PLUGIN-1163** Updated the plugin to use the latest monitoring agent version [`3.6.1`](plugin_monitoring_agent.md#release-361).
 
 ## Release 2.0.1
 
@@ -1626,19 +1626,32 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 - **MON-359** Add `state-change` transform type and `previous_fields` to the `t128_transform`
 - **I95-43137** Add the `t128_session_records` input type.
 - **MON-305** Add the `t128_pass` processor type.
+- **MON-383** Allow double backslash in input configuration files.
 
 #### Issues Fixed:
 - **MON-354** `t128_device_state` collector has incorrect tags and fields for 128T versions < 4.5.3
 
   _**Resolution**_ Adjust some tags and fields in the `t128_device_state` collector for 128T versions < 4.5.3
 
-- **MON-383** Allow double backslash in telegraf input
-
-  _**Resolution**_ Modify the TOML parsing logic to allow double backslashes
-
 - **I95-43137** Session records and other JSON fields are truncated when used with the `syslog` output.
 
   _**Resolution**_ Escape the characters not allowed by the syslog specification.
+
+- **MON-369** Variables in output configuration files not substituted.
+
+  _**Resolution**_ Extend variable substitution functionality to output files.
+
+- **MON-320** Non-string variables in configuration files not substituted.
+
+  _**Resolution**_ Extend variable substitution functionality to non-string variables.
+
+- **MON-354** Input files are not generated correctly.
+
+  _**Resolution**_ Modify translation logic so configuration files are not overwritten.
+
+- **MON-365** Top analytics translation file is not staged correctly. 
+
+  _**Resolution**_ Stage the file to a subdirectory of the translations directory.
 
 
 
