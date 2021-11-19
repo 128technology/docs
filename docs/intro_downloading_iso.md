@@ -5,9 +5,9 @@ sidebar_label: Downloading ISOs
 
 ## Introduction
 
-128 Technology provides two workflows for the installation process:
+Juniper Session Smart Networking provides two workflows for the installation process:
 
-- **Interactive:** Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the 128T software is started.
+- **Interactive:** Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the SSR software is started.
 
 - **One Touch Provisioning (OTP):** This is the preferred method of installation. Sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router.
 
@@ -21,43 +21,84 @@ With releases 4.5.6-1 and 5.0.0-1 v2 (and greater), we now provide a single ISO 
 - 128T-4.5.6-1.el7.OTP.v1.x86_64.iso
 - 128T-5.0.0-1.el7.OTP.v2.x86_64.iso
 
-### Installer Considerations
+### Installation Considerations
 
-The username/token simplifies access and does not require the conversion process used for the certificate. With the latest release of the 128T Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 or greater is required. 128T/SSR software version 5.3 and greater accept **only** the username and token for software access. 
+The newer installation process uses a username and token that is provided with the software license. The username/token simplifies access and does not require the conversion process used for the certificate. With the latest releases of the Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 or greater is required. SSR software version 5.3 and greater accept **only** the username and token for software access. 
 
 :::note
-Do not uninstall old versions of the 128T Installer. Later versions of the 128T Installer have dependencies on the earlier versions, and uninstalling them may cause issues for rollback operations. 
+Do not uninstall old versions of the 128T/SSR Installer. Later versions of the Installer have dependencies on the earlier versions, and uninstalling them may cause issues for upgrade and/or rollback operations. 
 :::
 
-Juniper highly recommends upgrading your Conductor to 4.5.7, 5.0.1, or 5.1.1. These versions contain updates for using a username/token for software access. If a username/token is used and the 128T software is not upgraded, a manual process must be followed each time the username/token is changed. See the [Manual Token Process](installer_cli_reference.md#manual-token-process) for more information.
+Juniper requires upgrading your Conductor to a minimum 4.5.7, 5.0.1, or 5.1.1 version before the username and token software access can be used (upgrading to the latest patch release for your deployed version is always recommended). These versions contain updates for using a username/token for software access. If a username/token is used and the SSR software is not upgraded, a manual process must be followed each time the username/token is changed. Before using a manual process for upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) the [**Rolling Back Software**](intro_rollback.md) documentation, then review the [Manual Token Process](installer_cli_reference.md#manual-token-process) for more information.
 
 ## Downloading an ISO
 
-The 128T Software packages are available from our public servers using the username and token provided to you. 
+The SSR Software packages are available from our public servers using the username and token provided to you. 
 
 For versions prior to release 5.3, use: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/`. 
 
-For version 5.3 and later, use `https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/`. 
+For versions 5.3 and later, use `https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/<Major>.<Minor>/`. 
 
-You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page. If your client certificate or token is currently installed on your 128 Technology routers and conductors, you can download software updates from our yum servers or the web page. 
+You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page. If your client certificate or token is currently installed on your SSR routers and conductors, you can download software updates from our yum servers or the web page. 
 
 ### Downloading from the Command Line
 
-The ISO installation media is hosted at the same location as the 128T software packages, in the `isos` directory. To acquire the ISO, use the `curl` command. Specify the certificate or username and token obtained from 128 Technology with a valid software license.
+The ISO installation media is hosted at the same location as the SSR software packages, in the iso directories provided above. To acquire the ISO, use the `curl` command. Specify the certificate or username and token obtained from Juniper Networks, Inc. with a valid software license.
 
-#### Username and Token
+#### Username and Token Download
+##### Legacy ISO access (Versions less than 5.3.0)
 ```
-curl -O -u <username>:<token> https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/128T-<VERSION>.el7.x86_64.iso
+curl -L -O -u <username>:<token> https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/128T-<VERSION>.x86_64.iso
 ```
 
-#### Certificate
+Example: 
+```
+curl -L -O -u username:token https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/128T-4.5.0-1.el7.OTP.v6.x86_64.iso
+```
+
+##### ISO access (Versions 5.3.0 or greater)
+```
+curl -L -O -u <username>:<token> https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/<Major>.<Minor>/128T-<VERSION>.x86_64.iso
+```
+
+Example:
+```
+curl -O -L -u username:token https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/5.4/128T-5.4.0-104.el7.OTP.v1.x86_64.iso
+```
+
+Where `<VERSION>` is `<Major>.<Minor>.<patch>-<build>.<OS>.<ISO_variant>.<ISO_version>` of the version to download
+`<Major>` - Major release version number
+`<Minor>` - Minor release version number
+`<patch>` - patch release version number
+`<build>` - Build ID
+`<OS>` - Base OS (Currently only el7 is available)
+`<ISO_variant>` - ISO Type (Currently only OTP is available
+`<ISO_version>` - ISO version for the `<Major>.<Minor>.<patch>-<build>.<OS>.<ISO_variant>`
+
+
+#### Certificate Download
 ```bash
-curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/128T-<VERSION>.el7.x86_64.iso
+curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/128T-<VERSION>.x86_64.iso
 ```
 
-Where `<VERSION>` is replaced with the 128T version you are interested in.
+Where `<VERSION>` is replaced with the SSR version to download.
 
 ### Listing Available ISOs from the Command Line
+To view ISOs available for download, type the command below. Here, egrep is used to filter the results to 5.4.x.
+#### Username and Token based listing
+```
+# curl -u username:token https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/5.4/ | egrep '5\.4'
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   911    0   911    0     0   2853      0 --:--:-- --:--:-- --:--:--  2846
+<title>Index of generic-128t-isos-release-local/5.4</title>
+<h1>Index of generic-128t-isos-release-local/5.4</h1>
+<a href="128T-5.4.0-104.el7.OTP.v1.x86_64.iso">128T-5.4.0-104.el7.OTP.v1.x86_64.iso</a>                 18-Nov-2021 19:54  1.54 GB
+<a href="128T-5.4.0-104.el7.OTP.v1.x86_64.iso.sha256sum">128T-5.4.0-104.el7.OTP.v1.x86_64.iso.sha256sum</a>       18-Nov-2021 19:54  64 bytes
+<a href="128T-5.4.0-104.el7.OTP.v1.x86_64.iso.sha256sum.asc">128T-5.4.0-104.el7.OTP.v1.x86_64.iso.sha256sum.asc</a>   18-Nov-2021 19:54  821 bytes
+```
+
+#### Certificate based listing
 To view ISOs available for download, type the command below. Here, egrep is used to filter the results to 4.2.x.
 ```
 # curl --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/ | egrep '4\.2'
@@ -119,7 +160,7 @@ If the checksum validation fails, re-attempt the download. If the error message 
 
 ### Downloading from a Web Browser Using a Certificate
 
-In order for the 128T certificate to be imported into a browser, it must first be transformed into the PFX format. Use openssl from a Linux, Macintosh, or Windows 10 Subsystem for Linux shell.
+In order for the certificate to be imported into a browser, it must first be transformed into the PFX format. Use openssl from a Linux, Macintosh, or Windows 10 Subsystem for Linux shell.
 
 :::note
 This procedure is not necessary if you have a username and token.
