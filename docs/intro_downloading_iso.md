@@ -66,14 +66,14 @@ Example:
 curl -O -L -u username:token https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/5.4/128T-5.4.0-104.el7.OTP.v1.x86_64.iso
 ```
 
-Where <VERSION> is <Major>.<Minor>.<patch>-<build>.<OS>.<ISO_variant>.<ISO_version> of the version to download
-<Major> - Major release version number
-<Minor> - Minor release version number
-<patch> - patch release version number
-<build> - Build ID
-<OS> - Base OS (Currently only el7 is available)
-<ISO_variant> - ISO Type (Currently only OTP is available
-<ISO_version> - ISO version for the <Major>.<Minor>.<patch>-<build>.<OS>.<ISO_variant>
+Where `<VERSION>` is `<Major>.<Minor>.<patch>-<build>.<OS>.<ISO_variant>.<ISO_version>` of the version to download
+`<Major>` - Major release version number
+`<Minor>` - Minor release version number
+`<patch>` - patch release version number
+`<build>` - Build ID
+`<OS>` - Base OS (Currently only el7 is available)
+`<ISO_variant>` - ISO Type (Currently only OTP is available
+`<ISO_version>` - ISO version for the `<Major>.<Minor>.<patch>-<build>.<OS>.<ISO_variant>`
 
 
 #### Certificate Download
