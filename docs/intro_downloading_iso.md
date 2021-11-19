@@ -67,12 +67,19 @@ curl -O -L -u username:token https://software.128technology.com/artifactory/list
 ```
 
 Where `<VERSION>` is `<Major>.<Minor>.<patch>-<build>.<OS>.<ISO_variant>.<ISO_version>` of the version to download
+
 `<Major>` - Major release version number
+
 `<Minor>` - Minor release version number
+
 `<patch>` - patch release version number
+
 `<build>` - Build ID
+
 `<OS>` - Base OS (Currently only el7 is available)
+
 `<ISO_variant>` - ISO Type (Currently only OTP is available
+
 `<ISO_version>` - ISO version for the `<Major>.<Minor>.<patch>-<build>.<OS>.<ISO_variant>`
 
 
