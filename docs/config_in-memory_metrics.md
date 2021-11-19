@@ -72,20 +72,69 @@ Once a profile is configured on the Authority, it is availble to the routers, an
 ### Profile Retention
 
 Profile Retention can be configured as any of four values: **in-memory**, **short**, **intermediate**, and **long**. 
+
+The current implementation of the **in-memory** retention value is limited. 
+
 :::note 
 Metrics cascade from one retention value to the next; the use of any one value implies all values before it are also in effect. For example, using **intermediate** implies that **short** is also used.
 :::
 
-Retention values are not configurable. The list below indicates the configuration order.
-
-- in-memory
+Configuring retention values for persisted metrics helps manage the amount of data stored over time. Three settings are configurable:
 - short
 - intermediate
 - long
 
-The current implementation of the `in-memory` retention value is limited.  
+Each setting has three configuration fields.
 
-#### Example Profile: Native Output 
+- **enabled** (true/false): Activates/deactivates the retention setting, as well as the retention value(s) that follow. For example, disabling intermediate retention also disables long retention. Similarly, disabling the short retention disables all retention.
+- **interval**: Time between data points for retention. 
+- **duration**: How long the data will be stored before being dropped from the data store. 
+
+Retention Defaults
+
+| Retention | State | Interval | Duration |
+| --- | --- | --- | --- |
+| short | Enabled: true | 5 seconds | 1 hour |
+| intermediate | Enabled: true | 5 minutes | 1 day |
+| long | Enabled: true | 1 hour | 180 days |
+
+:::note
+Increasing the retention duration and/or decreasing the interval from the defaults has the potential to impact system overhead and should be carefully considered.
+:::
+
+The following example shows metrics retention configured only for short retention with the default values:
+
+```
+configure
+    authority
+        router        MyRouter
+            name   MyRouter 
+                system
+                    metrics
+                        retention 
+                            short
+                                enabled true
+                                interval 5s
+                                duration 1h
+                            intermediate 
+                                enabled false  
+                                interval 5m
+                                duration 1d
+                            long
+                                enabled false  
+                                interval 1h
+                                duration 180d
+                            exit
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+#### Example Profile 
 
 The following example configuration takes metrics specified in the `internet-reachability-metrics` profile and stores them through the **intermediate** retention time period.
 
@@ -170,7 +219,7 @@ config
                     profile  events
                         name       events
                         retention  long
-                    exit
+                     exit
                 exit
             exit
         exit

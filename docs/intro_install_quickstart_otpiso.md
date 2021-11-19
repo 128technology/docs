@@ -19,16 +19,6 @@ After the configuration has been added to the authority on the conductor:
 
 Clicking on the generate "QuickStart Link" will present you with a dialog box confirming some basic information about the target platform. Notably the *router name*, *node name*, and *asset ID*.
 
-By default the conductor generates a UUID for the asset ID so as to unqiuely identify the endpoint. It is often desirable to set the asset ID to be that of the serial number of the device for tracking purposes.
-
-:::note
-The serial number can be obtained from the device by using `dmidecode`
-```
-dmidecode -t system | grep Serial
-```
-If you plan on setting the asset ID to the serial number, now is the time to make that change to the configuration on the conductor.
-:::
-
 The *device host address* is the IP address that is assigned to the 128T router during the staging process.  By default this is set to `192.168.0.128`.
 
 A password is used to encrypt the contents of the QuickStart file.  This password will be required when applying the file to the target platform.
@@ -37,7 +27,7 @@ A password is used to encrypt the contents of the QuickStart file.  This passwor
 
 - Copy the auto generated “Password” (this can be set to a different value)
 - Follow step 1 to download the QuickStart file locally by selecting the “Click Here” link
-- Plug in the computer that contains the QuickStart file to any ethernet port on the router. Ensure DHCP is enabled on the computer connecting to the router.
+- Plug in the computer that contains the QuickStart file to any ethernet port except for port 1 on the router. Ensure DHCP is enabled on the computer connecting to the router.
 - Follow step 2 and click the link to start the QuickStart URL process
 - Login locally to the new router with the default username `admin` and password `128Tadmin`
 - Drag and drop the QuickStart file and click “Proceed”
