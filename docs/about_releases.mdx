@@ -14,6 +14,10 @@ For example, issues resolved in `4.3.12`, which was released on 3/12/2021, are r
 However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not addressed in `4.5.5` because `4.5.5` was released on 2/10/2021. Even though `4.5.5` is lexicographically higher than `4.3.12`, it is chronologically older than 4.3.12.
 :::
 
+The SSR software follows a semantic versioning scheme. Semantic versioning is a simple scheme built around the `name-X.Y.Z-build` concept. `X` is incremented for every major release. A major release can be the introduction of major features or when backwards compatibility is broken. `Y` is a minor release with solely non-breaking feature additions. `Z` is designated for bug fixes in previous releases. `-build` is used to denote the incremental process of development until the culmination in the final release.
+
+Starting with version `5.4.0` the `-build` will reflect the number of iterations the release candidate went through prior to release. The build number will never increment once the software has been released. The build number will be included in the release notes for the respective version.
+
 ## General Availability 
 
 | Version | Latest GA Version |
