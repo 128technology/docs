@@ -24,6 +24,17 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-config-generation-changes) for additional information.  
 
+## Release 5.4.1-4
+
+**Release Date:** November 23, 2021
+
+### Resolved Issues
+This release replaces the existing `5.4.0-104` release.
+
+### Resolved Issues
+
+- **I95-42990 Upgrade may cause a kernel panic:** Package order dependancy created a situation where upgrades from earlier versions of software may result in a kernel panic. Addressed package order dependencies.
+
 ## Release 5.4.0-104
 
 **Release Date:** November 18, 2021
