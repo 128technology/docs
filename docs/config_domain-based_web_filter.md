@@ -57,7 +57,7 @@ Application Identification is configured to automatically download updated domai
 
 ![Application Data Updates](/img/dbwf_app-id_updates.png)
 
-For additional information, see [application-identification.](config_reference_guide.md/#application-identification)
+For additional information, see [application-identification.](config_reference_guide.md#application-identification)
 
 ## Configuring Domain-based Web Filtering
 

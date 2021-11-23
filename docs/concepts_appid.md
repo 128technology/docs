@@ -226,7 +226,7 @@ For more information about using timers with the systemd service, refer to [Arch
 
 #### Viewing Modules
 
-Beginning with the 5.2 release, module registration and detailed module status (including a full list of ip-prefix/ports/protocol) can be accessed via a REST API or from the CLI. Please refer to the API documentation available from the GUI, and the [`show application modules status`](cli_reference.md/#show-application-modules-status) and [`show application modules registration`](cli_reference.md/#show-application-modules-registration) for full details.
+Beginning with the 5.2 release, module registration and detailed module status (including a full list of ip-prefix/ports/protocol) can be accessed via a REST API or from the CLI. Please refer to the API documentation available from the GUI, and the [`show application modules status`](cli_reference.md#show-application-modules-status) and [`show application modules registration`](cli_reference.md#show-application-modules-registration) for full details.
 
 #### Referencing Modules in Configuration
 

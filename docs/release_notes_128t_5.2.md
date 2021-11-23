@@ -99,11 +99,11 @@ Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#re
 ------
 - **I95-38081 Automatic generation of MSS Value:** The [network-interface configuration object](config_reference_guide.md#network-interface) now has an automatic option for the enforced-mss value. This automatically calculates the MSS of the network interface from the interface session MTU.
 ------
-- **I95-38514 View User Activity:** Added a user activity table to the GUI on the Users page, as well as adding a new [PCLI command `show user activity`](cli_reference.md/#show-user-activity).
+- **I95-38514 View User Activity:** Added a user activity table to the GUI on the Users page, as well as adding a new [PCLI command `show user activity`](cli_reference.md#show-user-activity).
 ------
-- **I95-39303 `show application modules` added:** [`show application modules status`](cli_reference.md/#show-application-modules-status) displays application names and transport information of a module. [`show application modules registration`](cli_reference.md/#show-application-modules-registration) displays registered application modules. 
+- **I95-39303 `show application modules` added:** [`show application modules status`](cli_reference.md#show-application-modules-status) displays application names and transport information of a module. [`show application modules registration`](cli_reference.md#show-application-modules-registration) displays registered application modules. 
 ------
-- **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md/#service-policy) has been enhanced to include values that allow the router to select the best path based on the current latency/MOS values of the paths. 
+- **I95-39336 Best Path Criteria:** The [service-policy](config_reference_guide.md#service-policy) has been enhanced to include values that allow the router to select the best path based on the current latency/MOS values of the paths. 
 ------
 
 ### Resolved Issues
