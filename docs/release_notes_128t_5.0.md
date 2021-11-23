@@ -53,7 +53,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-25513 Display 128T, Installer, and Installer Repo Versions:** The GUI and CLI both display the software version, installer version, and installer repo versions. 
 ------
-- **I95-27886 Packet Duplication for Inter-Node High Availability:** Packet duplication over multiple inter-node links helps reduce packet loss during transmission. For protocols such as UDP that do not verify packet integrity, this helps ensure full transmission of traffic. See [service-policy](config_reference_guide.md/#service-policy) for usage information. 
+- **I95-27886 Packet Duplication for Inter-Node High Availability:** Packet duplication over multiple inter-node links helps reduce packet loss during transmission. For protocols such as UDP that do not verify packet integrity, this helps ensure full transmission of traffic. See [service-policy](config_reference_guide.md#service-policy) for usage information. 
 ------
 - **I95-28531 Application Categorization:** Application Identification/Categorization utilizes a database of traffic categories, such as “News”, “Social Media”, “Health”, “Sports”, etc. These categories can be assigned to services, which can then be prioritized, monitored for traffic levels, or blocked for security purposes. Each category is populated with a list of domain names associated with the type of traffic.
 ------
@@ -81,7 +81,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-35741 [PCLI plugin service commands](cli_reference.md#manage-plugin-install):** The plugin lifecycle can now be managed through the PCLI. 
 ------
-- **I95-36876 `show assets software` includes Repository information:** The PCLI command [`show assets software`](cli_reference.md/#show-assets-software) includes the repository for each available software version. 
+- **I95-36876 `show assets software` includes Repository information:** The PCLI command [`show assets software`](cli_reference.md#show-assets-software) includes the repository for each available software version. 
 ------
 - **I95-38170 Updated path metrics for `show service-path`:** Latency, loss, and jitter metrics are displayed when they are available, even if performance monitor is not enabled for the path.   
 ------

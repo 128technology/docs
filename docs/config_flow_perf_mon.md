@@ -11,7 +11,7 @@ Inline Flow Performance Monitoring (FPM) complements BFD in measuring peer paths
 - `monitor-only`: Collect statistics without influencing packet processing features.
 - `resource-group`: Associate this performance monitoring profile with a top-level resource-group.
 
-Additional information is available at [`performance-monitoring-profile`.](config_reference_guide.md/#performance-monitoring-profile)
+Additional information is available at [`performance-monitoring-profile`.](config_reference_guide.md#performance-monitoring-profile)
 
 The data returned is organized by traffic class (high/medium/low/best-effort) and protocol (TDP, UDP), giving more granular data on the performance of a link - not just through synthetic traffic (BFD), but by piggybacking onto actual user traffic.
 

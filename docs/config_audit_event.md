@@ -129,7 +129,7 @@ Use the following information to create basic Input and Output configurations.
   default_sdid = "128T"
 ```
 
-3. The input and output are placed in the input and output directories respectively and tied together by the [Monitoring Agent configuration](plugin_monitoring_agent.md/#configuration). A sample monitoring agent configuration:
+3. The input and output are placed in the input and output directories respectively and tied together by the [Monitoring Agent configuration](plugin_monitoring_agent.md#configuration). A sample monitoring agent configuration:
 
 ```yaml
 enabled: true

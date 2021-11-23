@@ -17,7 +17,7 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 
 ### New Features
 
-- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md/#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
+- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
 
 ## Resolved Issues
 
@@ -298,7 +298,7 @@ The following error is displayed:
 /usr/bin/nice: /usr/lib/128T-installer/install128t.par: No such file or directory
 Failed to upgrade 128T!
 ```
-The recommended course of action is to perform a manual interactive upgrade of the conductor. Please refer to [Upgrading Using the Interactive Installer](intro_upgrading.md/#upgrading-using-the-interactive-installer) for that process. 
+The recommended course of action is to perform a manual interactive upgrade of the conductor. Please refer to [Upgrading Using the Interactive Installer](intro_upgrading.md#upgrading-using-the-interactive-installer) for that process. 
 
 ## Release 4.5.5
 

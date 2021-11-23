@@ -97,7 +97,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-39236/I95-40804/I95-41531 Session capture to produce unique pcap files:** A capture tag has been added to the session-capture feature. If a session-capture is created with a tag, that tag is used to name the pcaps throughout the topology, instead of the service name. Users are now able to initiate this capture from the Services page in the GUI and the command line.
 ------
-- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md/#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
+- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md#network-interface), and [`authority`](config_reference_guide.md#authority) in the Element Reference Guide.
 ------
 - **I95-40776 GUI self diagnostics for client connectivity:** A client connectivity error now diplays a dialog with several steps intended to help the user diagnose issues.
 
@@ -379,7 +379,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-38212 Restart System From the Node Panel:** The Process Management button has been added to the top of the Node Panel in the GUI. When selected, a list of operations displays, allowing the user to; Start, Stop, or Restart the 128T Conductor or Router. The option to Reboot the OS is also available.
 ------
-- **I95-38514 View User Activity:** Added a user activity table to the GUI on the Users page, as well as adding a new [PCLI command `show user activity`](cli_reference.md/#show-user-activity).
+- **I95-38514 View User Activity:** Added a user activity table to the GUI on the Users page, as well as adding a new [PCLI command `show user activity`](cli_reference.md#show-user-activity).
 ------
 - **I95-38642 Form Based Template Instantiation:**  An administrator can now define a JSON Schema to create a template for variables so a user can fill out the variables in a simple form.
 ------
