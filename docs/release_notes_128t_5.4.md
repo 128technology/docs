@@ -22,7 +22,17 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
 ------
-- **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-config-generation-changes) for additional information.  
+- **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
+
+## Release 5.4.1-4
+
+**Release Date:** November 23, 2021
+
+This release replaces the existing `5.4.0-104` release.
+
+### Resolved Issues
+
+- **I95-42990 Upgrade may cause a kernel panic:** Package order dependancy created a situation where upgrades from earlier versions of software may result in a kernel panic. Addressed package order dependencies.
 
 ## Release 5.4.0-104
 
@@ -52,7 +62,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-31358 VRRP Interface Redundancy:** VRRP is now supported as a protocol for configuring High Availability and Failover. For more information, see [Configuring Dual Router High Availability and VRRP](config_ha_vrrp.md).
 ------
-- **I95-34664 Add Ability to disable `graceful-restart`:** Users can now configure `graceful-restart` as disabled, rather than helper mode or full graceful restart. For more information, see [BGP Graceful Restart](config_bgp.md/#bgp-graceful-restart)
+- **I95-34664 Add Ability to disable `graceful-restart`:** Users can now configure `graceful-restart` as disabled, rather than helper mode or full graceful restart. For more information, see [BGP Graceful Restart](config_bgp.md#bgp-graceful-restart)
 ------
 - **I95-35131 Description Field for static DHCP Pool Assignment:** A description field has been added for static DHCP pool assignment. This is helpful to associate the device name with the static assignment.
 ------
@@ -76,7 +86,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **i95-40325 Configurable Metrics Retention:** Metrics retention intervals and storage duration values are now user configurable. See [In-Memory Metrics](config_in-memory_metrics.md) for more information. 
 ------
-- **I95-40436 Updated Application ID Domain Data:** Application Identification can be configured to automatically download updated domain and application datatsets daily, weekly (default), or monthly. For more information, see [Auto Update the Domain List](config_domain-based_web_filter.md/#auto-update-the-domain-list).
+- **I95-40436 Updated Application ID Domain Data:** Application Identification can be configured to automatically download updated domain and application datatsets daily, weekly (default), or monthly. For more information, see [Auto Update the Domain List](config_domain-based_web_filter.md#auto-update-the-domain-list).
 ------
  - **I95-40438 Support for Lenovo X722:** Upgrades to the DPDK version now provide support for the Lenovo Ethernet Connection X722 for 10GbE SFP+. 
 ------
@@ -92,7 +102,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-41457 VRF Learning via OSPF:** VRF can now learn via OSPF as well as BGP. For more information, see [VRF Learning.](config_vrf_learning.md)
 ------
-- **I95-42107 User defined Help for Templates:** When defining templates, adminstrators can provide help text for the template that will display for the user completing the templated configuration. For more information, see [Adding Help for a Template.](config_templates.md/#adding-help-for-a-template)
+- **I95-42107 User defined Help for Templates:** When defining templates, adminstrators can provide help text for the template that will display for the user completing the templated configuration. For more information, see [Adding Help for a Template.](config_templates.md#adding-help-for-a-template)
 ------
 - **I95-42278 Template filters for use with Subnets:** Filters have been added for use with CIDR formatting. 
 ------
@@ -100,7 +110,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-42479 Router Upgrade GUI Improvements:** Several improvements have been made to the Router Upgrade display in the GUI.
 ------
-- **I95-42923 `restore system factory-default` command added:** Configuration is reset to the factory defaults, the configuration is committed, and the system is rebooted. This is an Admin only function. Please see [`restore system factory-default`](cli_reference.md/#restore-system-factory-default) for additional information. 
+- **I95-42923 `restore system factory-default` command added:** Configuration is reset to the factory defaults, the configuration is committed, and the system is rebooted. This is an Admin only function. Please see [`restore system factory-default`](cli_reference.md#restore-system-factory-default) for additional information. 
 
 ## Resolved Issues
 
