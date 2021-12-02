@@ -120,6 +120,7 @@ module.exports = {
         "type": "category",
         "label": "How To",
         "items": [
+          "how_to_use_app_summary",
           "howto_conductor_migration",
           "howto_extend_gui_nav",
           "howto_lte",
