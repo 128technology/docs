@@ -21,7 +21,7 @@ Configuration changes are always made to a candidate configuration. In releases 
 
 Additionally, the candidate configuration is no longer synchronized between HA nodes. Only the running configuration is synchronized between nodes.
 
-It is strongly recommended to frequently save the candidate configuration using the [`export config`](cli_reference.md/#export-config) command while working, especially if you are performing multiple changes. Doing so will provide a checkpoint for changes to be committed. Changes to the running configuration are only made when the configuration is committed.
+It is strongly recommended to frequently save the candidate configuration using the [`export config`](cli_reference.md#export-config) command while working, especially if you are performing multiple changes. Doing so will provide a checkpoint for changes to be committed. Changes to the running configuration are only made when the configuration is committed.
 
 #### A Profile is required when `performance-monitoring` is enabled on a neighborhood.
 
@@ -40,7 +40,7 @@ When configuring redundant interfaces, **all** configured fields must be identic
 Committing configuration changes is not allowed when the system is in a "mixed version" state that may occur during an upgrade. For example, if one node of an HA pair is at 4.5.3 and an upgrade to 5.3 or higher has been performed on the other node, do not attempt to commit a configuration change until both nodes are updated to the new release.
 
 
-### Plugin Configuration Generation Changes
+## Plugin Configuration Generation Changes
 
 The configuration generation for plugins have been adapted to work with the improved configuration handling available in 5.3 and higher. When upgrading from a 4.x version of conductor, no action is required to take advantage of this new functionality.
 

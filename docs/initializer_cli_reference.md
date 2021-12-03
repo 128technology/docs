@@ -5,7 +5,7 @@ sidebar_label: Initializer Command Line Reference
 
 This is a reference document for the 128T Initializer command line interface.
 For a guide to basic usage, see the initialization section of the
-[Manual Installation Guide](intro_installation_installer.md/#initialize-the-128t-node).
+[Manual Installation Guide](intro_installation_installer.md#initialize-the-128t-node).
 
 ## Running the Initializer
 

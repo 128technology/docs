@@ -21,7 +21,7 @@ Per-adjacency traffic engineering allows you to automatically identify the adjac
 Per adjacency traffic-engineering is limited to spoke nodes in a hub and spoke topology. 
 :::
 
-Typically, adjacencies are automatically configured via [neighborhoods](concepts_glossary.md/#neighborhoods). All nodes in a neighborhood share layer 3 connectivity. Between any two nodes we can form a pair of adjacencies, one on each router, which describes their peering. When the adjacencies are automatically created, the spoke’s neighborhood `receive-cap` is inspected by the neighborhood Hub router. It creates an adjacency with a `transmit-cap` matching the spoke’s `receive-cap`. 
+Typically, adjacencies are automatically configured via [neighborhoods](concepts_glossary.md#neighborhoods). All nodes in a neighborhood share layer 3 connectivity. Between any two nodes we can form a pair of adjacencies, one on each router, which describes their peering. When the adjacencies are automatically created, the spoke’s neighborhood `receive-cap` is inspected by the neighborhood Hub router. It creates an adjacency with a `transmit-cap` matching the spoke’s `receive-cap`. 
 
 :::note 
 In order to generate the adjacencies correctly, configure a `receive-cap` on the neighborhood of the network interface with limited receive capabilities.

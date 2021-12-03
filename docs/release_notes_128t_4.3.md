@@ -30,13 +30,13 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
 ------
-- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limitingloginattempts) 
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md#limitingloginattempts) 
 ------
 - **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
 ------
 - **I95-37647 Server-Sent-Events pass values in the clear for some internal request URIs.** Vulnerabilities identified with server sent events have been resolved.
 ------
-- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
+- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md#fileuploadlimitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
 - **I95-37652 SSH Follows Weak Security Practices.** [Several fixes have been put in place to harden SSH access.](config_access_mgmt.md) Please see the warning regarding SSH Root Login at the top of this page.
 :::note
