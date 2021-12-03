@@ -4,7 +4,7 @@ sidebar_label: Upgrade Considerations
 ---
 Before upgrading to **version 5.3 or 5.4 and higher**, please review the following information.
 
-### Upgrade Installer 
+### Upgrade Installer
 Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 
 ### Rollback Considerations
@@ -42,7 +42,7 @@ Committing configuration changes is not allowed when the system is in a "mixed v
 
 ## Plugin Configuration Generation Changes
 
-The configuration generation for plugins have been adapted to work with the improved configuration handling available in 5.3 and higher. When upgrading from a 4.x version of conductor, no action is required to take advantage of this new functionality. 
+The configuration generation for plugins have been adapted to work with the improved configuration handling available in 5.3 and higher. When upgrading from a 4.x version of conductor, no action is required to take advantage of this new functionality.
 
 However, when upgrading from 5.1 or 5.2 to version 5.3 or higher, the following plugins must be updated **prior to upgrading** the SSR conductor. Please see [Upgrading an Existing Plugin](plugin_intro.md#upgrading-an-existing-plugin) for instructions.
 
@@ -53,3 +53,11 @@ However, when upgrading from 5.1 or 5.2 to version 5.3 or higher, the following 
 | ha-sync-redundancy | [>=1.1.0](plugin_ha_sync_redundancy.md#release-notes) |
 | icmp-reachability-detection | [>=3.0.3](plugin_icmp_reachability_detection.md#release-notes) |
 | wireguard | [>=2.0.3](plugin_wireguard.md#release-notes) |
+
+### Unsupported Plugins
+
+The following plugins are currently not supported in SSR version 5.4.0 due to some caveats listed [here](release_notes_128t_5.4.md#Caveats)
+
+| Plugin | Version |
+| ------ | ------- |
+| http-probe | 1.0.0 |
