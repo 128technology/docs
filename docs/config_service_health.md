@@ -224,7 +224,7 @@ Once a profile is configured, the above defaults are enforced. To turn off the s
 
 ### Health Probes
 
-An ICMP probe, as described below is built into the system, providing the health probe method. Other application specific probes (HTTP, TLS, SIP, etc.) are made possible with external plugins utilizing the REST API added for this feature. The two main aspects are:
+An ICMP probe, as described below is built into the system, providing the health probe method. Other application specific probes ([HTTP, TLS](plugin_http_probe.md), SIP, etc.) are made possible with external plugins utilizing the REST API added for this feature. The two main aspects are:
 
 - Load-balancer API to declare select paths as down
 - Mechanism to report activity or inactivity over a path to an external application
@@ -287,7 +287,7 @@ Probe-interval and probe-duration should be tuned so that probe-interval + probe
 
 ### Custom Health Probe Plugins
 
-The extensibility APIs described above enable plugins to be developed for performing additional probes using TCP, TLS, HTTP, SIP etc. The plugin workflow for these types of probes would be as follows:
+The extensibility APIs described above enable plugins to be developed for performing additional probes using TCP, [TLS, HTTP](plugin_http_probe.md), SIP etc. The plugin workflow for these types of probes would be as follows:
 - Augment the service-route > reachability-detection > probe choice statement to plugin specific probe configuration. In general, there is no restriction enforced on what and how many plugins run a reachability check in parallel.
 - The probe plugin operates independently to determine if the path is up or down. Based on the specific business logic, the plugin triggers the path down using the load balancer APIs.
 - The probe plugin uses the probe-status REST API to set service-paths up or down.
