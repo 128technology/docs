@@ -320,6 +320,7 @@ Alarms and events:
 
 Show commands:
 - `show stats` command can be used for capturing the “current” snapshot of the relevant stats.
+  - For the icmp-probe use `show stats icmp reachability-probe`
 - The Meets-SLA field has been added to the `show load-balancer` command to indicate the result of the reachability detection.
 
 ```
@@ -328,7 +329,7 @@ Show commands:
 ======== ========= ====== ======= ====== ========= ======== ===== ===========
  router         0    N/A      up   0.7%     250ms    100ms   2.0         Yes
 ```
-- The `show service-path` output indicates when a non-SVR path is no longer in-service and why.
+- The `show service-path detail` output indicates when a non-SVR path is no longer in-service and why.
 Two fields have been added to the show command: Meets-SLA and Reachability-Probes. Meets-SLA indicates if a service agent meets or satisfies SLA as a result of reachability detection. Reachability-Probes shows the probes status from reachability detection.
 
 ```
