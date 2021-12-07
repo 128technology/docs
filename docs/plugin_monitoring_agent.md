@@ -7,13 +7,13 @@ The 128T Monitoring Agent is an entity for collecting data from a node running 1
 
 The monitoring agent at its core is designed to be able to push data to external platforms. It currently leverages the [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) collection stack on every 128T router. However, the monitoring agent is designed with other tools and scale in mind. The monitoring agent is composed of the following:
 
-- **monitoring-agent-cli**  
+- **monitoring-agent-cli**
   Used for configuring and interacting with the underlying application
 
-- **collectors**  
+- **collectors**
   A set of inputs designed to collect data from several sources such as metrics, events etc.
 
-- **targets**  
+- **targets**
   A set of outputs for collecting and pushing the data to various data sinks such as external monitoring platforms, files on disk etc.
 
 ## Installation
@@ -28,8 +28,8 @@ The instructions for installing and managing the plugin can be found [here](plug
 ### Manual installation
 The 128T Monitoring Agent can be obtained from the official 128T software repository. The latest 128T-monitoring-agent should always be used and is compatible with `128T >= 4.1.0`
 
-:::important  
-Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported 128T versions. It should be preferred for new installations and upgrades.  
+:::important
+Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported 128T versions. It should be preferred for new installations and upgrades.
 :::
 
 The agent can be install using the `dnf` utility.
@@ -99,7 +99,7 @@ The output configuration provides information about the various data sink for th
 | format            | string                | When the data-format is other, the name of the output format supported by telegraf |
 | additional-config | multiline-toml-string | Additional telegraf configuration for the output not captured by the data model    |
 
-Based on the selected type, additional type specific configuration will be configurable. Here's an example of a `custom-output` which allows the user to create a TOML telegraf configuration 
+Based on the selected type, additional type specific configuration will be configurable. Here's an example of a `custom-output` which allows the user to create a TOML telegraf configuration
 
 ```config
 *admin@node1.conductor1# configure authority monitoring output http
@@ -194,7 +194,7 @@ exit
 ```
 
 #### Router configuration
-Once all the inputs, outputs and agent-config are provisioned, the profile can be referenced on the individual routers. The monitoring config elements can be found under `authority > router > system > monitoring` 
+Once all the inputs, outputs and agent-config are provisioned, the profile can be referenced on the individual routers. The monitoring config elements can be found under `authority > router > system > monitoring`
 
 | Element      | Type      | Description                                       |
 | ------------ | --------- | ------------------------------------------------- |
@@ -222,7 +222,7 @@ config
     exit
 exit
 ```
-### File based configuration 
+### File based configuration
 #### Version History
 
 | Release      | Modification                                                    |
@@ -319,8 +319,8 @@ files = ["stdout", "/tmp/metrics.out"]
 data_format = "influx"
 ```
 
-:::important  
-Users should not make changes to these files as they will be overwritten by the `monitoring-agent-cli configure` command.  
+:::important
+Users should not make changes to these files as they will be overwritten by the `monitoring-agent-cli configure` command.
 :::
 
 ### Samples
@@ -366,8 +366,8 @@ Path: `/var/lib/128t-monitoring/inputs/t128_metrics.conf`
     timeout = "15s"
 ```
 
-:::tip  
-Depending on the number of metrics you have enabled, you may need to increase the timeout to allow collection to complete. This can also influence your minimum polling interval.  
+:::tip
+Depending on the number of metrics you have enabled, you may need to increase the timeout to allow collection to complete. This can also influence your minimum polling interval.
 :::
 
 #### Linux System
@@ -568,8 +568,8 @@ Path: `/var/lib/128t-monitoring/outputs/syslog.conf`
   default_sdid = "128T"
 ```
 
-:::important  
-For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages  
+:::important
+For syslog output, not specifying the `default_sdid` parameter can result in empty or truncated messages
 :::
 
 ### Variable Replacement
@@ -865,19 +865,19 @@ The configuration file in a `TOML` definition of metrics has the following forma
 
 Each element of the configuration specifies an aspect of the [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v1.8/write_protocols/line_protocol_tutorial/) or the [128T REST API](api_rest_4.2.0.md).
 
-- **name**  
+- **name**
   The line protocol measurement to be used for the output
 
-- **fields**  
+- **fields**
   What line protocol fields should exist in the output
 
-- **fields.key** (e.g. `packets-received`)  
+- **fields.key** (e.g. `packets-received`)
   A line protocol field key that should exist in the output
 
-- **fields.value** (e.g. `stats/aggregate-session/service/packets-received`)  
+- **fields.value** (e.g. `stats/aggregate-session/service/packets-received`)
   The 128T KPI providing the value for the associated field key. See the [128T REST API documentation](api_rest_4.2.0.md) for a full list. Note that the documentation prefixes the KPIs with `/router/{router}/`.
 
-- **parameters** (e.g. `service`)  
+- **parameters** (e.g. `service`)
   The 128T parameters that should be preserved as line protocol tags in the output. When a non-empty list of values is provided for a parameter, only KPIs with matching parameters will be included in the output.
 
 A custom set of metrics can be collected by configuring the `t128_metrics` input as described in the sample. The configuration follows the same structure as the default file, but the metrics are nested under the input.
@@ -969,8 +969,8 @@ The configuration file in a `TOML` definition of event collector has the followi
   type = ["alarm", "admin"]
 ```
 
-:::important  
-In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.  
+:::important
+In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.
 :::
 
 ```toml
@@ -1043,8 +1043,8 @@ The `TOML` definition of the configuration looks as below. Telegraf `tagpass` ca
 ```
 
 
-:::important  
-In versions 3.3.1 and later, the simplified `t128_device_state` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.  
+:::important
+In versions 3.3.1 and later, the simplified `t128_device_state` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.
 :::
 
 ```toml
@@ -1175,8 +1175,8 @@ The device interface name, network interface name, vlan, ip address, and destina
   ##     destination-mac = ["00:0a:95:9d:68:16"]
 ```
 
-:::important  
-In versions 3.3.1 and later, the simplified `t128_arp_state` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.  
+:::important
+In versions 3.3.1 and later, the simplified `t128_arp_state` seen above should be used over the `execd` input version seen below. The config below should only be used with those older versions of the monitoring agent.
 :::
 
 ```toml
@@ -1281,6 +1281,7 @@ exit
 
 #### Top Applications
 The monitoring agent `top-applications` input can be used to configure various aspects of the API on the system. The various configuration options available under `authority > monitoring > input > top-applications` are as follows:
+
 | Element            | Type   | Default | Description                                                       |
 | ------------------ | ------ | ------- | ----------------------------------------------------------------- |
 | max-rows           | uint32 | 10      | The maximum number of rows to be collected per sample             |
@@ -1335,36 +1336,6 @@ The **top sessions** input above can be used to stream the view of the top 10 se
 The **top sources** input can be used to capture the list of source IP addresses by either **TOTAL_DATA** (default) or by **SESSION_COUNT**. In addition, the user can configure the maximum number of top data samples to collect as configured by the **max_rows** configuration above. Finally the **enabled** flag can be used to turn off the top sources collection is need be.
 
 The **top applications** input is useful when application identification in terms of module or tls have been configured on the router. By default, all the discovered sessions will be reported by the input. The user can tune the collection by setting up a search filter in the form of **filter** or eliminate the applications that have some minimum number of sessions via **min-session-count**. The **max-rows** will limit the reporting to the first N rows. The collection can be turned off by setting **enabled** to be false.
-
-#### Session Records
-
-| Release | Modification                                     |
-| ------- | ------------------------------------------------ |
-| 3.6.1   | `t128_session_records` input type was introduced |
-
-The monitoring agent `session-records` input can be used to generate session records on the system.
-
-:::note
-The session record input is only compatible with 128T >= 5.4.0.
-:::
-
-The `t128_session_records` collector allows a simple `TOML` configuration as below to capture the various session records on the system.
-```toml
-[[inputs.t128_session_records]]
-  ## Create a stream of 128T session reocrds.
-
-  ## A (unique) file to use for index tracking. This tracking allows each
-  ## session record to be produced once. By default, no tracking is used and
-  ## session records are produced starting from the point telegraf is launched.
-  # index-file = "/var/lib/128t-monitoring/state/session_records.index"
-
-  ## The name of the log file to produce to /var/log/128t-monitoring/<log-name>.log
-  # log-name = "session_records"
-
-  ## input session record filtering based on type
-  # [inputs.t128_session_records.tagpass]
-  # recordType = ["CREATE", "INTERMEDIATE", "CLOSE", "ERROR", "MODIFY"]
-```
 
 ### GraphQL Collector
 
@@ -1462,25 +1433,25 @@ The `TOML` configuration for the GraphQL input can be seen below
   ##   router-name = "allRouters/nodes/name"    # absolute path
 ```
 
-- **collector_name**  
+- **collector_name**
   A name for the collector which will be used as the measurement name of the produced data
 
-- **base_url**  
+- **base_url**
   The URL of the GraphQL API
 
-- **unix_socket**  
+- **unix_socket**
   The unix socket to use; the defualt empty string indicates no unix socket is being used
 
-- **timeout**  
+- **timeout**
   A limit on the amount of time taken for a given request. If the timeout is hit, no data will be produced for the sample.
 
-- **entry_point**  
+- **entry_point**
   The path to a point in the graph relative to which `extract_fields` and `extract_tags` will be specified. This path may contain `(<key>:<value>)` arguments corresponding to those in the GraphQL tree.
 
-- **extract_fields**  
+- **extract_fields**
   Paths, absolute or relative to the `entry_point`, from which fields should be created. Each value MUST point to a leaf in the graph. If the path is absolute, it MUST NOT diverge from the `entry_point` and MUST exclude graphQL argument. The keys become the field names for the produced values. At least one field MUST be specified.
 
-- **extract_tags**  
+- **extract_tags**
   Paths, absolute or relative to the `entry_point`, from which tags should be created. Each value MUST point to a leaf in the graph. If the path is absolute, it MUST NOT diverge from the `entry_point` and MUST exclude the `(<key>:<value>)` arguments which are allowed in the `entry_point`. The keys become the tag names for the produced values.
 
 Note that `(<key>:<value>)` arguments are valid only on the `entry_point`. They MUST NOT be specified on `extract_fields` or `extract_tags`.
@@ -1488,6 +1459,45 @@ Note that `(<key>:<value>)` arguments are valid only on the `entry_point`. They 
 It is possible for the relative paths of `extract_fields` and `extract_paths` to enter GraphQL lists. When that is the case, a separate line will be created for each entry in the list.
 
 When dealing with multiple child nodes, it is advised that each be handled in separate `t128_graphql` inputs.
+
+
+### Session Records
+
+| Release | Modification                                     |
+| ------- | ------------------------------------------------ |
+| 3.6.1   | `t128_session_records` input type was introduced |
+
+The monitoring agent `session-records` input can be used to generate session records on the system.
+
+:::note
+The session record input is only compatible with 128T >= 5.4.0.
+:::
+
+The various configuration options available under authority > monitoring > input > session-records are as follows:
+
+| Element               | Type   | Default | Description                                                                          |
+| --------------------- | ------ | ------- | -------------------------------------------------------------------------------------|
+| include-all-records   | string | true    | Whether to include all the session records generated by the system.                  |
+| record-type           | list   | empty   | List of valid session record type such as create, intermediate, modify, close, error |
+
+The `t128_session_records` collector allows a simple `TOML` configuration as below to capture the various session records on the system.
+
+```toml
+[[inputs.t128_session_records]]
+  ## Create a stream of 128T session reocrds.
+
+  ## A (unique) file to use for index tracking. This tracking allows each
+  ## session record to be produced once. By default, no tracking is used and
+  ## session records are produced starting from the point telegraf is launched.
+  # index-file = "/var/lib/128t-monitoring/state/session_records.index"
+
+  ## The name of the log file to produce to /var/log/128t-monitoring/<log-name>.log
+  # log-name = "session_records"
+
+  ## input session record filtering based on type
+  # [inputs.t128_session_records.tagpass]
+  # recordType = ["CREATE", "INTERMEDIATE", "CLOSE", "ERROR", "MODIFY"]
+```
 
 
 ## 128T Processors
@@ -1649,7 +1659,7 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 
   _**Resolution**_ Modify translation logic so configuration files are not overwritten.
 
-- **MON-365** Top analytics translation file is not staged correctly. 
+- **MON-365** Top analytics translation file is not staged correctly.
 
   _**Resolution**_ Stage the file to a subdirectory of the translations directory.
 
