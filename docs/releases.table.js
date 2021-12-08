@@ -23,7 +23,7 @@ export const releases = [
     version: '5.1.6',
     url:'release_notes_128t_5.1#release-516',
     releaseDate: 'October 27, 2021',
-    endOfMaintenance: 'December 24, 2021',
+    endOfMaintenance: 'January 31, 2022',
     endOfSupport: 'May 24, 2022',
   },
   {
@@ -44,7 +44,7 @@ export const releases = [
     version: '5.1.5',
     url: 'release_notes_128t_5.1#release-515',
     releaseDate: 'August 13, 2021',
-    endOfMaintenance: 'December 24, 2021',
+    endOfMaintenance: 'January 31, 2022',
     endOfSupport: 'May 24, 2022',
   },
   {
@@ -65,7 +65,7 @@ export const releases = [
     version: '5.1.4',
     url: 'release_notes_128t_5.1#release-514',
     releaseDate: 'July 7, 2021',
-    endOfMaintenance: 'December 24, 2021',
+    endOfMaintenance: 'January 31, 2022',
     endOfSupport: 'May 24, 2022',
   },
   {
@@ -86,7 +86,7 @@ export const releases = [
     version: '5.1.3',
     url: 'release_notes_128t_5.1#release-513',
     releaseDate: 'May 17, 2021',
-    endOfMaintenance: 'December 24, 2021',
+    endOfMaintenance: 'January 31, 2022',
     endOfSupport: 'May 24, 2022',
   },
   {
@@ -100,7 +100,7 @@ export const releases = [
     version: '5.1.2',
     url: 'release_notes_128t_5.1#release-512',
     releaseDate: 'April 30, 2021',
-    endOfMaintenance: 'December 24, 2021',
+    endOfMaintenance: 'January 31, 2022',
     endOfSupport: 'May 24, 2022',
   },
   {
@@ -114,7 +114,7 @@ export const releases = [
     version: '5.1.1',
     url: 'release_notes_128t_5.1#release-511',
     releaseDate: 'April 12, 2021',
-    endOfMaintenance: 'December 24, 2021',
+    endOfMaintenance: 'January 31, 2022',
     endOfSupport: 'May 24, 2022',
   },
   {
@@ -142,7 +142,7 @@ export const releases = [
     version: '5.1.0',
     url: 'release_notes_128t_5.1#release-5.1',
     releaseDate: 'March 15, 2021',
-    endOfMaintenance: 'December 24, 2021',
+    endOfMaintenance: 'January 31, 2022',
     endOfSupport: 'May 24, 2022',
   },
   {
