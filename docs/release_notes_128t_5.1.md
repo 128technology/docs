@@ -19,7 +19,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
-## Release 5.1.7-151
+## Release 5.1.7-1
 
 **Release Date:** December 9, 2021
 
