@@ -8,7 +8,7 @@ export const releases = [
   {
     version: '5.1.7',
     url:'release_notes_128t_5.1#release-517',
-    releaseDate: 'December 7, 2021',
+    releaseDate: 'December 9, 2021',
     endOfMaintenance: 'January 31, 2022',
     endOfSupport: 'May 24, 2022',
   },

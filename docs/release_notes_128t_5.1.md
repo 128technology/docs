@@ -19,9 +19,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
-## Release 5.1.7-1
+## Release 5.1.7-151
 
-**Release Date:** December 7, 2021
+**Release Date:** December 9, 2021
 
 ### New Features
 
@@ -69,7 +69,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43194 Web graphql handling of `loadBalanceService` mos should be `float`, not `int`:** Whole number integers have been changed to be precision `float`.
 ------
-- **I95-43205 changed ssh key permissions create problems:** In AWS instances during the upgrade to 5.4.0, the sshd user and ssh_keys group required for the sshd service to function have been observed to be removed or have their group id number replaced. This issue has been resolved and the sshd service has been preserved.
+- **I95-43205 Changed ssh key permissions:** In AWS instances during the upgrade to 5.4.0, the sshd user and ssh_keys group required for the sshd service have been removed or had their group-id replaced. This issue has been resolved and the sshd service has been preserved.
 ------
 - **I95-43244 Reverse Packet injection on Affinity Mismatch:** Resolved an issue where a reverse packet was being injected into a flow with no flow affinity.
 
@@ -77,6 +77,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ## Release 5.1.6-2
 
 **Release Date:** October 27, 2021
+
 This release replaces the existing `5.1.6-1` release.
 
 ### Resolved Issues
