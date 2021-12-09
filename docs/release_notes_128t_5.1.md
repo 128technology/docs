@@ -39,6 +39,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-38995 Show sessions by-id command is missing rx/tx byte data:** `show session by-id` now displays bytes received and sent, tcp retransmissions, and tcp/tls time to establish.
 ------
+- **I95-40013 `reverse-flow-enforcement` breaks `management-over-forwarding` in HA:** Modifications have been made to `reverse-flow-enforcement` to resolve this issue.
+------
 - **I95-41005 Management over forwarding stuck in key-accepted state:** `salt minion` is restarted to handle an asset stuck in key-accepted state.
 ------
 - **I95-42310 Cannot delete a Conductor address in the Authority using the GUI:** This issue has been resoved.
@@ -60,6 +62,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-42702 Newly created users not being saved:** Resolved an issue where the user datastore was not being written to disk on edits.
 ------
 - **I95-42760 LTE interface with forwarding set to false causes nodeMonitor crash loop:** Resolved an issue where the device interface forwarding option was incorrectly configured. 
+------
+- **I95-42788 Event History no Longer Shows Details of Diff:** Resolved an issue that was preventing `diff` details from displaying. 
 ------
 - **I95-42840 Post upgrade peer path flap:** Resolved an issue where keep-alive packets were not processed on the same flow.
 ------
