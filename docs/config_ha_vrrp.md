@@ -94,7 +94,7 @@ Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring 
 
                     vrrp
                         enabled                 true
-                        vrid                    128
+                        vrid                    129
                         priority                100
                         advertisement-interval  250
                     exit
@@ -210,7 +210,7 @@ Identify the secondary router, and configure the following settings.
 - VRRP and priority on the interfaces
 - Enable failover and set priority on the service routes
 
-The differences for the secondary router are the priority values and vrid's. 
+The differences for the secondary router are the priority values. 
 
 ### Assign the Peer
 On the secondary router, assign the peer router to which the secondary router will failover when service to the primary router has been restored. 
@@ -237,9 +237,6 @@ Configure node1 on router-b with the following interfaces:
 
 Activate VRRP on the `wan` and `lan` device interfaces of node1. Configuring a lower VRRP priority (97) on the `lan` and `wan` interfaces of router-b, identifies router-b as the secondary router. On a dual router HA setup, the vrids must be the same on the two redundant/VRRP devices - `router-a` and `router-b` `lan` device interfaces must have the same vrid, as well as each `wan` device interface vrid being the same.
 
-:::note
- `lan` devices and `wan` devices can have the same vrid because they are on different networks/broadcast domains. However, it is recommended to use different vrids on the secondary router to avoid confusion. In this example, we use 95.
-
 ```
 node                  node1
                 name                      node1
@@ -255,7 +252,7 @@ node                  node1
 
                     vrrp
                         enabled                 true
-                        vrid                    95
+                        vrid                    128
                         priority                97
                         advertisement-interval  250
                     exit
@@ -269,8 +266,8 @@ node                  node1
                         qp-value      30
                         mtu           1500
 
-                        address       172.16.1.3
-                            ip-address     172.16.1.3
+                        address       172.16.1.2
+                            ip-address     172.16.1.2
                             prefix-length  24
                         exit
 
@@ -289,7 +286,7 @@ node                  node1
 
                     vrrp
                         enabled                 true
-                        vrid                    95
+                        vrid                    129
                         priority                97
                         advertisement-interval  250
                     exit
@@ -484,7 +481,7 @@ config
 
                     vrrp
                         enabled                 true
-                        vrid                    128
+                        vrid                    129
                         priority                100
                         advertisement-interval  250
                     exit
@@ -599,8 +596,8 @@ config
                         qp-value      30
                         mtu           1500
 
-                        address       172.16.1.3
-                            ip-address     172.16.1.3
+                        address       172.16.1.2
+                            ip-address     172.16.1.2
                             prefix-length  24
                         exit
 
@@ -619,7 +616,7 @@ config
 
                     vrrp
                         enabled                 true
-                        vrid                    128
+                        vrid                    129
                         priority                99
                         advertisement-interval  250
                     exit
