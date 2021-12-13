@@ -28,9 +28,30 @@ The Forward Error Correction Profile has four configurable values:
 * High Loss Threshold - Default: 10%. The packet loss percentage at which the high-loss-ratio on parity packets will be applied.
 These defaults will switch on FEC when loss reaches 1% and ramp up the frequency of parity packets from 1:20 to 1:2 as loss rises to up 10% .
 
-### Sample Configuration
+### Sample Dynamic Configuration
 
-**Need Sample Config to put here**
+```
+        forward-error-correction-profile  fec-profile
+            name                 fec-profile
+            mode                 dynamic
+            low-loss-ratio       20
+            high-loss-ratio      2
+            low-loss-threshold   1
+            high-loss-threshold  10
+        exit
+```
+
+```
+        service-policy                    packet-duplication-policy
+            name                              packet-duplication-policy
+            service-class                     Standard
+            lb-strategy                       hunt
+            session-resiliency                packet-duplication
+            packet-resiliency                 forward-error-correction
+            transport-state-enforcement       reset
+            forward-error-correction-profile  fec-profile
+        exit
+```
 
 ## How to Use Forward Error Correction
 
