@@ -2,14 +2,15 @@
 title: Using Application Summary
 sidebar: Using Application Summary
 ---
+## Not Ready for Review 
 
-The Application Summary is available for each router that has Application Identification enabled on it. In most cases where an SSR has domain-based URL filtering enabled, Application Identification has also been enabled. 
+The Application Summary is available for each router that has Application Identification enabled. In most cases where an SSR has domain-based URL filtering enabled, Application Identification is enabled. 
 
-To enable Application Identification for a router, go to Configuration -> Authority -> [router name] -> Application Identification Settings and set to `true`.
+To manually enable Application Identification for a router, go to Configuration -> Authority -> [router name] -> Application Identification Settings and set to `true`.
 
-The Application Summary is accessed by selecting a router from the Authority -> Routers list. The Router page displays a table with current Application Summary statistics. Currently, the list  contains names of each application along with total bytes transferred in the last X minutes. Clicking on any area in this table brings you to the App Summary page.
+The Application Summary is accessed from the Router page in the GUI. Select a router from the Authority -> Routers list. The Router page displays a list with the names of each application and total bytes transferred in the last X minutes. Clicking on any area in this table brings you to the Application Summary page.
 
-The Application Summary page works similarly to Custom Reports by showing stats across a time range in a chart, but has an additional feature: clicking on any one point in the chart shows the related data **in the adjoined table below**. The currently selected time correlating to this point shows in the top right of the chart.
+The Application Summary page works similar to Custom Reports by showing stats across a time range in a chart, but has an additional feature: clicking on any one point in the chart shows the related data in a table below the current one. The selected time correlating to this point shows in the top right of the chart.
 
 By default the table shows all Applications, grouped by Category. This can be changed to view only Applications, or view only Clients (which will show the user a reverse view. The other two views are top-down, the Client view is bottom-up, where we map each Application to each unique Client). The user can change this by using the `Pivot By` dropdown next to the rest of the table controls.
 
