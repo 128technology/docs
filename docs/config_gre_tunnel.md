@@ -122,12 +122,12 @@ exit
 
 The following tunnel encapsulation statistics provide details on encapsulation and decapsulation success, as well as failure modes.
 
-- [`stats packet-processing action success tunnel gre encapsulate`](cli_stats_reference.md/#show-stats-packet-processing-action-success-tunnel-gre-encapsulate)
+- [`stats packet-processing action success tunnel gre encapsulate`](cli_stats_reference.md#show-stats-packet-processing-action-success-tunnel-gre-encapsulate)
 
-- [`stats packet-processing action success tunnel gre decapsulate`](cli_stats_reference.md/#show-stats-packet-processing-action-success-tunnel-gre-decapsulate)
+- [`stats packet-processing action success tunnel gre decapsulate`](cli_stats_reference.md#show-stats-packet-processing-action-success-tunnel-gre-decapsulate)
 
-- [`stats packet-processing action failure tunnel gre decapsulate`](cli_stats_reference.md/#show-stats-packet-processing-action-failure-tunnel-gre-decapsulate): The decapsulate failure indicates that the packets entering from the tunnel either were not tunneled properly, or are otherwise malformed.
+- [`stats packet-processing action failure tunnel gre decapsulate`](cli_stats_reference.md#show-stats-packet-processing-action-failure-tunnel-gre-decapsulate): The decapsulate failure indicates that the packets entering from the tunnel either were not tunneled properly, or are otherwise malformed.
 
-- [`stats packet-processing action failure tunnel invalid-entry`](cli_stats_reference.md/#show-stats-packet-processing-action-failure-tunnel-invalid-entry): The `invalid-entry` stat should be 0; it indicates a system error with propagating the tunnel configuration.
+- [`stats packet-processing action failure tunnel invalid-entry`](cli_stats_reference.md#show-stats-packet-processing-action-failure-tunnel-invalid-entry): The `invalid-entry` stat should be 0; it indicates a system error with propagating the tunnel configuration.
 
 

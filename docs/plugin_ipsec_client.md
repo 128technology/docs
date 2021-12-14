@@ -413,7 +413,7 @@ Completed in 0.10 seconds
 #### New Features and Improvements
 - **PLUGIN-1289** Ability to provision custom MSS on the remote tunnel interfaces
 
-The feature adds support for configuring a custom MSS value on the remote IPSec tunnel interface. The new configuration can be found under `router > node > ipsec-client > remote > enforced-mss`. The configuration follows the same format as the [network-interface > enforced-mss](config_reference_guide.md/#network-interface).
+The feature adds support for configuring a custom MSS value on the remote IPSec tunnel interface. The new configuration can be found under `router > node > ipsec-client > remote > enforced-mss`. The configuration follows the same format as the [network-interface > enforced-mss](config_reference_guide.md#network-interface).
 
 ### Release 1.0.7, 2.0.7, 2.1.0, 3.0.2
 

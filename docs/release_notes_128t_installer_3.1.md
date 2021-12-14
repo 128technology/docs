@@ -3,15 +3,23 @@ title: 128T Installer 3.1 Release Notes
 sidebar_label: '3.1'
 ---
 
+:::important
+**Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
+:::
+
+## Release 3.1.1
+
+### Resolved Issues
+
+- **IN-467 install/rollback operation flags rpmdb corruption when database is not corrupt:** During an installation or rollback, the rpmdb corruption detection process could terminate the operation and result in a failed install/rollback operation.
+------
+- **IN-469 Initial splash screen notice is hidden:** Initial notice was hidden in the slash screen on startup, This notice is now visible once the first screen is provided.
+
 ## Release 3.1.0
 
 ### New Features and Improvements
 
 - **Installer upgrade to support SSR Release 5.4.0**
-
-:::important
-**Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
-:::
 
 ### Resolved Issues
 

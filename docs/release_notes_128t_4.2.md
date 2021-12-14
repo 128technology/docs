@@ -82,7 +82,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37644/I95-37809 Analytics backend requests do not adhere to a strict schema.** This vulnerability has been addressed, and fixes put in place to prevent SQL injection attacks.
 ------
-- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md/#limiting-login-attempts) 
+- **I95-37645 Restriction of excessive authentication attempts.** [The user is now locked out after six failed login attempts.](config_access_mgmt.md#limiting-login-attempts) 
 ------
 - **I95-37646 Password Change does not require current password.** The password change process has been strengthened, and now requires the current password.
 ------
@@ -90,7 +90,7 @@ As part of the SSH hardening process, inactive SSH sessions will be logged out a
 ------
 - **I95-37650 The 128T web UI incorrectly supports being embedded as an iFrame within another page.** The 128T Web UI does not support iFrame embedding.
 ------
-- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md/#file-upload-limitations) that make it impossible to import or upload files that do not match tar.gz format. 
+- **I95-37651 Unrestricted File Upload.** [Restrictions are in place](config_access_mgmt.md#file-upload-limitations) that make it impossible to import or upload files that do not match tar.gz format. 
 ------
 - **I95-37800 Apply MSS Clamping on SYN/SYN+ACK packets.** MSS enforcement has been enabled on SYN-ACK packets. 
 ------

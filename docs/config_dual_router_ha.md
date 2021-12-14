@@ -5,7 +5,7 @@ sidebar_label: Dual Router High Availability using iBGP
 
 The SSR provides significant flexibility for high availability configurations. Like traditional routers, the SSR software can be deployed as a single router instance on multiple platforms, with high availability configured in a dual router configuration. Additionally, the SSR can deploy multiple software instances (referred to as nodes) within the same single installation, providing high availability across router nodes.  
 
-The release of the 5.4 software includes [VRRP as a configuration option](config_ha_vrrp.md) as well as a new service route parameter, [`enable-failover`](config_ha.md/#service-route-redundancy), that provides stateful failover on the dual node HA configuration. For configuration options using VRRP, please refer to [Configuring Dual Router High Availability and VRRP](config_ha_vrrp.md)
+The release of the 5.4 software includes [VRRP as a configuration option](config_ha_vrrp.md) as well as a new service route parameter, [`enable-failover`](config_ha.md#service-route-redundancy), that provides stateful failover on the dual node HA configuration. For configuration options using VRRP, please refer to [Configuring Dual Router High Availability and VRRP](config_ha_vrrp.md)
 
 ## Dual Router High Availability
 

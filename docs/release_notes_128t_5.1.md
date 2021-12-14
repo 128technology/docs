@@ -6,9 +6,9 @@ sidebar_label: '5.1'
 :::info
 Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
 
-If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
+If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR Software is provided.
 
-Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for release dates and links to all SSR Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
 ### Upgrade Considerations
@@ -19,9 +19,69 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
+## Release 5.1.7-1
+
+**Release Date:** December 9, 2021
+
+### New Features
+
+- **I95-35654 Improved Upgrade Workflow (GUI):** Added `Select Operation` to the router upgrade workflow, allowing users to see which versions are available based on the desired operation (either Download or Upgrade).
+------
+- **I95-41705 Add ability to search for multiple routers from the Routers page:** Users can now search for multiple routers in a single search from the Routers page. 
+------
+- **I95-41724 Improvements to the Dropdown List of 128T Software Upgrade Versions in Conductor GUI:** The Software Upgrade dropdown now displays the date and the repo location for each item in the list.
+------
+- **I95-42136 GUI should display subtype in event history:** Added the subtype column to the event history page, as well as a filter option using subtype.
+------
+- **I95-42479 Router Upgrade GUI Improvements:** Several improvements have been made to the Router Upgrade display in the GUI.
+
+### Resolved Issues
+
+- **I95-38995 Show sessions by-id command is missing rx/tx byte data:** `show session by-id` now displays bytes received and sent, tcp retransmissions, and tcp/tls time to establish.
+------
+- **I95-40013 `reverse-flow-enforcement` breaks `management-over-forwarding` in HA:** Modifications have been made to `reverse-flow-enforcement` to resolve this issue.
+------
+- **I95-41005 Management over forwarding stuck in key-accepted state:** `salt minion` is restarted to handle an asset stuck in key-accepted state.
+------
+- **I95-42310 Cannot delete a Conductor address in the Authority using the GUI:** This issue has been resoved.
+------
+- **I95-42421 Using Ctrl-c to exit PCLI works inconsistently:** This issue has been resolved. 
+------
+- **I95-42441 Automatic Provisioner downloads taking too long to download:** Resolved an issue where a download request would timeout if too many routers were requested at once.
+------
+- **I95-42544 Cannot add routing config to router on one of two HA conductors:** Resolved an issue with ntp selection from the ntp pool. The system now selects the user provided NTP Server address when that is provided. 
+------
+- **I95-42563 Attempting to get help on `adjacency` throws an exception:** Resolved an issue when entering `?` while configuring an adjacency was throwing an exception. 
+------
+- **I95-42619 Remove ping_interval from salt minion config:** Resolved an issue where salt minions would spontaneous restart themselves and transition back into the connected state, especially when the conductor is under heavy load.
+------
+- **I95-42625 Unable to add egress-source-nat-pool to interface:** This issue has been resolved.
+------
+- **I95-42649 `delete grant access` for access management role not working:** This issue has been resolved.
+------
+- **I95-42702 Newly created users not being saved:** Resolved an issue where the user datastore was not being written to disk on edits.
+------
+- **I95-42760 LTE interface with forwarding set to false causes nodeMonitor crash loop:** Resolved an issue where the device interface forwarding option was incorrectly configured. 
+------
+- **I95-42788 Event History no Longer Shows Details of Diff:** Resolved an issue that was preventing `diff` details from displaying. 
+------
+- **I95-42840 Post upgrade peer path flap:** Resolved an issue where keep-alive packets were not processed on the same flow.
+------
+- **I95-42897 Occasional uninformative "Base Exception: Failed to get random bytes" accompanying traffic failures:** Updated the exception to include error string and source location.
+------
+- **I95-43033 DHCP Relay not working:** DHCP relay services will now correctly support sub-tenants, as is supported elsewhere in the data model.
+------
+- **I95-43194 Web graphql handling of `loadBalanceService` mos should be `float`, not `int`:** Whole number integers have been changed to be precision `float`.
+------
+- **I95-43205 Changed ssh key permissions:** In AWS instances during the upgrade to 5.4.0, the sshd user and ssh_keys group required for the sshd service have been removed or had their group-id replaced. This issue has been resolved and the sshd service has been preserved.
+------
+- **I95-43244 Reverse Packet injection on Affinity Mismatch:** Resolved an issue where a reverse packet was being injected into a flow with no flow affinity.
+
+
 ## Release 5.1.6-2
 
 **Release Date:** October 27, 2021
+
 This release replaces the existing `5.1.6-1` release.
 
 ### Resolved Issues
@@ -97,7 +157,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-39236/I95-40804/I95-41531 Session capture to produce unique pcap files:** A capture tag has been added to the session-capture feature. If a session-capture is created with a tag, that tag is used to name the pcaps throughout the topology, instead of the service name. Users are now able to initiate this capture from the Services page in the GUI and the command line.
 ------
-- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md/#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
+- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md#network-interface), and [`authority`](config_reference_guide.md#authority) in the Element Reference Guide.
 ------
 - **I95-40776 GUI self diagnostics for client connectivity:** A client connectivity error now diplays a dialog with several steps intended to help the user diagnose issues.
 
@@ -379,7 +439,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-38212 Restart System From the Node Panel:** The Process Management button has been added to the top of the Node Panel in the GUI. When selected, a list of operations displays, allowing the user to; Start, Stop, or Restart the 128T Conductor or Router. The option to Reboot the OS is also available.
 ------
-- **I95-38514 View User Activity:** Added a user activity table to the GUI on the Users page, as well as adding a new [PCLI command `show user activity`](cli_reference.md/#show-user-activity).
+- **I95-38514 View User Activity:** Added a user activity table to the GUI on the Users page, as well as adding a new [PCLI command `show user activity`](cli_reference.md#show-user-activity).
 ------
 - **I95-38642 Form Based Template Instantiation:**  An administrator can now define a JSON Schema to create a template for variables so a user can fill out the variables in a simple form.
 ------
