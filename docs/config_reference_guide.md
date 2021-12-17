@@ -316,16 +316,17 @@ authority > router > application-identification
 
 #### Description:
 
-This sub-element lets the administrators set the behavior for the 128T router's application identification behavior.
+This sub-element allows you to automatically generate category-based application identification services under a service.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| mode | enumeration | Valid values: module, tls, http, all. When set to *module*, the 128T router uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *http*, the SSR will learn applications via HTTP host name parsing. The option *all* will provide the broadest application learning results. |
+| mode | enumeration | Valid values: **module, tls, http, all**. When set to **module**, the 128T router uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) When set to **tls**, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to **http**, the SSR will learn applications via HTTP host name parsing. The option **all** includes all modes. Includes all modes. To use the [web filtering feature](config_web_filtering.md), `application-identification` must be set to **all**. |
 | auto-update | configuration container | Default is enabled. Enables automatic update of application-identification domain dataset.  Contains configurable sub-elements. |  
 | update-time | uint8 | Range is 0-23. Default is 2 AM. Set the (local) time to update app-id dataset. |
 | update-jitter | uint8 | Range is 0-30. Default is 15. The max random jitter applied to the update-time. |
 | update-frequency | eumumeration | Default is weekly. Choose Daily, Weekly, or Monthly. |  
 
+See also [web-filtering](#web-filtering).
 
 #### Version History:
 | Release | Modification |
@@ -3108,6 +3109,24 @@ The *vector* sub-element lets administrators choose cost values for the vector l
 | Release | Modification |
 | --- | --- |
 | 3.2.0 | Introduced |
+
+## web-filtering
+
+#### Path:
+
+authority > router > application-identification > web-filtering
+
+#### Description:
+
+Enables and configures enhanced URL filtering. In order to configure web-filtering, application-identification must be enabled, and the mode must be set to *all*. For additional information, see [application-identification](#application-identification).
+
+| Element | Type | Description |
+| --- | --- | --- |
+| enabled | boolean | True/False. Default: false. Enable enhanced URL filtering. This requires `application-identification` to be enabled. |
+| max-retransmission-attempts-before-allow | uint8 | Default: 4. Max number of retransmission packet attempts before allowing session to continue. |
+| classify-session | container |   |   |
+| timeout | seconds | Default: 5. The amount of time the SSR will wait for a response from Websense. |
+| retries | uint8 | Default: 3. The max attempts to the Websense server when no response is received within the timeout duration. |
 
 ## webserver
 

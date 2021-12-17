@@ -1,77 +1,140 @@
 ---
-title: Configuring Domain-based Web Filtering/Routing
-sidebar: Configuring Domain-based Web Filtering/Routing
+title: Domain-based Routing and Application Identification
+sidebar: Domain-based Routing and Application Identification
 ---
 
-Configuring Domain-based Web Filtering allows users to create generic services for a broad range of domains that fall into a categories such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category. 
+## Overview
 
-Services can be defined based on categories to filter a broad set of related domains. Services can also be assigned to individual domains, and filtering performed in a more targeted manner. 
+Domain-based Routing allows users to create generic services for a broad range of domains that fall into a categories such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category. 
+
+Services can be defined based on categories to filter a broad set of related domains. Services can also be assigned to individual domains.
+
+## Configuring Domain-based Routing
+
+Domain-based Web Filtering is enabled on a child service. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+
+The high level steps for configuring Domain-based Routing are:
+
+- Create a parent service
+- Create the child service to be filtered
+- Create an access policy on the child service to filter traffic 
+
+#### Create the Parent Service
+
+```
+config
+    authority
+        service     internet
+            name          internet
+            scope         public
+            address       0.0.0.0/0
+        exit
+    exit
+exit
+```
+
+#### Create the Child Service
+The following example uses the domain category to classify traffic.
+```
+config
+    authority
+        service       adult.internet
+           name            adult.internet
+           domain-name-category    Adult 
+        exit
+    exit
+exit
+```
+#### Configure the Access Policy
+Configure the access-policy to block (deny) traffic.
+
+```
+config
+    authority
+        service    adult.internet
+            name                  adult.internet
+            domain-name-category  Adult
+            access-policy         adult.internet
+                source      adult.internet
+                permission  deny
+            exit
+        exit
+    exit
+exit
+
+```
 
 ## Domain Categories
 
-Use the `show domain-categories` command to display a list of categories in the CLI. The data is stored in the /etc/128technology/application-categories directory. The default categories available are:
+Listed below are the default set of SSR domain categories, which apply to all data sources on the system. These categories are not blocked by default, nor are they considered threatening, but represent a list of categories of information. Individual services and service policies can be configured on the SSR to allow or deny access to the category, or domains within a category. 
 
-```
-Node: node1
-================= =============== ===================
- Category          Session Count   Domain-name Count
-================= =============== ===================
- <Uncategorized>             403                  16
- Advertiser                    0                   0
- Arts                          0                   0
- Business                     14                  13
- CDN                           0                   0
- Computers                     1                   1
- Conferencing                  2                   1
- Cybersecurity                 0                   0
- DeviceIoT                     1                   1
- FileSharing                   0                   0
- Hosting                       0                   0
- Mail                          0                   0
- Recreation                    0                   0
- Reference                     0                   0
- Search                        0                   0
- SocialMedia                   0                   0
- SoftwareUpdates               0                   0
- StreamingMedia                0                   0
- Technology                   13                   6
-```
+- Adult
+- Advertisement
+- ArtsAndEntertainment
+- Business
+- CareerAndEducation
+- Collaboration
+- Conferencing
+- DeviceIoT
+- FileSharing
+- Financial
+- Gambling
+- Games
+- Government
+- Healthcare
+- Illegal
+- Infrastructure
+- Malware
+- Miscellaneous
+- Networking
+- NewsAndReference
+- Recreation
+- RemoteDesktop
+- Search
+- Security
+- Shopping
+- SocialMedia
+- SoftwareUpdates
+- Sports
+- StreamingMedia
+- Technology
+- Travel
+- Weapon
 
-To specify a Domain Name Category in the GUI, enter a category name into the Domain Name Category field. 
-
-![Configuration Fields](/img/dbwf_config_fields.png)
-
-Active categories and domains are displayed on the Applications Seen page available on the Routers page, using the link in the top right corner. 
+Active categories and domains are displayed in the GUI on the Applications Seen page. Use the link on the top right corner of the Routers page to view the applications available on the Routers page. 
 
 ![Select Applications Seen](/img/dbwf_appl_seen.png)
 
-Adding a new category or domain enters the information to the master list. The category and domain lists are generated when the configuration is committed. As new categories and domains are added, the configuration is updated, but the entire list is not regenerated. 
+## Application Identification
 
-Use the Generate Application Idenfication Categories toggle to generate a set of child services for each category. 
+Application Identification allows you to automatically generate category-based application identification services under a service. It also will automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_web_filtering.md). 
 
-![Generate Application Identification Categories](/img/dbwf_gen_categories.png)
+#### Modes
 
-### Auto-Update the Domain List
+- **module:** The 128T router uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.)
+- **tls:** The system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. 
+- **http:** The SSR will learn applications via HTTP host name parsing. 
+- **all:** Includes all modes. To use the [web filtering feature](config_web_filtering.md), `application-identification` must be set to **all**. 
 
-Application Identification is configured to automatically download updated domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel for each router. 
+By default, Application Identification automatically downloads updated domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [application-identification in the Element Reference section.](config_reference_guide.md#application-identification)
 
 ![Application Data Updates](/img/dbwf_app-id_updates.png)
 
-For additional information, see [application-identification.](config_reference_guide.md/#application-identification)
+## Configuring Domain-based Routing
 
-## Configuring Domain-based Web Filtering
+To enable Domain-based Routing, configure a parent service, a child service, and access policies to allow or deny traffic. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
 
-To enable Domain-based Web Filtering, you must configure a parent-level service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
-
-The high level steps for configuring Domain-based Web Filtering are:
+The high level steps for configuring Domain-based Web Routing are:
 
 - Create a parent service
 - Create the child service to be filtered
 - Configure a Tenant
 - Create an access policy on the child service to filter traffic 
 
+The following procedures describe configuring domain based filtering from the GUI. An example of the PCLI configuration is also shown.
+
 ### Create a Parent-level Service 
-In this example we create a broad service representing the internet.
+Create a broad service representing the internet.
 
 1. Log in to the Conductor GUI.
 2. Select Configuration.
@@ -99,7 +162,7 @@ exit
 
 ### Create Child Services 
 
-The child service classifies the traffic and provides the option to filter different domains and categories. We will create two services, one of which will be filtered out (denied).
+The child service classifies the traffic and provides the option to filter different domains and categories. We will create two services, the second will be filtered out (denied).
 
 #### Create the first service
 
@@ -138,7 +201,7 @@ A tenant must be configured in order to create an Access Policy. If you have not
 
 ### Create the Access Policy
 
-Configure the access-policy to deny the relevant tenants.
+Configure the access-policy to deny access to the domain category.
 
 1.	Scroll down to services.
 2.	Select adult.internet.
