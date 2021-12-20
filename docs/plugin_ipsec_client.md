@@ -408,6 +408,14 @@ Completed in 0.10 seconds
 
 ## Release Notes
 
+### Release 3.1.3
+
+#### Issues Fixed
+
+- **PLUGIN-1480** IPSec tunnels were removed from all previously configured routers after config commit
+
+  _**Resolution:**_ The config generation logic for the plugin will handle config with long lines correctly
+
 ### Release 2.2.0, 3.1.0
 
 #### New Features and Improvements
