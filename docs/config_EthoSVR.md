@@ -31,7 +31,7 @@ Use the following procedures to configure a 128T network to use Ethernet Over SV
 
 ### Create a Service For Ethernet Over SVR
 
-Use the following procedure to create a service on each router for layer 2 traffic. For IP traffic, use the [Create a Service](intro_basic_conductor_config.md/#create-a-service) procedure.
+Use the following procedure to create a service on each router for layer 2 traffic. For IP traffic, use the [Create a Service](intro_basic_conductor_config.md#create-a-service) procedure.
 
 1. On the Configuration home screen, scroll down to **Services** and click ADD.
 2. Name the service and click SAVE.

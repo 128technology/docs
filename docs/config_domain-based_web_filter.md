@@ -11,7 +11,7 @@ Services can be defined based on categories to filter a broad set of related dom
 
 ## Configuring Domain-based Routing
 
-Domain-based Web Filtering is enabled on a child service. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+Domain-based Routing is enabled on a child service. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
 
 The high level steps for configuring Domain-based Routing are:
 
@@ -119,6 +119,7 @@ Application Identification allows you to automatically generate category-based a
 By default, Application Identification automatically downloads updated domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [application-identification in the Element Reference section.](config_reference_guide.md#application-identification)
 
 ![Application Data Updates](/img/dbwf_app-id_updates.png)
+
 
 ## Configuring Domain-based Routing
 
