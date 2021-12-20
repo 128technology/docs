@@ -80,7 +80,6 @@ module.exports = {
           "config_forward_error_correction",
           "config_management_over_forwarding",
           "config_domain-based_web_filter",
-          "config_domain-based_web_filter55",
           "config_web_filtering",
           "config_EthoSVR",
           "config_flow_perf_mon",
