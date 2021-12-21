@@ -34,7 +34,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-42449 Removing a list element from config produces a confusing error:** Improved error reporting for deleting non-existing list elements.
 ------
-- **I95-42467 save-tech-support info does not save verbose configuration:** Corrected save-tech-support manifest to collect necessary configuration.
+- **I95-42467 save tech-support-info does not save verbose configuration:** Corrected save tech-support-info manifest to collect necessary configuration.
 ------
 - **I95-42973 `show config running generated` does not display generated configuration:** Corrected display output.
 ------
