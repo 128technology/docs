@@ -24,6 +24,57 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.4.2-5
+
+**Release Date:** December 22, 2021
+
+### Resolved Issues
+
+- **I95-42193 salt minion fails to connect to conductor:** asset-connection-resiliency has been enhanced to ensure all communication channels are operational.
+------
+- **I95-42449 Removing a list element from config produces a confusing error:** Improved error reporting for deleting non-existing list elements.
+------
+- **I95-42467 save-tech-support info does not save verbose configuration:** Corrected save-tech-support manifest to collect necessary configuration.
+------
+- **I95-42973 `show config running generated` does not display generated configuration:** Corrected display output.
+------
+- **I95-43071 Service health learning and path avoidance working intermittently for inter-node paths:** Race condition causing paths to be determined non-viable prior to service routes being created. 
+------
+- **I95-43089 Cannot import custom charts:** Corrected issue that prevented custom charts with tables from being imported.
+------
+- **I95-43091 `show fib` does not display interface next hop when gateway IP address is empty:** Corrected display.
+------
+- **I95-43143 Web server fails to start when template name matches system defaults:** Corrected system behavior when template naming conflicts exist.
+------
+- **I95-43147 SSR fails to start when an invalid MTU is configured:** Updated NIC support to handle MTU > 9K.
+------
+- **I95-43150 Highway process crash on receipt of LLDP message on standby node:** Corrected LLDP handling in HA.
+------
+- **I95-43180 Missing validation for non-forwarding fabric or shared interfaces sharing the same IP address:** Added validation to prevent the use of the same IP address for shared interfaces. 
+------
+- **I95-43273 GUI upgrade version selector does not show same version from multiple repositories:** Correctly display same version from multiple repositories.
+------
+- **I95-43276 DSCP steering configured on a child service will cause sessions to be dropped if DSCP values are not defined:** If DSCP values are not defined in child service, correctly inherit them from parent.
+------
+- **I95-43328 GUI config diff difficult to see in dark mode:** Increased contrast for configuration diff in dark mode.
+------
+- **I95-43380 Validation errors created by plugins augmenting existing configuration:** Corrected plugin validation handling.
+------
+- **I95-43389 Minion files truncated:** Corrected condition when empty SSR configuration would cause the minion file to be incorrectly created.
+------
+- **I95-43468 Unable to commit asset ID in GUI of newly adopted router:** Corrected adoption of new router behavior in GUI.
+------
+- **I95-43557 Highway process crash when per-adjacency TE and device TE is enabled and TE is not configured on all associated adjacencies:** Corrected issue.
+------
+- **I95-43558 Rolling back from 5.4.1 results in the message "There are no nodes configured" in the GUI:** Corrected issue.
+------
+- **I95-43612 REST API swagger documentation is incorrect for `/api/v1/user`:** Corrected API documentation.
+------
+- **I95-43671 Progress indicators for validate and generate config added:** GUI-based progress indicator added for better user feedback.
+------
+- **I95-43706 Quick Start workflow is difficult to see in dark mode:** Increased contrast for quick start in dark mode.
+
+
 ## Release 5.4.1-4
 
 **Release Date:** November 23, 2021
