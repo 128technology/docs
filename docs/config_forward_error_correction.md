@@ -7,29 +7,33 @@ sidebar: Configuring Forward Error Correction
 
 Forward Error Correction (FEC) adds resiliency against packet loss between two points in the network. The SSR implements Forward Error Correction using parity packets and a "round" based approach. In each round, a set number of data packets are sent before a parity packet. The number of packets per round is based on the observed packet loss for the flow. When the loss is greater, fewer data packets are sent before a parity packet.  
 
-FEC has two modes, Static and Dynamic, and a configurable Profile. 
-
-### Dynamic Mode: 
-
-Dynamic is the default mode. All values in the profile, default or user configured, are used. If the `low-loss-threshold` is configured to be above zero, it sets a `low-loss-ratio` of 0 up to the `low-loss-threshold`. When the `low-loss-ratio` is 0, tracking is disabled.  
-
-When tracking is disabled, FEC remains enabled, but does not calculate parity on each data packet, or send a parity packet at the end of the round. Once loss is observed at a greater than zero ratio, tracking is enabled, parity calculations begin, and parity packets are transmitted at the end of the round.
-
-### Static Mode: 
-
-Static mode hides all fields except for `low-loss-ratio`. In this mode, FEC does not change behavior based on loss. Thresholds are implicitly set to 0 (always on) and the `high-loss-ratio` is set to the value entered for the `low-loss-ratio`. This provides a consistent number of packets per parity, regardless of link quality.
-
-If a static mode profile is not created, the default value for `low-loss-ratio` (20) is used.  
+FEC has a configurable Profile, and two modes, Static and Dynamic. 
 
 ### Forward Error Correction Profile
 
 The Forward Error Correction Profile has four configurable values:
-* `low-loss-ratio` - Default 1:20. Defines the number of data packets to transmit before a parity packet is transmitted when loss is low.
-* `high-loss-ratio` - Default 1:2. Defines the number of data packets to transmit before a parity packet is transmitted when loss is high.
+* `low-loss-ratio` - Default 20:1. Defines the number of data packets to transmit before a parity packet is transmitted when loss is low.
+* `high-loss-ratio` - Default 2:1. Defines the number of data packets to transmit before a parity packet is transmitted when loss is high.
 * `low-loss-threshold` - Default: 1%. The packet loss percentage at which Forward Error Correction will be enabled.
 * `high-loss-threshold` - Default: 10%. The packet loss percentage at which the `high-loss-ratio` on parity packets will be applied.
 
 These defaults will switch on FEC when loss reaches 1% and ramp up the frequency of parity packets from 1:20 to 1:2 as loss rises to up 10%.
+
+### Dynamic Mode: 
+
+Dynamic is the default mode. In Dynamic mode, the behavior of FEC is adjusted for the currently observed packet loss, and is defined according the FEC profile. The profile is used to calculate the dataPacket:parityPacket ratio used for a given loss value in the following way:
+
+* [0, low-loss-threshold): Parity disabled, no parity is needed
+* [low-loss-threshold, high-loss-threshold]: Calculate the ratio needed for a given loss by computing the slope of the line described by (low-loss-threshold, low-loss-ratio) and (high-loss-threshold, high-Loss-ratio).
+* (high-loss-threshold, 100]: high-loss-ratio
+
+When parity is disabled, per the profile, FEC continues to attach the per-packet trailer to each data packet, but ceases to calculate and send parity packets. This results in reduced bandwidth overhead on links with observed loss less than the low-loss-threshold.
+
+### Static Mode: 
+
+Static mode hides all fields except for `low-loss-ratio`. In this mode, FEC does not change behavior based on loss. This provides a consistent number of packets per parity, regardless of link quality.
+
+If the values in a static mode FEC profile are not set, then the default value for `low-loss-ratio` (20) is used.  
 
 ## Sample Dynamic Configuration
 
@@ -45,11 +49,11 @@ These defaults will switch on FEC when loss reaches 1% and ramp up the frequency
 ```
 
 ```
-        service-policy                    packet-duplication-policy
-            name                              packet-duplication-policy
+        service-policy                    policy-a
+            name                              policy-a
             service-class                     Standard
             lb-strategy                       hunt
-            session-resiliency                packet-duplication
+            session-resiliency                none
             packet-resiliency                 forward-error-correction
             transport-state-enforcement       reset
             forward-error-correction-profile  fec-profile
@@ -57,18 +61,6 @@ These defaults will switch on FEC when loss reaches 1% and ramp up the frequency
 ```
 
 ## How to Use Forward Error Correction
-
-Forward Error Correction has the following limitations:
-
-- Forward Error Corrections carries a 4 byte per-packet overhead, and a parity packet overhead every N packets (Largest Packet Size in round + Packet Sizes Trailer (N * 2 bytes) + 4 bytes).
-
-- This feature should not be used when transferring large amounts of data at the MTU size. Similar to metadata, it is possible for this feature to increase the size of the packets beyond the MTU.
-
-- Additionally, this feature should not be used to diagnose link quality issues. If the packet loss is above a nominal amount, the extra data that FEC adds to the wire will likely cause extra loss, further decreasing link quality. 
-
-- Packet retransmission will not work when FEC is enabled. 
-
-### Configuring Forward Error Correction
 
 Forward Error Correction profiles are configured at the authority level, and can be used by any router in the authority. You can create a profile for a particular type of traffic, or even traffic type and a transport medium, and have it available for any router in the Authority.
 
@@ -88,11 +80,11 @@ Create the Forware Error Correction profile.
 
 Create the `service-policy`, or add the FEC profile to an existing `service-policy` by specifying `forward-error-correction` under `packet-resiliency`.
 ```
-        service-policy                    packet-duplication-policy
-            name                              packet-duplication-policy
+        service-policy                    policy-a
+            name                              policy-a
             service-class                     Standard
             lb-strategy                       hunt
-            session-resiliency                packet-duplication
+            session-resiliency                none
             packet-resiliency                 forward-error-correction
             transport-state-enforcement       reset
             forward-error-correction-profile  fec-profile
@@ -118,7 +110,7 @@ Create the `service`, or add the `service-policy` with the FEC profile to an exi
                 source      red@0.0.0.0/0
                 permission  allow
             exit
-            service-policy  packet-duplication-policy
+            service-policy  policy-a
         exit
 ```
 
@@ -130,12 +122,24 @@ Configuration and use of the static profile is similar to the process described 
         forward-error-correction-profile  fec-static-profile
             name                 fec-static-profile
             mode                 static
-            low-loss-ratio       30
+            low-loss-ratio       10
 ```
 
 ### Disable/Enable FEC from the Neighborhood Configuration
 
 The neighborhood/adjacency configuration can be used to disable FEC in cases where the per packet overhead from FEC is unnecessary (for example, on a very high quality link). Toggle `packet-resiliency` (enable/disable) across a path, within the Neighborhood.
+
+#### Limitations
+
+Forward Error Correction has the following limitations:
+
+- Forward Error Corrections carries a 4 byte per-packet overhead, and a parity packet overhead every N packets (Largest Packet Size in round + Packet Sizes Trailer (N * 2 bytes) + 4 bytes).
+
+- This feature should not be used when transferring large amounts of data at the MTU size. Similar to metadata, it is possible for this feature to increase the size of the packets beyond the MTU.
+
+- Additionally, this feature should not be used to diagnose link quality issues. If the packet loss is above a nominal amount, the extra data that FEC adds to the wire will likely cause extra loss, further decreasing link quality. 
+
+- Packet retransmission will not work when FEC is enabled. 
 
 ## Troubleshooting
 
