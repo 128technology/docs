@@ -107,7 +107,13 @@ Active categories and domains are displayed in the GUI on the Applications Seen 
 
 ## Application Identification
 
-Application Identification allows you to automatically generate category-based application identification services under a service. It also will automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_web_filtering.md). 
+Application Identification allows the automatic generation of category-based child services under a service. It also will automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_web_filtering.md). 
+
+**Is Learning mode configured by default? The paragraph below, which is new, seems to indicate it is. So why would you need to configure learning mode? Is this even relevant - now or in the previous release?**
+
+### Configuring Learning Mode
+
+Learning mode is used to gather statistics about a domain or category. You can select the type of information to be gathered; Modules, HTTPS, TLS, or All. 
 
 #### Modes
 
@@ -115,6 +121,26 @@ Application Identification allows you to automatically generate category-based a
 - **tls:** The system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. 
 - **http:** The SSR will learn applications via HTTP host name parsing. 
 - **all:** Includes all modes. To use the [web filtering feature](config_web_filtering.md), `application-identification` must be set to **all**. 
+
+To configure Learning Mode via the GUI:
+
+1. Select a router.
+2. Scroll down to Router Settings and click Application Identification Settings.
+
+![Application ID Setting Button](/img/config_app_learning1.png)
+
+3. Set `enabled` to `true`.
+
+![App ID Basic Info](/img/config_app_learning2.png)
+
+4. Under Application Identification, select ADD.
+5. Select a type of application to identify. In most cases, selecting `all` will provide the best data set.
+
+![App Id Dropdown](/img/config_app_learning3.png)
+
+6. Validate and Commit the changes. 
+
+If Learning Mode is disabled, statistics are only gathered for categories/domains that are configured in a service.
 
 By default, Application Identification automatically downloads updated domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [application-identification in the Element Reference section.](config_reference_guide.md#application-identification)
 
