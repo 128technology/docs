@@ -8,13 +8,20 @@ The Application Summary is available for each router that has Application Identi
 
 To manually enable Application Identification for a router, go to Configuration -> Authority -> [router name] -> Application Identification Settings and set to `true`.
 
-The Application Summary is accessed from the Router page in the GUI. Select a router from the Authority -> Routers list. The Router page displays a list with the names of each application and total bytes transferred in the last X minutes. Clicking on any area in this table brings you to the Application Summary page.
+The Application Summary is accessed from the Router page in the GUI. Select a router from the Authority -> Routers list. In the panel across the top of the page, the Applications Seen panel displays a list with the names of each application and total bytes transferred in the last X minutes. Click on this table or the Applications Seen selection on the right side of the top panel to see the  Application Summary page.
 
-The Application Summary page works similar to Custom Reports by showing stats across a time range in a chart, but has an additional feature: clicking on any one point in the chart shows the related data in a table below the current one. The selected time correlating to this point shows in the top right of the chart.
+The Application Summary page show statistics across a time range in the chart. When a point in the graph is selected, the related data is displayed below the graph. The selected time is shown at the top right of the chart.
 
 By default the table shows all Applications, grouped by Category. This can be changed to view only Applications, or view only Clients (which will show the user a reverse view. The other two views are top-down, the Client view is bottom-up, where we map each Application to each unique Client). The user can change this by using the `Pivot By` dropdown next to the rest of the table controls.
 
-The table controls include `Pivot By`, `View By`, and a `Search`. `View By` changes the metric being viewed in the chart - currently it can change between `rx`, `tx`, and `total bytes`. Clicking on the chevron/caret on the left-side of the table expands a collapsed row and showing associated child data (this is not available for Pivot By: Application). Click on the appropriate checkbox (color-coded to match the relevant series in the chart) to hide that series in the chart. You can also change which data is being viewed in the chart by clicking the chart icon in the top-left of the table - this switches the chart to view all parent data in a given Pivot, or only relevant child data related to the parent (for example, all Applications related to a Category).
+The table controls include `Search`, `View By`, and `Pivot By`. 
+
+`View By` `bytes rx`, `bytes tx`, and `total bytes`. 
+
+View By: Bytes Recieved, Bytes Sent, Total Bytes
+Pivot By: Application, Category, Clients.
+
+Clicking on the chevron/caret on the left-side of the table expands a collapsed row and showing associated child data (this is not available for Pivot By: Application). Click on the appropriate checkbox (color-coded to match the relevant series in the chart) to hide that series in the chart. You can also change which data is being viewed in the chart by clicking the chart icon in the top-left of the table - this switches the chart to view all parent data in a given Pivot, or only relevant child data related to the parent (for example, all Applications related to a Category).
 
 Application Summary data currently is only viewed on a node-by-node basis - that is, data viewed comes specifically from one node at a time. Use the **Node** dropdown on the top-right of the page to change the node being viewed. 
 
