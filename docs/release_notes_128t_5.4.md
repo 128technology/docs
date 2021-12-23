@@ -80,7 +80,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43671 Progress indicators for validate and generate config added:** GUI-based progress indicator added for better user feedback.
 ------
-- **I95-43687 GUI Visual Issues after Upgrade:** This issue has been resolved.
+- **I95-43687 GUI missing menu items after Upgrade:** Resolved an issue where the Service Addresses and Port Ranges menu items were missing from the GUI after an upgrade.
 ------
 - **I95-43706 Quick Start workflow is difficult to see in dark mode:** Increased contrast for quick start in dark mode.
 ------
