@@ -30,7 +30,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
-- **I95-42193 salt minion fails to connect to conductor:** asset-connection-resiliency has been enhanced to ensure all communication channels are operational.
+- **I95-42193 salt minion fails to connect to conductor:** `asset-connection-resiliency` has been enhanced to ensure all communication channels are operational.
 ------
 - **I95-42449 Removing a list element from config produces a confusing error:** Improved error reporting for deleting non-existing list elements.
 ------
@@ -41,6 +41,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-43071 Service health learning and path avoidance working intermittently for inter-node paths:** Race condition causing paths to be determined non-viable prior to service routes being created. 
 ------
 - **I95-43089 Cannot import custom charts:** Corrected issue that prevented custom charts with tables from being imported.
+------
+- **I95-43066 Issue with Database Query:** Resolved an issue when the buffer queue is full, the inflight message was dropped.
 ------
 - **I95-43091 `show fib` does not display interface next hop when gateway IP address is empty:** Corrected display.
 ------
@@ -64,16 +66,25 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43468 Unable to commit asset ID in GUI of newly adopted router:** Corrected adoption of new router behavior in GUI.
 ------
+- **I95-43555 Missing 128T-manifest blocks upgrade:** If the user removes the 128T-mist-wan-assurance plugin, the 128T-manifest was removed/downgraded. This plugin is required for SSR 5.4 and higher, and is no longer removable. 
+------
 - **I95-43557 Highway process crash when per-adjacency TE and device TE is enabled and TE is not configured on all associated adjacencies:** Corrected issue.
 ------
 - **I95-43558 Rolling back from 5.4.1 results in the message "There are no nodes configured" in the GUI:** Corrected issue.
+------
+- **I95-43604 NAT Keepalive Issue:** Resolved an issue where the keep-alive cache entry was being removed if the flow was invalidated. 
+------
+- **I95-43611 `modifySessionWithNewFlow` not updating the session flows:** Resolved an issue so the  metric bandwidth is being counted for the correct interface after flow-move.
 ------
 - **I95-43612 REST API swagger documentation is incorrect for `/api/v1/user`:** Corrected API documentation.
 ------
 - **I95-43671 Progress indicators for validate and generate config added:** GUI-based progress indicator added for better user feedback.
 ------
+- **I95-43687 GUI Visual Issues after Upgrade:** This issue has been resolved.
+------
 - **I95-43706 Quick Start workflow is difficult to see in dark mode:** Increased contrast for quick start in dark mode.
-
+------
+- **I95-43836 Inactive node to active node proxy privilege escalation:** Resolved an issue where requests sent to the inactive node would be elevated to admin status when they reached the active node. 
 
 ## Release 5.4.1-4
 
