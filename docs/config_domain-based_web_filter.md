@@ -117,7 +117,7 @@ Learning mode is used to gather statistics about a domain or category. You can s
 
 #### Modes
 
-- **module:** The 128T router uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.)
+- **module:** The SSR uses an external module for application classification. The SSR expects classification modules to be installed on the system in /var/etc/128technology/application-modules, and are provided with the SSR software.
 - **tls:** The system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. 
 - **http:** The SSR will learn applications via HTTP host name parsing. 
 - **all:** Includes all modes. To use the [web filtering feature](config_web_filtering.md), `application-identification` must be set to **all**. 

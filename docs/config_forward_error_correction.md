@@ -23,9 +23,11 @@ These defaults will switch on FEC when loss reaches 1% and ramp up the frequency
 
 Dynamic is the default mode. In Dynamic mode, the behavior of FEC is adjusted for the currently observed packet loss, and is defined according the FEC profile. The profile is used to calculate the dataPacket:parityPacket ratio used for a given loss value in the following way:
 
-* [0, low-loss-threshold): Parity disabled, no parity is needed
-* [low-loss-threshold, high-loss-threshold]: Calculate the ratio needed for a given loss by computing the slope of the line described by (low-loss-threshold, low-loss-ratio) and (high-loss-threshold, high-Loss-ratio).
-* (high-loss-threshold, 100]: high-loss-ratio
+- `0, low-loss-threshold`: For any value from 0 loss up to the low-loss-threshold, FEC is enabled, but parity disabled and no action is taken.
+
+- `low-loss-threshold, high-loss-threshold`: Once the low-loss-threshold is crossed, the loss ratio is calculated. The loss ratio is determined by plotting the line between `low-loss-threshold, low-loss-ratio` and `high-loss-threshold, high-Loss-ratio` and computing the slope. The slope determines the loss ratio. 
+
+- `high-loss-threshold, 100`: If the high-loss-threshold is crossed, traffic is treated with the high-loss-ratio.
 
 When parity is disabled, per the profile, FEC continues to attach the per-packet trailer to each data packet, but ceases to calculate and send parity packets. This results in reduced bandwidth overhead on links with observed loss less than the low-loss-threshold.
 
@@ -62,9 +64,9 @@ If the values in a static mode FEC profile are not set, then the default value f
 
 ## How to Use Forward Error Correction
 
-Forward Error Correction profiles are configured at the authority level, and can be used by any router in the authority. You can create a profile for a particular type of traffic, or even traffic type and a transport medium, and have it available for any router in the Authority.
+Forward Error Correction profiles are configured at the authority level and are not traffic-specific, which allows them to be used on any service and any router in the authority. 
 
-The order of configuration is not important, but the following process configures a dynamic FEC profile using the default values, for a service that monitors UDP traffic.
+The order of configuration is not important, but the following process configures a dynamic FEC profile using the default values, and assigns it to a service for UDP traffic.
 
 Create the Forware Error Correction profile.
 ```

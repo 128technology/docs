@@ -5,11 +5,11 @@ sidebar: Web Filtering
 
 ## Overview
 
-Web filtering provides technology within SSR that allows administrators to prevent clients within a network access to dangerous, malicious, or inappropriate internet content. While Domain-based routing provides a broad method of filtering content, web filtering extracts the full URL as http traffic traverses the router. This allows a more targeted approach to filtering. Additionally, Web filtering provides domain classification using third party data sources to generate the most comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs. 
+Web filtering provides technology within SSR that allows administrators to prevent clients within a network access to dangerous, malicious, or inappropriate internet content. While [Domain-based routing](config_domain-based_web_filtering.md) provides a broad method of filtering content, web filtering extracts the full URL as http traffic traverses the router. This allows a more targeted approach to filtering. Additionally, Web filtering provides domain classification using third party data sources to generate the most comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs. 
 
 ### How it Works
 
-The SSR Application Director (AD) maintains a local cache of URLs known to contain threatening content, or that have been configured to be blocked. As clients request various URLs over HTTP, the SSR compares the request to the local cache. If a requested URL is matched to one in the cache, then the information configured for the Category is used - allow or block. If the requested URL does not exist in the cache, the AD makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service. 
+The SSR maintains a local cache of URLs known to contain threatening content, or that have been configured to be blocked. As clients request various URLs over HTTP, the SSR compares the request to the local cache. If a requested URL is matched to one in the cache, then the information configured for the Category is used - allow or block. If the requested URL does not exist in the cache, the SSR makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service. 
 - The initial request is dropped while the query takes place, and a configurable number of retransmissions takes place to maintain the connection.
 - If no threat is identified, the local cache is updated, and the session continues normally.
 - If the URL is considered threatening/dangerous, the service policy is applied and the connection to the URL is terminated. 
