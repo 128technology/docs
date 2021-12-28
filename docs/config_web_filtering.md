@@ -5,7 +5,7 @@ sidebar: Web Filtering
 
 ## Overview
 
-Web filtering provides technology within SSR that allows administrators to prevent clients within a network access to dangerous, malicious, or inappropriate internet content. While [Domain-based routing](config_domain-based_web_filtering.md) provides a broad method of filtering content, web filtering extracts the full URL as http traffic traverses the router. This allows a more targeted approach to filtering. Additionally, Web filtering provides domain classification using third party data sources to generate the most comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs. 
+Web filtering provides technology within SSR that allows administrators to prevent clients within a network access to dangerous, malicious, or inappropriate internet content. While [Domain-based routing](config_domain-based_web_filter.md) provides a broad method of filtering content, web filtering extracts the full URL as http traffic traverses the router. This allows a more targeted approach to filtering. Additionally, Web filtering provides domain classification using third party data sources to generate the most comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs. 
 
 ### How it Works
 
