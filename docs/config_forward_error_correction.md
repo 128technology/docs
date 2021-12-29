@@ -19,19 +19,36 @@ The Forward Error Correction Profile has four configurable values:
 
 These defaults will switch on FEC when loss reaches 1% and ramp up the frequency of parity packets from 1:20 to 1:2 as loss rises to up 10%.
 
-### Dynamic Mode: 
+### Dynamic Mode 
 
-Dynamic is the default mode. In Dynamic mode, the behavior of FEC is adjusted for the currently observed packet loss, and is defined according the FEC profile. The profile is used to calculate the dataPacket:parityPacket ratio used for a given loss value in the following way:
+Dynamic is the default mode. In Dynamic mode, the behavior of FEC is adjusted for the currently observed packet loss, and is defined according the FEC profile. The profile is used to calculate the `dataPacket:parityPacket` ratio used for a given loss value in the following way:
 
-- `0, low-loss-threshold`: For any value from 0 loss up to the low-loss-threshold, FEC is enabled, but parity disabled and no action is taken.
+- `0, low-loss-threshold`: For any value from 0 loss up to the `low-loss-threshold`, FEC is enabled, but parity is disabled and no action is taken.
 
-- `low-loss-threshold, high-loss-threshold`: Once the low-loss-threshold is crossed, the loss ratio is calculated. The loss ratio is determined by plotting the line between `low-loss-threshold, low-loss-ratio` and `high-loss-threshold, high-Loss-ratio` and computing the slope. The slope determines the loss ratio. 
+- `low-loss-threshold, high-loss-threshold`: Once the `low-loss-threshold` is crossed, the loss ratio is calculated. The loss ratio is determined by plotting the line between `low-loss-threshold, low-loss-ratio` and `high-loss-threshold`, `high-Loss-ratio` and computing the slope. The slope determines the loss ratio. 
 
-- `high-loss-threshold, 100`: If the high-loss-threshold is crossed, traffic is treated with the high-loss-ratio.
+- `high-loss-threshold, 100`: If the `high-loss-threshold` is crossed, traffic is treated with the `high-loss-ratio`.
 
-When parity is disabled, per the profile, FEC continues to attach the per-packet trailer to each data packet, but ceases to calculate and send parity packets. This results in reduced bandwidth overhead on links with observed loss less than the low-loss-threshold.
+When parity is disabled per the profile, FEC continues to attach the per-packet trailer to each data packet, but ceases to calculate and send parity packets. This results in reduced bandwidth overhead on links with observed loss less than the `low-loss-threshold`.
 
-### Static Mode: 
+As an example of how the loss ratio is calculated, let's say Company X has a microwave link that on good days sees no loss, but when the weather is bad they see loss ranging from 2%-6%. They determine that they don't want to waste bandwidth for a loss below 2%, but above 6% they want to be as agressive as is reasonable. These are their loss thresholds; low loss is 2%, high loss is 6%. 
+
+To heal the low loss, they choose to send a parity packet every 20 packets (`low-loss-ratio` 1:20). To heal the 6% loss, they need at least one packet every 16, but choose to go every 10 packets to provide a good connection in their worst scenario (`high-loss-ratio` 1:10). 
+
+To configure the FEC profile, they enter the following values:
+- `low-loss-ratio`: 20
+- `high-loss-ratio`: 10
+- `low-loss-threshold`: 2
+- `high-loss-threshold`: 6
+
+The following graph displays how the loss ratio is calculated. 
+
+![Loss Ratio Graph](/img/config_fec_dynamic_graph.png)
+
+If the customer later determines that they want to improve on higher loss values, then it is a simple adjustment to the profile. For any loss in between the high and low thresholds, dynamic mode will adjust along the slope automatically. Static mode does not - it uses one ratio for all loss percentages. 
+
+
+### Static Mode 
 
 Static mode hides all fields except for `low-loss-ratio`. In this mode, FEC does not change behavior based on loss. This provides a consistent number of packets per parity, regardless of link quality.
 
