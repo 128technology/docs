@@ -127,12 +127,15 @@ sidebar_label: Alarms
 | --------- | ------------------------------------------------ |
 | Category  | peer                                             |
 | Severity  | critical                                         |
-| Message   | Peer `<name>` is not reachable                   |
+| Message   | Peer `<name>` is not reachable, with BFD down reason: `<cause>`. |
 | Threshold | When all paths to a peer are marked down by BFD. |
 
 | Cause                                                 | Troubleshooting Step                                         |
 | ----------------------------------------------------- | ------------------------------------------------------------ |
-| All “Peer path” alarms to a given peer are triggered. | Review the statistics for `show stats bfd by-peer-path` to investigate for anomolies.<br />Capture packets on the interface(s) that talk to the peer and look for successful UDP traffic to and from the peer at port 1280. |
+| Local operator down | Local operation status changed to down. Review the statistics for `show stats bfd by-peer-path` to investigate for anomolies.<br />Capture packets on the interface(s) that talk to the peer and look for successful UDP traffic to and from the peer at port 1280. |
+| Remote admin down | Peer admin status changed to down. Use Troubleshooting steps above. |
+| Remote down | Peer status changed to down. Use Troubleshooting steps above. |
+| rx timer expired | Expected rx timer has expired on the peer path. Use Troubleshooting steps above. |
 
 ------
 
