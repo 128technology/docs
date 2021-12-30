@@ -5,7 +5,7 @@ sidebar_label: Configuring DSCP Steering
 
 When traffic is traversing an IPSec encrypted tunnel, every flow within that tunnel shares the same layer 3 headers, making them difficult to identify. 
 
-To provide identification and aid in load balancing, a DSCP value can be set at the endpoint. When the traffic reaches the SSR, the DSCP value is used as both a representation of traffic engineering priority and path priority for DSCP traffic steering. There are currently two IPSec tunnel types supported by the SSR; NAT traversal (NatT) and ESP.
+To provide identification and aid in load balancing and traffic engineering, DSCP values can be set at the tunnel endpoint. When the traffic reaches the SSR, the DSCP value is used for both traffic engineering priority and path priority for DSCP traffic steering. There are currently two IPSec tunnel types supported by the SSR; NAT traversal (NatT) and ESP.
 
 ## Configuration
 
@@ -35,7 +35,8 @@ network-interface foo
     exit
 exit     
 ```
-When steering ESP traffic, no ports are specified. For example:
+
+When steering ESP traffic, ports are not specified. For example:
 
 ```
 network-interface foo
@@ -52,7 +53,7 @@ network-interface foo
 exit   
 ```
 
-Steering takes place using the dscp values configured on the service as shown below.
+Steering of ESP traffic takes place using the dscp values configured on the service as shown below.
 
 ### Service Configuration
 
