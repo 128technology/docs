@@ -142,8 +142,13 @@ Metrics for FEC are categorized into success and failure counters. Use the follo
 
 Use `show packet-processing action success fec` to view the following success metrics.
 
+#### Add
+
 - **Parity-sent:**  A parity packet was successfully sent.
 - **Trailer-added:** An FEC trailer was successfully added to a packet.
+
+#### Remove
+
 - **Trailer-removed:** An FEC trailer was successfully removed from a packet.
 - **Regenerated-packet:** A packet that was missing from a round was able to be regenerated via the parity packet.
 - **Completed-round:** A round was able to be completed successfully. Either all packets arrived as expected, or a single packet was missing and the parity was able to regenerate the missing packet.
@@ -155,10 +160,15 @@ Use `show packet-processing action success fec` to view the following success me
 
 Use `show packet-processing action failure fec` to view the following failure metrics. 
 
+#### Add
+
 - **Allocation:** The number of times a packet was dropped because memory for the FEC trailer could not be allocated.
-- **Round-completion:** The number of times a round was not able to be completed. Mainly occurs when the number of packets lost in a round is greater than one, and the parity packet cannot heal the round. However, if the scenario described under the Resync counter is detected, then this stat may also be incremented if the current round is not completed.
-- **Out-of-order-discard:** The number of packets dropped due to belonging to a recently completed FEC round.
+- **Buffer-expansion:** The number of packets that were dropped because packet payload could not be expanded to fit a FEC header.
+
+#### Remove
+
+- **Completed-round:** The number of times a round was not able to be completed. Mainly occurs when the number of packets lost in a round is greater than one, and the parity packet cannot heal the round. However, if the scenario described under the Resync counter is detected, then this stat may also be incremented if the current round is not completed.
+- **Out-of-order:** The number of packets dropped due to belonging to a recently completed FEC round.
 - **Unexpected-parity:** The number of parity packets received when the recipient of FEC packets was not tracking a round.
 - **Parity-discard:** The number of parity packets that were discarded because not enough data packets were received.  
-- **Buffer-expansion-failure:** The number of packets that were dropped because packet payload could not be expanded to fit a FEC header.
 - **Invalid-payload-length:** The number of packets dropped while attempting to process an FEC packet, but the payload was too short to accommodate an FEC header.

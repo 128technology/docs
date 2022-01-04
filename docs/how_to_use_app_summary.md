@@ -2,36 +2,29 @@
 title: Using Application Summary
 sidebar: Using Application Summary
 ---
-## Not Ready for Review 
-
-The Application Summary is available for each router that has Application Identification enabled. In most cases where an SSR has domain-based URL filtering enabled, Application Identification is enabled. 
+The Application Summary is available for each router with Application Identification enabled. In cases where an SSR has [domain-based filtering](config_domain-based_web_filtering.md) enabled, Application Identification is also enabled. 
 
 To manually enable Application Identification for a router, go to Configuration -> Authority -> [router name] -> Application Identification Settings and set to `true`.
 
-The Application Summary is accessed from the Router page in the GUI. Select a router from the Authority -> Routers list. In the panel across the top of the page, the Applications Seen panel displays a list with the names of each application and total bytes transferred in the last X minutes. Click on this table or the Applications Seen selection on the right side of the top panel to see the  Application Summary page.
+![Application ID Summary Enabled](/img/app_summary_enabled.png)
 
-The Application Summary page show statistics across a time range in the chart. When a point in the graph is selected, the related data is displayed below the graph. The selected time is shown at the top right of the chart.
+The Application Summary is accessed from the Router page in the GUI. Select a router from the Authority -> Routers list. In the panel across the top of the page, the Applications Seen panel displays a list with the names of each application and total bytes transferred in the last X minutes. Click on this table or the Applications Seen selection on the right side of the top panel.
 
-By default the table shows all Applications, grouped by Category. This can be changed to view only Applications, or view only Clients (which will show the user a reverse view. The other two views are top-down, the Client view is bottom-up, where we map each Application to each unique Client). The user can change this by using the `Pivot By` dropdown next to the rest of the table controls.
+The Application Summary panel is displayed below the router chart when a point in the graph is selected. The selected time is shown at the top right of the chart.
 
-The table controls include `Search`, `View By`, and `Pivot By`. 
+![Application Summary](/img/app_summary.png)
 
-`View By` `bytes rx`, `bytes tx`, and `total bytes`. 
+By default the table shows all Applications, grouped by Category. To view Applications or Clients, use the `Pivot By` dropdown. The table controls include `Search`, `View By`, and `Pivot By`. 
 
-View By: Bytes Recieved, Bytes Sent, Total Bytes
+Search is typically used to locate specific applications or clients when the list is extensive. 
+View By options include: Bytes Recieved, Bytes Sent, Total Bytes.
 Pivot By: Application, Category, Clients.
 
-Clicking on the chevron/caret on the left-side of the table expands a collapsed row and showing associated child data (this is not available for Pivot By: Application). Click on the appropriate checkbox (color-coded to match the relevant series in the chart) to hide that series in the chart. You can also change which data is being viewed in the chart by clicking the chart icon in the top-left of the table - this switches the chart to view all parent data in a given Pivot, or only relevant child data related to the parent (for example, all Applications related to a Category).
+Clicking on the down arrow on the left-side of the table expands collapsed rows, showing associated child data when available. Click on the appropriate color coded checkbox to hide the series in the chart. You can also change the data is being viewed by clicking the chart icon in the top-left of the table. This switches the chart to view all parent data in a given Pivot, or only relevant child data related to the parent (for example, all Applications related to a Category).
 
-Application Summary data currently is only viewed on a node-by-node basis - that is, data viewed comes specifically from one node at a time. Use the **Node** dropdown on the top-right of the page to change the node being viewed. 
+Application Summary data is viewed on a node-by-node basis; data is displayed one node at a time. Use the **Node** dropdown on the top-right of the page to change the node being viewed. 
 
-Clicking a row in the table will populate the Client & Next Hop Information table. This table shows relevant Next Hop information related to a given client under the selected row. You can view all details about a certain client by clicking on the Details button in the first column of the table. This will display further aggregate details about the client, such as TCP Retransmissions, TCP Resets, New/Active/Failed sessions, Traffic Class, and more.
+Clicking a row in the table populates the **Client & Next Hop Information** table. This table shows Next Hop information related to a client directly under the selected row. To view all details about a client, click on the **Details** button in the first column of the table. 
 
-Similar to the Custom Reports functionality, a time selector in the top-right of the page  allows the user to select a time range other than the default (default is 30 minute lookback). Because of strain on the system, the max lookback is limited to 24 hours. If a larger time range is selected, the range will truncate to 24 hours to avoid issues with load times and system strain.
+Similar to the Custom Reports functionality, a time selector in the top-right of the page  allows you to select a time range (default is 30 minute lookback). To minimize load time and strain on the system, the max lookback is limited to 24 hours.
 
-
-### Default values
-(total bytes transferred in the last X minutes default interval is 1 mintue)
-
-#### other stuff cut and pasted here cuz it's important
- (which indicates "Select an application in the table above to view client information" when no row is selected)
