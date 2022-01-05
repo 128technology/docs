@@ -1,11 +1,11 @@
 ---
-title: Domain-based Routing and Application Identification
-sidebar: Domain-based Routing and Application Identification
+title: Web Filtering and Application Identification
+sidebar: Web Filtering and Application Identification
 ---
 
 ## Overview
 
-Domain-based Routing allows users to create generic services for a broad range of domains that fall into a categories such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category. 
+Web Filtering allows users to create generic services for a broad range of domains that fall into a categories such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. **Additionally, users can modify the list of domains in a category. (is this true??)** 
 
 Services can be defined based on categories to filter a broad set of related domains. Services can also be assigned to individual domains.
 
@@ -108,14 +108,14 @@ Active categories and domains are displayed in the GUI on the Applications Seen 
 ## Application Identification
 
 Application Identification allows the automatic generation of category-based child services under a service. It also will automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_web_filtering.md). 
-
+<!---
 **Is Learning mode configured by default? The paragraph below, which is new, seems to indicate it is. So why would you need to configure learning mode? Is this even relevant - now or in the previous release?**
 
 ### Configuring Learning Mode
 
 Learning mode is used to gather statistics about a domain or category. You can select the type of information to be gathered; Modules, HTTPS, TLS, or All. 
-
-#### Modes
+--->
+### Modes
 
 - **module:** The SSR uses an external module for application classification. The SSR expects classification modules to be installed on the system in /var/etc/128technology/application-modules, and are provided with the SSR software.
 - **tls:** The system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. 

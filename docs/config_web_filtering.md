@@ -12,7 +12,7 @@ Web filtering provides technology within SSR that allows administrators to preve
 The SSR maintains a local cache of URLs known to contain threatening content, or that have been configured to be blocked. As clients request various URLs over HTTP, the SSR compares the request to the local cache. If a requested URL is matched to one in the cache, then the information configured for the Category is used - allow or block. If the requested URL does not exist in the cache, the SSR makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service. 
 - The initial request is dropped while the query takes place, and a configurable number of retransmissions takes place to maintain the connection.
 - If no threat is identified, the local cache is updated, and the session continues normally.
-- If the URL is considered threatening/dangerous, the service policy is applied and the connection to the URL is terminated. 
+- If the URL is considered threatening/dangerous, the service policy is applied and the connection to the URL is terminated.
 
 ### Basic Configuration
 
