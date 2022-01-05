@@ -2,7 +2,7 @@
 title: Using Application Summary
 sidebar: Using Application Summary
 ---
-The Application Summary is available for each router with Application Identification enabled. In cases where an SSR has [domain-based filtering](config_domain-based_web_filtering.md) enabled, Application Identification is also enabled. 
+The Application Summary is available for each router with Application Identification enabled. In cases where an SSR has [domain-based filtering](config_domain-based_web_filter.md) enabled, Application Identification is also enabled. 
 
 To manually enable Application Identification for a router, go to Configuration -> Authority -> [router name] -> Application Identification Settings and set to `true`.
 
