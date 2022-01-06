@@ -1,24 +1,107 @@
 ---
-title: Web Filtering and Application Identification
-sidebar: Web Filtering and Application Identification
+title: Web Filtering
+sidebar: Web Filtering
 ---
 
 ## Overview
 
-Web Filtering allows users to create generic services for a broad range of domains that fall into a categories such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. **Additionally, users can modify the list of domains in a category. (is this true??)** 
+Web filtering allows administrators to prevent access to dangerous, malicious, or inappropriate internet content. Services are created to handle traffic using the following set of configuration elements:
 
-Services can be defined based on categories to filter a broad set of related domains. Services can also be assigned to individual domains.
+- url
+- domain-name
+- subcategory
+- category
 
-## Configuring Domain-based Routing
+Web filtering extracts the full URL as http traffic traverses the router, allowing a targeted approach to filtering. Additionally, web filtering provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs.
 
-Domain-based Routing is enabled on a child service. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+### Basic Configuration
 
-The high level steps for configuring Domain-based Routing are:
+- Configure `application-identification` and `web-filtering`
+- Configure or edit a child service to block the content
 
+#### Example Config
+
+Configure `application-identification` mode `all` and enable `web-filtering`:
+
+```
+config
+    authority
+              router  office
+                name      office
+                application-identification
+                  mode  all
+                  web-filtering
+                      enabled true                   
+                exit
+              exit
+    exit
+exit
+```
+
+Create a child service with an `access-policy` to restrict traffic:
+
+```
+config
+    authority
+        service      internet
+            name                internet
+            description         "The INTERNET"
+            address             0.0.0.0/0
+            access-policy       lan
+                source  lan
+                permission allow
+            exit
+        exit
+        service  block.internet
+            name                block.internet
+            description         "Block certain content"
+            domain-name-category    Sports
+            access-policy       lan
+                source      lan
+                permission  deny
+            exit
+        exit
+exit
+
+```
+
+## How it Works
+
+The SSR maintains a cache of the most frequently used URLs. As clients request URLs over HTTP, the SSR compares the request to the cache. If a requested URL is matched to one in the cache, then the information configured for the Category is used - allow or block. If the requested URL does not exist in the cache, the SSR makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service for categorization of the URL. 
+
+- The initial request is dropped while the query takes place, and a configurable number of retransmissions takes place to maintain the connection.
+- When a response is received, the cache is updated, and the category information in the service policy is applied.
+
+### Configuring Web Filtering using the PCLI
+
+Web Filtering is enabled on the router through [Application Identification](config_app_ident.md). The mode must be set to `all`, and `web-filtering` must be `enabled true` as shown above. A child service is then created with an allow or deny action for the domain category. 
+
+The high level steps for configuring Web Filtering are:
+
+- Enable `application-identification mode all`
+- Enable web filtering
 - Create a parent service
 - Create the child service to be filtered
 - Create an access policy on the child service to filter traffic 
 
+In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+
+#### Configure `application-identification` 
+
+```
+config
+    authority
+              router  office
+                name      office
+                application-identification
+                  mode  all
+                  web-filtering
+                      enabled true                   
+                exit
+              exit
+    exit
+exit
+```
 #### Create the Parent Service
 
 ```
@@ -105,56 +188,14 @@ Active categories and domains are displayed in the GUI on the Applications Seen 
 
 ![Select Applications Seen](/img/dbwf_appl_seen.png)
 
-## Application Identification
+## Configuring Web Filtering using the GUI
 
-Application Identification allows the automatic generation of category-based child services under a service. It also will automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_web_filtering.md). 
-<!---
-**Is Learning mode configured by default? The paragraph below, which is new, seems to indicate it is. So why would you need to configure learning mode? Is this even relevant - now or in the previous release?**
-
-### Configuring Learning Mode
-
-Learning mode is used to gather statistics about a domain or category. You can select the type of information to be gathered; Modules, HTTPS, TLS, or All. 
---->
-### Modes
-
-- **module:** The SSR uses an external module for application classification. The SSR expects classification modules to be installed on the system in /var/etc/128technology/application-modules, and are provided with the SSR software.
-- **tls:** The system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. 
-- **http:** The SSR will learn applications via HTTP host name parsing. 
-- **all:** Includes all modes. To use the [web filtering feature](config_web_filtering.md), `application-identification` must be set to **all**. 
-
-To configure Learning Mode via the GUI:
-
-1. Select a router.
-2. Scroll down to Router Settings and click Application Identification Settings.
-
-![Application ID Setting Button](/img/config_app_learning1.png)
-
-3. Set `enabled` to `true`.
-
-![App ID Basic Info](/img/config_app_learning2.png)
-
-4. Under Application Identification, select ADD.
-5. Select a type of application to identify. In most cases, selecting `all` will provide the best data set.
-
-![App Id Dropdown](/img/config_app_learning3.png)
-
-6. Validate and Commit the changes. 
-
-If Learning Mode is disabled, statistics are only gathered for categories/domains that are configured in a service.
-
-By default, Application Identification automatically downloads updated domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [application-identification in the Element Reference section.](config_reference_guide.md#application-identification)
-
-![Application Data Updates](/img/dbwf_app-id_updates.png)
-
-
-## Configuring Domain-based Routing
-
-To enable Domain-based Routing, configure a parent service, a child service, and access policies to allow or deny traffic. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+To enable Web Filtering, configure application identification, a parent service, a child service, and access policies to allow or deny traffic. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
 
 The high level steps for configuring Domain-based Web Routing are:
 
 - Create a parent service
-- Create the child service to be filtered
+- Create the child service
 - Configure a Tenant
 - Create an access policy on the child service to filter traffic 
 
@@ -187,20 +228,11 @@ config
 exit
 ```
 
-### Create Child Services 
+### Create the Child Service 
 
-The child service classifies the traffic and provides the option to filter different domains and categories. We will create two services, the second will be filtered out (denied).
+The child service classifies the traffic and provides the option to filter different domains and categories.
 
-#### Create the first service
-
-1.	In the Services window, select ADD.
-2.	Name the first service `netflix.internet`
-3.	On the Service screen, verify that Enabled is set to **true**.
-4.	Set share service routes to **true**.
-5.	Scroll down to Domain Name and enter the domain name using a wildcard to allow identification of all domain names; `*.netflix.com`.
-6.	In the Domain Name Category field, click ADD and select/add the domain category, Entertainment.
-
-#### Create the second service, the one to be filtered 
+#### Create the child service 
 1.	In the Services panel, select ADD.
 2.	Create a new service, `adult.internet`.
 3.	On the Service screen, verify that Enabled is set to **true**.
@@ -210,11 +242,6 @@ The child service classifies the traffic and provides the option to filter diffe
 ```
 config
     authority
-        service  	netflix.internet
-           name       	netflix.internet
-           domain-name             *.netflix.com
-           domain-name-category    Entertainment
-        exit
         service       adult.internet
            name            adult.internet
            domain-name-category    Adult 
@@ -259,29 +286,6 @@ config
 exit
 
 ```
-
-## Configuring Learning Mode
-
-Learning mode is used to gather statistics about a domain or category. You can select the type of information to be gathered; Modules, HTTPS, TLS, or All. 
-
-To configure Learning Mode via the GUI:
-1. Select a router.
-2. Scroll down to Router Settings and click Application Identification Settings.
-
-![Application ID Setting Button](/img/config_app_learning1.png)
-
-3. Set `enabled` to `true`.
-
-![App ID Basic Info](/img/config_app_learning2.png)
-
-4. Under Application Identification, select ADD.
-5. Select a type of application to identify. In most cases, selecting `all` will provide the best data set.
-
-![App Id Dropdown](/img/config_app_learning3.png)
-
-6. Validate and Commit the changes. 
-
-If Learning Mode is disabled, statistics are only gathered for categories/domains that are configured in a service.
 
 ## Show Commands
 
