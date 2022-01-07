@@ -53,11 +53,13 @@ network-interface foo
 exit   
 ```
 
-Steering of ESP traffic takes place using the dscp values configured on the service as shown below.
+Traffic steering takes place using the DSCP values configured on the service as shown below.
 
 ### Service Configuration
 
 A DSCP value and range is configured for the Service; this identifies the priority and handling of the traffic at the router. DSCP aware services are configured in a hierarchy; DSCP values are not configured on the parent service. Child services are configured with a DSCP value.
+
+
 
 The following configuration splits the tunnel across 3 services: the traffic with `dscp` value 14 is handled by the high-priority service; the traffic with `dscp` values from 26 to 28 is handled by the low-priority service. The remaining traffic falls back into the parent tunnel service.
 
