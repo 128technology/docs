@@ -3,14 +3,14 @@ title: Application Identification
 sidebar: Application Identification
 ---
 
-Application Identification allows the automatic generation of category-based child services under a service. It also will automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_web_filtering.md). 
+Application Identification allows the automatic generation of category-based child services under a service. It also will automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_domain-based_web_filter.md#how-it-works). 
 
 ### Modes
 
 - **module:** The SSR uses an external module for application classification. The SSR expects classification modules to be installed on the system in /var/etc/128technology/application-modules, and are provided with the SSR software.
 - **tls:** The system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. 
 - **http:** The SSR will learn applications via HTTP host name parsing. 
-- **all:** Includes all modes. To use the [web filtering feature](config_web_filtering.md), `application-identification` must be set to **all**. 
+- **all:** Includes all modes. To use [web filtering](config_domain-based_web_filter.md), `application-identification` must be set to **all**. 
 
 By default, Application Identification automatically downloads updated domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [application-identification in the Element Reference section.](config_reference_guide.md#application-identification)
 
@@ -39,7 +39,9 @@ To configure Learning Mode via the GUI:
 
 ![App Id Dropdown](/img/config_app_learning3.png)
 
-6. Validate and Commit the changes. 
+6. Click Save.
+
+7. Validate and Commit the changes. 
 
 Once enabled, the Application Summary is populated. 
 

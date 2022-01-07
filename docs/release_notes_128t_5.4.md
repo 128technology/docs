@@ -255,4 +255,4 @@ This is being addressed, and will be resolved in an upcoming point release.
 ------
 - **I95-43283 Not all configured device interfaces are available in charts:** After upgrading to 5.4, only the `device-interfaces`, `network-interfaces` and `services` that have observed active traffic will be available as permutations for charts and graphs.
 ------
-- **I95-43380 PCLI and UI does not allow the user to edit the [`http-probe-profile`](#plugin_http_probe.md) configuration:** There is no known workaround at this time. This is being addressed in an upcoming point release. See additional considerations [here](intro_upgrade_considerations.md#unsupported-plugins).
+- **I95-43380 PCLI and UI does not allow the user to edit the [`http-probe-profile`](plugin_http_probe.md) configuration:** There is no known workaround at this time. This is being addressed in an upcoming point release.

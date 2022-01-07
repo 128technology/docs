@@ -320,7 +320,7 @@ This sub-element allows you to automatically generate category-based application
 
 | Element | Type | Description |
 | --- | --- | --- |
-| mode | enumeration | Valid values: **module, tls, http, all**. When set to **module**, the 128T router uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) When set to **tls**, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to **http**, the SSR will learn applications via HTTP host name parsing. The option **all** includes all modes. Includes all modes. To use the [web filtering feature](config_web_filtering.md), `application-identification` must be set to **all**. |
+| mode | enumeration | Valid values: **module, tls, http, all**.<br /> When set to **module**, the SSR router uses an external module for application classification. The SSR expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are provided in the SSR software.)<br /> When set to **tls**, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications.<br /> When set to **http**, the SSR will learn applications via HTTP host name parsing.<br /> The option **all** includes all modes. `application-identification` must be set to **all** to use [web filtering](config_domain-based_web_filter.md). |
 | auto-update | configuration container | Default is enabled. Enables automatic update of application-identification domain dataset.  Contains configurable sub-elements. |  
 | update-time | uint8 | Range is 0-23. Default is 2 AM. Set the (local) time to update app-id dataset. |
 | update-jitter | uint8 | Range is 0-30. Default is 15. The max random jitter applied to the update-time. |
@@ -3118,7 +3118,7 @@ authority > router > application-identification > web-filtering
 
 #### Description:
 
-Enables and configures enhanced URL filtering. In order to configure web-filtering, application-identification must be enabled, and the mode must be set to *all*. For additional information, see [application-identification](#application-identification).
+Enables and configures URL filtering. In order to configure web-filtering, application-identification must be enabled, and the mode must be set to *all*. For additional information, see [application-identification](#application-identification).
 
 | Element | Type | Description |
 | --- | --- | --- |
