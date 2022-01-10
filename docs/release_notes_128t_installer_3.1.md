@@ -1,5 +1,5 @@
 ---
-title: 128T Installer 3.1 Release Notes
+title: SSR Installer 3.1 Release Notes
 sidebar_label: '3.1'
 ---
 

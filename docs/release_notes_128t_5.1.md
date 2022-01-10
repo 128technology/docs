@@ -1,5 +1,5 @@
 ---
-title: 128T 5.1 Release Notes
+title: SSR 5.1 Release Notes
 sidebar_label: '5.1'
 ---
 
