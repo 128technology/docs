@@ -69,7 +69,7 @@ exit
 
 The SSR maintains a cache of the most frequently used URLs. As clients request URLs over HTTP, the SSR compares the request to the cache. If a requested URL is matched to one in the cache, then the information configured for the Category is used - allow or block. If the requested URL does not exist in the cache, the SSR makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service for categorization of the URL. 
 
-- The initial request is dropped while the query takes place, and a configurable number of retransmissions takes place to maintain the connection.
+- While waiting for a response to the categorization query, the SRR will drop packets for the request. Clients will attempt to retransmit the request. If a configurable threshold of retransmissions is hit, the SRR will give up on categorization and allow the session.
 - When a response is received, the cache is updated, and the category information in the service policy is applied.
 
 ### Configuring Web Filtering using the PCLI
