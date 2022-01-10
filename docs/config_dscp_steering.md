@@ -15,7 +15,7 @@ To provide identification and aid in load balancing and traffic engineering, DSC
 
 #### Example Config
 
-Configure the `network-inerface` for `dcsp-steering`:
+Configure the `network-interface` for `dcsp-steering`:
 ```
 network-interface foo
     name foo
