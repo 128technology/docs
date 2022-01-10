@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
-## Release 5.4.3-1
+## Release 5.4.3-3
 
 **Release Date:** January 12, 2022
 
@@ -40,7 +40,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-41320 When quitting the PCLI, a slow PCLI response may result in traceback messages:** This is not harmful, and this situation is now handled internally. 
 ------
-- **I95-42364 `off-subnet-reverse-arp-mac-learning` does not work when `outbound-only` is configured:** The  learned MAC is now saved in the reverse flow placeholder for use when the flow is established. 
+- **I95-42364 `off-subnet-reverse-arp-mac-learning` does not work when `outbound-only` is configured:** The learned MAC is now saved in the reverse flow placeholder for use when the flow is established. 
 ------
 - **I95-42608 BGP over SVR not able to open BGP session when routingManager is active on different node than interface:** This has been resolved by sending the packet to the node where routingManager is active via the inter node path.
 ------
