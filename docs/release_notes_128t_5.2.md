@@ -1,13 +1,13 @@
 ---
-title: 128T 5.2 Release Notes
+title: SSR 5.2 Release Notes
 sidebar_label: '5.2'
 ---
 :::info
 Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
 
-If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
+If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR Software is provided.
 
-Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for release dates and links to all SSR / 128T Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
+Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for release dates and links to all SSR Release Notes; or, if you know the Issue ID Number, enter that into the Search field at the top right of this page. 
 :::
 
 ### Upgrade Considerations

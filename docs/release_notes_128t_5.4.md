@@ -24,6 +24,50 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.4.3-3
+
+**Release Date:** January 12, 2022
+
+### New Features
+
+- **I95-39193 Extend Timeout after completion of three way handshake:** The TCP timer for the `initial-timeout` is now configurable per session-type.
+
+### Resolved Issues
+
+- **I95-33730 The `Completed in .* seconds` includes the time waiting for the user to confirm:** The execution time now only includes the time spent executing a command.  
+------
+- **I95-41108 EthoSVR doesn't restart the session when all peer paths are disabled:** This is not specific to EthoSVR and can happen to any session that is unidirectional. This issue has been resolved. 
+------
+- **I95-41320 When quitting the PCLI, a slow PCLI response may result in traceback messages:** This is not harmful, and this situation is now handled internally. 
+------
+- **I95-42364 `off-subnet-reverse-arp-mac-learning` does not work when `outbound-only` is configured:** The learned MAC is now saved in the reverse flow placeholder for use when the flow is established. 
+------
+- **I95-42608 BGP over SVR not able to open BGP session when routingManager is active on different node than interface:** This has been resolved by sending the packet to the node where routingManager is active via the inter node path.
+------
+- **I95-42813 Access Manager reports Reload Audit rules failed:** Resolved an issue where the per-user home directory audit rules were being generated without new lines, causing them to be appended to the same line.
+------
+- **I95-43264 CVE Issues:** The latest Security vulnerabilities have been identified and addressed. 
+------
+- **I95-43442 BGP peering breaks when VRRP is enabled on the interface:** Resolved an issue with transitioning the redundancy state of network interfaces.
+------
+- **I95-43591 When deleting a linux user, the default bash is not restored:** A protection has been added to the SSR to disallow the creation of a user that already exists on the linux system.
+------
+-**I95-43643 EoSVR services frozen:** Resolved an issue where EoSVR services were not setting up actions properly.
+------
+- **I95-43794 Waypoint allocation issue on peer connectivity change:** The `waypointManager` was not looking at the peer connectivity for `modify` cases. A check for peer connectivity has been added. 
+------
+- **I95-43799 ICMP not responding on IPs, if multiple IPs are used for one interface:** The SSR now properly handles dynamic reconfiguration for additional ip-addresses.
+------
+- **I95-43823 Cannot configure IP prefix in access policy from GUI:** Resolved an issue that prevented the SAVE button from activating.
+------
+- **I95-43833 Unable to commit new configuration after upgrade to 5.4.1:** Resolved an issue where missing IDs in the candidate configuration caused an exception during a commit.
+------
+- **I95-43839 Spaces in config filename cause issues importing the config after a rollback:** Spaces in filenames are no longer allowed, and the encoding of those spaces is now blocked. 
+------
+- **I95-43938 StateMonitor does not sync different files with the same modified time:** For files with identical timestamps, a tiebreaker has been added to sync the files. 
+------
+- **I95-43943 SCTP packets have 0 for source and destination ports in the SCTP packet header:** Resolved an issue where the SCTP header is being mishandled.
+
 ## Release 5.4.2-5
 
 **Release Date:** December 22, 2021
@@ -232,7 +276,7 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-42897 Occasional uninformative "Base Exception: Failed to get random bytes" accompanying traffic failures:** Updated the exception to include error string and source location.
 ------
-- **I95-43205 Changes to ssh key permissions create problems:** This issue has been resolved.
+- **I95-43205 Changed ssh key permissions:** In AWS instances during the upgrade to 5.4.0, the sshd user and ssh_keys group required for the sshd service have been removed or had their group-id replaced. This issue has been resolved and the sshd service has been preserved.
 ------
 - **I95-43028 Downloaded software for the router does not show up on secondary conductor:** Resolved this issue so that full output is delivered to all nodes.
 ------
