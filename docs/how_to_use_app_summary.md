@@ -12,13 +12,22 @@ The Application Summary is accessed from the Router page in the GUI. Select a ro
 
 The Application Summary panel is displayed below the router chart when a point in the graph is selected. The selected time is shown at the top right of the chart.
 
+#### Pivot by Category
+
 ![Application Summary](/img/app_summary.png)
 
-By default the table shows all Applications, grouped by Category. To view Applications or Clients, use the `Pivot By` dropdown. The table controls include `Search`, `View By`, and `Pivot By`. 
+By default the table shows all Applications, grouped by Category (above). To view Applications or Clients, use the `Pivot By` dropdown. The table controls include `Search`, `View By`, and `Pivot By`. Search is typically used to locate specific applications or clients when the list is extensive. 
 
-Search is typically used to locate specific applications or clients when the list is extensive. 
-View By options include: Bytes Recieved, Bytes Sent, Total Bytes.
-Pivot By: Application, Category, Clients.
+- View By options include: Bytes Recieved, Bytes Sent, Total Bytes.
+- Pivot By: Application, Category, Clients.
+
+#### Pivot by Application
+
+![Application Summary by Application](/img/app_summary_application.png)
+
+#### Pivot by Client
+
+![Application Summary by Client](/img/app_summary_client.png)
 
 Clicking on the down arrow on the left-side of the table expands collapsed rows, showing associated child data when available. Click on the appropriate color coded checkbox to hide the series in the chart. You can also change the data being viewed by clicking the chart icon in the top-left of the table. This switches the chart to view all parent data in a given Pivot, or only relevant child data related to the parent (for example, all Applications related to a Category).
 
