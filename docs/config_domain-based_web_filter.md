@@ -14,6 +14,10 @@ Web filtering allows administrators to prevent access to dangerous, malicious, o
 
 Web filtering extracts the full URL as http traffic traverses the router, allowing a targeted approach to filtering. Additionally, web filtering provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs.
 
+:::note
+Web Filtering is a separate, optional feature, available through the purchase of a Web-Filtering license. For information about activating this powerful feature, please contact Customer Support or your Sales Engineer.
+::: 
+
 ### Basic Configuration
 
 - Configure `application-identification` and `web-filtering`
