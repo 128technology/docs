@@ -2,13 +2,18 @@
 title: Using Application Summary
 sidebar: Using Application Summary
 ---
-The Application Summary is available for each router with Application Identification enabled. In cases where an SSR has [web filtering](config_domain-based_web_filter.md) enabled, Application Identification is also enabled. 
+The Application Summary is available on routers with Application Identification enabled. In cases where an SSR has [web filtering](config_domain-based_web_filter.md) enabled, Application Identification is also enabled. 
 
-To enable Application Identification for a router that does not have web filtering enabled, go to Configuration -> Authority -> [router name] -> Application Identification Settings and set to `true`.
+To enable the Application Summary for a router that does not have web filtering enabled, go to Configuration -> Authority -> [router name] -> Application Identification Settings and set Summary Tracking to `true`.
+
+The following are the configurable settings for Application Summary.
+- Summary Tracking: Enable session stats tracking by application.
+- Write Interval: Interval to define how often analytics are calculated.
+- Max Capacity: The maximum capacity for resolved next-hops under a client.
 
 ![Application ID Summary Enabled](/img/app_summary_enabled.png)
 
-The Application Summary is accessed from the Router page in the GUI. Select a router from the Authority -> Routers list. In the panel across the top of the page, the Applications Seen panel displays a list with the names of each application and total bytes transferred in the last X minutes. Click on this table or the Applications Seen selection on the right side of the top panel.
+The Application Summary is accessed from the Router page in the GUI. Select a router from the Authority -> Routers list. In the panel across the top of the page, the Applications Seen panel displays a list with the names of each application and total bytes transferred in the last X minutes (Write Interval; default is 1 minute). Click on this table or the Applications Seen selection on the right side of the top panel.
 
 The Application Summary panel is displayed below the router chart when a point in the graph is selected. The selected time is shown at the top right of the chart.
 
