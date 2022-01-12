@@ -29,7 +29,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
-- **I95-41108 EthoSVR doesn't restart the session when all peer paths are disabled:** This is not specific to EthoSVR and can happen to any session that is unidirectional. This issue has been resolved. 
+- **I95-41108 EthoSVR not restarting the session when all peer paths are disabled:** This is not specific to EthoSVR and can happen to any session that is unidirectional. This issue has been resolved. 
 ------
 - **I95-41802/I95-43264 CVE Issues:** The latest Security vulnerabilities have been identified and addressed.
 ------
@@ -37,15 +37,15 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-42364 `off-subnet-reverse-arp-mac-learning` does not work when `outbound-only` is configured:** The learned MAC is now saved in the reverse flow placeholder for use when the flow is established. 
 ------
-- **I95-43066 Issue with database query co-ordinator:** Resolved an issue that when the buffer queue is full, the message is dropped, but the event was not handling the inflight message.
+- **I95-43066 Requests for metrics are timing out:** Resolved an issue that when the buffer queue is full, the message is dropped, but the event was not handling the inflight message.
 ------
-- **I95-43389 SALT Minion file truncation:** This issue has been resolved.
+- **I95-43389 Salt Minion file truncation:** This issue has been resolved.
 ------
 - **I95-43454 Plugin highstate not sync'd:** When applying DNS cache configuration changes via PCLI or GUI, highstate is not being applied from the conductor to router. This issue was resolved by removing support of legacy pillar generation for plugins.
 ------
 - **I95-43591 When deleting a linux user, the default bash is not restored:** A protection has been added to the SSR to disallow the creation of a user that already exists on the linux system.
 ------
-- **I95-43604 NAT keep alive problem:** Resolved an issue where the keep-alive cache entry was being removed when the flow was invalidated.
+- **I95-43604 NAT keepalive problem:** Resolved an issue where the keepalive cache entry was being removed when the flow was invalidated.
 ------
 - **I95-43643 EoSVR services frozen:** Resolved an issue where EoSVR services were not setting up actions properly.
 ------
@@ -55,11 +55,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43799 ICMP not responding on IPs, if multiple IPs are used for one interface:** The SSR now properly handles dynamic reconfiguration for additional ip-addresses.
 ------
-- **I95-43817 GUI Displays Interfaces as "Up" When it is Actually Provisionally Down:** This issue has been resolved. 
+- **I95-43817 GUI displays interfaces as "Up" when it is actually provisionally down:** This issue has been resolved. 
 ------
 - **I95-43839 Spaces in config filename cause issues importing the config after a rollback:** Spaces in filenames are no longer allowed, and the encoding of those spaces is now blocked. 
 ------
-- **I95-43878 Expired DHCP Address Still Displayed When Interface is Provisionally Down:** Expired DHCP addresses are now displayed as "unresolved".
+- **I95-43878 Expired DHCP address still displayed when interface is provisionally down:** Expired DHCP addresses are now displayed as "unresolved".
 ------
 - **I95-43938 StateMonitor does not sync different files with the same modified time:** For files with identical timestamps, a tiebreaker has been added to sync the files. 
 
