@@ -46,7 +46,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-42813 Access Manager reports Reload Audit rules failed:** Resolved an issue where the per-user home directory audit rules were being generated without new lines, causing them to be appended to the same line.
 ------
-- **I95-43264 CVE Issues:** The latest Security vulnerabilities have been identified and addressed. 
+- **I95-43264/I95-43624 CVE Issues:** The latest Security vulnerabilities have been identified and addressed. 
 ------
 - **I95-43442 BGP peering breaks when VRRP is enabled on the interface:** Resolved an issue with transitioning the redundancy state of network interfaces.
 ------
@@ -67,6 +67,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-43938 StateMonitor does not sync different files with the same modified time:** For files with identical timestamps, a tiebreaker has been added to sync the files. 
 ------
 - **I95-43943 SCTP packets have 0 for source and destination ports in the SCTP packet header:** Resolved an issue where the SCTP header is being mishandled.
+------
+- **I95-44095 VRRP Manager only sending GARPs on some VLANs:** Resolved an issue where the VRRP Manager was only sending GARPs on some VLANs when the advertise timer was firing.
 
 ## Release 5.4.2-5
 
