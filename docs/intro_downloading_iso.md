@@ -48,7 +48,7 @@ The ISO installation media is hosted at the same location as the SSR software pa
 #### Username and Token Download
 ##### Legacy ISO access (Versions less than 5.3.0)
 ```
-curl -L -O -u <username>:<token> https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/128T-<VERSION>.x86_64.iso
+curl -L -O -u <username>:<token> https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/128T-<VERSION>.x86_64.<file_format>
 ```
 
 Example: 
@@ -58,7 +58,7 @@ curl -L -O -u username:token https://software.128technology.com/artifactory/list
 
 ##### ISO access (Versions 5.3.0 or greater)
 ```
-curl -L -O -u <username>:<token> https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/<Major>.<Minor>/128T-<VERSION>.x86_64.iso
+curl -L -O -u <username>:<token> https://software.128technology.com/artifactory/list/generic-128t-isos-release-local/<Major>.<Minor>/128T-<VERSION>.x86_64.<file_format>
 ```
 
 Example:
@@ -82,10 +82,11 @@ Where `<VERSION>` is `<Major>.<Minor>.<patch>-<build>.<OS>.<img_variant>.<img_ve
 
 `<img_version>` - ISO version for the `<Major>.<Minor>.<patch>-<build>.<OS>.<img_variant>`
 
+Where `<file_format>` is one of `iso` for an ISO image, and `raw.gz` for a gzip compressed disk image
 
 #### Certificate Download
 ```bash
-curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/128T-<VERSION>.x86_64.iso
+curl -O --cert /etc/pki/128technology/release.pem https://yum.128technology.com/isos/128T-<VERSION>.x86_64.<file_format>
 ```
 
 Where `<VERSION>` is replaced with the SSR version to download.
