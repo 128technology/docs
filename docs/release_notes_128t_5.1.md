@@ -61,6 +61,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43878 Expired DHCP address still displayed when interface is provisionally down:** Expired DHCP addresses are now displayed as "unresolved".
 ------
+- **I95-43911 Adding a Resource Group in the GUI displays a blank page:** Resolved an issue with an invariant that would generate the blank page. 
+------
 - **I95-43938 StateMonitor does not sync different files with the same modified time:** For files with identical timestamps, a tiebreaker has been added to sync the files. 
 
 ## Release 5.1.7-1
