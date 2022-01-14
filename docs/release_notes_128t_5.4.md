@@ -24,9 +24,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
-## Release 5.4.3-3
+## Release 5.4.3-4
 
-**Release Date:** January 12, 2022
+**Release Date:** January 18, 2022
 
 ### New Features
 
@@ -52,7 +52,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43591 When deleting a linux user, the default bash is not restored:** A protection has been added to the SSR to disallow the creation of a user that already exists on the linux system.
 ------
--**I95-43643 EoSVR services frozen:** Resolved an issue where EoSVR services were not setting up actions properly.
+- **I95-43643 EoSVR services frozen:** Resolved an issue where EoSVR services were not setting up actions properly.
 ------
 - **I95-43794 Waypoint allocation issue on peer connectivity change:** The `waypointManager` was not looking at the peer connectivity for `modify` cases. A check for peer connectivity has been added. 
 ------
