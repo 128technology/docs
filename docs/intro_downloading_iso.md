@@ -82,7 +82,7 @@ Where `<VERSION>` is `<Major>.<Minor>.<patch>-<build>.<OS>.<img_variant>.<img_ve
 
 `<img_version>` - ISO version for the `<Major>.<Minor>.<patch>-<build>.<OS>.<img_variant>`
 
-Where `<file_format>` is one of `iso` for an ISO image, and `raw.gz` for a gzip compressed disk image
+Where `<file_format>` is one of `iso` for an ISO image, or `raw.gz` for a gzip compressed disk image
 
 #### Certificate Download
 ```bash
