@@ -1,9 +1,8 @@
 ---
-title: GUI Configuration Reference
-sidebar_label: GUI Configuration Reference
-description: 'Formerly the Configuration Element Reference.'
+title: Configuration Element Reference
+sidebar_label: Configuration Element Reference
 ---
-This section is a reference guide for the elements of the GUI.
+This section is a reference guide for the elements of the User Interface.
 
 ## access-control
 
