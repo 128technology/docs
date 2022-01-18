@@ -81,7 +81,7 @@ It is easiest to use the Service Routes configured in Detection Mode and simply 
 4. Under Reachability Detection Settings, enable Reachability Detection Enforcement.
 5. Define the Enforcement Detection Window (time). The `detection-window` (default 5s) determines how often the stats will be aggregated in terms of min, max, and median.
 6. Define an Enforcement Hold-Down time. This determines how long the path stays down upon determining it is unusable.
-7. If probes will be used to determine service health, configure `probe-type` as `always`. Otherwise, configure `probe-type` as `disabled` to use only organic traffic as the basis of service health.
+7. To use a probe to determine service health, configure the `probe-type` as `always`. To use only organic traffic to determine service health, set the `probe-type` to `disabled`.
 8. If you have previously configured a Reachability Profile, select the appropriate profile. If there is no existing Reachability Detection Profile, use the procedure below.
 9. Scroll to Reachability Detection Enforcement Probes and click ADD.
 10. Enter a name for the probe and click SAVE.
@@ -164,11 +164,11 @@ authority
                 hold-down             60
                 reachability-profile  profile-1
                 probe-type            always
-                    probe               foo
-                        name                foo
-                        enabled             true
-                        icmp-probe-profile  icmp-profile-0
-                    exit
+
+                probe                 foo
+                    name                foo
+                    enabled             true
+                    icmp-probe-profile  icmp-profile-0
                 exit
             exit
         exit
