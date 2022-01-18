@@ -21,7 +21,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.1.8-1
 
-**Release Date:** January 14, 2022
+**Release Date:** January 18, 2022
 
 ### New Features
 
@@ -58,8 +58,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-43817 GUI displays interfaces as "Up" when it is actually provisionally down:** This issue has been resolved. 
 ------
 - **I95-43839 Spaces in config filename cause issues importing the config after a rollback:** Spaces in filenames are no longer allowed, and the encoding of those spaces is now blocked. 
-------
-- **I95-43878 Expired DHCP address still displayed when interface is provisionally down:** Expired DHCP addresses are now displayed as "unresolved".
 ------
 - **I95-43911 Adding a Resource Group in the GUI displays a blank page:** Resolved an issue with an invariant that would generate the blank page. 
 ------
