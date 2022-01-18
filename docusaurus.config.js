@@ -43,11 +43,6 @@ module.exports = {
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} Juniper Networks, Inc.`,
     },
-    algolia: {
-      apiKey: '1ee0f6866243c8e25883eee3ce0708ce',
-      indexName: '128technology',
-      algoliaOptions: {},
-    },
     googleAnalytics: {
       trackingID: 'UA-167298415-2',
       // Optional fields.
