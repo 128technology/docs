@@ -67,4 +67,11 @@ module.exports = {
     path.resolve(__dirname, './src/components/adobe-analytics-plugin'),
     './src/plugins/release-notes-api.js',
   ],
+  customFields: {
+    search: {
+      orgId: '0f342292-b359-4adf-b34c-a24aad8d3433',
+      token: '???',
+      docSource: '128t',
+    },
+  },
 };
