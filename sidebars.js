@@ -90,8 +90,8 @@ module.exports = {
       "config_templates",
       "config_transport_encryption",
       "config_wan_assurance", 
-    ],
-    "High Availability":,[
+    ]
+    "High Availability": [
       "config_ha",
       "config_dual_router_ha",
       "config_ha_vrrp",
@@ -99,10 +99,10 @@ module.exports = {
       "config_adding_interfaces_to_ha_team",
       "config_transition_standalone_to_ha",
     ],
-    "Security",[
+    "Security": [
       "sec_adaptive_encrypt",
     ],
-    "How To",: [
+    "How To": [
       "howto_conductor_migration",
       "howto_extend_gui_nav",
       "howto_lte",
@@ -112,7 +112,7 @@ module.exports = {
       "howto_trusted_ca_certificate",
       "howto_tune_bfd",
     ],
-    "Troubleshooting",:[
+    "Troubleshooting": [
       "ts_applications",
       "ts_ap_duplicate_assets",
       "ts_ap_salt_minion",
