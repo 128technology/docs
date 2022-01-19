@@ -166,10 +166,10 @@ module.exports = {
       "bcp_service-policy_defaults",
       "bcp_tenants",
     ],
-    "CLI and GUI Reference": [
+    "CLI and Element Reference": [
       "cli_reference",
-      "cli_stats_reference",
-      "config_reference_guide",      
+      "config_reference_guide",
+      "cli_stats_reference",    
     ],
     "Installer/Initializer Reference": [
       "installer_cli_reference",
