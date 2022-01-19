@@ -64,5 +64,7 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['./src/plugins/release-notes-api.js'],
+  plugins: [
+    './src/plugins/release-notes-api.js',
+  ],
 };
