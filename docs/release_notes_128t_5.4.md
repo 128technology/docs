@@ -69,6 +69,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-43943 SCTP packets have 0 for source and destination ports in the SCTP packet header:** Resolved an issue where the SCTP header is being mishandled.
 ------
 - **I95-44095 VRRP Manager only sending GARPs on some VLANs:** Resolved an issue where the VRRP Manager was only sending GARPs on some VLANs when the advertise timer was firing.
+------
+- **I95-44129 Issue when converting management over forwarding config generation:** Resolved an issue where config generation was throwing an error when generating management over forwarding services for PPPoE type device-interfaces.
 
 ## Release 5.4.2-5
 
