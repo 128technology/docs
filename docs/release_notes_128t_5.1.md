@@ -39,7 +39,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43066 Requests for metrics are timing out:** Resolved an issue that when the buffer queue is full, the message is dropped, but the event was not handling the inflight message.
 ------
-- **I95-43329 ISO missing Rescue Boot Image:** The Rescue Boot Image was missing in the 5.1.6 and 5.1.7 OTP ISOs. This has been corrected in the 5.1.8 release with `128T-5.1.8-1.el7.OTP.v2.x86_64.iso`.
+- **I95-43329 ISO imaged system missing rescue boot image:** The Rescue Boot Image was missing on systems with 5.1.6 or 5.1.7 installed. This has been corrected in the 5.1.8 release with `128T-5.1.8-1.el7.OTP.v2.x86_64.iso`.
 ------
 - **I95-43389 Salt Minion file truncation:** This issue has been resolved.
 ------
