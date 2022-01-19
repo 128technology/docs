@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.4.3-4
 
-**Release Date:** January 18, 2022
+**Release Date:** January 21, 2022
 
 ### New Features
 
@@ -195,6 +195,8 @@ This release replaces the existing `5.4.0-104` release.
 - **i95-40325 Configurable Metrics Retention:** Metrics retention intervals and storage duration values are now user configurable. See [In-Memory Metrics](config_in-memory_metrics.md) for more information.
 ------
 - **I95-40436 Updated Application ID Domain Data:** Application Identification can be configured to automatically download updated domain and application datatsets daily, weekly (default), or monthly. For more information, see [Auto Update the Domain List](config_domain-based_web_filter.md#auto-update-the-domain-list).
+------
+- **I95-40416 Google Cloud Platform Support:** The SSR now supports the Google Cloud Platform (GCP).
 ------
  - **I95-40438 Support for Lenovo X722:** Upgrades to the DPDK version now provide support for the Lenovo Ethernet Connection X722 for 10GbE SFP+.
 ------
