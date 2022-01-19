@@ -3,7 +3,7 @@ title: 'Command Line Reference'
 sidebar_label: 'Command Line Reference'
 ---
 
-This reference is better understood if you know the basics of how to operate the PCLI.  If you have not used the PCLI before, it is beneficial to first read [the basics about the PCLI](concepts_pcli.md) and the [basics of the configuration management](config_basics.md).
+The Command Line Reference guide is better understood if you know the basics of operating the programmable command line interface (PCLI). Commands and actions such as clear, edit, delete, restore, and show, for example, are described here. If you have not used the PCLI before, please refer to [About the PCLI](concepts_pcli.md) for an explanation of how it works.
 
 ## `clear arp`
 
