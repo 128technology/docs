@@ -3,7 +3,7 @@ title: Show Stats Reference
 sidebar_label: Show Stats Reference
 ---
 
-This reference is better understood if you know the basics of how to operate the PCLI.  If you have not used the PCLI before, it is beneficial to first read [the basics about the PCLI](concepts_pcli.md) and the [basics of the configuration management](config_basics.md).
+This reference is better understood if you know the basics of how to operate the PCLI. If you have not used the PCLI before, it is beneficial to first read [the basics about the PCLI](concepts_pcli.md).
 
 The _show stats_ command, and its myriad of subcommands, retrieve statistical data from various functions within the 128T router and return them to the user. Used for troubleshooting, debugging configuration, or just to monitor the health and well-being of the 128T router, these show commands provide a wealth of information and insight to users of the software.
 
