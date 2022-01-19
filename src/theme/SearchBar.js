@@ -104,7 +104,7 @@ function Modal({onClose}) {
       setIsLoading(true);
 
       fetch(
-        `https://api.mist.com/api/v1/labs/orgs/${searchOptions.orgId}/knowledge_search`
+        `https://api.mist.com/api/v1/labs/orgs/${searchOptions.orgId}/knowledge_search`,
         {
           method: 'POST',
           body: JSON.stringify({
