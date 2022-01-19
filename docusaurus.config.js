@@ -70,7 +70,8 @@ module.exports = {
   customFields: {
     search: {
       orgId: '0f342292-b359-4adf-b34c-a24aad8d3433',
-      token: '???',
+      token:
+        'ZQJJECTUUgO0XNnwP0BjMJGzLmfgRgr1U92JSfG9XkabYere9Yxaza0b7ZhnI2WenU4C9KgZKL1Mh1abkPtrd3SkaaM1WZ7q',
       docSource: '128t',
     },
   },
