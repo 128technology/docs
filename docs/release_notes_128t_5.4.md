@@ -232,11 +232,11 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-42897 Occasional uninformative "Base Exception: Failed to get random bytes" accompanying traffic failures:** Updated the exception to include error string and source location.
 ------
-- **I95-43205 Changes to ssh key permissions create problems:** This issue has been resolved.
+- **I95-43205 Changed ssh key permissions:** In AWS instances during the upgrade to 5.4.0, the sshd user and ssh_keys group required for the sshd service have been removed or had their group-id replaced. This issue has been resolved and the sshd service has been preserved.
 ------
 - **I95-43028 Downloaded software for the router does not show up on secondary conductor:** Resolved this issue so that full output is delivered to all nodes.
 ------
-- **I95-43083 ISO missing Rescue Boot Image:** Replacing packages that were removed during upgrade.
+- **I95-43083 ISO imaged system missing rescue boot entry:** Replaced packages that were missing in versions 5.1.6 and 5.1.7.
 ------
 - **I95-43135 Rare Race condition in an HA configuration:** Resolved a rare race condition that may occur if an `export config` command is run during a failover.
 ------
