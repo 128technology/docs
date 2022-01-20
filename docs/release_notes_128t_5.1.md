@@ -39,6 +39,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43066 Requests for metrics are timing out:** Resolved an issue that when the buffer queue is full, the message is dropped, but the event was not handling the inflight message.
 ------
+- **I95-43329 ISO imaged system missing rescue boot image:** The Rescue Boot Image was missing on systems with 5.1.6 or 5.1.7 installed. This has been corrected in the 5.1.8 release with `128T-5.1.8-1.el7.OTP.v2.x86_64.iso`.
+------
 - **I95-43389 Salt Minion file truncation:** This issue has been resolved.
 ------
 - **I95-43454 Plugin highstate not sync'd:** When applying DNS cache configuration changes via PCLI or GUI, highstate is not being applied from the conductor to router. This issue was resolved by removing support of legacy pillar generation for plugins.
