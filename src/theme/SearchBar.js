@@ -84,8 +84,6 @@ function Modal({onClose}) {
   const [isLoading, setIsLoading] = React.useState(false);
   const [hoveredIdx, setHoveredIdx] = useState(-1);
 
-  const searchOptions = siteConfig.customFields.search;
-
   React.useEffect(() => {
     const existing = document.body.style.overflowY;
     document.body.style.overflowY = 'hidden';
@@ -104,17 +102,16 @@ function Modal({onClose}) {
       setIsLoading(true);
 
       fetch(
-        `https://api.mist.com/api/v1/labs/orgs/${searchOptions.orgId}/knowledge_search`,
+        `https://ijx9l93j28.execute-api.us-east-1.amazonaws.com/default/Func`,
         {
           method: 'POST',
           body: JSON.stringify({
             query: search,
             count: 10,
-            doc_source: searchOptions.docSource,
+            doc_source: '128t',
           }),
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
-            Authorization: `Token ${searchOptions.token}`,
           },
           signal: abort.signal,
         },
