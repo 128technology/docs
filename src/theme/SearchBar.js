@@ -143,7 +143,7 @@ function Modal({onClose}) {
       onClick={onClose}>
       <div className="DocSearch-Modal" onClick={(e) => e.stopPropagation()}>
         <header className="DocSearch-SearchBar">
-          <form className="DocSearch-Form">
+          <div className="DocSearch-Form">
             <label className="DocSearch-MagnifierLabel" id="docsearch-label">
               <svg
                 width="20"
@@ -210,7 +210,7 @@ function Modal({onClose}) {
                 </svg>
               </button>
             )}
-          </form>
+          </div>
         </header>
         {items.length === 0 && <div style={{height: 12}} />}
         {items.length > 0 && (
