@@ -5,10 +5,10 @@ sidebar_label: Machine Communication
 This document lists the different communication channels between nodes within a router, between peering routers, and between routers and their conductor. This is to provide:
 
 - A guide for port forwarding when deploying a conductor behind a firewall
-- A tool to help predict and manage the amount of ambient, management-plane bandwidth that 128T software will use during "steady state." (This is useful when deploying devices that have limited use and/or expensive WAN connections, such as LTE.)
+- A tool to help predict and manage the amount of ambient, management-plane bandwidth that SSR software will use during "steady state." (This is useful when deploying devices that have limited use and/or expensive WAN connections, such as LTE.)
 
 ## Connections
-Each running instance of 128T software (generically termed as a _node_) can exist in one of two _roles_: a _router_ or a _conductor_. Furthermore, two _nodes_ can be coupled together to form a highly available router or conductor. There are machine to machine (M2M) connections between the various topologies of nodes, which will be covered here. These include:
+Each running instance of SSR software (generically termed as a _node_) can exist in one of two _roles_: a _router_ or a _conductor_. Furthermore, two _nodes_ can be coupled together to form a highly available router or conductor. There are machine to machine (M2M) connections between the various topologies of nodes, which will be covered here. These include:
 
 - Node to node connectivity within a highly available router
 - Router to router connectivity between peering routers
@@ -30,7 +30,7 @@ When deploying geographically separated conductor nodes, the following requireme
 Between peered routers, there are four different M2M connections that are established aside from forwarding plane traffic that is sent between them, and excluding routing protocol control plane traffic (BGP). Each of the connections is described here.
 
 :::note
-Peering 128T routers requires a successful exchange of BFD packets in order to initiate SVR connections. _At least one of the devices must be reachable at 1280/UDP._ Peering can be established if one device is behind a NAT that allocates dynamic ports, but not both. To peer devices that are both behind distinct NATs (not recommended), you must forward 1280/UDP to one or both of them.
+Peering SSR routers requires a successful exchange of BFD packets in order to initiate SVR connections. _At least one of the devices must be reachable at 1280/UDP._ Peering can be established if one device is behind a NAT that allocates dynamic ports, but not both. To peer devices that are both behind distinct NATs (not recommended), you must forward 1280/UDP to one or both of them.
 :::
 
 ### BFD (Peer Path Detection)
@@ -38,33 +38,33 @@ Peering 128T routers requires a successful exchange of BFD packets in order to i
 | ------------- | ---------- | ---------------- | ------------------------------------------------------------ |
 | bidirectional | 1280/UDP   | 1s               | Frequency negotiated between devices by configuring `desired-tx-interval` and `required-min-rx-interval` settings. Client and server payloads are variable length, typically greater than 90 bytes. This is due to the presence of peer-name. |
 
-[BFD](https://en.wikipedia.org/wiki/Bidirectional_Forwarding_Detection), or Bidirectional Forwarding Detection (as defined in [RFC 5880](https://tools.ietf.org/html/rfc5880)), is exchanged between 128T routers to detect SVR path availability. I.e., the successful, and continued exchange of BFD packets is a prerequisite for choosing that path to carry SVR traffic. For peer path detection, 128T uses the _asynchronous mode_ of BFD.
+[BFD](https://en.wikipedia.org/wiki/Bidirectional_Forwarding_Detection), or Bidirectional Forwarding Detection (as defined in [RFC 5880](https://tools.ietf.org/html/rfc5880)), is exchanged between SSR routers to detect SVR path availability. I.e., the successful, and continued exchange of BFD packets is a prerequisite for choosing that path to carry SVR traffic. For peer path detection, SSR uses the _asynchronous mode_ of BFD.
 
-The peering status between 128T devices is viewable using the PCLI command `show peers`.
+The peering status between SSR devices is viewable using the PCLI command `show peers`.
 
 The default timer values for BFD traffic are adequate for deployments where head end routers are managing 1,000 aggregate peer paths. For larger deployments, these values should be dilated.
 
 ### BFD (Path Quality)
 | Direction     | Port/Proto | Default Interval | Notes                                                        |
 | ------------- | ---------- | ---------------- | ------------------------------------------------------------ |
-| bidirectional | 1280/UDP   | 10s              | A ten (10) packet burst sent between 128T routers on each peer path. Client and server payloads are variable length, typically greater than 90 bytes. This is due to the presence of peer-name.|
+| bidirectional | 1280/UDP   | 10s              | A ten (10) packet burst sent between SSR routers on each peer path. Client and server payloads are variable length, typically greater than 90 bytes. This is due to the presence of peer-name.|
 
-Each 128T router will measure the path quality to its peer using the _echo mode_ of BFD. It does so by sending a burst of ten packets every ten seconds over each peer path. These packets are echoed back from the remote 128T instance and returned to the point of origin. This allows the transmitter to accurately measure round trip time, and calculate packet loss and jitter (variability in interpacket arrival times).
+Each SSR router will measure the path quality to its peer using the _echo mode_ of BFD. It does so by sending a burst of ten packets every ten seconds over each peer path. These packets are echoed back from the remote SSR instance and returned to the point of origin. This allows the transmitter to accurately measure round trip time, and calculate packet loss and jitter (variability in interpacket arrival times).
 
 The results of the path quality testing are available in the output of the PCLI command `show peers detail`.
 
 :::note
-The 128T will also *calculate* a Mean Opinion Score (MOS) for each peer path. This is derived from the loss, latency, and jitter values empirically determined by the Path Quality BFD packets.
+The SSR will also *calculate* a Mean Opinion Score (MOS) for each peer path. This is derived from the loss, latency, and jitter values empirically determined by the Path Quality BFD packets.
 :::
 
-In many common deployment scenarios, the 128T software is deployed as "hub-and-spoke," where the traffic flows exclusively (or nearly exclusively) in one direction from branch deployments toward data centers. In these topologies, it is common and recommended to disable the asynchronous packets sent by the hub routers toward the edge routers, since the path selection critieria is not relevant.
+In many common deployment scenarios, the SSR software is deployed as "hub-and-spoke," where the traffic flows exclusively (or nearly exclusively) in one direction from branch deployments toward data centers. In these topologies, it is common and recommended to disable the asynchronous packets sent by the hub routers toward the edge routers, since the path selection critieria is not relevant.
 
 ### Firewall Detector
 | Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
 | ------------- | ---------- | ---------------------- | ---------------------- | ---------------- | ------------------------------------------------------------ |
 | bidirectional | 1280/TCP   | 6516                   | 6516                   | 300s             | Rate can be adjusted by setting `udp-transform/detect-interval` or disabled by setting `udp-transform/mode` to `always-transform`. |
 
-Each 128T periodically sends _firewall detector_ packets on each peer path to determine if stateful firewalls exist on the peer path. Firewalls between 128T devices can interfere with SVR behavior; because of this, the firewall detector is used to automatically trigger a _UDP transform_ feature, to carry SVR over UDP when firewalls would otherwise block TCP. The status of the firewall detector is show in the PCLI in the output of `show udp-transform`:
+Each SSR periodically sends _firewall detector_ packets on each peer path to determine if stateful firewalls exist on the peer path. Firewalls between SSR devices can interfere with SVR behavior; because of this, the firewall detector is used to automatically trigger a _UDP transform_ feature, to carry SVR over UDP when firewalls would otherwise block TCP. The status of the firewall detector is show in the PCLI in the output of `show udp-transform`:
 
 ```
 admin@labsystem1.fiedler# show udp-transform router newton
@@ -83,15 +83,40 @@ The firewall detector function sends deliberately malformed, out-of-order, and m
 | ------------- | ---------- | ---------------------- | ---------------------- | ---------------- | ------------------------------------------------------------ |
 | bidirectional | 1280/UDP   | 2945                   | 90                     | 600s             | Interval is configurable within `path-mtu-discovery/interval`, or disabled `path-mtu-discovery/enabled`. |
 
-Peering 128T routers will perform path MTU discovery on each peer path between each other. This test is run every ten (10) minutes by default, to adjust in the event of path changes between peering devices.
+Peering SSR routers will perform path MTU discovery on each peer path between each other. This test is run every ten (10) minutes by default, to adjust in the event of path changes between peering devices. During the test, SSR routers send packets of various sizes to discover the MTU of the path. However, in some government deployments the use of MTU discovery is not possible. 
+
+In order to accommodate these deployments where “ICMP Destination Unreachable - Fragmentation Needed” response messages are not generated (RFC1911 is not followed), three successive non-responses are considered equivalent to ICMP responses for the purposes of driving the algorithm with an inferred MTU.
 
 The discovered MTU is viewable in the output of `show peers`.
+
+### Secure Vector Routing Traffic
+
+By using SVR, the SSR creates sessions to transport directional, encrypted, tunnel-free traffic to its peers by creating engineered pathways between waypoints – IP addresses assigned to SSR interfaces. This is a significant departure from legacy tunnel-based approaches. For additional information about Waypoints and Secure Vector Routing (SVR) please refer to [Concepts of Waypoints and Waypoint Ports](concepts_waypoint_ports.md).
+
+| Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
+| ------------- | ---------- | ---------------------- | ---------------------- | ---------------- | ------------------------------------------------------------ |
+| bidirectional | 16385-65,353 <br /> TCP/UDP | -- | -- | -- | Native TCP sessions use TCP for transport. UDP is used for all other session types. Use `udp-transform` to force UDP transport. |
+
+#### Protocol
+
+By default, native TCP sessions use TCP, and UDP is used for all other session types. However, if firewall detection is enabled and [triggered](#firewall_detector), all traffic destined for a peer transitions to UDP. 
+
+You can manually configure traffic to use UDP for transport by modifying the [`udp-transform`]( config_reference_guide.md/#udp-transform) sub-element under [network-interface > adjacency](config_reference_guide.md/#adjacency) or [network-interface > neighborhood]( config_reference_guide.md/#neighborhood).
+
+#### Port Ranges
+
+The default range of ports used for configuring waypoints with SVR is 16,385 through 65,533.
+
+If you need to limit the ports or port range the SSR uses for receiving traffic, a `port-range` can be configured under the `neighborhood`. This tells peer SSRs to constrain the destination port range used when communicating with another router. Note that when manually specifying a port range, port numbers 1025 to 16383 can also be used. 
+
+#### Example:
+Let's say you want to utilize UDP for transport, but do not want to open up all the default ports. To limit the number of ports open on your firewall, you choose to specify a port range of 10,000 to 12,000. With each new waypoint, another 1,000,000 active sessions are added. Even with a small port range selection you can easily support 40,000 active users at 25 active sessions per user.
 
 ## Router to Conductor Connectivity
 Each deployed router (and in many cases, individual nodes within that router) has multiple concurrent connections to each conductor node within its authority. The primary connection between a router and a conductor is using 930/TCP, which is an encrypted SSH connection that bears most router-to-conductor inter-process communication (IPC). The secondary connetion is that between a router's _salt-minion_ and a conductor's _salt-master_, which leverages 4505-4506/TCP.
 
 :::important
-When deploying a firewall in front of your 128T conductor, it is important to ensure that ports 930/TCP, 4505/TCP, and 4506/TCP are forwarded to your conductor node.
+When deploying a firewall in front of your SSR conductor, it is important to ensure that ports 930/TCP, 4505/TCP, and 4506/TCP are forwarded to your conductor node.
 :::
 
 ### Software Version Check
@@ -172,7 +197,7 @@ When the conductor is used as a software repository for its managed routers, the
 | ------------- | ---------- | ---------------------- | ---------------------- | ------------------------- | ------------------------------------------------------------ |
 | bidirectional | 930/TCP    | 104                    | 104                    | 20s (client), 5s (server) | Only exchanged if the conductor is configured as a proxy for software retrieval. |
 
-When the conductor is used as a proxy for reaching the 128T software repository, there will be connectivity checks sent periodically. The frequency at which these are exchanged is not configurable. When the conductor is not used as a software proxy (which is the default behavior), these keepalives are not sent.
+When the conductor is used as a proxy for reaching the SSR software repository, there will be connectivity checks sent periodically. The frequency at which these are exchanged is not configurable. When the conductor is not used as a software proxy (which is the default behavior), these keepalives are not sent.
 
 ### SSH Keepalives
 | Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
