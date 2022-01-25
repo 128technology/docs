@@ -20,7 +20,7 @@ For the purpose of the policy, the following definitions apply:
 
 **EOS Date:** EOS Date is the date after which Juniper will not be under obligation to perform support services of any kind for the affected software or the embedded operating system software supporting the affected product. 
 
-**End-of-Life (EOL):** End-of-Life means that the product release in question has reached the end of its “useful lifespan”. After the EOL date, Juniper Networks will no longer provide support services for the release of the product. In most cases the EOL date coincides with the End of Service (EOS) date for the product release.
+**End-of-Life (EOL):** End-of-Life means that the product release in question has reached the end of its “useful lifespan”. After the EOL date, Juniper Networks will no longer provide support services for the product release. In most cases the EOL date coincides with the End of Service (EOS) date for the product release.
 
 **End-of-Life Notification (EOLN):** The EOLN is provided by Juniper Networks to notify customers and partners that a product that is planned to reach its End-of-Life date in the near future.
 
