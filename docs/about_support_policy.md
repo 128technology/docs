@@ -18,9 +18,9 @@ For the purpose of the policy, the following definitions apply:
 
 **EOSE - End of Software Engineering support date:** EOSE is the date after which Juniper is no longer committed to furnish Software Engineering level support or “Maintenance” for the SSN Software. This means that no further Releases (e.g. service or maintenance releases or patches) will be created for the support Version of SSN Sofware. JTAC support will generally be limited to investigation and troubleshooting in an attempt to provide solutions, configuration guidelines and workarounds. 
 
-**EOS Date:** EOS Date is the date after which Juniper will not be under obligation to perform support services of any kind for the affected hardware or the embedded operating system software supporting the affected product. 
+**EOS Date:** EOS Date is the date after which Juniper will not be under obligation to perform support services of any kind for the affected software or the embedded operating system software supporting the affected product. 
 
-**End-of-Life (EOL):** End-of-Life means that the product release in question has reached the end of its “useful lifespan”. After the EOL date, Juniper Networks will no longer provide support services for the release of the product. In most cases the EOL date coincides with the End of Service (EOS) date for the release of the product.
+**End-of-Life (EOL):** End-of-Life means that the product release in question has reached the end of its “useful lifespan”. After the EOL date, Juniper Networks will no longer provide support services for the release of the product. In most cases the EOL date coincides with the End of Service (EOS) date for the product release.
 
 **End-of-Life Notification (EOLN):** The EOLN is provided by Juniper Networks to notify customers and partners that a product that is planned to reach its End-of-Life date in the near future.
 
