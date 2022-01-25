@@ -2,7 +2,10 @@
 title: Configuration Element Reference
 sidebar_label: Configuration Element Reference
 ---
+
 This section is a reference guide for the elements of the User Interface.
+
+The Configuration Element Reference guide provides reference information about the individual configuration commands, elements, and context used to build your SSR configuration. To learn the basics of the configuration workflow, refer to [Configuration Management](config_basics.md) for more information.
 
 ## access-control
 

@@ -169,7 +169,11 @@ module.exports = {
     "CLI and Element Reference": [
       "cli_reference",
       "config_reference_guide",
+<<<<<<< HEAD
       "cli_stats_reference",    
+=======
+      "cli_stats_reference",     
+>>>>>>> a9e1cf189f3af87c1bb19f17c8111defb0486190
     ],
     "Installer/Initializer Reference": [
       "installer_cli_reference",
