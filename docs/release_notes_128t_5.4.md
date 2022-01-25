@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.4.3-4
 
-**Release Date:** January 21, 2022
+**Release Date:** January 26, 2022
 
 ### New Features
 
@@ -54,6 +54,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43643 EoSVR services frozen:** Resolved an issue where EoSVR services were not setting up actions properly.
 ------
+- **I95-43684 SSC Callback In ConfigClient:** An SSC callback in Config Client was causing a long lived reference to the config client instance. This callback has been removed. 
+------
 - **I95-43794 Waypoint allocation issue on peer connectivity change:** The `waypointManager` was not looking at the peer connectivity for `modify` cases. A check for peer connectivity has been added. 
 ------
 - **I95-43799 ICMP not responding on IPs, if multiple IPs are used for one interface:** The SSR now properly handles dynamic reconfiguration for additional ip-addresses.
@@ -68,7 +70,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43943 SCTP packets have 0 for source and destination ports in the SCTP packet header:** Resolved an issue where the SCTP header is being mishandled.
 ------
+- **I95-44059 Conductor Latency issue:** The API cache was constantly requesting downstream router version. The cache instantiation in the API client has been updated and the issue has been resolved. 
+------
 - **I95-44095 VRRP Manager only sending GARPs on some VLANs:** Resolved an issue where the VRRP Manager was only sending GARPs on some VLANs when the advertise timer was firing.
+------
+- **I95-44108 Interfaces were failing to GARP when withdrawing from redundancy:** Resolved an issue where interfaces withdrawing from redundancy were not advertising the change.
+------
+- **I95-44115 Conductor Failover fails, with no connection to Branch-Nodes:** Added checks for both ssh status code and uptime to determine the state of the connection.
 ------
 - **I95-44129 Issue when converting management over forwarding config generation:** Resolved an issue where config generation was throwing an error when generating management over forwarding services for PPPoE type device-interfaces.
 
