@@ -101,7 +101,7 @@ By using SVR, the SSR creates sessions to transport directional, encrypted, tunn
 
 By default, native TCP sessions use TCP, and UDP is used for all other session types. However, if firewall detection is enabled and [triggered](#firewall_detector), all traffic destined for a peer transitions to UDP. 
 
-You can manually configure traffic to use UDP for transport by modifying the [`udp-transform`](config_reference_guide.md#udp-transform) sub-element under [network-interface > adjacency](config_reference_guide.md#adjacency) or [network-interface > neighborhood]( config_reference_guide.md#neighborhood).
+You can manually configure traffic to use UDP for transport by modifying the [`udp-transform`](config_reference_guide.md#udp-transform) sub-element under [network-interface > adjacency](config_reference_guide.md#adjacency) or [network-interface > neighborhood](config_reference_guide.md#neighborhood).
 
 #### Port Ranges
 
