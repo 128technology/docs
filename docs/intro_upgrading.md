@@ -55,6 +55,10 @@ Before upgrading the SSR Software, use the following procedure to stop the the s
 ## Upgrading the Conductor 
 Use the following procedures to upgrade a Conductor from the GUI or using the Interactive Installer (linux shell).
 
+:::note
+Before upgrading a conductor, it is recommended to [export the running configuration](config_basics.md/#importexport).
+:::
+
 ### Upgrade using the GUI
 
 1. Select **Conductor** under Authority.
@@ -74,6 +78,10 @@ Use the [Interactive Installer](#upgrading-using-the-interactive-installer) proc
 
 ## Upgrading a Router 
 Use the following procedures to upgrade a Router from either the GUI or the PCLI.
+
+:::note
+The Router software version cannot be higher than the software version installed on the Conductor.
+:::
 
 ### Upgrade using the Conductor's PCLI
 
@@ -114,7 +122,7 @@ The Interactive Installer can be used to upgrade a conductor or a router.
    :::note
    If you are running an older version of the Installer (prior to version 2.7.0), it is strongly recommended that you first upgrade to the latest version of the Installer. If the upgrade is not possible, and you are running an Installer version prior to 2.7.0, use the Screen utility when performing an upgrade in interactive mode to avoid SSH session timeout. Installer versions 2.7.0 and above do not need to use the Screen utility.
 
-   To upgrade the installer run `dnf update 128T-installer` from the linux prompt.
+   To upgrade the installer, run `dnf update 128T-installer` from the linux prompt.
    :::
 
 2. Create a screen and attach to it.
