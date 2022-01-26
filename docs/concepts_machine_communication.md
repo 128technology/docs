@@ -76,7 +76,7 @@ admin@labsystem1.fiedler# show udp-transform router newton
                             burlington   enabled    TCP SYN; Mid-flow; TCP SYN Jumbo;
 ```
 
-The firewall detector function sends deliberately malformed, out-of-order, and missequenced packets in bursts of four packets every five minutes (by default). This time may be dilated if you are assured there is no firewall on the path, nor any possibility of the path changing to include a stateful device at any point in the future. If you know there is a firewall device in the path, you can force the `udp-transform` to `always-transform`, which suppresses the firewall detector packets entirely.
+The firewall detector function sends deliberately malformed, out-of-order, and missequenced packets in bursts of four packets every five minutes (by default). This time may be increased if you are certain there is no firewall on the path, nor any possibility of the path changing to include a stateful device. If you know there is a firewall device in the path, you can force the `udp-transform` to `always-transform`, which suppresses the firewall detector packets entirely.
 
 ### Path MTU Discovery
 | Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
@@ -105,12 +105,12 @@ You can manually configure traffic to use UDP for transport by modifying the [`u
 
 #### Port Ranges
 
-The default range of ports used for configuring waypoints with SVR is 16,385 through 65,533.
+The default range of ports used for configuring waypoints with SVR is 16,385 through 65,533. When sending traffic to a peer, the 128T will allocate an even numbered waypoint for itself and an odd numbered waypoint for its peer.
 
 If you need to limit the ports or port range the SSR uses for receiving traffic, a `port-range` can be configured under the `neighborhood`. This tells peer SSRs to constrain the destination port range used when communicating with another router. Note that when manually specifying a port range, port numbers 1025 to 16383 can also be used. 
 
 #### Example:
-Let's say you want to utilize UDP for transport, but do not want to open up all the default ports. To limit the number of ports open on your firewall, you choose to specify a port range of 10,000 to 12,000. With each new waypoint, another 1,000,000 active sessions are added. Even with a small port range selection you can easily support 40,000 active users at 25 active sessions per user.
+Let's say you want to utilize UDP for transport, but do not want to open up all the default ports. To limit the number of ports open on your firewall, you choose to specify a port range of 10,000 to 12,000. With each new waypoint, thousands of active sessions are added. Even with a small port range selection you can easily support many active users.
 
 ## Router to Conductor Connectivity
 Each deployed router (and in many cases, individual nodes within that router) has multiple concurrent connections to each conductor node within its authority. The primary connection between a router and a conductor is using 930/TCP, which is an encrypted SSH connection that bears most router-to-conductor inter-process communication (IPC). The secondary connetion is that between a router's _salt-minion_ and a conductor's _salt-master_, which leverages 4505-4506/TCP.
