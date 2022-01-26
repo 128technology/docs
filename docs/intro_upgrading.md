@@ -112,7 +112,9 @@ The Interactive Installer can be used to upgrade a conductor or a router.
 1. Launch a Linux command prompt window on the node you wish to upgrade.
 
    :::note
-   If you are running an older version of the Installer (prior to version 2.7.0), it is strongly recommended to use the Screen utility when performing an upgrade in interactive mode to avoid SSH session timeout. Installer versions 2.7.0 and above do not need to use the Screen utility.
+   If you are running an older version of the Installer (prior to version 2.7.0), it is strongly recommended that you first upgrade to the latest version of the Installer. If the upgrade is not possible, and you are running an Installer version prior to 2.7.0, use the Screen utility when performing an upgrade in interactive mode to avoid SSH session timeout. Installer versions 2.7.0 and above do not need to use the Screen utility.
+
+   To upgrade the installer run `dnf update 128T-installer` from the linux prompt.
    :::
 
 2. Create a screen and attach to it.
@@ -131,7 +133,7 @@ The Interactive Installer can be used to upgrade a conductor or a router.
    sudo install128t
    ```
 
-   **Result**:  The SSR splash screen appears.
+   **Result**: The SSR splash screen appears.
    :::note
    The `install128t` application checks for an available update. If a newer version is detected, it requests that you update. 
    :::
