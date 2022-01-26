@@ -1,7 +1,7 @@
 ---
 title: Product Software Lifecycle Support Policy
 sidebar_label: Software Support Policy
-description: "This document defines the product lifecycle support policy for Juniper Networks’ software products.  The policy includes both software maintenance, software support, and end-of-life."
+description: "This document defines the product lifecycle support policy for Juniper Networks, Inc.'s SSN software products.  The policy includes both software maintenance, software support, and end-of-life."
 ---
 
 ## Overview and Definitions
