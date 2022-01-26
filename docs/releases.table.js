@@ -518,7 +518,7 @@ export const columns = [
     sortType: DateSort
   },
   {
-    Header: "End of Maintenance",
+    Header: "End of Software Engineering support",
     accessor: "endOfMaintenance",
     className: "pester-data-table",
     sortType: DateSort
