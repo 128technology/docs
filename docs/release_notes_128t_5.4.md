@@ -24,6 +24,62 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.4.3-8
+
+**Release Date:** January 27, 2022
+
+### New Features
+
+- **I95-39193 Extend Timeout after completion of three way handshake:** The TCP timer for the `initial-timeout` is now configurable per session-type.
+
+### Resolved Issues
+
+- **I95-33730 The `Completed in .* seconds` includes the time waiting for the user to confirm:** The execution time now only includes the time spent executing a command.  
+------
+- **I95-41108 EthoSVR doesn't restart the session when all peer paths are disabled:** This is not specific to EthoSVR and can happen to any session that is unidirectional. This issue has been resolved. 
+------
+- **I95-41320 When quitting the PCLI, a slow PCLI response may result in traceback messages:** This is not harmful, and this situation is now handled internally. 
+------
+- **I95-42364 `off-subnet-reverse-arp-mac-learning` does not work when `outbound-only` is configured:** The learned MAC is now saved in the reverse flow placeholder for use when the flow is established. 
+------
+- **I95-42608 BGP over SVR not able to open BGP session when routingManager is active on different node than interface:** This has been resolved by sending the packet to the node where routingManager is active via the inter node path.
+------
+- **I95-42813 Access Manager reports Reload Audit rules failed:** Resolved an issue where the per-user home directory audit rules were being generated without new lines, causing them to be appended to the same line.
+------
+- **I95-43264/I95-43624 CVE Issues:** The latest Security vulnerabilities have been identified and addressed. 
+------
+- **I95-43442 BGP peering breaks when VRRP is enabled on the interface:** Resolved an issue with transitioning the redundancy state of network interfaces.
+------
+- **I95-43591 When deleting a linux user, the default bash is not restored:** A protection has been added to the SSR to disallow the creation of a user that already exists on the linux system.
+------
+- **I95-43643 EoSVR services frozen:** Resolved an issue where EoSVR services were not setting up actions properly.
+------
+- **I95-43684 SSC Callback In ConfigClient:** An SSC callback in Config Client was causing a long lived reference to the config client instance. This callback has been removed. 
+------
+- **I95-43794 Waypoint allocation issue on peer connectivity change:** The `waypointManager` was not looking at the peer connectivity for `modify` cases. A check for peer connectivity has been added. 
+------
+- **I95-43799 ICMP not responding on IPs, if multiple IPs are used for one interface:** The SSR now properly handles dynamic reconfiguration for additional ip-addresses.
+------
+- **I95-43823 Cannot configure IP prefix in access policy from GUI:** Resolved an issue that prevented the SAVE button from activating.
+------
+- **I95-43833 Unable to commit new configuration after upgrade to 5.4.1:** Resolved an issue where missing IDs in the candidate configuration caused an exception during a commit.
+------
+- **I95-43839 Spaces in config filename cause issues importing the config after a rollback:** Spaces in filenames are no longer allowed, and the encoding of those spaces is now blocked. 
+------
+- **I95-43938 StateMonitor does not sync different files with the same modified time:** For files with identical timestamps, a tiebreaker has been added to sync the files. 
+------
+- **I95-43943 SCTP packets have 0 for source and destination ports in the SCTP packet header:** Resolved an issue where the SCTP header is being mishandled.
+------
+- **I95-44059 Conductor Latency issue:** The API cache was constantly requesting downstream router version. The cache instantiation in the API client has been updated and the issue has been resolved. 
+------
+- **I95-44095 VRRP Manager only sending GARPs on some VLANs:** Resolved an issue where the VRRP Manager was only sending GARPs on some VLANs when the advertise timer was firing.
+------
+- **I95-44108 Interfaces were failing to GARP when withdrawing from redundancy:** Resolved an issue where interfaces withdrawing from redundancy were not advertising the change.
+------
+- **I95-44115 Conductor Failover fails, with no connection to Branch-Nodes:** Added checks for both ssh status code and uptime to determine the state of the connection.
+------
+- **I95-44129 Issue when converting management over forwarding config generation:** Resolved an issue where config generation was throwing an error when generating management over forwarding services for PPPoE type device-interfaces.
+
 ## Release 5.4.2-5
 
 **Release Date:** December 22, 2021
@@ -149,6 +205,8 @@ This release replaces the existing `5.4.0-104` release.
 - **i95-40325 Configurable Metrics Retention:** Metrics retention intervals and storage duration values are now user configurable. See [In-Memory Metrics](config_in-memory_metrics.md) for more information.
 ------
 - **I95-40436 Updated Application ID Domain Data:** Application Identification can be configured to automatically download updated domain and application datatsets daily, weekly (default), or monthly. For more information, see [Auto Update the Domain List](config_domain-based_web_filter.md#auto-update-the-domain-list).
+------
+- **I95-40416 Google Cloud Platform Support:** The SSR now supports the Google Cloud Platform (GCP).
 ------
  - **I95-40438 Support for Lenovo X722:** Upgrades to the DPDK version now provide support for the Lenovo Ethernet Connection X722 for 10GbE SFP+.
 ------

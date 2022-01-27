@@ -4,7 +4,7 @@ sidebar_label: Supported NICs and Drivers
 ---
 ## Certified NICs and Drivers
 
-The following NICs and drivers have been tested and are certified by Juniper / 128 Technology for use with the Session Smart Router / 128T.
+The following NICs and drivers have been tested and are certified by Juniper for use with the Session Smart Router (SSR).
 
 ### Intel
 
@@ -30,7 +30,7 @@ The following NICs and drivers have been tested and are certified by Juniper / 1
 
 ### Mellanox 
 
-| Device ID | Driver | SSR/128T Version Introduced |
+| Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- |
 | MT28800 Family [ConnectX-5 Ex Virtual Function] (101a) | net_mlx5 | 4.5.0 |
 | MT28800 Family [ConnectX-5 Ex] (1019) | net_mlx5 | 4.5.0 |
@@ -47,7 +47,7 @@ The Vendor ID and Device ID are represented in the example above as [8086:100e].
 
 ## Compatible NICs and Drivers
 
-Additional NICs and drivers may be compatible with the SSR/128T, but have not been fully tested by Juniper/128 Technology, and may not fully support all features of the SSR/128T. 
+Additional NICs and drivers may be compatible with the SSR, but have not been fully tested by Juniper/128 Technology, and may not fully support all features of the SSR. 
 
 :::note
 128 Technology strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third-party. See [Compatible Platform Support](about_supported_platforms.md#support-for-128t-on-compatible-platforms).
@@ -56,14 +56,14 @@ Additional NICs and drivers may be compatible with the SSR/128T, but have not be
 Compatible platforms have the following characteristics:
 * Meets [minimum platform specifications](about_supported_platforms.md#minimum-platform-specifications)
 * No commitment to keep up with third-party supplier changes
-* No commitment to support device on future 128T versions
+* No commitment to support device on future SSR versions
 * May require additional configuration upon implementation (vs. out of box experience)
 * Performance benchmarking not provided
 * Supporting documentation not provided
 
-See [128T Compatible Platforms](about_supported_platforms.md#128t-compatible-platform) for additional definitions and requirements for compatible platforms. 
+See [SSR Compatible Platforms](about_supported_platforms.md#128t-compatible-platform) for additional definitions and requirements for compatible platforms. 
 
-The list below includes those devices that are compatible with the SSR/128T, but have not been tested by Juniper/128 Technology. 
+The list below includes those devices that are compatible with the SSR, but have not been tested by Juniper/128 Technology. 
 
 ### Searching the List
 
@@ -78,7 +78,7 @@ Additionally, the vendor name and ID is helpful to identify the NIC.
 
 Searching for the device ID 100e will return two results from different vendors. Searching for the device name `82540EM Gigabit Ethernet Controller` returns the following: 
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Intel Corporation (8086) | 82540EM Gigabit Ethernet Controller (100e) | net_e1000_em | 4.5.0 |
 
@@ -98,7 +98,7 @@ Use the links below to browse the list of a specific vendor.
 
 ### Amazon
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Amazon.com, Inc. (1d0f) | Elastic Network Adapter (ENA) (ec20) | net_ena | 4.5.0 | 
 
