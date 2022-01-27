@@ -280,7 +280,7 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-43028 Downloaded software for the router does not show up on secondary conductor:** Resolved this issue so that full output is delivered to all nodes.
 ------
-- **I95-43083 ISO missing Rescue Boot Image:** Replacing packages that were removed during upgrade.
+- **I95-43083 ISO imaged system missing rescue boot entry:** Replaced packages that were missing in versions 5.1.6 and 5.1.7.
 ------
 - **I95-43135 Rare Race condition in an HA configuration:** Resolved a rare race condition that may occur if an `export config` command is run during a failover.
 ------

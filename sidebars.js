@@ -72,7 +72,6 @@ module.exports = {
           "config_ospf",
           "config_dscp_steering",
           "config_vrf_learning",
-          "config_reference_guide",
           "config_audit_event",
           "config_dhcp",
           "config_dns_proxy",
@@ -170,8 +169,9 @@ module.exports = {
       "bcp_service-policy_defaults",
       "bcp_tenants",
     ],
-    "CLI Reference": [
+    "CLI and Element Reference": [
       "cli_reference",
+      "config_reference_guide",
       "cli_stats_reference",
     ],
     "Installer/Initializer Reference": [

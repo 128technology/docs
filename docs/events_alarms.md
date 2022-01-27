@@ -286,8 +286,8 @@ sidebar_label: Alarms
 
 | Cause                                              | Troubleshooting Step                                         |
 | -------------------------------------------------- | ------------------------------------------------------------ |
-| Intermittent process consuming large amount of CPU | If the alarm triggers and clears intermittently this could indicate a periodic load spike or intermittent process workload. Check the current cpu utilization of all processes in the system by using the linux command `top` or the PCLI command `show stats process cpu`. If the processes “highway” is consuming a large amount of CPU this could indicate a high network load event. |
-| Process consistently consuming large amount of CPU | If the alarm is constantly active this could indicate an under-provisioned system. Check the current cpu utilization of all processes in the system by using the linux command `top` or the PCLI command `show stats process cpu. If the process “highway” is consuming a large amount of CPU this could indicate a high network load. Contact 128T support for guidance on provisioning the system. |
+| Intermittent process consuming large amount of CPU | If the alarm triggers and clears intermittently this could indicate a periodic load spike or intermittent process workload. Check the current cpu utilization of all processes in the system by using the linux command `top` or the PCLI command `show stats process cpu`. |
+| Process consistently consuming large amount of CPU | If the alarm is constantly active this could indicate an under-provisioned system. Check the current cpu utilization of all processes in the system by using the linux command `top` or the PCLI command `show stats process cpu`. Contact 128T support for guidance on provisioning the system. |
 
 ------
 
