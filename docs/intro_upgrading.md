@@ -31,9 +31,9 @@ Examples:
 - Conductor running version 5.2.1, managing Routers running version 4.5.13: Supported.
 - Conductor running version 4.5.13, managing Routers running version 4.2.9: Not supported, but may work.
 
-### Stopping the 128T Routing Software
+### Stopping the SSR Software
 
-Before upgrading the 128T Routing Software, use the following procedure to stop the the software.
+Before upgrading the SSR Software, use the following procedure to stop the the software.
 
 1. Launch a Linux shell window.
 2. Execute the command: 
@@ -52,7 +52,38 @@ Before upgrading the 128T Routing Software, use the following procedure to stop 
    
 5. Close the Linux shell.
 
-## Upgrading using the Conductor's PCLI
+## Upgrading the Conductor 
+Use the following procedures to upgrade a Conductor from the GUI or using the Interactive Installer (linux shell).
+
+:::note
+Before upgrading a conductor, it is recommended to [export the running configuration](config_basics.md/#importexport).
+:::
+
+### Upgrade using the GUI
+
+1. Select **Conductor** under Authority.
+2. In the **Node: Conductor** panel, select the **Upgrade SSR** icon (the arrow within a circle). This icon displays green when upgrades are available. 
+3. In the **Upgrade SSR** window, use the drop down to select the SSR version for the upgrade. 
+4. Click **Proceed**.
+
+The Upgrade screen displays the Raw Log with the upgrade progress. Once the upgrade is complete, the Conductor is restarted and the GUI is refreshed. 
+
+### Using the Interactive Installer
+
+:::important
+For systems with both primary and secondary conductors, it is a best practice to upgrade only one conductor at a time. 
+:::
+
+Use the [Interactive Installer](#upgrading-using-the-interactive-installer) procedure to upgrade the conductor from a linux shell. 
+
+## Upgrading a Router 
+Use the following procedures to upgrade a Router from either the GUI or the PCLI.
+
+:::note
+The Router software version cannot be higher than the software version installed on the Conductor.
+:::
+
+### Upgrade using the Conductor's PCLI
 
 For routers managed by an SSR Conductor, upgrades can be initiated via the SSR conductor's PCLI. This upgrade process is completed in two stages: *download* followed by *upgrade*.
 
@@ -71,23 +102,27 @@ As an administrator-level user, log into the conductor's PCLI.
 
 The conductor's _automated provisioner_ will upgrade both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
 
-## Upgrading using the Conductor's GUI
+### Upgrade using the Conductor's GUI
 
 Similar to the process for upgrading using the PCLI, the upgrade process using the GUI is done in two stages: *download* and *upgrade*.
 
-1. Navigate to the Router page in the Conductor's GUI. Routers that have available upgrades will indicate as such using an upgrade badge in the router list.
-2. Click on the Upgrade SSR icon (the arrow within a circle) next to your router. Result: a list of upgrade and download options appears. This list is filterable if the list of available options grows large.
-3. Click on the target release in the Available Downloads section of the list. You will be asked to confirm the operation.<br/>Result: the SSR will begin downloading the software. Click on the router in the router list to monitor its progress.
-4. Once complete, click the Upgrade SSR icon again, and select the target software release from the Available Upgrades list. You will again be asked to confirm this operation.<br/>Result: the router will now begin the upgrade process.
+1. Navigate to the Router page in the Conductor's GUI. Routers that have available upgrades are indicated with the green **Upgrade SSR** icon (the arrow within a circle) in the router list.
+2. Click on the **Upgrade SSR** icon next to your router. A list of upgrade and download options appears. This list is filterable if the list grows large.
+3. Click on the target release in the Available Downloads section of the list. 
+4. Confirm the operation to begin downloading the software. Clicking on the router in the router list shows download progress.
+5. Once complete, click the **Upgrade SSR** icon again, and select the target software release from the Available Upgrades list. Confirm this operation to begin the upgrade process.
 
-The Automated Provisioner will upgrade both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
+The Automated Provisioner upgrades both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
 
 ## Upgrading using the Interactive Installer
+The Interactive Installer can be used to upgrade a conductor or a router.
 
 1. Launch a Linux command prompt window on the node you wish to upgrade.
 
    :::note
-   To avoid SSH session timeout during installation, it is strongly recommended to use the Screen utility when performing an upgrade in interactive mode.
+   If you are running an older version of the Installer (prior to version 2.7.0), it is strongly recommended that you first upgrade to the latest version of the Installer. If the upgrade is not possible, and you are running an Installer version prior to 2.7.0, use the Screen utility when performing an upgrade in interactive mode to avoid SSH session timeout. Installer versions 2.7.0 and above do not need to use the Screen utility.
+
+   To upgrade the installer, run `dnf update 128T-installer` from the linux prompt.
    :::
 
 2. Create a screen and attach to it.
@@ -106,23 +141,37 @@ The Automated Provisioner will upgrade both nodes in a high availability router 
    sudo install128t
    ```
 
-   **Result**:  The SSR splash screen appears.
+   **Result**: The SSR splash screen appears.
    :::note
-   The `install128t` application will check to see if it has an update available, and will ask that you upgrade if it detects a newer version is available.
+   The `install128t` application checks for an available update. If a newer version is detected, it requests that you update. 
    :::
 
 5. Press the **enter** key to select **Begin** and start the installation wizard.
 
-6. When prompted, select **Upgrade**.<br/>**Result**: The application queries 128 Technology's software repository for new software.
+   :::note
+   Use the spacebar to move between entries in the installer windows.
+   :::
+
+6. When prompted, select **Upgrade**.
+   
+   ![Conductor Upgrade](/img/conductor_upgrade1.png)
+
+   **Result**: The application queries the SSR software repository for the latest software.
 
 7. Select the desired software version from the list of available options.
 
-8. Once the upgrade is complete, press the **enter** key to select **Yes** to start your software.
+   ![Version Selection dialog](/img/conductor_upgrade2_version.png)
+
+8. Confirm the upgrade to begin the upgrade process.
+
+   ![Confirm Upgrade](/img/conductor_upgrade3_confirm.png)
+
+9. Once the upgrade is complete, press the **enter** key to select **Yes** to start your software.
    :::note
    Your output may vary based upon the nature of the upgrade, occasion, various packages, and dependencies that SSR requires as part of the SSR Routing Software upgrade.
    :::
    
-9. Detach from the Screen utility.
+9. Detach from the Screen utility (if applicable).
    ```
    ctrl+a
    d
