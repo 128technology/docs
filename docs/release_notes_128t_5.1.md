@@ -19,6 +19,50 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
+## Release 5.1.8-1
+
+**Release Date:** January 18, 2022
+
+### New Features
+
+- **I95-39193 Extend Timeout after completion of three way handshake:** The TCP timer for the `initial-timeout` is now configurable per session-type.
+
+### Resolved Issues
+
+- **I95-41108 EthoSVR not restarting the session when all peer paths are disabled:** This is not specific to EthoSVR and can happen to any session that is unidirectional. This issue has been resolved. 
+------
+- **I95-41802/I95-43264 CVE Issues:** The latest Security vulnerabilities have been identified and addressed.
+------
+- **I95-41876/I95-43624 CVE on CentOS 7:** The latest CentOS 7 security vulnerabilities have been identified and addressed.
+------
+- **I95-42364 `off-subnet-reverse-arp-mac-learning` does not work when `outbound-only` is configured:** The learned MAC is now saved in the reverse flow placeholder for use when the flow is established. 
+------
+- **I95-43066 Requests for metrics are timing out:** Resolved an issue that when the buffer queue is full, the message is dropped, but the event was not handling the inflight message.
+------
+- **I95-43389 Salt Minion file truncation:** This issue has been resolved.
+------
+- **I95-43454 Plugin highstate not sync'd:** When applying DNS cache configuration changes via PCLI or GUI, highstate is not being applied from the conductor to router. This issue was resolved by removing support of legacy pillar generation for plugins.
+------
+- **I95-43591 When deleting a linux user, the default bash is not restored:** A protection has been added to the SSR to disallow the creation of a user that already exists on the linux system.
+------
+- **I95-43604 NAT keepalive problem:** Resolved an issue where the keepalive cache entry was being removed when the flow was invalidated.
+------
+- **I95-43643 EoSVR services frozen:** Resolved an issue where EoSVR services were not setting up actions properly.
+------
+- **I95-43693 Password change:** The SSR now provides a warning message indicating that when the password is changed on an admin account.
+------
+- **I95-43698 DHCP address shows same address on HA nodes when using same network interface name:** Resolved an issue where a node would attempt to update the address of an interface if there is a non-HA interface on the other node with the same name that was being updated.
+------
+- **I95-43799 ICMP not responding on IPs, if multiple IPs are used for one interface:** The SSR now properly handles dynamic reconfiguration for additional ip-addresses.
+------
+- **I95-43817 GUI displays interfaces as "Up" when it is actually provisionally down:** This issue has been resolved. 
+------
+- **I95-43839 Spaces in config filename cause issues importing the config after a rollback:** Spaces in filenames are no longer allowed, and the encoding of those spaces is now blocked. 
+------
+- **I95-43911 Adding a Resource Group in the GUI displays a blank page:** Resolved an issue with an invariant that would generate the blank page. 
+------
+- **I95-43938 StateMonitor does not sync different files with the same modified time:** For files with identical timestamps, a tiebreaker has been added to sync the files. 
+
 ## Release 5.1.7-1
 
 **Release Date:** December 9, 2021
