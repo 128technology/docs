@@ -169,7 +169,7 @@ module.exports = {
     "CLI and Element Reference": [
       "cli_reference",
       "config_reference_guide",
-      "cli_stats_reference",
+      "cli_stats_reference",    
     ],
     "Installer/Initializer Reference": [
       "installer_cli_reference",

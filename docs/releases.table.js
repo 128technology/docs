@@ -6,6 +6,13 @@ import React from "react";
 // ----------------------------------------------------------------------------
 export const releases = [
   {
+    version: '5.4.3',
+    url:'release_notes_128t_5.4#release-543-8',
+    releaseDate: 'January 27, 2022',
+    endOfMaintenance: 'May 18, 2022',
+    endOfSupport: 'November 18, 2022',
+  },
+  {
     version: '5.1.8',
     url:'release_notes_128t_5.1#release-518',
     releaseDate: 'January 18, 2022',
@@ -518,7 +525,7 @@ export const columns = [
     sortType: DateSort
   },
   {
-    Header: "End of Maintenance",
+    Header: "End of Software Engineering support",
     accessor: "endOfMaintenance",
     className: "pester-data-table",
     sortType: DateSort

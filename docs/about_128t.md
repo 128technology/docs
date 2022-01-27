@@ -1,9 +1,9 @@
 ---
-title: 128T Networking Platform
-sidebar_label: 128T
+title: Session Smart Networking Platform
+sidebar_label: Session Smart Networking Platform
 ---
 
-## What is the 128T Networking Platform?
+## What is the Session Smart Networking Platform?
 
 Networks exist to connect users to services and applications, and network design should start with those services at the core. Secure Vector Routing (SVR) is a new routing architecture that enables the network to differentiate the way it delivers applications and services with simplicity, security, and scalability in mind. It replaces tunnel-based network overlays and inefficient provisioning systems with distributed control, simple intelligent service-based routing, and in-band (data plane) session-based signaling. SVR is fully compatible and interoperable with existing network protocols and architectures, allowing it to be gradually introduced into an existing IP network without affecting the network endpoints or hosts.
 
