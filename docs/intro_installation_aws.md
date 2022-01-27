@@ -3,7 +3,7 @@ title: Installing from the AWS Marketplace
 sidebar_label: Installing from the AWS Marketplace
 ---
 
-Partnering with Amazon, you can install a 128T Conductor and a 128T Session Smart Router using Amazon Web Services (AWS). AWS is a secure cloud platform that offers computing power, data storage, content delivery, flexibility, scalability, and reliability for software products. 
+Partnering with Amazon, you can install a Conductor and a Session Smart Router (SSR) using Amazon Web Services (AWS). AWS is a secure cloud platform that offers computing power, data storage, content delivery, flexibility, scalability, and reliability for software products. 
 :::note
 For more information on Amazon Web Services, refer to the [AWS website](https://aws.amazon.com/what-is-aws/).
 :::
@@ -49,20 +49,20 @@ For more information on Amazon Web Services, refer to the [AWS website](https:/
 21. On the _Launch Status_ page, click **View Instances**.
 22. Record the instances IP address.
 23. Launch a command window prompt.
-24. Enter the IP address of the instance. **Result:** The interactive 128T Installer application launches.
+24. Enter the IP address of the instance. **Result:** The interactive SSR Installer application launches.
 25. When prompted by the installer, press the **Enter** key to select Begin.
 
-Follow the instructions as outlined in [Install the 128T Routing Software](#install-using-128t-installer)
+Follow the instructions as outlined in [Install the SSR Routing Software](#install-using-128t-installer)
 
-## Install 128T From Amazon Web Services Using ZTP
+## Install SSR From Amazon Web Services Using ZTP
 
 :::important
-Deploying a 128T router using Zero Touch Provisioning via tags is currently disabled. We are currently working on updating the AMIs in the marketplace to enable back the functionality.
+Deploying an SSR using Zero Touch Provisioning via tags is currently disabled. We are currently working on updating the AMIs in the marketplace to enable back the functionality.
 :::
 
-After installing a 128T conductor, you can use ZTP to install your 128 routers from Amazon Web Services.
+After installing the conductor, you can use ZTP to install your SSR routers from Amazon Web Services.
 
-### To install 128T from AWS using ZTP:
+### To install SSR from AWS using ZTP:
 
 1. Launch a web browser and navigate to [https://aws.amazon.com/](https://aws.amazon.com/).
 2. Login to AWS with your account. 
@@ -81,8 +81,8 @@ After installing a 128T conductor, you can use ZTP to install your 128 routers
 12. Click **Next: Add Tags**.
 13. On the the _Step 5: Add Tags_ page, click **Add Tags**.
 14. Click inside the Key column, select the following tags, and enter the tag definition in the Value column.
-- conductor-ip-primary: populate this with the IP address of your 128T conductor
-- asset-id: populate this with the asset identification you want to assign to the 128T router (optional)
+- conductor-ip-primary: populate this with the IP address of your conductor
+- asset-id: populate this with the asset identification you want to assign to the SSR router (optional)
 15. Click **Next: Configure Security Group**.
 16. On the _Step 6: Configure Security Group_ page, click **select an existing security group** and choose one from the list.
   > If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
@@ -93,11 +93,11 @@ After installing a 128T conductor, you can use ZTP to install your 128 routers
   > If the desired key pair is not listed click **Create a new key pair**, enter a name in the Key pair name field and click **Download Key Pair**.
 21. Check the acknowledgment check box and then click **Launch Instances**.
 22. On the _Launch Status_ page, click **View Instances**.
-23. Connect and assign this router/instance to your 128T conductor either using the GUI or PCLI. **Result**: The router installs automatically.
+23. Connect and assign this router/instance to your conductor either using the GUI or PCLI. **Result**: The router installs automatically.
 
-## Configure 128T Using AWS
+## Configure SSR Using AWS
 
-After  installing 128T using Amazon Web Services, you must then create and apply configuration elements. During the configuration process you'll set up the following:
+After installing SSR using Amazon Web Services, you must then create and apply configuration elements. During the configuration process you'll set up the following:
 
 - Route Tables
 - Internet Gateways
