@@ -102,12 +102,19 @@ function Feature({link, title, description}) {
   );
 }
 
+function MergeBaseUrl({path, description}) {
+  const ref = useBaseUrl(path);
+  return (
+    <img src={ref} alt={description} />
+  );
+}
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={`Home`}
+      title={`${siteConfig.title}`}
       description="The source for documentation of the 128T Session Smart Routing Platform.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
@@ -131,7 +138,7 @@ function Home() {
                 <p>Get started now building services with the 128T Session Smart Router.</p>
               </div>
               <div className={classnames('col col--8', styles.feature)}>
-                <img src="/img/128t-components.png" alt="128T Networking Platform" />
+                <MergeBaseUrl path="img/128t-components.png" description="128T Networking Platform" />
               </div>
             </div>
           </div>

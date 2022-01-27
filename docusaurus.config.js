@@ -1,8 +1,12 @@
+const path = require('path');
+
 module.exports = {
-  title: '128T Docs',
-  tagline: 'The documentation source for the 128T Networking Platform',
-  url: 'https://docs.128technology.com',
-  baseUrl: '/',
+  title: 'SSN Docs',
+  tagline: 'The documentation source for the Session Smart Networking Platform',
+  //url: 'https://docs.128technology.com',
+  url: 'https://uat.juniper.net',
+  //baseUrl: '/',
+  baseUrl: '/documentation/us/en/software/session-smart-router/',
   favicon: 'img/favicon.ico',
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
@@ -34,7 +38,7 @@ module.exports = {
           position: 'right',
         },
         {
-          href: 'https://www.128technology.com/',
+          href: 'https://www.juniper.net/',
           label: 'Company',
           position: 'right',
         },
@@ -42,11 +46,6 @@ module.exports = {
     },
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} Juniper Networks, Inc.`,
-    },
-    googleAnalytics: {
-      trackingID: 'UA-167298415-2',
-      // Optional fields.
-      anonymizeIP: true, // Should IPs be anonymized?
     },
   },
   presets: [
