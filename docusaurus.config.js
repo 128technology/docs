@@ -1,12 +1,10 @@
 const path = require('path');
 
 module.exports = {
-  title: '128T Docs',
-  tagline: 'The documentation source for the 128T Networking Platform',
-  //url: 'https://docs.128technology.com',
-  url: 'https://uat.juniper.net',
-  //baseUrl: '/',
-  baseUrl: '/documentation/us/en/software/session-smart-router/',
+  title: 'SSN Docs',
+  tagline: 'The documentation source for the Session Smart Networking Platform',
+  url: 'https://docs.128technology.com',
+  baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
@@ -38,7 +36,7 @@ module.exports = {
           position: 'right',
         },
         {
-          href: 'https://www.128technology.com/',
+          href: 'https://www.juniper.net/',
           label: 'Company',
           position: 'right',
         },
@@ -64,7 +62,13 @@ module.exports = {
     ],
   ],
   plugins: [
-    path.resolve(__dirname, './src/components/adobe-analytics-plugin'),
     './src/plugins/release-notes-api.js',
   ],
+  customFields: {
+    marvisSearch: {
+      docSource: "128t",
+      numResults: 10,
+      proxyURL: 'https://raq48a0wrg.execute-api.us-east-1.amazonaws.com/prod/marvis_docs_api_proxy',
+    },
+  },
 };

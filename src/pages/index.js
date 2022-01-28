@@ -114,7 +114,7 @@ function Home() {
   const {siteConfig = {}} = context;
   return (
     <Layout
-      title={`Home`}
+      title={`${siteConfig.title}`}
       description="The source for documentation of the Juniper Session Smart Routing Platform.">
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
@@ -138,7 +138,7 @@ function Home() {
                 <p>Get started now building services with the Session Smart Router.</p>
               </div>
               <div className={classnames('col col--8', styles.feature)}>
-                <MergeBaseUrl path="img/128t-components.png" description="128T Networking Platform" />
+                <MergeBaseUrl path="img/128t-components.png" description="Session Smart Networking Platform" />
               </div>
             </div>
           </div>
