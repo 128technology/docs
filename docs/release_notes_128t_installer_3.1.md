@@ -11,7 +11,7 @@ sidebar_label: '3.1'
 
 ### Resolved Issues
 
-- **IN-472 CVE vulnerability:** An automatic update of CentOS is now generated to address this vulnerability. 
+- **IN-472 CVE-2020-14352:** This vulnerability has been addressed. 
 
 ## Release 3.1.1
 
