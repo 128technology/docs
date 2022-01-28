@@ -84,6 +84,8 @@ function Modal({onClose}) {
   const [isLoading, setIsLoading] = React.useState(false);
   const [hoveredIdx, setHoveredIdx] = useState(-1);
 
+  const searchOptions = siteConfig.customFields.marvisSearch;
+
   React.useEffect(() => {
     const existing = document.body.style.overflowY;
     document.body.style.overflowY = 'hidden';
@@ -101,21 +103,18 @@ function Modal({onClose}) {
     const t = setTimeout(() => {
       setIsLoading(true);
 
-      fetch(
-        `https://ijx9l93j28.execute-api.us-east-1.amazonaws.com/default/Func`,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            query: search,
-            count: 10,
-            doc_source: '128t',
-          }),
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-          },
-          signal: abort.signal,
+      fetch(`${searchOptions.proxyURL}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          query: search,
+          count: `${searchOptions.numResults}`,
+          doc_source: `${searchOptions.docSource}`,
+        }),
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
         },
-      )
+        signal: abort.signal,
+      })
         .then((x) => x.json())
         .then((x) => x.data.docs)
         .catch((err) => (console.error(err), []))
