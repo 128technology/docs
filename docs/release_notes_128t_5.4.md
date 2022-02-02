@@ -51,11 +51,17 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44207 An empty show ospf dyn operator was generating an error condition in the pcli:** This issue has been resolved.
 ------
+- **I95-44221 Health check tracking issue:** Resolved an issue where dynamic reconfig of enforcement flag leaves service-path without health check tracking.
+------
 - **I95-44246 The "Piping Output..." message does not clear:** When running a grep command from the pcli, the piping output does not clear. This issue has been resolved.
 ------
 - **I95-44252 Back out logic for removal of Multiple 128T rpms:** The need for this logic is obsolete, and the logic has been removed.
 ------
 - **I95-44278 Paste configuration error:** Resolved an issue where pasting multiple lines that beginning with `configure` caused an error.
+------
+- **I95-44360 Custom Charts Create/Delete Dialog Boxes Not Dismissing:** Resolved an issue where a race condition was preventing dismissal of the dialog boxes.
+------
+- **I95-44369 SSC Container sourcing from wrong location:** This issue has been resolved. 
 
 ## Release 5.4.3-8
 
