@@ -2,9 +2,8 @@
 title: Using Application Summary
 sidebar: Using Application Summary
 ---
-The Application Summary is available on routers with Application Identification enabled. In cases where an SSR has [web filtering](config_domain-based_web_filter.md) enabled, Application Identification is also enabled. 
 
-To enable the Application Summary for a router that does not have web filtering enabled, go to Configuration -> Authority -> [router name] -> Application Identification Settings and set Summary Tracking to `true`.
+The Application Summary is available for routers where both [Application Identification](config_app_ident.md) and Summary Tracking are enabled. `summary-tracking` is enabled by default, and `application-identification` must be set to `mode all`.  
 
 The following are the configurable settings for Application Summary.
 - Summary Tracking: Enable session stats tracking by application.

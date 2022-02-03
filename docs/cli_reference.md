@@ -41,7 +41,7 @@ clear app-id cache [force] [stale-entries] [node <node>] {router <router> | reso
 | [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
 | [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
 | [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
-| [`show stats app-id application-director cache`](STATS.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
 
 ## `clear app-id cache-entry address`
 
@@ -80,7 +80,7 @@ clear app-id cache-entry address [force] [node <node>] {router <router> | resour
 | [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
 | [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
 | [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
-| [`show stats app-id application-director cache`](STATS.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
 
 ## `clear app-id cache-entry domain`
 
@@ -117,7 +117,7 @@ clear app-id cache-entry domain [force] [node <node>] {router <router> | resourc
 | [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
 | [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
 | [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
-| [`show stats app-id application-director cache`](STATS.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
 
 ## `clear app-id cache-entry url`
 
@@ -154,7 +154,7 @@ clear app-id cache-entry url [force] [node <node>] {router <router> | resource-g
 | [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
 | [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
 | [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
-| [`show stats app-id application-director cache`](STATS.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
 
 
 ## `clear arp`
