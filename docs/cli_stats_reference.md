@@ -27875,13 +27875,13 @@ show stats app-id application-director cache [since <since>] [force] [router <ro
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id cache`](README.md#clear-app-id-cache) | Clear app-id entries from cache |
-| [`clear app-id cache-entry address`](README.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
-| [`clear app-id cache-entry domain`](README.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
-| [`clear app-id cache-entry url`](README.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
-| [`lookup application by-address`](README.md#lookup-application-by-address) | Look up application identification by address key |
-| [`lookup application by-domain`](README.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
-| [`show app-id cache`](README.md#show-app-id-cache) | Show information of app-id entries in cache |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
 
 ## `show stats app-id application-director cache hit`
 
@@ -27912,13 +27912,13 @@ show stats app-id application-director cache hit [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id cache`](README.md#clear-app-id-cache) | Clear app-id entries from cache |
-| [`clear app-id cache-entry address`](README.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
-| [`clear app-id cache-entry domain`](README.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
-| [`clear app-id cache-entry url`](README.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
-| [`lookup application by-address`](README.md#lookup-application-by-address) | Look up application identification by address key |
-| [`lookup application by-domain`](README.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
-| [`show app-id cache`](README.md#show-app-id-cache) | Show information of app-id entries in cache |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
 
 ## `show stats app-id application-director cache miss`
 
@@ -27949,13 +27949,13 @@ show stats app-id application-director cache miss [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id cache`](README.md#clear-app-id-cache) | Clear app-id entries from cache |
-| [`clear app-id cache-entry address`](README.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
-| [`clear app-id cache-entry domain`](README.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
-| [`clear app-id cache-entry url`](README.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
-| [`lookup application by-address`](README.md#lookup-application-by-address) | Look up application identification by address key |
-| [`lookup application by-domain`](README.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
-| [`show app-id cache`](README.md#show-app-id-cache) | Show information of app-id entries in cache |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
 
 ## `show stats app-id application-director cache size`
 
@@ -27986,13 +27986,13 @@ show stats app-id application-director cache size [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id cache`](README.md#clear-app-id-cache) | Clear app-id entries from cache |
-| [`clear app-id cache-entry address`](README.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
-| [`clear app-id cache-entry domain`](README.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
-| [`clear app-id cache-entry url`](README.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
-| [`lookup application by-address`](README.md#lookup-application-by-address) | Look up application identification by address key |
-| [`lookup application by-domain`](README.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
-| [`show app-id cache`](README.md#show-app-id-cache) | Show information of app-id entries in cache |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
 
 ## `show stats app-id application-director lookup`
 
