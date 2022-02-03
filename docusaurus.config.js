@@ -1,6 +1,6 @@
 module.exports = {
-  title: '128T Docs',
-  tagline: 'The documentation source for the 128T Networking Platform',
+  title: 'SSN Docs',
+  tagline: 'The documentation source for the Session Smart Networking Platform',
   url: 'https://docs.128technology.com',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
@@ -34,7 +34,7 @@ module.exports = {
           position: 'right',
         },
         {
-          href: 'https://www.128technology.com/',
+          href: 'https://www.juniper.net/',
           label: 'Company',
           position: 'right',
         },
@@ -42,16 +42,6 @@ module.exports = {
     },
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} Juniper Networks, Inc.`,
-    },
-    algolia: {
-      apiKey: '1ee0f6866243c8e25883eee3ce0708ce',
-      indexName: '128technology',
-      algoliaOptions: {},
-    },
-    googleAnalytics: {
-      trackingID: 'UA-167298415-2',
-      // Optional fields.
-      anonymizeIP: true, // Should IPs be anonymized?
     },
   },
   presets: [
@@ -69,5 +59,14 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['./src/plugins/release-notes-api.js'],
+  plugins: [
+    './src/plugins/release-notes-api.js',
+  ],
+  customFields: {
+    marvisSearch: {
+      docSource: "128t",
+      numResults: 10,
+      proxyURL: 'https://raq48a0wrg.execute-api.us-east-1.amazonaws.com/prod/marvis_docs_api_proxy',
+    },
+  },
 };
