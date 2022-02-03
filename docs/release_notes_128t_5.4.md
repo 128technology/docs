@@ -27,15 +27,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.4.4-x
 
-**Release Date:** February 4, 2022
+**Release Date:** February 9, 2022
 
 ### New Features
 
 - **I95-25630 Gateway IP is required:** When creating or changing a service-route with a next-hop of a static IP net-int, a gateway IP is required. If no gateway IP has been specified, the network-interface gateway will be used. 
 ------
 - **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to that of CentOS 8.4 to address several CVEs and provide support for Wireguard and Cordoba. 
-------
-- **I95-44144 Update Zookeeper:** Zookeeper has been updated to log4j-2.17.1.
 ------
 - **I95-44224 Autocomplete for Resource Groups:** Autocomplete has been added to the pcli when configuring resource groups. 
 
@@ -47,15 +45,17 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43809 CLI commands fail to run from the Conductor:** Resolved an issue where requests made to a HA conductor would not always try its peer.
 ------
+- **I95-44144 Update Zookeeper Logging:** Zookeeper logging library has been replaced with reload4j.
+------
 - **I95-44152 `reachability-detection probe-type` description does not match implementation:** The configuration field description for `reachability-detection probe-type` has been updated.
 ------
-- **I95-44207 An empty show ospf dyn operator was generating an error condition in the pcli:** This issue has been resolved.
+- **I95-44207 Unprovisioned OSPF configuration causes the PCLI to generate an error when issuing show ospf:** This issue has been resolved.
 ------
 - **I95-44221 Health check tracking issue:** Resolved an issue where dynamic reconfig of enforcement flag leaves service-path without health check tracking.
 ------
 - **I95-44246 The "Piping Output..." message does not clear:** When running a grep command from the pcli, the piping output does not clear. This issue has been resolved.
 ------
-- **I95-44252 Back out logic for removal of Multiple 128T rpms:** The need for this logic is obsolete, and the logic has been removed.
+- **I95-44252 Unneeded package dependencies may cause upgrade or rollback failures:** The packages and logic is obsolete and have been removed.
 ------
 - **I95-44278 Paste configuration error:** Resolved an issue where pasting multiple lines that beginning with `configure` caused an error.
 ------
