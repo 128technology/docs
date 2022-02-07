@@ -5,11 +5,11 @@ sidebar_label: Creating Bootable USB
 
 ## Introduction
 
-128 Technology distributes our software as a set of applications or an ISO. The ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as a 128T system. The goal of this guide is produce a bootable USB drive from a 128T ISO.
+Juniper Networks distributes the SSR software as a set of applications or an ISO. The ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as an SSR system. The goal of this guide is produce a bootable USB drive from an SSR ISO.
 
 ## Bootable USB
 
-For small deployments or a proof of concept, each ISO image can be loaded on to a bootable USB to install the operating system and 128T software. After you have created the bootable ISO, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md). 
+For small deployments or a proof of concept, each ISO image can be loaded on to a bootable USB to install the operating system and SSR software. After you have created the bootable ISO, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md). 
 
 ### Creating a Bootable ISO: Linux and MacOS
 
@@ -30,7 +30,7 @@ sudo diskutil unmount /dev/disk2s1
 sudo dd if=~/128T-<VERSION>.el7.x86_64.iso of=/dev/rdisk2 bs=16384
 diskutil eject /dev/disk2s1
 ```
-Where `<VERSION>` is replaced with the 128T version you are interested in.
+Where `<VERSION>` is replaced with the SSR version you are interested in.
 
 ### Creating a Bootable ISO: Windows
 
@@ -40,7 +40,7 @@ Before beginning, install the Rufus software https://rufus.akeo.ie/downloads/ on
 1. Launch Rufus.
 2. Select the USB Device.
 3. Select **MBR partition scheme for BIOS or UEFI**.
-4. Select the 128T ISO.
+4. Select the SSR ISO.
 5. Click **Start**.
 6. Select **Write in ISO image mode**.
 7. Click **OK**.
@@ -59,7 +59,7 @@ Multiple installations can be performed quickly and efficiently using Disk Cloni
 :::note
 When using cloned images, an identical hardware platform must be used. Create a new image for each hardware variation.
 :::
-The cloned platform disk is then used to install the filesystem and 128T software on any number of other identical hardware platforms. 
+The cloned platform disk is then used to install the filesystem and SSR software on any number of other identical hardware platforms. 
 
 The high level steps are as follows:
 
