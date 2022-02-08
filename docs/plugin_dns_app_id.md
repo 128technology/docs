@@ -341,6 +341,22 @@ exit
 The plugin must be updated to version 3.1.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
+### Release 3.1.4
+
+#### Issues Fixed
+
+- **PLUGIN-1452**  DNS cache services constantly fail on system startup
+
+  _**Resolution:**_ The DNS cache systemd services will be deferred until the 128T services are running and stable.
+
+- **PLUGIN-1461**  Config generation for the plugin failing in the Bonsai mode
+
+  _**Resolution:**_ Correctly handle the config generation for routers where the DNS cache plugin is not enabled during bonsai config generation
+
+- **PLUGIN-1494**  no route being injected into FIB table for dns-app-id custom apps.
+
+  _**Resolution:**_ Automatically enable the module mode on router with dns-app-id config enabled
+
 ### Release 3.1.3
 
 #### Issues Fixed
