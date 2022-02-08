@@ -63,15 +63,13 @@ Node: AAPVA0962P1A
          t1         0   mpls-backup    169.254.128.128   0.0.0.0/0          <global>
 ```
 
-Additionally, use [`show-fib router <router> tenant <tenant>`](cli_reference.md/#show-fib) to gather information about FIB entries at the router.
-
 ### Determining the Tenant from the GUI
 
 1. Open the Conductor's GUI. 
 2. Under Authority, click on **Routers**. In the main information panel, a list of all of the managed routers is displayed. 
 3. Click on a router to display its information page. 
-4. On the right side of the information page, click **Debug**. 
-5. From the Debug screen, click on the **Source Tenant** tab at the top of the screen. This displays the output of the source lookup table for the router – the same output as the PCLI's `show tenant members` command. 
+4. On the right side of the information page, click **Routing Details**. 
+5. From the Routing Details screen, click on the **Source Tenant** tab at the top of the screen. This displays the output of the source lookup table for the router – the same output as the PCLI's `show tenant members` command. 
 
 ## Identifying the Service
 
@@ -332,21 +330,27 @@ Verfiy whether the WAN links are up by checking the peer path information with t
 
 - Understanding Transmitted Data Type 
 
-    _REVIEWERS: Need additional information here. What are we looking for? What happens if it is a short or long session? How do you determine this info, how do we use it to help resolve the issue?_
+    **_REVIEWERS: Need additional information here. What are we looking for? What happens if it is a short or long session? How do you determine this info, how do we use it to help resolve the issue?_**
 
     - Short session
     - Long lived session
     - Protocol[s] used [ssh, ftp, http, etc]
 
-#### Priorities
+- Identify the impacted service and service class
 
-_REVIEWERS: Need additional details on what is meant by priorities. Is this the priority of what should be fixed first? Is this to determine what the traffic priority is?_
+    - Use [`show-fib router <router> tenant <tenant>`](cli_reference.md/#show-fib) to gather information about FIB entries at the router.
+
+#### Reviewing Traffic Engineering Priorities
+
+In cases where traffic engineering has been configured, an oversubscribed traffic class may cause the application performance to suffer. Use the following show commands to dig into the application processing details.
 
 Use the [`show stats traffic-eng internal-application sent-timeout router <routerName>`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-sent-timeout) to identify the number of packets dropped due to excess scheduling latency for the internal application. This may indicate that the serviceArea is overloaded. Run this command multiple times and look for incrementing stats.
 
 Use the [`show stats traffic-eng internal-application per-traffic-class schedule-failure-packets router <routerName>`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-schedule-failure-packets) command to check the number of packets failed to schedule for transmission due to bandwidth oversubscription for this application. If the counter is increasing by high numbers, then traffic engineering may be an issue. Run the command multiple times and look for incrementing stats.
 
 Use the [`show stats packet-processing action failure router <routerName>`](cli_stats_reference.md/#show-stats-packet-processing-action-failure) to view statistics pertaining to failures during packet action processing. Run the command multiple times and look for incrementing stats.
+
+If an oversubscribed traffic class is identified, consider reclassifying the traffic in the identified class, or increasing the allocation for that class. 
 
 #### Fragmentation 
 
