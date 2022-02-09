@@ -25,9 +25,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
 
-## Release 5.4.4-x
+## Release 5.4.4-5
 
-**Release Date:** February 9, 2022
+**Release Date:** February 10, 2022
 
 ### New Features
 
@@ -62,6 +62,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-44360 Custom Charts Create/Delete Dialog Boxes Not Dismissing:** Resolved an issue where a race condition was preventing dismissal of the dialog boxes.
 ------
 - **I95-44369 SSC Container sourcing from wrong location:** This issue has been resolved. 
+
+### Caveats
+
+- **I95-44222 Commit fails for RBAC users with config-write permissions:** RBAC users with config-write permissions, but who do not have explicit write access to t128/ get a “failure to commit” message.
+	**_Workaround:_** Manually create a `commit` role and set the 128t:/ resource in the role. Add this role to users who need the ability to commit.
 
 ## Release 5.4.3-8
 
