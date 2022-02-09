@@ -48,7 +48,7 @@ To determine the impacted service and service class, use the command `show tenan
 admin@node1.router# show tenant members
 Mon 2019-11-25 17:36:37 UTC
 
-Node: AAPVA0962P1A
+Node: SOLMA0128P1A
 
 ============ ========= ============== ================= ================== =================
  Device I/F   VLAN ID   Network I/F    Network I/F IP    Source IP Prefix   Tenant
