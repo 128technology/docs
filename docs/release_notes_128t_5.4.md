@@ -39,19 +39,29 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
-- **I95-42448 High and Medium CVEs:** These items have been addressed and resolved. 
+**CVE Resolution - The following CVE issues have been addressed and resolved with this release:**
+
+I95-40268: CVE-2008-5161
+I95-41591: CESA-2021:0856 
+I95-42448: DoDIN APL Certification (multiple)
+I95-43261: CVE-2021-41617 (CESA-2021:4782) 
+I95-43471: CVE-2015-9262 (CESA-2018:3059)
+I95-43625: CVE-2021-42574 (CESA-2021:4033)
+I95-44087: CVE-2016-2124, CVE-2020-25717 (CESA-2021:5192)
+I95-44088: CVE-2021-43527 (CESA-2021:4904)
+I95-44206: CVE-2021-20271 (CESA-2021:4785) 
 ------
 - **I95-42942 GUI Session Capture not working:** Resolved an issue with Packet Count and Session Count options. Session Capture now works as expected. 
 ------
 - **I95-43809 CLI commands fail to run from the Conductor:** Resolved an issue where requests made to a HA conductor would not always try its peer.
+------
+- **I95-44107 Service routes with a GRE interface in the next-hop fail validation:** Updated the validation process for mapping interfaces.
 ------
 - **I95-44144 Update Zookeeper Logging:** Zookeeper logging library has been replaced with reload4j.
 ------
 - **I95-44152 `reachability-detection probe-type` description does not match implementation:** The configuration field description for `reachability-detection probe-type` has been updated.
 ------
 - **I95-44207 Unprovisioned OSPF configuration causes the PCLI to generate an error when issuing show ospf:** This issue has been resolved.
-------
-- **I95-44221 Health check tracking issue:** Resolved an issue where dynamic reconfig of enforcement flag leaves service-path without health check tracking.
 ------
 - **I95-44246 The "Piping Output..." message does not clear:** When running a grep command from the pcli, the piping output does not clear. This issue has been resolved.
 ------
@@ -61,7 +71,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44360 Custom Charts Create/Delete Dialog Boxes Not Dismissing:** Resolved an issue where a race condition was preventing dismissal of the dialog boxes.
 ------
-- **I95-44369 SSC Container sourcing from wrong location:** This issue has been resolved. 
+- **I95-44480 Not allowing some valid identifiers or values:** This issue has been resolved.
+------
+- **I95-44517 Time check incorrectly locking upgrade process:** The time check has been replaced with a process name check.  
+------
+- **I95-44538 Invalid Stat increment:** This issue has been resolved. 
 
 ### Caveats
 
