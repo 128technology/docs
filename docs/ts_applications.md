@@ -328,14 +328,6 @@ Verfiy whether the WAN links are up by checking the peer path information with t
     - Check jitter using [`show stats bfd by-peer-path router <routerName> jitter`](cli_stats_reference.md/#show-stats-bfd-by-peer-path-jitter).
     - Check latency using [`show stats bfd by-peer-path router <routerName> latency`](cli_stats_reference.md/#show-stats-bfd-by-peer-path-latency).
 
-- Understanding Transmitted Data Type 
-
-    **_REVIEWERS: Need additional information here. What are we looking for? What happens if it is a short or long session? How do you determine this info, how do we use it to help resolve the issue?_**
-
-    - Short session
-    - Long lived session
-    - Protocol[s] used [ssh, ftp, http, etc]
-
 - Identify the impacted service and service class
 
     - Use [`show-fib router <router> tenant <tenant>`](cli_reference.md/#show-fib) to gather information about FIB entries at the router.
