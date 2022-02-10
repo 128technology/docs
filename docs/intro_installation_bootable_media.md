@@ -3,9 +3,9 @@ title: Conductor Interactive Installation
 sidebar_label: Conductor Interactive Installation
 ---
 
-This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading a 128T ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
+This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
-The steps in this section describe the interactive Conductor installation from the ISO. The section [Initialize the 128T](#initialize-the-128t-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
+The steps in this section describe the interactive Conductor installation from the ISO. The section [Initialize the SSR](#initialize-the-128t-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
 
 :::note
 The Conductor installation must be completed before installing a router or routers using the OTP ISO.
@@ -14,7 +14,7 @@ This same procedure may be used to install a router, or the procedure [Router In
 
 ## Prerequisites
 
-- Ensure that the platform you are installing on meets the 128T hardware requirements.
+- Ensure that the platform you are installing on meets the SSR hardware requirements.
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 
 ## Installing the ISO
@@ -41,17 +41,17 @@ Selecting the wrong type of console (Serial or VGA) may result in garbled charac
 
 The procedure that follows here is the Interactive Install on the VGA Console.
 
-#### 128T System via Serial Console
+#### SSR System via Serial Console
 
 Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. For serial console issues please refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
 
-#### 128T System with VGA Console
+#### SSR System with VGA Console
 
-Use this option when running on hardware that has onboard graphics chipsets. This installs 128T using the GUI installer.
+Use this option when running on hardware that has onboard graphics chipsets. This installs SSR software using the GUI installer.
 
-### 128T Installation
+### SSR Installation
 
-After the Linux installation completes, the 128T software installation begins. Note that this may take several minutes to complete. After the installation has completed, the following screen is displayed:
+After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete. After the installation has completed, the following screen is displayed:
 
 ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
 
@@ -65,7 +65,7 @@ Shut down the system and remove the bootable media. Then power the system up to 
    | -------- | ---------- | ------------ |
    | root     | 128tRoutes | Linux account |
    | t128     | 128tRoutes | Linux account |
-   | admin | 128Tadmin | 128T PCLI admin account - see note below |
+   | admin | 128Tadmin | SSR PCLI admin account - see note below |
  
    It is *strongly recommended* that you change these passwords immediately.
 
@@ -75,7 +75,7 @@ Shut down the system and remove the bootable media. Then power the system up to 
 
 ## Initial Boot and NMTUI
 
-When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the 128T Initializer is started.
+When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.
 
 ![128T NetManager TUI Start](/img/Initializer_Serial0.png)
 
@@ -85,17 +85,17 @@ Selecting `Yes` launches the CentOS NMTUI application to perform an initial netw
 
 Refer to the NMTUI user documentation for more details.
 
-## Initialize the 128T Node
+## Initialize the SSR Node
 
-The 128T Initializer tunes your operating system, prepares the platform to run the 128T software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot for the `Install 128T Routing Software...` installation options.
+The SSR Initializer tunes your operating system, prepares the platform to run the SSR software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot for the `Install 128T Routing Software...` installation options.
 
 If you are installing a highly available Conductor on the cloud, please refer to [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md).
 
-1. On the 128T Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the 128T node and press the **Enter** key to select **OK**.
+1. On the SSR Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the SSR node and press the **Enter** key to select **OK**.
 
-  ![128T Role](/img/initializer_Serial2.png)
+  ![SSR Role](/img/initializer_Serial2.png)
 
-2. For 128T routers, you will be prompted for the IP address(es) of your 128T conductor(s). If you have conductors, enter the administrative addresses and the node will retrieve the configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
+2. For SSR routers, you will be prompted for the IP address(es) of your conductor(s). If you have conductors, enter the administrative addresses and the node will retrieve the configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
 3. When asked _What kind of Router/Conductor node is this?_, select from the following options:
 
   ![Identify the Node](/img/initializer_Serial3.png)
@@ -116,28 +116,28 @@ If you are installing a highly available Conductor on the cloud, please refer to
 
     ![Node Information](/img/initializer_Serial5.png)
 
-    - **Node Name:** The name of the system within your 128T Router or Conductor, for example, _conductor_. By default this field uses the Linux system's hostname.
+    - **Node Name:** The name of the system within your SSR Router or Conductor, for example, _conductor_. By default this field uses the Linux system's hostname.
 
     :::note
     Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).
     :::
-    - **Router/Conductor Name:** The name of the Router or Conductor system as a whole. When referring to a running 128T software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `conductor-node1.conductor`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
+    - **Router/Conductor Name:** The name of the Router or Conductor system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `conductor-node1.conductor`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
-5. On the **Password Setup** screen, create a password for the 128T Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
+5. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
 
   ![Password Setup](/img/initializer_Serial6.png)
 
-6. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact 128T technical support.
+6. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact Juniper Technical Support.
 
-7. When prompted, either reboot your system or start 128T.
+7. When prompted, either reboot your system or start SSR.
 
   ![Initializer Complete](/img/initializer_complete.png)
 
   :::note
-  If installing the 128T software for the first time, a system reboot is required.
+  If installing the SSR software for the first time, a system reboot is required.
   :::
 
 ### Install a Second HA Node for the Conductor
@@ -156,41 +156,41 @@ If there is a second node for Conductor HA, install the system using the same pr
 
   ![HA Peer Credentials](/img/initializer_Serial4eHAPeer.png)
 
-4. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no **failures** are present, you can choose to continue with the installation even if multiple warnings exist. For information about why a specific test may have failed or generated a warning, contact 128T technical support.
+4. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no **failures** are present, you can choose to continue with the installation even if multiple warnings exist. For information about why a specific test may have failed or generated a warning, contact Juniper Technical Support.
 
 5. After the initialization process completes the setup, the following screen displays. Use the Enter key to select `Got it!`
 
   ![Peer Restart](/img/initializer_Serial7.png)
 
-6. The Installer Status screen indicates success. Use the spacebar to either reboot your system or start 128T.
+6. The Installer Status screen indicates success. Use the spacebar to either reboot your system or start SSR.
 
   ![Initializer Complete](/img/initializer_complete.png)
 
   :::note
-  If installing the 128T software for a router, a system reboot may be required.
+  If installing the SSR software for a router, a system reboot may be required.
   :::
 
 ## Verify Installation
 
-After installing the 128T Software it is important to verify that the installation was completed successfully.
+After installing the SSR Software it is important to verify that the installation was completed successfully.
 
-### To Verify the 128T Installation:
+### To Verify the SSR Installation:
 
 1. Launch a command prompt window.
 
-2. Execute the command:
+2. Execute the command:
 
    ```
    sudo systemctl status 128T
    ```
 
-   **Result:** The service is listed as _Active (running)_.
+   **Result:** The service is listed as _Active (running)_.
 
    If the service is listed as _Inactive_, run the `sudo systemctl start 128T` command. This may take several minutes to fully launch the service.
 
 3. Once the service is listed as _Active_, log into the system as Admin using the system default password.
 
-   **Result:** The installation is verified.
+   **Result:** The installation is verified.
 
 4. Close the command prompt window. 
 

@@ -3,7 +3,7 @@ title: ICMP Reachability Detection Plugin
 sidebar_label: ICMP Reachability Detection
 ---
 
-The ICMP reachability detection plugin is designed to solve the problem where upstream next-hop failures cause 128T to blackhole traffic for non-SVR services. When a 128T router is provisioned to send traffic towards operationally valid next-hop(s), one of those next-hops might be incapable of delivering the packets to the final destination due to upstream failures beyond simple link or ARP failures causing the traffic being blackholed. The ICMP reachability detection plugin solves this problem by pinging a destination for reachability and allowing new sessions to failover to alternate paths when the primary path is unreachable. The plugin can also be used to perform a similar probe end-to-end to a server over SVR and trigger a failover in the same manner.
+The ICMP reachability detection plugin is designed to solve the problem where upstream next-hop failures cause the SSR to blackhole traffic for non-SVR services. When an SSR is provisioned to send traffic towards operationally valid next-hop(s), one of those next-hops might be incapable of delivering the packets to the final destination due to upstream failures beyond simple link or ARP failures causing the traffic being blackholed. The ICMP reachability detection plugin solves this problem by pinging a destination for reachability and allowing new sessions to failover to alternate paths when the primary path is unreachable. The plugin can also be used to perform a similar probe end-to-end to a server over SVR and trigger a failover in the same manner.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -35,12 +35,12 @@ The application module JSON will be set up based on the `service > icmp-probe` c
 
 ### Sunny Day Scenario
 
-The diagram below shows two available paths - broadband and LTE. In a sunny day scenario, the plugin will perform continuous pings to the destination and report the status as up. In this case, the configured `service > icmp-probe > address` will be configured in the application module for broadband service. This in turn will trigger the 128T router to install the FIB entries for the `internet-broadband` service and all incoming sessions will be routed to the only available path for that service called `rte-internet-broadband`. This is essentially why the plugin can only operate in hunt mode.
+The diagram below shows two available paths - broadband and LTE. In a sunny day scenario, the plugin will perform continuous pings to the destination and report the status as up. In this case, the configured `service > icmp-probe > address` will be configured in the application module for broadband service. This in turn will trigger the SSR to install the FIB entries for the `internet-broadband` service and all incoming sessions will be routed to the only available path for that service called `rte-internet-broadband`. This is essentially why the plugin can only operate in hunt mode.
 
 ![Sunny Day Scenario](/img/icmp_probe_sunny_day_scenario.png)
 
 ### Primary Path Failure Scenario
-The diagram below depicts the failure to ping the server over the broadband interface. This failure would typically cause the traffic to be blackholed as the upstream ISP gateway is still reachable via ARP. The ICMP probe plugin, however, will detect the server ICMP failure and will in turn update the application module JSON for the LTE service with the configured `service > icmp-probe > address`. As a result of this, the 128T router will remove the FIB entries for the broadband service and replace it with FIB entries for the internet-lte service. All subsequent sessions will then be routed using the only available rte-internet-lte service route.
+The diagram below depicts the failure to ping the server over the broadband interface. This failure would typically cause the traffic to be blackholed as the upstream ISP gateway is still reachable via ARP. The ICMP probe plugin, however, will detect the server ICMP failure and will in turn update the application module JSON for the LTE service with the configured `service > icmp-probe > address`. As a result of this, the SSR will remove the FIB entries for the broadband service and replace it with FIB entries for the internet-lte service. All subsequent sessions will then be routed using the only available rte-internet-lte service route.
 
 ![Primary Path Failure](/img/icmp_probe_primary_path_failover_scenario.png)
 
@@ -218,7 +218,7 @@ The following considerations should be made while configuring the service-route 
 
 
 :::note
-The plugin can support any number of paths to be monitored for activity. Each of th path must have a unique vector-priority associated with them to determine the preference order.
+The plugin can support any number of paths to be monitored for activity. Each path must have a unique vector-priority associated with it to determine the preference order.
 :::
 
 ## Triggering Manual Failover Or Recovery
@@ -867,5 +867,5 @@ The plugin must be updated to version 3.0.3 or later prior to [upgrading the con
 
 #### Issues Fixed
 
-- **PLUGIN-768** Support the ICMP Reachability Detection plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the ICMP Reachability Detection plugin in SSR versions `5.1.0` and greater.
 - **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-icmp-reachability-detection`
