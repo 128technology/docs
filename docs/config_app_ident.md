@@ -1,6 +1,6 @@
 ---
 title: Application Identification
-sidebar: Application Identification
+sidebar_label: Application Identification
 ---
 
 Application Identification automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_domain-based_web_filter.md#how-it-works). 
