@@ -336,7 +336,7 @@ Verfiy whether the WAN links are up by checking the peer path information with t
 
 Look closely at the traffic engineering priorities. An oversubscribed traffic class may cause the application performance to suffer. Use the following show commands to dig into the application processing details.
 
-Use the [`show stats traffic-eng internal-application sent-timeout router <routerName>`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-sent-timeout) to identify the number of packets dropped due to excess scheduling latency for the internal application. This may indicate that the serviceArea is overloaded. Run this command multiple times and look for incrementing stats.
+Use the [`show stats traffic-eng device-port sent-timeout router <routerName>`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-sent-timeout) to identify the number of packets dropped due to excess scheduling latency for the internal application. This may indicate that the serviceArea is overloaded. Run this command multiple times and look for incrementing stats.
 
 Use the [`show stats traffic-eng internal-application per-traffic-class schedule-failure-packets router <routerName>`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-schedule-failure-packets) command to check the number of packets failed to schedule for transmission due to bandwidth oversubscription for this application. If the counter is increasing by high numbers, then traffic engineering may be an issue. Run the command multiple times and look for incrementing stats.
 
