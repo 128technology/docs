@@ -177,6 +177,18 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 The plugin must be updated to version 3.2.1 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
+### Release 3.2.2
+
+#### Issues Fixed
+
+- **PLUGIN-1452** The dns-app-id plugin has lot of failures on system startup
+
+  _**Resolution:**_ The dns-app-id plugin will wait for dns-cache components to be initialized and running before starting up
+
+- **PLUGIN-1480** Large configuration was causing plugin config generation to fail
+
+  _**Resolution:**_ The config generation logic for the plugin will handle config with long lines correctly
+
 ### Release 3.2.1
 
 #### Issues Fixed
