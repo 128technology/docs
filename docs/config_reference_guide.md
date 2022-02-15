@@ -2315,6 +2315,8 @@ The 128T router solution is deployed to facilitate the delivery of new applicati
 | application-type | enumeration | Valid values: generic, dhcp-relay, dns-proxy, ftp-control, or ftp-data. Default: generic. Certain types of traffic require special treatment by the 128T. For example, when forwarding FTP traffic, the FTP protocol can exchange addresses that may not be reachable if there are NAT devices between the source and destination; thus, the use of `ftp-control` and `ftp-data` can look for, and replace, those unreachable addresses and act as an FTP Application Layer Gateway. See also: [DNS Proxy](config_dns_proxy.md). |
 | applies-to | sub-element | Controls which devices will receive copies of this `service` from the conductor when configuration is committed. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
+| domain-name | string | Domain name that identifies a service. Traffic matching this domain name is assigned to this service. |
+| domain-name-category | string | Domain name categorization of this service. This is matched against the imported categories using the domain pulled from the data stream. |
 | enabled | boolean | When false, this service is administratively disabled. Packets addressed to this service's address(es) will not be processed. |
 | fqdn-resolution-type | enumeration | Valid values: v4, v6. Default: v4. This controls which type of DNS query will be issued when trying to resolve `address` values that are configured as hostnames. |
 | generated | boolean | Default: false. When a 128T conductor generates traffic it sets this field to `true`. In order to make any modifications to generated configuration elements, it is necessary to set the `generated` flag to `false` to have those changes persist. |
@@ -2329,6 +2331,7 @@ The 128T router solution is deployed to facilitate the delivery of new applicati
 | tap-multiplexing | boolean | Setting this to true will cause the 128T router to treat the sessions for this traffic differently than the default behavior. Traffic that matches a FIB entry for the service will create two local sessions: one that matches the forward flow and one that matches the reverse flow with the source and destination addresses flipped.  When the router sends this traffic over SVR to the remote router, it inserts a small piece of metadata into each packet which identifies whether it is for the forward or reverse flow.  This is used by the remote router to undo the NAT and ensure the IP address and port are replaced correctly with the original source or destination information.  The purpose of this is to ensure that both the forward and reverse flows are NATted to the same address and port combination over SVR, thus ensuring they follow the same path over the internet and do not arrive out of order at the capture receiver. |
 | tenant | reference | Refers to a configured *tenant* instance by its name. |
 | transport | sub-element | The transport protocol(s) and port(s) for the service. |
+| url | string | URL that identifies a service. Traffic matching this URL will be considered to belong to this service. |
 
 #### Version History:
 | Release | Modification |
