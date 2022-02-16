@@ -81,6 +81,9 @@ I95-44206: CVE-2021-20271 (CESA-2021:4785)
 
 - **I95-44222 Commit fails for RBAC users with config-write permissions:** RBAC users with config-write permissions, but who do not have explicit write access to t128/ get a “failure to commit” message.
 	**_Workaround:_** Manually create a `commit` role and set the 128t:/ resource in the role. Add this role to users who need the ability to commit.
+------
+- **I95-44608 Conductor Rollback:** In a high availability configuration where 5.4.x has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
+
 
 ## Release 5.4.3-8
 

@@ -100,3 +100,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-41116 Authentication Error after Upgrade:** Resolved an issue where performing an upgrade, then a rollback, then upgrade, blocked validation. 
 ------
 - **I95-41275 Synchronization unable to complete:** Resolved an issue where a previous failure prevents synchronization. 
+
+### Caveats
+
+- **I95-44608 Conductor Rollback:** In a high availability configuration where 5.3.0 has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 

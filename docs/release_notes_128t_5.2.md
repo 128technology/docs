@@ -41,6 +41,11 @@ Contains fixes from: [Release 5.1.5, August 13, 2021](release_notes_128t_5.1.md#
 ### Caveats
 
 - **I95-40335 Package dependency conflicts:** 5.2.2 supports the `vrsx-sfc` plugin. With this plugin, upgrading to 5.3.0 is not supported. If the system is upgraded to 5.3.0 with this plugin installed, the plugin dependencies will be removed and the features provided with this plugin will no longer function.
+------
+
+### Caveats
+
+- **I95-44608 Conductor Rollback:** In a high availability configuration where 5.2.x has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
 
 ## Release 5.2.1
 **Release Date:** July 20, 2021
