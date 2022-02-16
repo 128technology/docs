@@ -95,6 +95,8 @@ When capturing packets on an interface that has a VLAN tag you must also include
 If the traffic is not present in the output of `show sessions`, then it is either not reaching that SSR, failing to establish a session due to some configuration or software error, or was a very short-lived session and it has already expired from the session table.
 :::
 
+In addition to the packet capture methods described above, you can use the [Selective Packet Capture feature](ts_packet_capture.md#selective-packet-capture) to apply a trace not only on the ingress node where the capture is defined, but also triggering traces on every subsequent SSR node the session traverses.
+
 ### Determining the Service from the PCLI
 
 If you were able to find the session in the output of the session table, it will positively identify the name of the service that is being accessed. Move on to the next step, Determinine the Selected Route.
@@ -334,15 +336,13 @@ Verfiy whether the WAN links are up by checking the peer path information with t
 
 #### Reviewing Traffic Engineering Priorities
 
-Look closely at the traffic engineering priorities. An oversubscribed traffic class may cause the application performance to suffer. Use the following show commands to dig into the application processing details.
+Look closely at the traffic engineering priorities. An oversubscribed traffic class may cause the application performance to suffer. If an oversubscribed traffic class is identified, consider reclassifying the traffic in the identified class, or increasing the allocation for that class. Use the following `show` commands to dig into the application processing details.
 
-Use the [`show stats traffic-eng device-port sent-timeout router <routerName>`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-sent-timeout) to identify the number of packets dropped due to excess scheduling latency for the internal application. This may indicate that the serviceArea is overloaded. Run this command multiple times and look for incrementing stats.
+Use the `show stats traffic-eng device-interface per-traffic-class traffic-class <traffic class>` to display the available success and failure statistics associated with traffic engineering. When experiencing a degradation in user experience for a particular application, checking the associated error statistics for traffic engineering may show an overwhelmed traffic-class. 
 
-Use the [`show stats traffic-eng internal-application per-traffic-class schedule-failure-packets router <routerName>`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-schedule-failure-packets) command to check the number of packets failed to schedule for transmission due to bandwidth oversubscription for this application. If the counter is increasing by high numbers, then traffic engineering may be an issue. Run the command multiple times and look for incrementing stats.
+Statistics such as `buffer-capacity-exceeded-packets`, and `schedule-failure-packets` show issues where an incoming burst or sustained rate has exceeded a particular queue (or multiple queues) within traffic engineering, causing the loss of those packets. 
 
-Use the [`show stats packet-processing action failure router <routerName>`](cli_stats_reference.md/#show-stats-packet-processing-action-failure) to view statistics pertaining to failures during packet action processing. Run the command multiple times and look for incrementing stats.
-
-If an oversubscribed traffic class is identified, consider reclassifying the traffic in the identified class, or increasing the allocation for that class. 
+Statistics such as `dequeue-aqm-drop-packets` and `dequeue-max-latency-drop-packets` show that packets have buffered for an excessive amount of time and are being dropped to clear up buffer space within the scheduler for more recent packets. This type of packet loss is indicative of excessive bandwidth which has overwhelmed the transmit-cap of the device-interface for a prolonged period of time. 
 
 #### Fragmentation 
 
