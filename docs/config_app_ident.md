@@ -3,7 +3,7 @@ title: Application Identification
 sidebar_label: Application Identification
 ---
 
-Application Identification automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_domain-based_web_filter.md#how-it-works). 
+Application Identification can automatically learn, identify, and classify applications processed by the SSR and store them in the [web filtering cache](config_domain-based_web_filter.md#how-it-works). 
 
 ### Modes
 
@@ -18,7 +18,7 @@ By default, the SSR automatically downloads domain and application datatsets wee
 
 ## Application Summary
 
-The Application Summary is available for each router with Application Identification enabled. Use the steps below to configure Application Learning mode. Refer to [Application Summary](how_to_use_app_summary.md) to learn more about using the Application Summary. 
+The Application Summary is available for routers where both Application Identification and Summary Tracking are enabled. `summary-tracking` is enabled by default, and `application-identification` must be set to `mode all`. Refer to [Application Summary](how_to_use_app_summary.md) to learn more about using the Application Summary. 
 
 ### Configuring Learning Mode and Application Summary
 

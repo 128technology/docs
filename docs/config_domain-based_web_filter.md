@@ -299,14 +299,14 @@ The `block-search.internet` child service will match the various URLs as follows
 
 To enable Web Filtering, configure application identification, a parent service, a child service, and access policies to allow or deny traffic. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
 
-The high level steps for configuring Domain-based Web Routing are:
+The high level steps for configuring web filtering are:
 
 - Create a parent service
 - Create the child service
 - Configure a Tenant
 - Create an access policy on the child service to filter traffic 
 
-The following procedures describe configuring domain based filtering from the GUI. An example of the PCLI configuration is also shown.
+The following procedures describe configuring web filtering from the GUI. An example of the PCLI configuration is also shown.
 
 ### Create a Parent-level Service 
 Create a broad service representing the internet.
