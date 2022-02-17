@@ -103,4 +103,4 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Caveats
 
-- **I95-44608 Conductor Rollback:** In a high availability configuration where 5.3.0 has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
+- **I95-44608 Conductor Rollback:** In a High Availability configuration where release 5.1.7 or higher has been installed, and a rollback is necessary to a version less than 5.1.7, both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
