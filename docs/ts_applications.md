@@ -84,7 +84,7 @@ All service matching is performed based on the destination address of packets re
 
 The best method to identify this information is to use [Selective Packet Capture](ts_packet_capture.md#selective-packet-capture). This method applies a trace not only on the ingress node where the capture is defined, but also triggering traces on every subsequent SSR node the session traverses.
 
-Please refer to the [Selective Packet Capture section](ts_packet_capture.md#selective-packet-capture) to configure this feature.
+Please refer to the [Selective Packet Capture section](ts_packet_capture.md#selective-packet-capture) to enable this feature.
 
 ### Determining the Service from the PCLI
 
@@ -327,11 +327,11 @@ Verfiy whether the WAN links are up by checking the peer path information with t
 
 Look closely at the traffic engineering priorities. An oversubscribed traffic class may cause the application performance to suffer. If an oversubscribed traffic class is identified, consider reclassifying the traffic in the identified class, or increasing the allocation for that class. Use the following `show` commands to dig into the application processing details.
 
-Use the `show stats traffic-eng device-interface per-traffic-class traffic-class <traffic class>` to display the available success and failure statistics associated with traffic engineering. When experiencing a degradation in user experience for a particular application, checking the associated error statistics for traffic engineering may show an overwhelmed traffic-class. 
+Use the [`show stats traffic-eng device-interface per-traffic-class traffic-class <traffic class>`](cli_stats_reference.md/#show-stats-traffic-eng-device-interface-per-traffic-class) to display the available success and failure statistics associated with traffic engineering. When experiencing a degradation in user experience for a particular application, checking the associated error statistics for traffic engineering may show an overwhelmed traffic-class. 
 
-Statistics such as `buffer-capacity-exceeded-packets`, and `schedule-failure-packets` show issues where an incoming burst or sustained rate has exceeded a particular queue (or multiple queues) within traffic engineering, causing the loss of those packets. 
+Statistics such as [`buffer-capacity-exceeded-packets`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-buffer-capacity-exceeded-packets), and [`schedule-failure-packets`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-schedule-failure-packets) show issues where an incoming burst or sustained rate has exceeded a particular queue (or multiple queues) within traffic engineering, causing the loss of those packets. 
 
-Statistics such as `dequeue-aqm-drop-packets` and `dequeue-max-latency-drop-packets` show that packets have buffered for an excessive amount of time and are being dropped to clear up buffer space within the scheduler for more recent packets. This type of packet loss is indicative of excessive bandwidth which has overwhelmed the transmit-cap of the device-interface for a prolonged period of time. 
+Statistics such as [`dequeue-aqm-drop-packets`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-dequeue-aqm-drop-packets) and [`dequeue-max-latency-drop-packets`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-dequeue-max-latency-drop-packets) show that packets have buffered for an excessive amount of time and are being dropped to clear up buffer space within the scheduler for more recent packets. This type of packet loss is indicative of excessive bandwidth which has overwhelmed the transmit-cap of the device-interface for a prolonged period of time. 
 
 #### Fragmentation 
 
@@ -346,7 +346,7 @@ Now that you have a sense of the type of application traffic you're interested i
 
 1. Coordinate a time with the end user reporting a problem to attempt to reproduce the issue.
 
-2. Prior to testing, enable packet captures on the non-SVR interfaces (typically the LAN) at both the ingress SSR and the egress SSR devices. Use filters that are inclusive, but as narrow as possible to keep the signal:noise ratio high.
+2. Prior to testing, enable session captures on the non-SVR interfaces (typically the LAN) at both the ingress SSR and the egress SSR devices. Use filters that are inclusive, but as narrow as possible to keep the signal:noise ratio high.
 :::note
 Typically filtering traffic based on source IP at the ingress SSR and destination IP at the egress SSR is the most useful, since this will sidestep NAT issues.
 :::
@@ -359,19 +359,17 @@ Typically filtering traffic based on source IP at the ingress SSR and destinatio
 
 6. Repeate steps 4-6 several times, incrementing the TEST numbers in your log message.
 
-7. Lower the log levels on all devices, disable packet captures on all devices.
+7. Lower the log levels on all devices (if explicitly raised), and disable session captures on all devices.
 
 8. Retrieve the logs and captures from ingress and egress SSR systems.
 
 9. Analyze the captures to follow the packet flow from ingress to egress SSR. Ensure that all messages received on the ingress router arrive and are forwarded by the egress router, and that the return path follows suit in the reverse direction.
 
-10. If the packet captures and logs do not both contain the user's test traffic, change the filter to improve the signal:noise ratio and re-test. **Getting packet captures that correspond to logs that demonstrate the failure is the most important step.**
-
 If the SSR devices are confirmed to be forwarding traffic in both directions but the application is not working, then consult with the application provider to get their consultation. If the SSR devices are not forwarding traffic, continue troubleshooting.
 
 ### Traffic Doesn't Leave the Ingress Router
 
-This is generally due to a configuration problem or a transient network issue (e.g., an interface failure). Look for the `BEGINNING TEST` messages in the logs and correlate them to the packet captures you took. Look for evidence of failure. For configurations that had been working previously but stopped (with no configuration changes), correlate the time at which traffic stopped working to any notable items in the router's event history – viewable with the command `show events alarm`.
+This is generally due to a configuration problem or a transient network issue (e.g., an interface failure). Look for the `BEGINNING TEST` messages in the logs and correlate them to the session captures you took. Look for evidence of failure. For configurations that had been working previously but stopped (with no configuration changes), correlate the time at which traffic stopped working to any notable items in the router's event history – viewable with the command `show events alarm`.
 
 ### Traffic Doesn't Reach the Egress Router
 
@@ -379,11 +377,11 @@ If traffic is processed by the ingress router and you believe it is forwarded ou
 
 1. Run the tests as was done previously. Investigate the `highway` logs or the output of the `show sessions` table while the traffic is in progress to see what waypoint allocations were assigned to that traffic flow. On the ingress router this will be indicated by the `rev` flow for the session.
 
-2. Look for these ports in the WAN captures on both the ingress and egress routers. If you see them leaving the ingress router and not arriving at the egress router, then this should be taken to your ISP for assistance in troubleshooting.
+2. Look for these ports in the 128T_service_.pcap on both the ingress and egress routers. If you see them leaving the ingress router and not arriving at the egress router, then this should be taken to your ISP for assistance in troubleshooting.
 
 ### Traffic Doesn't Leave the Egress Router
 
-As with issues with the ingress router, this is generally due to a configuration problem or a transient network issue (e.g., an interface failure). Look for the `BEGINNING TEST` messages in the logs and correlate them to the packet captures you took. Look for evidence of failure. For configurations that had been working previously but stopped (with no configuration changes), correlate the time at which traffic stopped working to any notable items in the router's event history – viewable with the command `show events alarm`.
+As with issues with the ingress router, this is generally due to a configuration problem or a transient network issue (e.g., an interface failure). Look for the `BEGINNING TEST` messages in the logs and correlate them to the sessioin captures you took. Look for evidence of failure. For configurations that had been working previously but stopped (with no configuration changes), correlate the time at which traffic stopped working to any notable items in the router's event history – viewable with the command `show events alarm`.
 
 ## Support Services
 
