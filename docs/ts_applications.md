@@ -80,21 +80,11 @@ It is worth following these steps if you are not 100% certain of the service tha
 
 ### Identifying the Destination IP Address, Port, and Transport
 
-All service matching is performed based on the destination address of packets received by an SSR, inclusive of port and transport protocol. It is important to understand what address, port, and protocol are being transmitted by the client. There are several tools to use to glean this:
+All service matching is performed based on the destination address of packets received by an SSR, inclusive of port and transport protocol. It is important to understand what address, port, and protocol are being transmitted by the client. 
 
-- Packet captures. Enabling packet captures on the ingress interface will definitively show what IP/port/proto is being sent by the client. Use a capture filter such as `host a.b.c.d` (e.g., `host 192.168.1.100`) on the ingress interface, to isolate the trace to a source with the IP address `a.b.c.d`.
+The best method to identify this information is to use [Selective Packet Capture](ts_packet_capture.md#selective-packet-capture). This method applies a trace not only on the ingress node where the capture is defined, but also triggering traces on every subsequent SSR node the session traverses.
 
-:::info Remember
-When capturing packets on an interface that has a VLAN tag you must also include `and vlan` in your capture-filter.
-:::
-
-- The output of `show sessions` from the PCLI (or the equivalent output in the GUI) will identify all traffic that is in the SSR's *session table* – i.e., it has been through "first packet processing" on the SSR. Use the `grep` command to filter this traffic down to the source IP address, to see which destination(s) that client is attempting to access. From this list, winnow it down to the destination.
-
-:::note
-If the traffic is not present in the output of `show sessions`, then it is either not reaching that SSR, failing to establish a session due to some configuration or software error, or was a very short-lived session and it has already expired from the session table.
-:::
-
-In addition to the packet capture methods described above, you can use the [Selective Packet Capture feature](ts_packet_capture.md#selective-packet-capture) to apply a trace not only on the ingress node where the capture is defined, but also triggering traces on every subsequent SSR node the session traverses.
+Please refer to the [Selective Packet Capture section](ts_packet_capture.md#selective-packet-capture) to configure this feature.
 
 ### Determining the Service from the PCLI
 
@@ -361,26 +351,21 @@ Now that you have a sense of the type of application traffic you're interested i
 Typically filtering traffic based on source IP at the ingress SSR and destination IP at the egress SSR is the most useful, since this will sidestep NAT issues.
 :::
 
-3. If possible, raise the log level on the ingress and egress SSR for the `highway` process. The command is `set log level debug highway` from the router's PCLI. If the router is not busy, you can set the log level to `trace` instead of debug.
-:::note
-Do not raise the log level on busy routers (i.e., head end) to `trace`, and do not leave them running at `debug` for extended periods.
-:::
+3. Use the command `write log message BEGINNING TEST 1` to cause the SSR to put an identifier into each log on the system.
 
-4. Use the command `write log message BEGINNING TEST 1` to cause the SSR to put an identifier into each log on the system.
+4. Ask your user to run tests that demonstrate the failure.
 
-5. Ask your user to run tests that demonstrate the failure.
+5. Use the command `write log message ENDING TEST 1`
 
-6. Use the command `write log message ENDING TEST 1`
+6. Repeate steps 4-6 several times, incrementing the TEST numbers in your log message.
 
-7. Repeate steps 4-6 several times, incrementing the TEST numbers in your log message.
+7. Lower the log levels on all devices, disable packet captures on all devices.
 
-8. Lower the log levels on all devices, disable packet captures on all devices.
+8. Retrieve the logs and captures from ingress and egress SSR systems.
 
-9. Retrieve the logs and captures from ingress and egress SSR systems.
+9. Analyze the captures to follow the packet flow from ingress to egress SSR. Ensure that all messages received on the ingress router arrive and are forwarded by the egress router, and that the return path follows suit in the reverse direction.
 
-10. Analyze the captures to follow the packet flow from ingress to egress SSR. Ensure that all messages received on the ingress router arrive and are forwarded by the egress router, and that the return path follows suit in the reverse direction.
-
-11. If the packet captures and logs do not both contain the user's test traffic, change the filter to improve the signal:noise ratio and re-test. **Getting packet captures that correspond to logs that demonstrate the failure is the most important step.**
+10. If the packet captures and logs do not both contain the user's test traffic, change the filter to improve the signal:noise ratio and re-test. **Getting packet captures that correspond to logs that demonstrate the failure is the most important step.**
 
 If the SSR devices are confirmed to be forwarding traffic in both directions but the application is not working, then consult with the application provider to get their consultation. If the SSR devices are not forwarding traffic, continue troubleshooting.
 
@@ -392,11 +377,9 @@ This is generally due to a configuration problem or a transient network issue (e
 
 If traffic is processed by the ingress router and you believe it is forwarded out to the egress router but doesn't arrive, perform additional testing as follows:
 
-1. Enable packet captures as was done previously, but also enable them on the WAN interface(s) of the ingress and egress SSR devices. Use `capture-filter` configuration that limits the traffic to only the two waypoints of the two routers in question.
+1. Run the tests as was done previously. Investigate the `highway` logs or the output of the `show sessions` table while the traffic is in progress to see what waypoint allocations were assigned to that traffic flow. On the ingress router this will be indicated by the `rev` flow for the session.
 
-2. Run the tests as was done previously. Investigate the `highway` logs or the output of the `show sessions` table while the traffic is in progress to see what waypoint allocations were assigned to that traffic flow. On the ingress router this will be indicated by the `rev` flow for the session.
-
-3. Look for these ports in the WAN captures on both the ingress and egress routers. If you see them leaving the ingress router and not arriving at the egress router, then this should be taken to your ISP for assistance in troubleshooting.
+2. Look for these ports in the WAN captures on both the ingress and egress routers. If you see them leaving the ingress router and not arriving at the egress router, then this should be taken to your ISP for assistance in troubleshooting.
 
 ### Traffic Doesn't Leave the Egress Router
 
