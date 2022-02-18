@@ -22,7 +22,7 @@ This procedure assumes you do not already have an account, organization, or site
 
 For detailed information about Mist WAN Assurance, please refer to the [Mist WAN Assurance documentation](https://www.juniper.net/us/en/products/cloud-services/wan-assurance.html). 
 
-1. Create an account on the [Mist portal](https://integration.mistsys.com/). 
+1. Create an account on the [Mist portal](https://manage.mist.com/). 
 
 2. Create an organization for the authority. 
 
