@@ -38,17 +38,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
-**CVE Resolution - The following CVE issues have been addressed and resolved with this release:**
-
-I95-40268: CVE-2008-5161
-I95-41591: CESA-2021:0856 
-I95-42448: DoDIN APL Certification (multiple)
-I95-43261: CVE-2021-41617 (CESA-2021:4782) 
-I95-43471: CVE-2015-9262 (CESA-2018:3059)
-I95-43625: CVE-2021-42574 (CESA-2021:4033)
-I95-44087: CVE-2016-2124, CVE-2020-25717 (CESA-2021:5192)
-I95-44088: CVE-2021-43527 (CESA-2021:4904)
-I95-44206: CVE-2021-20271 (CESA-2021:4785) 
+- **The following CVE issues have been addressed and resolved with this release:**
+I95-40268, I95-41591, I95-41794, I95-41863, I95-42448, I95-43258, I95-43260, I95-43261, I95-43471, I95-43623, I95-43625, I95-44087, I95-44088, I95-44206, I95-44322 
 ------
 - **I95-42942 GUI Session Capture not working:** Resolved an issue with Packet Count and Session Count options. Session Capture now works as expected. 
 ------
