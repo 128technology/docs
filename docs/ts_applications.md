@@ -7,7 +7,7 @@ This guide describes the methodology behind troubleshooting issues on the SSR th
 
 This document is for network administrators responsible for managing a deployed Session Smart Networking Platform.
 
-## Application Latency Troubleshooting Steps
+## Troubleshooting Steps
 
 The basic approach used to troubleshoot applications on the Session Smart Networking Platform follows the set of steps below:
 
@@ -18,14 +18,13 @@ The basic approach used to troubleshoot applications on the Session Smart Networ
 5. Generate test traffic using the `service-ping` command.
 6. Perform end user testing.
 
-Each of these steps is discussed in more detail in the sections that follow. It is recommended to perform the application troubleshooting steps on both the local router and the remote router.
+Each of these steps is discussed in more detail in the sections that follow. It is recommended to perform the application troubleshooting steps on both the local router and the remote router (if applicable).
 
 ## Identify the Affected Applications
 
 The following information can be gathered from the customer:
 
-- Application Names
-- Functions
+- Application name and function
 - Any application dependencies such as DNS, LDAP/TACACS+, etc.
 
 ## Identifying the Requesting Tenant
