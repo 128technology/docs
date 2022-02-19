@@ -190,7 +190,7 @@ This release replaces the existing `5.1.6-1` release.
 
 ### Caveats
 
-- **I95-41574 Conductor Rollback:** In a high availability configuration where 5.1.6 has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
+- **I95-41574 Conductor Rollback:** In a High Availability configuration where 5.1.6 has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
 
 ## Release 5.1.5
 **Release Date:** August 13, 2021
