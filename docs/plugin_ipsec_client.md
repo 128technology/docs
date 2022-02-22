@@ -443,7 +443,7 @@ Completed in 0.10 seconds
 #### New Features and Improvements
 - **PLUGIN-1509** Ability to configure tunnel monitors
 
-The feature adds support for configuring tunnel monitors using ping. See [the tunnel monitoring section](tunnel-monitoring) for more details.
+The feature adds support for configuring tunnel monitors using ping. See [the tunnel monitoring section](#tunnel-monitoring) for more details.
 
 #### Issues Fixed
 - **PLUGIN-1389** Corrupt encryption database caused tunnels to not come up.
