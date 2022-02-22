@@ -5,9 +5,9 @@ sidebar_label: 'PCLI'
 
 ## About the PCLI
 
-The PCLI (an acronym for _Programmable Command Line Interface_) is one of the two primary human interfaces on the 128T router; this document will use the terms PCLI and CLI interchangeably. This document describes the set of PCLI commands supported by the 128T router. Each command listed below will show all mandatory and optional arguments, representative output from the PCLI where applicable, and version history.
+The Programmable Command Line Interface (PCLI) is one of the two primary human interfaces for the SSR; this document uses the terms PCLI and CLI interchangeably. This document describes how to use the PCLI commands supported by the SSR. 
 
-Note that all of the examples in this document will be run as the _admin_ role (as denoted by the prompt in this and other examples); however, each command will also indicate which user roles – either _user_ or _admin_ at the time of this writing – are eligible to run the command based upon that command&#39;s privileges. Note that unprivileged _user_ accounts will not only be unable to execute these commands, they will not "see" them in the PCLI as part of the help text, etc.
+Note that all of the examples in this document are run as the _admin_ role (as denoted by the prompt in this and other examples); however, each command also indicates which user roles – either _user_ or _admin_ at the time of this writing – are eligible to run the command based upon that command's privileges. Note that unprivileged _user_ accounts are not only unable to execute these commands, they do not "see" them in the PCLI as part of the help text, etc.
 
 Optional arguments are written in brackets (`[` `]`), and users may include or omit them as needed. Variable arguments (where users need to supply a value, rather than entering in the literal string shown in the syntax) are written in angle brackets (`<` `>`).
 
@@ -23,7 +23,7 @@ Braces, brackets, and pipes are often combined and nested to describe the comple
 
 ## The PCLI Prompt
 
-The PCLI will indicate that there are uncommitted configuration changes via a change to the prompt. When uncommitted changes exist, the prompt is prefixed with an asterisk ("\*"):
+The PCLI will indicate when there are uncommitted configuration changes via a change to the prompt. When uncommitted changes exist, the prompt is prefixed with an asterisk ("\*"):
 
 ```
 *admin@labsystem1.fiedler#
@@ -41,8 +41,8 @@ admin@labsystem1.fiedler#
 
 This command is the equivalent to the following two actions:
 
-1. `<enter>` execute what is currently on the prompt line (if any).
-2. `top<enter>` exit the current menu and go to the root of the PCLI tree.
+1. `<enter>`: Execute what is currently on the prompt line (if any).
+2. `top<enter>`: Exit the current menu and go to the root of the PCLI tree.
 
 When the buffer is empty:
 
@@ -91,7 +91,7 @@ When working across multiple systems, it is convenient to copy snippets of one c
 
 An example of copying a service from one system and pasting it to another is shown below.
 
-```config
+```
 admin@tp-colo-primary.tp-colo# show config running authority service internet_service
 
 config

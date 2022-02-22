@@ -114,6 +114,7 @@ Platforms may have a variety of different features and capabilities configurable
 * Boot mode: do not change manufacturer's settings (Legacy or UEFI accepted)
 * Boot order: HDD, USB, PXE
 * Watchdog timer: disabled
+* SR-IOV: enabled
 * Secure Boot: disabled
 * Serial Port Baud Rate: 115200/8-n-1 (To be used for console installation)
 * Power profile: maximum performance

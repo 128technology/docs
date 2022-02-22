@@ -24,6 +24,54 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.4.4-9
+
+**Release Date:** February 18, 2022
+
+### New Features
+
+- **I95-25630 Gateway IP is required:** When creating or changing a service-route with a next-hop of a static IP net-int, a gateway IP is required. If no gateway IP has been specified, the network-interface gateway will be used. 
+------
+- **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to that of CentOS 8.4 to address several CVEs and provide support for Wireguard and Cordoba. 
+------
+- **I95-44224 Autocomplete for Resource Groups:** Autocomplete has been added to the pcli when configuring resource groups. 
+
+### Resolved Issues
+
+- **The following CVE issues have been addressed and resolved with this release:**
+I95-40268, I95-41591, I95-41794, I95-41863, I95-42448, I95-43258, I95-43260, I95-43261, I95-43471, I95-43623, I95-43625, I95-44087, I95-44088, I95-44206, I95-44322 
+------
+- **I95-42942 GUI Session Capture not working:** Resolved an issue with Packet Count and Session Count options. Session Capture now works as expected. 
+------
+- **I95-43809 CLI commands fail to run from the Conductor:** Resolved an issue where requests made to a HA conductor would not always try its peer.
+------
+- **I95-44107 Service routes with a GRE interface in the next-hop fail validation:** Updated the validation process for mapping interfaces.
+------
+- **I95-44144 Update Zookeeper Logging:** Zookeeper logging library has been replaced with reload4j.
+------
+- **I95-44152 `reachability-detection probe-type` description does not match implementation:** The configuration field description for `reachability-detection probe-type` has been updated.
+------
+- **I95-44207 Unprovisioned OSPF configuration causes the PCLI to generate an error when issuing show ospf:** This issue has been resolved.
+------
+- **I95-44246 The "Piping Output..." message does not clear:** When running a grep command from the pcli, the piping output does not clear. This issue has been resolved.
+------
+- **I95-44252 Unneeded package dependencies may cause upgrade or rollback failures:** The packages and logic is obsolete and have been removed.
+------
+- **I95-44278 Paste configuration error:** Resolved an issue where pasting multiple lines that beginning with `configure` caused an error.
+------
+- **I95-44360 Custom Charts Create/Delete Dialog Boxes Not Dismissing:** Resolved an issue where a race condition was preventing dismissal of the dialog boxes.
+------
+- **I95-44480 Not allowing some valid identifiers or values:** This issue has been resolved.
+------
+- **I95-44517 Time check incorrectly locking upgrade process:** The time check has been replaced with a process name check.  
+------
+- **I95-44538 Invalid Stat increment:** This issue has been resolved. 
+
+### Caveats
+
+- **I95-44222 Commit fails for RBAC users with config-write permissions:** RBAC users with config-write permissions, but who do not have explicit write access to t128/ get a “failure to commit” message.
+	**_Workaround:_** Manually create a `commit` role and set the 128t:/ resource in the role. Add this role to users who need the ability to commit.	
+
 ## Release 5.4.3-8
 
 **Release Date:** January 27, 2022
