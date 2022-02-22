@@ -84,6 +84,36 @@ exit
 Only one `ipsec-client` can be configured per node, but two `remote`s can be configured per client.
 :::
 
+### Tunnel Monitoring
+Tunnel monitoring is a way to monitor the health of individual tunnels and have them be automatically restarted if they become unhealthy. An ICMP ping will be used for the traffic. For each `remote`, you can specify a destination, interval, timeout, and the number of max retries for each interval.
+
+```
+node
+    ipsec-client client1
+        remote c1gateway1
+            tunnel-monitor
+                enabled true
+                destination 8.8.8.8
+                    address 8.8.8.8
+                    timeout 10
+                    max-retries 3
+                    interval 120
+                exit
+            exit
+        exit
+
+        tunnel-monitor-nat-network 10.128.128.0/28
+    exit
+exit
+```
+
+* `enabled` - Allows you to switch tunnel monitoring on and off for a `remote`
+* `address` - The ip or hostname to send traffic to. This address must be reachable after traversing the tunnel.
+* `timeout` - Duration (in seconds) within which to reach the destination. Each attempt will be made in this duration / `max-retries` interval.
+* `max-retries` - Number of consecutive missed ICMP ping responses from the destination within the interval before deciding that the tunnel is unhealthy.
+* `interval` - Duration (in seconds) of how often to perform an ICMP probe test to the probe-address.
+* `tunnel-monitor-nat-network` - The subnet to originate traffic from. The correspnoding ingress KNI's fourth octet will be used. By default, the subnet `10.128.128.0/28` is used.
+
 ### Generated 128T Configuration
 A KNI per remote is created with the name of the `remote` and a single egress KNI is created with the name of the `ipsec-client`.
 
@@ -407,6 +437,18 @@ Completed in 0.10 seconds
 ```
 
 ## Release Notes
+
+### Release 3.2.0
+
+#### New Features and Improvements
+- **PLUGIN-1509** Ability to configure tunnel monitors
+
+The feature adds support for configuring tunnel monitors using ping. See TUNNEL_MONITORING_SECTIon for more details.
+
+#### Issues Fixed
+- **PLUGIN-1389** Corrupt encryption database caused tunnels to not come up.
+
+ _**Resolution**_ The service on the router will clean up these database files on startup.
 
 ### Release 2.2.0, 3.1.0
 
