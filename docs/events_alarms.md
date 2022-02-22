@@ -7,11 +7,11 @@ sidebar_label: Alarms
 | Category  | asset                                                        |
 | Severity  | major                                                        |
 | Message   | Asset `<id>`, which is configured as `<node>`.`<router>`, is not running |
-| Threshold | Issued when the 128T service stops on a node (must be managed by ZTP). Clears on 128T start. |
+| Threshold | Issued when the SSR service stops on a node (must be managed by ZTP). Clears on SSR start. |
 
 | Cause                                                  | Troubleshooting Step                                         |
 | ------------------------------------------------------ | ------------------------------------------------------------ |
-| 128T is not running on node `<node>` router `<router>` | Start 128T from the Conductor PCLI by entering with `send command start router <router> node <node>` or pressing the start button on the Conductor’s router page in the GUI. If 128T cannot start check `systemctl status 128T` on that node. |
+| SSR is not running on node `<node>` router `<router>` | Start SSR from the Conductor PCLI by entering with `send command start router <router> node <node>` or pressing the start button on the Conductor’s router page in the GUI. If the SSR cannot start check `systemctl status 128T` on that node. |
 
 ------
 
@@ -20,11 +20,11 @@ sidebar_label: Alarms
 | Category  | asset                                                        |
 | Severity  | major                                                        |
 | Message   | Asset`<id>`, which is configured as `<node>`.`<router>`, failed to install. |
-| Threshold | Issued when the 128T install fails on a node (must be managed by ZTP). Clears once 128T is installed. |
+| Threshold | Issued when the SSR install fails on a node (must be managed by ZTP). Clears once SSR is installed. |
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| 128T failed to install on node `<node>` router `<router>`, which is asset `<id>` | Issue command `show assets <id>` to see detailed information on why the install failed and follow the instructions to fix the issue and retry the installation. |
+| SSR failed to install on node `<node>` router `<router>`, which is asset `<id>` | Issue command `show assets <id>` to see detailed information on why the install failed and follow the instructions to fix the issue and retry the installation. |
 
 ------
 
@@ -37,7 +37,7 @@ sidebar_label: Alarms
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Multiple nodes configured within one router have different software versions. | Manually upgrade the node that has the lower version using 128T or upgrade the router from the PCLI by issuing the `send command upgrade router <router> <version>` or hitting the upgrade button on the Conductor's Software Management Studio page on the GUI. |
+| Multiple nodes configured within one router have different software versions. | Manually upgrade the node that has the lower version. Upgrade the router from the PCLI by issuing the `send command upgrade router <router> <version>` or the upgrade button on the Router page on the Conductor's GUI. |
 
 ------
 
@@ -169,7 +169,7 @@ sidebar_label: Alarms
 
 | Cause                                                       | Troubleshooting Step                                         |
 | ----------------------------------------------------------- | ------------------------------------------------------------ |
-| Occurs when 90% or more of the total FIB table is utilized. | The alarm is cleared when 80% or less of the total FIB table is utilized. This may be due to suboptimal configuration or insufficient memory allocated to the 128T software. Contact 128T support if this alarm persists. |
+| Occurs when 90% or more of the total FIB table is utilized. | The alarm is cleared when 80% or less of the total FIB table is utilized. This may be due to suboptimal configuration or insufficient memory allocated to the SSR software. Contact Juniper support if this alarm persists. |
 
 ------
 
@@ -207,7 +207,7 @@ sidebar_label: Alarms
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact 128T customer support. |
+| Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact Juniper customer support. |
 
 ------
 
@@ -219,7 +219,7 @@ sidebar_label: Alarms
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact 128T customer support. |
+| Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact Juniper customer support. |
 
 ------
 
@@ -228,12 +228,12 @@ sidebar_label: Alarms
 | Category  | process                                                      |
 | Severity  | major                                                        |
 | Message   | Process has exited unexpectedly: `<process-name>`            |
-| Threshold | Issued when a 128T system process exits and is cleared when it is successfully restarted |
+| Threshold | Issued when a SSR system process exits and is cleared when it is successfully restarted |
 
 | Cause                                               | Troubleshooting Step                                         |
 | --------------------------------------------------- | ------------------------------------------------------------ |
-| Process exits once and restarts to normal operation | The 128T system is designed to restart processes in the event of a failure. If this alarm state is only seen briefly and then clears it is likely that the system has self-recovered. Please report to 128T customer support. |
-| Process exits continuously                          | Contact 128T customer support                                |
+| Process exits once and restarts to normal operation | The SSR is designed to restart processes in the event of a failure. If this alarm state is only seen briefly and then clears it is likely that the system has self-recovered. Please report to Juniper customer support. |
+| Process exits continuously                          | Contact Juniper customer support                                |
 
 ------
 
@@ -246,6 +246,7 @@ sidebar_label: Alarms
 
 | Cause                                   | Troubleshooting Step                                         |
 | --------------------------------------- | ------------------------------------------------------------ |
+| Alarm triggers above 90% memory usage | The Alarm resets/clears when memory usage drops below 80%. |
 | A process is consuming excessive memory | Locate the system processes consuming large amounts of system memory by running `show stats process memory rss` from the PCLI. |
 
 ------
@@ -286,8 +287,9 @@ sidebar_label: Alarms
 
 | Cause                                              | Troubleshooting Step                                         |
 | -------------------------------------------------- | ------------------------------------------------------------ |
+| Alarm triggers above 85% CPU usage for 30 seconds | The alarm clears when the CPU usage drops below 70%. |
 | Intermittent process consuming large amount of CPU | If the alarm triggers and clears intermittently this could indicate a periodic load spike or intermittent process workload. Check the current cpu utilization of all processes in the system by using the linux command `top` or the PCLI command `show stats process cpu`. |
-| Process consistently consuming large amount of CPU | If the alarm is constantly active this could indicate an under-provisioned system. Check the current cpu utilization of all processes in the system by using the linux command `top` or the PCLI command `show stats process cpu`. Contact 128T support for guidance on provisioning the system. |
+| Process consistently consuming large amount of CPU | If the alarm is constantly active this could indicate an under-provisioned system. Check the current cpu utilization of all processes in the system by using the linux command `top` or the PCLI command `show stats process cpu`. Contact Juniper support for guidance on provisioning the system. |
 
 ------
 
@@ -339,8 +341,8 @@ sidebar_label: Alarms
 
 | Cause                                             | Troubleshooting Step                                         |
 | ------------------------------------------------- | ------------------------------------------------------------ |
-| The HA peer node has shut down or stopped running | Verify that the HA peer node is powered on and running. If the node is running verify that the 128T service is running without error by issuing the command `systemctl status 128T`. If the system appears to be running correctly check connectivity between the systems by issuing the PCLI command `show system connectivity` on both nodes. |
-| Connectivity between HA nodes is down             | HA node connectivity can be evaluated with the PCLI command `show system connectivity`. If the state to the peer node is not `connected` check the inter node tunnel status by running the PCLI command `show system connectivity internal`. All tunnels to the peer node should report “connected”. If connectivity is down verify links between the systems and if they are up then please contact 128T support. |
+| The HA peer node has shut down or stopped running | Verify that the HA peer node is powered on and running. If the node is running verify that the SSR service is running without error by issuing the command `systemctl status 128T`. If the system appears to be running correctly check connectivity between the systems by issuing the PCLI command `show system connectivity` on both nodes. |
+| Connectivity between HA nodes is down             | HA node connectivity can be evaluated with the PCLI command `show system connectivity`. If the state to the peer node is not `connected` check the inter node tunnel status by running the PCLI command `show system connectivity internal`. All tunnels to the peer node should report “connected”. If connectivity is down verify links between the systems and if they are up then please contact Juniper support. |
 
 ------
 
@@ -366,7 +368,7 @@ sidebar_label: Alarms
 
 | Cause                                            | Troubleshooting Step                                         |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| Network connectivity failure or misconfiguration | Ensure that the SNMP server defined in the configuration is reachable.  Usually this can be determined by issueing a `ping` to the server address.  If the server does not respond, run a packet capture on the interface used for SNMP to observe if traffic is being generated from the 128T upon event generation. |
+| Network connectivity failure or misconfiguration | Ensure that the SNMP server defined in the configuration is reachable.  Usually this can be determined by issueing a `ping` to the server address.  If the server does not respond, run a packet capture on the interface used for SNMP to observe if traffic is being generated from the SSR upon event generation. |
 
 ------
 
@@ -379,4 +381,4 @@ sidebar_label: Alarms
 
 | Cause                                               | Troubleshooting Step                                         |
 | --------------------------------------------------- | ------------------------------------------------------------ |
-| non-dynamically reconfiguable filed has been edited | Some fields within the 128T configuration is not dynamic and requires a restart of the 128T process to take effect (e.g. forwarding-cores).  From the Conductor Router page, click on the gear icon to issue a restart of the 128T process.  Alternatively, from within the linux shell of the 128T Router, issue `systemctl restart 128T` |
+| non-dynamically reconfiguable filed has been edited | Some fields within the SSR configuration are not dynamic and requires a restart of the SSR process to take effect (e.g. forwarding-cores).  From the Conductor Router page, click on the gear icon to issue a restart of the SSR process.  Alternatively, from within the linux shell of the SSR Router, issue `systemctl restart 128T` |
