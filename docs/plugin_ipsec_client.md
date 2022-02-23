@@ -351,7 +351,7 @@ Configuration and pillar generation logs can be found on the conductor under `/v
 Salt status can be found on the conductor by utilizing the PCLI’s `show assets` and `show assets <asset-id>` commands.
 
 ### PCLI Enhancements
-To check the status of the IPsec tunnels for a given ingress KNI, extra IPsec tunnel related output will be found in the `show device-interface` command.
+To check the status of the IPsec tunnels for a given ingress KNI, extra IPsec tunnel related output will be found in the `show device-interface` command as well as the `show plugin state` command.
 
 Example output for a healthy tunnel:
 ```
@@ -418,6 +418,30 @@ Example output for a tunnel that is down:
 
  IPSec:
    Tunnel Status:     Down
+```
+
+#### Tunnel Monitor State
+
+If tunnel monitoring is enabled for a remote, corresponding tunnel monitoring state is included in the pcli commands.
+
+```
+ IPSec:
+     Tunnel Status:   Up
+     Tunnel Details:
+         Name:        ipsec-client-tunnel-primary-rem1
+         Remote id:   172.16.4.3
+         SA Details:
+             Add time:2022-02-14 15:41:15
+             In bytes:60
+             Out bytes:60
+         Ingress Total (bytes):60
+         Egress Total (bytes):60
+     SA Count:        1
+     Tunnel Monitoring:
+           Destination:8.8.8.8
+           Status:    up
+           Last Attempt:2022-02-14 15:42:34
+           Last Restart:2022-02-14 15:41:15
 ```
 
 ### Systemd Services
