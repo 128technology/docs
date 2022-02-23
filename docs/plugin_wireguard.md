@@ -322,6 +322,39 @@ config
 exit
 ```
 
+eth1-net can be configured with DHCP enabled after Release 2.0.5:
+```
+config
+  authority
+    router             r1
+      wireguard-profile    wg-profile-1
+        name             wg-profile-1
+
+        private-network
+          neighborhood  remote
+          address       10.10.10.1/24
+        exit
+
+        peer             iot-dev-1
+          name        iot-dev-1
+          public-key  Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=
+          allowed-ip  10.10.10.2/32
+        exit
+      exit
+
+      node                 node1
+        device-interface  eth1
+          network-interface  eth1-net
+            dhcp         v4
+            wireguard-profile wg-profile-1
+          exit
+        exit
+      exit
+    exit
+  exit
+exit
+```
+
 ### Remote Endpoint Configuration
 
 The wireguard configuration on the IoT device might look like the following:
@@ -336,6 +369,13 @@ PrivateKey = MEAtlWq4Ou7++yxjYGtTa85gzDj3mbbCy76J5oWPaG8=
 PublicKey = lV8egtiC8AKNh+DawkSM6G8t4x6BMFCsz8m48ToxHyA=
 AllowedIPs = 0.0.0.0/0
 Endpoint = 1.1.1.1:12800
+```
+:::note
+If Endpoint has DHCP enabled, this Endpoint address needs to be configured with latest IP address assigned.
+:::
+
+```
+
 PersistentKeepalive = 30
 ```
 :::note
@@ -345,6 +385,7 @@ The `PersistentKeepalive` in this wireguard configuration causes the peer to kee
 With the profile and peer configured on the 128T router `r1`, and wireguard configured on the remote IoT device, you can verify the device is keeping the connection alive by reviewing the `latest handshake` output of `show device-interface router <router_name> name <profile_name>`:
 
 ```
+
 admin@node1.dev-conductor# show device-interface router r1 name wg-profile-1
 Wed 2020-08-05 23:33:02 UTC
 
@@ -637,6 +678,23 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 :::warning
 The plugin must be updated to version 2.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
+
+### Release 2.0.5
+
+#### New Features and Improvements
+
+- **PLUGIN-1429**  Support DHCP for wireguard interfaces
+The feature adds support for configuring wireguard profile in network interface level when dhcp is enabled.
+  
+
+### Release 2.0.4
+
+#### Issues Fixed
+
+- **PLUGIN-1469**  Add support for kernel version `4.18.0-305.19.1`.
+
+
+### Release 2.0.2, 1.2.2
 
 ### Release 2.0.3
 
