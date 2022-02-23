@@ -92,7 +92,7 @@ Only one `ipsec-client` can be configured per node, but two `remote`s can be con
 | -------- | ------------------------------------ |
 | 3.2.0    | `remote > tunnel-monitor` introduced |
 
-Tunnel monitoring is a way to monitor the health of individual tunnels and have them be automatically restarted if they become unhealthy. An ICMP ping will be used for the traffic. For each `remote`, you can specify a destination, interval, timeout, and the number of max retries for each interval.
+Tunnel monitoring is a way to monitor the health of individual tunnels and have them automatically restart if they become unhealthy. An ICMP ping is used for the traffic. For each `remote`, you can specify a destination, interval, timeout, and the number of max retries for each interval.
 
 ```
 node
@@ -114,12 +114,12 @@ node
 exit
 ```
 
-* `enabled` - Allows you to switch tunnel monitoring on and off for a `remote`
-* `address` - The ip or hostname to send traffic to. This address must be reachable after traversing the tunnel.
+* `enabled` - Allows you to switch tunnel monitoring on and off for a `remote`.
+* `address` - The IP or hostname where traffic is sent. This address must be reachable after traversing the tunnel.
 * `timeout` - Duration (in seconds) within which to reach the destination. Each attempt will be made in this duration / `max-retries` interval.
 * `max-retries` - Number of consecutive missed ICMP ping responses from the destination within the interval before deciding that the tunnel is unhealthy.
 * `interval` - Duration (in seconds) of how often to perform an ICMP probe test to the probe-address.
-* `tunnel-monitor-nat-network` - The subnet to originate traffic from. The correspnoding ingress KNI's fourth octet will be used. By default, the subnet `10.128.128.0/28` is used.
+* `tunnel-monitor-nat-network` - The subnet where traffic originates. The corresponding ingress KNI's fourth octet is used. By default, the subnet `10.128.128.0/28` is used.
 
 ### Generated 128T Configuration
 A KNI per remote is created with the name of the `remote` and a single egress KNI is created with the name of the `ipsec-client`.
