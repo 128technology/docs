@@ -85,6 +85,13 @@ Only one `ipsec-client` can be configured per node, but two `remote`s can be con
 :::
 
 ### Tunnel Monitoring
+
+##### Version History
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.2.0    | `remote > tunnel-monitor` introduced |
+
 Tunnel monitoring is a way to monitor the health of individual tunnels and have them be automatically restarted if they become unhealthy. An ICMP ping will be used for the traffic. For each `remote`, you can specify a destination, interval, timeout, and the number of max retries for each interval.
 
 ```
