@@ -450,6 +450,10 @@ The feature adds support for configuring tunnel monitors using ping. See [the tu
 
  _**Resolution**_ The service on the router will clean up these database files on startup.
 
+- **PLUGIN-1467** Configuring `aes_gcm256` for `phase2-encryption` resulted in invalid libreswan configuration.
+
+ _**Resolution**_ The libreswan config generation will generate valid configuration for `aes_gcm256`.
+
 ### Release 3.1.3
 
 #### Issues Fixed
