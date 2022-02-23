@@ -59,7 +59,7 @@ exit
 With the profile configured and set on an interface, the router will install the required components for wireguard peering.
 
 
-### Version History
+#### Version History 
 
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
@@ -361,15 +361,12 @@ PrivateKey = MEAtlWq4Ou7++yxjYGtTa85gzDj3mbbCy76J5oWPaG8=
 PublicKey = lV8egtiC8AKNh+DawkSM6G8t4x6BMFCsz8m48ToxHyA=
 AllowedIPs = 0.0.0.0/0
 Endpoint = 1.1.1.1:12800
-```
-:::note
-If Endpoint has DHCP enabled, this Endpoint address needs to be configured with latest IP address assigned.
-:::
-
-```
-
 PersistentKeepalive = 30
 ```
+:::note
+If wireguard is hosted on a DHCP enabled interface, `Endpoint` address needs to be configured with latest IP address assigned.
+:::
+
 :::note
 The `PersistentKeepalive` in this wireguard configuration causes the peer to keep the connection to the peer alive by sending periodic traffic. This has the effect of allowing the 128T to originate sessions to the peer at any time. See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
 :::
