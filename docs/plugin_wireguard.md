@@ -56,8 +56,33 @@ config
   exit
 exit
 ```
-
 With the profile configured and set on an interface, the router will install the required components for wireguard peering.
+
+
+### Version History
+
+| Release      | Modification                                    |
+| ------------ | ----------------------------------------------- |
+| 2.1.0        | Support for DHCP interface is introduced        |
+
+Wireguard profile can be configured on DHCP enabled network interface:
+```
+config
+  authority
+    router             r1
+      node                 node1
+        device-interface  eth1
+          network-interface  eth1-net
+            dhcp            v4
+            wireguard-profile wg-profile-1
+          exit
+        exit
+      exit
+    exit
+  exit
+exit
+```
+
 
 ## Services and Tenants with Wireguard
 
@@ -314,39 +339,6 @@ config
             address     1.1.1.1
               wireguard-profile wg-profile-1
             exit
-          exit
-        exit
-      exit
-    exit
-  exit
-exit
-```
-
-eth1-net can be configured with DHCP enabled after Release 2.0.5:
-```
-config
-  authority
-    router             r1
-      wireguard-profile    wg-profile-1
-        name             wg-profile-1
-
-        private-network
-          neighborhood  remote
-          address       10.10.10.1/24
-        exit
-
-        peer             iot-dev-1
-          name        iot-dev-1
-          public-key  Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=
-          allowed-ip  10.10.10.2/32
-        exit
-      exit
-
-      node                 node1
-        device-interface  eth1
-          network-interface  eth1-net
-            dhcp         v4
-            wireguard-profile wg-profile-1
           exit
         exit
       exit
@@ -679,19 +671,20 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 The plugin must be updated to version 2.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
-### Release 2.0.5
+### Release 2.1.0
 
 #### New Features and Improvements
 
 - **PLUGIN-1429**  Support DHCP for wireguard interfaces
 The feature adds support for configuring wireguard profile in network interface level when dhcp is enabled.
   
-
-### Release 2.0.4
-
 #### Issues Fixed
 
 - **PLUGIN-1469**  Add support for kernel version `4.18.0-305.19.1`.
+
+- **PLUGIN-1480** Large configuration was causing plugin config generation to fail
+
+  _**Resolution:**_ The config generation logic for the plugin will handle config with long lines correctly
 
 
 ### Release 2.0.2, 1.2.2
