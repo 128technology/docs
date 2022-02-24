@@ -30,7 +30,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- I95-25630
+- **I95-25630 Gateway IP is required:** When creating or changing a service-route with a next-hop of a static IP net-int, a gateway IP is required. If no gateway IP has been specified, the network-interface gateway will be used. 
 ------
 - **I95-28791 Forward Error Correction:** Forward Error Correction (FEC) adds resiliency against packet loss between two points in the network. Profiles are configured at the authority level and are not traffic-specific, which allows them to be used on any service and any router in the authority. For information about using this feature, please see [Configuring Forward Error Correction](config_forward_error_correction.md).
 ------
@@ -44,17 +44,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43395 ESP protocol for DSCP Traffic Steering:** DSCP Traffic Steering now supports the ESP protocol. For more information, see [Configuring DSCP Steering.](config_dscp_steering.md)
 ------
-- I95-43645
-------
-- I95-43909
-------
-- I95-43919
-------
 - **I95-44224 Autocomplete for Resource Groups:** Autocomplete has been added to the pcli when configuring resource groups. 
-------
-- I95-44609
-
-
 
 ### Resolved Issues
 
