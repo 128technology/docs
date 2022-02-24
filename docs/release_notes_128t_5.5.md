@@ -40,7 +40,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-41072 Enhanced Web Filtering:** Web Filtering allows administrators to limit or prevent user access to internet content. These limitations may be based on company or organization policies, or because a domain may be know to contain malicious, inappropriate, or dangerous content. Individual services and service policies can be configured on the SSR to allow or deny access to an entire domain category, or specific domains within a category. For more information, see [Web Filtering.](config_domain-based_web_filter.md)
 ------
-- **I95-41527 Application Identification:** Application Identification is a compoonent of Enhanced Web Filtering, and can automatically learn, identify, and classify applications processed by the SSR and store them in the web filtering cache. For more information, see [Application Identification.](config_app_ident.md)
+- **I95-41527 Application Identification:** Application Identification is a component of Enhanced Web Filtering, and can automatically learn, identify, and classify applications processed by the SSR and store them in the web filtering cache. For more information, see [Application Identification.](config_app_ident.md)
 ------
 - **I95-43395 ESP protocol for DSCP Traffic Steering:** DSCP Traffic Steering now supports the ESP protocol. For more information, see [Configuring DSCP Steering.](config_dscp_steering.md)
 ------

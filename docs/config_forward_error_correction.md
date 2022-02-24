@@ -140,7 +140,7 @@ Metrics for FEC are categorized into success and failure counters. Use the follo
 
 ### Success Counters
 
-Use `show packet-processing action success fec` to view the following success metrics.
+Use [`show stats packet-processing action success fec`](cli_stats_reference.md#show-stats-packet-processing-action-success-fec) to view the following success metrics.
 
 #### Add
 
@@ -158,7 +158,7 @@ Use `show packet-processing action success fec` to view the following success me
 
 ### Failure Counters
 
-Use `show packet-processing action failure fec` to view the following failure metrics. 
+Use [`show stats packet-processing action failure fec`](cli_stats_reference.md#show-stats-packet-processing-action-failure-fec) to view the following failure metrics. 
 
 #### Add
 
