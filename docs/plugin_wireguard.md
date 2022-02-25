@@ -673,7 +673,7 @@ The plugin must be updated to version 2.0.3 or later prior to [upgrading the con
 #### New Features and Improvements
 
 - **PLUGIN-1429**  Support wireguard on DHCP interfaces
-The feature adds support for configuring wireguard profile on the network interface level when DHCP is enabled.
+  - The feature adds support for configuring wireguard profile on the network interface level when DHCP is enabled.
   
 #### Issues Fixed
 
