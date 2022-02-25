@@ -63,9 +63,9 @@ With the profile configured and set on an interface, the router will install the
 
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
-| 2.1.0        | Support for DHCP interface is introduced        |
+| 2.1.0        | Support for DHCP interfaces is introduced        |
 
-Wireguard profile can be configured on DHCP enabled network interface:
+Wireguard profile can be configured on DHCP enabled network interfaces:
 ```
 config
   authority
@@ -364,7 +364,7 @@ Endpoint = 1.1.1.1:12800
 PersistentKeepalive = 30
 ```
 :::note
-If wireguard is hosted on a DHCP enabled interface, `Endpoint` address needs to be configured with latest IP address assigned.
+If wireguard is hosted on a DHCP enabled interface, the peer's `Endpoint` address needs to be configured with the latest IP address assigned.
 :::
 
 :::note
@@ -672,8 +672,8 @@ The plugin must be updated to version 2.0.3 or later prior to [upgrading the con
 
 #### New Features and Improvements
 
-- **PLUGIN-1429**  Support DHCP for wireguard interfaces
-The feature adds support for configuring wireguard profile in network interface level when dhcp is enabled.
+- **PLUGIN-1429**  Support wireguard on DHCP interfaces
+The feature adds support for configuring wireguard profile on the network interface level when DHCP is enabled.
   
 #### Issues Fixed
 
