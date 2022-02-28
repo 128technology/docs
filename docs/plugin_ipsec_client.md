@@ -84,6 +84,43 @@ exit
 Only one `ipsec-client` can be configured per node, but two `remote`s can be configured per client.
 :::
 
+### Tunnel Monitoring
+
+##### Version History
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.2.0    | `remote > tunnel-monitor` introduced |
+
+Tunnel monitoring is a way to monitor the health of individual tunnels and have them automatically restart if they become unhealthy. An ICMP ping is used for the traffic. For each `remote`, you can specify a destination, interval, timeout, and the number of max retries for each interval.
+
+```
+node
+    ipsec-client client1
+        remote c1gateway1
+            tunnel-monitor
+                enabled true
+                destination 8.8.8.8
+                    address 8.8.8.8
+                    timeout 10
+                    max-retries 3
+                    interval 120
+                exit
+            exit
+        exit
+
+        tunnel-monitor-nat-network 10.128.128.0/28
+    exit
+exit
+```
+
+* `enabled` - Allows you to switch tunnel monitoring on and off for a `remote`.
+* `address` - The IP or hostname where traffic is sent. This address must be reachable after traversing the tunnel.
+* `timeout` - Duration (in seconds) within which to reach the destination. Each attempt will be made in this duration / `max-retries` interval.
+* `max-retries` - Number of consecutive missed ICMP ping responses from the destination within the interval before deciding that the tunnel is unhealthy.
+* `interval` - Duration (in seconds) of how often to perform an ICMP probe test to the probe-address.
+* `tunnel-monitor-nat-network` - The subnet where traffic originates. The corresponding ingress KNI's fourth octet is used. By default, the subnet `10.128.128.0/28` is used.
+
 ### Generated 128T Configuration
 A KNI per remote is created with the name of the `remote` and a single egress KNI is created with the name of the `ipsec-client`.
 
@@ -314,7 +351,7 @@ Configuration and pillar generation logs can be found on the conductor under `/v
 Salt status can be found on the conductor by utilizing the PCLI’s `show assets` and `show assets <asset-id>` commands.
 
 ### PCLI Enhancements
-To check the status of the IPsec tunnels for a given ingress KNI, extra IPsec tunnel related output will be found in the `show device-interface` command.
+To check the status of the IPsec tunnels for a given ingress KNI, extra IPsec tunnel related output will be found in the `show device-interface` command as well as the `show plugin state` command.
 
 Example output for a healthy tunnel:
 ```
@@ -383,6 +420,30 @@ Example output for a tunnel that is down:
    Tunnel Status:     Down
 ```
 
+#### Tunnel Monitor State
+
+If tunnel monitoring is enabled for a remote, corresponding tunnel monitoring state is included in the pcli commands.
+
+```
+ IPSec:
+     Tunnel Status:   Up
+     Tunnel Details:
+         Name:        ipsec-client-tunnel-primary-rem1
+         Remote id:   172.16.4.3
+         SA Details:
+             Add time:2022-02-14 15:41:15
+             In bytes:60
+             Out bytes:60
+         Ingress Total (bytes):60
+         Egress Total (bytes):60
+     SA Count:        1
+     Tunnel Monitoring:
+           Destination:8.8.8.8
+           Status:    up
+           Last Attempt:2022-02-14 15:42:34
+           Last Restart:2022-02-14 15:41:15
+```
+
 ### Systemd Services
 To check the status of the IPsec client service on the router, you can run `show system services` which will show all 128T related services running on the specified node. The one for this plugin is named `128t-ipsec`.
 
@@ -407,6 +468,22 @@ Completed in 0.10 seconds
 ```
 
 ## Release Notes
+
+### Release 3.2.0
+
+#### New Features and Improvements
+- **PLUGIN-1509** Ability to configure tunnel monitors
+
+The feature adds support for configuring tunnel monitors using ping. See [the tunnel monitoring section](#tunnel-monitoring) for more details.
+
+#### Issues Fixed
+- **PLUGIN-1389** Corrupt encryption database caused tunnels to not come up.
+
+  _**Resolution**_ The service on the router will clean up these database files on startup.
+
+- **PLUGIN-1467** Configuring `aes_gcm256` for `phase2-encryption` resulted in invalid libreswan configuration.
+
+  _**Resolution**_ The libreswan config generation will generate valid configuration for `aes_gcm256`.
 
 ### Release 3.1.3
 
