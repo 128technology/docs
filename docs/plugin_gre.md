@@ -546,6 +546,23 @@ In addition, a `ping-monitor` service is started for each configured tunnel, the
 
 ## Release Notes
 
+### Release 3.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-1322** GRE plugin was not cleaning up directories on uninstall
+
+  _**Resolution:**_ The salt directories will be removed appropriately on plugin uninstall
+
+- **PLUGIN-1480** Large configuration was causing plugin config generation to fail
+
+  _**Resolution:**_ The config generation logic for the plugin will handle config with long lines correctly
+
+- **PLUGIN-1571** GRE tunnel configuration fails to validate on upgrade to 5.4.0 and greater
+
+    _**Resolution**_ The ip-addresses for generated KNI will now be consistent between 5.1.0 and 5.4.0 versions of software
+
+
 ### Release 3.0.0
 
 #### Issues Fixed
