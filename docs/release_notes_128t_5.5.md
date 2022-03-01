@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.5.0-1
 
-**Release Date:** February 25, 2022
+**Release Date:** March 3, 2022
 
 ### New Features
 
@@ -91,9 +91,5 @@ I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95
 ------
 - **I95-44591 Paste-config does not allow small config snippets to be pasted:** Resolved an issue where the list keys were not being passed as part of the `value` in the transaction.
 
-
-
-
-
-
-
+## Caveats
+- **I95-44691 Restart the SSR after disabling Application Identification:** On a system with Application Identification enabled; if you choose to disable Application Identification, you must restart the SSR.

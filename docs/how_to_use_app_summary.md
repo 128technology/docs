@@ -3,7 +3,7 @@ title: Using Application Summary
 sidebar_label: Using Application Summary
 ---
 
-The Application Summary is available for routers where both [Application Identification](config_app_ident.md) and Summary Tracking are enabled. `summary-tracking` is enabled by default, and `application-identification` must be set to `mode all`.  
+The Application Summary is available for routers where both [Application Identification](config_app_ident.md) and Summary Tracking are enabled. `summary-tracking` is enabled by default, and `application-identification` must be set to `mode all`.
 
 The following Application Summary settings are configured in the Application Identification panel.
 - Summary Tracking: Enable session stats tracking by application.
