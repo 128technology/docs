@@ -59,7 +59,7 @@ exit
 With the profile configured and set on an interface, the router will install the required components for wireguard peering.
 
 
-#### Version History 
+#### Version History
 
 | Release      | Modification                                    |
 | ------------ | ----------------------------------------------- |
@@ -674,7 +674,7 @@ The plugin must be updated to version 2.0.3 or later prior to [upgrading the con
 
 - **PLUGIN-1429**  Support wireguard on DHCP interfaces
   - The feature adds support for configuring wireguard profile on the network interface level when DHCP is enabled.
-  
+
 #### Issues Fixed
 
 - **PLUGIN-1469**  Add support for kernel version `4.18.0-305.19.1`.
@@ -682,9 +682,6 @@ The plugin must be updated to version 2.0.3 or later prior to [upgrading the con
 - **PLUGIN-1480** Large configuration was causing plugin config generation to fail
 
   _**Resolution:**_ The config generation logic for the plugin will handle config with long lines correctly
-
-
-### Release 2.0.2, 1.2.2
 
 ### Release 2.0.3
 
