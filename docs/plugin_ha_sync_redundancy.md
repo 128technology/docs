@@ -236,7 +236,7 @@ The plugin must be updated to version 1.1.0 or later prior to [upgrading the con
 
 #### Issues Fixed
 
-- **PLUGIN-1580**  Communication through HA sync interface was broken after one of HA node was rebooted
+- **PLUGIN-1580**  Communication through HA sync interface was broken after one HA node was rebooted
 
   _**Resolution:**_ Set a priority on the teams interface so each node prefers the same interface as active
 
