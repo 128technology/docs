@@ -33,10 +33,10 @@ The following image depicts a graphical representation of the infrastructure ele
 
 #### Selecting the Azure Image
 
-If your preference is to avoid installing the Session Smart Networking software, or if there is no access to the 128 Technology repositories in the Azure environment where the software needs to be deployed (e.g., no access to the Internet), Juniper Networks offers a Private image that includes the Session Smart Networking software already installed. The Public image can be shared with your Azure subscription via the Azure Marketplace.
+If your preference is to avoid installing the Session Smart Networking software, or if there is no access to the 128 Technology repositories in the Azure environment where the software needs to be deployed (e.g., no access to the Internet), Juniper Networks offers a Private image that includes the Session Smart Networking software already installed. The Private image can be shared with your Azure subscription via the Azure Marketplace.
 
 :::important
-There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (Azure compute cost). Please also note that software upgrades and deployments outside of Azure (e.g., on premises) will not be possible without tokens or certificates.
+There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) will not be possible without a token or certificate.
 :::
 
 To request access to the Private image follow the next steps:
@@ -47,7 +47,7 @@ To request access to the Private image follow the next steps:
 * On the search box right at the top of the screen, search for "Subscriptions". If you cannot find the subscription associated with your Azure account click [here](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
 * Take note of your Subscription ID.
 
-2. Contact your Juniper Networks Sales representantive and provide:
+2. Contact your Juniper Networks Sales representative and provide:
 
 * The Subscription ID of the Azure account that will be used for the deployment.
 * The version of the Session Smart Networking software. Your Juniper Sales representative will assist you if you don't know the version you need for your deployment.
@@ -65,6 +65,8 @@ To request access to the Private image follow the next steps:
 * If the Private image of the **Session Smart Networking** offering is displayed, then the Private image has been shared successfully with your Azure Subscription ID.
 
 <img src="/img/platforms_azure_marketplace_image_private.png" alt="Session Smart Networking Private offering" width="192" height="243" />
+
+On the contrary, if you prefer not to use the Private image then refer to the Public image of the **Session Smart Networking** offering available [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview).
 
 Lastly, if your preference is to deploy the Session Smart Networking software via the Azure Portal then continue with the next section "Azure Portal". Otherwise, to deploy the software using Azure CLI or PowerShell commands please proceed to the section "Azure CLI or Poweshell" below.
 
@@ -129,7 +131,7 @@ The following infrastructure must exist in your Azure subscription:
     * The interface of the Conductor that is going to manage this router must be reachable from this subnet.
 
 :::important
-Please note that deploying Session Smart Routers without a valid certificate will be limited to deployments within the cloud only. If your use case requires the deployment of an SSR on your premises as well, please contact your Juniper Sales representative.
+Please note that deploying Session Smart Routers without a valid token or certificate will be limited to deployments within the cloud only. If your use case requires the deployment of an SSR on your premises as well, please contact your Juniper Sales representative.
 :::
 
 ### Deployment
