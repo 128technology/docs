@@ -64,7 +64,7 @@ To request access to the Private image follow the next steps:
 * Click on the "View private products" link.
 * If the Private image of the **Session Smart Networking** offering is displayed, then the Private image has been shared successfully with your Azure Subscription ID.
 
-<img src="/img/platforms_azure_marketplace_image_private.png" alt="Session Smart Networking Private offering" width="432" height="674" />
+<img src="/img/platforms_azure_marketplace_image_private.png" alt="Session Smart Networking Private offering" width="192" height="243" />
 
 Lastly, if your preference is to deploy the Session Smart Networking software via the Azure Portal then continue with the next section "Azure Portal". Otherwise, to deploy the software using Azure CLI or PowerShell commands please proceed to the section "Azure CLI or Poweshell" below.
 
