@@ -128,7 +128,7 @@ Forward Error Correction has the following limitations:
 
 - Forward Error Corrections carries a 4 byte per-packet overhead, and a parity packet overhead every N packets (Largest Packet Size in round + Packet Sizes Trailer (N * 2 bytes) + 4 bytes).
 
-- This feature should not be used when transferring large amounts of data at the MTU size. Similar to metadata, it is possible for this feature to increase the size of the packets beyond the MTU.
+- If you are going to be transferring large amounts of data at, or close to, the MTU size with FEC enabled, it is strongly recommended to enable `path-MTU`. This setting automatically adjusts the packet size, allowing space for the FEC headers and preventing fragmentation.
 
 - Additionally, this feature should not be used to diagnose link quality issues. If the packet loss is above a nominal amount, the extra data that FEC adds to the wire will likely cause extra loss, further decreasing link quality. 
 
