@@ -92,4 +92,8 @@ I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95
 - **I95-44591 Paste-config does not allow small config snippets to be pasted:** Resolved an issue where the list keys were not being passed as part of the `value` in the transaction.
 
 ## Caveats
+
 - **I95-44691 Restart the SSR after disabling Application Identification:** On a system with Application Identification enabled; if you choose to disable Application Identification, you must restart the SSR.
+------
+- **I95-44915 Large amounts of Application Identifictation data take a long time to load:** Wait times of up to 1.5 minutes may occur when displaying large amounts of application identification data. Additionally, display issues may be encountered if you attempt to change nodes while in this load process.
+
