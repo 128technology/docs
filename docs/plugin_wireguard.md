@@ -56,8 +56,33 @@ config
   exit
 exit
 ```
-
 With the profile configured and set on an interface, the router will install the required components for wireguard peering.
+
+
+#### Version History
+
+| Release      | Modification                                    |
+| ------------ | ----------------------------------------------- |
+| 2.1.0        | Support for DHCP interfaces is introduced        |
+
+Wireguard profile can be configured on DHCP enabled network interfaces:
+```
+config
+  authority
+    router             r1
+      node                 node1
+        device-interface  eth1
+          network-interface  eth1-net
+            dhcp            v4
+            wireguard-profile wg-profile-1
+          exit
+        exit
+      exit
+    exit
+  exit
+exit
+```
+
 
 ## Services and Tenants with Wireguard
 
@@ -339,12 +364,17 @@ Endpoint = 1.1.1.1:12800
 PersistentKeepalive = 30
 ```
 :::note
+If wireguard is hosted on a DHCP enabled interface, the peer's `Endpoint` address needs to be configured with the latest IP address assigned.
+:::
+
+:::note
 The `PersistentKeepalive` in this wireguard configuration causes the peer to keep the connection to the peer alive by sending periodic traffic. This has the effect of allowing the 128T to originate sessions to the peer at any time. See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
 :::
 
 With the profile and peer configured on the 128T router `r1`, and wireguard configured on the remote IoT device, you can verify the device is keeping the connection alive by reviewing the `latest handshake` output of `show device-interface router <router_name> name <profile_name>`:
 
 ```
+
 admin@node1.dev-conductor# show device-interface router r1 name wg-profile-1
 Wed 2020-08-05 23:33:02 UTC
 
@@ -637,6 +667,21 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 :::warning
 The plugin must be updated to version 2.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
+
+### Release 2.1.0
+
+#### New Features and Improvements
+
+- **PLUGIN-1429**  Support wireguard on DHCP interfaces
+  - The feature adds support for configuring wireguard profile on the network interface level when DHCP is enabled.
+
+#### Issues Fixed
+
+- **PLUGIN-1469**  Add support for kernel version `4.18.0-305.19.1`.
+
+- **PLUGIN-1480** Large configuration was causing plugin config generation to fail
+
+  _**Resolution:**_ The config generation logic for the plugin will handle config with long lines correctly
 
 ### Release 2.0.3
 

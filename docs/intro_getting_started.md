@@ -1,6 +1,6 @@
 ---
-title: Getting Started with the Session Smart Networking Platform
-sidebar_lable: Getting Started with the Session Smart Networking Platform
+title: Getting Started with the SSR Networking Platform
+sidebar_label: Getting Started with the SSR Networking Platform
 ---
 ## Introduction
 The Session Smart Networking Platform is the first 100% software-defined, session-based distributed IP routing and network services platform designed from the ground-up with an application and service-centric context.  The platform consists of two primary components: the Session Smart Router (SSR) and the Conductor. Together, they form a single logical control plane that is highly distributed, and a data plane that is truly session-aware. The Session Smart Networking Platform supports a wide range of deployment models scaling from a small branch office to a high capacity edge router to a hyper-scale software-defined data center.
@@ -12,6 +12,7 @@ The Conductor is a centralized management and policy engine that provides orches
 The Session Smart Router combines a service-centric control plane and a session-aware data plane to offer all IP routing tables, feature-rich policy management, advanced data collection, and analytics in addition to high-speed packet forwarding, classification, and security functions.
 
 ### Secure Vector Routing (SVR)
+
 The Session Smart Networking Platform uses Secure Vector Routing, an innovative approach to IP routing that eliminates the need for tunnel-based overlay networks. The Session Smart Networking Platform and Secure Vector Routing make existing networks dramatically simpler, smarter, more secure and seamless. SVR comprises two unique control plane and data plane components, the service-centric control plane and the session-aware data plane. 
 
 ### Data Model
@@ -28,7 +29,9 @@ The session-aware data plane makes dynamic forwarding and policy decisions based
 - **Multi-tenant** – Hierarchical multi-tenancy and secure segmentation is supported end-to-end across network and NAT (network address translation) boundaries.
 
 ## High Availability and Resilience
-The SSR platform has been designed to provide High Availability to provide stateful failover in addition to load sharing. The SSR solution can utilize redundant or alternate paths between nodes in a network to reroute traffic, improve resiliency, and maximize throughput. These maximally diverse paths can provide link and node protection.
+
+The Session Smart Networking platform has been designed to provide High Availability to provide stateful failover in addition to load sharing. The SSR solution can utilize redundant or alternate paths between nodes in a network to reroute traffic, improve resiliency, and maximize throughput. These diverse paths can provide link and node protection.
+
 The solution operates in active/active clustering mode. Routers are grouped together as a pair of nodes, with each unit processing traffic and sharing the network load. Each router consists of two units acting as a stateful HA pair. Active/active clustering provides stateful failover in addition to load sharing. A fabric link between the routers is used to route traffic between them in case of failure. All information between the routers are shared using highly efficient in-memory databases to minimize bandwidth usage and to enable instantaneous information exchange. All processes in an SSR are self-resilient. They can regenerate themselves independently in case of process failures or exceptions.
 
 

@@ -45,6 +45,7 @@ show stats [since <since>] [force] [router <router>] [<verbosity>]
 | [`active-sources`](#show-stats-active-sources) | Active sources over the last 30 minutes |
 | [`aggregate-session`](#show-stats-aggregate-session) | Aggregate statistics derived across vectored sessions |
 | [`app-id`](#show-stats-app-id) | Stats pertaining to application identification |
+| [`application-director`](#show-stats-application-director) | Metrics about the Application Director |
 | [`application-framework`](#show-stats-application-framework) | Application Framework statistics for managed applications |
 | [`arp`](#show-stats-arp) | Stats pertaining to ARP management packets |
 | [`audit`](#show-stats-audit) | Metrics tracking various aspects of the auditing system |
@@ -339,9 +340,9 @@ show stats aggregate-session by-device-interface [device-interface <device-inter
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
-| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions) | Total TCP invalid state transitions received for active sessions (packets per second) |
-| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions received for active sessions in the forward direction (packets per second) |
-| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second) |
+| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
 | [`tcp-out-of-order`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-order) | Total number of TCP data received for active sessions that was out of order (packets per second) |
 | [`tcp-out-of-order-forward`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
 | [`tcp-out-of-order-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
@@ -3015,7 +3016,7 @@ show stats aggregate-session by-device-interface tcp-bad-flag-combinations-rever
 
 ## `show stats aggregate-session by-device-interface tcp-invalid-state-transitions`
 
-Total TCP invalid state transitions received for active sessions (packets per second)
+Total TCP invalid state transitions detected for active sessions (packets per second)
 
 #### Usage
 
@@ -3040,7 +3041,7 @@ show stats aggregate-session by-device-interface tcp-invalid-state-transitions [
 
 ## `show stats aggregate-session by-device-interface tcp-invalid-state-transitions-forward`
 
-Total TCP invalid state transitions received for active sessions in the forward direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
 
 #### Usage
 
@@ -3065,7 +3066,7 @@ show stats aggregate-session by-device-interface tcp-invalid-state-transitions-f
 
 ## `show stats aggregate-session by-device-interface tcp-invalid-state-transitions-reverse`
 
-Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second)
 
 #### Usage
 
@@ -3723,9 +3724,9 @@ show stats aggregate-session by-network-interface [network-interface <network-in
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-network-interface-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-network-interface-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
-| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-network-interface-tcp-invalid-state-transitions) | Total TCP invalid state transitions received for active sessions (packets per second) |
-| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-network-interface-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions received for active sessions in the forward direction (packets per second) |
-| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second) |
+| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-network-interface-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-network-interface-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
 | [`tcp-out-of-order`](#show-stats-aggregate-session-by-network-interface-tcp-out-of-order) | Total number of TCP data received for active sessions that was out of order (packets per second) |
 | [`tcp-out-of-order-forward`](#show-stats-aggregate-session-by-network-interface-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
 | [`tcp-out-of-order-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
@@ -6399,7 +6400,7 @@ show stats aggregate-session by-network-interface tcp-bad-flag-combinations-reve
 
 ## `show stats aggregate-session by-network-interface tcp-invalid-state-transitions`
 
-Total TCP invalid state transitions received for active sessions (packets per second)
+Total TCP invalid state transitions detected for active sessions (packets per second)
 
 #### Usage
 
@@ -6424,7 +6425,7 @@ show stats aggregate-session by-network-interface tcp-invalid-state-transitions 
 
 ## `show stats aggregate-session by-network-interface tcp-invalid-state-transitions-forward`
 
-Total TCP invalid state transitions received for active sessions in the forward direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
 
 #### Usage
 
@@ -6449,7 +6450,7 @@ show stats aggregate-session by-network-interface tcp-invalid-state-transitions-
 
 ## `show stats aggregate-session by-network-interface tcp-invalid-state-transitions-reverse`
 
-Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second)
 
 #### Usage
 
@@ -7108,9 +7109,9 @@ show stats aggregate-session by-node [since <since>] [force] [router <router>] [
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-node-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-node-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-node-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
-| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-node-tcp-invalid-state-transitions) | Total TCP invalid state transitions received for active sessions (packets per second) |
-| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-node-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions received for active sessions in the forward direction (packets per second) |
-| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-node-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second) |
+| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-node-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-node-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-node-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
 | [`tcp-out-of-order`](#show-stats-aggregate-session-by-node-tcp-out-of-order) | Total number of TCP data received for active sessions that was out of order (packets per second) |
 | [`tcp-out-of-order-forward`](#show-stats-aggregate-session-by-node-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
 | [`tcp-out-of-order-reverse`](#show-stats-aggregate-session-by-node-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
@@ -9809,7 +9810,7 @@ show stats aggregate-session by-node tcp-bad-flag-combinations-reverse [since <s
 
 ## `show stats aggregate-session by-node tcp-invalid-state-transitions`
 
-Total TCP invalid state transitions received for active sessions (packets per second)
+Total TCP invalid state transitions detected for active sessions (packets per second)
 
 #### Usage
 
@@ -9834,7 +9835,7 @@ show stats aggregate-session by-node tcp-invalid-state-transitions [since <since
 
 ## `show stats aggregate-session by-node tcp-invalid-state-transitions-forward`
 
-Total TCP invalid state transitions received for active sessions in the forward direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
 
 #### Usage
 
@@ -9859,7 +9860,7 @@ show stats aggregate-session by-node tcp-invalid-state-transitions-forward [sinc
 
 ## `show stats aggregate-session by-node tcp-invalid-state-transitions-reverse`
 
-Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second)
 
 #### Usage
 
@@ -10517,9 +10518,9 @@ show stats aggregate-session by-service [service <service>] [since <since>] [for
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-service-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-service-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-service-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
-| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-tcp-invalid-state-transitions) | Total TCP invalid state transitions received for active sessions (packets per second) |
-| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions received for active sessions in the forward direction (packets per second) |
-| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second) |
+| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
 | [`tcp-out-of-order`](#show-stats-aggregate-session-by-service-tcp-out-of-order) | Total number of TCP data received for active sessions that was out of order (packets per second) |
 | [`tcp-out-of-order-forward`](#show-stats-aggregate-session-by-service-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
 | [`tcp-out-of-order-reverse`](#show-stats-aggregate-session-by-service-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
@@ -13269,7 +13270,7 @@ show stats aggregate-session by-service tcp-bad-flag-combinations-reverse [servi
 
 ## `show stats aggregate-session by-service tcp-invalid-state-transitions`
 
-Total TCP invalid state transitions received for active sessions (packets per second)
+Total TCP invalid state transitions detected for active sessions (packets per second)
 
 #### Usage
 
@@ -13295,7 +13296,7 @@ show stats aggregate-session by-service tcp-invalid-state-transitions [service <
 
 ## `show stats aggregate-session by-service tcp-invalid-state-transitions-forward`
 
-Total TCP invalid state transitions received for active sessions in the forward direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
 
 #### Usage
 
@@ -13321,7 +13322,7 @@ show stats aggregate-session by-service tcp-invalid-state-transitions-forward [s
 
 ## `show stats aggregate-session by-service tcp-invalid-state-transitions-reverse`
 
-Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second)
 
 #### Usage
 
@@ -13994,9 +13995,9 @@ show stats aggregate-session by-service-class [service-class <service-class>] [s
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-service-class-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-service-class-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-service-class-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
-| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-class-tcp-invalid-state-transitions) | Total TCP invalid state transitions received for active sessions (packets per second) |
-| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-class-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions received for active sessions in the forward direction (packets per second) |
-| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-class-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second) |
+| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-class-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-class-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-class-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
 | [`tcp-out-of-order`](#show-stats-aggregate-session-by-service-class-tcp-out-of-order) | Total number of TCP data received for active sessions that was out of order (packets per second) |
 | [`tcp-out-of-order-forward`](#show-stats-aggregate-session-by-service-class-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
 | [`tcp-out-of-order-reverse`](#show-stats-aggregate-session-by-service-class-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
@@ -16746,7 +16747,7 @@ show stats aggregate-session by-service-class tcp-bad-flag-combinations-reverse 
 
 ## `show stats aggregate-session by-service-class tcp-invalid-state-transitions`
 
-Total TCP invalid state transitions received for active sessions (packets per second)
+Total TCP invalid state transitions detected for active sessions (packets per second)
 
 #### Usage
 
@@ -16772,7 +16773,7 @@ show stats aggregate-session by-service-class tcp-invalid-state-transitions [ser
 
 ## `show stats aggregate-session by-service-class tcp-invalid-state-transitions-forward`
 
-Total TCP invalid state transitions received for active sessions in the forward direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
 
 #### Usage
 
@@ -16798,7 +16799,7 @@ show stats aggregate-session by-service-class tcp-invalid-state-transitions-forw
 
 ## `show stats aggregate-session by-service-class tcp-invalid-state-transitions-reverse`
 
-Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second)
 
 #### Usage
 
@@ -17471,9 +17472,9 @@ show stats aggregate-session by-service-group [service-group <service-group>] [s
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-service-group-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-service-group-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-service-group-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
-| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-group-tcp-invalid-state-transitions) | Total TCP invalid state transitions received for active sessions (packets per second) |
-| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-group-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions received for active sessions in the forward direction (packets per second) |
-| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-group-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second) |
+| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-group-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-group-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-group-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
 | [`tcp-out-of-order`](#show-stats-aggregate-session-by-service-group-tcp-out-of-order) | Total number of TCP data received for active sessions that was out of order (packets per second) |
 | [`tcp-out-of-order-forward`](#show-stats-aggregate-session-by-service-group-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
 | [`tcp-out-of-order-reverse`](#show-stats-aggregate-session-by-service-group-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
@@ -20223,7 +20224,7 @@ show stats aggregate-session by-service-group tcp-bad-flag-combinations-reverse 
 
 ## `show stats aggregate-session by-service-group tcp-invalid-state-transitions`
 
-Total TCP invalid state transitions received for active sessions (packets per second)
+Total TCP invalid state transitions detected for active sessions (packets per second)
 
 #### Usage
 
@@ -20249,7 +20250,7 @@ show stats aggregate-session by-service-group tcp-invalid-state-transitions [ser
 
 ## `show stats aggregate-session by-service-group tcp-invalid-state-transitions-forward`
 
-Total TCP invalid state transitions received for active sessions in the forward direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
 
 #### Usage
 
@@ -20275,7 +20276,7 @@ show stats aggregate-session by-service-group tcp-invalid-state-transitions-forw
 
 ## `show stats aggregate-session by-service-group tcp-invalid-state-transitions-reverse`
 
-Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second)
 
 #### Usage
 
@@ -20948,9 +20949,9 @@ show stats aggregate-session by-service-route [service-route <service-route>] [s
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-service-route-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-service-route-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-service-route-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
-| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-route-tcp-invalid-state-transitions) | Total TCP invalid state transitions received for active sessions (packets per second) |
-| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-route-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions received for active sessions in the forward direction (packets per second) |
-| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-route-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second) |
+| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-route-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-route-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-route-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
 | [`tcp-out-of-order`](#show-stats-aggregate-session-by-service-route-tcp-out-of-order) | Total number of TCP data received for active sessions that was out of order (packets per second) |
 | [`tcp-out-of-order-forward`](#show-stats-aggregate-session-by-service-route-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
 | [`tcp-out-of-order-reverse`](#show-stats-aggregate-session-by-service-route-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
@@ -23700,7 +23701,7 @@ show stats aggregate-session by-service-route tcp-bad-flag-combinations-reverse 
 
 ## `show stats aggregate-session by-service-route tcp-invalid-state-transitions`
 
-Total TCP invalid state transitions received for active sessions (packets per second)
+Total TCP invalid state transitions detected for active sessions (packets per second)
 
 #### Usage
 
@@ -23726,7 +23727,7 @@ show stats aggregate-session by-service-route tcp-invalid-state-transitions [ser
 
 ## `show stats aggregate-session by-service-route tcp-invalid-state-transitions-forward`
 
-Total TCP invalid state transitions received for active sessions in the forward direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
 
 #### Usage
 
@@ -23752,7 +23753,7 @@ show stats aggregate-session by-service-route tcp-invalid-state-transitions-forw
 
 ## `show stats aggregate-session by-service-route tcp-invalid-state-transitions-reverse`
 
-Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second)
 
 #### Usage
 
@@ -24425,9 +24426,9 @@ show stats aggregate-session by-tenant [tenant <tenant>] [since <since>] [force]
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-tenant-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-tenant-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-tenant-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
-| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-tenant-tcp-invalid-state-transitions) | Total TCP invalid state transitions received for active sessions (packets per second) |
-| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-tenant-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions received for active sessions in the forward direction (packets per second) |
-| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-tenant-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second) |
+| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-tenant-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-tenant-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-tenant-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
 | [`tcp-out-of-order`](#show-stats-aggregate-session-by-tenant-tcp-out-of-order) | Total number of TCP data received for active sessions that was out of order (packets per second) |
 | [`tcp-out-of-order-forward`](#show-stats-aggregate-session-by-tenant-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
 | [`tcp-out-of-order-reverse`](#show-stats-aggregate-session-by-tenant-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
@@ -27177,7 +27178,7 @@ show stats aggregate-session by-tenant tcp-bad-flag-combinations-reverse [tenant
 
 ## `show stats aggregate-session by-tenant tcp-invalid-state-transitions`
 
-Total TCP invalid state transitions received for active sessions (packets per second)
+Total TCP invalid state transitions detected for active sessions (packets per second)
 
 #### Usage
 
@@ -27203,7 +27204,7 @@ show stats aggregate-session by-tenant tcp-invalid-state-transitions [tenant <te
 
 ## `show stats aggregate-session by-tenant tcp-invalid-state-transitions-forward`
 
-Total TCP invalid state transitions received for active sessions in the forward direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
 
 #### Usage
 
@@ -27229,7 +27230,7 @@ show stats aggregate-session by-tenant tcp-invalid-state-transitions-forward [te
 
 ## `show stats aggregate-session by-tenant tcp-invalid-state-transitions-reverse`
 
-Total TCP invalid state transitions received for active sessions in the reverse direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second)
 
 #### Usage
 
@@ -27796,10 +27797,1494 @@ show stats app-id [since <since>] [force] [router <router>] [node <node>] [<verb
 
 | command | description |
 | ------- | ----------- |
+| [`application-director`](#show-stats-app-id-application-director) | Statistics for &#x27;application-director&#x27; |
+| [`applications`](#show-stats-app-id-applications) | Statistics for &#x27;applications&#x27; |
 | [`domain-database`](#show-stats-app-id-domain-database) | Stats related to application identification category files |
 | [`domain-lookup`](#show-stats-app-id-domain-lookup) | Statistics for &#x27;domain-lookup&#x27; |
 | [`refreshes`](#show-stats-app-id-refreshes) | The total number of times app-id modules were refreshed |
 | [`retries`](#show-stats-app-id-retries) | The total number of times failed app-id modules were retried |
+| [`subcategory-lookup`](#show-stats-app-id-subcategory-lookup) | Statistics for &#x27;subcategory-lookup&#x27; |
+| [`url-lookup`](#show-stats-app-id-url-lookup) | Statistics for &#x27;url-lookup&#x27; |
+
+## `show stats app-id application-director`
+
+Statistics for &#x27;application-director&#x27;
+
+#### Usage
+
+```
+show stats app-id application-director [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`cache`](#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+| [`lookup`](#show-stats-app-id-application-director-lookup) | Statistics for &#x27;lookup&#x27; |
+
+## `show stats app-id application-director cache`
+
+Statistics for &#x27;cache&#x27;
+
+#### Usage
+
+```
+show stats app-id application-director cache [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`hit`](#show-stats-app-id-application-director-cache-hit) | The number of times a query to the application-director cache had a hit |
+| [`miss`](#show-stats-app-id-application-director-cache-miss) | The number of times a query to the application-director cache had a miss |
+| [`size`](#show-stats-app-id-application-director-cache-size) | The current size of the application-director cache |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
+
+## `show stats app-id application-director cache hit`
+
+The number of times a query to the application-director cache had a hit
+
+#### Usage
+
+```
+show stats app-id application-director cache hit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
+
+## `show stats app-id application-director cache miss`
+
+The number of times a query to the application-director cache had a miss
+
+#### Usage
+
+```
+show stats app-id application-director cache miss [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
+
+## `show stats app-id application-director cache size`
+
+The current size of the application-director cache
+
+#### Usage
+
+```
+show stats app-id application-director cache size [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](cli_reference.md#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](cli_reference.md#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](cli_reference.md#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](cli_reference.md#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](cli_reference.md#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](cli_reference.md#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](cli_reference.md#show-app-id-cache) | Show information of app-id entries in cache |
+
+## `show stats app-id application-director lookup`
+
+Statistics for &#x27;lookup&#x27;
+
+#### Usage
+
+```
+show stats app-id application-director lookup [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`failure`](#show-stats-app-id-application-director-lookup-failure) | The number of times the REST call to the application-director had an error |
+| [`miss`](#show-stats-app-id-application-director-lookup-miss) | The number of times the REST call to the application-director succeeded, but did not get an application |
+| [`success`](#show-stats-app-id-application-director-lookup-success) | The number of times the REST call to the application-director succeeded and returned an application-name |
+
+## `show stats app-id application-director lookup failure`
+
+The number of times the REST call to the application-director had an error
+
+#### Usage
+
+```
+show stats app-id application-director lookup failure [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id application-director lookup miss`
+
+The number of times the REST call to the application-director succeeded, but did not get an application
+
+#### Usage
+
+```
+show stats app-id application-director lookup miss [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id application-director lookup success`
+
+The number of times the REST call to the application-director succeeded and returned an application-name
+
+#### Usage
+
+```
+show stats app-id application-director lookup success [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications`
+
+Statistics for &#x27;applications&#x27;
+
+#### Usage
+
+```
+show stats app-id applications [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`bytes-received-reverse`](#show-stats-app-id-applications-bytes-received-reverse) | Total bytes received for the application since discovery in the reverse direction |
+| [`bytes-transmitted-forward`](#show-stats-app-id-applications-bytes-transmitted-forward) | Total bytes sent for the application since discovery in the forward direction |
+| [`capacity-limits`](#show-stats-app-id-applications-capacity-limits) | Statistics for &#x27;capacity-limits&#x27; |
+| [`packets-received-reverse`](#show-stats-app-id-applications-packets-received-reverse) | Total packets received for the application since discovery in the reverse direction |
+| [`packets-transmitted-forward`](#show-stats-app-id-applications-packets-transmitted-forward) | Total packets sent for the application since discovery in the forward direction |
+| [`sessions`](#show-stats-app-id-applications-sessions) | Statistics for &#x27;sessions&#x27; |
+| [`tcp-bad-flag-combinations-forward`](#show-stats-app-id-applications-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
+| [`tcp-bad-flag-combinations-reverse`](#show-stats-app-id-applications-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-app-id-applications-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-app-id-applications-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
+| [`tcp-out-of-order-forward`](#show-stats-app-id-applications-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
+| [`tcp-out-of-order-reverse`](#show-stats-app-id-applications-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
+| [`tcp-out-of-window-forward`](#show-stats-app-id-applications-tcp-out-of-window-forward) | Total number of TCP data received for active sessions that was out of window in the forward direction (packets per second) |
+| [`tcp-out-of-window-reverse`](#show-stats-app-id-applications-tcp-out-of-window-reverse) | Total number of TCP data received for active sessions that was out of window in the reverse direction (packets per second) |
+| [`tcp-resets-received-forward`](#show-stats-app-id-applications-tcp-resets-received-forward) | Total TCP resets received for active sessions in the forward direction (resets per second) |
+| [`tcp-resets-received-reverse`](#show-stats-app-id-applications-tcp-resets-received-reverse) | Total TCP resets received for active sessions in the reverse direction (resets per second) |
+| [`tcp-resets-transmitted-forward`](#show-stats-app-id-applications-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
+| [`tcp-resets-transmitted-reverse`](#show-stats-app-id-applications-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
+| [`tcp-retransmission-packets-received-reverse`](#show-stats-app-id-applications-tcp-retransmission-packets-received-reverse) | TCP retransmission packets received in the reverse direction |
+| [`tcp-retransmission-packets-transmitted-forward`](#show-stats-app-id-applications-tcp-retransmission-packets-transmitted-forward) | TCP retransmission packets transmitted in the forward direction |
+| [`time-to-first-data-packet`](#show-stats-app-id-applications-time-to-first-data-packet) | Stats pertaining to the time of the first data packet |
+| [`tracked-next-hops`](#show-stats-app-id-applications-tracked-next-hops) | Current number of applications tracked per client per next-hop (next-hops) |
+
+## `show stats app-id applications bytes-received-reverse`
+
+Total bytes received for the application since discovery in the reverse direction
+
+#### Usage
+
+```
+show stats app-id applications bytes-received-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications bytes-transmitted-forward`
+
+Total bytes sent for the application since discovery in the forward direction
+
+#### Usage
+
+```
+show stats app-id applications bytes-transmitted-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications capacity-limits`
+
+Statistics for &#x27;capacity-limits&#x27;
+
+#### Usage
+
+```
+show stats app-id applications capacity-limits [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`quad-zero-client-used`](#show-stats-app-id-applications-capacity-limits-quad-zero-client-used) | Number of sessions tracked with a quad-zero client by application due to capacity limitations |
+| [`untracked`](#show-stats-app-id-applications-capacity-limits-untracked) | Number of sessions not tracked by application due to capacity limitations |
+
+## `show stats app-id applications capacity-limits quad-zero-client-used`
+
+Number of sessions tracked with a quad-zero client by application due to capacity limitations
+
+#### Usage
+
+```
+show stats app-id applications capacity-limits quad-zero-client-used [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications capacity-limits untracked`
+
+Number of sessions not tracked by application due to capacity limitations
+
+#### Usage
+
+```
+show stats app-id applications capacity-limits untracked [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications packets-received-reverse`
+
+Total packets received for the application since discovery in the reverse direction
+
+#### Usage
+
+```
+show stats app-id applications packets-received-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications packets-transmitted-forward`
+
+Total packets sent for the application since discovery in the forward direction
+
+#### Usage
+
+```
+show stats app-id applications packets-transmitted-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications sessions`
+
+Statistics for &#x27;sessions&#x27;
+
+#### Usage
+
+```
+show stats app-id applications sessions [netintf <netintf>] [application <application>] [client <client>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`active`](#show-stats-app-id-applications-sessions-active) | Active session count (sessions) |
+| [`close-before-establishment`](#show-stats-app-id-applications-sessions-close-before-establishment) | Number of sessions closed before establishment |
+| [`failed`](#show-stats-app-id-applications-sessions-failed) | Failed session count (sessions) |
+| [`length`](#show-stats-app-id-applications-sessions-length) | Stats pertaining to the session length |
+| [`success`](#show-stats-app-id-applications-sessions-success) | Success session count (sessions) |
+
+## `show stats app-id applications sessions active`
+
+Active session count (sessions)
+
+#### Usage
+
+```
+show stats app-id applications sessions active [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications sessions close-before-establishment`
+
+Number of sessions closed before establishment
+
+#### Usage
+
+```
+show stats app-id applications sessions close-before-establishment [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications sessions failed`
+
+Failed session count (sessions)
+
+#### Usage
+
+```
+show stats app-id applications sessions failed [netintf <netintf>] [application <application>] [client <client>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications sessions length`
+
+Stats pertaining to the session length
+
+#### Usage
+
+```
+show stats app-id applications sessions length [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`count`](#show-stats-app-id-applications-sessions-length-count) | Count of sessions terminated during this window |
+| [`max`](#show-stats-app-id-applications-sessions-length-max) | Max length of sessions terminated during this window (milliseconds) |
+| [`min`](#show-stats-app-id-applications-sessions-length-min) | Min length of sessions terminated during this window (milliseconds) |
+| [`total`](#show-stats-app-id-applications-sessions-length-total) | Total length of sessions terminated during this window (milliseconds) |
+
+## `show stats app-id applications sessions length count`
+
+Count of sessions terminated during this window
+
+#### Usage
+
+```
+show stats app-id applications sessions length count [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications sessions length max`
+
+Max length of sessions terminated during this window (milliseconds)
+
+#### Usage
+
+```
+show stats app-id applications sessions length max [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications sessions length min`
+
+Min length of sessions terminated during this window (milliseconds)
+
+#### Usage
+
+```
+show stats app-id applications sessions length min [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications sessions length total`
+
+Total length of sessions terminated during this window (milliseconds)
+
+#### Usage
+
+```
+show stats app-id applications sessions length total [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications sessions success`
+
+Success session count (sessions)
+
+#### Usage
+
+```
+show stats app-id applications sessions success [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-bad-flag-combinations-forward`
+
+Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-bad-flag-combinations-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-bad-flag-combinations-reverse`
+
+Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-bad-flag-combinations-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-invalid-state-transitions-forward`
+
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-invalid-state-transitions-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-invalid-state-transitions-reverse`
+
+Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-invalid-state-transitions-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-out-of-order-forward`
+
+Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-out-of-order-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-out-of-order-reverse`
+
+Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-out-of-order-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-out-of-window-forward`
+
+Total number of TCP data received for active sessions that was out of window in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-out-of-window-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-out-of-window-reverse`
+
+Total number of TCP data received for active sessions that was out of window in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-out-of-window-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-resets-received-forward`
+
+Total TCP resets received for active sessions in the forward direction (resets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-resets-received-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-resets-received-reverse`
+
+Total TCP resets received for active sessions in the reverse direction (resets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-resets-received-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-resets-transmitted-forward`
+
+Total number of TCP resets sent for active sessions in the forward direction (resets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-resets-transmitted-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-resets-transmitted-reverse`
+
+Total number of TCP resets sent for active sessions in the reverse direction (resets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-resets-transmitted-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-retransmission-packets-received-reverse`
+
+TCP retransmission packets received in the reverse direction
+
+#### Usage
+
+```
+show stats app-id applications tcp-retransmission-packets-received-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-retransmission-packets-transmitted-forward`
+
+TCP retransmission packets transmitted in the forward direction
+
+#### Usage
+
+```
+show stats app-id applications tcp-retransmission-packets-transmitted-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications time-to-first-data-packet`
+
+Stats pertaining to the time of the first data packet
+
+#### Usage
+
+```
+show stats app-id applications time-to-first-data-packet [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`count`](#show-stats-app-id-applications-time-to-first-data-packet-count) | Number of sessions that recorded a time to first data packet |
+| [`max`](#show-stats-app-id-applications-time-to-first-data-packet-max) | Max time to receive the first data byte (milliseconds) |
+| [`min`](#show-stats-app-id-applications-time-to-first-data-packet-min) | Min time to receive the first data byte (milliseconds) |
+| [`total`](#show-stats-app-id-applications-time-to-first-data-packet-total) | Total time to receive the first data byte (milliseconds) |
+
+## `show stats app-id applications time-to-first-data-packet count`
+
+Number of sessions that recorded a time to first data packet
+
+#### Usage
+
+```
+show stats app-id applications time-to-first-data-packet count [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications time-to-first-data-packet max`
+
+Max time to receive the first data byte (milliseconds)
+
+#### Usage
+
+```
+show stats app-id applications time-to-first-data-packet max [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications time-to-first-data-packet min`
+
+Min time to receive the first data byte (milliseconds)
+
+#### Usage
+
+```
+show stats app-id applications time-to-first-data-packet min [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications time-to-first-data-packet total`
+
+Total time to receive the first data byte (milliseconds)
+
+#### Usage
+
+```
+show stats app-id applications time-to-first-data-packet total [netintf <netintf>] [protocol <protocol>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tracked-next-hops`
+
+Current number of applications tracked per client per next-hop (next-hops)
+
+#### Usage
+
+```
+show stats app-id applications tracked-next-hops [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats app-id domain-database`
 
@@ -27831,7 +29316,9 @@ show stats app-id domain-database [since <since>] [force] [router <router>] [nod
 | command | description |
 | ------- | ----------- |
 | [`domain-count`](#show-stats-app-id-domain-database-domain-count) | The number of domains mapped to categories for application identification |
+| [`subcategory-count`](#show-stats-app-id-domain-database-subcategory-count) | The number of subcategories mapped to services for application identification |
 | [`updates`](#show-stats-app-id-domain-database-updates) | The number of times that the application identifier has parsed category files |
+| [`url-count`](#show-stats-app-id-domain-database-url-count) | The number of URLs mapped to categories for application identification |
 
 ## `show stats app-id domain-database domain-count`
 
@@ -27858,6 +29345,31 @@ show stats app-id domain-database domain-count [since <since>] [force] [router <
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats app-id domain-database subcategory-count`
+
+The number of subcategories mapped to services for application identification
+
+#### Usage
+
+```
+show stats app-id domain-database subcategory-count [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats app-id domain-database updates`
 
 The number of times that the application identifier has parsed category files
@@ -27866,6 +29378,31 @@ The number of times that the application identifier has parsed category files
 
 ```
 show stats app-id domain-database updates [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id domain-database url-count`
+
+The number of URLs mapped to categories for application identification
+
+#### Usage
+
+```
+show stats app-id domain-database url-count [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -28036,6 +29573,612 @@ show stats app-id retries [since <since>] [force] [router <router>] [node <node>
 | node | The name of the node generating this metric |
 | router | The router for which to display stats (default: &lt;current router&gt;) |
 | since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id subcategory-lookup`
+
+Statistics for &#x27;subcategory-lookup&#x27;
+
+#### Usage
+
+```
+show stats app-id subcategory-lookup [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`hit`](#show-stats-app-id-subcategory-lookup-hit) | The number of times a service has been identified from a subcategory |
+| [`miss`](#show-stats-app-id-subcategory-lookup-miss) | The number of times a child service could not be identified from a subcategory |
+| [`service-not-applicable`](#show-stats-app-id-subcategory-lookup-service-not-applicable) | The number of times a service could not be identified from a subcategory when the parent service is invalid |
+
+## `show stats app-id subcategory-lookup hit`
+
+The number of times a service has been identified from a subcategory
+
+#### Usage
+
+```
+show stats app-id subcategory-lookup hit [service <service>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id subcategory-lookup miss`
+
+The number of times a child service could not be identified from a subcategory
+
+#### Usage
+
+```
+show stats app-id subcategory-lookup miss [service <service>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id subcategory-lookup service-not-applicable`
+
+The number of times a service could not be identified from a subcategory when the parent service is invalid
+
+#### Usage
+
+```
+show stats app-id subcategory-lookup service-not-applicable [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id url-lookup`
+
+Statistics for &#x27;url-lookup&#x27;
+
+#### Usage
+
+```
+show stats app-id url-lookup [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`hit`](#show-stats-app-id-url-lookup-hit) | The number of times a service has been identified from a URL |
+| [`miss`](#show-stats-app-id-url-lookup-miss) | The number of times a child service could not be identified from a URL |
+| [`service-not-applicable`](#show-stats-app-id-url-lookup-service-not-applicable) | The number of times a service could not be identified from a URL when the parent service is invalid |
+
+## `show stats app-id url-lookup hit`
+
+The number of times a service has been identified from a URL
+
+#### Usage
+
+```
+show stats app-id url-lookup hit [service <service>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id url-lookup miss`
+
+The number of times a child service could not be identified from a URL
+
+#### Usage
+
+```
+show stats app-id url-lookup miss [service <service>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id url-lookup service-not-applicable`
+
+The number of times a service could not be identified from a URL when the parent service is invalid
+
+#### Usage
+
+```
+show stats app-id url-lookup service-not-applicable [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director`
+
+Metrics about the Application Director
+
+#### Usage
+
+```
+show stats application-director [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`classify-session`](#show-stats-application-director-classify-session) | Metrics about how sessions were classified |
+| [`requests`](#show-stats-application-director-requests) | The requests made to each endpoint and the status code produced |
+
+## `show stats application-director classify-session`
+
+Metrics about how sessions were classified
+
+#### Usage
+
+```
+show stats application-director classify-session [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`cache`](#show-stats-application-director-classify-session-cache) | Metrics about cache interactions |
+| [`domain`](#show-stats-application-director-classify-session-domain) | Classification was based on the domain name (requests) |
+| [`ip`](#show-stats-application-director-classify-session-ip) | Classification was based on the server&#x27;s IP address (requests) |
+| [`transport`](#show-stats-application-director-classify-session-transport) | Classification was based on the transport (requests) |
+| [`unclassified`](#show-stats-application-director-classify-session-unclassified) | The request could not be classified (requests) |
+| [`url`](#show-stats-application-director-classify-session-url) | Classification was based on the requested URL (requests) |
+| [`websense`](#show-stats-application-director-classify-session-websense) | Metrics about Websense interactions |
+
+## `show stats application-director classify-session cache`
+
+Metrics about cache interactions
+
+#### Usage
+
+```
+show stats application-director classify-session cache [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`request`](#show-stats-application-director-classify-session-cache-request) | Cache Request (requests) |
+| [`success`](#show-stats-application-director-classify-session-cache-success) | Cache Success (requests) |
+
+## `show stats application-director classify-session cache request`
+
+Cache Request (requests)
+
+#### Usage
+
+```
+show stats application-director classify-session cache request [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director classify-session cache success`
+
+Cache Success (requests)
+
+#### Usage
+
+```
+show stats application-director classify-session cache success [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director classify-session domain`
+
+Classification was based on the domain name (requests)
+
+#### Usage
+
+```
+show stats application-director classify-session domain [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director classify-session ip`
+
+Classification was based on the server&#x27;s IP address (requests)
+
+#### Usage
+
+```
+show stats application-director classify-session ip [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director classify-session transport`
+
+Classification was based on the transport (requests)
+
+#### Usage
+
+```
+show stats application-director classify-session transport [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director classify-session unclassified`
+
+The request could not be classified (requests)
+
+#### Usage
+
+```
+show stats application-director classify-session unclassified [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director classify-session url`
+
+Classification was based on the requested URL (requests)
+
+#### Usage
+
+```
+show stats application-director classify-session url [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director classify-session websense`
+
+Metrics about Websense interactions
+
+#### Usage
+
+```
+show stats application-director classify-session websense [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`request`](#show-stats-application-director-classify-session-websense-request) | Websense Request (requests) |
+| [`success`](#show-stats-application-director-classify-session-websense-success) | Websense Success (requests) |
+
+## `show stats application-director classify-session websense request`
+
+Websense Request (requests)
+
+#### Usage
+
+```
+show stats application-director classify-session websense request [status <status>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| status | The response code (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director classify-session websense success`
+
+Websense Success (requests)
+
+#### Usage
+
+```
+show stats application-director classify-session websense success [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats application-director requests`
+
+The requests made to each endpoint and the status code produced
+
+#### Usage
+
+```
+show stats application-director requests [endpoint <endpoint>] [status <status>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| endpoint | The name endpoint (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| status | The response code (comma-separated list) |
 
 ##### Positional Arguments
 
@@ -36930,6 +39073,7 @@ show stats highway destination-reachability [service <service>] [network-interfa
 | command | description |
 | ------- | ----------- |
 | [`icmp`](#show-stats-highway-destination-reachability-icmp) | Statistics for &#x27;icmp&#x27; |
+| [`other`](#show-stats-highway-destination-reachability-other) | Statistics for &#x27;other&#x27; |
 | [`tcp`](#show-stats-highway-destination-reachability-tcp) | Statistics for &#x27;tcp&#x27; |
 | [`tls`](#show-stats-highway-destination-reachability-tls) | Statistics for &#x27;tls&#x27; |
 | [`udp`](#show-stats-highway-destination-reachability-udp) | Statistics for &#x27;udp&#x27; |
@@ -37162,6 +39306,255 @@ The number of times a ICMP endpoint was unreachable
 
 ```
 show stats highway destination-reachability icmp unreachable [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability other`
+
+Statistics for &#x27;other&#x27;
+
+#### Usage
+
+```
+show stats highway destination-reachability other [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`established`](#show-stats-highway-destination-reachability-other-established) | The number of other sessions that have received a reverse packet |
+| [`time-to-establishment`](#show-stats-highway-destination-reachability-other-time-to-establishment) | Statistics for &#x27;time-to-establishment&#x27; |
+| [`timeout-before-establishment`](#show-stats-highway-destination-reachability-other-timeout-before-establishment) | The number of other sessions that timed out before a packet was received in the reverse direction |
+| [`unreachable`](#show-stats-highway-destination-reachability-other-unreachable) | The number of times a other endpoint was unreachable |
+
+## `show stats highway destination-reachability other established`
+
+The number of other sessions that have received a reverse packet
+
+#### Usage
+
+```
+show stats highway destination-reachability other established [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability other time-to-establishment`
+
+Statistics for &#x27;time-to-establishment&#x27;
+
+#### Usage
+
+```
+show stats highway destination-reachability other time-to-establishment [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`max`](#show-stats-highway-destination-reachability-other-time-to-establishment-max) | A windowed maximum of the time in milliseconds for establishment |
+| [`mean`](#show-stats-highway-destination-reachability-other-time-to-establishment-mean) | A windowed mean of the time in milliseconds for establishment |
+| [`min`](#show-stats-highway-destination-reachability-other-time-to-establishment-min) | A windowed minimum of the time in milliseconds for establishment |
+
+## `show stats highway destination-reachability other time-to-establishment max`
+
+A windowed maximum of the time in milliseconds for establishment
+
+#### Usage
+
+```
+show stats highway destination-reachability other time-to-establishment max [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability other time-to-establishment mean`
+
+A windowed mean of the time in milliseconds for establishment
+
+#### Usage
+
+```
+show stats highway destination-reachability other time-to-establishment mean [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability other time-to-establishment min`
+
+A windowed minimum of the time in milliseconds for establishment
+
+#### Usage
+
+```
+show stats highway destination-reachability other time-to-establishment min [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability other timeout-before-establishment`
+
+The number of other sessions that timed out before a packet was received in the reverse direction
+
+#### Usage
+
+```
+show stats highway destination-reachability other timeout-before-establishment [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-prefix | The destination IP address and prefix (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats highway destination-reachability other unreachable`
+
+The number of times a other endpoint was unreachable
+
+#### Usage
+
+```
+show stats highway destination-reachability other unreachable [service <service>] [network-interface <network-interface>] [destination-prefix <destination-prefix>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -40692,6 +43085,7 @@ show stats packet-processing action failure [core <core>] [since <since>] [force
 | [`bfd`](#show-stats-packet-processing-action-failure-bfd) | Statistics for &#x27;bfd&#x27; |
 | [`dpi`](#show-stats-packet-processing-action-failure-dpi) | Statistics for &#x27;dpi&#x27; |
 | [`ethernet-header-transform`](#show-stats-packet-processing-action-failure-ethernet-header-transform) | Statistics for &#x27;ethernet-header-transform&#x27; |
+| [`fec`](#show-stats-packet-processing-action-failure-fec) | Statistics for &#x27;fec&#x27; |
 | [`flow-move`](#show-stats-packet-processing-action-failure-flow-move) | Statistics for &#x27;flow-move&#x27; |
 | [`hmac`](#show-stats-packet-processing-action-failure-hmac) | Statistics for &#x27;hmac&#x27; |
 | [`ip-header-transform`](#show-stats-packet-processing-action-failure-ip-header-transform) | Statistics for &#x27;ip-header-transform&#x27; |
@@ -40743,6 +43137,7 @@ show stats packet-processing action failure aes [core <core>] [port <port>] [sin
 | [`decryption-exception`](#show-stats-packet-processing-action-failure-aes-decryption-exception) | The number of packets dropped due to a decryption exception |
 | [`encryption-exception`](#show-stats-packet-processing-action-failure-aes-encryption-exception) | The number of packets dropped due to an encryption exception |
 | [`get-data-length`](#show-stats-packet-processing-action-failure-aes-get-data-length) | The number of packets dropped due to a failure to get the data length |
+| [`invalid-affinity`](#show-stats-packet-processing-action-failure-aes-invalid-affinity) | The number of times the AES context was processed on worker core with invalid affinty |
 | [`iv-append`](#show-stats-packet-processing-action-failure-aes-iv-append) | The number of packets dropped due to a failure to append the iv |
 | [`iv-generation`](#show-stats-packet-processing-action-failure-aes-iv-generation) | The number of packets dropped due to an iv generation failure |
 | [`iv-seed`](#show-stats-packet-processing-action-failure-aes-iv-seed) | The number of packets dropped due to a seed failure on decrypt |
@@ -40842,6 +43237,33 @@ The number of packets dropped due to a failure to get the data length
 
 ```
 show stats packet-processing action failure aes get-data-length [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure aes invalid-affinity`
+
+The number of times the AES context was processed on worker core with invalid affinty
+
+#### Usage
+
+```
+show stats packet-processing action failure aes invalid-affinity [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -41622,6 +44044,300 @@ show stats packet-processing action failure ethernet-header-transform packet-exp
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats packet-processing action failure fec`
+
+Statistics for &#x27;fec&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action failure fec [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`add`](#show-stats-packet-processing-action-failure-fec-add) | Statistics for &#x27;add&#x27; |
+| [`remove`](#show-stats-packet-processing-action-failure-fec-remove) | Statistics for &#x27;remove&#x27; |
+
+## `show stats packet-processing action failure fec add`
+
+Statistics for &#x27;add&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action failure fec add [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`allocation`](#show-stats-packet-processing-action-failure-fec-add-allocation) | The number of packets dropped because the memory for the FEC could not be allocated |
+| [`buffer-expansion`](#show-stats-packet-processing-action-failure-fec-add-buffer-expansion) | The number of times payload could not be expanded to fit FEC headers |
+
+## `show stats packet-processing action failure fec add allocation`
+
+The number of packets dropped because the memory for the FEC could not be allocated
+
+#### Usage
+
+```
+show stats packet-processing action failure fec add allocation [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure fec add buffer-expansion`
+
+The number of times payload could not be expanded to fit FEC headers
+
+#### Usage
+
+```
+show stats packet-processing action failure fec add buffer-expansion [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure fec remove`
+
+Statistics for &#x27;remove&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action failure fec remove [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`completed-round`](#show-stats-packet-processing-action-failure-fec-remove-completed-round) | The number of FEC rounds which failed to complete |
+| [`invalid-payload-length`](#show-stats-packet-processing-action-failure-fec-remove-invalid-payload-length) | The number of discarded packets because payload was too short |
+| [`out-of-order`](#show-stats-packet-processing-action-failure-fec-remove-out-of-order) | The number of packets dropped due to belonging to a recently completed FEC round |
+| [`parity-discard`](#show-stats-packet-processing-action-failure-fec-remove-parity-discard) | The number of discarded parity packets because not enough data packets were received |
+| [`unexpected-parity`](#show-stats-packet-processing-action-failure-fec-remove-unexpected-parity) | The number of parity packets received when FEC was not tracking a round |
+
+## `show stats packet-processing action failure fec remove completed-round`
+
+The number of FEC rounds which failed to complete
+
+#### Usage
+
+```
+show stats packet-processing action failure fec remove completed-round [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure fec remove invalid-payload-length`
+
+The number of discarded packets because payload was too short
+
+#### Usage
+
+```
+show stats packet-processing action failure fec remove invalid-payload-length [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure fec remove out-of-order`
+
+The number of packets dropped due to belonging to a recently completed FEC round
+
+#### Usage
+
+```
+show stats packet-processing action failure fec remove out-of-order [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure fec remove parity-discard`
+
+The number of discarded parity packets because not enough data packets were received
+
+#### Usage
+
+```
+show stats packet-processing action failure fec remove parity-discard [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure fec remove unexpected-parity`
+
+The number of parity packets received when FEC was not tracking a round
+
+#### Usage
+
+```
+show stats packet-processing action failure fec remove unexpected-parity [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats packet-processing action failure flow-move`
 
 Statistics for &#x27;flow-move&#x27;
@@ -41719,6 +44435,7 @@ show stats packet-processing action failure hmac [core <core>] [port <port>] [si
 | [`context-reinitialized`](#show-stats-packet-processing-action-failure-hmac-context-reinitialized) | The number of times the HMAC context was reinitialized due to successive failures |
 | [`digest-calculation`](#show-stats-packet-processing-action-failure-hmac-digest-calculation) | The number of packets dropped due to a HMAC digest calculation failure |
 | [`digest-compare`](#show-stats-packet-processing-action-failure-hmac-digest-compare) | The number of packets dropped because the HMAC digest didn&#x27;t match the calculated value |
+| [`invalid-affinity`](#show-stats-packet-processing-action-failure-hmac-invalid-affinity) | The number of times the HMAC context was processed on worker core with invalid affinty |
 | [`opposite-flow-not-found`](#show-stats-packet-processing-action-failure-hmac-opposite-flow-not-found) | The number of enable-metadata packets dropped because the opposite flow could not be found |
 
 ## `show stats packet-processing action failure hmac allocation`
@@ -41864,6 +44581,33 @@ The number of packets dropped because the HMAC digest didn&#x27;t match the calc
 
 ```
 show stats packet-processing action failure hmac digest-compare [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure hmac invalid-affinity`
+
+The number of times the HMAC context was processed on worker core with invalid affinty
+
+#### Usage
+
+```
+show stats packet-processing action failure hmac invalid-affinity [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -43399,6 +46143,7 @@ show stats packet-processing action success [core <core>] [since <since>] [force
 | [`drop`](#show-stats-packet-processing-action-success-drop) | The number of packets processed by installed drop actions |
 | [`duplicate-detector`](#show-stats-packet-processing-action-success-duplicate-detector) | Statistics for &#x27;duplicate-detector&#x27; |
 | [`ethernet-header-transform`](#show-stats-packet-processing-action-success-ethernet-header-transform) | The number of packets successfully encapsulated |
+| [`fec`](#show-stats-packet-processing-action-success-fec) | Statistics for &#x27;fec&#x27; |
 | [`flow-move`](#show-stats-packet-processing-action-success-flow-move) | Statistics for &#x27;flow-move&#x27; |
 | [`forward`](#show-stats-packet-processing-action-success-forward) | Statistics for &#x27;forward&#x27; |
 | [`hmac`](#show-stats-packet-processing-action-success-hmac) | Statistics for &#x27;hmac&#x27; |
@@ -44506,6 +47251,328 @@ The number of packets successfully encapsulated
 
 ```
 show stats packet-processing action success ethernet-header-transform [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success fec`
+
+Statistics for &#x27;fec&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action success fec [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`add`](#show-stats-packet-processing-action-success-fec-add) | Statistics for &#x27;add&#x27; |
+| [`remove`](#show-stats-packet-processing-action-success-fec-remove) | Statistics for &#x27;remove&#x27; |
+
+## `show stats packet-processing action success fec add`
+
+Statistics for &#x27;add&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action success fec add [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`parity-sent`](#show-stats-packet-processing-action-success-fec-add-parity-sent) | FEC parity packet successfully sent |
+| [`trailer-added`](#show-stats-packet-processing-action-success-fec-add-trailer-added) | FEC trailer sucessfully added |
+
+## `show stats packet-processing action success fec add parity-sent`
+
+FEC parity packet successfully sent
+
+#### Usage
+
+```
+show stats packet-processing action success fec add parity-sent [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success fec add trailer-added`
+
+FEC trailer sucessfully added
+
+#### Usage
+
+```
+show stats packet-processing action success fec add trailer-added [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success fec remove`
+
+Statistics for &#x27;remove&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action success fec remove [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`completed-round`](#show-stats-packet-processing-action-success-fec-remove-completed-round) | FEC round successfully completed |
+| [`out-of-order`](#show-stats-packet-processing-action-success-fec-remove-out-of-order) | The number of data packets received out of order for the current FEC round |
+| [`regenerated-packet`](#show-stats-packet-processing-action-success-fec-remove-regenerated-packet) | The number of FEC packet regenerations successfully completed |
+| [`resync`](#show-stats-packet-processing-action-success-fec-remove-resync) | The number of times FEC was forced to resync on a new round of packets |
+| [`trailer-removed`](#show-stats-packet-processing-action-success-fec-remove-trailer-removed) | FEC trailer sucessfully removed |
+| [`unnecessary-parity`](#show-stats-packet-processing-action-success-fec-remove-unnecessary-parity) | The number of FEC parity packets received that were not needed to complete a round |
+
+## `show stats packet-processing action success fec remove completed-round`
+
+FEC round successfully completed
+
+#### Usage
+
+```
+show stats packet-processing action success fec remove completed-round [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success fec remove out-of-order`
+
+The number of data packets received out of order for the current FEC round
+
+#### Usage
+
+```
+show stats packet-processing action success fec remove out-of-order [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success fec remove regenerated-packet`
+
+The number of FEC packet regenerations successfully completed
+
+#### Usage
+
+```
+show stats packet-processing action success fec remove regenerated-packet [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success fec remove resync`
+
+The number of times FEC was forced to resync on a new round of packets
+
+#### Usage
+
+```
+show stats packet-processing action success fec remove resync [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success fec remove trailer-removed`
+
+FEC trailer sucessfully removed
+
+#### Usage
+
+```
+show stats packet-processing action success fec remove trailer-removed [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success fec remove unnecessary-parity`
+
+The number of FEC parity packets received that were not needed to complete a round
+
+#### Usage
+
+```
+show stats packet-processing action success fec remove unnecessary-parity [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -47216,6 +50283,7 @@ show stats packet-processing classifier received [core <core>] [port <port>] [si
 | [`dhcp`](#show-stats-packet-processing-classifier-received-dhcp) | The number of packets received and classified as DHCP |
 | [`dhcpv6`](#show-stats-packet-processing-classifier-received-dhcpv6) | The number of packets received and classified as DHCPv6 |
 | [`discards`](#show-stats-packet-processing-classifier-received-discards) | The number of packets dropped due to a failure to classify the packet |
+| [`esp`](#show-stats-packet-processing-classifier-received-esp) | The number of packets received and classified as ESP |
 | [`exception`](#show-stats-packet-processing-classifier-received-exception) | The number of exceptions caught while classifying packets |
 | [`fragmented-icmp-discards`](#show-stats-packet-processing-classifier-received-fragmented-icmp-discards) | The number of fragmented ICMP packets discarded |
 | [`fragmented-icmpv6-discards`](#show-stats-packet-processing-classifier-received-fragmented-icmpv6-discards) | The number of fragmented ICMPv6 packets discarded |
@@ -47430,6 +50498,33 @@ The number of packets dropped due to a failure to classify the packet
 
 ```
 show stats packet-processing classifier received discards [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier received esp`
+
+The number of packets received and classified as ESP
+
+#### Usage
+
+```
+show stats packet-processing classifier received esp [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -48818,6 +51913,7 @@ show stats packet-processing classifier sent [core <core>] [port <port>] [since 
 | [`broadcast`](#show-stats-packet-processing-classifier-sent-broadcast) | The number of broadcast packets sent |
 | [`dhcp`](#show-stats-packet-processing-classifier-sent-dhcp) | The number of DHCP packets sent |
 | [`dhcpv6`](#show-stats-packet-processing-classifier-sent-dhcpv6) | The number of DHCPv6 packets sent |
+| [`esp`](#show-stats-packet-processing-classifier-sent-esp) | The number of ESP packets sent |
 | [`gre`](#show-stats-packet-processing-classifier-sent-gre) | The number of GRE packets sent |
 | [`icmp`](#show-stats-packet-processing-classifier-sent-icmp) | The number of ICMP packets sent |
 | [`icmpv6`](#show-stats-packet-processing-classifier-sent-icmpv6) | The number of ICMPv6 packets sent |
@@ -48947,6 +52043,33 @@ show stats packet-processing classifier sent dhcpv6 [core <core>] [port <port>] 
 | port | The device interface for which this metric was generated (comma-separated list) |
 | router | The router for which to display stats (default: &lt;current router&gt;) |
 | since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier sent esp`
+
+The number of ESP packets sent
+
+#### Usage
+
+```
+show stats packet-processing classifier sent esp [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list). |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The name of the node generating this metric. |
+| port | The device interface for which this metric was generated (comma-separated list). |
+| router | The router for which to display stats (default: &lt;current router&gt;). |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp]. |
 
 ##### Positional Arguments
 
@@ -54140,8 +57263,10 @@ show stats performance-monitoring peer-path [peer-name <peer-name>] [peer-host <
 | ------- | ----------- |
 | [`jitter`](#show-stats-performance-monitoring-peer-path-jitter) | Jitter in milliseconds for the 128T peer path. |
 | [`latency`](#show-stats-performance-monitoring-peer-path-latency) | Latency in milliseconds for the 128T peer path. |
-| [`loss`](#show-stats-performance-monitoring-peer-path-loss) | Packet loss percentange for the 128T peer path. |
+| [`loss`](#show-stats-performance-monitoring-peer-path-loss) | Aggregate packet loss percentange for the 128T peer path. |
 | [`mos`](#show-stats-performance-monitoring-peer-path-mos) | MOS value calculated for the 128T peer path. (hundreths of a decimal) |
+| [`received`](#show-stats-performance-monitoring-peer-path-received) | Statistics for &#x27;received&#x27; |
+| [`transmit`](#show-stats-performance-monitoring-peer-path-transmit) | Statistics for &#x27;transmit&#x27; |
 | [`updated`](#show-stats-performance-monitoring-peer-path-updated) | The unix timestamp (seconds) when the peer path&#x27;s values were last updated. |
 
 ## `show stats performance-monitoring peer-path jitter`
@@ -54208,7 +57333,7 @@ show stats performance-monitoring peer-path latency [peer-name <peer-name>] [pee
 
 ## `show stats performance-monitoring peer-path loss`
 
-Packet loss percentange for the 128T peer path.
+Aggregate packet loss percentange for the 128T peer path.
 
 #### Usage
 
@@ -54245,6 +57370,270 @@ MOS value calculated for the 128T peer path. (hundreths of a decimal)
 
 ```
 show stats performance-monitoring peer-path mos [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [traffic-class <traffic-class>] [protocol <protocol>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats performance-monitoring peer-path received`
+
+Statistics for &#x27;received&#x27;
+
+#### Usage
+
+```
+show stats performance-monitoring peer-path received [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [traffic-class <traffic-class>] [protocol <protocol>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`loss`](#show-stats-performance-monitoring-peer-path-received-loss) | Packet loss percentange for receiving from the 128T peer path. |
+| [`marked-packets`](#show-stats-performance-monitoring-peer-path-received-marked-packets) | The number of packets marked by the peer during a given interval. |
+| [`marked-packets-acknowledged`](#show-stats-performance-monitoring-peer-path-received-marked-packets-acknowledged) | The number of marked packets acknowledged by the node during a given interval. |
+
+## `show stats performance-monitoring peer-path received loss`
+
+Packet loss percentange for receiving from the 128T peer path.
+
+#### Usage
+
+```
+show stats performance-monitoring peer-path received loss [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [traffic-class <traffic-class>] [protocol <protocol>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats performance-monitoring peer-path received marked-packets`
+
+The number of packets marked by the peer during a given interval.
+
+#### Usage
+
+```
+show stats performance-monitoring peer-path received marked-packets [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [traffic-class <traffic-class>] [protocol <protocol>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats performance-monitoring peer-path received marked-packets-acknowledged`
+
+The number of marked packets acknowledged by the node during a given interval.
+
+#### Usage
+
+```
+show stats performance-monitoring peer-path received marked-packets-acknowledged [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [traffic-class <traffic-class>] [protocol <protocol>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats performance-monitoring peer-path transmit`
+
+Statistics for &#x27;transmit&#x27;
+
+#### Usage
+
+```
+show stats performance-monitoring peer-path transmit [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [traffic-class <traffic-class>] [protocol <protocol>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`loss`](#show-stats-performance-monitoring-peer-path-transmit-loss) | Packet loss percentange for transmitting to the 128T peer path. |
+| [`marked-packets`](#show-stats-performance-monitoring-peer-path-transmit-marked-packets) | The number of packets marked by the node during a given interval. |
+| [`marked-packets-acknowledged`](#show-stats-performance-monitoring-peer-path-transmit-marked-packets-acknowledged) | The number of marked packets acknowledged by the peer during a given interval. |
+
+## `show stats performance-monitoring peer-path transmit loss`
+
+Packet loss percentange for transmitting to the 128T peer path.
+
+#### Usage
+
+```
+show stats performance-monitoring peer-path transmit loss [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [traffic-class <traffic-class>] [protocol <protocol>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats performance-monitoring peer-path transmit marked-packets`
+
+The number of packets marked by the node during a given interval.
+
+#### Usage
+
+```
+show stats performance-monitoring peer-path transmit marked-packets [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [traffic-class <traffic-class>] [protocol <protocol>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| protocol | The protocol for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats performance-monitoring peer-path transmit marked-packets-acknowledged`
+
+The number of marked packets acknowledged by the peer during a given interval.
+
+#### Usage
+
+```
+show stats performance-monitoring peer-path transmit marked-packets-acknowledged [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [traffic-class <traffic-class>] [protocol <protocol>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -59568,6 +62957,7 @@ show stats service-area received [since <since>] [force] [router <router>] [node
 | [`update-flow-with-peer-success`](#show-stats-service-area-received-update-flow-with-peer-success) | Number of reverse metadata packets that updated flow with destination peer |
 | [`update-session-with-peer-failure`](#show-stats-service-area-received-update-session-with-peer-failure) | Number of reverse metadata packets that failed to update session with destination peer |
 | [`update-session-with-peer-success`](#show-stats-service-area-received-update-session-with-peer-success) | Number of reverse metadata packets that updated session with destination peer |
+| [`url-filtering`](#show-stats-service-area-received-url-filtering) | Stats pertaining to Url-Filtering in the Service Area |
 | [`valid-reverse-metadata-packets`](#show-stats-service-area-received-valid-reverse-metadata-packets) | Number of valid reverse metadata packets received |
 
 ## `show stats service-area received adaptive-encryption-modify-packets`
@@ -60796,6 +64186,435 @@ Number of reverse metadata packets that updated session with destination peer
 
 ```
 show stats service-area received update-session-with-peer-success [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received url-filtering`
+
+Stats pertaining to Url-Filtering in the Service Area
+
+#### Usage
+
+```
+show stats service-area received url-filtering [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`drop`](#show-stats-service-area-received-url-filtering-drop) | Stats describing packets that were dropped due to url-filtering |
+| [`service-update`](#show-stats-service-area-received-url-filtering-service-update) | Stats pertaining to service updates due to url-filtering |
+
+## `show stats service-area received url-filtering drop`
+
+Stats describing packets that were dropped due to url-filtering
+
+#### Usage
+
+```
+show stats service-area received url-filtering drop [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`cache-miss`](#show-stats-service-area-received-url-filtering-drop-cache-miss) | Stats describing packets that were dropped due to url-filtering cache misses |
+
+## `show stats service-area received url-filtering drop cache-miss`
+
+Stats describing packets that were dropped due to url-filtering cache misses
+
+#### Usage
+
+```
+show stats service-area received url-filtering drop cache-miss [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`application-director`](#show-stats-service-area-received-url-filtering-drop-cache-miss-application-director) | Stats describing packets that were dropped due to url-filtering cache misses in the application-director |
+
+## `show stats service-area received url-filtering drop cache-miss application-director`
+
+Stats describing packets that were dropped due to url-filtering cache misses in the application-director
+
+#### Usage
+
+```
+show stats service-area received url-filtering drop cache-miss application-director [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`domain`](#show-stats-service-area-received-url-filtering-drop-cache-miss-application-director-domain) | Number of packet drops due to application-director domain cache miss (packets) |
+| [`url`](#show-stats-service-area-received-url-filtering-drop-cache-miss-application-director-url) | Number of packet drops due to application-director URL cache miss (packets) |
+
+## `show stats service-area received url-filtering drop cache-miss application-director domain`
+
+Number of packet drops due to application-director domain cache miss (packets)
+
+#### Usage
+
+```
+show stats service-area received url-filtering drop cache-miss application-director domain [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received url-filtering drop cache-miss application-director url`
+
+Number of packet drops due to application-director URL cache miss (packets)
+
+#### Usage
+
+```
+show stats service-area received url-filtering drop cache-miss application-director url [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received url-filtering service-update`
+
+Stats pertaining to service updates due to url-filtering
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`application-director`](#show-stats-service-area-received-url-filtering-service-update-application-director) | Stats pertaining to service updates due to url-filtering and the application-director |
+| [`configuration`](#show-stats-service-area-received-url-filtering-service-update-configuration) | Stats pertaining to service updates due to url-filtering configuration |
+| [`database`](#show-stats-service-area-received-url-filtering-service-update-database) | Stats pertaining to service updates due to url-filtering and the database |
+
+## `show stats service-area received url-filtering service-update application-director`
+
+Stats pertaining to service updates due to url-filtering and the application-director
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update application-director [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`domain`](#show-stats-service-area-received-url-filtering-service-update-application-director-domain) | Number of times app-id service updated from an application-director domain classification (updates) |
+| [`url`](#show-stats-service-area-received-url-filtering-service-update-application-director-url) | Number of times app-id service updated from an application-director URL classification (updates) |
+
+## `show stats service-area received url-filtering service-update application-director domain`
+
+Number of times app-id service updated from an application-director domain classification (updates)
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update application-director domain [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received url-filtering service-update application-director url`
+
+Number of times app-id service updated from an application-director URL classification (updates)
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update application-director url [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received url-filtering service-update configuration`
+
+Stats pertaining to service updates due to url-filtering configuration
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update configuration [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`domain`](#show-stats-service-area-received-url-filtering-service-update-configuration-domain) | Number of times app-id service updated from a configured domain (updates) |
+| [`url`](#show-stats-service-area-received-url-filtering-service-update-configuration-url) | Number of times app-id service updated from a configured URL (updates) |
+
+## `show stats service-area received url-filtering service-update configuration domain`
+
+Number of times app-id service updated from a configured domain (updates)
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update configuration domain [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received url-filtering service-update configuration url`
+
+Number of times app-id service updated from a configured URL (updates)
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update configuration url [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received url-filtering service-update database`
+
+Stats pertaining to service updates due to url-filtering and the database
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update database [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`domain`](#show-stats-service-area-received-url-filtering-service-update-database-domain) | Number of times app-id service updated from the domain-database (updates) |
+
+## `show stats service-area received url-filtering service-update database domain`
+
+Number of times app-id service updated from the domain-database (updates)
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update database domain [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments

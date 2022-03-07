@@ -36,6 +36,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44224 Autocomplete for Resource Groups:** Autocomplete has been added to the pcli when configuring resource groups. 
 
+:::info
+When installing 5.4.4, the following can be seen in the installation logs:
+
+`depmod: WARNING: /lib/modules/4.18.0-305.19.1.el8_4.x86_64/kernel/drivers/infiniband/hw/i40iw/i40iw.ko.xz needs unknown symbol i40e_unregister_client `
+
+This is a warning for a driver that is not used or supported in the SSR software, and can safely be ignored.
+:::
+
 ### Resolved Issues
 
 - **The following CVE issues have been addressed and resolved with this release:**
@@ -361,4 +369,4 @@ This is being addressed, and will be resolved in an upcoming point release.
 ------
 - **I95-43283 Not all configured device interfaces are available in charts:** After upgrading to 5.4, only the `device-interfaces`, `network-interfaces` and `services` that have observed active traffic will be available as permutations for charts and graphs.
 ------
-- **I95-43380 PCLI and UI does not allow the user to edit the [`http-probe-profile`](#plugin_http_probe.md) configuration:** There is no known workaround at this time. This is being addressed in an upcoming point release. See additional considerations [here](intro_upgrade_considerations.md#unsupported-plugins).
+- **I95-43380 PCLI and UI does not allow the user to edit the [`http-probe-profile`](plugin_http_probe.md) configuration:** There is no known workaround at this time. This is being addressed in an upcoming point release.
