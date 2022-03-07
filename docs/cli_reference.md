@@ -5,6 +5,158 @@ sidebar_label: 'Command Line Reference'
 
 The Command Line Reference guide is better understood if you know the basics of operating the programmable command line interface (PCLI). Commands and actions such as clear, edit, delete, restore, and show, for example, are described here. If you have not used the PCLI before, please refer to [About the PCLI](concepts_pcli.md) for an explanation of how it works.
 
+## `clear app-id cache`
+
+Clear app-id entries from cache
+
+#### Usage
+
+```
+clear app-id cache [force] [stale-entries] [node <node>] {router <router> | resource-group <resource-group>} [<cache>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to clear app-id cache entries |
+| resource-group | The name of the resource group |
+| router | The router on which to clear app-idcache entries |
+| stale-entries | Only clear the stale (expired) entries |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| cache | Clear app-id entries from address cache, domain cache, url cache, or all (default: all) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache-entry address`](#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+
+## `clear app-id cache-entry address`
+
+Clear specific app-id entry from cache by address key
+
+#### Usage
+
+```
+clear app-id cache-entry address [force] [node <node>] {router <router> | resource-group <resource-group>} <ip> <port> <protocol>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to clear app-id cache entry |
+| resource-group | The name of the resource group |
+| router | The router on which to clear app-id cache entry |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ip | IP address of the address key [type: IP address] |
+| port | Port of the address key [type: port] |
+| protocol | Protocol of the address key [type: string or uint8] |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry domain`](#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+
+## `clear app-id cache-entry domain`
+
+Clear specific app-id entry from cache by domain name key
+
+#### Usage
+
+```
+clear app-id cache-entry domain [force] [node <node>] {router <router> | resource-group <resource-group>} <domain>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to clear app-id cache entry |
+| resource-group | The name of the resource group |
+| router | The router on which to clear app-id cache entry |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| domain | Domain name |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry url`](#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+
+## `clear app-id cache-entry url`
+
+Clear specific app-id entry from cache by url key
+
+#### Usage
+
+```
+clear app-id cache-entry url [force] [node <node>] {router <router> | resource-group <resource-group>} <url>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to clear app-id cache entry |
+| resource-group | The name of the resource group |
+| router | The router on which to clear app-id cache entry |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| url | URL |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+
+
 ## `clear arp`
 
 Clear the entire ARP cache or a subset if arguments are provided.
@@ -1617,6 +1769,78 @@ Import success
 | Release | Modification                |
 | ------- | ----------------------------|
 | 4.4.0   | This feature was introduced |
+
+## `lookup application by-address`
+
+Look up application identification by address key
+
+#### Usage
+
+```
+lookup application by-address router <router> node <node> <ip> <port> <protocol>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node on which to look up application identification |
+| router | The router on which to look up application identification |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| ip | IP address of the address key [type: IP address] |
+| port | Port of the address key [type: port] |
+| protocol | Protocol of the address key [type: string or uint8] |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+
+## `lookup application by-domain`
+
+Look up application identification by domain name or url key
+
+#### Usage
+
+```
+lookup application by-domain router <router> node <node> <domain-url>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node on which to look up application identification |
+| router | The router on which to look up application identification |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| domain-url | Domain name or URL |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
+| [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
 
 ## `manage plugin install`
 
@@ -3537,6 +3761,68 @@ Completed in 0.35 seconds
 | ------- | ----------------------------|
 | 1.1.0   | This feature was introduced |
 | 3.1.0   | Previously allowed filtering by node, now the command shows all alarms. |
+
+## `show app-id cache`
+
+Show information of app-id entries in cache
+
+#### Usage
+
+```
+show app-id cache [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>} <cache>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node on which to show app-id cache entries |
+| resource-group | The name of the resource group |
+| router | The router on which to show app-id cache entries |
+| rows | The number of app-id cache to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| cache | Show app-id entries from address, domain, or url cache |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`clear app-id cache`](#clear-app-id-cache) | Clear app-id entries from cache |
+| [`clear app-id cache-entry address`](#clear-app-id-cache-entry-address) | Clear specific app-id entry from cache by address key |
+| [`clear app-id cache-entry domain`](#clear-app-id-cache-entry-domain) | Clear specific app-id entry from cache by domain name key |
+| [`clear app-id cache-entry url`](#clear-app-id-cache-entry-url) | Clear specific app-id entry from cache by url key |
+| [`lookup application by-address`](#lookup-application-by-address) | Look up application identification by address key |
+| [`lookup application by-domain`](#lookup-application-by-domain) | Look up application identification by domain name or url key |
+| [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
+
+## `show app-id categories`
+
+Show available top-level categories
+
+#### Usage
+
+```
+show app-id categories [router <router>] [node <node>] [<name>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node on which to show app-id categories |
+| router | The router on which to show app-id categories (default: &lt;current router&gt;) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | Display the subcategories for category &#x27;name&#x27; |
+
 ## `show application modules registration`
 
 Display registered application-modules.
@@ -4789,11 +5075,7 @@ show device-interface [name <name>] [force] [node <node>] router <router> [<verb
 
 | name | description |
 | ---- | ----------- |
-| detail (default) |  |
-| extended-statistics |  |
-| registers |  |
-| summary |  |
-| verbosity |  | 
+| verbosity | detail \| summary \| extended-statistics \| registers (default: detail) |
 
 #### Description
 
@@ -5294,6 +5576,12 @@ show events [{router <router> | resource-group <resource-group>}] [from <from>] 
 | rows | The number of events to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | to | Only show events before the provided time. You can use the provided standard timestamps, such as 45m, 1d, or 1mo; or enter a value [type: timestamp] |
 | type | Filter events based on the event type and subtype |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ##### See Also
 

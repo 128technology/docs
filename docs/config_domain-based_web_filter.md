@@ -1,77 +1,315 @@
 ---
-title: Configuring Domain-based Web Filtering/Routing
-sidebar: Configuring Domain-based Web Filtering/Routing
+title: Web Filtering
+sidebar: Web Filtering
 ---
 
-Configuring Domain-based Web Filtering allows users to create generic services for a broad range of domains that fall into a categories such as “Sports” (i.e.; espn.com, nfl.com, nhl.com, etc.) “Social Media” (Facebook, LinkedIn, etc), “Adult” and others. Categories are populated with known domains associated with the traffic type. Domain learning can be enabled so that the default domains are supplemented with discovered domains in each category. Additionally, users can modify the list of domains in a category. 
+## Overview
 
-Services can be defined based on categories to filter a broad set of related domains. Services can also be assigned to individual domains, and filtering performed in a more targeted manner. 
+Web filtering allows administrators to prevent access to dangerous, malicious, or inappropriate internet content. Services are created to handle traffic using the following set of configuration elements:
+
+- url
+- domain-name
+- subcategory
+- category
+
+Web filtering extracts the full URL as http traffic traverses the router, allowing a targeted approach to filtering. Additionally, web filtering provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs.
+
+:::note
+Web Filtering is a separate, optional feature, available through the purchase of a Web-Filtering license. For information about activating this powerful feature, please contact Customer Support or your Sales Engineer.
+::: 
+
+### Basic Configuration
+
+- Configure `application-identification` and `web-filtering`
+- Configure or edit a child service to block the content
+
+#### Example Config
+
+Configure `application-identification` mode `all` and enable `web-filtering`:
+
+```
+config
+    authority
+              router  office
+                name      office
+                application-identification
+                  mode  all
+                  web-filtering
+                      enabled true                   
+                exit
+              exit
+    exit
+exit
+```
+
+Create a child service with an `access-policy` to restrict traffic:
+
+```
+config
+    authority
+        service      internet
+            name                internet
+            description         "The INTERNET"
+            address             0.0.0.0/0
+            access-policy       lan
+                source  lan
+                permission allow
+            exit
+        exit
+        service  block.internet
+            name                block.internet
+            description         "Block certain content"
+            domain-name-category    Sports
+            access-policy       lan
+                source      lan
+                permission  deny
+            exit
+        exit
+exit
+
+```
+
+## How it Works
+
+The SSR maintains a cache of the most frequently used domains and URLs. As clients request URLs over HTTP, the SSR compares the request to the cache. If a requested URL is matched to one in the cache, then the information configured for the Category is used - allow or block. If the requested URL does not exist in the cache, the SSR makes a secure, authenticated, and asynchronous query to the Websense ThreatSeeker Cloud service for categorization of the URL. 
+
+- While waiting for a response to the categorization query, the SSR will drop packets for the request. Clients are expected to retransmit the request. If a configurable threshold of retransmissions is hit, the SSR will give up on categorization and allow the session.
+- When a response is received, the cache is updated, and the category information in the service policy is applied.
+
+### Configuring Web Filtering using the PCLI
+
+Web Filtering is enabled on the router through [Application Identification](config_app_ident.md). The mode must be set to `all`, and `web-filtering` must be `enabled true` as shown above. A child service is then created with an allow or deny action for the domain category. 
+
+The high level steps for configuring Web Filtering are:
+
+- Enable `application-identification mode all`
+- Enable web filtering
+- Create a parent service
+- Create the child service to be filtered
+- Create an access policy on the child service to filter traffic 
+
+In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+
+#### Configure `application-identification` 
+
+```
+config
+    authority
+              router  office
+                name      office
+                application-identification
+                  mode  all
+                  web-filtering
+                      enabled true                   
+                exit
+              exit
+    exit
+exit
+```
+#### Create the Parent Service
+
+```
+config
+    authority
+        service     internet
+            name          internet
+            scope         public
+            address       0.0.0.0/0
+        exit
+    exit
+exit
+```
+
+#### Create the Child Service
+The following example uses the domain category to classify traffic.
+```
+config
+    authority
+        service       adult.internet
+           name            adult.internet
+           domain-name-category    Adult 
+        exit
+    exit
+exit
+```
+#### Configure the Access Policy
+Configure the access-policy to block (deny) traffic.
+
+```
+config
+    authority
+        service    adult.internet
+            name                  adult.internet
+            domain-name-category  Adult
+            access-policy         adult.internet
+                source      adult.internet
+                permission  deny
+            exit
+        exit
+    exit
+exit
+
+```
 
 ## Domain Categories
 
-Use the `show domain-categories` command to display a list of categories in the CLI. The data is stored in the /etc/128technology/application-categories directory. The default categories available are:
+Listed below are the default set of SSR domain categories, which apply to all data sources on the system. These categories are not blocked by default, nor are they considered threatening, but represent a list of categories of information. Individual services and service policies can be configured on the SSR to allow or deny access to the category, or domains within a category. 
 
-```
-Node: node1
-================= =============== ===================
- Category          Session Count   Domain-name Count
-================= =============== ===================
- <Uncategorized>             403                  16
- Advertiser                    0                   0
- Arts                          0                   0
- Business                     14                  13
- CDN                           0                   0
- Computers                     1                   1
- Conferencing                  2                   1
- Cybersecurity                 0                   0
- DeviceIoT                     1                   1
- FileSharing                   0                   0
- Hosting                       0                   0
- Mail                          0                   0
- Recreation                    0                   0
- Reference                     0                   0
- Search                        0                   0
- SocialMedia                   0                   0
- SoftwareUpdates               0                   0
- StreamingMedia                0                   0
- Technology                   13                   6
-```
+- Adult
+- Advertisement
+- ArtsAndEntertainment
+- Business
+- CareerAndEducation
+- Collaboration
+- Conferencing
+- DeviceIoT
+- FileSharing
+- Financial
+- Gambling
+- Games
+- Government
+- Healthcare
+- Illegal
+- Infrastructure
+- Malware
+- Miscellaneous
+- Networking
+- NewsAndReference
+- Recreation
+- RemoteDesktop
+- Search
+- Security
+- Shopping
+- SocialMedia
+- SoftwareUpdates
+- Sports
+- StreamingMedia
+- Technology
+- Travel
+- Weapon
 
-To specify a Domain Name Category in the GUI, enter a category name into the Domain Name Category field. 
-
-![Configuration Fields](/img/dbwf_config_fields.png)
-
-Active categories and domains are displayed on the Applications Seen page available on the Routers page, using the link in the top right corner. 
+Active categories and domains are displayed in the GUI on the Applications Seen page. Use the link on the top right corner of the Routers page to view the applications available on the Routers page. 
 
 ![Select Applications Seen](/img/dbwf_appl_seen.png)
 
-Adding a new category or domain enters the information to the master list. The category and domain lists are generated when the configuration is committed. As new categories and domains are added, the configuration is updated, but the entire list is not regenerated. 
+## Service Matching Order
 
-Use the Generate Application Idenfication Categories toggle to generate a set of child services for each category. 
+When matching a session to a service, the list below represents the priority order in which the service resolution is performed. 
 
-![Generate Application Identification Categories](/img/dbwf_gen_categories.png)
+- URL
+- domain-name
+- subcategory
+- category
 
-### Auto-Update the Domain List
+The SSR obtains the category and subcategory for the URL and domain from Websense, which is then used for the service matching algorithm described below. 
 
-Application Identification is configured to automatically download updated domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel for each router. 
+For example, on the URL: http://www.google.com/doodles/doodle-champion-island-games-september-05, matching will be performed in the following order. 
 
-![Application Data Updates](/img/dbwf_app-id_updates.png)
+1.  Does any child service URL list contain a match for this URL, including any wild-card patterns for URLs? 
+- Yes, the following child service matches the URL:
 
-For additional information, see [application-identification.](config_reference_guide.md#application-identification)
+```
+     service  google-doodle.internet
+            name                google-doodle.internet
+            description         "No doodling at work"
+            url                 http://www.google.com/doodles/*
 
-## Configuring Domain-based Web Filtering
+            access-policy       lan
+                source      lan
+                permission  deny
+            exit
+        exit
+```
 
-To enable Domain-based Web Filtering, you must configure a parent-level service under which your child service will nest. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+2. If there was no match to the first query, then does any child service match the domain in the URL? 
+- Yes, the following domain based service matches the URL:
 
-The high level steps for configuring Domain-based Web Filtering are:
+```
+        service  google.internet
+            name                google.internet
+            description         "No searching at work"
+            domain-name             *google.com
+
+            access-policy       lan
+                source      lan
+                permission  deny
+            exit
+        exit
+```
+
+3.  If there was no match to query 2, then is there a child service which contains the subcategory Search Engines and Portals ? 
+- Yes, the URL matches a sub-category called *Search Engines and Portals* within the category of **Technology**.
+
+```
+        service  search.internet
+            name                search.internet
+            description         "No searching at work"
+            subcategory             Search Engines and Portals
+
+            access-policy       lan
+                source      lan
+                permission  deny
+            exit
+        exit
+```
+
+4.  And finally, if there is no match to query 3; is there a child service which matches category Technology? For example:
+
+```
+        service  technology.internet
+            name                technology.internet
+            description         "Technology is okay at work"
+            domain-category         Technology
+
+            access-policy       lan
+                source      lan
+                permission  allow
+            exit
+        exit
+```
+In this case, `google.com` does not fall into the category of Technology.
+
+### Matching Order Algorithm
+
+The matching order algorithm is the same for scenarios when all the web filtering config options are used across different child services under the parent, or used on the same child service. For example, consider the following service:
+
+```
+        service  block-search.internet
+            name                search.internet
+            description         "No searching at work"
+            url                 http://www.google.com/doodles/*
+            domain-name         *google.com
+            subcategory         Search Engines and Portals
+
+            access-policy       lan
+                source      lan
+                permission  deny
+            exit
+        exit
+```
+The `block-search.internet` child service will match the various URLs as follows:
+
+| URL | Match Type | Description |
+| --- | --- | --- |
+| http://www.google.com/doodles/doodle-champion-island-games-september-05 | By URL<br /> http://www.google.com/doodles/* | The wild-card URL is the best match in this case. |
+| http://www.google.com | By domain *google.com | The URL is not a match, but the domain is and the overall child service is a match as a result. |
+| http://www.bing.com | By subcategory Search Engines and Portals. | The URL matches neither the configured URL or domain pattern, however, it is a Search Engine and matches the child service. |
+
+## Configuring Web Filtering using the GUI
+
+To enable Web Filtering, configure application identification, a parent service, a child service, and access policies to allow or deny traffic. In many cases, you may have pieces of this procedure already in place, such as  the *internet* service configured as an example below. 
+
+The high level steps for configuring web filtering are:
 
 - Create a parent service
-- Create the child service to be filtered
+- Create the child service
 - Configure a Tenant
 - Create an access policy on the child service to filter traffic 
 
+The following procedures describe configuring web filtering from the GUI. An example of the PCLI configuration is also shown.
+
 ### Create a Parent-level Service 
-In this example we create a broad service representing the internet.
+Create a broad service representing the internet.
 
 1. Log in to the Conductor GUI.
 2. Select Configuration.
@@ -97,20 +335,11 @@ config
 exit
 ```
 
-### Create Child Services 
+### Create the Child Service 
 
-The child service classifies the traffic and provides the option to filter different domains and categories. We will create two services, one of which will be filtered out (denied).
+The child service classifies the traffic and provides the option to filter different domains and categories.
 
-#### Create the first service
-
-1.	In the Services window, select ADD.
-2.	Name the first service `netflix.internet`
-3.	On the Service screen, verify that Enabled is set to **true**.
-4.	Set share service routes to **true**.
-5.	Scroll down to Domain Name and enter the domain name using a wildcard to allow identification of all domain names; `*.netflix.com`.
-6.	In the Domain Name Category field, click ADD and select/add the domain category, Entertainment.
-
-#### Create the second service, the one to be filtered 
+#### Create the child service 
 1.	In the Services panel, select ADD.
 2.	Create a new service, `adult.internet`.
 3.	On the Service screen, verify that Enabled is set to **true**.
@@ -120,11 +349,6 @@ The child service classifies the traffic and provides the option to filter diffe
 ```
 config
     authority
-        service  	netflix.internet
-           name       	netflix.internet
-           domain-name             *.netflix.com
-           domain-name-category    Entertainment
-        exit
         service       adult.internet
            name            adult.internet
            domain-name-category    Adult 
@@ -138,7 +362,7 @@ A tenant must be configured in order to create an Access Policy. If you have not
 
 ### Create the Access Policy
 
-Configure the access-policy to deny the relevant tenants.
+Configure the access-policy to deny access to the domain category.
 
 1.	Scroll down to services.
 2.	Select adult.internet.
@@ -170,116 +394,9 @@ exit
 
 ```
 
-## Configuring Learning Mode
-
-Learning mode is used to gather statistics about a domain or category. You can select the type of information to be gathered; Modules, HTTPS, TLS, or All. 
-
-To configure Learning Mode via the GUI:
-1. Select a router.
-2. Scroll down to Router Settings and click Application Identification Settings.
-
-![Application ID Setting Button](/img/config_app_learning1.png)
-
-3. Set `enabled` to `true`.
-
-![App ID Basic Info](/img/config_app_learning2.png)
-
-4. Under Application Identification, select ADD.
-5. Select a type of application to identify. In most cases, selecting `all` will provide the best data set.
-
-![App Id Dropdown](/img/config_app_learning3.png)
-
-6. Validate and Commit the changes. 
-
-If Learning Mode is disabled, statistics are only gathered for categories/domains that are configured in a service.
-
 ## Show Commands
 
-The following show commands can be used from the CLI to display the list of domains and domain categories available and in use for Domain based web Filtering. 
+The following show commands can be used from the CLI to display the list of domains and domain categories available and in use for web filtering. 
 
-`show domain-name`:
-```
-admin@node1.test-home# show domain-names
-Thu 2021-06-24 22:03:28 EDT
-
-Retrieving from 'node1.test-home'...
-Node: node1.test-home Page 1
-
-=================================== =============== ================= =====================
- Domain                              Session Count   Category          Last Updated
-=================================== =============== ================= =====================
- ps16.pndsn.com                                 44   <Uncategorized>   2021-06-24 21:37:52
- ps17.pndsn.com                                 40   <Uncategorized>   2021-06-24 21:37:52
- ps9.pndsn.com                                  39   <Uncategorized>   2021-06-24 21:37:53
- ps3.pndsn.com                                  36   <Uncategorized>   2021-06-24 21:37:52
- ps14.pndsn.com                                 36   <Uncategorized>   2021-06-24 21:37:52
- ps6.pndsn.com                                  30   <Uncategorized>   2021-06-24 21:37:52
- ps7.pndsn.com                                  20   <Uncategorized>   2021-06-24 22:01:26
- ps4.pndsn.com                                  20   <Uncategorized>   2021-06-24 21:37:52
- ps15.pndsn.com                                 20   <Uncategorized>   2021-06-24 21:37:52
- ps1.pndsn.com                                  20   <Uncategorized>   2021-06-24 21:37:52
- ps2.pndsn.com                                  10   <Uncategorized>   2021-06-24 21:37:52
- ps18.pndsn.com                                 10   <Uncategorized>   2021-06-24 21:38:15
- ps13.pndsn.com                                 10   <Uncategorized>   2021-06-24 21:38:06
- api-ws.mistsys.com                              3   Technology        2021-06-24 21:37:54
- wss-primary.slack.com                           2   Business          2021-06-24 21:37:53
- mtalk.google.com                                2   Conferencing      2021-06-24 07:49:11
- ep-terminator-staging.mistsys.net               2   Technology        2021-06-24 20:44:12
- mistsys.atlassian.net                           2   Technology        2021-06-24 21:37:53
- beacons.gvt2.com                                1   Business          2021-06-24 22:01:15
- *.immedia-semi.com                              1   DeviceIoT         2021-06-23 09:29:52
- status-integration.mistsys.com                  1   Technology        2021-06-24 21:37:55
- ssl.gstatic.com                                 1   Business          2021-06-24 22:00:21
- slackb.com                                      1   Business          2021-06-24 22:00:21
- slack.com                                       1   Business          2021-06-24 21:38:21
- skydrive.wns.windows.com                        1   Business          2021-06-24 21:38:08
- push.services.mozilla.com                       1   Business          2021-06-24 21:37:59
- addon-juniper.goskope.com                       1   <Uncategorized>   2021-06-24 21:37:55
- alive.github.com                                1   Technology        2021-06-24 21:37:54
- beacons.gcp.gvt2.com                            1   Business          2021-06-24 22:00:21
- beacons3.gvt2.com                               1   Business          2021-06-24 22:03:15
- beacons4.gvt2.com                               1   Business          2021-06-24 22:02:15
- courier.push.apple.com                          1   Business          2021-06-24 21:37:53
- gateway-juniper.goskope.com                     1   <Uncategorized>   2021-06-24 21:38:01
- github.com                                      1   Computers         2021-06-24 21:38:32
- gs-loc.apple.com                                1   Business          2021-06-24 21:38:37
- ibm.lakesidesoftware.com                        1   <Uncategorized>   2021-06-24 21:41:54
- lp-push-server-770.lastpass.com                 1   Business          2021-06-24 21:37:57
-
-Completed in 0.09 seconds
-```
-
-`show domain-categories`: 
-```
-admin@node1.test-home# show domain-categories
-Thu 2021-06-24 22:03:45 EDT
-✔ Retrieving domain-name categories...
-
-Node: node1
-================= =============== ===================
- Category          Session Count   Domain-name Count
-================= =============== ===================
- <Uncategorized>             403                  16
- Advertiser                    0                   0
- Arts                          0                   0
- Business                     14                  13
- CDN                           0                   0
- Computers                     1                   1
- Conferencing                  2                   1
- Cybersecurity                 0                   0
- DeviceIoT                     1                   1
- FileSharing                   0                   0
- Hosting                       0                   0
- Mail                          0                   0
- Recreation                    0                   0
- Reference                     0                   0
- Search                        0                   0
- SocialMedia                   0                   0
- SoftwareUpdates               0                   0
- StreamingMedia                0                   0
- Technology                   13                   6
-
-Completed in 0.08 seconds
-```
-
-
+- `show domain-name`: Displays a list of the domain names.
+- `show domain-categories`: Displays the list of categories shown [above.](#domain-categories)

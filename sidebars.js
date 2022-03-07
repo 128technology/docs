@@ -76,8 +76,10 @@ module.exports = {
           "config_dhcp",
           "config_dns_proxy",
           "config_ldap",
+          "config_forward_error_correction",
           "config_management_over_forwarding",
           "config_domain-based_web_filter",
+          "config_app_ident",
           "config_EthoSVR",
           "config_flow_perf_mon",
           "config_gre_tunnel",
@@ -119,6 +121,7 @@ module.exports = {
         "type": "category",
         "label": "How To",
         "items": [
+          "how_to_use_app_summary",
           "howto_conductor_migration",
           "howto_extend_gui_nav",
           "howto_lte",
@@ -206,6 +209,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_5.5",
           "release_notes_128t_5.4",
           "release_notes_128t_5.3",
           "release_notes_128t_5.2",
