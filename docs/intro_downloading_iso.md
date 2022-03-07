@@ -242,7 +242,7 @@ The SSR software can now be downloaded as a qcow2 image. Qcow2 is a storage form
 
 Download the qcow2 image using the link below:
 
-- https://technology128t.jfrog.io/ui/repos/tree/General/generic-128t-images-release-local
+- https://software.128technology.com/artifactory/list/generic-128t-images-release-local
 
 Use the OpenStack management tool to load the image into your virtual environment, or deploy it directly from the hypervisor. The VM then boots using the pre-installed software.
 
