@@ -79,6 +79,8 @@ I95-40268, I95-41591, I95-41794, I95-41863, I95-42448, I95-43258, I95-43260, I95
 
 - **I95-44222 Commit fails for RBAC users with config-write permissions:** RBAC users with config-write permissions, but who do not have explicit write access to t128/ get a “failure to commit” message.
 	**_Workaround:_** Manually create a `commit` role and set the 128t:/ resource in the role. Add this role to users who need the ability to commit.	
+------
+- **I95-44881 System not booting on AWS c5 instance:** If you are running on an AWS c5 instance, it is recommended that you not upgrade to 5.4.4 at this time. An issue with a driver has been identified, which prevents the system from booting. This issue will be resolved in the next 5.4 patch.
 
 ## Release 5.4.3-8
 
