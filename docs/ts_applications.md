@@ -88,7 +88,7 @@ Please refer to the [Selective Packet Capture section](ts_packet_capture.md#sele
 
 ### Determining the Service from the PCLI
 
-If you were able to find the session in the output of the session table, it will positively identify the name of the service that is being accessed. Move on to the next step, Determinine the Selected Route.
+If you were able to find the session in the output of the session table, it will positively identify the name of the service that is being accessed. Move on to the next step, Determine the Selected Route.
 
 If you were unable to find the session in the output of the session table, we'll need to dig into the IP/port/protocol of the packet to see which service it should match.
 
@@ -101,7 +101,7 @@ show fib router newton | grep " trusted"
 ```
 
 :::note
-The tenant name within quotes has a preceding space. That will let you isolate services that are specifically allowed by this tenant, and not any of its descendents (children, grandchildren, etc.).
+The tenant name within quotes has a preceding space. That will let you isolate services that are specifically allowed by this tenant, and not any of its descendants (children, grandchildren, etc.).
 :::
 
 This command will output a list of prefixes/transports/ports, sorted by IP address:
@@ -151,7 +151,7 @@ The lookup algorithm is as follows:
 
 1. Perform the lookup with a "fully qualified" protocol and port (e.g., UDP/53).
 2. If there is no hit, perform a lookup with a fully-qualified protocol and a wildcard port (e.g., UDP/*)
-3. If there is no hit, perform a lookup with a fully wildcarded protocol and port
+3. If there is no hit, perform a lookup using a full wildcard for protocol and port.
 
 This information is critical when trying to understand which service your inbound traffic matches.
 
@@ -346,10 +346,7 @@ Now that you have a sense of the type of application traffic you're interested i
 
 1. Coordinate a time with the end user reporting a problem to attempt to reproduce the issue.
 
-2. Prior to testing, enable session captures on the non-SVR interfaces (typically the LAN) at both the ingress SSR and the egress SSR devices. Use filters that are inclusive, but as narrow as possible to keep the signal:noise ratio high.
-:::note
-Typically filtering traffic based on source IP at the ingress SSR and destination IP at the egress SSR is the most useful, since this will sidestep NAT issues.
-:::
+2. Prior to testing, enable session captures on the LAN interface of the egress router using the service identified in previous steps. Use filters that are inclusive, but as narrow as possible to keep the signal:noise ratio high.
 
 3. Use the command `write log message BEGINNING TEST 1` to cause the SSR to put an identifier into each log on the system.
 
@@ -357,9 +354,9 @@ Typically filtering traffic based on source IP at the ingress SSR and destinatio
 
 5. Use the command `write log message ENDING TEST 1`
 
-6. Repeate steps 4-6 several times, incrementing the TEST numbers in your log message.
+6. Repeat steps 4-6 several times, incrementing the TEST numbers in your log message.
 
-7. Lower the log levels on all devices (if explicitly raised), and disable session captures on all devices.
+7. Disable session captures on all devices.
 
 8. Retrieve the logs and captures from ingress and egress SSR systems.
 
@@ -375,13 +372,13 @@ This is generally due to a configuration problem or a transient network issue (e
 
 If traffic is processed by the ingress router and you believe it is forwarded out to the egress router but doesn't arrive, perform additional testing as follows:
 
-1. Run the tests as was done previously. Investigate the `highway` logs or the output of the `show sessions` table while the traffic is in progress to see what waypoint allocations were assigned to that traffic flow. On the ingress router this will be indicated by the `rev` flow for the session.
+1. Run the tests as was done previously. Investigate the `highway` and `serviceArea` logs, or the output of the `show sessions` table while the traffic is in progress to see what waypoint allocations were assigned to that traffic flow. On the ingress router this will be indicated by the `rev` flow for the session.
 
 2. Look for these ports in the 128T_service_.pcap on both the ingress and egress routers. If you see them leaving the ingress router and not arriving at the egress router, then this should be taken to your ISP for assistance in troubleshooting.
 
 ### Traffic Doesn't Leave the Egress Router
 
-As with issues with the ingress router, this is generally due to a configuration problem or a transient network issue (e.g., an interface failure). Look for the `BEGINNING TEST` messages in the logs and correlate them to the sessioin captures you took. Look for evidence of failure. For configurations that had been working previously but stopped (with no configuration changes), correlate the time at which traffic stopped working to any notable items in the router's event history – viewable with the command `show events alarm`.
+As with issues with the ingress router, this is generally due to a configuration problem or a transient network issue (e.g., an interface failure). Look for the `BEGINNING TEST` messages in the logs and correlate them to the session captures you took. Look for evidence of failure. For configurations that had been working previously but stopped (with no configuration changes), correlate the time at which traffic stopped working to any notable items in the router's event history – viewable with the command `show events alarm`.
 
 ## Support Services
 
