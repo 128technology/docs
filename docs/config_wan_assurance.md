@@ -36,7 +36,7 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
 
     For additional information about creating an Organization, please refer to the Mist [Organization Config documentation](https://www.mist.com/documentation/category/organization-config/).
 
-3. Create one Site for each physical location for onboarding 128T SSRs. 
+3. Create one Site for each physical location for onboarding the SSRs. 
 
     Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites. Other devices from the Juniper stack such as Mist APs, Switches, SRX, etc., should be onboarded and assigned to the same site as the SSR when possible. This provides a clean topology view of all devices running within a site.
     
@@ -122,7 +122,7 @@ Disabling WAN Assurance does not automatically release the router from the cloud
 
 ### Site Assignment (Mist)
 
-Once the SSR/128T portion of the onboarding process is complete, each router is displayed on the Mist inventory page under **Organization > Inventory**. Select Gateways on the top of the page to see a list of the routers and status. The router is listed as Unassigned, and must be assigned to the appropriate site.
+Once the SSR portion of the onboarding process is complete, each router is displayed on the Mist inventory page under **Organization > Inventory**. Select Gateways on the top of the page to see a list of the routers and status. The router is listed as Unassigned, and must be assigned to the appropriate site.
 
 :::note
 Sites must have already been created - there is no option to create a site in the drop down.
@@ -134,7 +134,7 @@ Sites must have already been created - there is no option to create a site in th
 4. In the Assign Gateway dialog, select the appropriate site from the drop down.
 5. Click on **Assign to Site**.
 
-Once the site assignment is complete, the information is relayed back to the corresponding 128T router, and the router begins streaming the telemetry data to the cloud.
+Once the site assignment is complete, the information is relayed back to the corresponding SSR router, and the router begins streaming the telemetry data to the cloud.
 
 ## SSR WAN Assurance Features
 
@@ -156,7 +156,7 @@ Once onboarding is complete, the router begins streaming telemetry data. Data ap
 
 ### Application Insights & SLE
 
-To provide insights into the application, services, and some SLE functionality, enable `session-record`. It is recommended to enable session records for all the SSR/128T services to provide a broad look at the application use. 
+To provide insights into the application, services, and some SLE functionality, enable `session-record`. It is recommended to enable session records for all the SSR services to provide a broad look at the application use.  
 ```
 1    authority
 2        service             internet
@@ -176,6 +176,11 @@ To provide insights into the application, services, and some SLE functionality, 
 16            exit
 17        exit
 ```
+Additionally, configuring `application-identification` to `mode all` populates the Application Summary in the SSR GUI. Applications are grouped by Category or Clients, and can be further refined by using the following **view by** options: Bytes Recieved, Bytes Sent, Total Bytes. 
+
+![Application Summary](/img/app_summary.png)
+
+For more information, see [Using Application Summary.](how_to_use_app_summary.md)
 
 ## Troubleshooting
 

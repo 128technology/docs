@@ -127,7 +127,7 @@ sidebar_label: Alarms
 | --------- | ------------------------------------------------ |
 | Category  | peer                                             |
 | Severity  | critical                                         |
-| Message   | Peer `<name>` is not reachable                   |
+| Message   | Peer `<name>` is not reachable. |
 | Threshold | When all paths to a peer are marked down by BFD. |
 
 | Cause                                                 | Troubleshooting Step                                         |
