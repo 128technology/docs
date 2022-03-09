@@ -1,15 +1,15 @@
 ---
-title: Extending Web UI Navigation Bar
-sidebar_label: Extending GUI Nav
+title: Extending the GUI Navigation Bar
+sidebar_label: Extending the GUI Navigation Bar
 ---
 
-The 128T Networking Platform has been designed to be extended beyond its base set of capabilities. One way in which this can be realized is in extending the navigation pane within the GUI to links external to the 128T platform. This is useful when integrating third party packages into the 128T ecosystem, such as using [Squid Proxy](http://www.squid-cache.org) to perform URL filtering. Extending the navigation bar provides a seamless integration between the application so the user does not need to leave the 128T experience.
+The SSR Networking Platform has been designed to be extended beyond its base set of capabilities. One way in which this can be realized is in extending the navigation pane within the GUI to links external to the SSR platform. This is useful when integrating third party packages into the SSR ecosystem, such as using [Squid Proxy](http://www.squid-cache.org) to perform URL filtering. Extending the navigation bar provides a seamless integration between the application so the user does not need to leave the SSR experience.
 
 The example below shows the "Apple" and "Hello" added as external resources.
 
 ![Example](/img/howto_extend_gui_nav.png)
 
-For applications that are running on the same platform as the 128T, the authentication token can be used to guarantee access to the requested resource.
+For applications that are running on the same platform as the SSR, the authentication token can be used to guarantee access to the requested resource.
 
 In order to access the user token, the following code snippet can be leveraged:
 ```js

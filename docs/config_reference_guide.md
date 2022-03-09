@@ -318,16 +318,17 @@ authority > router > application-identification
 
 #### Description:
 
-This sub-element lets the administrators set the behavior for the SSR's application identification behavior.
+This sub-element allows you to automatically generate category-based application identification services under a service.
 
 | Element | Type | Description |
 | --- | --- | --- |
-| mode | enumeration | Valid values: module, tls, http, all. When set to *module*, the SSR uses an external module for application classification. The 128T expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are supplied by 128 Technology.) When set to *tls*, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications. When set to *http*, the SSR will learn applications via HTTP host name parsing. The option *all* will provide the broadest application learning results. |
+| mode | enumeration | Valid values: **module, tls, http, all**.<br /> When set to **module**, the SSR router uses an external module for application classification. The SSR expects classification modules to be installed on the system in /var/etc/128technology/application-modules. (These modules are provided in the SSR software.)<br /> When set to **tls**, the system inspects X.509 certificates exchanged during the TLS handshake to look for Common Name elements to identify applications.<br /> When set to **http**, the SSR will learn applications via HTTP host name parsing.<br /> The option **all** includes all modes. `application-identification` must be set to **all** to use [web filtering](config_domain-based_web_filter.md). |
 | auto-update | configuration container | Default is enabled. Enables automatic update of application-identification domain dataset.  Contains configurable sub-elements. |  
 | update-time | uint8 | Range is 0-23. Default is 2 AM. Set the (local) time to update app-id dataset. |
 | update-jitter | uint8 | Range is 0-30. Default is 15. The max random jitter applied to the update-time. |
 | update-frequency | eumumeration | Default is weekly. Choose Daily, Weekly, or Monthly. |  
 
+See also [web-filtering](#web-filtering).
 
 #### Version History:
 | Release | Modification |
@@ -2314,6 +2315,8 @@ The SSR solution is deployed to facilitate the delivery of new applications; as 
 | application-type | enumeration | Valid values: generic, dhcp-relay, dns-proxy, ftp-control, or ftp-data. Default: generic. Certain types of traffic require special treatment by the 128T. For example, when forwarding FTP traffic, the FTP protocol can exchange addresses that may not be reachable if there are NAT devices between the source and destination; thus, the use of `ftp-control` and `ftp-data` can look for, and replace, those unreachable addresses and act as an FTP Application Layer Gateway. See also: [DNS Proxy](config_dns_proxy.md). |
 | applies-to | sub-element | Controls which devices will receive copies of this `service` from the conductor when configuration is committed. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
+| domain-name | string | Domain name that identifies a service. Traffic matching this domain name is assigned to this service. |
+| domain-name-category | string | Domain name categorization of this service. This is matched against the imported categories using the domain pulled from the data stream. |
 | enabled | boolean | When false, this service is administratively disabled. Packets addressed to this service's address(es) will not be processed. |
 | fqdn-resolution-type | enumeration | Valid values: v4, v6. Default: v4. This controls which type of DNS query will be issued when trying to resolve `address` values that are configured as hostnames. |
 | generated | boolean | Default: false. When a 128T conductor generates traffic it sets this field to `true`. In order to make any modifications to generated configuration elements, it is necessary to set the `generated` flag to `false` to have those changes persist. |
@@ -2328,6 +2331,7 @@ The SSR solution is deployed to facilitate the delivery of new applications; as 
 | tap-multiplexing | boolean | Setting this to true will cause the SSR to treat the sessions for this traffic differently than the default behavior. Traffic that matches a FIB entry for the service will create two local sessions: one that matches the forward flow and one that matches the reverse flow with the source and destination addresses flipped.  When the router sends this traffic over SVR to the remote router, it inserts a small piece of metadata into each packet which identifies whether it is for the forward or reverse flow.  This is used by the remote router to undo the NAT and ensure the IP address and port are replaced correctly with the original source or destination information.  The purpose of this is to ensure that both the forward and reverse flows are NATted to the same address and port combination over SVR, thus ensuring they follow the same path over the internet and do not arrive out of order at the capture receiver. |
 | tenant | reference | Refers to a configured *tenant* instance by its name. |
 | transport | sub-element | The transport protocol(s) and port(s) for the service. |
+| url | string | URL that identifies a service. Traffic matching this URL will be considered to belong to this service. |
 
 #### Version History:
 | Release | Modification |
@@ -3103,6 +3107,24 @@ The *vector* sub-element lets administrators choose cost values for the vector l
 | Release | Modification |
 | --- | --- |
 | 3.2.0 | Introduced |
+
+## web-filtering
+
+#### Path:
+
+authority > router > application-identification > web-filtering
+
+#### Description:
+
+Enables and configures URL filtering. In order to configure web-filtering, application-identification must be enabled, and the mode must be set to *all*. For additional information, see [application-identification](#application-identification).
+
+| Element | Type | Description |
+| --- | --- | --- |
+| enabled | boolean | True/False. Default: false. Enable enhanced URL filtering. This requires `application-identification` to be enabled. |
+| max-retransmission-attempts-before-allow | uint8 | Default: 4. Max number of retransmission packet attempts before allowing session to continue. |
+| classify-session | container |   |   |
+| timeout | seconds | Default: 5. The amount of time the SSR will wait for a response from Websense. |
+| retries | uint8 | Default: 3. The max attempts to the Websense server when no response is received within the timeout duration. |
 
 ## webserver
 
