@@ -116,7 +116,7 @@ function Modal({onClose}) {
           method: 'POST',
           body: JSON.stringify({
             query: search,
-            count: `${searchOptions.numResults}`,
+            count: searchOptions.numResults,
             doc_source: `${searchOptions.docSource}`
           }),
           headers: {
