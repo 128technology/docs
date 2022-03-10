@@ -346,7 +346,7 @@ Now that you have a sense of the type of application traffic you're interested i
 
 1. Coordinate a time with the end user reporting a problem to attempt to reproduce the issue.
 
-2. Prior to testing, enable session captures on the LAN interface of the egress router using the service identified in previous steps. Use filters that are inclusive, but as narrow as possible to keep the signal:noise ratio high.
+2. Prior to testing, enable session captures on the LAN interface of the egress router using the service identified in previous steps.
 
 3. Use the command `write log message BEGINNING TEST 1` to cause the SSR to put an identifier into each log on the system.
 
