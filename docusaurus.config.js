@@ -69,7 +69,7 @@ module.exports = {
   customFields: {
     marvisSearch: {
       docSource: "128t",
-      numResults: 10,
+      numResults: 15,
       proxyURL: 'https://raq48a0wrg.execute-api.us-east-1.amazonaws.com/prod/marvis_docs_api_proxy',
     },
   },
