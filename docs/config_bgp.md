@@ -98,7 +98,9 @@ You can apply policies to these routes (i.e., policy and filters) individually. 
 :::
 
 ```
-**admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
+**admin@branchoffice1.seattlesite1# config auth
+ admin@branchoffice1.seattlesite1 (authority)# router seattlesite1
+ admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
  admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing-protocol bgp
  admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# address- family ipv4-unicast
  admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# network 172.16.255.0/30
@@ -111,7 +113,9 @@ In this example we're advertising the CIDR `172.16.255.0/30`, and it will use th
 To redistribute connected, static, service routes and/or routes learned through OSPF, you can use the `redistribute` configuration.
 
 ```
-admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
+admin@branchoffice1.seattlesite1# config auth
+admin@branchoffice1.seattlesite1 (authority)# router seattlesite1
+admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
 admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing-protocol bgp
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# redistribute connected
 ```
@@ -189,11 +193,15 @@ exit
 
 #### Sample Configuration:
 ```
-admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
+admin@branchoffice1.seattlesite1# config auth
+admin@branchoffice1.seattlesite1 (authority)# router seattlesite1
+admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
 admin@branchoffice1.seattlesite1 (routing[type=default-instance])# interface bgp-int-seattle
 admin@branchoffice1.seattlesite1 (interface[name=bgp-int-seattle])# ip- address 10.128.128.2
-admin@branchoffice1.seattlesite1 (interface[name=bgp-int-seattle])# exit admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
-admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# local-as 100 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# router-id 10.128.128.2
+admin@branchoffice1.seattlesite1 (interface[name=bgp-int-seattle])# exit
+admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# local-as 100
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# router-id 10.128.128.2
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# address- family ipv4-unicast
 admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# exit
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# neighbor 10.128.128.1
@@ -210,7 +218,11 @@ admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=10.128.128.1])# mult
 admin@branchoffice1.seattlesite1 (multihop)# ttl 255
 admin@branchoffice1.seattlesite1 (multihop)# exit
 admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=10.128.128.1])# exit
-admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# exit admin@branchoffice1.seattlesite1 (routing[type=default-instance])# exit admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# exit admin@branchoffice1.seattlesite1 (authority)# exit admin@branchoffice1.seattlesite1#
+admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# exit
+admin@branchoffice1.seattlesite1 (routing[type=default-instance])# exit
+admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# exit
+admin@branchoffice1.seattlesite1 (authority)# exit
+admin@branchoffice1.seattlesite1#
 ```
 
 ### Verifying the BGP Configuration
@@ -428,7 +440,9 @@ This section contains various features supported by the 128T's BGP implementatio
 While configuring iBGP, you may need to enable the **Route Reflector** capability to facilitate easy learning of routes. Your 128T can be configured as a route reflector for a particular neighbor or more realistically a set of neighbors, also known as a route reflector client(s). This can be configured in the route reflector router's BGP config, under the respective neighbor object.
 
 ```
-admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
+admin@branchoffice1.seattlesite1# config auth
+admin@branchoffice1.seattlesite1 (authority)# router seattlesite1
+admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
 admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# neighbor 1.1.1.1
 ```
@@ -448,7 +462,9 @@ When the route reflector sends routes to the clients, by default it doesn't modi
 When configuring iBGP, the **Confederation** feature may be helpful when dealing with an enormous autonomous system. This feature allows you to break up the AS into smaller sub-autonomous systems. Confederation can be directly configured under the routing protocol element. Here, 65535 is the **confederation identifier AS number** and, 1100 and 2200 are the **member AS** numbers of that confederation AS.
 
 ```
-admin@branchoffice1.seattlesite1# config auth admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
+admin@branchoffice1.seattlesite1# config auth
+admin@branchoffice1.seattlesite1 (authority)# router seattlesite1
+admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
 admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing- protocol bgp
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation identifier 65535
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# confederation member-as 1100
