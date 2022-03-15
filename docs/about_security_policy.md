@@ -1,7 +1,7 @@
 ---
 title: Security Vulnerability Policy
 sidebar_label: Security Policy
-description: 'This document defines the expections for 128 Technology in delivering communication and resolutions to security related vulenerabilities.'
+description: 'This document defines the expectations for Juniper in delivering communication and resolutions to security related vulnerabilities.'
 ---
 
 ## Introduction
@@ -14,7 +14,7 @@ The following flowchart illustrates the relationship between vulnerability discl
 
 ## Reporting Suspected Security Vulnerability
 
-Individuals and Enterprises that are experiencing 128 Technology product security issues are strongly encouraged to contact 128 SIRT through email at 128sirtreport@128technology.com or open a case on the 128 Technology customer portal at https://community.128technology.com.
+Individuals and Enterprises that are experiencing 128 Technology product security issues are strongly encouraged to contact Juniper SIRT or open a case on the [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c).
 
 ## Organizational Roles and Responsibilities
 

@@ -8,7 +8,7 @@ The Session Smart Networking Platform runs on both bare metal servers and as a v
 Please review the router and conductor [minimum requirements](about_supported_platforms.md#minimum-platform-specifications). See [Certified Platforms](about_certified_platforms.mdx) and the [Platform Support Policy](about_supported_platforms.md) for more details.
 
 :::info
-Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.128technology.com/) for hardware profile examples.
+Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/) for hardware profile examples.
 :::
 
 :::important
@@ -28,7 +28,7 @@ It may be necessary to change the target system’s BIOS settings to allow booti
 ![BIOS Screen](/img/intro_installation_bootable_media_bios.png)
 
 ### Enable Automatic Restart
-In the event of power disruption, the Automatic Restart setting in your system's BIOS can automatically restart your system once power is restored. As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [Interchange](https://community.128technology.com/) for commonly deployed SSR hardware platforms. Below are representative steps for common BIOS parameters:
+In the event of power disruption, the Automatic Restart setting in your system's BIOS can automatically restart your system once power is restored. As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/) for commonly deployed SSR hardware platforms. Below are representative steps for common BIOS parameters:
 
 #### To enable Automatic Restart:
 1. From the BIOS settings screen, select ACPI \> Power Settings.
@@ -48,7 +48,7 @@ When deploying SSR on VMware ESXi release 6.7 (or newer), Secure Boot must be di
 3. Save the configuration.
 4. Reboot your system.
 
-BIOS settings may vary between hardware vendors. Please consult your hardware documentation for specific instructions. Additional information for common deployments of SSR hardware platforms may be found on [Interchange](https://community.128technology.com/).
+BIOS settings may vary between hardware vendors. Please consult your hardware documentation for specific instructions. Additional information for common deployments of SSR hardware platforms may be found on [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/).
 
 ## Interface Requirements
 Logically, SSR routers have at least two interfaces; in many deployments they represent LAN and WAN interfaces. These may be separate physical interfaces, or they may be separate VLANs on a single physical interface. There is also typically a third interface used for management traffic.
@@ -110,7 +110,7 @@ If a PCI address for an interfaces change, the system will be disqualified. Exam
 If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).
 :::
 :::note
-PCI-to-port maps are available for commonly deployed hardware systems on our user community, [Interchange](https://community.128technology.com/)
+PCI-to-port maps are available for commonly deployed hardware systems on our user community, [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/)
 :::
 
 ## VMware ESXi and KVM Requirements
