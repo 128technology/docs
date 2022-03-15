@@ -303,39 +303,39 @@ Ping from 1.0.0.1 (1.0.0.1): icmp_seq=3 ttl=57 time=138.002ms
 
 Verfiy whether the WAN links are up by checking the peer path information with the commands below.
 
-- Use [`show device-interface router <routerName> summary`](cli_reference.md/#show-device-interface) to confirm that the target device-interface is up/up/up.
+- Use [`show device-interface router <routerName> summary`](cli_reference.md#show-device-interface) to confirm that the target device-interface is up/up/up.
 
-- Use [`show network-interface router <routerName>`](cli_reference.md/#show-network-interface) to confirm that the target network-interface is up.
+- Use [`show network-interface router <routerName>`](cli_reference.md#show-network-interface) to confirm that the target network-interface is up.
 
-- From the Router PCLI, check the up/down transition of the peer-paths using [`show peers name router <routerName> detail`](cli_reference.md/#show-peers).
+- From the Router PCLI, check the up/down transition of the peer-paths using [`show peers name router <routerName> detail`](cli_reference.md#show-peers).
 
-- From the Conductor PCLI, confirm peer status is up: [`show peers name router <routerName> detail`](cli_reference.md/#show-peers).
+- From the Conductor PCLI, confirm peer status is up: [`show peers name router <routerName> detail`](cli_reference.md#show-peers).
        
 ### WAN Side Application Latency
 
 - Check link latency via BFD based information
-    [`show stats bfd by-peer-path router <routerName>`](cli_stats_reference.md/#show-stats-bfd-by-peer-path)
-    - Check [`show stats bfd by-peer-path router <routerName> async received miss`](cli_stats_reference.md/#show-stats-bfd-by-peer-path-async-received-miss) for BFD async packets not received in time on the peer path.
-    - Check jitter using [`show stats bfd by-peer-path router <routerName> jitter`](cli_stats_reference.md/#show-stats-bfd-by-peer-path-jitter).
-    - Check latency using [`show stats bfd by-peer-path router <routerName> latency`](cli_stats_reference.md/#show-stats-bfd-by-peer-path-latency).
+    [`show stats bfd by-peer-path router <routerName>`](cli_stats_reference.md#show-stats-bfd-by-peer-path)
+    - Check [`show stats bfd by-peer-path router <routerName> async received miss`](cli_stats_reference.md#show-stats-bfd-by-peer-path-async-received-miss) for BFD async packets not received in time on the peer path.
+    - Check jitter using [`show stats bfd by-peer-path router <routerName> jitter`](cli_stats_reference.md#show-stats-bfd-by-peer-path-jitter).
+    - Check latency using [`show stats bfd by-peer-path router <routerName> latency`](cli_stats_reference.md#show-stats-bfd-by-peer-path-latency).
 
 - Identify the impacted service and service class
 
-    - Use [`show-fib router <router> tenant <tenant>`](cli_reference.md/#show-fib) to gather information about FIB entries at the router.
+    - Use [`show-fib router <router> tenant <tenant>`](cli_reference.md#show-fib) to gather information about FIB entries at the router.
 
 #### Reviewing Traffic Engineering Priorities
 
 Look closely at the traffic engineering priorities. An oversubscribed traffic class may cause the application performance to suffer. If an oversubscribed traffic class is identified, consider reclassifying the traffic in the identified class, or increasing the allocation for that class. Use the following `show` commands to dig into the application processing details.
 
-Use the [`show stats traffic-eng device-interface per-traffic-class traffic-class <traffic class>`](cli_stats_reference.md/#show-stats-traffic-eng-device-interface-per-traffic-class) to display the available success and failure statistics associated with traffic engineering. When experiencing a degradation in user experience for a particular application, checking the associated error statistics for traffic engineering may show an overwhelmed traffic-class. 
+Use the [`show stats traffic-eng device-interface per-traffic-class traffic-class <traffic class>`](cli_stats_reference.md#show-stats-traffic-eng-device-interface-per-traffic-class) to display the available success and failure statistics associated with traffic engineering. When experiencing a degradation in user experience for a particular application, checking the associated error statistics for traffic engineering may show an overwhelmed traffic-class. 
 
-Statistics such as [`buffer-capacity-exceeded-packets`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-buffer-capacity-exceeded-packets), and [`schedule-failure-packets`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-schedule-failure-packets) show issues where an incoming burst or sustained rate has exceeded a particular queue (or multiple queues) within traffic engineering, causing the loss of those packets. 
+Statistics such as [`buffer-capacity-exceeded-packets`](cli_stats_reference.md#show-stats-traffic-eng-internal-application-per-traffic-class-buffer-capacity-exceeded-packets), and [`schedule-failure-packets`](cli_stats_reference.md#show-stats-traffic-eng-internal-application-per-traffic-class-schedule-failure-packets) show issues where an incoming burst or sustained rate has exceeded a particular queue (or multiple queues) within traffic engineering, causing the loss of those packets. 
 
-Statistics such as [`dequeue-aqm-drop-packets`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-dequeue-aqm-drop-packets) and [`dequeue-max-latency-drop-packets`](cli_stats_reference.md/#show-stats-traffic-eng-internal-application-per-traffic-class-dequeue-max-latency-drop-packets) show that packets have buffered for an excessive amount of time and are being dropped to clear up buffer space within the scheduler for more recent packets. This type of packet loss is indicative of excessive bandwidth which has overwhelmed the transmit-cap of the device-interface for a prolonged period of time. 
+Statistics such as [`dequeue-aqm-drop-packets`](cli_stats_reference.md#show-stats-traffic-eng-internal-application-per-traffic-class-dequeue-aqm-drop-packets) and [`dequeue-max-latency-drop-packets`](cli_stats_reference.md#show-stats-traffic-eng-internal-application-per-traffic-class-dequeue-max-latency-drop-packets) show that packets have buffered for an excessive amount of time and are being dropped to clear up buffer space within the scheduler for more recent packets. This type of packet loss is indicative of excessive bandwidth which has overwhelmed the transmit-cap of the device-interface for a prolonged period of time. 
 
 #### Fragmentation 
 
-To check for fragmentation, run the [`show stats packet-processing fragmentation router <routerName>`](cli_stats_reference.md/#show-stats-packet-processing-fragmentation) command multiple times and look for incrementing stats. If Path MTU Discovery [PMTUD] is currently disabled, we recommend it be enabled. 
+To check for fragmentation, run the [`show stats packet-processing fragmentation router <routerName>`](cli_stats_reference.md#show-stats-packet-processing-fragmentation) command multiple times and look for incrementing stats. If Path MTU Discovery [PMTUD] is currently disabled, we recommend it be enabled. 
 :::note
 The Automatic MSS adjustment feature was added in version 5.2.
 :::

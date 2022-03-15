@@ -17,7 +17,7 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 
 ### New Features
 
-- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md#network-interface), and [`authority`](config_reference_guide.md/#authority) in the Element Reference Guide.
+- **I95-39617 Add cost (currency) and carrier information to the `network-interface` and `authority`:** Added attributes to the network-interface that reflect the monetary cost for paths. For more information, refer to [`network-interface`](config_reference_guide.md#network-interface), and [`authority`](config_reference_guide.md#authority) in the Element Reference Guide.
 
 ## Resolved Issues
 
