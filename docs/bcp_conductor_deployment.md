@@ -53,7 +53,7 @@ The 128T conductor will run effectively on a virtual machine in both private and
 
 Running a small lab network or pilot deployment on a modestly sized conductor is acceptable, but be advised that migrating routers from a "temporary" or "POC" conductor to a production conductor may incur downtime during the transition. It is best to procure and deploy suitable hardware up front.
 
-128 Technology provides a [sizing tool](https://community.128technology.com/viewdocument/128t-conductor-sizing-spreadsheet?CommunityKey=db47b751-299b-4fb9-8859-a7bf877ed8d8&tab=librarydocuments) on our community site to give guidance on CPU, memory, and disk requirements for bare metal and cloud conductor deployments.
+128 Technology provides a sizing tool on [our community site](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/) to give guidance on CPU, memory, and disk requirements for bare metal and cloud conductor deployments.
 
 :::tip Key Decision
 Size your conductor for the size you anticipate your network to grow to, or the number of nodes your administrative policy caps for a single configuration platform. For deployments in excess of 2,000 managed nodes (remembering that a highly available router counts twice), see the section on POD design below.
