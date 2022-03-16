@@ -7,7 +7,7 @@ sidebar_label: Upgrading
 If you are upgrading to version 5.3 or higher of the SSR software, please refer to the [Upgrade Considerations](intro_upgrade_considerations.md) before proceeding.
 :::
 
-Your SSR router or conductor must have internet access to download the latest software packages; for deployments where the SSR router does not have internet access, you can use the SSR conductor as a repository (or proxy) to retrieve software images. As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.
+Your SSR router or conductor must have internet access to download the latest software packages; for deployments where the SSR does not have internet access, you can use the SSR conductor as a repository (or proxy) to retrieve software images. As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.
 
 There are three standard ways of upgrading routers:
 
@@ -56,7 +56,7 @@ Before upgrading the SSR Software, use the following procedure to stop the the s
 Use the following procedures to upgrade a Conductor from the GUI or using the Interactive Installer (linux shell).
 
 :::note
-Before upgrading a conductor, it is recommended to [export the running configuration](config_basics.md/#importexport).
+Before upgrading a conductor, it is recommended to [export the running configuration](config_basics.md#importexport).
 :::
 
 ### Upgrade using the GUI
@@ -179,7 +179,7 @@ The Interactive Installer can be used to upgrade a conductor or a router.
 
 ## Routers with Restricted Internet Access
 
-The standard upgrade workflow is for individual instances of SSR software to download software upgrades directly from mirror servers hosted and managed by Juniper on the public internet. Occasionally, SSR routers are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from a conductor.
+The standard upgrade workflow is for individual instances of SSR software to download software upgrades directly from mirror servers hosted and managed by Juniper on the public internet. Occasionally, SSRs are deployed in locations with restricted or no access to the internet. In this case, you can configure the routers to retrieve software from a conductor.
 
 Within a given router's configuration, at `router > system > software-update > repository`, you can configure the `source-type` setting to one of three values:
 

@@ -19,6 +19,50 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
+## Release 5.1.9-1
+
+**Release Date:** March 16, 2022
+
+## New Features
+
+- **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to that of CentOS 8.4 to address several CVEs and provide support for Wireguard and Cordoba. 
+
+## Resolved Issues
+
+- **The following CVE issues have been addressed and resolved with this release:** I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95-44088, I95-44206, I95-44618
+------
+- **I95-40438 Unable to rename a router:** Increased the maximum message size so that the larger configuration changes can be processed correctly.
+------
+- **I95-41931 Peers show the IP address not the router name in the GUI:** This issue has been resolved, and both the IP address and router name are displayed. 
+------
+- **I95-42318 Broken symlink for plugins results in a highway crash:** Resolved the handling of a broken symlink for plugins, which was resulting in a failure to apply config and a highway crash.
+------
+- **I95-43280 HA does not recover after power outage:** This issue has been resolved. 
+------
+- **I95-43809 CLI commands fail to run from the Conductor:** Resolved an issue where requests made to a HA conductor would not always try its peer.
+------
+- **I95-43897 Planned failover did not work properly:** Resolved an issue where a waypoint missing from an internal database prevented failover.  
+------
+- **I95-44144 Update Zookeeper Logging:** Zookeeper logging library has been replaced with reload4j.
+------
+- **I95-44278 Paste configuration error:** Resolved an issue where pasting multiple lines that beginning with `configure` caused an error.
+------
+- **I95-44424 Cannot set log level configured on remote router from conductor CLI:** This issue has been resolved.
+------
+- **I95-44443 NTP Server config not always picked up:** Resolved an issue where NTP configuration was changed but the backend would not take action on those changes.
+------
+- **I95-44534 Session Capture in GUI not working:** A Session Capture triggered from the GUI now creates a capture for new sessions traversing the same path as this session. 
+------
+- **I95-44554 Metadata packets may incorrectly pin flow affinity:** Worker core affinity latching has been prevented, resolving this issue. 
+------
+- **I95-44517 Time check incorrectly locking upgrade process:** The time check has been replaced with a process name check.  
+------
+- **i95-44726 Multiple sites - node B is completely inaccessible:** Resolved a buffer leak in the wanpipe driver.
+------
+- **I95-44730 Export event history exports only last 30 minutes:** Resolved an issue where `time` was captured, but never updated. 
+------
+- **I95-44741 Initializer fails with empty global init:** Resolved an issue where the initializer would fail if the existing global.init was empty. 
+
 ## Release 5.1.8-1
 
 **Release Date:** January 18, 2022
