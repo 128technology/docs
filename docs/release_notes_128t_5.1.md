@@ -21,7 +21,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.1.9-1
 
-**Release Date:** March 15, 2022
+**Release Date:** March 16, 2022
 
 ## New Features
 
@@ -32,6 +32,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **The following CVE issues have been addressed and resolved with this release:** I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95-44088, I95-44206, I95-44618
 ------
 - **I95-40438 Unable to rename a router:** Increased the maximum message size so that the larger configuration changes can be processed correctly.
+------
+- **I95-41931 Peers show the IP address not the router name in the GUI:** This issue has been resolved, and both the IP address and router name are displayed. 
 ------
 - **I95-42318 Broken symlink for plugins results in a highway crash:** Resolved the handling of a broken symlink for plugins, which was resulting in a failure to apply config and a highway crash.
 ------
