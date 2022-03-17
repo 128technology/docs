@@ -79,8 +79,8 @@ export const releases = [
     version: '4.5.11',
     url: 'release_notes_128t_4.5#release-4511',
     releaseDate: 'September 7, 2021',
-    endOfMaintenance: 'April 15, 2022',
-    endOfSupport: 'October 15, 2022',
+    endOfMaintenance: 'April 15, 2021',
+    endOfSupport: 'October 15, 2021',
   },
   {
     version: '5.2.2',
