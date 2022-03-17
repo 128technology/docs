@@ -99,7 +99,7 @@ Agree to the terms of use and conditions of the deployment and lastly click on t
 
 If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
 
-![PrivateImageVersionMismatch](/img/platforms_azure_private_image_version_mismatch.png)
+<img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side. Click on the HTTPS URL to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128TAdmin. To login to the VM via SSH use the username and the SSH public key provided in the template.
 
@@ -129,7 +129,7 @@ Launch the deployment with the corresponding Azure CLI or PowerShell commands ma
 
 If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
 
-![PrivateImageVersionMismatch](/img/platforms_azure_private_image_version_mismatch.png)
+<img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left hand side. Click on the HTTPS URL to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is the name of the VM. To login to the VM via SSH use the username and the SSH public key provided in the template.
 
@@ -201,7 +201,7 @@ Agree to the terms of use and conditions of the deployment and lastly click on t
 
 If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
 
-![PrivateImageVersionMismatch](/img/platforms_azure_private_image_version_mismatch.png)
+<img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs tab on the left side. To login to the instance via SSH, use the username and the SSH public key provided in the template.
 
@@ -226,7 +226,7 @@ Create the parameters file, accept the terms of use and conditions of the image 
 
 If the validation process fails with the error shown below, please make sure you are deploying the version of the software Juniper has allowlisted to your Subscription ID and try again later. If the problem persists, please contact your Juniper representative.
 
-![PrivateImageVersionMismatch](/img/platforms_azure_private_image_version_mismatch.png)
+<img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
 Once the deployment completes, information is provided in the Outputs section. To login to the VM via SSH, use the username and the SSH public key provided in the template.
 
@@ -361,9 +361,9 @@ When configuring the managed SSR via its corresponding Conductor, use the PCI ad
 
 ### Agree to the Terms of Use and the Privacy Policy
 
-To agree to the Terms of Use and the Privacy Policy for the Session Smart Networking image used, click on **Get it0 NOW** as shown in the following image:
+To agree to the Terms of Use and the Privacy Policy for the Session Smart Networking image used, click on **Get It Now** as shown in the following image:
 
-![Session Smart Networking](/img/platforms_azure_marketplace_getitnow.png)
+<img src="/img/platforms_azure_marketplace_getitnow.png" alt="Session Smart Networking" width="25%" height="25%" />
 
 Click on **Continue** in order to agree to the Terms of Use and the Privacy Policy.
 
