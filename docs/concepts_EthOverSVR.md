@@ -3,9 +3,9 @@ title: Ethernet Over Secure Vector Routing
 sidebar_label: Ethernet Over Secure Vector Routing
 ---
 
-Ethernet Over SVR (EoSVR) is a proprietary 128 Technology protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between 128T routers with increased security and efficiency, without the overhead of IP packet encapsulation.  
+Ethernet Over SVR (EoSVR) is a proprietary protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between SSR routers with increased security and efficiency, without the overhead of IP packet encapsulation.
 
-Layer 2 and IP traffic destined for your LAN arrives on the 128T Router and is transported over an Ethernet Over SVR bridge to the destination 128T router within the customer network. The bridge is configured between not more than two routers, and the configuration is validated before committing it to the running config.
+Layer 2 and IP traffic destined for your LAN arrives on the SSR and is transported over an Ethernet Over SVR bridge to the destination SSR within the customer network. The bridge is configured between not more than two routers, and the configuration is validated before committing it to the running config.
 
 EoSVR is only supported for point to point layer 2 services, and provides the following advantages over traditional MPLS networks:
 - Eliminates additional CE routers needed to deploy MPLS pseudowires.
@@ -42,17 +42,17 @@ All IP traffic is sent over SVR with the following new fields in the metadata:
 - Source MAC
 - Destination MAC
 
-The first packet carries the metadata containing the L2 information to the final 128T router. There the ethernet header is replaced with the fields above, and the packet is sent to the final destination.
+The first packet carries the metadata containing the L2 information to the final SSR. There the ethernet header is replaced with the fields above, and the packet is sent to the final destination.
 
-The new metadata field avoids tunneling the entire IP packet inside another IP packet. The first packet carries the layer 2 information. Any subsequent packets that are sent without metadata have the layer 2 information restored at the final 128T router, which extends the broadcast domain.
+The new metadata field avoids tunneling the entire IP packet inside another IP packet. The first packet carries the layer 2 information. Any subsequent packets that are sent without metadata have the layer 2 information restored at the final SSR, which extends the broadcast domain.
 
-Flows setup for IP Traffic are bidirectional. These packets are expected to be in the same broadcast domain, and the ethernet address is preserved at the final 128T router.
+Flows setup for IP Traffic are bidirectional. These packets are expected to be in the same broadcast domain, and the ethernet address is preserved at the final SSR.
 
 ### VxLAN Traffic
 
-VxLAN traffic is is identified by having a destination port of 4789. When VxLAN traffic arrives on a 128T Router, a service is defined to carry the traffic. This service will have a service-route with a next-hop to the peer 128T router. Because VxLAN traffic is unidirectional, two services are used to transport VxLAN traffic from one 128T router to another, one in each direction. 
+VxLAN traffic is is identified by having a destination port of 4789. When VxLAN traffic arrives on an SSR, a service is defined to carry the traffic. This service will have a service-route with a next-hop to the peer SSR. Because VxLAN traffic is unidirectional, two services are used to transport VxLAN traffic from one SSR to another, one in each direction. 
 
-**128T R1 Service**
+**SSR R1 Service**
 ```
 Service Vxlan_To_R2
   protocol UDP
@@ -60,7 +60,7 @@ Service Vxlan_To_R2
   Address 1.1.1.0/24
   ```
 
-**128T R2 Service**
+**SSR R2 Service**
 ```
 Service Vxlan_To_R1
   protocol UDP
