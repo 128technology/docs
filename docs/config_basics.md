@@ -56,8 +56,8 @@ User B also has one change of their own. User B’s candidate configuration requ
 
 ### Conflict Resolution
 
-If the validation operation encouters conflicts, only conflicting changes are lost. Other changes are applied to the Candidate configuration. An Error message is displayed for each conflict, containing details about the conflicting changes. 
-To see what changes were preserved, run `compare-config`. 
+If the validation operation encouters conflicts, an error message containing details is displayed for each conflict. Conflicts are not committed, and are deleted from the candiate config. Other changes are applied to the Candidate configuration.  
+To see the changes that were preserved, run `compare-config`.
 
 The following is an example of a configuration conflict as seen in the PCLI: 
 ```
