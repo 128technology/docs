@@ -207,8 +207,8 @@ If the validation process fails with the error shown below, please make sure you
 Once the deployment completes, information is provided in the Outputs tab on the left side. To login to the instance via SSH, use the username and the SSH public key provided in the template.
 
 If the **Session Smart Networking** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. To retrieve the name of the asset-id, SSH to the router VM and run the following command:
-`sudo dmidecode | grep UUID`
-Then login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
+`sudo dmidecode | grep UUID`. 
+Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
 
 #### Azure CLI or PowerShell
 
