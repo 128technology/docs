@@ -101,7 +101,8 @@ If the validation process fails with the error shown below, please make sure you
 
 <img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
-Once the deployment completes, information is provided in the Outputs tab on the left hand side. Click on the HTTPS URL to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128TAdmin. To login to the VM via SSH use the username and the SSH public key provided in the template.
+Once the deployment completes, information is provided in the Outputs tab on the left hand side. Click on the HTTPS URL to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command:
+`sudo dmidecode | grep UUID`
 
 :::important
 Be sure to change the password that conforms to your business' password requirements and criteria.
@@ -131,7 +132,7 @@ If the validation process fails with the error shown below, please make sure you
 
 <img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
-Once the deployment completes, information is provided in the Outputs tab on the left hand side. Click on the HTTPS URL to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is the name of the VM. To login to the VM via SSH use the username and the SSH public key provided in the template.
+Once the deployment completes, information is provided in the Outputs tab on the left hand side. Click on the HTTPS URL to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template.
 
 :::important
 Be sure to change the password that conforms to your business' password requirements and criteria.
@@ -205,7 +206,9 @@ If the validation process fails with the error shown below, please make sure you
 
 Once the deployment completes, information is provided in the Outputs tab on the left side. To login to the instance via SSH, use the username and the SSH public key provided in the template.
 
-If the **Session Smart Networking** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. Please login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
+If the **Session Smart Networking** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. To retrieve the name of the asset-id, SSH to the router VM and run the following command:
+`sudo dmidecode | grep UUID`. 
+Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
 
 #### Azure CLI or PowerShell
 
@@ -443,7 +446,7 @@ The information listed in the Outputs tab is the following:
 :::important
 When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field. 
 When logging to the application via CLI or HTTPs the username is "admin" and the password:
-* For Private images the password is 128TAdmin.
+* For Private images the password is 128Tadmin.
 :::
 
 Alternatively, it is possible to launch the template programmatically. The PowerShell commands for each Session Smart Networking software image are shown next, please run the commands corresponding to the image you want to use:
@@ -551,12 +554,10 @@ The information listed in the Outputs tab is the following:
 * Public IP address assigned to the management interface of the instance.
 * SSH command to login to the Linux VM via the management interface.
 
-If the **Session Smart Networking** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. Please login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
-
 :::important
 When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
 When logging to the application via CLI or HTTPs the username is "admin" and the password will be:
-* For Private images the password 128TAdmin.
+* For Private images the password is 128Tadmin.
 :::
 
 Alternatively, it is possible to launch the template programmatically. The PowerShell commands for each Session Smart Networking software image are shown next, please run the commands corresponding to the image you want to use:
