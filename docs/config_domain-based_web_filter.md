@@ -3,6 +3,12 @@ title: Web Filtering
 sidebar: Web Filtering
 ---
 
+#### Version History
+| Release | Modification                |
+| ------- | --------------------------- |
+| 5.0.0   | Application categorization and Domain Filtering introduced |
+| 5.5.0   | Support for Enhanced Web Filtering added |
+
 ## Overview
 
 Web filtering allows administrators to prevent access to dangerous, malicious, or inappropriate internet content. Services are created to handle traffic using the following set of configuration elements:
