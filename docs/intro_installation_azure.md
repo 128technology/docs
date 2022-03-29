@@ -64,8 +64,8 @@ A Conductor can be deployed via the [Azure Portal](https://portal.azure.com) or 
 When deploying the Session Smart Conductor using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
 * Virtual machine using a Session Smart image available in the marketplace.
 * The Conductor is deployed with a single network interface identified as the control interface.
-** There is a network security group associated with the control interface.
-** The control interface has a unique and static public IP address.
+ * There is a network security group associated with the control interface.
+ * The control interface has a unique and static public IP address.
 
 The following image shows the infrastructure elements deployed:
 
