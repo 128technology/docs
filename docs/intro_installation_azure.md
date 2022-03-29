@@ -11,8 +11,8 @@ This guide describes the process for deploying a Session Smart Conductor and a S
 
 There are different Plans available for the Juniper Session Smart Networking Platform offering:
 
-* "Private" Plan: if there is no access to the 128 Technology repositories in the Azure environment where the software needs to be deployed (e.g., no access to the Internet), or if your preference is to avoid installing the Session Smart Networking software, a Private image can be shared with your Azure subscription via the Azure Marketplace. To request access to a Private plan, please refer to the section [Requesting access to a Private plan](#requesting-access-to-a-private-plan).
-* "Hourly" Plan: free trial period for 30 days, hourly software cost afterwards. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, e.g., on premises, require a token or certificate. The software can not be purchased via the marketplace. Refer to the Hourly plan of the **Session Smart Networking Platform** offering available [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview).
+* Private Plan: For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
+* Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
 
 ### Requesting access to a Private plan
 
@@ -53,21 +53,21 @@ To request access to a Private plan follow the next steps:
 
 The following infrastructure must exist in your Azure subscription:
 * A VNet where the Conductor will be deployed.
-* The existing VNet should be segmented with at least one subnet.
-  * This subnet should be reachable for SSH and HTTPs access for administration purposes.
+* The existing VNet is segmented with at least one subnet.
+  * The subnet is reachable for SSH and HTTPs access for administration purposes.
   * The Session Smart Routers managed by this Conductor must be able to reach the IP address of the Conductor in this subnet.
 
 ### Deployment
 
-A Conductor can be deployed via the [Azure Portal](https://portal.azure.com) or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods, please proceed to the method that better suits your needs.
+A Conductor can be deployed via the [Azure Portal](https://portal.azure.com) or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods. Choose the method that better suits your needs.
 
-When deploying the Session Smart Conductor using the templates referenced later in this section, the following infrastructure elements are created automatically on your behalf in order to assist you with the deployment process:
-* Virtual machine using a Session Smart  image available in the marketplace.
-* The Conductor is deployed with one network interface known as the control interface.
-* The network interface has a network security group associated.
-* The control interface has a unique and static public IP address associated.
+When deploying the Session Smart Conductor using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
+* Virtual machine using a Session Smart image available in the marketplace.
+* The Conductor is deployed with a single network interface identified as the control interface.
+** There is a network security group associated with the control interface.
+** The control interface has a unique and static public IP address.
 
-The following image depicts a graphical representation of the infrastructure elements deployed:
+The following image shows the infrastructure elements deployed:
 
 ![Conductor deployment](/img/platforms_azure_conductor_deployment.png)
 
@@ -146,11 +146,11 @@ Be sure to change the password that conforms to your business' password requirem
 The following infrastructure must exist in your Azure subscription:
 * A VNet where the SSR will be deployed.
 * An Availability Set where the SSR will be deployed.
-* The existing VNet should be segmented with at least three subnets. The role of each subnet is described below:
+* The existing VNet is segmented with at least three subnets. The role of each subnet is described below:
   * Public subnet. The expectation is that this subnet provides connectivity to enable communication with external/remote SSR peers.
   * Private subnet. The expectation is that this subnet provides connectivity to internal workloads within the cloud.
   * Management subnet. The expectation is that this subnet meets the following capabilities:
-    * This subnet should be reachable via SSH for administration purposes.
+    * The subnet is reachable for SSH for administration purposes.
     * The interface of the Conductor that is going to manage this router must be reachable from this subnet.
 
 :::important
@@ -159,15 +159,15 @@ Please note that deploying Session Smart Routers without a valid token or certif
 
 ### Deployment
 
-A SSR can be deployed manually via the [Azure Portal](https://portal.azure.com) or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods, please proceed to the method that better suits your needs.
+A SSR can be deployed manually via the [Azure Portal](https://portal.azure.com) or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods. Choose the method that better suits your needs.
 
-When deploying an SSR using either of the templates referenced later in this section, the following infrastructure elements are created automatically on your behalf in order to assist you with the deployment process:
-* Virtual machine using a Session Smart  image available in the marketplace.
+When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
+* Virtual machine using a Session Smart image available in the marketplace.
 * The router is deployed with three network interfaces: public, private and management interfaces.
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
 * The public and management interfaces have a unique and static public IP address associated.
 
-The following image depicts a graphical representation of the infrastructure elements deployed:
+The following image shows the infrastructure elements deployed:
 
 ![Router deployment](/img/platforms_azure_router_deployment.png)
 
