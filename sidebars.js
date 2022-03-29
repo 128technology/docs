@@ -34,7 +34,7 @@ module.exports = {
       "intro_installation_azure",
       "intro_initialize_HA_conductor",
     ],
-    "Supporting Information - Appendix": [
+    "Supporting Install Information - Appendix": [
       "intro_installation_installer",
       "legacy_OTP_install",
       "intro_upgrade_considerations",
@@ -66,7 +66,7 @@ module.exports = {
         "label": "Configuration",
         "items": [
           "config_basics",
-          "config_access_mgmt",
+          "config_templates",
           "config_asset_connection_resiliency",
           "config_bgp",
           "config_ospf",
@@ -75,7 +75,6 @@ module.exports = {
           "config_audit_event",
           "config_dhcp",
           "config_dns_proxy",
-          "config_ldap",
           "config_forward_error_correction",
           "config_management_over_forwarding",
           "config_domain-based_web_filter",
@@ -93,7 +92,6 @@ module.exports = {
           "config_static_hostname_mapping",
           "config_STEP",
           "config_tenants",
-          "config_templates",
           "config_transport_encryption",
           "config_wan_assurance",
         ],
@@ -108,6 +106,16 @@ module.exports = {
           "config_non_forwarding_ha_interfaces",
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Access Management and Authentication",
+        "items": [
+          "config_access_mgmt",
+          "config_ldap",
+          "config_radius",
+          "config_password_policies",
         ],
       },
       {

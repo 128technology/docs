@@ -1,6 +1,6 @@
 ---
-title: 'Command Line Reference'
-sidebar_label: 'Command Line Reference'
+title: Command Line Reference
+sidebar_label: Command Line Reference
 ---
 
 The Command Line Reference guide is better understood if you know the basics of operating the programmable command line interface (PCLI). Commands and actions such as clear, edit, delete, restore, and show, for example, are described here. If you have not used the PCLI before, please refer to [About the PCLI](concepts_pcli.md) for an explanation of how it works.
@@ -867,10 +867,10 @@ create user [<username>]
 
 #### Description
 
-The `create user` command allows administrators to create user accounts for user and/or administrative access to the SSR router&#x27;s management port. Issuing the `create user &lt;username&gt;` launches an interactive session that prompts for the new user&#x27;s full name, password, whether they are an administrative or basic user, and the enabled/disabled state of that user account.
+The `create user` command allows administrators to create user accounts for user and/or administrative access to the SSR router's management port. Issuing the `create user <username>` launches an interactive session that prompts for the new user's full name, password, whether they are an administrative or basic user, and the enabled/disabled state of that user account.
 
 :::note
-The password must be at least eight characters long, with at least one uppercase letter, one lowercase letter, one digit, and cannot contain any characters that repeat more than three times.
+Password policies have been updated with the release of version 5.6. Please see [Password Policies](config_password_policies.md) for additional information. 
 :::
 
 #### Example

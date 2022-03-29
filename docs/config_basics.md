@@ -29,13 +29,13 @@ The Force Configuration Generation command (selected from the GUI or using `crea
 ![popup](/img/config_force_regen2.png)
 ![dialog](/img/config_force_regen3.png)
 
-## Running
+## Running Configuration
 
 The running configuration is the set of configuration elements that the SSR is currently using to make routing decisions, forward traffic, enforce policy, etc. The SSR loads the running configuration when the software starts; this configuration will either be the one that it retrieves at start from its conductor, or from its local disk (in the case where it is either unmanaged, or unable to reach its conductor).
 
-## Candidate Configuration Concurrency
+## Candidate Configuration
 
-Configuration concurrency creates a candidate configuration for each user the first time they edit their configuration, allowing multiple administrators to modify the running configuration at the same time. 
+Configuration concurrency was introduced in version 5.6. This feature creates a candidate configuration for each user the first time they edit their configuration, allowing multiple administrators to modify the running configuration at the same time. 
 
 :::note
 Beginning with 5.3, the candidate configuration is not saved to disk and will not persistent through reboot. It is strongly recommended that you export candidate configurations occasionally when making large or important changes to avoid losing your work.
@@ -56,31 +56,46 @@ User B also has one change of their own. User B’s candidate configuration requ
 
 ### Conflict Resolution
 
-If the validation operation encouters conflicts, an error message containing details is displayed for each conflict. Conflicts are not committed, and are deleted from the candiate config. Other changes are applied to the Candidate configuration.  
-To see the changes that were preserved, run `compare-config`.
+If the validation operation encouters conflicts, an error message containing details is displayed for each conflict. Conflicts are not committed, and are deleted from the candiate config. Other changes are applied to the Candidate configuration. 
+
+In the example below, User A changed the description of the router `Router`, but User B had already deleted that router, resulting in the conflict. 
+
+To see the configuration changes that were preserved in the candidate despite the conflicts, run `compare-config`.
 
 The following is an example of a configuration conflict as seen in the PCLI: 
 ```
 *admin@conductor-east-1.RTR_EAST_CONDUCTOR# commit force
 Validating, then committing...
-% Error: Failed to commit candidate configuration because another user has committed conflicting changes. The following changes have
-been lost, run 'compare config' to see changes that were preserved:
+% Error: Failed to commit candidate configuration because another user 
+has committed conflicting changes. The following changes have been lost, 
+run 'compare config' to see changes that were preserved:
+
 1. failed to apply merge configuration change
 
+config
 
-    config
+    authority
 
-        authority
-
-            router  Router
-                name         Router
-                description  hello
-            exit
+        router  Router
+            name         Router
+            description  hello
         exit
     exit
-
+exit
 ```
 
+In this case, using `compare-config` displays a non-coflicting change that remains in the candidate, and can be committed.
+
+```
+*admin@conductor-east-1.RTR_EAST_CONDUCTOR# compare config
+
+config
+
+    authority
+        name  NewAuthority
+    exit
+exit
+```
 ## Configuration Workflows
 
 Unlike many traditional routers, the Session Smart Networking Platform contains a series of interdependent pieces of configuration – referred to as our *data model* – to inform its decisions on routing, forwarding, and policy enforcement. These interdependencies mean that the method of working with the SSR may be slightly different than you are accustomed to.
