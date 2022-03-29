@@ -70,7 +70,7 @@ Validating, then committing...
 has committed conflicting changes. The following changes have been lost, 
 run 'compare config' to see changes that were preserved:
 
-1. failed to apply merge configuration change
+1. failed to apply merge configuration change:
 
 config
 
