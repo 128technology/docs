@@ -7,6 +7,46 @@ sidebar_label: Installing in Azure
 
 This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure.
 
+## Selecting the Azure Plan
+
+There are different Plans available for the Juniper Session Smart Networking Platform offering:
+
+* "Private" Plan: if there is no access to the 128 Technology repositories in the Azure environment where the software needs to be deployed (e.g., no access to the Internet), or if your preference is to avoid installing the Session Smart Networking software, a Private image can be shared with your Azure subscription via the Azure Marketplace. To request access to a Private plan, please refer to the section "Requesting access to a Private plan" <a href="https://docs.128technology.com/docs/intro_installation_azure#requesting-access-to-a-private-plan">here</a>.
+* "Hourly" Plan: free trial period for 30 days, hourly software cost afterwards. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, e.g., on premises, require a token or certificate. The software can not be purchased via the marketplace. Refer to the Hourly plan of the **Session Smart Networking Platform** offering available [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview).
+
+### Requesting access to a Private plan
+
+:::important
+There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) will not be possible without a token or certificate.
+:::
+
+To request access to a Private plan follow the next steps:
+
+1. Locate the Subscription ID of the Azure account where the deployment of the software is going to take place. Follow the next steps to find the Subscription ID:
+
+* Please click [here](https://portal.azure.com) to go to the Azure portal.
+* On the search box right at the top of the screen, search for "Subscriptions". If you cannot find the subscription associated with your Azure account click [here](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
+* Take note of your Subscription ID.
+
+2. Contact your Juniper Networks Sales representative and provide:
+
+* The Subscription ID of the Azure account that will be used for the deployment.
+* The version of the Session Smart Networking software. Your Juniper Sales representative will assist you if you don't know the version you need for your deployment.
+
+3. Wait for the confirmation from your Juniper Sales representative to confirm that your Azure Subscription has been allowlisted and therefore access has been granted.
+
+4. Once your Subscription ID has been allowlisted, validate that the Private plan has been shared with your Subscription:
+
+* Click [here](https://portal.azure.com) to go to the Azure portal. On the search box right at the top of the screen, search for "Marketplace". If you are unable to access the Marketplace via your Azure Portal, click [here](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace/GalleryMenuBlade/selectedMenuItemId/home).
+* The following banner is displayed at the top:
+
+![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
+
+* Click on the "View private products" link.
+* If the Private image of the **Session Smart Networking Platform** offering is displayed, then the Private image has been shared successfully with your Azure Subscription ID.
+
+<img src="/img/platforms_azure_marketplace_image_private.png" alt="Session Smart Networking Private offering" width="192" height="243" />
+
 ## Session Smart Conductor Deployment
 
 ### Requirements
@@ -31,50 +71,11 @@ The following image depicts a graphical representation of the infrastructure ele
 
 ![Conductor deployment](/img/platforms_azure_conductor_deployment.png)
 
-#### Selecting the Azure Image
-
-If your preference is to avoid installing the Session Smart Networking software, or if there is no access to the 128 Technology repositories in the Azure environment where the software needs to be deployed (e.g., no access to the Internet), Juniper Networks offers a Private image that includes the Session Smart Networking software already installed. The Private image can be shared with your Azure subscription via the Azure Marketplace.
-
-:::important
-There is no software cost associated with deploying the Private image, the cost of running the VM is the only cost (Azure compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) will not be possible without a token or certificate.
-:::
-
-To request access to the Private image follow the next steps:
-
-1. Locate the Subscription ID of the Azure account where the deployment of the software is going to take place. Follow the next steps to find the Subscription ID:
-
-* Please click [here](https://portal.azure.com) to go to the Azure portal.
-* On the search box right at the top of the screen, search for "Subscriptions". If you cannot find the subscription associated with your Azure account click [here](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
-* Take note of your Subscription ID.
-
-2. Contact your Juniper Networks Sales representative and provide:
-
-* The Subscription ID of the Azure account that will be used for the deployment.
-* The version of the Session Smart Networking software. Your Juniper Sales representative will assist you if you don't know the version you need for your deployment.
-
-3. Wait for the confirmation from your Juniper Sales representative to confirm that your Azure Subscription has been allowlisted and therefore access has been granted.
-
-4. Once your Subscription ID has been allowlisted, validate that the Private image has been shared with your Subscription:
-
-* Click [here](https://portal.azure.com) to go to the Azure portal. On the search box right at the top of the screen, search for "Marketplace". If you are unable to access the Marketplace via your Azure Portal, click [here](https://portal.azure.com/#blade/Microsoft_Azure_Marketplace/GalleryMenuBlade/selectedMenuItemId/home).
-* The following banner is displayed at the top:
-
-![Marketplace private offerings](/img/platforms_azure_marketplace_private_banner.png)
-
-* Click on the "View private products" link.
-* If the Private image of the **Session Smart Networking** offering is displayed, then the Private image has been shared successfully with your Azure Subscription ID.
-
-<img src="/img/platforms_azure_marketplace_image_private.png" alt="Session Smart Networking Private offering" width="192" height="243" />
-
-On the contrary, if you prefer not to use the Private image then refer to the Public image of the **Session Smart Networking** offering available [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview).
-
-Lastly, if your preference is to deploy the Session Smart Networking software via the Azure Portal then continue with the next section "Azure Portal". Otherwise, to deploy the software using Azure CLI or PowerShell commands please proceed to the section "Azure CLI or Poweshell" below.
-
 #### Azure Portal
 
 To deploy the Session Smart Networking software via the Azure Portal:
 
-Click on the **Session Smart Networking** offering selected during the previous section "Selecting the Azure Image". 
+Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan". 
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the tab "Plans + Pricing" as shown in the following picture:
@@ -112,7 +113,7 @@ Be sure to change the password that conforms to your business' password requirem
 
 To deploy the Session Smart Networking software via Azure CLI or PowerShell:
 
-Click on the **Session Smart Networking** offering selected during the previous section "Selecting the Azure Image".
+Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan".
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
@@ -174,7 +175,7 @@ The following image depicts a graphical representation of the infrastructure ele
 
 To deploy the Session Smart Networking software via the Azure Portal:
 
-Click on the **Session Smart Networking** offering selected during the previous section "Selecting the Azure Image".
+Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan".
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the tab "Plans + Pricing" as shown in the following picture:
@@ -206,13 +207,13 @@ If the validation process fails with the error shown below, please make sure you
 
 Once the deployment completes, information is provided in the Outputs tab on the left side. To login to the instance via SSH, use the username and the SSH public key provided in the template.
 
-If the **Session Smart Networking** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. To retrieve the name of the asset-id, SSH to the router VM and run the following command:
+If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. To retrieve the name of the asset-id, SSH to the router VM and run the following command:
 `sudo dmidecode | grep UUID`. 
 Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
 
 #### Azure CLI or PowerShell
 
-Click on the **Session Smart Networking** offering selected during the previous section "Selecting the Azure Image".
+Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan".
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
@@ -497,7 +498,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Go to the **Session Smart Networking** offering following the steps described in the section "Selecting the Azure Image". Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Go to the **Session Smart Networking Platform** offering following the steps described in the section "Selecting the Azure Plan". Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
@@ -632,7 +633,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Go to the **Session Smart Networking** offering following the steps described in the section "Selecting the Azure Image". Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Go to the **Session Smart Networking Platform** offering following the steps described in the section "Selecting the Azure Plan". Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
