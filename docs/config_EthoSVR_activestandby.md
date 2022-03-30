@@ -43,12 +43,12 @@ global-id          30
 ethernet-over-svr name     br7
 ethernet-over-svr enabled  true
  
-ethernet-over-svr peer 169.254.50.5 SSR_BRANCH ip-address  169.254.50.5
-ethernet-over-svr peer 169.254.50.5 SSR_BRANCH peer        SSR_BRANCH
+ethernet-over-svr peer 169.254.50.6 SSR_BRANCH ip-address  169.254.50.6
+ethernet-over-svr peer 169.254.50.6 SSR_BRANCH peer        SSR_BRANCH
 tenant             he1.tenant1
  
-address 169.254.50.7 ip-address     169.254.50.7
-address 169.254.50.7 prefix-length  24
+address 169.254.50.5 ip-address     169.254.50.5
+address 169.254.50.5 prefix-length  24
 
 ```
 
@@ -76,17 +76,26 @@ EoSVR A/S relies on the SSR to send broadcast traffic using only one of the defi
 
 ![ARP Traffic](/img/ethosvr_activestandby_ARP.png)
 
-As with the standard EoSVR case, two services are created: one for L2 traffic and one for the IP traffic. For both types, vectors are used to determine which service gets priority. 
+In a standard EoSVR configuration there are typically two routers; R1 and R2. EoSVR is configured on the LAN of R1 and R2. There is a WAN connection between R1 and R2, and they communicate via SVR. Since EoSVR is configured on the LAN of R1 and R2, they both act as a virtual LAN. There are 2 services that are configured:
 
-In order to demonstrate the configuration, let´s assume the scenario in Figure 1.
+- A service from R1 to R2 so that L2 and IP packets can go from R1 to R2. This service has the IP address of the interface with EoSVR enabled on R2. The service route on R2 is an EoSVR bridge. 
+
+- A service for packets from R2 to R1 where the service address is the IP of the EoSVR interface on R2.
+
+For EoSVR Active/Standby, all of the above holds true, but we now have R1 talking to Headend 1 and Headend 2. This means there will be:
+- one service for H1's EoSVR interface IP 
+- one service for H2's EoSVR interface ip
+- one service for R1's EoSVR IP 
+
+In order to demonstrate the configuration, let´s assume the scenario in the figure above.
 
 ### Step 1: Configure LAN Interfaces
 
 Configure the LAN network interfaces:
 
-- Both Headends have their respective EoSVR bridges configured with the same IP address in the network interface and in the peer with the branch EoSVR bridge. *(not clear on what is being configured here: is the "same IP address" from the branch with the EoSVR bridge, or is the IP address used in both the network interface and the peer that has an EoSVR bridge?*)
+- Both Headends have their respective EoSVR bridges configured with the same IP address in the network interface and on the peer with the branch EoSVR bridge.
 
-- The branch EoSVR bridge peering is configured with the IP address used in both Headends. Any of the Headend routers can be selected (*this doesn't make sense - can you clarify what you mean by any of the headends can be selected? You are describing the configuration of two, are there others that they can select?*)
+- The branch EoSVR bridge peering is configured with the IP address used in both Headends.
 
 #### Branch 
 
@@ -114,12 +123,12 @@ global-id          30
 ethernet-over-svr name     br7
 ethernet-over-svr enabled  true
  
-ethernet-over-svr peer 169.254.50.5 SSR_BRANCH ip-address  169.254.50.5
-ethernet-over-svr peer 169.254.50.5 SSR_BRANCH peer        SSR_BRANCH
+ethernet-over-svr peer 169.254.50.6 SSR_BRANCH ip-address  169.254.50.6
+ethernet-over-svr peer 169.254.50.6 SSR_BRANCH peer        SSR_BRANCH
 tenant             he1.tenant1
  
-address 169.254.50.7 ip-address     169.254.50.7
-address 169.254.50.7 prefix-length  24
+address 169.254.50.5 ip-address     169.254.50.5
+address 169.254.50.5 prefix-length  24
 ```
 
 #### Headend 2
@@ -141,9 +150,11 @@ address 169.254.50.5 prefix-length  24
 
 ### Step 2: Configure Neighborhoods to determine active and standby services
 
-In order to control which service is active and which is standby, two different neighborhoods are defined. On the branch side both (*neighborhoods?*) are applied on each Headend. (*For the?*) Site, only one, either active or standby, is configured. *need help understanding this*
+In order to control which service is active and which is standby, two different neighborhoods are defined and vectors applied. Let's say you want to prefer H1 for all packets from R1 to headend. Only in a situation where H1 fails or all paths to h1 fails, will we want to send packets to H2. 
 
-Branch
+Configure the neighborhood and the vectors; For the service towards headend (the H1-H2 service), set the vector values to prefer the paths to H1 (primary path), and then to H2 (secondary path).
+
+#### Branch
 
 ```
 name                   wan1
@@ -154,10 +165,10 @@ neighborhood wan1_standby name    wan1_standby
 neighborhood wan1_standby vector  wan1_standby
 
 neighborhood wan1_active name    wan1_active
-neighborhood wan1_active vector  wan1_active`
+neighborhood wan1_active vector  wan1_active
 ```
 
-Headend 1
+#### Headend 1
 
 ```
 name                   wan1
@@ -168,7 +179,7 @@ neighborhood wan1_active topology  hub
 neighborhood wan1_active vector    wan1_active
 ```
 
-Headend 2
+#### Headend 2
 ```
 name                   wan1
 global-id              28
@@ -180,11 +191,11 @@ neighborhood wan1_standby vector    wan1_standby
 
 ### Step 3: Configure Services
 
-If you are not familiar with configuring L2 and L3 services, please refer to [Create a Service for Ethernet Over SVR](config_EthoSVR.md#create-a-service-for-ethernet-over-svr). *(that documentation does not cover L3 services - do I need to add that?)*
+If you are not familiar with configuring L2 and L3 services, please refer to [Create a Service for Ethernet Over SVR](config_EthoSVR.md#create-a-service-for-ethernet-over-svr).
 
-Configure the following services for an EoSVR A/S non-encapsulated use case, following a branch-to-headend direction.
+Create the service using a branch-to-headend direction. 
 
-L2 service
+#### L2 service
 ```
 name            l2_service
 security        unencrypted
@@ -195,11 +206,10 @@ transport udp port-range 1281 start-port  1281
 address         169.254.50.5
  
 access-policy branch.tenant1 source  branch.tenant1
-service-policy  iberdrola_L2
-
+service-policy  customer_L2
 ```
 
-L3_service
+#### L3_service
 ```
 name                  L3_service
 security              unencrypted
@@ -212,11 +222,11 @@ transport icmp protocol  icmp
 address               0.0.0.0/0
 
 access-policy branch.tenant1 source  branch.tenant1
-service-policy        iberdrola_L2
+service-policy        customer_L2
 share-service-routes  true
 ```
 
-Headend 1
+#### Headend 1
 ```
 name          L2_service_SR
 service-name  L2_service
@@ -229,7 +239,7 @@ service-name  L3_service
 bridge-name   br7
 ```
 
-Headend 2
+#### Headend 2
 ```
 name          L2_service_SR
 service-name  L2_service
@@ -242,7 +252,7 @@ service-name  L3_service
 bridge-name   br5
 ```
 
-### Step 4: Configure service policy
+### Step 4: Configure the Service Policy
 
 When you configure the [service policy](config_reference_guide.md#service-policy), make sure session-resiliency is set to `revertible failover.` Configure the vector list according to the active / standby priorities. For information about configuring vectors and priorities, refer to the [Configuration Element Reference.](config_reference_guide.md#vector)
 
