@@ -3,6 +3,11 @@ title: Configuring Forward Error Correction
 sidebar: Configuring Forward Error Correction
 ---
 
+#### Version History
+| Release | Modification                |
+| ------- | --------------------------- |
+| 5.5.0   | This feature was introduced |
+
 ## Overview
 
 Forward Error Correction (FEC) adds resiliency against packet loss between two points in the network. The SSR implements Forward Error Correction using parity packets and a "round" based approach. In each round, a set number of data packets are sent before a parity packet. The number of packets per round is based on the observed packet loss for the flow. When the loss is greater, fewer data packets are sent before a parity packet.  
