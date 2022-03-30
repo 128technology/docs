@@ -202,10 +202,7 @@ module.exports = {
       "plugin_wireguard",
       "plugin_kni_namespace_scripts",
     ],
-    "REST APIs": [
-      "api_rest_4.2.0",
-    ],
-    "Release Notes": [
+   "Release Notes": [
       {
         "type": "category",
         "label": "SSR",
