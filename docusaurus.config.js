@@ -29,8 +29,8 @@ module.exports = {
       items: [
         {to: 'docs/intro_getting_started', label: 'Docs', position: 'right'},
         {
-          href: 'https://community.128technology.com/home',
-          label: 'Interchange',
+          href: 'https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c',
+          label: 'Session Smart Community',
           position: 'right',
         },
         {
