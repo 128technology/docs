@@ -80,11 +80,11 @@ const features = [
     ),
   },
   {
-    title: <>APIs</>,
-    link: 'docs/api_rest_4.2.0',
+    title: <>Software Releases</>,
+    link: 'docs/about_releases',
     description: (
       <>
-        Automate and integrate with the SSR APIs
+        List of all SSR software releases
       </>
     ),
   }
