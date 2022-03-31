@@ -52,29 +52,53 @@ module.exports = {
     "Deployment Considerations": [
       "intro_system_reqs",
     ],
-    "Installation Process": [
-      "intro_installation",
-      "intro_downloading_iso",
-      "intro_creating_bootable_usb",
-      "intro_installation_bootable_media",
-      "intro_basic_conductor_config",
-      "intro_basic_router_config",
-      "intro_otp_iso_install",
-      "intro_install_quickstart_otpiso",
-    ],
-    "Cloud Installations": [
-      "intro_installation_aws",
-      "intro_installation_quickstart_aws",
-      "intro_installation_azure",
-      "intro_initialize_HA_conductor",
-    ],
-    "Installation Appendix": [
-      "intro_installation_installer",
-      "legacy_OTP_install",
-      "intro_upgrade_considerations",
-      "intro_upgrading",
-      "intro_rollback",
-    ],
+    "Installation": [
+      {
+        "type": "category",
+        "label": "Network Installation",
+        "items": [
+          "intro_installation",
+          "intro_downloading_iso",
+          "intro_creating_bootable_usb",
+          "intro_installation_bootable_media",
+          "intro_basic_conductor_config",
+          "intro_basic_router_config",
+          "intro_otp_iso_install",
+          "intro_install_quickstart_otpiso",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Cloud Installation",
+        "items": [
+          "intro_installation_aws",
+          "intro_installation_quickstart_aws",
+          "intro_installation_azure",
+          "intro_initialize_HA_conductor",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Installation Appendix",
+        "items": [
+          "intro_installation_installer",
+          "legacy_OTP_install",
+          "intro_upgrade_considerations",
+          "intro_upgrading",
+          "intro_rollback",
+        ],
+       },
+      {
+        "type": "category",
+        "label": "Installer/Initializer Reference",
+        "items": [
+          "installer_cli_reference",
+          "installer_preferences",
+          "initializer_cli_reference",
+          "initializer_preferences",
+        ],
+      },
+    ],    
     "Concepts": [
       "concepts_application_discovery",
       "concepts_appid",
@@ -137,8 +161,6 @@ module.exports = {
     "Access Management and Authentication": [
           "config_access_mgmt",
           "config_ldap",
-          "config_radius",
-          "config_password_policies",
     ],
     "High Availability": [
       "concepts_ha_theoryofoperation",
@@ -200,12 +222,7 @@ module.exports = {
       "config_reference_guide",
       "cli_stats_reference",    
     ],
-    "Installer/Initializer Reference": [
-      "installer_cli_reference",
-      "installer_preferences",
-      "initializer_cli_reference",
-      "initializer_preferences",
-    ],
+    
     "Plugins": [
       "plugin_intro",
       "plugin_aws_tgw_connect",
