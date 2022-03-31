@@ -1,5 +1,6 @@
 ---
 title: Rate Limiting
+sidebar_label: Rate Limiting
 ---
 
 Rate limiting, when configured, is applied to packets entering the data path prior to any packet transformations so as to prevent an individual flow from consuming more bandwidth than allowed.
@@ -104,7 +105,7 @@ exit
 
 ```
 
-### Troubleshooting
+## Troubleshooting
 
 To determine the number of packets meeting the rate limit check, execute the command on the PCLI:
 ```

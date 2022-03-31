@@ -1,9 +1,7 @@
 ---
-title: Application Identification
-sidebar_label: Application Identification
+title: Overview of Application Identification
+sidebar_label: Overview of Application Identification
 ---
-
-## Identifying Applications by Name
 
 The Session Smart Routing platform has several techniques by which it can associate inbound traffic to named applications. This is sometimes referred to as "Application Identification" (or "appID"), and the feature that allows administrators to define network policies using Fully Qualified Domain Names (FQDNs) instead of IP addresses.
 
