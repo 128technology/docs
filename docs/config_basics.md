@@ -99,7 +99,7 @@ exit
 ```
 ### GUI Considerations
 
-Juniper strongly suggests careful configuration of users' permissions to avoid rare configuration conflicts when users make updates using the GUI. For information about user permissions, see [Configuring Role-Based Access Control.](config-RBAC.md)
+Juniper strongly suggests careful configuration of users' permissions to avoid rare configuration conflicts when users make updates using the GUI. For information about user permissions, see [Configuring Role-Based Access Control.](config_RBAC.md)
 
 The following conflict *may* occur when multiple GUI users make changes to the configuration. 
 
