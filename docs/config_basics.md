@@ -31,7 +31,7 @@ The Force Configuration Generation command (selected from the GUI or using `crea
 
 ## Running Configuration
 
-The running configuration is the set of configuration elements that the SSR is currently using to make routing decisions, forward traffic, enforce policy, etc. The SSR loads the running configuration when the software starts; this configuration will either be the one that it retrieves at start from its conductor, or from its local disk (in the case where it is either unmanaged, or unable to reach its conductor).
+The running configuration is the set of configuration elements that the SSR is currently using to make routing decisions, forward traffic, enforce policy, etc. The SSR loads the running configuration when the software starts; this configuration is either the one that it retrieves at start from its conductor, or from its local disk (in the case where it is either unmanaged, or unable to reach its conductor).
 
 ## Candidate Configuration
 
@@ -41,9 +41,10 @@ Configuration concurrency was introduced in version 5.6. This feature creates a 
 Beginning with 5.3, the candidate configuration is not saved to disk and will not persistent through reboot. It is strongly recommended that you export candidate configurations occasionally when making large or important changes to avoid losing your work.
 :::
 
-Each user makes edits locally to a candidate configuration. When they have completed their edits locally, they commit the config to the conductor, and it is merged into the running configuration. When other users complete and commit their changes, the updated running configuration is pulled down to the system making the changes (rebased), and compared for conflicts. If none exist, the local changes are committed to the running configuration on the conductor. 
+Each user makes edits locally to a candidate configuration. When they have completed their edits locally, they commit the config to the conductor and changes are merged into the running configuration. As other users complete and commit their changes, the updated running configuration is compared to each candidate configuration for conflicts. If none exist, the local changes are committed to the running configuration on the conductor. 
 
 #### How it Works
+
 Consider the case of User A and User B:
 
 - Both users access the same conductor, open the configuration, and begin making changes. 
@@ -52,13 +53,13 @@ Consider the case of User A and User B:
 
 When User A commits their changes, the changes applied to their candidate configuration are validated and then merged into the running configuration. The candidate configuration from User B is now behind the running configuration by User A’s three changes. 
 
-User B also has one change of their own. User B’s candidate configuration requires a rebase before a commit to the conductor is completed. The rebase operation is part of the commit operation, and takes the transactions in User B’s current candidate configuration, validates them against the rebased running configuration, and then merges the candidate into the running config.  
+User B has one change of their own. The validation and commit process compares the **updated** running configuration to User B's candidate configuration for conflicts. If none are found, then the local changes are committed to the running configuration on the conductor. 
+
+If the validation operation encouters conflicts, an error message containing the details of the conflict is displayed, and the conflicts are deleted from the candiate config. All non-conflicting changes are preserved in the candidate configuration. 
 
 ### Conflict Resolution
 
-If the validation operation encouters conflicts, an error message containing details is displayed for each conflict. Conflicts are not committed, and are deleted from the candiate config. Other changes are applied to the Candidate configuration. 
-
-In the example below, User A changed the description of the router `Router`, but User B had already deleted that router, resulting in the conflict. 
+In the example below, User B changed the description of the router `Router`, but User A had already deleted that router, resulting in the conflict. 
 
 To see the configuration changes that were preserved in the candidate despite the conflicts, run `compare-config`.
 
@@ -96,11 +97,62 @@ config
     exit
 exit
 ```
+### GUI Considerations
+
+Juniper strongly suggests careful configuration of users' permissions to avoid rare configuration conflicts when users make updates using the GUI. For information about user permissions, see [Configuring Role-Based Access Control.](config-RBAC.md)
+
+The following conflict *may* occur when multiple GUI users make changes to the configuration. 
+
+#### Scenario:
+
+- User A removes a peer from the configuration, and commits the change. 
+The change has no conflicts and is accepted into the running config.
+
+- User B changes the description field of the peer that User A deleted. User B then commits their changes. 
+
+Rather than an error message informing User B that the peer they are editing has been deleted, the GUI accepts the information directly impacting the change to the description field, but not the entire peer. The resulting commit failure message can be cryptic, as shown below. 
+
+![GUI Commit Failure](/img/config_concurrency_gui_commit_fail.png)
+
+In this case, using the configuration changes as seen from the command line, the discrepancies are visible. 
+
+```
+config
+
+    authority
+
+        router  RTR_EAST_COMBO
+            name         RTR_EAST_COMBO
+            peer         fakerouter      <--- DELETED BY USER A
+            authority-name    Authority
+            router-name       fakerouter
+        exit
+    exit
+exit
+```
+
+```
+config
+
+    authority
+
+        router  RTR_EAST_COMBO
+            name         RTR_EAST_COMBO
+            
+            peer         fakerouter      
+                name       fakerouter
+                description    "hello user was here"    <--- ADDED BY USER B
+        exit
+    exit
+exit
+```
+When User B commits their change, the peer, name, and description are verified to be added back into the configuration. The deleted authority-name and router-name are not found as part of the change, and therefore generate the commit failure message. 
+
 ## Configuration Workflows
 
 Unlike many traditional routers, the Session Smart Networking Platform contains a series of interdependent pieces of configuration – referred to as our *data model* – to inform its decisions on routing, forwarding, and policy enforcement. These interdependencies mean that the method of working with the SSR may be slightly different than you are accustomed to.
 
-The basic premise, as mentioned in the sections that precede this, is that there are two configurations on your SSR at any point in time: the *running configuration* and the *candidate configuration*. You stage configuration changes in the candidate, and when you have completed your configuration activity, you validate and commit them to the running configuration – bringing the candidate and running back into unison. From there, you may undertake your next set of configuration changes.
+The basic premise is that there may two configurations on your SSR at any point in time: the *running configuration* and, as soon as you make any edits to the configuration, a *candidate configuration* is created. You stage configuration changes in the candidate, and when you have completed your configuration activity, you validate and commit them to the running configuration – bringing the candidate and running back into unison. Upon commit, the candidate configuration iFrom there, you may undertake your next set of configuration changes.
 
 This basic workflow (configure, validate, commit) is the fundamental mechanism for effecting change in the behavior of your SSR Networking Platform. Other operations you may be familiar with from other network devices, such as backup/restore, etc., have analogues in the SSR paradigm. These backup/restore operations may operate on the candidate configuration, the running configuration, or both.
 
@@ -114,7 +166,7 @@ The output of `compare config candidate running` is formatted such that it can b
 
 ### Restoring the Candidate
 
-Similar to copying and pasting the output of `compare config candidate running` into the PCLI, there is a specific command for reverting the entire candidate configuration back to the running configuration's state. The command `restore config running` resets the candidate back to the system's runtime configuration.
+Similar to copying and pasting the output of `compare config candidate running` into the PCLI, there is a specific command for reverting the entire candidate configuration back to the running configuration's state. The command `restore config running` resets the candidate back to the system's runtime configuration, and deletes the candidate configuration.
 
 From the GUI, use the **Revert to Running** button in the navigation bar near the top of the window to accomplish the same goal.
 
