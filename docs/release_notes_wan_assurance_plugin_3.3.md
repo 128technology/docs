@@ -20,4 +20,4 @@ The services where all addresses belong to RFC1918 address space will be reporte
 
 - **I95-45173 Newly on-boarded routers were reported as dummy-router in the MIST inventory:** The initial registration process is now delayed until conductor completes the full reinitialization of the router and the configured router and node names are available.
 
-- **I95-45171 The service-router is not auto-generated when the plugin is enabled by default:** The FQDN based service auto-generation has been deprecated and the auto-generation is not required anymore.
+- **I95-45171 The service-route is not auto-generated when the plugin is enabled by default:** The FQDN based service auto-generation has been deprecated and the auto-generation is not required anymore.
