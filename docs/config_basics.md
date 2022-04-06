@@ -99,9 +99,11 @@ exit
 ```
 ### GUI Considerations
 
-Juniper strongly suggests careful configuration of users' permissions to avoid rare configuration conflicts when users make updates using the GUI. For information about user permissions, see [Configuring Role-Based Access Control.](config_RBAC.md)
+Juniper strongly suggests careful configuration of users' permissions to avoid rare configuration conflicts when users concurrently make conflicting updates **using the GUI**. For information about user permissions, see [Configuring Role-Based Access Control.](config_RBAC.md)
 
+:::important
 The following conflict *may* occur when multiple GUI users make changes to the configuration. 
+:::
 
 #### Scenario:
 
@@ -114,7 +116,7 @@ Rather than an error message informing User B that the peer they are editing has
 
 ![GUI Commit Failure](/img/config_concurrency_gui_commit_fail.png)
 
-In this case, using the configuration changes as seen from the command line, the discrepancies are visible. 
+In this case, viewing the configuration changes as seen from the command line, the discrepancies are visible. 
 
 ```
 config
@@ -123,9 +125,9 @@ config
 
         router  RTR_EAST_COMBO
             name         RTR_EAST_COMBO
-            peer         fakerouter      <--- DELETED BY USER A
+            peer         bluerouter      <--- DELETED BY USER A
             authority-name    Authority
-            router-name       fakerouter
+            router-name       bluerouter
         exit
     exit
 exit
@@ -139,14 +141,16 @@ config
         router  RTR_EAST_COMBO
             name         RTR_EAST_COMBO
             
-            peer         fakerouter      
-                name       fakerouter
+            peer         bluerouter      
+                name       bluerouter
                 description    "hello user was here"    <--- ADDED BY USER B
         exit
     exit
 exit
 ```
 When User B commits their change, the peer, name, and description are verified to be added back into the configuration. The deleted authority-name and router-name are not found as part of the change, and therefore generate the commit failure message. 
+
+To resolve this type of conflict, the error message and candidate configuration should be reviewed with the adminstrator. They can work to identify the user who generated the conflicting changes and review the event logs to reconstruct the changes to the affected objects. Ultimately the users must determine the priority of the configuration changes and commit the result.
 
 ## Configuration Workflows
 
