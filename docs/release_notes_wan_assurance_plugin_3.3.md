@@ -16,8 +16,8 @@ The services where all addresses belong to the RFC1918 address space are reporte
 
 - **WAN-618 Releasing SSR from one org to another can result in errors** The device will auto-detect a transition from one org to another, eliminating the need to explicitly release and un-release the device. The device, however, still remains in the inventory of the original org which the user can clean up at their convenience.
 
-- **MIST-59532 Peer down alerts are not being reported for HA routers:** Correct device-interface name is being used to populate the events for HA router to prevent the events from being discarded.
+- **MIST-59532 Peer down alerts are not being reported for HA routers:** The correct device-interface name is being used to populate the events for an HA router to prevent the events from being discarded.
 
-- **I95-45173 Newly on-boarded routers were reported as dummy-router in the MIST inventory:** The initial registration process is now delayed until conductor completes the full reinitialization of the router and the configured router and node names are available.
+- **I95-45173 Newly on-boarded routers were reported as a dummy-router in the MIST inventory:** The initial registration process is now delayed until the conductor completes the full reinitialization of the router and the configured router and node names are available.
 
 - **I95-45171 The service-route is not auto-generated when the plugin is enabled by default:** The FQDN based service auto-generation has been deprecated and the auto-generation is not required anymore.
