@@ -14,7 +14,7 @@ The services where all addresses belong to the RFC1918 address space are reporte
 
 - **WAN-658 Duplicate ARP events being generated:** The duplicate events were generated every time the connection to the cloud was disrupted. The condition is now handled more gracefully and duplicate events are no longer generated.
 
-- **WAN-618 Releasing SSR from one org to another can result in errors** The device will auto-detect a transition from one org to another eliminating the need to explicitly release and un-release the device. The device, however, will still remain in the inventory of the original org which the user can clean up at their convenience.
+- **WAN-618 Releasing SSR from one org to another can result in errors** The device will auto-detect a transition from one org to another, eliminating the need to explicitly release and un-release the device. The device, however, still remains in the inventory of the original org which the user can clean up at their convenience.
 
 - **MIST-59532 Peer down alerts are not being reported for HA routers:** Correct device-interface name is being used to populate the events for HA router to prevent the events from being discarded.
 
