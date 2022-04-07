@@ -8,7 +8,7 @@ sidebar_label: '3.3'
 ### New Features
 - **WAN-782 Support for automatic detection of custom applications:**
 
-The services where all addresses belong to RFC1918 address space will be reported to the MIST backend as custom apps. These custom apps will be visible in the Application insights page along side other auto detected applications.
+The services where all addresses belong to the RFC1918 address space are reported to the MIST backend as custom applications. These custom applications are now visible in the Application Insights page along side other auto-detected applications.
 
 ### Resolved Issues
 
