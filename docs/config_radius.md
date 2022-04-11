@@ -1,6 +1,6 @@
 ---
-title: Radius Authentication
-sidebar_label: Radius Authentication
+title: Authentication Methods
+sidebar_label: Authentication Methods
 ---
 
 | Release | Modification |
