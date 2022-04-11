@@ -282,3 +282,14 @@ The same steps can be used to bring `up` a path that is currently `down` by chan
 :::tip
 Additional debugging can be turned on for the `http-monitor` instance by setting `LOG_LEVEL=DEBUG` in `/var/run/128technology/plugins/http_monitor/{probe-name}.conf` config file
 :::
+
+## Release Notes
+
+### Release 1.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-1640** Error downloading router components when http-probe plugin enabled on a router
+
+  _**Resolution:**_ Updated the salt states to provide the correct router components.
+
