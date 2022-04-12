@@ -8,10 +8,6 @@ The http-probe plugin is designed to leverage the reachability detection APIs th
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
-:::warning
-The SSR version 5.4.0 does not fully support this plugin. Please see the upgrade considerations page [here](intro_upgrade_considerations.md#unsupported-plugins)
-:::
-
 ## Overview
 Once installed and configured properly, the plugin will do the following operations on the router.
 
