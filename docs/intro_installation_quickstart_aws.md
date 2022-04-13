@@ -11,7 +11,7 @@ This guide describes the process for deploying a Session Smart Conductor and a S
 
 There are different AMIs (images) available for the Juniper Session Smart Networking Platform offering:
 
-* Private: For cases where there is no access to the SSR repositories (no internet connection) from the AWS environment where the software will be deployed, a Private Offer can be issues to your AWS account via the AWS Marketplace. To request access to a private offer, refer to [Requesting access to a Private offer](#requesting-access-to-a-private-offer) for additional information.
+* Private: For cases where there is no access to the SSR repositories (no internet connection) from the AWS environment where the software will be deployed, a Private Offer can be issued to your AWS account via the AWS Marketplace. To request access to a private offer, refer to [Requesting access to a Private offer](#requesting-access-to-a-private-offer) for additional information.
 * Hourly: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Refer to the [Session Smart Networking Platform (PAYG)](https://aws.amazon.com/marketplace/pp/prodview-l5kwn7puwvt3g?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) offering.
 
 ### Requesting access to a Private Offer
@@ -20,12 +20,12 @@ There are different AMIs (images) available for the Juniper Session Smart Networ
 There is no software cost associated with deploying the Private image, the cost of running the EC2 instance is the only cost (AWS compute cost). Please also note that software upgrades and deployments **outside** of the cloud (e.g., on premises) will not be possible without a token or certificate.
 :::
 
-To request access to a Private offer follow the next steps:
+To request access to a Private offer:
 
-1. Locate the account ID of the AWS account where the deployment of the software is going to take place. Follow the next steps to find the account ID:
+1. Locate the account ID of the AWS account where the deployment of the software is going to take place:
 
-* Please click [here](https://console.aws.amazon.com) to go to the AWS console.
-* On the right at the top of the screen, click on the downward arrow next to your username. If you cannot find the account ID associated with your Azure account click [here](https://console.aws.amazon.com/billing/home?region=us-east-1&skipRegion=true#/account).
+* Click [here](https://console.aws.amazon.com) to go to the AWS console.
+* On the right at the top of the screen, click on the downward arrow next to your username. If you cannot find the account ID associated with your AWS account click [here](https://console.aws.amazon.com/billing/home?region=us-east-1&skipRegion=true#/account).
 * Take note of your account ID.
 
 2. Contact your Juniper Networks Sales representative and provide:
@@ -33,9 +33,9 @@ To request access to a Private offer follow the next steps:
 * The Account ID of the AWS account that will be used for the deployment.
 * The version of the Session Smart Networking software. Your Juniper Sales representative will assist you if you don't know the version you need for your deployment.
 
-3. Wait for your Juniper Sales representative to email you the private offer.
+Your Juniper Sales representative will email you the private offer.
 
-4. Click on the private offer, and if satisfied accept the new terms and conditions.
+3. When you receive the email containing the private offer, click to open and review / accept the terms and conditions.
 
 ## Session Smart Conductor Deployment
 
@@ -63,7 +63,7 @@ The following image shows the infrastructure elements deployed:
 
 #### AWS Console
 
-To deploy the Session Smart Networking software via the Azure Portal:
+To deploy the Session Smart Networking software via the AWS Console:
 
 Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the AMI". 
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
@@ -95,7 +95,7 @@ Be sure to change the password that conforms to your business' password requirem
 
 #### AWS CLI
 
-To deploy the Session Smart Networking software via the Azure Portal:
+To deploy the Session Smart Networking software via the AWS CLI:
 
 Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the AMI". 
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
@@ -143,7 +143,7 @@ When deploying the Session Smart Router using the templates referenced in this s
 
 #### AWS Console
 
-To deploy the Session Smart Networking software via the Azure Portal:
+To deploy the Session Smart Networking software via the AWS Console:
 
 Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the AMI". 
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
@@ -173,7 +173,7 @@ Once the deployment completes, information is provided in the Outputs tab:
 
 #### AWS CLI
 
-To deploy the Session Smart Networking software via the Azure Portal:
+To deploy the Session Smart Networking software via the AWS CLI:
 
 Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the AMI". 
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
