@@ -68,8 +68,7 @@ module.exports = {
           "config_basics",
           "config_templates",
           "config_asset_connection_resiliency",
-          "config_bgp",
-          "config_ospf",
+
           "config_dscp_steering",
           "config_vrf_learning",
           "config_audit_event",
@@ -96,6 +95,15 @@ module.exports = {
           "config_wan_assurance",
         ],
       },
+      {
+        "type": "category",
+        "label": "Optimizing Routing Protocols",
+        "items": [
+          "config_bfd",
+          "config_bgp",
+          "config_ospf",  
+        ],
+      },      
       {
         "type": "category",
         "label": "High Availability",
