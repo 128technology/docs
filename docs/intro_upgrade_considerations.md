@@ -53,11 +53,3 @@ However, when upgrading from 5.1 or 5.2 to version 5.3 or higher, the following 
 | ha-sync-redundancy | [>=1.1.0](plugin_ha_sync_redundancy.md#release-notes) |
 | icmp-reachability-detection | [>=3.0.3](plugin_icmp_reachability_detection.md#release-notes) |
 | wireguard | [>=2.0.3](plugin_wireguard.md#release-notes) |
-
-### Unsupported Plugins
-
-The following plugins are currently not supported in SSR version 5.4.0 due to some caveats listed [here](release_notes_128t_5.4.md#Caveats)
-
-| Plugin | Version |
-| ------ | ------- |
-| http-probe | 1.0.0 |

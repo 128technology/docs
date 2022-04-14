@@ -8,10 +8,6 @@ The http-probe plugin is designed to leverage the reachability detection APIs th
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
-:::warning
-The SSR version 5.4.0 does not fully support this plugin. Please see the upgrade considerations page [here](intro_upgrade_considerations.md#unsupported-plugins)
-:::
-
 ## Overview
 Once installed and configured properly, the plugin will do the following operations on the router.
 
@@ -282,3 +278,14 @@ The same steps can be used to bring `up` a path that is currently `down` by chan
 :::tip
 Additional debugging can be turned on for the `http-monitor` instance by setting `LOG_LEVEL=DEBUG` in `/var/run/128technology/plugins/http_monitor/{probe-name}.conf` config file
 :::
+
+## Release Notes
+
+### Release 1.0.1
+
+#### Issues Fixed
+
+- **PLUGIN-1640** Error downloading router components when http-probe plugin enabled on a router
+
+  _**Resolution:**_ Updated the salt states to provide the correct router components.
+
