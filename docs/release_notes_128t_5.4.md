@@ -34,7 +34,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44029 FIB in GUI does not show Next Hops:** Updates have been made to the behavior of the Routing Details menu to display this information.
 ------
-- **I95-44142 Automated Provisioner Race issue:** Resolved a rare crash where applications would attempt to get information about already-closed sockets when responding to API requests.
+- **I95-44142 Automated Provisioner race condition:** Resolved a rare crash where applications would attempt to get information about already-closed sockets when responding to API requests.
 ------
 - **I95-44425 `show service-paths` output frequently shows "Nothing to display" when there should be output:** This issue has been resolved.
 ------
@@ -46,13 +46,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44759 Unable to initiate SR-IOV interface when multiple cores running:** This issue has been resolved. 
 ------
-- **I95-44816 Highway process stuck in a loop when a config committed with a DSCP range missing an end value:** This issue has been resolved by updating the `dscp-range` in the data model so the `endValue` of the range is always populated.
+- **I95-44816 Highway process fails to run when a config committed with a DSCP range missing an end value:** This issue has been resolved by updating the `dscp-range` in the data model so the `endValue` of the range is always populated.
 ------
 - **I95-44823 Conductor upgrade failure - extra space in integer is invalid:** Extra spaces on integer types are now trimmed off to avoid this issue. 
 ------
 - **I95-44913 kmod-i40e metapackage causing upgrade issues:** The metapackage has been removed and upgrade issues have been resolved. 
 ------
-- **I95-44985 Set salt-minion minimum version to resolve CVE's:** This issue has been resolved. 
+- **I95-44985 Update salt-minion minimum version to resolve CVEs:** This issue has been resolved. 
 ------
 - **I95-45063 SSR Azure instances unstable on large machine types:** Resolved an issue with Mellanox5 after upgrading the SSR to 5.4.
 ------
