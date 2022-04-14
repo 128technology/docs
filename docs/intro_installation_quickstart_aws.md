@@ -88,7 +88,7 @@ Click on the "Create stack" button to launch the deployment.
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
 Once the deployment completes, information is provided in the Outputs tab:
-* If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+* If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
 * If the **Session Smart Networking Platform** offering selected for the deployment was a **Private AMI** or an **Hourly AMI**, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are “admin” for username and the password is 128Tadmin. To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
 :::important
@@ -110,7 +110,7 @@ Copy to the clipboard the URL of the template located in the field "Amazon S3 UR
 Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For additional information please click [here](#launch-the-template).
 
 Once the deployment completes, information is provided in the Outputs tab:
-* If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+* If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
 * If the **Session Smart Networking Platform** offering selected for the deployment was a **Private AMI** or an **Hourly AMI**, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are “admin” for username and the password is 128Tadmin. To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
 :::important
@@ -144,6 +144,10 @@ When deploying the Session Smart Router using the templates referenced in this s
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
 * The public and management interfaces have a unique and static public IP address associated.
 
+The following image shows the infrastructure elements deployed:
+
+![Router deployment](/img/platforms_aws_router_deployment.png)
+
 #### AWS Console
 
 To deploy the Session Smart Networking software via the AWS Console:
@@ -172,7 +176,7 @@ Click on the "Create stack" button to launch the deployment.
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
 Once the deployment completes, information is provided in the Outputs tab:
-* If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+* If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually. To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
 #### AWS CLI
@@ -190,7 +194,7 @@ Copy to the clipboard the URL of the template located in the field "Amazon S3 UR
 Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For additional information please click [here](#launch-the-template).
 
 Once the deployment completes, information is provided in the Outputs tab:
-* If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+* If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually. To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
 ### Configuring a Device Interface
@@ -287,9 +291,9 @@ The information listed in the Outputs tab is the following:
 * SSH command to login to the Linux VM. Please continue to the end of this section below for more information regarding the credentials to login.
 
 :::important
-When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template. 
-If a template of a Private or Hourly image was used, you can login to the application via CLI or HTTPs as indicated in the `SSHLogin` or the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
-If a template of the Bring Your Own License image was used, SSH to the EC2 instance as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
+If a template of the Bring Your Own License image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
 ##### AWS CLI 
@@ -333,9 +337,9 @@ aws ec2 create-launch-template \
 ```
 
 :::important
-When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template. 
-If a template of a Private or Hourly image was used, you can login to the application via CLI or HTTPs as indicated in the `SSHLogin` or the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
-If a template of the Bring Your Own License image was used, SSH to the EC2 instance as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
+If a template of the Bring Your Own License image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
 #### Session Smart Router
@@ -372,7 +376,7 @@ Fill out the template. Review the section above to understand the parameters of 
 Continue clicking the "Next" button.
 Click **Create Stack** to start the deployment.
 
-Once the deployment of the template is complete, information about the new Conductor deployment is provided in the Output tab.
+Once the deployment of the template is complete, information about the new router deployment is provided in the Output tab.
 
 The information listed in the Outputs tab is the following:
 * Instance ID of the Router EC2 instance.
@@ -380,9 +384,9 @@ The information listed in the Outputs tab is the following:
 * SSH command to login to the Linux VM. Please continue to the end of this section below for more information regarding the credentials to login.
 
 :::important
-When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template. 
-If a template of a Private or Hourly image was used, you can login to the application via CLI or HTTPs as indicated in the `SSHLogin` or the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
-If a template of the Bring Your Own License image was used, SSH to the EC2 instance as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
+If a template of the Bring Your Own License image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
 ##### AWS CLI 
@@ -431,9 +435,9 @@ aws ec2 create-launch-template \
 ```
 
 :::important
-When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template. 
-If a template of a Private or Hourly image was used, you can login to the application via CLI or HTTPs as indicated in the `SSHLogin` or the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
-If a template of the Bring Your Own License image was used, SSH to the EC2 instance as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
+If a template of the Bring Your Own License image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
 ### Deploying a Conductor or Router without using the templates
