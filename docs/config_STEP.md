@@ -276,6 +276,10 @@ config
 
 Only the default district parameters have any effect. If no `district-settings` are configured, or if any of the `step-peer-path-advertisement` values are not provided, the default values will be used.
 
+## STEP High Availability
+
+Configuring STEP in an HA network is supported. STEP routers are configured normally for HA, with no additional configuration specific to STEP. The Conductor must be configured for HA, and a `step-repo` is required on each node of the HA Conductor. HA STEP `show` commands are described below.
+
 ## Configurable Parameters
 ```
 step peer path advertisement
