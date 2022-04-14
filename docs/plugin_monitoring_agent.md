@@ -863,7 +863,7 @@ The configuration file in a `TOML` definition of metrics has the following forma
     service = []
 ```
 
-Each element of the configuration specifies an aspect of the [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v1.8/write_protocols/line_protocol_tutorial/) or the [128T REST API](api_rest_4.2.0.md).
+Each element of the configuration specifies an aspect of the [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v1.8/write_protocols/line_protocol_tutorial/) or the 128T REST API. REST API documentation is available from the "About This System" page in the SSR GUI.
 
 - **name**
   The line protocol measurement to be used for the output
@@ -875,7 +875,7 @@ Each element of the configuration specifies an aspect of the [InfluxDB line prot
   A line protocol field key that should exist in the output
 
 - **fields.value** (e.g. `stats/aggregate-session/service/packets-received`)
-  The 128T KPI providing the value for the associated field key. See the [128T REST API documentation](api_rest_4.2.0.md) for a full list. Note that the documentation prefixes the KPIs with `/router/{router}/`.
+  The 128T KPI providing the value for the associated field key. See the 128T REST API documentation available from the "About This System" page in the SSR GUI for a full list. Note that the documentation prefixes the KPIs with `/router/{router}/`.
 
 - **parameters** (e.g. `service`)
   The 128T parameters that should be preserved as line protocol tags in the output. When a non-empty list of values is provided for a parameter, only KPIs with matching parameters will be included in the output.

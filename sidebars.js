@@ -172,7 +172,7 @@ module.exports = {
     "CLI and Element Reference": [
       "cli_reference",
       "config_reference_guide",
-      "cli_stats_reference",    
+      "cli_stats_reference",
     ],
     "Installer/Initializer Reference": [
       "installer_cli_reference",
@@ -201,10 +201,7 @@ module.exports = {
       "plugin_wireguard",
       "plugin_kni_namespace_scripts",
     ],
-    "REST APIs": [
-      "api_rest_4.2.0",
-    ],
-    "Release Notes": [
+   "Release Notes": [
       {
         "type": "category",
         "label": "SSR",
@@ -238,6 +235,13 @@ module.exports = {
           "release_notes_128t_installer_2.1",
         ],
       },
+      {
+        "type": "category",
+        "label": "WAN Assurance",
+        "items": [
+          "release_notes_wan_assurance_plugin_3.3"
+        ]
+      }
     ],
   },
 };
