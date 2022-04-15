@@ -117,6 +117,21 @@ Once the deployment completes, information is provided in the Outputs tab:
 Be sure to change the password that conforms to your business' password requirements and criteria.
 :::
 
+### Add a token to enable upgrades and deployments on-premises
+
+If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, then the token credentials will be entered during the software installation process. However, if the **Session Smart Networking Platform** offering selected for the deployment was a **Private AMI** or an **Hourly AMI**, then add the token credentials:
+
+1. SSH to the EC2 intance of Conductor (Linux). 
+2. Run in Linux the following command to add a token credential:
+
+```
+install128t repo authenticate --username <your username> --token <your token>
+```
+
+:::important
+If a token or certificate is not in your possession, please contact your Juniper Sales representative.
+:::
+
 ## Session Smart Router Deployment
 
 ### Requirements
@@ -211,10 +226,14 @@ In earlier versions of the 128T Networking Platform software (pre-5.0), the SSR 
 
 #### Assign the PCI Address Identifier to a Device Interface
 
-Assign the VMBus UUID to a device interface using the CLI.
+:::important
+For cloud deployments the recommendation is not to configure the management interface (the first network interface of the EC2 instance) as management over forwarding. In other words, the recommendation is not to configure the management interface in the router at all, so that management is out of band and remains managed by Linux.
+:::
+
+Assign the PCI Address Identifier to a device interface using the Conductor CLI or GUI.
 
 1. Login to the CLI on the Conductor. 
-2. Run the following commands to configure a device interface with a PCI Address on a router:
+2. Run the following commands to configure a device interface with a PCI Address for every forwarding interface of the router:
 
 ```
 configure authority router <router name> node <node name> device-interface <device interface name>
@@ -225,6 +244,52 @@ top
 ```
 
 3. Repeat the steps above for each device interface and router running on AWS.
+
+4. Validate and commit the changes.
+```
+validate
+commit
+```
+
+#### Configure the IP Addressing for every Network interface
+
+By default, AWS assigns a private IP address to each network interface attached to an EC2 instance. Therefore, the recommendation is to enable DHCP on every network interface managed by the SSR.
+
+1. Login to the CLI on the Conductor. 
+2. Run the following commands to configure a network interface with DHCP on a router:
+
+```
+configure authority router <router name> node <node name> device-interface <device interface name> network-interface <network interface name>
+dhcp v4
+top
+```
+
+3. Repeat the steps above for each network interface and router running on AWS.
+
+4. Validate and commit the changes.
+```
+validate
+commit
+```
+
+:::important
+If setting static private IP address is a requirement, note that for every subnet AWS reserves the first IP address as the AWS subnet gateway. For example, if the prefix of a subnet in AWS is 192.168.0.1/24, then AWS reserves the IP address 192.168.1.1 for the gateway of the subnet, therefore, make sure the corresponding network interface of the Session Smart Router is configured with the gateway 192.168.1.1 accordingly.
+:::
+
+#### Configuration for every Network Interface with a Public IP Address
+
+When AWS associates a Public IP address with the elastic network interface of an EC2 instance, AWS does a 1:1 mapping betwen the Public IP address and the Private IP address for that elastic network interface. In other words, every network interface attached to the EC2 instance sits behind that Public IP, and all traffic destined to the Public IP is NATted and forwarded to the corresponding private IP address. Therefore, for every elastic network interface which has a Public IP address associated (e.g. the WAN interface), the Neighborhood has to be configured accordingly so that the SSR is aware that forwarding is behind NAT.
+
+1. Login to the CLI on the Conductor. 
+2. Run the following commands to configure the external-nat-address in the Neighborhood for every network interface with a Public IP address on a router:
+
+```
+configure authority router <router name> node <node name> device-interface <device interface name> network-interface <network interface name> neighborhood <neighborhood name>
+external-nat-address <public IP address AWS assigned to the elastic network interface of the EC2 instance>
+top
+```
+
+3. Repeat the steps above for each network interface with a Public IP address and router running on AWS.
 
 4. Validate and commit the changes.
 ```
