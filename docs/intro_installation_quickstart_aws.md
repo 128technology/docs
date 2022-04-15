@@ -233,7 +233,7 @@ For cloud deployments the recommendation is not to configure the management inte
 Assign the PCI Address Identifier to a device interface using the Conductor CLI or GUI.
 
 1. Login to the CLI on the Conductor. 
-2. Run the following commands to configure a device interface with a PCI Address for every forwarding interface of the router:
+2. Run the following commands to configure a device interface with a PCI Address for every forwarding interface (e.g. WAN and LAN) of the router:
 
 ```
 configure authority router <router name> node <node name> device-interface <device interface name>
@@ -243,7 +243,7 @@ pci-address <device interface vmbus uuid>
 top
 ```
 
-3. Repeat the steps above for each device interface and router running on AWS.
+3. Repeat the steps above for each forwarding device interface (e.g. WAN and LAN) and router running on AWS.
 
 4. Validate and commit the changes.
 ```
