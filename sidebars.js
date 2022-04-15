@@ -47,6 +47,13 @@ module.exports = {
           "release_notes_128t_installer_2.1",
         ],
       },
+      {
+        "type": "category",
+        "label": "WAN Assurance",
+        "items": [
+          "release_notes_wan_assurance_plugin_3.3"
+        ],
+      },
     ],
     "System Requirements": [
       "intro_system_reqs",
