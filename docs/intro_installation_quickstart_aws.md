@@ -26,7 +26,7 @@ To request access to a Private offer:
 1. Locate the account ID of the AWS account where the deployment of the software is going to take place:
 
 * Click [here](https://console.aws.amazon.com) to go to the AWS console.
-* On the right at the top of the screen, click on the downward arrow next to your username. If you cannot find the account ID associated with your AWS account access the following URL https://console.aws.amazon.com/billing/home?region=us-east-1&skipRegion=true#/account.
+* On the right at the top of the screen, click on the downward arrow next to your username, the account ID will be displayed.
 * Take note of your account ID.
 
 2. Contact your Juniper Networks Sales representative and provide:
