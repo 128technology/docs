@@ -139,6 +139,7 @@ module.exports = {
         "items": [
           "config_STEP",
           "config_step_ha",
+          "howto_STEP_GUI",
           "ts_step",
         ],
       },
