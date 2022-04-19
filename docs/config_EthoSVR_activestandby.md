@@ -5,17 +5,17 @@ sidebar_label: Configuring Ethernet Over SVR for Active/Standby
 
 EoSVR is a point-to-point L2 service that provides session resiliency even during a failover between different underlying networks. However, there may be cases where you also require redundancy at the service level when using L2 services in the network.
 
-For example, in a network deployment where there are no loop detection mechanisms available, the EoSVR Active Standby configuration gives you the ability to configure two different endpoints on the P2P L2 service, while making sure only one is active at a time. In the configuration example below, VLAN A needs to be extended so that End Device 2 can be reached from any of the two Headends, typically deployed in two different datacenters.
+For example, in a network deployment where there are no loop detection mechanisms available, the EoSVR Active Standby configuration gives you the ability to configure two different endpoints on the P2P L2 service, while making sure only one is active at a time. In the configuration example below, VLAN A needs to be extended so that End Device 2 can be reached from either head-end, typically deployed in two different datacenters.
 
 ![Ethernet over SVR Active Standby](/img/ethosvr_active-standby.png)
 
-In this example, VLAN A needs to be extended so that End Device 2 can be reached from any of the two Headends, typically deployed in two different datacenters. 
+In this example, VLAN A needs to be extended so that End Device 2 can be reached from either head-end, typically deployed in two different datacenters. 
 
 ## Configuration Example
 
 The EoSVR Active/Standby feature relies on the standard EoSVR functionality. To configure Active/Standby, the same LAN interface IP address needs to be defined on both Headends (see Figure 1).
 
-*does this show the full configuration? In other words, can I just configure this and have it work?* 
+*DOES THIS SHOW THE FULL CONFIGURATION? CAN I JUST CONFIGURE THIS AND HAVE IT WORK??* 
 
 #### Branch
 
