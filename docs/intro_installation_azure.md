@@ -82,7 +82,7 @@ Click on the tab "Plans + Pricing" as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-Lastly click on the "Launch" link of the template that better suits your needs.
+Lastly click on the "Launch" link of the "Juniper Session Smart Conductor" template that better suits your needs.
 
 Answer the following 3 questions to launch the deployment of a Conductor (additional information [here](#launch-the-template)):
 * What name do you want to give it?  
@@ -102,8 +102,8 @@ If the validation process fails with the error shown below, please make sure you
 
 <img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
-Once the deployment completes, information is provided in the Outputs tab on the left hand side. Click on the HTTPS URL to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command:
-`sudo dmidecode | grep UUID`
+Once the deployment completes, information is provided in the Outputs tab on the left hand side:
+* If the **Session Smart Networking Platform** offering selected for the deployment was a **Private** or an **Hourly** image, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command: `sudo dmidecode | grep UUID`
 
 :::important
 Be sure to change the password that conforms to your business' password requirements and criteria.
@@ -124,7 +124,7 @@ Click on the tab "Plans + Pricing" as shown in the following picture:
 
 ![Plans](/img/platforms_azure_plans.png)
 
-Lastly copy to the clipboard the URL of the template located in the field "URL" that better suits your needs.
+Lastly copy to the clipboard the URL of the "Juniper Session Smart Conductor" template located in the field "URL" that better suits your needs.
 
 Create the parameters file, accept the terms of use and conditions of the image.
 Launch the deployment with the corresponding Azure CLI or PowerShell commands making use of the URL of the template identified previously. For additional information please click [here](#launch-the-template).
@@ -133,7 +133,8 @@ If the validation process fails with the error shown below, please make sure you
 
 <img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
-Once the deployment completes, information is provided in the Outputs tab on the left hand side. Click on the HTTPS URL to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template.
+Once the deployment completes, information is provided in the Outputs tab on the left hand side:
+* If the **Session Smart Networking Platform** offering selected for the deployment was a **Private** or an **Hourly** image, click on the HTTPS URL of the `HTTPSLogin` field to login to the Conductor GUI (In some cases when using Chrome, the self-signed certificate may return an "unsafe" connection. Click through the message.). The credentials are "admin" for username and the password is 128Tadmin. To login to the VM via SSH use the username and the SSH public key provided in the template. To retrieve the name of the asset-id, SSH to the Conductor VM and run the following command: `sudo dmidecode | grep UUID`
 
 :::important
 Be sure to change the password that conforms to your business' password requirements and criteria.
@@ -159,7 +160,7 @@ Please note that deploying Session Smart Routers without a valid token or certif
 
 ### Deployment
 
-A SSR can be deployed manually via the [Azure Portal](https://portal.azure.com) or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods. Choose the method that better suits your needs.
+A Session Smart Router can be deployed manually via the [Azure Portal](https://portal.azure.com) or in an automated fashion using Azure CLI or PowerShell commands. This section describes both methods. Choose the method that better suits your needs.
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
 * Virtual machine using a Session Smart image available in the marketplace.
@@ -205,13 +206,12 @@ If the validation process fails with the error shown below, please make sure you
 
 <img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
-Once the deployment completes, information is provided in the Outputs tab on the left side. To login to the instance via SSH, use the username and the SSH public key provided in the template.
-
-If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. To retrieve the name of the asset-id, SSH to the router VM and run the following command:
-`sudo dmidecode | grep UUID`. 
-Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
+Once the deployment completes, information is provided in the Outputs tab on the left hand side:
+* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. To retrieve the name of the asset-id, SSH to the router VM and run the following command: `sudo dmidecode | grep UUID`. To login to the instance via SSH, use the username and the SSH public key provided in the template. Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
 
 #### Azure CLI or PowerShell
+
+To deploy the Session Smart Networking software via Azure CLI or Powershell:
 
 Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan".
 Click on the "Get it now" button.
@@ -232,7 +232,8 @@ If the validation process fails with the error shown below, please make sure you
 
 <img src="/img/platforms_azure_private_image_version_mismatch.png" alt="Private Image Version Mismatch" width="75%" height="75%" />
 
-Once the deployment completes, information is provided in the Outputs section. To login to the VM via SSH, use the username and the SSH public key provided in the template.
+Once the deployment completes, information is provided in the Outputs tab on the left hand side:
+* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private image**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. To retrieve the name of the asset-id, SSH to the router VM and run the following command: `sudo dmidecode | grep UUID`. To login to the instance via SSH, use the username and the SSH public key provided in the template. Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually.
 
 ### Network Interfaces Layout
 
@@ -430,9 +431,17 @@ A description of the parameters of the template are listed in the following tabl
 | Admin Public Key Data| Paste in this field the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys).                                                                                                                                                                                                 |
 | Admin Allowed CIDR   | It allows for restricting reachability to the control interface of the Conductor to a well known source IP address CIDR range for management purposes. It is common to set this field to 0.0.0.0/0 (accepting traffic from all source IP addresses) for now, as the source IP address/es where the Conductor will be administered from may not be known at this time. However, once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Conductor will be administered.                                                                                                                                                                                     |
 
-Accept the Terms and Conditions of the deployment by ticking the box "I agree to the terms and conditions stated above".
+##### Azure Portal
 
-Finally, click **Purchase** to start the deployment.
+Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan". 
+Click on the "Get it now" button.
+Agree to the terms of use and privacy policy of the image.
+Click on the tab "Plans + Pricing" as shown in the following picture:
+
+![Plans](/img/platforms_azure_plans.png)
+
+Click on the "Launch" link of the "Juniper Session Smart Conductor" template that better suits your needs.
+Agree to the terms of use and conditions of the deployment and lastly click on the **Purchase** button to launch the deployment.
 
 Once the deployment of the template is complete, information about the new Conductor deployment is provided in the Output tab.
 
@@ -445,14 +454,13 @@ The information listed in the Outputs tab is the following:
 * SSH command to login to the Linux VM. Please continue to the end of this section below for more information regarding the credentials to login.
 
 :::important
-When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field. 
-When logging to the application via CLI or HTTPs the username is "admin" and the password:
-* For Private images the password is 128Tadmin.
+When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
-Alternatively, it is possible to launch the template programmatically. The PowerShell commands for each Session Smart Networking software image are shown next, please run the commands corresponding to the image you want to use:
+#### Azure CLI or PowerShell
 
-##### <u>Session Smart Conductor (Private Image)</u>
+Alternatively, it is possible to launch the template programmatically. Please adjust the content of the JSON file below to match the input of each template:
 
 Create the parameters file conductor_private.parameters.json with the following command:
 
@@ -498,7 +506,11 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Go to the **Session Smart Networking Platform** offering following the steps described in the section "Selecting the Azure Plan". Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Go to the **Session Smart Networking Platform** offering following the steps described in the section "Selecting the Azure Plan".
+Click on the "Get it now" button.
+Agree to the terms of use and privacy policy of the image.
+Click on the "Get started" button to enable programmatic deployment for the subscription.
+Click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
@@ -512,6 +524,11 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 -TemplateUri <template-URL> `
 -TemplateParameterFile ./conductor_private.parameters.json
 ```
+
+:::important
+When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
+:::
 
 #### Session Smart Router
 
@@ -542,13 +559,22 @@ A description of the parameters of the template are listed in the following tabl
 | Admin Username       | Fill out the field Admin Username with the desired username to login to the VM (Linux) via SSH.                                                                              |
 | Admin Public Key Data| Paste in the field Admin Public Key Data the SSH public key to be used to authenticate with the VM (Linux) instance via SSH. The key needs to be at least 2048-bit and in ssh-rsa format. Please find the following an example of a valid key next (To reduce the length of the key in this example multiple character have been replaced by three dots): ```ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDHwB1Qe1KndGqKuT3F...GumfdHfdasy8N0kncMtp2wtkqoLsRWdJ4/WKaZBOrPd4Q== admin@Admin-MacBook-Pro.local```. For more information about creating ssh keys, see [Create SSH keys on Linux and Mac for Linux VMs in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/mac-create-ssh-keys).                                                                                                         |
 
-Accept the terms and conditions of the deployment ticking on the box "I agree to the terms and conditions stated above".
+##### Azure Portal
 
-Lastly click on the button Purchase to start the deployment.
+Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan". 
+Click on the "Get it now" button.
+Agree to the terms of use and privacy policy of the image.
+Click on the tab "Plans + Pricing" as shown in the following picture:
 
-Once the deployment of the template completes, information is provided in the Output tab Output on the left.
+![Plans](/img/platforms_azure_plans.png)
+
+Click on the "Launch" link of the "Juniper Session Smart Router" template that better suits your needs.
+Agree to the terms of use and conditions of the deployment and lastly click on the **Purchase** button to launch the deployment.
+
+Once the deployment of the template is complete, information about the new router deployment is provided in the Output tab.
 
 ![Plans](/img/platforms_azure_deployment_complete.png)
+
 
 The information listed in the Outputs tab is the following:
 * Name of the VM instance.
@@ -557,13 +583,12 @@ The information listed in the Outputs tab is the following:
 
 :::important
 When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
-When logging to the application via CLI or HTTPs the username is "admin" and the password will be:
-* For Private images the password is 128Tadmin.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
-Alternatively, it is possible to launch the template programmatically. The PowerShell commands for each Session Smart Networking software image are shown next, please run the commands corresponding to the image you want to use:
+#### Azure CLI or PowerShell
 
-##### <u>Session Smart Router (Private Image)</u>
+Alternatively, it is possible to launch the template programmatically. Please adjust the content of the JSON file below to match the input of each template:
 
 Create the parameters file router_private.parameters.json with the following command:
 
@@ -633,7 +658,11 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Go to the **Session Smart Networking Platform** offering following the steps described in the section "Selecting the Azure Plan". Click on the "Get it now" button, agree to the terms of use and privacy policy of the image, click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
+Go to the **Session Smart Networking Platform** offering following the steps described in the section "Selecting the Azure Plan".
+Click on the "Get it now" button.
+Agree to the terms of use and privacy policy of the image.
+Click on the "Get started" button to enable programmatic deployment for the subscription.
+Click the button "Save" to save the changes.
 
 ![Plans](/img/platforms_azure_programmatically.png)
 
@@ -647,3 +676,8 @@ New-AzResourceGroupDeployment -ResourceGroupName <your-resource-group-name> `
 -TemplateUri <template-URL> `
 -TemplateParameterFile ./router_private.parameters.json
 ```
+
+:::important
+When logging to the Linux instance via SSH make use of the username specified in the "Admin Username" field and the corresponding private key specified in the "Admin Public Key Data" field.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
+:::
