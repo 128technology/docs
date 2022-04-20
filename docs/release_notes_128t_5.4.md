@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
-## Release 5.4.5-5
+## Release 5.4.5-6
 
 **Release Date: April 22, 2022**
 
@@ -61,6 +61,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-45094 Unnecessary rotation of salt minion config:** Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.
 ------
 - **I95-45211 New users run into permissions errors:** Access Control Lists are now preserved on file rotations.
+------
+- **I95-45618 Issue with MAC address in Azure environment:** Resolved this issue by handling non-ethernet MAC addresses during MLX device discovery.
 
 ## Release 5.4.4-9
 
