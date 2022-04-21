@@ -22,7 +22,7 @@ The tabs across the top of the pane - LSDB, Routes, Client, Server, and Document
     - Select an ID to see peer path details.
     - Selecting a service from the table displays additional details. 
 
-**Routes:** Service routes specific to the selected router.
+**Routes:** Summary shows a list of the service routes on the selected router. Selecting Details displays the detailed information about each service including the IP address and prefix, the best path indicator, and cost for the route. Sort order is determined by Path group, and then can be defined by the user for secondary sorting.
 
 **Client:** Step client for the selected router
 
