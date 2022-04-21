@@ -1614,10 +1614,10 @@ export config <datastore> <export-name>
 
 The _export_ command takes a configuration from a previously created backup (via _create config backup_), from the candidate configuration, or from the SSR router&#x27;s running configuration, and stores it as a file on the local filesystem. It can then be taken off, moved onto other systems, archived, etc.
 
-Exported files are stored in /etc/128technology/config-backups/ and are stored as GZIP compressed files.
+Exported files are stored in /etc/128technology/config-exports/ and are stored as GZIP compressed files.
 
 The _export_ command&#x27;s complement, _import_ is used to reverse the process, taking a configuration archive and restoring it onto a system.
-
+The _delete config exported_ command removes unneeded exported configurations.
 #### Example
 
 ```
@@ -2222,7 +2222,7 @@ Discard uncommitted changes from the candidate config.
 #### Usage
 
 ```
-restore config running [force]
+restore config running [force] [<username>]
 ```
 
 ##### Keyword Arguments
@@ -2230,6 +2230,12 @@ restore config running [force]
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| username | Name of the account to discard candidate changes from (default: &lt;current user&gt;) |
 
 ##### See Also
 
@@ -3562,7 +3568,7 @@ set log level configured [category <category>] [force] [router <router>] [node <
 
 | name | description |
 | ---- | ----------- |
-| process-name | The process for which to set the log level (default: all) |
+| process-name | The process for which to set the log level (the log level will change for all processes when no process is specified) (default: all) |
 
 #### Description
 
@@ -4327,6 +4333,32 @@ Fri 2017-07-21 15:41:54 UTC
 | Release | Modification                |
 | ------- | ----------------------------|
 | 4.4.0   | This feature was introduced |
+
+## `show bfd`
+
+Show BFD Peer &lt;&gt;
+
+#### Usage
+
+```
+show bfd [vrf <vrf>] [peer <ip>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| peer | Retrieve BFD information for this peer. |
+| resource-group | The name of the resource group. |
+| router | The router to request BFD information from. |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ## `show bgp`
 
@@ -8342,7 +8374,7 @@ show session-captures [{id <id> | detail}] [{router <router> | resource-group <r
 | ---- | ----------- |
 | detail | Display session-captures in detail |
 | force | Skip confirmation prompt. Only required when targeting all routers |
-| id | The session-capture to show in detail [type: int] |
+| id | The session-capture to show in detail |
 | node | The node on which to show session-captures |
 | resource-group | The name of the resource group |
 | router | The router on which to show session-captures (default: all) |
@@ -8625,6 +8657,24 @@ show step routes [rows <rows>] [node <node-name>] [service <service-name>] [ip-p
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary (default: summary) |
+
+## `show step-repo clients`
+
+Show STEP repo clients
+
+#### Usage
+
+```
+show step-repo clients [<verbosity>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+
 
 ## `show system`
 
@@ -9468,7 +9518,7 @@ This command validates the current candidate configuration to check for referent
 Many configuration elements within the SSR router refer to other configuration elements by their _name_. If an administrator mistypes a name, or a referenced object is deleted without updating the source of that reference, this candidate configuration is said to be invalid. By using the validate command, administrators can ensure their configuration is valid prior to committing it to be the running configuration.
 
 :::note
-validation occurs automatically whenever the commit command is run; this standalone
+Validation occurs automatically whenever the commit command is run; this standalone
 command allows administrators to check for validity without requiring that the
 configuration is committed immediately.
 :::
