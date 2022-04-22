@@ -212,7 +212,7 @@ Once the deployment completes, information is provided in the Outputs tab:
 * If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo ssr-install`.
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually. To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
-### Configuring a Device Interface
+### Network Interfaces Layout
 
 The _Session Smart Router Template_ deploys an EC2 instance for the SSR with three network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Management, Public, and Private. The network interfaces are mapped as follows:
 
@@ -222,7 +222,26 @@ The _Session Smart Router Template_ deploys an EC2 instance for the SSR with thr
 | eth1                   | Public           | 0000:00:06.0    |
 | eth2                   | Private          | 0000:00:07.0    |
 
-In earlier versions of the 128T Networking Platform software (pre-5.0), the SSR used the PCI addresses to map to the device interfaces. If you are installing an earlier version of the Software, please see [PCI Address Association](#pci-address-association).
+### Configuring a Device Interface
+
+The following are the high level steps to configure a device interface on a SSR running in the AWS cloud.
+
+Determine the Device Interface Layout
+Configure and Assign the PCI Address Identifier to a Device Interface
+Configure the IP Addressing for every Network interface
+Configuration for every Network Interface with a Public IP Address (if a public IP address is associated to any of the network interfaces)
+Verify Connectivity
+
+#### Determine the Device Interface Layout
+
+Perform the following steps to identify the correct PCI address for each network interface attached to the EC2 instance:
+
+Login via SSH to the EC2 corresponding to the SSR.
+Run the following command in Linux: `sudo dpdk-devbind.py --status`
+
+The PCI address is the first column under **Network devices using kernel driver**. The network interfaces are listed in the order in which they are attached to the EC2 instance.
+
+If you have used the _Session Smart Router Template_ to deploy the SSR, the template attached the network interfaces to the EC2 instance in the order described in the previous section [Network Interfaces Layout](#network-interfaces-layout). Otherwise, if you did not use the template and instead launched an EC2 instance with a custom network interface layout, note the order in which the network interfaces are attached to your EC2 instance.
 
 #### Assign the PCI Address Identifier to a Device Interface
 
