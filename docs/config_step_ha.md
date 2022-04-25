@@ -8,8 +8,6 @@ sidebar_label: STEP High Availability
 | ------- | --------------------------- |
 | 5.6.0   | STEP HA introduced |
 
-STEP can be used in a High Availability configuration, but must be configured on both the routers and the conductors. 
-
 ## STEP Repository High Availability
 
 To achieve STEP repository high availability, the conductor is placed in an HA configuration. Each of the two conductor nodes hosts a STEP repository, and both nodes are active. All routers in the authority are connected to both repositories. Each router sends and recieves STEP router document updates from both repositories, providing redundancy in case one of the repositories becomes unavailable. Each router uses existing secure communication channels to the conductor nodes to exchange STEP information.

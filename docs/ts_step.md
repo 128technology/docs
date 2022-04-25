@@ -2,7 +2,16 @@
 title: Troubleshooting STEP
 sidebar_label: Troubleshooting STEP
 ---
-## Show Commands
+
+## Missing Forwarding State Information
+
+If a router is missing the expected STEP provided forwarding state information (FIB entries and service-path entries) for a service:
+
+1. Check that the router is connected to the STEP repository (using `show step clients`)
+2. Check the router's view of the LSDB (use the `show step lsdb` command) to verify the destination router is known and is advertising the service in its STEP document
+3. Check the result of the STEP path computation for the service (use `show step routes`)
+
+### Show Commands
 
 The following show commands provide a view into the STEP functionality.
 

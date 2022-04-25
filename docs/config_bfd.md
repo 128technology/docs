@@ -3,7 +3,7 @@ title: Bidirectional Forwarding Detection (BFD)
 sidebar_label: BFD
 ---
 
-This section provides information about using BFD with BGP and OSPF protocols on the Session Smart Networking Platform, and how to configure your SSR to take advantage of the Free Range Routing (FRR) capability with BFD.
+This section provides information about using BFD with BGP and OSPF protocols on the Session Smart Networking Platform.
 
 ## Overview
 
@@ -79,7 +79,7 @@ authority
 
 ## Troubleshooting
 
-The show commands available in FRR are also available through the SSR PCLI. Additionally, the  BFD status is available in the GUI. 
+The following `show` commands are available through the SSR PCLI. Additionally, the  BFD status is available in the GUI. 
 
 The following show commands are also available for insight into the configuration:
 
