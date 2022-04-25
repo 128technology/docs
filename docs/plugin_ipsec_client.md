@@ -560,7 +560,7 @@ The detailed tech support info bundle will now include the necessary logs and da
 
 A new config option has been added to enable libreswan features that are not made available as first class configuration.
 
-- **PLUGIN-1591** Add cpu, memory & status tracking for ipsec services
+- **PLUGIN-1591** Add cpu, memory, and  status tracking for ipsec services.
 
 The system will now track the cpu, memory and usage information for various IPSec client related processes.
 
