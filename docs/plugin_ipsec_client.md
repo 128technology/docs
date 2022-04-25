@@ -556,7 +556,7 @@ The `encapsulation` and `remote-peer-type` options are now available for configu
 
 The detailed tech support info bundle will now include the necessary logs and data for troubleshooting ipsec-client plugin related problems.
 
-- **PLUGIN-1598** - Support custom options for obscure libreswan config pieces
+- **PLUGIN-1598** - Support custom options for obscure libreswan config fields
 
 A new config option has been added to enable libreswan features that are not made available as first class configuration.
 
