@@ -89,7 +89,7 @@ exit
 | value    | The value of the option              |
 
 :::warning
-The `custom-option` are added to the libreswan config file and any invalid option could prevent the application from starting up.
+The `custom-option` is added to the libreswan config file; any invalid option could prevent the application from starting up.
 :::
 
 ### Clients
