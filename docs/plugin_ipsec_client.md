@@ -568,7 +568,7 @@ The system will now track the cpu, memory and usage information for various IPSe
 
 - **PLUGIN-1628** Incorrect network-script path was being used in the auto generated device-interface configuration
 
-  _**Resolution**_ The auto configuration was updated to use the right script path.
+  _**Resolution**_ The auto configuration was updated to use the correct script path.
 
 - **PLUGIN-1610** The IPSec environment setup can fail on first time plugin install
 
