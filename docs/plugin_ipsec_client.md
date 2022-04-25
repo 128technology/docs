@@ -161,7 +161,7 @@ exit
 | `timeout` | Duration (in seconds) within which to reach the destination. Each attempt will be made in this duration / `max-retries` interval. |
 | `max-retries` | Number of consecutive missed ICMP ping responses from the destination within the interval before deciding that the tunnel is unhealthy. |
 | `interval` | Duration (in seconds) of how often to perform an ICMP probe test to the probe-address. |
-| `tunnel-monitor-nat-network` | The subnet where traffic originates. The corresponding ingress KNI's fourth  |octet is used. By default, the subnet `10.128.128.0/28` is used.
+| `tunnel-monitor-nat-network` | The subnet where traffic originates. The corresponding ingress KNI's fourth octet is used. By default, the subnet `10.128.128.0/28` is used. |
 
 ### Generated 128T Configuration
 A KNI per remote is created with the name of the `remote` and a single egress KNI is created with the name of the `ipsec-client`.
