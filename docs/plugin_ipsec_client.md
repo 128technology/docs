@@ -487,7 +487,7 @@ If tunnel monitoring is enabled for a remote, corresponding tunnel monitoring st
 ```
 
 ### Commands
-The `restart ipsec tunnel` command can be used to restart an individual IPSec tunnel via the conductor PCLI and UI.
+The `restart ipsec remote` command can be used to restart an individual IPSec tunnel via the conductor PCLI and UI.
 
 ```
 admin@node1.conductor# restart ipsec remote router router-1 node node-1 remote-1
