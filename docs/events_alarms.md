@@ -2,31 +2,8 @@
 title: Alarms
 sidebar_label: Alarms
 ---
-| Field     | Data                                                         |
-| --------- | ------------------------------------------------------------ |
-| Category  | asset                                                        |
-| Severity  | major                                                        |
-| Message   | Asset `<id>`, which is configured as `<node>`.`<router>`, is not running |
-| Threshold | Issued when the SSR service stops on a node (must be managed by ZTP). Clears on SSR start. |
 
-| Cause                                                  | Troubleshooting Step                                         |
-| ------------------------------------------------------ | ------------------------------------------------------------ |
-| SSR is not running on node `<node>` router `<router>` | Start SSR from the Conductor PCLI by entering with `send command start router <router> node <node>` or pressing the start button on the Conductor’s router page in the GUI. If the SSR cannot start check `systemctl status 128T` on that node. |
-
-------
-
-| Field     | Data                                                         |
-| --------- | ------------------------------------------------------------ |
-| Category  | asset                                                        |
-| Severity  | major                                                        |
-| Message   | Asset`<id>`, which is configured as `<node>`.`<router>`, failed to install. |
-| Threshold | Issued when the SSR install fails on a node (must be managed by ZTP). Clears once SSR is installed. |
-
-| Cause                                                        | Troubleshooting Step                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| SSR failed to install on node `<node>` router `<router>`, which is asset `<id>` | Issue command `show assets <id>` to see detailed information on why the install failed and follow the instructions to fix the issue and retry the installation. |
-
-------
+## Asset
 
 | Field     | Data                                                         |
 | --------- | ------------------------------------------------------------ |
@@ -56,6 +33,34 @@ sidebar_label: Alarms
 
 | Field     | Data                                                         |
 | --------- | ------------------------------------------------------------ |
+| Category  | asset                                                        |
+| Severity  | major                                                        |
+| Message   | Asset `<id>`, which is configured as `<node>`.`<router>`, is not running |
+| Threshold | Issued when the SSR service stops on a node (must be managed by ZTP). Clears on SSR start. |
+
+| Cause                                                  | Troubleshooting Step                                         |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
+| SSR is not running on node `<node>` router `<router>` | Start SSR from the Conductor PCLI by entering with `send command start router <router> node <node>` or pressing the start button on the Conductor’s router page in the GUI. If the SSR cannot start check `systemctl status 128T` on that node. |
+
+------
+
+| Field     | Data                                                         |
+| --------- | ------------------------------------------------------------ |
+| Category  | asset                                                        |
+| Severity  | major                                                        |
+| Message   | Asset`<id>`, which is configured as `<node>`.`<router>`, failed to install. |
+| Threshold | Issued when the SSR install fails on a node (must be managed by ZTP). Clears once SSR is installed. |
+
+| Cause                                                        | Troubleshooting Step                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| SSR failed to install on node `<node>` router `<router>`, which is asset `<id>` | Issue command `show assets <id>` to see detailed information on why the install failed and follow the instructions to fix the issue and retry the installation. |
+
+------
+
+## bgp_neighbor
+
+| Field     | Data                                                         |
+| --------- | ------------------------------------------------------------ |
 | Category  | bgp_neighbor                                                     |
 | Severity  | major                                                        |
 | Message   | Neighbor `<ipaddress>` failed to reach the ESTABLISHED state. |
@@ -67,6 +72,8 @@ sidebar_label: Alarms
 
 ------
 
+## giid
+
 | Field     | Data                                                         |
 | --------- | ------------------------------------------------------------ |
 | Category  | giid                                                         |
@@ -77,6 +84,23 @@ sidebar_label: Alarms
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Interface configured to obtain address dynamically using DHCP but was not able to acquire one in time. | Ensure the interface is operationally up<br/>Ensure the interface is connected to a network with a DHCP server and the server will accept the node’s request for DHCP address.<br/>Collect the DHCP statistics to check for any failures.<br/>Collect packet traces on the DHCP interface to investigate any protocol level failures. |
+
+------
+
+## Interface
+
+| Field     | Data                       |
+| --------- | -------------------------- |
+| Category  | interface                  |
+| Severity  | critical                   |
+| Message   | interface operational down |
+| Threshold | up/down                    |
+
+| Cause                                            | Troubleshooting Step                                         |
+| ------------------------------------------------ | ------------------------------------------------------------ |
+| Interface is down for an Ethernet WAN connection | The next hop networking equipment is down. Troubleshoot by checking for link status on adjacent equipment, adjacent switch ports, etc. |
+| Interface is down for an HA or LAN connection    | The next hop networking equipment is down. Troubleshoot by checking for link status on adjacent equipment, adjacent switch ports, etc. |
+| The down interface is an LTE interface           | Check that strength and status of the LTE connection by using the `show device-interface router <router name> id <interface id>` command.<br/>• If the signal strength is marginal, poor, or 0 the LTE interface is malfunctioning.<br/>• If the system mode is not listed as LTE the signal is malfunctioning.<br/>• If the Operation Status is down, the LTE interface is malfunctioning.<br/><br/>In the event of the conditions above, contact 128 Technology. |
 
 ------
 
@@ -93,18 +117,18 @@ sidebar_label: Alarms
 
 ------
 
-| Field     | Data                       |
-| --------- | -------------------------- |
-| Category  | interface                  |
-| Severity  | critical                   |
-| Message   | interface operational down |
-| Threshold | up/down                    |
+## Peer
 
-| Cause                                            | Troubleshooting Step                                         |
-| ------------------------------------------------ | ------------------------------------------------------------ |
-| Interface is down for an Ethernet WAN connection | The next hop networking equipment is down. Troubleshoot by checking for link status on adjacent equipment, adjacent switch ports, etc. |
-| Interface is down for an HA or LAN connection    | The next hop networking equipment is down. Troubleshoot by checking for link status on adjacent equipment, adjacent switch ports, etc. |
-| The down interface is an LTE interface           | Check that strength and status of the LTE connection by using the `show device-interface router <router name> id <interface id>` command.<br/>• If the signal strength is marginal, poor, or 0 the LTE interface is malfunctioning.<br/>• If the system mode is not listed as LTE the signal is malfunctioning.<br/>• If the Operation Status is down, the LTE interface is malfunctioning.<br/><br/>In the event of the conditions above, contact 128 Technology. |
+| Field     | Data                                             |
+| --------- | ------------------------------------------------ |
+| Category  | peer                                             |
+| Severity  | critical                                         |
+| Message   | Peer `<name>` is not reachable. |
+| Threshold | When all paths to a peer are marked down by BFD. |
+
+| Cause                                                 | Troubleshooting Step                                         |
+| ----------------------------------------------------- | ------------------------------------------------------------ |
+| All “Peer path” alarms to a given peer are triggered. | Review the statistics for `show stats bfd by-peer-path` to investigate for anomolies.<br />Capture packets on the interface(s) that talk to the peer and look for successful UDP traffic to and from the peer at port 1280. |
 
 ------
 
@@ -123,19 +147,6 @@ sidebar_label: Alarms
 
 ------
 
-| Field     | Data                                             |
-| --------- | ------------------------------------------------ |
-| Category  | peer                                             |
-| Severity  | critical                                         |
-| Message   | Peer `<name>` is not reachable. |
-| Threshold | When all paths to a peer are marked down by BFD. |
-
-| Cause                                                 | Troubleshooting Step                                         |
-| ----------------------------------------------------- | ------------------------------------------------------------ |
-| All “Peer path” alarms to a given peer are triggered. | Review the statistics for `show stats bfd by-peer-path` to investigate for anomolies.<br />Capture packets on the interface(s) that talk to the peer and look for successful UDP traffic to and from the peer at port 1280. |
-
-------
-
 | Field    | Data                                    |
 | -------- | --------------------------------------- |
 | Category | peer                                    |
@@ -145,6 +156,32 @@ sidebar_label: Alarms
 | Cause                                                        | Troubleshooting Step                             |
 | ------------------------------------------------------------ | ------------------------------------------------ |
 | Maximum Transmit Unit for packet size is unable to be determined. | Set the MTU for the device-interface statically. |
+
+------
+
+## Platform
+
+| Field    | Data                                        |
+| -------- | ------------------------------------------- |
+| Category | platform                                    |
+| Severity | critical                                    |
+| Message  | Security Rekey failed for: `<node-name(s)>` |
+
+| Cause                                                        | Troubleshooting Step                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact Juniper customer support. |
+
+------
+
+| Field    | Data                                        |
+| -------- | ------------------------------------------- |
+| Category | platform                                    |
+| Severity | critical                                    |
+| Message  | Security Rekey failed for: `<node-name(s)>` |
+
+| Cause                                                        | Troubleshooting Step                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact Juniper customer support. |
 
 ------
 
@@ -158,6 +195,7 @@ sidebar_label: Alarms
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | Occurs when 90% or more of the total flow table is utilized. | The alarm is cleared when 80% or less of the total flow table is utilized. |
+
 ------
 
 | Field     | Data                                    |
@@ -199,30 +237,6 @@ sidebar_label: Alarms
 
 ------
 
-| Field    | Data                                        |
-| -------- | ------------------------------------------- |
-| Category | platform                                    |
-| Severity | critical                                    |
-| Message  | Security Rekey failed for: `<node-name(s)>` |
-
-| Cause                                                        | Troubleshooting Step                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact Juniper customer support. |
-
-------
-
-| Field    | Data                                        |
-| -------- | ------------------------------------------- |
-| Category | platform                                    |
-| Severity | critical                                    |
-| Message  | Security Rekey failed for: `<node-name(s)>` |
-
-| Cause                                                        | Troubleshooting Step                                         |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Issued when a conductor fails to distribute newly created security keys during rekey process to any managed routers. | Make sure failed nodes are running and have connectivity to the conductor. If the problem still persists please contact Juniper customer support. |
-
-------
-
 | Field     | Data                                                         |
 | --------- | ------------------------------------------------------------ |
 | Category  | process                                                      |
@@ -234,6 +248,24 @@ sidebar_label: Alarms
 | --------------------------------------------------- | ------------------------------------------------------------ |
 | Process exits once and restarts to normal operation | The SSR is designed to restart processes in the event of a failure. If this alarm state is only seen briefly and then clears it is likely that the system has self-recovered. Please report to Juniper customer support. |
 | Process exits continuously                          | Contact Juniper customer support                                |
+
+------
+
+## System
+
+------
+
+| Field     | Data                                |
+| --------- | ----------------------------------- |
+| Category  | system                              |
+| Severity  | critical                            |
+| Message   | Node `<node-name>` went offline     |
+| Threshold | Issued when an HA node goes offline |
+
+| Cause                                             | Troubleshooting Step                                         |
+| ------------------------------------------------- | ------------------------------------------------------------ |
+| The HA peer node has shut down or stopped running | Verify that the HA peer node is powered on and running. If the node is running verify that the SSR service is running without error by issuing the command `systemctl status 128T`. If the system appears to be running correctly check connectivity between the systems by issuing the PCLI command `show system connectivity` on both nodes. |
+| Connectivity between HA nodes is down             | HA node connectivity can be evaluated with the PCLI command `show system connectivity`. If the state to the peer node is not `connected` check the inter node tunnel status by running the PCLI command `show system connectivity internal`. All tunnels to the peer node should report “connected”. If connectivity is down verify links between the systems and if they are up then please contact Juniper support. |
 
 ------
 
@@ -296,7 +328,7 @@ sidebar_label: Alarms
 | Field     | Data                                                         |
 | --------- | ------------------------------------------------------------ |
 | Category  | system                                                       |
-| Severity  | Major                                                        |
+| Severity  | major                                                        |
 | Message   | Received config sync info state for node `<node-name>` with syncVersion=`<version>`, error=`<error>`, message=`<message>` and resulting action=`<action>` |
 | Threshold | Configuration synchronization error                          |
 
@@ -322,27 +354,13 @@ sidebar_label: Alarms
 | Field     | Data                                                         |
 | --------- | ------------------------------------------------------------ |
 | Category  | system                                                       |
-| Severity  | Major                                                        |
+| Severity  | major                                                        |
 | Message   | No active NTP server                                         |
 | Threshold | Issued when the system is not connected to any active NTP servers. |
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | The router is having connectivity problems to the NTP server that was selected. | Specify NTP server(s) to connect to. From PCLI, “configure authority router `<router name>` system ntp server `<ntp server address>`”.<br/>Make this more resilient by specifying more NTP servers. A common practice is to specify 4 servers. |
-
-------
-
-| Field     | Data                                |
-| --------- | ----------------------------------- |
-| Category  | system                              |
-| Severity  | critical                            |
-| Message   | Node `<node-name>` went offline     |
-| Threshold | Issued when an HA node goes offline |
-
-| Cause                                             | Troubleshooting Step                                         |
-| ------------------------------------------------- | ------------------------------------------------------------ |
-| The HA peer node has shut down or stopped running | Verify that the HA peer node is powered on and running. If the node is running verify that the SSR service is running without error by issuing the command `systemctl status 128T`. If the system appears to be running correctly check connectivity between the systems by issuing the PCLI command `show system connectivity` on both nodes. |
-| Connectivity between HA nodes is down             | HA node connectivity can be evaluated with the PCLI command `show system connectivity`. If the state to the peer node is not `connected` check the inter node tunnel status by running the PCLI command `show system connectivity internal`. All tunnels to the peer node should report “connected”. If connectivity is down verify links between the systems and if they are up then please contact Juniper support. |
 
 ------
 
@@ -376,9 +394,23 @@ sidebar_label: Alarms
 | --------- | ---------------------------------------------------- |
 | Category  | system                                               |
 | Severity  | major                                                |
-| Message   | Restart required.                                    |
+| Message   | Restart required                                    |
 | Threshold | Restart is required for configuration to take effect |
 
 | Cause                                               | Troubleshooting Step                                         |
 | --------------------------------------------------- | ------------------------------------------------------------ |
-| non-dynamically reconfiguable filed has been edited | Some fields within the SSR configuration are not dynamic and requires a restart of the SSR process to take effect (e.g. forwarding-cores).  From the Conductor Router page, click on the gear icon to issue a restart of the SSR process.  Alternatively, from within the linux shell of the SSR Router, issue `systemctl restart 128T` |
+| Non-dynamically reconfiguable filed has been edited | Some fields within the SSR configuration are not dynamic and requires a restart of the SSR process to take effect (e.g. forwarding-cores).  From the Conductor Router page, click on the gear icon to issue a restart of the SSR process.  Alternatively, from within the linux shell of the SSR Router, issue `systemctl restart 128T` |
+
+------
+
+| Field     | Data                                                 |
+| --------- | ---------------------------------------------------- |
+| Category  | system                                               |
+| Severity  | minor                                                |
+| Message   | Application Identification cache utilization is approaching maximum capacity  |
+| Threshold | Fires at 95% of `max-capacity` value (default is 10,000) |
+
+| Cause                                               | Troubleshooting Step                                         |
+| --------------------------------------------------- | ------------------------------------------------------------ |
+| Capacity of the cache exceeds 95% of the `max-capacity` configured value | The alarm is cleared once the capacity of the 
+cache goes below 85% of the configured value, and as sessions using those stats expire. The alarm can be addressed by adjusting the `max-capacity` value under `application-identification`. App-id stats are tracked per application, per client, and per next-hop. The granularity of per-application, per-client traffic stats will be reduced while the alarm is active on the system. |
