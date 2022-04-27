@@ -52,6 +52,46 @@ exit
 This plugin can only connect to IPsec endpoints that support pre-shared key authentication.
 :::
 
+#### Custom Options
+
+##### Version History
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.3.0    | `profile > custom-option` introduced |
+
+The `custom-option` allows the user to configure additional obscure libreswan options that are not exposed via the profile and remote configuration.
+
+```
+config
+
+    authority
+
+        router  RTR_EAST_1_COMBO
+            name           RTR_EAST_1_COMBO
+
+            ipsec-profile  primary
+                name           primary
+
+                custom-option  key
+                    name   key
+                    value  value
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+| Config   | Description                          |
+| -------- | ------------------------------------ |
+| name     | The name of the libreswan option     |
+| value    | The value of the option              |
+
+:::warning
+The `custom-option` is added to the libreswan config file; any invalid option could prevent the application from starting up.
+:::
+
 ### Clients
 Clients are a collection of remote endpoints which can be used for failover purposes.
 
@@ -114,12 +154,14 @@ node
 exit
 ```
 
-* `enabled` - Allows you to switch tunnel monitoring on and off for a `remote`.
-* `address` - The IP or hostname where traffic is sent. This address must be reachable after traversing the tunnel.
-* `timeout` - Duration (in seconds) within which to reach the destination. Each attempt will be made in this duration / `max-retries` interval.
-* `max-retries` - Number of consecutive missed ICMP ping responses from the destination within the interval before deciding that the tunnel is unhealthy.
-* `interval` - Duration (in seconds) of how often to perform an ICMP probe test to the probe-address.
-* `tunnel-monitor-nat-network` - The subnet where traffic originates. The corresponding ingress KNI's fourth octet is used. By default, the subnet `10.128.128.0/28` is used.
+| Config   | Description                          |
+| -------- | ------------------------------------ |
+| `enabled` | Allows you to switch tunnel monitoring on and off for a `remote`. |
+| `address` | The IP or hostname where traffic is sent. This address must be reachable after traversing the  tunnel. |
+| `timeout` | Duration (in seconds) within which to reach the destination. Each attempt will be made in this duration / `max-retries` interval. |
+| `max-retries` | Number of consecutive missed ICMP ping responses from the destination within the interval before deciding that the tunnel is unhealthy. |
+| `interval` | Duration (in seconds) of how often to perform an ICMP probe test to the probe-address. |
+| `tunnel-monitor-nat-network` | The subnet where traffic originates. The corresponding ingress KNI's fourth octet is used. By default, the subnet `10.128.128.0/28` is used. |
 
 ### Generated 128T Configuration
 A KNI per remote is created with the name of the `remote` and a single egress KNI is created with the name of the `ipsec-client`.
@@ -444,6 +486,35 @@ If tunnel monitoring is enabled for a remote, corresponding tunnel monitoring st
            Last Restart:2022-02-14 15:41:15
 ```
 
+### Commands
+
+##### Version History
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.3.0    | `profile > custom-option` introduced |
+
+The `restart ipsec remote` command can be used to restart an individual IPSec tunnel via the conductor PCLI and UI.
+
+```
+admin@node1.conductor# restart ipsec remote router router-1 node node-1 remote-1
+✔ Retrieving 0/1 targets complete....
+Target: node1.conductor
+
+002 "ipsec-client-tunnel-primary-remote-1": terminating SAs using this connection
+002 "ipsec-client-tunnel-primary-remote-1" #8261: deleting state (STATE_PARENT_I1)
+002 "ipsec-client-tunnel-primary-remote-1" #8262: initiating v2 parent SA
+133 "ipsec-client-tunnel-primary-remote-1" #8262: STATE_PARENT_I1: initiate
+
+Successfully retrieved info.
+admin@node1.conductor#
+```
+
+From the conductor UI, the command can be accessed as shown in the screenshot below.
+
+![IPsec Tunnel Restart Command](/img/ipsec_tunnel_restart.png)
+
+
 ### Systemd Services
 To check the status of the IPsec client service on the router, you can run `show system services` which will show all 128T related services running on the specified node. The one for this plugin is named `128t-ipsec`.
 
@@ -468,6 +539,49 @@ Completed in 0.10 seconds
 ```
 
 ## Release Notes
+
+### Release 3.3.0
+
+**Release Date:** Apr 27, 2022
+
+#### New Features and Improvements
+- **PLUGIN-630** Raise the number of supported IPSec client tunnels from 2 to 4
+
+The plugin now supports up to 4 IPSec tunnels per node.
+
+- **PLUGIN-1641** Optimize the initial IPSec environment setup
+
+The majority of the IPSec config and environment management is performed locally on the router thereby minimizing the interaction with salt states.
+
+- **PLUGIN-1533** Create a command to restart an individual tunnel
+
+A new command was added to allow the user to restart an individual tunnel. More details can be found in the [commands section](#commands)
+
+- **PLUGIN-1532** Enable additional configuration options for IPSec tunnels.
+
+The `encapsulation` and `remote-peer-type` options are now available for configuration.
+
+- **PLUGIN-1554** Collect ipsec-client plugin data as part of tech support info
+
+The detailed tech support info bundle will now include the necessary logs and data for troubleshooting ipsec-client plugin related problems.
+
+- **PLUGIN-1598** - Support custom options for obscure libreswan config fields
+
+A new config option has been added to enable libreswan features that are not made available as first class configuration.
+
+- **PLUGIN-1591** Add cpu, memory, and  status tracking for ipsec services.
+
+The system will now track the cpu, memory and usage information for various IPSec client related processes.
+
+#### Issues Fixed
+
+- **PLUGIN-1628** Incorrect network-script path was being used in the auto generated device-interface configuration
+
+  _**Resolution**_ The auto configuration was updated to use the correct script path.
+
+- **PLUGIN-1610** The IPSec environment setup can fail on first time plugin install
+
+  _**Resolution**_ The salt states were improved to have better interdependencies to avoid the first time boot failure.
 
 ### Release 3.2.0
 
