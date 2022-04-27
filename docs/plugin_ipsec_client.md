@@ -487,6 +487,13 @@ If tunnel monitoring is enabled for a remote, corresponding tunnel monitoring st
 ```
 
 ### Commands
+
+##### Version History
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.3.0    | `profile > custom-option` introduced |
+
 The `restart ipsec remote` command can be used to restart an individual IPSec tunnel via the conductor PCLI and UI.
 
 ```
@@ -534,6 +541,8 @@ Completed in 0.10 seconds
 ## Release Notes
 
 ### Release 3.3.0
+
+Release Date: 03/27/2022
 
 #### New Features and Improvements
 - **PLUGIN-630** Raise the number of supported IPSec client tunnels from 2 to 4
