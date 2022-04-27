@@ -281,6 +281,16 @@ Additional debugging can be turned on for the `http-monitor` instance by setting
 
 ## Release Notes
 
+### Release 1.0.2
+
+**Release Date:** Apr 29, 2022
+
+#### Issues Fixed
+
+- **PLUGIN-1680** The HTTP probe status takes a very long time to detect upstream failure
+
+  _**Resolution:**_ The logic for detecting upstream failures for combination of very small duration and retry has been improved upon.
+
 ### Release 1.0.1
 
 #### Issues Fixed
