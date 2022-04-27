@@ -14,9 +14,9 @@ BFD can be enabled on the OSPF interface or the BGP neighbor. BFD configuration 
 - **required-min-rx-interval** (default: 1000): The minimum interval in milliseconds that this system must receive a BFD control packet.
 - **desired-tx-interval** (default: 1000): The minimum transmission interval in milliseconds used to send BFD control packets.
 
-For OSPF, the BFD configuration can be made for the given OSPF interface. Once a neighbor is learned on this interface, then a BFD session is created with the same addresses used to create the OSPF adjacency.  
+For OSPF, the BFD configuration can be created for the given OSPF interface. Once a neighbor is learned on this interface, then a BFD session is created with the same addresses used to create the OSPF adjacency.  
 
-For BGP, the BFD configuration is made for a BGP neighbor. Once the BGP neighbor is learned, then a BGP session is created. BFD uses the same addresses as the BGP adjacency. These can be interface addresses for directly connected BGP neighbors, or loopback addresses. 
+For BGP, the BFD configuration is created for a BGP neighbor. Once the BGP neighbor is learned, then a BGP session is created. BFD uses the same addresses as the BGP adjacency. These can be interface addresses for directly connected BGP neighbors, or loopback addresses. 
 
 The BFD peers are automatically removed by the protocols once the BGP/OSPF neighbor is removed. The OSPF/BGP adjacency remains up when BFD is configured for the peer. However, if the BFD configuration is modified while the BFD session is Up, then the OSPF/BGP adjacency will flap.
 

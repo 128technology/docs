@@ -128,6 +128,13 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "NTP",
+        "items": [
+          "config_ntp_auth",
+        ],
+      },
+      {
+        "type": "category",
         "label": "Security",
         "items": [
           "sec_adaptive_encrypt",
