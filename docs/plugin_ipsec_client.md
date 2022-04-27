@@ -542,7 +542,7 @@ Completed in 0.10 seconds
 
 ### Release 3.3.0
 
-Release Date: 03/27/2022
+**Release Date:** Apr 27, 2022
 
 #### New Features and Improvements
 - **PLUGIN-630** Raise the number of supported IPSec client tunnels from 2 to 4
