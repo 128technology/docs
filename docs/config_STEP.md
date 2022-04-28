@@ -277,6 +277,14 @@ admin@conductor-node-1.Conductor# show service-path router Ingress node ingress
  inet          __inet_0.0.0.0/0_Egress:egress                step   172.16.3.3/32   172.16.3.3   intf11      lte       500      0   0/unlimited   Up(Up)
  inet          __inet_0.0.0.0/0_Egress:egress                step   172.16.4.4/32   172.16.4.4   intf12      mpls      100      0   0/unlimited   Up(Up)
 ```
+### Route Computation
+
+When STEP determines the best route to use, it takes the following information from the service-policy into consideration.  
+
+- Two of the **Best Path Selection Criteria** in the `service-policy` selection options are now considered: vector and average-latency. MOS is not supported for STEP route computation. In releases prior to 5.6, STEP assumed the `vector` value.
+
+When **Service Level Agreement** is enabled in the service-policy (**Path Quality Filter** is set to `true`), then the configured value for the **Path Quality Measure** is considered during the STEP route computation. Peer-paths that do not meet the SLA are being penalized during the route computation. When the **Use Best-Effort Paths** is set to `false`, those peer-paths are not used at all.
+
 
 ## Configurable Parameters
 
