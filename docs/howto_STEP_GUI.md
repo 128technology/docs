@@ -7,23 +7,37 @@ sidebar_label: Using the STEP GUI
 | ------- | --------------------------- |
 | 5.6.0   | STEP GUI introduced |
 
-For a graphical view of the information displayed in the PCLI, use the STEP GUI. Located in the Tools menu on the bottom left of the SSR GUI, clicking STEP provides a look into the STEP functionality.
+For a graphical view of the information displayed in the PCLI, use the STEP GUI. Located in the Tools menu on the bottom left of the SSR GUI, clicking STEP and select a router to get a look into the STEP functionality.
 
 ![STEP GUI](/img/howto_step_gui1.png)
 
-The tabs across the top of the pane - LSDB, Routes, Client, Server, and Documents - display STEP related tables. All tables are configurable; select the columns icon to show / hide columns.
+The tabs across the top of the pane - LSDB, Routes, Client, and Server - display STEP related tables. All tables are configurable; select the columns icon to show / hide columns.
 
-**LSDB Link state database:** The information the current router has available for all other routers on the STEP network. To change routers, select the down arrow under Router Context in the top left corner of the screen. 
-- Summary selected: A high level summary of the services for each router that the originating router knows about. 
+**LSDB Link State Database:** The information the selected router has available for all other routers on the STEP network. There are two views available on this tab; Summary and Detail.
+
+- Summary view: Shows a high level summary of the services for each router known to the router selected in the Router Context (this is the router selected when accessing the STEP GUI). 
     - Click the router in the table to display the peer path details.
 
-- Detail selected: Shows detail for the paths and advertised services for the originating router. 
-    - Select the Originating Router icon next to Summary and choose a router from the dropdown to see all the local information that the originating router has on the selected router.
-    - Select an ID to see peer path details.
-    - Selecting a service from the table displays additional details. 
+- Details view: The Details view on the LSDB tab has two parameters:
+The **Router Context** selector on the top left determines what router is being queried for the information.
+The **Originating Router** selector determines which router document is shown in the table below. The Originating Router displays the information that is being advertised from that particular router.
 
-**Routes:** Summary shows a list of the service routes on the selected router. Selecting Details displays the detailed information about each service including the IP address and prefix, the best path indicator, and cost for the route. Sort order is determined by Path group, and then can be defined by the user for secondary sorting.
+![LSDB Details View](/img/howto_step_gui_lsdbDetails.png)
 
-**Client:** Step client for the selected router
+Items in the tables are selectable and will display additional detail screens. 
 
-**Server:** The server residing on the conductor. Displays all the router connections to the server. 
+**Routes:** Displays all service routes for the selected router (Router Context).
+
+- Summary view: Shows a high level summary of the service routes known to the router selected in the Router Context. Includes Node Name, Service Name, IP Prefix, number of paths, and the Best Path for each.
+
+- Details view: The Details view  displays information about individual services. Each Service is presented in it's own table as shown below. 
+
+![Routes Detail View](/img/howto_step_gui_routeDetails.png)
+
+**Client:** Step client details for the selected router based upon the STEP router documents. 
+
+![Client View](/img/howto_step_gui_client.png)
+
+**Server:** The server residing on the conductor. Displays the server connections to each router, including session state, and status. The STEP router document can be downloaded from this location as well. 
+
+![Server Details View](/img/howto_step_gui_server.png)

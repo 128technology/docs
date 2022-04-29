@@ -279,12 +279,11 @@ admin@conductor-node-1.Conductor# show service-path router Ingress node ingress
 ```
 ### Route Computation
 
-When STEP determines the best route to use, it takes the following information from the service-policy into consideration.  
+When STEP determines the best route to use, it takes the following information from the `service-policy` into consideration.  
 
-- Two of the **Best Path Selection Criteria** in the `service-policy` selection options are now considered: vector and average-latency. MOS is not supported for STEP route computation. In releases prior to 5.6, STEP assumed the `vector` value.
+- **Best Path Selection Criteria** in the `service-policy` selection options are now considered: vector and average-latency. MOS is not supported for STEP route computation. In releases prior to 5.6, STEP assumed the `vector` value.
 
-When **Service Level Agreement** is enabled in the service-policy (**Path Quality Filter** is set to `true`), then the configured value for the **Path Quality Measure** is considered during the STEP route computation. Peer-paths that do not meet the SLA are being penalized during the route computation. When the **Use Best-Effort Paths** is set to `false`, those peer-paths are not used at all.
-
+- **Path Quality Measure** is considered during the STEP route computation when **Service Level Agreement** is enabled in the `service-policy` (**Path Quality Filter** is set to `true`). Peer-paths that do not meet the SLA are penalized during the route computation. When the **Use Best-Effort Paths** is set to `false`, those peer-paths are not used at all.
 
 ## Configurable Parameters
 
