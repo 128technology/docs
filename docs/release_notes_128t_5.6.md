@@ -44,7 +44,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-41449 JITC: NTP Authentication with SHA1 or better:** Support for NTP authentication provides options for external NTP server authentication. See [NTP Authentication](config_ntp_auth.md) for more information.
 ------
-- **I95-41509 STEP Route Computation enhancements:** STEP uses additional service policy information when computing the best path scenario. See [STEP Route Computation](config_STEP.m#route-computation) for more information.
+- **I95-41509 STEP Route Computation enhancements:** STEP uses additional service policy information when computing the best path scenario. See [STEP Route Computation](config_STEP.md#route-computation) for more information.
 ------
 - **I95-41557 Software Lifecycle Management:** The download, installation, and software lifecycle process is more easily managed from a single location in the GUI. See [Software Lifecycle] for additional information. 
 ------
