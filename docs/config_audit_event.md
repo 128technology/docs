@@ -67,27 +67,6 @@ config
 exit
 ```
 
-### Remote Logging 
-Audit logs can be stored off system by configuring a remote logging server. When the IP address and port are configured, audit logs are sent to the remote system for storage and review. 
-
-```
-config
-    authority
-        router  Fabric128
-            name    Fabric128
-            system
-                audit
-                    remote-logging-server  1.1.1.1 60
-                        address  1.1.1.1
-                        port     60
-                    exit
-                exit
-            exit
-        exit
-    exit
-exit
-```
-
 ### Storing Events for Short Durations
 By default the SSR routers store all events except traffic events for up to six months on the local disk. In some cases it might be desirable to shorten the length of time for these events to minimize the impact on the local disk. This can be accomplished as follows:
 
@@ -166,7 +145,27 @@ outputs:
 
 Once these configurations are in place, starting the Monitoring Agent will send events to syslog. 
 
+### Remote Logging 
 
+Audit logs can be stored off system by configuring a remote logging server. When the IP address and port are configured, audit logs are sent to the remote system for storage and review. 
+
+```
+config
+    authority
+        router  Fabric128
+            name    Fabric128
+            system
+                audit
+                    remote-logging-server  1.1.1.1 60
+                        address  1.1.1.1
+                        port     60
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
+```
 ## Viewing the Audit Log
 
 To view the contents of the audit log via the GUI (on the Conductor or Router as configured above).

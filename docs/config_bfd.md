@@ -1,6 +1,6 @@
 ---
 title: Bidirectional Forwarding Detection (BFD)
-sidebar_label: BFD
+sidebar_label: BFD with BGP and OSPF
 ---
 
 This section provides information about using BFD with BGP and OSPF protocols on the Session Smart Networking Platform.

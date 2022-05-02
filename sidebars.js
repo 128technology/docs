@@ -98,9 +98,10 @@ module.exports = {
         "type": "category",
         "label": "Optimizing Routing Protocols",
         "items": [
-          "config_bfd",
+          "howto_tune_bfd",
           "config_bgp",
-          "config_ospf",  
+          "config_ospf", 
+          "config_bfd", 
         ],
       },      
       {
@@ -162,7 +163,6 @@ module.exports = {
           "howto_maintenance_mode",
           "howto_ms365",
           "howto_trusted_ca_certificate",
-          "howto_tune_bfd",
         ],
       },
       {
@@ -239,6 +239,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_5.6",
           "release_notes_128t_5.5",
           "release_notes_128t_5.4",
           "release_notes_128t_5.3",
