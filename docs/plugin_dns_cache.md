@@ -161,6 +161,46 @@ exit
 
 The `block-domains` configuration allows the DNS server to block those domains by replying back with NXDOMAIN indicating that the domain name doesn't exist.
 
+### Custom Options
+
+##### Version History
+
+| Release | Modification                                    |
+| ------------ | ----------------------------------------------- |
+| 3.3.1   | `dns-cache > custom-options` was introduced |
+
+The `custom-options` allows the user to configure additional dnsmasq options that are not exposed as support configuration options.
+
+```config {10-13}
+config
+
+    authority
+
+        router  router
+            name       router
+
+            dns-cache
+
+                custom-options  domain-needed
+                    name   domain-needed
+                    value  yes
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+| Config   | Description                          |
+| -------- | ------------------------------------ |
+| name     | The name of the dnsmasq option     |
+| value    | The value of the option              |
+
+:::warning
+The `custom-option` is added to the dnsmasq config file; any invalid option could prevent the application from starting up.
+:::
+
+
 ## Third Party Software and Licenses
 - dnsmasq (GNU GPL v2, v3)
 
@@ -176,6 +216,21 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 :::warning
 The plugin must be updated to version 3.2.1 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
+
+### Release 3.3.1
+
+**Release Date:** Apr 29, 2022
+
+#### New Features and Improvements
+
+- **PLUGIN-1208** Enhance DNS Cache Plugin with An Advanced field
+
+Added support for new custom dnsmasq options that are otherwise not provided via direct configuration.
+
+#### Issues Fixed
+- **PLUGIN-1707** dns-cache service stops working
+
+  _**Resolution:**_ The salt states were made more robust to handle certain failure conditions better. In addition, the router will monitor the status of the dns service and restart it as necessary.
 
 ### Release 3.2.2
 
