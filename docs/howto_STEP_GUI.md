@@ -26,7 +26,7 @@ The **Originating Router** selector determines which router document is shown in
 
 Items in the tables are selectable and will display additional detail screens. 
 
-**Routes:** Displays all service routes for the selected router (Router Context).
+**Routes:** Displays all service routes for the selected router (Router Context). These routes are computed by the router based on the topology information received from the STEP repository as shown on the LSDB tab.
 
 - Summary view: Shows a high level summary of the service routes known to the router selected in the Router Context. Includes Node Name, Service Name, IP Prefix, number of paths, and the Best Path for each.
 
@@ -34,10 +34,10 @@ Items in the tables are selectable and will display additional detail screens.
 
 ![Routes Detail View](/img/howto_step_gui_routeDetails.png)
 
-**Client:** Step client details for the selected router based upon the STEP router documents. 
+**Client:** STEP client details for the selected router. Provides information about the connection to the one or two STEP repositories in the authority. 
 
 ![Client View](/img/howto_step_gui_client.png)
 
-**Server:** The server residing on the conductor. Displays the server connections to each router, including session state, and status. The STEP router document can be downloaded from this location as well. 
+**Server:** The server residing on the conductor. Displays the server connections to each router, including session state, and status. Any STEP router documents received by the server can be downloaded from this location as well. 
 
 ![Server Details View](/img/howto_step_gui_server.png)

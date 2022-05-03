@@ -12,7 +12,7 @@ sidebar_label: STEP High Availability
 
 To achieve STEP repository high availability, the conductor is placed in an HA configuration. Each of the two conductor nodes hosts a STEP repository, and both nodes are active. All routers in the authority are connected to both repositories. Each router sends and recieves STEP router document updates from both repositories, providing redundancy in case one of the repositories becomes unavailable. Each router uses existing secure communication channels to the conductor nodes to exchange STEP information.
 
-To configure STEP repository High Availability, specify the IP addresses of both conductor nodes as STEP repositories:
+To configure STEP repository High Availability, [enable STEP](config_STEP.md#enable-step) on each conductor, and then specify the IP addresses of both conductor nodes as STEP repositories:
 
 ```
 config

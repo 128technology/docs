@@ -17,6 +17,7 @@ config authority
         description "STEP Repository on the Conductor"
     exit
 ```
+When configuring STEP repositories for high availability, the above configuration must be created on both repositories. See [STEP Repository High Availability](config_step_ha.md) for more information. 
 
 ### Configuring Peer Path Advertisement Settings
 
