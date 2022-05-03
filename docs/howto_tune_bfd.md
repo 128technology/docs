@@ -3,17 +3,17 @@ title: Tuning BFD Settings
 sidebar_label: Tuning BFD
 ---
 
-The BFD protocol is defined in [RFC 5880](https://tools.ietf.org/html/rfc5880), which describes the basics of its state machine. When two 128T routers are configured to be peered together, they will begin to send BFD packets to each other over each peer path in order to establish peer reachability (using UDP port 1280). The state will be "down" until a three-way BFD handshake occurs, in which case the state will transition to become "up."
+The BFD protocol is defined in [RFC 5880](https://tools.ietf.org/html/rfc5880), which describes the basics of its state machine. When two SSR routers are configured to be peered together, they will begin to send BFD packets to each other over each peer path in order to establish peer reachability (using UDP port 1280). The state will be "down" until a three-way BFD handshake occurs, in which case the state will transition to become "up."
 
-Throughout the life cycle of the BFD peering relationship between 128T routers, two different kinds of BFD operating modes are used:
+Throughout the life cycle of the BFD peering relationship between SSR routers, two different kinds of BFD operating modes are used:
 
 - BFD asynchronous control mode
 
 - BFD echo mode
 
-### 128T Peer BFD Settings
+### SSR Peer BFD Settings
 
-For a given peering relationship between 128T routers, the following settings are available:
+For a given peering relationship between SSR routers, the following settings are available:
 ```
   bfd
       state                       enabled
@@ -29,9 +29,9 @@ For a given peering relationship between 128T routers, the following settings ar
 
 ### Asynchronous Control Mode
 
-Asynchronous control mode messages are used between 128T router peers to establish and maintain peering state. In other words, it is the exchange of these messages that determine if a peer is up or down. These messages are exchanged between router waypoints, with both routers periodically transmitting async mode messages to their peers, as well as expecting to receive and process async mode messages from their peers.
+Asynchronous control mode messages are used between SSR router peers to establish and maintain peering state. In other words, it is the exchange of these messages that determine if a peer is up or down. These messages are exchanged between router waypoints, with both routers periodically transmitting async mode messages to their peers, as well as expecting to receive and process async mode messages from their peers.
 
-The following BFD settings influence how a 128T uses async mode messages:
+The following BFD settings influence how an SSR uses async mode messages:
 
 ```
 desired-tx-interval
@@ -39,9 +39,9 @@ required-min-rx-interval
 multiplier
 ```
 
-These settings are used in a negotiation between two 128T peers over a given peer path. They are used in determining precisely when each router should send, and expect to receive async control mode messages. They are also used in determining the length of time that must pass without receiving messages from a peer, before that peer is deemed to be "down."
+These settings are used in a negotiation between two SSR peers over a given peer path. They are used in determining precisely when each router should send, and expect to receive async control mode messages. They are also used in determining the length of time that must pass without receiving messages from a peer, before that peer is deemed to be "down."
 
-The below setting on a 128T router communicates to its peer how often (in milliseconds) the router wishes to transmit BFD async mode packets:
+The below setting on an SSR router communicates to its peer how often (in milliseconds) the router wishes to transmit BFD async mode packets:
 
 ```
 desired-tx-interval
@@ -49,7 +49,7 @@ desired-tx-interval
 
 In other words, "*I'd like to send to you at this interval.*"
 
-The below setting on a 128T router communicates to its peer the minimum interval (in milliseconds) between BFD async mode packets that it is capable of receiving:
+The below setting on an SSR router communicates to its peer the minimum interval (in milliseconds) between BFD async mode packets that it is capable of receiving:
 
 ```
 required-min-rx-interval
@@ -57,9 +57,9 @@ required-min-rx-interval
 
 In other words, "*don't send to me at less than this interval.*"
 
-Once the 128T routers establish communication with each other, each peer gains knowledge of the intervals their peer wishes to transmit async control mode messages to them at, as well as the minimum intervals the peer is able to receive at. Based on this knowledge, they will each begin to transmit async control mode messages at either their own `desired-tx-interval` time or their peers `required-min-rx-interval` time, whichever is greater.
+Once the SSR routers establish communication with each other, each peer gains knowledge of the intervals their peer wishes to transmit async control mode messages to them at, as well as the minimum intervals the peer is able to receive at. Based on this knowledge, they will each begin to transmit async control mode messages at either their own `desired-tx-interval` time or their peers `required-min-rx-interval` time, whichever is greater.
 
-The below setting goes into a calculation for a 128T router to determine how long it should go without receiving an async mode packet from it's peer, before it declares it "down":
+The below setting goes into a calculation for an SSR router to determine how long it should go without receiving an async mode packet from it's peer, before it declares it "down":
 
 ```
 multiplier
@@ -73,9 +73,9 @@ If both router peers use the default settings above, you should expect to see th
 
 ### Damping
 
-BFD is used to detect path failures between routers. BFD notifies the load-balancer and other peer-path observers when there is packet loss between peering routers, or if the link fails. In many cases it becomes critical to minimize session failovers to prevent the session from oscillating between paths, to reduce unnecessary changes to routing tables, prevent consumption of valuable system resources, and avert needless convergence impact. 128T routers have a hold down timer that can be configured to prevent BFD from making immediate updates until the timer has expired. This method works well when the characteristic of the link is well known and a predetermined value can be assigned to the timer.
+BFD is used to detect path failures between routers. BFD notifies the load-balancer and other peer-path observers when there is packet loss between peering routers, or if the link fails. In many cases it becomes critical to minimize session failovers to prevent the session from oscillating between paths, to reduce unnecessary changes to routing tables, prevent consumption of valuable system resources, and avert needless convergence impact. SSR routers have a hold down timer that can be configured to prevent BFD from making immediate updates until the timer has expired. This method works well when the characteristic of the link is well known and a predetermined value can be assigned to the timer.
 
-In cases where link characteristics change or are unpredictable, the 128T router can dynamically adjust BFD notification periods and reduce excessive notifications to clients. This prevents unnecessary instability in the network, minimizing unnecessary failovers and flapping links. 
+In cases where link characteristics change or are unpredictable, the SSR router can dynamically adjust BFD notification periods and reduce excessive notifications to clients. This prevents unnecessary instability in the network, minimizing unnecessary failovers and flapping links. 
 
 Simple BFD damping (hold-down timer) is enabled by default, and can be disabled by an administrator. Dynamic BFD Damping is enabled by an administrator using the `dynamic-damping` configuration field. 
 
@@ -85,7 +85,7 @@ Simple BFD damping (hold-down timer) is enabled by default, and can be disabled 
 
 **Maximum Hold Down Timer:** The maximum amount of time that BFD must wait before it begins notifications. This timer only applies when BFD damping is enabled. The default value for this is 3600s (or 1 hour). The network administrator may configure this to be any value higher than the initial`hold-down-time`.
 
-**Dynamic Damping:** Disabled by default. When enabled, the 128T router uses the `hold-down-time` and `maximum-hold-down-time` parameters to dynamically adjust the damping timer to ensure that excessive BFD flaps are not affecting the system negatively. This prevents the effect of oscillations, or flapping, caused by BFD and underperforming (or volatile) links. It ensures stability of the entire network and reduces the events requiring the network administrator's attention.
+**Dynamic Damping:** Disabled by default. When enabled, the SSR router uses the `hold-down-time` and `maximum-hold-down-time` parameters to dynamically adjust the damping timer to ensure that excessive BFD flaps are not affecting the system negatively. This prevents the effect of oscillations, or flapping, caused by BFD and underperforming (or volatile) links. It ensures stability of the entire network and reduces the events requiring the network administrator's attention.
 
 | Element | Parent Configuration | Type | Values |
 | --- | --- | --- | --- |
@@ -124,9 +124,9 @@ If damping is disabled, the configured `hold-down-time` will be used with the cu
 
 ### Echo Mode
 
-Echo mode messages are used between 128T router peers to measure path quality, including jitter, packet loss, and latency (JPL). Echo mode messages are transmitted from one router to its peer, which simply echoes them back to the originating router. In contrast to async control mode messages, which are conversations between peer BFD agents, echo mode messages are one router's conversation with itself via its router peer, over a specific peer path.
+Echo mode messages are used between SSR router peers to measure path quality, including jitter, packet loss, and latency (JPL). Echo mode messages are transmitted from one router to its peer, which simply echoes them back to the originating router. In contrast to async control mode messages, which are conversations between peer BFD agents, echo mode messages are one router's conversation with itself via its router peer, over a specific peer path.
 
-The below sets how often (in seconds) a 128T router will perform a test of path quality using BFD echo mode messages:
+The below sets how often (in seconds) an SSR router will perform a test of path quality using BFD echo mode messages:
 
 ```
 link-test-interval

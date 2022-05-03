@@ -340,6 +340,9 @@ show stats aggregate-session by-device-interface [device-interface <device-inter
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-device-interface-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) |
+| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-device-interface-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
 | [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
 | [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
 | [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
@@ -3014,6 +3017,81 @@ show stats aggregate-session by-device-interface tcp-bad-flag-combinations-rever
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats aggregate-session by-device-interface tcp-duplicate-acks`
+
+Total number of TCP duplicate ACKs and window updates for active sessions (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-device-interface tcp-duplicate-acks [device-interface <device-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-interface | The name of the device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-device-interface tcp-duplicate-acks-forward`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-device-interface tcp-duplicate-acks-forward [device-interface <device-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-interface | The name of the device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-device-interface tcp-duplicate-acks-reverse`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-device-interface tcp-duplicate-acks-reverse [device-interface <device-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-interface | The name of the device interface generating this metric (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats aggregate-session by-device-interface tcp-invalid-state-transitions`
 
 Total TCP invalid state transitions detected for active sessions (packets per second)
@@ -3416,7 +3494,7 @@ show stats aggregate-session by-device-interface tcp-resets-transmitted-reverse 
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions`
 
-Total TCP data retransmissions for active sessions (retransmissions per second)
+Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -3441,7 +3519,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions [device-int
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-received`
 
-Total number of TCP data retransmissions received for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -3466,7 +3544,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-received [d
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-received-forward`
 
-Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -3491,7 +3569,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-received-fo
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-received-reverse`
 
-Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -3516,7 +3594,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-received-re
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-transmitted`
 
-Total number of TCP data retransmissions sent for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -3541,7 +3619,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-transmitted
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-transmitted-forward`
 
-Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -3566,7 +3644,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-transmitted
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-transmitted-reverse`
 
-Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -3724,6 +3802,9 @@ show stats aggregate-session by-network-interface [network-interface <network-in
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-network-interface-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-network-interface-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-network-interface-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) |
+| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-network-interface-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
 | [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-network-interface-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
 | [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-network-interface-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
 | [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
@@ -3740,13 +3821,13 @@ show stats aggregate-session by-network-interface [network-interface <network-in
 | [`tcp-resets-transmitted`](#show-stats-aggregate-session-by-network-interface-tcp-resets-transmitted) | Total TCP resets sent for active sessions (resets per second) |
 | [`tcp-resets-transmitted-forward`](#show-stats-aggregate-session-by-network-interface-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
 | [`tcp-resets-transmitted-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions) | Total TCP data retransmissions for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-received) | Total number of TCP data retransmissions received for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions sent for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions) | Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-received) | Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-network-interface-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second) |
 
 ## `show stats aggregate-session by-network-interface bandwidth`
 
@@ -6398,6 +6479,81 @@ show stats aggregate-session by-network-interface tcp-bad-flag-combinations-reve
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats aggregate-session by-network-interface tcp-duplicate-acks`
+
+Total number of TCP duplicate ACKs and window updates for active sessions (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-network-interface tcp-duplicate-acks [network-interface <network-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-network-interface tcp-duplicate-acks-forward`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-network-interface tcp-duplicate-acks-forward [network-interface <network-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-network-interface tcp-duplicate-acks-reverse`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-network-interface tcp-duplicate-acks-reverse [network-interface <network-interface>] [since <since>] [force] [router <router>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| network-interface | The name of the network interface generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats aggregate-session by-network-interface tcp-invalid-state-transitions`
 
 Total TCP invalid state transitions detected for active sessions (packets per second)
@@ -6800,7 +6956,7 @@ show stats aggregate-session by-network-interface tcp-resets-transmitted-reverse
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions`
 
-Total TCP data retransmissions for active sessions (retransmissions per second)
+Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -6825,7 +6981,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions [network-i
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-received`
 
-Total number of TCP data retransmissions received for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -6850,7 +7006,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-received [
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-received-forward`
 
-Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -6875,7 +7031,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-received-f
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-received-reverse`
 
-Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -6900,7 +7056,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-received-r
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-transmitted`
 
-Total number of TCP data retransmissions sent for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -6925,7 +7081,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-transmitte
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-transmitted-forward`
 
-Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -6950,7 +7106,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-transmitte
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-transmitted-reverse`
 
-Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -7109,6 +7265,9 @@ show stats aggregate-session by-node [since <since>] [force] [router <router>] [
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-node-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-node-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-node-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-node-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) |
+| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-node-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-node-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
 | [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-node-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
 | [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-node-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
 | [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-node-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
@@ -7125,13 +7284,13 @@ show stats aggregate-session by-node [since <since>] [force] [router <router>] [
 | [`tcp-resets-transmitted`](#show-stats-aggregate-session-by-node-tcp-resets-transmitted) | Total TCP resets sent for active sessions (resets per second) |
 | [`tcp-resets-transmitted-forward`](#show-stats-aggregate-session-by-node-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
 | [`tcp-resets-transmitted-reverse`](#show-stats-aggregate-session-by-node-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-node-tcp-retransmissions) | Total TCP data retransmissions for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-node-tcp-retransmissions-received) | Total number of TCP data retransmissions received for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-node-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-node-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-node-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions sent for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-node-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-node-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-node-tcp-retransmissions) | Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-node-tcp-retransmissions-received) | Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-node-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-node-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-node-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-node-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-node-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second) |
 
 ## `show stats aggregate-session by-node bandwidth`
 
@@ -9808,6 +9967,81 @@ show stats aggregate-session by-node tcp-bad-flag-combinations-reverse [since <s
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats aggregate-session by-node tcp-duplicate-acks`
+
+Total number of TCP duplicate ACKs and window updates for active sessions (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-node tcp-duplicate-acks [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-node tcp-duplicate-acks-forward`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-node tcp-duplicate-acks-forward [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-node tcp-duplicate-acks-reverse`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-node tcp-duplicate-acks-reverse [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats aggregate-session by-node tcp-invalid-state-transitions`
 
 Total TCP invalid state transitions detected for active sessions (packets per second)
@@ -10210,7 +10444,7 @@ show stats aggregate-session by-node tcp-resets-transmitted-reverse [since <sinc
 
 ## `show stats aggregate-session by-node tcp-retransmissions`
 
-Total TCP data retransmissions for active sessions (retransmissions per second)
+Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -10235,7 +10469,7 @@ show stats aggregate-session by-node tcp-retransmissions [since <since>] [force]
 
 ## `show stats aggregate-session by-node tcp-retransmissions-received`
 
-Total number of TCP data retransmissions received for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -10260,7 +10494,7 @@ show stats aggregate-session by-node tcp-retransmissions-received [since <since>
 
 ## `show stats aggregate-session by-node tcp-retransmissions-received-forward`
 
-Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -10285,7 +10519,7 @@ show stats aggregate-session by-node tcp-retransmissions-received-forward [since
 
 ## `show stats aggregate-session by-node tcp-retransmissions-received-reverse`
 
-Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -10310,7 +10544,7 @@ show stats aggregate-session by-node tcp-retransmissions-received-reverse [since
 
 ## `show stats aggregate-session by-node tcp-retransmissions-transmitted`
 
-Total number of TCP data retransmissions sent for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -10335,7 +10569,7 @@ show stats aggregate-session by-node tcp-retransmissions-transmitted [since <sin
 
 ## `show stats aggregate-session by-node tcp-retransmissions-transmitted-forward`
 
-Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -10360,7 +10594,7 @@ show stats aggregate-session by-node tcp-retransmissions-transmitted-forward [si
 
 ## `show stats aggregate-session by-node tcp-retransmissions-transmitted-reverse`
 
-Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -10518,6 +10752,9 @@ show stats aggregate-session by-service [service <service>] [since <since>] [for
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-service-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-service-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-service-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-service-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) |
+| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-service-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-service-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
 | [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
 | [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
 | [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
@@ -10534,13 +10771,13 @@ show stats aggregate-session by-service [service <service>] [since <since>] [for
 | [`tcp-resets-transmitted`](#show-stats-aggregate-session-by-service-tcp-resets-transmitted) | Total TCP resets sent for active sessions (resets per second) |
 | [`tcp-resets-transmitted-forward`](#show-stats-aggregate-session-by-service-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
 | [`tcp-resets-transmitted-reverse`](#show-stats-aggregate-session-by-service-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-tcp-retransmissions) | Total TCP data retransmissions for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-tcp-retransmissions-received) | Total number of TCP data retransmissions received for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-service-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-service-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions sent for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-service-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-service-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-tcp-retransmissions) | Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-tcp-retransmissions-received) | Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-service-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-service-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-service-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-service-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second) |
 
 ## `show stats aggregate-session by-service bandwidth`
 
@@ -13268,6 +13505,84 @@ show stats aggregate-session by-service tcp-bad-flag-combinations-reverse [servi
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats aggregate-session by-service tcp-duplicate-acks`
+
+Total number of TCP duplicate ACKs and window updates for active sessions (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service tcp-duplicate-acks [service <service>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-service tcp-duplicate-acks-forward`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service tcp-duplicate-acks-forward [service <service>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-service tcp-duplicate-acks-reverse`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service tcp-duplicate-acks-reverse [service <service>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service | The name of the service generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats aggregate-session by-service tcp-invalid-state-transitions`
 
 Total TCP invalid state transitions detected for active sessions (packets per second)
@@ -13683,7 +13998,7 @@ show stats aggregate-session by-service tcp-resets-transmitted-reverse [service 
 
 ## `show stats aggregate-session by-service tcp-retransmissions`
 
-Total TCP data retransmissions for active sessions (retransmissions per second)
+Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -13708,7 +14023,7 @@ show stats aggregate-session by-service tcp-retransmissions [service <service>] 
 
 ## `show stats aggregate-session by-service tcp-retransmissions-received`
 
-Total number of TCP data retransmissions received for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -13733,7 +14048,7 @@ show stats aggregate-session by-service tcp-retransmissions-received [service <s
 
 ## `show stats aggregate-session by-service tcp-retransmissions-received-forward`
 
-Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -13759,7 +14074,7 @@ show stats aggregate-session by-service tcp-retransmissions-received-forward [se
 
 ## `show stats aggregate-session by-service tcp-retransmissions-received-reverse`
 
-Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -13785,7 +14100,7 @@ show stats aggregate-session by-service tcp-retransmissions-received-reverse [se
 
 ## `show stats aggregate-session by-service tcp-retransmissions-transmitted`
 
-Total number of TCP data retransmissions sent for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -13810,7 +14125,7 @@ show stats aggregate-session by-service tcp-retransmissions-transmitted [service
 
 ## `show stats aggregate-session by-service tcp-retransmissions-transmitted-forward`
 
-Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -13836,7 +14151,7 @@ show stats aggregate-session by-service tcp-retransmissions-transmitted-forward 
 
 ## `show stats aggregate-session by-service tcp-retransmissions-transmitted-reverse`
 
-Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -13995,6 +14310,9 @@ show stats aggregate-session by-service-class [service-class <service-class>] [s
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-service-class-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-service-class-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-service-class-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-service-class-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) |
+| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-service-class-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-service-class-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
 | [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-class-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
 | [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-class-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
 | [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-class-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
@@ -14011,13 +14329,13 @@ show stats aggregate-session by-service-class [service-class <service-class>] [s
 | [`tcp-resets-transmitted`](#show-stats-aggregate-session-by-service-class-tcp-resets-transmitted) | Total TCP resets sent for active sessions (resets per second) |
 | [`tcp-resets-transmitted-forward`](#show-stats-aggregate-session-by-service-class-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
 | [`tcp-resets-transmitted-reverse`](#show-stats-aggregate-session-by-service-class-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions) | Total TCP data retransmissions for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-received) | Total number of TCP data retransmissions received for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions sent for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions) | Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-received) | Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-service-class-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second) |
 
 ## `show stats aggregate-session by-service-class bandwidth`
 
@@ -16745,6 +17063,84 @@ show stats aggregate-session by-service-class tcp-bad-flag-combinations-reverse 
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats aggregate-session by-service-class tcp-duplicate-acks`
+
+Total number of TCP duplicate ACKs and window updates for active sessions (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service-class tcp-duplicate-acks [service-class <service-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service-class | The name of the service class generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-service-class tcp-duplicate-acks-forward`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service-class tcp-duplicate-acks-forward [service-class <service-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service-class | The name of the service class generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-service-class tcp-duplicate-acks-reverse`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service-class tcp-duplicate-acks-reverse [service-class <service-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service-class | The name of the service class generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats aggregate-session by-service-class tcp-invalid-state-transitions`
 
 Total TCP invalid state transitions detected for active sessions (packets per second)
@@ -17160,7 +17556,7 @@ show stats aggregate-session by-service-class tcp-resets-transmitted-reverse [se
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions`
 
-Total TCP data retransmissions for active sessions (retransmissions per second)
+Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -17185,7 +17581,7 @@ show stats aggregate-session by-service-class tcp-retransmissions [service-class
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-received`
 
-Total number of TCP data retransmissions received for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -17210,7 +17606,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-received [serv
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-received-forward`
 
-Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -17236,7 +17632,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-received-forwa
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-received-reverse`
 
-Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -17262,7 +17658,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-received-rever
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-transmitted`
 
-Total number of TCP data retransmissions sent for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -17287,7 +17683,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-transmitted [s
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-transmitted-forward`
 
-Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -17313,7 +17709,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-transmitted-fo
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-transmitted-reverse`
 
-Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -17472,6 +17868,9 @@ show stats aggregate-session by-service-group [service-group <service-group>] [s
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-service-group-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-service-group-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-service-group-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-service-group-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) |
+| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-service-group-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-service-group-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
 | [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-group-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
 | [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-group-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
 | [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-group-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
@@ -17488,13 +17887,13 @@ show stats aggregate-session by-service-group [service-group <service-group>] [s
 | [`tcp-resets-transmitted`](#show-stats-aggregate-session-by-service-group-tcp-resets-transmitted) | Total TCP resets sent for active sessions (resets per second) |
 | [`tcp-resets-transmitted-forward`](#show-stats-aggregate-session-by-service-group-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
 | [`tcp-resets-transmitted-reverse`](#show-stats-aggregate-session-by-service-group-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions) | Total TCP data retransmissions for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-received) | Total number of TCP data retransmissions received for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions sent for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions) | Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-received) | Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-service-group-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second) |
 
 ## `show stats aggregate-session by-service-group bandwidth`
 
@@ -20222,6 +20621,84 @@ show stats aggregate-session by-service-group tcp-bad-flag-combinations-reverse 
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats aggregate-session by-service-group tcp-duplicate-acks`
+
+Total number of TCP duplicate ACKs and window updates for active sessions (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service-group tcp-duplicate-acks [service-group <service-group>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service-group | The name of the service group generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-service-group tcp-duplicate-acks-forward`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service-group tcp-duplicate-acks-forward [service-group <service-group>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service-group | The name of the service group generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-service-group tcp-duplicate-acks-reverse`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service-group tcp-duplicate-acks-reverse [service-group <service-group>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service-group | The name of the service group generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats aggregate-session by-service-group tcp-invalid-state-transitions`
 
 Total TCP invalid state transitions detected for active sessions (packets per second)
@@ -20637,7 +21114,7 @@ show stats aggregate-session by-service-group tcp-resets-transmitted-reverse [se
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions`
 
-Total TCP data retransmissions for active sessions (retransmissions per second)
+Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -20662,7 +21139,7 @@ show stats aggregate-session by-service-group tcp-retransmissions [service-group
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-received`
 
-Total number of TCP data retransmissions received for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -20687,7 +21164,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-received [serv
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-received-forward`
 
-Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -20713,7 +21190,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-received-forwa
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-received-reverse`
 
-Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -20739,7 +21216,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-received-rever
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-transmitted`
 
-Total number of TCP data retransmissions sent for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -20764,7 +21241,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-transmitted [s
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-transmitted-forward`
 
-Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -20790,7 +21267,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-transmitted-fo
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-transmitted-reverse`
 
-Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -20949,6 +21426,9 @@ show stats aggregate-session by-service-route [service-route <service-route>] [s
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-service-route-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-service-route-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-service-route-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-service-route-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) |
+| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-service-route-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-service-route-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
 | [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-service-route-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
 | [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-service-route-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
 | [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-service-route-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
@@ -20965,13 +21445,13 @@ show stats aggregate-session by-service-route [service-route <service-route>] [s
 | [`tcp-resets-transmitted`](#show-stats-aggregate-session-by-service-route-tcp-resets-transmitted) | Total TCP resets sent for active sessions (resets per second) |
 | [`tcp-resets-transmitted-forward`](#show-stats-aggregate-session-by-service-route-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
 | [`tcp-resets-transmitted-reverse`](#show-stats-aggregate-session-by-service-route-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions) | Total TCP data retransmissions for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-received) | Total number of TCP data retransmissions received for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions sent for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions) | Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-received) | Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-service-route-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second) |
 
 ## `show stats aggregate-session by-service-route bandwidth`
 
@@ -23699,6 +24179,84 @@ show stats aggregate-session by-service-route tcp-bad-flag-combinations-reverse 
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats aggregate-session by-service-route tcp-duplicate-acks`
+
+Total number of TCP duplicate ACKs and window updates for active sessions (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service-route tcp-duplicate-acks [service-route <service-route>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service-route | The name of the service route generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-service-route tcp-duplicate-acks-forward`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service-route tcp-duplicate-acks-forward [service-route <service-route>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service-route | The name of the service route generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-service-route tcp-duplicate-acks-reverse`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-service-route tcp-duplicate-acks-reverse [service-route <service-route>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| service-route | The name of the service route generating this metric (comma-separated list) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats aggregate-session by-service-route tcp-invalid-state-transitions`
 
 Total TCP invalid state transitions detected for active sessions (packets per second)
@@ -24114,7 +24672,7 @@ show stats aggregate-session by-service-route tcp-resets-transmitted-reverse [se
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions`
 
-Total TCP data retransmissions for active sessions (retransmissions per second)
+Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -24139,7 +24697,7 @@ show stats aggregate-session by-service-route tcp-retransmissions [service-route
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-received`
 
-Total number of TCP data retransmissions received for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -24164,7 +24722,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-received [serv
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-received-forward`
 
-Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -24190,7 +24748,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-received-forwa
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-received-reverse`
 
-Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -24216,7 +24774,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-received-rever
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-transmitted`
 
-Total number of TCP data retransmissions sent for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -24241,7 +24799,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-transmitted [s
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-transmitted-forward`
 
-Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -24267,7 +24825,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-transmitted-fo
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-transmitted-reverse`
 
-Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -24426,6 +24984,9 @@ show stats aggregate-session by-tenant [tenant <tenant>] [since <since>] [force]
 | [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-tenant-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-tenant-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-tenant-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-tenant-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) |
+| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-tenant-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-tenant-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
 | [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-tenant-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
 | [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-tenant-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
 | [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-tenant-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
@@ -24442,13 +25003,13 @@ show stats aggregate-session by-tenant [tenant <tenant>] [since <since>] [force]
 | [`tcp-resets-transmitted`](#show-stats-aggregate-session-by-tenant-tcp-resets-transmitted) | Total TCP resets sent for active sessions (resets per second) |
 | [`tcp-resets-transmitted-forward`](#show-stats-aggregate-session-by-tenant-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
 | [`tcp-resets-transmitted-reverse`](#show-stats-aggregate-session-by-tenant-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions) | Total TCP data retransmissions for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-received) | Total number of TCP data retransmissions received for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions sent for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions) | Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-received) | Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-tenant-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second) |
 
 ## `show stats aggregate-session by-tenant bandwidth`
 
@@ -27176,6 +27737,84 @@ show stats aggregate-session by-tenant tcp-bad-flag-combinations-reverse [tenant
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats aggregate-session by-tenant tcp-duplicate-acks`
+
+Total number of TCP duplicate ACKs and window updates for active sessions (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-tenant tcp-duplicate-acks [tenant <tenant>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| tenant | The name of the tenant generating this metric (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-tenant tcp-duplicate-acks-forward`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-tenant tcp-duplicate-acks-forward [tenant <tenant>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| tenant | The name of the tenant generating this metric (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats aggregate-session by-tenant tcp-duplicate-acks-reverse`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats aggregate-session by-tenant tcp-duplicate-acks-reverse [tenant <tenant>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| tenant | The name of the tenant generating this metric (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats aggregate-session by-tenant tcp-invalid-state-transitions`
 
 Total TCP invalid state transitions detected for active sessions (packets per second)
@@ -27591,7 +28230,7 @@ show stats aggregate-session by-tenant tcp-resets-transmitted-reverse [tenant <t
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions`
 
-Total TCP data retransmissions for active sessions (retransmissions per second)
+Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -27616,7 +28255,7 @@ show stats aggregate-session by-tenant tcp-retransmissions [tenant <tenant>] [si
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-received`
 
-Total number of TCP data retransmissions received for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -27641,7 +28280,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-received [tenant <ten
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-received-forward`
 
-Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -27667,7 +28306,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-received-forward [ten
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-received-reverse`
 
-Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -27693,7 +28332,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-received-reverse [ten
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-transmitted`
 
-Total number of TCP data retransmissions sent for active sessions (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second)
 
 #### Usage
 
@@ -27718,7 +28357,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-transmitted [tenant <
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-transmitted-forward`
 
-Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second)
 
 #### Usage
 
@@ -27744,7 +28383,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-transmitted-forward [
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-transmitted-reverse`
 
-Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second)
 
 #### Usage
 
@@ -28139,6 +28778,8 @@ show stats app-id applications [since <since>] [force] [router <router>] [node <
 | [`sessions`](#show-stats-app-id-applications-sessions) | Statistics for &#x27;sessions&#x27; |
 | [`tcp-bad-flag-combinations-forward`](#show-stats-app-id-applications-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
 | [`tcp-bad-flag-combinations-reverse`](#show-stats-app-id-applications-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
+| [`tcp-duplicate-acks-forward`](#show-stats-app-id-applications-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-app-id-applications-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
 | [`tcp-invalid-state-transitions-forward`](#show-stats-app-id-applications-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
 | [`tcp-invalid-state-transitions-reverse`](#show-stats-app-id-applications-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
 | [`tcp-out-of-order-forward`](#show-stats-app-id-applications-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
@@ -28149,8 +28790,8 @@ show stats app-id applications [since <since>] [force] [router <router>] [node <
 | [`tcp-resets-received-reverse`](#show-stats-app-id-applications-tcp-resets-received-reverse) | Total TCP resets received for active sessions in the reverse direction (resets per second) |
 | [`tcp-resets-transmitted-forward`](#show-stats-app-id-applications-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
 | [`tcp-resets-transmitted-reverse`](#show-stats-app-id-applications-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
-| [`tcp-retransmission-packets-received-reverse`](#show-stats-app-id-applications-tcp-retransmission-packets-received-reverse) | TCP retransmission packets received in the reverse direction |
-| [`tcp-retransmission-packets-transmitted-forward`](#show-stats-app-id-applications-tcp-retransmission-packets-transmitted-forward) | TCP retransmission packets transmitted in the forward direction |
+| [`tcp-retransmission-packets-received-reverse`](#show-stats-app-id-applications-tcp-retransmission-packets-received-reverse) | TCP retransmission packets and out of order packets received in the reverse direction |
+| [`tcp-retransmission-packets-transmitted-forward`](#show-stats-app-id-applications-tcp-retransmission-packets-transmitted-forward) | TCP retransmission packets and out of order packets transmitted in the forward direction |
 | [`time-to-first-data-packet`](#show-stats-app-id-applications-time-to-first-data-packet) | Stats pertaining to the time of the first data packet |
 | [`tracked-next-hops`](#show-stats-app-id-applications-tracked-next-hops) | Current number of applications tracked per client per next-hop (next-hops) |
 
@@ -28737,6 +29378,66 @@ show stats app-id applications tcp-bad-flag-combinations-reverse [netintf <netin
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats app-id applications tcp-duplicate-acks-forward`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-duplicate-acks-forward [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats app-id applications tcp-duplicate-acks-reverse`
+
+Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second)
+
+#### Usage
+
+```
+show stats app-id applications tcp-duplicate-acks-reverse [netintf <netintf>] [application <application>] [client <client>] [next-hop <next-hop>] [traffic-class <traffic-class>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| application | The application name or IP+port if the application cannot be resolved (comma-separated list) |
+| client | The IP address of a client (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop | The next hop being used (comma-separated list) |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| traffic-class | The traffic class for which this metric was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats app-id applications tcp-invalid-state-transitions-forward`
 
 Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
@@ -29039,7 +29740,7 @@ show stats app-id applications tcp-resets-transmitted-reverse [netintf <netintf>
 
 ## `show stats app-id applications tcp-retransmission-packets-received-reverse`
 
-TCP retransmission packets received in the reverse direction
+TCP retransmission packets and out of order packets received in the reverse direction
 
 #### Usage
 
@@ -29069,7 +29770,7 @@ show stats app-id applications tcp-retransmission-packets-received-reverse [neti
 
 ## `show stats app-id applications tcp-retransmission-packets-transmitted-forward`
 
-TCP retransmission packets transmitted in the forward direction
+TCP retransmission packets and out of order packets transmitted in the forward direction
 
 #### Usage
 

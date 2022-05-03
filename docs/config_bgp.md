@@ -1,30 +1,30 @@
 ---
-title: Configuring BGP
-sidebar_label: Configuring BGP
+title: Border Gateway Protocol (BGP)
+sidebar_label: BGP
 ---
 
 The Border Gateway Protocol (BGP) is a standard exterior gateway protocol developed for exchanging routing and reachability information between Autonomous Systems, a collection of IP routing prefixes managed by a single administrative entity. BGP makes routing decisions based on paths and network policies; although historically mainly seen in service provider networks, it is now gaining acceptance in large enterprise networks. BGP can also be used for routing within an autonomous system as an interior gateway protocol; when doing so it is referred to as iBGP.
 
-Learning routes from BGP simplifies enterprise configuration and integration with Secure Vector Routing. In this configuration guide we will also discuss a 128T-specific feature referred to as "BGP over SVR" (or BGPoSVR), which combines the power of Secure Vector Routing with the rich feature set of the BGP protocol.
+Learning routes from BGP simplifies enterprise configuration and integration with Secure Vector Routing. In this configuration guide we will also discuss a SSR-specific feature referred to as "BGP over SVR" (or BGPoSVR), which combines the power of Secure Vector Routing with the rich feature set of the BGP protocol.
 
 ### Prerequisites
 
-This section presumes that the reader has a running 128T system and wants to add configuration to support BGP. The running 128T system should already include configuration for basic platform functionality (e.g., `router`, `node`, `device-interface`, `network-interface`) and basic 128T modeling configuration (e.g., tenants, services, etc.). Refer to the [Element Reference](config_reference_guide.md) section of our documentation for a better understanding about basics of the 128T data model.
+This section presumes that you have a running SSR system and wants to add configuration to support BGP. The running SSR system should already include configuration for basic platform functionality (e.g., `router`, `node`, `device-interface`, `network-interface`) and basic SSR modeling configuration (e.g., tenants, services, etc.). Refer to the [Element Reference](config_reference_guide.md) section of our documentation for a better understanding about basics of the SSR data model.
 
-### Peering with non-128T Routers
+### Peering with non-SSR Routers
 
-The BGP configuration exists in the [`routing`](config_reference_guide.md#routing) configuration container within the 128T data model. For any routing configuration, static or dynamic, a default routing instance called `default-instance` must be defined in the 128T configuration.
+The BGP configuration exists in the [`routing`](config_reference_guide.md#routing) configuration container within the SSR data model. For any routing configuration, static or dynamic, a default routing instance called `default-instance` must be defined in the SSR configuration.
 
 In this example we will assume that BGP is configured on the peering router with IP address 1.1.1.1, as autonomous system number (ASN) 6000. 
 
-1. To peer the 128T router with this router, configure BGP on our 128T using the following commands:
+1. To peer the SSR with this router, configure BGP on our SSR using the following commands:
 
 ```
 admin@branchoffice1.seattlesite1# config auth
 admin@branchoffice1.seattlesite1 (authority)# router seattlesite1 
 admin@branchoffice1.seattlesite1 (router[name=seattlesite1])# routing default-instance
 ```
-Every 128T router (in this case, the router named `seattlesite1`), contains all of its legacy routing protocol information within the `default-instance` routing container.
+Every SSR router (in this case, the router named `seattlesite1`), contains all of its legacy routing protocol information within the `default-instance` routing container.
 ```
 admin@branchoffice1.seattlesite1 (routing[type=default-instance])# routing-protocol bgp
 ```
@@ -44,7 +44,7 @@ admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# exit
 ```
 Address families are also sometimes referred to as "AFI-SAFI" (pronounced "affy-saffy"), which is an Address Family Indicator plus Sub-Address Family Indicator. 
 
-4. Configure the `neighbor`. In the example here, we've identified its IP address as `1.1.1.1` and its ASN as 6000. (Because this neighbor has a different ASN than the 128T, the 128T will recognize it as an eBGP peer rather than an iBGP peer.) An `address-family` of `ipv4-unicast`, lets the 128T know to exchange IPv4 unicast routes with the peer.
+4. Configure the `neighbor`. In the example here, we've identified its IP address as `1.1.1.1` and its ASN as 6000. (Because this neighbor has a different ASN than the SSR, the SSR will recognize it as an eBGP peer rather than an iBGP peer.) An `address-family` of `ipv4-unicast`, lets the SSR know to exchange IPv4 unicast routes with the peer.
 
 ```
 admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# neighbor 1.1.1.1
@@ -55,7 +55,7 @@ admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])#exit
 admin@branchoffice1.seattlesite1 (neighbor[neighbor-address=1.1.1.1])# exit
 ```
 
-5. Set `next-hop-self` to `true.` During advertisement, non-directly connected routers need to learn how to reach an advertised route. To provide this information to the non-directly connected (as well as iBGP peers), next-hop-self command is used. This will cause the 128T to rewrite the `next-hop` information in the routes it advertises to this peer to be its own address.
+5. Set `next-hop-self` to `true.` During advertisement, non-directly connected routers need to learn how to reach an advertised route. To provide this information to the non-directly connected (as well as iBGP peers), next-hop-self command is used. This will cause the SSR to rewrite the `next-hop` information in the routes it advertises to this peer to be its own address.
 
 :::note
 In the example above, we've set our router's AS to 100. This will apply to all neighbors as the "default" AS it will advertise. You can override this on a per-neighbor basis by setting `local-as` within the `neighbor` configuration to a different value. However, *you must not configure the same value within the neighbor as you've already set in your global configuration*. This may cause issues when attempting to establish a peering relationship.
@@ -121,9 +121,9 @@ admin@branchoffice1.seattlesite1 (routing-protocol[type=bgp])# redistribute conn
 ```
 
 ## BGP over SVR (BGPoSVR)
-Use BGP over SVR when peering with a 128T to gain the benefit of Secure Vector Routing for all BGP traffic flowing to-and-from the 128T peers. 
+Use BGP over SVR when peering with an SSR to gain the benefit of Secure Vector Routing for all BGP traffic flowing to-and-from the SSR peers. 
 
-This procedure assumes that the 128T system is configured for basic platform functionality. Refer to the configuration example below for context.
+This procedure assumes that the SSR system is configured for basic platform functionality. Refer to the configuration example below for context.
 
 To configure BGP over SVR:
 
@@ -226,7 +226,7 @@ admin@branchoffice1.seattlesite1#
 ```
 
 ### Verifying the BGP Configuration
-Use `show bgp` to see the overview of the BGP routing process on the 128T:
+Use `show bgp` to see the overview of the BGP routing process on the SSR:
 
 ```
 admin@branchoffice1.seattlesite1# show bgp
@@ -433,11 +433,11 @@ If the BGP peering session does not form, use packet capture to view the local B
 
 ## Routing Features
 
-This section contains various features supported by the 128T's BGP implementation.
+This section contains various features supported by the SSR's BGP implementation.
 
-### Configuring 128T as a Route Reflector
+### Configuring SSR as a Route Reflector
 
-While configuring iBGP, you may need to enable the **Route Reflector** capability to facilitate easy learning of routes. Your 128T can be configured as a route reflector for a particular neighbor or more realistically a set of neighbors, also known as a route reflector client(s). This can be configured in the route reflector router's BGP config, under the respective neighbor object.
+While configuring iBGP, you may need to enable the **Route Reflector** capability to facilitate easy learning of routes. Your SSR can be configured as a route reflector for a particular neighbor or more realistically a set of neighbors, also known as a route reflector client(s). This can be configured in the route reflector router's BGP config, under the respective neighbor object.
 
 ```
 admin@branchoffice1.seattlesite1# config auth

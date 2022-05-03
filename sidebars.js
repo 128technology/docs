@@ -166,9 +166,11 @@ module.exports = {
     "Security": [
       "sec_adaptive_encrypt",
     ],
-    "STEP": [
-     "concepts_STEP",
-     "config_STEP",
+    "Service and Topology Exchange Protocol (STEP)": [
+        "config_STEP",
+        "config_step_ha",
+        "howto_STEP_GUI",
+        "ts_step",
     ],
     "Services and Service Policies":[
       "bcp_service_and_service_policy_design",

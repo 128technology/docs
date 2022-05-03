@@ -33,7 +33,7 @@ Examples:
 
 ### Stopping the SSR Software
 
-Before upgrading the SSR Software, use the following procedure to stop the the software.
+Before upgrading the SSR Software from the PCLI, use the following procedure to stop the the software.
 
 1. Launch a Linux shell window.
 2. Execute the command: 
@@ -77,7 +77,7 @@ For systems with both primary and secondary conductors, it is a best practice to
 Use the [Interactive Installer](#upgrading-using-the-interactive-installer) procedure to upgrade the conductor from a linux shell. 
 
 ## Upgrading a Router 
-Use the following procedures to upgrade a Router from either the GUI or the PCLI.
+Use the following procedures to upgrade a Router.
 
 :::note
 The Router software version cannot be higher than the software version installed on the Conductor.
@@ -103,6 +103,27 @@ As an administrator-level user, log into the conductor's PCLI.
 The conductor's _automated provisioner_ will upgrade both nodes in a high availability router in series to minimize/avoid downtime. Despite this, it is still recommended to perform upgrade activity during periods of low traffic or maintenance windows.
 
 ### Upgrade using the Conductor's GUI
+
+Beginning with the 5.6.0 release of the SSR software, router upgrades are performed from the Software Lifecycle panel.
+
+![Software Lifecycle Panel](/img/intro_upgrading_swlifecycle.png)
+
+1. Navigate to the Routers page.
+2. At the top of the page, select Software Lifecycle.
+3. To being the upgrade process, select Initiate Upgrade.
+4. Select Download and a version from the dropdown.
+5. Select the router or routers where the software will be downloaded from the router list. 
+6. Click start. 
+7. When the download process completes, return to the Software Lifecycle panel and select upgrade, the version, the router, and finally the Start button.
+The upgrade will run to completion with no interaction necessary. 
+
+#### Lifecycle History
+
+To view the install history for your routers, selecting Lifecycle History displays all versions downloaded and installed, and the operation status. 
+
+#### Legacy Upgrades
+
+Use the steps below to download and upgrade SSR software if you are running versions earlier than 5.6.0.
 
 Similar to the process for upgrading using the PCLI, the upgrade process using the GUI is done in two stages: *download* and *upgrade*.
 
