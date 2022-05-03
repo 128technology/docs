@@ -111,6 +111,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-45268 Third-party-drivers rpm install hung:** Resolved an issue where the installation hangs when running a post-install scriptlet. The script is not necessary at that stage and has been disabled.
 ------
 - **I95-45348 Update salt master and minion to 3002.8:** This update resolves several CVE's and requires that the conductor must be running this release containing these fixes **before** upgrading a router. 
+**Important** Please see the Caveat below for additional important information about HA upgrades.
 ------
 - **I95-45374 Router Dropping SIP traffic:** Provide a warning if users configure a service-class to rate-limit but don't set max-flow-burst/max-flow-rate values (default is set to 0).
 ------
@@ -121,3 +122,10 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-45696 Memory leak in pam challenge library:** Resolved a memory leak in the PAM challenge library. 
 ------
 - **I95-45816 "TCP State Stream Parse Error" filling up the flpp.log:** This log issue has been addressed. 
+
+## Caveats
+
+- **I95-45348: Update salt master and minion to 3002.8:** When upgrading an HA pair to version 5.6.0, please be aware of the following: While updating the conductors in an HA pair, the upgraded conductor node asset state will remain DISCONNECTED if the active `automatedProvisioner` is not running a corrected version. When performing an HA conductor upgrade the node running the oldest software assumes leadership. However, the older version will not be able to talk to the new software on the upgraded conductor. 
+
+The active `automatedProvisioner` can be determined by running the command `show system processes`. Once the upgrade begins on the old node, the newly upgraded conductor takes over. Upon completion of the upgrade
+
