@@ -18,6 +18,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_5.6",
           "release_notes_128t_5.5",
           "release_notes_128t_5.4",
           "release_notes_128t_5.3",
@@ -108,6 +109,8 @@ module.exports = {
     "Access Management and Authentication": [
       "config_access_mgmt",
       "config_ldap",
+      "config_radius",
+      "config_password_policies",
     ],
     "CLI and Element Reference": [
       "concepts_pcli",
@@ -120,8 +123,6 @@ module.exports = {
       "config_templates",
       "config_RBAC",
       "config_asset_connection_resiliency",
-      "config_bgp",
-      "config_ospf",
       "config_audit_event",
       "config_dhcp",
       "config_dns_proxy",
@@ -129,13 +130,11 @@ module.exports = {
       "config_management_over_forwarding",
       "config_flow_perf_mon",
       "config_gre_tunnel",
-      "config_in-memory_metrics",
       "config_nat",
       "howto_config_PPPoE",
       "config_service_health",
       "config_snmp",
       "config_snmp_metrics",
-      "config_static_hostname_mapping", 
       "config_transport_encryption",   
     ],
     "Ethernet Over SVR": [
@@ -163,6 +162,19 @@ module.exports = {
     "Mist Integration": [
       "config_wan_assurance",
     ],
+    "Metrics": [
+      "concepts_metrics",
+      "config_in-memory_metrics",
+    ],
+    "NTP": [
+     "config_ntp_auth",
+    ],
+    "Optimizing Routing Protocols": [
+      "howto_tune_bfd",
+      "config_bgp",
+      "config_ospf", 
+      "config_bfd", 
+    ],
     "Security": [
       "sec_adaptive_encrypt",
     ],
@@ -174,6 +186,7 @@ module.exports = {
     ],
     "Services and Service Policies":[
       "bcp_service_and_service_policy_design",
+      "config_static_hostname_mapping",
       "bcp_service-policy_defaults",
     ],
     "Traffic Engineering":[
@@ -195,6 +208,7 @@ module.exports = {
       "ts_forwarding_resource_pools",
       "ts_logs",
       "ts_mac_uniqueness",
+      "ts_step",
       "ts_t1_troubleshooting",
       "ts_troubleshooting_vrf",
       "config_asset_connection_resiliency",
@@ -227,7 +241,6 @@ module.exports = {
       "howto_maintenance_mode",
       "howto_ms365",
       "howto_trusted_ca_certificate",
-      "howto_tune_bfd",
     ],
     "Best Practices": [
       "bcp_att_avpn_configuration",
@@ -244,8 +257,7 @@ module.exports = {
       "concepts_kni",
       "concepts_linux_host_networking",
       "concepts_network_planes",
-      "concepts_metadata",
-      "concepts_metrics",
+      "concepts_metadata",      
       "concepts_machine_communication",
       "concepts_session_timer",
       "concepts_waypoint_ports",
