@@ -3,7 +3,7 @@ title: Configuring In-Memory Metrics
 sidebar_label: In-Memory Metrics
 ---
 
-Support for persisting in-memory 128T metrics allows you historical access to longer term system measurements. The feature also provides greater control over which combinations of those in-memory metrics should be persisted and for how long.
+Support for persisting in-memory SSR metrics allows historical access to longer term system measurements. The feature also provides greater control over which combinations of those in-memory metrics are persisted and for how long.
 
 ## Metrics Profile
 
@@ -11,7 +11,7 @@ To use In-Memory Metrics, specify the metrics intended for persistence as part o
 
 ### Metrics
 
-An individual metric indicates one 128T metric to be part of the profile. Each profile must contain at least one metric to be valid. The metric’s ID matches the description in the REST API/Swagger documentation for the statistic.
+An individual metric indicates one SSR metric to be part of the profile. Each profile must contain at least one metric to be valid. The metric’s ID matches the description in the REST API/Swagger documentation for the statistic.
 
 ### Filters
 
@@ -63,7 +63,7 @@ config
 exit
 ```
 
-When the above profile is referenced by a router, the various reachability metrics are persisted but only for the `internet` service and `best-effort` traffic-class. These metrics are available as time-series from the GraphQL API or in the GUI.
+When the above profile is referenced by a router, the various reachability metrics are persisted only for the `internet` service and `best-effort` traffic-class. These metrics are available as time-series from the GraphQL API or in the GUI.
 
 ### Profile References
 
