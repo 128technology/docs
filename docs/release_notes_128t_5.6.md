@@ -121,6 +121,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-45696 Memory leak in pam challenge library:** Resolved a memory leak in the PAM challenge library. 
 ------
+- **I95-45761 SSH ClientAliveInterval change:** The SSH `ClientAliveInterval` has been reset to 900.
+------
 - **I95-45816 "TCP State Stream Parse Error" filling up the flpp.log:** This log issue has been addressed. 
 
 ## Caveats
