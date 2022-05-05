@@ -16,17 +16,17 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
-- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 ------
 - **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
-- **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
+- **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. The Installer typically prompts you update when a new version is available. Select **Update** when prompted.
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
 ## Release 5.4.5-6
 
-**Release Date: April 22, 2022**
+**Release Date: May 11, 2022**
 
 ### Resolved Issues
 
@@ -56,13 +56,23 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44985 Update salt-minion minimum version to resolve CVEs:** This issue has been resolved. 
 ------
+- **I95-44991 SSR not passing Aruba data on GRE Tunnels:** Resolved an issue where GRE packets with a reserved bit in the header are incorrectly dropped as invalid.
+------
 - **I95-45063 SSR Azure instances unstable on large machine types:** Resolved an issue with Mellanox5 after upgrading the SSR to 5.4.
 ------
 - **I95-45094 Unnecessary rotation of salt minion config:** Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.
 ------
 - **I95-45211 New users run into permissions errors:** Access Control Lists are now preserved on file rotations.
 ------
+- **I95-45489 `ifcfg` custom options issues:** Resolved an issue where  interface ifcfg option changes were not being processed.
+------
+- **I95-45583 HA Connection lost during commit:** Resolved an issue where session was missing necessary path data information relating to the peer path.
+------
 - **I95-45618 Issue with MAC address in Azure environment:** Resolved this issue by handling non-ethernet MAC addresses during MLX device discovery.
+------
+- **I95-45783 User home directores are different across the network topology:** Resolved an issue where findUser was hitting a "User not Found" error and exiting.
+------
+- **I95-45799 Monitoring Agent Service Fix:** Updated the Monitoring Agent to include the latest updates. 
 
 ## Release 5.4.4-9
 
