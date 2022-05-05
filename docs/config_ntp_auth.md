@@ -3,6 +3,11 @@ title: NTP Authentication
 sidebar_label: NTP Authentication
 ---
 
+#### Version History
+| Release | Modification                |
+| ------- | --------------------------- |
+| 5.6.0   | NTP Authentication introduced |
+
 Support for NTP authentication allows external NTP servers to be authenticated using an `md5` or `sha1` hash, allowing the SSR to verify the identity of the server being used for NTP time synchronization.
 
 To allow the NTP client to synchronize with an authenticated server the following information must be provided:
