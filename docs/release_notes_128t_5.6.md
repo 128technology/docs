@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.6.0-1
 
-**Release Date:** May 11, 2022
+**Release Date:** May 13, 2022
 
 ### New Features
 
@@ -82,11 +82,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-41992 Warning for Rate-Limit with Flow-Limit values at 0:** A warning has been added to advise users that this will cause dropped packets.
 ------
+- **I95-43239 LTE APN on Modem not set up correctly:** The APN is now always written to the the modem using the default index of 1. 
+------
 - **I95-44142 Automated Provisioner Race condition:** Resolved a rare crash where applications would attempt to get information about already-closed sockets when responding to API requests.
 ------
 - **I95-44435 Save Tech Support should include Service Paths:** `save tech-support-info` includes `show service-path` and `show rib`.
 ------
-- **I95-44772 Time series HMAC failures after rebooting node in HA router:** Device interfaces are flushed upon becoming active to avoid handling of packets which have been delayed due to inactivity.
+- **I95-44722 Time series HMAC failures after rebooting node in HA router:** Device interfaces are flushed upon becoming active to avoid handling of packets which have been delayed due to inactivity.
 ------
 - **I95-44823 Conductor upgrade failure - extra space in integer is invalid:** Extra spaces on integer types are now trimmed off to avoid this issue.
 ------
@@ -119,9 +121,17 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-45583 HA Connection lost during commit:** Resolved an issue where  session was missing necessary path data information relating to the peer path.
 ------
+- **I95-45618 MAC address issue in Azure environment:** Non-ethernet MAC addresses are now handled correctly during MLX device discovery.
+------
+- **I95-45643 User created users missing after upgrade:** Resolved an issue where the XML values true/false are also handled as 1/0.
+------
 - **I95-45696 Memory leak in pam challenge library:** Resolved a memory leak in the PAM challenge library. 
 ------
+- **I95-45779 LDAP user login blocked during HA upgrade:** Resolved an issue where the LDAP user login was blocked until the upgrade was complete on both HA conductors.
+------
 - **I95-45761 SSH ClientAliveInterval change:** The SSH `ClientAliveInterval` has been reset to 900.
+------
+- **I95-45783 User home directories different across the topology during upgrade:** Resolved an issue with incorrect LDAP user roles during upgrade.
 ------
 - **I95-45816 "TCP State Stream Parse Error" filling up the flpp.log:** This log issue has been addressed. 
 
