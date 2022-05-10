@@ -11,21 +11,21 @@ sidebar_label: Using the STEP GUI
 
 Use the STEP Configuration Settings button on the Configuration Home panel to set basic STEP configuration parameters.
 
-![STEP Configuration Home](img/howto_stepgui_config.png)
+<img src="/img/howto_stepgui_config.png" alt="STEP Configuration Home" width="300" height="200" />
 
 To configure STEP settings from the GUI, enter information into the fields as shown.
 
-![STEP Settings](img/howto_stepgui_config2.png)
+![STEP Settings](/img/howto_stepgui_config2.png)
 
 ### Add a STEP Repository
 
 Click ADD and enter the IP address of the STEP repository. 
 
-![New STEP Repo](img/howto_stepgui_config3.png)
+<img src="/img/howto_stepgui_config3.png" alt="New STEP Repo" width="400" height="150" />
 
 Enter the Basic STEP Repository information.
 
-![Basic STEP Repo](img/howto_stepgui_config4.png)
+![Basic STEP Repo](/img/howto_stepgui_config4.png)
 
 The default District settings  and Connection Settings are currently tied to default values and not configurable at this time. For information about configuring `step-peer-path-sla-metrics-advertisement` within the district settings, see [Router District Settings.](config_STEP.md#router-district-settings)
 
