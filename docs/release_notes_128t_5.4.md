@@ -66,6 +66,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-45489 `ifcfg` custom options issues:** Resolved an issue where  interface ifcfg option changes were not being processed.
 ------
+- **I95-45559 Corrupted `resolv.conf` after ODM imaging:** Resolved an issue on SSR systems running dns-proxy services with external interfaces configured using `PEERDNS=yes`, where a race condition may occur that results in corrupt nameservers being added to the `/etc/resolv.conf` file.
+------
 - **I95-45583 HA Connection lost during commit:** Resolved an issue where session was missing necessary path data information relating to the peer path.
 ------
 - **I95-45618 Issue with MAC address in Azure environment:** Resolved this issue by handling non-ethernet MAC addresses during MLX device discovery.
@@ -133,6 +135,20 @@ I95-40268, I95-41591, I95-41794, I95-41863, I95-42448, I95-43258, I95-43260, I95
 
 - **I95-44222 Commit fails for RBAC users with config-write permissions:** RBAC users with config-write permissions, but who do not have explicit write access to t128/ get a “failure to commit” message.
 	**_Workaround:_** Manually create a `commit` role and set the 128t:/ resource in the role. Add this role to users who need the ability to commit.	
+------
+- **I95-45559 Corrupted `resolv.conf` after ODM imaging:** On SSR systems running dns-proxy services with external interfaces configured using `PEERDNS=yes`, a race condition may occur that results in corrupt nameservers being added to the `/etc/resolv.conf` file.
+	
+	**_Workaround:_** A temporary workaround is to force an update of this file by either of the following methods:
+
+	- Perform a dummy modification of the file to force it to be updated:
+	  ```
+	  touch /etc/resolv.conf
+	  ```
+
+	- Restart 128T:
+	  ```
+	  systemctl restart 128T
+	  ```
 
 ## Release 5.4.3-8
 
