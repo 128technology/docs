@@ -7,6 +7,30 @@ sidebar_label: Using the STEP GUI
 | ------- | --------------------------- |
 | 5.6.0   | STEP GUI introduced |
 
+## STEP Configuration
+
+Use the STEP Configuration Settings button on the Configuration Home panel to set basic STEP configuration parameters.
+
+![STEP Configuration Home](img/howto_stepgui_config.png)
+
+To configure STEP settings from the GUI, enter information into the fields as shown.
+
+![STEP Settings](img/howto_stepgui_config2.png)
+
+### Add a STEP Repository
+
+Click ADD and enter the IP address of the STEP repository. 
+
+![New STEP Repo](img/howto_stepgui_config3.png)
+
+Enter the Basic STEP Repository information.
+
+![Basic STEP Repo](img/howto_stepgui_config4.png)
+
+The default District settings  and Connection Settings are currently tied to default values and not configurable at this time. For information about configuring `step-peer-path-sla-metrics-advertisement` within the district settings, see [Router District Settings.](config_STEP.md#router-district-settings)
+
+## STEP Tables
+
 For a graphical view of the information displayed in the PCLI, use the STEP GUI. Located in the Tools menu on the bottom left of the SSR GUI, clicking STEP and select a router to get a look into the STEP functionality.
 
 ![STEP GUI](/img/howto_step_gui1.png)

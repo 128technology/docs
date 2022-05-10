@@ -144,7 +144,7 @@ Note that the effective values are those in the adjacency. The adjacency configu
 If `moving-average-sample-size` or `significance-threshold` is not configured, the default values will be used. Likewise, if `increase-report-delay` or `decrease-report-delay` is not configured, the default configuration is in effect.
 
 ### Router District Settings
-The rate limit parameters for peer path SLA updates to the STEP router document can be configured for each router. The router can use different values on a per-district basis:
+The rate limit parameters for peer path SLA updates to the STEP router document can be configured for each router from within the default-district parameters:
 ```
 config
     authority
