@@ -63,6 +63,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44741 Initializer fails with empty global init:** Resolved an issue where the initializer would fail if the existing global.init was empty. 
 
+### Caveats
+
+- **I95-45946: Forwarding Plane Fault preventing packet forwarding:** Systems containing the Intel x553 NIC and running the IXGBE driver may stop forwarding packets due to an SSR forwarding plane fault. In configurations where data plane interfaces and non-forwarding interfaces such as management or high availability synchronization are mixed on the same IXBGE-based PCI device, a highway failure may prevent the non-forwarding interfaces from passing traffic. 
+
+	**Workaround:** Restart the SSR software. 
+
+	This issue has been found in earlier versions of the SSR software. Please use this workaround should you encounter this issue on an earlier release. 
+
 ## Release 5.1.8-1
 
 **Release Date:** January 18, 2022
