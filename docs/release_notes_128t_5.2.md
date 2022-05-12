@@ -43,6 +43,12 @@ Contains fixes from: [Release 5.1.5, August 13, 2021](release_notes_128t_5.1.md#
 - **I95-40335 Package dependency conflicts:** 5.2.2 supports the `vrsx-sfc` plugin. With this plugin, upgrading to 5.3.0 is not supported. If the system is upgraded to 5.3.0 with this plugin installed, the plugin dependencies will be removed and the features provided with this plugin will no longer function.
 ------
 - **I95-44608 Conductor Rollback:** In a High Availability configuration where release 5.1.7 or higher has been installed, and a rollback is necessary to a version less than 5.1.7, both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
+------
+- **I95-45946: Forwarding Plane Fault preventing packet forwarding:** Systems containing the Intel x553 NIC and running the IXGBE driver may stop forwarding packets due to an SSR forwarding plane fault. In configurations where data plane interfaces and non-forwarding interfaces such as management or high availability synchronization are mixed on the same IXBGE-based PCI device, a highway failure may prevent the non-forwarding interfaces from passing traffic. 
+
+	**Workaround:** Restart the SSR software. 
+
+	This issue has been found in earlier versions of the SSR software. Please use this workaround should you encounter this issue on an earlier release. 
 
 ## Release 5.2.1
 **Release Date:** July 20, 2021
