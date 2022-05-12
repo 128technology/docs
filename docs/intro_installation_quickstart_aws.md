@@ -7,11 +7,11 @@ sidebar_label: Installing in AWS
 
 This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in AWS. The process consists of the following steps:
 
-1. [selecting the AMI](#selecting-the-ami).
+1. [Selecting the AMI](#selecting-the-ami).
 2. Deploying a [Session Smart Conductor](#session-smart-conductor-deployment).
 3. Deploying a [Session Smart Router](#session-smart-router-deployment).
 
-Proceed to the next section [selecting the AMI](#selecting-the-ami).
+Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 #### Selecting the AMI
 
@@ -74,7 +74,7 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the AWS Console:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [selecting the AMI](#selecting-the-ami). 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
 Click on the “Continue to Configuration” button.
 In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
@@ -107,7 +107,7 @@ Be sure to change the password that conforms to your business' password requirem
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [selecting the AMI](#selecting-the-ami). 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
 Click on the “Continue to Configuration” button.
 In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
@@ -177,7 +177,7 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the AWS Console:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [selecting the AMI](#selecting-the-ami). 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
 Click on the “Continue to Configuration” button.
 In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
@@ -208,7 +208,7 @@ Once the deployment completes, information is provided in the Outputs tab:
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [selecting the AMI](#selecting-the-ami). 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
 Click on the “Continue to Configuration” button.
 In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
@@ -364,7 +364,7 @@ A description of the parameters of the template are listed in the following tabl
 
 ##### AWS Console
 
-Go to the **Session Smart Networking Platform** offering following the steps described in the section [selecting the AMI](#selecting-the-ami).
+Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
 Click on the “Continue to Configuration” button.
 In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
@@ -414,7 +414,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Go to the **Session Smart Networking Platform** offering following the steps described in the section [selecting the AMI](#selecting-the-ami).
+Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
 Click on the “Continue to Configuration” button.
 In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
@@ -459,7 +459,7 @@ A description of the parameters of the template are listed in the following tabl
 
 ##### AWS Console
 
-Go to the **Session Smart Networking Platform** offering following the steps described in the section [selecting the AMI](#selecting-the-ami).
+Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
 Click on the “Continue to Configuration” button.
 In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
@@ -512,7 +512,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Go to the **Session Smart Networking Platform** offering following the steps described in the section [selecting the AMI](#selecting-the-ami).
+Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
 Click on the “Continue to Configuration” button.
 In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
