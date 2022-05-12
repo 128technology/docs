@@ -2,6 +2,10 @@
 title: Supported NICs and Drivers
 sidebar_label: Supported NICs and Drivers
 ---
+:::note
+While Juniper has tested the following NICs, it does not guarantee compatibility of every NIC with every platform on every software release.
+:::
+
 ## Certified NICs and Drivers
 
 The following NICs and drivers have been tested and are certified by Juniper for use with the Session Smart Router (SSR).
