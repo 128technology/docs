@@ -29,7 +29,6 @@ module.exports = {
       "intro_install_quickstart_otpiso",
     ],
     "Cloud Installations": [
-      "intro_installation_aws",
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
       "intro_initialize_HA_conductor",
