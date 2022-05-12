@@ -9,7 +9,26 @@ This document describes the process for deploying a Highly Available Conductor i
 
 128 Technology is committed to providing the highest quality software with each release. As such, Critical Vulnerability Exposures (CVE) are continuously addressed, and security and administration best practices are enforced. Allowing SSH Root login has been identified as a significant vulnerability and has been mitigated. Additionally, all public cloud providers enforce SSH key-based authentication instead of password-based authentication. As a result of this stricter security posture, the process to deploy a Highly Available 128T Conductor in the public cloud requires additional steps during the Initialization procedure. Use the following procedure to successfully deploy an HA Conductor in the cloud. 
 
-To deploy a Conductor in High Availability, two VMs must be launched. In this document these are referred to as Node A and Node B.
+The process to deploy a highly available Conductor in the public cloud consists of the following steps:
+
+1. Launch two Session Smart Conductor VMs as described in the following links:
+
+* [AWS](intro_installation_quickstart_aws.md)
+* [Azure](intro_installation_azure.md)
+
+Click on the link of the public cloud provider where you want to perform the Session Smart Conductor HA deployment. In this document these Conductors are referred to as Node A and Node B respectively.
+
+2. If you have selected the Hourly or Private AWS AMI or Azure Plan during step 1, then proceed to step number 3. Otherwise refer to [Deploying the Primary Node Conductor – Node A](deploying-the-primary-node-conductor-–-node-a.md) to install the SSR software in Node A, and when completed proceed to step 4.
+ 
+3. Initialize the primary node of Conductor as described in the section [Configure Node A](#configure-node-a).
+
+4. If you have selected the Hourly or Private AWS AMI or Azure Plan during step 1, then proceed to step number 5. Otherwise refer to [Deploying the Primary Node Conductor – Node B](deploying-the-primary-node-conductor-–-node-b.md) to install the SSR software in Node B, and when completed proceed to step 6.
+
+5. Initialize the secondary node of Conductor as described in the section [Configure Node B](#configure-node-b).
+
+6. [Disable Password-based Authentication in the Primary Node](#disable-password-based-authentication-in-the-primary-node).
+
+7. [Validate the HA Conductor Deployment](#validate-the-ha-conductor-deployment).
 
 ## Deploying the Primary Node Conductor – Node A
 
@@ -29,8 +48,10 @@ If the software is already installed, launch the initializer from the command li
 	Once Node A has rebooted, you must perform the following steps to configure SSH key-based authentication. Please note the commands vary depending on the public cloud provider.
 
 5. Log in to the Node A VM via SSH and run the following commands, according to your public cloud provider.
-	- Azure: `sudo su - passwd (username of the VM)`
-	- AWS: `sudo su – passwd t128`
+	- Azure: `sudo su -`
+	         `passwd <username of the VM>`
+	- AWS: `sudo su –`
+	       `passwd t128`
 
 	When the password has been updated successfully the following message is displayed:
 
