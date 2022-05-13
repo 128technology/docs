@@ -5,7 +5,13 @@ sidebar_label: Installing in Azure
 
 ## Introduction
 
-This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure.
+This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in Azure. The process consists of the following steps:
+
+1. [Selecting the Azure plan"](#selecting-the-azure-plan).
+2. Deploying a [Session Smart Conductor](#session-smart-conductor-deployment).
+3. Deploying a [Session Smart Router](#session-smart-router-deployment).
+
+Proceed to the next section [Selecting the Azure plan"](#selecting-the-azure-plan).
 
 ## Selecting the Azure Plan
 
@@ -13,6 +19,8 @@ There are different Plans available for the Juniper Session Smart Networking Pla
 
 * Private Plan: For cases where there is no access to the SSR repositories (no internet connection) from the Azure environment where the software will be deployed, a Private image can be shared in the Azure Marketplace using your Azure subscription. To request access to a private plan, refer to [Requesting access to a Private plan](#requesting-access-to-a-private-plan) for additional information.
 * Hourly Plan: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Select the Hourly plan of the [Session Smart Networking Platform](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/juniper-networks.session-smart-networking-payg?tab=Overview) offering.
+
+Once you have selected the plan that better suits the needs of your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
 ### Requesting access to a Private plan
 
@@ -75,7 +83,7 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the Azure Portal:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan". 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan). 
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the tab "Plans + Pricing" as shown in the following picture:
@@ -113,7 +121,7 @@ Be sure to change the password that conforms to your business' password requirem
 
 To deploy the Session Smart Networking software via Azure CLI or PowerShell:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan".
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
@@ -139,6 +147,8 @@ Once the deployment completes, information is provided in the Outputs tab on the
 :::important
 Be sure to change the password that conforms to your business' password requirements and criteria.
 :::
+
+Proceed to the next section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
 ## Session Smart Router Deployment
 
@@ -176,7 +186,7 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the Azure Portal:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan".
+Click on the **Session Smart Networking Platform** offering selected during the previous section [selecting the Azure plan"](#selecting-the-azure-plan).
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the tab "Plans + Pricing" as shown in the following picture:
@@ -213,7 +223,7 @@ Once the deployment completes, information is provided in the Outputs tab on the
 
 To deploy the Session Smart Networking software via Azure CLI or Powershell:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan".
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan).
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the "Get started" button to enable programmatic deployment for the subscription and click the button "Save" to save the changes.
@@ -337,31 +347,6 @@ commit
 
 4. Azure gateways do not reply to ping, but you can verify connectivity by checking the ARP table on the SSR. Use `show arp` to display the ARP table, and look for **valid** entries. 
 
-### PCI Address Association
-
-In order to configure the SSR using pre-5.0 software, each device interface must be mapped to the corresponding PCI address. Use the following steps to identify the correct PCI address for each ethernet port. 
-
-1. Log in via SSH to the VM corresponding to the SSR as indicated in the Outputs section of the deployed template.
-2. Run the following command:
-
-```
-sudo dpdk-devbind.py --status
-```
-
-The PCI address is the first column under **Network devices using kernel driver** shown in the image below. The corresponding network interfaces follow the **if** parameter. 
-
-![DPDK PCI addresses](/img/platforms_azure_dpdk_pci.png)
-
-The following table clarifies the PCI mapping to each network interface. 
-
-| Network interface name | Subnet           | PCI address  |
-| ---------------------- | ---------------- | ------------ |
-| eth3                   | Management       | be6d:00:02.0 |
-| eth4                   | Public           | 8061:00:02.0 |
-| eth5                   | Private          | a994:00:02.0 |
-
-When configuring the managed SSR via its corresponding Conductor, use the PCI addresses to configure each device interface.
-
 ## Annexes
 
 ### Agree to the Terms of Use and the Privacy Policy
@@ -433,7 +418,7 @@ A description of the parameters of the template are listed in the following tabl
 
 ##### Azure Portal
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan". 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan). 
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the tab "Plans + Pricing" as shown in the following picture:
@@ -506,7 +491,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Go to the **Session Smart Networking Platform** offering following the steps described in the section "Selecting the Azure Plan".
+Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the Azure plan"](#selecting-the-azure-plan).
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the "Get started" button to enable programmatic deployment for the subscription.
@@ -561,7 +546,7 @@ A description of the parameters of the template are listed in the following tabl
 
 ##### Azure Portal
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section "Selecting the Azure Plan". 
+Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the Azure plan"](#selecting-the-azure-plan). 
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the tab "Plans + Pricing" as shown in the following picture:
@@ -658,7 +643,7 @@ and paste the following JSON content, please adjust the values to your specific 
 }
 ```
 
-Go to the **Session Smart Networking Platform** offering following the steps described in the section "Selecting the Azure Plan".
+Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the Azure plan"](#selecting-the-azure-plan).
 Click on the "Get it now" button.
 Agree to the terms of use and privacy policy of the image.
 Click on the "Get started" button to enable programmatic deployment for the subscription.
