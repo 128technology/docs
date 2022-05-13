@@ -28,23 +28,55 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date: May 11, 2022**
 
+### New Features
+
+- **I95-44847 PCLI Typo Corrections:** When a user incorrectly types a PCLI command or the name of a router or node, the error message now contains a suggestion of what command they might've wanted to run. These suggestions are seen in the form of `Did you mean ... ?`
+
 ### Resolved Issues
 
 - **I95-35228 DHCP waypoint addresses not displayed on standby node in UI:** Resolved an issue where the PCLI logic was not matching the GUI Network Interface table.
 ------
+- **I95-39274 DNS-based services kill asset connection resiliency:** Resolved an issue where an internal commit was bouncing the kni254 interface and causing a series of connection resets.
+------
+- **I95-40348 Unable to rename a router:** Increased the maximum message size so that the larger configuration changes can be processed correctly.
+------
+- **I95-41931 Peers show the IP address not the router name in the GUI:** This issue has been resolved, and both the IP address and router name are displayed. 
+------
+- **I95-42318 Broken symlink for plugins results in a highway crash:** Resolved the handling of a broken symlink for plugins, which was resulting in a failure to apply config and a highway crash.
+------
 - **I95-42818 Service Path Does not show DOWN when Reachability Probes Fail:** Resolved an issue with the state logic for the service path, causing the GUI to not return the same/correct information as the PCLI.
+------
+- **I95-43239 LTE APN on Modem not set up correctly:** The APN is now always written to the the modem using the default index of 1.
+------
+- **I95-43897 Planned failover did not work properly:** Resolved an issue where a waypoint missing from an internal database prevented failover.  
 ------
 - **I95-44029 FIB in GUI does not show Next Hops:** Updates have been made to the behavior of the Routing Details menu to display this information.
 ------
 - **I95-44142 Automated Provisioner race condition:** Resolved a rare crash where applications would attempt to get information about already-closed sockets when responding to API requests.
 ------
+- **I95-44424 Cannot set log level configured on remote router from conductor CLI:** This issue has been resolved.
+------
 - **I95-44425 `show service-paths` output frequently shows "Nothing to display" when there should be output:** This issue has been resolved.
+------
+- **I95-44443 NTP Server config not always picked up:** Resolved an issue where NTP configuration was changed but the backend would not take action on those changes.
+------
+- **I95-44534 Session Capture in GUI not working:** A Session Capture triggered from the GUI now creates a capture for new sessions traversing the same path as this session. 
+------
+- **I95-44554 Metadata packets may incorrectly pin flow affinity:** Worker core affinity latching has been prevented, resolving this issue. 
 ------
 - **I95-44568 VRRP interfaces both report "vrrp-standby" after provisional down of primary interface:** Resolved an issue when using `provisional-down` on the primary interface while reconfiguring `shared-phy` to `vrrp` causes a deadlock in the highway process.
 ------
 - **I95-44591 Paste-config does not allow small config snippets to be posted:** Resolved an issue where the list keys were not being passed in as part of the `value` in the transaction.
 ------
+- **I95-44618 CentOS package update:** This package has been updated to resolve a CVE issue.
+------
 - **I95-44722 Time based HMAC failure after HA reboot:** Resolved a buffering issue where device interfaces are now flushed upon becoming active to avoid handling of inactive packets.
+------
+- **I95-44726 Invalid return code returned by LTE firmware creating a memory leak:** Resolved a buffer leak in the wanpipe driver.
+------
+- **I95-44730 Export event history exports only last 30 minutes:** Resolved an issue where `time` was captured, but never updated. 
+------
+- **I95-44741 Initializer fails with empty global init:** Resolved an issue where the initializer would fail if the existing global.init was empty. 
 ------
 - **I95-44759 Unable to initiate SR-IOV interface when multiple cores running:** This issue has been resolved. 
 ------
@@ -62,7 +94,15 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-45094 Unnecessary rotation of salt minion config:** Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.
 ------
+- **I95-45146 GUI error message for users authenticated by LDAP to Active Directory Server:** This issue has been resolved.
+------
+- **I95-45164 Active peers show Unavailable for PATH-MTU, LATENCY, JITTER, LOSS & MOS for some transports:** Resolved a rare issue in the case of an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the non-compliant device's timeouts are incorrectly interpreted and the MTU becomes unresolvable.
+------
 - **I95-45211 New users run into permissions errors:** Access Control Lists are now preserved on file rotations.
+------
+- **I95-45372 Filters in the Routers Tab not working:** Resolved a logic issue with the GUI table.
+------
+- **I95-45462 128T-monitoring agent does not start automatically after upgrade to 5.4.4:** Updated the Monitoring Agent to resolve this issue. 
 ------
 - **I95-45489 `ifcfg` custom options issues:** Resolved an issue where  interface ifcfg option changes were not being processed.
 ------
@@ -72,7 +112,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-45618 Issue with MAC address in Azure environment:** Resolved this issue by handling non-ethernet MAC addresses during MLX device discovery.
 ------
-- **I95-45783 User home directores are different across the network topology:** Resolved an issue where findUser was hitting a "User not Found" error and exiting.
+- **I95-45641 Stuck BGPoSVR Sessions after Failover:** Made changes to provide updates to less specific FIB entries when routes are updated to resolve this issue. 
+------
+- **I95-45783 User home directores are different across the network topology:** Resolved an issue where findUser was hitting a "User not Found" error and exiting. 
 ------
 - **I95-45799 Monitoring Agent Service Fix:** Updated the Monitoring Agent to include the latest updates. 
 
