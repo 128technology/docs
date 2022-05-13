@@ -62,6 +62,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-44730 Export event history exports only last 30 minutes:** Resolved an issue where `time` was captured, but never updated. 
 ------
 - **I95-44741 Initializer fails with empty global init:** Resolved an issue where the initializer would fail if the existing global.init was empty. 
+------
+- **I95-45860 ISO update:** The `openssh-clients` has been updated in the ISO to address a CVE Security Vulnerability. 
 
 ### Caveats
 
