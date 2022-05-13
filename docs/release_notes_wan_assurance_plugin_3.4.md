@@ -5,7 +5,7 @@ sidebar_label: '3.4'
 
 ## Release 3.4.0
 
-**Release Data:** To be filled
+**Release Date:** May 13, 2022
 ### New Features
 - **WAN-667 Improve the connection diagnostics for MIST cloud**
 
