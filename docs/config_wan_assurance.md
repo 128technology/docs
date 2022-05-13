@@ -3,10 +3,10 @@ title: Configuring WAN Assurance
 sidebar_label: Configuring WAN Assurance
 ---
 
-Use the following process to onboard Session Smart Routers (SSR) to the Mist cloud. Since SSN software can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding. 
+Use the following process to onboard Session Smart Routers (SSR) to the Mist cloud. Since SSN software can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding.
 
 :::important
-Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR and Mist. 
+Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR and Mist.
 :::
 
 High Level Steps:
@@ -20,26 +20,26 @@ High Level Steps:
 
 This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist Wan Assurance.
 
-For detailed information about Mist WAN Assurance, please refer to the [Mist WAN Assurance documentation](https://www.juniper.net/us/en/products/cloud-services/wan-assurance.html). 
+For detailed information about Mist WAN Assurance, please refer to the [Mist WAN Assurance documentation](https://www.juniper.net/us/en/products/cloud-services/wan-assurance.html).
 
-1. Create an account on the [Mist portal](https://manage.mist.com/). 
+1. Create an account on the [Mist portal](https://manage.mist.com/).
 
-2. Create an organization for the authority. 
+2. Create an organization for the authority.
 
 - From the Mist menu on the left, select **Organization**, and select **Settings** from the menu.
 
     ![Organization Settings](/img/wan_org_settings.png)
 
-- In the Create Organization panel, enter a name for the Organization. 
+- In the Create Organization panel, enter a name for the Organization.
 
     ![Organization Panel](/img/wan_create_org.png)
 
     For additional information about creating an Organization, please refer to the Mist [Organization Config documentation](https://www.mist.com/documentation/category/organization-config/).
 
-3. Create one Site for each physical location for onboarding the SSRs. 
+3. Create one Site for each physical location for onboarding the SSRs.
 
     Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites. Other devices from the Juniper stack such as Mist APs, Switches, SRX, etc., should be onboarded and assigned to the same site as the SSR when possible. This provides a clean topology view of all devices running within a site.
-    
+
 - From the Mist menu on the left, select **Organization** and select **Site Configuration** from the menu.
 
     ![Site Configuration](/img/wan_org_site_config.png)
@@ -48,13 +48,13 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
 
     ![Site Button](/img/wan_create_site_button.png)
 
-- Use the New Site panel to configure a site. 
+- Use the New Site panel to configure a site.
 
     ![New Site Panel](/img/wan_new_site.png)
-    
-    For information about the fields used to create a site, please refer to the Mist [Site Configuration documenation](https://www.mist.com/documentation/category/site-configuration/). 
 
-4. Access the registration code for the organization. 
+    For information about the fields used to create a site, please refer to the Mist [Site Configuration documenation](https://www.mist.com/documentation/category/site-configuration/).
+
+4. Access the registration code for the organization.
 
 - From the Mist menu on the left, select **Organization > Inventory**.
 
@@ -68,11 +68,11 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
 
     ![Gateway Adoption](/img/wan_registration_code.png)
 
-- Click on **Copy to Clipboard**. 
+- Click on **Copy to Clipboard**.
 
-5. Return to the SSR and login to the conductor PCLI as an admin. 
+5. Return to the SSR and login to the conductor PCLI as an admin.
 
-6. Paste the registration code into the PCLI. 
+6. Paste the registration code into the PCLI.
 
 ```
     admin@node1.conductor1# configure authority mist-wan-assurance registration-code eyJ0eX
@@ -87,20 +87,20 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
 ```
 
 To enter the registration code in the SSR GUI, copy the text registration-code from the Mist portal (info above) and paste it under **Configuration > Authority > Mist WAN Assurance > Registration Code**.
-    
+
 ```
     config
-    
+
         authority
-    
+
             mist-wan-assurance
                 registration-code  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRjNGIwNzAiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1fdXJsIjoid3NzOi8vZXAtdGVybWluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjIyNzQ2MTc1LCJleHAiOjE2NTQyODIxNzV9.iDobxHQzKZkJyTd98jUoVFZrZet7ElvPQdsCdDFfAN0
             exit
         exit
     exit
-    
+
     *admin@node1.conductor1#
-    
+
 ```
 Committing the registration code enables WAN Assurance on all connected routers. If you only want WAN Assurance enabled on certain routers, please refer to [Skipping Specific Routers](#skipping-specific-routers) before committing the registration code information to the configuration.
 
@@ -114,7 +114,7 @@ Once a valid registration code is committed, registration is automatic. The cond
 
 A router or routers can be skipped during the Mist onboarding process. Change *authority > router > mist-wan-assurance > enabled* to `false`. The Conductor will skip the router and associated nodes (if it is an HA router).
 
-For a system that has completed the onboarding process, setting `mist-wan-assurance` to `false` will prevent telemetry data from being sent to the cloud. 
+For a system that has completed the onboarding process, setting `mist-wan-assurance` to `false` will prevent telemetry data from being sent to the cloud.
 
 :::note
 Disabling WAN Assurance does not automatically release the router from the cloud. See Releasing a Router for more information.
@@ -146,7 +146,7 @@ The SSR can be configured to receive LLDP packets from LAN interfaces. This info
 
 ### Gateway Insights
 
-Once onboarding is complete, the router begins streaming telemetry data. Data appears on the Mist portal after approximately 15 minutes. The Gateway Insights page provides a good starting point for viewing the analytics being streamed to the cloud. 
+Once onboarding is complete, the router begins streaming telemetry data. Data appears on the Mist portal after approximately 15 minutes. The Gateway Insights page provides a good starting point for viewing the analytics being streamed to the cloud.
 
 1. Select Gateways from the left side menu.
 2. On the Gateways page, select a site from the drop down.
@@ -156,7 +156,7 @@ Once onboarding is complete, the router begins streaming telemetry data. Data ap
 
 ### Application Insights & SLE
 
-To provide insights into the application, services, and some SLE functionality, enable `session-record`. It is recommended to enable session records for all the SSR services to provide a broad look at the application use.  
+To provide insights into the application, services, and some SLE functionality, enable `session-record`. It is recommended to enable session records for all the SSR services to provide a broad look at the application use.
 ```
 1    authority
 2        service             internet
@@ -176,7 +176,7 @@ To provide insights into the application, services, and some SLE functionality, 
 16            exit
 17        exit
 ```
-Additionally, configuring `application-identification` to `mode all` populates the Application Summary in the SSR GUI. Applications are grouped by Category or Clients, and can be further refined by using the following **view by** options: Bytes Recieved, Bytes Sent, Total Bytes. 
+Additionally, configuring `application-identification` to `mode all` populates the Application Summary in the SSR GUI. Applications are grouped by Category or Clients, and can be further refined by using the following **view by** options: Bytes Recieved, Bytes Sent, Total Bytes.
 
 ![Application Summary](/img/app_summary.png)
 
@@ -189,21 +189,49 @@ Use the following information to help identify or resolve issues configuring WAN
 ### Show Command
 The `show plugins state` command displays extensive information about the state of the plugin. Use the following command as a starting point for any troubleshooting.
 
+`show plugins state router <router name> summary 128T-mist-wan-assurance`
+
+##### Version History
+
+| Release      | Modification                                    |
+| ------------ | ----------------------------------------------- |
+| 3.4.0        | Additional diagnostics for connection down case was added |
+
+The `connection` column will display the current status of the device connection to the MIST cloud. When the connection is down, it will also display information useful to diagnose the connection issue.
+
+```
+admin@node1.office# show plugins state summary 128T-mist-wan-assurance
+Thu 2022-05-12 22:38:34 EDT
+✔ Retrieving state data...
+Target: node1.office
+
+============ ======================== ============== ================= =================== ============
+ Agent        Connection               128T           128T-mist-agent   Device-ID           Interfaces
+============ ======================== ============== ================= =================== ============
+ unassigned   down - no DNS response   5.5.0-43.el7   3.1.2666-1.el7    02-00-01-f3-39-eb            4
+
+Retrieved state data.
+Completed in 1.98 seconds
+admin@node1.office#
+```
+
+For additional troubleshooting information use the `detail` commands as shown below
+
 `show plugins state router <router name> detail 128T-mist-wan-assurance`
 
 ### Moving a Router
 
-In a situation where a router needs to be moved from one organization to another or physically relocated the router must be released and then re-onboarded. 
+In a situation where a router needs to be moved from one organization to another or physically relocated the router must be released and then re-onboarded.
 
 ### Releasing a Router
 
-The router must be released from both Mist and the SSN conductor. To release a router, use the following process. 
+The router must be released from both Mist and the SSN conductor. To release a router, use the following process.
 
 1. From the Mist GUI:
 
 * Go to **Organization > Inventory**.
 * Select the checkbox next to the router.
-* Click on the **More** drop down that appears on the top of the page. 
+* Click on the **More** drop down that appears on the top of the page.
 * Select **Release**.
 * Click on **Release** to confirm.
 
@@ -229,11 +257,11 @@ In the GUI:
 
 After a few minutes the router will be released and stop sending the data to the Mist cloud. Once that process is completed, disable the Mist WAN Assurance plugin on the router.
 
-![Disable MWA Plugin](/img/wana_disabled_mwa.png) 
+![Disable MWA Plugin](/img/wana_disabled_mwa.png)
 
 ### Re-Onboarding a Router
 
-To re-onboard a router, re-enable the plugin on the router. This triggers a reload of the registration code and the onboarding process. 
+To re-onboard a router, re-enable the plugin on the router. This triggers a reload of the registration code and the onboarding process.
 
 ![Enable MWA Plugin](/img/wana_enabled_mwa.png)
 
