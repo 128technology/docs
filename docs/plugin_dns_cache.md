@@ -217,6 +217,16 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 The plugin must be updated to version 3.2.1 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
+### Release 3.4.0
+
+**Release Date:** May 13, 2022
+
+#### New Features and Improvements
+
+- **PLUGIN-1611** Improve HA support for DNS based app-id
+
+The DNS cache plugin is enhanced to synchronize the cache between HA nodes to allow the DNS app-id plugin to consume and process DNS records on both nodes.
+
 ### Release 3.3.1
 
 **Release Date:** Apr 29, 2022
