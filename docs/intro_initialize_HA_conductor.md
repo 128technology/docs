@@ -18,11 +18,11 @@ The process to deploy a highly available Conductor in the public cloud consists 
 
 Click on the link of the public cloud provider where you want to perform the Session Smart Conductor HA deployment. In this document these Conductors are referred to as Node A and Node B respectively.
 
-2. If you have selected the Hourly or Private AWS AMI or Azure Plan during step 1, then proceed to step number 3. Otherwise refer to [Deploying the Primary Node Conductor – Node A](deploying-the-primary-node-conductor-–-node-a.md) to install the SSR software in Node A, and when completed proceed to step 4.
+2. If you have selected the Hourly or Private AWS AMI or Azure Plan during step 1, then proceed to step 3. Otherwise, refer to [Deploying the Primary Node Conductor – Node A](#deploying-the-primary-node-conductor--node-a) to install the SSR software in Node A. When completed, proceed to step 4.
  
 3. Initialize the primary node of Conductor as described in the section [Configure Node A](#configure-node-a).
 
-4. If you have selected the Hourly or Private AWS AMI or Azure Plan during step 1, then proceed to step number 5. Otherwise refer to [Deploying the Primary Node Conductor – Node B](deploying-the-primary-node-conductor-–-node-b.md) to install the SSR software in Node B, and when completed proceed to step 6.
+4. If you have selected the Hourly or Private AWS AMI or Azure Plan during step 1, then proceed to step 5. Otherwise, refer to [Deploying the Primary Node Conductor – Node B](#deploying-the-secondary-node-conductor--node-b) to install the SSR software in Node B. When completed, proceed to step 6.
 
 5. Initialize the secondary node of Conductor as described in the section [Configure Node B](#configure-node-b).
 
@@ -32,18 +32,18 @@ Click on the link of the public cloud provider where you want to perform the Ses
 
 ## Deploying the Primary Node Conductor – Node A
 
-If the 128T software is not already installed on the Node A VM, launch the 128T installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer.md). After the installation is complete, the system will restart and the initializer will launch automatically.
+If the SSR software is not already installed on the Node A VM, launch the SSR installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer.md). After the installation is complete, the system will restart and the initializer will launch automatically.
 
 If the software is already installed, launch the initializer from the command line using `initialize128t`.
 
 ### Configure Node A
-1. On the 128T Initializer Wizard, use the spacebar to select the Conductor role for the 128T node and press the Enter key to select OK.
+1. On the SSR Initializer Wizard, use the spacebar to select the Conductor role for the SSR node and press the Enter key to select OK.
 2. To configure Node A, select **1st HA Node HA peer is not set up** on the HA Setup screen, and OK. 
 
 	![HA Setup](/img/CloudHA_NodeA1.png)
 
 3. Enter the IP address of Node A that will be used as the HA sync interface.
-4. Continue with step 4 in the [Initialize the 128T Node](intro_installation_bootable_media.md#initialize-the-128t-node) procedure. After the initialization is complete, reboot Node A as instructed.
+4. Continue with step 4 in the [Initialize the SSR Node](intro_installation_bootable_media.md#initialize-the-ssr-node) procedure. After the initialization is complete, reboot Node A as instructed.
 
 	Once Node A has rebooted, you must perform the following steps to configure SSH key-based authentication. Please note the commands vary depending on the public cloud provider.
 
@@ -80,10 +80,10 @@ Node A is now ready to allow access to Node B in order to form the HA pair. The 
 
 ## Deploying the Secondary Node Conductor – Node B
 
-Log in to the Node B VM. If the 128T software is not already installed, launch the 128T installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer.md). After the installation is complete, the system will restart and the initializer will launch automatically.
+Log in to the Node B VM. If the SSR software is not already installed, launch the SSR installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer.md). After the installation is complete, the system will restart and the initializer will launch automatically.
 If the software is already installed, launch the initializer from the command line using `initialize128t.`
 
-1. On the 128T Initializer Wizard, use the space bar to select the Conductor role for the 128T node and press the Enter key to select OK.
+1. On the SSR Initializer Wizard, use the space bar to select the Conductor role for the SSR node and press the Enter key to select OK.
 2. To configure Node B, select **2nd HA Node HA peer is already set up** on the HA Setup screen, and **OK**.
 
 	![HA Setup](/img/CloudHA_NodeB1.png)
@@ -135,11 +135,11 @@ passwd -l t128
 
 ### Validate the HA Conductor Deployment
 
-When Node A has fully rebooted, both Node A and Node B will be synced. To validate the Conductor deployment is Highly Available, login to the 128 Technology Conductor CLI (pCLI) on Node A and run the command `show system connectivity`. If the status displays **Connected**, the HA setup has completed successfully.
+When Node A has fully rebooted, both Node A and Node B will be synced. To validate the Conductor deployment is Highly Available, login to the Conductor CLI (pCLI) on Node A and run the command `show system connectivity`. If the status displays **Connected**, the HA setup has completed successfully.
 
 ## Using the Azure Portal
 
-This section describes the process to deploy a 128T Conductor in HA using the Azure Portal.
+This section describes the process to deploy a SSR Conductor in HA using the Azure Portal.
 
 1. Begin with the section [Deploying the Primary Node Conductor – Node A](#deploying-the-primary-node-conductor--node-a).
 2. After Node A reboots, click on the name of the VM shown in the Azure Portal (Node A).
