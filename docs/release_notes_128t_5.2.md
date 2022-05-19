@@ -20,7 +20,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.2.3
 
-**Release Date:** May 20, 2022
+**Release Date:** May 19, 2022
 
 ### Resolved Issues
 
