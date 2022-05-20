@@ -146,6 +146,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-45783 User home directories different across the topology during upgrade:** Resolved an issue with incorrect LDAP user roles during upgrade.
 ------
 - **I95-45816 "TCP State Stream Parse Error" filling up the flpp.log:** This log issue has been addressed. 
+------
+- **I95-46093 IPSEC-NAT timeout default too low:** The IPSEC-NAT default timeout has been increased to 125 seconds. 
 
 ## Caveats
 
