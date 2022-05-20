@@ -90,4 +90,16 @@ Return to the Authority level, scroll down to Services, and click ADD.
 5. Click Validate, then Commit. 
 
 
+## Configure the SNMP Service Route
+
+The SNMP Service route is used for polling each SSR by the SNMP manager.
+
+Authority > Router > Service Routes
+From the Authority level, select the router.
+Scroll down to Service Routes and click ADD.
+Enter the New Service Route name; `snmp` and click SAVE.
+In the Service route Information pane, choose the snmp service route created earlier.
+Under 
+
+
 
