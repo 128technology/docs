@@ -5,19 +5,19 @@ import React from "react";
 // New entries should be placed at the top.
 // ----------------------------------------------------------------------------
 export const releases = [
+   {
+    version: '5.6.0',
+    url:'release_notes_128t_5.6',
+    releaseDate: 'May 20, 2022',
+    endOfMaintenance: 'February 20, 2023',
+    endOfSupport: 'August 20, 2023',
+  },
   {
     version: '5.4.5',
     url:'release_notes_128t_5.4#release-545-8',
     releaseDate: 'May 11, 2022',
     endOfMaintenance: 'December 18, 2022',
     endOfSupport: 'June 18, 2023',
-  },
- {
-    version: '5.6.0',
-    url:'release_notes_128t_5.6',
-    releaseDate: 'May 13, 2022',
-    endOfMaintenance: 'February 13, 2023',
-    endOfSupport: 'August 13, 2023',
   },
   {
     version: '5.1.9',
