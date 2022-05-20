@@ -2,13 +2,14 @@
 title: Open Shortest Path First (OSPF)
 sidebar_label: OSPF
 ---
-The goal of this guide is to provide guidance for implementing OSPF on the SSR Networking Platform. The OSPF feature enables a dynamic and flexible integration of SVR in customer networks.
-Open Shortest Path First (OSPF) is an interior gateway protocol (IGP) that is most often used to dynamically manage network routes in large enterprise network. It determines routes dynamically by obtaining information from other routers and advertising routes to other routers by way of Link State Advertisements (LSAs). The information gathered from the LSAs is used to construct a topology map of the network. This topology map is shared across routers in the network and used to populate the IP routing table with available routes.
+This section provides guidance for implementing OSPF on the SSR Networking Platform. The OSPF feature enables a dynamic and flexible integration of SVR in customer networks.
+
+Open Shortest Path First (OSPF) is an interior gateway protocol (IGP) that is most often used to dynamically manage network routes in large enterprise networks. It determines routes dynamically by obtaining information from other routers and advertising routes to other routers by way of Link State Advertisements (LSAs). The information gathered from the LSAs is used to construct a topology map of the network. This topology map is shared across routers in the network and used to populate the IP routing table with available routes.
 
 Learning routes from OSPF simplifies enterprise configuration and integration with Secure Vector Routing.
 
 ## Prerequisites
-This document presumes that the reader has a running SSR system and wants to add configuration to support OSPF. The running SSR system includes configuration for basic platform functionality (e.g., router, node, device-interface, network-interface) and basic routing configuration (e.g., tenants, services, etc.).
+This document presumes you have a running SSR system and want to add configuration to support OSPF. The running SSR system includes configuration for basic platform functionality (e.g., router, node, device-interface, network-interface) and basic routing configuration (e.g., tenants, services, etc.).
 
 ## OSPF Configuration
 As with BGP and static routes, the OSPF configuration exists within the routing configuration container in the SSR data model. First, we’ll configure the OSPF “instance” and give it the instance-id of 1.
@@ -90,7 +91,7 @@ use-learned-routes
 ![OSPF Topology](/img/config_ospf.png)
 
 ## Configuration Verification
-Several “show” commands are available in the PCLI to display information about the state of the OSP protocol. In addition to the “show ospf” branch of output, you will now see contributions to the RIB from OSPF in the output of “show rib”.
+Several `show` commands are available in the PCLI to display information about the state of the OSP protocol. In addition to the `show ospf` branch of output, you will also see contributions to the RIB from OSPF in the output of `show rib`.
 ```
 admin@labsystem1.fiedler# show ospf
 usage: ospf [area <area-id>] [router <router>] [<verbosity>]
@@ -113,7 +114,7 @@ routes            Show information about the OSPF routes
 ```
 
 ## OSPF Troubleshooting Steps
-1. Verify OSPF router information (show ospf detail or show ospf summary)
+1. Verify OSPF router information (`show ospf detail` or `show ospf summary`)
     1. Check the area
     2. Check for adjacency
 2. Verify OSPF interface (`show ospf interface`)

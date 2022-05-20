@@ -23,11 +23,11 @@ The peer path SLA metrics originate from BFD and are individually generated for 
 - latency (in ms)
 - jitter (in ms)
 
-These metrics need to be advertised in the STEP router document, but at a lower frequency. In support of that, a moving average calculation is performed to smooth out brief spikes. The moving average is weighted towards the most recent values, and the sample size for the moving average is configurable. The default sample size is 3. The WMA parameters can be configured by neighborhood. For configuration information, see [Configuring Weighted Moving Average Parameters](config_STEP.md#neighborhood-and-adjacency).
+These metrics need to be advertised in the STEP router document, but at a lower frequency. In support of that, a moving average calculation is performed to smooth out brief spikes. The moving average is weighted towards the most recent values, and the sample size for the moving average is configurable. The default sample size is 3. The WMA parameters can be configured by neighborhood. For a configuration example, see [Configuring Peer Path Advertisement Settings](config_STEP.md#configuring-peer-path-advertisement-settings). For a list and description of the configuration elements, see [`step-peer-path-advertisement (neighborhood)`](config_reference_guide.md#step-peer-path-advertisement-neighborhood).
 
 ### Determining the Reporting Delay
 
-In order to determine how quickly a metric change needs to be advertised, the latest SLA metrics coming out of the WMA calculation are compared against the values most recently advertised in the router document. The result is a percentage increase or decrease for each of the three metric types. The largest percentage increase and the largest percentage decrease are chosen from the three percentage values. The Reporting Delay parameters can be configured by neighborhood. For configuration information, see [Configuring Weighted Moving Average Parameters](config_STEP.md#neighborhood-and-adjacency).
+In order to determine how quickly a metric change needs to be advertised, the latest SLA metrics coming out of the WMA calculation are compared against the values most recently advertised in the router document. The result is a percentage increase or decrease for each of the three metric types. The largest percentage increase and the largest percentage decrease are chosen from the three percentage values. The Reporting Delay parameters can be configured by neighborhood, as shown in the link above.
 
 #### Threshold Values
 

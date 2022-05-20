@@ -3,6 +3,13 @@ title: WAN Assurance Plugin 3.4 Release Notes
 sidebar_label: '3.4'
 ---
 
+## Release 3.4.1
+**Release Date:** May 16, 2022
+
+### Resolved Issues
+
+- **I95-46089 WAN assurance process consumes excessive memory resulting in alarms:** The mist-agent will limit the amount of data it buffers in internal cache when processing data with errors.
+
 ## Release 3.4.0
 
 **Release Date:** May 13, 2022

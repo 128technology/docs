@@ -1,21 +1,22 @@
 ---
 title: Metrics
+sidebar_label: Metrics
 ---
-When querying the `STATS` API, you will notice the resolution of the data changes over time.  This is due to the downsampling that occurs.  Downsampling is performed to reduce the amount of data persisted to disk, ultimately purging the data from the system after a period of time.
+When querying the `STATS` API, you will notice the resolution of the data changes over time.  This is due to the downsampling that occurs. Downsampling is performed to reduce the amount of data persisted to disk, ultimately purging the data from the system after a period of time.
 
-The system samples data every 5 seconds.  The sampling interval is configurable under `authority > router > system > metrics > sample-period <value>`.
+The system samples data every 5 seconds. The sampling interval is configurable under `authority > router > system > metrics > sample-period <value>`.
 :::note
-It is not recommended to change the sample-period.  Increasing the value reduces the resolution of the information collected.  Decreasing the value will create a greater computational load on the system. The software has been tuned to operate optimally at a sampling interval of 5 seconds.
+It is not recommended to change the sample-period. Increasing the value reduces the resolution of the information collected. Decreasing the value creates a greater computational load on the system. The software has been tuned to operate optimally at a sampling interval of 5 seconds.
 :::
 - The full resolution of 5 second sampled data is kept for 1 hour.
-- Every five minutes, the sampled data is aggregated.  The 5 minute values are kept for a day.
-- Every hour the 5 minute values are aggregated.  The 1 hour values are kept for 6 months.
+- Every five minutes, the sampled data is aggregated. The 5 minute values are kept for a day.
+- Every hour the 5 minute values are aggregated. The 1 hour values are kept for 6 months.
 - After 6 months, the data is purged from disk.
 
 ### In Memory Metrics
-By default, not all metrics are persisted to disk and subject to downsampling. When executing `show stats` commands utilizing the `since` argument, the command will report that the requested data will be unavailable.
+By default, not all metrics are persisted to disk and subject to downsampling. When executing `show stats` commands utilizing the `since` argument, the command reports that the requested data is unavailable.
 
-In-memory metrics can be configured so that only metrics matching a filter are persisted. For more information refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md).
+To view in-memory metrics, create a Metrics Profile containing the specific metrics to be collected and persisted. For information about creating a Metrics Profile to collect your metrics, see [Configuring In-Memory Metrics](config_in-memory_metrics.md).
 
 Care should be taken to avoid overloading the system with the metrics. Many metrics are currently in-memory because of the heavy load they introduce to the system if they were all persisted. 
 
@@ -45,11 +46,11 @@ Completed in 0.06 seconds
 ```
 
 ## Session Establishment Metrics
-A key indicator of application performance is the time it takes to establish the TCP session between client and server.  This is effectively the time it takes to get to the first data packet between endpoints.  This metric is more telling than packet transmission rates because it is directional and end to end.  Importantly, this information can be used as a measure of SLA to influence path selection.
+A key indicator of application performance is the time it takes to establish the TCP session between client and server. This is effectively the time it takes to get to the first data packet between endpoints. This metric is more telling than packet transmission rates because it is directional and end to end. Importantly, this information can be used as a measure of SLA to influence path selection.
 
-Session establishment metrics have been created and are gathered on a per service, per interface, per destination, per traffic-class basis.  This level of granularity provides surgically accurate information on how the network treatment and performance is impacting application behavior.  A capability that is unique only to the 128T router.
+Session establishment metrics have been created and are gathered on a per service, per interface, per destination, per traffic-class basis. This level of granularity provides surgically accurate information on how the network treatment and performance is impacting application behavior. A capability that is unique only to the SSR router.
 
-To add more context to the sessions traversing the 128T router, the newly added session establishment metrics detailed below will be collected in protocol based buckets *TCP*, *UDP*, *ICMP*, and *TLS*.  Each protocol has its own determination of what qualifications need to be met for a session to become *established*.  In turn there is protocol/application-specific handling of each of these, defined by what is considered *established*.  For the remainder of the document, the following definitions of establishment are implied per protocol:
+To add more context to the sessions traversing the SSR router, the newly added session establishment metrics detailed below are collected in protocol based buckets *TCP*, *UDP*, *ICMP*, and *TLS*. Each protocol has its own determination of what qualifications need to be met for a session to become *established*. In turn there is protocol/application-specific handling of each of these, defined by what is considered *established*.  For the remainder of the document, the following definitions of establishment are implied per protocol:
 
 - **TCP** - session has seen an acknowledgement to the first packet after the TCP handshake that contains payload
 - **UDP** - session has seen a packet in the reverse direction
@@ -57,7 +58,7 @@ To add more context to the sessions traversing the 128T router, the newly added 
 - **TLS** - session has seen an acknowledgement to the first packet after the TLS handshake that contains payload
 
 ### Time to Establish
-This is a grouping of 3 different metrics: min, max, and mean.  The time from session start to when it reaches the established state as defined above per-protocol.  The exception is for TLS, the start time will be at TCP establishment instead of session start.
+This is a grouping of 3 different metrics: min, max, and mean. The time from session start to when it reaches the established state as defined above per-protocol. The exception is for TLS, the start time is at TCP establishment instead of session start.
 
 ```
 admin@t116-dut1.t116# show stats highway destination-reachability tcp time-to-establishment
@@ -141,7 +142,7 @@ TCP sessions that were successfully established
 ```
 
 ### Sessions Timed Out Before Establishment
-Counts of how many sessions timed out without ever reaching establishment, as defined per-protocol above. The TLS bucket of this metric is incremented only when the TCP established state has been reached but before the TLS established state has been reached.
+Counts of how many sessions timed out without reaching establishment, as defined per-protocol above. The TLS bucket of this metric is incremented only when the TCP established state has been reached but before the TLS established state has been reached.
 
 ```
 admin@t116-dut1.t116# show stats highway destination-reachability tcp timeout-before-establishment
@@ -165,7 +166,7 @@ Completed in 0.02 seconds
 ### Destination Unreachable
 Counts of how many sessions could not complete because the destination was unreachable. This is determined by receipt of an ICMP destination unreachable for the session.
 
-The below metrics don't apply across all of the specified protocols/applications (UDP, ICMP, TCP, TLS) and will have the specific protocol/application name in the metric.
+The below metrics do not apply across all of the specified protocols/applications (UDP, ICMP, TCP, TLS) and have the specific protocol/application name in the metric.
 
 ```
 admin@t116-dut1.t116# show stats highway destination-reachability tcp unreachable
@@ -187,7 +188,7 @@ Completed in 0.02 seconds
 ```
 
 ### Session Close Before TCP Establishment
-Counts the number of sessions that are closed by reset or fin before the session has finished the TCP handshake and data has been acknowledged.  This can be a server responding to a SYN with a reset or a proxy terminating a session it can’t complete.
+Counts the number of sessions closed by reset or fin before the session has finished the TCP handshake and data has been acknowledged. This can be a server responding to a SYN with a reset or a proxy terminating a session it cannot complete.
 
 ```
 admin@t116-dut1.t116# show stats highway destination-reachability tcp close-before-establishment
@@ -233,7 +234,7 @@ Completed in 0.02 seconds
 ### Configuration
 In order to begin collection of the metrics described above, a service-route must be configured to enable reachability-detection.
 
-An example of enabled configuration is below:
+Example:
 
 ```
 service-route
