@@ -100,6 +100,12 @@ Configuring the basic properties of the two nodes is described elsewhere in this
 
 The shared-phys-address is simply a series of six octets, that is unique on a given broadcast domain. (The SSR Conductor also enforces that the shared-phys-address be unique among all routers within an Authority.) There are no hard and fast rules for creating "globally unique" MAC addresses; there are, however, many websites available that will generate random values. Again, since these MAC addresses are only used on a broadcast domain, they do not need to be globally unique to suit the SSR router's needs. The shared-phys-address is configured using the format "00:00:00:00:00:00."
 
+:::important
+When configuring shared-MAC failover, it is important to use a **locally administered MAC address**. The use of a universally administered MAC causes inconsistent session establishment issues. These can be difficult to troubleshoot. 
+
+For more information about locally and universally administered MAC addresses, please see [MAC Addresses.](https://en.wikipedia.org/wiki/MAC_address#Universal_vs._local_(U/L_bit)
+:::
+
 Configuring the same shared-phys-address on two different interfaces (one per node in the high availability pair) informs the SSR that you wish to have the interfaces protect one another. This in turn causes the SSR to assign all corresponding pairs of network-interfaces that belong to this shared interface the same common _global ID_. (I.e., each network-interface on a node will have a unique global ID, but each counterpart network-interface on a highly available node will have the same global ID.) The global ID is an internal identifier, used by the SSR, to refer to the shared interface.
 
 ### About the Global ID
@@ -114,7 +120,7 @@ pci-address          0000:00:14.0
 link-settings        auto
 enabled              true
 forwarding           true
-shared-phys-address  00:00:5e:00:00:00
+shared-phys-address  12:81:28:00:00:AA
 
 network-interface    vlan0
     name                   vlan0
@@ -491,6 +497,12 @@ Node 2 lan and wan interfaces are configured similarly, however the priority is 
 ## Shared-MAC Failover Sample Configuration 
 Below is a sample, minimal configuration for which shows the inclusion of both a fabric interfaces as well as redundancy-groups. This topology consists of 4 interfaces per node.  1 LAN, 1 WAN, 1 Fabric dog-leg, and 1 Fabric forwarding interface.
 
+:::important
+When configuring shared-MAC failover, it is important to use a **locally administered MAC address**, as shown in the updated configuration below. The use of a universally administered MAC causes inconsistent session establishment issues. These can be difficult to troubleshoot.
+
+For more information about locally and universally administered MAC addresses, please see [MAC Addresses.](https://en.wikipedia.org/wiki/MAC_address#Universal_vs._local_(U/L_bit)
+:::
+
 This is an example of a **pre-5.4 configuration** using the shared-mac failover. 
 
 ```
@@ -529,7 +541,7 @@ This is an example of a **pre-5.4 configuration** using the shared-mac failover.
                         link-settings        auto
                         enabled              true
                         forwarding           true
-                        shared-phys-address  00:00:5e:00:00:00
+                        shared-phys-address  12:81:28:00:00:AA
     
                         network-interface    vlan0
                             name                   vlan0
@@ -556,7 +568,7 @@ This is an example of a **pre-5.4 configuration** using the shared-mac failover.
                         link-settings        auto
                         enabled              true
                         forwarding           true
-                        shared-phys-address  00:00:5e:00:00:01
+                        shared-phys-address  12:81:28:00:00:BB
     
                         network-interface    vlan100
                             name                   vlan100
@@ -622,7 +634,7 @@ This is an example of a **pre-5.4 configuration** using the shared-mac failover.
                         link-settings        auto
                         enabled              true
                         forwarding           true
-                        shared-phys-address  00:00:5e:00:00:00
+                        shared-phys-address  12:81:28:00:00:AA
     
                         network-interface    vlan0
                             name                   vlan0
@@ -649,7 +661,7 @@ This is an example of a **pre-5.4 configuration** using the shared-mac failover.
                         link-settings        auto
                         enabled              true
                         forwarding           true
-                        shared-phys-address  00:00:5e:00:00:01
+                        shared-phys-address  12:81:28:00:00:BB
     
                         network-interface    vlan100
                             name                   vlan100
