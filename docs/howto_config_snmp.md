@@ -39,7 +39,7 @@ The procedures below use the GUI to create the configuration, and assume the fol
 
 ![Device Interface Type](/img/howto_config_snmp3.png)
 
-*(Host, then what? Forwarding? Identifier? KNI namespace? If not setting anything, why?)*
+*(Is anything other than Host configured here? Forwarding? Identifier? KNI namespace? And if we are not configuring anything else, is there a reason not to?)*
 
 5. Scroll down to Network Interfaces. Click on ADD to add a new network interface for the SNMP device interface.
 
@@ -50,11 +50,9 @@ The procedures below use the GUI to create the configuration, and assume the fol
 ![New Network Interface](/img/howto_config_snmp5.png)
 
 7. Under Management Traffic Settings, define a dedicated management vector. 
-- enter the name 
-- set the priority to 100
-- enable a default route 
-
-*(why are no other Basic Information settings configured?)* 
+- Enter the name 
+- Set the priority to 100
+- Enable a default route 
 
 ![Management Traffic Settings](/img/howto_config_snmp6.png)
 
@@ -92,7 +90,7 @@ Return to the Router level, and scroll down to the Router Settings.
 
 3. Under SNMP Notification Receivers, click ADD, enter the IP address of the SNMP Manager, and set the Notification Type to **trap**.
 
-![Notifictation Receiver](/img/howto_config_snmp14.png)
+![Notification Receiver](/img/howto_config_snmp14.png)
 
 4. Return to the router system settings, scroll down to the SNMP Access Control Policies and click ADD.
 5. Enter the `management` as the new Access Control Policy name and click SAVE. 
@@ -100,6 +98,7 @@ Return to the Router level, and scroll down to the Router Settings.
 ![New Access Control Policy](/img/howto_config_snmp15.png)
 
 6. In the SNMP Access Control Policies pane, enter the Permitted Client Host IP address. 
+
 ![SNMP Access Control Policy](/img/howto_config_snmp15-1.png)
 
 7. Click Validate, then Commit.
@@ -109,7 +108,7 @@ A new interface is created at the Linux level bearing the same name and gateway 
 ### Configure Global Services
 
 At the Authority Level, scroll down to Services, and click ADD.
-1. Enter a name for the new service; in this case, the service name is snmp-(name of the SSR). Create a service for each SSR. This service is used for polling of individual SSRs.
+1. Enter a name for the new service; in this case, the service name is `snmp-<SSR-name>`. Create a service for each SSR. This service is used for polling of individual SSRs.
 
 ![New Polling Service](/img/howto_config_snmp16.png)
 
@@ -117,7 +116,7 @@ At the Authority Level, scroll down to Services, and click ADD.
 
 ![Share Service Routes](/img/howto_config_snmp16-1.png)
 
-3.  Scroll down to Policies, and set the Security Policy to **internal**. (No Service Policy?)
+3.  Scroll down to Policies, and set the Security Policy to **internal**. *(Is there no need to configure a Service Policy?)*
 
 ![Security Policy](/img/howto_config_snmp16-2.png)
 
@@ -133,12 +132,15 @@ Return to the Authority level, scroll down to Services, and click ADD.
 ![New Trap Service](/img/howto_config_snmp16-4.png)
 
 2. In the Basic Information panel, verify that the Share Service Routes toggle is set to true (default).
+
 ![Share Service Routes](/img/howto_config_snmp16-4.png)
 
-3.  Scroll down to Policies, and set the Security Policy to **internal**. (No Service Policy?)
+3.  Scroll down to Policies, and set the Security Policy to **internal**. *(Is there no need to configure a Service Policy?)*
+
 ![Security Policy](/img/howto_config_snmp16-2.png)
 
 4. Scroll back up to Service Addresses, click ADD, and enter the IP address of the SNMP manager.
+
 ![SNMP Manager IP Address](/img/howto_config_snmp16-6.png)
 
 5. Click Validate, then Commit. 
@@ -154,9 +156,11 @@ This procedure creates the service route used for SNMP polling, and must be repe
 2. Scroll down to Service Routes and click ADD.
 3. Enter the New Service Route name; `snmp` and click SAVE. 
 4. In the Service route Information pane, choose the `snmp-<service-name>` service name created earlier.
+
 ![Service Name](/img/howto_config_snmp17.png)
 
 5. Under Service Route Type, select Use Learned Routes from the drop down.
+
 ![Use Learned Routes](/img/howto_config_snmp18.png)
 
 6. Click Validate, then Commit.
@@ -168,11 +172,17 @@ Return to the Router level, and select the hub SSR. You can see the service rout
 1. From the Router level, and select Service Routes.
 2. Click ADD.
 3. Enter a new Service Route name, `snmp-trap` and click SAVE.
-![SNMP Trap]((/img/howto_config_snmp19.png)
+
+![SNMP Trap](/img/howto_config_snmp19.png)
+
 4. In the Service route Information pane, choose the `snmp-trap` service route created earlier.
-![SNMP Trap Route]((/img/howto_config_snmp19-1.png)
+
+![SNMP Trap Route](/img/howto_config_snmp19-1.png)
+
 5. Under Service Route Type, select Use Learned Routes from the drop down.
+
 ![Use Learned Routes](/img/howto_config_snmp18.png)
+
 6. Click Validate, then Commit.
 
 Return to the Router level, and select the Spoke SSR. You can see the service route is automatically generated where the snmp traps are generated.
