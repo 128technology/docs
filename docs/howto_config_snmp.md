@@ -4,7 +4,7 @@ sidebar_label: SNMP - Configuration
 ---
 ## Overview
 
-The following are the high level steps for configuring SNMP. Each procedure is broken out below. 
+The following are the high level steps for configuring SNMP. Each procedure is detailed below. 
 
 - Configure KNI Interface at both hub and spoke SSRs
 
