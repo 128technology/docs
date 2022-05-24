@@ -129,38 +129,50 @@ At the Authority Level, scroll down to Services, and click ADD.
 
 Return to the Authority level, scroll down to Services, and click ADD.
 1. Name the service **snmp-trap**. This service is used for traps from all SSRs.
+
+![New Trap Service](/img/howto_config_snmp16-4.png)
+
 2. In the Basic Information panel, verify that the Share Service Routes toggle is set to true (default).
+![Share Service Routes](/img/howto_config_snmp16-4.png)
 
 3.  Scroll down to Policies, and set the Security Policy to **internal**. (No Service Policy?)
+![Security Policy](/img/howto_config_snmp16-2.png)
 
-4. Scroll back up to Service Addresses and enter the IP address of the SNMP manager.
+4. Scroll back up to Service Addresses, click ADD, and enter the IP address of the SNMP manager.
+![SNMP Manager IP Address](/img/howto_config_snmp16-6.png)
 
 5. Click Validate, then Commit. 
-
 
 ### Configure the SNMP Service Routes
 
 The SNMP Service routes are used for polling each SSR by the SNMP manager.
 
 #### SNMP Service Route
+This procedure creates the service route used for SNMP polling, and must be repeated at each SSR to be polled by the SNMP Manager. 
 
-1. Authority > Router > Service Routes
-2. From the Authority level, select the router.
-3. Scroll down to Service Routes and click ADD.
-4. Enter the New Service Route name; `snmp` and click SAVE.
-5. In the Service route Information pane, choose the `snmp` service route created earlier.
-6. Under Service Route Type, select Use Learned Routes from the drop down.
-7. Click Validate, then Commit.
+1. From the Authority level, select the router.
+2. Scroll down to Service Routes and click ADD.
+3. Enter the New Service Route name; `snmp` and click SAVE. 
+4. In the Service route Information pane, choose the `snmp-<service-name>` service name created earlier.
+![Service Name](/img/howto_config_snmp17.png)
 
-Return to the Router level, and select the hub SSR. You can see the service route is automatically generated at the hub where the SNMP Manager lives.
+5. Under Service Route Type, select Use Learned Routes from the drop down.
+![Use Learned Routes](/img/howto_config_snmp18.png)
 
-#### SNMP-trap Serivce Route
+6. Click Validate, then Commit.
+
+Return to the Router level, and select the hub SSR. You can see the service route is automatically generated at the SNMP Manager hub.
+
+#### SNMP-trap Service Route
 
 1. From the Router level, and select Service Routes.
 2. Click ADD.
 3. Enter a new Service Route name, `snmp-trap` and click SAVE.
+![SNMP Trap]((/img/howto_config_snmp19.png)
 4. In the Service route Information pane, choose the `snmp-trap` service route created earlier.
+![SNMP Trap Route]((/img/howto_config_snmp19-1.png)
 5. Under Service Route Type, select Use Learned Routes from the drop down.
+![Use Learned Routes](/img/howto_config_snmp18.png)
 6. Click Validate, then Commit.
 
 Return to the Router level, and select the Spoke SSR. You can see the service route is automatically generated where the snmp traps are generated.
