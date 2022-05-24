@@ -44,6 +44,10 @@ Configure node1 on router-a with the following interfaces:
 
 Activate VRRP on the `lan` device interface of node1. By configuring `router-a` with a higher VRRP priority (100), `router-a` is identified as the primary router. We will configure `router-b` as the secondary router.
 
+:::note
+These examples demonstrate the use of VRRP for LAN-side network interfaces connected to a common switch. While uncommon in production deployments, VRRP can also be configured for WAN interfaces.
+:::
+
 ```
 			node                  node1
                 name                      node1
