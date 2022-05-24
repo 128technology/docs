@@ -57,13 +57,11 @@ Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring 
                     name               lan
                     type               ethernet
                     pci-address        0000:00:04.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    128
                         priority                100
-                        advertisement-interval  250
                     exit
 
                     network-interface  lan
@@ -90,13 +88,11 @@ Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring 
                     name               wan
                     type               ethernet
                     pci-address        0000:00:05.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    129
                         priority                100
-                        advertisement-interval  250
                     exit
 
                     network-interface  wan
@@ -248,13 +244,11 @@ node                  node1
                     name               lan
                     type               ethernet
                     pci-address        0000:00:04.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    128
                         priority                97
-                        advertisement-interval  250
                     exit
 
                     network-interface  lan
@@ -282,13 +276,11 @@ node                  node1
                     name               wan
                     type               ethernet
                     pci-address        0000:00:05.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    129
                         priority                97
-                        advertisement-interval  250
                     exit
 
                     network-interface  wan
@@ -446,13 +438,11 @@ config
                     name               lan
                     type               ethernet
                     pci-address        0000:00:04.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    128
                         priority                100
-                        advertisement-interval  250
                     exit
                     network-interface  lan
                         name          lan
@@ -477,13 +467,11 @@ config
                     name               wan
                     type               ethernet
                     pci-address        0000:00:05.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    129
                         priority                100
-                        advertisement-interval  250
                     exit
 
                     network-interface  wan
@@ -578,13 +566,11 @@ config
                     name               lan
                     type               ethernet
                     pci-address        0000:00:04.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    128
                         priority                99
-                        advertisement-interval  250
                     exit
 
                     network-interface  lan
@@ -612,13 +598,11 @@ config
                     name               wan
                     type               ethernet
                     pci-address        0000:00:05.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    129
                         priority                99
-                        advertisement-interval  250
                     exit
 
                     network-interface  wan
