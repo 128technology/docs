@@ -101,7 +101,9 @@ Configuring the basic properties of the two nodes is described elsewhere in this
 The shared-phys-address is simply a series of six octets, that is unique on a given broadcast domain. (The SSR Conductor also enforces that the shared-phys-address be unique among all routers within an Authority.) There are no hard and fast rules for creating "globally unique" MAC addresses; there are, however, many websites available that will generate random values. Again, since these MAC addresses are only used on a broadcast domain, they do not need to be globally unique to suit the SSR router's needs. The shared-phys-address is configured using the format "00:00:00:00:00:00."
 
 :::important
-When configuring shared-MAC failover, it is important to use a **locally administered MAC address**. The use of a universally administered MAC causes inconsistent session establishment issues. These can be difficult to troubleshoot.
+When configuring shared-MAC failover, it is important to use a **locally administered MAC address**. The use of a universally administered MAC causes inconsistent session establishment issues. These can be difficult to troubleshoot. 
+
+For more information about locally and universally administered MAC addresses, please see [MAC Addresses.](https://en.wikipedia.org/wiki/MAC_address#Universal_vs._local_(U/L_bit)
 :::
 
 Configuring the same shared-phys-address on two different interfaces (one per node in the high availability pair) informs the SSR that you wish to have the interfaces protect one another. This in turn causes the SSR to assign all corresponding pairs of network-interfaces that belong to this shared interface the same common _global ID_. (I.e., each network-interface on a node will have a unique global ID, but each counterpart network-interface on a highly available node will have the same global ID.) The global ID is an internal identifier, used by the SSR, to refer to the shared interface.
@@ -497,6 +499,8 @@ Below is a sample, minimal configuration for which shows the inclusion of both a
 
 :::important
 When configuring shared-MAC failover, it is important to use a **locally administered MAC address**, as shown in the updated configuration below. The use of a universally administered MAC causes inconsistent session establishment issues. These can be difficult to troubleshoot.
+
+For more information about locally and universally administered MAC addresses, please see [MAC Addresses.](https://en.wikipedia.org/wiki/MAC_address#Universal_vs._local_(U/L_bit)
 :::
 
 This is an example of a **pre-5.4 configuration** using the shared-mac failover. 
