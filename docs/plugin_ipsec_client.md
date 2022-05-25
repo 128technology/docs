@@ -550,7 +550,7 @@ Completed in 0.10 seconds
 
 - **PLUGIN-1730** Invalid libreswan configuration was being generated when multiple local or remote subnets were configured.
 
-  _**Resolution**_ The libreswan configuration generation was fixed.
+  _**Resolution**_ The issue with the libreswan configuration generation has been resolved.
 
 ### Release 3.3.0
 
