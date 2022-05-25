@@ -540,6 +540,18 @@ Completed in 0.10 seconds
 
 ## Release Notes
 
+### Release 3.3.1
+
+**Release Date:** May 25, 2022
+
+**Router Version** 128T-ipsec-2.2.2-1
+
+#### Issues Fixed
+
+- **PLUGIN-1730** Invalid libreswan configuration was being generated when multiple local or remote subnets were configured.
+
+  _**Resolution**_ The libreswan configuration generation was fixed.
+
 ### Release 3.3.0
 
 **Release Date:** Apr 27, 2022
