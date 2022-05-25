@@ -39,8 +39,6 @@ The procedures below use the GUI to create the configuration, and assume the fol
 
 ![Device Interface Type](/img/howto_config_snmp3.png)
 
-*(Is anything other than Host configured here? Forwarding? Identifier? KNI namespace? And if we are not configuring anything else, is there a reason not to?)*
-
 5. Scroll down to Network Interfaces. Click on ADD to add a new network interface for the SNMP device interface.
 
 ![Add Network Interface](/img/howto_config_snmp4.png)
@@ -49,14 +47,14 @@ The procedures below use the GUI to create the configuration, and assume the fol
 
 ![New Network Interface](/img/howto_config_snmp5.png)
 
-7. Under Management Traffic Settings, define a dedicated management vector. 
+7. Under Management Traffic Settings, define a dedicated management vector. This vector should be associated with the management interface. 
 - Enter the name 
 - Set the priority to 100
 - Enable a default route 
 
 ![Management Traffic Settings](/img/howto_config_snmp6.png)
 
-8. Scroll down to Interface Addresses, click ADD and enter the IP address of the Network interface and click SAVE.
+8. Scroll down to Interface Addresses, click ADD and enter the IP address of the network interface and click SAVE.
 
 ![New Network Interface IP Address](/img/howto_config_snmp8.png)
 
@@ -135,7 +133,7 @@ Return to the Authority level, scroll down to Services, and click ADD.
 
 ![Share Service Routes](/img/howto_config_snmp16-4.png)
 
-3.  Scroll down to Policies, and set the Security Policy to **internal**. *(Is there no need to configure a Service Policy?)*
+3.  Scroll down to Policies, and set the Security Policy to **internal**.
 
 ![Security Policy](/img/howto_config_snmp16-2.png)
 
