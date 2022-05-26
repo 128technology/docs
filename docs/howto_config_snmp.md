@@ -25,6 +25,8 @@ The procedures below use the GUI to create the configuration, and assume the fol
 
 ### Configure the KNI Interface
 
+For additional information about the configuration of KNI interfaces, see [Kernel Network Interfaces.](concepts_kni.md)
+
 1. From the Authority, navigate to the Router > Node > Device Interface.
 
 2. Under the Device Interface, click ADD.
@@ -62,11 +64,7 @@ The procedures below use the GUI to create the configuration, and assume the fol
 
 ![IP Subnet](/img/howto_config_snmp9.png)
 
-**Please provide additional information on the following. I do not understand the context of these comments in the How To Configure SNMP powerpoint** 
-
-*The gateway IP is the IP of an interface to be created by the SSR at the Linux level in step 2.4 upon Validate + Commit.* 
-
-*This GW IP is also the IP that should be used to poll at the SNMP Manager, not the SSR snmp interface IP.*
+It is important that this address is specified as the address to be polled by the SNMP Manager. The Gateway IP address is also used by the SSR to automatically create an interface at the Linux level later in this procedure.  
 
 10. Under Host Services, click ADD.
 
@@ -163,7 +161,7 @@ This procedure creates the service route used for SNMP polling, and must be repe
 
 6. Click Validate, then Commit.
 
-Return to the Router level, and select the hub SSR. You can see the service route is automatically generated at the SNMP Manager hub.
+Return to the Router level, and select the Hub SSR. You can see the service route is automatically generated at the SNMP Manager.
 
 #### SNMP-trap Service Route
 
