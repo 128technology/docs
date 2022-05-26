@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.5.1-5
 
-**Release Date:** May 26. 2022
+**Release Date:** May 26, 2022
 
 ### New Features
 
@@ -40,7 +40,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **The following CVE issues have been addressed and resolved with this release:**
 I95-45054, I95-45056, I95-45059
-
+------
 - **I95-42438 Save Tech Support tries to run when 128T service is down:** In situations where the PCLI is still active, but the 128T service is down, trying to run `save tech support` will appear to work, but does not return any info. This issue has been resolved, and will return a message when information is not retrievable. 
 ------
 - **I95-43606 No communication between Routers:** In rare instances the BFD Pinhole feature experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.
@@ -64,15 +64,14 @@ I95-45054, I95-45056, I95-45059
 - **I95-45348 Update salt master and minion to 3002.8:** This update resolves several CVE's and requires that the conductor must be running this release containing these fixes **before** upgrading a router. 
 **Important** Please see the Caveat below for additional important information about HA upgrades.
 ------
-- **I95-45374 Router Dropping SIP traffic:** A warning is displayed if users configure a service-class to rate-limit but don't set max-flow-burst/max-flow-rate values (default is set to 0).
+- **I95-45374 Service-class with a rate-limit of 0 will drop traffic:** A warning is displayed if users configure a service-class to rate-limit but don't set max-flow-burst/max-flow-rate values (default is set to 0).
 ------
 - **I95-45514 Only allow DSCP-steering config on forwarding interfaces:** DSCP Steering config no longer appears on non-forwarding interfaces.
 ------
 - **I95-45541 LDAP users are unable to login to the PCLI due to permission errors:** This issue has been resolved.
 ------
-- **I95-45696 Memory leak in pam challenge library:** Resolved a memory leak in the PAM challenge library. 
+- **I95-45696 Memory leak in PAM challenge library:** Resolved a memory leak in the PAM challenge library. 
 ------
-- **I95-45767 Verify RBAC handles spaces and escaped characters correctly:** Both spaces and escaped characters are properly handled.
 - **I95-45842 PCLI `show events` does not paginate correctly:** This issue has been resolved.
 ------
 - **I95-45882 Rare case where an invalid DHCP server configuration generated:** This issue has been resolved.
@@ -82,9 +81,15 @@ I95-45054, I95-45056, I95-45059
 
 ### Caveats
 
-- **I95-45348: Update salt master and minion to 3002.8:** When upgrading an HA pair to version 5.5.1, please be aware of the following: While updating the conductors in an HA pair, the upgraded conductor node asset state will remain DISCONNECTED if the active `automatedProvisioner` is not running a corrected version. When performing an HA conductor upgrade the node running the oldest software assumes leadership. However, the older version will not be able to talk to the new software on the upgraded conductor. 
+- **I95-45348: Update salt master and minion to 3002.8:** When upgrading an HA pair to version 5.5.1, please be aware of the following: While updating the conductors in an HA pair, the upgraded conductor node asset state will remain DISCONNECTED if the active `automatedProvisioner` is not running a corrected version (see table below). When performing an HA conductor upgrade the node running the oldest software assumes leadership. However, the older version will not be able to talk to the new software on the upgraded conductor. 
 
 The active `automatedProvisioner` can be determined by running the command `show system processes`. Once the upgrade begins on the old node, the newly upgraded conductor takes over.
+
+#### Corrected Versions
+
+| Router Software Version | Minimum Required Conductor Version |
+| --- | --- |
+| 5.5.1 | 5.5.1, 5.6.0 |
 
 ## Release 5.5.0-43
 
@@ -153,7 +158,7 @@ I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95
 ------
 - **I95-44591 Paste-config does not allow small config snippets to be pasted:** Resolved an issue where the list keys were not being passed as part of the `value` in the transaction.
 
-## Caveats
+### Caveats
 
 - **I95-44691 Restart the SSR after disabling Application Identification:** On a system with Application Identification enabled; if you choose to disable Application Identification, you must restart the SSR.
 ------
