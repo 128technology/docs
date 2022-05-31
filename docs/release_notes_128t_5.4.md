@@ -16,13 +16,115 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
-- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 ------
 - **I95-42452 Conductor Upgrade Time:** Upgrades to version 5.4 can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
-- **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
+- **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. The Installer typically prompts you update when a new version is available. Select **Update** when prompted.
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
+
+## Release 5.4.5-8
+
+**Release Date: May 11, 2022**
+
+### New Features
+
+- **I95-44847 PCLI Typo Corrections:** When a user incorrectly types a PCLI command or the name of a router or node, the error message now contains a suggestion of what command they might've wanted to run. These suggestions are seen in the form of `Did you mean ... ?`
+
+### Resolved Issues
+
+- **I95-35228 DHCP waypoint addresses not displayed on standby node in UI:** Resolved an issue where the PCLI logic was not matching the GUI Network Interface table.
+------
+- **I95-39274 DNS-based services kill asset connection resiliency:** Resolved an issue where an internal commit was bouncing the kni254 interface and causing a series of connection resets.
+------
+- **I95-40348 Unable to rename a router:** Increased the maximum message size so that the larger configuration changes can be processed correctly.
+------
+- **I95-41931 Peers show the IP address not the router name in the GUI:** This issue has been resolved, and both the IP address and router name are displayed. 
+------
+- **I95-42318 Broken symlink for plugins results in a highway crash:** Resolved the handling of a broken symlink for plugins, which was resulting in a failure to apply config and a highway crash.
+------
+- **I95-42818 Service Path Does not show DOWN when Reachability Probes Fail:** Resolved an issue with the state logic for the service path, causing the GUI to not return the same/correct information as the PCLI.
+------
+- **I95-43239 LTE APN on Modem not set up correctly:** The APN is now always written to the the modem using the default index of 1.
+------
+- **I95-43897 Planned failover did not work properly:** Resolved an issue where a waypoint missing from an internal database prevented failover.  
+------
+- **I95-44029 FIB in GUI does not show Next Hops:** Updates have been made to the behavior of the Routing Details menu to display this information.
+------
+- **I95-44142 Automated Provisioner race condition:** Resolved a rare crash where applications would attempt to get information about already-closed sockets when responding to API requests.
+------
+- **I95-44424 Cannot set log level configured on remote router from conductor CLI:** This issue has been resolved.
+------
+- **I95-44425 `show service-paths` output frequently shows "Nothing to display" when there should be output:** This issue has been resolved.
+------
+- **I95-44443 NTP Server config not always picked up:** Resolved an issue where NTP configuration was changed but the backend would not take action on those changes.
+------
+- **I95-44534 Session Capture in GUI not working:** A Session Capture triggered from the GUI now creates a capture for new sessions traversing the same path as this session. 
+------
+- **I95-44554 Metadata packets may incorrectly pin flow affinity:** Worker core affinity latching has been prevented, resolving this issue. 
+------
+- **I95-44568 VRRP interfaces both report "vrrp-standby" after provisional down of primary interface:** Resolved an issue when using `provisional-down` on the primary interface while reconfiguring `shared-phy` to `vrrp` causes a deadlock in the highway process.
+------
+- **I95-44591 Paste-config does not allow small config snippets to be posted:** Resolved an issue where the list keys were not being passed in as part of the `value` in the transaction.
+------
+- **I95-44618 CentOS package update:** This package has been updated to resolve a CVE issue.
+------
+- **I95-44722 Time based HMAC failure after HA reboot:** Resolved a buffering issue where device interfaces are now flushed upon becoming active to avoid handling of inactive packets.
+------
+- **I95-44726 Invalid return code returned by T1 card firmware creating a memory leak:** Resolved a buffer leak in the wanpipe driver.
+------
+- **I95-44730 Export event history exports only last 30 minutes:** Resolved an issue where `time` was captured, but never updated. 
+------
+- **I95-44741 Initializer fails with empty global init:** Resolved an issue where the initializer would fail if the existing global.init was empty. 
+------
+- **I95-44759 Unable to initiate SR-IOV interface when multiple cores running:** This issue has been resolved. 
+------
+- **I95-44816 Highway process fails to run when a config committed with a DSCP range missing an end value:** This issue has been resolved by updating the `dscp-range` in the data model so the `endValue` of the range is always populated.
+------
+- **I95-44823 Conductor upgrade failure - extra space in integer is invalid:** Extra spaces on integer types are now trimmed off to avoid this issue. 
+------
+- **I95-44913 kmod-i40e metapackage causing upgrade issues:** The metapackage has been removed and upgrade issues have been resolved. 
+------
+- **I95-44985 Update salt-minion minimum version to resolve CVEs:** This issue has been resolved. 
+------
+- **I95-44991 SSR not passing Aruba data on GRE Tunnels:** Resolved an issue where GRE packets with a reserved bit in the header are incorrectly dropped as invalid.
+------
+- **I95-45063 SSR Azure instances unstable on large machine types:** Resolved an issue with Mellanox5 after upgrading the SSR to 5.4.
+------
+- **I95-45094 Unnecessary rotation of salt minion config:** Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.
+------
+- **I95-45146 GUI error message for users authenticated by LDAP to Active Directory Server:** This issue has been resolved.
+------
+- **I95-45164 Active peers show Unavailable for PATH-MTU, LATENCY, JITTER, LOSS & MOS for some transports:** Resolved a rare issue in the case of an RFC-compliant device ahead of a non-compliant device with a smaller MTU, the non-compliant device's timeouts are incorrectly interpreted and the MTU becomes unresolvable.
+------
+- **I95-45211 New users run into permissions errors:** Access Control Lists are now preserved on file rotations.
+------
+- **I95-45372 Filters in the Routers Tab not working:** Resolved a logic issue with the GUI table.
+------
+- **I95-45462 128T-monitoring agent does not start automatically after upgrade to 5.4.4:** Updated the Monitoring Agent to resolve this issue. 
+------
+- **I95-45489 `ifcfg` custom options issues:** Resolved an issue where  interface ifcfg option changes were not being processed.
+------
+- **I95-45559 Corrupted `resolv.conf` after ODM imaging:** Resolved an issue on SSR systems running dns-proxy services with external interfaces configured using `PEERDNS=yes`, where a race condition may occur that results in corrupt nameservers being added to the `/etc/resolv.conf` file.
+------
+- **I95-45583 HA Connection lost during commit:** Resolved an issue where session was missing necessary path data information relating to the peer path.
+------
+- **I95-45618 Issue with MAC address in Azure environment:** Resolved this issue by handling non-ethernet MAC addresses during MLX device discovery.
+------
+- **I95-45641 Stuck BGPoSVR Sessions after Failover:** Made changes to provide updates to less specific FIB entries when routes are updated to resolve this issue. 
+------
+- **I95-45783 User home directores are different across the network topology:** Resolved an issue where findUser was hitting a "User not Found" error and exiting. 
+------
+- **I95-45799 Monitoring Agent Service Fix:** Updated the Monitoring Agent to include the latest updates. 
+
+### Caveats
+
+- **I95-45946: Forwarding Plane Fault preventing packet forwarding:** Systems containing the Intel x553 NIC and running the IXGBE driver may stop forwarding packets due to an SSR forwarding plane fault. In configurations where data plane interfaces and non-forwarding interfaces such as management or high availability synchronization are mixed on the same IXBGE-based PCI device, a highway failure may prevent the non-forwarding interfaces from passing traffic. 
+
+	**Workaround:** Restart the SSR software. 
+
+	This issue has been found in earlier versions of the SSR software. Please use this workaround should you encounter this issue on an earlier release. 
 
 ## Release 5.4.4-9
 
@@ -83,6 +185,20 @@ I95-40268, I95-41591, I95-41794, I95-41863, I95-42448, I95-43258, I95-43260, I95
 
 - **I95-44222 Commit fails for RBAC users with config-write permissions:** RBAC users with config-write permissions, but who do not have explicit write access to t128/ get a “failure to commit” message.
 	**_Workaround:_** Manually create a `commit` role and set the 128t:/ resource in the role. Add this role to users who need the ability to commit.	
+------
+- **I95-45559 Corrupted `resolv.conf` after ODM imaging:** On SSR systems running dns-proxy services with external interfaces configured using `PEERDNS=yes`, a race condition may occur that results in corrupt nameservers being added to the `/etc/resolv.conf` file.
+	
+	**_Workaround:_** A temporary workaround is to force an update of this file by either of the following methods:
+
+	- Perform a dummy modification of the file to force it to be updated:
+	  ```
+	  touch /etc/resolv.conf
+	  ```
+
+	- Restart 128T:
+	  ```
+	  systemctl restart 128T
+	  ```
 
 ## Release 5.4.3-8
 

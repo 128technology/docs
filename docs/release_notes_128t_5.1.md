@@ -31,7 +31,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **The following CVE issues have been addressed and resolved with this release:** I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95-44088, I95-44206, I95-44618
 ------
-- **I95-40438 Unable to rename a router:** Increased the maximum message size so that the larger configuration changes can be processed correctly.
+- **I95-40348 Unable to rename a router:** Increased the maximum message size so that the larger configuration changes can be processed correctly.
 ------
 - **I95-41931 Peers show the IP address not the router name in the GUI:** This issue has been resolved, and both the IP address and router name are displayed. 
 ------
@@ -57,11 +57,21 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44517 Time check incorrectly locking upgrade process:** The time check has been replaced with a process name check.  
 ------
-- **i95-44726 Multiple sites - node B is completely inaccessible:** Resolved a buffer leak in the wanpipe driver.
+- **I95-44726 Invalid return code returned by T1 card firmware creating a memory leak:** Resolved a buffer leak in the wanpipe driver.
 ------
 - **I95-44730 Export event history exports only last 30 minutes:** Resolved an issue where `time` was captured, but never updated. 
 ------
 - **I95-44741 Initializer fails with empty global init:** Resolved an issue where the initializer would fail if the existing global.init was empty. 
+------
+- **I95-45860 ISO update:** The `openssh-clients` has been updated in the ISO to address a CVE Security Vulnerability. 
+
+### Caveats
+
+- **I95-45946: Forwarding Plane Fault preventing packet forwarding:** Systems containing the Intel x553 NIC and running the IXGBE driver may stop forwarding packets due to an SSR forwarding plane fault. In configurations where data plane interfaces and non-forwarding interfaces such as management or high availability synchronization are mixed on the same IXBGE-based PCI device, a highway failure may prevent the non-forwarding interfaces from passing traffic. 
+
+	**Workaround:** Restart the SSR software. 
+
+	This issue has been found in earlier versions of the SSR software. Please use this workaround should you encounter this issue on an earlier release. 
 
 ## Release 5.1.8-1
 

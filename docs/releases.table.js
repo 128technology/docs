@@ -5,12 +5,26 @@ import React from "react";
 // New entries should be placed at the top.
 // ----------------------------------------------------------------------------
 export const releases = [
- {
+   {
     version: '5.6.0',
     url:'release_notes_128t_5.6',
-    releaseDate: 'May 4, 2022',
-    endOfMaintenance: 'February 4. 2023',
-    endOfSupport: 'August 4, 2023',
+    releaseDate: 'May 20, 2022',
+    endOfMaintenance: 'February 20, 2023',
+    endOfSupport: 'August 20, 2023',
+    },
+    {
+    version: '5.2.3',
+    url: 'release_notes_128t_5.2#release-523',
+    releaseDate: 'May 20, 2022',
+    endOfMaintenance: 'November 10, 2021',
+    endOfSupport: 'May 10, 2022',
+  },
+  {
+    version: '5.4.5',
+    url:'release_notes_128t_5.4#release-545-8',
+    releaseDate: 'May 11, 2022',
+    endOfMaintenance: 'December 18, 2022',
+    endOfSupport: 'June 18, 2023',
   },
   {
     version: '5.1.9',
@@ -23,22 +37,23 @@ export const releases = [
     version: '5.5.0',
     url:'release_notes_128t_5.5',
     releaseDate: 'March 7, 2022',
-    endOfMaintenance: 'November 7, 2022',
+    endOfMaintenance: 'December 7, 2022',
     endOfSupport: 'May 7, 2023',
+
   },
  {
     version: '5.4.4',
     url:'release_notes_128t_5.4#release-544-9',
     releaseDate: 'February 18, 2022',
-    endOfMaintenance: 'December 2, 2022',
-    endOfSupport: 'June 2, 2023',
+    endOfMaintenance: 'December 18, 2022',
+    endOfSupport: 'June 18, 2023',
   },
  {
     version: '5.4.3',
     url:'release_notes_128t_5.4#release-543-8',
     releaseDate: 'January 27, 2022',
-    endOfMaintenance: 'December 2, 2022',
-    endOfSupport: 'June 2, 2023',
+    endOfMaintenance: 'December 18, 2022',
+    endOfSupport: 'June 18, 2023',
   },
   {
     version: '5.1.8',
@@ -51,8 +66,8 @@ export const releases = [
     version: '5.4.2',
     url:'release_notes_128t_5.4#release-542-5',
     releaseDate: 'December 22, 2021',
-    endOfMaintenance: 'December 2, 2022',
-    endOfSupport: 'June 2, 2023',
+    endOfMaintenance: 'December 18, 2022',
+    endOfSupport: 'June 18, 2023',
   },
   {
     version: '5.1.7',
@@ -65,15 +80,15 @@ export const releases = [
     version: '5.4.1',
     url:'release_notes_128t_5.4#release-541-4',
     releaseDate: 'November 23, 2021',
-    endOfMaintenance: 'December 2, 2022',
-    endOfSupport: 'June 2, 2023',
+    endOfMaintenance: 'December 18, 2022',
+    endOfSupport: 'June 18, 2023',
   },
   {
     version: '5.4.0',
     url:'release_notes_128t_5.4#release-540-104',
     releaseDate: 'November 18, 2021',
-    endOfMaintenance: 'December 2, 2022',
-    endOfSupport: 'June 2, 2023',
+    endOfMaintenance: 'December 18, 2022',
+    endOfSupport: 'June 18, 2023',
   },
   {
     version: '5.1.6',

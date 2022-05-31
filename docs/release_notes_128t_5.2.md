@@ -18,6 +18,40 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor, peer, or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 
+## Release 5.2.3
+
+**Release Date:** May 20, 2022
+
+### Resolved Issues
+
+- **I95-41319 Reachability metrics not updating:** The reachability metrics for the min & max time to establishment now reset and report correctly.
+------
+- **I95-41849 Plugin Commands not working in PCLI:** The PCLI is now sending the correct arguments to the plugin service.
+------
+- **I95-42193 salt minion fails to connect to conductor:** `asset-connection-resiliency` has been enhanced to ensure all communication channels are operational.
+------
+- **I95-42396 Highway crash after receiving a bad packet:** Resolved an issue in the DPDK internal storage space.
+------
+- **I95-42608 BGP over SVR not able to open BGP session when routingManager is active on different node than interface:** This has been resolved by sending the packet to the node where routingManager is active via the inter node path.
+------
+- **I95-42779 ICMP Probe not detecting interface is UP causing Probe to fail:** Resolved an issue where IcmpProbeManager hangs on an invalid node id.
+------
+- **I95-42942 GUI Session Capture not working:** Resolved an issue with Packet Count and Session Count options. Session Capture now works as expected. 
+------
+- **I95-43071 Service health learning and path avoidance working intermittently for inter-node paths:** Race condition causing paths to be determined non-viable prior to service routes being created. 
+------
+- **I95-43091 `show fib` does not display interface next hop when gateway IP address is empty:** The display has been corrected.
+------
+- **I95-43239 LTE APN on Modem not set up correctly:** The APN is now always written to the the modem using the default index of 1.
+------
+- **I95-43794 Waypoint allocation issue on peer connectivity change:** The `waypointManager` was not looking at the peer connectivity for `modify` cases. A check for peer connectivity has been added. 
+------
+- **I95-44142 Automated Provisioner race condition:** Resolved a rare crash where applications would attempt to get information about already-closed sockets when responding to API requests.
+------
+- **I95-44991 SSR not passing Aruba data on GRE Tunnels:** Resolved an issue where GRE packets with a reserved bit in the header are incorrectly dropped as invalid.
+------
+- **I95-45583 HA Connection lost during commit:** Resolved an issue where session was missing necessary path data information relating to the peer path.
+
 ## Release 5.2.2
 **Release Date:** August 24, 2021
 Contains fixes from: [Release 5.1.5, August 13, 2021](release_notes_128t_5.1.md#release-515)
@@ -43,6 +77,12 @@ Contains fixes from: [Release 5.1.5, August 13, 2021](release_notes_128t_5.1.md#
 - **I95-40335 Package dependency conflicts:** 5.2.2 supports the `vrsx-sfc` plugin. With this plugin, upgrading to 5.3.0 is not supported. If the system is upgraded to 5.3.0 with this plugin installed, the plugin dependencies will be removed and the features provided with this plugin will no longer function.
 ------
 - **I95-44608 Conductor Rollback:** In a High Availability configuration where release 5.1.7 or higher has been installed, and a rollback is necessary to a version less than 5.1.7, both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
+------
+- **I95-45946: Forwarding Plane Fault preventing packet forwarding:** Systems containing the Intel x553 NIC and running the IXGBE driver may stop forwarding packets due to an SSR forwarding plane fault. In configurations where data plane interfaces and non-forwarding interfaces such as management or high availability synchronization are mixed on the same IXBGE-based PCI device, a highway failure may prevent the non-forwarding interfaces from passing traffic. 
+
+	**Workaround:** Restart the SSR software. 
+
+	This issue has been found in earlier versions of the SSR software. Please use this workaround should you encounter this issue on an earlier release. 
 
 ## Release 5.2.1
 **Release Date:** July 20, 2021
