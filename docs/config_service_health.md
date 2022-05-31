@@ -176,53 +176,6 @@ authority
 exit
 ```
 
-### Traffic Profile
-
-When a traffic profile is configured, it allows for the enforcement of path characteristics.
-```
-router > traffic-profile
-	name	profile1
-	protocol tcp
-          protocol tcp
-          traffic-class high
-              traffic-class high
-              enabled true
-              acceptable-error-threshold	5
-              time-to-establishment
-    	            enabled	true
-	            max	      100
-	            mean	      50
-          traffic-class best-effort
-              traffic-class best-effort
-              enabled true
-              acceptable-error-threshold	10
-              time-to-establishment
-    	            enabled	true
-	            max	      500
-	            mean	      250
-	protocol udp
-          protocol udp
-          acceptable-error-threshold	20
-          time-to-establishment
-   	     enabled	false
-```
-- `traffic-profile` allows the user to configure enforcement parameters for tcp, udp and tls.
-- `traffic-class` allows the user to configure different treatments for different classes of traffic for the same service. The same default values (as described below) apply to all the classes.
-- `acceptable-error-threshold` (expressed in percentage) is the amount of errors acceptable on the path before taking it offline. For TCP, this includes the session closed before establishment, any ICMP error that constitutes destination unreachable, and session timeout before establishment. For UDP, this includes the destination unreachable class of ICMP errors.
-- `time-to-establishment` allows the user to configure a max and a mean time for a session to be established as defined for the protocol within the configured detection-window. The following table describes the default values.
-
-| Config | Type | Default Value | How to disable? |
-| ------ | ---- | ------------- | --------------- |
-| acceptable-error-threshold | percentage | 25% | 0% |
-| traffic-class |
-| enabled | boolean | true | false |
-| time-to-establishment |
-| - enabled | boolean | true | false |
-| - max | milliseconds | 500 ms | 0 ms |
-| - mean | milliseconds | 250 ms | 0 ms |
-
-Once a profile is configured, the above defaults are enforced. To turn off the specific enforcement, configure an appropriate value as listed above.
-
 ### Health Probes
 
 An ICMP probe, as described below is built into the system, providing the health probe method. Other application specific probes ([HTTP, TLS](plugin_http_probe.md), SIP, etc.) are made possible with external plugins utilizing the REST API added for this feature. The two main aspects are:
