@@ -86,6 +86,7 @@ module.exports = {
           "config_RBAC",
           "config_service_health",
           "config_snmp",
+          "howto_config_snmp",
           "config_snmp_metrics",
           "config_static_hostname_mapping",
           "config_tenants",
