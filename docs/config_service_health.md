@@ -88,21 +88,6 @@ It is easiest to use the Service Routes configured in Detection Mode and simply 
 11. In the Probe Type window, select a probe type from the drop-down. The default probe type is an ICMP probe.
 12. Click Validate, and then Commit.
 
-#### Creating a Reachability Detection Profile
-
-1. Go to the Router level (up one level).
-2. Scroll down to Reachability Profile, and click ADD.
-3. Under Protocol, click ADD.
-4. Select the Protocol type from the drop-down (tcp, tls, udp) and click SAVE.
-5. Under the protocol class label, click ADD.
-6. Select a traffic class ID and click SAVE. The traffic-class configuration allows you to configure different treatments for different classes of traffic for the same service.
-7. In the Acceptable Error Threshold field, set the threshold.
-8. In the `time-to-establishment.label` field, set Enabled to true. Define the max and mean times as necessary. This configures the time allowed to establish a session for the protocol.
-9. Return to the Router level.
-10. Select the Service Route where the Enforcement settings will be in affect.
-11. Scroll down to Reachability Detection settings. In the Reachability Detection Enforcement Profile select the Reachability Profile you just created.
-12. Click Validate, and then Commit.
-
 The following is an example Enforcement configuration with a Reachability Profile entered from the PCLI.
 
 ```
@@ -175,6 +160,66 @@ authority
     exit
 exit
 ```
+
+### Creating a Reachability Detection Profile
+
+Defining a reachability detection profile (`reachability-detection-profile`) allows you to define the criteria around determining the health of a path. 
+
+1. Go to the Router level (up one level).
+2. Scroll down to Reachability Profile, and click ADD.
+3. Under Protocol, click ADD.
+4. Select the Protocol type from the drop-down (tcp, tls, udp) and click SAVE.
+5. Under the protocol class label, click ADD.
+6. Select a traffic class ID and click SAVE. The traffic-class configuration allows you to configure different treatments for different classes of traffic for the same service.
+7. In the Acceptable Error Threshold field, set the threshold.
+8. In the `time-to-establishment.label` field, set Enabled to true. Define the max and mean times as necessary. This configures the time allowed to establish a session for the protocol.
+9. Return to the Router level.
+10. Select the Service Route where the Enforcement settings will be in affect.
+11. Scroll down to Reachability Detection settings. In the Reachability Detection Enforcement Profile select the Reachability Profile you just created.
+12. Click Validate, and then Commit.
+
+```
+Authority
+    router
+        reachability-detection-profile
+            name    profile1
+            protocol tcp
+                protocol tcp
+                traffic-class high
+                    enabled true
+                    acceptable-error-threshold    5
+                    time-to-establishment
+                        enabled true
+                        max       100
+                        mean          50
+                traffic-class best-effort
+                    enabled true
+                    acceptable-error-threshold    10
+                    time-to-establishment
+                        enabled true
+                        max       500
+                        mean          250
+            protocol udp
+                acceptable-error-threshold    20
+                time-to-establishment
+                    enabled    false
+```
+- `reachability-detection-profile` allows the user to configure enforcement parameters for tcp, udp and tls.
+- `traffic-class` allows the user to configure different treatments for different classes of traffic for the same service. The same default values (as described below) apply to all the classes.
+- `acceptable-error-threshold` (expressed in percentage) is the amount of errors acceptable on the path before taking it offline. For TCP, this includes the session closed before establishment, any ICMP error that constitutes destination unreachable, and session timeout before establishment. For UDP, this includes the destination unreachable class of ICMP errors.
+- `time-to-establishment` allows the user to configure a max and a mean time for a session to be established as defined for the protocol within the configured detection-window. The following table describes the default values.
+
+| Config | Type | Default Value | How to disable? |
+| ------ | ---- | ------------- | --------------- |
+| acceptable-error-threshold | percentage | 25% | 0% |
+| traffic-class |
+| enabled | boolean | true | false |
+| time-to-establishment |
+| - enabled | boolean | true | false |
+| - max | milliseconds | 500 ms | 0 ms |
+| - mean | milliseconds | 250 ms | 0 ms |
+
+If a profile is configured with no values specified, the defaults listed above are enforced. To turn off the specific enforcement, use the disable value shown above.
 
 ### Health Probes
 
