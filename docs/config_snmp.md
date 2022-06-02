@@ -1,6 +1,6 @@
 ---
-title: Simple Network Management Protocol (SNMP)
-sidebar_label: SNMP
+title: Simple Network Management Protocol (SNMP) - Overview
+sidebar_label: SNMP - Overview
 ---
 
 Simple Network Management Protocol (SNMP) is an internet standard protocol for collecting and organizing information about managed devices on IP networks and for modifying that information to change device behavior. SNMP is widely used in network management for network monitoring. SNMP exposes management data in the form of variables on the managed systems organized in a management information base (MIB) which describe the system status and configuration.[^1]
@@ -26,7 +26,29 @@ In order to install the 128T MIBS on another platform, a valid certificate and y
 The specific objects available in the MIB are described in more details in the the section [MIB Layout](#mib-layout).
 
 ## Basic Configuration
-Configuring SNMP on the 128T is done on a per-router basis, and is done within the `router > system > services > snmp-server` branch of the configuration hierarchy. There are three areas of configuration required: the *protocol* configuration, the *access* configuration, and the *notification receiver* configuration.
+Configuring SNMP on the 128T is done on a per-router basis, and is done within the `router > system settings > snmp-server` branch of the configuration hierarchy. There are three areas of configuration required: the *protocol* configuration, the *access* configuration, and the *notification receiver* configuration.
+
+### Sample Configuration (Basic)
+
+```
+snmp-server
+    enabled                true
+    version                v2c
+    port                   161
+
+    access-control         my-nms-agent
+        name       my-nms-agent
+        community  public
+        source     10.128.201.2
+    exit
+
+    notification-receiver  10.128.201.2 162 trap
+        ip-address  10.128.201.2
+        port        162
+        type        trap
+    exit
+exit
+```
 
 ### Protocol Configuration
 
@@ -87,28 +109,6 @@ A _forwarding interface_ is one that is identified in your 128T configuration as
 1. A `host-service` on the network-interface, with type set to `custom` and `transport` set to UDP/161 (or whichever port you've specified in your `snmp-server` configuration).
 2. The `host-service` should include one or more `access-policy` statements to allow access by the SNMP polling device(s).
 3. The `access-control` in the `snmp-server` should have its `source` set to `169.254.127.126` instead of the actual address of your SNMP polling server. This is due to the fact that the inbound SNMP requests will arrive at the Linux host operating system via a _kernel network interface_ (KNI), which performs source NAT of the outbound packets sent to snmpd.
-
-## Sample Configuration (Basic)
-
-```
-snmp-server
-    enabled                true
-    version                v2c
-    port                   161
-
-    access-control         my-nms-agent
-        name       my-nms-agent
-        community  public
-        source     10.128.201.2
-    exit
-
-    notification-receiver  10.128.201.2 162 trap
-        ip-address  10.128.201.2
-        port        162
-        type        trap
-    exit
-exit
-```
 
 ## Sample Configuration (Via Forwarding Interface)
 
