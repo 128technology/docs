@@ -24,6 +24,12 @@ device-interface pppoe-dev
     exit
 ```
 
+:::note
+PPPoE interfaces are natively Linux interfaces. The SSR uses a set of scripts (running in Linux) to manage the PPPoE interface and leverages KNI, iptable rules, and network namespace to exchange packets with the PPPoE interface.
+:::
+
+For additional information about configuring PPPoE interfaces, see [Configuring PPPoE.](howto_config_PPPoE.md)
+
 To further illustrate the use of the PPPoE VLAN tag, the following configuration snippet shows the difference between a non-VLAN tagged interface and two tagged interfaces. 
 
 ```
@@ -74,4 +80,3 @@ device-interface pppoe-dev-3
 exit
 ```
 
-For additional information about configuring PPPoE interfaces, see [Configuring PPPoE.](howto_config_PPPoE.md)

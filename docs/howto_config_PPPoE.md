@@ -7,6 +7,10 @@ sidebar_label: Configuring PPPoE
 
 Use the following examples to configure PPPoE.
 
+:::note
+PPPoE interfaces are natively Linux interfaces. The SSR uses a set of scripts (running in Linux) to manage the PPPoE interface and leverages KNI, iptable rules, and network namespace to exchange packets with the PPPoE interface.
+:::
+
 ### Configure a PPPoE Interface
 
 Use the following example to configure a PPPoE interface.
