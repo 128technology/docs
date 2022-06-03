@@ -1,9 +1,34 @@
 ---
-title: Configuring Dual PPPoE
-sidebar_label: Configuring Dual PPPoE
+title: Configuring PPPoE
+sidebar_label: Configuring PPPoE
 ---
 
-### Configuration
+## Configuration
+
+Use the following examples to configure PPPoE.
+
+### Configure a PPPoE Interface
+
+Use the following example to configure a PPPoE interface.
+
+```
+device-interface pppoe-dev-0
+    name pppoe-dev-0
+    type pppoe
+    target-interface eth0
+    pppoe
+        user-name user1
+        password passw0rd1
+        authentication-protocol chap
+    exit
+    network-interface pppoe-intf-0
+        name pppoe-intf-0
+        source-nat true
+    exit
+exit
+```
+
+### Configure Dual PPPoE Interfaces
 
 Support for multiple PPPoE interfaces on a single node is configured as follows.
 
@@ -11,7 +36,7 @@ Support for multiple PPPoE interfaces on a single node is configured as follows.
 device-interface pppoe-dev-1
     name pppoe-dev-1
     type pppoe
-    target-interface dpdk3
+    target-interface eth1
     pppoe
         user-name user1
         password passw0rd1
@@ -25,7 +50,7 @@ exit
 device-interface pppoe-dev-2
     name pppoe-dev-2
     type pppoe
-    target-interface dpdk4
+    target-interface eth2
     pppoe
         user-name user2
         password passw0rd2
@@ -87,7 +112,7 @@ After the first authentication failure (for pppd exit code 19), the intervals be
 ```
 #### Connection Status using Linux
 
-When the 128T is not running and the PPPoE connection is managed by linux, a `pppoe-state` utility is used to return the connection status. To use the utility, run `pppoe-state ppp<giid>` as shown below.
+When the SSR is not running and the PPPoE connection is managed by linux, a `pppoe-state` utility is used to return the connection status. To use the utility, run `pppoe-state ppp<giid>` as shown below.
 
 ```
 [root@t189-dut1 ~]# pppoe-state ppp2
