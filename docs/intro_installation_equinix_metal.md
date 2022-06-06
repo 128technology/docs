@@ -11,7 +11,7 @@ sidebar_label: Installing in Equinix Metal
 
 This guide describes the process for deploying a Session Smart Router (SSR) in Equinix Metal. The process consists of the following steps:
 
-1. Deploying a Session Smart Conductor. For a quick deployment you can use the Hourly/PAYG offering available in Azure or AWS. Refer to the [Azure documentation](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_installation_azure/#session-smart-conductor-deployment) or the [AWS documentation](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_installation_quickstart_aws) for more information.
+1. Deploying a Session Smart Conductor. For a quick deployment you can use the Hourly/PAYG offering available in Azure or AWS. Refer to the [Azure documentation](intro_installation_azure.md#session-smart-conductor-deployment) or the [AWS documentation](intro_installation_quickstart_aws.md#session-smart-conductor-deployment) for more information.
 2. Completing the [prerequisites for the deployment](#prerequisites).
 3. Preparing the [Equinix Metal Project for deployment](#equinix-metal-project-deployment).
 4. Deploying a [Session Smart Router](#session-smart-router-deployment).
@@ -131,7 +131,7 @@ Launch the installer using the following command:
 
 `sudo install128t`
 
-To complete the installation of the Session Smart Router (SSR) software, continue from the step 4 of the [Manual Installation procedure](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_installation_installer#manually-installing-using-the-128t-installer).
+To complete the installation of the Session Smart Router (SSR) software, continue from the step 4 of the [Manual Installation procedure](intro_installation_installer.md#manually-installing-using-the-128t-installer).
 
 The server restarts at the end of the installation process. Login to the Conductor GUI and use the procedure below (Attaching the L2 Networks to the Server) to configure the Session Smart Router device interfaces.
 
