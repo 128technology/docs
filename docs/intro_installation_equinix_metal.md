@@ -16,7 +16,7 @@ This guide describes the process for deploying a Session Smart Router (SSR) in E
 3. Preparing the [Equinix Metal Project for deployment](#equinix-metal-project-deployment).
 4. Deploying a [Session Smart Router](#session-smart-router-deployment).
 
-Additional technical documentation on Equinix Metal can be found [here](https://metal.equinix.com/developers/docs/).
+For additional information about Equinix Metal, please refer to the [Equinix Metal Product Documentation](https://metal.equinix.com/developers/docs/).
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ Additional technical documentation on Equinix Metal can be found [here](https://
   * Add your SSH Key to your Equinix Metal account or project as described [here](https://metal.equinix.com/developers/docs/accounts/ssh-keys/#personal-keys-vs-project-keys).
 * A token or certificate to install the Juniper Session Smart Router software. If a token or certificate is not in your possession, please contact your Juniper Sales representative.
 
-Once you have all the prerequisites, proceed to the next section [Equinix Metal Project Deployment](#equinix-metal-project-deployment) to deploy the network infrastructure required to deploy a Session Smart Router.
+Once you have all the prerequisites, begin with [Equinix Metal Project Deployment](#equinix-metal-project-deployment) to deploy the network infrastructure required to deploy a Session Smart Router.
 
 ## Equinix Metal Project Deployment
 
@@ -36,7 +36,7 @@ It is recommended to implement a network infrastructure design that complies wit
   * For example, create one `Internet VLAN` for data plane Internet access, and a second `Peering VLAN` to forward traffic destined for other Equinix Metal regions, or to Public Cloud Providers, etc.
 * For servers that only have 2 ports (network interfaces):
   * The first port is dedicated to management functions only. The port must have access to the Internet, allowing the SSR to be reachable by SSH for administration activities. In addition, if the Conductor is hosted in the Internet, connectivity to Conductor must be provided via this network interface.
-  * The second port is dedicated to the data plane. The second port is attached to multiple L2 VLANs using 802.1q
+  * The second port is dedicated to the data plane, and is attached to multiple L2 VLANs using 802.1q.
 
 The next sections implement the recommended design in Equinix Metal.
 
@@ -48,9 +48,7 @@ The next sections implement the recommended design in Equinix Metal.
 4. Select the location of your deployment.
 5. Provide a descritpion and an ID for the VLAN.
 
-Repeat the steps above to create as many L2 VLANs as necessary to meet your specific requirements. For example:
-
-For example: Internet and VLAN ID 128.
+Repeat the steps above to create as many L2 VLANs as necessary to meet your specific requirements. For example: Internet and VLAN ID 128.
 
 | Description | VNID |
 | ----------- | ---- |
@@ -59,7 +57,7 @@ For example: Internet and VLAN ID 128.
 
 ### Deploying a Metal Gateway
 
-An Equinix Metal™ Metal Gateway provides a single IPv4 Gateway for a subnet. This allows you to deploy a group of servers in a Metro that are all on the same subnet and that can all connect to each other or the Internet through the Metal Gateway.
+An Equinix Metal™ Metal Gateway provides a single IPv4 Gateway for a subnet. This allows you to deploy a group of servers in a Metro on the same subnet, and able to connect to each other or the Internet through the Metal Gateway.
 
 Deploy a Metal Gateway in the `Internet VLAN` to break out to the Internet:
 
@@ -77,13 +75,9 @@ Deploy a Metal Gateway in the `Internet VLAN` to break out to the Internet:
 12. Select `Public IPv4` and select the IP range created above.
 13. Click on the "Create Metal Gateway" button.
 
-Proceed to the next section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
-
 ## Session Smart Router Deployment
 
-### Deployment
-
-To deploy a Session Smart Router software via the [Equinix Metal Console](https://console.equinix.com/login):
+Use the following procedure to deploy a Session Smart Router software via the [Equinix Metal Console](https://console.equinix.com/login):
 
 1. Click on the “Servers" tab.
 2. Click on one of the reservation options available. Select "On Demand" if you do not need to reserve the server for a committed period of time.
@@ -93,7 +87,7 @@ To deploy a Session Smart Router software via the [Equinix Metal Console](https:
 6. Select the number of servers to reserve, and provide a name for each.
 7. Click on the "Deploy Now" button.
 
-Once the reservation request completes, the Public IP address of the management interface of the server will be accessible. The Public IP address of the server is displayed in the Equinix Metal Console.
+After the reservation request is complete, the Public IP address of the management interface of the server is accessible. The Public IP address of the server is displayed in the Equinix Metal Console.
 
 SSH into the Public IP address of the server with the following command: 
 
@@ -141,7 +135,7 @@ To complete the installation of the Session Smart Router (SSR) software, continu
 
 The server restarts at the end of the installation process. Login to the Conductor GUI and use the procedure below (Attaching the L2 Networks to the Server) to configure the Session Smart Router device interfaces.
 
-### Attaching the L2 Networks to the server
+### Attaching the L2 Networks to the Server
 
 1. Login to the [Equinix Metal Console](https://console.equinix.com/login).
 2. Click on the “Servers" tab.
@@ -213,6 +207,6 @@ exit
 
 ## Appendix
 
-### Console access
+### Console Access
 
 There may be times when a server becomes unreachable over SSH due to broken networking, a bad install, misconfiguration, a kernel upgrade, bad firewall rules, etc. Equinix Metal™ offers an out-of-band console called "SOS" - which stands for Serial Over SSH. Refer to the [SOS - Serial Over SSH](https://metal.equinix.com/developers/docs/resilience-recovery/serial-over-ssh/) documentation for additional information.
