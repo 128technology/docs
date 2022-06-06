@@ -245,7 +245,7 @@ Mon 2020-03-09 17:50:14 UTC
 ```
 
 :::note
-The 128 Technology solution includes the Sangoma E1/T1 card for interfacing to MPLS networks. For more information on the Framer alarms, the LIU alarms, and the Tx alarms, refer to the [Sangoma Reference Guide](https://wiki.freepbx.org/pages/viewpage.action?pageId=57411508) for details.
+The 128 Technology solution includes the Sangoma E1/T1 card for interfacing to MPLS networks. For more information on the Framer alarms, the LIU alarms, and the Tx alarms, refer to the Sangoma Reference Guide for details.
 :::
 
 #### Checking the Circuit Status

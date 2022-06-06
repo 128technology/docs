@@ -15,6 +15,10 @@ For example, in the following hub and spoke diagram the Datacenter router has 5 
 
 Per-adjacency traffic engineering allows you to automatically identify the adjacent path and the `receive-cap`, and limit the rate of traffic destined for that path. With a `receive-cap` configured for each adjacency, traffic does not exceed the `receive-cap` associated with the adjacency, and is not dropped by the ISP. 
 
+### Traffic Profile
+
+A traffic profile allows you to adjust the amount of bandwidth allocated for various traffic categories. When a traffic profile is configured, it is applied on a network or device interface. Note that the values for best-effort, high, medium, and low are percentage values, and collectively must add up to 100 percent. See [`traffic-profile`](config_reference_guide.md#traffic-profile) for additional information. 
+
 ### Auto-Configuration via Neighborhoods
 
 :::note
