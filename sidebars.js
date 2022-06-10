@@ -143,6 +143,15 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Intrusion Detection and Prevention",
+        "items": [
+          "concepts_ssr_idp",
+          "config_idp",
+          "ts_idp",
+        ],
+      },
+      {
+        "type": "category",
         "label": "Service and Topology Exchange Protocol (STEP)",
         "items": [
           "config_STEP",

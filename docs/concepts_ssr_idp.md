@@ -42,6 +42,10 @@ The actions taken when a threat is identified or an attack is detected are liste
 
 	Events are always generated for any detected vulnerability. However, when the **Alert** action is specified, no additional measure is taken by the system to prevent the attack. Alerts are typically only to low severity attacks, or when the administrator explicitly configures the alert-only action for a service and tenant. 
 
+### Security Events Dashboard
+
+Security events are generated any time a vulnerability is detected. These events are stored on the system for up to 24 hours (is this configurable?), and can be viewed on the Security Event History page on the SSR Conductor. 
+
 ### Automatic Updates
 
 The SSR will leverage the existing configuration for auto-update under config > authority > router > application-identification > auto-update to set up an automatic update schedule for the IDP signatures. This will only apply to routers that have this feature enabled. 
