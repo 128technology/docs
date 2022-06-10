@@ -7,6 +7,16 @@ sidebar_label: '3.1'
 **Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 :::
 
+## Release 3.1.4
+
+### Resolved Issues
+
+- **IN-497 Conductor Only Upgrade Time Too Long:** Conductors configured as `conductor-only` are without internet connectivity for their routers, causing HTTP requests to fail. The process has been updated to identify if DNF is configured with a proxy, and to make use of that proxy for HTTP requests.
+------
+- **IN-464/IN-487 Reinstall is now an "Advanced Feature":** Reinstallation should be performed from the ISO, rather than the Installer to avoid problems of leftover packages and kernel mismatches.
+------
+- **IN-479 Update Support Contacts in the Installer:** The contact information in the Installer has been updated.
+
 ## Release 3.1.3
 
 ### Resolved Issues
