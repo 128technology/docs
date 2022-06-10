@@ -11,7 +11,7 @@ sidebar_label: '3.1'
 
 ### Resolved Issues
 
-- **IN-497 Conductor Only Upgrade Time Too Long:** Conductors configured as `conductor-only` are without internet connectivity for their routers, causing HTTP requests to fail. The process has been updated to identify if DNF is configured with a proxy, and to make use of that proxy for HTTP requests.
+- **IN-497 Router upgrades take an extended amount if the repo times out with conductor-only configured:** Routers that are configured as `conductor-only` and that can resolve the remote repo, but where the repo access operations time out, may result in an extended amount of time for upgrades to complete. This issue has been resolved.
 ------
 - **IN-464/IN-487 Reinstall is now an "Advanced Feature":** Reinstallation should be performed from the ISO, rather than the Installer to avoid problems of leftover packages and kernel mismatches.
 ------
