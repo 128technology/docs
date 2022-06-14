@@ -24,6 +24,70 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.4.6
+
+**Release Date: June 16, 2022**
+
+### New Features
+
+- **I95-44863 Automatic Core Assignment after Reboot:** On systems running in automatic mode, where the Router core count has increased or decreased, the software now automatically recalculates the core count and allocation.
+------
+- **I95-43048 Implement NIST-FIPS validated cryptography:** NIST FIPS-validated cryptography has been implemented for the following: To provision digital signatures, to generate cryptographic hashes, and to protect data requiring data-at-rest protections in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards.
+------ 
+- **I95-44769 Add linux system logs to the Tech Support Information data:** Added settings to SaveTechSupportInfo to allow for customizations of journalctl settings, as well as some additional collection.
+
+### Resolved Issues
+
+- **The following CVE's have been addressed and resolved:** I95-45054, I95-45056, I95-45059, I95-45060, I95-45123, I95-45165, I95-46020, I95-45359.
+------
+- **I95-40904 Power save mode not working:** This issue has been resolved.
+------
+- **I95-42438 Save Tech Support tries to run when 128T service is down:** In situations where the PCLI is still active, but the 128T service is down, trying to run `save tech support` will appear to work, but does not return any info. This issue has been resolved, and will return a message when information is not retrievable. 
+------
+- **I95-43606 No communication between Routers:** In rare instances the BFD Pinhole feature experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.
+------
+- **I95-44001 Peer uptime showing "Unavailable":** Peer path uptime now displays the correct values.
+------
+- **I95-44551 DHCP Relay not working after upgrade:** A packet for traffic matching a summary service may be dropped because it was incorrectly flagged as hierarchical on the SVR peer. Well known non-hierarchical services such asDHCP relay will no longer perform hierarchical service checks on the peer.
+------
+- **I95-44988 SSR Stuck in Upgrade status:** Improved logging to detect when an installer session is started and there is an already an active interactive installer session; for example when an interactive installer session was left open.
+------
+- **I95-45113 SNMP override of the IfTable:** An issue with SNMP reporting has been resolved.
+------
+- **I95-45124 RBAC Config Endpoints Leaking Information:** Resolved an issue where some configuration endpoints would allow users with incorrect permissions make requests.
+------
+- **I95-45126 Split-brain after the sync interface goes down:** This issue has been resolved.
+------
+- **I95-45162 Improve download/upgrade error message if a router name does not exist:** In situations where a router does not exist, the download and upgrade message now indicates that the router does not exist.
+------
+- **I95-45220 Conductor local forwarding parameters not dynamic:** Resolved an issue when transitioning a conductor from standalone to HA the managed routers were not automatically connecting to the newly added conductor node.
+------
+- **I95-45271 Error while trying to change appearance or selecting custom reports:** In some cases where error messages are vague, a path to the error location is provided. 
+------
+- **I95-45541 LDAP users are unable to login to the PCLI due to permission errors:** This issue has been resolved.
+------
+- **I95-45696 Memory leak in PAM challenge library:** Resolved a memory leak in the PAM challenge library. 
+------
+- **I95-45814 No Bandwidth statistics visible in GUI:** 
+------
+- **I95-45842 PCLI `show events` does not paginate correctly:** This issue has been resolved.
+------
+- **I95-45882 Rare case where an invalid DHCP server configuration generated:** This issue has been resolved.
+------
+- **I95-46055 Add warning when transmit caps are too low:** Users now get a warning when configuring a traffic-engineering transmit-cap under 1Mbps.
+
+### Caveats
+
+- **I95-45348: Update salt master and minion to 3002.8:** When upgrading an HA pair to version 5.4.6, please be aware of the following: While updating the conductors in an HA pair, the upgraded conductor node asset state will remain DISCONNECTED if the active `automatedProvisioner` is not running a corrected version (see table below). When performing an HA conductor upgrade the node running the oldest software assumes leadership. However, the older version will not be able to talk to the new software on the upgraded conductor. 
+
+	The active `automatedProvisioner` can be determined by running the command `show system processes`. Once the upgrade begins on the old node, the newly upgraded conductor takes over.
+
+	#### Corrected Versions
+
+	| Router Software Version | Minimum Required Conductor Version |
+	| --- | --- |
+	| 5.4.6 | 5.4.6, 5.5.1, 5.6.0 |
+
 ## Release 5.4.5-8
 
 **Release Date: May 11, 2022**
