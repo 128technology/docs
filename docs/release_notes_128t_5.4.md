@@ -30,11 +30,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- **I95-44863 Automatic Core Assignment after Reboot:** On systems running in automatic mode, where the Router core count has increased or decreased, the software now automatically recalculates the core count and allocation.
+- **I95-44863 Automatic Core Assignment after Reboot:** On systems where `forwarding-core-mode` is set to `automatic`, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
 ------
 - **I95-44267 Implement NIST-FIPS validated cryptography:** NIST FIPS-validated cryptography has been implemented and provides the ability to provision digital signatures, to generate cryptographic hashes, and to protect data requiring data-at-rest protections in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. For information about how to enable FIPS mode, refer to the [Conductor Interactive Installation](intro_installation_bootable_media.md) documentation.
 ------ 
-- **I95-44769 Add linux system logs to the Tech Support Information data:** Added settings to SaveTechSupportInfo to allow for customizations of journalctl settings, as well as some additional collection.
+- **I95-44769 Add Linux system logs to the Tech Support Information data:** This patch allows for customizations of the systemd journal content included in the `tech-support-info` bundle, and includes additional default content.
 
 ### Resolved Issues
 
@@ -42,19 +42,19 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-40904 Power save mode not working:** This issue has been resolved.
 ------
-- **I95-42438 Save Tech Support tries to run when SSR service is down:** In situations where the PCLI is still active, but the SSR service is down, trying to run `save tech support` will appear to work, but does not return any info. This issue has been resolved, and will return a message when information is not retrievable. 
+- **I95-42438 `save tech-support-info` tries to run when SSR service is down:** In situations where the PCLI is still active, but the SSR service is down, trying to run `save tech-support-info` will appear to work, but does not return any info. This issue has been resolved, and will return a message when information is not retrievable. 
 ------
-- **I95-43606 No communication between Routers:** In rare instances the BFD Pinhole feature experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.
+- **I95-43606 No communication between Routers:** In rare instances, BFD outbound-only flows experienced collisions between forward session flows. Session modification has been addressed and collisions are now avoided.
 ------
 - **I95-44001 Peer uptime showing "Unavailable":** Peer path uptime now displays the correct values.
 ------
-- **I95-44551 DHCP Relay not working after upgrade:** A packet for traffic matching a summary service may be dropped because it was incorrectly flagged as hierarchical on the SVR peer. Well known non-hierarchical services such asDHCP relay will no longer perform hierarchical service checks on the peer.
+- **I95-44551 DHCP Relay not working after upgrade:** A packet for traffic matching a summary service may be dropped because it was incorrectly flagged as hierarchical on the SVR peer. Well known non-hierarchical services such as DHCP relay will no longer perform hierarchical service checks on the peer.
 ------
 - **I95-44988 SSR Stuck in Upgrade status:** Improved logging to detect when an installer session is started and there is an already an active interactive installer session; for example when an interactive installer session was left open.
 ------
 - **I95-45113 SNMP override of the IfTable:** An issue with SNMP reporting has been resolved.
 ------
-- **I95-45124 RBAC Config Endpoints Leaking Information:** Resolved an issue where some configuration endpoints would allow users with incorrect permissions make requests.
+- **I95-45124 RBAC Config Endpoints Leaking Information:** Resolved an issue where some configuration endpoints would allow users with insufficient permissions to make configuration requests.
 ------
 - **I95-45126 Split-brain after the sync interface goes down:** Resolved an issue that if the SSR software experienced a crash while it owned an interface from an X553 device, other devices hosted by the same chip could be impacted.
 ------
