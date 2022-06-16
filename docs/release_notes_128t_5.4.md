@@ -32,8 +32,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-44863 Automatic Core Assignment after Reboot:** On systems where `forwarding-core-mode` is set to `automatic`, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
 ------
-- **I95-44267 Implement NIST-FIPS validated cryptography:** NIST FIPS-validated cryptography has been implemented and provides the ability to provision digital signatures, to generate cryptographic hashes, and to protect data requiring data-at-rest protections in accordance with applicable federal laws, Executive Orders, directives, policies, regulations, and standards. For information about how to enable FIPS mode, refer to the [Conductor Interactive Installation](intro_installation_bootable_media.md) documentation.
------- 
 - **I95-44769 Add Linux system logs to the Tech Support Information data:** This patch allows for customizations of the systemd journal content included in the `tech-support-info` bundle, and includes additional default content.
 
 ### Resolved Issues
@@ -60,7 +58,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-45162 Improve download/upgrade error message if a router name does not exist:** In situations where a router does not exist, the download and upgrade message now indicates that the router does not exist.
 ------
-- **I95-45220 Conductor local forwarding parameters not dynamic:** Resolved an issue when transitioning a conductor from standalone to HA the managed routers were not automatically connecting to the newly added conductor node.
+- **I95-45220 Conductor local forwarding parameters not dynamic:** Resolved an issue when transitioning a conductor from standalone to HA, the managed routers were not automatically connecting to the newly added conductor node.
 ------
 - **I95-45271 Error while trying to change appearance or selecting custom reports:** In some cases where error messages are vague, a path to the error location is provided. 
 ------
@@ -68,7 +66,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-45696 Memory leak in PAM challenge library:** Resolved a memory leak in the PAM challenge library. 
 ------
-- **I95-45814 No Bandwidth statistics visible in GUI:** Resolved an issue with a buffer overflow when processing high numbers of services and service routes which prevented a subset of stats from being stored and displayed.
+- **I95-45814 No Bandwidth statistics visible in GUI:** Resolved an issue when processing high numbers of services and service routes which prevented a subset of stats from being stored and displayed.
 ------
 - **I95-45842 PCLI `show events` does not paginate correctly:** This issue has been resolved.
 ------
