@@ -668,6 +668,20 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 The plugin must be updated to version 2.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
+### Release 2.1.1
+
+**Release Date:** Jun 16, 2022
+
+#### Issues Fixed
+
+- **PLUGIN-1505** Wireguard config does not allow reference to an existing tenant
+
+  _**Resolution:**_ The config generation logic for the plugin will allow references to existing tenants.
+
+- **PLUGIN-1753** Disabling wireguard plugin can cause the 128T manifest to be removed
+
+  _**Resolution:**_ When disabling the plugin, the kernel modules and 128T manifest are no longer removed.
+
 ### Release 2.1.0
 
 #### New Features and Improvements
