@@ -105,12 +105,20 @@ You can manually configure traffic to use UDP for transport by modifying the [`u
 
 #### Port Ranges
 
-The default range of ports used for configuring waypoints with SVR is 16,385 through 65,533. When sending traffic to a peer, the 128T will allocate an even numbered waypoint for itself and an odd numbered waypoint for its peer.
+The default range of ports used for configuring waypoints with SVR is 16,385 through 65,533. When sending traffic to a peer, the SSR will allocate an even numbered waypoint for itself and an odd numbered waypoint for its peer.
 
 If you need to limit the ports or port range the SSR uses for receiving traffic, a `port-range` can be configured under the `neighborhood`. This tells peer SSRs to constrain the destination port range used when communicating with another router. Note that when manually specifying a port range, port numbers 1025 to 16383 can also be used. 
 
 #### Example:
 Let's say you want to utilize UDP for transport, but do not want to open up all the default ports. To limit the number of ports open on your firewall, you choose to specify a port range of 10,000 to 12,000. With each new waypoint, thousands of active sessions are added. Even with a small port range selection you can easily support many active users.
+
+### TTL Handling
+
+Beginning with version 6.0.0, the SSR's handling SVR traffic can be configured to adjust the TTL value on hops between SSR routers. This adjustment can prevent situations where the TTL expires on packets flowing through multiple hops and then out to the Internet to their final destination. 
+
+| Element | Type | Description |
+| --- | --- | --- |
+| ttl-padding | enumeration | Valid values: 0-255, automatic, false. Default is 0. A numeric value is used to adjust the TTL of each packet destined to the next SSR. All subsequent routers continue to decrement the TTL value, but seeding at a higher value at each SSR hop minimizes the risk of TTL expiring mid-route. Automatic allows BFD traffic to help determine hops between SSR's and adjusts padding automatically. False disables the feature. |
 
 ## Router to Conductor Connectivity
 Each deployed router (and in many cases, individual nodes within that router) has multiple concurrent connections to each conductor node within its authority. The primary connection between a router and a conductor is using 930/TCP, which is an encrypted SSH connection that bears most router-to-conductor inter-process communication (IPC). The secondary connetion is that between a router's _salt-minion_ and a conductor's _salt-master_, which leverages 4505-4506/TCP.
