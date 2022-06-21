@@ -1,6 +1,6 @@
 ---
-title: SNMP - Configuration 
-sidebar_label: SNMP - Configuration
+title: SNMP Configuration 
+sidebar_label: Configuration
 ---
 ## Overview
 

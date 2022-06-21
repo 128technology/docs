@@ -1,9 +1,11 @@
 module.exports = {
   "docs": {
     "About": [
-      "about_128t",
       "intro_getting_started",
+      "about_128t",
       "about_svr_savings",
+    ],
+    "Releases and Support": [  
       "about_releases",
       "about_support_policy",
       "about_services_description",
@@ -122,20 +124,14 @@ module.exports = {
       "config_basics",
       "config_templates",
       "config_RBAC",
-      "config_asset_connection_resiliency",
-      "config_audit_event",
       "config_dhcp",
+      "config_management_over_forwarding",      
+      "config_asset_connection_resiliency",      
       "config_dns_proxy",
-      "config_forward_error_correction",
-      "config_management_over_forwarding",
-      "config_flow_perf_mon",
+      "config_forward_error_correction",      
       "config_gre_tunnel",
       "config_nat",
-      "howto_config_PPPoE",
       "config_service_health",
-      "howto_config_snmp",
-      "config_snmp",
-      "config_snmp_metrics",
       "config_transport_encryption",   
     ],
     "Ethernet Over SVR": [
@@ -146,6 +142,7 @@ module.exports = {
       "events_overview",
       "events_alarms",
       "events_events",
+      "config_audit_event",
     ],
     "High Availability": [
       "concepts_ha_theoryofoperation",
@@ -171,10 +168,13 @@ module.exports = {
      "config_ntp_auth",
     ],
     "Optimizing Routing Protocols": [
-      "howto_tune_bfd",
       "config_bgp",
       "config_ospf", 
       "config_bfd", 
+      "howto_tune_bfd",
+      "config_flow_perf_mon",
+      "howto_config_PPPoE",
+      "howto_pppoe_vlan",
     ],
     "Security": [
       "sec_adaptive_encrypt",
@@ -185,19 +185,24 @@ module.exports = {
         "howto_STEP_GUI",
         "ts_step",
     ],
-    "Services and Service Policies":[
+    "Services and Service Policies": [
       "bcp_service_and_service_policy_design",
       "config_static_hostname_mapping",
       "bcp_service-policy_defaults",
+    ],
+    "SNMP": [
+      "config_snmp",
+      "howto_config_snmp",
+      "config_snmp_metrics",
+    ],
+    "Tenants": [
+      "bcp_tenants",
+      "config_tenants",
     ],
     "Traffic Engineering":[
       "bcp_per-adjacency_traffic_engineering",
       "config_dscp_steering",
       "config_rate_limiting",
-    ],
-    "Tenants": [
-      "bcp_tenants",
-      "config_tenants",
     ],
     "Troubleshooting": [
       "ts_applications",

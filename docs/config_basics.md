@@ -1,6 +1,6 @@
 ---
-title: Configuration Management on the SSR
-sidebar_label: Configuration Management
+title: Configuration Workflow on the SSR
+sidebar_label: Configuration Workflow
 ---
 
 The following sections describe the various configurations available to you on your SSR, the basics of the configuration workflow, and important things to consider when managing your SSR devices.
