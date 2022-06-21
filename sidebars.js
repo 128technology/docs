@@ -133,6 +133,7 @@ module.exports = {
       "config_nat",
       "howto_config_PPPoE",
       "config_service_health",
+      "howto_config_snmp",
       "config_snmp",
       "config_snmp_metrics",
       "config_transport_encryption",   

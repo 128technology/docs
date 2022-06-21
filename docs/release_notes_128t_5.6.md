@@ -40,6 +40,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-37648 Configurable Password Policy:** The SSR password policies have been updated to provide a more secure experience. See [Password Policies](config_password_policies.md) for additional information.
 ------
+- **I95-38430 Support for PPPoE over VLAN:** Added support for PPPoE over VLAN. See [VLAN Support on a PPPoE Interface](howto_pppoe_vlan.md) for configuration information. 
+------
 - **I95-39712 Hierarchical Service Inheritance For STEP Learned Routes:** Child services now inherit routes of their parent services, when the parent route is learned through STEP. For more information see [Hierarchical Services.](config_STEP.md#hierarchical-services)
 ------
 - **I95-40130 Factory Defaults for Conductor Communication:** Added SaltStack, Conductor, and IKE default session-types. For new deployments, SIP, SIPS, and IPSEC-NAT use NAT Keep Alive by default, and the timeout for IPSEC-NAT is 125 seconds.
@@ -123,9 +125,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-45348 Update salt master and minion to 3002.8:** This update resolves several CVE's and requires that the conductor must be running this release containing these fixes **before** upgrading a router. 
 **Important** Please see the Caveat below for additional important information about HA upgrades.
 ------
-- **I95-45374 Router Dropping SIP traffic:** Provide a warning if users configure a service-class to rate-limit but don't set max-flow-burst/max-flow-rate values (default is set to 0).
+- **I95-45374 Router Dropping SIP traffic:** A warning is displayed if users configure a service-class to rate-limit but don't set max-flow-burst/max-flow-rate values (default is set to 0).
 ------
-- **I95-45541 LDAP users are unable to login to the PCLI due to getting permission errors on global.init:** This issue has been resolved.
+- **I95-45541 LDAP users are unable to login to the PCLI due to permission errors:** This issue has been resolved.
 ------
 - **I95-45559 Corrupted resolv.conf after ODM imaging:** Resolved an issue on SSR systems running dns-proxy services with external interfaces configured using PEERDNS=yes, where a race condition may occur that results in corrupt nameservers being added to the /etc/resolv.conf file.
 ------
