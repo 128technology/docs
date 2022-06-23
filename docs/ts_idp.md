@@ -5,7 +5,7 @@ sidebar_label: Troubleshooting IDP
 
 ### Show Commands
 
-**(need more information, better troubleshooting information)**
+**(need additional information, better troubleshooting information)**
 
 The `show idp application` and its sub-commands provide information about the running state of the IDP engine. 
 
