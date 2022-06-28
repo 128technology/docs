@@ -24,6 +24,52 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.5.2-1
+
+**Release Date:** June 30, 2022
+
+### New Features
+
+- **I95-40195 LDAP does not allow search base to be configured correctly:** This is a new feature. New commands, new config. 
+------
+- **I95-40333 Save credentials for accessing SSR software repositories:** `set software access-token` is a new PCLI command to save credentials for accessing SSR software repositories. This provides a way to run `install128t repo authenticate` without dropping to a linux shell.
+------
+- **I95-44863 Automatic Core Assignment after Reboot:** On systems where forwarding-core-mode is set to automatic, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
+------
+- **I95-46562 Allow targeting another router or node when saving
+tech-support-info:** GUI: There is a new button on the **Logs** page in the GUI to download a tech-support-info bundle. This allows downloading a router's `tech-support-info` directly from the Conductor UI. <br />
+PCLI: The PCLI command `save tech-support-info` can now collect logs from another node. This means that from the Conductor's PCLI a `tech-support-info` bundle can be collected from a Managed Router or the HA peer.
+
+### Resolved Issues
+
+- **The following CVE's have been addressed and resolved:** I95-45060, I95-45123, I95-45165, I95-46020, I95-46359.
+------
+- **I95-45126 Split-brain after the sync interface goes down:** Resolved an issue that if the SSR software experienced a crash while it owned an interface from an X553 device, other devices hosted by the same chip could be impacted.
+------
+- **I95-45814 No Bandwidth statistics visible in GUI:** Resolved an issue when processing high numbers of services and service routes which prevented a subset of stats from being stored and displayed.
+------
+- **I95-46114 SSR flooded with Highway messages:** The chatty `InterfaceMap::Exception: Unable to find path to peer` highway log has been suppressed.
+------
+- **I95-46136 Unused app-id stats not being purged fast enough:** Ressolved an issue where app-id stats tracked per client, per app, per next-hop are not cleaned up when inactive.
+------
+- **I95-46169 RIB Doesn't Update Connected Route After Changing Network Interface Address Prefix from /24 to /27:** Resolved an issue when changing the prefix length for a network interface address, the RIB was not updated and routing protocols were not aware of the change.
+------
+- **I95-46314 Configuring Static Assignment with Client-Identifier Causes DHCP failure:** Updated config validation to verify that, within a single DHCP server host-service, all static assignments use unique client-identifiers.
+------
+- **I95-46332 VRRP Does Not Work with Ethernet Controller X710 for 10GbE SFP+:** Configuring VRRP on an Intel X700 series NIC can see discard broadcast packets due to the source pruning feature which is enabled by default. This change disables source pruning when VRRP is enabled on these NICs.
+------
+- **I95-46394 Conductor missing generated GIID's:** Resolved a rare case where the GIID on generated redundant interfaces was missing.
+------
+- **I95-46419 FEC w/ OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modifcation to resolve the outbound only path.
+------
+- **I95-46451 Active Node not updating properly:** Resolved an issue with inter-node VRRP wherein the virtual interface could get stuck in a bad state after a flap.
+------
+- **I95-46454 ICMP manager excessively logs ICMP echo replies with no matching context:** This issue has bee resolvd.
+------
+- **I95-46613 Flow move may not happen without forward packet for outbound only sessions:** Resolved an issue that when a session has been idle for more than 10 seconds, sessions for outbound-only connections may not failover properly without a forward packet.
+------
+- **I95-46641 Modem lockup after reset on dual LTE system:** This issue has been resolved. 
+
 ## Release 5.5.1-6
 
 **Release Date:** June 1, 2022
