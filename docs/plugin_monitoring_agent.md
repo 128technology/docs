@@ -1608,6 +1608,19 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 
 ## Monitoring Agent Plugin Notes
 
+## Release 2.1.0
+
+**Release Date:** Jun 24, 2022
+
+#### New Features and Improvements:
+  - **MON-391** Add support for tech support info collection for all monitoring agent components
+  - **MON-389** Add support for adjacent hostname in the peer-path collector
+
+#### Issues Fixed ####
+  - **PLUGIN-1729** Monitoring agent service stopped sending metrics
+
+    _**Resolution**_ The monitoring agent service will now be stopped gracefully before upgrades and will automatically restart after upgrade
+
 ## Release 2.0.3
 
 #### New Features and Improvements:
