@@ -17,8 +17,8 @@ The `ldap-server` configuration has the following attributes:
 :::note
 If using an FQDN/hostname, this name must be resolvable by the SSR.
 :::
-- **search-base**: the search base defines the starting point for the search in the directory tree. For example, SSR might need to query the entire directory, in which case the search base must specify the root of the directory service. Or, SSR might need to query a specific organizational unit (OU) in the directory. Generally this is configured as a series of _Domain Components_, which are abbreviated "dc."
-- **server-type**: an enumeration, which can be _global-catalog_, _ldaps_, or _starttls_. For Active Directory LDAP servers, use `global-catalog`. LDAPS is LDAP wrapped in SSL, and is a non-standard (yet popular) implementation. StartTLS is instead built into the LDAP protocol itself. Consult your LDAP server's documentation to determine the server-type most appropriate for your deployment.
+- **search-base**: The search base defines the starting point for the search in the directory tree. For example, SSR might need to query the entire directory, in which case the search base must specify the root of the directory service. Or, SSR might need to query a specific organizational unit (OU) in the directory. Generally this is configured as a series of _Domain Components_, which are abbreviated "dc."
+- **server-type**: An enumeration, which can be _global-catalog_, _ldaps_, or _starttls_. For Active Directory LDAP servers, use `global-catalog`. LDAPS is LDAP wrapped in SSL, and is a non-standard (yet popular) implementation. StartTLS is instead built into the LDAP protocol itself. Consult your LDAP server's documentation to determine the server-type most appropriate for your deployment.
 :::note
 The default type is ldaps, which requires TLS/SSL for the entire duration of the connection
 :::
@@ -30,8 +30,20 @@ The "starttls" type will not send user passwords in the process of being validat
 - **distinguished-name**: the name to use when binding to the server; available when bind-type is set to `password`.
 - **password**: the password to use to bind to the server (available when bind-type is set to `password`)
 
-## Sample Configuration
-Here is a sample configuration that interfaces with Microsoft Active Directory
+The following `ldap-server` configuration options have been added with SSR Version 5.5.2:
+- **certificate-assurance**: Allows the SSR to perform different levels of server certificate verification in a TLS session. The following values can be specified:
+    - **Weak:** Do not request or check any server certificates.
+    - **Mild:** Ignore invalid or missing certificates, but check for hostname.
+    - **Moderate:** Terminate on invalid certificate, but ignore missing certificates.
+    - **Strong:** (Default) Terminate on invalid and missing certificates.
+- **auto-generate-filter**: Turn on or off user- and group-based filters automatically.
+    - **True**: (Default) SSR generates user- and group-based filters.
+    - **False**: SSR does not generate user- and group-based filters.
+- **user-search-base**: Allows users to set user-search-base filters when auto-generate-filter is false for server-type global-catalog. See the configuration examples below for usage.
+- **group-search-base**: Allows users to set group-search-base filters when auto-generate-filter is false for server-type global-catalog.  See the configuration examples below for usage.
+
+## Sample Configurations
+The following sample configuration interfaces with Microsoft Active Directory.
 ```
 ldap-server ActiveDirectory
     name ActiveDirectory
@@ -45,6 +57,57 @@ ldap-server ActiveDirectory
 exit
 ```
 
+#### `certificate-assurance` Configuration Example
+
+```
+admin@test1.RTR_EAST_CONDUCTOR (ldap-server[name=myldap])# show 
+name                    myldap
+address                 ad.systemsadtest.local
+search-base             dc=systemsadtest,dc=local
+auto-generate-filter    true
+certificate-assurance   strong
+server-type             global-catalog
+port                    server-type-default
+bind-type               password
+distinguished-name  ldapuser@systemsadtest.local
+password            (removed)
+```
+
+#### `auto-generate-filter` Configuration Example
+
+```
+admin@test1.RTR_EAST_CONDUCTOR (ldap-server[name=myldap])# show 
+name                    myldap
+address                 ad.systemsadtest.local
+search-base             dc=systemsadtest,dc=local
+auto-generate-filter    false
+certificate-assurance   strong
+server-type             global-catalog
+port                    server-type-default
+bind-type               password
+distinguished-name  ldapuser@systemsadtest.local
+password            (removed)
+```
+
+#### `user-search-base` and `group-search-base` Configuration Examples
+
+```
+admin@test1.RTR_EAST_CONDUCTOR (ldap-server[name=myldap])# show 
+name                    myldap
+address                 ad.systemsadtest.local
+search-base             dc=systemsadtest,dc=local
+auto-generate-filter    false
+certificate-assurance   strong
+user-search-base    DC=DIR, DC=slb,DC=com?subtree?(|(&(objectCategory=user)(memberOf=CN=128t-admin,OU=EAR-AA-899,OU=Applications,OU=Groups,DC=DIR,DC=slb,DC=com)))
+
+group-search-base      OU=EAR-AA-899,OU=Applications,OU=Groups,DC=DIR,DC=slb,DC=com?subtree?(&(objectclass=group)(|(cn=128t-admin)(cn=128t-user)))
+server-type             global-catalog
+port                    server-type-default
+bind-type               password
+distinguished-name  ldapuser@systemsadtest.local
+password            (removed)
+```
+
 ## LDAP User Account Requirements
 It is important to ensure that administrative users are configured on the LDAP server as being a member of a group called `128t-user` for read-only access to the configuration, or `128t-admin` for read-write access to configuration. These group names are case sensitive.
 
@@ -55,6 +118,17 @@ It is important to ensure that administrative users are configured on the LDAP s
 - The "admin" user is always authenticated locally;  any "admin" user in ldap is ignored
 - If the TLS certificates for LDAP servers are not from a CA recognized by openssl's CA bundle, trust for the certificate must be configured manually (in linux)
 - When the system is configured to use LDAP for user authentication, the status of the LDAP connection can be seen on the Users page of the GUI. This is a high level status of connectivity to retrieve user and group information based on the LDAP configuration.
+
+### Logging
+For SSR Version 5.5.2 an LDAP log category has been added to allow you to change the LDAP log level.
+
+```
+admin@test1.RTR_EAST_CONDUCTOR# set log level category ldap
+configured debug      error      fatal      force      info       node       router     trace      warning    
+admin@test1.RTR_EAST_CONDUCTOR# set log level category ldap debug
+✔ Setting log level...
+Log level successfully set
+```
 
 ## Debugging Issues Using LDAP
 For diagnosing connection status from linux

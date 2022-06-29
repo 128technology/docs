@@ -30,15 +30,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- **I95-40195 LDAP does not allow search base to be configured correctly:** This is a new feature. New commands, new config. 
+- **I95-40195 LDAP does not allow search base to be configured correctly:** Search base parameters, filter generation, certificate assurance, and logging enhancements have been added to the `ldap-server` configuration. See [LDAP](config_ldap.md) for more information.
 ------
 - **I95-40333 Save credentials for accessing SSR software repositories:** `set software access-token` is a new PCLI command to save credentials for accessing SSR software repositories. This provides a way to run `install128t repo authenticate` without dropping to a linux shell.
 ------
 - **I95-44863 Automatic Core Assignment after Reboot:** On systems where forwarding-core-mode is set to automatic, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
 ------
-- **I95-46562 Allow targeting another router or node when saving
-tech-support-info:** GUI: There is a new button on the **Logs** page in the GUI to download a tech-support-info bundle. This allows downloading a router's `tech-support-info` directly from the Conductor UI. <br />
-PCLI: The PCLI command `save tech-support-info` can now collect logs from another node. This means that from the Conductor's PCLI a `tech-support-info` bundle can be collected from a Managed Router or the HA peer.
+- **I95-46562 Allow targeting another router or node when saving tech-support-info:** GUI: A button has been added to the **Logs** page in the GUI to download a tech-support-info bundle. This allows downloading a router's `tech-support-info` directly from the Conductor GUI. <br />
+PCLI: The PCLI command `save tech-support-info` can now collect logs from another node. Using the Conductor's PCLI, a `tech-support-info` bundle can be collected from a Managed Router or the HA peer.
 
 ### Resolved Issues
 
@@ -50,7 +49,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-46114 SSR flooded with Highway messages:** The chatty `InterfaceMap::Exception: Unable to find path to peer` highway log has been suppressed.
 ------
-- **I95-46136 Unused app-id stats not being purged fast enough:** Ressolved an issue where app-id stats tracked per client, per app, per next-hop are not cleaned up when inactive.
+- **I95-46136 Unused app-id stats not being purged fast enough:** Resolved an issue where app-id stats tracked per client, per app, per next-hop are not cleaned up when inactive.
 ------
 - **I95-46169 RIB Doesn't Update Connected Route After Changing Network Interface Address Prefix from /24 to /27:** Resolved an issue when changing the prefix length for a network interface address, the RIB was not updated and routing protocols were not aware of the change.
 ------
