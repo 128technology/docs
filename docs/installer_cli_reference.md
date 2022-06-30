@@ -270,7 +270,7 @@ install128t repo disable alpha beta
 
 #### Update Repository Authentication
 
-Beginning with SSR Version 5.5.2, the preferred method to save repository access credentials is to use the PCLI command `set software access-token`. For additional information on this command, see [`set software access-token`](cli_reference#set-software-access-token).
+Beginning with SSR Version 5.5.2, the preferred method to save repository access credentials is to use the PCLI command `set software access-token`. For additional information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
 
 For earlier software versions, the `repo authenticate` subcommand is used to configure credentials for
 authenticating with SSR software repositories. To use this subcommand, you
