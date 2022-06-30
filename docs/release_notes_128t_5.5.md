@@ -71,7 +71,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 ### Caveats
 
-- **I95-46822 Flow-move without forward packets cannot fail back:**
+- **I95-46822 Revertible failover traffic may not be restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it may take seconds for traffic to be restored when forward traffic is present; in situations where **only** reverse traffic is present, traffic may not be restored. This issue will be resolved in a future release.
 
 ## Release 5.5.1-6
 
