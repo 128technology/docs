@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
-## Release 5.5.2-1
+## Release 5.5.2-5
 
 **Release Date:** June 30, 2022
 
@@ -32,9 +32,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-40195 LDAP does not allow search base to be configured correctly:** Search base parameters, filter generation, certificate assurance, and logging enhancements have been added to the `ldap-server` configuration. See [LDAP](config_ldap.md) for more information.
 ------
-- **I95-40333 Save credentials for accessing SSR software repositories:** `set software access-token` is a new PCLI command to save credentials for accessing SSR software repositories. This provides a way to run `install128t repo authenticate` without dropping to a linux shell.
+- **I95-40333 Save credentials for accessing SSR software repositories:** `set software access-token` is a new PCLI command to save credentials for accessing SSR software repositories. This provides a way to run `install128t repo authenticate` without dropping to a linux shell. For additional information on this command, see [`set software access-token`](cli_reference#set-software-access-token).
 ------
-- **I95-44863 Automatic Core Assignment after Reboot:** On systems where forwarding-core-mode is set to automatic, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
+- **I95-44863 Automatic Core Assignment after Reboot:** On systems where `forwarding-core-mode` is set to `automatic`, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
 ------
 - **I95-46562 Allow targeting another router or node when saving tech-support-info:** GUI: A button has been added to the **Logs** page in the GUI to download a tech-support-info bundle. This allows downloading a router's `tech-support-info` directly from the Conductor GUI. <br />
 PCLI: The PCLI command `save tech-support-info` can now collect logs from another node. Using the Conductor's PCLI, a `tech-support-info` bundle can be collected from a Managed Router or the HA peer.
@@ -68,6 +68,10 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 - **I95-46613 Flow move may not happen without forward packet for outbound only sessions:** Resolved an issue that when a session has been idle for more than 10 seconds, sessions for outbound-only connections may not failover properly without a forward packet.
 ------
 - **I95-46641 Modem lockup after reset on dual LTE system:** This issue has been resolved. 
+
+### Caveats
+
+- **I95-46822 Flow-move without forward packets cannot fail back:**
 
 ## Release 5.5.1-6
 

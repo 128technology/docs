@@ -70,9 +70,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-45220 Conductor local forwarding parameters not dynamic:** Resolved an issue when transitioning a conductor from standalone to HA, the managed routers were not automatically connecting to the newly added conductor node.
 ------
-- **I95-45353 Filter with node does not work in session debug table:** Filter by Node is not a candidate for searching in the debug tables. It has a separate filter mechanism. This option has been removed from the session debug tables.
-------
 - **I95-45271 Error while trying to change appearance or selecting custom reports:** In some cases where error messages are vague, a path to the error location is provided. 
+------
+- **I95-45353 Filter with node does not work in session debug table:** Filter by Node is not a candidate for searching in the debug tables. It has a separate filter mechanism. This option has been removed from the session debug tables.
 ------
 - **I95-45541 LDAP users are unable to login to the PCLI due to permission errors:** This issue has been resolved.
 ------
@@ -93,6 +93,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-46169 RIB Doesn't Update Connected Route After Changing Network Interface Address Prefix from /24 to /27:** Resolved an issue when changing the prefix length for a network interface address, the RIB was not updated and routing protocols were not aware of the change.
 ------
 - **I95-46314 Configuring Static Assignment with Client-Identifier Causes DHCP failure:** Updated config validation to verify that, within a single DHCP server host-service, all static assignments use unique client-identifiers.
+------
+- **I95-46343 Routers page Search not working for UpperCase values:** Resolved an issue with the search bar for the Routers page.  
 ------
 - **I95-46451 Active Node not updating properly:** Resolved an issue with inter-node VRRP wherein the virtual interface could get stuck in a bad state after a flap.
 ------
