@@ -2504,14 +2504,17 @@ Gather system information for technical support.
 #### Usage
 
 ```
-save tech-support-info [manifest <manifest>] [<prefix>]
+save tech-support-info [force] [manifest <manifest>] [router <router>] [node <node>] [<prefix>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| force | Skip confirmation prompt |
 | manifest | The manifest describing the commands and logs to collect (default: summary) |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
@@ -3537,7 +3540,7 @@ The category can be any of the following:
 | DNS | Domain Name System | Components related to DNS. |
 | PCLI | PCLI | All the PCLI&#x27;s log messages. |
 | BONS | Configuration Database | Components related to the configuration database. |
-
+| LDAP | LDAP | All the System Security Services Daemon logs. |
 #### Version History
 
 | Release | Modification                |
@@ -3667,6 +3670,35 @@ Successfully set provisional status for device 10
 | ------- | ----------------------------|
 | 4.5.3   | This feature was introduced |
 
+## `set software access-token`
+
+Save credentials for accessing SSR software repositories.
+
+#### Usage
+
+```
+set software access-token [{router <router> | resource-group <resource-group>}] [force] [node <node>] <username> <token>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The name of the node. |
+| resource-group | The name of the resource group. |
+| router | The name of the router (default: &lt;current router&gt;). |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| username | The username for the software access account. |
+| token | Authentication token for SSR software. |
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.5.2   | This feature was introduced |
 
 ## `shell`
 
@@ -6298,6 +6330,36 @@ This command queries the LTE devices and displays the following state info:
 - registration-status
 - connection-status (show IP if connected, otherwise, show previous error)
 - signal-strength (rating, RSSI, and SNR)
+
+## `show mist`
+
+Display information about the link between the SSR and the Mist Cloud.
+
+#### Usage
+
+```
+show mist [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | Node for which to display Mist state. |
+| resource-group | The name of the resource group. |
+| router | Router for which to display Mist state (default: all). |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail |
+| summary | (default: summary) |
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.5.2   | This feature was introduced |
 
 ## `show network-interface`
 
@@ -9472,14 +9534,15 @@ Trace the HTTP API calls of another command, for troubleshooting purposes.
 #### Usage
 
 ```
-trace [verbose] <command> [<command> ...]
+trace [verbose] [verbose] [verbose] [no-logs] <command> [<command> ...]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| verbose |  |
+| no-logs | Do not display log messages. |
+| verbose | Include additional information about each request and response. This argument can be repeated up to 3 times |
 
 ##### Positional Arguments
 
