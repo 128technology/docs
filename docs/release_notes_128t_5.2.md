@@ -32,7 +32,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
-- **The following CVE's have been addressed and resolved:** I95-44985, I95-45054, I95-45056, I95-45059, I95-45060, I95-123, I95-45165, I95-45348, I95-46020. I95-46359. 
+- **The following CVE's have been addressed and resolved:** I95-44985, I95-45054, I95-45056, I95-45059, I95-45060, I95-45123, I95-45165, I95-45348, I95-46020. I95-46359. 
 ------
 - **I95-35228 DHCP waypoint addresses not displayed on standby node in UI:** Resolved an issue where the PCLI logic was not matching the GUI Network Interface table.
 ------
