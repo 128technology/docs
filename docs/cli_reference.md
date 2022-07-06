@@ -159,7 +159,7 @@ clear app-id cache-entry url [force] [node <node>] {router <router> | resource-g
 
 ## `clear arp`
 
-Clear the entire ARP cache or a subset if arguments are provided.
+Refresh the entire ARP cache or a subset if arguments are provided.
 
 #### Usage
 
@@ -171,13 +171,13 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 | name | description |
 | ---- | ----------- |
-| device-interface | The device interface on which to clear the ARP cache (default: all) |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| ip | The IP address for which to clear an ARP entry (must be specified after &#x27;device-interface&#x27;) [type: IP address] |
-| node | The name of the node |
-| resource-group | The name of the resource group |
-| router | The name of the router |
-| vlan | The VLAN on which to clear the ARP cache (must be specified after &#x27;device-interface&#x27;) [type: int] |
+| device-interface | The device interface on which to refresh the ARP cache (default: all). |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| ip | The IP address for which to clear an ARP entry (must be specified after &#x27;device-interface&#x27;). [type: IP address] |
+| node | The name of the node. |
+| resource-group | The name of the resource group. |
+| router | The name of the router. |
+| vlan | The VLAN on which to clear the ARP cache (must be specified after &#x27;device-interface&#x27;). [type: int] |
 
 ##### See Also
 
@@ -187,7 +187,11 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 #### Description
 
-The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from an SSR router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove. The PCLI will auto-complete typed entries for improved accuracy. 
+The `clear arp` command is typically used during troubleshooting to force a refresh of ARP (Address Resolution Protocol) entries from an SSR router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which entry to refresh. The PCLI auto-completes typed entries for improved accuracy. 
+
+:::note
+ARP entries are not removed or deleted; instead the command forces a refresh of the cache outside of the scheduled ARP timeout.
+:::
 
 #### Version History
 | Release | Modification                |
