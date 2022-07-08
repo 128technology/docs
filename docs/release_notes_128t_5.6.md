@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.6.1-1
 
-**Release Date:** July 7, 2022
+**Release Date:** July 13, 2022
 
 ### New Features
 
@@ -41,6 +41,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-44769 Add Linux system logs to the Tech Support Information data:** This patch allows for customizations of the systemd journal content included in the `tech-support-info` bundle, and includes additional default content.
 ------
 - **I95-44863 Automatic Core Assignment after Reboot:** On systems where `forwarding-core-mode` is set to `automatic`, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
+------
+- **I95-44870 Mist Self-Registration Onboarding:** More to come. 
 ------
 - **I95-45670 BGP Conditional Advertisement:** More to come.
 ------
