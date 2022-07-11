@@ -540,6 +540,31 @@ Completed in 0.10 seconds
 
 ## Release Notes
 
+### Release 3.4.0
+
+**Release Date:** Jul 13, 2022
+
+**Router Version** 128T-ipsec-2.2.4-2
+
+#### New Features and Improvements
+- **PLUGIN-1720** Added support for new ciphers for Phase-1 and Phase-2 security
+
+The plugin now support aes-256-gcm, dh-20, sha512 and no-auth encryption schemes.
+
+#### Issues Fixed
+
+- **PLUGIN-880** IPSec client connection is not initiated for certain config combinations
+
+  _**Resolution:**_ The ipsec client names beginning with ipsec and mast are not supported by libreswan. As part of the fix, a new config rule was added to enforce this requirement.
+
+- **PLUGIN-1807** IPSec health monitoring configuration does not report correct status
+
+  _**Resolution:**_ The monitoring scripts were writing data to a non-persistent path resulting in the failure across reboots. The state directory will not be automatically re-generated on system reboots.
+
+- **PLUGIN-1810** Trace logging in configuration results in IPSec failures
+
+  _**Resolution:**_ Trace level logging is not converted appropriately for IPSec configuration to prevent underlying failures.
+
 ### Release 3.3.1
 
 **Release Date:** May 25, 2022
