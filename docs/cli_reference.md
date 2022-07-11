@@ -3778,10 +3778,10 @@ set software access-token [{router <router> | resource-group <resource-group>}] 
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The name of the node |
-| resource-group | The name of the resource group |
-| router | The name of the router (default: &lt;current router&gt;) |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The name of the node. |
+| resource-group | The name of the resource group. |
+| router | The name of the router (default: &lt;current router&gt;). |
 
 ##### Positional Arguments
 
@@ -3789,6 +3789,10 @@ set software access-token [{router <router> | resource-group <resource-group>}] 
 | ---- | ----------- |
 | username | The username for the software access account. |
 | token | Authentication token for SSR software. |
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.5.2   | This feature was introduced |
 
 ## `set system software image`
 
@@ -3817,6 +3821,10 @@ set system software image <image>
 | [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
 | [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
 | [`show system version`](#show-system-version) | Show system version information. |
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.0.0   | This feature was introduced |
 
 ## `shell`
 
@@ -6451,7 +6459,7 @@ This command queries the LTE devices and displays the following state info:
 
 ## `show mist`
 
-Display information about the link between the SSR and the Mist Cloud
+Display information about the link between the SSR and the Mist Cloud.
 
 #### Usage
 
@@ -6463,10 +6471,10 @@ show mist [{router <router> | resource-group <resource-group>}] [force] [node <n
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | node for which to display mist state |
-| resource-group | The name of the resource group |
-| router | router for which to display mist state (default: all) |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | Node for which to display Mist state. |
+| resource-group | The name of the resource group. |
+| router | Router for which to display Mist state (default: all). |
 
 ##### Positional Arguments
 
@@ -6480,6 +6488,9 @@ show mist [{router <router> | resource-group <resource-group>}] [force] [node <n
 | ------- | ----------- |
 | [`adopt`](#adopt) | Assign the current router to a Mist organization. |
 
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.5.2   | This feature was introduced |
 
 ## `show network-interface`
 
