@@ -3,31 +3,56 @@ title: Next Generation Installation
 sidebar_label: Next Generation Installation
 ---
 
-Versions 5.6.1 and higher and version 6.0 overview of how and why here
+Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments.
 
-### FIPS 
+For on-premises and conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. 
 
-For release 6.0 and later there are two methods to enable FIPS enforcement, depending whether the system is installed using the package-based install or the image-based install.
+The image-based installation creates two partitions on the disk, and installs the full 6.0 image onto one of the partitions (partition A), and then boots into that image. When upgrades become available and are intiated, the new ISO image is copied onto partition B. The upgrade process then copies configurations and persistent information from the Active partition to the new image, then reboots into the new version.
 
-The package-based workflow requires that the `fips=1` flag be manually set during the installation. In cases where the flag was not or cannot be set during installation, a fips rpm is available for download and can be installed.
+## Download
 
-1. Use up/down keys to highlight the desired install mode
-	![Bios Install](/img/56fips_BIOSinstall_1.png)
+The image-based ISO's are available to download at the following location:
 
-2. Press TAB to edit the config.
+`https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/<Major>.<Minor>/`. 
 
-3. Add ‘fips=1’ to the end of the vmlinuz parameters
-	![FIPS Parameter](/img/56fips_BIOSinstall_2.png)
+You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page. For the detailed download process, see [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso). 
 
-4. Press Enter to start the FIPS install
+### Create a Bootable USB
 
-The image-based installation is performed from a menu that is dynamically generated at install time. 
+Use the instructions [Creating a Bootable ISO](intro_creating_bootable_usb.md) to create a USB to be used to install the image. 
 
-1. Select ‘5’ for the install option to select “Enable FIPS 140-2 mode” (the leading asterisk indicates the currently selected entries). 
-	![Generated Meu](/img/60fips_install_1.png)
+## Installation 
 
-2. The resulting system boots into FIPS 140-2 enforcing mode. 
+1. Insert the flash drive into the appliance, and boot into the flash drive.
+2. Select the installation methods; Serial Console or VGA. If you do not make a selection, the Serial mode installation is selected by default. 
+
+	![Select Mode](/img/install_imagebased_1.png)
+
+3. In the Installer window, select 2 for the ZTP Install Mode. 
+
+	![Select Install Mode](/img/install_imagebased_2.png)
+
+On a system with multiple disks, the **Install Devices** selection allows you to _steer_ the boot and root filesystems to individual devices if necessary.
+
+4. If you require FIPS enforcement, select 5 for `Enable FIPS 140-2 mode`. If you do not require FIPS enforcement, skip to step 7. 
+
+	![Generated Menu](/img/60fips_install_1.png)
+
+5. The resulting system boots into FIPS 140-2 enforcing mode. 
+
 	![Boot](/img/60fips_install_2.png)
 
-3. Verify FIPS mode is active by reading the kernel crypto state using `sysctl`. The result is an error when attempting to use a non-FIPS compliant crypto such as md5.
+6. Verify FIPS mode is active by reading the kernel crypto state using `sysctl`. The result is an error when attempting to use a non-FIPS compliant crypto such as md5.
+	
 	![Error Message at bottom](/img/60fips_install_3.png)
+
+7. Press the enter key to start the installation. 
+8. Once complete, you are prompted with an option to press Esc to reboot immediately, or Enter to shutdown and continue later. 
+9. Upon restart, the system initializes and is internet ready. You can now use one of the following ways to associate the device with a Mist organization.
+    * GUI through LAN port.
+    * PCLI `adopt` command.
+    * Have a USB flash drive inserted on first boot with whitebox config already on it. 
+    :::note 
+    Do not insert the USB before reaching step 5, or it may be erased during install.
+    :::
+
