@@ -710,7 +710,7 @@ The plugin now support aes-256-gcm, dh-20, sha512 and no-auth encryption schemes
 
 - **PLUGIN-1810** Trace logging in configuration results in IPSec failures
 
-  _**Resolution:**_ Trace level logging is not converted appropriately for IPSec configuration to prevent underlying failures.
+  _**Resolution:**_ Trace level logging is now converted appropriately for IPSec configuration to prevent underlying failures.
 
 ### Release 3.3.1
 
