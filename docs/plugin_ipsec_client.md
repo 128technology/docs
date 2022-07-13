@@ -308,7 +308,7 @@ config
 exit
 ```
 
-The `service-route > next-hop > interface` must point to the corresponding `ipsec-client > remote > name`-intf to route the traffic through the tunnel. All the available SSR routing techniques using vectors, service-policy etc can be leverage to define how the untrusted traffic is sent over the tunnels and how to route the traffic. The SSR will route the packets through the appropriate IPSec tunnels and manage the failover as per the policy. On the return path, the encrypted traffic will be processed, decrypted and send back to the client that originates the session.
+The `service-route > next-hop > interface` must point to the corresponding `ipsec-client > remote > name`-intf to route the traffic through the tunnel. All available SSR routing techniques including using vectors, service-policy, etc., can be leveraged to define how the untrusted traffic is sent over the tunnels, and how to route the traffic. The SSR routes the packets through the appropriate IPSec tunnels and manages the failover as per the policy. On the return path, the encrypted traffic is processed, decrypted, and send back to the client that originated the session.
 
 ## Thirdparty Software & Licenses
 - Libreswan v3.23-5.el7_5 (GNU GPLv2)
