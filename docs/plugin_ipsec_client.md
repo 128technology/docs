@@ -119,7 +119,7 @@ The main config properties of a remote endpoint are as follows.
 | profile           | reference | The name of the profile to be used for this remote endpoint. |
 | remote-id         | string    | The optional remote identifier used during authentication. |
 | subnet            | ip-prefix | The remote subnet behind the tunnel. |
-| tunnel-monitor    | container | Properties for monitoring the phase-2 connection. More details [here](plugin_ipsec_client.md#tunnel-monitoring) |
+| tunnel-monitor    | container | Properties for monitoring the phase-2 connection. See [Tunnel Monitoring](plugin_ipsec_client.md#tunnel-monitoring) for more information. |
 
 Example:
 ```
