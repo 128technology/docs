@@ -118,7 +118,7 @@ The main config properties of a remote endpoint are as follows.
 | host              | ip-or-fqdn | The address or FQDN of the remote endpoint. |
 | profile           | reference | The name of the profile to be used for this remote endpoint |
 | remote-id         | string    | The optional remote identifier used during authentication |
-| subnet            | ip-prefix | The remote subnet behind the tunnel |
+| subnet            | ip-prefix | The remote subnet behind the tunnel. |
 | tunnel-monitor    | container | Properties for monitoring the phase-2 connection. More details [here](plugin_ipsec_client.md#tunnel-monitoring) |
 
 Example:
