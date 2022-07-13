@@ -12,7 +12,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 ## Configuration
 
 The IPsec plugin setup has the following key parts to the configuration.
-* `ipsec-profile` describing the mechanism with which to connect to the server
+* `ipsec-profile` describing the mechanism with which to connect to the server.
 * `ipsec-client` represent the remote endpoints or server that the ipsec client communicates with
 * `service-route`'s to route the traffic through the tunnels
 
