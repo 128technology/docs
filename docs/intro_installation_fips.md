@@ -50,9 +50,35 @@ On a system with multiple disks, the **Install Devices** selection allows you to
 8. Once complete, you are prompted with an option to press Esc to reboot immediately, or Enter to shutdown and continue later. 
 9. Upon restart, the system initializes and is internet ready. You can now use one of the following ways to associate the device with a Mist organization.
     * GUI through LAN port.
-    * PCLI `adopt` command.
-    * Have a USB flash drive inserted on first boot with whitebox config already on it. 
+    * PCLI [`adopt`](cli_reference.md#adopt) command.
+    * Have a USB flash drive inserted on first boot with whitebox configuration. 
     :::note 
     Do not insert the USB before reaching step 5, or it may be erased during install.
     :::
+
+#### Associtate the Router with Mist
+
+This section covers the basic steps to associate your router with a Mist Organization using the SSR and Mist GUI.
+
+1. Upon reboot, you are presented with the SSR login screen where you can choose to Manage the router through the Mist cloud. Select this option. 
+	![SSR Login Screen](/img/onboard_mist1.png)
+
+2. Choose how to associate the router with the Mist Cloud; selecting an Organization, or use a registration code. 
+
+	![Mist Association](/img/onboard_mist2.png)
+
+	In this example, we will choose the organization.
+
+3. 	Log in to Mist.
+4. Select the organization from the drop down list.
+	
+	![Select Organization](/img/onboard_mist3.png)
+
+5. If you assigned your router a name, enter it here and select ADOPT.
+	![Router Name](/img/onboard_mist4.png)
+
+6. If there are no errors, the router is associated with the organization and visible in the Mist UI.
+
+	[Success](/img/onboard_mist5.png)
+
 

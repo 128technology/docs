@@ -5,6 +5,39 @@ sidebar_label: Command Line Reference
 
 The Command Line Reference guide is better understood if you know the basics of operating the programmable command line interface (PCLI). Commands and actions such as clear, edit, delete, restore, and show, for example, are described here. If you have not used the PCLI before, please refer to [About the PCLI](concepts_pcli.md) for an explanation of how it works.
 
+## `adopt`
+
+Assign the current router to a Mist organization.
+
+#### Usage
+
+```
+adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [router-name <router-name>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. |
+| org-id | The ID of the Mist organization where the router is assigned. |
+| registration-code | The registration code used to assign this router to an organization. |
+| router-name | Assign a name to the router. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show mist`](#show-mist) | Display information about the link between the SSR and the Mist Cloud |
+
+#### Description
+
+If you know the ID of the organization in Mist, or the registration code for the router, you can use the optional `org-id` or `registration-code` arguments. Otherwise, use the interactive dialog to walk through entering Mist credentials and assigning the router to an organization.
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.0.0   | This feature was introduced |
+
 ## `clear app-id cache`
 
 Clear app-id entries from cache
