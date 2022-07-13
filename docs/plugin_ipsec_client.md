@@ -220,7 +220,7 @@ exit
 
 
 ### Configuring services for tunnel traffic
-The user define up to four `ipsec-client > remote` endpoints per node. In addition, the user has to also define the necessary service and service-routes to route the tunnel traffic over the desired WAN interface.
+The user can define up to four `ipsec-client > remote` endpoints per node. In addition, the user must also define the necessary service and service-routes to route the tunnel traffic over the desired WAN interface.
 
 The following example shows a configuration for capturing the tunnel traffic and allows the `ipsec` tenant as defined in `router > ipsec-client > tenant` config above.
 
