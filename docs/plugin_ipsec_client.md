@@ -17,7 +17,7 @@ The IPsec plugin setup has the following key parts to the configuration.
 * `service-route`'s to route the traffic through the tunnels
 
 ### Profiles
-The `router > ipsec-profile`'s are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s. The table below represents the most common configuration elements for a valid ipsec profile
+The `router > ipsec-profile`'s are reusable IPsec settings that can be used across multiple nodes in a router and multiple IPsec endpoint `remote`s. The table below represents the most common configuration elements for a valid ipsec profile.
 
 ```
 router
