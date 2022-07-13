@@ -115,7 +115,7 @@ The main config properties of a remote endpoint are as follows.
 | Config            | Type      | Description                            |
 | --------          | -----     | -------------------                    |
 | name              | string    | The name of the remote client to be used for sending traffic to the tunnel. |
-| host              | ip-or-fqdn | The address or FQDN of the remote endpoint |
+| host              | ip-or-fqdn | The address or FQDN of the remote endpoint. |
 | profile           | reference | The name of the profile to be used for this remote endpoint |
 | remote-id         | string    | The optional remote identifier used during authentication |
 | subnet            | ip-prefix | The remote subnet behind the tunnel |
