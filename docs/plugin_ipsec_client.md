@@ -174,7 +174,7 @@ Only one `ipsec-client` can be configured per node, but two `remote`s can be con
 :::
 
 :::warning
-The `ipsec-client > name` cannot start with `ipsec` or `mast`. See notes [here](plugin_ipsec_client.md#release-340)
+The `ipsec-client > name` cannot start with `ipsec` or `mast`. See notes [here](plugin_ipsec_client.md#release-340).
 :::
 
 Each `remote` represents a unique tunnel destination and can be used to route traffic in/out of the tunnels. Typically each node has two tunnels to act as primary and backup.
