@@ -41,19 +41,21 @@ Selecting the wrong type of console (Serial or VGA) may result in garbled charac
 
 ### FIPS Enforcement Mode
 
-FIPS Enforcement is available for version 6.0 and later. FIPS mode can be enabled manually during the installation. In cases where the flag was not or cannot be set during installation, a FIPS rpm is available for download and can be installed.
+FIPS Enforcement is available for **version 6.0 and later**. FIPS mode can be enabled manually during the installation. In cases where the flag was not or cannot be set during installation, a FIPS RPM is available for download from the SSR repos, and can be installed.
 
 Use the following procedure to enable FIPS enforcement.
 
-1. Use up/down keys to highlight the desired install mode
+1. Use up/down keys to highlight the desired install mode. 
+
   ![Bios Install](/img/56fips_BIOSinstall_1.png)
 
 2. Press TAB to edit the config.
 
-3. Add ‘fips=1’ to the end of the vmlinuz parameters
+3. Add `fips=1` to the end of the vmlinuz parameters.
+
   ![FIPS Parameter](/img/56fips_BIOSinstall_2.png)
 
-4. Press Enter to start the FIPS install    
+4. Press Enter to start the install.   
 
 The procedure that follows here is the Interactive Install on the VGA Console.
 
