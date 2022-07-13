@@ -56,32 +56,24 @@ On a system with multiple disks, the **Install Devices** selection allows you to
     Do not insert the USB before reaching step 5, or it may be erased during install.
     :::
 
-#### Associtate the Router with Mist
+### Associate the Router with Mist
 
-This section covers the basic steps to associate your router with a Mist Organization using the SSR and Mist GUI.
+This section covers the basic steps to associate your router with a Mist Organization using the SSR and Mist GUI. The following animation presents the steps for associating the onboarded router with a Mist organization.
+
+![GUI Adopt](/img/gui-adopt.gif)
+
+The steps performed in the animation are listed here.
 
 1. Upon reboot, you are presented with the SSR login screen where you can choose to Manage the router through the Mist cloud. Select this option. 
-	![SSR Login Screen](/img/onboard_mist1.png)
 
-2. Choose how to associate the router with the Mist Cloud; selecting an Organization, or use a registration code. 
+2. Choose how to associate the router with the Mist Cloud; selecting an Organization, or use a registration code. In this example, we will choose the organization.
 
-	![Mist Association](/img/onboard_mist2.png)
+3. Log in to Mist.
 
-	In this example, we will choose the organization.
-
-3. 	Log in to Mist.
 4. Select the organization from the drop down list.
-	
-	![Select Organization](/img/onboard_mist3.png)
 
 5. If you assigned your router a name, enter it here and select ADOPT.
-	![Router Name](/img/onboard_mist4.png)
 
 6. If there are no errors, the router is associated with the organization and visible in the Mist UI.
 
-	![Success](/img/onboard_mist5.png)
-
-The following short animation presents the steps for associating the onboarded router with a Mist organization.
-
-![Associate with Mist](/img/onboard_gui_adopt.gif)
-￼
+7. Click on the link to the Mist Cloud to see the router in the Mist inventory.

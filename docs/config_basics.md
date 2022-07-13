@@ -152,6 +152,15 @@ When User B commits their change, the peer, name, and description are verified t
 
 To resolve this type of conflict, the error message and candidate configuration should be reviewed with the adminstrator. They can work to identify the user who generated the conflicting changes and review the event logs to reconstruct the changes to the affected objects. Ultimately the users must determine the priority of the configuration changes and commit the result.
 
+### High Availability Configurations
+
+There are several things to be mindful of before configuring high availability: 
+- The two nodes must be informed that they are part of a high availability set. 
+- They must have a dedicated interface between them for synchronizing state information about active sessions. 
+- For software versions prior to 5.3.0, all configuration edit and commit operations must be done on **only** one node. 
+
+Please refer to [Configuring Dual Node High Availability](config_ha.md#requirements) for detailed configuration steps and information related to HA configurations.
+
 ## Configuration Workflows
 
 Unlike many traditional routers, the Session Smart Networking Platform contains a series of interdependent pieces of configuration – referred to as our *data model* – to inform its decisions on routing, forwarding, and policy enforcement. These interdependencies mean that the method of working with the SSR may be slightly different than you are accustomed to.
