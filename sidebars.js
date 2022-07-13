@@ -29,6 +29,11 @@ module.exports = {
       "intro_installation_fips",
       "intro_install_quickstart_otpiso",
     ],
+    "Upgrades and Rollback": [
+      "intro_upgrade_considerations",
+      "intro_upgrading",
+      "intro_rollback",
+      ],
     "Cloud Installations": [
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
@@ -37,9 +42,6 @@ module.exports = {
     "Supporting Install Information - Appendix": [
       "intro_installation_installer",
       "legacy_OTP_install",
-      "intro_upgrade_considerations",
-      "intro_upgrading",
-      "intro_rollback",
     ],
     "Concepts": [
       "concepts_application_discovery",

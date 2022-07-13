@@ -19,6 +19,12 @@ Before you begin the installation and configuration of an SSR Networking Plaform
 The examples listed in this guide generally prefer running commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 
 :::
 
+## Image Based Installation
+
+Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments. See [Next Generation Installation](intro_installation_fips.md) for information and the ISO installation process.
+
+For customers with on-premises and conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) continues to be used for upgrades and new installations.
+
 ### Regarding Upgrades
 
 Please refer to [Upgrade Considerations](intro_upgrade_considerations.md) before upgrading. Additional prerequisites include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 

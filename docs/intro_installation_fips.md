@@ -79,6 +79,6 @@ This section covers the basic steps to associate your router with a Mist Organiz
 
 6. If there are no errors, the router is associated with the organization and visible in the Mist UI.
 
-	[Success](/img/onboard_mist5.png)
+	![Success](/img/onboard_mist5.png)
 
 
