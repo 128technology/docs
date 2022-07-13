@@ -28,7 +28,7 @@ Use the instructions [Creating a Bootable ISO](intro_creating_bootable_usb.md) t
 
 	![Select Mode](/img/install_imagebased_1.png)
 
-3. In the Installer window, select 2 for the ZTP Install Mode. 
+3. In the Installer window, select 2 for the ZTP Install Mode. This is the default mode for image-based installation.  
 
 	![Select Install Mode](/img/install_imagebased_2.png)
 
@@ -81,4 +81,7 @@ This section covers the basic steps to associate your router with a Mist Organiz
 
 	![Success](/img/onboard_mist5.png)
 
+The following short animation presents the steps for associating the onboarded router with a Mist organization.
 
+![Associate with Mist](/img/onboard_gui_adopt.gif)
+￼
