@@ -38,7 +38,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------ 
 - **I95-44267 NIST FIPS Validated Cryptography:** FIPS Enforcement Mode has been added to both the new image-based and existing package-based installation processes. See [Next Generation Installation](intro_installation_fips.md#installation) for FIPS activation steps as part of the image-based installation. Refer to [FIPS Enforcement Mode](intro_installation_bootable_media.md#fips-enforcement-mode) for details using the legacy package-based installation.
 ------
-- **I95-44870 Mist Self-Registration and Onboarding:** Onboarding a Mist Managed SSR instance can be accomplished as part of the installation process. For details, refer to the steps to [Associate the Router with Mist](/intro_installation_fip.md#associate-the-router-with-mist) as part of the image-based installation. 
+- **I95-44870 Mist Self-Registration and Onboarding:** Onboarding a Mist Managed SSR instance can be accomplished as part of the installation process. For details, refer to the steps to [Associate the Router with Mist](/intro_installation_fips.md#associate-the-router-with-mist) as part of the image-based installation. 
 ------
 - **I95-46747 Improved the Password user experience:** You now are re-prompted up to three times for the current password if it is incorrect. If a new password does not meet the strength check, you are prompted with that information, and required to update the password.
 
