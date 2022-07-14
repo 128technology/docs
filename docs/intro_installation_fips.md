@@ -84,6 +84,6 @@ When the device is installed with SSR software, the software scans the device to
 When the device is unrecognized, a default port layout is generated based upon PCI address order.
 This order often does NOT match the external bezel port order. Some plugging in and testing may be required.
 
-For information about port layout on Juniper certified or compatible devices, see [Device Default Port Layout].
+For information about port layout on Juniper certified or compatible devices, see [Device Default Port Layout] *link coming*.
 
 

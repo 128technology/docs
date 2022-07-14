@@ -1,6 +1,6 @@
 ---
 title: SSR 6.0 Release Notes
-sidebar_label: '6.0
+sidebar_label: '6.0'
 ---
 :::info
 Issues resolved in a release are merged into subsequent releases chronologically AND numerically.
@@ -30,15 +30,15 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- **I95-35794 IP TTL Handling:** The SSR's handling SVR traffic can be configured to adjust the TTL value on hops between SSR routers. This adjustment can prevent situations where the TTL expires on packets flowing through multiple hops and then out to the Internet to their final destination. For more information, see [TTL Handling](concepts_machine_communication.md#ttl-handling).
+- **I95-35794 IP TTL Handling:** The SSR's handling of SVR traffic can be configured to adjust the TTL value on hops between SSR routers. This adjustment can prevent situations where the TTL expires on packets flowing through multiple hops and then out to the Internet to their final destination. For more information, see [TTL Handling](concepts_machine_communication.md#ttl-handling).
 ------
 - **I95-36916 IPv6/v4 Dual Stack Operation:** Dual Stack operation is now fully supported.
 ------
-- **I95-40373 Appliance Image-based Installation:** 
+- **I95-40373 Appliance Image-based Installation:** An image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. For a full description of this feature, see [Next Generation Installation](intro_installation_fips.md).
 ------ 
-- **I95-44267 NIST FIPS Validated Cryptography:**
+- **I95-44267 NIST FIPS Validated Cryptography:** FIPS Enforcement Mode has been added to both the new image-based and existing package-based installation processes. See [Next Generation Installation](intro_installation_fips.md#installation) for FIPS activation steps as part of the image-based installation. Refer to [FIPS Enforcement Mode](intro_installation_bootable_media.md#fips-enforcement-mode) for details using the legacy package-based installation.
 ------
-- **I95-44870 Mist Self-Registration and Onboarding:**
+- **I95-44870 Mist Self-Registration and Onboarding:** Onboarding a Mist Managed SSR instance can be accomplished as part of the installation process. For details, refer to the steps to [Associate the Router with Mist](/intro_installation_fip.md#associate-the-router-with-mist) as part of the image-based installation. 
 ------
 - **I95-46747 Improved the Password user experience:** You now are re-prompted up to three times for the current password if it is incorrect. If a new password does not meet the strength check, you are prompted with that information, and required to update the password.
 
@@ -56,9 +56,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-46822 Revertible failover traffic not restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.
 ------
-- **I95-46826 Carrier detection logic not recognizing disaster recovery modem:**
+- **I95-46826 Carrier detection logic not recognizing disaster recovery modem:** Resolved an issue where the carrier detection logic did not recognize keywords and failed to associate a modem correctly. 
 
+### Caveats
 
+- **I95-40373 Image-based Installer Interactive Installer:** When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root, using the default credentials to complete the installation. This will be resolved in a future release.
 
 
 

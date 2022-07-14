@@ -114,7 +114,7 @@ Let's say you want to utilize UDP for transport, but do not want to open up all 
 
 ### TTL Handling
 
-Beginning with version 6.0.0, the SSR's handling SVR traffic can be configured to adjust the TTL value on hops between SSR routers. This adjustment can prevent situations where the TTL expires on packets flowing through multiple hops and then out to the Internet to their final destination. 
+Beginning with version 6.0.0, the SSR's handling of SVR traffic can be configured to adjust the TTL value on hops between SSR routers. This adjustment can prevent situations where the TTL expires on packets flowing through multiple hops and then out to the Internet to their final destination. 
 
 | Element | Type | Description |
 | --- | --- | --- |
