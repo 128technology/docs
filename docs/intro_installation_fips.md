@@ -5,7 +5,7 @@ sidebar_label: Next Generation Installation
 
 Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments.
 
-For on-premises and conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. 
+For conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. 
 
 The image-based installation creates two partitions on the disk, and installs the full 6.0 image onto one of the partitions (partition A), and then boots into that image. When upgrades become available and are intiated, the new ISO image is copied onto partition B. The upgrade process then copies configurations and persistent information from the Active partition to the new image, then reboots into the new version.
 
@@ -77,3 +77,13 @@ The steps performed in the animation are listed here.
 6. If there are no errors, the router is associated with the organization and visible in the Mist UI.
 
 7. Click on the link to the Mist Cloud to see the router in the Mist inventory.
+
+### Port Layout
+
+When the device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device a known port layout is prescribed as the device default.
+When the device is unrecognized, a default port layout is generated based upon PCI address order.
+This order often does NOT match the external bezel port order. Some plugging in and testing may be required.
+
+For information about port layout on Juniper certified or compatible devices, see [Device Default Port Layout].
+
+
