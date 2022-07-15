@@ -56,11 +56,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-46822 Revertible failover traffic not restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.
 ------
-- **I95-46826 Carrier detection logic not recognizing disaster recovery modem:** Resolved an issue where the carrier detection logic did not recognize keywords and failed to associate a modem correctly. 
+- **I95-46826 Carrier detection logic not recognizing disaster recovery modem:** Updated the carrier detection logic to properly recognize the carrier when a modem is attached to a disaster recovery cell tower.
 
 ### Caveats
 
-- **I95-40373 Image-based Installer Interactive Installer:** When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root, using the default credentials to complete the installation. This will be resolved in a future release.
+- **I95-40373 Image-based Installer / Interactive Installer:** When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root, using the default credentials to complete the installation. This will be resolved in a future release.
 
 
 

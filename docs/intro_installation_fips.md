@@ -30,6 +30,10 @@ Use the instructions [Creating a Bootable ISO](intro_creating_bootable_usb.md) t
 
 3. In the Installer window, select 2 for the ZTP Install Mode. This is the default mode for image-based installation.  
 
+:::note
+When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root, using the default credentials to complete the installation. This will be resolved in a future release.
+:::
+
 	![Select Install Mode](/img/install_imagebased_2.png)
 
 On a system with multiple disks, the **Install Devices** selection allows you to _steer_ the boot and root filesystems to individual devices if necessary.
