@@ -7,7 +7,7 @@ Beginning with version 6.0, an image-based ISO installation process has been imp
 
 For conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. 
 
-The image-based installation creates two partitions on the disk, and installs the full 6.0 image onto one of the partitions (partition A), and then boots into that image. When upgrades become available and are intiated, the new ISO image is copied onto partition B. The upgrade process then copies configurations and persistent information from the Active partition to the new image, then reboots into the new version.
+The image-based installation creates two volumes on the disk, installs the full 6.0 image into one of the volumes, and boots into that image. When an upgrades is intiated, the new ISO image is copied into the other volume. The upgrade process then copies configurations and persistent information from the old image to the new image, then reboots into the new version.
 
 ## Download
 
