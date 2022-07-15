@@ -46,7 +46,7 @@ FIPS Enforcement is available for **version 6.0 and later**. FIPS mode can be en
 :::important
 If you require strict FIPS compliance, the `fips=1` kernel option must be added to the kernel command line during system installation to ensure that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
-If FIPS enablement retrospectively via RPM installation, the already created accounts could be using non-FIPS compliant cyphers.
+If FIPS enablement is done retrospectively via RPM installation, the already created accounts could be using non-FIPS compliant cyphers.
 :::
 
 Use the following procedure to enable FIPS enforcement.
