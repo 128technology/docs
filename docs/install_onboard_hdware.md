@@ -27,7 +27,7 @@ Use this data to complete the onboarding process for your whitebox device.
 
 2. Connect port 6 `ge0/0/6` (LAN) to your laptop, and statically assign your laptop port address 192.168.6.10
 
-3. Go to https://192.168.6.1 
+3. Go to `https://192.168.6.1` 
 
 4. Then what????
 
@@ -39,7 +39,7 @@ Use this data to complete the onboarding process for your whitebox device.
 
 2. Connect port 3 `ge0/0/3` (LAN) to your laptop, and statically assign your laptop port address 192.168.3.10.
 
-3. Go to https://192.168.3.1 
+3. Go to `https://192.168.3.1 `
 
 4. Then what????
 
@@ -52,7 +52,7 @@ Use this data to complete the onboarding process for your whitebox device.
 
 2. Connect port 1 `ge0/0/1` (LAN) to your laptop, and statically assign your laptop port address 192.168.1.10.
 
-3. Go to https://192.168.1.1 
+3. Go to `https://192.168.1.1` 
 
 4.  Then What??
 
@@ -65,7 +65,7 @@ Use this data to complete the onboarding process for your whitebox device.
 
 2. Connect port 1 `ge0/0/1` (LAN) to your laptop, and statically assign your laptop port address 192.168.1.10.
 
-3. Go to https://192.168.1.1 
+3. Go to `https://192.168.1.1` 
 
 4.  Then What??
 
