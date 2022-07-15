@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
-## Release 6.0.0-1
+## Release 6.0.0
 
 **Release Date:** July 20, 2022
 
@@ -34,9 +34,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-36916 IPv6/v4 Dual Stack Operation:** Dual Stack operation is now fully supported.
 ------
-- **I95-40373 Appliance Image-based Installation:** An image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. For a full description of this feature, see [Next Generation Installation](intro_installation_fips.md).
+- **I95-40373 Appliance Image-based Installation:** An image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. For a full description of this feature, see [Image-Based Installation](intro_installation_fips.md).
 ------ 
-- **I95-44267 NIST FIPS Validated Cryptography:** FIPS Enforcement Mode has been added to both the new image-based and existing package-based installation processes. See [Next Generation Installation](intro_installation_fips.md#installation) for FIPS activation steps as part of the image-based installation. Refer to [FIPS Enforcement Mode](intro_installation_bootable_media.md#fips-enforcement-mode) for details using the legacy package-based installation.
+- **I95-44267 NIST FIPS Validated Cryptography:** FIPS Enforcement Mode has been added to both the new image-based and existing package-based installation processes. See [Image-Based Installation](intro_installation_fips.md#installation) for FIPS activation steps as part of the image-based installation. Refer to [FIPS Enforcement Mode](intro_installation_bootable_media.md#fips-enforcement-mode) for details using the legacy package-based installation.
 ------
 - **I95-44870 Mist Self-Registration and Onboarding:** Onboarding a Mist Managed SSR instance can be accomplished as part of the installation process. For details, refer to the steps to [Associate the Router with Mist](intro_installation_fips.md#associate-the-router-with-mist) as part of the image-based installation. 
 ------
@@ -44,7 +44,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
-- **I95-44375 ICMPv6 Neighbor Solicitations are not responded to in  IPv4/v6 Dual Stack:** Resolved an issue with Neighbor solicitation processing in a Dual Stack configuration. 
+- **I95-44375 ICMPv6 Neighbor Solicitations are not responded to in IPv4/v6 Dual Stack:** Resolved an issue with Neighbor solicitation processing in a Dual Stack configuration. 
 ------
 - **I95-44548 Application Summary Sort Order:** Resolved an issue with the Application Summary sort order changing unintentionally.
 ------
@@ -60,7 +60,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Caveats
 
-- **I95-40373 Image-based Installer / Interactive Installer:** When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root, using the default credentials to complete the installation. This will be resolved in a future release.
+- **I95-40373 Image-based Installer / Interactive Installer:** When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root using the default credentials, and type `initialize128t` to perform interactive initialization. This will be resolved in a future release.
 
 
 

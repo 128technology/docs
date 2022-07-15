@@ -1,6 +1,6 @@
 ---
-title: Next Generation Installation
-sidebar_label: Next Generation Installation
+title: Image-Based Installation
+sidebar_label: Image-Based Installation
 ---
 
 Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments.
@@ -31,10 +31,10 @@ Use the instructions [Creating a Bootable ISO](intro_creating_bootable_usb.md) t
 3. In the Installer window, select 2 for the ZTP Install Mode. This is the default mode for image-based installation.  
 
 :::note
-When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root, using the default credentials to complete the installation. This will be resolved in a future release.
+When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root using the default credentials, and type `initialize128t` to perform interactive initialization. This will be resolved in a future release.
 :::
 
-	![Select Install Mode](/img/install_imagebased_2.png)
+![Select Install Mode](/img/install_imagebased_2.png)
 
 On a system with multiple disks, the **Install Devices** selection allows you to _steer_ the boot and root filesystems to individual devices if necessary.
 
@@ -82,12 +82,21 @@ The steps performed in the animation are listed here.
 
 7. Click on the link to the Mist Cloud to see the router in the Mist inventory.
 
+### Adopt the Router from the SSR PCLI
+
+If you prefer to work from the PCLI, you can use the [`adopt`](cli_reference.md#adopt) command to associate the router with Mist. 
+
+![Adopt command](/img/adopt_pcli_imagebased1.png)
+
+
+![Adopt output](/img/adopt_pcli_imagebased2.png)
+
 ### Port Layout
 
 When the device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device a known port layout is prescribed as the device default.
 When the device is unrecognized, a default port layout is generated based upon PCI address order.
 This order often does NOT match the external bezel port order. Some plugging in and testing may be required.
 
-For information about port layout on Juniper certified or compatible devices, see [Device Default Port Layout] *link coming*.
+For information about port layout on Juniper certified or compatible devices, see [Device Default Port Layout](install_onboard_hdware.md).
 
 

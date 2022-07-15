@@ -27,6 +27,7 @@ module.exports = {
       "intro_basic_router_config",
       "intro_otp_iso_install",
       "intro_installation_fips",
+      "install_onboard_hdware",
       "intro_install_quickstart_otpiso",
     ],
     "Upgrades and Rollback": [
