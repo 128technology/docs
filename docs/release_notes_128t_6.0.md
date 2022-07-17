@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.0.0
 
-**Release Date:** July 20, 2022
+**Release Date:** July 17, 2022
 
 ### New Features
 
@@ -61,7 +61,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ### Caveats
 
 - **I95-40373 Image-based Installer / Interactive Installer:** When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root using the default credentials, and type `initialize128t` to perform interactive initialization. This will be resolved in a future release.
-
+------
+- **I95-47095 LAN Redundancy breaks WAN Redundancy:** If you need to convert a LAN or WAN interface from non-redundant to redundant or from redundant to non-redundant, the affected nodes must be restarted.
 
 
 
