@@ -62,8 +62,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-40373 Image-based Installer / Interactive Installer:** When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root using the default credentials, and type `initialize128t` to perform interactive initialization. This will be resolved in a future release.
 ------
-- **I95-47095 LAN Redundancy breaks WAN Redundancy (Mist-managed):** If you need to convert a LAN or WAN interface from non-redundant to redundant or from redundant to non-redundant, the affected nodes must be restarted.
-
+- **I95-47095/MIST-66000 LAN Redundancy breaks WAN Redundancy (Mist-managed):** If you need to convert a LAN or WAN interface from non-redundant to redundant or from redundant to non-redundant, the affected nodes must be restarted.
+------
+- **MIST-65629 Traffic Shaping (SSR Only) option not available (Mist-managed):** Traffic engineering may not be properly enabled in a high availability configuration for Mist-managed SSR's. This issue is under investigation.
+------
+- **MIST-65945 SSR does not support Second BGP neighbor (Mist-managed):** More than one BGP neighbor is not currently supported via the “Add BGP Neighbors” GUI button for Mist-managed SSR's. Multiple neighbors however can be added via the BGP configuration tab. 
 
 
 
