@@ -1,15 +1,15 @@
 ---
-title: VRF Learning
-sidebar_label: VRF Learning
+title: VRF Support
+sidebar_label: VRF Support
 ---
 
-The following configuration procedures can be used to initiate VRF learning using static routes, BGP, and OSPF. Configuration can take place at the global/default VRF level, or inside a VRF container. 
+The following configuration procedures can be used to provide VRF support for static routes, BGP, and OSPF. Configuration can take place at the global/default VRF level, or inside a VRF container. 
 
-With VRF, you have the ability to have multiple, independent instances of both BGP and OSPF. When you are managing multiple networks, VRF learning provides the ability learn and isolate these networks from one another, so that traffic destined for an internal private IP address does not get routed to a different network.  
+With VRF, you have the ability to have multiple, independent instances of both BGP and OSPF. When managing multiple networks, VRF provides the ability learn and isolate these networks from one another, so that traffic destined for an internal private IP address does not get routed to a different network.  
 
 ## Add VRF Objects Using BGP
 
-To add VRF learning using BGP, add VRF objects to the `routing default-instance`, and configure BGP as the routing protocol. This allows the SSR BGP instance to peer with a remote peer and learn routes for the VRF.
+To add VRF support for BGP, add VRF objects to the `routing default-instance`, and configure BGP as the routing protocol. This allows the SSR BGP instance to peer with a remote peer and learn routes for the VRF.
 ```
 router         Test
     routing    default-instance
@@ -27,7 +27,7 @@ In the example above, all routes learned via BGP will be installed within the VR
 
 ## Add VRF Objects Using OSPF
 
-To add VRF learning using OSPF, add VRF objects to the `routing default-instance`, and configure an OSPF instance with the `instance-id` of 1. This allows the SSR OSPF instance to dynamically learn and advertise routes to other routers by way of Link State Advertisements (LSAs). 
+To add VRF support for OSPF, add VRF objects to the `routing default-instance`, and configure an OSPF instance with the `instance-id` of 1. This allows the SSR OSPF instance to dynamically learn and advertise routes to other routers by way of Link State Advertisements (LSAs). 
 ```
 router  Test
             name     Test
