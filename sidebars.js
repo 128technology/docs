@@ -26,8 +26,15 @@ module.exports = {
       "intro_basic_conductor_config",
       "intro_basic_router_config",
       "intro_otp_iso_install",
+      "intro_installation_fips",
+      "install_onboard_hdware",
       "intro_install_quickstart_otpiso",
     ],
+    "Upgrades and Rollback": [
+      "intro_upgrade_considerations",
+      "intro_upgrading",
+      "intro_rollback",
+      ],
     "Cloud Installations": [
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
@@ -36,9 +43,6 @@ module.exports = {
     "Supporting Install Information - Appendix": [
       "intro_installation_installer",
       "legacy_OTP_install",
-      "intro_upgrade_considerations",
-      "intro_upgrading",
-      "intro_rollback",
     ],
     "Concepts": [
       "concepts_application_discovery",
@@ -240,6 +244,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_6.0",
           "release_notes_128t_5.6",
           "release_notes_128t_5.5",
           "release_notes_128t_5.4",
