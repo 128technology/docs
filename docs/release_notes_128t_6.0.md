@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.0.0
 
-**Release Date:** July 17, 2022
+**Release Date:** July 18, 2022
 
 ### New Features
 
