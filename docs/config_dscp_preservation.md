@@ -3,9 +3,9 @@ title: DSCP Preservation
 sidebar_label: DSCP Preservation
 ---
 
-DSCP values may be changed by applications or hardware at any point while traversing a network. In some situations it is important that the DSCP value received at the router is the same as the original value with which it left the client. This feature allows you to preserve the original DSCP value across SVR.
+DSCP values are commonly changed within network boundaries. In some situations it is important that the DSCP value received at the router are preserved through all SVR hops within the network. This feature allows the network administrator to preserve the original DSCP value across SVR hops.
 
-When a new session is created, the DSCP value of the first packet received from the local LAN is recorded and included in the metadata. If DSCP values change within the life of the session, when the packet egresses from SVR the original DSCP value is restored and is used on all subsequent packets. This is different from traditional tunneled solutions where each packet is preserved in its entirety. 
+When a new session is created, the DSCP value of the first packet received from the local LAN is recorded and included in the respective session's metadata. If DSCP values differ per packet within a session, the DSCP value from the first packet in the session will be used for each packet. This is different from traditional tunneled solutions where each packet is preserved in its entirety. 
 
 ## Configuration
 
