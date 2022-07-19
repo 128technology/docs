@@ -23,41 +23,57 @@ Use this data to complete the onboarding process for your whitebox device.
 
 ![Lanner 1515](/img/install_onbd_hdwr_lanner.png)
 
-1. Connect port 3 `ge0/0/3` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_fips.md#adopt-the-router-from-the-ssr-pcli)
+1. Connect port 3 `ge0/0/3` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
 2. Connect port 6 `ge0/0/6` (LAN) to your laptop, and statically assign your laptop port address 192.168.6.10
 
 3. Go to `https://192.168.6.1` 
 
+4. Log in to the router and use one of the following ways to associate the device with a Mist organization.
+    * [GUI through LAN port.](intro_installation_image.md#associate-the-router-with-mist)
+    * [PCLI `adopt`command.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
+
 ### Silicom Madrid 90500-0151-G61
 
 ![Silicom Madrid](/img/install_onbd_hdwr_silicom.png)
 
-1. Connect port 6 `ge0/0/6` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_fips.md#adopt-the-router-from-the-ssr-pcli)
+1. Connect port 6 `ge0/0/6` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
 2. Connect port 3 `ge0/0/3` (LAN) to your laptop, and statically assign your laptop port address 192.168.3.10.
 
 3. Go to `https://192.168.3.1 `
 
+4. Log in to the router and use one of the following ways to associate the device with a Mist organization.
+    * [GUI through LAN port.](intro_installation_image.md#associate-the-router-with-mist)
+    * [PCLI `adopt`command.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
+
 ### Fitlet2 Dual Port
 
 ![Fitlet2 Dual Port](/img/install_onbd_hdwr_fitletdual.png)
 
-1. Connect port 2 `ge0/0/0 ` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_fips.md#adopt-the-router-from-the-ssr-pcli)
+1. Connect port 2 `ge0/0/0 ` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
 2. Connect port 1 `ge0/0/1` (LAN) to your laptop, and statically assign your laptop port address 192.168.1.10.
 
 3. Go to `https://192.168.1.1` 
+
+4. Log in to the router and use one of the following ways to associate the device with a Mist organization.
+    * [GUI through LAN port.](intro_installation_image.md#associate-the-router-with-mist)
+    * [PCLI `adopt`command.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
 ### Fitlet2 Quad Port
 
 ![Fitlet2 Quad Port](/img/install_onbd_hdwr_fitletquad.png)
 
-1. Connect port 2 `ge0/0/0 ` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_fips.md#adopt-the-router-from-the-ssr-pcli)
+1. Connect port 2 `ge0/0/0 ` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
 2. Connect port 1 `ge0/0/1` (LAN) to your laptop, and statically assign your laptop port address 192.168.1.10.
 
 3. Go to `https://192.168.1.1` 
+
+4. Log in to the router and use one of the following ways to associate the device with a Mist organization.
+    * [GUI through LAN port.](intro_installation_image.md#associate-the-router-with-mist)
+    * [PCLI `adopt`command.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
 ### Additional Non-certified, Compatible 
 
@@ -70,6 +86,10 @@ Ports `ge0/0/0 – ge0/0/n` will be automatically mapped based on the internal P
 2. Connect `ge0/0/0` (WAN) to a network providing DHCP address assignment and outbound connectivity to Mist.
 
 3. Connect `ge0/0/1` (LAN) to your laptop and statically assign your laptop port address `192.168.1.10`.
+
+4. Log in to the router and use one of the following ways to associate the device with a Mist organization.
+    * [GUI through LAN port.](intro_installation_image.md#associate-the-router-with-mist)
+    * [PCLI `adopt`command.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
 :::note
 Port numbering can be re-mapped to match the external layout if needed. However, this requires customizing the software installation.
