@@ -2,7 +2,7 @@
 title: Platform Support Policy
 ---
 
-Juniper's Session Smart Router (SSR) software is designed to be abstracted from the underlying platform infrastructure, for maximum deployment flexibility. Each platform provides different capabilities and characteristics with regard to performance, functionality, and operating environment. 128 Technology strongly recommends that any combination of software and platform undergo a thorough certification process. The following describes the levels of support for platforms, and details the 128 Technology certification program.
+Juniper's Session Smart Router (SSR) software is designed to be abstracted from the underlying platform infrastructure, for maximum deployment flexibility. Each platform provides different capabilities and characteristics with regard to performance, functionality, and operating environment. Juniper strongly recommends that any combination of software and platform undergo a thorough certification process. The following describes the levels of support for platforms, and details the Juniper certification program.
 
 ## Terminology
 
@@ -19,14 +19,14 @@ For the purposes of describing the platform support policy, the following terms 
 
 Juniper continuously works to maintain a platform abstraction in its software design. At the same time, there are often characteristics and optimizations that require platform-specific support. This support comes by way of a platform certification program which provides assurances of performance and functionality of the SSR Networking Platform software. For example, the SSR Networking Platform software utilizes [DPDK](https://www.dpdk.org) for broad driver support, and in some cases specific firmware revisions need to be loaded prior to being able to fully utilize the SSR's optimized packet forwarding capabilities.
 
-Inclusion in the SSR Certification Program is based on a given platforms ability to continuously meet certain test and support criteria. New platforms are added to the program at 128 Technology's discretion. For details on how to get new platforms in to the SSR certification program, or further information regarding the program, please [contact](https://www.128technology.com/contact) 128 Technology.
+Inclusion in the SSR Certification Program is based on a given platforms ability to continuously meet certain test and support criteria. New platforms are added to the program at Juniper's discretion. For details on how to get new platforms in to the SSR certification program, or further information regarding the program, please [contact](https://www.128technology.com/contact) Juniper.
 
 ### SSR Certified Plus Platform
 
 The SSR Certification program provides a designation of Certified Plus for certain platforms. Certified Plus platforms have the following characteristics:
 
 * SSR Networking Platform software is continuously tested on the platform for performance and functionality
-* Complete build, including BIOS, DMI information, and labeling controlled by 128 Technology specification
+* Complete build, including BIOS, DMI information, and labeling controlled by Juniper specification
 * May include commitment to keep up with third-party supply chain and platform changes (end of life parts, BIOS changes, etc.)
 * Supplier relationship established
 * Includes performance benchmarking
@@ -58,7 +58,7 @@ The SSR Certification program provides a designation of Certified for certain pl
 
 The SSR Certification program provides a designation of Qualified for certain platforms.
 :::note
-128 Technology strongly recommends certification for any build in a production deployment. When a qualified platform is used, certification should be done by the end operator or a third-party. See [compatible platform support](#support-for-128t-on-compatible-platforms).
+Juniper strongly recommends certification for any build in a production deployment. When a qualified platform is used, certification should be done by the end operator or a third-party. See [compatible platform support](#support-for-128t-on-compatible-platforms).
 :::
 
 Qualified platforms have the following characteristics:
@@ -75,7 +75,7 @@ Qualified platforms have the following characteristics:
 
 The SSR Certification program provides a [compatible platform guide](#128t-compatible-platforms-guide) for platforms which are compatible.
 :::note
-128 Technology strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third-party. See [compatible platform support](#support-for-128t-on-compatible-platforms).
+Juniper strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third-party. See [compatible platform support](#support-for-128t-on-compatible-platforms).
 :::
 
 Compatible platforms have the following characteristics:
@@ -149,8 +149,8 @@ Multi-socket platforms are not compatible with the SSR software when run as a ro
 
 ## Support for SSR on Compatible Platforms
 
-128 Technology will support the SSR Networking Platform software running on compatible third party platforms per the [product support policy](about_support_policy.md). 128 Technology will assist customers in problem analysis to determine whether or not the technical issue is related to the third-party platform or software. This includes platforms which are Certified Plus, Certified, Qualified, and Compatible. In order to isolate the issue, 128 Technology reserves the right to request that the third-party hardware or software be altered or removed. 128 Technology does not maintain the ability to test or reproduce issues found when running on compatible platforms, and reserves to right to request testing be done within a customer environment. If the root cause is believed to originate from a third-party vendor's product, the customer is required to open a support request with the third-party vendor's support organization independent of 128 Technology.
+Juniper will support the SSR Networking Platform software running on compatible third party platforms per the [product support policy](about_support_policy.md). Juniper will assist customers in problem analysis to determine whether or not the technical issue is related to the third-party platform or software. This includes platforms which are Certified Plus, Certified, Qualified, and Compatible. In order to isolate the issue, Juniper reserves the right to request that the third-party hardware or software be altered or removed. Juniper does not maintain the ability to test or reproduce issues found when running on compatible platforms, and reserves to right to request testing be done within a customer environment. If the root cause is believed to originate from a third-party vendor's product, the customer is required to open a support request with the third-party vendor's support organization independent of Juniper.
 
 ## Support for SSR on Incompatible Platforms
 
-128 Technology provides no support, and commitments to functionality, stability, or performance of the SSR Networking Platform software on incompatible platforms.
+Juniper provides no support, and commitments to functionality, stability, or performance of the SSR Networking Platform software on incompatible platforms.
