@@ -21,7 +21,7 @@ The examples listed in this guide generally prefer running commands as a non-roo
 
 ## Image Based Installation
 
-Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments. See [Image-Based Installation](intro_installation_fips.md) for information and the ISO installation process.
+Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments. See [Image-Based Installation](intro_installation_image.md) for information and the ISO installation process.
 
 For customers with conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) continues to be used for upgrades and new installations.
 

@@ -9,6 +9,15 @@ For conductor-managed deployments, the [package-based installation](intro_instal
 
 The image-based installation creates two volumes on the disk, installs the full 6.0 image into one of the volumes, and boots into that image. When an upgrades is intiated, the new ISO image is copied into the other volume. The upgrade process then copies configurations and persistent information from the old image to the new image, then reboots into the new version.
 
+The Image-based install consists of the following steps:
+
+- [Download](#download)
+- [Installation](#installation)
+- [Default Port Identification](#device-default-port-identification)
+- [Associate the Device with Mist Using the GUI](#associate-the-router-with-mist)
+	- OR
+- [Adopt the device using the PCLI](#adopt-the-router-from-the-ssr-pcli)
+
 ## Download
 
 The image-based ISO's are available to download at the following location:
@@ -52,13 +61,23 @@ On a system with multiple disks, the **Install Devices** selection allows you to
 
 7. Press the enter key to start the installation. 
 8. Once complete, you are prompted with an option to press Esc to reboot immediately, or Enter to shutdown and continue later. 
-9. Upon restart, the system initializes and is internet ready. You can now use one of the following ways to associate the device with a Mist organization.
-    * GUI through LAN port.
-    * PCLI [`adopt`](cli_reference.md#adopt) command.
-    * Have a USB flash drive inserted on first boot with whitebox configuration. 
-    :::note 
-    Do not insert the USB before reaching step 5, or it may be erased during install.
-    :::
+9. Upon restart, the system initializes and is internet ready. Since each manufacturer's device port layout is different, use the following information to identify the port layout of the device to complete the onboarding process.
+
+### Device Default Port Identification
+
+When a whitebox device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device, a known port layout is configured as the device default.
+When the device is unrecognized, a default port layout is generated based upon PCI address order.
+This order often does NOT match the external bezel port order. Some plugging in and testing may be required.
+
+The following sections provide information about port connections on Juniper certified devices and non-certified devices that are considered compatible. 
+
+- [Lanner 1515:](install_onboard_hdware#lanner-1515) Certified Device
+- [Silicom Madrid 90500-0151-G61:](install_onboard_hdware#silicom-madrid-90500-0151-g61) Certified Device
+- [Fitlet2 Dual Port:](install_onboard_hdware#fitlet2-dual-port) Non-certified, Compatible Device
+- [Fitlet2 Quad Port:](install_onboard_hdware#fitlet2-quad-port) Non-certified, Compatible Device
+- [Additional Non-certified, Compatible Devices](install_onboard_hdware#additional-non-certified-compatible)
+
+Use this data to identify the port layout for your whitebox device. A link to return to this process is provided at the end of the process for each device. 
 
 ### Associate the Router with Mist
 
@@ -90,13 +109,4 @@ If you prefer to work from the PCLI, you can use the [`adopt`](cli_reference.md#
 
 
 ![Adopt output](/img/adopt_pcli_imagebased2.png)
-
-### Port Layout
-
-When the device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device a known port layout is prescribed as the device default.
-When the device is unrecognized, a default port layout is generated based upon PCI address order.
-This order often does NOT match the external bezel port order. Some plugging in and testing may be required.
-
-For information about port layout on Juniper certified or compatible devices, see [Device Default Port Layout](install_onboard_hdware.md).
-
 
