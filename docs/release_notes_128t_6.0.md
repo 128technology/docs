@@ -57,6 +57,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-46822 Revertible failover traffic not restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.
 ------
 - **I95-46826 Carrier detection logic not recognizing disaster recovery modem:** Updated the carrier detection logic to properly recognize the carrier when a modem is attached to a disaster recovery cell tower.
+------
+- **WAN-1191 - Incorrect interface Port Mapping for Silicom Madrid supported platforms:** This update corrects the port mappings. It is recommended that the latest image be used for all image-based installs. For information about Image-based installs and where to download the latest ISO, please refer to [Image-Based Installation](intro_installation_image.md).
 
 ### Caveats
 
