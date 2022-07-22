@@ -20,6 +20,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_6.0",
           "release_notes_128t_5.6",
           "release_notes_128t_5.5",
           "release_notes_128t_5.4",
@@ -79,6 +80,14 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Image-Based Installation",
+        "items": [
+          "intro_installation_image",
+          "install_onboard_hdware",
+        ],
+      },
+      {
+        "type": "category",
         "label": "Cloud Installation",
         "items": [
           "intro_installation_aws",
@@ -89,13 +98,19 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Upgrades and Rollback",
+         "items": [
+          "intro_upgrade_considerations",
+          "intro_upgrading",
+          "intro_rollback",
+        ],
+      },
+      {
+        "type": "category",
         "label": "Installation Appendix",
         "items": [
           "intro_installation_installer",
           "legacy_OTP_install",
-          "intro_upgrade_considerations",
-          "intro_upgrading",
-          "intro_rollback",
         ],
        },
       {
@@ -158,8 +173,12 @@ module.exports = {
       "howto_lte",
       "bcp_lte_peering",
     ],
-    "Mist Integration": [
+    "Mist Integration and WAN Assurance": [
       "config_wan_assurance",
+      "release_notes_wan_assurance_plugin_3.3",
+      "release_notes_wan_assurance_plugin_3.4",
+      "intro_installation_image",
+      "install_onboard_hdware",
     ],
     "Metrics": [
       "concepts_metrics",
