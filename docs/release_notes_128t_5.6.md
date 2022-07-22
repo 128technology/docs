@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.6.1-1
 
-**Release Date:** July 22, 2022
+**Release Date:** July 28, 2022
 
 ### New Features
 
@@ -42,6 +42,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44863 Automatic Core Assignment after Reboot:** On systems where `forwarding-core-mode` is set to `automatic`, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
 ------
+- **I95-44870 Mist Self-Registration and Onboarding:** Onboarding a Mist Managed SSR instance can be accomplished as part of the installation process. For details, refer to the steps to [Associate the Router with Mist](intro_installation_image.md#associate-the-router-with-mist) as part of the image-based installation. 
+------
 - **I95-45670 BGP Conditional Advertisement:** When an SSR prefers a given provider for outbound traffic, it can now be configured to receive locally destined traffic specifically from that provider. For details and configuration information, see [BGP Conditional Advertisement.](config_bgp.md#bgp-conditional-advertisement)
 ------
 - **I95-45679 Round trip time to packet acknowledgement:** A new TCP metric that samples round trip time from data sent to acknowledgement has been added.
@@ -55,6 +57,8 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 ### Resolved Issues
 
+- **The following CVE's have been addressed and resolved:** I95-45054, I9-45056, I95-45059, I95-45060, I95-45165, I95-46020, I95-46359. 
+------
 - **I95-35228 DHCP waypoint addresses not displayed on standby node in UI:** Resolved an issue where the PCLI logic was not matching the GUI Network Interface table.
 ------
 - **I95-39274 DNS-based services kill asset connection resiliency:** Resolved an issue where an internal commit was bouncing the kni254 interface and causing a series of connection resets.
@@ -97,6 +101,8 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45890 Service paths for BGP over SVR routes are not being rebuilt:** Resolved an issue when the vector configuration is changed on a network interface, the service paths for BGP over SVR routes are not being rebuilt. 
 ------
+- **I95-45999 Azure Router Crash:** Added support for NetVSC/VF hotswapping to resolve this issue.
+------
 - **I95-46055 Add warning when transmit caps are too low:** Users now get a warning when configuring a traffic-engineering transmit-cap under 1Mbps.
 ------
 - **I95-46114 SSR flooded with Highway messages:** The chatty `InterfaceMap::Exception: Unable to find path to peer` highway log has been suppressed. 
@@ -113,7 +119,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-46411 PPPoE over VLAN interface status missing in `show` commands:** Added atttribute to show the missing information. 
 ------ 
-- **I95-46419 FEC w/ OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modifcation to resolve the outbound only path.
+- **I95-46419 Forward Error Correction (FEC) with OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modifcation to resolve the outbound only path.
 ------
 - **I95-46451 Active Node not updating properly:** Resolved an issue with inter-node VRRP wherein the virtual interface could get stuck in a bad state after a flap.
 ------
@@ -126,6 +132,16 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 - **I95-46613 Flow move may not happen without forward packet for outbound only sessions:** Resolved an issue that when a session has been idle for more than 10 seconds, sessions for outbound-only connections may not failover properly without a forward packet.
 ------
 - **I95-46641 Modem lockup after reset on dual LTE system:** Resolved an issue with dual LTE modem lockup after reset.
+------
+- **I95-46822 Revertible failover traffic not restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.
+------
+- **I95-46915 Temporary passwords do not allow entry:** Resolved an issue where authentication fails in validating the account if the current password is expired. 
+------
+- **I95-46931 Hardware using ConnectX6-DX fails to initialize:** Added support for this card variant.
+------
+- **I95-46959 PPPoE over VLAN not working when target interface is down:** Added code to bring up parent interface before VLAN interface.
+------
+- **I95-47111 Issues with redundant interfaces on startup:** Resolved an issue where the notifications for active interfaces may get lost when using VRRP for redundancy.
 
 ## Release 5.6.0-44
 
@@ -204,6 +220,8 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 - **I95-44854 Extra "Application" column in Top Sessions panel:** The extra column has been removed. 
 ------
 - **I95-44913 kmod-i40e metapackage causing upgrade issues:** The metapackage has been removed and upgrade issues have been resolved.
+------
+- **I95-44985 Update salt-minion minimum version to resolve CVEs:** This issue has been resolved. 
 ------
 - **I95-44991 SSR not passing Aruba data on GRE Tunnels:** Resolved an issue where GRE packets with reserved bit in the header are incorrectly dropped as invalid.
 ------
