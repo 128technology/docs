@@ -6,21 +6,48 @@ import React from "react";
 // ----------------------------------------------------------------------------
 export const releases = [
    {
+    version: '6.0.0',
+    url: 'release_notes_128t_6.0#release-600-56',
+    releaseDate: 'July 18, 2022',
+    endOfMaintenance: 'April 20, 2023',
+    endOfSupport: 'October 20, 2023',
+   },
+   {
+    version: '5.2.4',
+    url: 'release_notes_128t_5.2#release-524-1',
+    releaseDate: 'July 7, 2022',
+    endOfMaintenance: 'November 10, 2021',
+    endOfSupport: 'May 10, 2022',
+   },
+   {
+    version: '5.5.2',
+    url:'release_notes_128t_5.5#release-552-5',
+    releaseDate: 'June 30, 2022',
+    endOfMaintenance: 'December 7, 2022',
+    endOfSupport: 'May 7, 2023',
+   },
+   {
+    version: '5.4.6',
+    url:'release_notes_128t_5.4#release-546-9',
+    releaseDate: 'June 28, 2022',
+    endOfMaintenance: 'December 18, 2022',
+    endOfSupport: 'June 18, 2023',
+  },
+  {
     version: '5.5.1',
     url:'release_notes_128t_5.5#release-551-6',
     releaseDate: 'June 1, 2022',
     endOfMaintenance: 'December 7, 2022',
     endOfSupport: 'May 7, 2023',
-
-  },
+   },
    {
     version: '5.6.0',
     url:'release_notes_128t_5.6',
     releaseDate: 'May 20, 2022',
     endOfMaintenance: 'February 20, 2023',
     endOfSupport: 'August 20, 2023',
-    },
-    {
+   },
+   {
     version: '5.2.3',
     url: 'release_notes_128t_5.2#release-523',
     releaseDate: 'May 20, 2022',

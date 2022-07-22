@@ -5,6 +5,39 @@ sidebar_label: Command Line Reference
 
 The Command Line Reference guide is better understood if you know the basics of operating the programmable command line interface (PCLI). Commands and actions such as clear, edit, delete, restore, and show, for example, are described here. If you have not used the PCLI before, please refer to [About the PCLI](concepts_pcli.md) for an explanation of how it works.
 
+## `adopt`
+
+Assign the current router to a Mist organization.
+
+#### Usage
+
+```
+adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [router-name <router-name>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. |
+| org-id | The ID of the Mist organization where the router is assigned. |
+| registration-code | The registration code used to assign this router to an organization. |
+| router-name | Assign a name to the router. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show mist`](#show-mist) | Display information about the link between the SSR and the Mist Cloud |
+
+#### Description
+
+If you know the ID of the organization in Mist, or the registration code for the router, you can use the optional `org-id` or `registration-code` arguments. Otherwise, use the interactive dialog to walk through entering Mist credentials and assigning the router to an organization.
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.0.0   | This feature was introduced |
+
 ## `clear app-id cache`
 
 Clear app-id entries from cache
@@ -159,7 +192,7 @@ clear app-id cache-entry url [force] [node <node>] {router <router> | resource-g
 
 ## `clear arp`
 
-Clear the entire ARP cache or a subset if arguments are provided.
+Refresh the entire ARP cache or a subset if arguments are provided.
 
 #### Usage
 
@@ -171,13 +204,13 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 | name | description |
 | ---- | ----------- |
-| device-interface | The device interface on which to clear the ARP cache (default: all) |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| ip | The IP address for which to clear an ARP entry (must be specified after &#x27;device-interface&#x27;) [type: IP address] |
-| node | The name of the node |
-| resource-group | The name of the resource group |
-| router | The name of the router |
-| vlan | The VLAN on which to clear the ARP cache (must be specified after &#x27;device-interface&#x27;) [type: int] |
+| device-interface | The device interface on which to refresh the ARP cache (default: all). |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| ip | The IP address for which to clear an ARP entry (must be specified after &#x27;device-interface&#x27;). [type: IP address] |
+| node | The name of the node. |
+| resource-group | The name of the resource group. |
+| router | The name of the router. |
+| vlan | The VLAN on which to clear the ARP cache (must be specified after &#x27;device-interface&#x27;). [type: int] |
 
 ##### See Also
 
@@ -187,7 +220,11 @@ clear arp [{vlan <vlan> | ip <ip>}] [device-interface <device-interface>] [force
 
 #### Description
 
-The `clear arp` command is typically used during troubleshooting, to remove ARP (Address Resolution Protocol) entries from an SSR router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which specific entry to remove. The PCLI will auto-complete typed entries for improved accuracy. 
+The `clear arp` command is typically used during troubleshooting to force a refresh of ARP (Address Resolution Protocol) entries from an SSR router or node&#x27;s ARP cache. The command has multiple filters, allowing administrators to specify which entry to refresh. The PCLI auto-completes typed entries for improved accuracy. 
+
+:::note
+ARP entries are not removed or deleted; instead the command forces a refresh of the cache outside of the scheduled ARP timeout.
+:::
 
 #### Version History
 | Release | Modification                |
@@ -1211,6 +1248,34 @@ The _delete sessions_ command removes all current sessions or a subset if argume
 This may be a service impacting operation.
 :::
 
+## `delete system software`
+
+Remove or cancel a previously started download.
+
+#### Usage
+
+```
+delete system software version <version>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| version | The version to cancel or remove. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
 ## `delete user`
 
 Delete a user account
@@ -2164,6 +2229,67 @@ admin@labsystem1.fiedler#
 | Release | Modification                |
 | ------- | ----------------------------|
 | 3.1.0   | This feature was introduced |
+## `request system software download`
+
+Download a new version of the SSR.
+
+#### Usage
+
+```
+request system software download version <version>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| version | The version to download. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+## `request system software upgrade`
+
+Upgrade to a new version of the SSR.
+
+#### Usage
+
+```
+request system software upgrade version <version>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| version | The version to upgrade to. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+#### Description
+
+:::warning
+This may be a service impacting operation.
+:::
 
 ## `restore config factory-default`
 
@@ -2504,14 +2630,17 @@ Gather system information for technical support.
 #### Usage
 
 ```
-save tech-support-info [manifest <manifest>] [<prefix>]
+save tech-support-info [force] [manifest <manifest>] [router <router>] [node <node>] [<prefix>]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| force | Skip confirmation prompt |
 | manifest | The manifest describing the commands and logs to collect (default: summary) |
+| node | The name of the node |
+| router | The name of the router (default: &lt;current router&gt;) |
 
 ##### Positional Arguments
 
@@ -3537,13 +3666,14 @@ The category can be any of the following:
 | DNS | Domain Name System | Components related to DNS. |
 | PCLI | PCLI | All the PCLI&#x27;s log messages. |
 | BONS | Configuration Database | Components related to the configuration database. |
-
+| LDAP | LDAP | All the System Security Services Daemon logs. |
 #### Version History
 
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
 | 3.1.0   | Log categories introduced   |
+| 6.0.0   | LDAP category added         |
 
 ## `set log level configured`
 
@@ -3667,6 +3797,67 @@ Successfully set provisional status for device 10
 | ------- | ----------------------------|
 | 4.5.3   | This feature was introduced |
 
+## `set software access-token`
+
+Save credentials for accessing SSR software repositories.
+
+#### Usage
+
+```
+set software access-token [{router <router> | resource-group <resource-group>}] [force] [node <node>] <username> <token>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The name of the node. |
+| resource-group | The name of the resource group. |
+| router | The name of the router (default: &lt;current router&gt;). |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| username | The username for the software access account. |
+| token | Authentication token for SSR software. |
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.5.2   | This feature was introduced |
+
+## `set system software image`
+
+Set the boot image.
+
+#### Usage
+
+```
+set system software image <image>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| image | The image to load on next boot |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.0.0   | This feature was introduced |
 
 ## `shell`
 
@@ -6299,6 +6490,41 @@ This command queries the LTE devices and displays the following state info:
 - connection-status (show IP if connected, otherwise, show previous error)
 - signal-strength (rating, RSSI, and SNR)
 
+## `show mist`
+
+Display information about the link between the SSR and the Mist Cloud.
+
+#### Usage
+
+```
+show mist [{router <router> | resource-group <resource-group>}] [force] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | Node for which to display Mist state. |
+| resource-group | The name of the resource group. |
+| router | Router for which to display Mist state (default: all). |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`adopt`](#adopt) | Assign the current router to a Mist organization. |
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 5.5.2   | This feature was introduced |
+
 ## `show network-interface`
 
 Display network-interface data for network-interface.
@@ -8604,6 +8830,31 @@ Completed in 0.10 seconds
 
 Please refer to the [Show Stats Reference](cli_stats_reference.md) for detailed information about `show stats`.
 
+## `show step clients`
+
+Show STEP clients
+
+#### Usage
+
+```
+show step clients [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The router to request STEP information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
 ## `show step lsdb`
 
 Show STEP link state database
@@ -8703,6 +8954,7 @@ show system [{router <router> | resource-group <resource-group>}] [force] [node 
 | [`processes`](#show-system-processes) | Display a table summarizing the statuses of processes. |
 | [`registry`](#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 | [`services`](#show-system-services) | Display a table summarizing statuses of SSR systemd services. |
+| [`software`](#show-system-software) | &lt;available&gt; \| &lt;download&gt; \| &lt;upgrade&gt; |
 | [`version`](#show-system-version) | Show system version information. |
 
 ##### See Also
@@ -9016,6 +9268,84 @@ Wed 2020-04-15 20:41:18 UTC
 Completed in 0.11 seconds
 ```
 
+## `show system software available`
+
+Display new versions of the SSR that can be installed.
+
+#### Usage
+
+```
+show system software available [<verbosity>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+## `show system software download`
+
+Display in-progress and completed downloads of new SSR versions.
+
+#### Usage
+
+```
+show system software download [version <version>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| version | Display state about only a single version |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
+## `show system software upgrade`
+
+Follow an in-progress upgrade.
+
+#### Usage
+
+```
+show system software upgrade
+```
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system version`](#show-system-version) | Show system version information. |
+
 ## `show system version`
 
 Show system version information.
@@ -9040,6 +9370,18 @@ show system version [{router <router> | resource-group <resource-group>}] [force
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary (default: summary) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`delete system software`](#delete-system-software) | Remove or cancel a previously started download. |
+| [`request system software download`](#request-system-software-download) | Download a new version of the SSR. |
+| [`request system software upgrade`](#request-system-software-upgrade) | Upgrade to a new version of the SSR. |
+| [`set system software image`](#set-system-software-image) | Set the boot image. |
+| [`show system software available`](#show-system-software-available) | Display new versions of the SSR that can be installed. |
+| [`show system software download`](#show-system-software-download) | Display in-progress and completed downloads of new SSR versions. |
+| [`show system software upgrade`](#show-system-software-upgrade) | Follow an in-progress upgrade. |
 
 #### Description
 
@@ -9472,14 +9814,15 @@ Trace the HTTP API calls of another command, for troubleshooting purposes.
 #### Usage
 
 ```
-trace [verbose] <command> [<command> ...]
+trace [verbose] [verbose] [verbose] [no-logs] <command> [<command> ...]
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| verbose |  |
+| no-logs | Do not display log messages. |
+| verbose | Include additional information about each request and response. This argument can be repeated up to 3 times |
 
 ##### Positional Arguments
 
