@@ -410,21 +410,25 @@ For example:
 
 ```
 routing-protocol bgp
-neighbor                   <neighbor-ip>
-    address-family    ipv4-unicast
-        conditional-advertisement
-            interval-time  15
-            advertisement-policy  <policy-name>
-            exist-policy          <policy-name>
+    type                       bgp
+    local-as                   2
+    conditional-advertisement
+        interval-time  15
+    exit
+    neighbor                   <neighbor-ip>
+        address-family    ipv4-unicast
+            conditional-advertisement
+                advertisement-policy  <policy-name>
+                exist-policy          <policy-name>
+            exit
         exit
     exit
-exit
-neighbor                   <neighbor-ip>
-    address-family    ipv4-unicast
-        conditional-advertisement
-            interval-time  15
-            advertisement-policy  <policy-name>
-            non-exist-policy      <policy-name>
+    neighbor                   <neighbor-ip>
+        address-family    ipv4-unicast
+            conditional-advertisement
+                advertisement-policy  <policy-name>
+                non-exist-policy      <policy-name>
+            exit
         exit
     exit
 exit
