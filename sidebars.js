@@ -28,17 +28,23 @@ module.exports = {
       "intro_otp_iso_install",
       "intro_install_quickstart_otpiso",
     ],
+    "Image-Based Installation": [
+      "intro_installation_image",
+      "install_onboard_hdware",
+    ], 
     "Cloud Installations": [
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
       "intro_initialize_HA_conductor",
     ],
-    "Supporting Install Information - Appendix": [
-      "intro_installation_installer",
-      "legacy_OTP_install",
+    "Upgrades and Rollback": [
       "intro_upgrade_considerations",
       "intro_upgrading",
       "intro_rollback",
+    ],
+    "Supporting Install Information - Appendix": [
+      "intro_installation_installer",
+      "legacy_OTP_install",
     ],
     "Concepts": [
       "concepts_application_discovery",
@@ -249,6 +255,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_6.0",
           "release_notes_128t_5.6",
           "release_notes_128t_5.5",
           "release_notes_128t_5.4",

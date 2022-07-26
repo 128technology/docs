@@ -5,7 +5,15 @@ sidebar_label: Downloading ISOs
 
 ## Introduction
 
-Juniper Session Smart Networking provides two workflows for the installation process:
+Juniper Session Smart Networking provides the following workflows for the installation process:
+
+- **Image-based ISO:** Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments.
+
+  The image-based ISO's are available to download at the following location:
+
+  `https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/<Major>.<Minor>/`. 
+
+  For details about the Image-based install process, see [Image-based Installation.](intro_installation_image.md) 
 
 - **Interactive:** Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the SSR software is started.
 
