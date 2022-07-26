@@ -222,6 +222,7 @@ module.exports = {
     "Traffic Engineering":[
       "bcp_per-adjacency_traffic_engineering",
       "config_dscp_steering",
+      "config_dscp_preservation",
       "config_rate_limiting",
     ],
     "Troubleshooting": [
