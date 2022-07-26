@@ -80,10 +80,6 @@ Node: labsystem2
 Completed in 0.19 seconds
 ```
 
-### Session Failover
-
-For long-lived sessions that are very reverse-data intensive (for example, a TCP session that is downloading a large file over HTTP) a session failover often results in an empty session. This happens because the new session is expecting a forward packet to re-establish the session. To prevent the transfer from stalling, a keep-alive mechanism has been added for flow moves. When a flow move is triggered, the SSR detects inactivity in forward traffic and generates a keep-alive packet in the forward direction. This packet causes the session to be properly modified to the new path, and forwarded on to the subsequent router(s). The subsequent router session is modified as well. The keep-alive packet is dropped before egressing to the LAN. In a case where the failover is selecting a new path to a new node/router rather than modifying an existing session, a new session will be created.
-
 ## Migrating from Standalone to HA
 For an established standalone router of one node, converting it to be highly available requires configuring a second node within the SSR configuration (PCLI or GUI).
 
