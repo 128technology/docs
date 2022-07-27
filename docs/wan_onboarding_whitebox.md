@@ -21,6 +21,10 @@ The following sections provide information about port connections on Juniper cer
 
 Use this data to identify the port layout for your whitebox device. A link to return to this process is provided at the end of the process for each device. 
 
+:::info
+IP connectivity is required for GUI onboarding. If you do not have an ethernet interface to connect to the device, you must use pcli adoption through the console.
+:::
+
 ## Associate the Router with Mist
 
 This section covers the basic steps to associate your router with a Mist Organization using the SSR and Mist GUI. The following animation presents the steps for associating the onboarded router with a Mist organization. The steps performed in the animation are provided below.
