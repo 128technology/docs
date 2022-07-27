@@ -69,6 +69,7 @@ module.exports = {
       "wan_staging",
       "wan_onboarding_whitebox",
       "config_wan_assurance",
+      "site_assignment",
     ],
     "Administration": [
       {

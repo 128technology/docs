@@ -25,7 +25,7 @@ Use this data to identify the port layout for your whitebox device. A link to re
 IP connectivity is required for GUI onboarding. If you do not have an ethernet interface to connect to the device, you must use pcli adoption through the console.
 :::
 
-## Associate the Router with Mist
+## GUI Adoption
 
 This section covers the basic steps to associate your router with a Mist Organization using the SSR and Mist GUI. The following animation presents the steps for associating the onboarded router with a Mist organization. The steps performed in the animation are provided below.
 
@@ -45,7 +45,9 @@ This section covers the basic steps to associate your router with a Mist Organiz
 
 7. Click on the link to the Mist Cloud to see the router in the Mist inventory and begin managing your device.
 
-## Adopt the Router from the SSR PCLI
+![GUI Adoption Success](/img/gui_adopt_success.png)
+
+## CLI Adoption
 
 If you prefer to work from the PCLI, you can use the [`adopt`](cli_reference.md#adopt) command to associate the router with Mist. 
 
@@ -53,3 +55,19 @@ If you prefer to work from the PCLI, you can use the [`adopt`](cli_reference.md#
 
 
 ![Adopt output](/img/adopt_pcli_imagebased2.png)
+
+## Manual Adoption
+
+Alternatively it is possible to obtain a registration code directly from the Mist portal. Under Organization > Inventory, select WAN Edges at the top of the screen. Then select "Adopt WAN Edge" on the top-right. Select the radio button "Session Smart Router (SSR)" to create a registration code.
+![Adopt WAN Edge](/img/adopt-wan-edge.png)
+
+Copy the registration code into your clipboard.
+![Registration Code](/img/adopt-registration-code.png)
+
+Copy the registration code into your clipboard. You can enter the registration code via GUI:
+![GUI Adoption Step 1](/img/gui-reg-code-adoption-1.png)
+![GUI Adoption Step 2](/img/gui-reg-code-adoption-2.png)
+![GUI Adoption Step 3](/img/gui-reg-code-adoption-3.png)
+
+or PCLI:
+![CLI Registration Code Adoption](/img/adopt-cli-reg-code.png)
