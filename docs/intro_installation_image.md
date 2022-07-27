@@ -7,7 +7,7 @@ Beginning with version 6.0, an image-based ISO installation process has been imp
 
 For conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. 
 
-The image-based installation creates two volumes on the disk, installs the full 6.0 image into one of the volumes, and boots into that image. When an upgrades is intiated, the new ISO image is copied into the other volume. The upgrade process then copies configurations and persistent information from the old image to the new image, then reboots into the new version.
+The image-based installation creates two volumes on the disk, installs the full 6.0 image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process then copies configurations and persistent information from the old image to the new image, then reboots into the new version.
 
 The Image-based install consists of the following steps:
 
@@ -85,7 +85,7 @@ This section covers the basic steps to associate your router with a Mist Organiz
 
 ![GUI Adopt](/img/gui-adopt.gif)
 
-The steps performed in the animation are listed here.
+The steps performed in the animation are listed below.
 
 1. Upon reboot, you are presented with the SSR login screen where you can choose to Manage the router through the Mist cloud. Select this option. 
 

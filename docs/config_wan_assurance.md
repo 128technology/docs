@@ -1,9 +1,9 @@
 ---
-title: Configuring WAN Assurance
-sidebar_label: Configuring WAN Assurance
+title: Conductor Managed WAN Assurance
+sidebar_label: Conductor Managed WAN Assurance
 ---
 
-Use the following process to onboard Session Smart Routers (SSR) to the Mist cloud. Since SSN software can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding.
+Use the following process to onboard a conductor-managed Session Smart Router (SSR) to the Mist cloud. Since SSN software can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding.
 
 :::important
 Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR and Mist.
