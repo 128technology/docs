@@ -65,6 +65,11 @@ module.exports = {
       "concepts_waypoint_ports",
       "concepts_glossary",
     ],
+    "WAN Assurance": [
+      "wan_staging",
+      "wan_onboarding_whitebox",
+      "config_wan_assurance",
+    ],
     "Administration": [
       {
         "type": "category",
