@@ -3,7 +3,7 @@ title: Staging
 sidebar_label: Staging
 ---
 
-Beginning with version 6.0, WAN Assurance for the SSR is available for users who manage their network using the Mist Cloud. 
+Beginning with version 6.0, WAN Assurance for the SSR is available for users who manage their network using the Mist Cloud. This document assumes that you have the Mist Cloud configured and currently managing your network. 
 
 The installation consists of the following steps:
 - Staging
