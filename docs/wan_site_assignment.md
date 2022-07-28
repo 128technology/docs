@@ -3,7 +3,7 @@ title: Site Assignment
 sidebar_label: Site Assignment
 ---
 
-After the SSR has been onboarded to the Mist Cloud, assign it to a Site to begin gathering data in Mist. The steps for this process are provided after the demonstration video.
+After the SSR has been onboarded to the Mist Cloud, assign it to a site to begin managing the device configuration and gathering data in Mist. The steps for this process are provided after the demonstration video.
 
 ![Site Assignment 2](/img/site-assignment-2.gif)
 
