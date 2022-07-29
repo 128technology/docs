@@ -64,9 +64,9 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
 
     ![Inventory panel](/img/wan_inventory_panel.png)
 
-- Click on the Adopt Gateways button in the top right corner. The Gateway Adoption dialog appears, displaying the registration code.
+- Click on the Adopt WAN Edges button in the top right corner. The WAN Edge Adoption dialog appears, displaying the registration code.
 
-    ![Gateway Adoption](/img/wan_registration_code.png)
+    ![WAN Edge Adoption](/img/wan_registration_code.png)
 
 - Click on **Copy to Clipboard**.
 
