@@ -66,6 +66,7 @@ module.exports = {
       "concepts_glossary",
     ],
     "WAN Assurance": [
+      "wan_onboarding_ssrdevice",
       "wan_staging",
       "wan_onboarding_whitebox",
       "wan_site_assignment",
