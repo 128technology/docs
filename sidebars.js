@@ -81,6 +81,7 @@ module.exports = {
           "config_asset_connection_resiliency",
 
           "config_dscp_steering",
+          "config_dscp_preservation",
           "config_vrf_learning",
           "config_audit_event",
           "config_dhcp",
