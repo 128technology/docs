@@ -50,8 +50,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-45679 Round trip time to packet acknowledgement:** A new TCP metric that samples round trip time from data sent to acknowledgement has been added.
 ------
-- **I95-46425 VRRP Alarm:** An alarm is raised when an interface switches from using the primary VRRP to the secondary VRRP.
-------
 - **I95-46562 Allow targeting another router or node when saving tech-support-info:** GUI: A button has been added to the **Logs** page in the GUI to download a tech-support-info bundle. This allows downloading a router's `tech-support-info` directly from the Conductor GUI. <br />
 PCLI: The PCLI command `save tech-support-info` can now collect logs from another node. Using the Conductor's PCLI, a `tech-support-info` bundle can be collected from a Managed Router or the HA peer.
 ------
