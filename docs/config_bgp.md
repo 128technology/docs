@@ -7,11 +7,11 @@ The Border Gateway Protocol (BGP) is a standard exterior gateway protocol develo
 
 Learning routes from BGP simplifies enterprise configuration and integration with Secure Vector Routing. In this configuration guide we will also discuss a SSR-specific feature referred to as "BGP over SVR" (or BGPoSVR), which combines the power of Secure Vector Routing with the rich feature set of the BGP protocol.
 
-### Prerequisites
+## Prerequisites
 
 This section presumes that you have a running SSR system and wants to add configuration to support BGP. The running SSR system should already include configuration for basic platform functionality (e.g., `router`, `node`, `device-interface`, `network-interface`) and basic SSR modeling configuration (e.g., tenants, services, etc.). Refer to the [Element Reference](config_reference_guide.md) section of our documentation for a better understanding about basics of the SSR data model.
 
-### Peering with non-SSR Routers
+## Peering with non-SSR Routers
 
 The BGP configuration exists in the [`routing`](config_reference_guide.md#routing) configuration container within the SSR data model. For any routing configuration, static or dynamic, a default routing instance called `default-instance` must be defined in the SSR configuration.
 
@@ -85,7 +85,7 @@ neighbor        1.1.1.1
 exit
 ```
 
-### Advertising Routes
+## Advertising Routes
 There are two ways to advertise routes into BGP:
 - Using `network` statements to identify the prefixes you want to advertise
 - Redistributing routes learned through other IGP or from configuration
@@ -393,6 +393,187 @@ If all expected configuration has been generated, but a BGP over SVR session doe
 - show sessions
 
 Additionally, use the `show rib {vrf <vrf-name>}` command to verify the BGP neighbor is reachable and its kernel route entry is not superseded by another, higher priority entry in the RIB. 
+
+## BGP Conditional Advertisement
+
+When an SSR prefers a given provider for outbound traffic, it can be configured to receive locally destined traffic from that provider. By advertising the SSR's local routes to the preferred provider, it ensures that locally destined traffic only comes from the preferred provider.
+
+### Configuration
+
+BGP conditional advertisement is configured under the BGP neighbor address by configuring a conditional routing policy and an advertisement routing policy.
+
+When the conditional routing policy is satisfied against all BGP selected routes in the BGP RIB, all routes in the BGP RIB matched by the advertising routing policy are advertised to the configured neighbor. 
+
+If the conditional routing policy is not satisfied, all routes matched by the advertising route policy are withdrawn from the configured neighbor. The conditional routing policy may be configured to be satisfied in an `exist-case`, where any route matches the policy; or where no route matches - a `non-exist case`. 
+
+For example:
+
+```
+routing-protocol bgp
+    type                       bgp
+    local-as                   2
+    conditional-advertisement
+        interval-time  15
+    exit
+    neighbor                   <neighbor-ip>
+        address-family    ipv4-unicast
+            conditional-advertisement
+                advertisement-policy  <policy-name>
+                exist-policy          <policy-name>
+            exit
+        exit
+    exit
+    neighbor                   <neighbor-ip>
+        address-family    ipv4-unicast
+            conditional-advertisement
+                advertisement-policy  <policy-name>
+                non-exist-policy      <policy-name>
+            exit
+        exit
+    exit
+exit
+
+```
+The conditional routing policy is evaluated by default every 60 seconds, but is configurable as shown above.
+
+Conditional advertisement is applicable to established BGP neighbors only.
+
+### Example Configuration
+
+In this example, the hubs are 11.1.1.4, 11.1.1.5, and 172.16.3.6. The conditional exist policy for each hub is the default route prefix match, and the peer address of the hub. The hubs use the same advertise policy.
+
+```
+filter  default-route
+    type  prefix-filter
+    name  default-route 
+    rule  10
+        name    10
+        prefix  0.0.0.0/0
+    exit
+exit
+filter  15-0
+    type  prefix-filter
+    name  15-0
+    rule  10
+        name    10
+        prefix  15.0.0.0/16
+        le      32
+    exit
+exit
+policy  default-dut4
+    name       default-dut4
+    statement  10
+        name       10
+        condition  address-prefix-filter-condition
+            type           address-prefix-filter-condition
+            prefix-filter  default-route
+        exit
+        condition  peer-condition
+            type          peer-condition
+            peer-address  11.1.1.4
+        exit
+    exit
+exit 
+policy  default-dut5
+    name       default-dut5
+    statement  10
+        name       10
+        condition  address-prefix-filter-condition
+            type           address-prefix-filter-condition
+            prefix-filter  default-route
+        exit
+        condition  peer-condition
+            type          peer-condition
+            peer-address  11.1.1.5
+        exit
+    exit
+exit
+policy  default-dut6
+    name       default-dut6
+    statement  10
+        name       10
+        condition  address-prefix-filter-condition
+            type           address-prefix-filter-condition
+            prefix-filter  default-route
+        exit
+        condition  peer-condition
+            type          peer-condition
+            peer-address  172.16.3.6
+        exit
+    exit
+exit
+policy  15-0
+    name       15-0 
+    statement  10
+        name       10
+         condition  address-prefix-filter-condition
+            type           address-prefix-filter-condition
+            prefix-filter  15-0
+        exit
+        action     set-community
+            type                 set-community
+            community-attribute  2:15
+        exit
+    exit
+exit
+
+routing-protocol  bgp
+    type                       bgp
+    local-as                   2
+    conditional-advertisement
+        interval-time  15
+    exit
+    neighbor                   11.1.1.4
+        neighbor-address  11.1.1.4
+        neighbor-as       4
+        address-family    ipv4-unicast
+            afi-safi                   ipv4-unicast
+            conditional-advertisement
+                advertisement-policy  15-0
+                exist-policy          default-dut4
+            exit
+        exit
+    exit
+    neighbor                   11.1.1.5
+        neighbor-address  11.1.1.5
+        neighbor-as       5 
+        address-family    ipv4-unicast
+            afi-safi                   ipv4-unicast
+            conditional-advertisement
+                advertisement-policy  15-0
+                exist-policy          default-dut5
+            exit
+        exit
+    exit
+    neighbor                   172.16.3.6
+        neighbor-address  172.16.3.6
+        neighbor-as       6
+        address-family    ipv4-unicast
+            afi-safi                   ipv4-unicast
+            conditional-advertisement
+                advertisement-policy  15-0
+                exist-policy          default-dut6
+            exit
+        exit
+    exit
+exit
+
+```
+### Known Limitations
+
+This feature may introduce some additional load on the routing engine as the conditional policy must be executed each time the BGP RIB changes.
+
+### Show Commands
+
+Use `show bgp neighbors` to see information about the neighbor conditional advertisement configuration and state:
+
+```
+PCLI# show bgp neighbors
+…
+BGP neighbor is 11.1.1.5, remote AS 5, local AS 2, external link
+…
+  Condition EXIST, Condition-map *default-dut5, Advertise-map *15-0, status: Withdraw
+```
 
 ## BGP Graceful Restart
 
