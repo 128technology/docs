@@ -10,7 +10,7 @@ sidebar_label: '3.5'
 
 - **I95-47351 Conductor with a large number of assets would take a long time to apply WAN Assurance Plugin state:**
 
-  _**Resolution:**_ The WAN Assurance plugin use plugin data files instead of pillar to synchronize data and apply plugin state to speed up the process.
+  _**Resolution:**_ The WAN Assurance plugin uses plugin data files instead of pillar to synchronize data and apply plugin state to speed up the process.
 
 ## Release 3.5.0
 
@@ -19,11 +19,11 @@ sidebar_label: '3.5'
 ### New Features
 - **I95-45678 Report the TCP round trip time metric**
 
-For TCP sessions the SSR collects metrics on TCP round-trip time which will be reported via application summary to the MIST cloud.
+For TCP sessions the SSR collects metrics on TCP round-trip time which are reported via application summary to the MIST cloud.
 
 - **WAN-903 Improve the reporting for the release workflow**
 
-When a device is released from the MIST portal, the `show mist details` command provides additional context around the status, registration code being used and other information to assist in re-onboarding the device.
+When a device is released from the MIST portal, the `show mist details` command provides additional context around the status, registration code being used, and other information to assist in re-onboarding the device.
 
 - **PLUGIN-1768 Add configuration commit warnings for expired registration code**
 
