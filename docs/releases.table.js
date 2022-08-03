@@ -5,6 +5,13 @@ import React from "react";
 // New entries should be placed at the top.
 // ----------------------------------------------------------------------------
 export const releases = [
+    {
+    version: '5.6.1',
+    url:'release_notes_128t_5.6#release-561-18',
+    releaseDate: 'August 1, 2022',
+    endOfMaintenance: 'February 20, 2023',
+    endOfSupport: 'August 20, 2023',
+   },
    {
     version: '6.0.0',
     url: 'release_notes_128t_6.0#release-600-56',
