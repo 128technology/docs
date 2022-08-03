@@ -27,7 +27,7 @@ When a device is released from the MIST portal, the `show mist details` command 
 
 - **PLUGIN-1768 Add configuration commit warnings for expired registration code**
 
-The `authority > mist-wan-assurance > registration-code` is used for onboarding new routers and has an expiration of one year. A warning is now displayed when using an expired code and the `show mist details` commands will also display the expiration date for the configured token.
+The `authority > mist-wan-assurance > registration-code` is used for onboarding new routers and has an expiration of one year. A warning is now displayed when using an expired code. The `show mist details` commands also displays the expiration date for the configured token.
 
 - **WAN-720 Support Greenfield and Whitebox devices for MIST onboarding**
 
