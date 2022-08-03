@@ -34,5 +34,5 @@ The `authority > mist-wan-assurance > registration-code` is used for onboarding 
 Support for onboarding and conductor redirection for Juniper branded devices as well as other Whiteboxes was introduced.
 
 :::important
-After upgrade the device will stop reporting the TCP reset metrics for 128T version 5.6.0 and lower since those metrics were reporting higher than normal error counts.
+After upgrade the device will stop reporting the TCP reset metrics for SSR version 5.6.0 and lower since those metrics were reporting higher than normal error counts.
 :::
