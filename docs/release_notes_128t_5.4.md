@@ -28,6 +28,10 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date: August 4, 2022**
 
+With release 5.4.7-9 a single ISO is provided that supports installation workflows. 
+
+- 128T-5.4.7-5.el7.ISO.v1.x86_64.iso
+
 ### New Features
 
 - **I95-40195 LDAP does not allow search base to be configured correctly:** Search base parameters, filter generation, certificate assurance, and logging enhancements have been added to the `ldap-server` configuration. See [LDAP](config_ldap.md) for more information.
@@ -37,10 +41,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-46562 Allow targeting another router or node when saving tech-support-info:** GUI: A button has been added to the **Logs** page in the GUI to download a tech-support-info bundle. This allows downloading a router's `tech-support-info` directly from the Conductor GUI. <br />
 PCLI: The PCLI command `save tech-support-info` can now collect logs from another node. Using the Conductor's PCLI, a `tech-support-info` bundle can be collected from a Managed Router or the HA peer.
 ------
-- **I95-46574 Security History Export:** An Export button has been to the Security History page.
+- **I95-46574 Security History Export:** An Export button has been added to the Security History page.
 ------
-- **I95-46747 Improved the Password user experience:** You now are re-propmpted up to three times for the current password if it is incorrect. If a new password does not meet the strength check, you are prompted with that information, and required to update the password. 
-
+- **I95-46747 Improved the Password user experience:** You now are re-prompted up to three times for the current password if it is incorrect. If a new password does not meet the strength check, you are prompted with that information, and required to update the password. 
 
 ### Resolved Issues
 

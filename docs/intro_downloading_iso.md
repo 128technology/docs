@@ -29,6 +29,10 @@ With releases 4.5.6-1 and 5.0.0-1 v2 (and greater), we now provide a single ISO 
 - 128T-4.5.6-1.el7.OTP.v1.x86_64.iso
 - 128T-5.0.0-1.el7.OTP.v2.x86_64.iso
 
+With release 5.4.7-9 (and greater) a single ISO is provided that supports Installation workflows. 
+
+- 128T-5.4.7-5.el7.ISO.v1.x86_64.iso
+
 ### Installation Considerations
 
 The newer installation process uses a username and token that is provided with the software license. The username/token simplifies access and does not require the conversion process used for the certificate. With the latest releases of the Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 or greater is required. SSR software version 5.3 and greater accept **only** the username and token for software access. 
