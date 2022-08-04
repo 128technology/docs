@@ -5,7 +5,7 @@ sidebar_label: SSR Device Onboarding
 
 ## Onboarding a Conductor-Managed SSR Appliance
 
-Juniper SSR hardware devices (SSR120/130, SSR1000-1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts your device into your Mist Organization. Scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. For information about using the QR code, refer to the [Claiming APs page](https://www.mist.com/documentation/claiming-aps/).
+Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts your device into your Mist Organization. Scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. For information about using the QR code, refer to the [Claiming APs page](https://www.mist.com/documentation/claiming-aps/).
 
 Alternatively, you can onboard a conductor-managed SSR device into the Mist cloud using the Mist UI and your Claim Code. 
 
@@ -18,7 +18,7 @@ Alternatively, you can onboard a conductor-managed SSR device into the Mist clou
 7. Select the Claim WAN Edges button and enter the Claim Code.
 8. Assign the device to a site.
 
-In both onboarding processes, when Mist identifies that the device is conductor-managed from the cloud, it reinitializes to use the factory default configuration with the conductor IP address. During the initialization process, it reaches out to the conductor and pulls down the appropriate configuration.  
+In both onboarding processes, conductor-managed devices reinitialize to use the factory default configuration with the conductor IP address. During the initialization process, it reaches out to the conductor and pulls down the appropriate configuration.  
 
 ## Upgrading from Earlier SSR Versions
 
