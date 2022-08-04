@@ -28,9 +28,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date: August 4, 2022**
 
-With release 5.4.7-9 a single ISO is provided that supports installation workflows. 
+With release 5.4.7-7 (and greater) the iso name format has changed from using `OTP` to `ISO`:
 
-- 128T-5.4.7-5.el7.ISO.v1.x86_64.iso
+- 128T-5.4.7-7.el7.ISO.v1.x86_64.iso
 
 ### New Features
 

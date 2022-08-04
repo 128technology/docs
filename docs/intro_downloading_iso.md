@@ -29,9 +29,9 @@ With releases 4.5.6-1 and 5.0.0-1 v2 (and greater), we now provide a single ISO 
 - 128T-4.5.6-1.el7.OTP.v1.x86_64.iso
 - 128T-5.0.0-1.el7.OTP.v2.x86_64.iso
 
-With release 5.4.7-9 (and greater) a single ISO is provided that supports Installation workflows. 
+With release 5.4.7-7 (and greater) the iso name format has changed from using `OTP` to `ISO`:
 
-- 128T-5.4.7-5.el7.ISO.v1.x86_64.iso
+- 128T-5.4.7-7.el7.ISO.v1.x86_64.iso
 
 ### Installation Considerations
 
