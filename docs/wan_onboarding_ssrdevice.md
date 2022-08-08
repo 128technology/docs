@@ -7,11 +7,15 @@ sidebar_label: SSR Device Onboarding
 
 Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts your device into your Mist Organization. Scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. For information about using the QR code, refer to the [Claiming APs page](https://www.mist.com/documentation/claiming-aps/).
 
+The Mist App can be downloaded from the following locations:
+- [For Apple Devices](https://apps.apple.com/us/app/mistai/id1215196902) 
+- [For Android Devices](https://play.google.com/store/apps/details?id=com.mist.mistify&hl=en_US&gl=US)
+
 Alternatively, you can onboard a conductor-managed SSR device into the Mist cloud using the Mist UI and your Claim Code. 
 
 1. Unbox the SSR appliance.
-2. Power up the SSR appliance.
-3. Connect to the WAN port.
+2. Connect to the WAN port.
+3. Power up the SSR appliance.
 4. Copy the Claim Code from the QR sticker.
 5. Login to the Mist UI on another device and navigate to your organization.
 6. Go to the WAN Edges page
