@@ -119,7 +119,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------ 
 - **I95-46419 Forward Error Correction (FEC) with OutBound Only Fails:** Resolved an issue where FEC actions are not installed properly after the modifcation to resolve the outbound only path.
 ------
-- **I95-46454 ICMP manager excessively logs ICMP echo replies with no matching context:** This issue has bee resolvd.
+- **I95-46454 ICMP manager excessively logs ICMP echo replies with no matching context:** This issue has been resolved.
 ------
 - **I95-46458 `set password` from PCLI hangs at "Modifying password":** This issue has been resolved. 
 ------
