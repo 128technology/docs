@@ -17,6 +17,8 @@ config authority
         description "STEP Repository on the Conductor"
     exit
 ```
+When STEP is enabled on an existing router, it is a best practice to clear all existing sessions so the routers begin using the STEP-based routes. This is especially important for EoSVR configurations, to prevent traffic from being dropped. Use the command `delete sessions service <service-name>` or `delete sessions service <eosvr-service-name>` to clear sessions.
+
 When configuring STEP repositories for high availability, the above configuration must be created on both repositories. See [STEP Repository High Availability](config_step_ha.md) for more information. 
 
 ### Configuring Peer Path Advertisement Settings

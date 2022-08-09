@@ -5,6 +5,10 @@ sidebar_label: Configuring Ethernet Over Secure Vector Routing
 
 Use the following procedures to configure an SSR network to use Ethernet over SVR (EoSVR). Any network interface can be configured to use Ethernet over SVR. 
 
+:::note
+When configuring EoSVR on a STEP-enabled router, it is a best practice to clear all existing sessions so the routers begin using the STEP-based routes. This is especially important for EoSVR configurations, to prevent traffic from being dropped. Use the command `delete sessions service <eosvr-service-name>` to clear sessions.
+:::
+
 ### Configure an Ethernet over SVR Bridge
 
 1. On the Configuration home screen, select a Router.
