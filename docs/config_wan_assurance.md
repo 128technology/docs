@@ -3,7 +3,7 @@ title: Conductor Managed WAN Assurance
 sidebar_label: Conductor Managed WAN Assurance
 ---
 
-SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. However, for software versions prior to SSR Version 6.0, router adoption relies on an on-premise conductor to assist in the onboarding. This document explains the process of enabling WAN Assurance on the Conductor. This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
+SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. However, for software versions prior to SSR Version 6.0, router adoption relies on an on-premise conductor to assist in the onboarding. This document explains the process of enabling WAN Assurance telemetry and ZTP for conductor-based deployments. This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
 
 :::important
 Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR and Mist.

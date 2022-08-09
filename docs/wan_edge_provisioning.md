@@ -13,7 +13,7 @@ This process assumes that you already have an account on the Mist Portal.
 
 Create one Site for each physical location for onboarding the SSRs.
 
-- Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites. Other devices from the Juniper stack such as Mist APs, Switches, SRX, etc., should be onboarded and assigned to the same site as the SSR when possible. This provides a clean topology view of all devices running within a site.
+- Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites. Other devices from the Juniper stack such as Mist APs, Switches, SRX, etc., should be onboarded and assigned to their respective sites. This provides a clean topology view of all devices running within a site.
 - Spoke Site is typically the location where a full stack solution is deployed. The location field is required for creation. Site variables are assigned after the network is defined.
 
 ### Add a Network
@@ -41,7 +41,7 @@ To create a new application, navigate to Applications and click Add Applications
 
 ![Add Application](/img/wanas_add-app.gif)
 
-Configure and save a basic Internet app.
+Configure and save a basic Internet app. If you intend to have a catch-all application for all traffic, it is best practice to create an "Internet" application that is represented by a quad 0 (0.0.0.0/0).
 
 ![Application Panel](/img/wanas_add-app_static.png)
 
