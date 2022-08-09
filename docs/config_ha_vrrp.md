@@ -23,8 +23,6 @@ On the primary router, assign the peer router to which the primary will failover
 ```
 config
     authority
-        remote-login
-        exit
         router          router-a
             name                  router-a
             location              "router-a Philadephia"
@@ -44,7 +42,11 @@ Configure node1 on router-a with the following interfaces:
 - wan
 - far (the inter-router communication link)
 
-Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring `router-a` with a higher VRRP priority (100), `router-a` is identified as the primary router. We will configure `router-b` as the secondary router.
+Activate VRRP on the `lan` device interface of node1. By configuring `router-a` with a higher VRRP priority (100), `router-a` is identified as the primary router. We will configure `router-b` as the secondary router.
+
+:::note
+These examples demonstrate the use of VRRP for LAN-side network interfaces connected to a common switch. While uncommon in production deployments, VRRP can also be configured for WAN interfaces.
+:::
 
 ```
 			node                  node1
@@ -57,20 +59,17 @@ Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring 
                     name               lan
                     type               ethernet
                     pci-address        0000:00:04.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    128
                         priority                100
-                        advertisement-interval  250
                     exit
 
                     network-interface  lan
                         name          lan
                         global-id     1
                         tenant        red
-                        rewrite-dscp  false
                         source-nat    false
                         qp-value      30
                         mtu           1500
@@ -90,20 +89,11 @@ Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring 
                     name               wan
                     type               ethernet
                     pci-address        0000:00:05.0
-                    capture-filter     len>0
 
-                    vrrp
-                        enabled                 true
-                        vrid                    129
-                        priority                100
-                        advertisement-interval  250
-                    exit
-
-                    network-interface  wan
+                     network-interface  wan
                         name                   wan
                         global-id              3
                         inter-router-security  aes1
-                        rewrite-dscp           false
                         source-nat             false
                         qp-value               30
                         mtu                    1500
@@ -131,7 +121,6 @@ Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring 
                             vector             peer
                         exit
                         inter-router-security  aes1
-                        rewrite-dscp           false
                         source-nat             false
                         qp-value               30
                         mtu                    1500
@@ -144,6 +133,7 @@ Activate VRRP on the `wan` and `lan` device interfaces of node1. By configuring 
                 exit
             exit
 ```
+
 ### Enable Service Route Failover
 
 Set `enable-failover` to true. This will enable failover between service routes on router-a.  
@@ -228,6 +218,7 @@ On the secondary router, assign the peer router to which the secondary router wi
                 router-name     router-a
             exit
 ```
+
 ### Configure VRRP
 
 Configure node1 on router-b with the following interfaces:
@@ -235,10 +226,10 @@ Configure node1 on router-b with the following interfaces:
 - wan
 - far (this is the inter-router communication link)
 
-Activate VRRP on the `wan` and `lan` device interfaces of node1. Configuring a lower VRRP priority (97) on the `lan` and `wan` interfaces of router-b, identifies router-b as the secondary router. On a dual router HA setup, the vrids must be the same on the two redundant/VRRP devices - `router-a` and `router-b` `lan` device interfaces must have the same vrid, as well as each `wan` device interface vrid being the same.
+Activate VRRP on the `lan` device interface of node1. Configuring a lower VRRP priority (97) on the `lan` interface of router-b, identifies router-b as the secondary router. On a dual router HA setup, the vrids must be the same on the two redundant/VRRP devices - `router-a` and `router-b` `lan` device interfaces must have the same vrid.
 
 ```
-node                  node1
+            node                  node1
                 name                      node1
                 asset-id                  8100f73d-2071-47c3-86cb-07eba002b698
                 role                      combo
@@ -248,20 +239,17 @@ node                  node1
                     name               lan
                     type               ethernet
                     pci-address        0000:00:04.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    128
                         priority                97
-                        advertisement-interval  250
                     exit
 
                     network-interface  lan
                         name          lan
                         global-id     4
                         tenant        red
-                        rewrite-dscp  false
                         source-nat    false
                         qp-value      30
                         mtu           1500
@@ -282,20 +270,11 @@ node                  node1
                     name               wan
                     type               ethernet
                     pci-address        0000:00:05.0
-                    capture-filter     len>0
-
-                    vrrp
-                        enabled                 true
-                        vrid                    129
-                        priority                97
-                        advertisement-interval  250
-                    exit
 
                     network-interface  wan
                         name                   wan
                         global-id              6
                         inter-router-security  aes1
-                        rewrite-dscp           false
                         source-nat             false
                         qp-value               30
                         mtu                    1500
@@ -323,7 +302,6 @@ node                  node1
                             vector             peer
                         exit
                         inter-router-security  aes1
-                        rewrite-dscp           false
                         source-nat             false
                         qp-value               30
                         mtu                    1500
@@ -336,6 +314,7 @@ node                  node1
                 exit
             exit
 ```
+
 ### Enable Service Route Failover
 
 To preserve session state between routers, configure the following service routes. Set `enable-failover` to true.
@@ -347,9 +326,9 @@ To preserve session state between routers, configure the following service route
                 vector           local-vrrp
                 enable-failover  true
 
-                next-hop         node1 wan
+                next-hop         node1 lan
                     node-name    node1
-                    interface    wan
+                    interface    lan
                 exit
             exit
 
@@ -420,8 +399,6 @@ The steps above illustrate the differences in a high availability configuration,
 ```
 config
     authority
-        remote-login
-        exit
         router          router-a
             name                  router-a
             location              "router-a Philadephia"
@@ -433,9 +410,7 @@ config
                 authority-name  Authority128
                 router-name     router-b
             exit
-            system
-                log-level  trace
-            exit
+
             node                  node1
                 name                      node1
                 asset-id                  f1305f6b-44c3-4b1e-b887-7376efc974d7
@@ -446,19 +421,16 @@ config
                     name               lan
                     type               ethernet
                     pci-address        0000:00:04.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    128
                         priority                100
-                        advertisement-interval  250
                     exit
                     network-interface  lan
                         name          lan
                         global-id     1
                         tenant        red
-                        rewrite-dscp  false
                         source-nat    false
                         qp-value      30
                         mtu           1500
@@ -473,24 +445,16 @@ config
                         exit
                     exit
                 exit
+
                 device-interface          wan
                     name               wan
                     type               ethernet
                     pci-address        0000:00:05.0
-                    capture-filter     len>0
-
-                    vrrp
-                        enabled                 true
-                        vrid                    129
-                        priority                100
-                        advertisement-interval  250
-                    exit
 
                     network-interface  wan
                         name                   wan
                         global-id              3
                         inter-router-security  aes1
-                        rewrite-dscp           false
                         source-nat             false
                         qp-value               30
                         mtu                    1500
@@ -518,7 +482,6 @@ config
                             vector             peer
                         exit
                         inter-router-security  aes1
-                        rewrite-dscp           false
                         source-nat             false
                         qp-value               30
                         mtu                    1500
@@ -537,9 +500,9 @@ config
                 vector           local-vrrp
                 enable-failover  true
 
-                next-hop         combo wan
+                next-hop         combo lan
                     node-name  combo
-                    interface  wan
+                    interface  lan
                 exit
             exit
 
@@ -564,10 +527,6 @@ config
                 router-name     router-a
             exit
 
-            system
-                log-level  trace
-            exit
-
             node                  node1
                 name                      node1
                 asset-id                  8100f73d-2071-47c3-86cb-07eba002b698
@@ -578,20 +537,17 @@ config
                     name               lan
                     type               ethernet
                     pci-address        0000:00:04.0
-                    capture-filter     len>0
 
                     vrrp
                         enabled                 true
                         vrid                    128
                         priority                99
-                        advertisement-interval  250
                     exit
 
                     network-interface  lan
                         name          lan
                         global-id     4
                         tenant        red
-                        rewrite-dscp  false
                         source-nat    false
                         qp-value      30
                         mtu           1500
@@ -612,20 +568,11 @@ config
                     name               wan
                     type               ethernet
                     pci-address        0000:00:05.0
-                    capture-filter     len>0
-
-                    vrrp
-                        enabled                 true
-                        vrid                    129
-                        priority                99
-                        advertisement-interval  250
-                    exit
 
                     network-interface  wan
                         name                   wan
                         global-id              6
                         inter-router-security  aes1
-                        rewrite-dscp           false
                         source-nat             false
                         qp-value               30
                         mtu                    1500
@@ -672,9 +619,9 @@ config
                 vector           local-vrrp
                 enable-failover  true
 
-                next-hop         combo wan
+                next-hop         combo lan
                     node-name    combo
-                    interface    wan
+                    interface    lan
                 exit 
             exit
 
@@ -756,4 +703,83 @@ config
     exit
 exit
 
+```
+
+The following is a config snippet to support vrrp with vlan. The vrrp network-interface with a vlan tag matching the one in the vrrp config will be used for sending out VRRP advertisements.
+
+:::important
+The network-interface must have a static IP address.
+:::
+```
+config
+    authority
+        router    Fabric128
+            name              Fabric128
+            node              test1
+                name              test1
+                enabled           true
+                device-interface  dev
+                    name               dev
+                    type               ethernet
+                    pci-address        0000:00:05.0
+                    vrrp
+                        enabled                 true
+                        vlan                    1
+                        vrid                    128
+                        priority                100
+                        advertisement-interval  1000
+                    exit
+                    network-interface  intf1
+                        name          intf1
+                        vlan          0
+                        type          external
+                        dhcp          v4
+                    exit
+                    network-interface  intf2
+                        name          intf2
+                        vlan          1
+                        type          external
+                        address       172.16.3.1
+                            ip-address     172.16.3.1
+                            prefix-length  24
+                            gateway        172.16.3.10
+                        exit
+                    exit
+                exit
+            exit
+            node              test2
+                name              test2
+                enabled           true
+                device-interface  dev
+                    name               dev
+                    type               ethernet
+                    pci-address        0000:00:05.0
+                    vrrp
+                        enabled                 true
+                        vlan                    1
+                        vrid                    128
+                        priority                99
+                        advertisement-interval  1000
+                    exit
+                    network-interface  intf1
+                        name          intf1
+                        vlan          0
+                        type          external
+                        dhcp          v4
+                    exit
+                    network-interface  intf2
+                        name          intf2
+                        vlan          1
+                        type          external
+                        address       172.16.3.1
+                            ip-address     172.16.3.1
+                            prefix-length  24
+                            gateway        172.16.3.10
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit
 ```

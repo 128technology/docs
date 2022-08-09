@@ -7,6 +7,16 @@ sidebar_label: '3.1'
 **Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 :::
 
+## Release 3.1.4
+
+### Resolved Issues
+
+- **IN-497 Router upgrades take an extended amount if the repo times out with conductor-only configured:** Routers that are configured as `conductor-only` and that can resolve the remote repo, but where the repo access operations time out, may result in an extended amount of time for upgrades to complete. This issue has been resolved.
+------
+- **IN-464/IN-487 Reinstall is now an "Advanced Feature":** Reinstallation should be performed from the ISO, rather than the Installer to avoid problems of leftover packages and kernel mismatches.
+------
+- **IN-479 Update Support Contacts in the Installer:** The contact information in the Installer has been updated.
+
 ## Release 3.1.3
 
 ### Resolved Issues

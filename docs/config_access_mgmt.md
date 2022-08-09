@@ -30,7 +30,9 @@ From the terminal window:
 
 For additional information about the manual installation process with Screen, please refer to [Manually Installing the 128T](intro_installation_installer.md).
 
-### Additional Changes to SSH Parameters
+### Additional SSH Parameters
+- SSH Mode Verification performs strict mode checking of home directory configuration files, as well as user-specific SSH configuration files to prevent one user from logging on to the system as another user.
+- SSH logon by a non-certificate-trusted host is not allowed. 
 - The SSH login grace time is limited to waiting for one minute for a password to be entered.
 - SSH access is limited to users assigned to the `wheel` group.
 - When creating a user with SSH privileges from the UI, that user must be assigned to an admin user group.

@@ -1,9 +1,9 @@
 ---
-title: Configuring WAN Assurance
-sidebar_label: Configuring WAN Assurance
+title: Conductor Managed WAN Assurance
+sidebar_label: Conductor Managed WAN Assurance
 ---
 
-Use the following process to onboard Session Smart Routers (SSR) to the Mist cloud. Since SSN software can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding.
+Use the following process to onboard a conductor-managed Session Smart Router (SSR) to the Mist cloud. Since SSN software can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding.
 
 :::important
 Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR and Mist.
@@ -60,7 +60,7 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
 
     ![Inventory Menu](/img/wan_inventory.png)
 
-- In the Inventory panel, click on the **Gateways** selection on the top of the screen.
+- In the Inventory panel, click on the **WAN Edge** selection on the top of the screen.
 
     ![Inventory panel](/img/wan_inventory_panel.png)
 
@@ -79,7 +79,7 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
     AiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRj
     NGIwNzAiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1
     fdXJsIjoid3NzOi8vZXAtdGVybWluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjIyNzQ2MT
-    c1LCJleHAiOjE2NTQyODIxNzV9.iBul1W1nk!3JyTd98jUoVFZrZet7ElvPQdsCdDFfAN0
+    c1LAiOjE2NTQyODIxNzV9.iBul1W1nk!3JyTd98jUoVFZrZet7ElvPQdsCdDFfAN0
     admin@node1.conductor1#
     *admin@node1.conductor1#
     *admin@node1.conductor1#
@@ -94,7 +94,7 @@ To enter the registration code in the SSR GUI, copy the text registration-code f
         authority
 
             mist-wan-assurance
-                registration-code  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRjNGIwNzAiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1fdXJsIjoid3NzOi8vZXAtdGVybWluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjIyNzQ2MTc1LCJleHAiOjE2NTQyODIxNzV9.iDobxHQzKZkJyTd98jUoVFZrZet7ElvPQdsCdDFfAN0
+                registration-code  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRjNGIwNzAiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1fdXJsIjoid3NzOi8vZXAtdGVybWluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjIyNzQ2MTc1LCJleHAiOjE2NTQyODIxNzV9.iBul1W1nk!3J0
             exit
         exit
     exit
@@ -135,6 +135,45 @@ Sites must have already been created - there is no option to create a site in th
 5. Click on **Assign to Site**.
 
 Once the site assignment is complete, the information is relayed back to the corresponding SSR router, and the router begins streaming the telemetry data to the cloud.
+
+### Viewing the SSR status
+
+The status of the SSR connection to the MIST cloud and other details can be found on the GUI and PCLI.
+
+#### On the Conductor UI
+
+* Navigate to Plugins > MIST WAN ASSURANCE > Details.
+
+ ![Plugins Context Menu](/img/wana_plugin_detail.png)
+
+* Select the router from the `Router Context` menu.
+
+ ![Plugins Context Menu](/img/wana_plugin_context.png)
+
+* The summary output is displayed by default and contains useful information about the device connection to the MIST cloud.
+
+ ![Plugins Context Menu](/img/wana_plugin_state.png)
+
+
+#### On the Conductor PCLI
+
+* The `show mist` command can be used to display the summary and detail information about the 128 router's connection to the MIST cloud.
+
+```console
+admin@node1.conductor1# show mist router 128t-east
+Wed 2022-07-20 05:33:05 UTC
+✔ Retrieving mist state...
+Target: node1.128t-east
+
+========== ============ ============= ================= ============================= =================== ============
+ Agent      Connection   128T          128T-mist-agent   Platform                      Device-ID           Interfaces
+========== ============ ============= ================= ============================= =================== ============
+ assigned   up           5.6.1-9.el7   4.0.3330-1.el7    OpenStack Foundation - Nova   02-00-01-c9-90-16            6
+
+Retrieved mist state.
+Completed in 1.06 seconds
+admin@node1.conductor1#
+```
 
 ## SSR WAN Assurance Features
 
@@ -191,12 +230,6 @@ The `show plugins state` command displays extensive information about the state 
 
 `show plugins state router <router name> summary 128T-mist-wan-assurance`
 
-##### Version History
-
-| Release      | Modification                                    |
-| ------------ | ----------------------------------------------- |
-| 3.4.0        | Additional diagnostics for connection down case was added |
-
 The `connection` column will display the current status of the device connection to the MIST cloud. When the connection is down, it will also display information useful to diagnose the connection issue.
 
 ```
@@ -225,9 +258,7 @@ In a situation where a router needs to be moved from one organization to another
 
 ### Releasing a Router
 
-The router must be released from both Mist and the SSN conductor. To release a router, use the following process.
-
-1. From the Mist GUI:
+To release a router, use the following process from the MIST GUI:
 
 * Go to **Organization > Inventory**.
 * Select the checkbox next to the router.
@@ -235,34 +266,101 @@ The router must be released from both Mist and the SSN conductor. To release a r
 * Select **Release**.
 * Click on **Release** to confirm.
 
-2. On the SSN conductor, you can perform a release from either the conductor shell or the GUI.
+After a few minutes the router will be released and stop sending the data to the Mist cloud. Use the information in  [Viewing the SSR Status](#viewing-the-ssr-status) to check the current status. A successfully released router will display the following:
 
-From the conductor shell:
+ ![Plugins Context Menu](/img/wana_plugin_released.png)
 
-`release mist agent router <router> node <node>`
 
-In the GUI:
-
- 1. In the Tools menu, select Plugin Commands.
-
- 2. In the Plugin Commands pane, select the plugin command (top right corner) **release Mist agent**.
-
- ![Plugins Context Menu](/img/wana_release_mist.png)
-
- 3. Select the router and node from the drop down lists.
-
- ![Plugin Release Context](/img/wana_release_mwa_context.png)
-
- 4. Click **Execute**.
-
-After a few minutes the router will be released and stop sending the data to the Mist cloud. Once that process is completed, disable the Mist WAN Assurance plugin on the router.
+Once that process is completed, disable the Mist WAN Assurance plugin on the router.
 
 ![Disable MWA Plugin](/img/wana_disabled_mwa.png)
 
 ### Re-Onboarding a Router
 
-To re-onboard a router, re-enable the plugin on the router. This triggers a reload of the registration code and the onboarding process.
+Once the necessary changes have been made to the registration-code and other configuration, the re-onboarding process can begin.
+
+#### Using the Conductor UI
+
+1. Navigate to Plugins > MIST WAN ASSURANCE > Details.
+
+ ![Plugins Context Menu](/img/wana_plugin_detail.png)
+
+2. Confirm the registration-code on the router is as expected. This can done via the `Detail State` tab as shown below.
+
+ ![Plugins Detail State](/img/wana_plugin_detail_regcode.png)
+
+3. Re-enable the plugin on the router and commit the configuration.
 
 ![Enable MWA Plugin](/img/wana_enabled_mwa.png)
 
+4. Switch to the `Command` tab, select the router from the `Router Context` menu and select the `unrelease mist agent` command.
 
+ ![Plugins Command Context Menu](/img/wana_plugin_command_context.png)
+
+5. Click on `Execute` to initiate the re-onboarding process using the registration-code currently available on the system.
+
+ ![Unreleased](/img/wana_unreleased.png)
+
+
+#### Using the conductor PCLI
+
+1. Confirm the registration-code on the router is as expected.
+
+```console
+admin@node1.conductor1# show mist router 128t-east detail
+Wed 2022-07-20 05:58:33 UTC
+✔ Retrieving mist state...
+
+==============================================================================================================================================================================================================================================================
+ node1.128t-east
+==============================================================================================================================================================================================================================================================
+   128T:                                       5.6.1-9
+   128T-mist-agent:                            4.0.3330-1
+   Agent:                                      released
+   Connection:                                 down
+   registration-code:                          eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRjNGIwNzAiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1fdXJsIjoid3NzOi8vZXAtdGVyb
+ WluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjU4MjkzMTQ2LCJleHAiOjE2ODk4MjkxNDZ9.LVIW0Gx8Q8IIkp0o1J86ZoW3_FytrRDKJEMQdBqABCD
+   registration-time:                          unknown
+
+Retrieved mist state.
+Completed in 0.97 seconds
+admin@node1.conductor1#
+```
+
+2. Re-enable the plugin on the router.
+
+```console
+admin@node1.conductor1# config authority router 128t-east mist-wan-assurance enabled true
+```
+
+3. Unrelease the router to initiate the re-onboarding process.
+
+```console
+admin@node1.conductor1# unrelease mist agent
+node   router
+admin@node1.conductor1# unrelease mist agent router 128t-east node node1
+✔ Retrieving...
+Target: node1.conductor1
+
+Unreleased
+
+Successfully retrieved info.
+admin@node1.conductor1#
+```
+
+4. Once re-onboarded, check the status using the `show mist` command.
+```console
+admin@node1.conductor1# show mist router 128t-east
+Wed 2022-07-20 06:01:32 UTC
+✔ Retrieving mist state...
+Target: node1.128t-east
+
+============ ============ ============= ================= ============================= =================== ============
+ Agent        Connection   128T          128T-mist-agent   Platform                      Device-ID           Interfaces
+============ ============ ============= ================= ============================= =================== ============
+ unassigned   up           5.6.1-9.el7   4.0.3330-1.el7    OpenStack Foundation - Nova   02-00-01-63-0e-65            6
+
+Retrieved mist state.
+Completed in 0.90 seconds
+admin@node1.conductor1#
+```
