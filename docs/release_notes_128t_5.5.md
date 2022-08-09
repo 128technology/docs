@@ -24,15 +24,17 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
-## Release 5.5.3-X
+## Release 5.5.3-4
 
 **Release Date:** August 11, 2022
 
 ### New Features
 
+- **I95-41561 EoSVR Active / Standby:** EoSVR Active Standby configuration gives you the ability to configure two different endpoints on the P2P L2 service, while making sure only one is active at a time. For more information, see [Configuring Ethernet Over SVR for Active/Standby](config_EthoSVR_activestandby).
+------
 - **I95-44863 Automatic Core Assignment after Reboot:** On systems where `forwarding-core-mode` is set to `automatic`, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
 ------
-- **I95-46145 Extend clear app-id PCLI command to support stats purge:** The `clear app-id` command has been extended to clear expired client and next hop stats.
+- **I95-46145 Extend clear app-id PCLI command to support stats purge:** The `clear app-id` command has been extended to clear expired client and next hop stats. For more information, see [`clear app-id stats`](cli_reference.md#clear-app-id-stats).
 ------
 - **I95-46747 Improved the Password user experience:** You now are re-prompted up to three times for the current password if it is incorrect. If a new password does not meet the strength check, you are prompted with that information, and required to update the password.
 
