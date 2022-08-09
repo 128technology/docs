@@ -30,7 +30,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-- **I95-41561 EoSVR Active / Standby:** EoSVR Active Standby configuration gives you the ability to configure two different endpoints on the P2P L2 service, while making sure only one is active at a time. For more information, see [Configuring Ethernet Over SVR for Active/Standby](config_EthoSVR_activestandby).
+- **I95-41561 EoSVR Active / Standby:** EoSVR Active Standby configuration gives you the ability to configure two different endpoints on the P2P L2 service, while making sure only one is active at a time. For more information, see [Configuring Ethernet Over SVR for Active/Standby](config_EthoSVR_activestandby.md).
 ------
 - **I95-44863 Automatic Core Assignment after Reboot:** On systems where `forwarding-core-mode` is set to `automatic`, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
 ------
