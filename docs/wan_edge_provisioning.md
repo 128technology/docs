@@ -9,12 +9,12 @@ This process assumes that you already have an account on the Mist Portal.
 
 ### Site Creation
 
-![Create a Site](/img/wanas_create_site.gif)
-
 Create one Site for each physical location for onboarding the SSRs.
 
 - Create a unique site for each physical (or logical) location in the network. For example, the spoke and hub should be onboarded to different sites. Other devices from the Juniper stack such as Mist APs, Switches, SRX, etc., should be onboarded and assigned to their respective sites. This provides a clean topology view of all devices running within a site.
 - Spoke Site is typically the location where a full stack solution is deployed. The location field is required for creation. Site variables are assigned after the network is defined.
+
+![Create a Site](/img/wanas_create_site.gif)
 
 ### Add a Network
 
