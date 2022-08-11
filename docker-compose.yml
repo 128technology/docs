@@ -2,6 +2,8 @@ version: "3"
 
 services:
   docusaurus:
+    environment:
+      - NODE_OPTIONS=--max-old-space-size=4096
     build: .
     ports:
       - 3000:3000

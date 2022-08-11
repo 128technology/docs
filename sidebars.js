@@ -94,6 +94,7 @@ module.exports = {
           "config_domain-based_web_filter",
           "config_app_ident",
           "config_EthoSVR",
+          "config_EthoSVR_activestandby",
           "config_flow_perf_mon",
           "config_gre_tunnel",
           "config_in-memory_metrics",
