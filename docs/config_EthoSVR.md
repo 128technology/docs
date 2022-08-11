@@ -3,14 +3,18 @@ title: Configuring Ethernet Over Secure Vector Routing
 sidebar_label: Configuring Ethernet Over Secure Vector Routing
 ---
 
-Use the following procedures to configure a 128T network to use Ethernet Over SVR (EoSVR). Any network interface can be configured to use Ethernet Over SVR. 
+Use the following procedures to configure an SSR network to use Ethernet over SVR (EoSVR). Any network interface can be configured to use Ethernet over SVR. 
 
-### Configure an Ethernet Over SVR Bridge
+:::note
+When configuring EoSVR on a STEP-enabled router, it is a best practice to clear all existing sessions so the routers begin using the STEP-based routes. This is especially important for EoSVR configurations, to prevent stuck flows and traffic from being dropped. Use the command `delete sessions service <eosvr-service-name>` to clear sessions.
+:::
+
+### Configure an Ethernet over SVR Bridge
 
 1. On the Configuration home screen, select a Router.
 2. Scroll down and select a Node.
-3. Scroll down to **Device Interfaces** and select the device interface (the LAN interface) that connects to the peer 128T router. 
-4. Scroll down to **Network Interfaces**, and select the network interface (the LAN interface) that connects to the peer 128T router.
+3. Scroll down to **Device Interfaces** and select the device interface (the LAN interface) that connects to the peer SSR router. 
+4. Scroll down to **Network Interfaces**, and select the network interface (the LAN interface) that connects to the peer SSR router.
 5. Scroll down to the **Ethernet Over SVR Bridge** tile, and click it. 
 	![Ethernet over SVR](/img/config_EthoSVR_tile.png)
 
@@ -23,13 +27,13 @@ Use the following procedures to configure a 128T network to use Ethernet Over SV
 	:::
 
 8. In the Peer Info panel, select ADD.
-9. Enter LAN IP address of the corresponding peer 128T router where the same bridge name is configured.
+9. Enter LAN IP address of the corresponding peer SSR router where the same bridge name is configured.
 	![Peer Info](/img/config_EthoSVR_BridgeS8.png)
 
 10. From the Name drop down, select the Peer router, and click SAVE. 
 11. Repeat this process for the Peer router, using the same name for the bridge and adding the appropriate Peer IP address and name. 
 
-### Create a Service For Ethernet Over SVR
+### Create a Service For Ethernet over SVR
 
 Use the following procedure to create a service on each router for layer 2 traffic. For IP traffic, use the [Create a Service](intro_basic_conductor_config.md#create-a-service) procedure.
 
