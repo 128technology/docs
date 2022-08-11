@@ -3,13 +3,13 @@ title: SSR Device Onboarding
 sidebar_label: SSR Device Onboarding
 ---
 
-## Onboarding a Conductor-Managed SSR Appliance
-
 Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts your device into your Mist Organization. Scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. 
 
 The Mist App can be downloaded from the following locations:
 - [For Apple Devices](https://apps.apple.com/us/app/mistai/id1215196902) 
 - [For Android Devices](https://play.google.com/store/apps/details?id=com.mist.mistify&hl=en_US&gl=US)
+
+## Pre-Onboarding Verification
 
 When onboarding a conductor-managed device, the process is simplified by ensuring that the IP address of the managing conductor is configured for the site that will adopt the device. This is typically done during Site Configuration. To verify the conductor IP address has been assigned:
 
@@ -37,6 +37,8 @@ If no IP address is present, use the SSR GUI to copy the IP address.
 
 	![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
 
+## Onboarding a Conductor-Managed SSR Appliance
+
 Use the following process to onboard a conductor-managed SSR device into the Mist cloud using the Mist UI and your Claim Code. 
 
 1. Unbox the SSR appliance.
@@ -46,13 +48,16 @@ Use the following process to onboard a conductor-managed SSR device into the Mis
 
 3. Power up the SSR appliance.
 4. Copy the Claim Code from the QR sticker.
+
 	![Claim code](/img/wanas_claim_code_example.png)
+
 5. Login to the Mist UI on another device and navigate to your organization.
-6. Go to the WAN Edges page.
-	![WAN Edge](/img/wanas_wan_edges.png)
-7. Select the Claim WAN Edges button. 
+6. Go to the WAN Edges page and select the Claim WAN Edges button. 
+
 	![WAN Edges Button](/img/wanas_claim_wan_edge_button.png)
-8. Enter the Claim Code.
+
+7. Enter the Claim Code.
+
 	![Claim Code](/img/wanas_claimwanedge1.png)
 
 In the onboarding processes, conductor-managed devices reinitialize to use the factory default configuration with the conductor IP address. During the initialization process, it reaches out to the conductor and pulls down the appropriate configuration.  
