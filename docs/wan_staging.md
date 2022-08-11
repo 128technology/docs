@@ -1,9 +1,11 @@
 ---
-title: Staging
-sidebar_label: Staging
+title: Whitebox Staging
+sidebar_label: Whitebox Staging
 ---
 
-Beginning with version 6.0, WAN Assurance for the SSR is available for users who manage their network using the Mist Cloud. This document assumes that you have the Mist Cloud configured and currently managing your network. 
+Beginning with version 6.0, WAN Assurance for the SSR is available for users who manage their network using the Mist Cloud. This document describes the process to download an image and onboard a **whitebox** - a non-Juniper hardware device, that is either certified by Juniper, or Juniper approved, self-evaluated device. 
+
+This process also assumes that you have the Mist Cloud configured and currently managing your network. 
 
 The installation consists of the following steps:
 - Staging
@@ -20,6 +22,10 @@ For conductor-managed deployments, the [package-based installation](intro_instal
 ## Staging
 
 Prepare your system for installation - appliance installation and power up - per the hardware installation instructions provided with the system.
+
+### Juniper Devices
+
+Juniper SSR hardware devices (SSR120/130, SSR1000-1500) include a QR code that when scanned, will automatically adopt your device into your Mist Organization. Scan the code using your Mist AI App, and follow the on screen instructions to adopt your device. 
 
 ### Download 
 

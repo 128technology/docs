@@ -1,6 +1,6 @@
 ---
-title: Onboarding
-sidebar_label: Onboarding
+title: Whitebox Onboarding
+sidebar_label: Whitebox Onboarding
 ---
 
 Use the following information to access the management port and begin the onboarding process.
