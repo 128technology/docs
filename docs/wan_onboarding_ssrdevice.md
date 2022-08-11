@@ -5,7 +5,7 @@ sidebar_label: SSR Device Onboarding
 
 ## Onboarding a Conductor-Managed SSR Appliance
 
-Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts your device into your Mist Organization. Scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. For information about using the QR code, refer to the [Claiming APs page](https://www.mist.com/documentation/claiming-aps/).
+Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts your device into your Mist Organization. Scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. For information about using the QR code, refer to the [Claiming SSRs page](https://www.mist.com/documentation/claiming-aps/).
 
 The Mist App can be downloaded from the following locations:
 - [For Apple Devices](https://apps.apple.com/us/app/mistai/id1215196902) 
@@ -17,12 +17,18 @@ Alternatively, you can onboard a conductor-managed SSR device into the Mist clou
 2. Connect to the WAN port.
 3. Power up the SSR appliance.
 4. Copy the Claim Code from the QR sticker.
+	![Claim code](/img/wanas_claim_code_example.png)
 5. Login to the Mist UI on another device and navigate to your organization.
-6. Go to the WAN Edges page
-7. Select the Claim WAN Edges button and enter the Claim Code.
-8. Assign the device to a site.
+6. Go to the WAN Edges page.
+	![WAN Edge](/img/wanas_wan_edges.png)
+7. Select the Claim WAN Edges button. 
+	![WAN Edges Button](/img/wanas_claim_wan_edge_button.png)
+8. Enter the Claim Code.
+	![Claim Code](/img/wanas_claimwanedge1.png)
 
-In both onboarding processes, conductor-managed devices reinitialize to use the factory default configuration with the conductor IP address. During the initialization process, it reaches out to the conductor and pulls down the appropriate configuration.  
+In the onboarding processes, conductor-managed devices reinitialize to use the factory default configuration with the conductor IP address. During the initialization process, it reaches out to the conductor and pulls down the appropriate configuration.  
+
+After a few minutes the SSR will appear in the inventory as "Unassigned". Once it appears in the inventory, it must be assigned to a site. Use the [Site Assignment](wan_site_assignment.md) procedure to complete the SSR onboarding.
 
 ## Upgrading from Earlier SSR Versions
 

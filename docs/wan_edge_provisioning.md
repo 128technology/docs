@@ -7,7 +7,7 @@ To facilitate the ZTP (zero-touch provisioning) process of onboarding an SSR int
 
 This process assumes that you already have an account on the Mist Portal.
 
-### Site Creation
+## Site Creation
 
 Create one Site for each physical location for onboarding the SSRs.
 
@@ -16,7 +16,23 @@ Create one Site for each physical location for onboarding the SSRs.
 
 ![Create a Site](/img/wanas_create_site.gif)
 
-### Add a Network
+### Conductor-Managed Sites
+
+If you are creating a site for a conductor-managed SSR deployment, it is a best practice to configure the IP address of the conductor as part of the site creation. Use the following procedure to retrieve and assign the conductor IP address to the Mist site. 
+
+1.  On the Configuration Home panel in the SSR GUI, click the Authority button. 
+
+	![Authority Home](/img/wanas_conductor_ip1.png)
+
+2. Under Authority Settings, scroll down to **Conductor Addresses** and copy the IP address of the conductor.
+
+	![Conductor Address](/img/wanas_conductor_ip.png)
+
+3. Return to the Mist Site Configuration, and scroll down to the Session Smart Conductor field and add the Conductor IP address.
+
+	![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
+
+## Add a Network
 
 ![Add a Network](/img/wanas_create-network.gif) 
 
@@ -29,7 +45,7 @@ In the add network panel, define the following:
 
 ![Network Details Panel](/img/wanas_create-network_detail.png)
 
-### Identify Applications
+## Identify Applications
 
 Applications represent the "things" that the users are connecting to. These include:
 - Network services
@@ -45,7 +61,7 @@ Configure and save a basic Internet app. If you intend to have a catch-all appli
 
 ![Application Panel](/img/wanas_add-app_static.png)
 
-### Create Standalone WAN Edge Template
+## Create Standalone WAN Edge Template
 
 Navigate to “WAN Edge Templates” and create a new template.
 
@@ -55,7 +71,7 @@ Enter your NTP and DNS settings.
 
 ![Define Template](/img/wanas_template_static.png)
 
-### Create the WAN Interface
+## Create the WAN Interface
 
 Add a new WAN interface to the template.
 
@@ -65,7 +81,7 @@ Enter and save the WAN interface settings.
 
 ![WAN Settings](/img/wanas_add_wan.png)
 
-### Create the LAN Interface
+## Create the LAN Interface
 
 Add a new LAN interface to the template.
 
@@ -79,13 +95,13 @@ Set up a DHCP server pool for the LAN network.
 
 ![Set Server Pool](/img/wanas_add_lan_dhcp.png)
 
-### Create Breakout Steering Policy
+## Create Breakout Steering Policy
 
 Add a traffic steering policy specifying use of WAN path, and previously configured WAN interface.
 
 ![Steering Policy](/img/wanas_add_steering.gif)
 
-### Create an Access Policy
+## Create an Access Policy
 
 Add an access policy to the template.
 
@@ -95,7 +111,7 @@ Select your network, your internet app, and breakout steering policy.
 
 ![Define Access Policy](/img/wanas_add_access_policy2.gif)
 
-### Associate Template With Site
+## Associate Template With Site
 
 Save the template you have configured, and associate the template with your previously created site.
 
