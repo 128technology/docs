@@ -5,16 +5,45 @@ sidebar_label: SSR Device Onboarding
 
 ## Onboarding a Conductor-Managed SSR Appliance
 
-Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts your device into your Mist Organization. Scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. For information about using the QR code, refer to the [Claiming SSRs page](https://www.mist.com/documentation/claiming-aps/).
+Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts your device into your Mist Organization. Scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. 
 
 The Mist App can be downloaded from the following locations:
 - [For Apple Devices](https://apps.apple.com/us/app/mistai/id1215196902) 
 - [For Android Devices](https://play.google.com/store/apps/details?id=com.mist.mistify&hl=en_US&gl=US)
 
-Alternatively, you can onboard a conductor-managed SSR device into the Mist cloud using the Mist UI and your Claim Code. 
+When onboarding a conductor-managed device, the process is simplified by ensuring that the IP address of the managing conductor is configured for the site that will adopt the device. This is typically done during Site Configuration. To verify the conductor IP address has been assigned:
+
+1. Select Site Configuration from the Organization menu.
+
+	![Site Configuration](/img/wanas_select_site_config.png)
+
+2. Select the Site the device will be adopted into from the list of Sites.
+
+3. Scroll down to **Session Smart Conductor** and verify the IP address. 
+
+	![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
+
+If no IP address is present, use the SSR GUI to copy the IP address.
+
+1.  On the Configuration Home panel in the SSR GUI, click the Authority button. 
+
+	![Authority Home](/img/wanas_conductor_ip1.png)
+
+2. Under Authority Settings, scroll down to **Conductor Addresses** and copy the IP address of the conductor.
+
+	![Conductor Address](/img/wanas_conductor_ip.png)
+
+3. Return to the Mist Site Configuration, and scroll down to the Session Smart Conductor field and add the Conductor IP address.
+
+	![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
+
+Use the following process to onboard a conductor-managed SSR device into the Mist cloud using the Mist UI and your Claim Code. 
 
 1. Unbox the SSR appliance.
-2. Connect to the WAN port.
+2. Connect to the WAN port. The WAN 1 network interface is labeled port 0/0 on the device.
+
+	![SSR 1200](/img/jnpr_ssr1200.png)
+
 3. Power up the SSR appliance.
 4. Copy the Claim Code from the QR sticker.
 	![Claim code](/img/wanas_claim_code_example.png)
