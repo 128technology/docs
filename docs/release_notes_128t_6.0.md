@@ -34,7 +34,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47077 Configuration options for User Accounts:** Added configuration options for number of login attempts before locking user account, and number of seconds that user account will be locked before being able to attempt to login again. For information, see [Password Policies](config_password_policies.md).
 ------
-- **I95-47136 Settings for WAN Link Speed and Duplex:** With this update, the SSR supports the auto-negotiation, disable, and speed/duplex settings configured in Mist on an SSR.
+- **I95-47136/MIST-62741 Settings for WAN Link Speed and Duplex (Mist-managed):** With this update, the auto-negotiation, disable, and speed/duplex settings are visible in Mist.
 
 ### Resolved Issues
 
