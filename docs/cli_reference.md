@@ -189,6 +189,30 @@ clear app-id cache-entry url [force] [node <node>] {router <router> | resource-g
 | [`show app-id cache`](#show-app-id-cache) | Show information of app-id entries in cache |
 | [`show stats app-id application-director cache`](cli_stats_reference.md#show-stats-app-id-application-director-cache) | Statistics for &#x27;cache&#x27; |
 
+## `clear app-id stats`
+
+Clear inactive app-id stats
+
+#### Usage
+
+```
+clear app-id stats [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| node | The node on which to clear inactive app-id stats |
+| resource-group | The name of the resource group |
+| router | The router on which to clear inactive app-id stats |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show stats app-id applications`](cli_stats_reference.md#show-stats-app-id-applications) | Statistics for &#x27;applications&#x27; |
 
 ## `clear arp`
 

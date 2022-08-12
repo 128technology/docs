@@ -66,9 +66,12 @@ module.exports = {
       "concepts_glossary",
     ],
     "WAN Assurance": [
+      "wan_overview",
+      "wan_edge_provisioning",
       "wan_staging",
       "wan_onboarding_whitebox",
       "wan_site_assignment",
+      "wan_onboarding_ssrdevice",
       "config_wan_assurance",
     ],
     "Administration": [
@@ -91,6 +94,7 @@ module.exports = {
           "config_domain-based_web_filter",
           "config_app_ident",
           "config_EthoSVR",
+          "config_EthoSVR_activestandby",
           "config_flow_perf_mon",
           "config_gre_tunnel",
           "config_in-memory_metrics",

@@ -45,7 +45,7 @@ const features = [
   },
   {
     title: <>WAN Assurance</>,
-    link: 'docs/wan_staging',
+    link: 'docs/wan_overview',
     description: (
       <>
         Onboard and Adopt the SSR into the Mist Cloud
