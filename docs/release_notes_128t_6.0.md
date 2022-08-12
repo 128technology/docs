@@ -32,7 +32,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-46387 New Service Route Type for BGP over SVR:** Added a new service route type that indicates to the Routing Agent that local service routes and BGP over SVR routes should be merged together when creating local balanced paths.
 ------
-- **I95-47077 Configuration options for User Accounts:** Added configuration options for number of login attempts before locking user account, and number of seconds that user account will be locked before being able to attempt to login again. For information, see [Password Policies](config_passworkd_policies.md).
+- **I95-47077 Configuration options for User Accounts:** Added configuration options for number of login attempts before locking user account, and number of seconds that user account will be locked before being able to attempt to login again. For information, see [Password Policies](config_password_policies.md).
 ------
 - **I95-47136 Settings for WAN Link Speed and Duplex:** With this update, the SSR supports the auto-negotiation, disable, and speed/duplex settings configured in Mist on an SSR.
 
