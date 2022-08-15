@@ -7,7 +7,7 @@ Beginning with version 6.0, an image-based ISO installation process has been imp
 
 For conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. 
 
-The image-based installation creates two volumes on the disk, installs the full 6.0 image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process then copies configurations and persistent information from the old image to the new image, then reboots into the new version.
+The image-based installation creates two volumes on the disk, installs the full 6.0.x image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version.
 
 The Image-based install consists of the following steps:
 
@@ -24,6 +24,13 @@ The image-based ISO's are available to download at the following location:
 
 `https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/<Major>.<Minor>/`. 
 
+Files available for download are:
+
+- `*.iso` - This file is used for installing/staging bare metal platforms.
+- `*.qcow` - This file is used for virtual environments such as KVM or ESXi.
+- `*.tar` - This file is used by Mist or the SSR conductor for image-based upgrades, and is accessed directly by the system during the upgrade. User download is not necessary or advised.
+- `*.ztp.raw.gz` - This file is used by manufacturing, and is not applicable for customer use. 
+
 You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page. For the detailed download process, see [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso). 
 
 ### Create a Bootable USB
@@ -39,13 +46,9 @@ Use the instructions [Creating a Bootable ISO](intro_creating_bootable_usb.md) t
 
 3. In the Installer window, select 2 for the ZTP Install Mode. This is the default mode for image-based installation.  
 
-:::note
-When using the image-based 6.0 installation, be aware that if Interactive Install is selected, `intialize128t` does not launch automatically on first boot. This must be run manually; log in to the console as root using the default credentials, and type `initialize128t` to perform interactive initialization. This will be resolved in a future release.
-:::
+	![Select Install Mode](/img/install_imagebased_2.png)
 
-![Select Install Mode](/img/install_imagebased_2.png)
-
-On a system with multiple disks, the **Install Devices** selection allows you to _steer_ the boot and root filesystems to individual devices if necessary.
+	On a system with multiple disks, the **Install Devices** selection allows you to _steer_ the boot and root filesystems to individual devices if necessary.
 
 4. If you require FIPS enforcement, select 5 for `Enable FIPS 140-2 mode`. If you do not require FIPS enforcement, skip to step 7. 
 
