@@ -58,6 +58,10 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47336 Running configuration change events are missing:** Updates have been made to include `username` in the running configuration change events log. 
 
+### Caveats
+
+- **I95-47390 Inline BFD Collisions:** BFD peering between two router fails when one of the peer has a DHCP interface and has external NAT configured on neighborhood. This will occur in AWS deployments. This issue will be addressed in an future release. 
+
 ## Release 6.0.0-56
 
 **Release Date:** July 18, 2022
