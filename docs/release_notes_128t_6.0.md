@@ -44,8 +44,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-46056 `show ntp` has no output from PCLI, even though NTP is configured:** The output of `show ntp` now reports IP addresses of the time servers rather than resolve hostnames.
 ------
-- **I95-46281 Kernel Update:** Update to RHCK 8.6 for the latest security fixes.
-------
 - **I95-46545 Conductor Validation passing when a URL is configured in a Parent Service:** Validation for application-identification has been updated to include URL and subcategory. 
 ------
 - **I95-46931 Hardware using ConnectX6-DX fails to initialize:** Added support for this card variant.
