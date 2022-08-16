@@ -6,6 +6,41 @@ import React from "react";
 // ----------------------------------------------------------------------------
 export const releases = [
    {
+    version: '6.0.1',
+    url: 'release_notes_128t_6.0#release-601-12',
+    releaseDate: 'August 15, 2022',
+    endOfMaintenance: 'April 20, 2023',
+    endOfSupport: 'October 20, 2023',
+   },
+   {
+    version: '5.5.3',
+    url:'release_notes_128t_5.5#release-553-4',
+    releaseDate: 'August 11, 2022',
+    endOfMaintenance: 'December 7, 2022',
+    endOfSupport: 'May 7, 2023',
+  },
+  {
+    version: '5.4.7',
+    url:'release_notes_128t_5.4#release-547-7',
+    releaseDate: 'August 4, 2022',
+    endOfMaintenance: 'December 18, 2022',
+    endOfSupport: 'June 18, 2023',
+  },
+  {
+    version: '5.6.1',
+    url:'release_notes_128t_5.6#release-561-18',
+    releaseDate: 'August 1, 2022',
+    endOfMaintenance: 'February 20, 2023',
+    endOfSupport: 'August 20, 2023',
+   },
+   {
+    version: '6.0.0',
+    url: 'release_notes_128t_6.0#release-600-56',
+    releaseDate: 'July 18, 2022',
+    endOfMaintenance: 'April 20, 2023',
+    endOfSupport: 'October 20, 2023',
+   },
+   {
     version: '5.2.4',
     url: 'release_notes_128t_5.2#release-524-1',
     releaseDate: 'July 7, 2022',

@@ -3,38 +3,38 @@ title: Service and Service Policy Design
 sidebar_label: Service and Service Policy Design
 ---
 
-Designing a service-oriented network with the 128T Session Smart router benefits from careful planning and thoughtful policy decisions. With the ability to steer traffic using the best path on a per-session basis, administrators have more control than ever before in deciding how their users maximize the network. This document discusses two fundamental, and related concepts: the *service* and the *service-policy*.
+Designing a service-oriented network with the SSR benefits from careful planning and thoughtful policy decisions. With the ability to steer traffic using the best path on a per-session basis, administrators have more control than ever before in deciding how their users maximize the network. This document discusses two fundamental, and related concepts: the *service* and the *service-policy*.
 
-A service is a network destination of interest to your network's users. It can represent a web server, a PBX system for your phones, a CRM system in the public cloud, or something specific only to you. The `service` data model in the 128T modeling language gives administrators great flexibility in defining what constitutes an "interesting" application that requires specific treatment as contrasted to bulk data. The `service-policy` affiliated with that `service` lets the administrator specify the treatment for the traffic of that service: where it should go, which path it should use to get there, how it gets treated along the way (marked and queued), and what to do in the event of network failures.
+A service is a network destination of interest to your network's users. It can represent a web server, a PBX system for your phones, a CRM system in the public cloud, or something specific only to you. The `service` data model in the SSR modeling language gives administrators great flexibility in defining what constitutes an "interesting" application that requires specific treatment as contrasted to bulk data. The `service-policy` affiliated with that `service` lets the administrator specify the treatment for the traffic of that service: where it should go, which path it should use to get there, how it gets treated along the way (marked and queued), and what to do in the event of network failures.
 
-In this document we will cover the various types of services that are configurable in the 128T data model, and how to apply them. We will then discuss the predominant service-policy options for governing the traffic treatment for traffic steering, and give some rules of thumb for how to apply them.
+In this document we will cover the various types of services that are configurable in the SSR data model, and how to apply them. We will then discuss the predominant service-policy options for governing the traffic treatment for traffic steering, and give some rules of thumb for how to apply them.
 
 ## Intended Audience
 
-This document is intended for network administrators and network architects responsible for designing 128T configurations for their end users. It provides a conceptual overview for the different options available for configuring `service` and `service-policy` data models, and guidance on when to use the various attributes.
+This document is intended for network administrators and network architects responsible for designing SSR configurations for their end users. It provides a conceptual overview for the different options available for configuring `service` and `service-policy` data models, and guidance on when to use the various attributes.
 
 This document is relevant to the day-to-day job of network operations and network support staff, to help them to interpret a configuration to understand its intent.
 
 ## Overview
 
-In the 128T worldview, each IP destination that will receive traffic must be configured as a *service*. A service can be defined as broadly as a netmask (it is common for our customers to have a service representing the entire internet, as 0.0.0.0/0) or as specific as a transport protocol and single port. As traffic arrives at a 128T router, it (among other things) is associated with a configured service, which will in turn influence its path selection.
+In the SSR worldview, each IP destination that will receive traffic must be configured as a *service*. A service can be defined as broadly as a netmask (it is common for our customers to have a service representing the entire internet, as 0.0.0.0/0) or as specific as a transport protocol and single port. As traffic arrives at an SSR router, it (among other things) is associated with a configured service, which will in turn influence its path selection.
 
-Path selection on the 128T is a decision process that considers several factors:
+Path selection on the SSR is a decision process that considers several factors:
 
 - Current network state. Are next hops reachable? Is a remote peer reachable? What are the current quality metrics for the various potential paths?
-- Administrative priorities. Which path should this traffic take in the "sunny day scenario," when all paths are available? How should the 128T assess viability for a path for any given service?
+- Administrative priorities. Which path should this traffic take in the "sunny day scenario," when all paths are available? How should the SSR assess viability for a path for any given service?
 
-In the previous section of this document we discuss how 128T determines whether or not a remote peer is reachable (asynchronous BFD) and the quality of the path (echo BFD). These both pertain to the *current network state*. The *administrative priorities* of the 128T are described through the use of a *service-policy*, a configuration element that is associated with a service.
+In the previous section of this document we discuss how the SSR determines whether or not a remote peer is reachable (asynchronous BFD) and the quality of the path (echo BFD). These both pertain to the *current network state*. The *administrative priorities* of the SSR are described through the use of a *service-policy*, a configuration element that is associated with a service.
 
 ## Service Types
 
-The *service* configuration element is the cornerstone of the 128T data model. It is what allows administrators to describe eligible destinations for traffic, to which they can subsequently define access controls, routing policy, and traffic treatment. There is a strong correlation between successful deployments of the 128T software and a deep understanding of the services on the target network.
+The *service* configuration element is the cornerstone of the SSR data model. It is what allows administrators to describe eligible destinations for traffic, to which they can subsequently define access controls, routing policy, and traffic treatment. There is a strong correlation between successful deployments of the SSR software and a deep understanding of the services on the target network.
 
 A service's configuration is very flexible, and can represent many different aspects of a network's topology. The various data modeling variants of a service are described in the sections that follow.
 
 ### Fully Qualified Services
 
-The most fundamental, and granular definition of a service is one which defines a specific application on your network. The goal of any 128T-powered configuration should be to configure *fully qualified* services with as much precision as possible. The key elements of a fully qualified service are:
+The most fundamental, and granular definition of a service is one which defines a specific application on your network. The goal of any SSR-powered configuration should be to configure *fully qualified* services with as much precision as possible. The key elements of a fully qualified service are:
 
 - A narrow range of IP addresses that all serve the application
 - Specific transport protocols and ports that the application uses
@@ -82,7 +82,7 @@ Define the service as specifically as possible, using transport/port and specifi
 
 ### CIDR Services
 
-Many deployments of the 128T software include a number of *CIDR services* which – in contrast to fully qualified services – are broad swaths of IP addresses, typically located behind a 128T at a specific location.
+Many deployments of the SSR software include a number of *CIDR services* which – in contrast to fully qualified services – are broad swaths of IP addresses, typically located behind an SSR at a specific location.
 
 The hallmarks of a CIDR Service are that it seldom has transport protocols defined, and never has ports defined. (Administrators may configure transport protocols without ports to restrict a service to TCP, UDP, and ICMP only, and block other IP protocols such as GRE.)
 
@@ -118,11 +118,11 @@ exit
 
 ### Summary and Spoke Services
 
-*Summary services* and *spoke services* work in conjunction with each another to provide coarse routes from one 128T to another, and specific routes from the receiving 128T router to the destination. It is commonly used in "hub and spoke" topologies, where a less-specific route will direct traffic to a location, and that location's router has more specific routes to apply to the traffic.
+*Summary services* and *spoke services* work in conjunction with each another to provide coarse routes from one SSR to another, and specific routes from the receiving SSR router to the destination. It is commonly used in "hub and spoke" topologies, where a less-specific route will direct traffic to a location, and that location's router has more specific routes to apply to the traffic.
 
 For example, in a retail deployment it is common for each branch location to have a specific CIDR block allocated, e.g., 10.20.20.0/24 for "site 2020." For traffic originating in a data center and destined for the branch, a summary service is configured using the address 10.20.20.0/24. The branch router has more specific spoke services for the individual applications at the branch; e.g., 10.20.20.128/32, 10.20.20.60/32 UDP/5060, etc.
 
-Conceptually, summary services and spoke services are very similar to CIDR services and application-based services, respectively. However, there is one significant difference between a summary service and a CIDR service: the summary service *must include a transport section*. This is the "trigger" for the receiving 128T router to apply a more-specific spoke service.
+Conceptually, summary services and spoke services are very similar to CIDR services and application-based services, respectively. However, there is one significant difference between a summary service and a CIDR service: the summary service *must include a transport section*. This is the "trigger" for the receiving SSR router to apply a more-specific spoke service.
 
 :::note
 A second, common attribute of summary services is the inclusion of an `applies-to` block in the configuration. The purpose of this block is described in more detail in the _Router/Router Group-based Services_ section below. Because summary and spoke services are generally at their most useful in massive deployments to reduce overall configuration overhead, this is a strong case for using Router/Router Group-based services whenever summary services are considered.
@@ -170,17 +170,17 @@ exit
 
 ### Generated Services
 
-Various features within the 128T will cause services to be generated automatically when configured. This includes:
+Various features within the SSR will cause services to be generated automatically when configured. This includes:
 
 - Conductor Host Services
 - BGP over SVR
 - DHCP Relay
 
 :::note
-The services generated by the 128T are created as fully qualified services.
+The services generated by the SSR are created as fully qualified services.
 :::
 
-Each of these service types shares one important attribute: they are created with the `generated` flag set to `true`. If you want to make any modifications to the generated services, you must first set `generated` to `false`, or else your configuration changes will be stripped upon the next time the configuration is committed. For more information on configuration workflows involving the `generated` flag, refer to the [128T software documentation](config_basics.md#generated-configuration).
+Each of these service types shares one important attribute: they are created with the `generated` flag set to `true`. If you want to make any modifications to the generated services, you must first set `generated` to `false`, or else your configuration changes will be stripped upon the next time the configuration is committed. For more information on configuration workflows involving the `generated` flag, refer to the [SSR software documentation](config_basics.md#generated-configuration).
 
 Example (BGP over SVR):
 
@@ -224,7 +224,7 @@ exit
 
 ### Router/Router Group-Based Services
 
-Router- and router group-based services are not services unto themselves; rather, the term refers to the capability of limiting the scope of services to specific routers or sets of routers. By default, any service configured on a 128T conductor is pushed down to all routers it manages. This may result in unnecessary bloat on routers that will never have a calling for a specific service. E.g., in a typical retail deployment traffic generally goes in one of two directions: originating at a store and heading to a data center, or originating at a data center and heading to a store. Thus it is important for head end routers to have access to store services, and for a store to have the configuration corresponding to its own local services, but there will be no need for every store to have every other store's local services in a full mesh.
+Router- and router group-based services are not services unto themselves; rather, the term refers to the capability of limiting the scope of services to specific routers or sets of routers. By default, any service configured on a conductor is pushed down to all routers it manages. This may result in unnecessary bloat on routers that will never have a calling for a specific service. E.g., in a typical retail deployment traffic generally goes in one of two directions: originating at a store and heading to a data center, or originating at a data center and heading to a store. Thus it is important for head end routers to have access to store services, and for a store to have the configuration corresponding to its own local services, but there will be no need for every store to have every other store's local services in a full mesh.
 
 :::note
 In case a full mesh is a requirement, 128 Technology has the Summary and Spoke Services – which use router-based services to optimize the configuration.
@@ -307,7 +307,7 @@ Here's a common sight in large retail deployments: a `core2store` service for tr
 
 ### Application-Module Services
 
-Application-module services are dynamic and have two parts: a `service` configuration that references an `application-name`, and a script resident on the 128T's host operating system with that `application-name` that generates forwarding rules (FIB entries, in the form of JSON configuration) that are installed onto the 128T. Application-module services give the ultimate flexibility to the 128T administrator: the ability to  define the forwarding logic of the 128T using the programming language of their choice.
+Application-module services are dynamic and have two parts: a `service` configuration that references an `application-name`, and a script resident on the SSR's host operating system with that `application-name` that generates forwarding rules (FIB entries, in the form of JSON configuration) that are installed onto the SSR. Application-module services give the ultimate flexibility to the SSR administrator: the ability to  define the forwarding logic of the SSR using the programming language of their choice.
 
 To enable an application-module service, a router must have `application-identification` with `mode` set to `module`, as is shown here:
 
@@ -356,7 +356,7 @@ config
 exit
 ```
 
-Lastly, a file within `/etc/128technology/application-modules/` to be executed by the 128T software:
+Lastly, a file within `/etc/128technology/application-modules/` to be executed by the SSR software:
 
 ```
 [pt@labsystem4 application-modules]$ cd /etc/128technology/application-modules/
@@ -376,7 +376,7 @@ For more information on creating your own custom `application-module`, review th
 
 Introduced in the 5.0 release, *hierarchical services* allow you to create groupings of services that, like [hierarchical tenants](config_tenants.md#subtenant-hierarchies), inherit properties from one another.
 
-From a configuration standpoint, hierarchical services follow the same convention that other, hierarchically organized data model elements do within the 128T software: by using a `.` separator. They also follow the same principle of inheritance: "children" inherit the properties of the "parent."
+From a configuration standpoint, hierarchical services follow the same convention that other, hierarchically organized data model elements do within the SSR software: by using a `.` separator. They also follow the same principle of inheritance: "children" inherit the properties of the "parent."
 
 By way of example, consider the following configuration fragment:
 
@@ -407,7 +407,7 @@ config
 exit
 ```
 
-This represents a standard, run of the mill "default route" service for basic internet traffic. Most deployments of the 128T software have something similar to this configured, along with the requisite `service-route` configuration to accompany them. Now consider this:
+This represents a standard, run of the mill "default route" service for basic internet traffic. Most deployments of the SSR software have something similar to this configured, along with the requisite `service-route` configuration to accompany them. Now consider this:
 
 ```
 admin@labsystem1.fiedler# show conf running authority service ZOOM.internet
@@ -548,7 +548,7 @@ There are three principal controls within this service-policy:
 
 ### Vectors
 
-By configuring vectors and assigning `priority` to them, an administrator can influence the path selection for egress traffic by a 128T device. Each vector has two components: a `name` and a `priority`. The `name` listed is also applied to an adjacency (though typically configured within a `neighborhood` and triggering the generation of a peer adjacency) to associate to the preferred egress path.
+By configuring vectors and assigning `priority` to them, an administrator can influence the path selection for egress traffic by an SSR device. Each vector has two components: a `name` and a `priority`. The `name` listed is also applied to an adjacency (though typically configured within a `neighborhood` and triggering the generation of a peer adjacency) to associate to the preferred egress path.
 
 By way of example, here is an adjacency on the broadband interface of an example branch location:
 
@@ -601,9 +601,13 @@ In general, 128 Technology recommends using the `revertible-failover` setting fo
 The vast majority of network sessions are transient, short-lived sessions, but you can validate this during your application discovery exercises.
 :::
 
+### Session Failover
+
+For long-lived sessions that are very reverse-data intensive (for example, a TCP session that is downloading a large file over HTTP) a session failover often results in an empty session. This happens because the new session is expecting a forward packet to re-establish the session. To prevent the transfer from stalling, a keep-alive mechanism has been added for flow moves. When a flow move is triggered, the SSR detects inactivity in forward traffic and generates a keep-alive packet in the forward direction. This packet causes the session to be properly modified to the new path, and forwarded on to the subsequent router(s). The subsequent router session is modified as well. The keep-alive packet is dropped before egressing to the LAN. In a case where the failover is selecting a new path to a new node/router rather than modifying an existing session, a new session will be created.
+
 ### Path Quality Metrics
 
-The 128T supports four path quality metrics in its service-policy, all of which establish thresholds for determining a path's eligibility for carrying traffic that references that service-policy. The metrics are:
+The SSR supports four path quality metrics in its service-policy, all of which establish thresholds for determining a path's eligibility for carrying traffic that references that service-policy. The metrics are:
 
 - `max-loss`, which will indicate the maximum percentage of packet loss before a path is ineligible
 - `max-latency`, which indicates the maximum latency (half of the round trip time) before a path is unsuitable
@@ -616,10 +620,10 @@ The MOS value for a given path is a composite metric, computed based on loss, la
 
 ### Transport State Enforcement
 
-Within the service-policy configuration is the [transport-state-enforcement](config_reference_guide.md#service-policy) parameter, which governs the behavior of the 128T's TCP state machine for processing inbound TCP packets. As a stateful networking device, the 128T's default behavior is to reject any mid-flow TCP packets (i.e., packets without the SYN flag set) unless it – or its paired node in a dual node HA router – participated in the TCP three-way handshake for that session. There are deployments where this behavior may be undesirable. 
+Within the service-policy configuration is the [transport-state-enforcement](config_reference_guide.md#service-policy) parameter, which governs the behavior of the SSR's TCP state machine for processing inbound TCP packets. As a stateful networking device, the SSR's default behavior is to reject any mid-flow TCP packets (i.e., packets without the SYN flag set) unless it – or its paired node in a dual node HA router – participated in the TCP three-way handshake for that session. There are deployments where this behavior may be undesirable. 
 
 For example, when an environment includes systems that are deployed in a [*dual router HA*](config_dual_router_ha.md) configuration, any services used to send traffic to or from the dual router HA must reference a service-policy that has `transport-state-enforcement` set to `allow`.
 
-This is because the dual router HA deployment model specifically does not share information between the 128T instances comprising the HA pair; thus, a router may receive mid-flow TCP packets if its counterpart fails (or if routing converges to the other node for any reason, etc.). Without access to any shared state about the in-progress TCP session, if `transport-state-enforcement` is left to its default value, this TCP session would get rejected by the router.
+This is because the dual router HA deployment model specifically does not share information between the SSR instances comprising the HA pair; thus, a router may receive mid-flow TCP packets if its counterpart fails (or if routing converges to the other node for any reason, etc.). Without access to any shared state about the in-progress TCP session, if `transport-state-enforcement` is left to its default value, this TCP session would get rejected by the router.
 
-It is also reasonable to consider `transport-state-enforcement` for 128T instances deployed as transit routers. That is, when a router – even one deployed as a dual node HA pair – could receive traffic in the event of a failure somewhere else in the network. Consider a case where a branch office has two possible data centers it could leverage when sending traffic; if the primary data center becomes unreachable, then traffic may flow to the alternate data center, including packets associated with existing TCP sessions. Generally, for catastrophic failures such as disaster recovery sites, it is not unreasonable to expect that the network will "hang up" on existing TCP sessions to instigate a reconnection attempt by the client. (In fact, it often turns out to be *beneficial* to have the client(s) reconnect, to ensure consistency with application delivery, DPI, etc. at the new data center.)
+It is also reasonable to consider `transport-state-enforcement` for SSR instances deployed as transit routers. That is, when a router – even one deployed as a dual node HA pair – could receive traffic in the event of a failure somewhere else in the network. Consider a case where a branch office has two possible data centers it could leverage when sending traffic; if the primary data center becomes unreachable, then traffic may flow to the alternate data center, including packets associated with existing TCP sessions. Generally, for catastrophic failures such as disaster recovery sites, it is not unreasonable to expect that the network will "hang up" on existing TCP sessions to instigate a reconnection attempt by the client. (In fact, it often turns out to be *beneficial* to have the client(s) reconnect, to ensure consistency with application delivery, DPI, etc. at the new data center.)
