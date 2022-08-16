@@ -479,6 +479,13 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 3.2.0
+
+#### New Features and Improvements
+- **PLUGIN-1839** Reduce time to apply salt states in large scale deployments
+
+By using Saltstack data files, the time to apply high states across all assets is significantly reduced.
+
 ### Release 2.4.0, 3.1.1
 
 #### New Features and Improvements

@@ -1,9 +1,9 @@
 ---
-title: Configuring WAN Assurance
-sidebar_label: Configuring WAN Assurance
+title: Conductor Managed WAN Assurance
+sidebar_label: Conductor Managed WAN Assurance
 ---
 
-Use the following process to onboard Session Smart Routers (SSR) to the Mist cloud. Since SSN software can run on any certified hardware or virtual machine, this process relies on an on-premise conductor to assist in the onboarding.
+SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. However, for software versions prior to SSR Version 6.0, router adoption relies on an on-premise conductor to assist in the onboarding. This document explains the process of enabling WAN Assurance telemetry and ZTP for conductor-based deployments. This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
 
 :::important
 Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR and Mist.
@@ -17,8 +17,6 @@ High Level Steps:
 - Assign routers to a Site.
 
 ## Enable WAN Assurance on the Conductor
-
-This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist Wan Assurance.
 
 For detailed information about Mist WAN Assurance, please refer to the [Mist WAN Assurance documentation](https://www.juniper.net/us/en/products/cloud-services/wan-assurance.html).
 
@@ -60,13 +58,13 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
 
     ![Inventory Menu](/img/wan_inventory.png)
 
-- In the Inventory panel, click on the **Gateways** selection on the top of the screen.
+- In the Inventory panel, click on the **WAN Edge** selection on the top of the screen.
 
     ![Inventory panel](/img/wan_inventory_panel.png)
 
-- Click on the Adopt Gateways button in the top right corner. The Gateway Adoption dialog appears, displaying the registration code.
+- Click on the Adopt WAN Edges button in the top right corner. The WAN Edge Adoption dialog appears, displaying the registration code.
 
-    ![Gateway Adoption](/img/wan_registration_code.png)
+    ![WAN Edge Adoption](/img/wan_registration_code.png)
 
 - Click on **Copy to Clipboard**.
 
@@ -79,7 +77,7 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
     AiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRj
     NGIwNzAiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1
     fdXJsIjoid3NzOi8vZXAtdGVybWluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjIyNzQ2MT
-    c1LCJleHAiOjE2NTQyODIxNzV9.iBul1W1nk!3JyTd98jUoVFZrZet7ElvPQdsCdDFfAN0
+    c1LAiOjE2NTQyODIxNzV9.iBul1W1nk!3JyTd98jUoVFZrZet7ElvPQdsCdDFfAN0
     admin@node1.conductor1#
     *admin@node1.conductor1#
     *admin@node1.conductor1#
@@ -94,7 +92,7 @@ To enter the registration code in the SSR GUI, copy the text registration-code f
         authority
 
             mist-wan-assurance
-                registration-code  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRjNGIwNzAiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1fdXJsIjoid3NzOi8vZXAtdGVybWluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjIyNzQ2MTc1LCJleHAiOjE2NTQyODIxNzV9.iDobxHQzKZkJyTd98jUoVFZrZet7ElvPQdsCdDFfAN0
+                registration-code  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwYzE2MGI3Zi0xMDI3LTRjZDEtOTIzYi03NDQ1MzRjNGIwNzAiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1fdXJsIjoid3NzOi8vZXAtdGVybWluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjIyNzQ2MTc1LCJleHAiOjE2NTQyODIxNzV9.iBul1W1nk!3J0
             exit
         exit
     exit
@@ -229,12 +227,6 @@ Use the following information to help identify or resolve issues configuring WAN
 The `show plugins state` command displays extensive information about the state of the plugin. Use the following command as a starting point for any troubleshooting.
 
 `show plugins state router <router name> summary 128T-mist-wan-assurance`
-
-##### Version History
-
-| Release      | Modification                                    |
-| ------------ | ----------------------------------------------- |
-| 3.4.0        | Additional diagnostics for connection down case was added |
 
 The `connection` column will display the current status of the device connection to the MIST cloud. When the connection is down, it will also display information useful to diagnose the connection issue.
 

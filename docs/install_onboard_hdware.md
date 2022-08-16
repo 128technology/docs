@@ -19,6 +19,10 @@ The following sections provide information about port connections on Juniper cer
 
 Use this data to complete the onboarding process for your whitebox device. 
 
+:::info
+IP connectivity is required for GUI onboarding. If you do not have an ethernet interface to connect to the device, you must use pcli adoption through the console.
+:::
+
 ### Lanner 1515
 
 ![Lanner 1515](/img/install_onbd_hdwr_lanner.png)

@@ -65,6 +65,15 @@ module.exports = {
       "concepts_waypoint_ports",
       "concepts_glossary",
     ],
+    "WAN Assurance": [
+      "wan_overview",
+      "wan_edge_provisioning",
+      "wan_staging",
+      "wan_onboarding_whitebox",
+      "wan_site_assignment",
+      "wan_onboarding_ssrdevice",
+      "config_wan_assurance",
+    ],
     "Administration": [
       {
         "type": "category",
@@ -75,6 +84,7 @@ module.exports = {
           "config_asset_connection_resiliency",
 
           "config_dscp_steering",
+          "config_dscp_preservation",
           "config_vrf_learning",
           "config_audit_event",
           "config_dhcp",
@@ -84,6 +94,7 @@ module.exports = {
           "config_domain-based_web_filter",
           "config_app_ident",
           "config_EthoSVR",
+          "config_EthoSVR_activestandby",
           "config_flow_perf_mon",
           "config_gre_tunnel",
           "config_in-memory_metrics",
@@ -290,8 +301,9 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance",
         "items": [
-          "release_notes_wan_assurance_plugin_3.3",
-          "release_notes_wan_assurance_plugin_3.4"
+          "release_notes_wan_assurance_plugin_3.5",
+          "release_notes_wan_assurance_plugin_3.4",
+          "release_notes_wan_assurance_plugin_3.3"
         ]
       }
     ],
