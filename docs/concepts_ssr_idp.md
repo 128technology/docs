@@ -5,7 +5,7 @@ sidebar_label: Intrusion Detection and Prevention
 
 ## Overview
 
-Intrusion Detection and Prevention (IDP) leverages the Juniper IDP Signature Database which provides state of the art protection against the most up-to-date vulnerabilities. This database contains definitions of attack objects and application signatures defined in the form of IDP policy rules. By automatically downloading the latest definitions and application signatures, the SSR is able to provide cutting edge security solutions for your network. 
+Intrusion Detection and Prevention (IDP) leverages the Juniper IDP Signature Database, providing state of the art protection against the most up-to-date vulnerabilities. This database contains definitions of attack objects and application signatures defined in the form of IDP policy rules. By automatically downloading the latest definitions and application signatures, the SSR is able to provide cutting edge security solutions for your network. 
 
 ## How It Works
 
@@ -44,7 +44,7 @@ The actions taken when a threat is identified or an attack is detected are liste
 
 ### Security Events Dashboard
 
-Security events are generated any time a vulnerability is detected. These events are stored on the system for up to 24 hours (is this configurable?), and can be viewed on the Security Event History page on the SSR Conductor. 
+Security events are generated any time a vulnerability is detected. These events are stored on the system for up to 24 hours, and can be viewed on the Security Event History page on the SSR Conductor, or from the PCLI using the *X command. 
 
 ### Automatic Updates
 
@@ -54,7 +54,7 @@ The SSR will leverage the existing configuration for auto-update under config > 
 
 The following is a list of the current limitations of the IDP solution. 
 
-- The IDP solution is only designed for use on a spoke router, and for local breakout services.
+- The IDP solution is designed for use with local breakout services, and on a spoke router.
 
 - IDP is not supported for hierarchical services. The policy can be enabled on a parent service, but not on the child services.
 

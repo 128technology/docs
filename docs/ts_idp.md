@@ -35,4 +35,4 @@ When IDP is configured on a router, an alarm is generated if the IDP engine is i
 
 Logs 
 
-The `show tech-support` info contains the relevant logs and journals associated with the IDP engine.  
+The `show tech-support` info contains the relevant logs and journals associated with the IDP engine. Logs specific to IDP functions are stored here: `/var/logs/128technology/idp/*`.
