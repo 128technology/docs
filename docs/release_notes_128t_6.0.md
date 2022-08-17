@@ -24,6 +24,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 6.0.2-8
+
+**Release Date:** August 16, 2022
+
+### Resolved Issues
+
+- **I95-47578 NIC ports incorrectly named:** Resolved an issue where systems installing SSR software version 6.0.1-12 using the ISO or IBU image resulted in the SSR120 and SSR130 NIC ports being named incorrectly. 
+
 ## Release 6.0.1-12
 
 **Release Date:** August 15, 2022
