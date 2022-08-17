@@ -3,11 +3,7 @@ title: SSR Device Onboarding
 sidebar_label: SSR Device Onboarding
 ---
 
-Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts your device into your Mist Organization. Scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. 
-
-The Mist App can be downloaded from the following locations:
-- [For Apple Devices](https://apps.apple.com/us/app/mistai/id1215196902) 
-- [For Android Devices](https://play.google.com/store/apps/details?id=com.mist.mistify&hl=en_US&gl=US)
+Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts the device into your Mist Organization. Before scanning, it is suggested that you verify the IP address of the managing conductor using the process below. 
 
 ## Pre-Onboarding Verification
 
@@ -39,10 +35,18 @@ If no IP address is present, use the SSR GUI to copy the IP address.
 
 ## Onboarding a Conductor-Managed SSR Appliance
 
+The easiest way to onboard your SSR device is using the QR code. Simply scan the code using your Mist AI App or a QR Scanner and follow the on screen instructions to adopt your device. 
+
+The Mist App can be downloaded from the following locations:
+- [For Apple Devices](https://apps.apple.com/us/app/mistai/id1215196902) 
+- [For Android Devices](https://play.google.com/store/apps/details?id=com.mist.mistify&hl=en_US&gl=US)
+
+### Onboarding using a Claim Code
+
 Use the following process to onboard a conductor-managed SSR device into the Mist cloud using the Mist UI and your Claim Code. 
 
 1. Unbox the SSR appliance.
-2. Connect to the WAN port. The WAN 1 network interface is labeled port 0/0 on the device.
+2. Connect to the WAN port. The WAN network interface is labeled port 0/0 on the device.
 
 	![SSR 1200](/img/jnpr_ssr1200.png)
 
