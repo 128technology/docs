@@ -27,7 +27,7 @@ In the Mist Inventory panel the new router shows as "Unassigned".
 
 The site assignment takes a few minutes. To view the events and activity on the fully onboarded device:
 - Select WAN Edges from the sidebar. 
-- From the Site dropdown, choose the site where the SSR is assigned.
+- From the Site dropdown, choose the site where the SSR is assigned, and select the SSR.
 	
 	![Site Dropdown](/img/wan_site_assign5a.png)
 

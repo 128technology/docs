@@ -75,13 +75,16 @@ It is possible to obtain a registration code directly from the Mist portal.
 ![Adopt WAN Edge](/img/adopt-wan-edge.png)
 
 4. Copy the registration code into your clipboard.
+
 ![Registration Code](/img/adopt-registration-code.png)
 
 5. Enter the registration code via GUI:
+
 ![GUI Adoption Step 1](/img/gui-reg-code-adoption-1.png)
 ![GUI Adoption Step 2](/img/gui-reg-code-adoption-2.png)
 ![GUI Adoption Step 3](/img/gui-reg-code-adoption-3.png)
 
-	or PCLI:
+Or enter the registration code using the PCLI:
+
 ![CLI Registration Code Adoption](/img/adopt-cli-reg-code.png)
 
