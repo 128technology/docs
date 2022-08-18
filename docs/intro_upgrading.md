@@ -210,7 +210,7 @@ Within a given router's configuration, at `router > system > software-update > r
   The conductor(s) require internet access, and the routers must be able to resolve internet hosted repositories.
   :::
 - `prefer-conductor`: The router will retrieve software versions from the conductor, and fall back to using the internet
-- `internet-only` (default): The router will use Juniper's publicly hosted repositories for retrieving sofwtare images
+- `internet-only` (default): The router will use Juniper's publicly hosted repositories for retrieving software images
 
 :::note
 Because this is a router setting, your collection of routers can each use different preferences. For example, a router on the internet can use a Juniper repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
