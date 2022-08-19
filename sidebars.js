@@ -66,7 +66,6 @@ module.exports = {
       "concepts_glossary",
     ],
     "WAN Assurance Quick Start": [
-      "intro_wa_quickstart_0_onboarding",
       "intro_wa_quickstart_1_networks",
       "intro_wa_quickstart_2_apps",
       "intro_wa_quickstart_3_templates",

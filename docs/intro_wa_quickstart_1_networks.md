@@ -3,13 +3,7 @@ title: Networks
 sidebar_label: Networks
 ---
 
-## Configure the Device in Mist
-
-To provision your SSR device with ZTP, first log into your organization in Mist.
-
-### LAN Network Users
-
-Start by describing your users that will be accessing applications over a LAN network segment.
+To begin your WAN design, start by describing your users that will be accessing applications over a LAN network segment.
 
 ![Add network](/img/intro_wa_quickstart_1.gif)
 

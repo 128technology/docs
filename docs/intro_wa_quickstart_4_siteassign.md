@@ -3,36 +3,26 @@ title: Add Device to Site
 sidebar_label: Add Device to Site
 ---
 
-### WAN Edge Template
+At this point you have the following:
+* your SSR device in your inventory.
+* a WAN edge template for configuration in Mist.
+* your WAN edge template associated with your site in Mist.
 
-So far your org has a SSR device in your inventory, a network for you LAN, and an `Internet` application for your WAN to deliver.
+Associating the device with the site and template gets you working config!
 
-A WAN Edge template is going to tie them all together! The use of templates allow for re-usable and consistent configuration for every SSR device you deploy beyond the one you are currently working with.
+![Add network](/img/intro_wa_quickstart_site_assign.gif)
 
-![Add template](/img/intro_wa_quickstart_5.gif)
+1. Go to your org WAN Edges inventory.
+2. Select your device.
+3. Assign the device to your site.
+4. **Check the `Manage configuration with Mist`** checkbox.
+5. Select "Assign to Site".
 
-1. Navigate back to the WAN section of the organization sidebar menu, and select "WAN Edge Templates".
-2. Select "Create Template" in the upper right.
-3. Name the template.
-4. **Click `Create`**.
-5. Enter NTP and DNS information to be used by the WAN edge device.
+## Congratulations!
+Mist is now sending template-driven configuration down to your device. After a few minutes to process and apply the configuration, it will begin forwarding sessions from LAN to WAN as described by your policy.
 
-#### WAN
+Head over to the WAN Edges menu on the side bar, select your device, and watch events as the device completes ZTP.
 
-The first thing to do in your template, is describe which port to use for WAN.
+As your client devices connected to the LAN are assigned addresses from the WAN Edge DHCP server and begin sending sessions, telemetry will populate the insights page, and Marvis will start analyzing it on your behalf.
 
-![Add WAN](/img/intro_wa_quickstart_6.gif)
-
-1. Scroll down to the WAN section of the template, and select "Add WAN".
-2. Name the WAN port `wan1`.
-3. Since you already plugged port 0 on the device into Internet, enter `ge-0/0/0` to designate it as a WAN port.
-4. Make sure IP configuration is set to be learned from DHCP, and source NAT is enabled.
-5. **Click `Add` at the bottom of the "Edit WAN Configuration" side panel.
-
-<img src="/img/intro_wa_quickstart_7.png" alt="Configure WAN" width="500"/>
-
-#### LAN
-
-#### Policy
-
-## Claim Your Device
+Continue reading in the docs for more advanced design use cases, deployment and onboarding scenarios, and AI operations with Mist WAN Assurance!
