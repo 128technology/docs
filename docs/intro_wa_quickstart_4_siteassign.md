@@ -4,9 +4,9 @@ sidebar_label: Add Device to Site
 ---
 
 At this point you have the following:
-* your SSR device in your inventory.
-* a WAN edge template for configuration in Mist.
-* your WAN edge template associated with your site in Mist.
+* Your SSR device in your inventory.
+* A WAN edge template for configuration in Mist.
+* Your WAN edge template associated with your site in Mist.
 
 Associating the device with the site and template gets you working config!
 
