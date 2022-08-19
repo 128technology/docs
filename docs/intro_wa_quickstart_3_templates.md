@@ -73,7 +73,7 @@ Finally you will tie your networks and applications together in an access policy
 ![Add access](/img/intro_wa_quickstart_12.gif)
 
 1. Scroll to the access policy section of the template, and select "Add Policy."
-2. Enter a name the name column, and **click the check** to the right of your entry.
+2. Enter a string the name column, and **click the check** to the right of your entry.
 3. From the "Network" column dropdown, select your LAN network.
 4. From the "Applications" column dropdown, select your Internet app.
 5. From the "Traffic Steering" column dropdown, select your local breakout steering policy.
