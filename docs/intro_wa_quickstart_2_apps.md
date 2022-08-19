@@ -17,4 +17,4 @@ Next describe an applications for the WAN to deliver, starting with the Internet
 
 Nice! Your organization is set up to provide access to Internet using the WAN.
 
-Continue to [templates](intro_wa_quickstart_3_templates) to apply policy for this application.
+Continue to [templates](intro_wa_quickstart_3_templates.md) to apply policy for this application.
