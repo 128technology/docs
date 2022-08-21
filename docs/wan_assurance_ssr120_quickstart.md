@@ -38,7 +38,7 @@ To enter the device claim information into Mist, you can:
 
 ### Mist Claim Code Entry
 
-1. Log into your Mist organization dashboard.
+1. Log into your Mist organization's dashboard.
 2. Navigate to your organization's inventory, and select the WAN tab at the top.
 
 ![Claim device](/img/intro_wa_quickstart_claim.gif)
