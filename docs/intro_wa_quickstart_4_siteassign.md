@@ -12,7 +12,7 @@ Associating the device with the site and template gets you a working config!
 
 ![Add network](/img/intro_wa_quickstart_site_assign.gif)
 
-1. Go to your org WAN Edges inventory.
+1. Go to your organization's WAN Edges Inventory.
 2. Select your device.
 3. Assign the device to your site.
 4. Check the **`Manage configuration with Mist`** checkbox.
