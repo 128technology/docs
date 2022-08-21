@@ -11,7 +11,7 @@ Let's get it set up in the Mist cloud with WAN Assurance.
 
 <img src="/img/intro_wa_ssr130_quickstart_1.png" alt="Device Connections" width="500"/>
 
-Your SSR device uses port 0 (`ge-0/0/0`) as a default WAN port to contact Mist for zero-touch provisioning (ZTP). Also you will set up port 3 (`ge-0/0/3`) with a LAN network.
+Your SSR device uses port 0 (`ge-0/0/0`) as a default WAN port to contact Mist for zero-touch provisioning (ZTP). You will also be setting up port 3 (`ge-0/0/3`) with a LAN network.
 
 1. **Connect port 0** to an Ethernet WAN link capable of providing the device with:
     * DHCP address assignment
@@ -28,18 +28,18 @@ Great job! Your SSR device is now connected to the Mist cloud and awaiting furth
 
 ## Claim Your Device
 
-To add the device to your organization WAN Edge inventory, locate the claim label found on the device.
+To add the device to your organization's WAN Edge inventory, locate the claim label found on the device.
 
 <img src="/img/intro_wa_ssr130_quickstart_2.png" alt="Device Connections" width="500"/>
 
 To enter the device claim information into Mist, you can:
 * Enter the claim code in Mist
-* scan the QR code with the Mist mobile app
+* Scan the QR code with the Mist mobile app
 
 ### Mist Claim Code Entry
 
-1. Log into your Mist organization dashboard.
-2. Navigate to your organization inventory, and select the WAN tab at the top.
+1. Log into your Mist organization's dashboard.
+2. Navigate to your organization's inventory, and select the WAN tab at the top.
 
 ![Claim device](/img/intro_wa_quickstart_claim.gif)
 
@@ -60,4 +60,4 @@ The MistAI app can be downloaded from mobile app stores:
 
 ## Onboarding Complete!
 
-Fantastic, your devices is in your inventory! To provision your SSR device with ZTP, log into Mist and **[continue to WAN configuration.](intro_wa_quickstart_1_networks.md)**
+Fantastic, your device is in your inventory! To provision your SSR device with ZTP, log into Mist and **[continue to WAN configuration.](intro_wa_quickstart_1_networks.md)**
