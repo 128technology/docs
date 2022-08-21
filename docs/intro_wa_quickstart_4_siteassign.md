@@ -19,7 +19,7 @@ Associating the device with the site and template gets you working config!
 5. Select "Assign to Site".
 
 ## Congratulations!
-Mist is now sending template-driven configuration down to your device. After a few minutes to process and apply the configuration, it will begin forwarding sessions from LAN to WAN as described by your policy.
+Mist is now sending the template-driven configuration down to your device. After a few minutes to process and apply the configuration, it will begin forwarding sessions from LAN to WAN as described by your policy.
 
 Head over to the WAN Edges menu on the side bar, select your device, and watch events as the device completes ZTP.
 
