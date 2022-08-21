@@ -28,7 +28,7 @@ Great job! Your SSR device is now connected to the Mist cloud and awaiting furth
 
 ## Claim Your Device
 
-To add the device to your organization WAN Edge inventory, locate the claim label found on the device.
+To add the device to your organization's WAN Edge inventory, locate the claim label found on the device.
 
 <img src="/img/intro_wa_ssr120_quickstart_2.png" alt="Device Connections" width="500"/>
 
