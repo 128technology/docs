@@ -21,7 +21,7 @@ Associating the device with the site and template gets you working config!
 ## Congratulations!
 Mist is now sending the template-driven configuration down to your device. After a few minutes to process and apply the configuration, it will begin forwarding sessions from LAN to WAN as described by your policy.
 
-Head over to the WAN Edges menu on the side bar, select your device, and watch events as the device completes ZTP.
+Head over to the WAN Edges menu on the sidebar, select your device, and watch events as the device completes ZTP.
 
 As your client devices connected to the LAN are assigned addresses from the WAN Edge DHCP server and begin sending sessions, telemetry will populate the insights page, and Marvis will start analyzing it on your behalf.
 
