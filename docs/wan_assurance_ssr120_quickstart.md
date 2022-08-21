@@ -60,4 +60,4 @@ The MistAI app can be downloaded from mobile app stores:
 
 ## Onboarding Complete!
 
-Fantastic, your devices is in your inventory! To provision your SSR device with ZTP, log into Mist and **[continue to WAN configuration.](intro_wa_quickstart_1_networks.md)**
+Fantastic, your device is in your inventory! To provision your SSR device with ZTP, log into Mist and **[continue to WAN configuration.](intro_wa_quickstart_1_networks.md)**
