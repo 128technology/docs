@@ -15,7 +15,7 @@ Your SSR device uses port 0 (`ge-0/0/0`) as a default WAN port to contact Mist f
 
 1. **Connect port 0** to an Ethernet WAN link capable of providing the device with:
     * DHCP address assignment
-    * Connectivity Internet and Mist
+    * Connectivity to the Internet and Mist
 
 2. **Connect port 3** to your LAN devices, including:
     * Mist-managed Juniper EX switches
