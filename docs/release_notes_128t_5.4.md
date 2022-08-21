@@ -271,10 +271,6 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 **Release Date:** February 18, 2022
 
-:::warning
-If you are running on one of the AWS t2, t3, c5, or c5n instance families, **it is recommended that you not upgrade to 5.4.4 at this time.** An issue with a driver has been identified, which prevents the system from booting. This issue will be resolved in the next 5.4 patch.
-:::
-
 ### New Features
 
 - **I95-25630 Gateway IP is required:** When creating or changing a service-route with a next-hop of a static IP net-int, a gateway IP is required. If no gateway IP has been specified, the network-interface gateway will be used. 
