@@ -8,7 +8,7 @@ At this point you have the following:
 * A WAN edge template for configuration in Mist.
 * Your WAN edge template associated with your site in Mist.
 
-Associating the device with the site and template gets you working config!
+Associating the device with the site and template gets you a working config!
 
 ![Add network](/img/intro_wa_quickstart_site_assign.gif)
 
