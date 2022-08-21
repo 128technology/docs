@@ -3,7 +3,7 @@ title: Applications
 sidebar_label: Applications
 ---
 
-Next describe an applications for the WAN to deliver, starting with the Internet.
+Next describe the applications for the WAN to deliver, starting with the Internet.
 
 ![Add app](/img/intro_wa_quickstart_3.gif)
 
@@ -15,6 +15,6 @@ Next describe an applications for the WAN to deliver, starting with the Internet
 
 <img src="/img/intro_wa_quickstart_4.png" alt="Configure app" width="500"/>
 
-Nice! Your organization is set up to provide access to Internet using the WAN.
+Nice! Your organization is set up to provide access to the Internet using the WAN.
 
 Continue to [templates](intro_wa_quickstart_3_templates.md) to apply policy for this application.

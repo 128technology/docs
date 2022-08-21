@@ -3,7 +3,7 @@ title: Networks
 sidebar_label: Networks
 ---
 
-To begin your WAN design, start by describing your users that will be accessing applications over a LAN network segment.
+To begin your WAN design, identify the network to be used for accessing applications over a LAN network segment.
 
 ![Add network](/img/intro_wa_quickstart_1.gif)
 
@@ -15,6 +15,6 @@ To begin your WAN design, start by describing your users that will be accessing 
 
 <img src="/img/intro_wa_quickstart_2.png" alt="Configure network" width="500"/>
 
-Excellent! This network is now defined for use across the entire org, including in the template you will soon apply to your new SSR device.
+Excellent! This network is now defined for use across the entire org, including the template you will apply to your new SSR device.
 
 Continue to set up some [applications](intro_wa_quickstart_2_apps.md) for these users to access.

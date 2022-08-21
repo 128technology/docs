@@ -3,9 +3,9 @@ title: WAN Edge Templates
 sidebar_label: WAN Edge Templates
 ---
 
-So far you have a SSR device waiting to be claimed, a network for you LAN, and an `Internet` application for your WAN to deliver.
+So far you have an SSR device waiting to be claimed, a network for your LAN, and an `Internet` application for your WAN to deliver.
 
-A WAN Edge template is going to tie them all together! The use of templates allow for re-usable and consistent configuration for every SSR device you deploy beyond the one you are currently working with.
+A WAN Edge template ties them all together! The use of templates allow for re-usable and consistent configuration for every SSR device you deploy. 
 
 ![Add template](/img/intro_wa_quickstart_5.gif)
 
@@ -17,21 +17,21 @@ A WAN Edge template is going to tie them all together! The use of templates allo
 
 ## WAN
 
-The first thing to do in your template, is describe which port to use for WAN.
+The first thing to do in your template is to describe which port to use for the WAN.
 
 ![Add WAN](/img/intro_wa_quickstart_6.gif)
 
 1. Scroll to the WAN section of the template, and select "Add WAN".
 2. Name the WAN port `wan1`.
 3. Since you already plugged port 0 on the device into Internet, enter `ge-0/0/0` to designate it as a WAN port.
-4. Make sure IP configuration is set to be learned from DHCP, and source NAT is enabled.
+4. Make sure IP Configuration is set to be learned from DHCP, and Source NAT is enabled.
 5. **Click `Add`** at the bottom of the "Edit WAN Configuration" side panel.
 
 <img src="/img/intro_wa_quickstart_7.png" alt="Configure WAN" width="500"/>
 
 ## LAN
 
-Next associate your LAN network segment with the appropriate port on the device, and give the LAN additional network services such as DHCP.
+Next, associate your LAN network segment with the appropriate port on the device, and give the LAN additional network services such as DHCP.
 
 ![Add LAN](/img/intro_wa_quickstart_8.gif)
 
@@ -47,32 +47,32 @@ Next associate your LAN network segment with the appropriate port on the device,
 7. Give your DHCP server an address pool starting with `192.168.1.100` and ending with `192.168.1.200`.
 8. Enter `192.168.1.1` the gatway to be assigned to DHCP clients.
 9. Finally, enter `1.1.1.1,8.8.8.8` as DNS servers to be assigned to clients on the network.
-5. **Click `Add`** at the bottom of the "Edit LAN Configuration" side panel.
+5. Click **`Add`** at the bottom of the "Edit LAN Configuration" side panel.
 
 <img src="/img/intro_wa_quickstart_10.png" alt="Configure DHCP" width="500"/>
 
 ## Policy
 
-Your template has WANs and LANs, now you need to tell the device how to use them to connect users to applications. This is done with steering and access policy.
+Your template has WANs and LANs, now you need to tell the device how to use them to connect users to applications. This is done using Traffic Steering and Access Policies.
 
 ### Steering Policy
 
 ![Add steering](/img/intro_wa_quickstart_11.gif)
 
-1. Scroll to the traffic steering section of the template, and select "Add Traffic Steering".
+1. Scroll to the Traffic Steering section of the template, and select "Add Traffic Steering".
 2. Name your steering policy, for example, `local-breakout`.
-3. Select "Add Paths" to give your steering policy a path to send to.
-4. Select `WAN` as the path type, and select your WAN interface. For apps that use the policy, this will indicate you want them sent directly out of the local WAN interface.
+3. Select "Add Paths" to give your steering policy a path where traffic is sent.
+4. Select `WAN` as the path type, and select your WAN interface. For apps that use the policy, this indicates you want them sent directly out of the local WAN interface.
 5. **Click the check** in the upper right of the "Add Path" box, and **click `Add`** at the bottom of the "Add Traffic Steering" side panel.
 
 
 ### Access Policy
 
-Finally you will tie your networks and applications together in an access policy.
+Finally, tie your networks and applications together in an access policy.
 
 ![Add access](/img/intro_wa_quickstart_12.gif)
 
-1. Scroll to the access policy section of the template, and select "Add Policy."
+1. Scroll to the Access Policy section of the template, and select "Add Policy."
 2. Enter a string the name column, and **click the check** to the right of your entry.
 3. From the "Network" column dropdown, select your LAN network.
 4. From the "Applications" column dropdown, select your Internet app.
