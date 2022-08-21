@@ -34,7 +34,7 @@ To add the device to your organization WAN Edge inventory, locate the claim labe
 
 To enter the device claim information into Mist, you can:
 * Enter the claim code in Mist
-* scan the QR code with the Mist mobile app
+* Scan the QR code with the Mist mobile app
 
 ### Mist Claim Code Entry
 
