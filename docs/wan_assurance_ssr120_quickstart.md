@@ -9,7 +9,7 @@ Let's get it set up in the Mist cloud with WAN Assurance.
 
 ## Connect Your Device to the Cloud
 
-<img src="/img/intro_wa_ssr120_quickstart_1.png" alt="Device Connections" width="500"/>
+![Device Connections](/img/intro_wa_ssr120_quickstart_1.png)
 
 Your SSR device uses port 0 (`ge-0/0/0`) as a default WAN port to contact Mist for zero-touch provisioning (ZTP). You will also be setting up port 3 (`ge-0/0/3`) with a LAN network.
 
@@ -30,7 +30,7 @@ Great job! Your SSR device is now connected to the Mist cloud and awaiting furth
 
 To add the device to your organization's WAN Edge inventory, locate the claim label found on the device.
 
-<img src="/img/intro_wa_ssr120_quickstart_2.png" alt="Device Connections" width="500"/>
+![Claim Code](/img/intro_wa_ssr120_quickstart_2.png)
 
 To enter the device claim information into Mist, you can:
 * Enter the claim code in Mist
@@ -49,7 +49,7 @@ To enter the device claim information into Mist, you can:
 2. Select "Claim Devices to Org".
 3. Scan the QR code.
 
-<img src="/img/intro_wa_quickstart_mobile_app.png" alt="MistAI app" width="250"/>
+![Mist AI App](/img/intro_wa_quickstart_mobile_app.png)
 
 :::note
 
