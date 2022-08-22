@@ -44,7 +44,7 @@ The actions taken when a threat is identified or an attack is detected are liste
 
 ### Security Events Dashboard
 
-Security events are generated any time a vulnerability is detected. These events are stored on the system for up to 24 hours, and can be viewed on the Security Event History page on the SSR Conductor, or from the PCLI using the *X command. 
+Security events are generated any time a vulnerability is detected. These events are stored on the system for up to 24 hours, and can be viewed on the Security Event History page on the SSR Conductor, or from the PCLI using the `show idp events` command. Events can be filtered for focused results. See [`show idp events`](cli_reference.md#show-idp-events) for a complete list of event filters. 
 
 ### Automatic Updates
 
@@ -54,7 +54,7 @@ The SSR will leverage the existing configuration for auto-update under config > 
 
 The following is a list of the current limitations of the IDP solution. 
 
-- The IDP solution is designed for use with local breakout services, and on a spoke router.
+- The IDP solution is designed for use with local breakout services, and on a spoke router. 
 
 - IDP is not supported for hierarchical services. The policy can be enabled on a parent service, but not on the child services.
 
@@ -62,6 +62,12 @@ The following is a list of the current limitations of the IDP solution.
 	- Use the tenant-prefix on the network-interface
 	- Use the tenant with a member with well-defined subnets
 
+- Advanced Configuration Elements: There are configuration elements available to advanced users (defined by the administrator) that allow support for Secure Vector Routing (SVR) with IDP. The options are available under **Configuration > Authority > Router > IDP > Mode**. The options are:
+	- `auto`: Default setting, and it is recommended to leave this setting.
+	- `disabled`: 
+	- `spoke`:
+	- `hub`: Configures the router as an SVR pass-through. 
+For more information, see [IDP](config_reference_guide.md) in the **Configuration Element Reference
 
 
 

@@ -6367,7 +6367,7 @@ Query and display the IDP details.
 
 ## `show idp events`
 
-Show all IDP event
+Show all IDP events.
 
 #### Usage
 
@@ -6413,7 +6413,7 @@ show idp events [{from <from> | since <since>}] [to <to>] [verbose] [rows <rows>
 
 ## `show idp events by-application`
 
-Show IDP event by application
+Show IDP events by application.
 
 #### Usage
 
@@ -6456,7 +6456,7 @@ Query by application name and display summary, breif or detail events
 
 ## `show idp events by-attack`
 
-Show IDP event by attack type
+Show IDP events by attack type.
 
 #### Usage
 
@@ -6499,7 +6499,7 @@ Query by attack type and display summary, breif or detail of filtered events
 
 ## `show idp events by-severity`
 
-Show IDP event by severity level
+Show IDP events by severity level.
 
 #### Usage
 
