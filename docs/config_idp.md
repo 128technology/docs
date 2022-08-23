@@ -43,8 +43,9 @@ exit
 
 ```
 
+**Need to understand if the following paragraph is true, and if so, how is traffic flow relative to bandwidth controlled?** 
 
-It is also important to control the amount of traffic flowing through the IDP engine, as there are system constraints around performance and bandwidth. Intrusion detection is a resource intensive operation and the configuration and expectations must reflect these limitations. (How does one do this? Need to add this info.)
+It is also important to control the amount of traffic flowing through the IDP engine, as there are system constraints around performance and bandwidth. Intrusion detection is a resource intensive operation and the configuration and expectations must reflect these limitations. 
 
 ### Tenant Configuration
 
@@ -97,7 +98,7 @@ config
 
 ## Core Requirements 
 
-The SSR IDP engine requires a dedicated core. When the SSR is configured with  `forwarding-core-mode` as automatic, the system automatically assigns cores based on the hardware type, as well as an additional core for IDP. 
+The SSR IDP engine requires a dedicated core. When the SSR is configured with `forwarding-core-mode` as automatic, the system automatically assigns cores based on the hardware type, as well as an additional core for IDP. 
 
 When the router is configured with `forwarding-core-mode` as manual, the administrator must account for the `forwarding-core-count` to include IDP core. For an HA router, each node follows the above scheme.
 :::note
