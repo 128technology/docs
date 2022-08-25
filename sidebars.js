@@ -65,19 +65,41 @@ module.exports = {
       "concepts_waypoint_ports",
       "concepts_glossary",
     ],
-    "WAN Assurance Quick Start": [
-      "intro_wa_quickstart_1_networks",
-      "intro_wa_quickstart_2_apps",
-      "intro_wa_quickstart_3_templates",
-      "intro_wa_quickstart_4_siteassign"
-    ],
     "WAN Assurance": [
       "wan_overview",
       "wan_edge_provisioning",
+    ],
+    "WAN Assurance Quick Start": [
+      {
+        "type": "category",
+        "label": "SSR120",
+        "items": [
+          "wan_assurance_ssr120_quickstart",
+          "intro_wa_quickstart_1_networks",
+          "intro_wa_quickstart_2_apps",
+          "intro_wa_quickstart_3_templates",
+          "intro_wa_quickstart_4_siteassign"
+        ],
+      },
+      {
+        "type": "category",
+        "label": "SSR130",
+        "items": [
+          "wan_assurance_ssr130_quickstart",
+          "intro_wa_quickstart_1_networks",
+          "intro_wa_quickstart_2_apps",
+          "intro_wa_quickstart_3_templates",
+          "intro_wa_quickstart_4_siteassign"
+        ],
+      },
+    ],
+    "WAN Assurance Telemetry": [
+      "wan_overview",
+      "wan_edge_provisioning",
+      "wan_onboarding_ssrdevice",
       "wan_staging",
       "wan_onboarding_whitebox",
       "wan_site_assignment",
-      "wan_onboarding_ssrdevice",
       "config_wan_assurance",
     ],
     "Administration": [

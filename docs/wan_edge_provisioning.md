@@ -16,22 +16,6 @@ Create one Site for each physical location for onboarding the SSRs.
 
 ![Create a Site](/img/wanas_create_site.gif)
 
-### Conductor-Managed Sites
-
-If you are creating a site for a conductor-managed SSR deployment, it is a best practice to configure the IP address of the conductor as part of the site creation. Use the following procedure to retrieve and assign the conductor IP address to the Mist site. 
-
-1.  On the Configuration Home panel in the SSR GUI, click the Authority button. 
-
-	![Authority Home](/img/wanas_conductor_ip1.png)
-
-2. Under Authority Settings, scroll down to **Conductor Addresses** and copy the IP address of the conductor.
-
-	![Conductor Address](/img/wanas_conductor_ip.png)
-
-3. Return to the Mist Site Configuration, and scroll down to the Session Smart Conductor field and add the Conductor IP address.
-
-	![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
-
 ## Add a Network
 
 ![Add a Network](/img/wanas_create-network.gif) 
