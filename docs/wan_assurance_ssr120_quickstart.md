@@ -40,6 +40,10 @@ To enter the device claim information into Mist, you can:
 
 1. Log into your Mist organization's dashboard.
 2. Navigate to your organization's inventory, and select the WAN tab at the top.
+3. Select the "Claim WAN Edges" button in the upper right of the inventory screen.
+4. Add the device claim code into the list of devices to claim.
+5. **Un-check** the "Assign claimed WAN edges to site" box. This will place the device into inventory, and it will be assigned to a site later.
+6. Click the "Claim" button to claim the device into your inventory.
 
 ![Claim device](/img/intro_wa_quickstart_claim.gif)
 
