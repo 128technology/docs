@@ -3,16 +3,15 @@ title: Configure Intrusion Detection and Prevention
 sidebar_label: Configure IDP
 ---
 
-In a typical network deployment, there is always a mix of trusted and untrusted traffic. The administrator specifies the services and tenants that receive IDP treatment, and which IDP policy to apply to the traffic. 
+In a typical network deployment, there is always a mix of trusted and untrusted traffic. To prevent against security breaches, the SSR uses the IDP Signature database to identify and take action against malicious traffic. SSR services and tenants are configured to be monitored by the IDP engine, and an IDP policy is applied to the traffic. 
 
-By configuring the `idp-policy` at the `access-policy` level, the same service can receive different IDP treatment for different tenants. 
+The `idp-policy` has three levels of policy; Alert, Standard, and Strict. These are configured in the `access-policy`, allowing the same service to receive different IDP treatment for different tenants.
 
-In the following example, all internet traffic originating from the `corporate` tenant idenfied as malicious or threatening receives a `strict` policy enforcement. Traffic originating from the `guest` tenant that is idenfied as malicious or threatening only triggers alerts. This means that the same threat entering two different network segments receives different treatment, allowing the administrator to enforce the right level of protection based on corporate policies.
+In the following example, all internet traffic originating from the `corporate` tenant identified as malicious or threatening receives a `strict` policy enforcement. Traffic originating from the `guest` tenant that is identified as malicious or threatening only triggers an alert. This means that the same threat entering two different network segments receives different treatment, allowing the administrator to enforce the right level of protection based on corporate policies.
 
 ### Configuration
 
 In the following example configuration, three access policies are defined for the service `internet`.
-
 
 ```
 config
@@ -42,10 +41,6 @@ config
 exit
 
 ```
-
-**Need to understand if the following paragraph is true, and if so, how is traffic flow relative to bandwidth controlled?** 
-
-It is also important to control the amount of traffic flowing through the IDP engine, as there are system constraints around performance and bandwidth. Intrusion detection is a resource intensive operation and the configuration and expectations must reflect these limitations. 
 
 ### Tenant Configuration
 
