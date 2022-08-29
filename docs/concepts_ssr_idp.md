@@ -3,8 +3,6 @@ title: Intrusion Detection and Prevention
 sidebar_label: Intrusion Detection and Prevention
 ---
 
-## Overview
-
 Intrusion Detection and Prevention (IDP) leverages the Juniper IDP Signature Database, providing state of the art protection against the most up-to-date vulnerabilities. This database contains definitions of attack objects and application signatures defined in the form of IDP policy rules, and is updated regularly. By automatically downloading the latest definitions and application signatures, the SSR is able to provide cutting edge security solutions for your network. 
 
 ## How It Works
@@ -40,7 +38,7 @@ Events can be filtered for focused results. See [`show idp events`](cli_referenc
 
 ### Automatic Updates
 
-IDP Automatic Updates are defined using the same time value configured in the Application Identification **auto-update** setting. If no value is set, the default is weekly. 
+IDP Automatic Updates are defined using the same value configured in the Application Identification **auto-update** setting. If no value is set, the default is weekly. 
 
 ![App ID Update Frequency](/img/idp_app-id-data-update.jpg)
 
@@ -56,19 +54,11 @@ The following is a list of the current limitations of the IDP solution.
 	- Use the tenant-prefix on the network-interface
 	- Use the tenant with a member with well-defined subnets
 
-- Advanced Configuration Elements: There are configuration elements available to advanced users (defined by the administrator) that allow support for Secure Vector Routing (SVR) with IDP. The options are available under **Configuration > Authority > Router > Advanced IDP Settings**. 
+- IDP Mode: This is set to Auto by default, and automatically determines the status of your SSR for IDP. This is an Advanced administrative setting and it is not recommended to be changed. The options are described here for adminstrators. 
 
 ![Advanced IDP Settings](/img/idp_adv-idp-setting-mode.jpg)
 
-The options are:
-- `auto`: Default. It is recommended to leave this setting.
-- `disabled`: Disables IDP. 
-- `spoke`: Forces 
+- `auto`: Default. Automatically reviews the configuration to determine whether the SSR is a Hub or Spoke. It is recommended to leave this setting.
+- `disabled`: Used to disable IDP, for example on an individual router.
+- `spoke`: Defines the router as the location that is performing the IDP inspection. 
 - `hub`: Configures the router as an SVR pass-through. 
-
-
-
-
-
-
-
