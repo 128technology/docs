@@ -53,10 +53,6 @@ If the _current_ GA version of software is 5.2.3, then 5.2.X and 5.1.X are suppo
 
 Juniper Networks is committed to providing the highest quality software with each release. In addition to creating new features and functions for the Session Smart Networking Platform, Critical Vulnerability Exposures (CVE) are continuously evaluated and addressed in accordance with our [security policy](about_security_policy.md). In many cases, CVEs exist in the operating system's libraries, binaries, and kernel. Addressing these vulnerabilities requires upgrading direct or indirect dependences of the SSN products from upstream repositories.  In some cases, this requires upgrading the kernel or even the version of OS distribution, which no longer qualifies as a patch and necessitates an increment to a minor or major version of software.
 
-### Extended Maintenance & Support
-
-Extended maintenance and support may be available for certain releases after EOM. To request extended maintenance for a release, customers and partners should contact a Juniper Networks sales representative. In order to receive Extended Maintenance and Support, you must also maintain active subscriptions for the products in question for the duration of the extended maintenance and support period.
-
 ### End-of-life products
 
 When a software product approaches End of Life (EOL), it is the policy of Juniper Networks to communicate these important milestones to our customers. It is our intent to help customers understand the impact of the product end of life, to understand the associated timelines, and help manage the product transition.
