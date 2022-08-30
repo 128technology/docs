@@ -43059,7 +43059,7 @@ show stats idp attacks total [since <since>] [force] [router <router>] [node <no
 
 ## `show stats idp bytes`
 
-Metrics for packets
+IDP Metrics for bytes
 
 #### Usage
 

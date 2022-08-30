@@ -3,7 +3,7 @@ title: Troubleshooting IDP
 sidebar_label: Troubleshooting IDP
 ---
 
-`show idp application` and its sub-commands provide information about the running state of the IDP engine. 
+[`show idp application status`](cli_reference.md#show-idp-application-status) and its sub-commands provide information about the running state of the IDP engine. 
 
 ```
 admin@node.idp # show idp application status
@@ -20,8 +20,6 @@ Thu 2022-05-19 04:45:49 UTC
  Docker:     running
 
 ```
-The `show stats idp` metrics track the number of packets and bytes sent in/out of the IDP engine. Additionally, data is captured by protocol such as UDP, TCP, ICMP etc. 
-
 ## Show Commands
 
 Each of the commands listed below, and the subcommands for each, provide additional details for IDP visibility. Use the links to learn more about each command. 
@@ -40,14 +38,22 @@ Each of the commands listed below, and the subcommands for each, provide additio
 | [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
-### Administrator Only Commands
+### Additional Commands
 
-The following commands are visible only to Administrators, and should only be run when instructed to do so by Juniper technical support. 
+The following commands are visible only in the Advanced view, and should only be run when instructed to do so by Juniper technical support. 
 
 | command | description |
 | ------- | ----------- |
 | [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild IDP Command. |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+
+## Stats
+
+The [`show stats idp`](cli_stats_reference.md#show-stats-idp) display metrics for attacks, bytes received and transmitted, and packets dropped, processed, received, and transmitted, as well as by indiviual protocol. 
+
+- [`attacks`](#show-stats-idp-attacks)
+- [`bytes`](#show-stats-idp-bytes)
+- [`packets`](#show-stats-idp-packets)
 
 ## Logs 
 

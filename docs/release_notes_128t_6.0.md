@@ -24,6 +24,20 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 6.0.4-X
+
+**Release Date:** September 9, 2022
+
+### Resolved Issues
+
+- **The following CVE's have been addressed and resolved:** I95-45054, I95-45060, I95-45165, I95-47485. 
+------
+- **I95-45094 Unnecessary rotation of salt minion config:** Resolved an issue where the global.init and salt minion config are unnecessarily rotated and updated with no changes to the actual contents of the file.
+------
+- **I95-45583 HA Connection lost during commit:** Resolved an issue where session was missing necessary path data information relating to the peer path.
+------
+
+
 ## Release 6.0.2-8
 
 **Release Date:** August 16, 2022

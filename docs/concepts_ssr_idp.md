@@ -7,7 +7,7 @@ Intrusion Detection and Prevention (IDP) leverages the Juniper IDP Signature Dat
 
 ## How It Works
 
-The following IDP profiles are available to apply the necessary policy enforcement on services.
+The following IDP profiles apply the necessary policy enforcement on services.
 
 - **Standard** - The **Standard** profile is the default and represents a set of IDP signatures and rules recommended by Juniper. Each type and severity of attack has a Juniper-defined action that is enforced when an attack is detected. 
 
@@ -17,16 +17,11 @@ The following IDP profiles are available to apply the necessary policy enforceme
 
 ### IDP Actions
 
-The actions taken when a threat is identified or an attack is detected are listed below.
+The Juniper IDP ruleset defines the type of action when a threat is identified or an attack is detected. The actions taken include:
 
-- **Recommended** - The Juniper IDP ruleset defines the type of action to be taken for a vulnerability. Some of the possible actions taken include:
-	- Close the client and server TCP connection.
-	- Drop current and all subsequent packets.
-	- Alert only, no additional action taken.
-
-- **Close or Block** - The TCP connection is closed towards the client and server. For UDP and other non-stream-oriented protocols, the packets are dropped. 
-
-- **Alert** - Events are always generated for any detected vulnerability. However, when the **Alert** action is specified, no additional measure is taken by the system to prevent the attack. Alerts are typically only to low severity attacks, or when the administrator explicitly configures the alert-only action for a service and tenant. 
+- **Close** the client and server TCP connection. The TCP connection is closed towards the client and server.
+- **Drop** current and all subsequent packets. For UDP and other non-stream-oriented protocols, the packets are dropped.
+- **Alert** only, no additional action taken. Events are generated for detected vulnerabilities. However, no additional measure is taken by the system to prevent the attack. Alerts are typically only for low severity attacks, or when the administrator explicitly configures the alert-only action for a service and tenant.
 
 ### Security Events Dashboard
 
@@ -38,9 +33,24 @@ Events can be filtered for focused results. See [`show idp events`](cli_referenc
 
 ### Automatic Updates
 
-IDP Automatic Updates are defined using the same value configured in the Application Identification **auto-update** setting. If no value is set, the default is weekly. 
+IDP Automatic Updates are defined using the same values configured in the Application Identification **auto-update** setting. If no value is set, the defaults are used:
+
+- Enabled
+- Update time: 2AM
+- Frequency: Weekly 
+
+For information about changing the settings, see [Application Identification Modes.](config_app_ident.md#modes)
 
 ![App ID Update Frequency](/img/idp_app-id-data-update.jpg)
+
+## Core Requirements 
+
+The SSR IDP engine requires a dedicated core. When the SSR is configured with `forwarding-core-mode` as automatic, the system automatically assigns cores based on the hardware type, as well as an additional core for IDP. 
+
+When the router is configured with `forwarding-core-mode` as manual, the administrator must account for the `forwarding-core-count` to include IDP core. For an HA router, each node follows the above scheme.
+:::note
+The system requires a reboot for the IDP core allocation; after upgrading to SSR 6.x for the first time, an additional reboot is required to enable the IDP engine.
+:::
 
 ## Limitations
 
@@ -54,11 +64,11 @@ The following is a list of the current limitations of the IDP solution.
 	- Use the tenant-prefix on the network-interface
 	- Use the tenant with a member with well-defined subnets
 
-- IDP Mode: This is set to Auto by default, and automatically determines the status of your SSR for IDP. This is an Advanced administrative setting and it is not recommended to be changed. The options are described here for adminstrators. 
+- IDP Mode: Set as `auto` by default, and automatically determines the status of your SSR for IDP. It is not recommended to change the mode. 
 
-![Advanced IDP Settings](/img/idp_adv-idp-setting-mode.jpg)
+	- `auto`: Default. Automatically reviews the configuration to determine whether the SSR is a Hub or Spoke.
+	- `disabled`: Used to disable IDP.
+	- `spoke`: Defines the router as the location that is performing the IDP inspection. 
+	- `hub`: Configures the router as an SVR pass-through. 
 
-- `auto`: Default. Automatically reviews the configuration to determine whether the SSR is a Hub or Spoke. It is recommended to leave this setting.
-- `disabled`: Used to disable IDP, for example on an individual router.
-- `spoke`: Defines the router as the location that is performing the IDP inspection. 
-- `hub`: Configures the router as an SVR pass-through. 
+![IDP Settings](/img/idp_adv-idp-setting-mode.jpg)

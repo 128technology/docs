@@ -91,15 +91,6 @@ config
         exit
 ```
 
-## Core Requirements 
-
-The SSR IDP engine requires a dedicated core. When the SSR is configured with `forwarding-core-mode` as automatic, the system automatically assigns cores based on the hardware type, as well as an additional core for IDP. 
-
-When the router is configured with `forwarding-core-mode` as manual, the administrator must account for the `forwarding-core-count` to include IDP core. For an HA router, each node follows the above scheme.
-:::note
-The system requires a reboot for the IDP core allocation; after upgrading to SSR 6.x for the first time, an additional reboot is required to enable the IDP engine.
-:::
-
 ## High Availability
 
 The IDP engine runs on each node of the system. Traffic is always sent to the IDP instance on the first node - per the order in configuration. Upon failover, the existing sessions do not gracefully failover; the TCP sessions are reset, and new sessions must be established by the client. For UDP sessions, the same best effort behavior can be expected from the IDP engine.
