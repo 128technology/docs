@@ -31,7 +31,7 @@ module.exports = {
     "Image-Based Installation": [
       "intro_installation_image",
       "install_onboard_hdware",
-    ], 
+    ],
     "Cloud Installations": [
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
@@ -64,6 +64,12 @@ module.exports = {
       "concepts_STEP",
       "concepts_waypoint_ports",
       "concepts_glossary",
+    ],
+    "WAN Assurance Quick Start": [
+      "intro_wa_quickstart_1_networks",
+      "intro_wa_quickstart_2_apps",
+      "intro_wa_quickstart_3_templates",
+      "intro_wa_quickstart_4_siteassign"
     ],
     "WAN Assurance": [
       "wan_overview",
@@ -117,10 +123,10 @@ module.exports = {
         "items": [
           "howto_tune_bfd",
           "config_bgp",
-          "config_ospf", 
-          "config_bfd", 
+          "config_ospf",
+          "config_bfd",
         ],
-      },      
+      },
       {
         "type": "category",
         "label": "High Availability",
