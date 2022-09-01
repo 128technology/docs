@@ -145,7 +145,7 @@ outputs:
 
 Once these configurations are in place, starting the Monitoring Agent will send events to syslog. 
 
-### Remote Logging 
+## Remote Logging 
 
 Audit logs can be stored off system by configuring a remote logging server. When the IP address and port are configured, audit logs are sent to the remote system for storage and review. 
 
@@ -166,8 +166,72 @@ config
     exit
 exit
 ```
+### Secure Syslog Transport
+
+Beginning with Version 6.0.4, the SSR can be configured to send system generated events over a secure TLS or TCP connection to a remote-logging server for analysis and storage. The current default is a UDP connection.
+
+A new configuration element, `protocol`, has been added to the syslog configuration under `authority/router/system` to configure the protocol that the SSR uses to open communication with the syslog server. 
+
+#### Certificates
+
+Use `config authority` to configure a certificate for use when opening the TLS connection, and to encrypt packets sent to the syslog server.
+
+- Configure a Trusted CA Certificate on the SSR 
+
+Copy the content of the trusted CA certificate into the configuration.
+```
+    admin@test1.Fabric128 (trusted-ca-certificate[name=server-ca])# show
+        name     server-ca
+        content  (text/plain) <-- contents of the server certificate.
+```
+
+- Configure a Client Certificate on the SSR
+
+Copy the content of the client certificate into the configuration.
+```
+    admin@test1.Fabric128 (client-certificate[name=ABC])# show
+        name     ABC
+        content  (text/plain). <---- contents of the client certificate.
+```
+See [Adding a Trusted Certificate](howto_trusted_ca_certificate.md) for more information.
+
+#### TLS and TCP Transport
+
+To provide secure transport for the system generated events, the SSR can be configured to use TLS to open an encrypted communication channel with the syslog server.
+
+```
+    admin@test1.Fabric128 (syslog)# show
+        severity        info
+        facility        any
+        protocol        tls
+        client-certificate-name  ABC. <-- client certificate already configured under authority/client-certificate
+
+        server          172.18.2.183 514
+            ip-address  172.18.2.183
+            port        514
+    exit
+```
+
+##### TCP Transport
+
+Configure the SSR to use TCP for transport to syslog server.
+
+:::important
+Although using TCP guarantees events are transmitted to the destination syslog server, it is not considered secure because the syslog server is clear text.
+:::
+
+```
+    admin@test1.Fabric128 (syslog)# show
+        severity        info
+        facility        any
+        protocol        tcp
+
+        server          172.18.2.183 514
+            ip-address  172.18.2.183
+            port        514
+    exit
+```
+
 ## Viewing the Audit Log
 
-To view the contents of the audit log via the GUI (on the Conductor or Router as configured above).
-
-To view the contents of the audit log, navigate to the **Tools** page and choose **Event History**. The Event History viewer shows all of the events that this SSR has accumulated, including audit log events. Audit log events are of type **ADMIN**; use the built-in filtering mechanism to limit the Event History search results to ADMIN type events.
+To view the contents of the audit log via the GUI (on the Conductor or Router as configured above), navigate to the **Tools** page and choose **Event History**. The Event History viewer shows all of the events that the SSR has accumulated, including audit log events. Audit log events are of type **ADMIN**; use the built-in filtering mechanism to limit the Event History search results to ADMIN type events.

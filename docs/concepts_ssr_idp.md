@@ -21,7 +21,7 @@ You can apply a profile (Alert, Standard, Strict) to an `access-policy`. Each pr
 
 ### Security Events Dashboard
 
-Security events are generated any time a vulnerability is detected. These events are stored on the system for up to 24 hours, and can be viewed on the Security Event History page on the SSR Conductor, or from the PCLI using the `show idp events` command. 
+Security events are generated any time a vulnerability is detected. These events are stored on the system for up to 24 hours, and can be viewed on the Security Event History page on the SSR GUI, or from the PCLI using the `show idp events` command. 
 
 ```
 admin@node.cadillac# show idp events
