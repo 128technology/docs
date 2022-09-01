@@ -2254,93 +2254,6 @@ admin@labsystem1.fiedler#
 | ------- | ----------------------------|
 | 3.1.0   | This feature was introduced |
 
-## `request idp rebuild`
-
-Rebuild IDP Command
-
-#### Usage
-
-```
-request idp rebuild [force] router <router> node <node>
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt |
-| node | The node for which to rebuild IDP |
-| router | The router for which to rebuild IDP |
-
-##### See Also
-
-| command | description |
-| ------- | ----------- |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details |
-| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
-
-#### Description
-
-Initiate a rebuild of the underlying IDP engine.
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 6.0.4   | This feature was introduced |
-
-## `request idp refresh-security-packages`
-
-Request IDP connectivity details. Triggers an update/display of the IDP connectivity details shown in `show idp security-package`.
-
-#### Usage
-
-```
-request idp refresh-security-packages [force] [node <node>] {router <router> | resource-group <resource-group>}
-```
-
-##### Keyword Arguments
-
-| name | description |
-| ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The node for which to refresh security package data |
-| resource-group | The name of the resource group |
-| router | The router for which to refresh security package data |
-
-##### See Also
-
-| command | description |
-| ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details |
-| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
-
-#### Version History
-
-| Release | Modification                |
-| ------- | ----------------------------|
-| 6.0.4   | This feature was introduced |
-
 ## `request idp restart`
 
 Restart IDP Command
@@ -2348,7 +2261,7 @@ Restart IDP Command
 #### Usage
 
 ```
-request idp restart [force] router <router> node <node>
+request idp restart [force] [rebuild] router <router> node <node>
 ```
 
 ##### Keyword Arguments
@@ -2357,28 +2270,71 @@ request idp restart [force] router <router> node <node>
 | ---- | ----------- |
 | force | Skip confirmation prompt |
 | node | The node for which to restart IDP |
+| rebuild | Delete and rebuild IDP |
 | router | The router for which to restart IDP |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command. |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
 
 Initiate a restart of the underlying IDP engine.
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.0.4   | This feature was introduced |
+
+## `request idp signature-query`
+
+Request IDP signature database connectivity.
+
+#### Usage
+
+```
+request idp signature-query [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which to refresh security signature data |
+| resource-group | The name of the resource group |
+| router | The router for which to refresh security signature data |
+
+#### Description
+
+Query and display the IDP signature database connectivity details.
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
+| [`show idp events`](#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Version History
 
@@ -3824,6 +3780,8 @@ The category can be any of the following:
 | PCLI | PCLI | All the PCLI&#x27;s log messages. |
 | BONS | Configuration Database | Components related to the configuration database. |
 | LDAP | LDAP | All the System Security Services Daemon logs. |
+| IDP | IDP | Components related to IDP. |
+
 #### Version History
 
 | Release | Modification                |
@@ -6347,17 +6305,16 @@ show idp application status [force] [node <node>] {router <router> | resource-gr
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command. |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command .|
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](#show-idp-network) | Show underlying IDP network status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -6393,17 +6350,16 @@ show idp details [force] [node <node>] {router <router> | resource-group <resour
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command. |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](#show-idp-network) | Show underlying IDP network status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -6424,12 +6380,12 @@ show idp events [{from <from> | since <since>}] [to <to>] [verbose] [rows <rows>
 
 | name | description |
 | ---- | ----------- |
-| from | Only show events after the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| from | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
 | node | The name of the node. |
 | router | The name of the router. |
 | rows | The number of event entries to display at once [type: int or &#x27;all&#x27;] (default: 50). |
-| since | Only show events after the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
-| to | Only show events before the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| since | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| to | Only show events before the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
 | verbose | Get detailed event information. |
 
 ##### Subcommands
@@ -6444,17 +6400,16 @@ show idp events [{from <from> | since <since>}] [to <to>] [verbose] [rows <rows>
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command .|
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](#show-idp-network) | Show underlying IDP network status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Version History
@@ -6477,31 +6432,31 @@ show idp events by-application [{from <from> | since <since>}] [to <to>] [verbos
 
 | name | description |
 | ---- | ----------- |
-| from | Only show events after the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| from | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
 | name | Filter IDP events by application. |
 | node | The name of the node. |
 | router | The name of the router. |
 | rows | The number of event entries to display at once [type: int or &#x27;all&#x27;] (default: 50). |
-| since | Only show events after the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
-| to | Only show events before the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| since | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| to | Only show events before the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
 | verbose | Get detailed event information. |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](#show-idp-network) | Show underlying IDP network status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
+
 
 #### Description
 
@@ -6527,30 +6482,29 @@ show idp events by-attack [{from <from> | since <since>}] [to <to>] [verbose] [n
 
 | name | description |
 | ---- | ----------- |
-| from | Only show events after the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
-| name | Filter IDP events by attack |
-| node | The name of the node |
-| router | The name of the router |
+| from | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| name | Filter IDP events by attack. |
+| node | The name of the node. |
+| router | The name of the router. |
 | rows | The number of event entries to display at once [type: int or &#x27;all&#x27;] (default: 50). |
-| since | Only show events after the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
-| to | Only show events before the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| since | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| to | Only show events before the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
 | verbose | Get detailed event information. |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](#show-idp-network) | Show underlying IDP network status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -6577,30 +6531,29 @@ show idp events by-severity [{from <from> | since <since>}] [to <to>] [verbose] 
 
 | name | description |
 | ---- | ----------- |
-| from | Only show events after the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| from | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
 | name | Filter IDP events by severity. |
 | node | The name of the node. |
 | router | The name of the router. |
 | rows | The number of event entries to display at once [type: int or &#x27;all&#x27;] (default: 50). |
-| since | Only show events after the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
-| to | Only show events before the provided time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| since | Only show events after the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
+| to | Only show events before the specified time, events are kept for 24 hours maximum. Can either be a timestamp, such as yyyy-mm-dd hh:mm:ss, hh:mm and 8am, 2pm (assume current day if not specified) or a delta, such as 45m, 2h, 1d [type: timestamp]. |
 | verbose | Get detailed event information. |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command. |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command. |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
-| [`show idp network`](#show-idp-network) | Show underlying IDP network status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -6615,7 +6568,7 @@ Query by severity level and display summary, brief or detailed, of filtered even
 
 ## `show idp network`
 
-Show underlying IDP network status.
+Show IDP networks.
 
 #### Usage
 
@@ -6636,17 +6589,16 @@ show idp network [force] [node <node>] {router <router> | resource-group <resour
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command. |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command. |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -6661,7 +6613,7 @@ Query and display the current state of the IDP network along with detailed messa
 
 ## `show idp platform`
 
-Show underlying IDP platform data.
+Show IDP platform data.
 
 #### Usage
 
@@ -6682,17 +6634,16 @@ show idp platform [force] [node <node>] {router <router> | resource-group <resou
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command. |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command. |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](#show-idp-network) | Show underlying IDP network status. |
-| [`show idp security-package`](#show-idp-security-package) | Show underlying IDP security package details. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
@@ -6705,14 +6656,14 @@ Query and display IDP platform data.
 | ------- | ----------------------------|
 | 6.0.4   | This feature was introduced. |
 
-## `show idp security-package`
+## `show idp signatures`
 
-Show underlying IDP security package details.
+Show IDP signature package details.
 
 #### Usage
 
 ```
-show idp security-package [force] [node <node>] {router <router> | resource-group <resource-group>}
+show idp signatures [force] [node <node>] {router <router> | resource-group <resource-group>}
 ```
 
 ##### Keyword Arguments
@@ -6720,30 +6671,29 @@ show idp security-package [force] [node <node>] {router <router> | resource-grou
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. Only required when targeting all routers. |
-| node | The node for which to display security package details. |
+| node | The node for which to display signature package details. |
 | resource-group | The name of the resource group. |
-| router | The router for which to display security package details. |
+| router | The router for which to display signature package details. |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](#request-idp-rebuild) | Rebuild IDP Command. |
-| [`request idp refresh-security-package`](#request-idp-refresh-security-package) | Update the IDP connectivity details. |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command. |
-| [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](#show-idp-details) | Show underlying IDP details. |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
 | [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP events by attack type. |
 | [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP events by severity level. |
-| [`show idp network`](#show-idp-network) | Show underlying IDP network status. |
-| [`show idp platform`](#show-idp-platform) | Show underlying IDP platform data. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
 
-Query and display the security package details of the IDP application.
+Query and display the IDP signature package details.
 
 #### Version History
 
