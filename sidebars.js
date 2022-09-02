@@ -114,7 +114,6 @@ module.exports = {
           "config_static_hostname_mapping",
           "config_tenants",
           "config_transport_encryption",
-          "config_wan_assurance",
         ],
       },
       {
@@ -137,7 +136,6 @@ module.exports = {
           "config_non_forwarding_ha_interfaces",
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
-          "config_step_ha",
         ],
       },
       {
