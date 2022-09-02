@@ -42963,17 +42963,56 @@ show stats idp attacks missed [since <since>] [force] [router <router>] [node <n
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
 | [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
 | [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
 | [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
+
+## `show stats idp attacks mist-sent`
+
+Number of attacks sent to mist cloud (count)
+
+#### Usage
+
+```
+show stats idp attacks mist-sent [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp attacks received`
 
@@ -43004,17 +43043,16 @@ show stats idp attacks received [since <since>] [force] [router <router>] [node 
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp attacks total`
 
@@ -43045,21 +43083,20 @@ show stats idp attacks total [since <since>] [force] [router <router>] [node <no
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp bytes`
 
-IDP Metrics for bytes
+Metrics for bytes
 
 #### Usage
 
@@ -43075,7 +43112,7 @@ show stats idp bytes [netintf <netintf>] [since <since>] [force] [router <router
 | netintf | The network interface for which this metric was generated (comma-separated list) |
 | node | The name of the node generating this metric |
 | router | The router for which to display stats (default: &lt;current router&gt;) |
-| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp]. |
 
 ##### Positional Arguments
 
@@ -43094,17 +43131,16 @@ show stats idp bytes [netintf <netintf>] [since <since>] [force] [router <router
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp bytes received`
 
@@ -43136,17 +43172,16 @@ show stats idp bytes received [netintf <netintf>] [since <since>] [force] [route
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp bytes transmitted`
 
@@ -43178,17 +43213,16 @@ show stats idp bytes transmitted [netintf <netintf>] [since <since>] [force] [ro
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets`
 
@@ -43229,17 +43263,16 @@ show stats idp packets [since <since>] [force] [router <router>] [node <node>] [
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets dropped`
 
@@ -43270,17 +43303,16 @@ show stats idp packets dropped [since <since>] [force] [router <router>] [node <
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets processed`
 
@@ -43311,17 +43343,16 @@ show stats idp packets processed [since <since>] [force] [router <router>] [node
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets protocol`
 
@@ -43361,17 +43392,16 @@ show stats idp packets protocol [since <since>] [force] [router <router>] [node 
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets protocol icmp`
 
@@ -43402,17 +43432,16 @@ show stats idp packets protocol icmp [since <since>] [force] [router <router>] [
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets protocol other`
 
@@ -43443,17 +43472,16 @@ show stats idp packets protocol other [since <since>] [force] [router <router>] 
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets protocol tcp`
 
@@ -43484,17 +43512,16 @@ show stats idp packets protocol tcp [since <since>] [force] [router <router>] [n
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets protocol udp`
 
@@ -43525,17 +43552,16 @@ show stats idp packets protocol udp [since <since>] [force] [router <router>] [n
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets received`
 
@@ -43567,17 +43593,16 @@ show stats idp packets received [netintf <netintf>] [since <since>] [force] [rou
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats idp packets transmitted`
 
@@ -43609,17 +43634,16 @@ show stats idp packets transmitted [netintf <netintf>] [since <since>] [force] [
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
-| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
-| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
-| [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
-| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event |
-| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](cli_reference.md#show-idp-network) | Show underlying IDP application status. |
-| [`show idp platform`](cli_reference.md#show-idp-platform) | Show underlying IDP platform data. |
-| [`show idp security-package`](cli_reference.md#show-idp-security-package) | Show underlying IDP security package details |
+| [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
+| [`show idp events`](cli_reference.md#show-idp-events) | Show all IDP event. |
+| [`show idp events by-application`](cli_reference.md#show-idp-events-by-application) | Show IDP events by application. |
+| [`show idp events by-attack`](cli_reference.md#show-idp-events-by-attack) | Show IDP events by attack type. |
+| [`show idp events by-severity`](cli_reference.md#show-idp-events-by-severity) | Show IDP events by severity level. |
+| [`show idp network`](cli_reference.md#show-idp-network) | Show IDP networks. |
+| [`show idp platform`](cli_reference.md#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](cli_reference.md#show-idp-signatures) | Show IDP signature package details. |
 
 ## `show stats interface`
 
@@ -47217,10 +47241,12 @@ show stats packet-processing action failure metadata [core <core>] [port <port>]
 | [`add`](#show-stats-packet-processing-action-failure-metadata-add) | The number of packets dropped because metadata add operation failed |
 | [`cached-attributes-not-found`](#show-stats-packet-processing-action-failure-metadata-cached-attributes-not-found) | The number of metadata propagate add failures due to missing cached attributes |
 | [`enable-metadata-flow-miss`](#show-stats-packet-processing-action-failure-metadata-enable-metadata-flow-miss) | The number of times enable-metadata packet was not processed due to missing reverse flow |
+| [`flow-move-buffer-allocation`](#show-stats-packet-processing-action-failure-metadata-flow-move-buffer-allocation) | The number of times flow-move acknowledgement packet was not sent due to a lack of buffers |
 | [`get-length`](#show-stats-packet-processing-action-failure-metadata-get-length) | The number of packets dropped because the metadata length could not be determined |
 | [`invalid-type`](#show-stats-packet-processing-action-failure-metadata-invalid-type) | The number of packets dropped because of invalid metadata type |
 | [`invalidate-for-enable-metadata`](#show-stats-packet-processing-action-failure-metadata-invalidate-for-enable-metadata) | The number of times a flow that couldn&#x27;t be invalidated from the enable-metadata packets |
 | [`not-present`](#show-stats-packet-processing-action-failure-metadata-not-present) | The number of packets dropped because the metadata was not present when required |
+| [`received-invalid-forced-drop-reason`](#show-stats-packet-processing-action-failure-metadata-received-invalid-forced-drop-reason) | The number of packets dropped with invalid forced-drop reason |
 | [`received-unknown-forced-drop-reason`](#show-stats-packet-processing-action-failure-metadata-received-unknown-forced-drop-reason) | The number of packets dropped with unknown forced-drop reason |
 | [`reverse-buffer-allocation`](#show-stats-packet-processing-action-failure-metadata-reverse-buffer-allocation) | The number of times reverse metadata packet was not sent due to a lack of buffers |
 | [`turn-off-buffer-allocation`](#show-stats-packet-processing-action-failure-metadata-turn-off-buffer-allocation) | The number of times metadata-turnoff packet was not sent due to a lack of buffers |
@@ -50664,17 +50690,22 @@ show stats packet-processing action success metadata [core <core>] [port <port>]
 | [`add-false-positive-correction`](#show-stats-packet-processing-action-success-metadata-add-false-positive-correction) | Metadata length added to correct for payload and cookie collisions |
 | [`add-not-required`](#show-stats-packet-processing-action-success-metadata-add-not-required) | Adding of metadata is not required |
 | [`added`](#show-stats-packet-processing-action-success-metadata-added) | Metadata successfully added |
+| [`flow-move-send-not-required`](#show-stats-packet-processing-action-success-metadata-flow-move-send-not-required) | Number of Flow Move packets not sent |
 | [`inline-modify`](#show-stats-packet-processing-action-success-metadata-inline-modify) | Statistics for &#x27;inline-modify&#x27; |
 | [`invalidate-for-enable-metadata`](#show-stats-packet-processing-action-success-metadata-invalidate-for-enable-metadata) | Number of times flow was invalidated due to Enable Metadata packets received |
 | [`propagate-not-required`](#show-stats-packet-processing-action-success-metadata-propagate-not-required) | Propagation of metadata is not required |
 | [`received-disable-forward-metadata`](#show-stats-packet-processing-action-success-metadata-received-disable-forward-metadata) | Number of packets purposefully dropped after disabling forward metadata |
 | [`received-enable-metadata`](#show-stats-packet-processing-action-success-metadata-received-enable-metadata) | Number of Enable Metadata packets received and purposefully dropped |
+| [`received-flow-move`](#show-stats-packet-processing-action-success-metadata-received-flow-move) | Number of Flow Move packets received and purposefully dropped |
+| [`received-flow-move-acknowledgement`](#show-stats-packet-processing-action-success-metadata-received-flow-move-acknowledgement) | Number of Flow Move acknowledgement packets received and purposefully dropped |
 | [`received-keep-alive`](#show-stats-packet-processing-action-success-metadata-received-keep-alive) | Number of keep-alive packets received and purposefully dropped |
 | [`remove-false-positive-correction`](#show-stats-packet-processing-action-success-metadata-remove-false-positive-correction) | Metadata length removed after false positive detection |
 | [`remove-not-required`](#show-stats-packet-processing-action-success-metadata-remove-not-required) | Removing of metadata is not required |
 | [`removed`](#show-stats-packet-processing-action-success-metadata-removed) | Metadata successfully removed |
 | [`right-lane-sent`](#show-stats-packet-processing-action-success-metadata-right-lane-sent) | Reverse metadata packets that were succcessfully sent to right lane |
 | [`sent-disable-forward-metadata`](#show-stats-packet-processing-action-success-metadata-sent-disable-forward-metadata) | Number of packets generated indicating to disable forward metadata |
+| [`sent-flow-move`](#show-stats-packet-processing-action-success-metadata-sent-flow-move) | Number of Flow Move packets sent |
+| [`sent-flow-move-acknowledgement`](#show-stats-packet-processing-action-success-metadata-sent-flow-move-acknowledgement) | Number of Flow Move acknowledgement packets sent |
 | [`updated`](#show-stats-packet-processing-action-success-metadata-updated) | Reverse metadata in packet updated successfully |
 
 ## `show stats packet-processing action success metadata add-false-positive-correction`
@@ -60657,6 +60688,209 @@ show stats process queue depth [process-name <process-name>] [queue-name <queue-
 | command | description |
 | ------- | ----------- |
 | [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+
+## `show stats queue`
+
+Metrics tracking the TANK queue production and consumption
+
+#### Usage
+
+```
+show stats queue [topic <topic>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| topic | The represented TANK topic (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`consumed`](#show-stats-queue-consumed) | Metrics describing topic consumption within the TANK queue |
+| [`produced`](#show-stats-queue-produced) | Metrics describing topic production within the TANK queue |
+
+## `show stats queue consumed`
+
+Metrics describing topic consumption within the TANK queue
+
+#### Usage
+
+```
+show stats queue consumed [topic <topic>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| topic | The represented TANK topic (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`bytes`](#show-stats-queue-consumed-bytes) | Bytes consumed from the TANK topic (bytes) |
+| [`messages`](#show-stats-queue-consumed-messages) | Messages consumed from the TANK topic (messages) |
+
+## `show stats queue consumed bytes`
+
+Bytes consumed from the TANK topic (bytes)
+
+#### Usage
+
+```
+show stats queue consumed bytes [topic <topic>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| topic | The represented TANK topic (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats queue consumed messages`
+
+Messages consumed from the TANK topic (messages)
+
+#### Usage
+
+```
+show stats queue consumed messages [topic <topic>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| topic | The represented TANK topic (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats queue produced`
+
+Metrics describing topic production within the TANK queue
+
+#### Usage
+
+```
+show stats queue produced [topic <topic>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| topic | The represented TANK topic (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`bytes`](#show-stats-queue-produced-bytes) | Bytes produced for the TANK topic (bytes) |
+| [`messages`](#show-stats-queue-produced-messages) | Messages produced for the TANK topic (messages) |
+
+## `show stats queue produced bytes`
+
+Bytes produced for the TANK topic (bytes)
+
+#### Usage
+
+```
+show stats queue produced bytes [topic <topic>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| topic | The represented TANK topic (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats queue produced messages`
+
+Messages produced for the TANK topic (messages)
+
+#### Usage
+
+```
+show stats queue produced messages [topic <topic>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| topic | The represented TANK topic (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats redis-server-manager`
 
