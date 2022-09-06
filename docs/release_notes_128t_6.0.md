@@ -64,7 +64,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Caveats
 
-- **I95-46126 Router Status:** In some rare configurations of High Availability where a router is connected to HA Conductor 1, but not directly connected to HA Conductor 2, alarms generated on the router will not be seen on Conductor 2 - the conductor to which the router is not directly connected. To see alarms on a router, the Conductor must be directly connected to the Router. 
+- **I95-46126 Router Status:** In HA configurations where a router is connected to HA Conductor 1, but not directly connected to HA Conductor 2, alarms generated on the router will not be seen on Conductor 2 - the conductor to which the router is not directly connected. To see alarms on a router, the Conductor must be directly connected to the Router. 
 
 ## Release 6.0.2-8
 
