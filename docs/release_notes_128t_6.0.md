@@ -30,7 +30,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### New Features
 
-
 - **I95-35571 Enhanced Syslog:** Beginning with Version 6.0.4, the SSR can be configured to send system generated events over a secure TLS or TCP connection to a remote-logging server for analysis and storage. For more information, see [Secure Syslog Transport](config_audit_event.md#secure-syslog-transport)
 ------ 
 - **I95-44533 Intrusion Detection and Prevention:** Using the Juniper IDP Signature Database, IDP is now available on the SSR and on Mist-managed devices. For detailed information, see [Intrusion Detection and Prevention](concepts_ssr_idp.md)
@@ -62,6 +61,10 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-47537/I95-47556 Synchronize writing to files to avoid a race condition:** Added a common file lock to synchronize writes.
 ------
 - **I95-47655 BGP issues with VRRP:** VRRP failover may cause routing to not function if internal device numbering is not consistent across the redundant nodes.
+
+### Caveats
+
+- **I95-46126 Router Status:** In some rare configurations of High Availability where a router is connected to HA Conductor 1, but not directly connected to HA Conductor 2, alarms generated on the router will not be seen on Conductor 2 - the conductor to which the router is not directly connected. To see alarms on a router, the Conductor must be directly connected to the Router. 
 
 ## Release 6.0.2-8
 
