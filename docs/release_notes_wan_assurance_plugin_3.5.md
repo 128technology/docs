@@ -3,6 +3,15 @@ title: WAN Assurance Plugin 3.5 Release Notes
 sidebar_label: '3.5'
 ---
 
+## Release 3.5.2
+**Release Date:** Sep 06, 2022
+
+### Resolved Issues
+
+- **WAN-1238 Report missing FPM metrics:**
+
+  _**Resolution:**_ Update the mist-agent telemetry configuration to not filter FPM metrics so they can be reported to the cloud.
+
 ## Release 3.5.1
 **Release Date:** Aug 03, 2022
 
