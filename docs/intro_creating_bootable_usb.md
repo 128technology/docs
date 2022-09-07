@@ -5,75 +5,34 @@ sidebar_label: Creating Bootable USB
 
 ## Introduction
 
-Juniper Networks distributes the SSR software as a set of applications or an ISO. The ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as an SSR system. The goal of this guide is produce a bootable USB drive from an SSR ISO.
+Juniper Networks distributes the SSR software in a number of forms for different environments. Of those asset types, the ISO is most commonly used to stage a system that does not have an operating system, or if the system is being repurposed as an SSR system. The goal of this guide is produce a bootable USB drive from an SSR ISO.
 
-## Bootable USB
-
-For small deployments or a proof of concept, each ISO image can be loaded on to a bootable USB to install the operating system and SSR software. After you have created the bootable ISO, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md). 
+For small deployments or a proof of concept, each ISO image can be loaded on to a bootable USB to install the operating system and SSR software.
 
 ### Creating a Bootable ISO: Linux and MacOS
 
-Creating a bootable ISO from Linux or the MacOS is straightforward. You must have administrative privileges to the system.
+Creating a bootable ISO from Linux, Windows or MacOS is straightforward. The best way to get started is with a tool that makes creating bootable USBs easy for any platform. 
 
-1. Download the ISO for the software version to be loaded onto the USB. Use the [download instructions](intro_downloading_iso.md). 
+1. [Download and install Etcher](https://www.balena.io/etcher/) for your platform.
 
-2. Locate the USB volume name of the target drive (in this example, “disk2s1”) with the `diskutil` command.
+2. Download the SSR ISO for the software version to be loaded onto the USB. Use the [download instructions](intro_downloading_iso.md). 
 
-```
-diskutil list
-```
+3. Launch Etcher. Select the ISO as the source from step 2
+![Select ISO](/img/usb_select_iso.png)
 
-3. Use the command below to copy the ISO image onto the USB. 
+4. Select the target USB device attached to the system.
+![Select Target](/img/usb_select_target.png)
 
-```
-sudo diskutil unmount /dev/disk2s1
-sudo dd if=~/128T-<VERSION>.el7.x86_64.iso of=/dev/rdisk2 bs=16384 status=progress
-diskutil eject /dev/disk2s1
-```
-Where `<VERSION>` is replaced with the SSR version you are interested in.
+5. Click Flash! to get started
+![Click Flash!](/img/usb_select_flash.png)
 
-### Creating a Bootable ISO: Windows
+6. Wait for the USB to be flashed with the image
+![Waiting](/img/usb_flashing.png)
 
-Before beginning, install the Rufus software https://rufus.akeo.ie/downloads/ on your Windows system. [^1]
+7. Once the image has been flashed, the contents will be validated against the source
+![Validating](/img/usb_validating.png)
 
-### Procedure
-1. Launch Rufus.
-2. Select the USB Device.
-3. Select **MBR partition scheme for BIOS or UEFI**.
-4. Select the SSR ISO.
-5. Click **Start**.
-6. Select **Write in ISO image mode**.
-7. Click **OK**.
+8. Once validated, eject the USB drive.
+![Complete](/img/usb_complete.png)
 
-:::note
-The 128 Technology ISOs are desiged to be installed on both BIOS and uEFI partitions, however hardware support varies. Please check your hardware configuration requirements before specifying one or the other during install. 
-:::
-
-## Creating a CDROM/DVD
-
-For systems with an onboard optical drive, it may be preferable to write the ISO to a CD, DVD, or BlueRay disk. There are many tools available on the major platforms to write ISOs to optical discs, such as K3b, Disco, etc. Those procedures are not addressed here. 
-
-## Disk Cloning
-
-Multiple installations can be performed quickly and efficiently using Disk Cloning. After the initial ISO installation and power off, the platform is generic and can be cloned to a bootable USB to create a copy of that platform. 
-:::note
-When using cloned images, an identical hardware platform must be used. Create a new image for each hardware variation.
-:::
-The cloned platform disk is then used to install the filesystem and SSR software on any number of other identical hardware platforms. 
-
-The high level steps are as follows:
-
-- The platform is installed using an ISO image which powers down on success.
-- Use Clonezilla or other Live USB to copy the platform on to bootable media.
-- Distribute the cloned disk using USB, multicast, or other technique.
-
-Refer to [Installing from an ISO](intro_otp_iso_install.mdx) for installation information.
-
-## Further Resources
-
-Additional information on Bootable USB creation tools can be found here:
-
-https://www.pcsteps.com/1461-create-linux-installation-usb-dvd/
-
-[^1]: tested with version 2.18.1213
-
+9. After you have created the bootable ISO, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md). 
