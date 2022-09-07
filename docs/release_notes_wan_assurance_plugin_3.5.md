@@ -4,7 +4,7 @@ sidebar_label: '3.5'
 ---
 
 ## Release 3.5.2
-**Release Date:** Aug 24, 2022
+**Release Date:** Sep 06, 2022
 
 ### Resolved Issues
 
