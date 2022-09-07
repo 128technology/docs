@@ -17,19 +17,19 @@ Creating a bootable ISO from Linux, Windows or MacOS is straightforward. The bes
 
 2. Download the SSR ISO for the software version to be loaded onto the USB. Use the [download instructions](intro_downloading_iso.md). 
 
-3. Launch Etcher. Select the ISO as the source from step 2
+3. Launch Etcher. Select the ISO as the source from step 2.
 ![Select ISO](/img/usb_select_iso.png)
 
 4. Select the target USB device attached to the system.
 ![Select Target](/img/usb_select_target.png)
 
-5. Click Flash! to get started
+5. Click Flash! to get started.
 ![Click Flash!](/img/usb_select_flash.png)
 
-6. Wait for the USB to be flashed with the image
+6. Wait for the USB to be flashed with the image.
 ![Waiting](/img/usb_flashing.png)
 
-7. Once the image has been flashed, the contents will be validated against the source
+7. Once the image has been flashed, the contents will be validated against the source.
 ![Validating](/img/usb_validating.png)
 
 8. Once validated, eject the USB drive.

@@ -5,7 +5,7 @@ sidebar_label: Downloading ISOs
 
 ## Introduction
 
-With your purchase of a SSR license, you will have obtained a set of credentials used to access the Session Smart Routing software. These credentials, in the form of a username and password will be used to access the software assets.
+With your purchase of a SSR license, you are provided a set of credentials used to access the Session Smart Routing software. These credentials, in the form of a username and password are used to access the software assets.
 
 Juniper Session Smart Networking provides the following workflows for the installation process:
 
