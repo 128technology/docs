@@ -1,9 +1,9 @@
 ---
-title: Conductor Managed WAN Assurance
-sidebar_label: Conductor Managed WAN Assurance
+title: WAN Assurance Telemetry
+sidebar_label: WAN Assurance Telemetry
 ---
 
-SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. However, for software versions prior to SSR Version 6.0, router adoption relies on an on-premise conductor to assist in the onboarding. This document explains the process of enabling WAN Assurance telemetry and ZTP for conductor-based deployments. This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
+SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. However, for software versions prior to SSR Version 6.0, router adoption relies on an on-premise conductor to assist in the onboarding and management. This document explains the process of enabling WAN Assurance telemetry and zero-touch provisioning (ZTP) for conductor-based deployments. This procedure assumes you **do not** already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
 
 :::important
 Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR and Mist.
@@ -104,11 +104,11 @@ Committing the registration code enables WAN Assurance on all connected routers.
 
 7. Commit the registration code to the configuration.
 
-### Onboarding Routers
+### Onboard Routers
 
 Once a valid registration code is committed, registration is automatic. The conductor sends instructions to all connected routers to self-onboard to the Mist cloud. The process is automated and the routers do not require any user interaction.
 
-### Skipping Specific Routers
+#### Skipping Specific Routers
 
 A router or routers can be skipped during the Mist onboarding process. Change *authority > router > mist-wan-assurance > enabled* to `false`. The Conductor will skip the router and associated nodes (if it is an HA router).
 
@@ -118,7 +118,7 @@ For a system that has completed the onboarding process, setting `mist-wan-assura
 Disabling WAN Assurance does not automatically release the router from the cloud. See Releasing a Router for more information.
 :::
 
-### Site Assignment (Mist)
+## Site Assignment
 
 Once the SSR portion of the onboarding process is complete, each router is displayed on the Mist inventory page under **Organization > Inventory**. Select Gateways on the top of the page to see a list of the routers and status. The router is listed as Unassigned, and must be assigned to the appropriate site.
 

@@ -68,6 +68,10 @@ module.exports = {
     "WAN Assurance": [
       "wan_overview",
       "wan_edge_provisioning",
+      "wan_onboarding_ssrdevice",
+      "wan_staging",
+      "wan_onboarding_whitebox",
+      "wan_site_assignment",
     ],
     "WAN Assurance Quick Start": [
       {
@@ -94,13 +98,11 @@ module.exports = {
       },
     ],
     "WAN Assurance Telemetry": [
-      "wan_overview",
-      "wan_edge_provisioning",
-      "wan_onboarding_ssrdevice",
-      "wan_staging",
-      "wan_onboarding_whitebox",
-      "wan_site_assignment",
-      "config_wan_assurance",
+      "wan_telemetry_overview",
+      "wan_telemetry_enable",
+      "wan_telemetry_site_assign",
+      "wan_telemetry_features",
+      "wan_telemetry_troubleshooting",
     ],
     "Administration": [
       {
@@ -136,7 +138,6 @@ module.exports = {
           "config_static_hostname_mapping",
           "config_tenants",
           "config_transport_encryption",
-          "config_wan_assurance",
         ],
       },
       {
