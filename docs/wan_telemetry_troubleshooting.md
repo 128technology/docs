@@ -6,6 +6,7 @@ sidebar_label: Troubleshooting
 Use the following information to help identify or resolve issues configuring WAN Assurance on an SSR.
 
 ### Show Command
+
 The `show plugins state` command displays extensive information about the state of the plugin. Use the following command as a starting point for any troubleshooting.
 
 `show plugins state router <router name> summary 128T-mist-wan-assurance`
@@ -31,6 +32,44 @@ admin@node1.office#
 For additional troubleshooting information use the `detail` commands as shown below
 
 `show plugins state router <router name> detail 128T-mist-wan-assurance`
+
+### SSR Connection Status
+
+The status of the SSR connection to the MIST cloud and other details can be found on the GUI and PCLI.
+
+#### On the Conductor UI
+
+* Navigate to Plugins > MIST WAN ASSURANCE > Details.
+
+ ![Plugins Context Menu](/img/wana_plugin_detail.png)
+
+* Select the router from the `Router Context` menu.
+
+ ![Plugins Context Menu](/img/wana_plugin_context.png)
+
+* The summary output is displayed by default and contains useful information about the device connection to the MIST cloud.
+
+ ![Plugins Context Menu](/img/wana_plugin_state.png)
+
+#### On the Conductor PCLI
+
+* The `show mist` command can be used to display the summary and detail information about the SSR's connection to the MIST cloud.
+
+```console
+admin@node1.conductor1# show mist router 128t-east
+Wed 2022-07-20 05:33:05 UTC
+✔ Retrieving mist state...
+Target: node1.128t-east
+
+========== ============ ============= ================= ============================= =================== ============
+ Agent      Connection   128T          128T-mist-agent   Platform                      Device-ID           Interfaces
+========== ============ ============= ================= ============================= =================== ============
+ assigned   up           5.6.1-9.el7   4.0.3330-1.el7    OpenStack Foundation - Nova   02-00-01-c9-90-16            6
+
+Retrieved mist state.
+Completed in 1.06 seconds
+admin@node1.conductor1#
+```
 
 ### Moving a Router
 

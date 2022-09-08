@@ -15,11 +15,11 @@ In the Mist Inventory panel the new router shows as "Unassigned".
 	
 	![Assign to Site](/img/wan_site_assign2.png)
 
-3. Select the site from from the **Site** list. If you are onboarding a **conductor-managed device, do not select Manage Configuration from Mist** under Manage Configuration. This allows the device to reach out to the conductor IP address specified when the site was created to receive configuration information.
+3. Select the site from from the **Site** list. 
 
 	![Site List](/img/wan_site_assign3_nomist.png)
 
-4. If you are onboarding a **Mist-managed device** (using SSR 6.0 software) select **Manage Configuration from Mist** under Manage Configuration. If this is not selected, the router will not be managed by Mist. 
+4. Select **Manage Configuration from Mist** under Manage Configuration. If this is not selected, the router will not be managed by Mist. 
 
 	![Managed by Mist](/img/wan_site_assign4.png)
 

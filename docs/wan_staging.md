@@ -17,7 +17,7 @@ The installation consists of the following steps:
 	- OR
 - [Adopt the device using the PCLI](wan_onboarding_whitebox.md#adopt-the-router-from-the-ssr-pcli)
 
-For conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. To onboard a conductor-managed deployment, see [Configuring Conductor-Managed WAN Assurance](config_wan_assurance.md).
+For conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. To onboard a conductor-managed deployment, see [WAN Assurance Telemetry Overview](wan_telemetry_overview.md).
 
 ## Staging
 

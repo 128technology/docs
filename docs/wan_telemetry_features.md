@@ -1,6 +1,6 @@
 ---
 title: WAN Assurance Features
-sidebar_label: WAN Assurance Features
+sidebar_label: Features
 ---
 
 The following are some of the features available with WAN Assurance Telemetry.
@@ -11,15 +11,14 @@ The SSR can be configured to receive LLDP packets from LAN interfaces. This info
 
 `configure authority router <router> node <node> device-interface <lan-intf> lldp mode receive-only`
 
-### Gateway Insights
+### WAN Edge Insights
 
-Once onboarding is complete, the router begins streaming telemetry data. Data appears on the Mist portal after approximately 15 minutes. The Gateway Insights page provides a good starting point for viewing the analytics being streamed to the cloud.
+Once onboarding is complete, the router begins streaming telemetry data. Data appears on the Mist portal after approximately 15 minutes. The WAN Edge Insights page provides a good starting point for viewing the analytics being streamed to the cloud.
 
-1. Select Gateways from the left side menu.
-2. On the Gateways page, select a site from the drop down.
-3. Select a router from the list.
-4. In the Properties pane, select the link to Gateway Insights.
-
+1. Select WAN Edges from the sidebar.
+2. From the Site dropdown, choose the site where the SSR is assigned.
+3. Select the SSR from the list.
+4. In the Properties pane, select the link to WAN Edge Insights.
 
 ### Application Insights & SLE
 
