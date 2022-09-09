@@ -7,6 +7,18 @@ sidebar_label: '3.1'
 **Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 :::
 
+## Release 3.1.5
+
+### Resolved Issues
+
+- **IN-491 Installer Repo uses HTTP instead of HTTPS:** Installer repo now defaults to HTTPS. 
+------
+- **IN-502 Improve error message for package-based install attempt on an image-based install:** The package-based installation process will not attempt to install on an image-based install, and provides relevant messaging. 
+------
+- **IN-503 Help prevent a DNF crash that can occur under poor network conditions:** Installer and download operations will now provide useful error feedback when poor network conditions are encountered, and operations will halt.
+------
+- **IN-505 Installer does not attempt to use subsequent configured repositories:** When multiple conductor-hosted repositories are used (`prefer-conductor` or `conductor-only` configuration) with an HA conductor, package availability is checked on both Conductors instead of just one.
+
 ## Release 3.1.4
 
 ### Resolved Issues
