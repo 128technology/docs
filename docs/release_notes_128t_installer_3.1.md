@@ -17,7 +17,7 @@ sidebar_label: '3.1'
 ------
 - **IN-503 Help prevent a DNF crash that can occur under poor network conditions:** Installer and download operations will now provide useful error feedback when poor network conditions are encountered, and operations will halt.
 ------
-- **IN-505 The `check_url` plugin only checks first `baseurl` location:** When multiple conductor-hosted repositories are used (`prefer-conductor` or `conductor-only` configuration) with an HA conductor, package availability is checked on both Conductors instead of just one.
+- **IN-505 Installer does not attempt to use subsequent configured repositories:** When multiple conductor-hosted repositories are used (`prefer-conductor` or `conductor-only` configuration) with an HA conductor, package availability is checked on both Conductors instead of just one.
 
 ## Release 3.1.4
 
