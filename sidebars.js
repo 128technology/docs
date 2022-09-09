@@ -44,6 +44,7 @@ module.exports = {
     ],
     "Supporting Install Information - Appendix": [
       "intro_installation_installer",
+      "install_qcow2_deployment",
       "legacy_OTP_install",
     ],
     "Concepts": [
