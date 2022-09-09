@@ -191,7 +191,7 @@ Copy the content of the client certificate into the configuration.
 ```
     admin@test1.Fabric128 (client-certificate[name=ABC])# show
         name     ABC
-        content  (text/plain). <---- contents of the client certificate.
+        content  (text/plain) <---- contents of the client certificate.
 ```
 See [Adding a Trusted Certificate](howto_trusted_ca_certificate.md) for more information.
 
@@ -204,7 +204,7 @@ To provide secure transport for the system generated events, the SSR can be conf
         severity        info
         facility        any
         protocol        tls
-        client-certificate-name  ABC. <-- client certificate already configured under authority/client-certificate
+        client-certificate-name  ABC <-- client certificate already configured under authority/client-certificate
 
         server          172.18.2.183 514
             ip-address  172.18.2.183
@@ -217,7 +217,7 @@ To provide secure transport for the system generated events, the SSR can be conf
 Configure the SSR to use TCP for transport to syslog server.
 
 :::important
-Although using TCP guarantees events are transmitted to the destination syslog server, it is not considered secure because the syslog server is clear text.
+Although using TCP guarantees events are transmitted to the destination syslog server, it is not considered secure because TCP without TLS transmits data in clear text.
 :::
 
 ```
