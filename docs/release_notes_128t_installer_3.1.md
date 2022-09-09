@@ -11,9 +11,9 @@ sidebar_label: '3.1'
 
 ### Resolved Issues
 
-- **IN-491 Installer Repo uses HTTP instead of HTTPS:** Installer repo now defaults to HTTPS. To install the new repo manually, run yum install https://yum.128technology.com/installer/repo.rpm.
+- **IN-491 Installer Repo uses HTTP instead of HTTPS:** Installer repo now defaults to HTTPS. 
 ------
-- **IN-502 Improve error message for package-based install attempt over image-based install:** The package-based installation process will not attempt over an image-based install, and provides relevant messaging. 
+- **IN-502 Improve error message for package-based install attempt on an image-based install:** The package-based installation process will not attempt to install on an image-based install, and provides relevant messaging. 
 ------
 - **IN-503 Help prevent a DNF crash that can occur under poor network conditions:** Installer and download operations will now provide useful error feedback when poor network conditions are encountered, and operations will halt.
 ------
