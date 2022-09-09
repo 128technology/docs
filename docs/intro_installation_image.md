@@ -22,7 +22,8 @@ The Image-based install consists of the following steps:
 
 The image-based ISO's are available to download at the following location:
 
-`https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/<Major>.<Minor>/`. 
+<!-- markdown-link-check-disable-next-line -->
+https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/
 
 Files available for download are:
 
@@ -31,7 +32,7 @@ Files available for download are:
 - `*.tar` - This file is used by Mist or the SSR conductor for image-based upgrades, and is accessed directly by the system during the upgrade. User download is not necessary or advised.
 - `*.ztp.raw.gz` - This file is used by manufacturing, and is not applicable for customer use. 
 
-You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page. For the detailed download process, see [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso). 
+You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page.
 
 ### Create a Bootable USB
 
