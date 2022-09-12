@@ -24,9 +24,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
-## Release 6.0.4-10
+## Release 6.0.4-11
 
-**Release Date:** September 9, 2022
+**Release Date:** September 12, 2022
 
 ### New Features
 
@@ -65,10 +65,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ### Caveats
 
 - **I95-46126 Router Status:** In HA configurations where a router is connected to HA Conductor 1, but not directly connected to HA Conductor 2, alarms generated on the router will not be seen on Conductor 2 - the conductor to which the router is not directly connected. To see alarms on a router, the Conductor must be directly connected to the Router. 
-------
-- **I95-47309 IDP `tenant-prefix` warning persists after IDP has started:** A validation warning is generated/displayed stating IDP is not enabled on a tenant. This message appears in error; IDP will be enabled.
-------
-- **I95-47871 Stale IDP Engine Policy Message:** In situations where a config change modifies an idp-policy, an “IDP policy compiling, waiting to finish” message appears in `show idp application status`. This message persists after the config change is finished and does not clear. This message has no impact on IDP operation and can be ignored. 
 
 ## Release 6.0.2-8
 
