@@ -44,13 +44,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-46281 Update Kernel to RHCK 8.6:** Updated the kernel to integrate the latest security fixes.
 ------
-- **I95-46662 Tenant prefix differences on two HA router nodes not validating correctly:** Added a validation check to ensure that the tenant-prefixes between two redundant interfaces are identical.
+- **I95-46662 Tenant prefix differences on two HA router nodes are not validating correctly:** Added a validation check to ensure that the tenant-prefixes between two redundant interfaces are identical.
 ------
 - **I95-46918 GUI and PCLI out of sync when new configuration elements added/modified:** Resolved an issue where `show network-interface` and `show config` were not updating properly.
 ------
 - **I95-46919 LDAP Users Not Shown in GUI Users Display:** Updated username requirements and the ability to identify issues with usernames not meeting those requirements. See [Username and Password Policies](config_password_policies.md) for username requirements.
 ------
-- **I95-46921 Status error on fresh install:** Removed unnecessary listening check on port 830.
+- **I95-46921 `128status.sh` script incorrectly checks for non-existent listening port:** Removed port 830 check for software versions 5.3.0 and greater
 ------
 - **I95-47551 Keep-alives are not generated for unidirectional outbound-only sessions:** Resolved an issue with keep-alive generation for unidirectional outbound-only sessions.
 ------
