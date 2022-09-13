@@ -1,12 +1,15 @@
 ---
-title: Password Policies
-sidebar_label: Password Policies
+title: Username and Password Policies
+sidebar_label: Username and Password Policies
 ---
 
 | Release | Modification |
 | ------- | ------------ |
 | 5.6.0   | Feature introduced |
 | 6.0.1   | Added Max failed login attempts and User lock time. |
+| 6.0.4   | Added Username requirements. |
+
+### Password Requirements
 
 The SSR password policies have been updated to provide a more secure experience. When creating passwords and password policies for users, the following parameters are enforced.
 
@@ -21,3 +24,15 @@ The SSR password policies have been updated to provide a more secure experience.
 9. The default admin password **must** be changed to strong password on first use.
 10. The maximum failed login attempts are configurable, with a default of 6.
 11. User lock time (time the user must wait before attempting login after reaching the max failed attempts) is configurable. The default is 1800 seconds.
+
+### Username Requirements
+
+1. Usernames may contain only lower and upper case letters, digits, underscores `_`, or dashes `-`. 
+2. They can end with a dollar sign `$`. 
+3. Dashes `-` are not allowed at the beginning of the username. 
+4. Fully numeric usernames and usernames beginning with `.` are not recommended. 
+5. Usernames may only be up to 32 characters long.
+
+:::important
+After upgrading to a release with new username pattern support, users can add a username using the above requirements. However, after rolling back a node to the previous release, the username delete will fail because the old user data model does not support the new format. Usernames that do not support the **old** username pattern should be deleted before rolling back nodes. If they are not, those users cannot be deleted after the rollback.
+:::

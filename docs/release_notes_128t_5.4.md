@@ -279,14 +279,6 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-44224 Autocomplete for Resource Groups:** Autocomplete has been added to the pcli when configuring resource groups. 
 
-:::info
-When installing 5.4.4, the following can be seen in the installation logs:
-
-`depmod: WARNING: /lib/modules/4.18.0-305.19.1.el8_4.x86_64/kernel/drivers/infiniband/hw/i40iw/i40iw.ko.xz needs unknown symbol i40e_unregister_client `
-
-This is a warning for a driver that is not used or supported in the SSR software, and can safely be ignored.
-:::
-
 ### Resolved Issues
 
 - **The following CVE issues have been addressed and resolved with this release:**
