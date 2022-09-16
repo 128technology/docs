@@ -3,9 +3,7 @@ title: Create a Site
 sidebar_label: Create a Site
 ---
 
-- Create an account on the Mist portal
-- Add your Organization
-- Create a Site
+Use the following steps to create your account, organization, and site on the Mist Portal.
 
 ## Create an Account
 
@@ -43,9 +41,9 @@ For detailed information about the fields used to create a site, please refer to
 
 ### Conductor IP Address
 
-Configure the IP address of the conductor as part of the site creation. Use the following procedure to retrieve and assign the conductor IP address to the Mist site. 
+It is a best practice to configure the IP address of the conductor as part of the site creation. Use the following procedure to retrieve the conductor IP address from the SSR GUI, and assign it to the site in Mist. 
 
-1.  On the Configuration Home panel in the SSR GUI, click the Authority button. 
+1.  On the Configuration Home panel **in the SSR GUI**, click the Authority button. 
 
     ![Authority Home](/img/wanas_conductor_ip1.png)
 
@@ -53,11 +51,7 @@ Configure the IP address of the conductor as part of the site creation. Use the 
 
     ![Conductor Address](/img/wanas_conductor_ip.png)
 
-3. Return to the Mist Site Configuration, and scroll down to the Session Smart Conductor field and add the Conductor IP address.
+3. Return to the Mist GUI, under Site Configuration, and scroll down to the **Session Smart Conductor** field and add the Conductor IP address.
 
     ![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
-
-
-:::
-
 

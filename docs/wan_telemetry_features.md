@@ -5,12 +5,6 @@ sidebar_label: Features
 
 The following are some of the features available with WAN Assurance Telemetry.
 
-### Topology Mapping
-
-The SSR can be configured to receive LLDP packets from LAN interfaces. This information is useful for creating a local site level topology view. Use the following code example to enable the LLDP receive mode on LAN interfaces.
-
-`configure authority router <router> node <node> device-interface <lan-intf> lldp mode receive-only`
-
 ### WAN Edge Insights
 
 Once onboarding is complete, the router begins streaming telemetry data. Data appears on the Mist portal after approximately 15 minutes. The WAN Edge Insights page provides a good starting point for viewing the analytics being streamed to the cloud.
@@ -20,9 +14,15 @@ Once onboarding is complete, the router begins streaming telemetry data. Data ap
 3. Select the SSR from the list.
 4. In the Properties pane, select the link to WAN Edge Insights.
 
+### Topology Mapping
+
+The SSR can be configured to receive LLDP packets from LAN interfaces. This information is useful for creating a local site level topology view. Use the following code example to enable the LLDP receive mode on LAN interfaces.
+
+`configure authority router <router> node <node> device-interface <lan-intf> lldp mode receive-only`
+
 ### Application Insights & SLE
 
-To provide insights into the application, services, and some SLE functionality, enable `session-record`. It is recommended to enable session records for all the SSR services to provide a broad look at the application use.
+To provide insights into the application, services, and some SLE functionality, enable `session-record` on the SSR. It is recommended to enable session records for all the SSR services to provide a broad look at the application use.
 ```
 1    authority
 2        service             internet

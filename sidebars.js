@@ -99,7 +99,10 @@ module.exports = {
     ],
     "WAN Assurance Telemetry": [
       "wan_telemetry_overview",
-      "wan_telemetry_enable",
+      "wan_telemetry_create_site",
+      "wan_telemetry_provisioning",
+      "wan_telemetry_template",
+      "wan_telemetry_register",
       "wan_telemetry_site_assign",
       "wan_telemetry_features",
       "wan_telemetry_troubleshooting",
