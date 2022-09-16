@@ -53,7 +53,7 @@ Next, associate your LAN network segment with the appropriate port on the device
 
 ## Policy
 
-Your template has WANs and LANs; now you need to tell the device how to use them to connect users to applications. This is done using Traffic Steering and Access Policies.
+Your template has WANs and LANs; now you need to tell the device how to use them to connect users to applications. This is done using Traffic Steering and Application Policies.
 
 ### Steering Policy
 
@@ -66,13 +66,13 @@ Your template has WANs and LANs; now you need to tell the device how to use them
 5. **Click the check** in the upper right of the Add Path box, and then click **`Add`** at the bottom of the **Add Traffic Steering** side panel.
 
 
-### Access Policy
+### Application Policy
 
-Finally, tie your networks and applications together in an access policy.
+Finally, tie your networks and applications together in an application policy.
 
 ![Add access](/img/intro_wa_quickstart_12.gif)
 
-1. Scroll to the Access Policy section of the template, and select **Add Policy**.
+1. Scroll to the Application Policy section of the template, and select **Add Policy**.
 2. Enter a string in the name column, and **click the check** to the right of your entry.
 3. From the **Network** column dropdown, select your LAN network.
 4. From the **Applications** column dropdown, select your Internet app.

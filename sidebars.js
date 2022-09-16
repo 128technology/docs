@@ -44,6 +44,7 @@ module.exports = {
     ],
     "Supporting Install Information - Appendix": [
       "intro_installation_installer",
+      "install_qcow2_deployment",
       "legacy_OTP_install",
     ],
     "Concepts": [
@@ -163,7 +164,6 @@ module.exports = {
           "config_non_forwarding_ha_interfaces",
           "config_adding_interfaces_to_ha_team",
           "config_transition_standalone_to_ha",
-          "config_step_ha",
         ],
       },
       {
@@ -188,6 +188,15 @@ module.exports = {
         "label": "Security",
         "items": [
           "sec_adaptive_encrypt",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Intrusion Detection and Prevention",
+        "items": [
+          "concepts_ssr_idp",
+          "config_idp",
+          "ts_idp",
         ],
       },
       {
