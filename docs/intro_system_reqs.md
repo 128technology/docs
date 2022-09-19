@@ -12,6 +12,10 @@ Larger hard drives may be required if you intended to support an increased volum
 :::
 
 :::important
+While the SSR uses a journaled filesystem to limit the risk of data corruption during a power failure, the use of an uninterrupted power supply (UPS) is recommended whenever practical.
+:::
+
+:::important
 When run as a virtual machine, CPU cores must be dedicated to the SSR router using core affinity.
 :::
 
