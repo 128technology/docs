@@ -1,7 +1,7 @@
 ---
 title: Product Software Lifecycle Support Policy
 sidebar_label: Software Support Policy
-description: "This document defines the product lifecycle support policy for Juniper Networks, Inc.'s SSN software products.  The policy includes both software maintenance, software support, and end-of-life."
+description: "This document defines the product lifecycle support policy for Juniper Networks, Inc.'s SSN software products. The policy includes software maintenance, software support, and end-of-life."
 ---
 
 ## Overview and Definitions
@@ -35,6 +35,7 @@ This lifecycle support policy covers the lifecycle, milestones, maintenance, and
 End-of-Life milestone deadlines for Releases are not triggered by an EOLN. Instead, a product-specific Process Support Notification posted on [Juniper’s public website](about_releases.mdx) at or before general availability of the first Release under the applicable software Version will specify rules for Release EOSE and Release EOS. Juniper may modify those rules from time to time by posting on its public website. 
 
 End-of-Life milestones for Releases under one Version do not affect support commitments relating to Releases for other Versions.
+
 * **Typical Timing of Release EOSE:** EOSE for Releases under a particular Version shall be at least nine (9) months after first general availability of the initial Release under that Version.
 
 * Notwithstanding the minimum timing of Release EOSE, Software Engineering (“Maintenance") services will be provided for at least the two (2) most recent Software Versions. The N-1 Version and its Releases reaches the EOSE date upon the GA of a new Version.
@@ -49,14 +50,14 @@ If the _current_ GA version of software is 5.2.3, then 5.2.X and 5.1.X are suppo
 
 * **Effect of Release EOS:** After Release EOS Juniper is not under obligation to perform support services of any kind for any Releases under the applicable Version. Juniper is not under any obligation to keep any such Releases available for download after Release EOS.
 
-## CVEs
-
-Juniper Networks is committed to providing the highest quality software with each release. In addition to creating new features and functions for the Session Smart Networking Platform, Critical Vulnerability Exposures (CVE) are continuously evaluated and addressed in accordance with our [security policy](about_security_policy.md). In many cases, CVEs exist in the operating system's libraries, binaries, and kernel. Addressing these vulnerabilities requires upgrading direct or indirect dependences of the SSN products from upstream repositories.  In some cases, this requires upgrading the kernel or even the version of OS distribution, which no longer qualifies as a patch and necessitates an increment to a minor or major version of software.
-
-### End-of-life products
+## End-of-Life Products
 
 When a software product approaches End of Life (EOL), it is the policy of Juniper Networks to communicate these important milestones to our customers. It is our intent to help customers understand the impact of the product end of life, to understand the associated timelines, and help manage the product transition.
 
-This communication is handled on a product-by-product basis via an End of Life Notification (EOLN), which is a specific type of Product Support Notification (PSN). EOLN’s are posted at Juniper’s public website. (As of the date of this policy document, the site is located at https://www.juniper.net/support/eol/, where this policy is also posted). 
+This communication is handled on a product-by-product basis via an End of Life Notification (EOLN), which is a specific type of Product Support Notification (PSN). EOL dates for the SSR are posted on the [Session Smart Router Dates & Milestones](https://support.juniper.net/support/eol/software/ssr/) page on the Juniper website.
 
-The EOLN includes the critical milestone dates that occur in the typical product end of life process. The EOLN may also contain other key information pertaining to Juniper Networks hardware and software products, such as recommended replacement product(s). Rules and milestone dates specified in the EOLN for a particular product may vary from the guidelines stated below. Variance from the guidelines may occur in a variety of cases, including among others, when a product joins the Juniper portfolio as part of an acquisition, where the acquired company has a materially different end-of-life policy.
+The EOLN includes the critical milestone dates that occur in the typical product end of life process. The EOLN may also contain other key information pertaining to Juniper Networks hardware and software products, such as recommended replacement product(s). Rules and milestone dates specified in the EOLN for a particular product may vary from the guidelines stated above. Variance from the guidelines may occur in a variety of cases, including among others, when a product joins the Juniper portfolio as part of an acquisition, where the acquired company has a materially different end-of-life policy.
+
+## CVEs
+
+Juniper Networks is committed to providing the highest quality software with each release. In addition to creating new features and functions for the Session Smart Networking Platform, Critical Vulnerability Exposures (CVE) are continuously evaluated and addressed in accordance with our [security policy](about_security_policy.md). In many cases, CVEs exist in the operating system's libraries, binaries, and kernel. Addressing these vulnerabilities requires upgrading direct or indirect dependences of the SSN products from upstream repositories.  In some cases, this requires upgrading the kernel or even the version of OS distribution, which no longer qualifies as a patch and necessitates an increment to a minor or major version of software.
