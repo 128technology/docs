@@ -24,6 +24,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.5.5-2
+
+**Release Date:** September 21, 2022
+
+### Resolved Issues:
+
+- **I95-48038 nginx declares 128TWeb dead if downstream routers are offline:** Resolved an issue where proxying through the peer resulted in error code 500.
+
 ## Release 5.5.4-8
 
 **Release Date:** September 19, 2022
