@@ -15,6 +15,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 | ------------------ | --------------- | -------------------- |
 | Azure VNET         | `azure-vnet`    | 2.0.0                |
 | Azure Loadbalancer | `azure-lb`      | 2.0.0                |
+| Alicloud VPC       | `alicloud-vpc`  | 3.0.0                |
 
 
 ## Version Restrictions
@@ -89,6 +90,21 @@ The agent finds all of the route tables within the VNET using the Azure REST API
 
 :::warning
 To prevent routing loops, the solution will not update the Azure Route Tables assigned to a subnet that has an activating node's _network interface_.
+:::
+
+#### Alicloud VPC
+
+A `solution-type` of `alicloud-vpc` can be used to enable the Alicloud VPC API agent. It requires an Alicloud Route Table setup on the same VNET as the redundant interfaces. 
+
+Since the deployment of Juniper SDWAN HA requires granting RAM role permissions, you need to add a RAM username for this under your current Alicloud account and grant the following permissions. The Virtual Machines where these members are running must be granted with the RAM role with following permissions in order for the route updates to work correctly:
+
+* AliyunECSFullAccess
+* AliyunVPCFullAccess 
+
+The agent finds all of the route tables within the Alicloud VPC using the Alicloud REST APIs. When a redundant interface becomes active, the agent updates the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's redundant interface will now be inactive. There is no update to the route table needed when becoming inactive.
+
+:::warning
+To prevent routing loops, the solution will not update the Alicloud Route Tables assigned to a subnet that has an activating node's _network interface_.
 :::
 
 ## Scenarios
@@ -406,6 +422,48 @@ Example output for the `azure-lb` solution:
 Completed in 1.72 seconds
 ```
 
+Example output for the `alicloud-vpc` solution:
+```
+# show device-interface name cloud-ha
+Wed 2022-09-21 10:31:57 CST
+✔ Retrieving device interface information...
+
+======================================================
+ AlicloudSDWAN-HA-Router01:cloud-ha
+======================================================
+ Type:                host
+ Forwarding:          true
+ Mode:                host
+ MAC Address:         ca:4d:38:ac:9b:5c
+
+ Admin Status:        up
+ Operational Status:  up
+ Provisional Status:  up
+ Redundancy Status:   non-redundant
+ Speed:               1 Gb/s
+ Duplex:              full
+
+ in-octets:                  1059977756
+ in-unicast-pkts:              10915259
+ in-errors:                           0
+ out-octets:                 1053204137
+ out-unicast-pkts:             10915347
+ out-errors:                          0
+
+ Cloud HA:
+     is-active:       True
+     last-activity-change:Fri 2022-09-09 10:31:15 CST
+     first-active-interface:LAN
+     first-active-mac-address:00:16:3e:10:a9:34
+     prefixes:
+       10.0.0.0/8
+       172.16.0.0/12
+     local-status:    healthy
+     remote-status:   healthy
+
+Completed in 0.04 seconds
+```
+
 ### Systemd Services
 
 * `128T-telegraf@cloud_ha_health`: the instance of the monitoring agent that produces the health statuses
@@ -609,7 +667,7 @@ router router2
 exit
 ```
 
-### Complete Example Configuration
+### Complete Example Configuration #1 for azure-lb
 
 Below is an example of a complete, but minimal configuration entered by the user.
 
@@ -905,6 +963,136 @@ config
     exit
 exit
 ```
+
+
+### Part of Example Configuration #2 for alicloud-vpc after auto generation.
+
+Below is an example of a node and service part, it is a running configuration for user.
+
+:::warning
+This example configuration is good to understand all of the concepts but should not be used on a system as is.
+:::
+
+
+            node                                AlicloudSDWAN-HA-Router01
+                name              AlicloudSDWAN-HA-Router01
+                asset-id          iZwz96to20bbnnb
+
+                device-interface  WAN
+                    name               WAN
+                    pci-address        0000:00:04.0
+
+                    network-interface  WAN
+                        name                   WAN
+                        global-id              17
+
+                        neighborhood           ChinaUnicom
+                            name                  ChinaUnicom
+                            external-nat-address  119.23.200.200
+                            vector                wan1
+
+                            path-mtu-discovery
+                                enabled  true
+                            exit
+                        exit
+                        inter-router-security  internal
+                        dhcp                   v4
+                    exit
+                exit
+
+                device-interface  LAN
+                    name               LAN
+                    pci-address        0000:00:05.0
+                    enabled            true
+
+                    network-interface  LAN
+                        name                   LAN
+                        global-id              18
+
+                        neighborhood           ALICLOUD
+                            name  ALICLOUD
+                        exit
+                        inter-router-security  internal
+                        dhcp                   v4
+                    exit
+                exit
+
+                device-interface  farbic
+                    name               farbic
+                    pci-address        0000:00:06.0
+
+                    network-interface  fabric
+                        name                   fabric
+                        global-id              19
+
+                        neighborhood           intracloud
+                            name                intracloud
+                            topology            mesh
+
+                            path-mtu-discovery
+                                enabled  true
+                            exit
+                        exit
+                        inter-router-security  internal
+                        dhcp                   v4
+                    exit
+                exit
+
+                device-interface  cloud-ha
+                    name               cloud-ha
+                    description        "Auto generated device interface cloud-ha"
+                    type               host
+
+                    network-interface  cloud-ha-intf
+                        name        cloud-ha-intf
+                        global-id   27
+                        type        external
+                        tenant      cloud-ha
+                        source-nat  true
+
+                        address     169.254.137.1
+                            ip-address     169.254.137.1
+                            prefix-length  30
+                            gateway        169.254.137.2
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route                       Alicloud-HA-test
+                name          Alicloud-HA-test
+                service-name  Alicloud-HA-test
+                vector        peer1
+
+                next-hop      AlicloudSDWAN-HA-Router01 LAN
+                    node-name  AlicloudSDWAN-HA-Router01
+                    interface  LAN
+                    vector     peer1
+                exit
+            exit
+
+            service-route                       AliCloud-HA-test2
+                name          AliCloud-HA-test2
+                service-name  Alicloud-HA-test
+                vector        peer2
+                peer          AlicloudSDWAN-HA-Router02
+            exit
+
+            service-route                       cloud-ha-service-route-alicloud-1
+                name          cloud-ha-service-route-alicloud-1
+                service-name  cloud-ha-service-alicloud-1
+                nat-target    169.254.137.2
+            exit
+
+            service-route                       cloud-ha-peer-service-route-alicloud-2
+                name          cloud-ha-peer-service-route-alicloud-2
+                service-name  cloud-ha-service-alicloud-2
+                peer          AlicloudSDWAN-HA-Router02
+            exit
+        exit
+
+
+
 
 ## Release Notes
 
