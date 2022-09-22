@@ -28,6 +28,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date:** September 19, 2022
 
+:::important
+Release 5.5.4-8 has been withdrawn from the Release Repository due to an issue identified shortly after release. This issue is being resolved and a new patch release will be forthcoming. 
+:::
+
+
 ### New Features
 
 - **I95-47418 Audit Events for Plugin Install/Remove:** There is a new audit event that tracks when a plugin is installed or uninstalled. This can be viewed on the Audit History page in the GUI or in the PCLI by running `show events type admin.plugin`
