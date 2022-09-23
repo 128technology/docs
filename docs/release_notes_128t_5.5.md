@@ -30,7 +30,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues:
 
-- **I95-48038 502 Error returned if downstream routers are offline:** Resolved an issue introduced in Release 5.5.4-8 that caused HTTP requests on the conductor to return a 502 error for all requests if one downstream router is offline.
+- **I95-48038 502 Error returned if managed routers are offline:** Resolved an issue introduced in Release 5.5.4-8 that caused HTTP requests on the conductor to return a 502 error for all requests if a managed router is offline.
 
 ## Release 5.5.4-8
 
