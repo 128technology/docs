@@ -24,6 +24,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.5.5-3
+
+**Release Date:** September 23, 2022
+
+### Resolved Issues:
+
+- **I95-48038 502 Error returned if managed routers are offline:** Resolved an issue introduced in Release 5.5.4-8 that caused HTTP requests on the conductor to return a 502 error for all requests if a managed router is offline.
+
 ## Release 5.5.4-8
 
 **Release Date:** September 19, 2022
