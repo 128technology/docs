@@ -21,7 +21,7 @@ The peer path stats now report the router hop count and the IP address for the p
 
   _**Resolution:**_ The telegraf instances are no longer restarted on disconnect.
 
-- **WAN-1320 Control CPU usage incorrectly includes the data core usage:**
+- **WAN-1322 Control CPU usage incorrectly includes the data core usage:**
 
   _**Resolution:**_ The control plane CPU utilization excludes the data core usage sent to the MIST cloud.
 
