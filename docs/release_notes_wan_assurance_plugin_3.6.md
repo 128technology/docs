@@ -23,7 +23,7 @@ The peer path stats now report the router hop count and the IP address for the p
 
 - **WAN-1320 Control CPU usage incorrectly includes the data core usage:**
 
-  _**Resolution:**_ The control plane CPU utilization will exclude the data core usage sent to the MIST cloud.
+  _**Resolution:**_ The control plane CPU utilization excludes the data core usage sent to the MIST cloud.
 
 - **I95-47776 The tank instance for cloud-intel-agent fails to start on certain systems:**
 
@@ -37,4 +37,4 @@ The peer path stats now report the router hop count and the IP address for the p
 ### New Features
 - **I95-47639 Report IDP Security Events**
 
-When IDP is enabled on the router, the security events will be reported to the MIST cloud.
+When IDP is enabled on the router, the security events are reported to the MIST cloud.
