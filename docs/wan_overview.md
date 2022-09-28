@@ -3,23 +3,22 @@ title: WAN Assurance Overview
 sidebar_label: Overview
 ---
 
-SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments, and beginning with version 6.0, WAN Assurance for the SSR is available for users who manage their network using the Mist Cloud. For onboarding a Juniper device with 6.x software, refer to the [SSR120 Quickstart](wan_assurance_ssr120_quickstart.md) or the [SSR130 Quickstart](wan_assurance_ssr130_quickstart.md).
+SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments, and beginning with version 6.0, WAN Assurance for the SSR is available for users who manage their network using the Mist Cloud. 
 
-For software versions prior to SSR Version 6.0, WAN Assurance is available with Mist, but routers are managed by a conductor. Juniper SSR hardware devices are currently shipping with the version 5.4.4 software installed. For conductor-managed deployments, see the [WAN Assurance Telemetry Overview.](wan_telemetry_overview.md)
+The onboarding process for each deployment is similar - connect your device to the Mist Cloud, claim the device into your organization's inventory, create the topology for the SSR, and add the device to the site. The adoption is simplified through the zero-touch-provisioning process (ZTP) beginning with either scanning the QR code, or entering the claim code into your Mist Organization. 
 
-The onboarding process for each deployment is similar - create the topology and configuration where the SSR will be adopted before adding the SSR to the Mist Cloud. The adoption is simplified through the zero-touch-provisioning process (ZTP) beginning with either scanning the QR code, or entering the claim code into your Mist Org. 
+### Onboard a Mist-Managed SSR Device
 
-### Process
+For onboarding an SSR device with 6.x software, start with the [SSR120 Onboarding](wan_assurance_ssr120_quickstart.md) or the [SSR130 Onboarding](wan_assurance_ssr130_quickstart.md).
 
-The process for bringing your SSR into the Mist cloud is the following:
-- [WAN Edge Provisioning](wan_edge_provisioning.md)
+### Onboard a Conductor-Managed SSR Device
 
-and then either
+For SSR devices running software versions prior to version 6.x, WAN Assurance is available through Mist, but routers are managed by a conductor. Begin with [SSR Device Onboarding](wan_onboarding_ssrdevice.md), and then proceed to either [SSR120 Onboarding](wan_assurance_ssr120_quickstart.md) or the [SSR130 Onboarding](wan_assurance_ssr130_quickstart.md) and the process that follows. 
 
-- [SSR 120/130/1200/1300 Onboarding](wan_onboarding_ssrdevice.md)
+### Onboard a Whitebox Device
 
-Or
+To onboard a Whitebox device - a non-Juniper hardware device, that is either certified by Juniper, or a Juniper approved, self-evaluated device - Use the following procedure:
 
-- [Whitebox Staging](wan_staging.md)
-- [Whitebox Onboarding](wan_onboarding_whitebox.md)
-- [Site Assignment ](wan_site_assignment.md)
+1. [Whitebox Staging](wan_staging.md)
+2. [Whitebox Onboarding](wan_onboarding_whitebox.md)
+3. [Site Assignment ](wan_telemetry_site_assign.md)

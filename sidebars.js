@@ -68,45 +68,20 @@ module.exports = {
     ],
     "WAN Assurance": [
       "wan_overview",
-      "wan_edge_provisioning",
       "wan_onboarding_ssrdevice",
       "wan_staging",
       "wan_onboarding_whitebox",
-      "wan_site_assignment",
-    ],
-    "WAN Assurance Quick Start": [
-      {
-        "type": "category",
-        "label": "SSR120",
-        "items": [
-          "wan_assurance_ssr120_quickstart",
-          "intro_wa_quickstart_1_networks",
-          "intro_wa_quickstart_2_apps",
-          "intro_wa_quickstart_3_templates",
-          "intro_wa_quickstart_4_siteassign"
-        ],
-      },
-      {
-        "type": "category",
-        "label": "SSR130",
-        "items": [
-          "wan_assurance_ssr130_quickstart",
-          "intro_wa_quickstart_1_networks",
-          "intro_wa_quickstart_2_apps",
-          "intro_wa_quickstart_3_templates",
-          "intro_wa_quickstart_4_siteassign"
-        ],
-      },
-    ],
-    "WAN Assurance Telemetry": [
-      "wan_telemetry_overview",
-      "wan_telemetry_create_site",
-      "wan_telemetry_provisioning",
-      "wan_telemetry_template",
-      "wan_telemetry_register",
       "wan_telemetry_site_assign",
       "wan_telemetry_features",
       "wan_telemetry_troubleshooting",
+    ],
+    "WAN Assurance Quick Start": [
+      "wan_assurance_ssr120_quickstart",
+      "wan_assurance_ssr130_quickstart",
+      "intro_wa_quickstart_1_networks",
+      "intro_wa_quickstart_2_apps",
+      "intro_wa_quickstart_3_templates",
+      "intro_wa_quickstart_4_siteassign"
     ],
     "Administration": [
       {

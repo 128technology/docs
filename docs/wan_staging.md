@@ -23,10 +23,6 @@ For conductor-managed deployments, the [package-based installation](intro_instal
 
 Prepare your system for installation - appliance installation and power up - per the hardware installation instructions provided with the system.
 
-### Juniper Devices
-
-Juniper SSR hardware devices (SSR120/130, SSR1000-1500) include a QR code that when scanned, will automatically adopt your device into your Mist Organization. Scan the code using your Mist AI App, and follow the on screen instructions to adopt your device. 
-
 ### Download 
 
 The image-based ISO's are available to download at the following location:
