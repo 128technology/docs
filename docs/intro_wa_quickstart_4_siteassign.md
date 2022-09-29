@@ -15,7 +15,10 @@ Associating the device with the site and template gets you a working config!
 1. Go to your organization's WAN Edges Inventory.
 2. Select your device.
 3. Assign the device to your site.
-4. Check the **`Manage configuration with Mist`** checkbox.
+4. If you are configuring a **Mist-managed** router (SSR Software version 6.x and above), check the **`Manage configuration with Mist`** checkbox. 
+
+	For conductor-managed routers (SSR Software version 5.4.x to 6.x) Make sure there is **no** checkmark in the **Manage Configuration from Mist** under **Manage Configuration**.
+    
 5. Select **Assign to Site**.
 
 ## Congratulations!

@@ -1,13 +1,13 @@
 ---
-title: Conductor-Managed SSR Onboarding
-sidebar_label: Conductor-Managed SSR Onboarding
+title: Adopting a Conductor-Managed SSR
+sidebar_label: Adopting a Conductor-Managed SSR
 ---
 
 Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts the device into your Mist Organization. Before scanning, it is suggested that you verify the IP address of the managing conductor using the process below. 
 
-## Pre-Onboarding Verification
+## Verification
 
-When onboarding a conductor-managed device, the process is simplified by ensuring that the IP address of the managing conductor is configured for the site that will adopt the device. This is typically done during Site Configuration. To verify the conductor IP address has been assigned:
+To simplify the process of adopting a conductor-managed device, ensure that the IP address of the managing conductor has been added for the site where the SSR will be adopted. This is typically done during Site Configuration. To verify the conductor IP address has been assigned:
 
 1. Select Site Configuration from the Organization menu.
 
@@ -33,4 +33,6 @@ If no IP address is present, use the SSR GUI to copy the IP address.
 
 	![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
 
-Proceed to either [SSR120 Onboarding](wan_assurance_ssr120_quickstart.md) or the [SSR130 Onboarding](wan_assurance_ssr130_quickstart.md) and the process that follows. 
+Once the verification is complete, use the procedure linked below to adopt your SSR into the Mist Cloud. 
+- [SSR120 Onboarding](wan_assurance_ssr120_quickstart.md) 
+- [SSR130 Onboarding](wan_assurance_ssr130_quickstart.md) 

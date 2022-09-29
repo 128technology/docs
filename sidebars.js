@@ -68,12 +68,19 @@ module.exports = {
     ],
     "WAN Assurance": [
       "wan_overview",
-      "wan_onboarding_ssrdevice",
+      {
+        "type": "category",
+        "label": "Cloud Telemetry for a Conductor-Managed SSR",
+        "items": [
+          "wan_onboarding_ssrdevice",
+          "wan_telemetry_features",
+          "wan_telemetry_troubleshooting",
+          ],
+       }, 
       "wan_staging",
       "wan_onboarding_whitebox",
       "wan_telemetry_site_assign",
-      "wan_telemetry_features",
-      "wan_telemetry_troubleshooting",
+      
     ],
     "WAN Assurance Quick Start": [
       "wan_assurance_ssr120_quickstart",
