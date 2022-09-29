@@ -967,10 +967,10 @@ exit
 
 ### Part of Example Configuration #2 for alicloud-vpc after auto generation.
 
-Below is an example of a node and service part, it is a running configuration for user.
+Below is a sample running configuration for a node and a service.
 
-:::warning
-This example configuration is good to understand all of the concepts but should not be used on a system as is.
+:::info
+Use the following configuration as an example only - it should not be used on a system as is. 
 :::
 
 
