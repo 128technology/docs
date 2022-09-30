@@ -3,25 +3,7 @@ title: WAN Assurance Features
 sidebar_label: Features
 ---
 
-The following are some of the features available with WAN Assurance Telemetry.
-
-### WAN Edge Insights
-
-Once onboarding is complete, the router begins streaming telemetry data. Data appears on the Mist portal after approximately 15 minutes. The WAN Edge Insights page provides a good starting point for viewing the analytics being streamed to the cloud.
-
-To view the events and activity on the fully onboarded device:
-
-- Select WAN Edges from the sidebar. 
-- From the Site dropdown, choose the site where the SSR is assigned, and select the SSR.
-    
-    ![Site Dropdown](/img/wan_site_assign5a.png)
-
-- From the Site panel, choose WAN Edge Insights. 
-    
-    ![Link to WAN Edge Insights](/img/wan_site_assign5b.png)
-
-    ![WAN Edge Insights](/img/wan_site_assign5.png)
-
+The following features are available with WAN Assurance Cloud Telemetry. They are configured on the conductor and viewed from the SSR GUI or PCLI.
 
 ### Topology Mapping
 

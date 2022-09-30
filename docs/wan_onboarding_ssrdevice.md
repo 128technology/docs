@@ -3,7 +3,7 @@ title: Adopting a Conductor-Managed SSR
 sidebar_label: Adopting a Conductor-Managed SSR
 ---
 
-Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.4 software. The device includes a QR code that when scanned, automatically adopts the device into your Mist Organization. Before scanning, it is suggested that you verify the IP address of the managing conductor using the process below. 
+Juniper SSR hardware devices (SSR120/130, SSR1200/1300/1400/1500) come pre-installed with the version 5.4.x software. The device includes a QR code that when scanned, automatically adopts the device into your Mist Organization. Before scanning, it is suggested that you verify the IP address of the managing conductor using the process below. 
 
 ## Verification
 
