@@ -19,7 +19,7 @@ In the Mist Inventory panel the new router shows as "Unassigned".
 
     ![Site List](/img/wan_site_assign3_nomist.png)
 
-4. For conductor-managed routers (SSR Software version 5.4.x to 6.x) Make sure there is **no** checkmark in the **Manage Configuration from Mist** under **Manage Configuration**. The device will reach out to the conductor IP address specified during site creation to receive configuration information.
+4. For conductor-managed routers (SSR Software version 5.4.x and greater), make sure there is **no** checkmark in the **Manage Configuration from Mist** under **Manage Configuration**. The device will reach out to the conductor IP address specified during site creation to receive configuration information.
 
     If you are configuring a **Mist-managed** router (SSR Software version 6.x and above) place a checkmark in the **Manage Configuration from Mist** box.
 
