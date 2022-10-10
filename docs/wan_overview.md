@@ -17,7 +17,7 @@ For onboarding an SSR device with 6.x software, start with either [SSR120 Onboar
 
 ### Adopt a Conductor-Managed SSR Device
 
-To adopt conductor-managed SSR devices into Mist, begin with [Adopting a Conductor-Managed SSR](wan_onboarding_ssrdevice.md), and then proceed to either [SSR120 Onboarding](wan_assurance_ssr120_quickstart.md) or the [SSR130 Onboarding](wan_assurance_ssr130_quickstart.md) and the process that follows. 
+To adopt conductor-managed SSR devices into Mist, refer to [Cloud Telemetry for a Conductor-Managed SSR](config_wan_assurance.md). 
 
 ### Adopt a Whitebox Device
 

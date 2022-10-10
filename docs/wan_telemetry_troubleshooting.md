@@ -5,7 +5,7 @@ sidebar_label: Troubleshooting
 
 Use the following information to help identify or resolve issues configuring WAN Assurance on an SSR.
 
-### Show Command
+## Show Command
 
 The `show plugins state` command displays extensive information about the state of the plugin. Use the following command as a starting point for any troubleshooting.
 
@@ -33,11 +33,11 @@ For additional troubleshooting information use the `detail` commands as shown be
 
 `show plugins state router <router name> detail 128T-mist-wan-assurance`
 
-### SSR Connection Status
+## SSR Connection Status
 
-The status of the SSR connection to the MIST cloud and other details can be found on the GUI and PCLI.
+The status of the SSR connection to the Mist cloud and other details can be found on the SSR GUI and PCLI.
 
-#### On the Conductor UI
+### On the Conductor GUI
 
 * Navigate to Plugins > MIST WAN ASSURANCE > Details.
 
@@ -47,13 +47,13 @@ The status of the SSR connection to the MIST cloud and other details can be foun
 
  ![Plugins Context Menu](/img/wana_plugin_context.png)
 
-* The summary output is displayed by default and contains useful information about the device connection to the MIST cloud.
+* The summary output is displayed by default and contains useful information about the device connection to the Mist cloud.
 
  ![Plugins Context Menu](/img/wana_plugin_state.png)
 
-#### On the Conductor PCLI
+### On the Conductor PCLI
 
-* The `show mist` command can be used to display the summary and detail information about the SSR's connection to the MIST cloud.
+* The `show mist` command can be used to display the summary and detail information about the SSR's connection to the Mist cloud.
 
 ```console
 admin@node1.conductor1# show mist router 128t-east
@@ -71,13 +71,13 @@ Completed in 1.06 seconds
 admin@node1.conductor1#
 ```
 
-### Moving a Router
+## Moving a Router
 
-In a situation where a router needs to be moved from one organization to another or physically relocated the router must be released and then re-onboarded.
+In a situation where a router needs to be moved from one organization to another or physically relocated, the router must be released and then re-onboarded.
 
 ### Releasing a Router
 
-To release a router, use the following process from the MIST GUI:
+To release a router, use the following process from the Mist GUI:
 
 * Go to **Organization > Inventory**.
 * Select the checkbox next to the router.
@@ -85,10 +85,9 @@ To release a router, use the following process from the MIST GUI:
 * Select **Release**.
 * Click on **Release** to confirm.
 
-After a few minutes the router will be released and stop sending the data to the Mist cloud. Use the information in  [Viewing the SSR Status](#viewing-the-ssr-status) to check the current status. A successfully released router will display the following:
+After a few minutes the router will be released and stop sending the data to the Mist cloud. Use the information in [Viewing the SSR Status](#viewing-the-ssr-status) to check the current status. A successfully released router will display the following:
 
  ![Plugins Context Menu](/img/wana_plugin_released.png)
-
 
 Once that process is completed, disable the Mist WAN Assurance plugin on the router.
 
@@ -121,7 +120,7 @@ Once the necessary changes have been made to the registration-code and other con
  ![Unreleased](/img/wana_unreleased.png)
 
 
-#### Using the conductor PCLI
+#### Using the Conductor PCLI
 
 1. Confirm the registration-code on the router is as expected.
 
