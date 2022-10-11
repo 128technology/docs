@@ -77,6 +77,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-48038 502 Error returned if managed routers are offline:** Resolved an issue that caused HTTP requests on the conductor to return a 502 error for all requests if a managed router is offline.
 ------
 - **I95-48125 Save TSI streaming from router to conductor not working:** Adding a node and router argument to the PCLI command `save tech-support-info` now works correctly.
+------
+- **WAN-1327 Device Adoption may fail** Resolved issues where a "factory reset" system failed to be adopted. This could be seen if an invalid claim code was entered during the adoption process, or when a whitebox system (non Juniper-branded) was not successfully released.
 
 ## Release 5.4.7-7
 
