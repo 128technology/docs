@@ -9,7 +9,6 @@ module.exports = {
       "about_supported_drivers",
       "about_certified_platforms",
       "about_security_policy",
-      "about_services_description",
       "CONTRIBUTING",
     ],
     "Introduction": [
