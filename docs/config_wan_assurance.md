@@ -190,13 +190,13 @@ admin@node1.conductor1#
 
 For additional information about working with WAN Assurance Telemetry, see these additional sections:
 
-- [Features](wan_telemetry_features.md)
+- #### [Features](wan_telemetry_features.md)
 
     #### [Topology Mapping](wan_telemetry_features.md#topology-mapping)
 
     #### [Application Insights](wan_telemetry_features.md#application-insights--sle)
 
-- [Troubleshooting](wan_telemetry_troubleshooting.md)
+- #### [Troubleshooting](wan_telemetry_troubleshooting.md)
 
     #### [`show` commands](wan_telemetry_troubleshooting.md#show-command)
 
