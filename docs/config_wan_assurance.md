@@ -54,7 +54,7 @@ Create a unique site for each physical (or logical) location in the network. For
 
     ![New Site Panel](/img/wan_new_site.png)
 
-- Add the Conductor IP address to the Site. 
+- Add the Conductor IP address to the Site. This allows devices such as the SSR 120/130 to use ZTP to access the conductor through Mist. 
 
     ![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
 
@@ -191,4 +191,10 @@ admin@node1.conductor1#
 For additional information about working with WAN Assurance Telemetry, see these additional sections:
 
 - [Features](wan_telemetry_features.md)
+    - [Topology Mapping](wan_telemetry_features.md#topology-mapping)
+    - [Application Insights](wan_telemetry_features.md#application-insights--sle)
 - [Troubleshooting](wan_telemetry_troubleshooting.md)
+    - [`show` commands](wan_telemetry_troubleshooting.md#show-command)
+    - [Connection Status](wan_telemetry_troubleshooting.md#ssr-connection-status)
+    - [Moving or Releasing a Router](wan_telemetry_troubleshooting.md#moving-a-router)
+
