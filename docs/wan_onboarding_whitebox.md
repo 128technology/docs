@@ -86,5 +86,28 @@ It is possible to obtain a registration code directly from the Mist portal.
 
 Or enter the registration code using the PCLI:
 
-![CLI Registration Code Adoption](/img/adopt-cli-reg-code.png)
+```
+admin@128t-east.128t-east# adopt
+✔ Waiting for help...
+usage: adopt [{org-id <org-id> | registration-code <registration-code>}] [force]
+             [router-name <router-name>]
+
+Assign the current router to a Mist organization.
+
+If you already know the ID of the organization or the registration code then you can
+use the optional 'org-id' or 'registration-code' arguments. Otherwise an interactive
+dialog will walk you through entering your Mist credentials and choosing an
+organization to assign the router to.
+
+keyword arguments:
+force                Skip confirmation prompt
+org-id               The ID of the mist organization to assign the router to.
+registration-code    The registration code used to assign this router to an
+                     organization.
+router-name          Assign a name to the router
+
+see also:
+show mist    Display information about the link between the SSR and the Mist Cloud
+admin@128t-east.128t-east# adopt router-name 128t-east registration-code eyJ0eXAi...
+```
 

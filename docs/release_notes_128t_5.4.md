@@ -577,7 +577,7 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-40679 Show DPU command pagination:** Pagination has been added to the `show dpu` command to better present the volume of information.
 ------
-- **I95-41016 WAN Assurance:** SSR provides integration with Mist WAN Assurance. For configuration information, see [Configuring WAN Assurance](config_wan_assurance.md).
+- **I95-41016 WAN Assurance:** SSR provides integration with Mist WAN Assurance. For configuration information, see [WAN Assurance Overview](wan_overview.md).
 ------
 - **I95-41093 Show Commit time:** The GUI now displays the time of the last commit operation.
 ------

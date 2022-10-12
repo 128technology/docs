@@ -66,20 +66,38 @@ module.exports = {
       "concepts_waypoint_ports",
       "concepts_glossary",
     ],
-    "WAN Assurance Quick Start": [
-      "intro_wa_quickstart_1_networks",
-      "intro_wa_quickstart_2_apps",
-      "intro_wa_quickstart_3_templates",
-      "intro_wa_quickstart_4_siteassign"
-    ],
     "WAN Assurance": [
       "wan_overview",
-      "wan_edge_provisioning",
-      "wan_staging",
-      "wan_onboarding_whitebox",
-      "wan_site_assignment",
-      "wan_onboarding_ssrdevice",
-      "config_wan_assurance",
+      {
+        "type": "category",
+        "label": "WAN Assurance Quick Start",
+        "items": [
+          "wan_assurance_ssr120_quickstart",
+          "wan_assurance_ssr130_quickstart",
+          "intro_wa_quickstart_1_networks",
+          "intro_wa_quickstart_2_apps",
+          "intro_wa_quickstart_3_templates",
+          "intro_wa_quickstart_4_siteassign",
+          ],
+      },
+      {
+        "type": "category",
+        "label": "Whitebox Adoption",
+        "items": [ 
+          "wan_staging",
+          "wan_onboarding_whitebox",
+          "wan_telemetry_site_assign",
+          ]
+      },
+      {
+        "type": "category",
+        "label": "Cloud Telemetry for a Conductor-Managed SSR",
+        "items": [
+          "config_wan_assurance",
+          "wan_telemetry_features",
+          "wan_telemetry_troubleshooting",
+          ],
+      },
     ],
     "Administration": [
       {

@@ -17,21 +17,21 @@ The installation consists of the following steps:
 	- OR
 - [Adopt the device using the PCLI](wan_onboarding_whitebox.md#adopt-the-router-from-the-ssr-pcli)
 
-For conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. To onboard a conductor-managed deployment, see [Configuring Conductor-Managed WAN Assurance](config_wan_assurance.md).
-
 ## Staging
 
 Prepare your system for installation - appliance installation and power up - per the hardware installation instructions provided with the system.
-
-### Juniper Devices
-
-Juniper SSR hardware devices (SSR120/130, SSR1000-1500) include a QR code that when scanned, will automatically adopt your device into your Mist Organization. Scan the code using your Mist AI App, and follow the on screen instructions to adopt your device. 
 
 ### Download 
 
 The image-based ISO's are available to download at the following location:
 
-`https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local/<Major>.<Minor>/`. 
+<!-- markdown-link-check-disable-next-line -->
+- https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local
+
+The package-based ISOs for Conductor-managed deployments are available to download at the following location:
+
+<!-- markdown-link-check-disable-next-line -->
+- https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
 
 You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page. For the detailed download process, see [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso). 
 
