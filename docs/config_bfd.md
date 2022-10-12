@@ -178,7 +178,7 @@ Tue 2022-02-01 15:39:13 UTC
 
 ```
 
-## BFD Echo mode tests
+## BFD Echo Mode Tests
 
 This feature enables BFD asynchronous mode support. Many routers additionally use BFD echo mode to ensure a forwarding path is available. While the SSR does not support the sending of BFD echo mode tests to a non-SSR router, we can return the echo mode traffic to the originating router allowing it to pass its echo mode test. Unlike BFD asynchronous mode, BFD echo mode is not handled by a BFD process on the peer router. Instead, it is intended to be processed by the packet forwarding plane and returned to the originating router. In order to pass this echo test traffic, an SSR must be configured to allow this traffic just like any other forwarding traffic. This requires a tenant and a service as with all traffic forwarded by the SSR.
 
