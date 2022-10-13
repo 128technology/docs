@@ -61,6 +61,10 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-47537/I95-47556 Synchronize writing to files to avoid a race condition:** Added a common file lock to synchronize writes.
 ------
 - **I95-47655 BGP issues with VRRP:** VRRP failover may cause routing to not function if internal device numbering is not consistent across the redundant nodes.
+------
+- **WAN-1327/MIST-69263 Device Adoption may fail:** Resolved issues where a "factory reset" system failed to be adopted. This could be seen if an invalid claim code was entered during the adoption process, or when a whitebox system (non Juniper-branded) was not successfully released.
+
+	This issue was missing from the `6.0.4-11 v7` IBU image, and has been corrected in the `SSR-6.0.4-11.el7.x86_64.ibu-v8.iso` ISO.
 
 ### Caveats
 
