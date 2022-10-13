@@ -15,7 +15,7 @@ Juniper Session Smart Networking provides the following workflows for the instal
 
 - **Package-based ISO:** For users who do not use Mist Cloud, this ISO offers multiple local installation methods.
   - **One Touch Provisioning (OTP)** is the default and preferred method of installation. OTP sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router. See the following procedures for OTP installation steps: 
-    - [Router Installation Using OTP](intro_otp_iso_install.md)
+    - [Router Installation Using OTP](intro_otp_iso_install.mdx)
     - [Quickstart from the OTP ISO](intro_install_quickstart_otpiso.md)
   - **Interactive:** For bespoke deployments where customized platform configuration is necessary, an interactive mode exists. Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the SSR software is started.
 
