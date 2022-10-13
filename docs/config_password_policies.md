@@ -32,6 +32,7 @@ The SSR password policies have been updated to provide a more secure experience.
 3. Dashes `-` are not allowed at the beginning of the username. 
 4. Fully numeric usernames and usernames beginning with `.` are not recommended. 
 5. Usernames may only be up to 32 characters long.
+6. The `.` character is allowed within a username: `firstname.lastname`.
 
 :::important
 After upgrading to a release with new username pattern support, users can add a username using the above requirements. However, after rolling back a node to the previous release, the username delete will fail because the old user data model does not support the new format. Usernames that do not support the **old** username pattern should be deleted before rolling back nodes. If they are not, those users cannot be deleted after the rollback.
