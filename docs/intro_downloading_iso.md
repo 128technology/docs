@@ -13,24 +13,28 @@ Juniper Session Smart Networking provides the following workflows for the instal
 
   For details about the Image-based install process, see [Image-based Installation.](intro_installation_image.md) 
 
-- **One Touch Provisioning (OTP):** This is the preferred method of installation. Sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router.
+- **Package-based ISO:** For users who do not use Mist Cloud, this ISO offers multiple local installation methods.
+  - **One Touch Provisioning (OTP)** is the default and preferred method of installation. OTP sets up DHCP on all interfaces and boots a Web Server GUI. After installing the Conductor and configuring routers through the Conductor, the OTP bootstrap process will install and configure the router. See the following procedures for OTP installation steps: 
+    - [Router Installation Using OTP](intro_otp_iso_install.mdx)
+    - [Quickstart from the OTP ISO](intro_install_quickstart_otpiso.md)
+  - **Interactive:** For bespoke deployments where customized platform configuration is necessary, an interactive mode exists. Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the SSR software is started.
 
 :::note
-For bespoke deployments where customized platform configuration is necessary, an interactive mode exists.
+Beginning with release 5.4.7-7 and any 5.x ISO [**released after August 4, 2022**](about_releases.mdx#all-releases---limited-and-general-availability), the ISO name format has changed from using `OTP` to `ISO`:
 
-- **Interactive:** Installation is done via a serial console or VGA. An interactive session is started to configure network interfaces, passwords, node name and type, and conductor IP (if applicable) before the SSR software is started.
+- 128T-5.4.7-7.el7.ISO.v1.x86_64.iso
 :::
 
 ## Downloading an ISO
 
 The SSR Software packages are available from our public servers using the username and token provided to you and can be accessed at the following location:
 
-  The image-based ISOs for Mist-based deployments are available to download at the following location:
+The image-based ISOs for Mist-managed deployments are available to download at the following location:
 
 <!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-install-images-release-local
 
-  The package-based ISOs for Conductor-managed deployments are available to download at the following location:
+The package-based ISOs for Conductor-managed deployments are available to download at the following location:
 
 <!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
