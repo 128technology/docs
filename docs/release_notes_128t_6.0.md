@@ -32,8 +32,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-41072 Enhanced Web Filtering:** Web Filtering allows administrators to limit or prevent user access to internet content. These limitations may be based on company or organization policies, or because a domain may be know to contain malicious, inappropriate, or dangerous content. Individual services and service policies can be configured on the SSR to allow or deny access to an entire domain category, or specific domains within a category. For more information, see [Web Filtering.](config_domain-based_web_filter.md)
 ------
-- **I95-44533 IDP Integration with Juniper cSRX:** The SSR IDP feature is available for use on the cSRX platform. See [Intrusion Detection and Prevention](concepts_ssr_idp.md) for more information.
-------
 - **I95-47418 Audit Events for Plugin Install/Remove:** There is a new audit event that tracks when a plugin is installed or uninstalled. This can be viewed on the Audit History page in the GUI or in the PCLI by running `show events type admin.plugin`.
 ------
 - **I95-47795 Serial and VGA rescue boot options:** from the IBU ISO A "Maintenance Operations" submenu has been added to the image-based ISO, and VGA and serial rescue mode options along with a reboot option have been added to the menu.
@@ -42,7 +40,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **The following CVE's have been addressed and resolved:** I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049.
 ------
-- **I95-39454 Created User cannot access PCLI operations:** Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.
+- **I95-39454 Newly created user cannot access PCLI operations:** Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.
 ------
 - **I95-42320 BGP aggregate-address not working:** Add support for BGP address summarization.
 ------
@@ -92,7 +90,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47872 App-ID summary tracking of failed sessions still incremented when feature disabled:** App-ID stats tracking for failed sessions now checks the feature enabled flag and responds appropriately. 
 ------
-- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** We now use the base interface for egress if the `icmp-probe probe-address` is the same as tunnel destination, and the `internal-address` as the source if the `egress-interface` is `gre-overlay`.
+- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** We now use the base interface for egress if the `icmp-probe probe-address` is the same as the tunnel destination, and use the `internal-address` as the source if the `egress-interface` is `gre-overlay`.
 ------
 - **I95-47967 Cloud bootstrapper does not bootstrap the deployed Conductor:** Resolved an issue where the configuration was being rejected by the cloud bootstrapper when the device was a conductor.
 ------
@@ -114,9 +112,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48221 Image-Based Upgrade failing on systems with 8GB RAM:** Image-based unpacker now uses a temporary disk file if the available RAM is low during filesystem decompression.
 ------
-- **I95-48238 Image unpacker failing on conditions of low host memory:** Image-based unpacker now uses a temporary disk file if the available RAM is low during filesystem decompression.
-------
-- **WAN-1262 WAN Assurance login error issue:** Reolved an issue when logging into the SSR GUI for the first time on a whitebox system, selecting the option to log into the mist cloud and entering an incorrect password caused the application to crash.
+- **WAN-1262 WAN Assurance login error issue:** Resolved an issue when logging into the SSR GUI for the first time on a whitebox system, selecting the option to log into the Mist cloud and entering an incorrect password caused the application to crash.
 
 ## Release 6.0.4-11
 
@@ -155,6 +151,10 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-47537/I95-47556 Synchronize writing to files to avoid a race condition:** Added a common file lock to synchronize writes.
 ------
 - **I95-47655 BGP issues with VRRP:** VRRP failover may cause routing to not function if internal device numbering is not consistent across the redundant nodes.
+------
+- **WAN-1327/MIST-69263 Device Adoption may fail:** Resolved issues where a "factory reset" system failed to be adopted. This could be seen if an invalid claim code was entered during the adoption process, or when a whitebox system (non Juniper-branded) was not successfully released.
+
+This issue has been corrected in the SSR-6.0.4-11.el7.x86_64.ibu-v8.iso ISO.
 
 ### Caveats
 
