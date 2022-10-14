@@ -32,6 +32,7 @@ module.exports = {
       "install_onboard_hdware",
     ],
     "Cloud Installations": [
+      "supported_cloud_platforms",
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
       "intro_initialize_HA_conductor",
