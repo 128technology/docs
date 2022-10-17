@@ -3,6 +3,23 @@ title: WAN Assurance Plugin 3.6 Release Notes
 sidebar_label: '3.6'
 ---
 
+## Release 3.6.3
+**Release Date:** Oct 18, 2022
+
+### Resolved Issues
+
+- **WAN-1403 Optimize the amount of memory used by the plugin:**
+
+  _**Resolution:**_ The number of telegraf instances were consolidated to reduce the overall memory footprint of the plugin.
+
+- **WAN-1391 High CPU usage during peer path stat collection:**
+
+  _**Resolution:**_ Optimized the peer path data collection on HA routers with large number of peer paths.
+
+- **WAN-1307 The FPM and BFD stats for dynamic interface were not reported consistently:**
+
+  _**Resolution:**_ The FPM and BFD metric samples for the dynamic interfaces are combined before sending to the MIST cloud.
+
 ## Release 3.6.2
 **Release Date:** Sep 29, 2022
 
