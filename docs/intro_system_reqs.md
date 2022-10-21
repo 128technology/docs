@@ -23,6 +23,13 @@ When run as a virtual machine, CPU cores must be dedicated to the SSR router usi
 It is strongly recommended to use ECC memory for all hardware platforms.
 :::
 
+## Environmental Requirements
+The SSR software has certain basic environmental requirements to ensure smooth operation. Chief among those are reliable NTP (Network Time Protocol) and DNS (Domain Name System). Please make certain you have NTP and DNS servers that are reachable by the host platform upon which the SSR application is installed.
+
+:::important
+Because the SSR application has various time-series databases that rely on precision timekeeping, the SSR application as a whole relies on precision timekeeping. It is therefore ill-advised to only use NTP servers that can be reached over SVR once the SSR application is running; this creates a circular dependency, where SSR relies on NTP and NTP relies on SSR. This can lead to clock skew and general product instability.
+:::
+
 ## BIOS Recommendations
 In order to configure standard, off-the-shelf hardware to perform in line with traditional routing hardware, we recommend that you configure several BIOS settings to increase performance and resiliency.
 
