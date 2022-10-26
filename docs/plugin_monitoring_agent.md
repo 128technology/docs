@@ -1608,6 +1608,27 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 
 ## Monitoring Agent Plugin Notes
 
+## Release 2.2.0
+
+**Release Date:** Oct 25, 2022
+
+**Router Version**
+- 128T-monitoring-agent-plugin-router-1.1.0-4
+- 128T-monitoring-agent-3.7.3-3
+
+#### Issues Fixed ####
+  - **PLUGIN-1902** Monitoring agent plugin fails to generate the metric input
+
+    _**Resolution**_ Improved the handling of default values when processing the monitoring agent metrics input configuration
+
+  - **PLUGIN-1903** Monitoring configuration does not work for milliseconds sampling and push interval
+
+    _**Resolution**_ The validation for the sampling and push interval no longer allows the invalid interval values in milliseconds, microseconds and nanoseconds
+
+  - **WAN-1449** The cpu state collector does not report correct values for IDP data core
+
+    _**Resolution**_ The query for retrieving the IDP data core usage is corrected to handle some errors more gracefully
+
 ## Release 2.1.0
 
 **Release Date:** Jun 24, 2022
