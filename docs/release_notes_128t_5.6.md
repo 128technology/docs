@@ -48,7 +48,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-46904 Labels in Reachability Profile are not correct:** Added missing labels to Traffic Class and Time to Establishment information screens.
 ------
-- **I95-47075 Disable weak SSH ciphers:** This issue has been resolved. 
+- **I95-47075 Disable weak SSH ciphers:** Resolved issues where the remote SSH server was configured to allow weak key exchange algorithms on `tcp/22` and `tcp/930`. 
 ------
 - **I95-47271 VRRP Alarm for Backup becoming Primary:** There is now an alarm when the backup VRRP node in an HA pair takes over as the primary.
 ------
@@ -62,7 +62,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47642 Plugin state summary (table view) for HA router overlays both nodes:** The Plugin state table has been separated by node.
 ------
-- **I95-47787 Worker core packet processing spikes to 100%:** Added the ability to tune the settings for session failover without requiring forward packet, and resolved the underlying issue that caused excessively high worker-core CPU.
+- **I95-47787 Worker core packet processing spikes to 100%:** Added the ability to tune the **Authority>Router>Reverse Packet Session Resiliency** `Minimum Packet Count` (default is 3) and `Detection Interval` (default is 5) settings for session failover without requiring forward packet, and resolved the underlying issue that caused excessively high worker-core CPU.
 ------
 - **I95-47909 Handle GRE tunnels in ICMP reachability probe:** The base interface for egress is now used if the `icmp-probe probe-address` is the same as the tunnel destination, and the `internal-address` is used as the source if the `egress-interface` is `gre-overlay`.
 ------
