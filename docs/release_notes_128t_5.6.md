@@ -48,7 +48,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-46904 Labels in Reachability Profile are not correct:** Added missing labels to Traffic Class and Time to Establishment information screens.
 ------
-- **I95-47075 Disable weak SSH ciphers:** Resolved issues where the remote SSH server was configured to allow weak key exchange algorithms on `tcp/22` and `tcp/930`. The following 
+- **I95-47075 Disable weak SSH ciphers:** Resolved issues where the remote SSH server was configured to allow weak key exchange algorithms on `tcp/22` and `tcp/930`. 
 ------
 - **I95-47271 VRRP Alarm for Backup becoming Primary:** There is now an alarm when the backup VRRP node in an HA pair takes over as the primary.
 ------
