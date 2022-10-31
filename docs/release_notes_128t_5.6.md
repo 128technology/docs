@@ -42,8 +42,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-46677 Modify GUI to not resize dashboard tiles:** Dashboard tiles now do not resize when the window is resized.
 ------
-- **I95-46701 Packet Loss on Headend Router:** Added `device-interface` rx/tx descriptor ring size to resolve this issue.
-------
 - **I95-46879 ICMP error responses are not NATed when sent over SVR:** Certain ICMP error messages can now be encapsulated over SVR when enabled within the neighborhood or adjacency configuration: Flows that are UDP over SVR are able to have their ICMP error messages encapsulated. 
 ------
 - **I95-46904 Labels in Reachability Profile are not correct:** Added missing labels to Traffic Class and Time to Establishment information screens.
@@ -56,7 +54,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47475 Session capture not downloadable for a read only user:** Adjusted permissions to provide access to session capture files to read-only users.
 ------
-- **I95-47456 Session table associated paths not scalable, scroll bar hidden:** The Session Table window has been enlarged to more clearly show information.
+- **I95-47476 Session table associated paths not scalable, scroll bar hidden:** The Session Table window has been enlarged to more clearly show information.
 ------
 - **I95-47529 Outbound-only sessions get stuck after NAT rebinding:** Resolved an issue that created stuck sessions when a NAT device was rebinding and failing to establish sessions from reverse packets.
 ------
