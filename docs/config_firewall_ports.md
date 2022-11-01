@@ -7,16 +7,21 @@ SSR software requires that the following ports be enabled on your firewall to al
 
 ### SSR to a Conductor
 
-| Service Type | Global 01 | Global 02 | Global 03 | Global 04 |
-| --- | --- | --- | --- | --- |
-| Conductor | [Conductor IP address] | 930/TCP | 4505/TCP | 4506/TCP |
+Enable the following on your firewall for SSR to Conductor connectivity:
 
+- [Conductor IP address] 
+- Port 930/TCP 
+- Port 4505/TCP 
+- Port 4506/TCP
 
 ### SSR to SSR
 
-| Service Type | Global 01 | Global 02 | Global 03 | Global 04 |
-| --- | --- | --- | --- | --- |
-| SSR | [SSR IP address] | 1280/UDP | 1280//TCP | 16,385-65,353 TCP/UDP |
+Enable the following on your firewall for SSR to SSR connectivity:
+
+- [SSR IP address]
+- Port 1280/UDP
+- Port 1280/TCP
+- Ports in the range 16,385-65,353 TCP/UDP
 
 ### SSR to the Mist Cloud
 
