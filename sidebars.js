@@ -16,6 +16,7 @@ module.exports = {
     ],
     "Deployment Considerations": [
       "intro_system_reqs",
+      "config_firewall_ports",
     ],
     "Installation Process": [
       "intro_installation",
