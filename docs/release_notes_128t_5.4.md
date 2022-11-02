@@ -32,8 +32,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-32789 Peer metrics unavailable after Conflux synchronization:** Resolved an issue with HA routers where the metrics application stops streaming metrics to the peer node after loading configuration.
 ------
-- **I95-43093 ISO installer console printing irrelevant errors:** Removed some installer operations that temporarily displayed errors that are no longer relevant.
-------
 - **I95-47271 VRRP Alarm for Backup becoming Primary:** There is now an alarm when the backup VRRP node in an HA pair takes over as the primary.
 ------
 - **I95-47787 Worker core packet processing spikes to 100%:** Added the ability to tune the Reverse Packet Session Resiliency Minimum Packet Count (default is 3) and Detection Interval (default is 5) settings for session failover without requiring forward packet, and resolved the underlying issue that caused excessively high worker-core CPU.
