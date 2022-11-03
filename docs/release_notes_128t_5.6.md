@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.6.3-5
 
-**Release Date:** November 2, 2022
+**Release Date:** November 3, 2022
 
 ### Resolved Issues
 
