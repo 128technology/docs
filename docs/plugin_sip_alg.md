@@ -479,6 +479,18 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 3.2.1
+**Release Date:** Nov 04, 2022
+
+**Router Version**
+- 128T-sip-alg-router-1.2.0-2
+
+#### Issues Fixed
+
+- **PLUGIN-1908** SIP ALG plugin consumes a lot of memory on a running system
+
+    _**Resolution**_ Reduced the overall number of child processes running on the system as well as stopped default kamailio service which is not used.
+
 ### Release 3.2.0
 
 #### New Features and Improvements
