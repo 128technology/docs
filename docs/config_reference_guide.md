@@ -2028,6 +2028,27 @@ This controls which repository or repositories a router will use to retrieve sof
 | offline-mode | boolean | Default: false. Controls whether the router will only be able to retrieve software upgrade images via its conductor.|
 | source-type | enumeration | Valid values: conductor-only, prefer-conductor, internet-only. Default: internet-only. To use the conductor as a proxy server to reach the SSR public internet repository, set this to `conductor-only` or `prefer-conductor`. To reach it via the public internet and not use the conductor as a proxy, set it to `internet-only`.|
 
+## reverse-packet-session-resiliency
+
+#### Path
+
+authority > router > reverse-packet-session-resiliency
+
+#### Description 
+
+Parameters for setting session failover behavior without presence of forward traffic.
+
+| Element  | Type        | Description                                                  |
+| -------- | ----------- | ------------------------------------------------------------ |
+| enabled  | boolean     | Default: true. Controls whether reverse packet triggered failover is enabled on this router when session resiliency is set. |
+| detection-interval | uint32 | Default: 5. Range: 1-30. | Frequency at which each session is checked for failover trigger in the absence of forward traffic. |
+| minimum-packet-count | uint32 | Default: 3. Range: 1-999999. Minimum number of packets received on the flow to activate the feature. |
+
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 5.6.3 | Introduced |
+
 ## route-reflector
 
 #### Path:
