@@ -36,6 +36,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-44957 Azure is not able to identify the asset-id of the depolyed conductor and router:** The Azure ID has been modified to a value that can be processed by Azure.
 ------
+- **I95-45478 Segmentation Fault in the Dynamic Peer Update process:** Resolved an issue with multi-threaded access to a data member, leading to a segmentation fault.
+------
 - **I95-46561 Peer table Sort by Destination does not work consistently:** Resolved an issue with sorting for Peer Path Source/Destination columns in the GUI.
 ------
 - **I95-46677 Modify GUI to not resize dashboard tiles:** Dashboard tiles now do not resize when the window is resized.
