@@ -3,6 +3,15 @@ title: WAN Assurance Plugin 3.6 Release Notes
 sidebar_label: '3.6'
 ---
 
+## Release 3.6.4
+**Release Date:** Nov 5, 2022
+
+### Resolved Issues
+
+- **WAN-1463 CPU and memory reporting causes a spike in CPU usage:**
+
+  _**Resolution:**_ Devised a more efficient collection scheme to minimize the CPU impact when collecting the CPU and memory data.
+
 ## Release 3.6.3
 **Release Date:** Oct 18, 2022
 
