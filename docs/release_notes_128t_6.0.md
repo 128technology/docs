@@ -24,15 +24,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.0.6-2
+## Release 6.0.6-9
 
 **Release Date:** November 13, 2022
 
 ### New Features
 
-- **I95-45781 Allow configuration of maximum timeout for health check:**
-------
-- **I95-48223 Add Application-specific information to show sessions by-id:** The following information has been added to show sessions by-id:
+- **I95-48223 Add Application-specific information to `show sessions by-id`:** The following information has been added to `show sessions by-id`:
 	- domainName
 	- uri
 	- category
@@ -92,8 +90,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-48181 "Failed to send IPFIX interim record" log messages:** Changed log level from Error to appropriate logging level for the cases when ipfix records should not be generated.
 ------
 - **I95-48246 Peer path GQL query should provide a node filter:** Added a parameter to stats on peer-path so that the node can be overwritten.
-------
-- **I95-48333 Single interface multiple adjacencies may not result in multiple service paths:** For inter router service paths, include adjacency remote host name in service path key.
 ------
 - **I95-48353 Optimize Application-ID stats allocation:** Reduced memory usage by avoiding unnecessary app-id stats tracking allocations.
 ------
@@ -234,7 +230,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **WAN-1327/MIST-69263 Device Adoption may fail:** Resolved issues where a "factory reset" system failed to be adopted. This could be seen if an invalid claim code was entered during the adoption process, or when a whitebox system (non Juniper-branded) was not successfully released.
 
 	This issue has been corrected in the `SSR-6.0.4-11.el7.x86_64.ibu-v8.iso` ISO.
-
 
 ### Caveats
 
