@@ -24,6 +24,32 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.4.9-7
+
+**Release Date: November 9, 2022**
+
+### Resolved Issues
+
+- **I95-32789 Peer metrics unavailable after Conflux synchronization:** Resolved an issue with HA routers where the metrics application stops streaming metrics to the peer node after loading configuration.
+------
+- **I95-45478 Segmentation Fault in the Dynamic Peer Update process:** Resolved an issue with multi-threaded access to a data member, leading to a segmentation fault.
+------
+- **I95-47271 VRRP Alarm for Backup becoming Primary:** There is now an alarm when the backup VRRP node in an HA pair takes over as the primary.
+------
+- **I95-47787 Worker core packet processing spikes to 100%:** Added the ability to tune the Reverse Packet Session Resiliency Minimum Packet Count (default is 3) and Detection Interval (default is 5) settings for session failover without requiring forward packet, and resolved the underlying issue that caused excessively high worker-core CPU.
+------
+- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** The base interface for egress is now used if the icmp-probe probe-address is the same as the tunnel destination, and the internal-address is used as the source if the egress-interface is gre-overlay.
+------
+- **I95-48103 Commit triggered BGP issue:** Resolved an issue where BGP neighbors configured with a short hold time might experience a BGP session flap during a configuration commit when app-ID is enabled.
+------
+- **I95-48108 Service Ping for a Service without Source NAT uses Source IP Address:** The service-ping now uses the source-ip as the packet source-ip if provided.
+------
+- **I95-48158 Unable to capture child services using session capture:** When a session capture is configured on a child service (e.g., `social.internet` instead of `internet`), the session is now recorded.
+------
+- **I95-483381 Race condition in session teardown:** Shared context is now maintained to allow all packet processing to be completed before session teardown.
+------
+- **I95-48507 SIP Sessions Issue:** Resolved an issue where a session can get modified incorrectly when a vlan is present and session resiliency is enabled for failover.
+
 ## Release 5.4.8-8
 
 **Release Date: October 11, 2022**
