@@ -72,13 +72,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48108 Service Ping for a Service without Source NAT uses Source IP Address:** The service-ping now uses the source-ip as the packet source-ip if provided.
 ------
- - **I95-48125 Save TSI streaming from router to conductor not working:** Adding a node and router argument to the PCLI command `save tech-support-info` now works correctly.
+- **I95-48125 Save TSI streaming from router to conductor not working:** Adding a node and router argument to the PCLI command `save tech-support-info` now works correctly.
 ------
- - **I95-48138 Enabling metadata only works for packets that match the port-range specified:** Resolved this issue by identifying the specific flow, and enabling reverse metadata for a that flow.
+- **I95-48138 Enabling metadata only works for packets that match the port-range specified:** Resolved this issue by identifying the specific flow, and enabling reverse metadata for a that flow.
 ------
- - **I95-48181 "Failed to send IPFIX interim record" log messages:** Changed log level from Error to appropriate logging level for the cases when ipfix records should not be generated.
+- **I95-48181 "Failed to send IPFIX interim record" log messages:** Changed log level from Error to appropriate logging level for the cases when ipfix records should not be generated.
 ------
- - **I95-48246 Peer path GQL query should provide a node filter:** Added a parameter to stats on peer-path so that the node can be overwritten.
+- **I95-48246 Peer path GQL query should provide a node filter:** Added a parameter to stats on peer-path so that the node can be overwritten.
 ------
 - **I95-48357 CoreDump on Failover with DSCP Steering:** Resolved an issue where DSCP Steering sessions would fail to move a flow under certain circumstances and, when using DSCP value 0, crash.
 ------
@@ -169,9 +169,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-48018 APP-ID implementation with proxy web server unable to identify traffic correctly:** Resolved an issue reading certain HTTP headers that was causing Application Identification to miss them.
 ------
 - **I95-48038 502 Error returned if managed routers are offline:** Resolved an issue that caused HTTP requests on the conductor to return a 502 error for all requests if a managed router is offline.
-
-
-
 
 ## Release 5.6.1-18
 
