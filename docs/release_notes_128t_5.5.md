@@ -24,6 +24,19 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+:::important
+
+The following issue has been discovered in the following releases:
+
+- 5.5.4
+- 5.5.5
+- 5.5.6
+
+If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue will be resolved in the next patch release. 
+
+For immediate resolution on the impacted releases, contact Juniper Technical Support, or your SE.
+:::
+
 ## Release 5.5.6-2
 
 **Release Date:** October 21, 2022
