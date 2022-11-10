@@ -28,6 +28,12 @@ module.exports = {
       "intro_otp_iso_install",
       "intro_install_quickstart_otpiso",
     ],
+    "Conductor Installation": [
+      "single_conductor_install",
+      "single_conductor_config",
+      "conductor_upgrade",
+      "conductor_conversion",
+    ],  
     "Image-Based Installation": [
       "intro_installation_image",
       "install_onboard_hdware",
