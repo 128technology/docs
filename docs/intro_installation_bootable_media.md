@@ -1,6 +1,6 @@
 ---
-title: Conductor Interactive Installation
-sidebar_label: Conductor Interactive Installation
+title: Conductor or Router Interactive Installation
+sidebar_label: Conductor or Router Interactive Installation
 ---
 
 This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).

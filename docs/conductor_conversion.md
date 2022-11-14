@@ -3,7 +3,7 @@ title: Conductor Conversion
 sidebar_label: Conductor Conversion
 ---
 
-An SSR device (SSR1xx or SSR 1xxx) shipped with SSR 5.4.x Routing software may be reinitialized as a conductor for use in an existing network, in a conductor-managed deployment. The conductor can be used with or without Cloud Telemetry for devices running pre 6.0.x SSR software.
+An SSR device (SSR1xx or SSR 1xxx) shipped with SSR 5.4.x Routing software may be reinitialized as a conductor for use in an existing network. The conductor can be used with or without Cloud Telemetry for devices running pre 6.0.x SSR software.
 
 Use the following procedure to reinitialize an SSR 1xx/1xxx as a conductor.
 
@@ -82,4 +82,10 @@ After installing the SSR Routing Software it is important to verify that the ins
 3. Once the service is listed as _Active_, log into the system as Admin using the system default password.<br/>**Result:** The installation is verified.
 
 4. Close the command prompt window.
+
+## Next Steps
+
+See [Router/Conductor Interactive Installation](intro_installation_bootable_media.md) or [Router Installation Using OTP](intro_otp_iso_install.md) for step to configure your routers. 
+
+If your deployment will take advantage of Mist Telemetry, see [Enable WAN Assurance on the Conductor](config_wan_assurance.md#enable-wan-assurance-on-the-conductor) for those next steps. 
 

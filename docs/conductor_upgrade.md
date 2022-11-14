@@ -117,4 +117,8 @@ Use this procedure to upgrade the conductor from a linux shell.
    ```
 
 ## Next Steps
-[Enable WAN Assurance on the Conductor](config_wan_assurance.md#enable-wan-assurance-on-the-conductor)
+
+See [Router/Conductor Interactive Installation](intro_installation_bootable_media.md) or [Router Installation Using OTP](intro_otp_iso_install.md) for step to configure your routers. 
+
+If your deployment will take advantage of Mist Telemetry, see [Enable WAN Assurance on the Conductor](config_wan_assurance.md#enable-wan-assurance-on-the-conductor) for those next steps. 
+
