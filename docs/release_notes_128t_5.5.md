@@ -28,7 +28,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 The following issue has been discovered in the following releases:
 
-- 5.5.4
 - 5.5.5
 - 5.5.6
 

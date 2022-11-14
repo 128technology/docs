@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.0.6-9
 
-**Release Date:** November 13, 2022
+**Release Date:** December 3, 2022
 
 ### New Features
 
@@ -43,7 +43,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-43302 Rename Third-Party menu text:** The menu text has been changed to **External** to more accurately reflect the links to other Juniper platforms.
 ------
-- **I95-44957 Azure is not able to identify the asset-id of the depolyed conductor and router:** The Azure ID has been modified to a value that can be processed by Azure.
+- **I95-44957 Azure is not able to identify the asset-id of the deployed conductor and router:** The Azure ID has been modified to a value that can be processed by Azure.
 ------
 - **I95-46561 Peer table Sort by Destination does not work consistently:** Resolved an issue with sorting for Peer Path Source/Destination columns in the GUI.
 ------
@@ -97,11 +97,11 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-483381 Race condition in session teardown:** Shared context is now maintained to allow all packet processing to be completed before session teardown.
 ------
-- **I95-48427 BGP ignoring multihop ttl setting leading to invalid nexthop:** Resolved an issue where BGP may temporarily "forget" about the ttl value configured for a neighbor. 
+- **I95-48427 BGP ignoring multihop TTL (Time To Live) setting leading to invalid nexthop:** Resolved an issue where BGP may temporarily "forget" about the TTL value configured for a neighbor. 
 ------
 - **I95-48476 SSR cannot be adopted into Mist if DNS server 1.1.1.1 is unreachable:** Resolved an issue where blocking 1.1.1.1 prevented the `adopt` command and the GUI first-time mist onboarding process from completing. 
 ------
-- **I95-48507 Vlan packets are generated without a valid vlan from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when vlan is present when session resiliency is enabled for failover.
+- **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
 
 :::important
 The following issue has been discovered in the following releases:
