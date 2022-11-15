@@ -65,16 +65,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48353 Optimize Application-ID stats allocation:** Reduced memory usage by avoiding unnecessary app-id stats tracking allocations.
 ------
-- **I95-48357 CoreDump on Failover with DSCP Steering:** Resolved an issue where DSCP Steering sessions would fail to move a flow under certain circumstances and, when using DSCP value 0, crash.
+- **I95-48357 Process Fault on Failover with DSCP Steering:** Resolved an issue where DSCP Steering sessions would fail to move a flow under certain circumstances and, when using DSCP value 0, crash.
 ------
 - **I95-483381 Race condition in session teardown:** Shared context is now maintained to allow all packet processing to be completed before session teardown. 
 ------
-- **I95-48507 Vlan packets are generated without a valid vlan from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when vlan is present when session resiliency is enabled for failover.
-------
-=======
-:::important
+- **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
 
-The following issue has been discovered in the following releases:
+:::important
+The following issue has been discovered in the releases listed here:
 
 - 5.5.5
 - 5.5.6
