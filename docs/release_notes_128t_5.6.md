@@ -24,6 +24,37 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.6.4-2
+
+**Release Date:** November 18, 2022
+
+### New Features
+
+- **I95-48223 Add Application-specific information to `show sessions by-id`:** The following information has been added to `show sessions by-id`: 
+	- domainName
+	- uri
+	- category
+	- overrideServiceName
+	- appStatsTrackingKey (combination of application, client ip, ingress-interface, next-hop, and traffic-class) 
+
+### Resolved Issues
+
+- **I95-48076 SSR Failover on GRE tunnels not working:** The base interface giid is now used to identify the state of a GRE tunnel next-hop.
+------
+- **I95-48158 Unable to capture child services using session capture:** When a session capture is configured on a child service (e.g., `social.internet` instead of `internet`), the session is now recorded.
+------
+- **I95-48427 BGP ignoring multihop TTL (Time To Live) setting leading to invalid nexthop:** Resolved an issue where BGP may temporarily "forget" about the TTL value configured for a neighbor.
+------
+- **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
+------
+- **I95-48508 Keep-alive cache may cause worker core CPU spikes:** Resolved potential worker core utilization CPU spikes by utilizing aggressive keep-alive timeouts.
+------
+- **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
+------
+- **I95-48685 Infinite Proxying Between HA systems:** Updates made to prevent the recursive proxying that occurs between two HA systems when one of the upstream targets is unavailable.
+------
+- **WAN-1372 Improve CPU Usage Reporting:** Devised a more efficient collection scheme to minimize the CPU impact when collecting the CPU and memory data.
+
 :::important
 The following issue has been discovered in the releases listed here:
 
