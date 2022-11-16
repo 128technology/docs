@@ -57,22 +57,6 @@ After the Linux installation completes, the SSR software installation begins. No
 
 Shut down the system and remove the bootable media. Then power the system up to complete the installation process. 
 
-- GUI login via HTTPS is enabled by default on port 443.
-
-- The following user accounts and passwords are created during the ISO installation process:
-
-   | Username | Password   | Access Scope |
-   | -------- | ---------- | ------------ |
-   | root     | 128tRoutes | Linux account |
-   | t128     | 128tRoutes | Linux account |
-   | admin | 128Tadmin | SSR PCLI admin account - see note below |
- 
-   It is *strongly recommended* that you change these passwords immediately.
-
-  :::note
-  The admin default password is only created during the OTP installation. There is no admin defaut for an interactive installation.
-  :::
-
 ## Initial Boot and NMTUI
 
 When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.
