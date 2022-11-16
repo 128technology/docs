@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 5.5.7-3
 
-**Release Date:** November 16, 2022
+**Release Date:** November 15, 2022
 
 ### New Features
 
@@ -70,6 +70,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-483381 Race condition in session teardown:** Shared context is now maintained to allow all packet processing to be completed before session teardown. 
 ------
 - **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
+------
+- **I95-48685 GUI and/or PCLI unresponsive:** Resolved an issue where on an HA conductor the user interface would become unresponsive if a managed router was offline or unreachable.
 
 :::important
 The following issue has been discovered in the releases listed here:
