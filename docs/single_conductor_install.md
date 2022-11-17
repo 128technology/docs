@@ -73,13 +73,18 @@ Refer to the NMTUI user documentation for more details.
 
 The SSR Initializer tunes your operating system, prepares the platform to run the SSR software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot for the `Install 128T Routing Software...` installation options.
 
-If you are installing a highly available Conductor on the cloud, please refer to [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md).
+There are three different types of conductor installation; 
+- Standalone Conductor 
+- Conductor High Availability
+- [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md).
+
+### Standalone Conductor
 
 1. On the SSR Initializer wizard screen, use the space bar to select the **Conductor**role for the SSR node, and press the **Enter** key to select **OK**.
 
   ![SSR Role](/img/initializer_Serial2.png)
 
-2. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. 
+2. For a standalone conductor, leave the field labeled 2nd Conductor Address blank. 
 
 3. When asked _What kind of Router/Conductor node is this?_, select **Standalone** from the following options:
 
