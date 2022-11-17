@@ -71,9 +71,9 @@ Configure a Linux interface that corresponds to the management port for your Con
 
 ![Config eno1](/img/nmtui-linux.png)
 
-![Edit Connection 1](nmtui-linux-1.png)
+![Edit Connection 1](/img/nmtui-linux-1.png)
 
-![Config Connection](nmtui-linux-2.png)
+![Config Connection](/img/nmtui-linux-2.png)
 
 Refer to the NMTUI user documentation for additional details.
 
