@@ -104,7 +104,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
 
 :::important
-The following issue has been discovered in the following releases:
+The following issue has been discovered in the releases listed here:
 
 - 6.0.4
 - 6.0.5
