@@ -59,7 +59,7 @@ Select `<Yes>` to shut down the system. Remove the bootable media, then power th
 
 ## Initial Boot and NMTUI
 
-When the system boots from the Interactive Installation work flow, the system prompts you to configure initial Linux Networking before the Initializer is started.
+When the system boots from the Interactive Installation work flow, the system prompts you to configure initial Linux Networking before the Initializer is started. By default, all interfaces are disabled; at least one must be enabled to allow administrative access to the Conductor GUI, and for the routers to reach the Conductor.  
 
 ![128T NetManager TUI Start](/img/Initializer_Serial0.png)
 
@@ -81,7 +81,7 @@ Refer to the NMTUI user documentation for additional details.
 
 The SSR Initializer tunes your operating system, prepares the platform to run the SSR software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot.
 
-There are three different types of conductor installation; 
+There are three different types of conductor installations; 
 - Standalone Conductor 
 - Conductor High Availability
 - [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md).
@@ -102,7 +102,7 @@ There are three different types of conductor installation;
 
     ![Node Information](/img/initializer_Serial5.png)
 
-    - **Node Name:** The name of the system within your Conductor, for example, _conductor-node1_. By default this field uses the Linux system's hostname.
+    - **Node Name:** The name of the system within your Conductor, for example, _conductor-node1_. By default this field uses the Linux system's hostname. The node name identifies the conductor node under the **Conductor** element in the Authority. 
 
     :::note
     Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).
@@ -136,17 +136,15 @@ After installing the SSR Software it is important to verify that the installatio
 
 2. Execute the command:
 
-   ```
-   sudo systemctl status 128T
-   ```
+  ```
+  sudo systemctl status 128T
+  ```
 
-   **Result:** The service is listed as _Active (running)_.
+  If the service is listed as _Active_ (running), go to step 3. 
 
-   If the service is listed as _Inactive_, run the `sudo systemctl start 128T` command. This may take several minutes to fully launch the service.
+  If the service is listed as _Inactive_, run the `sudo systemctl start 128T` command. This may take several minutes to fully launch the service.
 
-3. Once the service is listed as _Active_, log into the system as Admin using the system default password.
-
-   **Result:** The installation is verified.
+3. Once the service is listed as _Active_, log into the system as Admin using the system default password. By logging into the system, you have verified the installation. 
 
 4. Close the command prompt window. 
 
@@ -154,6 +152,20 @@ After installing the SSR Software it is important to verify that the installatio
 
 6. Log in to the SSR GUI using the admin name and password you created earlier.
   
+## Configure the Token
 
+Beginning with SSR Version 5.5.2, the preferred method to save repository access credentials is to use the PCLI command `set software access-token`. For additional information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
+
+For earlier software versions, the `repo authenticate` subcommand is used to configure credentials for authenticating with SSR software repositories. To use this subcommand, you must specify both a username and a token for authentication. Use the following procedure to either add or update the username/token:
+
+:::note
+It is strongly recommended that you update the token during a maintenance window. Performing these operations on a large deployment may take an extended amount of time to complete.
+:::
+
+1. Update the username/token using the [`install128t repo authenticate -u <user> -t <token>`](#repo) process on the conductor.
+
+2. Restart the conductor with `systemctl restart 128T` and wait for the conductor to be fully operational (can be up to 5 minutes).
+
+After the routers return to a running state the systems will be updated with the username/token.
 
 
