@@ -11,7 +11,7 @@ The steps in this section describe the *interactive conductor installation* from
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
 :::
 
-To install a router **after** installing and configuring the Conductor, use the [Router Installation](intro_installation_bootable_media.md#initialize-the-ssr-node); or the procedure [Router Installation Using OTP](intro_otp_iso_install.mdx) can be used to install complex router configurations. 
+To install a router **after** installing and configuring the Conductor, use the [Router Installation](intro_installation_bootable_media.md#initialize-the-ssr-node). The [Router Installation Using OTP](intro_otp_iso_install.mdx) procedure can be used to install more complex router configurations. 
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ To install a router **after** installing and configuring the Conductor, use the 
 
 ## Installing the ISO
 
-After imaging the ISO onto removable media, insert it into the target machine and power it on.
+After imaging the ISO onto removable media, insert it into the target device and power it on.
 
 ### Choose the Installation Type
 
@@ -34,9 +34,9 @@ To install using the Interactive Installation, use the arrow keys to select eith
 Differences for the serial console are described in [Serial Console Installation Information](#serial-console-installation-information). 
 
 :::note
-Not all hardware has video support. Booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
+Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
 
-Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed, and if left to continue will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
+Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 ::: 
 
 #### Install via Serial Console
@@ -49,7 +49,7 @@ Use this option when running on hardware that has onboard graphics chipsets. Thi
 
 The procedure that follows here is the **Interactive Install on the VGA Console**.
 
-### Conductor Installation
+## Conductor Installation
 
 After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (approximately 20 minutes). After the installation has completed, the following screen is displayed:
 
@@ -57,7 +57,7 @@ After the Linux installation completes, the SSR software installation begins. No
 
 Select `<Yes>` to shut down the system. Remove the bootable media, then power the system up to complete the installation process. 
 
-## Initial Boot and NMTUI
+### Initial Boot and NMTUI
 
 When the system boots from the Interactive Installation work flow, the system prompts you to configure initial Linux Networking before the Initializer is started. By default, all interfaces are disabled; at least one must be enabled to allow administrative access to the Conductor GUI, and for the routers to reach the Conductor.  
 
@@ -77,7 +77,7 @@ Configure a Linux interface that corresponds to the management port for your Con
 
 Refer to the NMTUI user documentation for additional details.
 
-## Initialize the SSR Node
+### Initialize the SSR Node
 
 The SSR Initializer tunes your operating system, prepares the platform to run the SSR software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot.
 
