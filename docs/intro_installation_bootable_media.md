@@ -1,6 +1,6 @@
 ---
-title: Conductor or Router Interactive Installation
-sidebar_label: Conductor or Router Interactive Installation
+title: SSR Interactive Installation
+sidebar_label: SSR Interactive Installation
 ---
 
 This section assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
@@ -65,11 +65,11 @@ Use the following procedure to enable FIPS enforcement.
 
 The procedure that follows here is the Interactive Install on the VGA Console.
 
-#### SSR System via Serial Console
+#### Install via Serial Console
 
 Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. For serial console issues please refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
 
-#### SSR System with VGA Console
+#### Install via VGA Console
 
 Use this option when running on hardware that has onboard graphics chipsets. This installs SSR software using the GUI installer.
 
@@ -115,11 +115,11 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 If you are installing a highly available Conductor on the cloud, please refer to [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md).
 
-1. On the SSR Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the SSR node and press the **Enter** key to select **OK**.
+1. On the SSR Initializer wizard screen, use the space bar to select either a **Router** or **Conductor **role for the SSR node and press the **Enter** key to select **OK**.
 
   ![SSR Role](/img/initializer_Serial2.png)
 
-2. For SSR routers, you will be prompted for the IP address(es) of your conductor(s). If you have conductors, enter the administrative addresses and the node will retrieve the configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
+2. For SSR routers, you will be prompted for the IP address(es) of your conductor(s). If you have conductors, enter the administrative addresses and the node will retrieve the configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
 3. When asked _What kind of Router/Conductor node is this?_, select from the following options:
 
   ![Identify the Node](/img/initializer_Serial3.png)

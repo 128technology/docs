@@ -12,7 +12,31 @@ Network configuration is provisioned on the conductor and pushed out to the rout
 - [Configuration templates created](config_templates.md) in the SSR software and imported to the conductor.
 - Network configuration manually created on the conductor after installation. 
 
-### Import Configurations
+## Import Configurations
+
+Configurations can be imported using either the GUI or the PCLI.
+
+### Using the SSR GUI:
+
+1. From the Configuration menu on the left, select **Import/Export**.
+
+![Config Import Menu](/img/conductor_config_import_gui.png)
+
+2. Available configurations are listed on the Import/Export Configuration screen. Select the **Apply** icon for the configuration you wish to import. 
+
+![Import Export List](/img/conductor_config_import_gui2.png)
+
+3. Click the Apply button on the instruction window.
+
+![Apply Config Instructions](/img/conductor_config_import_gui3.png)
+
+4. The imported configuration is added as the running config, and must be manually committed using the **COMMIT** button on the GUI. The list of changes **Ready to Commit** are shown on the bottom right of the GUI. 
+
+![Commit Button](/img/conductor_config_import_gui3a.png)
+
+![Ready to Commit](/img/conductor_config_import_gui4.png)
+
+### Using the SSR PCLI:
 
 1. Export the configuration of your existing network. Place that configuration into the `/etc/128technology/config-exports` directory on the SSR.
 2. From the SSR PCLI execute the `import-config <filename>` command to import the configuration onto the conductor as a candidate config.
@@ -20,33 +44,7 @@ Network configuration is provisioned on the conductor and pushed out to the rout
 	Click the **Apply** icon for the desired configuration file. 
 3. Once this operation has completed, `commit` the configuration to make it the running config. Any errors or conflicts will be noted and must be resolved before the commit succeeds. Once any errors are resolved, the config is available to update any connected routers. 
 
-### Initial Manual Configuration
+## Initial Manual Configuration
 
-Use the steps below to complete a base configuration of the Conductor.
-
-#### Name the Authority
-1. Log in to the GUI for your Conductor.
-2. Select **Configuration**.
-3. Select Authority and change the Authority Name to a unique identifier for your system.
-4. Select VALIDATE and then COMMIT.
-
-#### Create a Service
-The *service* configuration element is the cornerstone of the SSR data model. It is what allows administrators to describe eligible destinations for traffic, and subsequently define access controls, routing policy, and traffic treatment. 
-
-Each IP destination that will receive traffic must be configured as a *service*. A service can be defined as broadly as a netmask or as specific as a transport protocol and single port. This example creates a service representing the entire internet, as 0.0.0.0/0.
-
-1.	Log in to the Conductor GUI.
-2.	Select Configuration.
-3.	Scroll down to Services.
-4.	Select ADD next to Services.
-5.	Name the service *internet*, and select SAVE.
-6.	On the **Service** screen, verify that **Enabled** is set to *true*.
-7.  Set **Scope** to *public*.
-8.  Scroll down to Service Addresses and select ADD.
-9.  Enter the IP address 0.0.0.0/0, and select SAVE.
-10. At the top of the screen, select VALIDATE and then COMMIT. 
-
-For a more in-depth look at Services, please see [Service and Service Policy Design](bcp_service_and_service_policy_design.md).
-
-For more information about configuring and deploying conductors, please see [Conductor Deployment](bcp_conductor_deployment.md).
+Manual configurations are created on the conductor, using either the GUI or the PCLI. To understand this process, refer to [Configuration Management on the SSR](config_basics.md) as a starting point. 
 

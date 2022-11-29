@@ -14,10 +14,6 @@ There are two standard ways of upgrading a conductor:
 - Using the conductor's GUI to initiate the upgrade
 - Using the conductor's PCLI to initiate the upgrade
 
-:::note
-The upgrade process using the GUI and the PCLI is done in two stages: First, the software is downloaded, then it is installed.
-:::
-
 Prerequisites for upgrades now include configuring a user with super user (sudo) privileges. **SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
 
 ### Version Dependencies
@@ -25,9 +21,9 @@ Prerequisites for upgrades now include configuring a user with super user (sudo)
 The conductor `major.minor` version must be greater than or equal to the router version. The router version can not exceed the conductors `major.minor` version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support *may* work, but are not guaranteed to do so.  
 
 Examples:
-- Conductor running version 5.3.0, managing Routers running version 5.1.1: Supported.
-- Conductor running version 5.2.0, managing Routers running version 5.2.2: Supported.
-- Conductor running version 5.2.1, managing Routers running version 4.5.13: Supported.
+- Conductor running version 6.0.5, managing Routers running version 6.0.1: Supported.
+- Conductor running version 5.4.8, managing Routers running version 5.4.10: Supported.
+- Conductor running version 6.0.5, managing Routers running version 5.5.7: Supported.
 - Conductor running version 4.5.13, managing Routers running version 4.2.9: Not supported, but may work.
 
 ## Upgrading the Conductor 
