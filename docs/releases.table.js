@@ -13,6 +13,13 @@ export const releases = [
     endOfSupport: 'October 20, 2023',
   },
   {
+    version: '5.4.10',
+    url:'release_notes_128t_5.4#release-5410-3',
+    releaseDate: 'November 23, 2022',
+    endOfMaintenance: 'December 18, 2022',
+    endOfSupport: 'June 18, 2023',
+  },
+  {
     version: '5.6.4',
     url:'release_notes_128t_5.6#release-564-3',
     releaseDate: 'November 18, 2022',
