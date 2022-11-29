@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.0.6-9
+## Release 6.0.7-?
 
 **Release Date:** December 3, 2022
 
@@ -61,7 +61,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47476 Session table associated paths not scalable, scroll bar hidden:** The Session Table window has been enlarged to more clearly show information.
 ------
-- **I95-47519 Add First Article of Inspection scan output to Tech Support Info:** Added the output of the FAI (first article of inspection) script to Tech Support Info.
+- **I95-47519 Add First Article Inspection scan output to Tech Support Info:** Added the output of the FAI (First Article Inspection) script to Tech Support Info.
 ------
 - **I95-47787 Worker core packet processing spikes to 100%:** Added the ability to tune the [Reverse Packet Session Resiliency](config_reference_guide.md#reverse-packet-session-resiliency) `Minimum Packet Count` (default is 3) and `Detection Interval` (default is 5) settings for session failover without requiring forward packet, and resolved the underlying issue that caused excessively high worker-core CPU.
 ------
@@ -103,6 +103,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
 
+## Release 6.0.5-17
+
 :::important
 The following issue has been discovered in the releases listed here:
 
@@ -113,8 +115,6 @@ If an HA Conductor queries a disconnected router from the Conductor GUI Router p
 
 For immediate resolution on the impacted releases, contact Juniper Technical Support, or your SE.
 :::
-
-## Release 6.0.5-17
 
 **Release Date:** October 14, 2022
 
