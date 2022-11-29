@@ -81,7 +81,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-483381 Race condition in session teardown:** Shared context is now maintained to allow all packet processing to be completed before session teardown.
 ------
-- **I95-48507 SIP Sessions Issue:** Resolved an issue where a session can get modified incorrectly when a vlan is present and session resiliency is enabled for failover.
+- **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
 
 ## Release 5.4.8-8
 
