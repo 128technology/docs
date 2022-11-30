@@ -11,7 +11,7 @@ The steps in this section describe the *interactive conductor installation* from
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
 :::
 
-To install a router **after** installing and configuring the Conductor, use the [Router Installation](intro_installation_bootable_media.md#initialize-the-ssr-node). The [Router Installation Using OTP](intro_otp_iso_install.mdx) procedure can be used to install more complex router configurations. 
+To install a router **after** installing and configuring the Conductor, use the [SSR Installation](intro_installation_bootable_media.md#initialize-the-ssr-node). The [Router Installation Using OTP](intro_otp_iso_install.mdx) procedure can be used to install more complex router configurations. 
 
 ## Prerequisites
 
@@ -27,11 +27,11 @@ After imaging the ISO onto removable media, insert it into the target device and
 
 Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment. 
 
-To install using the Interactive Installation, use the arrow keys to select either `Serial: Interactive Install 128T <version number>.el7.x86_64` or **`VGA: Interactive Install 128T <version number>.el7.x86_64`**. As noted earlier, this guide describes the installation process using the Interactive Installation, specifically using the VGA console. The process for a Conductor or a Router is the same. 
+To install using the Interactive Installation, use the arrow keys to select either `Install 128T Routing Software Serial Console` or **`Install 128T Routing Software VGA Console`**. As noted earlier, this guide describes the installation process using the Interactive Installation, specifically using the VGA console.
 
-![VGA Boot with Interactive Install](/img/install_select_interactive2.png)
+![VGA Boot with Interactive Install](/img/install_select_interactive.png)
 
-Differences for the serial console are described in [Serial Console Installation Information](#serial-console-installation-information). 
+Differences for the serial console are described in [Serial Console Installation Information](intro_installation_bootable_media.md#serial-console-installation-information). 
 
 :::note
 Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
@@ -41,13 +41,41 @@ Selecting the wrong type of console (Serial or VGA) may result in garbled charac
 
 #### Install via Serial Console
 
-Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. For serial console issues please refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
+Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
+
+![Serial Install Selection](/img/install_select_interactive2.png)
+
+For serial console issues please refer to [Serial Console Troubleshooting](#serial-console-troubleshooting).
 
 #### Install via VGA Console
 
 Use this option when running on hardware that has onboard graphics chipsets. This installs SSR software using the GUI installer.
 
 The procedure that follows here is the **Interactive Install on the VGA Console**.
+
+### FIPS Enforcement Mode
+
+FIPS Enforcement is available for **version 6.0 and later**. FIPS mode can be enabled manually during the installation. In cases where the flag was not or cannot be set during installation, a FIPS RPM is available for download from the SSR repos, and can be installed.
+
+:::important
+If you require strict FIPS compliance, the `fips=1` kernel option must be added to the kernel command line during system installation to ensure that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
+
+If FIPS enablement is done retrospectively via RPM installation, the already created accounts could be using non-FIPS compliant cyphers.
+:::
+
+Use the following procedure to enable FIPS enforcement.
+
+1. Use up/down keys to highlight the desired install mode. 
+
+  ![Bios Install](/img/56fips_BIOSinstall_1.png)
+
+2. Press TAB to edit the config.
+
+3. Add `fips=1` to the end of the vmlinuz parameters.
+
+  ![FIPS Parameter](/img/56fips_BIOSinstall_2.png)
+
+4. Press Enter to start the install.   
 
 ## Conductor Installation
 
@@ -169,5 +197,4 @@ It is strongly recommended that you update the token during a maintenance window
 2. Restart the conductor with `systemctl restart 128T` and wait for the conductor to be fully operational (can be up to 5 minutes).
 
 After the routers return to a running state the systems will be updated with the username/token.
-
 

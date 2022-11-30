@@ -1,6 +1,6 @@
 ---
-title: Configure the Conductor
-sidebar: Configure the Conductor
+title: Import Configurations to the Conductor
+sidebar: Import Configurations to the Conductor
 ---
  
 The Conductor manages the SSR Routers you configure within the same Authority. It offers centralized administration, provisioning, monitoring, analytics, and lifecycle management of the SSR routers. 
