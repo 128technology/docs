@@ -196,7 +196,7 @@ export const releases = [
   },
  {
     version: '5.4.4',
-    url:'release_notes_128t_5.4#release-544-9',
+    url:'/docs/release_notes_128t_5.4#release-544-9',
     releaseDate: 'February 18, 2022',
     endOfMaintenance: 'December 18, 2022',
     endOfSupport: 'June 18, 2023',
