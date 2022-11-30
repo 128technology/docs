@@ -11,8 +11,8 @@ For the purposes of describing the platform support policy, the following terms 
 - ***Platform*** - A physical or virtual system, typically consisting of some amount of resources for compute, memory, disk, and networking. _Example_: A physical server, virtual machine, or public cloud virtual machine instance.
 - ***Certification*** - The process of testing to ensure that a specific combination of an SSR Networking Platform software version and platform build meet requirements for functionality, stability, and performance. _Example_: The [SSR Certification Program](#128t-certification-program) provides certification of a set of platforms with SSR Networking Platform software.
 - ***Certified Platform*** - A platform that is currently in the SSR Certification Program as an [SSR Certified Plus Platform](#128t-certified-plus-platform), or [SSR Certified Platform](#128t-certified-platform).
-- ***Qualified Platform*** - A platform that meets or exceeds [minimum platform specifications](#minimum-platform-specifications) and is known to be able to run SSR Networking Platform software. _Example_: A CompuLab fitlet2 with Intel Atom E3950, 8GB of memory, and 128GB of disk is a qualified platform.
-- ***Compatible Platform*** - A platform that meets or exceeds [minimum platform specifications](#minimum-platform-specifications). _Example_: A platform with Intel Xeon D-1518, 8GB of memory, and 128GB of disk is a compatible platform.
+- ***Qualified Platform*** - A platform that meets or exceeds [minimum platform specifications](#minimum-platform-specifications) and is known to be able to run SSR Networking Platform software. _Example_: A CompuLab fitlet2 with an Intel Atom E3950, 8GB of memory, and 120GB of disk space is a qualified platform.
+- ***Compatible Platform*** - A platform that meets or exceeds [minimum platform specifications](#minimum-platform-specifications). _Example_: A platform with an Intel Xeon D-1518, 8GB of memory, and 120GB of disk space is a compatible platform.
 - ***Incompatible Platform*** - A platform that does not meet [minimum platform specifications](#minimum-platform-specifications) and is unlikely to run SSR Networking Platform software at acceptable levels of functionality, stability, performance, or at all. _Example_: The [Apollo Guidance Computer](https://en.wikipedia.org/wiki/Apollo_Guidance_Computer) is an incompatible platform.
 
 ## SSR Certification Program
@@ -92,8 +92,8 @@ When selecting a compatible platform for an SSR router, the following provides s
 
 | Use | CPU | Memory | Disk | Network Interface |
 | --- | --- | --- | --- | --- |
-| Small Branch Office | 4 Intel cores, single socket | 8 GB ECC | 128 MLC* GB SSD | 4+ Physical NICs compatible with DPDK |
-| Medium Branch Office | 8 Intel cores, single socket | 16 GB ECC | 128+ MLC* GB SSD | 4+ Physical NICs compatible with DPDK |
+| Small Branch Office | 4 Intel cores, single socket | 8 GB ECC | 120 MLC* GB SSD | 4+ Physical NICs compatible with DPDK |
+| Medium Branch Office | 8 Intel cores, single socket | 16 GB ECC | 120+ MLC* GB SSD | 4+ Physical NICs compatible with DPDK |
 | Large Branch Office | 16 Intel cores, single socket | 32 GB ECC | 240+ GB MLC* SSD | 4+ Physical NICs compatible with DPDK |
 | Head-end or Data center | 8+ Intel Xeon cores, single socket | 32 GB ECC | 240+ GB MLC* SSD | 5+ Physical NICs compatible with DPDK |
 
@@ -128,7 +128,7 @@ These are the minimum platform specifications for running the SSR Networking Pla
 
 * Intel 4 Core x86 processor, single socket
 * 8GB ECC Memory
-* 128GB SSD
+* 120GB SSD
 * 1 DPDK enabled NIC port for standalone systems (two recommended)
 * 2 DPDK enabled NIC ports for HA systems (three recommended)
 * 1 dedicated NIC port for HA synchronization
@@ -143,7 +143,7 @@ Multi-socket platforms are not compatible with the SSR software when run as a ro
 
 * Intel 4 Core x86 processor
 * 8GB ECC Memory
-* 128GB SSD
+* 120GB SSD
 * 1 (1G) Management port
 * Hyperthreading enabled
 
