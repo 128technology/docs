@@ -1,0 +1,1 @@
+Sample text from merge_example 1.
