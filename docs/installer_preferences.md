@@ -387,7 +387,7 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 ```regexp
 ^((=|[><]=?)\s+)?([^\s:]+)?([^\s\-]+)(-(\S+))?$
 ```
-
+<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E((%3D%7C%5B%3E%3C%5D%3D%3F)%5Cs%2B)%3F(%5B%5E%5Cs%3A%5D%2B)%3F(%5B%5E%5Cs%5C-%5D%2B)(-(%5CS%2B))%3F%24 "try regular expression with regexr.com")
 
 #### 128T-version Examples
@@ -522,7 +522,7 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 ```regexp
 ^((=|[><]=?)\s+)?([^\s:]+)?([^\s\-]+)(-(\S+))?$
 ```
-
+<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E((%3D%7C%5B%3E%3C%5D%3D%3F)%5Cs%2B)%3F(%5B%5E%5Cs%3A%5D%2B)%3F(%5B%5E%5Cs%5C-%5D%2B)(-(%5CS%2B))%3F%24 "try regular expression with regexr.com")
 
 #### 128T-version Examples
@@ -614,7 +614,7 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 ```regexp
 ^((=|[><]=?)\s+)?([^\s:]+)?([^\s\-]+)(-(\S+))?$
 ```
-
+<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E((%3D%7C%5B%3E%3C%5D%3D%3F)%5Cs%2B)%3F(%5B%5E%5Cs%3A%5D%2B)%3F(%5B%5E%5Cs%5C-%5D%2B)(-(%5CS%2B))%3F%24 "try regular expression with regexr.com")
 
 #### 128T-version Examples

@@ -24,6 +24,50 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.6.4-3
+
+**Release Date:** November 18, 2022
+
+### New Features
+
+- **I95-48223 Add Application-specific information to `show sessions by-id`:** The following information has been added to `show sessions by-id`: 
+	- domainName
+	- uri
+	- category
+	- overrideServiceName
+	- appStatsTrackingKey (combination of application, client ip, ingress-interface, next-hop, and traffic-class) 
+
+### Resolved Issues
+
+- **I95-48076 SSR Failover on GRE tunnels not working:** The base interface giid is now used to identify the state of a GRE tunnel next-hop.
+------
+- **I95-48158 Unable to capture child services using session capture:** When a session capture is configured on a child service (e.g., `social.internet` instead of `internet`), the session is now recorded.
+------
+- **I95-48427 BGP ignoring multihop TTL (Time To Live) setting leading to invalid nexthop:** Resolved an issue where BGP may temporarily "forget" about the TTL value configured for a neighbor.
+------
+- **I95-48508 Keep-alive cache may cause worker core CPU spikes:** Resolved potential worker core utilization CPU spikes by utilizing aggressive keep-alive timeouts.
+------
+- **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
+------
+- **I95-48685 GUI and/or PCLI unresponsive:** Resolved an issue where on an HA conductor the user interface would become unresponsive if a managed router was offline or unreachable.
+------
+- **I95-48686 Transmitted packet buffers held too long:** The packet pool sizing has been adjusted to prevent pool depletion when local.init overrides for descriptor counts are present.
+------
+- **I95-48731 Sessions created on a `fin-ack` may get stuck:** Resolved an issue where, if tcp-state-enforcement is set to allow, a TCP session is established from a fin-ack may not get torn down in a timely manner.
+------
+- **WAN-1372 Improve CPU Usage Reporting:** Devised a more efficient collection scheme to minimize the CPU impact when collecting the CPU and memory data.
+
+:::important
+The following issue has been discovered in the releases listed here:
+
+- 5.6.2 
+- 5.6.3
+
+If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue will be resolved in the next patch release. 
+
+For immediate resolution on the impacted releases, contact Juniper Technical Support, or your SE.
+:::
+
 ## Release 5.6.3-6
 
 **Release Date:** November 7, 2022
@@ -72,17 +116,19 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48108 Service Ping for a Service without Source NAT uses Source IP Address:** The service-ping now uses the source-ip as the packet source-ip if provided.
 ------
- - **I95-48125 Save TSI streaming from router to conductor not working:** Adding a node and router argument to the PCLI command `save tech-support-info` now works correctly.
+- **I95-48125 Save TSI streaming from router to conductor not working:** Adding a node and router argument to the PCLI command `save tech-support-info` now works correctly.
 ------
- - **I95-48138 Enabling metadata only works for packets that match the port-range specified:** Resolved this issue by identifying the specific flow, and enabling reverse metadata for a that flow.
+- **I95-48138 Enabling metadata only works for packets that match the port-range specified:** Resolved this issue by identifying the specific flow, and enabling reverse metadata for a that flow.
 ------
- - **I95-48181 "Failed to send IPFIX interim record" log messages:** Changed log level from Error to appropriate logging level for the cases when ipfix records should not be generated.
+- **I95-48181 "Failed to send IPFIX interim record" log messages:** Changed log level from Error to appropriate logging level for the cases when ipfix records should not be generated.
 ------
- - **I95-48246 Peer path GQL query should provide a node filter:** Added a parameter to stats on peer-path so that the node can be overwritten.
+- **I95-48246 Peer path GQL query should provide a node filter:** Added a parameter to stats on peer-path so that the node can be overwritten.
 ------
 - **I95-48357 CoreDump on Failover with DSCP Steering:** Resolved an issue where DSCP Steering sessions would fail to move a flow under certain circumstances and, when using DSCP value 0, crash.
 ------
 - **I95-483381 Race condition in session teardown:** Shared context is now maintained to allow all packet processing to be completed before session teardown. 
+------
+- **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
 
 ## Release 5.6.2-7
 
