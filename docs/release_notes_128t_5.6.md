@@ -57,18 +57,18 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **WAN-1372 Improve CPU Usage Reporting:** Devised a more efficient collection scheme to minimize the CPU impact when collecting the CPU and memory data.
 
+## Release 5.6.3-6
+
 :::important
 The following issue has been discovered in the releases listed here:
 
 - 5.6.2 
 - 5.6.3
 
-If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue will be resolved in the next patch release. 
+If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue has been resolved in the next patch release with I95-48685. 
 
 For immediate resolution on the impacted releases, contact Juniper Technical Support, or your SE.
 :::
-
-## Release 5.6.3-6
 
 **Release Date:** November 7, 2022
 

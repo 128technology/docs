@@ -76,7 +76,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47909 Handle GRE tunnels in ICMP reachability probe:** The base interface for egress is now used if the `icmp-probe probe-address` is the same as the tunnel destination, and the `internal-address` is used as the source if the `egress-interface` is `gre-overlay`.
 ------
-- **I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:** Resolved an issue where FRR BGP update suppress was not removing any pending withdrawls.
+- **I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:** Resolved an issue where BGP update suppress was not removing any pending withdrawls.
 ------
 - **I95-47992 HTTP service not working in WAN Assurance:** Resolved an issue where HTTP traffic is dropped when using a combination of application-identification, adaptive-encryption, and spoke-to-hub-to-spoke topology (outbound-only peer-connectivity).
 ------
@@ -98,7 +98,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48246 Peer path GQL query should provide a node filter:** Added a parameter to stats on peer-path so that the node can be overwritten.
 ------
-- **I95-48343 Cannot complete Image-based installation if secondary disks are less than 2TB:** Resolved the issue so that image-based installation will complete correctly for systems containing drives larger than 2TB.
+- **I95-48343 Cannot complete Image-based installation if secondary disks are greater than 2TB:** Resolved the issue so that image-based installation will complete correctly for systems containing drives larger than 2TB.
 ------
 - **I95-48357 CoreDump on Failover with DSCP Steering:** Resolved an issue where DSCP Steering sessions would fail to move a flow under certain circumstances and, when using DSCP value 0, crash.
 ------
@@ -118,7 +118,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
 ------
-- **I95-48581 No entry timestamp for s`how app-id cache`:** Additional timing information has been added to `show app-id cache`.
+- **I95-48581 No entry timestamp for `show app-id cache`:** Additional timing information has been added to `show app-id cache`.
 ------
 **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
 ------
@@ -148,7 +148,7 @@ The following issue has been discovered in the releases listed here:
 - 6.0.4
 - 6.0.5
 
-If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue will be resolved in the next patch release. 
+If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue has been resolved in the next patch release with I95-48685. 
 
 For immediate resolution on the impacted releases, contact Juniper Technical Support, or your SE.
 :::
