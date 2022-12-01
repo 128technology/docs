@@ -24,13 +24,20 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.0.7-5
+## Release 6.0.7-6
 
 **Release Date:** December 3, 2022
 
 ### New Features
 
-- **I95-48223 Add Application-specific information to `show sessions by-id`:** The following information has been added to `show sessions by-id`:
+- **I95-47222 Add a Cleanup boot function for brownfield conversions:** Added a function that removes all kernels and unmatched `initramfs` files, as well as removing the copies of the saved files post-conversion from their original location.
+------
+- **I95-47409 Enhance tracking around Application ID expirations:** The following enhancements have been made to provide additonal insight to Application Identification:
+	- Track next hop additions and removals separately for more insight
+	- Track the number of times an expiration timer is set (globally and per next hop)
+	- Track the number of times an expiration timer is cleared due to a new session (globally and per next hop)
+------
+**I95-48223 Add Application-specific information to `show sessions by-id`:** The following information has been added to `show sessions by-id`:
 	- domainName
 	- uri
 	- category
@@ -39,6 +46,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Resolved Issues
 
+- **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653.
+------
 - **I95-32789 Peer metrics unavailable after Conflux synchronization:** Resolved an issue with HA routers where the metrics application stops streaming metrics to the peer node after loading configuration.
 ------
 - **I95-43302 Rename Third-Party menu text:** The menu text has been changed to **External** to more accurately reflect the links to other Juniper platforms.
@@ -67,7 +76,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47909 Handle GRE tunnels in ICMP reachability probe:** The base interface for egress is now used if the `icmp-probe probe-address` is the same as the tunnel destination, and the `internal-address` is used as the source if the `egress-interface` is `gre-overlay`.
 ------
-- **I95-47967 Cloud bootstrapper does not bootstrap the deployed Conductor:** Resolved an issue where the configuration was being rejected by the cloud bootstrapper when the device was a conductor.
+- **I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:** Resolved an issue where FRR BGP update suppress was not removing any pending withdrawls.
 ------
 - **I95-47992 HTTP service not working in WAN Assurance:** Resolved an issue where HTTP traffic is dropped when using a combination of application-identification, adaptive-encryption, and spoke-to-hub-to-spoke topology (outbound-only peer-connectivity).
 ------
@@ -79,8 +88,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48108 Service Ping for a Service without Source NAT uses Source IP Address:** The service-ping now uses the source-ip as the packet source-ip if provided.
 ------
-- **I95-48125 Save TSI streaming from router to conductor not working:** Adding a node and router argument to the PCLI command `save tech-support-info` now works correctly.
-------
 - **I95-48138 Enabling metadata only works for packets that match the port-range specified:** Resolved this issue by identifying the specific flow, and enabling reverse metadata for a that flow.
 ------
 - **I95-48158 Unable to capture child services using session capture:** When a session capture is configured on a child service (e.g., `social.internet` instead of `internet`), the session is now recorded.
@@ -91,17 +98,47 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48246 Peer path GQL query should provide a node filter:** Added a parameter to stats on peer-path so that the node can be overwritten.
 ------
-- **I95-48353 Optimize Application-ID stats allocation:** Reduced memory usage by avoiding unnecessary app-id stats tracking allocations.
+- **I95-48343 Cannot complete Image-based installation if secondary disks are less than 2TB:** Resolved the issue so that image-based installation will complete correctly for systems containing drives larger than 2TB.
 ------
 - **I95-48357 CoreDump on Failover with DSCP Steering:** Resolved an issue where DSCP Steering sessions would fail to move a flow under certain circumstances and, when using DSCP value 0, crash.
 ------
-- **I95-483381 Race condition in session teardown:** Shared context is now maintained to allow all packet processing to be completed before session teardown.
+- **I95-48381 Race condition in session teardown:** Shared context is now maintained to allow all packet processing to be completed before session teardown.
 ------
 - **I95-48427 BGP ignoring multihop TTL (Time To Live) setting leading to invalid nexthop:** Resolved an issue where BGP may temporarily "forget" about the TTL value configured for a neighbor. 
 ------
 - **I95-48476 SSR cannot be adopted into Mist if DNS server 1.1.1.1 is unreachable:** Resolved an issue where blocking 1.1.1.1 prevented the `adopt` command and the GUI first-time mist onboarding process from completing. 
 ------
 - **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
+------
+- **I95-48508 Keep-alive cache may cause worker core CPU spikes:** Resolved potential worker core utilization CPU spikes by utilizing aggressive keep-alive timeouts.
+------
+- **I95-48529 BFD sending link notification before hold-down timer expires:** Resolved an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now correctly reflect the peer status. Sessions will not be moved back to peers that have re-established connectivity but are still in the hold-down period.
+------
+- **I95-48579 Application director does not handle overlapping prefixes correctly:** The IP tree has been updated and now handles overlapping prefixes correctly. 
+------
+- **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
+------
+- **I95-48581 No entry timestamp for s`how app-id cache`:** Additional timing information has been added to `show app-id cache`.
+------
+**I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
+------
+- **I95-48656 Reduce TSI service log limit:** The size of the Tech Support Info journal has been restricted to prevent excessive resource consumption.
+------
+- **I95-48685 GUI and/or PCLI unresponsive:** Resolved an issue where on an HA conductor the user interface would become unresponsive if a managed router was offline or unreachable.
+------
+- **I95-48686 Transmitted packet buffers held too long:** The packet pool sizing has been adjusted to prevent pool depletion when local.init overrides for descriptor counts are present.
+------
+- **I95-48731 Sessions created on a `fin-ack` may get stuck:** Resolved an issue where, if tcp-state-enforcement is set to allow, a TCP session is established from a fin-ack may not get torn down in a timely manner.
+------
+- **I95-48772 `show running config` command displays an error:** Resolved an issue where `show config` requests on the PCLI failed if enum leaf-list entries were changed.
+------
+- **I95-48872 `show sessions by-id` doesn't display correctly tcp state or retransmission counts:** `show sessions by-id` now correctly display `tcp state` and `retransmissions` when `udp-transform` is enabled for a session.
+------
+- **I95-48897 Adaptive encryption breaks after flow move:** Resolved an issue where the session breaks during failover when adaptive encryption is enabled.
+------
+- **I95-48904 Stuck pinhole session after flow invalidation:** Resolved an issue with a stuck session that was setup from hub to HA spoke after a routing change.
+------
+- **WAN-1372 Improve CPU Usage Reporting:** Devised a more efficient collection scheme to minimize the CPU impact when collecting the CPU and memory data.
 
 ## Release 6.0.5-17
 
