@@ -3,7 +3,7 @@ title: Conductor Conversion
 sidebar_label: Conductor Conversion
 ---
 
-An SSR device (SSR1xx or SSR 1xxx) shipped with SSR 5.4.x Routing software may be reinitialized as a conductor for use in an existing network. The conductor can be used with or without Cloud Telemetry for devices running pre 6.0.x SSR software.
+An SSR device (SSR1xx or SSR1xxx) shipped with SSR 5.4.x Routing software may be reinitialized as a conductor for use in an existing network. The conductor can be used with or without Cloud Telemetry for devices running pre 6.0.x SSR software.
 
 Use the following procedure to reinitialize an SSR 1xx/1xxx as a conductor.
 
@@ -72,15 +72,21 @@ After installing the SSR Routing Software it is important to verify that the ins
 
 2. Execute the command:
 
-   ```
-   sudo systemctl status 128T
-   ```
+  ```
+  sudo systemctl status 128T
+  ```
 
-   **Result:** The service is listed as _Active (running)_.<br/>If the service is listed as _Inactive_, run the `sudo systemctl start 128T` command. This may take several minutes to fully launch the service.
+3. Once the service is listed as _Active_, log into the system as Admin using the system default password. By logging into the system, you have verified the installation. 
 
-3. Once the service is listed as _Active_, log into the system as Admin using the system default password.<br/>**Result:** The installation is verified.
+4. Close the command prompt window. 
 
-4. Close the command prompt window.
+5. Use a web browser to navigate to the IP address of the SSR GUI. For example; `https://192.168.1.25`
+
+6. Log in to the SSR GUI using the admin name and password you created earlier.
+  
+## Configure the Token
+
+To save repository access credentials, use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
 
 ## Next Steps
 

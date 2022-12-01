@@ -3,7 +3,7 @@ title: Single Conductor Interactive Installation
 sidebar_label: Single Conductor Interactive Installation
 ---
 
-This process assumes you have already created a bootable device, either a USB or CD/DVD/Blueray disk. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
+This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
 The steps in this section describe the *interactive conductor installation* from the packaged-based ISO. The section [Initialize the SSR](#initialize-the-128t-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO. 
 
@@ -114,7 +114,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 There are three different types of conductor installations; 
 - Standalone Conductor 
 - Conductor High Availability
-- [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md).
+- [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md)
 
 ### Standalone Conductor
 
@@ -153,7 +153,7 @@ There are three different types of conductor installations;
   ![Initializer Complete](/img/initializer_complete.png)
 
   :::note
-  If installing the SSR software for the first time, a system reboot is required.
+  A system reboot is required.
   :::
 
 ## Verify Installation
@@ -170,11 +170,7 @@ After installing the SSR Software it is important to verify that the installatio
   sudo systemctl status 128T
   ```
 
-  If the service is listed as _Active_ (running), go to step 3. 
-
-  If the service is listed as _Inactive_, run the `sudo systemctl start 128T` command. This may take several minutes to fully launch the service.
-
-3. Once the service is listed as _Active_, log into the system as Admin using the system default password. By logging into the system, you have verified the installation. 
+3. When the service is listed as _Active_, log into the system as Admin using the system default password. By logging into the system, you have verified the installation. 
 
 4. Close the command prompt window. 
 
@@ -184,17 +180,4 @@ After installing the SSR Software it is important to verify that the installatio
   
 ## Configure the Token
 
-Beginning with SSR Version 5.5.2, the preferred method to save repository access credentials is to use the PCLI command `set software access-token`. For additional information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
-
-For earlier software versions, the `repo authenticate` subcommand is used to configure credentials for authenticating with SSR software repositories. To use this subcommand, you must specify both a username and a token for authentication. Use the following procedure to either add or update the username/token:
-
-:::note
-It is strongly recommended that you update the token during a maintenance window. Performing these operations on a large deployment may take an extended amount of time to complete.
-:::
-
-1. Update the username/token using the [`install128t repo authenticate -u <user> -t <token>`](#repo) process on the conductor.
-
-2. Restart the conductor with `systemctl restart 128T` and wait for the conductor to be fully operational (can be up to 5 minutes).
-
-After the routers return to a running state the systems will be updated with the username/token.
-
+To save repository access credentials, use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).

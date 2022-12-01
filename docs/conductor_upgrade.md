@@ -7,7 +7,7 @@ sidebar_label: Upgrade the SSR Conductor
 If you are upgrading to version 5.3 or higher of the SSR software, please refer to the [Upgrade Considerations](intro_upgrade_considerations.md) before proceeding.
 :::
 
-Your SSR conductor must have internet access to download the latest software packages; for deployments where the SSR does not have internet access, you can use the SSR conductor as a repository (or proxy) to retrieve software images. As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.
+Your SSR conductor must have internet access to download the latest software packages; for deployments where the routers managed by the conductor do not have internet access, you can use the SSR conductor as a repository (or proxy) to retrieve software images. As with any upgrade activity, it is always prudent to create a backup of your current software configuration before initiating any upgrade activity.
 
 There are two standard ways of upgrading a conductor:
 
@@ -52,10 +52,14 @@ For systems with both primary and secondary conductors, it is a best practice to
 
 Use this procedure to upgrade the conductor from a linux shell.
 
+:::note
+While the linux shell is available for upgrading the conductor, it is advised to use the GUI. Upgrading through the interactive installer should be used in environments where a GUI is not otherwise accessible.
+:::
+
 1. Launch a Linux command prompt window on the node you wish to upgrade.
 
    :::note
-   If you are running an older version of the Installer (prior to version 2.7.0), it is strongly recommended that you first upgrade to the latest version of the Installer. If the upgrade is not possible, and you are running an Installer version prior to 2.7.0, use the Screen utility when performing an upgrade in interactive mode to avoid SSH session timeout. Installer versions 2.7.0 and above do not need to use the Screen utility.
+   It is strongly recommended that you first upgrade to the latest version of the Installer. If the upgrade is not possible, and you are running an Installer version prior to 2.7.0, use the Screen utility when performing an upgrade in interactive mode to avoid SSH session timeout.
 
    To upgrade the installer, run `dnf update 128T-installer` from the linux prompt.
    :::
