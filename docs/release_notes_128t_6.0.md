@@ -26,7 +26,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## Release 6.0.7-6
 
-**Release Date:** December 3, 2022
+**Release Date:** December 4, 2022
 
 ### New Features
 
@@ -120,7 +120,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48581 No entry timestamp for `show app-id cache`:** Additional timing information has been added to `show app-id cache`.
 ------
-**I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
+- **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
 ------
 - **I95-48656 Reduce TSI service log limit:** The size of the Tech Support Info journal has been restricted to prevent excessive resource consumption.
 ------
@@ -131,6 +131,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-48731 Sessions created on a `fin-ack` may get stuck:** Resolved an issue where, if tcp-state-enforcement is set to allow, a TCP session is established from a fin-ack may not get torn down in a timely manner.
 ------
 - **I95-48772 `show running config` command displays an error:** Resolved an issue where `show config` requests on the PCLI failed if enum leaf-list entries were changed.
+------
+- **I95-48826 Unable to get BGP over SVR connection up:** Updates made to use hostname as `peer-path-id` in forward metadata for LTE, PPPoE, and T1 on cloud-managed routers.
 ------
 - **I95-48872 `show sessions by-id` doesn't display correctly tcp state or retransmission counts:** `show sessions by-id` now correctly display `tcp state` and `retransmissions` when `udp-transform` is enabled for a session.
 ------
