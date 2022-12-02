@@ -113,7 +113,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 There are three different types of conductor installations; 
 - Standalone Conductor 
-- Conductor High Availability
+- [Conductor High Availability](ha_conductor_install.md)
 - [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md)
 
 ### Standalone Conductor

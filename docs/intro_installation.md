@@ -19,6 +19,20 @@ Before you begin the installation and configuration of an SSR Networking Plaform
 The examples listed in this guide generally prefer running commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 
 :::
 
+## Installation Process
+Installation is done from the SSR ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
+- [Download the ISOs](intro_downloading_iso.md)
+- [Create Bootable Media](intro_creating_bootable_usb.md)
+- [Perform the Interactive ISO installation](intro_installation_bootable_media.md) 
+- [Install a Conductor](single_conductor_install.md)
+- [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
+- [Install the Router using the OTP ISO](intro_otp_iso_install.mdx)
+
+To install the SSR software on AWS or Azure, refer to: 
+ - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)
+    - [Amazon Web Services Quickstart](intro_installation_quickstart_aws.md)
+ - [Installation in Microsoft Azure](intro_installation_azure.md)   
+
 ## Image Based Installation
 
 Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments. See [Image-Based Installation](intro_installation_image.md) for information and the ISO installation process.
@@ -36,24 +50,11 @@ For full details and instructions refer to [Upgrading the SSR Networking Platfor
 The conductor Major.Minor version must be greater than or equal to the router version. The router version can not exceed the conductors major.minor version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) contract can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support contract *may* work, but are not guaranteed to do so.  
 
 Examples:
-- Conductor running version 5.3.0, managing Routers running version 5.1.1: Supported.
-- Conductor running version 5.2.0, managing Routers running version 5.2.2: Supported.
-- Conductor running version 5.2.1, managing Routers running version 4.5.13: Supported.
+- Conductor running version 6.0.5, managing Routers running version 6.0.1: Supported.
+- Conductor running version 5.4.8, managing Routers running version 5.4.10: Supported.
+- Conductor running version 6.0.5, managing Routers running version 5.5.7: Supported.
 - Conductor running version 4.5.13, managing Routers running version 4.2.9: Not supported, but may work.
 
-## Installation Process
-Installation is done from the SSR ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
-- [Download the ISOs](intro_downloading_iso.md)
-- [Create Bootable Media](intro_creating_bootable_usb.md)
-- [Perform the Interactive ISO installation](intro_installation_bootable_media.md) 
-- [Install a Conductor](single_conductor_install.md)
-- [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
-- [Install the Router using the OTP ISO](intro_otp_iso_install.mdx)
-
-To install the SSR software on AWS or Azure, refer to: 
- - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)
- 	- [Amazon Web Services Quickstart](intro_installation_quickstart_aws.md)
- - [Installation in Microsoft Azure](intro_installation_azure.md)	
 
 
 
