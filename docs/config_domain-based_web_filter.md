@@ -364,7 +364,13 @@ exit
 ```
 
 ### Configure the Tenant
-A tenant must be configured in order to create an Access Policy. If you have not already configured a tenant for the service, refer to [Create the Tenant](intro_basic_conductor_config.md#create-the-tenant) in the Conductor Configuration documentation.
+A tenant must be configured in order to create an Access Policy.
+
+1.  Log in to the Conductor GUI.
+2.  Select Configuration.
+3.  Select ADD next to Tenants, enter name _corp_ and select SAVE. 
+4.  Return to the top level. 
+5.  At the top of the screen, select VALIDATE and then COMMIT.
 
 ### Create the Access Policy
 
