@@ -114,7 +114,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48529 BFD sending link notification before hold-down timer expires:** Resolved an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now correctly reflect the peer status. Sessions will not be moved back to peers that have re-established connectivity but are still in the hold-down period.
 ------
-- **I95-48579 Application director does not handle overlapping prefixes correctly:** The IP tree has been updated and now handles overlapping prefixes correctly. 
+- **I95-48579 Application director does not handle overlapping prefixes correctly:** The radix tree has been updated and now handles overlapping prefixes correctly. 
 ------
 - **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
 ------
