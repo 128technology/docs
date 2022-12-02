@@ -121,7 +121,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
   ![Identify the Node](/img/initializer_Serial3.png)
 
-- **1st HA Node:** This onductor is the first node of a high availability pair. You will be prompted to provide the local IP address for this node. The 2nd HA node will contact this node at the address provided to synchronize state. Note: The 1st Node IP address must be reachable by the 2nd HA Node.
+- **1st HA Node:** This conductor is the first node of a high availability pair. You will be prompted to provide the local IP address for this node. The 2nd HA node will contact this node at the address provided to synchronize state. Note: The 1st Node IP address must be reachable by the 2nd HA Node.
   
 - **2nd HA Node:** This conductor is the second node of a high availability pair, where the first node has been initialized. You will be prompted to provide the 1st Node IP address for this 2nd node that will be used to synchronize state. Note: The 2nd Node IP address must be reachable by the 1st HA Node.
 
