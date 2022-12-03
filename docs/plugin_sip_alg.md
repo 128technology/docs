@@ -479,6 +479,19 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 3.2.2
+**Release Date:** Dec 02, 2022
+
+**Router Version**
+- 128T-sip-alg-router-1.2.0-2
+
+#### Issues Fixed
+
+- **PLUGIN-1955** Reducing the default resource allocation of SIP ALG plugin causes call setup issues
+
+    _**Resolution**_ The defaults were restored to the original number of child processes running on the system
+
+
 ### Release 3.2.1
 **Release Date:** Nov 04, 2022
 
