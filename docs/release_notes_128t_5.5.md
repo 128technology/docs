@@ -73,18 +73,18 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48685 GUI and/or PCLI unresponsive:** Resolved an issue where on an HA conductor the user interface would become unresponsive if a managed router was offline or unreachable.
 
+## Release 5.5.6-2
+
 :::important
 The following issue has been discovered in the releases listed here:
 
 - 5.5.5
 - 5.5.6
 
-If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue will be resolved in the next patch release. 
+If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue has been resolved in the next patch release with I95-48685. 
 
 For immediate resolution on the impacted releases, contact Juniper Technical Support, or your SE.
 :::
-
-## Release 5.5.6-2
 
 **Release Date:** October 21, 2022
 
