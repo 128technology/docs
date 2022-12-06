@@ -16,6 +16,16 @@ The steps in this section describe the process of onboarding an SSR device (SSR1
 - [Connect your Device](#connect-your-device-to-the-cloud) 
 - [Onboard the SSR](#onboarding-the-ssr)
 
+## Conductor Provisioning
+
+The SSR Device must have a configuration provisioned on the managing Conductor **before** powering up and onboarding the SSR device. That can include either importing a configuration, or manually generating the configuration on the conductor. 
+
+Additionally, the conductor uses the asset ID to recognize the SSR device and associate it to a logically configured router. For the SSR to be onboarded to the conductor, this match has to be made for the appropriate router in the configuration. It is crucial to verify the Asset ID for the SSR Device when provisioning the router configuration on the conductor. 
+
+<!--- It's not clear to me what to expect for the asset id value from these SSR devices after Mist points them to conductor (is it the serial number, MAC address, or a UUID on a label on the box?) but for the SSR to be onboarded to the conductor this match has to be made on the appropriate router in the conductor config.--->
+
+It is strongly recommended to configure the SSR WAN and LAN interfaces to match the ports identified as the WAN and LAN ports in the documentation (see below).
+
 ## Mist Configuration for Onboarding the SSR 
 
 Configuring WAN Assurance requires Administrator level privileges on all platforms, SSR and Mist.
@@ -64,6 +74,10 @@ For new deployments enter the Conductor IP address as shown above.
 
 ### Connect Your Device to the Cloud
 
+:::important
+Before powering on the SSR, it is important to verify that the Conductor this SSR will be connecting to **has a valid configuration** for the SSR to download. See Provisioning Notes above.
+:::
+
 Once the conductor IP address has been configured, it is time to connect and power up your SSR Device.
 
 ![Device Connections](/img/intro_wa_ssr120_quickstart_1.png)
@@ -87,6 +101,10 @@ Great job! Your SSR device is now connected and awaiting further instructions.
 
 The conductor sends instructions to the connected SSR devices to self-onboard; the process is automated and the devices do not require any user interaction.
 
+
+
+<!---- remove the info below, verify it's use in Telemetry 
+
 ## Additional Information
 
 ### Skipping Specific Routers
@@ -97,4 +115,4 @@ For a system that has completed the onboarding process, setting `mist-wan-assura
 
 :::note
 Disabling WAN Assurance does not automatically release the router from the cloud. See Releasing a Router for more information.
-:::
+::: ----->
