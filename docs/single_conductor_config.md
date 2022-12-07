@@ -8,7 +8,6 @@ The Conductor manages the SSR Routers you configure within the same Authority. I
 Network configuration is provisioned on the conductor and pushed out to the routers. This can be done in the following ways:
 
 - Existing SSR configurations imported to the conductor. 
-- Non-SSR network configurations imported to the conductor; however these may need to be reviewed and revised to fit SSR conventions.
 - [Configuration templates created](config_templates.md) in the SSR software and imported to the conductor.
 - Network configuration manually created on the conductor after installation. 
 

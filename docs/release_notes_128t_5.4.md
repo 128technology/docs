@@ -44,6 +44,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48785 Service Area logging is missing the modify reason:** Resolved an issue when `session-capture` was enabled, service area logs were missing the `update reason`.
 
+## Release 5.4.9-7
 
 :::important
 
@@ -52,12 +53,10 @@ The following issue has been discovered in the following releases:
 - 5.4.8 
 - 5.4.9
 
-If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue will be resolved in the next patch release. 
+If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue has been resolved in the next patch release with I95-48685. 
 
 For immediate resolution on the impacted releases, contact Juniper Technical Support, or your SE.
 :::
-
-## Release 5.4.9-7
 
 **Release Date: November 9, 2022**
 
