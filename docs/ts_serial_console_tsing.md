@@ -9,7 +9,7 @@ Please note that Legacy and UEFI consoles display differently. The following is 
 
 The following is the  installation screen when booting to a UEFI console:
 
-![New Boot Screen](/img/intro_install_OTPInstall_1.png)
+![New Boot Screen](/img/install_select_interactive2.png)
 
 ## Troubleshooting
 
