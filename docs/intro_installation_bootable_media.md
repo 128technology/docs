@@ -82,7 +82,7 @@ After the Linux installation completes, the SSR software installation begins. No
 
 Shut down the system and remove the bootable media. Then power the system up to complete the installation process. 
 
-## Initial Boot and NMTUI
+## Initial Boot and NMTUI 
 
 When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.
 
