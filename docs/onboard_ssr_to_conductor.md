@@ -5,7 +5,7 @@ sidebar_label: Onboard an SSR Device to a Conductor
 
 The steps in this section describe the process of onboarding an SSR device (SSR1x0/1x00) to a Conductor using Mist, but without Cloud Telemetry (WAN Assurance Telemetry) integration. The steps are similar, but do not include a Mist Organization registration code. It does however, require an account on the Mist Portal, and the creation of an Organization. These provide the reference location for the SSR to connect to the Conductor. 
 
- **This document explains the process of enabling Mist and ZTP for conductor-managed deployments.** This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
+ **This document explains the process of enabling Mist ZTP for conductor-managed deployments.** This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
 
 #### High Level Steps:
 - [Install and deploy a Conductor](single_conductor_install.md)
