@@ -684,7 +684,7 @@ By using Saltstack data files, the time to apply high states across all assets i
 
 - **PLUGIN-1771** Missing neighborhood config on router breaks the config for other routers
 
-  _**Resolution:**_ The plugin will validate for the missing configuration and will also prevent failures on one router to impact other routes config.
+  _**Resolution:**_ The plugin will validate the missing configuration and prevent a failure on one router from impacting others.
 
 - **PLUGIN-1947** Wireguard plugin fails to operate on certain DHCP enabled interfaces
 
