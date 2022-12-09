@@ -13,7 +13,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 One or more BGP community profile objects can be configured at the authority level of the configuration. These profiles are then assigned to the individual routers.
 
 ### BGP Community Services Profile Configuration
-An example configuration is shown below, which shows the standard community strings for [Microsoft Office 365 over ExpressRoute](https://docs.microsoft.com/en-us/office365/enterprise/bgp-communities-in-expressroute). The `application-name` values are completely user configurable. The `bgp-community` is a list object to allow for scenarios where you may want to associate multiple community strings with a single application.
+An example configuration is shown below, which shows the standard community strings for Microsoft Office 365 over ExpressRoute. The `application-name` values are completely user configurable. The `bgp-community` is a list object to allow for scenarios where you may want to associate multiple community strings with a single application.
 
 ```
 config
