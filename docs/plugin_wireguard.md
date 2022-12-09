@@ -670,7 +670,7 @@ The plugin must be updated to version 2.0.3 or later prior to [upgrading the con
 
 ### Release 2.1.2
 
-**Release Date:** Dec 07, 2022
+**Release Date:** Dec 08, 2022
 
 **Router Version**
 - 128T-wireguard-router-2.1.6-3
