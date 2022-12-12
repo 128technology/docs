@@ -668,6 +668,32 @@ Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[26711]: __main__ - not starti
 The plugin must be updated to version 2.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
+### Release 2.1.2
+
+**Release Date:** Dec 08, 2022
+
+**Router Version**
+- 128T-wireguard-router-2.1.6-3
+
+#### New Features and Improvements
+- **PLUGIN-1839** Reduce time to apply salt states in large scale deployments
+
+By using Saltstack data files, the time to apply high states across all assets is significantly reduced.
+
+#### Issues Fixed
+
+- **PLUGIN-1771** Missing neighborhood config on router breaks the config for other routers
+
+  _**Resolution:**_ The plugin will validate the missing configuration and prevent a failure on one router from impacting others.
+
+- **PLUGIN-1947** Wireguard plugin fails to operate on certain DHCP enabled interfaces
+
+  _**Resolution:**_ The plugin handles the DHCP address in the presence of a neighborhood configuration more gracefully.
+
+- **PLUGIN-1954** Wireguard plugin fails to run on 128T-5.5.5 and higher
+
+  _**Resolution:**_ The wireguard plugin was extended to support newer kernel versions required for 128T-5.5.5 and above.
+
 ### Release 2.1.1
 
 **Release Date:** Jun 16, 2022
