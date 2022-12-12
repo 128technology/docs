@@ -7,6 +7,10 @@ Beginning with version 6.0, an image-based ISO installation process has been imp
 
 For conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) is used. 
 
+:::important
+The Image-Based Installation process supports Mist WAN Assurance; the Mist-managed WAN Assurance offering. Do not use the image-based installation for conductor-managed WAN Telemetry deployments.
+:::
+
 The image-based installation creates two volumes on the disk, installs the full 6.0.x image into one of the volumes, and boots into that image. When an upgrade is intiated, the new ISO image is copied into the other volume. The upgrade process copies configurations and persistent information from the old image to the new image, then reboots into the new version.
 
 The Image-based install consists of the following steps:
