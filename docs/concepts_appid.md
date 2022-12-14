@@ -164,9 +164,9 @@ The `example` service needs to have its own `service-route` in order for traffic
 
 With the TLS-based application identification technique, the `application-name` can include a wildcard such as `*.example.com`, which is not possible with the DNS-based approach. This gives administrators a bit more flexibility in defining which traffic to match to services when parsing the X.509 certificates.
 
-#### AppID V2 based on TLS
+#### Update for SSR version 5.0
 
-With App-Id v2 (SSR 5.0 and later), a FIB entry is no longer installed as DPI learns domain-name and IP address from TLS. Instead, heirarchical services and `domain-name` is used.
+Starting with versions SSR version 5.0, a FIB entry is no longer installed as part of DPI and instead learns domain-names and IP addresses from TLS and maps to hierarchical services using the `domain-name` field.
 
 ```
 config
