@@ -166,7 +166,7 @@ With the TLS-based application identification technique, the `application-name` 
 
 #### Update for SSR version 5.0
 
-Starting with versions SSR version 5.0, a FIB entry is no longer installed as part of DPI and instead learns domain-names and IP addresses from TLS and maps to hierarchical services using the `domain-name` field.
+Starting with SSR version 5.0, a FIB entry is no longer installed as part of DPI. Instead, domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
 
 ```
 config
@@ -175,7 +175,7 @@ config
 
         service  internet
             name                  internet
-            description           "www.example.com website"
+            description           "all internet traffic"
             address               0.0.0.0/0
 
             access-policy         trusted
