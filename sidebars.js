@@ -26,14 +26,17 @@ module.exports = {
       "intro_basic_router_config",
       "intro_otp_iso_install",
       "intro_install_quickstart_otpiso",
+      "onboard_ssr_to_conductor",
     ],
     "Conductor Installation": [
       "install_conductor_overview",
+      "bcp_conductor_deployment",
       "single_conductor_install",
       "ha_conductor_install",
       "single_conductor_config",
       "conductor_upgrade",
       "conductor_conversion",
+      "howto_conductor_migration",
     ],  
     "Image-Based Installation": [
       "intro_installation_image",
@@ -213,7 +216,6 @@ module.exports = {
         "label": "How To",
         "items": [
           "how_to_use_app_summary",
-          "howto_conductor_migration",
           "howto_extend_gui_nav",
           "howto_lte",
           "howto_config_PPPoE",
@@ -249,7 +251,6 @@ module.exports = {
     "Best Practices": [
       "bcp_att_avpn_configuration",
       "bcp_using_128T_as_ntp_server",
-      "bcp_conductor_deployment",
       "bcp_per-adjacency_traffic_engineering",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
