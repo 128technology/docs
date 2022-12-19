@@ -397,7 +397,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-44722 Time series HMAC failures after rebooting node in HA router:** Device interfaces are flushed upon becoming active to avoid handling of packets which have been delayed due to inactivity.
 ------
-- **I95-44726 Invalid return code returned by LTE firmware creating a memory leak:** Resolved a buffer leak in the wanpipe driver.
+- **I95-44726 Invalid return code returned by T1 firmware creating a memory leak:** Resolved a buffer leak in the wanpipe driver.
 ------
 - **I95-44823 Conductor upgrade failure - extra space in integer is invalid:** Extra spaces on integer types are now trimmed off to avoid this issue.
 ------
