@@ -7,7 +7,7 @@ The steps in this section describe the process of onboarding an SSR1x0/1x00 to a
 
 For details about WAN Assurance offerings; 
 
-- See [Cloud Telemetry](config_wan_assurance.md)for information about conductor-managed deployments with access to Mist Telemetry data.
+- See [Cloud Telemetry](config_wan_assurance.md) for information about conductor-managed deployments with access to Mist Telemetry data.
 - See [Mist WAN Assurance](https://www.juniper.net/documentation/product/us/en/mist-wan-assurance/) for information about Mist-managed deployments.
 
 :::note
@@ -72,9 +72,9 @@ Create a unique site for each physical (or logical) location in the network. **F
     For information about the fields used to create a site, please refer to the Mist [Site Configuration documentation](https://www.mist.com/documentation/category/site-configuration/).
 
 :::note
-For existing deployments of Conductor-managed Session Smart Networking, the Conductor IP address is pre-populated.
-
 For new deployments enter the Conductor IP address as shown above.
+
+When onboarding an SSR device to an existing Conductor-managed deployment, the existing condutor IP address is used.
 :::
 
 ### Connect Your Device to the Cloud
@@ -128,17 +128,3 @@ After onboarding the SSR, it is important to verify that the process was complet
 
 6. Log in to the SSR GUI using the admin name and password you created earlier.
   
-
-<!---- remove the info below, verify it's use in Telemetry 
-
-## Additional Information
-
-### Skipping Specific Routers
-
-A router or routers can be skipped during the Mist onboarding process. Use the Conductor GUI to change **authority > router > mist-wan-assurance > enabled** to `false`. The Conductor will skip the router and associated nodes (if it is an HA router).
-
-For a system that has completed the onboarding process, setting `mist-wan-assurance` to `false` will prevent telemetry data from being sent to the cloud.
-
-:::note
-Disabling WAN Assurance does not automatically release the router from the cloud. See Releasing a Router for more information.
-::: ----->
