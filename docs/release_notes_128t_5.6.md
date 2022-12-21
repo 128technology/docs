@@ -24,6 +24,19 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.6.5-4
+
+**Release Date:** December 22, 2022
+
+### New Features
+
+
+### Resolved Issues
+
+- **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
+------
+
+
 ## Release 5.6.4-3
 
 **Release Date:** November 18, 2022
