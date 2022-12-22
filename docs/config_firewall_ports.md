@@ -24,6 +24,8 @@ Enable the following on your firewall for SSR to SSR connectivity:
 - Ports in the range 16,385-65,353 TCP/UDP
 - rp.cloud.threatseeker.com on port 443/TCP; this is required for Web Filtering
 
+For detailed information about different communication channels between nodes within a router, between peering routers, and between routers and their conductor, see [Intra- and Inter-System Communication](concepts_machine_communication.md)
+
 ### SSR to the Mist Cloud
 
 | Service Type | Global 01 | Global 02 | Global 03 | Global 04 |
