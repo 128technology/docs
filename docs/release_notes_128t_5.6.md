@@ -24,9 +24,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
-## Release 5.6.5-4
+## Release 5.6.5-5
 
-**Release Date:** December 22, 2022
+**Release Date:** December 28, 2022
 
 ### Resolved Issues
 
@@ -34,7 +34,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
 ------
-- **I95-44926 Broken validation of 32 bit AS numbers:** Resolved an issue where a subset of 4-byte BGP private AS numbers was not accepted inside AS path specifications for routing policy "modify-as-path" actions.
+- **I95-44926 Configuration validation for `as-path` incorrect for certain values:** Resolved an issue where a subset of 4-byte BGP private AS numbers was not accepted inside AS path specifications for routing policy `modify-as-path` actions.
 ------
 - **I95-45478 Segmentation Fault in the Dynamic Peer Update process:** Resolved an issue with multi-threaded access to a data member, leading to a segmentation fault.
 ------
@@ -46,7 +46,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-48107 EoSVR sessions not stable:** Resolved an issue with loss of connectivity to STEP EoSVR peer. The STEP route is now held in place and available when STEP connectivity is restored. 
 ------
-- **I95-48163 Only services with load-balanced paths are shown in "show services":** Resolved an issue where services without load-balanced paths weremissing from show services output.
+- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths weremissing from show services output.
 ------
 - **I95-48324 Application Identification not parsing domain names:** The App-ID parsing mode has been updated to correctly parse domain names.
 ------
