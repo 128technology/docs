@@ -11,7 +11,7 @@ Throughout the life cycle of the BFD peering relationship between SSR routers, t
 
 - BFD echo mode
 
-### SSR Peer BFD Settings
+## SSR Peer BFD Settings
 
 For a given peering relationship between SSR routers, the following settings are available:
 ```
@@ -27,7 +27,17 @@ For a given peering relationship between SSR routers, the following settings are
   exit
 ```
 
-### Asynchronous Control Mode
+### High Tolerance Operation
+
+For customers operating SSRs in extremely lossy conditions such as field-deployed units in austere environments, more tolerant BFD settings may be required. In these situations, the following settings may be more forgiving.
+
+- Test length of 20 packets
+- Test interval of 20 seconds
+- Multiplier of 10 
+
+These changes send 20 packets every 20 seconds and require losing 10 packets in a row before a peer path is declared dead. Use these settings in conjunction with either SLA-based routing utilizing a Service Policy with Load Balancing settings (specifically the Best Path Selection Criteria set to MOS); or SLA Path Quality Filtering, to achieve the desired result.
+
+## Asynchronous Control Mode
 
 Asynchronous control mode messages are used between SSR router peers to establish and maintain peering state. In other words, it is the exchange of these messages that determine if a peer is up or down. These messages are exchanged between router waypoints, with both routers periodically transmitting async mode messages to their peers, as well as expecting to receive and process async mode messages from their peers.
 
@@ -71,7 +81,7 @@ In other words, "*if I don't receive a message in the amount of time that is my 
 
 If both router peers use the default settings above, you should expect to see them transmit async control mode messages every 1000ms, or 1s. If one or both peers do not receive an async control mode packet in 3x1000ms (3s), it will consider the peer path to be "down."
 
-### Damping
+## Damping
 
 BFD is used to detect path failures between routers. BFD notifies the load-balancer and other peer-path observers when there is packet loss between peering routers, or if the link fails. In many cases it becomes critical to minimize session failovers to prevent the session from oscillating between paths, to reduce unnecessary changes to routing tables, prevent consumption of valuable system resources, and avert needless convergence impact. SSR routers have a hold down timer that can be configured to prevent BFD from making immediate updates until the timer has expired. This method works well when the characteristic of the link is well known and a predetermined value can be assigned to the timer.
 
@@ -79,7 +89,7 @@ In cases where link characteristics change or are unpredictable, the SSR router 
 
 Simple BFD damping (hold-down timer) is enabled by default, and can be disabled by an administrator. Dynamic BFD Damping is enabled by an administrator using the `dynamic-damping` configuration field. 
 
-#### Parameters
+### Parameters
 
 **Initial Hold Down Timer:** The minimum amount of time BFD must wait before beginning notifications. The default is 5 seconds, and can be configured to be any value lower than the `maximum-hold-down-time`. The hold-down-timer will not accept a value of 0. 
 
@@ -93,7 +103,7 @@ Simple BFD damping (hold-down timer) is enabled by default, and can be disabled 
 | dynamic-damping | BFD (router, peer, neighborhood, adjacency) | Enumeration | Enabled/Disabled Default: Disabled |
 | maximum-hold-down-time | BFD (router, peer, neighborhood, adjacency) | Seconds | Default: 3600 (1 hour) Only configurable when dynamic-damping is enabled. Must be greater than hold-down-time. |
 
-##### Example
+#### Example
 
 ```
 config authority
@@ -122,7 +132,7 @@ config authority
 ```
 If damping is disabled, the configured `hold-down-time` will be used with the current existing `hold-down-time` logic. For additional information, see [BFD Router](config_reference_guide.md#bfd-router) in the Configuration Element Reference Guide.
 
-### Echo Mode
+## Echo Mode
 
 Echo mode messages are used between SSR router peers to measure path quality, including jitter, packet loss, and latency (JPL). Echo mode messages are transmitted from one router to its peer, which simply echoes them back to the originating router. In contrast to async control mode messages, which are conversations between peer BFD agents, echo mode messages are one router's conversation with itself via its router peer, over a specific peer path.
 
@@ -147,7 +157,7 @@ required-min-echo-interval
 If both router peers use the default settings above, you should expect to see each router independently perform echo mode tests every 10s, consisting of 10 echo mode packets sent to its peer in rapid succession, for each peer path it has established with that peer. Upon receipt, the peer will echo them back to the originating router, which will measure JPL.
 
 
-### Visibility into BFD
+## Visibility into BFD
 
 Visibility into the status of the BFD async control mode can be seen as "up" or "down" in PCLI commands such as the one below. They can also be seen in the topology view of the GUI and alarms are generated whenever a BFD detects paths are down:
 
