@@ -7,6 +7,18 @@ sidebar_label: '3.1'
 **Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 :::
 
+## Release 3.1.7
+
+### Resolved Issues
+
+- **IN-508 Prompt user to disable salt-minion:** When the installer is being run manually, the installer now will alert the user that the `salt-minion` is active and ask whether the `salt-minion` should be disabled for the duration of the operation.
+------
+- **IN-513 Include `shim-x86` package is downloaded:** The `shim-x86` package is now a required component of the installer and is always downloaded and installed on EFI systems.
+------
+- **IN-515 `auditd` service always restarted upon install:** The installer now identifies and respects the `auditd` state before an installation, and if it was disabled prior to the install, it does not restart it. 
+------
+- **IN-518 Prevent `erase128t` from running on Image-Based systems:** `erase128t` will now refuse to perform any operations on an Image-Based (IBU) system. 
+
 ## Release 3.1.6
 
 ### Resolved Issues
