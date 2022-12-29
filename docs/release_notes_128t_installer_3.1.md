@@ -4,7 +4,7 @@ sidebar_label: '3.1'
 ---
 
 :::important
-**Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
+**Upgrade Installer:** Before **upgrading to, or installing** version 5.4, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 :::
 
 ## Release 3.1.7

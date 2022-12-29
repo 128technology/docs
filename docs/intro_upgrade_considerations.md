@@ -5,7 +5,7 @@ sidebar_label: Upgrade Considerations
 Before upgrading to **version 5.3 or 5.4 and higher**, please review the following information.
 
 ### Upgrade Installer
-Before **upgrading to, or installing** version 5.4, update the Installer to version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
+Before **upgrading to, or installing** version 5.4, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. 
 
 ### Rollback Considerations
 Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
