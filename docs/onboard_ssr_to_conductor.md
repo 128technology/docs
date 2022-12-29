@@ -8,7 +8,7 @@ The steps in this section describe the process of onboarding an SSR device (SSR1
  **This document explains the process of enabling Mist ZTP for conductor-managed deployments.** This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
 
 #### High Level Steps:
-- [Install and deploy a Conductor](single_conductor_install.md)
+- [Install and deploy a Conductor](merged_single_conductor_install.mdx)
 - [Import or create a network configuration on the Conductor](single_conductor_config.md)
 - [Create an account on the Mist portal](#1-create-an-account-on-the-mist-portal)
 - [Add your Organization](#2-create-an-organization-for-the-authority)
@@ -21,8 +21,6 @@ The steps in this section describe the process of onboarding an SSR device (SSR1
 The SSR Device must have a configuration provisioned on the managing Conductor **before** powering up and onboarding the SSR device. That can include either importing a configuration, or manually generating the configuration on the conductor. 
 
 Additionally, the conductor uses the asset ID to recognize the SSR device and associate it to a logically configured router. For the SSR to be onboarded to the conductor, this match has to be made for the appropriate router in the configuration. It is crucial to verify the Asset ID for the SSR Device when provisioning the router configuration on the conductor. 
-
-<!--- It's not clear to me what to expect for the asset id value from these SSR devices after Mist points them to conductor (is it the serial number, MAC address, or a UUID on a label on the box?) but for the SSR to be onboarded to the conductor this match has to be made on the appropriate router in the conductor config.--->
 
 It is strongly recommended to configure the SSR WAN and LAN interfaces to match the ports identified as the WAN and LAN ports in the documentation (see below).
 

@@ -214,5 +214,5 @@ After installing the SSR Software it is important to verify that the installatio
 
 ## Repository Authentication
 
-To save repository access credentials it is necessary to configure a token for for authentication with SSR software repositories. See [Configure the Token](single_conductor_install.md#configure-the-token) for additional details. 
+To save repository access credentials it is necessary to configure a token for for authentication with SSR software repositories. See [Configure the Token](merged_single_conductor_install.mdx#configure-the-token) for additional details. 
 
