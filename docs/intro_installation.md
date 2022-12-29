@@ -33,9 +33,15 @@ To install the SSR software on AWS or Azure, refer to:
     - [Amazon Web Services Quickstart](intro_installation_quickstart_aws.md)
  - [Installation in Microsoft Azure](intro_installation_azure.md)   
 
+A Mist-redirect ZTP process for Conductor-managed deployments is supported on Juniper branded hardware devices - the SSR1x0/1x00. See [Onboard an SSR Device to a Conductor](onboard_ssr_to_conductor.md) for details about this process.
+
 ## Image Based Installation
 
 Beginning with version 6.0, an image-based ISO installation process has been implemented for users who manage their network using the Mist Cloud. This installation and upgrade process is only available for SSR version 6.0 and higher, and is currently only available for Mist-managed deployments. See [Image-Based Installation](intro_installation_image.md) for information and the ISO installation process.
+
+:::important
+The Image-Based Installation process supports Mist WAN Assurance; the Mist-managed WAN Assurance offering. Do not use the image-based installation for conductor-managed WAN Telemetry deployments.
+:::
 
 For customers with conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) continues to be used for upgrades and new installations.
 

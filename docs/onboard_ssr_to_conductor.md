@@ -3,9 +3,16 @@ title: Onboard an SSR Device to a Conductor
 sidebar_label: Onboard an SSR Device to a Conductor
 ---
 
-The steps in this section describe the process of onboarding an SSR device (SSR1x0/1x00) to a Conductor using Mist, but without Cloud Telemetry (WAN Assurance Telemetry) integration. The steps are similar, but do not include a Mist Organization registration code. It does however, require an account on the Mist Portal, and the creation of an Organization. These provide the reference location for the SSR to connect to the Conductor. 
+The steps in this section describe the process of onboarding an SSR1x0/1x00 to a Conductor using the Mist-redirect ZTP (Zero Touch Provisioning) process, without Cloud Telemetry (WAN Assurance Telemetry) integration. This procedure requires an account, organization, and sites configured on the Mist portal, and provides steps to configure those items.
 
- **This document explains the process of enabling Mist ZTP for conductor-managed deployments.** This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
+For details about WAN Assurance offerings; 
+
+- See [Cloud Telemetry](config_wan_assurance.md) for information about conductor-managed deployments with access to Mist Telemetry data.
+- See [Mist WAN Assurance](https://www.juniper.net/documentation/product/us/en/mist-wan-assurance/) for information about Mist-managed deployments.
+
+:::note
+The Mist-redirect ZTP process for Conductor-managed deployments is only supported on Juniper branded hardware devices - SSR1x0/1x00.
+:::
 
 #### High Level Steps:
 - [Install and deploy a Conductor](merged_single_conductor_install.mdx)
@@ -65,9 +72,9 @@ Create a unique site for each physical (or logical) location in the network. **F
     For information about the fields used to create a site, please refer to the Mist [Site Configuration documentation](https://www.mist.com/documentation/category/site-configuration/).
 
 :::note
-For existing deployments of Conductor-managed Session Smart Networking, the Conductor IP address is pre-populated.
-
 For new deployments enter the Conductor IP address as shown above.
+
+When onboarding an SSR device to an existing Conductor-managed deployment, the existing condutor IP address is used.
 :::
 
 ### Connect Your Device to the Cloud
@@ -99,18 +106,25 @@ Great job! Your SSR device is now connected and awaiting further instructions.
 
 The conductor sends instructions to the connected SSR devices to self-onboard; the process is automated and the devices do not require any user interaction.
 
+## Verify Onboarding
 
+After onboarding the SSR, it is important to verify that the process was completed successfully.
 
-<!---- remove the info below, verify it's use in Telemetry 
+### To Verify the SSR Onboarding:
 
-## Additional Information
+1. Launch a command prompt window.
 
-### Skipping Specific Routers
+2. Execute the command:
 
-A router or routers can be skipped during the Mist onboarding process. Use the Conductor GUI to change **authority > router > mist-wan-assurance > enabled** to `false`. The Conductor will skip the router and associated nodes (if it is an HA router).
+  ```
+  sudo systemctl status 128T
+  ```
 
-For a system that has completed the onboarding process, setting `mist-wan-assurance` to `false` will prevent telemetry data from being sent to the cloud.
+3. When the service is listed as _Active_, log into the system as Admin using the system default password. By logging into the system, you have verified the installation. 
 
-:::note
-Disabling WAN Assurance does not automatically release the router from the cloud. See Releasing a Router for more information.
-::: ----->
+4. Close the command prompt window. 
+
+5. Use a web browser to navigate to the IP address of the SSR GUI. For example; `https://192.168.1.25`
+
+6. Log in to the SSR GUI using the admin name and password you created earlier.
+  

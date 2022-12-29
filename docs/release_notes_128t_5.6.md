@@ -24,6 +24,72 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+## Release 5.6.5-5
+
+**Release Date:** December 28, 2022
+
+### Resolved Issues
+
+- **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653, I95-49039.
+------
+- **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
+------
+- **I95-44926 Configuration validation for `as-path` incorrect for certain values:** Resolved an issue where a subset of 4-byte BGP private AS numbers was not accepted inside AS path specifications for routing policy `modify-as-path` actions.
+------
+- **I95-45478 Segmentation Fault in the Dynamic Peer Update process:** Resolved an issue with multi-threaded access to a data member, leading to a segmentation fault.
+------
+- **I95-47797 Packet duplication does not interoperate well with outbound-only adjacencies:** When utilizing the packet-duplication feature (`service-policy -> session-resiliency = packet-duplication`), any peer adjacencies marked as `outbound-only` are no longer used. Packets are only duplicated along bidirectional paths.
+------
+- **I95-47929 Missing BGP advertisement after deleting all sessions after an upgrade:** Resolved an issue where BGP update suppress was not removing any pending withdrawls.
+------
+- **I95-47992 HTTP service not working in WAN Assurance:** Resolved an issue where HTTP traffic is dropped when using a combination of application-identification, adaptive-encryption, and spoke-to-hub-to-spoke topology (outbound-only peer-connectivity).
+------
+- **I95-48107 EoSVR sessions not stable:** Resolved an issue with loss of connectivity to STEP EoSVR peer. The STEP route is now held in place and available when STEP connectivity is restored. 
+------
+- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths weremissing from show services output.
+------
+- **I95-48324 Application Identification not parsing domain names:** The App-ID parsing mode has been updated to correctly parse domain names.
+------
+- **I95-48396 `show-rib` limited to 512 entries:** The `show rib` count maximum has been increased.
+------
+- **I95-48529 BFD sending link notification before hold-down timer expires:** Resolved an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now correctly reflect the peer status. Sessions will not be moved back to peers that have re-established connectivity but are still in the hold-down period.
+------
+- **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
+------
+- **I95-48582 `show bfd` command ignoring parameters:** The query parameters are now passed to the REST endpoint to be used byt the `show bfd` command.
+------
+- **I95-48641 Recreating BFD flow when an outbound-only session is reset:** Flow creation is now deferred until a reverse packet arrives from the peer, similar to the initial creation case.
+------
+- **I95-48656 Reduce TSI service log limit:** The size of the Tech Support Info journal has been restricted to prevent excessive resource consumption.
+------
+- **i95-48684 SSR not answering ARP requests:** Increased `internal-application traffic-engineering` rates for ARP traffic which was being dropped in a multiple packet-processing core environment incorrectly due to an over aggressive traffic engineering profile.
+------
+- **I95-48685 GUI and/or PCLI unresponsive:** Resolved an issue where on an HA conductor the user interface would become unresponsive if a managed router was offline or unreachable.
+------
+- **I95-48689 Top Sessions not displaying source address:** Restored the **Source** column in the Top Sessions table. 
+------
+- **I95-48723 HA sync not running after systems reconnect:** Historical metrics and events are synced between HA nodes after extended downtime.
+------
+- **I95-48772 `show running config` command displays an error:** Resolved an issue where `show config` requests on the PCLI failed if enum leaf-list entries were changed.
+------
+- **I95-48872 `show sessions by-id` doesn't display correctly tcp state or retransmission counts:** `show sessions by-id` now correctly display `tcp state` and `retransmissions` when `udp-transform` is enabled for a session.
+------
+- **I95-48897 Adaptive encryption breaks after flow move:** Resolved an issue where the session breaks during failover when adaptive encryption is enabled.
+------
+- **I95-48904 Stuck pinhole session after flow invalidation:** Resolved an issue with a stuck session that was setup from hub to HA spoke after a routing change.
+------
+- **I95-48950 Application identification modify packet is dropped:** Packets with `inline-modify` that traverse the BFD pinhole are now handled correctly.
+------
+- **I95-48988 High CPU for packet processing core:** Resolved an issue where the CPU can spike to 100% after a failover from internode/interrouter path to local breakout when failover is enabled for local breakout.
+------
+- **I95-49106 Degradation in performance during file rotation:** This issue has been resolved.
+------
+- **I95-49124 `show network-interface application` always has `unavailable` router name:** This issue has been resolved.
+------
+- **I95-49134 DHCP server does not work when device IDs on HA interface do not match:** Resolved an issue where a DHCP server interface may instead forward DHCP requests through the `service-area` and out to the WAN.
+------
+- **I95-49157 Poor GUI and PCLI performance for other users during a change/validate/commit operation:** Resolved the performance issue by optimizing the export config API.
+
 ## Release 5.6.4-3
 
 **Release Date:** November 18, 2022
@@ -397,7 +463,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-44722 Time series HMAC failures after rebooting node in HA router:** Device interfaces are flushed upon becoming active to avoid handling of packets which have been delayed due to inactivity.
 ------
-- **I95-44726 Invalid return code returned by LTE firmware creating a memory leak:** Resolved a buffer leak in the wanpipe driver.
+- **I95-44726 Invalid return code returned by T1 firmware creating a memory leak:** Resolved a buffer leak in the wanpipe driver.
 ------
 - **I95-44823 Conductor upgrade failure - extra space in integer is invalid:** Extra spaces on integer types are now trimmed off to avoid this issue.
 ------

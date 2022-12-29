@@ -6,6 +6,13 @@ import React from "react";
 // ----------------------------------------------------------------------------
 export const releases = [
   {
+    version: '5.6.5',
+    url:'/docs/release_notes_128t_5.6#release-565-5',
+    releaseDate: 'December 28, 2022',
+    endOfMaintenance: 'February 20, 2023',
+    endOfSupport: 'August 20, 2023',
+  },
+  {
     version: '6.0.7',
     url: 'release_notes_128t_6.0#release-607-8',
     releaseDate: 'December 5, 2022',
@@ -192,7 +199,7 @@ export const releases = [
     url:'/docs/release_notes_128t_5.1#release-519-1',
     releaseDate: 'March 16, 2022',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '5.5.0',
@@ -220,7 +227,7 @@ export const releases = [
     url:'/docs/release_notes_128t_5.1#release-518',
     releaseDate: 'January 18, 2022',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '5.4.2',
@@ -234,7 +241,7 @@ export const releases = [
     url:'/docs/release_notes_128t_5.1#release-517',
     releaseDate: 'December 9, 2021',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '5.4.1',
@@ -255,7 +262,7 @@ export const releases = [
     url:'/docs/release_notes_128t_5.1#release-516',
     releaseDate: 'October 27, 2021',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '4.5.11',
@@ -276,7 +283,7 @@ export const releases = [
     url: '/docs/release_notes_128t_5.1#release-515',
     releaseDate: 'August 13, 2021',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '5.3.0',
@@ -297,7 +304,7 @@ export const releases = [
     url: '/docs/release_notes_128t_5.1#release-514',
     releaseDate: 'July 7, 2021',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '4.5.10',
@@ -318,7 +325,7 @@ export const releases = [
     url: '/docs/release_notes_128t_5.1#release-513',
     releaseDate: 'May 17, 2021',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '5.2.0',
@@ -332,7 +339,7 @@ export const releases = [
     url: '/docs/release_notes_128t_5.1#release-512',
     releaseDate: 'April 30, 2021',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '4.5.8',
@@ -346,7 +353,7 @@ export const releases = [
     url: '/docs/release_notes_128t_5.1#release-511',
     releaseDate: 'April 12, 2021',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '5.0.1',
@@ -374,7 +381,7 @@ export const releases = [
     url: '/docs/release_notes_128t_5.1#release-5.1',
     releaseDate: 'March 15, 2021',
     endOfMaintenance: 'August 24, 2022',
-    endOfSupport: 'November 24, 2022',
+    endOfSupport: 'February 24, 2023',
   },
   {
     version: '4.3.12',
