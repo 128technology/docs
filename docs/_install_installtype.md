@@ -8,8 +8,6 @@ To install using the Interactive Installation, use the arrow keys to select eith
 
 ![VGA Boot with Interactive Install](/img/install_select_interactive.png)
 
-Differences for the serial console are described in [Serial Console Installation Information](#serial-console-install-information). 
-
 :::note
 Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
 

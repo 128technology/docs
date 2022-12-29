@@ -22,7 +22,7 @@ module.exports = {
       "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
-      "install_router_merged",
+      "install_router_merged", 
       "intro_basic_router_config",
       "intro_otp_iso_install",
       "intro_install_quickstart_otpiso",
@@ -31,7 +31,7 @@ module.exports = {
     "Conductor Installation": [
       "install_conductor_overview",
       "bcp_conductor_deployment",
-      "single_conductor_install",
+      "merged_single_conductor_install",
       "ha_conductor_install",
       "single_conductor_config",
       "conductor_upgrade",
