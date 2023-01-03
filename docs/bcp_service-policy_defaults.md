@@ -3,9 +3,9 @@ title: Service Policy Baseline Configurations
 sidebar_label: Service Policy Baseline Defaults
 ---
 
-One of the most powerful aspects of the 128T data model is the flexibility offered by a `service-policy`. Giving customers the ability to configure thresholds for when traffic should migrate from path to path based on current network status is a daunting task, however; most customers – and even application developers – are unaware of the sensitivity of their service to latency, loss, and jitter.
+One of the most powerful aspects of the SSR data model is the flexibility offered by a `service-policy`. Giving customers the ability to configure thresholds for when traffic should migrate from path to path based on current network status is a daunting task, however; most customers – and even application developers – are unaware of the sensitivity of their service to latency, loss, and jitter.
 
-This document recommends several base class `service-policy` definitions for common types of traffic. These can be used as sane starting points for configuring the 128T. Administrators should derive their own policies from these base definitions, adding in administrative preference for path selection using vectors.
+This document recommends several base class `service-policy` definitions for common types of traffic. These can be used as sane starting points for configuring the SSR. Administrators should derive their own policies from these base definitions, adding in administrative preference for path selection using vectors.
 
 The entire set of proposed base class policies is provided at the end of this document in a format suitable for copy/paste into existing systems.
 
@@ -33,7 +33,7 @@ VoIP signaling, at least for telephony applications, typically creates a long-li
 
 Signaling is not particularly sensitive to jitter or loss. The recommended latency for VoIP signaling is `250`, as the most prevalent VoIP protocol (SIP) retransmits messages when no reply is received within 500ms. Using a value of `250` accommodates one round trip between UAC and UAS.
 
-The `service-class` is assigned the value `Signalling`, one of 128T's factory default service classes. It will mark egress packets with DSCP 40 (CS5), per the recommendations of [[RFC 4594]](https://tools.ietf.org/html/rfc4594#section-4.2).
+The `service-class` is assigned the value `Signalling`, one of SSR's factory default service classes. It will mark egress packets with DSCP 40 (CS5), per the recommendations of [[RFC 4594]](https://tools.ietf.org/html/rfc4594#section-4.2).
 
 Baseline configuration:
 
@@ -48,7 +48,7 @@ best-effort          true
 max-latency          250
 ```
 
-VoIP media, on the other hand, is very sensitive to latency, loss, and jitter. The 128T software calculates "MOS" ([Mean Opinion Score](https://en.wikipedia.org/wiki/Mean_opinion_score)) for every peer path, as a composite metric derived by BFD metric data exchanged across the path. MOS is a "Quality of Experience" measurement, which assigns a single scalar value between 1 and 5 to an interactive session. Our benchmark for reasonable quality for VoIP media will be 3.6, which is the threshold below which many users will be disastisfied [[voip-mechanic]](https://www.voipmechanic.com/mos-mean-opinion-score.htm).
+VoIP media, on the other hand, is very sensitive to latency, loss, and jitter. the SSR software calculates "MOS" ([Mean Opinion Score](https://en.wikipedia.org/wiki/Mean_opinion_score)) for every peer path, as a composite metric derived by BFD metric data exchanged across the path. MOS is a "Quality of Experience" measurement, which assigns a single scalar value between 1 and 5 to an interactive session. Our benchmark for reasonable quality for VoIP media will be 3.6, which is the threshold below which many users will be disastisfied [[voip-mechanic]](https://www.voipmechanic.com/mos-mean-opinion-score.htm).
 
 Because voice and video calls are transient, we *strongly discourage* using `revertible-failover` as the `session-resiliency` setting. This can cause traffic to "ping pong" between two links during congestion or periods of "brown outs," degrading the overall quality of experience for the caller.
 
@@ -66,7 +66,7 @@ min-mos              3.6
 ```
 
 :::note
-MOS values can be dramatically affected by the codecs used in the audio/video streams. A G.711 stream (which is uncompressed) can achieve a theoretical maximum MOS of 4.4, whereas a G.729 stream can reach a theoretical maximum MOS of 3.9. However, the 128T's MOS calculation is derivative of path latency, loss, and jitter and will not consider codec. A value above 3.6 should be suitable for most signaled media traffic.
+MOS values can be dramatically affected by the codecs used in the audio/video streams. A G.711 stream (which is uncompressed) can achieve a theoretical maximum MOS of 4.4, whereas a G.729 stream can reach a theoretical maximum MOS of 3.9. However, the SSR's MOS calculation is derivative of path latency, loss, and jitter and will not consider codec. A value above 3.6 should be suitable for most signaled media traffic.
 :::
 
 Alternatively, it is possible to approximate the same behavior by explicitly specifying loss, latency, and jitter values. This gives additional flexibility if the values need to be tuned individually.
@@ -234,7 +234,7 @@ max-latency          250
 ```
 
 :::note
-In present-day networks, a large percentage of network transactions leverage HTTP/HTTPS. For this reason, it is not advisable to classify all HTTP/HTTPS traffic as `data-interactive`, as this could dramatically shift the percentages of traffic assigned to your 128T's traffic-engineering queues away from `best-effort` data. This policy straddles between `data-mission-critical` and `data-best-effort`, and should be used judiciously to improve network performance for client/server applications that fit into that spot in your network's QoS framework.
+In present-day networks, a large percentage of network transactions leverage HTTP/HTTPS. For this reason, it is not advisable to classify all HTTP/HTTPS traffic as `data-interactive`, as this could dramatically shift the percentages of traffic assigned to your SSR's traffic-engineering queues away from `best-effort` data. This policy straddles between `data-mission-critical` and `data-best-effort`, and should be used judiciously to improve network performance for client/server applications that fit into that spot in your network's QoS framework.
 :::
 
 #### Mission-Critical Data
@@ -256,7 +256,7 @@ max-latency          250
 ```
 
 :::note
-This baseline configuration uses the `MultimediaStreaming` service-class, which in turn uses DSCP 26 (AF31). MultimediaStreaming is assigned to the 128T's `medium` traffic-engineering queue.
+This baseline configuration uses the `MultimediaStreaming` service-class, which in turn uses DSCP 26 (AF31). MultimediaStreaming is assigned to the SSR's `medium` traffic-engineering queue.
 :::
 
 #### Best-Effort Data
@@ -302,7 +302,7 @@ Babiarz, J., et. al., "Configuration Guidelines for DiffServ Service Classes", [
 
 ## Basic Service Policy Definitions
 
-The output here is provided in `flat` format, to facilitate copy/pasting into an existing 128T conductor or router. Note that it has referencial dependencies on the various system-default `service-class` configuration, so for users that have modified or removed those `service-class` elements, adjustments will be required.
+The output here is provided in `flat` format, to facilitate copy/pasting into an existing SSR conductor or router. Note that it has referencial dependencies on the various system-default `service-class` configuration, so for users that have modified or removed those `service-class` elements, adjustments will be required.
 
 ```
 config authority service-policy voip-signaling name voip-signaling
