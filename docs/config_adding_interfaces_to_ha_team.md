@@ -6,7 +6,7 @@ This guide provides a procedure for manually adding multiple interfaces to the H
 
 For more information regarding non-forwarding interfaces please refer to this blog: [Configuring Non Forwarding Interfaces](config_non_forwarding_ha_interfaces.md).
 
-In order to configure an interface for HA sync, you must configure a non-forwarding interface of type `fabric`. The interface type of `fabric` indicates a direct link between HA peers. 128T will configure these Linux interfaces as a network team. Here is an example 128T configuration:
+In order to configure an interface for HA sync, you must configure a non-forwarding interface of type `fabric`. The interface type of `fabric` indicates a direct link between HA peers.The SSR software will configure these Linux interfaces as a network team. Here is an example SSR configuration:
 
 ```
 admin@T106_DUT1.Conductor (node[name=T106_DUT3])# show
@@ -56,7 +56,7 @@ dpdk1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-One limitation of the non-forwarding interfaces is that the user is only allowed to configure one non-forwarding `fabric` interface in the 128T configuration.  Therefore only one interface will exist in the teamed interface in Linux. In order to add a second interface the administrator is going to have to manually tweak some ifcfg scripts. First, navigate to the directory that contains all the ifcfg scripts:
+One limitation of the non-forwarding interfaces is that the user is only allowed to configure one non-forwarding `fabric` interface in the SSR configuration.  Therefore only one interface will exist in the teamed interface in Linux. In order to add a second interface the administrator is going to have to manually tweak some ifcfg scripts. First, navigate to the directory that contains all the ifcfg scripts:
 
 ```
 [root@t106-dut3 ~]# cd /etc/sysconfig/network-scripts/

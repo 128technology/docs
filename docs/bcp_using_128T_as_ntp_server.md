@@ -1,8 +1,8 @@
 ---
-title: Using 128T as an NTP Server
+title: Using SSR as an NTP Server
 sidebar_label: Branch NTP Service
 ---
-In many hub-and-spoke deployments, devices at the spoke locations are accustomed to using either public services (such as `time.nist.gov` or `pool.ntp.org`) or self-hosted NTP services as their clock source. Rather than carry this traffic on the WAN, this document demonstrates how 128T can provide NTP services for devices at the branch, avoiding unnecessary WAN traffic, and ensuring that all branch devices use a consistent clock source.
+In many hub-and-spoke deployments, devices at the spoke locations are accustomed to using either public services (such as `time.nist.gov` or `pool.ntp.org`) or self-hosted NTP services as their clock source. Rather than carry this traffic on the WAN, this document demonstrates how an SSR can provide NTP services for devices at the branch, avoiding unnecessary WAN traffic, and ensuring that all branch devices use a consistent clock source.
 
 :::note
 All of the recommendations in this document presume that the administrator has already set up the SSR to clock off of an upstream source.
@@ -10,7 +10,7 @@ All of the recommendations in this document presume that the administrator has a
 
 ## Overview
 
-There are two, somewhat complementary approaches to using a branch 128T as an NTP server:
+There are two, somewhat complementary approaches to using a branch SSR as an NTP server:
 
 - Issuing the SSR's address as the NTP server in DHCP repsonses and/or configuring devices to use the SSR's LAN interface as an NTP server
 - Capturing all inbound NTP (using a service that captures 123/UDP), and handling that traffic locally
@@ -145,7 +145,7 @@ config
 exit
 ```
 
-This `service-route` leverages [Linux host networking](concepts_linux_host_networking.md) to send packets to `ntpd` using the `kni254` interface present on all 128T devices.
+This `service-route` leverages [Linux host networking](concepts_linux_host_networking.md) to send packets to `ntpd` using the `kni254` interface present on all SSR devices.
 
 ## Conclusion
 

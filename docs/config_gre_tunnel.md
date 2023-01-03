@@ -3,10 +3,10 @@ title: Native GRE Tunnels
 sidebar_label: Native GRE Tunnels
 ---
 
-Generic Routing Encapsulation (GRE) is a lightweight tunneling protocol that encapsulates L3 traffic in an L3 and GRE header. The 128T Networking Platform now supports both a [GRE plugin](plugin_gre.md) as well as native GRE tunnels. 
+Generic Routing Encapsulation (GRE) is a lightweight tunneling protocol that encapsulates L3 traffic in an L3 and GRE header. The SSR Networking Platform now supports both a [GRE plugin](plugin_gre.md) as well as native GRE tunnels. 
 
 :::note
-This is not an SVR feature. GRE tunnels are not created to send packets between peered 128T routers. However, a packet coming from SVR can egress into a GRE tunnel, and vice versa.
+This is not an SVR feature. GRE tunnels are not created to send packets between peered SSR routers. However, a packet coming from SVR can egress into a GRE tunnel, and vice versa.
 :::
 
 ## Sending Packets

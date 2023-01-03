@@ -2,7 +2,7 @@
 title: Static Hostname Mappings
 ---
 
-[Services](concepts_glossary.md#services) are the construct used to define the properties and destination for traffic traversing the 128T. An example service for a printer can be seen below.
+[Services](concepts_glossary.md#services) are the construct used to define the properties and destination for traffic traversing the SSR. An example service for a printer can be seen below.
 
 ```
 config
@@ -36,9 +36,9 @@ config
 exit
 ```
 
-This single service template of sorts can now be used for every location, however it requires a DNS server at the location to correctly resolve `local.printer.service` to the location-specific address. If it not possible to leverage a DNS server to resolve hostnames, the 128T can be used to define a static mapping to achieve the same result.
+This single service template of sorts can now be used for every location, however it requires a DNS server at the location to correctly resolve `local.printer.service` to the location-specific address. If it not possible to leverage a DNS server to resolve hostnames, the SSR can be used to define a static mapping to achieve the same result.
 
-A mapping of hostname to a list of addresses can be added to the router configuration which in turn adds entries to `/etc/hosts`. 128T will use these addresses as resolutions for the hostnames as if they were directly added to `/etc/hosts` or returned by dynamic DNS lookup. The hostname/address mappings are used for all hostnames within the 128T configuration, not only on service addresses.
+A mapping of hostname to a list of addresses can be added to the router configuration which in turn adds entries to `/etc/hosts`. SSR will use these addresses as resolutions for the hostnames as if they were directly added to `/etc/hosts` or returned by dynamic DNS lookup. The hostname/address mappings are used for all hostnames within the SSR configuration, not only on service addresses.
 
 ## Configuration
 
@@ -66,7 +66,7 @@ The service configuration from above, in combination with this router-specific h
 
 ## Troubleshooting
 
-[`show dns resolutions`](cli_reference.md#show-dns-resolutions) displays whether hostnames provisioned within the 128T configuration have been resolved, either through configuration, leveraging `static-hostname-mapping` or manual through the PCLI.
+[`show dns resolutions`](cli_reference.md#show-dns-resolutions) displays whether hostnames provisioned within the SSR configuration have been resolved, either through configuration, leveraging `static-hostname-mapping` or manual through the PCLI.
 
 This output from `show dns resolutions` is performed with the _service_ configured with an address of `local.printer.service` but does not yet have a `static-hostname-mapping` configured.
 ```
@@ -127,5 +127,5 @@ Mon 2020-06-29 19:00:12 UTC
  ```
 
 :::note
-If using `set dns resolution` on a hostname resolved by a DNS server, the 128T will no longer attempt to resolve those addresses as static entries do not have a TTL.
+If using `set dns resolution` on a hostname resolved by a DNS server, the SSR will no longer attempt to resolve those addresses as static entries do not have a TTL.
 :::

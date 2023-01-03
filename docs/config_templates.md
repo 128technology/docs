@@ -7,7 +7,7 @@ Configuration templates allow administrators to automate the configuration of to
 
 ## Creating a Template
 
-To create a template, begin by navigating to the **Configuration** page of the 128T Networking Platform. Next, click on the **Templates** button in the top right action area of the page: ![navigate_to_templates](/img/templates_navigate.png)
+To create a template, begin by navigating to the **Configuration** page of the SSR Networking Platform. Next, click on the **Templates** button in the top right action area of the page: ![navigate_to_templates](/img/templates_navigate.png)
 
 On the templates page you will see a list of your current templates, or a button to create a new one if none exist. Click the **Create A Template** button to create a new template: ![templates_hero](/img/templates_hero.png)
 
@@ -95,7 +95,7 @@ Any changes made to the template body pane or variables pane must be saved by cl
 The body of a configuration template is written in the [Liquid](https://shopify.github.io/liquid/) templating language. Please refer to the [Liquid documentation](https://shopify.github.io/liquid/basics/introduction/) for the specifics of the language. 
 
 :::note
-The 128T Networking Platform supports several custom tags and filters in Liquid (e.g. `{% editGroup $}`) that would not be parsable by other Liquid evaluators.
+The SSR Networking Platform supports several custom tags and filters in Liquid (e.g. `{% editGroup $}`) that would not be parsable by other Liquid evaluators.
 :::
 
 ### The `{% editGroup $}` Tag
@@ -489,7 +489,7 @@ Templates support import and export functionality, both in basic and advanced mo
 
 ## Backing Up Templates / Storage Mechanism
 
-Templates are stored on disk as JSON in the following location: `/etc/128technology/sync/templates.json`. This file can be backed up, restored, or edited. While the 128T Networking Platform does watch this file for changes and updates it's state, it is not recommended to edit this file directly as a means to configure templates.
+Templates are stored on disk as JSON in the following location: `/etc/128technology/sync/templates.json`. This file can be backed up, restored, or edited. While the SSR Networking Platform does watch this file for changes and updates it's state, it is not recommended to edit this file directly as a means to configure templates.
 
 
 #### History
