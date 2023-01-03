@@ -16,7 +16,7 @@ This document follows the conventions of [JSON Schema](https://json-schema.org).
 http://128technology.com/initializerPreferencesFile
 ```
 
-Schema for the preferences file used by the 128T Initializer.
+Schema for the preferences file used by the SSR Initializer.
 
 ### Initializer Preferences File Type
 
@@ -114,9 +114,9 @@ The role of the Node being initialized.
 
 | Value         | Explanation                      |
 | :------------ | -------------------------------- |
-| `"conductor"` | A 128T Conductor node            |
+| `"conductor"` | An SSR Conductor node            |
 | `"control"`   | Unsupported. Use 'combo' instead |
-| `"combo"`     | A 128T Router node               |
+| `"combo"`     | An SSR Router node               |
 | `"slice"`     | Unsupported. Use 'combo' instead |
 
 ### router-name
@@ -229,7 +229,7 @@ false
 
 ### local-init
 
-Preferences to be passed to 128T local environment configuration. These must conform to the Environment Config schema for the version of 128T being initialized.
+Preferences to be passed to the SSR local environment configuration. These must conform to the Environment Config schema for the version of SSR being initialized.
 
 `local-init`
 
@@ -403,7 +403,7 @@ false
 
 ### is-virtual
 
-This must be true when initializing a 128T node that is managed by a Virtual Conductor.
+This must be true when initializing an SSR node that is managed by a Virtual Conductor.
 
 `is-virtual`
 
@@ -473,7 +473,7 @@ Configuration of the secondary Node in an HA Conductor.
 http://128technology.com/initializerPreferencesFile#/properties/local-init
 ```
 
-Preferences to be passed to 128T local environment configuration. These must conform to the Environment Config schema for the version of 128T being initialized.
+Preferences to be passed to SSR local environment configuration. These must conform to the Environment Config schema for the version of SSR being initialized.
 
 ### local-init Type
 

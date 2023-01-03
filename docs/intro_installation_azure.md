@@ -255,7 +255,7 @@ The _Session Smart Router Template_ deploys a VM for the SSR with three network 
 | eth1                   | Public           |
 | eth2                   | Private          |
 
-In earlier versions of the 128T Networking Platform software (pre-5.0), the SSR used the PCI addresses to map to the device interfaces. If you are installing an earlier version of the Software, please see [PCI Address Association](#pci-address-association). 
+In earlier versions of the SSR Networking Platform software (pre-5.0), the SSR used the PCI addresses to map to the device interfaces. If you are installing an earlier version of the Software, please see [PCI Address Association](#pci-address-association). 
 
 With the release of 5.0, device interfaces are mapped using the VMBus UUID; use of the PCI addresses is no longer supported. Use the following process to map the VMBus UUID to the device interfaces. 
 
