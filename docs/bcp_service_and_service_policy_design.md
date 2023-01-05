@@ -227,7 +227,7 @@ exit
 Router- and router group-based services are not services unto themselves; rather, the term refers to the capability of limiting the scope of services to specific routers or sets of routers. By default, any service configured on a conductor is pushed down to all routers it manages. This may result in unnecessary bloat on routers that will never have a calling for a specific service. E.g., in a typical retail deployment traffic generally goes in one of two directions: originating at a store and heading to a data center, or originating at a data center and heading to a store. Thus it is important for head end routers to have access to store services, and for a store to have the configuration corresponding to its own local services, but there will be no need for every store to have every other store's local services in a full mesh.
 
 :::note
-In case a full mesh is a requirement, 128 Technology has the Summary and Spoke Services – which use router-based services to optimize the configuration.
+In case a full mesh is a requirement, Juniper has the Summary and Spoke Services – which use router-based services to optimize the configuration.
 :::
 
 Use the `applies-to` configuration within a `service` to restrict its scope:
@@ -595,7 +595,7 @@ Consider the `MPLS-DIA-LTE` service-policy shown above, which lists five vectors
 
 As shown in the `MPLS-DIA-LTE` service-policy, the session-resiliency is set to `revertible-failover`. This policy comes into play when traffic needs to move in the event of a failure to a transport circuit (either a path failure or a path quality threshold has been crossed). After a failure to a circuit, traffic using that path will migrate to the next best circuit. When that circuit's quality is restored (the path returns to the `up` state, or the quality thresholds return to satisfactory values), `revertible-failover` *will migrate the traffic back to the preferred circuit*. Contrast this to the session-resiliency setting of `failover`, which will persist the traffic on the migrated circuit and not return it to the preferred circuit.
 
-In general, 128 Technology recommends using the `revertible-failover` setting for long-lived session types, such as SIP registrations. By contrast, 128 Technology recommends using the `failover` setting for transient sessions (such as the audio associated with a telephone call).
+In general, Juniper recommends using the `revertible-failover` setting for long-lived session types, such as SIP registrations. By contrast, Juniper recommends using the `failover` setting for transient sessions (such as the audio associated with a telephone call).
 
 :::note
 The vast majority of network sessions are transient, short-lived sessions, but you can validate this during your application discovery exercises.

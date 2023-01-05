@@ -18,7 +18,7 @@ Dual LTE support is valuable when connecting to two discrete wireless carriers w
 
 ### Prerequisites
 
-Of the many LTE modules on the market, 128 Technology has standardized on those modules that utilize QMI (Qualcomm MSM Interface Protocol).
+Of the many LTE modules on the market, Juniper has standardized on those modules that utilize QMI (Qualcomm MSM Interface Protocol).
 
 When running with a single LTE module, there are no restrictions on how the adapter is connected within the hardware platform.  When running with two LTE cards, it is required that the second module be connected via USB interface over MiniPCIe, M.2 or even USB dongle.
 

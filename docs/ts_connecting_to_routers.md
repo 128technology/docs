@@ -1,9 +1,9 @@
 ---
-title: Connecting to 128T Routers from Conductor
+title: Connecting to Routers from a Conductor
 sidebar_label: Connecting to Routers
 ---
 
-The `connect` command affords administrators the ability to connect to any managed 128T node via the PCLI from the conductor. This is implemented as a reverse SSH tunnel, originated by the 128T router, and associated with a specific loopback address and port on the conductor. (The loopback address for all managed routers is `127.127.0.1`, and the port is unique per router.)
+The `connect` command affords administrators the ability to connect to any managed SSR node via the PCLI from the conductor. This is implemented as a reverse SSH tunnel, originated by the SSR, and associated with a specific loopback address and port on the conductor. (The loopback address for all managed routers is `127.127.0.1`, and the port is unique per router.)
 
 Information about the IP and port assignments is maintained by the conductor in the file located at:
 
@@ -11,7 +11,7 @@ Information about the IP and port assignments is maintained by the conductor in 
 /var/lib/128technology/connect/nodeIdentifier
 ```
 
-As new 128T nodes (the fundamental building block of a 128T router) are added to or removed from an Authority, this `nodeIdentifier` file will get rotated in the same way that log files get rotated. Thus, you may see many iterations of this file on your filesystem. The newest will always be the copy without any suffix appended to it, as indicated above.
+As new SSR nodes (the fundamental building block of an SSR) are added to or removed from an Authority, this `nodeIdentifier` file will get rotated in the same way that log files get rotated. Thus, you may see many iterations of this file on your filesystem. The newest will always be the copy without any suffix appended to it, as indicated above.
 
 ## The nodeIdentifier File Contents
 
@@ -57,7 +57,7 @@ For example, assume I have a PCAP file on a managed node and I want to copy that
 [t128@conductor ~]$ scp -F /var/lib/128technology/connect/nodeIdentifier t128@node1.router1:/var/log/128technology/128T_wan.pcap /tmp
 ```
 
-Just as with SSH, we can pass the `nodeIdentifier` file using `-F` as an argument to `scp`. This command will copy the `128T_wan.pcap` file from the 128T's log directory to the conductor's filesystem in /tmp.
+Just as with SSH, we can pass the `nodeIdentifier` file using `-F` as an argument to `scp`. This command will copy the `128T_wan.pcap` file from the SSR's log directory to the conductor's filesystem in /tmp.
 
 Here's another example, using `sftp`.
 

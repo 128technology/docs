@@ -27,7 +27,7 @@ To segment your network using tenants, you follow a simple, three step workflow:
 2. Assign the rules for how a router identifies inbound traffic as belonging to a tenant. This is described in the *Tenant Configuration* section below.
 3. Selectively allow or deny tenants to your network's *services* using `access-control` stanzas
 
-By following this workflow, you'll grant access to your network's services only to those that should be allowed access. This is the basis of 128 Technology's approach to *Zero Trust Networking*: every `service` expressly identifies who (via tenancy) will have a route to it.
+By following this workflow, you'll grant access to your network's services only to those that should be allowed access. This is the basis of Juniper's approach to *Zero Trust Networking*: every `service` expressly identifies who (via tenancy) will have a route to it.
 
 But the SSR approach to Zero Trust Networking does not make configuring all possible sources and destinations of network traffic onerous; through the use of *CIDR Services* (described in the *Services and Service Policies* documentation, and *Tenant Hierarchies* (described below), you can jumpstart your network implementation right away.
 

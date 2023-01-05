@@ -51,10 +51,10 @@ The Vendor ID and Device ID are represented in the example above as [8086:100e].
 
 ## Compatible NICs and Drivers
 
-Additional NICs and drivers may be compatible with the SSR, but have not been fully tested by Juniper/128 Technology, and may not fully support all features of the SSR. 
+Additional NICs and drivers may be compatible with the SSR, but have not been fully tested by Juniper, and may not fully support all features of the SSR. 
 
 :::note
-128 Technology strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third-party. See [Compatible Platform Support](about_supported_platforms.md#support-for-128t-on-compatible-platforms).
+Juniper strongly recommends certification for any build in a production deployment. When a compatible platform is used, certification should be done by the end operator or a third-party. See [Compatible Platform Support](about_supported_platforms.md#support-for-128t-on-compatible-platforms).
 :::
 
 Compatible platforms have the following characteristics:
@@ -67,7 +67,7 @@ Compatible platforms have the following characteristics:
 
 See [SSR Compatible Platforms](about_supported_platforms.md#128t-compatible-platform) for additional definitions and requirements for compatible platforms. 
 
-The list below includes those devices that are compatible with the SSR, but have not been tested by Juniper/128 Technology. 
+The list below includes those devices that are compatible with the SSR, but have not been tested by Juniper. 
 
 ### Searching the List
 

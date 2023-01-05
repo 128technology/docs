@@ -129,7 +129,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-41705 Add ability to search for multiple routers from the Routers page:** Users can now search for multiple routers in a single search from the Routers page. 
 ------
-- **I95-41724 Improvements to the Dropdown List of 128T Software Upgrade Versions in Conductor GUI:** The Software Upgrade dropdown now displays the date and the repo location for each item in the list.
+- **I95-41724 Improvements to the Dropdown List of Software Upgrade Versions in Conductor GUI:** The Software Upgrade dropdown now displays the date and the repo location for each item in the list.
 ------
 - **I95-42136 GUI should display subtype in event history:** Added the subtype column to the event history page, as well as a filter option using subtype.
 ------
@@ -428,7 +428,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-39374 Multi-core TE and Per-AdjacencyTE feature interaction:** Resolved an issue where it was possible for a packet on a non-scheduled adjacency to make it into the schedulerGroup when adjacency-only Traffic Engineering was enabled.
 ------
-- **I95-39377 Provide progress while PCLI connects to 128T:** The system now provides progress to prevent users from attempting to use the PCLI before the system is fully operational. 
+- **I95-39377 Provide progress while PCLI connects to the SSR:** The system now provides progress to prevent users from attempting to use the PCLI before the system is fully operational. 
 ------
 - **I95-39380 Inline performance monitoring causes metadata parsing errors:** Added validation for the presence of performance-monitoring profile when enabled.
 ------
@@ -440,7 +440,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-39538 Periodic disruptions in service:** Resolved an issue in the HttpParser for application identification when parsing malformed HTTP traffic.
 ------
-- **I95-39555 Active interface out-of-sync with the leadership status for the underlying device interface:** Resolved an issue when both nodes of an HA router start 128T at a similar time, the active node for a redundant interface is not determined correctly, resulting in a failure to forward traffic.
+- **I95-39555 Active interface out-of-sync with the leadership status for the underlying device interface:** Resolved an issue when both nodes of an HA router start SSR at a similar time, the active node for a redundant interface is not determined correctly, resulting in a failure to forward traffic.
 ------
 - **I95-39558 After setting a custom favicon, clearing the icon does not reset to the default:** This issue has been resolved. 
 ------
@@ -503,11 +503,11 @@ This release replaces the existing `5.1.6-1` release.
 
 ### New Features and Improvements 
 
-- **[I95-19132 Role-Based Access Control](config_RBAC.md):** Role-Based Access Control provides a mechanism for an Administrator to create Access Management Roles that allow specific access to 128T resources such as routers, tenants, services, and other Authority-level configuration objects, as well as actions such as install, upgrade, or download.  
+- **[I95-19132 Role-Based Access Control](config_RBAC.md):** Role-Based Access Control provides a mechanism for an Administrator to create Access Management Roles that allow specific access to SSR resources such as routers, tenants, services, and other Authority-level configuration objects, as well as actions such as install, upgrade, or download.  
 ------
 - **[I95-21775 BGP VRF Support:](concepts_learning_VRF_routes.md)** Support for learning VRF routes through BGP and the associated routing tables has been added. Virtual Routing and Forwarding (VRF) instances make it possible to maintain multiple routing tables with overlapping address spaces in one router.
 ------
-- **[I95-21776 Ethernet Over SVR Support:](concepts_EthOverSVR.md)** Ethernet Over SVR (EoSVR) is a proprietary 128 Technology protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between 128T routers with increased security and efficiency, without the overhead of IP packet encapsulation.
+- **[I95-21776 Ethernet Over SVR Support:](concepts_EthOverSVR.md)** Ethernet Over SVR (EoSVR) is a proprietary Juniper protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between 128Ts with increased security and efficiency, without the overhead of IP packet encapsulation.
 ------
 - **I95-23206 Custom Chart Legends:** This feature allows the user to assign a custom series name to each trace in the legend by hovering over the series name, and clicking on the displayed icon. The pop up dialog allows you to assign a name to the series.
 ------
@@ -533,11 +533,11 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-37443 Latency/Jitter/Loss chart:** A chart showing the latency, jitter, and loss for the selected peer path over time is accessible by clicking the **Source** field in the Peer Paths table on the Router page. 
 ------
-- **I95-37473 PCLI: Advanced mode:** Advanced Mode allows viewing and editing configuration fields that are normally hidden and automatically generated by 128T. The new mode is invoked by passing `--user-mode=advanced` to the PCLI at launch.
+- **I95-37473 PCLI: Advanced mode:** Advanced Mode allows viewing and editing configuration fields that are normally hidden and automatically generated by the SSR. The new mode is invoked by passing `--user-mode=advanced` to the PCLI at launch.
 ------
 - **I95-37663 GUI rebrand for managed service providers:** The Authority Settings now has a 'Theme' section that allows you to change the primary color, secondary color, and main icon of the GUI. 
 ------
-- **I95-38212 Restart System From the Node Panel:** The Process Management button has been added to the top of the Node Panel in the GUI. When selected, a list of operations displays, allowing the user to; Start, Stop, or Restart the 128T Conductor or Router. The option to Reboot the OS is also available.
+- **I95-38212 Restart System From the Node Panel:** The Process Management button has been added to the top of the Node Panel in the GUI. When selected, a list of operations displays, allowing the user to; Start, Stop, or Restart the SSR Conductor or Router. The option to Reboot the OS is also available.
 ------
 - **I95-38514 View User Activity:** Added a user activity table to the GUI on the Users page, as well as adding a new [PCLI command `show user activity`](cli_reference.md#show-user-activity).
 ------
@@ -578,19 +578,19 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 ------
 - **I95-35783 Bootstrap DHCP server not resilient to power loss or abrupt shutdown:** The handling of abrupt shutdowns has been strengthened.
 ------
-- **I95-36053 High number of System Events on 128T Config changes:** Added a filter to audit logs of type SERVICE-START and SERVICE-STOP based on service to filter just the required services.
+- **I95-36053 High number of System Events on SSR Config changes:** Added a filter to audit logs of type SERVICE-START and SERVICE-STOP based on service to filter just the required services.
 ------
 - **I95-36366 Security keys are not automatically generated for unmanaged router:** Security keys are now automatically generated. 
 ------
 - **I95-36397 / I95-36614 Auto Generated DHCP Server Interface Down:** Generate namespace ID with node specific namespace name for device interface to prevent namespace id collision.
 ------
-- **I95-36509 Validation may be terminated or not execute if the 128T SSR experiences a disconnect from the conductor:** This issue has been resolved.
+- **I95-36509 Validation may be terminated or not execute if the SSR experiences a disconnect from the conductor:** This issue has been resolved.
 ------
 - **I95-36761 Configuring `default-route-distance` under bgp causes a fault in the PCLI:** This issue has been resolved by providing defaults for default BGP distances (ebgp, ibgp, and local).
 ------
 - **I95-37002 Help text on shared-mac parameter should be more explicit:** The description has been updated to provide additional information. 
 ------
-- **I95-37181 LTE Modem denied from network with 128T Service Running:** Resolved an issue where UDP packets larger than the network-interface MTU causes Rx Error on the LTE interface, resulting in denial of the LTE modem.
+- **I95-37181 LTE Modem denied from network with SSR Service Running:** Resolved an issue where UDP packets larger than the network-interface MTU causes Rx Error on the LTE interface, resulting in denial of the LTE modem.
 ------
 - **I95-37699 `save tech-support-info` may generate a corrupted zip file on systems that have greater than 10K alarms:** Added a `limit` argument to PCLI show events and Tech Support to resolve this issue.  
 ------
@@ -610,7 +610,7 @@ Please refer to the [**Caveats**](#caveats) section for important information pr
 ------
 - **I95-38393 Router Cannot Get Past Connected State:** Resolved an issue where assets could become stuck in Connected state.
 ------
-- **I95-38458 PCLI fails to start after upgrade:** Resolved an issue where caching errors prevented 128T from starting. 
+- **I95-38458 PCLI fails to start after upgrade:** Resolved an issue where caching errors prevented SSR from starting. 
 ------
 - **I95-38474 The `router > dns-config` does not account for the immutable bit on `/etc/resolv.conf`:** Resolved an issue with the DNS proxy not working due to the immutable bit set by ISO. 
 ------

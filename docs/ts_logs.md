@@ -1,13 +1,13 @@
 ---
-title: Understanding Logs on the 128T
+title: Understanding Logs on the SSR
 sidebar_label: Logs
 ---
-Logs 128T are stored in 4 principal locations: `/var/log/128technology/`, `/var/log/install128t/`, `/var/log/salt/` and in the journal.
+SSR logs are stored in 4 principal locations: `/var/log/128technology/`, `/var/log/install128t/`, `/var/log/salt/` and in the journal.
 
-- `/var/log/128technology/`, as the name suggests, contains the majority of the logs related to 128T application processing.
-- 128T utilizes [Salt Stack](https://docs.saltproject.io) for life cycle management and Dev Ops automation. Salt-related log files are contained within their default directory of `/var/log/salt/`.
-- The 128T-installer is a separate application that is used for installing and upgrading the 128T.  Any logs related to installation, initialization, upgrade, or rollback will be contained within the `/var/log/install128t/` directory.
-- The journal contains logs from processes that are managed by systemd and not by the 128T process manager.  In order to view logs related to these processes, you can execute `journalctl -u <process>`. 128T-related processes that are managed by systemd are:
+- `/var/log/128technology/`, as the name suggests, contains the majority of the logs related to SSR application processing.
+- The SSR utilizes [Salt Stack](https://docs.saltproject.io) for life cycle management and Dev Ops automation. Salt-related log files are contained within their default directory of `/var/log/salt/`.
+- The `128T-installer` is a separate application that is used for installing and upgrading the SSR.  Any logs related to installation, initialization, upgrade, or rollback will be contained within the `/var/log/install128t/` directory.
+- The journal contains logs from processes that are managed by systemd and not by the SSR process manager.  In order to view logs related to these processes, you can execute `journalctl -u <process>`. SSR-related processes that are managed by systemd are:
   - `128TWeb`
   - `nginx`
   - `128TWebAuth`
@@ -89,9 +89,9 @@ routingEngineProcesses.log
 -rw-rw-rw-+  1 root  root   2907035 Apr  2 13:59 zookeeperServer.log
 ```
 
-You may have noticed that some log files are approximately 10MB large and others that have a `file-name.#.log` format.  128T rotates logs when it starts and if a log file reaches 10MB in size. There are a maximum number of 25 rotated files per process before the oldest one gets deleted.
+You may have noticed that some log files are approximately 10MB large and others that have a `file-name.#.log` format. The SSR rotates logs when it starts and if a log file reaches 10MB in size. There are a maximum number of 25 rotated files per process before the oldest one gets deleted.
 
-Each process that runs on a 128T writes to its own log. You can view the processes on your 128T by issuing the command `show system processes` in the PCLI:
+Each process that runs on an SSR writes to its own log. You can view the processes on your SSR by issuing the command `show system processes` in the PCLI:
 
 ```
 admin@branchoffice1.seattlesite1# show system processes
@@ -191,7 +191,7 @@ May 22 23:31:01.288 [USER| -- ] INFO  (highwayManagerPo) this is a test HighwayM
 May 22 23:22:51.384 [USER| -- ] INFO  (node  ) this is a test
 ```
 
-When working with the 128T Support Team, you may be asked to bundle your logs. This is easy with the built-in 128T log compression utility: 
+When working with the Juniper Support Team, you may be asked to bundle your logs. This is easy with the built-in SSR log compression utility: 
 ```
 admin@branchoffice1.seattlesite1# save tech-support-info
 Retrieving Tech Support Info...
@@ -202,4 +202,4 @@ admin@branchoffice1.seattlesite1# quit
 -rw-r--r-- 1 root root 2198659 Sep 12 20:11 /var/log/128technology/tech-support-info.tar.gz
 ```
 
-This command bundles all the log files and other system environment properties that may be needed to diagnose issues related to 128T, and compresses them into a file in `/var/log/128technology/`.
+This command bundles all the log files and other system environment properties that may be needed to diagnose issues related to the SSR, and compresses them into a file in `/var/log/128technology/`.

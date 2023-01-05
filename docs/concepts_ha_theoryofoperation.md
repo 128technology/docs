@@ -13,7 +13,7 @@ This document will describe the benefits and caveats of each of these models, as
 This document is intended for network architects, and is to be used as a guideline during the network design phase of deployment.
 
 ## Introduction
-High availability (or “HA”) is the practice of deploying additional network elements for traffic resiliency, to account for link or system downtime. In general, 128 Technology, Inc. encourages the deployment of highly available routers and conductors, as this will provide service continuity in the event of network failures, software faults, or hardware downtime (both scheduled and unscheduled).
+High availability (or “HA”) is the practice of deploying additional network elements for traffic resiliency, to account for link or system downtime. In general, we encourage the deployment of highly available routers and conductors, as this will provide service continuity in the event of network failures, software faults, or hardware downtime (both scheduled and unscheduled).
 
 :::note
 There are other types of protection afforded SSR-powered networks, including path protection (via peer path selection) and link impairment protection (via session resiliency features, packet duplication, packet retransmitions, etc.), but these are not a consequence of supplying two nodes to mitigate the impact of failures.
