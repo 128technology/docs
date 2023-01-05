@@ -395,7 +395,7 @@ Some configurations elect to use this technique for tenant association in lieu o
 ## Service Layer
 
 ### Services
-Services make up the heart of the SSR data model. the SSR data model is built upon the idea that one should build their network around the applications that they will be accessing and not determine which applications their network can access based off of the way their network is set up. In the SSR data model, a `service` is a traffic destination being accessed by constituents in your network. 
+Services make up the heart of the SSR data model. The SSR data model is built upon the idea that one should build their network around the applications that they will be accessing and not determine which applications their network can access based off of the way their network is set up. In the SSR data model, a `service` is a traffic destination being accessed by constituents in your network. 
 
 Service configuration, which represents the cornerstone of the SSR’s worldview, is part of the set of global data within an authority. Services represent specific applications that a network delivers; e.g., web services, database services, or voice/video services. Using a top-down approach, the SSR data model asks that administrators define the services that their network will deliver, the requirements that the service demands (in terms of latency, packet loss, jitter, etc.), and the network topology – and the SSR will deliver traffic to the service using the optimal paths through the network. Because they are global data within an authority, all services defined within an authority are part of the dataset for each SSRs router that is also a member of that authority.
 

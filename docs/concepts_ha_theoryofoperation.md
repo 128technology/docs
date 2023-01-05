@@ -2,7 +2,7 @@
 title: High Availability - Theory of Operation
 sidebar_label: HA - Theory of Operation
 ---
-This document describes the most common set of deployment models for taking two instances of SSR routing software (referred to as “nodes”) and deploying those nodes together to provide high availability. the SSR routing software presents several deployment options for high availability, including:
+This document describes the most common set of deployment models for taking two instances of SSR routing software (referred to as “nodes”) and deploying those nodes together to provide high availability. The SSR routing software presents several deployment options for high availability, including:
 
 - **Dual node high availability**: where two nodes form one logical router, with shared state and a "fabric" backplane between them.
 - **Dual router high availability**: where two nodes form two logical routers, with no shared state. This is a familiar approach to administrators accustomed to deploying pairs of legacy routing platforms.

@@ -38,7 +38,7 @@ Selecting the wrong type of console may result in garbage characters being displ
 
 #### SSR System with VGA Console
 
-Use this option when running on hardware that has onboard graphics chipsets. This installs the  SSR using the GUI installer.
+Use this option when running on hardware that has onboard graphics chipsets. This installs the SSR using the GUI installer.
 
 ### SSR Installation
 

@@ -48,7 +48,7 @@ best-effort          true
 max-latency          250
 ```
 
-VoIP media, on the other hand, is very sensitive to latency, loss, and jitter. the SSR software calculates "MOS" ([Mean Opinion Score](https://en.wikipedia.org/wiki/Mean_opinion_score)) for every peer path, as a composite metric derived by BFD metric data exchanged across the path. MOS is a "Quality of Experience" measurement, which assigns a single scalar value between 1 and 5 to an interactive session. Our benchmark for reasonable quality for VoIP media will be 3.6, which is the threshold below which many users will be disastisfied [[voip-mechanic]](https://www.voipmechanic.com/mos-mean-opinion-score.htm).
+VoIP media, on the other hand, is very sensitive to latency, loss, and jitter. The SSR software calculates "MOS" ([Mean Opinion Score](https://en.wikipedia.org/wiki/Mean_opinion_score)) for every peer path, as a composite metric derived by BFD metric data exchanged across the path. MOS is a "Quality of Experience" measurement, which assigns a single scalar value between 1 and 5 to an interactive session. Our benchmark for reasonable quality for VoIP media will be 3.6, which is the threshold below which many users will be disastisfied [[voip-mechanic]](https://www.voipmechanic.com/mos-mean-opinion-score.htm).
 
 Because voice and video calls are transient, we *strongly discourage* using `revertible-failover` as the `session-resiliency` setting. This can cause traffic to "ping pong" between two links during congestion or periods of "brown outs," degrading the overall quality of experience for the caller.
 

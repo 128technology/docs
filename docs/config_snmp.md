@@ -10,7 +10,7 @@ Simple Network Management Protocol (SNMP) is an internet standard protocol for c
 The SSR implementation of SNMP relies on the *snmpd* process running within the host operating system. All configuration for SNMP, however, is done within the SSR's data model via its administrative interfaces (e.g., PCLI, GUI, etc.).
 
 ## MIB Definitions
-128T provdes MIB files that describe the SSR SNMP objects and traps available on the SSR device and how they are encoded. For ease of use, these are installed on the device itself in this location
+SSR provdes MIB files that describe the SSR SNMP objects and traps available on the SSR device and how they are encoded. For ease of use, these are installed on the device itself in this location
 ```
 /usr/share/snmp/128technology/
 ```
@@ -20,7 +20,7 @@ A Network Management System (NMS) can import these MIBs when managing the SSR ap
 dnf install 128T-mibs
 ```
 :::note
-In order to install the SSR MIBS on another platform, a valid certificate and yum repo file must be present on the platform in order to obtain the file from the 128 Technology repository.
+In order to install the SSR MIBS on another platform, a valid certificate and yum repo file must be present on the platform in order to obtain the file from the SSR repository.
 :::
 
 The specific objects available in the MIB are described in more details in the the section [MIB Layout](#mib-layout).
@@ -192,7 +192,7 @@ The t128AlarmNotification definition defines the alarm trap sent out by the syst
 
 ### T128-METRICS.mib
 
-The SSR-METRICS-MIB provides SNMP access to the expansive set of metrics provided by the SSR product which are exposed via the t128MetricsTable.
+The T128-METRICS-MIB provides SNMP access to the expansive set of metrics provided by the SSR product which are exposed via the t128MetricsTable.
 
 Each row of the metrics table is keyed by two objects, the t128MetricAlias and the t128MetricIndex. The t128MetricAlias is an arbitrary string up to 64 characters long that represents a description of the metric. When read from the table, this alias also includes a metric instance suffix which in the most common case will be `_0`. For example, if the default CPU utlization metric has an alias _cpuUtilization_, it will be returned as `cpuUtilization_0`. In addition to the alias, the t128MetricIndex key represents a unique series of a metric.
 

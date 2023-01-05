@@ -2,7 +2,7 @@
 title: Application Discovery
 sidebar_label: Application Discovery
 ---
-the SSR routing software's value grows to an organization as administrators create and refine application-specific policy for traffic steering and prioritization. The more detail included in the SSR's configuration, the more fine-grained the policies can be, which allows for precision treatment of traffic through the SSR's forwarding plane.
+The SSR routing software's value grows to an organization as administrators create and refine application-specific policy for traffic steering and prioritization. The more detail included in the SSR's configuration, the more fine-grained the policies can be, which allows for precision treatment of traffic through the SSR's forwarding plane.
 
 It is very common for network administrators to be largely unaware of the traffic that is traversing their infrastructure, and thus it is important to perform an _application discovery_ process to identify the various types of traffic. Once identified and modeled within the SSR data model, administrators can apply network policy to give that traffic specific treatment.
 
@@ -138,7 +138,7 @@ This will create a file named `128T.question.fsdb`, which contains all of the ho
 
 ##### SSR's Built-in Application Identification
 
-the SSR networking platform can passively observe information exchanged during TLS connections and scrape application information from server-side X.509 certificates. This is done by setting the `application-identification` on a given router to use `mode tls`. Below is a configuration excerpt:
+The SSR networking platform can passively observe information exchanged during TLS connections and scrape application information from server-side X.509 certificates. This is done by setting the `application-identification` on a given router to use `mode tls`. Below is a configuration excerpt:
 
 ```
 admin@labsystem1.fiedler# show config running auth router newton application-identification
@@ -164,7 +164,7 @@ While this is the easiest technique to employ for application identification, it
 
 ##### IPFIX
 
-Internet Protocol Flow Information Export, or IPFIX, is an IETF protocol for that standardizes the way networking equipment reports on the flows it processes, for billing, management, accounting, etc. the SSR supports IPFIX, and it is possible to leverage IPFIX records to investigate traffic traversing an SSR.
+Internet Protocol Flow Information Export, or IPFIX, is an IETF protocol for that standardizes the way networking equipment reports on the flows it processes, for billing, management, accounting, etc. The SSR supports IPFIX, and it is possible to leverage IPFIX records to investigate traffic traversing an SSR.
 
 Below is a configuration fragment that shows a representative sample on how to set up an IPFIX collector. (Consult with your IPFIX collector documentation to understand which ports and protocols it uses, as these can vary from vendor to vendor.)
 
@@ -199,7 +199,7 @@ Filter the traffic to the `lab.` tenant to avoid a deluge of unnecessary traffic
 
 ##### Audit Logging
 
-the SSR also has a facility for recording all traffic flows as part of its _audit log_ functionality. Enabled on a per-router basis, the traffic logs will show all connections that are established and rejected for every source address.
+The SSR also has a facility for recording all traffic flows as part of its _audit log_ functionality. Enabled on a per-router basis, the traffic logs will show all connections that are established and rejected for every source address.
 
 To configure the audit logging on a router:
 

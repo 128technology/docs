@@ -7,7 +7,7 @@ The DPDK kernel network interface (KNI) provides a way for the SSR to route traf
 
 
 ## Configuration
-There are several types of interfaces in the product that leverage KNIs such as [LTE](howto_lte.md), PPPoE and T1 are all implemented using KNIs under the covers. the SSR router also provides the ability to provision KNIs in various modes and provides an extensible scripting framework around them.
+There are several types of interfaces in the product that leverage KNIs such as [LTE](howto_lte.md), PPPoE and T1 are all implemented using KNIs under the covers. The SSR router also provides the ability to provision KNIs in various modes and provides an extensible scripting framework around them.
 
 ### Host KNI
 The `host` mode KNI creates a KNI in Linux with the name specified. The following configuration shows the example of such KNI

@@ -151,7 +151,6 @@ exit
 All inbound requests on this specific network-interface, considered part of the “engineering” tenant, will only be able to access services that are part of the engineering tenant, or those services in other tenants that have explicitly allowed (via access-policy) members of the engineering tenant. Using access-policy statements to control access – allowing or denying various user populations – is described in the section on Service configuration.
 
 ## Subtenant Hierarchies
-
 The SSR not only allows you to partition your user population into various tenants, it allows for further segmentation of those tenants into “families” of tenants – a hierarchical (family) tree, where subtenants (children) inherit properties from their parentage. When granting access to a service to a tenant, all children of that tenant are also granted access by default; however, the converse is not true. When a child tenant is granted access to a service, the parent tenant will not have routes to it.
 
 This allows for very fine-grained access control, where services and tenant families can be combined to give access to network services to very specific user populations.
