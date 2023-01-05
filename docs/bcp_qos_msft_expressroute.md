@@ -11,13 +11,13 @@ This applies only to ExpressRoute peering for voice applications. Consult your M
 
 Microsoft only recognizes five different DSCP values on ExpressRoute. Any packets marked with a DSCP value other than one of these five will be dropped; therefore, _it is important to ensure any services that will leverage ExpressRoute have a service-policy that marks traffic to one of thsee five values._
 
-The table below is an augmented version of [the one provided by Microsoft](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-qos), to indicate the mapping of ExpressRoute DSCP to built-in 128T `service-class` definitions. Each 128T system will have these mappings as part of the "factory default" configuration.
+The table below is an augmented version of [the one provided by Microsoft](https://docs.microsoft.com/en-us/azure/expressroute/expressroute-qos), to indicate the mapping of ExpressRoute DSCP to built-in SSR `service-class` definitions. Each SSR system will have these mappings as part of the "factory default" configuration.
 
 :::important
 It is possible that your factory default configuration has been administratively modified or various elements administratively deleted, and thus these `service-class` definitions do not exist on your system. You can confirm the presence or absence of these configuration elements by using the PCLI command `show config running authority service-class verbose all`, and ensuring the five classes mentioned below exist, and match the DSCP markings as indicated.
 :::
 
-| Traffic Class | DSCP Marking | 128T Service Class | Workload                         |
+| Traffic Class | DSCP Marking | SSR Service Class | Workload                         |
 | ------------- | ------------ | - | -------------------------------- |
 | Voice         | EF (46)      | Telephony | Skype/Microsoft Teams/Lync voice |
 | Interactive | AF41 (34) | MultimediaConferencing | Video, VBSS |

@@ -3,7 +3,7 @@ title: Cloud High Availability Plugin
 sidebar_label: Cloud HA
 ---
 
-The 128T-cloud-ha plugin provides High Availability (HA) functionality for the 128T Networking Platform deployed in the cloud. HA for 128T routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin uses node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
+The SSR-cloud-ha plugin provides High Availability (HA) functionality for the SSR Networking Platform deployed in the cloud. HA for SSR routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin uses node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -20,8 +20,8 @@ The instructions for installing and managing the plugin can be found [here](plug
 
 ## Version Restrictions
 
- The router component can only be installed on versions of 128T which support provisional state on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
- The versions of 128T that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of 128T that satisfy this requirement.
+ The router component can only be installed on versions of SSR which support provisional state on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
+ The versions of SSR that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of SSR that satisfy this requirement.
 
 
 ## Plugin Behavior
@@ -69,9 +69,9 @@ Backend Pool example:
 ![Azure Loadblancer Backend Pool Configuration](/img/cloud-ha-azure-lb-backend-pool-config.png)
 
 
-The Azure Loadbalancer sends a health probe to the redundant 128T's redundant interfaces. These probes are routed through the `cloud-ha` interface, through a `128T-azure-lb-nginx` instance, and down to the Azure Loadbalancer API Agent. 
+The Azure Loadbalancer sends a health probe to the redundant SSR's redundant interfaces. These probes are routed through the `cloud-ha` interface, through a `128T-azure-lb-nginx` instance, and down to the Azure Loadbalancer API Agent. 
 
-The Azure Loadbalancer API Agent responds to the probes with a `200` status code when the current node is active and a `500` code when its inactive. A probe to the inactive node will not reach the 128T when the redundant interfaces are set provisionally down.
+The Azure Loadbalancer API Agent responds to the probes with a `200` status code when the current node is active and a `500` code when its inactive. A probe to the inactive node will not reach the SSR when the redundant interfaces are set provisionally down.
 
 #### Azure VNET
 
@@ -141,7 +141,7 @@ If the problem with the secondary node resolves, then the HA Agents will update 
 
 ### Primary Shutdown
 
-This scenario is what will occur if the primary node were to be taken down for maintenance or failed completely. The primary node's HA Agent (and Monitoring Agent and API Agent) will be shutdown when 128T is shutdown, so it will not perform any failover operations. The secondary node will wait for `peer-reachability-timeout` seconds of not hearing from the primary node to determine that the secondary node is unreachable. Once the primary node is determined unreachable, the secondary HA Agent will take over and become active since it does not know if the primary node is shutdown or unreachable.
+This scenario is what will occur if the primary node were to be taken down for maintenance or failed completely. The primary node's HA Agent (and Monitoring Agent and API Agent) will be shutdown when SSR is shutdown, so it will not perform any failover operations. The secondary node will wait for `peer-reachability-timeout` seconds of not hearing from the primary node to determine that the secondary node is unreachable. Once the primary node is determined unreachable, the secondary HA Agent will take over and become active since it does not know if the primary node is shutdown or unreachable.
 
 ![primary-shutdown-scenario](/img/cloud-ha-primary-shutdown-scenario.png)
 
@@ -267,7 +267,7 @@ Nodes can only be members of one group.
 
 ### Address Prefixes
 
-Certain prefixes can be configured to be controlled by the Cloud HA 128T by tagging services with groups. The services that are tagged with a certain group will have all of their `address` fields added to the list of configured prefixes.
+Certain prefixes can be configured to be controlled by the Cloud HA SSR by tagging services with groups. The services that are tagged with a certain group will have all of their `address` fields added to the list of configured prefixes.
 
 ```
 service
@@ -280,7 +280,7 @@ exit
 
 Any additional prefixes that should be included in the controlled prefix list can be configured as `additional-branch-prefix`s under the group.
 
-## Generated 128T Configuration
+## Generated SSR Configuration
 
 To see a full blown configuration and the configuration it generates, look at `Complete Example Configuration` in the `Appendix`.
 
@@ -334,7 +334,7 @@ The different services on the router all log to the files captured by the glob `
 
 
 ### PCLI Enhancements
-To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. This state information is also accessible from the 128T's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
+To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. This state information is also accessible from the SSR's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
 
 #### State Fields
 
@@ -495,7 +495,7 @@ Completed in 0.10 seconds
 
 ### Router Version Incompatibility
 
-As mentioned in the `Version Restrictions` section, the router component of the plugin will only install on 128T versions which support the provisional device interface state. This will be apparent to the user if the router component is not being setup and `show assets` indicates an error similar to:
+As mentioned in the `Version Restrictions` section, the router component of the plugin will only install on SSR versions which support the provisional device interface state. This will be apparent to the user if the router component is not being setup and `show assets` indicates an error similar to:
 
 ```
 Error:
@@ -1100,4 +1100,4 @@ Use the following configuration as an example only - it should not be used on a 
 
 #### Issues Fixed
 
-- **PLUGIN-768** Support the Cloud HA plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the Cloud HA plugin in SSR versions `5.1.0` and greater.

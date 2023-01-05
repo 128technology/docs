@@ -16,7 +16,7 @@ This document follows the conventions of [JSON Schema](https://json-schema.org).
 http://128technology.com/installerPreferencesFile
 ```
 
-Schema for the preferences file used by the 128T Installer.
+Schema for the preferences file used by the SSR Installer.
 
 ### Installer Preferences File Type
 
@@ -44,7 +44,7 @@ Schema for the preferences file used by the 128T Installer.
 
 ### install
 
-Cleanly install 128T with the given options after wiping away any traces of previous installations.
+Cleanly install SSR with the given options after wiping away any traces of previous installations.
 
 `install`
 
@@ -57,7 +57,7 @@ Cleanly install 128T with the given options after wiping away any traces of prev
 
 ### upgrade
 
-Upgrade 128T to a newer version.
+Upgrade SSR to a newer version.
 
 `upgrade`
 
@@ -70,7 +70,7 @@ Upgrade 128T to a newer version.
 
 ### rollback
 
-Roll back to the previous installation of 128T. This is only possible if 128T was installed or upgraded with the Installer.
+Roll back to the previous installation of SSR. This is only possible if SSR was installed or upgraded with the Installer.
 
 Before perfroming a rollback, please refer to [Rolling Back Software](intro_rollback.md) for important details about the rollback operation.
 
@@ -85,7 +85,7 @@ Before perfroming a rollback, please refer to [Rolling Back Software](intro_roll
 
 ### download
 
-Download the 128T software and dependencies without installing.
+Download the SSR software and dependencies without installing.
 
 `download`
 
@@ -98,7 +98,7 @@ Download the 128T software and dependencies without installing.
 
 ### import
 
-Import a 128T ISO or packages directory into the local repository.
+Import an SSR ISO or packages directory into the local repository.
 
 `import`
 
@@ -111,7 +111,7 @@ Import a 128T ISO or packages directory into the local repository.
 
 ### repository
 
-Manage 128T software repositories.
+Manage SSR software repositories.
 
 `repository`
 
@@ -124,7 +124,7 @@ Manage 128T software repositories.
 
 ### authentication
 
-Authentication for downloading and installing 128T software.
+Authentication for downloading and installing SSR software.
 
 `authentication`
 
@@ -141,7 +141,7 @@ Authentication for downloading and installing 128T software.
 
 ### enable-128T
 
-Enable the 128T service if the operation is successful.
+Enable the SSR service if the operation is successful.
 
 `enable-128T`
 
@@ -162,7 +162,7 @@ false
 
 ### start-128T
 
-Start the 128T service if the operation is successful.
+Start the SSR service if the operation is successful.
 
 `start-128T`
 
@@ -279,7 +279,7 @@ The default value is:
 
 ### set-default-kernel
 
-Whether or not to set the system's default kernel after an Installer operation. If set to 'false', the correct kernel will need to be enabled manually for 128T to function normally.
+Whether or not to set the system's default kernel after an Installer operation. If set to 'false', the correct kernel will need to be enabled manually for SSR to function normally.
 
 `set-default-kernel`
 
@@ -325,7 +325,7 @@ false
 http://128technology.com/installerPreferencesFile#/properties/install
 ```
 
-Cleanly install 128T with the given options after wiping away any traces of previous installations.
+Cleanly install SSR with the given options after wiping away any traces of previous installations.
 
 ### install Type
 
@@ -356,7 +356,7 @@ Deprecated; use 'authentication.certificate' instead
 
 ### initialize
 
-Preferences to pass to the Initializer. These must conform to the Initializer preferences schema for the version of 128T being installed.
+Preferences to pass to the Initializer. These must conform to the Initializer preferences schema for the version of SSR being installed.
 
 `initialize`
 
@@ -367,7 +367,7 @@ Preferences to pass to the Initializer. These must conform to the Initializer pr
 
 `object` ([Initializer Preferences File](initializer_preferences.md))
 
-### 128T-version
+### SSR-version
 
 An RPM version requirement string of the form '[comparison ][epoch:]version[-release]', where 'comparison' is one of '>=', '&lt;', '>', '&lt;=', or '='. If omitted, '=' will be used for 'comparison'.
 
@@ -376,11 +376,11 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 - is optional
 - cannot be null
 
-#### 128T-version Type
+#### SSR-version Type
 
 `string`
 
-#### 128T-version Constraints
+#### SSR-version Constraints
 
 **pattern**: the string must match the following regular expression:
 
@@ -390,7 +390,7 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 <!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E((%3D%7C%5B%3E%3C%5D%3D%3F)%5Cs%2B)%3F(%5B%5E%5Cs%3A%5D%2B)%3F(%5B%5E%5Cs%5C-%5D%2B)(-(%5CS%2B))%3F%24 "try regular expression with regexr.com")
 
-#### 128T-version Examples
+#### SSR-version Examples
 
 ```json
 "3.0.3"
@@ -430,7 +430,7 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 
 ### no-nuke-on-start
 
-Do not erase previous installations of 128T when the Installer starts.
+Do not erase previous installations of SSR when the Installer starts.
 
 `no-nuke-on-start`
 
@@ -451,7 +451,7 @@ false
 
 ### no-nuke-on-failure
 
-Do not uninstall 128T and clean up if the Installer fails.
+Do not uninstall SSR and clean up if the Installer fails.
 
 `no-nuke-on-failure`
 
@@ -476,7 +476,7 @@ false
 http://128technology.com/installerPreferencesFile#/properties/upgrade
 ```
 
-Upgrade 128T to a newer version.
+Upgrade SSR to a newer version.
 
 ### upgrade Type
 
@@ -502,7 +502,7 @@ Deprecated; use 'authentication.certificate' instead.
 
 `string`
 
-### 128T-version
+### SSR-version
 
 An RPM version requirement string of the form '[comparison ][epoch:]version[-release]', where 'comparison' is one of '>=', '&lt;', '>', '&lt;=', or '='. If omitted, '=' will be used for 'comparison'.
 
@@ -511,11 +511,11 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 - is optional
 - cannot be null
 
-#### 128T-version Type
+#### SSR-version Type
 
 `string`
 
-#### 128T-version Constraints
+#### SSR-version Constraints
 
 **pattern**: the string must match the following regular expression:
 
@@ -525,7 +525,7 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 <!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E((%3D%7C%5B%3E%3C%5D%3D%3F)%5Cs%2B)%3F(%5B%5E%5Cs%3A%5D%2B)%3F(%5B%5E%5Cs%5C-%5D%2B)(-(%5CS%2B))%3F%24 "try regular expression with regexr.com")
 
-#### 128T-version Examples
+#### SSR-version Examples
 
 ```json
 "3.0.3"
@@ -569,7 +569,7 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 http://128technology.com/installerPreferencesFile#/properties/rollback
 ```
 
-Roll back to the previous installation of 128T. This is only possible if 128T was installed or upgraded with the Installer.
+Roll back to the previous installation of SSR. This is only possible if SSR was installed or upgraded with the Installer.
 
 ### rollback Type
 
@@ -581,7 +581,7 @@ Roll back to the previous installation of 128T. This is only possible if 128T wa
 http://128technology.com/installerPreferencesFile#/properties/download
 ```
 
-Download the 128T software and dependencies without installing.
+Download the SSR software and dependencies without installing.
 
 ### download Type
 
@@ -594,7 +594,7 @@ Download the 128T software and dependencies without installing.
 | [128T-version](#128T-version)       | `string` | Optional | cannot be null | [Installer Preferences File](#128t-version "http&#x3A;//128technology.com/installerPreferencesFile#/properties/download/properties/128T-version")       |
 | [yum-certificate](#yum-certificate) | `string` | Optional | cannot be null | [Installer Preferences File](#yum-certificate "http&#x3A;//128technology.com/installerPreferencesFile#/properties/download/properties/yum-certificate") |
 
-### 128T-version
+### SSR-version
 
 An RPM version requirement string of the form '[comparison ][epoch:]version[-release]', where 'comparison' is one of '>=', '&lt;', '>', '&lt;=', or '='. If omitted, '=' will be used for 'comparison'.
 
@@ -603,11 +603,11 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 - is optional
 - cannot be null
 
-#### 128T-version Type
+#### SSR-version Type
 
 `string`
 
-#### 128T-version Constraints
+#### SSR-version Constraints
 
 **pattern**: the string must match the following regular expression:
 
@@ -617,7 +617,7 @@ An RPM version requirement string of the form '[comparison ][epoch:]version[-rel
 <!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E((%3D%7C%5B%3E%3C%5D%3D%3F)%5Cs%2B)%3F(%5B%5E%5Cs%3A%5D%2B)%3F(%5B%5E%5Cs%5C-%5D%2B)(-(%5CS%2B))%3F%24 "try regular expression with regexr.com")
 
-#### 128T-version Examples
+#### SSR-version Examples
 
 ```json
 "3.0.3"
@@ -674,7 +674,7 @@ Deprecated; use 'authentication.yum-certificate' instead.
 http://128technology.com/installerPreferencesFile#/properties/import
 ```
 
-Import a 128T ISO or packages directory into the local repository.
+Import an SSR ISO or packages directory into the local repository.
 
 ### import Type
 
@@ -711,7 +711,7 @@ false
 
 ### iso-path
 
-The path to the 128T ISO to be imported.
+The path to the SSR ISO to be imported.
 
 `iso-path`
 
@@ -741,7 +741,7 @@ The path to package directory to be imported.
 http://128technology.com/installerPreferencesFile#/properties/repository
 ```
 
-Manage 128T software repositories.
+Manage SSR software repositories.
 
 ### repository Type
 
@@ -756,7 +756,7 @@ Manage 128T software repositories.
 
 ### enable
 
-Enable 128T software repositories. If a new authentication token is specified, an existing repository configuration will be updated to use the new token.
+Enable SSR software repositories. If a new authentication token is specified, an existing repository configuration will be updated to use the new token.
 
 `enable`
 
@@ -769,7 +769,7 @@ Enable 128T software repositories. If a new authentication token is specified, a
 
 ### disable
 
-Disable 128T software repositories.
+Disable SSR software repositories.
 
 `disable`
 
@@ -786,7 +786,7 @@ Disable 128T software repositories.
 http://128technology.com/installerPreferencesFile#/properties/repository/properties/enable
 ```
 
-Enable 128T software repositories. If a new authentication token is specified, an existing repository configuration will be updated to use the new token.
+Enable SSR software repositories. If a new authentication token is specified, an existing repository configuration will be updated to use the new token.
 
 ### enable Type
 
@@ -801,7 +801,7 @@ Enable 128T software repositories. If a new authentication token is specified, a
 
 ### repos
 
-A list of 128T repositories to enable.
+A list of SSR repositories to enable.
 
 `repos`
 
@@ -876,7 +876,7 @@ Allow the use of all configured and enabled RPM repositories.
 http://128technology.com/installerPreferencesFile#/properties/repository/properties/disable
 ```
 
-Disable 128T software repositories.
+Disable SSR software repositories.
 
 ### disable Type
 
@@ -891,7 +891,7 @@ Disable 128T software repositories.
 
 ### repos
 
-A list of 128T repositories to disable.
+A list of SSR repositories to disable.
 
 `repos`
 
@@ -929,7 +929,7 @@ false
 http://128technology.com/installerPreferencesFile#/definitions/authentication
 ```
 
-Authentication for downloading and installing 128T software.
+Authentication for downloading and installing SSR software.
 
 ### authentication Type
 
@@ -983,7 +983,7 @@ API key to be used for authentication.
 
 ### certificate
 
-The contents of a certificate file to use for authenticating with the 128T RPM repository. If present, this will overwrite an existing certificate.
+The contents of a certificate file to use for authenticating with the SSR RPM repository. If present, this will overwrite an existing certificate.
 
 `certificate`
 
@@ -1004,7 +1004,7 @@ The contents of a certificate file to use for authenticating with the 128T RPM r
 http://128technology.com/installerPreferencesFile#/definitions/repository-type
 ```
 
-A 128T software repository.
+An SSR software repository.
 
 ### repository-type Type
 
@@ -1016,11 +1016,11 @@ A 128T software repository.
 
 | Value               | Explanation                                 |
 | :------------------ | ------------------------------------------- |
-| `"alpha"`           | 128T alpha software repository              |
-| `"beta"`            | 128T beta software repository               |
-| `"legacy"`          | 128T software repository for older releases |
-| `"prealpha"`        | 128T pre-alpha software repository          |
-| `"release"`         | 128T release software repository            |
-| `"plugins-alpha"`   | 128T alpha plugin repository                |
-| `"plugins-beta"`    | 128T beta plugin repository                 |
-| `"plugins-release"` | 128T release plugin repository              |
+| `"alpha"`           | SSR alpha software repository              |
+| `"beta"`            | SSR beta software repository               |
+| `"legacy"`          | SSR software repository for older releases |
+| `"prealpha"`        | SSR pre-alpha software repository          |
+| `"release"`         | SSR release software repository            |
+| `"plugins-alpha"`   | SSR alpha plugin repository                |
+| `"plugins-beta"`    | SSR beta plugin repository                 |
+| `"plugins-release"` | SSR release plugin repository              |

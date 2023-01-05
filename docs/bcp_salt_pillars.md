@@ -1,6 +1,6 @@
 ---
-title: Using Saltstack at Scale With 128T
-sidebar_label: Saltstack at Scale With 128T
+title: Using Saltstack at Scale With SSR
+sidebar_label: Saltstack at Scale With SSR
 ---
 
 ## Introduction
@@ -13,9 +13,9 @@ This guide is not intended to teach the users how to use Saltstack. This documen
 
 [Salt Pillars](https://docs.saltstack.com/en/latest/topics/tutorials/pillar.html)
 
-## Using Salt with 128T
+## Using Salt with SSR
 
-The 128T Conductor uses different Salt environments to logically separate the 128T specific Salt state and modules from any custom Salt modules implemented by the user. The locations for each environment are defined in the Salt-Master configuration file on the Conductor.
+The SSR Conductor uses different Salt environments to logically separate the SSR specific Salt state and modules from any custom Salt modules implemented by the user. The locations for each environment are defined in the Salt-Master configuration file on the Conductor.
 
 `/etc/128technology/salt/master`:
 ```
@@ -37,7 +37,7 @@ pillar_roots:
 ```
 
 
-The `128T` and `plugins` environments are managed by the Conductor and should not be modified. The `base` environment is left for the user to implement any custom Salt logic for their specific deployment. When a Salt Minion connects to the 128T Conductor the Salt-Master will execute the Salt highstate for each Salt environment automatically. The highstate consists of the states listed in the `top.sls` for each environment. By default the `top.sls` for the `base` environment performs a dummy state meant to serve as an example to users, but can be modified to perform states for the users specific deployment:
+The `128T` and `plugins` environments are managed by the Conductor and should not be modified. The `base` environment is left for the user to implement any custom Salt logic for their specific deployment. When a Salt Minion connects to the SSR Conductor the Salt-Master will execute the Salt highstate for each Salt environment automatically. The highstate consists of the states listed in the `top.sls` for each environment. By default the `top.sls` for the `base` environment performs a dummy state meant to serve as an example to users, but can be modified to perform states for the users specific deployment:
 
 `/srv/salt/top.sls`:
 ```
@@ -126,7 +126,7 @@ Interface {{ interface.name }}:
       - 8.8.4.4
 ```
 
-This approach quickly breaks down at scale. Each time a highstate is run the Salt-Master needs to parse the pillar top file and decide which pillar files apply to each Salt Minion. The top file supports glob matching and is not always a simple 1:1 match from Salt Minion ID to pillar file, therefore the entire file needs to be parsed each time a highstate is performed. Next, the Salt-Master encrypts the pillar data and sends it securely to each Salt Minion. These operations become extremely costly and profiling shows the Salt-Master spends 95% of its compute time compiling pillar data if the pillar top file contains more than one thousand individual pillar files. The Salt-Master becomes unable to process incoming minion requests and cannot communicate with more than ~250 minions concurrently. The Salt-Master's ten worker threads saturate to 100% CPU usage and impact the performance of the rest of the 128T processes operating on the Conductor.
+This approach quickly breaks down at scale. Each time a highstate is run the Salt-Master needs to parse the pillar top file and decide which pillar files apply to each Salt Minion. The top file supports glob matching and is not always a simple 1:1 match from Salt Minion ID to pillar file, therefore the entire file needs to be parsed each time a highstate is performed. Next, the Salt-Master encrypts the pillar data and sends it securely to each Salt Minion. These operations become extremely costly and profiling shows the Salt-Master spends 95% of its compute time compiling pillar data if the pillar top file contains more than one thousand individual pillar files. The Salt-Master becomes unable to process incoming minion requests and cannot communicate with more than ~250 minions concurrently. The Salt-Master's ten worker threads saturate to 100% CPU usage and impact the performance of the rest of the SSR processes operating on the Conductor.
 
 ## A Better Approach: Map Files
 
@@ -176,7 +176,7 @@ There is no need to manually sync the map file from the data directory on the Sa
 
 With the Salt pillar approach the Salt-Master renders the entire pillar top file and encrypts the pillar data each time it needs to perform highstate. With the map file approach the Salt-Master simply executes the highstate and the Salt Minion will fetch the correct map file automatically and render the information locally, saving lots of CPU cycles on the Salt-Master. With either approach the data is retrieved over an encrypted SSH tunnel between Salt Minion and Salt-Master. The only downside with the map approach is that the data is not encrypted on the Salt Minion when cached locally, which is why the map approach should not be used for sensitive data.
 
-Pillars can still be used at scale provided that the pillar top file is small. One example would be using Salt pillars to set the same root password on all managed 128T Routers:
+Pillars can still be used at scale provided that the pillar top file is small. One example would be using Salt pillars to set the same root password on all managed SSR Routers:
 ```
 base:
   '*':

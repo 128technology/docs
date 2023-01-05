@@ -2,7 +2,7 @@
 title: Session Timers
 sidebar_label: Session Timers
 ---
-When packets stop arriving on the flows of a session, the 128T router will clear the session after a period of time. The amount of time depends on the type of traffic.
+When packets stop arriving on the flows of a session, the SSR will clear the session after a period of time. The amount of time depends on the type of traffic.
 
 ## Session Type Timeout
 
@@ -68,4 +68,4 @@ For traffic which does not match any session type, the following default timeout
 
 ## TCP Timeout
 
-For a session using TCP, the 128T examines the state of the flows. When first TCP packets arrive, the flows for the session are given a timeout of 10s. Once the connection reaches an established state, the timeout for the flows are updated to the default or configured session-type timeout value.
+For a session using TCP, the SSR examines the state of the flows. When first TCP packets arrive, the flows for the session are given a timeout of 10s. Once the connection reaches an established state, the timeout for the flows are updated to the default or configured session-type timeout value.

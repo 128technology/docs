@@ -2,9 +2,9 @@
 title: Application Discovery
 sidebar_label: Application Discovery
 ---
-The 128T routing software's value grows to an organization as administrators create and refine application-specific policy for traffic steering and prioritization. The more detail included in the 128T's configuration, the more fine-grained the policies can be, which allows for precision treatment of traffic through the 128T's forwarding plane.
+The SSR routing software's value grows to an organization as administrators create and refine application-specific policy for traffic steering and prioritization. The more detail included in the SSR's configuration, the more fine-grained the policies can be, which allows for precision treatment of traffic through the SSR's forwarding plane.
 
-It is very common for network administrators to be largely unaware of the traffic that is traversing their infrastructure, and thus it is important to perform an _application discovery_ process to identify the various types of traffic. Once identified and modeled within the 128T data model, administrators can apply network policy to give that traffic specific treatment.
+It is very common for network administrators to be largely unaware of the traffic that is traversing their infrastructure, and thus it is important to perform an _application discovery_ process to identify the various types of traffic. Once identified and modeled within the SSR data model, administrators can apply network policy to give that traffic specific treatment.
 
 This document discusses the discovery process, to inform network architects, network engineers, and operational support teams on the best practices for isolating and categorizing network traffic flows.
 
@@ -17,19 +17,19 @@ The basic workflow for application discovery is typically done as an iterative p
 
 Steps 2 and 3 then repeat themselves in perpetuity throughout the lifecycle of the deployment, as new applications are introduced, retired, or go through their own lifecycle adaptations.
 
-The sections that follow will outline the techniques, tools, and strategies for successfully managing application discovery with the 128T router.
+The sections that follow will outline the techniques, tools, and strategies for successfully managing application discovery with the SSR.
 
 ### Create Coarse Routes
-The notion of creating "coarse routes" – that is, broad routes that knowingly convey many different bundled applications – is to set up the 128T to allow for communication between clients and the applications, to have a platform for subsequent analysis. Said another way: if you don't give clients the ability to talk to applications – even before you understand the traffic flows, traffic patterns, and application dependencies – then you will have no traffic to analyze. While this does philosophically subvert the 128T notion of "deny by default," it does establish a structural framework for experimentation.
+The notion of creating "coarse routes" – that is, broad routes that knowingly convey many different bundled applications – is to set up the SSR to allow for communication between clients and the applications, to have a platform for subsequent analysis. Said another way: if you don't give clients the ability to talk to applications – even before you understand the traffic flows, traffic patterns, and application dependencies – then you will have no traffic to analyze. While this does philosophically subvert the SSR notion of "deny by default," it does establish a structural framework for experimentation.
 
 #### Initial Bootstrapping
-The term _initial bootstrapping_ refers to the basic configuration applied to the 128T to allow it to forward traffic. Generally speaking this entails creating a "default route" (i.e., a service with an address of `0.0.0.0/0`, representing all possible IP destinations). The default route is the most primitive of bootstrapping, and is the starting point for virtually every 128T deployment.
+The term _initial bootstrapping_ refers to the basic configuration applied to the SSR to allow it to forward traffic. Generally speaking this entails creating a "default route" (i.e., a service with an address of `0.0.0.0/0`, representing all possible IP destinations). The default route is the most primitive of bootstrapping, and is the starting point for virtually every SSR deployment.
 
 :::info
-The `0.0.0.0/0` service can be removed from configurations once application discovery is "complete," at least to the point where all business-critical applications are accounted for and modeled in the 128T configuration. But it is more customary that this default route remains in place, for "local internet breakout" at branch locations, or is sent to a third party security stack (such as ZScaler or Palo Alto's Prisma) for IDS/IPS, Anti-virus scanning, etc.
+The `0.0.0.0/0` service can be removed from configurations once application discovery is "complete," at least to the point where all business-critical applications are accounted for and modeled in the SSR configuration. But it is more customary that this default route remains in place, for "local internet breakout" at branch locations, or is sent to a third party security stack (such as ZScaler or Palo Alto's Prisma) for IDS/IPS, Anti-virus scanning, etc.
 :::
 
-Conceptually, it is convenient to think of the traffic traversing the 128T as a pie chart; the `0.0.0.0/0` route represents the "other" (unspecified) category. Our job is to break that category into a series of more specific definitions.
+Conceptually, it is convenient to think of the traffic traversing the SSR as a pie chart; the `0.0.0.0/0` route represents the "other" (unspecified) category. Our job is to break that category into a series of more specific definitions.
 
 In most deployments there will be various applications that are known _a priori_, especially if those applications are delivered as part of a managed service offering driving the network transformation. For example, an SD-WAN deployment with a Managed Service Provider that is delivering voice service will know the details of the voice application. Thus, instead of starting with a single `0.0.0.0/0` service, we can add a `voice` service.
 
@@ -47,9 +47,9 @@ No matter how it is described, the process is the same: we need to piece togethe
 #### Proactive vs. Reactive Discovery
 Working with a customer at the outset of the project to define their applications is _proactive discovery_. The more upfront work that can be done during a lab evaluation, proof-of-concept deployment, or pilot rollout, the higher the likelihood for success. Proactive application discovery is generally a learning process for the network architect, to see firsthand (in many cases for the first time) the sheer number of different flows traversing their network.
 
-_Reactive discovery_, performed once the 128T deployment is live, occurs as a response to end-user criticism. Comments such as "the intranet site is slow," or "I can't complete a point of sale transaction while I'm running inventory reports" are breadcrumbs into the aspects of the service definitions and service policies that need refinement.
+_Reactive discovery_, performed once the SSR deployment is live, occurs as a response to end-user criticism. Comments such as "the intranet site is slow," or "I can't complete a point of sale transaction while I'm running inventory reports" are breadcrumbs into the aspects of the service definitions and service policies that need refinement.
 
-In most 128T deployments, the lion's share of the discovery is reactive; this is not by design, but usually by circumstance. Because the proactive discovery process is typically done in antiseptic lab environments, or when traffic is isolated to a small number of devices under test, the interactions between applications are not easily identified.
+In most SSR deployments, the lion's share of the discovery is reactive; this is not by design, but usually by circumstance. Because the proactive discovery process is typically done in antiseptic lab environments, or when traffic is isolated to a small number of devices under test, the interactions between applications are not easily identified.
 
 (And we all know that end users are always able to find configuration bugs that no amount of lab testing ever could.)
 
@@ -84,11 +84,11 @@ Try to define the service as concisely as possible, but always bear in mind that
 
 #### Tools of the Trade
 
-The 128T software has a number of built-in tools to help faciliate the application discovery workflow. In general, these are used in conjunction to provide multiple proof points.
+The SSR software has a number of built-in tools to help faciliate the application discovery workflow. In general, these are used in conjunction to provide multiple proof points.
 
-##### 128T's Session Table
+##### SSR's Session Table
 
-The 128T maintains a list of all active sessions for all traffic it is forwarding, and makes that available to administrators via the PCLI command `show sessions` and in the GUI in the Sessions view. Much of the data identified in the [Pertinent Application Data](#pertinent-application-data) section is available in the Session Table. 
+The SSR maintains a list of all active sessions for all traffic it is forwarding, and makes that available to administrators via the PCLI command `show sessions` and in the GUI in the Sessions view. Much of the data identified in the [Pertinent Application Data](#pertinent-application-data) section is available in the Session Table. 
 
 If you have set the tenancy of your lab system using the technique mentioned in the [Establishing a Lab Environment](#establishing-a-lab-environment) section, it becomes easy to filter the session table using `grep`, as in:
 
@@ -100,7 +100,7 @@ This shows the active sessions for the `lab.guest` tenant. Each of the session t
 
 ##### Packet Capture
 
-Each `device-interface` within the 128T allows for packet capture using the Berkeley Packet Filter (BPF) syntax familiar to users of the Wireshark application. During discovery, and particularly if you've limited your egress route to one specific interface, applying a packet capture filter to that egress device-interface (even a broad filter such as `len>0`) lets you capture the traffic for postmortem analysis. Unlike session table entries, which are transient and will be created and destroyed as traffic flows through the system, this provides a permanent record for the traffic sent from that system. The PCAP file, located on the 128T's filesystem within `/var/log/128technology/128T_interfaceName.pcap`, can be copied off and dissected using Wireshark, tcpdump, etc.
+Each `device-interface` within the SSR allows for packet capture using the Berkeley Packet Filter (BPF) syntax familiar to users of the Wireshark application. During discovery, and particularly if you've limited your egress route to one specific interface, applying a packet capture filter to that egress device-interface (even a broad filter such as `len>0`) lets you capture the traffic for postmortem analysis. Unlike session table entries, which are transient and will be created and destroyed as traffic flows through the system, this provides a permanent record for the traffic sent from that system. The PCAP file, located on the SSR's filesystem within `/var/log/128technology/128T_interfaceName.pcap`, can be copied off and dissected using Wireshark, tcpdump, etc.
 
 Working through packet captures is an involved process, but will provide unequivocal evidence of the applications your devices are consuming, as well as all dependencies. Filtering the PCAP file to a single Device Under Test (DUT) will show all traffic to and from that device.
 
@@ -110,7 +110,7 @@ Copy off capture files periodically and label them with the tests performed. Thi
 
 ##### DNS-based Packet Capture
 
-A variant on the packet-capture technique described previously is to apply a filter on the 128T to only capture DNS transactions. Since DNS is generally a prerequisite for all network transactions, capturing DNS will typically give a deep insight into the locations that LAN-side clients are accessing, with the added benefit that the names are human readable.
+A variant on the packet-capture technique described previously is to apply a filter on the SSR to only capture DNS transactions. Since DNS is generally a prerequisite for all network transactions, capturing DNS will typically give a deep insight into the locations that LAN-side clients are accessing, with the added benefit that the names are human readable.
 
 Apply a capture-filter on the LAN-side `device-interface`, and set the filter to `udp port 53`. Because DNS transactions are small (two packets), and because they are infrequent, this filter can be left in place for a long time before the capture file is harvested.
 
@@ -136,9 +136,9 @@ dnsanon -i 128T_LAN.pcap -c none -f 128T -p q
 
 This will create a file named `128T.question.fsdb`, which contains all of the hostnames that clients requested during the capture period.
 
-##### 128T's Built-in Application Identification
+##### SSR's Built-in Application Identification
 
-The 128T networking platform can passively observe information exchanged during TLS connections and scrape application information from server-side X.509 certificates. This is done by setting the `application-identification` on a given router to use `mode tls`. Below is a configuration excerpt:
+The SSR networking platform can passively observe information exchanged during TLS connections and scrape application information from server-side X.509 certificates. This is done by setting the `application-identification` on a given router to use `mode tls`. Below is a configuration excerpt:
 
 ```
 admin@labsystem1.fiedler# show config running auth router newton application-identification
@@ -158,13 +158,13 @@ config
 exit
 ```
 
-With this configuration in place, the router will harvest the *Common Name* information from X.509 certificates as they traverse the 128T, and provide access to them via the `show application names` PCLI command as well as within the GUI.
+With this configuration in place, the router will harvest the *Common Name* information from X.509 certificates as they traverse the SSR, and provide access to them via the `show application names` PCLI command as well as within the GUI.
 
 While this is the easiest technique to employ for application identification, it is limited to only work with services that leverage TLS.
 
 ##### IPFIX
 
-Internet Protocol Flow Information Export, or IPFIX, is an IETF protocol for that standardizes the way networking equipment reports on the flows it processes, for billing, management, accounting, etc. The 128T supports IPFIX, and it is possible to leverage IPFIX records to investigate traffic traversing a 128T.
+Internet Protocol Flow Information Export, or IPFIX, is an IETF protocol for that standardizes the way networking equipment reports on the flows it processes, for billing, management, accounting, etc. The SSR supports IPFIX, and it is possible to leverage IPFIX records to investigate traffic traversing an SSR.
 
 Below is a configuration fragment that shows a representative sample on how to set up an IPFIX collector. (Consult with your IPFIX collector documentation to understand which ports and protocols it uses, as these can vary from vendor to vendor.)
 
@@ -188,10 +188,10 @@ exit
 ```
 
 :::note
-The `sampling-percentage` of 100 **should only be used when dealing with small traffic volumes**. The impact of IPFIX traffic processing at scale can overwhelm 128T as well as your IPFIX infrastructure. This is a key reason why the `lab.pos` (etc.) tenancy structure is critical for success, as it will limit your collection to the specific DUT.
+The `sampling-percentage` of 100 **should only be used when dealing with small traffic volumes**. The impact of IPFIX traffic processing at scale can overwhelm the SSR as well as your IPFIX infrastructure. This is a key reason why the `lab.pos` (etc.) tenancy structure is critical for success, as it will limit your collection to the specific DUT.
 :::
 
-Once the IPFIX collector is confirmed up and operational and harvesting records supplied by 128T, run through lab testing to collect information. Like packet captures, this provides conclusive evidence of all traffic flows observed by the 128T.
+Once the IPFIX collector is confirmed up and operational and harvesting records supplied by the SSR, run through lab testing to collect information. Like packet captures, this provides conclusive evidence of all traffic flows observed by the SSR.
 
 :::tip Key to success
 Filter the traffic to the `lab.` tenant to avoid a deluge of unnecessary traffic, and to be able to ratchet the `sampling-percentage` to 100.
@@ -199,7 +199,7 @@ Filter the traffic to the `lab.` tenant to avoid a deluge of unnecessary traffic
 
 ##### Audit Logging
 
-The 128T also has a facility for recording all traffic flows as part of its _audit log_ functionality. Enabled on a per-router basis, the traffic logs will show all connections that are established and rejected for every source address.
+The SSR also has a facility for recording all traffic flows as part of its _audit log_ functionality. Enabled on a per-router basis, the traffic logs will show all connections that are established and rejected for every source address.
 
 To configure the audit logging on a router:
 
@@ -232,7 +232,7 @@ exit
 On busy systems, this will generate a lot of logging. Be advised that turning this feature on for busy production sites may have a performance impact.
 :::
 
-To retrieve the logs, connect to the 128T's GUI (either the conductor or directly on the router), navigate to the router's page and click **Event History**. At the top of the page, click the Export button, which will prompt you to save the file to your local machine as either text or JSON.
+To retrieve the logs, connect to the SSR's GUI (either the conductor or directly on the router), navigate to the router's page and click **Event History**. At the top of the page, click the Export button, which will prompt you to save the file to your local machine as either text or JSON.
 
 The file will contain entries similar to the following:
 
@@ -251,7 +251,7 @@ Run iterations of tests, pull down the audit logs, and label the files to indica
 
 ##### Dropped Packets
 
-Akin to the audit logging capabilities of the 128T, _Dropped Packets_, a GUI only feature, can be helpful to identify those sessions that are not established due to the current policy configured on the 128T. After logging into the 128T platform, navigate to the router under discovery. From there, navigate to the _Debug_ page which can be found on the right hand side of the page.  The debug page provides access to some of the same information available in the PCLI - `show fib`, `show sessions`, etc. Select the right-most tab for Dropped Packets.
+Akin to the audit logging capabilities of the SSR, _Dropped Packets_, a GUI only feature, can be helpful to identify those sessions that are not established due to the current policy configured on the SSR. After logging into the SSR platform, navigate to the router under discovery. From there, navigate to the _Debug_ page which can be found on the right hand side of the page.  The debug page provides access to some of the same information available in the PCLI - `show fib`, `show sessions`, etc. Select the right-most tab for Dropped Packets.
 
 ![Dropped Packets](/img/concepts_application_discovery_dropped_packets.png)
 
@@ -268,7 +268,7 @@ Expand your current policies or service definitions to include IP destinations o
 
 _Application dependencies_ are prerequisites that must be satisfied before an application transaction is successful. Most applications are dependent on DNS, for example – successfully resolving a domain name is a prerequisite for sending a HTTPS request to a web site on the internet. But application dependencies can take all forms; some applications require a separate authentication transaction to a AAA server, some web sites need to transact to back end database servers, etc.
 
-While much of the application discovery process is focused on a client in a branch location accessing applications at a corporate data center or on the internet, creating a dependency map will not only help design the 128T configuration in an effective manner, it will greatly benefit post-deployment troubleshooting when the application is not performant or functioning properly. (E.g., if a point of sale device needs to authenticate to an LDAP server in one data center, but transact with back-end inventory management servers in another data center, it will be vital knowledge when troubleshooting a customer report with the POS.)
+While much of the application discovery process is focused on a client in a branch location accessing applications at a corporate data center or on the internet, creating a dependency map will not only help design the SSR configuration in an effective manner, it will greatly benefit post-deployment troubleshooting when the application is not performant or functioning properly. (E.g., if a point of sale device needs to authenticate to an LDAP server in one data center, but transact with back-end inventory management servers in another data center, it will be vital knowledge when troubleshooting a customer report with the POS.)
 
 ### Create Specific Configuration and Test
 

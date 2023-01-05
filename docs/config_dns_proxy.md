@@ -2,7 +2,7 @@
 title: DNS Proxy
 sidebar_label: DNS Proxy
 ---
-In a typical hub/spoke deployment, its very common for the WAN interfaces to have some sort of dynamic interface such as DHCP, PPPoE, LTE, etc. The 128T router can dynamically learn the DNS server address for these interfaces and can load balance DNS requests across the learned servers. The dns-proxy feature aims to provide a simple way to proxy all DNS requests originating on the LAN side to the learned server address(es) on the WAN side without having to re-configure or update client endpoints. This allows the network to better adapt to failures on the WAN interfaces while minimizing loss of connectivity from client side applications as clients can utilize the LAN address of the 128T to resolve DNS requests.
+In a typical hub/spoke deployment, its very common for the WAN interfaces to have some sort of dynamic interface such as DHCP, PPPoE, LTE, etc. The SSR can dynamically learn the DNS server address for these interfaces and can load balance DNS requests across the learned servers. The dns-proxy feature aims to provide a simple way to proxy all DNS requests originating on the LAN side to the learned server address(es) on the WAN side without having to re-configure or update client endpoints. This allows the network to better adapt to failures on the WAN interfaces while minimizing loss of connectivity from client side applications as clients can utilize the LAN address of the SSR to resolve DNS requests.
 
 ## Overview
 The common workflow for using this feature is as follows:
@@ -12,7 +12,7 @@ The common workflow for using this feature is as follows:
 * Configure a service-route to indicate the WAN interface(s) to be used for proxying DNS requests
 
 ## Advertise Interface Address as DNS Server
-A key component for DNS proxy is the ability to configure a fixed address as the DNS address for the clients on the LAN. A typical choice is to use the LAN-facing 128T interface address as the DNS server address, though the feature is not limited to this choice. The selected address can either be statically configured on the clients or configured via DHCP server (either external or 128T acting as the DHCP server).
+A key component for DNS proxy is the ability to configure a fixed address as the DNS address for the clients on the LAN. A typical choice is to use the LAN-facing SSR interface address as the DNS server address, though the feature is not limited to this choice. The selected address can either be statically configured on the clients or configured via DHCP server (either external or SSR acting as the DHCP server).
 
 On a linux system representing a client, its `/etc/resolv.conf` file would contain similar contents:
 
@@ -23,7 +23,7 @@ nameserver 10.10.10.1
 ```
 
 ## Configuring a DNS proxy service
-The special `dns-proxy` application-type is used for creating a DNS proxy service. All other service attributes such as access-policies, service-policies, etc., are also applicable to this service. The `dns-proxy` application-type indicates to the 128T router to perform a destination NAT on the traffic when the session is created for the service.
+The special `dns-proxy` application-type is used for creating a DNS proxy service. All other service attributes such as access-policies, service-policies, etc., are also applicable to this service. The `dns-proxy` application-type indicates to the SSR to perform a destination NAT on the traffic when the session is created for the service.
 
 ```
 admin@node1.conductor# show config running authority service lan-dns-proxy
@@ -63,15 +63,15 @@ admin@node1.conductor#
 
 The example configuration captures all DNS traffic sent to address `10.10.10.1` interface as configured on the test client in the previous step. 
 
-### How to proxy DNS requests originating from the linux host of the 128T router
-The `_internal_` tenant has a special meaning on the 128T routers as it represents the traffic originating from the host OS of the router. When the service allows the `_internal_` tenant and a `service-route` is created for this service, the target router linux environment is automatically configured for use with the DNS proxy. The `/etc/resolv.conf` on the 128T is modified to point to a loopback address within the 128T router.
+### How to proxy DNS requests originating from the linux host of the SSR
+The `_internal_` tenant has a special meaning on the SSRs as it represents the traffic originating from the host OS of the router. When the service allows the `_internal_` tenant and a `service-route` is created for this service, the target router linux environment is automatically configured for use with the DNS proxy. The `/etc/resolv.conf` on the SSR is modified to point to a loopback address within the SSR.
 
 ```
-; This file has been automatically updated by 128T - DO NOT EDIT
+; This file has been automatically updated by SSR - DO NOT EDIT
 nameserver 169.254.127.126
 ```
 
-This allows all DNS queries (for example, as a result of dnf lookups, etc.) to be intercepted by 128T router and create sessions appropriately.
+This allows all DNS queries (for example, as a result of dnf lookups, etc.) to be intercepted by SSR and create sessions appropriately.
 
 Additionally, this loopback address needs to be added to `dns-proxy` service.
 
@@ -167,7 +167,7 @@ admin@node1.conductor#
 A few key points about the service-route for a dns-proxy service type:
 
 ### Multiple learned DNS addresses
-If the dynamic interface learns multiple IP addresses, the 128T router will apply a round-robin load-balancing strategy amongst these IP address. Here's how you can check the details on the learned DNS addresses.
+If the dynamic interface learns multiple IP addresses, the SSR will apply a round-robin load-balancing strategy amongst these IP address. Here's how you can check the details on the learned DNS addresses.
 
 ```
 admin@node1.conductor# show dhcp v4 router router1 name inband-mgmt-intf detail

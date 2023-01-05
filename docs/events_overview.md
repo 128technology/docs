@@ -103,16 +103,16 @@ show events alarm from 2020-03-30T22:00:00Z to 2020-03-30T23:59:59Z router AAPDE
 | Field    | Description                                                  |
 | :------- | :----------------------------------------------------------- |
 | dateTime | This is the date and time that the event occurred. The format of the value followsthe ISO 8601 standard |
-| node     | The system within the 128T which produced the event          |
+| node     | The system within the SSR which produced the event          |
 | process  | The process within the node which produced the event         |
 | source   | The name of the entity which was the originator of the alarm. When the topic is a network-interface, this would be the name of the network-interface. |
-| category | This is the alarm type. Each category has a specific message format:<br />• **system** Related to the system, e.g. CPU, memory, etc.<br />• **process** Related to an internal software process<br />• **interface/network-interface** Related to an interface on the 128T (up, down,etc.)<br />• **platform** Related to low-level events that aren't necessarily derived from the machine; e.g. security keys<br />• **peer** Related to connectivity between 128T routers<br />• **platform-state** Sourced from the stats infrastructure<br />• **redundancy** Related to high availability behavior; e.g. a failover or leadership change<br />• **giid** Related to an interface that is part of a redundant pair (giid is an interface's "global ID")<br />• **asset**  An alarm sourced by an asset (a managed node) that is dervied from Automated Provisioner |
+| category | This is the alarm type. Each category has a specific message format:<br />• **system** Related to the system, e.g. CPU, memory, etc.<br />• **process** Related to an internal software process<br />• **interface/network-interface** Related to an interface on the SSR (up, down,etc.)<br />• **platform** Related to low-level events that aren't necessarily derived from the machine; e.g. security keys<br />• **peer** Related to connectivity between SSR routers<br />• **platform-state** Sourced from the stats infrastructure<br />• **redundancy** Related to high availability behavior; e.g. a failover or leadership change<br />• **giid** Related to an interface that is part of a redundant pair (giid is an interface's "global ID")<br />• **asset**  An alarm sourced by an asset (a managed node) that is dervied from Automated Provisioner |
 | severity | Alarms can be categorized in one of four severities: critical, major, minor and info. These severity levels can be used to filter alerts based on one of these levels. The default severity level is info, which shows all alarms.<br />• **critical** The condition affects service<br />• **major** Immediate action is required<br />• **minor** Minor warning conditions<br />• **info** No action is required |
 | message  | Descriptive text regarding the nature of the alarm           |
 
 ## Shelving Alarms
 
-When a 128T is put into “Maintenance Mode” all alarms for that 128T will be “shelved”. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI. The state of shelved alarms can be optionally viewed by issuing:
+When an SSR is put into “Maintenance Mode” all alarms for that SSR will be “shelved”. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI. The state of shelved alarms can be optionally viewed by issuing:
 
 ```
 admin@conductor1.nycsite1# show alarms shelved

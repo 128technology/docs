@@ -27,7 +27,7 @@ After imaging the ISO onto removable media, insert it into the target device and
 
 Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment. 
 
-To install using the Interactive Installation, use the arrow keys to select either `Install 128T Routing Software Serial Console` or **`Install 128T Routing Software VGA Console`**. As noted earlier, this guide describes the installation process using the Interactive Installation, specifically using the VGA console.
+To install using the Interactive Installation, use the arrow keys to select either `Install SSR Routing Software Serial Console` or **`Install SSR Routing Software VGA Console`**. As noted earlier, this guide describes the installation process using the Interactive Installation, specifically using the VGA console.
 
 ![VGA Boot with Interactive Install](/img/install_select_interactive.png)
 
@@ -162,7 +162,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 ## Install the Second Conductor HA Node
 
-For the second node for Conductor HA, install the system using the same process beginning with [Installing the ISO](intro_installation_bootable_media.md#installing-the-iso) and ending at [Initialize 128T](intro_installation_bootable_media.md#initialize-the-128t-node) step 2. From step 2, perform the following:
+For the second node for Conductor HA, install the system using the same process beginning with [Installing the ISO](intro_installation_bootable_media.md#installing-the-iso) and ending at [Initialize SSR](intro_installation_bootable_media.md#initialize-the-128t-node) step 2. From step 2, perform the following:
 
 1. When prompted for `What kind of Conductor node is this?` Select the **2nd HA Node**.
 

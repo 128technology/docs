@@ -5,11 +5,11 @@ sidebar_label: Show Stats Reference
 
 This reference is better understood if you know the basics of how to operate the PCLI. If you have not used the PCLI before, it is beneficial to first read [the basics about the PCLI](concepts_pcli.md).
 
-The _show stats_ command, and its myriad of subcommands, retrieve statistical data from various functions within the 128T router and return them to the user. Used for troubleshooting, debugging configuration, or just to monitor the health and well-being of the 128T router, these show commands provide a wealth of information and insight to users of the software.
+The _show stats_ command, and its myriad of subcommands, retrieve statistical data from various functions within the SSR and return them to the user. Used for troubleshooting, debugging configuration, or just to monitor the health and well-being of the SSR, these show commands provide a wealth of information and insight to users of the software.
 
-The _show stats_ command provides the ability to set a "zero point" for displaying statistical output using the _since_ command. The _since_ command takes either a timestamp as its argument (in ISO 8601 format), or the keyword _launch_, which shows statistics accumulated since the 128T routing software was launched. For more information on the zero point, refer to the section of this guide on _set context stats_.
+The _show stats_ command provides the ability to set a "zero point" for displaying statistical output using the _since_ command. The _since_ command takes either a timestamp as its argument (in ISO 8601 format), or the keyword _launch_, which shows statistics accumulated since the SSR software was launched. For more information on the zero point, refer to the section of this guide on _set context stats_.
 
-Generally speaking, the statistical data available via the 128T router's PCLI is organized into a tree-like hierarchy, with each subcommand potentially having its own series of subcommands. By omitting the (optional) subcommands, the 128T router will summarize all data from all possible subcommands and present it in a summary table; while this is very convenient to show a lot of potential data at a glance, it does incur additional processing overhead, and the retrieval of statistics may take an inordinately long time.
+Generally speaking, the statistical data available via the SSR's PCLI is organized into a tree-like hierarchy, with each subcommand potentially having its own series of subcommands. By omitting the (optional) subcommands, the SSR will summarize all data from all possible subcommands and present it in a summary table; while this is very convenient to show a lot of potential data at a glance, it does incur additional processing overhead, and the retrieval of statistics may take an inordinately long time.
 
 Each of the various _show stats_ subcommands will be described in sections that follow.
 
@@ -70,8 +70,8 @@ show stats [since <since>] [force] [router <router>] [<verbosity>]
 | [`packet-capture`](#show-stats-packet-capture) | Stats pertaining to captured packets |
 | [`packet-processing`](#show-stats-packet-processing) | Stats pertaining to packet processing |
 | [`path-tree`](#show-stats-path-tree) | Metrics tracking PathTree server and client behavior |
-| [`performance-monitoring`](#show-stats-performance-monitoring) | Stats pertaining to 128T peer path performance monitoring |
-| [`process`](#show-stats-process) | Metrics about 128T processes |
+| [`performance-monitoring`](#show-stats-performance-monitoring) | Stats pertaining to SSR peer path performance monitoring |
+| [`process`](#show-stats-process) | Metrics about SSR processes |
 | [`redis-server-manager`](#show-stats-redis-server-manager) | Stats pertaining to the Redis Server Manager |
 | [`redundancy`](#show-stats-redundancy) | Stats pertaining to the highway manager redundancy |
 | [`registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
@@ -33559,17 +33559,17 @@ show stats bfd by-peer-path [peer-name <peer-name>] [peer-host <peer-host>] [dev
 | command | description |
 | ------- | ----------- |
 | [`async`](#show-stats-bfd-by-peer-path-async) | Stats pertaining to BFD async mode per peer path |
-| [`average-latency`](#show-stats-bfd-by-peer-path-average-latency) | Rolling average latency in milliseconds for the 128T peer path. |
+| [`average-latency`](#show-stats-bfd-by-peer-path-average-latency) | Rolling average latency in milliseconds for the SSR peer path. |
 | [`dynamic-damping`](#show-stats-bfd-by-peer-path-dynamic-damping) | Stats pertaining to Dynamic BFD Damping |
 | [`echo`](#show-stats-bfd-by-peer-path-echo) | Stats pertaining to BFD echo mode per peer path |
-| [`jitter`](#show-stats-bfd-by-peer-path-jitter) | Jitter in milliseconds for the 128T peer path. |
-| [`latency`](#show-stats-bfd-by-peer-path-latency) | Latency in milliseconds for the 128T peer path. |
+| [`jitter`](#show-stats-bfd-by-peer-path-jitter) | Jitter in milliseconds for the SSR peer path. |
+| [`latency`](#show-stats-bfd-by-peer-path-latency) | Latency in milliseconds for the SSR peer path. |
 | [`link-down`](#show-stats-bfd-by-peer-path-link-down) | Stats tracking BFD link down event per peer path |
 | [`link-up`](#show-stats-bfd-by-peer-path-link-up) | The number of link-ups on the peer path. |
 | [`local-source-nat-change`](#show-stats-bfd-by-peer-path-local-source-nat-change) | The number of local source nat changes on the peer path. |
 | [`local-source-nat-reset`](#show-stats-bfd-by-peer-path-local-source-nat-reset) | The number of local source nat resets on the peer path. |
-| [`loss`](#show-stats-bfd-by-peer-path-loss) | Packet loss percentange for the 128T peer path. |
-| [`mos`](#show-stats-bfd-by-peer-path-mos) | MOS value calculated for the 128T peer path. (hundreths of a decimal) |
+| [`loss`](#show-stats-bfd-by-peer-path-loss) | Packet loss percentange for the SSR peer path. |
+| [`mos`](#show-stats-bfd-by-peer-path-mos) | MOS value calculated for the SSR peer path. (hundreths of a decimal) |
 | [`neighbor`](#show-stats-bfd-by-peer-path-neighbor) | Stats pertaining to BFD Neighbor |
 
 ##### See Also
@@ -33891,7 +33891,7 @@ show stats bfd by-peer-path async sent success [peer-name <peer-name>] [peer-hos
 
 ## `show stats bfd by-peer-path average-latency`
 
-Rolling average latency in milliseconds for the 128T peer path.
+Rolling average latency in milliseconds for the SSR peer path.
 
 #### Usage
 
@@ -34273,7 +34273,7 @@ show stats bfd by-peer-path echo sent success [peer-name <peer-name>] [peer-host
 
 ## `show stats bfd by-peer-path jitter`
 
-Jitter in milliseconds for the 128T peer path.
+Jitter in milliseconds for the SSR peer path.
 
 #### Usage
 
@@ -34309,7 +34309,7 @@ show stats bfd by-peer-path jitter [peer-name <peer-name>] [peer-host <peer-host
 
 ## `show stats bfd by-peer-path latency`
 
-Latency in milliseconds for the 128T peer path.
+Latency in milliseconds for the SSR peer path.
 
 #### Usage
 
@@ -34642,7 +34642,7 @@ show stats bfd by-peer-path local-source-nat-reset [peer-name <peer-name>] [peer
 
 ## `show stats bfd by-peer-path loss`
 
-Packet loss percentange for the 128T peer path.
+Packet loss percentange for the SSR peer path.
 
 #### Usage
 
@@ -34678,7 +34678,7 @@ show stats bfd by-peer-path loss [peer-name <peer-name>] [peer-host <peer-host>]
 
 ## `show stats bfd by-peer-path mos`
 
-MOS value calculated for the 128T peer path. (hundreths of a decimal)
+MOS value calculated for the SSR peer path. (hundreths of a decimal)
 
 #### Usage
 
@@ -59907,7 +59907,7 @@ show stats path-tree server transactions update processed [process <process>] [s
 
 ## `show stats performance-monitoring`
 
-Stats pertaining to 128T peer path performance monitoring
+Stats pertaining to SSR peer path performance monitoring
 
 #### Usage
 
@@ -59977,17 +59977,17 @@ show stats performance-monitoring peer-path [peer-name <peer-name>] [peer-host <
 
 | command | description |
 | ------- | ----------- |
-| [`jitter`](#show-stats-performance-monitoring-peer-path-jitter) | Jitter in milliseconds for the 128T peer path. |
-| [`latency`](#show-stats-performance-monitoring-peer-path-latency) | Latency in milliseconds for the 128T peer path. |
-| [`loss`](#show-stats-performance-monitoring-peer-path-loss) | Aggregate packet loss percentange for the 128T peer path. |
-| [`mos`](#show-stats-performance-monitoring-peer-path-mos) | MOS value calculated for the 128T peer path. (hundreths of a decimal) |
+| [`jitter`](#show-stats-performance-monitoring-peer-path-jitter) | Jitter in milliseconds for the SSR peer path. |
+| [`latency`](#show-stats-performance-monitoring-peer-path-latency) | Latency in milliseconds for the SSR peer path. |
+| [`loss`](#show-stats-performance-monitoring-peer-path-loss) | Aggregate packet loss percentange for the SSR peer path. |
+| [`mos`](#show-stats-performance-monitoring-peer-path-mos) | MOS value calculated for the SSR peer path. (hundreths of a decimal) |
 | [`received`](#show-stats-performance-monitoring-peer-path-received) | Statistics for &#x27;received&#x27; |
 | [`transmit`](#show-stats-performance-monitoring-peer-path-transmit) | Statistics for &#x27;transmit&#x27; |
 | [`updated`](#show-stats-performance-monitoring-peer-path-updated) | The unix timestamp (seconds) when the peer path&#x27;s values were last updated. |
 
 ## `show stats performance-monitoring peer-path jitter`
 
-Jitter in milliseconds for the 128T peer path.
+Jitter in milliseconds for the SSR peer path.
 
 #### Usage
 
@@ -60018,7 +60018,7 @@ show stats performance-monitoring peer-path jitter [peer-name <peer-name>] [peer
 
 ## `show stats performance-monitoring peer-path latency`
 
-Latency in milliseconds for the 128T peer path.
+Latency in milliseconds for the SSR peer path.
 
 #### Usage
 
@@ -60049,7 +60049,7 @@ show stats performance-monitoring peer-path latency [peer-name <peer-name>] [pee
 
 ## `show stats performance-monitoring peer-path loss`
 
-Aggregate packet loss percentange for the 128T peer path.
+Aggregate packet loss percentange for the SSR peer path.
 
 #### Usage
 
@@ -60080,7 +60080,7 @@ show stats performance-monitoring peer-path loss [peer-name <peer-name>] [peer-h
 
 ## `show stats performance-monitoring peer-path mos`
 
-MOS value calculated for the 128T peer path. (hundreths of a decimal)
+MOS value calculated for the SSR peer path. (hundreths of a decimal)
 
 #### Usage
 
@@ -60144,13 +60144,13 @@ show stats performance-monitoring peer-path received [peer-name <peer-name>] [pe
 
 | command | description |
 | ------- | ----------- |
-| [`loss`](#show-stats-performance-monitoring-peer-path-received-loss) | Packet loss percentange for receiving from the 128T peer path. |
+| [`loss`](#show-stats-performance-monitoring-peer-path-received-loss) | Packet loss percentange for receiving from the SSR peer path. |
 | [`marked-packets`](#show-stats-performance-monitoring-peer-path-received-marked-packets) | The number of packets marked by the peer during a given interval. |
 | [`marked-packets-acknowledged`](#show-stats-performance-monitoring-peer-path-received-marked-packets-acknowledged) | The number of marked packets acknowledged by the node during a given interval. |
 
 ## `show stats performance-monitoring peer-path received loss`
 
-Packet loss percentange for receiving from the 128T peer path.
+Packet loss percentange for receiving from the SSR peer path.
 
 #### Usage
 
@@ -60276,13 +60276,13 @@ show stats performance-monitoring peer-path transmit [peer-name <peer-name>] [pe
 
 | command | description |
 | ------- | ----------- |
-| [`loss`](#show-stats-performance-monitoring-peer-path-transmit-loss) | Packet loss percentange for transmitting to the 128T peer path. |
+| [`loss`](#show-stats-performance-monitoring-peer-path-transmit-loss) | Packet loss percentange for transmitting to the SSR peer path. |
 | [`marked-packets`](#show-stats-performance-monitoring-peer-path-transmit-marked-packets) | The number of packets marked by the node during a given interval. |
 | [`marked-packets-acknowledged`](#show-stats-performance-monitoring-peer-path-transmit-marked-packets-acknowledged) | The number of marked packets acknowledged by the peer during a given interval. |
 
 ## `show stats performance-monitoring peer-path transmit loss`
 
-Packet loss percentange for transmitting to the 128T peer path.
+Packet loss percentange for transmitting to the SSR peer path.
 
 #### Usage
 
@@ -60406,7 +60406,7 @@ show stats performance-monitoring peer-path updated [peer-name <peer-name>] [pee
 
 ## `show stats process`
 
-Metrics about 128T processes
+Metrics about SSR processes
 
 #### Usage
 
@@ -60434,8 +60434,8 @@ show stats process [process-name <process-name>] [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`cpu`](#show-stats-process-cpu) | Metrics about CPU usage of 128T processes |
-| [`memory`](#show-stats-process-memory) | Metrics about memory usage of 128T processes |
+| [`cpu`](#show-stats-process-cpu) | Metrics about CPU usage of SSR processes |
+| [`memory`](#show-stats-process-memory) | Metrics about memory usage of SSR processes |
 | [`queue`](#show-stats-process-queue) | Metrics about queues within a process |
 
 ##### See Also
@@ -60446,7 +60446,7 @@ show stats process [process-name <process-name>] [since <since>] [force] [router
 
 ## `show stats process cpu`
 
-Metrics about CPU usage of 128T processes
+Metrics about CPU usage of SSR processes
 
 #### Usage
 
@@ -60516,7 +60516,7 @@ show stats process cpu usage [process-name <process-name>] [since <since>] [forc
 
 ## `show stats process memory`
 
-Metrics about memory usage of 128T processes
+Metrics about memory usage of SSR processes
 
 #### Usage
 

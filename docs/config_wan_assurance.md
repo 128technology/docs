@@ -179,7 +179,7 @@ Wed 2022-07-20 05:33:05 UTC
 Target: node1.128t-east
 
 ========== ============ ============= ================= ============================= =================== ============
- Agent      Connection   128T          128T-mist-agent   Platform                      Device-ID           Interfaces
+ Agent      Connection   SSR          SSR-mist-agent   Platform                      Device-ID           Interfaces
 ========== ============ ============= ================= ============================= =================== ============
  assigned   up           5.6.1-9.el7   4.0.3330-1.el7    OpenStack Foundation - Nova   02-00-01-c9-90-16            6
 

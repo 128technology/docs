@@ -2,29 +2,29 @@
 title: Glossary
 ---
 # Data Model
-The data model used to describe network, service, and policy behavior consists of a series of interrelated objects, organized into a configuration hierarchy. All of these modeling components are contained within the _authority_, which represents the collection of all 128T networking components.
+The data model used to describe network, service, and policy behavior consists of a series of interrelated objects, organized into a configuration hierarchy. All of these modeling components are contained within the _authority_, which represents the collection of all SSRs networking components.
 
 ## Authority
-The topmost configuration container in the 128T data model is called the authority, which is where system-wide global data is stored. Conceptually, the authority represents the complete set of all 128T routers managed under a single organizational entity. The global data within the authority container includes service-layer and policy-layer configuration that applies to all of the 128T routers within this organizational entity. (In this document, the term “authority” and “organizational entity” are synonymous, unless specifically referring to the 128T router’s configuration object container.)
+The topmost configuration container in the SSR data model is called the authority, which is where system-wide global data is stored. Conceptually, the authority represents the complete set of all SSRs managed under a single organizational entity. The global data within the authority container includes service-layer and policy-layer configuration that applies to all of the SSRs within this organizational entity. (In this document, the term “authority” and “organizational entity” are synonymous, unless specifically referring to the SSR’s configuration object container.)
 
 ## Network Layer
 
 ### Router
-The routers are the 128T software systems responsible for receiving and sending packets to their correct destinations, aka routing. Routers consist of either one node (a standalone router), or two nodes (a high availability router).  You can think of Routers as a logical entity because they consist of one or two Nodes. Routers have `description` and `location-coordinates` fields that should be used to help give you some context as to the function of this router and where it is located. The name given to a Router should be a helpful name that tells the viewer of the configuration as much useful information as possible. 
+The routers are the SSR software systems responsible for receiving and sending packets to their correct destinations, aka routing. Routers consist of either one node (a standalone router), or two nodes (a high availability router).  You can think of Routers as a logical entity because they consist of one or two Nodes. Routers have `description` and `location-coordinates` fields that should be used to help give you some context as to the function of this router and where it is located. The name given to a Router should be a helpful name that tells the viewer of the configuration as much useful information as possible. 
 
 Any elements configured under the Router are considered Local Data. That means that they only exist in that Router and not in the other Routers. Global Data is anything that is configured outside the Router element and applies to your whole Authority, not just one Router. 
 
 ### Node
-Included in the local data of the router hierarchy are the software components that comprise that router referred to as nodes. Each node is a single running instance of 128T software that is either physical or virtual. Within router-specific routing attributes – including both “classic” routing protocols such as BGP and OSPF, as well as 128T-specific “service routes,” defined elsewhere. Localized policies, primarily focused on the traffic distribution and traffic engineering behaviors of an individual router, are also part of the local data within the router hierarchy.
+Included in the local data of the router hierarchy are the software components that comprise that router referred to as nodes. Each node is a single running instance of SSRs software that is either physical or virtual. Within router-specific routing attributes – including both “classic” routing protocols such as BGP and OSPF, as well as SSRs-specific “service routes,” defined elsewhere. Localized policies, primarily focused on the traffic distribution and traffic engineering behaviors of an individual router, are also part of the local data within the router hierarchy.
 
 ### Device Interface
-The Device Interface tells you which port on the physical server that you are using. The Device Interface will consist of a name, the type of interface it is, and an identifier for how to tell the 128T software which port it is taking control of. For example, if the `type` is `ethernet`, then you will need to put in a `pci-address` as your identifier. 
+The Device Interface tells you which port on the physical server that you are using. The Device Interface will consist of a name, the type of interface it is, and an identifier for how to tell the SSR software which port it is taking control of. For example, if the `type` is `ethernet`, then you will need to put in a `pci-address` as your identifier. 
 
 A device interface (represented in the data model as _device-interface_) is the manifestation of the I/O device where packets ingress and egress. A device-interface can be one of several varieties:
 
 - **Ethernet**: the most common type of interface, this is a physical Ethernet port on a hardware-based system, or a virtual Ethernet port on a virtual machine.
-- **Host**: creates a Kernel Network Interface, which carries traffic between the 128T software application and the underlying host operating system.
-- **Bridged**: used to attach the 128T software application to a Linux bridge.
+- **Host**: creates a Kernel Network Interface, which carries traffic between the SSR software application and the underlying host operating system.
+- **Bridged**: used to attach the SSR software application to a Linux bridge.
 - **PPPoE**: support for Point-to-Point Protocol over Ethernet, a popular network delivery mechanism for ISPs when using DSL.
 - **LTE**: support for Long-Term Evolution, a standard wireless communication protocol developed by the 3GPP.
 - **T1**: support for Transmission System 1, a carrier interface with speeds up to 1.544Mbps.
@@ -79,10 +79,10 @@ exit
 If two Device Interfaces have the same `shared-phys-address` that means that they are a redundant pair. You can issue `show device-interface summary` to find out which one is currently active and which is standby. 
 
 ### Network Interface
-Network Interfaces tell your 128T which networks it is participating in. You can have multiple Network Interfaces per Device Interface. Network Interfaces have `global-id` that are used by the 128T software to identify which Network Interface to send traffic out of. If two Network Interfaces have the same `global-id` then they are treated as redundant for one another, or as a _shared interface_.
+Network Interfaces tell your SSRs which networks it is participating in. You can have multiple Network Interfaces per Device Interface. Network Interfaces have `global-id` that are used by the SSR software to identify which Network Interface to send traffic out of. If two Network Interfaces have the same `global-id` then they are treated as redundant for one another, or as a _shared interface_.
 
 :::note
-Do not assign a `global-id` to a network-interface on your own. Your 128T will generate a unique `global-id` for a standalone network-interface, and will automatically assign a common `global-id` for shared interfaces when it detects that they each reference a common `shared-phys-address`. For more information on shared interfaces, refer to the [High Availability Best Practices](concepts_ha_theoryofoperation.md) documentation.
+Do not assign a `global-id` to a network-interface on your own. Your SSRs will generate a unique `global-id` for a standalone network-interface, and will automatically assign a common `global-id` for shared interfaces when it detects that they each reference a common `shared-phys-address`. For more information on shared interfaces, refer to the [High Availability Best Practices](concepts_ha_theoryofoperation.md) documentation.
 :::
 
 ```
@@ -162,7 +162,7 @@ exit
 ```
 
 ## Neighborhoods
-Neighborhoods are a means of specifying which Network Interfaces in your 128T Authority are connected to each other, helping your 128T conductor understand your network topology. By using Neighborhoods, your 128T will auto-configure certain elements, such as Peers, Adjacencies, and Service Routes, to ensure that the Network Interfaces in the same Neighborhood connect to each other automatically. By viewing the Network Interfaces and seeing which ones share the same Neighborhood labels, you can get a picture for which Network Interfaces are connected to each other. In the Neighborhood configuration, you can also see a field called `topology`. The values for Topology are:
+Neighborhoods are a means of specifying which Network Interfaces in your SSRs Authority are connected to each other, helping your SSRs conductor understand your network topology. By using Neighborhoods, your SSRs will auto-configure certain elements, such as Peers, Adjacencies, and Service Routes, to ensure that the Network Interfaces in the same Neighborhood connect to each other automatically. By viewing the Network Interfaces and seeing which ones share the same Neighborhood labels, you can get a picture for which Network Interfaces are connected to each other. In the Neighborhood configuration, you can also see a field called `topology`. The values for Topology are:
 
 - mesh
 - hub
@@ -171,10 +171,10 @@ Neighborhoods are a means of specifying which Network Interfaces in your 128T Au
 Meshes will connect to everything, hubs connect to spokes and meshes, and spokes connect to hubs and meshes. Knowing this information can help you visualize which Network Interfaces are connected to each other.
 
 ## Adjacency
-Another sub-element of the Network Interface is the Adjacency. The Adjacency tells your 128T how it can reach its Peer. Peers can be reachable from multiple Network Interfaces, so this is just one of the ways that a particular Peer is reachable. 
+Another sub-element of the Network Interface is the Adjacency. The Adjacency tells your SSRs how it can reach its Peer. Peers can be reachable from multiple Network Interfaces, so this is just one of the ways that a particular Peer is reachable. 
 
 ## Peer
-A Peer is another 128T router that your current 128T router is connected to. By understanding which routers are Peers, you can start to draw out a network diagram with your 128T nodes. 
+A Peer is another SSRs router that your current SSRs router is connected to. By understanding which routers are Peers, you can start to draw out a network diagram with your SSRs nodes. 
 ```
 router          seattlesite1
     name                  seattlesite1
@@ -319,7 +319,7 @@ exit
 ```
 
 ## Tenants
-Tenant is the term within the 128T data model used to represent a segmented partition within a L2/L3 network. Unlike other networking paradigms, where segmentation is done using overlay networking techniques (such as VLANs, VxLANs, etc.), the 128T router uses a novel tenancy model to place traffic sources and routes to their services (also referred to as service routes) into logical partitions within the underlay network itself. A rich set of hierarchical access control policies built into the tenancy model ensures that network traffic flows along prescribed paths, and only from eligible sources. Tenants, like the services that they access, reside within the global data in an authority's configuration. A tenant defined within a 128T authority is said to “stretch” across all 128T routers that are members of that authority, and tenant information is shared between 128T router instances.
+Tenant is the term within the SSR data model used to represent a segmented partition within a L2/L3 network. Unlike other networking paradigms, where segmentation is done using overlay networking techniques (such as VLANs, VxLANs, etc.), the SSR uses a novel tenancy model to place traffic sources and routes to their services (also referred to as service routes) into logical partitions within the underlay network itself. A rich set of hierarchical access control policies built into the tenancy model ensures that network traffic flows along prescribed paths, and only from eligible sources. Tenants, like the services that they access, reside within the global data in an authority's configuration. A tenant defined within the SSR authority is said to “stretch” across all SSRs that are members of that authority, and tenant information is shared between SSRs router instances.
 
 For information on how to define tenants, read the section in our documentation [Configuring Tenants](config_tenants.md)
 
@@ -349,11 +349,11 @@ Tenants can be children of other Tenants. This means that if you apply an access
 
 Traffic gets associated with a Tenant in one of three ways:
 
-1. Tenancy was assigned by an upstream 128T and communicated in metadata.
+1. Tenancy was assigned by an upstream SSRs and communicated in metadata.
 2. By arriving on a Network Interface that has a tenant configured.
 3. By arriving on a network-interface that has a neighborhood configured, and the source IP address of the IP packet is defined within a tenant's `member > address` definition.
 
-In the metadata that 128T routers send to each other when using SVR, they include the Tenant traffic has already been assigned. So, if my Seattle Router assigns the `seattle.corp` Tenant to a session and then sends that session to my Boston Router, my Boston Router will already know that this session belongs to the `seattle.corp` Tenant and use that information in determining if this session has access to the Service it is trying to access.
+In the metadata that SSRs send to each other when using SVR, they include the Tenant traffic has already been assigned. So, if my Seattle Router assigns the `seattle.corp` Tenant to a session and then sends that session to my Boston Router, my Boston Router will already know that this session belongs to the `seattle.corp` Tenant and use that information in determining if this session has access to the Service it is trying to access.
 
 At the Network Interface, you can also assign a Tenant and if any traffic that doesn't already have a Tenant assigned ingresses this Network Interface, it will belong to that Tenant. 
 
@@ -395,9 +395,9 @@ Some configurations elect to use this technique for tenant association in lieu o
 ## Service Layer
 
 ### Services
-Services make up the heart of the 128T data model. The 128T data model is built upon the idea that one should build their network around the applications that they will be accessing and not determine which applications their network can access based off of the way their network is set up. In the 128T data model, a `service` is a traffic destination being accessed by constituents in your network. 
+Services make up the heart of the SSR data model. The SSR data model is built upon the idea that one should build their network around the applications that they will be accessing and not determine which applications their network can access based off of the way their network is set up. In the SSR data model, a `service` is a traffic destination being accessed by constituents in your network. 
 
-Service configuration, which represents the cornerstone of the 128T router’s worldview, is part of the set of global data within an authority. Services represent specific applications that a network delivers; e.g., web services, database services, or voice/video services. Using a top-down approach, the 128T data model asks that administrators define the services that their network will deliver, the requirements that the service demands (in terms of latency, packet loss, jitter, etc.), and the network topology – and the 128T router will deliver traffic to the service using the optimal paths through the network. Because they are global data within an authority, all services defined within an authority are part of the dataset for each 128T router that is also a member of that authority.
+Service configuration, which represents the cornerstone of the SSR’s worldview, is part of the set of global data within an authority. Services represent specific applications that a network delivers; e.g., web services, database services, or voice/video services. Using a top-down approach, the SSR data model asks that administrators define the services that their network will deliver, the requirements that the service demands (in terms of latency, packet loss, jitter, etc.), and the network topology – and the SSR will deliver traffic to the service using the optimal paths through the network. Because they are global data within an authority, all services defined within an authority are part of the dataset for each SSRs router that is also a member of that authority.
 
 ```
 service  video
@@ -432,10 +432,10 @@ The naming convention you choose when modeling your network is very important wh
 :::
 
 ## Policy Layer
-A set of global policies rounds out the data model; complementing the router-specific policies, the global policies describe the treatment of traffic that flows between 128T routers. This includes information on how packets are classified into their various types (e.g., how to differentiate between web traffic, voice traffic, proprietary application traffic, etc.) and the requirements that those traffic varieties have from a networking perspective.
+A set of global policies rounds out the data model; complementing the router-specific policies, the global policies describe the treatment of traffic that flows between SSRs. This includes information on how packets are classified into their various types (e.g., how to differentiate between web traffic, voice traffic, proprietary application traffic, etc.) and the requirements that those traffic varieties have from a networking perspective.
 
 ## Service Policies
-Your Service may be configured with a _Service Policy_. A Service Policy tells each 128T how to handle traffic destined for that Service. It will define things such as whether the Service will be load balanced and with what strategy, whether session resiliency is set up, and selecting path preference with Vectors. The Service Policy will give you a better understanding of how important a Service is to a deployment and what paths that traffic will take to get to that Service.
+Your Service may be configured with a _Service Policy_. A Service Policy tells each SSRs how to handle traffic destined for that Service. It will define things such as whether the Service will be load balanced and with what strategy, whether session resiliency is set up, and selecting path preference with Vectors. The Service Policy will give you a better understanding of how important a Service is to a deployment and what paths that traffic will take to get to that Service.
 
 ```
 service-policy  prefer_broadband
@@ -459,7 +459,7 @@ exit
 ```
 
 ## Vectors
-Defined in the Service Policy, vectors let you set path priority with your 128T. You will see the Vectors configured at the Neighborhoods which are sub-elements of the Network Interface. The Service Policy is where you can determine the priority of each Vector when the 128T is deciding which path to send traffic down and thus which Network Interfaces to use. 
+Defined in the Service Policy, vectors let you set path priority with your SSRs. You will see the Vectors configured at the Neighborhoods which are sub-elements of the Network Interface. The Service Policy is where you can determine the priority of each Vector when the SSR is deciding which path to send traffic down and thus which Network Interfaces to use. 
 ```
 network-interface  mpls1
     name                    mpls1
@@ -490,7 +490,7 @@ exit
 ```
 
 ## Service Routes
-Service Routes are used to tell your 128T how to reach a particular Service. This is Local Data, so it is only specific to a particular Router. It tells that Router that if you see traffic that matches one of your configured Services, then send it to the following destination. The destination can be one or more 128T Peers, a gateway, an IP address, a subnet, a blackhole, etc. If the destination is another 128T, then the 128Ts will use Secure Vector Routing to send the traffic. 
+Service Routes are used to tell your SSRs how to reach a particular Service. This is Local Data, so it is only specific to a particular Router. It tells that Router that if you see traffic that matches one of your configured Services, then send it to the following destination. The destination can be one or more SSRs Peers, a gateway, an IP address, a subnet, a blackhole, etc. If the destination is another SSRs, then the SSRs will use Secure Vector Routing to send the traffic. 
 
 ```
 service-route         webserver-route
@@ -508,7 +508,7 @@ exit
 ```
 
 ## Service Route Policies
-A Service Route Policy is way to set limits on the Service Routes to use when the 128T is determining which path to take. This is necessary for load balancing. You can set limits based on the max number of concurrent sessions to send down one path or the session rate/second for that path. Service Route Policies get applied to the Service Routes. 
+A Service Route Policy is way to set limits on the Service Routes to use when the SSR is determining which path to take. This is necessary for load balancing. You can set limits based on the max number of concurrent sessions to send down one path or the session rate/second for that path. Service Route Policies get applied to the Service Routes. 
 
 ```
 service-route-policy  lb-policy
@@ -518,9 +518,9 @@ exit
 ```
 
 ## Routing Default-Instance
-While using Service Routes with the 128T is the preferred method of routing, you may also encounter deployments that use traditional routing methods such as BGP, OSPF, or Static Routes. You will find the settings for these under `routing` under the Router. The Routing element must have a `type` of `default-instance` but the sub-elements under that will have all the settings you need to set for creating Static Routes, BGP peering, and OSPF peering. 
+While using Service Routes with the SSR is the preferred method of routing, you may also encounter deployments that use traditional routing methods such as BGP, OSPF, or Static Routes. You will find the settings for these under `routing` under the Router. The Routing element must have a `type` of `default-instance` but the sub-elements under that will have all the settings you need to set for creating Static Routes, BGP peering, and OSPF peering. 
 
-When the 128T is making routing decisions, it will use traditional administrative distances to figure out which route to use with one exception: Service Routes get priority over every other route. You can see what route will get chosen with `show fib`. You can see the traditional routing decisions with `show rib`. 
+When the SSR is making routing decisions, it will use traditional administrative distances to figure out which route to use with one exception: Service Routes get priority over every other route. You can see what route will get chosen with `show fib`. You can see the traditional routing decisions with `show rib`. 
 
 ```
 routing               default-instance
