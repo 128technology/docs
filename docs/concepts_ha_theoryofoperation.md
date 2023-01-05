@@ -47,7 +47,7 @@ This state sharing occurs via a high-performance database that is available to b
 
 For SSR routers, session state synchronization for a session will occur only after a number of packets have been exchanged bi-directionally. This is to avoid the overhead of state synchronization for short-lived sessions (fewer than twelve packets), where a client reinitiating the session anew is as efficient as recovery.
 
-128T conductors also leverage the redundancy link for state synchronization, to checkpoint the status of connected systems, configuration updates, and alarms.
+Conductors also leverage the redundancy link for state synchronization, to checkpoint the status of connected systems, configuration updates, and alarms.
 
 #### Leader Election
 In addition to state synchronization, the SSR software also uses the redundancy link for _leader election_ – the term used to describe the negotiation between the two systems for determining which is more fit for active duty. Because the SSR software is comprised of a number of discrete software processes (daemons), there are actually multiple "leaders" for each dual node HA system simultaneously. Below is the sample output of the command `show system processes node all` from a highly available system:

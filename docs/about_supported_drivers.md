@@ -12,7 +12,7 @@ The following NICs and drivers have been tested and are certified by Juniper for
 
 ### Intel
 
-| Device ID | Driver | SSR/128T Version Introduced |
+| Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- |
 | Ethernet 10G 2P X520 Adapter (154d) | net_ixgbe | 4.5.0 |
 | Ethernet Converged Network Adapter X520-Q1 (1558) | net_ixgbe | 4.5.0 |
@@ -108,7 +108,7 @@ Use the links below to browse the list of a specific vendor.
 
 ### Aquantia Corp
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Aquantia Corp. (1d6a) | AQC107 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d107) | net_atlantic | 4.5.0 |
 | | AQC108 NBase-T/IEEE 802.3bz Ethernet Controller [AQtion] (d108) | net_atlantic | 4.5.0 |
@@ -118,14 +118,14 @@ Use the links below to browse the list of a specific vendor.
 
 ### Atomic Rules
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 |Atomic Rules LLC (1d6c) | AR-ARKA-FX0 Arkville 32B DPDK Data Mover (100d) | net_ark | 4.5.0 |
 | | AR-ARKA-FX1 Arkville 64B DPDK Data Mover (100e) | net_ark | 4.5.0 |
 
 ### Broadcom	
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Broadcom Limited (14e4) | BCM57301 NetXtreme-C 10Gb Ethernet Controller (16c8) | net_bnxt	| 4.5.0 |
 | | BCM57302 NetXtreme-C 10Gb/25Gb Ethernet Controller (16c9) | net_bnxt | 4.5.0 |
@@ -173,7 +173,7 @@ Use the links below to browse the list of a specific vendor.
 
 ### Cavium
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Cavium, Inc. (177d) |	CN23XX [LiquidIO II] SRIOV Virtual Function (9712) | net_liovf | 4.5.0 |
 | | THUNDERX Network Interface Controller virtual function (a034) |	net_thunderx | 4.5.0
@@ -183,7 +183,7 @@ Use the links below to browse the list of a specific vendor.
 
 ### Chelsio Communications
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Chelsio Communications Inc (1425) | T502-BT Unified Wire Ethernet Controller (5415) | net_cxgbe | 4.5.0 |
 | | T502-BT Unified Wire Ethernet Controller [VF] (5815) | net_cxgbevf | 4.5.0 |
@@ -350,7 +350,7 @@ Use the links below to browse the list of a specific vendor.
 
 ### Intel Corporation
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Intel Corporation (8086) | 10 Gigabit BR KX4 Dual Port Network Connection (10f7) | net_ixgbe | 4.5.0 |
 | | 82540EM Gigabit Ethernet Controller (100e) | net_e1000_em | 4.5.0 |
@@ -514,7 +514,7 @@ Use the links below to browse the list of a specific vendor.
 
 ### Mellanox
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Mellanox Technologies (15b3) | MT27500 Family [ConnectX-3] (1003) | net_mlx4 | 4.5.0 |
 | | MT27500/MT27520 Family [ConnectX-3/ConnectX-3 Pro Virtual Function] (1004) | net_mlx4 | 4.5.0 |
@@ -534,7 +534,7 @@ Use the links below to browse the list of a specific vendor.
 
 ### QLogic
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | QLogic Corp. (1077) | FastLinQ QL41000 Series 10/25/40/50GbE Controller (8070) | net_qede	| 4.5.0 |
 | | FastLinQ QL41000 Series Gigabit Ethernet Controller (SR-IOV VF) (8090) | net_qede_vf	| 4.5.0 |
@@ -547,7 +547,7 @@ Use the links below to browse the list of a specific vendor.
 
 ### Red Hat
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Red Hat, Inc. (1af4) |Inter-VM shared memory (1110) | net_avp	| 4.5.0 |
 | | Virtio network device (1000) | net_virtio | 4.5.0 |
@@ -556,7 +556,7 @@ Use the links below to browse the list of a specific vendor.
 
 ### Solarflare
 
-| Vendor ID | Device ID | Driver | SSR/128T Version Introduced |
+| Vendor ID | Device ID | Driver | SSR Version Introduced |
 | --- | --- | --- | --- |
 | Solarflare CommuVendor IDations (1924) | SFC9120 10G Ethernet Controller (Virtual Function) (1903) | net_sfc_efx | 4.5.0 |
 | | SFC9140 10/40G Ethernet Controller (Virtual Function) (1923) | net_sfc_efx | 4.5.0 |

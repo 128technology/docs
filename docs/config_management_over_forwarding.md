@@ -43,7 +43,7 @@ Because a default route is added in Linux, all traffic not captured by a static 
 
 For each of the [management services](#management-services) configured, the SSR will automatically generate corresponding `service` and `service-route` configurations for forwarding the respective traffic. The generated configuration objects will all start with the prefix `_management_`.
 
-Each of the service and service-routes share one important attribute: they are created with the `generated` flag set to `true`. If you want to make any modifications to the generated services, you must first set `generated` to `false`, or else your configuration changes will be stripped upon the next time the configuration is committed. For more information on configuration work-flows involving the `generated` flag, refer to the [128T software documentation](config_basics.md#generated-configuration).
+Each of the service and service-routes share one important attribute: they are created with the `generated` flag set to `true`. If you want to make any modifications to the generated services, you must first set `generated` to `false`, or else your configuration changes will be stripped upon the next time the configuration is committed. For more information on configuration work-flows involving the `generated` flag, refer to the [SSR software documentation](config_basics.md#generated-configuration).
 
 :::note
 `management` interfaces cannot be used on device-interface types of `host` or `bridge`.
