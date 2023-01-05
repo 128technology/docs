@@ -2,7 +2,7 @@
 title: LTE Peering
 sidebar_label: LTE Peering
 ---
-It is quite common for 128T routers to use LTE interfaces as a "last resort" transport when primary circuits are down, congested, or experiencing issues. This document recommends various configuration settings to strike a balance between performance and bandwidth usage for LTE interfaces, to get the most benefit from them when peering over LTE.
+It is quite common for SSRs to use LTE interfaces as a "last resort" transport when primary circuits are down, congested, or experiencing issues. This document recommends various configuration settings to strike a balance between performance and bandwidth usage for LTE interfaces, to get the most benefit from them when peering over LTE.
 
 :::note
 This document is intended for customers that use LTE interfaces as a last resort transport, not for those using it as a primary transport.
@@ -49,11 +49,11 @@ In this document, we provide a configuration fragment that illustrates how to tu
     exit
 ```
 
-## Notes about the configuration
+## Notes about the Configuration
 
-A [Carrier-grade NAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT), which is indistinguishable from an enterprise-grade (or consumer) NAT from a 128T configuration perspective, requires certain configuration considerations. First, as seen in the configuration fragment above, it is important to set the `peer-connectivity` to `outbound-only`. This will guarantee that any traffic originating at a peer and destined for the LTE device will be created "inside out" from the NAT's perspective. (For more information on the outbound-only feature of the 128T product, read the reference manual.)
+A [Carrier-grade NAT](https://en.wikipedia.org/wiki/Carrier-grade_NAT), which is indistinguishable from an enterprise-grade (or consumer) NAT from an SSR configuration perspective, requires certain configuration considerations. First, as seen in the configuration fragment above, it is important to set the `peer-connectivity` to `outbound-only`. This will guarantee that any traffic originating at a peer and destined for the LTE device will be created "inside out" from the NAT's perspective. 
 
-The `bfd` configuration is dilated to use `60000` milliseconds as its interval. This configuration is empirically observed to work on most U.S. LTE provider networks – the Carrier-grade NAT devices present in the United States typically use NAT bindings longer than one minute. This value may need adjustment in your local region, if you experience difficulties in establishing sessions toward 128T routers over LTE networks.
+The `bfd` configuration is dilated to use `60000` milliseconds as its interval. This configuration is empirically observed to work on most U.S. LTE provider networks – the Carrier-grade NAT devices present in the United States typically use NAT bindings longer than one minute. This value may need adjustment in your local region, if you experience difficulties in establishing sessions toward SSRs over LTE networks.
 
 :::important
 These BFD keepalive messages are small and therefore do not consume much bandwidth. However, on interfaces where every byte counts against your monthly bandwidth allocation, it is important to keep these settings as conservative as you can to maintain a stable connection.

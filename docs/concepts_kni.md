@@ -3,11 +3,11 @@ title: Kernel Network Interfaces
 sidebar_label: Kernel Network Interfaces
 ---
 
-The DPDK kernel network interface (KNI) provides a way for the 128T Session Smart router to route traffic to the Linux OS for access to various USER space applications. KNIs also provide a way for traffic originating in the Linux OS to be routed via the 128T Session Smart router. Every 128T router creates a KNI called `kni254` by default which is used to implement [in-band management access](concepts_linux_host_networking.md) to the router.
+The DPDK kernel network interface (KNI) provides a way for the SSR to route traffic to the Linux OS for access to various USER space applications. KNIs also provide a way for traffic originating in the Linux OS to be routed via the SSR. Every SSR creates a KNI called `kni254` by default which is used to implement [in-band management access](concepts_linux_host_networking.md) to the router.
 
 
 ## Configuration
-There are several types of interfaces in the product that leverage KNIs such as [LTE](howto_lte.md), PPPoE and T1 are all implemented using KNIs under the covers. The 128T router also provides the ability to provision KNIs in various modes and provides an extensible scripting framework around them.
+There are several types of interfaces in the product that leverage KNIs such as [LTE](howto_lte.md), PPPoE and T1 are all implemented using KNIs under the covers. The SSR router also provides the ability to provision KNIs in various modes and provides an extensible scripting framework around them.
 
 ### Host KNI
 The `host` mode KNI creates a KNI in Linux with the name specified. The following configuration shows the example of such KNI
@@ -46,7 +46,7 @@ exit
 
 ```
 
-The above configuration, creates a KNI called `host-kni` in Linux which can be utilized for sending and/or receiving traffic from 128T router. The configured `gateway` will be added as the IP address of the interface in Linux and the `ip-address` will be added as the gateway for the KNI from Linux's perspective.
+The above configuration, creates a KNI called `host-kni` in Linux which can be utilized for sending and/or receiving traffic from the SSR. The configured `gateway` will be added as the IP address of the interface in Linux and the `ip-address` will be added as the gateway for the KNI from Linux's perspective.
 
 ```
 # ip addr
@@ -99,7 +99,7 @@ config
 exit
 ```
 
-In this mode, the 128T router will create a Linux bridge (of the form `kni<global-id>_bridge`). To make the bridge name more predictable or to use an existing bridge network user can also configure the `bridge-name` field for the KNI. Once applied, the system will put both the KNI called `test-bridge` and `dpdk3` interface on the same bridge interface. In addition, the router will perform a mac swap by first learning the `mac-address` of the target-interface `dpdk3` and installing it on the KNI and installing the randomly generated KNI MAC address on the bridge and target interfaces.
+In this mode, the SSR router will create a Linux bridge (of the form `kni<global-id>_bridge`). To make the bridge name more predictable or to use an existing bridge network user can also configure the `bridge-name` field for the KNI. Once applied, the system will put both the KNI called `test-bridge` and `dpdk3` interface on the same bridge interface. In addition, the router will perform a mac swap by first learning the `mac-address` of the target-interface `dpdk3` and installing it on the KNI and installing the randomly generated KNI MAC address on the bridge and target interfaces.
 
 ```console
 # ip addr
@@ -144,7 +144,7 @@ The framework supports a set of scripts to assist in the initialization, mainten
 
 #### startup
 
-The `startup` script is executed when the KNI is created for the first time. This typically happens when either a new KNI config is added or the 128T service (re)starts. This is typically the place where the application should perform any cleanup of previous context, perform one time operations such as loading necessary drivers etc.
+The `startup` script is executed when the KNI is created for the first time. This typically happens when either a new KNI config is added or the SSR service (re)starts. This is typically the place where the application should perform any cleanup of previous context, perform one time operations such as loading necessary drivers etc.
 
 #### init
 
@@ -152,14 +152,14 @@ Once the interface is created and started, the `init` script will be invoked to 
 
 #### monitoring
 
-While the interface is up, the `monitoring` script is invoked every `1 second` and is meant to inspect the health of the KNI and its application. This is typically where the user could check for the status of the systemd service, some upstream connectivity etc. The script can report the word `down` over standard out to the 128T software to bring the interface operationally down. Once in this state, the system will continue to run the `monitoring` script to detect any other change in status if necessary.
+While the interface is up, the `monitoring` script is invoked every `1 second` and is meant to inspect the health of the KNI and its application. This is typically where the user could check for the status of the systemd service, some upstream connectivity etc. The script can report the word `down` over standard out to the SSR software to bring the interface operationally down. Once in this state, the system will continue to run the `monitoring` script to detect any other change in status if necessary.
 
 #### reinit
 
 In a normal scenario, the system is monitoring the operational status of the KNI as well as the bridge and target interface for the bridge type. At any point if the operational status goes down or the `monitoring` script reports down, the system has a `10 second` hold down time to let the system normalize on its own and then calls the `reinit` script to try and reinitialize the device. This provides an opportunity for the application to perform any cleanup before re-initializing the connection. In most cases, this will perform the same tasks as the `init` script.
 
 #### shutdown
-The `shutdown` script is called when the 128T router is stopped or if the KNI interface is deleted from the configuration. The script is intended to do final cleanup such as deleting namespaces, restoring routes in global namespace, etc.
+The `shutdown` script is called when the SSR router is stopped or if the KNI interface is deleted from the configuration. The script is intended to do final cleanup such as deleting namespaces, restoring routes in global namespace, etc.
 
 #### info
 
@@ -244,7 +244,7 @@ The script will be terminated if it takes longer than 30 seconds to finish.
 :::
 
 ### Script command line arguments
-In order to provide actionable information for script to perform their automation, each of the scripts are provided with a set of command line arguments that reflects the 128T configuration, specifically for the `host` and `bridged` types the following information is provided
+In order to provide actionable information for script to perform their automation, each of the scripts are provided with a set of command line arguments that reflects the SSR configuration, specifically for the `host` and `bridged` types the following information is provided
 
 Each script for the `host` type is passed each of the following arguments
 

@@ -3,14 +3,14 @@ title: Tenants
 sidebar_label: Tenants
 ---
 
-Tenancy is a powerful concept unique to the 128T router that allows administrators to create partitions within their network in order to segment access to network services. A tenant is effectively a network “perimeter” that defines a grouping of devices, and creates a _de facto_ trust zone. All users within a tenant, by default, are given access to the same set of services; or, said another way, members of a tenant share common _network policy_.
+Tenancy is a powerful concept unique to the SSR that allows administrators to create partitions within their network in order to segment access to network services. A tenant is effectively a network “perimeter” that defines a grouping of devices, and creates a _de facto_ trust zone. All users within a tenant, by default, are given access to the same set of services; or, said another way, members of a tenant share common _network policy_.
 
 ## Modeling Your Network Tenancy
 A tenant represents the basic means for grouping collections of devices together into a network segment. All devices within a tenant are treated with a common policy, and thereby will have consistent access to the services that have been "published" to the tenant.
 
-Each tenant, as modeled on your 128T router, has its own segment of the router's Forwarding Information Base (FIB) for making forwarding decisions for packets it receives. As services are made available to a tenant, entries are populated into the router's FIB, keyed by that tenant's name; members of that tenant will have routes to respective service, and non-members will not – all without the use of complex access controls or external firewalling.
+Each tenant, as modeled on your SSR, has its own segment of the router's Forwarding Information Base (FIB) for making forwarding decisions for packets it receives. As services are made available to a tenant, entries are populated into the router's FIB, keyed by that tenant's name; members of that tenant will have routes to respective service, and non-members will not – all without the use of complex access controls or external firewalling.
 
-The 128T router gives administrators several ways to define/describe how inbound packets are mapped to tenants: by matching the source IP address of inbound packets to configured IP prefixes within a network neighborhood, or based upon their ingress network-interface. (When both are in use on the same system, _the network-interface’s tenant will take precedence if both apply_.)
+The SSR gives administrators several ways to define/describe how inbound packets are mapped to tenants: by matching the source IP address of inbound packets to configured IP prefixes within a network neighborhood, or based upon their ingress network-interface. (When both are in use on the same system, _the network-interface’s tenant will take precedence if both apply_.)
 
 Each method for identifying inbound tenancy will be discussed in the sections that follow.
 
@@ -30,7 +30,7 @@ security     internal
 
 It may not look like much, but you’ve created a tenant!
 
-The field `security` refers to another configuration element on the system (a security policy), which governs how the 128T router encrypts and authenticates packets it receives and forwards. In this example we refer to a security element that comes installed on all 128T routers by default, the one called `internal`. If you typed `security internal` and the 128T router reported an error saying that it could not resolve the reference, then this part of your default configuration was missing. Don’t worry, creating a new security policy is just as simple as creating a tenant, a few short configuration steps.
+The field `security` refers to another configuration element on the system (a security policy), which governs how the SSR encrypts and authenticates packets it receives and forwards. In this example we refer to a security element that comes installed on all SSRs by default, the one called `internal`. If you typed `security internal` and the SSR reported an error saying that it could not resolve the reference, then this part of your default configuration was missing. Don’t worry, creating a new security policy is just as simple as creating a tenant, a few short configuration steps.
 
 This represents the minimum amount of configuration required to create a simple tenant partition. Later, as we configure services to make available to this tenant, you will see how this partition serves to segment these services from all other tenants, and from all other services.
 
@@ -121,9 +121,9 @@ exit
 ```
 
 ## Tenancy by Interface
-Each 128T router is a collection of one or more nodes, which represent the top of the hierarchy of a single deployment of 128T software. In turn, each node communicates with the IP network via device interfaces (physical interfaces) – physical connections to the network on bare metal systems, or bridged interfaces when the 128T software is deployed in virtual environments. On top of the device interfaces we build network interfaces (logical interfaces), or VLANs. The relationship in each of these levels of the hierarchy is many to one; i.e., there can be many device-interface elements per node, and many network-interface elements per device-interface.
+Each SSR is a collection of one or more nodes, which represent the top of the hierarchy of a single deployment of SSR software. In turn, each node communicates with the IP network via device interfaces (physical interfaces) – physical connections to the network on bare metal systems, or bridged interfaces when the SSR software is deployed in virtual environments. On top of the device interfaces we build network interfaces (logical interfaces), or VLANs. The relationship in each of these levels of the hierarchy is many to one; i.e., there can be many device-interface elements per node, and many network-interface elements per device-interface.
 
-Each of these network-interfaces has an optional configuration field, tenant. By applying a tenant name to this interface, all packets received on this interface are presumed to belong to that tenant, _even if the source IP address of that packet would indicate it is a member of a neighborhood-defined tenant_. This restricts the set of routes available to sources that reach the 128T router via this interface to only those available to that tenant.
+Each of these network-interfaces has an optional configuration field, tenant. By applying a tenant name to this interface, all packets received on this interface are presumed to belong to that tenant, _even if the source IP address of that packet would indicate it is a member of a neighborhood-defined tenant_. This restricts the set of routes available to sources that reach the SSR via this interface to only those available to that tenant.
 
 This is accomplished by way of each router filtering the routes in its FIB to only those pertinent to the specific tenant. (I.e., the tenant becomes part of the lookup key into the FIB, so only routes matching the tenant will match.)
 
@@ -151,7 +151,7 @@ exit
 All inbound requests on this specific network-interface, considered part of the “engineering” tenant, will only be able to access services that are part of the engineering tenant, or those services in other tenants that have explicitly allowed (via access-policy) members of the engineering tenant. Using access-policy statements to control access – allowing or denying various user populations – is described in the section on Service configuration.
 
 ## Subtenant Hierarchies
-The 128T router not only allows you to partition your user population into various tenants, it allows for further segmentation of those tenants into “families” of tenants – a hierarchical (family) tree, where subtenants (children) inherit properties from their parentage. When granting access to a service to a tenant, all children of that tenant are also granted access by default; however, the converse is not true. When a child tenant is granted access to a service, the parent tenant will not have routes to it.
+The SSR not only allows you to partition your user population into various tenants, it allows for further segmentation of those tenants into “families” of tenants – a hierarchical (family) tree, where subtenants (children) inherit properties from their parentage. When granting access to a service to a tenant, all children of that tenant are also granted access by default; however, the converse is not true. When a child tenant is granted access to a service, the parent tenant will not have routes to it.
 
 This allows for very fine-grained access control, where services and tenant families can be combined to give access to network services to very specific user populations.
 
@@ -176,7 +176,7 @@ member       HQnetwork
 exit
 ```
 
-This configuration fragment establishes the user population within the subnet 172.17.2.0/25 as members of the dev.engineering team. The 128T router uses dotted notation to indicate tenant parentage: dev.engineering is a child of engineering. The dotted notation is not limited to one level of depth, a tenant family can have an arbitrarily large number of descendants (e.g., eastcoast.dev.engineering, or bldg12.eastcoast.dev.engineering).
+This configuration fragment establishes the user population within the subnet 172.17.2.0/25 as members of the dev.engineering team. The SSR uses dotted notation to indicate tenant parentage: dev.engineering is a child of engineering. The dotted notation is not limited to one level of depth, a tenant family can have an arbitrarily large number of descendants (e.g., eastcoast.dev.engineering, or bldg12.eastcoast.dev.engineering).
 
 Irrespective of the number of levels of the tenant hierarchy, the same rule applies: children have access to services offered by their parents, but parents do not have access to services offered by their children.
 
@@ -185,7 +185,7 @@ Assigning a tenant to a network-interface will also let you use membership to id
 Referencing the example above, adding a member for `HQnetwork` in a different tenant "family" (such as `developer.acme`) will have no effect. The assignment of `engineering` to the network-interface strictly limits tenant affiliation to `engineering` and/or its children.
 
 ## The Global Tenant
-We've discussed two ways that tenancy can be determined on a 128T router: by assigning a tenant to an interface, or by creating neighborhood-based _tenant members_, that can use the source IP address within a neighborhood to glean tenancy. If neither of these rulesets apply – a packet arrives on an interface without a `tenant` assigned, and neither does it match a tenant's `member` definition for the neighborhood(s) on that interface – then the tenancy of that session is said to be assigned to the _global tenant_, which is also sometimes referred to as "tenantless."
+We've discussed two ways that tenancy can be determined on an SSR: by assigning a tenant to an interface, or by creating neighborhood-based _tenant members_, that can use the source IP address within a neighborhood to glean tenancy. If neither of these rulesets apply – a packet arrives on an interface without a `tenant` assigned, and neither does it match a tenant's `member` definition for the neighborhood(s) on that interface – then the tenancy of that session is said to be assigned to the _global tenant_, which is also sometimes referred to as "tenantless."
 
 ```
 admin@labsystem1.fiedler# show fib router newton
@@ -206,4 +206,4 @@ Capacity:    17402
 
 The services that are available to this tenant are limited to only those whose `scope` is set to `public` – there is no means for otherwise creating an `access-policy` that specifies whether the global tenant has access to a service.
 
-The net result of this "global" tenant is that a 128T router can operate without any tenant definitions whatsoever: assuming all service configurations have their `scope` set to `public`, then the router's FIB is unilaterally applied to all inbound packets, making the 128T behave akin to a traditional router. But what's the fun in that?
+The net result of this "global" tenant is that an SSR can operate without any tenant definitions whatsoever: assuming all service configurations have their `scope` set to `public`, then the router's FIB is unilaterally applied to all inbound packets, making the SSR behave akin to a traditional router. But what's the fun in that?

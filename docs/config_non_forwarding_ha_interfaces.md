@@ -3,12 +3,12 @@ title: Non-forwarding HA Interfaces
 sidebar_label: Non-forwarding HA Interfaces
 ---
 
-Non forwarding interfaces are used for several purposes, including HA peer node control traffic, reaching a 128T Conductor from a 128T Router, reaching managed 128T Routers from a 128T Conductor, management traffic and reaching the public internet.
+Non forwarding interfaces are used for several purposes, including HA peer node control traffic, reaching a Conductor from a SSR, reaching managed SSRs from a Conductor, management traffic and reaching the public internet.
 
-Before we get started, it is important to understand the [terminology relating to 128T interfaces](concepts_interface_types.md)
+Before we get started, it is important to understand the [terminology relating to SSR interfaces](concepts_interface_types.md)
 
 :::important
-Changing a forwarding interface to non forwarding and vice versa is not dynamically reconfigurable and requires a restart of the 128T node
+Changing a forwarding interface to non forwarding and vice versa is not dynamically reconfigurable and requires a restart of the SSR node
 :::
 
 A quick recap:
@@ -87,7 +87,7 @@ exit
 
 At this point, it may be a good time to commit the configuration.
 
-The interfaces created within the 128T configuration will manage corresponding interfaces in Linux. 128T will dynamically update all SSH tunnels which are used to send control traffic to the peer node.
+The interfaces created within the SSR configuration will manage corresponding interfaces in Linux. The SSR will dynamically update all SSH tunnels which are used to send control traffic to the peer node.
 
 ```
 eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -109,13 +109,13 @@ team-eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 ```
 
 :::note
-The first time a non-forwarding interface is configured and 128T "takes over" the Linux interfaces, a backup of all the previous ifcfg scripts will be created at `/var/run/128technology/network-script-backups.tar.gz`.
+The first time a non-forwarding interface is configured and SSR "takes over" the Linux interfaces, a backup of all the previous ifcfg scripts will be created at `/var/run/128technology/network-script-backups.tar.gz`.
 :::
 
 Notice the interfaces are configured as network team because the type was set to `fabric`. If instead the type was set to `shared` then interface `eth1` would have been configured directly with the static IP address.
 
 :::info
-Upon committing configuration changing the control IP addresses, it can take up to **two minutes** for the node to reconnect internally or reconnect to its HA peer node. This delay happens because 128T is waiting for the TCP state machine to close existing connections.  Don't panic.  Just sit tight and wait for everything to reconnect.
+Upon committing configuration changing the control IP addresses, it can take up to **two minutes** for the node to reconnect internally or reconnect to its HA peer node. This delay happens because SSR is waiting for the TCP state machine to close existing connections.  Don't panic.  Just sit tight and wait for everything to reconnect.
 :::
 
 While this example showcases peering with a HA node on a conductor, the configuration and operations are identical for a router.
@@ -181,7 +181,7 @@ exit
 Notice that some additional fields were configured. The `default-route` is set to `true`.  This instructs Linux to set this external interface as the default route for all traffic. Secondly, a `management-vector` was configured.  This is required when setting the `default-route` to `true`. The user is allowed to define multiple interfaces as the `default-route`, so the `management-vector` is used to define the priority of all interfaces which are set as the default route.
 
 :::note
-If you configure the interface that is currently being used to connect to 128T as an `external` interface, you will notice your connection hang for a few moments while 128T takes over the interface after the config is committed. Once the commit is complete you will notice the interface's ifcfg script has been updated:
+If you configure the interface that is currently being used to connect to SSR as an `external` interface, you will notice your connection hang for a few moments while SSR takes over the interface after the config is committed. Once the commit is complete you will notice the interface's ifcfg script has been updated:
 :::
 
 ```
@@ -197,7 +197,7 @@ TYPE=Ethernet
 USERCTL=no
 ```
 
-The goal of this functionality is to eliminate the need for administrators to have to drop to the Linux shell to manually configure interfaces. A configuration field name `ifcfg-option` was added to the `network-interface` to allow super users to add any config field directly to an ifcfg script that 128T currently does not support. 128T does validate that the user is not trying to configure any options that 128T already configures to avoid creating conflicts with 128T settings. An example is firewalld zones.  Perhaps this external interface needs to be configured as a trusted interface.
+The goal of this functionality is to eliminate the need for administrators to have to drop to the Linux shell to manually configure interfaces. A configuration field name `ifcfg-option` was added to the `network-interface` to allow super users to add any config field directly to an ifcfg script that SSR currently does not support. SSR does validate that the user is not trying to configure any options that SSR already configures to avoid creating conflicts with SSR settings. An example is firewalld zones.  Perhaps this external interface needs to be configured as a trusted interface.
 
 ```
 network-interface  ext-mgmt-intf

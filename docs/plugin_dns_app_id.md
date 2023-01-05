@@ -357,7 +357,7 @@ The DNS cache plugin is enhanced to synchronize the cache between HA nodes to al
 
 - **PLUGIN-1452**  DNS cache services constantly fail on system startup.
 
-  _**Resolution:**_ The DNS cache systemd services will be deferred until the 128T services are running and stable.
+  _**Resolution:**_ The DNS cache systemd services will be deferred until the SSR services are running and stable.
 
 - **PLUGIN-1461**  Config generation for the plugin failing in versions 5.4 and above.
 

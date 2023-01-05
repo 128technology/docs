@@ -5,7 +5,7 @@ sidebar_label: AT&T AVPN Configuration
 
 import Mermaid from '@theme/Mermaid';
 
-This guide is for network engineers and architects using their 128T Session Smart router to connect to AT&T’s MPLS VPN (AVPN) service. It will cover:
+This guide is for network engineers and architects using their Session Smart Router to connect to AT&T’s MPLS VPN (AVPN) service. It will cover:
 - Service class definitions for the various COS queues on the AT&T MPLS network
 - Strategies for mapping `service` configuration to the COS queues using `service-policy` elements
 - Guidelines for setting your `traffic-engineering` properties, to match the circuit profile of your AT&T MPLS link
@@ -18,17 +18,17 @@ This document is intended to be a companion guide to the *AT&T Network-Based Cla
 
 ## AT&T Service Classes
 
-The AT&T AVPN MPLS network uses six distinct classes of service for carrying customer traffic, as well as a seventh “control” queue for communication between the CE and PE router. This section describes each of the classes of service and provides 128T configuration fragments to illustrate how to configure your 128T Session Smart router to interact with the AVPN network.
+The AT&T AVPN MPLS network uses six distinct classes of service for carrying customer traffic, as well as a seventh “control” queue for communication between the CE and PE router. This section describes each of the classes of service and provides SSR configuration fragments to illustrate how to configure your Session Smart Router to interact with the AVPN network.
 
 :::note
 This document assumes the use of a 6COS circuit profile. The 4COS circuit does not use the COS2V nor COS5 classes of service. Otherwise, the recommendations made in this document apply.
 :::
 
 :::caution
-In each of the `service-class` configuration excerpts below, you will see it has been assigned a `traffic-class`. The 128T Session Smart router has four traffic classes, in order of priority: high, medium, low, best-effort. This is different from other network equipment, which may order the priorities as high, medium, best-effort, low.
+In each of the `service-class` configuration excerpts below, you will see it has been assigned a `traffic-class`. The Session Smart Router has four traffic classes, in order of priority: high, medium, low, best-effort. This is different from other network equipment, which may order the priorities as high, medium, best-effort, low.
 :::
 
-All of the `service-class` elements in this section are provided as an appendix to this document, to facilitate their import (or copy/paste) into your existing 128T configuration.
+All of the `service-class` elements in this section are provided as an appendix to this document, to facilitate their import (or copy/paste) into your existing SSR configuration.
 
 ### COS1: Real-time
 
@@ -181,7 +181,7 @@ exit
 The control queue is used for communicating between the CE and PE router, and should typically be limited to BGP and BFD only. This is an extremely low bandwidth queue.
 
 :::warning
-In many deployments the 128T does not BGP peer with the PE router, and in no deployments will the 128T send BFD to the PE router. Do not mark BFD or BGP with DSCP CS6/decimal 48. This is only presented for completeness, or when BGP peering with the PE router.
+In many deployments the SSR does not BGP peer with the PE router, and in no deployments will the SSR send BFD to the PE router. Do not mark BFD or BGP with DSCP CS6/decimal 48. This is only presented for completeness, or when BGP peering with the PE router.
 :::
 
 #### Configuration
@@ -205,7 +205,7 @@ exit
 
 ## Service Policies
 
-The 128T will use `service-policy` to indicate which sessions need to get marked and treated with the `session-type` configurations. Each `service` should have a corresponding `service-policy`, to ensure that the markings are applied and the correct `traffic-class` is used for traffic engineering.
+The SSR will use `service-policy` to indicate which sessions need to get marked and treated with the `session-type` configurations. Each `service` should have a corresponding `service-policy`, to ensure that the markings are applied and the correct `traffic-class` is used for traffic engineering.
 
 The base class `service-policy` configurations presented here are derived from the [BCP on Service Policy](bcp_service-policy_defaults.md).
 
@@ -226,7 +226,7 @@ The base class `service-policy` configurations presented here are derived from t
 
 ## Traffic Engineering Strategies
 
-The 128T router uses four traffic engineering queues for prioritizing egress traffic during times of congestion or link contention. The general practice of mapping the `traffic-class` assignments (high, medium, low, best-effort) into the various 6COS queues is shown below.
+The SSR uses four traffic engineering queues for prioritizing egress traffic during times of congestion or link contention. The general practice of mapping the `traffic-class` assignments (high, medium, low, best-effort) into the various 6COS queues is shown below.
 
 
 <Mermaid chart={`
@@ -261,7 +261,7 @@ The 128T router uses four traffic engineering queues for prioritizing egress tra
     end
 `}/>
 
-Each AT&T AVPN circuit has a *profile* associated with it (referred to as a "COS Package"), that maps to bandwidth allocations for the various COS queues. These in turn need to be mapped to the four egress traffic engineering queues on the 128T. The COS Package from AT&T is expressed as a set of six numbers (corresponding to the queues), where the first number is the percentage of the circuit bandwidth allocated for COS1, and the remaining five numbers (which sum to 100%) represent the amount of *bandwidth remaining* from the bandwidth not used by COS1.
+Each AT&T AVPN circuit has a *profile* associated with it (referred to as a "COS Package"), that maps to bandwidth allocations for the various COS queues. These in turn need to be mapped to the four egress traffic engineering queues on the SSR. The COS Package from AT&T is expressed as a set of six numbers (corresponding to the queues), where the first number is the percentage of the circuit bandwidth allocated for COS1, and the remaining five numbers (which sum to 100%) represent the amount of *bandwidth remaining* from the bandwidth not used by COS1.
 
 :::warning
 Math involved.
@@ -351,10 +351,10 @@ exit
 
 ## Appendix: Service Class Configuration
 
-The following configuration output is presented here to facilitate copy/paste into your 128T conductor.
+The following configuration output is presented here to facilitate copy/paste into your SSR conductor.
 
 :::note
-Because the `dscp` value is a key field for the `service-class` object, no two `service-class` configurations can share the same value. This will likely require you to delete existing `service-class` configuration, as the 128T ships with *factory default* `service-class` elements that will conflict with the ones presented below.
+Because the `dscp` value is a key field for the `service-class` object, no two `service-class` configurations can share the same value. This will likely require you to delete existing `service-class` configuration, as the SSR ships with *factory default* `service-class` elements that will conflict with the ones presented below.
 :::
 
 ```
