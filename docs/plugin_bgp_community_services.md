@@ -3,7 +3,7 @@ title: BGP Community Services Plugin
 sidebar_label: BGP Community Services
 ---
 
-The BGP Community Services Plugin allows the 128T router to create services based on the community strings of prefixes learned via BGP from remote routers. The plugin allows you to configure a profile containing mappings of application names to community strings. A router can be assigned one profile, which will allow it to create [application identification](concepts_appid.md) information to associate learned prefixes to application names. These application names can then be configured within a service definition in order to appropriately populate the routers FIB. The primary use case for this plugin was to identify Microsoft Office 365 application traffic for customers using ExpressRoute. However, there may be other use cases where it is desirable for prefixes identified by a BGP community string to be mapped into a service dynamically.
+The BGP Community Services Plugin allows the SSR to create services based on the community strings of prefixes learned via BGP from remote routers. The plugin allows you to configure a profile containing mappings of application names to community strings. A router can be assigned one profile, which will allow it to create [application identification](concepts_appid.md) information to associate learned prefixes to application names. These application names can then be configured within a service definition in order to appropriately populate the routers FIB. The primary use case for this plugin was to identify Microsoft Office 365 application traffic for customers using ExpressRoute. However, there may be other use cases where it is desirable for prefixes identified by a BGP community string to be mapped into a service dynamically.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -168,7 +168,7 @@ Once the application identification module is setup correctly and a configuratio
 
 The contents of this file should show a JSON mapping of the user defined application names to a list of prefixes. If the module had any difficulties producing the data, it should generate an error message that can be used to help in determining the reason for the failure. The failure will also indicate which application and community string the module was processing when it encountered a failure. This may be useful in determining if the failure happened initially with the first application/community or later in the processing of the dta. Some examples are shown below.
 
-- This error indicates that the routingManager API was not available to be queried. Please ensure the correct 128T software version is running on the router with this capability. 
+- This error indicates that the routingManager API was not available to be queried. Please ensure the correct SSR software version is running on the router with this capability. 
 ```json
 {
   "module-name": "bgp-community-services",
@@ -212,7 +212,7 @@ The contents of this file should show a JSON mapping of the user defined applica
 ```
 
 ## Azure Express Route O365 Profile Definition
-The output here is provided in `flat` format to facilitate copy/pasting into an existing 128T conductor or router. This can be used to create a proile named `O365` which can be assigned to specific routers. It will define application-names `ExchangeOnline`, `SharePointOnline`, `SkypeForBusiness`, and `OtherO365` which can each be used in the `application-name` field to define a service.
+The output here is provided in `flat` format to facilitate copy/pasting into an existing SSR conductor or router. This can be used to create a proile named `O365` which can be assigned to specific routers. It will define application-names `ExchangeOnline`, `SharePointOnline`, `SkypeForBusiness`, and `OtherO365` which can each be used in the `application-name` field to define a service.
 
 ```
 config authority bgp-community-services-profile O365 name O365
@@ -232,4 +232,4 @@ config authority bgp-community-services-profile O365 application OtherO365 bgp-c
 
 #### Issues Fixed
 
-- **PLUGIN-768** Support the BGP Community Services plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the BGP Community Services plugin in SSR versions `5.1.0` and greater.

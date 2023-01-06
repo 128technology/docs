@@ -1,12 +1,12 @@
 ---
-title: Access Management on the 128T
+title: Access Management on the SSR
 sidebar_label: Access Management
 ---
 
 Following industry security best practices, SSH features have been limited and in the case of SSH Root Login, have been disabled.
 
 ## Root Access
-To permit root access to the 128T system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. 
+To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. 
 **SSH Root login is not permitted.**
 
 Prerequisites for installation and upgrades now include configuring a super user in /etc/sudoers that is allowed to execute Linux shell commands as root (sudo privileges).
@@ -28,7 +28,7 @@ From the terminal window:
 	- `ctrl+a`
 	- `d`
 
-For additional information about the manual installation process with Screen, please refer to [Manually Installing the 128T](intro_installation_installer.md).
+For additional information about the manual installation process with Screen, please refer to [Manually Installing the SSR](intro_installation_installer.md).
 
 ### Additional SSH Parameters
 - SSH Mode Verification performs strict mode checking of home directory configuration files, as well as user-specific SSH configuration files to prevent one user from logging on to the system as another user.

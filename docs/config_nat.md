@@ -58,7 +58,7 @@ If support for more than 49,150 concurrent sessions per interface is needed, you
 When multiple addresses are configured, utilizing `source-nat`, the second address configured will only be utilized once the first is fully exhausted; so on and so forth.  Once the next configured address starts being utilized, it will remain in use until exhausted.
 
 ## Destination NAT
-Static desination network address translation can be performed by configuring a `service-route > nat-target`. It is common to leverage the public address of the router for internal services, such as VPN. Traffic destined to the 128T, configured as a _service_ with an _address_ that matches that of the public-facing network-interface is then NATed to an internal private address on the LAN for the application. This setting only performs address translation and does not modify the port.
+Static desination network address translation can be performed by configuring a `service-route > nat-target`. It is common to leverage the public address of the router for internal services, such as VPN. Traffic destined to the SSR, configured as a _service_ with an _address_ that matches that of the public-facing network-interface is then NATed to an internal private address on the LAN for the application. This setting only performs address translation and does not modify the port.
 
 ## NAT Pools
 
@@ -69,10 +69,10 @@ A static NAT binding can be configured by creating an `authority > router > nat-
 
 * The _nat-pool_ prefix is used to create a N:M mapping. Where each source IP (from ingress interface) is hashed to an IP address in the nat pool.
 * The static _nat-pool_ can only be configured as:
-  * _ingress-nat-pool_ on a _network-interface_ when peering with another 128T router
+  * _ingress-nat-pool_ on a _network-interface_ when peering with another SSR
   * egress-nat-pool on a _network-interface_ when not performing SVR
   * _source-nat-pool_ on a _service-route / next-hop_
-* 128T software will not reply to ARP requests on the pool prefix on the associated interface.  Therefore the 128T relies on the pool to be routed to the 128T gateway interface by another mechanism (e.g. static-routes, BGP, etc.) by the _next-hop_ in the network.
+* SSR software will not reply to ARP requests on the pool prefix on the associated interface.  Therefore the SSR relies on the pool to be routed to the SSR gateway interface by another mechanism (e.g. static-routes, BGP, etc.) by the _next-hop_ in the network.
 * Changes to the pool configuration will not affect the existing sessions as it has the potential of cascading effect on the network. These changes will resolve over time as the existing sessions naturally expire.
 
 The static NAT pool will simply hash the source IP address of incoming packets to the corresponding IP address in the pool.
@@ -103,7 +103,7 @@ Currently session migration is only supported for SVR sessions. This restriction
 
 <u>Session Recovery Considerations</u>
 
-For shared NAT pools provisioned on an HA interface that encounters a failover, the 128T software will put the interface into recovery mode to recover all sessions. At the end of the recovery period all non-discovered ports designed as free are returned to the NAT pool.
+For shared NAT pools provisioned on an HA interface that encounters a failover, the SSR software will put the interface into recovery mode to recover all sessions. At the end of the recovery period all non-discovered ports designed as free are returned to the NAT pool.
 
 ### Tenant filtering
 The _nat-pool_ configuration can optionally be provisioned with a list of tenants. When the configuration has _multiple_ IP pools available, the _tenant_ can be used to determine which IP pool will be selected for the source NAT. Absence of a tenant implies that the IP pool is valid for all traffic. The following rules will be applied in order to determine the selection of the NAT pool:

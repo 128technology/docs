@@ -74,7 +74,7 @@ exit
 
 ### Vendor-Specific Information DHCP Options
 
-Being deployed as a router requires the 128T platform to successfully interoperate with a myriad of network elements.  These elements can change from customer to customer and use case to use case.  To ensure interoperability between these network elements it can become necessary to support Options and Vendor Extensions on top of base functional support.
+Being deployed as a router requires the SSR platform to successfully interoperate with a myriad of network elements.  These elements can change from customer to customer and use case to use case.  To ensure interoperability between these network elements it can become necessary to support Options and Vendor Extensions on top of base functional support.
 
 The two supported Vendor-Specific Information are:
 

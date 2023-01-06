@@ -3,7 +3,7 @@ title: Initializer Command Line Reference
 sidebar_label: Initializer Command Line Reference
 ---
 
-This is a reference document for the 128T Initializer command line interface.
+This is a reference document for the SSR Initializer command line interface.
 For a guide to basic usage, see the initialization section of the
 [Manual Installation Guide](intro_installation_installer.md#initialize-the-128t-node).
 
@@ -36,13 +36,13 @@ be non-zero.
 :::note
 
 128T must not be running during initialization. The Initializer will
-detect when 128T is running and exit with this message:
+detect when SSR is running and exit with this message:
 
 ```txt
 128T is running; cannot launch Initializer
 ```
 
-To stop 128T, follow the steps shown in the
+To stop SSR, follow the steps shown in the
 [Installation Guide](intro_installation.md#stopping-the-128t-routing-software).
 
 :::

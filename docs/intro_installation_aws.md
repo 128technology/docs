@@ -49,7 +49,7 @@ For more information on Amazon Web Services, refer to the [AWS website](https://
 21. On the _Launch Status_ page, click **View Instances**.
 22. Record the instances IP address.
 23. Launch a command window prompt.
-24. Enter the IP address of the instance. **Result:** The interactive 128T Installer application launches.
+24. Enter the IP address of the instance. **Result:** The interactive SSR Installer application launches.
 25. When prompted by the installer, press the **Enter** key to select Begin.
 
 Follow the instructions as outlined in [Install the Session Smart Routing Software](#install-using-128t-installer)
@@ -60,7 +60,7 @@ Follow the instructions as outlined in [Install the Session Smart Routing Softwa
 Deploying an SSR using Zero Touch Provisioning via tags is currently disabled. We are currently working on updating the AMIs in the marketplace to enable back the functionality.
 :::
 
-After installing a 128T conductor, you can use ZTP to install your 128 routers from Amazon Web Services.
+After installing an SSR conductor, you can use ZTP to install your 128 routers from Amazon Web Services.
 
 ### To install Session Smart Networking software from AWS using ZTP:
 

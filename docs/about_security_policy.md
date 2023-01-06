@@ -48,9 +48,9 @@ Since customers and members of the media can contact 128 Technology with questio
 
 When appropriate, the PSIRT should make arrangements for sharing vulnerability reports with coordinators or other vendors. They should be conscious of the vulnerability handling policy of the other party.
 
-128 Technology utilizes third-party software in its codebase and should notify those organizations according to their software vulnerability disclosure policy should an issue be identified in third-party code.
+The Juniper Networks SSR utilizes third-party software in its codebase and should notify those organizations according to their software vulnerability disclosure policy should an issue be identified in third-party code.
 
-128 Technology partners with hardware vendors to provide end-to-end solutions for the 128T Networking Platform.  Should a hardware or hardware-related software vulnerability be identified with the vendors solution, 128 Technology will follow the vendors vulnerability disclosure policy.
+Juniper Networks partners with hardware vendors to provide end-to-end solutions for the SSR Networking Platform.  Should a hardware or hardware-related software vulnerability be identified with the vendors solution, Juniper Networks will follow the vendors vulnerability disclosure policy.
 
 The PSIRT will track all vulnerabilities found in all components used in the development of the 128 Technology’s products and services, including components from third-parties or external suppliers. Vulnerabilities in third-party and shared components can affect the vendor’s products and services.
 

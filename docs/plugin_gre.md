@@ -3,7 +3,7 @@ title: GRE Plugin
 sidebar_label: GRE
 ---
 
-The 128T GRE plugin can be used for creating IPv4 GRE tunnels between a 128T router and a remote GRE tunnel destination. For services such as Zscaler, this provides better throughput compared to other tunneling mechanisms.
+The SSR GRE plugin can be used for creating IPv4 GRE tunnels between a SSR router and a remote GRE tunnel destination. For services such as Zscaler, this provides better throughput compared to other tunneling mechanisms.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -63,7 +63,7 @@ exit
 admin@node1.conductor1#
 ```
 
-In the above example, you will notice there are two tunnels configured on the router. Each `destination` represents a single tunnel interface and allows the user to configure an IPv4 address for the destination. The `enabled-node` configuration allows the user to control which 128T router node will be operating which tunnel. In addition the `enabled-node > tenant` can be used to apply a specific tenant for the GRE tunnel traffic. For each destination on each enabled-node, the 128T router creates a unique KNI interface and the configured tenant is applied to this interface.
+In the above example, you will notice there are two tunnels configured on the router. Each `destination` represents a single tunnel interface and allows the user to configure an IPv4 address for the destination. The `enabled-node` configuration allows the user to control which SSR router node will be operating which tunnel. In addition the `enabled-node > tenant` can be used to apply a specific tenant for the GRE tunnel traffic. For each destination on each enabled-node, the SSR router creates a unique KNI interface and the configured tenant is applied to this interface.
 
 ### Tunnel ICMP health check parameters
 The GRE tunnels do not have an inherent mechanism to detect the availability of remote peers.  As a result, the GRE plugin allows the user to configure ICMP probes to the destination. The configuration is enabled by default with the following settings:
@@ -116,8 +116,8 @@ In the above configuration, the `address-type > custom` is used to set a private
 When using a private ICMP address, its important to also use an in-subnet address for the generated KNIs. This can be accomplished by configuring the appropriate `plugin-network` as illustrated in the example above.
 :::
 
-### 128T services to transport over the tunnel
-Next step is to identify the the prefix or the subnet to be transported over the tunnel. In some cases, it might be desirable to transport all internet traffic through the tunnel, so the prefix could be as simple as 0.0.0.0/0. This can be done by capturing the prefix in a 128T service and setting the next-hop as the `gre-x` interfaces. As noted in the [previous section](#tunnelicmp_health_check_parameters), each destination on a given node corresponds to a `gre-x` inteface. By configuring the next-hop as the appropriate GRE interfaces, it allows the incoming traffic to be service-function chained to a GRE tunnel towards a WAN interface.
+### SSR services to transport over the tunnel
+Next step is to identify the the prefix or the subnet to be transported over the tunnel. In some cases, it might be desirable to transport all internet traffic through the tunnel, so the prefix could be as simple as 0.0.0.0/0. This can be done by capturing the prefix in an SSR service and setting the next-hop as the `gre-x` interfaces. As noted in the [previous section](#tunnelicmp_health_check_parameters), each destination on a given node corresponds to a `gre-x` inteface. By configuring the next-hop as the appropriate GRE interfaces, it allows the incoming traffic to be service-function chained to a GRE tunnel towards a WAN interface.
 
 ```
 admin@node1.conductor1# show config running authority service lan-svc
@@ -567,7 +567,7 @@ In addition, a `ping-monitor` service is started for each configured tunnel, the
 
 #### Issues Fixed
 
-- **PLUGIN-768** Support the GRE plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the GRE plugin in SSR versions `5.1.0` and greater.
 - **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-gre`
 
 ### Release 1.1.3, 2.1.3

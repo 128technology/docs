@@ -8,7 +8,7 @@ Traditional SD-WAN solves the issues of WAN connectivity by creating virtual net
 
 [^1]: https://www.128technology.com/blog/tunnel-based-versus-tunnel-free-sd-wan-with-acg-research/
 
-Overlay-based SD-WAN creates a network transport that is heavyweight and less optimized; fragmentation is introduced; and scalability and security are negatively impacted. 128T Session Smart routers offer a tunnel-free SD-WAN solution, which is more native, lightweight and scalable, to implement than overlay-based SD-WAN.
+Overlay-based SD-WAN creates a network transport that is heavyweight and less optimized; fragmentation is introduced; and scalability and security are negatively impacted. Session Smart Routers offer a tunnel-free SD-WAN solution, which is more native, lightweight and scalable, to implement than overlay-based SD-WAN.
 
 A tunnel, as defined according to [RFC 1853](https://tools.ietf.org/html/rfc1853), encapsulates original IP payload with a new IP header. The original IP header is maintained while a new one is added.
 
@@ -47,11 +47,11 @@ The problem of tunnels is only exaggerated in cloud deployments. The [economic b
 One of the biggest downsides to tunnels is that of the bandwidth overhead, but there are also security, quality of service, and scaling issues as well.  You can read about other issues with tunnels and overhead [here](https://www.128technology.com/blog/13-debts-of-tunnel-networks/).
 
 
-128T Session Smart tunnel-free SD-WAN makes the network more scalable, bandwidth efficient, eliminating fragmentation and delivering better security when compared to the traditional tunnel-based SD-WAN. When tunnel-free SD-WAN is combined with session awareness, the network becomes dynamic and stateful. This results in an intelligent distributed fabric that goes beyond the stateless L2 and L3 connectivity provided by other SD-WAN solutions. By removing the overhead burden from transport and the need to process such overheads from CPE, the SD-WAN network becomes simple. SD-WAN CPE becomes more scalable and less costly, resulting in potential capex savings.
+Session Smart tunnel-free SD-WAN makes the network more scalable, bandwidth efficient, eliminating fragmentation and delivering better security when compared to the traditional tunnel-based SD-WAN. When tunnel-free SD-WAN is combined with session awareness, the network becomes dynamic and stateful. This results in an intelligent distributed fabric that goes beyond the stateless L2 and L3 connectivity provided by other SD-WAN solutions. By removing the overhead burden from transport and the need to process such overheads from CPE, the SD-WAN network becomes simple. SD-WAN CPE becomes more scalable and less costly, resulting in potential capex savings.
 
 ## Secure Vector Routing Savings Comparison Tool
 
-The GUI of the 128T offers a comparison tool to contrast different tunneling techniques and their bandwidth overhead with that of SVR directly on the traffic traversing the 128T in its environment.
+The GUI of the SSR offers a comparison tool to contrast different tunneling techniques and their bandwidth overhead with that of SVR directly on the traffic traversing the SSR in its environment.
 
 ![SVR Savings](/img/about_svr_savings_1.png)
 

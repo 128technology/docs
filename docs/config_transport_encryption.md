@@ -16,7 +16,7 @@ Transport based encryption does not change how packets are encrypted, it simply 
 To provide control on transport based encryption, use the following configuration options:
 
 `payload-encryption-override`: Enforces transport based encryption using the following options.
-- `enable-encryption`: Enable encryption of the payload even when the security-policy associated with the service is set to `encrypt=false`. If the payload is already encrypted by another 128T, send it out as is. 
+- `enable-encryption`: Enable encryption of the payload even when the security-policy associated with the service is set to `encrypt=false`. If the payload is already encrypted by another SSR, send it out as is. 
 - `disabled-override`: Disable override of the security policy and use the security policy settings associated with the service.
 
 ```

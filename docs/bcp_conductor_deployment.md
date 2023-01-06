@@ -53,14 +53,14 @@ The SSR conductor will run effectively on a virtual machine in both private and 
 
 Running a small lab network or pilot deployment on a modestly sized conductor is acceptable, but be advised that migrating routers from a "temporary" or "POC" conductor to a production conductor may incur downtime during the transition. It is best to procure and deploy suitable hardware up front.
 
-128 Technology provides a sizing tool on [our community site](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/) to give guidance on CPU, memory, and disk requirements for bare metal and cloud conductor deployments.
+Juniper provides a sizing tool on [our community site](https://community.juniper.net/viewdocument/128t-conductor-sizing-spreadsheet?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c&tab=librarydocuments) to give guidance on CPU, memory, and disk requirements for bare metal and cloud conductor deployments.
 
 :::tip Key Decision
 Size your conductor for the size you anticipate your network to grow to, or the number of nodes your administrative policy caps for a single configuration platform. For deployments in excess of 2,000 managed nodes (remembering that a highly available router counts twice), see the section on POD design below.
 :::
 
 ### POD Design
-The conductor is the single point of configuration for an array of managed routers; as such, its configuration can grow to be quite large. As the configuration grows larger, the processing time for new configuration moves, adds, and changes grows accordingly. 128 Technology recommends that network deployments be sized to a ratio of 2,000 assets per conductor (where an asset is a single instance of SSR software). I.e., either 1,000 highly available routers comprised of two nodes each, 2,000 standalone nodes, or any combination thereof.
+The conductor is the single point of configuration for an array of managed routers; as such, its configuration can grow to be quite large. As the configuration grows larger, the processing time for new configuration moves, adds, and changes grows accordingly. Juniper recommends that network deployments be sized to a ratio of 2,000 assets per conductor (where an asset is a single instance of SSR software). I.e., either 1,000 highly available routers comprised of two nodes each, 2,000 standalone nodes, or any combination thereof.
 
 For large scale deployments in excess of 2,000 assets, the conventional approach is to subdivide the network into PODs – independently managed networks. Each POD, or set of managed assets, is independently managed.
 
@@ -69,20 +69,20 @@ POD design can have impacts on staging and provisioning workflows (for example, 
 :::
 
 ### Tuning your System
-128 Technology recommends various platform and operating system settings to ensure the optimal performance of your SSR conductor.
+Juniper recommends various platform and operating system settings to ensure the optimal performance of your SSR conductor.
 
 #### Platform Tuning
-128 Technology recommends enabling hyperthreading for systems operating as conductors, as it may improve performance.
+Juniper recommends enabling hyperthreading for systems operating as conductors, as it may improve performance.
 
 :::note
-Because 128 Technology _does not_ recommend hyperthreading for nodes running SSR software as a router, please be aware when repurposing a host from conductor to router that hyperthreading should be disabled.
+Because Juniper _does not_ recommend hyperthreading for nodes running SSR software as a router, please be aware when repurposing a host from conductor to router that hyperthreading should be disabled.
 :::
 
 #### Linux OS Tuning
-This section is specifically geared toward end users that want to build their own conductor nodes on top of a base CentOS operating system. For users that install their conductor software using a 128 Technology-provided ISO, these settings will be set already.
+This section is specifically geared toward end users that want to build their own conductor nodes on top of a base CentOS operating system. For users that install their conductor software using a Juniper-provided ISO, these settings will be set already.
 
 ##### Configuring firewalld
-When deploying conductor on the internet, 128 Technology recommends limiting access to the system using *firewalld*. (The [*firewalld* system daemon](https://firewalld.org/) is a managed firewall application within Linux.) The basic premise is to restrict inbound access to the public-facing addresses to only allow ports 4505/TCP, 4506/TCP, and 930/TCP. This is generally done by:
+When deploying conductor on the internet, Juniper recommends limiting access to the system using *firewalld*. (The [*firewalld* system daemon](https://firewalld.org/) is a managed firewall application within Linux.) The basic premise is to restrict inbound access to the public-facing addresses to only allow ports 4505/TCP, 4506/TCP, and 930/TCP. This is generally done by:
 
 1. Creating a specific firewalld **zone**; e.g., `conductor`
 2. Creating a firewalld **service** for the conductor's salt-master, containing TCP ports 4505, 4506; e.g., `salt-master`
@@ -90,7 +90,7 @@ When deploying conductor on the internet, 128 Technology recommends limiting acc
 4. Adding the "salt-master" and "netconf" services to the `conductor` zone
 5. Set the public address to be in the `conductor` zone
 
-128 Technology has developed some salt states to assist with these common configuration steps. Refer to our [public Github repo](https://github.com/128technology/salt-states/blob/master/setup-firewalld-t128-zone.sls) for some samples you can use to tune your system accordingly.
+Juniper has developed some salt states to assist with these common configuration steps. Refer to our [public Github repo](https://github.com/128technology/salt-states/blob/master/setup-firewalld-t128-zone.sls) for some samples you can use to tune your system accordingly.
 
 :::note
 >>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls in versions 5.1 and later, with no loss of functionality.
@@ -131,7 +131,7 @@ Oftentimes a conductor is hosted within a data center that has a SSR head end ro
 - The head end router uses `management-config-generated` set to `proxy` requests received on its WAN interface (from remote branch sites) to the internal conductor's address.
 
 #### Remote Routers: to SVR or not to SVR?
-When deploying your conductor behind another SSR at a data center, it opens the possibility of using Secure Vector Routing to reach the conductor using peer paths between a branch and the data center. However, 128 Technology *does not recommend* using SVR between systems for several reasons:
+When deploying your conductor behind another SSR at a data center, it opens the possibility of using Secure Vector Routing to reach the conductor using peer paths between a branch and the data center. However, Juniper *does not recommend* using SVR between systems for several reasons:
 
 1. It exacerbates the Jekyll/Hyde problem (described below), by virtue of being both at the branch and the data center
 2. Certain upgrade workflows or maintenance activities will cause remote sites to toggle between SVR and natural routing, which is suboptimal
@@ -144,7 +144,7 @@ Most production deployments include redundant conductor nodes. When deployed as 
 The two conductor nodes must therefore have IP reachability to one another. For conductor nodes that are physically adjacent to one another, a direct cable between them is the most common deployment style. When separating conductor nodes over any distance, ensure they have a route to reach one another that will not interfere with the connectivity to the nodes they manage.
 
 ### Geographic Redundancy
-Highly available conductors run as active/active, and have ongoing needs for state synchronization between one another. For this reason, 128 Technology requires that the network between geographically separated conductors have *latency of no more than 100ms*, and *packet loss no greater than 1%*.
+Highly available conductors run as active/active, and have ongoing needs for state synchronization between one another. For this reason, Juniper requires that the network between geographically separated conductors have *latency of no more than 100ms*, and *packet loss no greater than 1%*.
 
 ## Conductor Access (Router Design)
 
