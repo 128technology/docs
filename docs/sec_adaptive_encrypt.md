@@ -5,7 +5,7 @@ sidebar_label: Adaptive Encryption
 
 ## Introduction
 
-In order to provide security across the WAN, the 128T Networking Platform provides the functionality to encrypt between peered routers. However, for traffic that is already encrypted by the end host, this is redundant. Adaptive Encryption is aimed at identifying the encrypted traffic and providing security for non-encrypted traffic by encrypting it through the 128T Router.
+In order to provide security across the WAN, the SSR Networking Platform provides the functionality to encrypt between peered routers. However, for traffic that is already encrypted by the end host, this is redundant. Adaptive Encryption is aimed at identifying the encrypted traffic and providing security for non-encrypted traffic by encrypting it through the SSR.
 
 On a service where most of the traffic is expected to be encrypted, the goal is to identify and encrypt those few sessions that are not. This eliminates the performance overhead of encrypting traffic that is already encrypted.
 

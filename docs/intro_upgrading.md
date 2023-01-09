@@ -218,7 +218,7 @@ Because this is a router setting, your collection of routers can each use differ
 
 For routers that have no access to the internet, set `router > system > software-update > repository > offline-mode` to `true`. This overrides the `source-type` leaf.
 
-The `import iso` command is used to import packages contained within an SSR ISO onto a local yum repository, allowing the SSR to be upgraded without connecting to 128 Technology servers. 
+The `import iso` command is used to import packages contained within an SSR ISO onto a local yum repository, allowing the SSR to be upgraded without connecting to Juniper servers. 
 :::note
 In an HA setup, when using offline-mode for routers to access the software from the conductors, the ISO must be imported to both conductors before performing the upgrade.
 :::

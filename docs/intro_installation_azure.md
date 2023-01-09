@@ -388,7 +388,7 @@ When you select a template, a new tab opens in the browser that redirects you to
 :::important
 As an additional note and only applicable when the chosen image is the Session Smart Networking Platform, please be aware of the following conditions before using any of its templates:
 * Applicable when deploying an Session Smart Router:
-  * If there is an existing Session Smart Conductor in the network and the intent is to perform a non interactive installation of an SSR (for example a ZTP installation) please make sure the certificate provided by 128 Technology has been imported and loaded in Session Smart Conductor before launching the template to deploy the SSR.
+  * If there is an existing Session Smart Conductor in the network and the intent is to perform a non interactive installation of an SSR (for example a ZTP installation) please make sure the certificate provided by Juniper has been imported and loaded in Session Smart Conductor before launching the template to deploy the SSR.
 :::
 
 ### Launch the Template

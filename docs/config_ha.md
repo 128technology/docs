@@ -217,7 +217,7 @@ Redundancy groups are sets of interfaces that _share fate_, such that if one of 
 When configuring high availability using VRRP, redundancy groups are not configured/needed.
 :::
 
-While redundancy groups are most commonly found in legacy deployments (i.e., those that predate 128 Technology's introduction of the fabric interface), they are still useful in simple HA deployments. Furthermore, the redundancy group affords administrators the ability to assert a preference for which node is active in an HA pair in the "sunny day" scenario where no interfaces are administratively or operationally down.
+While redundancy groups are most commonly found in legacy deployments (i.e., those that predate the SSR's introduction of the fabric interface), they are still useful in simple HA deployments. Furthermore, the redundancy group affords administrators the ability to assert a preference for which node is active in an HA pair in the "sunny day" scenario where no interfaces are administratively or operationally down.
 
 Generally, you will configure two nodes that each have a set of forwarding interfaces (for illustrative purposes, assume an interface on an internal network named _lan_ and an interface on an external network named _wan_). Each node requires a _redundancy-group_ that containing a pair of internal and external interfaces, as is seen in the following example:
 

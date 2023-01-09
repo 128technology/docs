@@ -1,12 +1,12 @@
 ---
-title: MAC Address Uniqueness on 128T
+title: MAC Address Uniqueness
 sidebar_label: MAC Address Uniqueness
 ---
 Each Ethernet device uses an address referred to as the Media Access Control (MAC) address that allows other devices to communicate with it at the Data Link layer. These addresses must be unique on each L2 (broadcast) domain, in order to ensure that Ethernet frames are sent to the appropriate device.
 
 Because two devices with the same MAC on the same L2 broadcast domain are indistinguishable from one another, this is often leveraged by equipment manufaturers for the purposes of interface failover; deliberately deploying two devices with the same MAC on the same broadcast domain, and controlling which of them "owns" the interface lets adjacent devices continue to communicate with the same L2 destination when ownership changes from one piece of equipment to another.
 
-The 128T router uses this technique for its "protected interface" failover; by assigning the same `shared-phys-address` on two interfaces spanning two nodes that comprise a router, you can have those nodes elect an active owner of the interface, and transfer ownership to the partner node in the event of a failure.
+The SSR uses this technique for its "protected interface" failover; by assigning the same `shared-phys-address` on two interfaces spanning two nodes that comprise a router, you can have those nodes elect an active owner of the interface, and transfer ownership to the partner node in the event of a failure.
 
 Thus, enabling this behavior only requires assigning a unique `shared-phys-address` that is shared between the two devices. Furthermore, for the reasons mentioned above, this `shared-phys-address` must be otherwise unique on its broadcast domain.
 
@@ -40,10 +40,10 @@ To avoid colliding MAC addresses within a domain, we must ensure each is unique.
 
 To rectify the problem, we must change the `shared-phys-address` on both the A and B nodes in a router.
 
-Additionally, for specific deployments where the two nodes in a router are not persistently connected to the same L2 interface at the same time, we recommend configuring Linux's MAC address on that interface to match the one that will be used by the 128T software. (This is because we have observed certain business-class DIA circuits that will only issue one IP/MAC binding at a time, and if Linux has a different MAC than 128T, the host's MAC may take a lease at the expense of 128T's MAC.)
+Additionally, for specific deployments where the two nodes in a router are not persistently connected to the same L2 interface at the same time, we recommend configuring Linux's MAC address on that interface to match the one that will be used by the SSR software. (This is because we have observed certain business-class DIA circuits that will only issue one IP/MAC binding at a time, and if Linux has a different MAC than the SSR, the host's MAC may take a lease at the expense of the SSR's MAC.)
 
-This is done by editing the `MACADDR` field within `/etc/sysconfig/network-scripts/ifcfg-<ifname>`. Ensure this matches the MAC configured within 128T's configuration.
+This is done by editing the `MACADDR` field within `/etc/sysconfig/network-scripts/ifcfg-<ifname>`. Ensure this matches the MAC configured within the SSR's configuration.
 
 :::warning
-This is NOT TO BE DONE for "traditional" high availability deployments where both interfaces are plugged into the same L2 broadcast domain at the same time. This is because stopping 128T on one node will cause Linux to ARP out for the MAC address, which will cause disruption to service for its counterpart that is still running.
+This is NOT TO BE DONE for "traditional" high availability deployments where both interfaces are plugged into the same L2 broadcast domain at the same time. This is because stopping SSR on one node will cause Linux to ARP out for the MAC address, which will cause disruption to service for its counterpart that is still running.
 :::

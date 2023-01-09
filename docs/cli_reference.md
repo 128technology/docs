@@ -2763,7 +2763,7 @@ save tech-support-info [force] [manifest <manifest>] [router <router>] [node <no
 
 #### Description
 
-This command packages statistics, logs and other diagnostic data, to exchange with 128 Technology&#x27;s support team. The _tech-support-info_ command echoes the location where it stores the file when complete (`/var/log/128technology/tech-support-info.tar.gz`).
+This command packages statistics, logs and other diagnostic data, to exchange with Juniper's support team. The _tech-support-info_ command echoes the location where it stores the file when complete (`/var/log/128technology/tech-support-info.tar.gz`).
 
 New manifest files can be created and placed into `/etc/128technology/tech-support-manifests`. Each manifest contains a list of PCLI commands, shell commands, files, and systemd journal&#x27;s to collect.
 
@@ -3750,7 +3750,7 @@ The _set log level_ command adjusts the degree to which the SSR writes informati
 
 The optional &lt;process-name&gt; and &lt;node-name&gt; arguments, can selectively change only a specific SSR&#x27;s software process on a given node.
 
-The _level_ must be one of: fatal, error, warning, info, debug, and trace. These are listed in order of increasing verbosity. 128 Technology, Inc. generally recommends that systems be set to _info_ level by default under normal operating circumstances.
+The _level_ must be one of: fatal, error, warning, info, debug, and trace. These are listed in order of increasing verbosity. Juniper generally recommends that systems be set to _info_ level by default under normal operating circumstances.
 
 As of software version 3.1, a new subcommand _set log level category_, allows administrators to collectively adjust groups of related functionality for specific troubleshooting exercises – instead of blindly adjusting the entire system&#x27;s log level and potentially impacting performance.
 

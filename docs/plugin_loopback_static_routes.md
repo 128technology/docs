@@ -3,7 +3,7 @@ title: Loopback Static Routes Plugin
 sidebar_label: Loopback Static Routes
 ---
 
-The `128T-loopback-static-routes` plugin provides a way to manage the route table in Linux for the loopback interface called [`kni254`](concepts_kni.md) which is created by default on a 128T router. This is useful to set up the appropriate [Linux host networking](concepts_linux_host_networking.md) when management traffic is traversing a forwarding interface managed by the 128T router.
+The `128T-loopback-static-routes` plugin provides a way to manage the route table in Linux for the loopback interface called [`kni254`](concepts_kni.md) which is created by default on an SSR. This is useful to set up the appropriate [Linux host networking](concepts_linux_host_networking.md) when management traffic is traversing a forwarding interface managed by the SSR.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -16,10 +16,10 @@ The plugin is designed to provide the following capabilities:
 * Automatically learn and program static routes for configured services
 
 ## Configuration
-The plugin aims to solve several different use cases when it comes to setting up the Linux host routing on a 128T router. The sections below explore each of the supported use cases and their configurations.
+The plugin aims to solve several different use cases when it comes to setting up the Linux host routing on an SSR. The sections below explore each of the supported use cases and their configurations.
 
 ### Make kni254 the Default Route in Linux
-When a 128T router is deployed at the edge of a network (such as a branch or a store), it typically does not have a dedicated management interface. In such scenarios, the traffic originating in Linux such as DNS, NTP, etc., has to be routed through the 128T platform. The [linux host networking](concepts_linux_host_networking.md#advanced-configuration) document describes the 128T configuration needed to accomplish this in details. The plugin configuration to set up the Linux routing to enable in-band management access is shown below.
+When an SSR is deployed at the edge of a network (such as a branch or a store), it typically does not have a dedicated management interface. In such scenarios, the traffic originating in Linux such as DNS, NTP, etc., has to be routed through the SSR platform. The [linux host networking](concepts_linux_host_networking.md#advanced-configuration) document describes the SSR configuration needed to accomplish this in details. The plugin configuration to set up the Linux routing to enable in-band management access is shown below.
 
 ```config
 authority
@@ -36,7 +36,7 @@ The `metric` of zero will try to make this "the" default route in Linux. If the 
 :::
 
 ### Automatically Discover Prefixes from Services
-The configuration attribute `learn-from-service`, when enabled, will selectively allow access to configured services. The `kni254` interface always belongs to the `_internal_` tenant and the plugin scans the running 128T configuration for the services that allow access to the `_internal_` tenant.
+The configuration attribute `learn-from-service`, when enabled, will selectively allow access to configured services. The `kni254` interface always belongs to the `_internal_` tenant and the plugin scans the running SSR configuration for the services that allow access to the `_internal_` tenant.
 
 :::note
 The `learn-from-service` config can only be used when `default-route` is set to false.
@@ -75,7 +75,7 @@ authority
 The configuration above will add a static route of `8.8.8.8/32` for the `dns` service and `172.16.101.10/32` for the `_conductor_1_` service. Since the `other_service` does not allow the `_internal_` tenant it will not be considered for adding the static routes towards `kni254`. All prefixes learned through this method will get the same configured metric in Linux. For example both the routes will get a metric of `128` in the above example.
 
 :::note
-When the 128T router is running software version 4.3.0 or greater, the learning mode will automatically react to new services being committed to the 128T configuration and keep the Linux host routes in sync.
+When the SSR is running software version 4.3.0 or greater, the learning mode will automatically react to new services being committed to the SSR configuration and keep the Linux host routes in sync.
 :::
 
 ### Configuring static-route
@@ -149,4 +149,4 @@ The plugin updates the `/etc/sysconfig/network-scripts/route-kni254` file and ap
 
 #### Issues Fixed
 
-- **PLUGIN-768** Support the Loopback Static Routes plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the Loopback Static Routes plugin in SSR versions `5.1.0` and greater.
