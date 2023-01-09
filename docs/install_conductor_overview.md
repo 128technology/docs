@@ -8,7 +8,7 @@ The Authority is where system-wide data is stored. Conceptually, the Authority r
 
 The following Conductor installation processes are covered in this guide:
 
-- [Standalone Conductor](merged_single_conductor_install.mdx)
+- [Standalone Conductor](single_conductor_install.mdx)
 - [High Availability](ha_conductor_install.md)
 - [Import Configurations to the Conductor](single_conductor_config.md)
 - [Conductor Software Upgrades](conductor_upgrade.md)

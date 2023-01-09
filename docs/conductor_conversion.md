@@ -90,7 +90,7 @@ To save repository access credentials, use the PCLI command `set software access
 
 ## Next Steps
 
-See [Router Interactive Installation](install_router_merged.mdx) or [Router Installation Using OTP](intro_otp_iso_install.mdx) for steps to install your routers. 
+See [Router Interactive Installation](intro_installation_bootable_media.mdx) or [Router Installation Using OTP](intro_otp_iso_install.mdx) for steps to install your routers. 
 
 If your deployment will take advantage of Mist Telemetry, see [Enable WAN Assurance on the Conductor](config_wan_assurance.md#enable-wan-assurance-on-the-conductor) for those next steps. 
 

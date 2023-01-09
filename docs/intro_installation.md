@@ -24,9 +24,9 @@ Installation is done from the SSR ISOs, typically from a bootable image on a fla
 - [Download the ISOs](intro_downloading_iso.md)
 - [Create Bootable Media](intro_creating_bootable_usb.md)
 - [Perform the Interactive ISO installation](intro_installation_bootable_media.md) 
-- [Install a Conductor](merged_single_conductor_install.mdx)
+- [Install a Conductor](single_conductor_install.mdx)
 - [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
-- [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](install_router_merged.mdx)
+- [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.mdx)
 
 To install the SSR software on AWS or Azure, refer to: 
  - [Installation from Amazon Web Services (AWS) Marketplace](intro_installation_aws.md)
