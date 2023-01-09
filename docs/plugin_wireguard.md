@@ -3,7 +3,7 @@ title: Wireguard Plugin
 sidebar_label: Wireguard
 ---
 
-The wireguard plugin allows your 128T router to peer with other endpoints using [wireguard](https://www.wireguard.com/).  With this plugin you can securely connect endpoints to your 128T fabric, extending services and network tenancy.
+The wireguard plugin allows your SSR to peer with other endpoints using [wireguard](https://www.wireguard.com/).  With this plugin you can securely connect endpoints to your SSR fabric, extending services and network tenancy.
 
 ![Wireguard overview](/img/plugin_wireguard_1.png)
 
@@ -13,13 +13,13 @@ See instructions for [installing and managing](plugin_intro.md#installation-and-
 
 ## Wireguard Basics
 
-Wireguard operates using [cryptokey routing](https://www.wireguard.com/#cryptokey-routing), which provides device-to-edge security with a 128T service centric fabric. For any wireguard peer to securely communicate with another, a [Curve25519](https://tools.ietf.org/html/rfc7748) public/private keypair is generated. Each endpoint wishing to form a peering relationship must be configured minimally with the public key of the peer, and the prefixes that are allowed to be sent to the peer.
+Wireguard operates using [cryptokey routing](https://www.wireguard.com/#cryptokey-routing), which provides device-to-edge security with an SSR service centric fabric. For any wireguard peer to securely communicate with another, a [Curve25519](https://tools.ietf.org/html/rfc7748) public/private keypair is generated. Each endpoint wishing to form a peering relationship must be configured minimally with the public key of the peer, and the prefixes that are allowed to be sent to the peer.
 
-When a 128T router is configured for wireguard, it will generate a public key which can be configured in remote endpoints that are to peer with it. Additionally service prefixes that should be sent to the 128T router by a wireguard peer, can be configured as allowed IPs. More information on wireguard configuration can be found [here](https://www.wireguard.com/quickstart/).
+When an SSR is configured for wireguard, it will generate a public key which can be configured in remote endpoints that are to peer with it. Additionally service prefixes that should be sent to the SSR by a wireguard peer, can be configured as allowed IPs. More information on wireguard configuration can be found [here](https://www.wireguard.com/quickstart/).
 
 ## Basic Configuration
 
-To configure your 128T router for wireguard peering, you first create a wireguard profile on the router. For example, the following defines a profile called `wg-profile-1`. Each wireguard endpoint will use a unique address from the prefix `10.10.10.0/24` as defined in the profile and the router wireguard instance will use the first address of `10.10.10.1`.:
+To configure your SSR for wireguard peering, you first create a wireguard profile on the router. For example, the following defines a profile called `wg-profile-1`. Each wireguard endpoint will use a unique address from the prefix `10.10.10.0/24` as defined in the profile and the router wireguard instance will use the first address of `10.10.10.1`.:
 
 ```
 config
@@ -86,7 +86,7 @@ exit
 
 ## Services and Tenants with Wireguard
 
-Configuration of a wireguard profile on a 128T router interface does **not** provide access to network services. It simply allows the endpoint to connect to the router using wireguard for secure transport, and all sessions will still be subject to the rules of [tenants and services](concepts_glossary.md#service-layer). To facilitate network tenancy being given to traffic coming from wireguard peers, a profile is configured with a neighborhood. The neighborhood in the wireguard profile will function as a named Layer 3 network, and used in defining [neighborhood based tenancy](bcp_tenants.mdx#per-neighborhood-tenancy) to provide access to services.
+Configuration of a wireguard profile on an SSR interface does **not** provide access to network services. It simply allows the endpoint to connect to the router using wireguard for secure transport, and all sessions will still be subject to the rules of [tenants and services](concepts_glossary.md#service-layer). To facilitate network tenancy being given to traffic coming from wireguard peers, a profile is configured with a neighborhood. The neighborhood in the wireguard profile will function as a named Layer 3 network, and used in defining [neighborhood based tenancy](bcp_tenants.mdx#per-neighborhood-tenancy) to provide access to services.
 
 :::tip
 If you do not have a pre-defined tenant to use for wireguard endpoints, you can optionally configure a `tenant` in the profile, and one will be automatically generated for you.
@@ -94,7 +94,7 @@ If you do not have a pre-defined tenant to use for wireguard endpoints, you can 
 
 ## Connecting Remote Endpoints
 
-You have devices that are remote from your 128T fabric, but you want to give them network tenancy and access to services. In this example use case, assume you have two datacenter routers `dc1` and `dc2`, hosting services for `172.16.1.0/24` and `172.16.2.0/24` respectively. You want your remote devices to connect directly to each datacenter for these services, and be given a tenant called `remote`. `dc1` has a network-interface address of `1.1.1.1`, and `dc2` has a network-interface address of `2.2.2.2` that will be used to allow wireguard peers to connect.
+You have devices that are remote from your SSR fabric, but you want to give them network tenancy and access to services. In this example use case, assume you have two datacenter routers `dc1` and `dc2`, hosting services for `172.16.1.0/24` and `172.16.2.0/24` respectively. You want your remote devices to connect directly to each datacenter for these services, and be given a tenant called `remote`. `dc1` has a network-interface address of `1.1.1.1`, and `dc2` has a network-interface address of `2.2.2.2` that will be used to allow wireguard peers to connect.
 
 ![Wireguard remote endpoints](/img/plugin_wireguard_2.png)
 
@@ -275,7 +275,7 @@ Endpoint = 2.2.2.2:12800
 
 ### Network Tenant For Endpoints
 
-In the remote endpoint example, traffic coming from endpoints will be transported to the appropriate 128T `dc1` or `dc2` routers using wireguard, and then be sent into the fabric sourced from each endpoint's assigned private address in the `10.10.10.0/24` network. To assign these endpoints a tenant, thus giving them access to services, the profile is configured with a `neighborhood` of `remote`. Based on this, you can define tenant membership for each endpoint in the private network.
+In the remote endpoint example, traffic coming from endpoints will be transported to the appropriate SSR `dc1` or `dc2` routers using wireguard, and then be sent into the fabric sourced from each endpoint's assigned private address in the `10.10.10.0/24` network. To assign these endpoints a tenant, thus giving them access to services, the profile is configured with a `neighborhood` of `remote`. Based on this, you can define tenant membership for each endpoint in the private network.
 
 For example, the following could be used to give endpoints in the network a tenant of `remote-worker` (including `p1` and `p2`), but give just `p3` tenant `engineering`:
 
@@ -305,9 +305,9 @@ exit
 
 ## Remote Service Agent
 
-You have a remote device that needs to be accessed as an agent of a service in your 128T network. In this example use case you have a remote IoT device that hosts a `thing` service with address `128.128.128.128/32`, which must be accessed by a tenant `technician`.
+You have a remote device that needs to be accessed as an agent of a service in your SSR network. In this example use case you have a remote IoT device that hosts a `thing` service with address `128.128.128.128/32`, which must be accessed by a tenant `technician`.
 
-A remote IoT device has a wireguard peer with a public key of `Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=`. It will be given an address of `10.10.10.2` from the private network, and it will peer with the 128T router `r1` on the  `1.1.1.1` network-interface address.
+A remote IoT device has a wireguard peer with a public key of `Jihom426SSceUCPpS1147NSNzZcY1wl40Sf+OQ1rjGU=`. It will be given an address of `10.10.10.2` from the private network, and it will peer with the SSR `r1` on the  `1.1.1.1` network-interface address.
 
 ![Wireguard service agent](/img/plugin_wireguard_3.png)
 
@@ -368,10 +368,10 @@ If wireguard is hosted on a DHCP enabled interface, the peer's `Endpoint` addres
 :::
 
 :::note
-The `PersistentKeepalive` in this wireguard configuration causes the peer to keep the connection to the peer alive by sending periodic traffic. This has the effect of allowing the 128T to originate sessions to the peer at any time. See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
+The `PersistentKeepalive` in this wireguard configuration causes the peer to keep the connection to the peer alive by sending periodic traffic. This has the effect of allowing the SSR to originate sessions to the peer at any time. See [wireguard documentation](https://www.wireguard.com/quickstart/) for more on configuring wireguard on other endpoints.
 :::
 
-With the profile and peer configured on the 128T router `r1`, and wireguard configured on the remote IoT device, you can verify the device is keeping the connection alive by reviewing the `latest handshake` output of `show device-interface router <router_name> name <profile_name>`:
+With the profile and peer configured on the SSR `r1`, and wireguard configured on the remote IoT device, you can verify the device is keeping the connection alive by reviewing the `latest handshake` output of `show device-interface router <router_name> name <profile_name>`:
 
 ```
 
@@ -540,7 +540,7 @@ IP and port of the endpoint. If not set, the endpoint of the peer will establish
 | `port`  | port number | Port at which the peer can be reached to connect. |
 
 :::note
-If an endpoint is configured, wireguard on the 128T may attempt to send outbound sessions to the IP and port defined. The sessions will originate from the profile loopback-address. A tenant and service must be created to route the outbound wireguard session to the defined peer endpoint.
+If an endpoint is configured, wireguard on the SSR may attempt to send outbound sessions to the IP and port defined. The sessions will originate from the profile loopback-address. A tenant and service must be created to route the outbound wireguard session to the defined peer endpoint.
 :::
 
 ## Troubleshooting
@@ -647,7 +647,7 @@ Aug 05 14:32:40 dev-fitlet node[32315]: '/etc/128technology/plugins/network-scri
 ```
 
 #### Wireguard not installed on the router
-In some cases, it is possible that the version of 128T router is not compatible with wireguard. In such a case you will see the log messages like below in the journal
+In some cases, it is possible that the version of SSR software is not compatible with wireguard. In such a case you will see the log messages like below in the journal
 
 ```
 Dec 18 20:56:03 t211-dut2.openstacklocal python3.6[28707]: __main__ - Could not validate wireguard packages: Could not query package kmod-wireguard, Command '['rpm', '-q', 'kmod-wireguard']' returned non-zero exit status 1.
@@ -690,9 +690,9 @@ By using Saltstack data files, the time to apply high states across all assets i
 
   _**Resolution:**_ The plugin handles the DHCP address in the presence of a neighborhood configuration more gracefully.
 
-- **PLUGIN-1954** Wireguard plugin fails to run on 128T-5.5.5 and higher
+- **PLUGIN-1954** Wireguard plugin fails to run on SSR-5.5.5 and higher
 
-  _**Resolution:**_ The wireguard plugin was extended to support newer kernel versions required for 128T-5.5.5 and above.
+  _**Resolution:**_ The wireguard plugin was extended to support newer kernel versions required for SSR-5.5.5 and above.
 
 ### Release 2.1.1
 
@@ -704,9 +704,9 @@ By using Saltstack data files, the time to apply high states across all assets i
 
   _**Resolution:**_ The config generation logic for the plugin will allow references to existing tenants.
 
-- **PLUGIN-1753** Disabling wireguard plugin can cause the 128T manifest to be removed
+- **PLUGIN-1753** Disabling wireguard plugin can cause the SSR manifest to be removed
 
-  _**Resolution:**_ When disabling the plugin, the kernel modules and 128T manifest are no longer removed.
+  _**Resolution:**_ When disabling the plugin, the kernel modules and SSR manifest are no longer removed.
 
 ### Release 2.1.0
 
@@ -746,28 +746,28 @@ By using Saltstack data files, the time to apply high states across all assets i
 
 - **PLUGIN-1072** Allow wireguard to start when the required version of `kmod-wireguard` is installed along with versions not used by the active kernel.
 - **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-wireguard`
-- **PLUGIN-768** Support the Wireguard plugin on conductors running 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the Wireguard plugin on conductors running SSR versions `5.1.0` and greater.
 
 ### Caveat
 
-- **I95-38622** The plugin is not supported on routers running 128T version `5.1.0`.
+- **I95-38622** The plugin is not supported on routers running SSR version `5.1.0`.
 
 ### Release 1.2.0
 
 #### Issues Fixed
 
-- **PLUGIN-922** Support multiple kernel versions for 128T Wireguard plugin and allow for graceful upgrade and rollback of the 128T software releases. The enhancement currently supports the following kernel versions: `3.10.0-1062.9.1`, `3.10.0-1127.18.2`, `3.10.0-1160`, and `3.10.0-1160.6.1`.
+- **PLUGIN-922** Support multiple kernel versions for SSR Wireguard plugin and allow for graceful upgrade and rollback of the SSR software releases. The enhancement currently supports the following kernel versions: `3.10.0-1062.9.1`, `3.10.0-1127.18.2`, `3.10.0-1160`, and `3.10.0-1160.6.1`.
 
 ### Caveat
-- **PLUGIN-987** A 128T software downgrade might fail when the currently installed wireguard kernel module and the new kernel being downgraded to are not compatible. The following procedure may be used to work around this issue
+- **PLUGIN-987** An SSR software downgrade might fail when the currently installed wireguard kernel module and the new kernel being downgraded to are not compatible. The following procedure may be used to work around this issue
 
 :::caution
 The process below will cause the wireguard tunnels to be torn down and the peers to disconnect. Please perform the operations during a maintenance window only.
 :::
 
   - Create a backup of the current running configuration to be restored later.
-  - Before rolling back the 128T version, remove all references to `wireguard-profile` from `authority > router > device-interface > network-interface > address`. Once these changes are committed, the wireguard rpms will be removed from the router.
-  - Rollback the 128T software to the desired version.
+  - Before rolling back the SSR version, remove all references to `wireguard-profile` from `authority > router > device-interface > network-interface > address`. Once these changes are committed, the wireguard rpms will be removed from the router.
+  - Rollback the SSR software to the desired version.
   - Restore the backup created in the first step. Once the changes are committed, the correct wireguard rpm's will be installed on the router.
 
 ### Release 1.1.0

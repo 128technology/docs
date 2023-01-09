@@ -8,12 +8,12 @@ sidebar_label: "AP: Duplicate Asset ID Error"
 This document describes the process for troubleshooting the duplicate asset ID error with Automated Provisioning (AP).
 
 Here are a few situations that may cause a duplicate asset ID:
-* 128T SSR has been cloned from staging and has not completed the initialization procedure, creating a unique ID
-* The same quickstart file has been applied to multiple 128T SSRs
-* A user has manually entered the same asset ID into the salt-minion ID file on multiple 128T SSRs
+* SSR has been cloned from staging and has not completed the initialization procedure, creating a unique ID
+* The same quickstart file has been applied to multiple SSRs
+* A user has manually entered the same asset ID into the salt-minion ID file on multiple SSRs
 
 :::note
-The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on the conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting a 128T router. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
+The terms "salt-master" and "conductor" are used interchangeably throughout this document. "Salt-master" refers to the salt-master process running on the conductor, which orchestrates tasks for AP.  Also the terms "minion", "salt-minion" and "asset" are used interchangeably throughout this document. "Minion" runs on an "asset", or system hosting an SSR. Minions are responsible for carrying out tasks on the host, given to it by the salt-master.
 :::
 
 This document will reference salt keys and salt grains. Some good resources for these topics are:
@@ -137,7 +137,7 @@ Key for minion asset1 deleted.
 If the conductor is in HA configuration then the salt keys need to be deleted from *both* conductors or the asset will be stuck in the `key-accepted` state.
 :::
 
-The salt-minion may reach out again automatically and get accepted by the conductor if the asset ID matches an asset ID in the 128T configuration. If the salt-minion does not reach out then it needs to be restarted manually from the Linux command line with `systemctl restart salt-minion`.
+The salt-minion may reach out again automatically and get accepted by the conductor if the asset ID matches an asset ID in the SSR configuration. If the salt-minion does not reach out then it needs to be restarted manually from the Linux command line with `systemctl restart salt-minion`.
 
 If the root cause was indeed a salt-minion that regenerated new keys (situation #1 above) and not two different salt-minions with different keys and the same ID (situation #2 above), then this procedure will solve your problem. The asset will reconnect properly and no duplicate ID error will appear. If the duplicate asset ID error and the denied and accepted keys reappear, then the user knows they are dealing with multiple salt-minions with the same minion ID.
 

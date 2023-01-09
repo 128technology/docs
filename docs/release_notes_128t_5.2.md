@@ -208,7 +208,7 @@ Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#re
 ------
 - **I95-36657 Improve Packet throughput of KNI-based Interfaces:** KNI buffer performance has been enhanced to handle large bursts of traffic. 
 ------
-- **I95-37296 Native 128T Support for GRE:** Native support (non-plugin) is availble for GRE Tunneling, providing better performance. For more information, see [Native GRE Tunnels](config_gre_tunnel.md).
+- **I95-37296 Native SSR Support for GRE:** Native support (non-plugin) is availble for GRE Tunneling, providing better performance. For more information, see [Native GRE Tunnels](config_gre_tunnel.md).
 ------
 - **I95-37459 Show Commands for Services:** The [show fib](cli_reference.md#show-fib) and [show fib lookup](cli_reference.md#show-fib-lookup) commands have been enhanced to provide more granular path-related debugging.
 ------

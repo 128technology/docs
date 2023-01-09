@@ -788,12 +788,12 @@ authority > router > entitlement
 
 #### Description:
 
-The entitlement is where you apply keys you received from 128 Technology, to license your SSR for carrying traffic.
+The entitlement is where you apply keys you received from Juniper, to license your SSR for carrying traffic.
 
 | Element | Type | Description |
 | --- | --- | --- |
 | description | string | A textual description of the entitlement. |
-| id | string | The entitlement string, supplied to you by 128 Technology. |
+| id | string | The entitlement string, supplied to you by Juniper. |
 | max-bandwidth | uint64 | The purchased bandwidth for your SSR, expressed in *bytes per second*. |
 
 #### Version History:
@@ -1121,9 +1121,9 @@ authority > router > system > log-category
 
 #### Description:
 
-The *log-category* element is what allows administrators to selectively increase/decrease the verbosity of logging for various subsystems within the SSR. At times, during troubleshooting (and in particular, at the specific request of a member of the 128 Technology Customer Support team), you may need to selectively increase the logging verbosity of a particular subsystem to isolate a fault or routing issue. To increase logging across all subsystems may overwhelm the system's resources (and potentially mask the issue you're trying to troubleshoot), so these subsystems can affect only a small portion of the overall system's logging behavior.
+The *log-category* element is what allows administrators to selectively increase/decrease the verbosity of logging for various subsystems within the SSR. At times, during troubleshooting (and in particular, at the specific request of a member of the Juniper Customer Support team), you may need to selectively increase the logging verbosity of a particular subsystem to isolate a fault or routing issue. To increase logging across all subsystems may overwhelm the system's resources (and potentially mask the issue you're trying to troubleshoot), so these subsystems can affect only a small portion of the overall system's logging behavior.
 
-These logging subsystems will generally only be tuned at the direct request from a member of the technical support team at 128 Technology.
+These logging subsystems will generally only be tuned at the direct request from a member of the technical support team at Juniper.
 
 | Element | Type | Description |
 | --- | --- | --- |
@@ -1656,7 +1656,7 @@ A *node* is a single software instance, one that comprises a whole or part of an
 | Element | Type | Description |
 | --- | --- | --- |
 | asset-id | string | The *asset-id* is a unique identifier for a node within an SSR, which is used with the Conductor's "automated provisioning" feature. The asset-id, configured within a router's node in an Authority-wide configuration managed by a Conductor, is matched to an asset-id supplied by an unprovisioned node. Once an asset-id match is established and accepted at the Conductor, the Conductor can definitively install and configure the appropriate software on that node. |
-| asset-validation-enabled | boolean | When true, the system will check to ensure it meets minimum hardware requirements prior to launching SSR software. When false, this check is bypassed. This should not be bypassed unless it is recommended by the 128 Technology Customer Support team. |
+| asset-validation-enabled | boolean | When true, the system will check to ensure it meets minimum hardware requirements prior to launching SSR software. When false, this check is bypassed. This should not be bypassed unless it is recommended by the Juniper Customer Support team. |
 | clean-after-failed-install | boolean | Obsolete. Default value: true. This governs whether all traces of the SSR will be removed if an installation fails on this asset. |
 | clean-before-install | boolean | Obsolete. Default value: true. When true, this will remove all traces of previous installed versions of SSR when the installer process launches. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
@@ -1672,7 +1672,7 @@ A *node* is a single software instance, one that comprises a whole or part of an
 | ssh-keepalive | sub-element | Properties applied to the SSH sessions initiated by this node to other nodes, routers, and its conductor(s).|
 | software-update-bandwidth | union | Range 1-999999999999, or "unlimited." Default: unlimited. Configured in bits/second, this lets you govern the amount of bandwidth that this SSR node will use when retrieving software download images during its upgrade operation. This is useful on slower links, to avoid congestion with production traffic. |
 | ssh-keepalive | sub-element | Governs whether or not this system will support SSH keepalives. |
-| usage-reporter-enabled | boolean | When true, this node will report anonymous usage statistics back to 128 Technology, Inc. for continuous improvement of our software. |
+| usage-reporter-enabled | boolean | When true, this node will report anonymous usage statistics back to Juniper for continuous improvement of our software. |
 
 #### Version History:
 | Release | Modification |
@@ -1761,7 +1761,7 @@ authority > router > peer
 
 #### Description:
 
-A *peer* object models a remote router (in this system's *authority* or in a remote *authority*) that this SSR will bridge to via STEP (the 128 Technology routing protocol) to share services.
+A *peer* object models a remote router (in this system's *authority* or in a remote *authority*) that this SSR will bridge to via STEP (the Juniper routing protocol) to share services.
 
 | Element | Type | Description |
 | --- | --- | --- |
@@ -2594,7 +2594,7 @@ authority > router > system > software-update
 
 #### Description:
 
-By default, an SSR retrieves software from a public software repository hosted by 128 Technology. However, in some deployments access to the public internet may be restricted. The *software-update* configuration allows administrative controls over how and from where the SSR will retrieve software.
+By default, an SSR retrieves software from a public software repository hosted by Juniper. However, in some deployments access to the public internet may be restricted. The *software-update* configuration allows administrative controls over how and from where the SSR will retrieve software.
 
 | Element | Type | Description |
 | --- | --- | --- |

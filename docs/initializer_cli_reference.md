@@ -35,11 +35,11 @@ be non-zero.
 
 :::note
 
-128T must not be running during initialization. The Initializer will
+The SSR must not be running during initialization. The Initializer will
 detect when SSR is running and exit with this message:
 
 ```txt
-128T is running; cannot launch Initializer
+SSR is running; cannot launch Initializer
 ```
 
 To stop SSR, follow the steps shown in the
@@ -50,7 +50,7 @@ To stop SSR, follow the steps shown in the
 ### Interactive Mode
 
 Without any arguments, the Initializer will open a wizard interface to initialize
-128T.
+SSR.
 
 ```sh
 initialize128t

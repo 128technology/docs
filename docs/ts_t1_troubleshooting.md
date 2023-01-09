@@ -5,7 +5,7 @@ sidebar_label: T1 Troubleshooting
 
 ## T1 Troubleshooting Process
 
-The 128T software is often configured to leverage legacy T1/E1 circuits to connect to provider MPLS networks. This document contains troubleshooting techniques available to 128T administrators, to confirm whether a T1 has issues prior to escalating to service provider, and to distinguish between a T1 issue and a downstream issue.
+The SSR software is often configured to leverage legacy T1/E1 circuits to connect to provider MPLS networks. This document contains troubleshooting techniques available to SSR administrators, to confirm whether a T1 has issues prior to escalating to service provider, and to distinguish between a T1 issue and a downstream issue.
 
 ### Confirm Interface Status
 
@@ -30,7 +30,7 @@ admin@node1.router# show device-interface node all summary  | egrep "Status|t1"
 ```
 
 :::note
-The state of `unknown` represents a T1 that has *never successfully come online since 128T system start*. The initial state of a T1 interface on the 128T platform is `unknown`, until it transitions to `up`. When a T1 is `unknown`, it can be treated as out of service.
+The state of `unknown` represents a T1 that has *never successfully come online since SSR system start*. The initial state of a T1 interface on the SSR platform is `unknown`, until it transitions to `up`. When a T1 is `unknown`, it can be treated as out of service.
 :::
 
 ### Confirm Peer Status
@@ -104,7 +104,7 @@ admin@node1.router# show events alarm from "2020-03-08 11:19" | grep t1
 
 The `network-interface` category is used when the interface transitions to up or down, either administratively (i.e., disabled or enabled by an administrator), or operationally (the physical circuit).
 
-The `peer` category reflects the ability for the 128T software to reach remote devices over that circuit.
+The `peer` category reflects the ability for the SSR software to reach remote devices over that circuit.
 
 When a `network-interface` is down, either operationally or administratively, this will obviously impact all traffic on that interface. For circumstances when the `network-interface` is operationally down, proceed to the Circuit Troubleshooting section of this document.
 
@@ -245,7 +245,7 @@ Mon 2020-03-09 17:50:14 UTC
 ```
 
 :::note
-The 128 Technology solution includes the Sangoma E1/T1 card for interfacing to MPLS networks. For more information on the Framer alarms, the LIU alarms, and the Tx alarms, refer to the Sangoma Reference Guide for details.
+The SSR solution includes the Sangoma E1/T1 card for interfacing to MPLS networks. For more information on the Framer alarms, the LIU alarms, and the Tx alarms, refer to the Sangoma Reference Guide for details.
 :::
 
 #### Checking the Circuit Status
@@ -295,7 +295,7 @@ admin@node1.router# show device-interface node node1 name t1
 ```
 
 #### Clearing the Counters
-The 128T cannot reset Sangoma counters within its administrative interfaces. To clear the counters, you must follow these steps within the Linux host operating system.
+The SSR cannot reset Sangoma counters within its administrative interfaces. To clear the counters, you must follow these steps within the Linux host operating system.
 
 :::note
 The **Sync Errors** counter cannot be cleared.
@@ -414,7 +414,7 @@ Ping from 10.61.73.170 (10.61.73.170): icmp_seq=2 ttl=254 time=11.235ms
 Ping from 10.61.73.170 (10.61.73.170): icmp_seq=3 ttl=254 time=11.583ms
 ```
 
-If the ping request fails and all indications from the 128T and Sangoma diagnostics indicate an otherwise healthy system, escalate to the service provider for investigation on the PE equipment.
+If the ping request fails and all indications from the SSR and Sangoma diagnostics indicate an otherwise healthy system, escalate to the service provider for investigation on the PE equipment.
 
 ## Manual Loopback
 
@@ -424,7 +424,7 @@ The Sangoma T1 Card with the latest firmware will automatically loop back on det
 When T1 is placed in loopback, the interface is no longer usable for remote administration, conductor connectivity, traffic forwarding, etc. **This should only be done during scheduled maintenance, or in critical situations.** Because this can interfere with remote administration, *it is essential another path be available so that the Node can be accessed to enter the command to disable T1 loopback* (thus restoring normal service) issued locally.
 :::
 
-The output of `show device-interface` will indicate a status of Admin: Up and Oper: Down while the loopback is engaged. You will need to use the Linux shell to query the card for statistics while it is unavailable to 128T.
+The output of `show device-interface` will indicate a status of Admin: Up and Oper: Down while the loopback is engaged. You will need to use the Linux shell to query the card for statistics while it is unavailable to SSR.
 
 Performance counters can be retrieved using the Linux command `wanpipemon -i w1g1 -c Ta`
 
@@ -467,7 +467,7 @@ All loopback modes are disabled!
 
 ## Standard T1 Configuration File
 
-Below is the standard configuration file included with the 128T software. **This configuration is generated by the 128T software and should not be modified, it is provided here for reference only.** 
+Below is the standard configuration file included with the SSR software. **This configuration is generated by the SSR software and should not be modified, it is provided here for reference only.** 
 
 The file is located at `/etc/wanpipe/wanpipe1.conf`.
 
@@ -536,4 +536,4 @@ If the troubleshooting exercise leads you to believe the issue is with the servi
    3. T1 Performance Errors Accumulting : Yes/No
    4. T1 RX signal in spec: Yes/No 
 5. Can ping PPP peer (Provider Edge) IP: Yes/No
-6. The timeline of events observed by the 128T and uncovered during your analysis
+6. The timeline of events observed by the SSR and uncovered during your analysis

@@ -1,5 +1,5 @@
 ---
-title: 128T Installer 2.6 Release Notes
+title: Installer 2.6 Release Notes
 sidebar_label: 2.6
 ---
 
@@ -14,9 +14,9 @@ sidebar_label: 2.6
 
 ### Issues Fixed
 
-- **IN-332** - grub2-efi-x64 removed on upgrade to 128T version 4.4.2 or 4.5.1 if the conductor is running on non uEFI OS imaged hardware and the routers are running on uEFI OS imaged hardware.
+- **IN-332** - grub2-efi-x64 removed on upgrade to SSR version 4.4.2 or 4.5.1 if the conductor is running on non uEFI OS imaged hardware and the routers are running on uEFI OS imaged hardware.
 
-   Until the systems are updated with the 128T-installer 2.6.2-1 version all upgrades should be performed by importing the 128T OTP ISO on the conductor for the targeted 128T upgrade version. Removal of grub2-efi-x64 rpm and a system reboot afterwards will result in a system that will not boot. Note: If the conductors have access to the public repos, the installer will be updated through the normal upgrade process. Additional information on the import process can be found here: [pcli import iso](cli_reference.md#import-iso) and [installer import](installer_cli_reference.md#import)
+   Until the systems are updated with the 128T-installer 2.6.2-1 version all upgrades should be performed by importing the SSR OTP ISO on the conductor for the targeted SSR upgrade version. Removal of grub2-efi-x64 rpm and a system reboot afterwards will result in a system that will not boot. Note: If the conductors have access to the public repos, the installer will be updated through the normal upgrade process. Additional information on the import process can be found here: [pcli import iso](cli_reference.md#import-iso) and [installer import](installer_cli_reference.md#import)
 
 ## Release 2.6.1
 
@@ -28,7 +28,7 @@ sidebar_label: 2.6
 
 ### New Features and Improvements
 
-- Support for 128T version 4.3.8
+- Support for SSR version 4.3.8
 
 ## Special Considerations
 
@@ -55,7 +55,7 @@ sidebar_label: 2.6
   To diagnose the problem, try running: `rpm -Va --nofiles --nodigest`.
   If this is a corrupted RPMDB, running `rpm --rebuilddb` may address the issue.
 
-  _**Cause:**_ Installed version of the RPM's coming from a later version of the Supported 128T OS version. 128T Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
+  _**Cause:**_ Installed version of the RPM's coming from a later version of the Supported SSR OS version. SSR Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
 
   _**Corrective Action:**_ For the offending RPM that comes from a different version of the OS than is installed and running, perform either operation:
 

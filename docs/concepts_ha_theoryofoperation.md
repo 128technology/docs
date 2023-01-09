@@ -13,7 +13,7 @@ This document will describe the benefits and caveats of each of these models, as
 This document is intended for network architects, and is to be used as a guideline during the network design phase of deployment.
 
 ## Introduction
-High availability (or “HA”) is the practice of deploying additional network elements for traffic resiliency, to account for link or system downtime. In general, 128 Technology, Inc. encourages the deployment of highly available routers and conductors, as this will provide service continuity in the event of network failures, software faults, or hardware downtime (both scheduled and unscheduled).
+High availability (or “HA”) is the practice of deploying additional network elements for traffic resiliency, to account for link or system downtime. In general, we encourage the deployment of highly available routers and conductors, as this will provide service continuity in the event of network failures, software faults, or hardware downtime (both scheduled and unscheduled).
 
 :::note
 There are other types of protection afforded SSR-powered networks, including path protection (via peer path selection) and link impairment protection (via session resiliency features, packet duplication, packet retransmitions, etc.), but these are not a consequence of supplying two nodes to mitigate the impact of failures.
@@ -47,7 +47,7 @@ This state sharing occurs via a high-performance database that is available to b
 
 For SSR routers, session state synchronization for a session will occur only after a number of packets have been exchanged bi-directionally. This is to avoid the overhead of state synchronization for short-lived sessions (fewer than twelve packets), where a client reinitiating the session anew is as efficient as recovery.
 
-128T conductors also leverage the redundancy link for state synchronization, to checkpoint the status of connected systems, configuration updates, and alarms.
+Conductors also leverage the redundancy link for state synchronization, to checkpoint the status of connected systems, configuration updates, and alarms.
 
 #### Leader Election
 In addition to state synchronization, the SSR software also uses the redundancy link for _leader election_ – the term used to describe the negotiation between the two systems for determining which is more fit for active duty. Because the SSR software is comprised of a number of discrete software processes (daemons), there are actually multiple "leaders" for each dual node HA system simultaneously. Below is the sample output of the command `show system processes node all` from a highly available system:

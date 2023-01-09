@@ -117,7 +117,7 @@ Apply a capture-filter on the LAN-side `device-interface`, and set the filter to
 After running tests, retrieve the file from the system for post-processing. We have had success using the `dnsanon` tool to extract the contents of a PCAP file into a text file containing the DNS queries. The `dnsanon` tool can be found at https://ant.isi.edu/software/dnsanon/.
 
 :::note
-The `dnsanon` tool is open source software and not supported by 128 Technology. Use at your own risk.
+The `dnsanon` tool is open source software and is not supported. Use at your own risk.
 :::
 
 Install dnsanon onto a CentOS system using the following commands:
@@ -280,7 +280,7 @@ Once the service definitions have been committed, re-execute the same tests and 
 
 Now that the service has been identified properly, we can assign the appropriate policy to it. While design of service policy is beyond the scope of this guide, it is important to document the policy to assist in troubleshooting and knowledge transfer.
 
-At 128 Technology, we recommend documenting services with the following attributes, at a minimum:
+We recommend documenting services with the following attributes, at a minimum:
 
 - Name
 - Address range
