@@ -1,11 +1,11 @@
 ---
-title: 128T Monitoring Agent
+title: Monitoring Agent
 sidebar_label: Monitoring Agent
 ---
 
-The 128T Monitoring Agent is an entity for collecting data from a node running 128T software and to push it to a collector. It is capable of collecting the data from several sources such as metrics, events etc. The current mechanism of monitoring a 128T router involves performing REST or GraphQL queries from the conductor. At scale, this can become inefficient and be problematic in terms of the performance of the conductor. Additionally it is important to interact with 3rd party monitoring platforms as means for organizations to collect, analyze and report using various KPIs available from 128T software and other application in the network.
+The SSR Monitoring Agent is an entity for collecting data from a node running SSR software and to push it to a collector. It is capable of collecting the data from several sources such as metrics, events etc. The current mechanism of monitoring an SSR involves performing REST or GraphQL queries from the conductor. At scale, this can become inefficient and be problematic in terms of the performance of the conductor. Additionally it is important to interact with 3rd party monitoring platforms as means for organizations to collect, analyze and report using various KPIs available from SSR software and other application in the network.
 
-The monitoring agent at its core is designed to be able to push data to external platforms. It currently leverages the [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) collection stack on every 128T router. However, the monitoring agent is designed with other tools and scale in mind. The monitoring agent is composed of the following:
+The monitoring agent at its core is designed to be able to push data to external platforms. It currently leverages the [Telegraf](https://www.influxdata.com/time-series-platform/telegraf/) collection stack on every SSR. However, the monitoring agent is designed with other tools and scale in mind. The monitoring agent is composed of the following:
 
 - **monitoring-agent-cli**
   Used for configuring and interacting with the underlying application
@@ -19,17 +19,17 @@ The monitoring agent at its core is designed to be able to push data to external
 ## Installation
 
 ### Plugin
-For deployments running 128T version `5.1.0` or greater on the conductor, install the monitoring agent plugin for configuration management.
+For deployments running SSR version `5.1.0` or greater on the conductor, install the monitoring agent plugin for configuration management.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
 :::
 
 ### Manual installation
-The 128T Monitoring Agent can be obtained from the official 128T software repository. The latest 128T-monitoring-agent should always be used and is compatible with `128T >= 4.1.0`
+The SSR Monitoring Agent can be obtained from the official SSR software repository. The latest 128T-monitoring-agent should always be used and is compatible with `128T >= 4.1.0`
 
 :::important
-Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported 128T versions. It should be preferred for new installations and upgrades.
+Monitoring Agent 3.X deprecates prior releases and is compatible with all previously supported SSR versions. It should be preferred for new installations and upgrades.
 :::
 
 The agent can be install using the `dnf` utility.
@@ -259,7 +259,7 @@ outputs:
 
 When multiple instances of the Monitoring Agent are running, two inputs with the same name can collide (be started/stopped/reconfigured by both instances) even if they are listed in separate `config.yaml` files. By default, the name of the directory containing the config file will be used as the name of the environment in order to distinguish them. Alternatively, the config `name` field can be explicitly specified to identify the unique environment.
 
-The `enabled` field is meant as global toggle for applying the monitoring agent functionality. When set to `disabled` the monitoring agent will remain dormant on the 128T.
+The `enabled` field is meant as global toggle for applying the monitoring agent functionality. When set to `disabled` the monitoring agent will remain dormant on the SSR.
 
 `lib-directory` is the root directory for the Monitoring Agent. Other directores exist relative to it. This is useful when intending to isolate a set of Monitoring Agent elements from others.
 
@@ -267,7 +267,7 @@ Each of the `tags`, a collection of key/value pairs, are used to add meta inform
 
 `sample-interval` and `push-interval` indicate the frequency (in seconds) for how often the data is collected and subsequently pushed to the collection target. When the `push-interval` value is greater than the `sample-interval`, the agent will produce `ceiling(push-interval/sample-interval)` samples collected within the push duration. It is recommended to configure the `push-interval` as a multiple of `sample-interval`. These values can be overridden at the input level for finer control of agent's behavior.
 
-The `inputs` represent a single unit of collection. This can be a combination of inputs available from `telegraf` as well as other inputs developed by 128T. The function and configuration of each of the 128T provided inputs can be found in subsequent sections. For `telegraf` inputs please refer to the [influx documentation online](https://docs.influxdata.com/telegraf/v1.13/plugins/plugin-list/#input-plugins). Each `input` can be a combination of one or more collectors and can contain other collector specific information. For each of the inputs, a user can also configure an `include-outputs` which is a list of outputs to send the collected information to. This allows the user to build a matrix of inputs and outputs and provides a granular control over which input should be sent to what output. Similarly, the user can also configure an `exclude-outputs` which will include all defined outputs except the one specified.
+The `inputs` represent a single unit of collection. This can be a combination of inputs available from `telegraf` as well as other inputs developed by Juniper. The function and configuration of each of the SSR provided inputs can be found in subsequent sections. For `telegraf` inputs please refer to the [influx documentation online](https://docs.influxdata.com/telegraf/v1.13/plugins/plugin-list/#input-plugins). Each `input` can be a combination of one or more collectors and can contain other collector specific information. For each of the inputs, a user can also configure an `include-outputs` which is a list of outputs to send the collected information to. This allows the user to build a matrix of inputs and outputs and provides a granular control over which input should be sent to what output. Similarly, the user can also configure an `exclude-outputs` which will include all defined outputs except the one specified.
 
 The `outputs` represent a data sink where the collected information is to be delivered. By virtue of using `telegraf`, the monitoring agent gets automatic support of the [available outputs supported by telegraf](https://docs.influxdata.com/telegraf/v1.13/plugins/plugin-list/#output-plugins). Each `input` can be configured to be delivered to one or more `output`.
 
@@ -279,7 +279,7 @@ The `monitoring-agent` uses a well-defined directory structure where it derives 
 
 Path: `/var/lib/128t-monitoring/inputs/`
 
-The `inputs` directory contains config files for the various inputs that are enabled in the monitoring-agent configuration. The monitoring agent expects to see a file called `<input-name.conf>` in this directory. Users can override the file name by specifying `conf: <filename.conf>` in the input definition within the config above. This file should only contain the telegraf definition for the input(s) that belong and not any other configuration. Configuration for all the 128T inputs will automatically be staged in the inputs directory. See the Config Examples section below for more details.
+The `inputs` directory contains config files for the various inputs that are enabled in the monitoring-agent configuration. The monitoring agent expects to see a file called `<input-name.conf>` in this directory. Users can override the file name by specifying `conf: <filename.conf>` in the input definition within the config above. This file should only contain the telegraf definition for the input(s) that belong and not any other configuration. Configuration for all the SSR inputs will automatically be staged in the inputs directory. See the Config Examples section below for more details.
 
 ### Outputs
 
@@ -327,7 +327,7 @@ Users should not make changes to these files as they will be overwritten by the 
 
 `/var/lib/128t-monitoring/samples/`
 
-The `samples` directory contains example configurations for the included 128T collectors. You can also display these using the [`monitoring-agent-cli`](#sample-config).
+The `samples` directory contains example configurations for the included SSR collectors. You can also display these using the [`monitoring-agent-cli`](#sample-config).
 
 ## Config Examples
 
@@ -337,7 +337,7 @@ The following examples higlight just a few ways the monitoring agent can be conf
 
 #### t128_metrics
 
-This example configures the `t128_metrics` collector to gather a set of default metrics from the 128T. This file is also included in the samples directory.
+This example configures the `t128_metrics` collector to gather a set of default metrics from the SSR. This file is also included in the samples directory.
 
 Path: `/var/lib/128t-monitoring/inputs/t128_metrics.conf`
 
@@ -584,10 +584,10 @@ Within an **input** configuration, several variables have been made available fo
 
 | Value             | Meaning                                           | Version Introduced |
 | ----------------- | ------------------------------------------------- | ------------------ |
-| `${ROUTER}`       | The router name of the running 128T instance      | 3.0.0              |
-| `${NODE}`         | The node name of the running 128T instance        | 3.0.0              |
-| `${128T_VERSION}` | The version of the running 128T instance          | 3.0.0              |
-| `${WEB_PORT}`     | A local port that can be used to access 128T APIs | 3.0.0              |
+| `${ROUTER}`       | The router name of the running SSR instance      | 3.0.0              |
+| `${NODE}`         | The node name of the running SSR instance        | 3.0.0              |
+| `${128T_VERSION}` | The version of the running SSR instance          | 3.0.0              |
+| `${WEB_PORT}`     | A local port that can be used to access SSR APIs | 3.0.0              |
 
 An example of this would be:
 
@@ -661,7 +661,7 @@ The `monitoring-agent validate` command will ensure that the monitoring-agent co
 
 ### Sample Config
 
-The `monitoring-agent-cli sample` command can be used to view the various collectors that are created as part of the 128T monitoring agent. The `list-available` command will simply show the set of available inputs (and outputs) that are packaged as part of the 128T monitoring-agent. These are in addition to the ones available natively via telegraf. For example:
+The `monitoring-agent-cli sample` command can be used to view the various collectors that are created as part of the SSR monitoring agent. The `list-available` command will simply show the set of available inputs (and outputs) that are packaged as part of the SSR monitoring-agent. These are in addition to the ones available natively via telegraf. For example:
 
 ```console
 # monitoring-agent-cli sample list-available
@@ -790,17 +790,17 @@ Stopping telegraf service 128T-telegraf@t128_arp_state.service
 Stopping telegraf service 128T-telegraf@t128_device_state.service
 ```
 
-## 128T Collectors
+## Collectors
 
-The 128T monitoring-agent comes pre-packaged with a set of collectors to assist in the monitoring of the 128T platform. Here are the various collectors and how to use them:
+The monitoring-agent comes pre-packaged with a set of collectors to assist in the monitoring of the SSR platform. Here are the various collectors and how to use them:
 
 ### Metric collector
 
-The `t128_metrics` input is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that 128T recommends a network operator to monitor. The various configuration options available under `authority > monitoring > input > metrics` are as follows:
+The `t128_metrics` input is responsible for collecting the configured metrics from a running system. By default, the metrics specified in `/etc/128t-monitoring/collectors/t128_metrics/default_config.toml` will be used by the collector. This represents a set of pre-configured metrics that we recommend that a network operator monitor. The various configuration options available under `authority > monitoring > input > metrics` are as follows:
 
 | Element            | Type      | Description                                                                            |
 | ------------------ | --------- | -------------------------------------------------------------------------------------- |
-| use-default-config | boolean   | Whether to use the set of builtin metrics as recommended by 128T router for monitoring |
+| use-default-config | boolean   | Whether to use the set of builtin metrics as recommended by the SSR for monitoring |
 | metric             | list      | List of metrics                                                                        |
 | metric > name      | string    | The desired name of the metric to include in the telegraf                              |
 | metric > id        | metric-id | The ID of the metric as it exists in the REST API                                      |
@@ -863,7 +863,7 @@ The configuration file in a `TOML` definition of metrics has the following forma
     service = []
 ```
 
-Each element of the configuration specifies an aspect of the [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v1.8/write_protocols/line_protocol_tutorial/) or the 128T REST API. REST API documentation is available from the "About This System" page in the SSR GUI.
+Each element of the configuration specifies an aspect of the [InfluxDB line protocol](https://docs.influxdata.com/influxdb/v1.8/write_protocols/line_protocol_tutorial/) or the SSR REST API. REST API documentation is available from the "About This System" page in the SSR GUI.
 
 - **name**
   The line protocol measurement to be used for the output
@@ -875,10 +875,10 @@ Each element of the configuration specifies an aspect of the [InfluxDB line prot
   A line protocol field key that should exist in the output
 
 - **fields.value** (e.g. `stats/aggregate-session/service/packets-received`)
-  The 128T KPI providing the value for the associated field key. See the 128T REST API documentation available from the "About This System" page in the SSR GUI for a full list. Note that the documentation prefixes the KPIs with `/router/{router}/`.
+  The SSR KPI providing the value for the associated field key. See the SSR REST API documentation available from the "About This System" page in the SSR GUI for a full list. Note that the documentation prefixes the KPIs with `/router/{router}/`.
 
 - **parameters** (e.g. `service`)
-  The 128T parameters that should be preserved as line protocol tags in the output. When a non-empty list of values is provided for a parameter, only KPIs with matching parameters will be included in the output.
+  The SSR parameters that should be preserved as line protocol tags in the output. When a non-empty list of values is provided for a parameter, only KPIs with matching parameters will be included in the output.
 
 A custom set of metrics can be collected by configuring the `t128_metrics` input as described in the sample. The configuration follows the same structure as the default file, but the metrics are nested under the input.
 
@@ -994,7 +994,7 @@ In versions 1.2.0, 2.1.0 and later, the more feature rich `t128_events` seen abo
 | Release      | Modification                                                    |
 | ------------ | --------------------------------------------------------------- |
 | 3.3.1        | `t128_device_state` input type was introduced                   |
-| 3.3.1        | `provisional-status` tag was added (available in 128T >= 4.5.3) |
+| 3.3.1        | `provisional-status` tag was added (available in SSR >= 4.5.3) |
 | 1.2.1, 2.1.1 | `mac-address` tag was introduced                                |
 
 
@@ -1206,7 +1206,7 @@ In versions 3.3.1 and later, the simplified `t128_arp_state` seen above should b
 
 ### LTE Collector
 
-The `lteMetricCollector128t` collector when run will scan the current node configuration for any 128T supported and configured LTE devices. This collector can be used for pushing the `signal-strength` and `carrier` information to the monitoring stack. For example:
+The `lteMetricCollector128t` collector when run will scan the current node configuration for any SSR supported and configured LTE devices. This collector can be used for pushing the `signal-strength` and `carrier` information to the monitoring stack. For example:
 
 ```toml
 [[inputs.exec]]
@@ -1470,7 +1470,7 @@ When dealing with multiple child nodes, it is advised that each be handled in se
 The monitoring agent `session-records` input can be used to generate session records on the system.
 
 :::note
-The session record input is only compatible with 128T >= 5.4.0.
+The session record input is only compatible with SSR >= 5.4.0.
 :::
 
 The various configuration options available under authority > monitoring > input > session-records are as follows:
@@ -1500,7 +1500,7 @@ The `t128_session_records` collector allows a simple `TOML` configuration as bel
 ```
 
 
-## 128T Processors
+## SSR Processors
 
 ### Transform Processor
 
@@ -1656,7 +1656,7 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 
 #### New Features and Improvements:
  - **PLUGIN-667** Introduce a new monitoring agent plugin to better manage the monitoring agent through the GUI and PCLI. Some key highlights are:
- * Support all the 128T developed collectors such as metrics, events, top-sessions, etc.
+ * Support all the SSR developed collectors such as metrics, events, top-sessions, etc.
  * Support the most commonly used outputs such as file, syslog, `Kafka`, etc.
  * Support multi-line input fields for generic telegraf configuration with TOML syntax validation.
 
@@ -1673,9 +1673,9 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 - **MON-383** Allow double backslash in input configuration files.
 
 #### Issues Fixed:
-- **MON-354** `t128_device_state` collector has incorrect tags and fields for 128T versions < 4.5.3
+- **MON-354** `t128_device_state` collector has incorrect tags and fields for SSR versions < 4.5.3
 
-  _**Resolution**_ Adjust some tags and fields in the `t128_device_state` collector for 128T versions < 4.5.3
+  _**Resolution**_ Adjust some tags and fields in the `t128_device_state` collector for SSR versions < 4.5.3
 
 - **I95-43137** Session records and other JSON fields are truncated when used with the `syslog` output.
 
@@ -1744,23 +1744,23 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 
 #### New Features and Improvements:
 
-- **MON-297** The LTE collector will use the state file generated by 128T software where possible.
+- **MON-297** The LTE collector will use the state file generated by SSR software where possible.
 
 #### Issues Fixed
 
-- **MON-300** Prevent the monitoring agent service from accidentally starting 128T service
+- **MON-300** Prevent the monitoring agent service from accidentally starting SSR service
 
-  _**Resolution**_ If 128T is not running, the MA will fail to start instead of starting 128T
+  _**Resolution**_ If SSR is not running, the MA will fail to start instead of starting SSR
 
-- **MON-294** LTE interfaces were not found in the 128T configuration
+- **MON-294** LTE interfaces were not found in the SSR configuration
 
-  _**Resolution**_ Account for the differences in the configuration across various 128T software versions.
+  _**Resolution**_ Account for the differences in the configuration across various SSR software versions.
 
 ### Release 3.0.0
 
 #### New Features and Improvements
 
-- **MON-230** Make 3.X version of the Monitoring agent compatible with 4.1.0 <= 128T < 6.0.0
+- **MON-230** Make 3.X version of the Monitoring agent compatible with 4.1.0 <= SSR < 6.0.0
 - **MON-233** Upgrade telegraf to 1.14.5
 - **MON-234** Improve metrics collection performance by creating a native Telegraf plugin
 - **MON-198** Provide sample and push interval overrides per input in the agent's config
@@ -1768,9 +1768,9 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 
 #### Issues Fixed
 
-- **MON-280** Make the arp state collector compatible with 128T 5.X
+- **MON-280** Make the arp state collector compatible with SSR 5.X
 
-  _**Resolution**_ The arp state collector now dynamically handles data collection depending on the 128T version.
+  _**Resolution**_ The arp state collector now dynamically handles data collection depending on the SSR version.
 
 
 ### Release 2.1.1
@@ -1778,7 +1778,7 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 #### New Features and Improvements
 
 - **MON-225** Update telegraf dependency to 1.14.3
-- **MON-227** Allow this version of the Monitoring Agent to be installed with 128T < 6.0.0 (previously < 5.0.0)
+- **MON-227** Allow this version of the Monitoring Agent to be installed with SSR < 6.0.0 (previously < 5.0.0)
 - **MON-218** Expose MAC address in the device state input
   - Allow better correlation between device and network interfaces.
 
@@ -1849,9 +1849,9 @@ For help configuring this option, please refer to the [Monitoring Agent Guide](p
 ### Release 2.0.0
 
 #### New Features and Improvements
-- **MON-126** Automatically stage all 128T input configuration for easy of use
+- **MON-126** Automatically stage all SSR input configuration for easy of use
 
-The configuration for all 128T collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
+The configuration for all SSR collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
 
 - **MON-148** Top applications, sessions and sources input plugin
 
@@ -1867,7 +1867,7 @@ A new stable version of telegraf was released upstream with several new inputs s
 
 - **MON-175** LTE metric collect will include SNR signal strength ####
 
-The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the 128T router.
+The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the SSR.
 
 
 #### Issues Fixed
@@ -1971,9 +1971,9 @@ For help configuring this option, please refer to the [Monitoring Agent Guide](p
 
 #### New Features and Improvements
 
-- **MON-126** Automatically stage all 128T input configuration for easy of use
+- **MON-126** Automatically stage all SSR input configuration for easy of use
 
-The configuration for all 128T collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
+The configuration for all SSR collectors such as t128_metrics, t128_events etc will automatically be staged in the inputs directory for convenience.
 
 - **MON-148** Top applications, sessions and sources input plugin
 
@@ -1989,7 +1989,7 @@ A new stable version of telegraf was released upstream with several new inputs s
 
 - **MON-175** LTE metric collect will include SNR signal strength ####
 
-The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the 128T router.
+The `t128_lte_metric` collector will look for and report SNR signal strength if it is reported by the SSR.
 
 
 #### Issues Fixed

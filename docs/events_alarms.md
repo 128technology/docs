@@ -100,7 +100,7 @@ sidebar_label: Alarms
 | ------------------------------------------------ | ------------------------------------------------------------ |
 | Interface is down for an Ethernet WAN connection | The next hop networking equipment is down. Troubleshoot by checking for link status on adjacent equipment, adjacent switch ports, etc. |
 | Interface is down for an HA or LAN connection    | The next hop networking equipment is down. Troubleshoot by checking for link status on adjacent equipment, adjacent switch ports, etc. |
-| The down interface is an LTE interface           | Check that strength and status of the LTE connection by using the `show device-interface router <router name> id <interface id>` command.<br/>• If the signal strength is marginal, poor, or 0 the LTE interface is malfunctioning.<br/>• If the system mode is not listed as LTE the signal is malfunctioning.<br/>• If the Operation Status is down, the LTE interface is malfunctioning.<br/><br/>In the event of the conditions above, contact 128 Technology. |
+| The down interface is an LTE interface           | Check that strength and status of the LTE connection by using the `show device-interface router <router name> id <interface id>` command.<br/>• If the signal strength is marginal, poor, or 0 the LTE interface is malfunctioning.<br/>• If the system mode is not listed as LTE the signal is malfunctioning.<br/>• If the Operation Status is down, the LTE interface is malfunctioning.<br/><br/>In the event of the conditions above, contact Juniper. |
 
 ------
 
@@ -373,7 +373,7 @@ sidebar_label: Alarms
 
 | Cause                                            | Troubleshooting Step                                         |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| Unable to read entitlement data from certificate | Ensure that the certificate installed on the system matches the one received from 128 Technology.  Run `install128t` to reinstall the certificate.  If the problem persists, contact customer support to obtain a new certificate. |
+| Unable to read entitlement data from certificate | Ensure that the certificate installed on the system matches the one received from Juniper.  Run `install128t` to reinstall the certificate.  If the problem persists, contact customer support to obtain a new certificate. |
 
 ------
 

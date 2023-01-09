@@ -3,7 +3,7 @@ title: Packet Capture
 sidebar_label: Packet Capture
 ---
 
-PCAPs are one of the most useful tools to debug traffic issues on the 128T Router, as well as wider networking issues. The nature of troubleshooting is that it is transitory; once the problem has been identified, the system state should be restored to its previous state (or possibly with necessary modifications as a result of the troubleshooting exercise). This guide walks through the approaches for applying dynamic capture filters to the 128T Networking Platform.
+PCAPs are one of the most useful tools to debug traffic issues on the SSR, as well as wider networking issues. The nature of troubleshooting is that it is transitory; once the problem has been identified, the system state should be restored to its previous state (or possibly with necessary modifications as a result of the troubleshooting exercise). This guide walks through the approaches for applying dynamic capture filters to the SSR Networking Platform.
 
 Packet capture information can be viewed and configured from both the PCLI and the [user interface](#packet-capture-in-the-gui). 
 
@@ -13,7 +13,7 @@ Enabling packet capture through configuration, while useful for defining filters
 
 When using dynamic capture filters, the following rules apply:
 
-- Creating or removing a dynamic capture filter does not persist and will not survive a restart of the 128T software
+- Creating or removing a dynamic capture filter does not persist and will not survive a restart of the SSR software
 - Interactions exist with configured capture filters
   - If capture filters exist within the configuration and a configuration change happens that does not impact static capture filters, the configuration change will not affect dynamic capture filters
   - If static capture filters exist within the configuration, and if a configuration change modifies the static capture filters, all dynamic capture filters will be removed
@@ -89,25 +89,25 @@ The syntax for displaying static and dynamic capture filters can be seen below:
 
 ## Selective Packet Capture
 
-While a powerful tool, it can be difficult to isolate a particular set of packets pertaining to a service using device-interface packet captures; especially if the session that is being tracked is an SVR session, where the IPs and L4 ports will be NATed. To simplify the troubleshooting effort, selective packet captures provides filtering controls beyond what is capable with BPF, and affords the administrator the ability to match traffic by service. A powerful capability of this feature is to apply a trace not only on the ingress node where the capture is defined, but also triggering traces on every subsequent 128T node the session traverses.
+While a powerful tool, it can be difficult to isolate a particular set of packets pertaining to a service using device-interface packet captures; especially if the session that is being tracked is an SVR session, where the IPs and L4 ports will be NATed. To simplify the troubleshooting effort, selective packet captures provides filtering controls beyond what is capable with BPF, and affords the administrator the ability to match traffic by service. A powerful capability of this feature is to apply a trace not only on the ingress node where the capture is defined, but also triggering traces on every subsequent SSR node the session traverses.
 
 Selective capture can operate in one of two modes:
 - _local-only_ mode will trigger a capture only on the node to which the command is issued
-- _default_ mode will propagate the capture to all subsequent 128T nodes the session traverses
+- _default_ mode will propagate the capture to all subsequent SSR nodes the session traverses
 
 :::note
-Much like per device interface packet captures, selective packet captures will not survive a restart of the 128T.
+Much like per device interface packet captures, selective packet captures will not survive a restart of the SSR.
 :::
 
 ### Default Mode
 
-There are four locations within the 128T wherein capturing packets will provide full visibility into the behavior of a packet.
+There are four locations within the SSR wherein capturing packets will provide full visibility into the behavior of a packet.
 1. Forward flow of a session arriving on the ingress interface (before any NATing has been applied)
 2. Forward flow of a session leaving the egress interface (post NAT with decrypted metadata)
 3. Reverse flow of a session arriving on the egress interface
 4. Reverse flow of a session leaving the ingress interface
 
-When creating a selective capture filter on the LAN interface, sessions will be tagged with an action that will capture all packets for the session at each of the four points listed above. Additionally, [metadata](concepts_metadata.md) will indicate to subsequent 128T nodes/routers to enable the packet capture for this session. Each 128T node will install capture filters in each of the four capture points for the same session. A [PCAP](https://www.tcpdump.org/pcap.html) file will be created on each node, containing the name of the service captured.
+When creating a selective capture filter on the LAN interface, sessions will be tagged with an action that will capture all packets for the session at each of the four points listed above. Additionally, [metadata](concepts_metadata.md) will indicate to subsequent SSR nodes/routers to enable the packet capture for this session. Each SSR node will install capture filters in each of the four capture points for the same session. A [PCAP](https://www.tcpdump.org/pcap.html) file will be created on each node, containing the name of the service captured.
 
 ![Typical Network Diagram](/img/ts_packet_capture_selective_capture.png)
 

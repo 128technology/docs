@@ -1,5 +1,5 @@
 ---
-title: 128T Installer 2.5 Release Notes
+title: Installer 2.5 Release Notes
 sidebar_label: 2.5
 ---
 
@@ -7,7 +7,7 @@ sidebar_label: 2.5
 
 ### New Features and Improvements
 
-- Support for 128T version 4.4, the 2.5 installer version is required for upgrading to the 128T 4.4 version.
+- Support for SSR version 4.4, the 2.5 installer version is required for upgrading to the SSR 4.4 version.
 
 - **IN-206** - Support for Offline ISO importing
 
@@ -17,7 +17,7 @@ sidebar_label: 2.5
 
 ### Issues Fixed
 
-- **IN-238** - Installer does not provide feedback that a certificate has Expired. With this release the installer will now notify the user when their 128T release certificate has expired before attempting an upgrade/install operation.
+- **IN-238** - Installer does not provide feedback that a certificate has Expired. With this release the installer will now notify the user when their SSR release certificate has expired before attempting an upgrade/install operation.
 
 - **IN-248** - Upgrade may hang on `save-to-local: rebuilding package` operation. 
 
@@ -44,7 +44,7 @@ sidebar_label: 2.5
   To diagnose the problem, try running: `rpm -Va --nofiles --nodigest`.
   If this is a corrupted RPMDB, running `rpm --rebuilddb` may address the issue.
 
-  _**Cause:**_ Installed version of the RPM's coming from a later version of the Supported 128T OS version. 128T Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
+  _**Cause:**_ Installed version of the RPM's coming from a later version of the Supported SSR OS version. SSR Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
 
   _**Corrective Action:**_ For the offending RPM that comes from a different version of the OS than is installed and running, perform either operation:
 
