@@ -507,7 +507,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **[I95-21775 BGP VRF Support:](concepts_learning_VRF_routes.md)** Support for learning VRF routes through BGP and the associated routing tables has been added. Virtual Routing and Forwarding (VRF) instances make it possible to maintain multiple routing tables with overlapping address spaces in one router.
 ------
-- **[I95-21776 Ethernet Over SVR Support:](concepts_EthOverSVR.md)** Ethernet Over SVR (EoSVR) is a proprietary Juniper protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between 128Ts with increased security and efficiency, without the overhead of IP packet encapsulation.
+- **[I95-21776 Ethernet Over SVR Support:](concepts_EthOverSVR.md)** Ethernet Over SVR (EoSVR) is a proprietary Juniper protocol that extends the Ethernet broadcast domain across multiple sites. EoSVR provides a site to site ethernet broadcast domain between SSRs with increased security and efficiency, without the overhead of IP packet encapsulation.
 ------
 - **I95-23206 Custom Chart Legends:** This feature allows the user to assign a custom series name to each trace in the legend by hovering over the series name, and clicking on the displayed icon. The pop up dialog allows you to assign a name to the series.
 ------

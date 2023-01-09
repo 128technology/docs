@@ -7,7 +7,7 @@ sidebar_label: 2.1
 ### Issues Fixed
 
 - **IN-106, IN-111** - Installer fails due to presense of .repodata 
-- **IN-112** - SSR  not started when installer does not complete but no changes were made on the system
+- **IN-112** - SSR not started when installer does not complete but no changes were made on the system
 - **IN-130** - New installation or upgrade may result in a failed installation or upgrade 
 
 ### Caveats
@@ -18,7 +18,7 @@ Curl error (6): Couldn't resolve host name for https://mirrors.128technology.com
 [Could not resolve host: mirrors.128technology.com; Unknown error]
   ```
 
-  _**Cause:**_ The router node could not resolve the SSR  software repository
+  _**Cause:**_ The router node could not resolve the SSR software repository
 
   _**Corrective Action:**_ When performing the upgrade from less than 4.1.0 to 4.1.0, ensure internet or Conductor access (where Conducted hosted services are enabled)
 

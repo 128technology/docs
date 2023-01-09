@@ -307,7 +307,7 @@ I95-45054, I95-45056, I95-45059
 ------
 - **I95-42318 Broken symlink for plugins results in a highway crash:** Resolved the handling of a broken symlink for plugins, which was resulting in a failure to apply config and a highway crash.
 ------
-- **I95-42438 Save Tech Support tries to run when SSR service is down:** In situations where the PCLI is still active, but the SSR  service is down, trying to run `save tech support` will appear to work, but does not return any info. This issue has been resolved, and will return a message when information is not retrievable. 
+- **I95-42438 Save Tech Support tries to run when SSR service is down:** In situations where the PCLI is still active, but the SSR service is down, trying to run `save tech support` will appear to work, but does not return any info. This issue has been resolved, and will return a message when information is not retrievable. 
 ------
 - **I95-42608 BGP over SVR not able to open BGP session when routingManager is active on different node than interface:** This has been resolved by sending the packet to the node where routingManager is active via the inter node path.
 ------
@@ -406,7 +406,7 @@ I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95
 ------
 - **I95-42942 GUI Session Capture not working:** Resolved an issue with Packet Count and Session Count options. Session Capture now works as expected. 
 ------
-- **I95-43327 Exchange FPM loss information between adjacent SSR  nodes:** Added a mechanism to communicate marking counts between adjacent nodes to allow both sides to understand the calculated loss. 
+- **I95-43327 Exchange FPM loss information between adjacent SSR nodes:** Added a mechanism to communicate marking counts between adjacent nodes to allow both sides to understand the calculated loss. 
 ------
 - **I95-43809 CLI commands fail to run from the Conductor:** Resolved an issue where requests made to a HA conductor would not always try its peer.
 ------
