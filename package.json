@@ -18,7 +18,7 @@
     "@docusaurus/preset-classic": "^2.2.0",
     "broken-link-checker-local": "^0.2.1",
     "classnames": "^2.2.6",
-    "mermaid": "^9.1.2",
+    "mermaid": "^9.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-simple-flowchart": "^1.2.4",
