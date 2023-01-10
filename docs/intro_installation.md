@@ -23,7 +23,7 @@ The examples listed in this guide generally prefer running commands as a non-roo
 Installation is done from the SSR ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
 - [Download the ISOs](intro_downloading_iso.md)
 - [Create Bootable Media](intro_creating_bootable_usb.md)
-- [Perform the Interactive ISO installation](intro_installation_bootable_media.md) 
+- [Perform the Interactive ISO installation](intro_installation_bootable_media.mdx) 
 - [Install a Conductor](single_conductor_install.mdx)
 - [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
 - [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.mdx)
@@ -43,7 +43,7 @@ Beginning with version 6.0, an image-based ISO installation process has been imp
 The Image-Based Installation process supports Mist WAN Assurance; the Mist-managed WAN Assurance offering. Do not use the image-based installation for conductor-managed WAN Telemetry deployments.
 :::
 
-For customers with conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.md) continues to be used for upgrades and new installations.
+For customers with conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.mdx) continues to be used for upgrades and new installations.
 
 ### Regarding Upgrades
 

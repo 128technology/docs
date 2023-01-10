@@ -11,7 +11,7 @@ The steps in this section describe the *interactive conductor installation* from
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
 :::
 
-To install a router **after** installing and configuring the Conductor, use the [SSR Installation](intro_installation_bootable_media.md#initialize-the-ssr-node). The [Router Installation Using OTP](intro_otp_iso_install.mdx) procedure can be used to install more complex router configurations. 
+To install a router **after** installing and configuring the Conductor, use the [SSR Installation](intro_installation_bootable_media.mdx#initialize-the-ssr-node). The [Router Installation Using OTP](intro_otp_iso_install.mdx) procedure can be used to install more complex router configurations. 
 
 ## Prerequisites
 
@@ -31,7 +31,7 @@ To install using the Interactive Installation, use the arrow keys to select eith
 
 ![VGA Boot with Interactive Install](/img/install_select_interactive.png)
 
-Differences for the serial console are described in [Serial Console Installation Information](intro_installation_bootable_media.md#serial-console-installation-information). 
+Differences for the serial console are described in [Serial Console Installation Information](intro_installation_bootable_media.mdx#serial-console-installation-information). 
 
 :::note
 Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
@@ -162,7 +162,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 ## Install the Second Conductor HA Node
 
-For the second node for Conductor HA, install the system using the same process beginning with [Installing the ISO](intro_installation_bootable_media.md#installing-the-iso) and ending at [Initialize SSR](intro_installation_bootable_media.md#initialize-the-128t-node) step 2. From step 2, perform the following:
+For the second node for Conductor HA, install the system using the same process beginning with [Installing the ISO](intro_installation_bootable_media.mdx#installing-the-iso) and ending at [Initialize SSR](intro_installation_bootable_media.mdx#initialize-the-128t-node) step 2. From step 2, perform the following:
 
 1. When prompted for `What kind of Conductor node is this?` Select the **2nd HA Node**.
 
