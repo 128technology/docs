@@ -63,7 +63,7 @@ Additionally, ensure that the profile is applied to your peer paths. This is gen
 
 ### Load Balancing 
 
-Flow Performance Monitoring (FPM) operates on top of existing traffic, and does not intiate its own traffic. Because of the interval timing and sample time, no significant load is added to the path, and no impact to load balancing is generated.  
+Flow Performance Monitoring (FPM) operates on top of existing traffic, and does not intiate its own traffic. Because of the interval timing and sample time, no significant load is added to the path. In `monitor-mode true`, no impact to load balancing is generated.  
 
 When `monitor-mode` is set to `true`, the FPM metrics are collected, but are **not** reported to the load balancer.   
 
