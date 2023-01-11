@@ -15,7 +15,7 @@ The Mist-redirect ZTP process for Conductor-managed deployments is only supporte
 :::
 
 #### High Level Steps:
-- [Install and deploy a Conductor](single_conductor_install.md)
+- [Install and deploy a Conductor](single_conductor_install.mdx)
 - [Import or create a network configuration on the Conductor](single_conductor_config.md)
 - [Create an account on the Mist portal](#1-create-an-account-on-the-mist-portal)
 - [Add your Organization](#2-create-an-organization-for-the-authority)

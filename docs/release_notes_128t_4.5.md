@@ -157,7 +157,7 @@ OR
 
 ### New Features and Improvements
 
-- **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.md). 
+- **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.mdx). 
 
 ### Resolved Issues
 
