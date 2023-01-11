@@ -2,11 +2,11 @@
 title: Manually Installing the SSR
 sidebar_label: Manually Installing the SSR
 ---
-This section describes the manual installation process for the SSR. For automated installation see [Installing from Bootable Media](intro_installation_bootable_media.md). 
+This section describes the manual installation process for the SSR. For automated installation see [Installing from Bootable Media](intro_installation_bootable_media.mdx). 
 
 ## Install Using SSR-Installer
 
-The SSR software installer package is hosted in the Juniper software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md). If you are performing an upgrade, see [Upgrading the SSR Networking Platform](intro_upgrading.md) for upgrade instructions. 
+The SSR software installer package is hosted in the Juniper software repository, located at yum.128technology.com. During installation the system will need access to the internet to retrieve software applications and libraries. Please ensure the system can reach the public internet prior to commencing. For offline installation instructions, follow the [instructions for installing from bootable media](intro_installation_bootable_media.mdx). If you are performing an upgrade, see [Upgrading the SSR Networking Platform](intro_upgrading.md) for upgrade instructions. 
 
 The SSR Software package is available from our public servers located at: `https://software.128technology.com/artifactory/list/generic-128t-legacy-isos-remote/` using the username and token provided to you. The username/token simplifies access and does not require the conversion process used for the certificate. With the latest release of the SSR Installer, both a certificate or username/token can be used for installation. However, to use a username/token for software access, Installer 3.0.0 is required. 
 

@@ -35,4 +35,4 @@ Creating a bootable ISO from Linux, Windows or MacOS is straightforward. The bes
 8. Once validated, eject the USB drive.
 ![Complete](/img/usb_complete.png)
 
-9. After you have created the bootable ISO, follow the [instructions for installing from bootable media](intro_installation_bootable_media.md). 
+9. After you have created the bootable ISO, follow the [instructions for installing from bootable media](intro_installation_bootable_media.mdx). 
