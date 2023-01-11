@@ -298,7 +298,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 ------
 - **I95-40333 Save credentials for accessing SSR software repositories:** `set software access-token` is a new PCLI command to save credentials for accessing SSR software repositories. This provides a way to run `install128t repo authenticate` without dropping to a linux shell. For additional information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
 ------
-- **I95-43048 NIST FIPS Validated Cryptography:** FIPS Enforcement Mode has been added to the  package-based installation processes. Refer to [FIPS Enforcement Mode](intro_installation_bootable_media.md#fips-enforcement-mode) for details.
+- **I95-43048 NIST FIPS Validated Cryptography:** FIPS Enforcement Mode has been added to the  package-based installation processes. Refer to [FIPS Enforcement Mode](intro_installation_bootable_media.mdx#fips-enforcement-mode) for details.
 ------
 - **I95-43785 DSCP Tag Preservation:** When set to `true` the `preserve-dscp` command allows you to preserve DSCP values that have been set in a service class or received on a LAN-Interface, over an SVR path. See [DSCP Preservation](config_dscp_preservation.md) for more inforamation.
 ------

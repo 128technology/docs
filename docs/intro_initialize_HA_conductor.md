@@ -43,7 +43,7 @@ If the software is already installed, launch the initializer from the command li
 	![HA Setup](/img/CloudHA_NodeA1.png)
 
 3. Enter the IP address of Node A that will be used as the HA sync interface.
-4. Continue with step 4 in the [Initialize the SSR Node](intro_installation_bootable_media.md#initialize-the-ssr-node) procedure. After the initialization is complete, reboot Node A as instructed.
+4. Continue with step 4 in the [Initialize the SSR Node](intro_installation_bootable_media.mdx#initialize-the-ssr-node) procedure. After the initialization is complete, reboot Node A as instructed.
 
 	Once Node A has rebooted, you must perform the following steps to configure SSH key-based authentication. Please note the commands vary depending on the public cloud provider.
 

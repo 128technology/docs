@@ -1,0 +1,85 @@
+---
+title: Single Conductor Interactive Installation
+sidebar_label: Single Conductor Interactive Installation
+---
+import InteractiveOverview from './_install_interactiveoverview.md';
+import Prerequisites from './_install_prereqs.md'; 
+import InstallationType from './_install_installtype.md'; 
+import FIPSmode from './_install_fipsmode.md'; 
+import LinuxComplete from './_install_linux_complete.md'; 
+import InitialBoot from './_install_nmtui_router.md'; 
+import VerifyInstall from './_install_verify_install.md';
+
+
+<InteractiveOverview/>
+
+## Prerequisites
+<Prerequisites/>
+
+## Choose the Installation Type
+<InstallationType/>
+
+### FIPS Enforcement Mode
+<FIPSmode/>
+
+## Conductor Installation
+<LinuxComplete/>
+
+### Initial Boot and NMTUI
+<InitialBoot/>
+
+### Initialize the SSR Node
+
+The SSR Initializer tunes your operating system, prepares the platform to run the SSR software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot.
+
+There are three different types of conductor installations; 
+- Standalone Conductor 
+- [Conductor High Availability](ha_conductor_install.md)
+- [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md)
+
+### Standalone Conductor
+
+1. On the SSR Initializer wizard screen, use the space bar to select the **Conductor** role for the SSR node, and press the **Enter** key to select **OK**.
+
+  ![SSR Role](/img/initializer_Serial2.png)
+
+2. When asked _What kind of Router/Conductor node is this?_, select **Standalone** from the following options:
+
+  ![Identify the Node](/img/initializer_standalone.png)
+
+- **Standalone:** This router/conductor has no highly available peer, and is not currently planned for high availability.
+
+3. Enter the following system properties on the **Node Info** screen:
+
+    ![Node Information](/img/initializer_Serial5.png)
+
+    - **Node Name:** The name of the system within your Conductor, for example, _conductor-node1_. By default this field uses the Linux system's hostname. The node name identifies the conductor node under the **Conductor** element in the Authority. 
+
+    :::note
+    Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).
+    :::
+    - **Conductor Name:** The name of the Conductor system as a whole. When referring to a running SSR software instance, it is identifiable by the full name; e.g., `conductor-node1.conductor`. The full system name is reflected in the PCLI prompt.
+
+4. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. 
+  :::note
+  Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
+  :::
+
+  ![Password Setup](/img/initializer_Serial6.png)
+
+5. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact Juniper Technical Support.
+
+6. When prompted, select `<Yes>` to start the conductor.
+
+  ![Initializer Complete](/img/initializer_complete.png)
+
+  :::note
+  A system reboot is required.
+  :::
+
+## Verify the Installation
+<VerifyInstall/>
+
+## Configure the Token
+
+To save repository access credentials, use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
