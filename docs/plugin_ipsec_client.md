@@ -3,7 +3,7 @@ title: IPsec Client plugin
 sidebar_label: IPsec Client
 ---
 
-The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPsec endpoints through the 128T router. It is possible to configure the plugin for each router to have multiple destination IPsec endpoints and thus the 128T will failover between them. This is accomplished by performing a [Service Function Chain (SFC)](plugin_intro.md#service-function-chaining) with Libreswan, a third-party IPsec client. By enabling this plugin, you can provide IPsec tunnel connectivity to third party providers from your 128T router.
+The 128T-ipsec-client plugin provides a way to send and encrypt traffic to IPsec endpoints through the SSR. It is possible to configure the plugin for each router to have multiple destination IPsec endpoints and thus the SSR will failover between them. This is accomplished by performing a [Service Function Chain (SFC)](plugin_intro.md#service-function-chaining) with Libreswan, a third-party IPsec client. By enabling this plugin, you can provide IPsec tunnel connectivity to third party providers from your SSR.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -317,7 +317,7 @@ The `service-route > next-hop > interface` must point to the corresponding `ipse
 ## Troubleshooting
 
 ### Data Model
-If the data model doesn’t appear in the PCLI or GUI, make sure that you have restarted the 128T service.
+If the data model doesn’t appear in the PCLI or GUI, make sure that you have restarted the SSR service.
 
 ### Logging
 The `/var/log/128technology/persistentDataManager.log` file at trace level will hold whether the configuration generation was run as well as output and return code.
@@ -451,9 +451,9 @@ From the conductor UI, the command can be accessed as shown in the screenshot be
 
 
 ### Systemd Services
-To check the status of the IPsec client service on the router, you can run `show system services` which will show all 128T related services running on the specified node. The one for this plugin is named `128t-ipsec`.
+To check the status of the IPsec client service on the router, you can run `show system services` which will show all SSR related services running on the specified node. The one for this plugin is named `128t-ipsec`.
 
-To verify that the services are running properly on the 128T router:
+To verify that the services are running properly on the SSR:
 * `systemctl status 128t-ipsec@<client>.service`
 
 ### Failover Alarms
@@ -474,13 +474,13 @@ Completed in 0.10 seconds
 ```
 
 ## Appendix
-### Generated 128T Configuration
+### Generated SSR Configuration
 A KNI per remote is created with the name of the `remote` and a single egress KNI is created with the name of the `ipsec-client`.
 
-### User-Specific 128T Configuration
+### User-Specific SSR Configuration
 To allow the maximum flexibility on getting the traffic into the plugin's network namespace and getting the traffic out, we rely on the user to configure those means (usually through services and service routes).
 
-You will need to have the IPsec endpoint bound traffic sent into the KNIs with the names of the `remote`s. You can use builtin 128T failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down. You will also need to configure a way for the traffic to be routed towards the IPsec endpoint after being encrypted. All of this encrypted traffic will be assigned to the `tenant` configured under `ipsec-client`.
+You will need to have the IPsec endpoint bound traffic sent into the KNIs with the names of the `remote`s. You can use builtin SSR failover techniques due to the KNIs being reported operationally down when the corresponding tunnel is down. You will also need to configure a way for the traffic to be routed towards the IPsec endpoint after being encrypted. All of this encrypted traffic will be assigned to the `tenant` configured under `ipsec-client`.
 
 ### Complete Example Configuration
 
@@ -820,7 +820,7 @@ The feature adds support for configuring a custom MSS value on the remote IPSec 
 
 #### Issues Fixed
 
-- **PLUGIN-768** Support the IPSec client plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the IPSec client plugin in SSR versions `5.1.0` and greater.
 - **PLUGIN-611** Added support for plugin state. Plugin state information can be accessed on the PCLI using `show plugins state [router <router>] [node <node>] [{detail | summmary}] 128T-ipsec-client`
 
 ### Release 1.0.6, 2.0.6
@@ -829,7 +829,7 @@ The feature adds support for configuring a custom MSS value on the remote IPSec 
 
 - **PLUGIN-1057** Ensure all critical IPsec client directories are created during installation of the plugin.
 - **PLUGIN-1053** Added an inactive IPsec client plugin state to allow seamless migration from zscaler. The inactive state is achieved by excluding `ipsec-client` from the configuration.
-- **PLUGIN-1046** Provide IPsec client auto-upgrade capability while crossing the 128T version `4.3.0` boundary.
+- **PLUGIN-1046** Provide IPsec client auto-upgrade capability while crossing the SSR version `4.3.0` boundary.
 
 ### Release 1.0.5, 2.0.5
 

@@ -18,7 +18,7 @@ Each running instance of SSR software (generically termed as a _node_) can exist
 The vast majority of node-to-node connections, deployed as highly available systems, are done over directly connected interfaces between collocated machines. As such, bandwidth consumption and firewall management are not applicable. However, it is possible to geographically separate highly available nodes and have them communicate over a WAN, typically in the form of a data center interconnection.
 
 :::important
-Geographic distribution for highly available systems is only supported for nodes serving as conductors. 128 Technology does not support geographic distribution of nodes acting as routers.
+Geographic distribution for highly available systems is only supported for nodes serving as conductors. Juniper does not support geographic distribution of nodes acting as routers.
 :::
 
 When deploying geographically separated conductor nodes, the following requirements must be met:

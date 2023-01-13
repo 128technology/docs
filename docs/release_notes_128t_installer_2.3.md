@@ -1,5 +1,5 @@
 ---
-title: 128T Installer 2.3 Release Notes
+title: Installer 2.3 Release Notes
 sidebar_label: 2.3
 ---
 
@@ -13,20 +13,20 @@ sidebar_label: 2.3
 
 - **IN-170** - The Installer may fail to download all packages required for a system update if empty rpms are present in local repo
 
-- **IN-171** - asset detail view may show "Attempt 1/3: Stopped 128T service" for a long time
+- **IN-171** - asset detail view may show "Attempt 1/3: Stopped SSR service" for a long time
 
 ## Release 2.3.1
 
 ### Issues Fixed
 
-- **IN-164** DNF subsystem fails during 128T Software upgrade and DNF repository cache refresh.
+- **IN-164** DNF subsystem fails during SSR Software upgrade and DNF repository cache refresh.
 
 
 ## Release 2.3.0
 
 ### Issues Fixed
 
-- **IN-150** 128T Upgrade terminates with "Unhandled exception: OSError"
+- **IN-150** SSR Upgrade terminates with "Unhandled exception: OSError"
 
 - **IN-154** Installer rollback does not work offline
 
@@ -40,7 +40,7 @@ sidebar_label: 2.3
   [Could not resolve host: mirrors.128technology.com; Unknown error]
   ```
 
-  _**Cause:**_ The router node could not resolve the 128T software repository
+  _**Cause:**_ The router node could not resolve the SSR software repository
 
   _**Corrective Action:**_ When performing the upgrade from less than 4.1.0 to 4.1.0, ensure internet or Conductor access (where Conducted hosted services are enabled)
 
@@ -62,7 +62,7 @@ sidebar_label: 2.3
   To diagnose the problem, try running: `rpm -Va --nofiles --nodigest`.
   If this is a corrupted RPMDB, running `rpm --rebuilddb` may address the issue.
 
-  _**Cause:**_ Installed version of the RPM's come from a later version of the Supported 128T OS version. 128T Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
+  _**Cause:**_ Installed version of the RPM's come from a later version of the Supported SSR OS version. SSR Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
 
   _**Corrective Action:**_ For the offending RPM that comes from a different version of the OS than is installed and running, perform either operation:
 
@@ -75,4 +75,4 @@ sidebar_label: 2.3
 
   _**Cause:**_ DNF uses the CentOS curl functions, in CentOS 7.3/7.4 the curl libraries may exhibit this issue.
 
-  _**Corrective Action:**_ If 128T 4.1.0 or greater is installed this is not an issue. If upgrading from a previous version and using the 128T Conductor, the Conductor will perform retries to work around this issue. If using the local installer for installation, re-execute the installer to work around this issue.     
+  _**Corrective Action:**_ If SSR 4.1.0 or greater is installed this is not an issue. If upgrading from a previous version and using the Conductor, the Conductor will perform retries to work around this issue. If using the local installer for installation, re-execute the installer to work around this issue.     

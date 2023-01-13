@@ -5,7 +5,7 @@ sidebar_label: SIP ALG
 
 The Session Initiation Protocol (SIP)[^1] is a signaling protocol used for initiating, maintaining, and terminating real-time sessions that include voice, video and messaging applications. SIP is a text based protocol and exchanges IP address information within its messages as a means to establish signaling and media sessions between endpoints. When the SIP clients are behind NAT this poses a particular challenge since the addresses in the SIP messages for such clients will be private IPs which are not reachable beyond the NAT boundaries.
 
-When 128T router is present at the edge of the NAT boundary, it is capable of performing a Application Layer Gateway (ALG) function for SIP protocol by doing packet inspection and re-writing the private IP address information in the SIP messages for both SIP headers and Session Description Protocol (SDP)[^2]. This enables both signaling and media traffic to traverse the NAT and makes the communication possible between the client behind the NAT and the remote SIP endpoint(s). The SIP ALG function can be enabled by installing and configuring the `128T-sip-alg` plugin.
+When the SSR is present at the edge of the NAT boundary, it is capable of performing a Application Layer Gateway (ALG) function for SIP protocol by doing packet inspection and re-writing the private IP address information in the SIP messages for both SIP headers and Session Description Protocol (SDP)[^2]. This enables both signaling and media traffic to traverse the NAT and makes the communication possible between the client behind the NAT and the remote SIP endpoint(s). The SIP ALG function can be enabled by installing and configuring the `128T-sip-alg` plugin.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -20,7 +20,7 @@ The sip-alg configuration can be enabled on a router. In order to configure `sip
 * Additional changes to the SDP to enable SIP interworking
 
 :::important
-The 128T sip-alg function only supports a scenario whereby all the SIP endpoints on the private network communicate via a SIP enabled PBX device.
+The SSR sip-alg function only supports a scenario whereby all the SIP endpoints on the private network communicate via a SIP enabled PBX device.
 :::
 
 The following configuration shows an example of what the configuration for a single PBX device would look like:
@@ -92,11 +92,11 @@ The `proxy-ip` represents a non-private address for the branch PBX that the remo
 
 ### Inbound and Outbound Services
 
-The `sip-alg` plugin operates on the concept of [SFC](plugin_intro.md#service-function-chaining) where all traffic is routed using KNIs to and from Linux. The 128T router uses `kamailio`[^3] to then [fix all SIP messages](#sip-message-changes) and perform additional routing to manage both inbound and outbound calls. For each of the `inbound` and `outbound` calls the plugin requires two services - an `ingress service` to route the traffic to the KNI and an `egress service` to route the traffic to the other SIP endpoint. The user is responsible for configuring the `egress service` and corresponding routes. The plugin automatically generates the `ingress service` and associated routes using the egress service and plugin configuration.
+The `sip-alg` plugin operates on the concept of [SFC](plugin_intro.md#service-function-chaining) where all traffic is routed using KNIs to and from Linux. The SSR uses `kamailio`[^3] to then [fix all SIP messages](#sip-message-changes) and perform additional routing to manage both inbound and outbound calls. For each of the `inbound` and `outbound` calls the plugin requires two services - an `ingress service` to route the traffic to the KNI and an `egress service` to route the traffic to the other SIP endpoint. The user is responsible for configuring the `egress service` and corresponding routes. The plugin automatically generates the `ingress service` and associated routes using the egress service and plugin configuration.
 
 #### Outbound Service and Config Auto Generation
 
-The `outbound` service is used for initial registration between the branch PBX and the SIP server as well as making all outbound calls to remote endpoints. A typical call flow originates from the private LAN network, routed via the 128T sip-alg function that transforms the SIP messages, which are then routed over the WAN interface to the remote endpoint. Consider the following example:
+The `outbound` service is used for initial registration between the branch PBX and the SIP server as well as making all outbound calls to remote endpoints. A typical call flow originates from the private LAN network, routed via the SSR sip-alg function that transforms the SIP messages, which are then routed over the WAN interface to the remote endpoint. Consider the following example:
 
 ```config
 authority
@@ -164,7 +164,7 @@ admin@node1.router1#
 
 #### Inbound Service and Config Auto Generation
 
-The `inbound` service is used for processing all incoming calls to the branch PBX from the remote server. A typical call flow originates from the public WAN network, routed via the 128T sip-alg function that transforms the SIP messages, which are then routed over the LAN interface to the branch PBX. The user is responsible for configuring the ingress service and the associated service-routes. Consider the following example:
+The `inbound` service is used for processing all incoming calls to the branch PBX from the remote server. A typical call flow originates from the public WAN network, routed via the SSR sip-alg function that transforms the SIP messages, which are then routed over the LAN interface to the branch PBX. The user is responsible for configuring the ingress service and the associated service-routes. Consider the following example:
 
 ```config
 authority
@@ -236,7 +236,7 @@ Some of the SDP options can include private IP addresses and pose additional cha
 
 ## SIP Message Changes
 
-The 128T `sip-alg` functionality is completely stateless and works by applying NAT rules to every SIP message sent and received. The SIP stack, however, is aware of directionality and uses this information to fix the messages with the correct set of IP addresses.
+The SSR `sip-alg` functionality is completely stateless and works by applying NAT rules to every SIP message sent and received. The SIP stack, however, is aware of directionality and uses this information to fix the messages with the correct set of IP addresses.
 
 #### Outbound Call Changes
 
@@ -359,7 +359,7 @@ In the inbound case, the following modifications were performed:
 
 ### Inspecting Kamailio
 
-The 128T `sip-alg` function launches a `kamailio` service which is responsible for fixing up all the SIP messages. The operation of the process can be inspected via querying the systemd service for the appropriate `sip-alg` instance. For example:
+The SSR `sip-alg` function launches a `kamailio` service which is responsible for fixing up all the SIP messages. The operation of the process can be inspected via querying the systemd service for the appropriate `sip-alg` instance. For example:
 
 ```
 # systemctl status t128-sip-alg@PBX.service
@@ -407,7 +407,7 @@ Hint: Some lines were ellipsized, use -l to show in full.
 The `kamailio` configuration can be found under `/etc/kamailio/kamailio.PBX.cfg` and should reflect the ip-mappings and other configuration from the plugin configuration.
 
 :::note
-Users should not make any manual changes to the `kamailio` config as it would get overwritten from the 128T conductor.
+Users should not make any manual changes to the `kamailio` config as it would get overwritten from the SSR conductor.
 :::
 
 ### Inspecting the sip-alg Namespace
@@ -479,6 +479,38 @@ Chain POSTROUTING (policy ACCEPT 0 packets, 0 bytes)
 
 ## Release Notes
 
+### Release 3.2.2
+**Release Date:** Dec 02, 2022
+
+**Router Version**
+- 128T-sip-alg-router-1.2.0-2
+
+#### Issues Fixed
+
+- **PLUGIN-1955** Reducing the default resource allocation of SIP ALG plugin causes call setup issues
+
+    _**Resolution**_ The defaults were restored to the original number of child processes running on the system
+
+
+### Release 3.2.1
+**Release Date:** Nov 04, 2022
+
+**Router Version**
+- 128T-sip-alg-router-1.2.0-2
+
+#### Issues Fixed
+
+- **PLUGIN-1908** SIP ALG plugin consumes a lot of memory on a running system
+
+    _**Resolution**_ Reduced the overall number of child processes running on the system as well as stopped default kamailio service which is not used.
+
+### Release 3.2.0
+
+#### New Features and Improvements
+- **PLUGIN-1839** Reduce time to apply salt states in large scale deployments
+
+By using Saltstack data files, the time to apply high states across all assets is significantly reduced.
+
 ### Release 2.4.0, 3.1.1
 
 #### New Features and Improvements
@@ -499,5 +531,5 @@ The feature adds support for configuring `sip-alg > dscp` to specify the TOS mar
 
 #### Issues Fixed
 
-- **PLUGIN-768** Support the SIP ALG plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the SIP ALG plugin in SSR versions `5.1.0` and greater.
 

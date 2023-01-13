@@ -6,7 +6,7 @@ Maintenance mode is used when staging equipment in a production network prior to
 
 ## Alarms during Maintenance mode
 
-When a 128T is put into **Maintenance Mode** all alarms for that 128T device will be **shelved**. Shelving refers to placing an alarm in state such that it is not considered critical and so as to not bother the user. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI.
+When an SSR is put into **Maintenance Mode** all alarms for that SSR device will be **shelved**. Shelving refers to placing an alarm in state such that it is not considered critical and so as to not bother the user. Shelved alarms will continue to be monitored by the system but will not be presented on the standard UI.
 
 The state of shelved alarms can be optionally viewed by issuing:
 ```

@@ -5,7 +5,7 @@ sidebar_label: Installer Command Line Reference
 
 This is a reference document for the SSR Installer command line interface.
 To get started installing the SSR with the Installer, see the
-[Conductor Interactive Installation](intro_installation_bootable_media.md).
+[Router Interactive Installation](intro_installation_bootable_media.mdx).
 
 To start the Installer, run the `install128t` command.
 

@@ -50,7 +50,7 @@ sidebar_label: Events
 
 | Cause                                            | Troubleshooting Step                                         |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| /etc/resolv.conf is edited | This file is managed by the 128T platform and should not be edited by hand or by an external script or processes. |
+| /etc/resolv.conf is edited | This file is managed by the SSR platform and should not be edited by hand or by an external script or processes. |
 
 ------
 
@@ -89,7 +89,7 @@ sidebar_label: Events
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Leadership for redis process has changed | This may happen if the HA link between nodes has gone down.  Check the availability of both nodes and their respective HA interface status.  If one of the nodes is offline, start the 128T process.  If the node is online, check the interface status. |
+| Leadership for redis process has changed | This may happen if the HA link between nodes has gone down.  Check the availability of both nodes and their respective HA interface status.  If one of the nodes is offline, start the SSR process.  If the node is online, check the interface status. |
 
 ------
 
@@ -102,7 +102,7 @@ sidebar_label: Events
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Leadership for routing engine process has changed | This may happen if the HA link between nodes has gone down.  Check the availability of both nodes and their respective HA interface status.  If one of the nodes is offline, start the 128T process.  If the node is online, check the interface status. |
+| Leadership for routing engine process has changed | This may happen if the HA link between nodes has gone down.  Check the availability of both nodes and their respective HA interface status.  If one of the nodes is offline, start the SSR process.  If the node is online, check the interface status. |
 
 ------
 
@@ -115,7 +115,7 @@ sidebar_label: Events
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Leadership for security leader process has changed | This may happen if the HA link between nodes has gone down.  Check the availability of both nodes and their respective HA interface status.  If one of the nodes is offline, start the 128T process.  If the node is online, check the interface status. |
+| Leadership for security leader process has changed | This may happen if the HA link between nodes has gone down.  Check the availability of both nodes and their respective HA interface status.  If one of the nodes is offline, start the SSR process.  If the node is online, check the interface status. |
 
 ------
 
@@ -128,7 +128,7 @@ sidebar_label: Events
 
 | Cause                                                        | Troubleshooting Step                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| Leadership for automated provisioner process has changed | This may happen if the HA link between nodes has gone down.  Check the availability of both nodes and their respective HA interface status.  If one of the nodes is offline, start the 128T process.  If the node is online, check the interface status. |
+| Leadership for automated provisioner process has changed | This may happen if the HA link between nodes has gone down.  Check the availability of both nodes and their respective HA interface status.  If one of the nodes is offline, start the SSR process.  If the node is online, check the interface status. |
 
 ------
 

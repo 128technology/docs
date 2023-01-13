@@ -3,7 +3,7 @@ title: Role-Based Access Control
 sidebar_label: Role-Based Access Control
 ---
 
-Role-Based Access Control (RBAC) provides a mechanism for an Administrator to create Access Management Roles that allow specific access to 128T resources such as routers, tenants, and services, as well as other Authority-level configuration objects. 
+Role-Based Access Control (RBAC) provides a mechanism for an Administrator to create Access Management Roles that allow specific access to SSR resources such as routers, tenants, and services, as well as other Authority-level configuration objects. 
 
 ## Configuring Role-Based Access Control
 

@@ -18,7 +18,7 @@ Dual LTE support is valuable when connecting to two discrete wireless carriers w
 
 ### Prerequisites
 
-Of the many LTE modules on the market, 128 Technology has standardized on those modules that utilize QMI (Qualcomm MSM Interface Protocol).
+Of the many LTE modules on the market, Juniper has standardized on those modules that utilize QMI (Qualcomm MSM Interface Protocol).
 
 When running with a single LTE module, there are no restrictions on how the adapter is connected within the hardware platform.  When running with two LTE cards, it is required that the second module be connected via USB interface over MiniPCIe, M.2 or even USB dongle.
 
@@ -34,10 +34,10 @@ Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 ```
 
 :::info
-QMI-based LTE modules that exist within the 128T platform will load the `qmi_wwan` linux driver.
+QMI-based LTE modules that exist within the SSR platform will load the `qmi_wwan` linux driver.
 :::
 
-Scan the path `/sys/bus/usb/drivers/qmi_wwan/*/net` to detect the QMI supported interface names.  It is these interface names that will be used within the 128T configuration.
+Scan the path `/sys/bus/usb/drivers/qmi_wwan/*/net` to detect the QMI supported interface names.  It is these interface names that will be used within the SSR configuration.
 ```bash
 [root@SOL_SCM920420006 ~]# ls /sys/bus/usb/drivers/qmi_wwan/*/net/
 /sys/bus/usb/drivers/qmi_wwan/1-3:1.8/net/:wwp0s21u3i8
@@ -59,7 +59,7 @@ Use the following configuration fields under network-interface to configure this
 
 Below is an example configuration with two LTE modules. The first module has an AT&T SIM and the second one has a Verizon SIM. Both have default-route enabled; the AT&T interface has a metric of 300 and the Verizon interface has a metric of 500.
 
-```128T
+```SSR
 device-interface lte-dev-1
     name lte-dev-1
     type lte
@@ -108,9 +108,9 @@ device-interface lte-dev-2
 exit
 ```
 
-When the 128T is not running, both LTE interfaces will be returned to linux. When this handover happens, a default-route is added to each interface in linux with an associated metric taken from the _management_vector_ priority. This is a result of the _management-vector_ configuration defined above.
+When the SSR is not running, both LTE interfaces will be returned to linux. When this handover happens, a default-route is added to each interface in linux with an associated metric taken from the _management_vector_ priority. This is a result of the _management-vector_ configuration defined above.
 
-After committing this configuration and shutting down 128T, the linux route table will look like:
+After committing this configuration and shutting down SSR, the linux route table will look like:
 
 ```bash
 [root@SOL_SCM920420006 ~]# ip route
@@ -187,7 +187,7 @@ In addition to the PCLI, standalone `qmicli` and `serial-command` scripts are al
 
 These scripts can be utilized through the salt infrastructure to remotely monitor the health of the interfaces.
 
-The output of `show device-interface` includes `usb-port` to identify the device to which the LTE adapter is connected. While the majority of the communication between the 128T and the LTE module is over QMI, AT commands are used for certain operations, such as a card reset.
+The output of `show device-interface` includes `usb-port` to identify the device to which the LTE adapter is connected. While the majority of the communication between the SSR and the LTE module is over QMI, AT commands are used for certain operations, such as a card reset.
 
 To determine which devices support AT commands, scan the path `/sys/class/net/{interface}/device/../*/ttyUSB*/`.  With the information retrieved from the `ls` command, you can then create a serial connection to the device to issues AT commands.
 
@@ -215,7 +215,7 @@ lte-image-preference --interface=wwp0s21u1i8 set ATT
 ## Special Considerations
 
 Prior to 4.3.3, on a single LTE system, a default-route within linux with a metric of 128 was always added. For backward compatibility and consistency of default behavior, after an upgrade to 4.3.3:
-- A default-route with a metric of 128 will be added to the 128T configuration if:
+- A default-route with a metric of 128 will be added to the SSR configuration if:
   - default-route is not set **OR** set to false
   - **AND** management-vector is **NOT** configured
 
@@ -226,7 +226,7 @@ A validation warning (as shown below) is issued when these conditions have not b
 Are you sure you want to commit the candidate config? [y/N]: y
 ⚠ Validating, then committing...
 Warnings:
-1. System is running a config without a default-route and a management-vector configured, a default-route with a metric of 128 will be added after 128T shutdown. To disable, set default-route to false and configure a management-vector.
+1. System is running a config without a default-route and a management-vector configured, a default-route with a metric of 128 will be added after SSR shutdown. To disable, set default-route to false and configure a management-vector.
 
     config
         authority
@@ -239,13 +239,13 @@ Warnings:
 Configuration committed
 *admin@SOL_SCM920420006.SOL_SCM920420006# q
 ```
-After the 128T shutdown, you’ll see that default route with metric 128 is set within linux.
+After the SSR shutdown, you’ll see that default route with metric 128 is set within linux.
 ```bash
 [root@SOL_SCM920420006 ~]# systemctl stop 128T
 [root@SOL_SCM920420006 ~]# ip route
 default via 172.17.0.1 dev enp4s0f0 proto static metric 100
 default dev wwp0s21u1i8 scope link metric 128
 ```
-If you need to disable the default route, within the 128T configuration, you need to:
+If you need to disable the default route, within the SSR configuration, you need to:
 - set `default-route` to _false_
 - **AND** configure a not-empty `management-vector`

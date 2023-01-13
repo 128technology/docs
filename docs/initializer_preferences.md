@@ -16,7 +16,7 @@ This document follows the conventions of [JSON Schema](https://json-schema.org).
 http://128technology.com/initializerPreferencesFile
 ```
 
-Schema for the preferences file used by the 128T Initializer.
+Schema for the preferences file used by the SSR Initializer.
 
 ### Initializer Preferences File Type
 
@@ -64,7 +64,7 @@ The name of the Node being initialized.
 ```regexp
 ^([a-zA-Z0-9]([a-zA-Z0-9\-_]){0,61})?[a-zA-Z0-9]$
 ```
-
+<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E(%5Ba-zA-Z0-9%5D(%5Ba-zA-Z0-9%5C-_%5D)%7B0%2C61%7D)%3F%5Ba-zA-Z0-9%5D%24 "try regular expression with regexr.com")
 
 ### node-ip
@@ -114,9 +114,9 @@ The role of the Node being initialized.
 
 | Value         | Explanation                      |
 | :------------ | -------------------------------- |
-| `"conductor"` | A 128T Conductor node            |
+| `"conductor"` | An SSR Conductor node            |
 | `"control"`   | Unsupported. Use 'combo' instead |
-| `"combo"`     | A 128T Router node               |
+| `"combo"`     | An SSR Router node               |
 | `"slice"`     | Unsupported. Use 'combo' instead |
 
 ### router-name
@@ -139,7 +139,7 @@ The name of the Router to which the Node belongs. Ignored if 'learn-from-ha-peer
 ```regexp
 ^([a-zA-Z0-9]([a-zA-Z0-9\-_]){0,61})?[a-zA-Z0-9]$
 ```
-
+<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E(%5Ba-zA-Z0-9%5D(%5Ba-zA-Z0-9%5C-_%5D)%7B0%2C61%7D)%3F%5Ba-zA-Z0-9%5D%24 "try regular expression with regexr.com")
 
 ### conductor
@@ -203,7 +203,7 @@ The name of the Node to be used as an HA peer. Required if 'learn-from-ha-peer' 
 ```regexp
 ^([a-zA-Z0-9]([a-zA-Z0-9\-_]){0,61})?[a-zA-Z0-9]$
 ```
-
+<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E(%5Ba-zA-Z0-9%5D(%5Ba-zA-Z0-9%5C-_%5D)%7B0%2C61%7D)%3F%5Ba-zA-Z0-9%5D%24 "try regular expression with regexr.com")
 
 ### learn-from-ha-peer
@@ -229,7 +229,7 @@ false
 
 ### local-init
 
-Preferences to be passed to 128T local environment configuration. These must conform to the Environment Config schema for the version of 128T being initialized.
+Preferences to be passed to the SSR local environment configuration. These must conform to the Environment Config schema for the version of SSR being initialized.
 
 `local-init`
 
@@ -287,7 +287,7 @@ A salted SHA-512 hash of the password to set for the 'admin' user.
 ```regexp
 ^\$6\$[A-Za-z0-9.\/]{1,16}\$[A-Za-z0-9.\/]{86}$
 ```
-
+<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E%5C%246%5C%24%5BA-Za-z0-9.%5C%2F%5D%7B1%2C16%7D%5C%24%5BA-Za-z0-9.%5C%2F%5D%7B86%7D%24 "try regular expression with regexr.com")
 
 #### admin-password Examples
@@ -316,7 +316,7 @@ A salted SHA-512 hash of the password to set for the 'root' user.
 ```regexp
 ^\$6\$[A-Za-z0-9.\/]{1,16}\$[A-Za-z0-9.\/]{86}$
 ```
-
+<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E%5C%246%5C%24%5BA-Za-z0-9.%5C%2F%5D%7B1%2C16%7D%5C%24%5BA-Za-z0-9.%5C%2F%5D%7B86%7D%24 "try regular expression with regexr.com")
 
 #### root-password Examples
@@ -403,7 +403,7 @@ false
 
 ### is-virtual
 
-This must be true when initializing a 128T node that is managed by a Virtual Conductor.
+This must be true when initializing an SSR node that is managed by a Virtual Conductor.
 
 `is-virtual`
 
@@ -473,7 +473,7 @@ Configuration of the secondary Node in an HA Conductor.
 http://128technology.com/initializerPreferencesFile#/properties/local-init
 ```
 
-Preferences to be passed to 128T local environment configuration. These must conform to the Environment Config schema for the version of 128T being initialized.
+Preferences to be passed to SSR local environment configuration. These must conform to the Environment Config schema for the version of SSR being initialized.
 
 ### local-init Type
 
@@ -571,7 +571,7 @@ Deprecated. This field is ignored.
 ```regexp
 ^([a-zA-Z0-9]([a-zA-Z0-9\-_]){0,61})?[a-zA-Z0-9]$
 ```
-
+<!-- markdown-link-check-disable-next-line -->
 [try pattern](https://regexr.com/?expression=%5E(%5Ba-zA-Z0-9%5D(%5Ba-zA-Z0-9%5C-_%5D)%7B0%2C61%7D)%3F%5Ba-zA-Z0-9%5D%24 "try regular expression with regexr.com")
 
 ### ip

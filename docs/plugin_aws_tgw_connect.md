@@ -3,7 +3,7 @@ title: AWS Transit Gateway Connect Plugin
 sidebar_label: AWS Transit Gateway Connect
 ---
 
-The 128T-aws-transit-gateway-connect plugin provides integration between a 128T and a Transit Gateway. It does so with the use of BGP for sharing routes and GRE tunnels to encapsulate the BGP traffic as well as any other traffic to be sent to the Transit Gateway.
+The 128T-aws-transit-gateway-connect plugin provides integration between an SSR and a Transit Gateway. It does so with the use of BGP for sharing routes and GRE tunnels to encapsulate the BGP traffic as well as any other traffic to be sent to the Transit Gateway.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -11,7 +11,7 @@ The instructions for installing and managing the plugin can be found [here](plug
 
 ## Version Restrictions
 
- The router configuration that is generated is only compatible with 128T versions which have [native GRE support](config_gre_tunnel.md) (128T >= 5.2.0).
+ The router configuration that is generated is only compatible with SSR versions which have [native GRE support](config_gre_tunnel.md) (128T >= 5.2.0).
 
 :::warning
 The plugin is designed to operate on an AWS conductor. Installing the plugin on a non AWS environment can cause delay with config commits for up to 5 seconds. Please refer to the link [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/identify_ec2_instances.html) on how to identify EC2 linux instances.
@@ -25,10 +25,10 @@ General Terms:
 * Transit Gateway Attachment - How the Transit Gateway attaches to a network.
 
 Transit Gateway Connect Terms:
-* Transit Gateway Connect - A logical unit containing the Connect Attachment, Transport Attachment, a Connect VPC, and the 128T.
+* Transit Gateway Connect - A logical unit containing the Connect Attachment, Transport Attachment, a Connect VPC, and the SSR.
 * Transit Gateway Connect Attachment - A new type of Transit Gateway Attachment which operates on top of an existing Transport Transit Gateway Attachment.
 * Transport Transit Gateway Attachment - An attachment on top of which a Connect Attachment is created. Must be either of type VPC or VPN.
-* Transit Gateway Connect Peer - A peer that communicates over GRE and with BGP to the Transit Gateway Connect. In our case, this is a 128T.
+* Transit Gateway Connect Peer - A peer that communicates over GRE and with BGP to the Transit Gateway Connect. In our case, this is an SSR.
 
 ### Approach
 
@@ -95,13 +95,13 @@ Configuration generation logs can be found on the conductor under `/var/**log**/
 
 ### Helpful Commands
 
-After the configuration is generated, the BGP peering status can be queried on the 128T side using the following commands on the router:
+After the configuration is generated, the BGP peering status can be queried on the SSR side using the following commands on the router:
 
 * `show bgp`
 * `show bgp neighbors`
 * `show bgp summary`
 
-On the AWS Portal, under `VPC` > `Transit Gateway Attachments` > `<your connect attachments>` > `Connect peers`, there will be entries for the 128T as a connect peer and the BGP status.
+On the AWS Portal, under `VPC` > `Transit Gateway Attachments` > `<your connect attachments>` > `Connect peers`, there will be entries for the SSR as a connect peer and the BGP status.
 
 
 ## Appendix
@@ -115,8 +115,8 @@ With the example configuration and the following AWS TGW connect peer
 | TGW GRE IP   | 10.128.2.201   |
 | TGW BGP IP 1 | 169.254.192.26 |
 | TGW BGP IP 2 | 169.254.192.27 |
-| 128T GRE IP  | 10.128.2.25    |
-| 128T BGP IP  | 169.254.192.25 |
+| SSR GRE IP  | 10.128.2.25    |
+| SSR BGP IP  | 169.254.192.25 |
 
 
 The following config will be generated:

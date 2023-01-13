@@ -11,17 +11,17 @@ Depending on the nature and size of a deployment, the hardware platform may not 
 
 ## Benefits
 
-When using a separate [non-forwarding](concepts_interface_types.md) interface for management traffic, packet forwarding is managed by Linux's routing table. Leveraging 128T's native routing capabilities for management traffic provides additional security, segmentation and advanced routing policy.
+When using a separate [non-forwarding](concepts_interface_types.md) interface for management traffic, packet forwarding is managed by Linux's routing table. Leveraging the SSR's native routing capabilities for management traffic provides additional security, segmentation and advanced routing policy.
 
-When provisioning management traffic to traverse forwarding interfaces, those interfaces will continue to be available for management related functions (e.g., ssh) even when the 128T is not running, yet will still be protected by firewall rules that match the respective policy. This is particularly important during maintenance operations when the 128T software is taken offline for an upgrade.
+When provisioning management traffic to traverse forwarding interfaces, those interfaces will continue to be available for management related functions (e.g., ssh) even when the SSR is not running, yet will still be protected by firewall rules that match the respective policy. This is particularly important during maintenance operations when the SSR software is taken offline for an upgrade.
 
 :::warning
-Once a forwarding interface is provisioned for management traffic, any existing OS configuration for that interface such as ifcfg and firewall rules will be overwritten to match the 128T configuration.
+Once a forwarding interface is provisioned for management traffic, any existing OS configuration for that interface such as ifcfg and firewall rules will be overwritten to match the SSR configuration.
 :::
 
 ## Management Services
 
-One of the strengths of the 128T data model is to dynamically apply policy only as needed. As it relates to management traffic, service policy will only be created for those management applications provisioned. The list of applications natively supported are:
+One of the strengths of the SSR data model is to dynamically apply policy only as needed. As it relates to management traffic, service policy will only be created for those management applications provisioned. The list of applications natively supported are:
 
 * [Conductor traffic](concepts_machine_communication.md#router-to-conductor-connectivity). This works in tandem with [conductor services](bcp_conductor_deployment.md)
 * [Web server access](config_reference_guide.md#webserver)
@@ -35,15 +35,15 @@ One of the strengths of the 128T data model is to dynamically apply policy only 
 
 ## Configuration
 
-When enabled, a default route will be configured in Linux's routing table to send all traffic to the interface [`kni254`](concepts_kni.md), which is the pathway into the 128T packet forwarding engine. Thus, standard 128T forwarding rules apply: any traffic originated by the host operating system that does not match a configured service will be dropped. Services and corresponding service routes are automatically created for the applications listed [above](#management-services).
+When enabled, a default route will be configured in Linux's routing table to send all traffic to the interface [`kni254`](concepts_kni.md), which is the pathway into the SSR packet forwarding engine. Thus, standard SSR forwarding rules apply: any traffic originated by the host operating system that does not match a configured service will be dropped. Services and corresponding service routes are automatically created for the applications listed [above](#management-services).
 
 :::important
-Because a default route is added in Linux, all traffic not captured by a static route, will be sent to the 128T. This means that the traffic will either be dropped, or match an existing service and route.
+Because a default route is added in Linux, all traffic not captured by a static route, will be sent to the SSR. This means that the traffic will either be dropped, or match an existing service and route.
 :::
 
-For each of the [management services](#management-services) configured, the 128T will automatically generate corresponding `service` and `service-route` configurations for forwarding the respective traffic. The generated configuration objects will all start with the prefix `_management_`.
+For each of the [management services](#management-services) configured, the SSR will automatically generate corresponding `service` and `service-route` configurations for forwarding the respective traffic. The generated configuration objects will all start with the prefix `_management_`.
 
-Each of the service and service-routes share one important attribute: they are created with the `generated` flag set to `true`. If you want to make any modifications to the generated services, you must first set `generated` to `false`, or else your configuration changes will be stripped upon the next time the configuration is committed. For more information on configuration work-flows involving the `generated` flag, refer to the [128T software documentation](config_basics.md#generated-configuration).
+Each of the service and service-routes share one important attribute: they are created with the `generated` flag set to `true`. If you want to make any modifications to the generated services, you must first set `generated` to `false`, or else your configuration changes will be stripped upon the next time the configuration is committed. For more information on configuration work-flows involving the `generated` flag, refer to the [SSR software documentation](config_basics.md#generated-configuration).
 
 :::note
 `management` interfaces cannot be used on device-interface types of `host` or `bridge`.
@@ -69,9 +69,9 @@ Configuring `dns-config > address` is required, however setting `dns-config > ad
 
 When provisioning multiple management interfaces, a _management vector_ is used to provide preference amongst the interfaces.
 
-When the 128T service is not running, a default route is created for the interface configured as management with the lowest metric (if multiple management interfaces are configured).
+When the SSR service is not running, a default route is created for the interface configured as management with the lowest metric (if multiple management interfaces are configured).
 
-For example, the following 128T configuration:
+For example, the following SSR configuration:
 ```
 network-interface  wan1-intf
     name               wan1-intf
@@ -94,7 +94,7 @@ default dev wan1-intf scope link metric 20
 
 ### Utility Address
 
-Management interfaces can be configured for redundancy between nodes of a HA pair by provisioning `authority > router > node > device-interface > shared-phys-address`. If the interface is redundant and management, a `authority > router > node > device-interface > network-interface > address > utility-ip-address` is required on the network-interface. This address is assigned to the Linux interface when 128T is not running with the original MAC address, not the virtual `shared-phys-address` from 128T configuration. The `utility-ip-address` must be unique per node across the router.
+Management interfaces can be configured for redundancy between nodes of a HA pair by provisioning `authority > router > node > device-interface > shared-phys-address`. If the interface is redundant and management, a `authority > router > node > device-interface > network-interface > address > utility-ip-address` is required on the network-interface. This address is assigned to the Linux interface when SSR is not running with the original MAC address, not the virtual `shared-phys-address` from SSR configuration. The `utility-ip-address` must be unique per node across the router.
 
 
 ### Sample Configuration

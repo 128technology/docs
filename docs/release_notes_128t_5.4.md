@@ -24,6 +24,193 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.  
 
+:::note
+The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
+:::
+
+## Release 5.4.11-4
+
+**Release Date: December 30, 2022**
+
+### Resolved Issues
+
+- **I95-46336 Peer connection not established after AWS upgrade:** Resolved an issue where an AWS C5 instance size can fail to initialize when more than one accelerated network interface is configured.
+------
+- **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
+------
+- **I95-48723 HA sync not running after systems reconnect:** Historical metrics and events are synced between HA nodes after extended downtime.
+------
+- **I95-48988 High CPU for packet processing core:** Resolved an issue where the CPU can spike to 100% after a failover from internode/interrouter path to local breakout when failover is enabled for local breakout.
+------
+- **I95-49106 Degradation in performance during file rotation:** This issue has been resolved.
+------
+- **I95-49157 Poor GUI and PCLI performance for other users during a change/validate/commit operation:** Resolved the performance issue by optimizing the export config API.
+
+## Release 5.4.10-3
+
+**Release Date: November 23, 2022**
+
+### Resolved Issues
+
+- **The following CVEs have been addressed in this release:** I95-48644, I95-48648, I95-48650, I95-48653. 
+------
+- **I95-48529 BFD sending link notification before hold-down timer expires:** Resolved an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now correctly reflect the peer status. Sessions will not be moved back to peers that have re-established connectivity but are still in the hold-down period.
+------
+- **I95-48656 Reduce TSI service log limit:** The size of the Tech Support Info journal has been restricted to prevent excessive resource consumption.
+------
+- **I95-48685 GUI and/or PCLI unresponsive:** Resolved an issue where on an HA conductor the user interface would become unresponsive if a managed router was offline or unreachable.
+------
+- **I95-48731 Sessions created on a `fin-ack` may get stuck:** Resolved an issue where, if `tcp-state-enforcement` is set to allow, a TCP session is established from a `fin-ack` may not get torn down in a timely manner.
+------
+- **I95-48772 `show running config` command displays an error:** Resolved an issue where `show config` requests on the PCLI failed if enum leaf-list entries were changed.
+------
+- **I95-48785 Service Area logging is missing the modify reason:** Resolved an issue when `session-capture` was enabled, service area logs were missing the `update reason`.
+
+## Release 5.4.9-7
+
+:::important
+
+The following issue has been discovered in the following releases:
+
+- 5.4.8 
+- 5.4.9
+
+If an HA Conductor queries a disconnected router from the Conductor GUI Router page or from the Conductor PCLI, the conductor may encounter periods of poor performance until the requests time out. The issue has been resolved in the next patch release with I95-48685. 
+
+For immediate resolution on the impacted releases, contact Juniper Technical Support, or your SE.
+:::
+
+**Release Date: November 9, 2022**
+
+### Resolved Issues
+
+- **I95-32789 Peer metrics unavailable after Conflux synchronization:** Resolved an issue with HA routers where the metrics application stops streaming metrics to the peer node after loading configuration.
+------
+- **I95-45478 Segmentation Fault in the Dynamic Peer Update process:** Resolved an issue with multi-threaded access to a data member, leading to a segmentation fault.
+------
+- **I95-47271 VRRP Alarm for Backup becoming Primary:** There is now an alarm when the backup VRRP node in an HA pair takes over as the primary.
+------
+- **I95-47787 Worker core packet processing spikes to 100%:** Added the ability to tune the Reverse Packet Session Resiliency Minimum Packet Count (default is 3) and Detection Interval (default is 5) settings for session failover without requiring forward packet, and resolved the underlying issue that caused excessively high worker-core CPU.
+------
+- **I95-47909 Handle GRE tunnels in ICMP reachability probe:** The base interface for egress is now used if the icmp-probe probe-address is the same as the tunnel destination, and the internal-address is used as the source if the egress-interface is gre-overlay.
+------
+- **I95-48103 Commit triggered BGP issue:** Resolved an issue where BGP neighbors configured with a short hold time might experience a BGP session flap during a configuration commit when app-ID is enabled.
+------
+- **I95-48108 Service Ping for a Service without Source NAT uses Source IP Address:** The service-ping now uses the source-ip as the packet source-ip if provided.
+------
+- **I95-48158 Unable to capture child services using session capture:** When a session capture is configured on a child service (e.g., `social.internet` instead of `internet`), the session is now recorded.
+------
+- **I95-483381 Race condition in session teardown:** Shared context is now maintained to allow all packet processing to be completed before session teardown.
+------
+- **I95-48507 VLAN packets are generated without a valid VLAN from the flow-move cache:** Resolved an issue where sessions could be modified incorrectly when a VLAN is present and session resiliency is enabled for failover.
+
+## Release 5.4.8-8
+
+**Release Date: October 11, 2022**
+
+### New Features
+
+- **I95-41072 Enhanced Web Filtering:** Web Filtering allows administrators to limit or prevent user access to internet content. These limitations may be based on company or organization policies, or because a domain may be know to contain malicious, inappropriate, or dangerous content. Individual services and service policies can be configured on the SSR to allow or deny access to an entire domain category, or specific domains within a category. For more information, see [Web Filtering.](config_domain-based_web_filter.md)
+------
+- **I95-47418 Audit Events for Plugin Install/Remove:** There is a new audit event that tracks when a plugin is installed or uninstalled. This can be viewed on the Audit History page in the GUI or in the PCLI by running `show events type admin.plugin`
+
+### Resolved Issues
+
+- **The following CVE's have been addressed and resolved:** I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049. 
+------
+- **I95-39454 Created User cannot access PCLI operations:** Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.
+------
+- **I95-44976 Highway issue when modifying an app-id session:** Resolved an issue where modifying an app-id session with a new session-id can lead to a crash.
+------
+- **I95-45847 Duplicate Alarms on Multiple Routers:** Resolved duplicate alarms by obtaining alarms from only one node in an HA pair.
+------
+- **I95-46126 Router Status:** Resolved an issue in HA configurations when a router is connected to HA Conductor 1, but not directly connected to HA Conductor 2, alarms generated on the router are now seen on Conductor 2 - the conductor to which the router is not directly connected.
+------
+- **I95-46281 Update Kernel to RHCK 8.6:** Updated the kernel to integrate the latest security fixes.
+------
+- **I95-46701 Packet Loss on Headend Router:** Added `device-interface` rx/tx descriptor ring size to resolve this issue.
+------
+- **I95-46918 GUI and PCLI out of sync when new configuration elements added/modified:** Resolved an issue where `show network-interface` and `show config` were not updating properly.
+------
+- **I95-46921 `128status.sh` script incorrectly checks for non-existent listening port:** Removed port 830 check for software versions 5.3.0 and greater.
+------
+- **I95-47271 VRRP Alarm for Backup becoming Primary:** There is now an alarm when the backup VRRP node in an HA pair takes over as the primary.
+------
+- **I95-47551 Keep-alives are not generated for unidirectional outbound-only sessions:** Resolved an issue with keep-alive generation for unidirectional outbound-only sessions.
+------
+- **I95-47552 LTE modem not coming up after upgrade:** Resolved an issue with modem detection and port scanning for Quectel EC25.
+------
+- **I95-47585 Transmit-failure increments when TE is enabled:** When `device-interface traffic-engineering` is enabled, the `stats/packet-processing/sent/interface-failure` statistic is no longer erroneously incremented.
+------
+- **I95-47655 BGP issues with VRRP:** VRRP failover may cause routing to not function if internal device numbering is not consistent across the redundant nodes.
+------
+- **I95-47685 Hitting maximum number of allocatable datapath memory regions:** Doubled the maximum number of allocatable datapath memory regions. 
+------
+- **I95-47767 Next Hop choice of "Blackhole" does not stay visible in Conductor:** This option was displayed in error, as the option is ignored. It has been removed.
+------
+- **I95-47969 Increased Memory use when generating TSI:** Resolved an issue where the s`ave runtime-stats` command and TSI generation could result in particularly high memory usage when Application Identification was enabled.
+
+	The `save runtime-stats` command no longer operates across multiple nodes and routers, and will not aggregate the metrics to disk on the conductor. This is to protect against excessive memory consumption. This is a change in functionality; however the public metrics APIs achieve the same result and are the preferred mechanism to collect authority wide metrics.
+------
+- **I95-47981 Ignore VRRP advertisements if the VRID doesn't match:** The VRID is now validated before accepting an advertisement to resolv an issue where VRRP advertisements intended for a different router were being processed.
+------
+- **I95-48038 502 Error returned if managed routers are offline:** Resolved an issue that caused HTTP requests on the conductor to return a 502 error for all requests if a managed router is offline.
+------
+- **I95-48125 Save TSI streaming from router to conductor not working:** Adding a node and router argument to the PCLI command `save tech-support-info` now works correctly.
+------
+- **WAN-1327 Device Adoption may fail** Resolved issues where a "factory reset" system failed to be adopted. This could be seen if an invalid claim code was entered during the adoption process, or when a whitebox system (non Juniper-branded) was not successfully released.
+
+## Release 5.4.7-7
+
+**Release Date: August 4, 2022**
+
+With release 5.4.7-7 (and greater) the iso name format has changed from using `OTP` to `ISO`:
+
+- 128T-5.4.7-7.el7.ISO.v1.x86_64.iso
+
+### New Features
+
+- **I95-40195 LDAP does not allow search base to be configured correctly:** Search base parameters, filter generation, certificate assurance, and logging enhancements have been added to the `ldap-server` configuration. See [LDAP](config_ldap.md) for more information.
+------
+- **I95-40333 Save credentials for accessing SSR software repositories:** `set software access-token` is a new PCLI command to save credentials for accessing SSR software repositories. This provides a way to run `install128t repo authenticate` without dropping to a linux shell. For additional information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
+------
+- **I95-46562 Allow targeting another router or node when saving tech-support-info:** GUI: A button has been added to the **Logs** page in the GUI to download a tech-support-info bundle. This allows downloading a router's `tech-support-info` directly from the Conductor GUI. <br />
+PCLI: The PCLI command `save tech-support-info` can now collect logs from another node. Using the Conductor's PCLI, a `tech-support-info` bundle can be collected from a Managed Router or the HA peer.
+------
+- **I95-46747 Improved the Password user experience:** You now are re-prompted up to three times for the current password if it is incorrect. If a new password does not meet the strength check, you are prompted with that information, and required to update the password. 
+
+### Resolved Issues
+
+- **The following CVE's have been addressed and resolved:** I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049.
+------
+- **I95-38408 DHCP server on wrong vlan sends offer in response to discover message:** Hosted DHCP servers that do not have an explicit vlan configured are now explicitly treated as vlan 0, and handle any DHCP packets that are untagged/vlan 0, in order to prevent those packets from being multicasted to multiple DHCP servers.
+------
+- **I95-44434 Peer metric sends IP of WAN interface instead of the expected string:** Logic has been added to show the available destination address.
+------
+- **I95-45890 Service paths for BGP over SVR routes are not being rebuilt:** Resolved an issue when the vector configuration is changed on a network interface, the service paths for BGP over SVR routes are not being rebuilt. 
+------
+- **I95-45999 Azure Router Crash:** Added support for NetVSC/VF hotswapping to resolve this issue.
+------
+- **I95-46056 `show ntp` has no output from PCLI, even though NTP is configured:** The output of show ntp will now report IP addresses of the time servers rather than resolve hostnames.
+------
+- **I95-46230 Highway Crash:** Resolved an issue where uncaught exceptions were causing highway issues.
+------
+- **I95-46332 VRRP Does Not Work with Ethernet Controller X710 for 10GbE SFP+:** Configuring VRRP on an Intel X700 series NIC can see discard broadcast packets due to the source pruning feature which is enabled by default. This change disables source pruning when VRRP is enabled on these NICs.
+------
+- **I95-46454 ICMP manager excessively logs ICMP echo replies with no matching context:** This issue has been resolved.
+------
+- **I95-46822 Revertible failover traffic not restored when reverse traffic is present:** For a "revertible-failover" service policy, when the preferred path is restored and a session no longer traverses an internode dogleg path, it was taking several seconds for traffic to be restored when forward traffic is present; in situations where only reverse traffic is present, traffic may not be restored. This issue has been resolved.
+------
+- **I95-46826 Carrier detection logic not recognizing disaster recovery modem:** Updated the carrier detection logic to properly recognize the carrier when a modem is attached to a disaster recovery cell tower.
+------
+- **I95-46931 Hardware using ConnectX6-DX fails to initialize:** Added support for this card variant.
+------
+- **I95-46933 `save-tech-support-info` creates a 0B file when manifest is missing:** This issue has been resolved and no file is created. 
+------
+- **I95-47111 Issues with redundant interfaces on startup:** Resolved an issue where the notifications for active interfaces may get lost when using VRRP for redundancy.
+------
+- **I95-47129 Metadata is not disabled after flow-move for EoSVR sessions:** Added a metadata turnoff after session failover for EoSVR.
+
 ## Release 5.4.6-9
 
 **Release Date: June 28, 2022**
@@ -222,10 +409,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date:** February 18, 2022
 
-:::warning
-If you are running on one of the AWS t2, t3, c5, or c5n instance families, **it is recommended that you not upgrade to 5.4.4 at this time.** An issue with a driver has been identified, which prevents the system from booting. This issue will be resolved in the next 5.4 patch.
-:::
-
 ### New Features
 
 - **I95-25630 Gateway IP is required:** When creating or changing a service-route with a next-hop of a static IP net-int, a gateway IP is required. If no gateway IP has been specified, the network-interface gateway will be used. 
@@ -233,14 +416,6 @@ If you are running on one of the AWS t2, t3, c5, or c5n instance families, **it 
 - **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to that of CentOS 8.4 to address several CVEs and provide support for Wireguard and Cordoba. 
 ------
 - **I95-44224 Autocomplete for Resource Groups:** Autocomplete has been added to the pcli when configuring resource groups. 
-
-:::info
-When installing 5.4.4, the following can be seen in the installation logs:
-
-`depmod: WARNING: /lib/modules/4.18.0-305.19.1.el8_4.x86_64/kernel/drivers/infiniband/hw/i40iw/i40iw.ko.xz needs unknown symbol i40e_unregister_client `
-
-This is a warning for a driver that is not used or supported in the SSR software, and can safely be ignored.
-:::
 
 ### Resolved Issues
 
@@ -482,7 +657,7 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-40679 Show DPU command pagination:** Pagination has been added to the `show dpu` command to better present the volume of information.
 ------
-- **I95-41016 WAN Assurance:** SSR provides integration with Mist WAN Assurance. For configuration information, see [Configuring WAN Assurance](config_wan_assurance.md).
+- **I95-41016 WAN Assurance:** SSR provides integration with Mist WAN Assurance. For configuration information, see [WAN Assurance Overview](wan_overview.md).
 ------
 - **I95-41093 Show Commit time:** The GUI now displays the time of the last commit operation.
 ------

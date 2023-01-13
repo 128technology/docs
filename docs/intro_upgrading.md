@@ -26,9 +26,9 @@ Prerequisites for upgrades now include configuring a user with super user (sudo)
 The conductor `major.minor` version must be greater than or equal to the router version. The router version can not exceed the conductors `major.minor` version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support *may* work, but are not guaranteed to do so.  
 
 Examples:
-- Conductor running version 5.3.0, managing Routers running version 5.1.1: Supported.
-- Conductor running version 5.2.0, managing Routers running version 5.2.2: Supported.
-- Conductor running version 5.2.1, managing Routers running version 4.5.13: Supported.
+- Conductor running version 6.0.5, managing Routers running version 6.0.1: Supported.
+- Conductor running version 5.4.8, managing Routers running version 5.4.10: Supported.
+- Conductor running version 6.0.5, managing Routers running version 5.5.7: Supported.
 - Conductor running version 4.5.13, managing Routers running version 4.2.9: Not supported, but may work.
 
 ### Stopping the SSR Software
@@ -210,7 +210,7 @@ Within a given router's configuration, at `router > system > software-update > r
   The conductor(s) require internet access, and the routers must be able to resolve internet hosted repositories.
   :::
 - `prefer-conductor`: The router will retrieve software versions from the conductor, and fall back to using the internet
-- `internet-only` (default): The router will use Juniper's publicly hosted repositories for retrieving sofwtare images
+- `internet-only` (default): The router will use Juniper's publicly hosted repositories for retrieving software images
 
 :::note
 Because this is a router setting, your collection of routers can each use different preferences. For example, a router on the internet can use a Juniper repository, but another router managed by the same conductor sitting in an isolated environment can use the conductor.
@@ -218,7 +218,7 @@ Because this is a router setting, your collection of routers can each use differ
 
 For routers that have no access to the internet, set `router > system > software-update > repository > offline-mode` to `true`. This overrides the `source-type` leaf.
 
-The `import iso` command is used to import packages contained within an SSR ISO onto a local yum repository, allowing the SSR to be upgraded without connecting to 128 Technology servers. 
+The `import iso` command is used to import packages contained within an SSR ISO onto a local yum repository, allowing the SSR to be upgraded without connecting to Juniper servers. 
 :::note
 In an HA setup, when using offline-mode for routers to access the software from the conductors, the ISO must be imported to both conductors before performing the upgrade.
 :::

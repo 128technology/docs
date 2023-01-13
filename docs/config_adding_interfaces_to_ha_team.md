@@ -6,7 +6,7 @@ This guide provides a procedure for manually adding multiple interfaces to the H
 
 For more information regarding non-forwarding interfaces please refer to this blog: [Configuring Non Forwarding Interfaces](config_non_forwarding_ha_interfaces.md).
 
-In order to configure an interface for HA sync, you must configure a non-forwarding interface of type `fabric`. The interface type of `fabric` indicates a direct link between HA peers. 128T will configure these Linux interfaces as a network team. Here is an example 128T configuration:
+In order to configure an interface for HA sync, you must configure a non-forwarding interface of type `fabric`. The interface type of `fabric` indicates a direct link between HA peers. The SSR software will configure these Linux interfaces as a network team. Here is an example SSR configuration:
 
 ```
 admin@T106_DUT1.Conductor (node[name=T106_DUT3])# show
@@ -56,7 +56,7 @@ dpdk1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-One limitation of the non-forwarding interfaces is that the user is only allowed to configure one non-forwarding `fabric` interface in the 128T configuration.  Therefore only one interface will exist in the teamed interface in Linux. In order to add a second interface the administrator is going to have to manually tweak some ifcfg scripts. First, navigate to the directory that contains all the ifcfg scripts:
+One limitation of the non-forwarding interfaces is that the user is only allowed to configure one non-forwarding `fabric` interface in the SSR configuration.  Therefore only one interface will exist in the teamed interface in Linux. In order to add a second interface the administrator is going to have to manually tweak some ifcfg scripts. First, navigate to the directory that contains all the ifcfg scripts:
 
 ```
 [root@t106-dut3 ~]# cd /etc/sysconfig/network-scripts/
@@ -71,7 +71,7 @@ ifcfg-kni254  ifdown-ippp       ifdown-routes  ifup-aliases     ifup-lte   ifup-
 ifcfg-lo      ifdown-ipv6       ifdown-sit     ifup-bnep        ifup-plip  ifup-t1      network-functions-ipv6
 ```
 
-Examine the ifcfg script for the interface that is already a part of the network team. In this example, the interface is `ifcfg-dpdk1`. The interface `dpdk1` was used because that interface corresponds to the PCI address of the non-forwarding `fabric` interface in the 128T configuration above, in this case `0000:00:04.0`:
+Examine the ifcfg script for the interface that is already a part of the network team. In this example, the interface is `ifcfg-dpdk1`. The interface `dpdk1` was used because that interface corresponds to the PCI address of the non-forwarding `fabric` interface in the SSR configuration above, in this case `0000:00:04.0`:
 
 ```
 [root@t106-dut3 network-scripts]# cat ifcfg-dpdk1
@@ -86,7 +86,7 @@ USERCTL=no
 ```
 
 :::warning
-Please ensure that you are not using an interface that is already being managed by 128T. The PCI address of this interface should not exist in the 128T configuration.
+Please ensure that you are not using an interface that is already being managed by the SSR. The PCI address of this interface should not exist in the SSR configuration.
 :::
 
 This example will configure `dpdk2`, which has a PCI address of `0000:00:05.0`. The first step is to perform an `ifdown` on the interface:

@@ -162,6 +162,43 @@ The `example` service needs to have its own `service-route` in order for traffic
 
 With the TLS-based application identification technique, the `application-name` can include a wildcard such as `*.example.com`, which is not possible with the DNS-based approach. This gives administrators a bit more flexibility in defining which traffic to match to services when parsing the X.509 certificates.
 
+#### Update for SSR version 5.0
+
+Starting with SSR version 5.0, a FIB entry is no longer installed as part of DPI. Instead, domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
+
+```
+config
+
+    authority
+
+        service  internet
+            name                  internet
+            description           "all internet traffic"
+            address               0.0.0.0/0
+
+            access-policy         trusted
+                source      trusted
+                permission  allow
+            exit
+            service-policy        NO-LTE
+            share-service-routes  false
+        exit
+
+        service  example.internet
+            name                  example.internet
+            description           "www.example.com website"
+            domain-name           www.example.com
+
+            access-policy         trusted
+                source      trusted
+                permission  deny
+            exit
+            share-service-routes  false
+        exit
+    exit
+exit
+```
+
 ### AppID using Modules
 
 The last, and arguably most powerful built-in technique for performing application identification is to use a *module* – effectively, a script that is resident on the SSR's host operating system that will generate a JSON file that contains dynamic, ingestible routes. This is extremely flexible, but requires some programming expertise.

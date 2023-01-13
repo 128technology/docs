@@ -3,7 +3,7 @@ title: Cloud High Availability Plugin
 sidebar_label: Cloud HA
 ---
 
-The 128T-cloud-ha plugin provides High Availability (HA) functionality for the 128T Networking Platform deployed in the cloud. HA for 128T routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin uses node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
+The SSR-cloud-ha plugin provides High Availability (HA) functionality for the SSR Networking Platform deployed in the cloud. HA for SSR routers in a non-cloud environment uses traditional techniques such as VRRP and GARP which both rely on a virtual MAC and virtual IP. In cloud environments such as AWS, Azure, etc., any techniques that rely on broadcast and multicast are not supported. This plugin uses node health metrics sent over SVR, as well as cloud API interactions to perform failovers in these cloud environments.
 
 :::note
 The instructions for installing and managing the plugin can be found [here](plugin_intro.md#installation-and-management).
@@ -15,12 +15,13 @@ The instructions for installing and managing the plugin can be found [here](plug
 | ------------------ | --------------- | -------------------- |
 | Azure VNET         | `azure-vnet`    | 2.0.0                |
 | Azure Loadbalancer | `azure-lb`      | 2.0.0                |
+| Alicloud VPC       | `alicloud-vpc`  | 3.0.0                |
 
 
 ## Version Restrictions
 
- The router component can only be installed on versions of 128T which support provisional state on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
- The versions of 128T that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of 128T that satisfy this requirement.
+ The router component can only be installed on versions of SSR which support provisional state on _device interfaces_. This is necessary for the plugin to be able to prevent asymmetrical routing.
+ The versions of SSR that support this feature have a `Provides: 128T-device-interface-api(1.0)`, so it can be checked ahead of time by performing a `rpm -q --whatprovides 128T-device-interface-api(1.0)` to see if the currently installed 128T satisfies this requirement or `dnf list --whatprovides 128T-device-interface-api(1.0)` to see all versions of SSR that satisfy this requirement.
 
 
 ## Plugin Behavior
@@ -68,9 +69,9 @@ Backend Pool example:
 ![Azure Loadblancer Backend Pool Configuration](/img/cloud-ha-azure-lb-backend-pool-config.png)
 
 
-The Azure Loadbalancer sends a health probe to the redundant 128T's redundant interfaces. These probes are routed through the `cloud-ha` interface, through a `128T-azure-lb-nginx` instance, and down to the Azure Loadbalancer API Agent. 
+The Azure Loadbalancer sends a health probe to the redundant SSR's redundant interfaces. These probes are routed through the `cloud-ha` interface, through a `128T-azure-lb-nginx` instance, and down to the Azure Loadbalancer API Agent. 
 
-The Azure Loadbalancer API Agent responds to the probes with a `200` status code when the current node is active and a `500` code when its inactive. A probe to the inactive node will not reach the 128T when the redundant interfaces are set provisionally down.
+The Azure Loadbalancer API Agent responds to the probes with a `200` status code when the current node is active and a `500` code when its inactive. A probe to the inactive node will not reach the SSR when the redundant interfaces are set provisionally down.
 
 #### Azure VNET
 
@@ -89,6 +90,21 @@ The agent finds all of the route tables within the VNET using the Azure REST API
 
 :::warning
 To prevent routing loops, the solution will not update the Azure Route Tables assigned to a subnet that has an activating node's _network interface_.
+:::
+
+#### Alicloud VPC
+
+A `solution-type` of `alicloud-vpc` can be used to enable the Alicloud VPC API agent. It requires an Alicloud Route Table setup on the same VNET as the redundant interfaces. 
+
+Since the deployment of Juniper SDWAN HA requires granting RAM role permissions, you need to add a RAM username for this under your current Alicloud account and grant the following permissions. The Virtual Machines where these members are running must be granted with the RAM role with following permissions in order for the route updates to work correctly:
+
+* AliyunECSFullAccess
+* AliyunVPCFullAccess 
+
+The agent finds all of the route tables within the Alicloud VPC using the Alicloud REST APIs. When a redundant interface becomes active, the agent updates the route tables for all the configured prefixes to point to that interface. The solution is designed to be idempotent, so the peer member's redundant interface will now be inactive. There is no update to the route table needed when becoming inactive.
+
+:::warning
+To prevent routing loops, the solution will not update the Alicloud Route Tables assigned to a subnet that has an activating node's _network interface_.
 :::
 
 ## Scenarios
@@ -125,7 +141,7 @@ If the problem with the secondary node resolves, then the HA Agents will update 
 
 ### Primary Shutdown
 
-This scenario is what will occur if the primary node were to be taken down for maintenance or failed completely. The primary node's HA Agent (and Monitoring Agent and API Agent) will be shutdown when 128T is shutdown, so it will not perform any failover operations. The secondary node will wait for `peer-reachability-timeout` seconds of not hearing from the primary node to determine that the secondary node is unreachable. Once the primary node is determined unreachable, the secondary HA Agent will take over and become active since it does not know if the primary node is shutdown or unreachable.
+This scenario is what will occur if the primary node were to be taken down for maintenance or failed completely. The primary node's HA Agent (and Monitoring Agent and API Agent) will be shutdown when SSR is shutdown, so it will not perform any failover operations. The secondary node will wait for `peer-reachability-timeout` seconds of not hearing from the primary node to determine that the secondary node is unreachable. Once the primary node is determined unreachable, the secondary HA Agent will take over and become active since it does not know if the primary node is shutdown or unreachable.
 
 ![primary-shutdown-scenario](/img/cloud-ha-primary-shutdown-scenario.png)
 
@@ -251,7 +267,7 @@ Nodes can only be members of one group.
 
 ### Address Prefixes
 
-Certain prefixes can be configured to be controlled by the Cloud HA 128T by tagging services with groups. The services that are tagged with a certain group will have all of their `address` fields added to the list of configured prefixes.
+Certain prefixes can be configured to be controlled by the Cloud HA SSR by tagging services with groups. The services that are tagged with a certain group will have all of their `address` fields added to the list of configured prefixes.
 
 ```
 service
@@ -264,7 +280,7 @@ exit
 
 Any additional prefixes that should be included in the controlled prefix list can be configured as `additional-branch-prefix`s under the group.
 
-## Generated 128T Configuration
+## Generated SSR Configuration
 
 To see a full blown configuration and the configuration it generates, look at `Complete Example Configuration` in the `Appendix`.
 
@@ -318,7 +334,7 @@ The different services on the router all log to the files captured by the glob `
 
 
 ### PCLI Enhancements
-To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. This state information is also accessible from the 128T's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
+To check the state of the Cloud HA solution running on the router, the plugin adds output to the  `show device-interface` command for the `cloud-ha` interface. This state information is also accessible from the SSR's public REST API with a `GET` on `/api/v1/router/<router>/node/<node>/cloud-ha/state`.
 
 #### State Fields
 
@@ -406,6 +422,48 @@ Example output for the `azure-lb` solution:
 Completed in 1.72 seconds
 ```
 
+Example output for the `alicloud-vpc` solution:
+```
+# show device-interface name cloud-ha
+Wed 2022-09-21 10:31:57 CST
+✔ Retrieving device interface information...
+
+======================================================
+ AlicloudSDWAN-HA-Router01:cloud-ha
+======================================================
+ Type:                host
+ Forwarding:          true
+ Mode:                host
+ MAC Address:         ca:4d:38:ac:9b:5c
+
+ Admin Status:        up
+ Operational Status:  up
+ Provisional Status:  up
+ Redundancy Status:   non-redundant
+ Speed:               1 Gb/s
+ Duplex:              full
+
+ in-octets:                  1059977756
+ in-unicast-pkts:              10915259
+ in-errors:                           0
+ out-octets:                 1053204137
+ out-unicast-pkts:             10915347
+ out-errors:                          0
+
+ Cloud HA:
+     is-active:       True
+     last-activity-change:Fri 2022-09-09 10:31:15 CST
+     first-active-interface:LAN
+     first-active-mac-address:00:16:3e:10:a9:34
+     prefixes:
+       10.0.0.0/8
+       172.16.0.0/12
+     local-status:    healthy
+     remote-status:   healthy
+
+Completed in 0.04 seconds
+```
+
 ### Systemd Services
 
 * `128T-telegraf@cloud_ha_health`: the instance of the monitoring agent that produces the health statuses
@@ -437,7 +495,7 @@ Completed in 0.10 seconds
 
 ### Router Version Incompatibility
 
-As mentioned in the `Version Restrictions` section, the router component of the plugin will only install on 128T versions which support the provisional device interface state. This will be apparent to the user if the router component is not being setup and `show assets` indicates an error similar to:
+As mentioned in the `Version Restrictions` section, the router component of the plugin will only install on SSR versions which support the provisional device interface state. This will be apparent to the user if the router component is not being setup and `show assets` indicates an error similar to:
 
 ```
 Error:
@@ -609,7 +667,7 @@ router router2
 exit
 ```
 
-### Complete Example Configuration
+### Complete Example Configuration #1 for azure-lb
 
 Below is an example of a complete, but minimal configuration entered by the user.
 
@@ -906,10 +964,140 @@ config
 exit
 ```
 
+
+### Part of Example Configuration #2 for alicloud-vpc after auto generation.
+
+Below is a sample running configuration for a node and a service.
+
+:::info
+Use the following configuration as an example only - it should not be used on a system as is. 
+:::
+
+
+            node                                AlicloudSDWAN-HA-Router01
+                name              AlicloudSDWAN-HA-Router01
+                asset-id          iZwz96to20bbnnb
+
+                device-interface  WAN
+                    name               WAN
+                    pci-address        0000:00:04.0
+
+                    network-interface  WAN
+                        name                   WAN
+                        global-id              17
+
+                        neighborhood           ChinaUnicom
+                            name                  ChinaUnicom
+                            external-nat-address  119.23.200.200
+                            vector                wan1
+
+                            path-mtu-discovery
+                                enabled  true
+                            exit
+                        exit
+                        inter-router-security  internal
+                        dhcp                   v4
+                    exit
+                exit
+
+                device-interface  LAN
+                    name               LAN
+                    pci-address        0000:00:05.0
+                    enabled            true
+
+                    network-interface  LAN
+                        name                   LAN
+                        global-id              18
+
+                        neighborhood           ALICLOUD
+                            name  ALICLOUD
+                        exit
+                        inter-router-security  internal
+                        dhcp                   v4
+                    exit
+                exit
+
+                device-interface  farbic
+                    name               farbic
+                    pci-address        0000:00:06.0
+
+                    network-interface  fabric
+                        name                   fabric
+                        global-id              19
+
+                        neighborhood           intracloud
+                            name                intracloud
+                            topology            mesh
+
+                            path-mtu-discovery
+                                enabled  true
+                            exit
+                        exit
+                        inter-router-security  internal
+                        dhcp                   v4
+                    exit
+                exit
+
+                device-interface  cloud-ha
+                    name               cloud-ha
+                    description        "Auto generated device interface cloud-ha"
+                    type               host
+
+                    network-interface  cloud-ha-intf
+                        name        cloud-ha-intf
+                        global-id   27
+                        type        external
+                        tenant      cloud-ha
+                        source-nat  true
+
+                        address     169.254.137.1
+                            ip-address     169.254.137.1
+                            prefix-length  30
+                            gateway        169.254.137.2
+                        exit
+                    exit
+                exit
+            exit
+
+            service-route                       Alicloud-HA-test
+                name          Alicloud-HA-test
+                service-name  Alicloud-HA-test
+                vector        peer1
+
+                next-hop      AlicloudSDWAN-HA-Router01 LAN
+                    node-name  AlicloudSDWAN-HA-Router01
+                    interface  LAN
+                    vector     peer1
+                exit
+            exit
+
+            service-route                       AliCloud-HA-test2
+                name          AliCloud-HA-test2
+                service-name  Alicloud-HA-test
+                vector        peer2
+                peer          AlicloudSDWAN-HA-Router02
+            exit
+
+            service-route                       cloud-ha-service-route-alicloud-1
+                name          cloud-ha-service-route-alicloud-1
+                service-name  cloud-ha-service-alicloud-1
+                nat-target    169.254.137.2
+            exit
+
+            service-route                       cloud-ha-peer-service-route-alicloud-2
+                name          cloud-ha-peer-service-route-alicloud-2
+                service-name  cloud-ha-service-alicloud-2
+                peer          AlicloudSDWAN-HA-Router02
+            exit
+        exit
+
+
+
+
 ## Release Notes
 
 ### Release 3.0.0
 
 #### Issues Fixed
 
-- **PLUGIN-768** Support the Cloud HA plugin in 128T versions `5.1.0` and greater.
+- **PLUGIN-768** Support the Cloud HA plugin in SSR versions `5.1.0` and greater.

@@ -4,15 +4,15 @@ title: Conductor Migration
 
 Before going through this document, it is beneficial to first understand the [best practices for deploying your conductor](bcp_conductor_deployment.md).
 
-The purpose of this guide is to provide an overview and walkthrough the process of migrating the routers and their conductor configurations to a newly installed 128T Conductor
+The purpose of this guide is to provide an overview and walkthrough the process of migrating the routers and their conductor configurations to a newly installed SSR Conductor
 
 ## Prerequisites
 
-This document presumes that the reader has already installed a new conductor and wants to migrate the routers in the network along with their configurations. If you have not yet setup your 128T nodes, you can follow the [installation guide](intro_installation.md) to walk you through that process.
+This document presumes that the reader has already installed a new conductor and wants to migrate the routers in the network along with their configurations. If you have not yet setup your SSR nodes, you can follow the [installation guide](intro_installation.md) to walk you through that process.
 
 ## Migration Process
 
-During the process of standing up the 128T conductor as mentioned in the Installation Guide, there are a couple of things we will have to make sure before proceeding with the migration of the router. Make sure that you have exported the configurations from the existing Conductor and import them to the new Conductor.
+Before proceeding with the migration of the router, ensure that you have exported the configurations from the existing Conductor and import them to the new Conductor.
 
 While importing the configurations to the Conductor, we will need to *“commit”* the changes from the PCLI as long as the candidate configuration is valid. A restart will be required and then we can proceed with the migration.
 
@@ -20,7 +20,7 @@ While importing the configurations to the Conductor, we will need to *“commit�
 It is extremely important that the conductor configurations are exported/imported correctly to avoid losing the configuration.
 :::
 
-Once the new conductor is all set up, we can go on with migrating the routers one at a time. The below commands have to be run on the PCLI on every router and should be repeated for all the routers individually.
+Once the new conductor is set up, we can go on with migrating the routers one at a time. The below commands have to be run on the PCLI on every router and should be repeated for all the routers individually.
 
 For standalone conductor, on the router use the command: `migrate conductor <address1>`
 

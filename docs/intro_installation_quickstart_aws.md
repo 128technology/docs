@@ -575,7 +575,7 @@ If a Conductor template of a Private or Hourly image was used, you can login to 
 21. On the _Launch Status_ page, click **View Instances**.
 22. Record the instances IP address.
 23. Launch a command window prompt.
-24. Enter the IP address of the instance. **Result:** The interactive 128T Installer application launches.
+24. Enter the IP address of the instance. **Result:** The interactive SSR Installer application launches.
 25. When prompted by the installer, press the **Enter** key to select Begin.
 
 ### Configuring a default route to an Internet Gateway

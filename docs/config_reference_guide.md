@@ -788,12 +788,12 @@ authority > router > entitlement
 
 #### Description:
 
-The entitlement is where you apply keys you received from 128 Technology, to license your SSR for carrying traffic.
+The entitlement is where you apply keys you received from Juniper, to license your SSR for carrying traffic.
 
 | Element | Type | Description |
 | --- | --- | --- |
 | description | string | A textual description of the entitlement. |
-| id | string | The entitlement string, supplied to you by 128 Technology. |
+| id | string | The entitlement string, supplied to you by Juniper. |
 | max-bandwidth | uint64 | The purchased bandwidth for your SSR, expressed in *bytes per second*. |
 
 #### Version History:
@@ -1121,9 +1121,9 @@ authority > router > system > log-category
 
 #### Description:
 
-The *log-category* element is what allows administrators to selectively increase/decrease the verbosity of logging for various subsystems within the SSR. At times, during troubleshooting (and in particular, at the specific request of a member of the 128 Technology Customer Support team), you may need to selectively increase the logging verbosity of a particular subsystem to isolate a fault or routing issue. To increase logging across all subsystems may overwhelm the system's resources (and potentially mask the issue you're trying to troubleshoot), so these subsystems can affect only a small portion of the overall system's logging behavior.
+The *log-category* element is what allows administrators to selectively increase/decrease the verbosity of logging for various subsystems within the SSR. At times, during troubleshooting (and in particular, at the specific request of a member of the Juniper Customer Support team), you may need to selectively increase the logging verbosity of a particular subsystem to isolate a fault or routing issue. To increase logging across all subsystems may overwhelm the system's resources (and potentially mask the issue you're trying to troubleshoot), so these subsystems can affect only a small portion of the overall system's logging behavior.
 
-These logging subsystems will generally only be tuned at the direct request from a member of the technical support team at 128 Technology.
+These logging subsystems will generally only be tuned at the direct request from a member of the technical support team at Juniper.
 
 | Element | Type | Description |
 | --- | --- | --- |
@@ -1656,7 +1656,7 @@ A *node* is a single software instance, one that comprises a whole or part of an
 | Element | Type | Description |
 | --- | --- | --- |
 | asset-id | string | The *asset-id* is a unique identifier for a node within an SSR, which is used with the Conductor's "automated provisioning" feature. The asset-id, configured within a router's node in an Authority-wide configuration managed by a Conductor, is matched to an asset-id supplied by an unprovisioned node. Once an asset-id match is established and accepted at the Conductor, the Conductor can definitively install and configure the appropriate software on that node. |
-| asset-validation-enabled | boolean | When true, the system will check to ensure it meets minimum hardware requirements prior to launching SSR software. When false, this check is bypassed. This should not be bypassed unless it is recommended by the 128 Technology Customer Support team. |
+| asset-validation-enabled | boolean | When true, the system will check to ensure it meets minimum hardware requirements prior to launching SSR software. When false, this check is bypassed. This should not be bypassed unless it is recommended by the Juniper Customer Support team. |
 | clean-after-failed-install | boolean | Obsolete. Default value: true. This governs whether all traces of the SSR will be removed if an installation fails on this asset. |
 | clean-before-install | boolean | Obsolete. Default value: true. When true, this will remove all traces of previous installed versions of SSR when the installer process launches. |
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
@@ -1672,7 +1672,7 @@ A *node* is a single software instance, one that comprises a whole or part of an
 | ssh-keepalive | sub-element | Properties applied to the SSH sessions initiated by this node to other nodes, routers, and its conductor(s).|
 | software-update-bandwidth | union | Range 1-999999999999, or "unlimited." Default: unlimited. Configured in bits/second, this lets you govern the amount of bandwidth that this SSR node will use when retrieving software download images during its upgrade operation. This is useful on slower links, to avoid congestion with production traffic. |
 | ssh-keepalive | sub-element | Governs whether or not this system will support SSH keepalives. |
-| usage-reporter-enabled | boolean | When true, this node will report anonymous usage statistics back to 128 Technology, Inc. for continuous improvement of our software. |
+| usage-reporter-enabled | boolean | When true, this node will report anonymous usage statistics back to Juniper for continuous improvement of our software. |
 
 #### Version History:
 | Release | Modification |
@@ -1761,7 +1761,7 @@ authority > router > peer
 
 #### Description:
 
-A *peer* object models a remote router (in this system's *authority* or in a remote *authority*) that this SSR will bridge to via STEP (the 128 Technology routing protocol) to share services.
+A *peer* object models a remote router (in this system's *authority* or in a remote *authority*) that this SSR will bridge to via STEP (the Juniper routing protocol) to share services.
 
 | Element | Type | Description |
 | --- | --- | --- |
@@ -1795,13 +1795,15 @@ The inline flow performance profile provides flow statistics collected on a per 
 | --- | --- | --- |
 | name | string | The name of the performance monitoring profile. |
 | marking-count | uint16 | The number of packets to mark within a given interval. |
-| interval-duration | uint32 | The duration of a packet marking interval in milliseconds. | monitor-only | enumeration | Valid values: true/false. Default is true. Collect statistics without influencing packet processing features. |
+| interval-duration | uint32 | The duration of a packet marking interval in milliseconds. | 
+| monitor-only | boolean | Default is `false`. Generates metrics and provides those metrics for calculating SLA and making load balancing decisions. Set `monitor-only` to `true` to generate metrics, but will not influence load balancing decisions or traffic flow. |
 | resource-group | string | Associate this performance monitoring profile with a top-level resource-group. |
 
 #### Version History:
 | Release | Modification |
 | --- | --- |
 | 5.0.0 | Introduced |
+| 5.1.0 | Added `monitor-only` |
 
 ## policy
 
@@ -2010,7 +2012,7 @@ The *remote-login* feature creates management connections between the conductor 
 | -------- | ----------- | ------------------------------------------------------------ |
 | enabled  | boolean     | Whether the remote-login feature is enabled for routers in this authority. |
 
-### See Also
+#### See Also
 [Connecting to Routers](ts_connecting_to_routers.md)
 
 ## repository
@@ -2027,6 +2029,27 @@ This controls which repository or repositories a router will use to retrieve sof
 | --- | --- | --- |
 | offline-mode | boolean | Default: false. Controls whether the router will only be able to retrieve software upgrade images via its conductor.|
 | source-type | enumeration | Valid values: conductor-only, prefer-conductor, internet-only. Default: internet-only. To use the conductor as a proxy server to reach the SSR public internet repository, set this to `conductor-only` or `prefer-conductor`. To reach it via the public internet and not use the conductor as a proxy, set it to `internet-only`.|
+
+## reverse-packet-session-resiliency
+
+#### Path
+
+authority > router > reverse-packet-session-resiliency
+
+#### Description 
+
+Parameters for setting session failover behavior without presence of forward traffic.
+
+| Element  | Type        | Description                                                  |
+| -------- | ----------- | ------------------------------------------------------------ |
+| enabled  | boolean     | Default: true. Controls whether reverse packet triggered failover is enabled on this router when session resiliency is set. |
+| detection-interval | uint32 | Default: 5. Range: 1-30. | Frequency at which each session is checked for failover trigger in the absence of forward traffic. |
+| minimum-packet-count | uint32 | Default: 3. Range: 1-999999. Minimum number of packets received on the flow to activate the feature. |
+
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 5.6.3 | Introduced |
 
 ## route-reflector
 
@@ -2573,7 +2596,7 @@ authority > router > system > software-update
 
 #### Description:
 
-By default, an SSR retrieves software from a public software repository hosted by 128 Technology. However, in some deployments access to the public internet may be restricted. The *software-update* configuration allows administrative controls over how and from where the SSR will retrieve software.
+By default, an SSR retrieves software from a public software repository hosted by Juniper. However, in some deployments access to the public internet may be restricted. The *software-update* configuration allows administrative controls over how and from where the SSR will retrieve software.
 
 | Element | Type | Description |
 | --- | --- | --- |

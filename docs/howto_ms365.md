@@ -3,7 +3,7 @@ title: Microsoft 365
 sidebar_label: Microsoft 365
 ---
 
-128T optimizes Microsoft 365 sessions, allowing you to easily configure the associated services to be delivered using the recommended [network connectivity principles](https://docs.microsoft.com/en-us/office365/enterprise/office-365-network-connectivity-principles). It uses an [AppID module](concepts_appid.md#appid-using-modules) for automatic discovery of Microsoft 365 endpoints, and simple service definition.
+The SSR optimizes Microsoft 365 sessions, allowing you to easily configure the associated services to be delivered using the recommended [network connectivity principles](https://docs.microsoft.com/en-us/office365/enterprise/office-365-network-connectivity-principles). It uses an [AppID module](concepts_appid.md#appid-using-modules) for automatic discovery of Microsoft 365 endpoints, and simple service definition.
 
 :::info
 Microsoft 365, or M365 is formerly known as Office 365, or O365.
@@ -14,7 +14,7 @@ Microsoft 365, or M365 is formerly known as Office 365, or O365.
 To configure your router for Microsoft 365 you must enable the router for AppID module learning mode, create Microsoft 365 services, and define associated policies for access, security, and routing.
 
 ### Enable Module Learning Mode
-In the router configuration, enable module based application learning mode by adding `module` to the "Application Identification" settings. 128T software installs a default AppID module for Microsoft 365 applications.
+In the router configuration, enable module based application learning mode by adding `module` to the "Application Identification" settings. SSR software installs a default AppID module for Microsoft 365 applications.
 
 #### GUI Example
 ![AppId Module Add](/img/howto_m365_1.png)

@@ -80,10 +80,6 @@ Node: labsystem2
 Completed in 0.19 seconds
 ```
 
-### Session Failover
-
-For long-lived sessions that are very reverse-data intensive (for example, a TCP session that is downloading a large file over HTTP) a session failover often results in an empty session. This happens because the new session is expecting a forward packet to re-establish the session. To prevent the transfer from stalling, a keep-alive mechanism has been added for flow moves. When a flow move is triggered, the SSR detects inactivity in forward traffic and generates a keep-alive packet in the forward direction. This packet causes the session to be properly modified to the new path, and forwarded on to the subsequent router(s). The subsequent router session is modified as well. The keep-alive packet is dropped before egressing to the LAN. In a case where the failover is selecting a new path to a new node/router rather than modifying an existing session, a new session will be created.
-
 ## Migrating from Standalone to HA
 For an established standalone router of one node, converting it to be highly available requires configuring a second node within the SSR configuration (PCLI or GUI).
 
@@ -221,7 +217,7 @@ Redundancy groups are sets of interfaces that _share fate_, such that if one of 
 When configuring high availability using VRRP, redundancy groups are not configured/needed.
 :::
 
-While redundancy groups are most commonly found in legacy deployments (i.e., those that predate 128 Technology's introduction of the fabric interface), they are still useful in simple HA deployments. Furthermore, the redundancy group affords administrators the ability to assert a preference for which node is active in an HA pair in the "sunny day" scenario where no interfaces are administratively or operationally down.
+While redundancy groups are most commonly found in legacy deployments (i.e., those that predate the SSR's introduction of the fabric interface), they are still useful in simple HA deployments. Furthermore, the redundancy group affords administrators the ability to assert a preference for which node is active in an HA pair in the "sunny day" scenario where no interfaces are administratively or operationally down.
 
 Generally, you will configure two nodes that each have a set of forwarding interfaces (for illustrative purposes, assume an interface on an internal network named _lan_ and an interface on an external network named _wan_). Each node requires a _redundancy-group_ that containing a pair of internal and external interfaces, as is seen in the following example:
 

@@ -255,7 +255,7 @@ The _Session Smart Router Template_ deploys a VM for the SSR with three network 
 | eth1                   | Public           |
 | eth2                   | Private          |
 
-In earlier versions of the 128T Networking Platform software (pre-5.0), the SSR used the PCI addresses to map to the device interfaces. If you are installing an earlier version of the Software, please see [PCI Address Association](#pci-address-association). 
+In earlier versions of the SSR Networking Platform software (pre-5.0), the SSR used the PCI addresses to map to the device interfaces. If you are installing an earlier version of the Software, please see [PCI Address Association](#pci-address-association). 
 
 With the release of 5.0, device interfaces are mapped using the VMBus UUID; use of the PCI addresses is no longer supported. Use the following process to map the VMBus UUID to the device interfaces. 
 
@@ -388,7 +388,7 @@ When you select a template, a new tab opens in the browser that redirects you to
 :::important
 As an additional note and only applicable when the chosen image is the Session Smart Networking Platform, please be aware of the following conditions before using any of its templates:
 * Applicable when deploying an Session Smart Router:
-  * If there is an existing Session Smart Conductor in the network and the intent is to perform a non interactive installation of an SSR (for example a ZTP installation) please make sure the certificate provided by 128 Technology has been imported and loaded in Session Smart Conductor before launching the template to deploy the SSR.
+  * If there is an existing Session Smart Conductor in the network and the intent is to perform a non interactive installation of an SSR (for example a ZTP installation) please make sure the certificate provided by Juniper has been imported and loaded in Session Smart Conductor before launching the template to deploy the SSR.
 :::
 
 ### Launch the Template

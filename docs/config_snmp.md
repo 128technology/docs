@@ -15,7 +15,8 @@ SSR provdes MIB files that describe the SSR SNMP objects and traps available on 
 /usr/share/snmp/128technology/
 ```
 
-A Network Management System (NMS) can import these MIBs when managing the SSR. On a Centos based NMS the latest mibs can be optionally installed by downloading the latest "128T-mibs" package from the SSR yum repoisitory.
+A Network Management System (NMS) can import these MIBs when managing the SSR appliance. On a Centos based NMS the latest mibs can be optionally installed by downloading the latest "128T-mibs" package from the SSR yum repoisitory.
+
 ```
 dnf install 128T-mibs
 ```
@@ -75,7 +76,7 @@ exit
 ```
 
 :::note
-Iif you intend on polling the SSR device via one of the *managed interfaces* (i.e., one that is configured within the SSR as a forwarding interface), this will require additional configuration steps. This in turn may affect the source address that the SNMP daemon sees as requests arrive. See the section below on Polling SNMP.
+If you intend on polling the SSR device via one of the *managed interfaces* (i.e., one that is configured within the SSR as a forwarding interface), this will require additional configuration steps. This in turn may affect the source address that the SNMP daemon sees as requests arrive. See the section below on Polling SNMP.
 :::
 
 ### Notification Receiver Configuration
