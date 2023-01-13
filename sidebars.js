@@ -8,7 +8,6 @@ module.exports = {
     "Releases and Support": [  
       "about_releases",
       "about_support_policy",
-      "about_services_description",
       "about_certified_platforms",
       "about_supported_drivers",
       "about_supported_platforms",
