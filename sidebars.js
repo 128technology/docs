@@ -64,7 +64,7 @@ module.exports = {
     "System Requirements": [
       "intro_system_reqs",
     ],
-    "Installation": [
+    "Installation Guide": [
       "intro_installation",
     {
         "type": "category",
@@ -164,8 +164,7 @@ module.exports = {
       "config_forward_error_correction",      
       "config_gre_tunnel",
       "config_nat",
-      "config_service_health",
-      "config_transport_encryption",   
+      "config_service_health",   
     ],
     "Ethernet Over SVR": [
       "concepts_EthOverSVR",
@@ -208,6 +207,7 @@ module.exports = {
     ],
     "Security": [
       "sec_adaptive_encrypt",
+      "config_transport_encryption",
     ],
     "Service and Topology Exchange Protocol (STEP)": [
         "config_STEP",
