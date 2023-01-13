@@ -55,20 +55,22 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance",
         "items": [
-          "release_notes_wan_assurance_plugin_3.3",
-          "release_notes_wan_assurance_plugin_3.4"
-        ],
-      },
+          "release_notes_wan_assurance_plugin_3.6",
+          "release_notes_wan_assurance_plugin_3.5",
+          "release_notes_wan_assurance_plugin_3.4",
+          "release_notes_wan_assurance_plugin_3.3"
+        ]
+      }
     ],
     "System Requirements": [
       "intro_system_reqs",
     ],
     "Installation": [
-      {
+      "intro_installation",
+    {
         "type": "category",
-        "label": "Network Installation",
+        "label": "Router Installation",
         "items": [
-          "intro_installation",
           "intro_downloading_iso",
           "intro_creating_bootable_usb",
           "intro_installation_bootable_media",
@@ -76,7 +78,22 @@ module.exports = {
           "intro_basic_router_config",
           "intro_otp_iso_install",
           "intro_install_quickstart_otpiso",
+          "onboard_ssr_to_conductor",
         ],
+      },
+      {
+        "type": "category",
+        "label": "Conductor Installation",
+        "items": [
+          "install_conductor_overview",
+          "bcp_conductor_deployment",
+          "single_conductor_install",
+          "ha_conductor_install",
+          "single_conductor_config",
+          "conductor_upgrade",
+          "conductor_conversion",
+          "howto_conductor_migration",
+        ],  
       },
       {
         "type": "category",
@@ -110,6 +127,7 @@ module.exports = {
         "label": "Installation Appendix",
         "items": [
           "intro_installation_installer",
+          "install_qcow2_deployment",
           "legacy_OTP_install",
         ],
        },
@@ -172,13 +190,6 @@ module.exports = {
     "LTE": [
       "howto_lte",
       "bcp_lte_peering",
-    ],
-    "Mist Integration and WAN Assurance": [
-      "config_wan_assurance",
-      "release_notes_wan_assurance_plugin_3.3",
-      "release_notes_wan_assurance_plugin_3.4",
-      "intro_installation_image",
-      "install_onboard_hdware",
     ],
     "Metrics": [
       "concepts_metrics",
@@ -254,6 +265,39 @@ module.exports = {
       "concepts_learning_VRF_routes",
       "config_vrf_learning",
       "ts_troubleshooting_vrf",
+    ],
+    "WAN Assurance and Mist Integration": [
+      "wan_overview",
+      {
+        "type": "category",
+        "label": "WAN Assurance Quick Start",
+        "items": [
+          "wan_assurance_ssr120_quickstart",
+          "wan_assurance_ssr130_quickstart",
+          "intro_wa_quickstart_1_networks",
+          "intro_wa_quickstart_2_apps",
+          "intro_wa_quickstart_3_templates",
+          "intro_wa_quickstart_4_siteassign",
+          ],
+        },
+              {
+        "type": "category",
+        "label": "Whitebox Adoption",
+        "items": [ 
+          "wan_staging",
+          "wan_onboarding_whitebox",
+          "wan_telemetry_site_assign",
+          ]
+      },
+      {
+        "type": "category",
+        "label": "Cloud Telemetry for a Conductor-Managed SSR",
+        "items": [
+          "config_wan_assurance",
+          "wan_telemetry_features",
+          "wan_telemetry_troubleshooting",
+          ],
+      },
     ],
     "Web Filtering": [
       "config_domain-based_web_filter",
