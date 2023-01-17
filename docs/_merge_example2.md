@@ -6,3 +6,5 @@ The Little Install Guide knew that if it was going to help the users have a grea
 
 
 Sample text from merge_example 2.
+
+<!--- need to add random invisible text to generate a change to force a rebuild of the PR --->
