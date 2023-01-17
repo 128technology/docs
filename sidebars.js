@@ -61,8 +61,9 @@ module.exports = {
         ]
       }
     ],
-    "System Requirements": [
+    "Deployment Considerations": [
       "intro_system_reqs",
+      "config_firewall_ports",
     ],
     "Installation Guide": [
       "intro_installation",
@@ -73,7 +74,6 @@ module.exports = {
           "intro_downloading_iso",
           "intro_creating_bootable_usb",
           "intro_installation_bootable_media",
-          "intro_basic_conductor_config",
           "intro_basic_router_config",
           "intro_otp_iso_install",
           "intro_install_quickstart_otpiso",
@@ -123,15 +123,6 @@ module.exports = {
       },
       {
         "type": "category",
-        "label": "Installation Appendix",
-        "items": [
-          "intro_installation_installer",
-          "install_qcow2_deployment",
-          "legacy_OTP_install",
-        ],
-       },
-      {
-        "type": "category",
         "label": "Installer/Initializer Reference",
         "items": [
           "installer_cli_reference",
@@ -140,6 +131,15 @@ module.exports = {
           "initializer_preferences",
         ],
       },
+      {
+        "type": "category",
+        "label": "Installation Appendix",
+        "items": [
+          "intro_installation_installer",
+          "install_qcow2_deployment",
+          "legacy_OTP_install",
+        ],
+       },
     ],
     "Access Management and Authentication": [
       "config_access_mgmt",
@@ -306,7 +306,6 @@ module.exports = {
       "concepts_application_discovery",
     ],
     "How To": [
-      "howto_conductor_migration",
       "howto_extend_gui_nav",
       "howto_maintenance_mode",
       "howto_ms365",
