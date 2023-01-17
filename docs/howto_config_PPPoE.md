@@ -1,7 +1,9 @@
 ---
-title: Configuring PPPoE
+title: Configuring Point-to-Point Protocol over Ethernet
 sidebar_label: Configuring PPPoE
 ---
+
+Point-to-Point Protocol over Ethernet (PPPoE) combines PPP, which typically runs over broadband connections, with the Ethernet link-layer protocol that allows users to connect to a network of hosts over a bridge or access concentrator. PPPoE enables service providers to maintain access control through PPP connections and also manage multiple hosts at a remote site.
 
 ## Configuration
 

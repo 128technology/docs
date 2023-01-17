@@ -1,9 +1,7 @@
 ---
-title: 'Programmable Command Line Interface (PCLI)'
-sidebar_label: 'PCLI'
+title: 'About the Programmable Command Line Interface (PCLI)'
+sidebar_label: 'About the PCLI'
 ---
-
-## About the PCLI
 
 The Programmable Command Line Interface (PCLI) is one of the two primary human interfaces for the SSR; this document uses the terms PCLI and CLI interchangeably. This document describes how to use the PCLI commands supported by the SSR. 
 

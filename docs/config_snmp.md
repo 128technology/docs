@@ -1,6 +1,6 @@
 ---
-title: Simple Network Management Protocol (SNMP) - Overview
-sidebar_label: SNMP - Overview
+title: Simple Network Management Protocol (SNMP) Overview
+sidebar_label: Overview
 ---
 
 Simple Network Management Protocol (SNMP) is an internet standard protocol for collecting and organizing information about managed devices on IP networks and for modifying that information to change device behavior. SNMP is widely used in network management for network monitoring. SNMP exposes management data in the form of variables on the managed systems organized in a management information base (MIB) which describe the system status and configuration.[^1]
@@ -16,6 +16,7 @@ SSR provdes MIB files that describe the SSR SNMP objects and traps available on 
 ```
 
 A Network Management System (NMS) can import these MIBs when managing the SSR appliance. On a Centos based NMS the latest mibs can be optionally installed by downloading the latest "128T-mibs" package from the SSR yum repoisitory.
+
 ```
 dnf install 128T-mibs
 ```
@@ -75,7 +76,7 @@ exit
 ```
 
 :::note
-Iif you intend on polling the SSR device via one of the *managed interfaces* (i.e., one that is configured within SSR as a forwarding interface), this will require additional configuration steps. This in turn may affect the source address that the SNMP daemon sees as requests arrive. See the section below on Polling SNMP.
+If you intend on polling the SSR device via one of the *managed interfaces* (i.e., one that is configured within the SSR as a forwarding interface), this will require additional configuration steps. This in turn may affect the source address that the SNMP daemon sees as requests arrive. See the section below on Polling SNMP.
 :::
 
 ### Notification Receiver Configuration
@@ -104,7 +105,7 @@ When sendiing responses via a forwarding interface (as described below), the SSR
 
 ### Polling via Forwarding Interfaces
 
-A _forwarding interface_ is one that is identified in your SSR configuration as being managed by the SSR software – generally, this is a `device-interface` of type `ethernet`, with a `pci-address` on your platform's PCI bus. In order to successfully poll an SSR via a forwarding interface, there are several other configuration components required:
+A _forwarding interface_ is one that is identified in your SSR configuration as being managed by the SSR software – generally, this is a `device-interface` of type `ethernet`, with a `pci-address` on your platform's PCI bus. In order to successfully poll a SSR via a forwarding interface, there are several other configuration components required:
 
 1. A `host-service` on the network-interface, with type set to `custom` and `transport` set to UDP/161 (or whichever port you've specified in your `snmp-server` configuration).
 2. The `host-service` should include one or more `access-policy` statements to allow access by the SNMP polling device(s).
@@ -192,7 +193,7 @@ The t128AlarmNotification definition defines the alarm trap sent out by the syst
 
 ### T128-METRICS.mib
 
-The T128-METRICS-MIB provides SNMP access to the expansive set of metrics provided by the SSR product which are exposed via the t128MetricsTable.
+The 128T-METRICS-MIB provides SNMP access to the expansive set of metrics provided by the SSR product which are exposed via the t128MetricsTable.
 
 Each row of the metrics table is keyed by two objects, the t128MetricAlias and the t128MetricIndex. The t128MetricAlias is an arbitrary string up to 64 characters long that represents a description of the metric. When read from the table, this alias also includes a metric instance suffix which in the most common case will be `_0`. For example, if the default CPU utlization metric has an alias _cpuUtilization_, it will be returned as `cpuUtilization_0`. In addition to the alias, the t128MetricIndex key represents a unique series of a metric.
 

@@ -1,6 +1,6 @@
 ---
-title: Alarms and Events
-sidebar_label: Alarm and Events
+title: Overview
+sidebar_label: Overview
 ---
 
 ## What are Alarms and Events?
