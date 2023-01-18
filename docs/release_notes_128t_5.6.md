@@ -28,6 +28,36 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.6.6-7
+
+**Release Date:** January 18, 2023
+
+### New Features
+
+- **I95-47947 Increase max CoreDump size to 4GB:** The maximum size of coredumps now defaults to 4G. This value can be configured in environment config by modifying the `maxCoredumpSize` field of the new `crashReporting` object. Any manual modifications to `coredump.conf` will be overwritten whenever the service is started. 
+
+:::important
+Upgrading to this release version will cause `coredump.conf` to be re-written with 4G limits for coredumps even if `coredump.conf` had been updated manually for a higher value!
+:::
+
+### Resolved Issues
+
+- **I95-46336 Peer connection not established after AWS upgrade:** Resolved an issue where an AWS C5 instance size can fail to initialize when more than one accelerated network interface is configured.
+------
+- **I95-48352 Application ID is not identifying MS-Teams correctly:** Resolved an issue where sessions with IP addresses as their domain names were not classified correctly. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.
+------
+- **I95-48447 JWTs signing does not meet stringent security standards:** Changed how JWTs are signed to increase security posture.
+------
+- **I95-48464 This CVE has been addressed.**
+------
+- **I95-49139 `show network-interface application` renders poorly for empty hostnames:** The DHCP server state script has been updated to not escape `<empty>` hostname.
+------
+- **I95-49166 OSPF is not configurable using the GUI:** This issue has been resolved.
+------
+- **I95-49225 Packets containing only path-metrics metadata are dropped:** Resolved an issue where FPM calculations caused these packets to be dropped when flows were affected due to routing changes.
+------
+- **I95-49326 New sessions become associated with defunct sessions on next-hop routers:** Enhanced session reuse detection to validate all incoming metadata once a session-id has been properly latched.
+
 ## Release 5.6.5-5
 
 **Release Date:** December 28, 2022
