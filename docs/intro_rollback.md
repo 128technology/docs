@@ -63,11 +63,3 @@ To avoid SSH session timeout during installation, it is strongly recommended to 
    ctrl+a
    d
    ```
-
-### Uninstalling SSR
-
-To uninstall SSR software and remove all configuration, libraries, and applications installed along with SSR, use the command `erase128t` from the Linux shell, as root user.
-
-:::warning
-This action is not revertible.
-:::
