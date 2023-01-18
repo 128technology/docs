@@ -333,30 +333,3 @@ cd /etc/yum.repos.d/
 for i in 128t-authenticated-*; do t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cp.get_file salt://${i} /etc/yum.repos.d/${i}; done
 t128-salt -C '* and not L@<conductor-1-asset-id>,<conductor-2-asset-id>' cmd.run "dnf makecache --assumeyes; yum makecache --assumeyes"
 ```
-
-## Uninstalling the SSR
-
-:::warning
-
-This command stops and uninstalls the SSR. It will also remove the SSR data files,
-including configuration, logs, and more. Use with caution!
-
-:::
-
-The `erase128t` can be used to uninstall the SSR. It is packaged with the Installer,
-but it is _not_ a subcommand of the `install128t` command.
-
-```sh
-erase128t
-```
-
-Use `-h`/`--help` to see all available options.
-
-<!-- markdownlint-disable line-length -->
-| Option | Description |
-|--------|-------------|
-| `-y`, `--assume-yes` | Skip confirmation prompts and run as if the answer was "yes". |
-| `-c`, `--cleanup-only` | Do not uninstall the SSR, but still delete associated data such as configuration. |
-| `-l`, `--keep-logs` | Do not remove the SSR log files. |
-<!-- markdownlint-enable line-length -->
-
