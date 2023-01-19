@@ -1,6 +1,5 @@
 
 <!--- SSR 1300 Hardware ---->
-
 ![Device Connections](/img/hdwr_ssr1300_faceplate.png)
 
 Your SSR device uses port 0 (`ge-0/0/0`) as a default WAN port to contact Mist for zero-touch provisioning (ZTP). You will also be setting up port 3 (`ge-0/0/3`) with a LAN network.
