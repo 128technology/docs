@@ -1,41 +1,7 @@
 ---
-title: Device Default Port Layout
-sidebar_label: Device Default Port Layout
+title: Whitebox Device Default Port Layout
+sidebar_label: Whitebox Device Default Port Layout
 ---
-import SSR120Hardware from './_hdwr_ssr120portcnx.md';
-import SSR130Hardware from './_hdwr_ssr130portcnx.md';
-import SSR1200Hardware from './_hdwr_ssr1200portcnx.md';
-import SSR1300Hardware from './_hdwr_ssr1300portcnx.md';
-import SSR1400Hardware from './_hdwr_ssr1400portcnx.md';
-import SSR1500Hardware from './_hdwr_ssr1500portcnx.md';
-import SilicomMadridG61 from './_hdwr_madridG61.md';
-
-
-The information in this section pertains to system onboarding using the Image-based installation introduced with the version 6.0 release. 
-
-## Juniper Devices
-
-The following sections provide information about port connections on Juniper devices.
-
-### SSR 120
-<SSR120Hardware/>
-
-### SSR 130
-<SSR130Hardware/>
-
-### SSR 1200
-<SSR1200Hardware/>
-
-### SSR 1300
-<SSR1300Hardware/>
-
-### SSR 1400
-<SSR1400Hardware/>
-
-### SSR 1500
-<SSR1500Hardware/>
-
-## Whitebox Devices
 
 When a whitebox device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device, a known port layout is configured as the device default.
 When the device is unrecognized, a default port layout is generated based upon PCI address order.
@@ -69,9 +35,19 @@ IP connectivity is required for GUI onboarding. If you do not have an ethernet i
     * [GUI through LAN port.](intro_installation_image.md#associate-the-router-with-mist)
     * [PCLI `adopt`command.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
-### Silicom Madrid 90500-0151-G61
+### Silicom Madrid 90500-0151-G61 
 
-<SilicomMadridG61/> 
+![Silicom Madrid](/img/install_onbd_hdwr_silicom.png)
+
+1. Connect port 6 `ge0/0/6` (WAN) to a network providing DHCP address assignment, and outbound connectivity to Mist. If you are adopting using the PCLI `adopt` command, proceed to [PCLI Adoption.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
+
+2. Connect port 3 `ge0/0/3` (LAN) to your laptop, and statically assign your laptop port address 192.168.3.10.
+
+3. Go to `https://192.168.3.1 `
+
+4. Log in to the router and use one of the following ways to associate the device with a Mist organization.
+    * [GUI through LAN port.](intro_installation_image.md#associate-the-router-with-mist)
+    * [PCLI `adopt`command.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
 ### Fitlet2 Dual Port
 
