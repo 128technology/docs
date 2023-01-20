@@ -79,11 +79,11 @@ This order often does NOT match the external bezel port order. Some plugging in 
 
 The following sections provide information about port connections on Juniper certified devices and non-certified devices that are considered compatible. 
 
-- [Lanner 1515:](install_onboard_hdware.md#lanner-1515) Certified Device
-- [Silicom Madrid 90500-0151-G61:](install_onboard_hdware.md#silicom-madrid-90500-0151-g61) Certified Device
-- [Fitlet2 Dual Port:](install_onboard_hdware.md#fitlet2-dual-port) Non-certified, Compatible Device
-- [Fitlet2 Quad Port:](install_onboard_hdware.md#fitlet2-quad-port) Non-certified, Compatible Device
-- [Additional Non-certified, Compatible Devices](install_onboard_hdware.md#additional-non-certified-compatible)
+- [Lanner 1515:](hdwr_whitebox_port_layout.md#lanner-1515) Certified Device
+- [Silicom Madrid 90500-0151-G61:](hdwr_whitebox_port_layout.md#silicom-madrid-90500-0151-g61) Certified Device
+- [Fitlet2 Dual Port:](hdwr_whitebox_port_layout.md#fitlet2-dual-port) Non-certified, Compatible Device
+- [Fitlet2 Quad Port:](hdwr_whitebox_port_layout.md#fitlet2-quad-port) Non-certified, Compatible Device
+- [Additional Non-certified, Compatible Devices](hdwr_whitebox_port_layout.md#additional-non-certified-compatible)
 
 Use this data to identify the port layout for your whitebox device. A link to return to this process is provided at the end of the process for each device. 
 

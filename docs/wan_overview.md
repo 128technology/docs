@@ -15,6 +15,10 @@ The onboarding process for each deployment is similar - connect your device to t
 
 For onboarding an SSR device with 6.x software, start with either [SSR120 Onboarding](wan_assurance_ssr120_quickstart.md) or [SSR130 Onboarding](wan_assurance_ssr130_quickstart.md), whichever is appropriate for your deployment.
 
+### Adopt a Conductor-Managed SSR Device
+
+To adopt conductor-managed SSR devices into Mist, refer to [Cloud Telemetry for a Conductor-Managed SSR](config_wan_assurance.md). 
+
 ### Adopt a Mist-Managed Whitebox Device
 
 To adopt a Mist-managed whitebox device with 6.x software - a non-Juniper hardware device, that is either certified by Juniper, or a Juniper approved, self-evaluated device - use the following procedure:
@@ -23,6 +27,3 @@ To adopt a Mist-managed whitebox device with 6.x software - a non-Juniper hardwa
 2. [Whitebox Onboarding](wan_onboarding_whitebox.md)
 3. [Site Assignment ](wan_telemetry_site_assign.md)
 
-### Adopt a Conductor-Managed SSR Device
-
-To adopt conductor-managed SSR devices into Mist, refer to [Cloud Telemetry for a Conductor-Managed SSR](config_wan_assurance.md). 

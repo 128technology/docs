@@ -1,53 +1,7 @@
 ---
-title: Device Default Port Layout
-sidebar_label: Device Default Port Layout
+title: Whitebox Device Default Port Layout
+sidebar_label: Whitebox Device Default Port Layout
 ---
-
-The information in this section pertains to system onboarding using the Image-based installation introduced with the version 6.0 release. 
-
-## Juniper Devices
-
-The following sections provide information about port connections on Juniper devices.
-
-### SSR 120
-
-![Device Connections](/img/intro_wa_ssr120_quickstart_1.png)
-
-Your SSR device uses port 0 (`ge-0/0/0`) as a default WAN port to contact Mist for zero-touch provisioning (ZTP). You will also be setting up port 3 (`ge-0/0/3`) with a LAN network.
-
-1. **Connect port 0** to an Ethernet WAN link capable of providing the device with:
-    * DHCP address assignment
-    * Connectivity to the Internet and Mist
-
-2. **Connect port 3** to your LAN devices, including:
-    * Mist-managed Juniper EX switches
-    * Mist APs
-    * User devices
-
-3. **Power on the device**.
-
-4. Use the [Mist Claim Code](wan_assurance_ssr120_quickstart.md#claim-your-device) to associate the device with a Mist Organization. 
-
-### SSR 130
-
-![Device Connections](/img/intro_wa_ssr130_quickstart_1.png)
-
-Your SSR device uses port 0 (`ge-0/0/0`) as a default WAN port to contact Mist for zero-touch provisioning (ZTP). You will also be setting up port 3 (`ge-0/0/3`) with a LAN network.
-
-1. **Connect port 0** to an Ethernet WAN link capable of providing the device with:
-    * DHCP address assignment
-    * Connectivity to the Internet and Mist
-
-2. **Connect port 3** to your LAN devices, including:
-    * Mist-managed Juniper EX switches
-    * Mist APs
-    * User devices
-
-3. **Power on the device**.
-
-4. Use the [Mist Claim Code](wan_assurance_ssr130_quickstart.md#claim-your-device) to associate the device with a Mist Organization. 
-
-## Whitebox Devices
 
 When a whitebox device is installed with SSR software, the software scans the device to generate a default port map. When the device is recognized as a certified device, a known port layout is configured as the device default.
 When the device is unrecognized, a default port layout is generated based upon PCI address order.
@@ -81,7 +35,7 @@ IP connectivity is required for GUI onboarding. If you do not have an ethernet i
     * [GUI through LAN port.](intro_installation_image.md#associate-the-router-with-mist)
     * [PCLI `adopt`command.](intro_installation_image.md#adopt-the-router-from-the-ssr-pcli)
 
-### Silicom Madrid 90500-0151-G61
+### Silicom Madrid 90500-0151-G61 
 
 ![Silicom Madrid](/img/install_onbd_hdwr_silicom.png)
 

@@ -39,7 +39,6 @@ module.exports = {
     ],  
     "Image-Based Installation": [
       "intro_installation_image",
-      "install_onboard_hdware",
     ],
     "Cloud Installations": [
       "supported_cloud_platforms",
@@ -78,6 +77,7 @@ module.exports = {
     ],
     "WAN Assurance": [
       "wan_overview",
+      "hdwr_ssr_device_port_layout",
       {
         "type": "category",
         "label": "WAN Assurance Quick Start",
@@ -95,6 +95,7 @@ module.exports = {
         "label": "Whitebox Adoption",
         "items": [ 
           "wan_staging",
+          "hdwr_whitebox_port_layout",
           "wan_onboarding_whitebox",
           "wan_telemetry_site_assign",
           ]
