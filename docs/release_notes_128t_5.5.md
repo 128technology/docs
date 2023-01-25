@@ -50,13 +50,13 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-46336 Peer connection not established after AWS upgrade:** Resolved an issue where an AWS C5 instance size can fail to initialize when more than one accelerated network interface is configured.
 ------
-- **I95-47888 Race condition in Application identification stats tracking:** This issue has been resolved. 
+- **I95-47888 Race condition in Application identification stats tracking causes crash:** This issue has been resolved. 
 ------
 - **I95-47992 HTTP service not working in WAN Assurance:** Resolved an issue where HTTP traffic is dropped when using a combination of application-identification, adaptive-encryption, and spoke-to-hub-to-spoke topology (outbound-only peer-connectivity).
 ------
-- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths weremissing from show services output.
+- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths were missing from show services output.
 ------
-- **I95-48324 Application Identification not parsing domain names:** The App-ID parsing mode has been updated to correctly parse domain names.
+- **I95-48324 Application Identification not parsing domain names:** The Application Identification parsing mode has been updated to correctly parse domain names on hub to spoke outbound traffic.
 ------
 - **I95-48352 Application ID is not identifying MS-Teams correctly:** Resolved an issue where sessions with IP addresses as their domain names were not classified correctly. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.
 ------
@@ -91,6 +91,8 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 - **I95-49134 DHCP server does not work when device IDs on HA interface do not match:** Resolved an issue where a DHCP server interface may instead forward DHCP requests through the `service-area` and out to the WAN.
 ------
 - **I95-49139 `show network-interface application` renders poorly for empty hostnames:** The DHCP server state script has been updated to not escape `<empty>` hostname.
+------
+- **I95-49143 Read data core utilization from graphQL metrics:** Timeseries is now used to improve the accuracy of the Data Core Utilization metrics.
 ------
 - **I95-49157 Poor GUI and PCLI performance for other users during a change/validate/commit operation:** Resolved the performance issue by optimizing the export config API.
 ------
