@@ -107,8 +107,6 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 - **I95-49242 When HMAC is disabled, the automatic MSS adjustment calculation for `enforced-mss = automatic` may be wrong :** The Automatic MSS adjustment calculation has been corrected (expanded). 
 ------
 - **I95-49341 BGP next hop exception being thrown:** Resolved an issue where a duplicate BGP next hop resulted in an exception. 
-------
-- **I95-49724 "Resource not found" error in the configuration preview of the Quickstart:** Removed a typo in the API Route for `/config/upload`. 
 
 ## Release 5.5.7-3
 
