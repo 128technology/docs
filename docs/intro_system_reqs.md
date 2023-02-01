@@ -59,7 +59,7 @@ When deploying SSR on VMware ESXi release 6.7 (or newer), Secure Boot must be di
 3. Save the configuration.
 4. Reboot your system.
 
-BIOS settings may vary between hardware vendors. Please consult your hardware documentation for specific instructions. Additional information for common deployments of SSR hardware platforms may be found on [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/).
+BIOS settings may vary between hardware vendors. Please consult your hardware documentation for specific instructions. Additional information for common deployments of SSR hardware platforms may be found on [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208).
 
 ## Interface Requirements
 Logically, SSR routers have at least two interfaces; in many deployments they represent LAN and WAN interfaces. These may be separate physical interfaces, or they may be separate VLANs on a single physical interface. There is also typically a third interface used for management traffic.
@@ -121,7 +121,7 @@ If a PCI address for an interfaces change, the system will be disqualified. Exam
 If you are unsure which device maps to which physical port on your Linux system, you can use Linux's ethtool application to blink the NIC's activity light. For example, the command `ethtool --identify eno1 120` will blink eno1's activity light for two minutes (120 seconds).
 :::
 :::note
-PCI-to-port maps are available for commonly deployed hardware systems on our user community, [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/)
+PCI-to-port maps are available for commonly deployed hardware systems on our user community, [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208)
 :::
 
 ## VMware ESXi and KVM Requirements
