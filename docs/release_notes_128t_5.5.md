@@ -28,9 +28,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.5.8-6
+## Release 5.5.8-7
 
-**Release Date:** January 31, 2023
+**Release Date:** February 1, 2023
 
 ### New Features
 
@@ -63,6 +63,10 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 - **I95-48396 `show-rib` limited to 512 entries:** The `show rib` count maximum has been increased.
 ------
 - **I95-48447 JWTs signing does not meet stringent security standards:** Changed how JWTs are signed to increase security posture.
+------
+- **I95-48529 BFD hold-down timer does not hold-down peer service-paths:** Resoled an issue where peer service-paths do not remain down while the BFD session / peer status is in the hold-down period after transitioning from down to up. Peer service-paths status now reflects the peer status, and sessions will not be moved back to peers that have re-established connectivity, but are still in the hold-down period.
+------
+- **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
 ------
 - **I95-48600 Compare Session ID's to prevent flow collisions:** Re-use of sessions is prevented when waypoint pool is exhausted and sessions linger on egress router.
 ------
@@ -103,6 +107,8 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 - **I95-49242 When HMAC is disabled, the automatic MSS adjustment calculation for `enforced-mss = automatic` may be wrong :** The Automatic MSS adjustment calculation has been corrected (expanded). 
 ------
 - **I95-49341 BGP next hop exception being thrown:** Resolved an issue where a duplicate BGP next hop resulted in an exception. 
+------
+- **I95-49724 "Resource not found" error in the configuration preview of the Quickstart:** Removed a typo in the API Route for `/config/upload`. 
 
 ## Release 5.5.7-3
 
