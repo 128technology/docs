@@ -39,7 +39,7 @@ It may be necessary to change the target system’s BIOS settings to allow booti
 ![BIOS Screen](/img/intro_installation_bootable_media_bios.png)
 
 ### Enable Automatic Restart
-In the event of power disruption, the Automatic Restart setting in your system's BIOS can automatically restart your system once power is restored. As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/) for commonly deployed SSR hardware platforms. Below are representative steps for common BIOS parameters:
+In the event of power disruption, the Automatic Restart setting in your system's BIOS can automatically restart your system once power is restored. As BIOS settings may vary between hardware vendors, consult your hardware platform's operating guides for specific instructions, or look on [AI-Driven SD-WAN powered by Session Smart community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208) for commonly deployed SSR hardware platforms. Below are representative steps for common BIOS parameters:
 
 #### To enable Automatic Restart:
 1. From the BIOS settings screen, select ACPI \> Power Settings.
