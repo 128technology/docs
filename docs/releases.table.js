@@ -5,7 +5,14 @@ import React from "react";
 // New entries should be placed at the top.
 // ----------------------------------------------------------------------------
 export const releases = [
-   {
+  {
+    version: '5.5.8',
+    url:'/docs/release_notes_128t_5.5#release-558-7',
+    releaseDate: 'February 1, 2023',
+    endOfMaintenance: 'May 19, 2023',
+    endOfSupport: 'November 19, 2023',
+  },
+  {
     version: '5.6.6',
     url:'/docs/release_notes_128t_5.6#release-566-7',
     releaseDate: 'January 18, 2023',
