@@ -3,9 +3,9 @@ title: WAN Assurance Overview
 sidebar_label: Overview
 ---
 
-SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. Beginning with version 6.0, WAN Assurance for the SSR is available for users who manage their network using the Mist Cloud ([Cloud-managed WAN Assurance](https://www.juniper.net/documentation/product/us/en/mist-wan-assurance/)). 
+SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. Beginning with version 6.0, WAN Assurance for the SSR is available for users who [manage their network using the Mist Cloud](https://www.juniper.net/documentation/product/us/en/mist-wan-assurance/). 
 
-For SSR devices running software versions 5.4.x and greater, WAN Assurance Cloud Telemetry is available through Mist, with routers managed by a conductor.
+For conductor-managed SSR devices running software versions 5.4.x and greater, [WAN Assurance Cloud Telemetry](config_wan_assurance.md) is available through Mist.
 
 ![SSR Managment Models](/img/wan_ssr_mgmt_models.png)
 
@@ -13,7 +13,14 @@ The onboarding process for each deployment is similar - connect your device to t
 
 ### Onboard a Mist-Managed SSR Device
 
-For onboarding an SSR device with 6.x software, start with either [SSR120 Onboarding](wan_assurance_ssr120_quickstart.md) or [SSR130 Onboarding](wan_assurance_ssr130_quickstart.md), whichever is appropriate for your deployment.
+For onboarding an SSR device to the Mist Cloud, start with the onboarding process appropriate for your deployment.
+
+- [SSR120 Onboarding](wan_assurance_ssr120_quickstart.md) 
+- [SSR130 Onboarding](wan_assurance_ssr130_quickstart.md)
+- [SSR1200 Onboarding](wan_assurance_ssr1200_quickstart.md)
+- [SSR1300 Onboarding](wan_assurance_ssr1300_quickstart.md)
+- [SSR1400 Onboarding](wan_assurance_ssr1400_quickstart.md)
+- [SSR1500 Onboarding](wan_assurance_ssr1500_quickstart.md)
 
 ### Adopt a Conductor-Managed SSR Device
 

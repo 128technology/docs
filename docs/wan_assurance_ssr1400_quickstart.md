@@ -63,6 +63,10 @@ You can download the Mist AI App from the [Mac App Store](https://apps.apple.com
 
 ![Claim device](/img/intro_wa_quickstart_claim.gif)
 
+:::note
+When a device is assigned to a site and set to be managed by Mist, upon first connection of the device to the cloud you will be prompted to upgrade to a version of software compatible with Mist. In some initial onboarding cases, this upgrade process may take up to 30 minutes or more.
+:::
+
 ## Onboarding Complete!
 
 Fantastic, your device is in your inventory! To provision your SSR device with ZTP, log into Mist and **[continue to WAN configuration.](intro_wa_quickstart_1_networks.md)**
