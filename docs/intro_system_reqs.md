@@ -8,7 +8,7 @@ The Session Smart Networking Platform runs on both bare metal servers and as a v
 Please review the router and conductor [minimum requirements](about_supported_platforms.md#minimum-platform-specifications). See [Certified Platforms](about_certified_platforms.mdx) and the [Platform Support Policy](about_supported_platforms.md) for more details.
 
 :::info
-Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c/) for hardware profile examples.
+Larger hard drives may be required if you intended to support an increased volume of flow and stored session-related information. These are used for analysis of the traffic patterns and utilization of your Session Smart Router (SSR) system. Consult with your account representative for hardware recommendations specific to your traffic throughput needs, or visit our [online community](https://community.juniper.net/communities/community-home?communitykey=18c17e96-c010-4653-84e4-f21341a8f208) for hardware profile examples.
 :::
 
 :::important
