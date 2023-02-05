@@ -14,8 +14,8 @@
     "check-links": "blcl -rog ./build/"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.2.0",
-    "@docusaurus/preset-classic": "^2.2.0",
+    "@docusaurus/core": "^2.3.1",
+    "@docusaurus/preset-classic": "^2.3.1",
     "broken-link-checker-local": "^0.2.1",
     "classnames": "^2.2.6",
     "mermaid": "^9.3.0",
