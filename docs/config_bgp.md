@@ -635,7 +635,7 @@ admin@branchoffice1.seattlesite1 (address-family[afi-safi=ipv4-unicast])# exit
 ```
 By setting `route-reflector client true`, we instruct the `branchoffice1` router to treat the neighbor as a route reflector client.
 
-There is one additional field which needs to be set in route reflector's BGP config, and that is `Client-ID`, which has the format of an IP address. This can be set to anything unique in the AS, and can be the same as the `Router ID` field.
+There is one additional field which needs to be set in route reflector's BGP config, and that is `Cluster-ID`, which has the format of an IP address. This can be set to anything unique in the AS, and can be the same as the `Router ID` field.
 
 When the route reflector sends routes to the clients, by default it doesn't modify the next-hop. An outbound policy can be used to change the next-hop in these routes to that of the route reflector, if desired. In such instances, another option, which is turned off by default, needs to be set in the route reflector's BGP config: `Route Reflector Allow Outbound Policy = TRUE`.
 
