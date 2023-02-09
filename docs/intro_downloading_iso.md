@@ -47,7 +47,7 @@ Files available for download are:
 - `*.iso` - This file is used for installing/staging bare metal platforms.
 - `*.qcow` - This file is used for virtual environments such as KVM.
 :::note
-Operation of SSR qcow2 without cloud-init is not supported at this time. Please read 
+Operation of SSR qcow2 without cloud-init is not supported at this time. Please see 
 [Deployment Using QCOW2](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/install_qcow2_deployment/) for further details.
 :::
 - `*.tar` - This file is used by Mist for image-based upgrades, and is accessed directly by the system during the upgrade. User download is not necessary or advised.
