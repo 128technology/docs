@@ -10,7 +10,7 @@
 | mgmt-0-0 | MGMT | Management interface | 0000:01:00.0 | 1000 | MGMT |
 | xe-0-0 | Port 0/0 | WAN 1 network interface | 0000:6a:00.0 | 10000 | WAN |
 | xe-0-1 | Port 0/1 | WAN 2 network interface | 0000:6a:00.1 | 10000 | WAN |
-| ge-0-2 | Port 0/2 | WAN 3 network interface | 0000:6a:00.2 | 10000 | WAN |
+| xe-0-2 | Port 0/2 | WAN 3 network interface | 0000:6a:00.2 | 10000 | WAN |
 | xe-0-3 | Port 0/3 | LAN 1 network interface | 0000:6a:00.3 | 10000 | LAN |
 | ge-1-0 | Port 1/0 | HA Sync network interface | 0000:19:00.0 | 1000 | HASync |
 | ge-1-1 | Port 1/1 | LAN 2 network interface | 0000:19:00.1 | 1000 | LAN |
@@ -27,7 +27,7 @@ Your SSR device uses Port 0/0 (`xe-0-0 `) as a default WAN port to contact Mist 
     * DHCP address assignment
     * Connectivity to the Internet and Mist
 
-2. **Connect port 3** to your LAN devices, including:
+2. **Connect port 0/3** to your LAN devices, including:
     * Mist-managed Juniper EX switches
     * Mist APs
     * User devices
