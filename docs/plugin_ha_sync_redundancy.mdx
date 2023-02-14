@@ -1,0 +1,26 @@
+---
+title: HA Sync Redundancy Plugin
+sidebar_label: HA Sync Redundancy Plugin
+---
+
+import RedundantHASync from './_ha_sync_plugin.md';
+import HASyncUseCases from './_ha_sync_Plugin_usecases.md';
+import HASyncTroubleshoot from './_ha_sync_troubleshooting.md';
+import HASyncReleaseNotes from './_ha_sync_plugin_release_notes.md';
+
+
+The HA Sync Redundancy plugin adds the ability to include an additional link in the team interface configured as described in [Non-Forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md). Additionally, the plugin provides the ability to use the HA sync connection (single or dual-member) to send HA fabric traffic by creating a vlan sub-interface, and setting up a KNI interface in a bridge with this sub-interface.
+
+## Configuration Snippet
+
+### Redundant HA Sync Interface
+<RedundantHASync/> 
+
+## Use Cases
+<HASyncUseCases/>
+
+## Troubleshooting
+<HASyncTroubleshooting/>
+
+## Release Notes
+<HASyncReleaseNotes/>

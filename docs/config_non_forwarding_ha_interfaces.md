@@ -1,14 +1,14 @@
 ---
-title: Non-forwarding HA Interfaces
-sidebar_label: Non-forwarding HA Interfaces
+title: Non-Forwarding HA Interfaces
+sidebar_label: Non-Forwarding HA Interfaces
 ---
 
-Non forwarding interfaces are used for several purposes, including HA peer node control traffic, reaching a Conductor from a SSR, reaching managed SSRs from a Conductor, management traffic and reaching the public internet.
+Non forwarding interfaces are used for several purposes, including HA peer node control traffic, reaching a Conductor from an SSR, reaching managed SSRs from a Conductor, management traffic and reaching the public internet.
 
 Before we get started, it is important to understand the [terminology relating to SSR interfaces](concepts_interface_types.md)
 
 :::important
-Changing a forwarding interface to non forwarding and vice versa is not dynamically reconfigurable and requires a restart of the SSR node
+Changing a forwarding interface to non forwarding and vice versa is not dynamically reconfigurable and requires a restart of the SSR node.
 :::
 
 A quick recap:

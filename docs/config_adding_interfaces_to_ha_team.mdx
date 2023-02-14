@@ -1,0 +1,20 @@
+---
+title: Adding Interfaces to an HA Team Interface
+sidebar_label: Adding Interfaces to an HA Team Interface
+---
+
+import RedundantHASync from './_ha_sync_plugin.md';
+import HASyncUseCases from './_ha_sync_Plugin_usecases.md';
+import HASyncTroubleshoot from './_ha_sync_troubleshooting.md';
+
+
+The information below is a Juniper best practice for adding interfaces to the HA sync team interface, and is simplified by using the the [HA Sync Redundancy Plugin](plugin_ha_sync_redundancy.mdx). The HA Sync Redundancy plugin adds the ability to include an additional link in the team interface configured as described in [Non-Forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md). Additionally, the plugin provides the ability to use the HA sync connection (single or dual-member) to send HA fabric traffic by creating a vlan sub-interface, and setting up a KNI interface in a bridge with this sub-interface.
+
+## Configuring the Redundant HA Sync Interface
+<RedundantHASync/> 
+
+## Use Cases
+<HASyncUseCases/>
+
+## Troubleshooting
+<HASyncTroubleshoot/>
