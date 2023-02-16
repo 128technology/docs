@@ -1,0 +1,6 @@
+<!--- HA Sync Plugin Use Cases --->
+
+
+Within an HA router, the communication that occurs on the HA sync connection is vital to proper operation of the router. In many ways it should be thought of as akin to the backplane of a chassis-based router, despite the fact that it is provided through an Ethernet connection. Due to the importance of this connection to proper functionality, customers often wish to provide redundant connections for this traffic in case of cable or interface failure.
+
+Additionally, there is typically a desire to minimize the number of cables running between two nodes in an HA router, possibly due to lack of physical ports available. This plugin provides the ability to leverage the existing HA sync connection for HA fabric traffic in order to limit the number of physical connections between the two nodes. This can either allow users to avoid the use of three cables when using a redundant HA connection or avoid using two when the hardware does not provide sufficient ports.

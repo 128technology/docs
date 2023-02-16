@@ -31,9 +31,9 @@ https://software.128technology.com/artifactory/list/generic-128t-install-images-
 
 Files available for download are:
 
-- `*.iso` - This file is used for installing/staging bare metal platforms.
-- `*.qcow` - This file is used for virtual environments such as KVM or ESXi. For more information see [Deployment Using QCOW2](install_qcow2_deployment.md)
+- `*.iso` - This file is used for installing/staging bare metal platforms. **Use this file to perform an image-based install.** 
 - `*.tar` - This file is used by Mist or the SSR conductor for image-based upgrades, and is accessed directly by the system during the upgrade. User download is not necessary or advised.
+- `*.qcow` - This file is used for virtual environments such as KVM or ESXi. **Do not** use this file to perform an image-based install on a Mist-managed device or system. For more information see [Deployment Using QCOW2](install_qcow2_deployment.md).  
 - `*.ztp.raw.gz` - This file is used by manufacturing, and is not applicable for customer use. 
 
 You will be prompted for your username and token to access the web page listing the software versions. Download is done directly from the page.
