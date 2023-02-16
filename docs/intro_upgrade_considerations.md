@@ -50,6 +50,6 @@ However, when upgrading from 5.1 or 5.2 to version 5.3 or higher, the following 
 | ------ | ------- |
 | dns-cache | [>=3.2.1](plugin_dns_cache.md#release-notes) |
 | dns-app-id | [>=3.1.3](plugin_dns_app_id.md#release-notes) |
-| ha-sync-redundancy | [>=1.1.0](plugin_ha_sync_redundancy.md#release-notes) |
+| ha-sync-redundancy | [>=1.1.0](plugin_ha_sync_redundancy.mdx#release-notes) |
 | icmp-reachability-detection | [>=3.0.3](plugin_icmp_reachability_detection.md#release-notes) |
 | wireguard | [>=2.0.3](plugin_wireguard.md#release-notes) |
