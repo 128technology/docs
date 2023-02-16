@@ -40,7 +40,7 @@ Configured within the SSR software (and implemented as a _team interface_ in Lin
 
 For more information about configuring redundant interfaces see [Non-forwarding HA Interfaces](config_non_forwarding_ha_interfaces.md).
 
-the SSR configuration model only supports one redundancy link to be configured. However, it is possible to configure a second redundancy link manually. For instructions, refer to the guide [Adding Interfaces to HA Team Interface](config_adding_interfaces_to_ha_team.md) for configuring additional redundancy links.
+the SSR configuration model only supports one redundancy link to be configured. However, it is possible to configure a second redundancy link manually. For instructions, refer to the guide [Adding Interfaces to HA Team Interface](config_adding_interfaces_to_ha_team.mdx) for configuring additional redundancy links.
 
 #### About State Synchronization
 This state sharing occurs via a high-performance database that is available to both nodes. As sessions are established through an SSR node, the receiving node consults this database to determine whether this session had previously been established via its counterpart. If it does not find any information, it processes this session as new, and it inserts state information into the shared database. In this way, session continuity is preserved irrespective of which node is active at the outset of an established session.
