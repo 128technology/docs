@@ -2925,6 +2925,37 @@ This sub-element allows administrators to control the default BGP timers the SSR
 | --- | --- |
 | 1.0.0 | Introduced |
 
+## traceroute
+
+#### Path 
+
+authority > router > traceroute
+
+#### Description
+
+The element allows operators to debug their connectivity from point to point.
+
+The `traceroute` command creates a traceroute context for probing the path to a specified endpoint. Traceroute targets can be specified as SVR peers, service/tenant defined endpoints, or targets reachable by routing.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| destination-ip | IP address | The destination address for the traceroute command |
+| peer-name | string | The name of the SVR peer to probe |
+| service | string | The service for the traceroute command (default is empty) |
+| source-ip | IP address | The source address for the traceroute command (default: 0.0.0.0) |
+| tenant | string | The tenant name for the traceroute command (default is empty) |
+
+To define each of the traceroute types, enter the following parameters:
+
+- Service traceroute: Enter the service name, tenant, and destination-ip.
+- Routed traceroute: Enter the destination-ip.
+- Peer traceroute: Enter the peer name and destination-ip.
+
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 6.1.0 | Introduced |
+
 ## traffic
 
 #### Path:

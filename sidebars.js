@@ -244,6 +244,7 @@ module.exports = {
           "ts_packet_capture",
           "ts_serial_console_tsing",
           "ts_t1_troubleshooting",
+          "ts_traceroute",
           "ts_troubleshooting_vrf",
         ],
       },
