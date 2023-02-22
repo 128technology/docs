@@ -2,10 +2,15 @@
 title: Traceroute
 sidebar_label: Traceroute
 ---
+#### Version History
+
+| Release | Modification |
+| ------- | ------------ |
+| 6.1.0   | This feature was introduced. |
 
 Traceroute is implemented as a troubleshooting tool, allowing you to debug  connectivity from point to point.
 
-Network administrators frequently make use of Linux traceroute as a compliment to ping when isolating intermediate connectivity issues and troubleshooting MTU, and TTL issues. Traceroute provides information on the intermediate connectivity on a hop-by-hop basis between a source and destination. The SSR Traceroute commands provide the ability to detect failure points in connectivity along the network traffic flow. With the routing model and distributed nature of the SSR, traceroute behaves differently depending on the use case.
+Network administrators frequently make use of Linux traceroute as a complement to ping when isolating intermediate connectivity issues and troubleshooting MTU, and TTL issues. Traceroute provides information on the intermediate connectivity on a hop-by-hop basis between a source and destination. The SSR Traceroute commands provide the ability to detect failure points in connectivity along the network traffic flow. With the routing model and distributed nature of the SSR, traceroute behaves differently depending on the use case.
 
 The following types of traceroute are available:
 
@@ -17,7 +22,7 @@ The following types of traceroute are available:
 
 Discovery packets are sent from the originating SSR to a single the destination port with varying time-to-live (TTL) values. For each iteration, the TTL is increased by 1, and a 3 packet burst is transmitted. This process is repeated until the originating SSR receives a suitable ‘terminating’ packet from the final destination, or until an upper-limit is reached for hop counts. 
 
-For service-traceroute and peer-traceroute, ICMP echo requests are the default discovery packets. To support instances where ICMP replies are disabled at the destination or disallowed by firewall rules, UDP and TCP are also supported.
+For service-traceroute and peer-traceroute, ICMP echo requests are the default discovery packets. To support instances where ICMP replies are disabled at the destination or disallowed by firewall rules, UDP is also supported.
 
 ## Command Information
 
@@ -30,7 +35,7 @@ The `traceroute` command creates a traceroute context for probing the path to a 
 
 | Element | Type | Description |
 | --- | --- | --- |
-| destination-ip | IP address | The destination address for the traceroute command |
+| destination-ip | positional | The destination IP address for the traceroute command |
 | peer-name | string | The name of the SVR peer to probe |
 | service | string | The service for the traceroute command (default is empty) |
 | source-ip | IP address | The source address for the traceroute command (default: 0.0.0.0) |
@@ -44,7 +49,7 @@ To define each of the traceroute types, enter the following parameters:
 
 Example of a Service Traceroute:
 ```
-admin@combo-west-a.combo-west# traceroute service east tenant red destination-ip 172.16.1.201
+admin@combo-west-a.combo-west# traceroute service east tenant red 172.16.1.201
 Running traceroute...
 traceroute to 172.16.1.201, 64 hops max 
 1. 172.16.102.101 10ms 7ms 1ms
