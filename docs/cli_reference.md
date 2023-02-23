@@ -10368,9 +10368,52 @@ trace [verbose] [verbose] [verbose] [no-logs] <command> [<command> ...]
 
 The `trace` command is used when attempting to determine what SSR services need to be inspected during troubleshooting.
 
+## traceroute
 
+#### Usage 
+```
+traceroute [peer-name <peer-name>][source-ip <source-ip>] [service <service>] [tenant <tenant>] destination-ip <destination-ip>
+```
 
+##### Keyword Arguments
 
+| name | description |
+| ---- | ----------- |
+| peer-name | The name of the SVR peer to probe |
+| service | The service for the traceroute command (default is empty) |
+| source-ip | The source address for the traceroute command (default: 0.0.0.0) |
+| tenant | The tenant name for the traceroute command (default is empty) |
+
+##### Postitional Arguments
+
+| name | description |
+| ---- | ----------- |
+| destination-ip | The destination IP address for the traceroute command |
+
+#### Description
+
+The `traceroute` command creates a traceroute context for probing the path to a specified endpoint. Traceroute targets can be specified as SVR peers, service/tenant defined endpoints, or targets reachable by routing. To define each of the traceroute types, enter the following parameters:
+
+- Service traceroute: Enter the service name, tenant, and destination-ip.
+- Routed traceroute: Enter the destination-ip.
+- Peer traceroute: Enter the peer name and destination-ip.
+
+#### Example
+
+```
+admin@combo-west-a.combo-west# traceroute service east tenant red 172.16.1.201
+Running traceroute...
+traceroute to 172.16.1.201, 64 hops max 
+1. 172.16.102.101 10ms 7ms 1ms
+2. 172.16.101.1 20ms 5ms 2ms
+3. 172.16.4.1 42ms 5ms 6ms
+4. 172.16.1.201 4ms 4ms 3ms
+```
+
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 6.1.0 | Introduced | 
 
 ## `validate`
 
