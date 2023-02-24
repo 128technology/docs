@@ -36,7 +36,7 @@ The `traceroute` command creates a traceroute context for probing the path to a 
 | Element | Type | Description |
 | --- | --- | --- |
 | destination-ip | positional | The destination IP address for the traceroute command |
-| peer-name | string | The name of the SVR peer to probe |
+| peer-name | string | The name of the SVR peer to probe (default is empty) |
 | service | string | The service for the traceroute command (default is empty) |
 | source-ip | IP address | The source address for the traceroute command (default: 0.0.0.0) |
 | tenant | string | The tenant name for the traceroute command (default is empty) |

@@ -10379,7 +10379,7 @@ traceroute [peer-name <peer-name>][source-ip <source-ip>] [service <service>] [t
 
 | name | description |
 | ---- | ----------- |
-| peer-name | The name of the SVR peer to probe |
+| peer-name | The name of the SVR peer to probe (default is empty) |
 | service | The service for the traceroute command (default is empty) |
 | source-ip | The source address for the traceroute command (default: 0.0.0.0) |
 | tenant | The tenant name for the traceroute command (default is empty) |
