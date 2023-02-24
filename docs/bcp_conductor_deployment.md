@@ -144,7 +144,10 @@ Most production deployments include redundant conductor nodes. When deployed as 
 The two conductor nodes must therefore have IP reachability to one another. For conductor nodes that are physically adjacent to one another, a direct cable between them is the most common deployment style. When separating conductor nodes over any distance, ensure they have a route to reach one another that will not interfere with the connectivity to the nodes they manage.
 
 ### Geographic Redundancy
-Highly available conductors run as active/active, and have ongoing needs for state synchronization between one another. For this reason, Juniper requires that the network between geographically separated conductors have *latency of no more than 100ms*, and *packet loss no greater than 1%*.
+Highly available conductors run as active/active, and have ongoing needs for state synchronization between one another. For this reason, Juniper requires that when deploying geographically separated conductor nodes, the following requirements must be met:
+- Latency less than 150ms
+- Packet loss less than 0.01%
+- No firewalling between the systems
 
 ## Conductor Access (Router Design)
 
