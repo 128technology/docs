@@ -819,6 +819,10 @@ The plugin must be updated to version 3.0.3 or later prior to [upgrading the con
 :::
 
 ### Release 3.0.4
+**Release Date:** Mar 01, 2023
+
+**Router Version**
+- 128T-icmp-reachability-detection-router-1.1.2-2
 
 #### Issues Fixed
 
