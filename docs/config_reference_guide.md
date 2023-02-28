@@ -2557,7 +2557,7 @@ authority > session-recovery-detection
 
 #### Description
 
-When enabled, the originating node will monitor activity on the reverse flow. If no activity is detected for the specified time, it will add an additional metadata attribute called `session-health-check` to the next forward flow. The `session-health-check` attribute is validated by the receiving node and if the flow on the hub does not exist, the hub will generate an `enable-metadata` message back to the spoke.
+When `inactivity-based` detection is enabled, the originating node monitors activity on the return flow. If no activity is detected for the specified time, the originator will add an additional metadata attribute called `session-health-check` to the next packet. The `session-health-check` attribute is validated by the receiving node. If the flow on the receiving node does not exist, it generates an `enable-metadata` message back to the originator.
 
 | Element | Type | Description |
 | --- | --- | --- |
