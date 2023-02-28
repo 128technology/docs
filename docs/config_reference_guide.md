@@ -2564,6 +2564,12 @@ When enabled, the originating node will monitor activity on the reverse flow. If
 | mode | enumeration | Valid values: packet-based (default), inactivity-based. | 
 | inactivity-timeout | uint64 | Expressed in seconds. The inactivity timer for sessions. Default value is 5 seconds. |
 
+#### Version History
+
+| Release | Modification |
+| --- | --- |
+| 6.1.0 | Feature introduced |
+
 ## session-type
 
 #### Path:
