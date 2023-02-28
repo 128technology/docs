@@ -2549,6 +2549,21 @@ This controls whether the SSR will attempt to detect when session-optimization i
 | --- | --- | --- |
 | enable-detection | boolean | Default: true. When `true`, the SSR will track latency for traffic on the interface to identify the need for session-optimization. When `false`, no session-optimization will occur for traffic on this interface. |
 
+## session-recovery-detection
+
+#### Path
+
+authority > session-recovery-detection
+
+#### Description
+
+When enabled, the originating node will monitor activity on the reverse flow. If no activity is detected for the specified time, it will add an additional metadata attribute called `session-health-check` to the next forward flow. The `session-health-check` attribute is validated by the receiving node and if the flow on the hub does not exist, the hub will generate an `enable-metadata` message back to the spoke.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| mode | enumeration | Valid values: packet-based (default), inactivity-based. | 
+| inactivity-timeout | uint64 | Expressed in seconds. The inactivity timer for sessions. Default value is 5 seconds. |
+
 ## session-type
 
 #### Path:
