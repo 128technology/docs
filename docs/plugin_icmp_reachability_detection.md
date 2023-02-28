@@ -826,9 +826,9 @@ The plugin must be updated to version 3.0.3 or later prior to [upgrading the con
 
 #### Issues Fixed
 
-- **PLUGIN-1480** Large configuration was causing plugin config generation to fail
+- **PLUGIN-1480** Large configuration was causing plugin config generation to fail.
 
-  _**Resolution:**_ The config generation logic for the plugin will handle config with long lines correctly
+  _**Resolution:**_ The config generation logic for the plugin will handle config with long lines correctly.
 
 - **PLUGIN-1494**  No route being injected into FIB table for dns-app-id custom apps.
 
