@@ -817,6 +817,27 @@ Some of the key aspects of the auto-generated configuration are as follows:
 :::warning
 The plugin must be updated to version 3.0.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
+
+### Release 3.0.4
+**Release Date:** Mar 01, 2023
+
+**Router Version**
+- 128T-icmp-reachability-detection-router-1.1.2-2
+
+#### Issues Fixed
+
+- **PLUGIN-1480** Large configuration was causing plugin config generation to fail.
+
+  _**Resolution:**_ The config generation logic for the plugin will handle config with long lines correctly.
+
+- **PLUGIN-1494**  No route being injected into FIB table for dns-app-id custom apps.
+
+  _**Resolution:**_ Automatically enable the module mode on router with dns-app-id config enabled.
+
+- **PLUGIN-2009** The preferred service path not selected after failover and recovery.
+
+  _**Resolution:**_ The ICMP probe state machine gracefully handles the boot up scenario as different paths come up at different times.
+
 ### Release 3.0.3
 
 #### Issues Fixed
