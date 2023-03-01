@@ -28,6 +28,21 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 6.0.8-19
+
+**Release Date:** March 3, 2023
+
+### New Features
+
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
+------
+
+
+
+
 ## Release 6.0.7-8
 
 **Release Date:** December 5, 2022
