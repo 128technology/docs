@@ -34,10 +34,19 @@ Session Recovery Detection has two modes:
 Because this feature uses a request/response mechanism, **all** SSR's must be upgraded before using/enabling this feature.
 :::
 
-### Show Commands
-
-Info coming
-
 ### Show Stats Commands
 
-Info coming
+The following `show stats packet-processing` commands provide insight into session information. For additional details for each stat, refer to **[show stats packet-processing action(add-link-here).** 
+
+```
+/stats/packet-processing/action/failure/metadata/session-health-check-buffer-allocation
+/stats/packet-processing/action/failure/metadata/session-health-check-timeout
+/stats/packet-processing/action/failure/metadata/session-health-check-timeout-forward-pinhole-flow
+/stats/packet-processing/action/failure/metadata/session-health-check-timeout-reverse-pinhole-flow
+/stats/packet-processing/action/success/metadata/added-session-health-check
+/stats/packet-processing/action/success/metadata/generated-session-health-check-acknowledgement
+/stats/packet-processing/action/success/metadata/received-session-health-check-acknowledgement
+/stats/packet-processing/action/success/metadata/received-stale-session-health-check-acknowledgement
+/stats/packet-processing/action/success/metadata/sent-session-health-check-acknowledgement
+/stats/service-area/received/reverse-packets-for-stuck-pinhole-session
+```
