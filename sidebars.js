@@ -122,7 +122,7 @@ module.exports = {
           "config_basics",
           "config_templates",
           "config_asset_connection_resiliency",
-
+          "config_session_recovery",
           "config_dscp_steering",
           "config_dscp_preservation",
           "config_vrf_learning",
