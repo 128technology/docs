@@ -30,17 +30,88 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ## Release 6.0.8-19
 
-**Release Date:** March 3, 2023
+**Release Date:** March 7, 2023
 
 ### New Features
 
+- **I95-47947 Increase max CoreDump size to 4GB:** The maximum size of coredumps now defaults to 4G. This value can be configured in environment config by modifying the `maxCoredumpSize` field of the new `crashReporting` object. Any manual modifications to `coredump.conf` will be overwritten whenever the service is started. 
+
+:::important
+Upgrading to this release version will cause `coredump.conf` to be re-written with 4G limits for coredumps even if `coredump.conf` had been updated manually for a higher value!
+:::
+------
+- **I95-48571 IDP Topology User Experience Improvements:** The SSR will include the auto-generated IDP mode when enabled as a part of `show idp application status`. Additionally, enabling `hub` mode will not result in engine bring-up errors.
+------
 
 ### Resolved Issues
 
 - **The following CVE's have been identified and addressed in this release:** I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
 ------
+- **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
+------
+- **I95-44926 Configuration validation for `as-path` incorrect for certain values:** Resolved an issue where a subset of 4-byte BGP private AS numbers was not accepted inside AS path specifications for routing policy `modify-as-path` actions.
+------
+- **I95-46336 Peer connection not established after AWS upgrade:** Resolved an issue where an AWS C5 instance size can fail to initialize when more than one accelerated network interface is configured.
+------
+- **I95-47797 Packet duplication does not interoperate well with outbound-only adjacencies:** When utilizing the packet-duplication feature (`service-policy -> session-resiliency = packet-duplication`), any peer adjacencies marked as `outbound-only` are no longer used. Packets are only duplicated along bidirectional paths.
+------
+- **I95-47992 HTTP service not working in WAN Assurance:** Resolved an issue where HTTP traffic is dropped when using a combination of application-identification, adaptive-encryption, and spoke-to-hub-to-spoke topology (outbound-only peer-connectivity).
+------
+- **I95-48054 STEP not working in Core Network:** Resolved an issue where processing STEP route updates can cause modification of unrelated FIB entries, potentially interrupting existing sessions.
+------
+- **I95-48061 DHCP server not starting after upgrade:** Resolved an issue where existing DHCP servers were not coming back up after upgrading from pre-6.0.X to post-6.0.X SSR software.
+------
+- **I95-48107 EoSVR sessions not stable:** Resolved an issue with loss of connectivity to STEP EoSVR peer. The STEP route is now held in place and available when STEP connectivity is restored. 
+------
+- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths weremissing from show services output.
+------
+- **I95-48232  :** We now prevent unnecessary FIB changes (which may lead to a short traffic interruption) when new routes are added to the RIB that are more specific than some configured service IP prefixes.
+------
+- **I95-48324 Application Identification not parsing domain names:** The App-ID parsing mode has been updated to correctly parse domain names.
+------
+- **I95-48352 Application ID is not identifying MS-Teams correctly:** Resolved an issue where sessions with IP addresses as their domain names were not classified correctly. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.
+------
+- **I95-48396 `show-rib` limited to 512 entries:** The `show rib` count maximum has been increased.
+------
+- **I95-48447 JWTs signing does not meet stringent security standards:** Changed how JWTs are signed to increase security posture.
+------
+- **I95-48464 This CVE has been addressed.**
+------
 
-
+- **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
+------
+- **I95-48581 Missing entry timestamp for `show app-id cache`:** Additional timing information has been added to `show app-id cache` to help identify the oldest entry.
+------
+- **I95-48582 `show bfd` command ignoring parameters:** The query parameters are now passed to the REST endpoint to be used byt the `show bfd` command.
+------
+- **I95-48590 ACK RTT Improvements:** Resolved an issue where the stats were not resetting properly, and added supporting sampling to ACK RTT tracking.    
+------
+- **I95-48641 Recreating BFD flow when an outbound-only session is reset:** Flow creation is now deferred until a reverse packet arrives from the peer, similar to the initial creation case.
+------
+- **I95-48684 SSR not answering ARP requests:** Increased `internal-application traffic-engineering` rates for ARP traffic which was being dropped in a multiple packet-processing core environment incorrectly due to an over aggressive traffic engineering profile.
+------
+- **I95-48689 Top Sessions not displaying source address:** Restored the **Source** column in the Top Sessions table. 
+------
+- **I95-48723 HA sync not running after systems reconnect:** Historical metrics and events are synced between HA nodes after extended downtime.
+------
+- **I95-48869 IDP Validation for mixed IDP Access Policies:** 
+------
+- **I95-48872 `show sessions by-id` doesn't display correctly tcp state or retransmission counts:** `show sessions by-id` now correctly display `tcp state` and `retransmissions` when `udp-transform` is enabled for a session.
+------
+- **I95-48897 Adaptive encryption breaks after flow move:** Resolved an issue where the session breaks during failover when adaptive encryption is enabled.
+------
+- **I95-48904 Stuck pinhole session after flow invalidation:** Resolved an issue with a stuck session that was setup from hub to HA spoke after a routing change.
+------
+- **I95-48927 Audit log disc failure mode:** Added a Failure Notification parameter and failure mode to inform users that the `auditd.conf` log disc is nearing capacity, or has reached capacity, and that action is required.
+------
+- **I95-48942 Routing policy filter condition reference type not validated:** Added a check to verify that when a routing policy condition references a filter, the condition type and filter type match. 
+------
+- **I95-48950 Application identification modify packet is dropped:** Packets with `inline-modify` that traverse the BFD pinhole are now handled correctly.
+------
+- **I95-48988 High CPU for packet processing core:** Resolved an issue where the CPU can spike to 100% after a failover from internode/interrouter path to local breakout when failover is enabled for local breakout.
+------
+- **I95-49106 Degradation in performance during file rotation:** This issue has been resolved.
+------
 
 
 ## Release 6.0.7-8
