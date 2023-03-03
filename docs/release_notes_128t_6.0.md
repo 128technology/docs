@@ -45,7 +45,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
+- **The following CVE's have been identified and addressed in this release:** I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
 ------
 - **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
 ------
@@ -75,9 +75,6 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48447 JWTs signing does not meet stringent security standards:** Changed how JWTs are signed to increase security posture.
 ------
-- **I95-48464 This CVE has been addressed.**
-------
-
 - **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
 ------
 - **I95-48581 Missing entry timestamp for `show app-id cache`:** Additional timing information has been added to `show app-id cache` to help identify the oldest entry.
@@ -94,7 +91,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48723 HA sync not running after systems reconnect:** Historical metrics and events are synced between HA nodes after extended downtime.
 ------
-- **I95-48869 IDP Validation for mixed IDP Access Policies:** 
+- **I95-48869 Failed to identify default IDP policy when it appears to be the first access policy defined in a service:** The default IDP policy is now handled as `IDP off` in all cases.
 ------
 - **I95-48872 `show sessions by-id` doesn't display correctly tcp state or retransmission counts:** `show sessions by-id` now correctly display `tcp state` and `retransmissions` when `udp-transform` is enabled for a session.
 ------
@@ -112,7 +109,33 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-49106 Degradation in performance during file rotation:** This issue has been resolved.
 ------
-
+- **I95-49118 HA LTE Interfaces go down and impact BGPoSVR and Conductor:** The handling of FIB updates due to interface state changes has been optimized to avoid possible traffic loss for unaffected FIB entries.
+------
+- **I95-49134 DHCP server does not work when device IDs on HA interface do not match:** Resolved an issue where a DHCP server interface may instead forward DHCP requests through the `service-area` and out to the WAN.
+------
+- **I95-49166 OSPF is not configurable using the GUI:** This issue has been resolved.
+------
+- **I95-49225 Packets containing only path-metrics metadata are dropped:** Resolved an issue where FPM calculations caused these packets to be dropped when flows were affected due to routing changes.
+------
+- **I95-49242 When HMAC is disabled, the automatic MSS adjustment calculation for `enforced-mss = automatic` may be wrong :** The Automatic MSS adjustment calculation has been corrected (expanded). 
+------
+- **I95-49341 BGP next hop exception being thrown:** Resolved an issue where a duplicate BGP next hop resulted in an exception.
+------
+- **I95-49451 Secondary conductor failed to synchronize after upgrade:** This issue was resolved by re-ordering the start up process for the 128T service.
+------
+- **I95-49454 Error while creating a new Radius user from the GUI:** The create user API will now reject requests that specifies invalid input parameters. 
+------
+- **I95-49455 Cut and paste from `show flat` generates an error:** Resolved the issue that prevented editing the OSPF list.
+------
+- **I95-49722 Event filter does not work on HA router nodes:** Resolved issues with filtering by node, and an incorrect value was displayed for the node column in the GUI.
+------
+- **I95-49756 RDP sessions failure over peer path:** Resolved an issue that caused RDP traffic to fail when adaptive encryption and AppId are both enabled.
+------
+- **I95-49778 Conductor GUI not showing data metrics for routers running:** Resolved an issue where API keys were not properly synced down to the managed routers which caused certain router data to not show up on the GUI.
+------
+- **I95-50058 Performance regression in Running Config APIs:** Resolved a constant cache miss for a specific set of the running config APIs.
+------
+- **WAN-1598 IDP Policies not set on the SSR:** This issue has been resolved. 
 
 ## Release 6.0.7-8
 
