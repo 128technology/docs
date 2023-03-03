@@ -4,7 +4,7 @@ sidebar_label: '3.7'
 ---
 
 ## Release 3.7.0
-**Release Date:** Mar 02, 2023
+**Release Date:** Mar 03, 2023
 
 ### New Features
 - **WAN-1440 Report metrics per network interface**
@@ -19,7 +19,7 @@ The router will report DHCP pool usage data along with an event when a particula
 
 - **WAN-1182 The device port layout takes a long time to populate after initial onboarding**
 
-  _**Resolution:**_ Upon establishing a new connection to the MIST cloud, the device will immediately send all relevant telemetry information to provide most up-to-date information
+  _**Resolution:**_ Upon establishing a new connection to the MIST cloud, the device will immediately send all relevant telemetry information to provide most up-to-date information.
 
 - **WAN-1415 Missing port up/down events for non-forwarding ports**
 
@@ -29,13 +29,9 @@ The router will report DHCP pool usage data along with an event when a particula
 
   _**Resolution:**_ After initial onboarding, the agent will maintain a single active connection to EP terminator to avoid commands being sent on the wrong connection.
 
-- **WAN-1507 The cloud triggered streaming PCAPs do not always report data**
-
-  _**Resolution:**_ The directory used to store the PCAP command related information will be persisted appropriately across agent and system level restarts.
-
 - **WAN-1509 Link up/down events and process restart events sometime get lost**
 
-  _**Resolution:**_ The cloud-intel agent will process incoming events real time and not cache the events for too long avoid any delays and drops.
+  _**Resolution:**_ The cloud-intel agent will process incoming events in real time and not cache the events for too long to avoid any delays and drops.
 
 - **WAN-1557 SSR reports stale firmware version**
 
@@ -43,12 +39,12 @@ The router will report DHCP pool usage data along with an event when a particula
 
 - **WAN-1564 The data core CPU usage date can sometimes be empty**
 
-  _**Resolution:**_ The mist-agent will ensure that the SPU data is always present in the oc-stats.
+  _**Resolution:**_ The mist-agent will ensure that the CPU data is always present in the oc-stats.
 
 - **WAN-1566 Port up/down events are seen for kni254 interface**
 
   _**Resolution:**_ The mist-agent will filter the port events for KNI interfaces such as kni254.
 
-- **WAN-1632 SSR devices have been sending bytes data as zero, causing large dips **
+- **WAN-1632 SSR devices have been sending bytes data as zero, causing large dips**
 
   _**Resolution:**_ The mist-agent internal collection timers were adjusted to ensure all relevant data is captured in time before pushing the oc-stats.
