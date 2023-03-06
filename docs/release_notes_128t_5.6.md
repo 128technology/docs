@@ -28,6 +28,26 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.6.7-x
+
+**Release Date:** March 10, 2023
+
+### New Features
+
+
+### Resolved Issues
+
+- **I95-48054 STEP not working in Core Network:** Resolved an issue where processing STEP route updates can cause modification of unrelated FIB entries, potentially interrupting existing sessions.
+------
+- **I95-48232 Ability to ping lost after failover:** We now prevent unnecessary FIB changes (which may lead to a short traffic interruption) when new routes are added to the RIB that are more specific than some configured service IP prefixes.
+------
+- **I95-48442 :**
+------
+
+
+
+
+
 ## Release 5.6.6-7
 
 **Release Date:** January 18, 2023
