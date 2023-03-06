@@ -28,7 +28,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 6.0.8-19
+## Release 6.0.8-20
 
 **Release Date:** March 7, 2023
 
@@ -63,9 +63,9 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48107 EoSVR sessions not stable:** Resolved an issue with loss of connectivity to STEP EoSVR peer. The STEP route is now held in place and available when STEP connectivity is restored. 
 ------
-- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths weremissing from show services output.
+- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths were missing from show services output.
 ------
-- **I95-48232  :** We now prevent unnecessary FIB changes (which may lead to a short traffic interruption) when new routes are added to the RIB that are more specific than some configured service IP prefixes.
+- **I95-48232 Ability to ping lost after failover:** We now prevent unnecessary FIB changes (which may lead to a short traffic interruption) when new routes are added to the RIB that are more specific than some configured service IP prefixes.
 ------
 - **I95-48324 Application Identification not parsing domain names:** The App-ID parsing mode has been updated to correctly parse domain names.
 ------
@@ -89,11 +89,11 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48689 Top Sessions not displaying source address:** Restored the **Source** column in the Top Sessions table. 
 ------
-- **I95-48723 HA sync not running after systems reconnect:** Historical metrics and events are synced between HA nodes after extended downtime.
+- **I95-48723 HA metrics sync not running after systems reconnect:** Historical metrics and events are synced between HA nodes after extended downtime.
 ------
-- **I95-48869 Failed to identify default IDP policy when it appears to be the first access policy defined in a service:** The default IDP policy is now handled as `IDP off` in all cases.
+- **I95-48869 Validation for idp-policy incorrectly permits mixing modes across access-policies (e.g., `strict` and `alert`):** The default IDP policy is now handled as `IDP off` in all cases.
 ------
-- **I95-48872 `show sessions by-id` doesn't display correctly tcp state or retransmission counts:** `show sessions by-id` now correctly display `tcp state` and `retransmissions` when `udp-transform` is enabled for a session.
+- **I95-48872 `show sessions by-id` doesn't correctly display tcp state or retransmission counts:** `show sessions by-id` now correctly display `tcp state` and `retransmissions` when `udp-transform` is enabled for a session.
 ------
 - **I95-48897 Adaptive encryption breaks after flow move:** Resolved an issue where the session breaks during failover when adaptive encryption is enabled.
 ------
@@ -117,15 +117,15 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-49225 Packets containing only path-metrics metadata are dropped:** Resolved an issue where FPM calculations caused these packets to be dropped when flows were affected due to routing changes.
 ------
-- **I95-49242 When HMAC is disabled, the automatic MSS adjustment calculation for `enforced-mss = automatic` may be wrong :** The Automatic MSS adjustment calculation has been corrected (expanded). 
+- **I95-49242 When HMAC is disabled, the automatic MSS adjustment calculation for `enforced-mss = automatic` may be wrong:** The Automatic MSS adjustment calculation has been corrected (expanded). 
 ------
 - **I95-49341 BGP next hop exception being thrown:** Resolved an issue where a duplicate BGP next hop resulted in an exception.
 ------
 - **I95-49451 Secondary conductor failed to synchronize after upgrade:** This issue was resolved by re-ordering the start up process for the 128T service.
 ------
-- **I95-49454 Error while creating a new Radius user from the GUI:** The create user API will now reject requests that specifies invalid input parameters. 
+- **I95-49454 Error while creating a new Radius user from the GUI:** The create user API now rejects requests with invalid input parameters. 
 ------
-- **I95-49455 Cut and paste from `show flat` generates an error:** Resolved the issue that prevented editing the OSPF list.
+- **I95-49655 Cutting and pasting the output of `show flat` does not work for OSPF:** Resolved the issue that prevented editing the OSPF list.
 ------
 - **I95-49722 Event filter does not work on HA router nodes:** Resolved issues with filtering by node, and an incorrect value was displayed for the node column in the GUI.
 ------
