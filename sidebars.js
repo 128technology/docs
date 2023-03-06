@@ -21,7 +21,7 @@ module.exports = {
       "intro_installation",
       "intro_downloading_iso",
       "intro_creating_bootable_usb",
-      "intro_installation_bootable_media", 
+      "intro_installation_bootable_media",
       "intro_basic_router_config",
       "intro_otp_iso_install",
       "intro_install_quickstart_otpiso",
@@ -36,7 +36,7 @@ module.exports = {
       "conductor_upgrade",
       "conductor_conversion",
       "howto_conductor_migration",
-    ],  
+    ],
     "Image-Based Installation": [
       "intro_installation_image",
     ],
@@ -97,7 +97,7 @@ module.exports = {
       {
         "type": "category",
         "label": "Whitebox Adoption",
-        "items": [ 
+        "items": [
           "wan_staging",
           "hdwr_whitebox_port_layout",
           "wan_onboarding_whitebox",
@@ -338,6 +338,7 @@ module.exports = {
         "type": "category",
         "label": "WAN Assurance",
         "items": [
+          "release_notes_wan_assurance_plugin_3.7",
           "release_notes_wan_assurance_plugin_3.6",
           "release_notes_wan_assurance_plugin_3.5",
           "release_notes_wan_assurance_plugin_3.4",
