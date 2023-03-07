@@ -28,7 +28,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.6.7-x
+## Release 5.6.7-2
 
 **Release Date:** March 10, 2023
 
@@ -44,7 +44,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-50072 Support for ConnectX-6 Lx PCIe device:** Support has been added for this device. 
 
-### Resolved Issues- 
+### Resolved Issues 
 
 - **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48643, I95-48859, I95-48907, I95-47079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
 ------
