@@ -3337,7 +3337,7 @@ _send command_ is only available within the PCLI of an SSR Conductor.
 
 ## `send command sync`
 
-Transition an asset back to &#x27;connected&#x27; and perform a sync.
+Transition an asset back to **connected** and perform a sync.
 
 #### Usage
 
@@ -3349,7 +3349,7 @@ send command sync [{router <router> | resource-group <resource-group>}] [force] 
 
 | name | description |
 | ---- | ----------- |
-| force | A single &#x27;force&#x27; forces the synchronization by disabling the smart sync skip mechanism. A second &#x27;force&#x27; skips the confirmation prompt. This argument can be repeated up to 2 times |
+| force | A single `force` forces the synchronization by disabling the smart sync skip mechanism. A second `force` skips the confirmation prompt. This argument can be repeated up to 2 times. |
 | node | The node to sync |
 | resource-group | The name of the resource group |
 | router | The router to sync (default: &lt;current router&gt;) |
@@ -3374,7 +3374,12 @@ send command sync [{router <router> | resource-group <resource-group>}] [force] 
 
 #### Description
 
-Transition an asset back to &#x27;connected&#x27; and perform a sync. The sync operation ensures the asset is provisioned correctly and all plugin changes are applied.
+Transition an asset back to **connected** and perform a sync. The sync operation ensures the asset is provisioned correctly and all plugin changes are applied.
+
+#### Version History
+| Release | Modification                |
+| ------- | --------------------------- |
+| 5.6.7   | This feature was introduced |
 
 ## `send command upgrade`
 
