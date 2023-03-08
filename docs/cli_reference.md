@@ -3089,6 +3089,7 @@ send command download [dry-run] [force] {router <router> | resource-group <resou
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -3133,6 +3134,7 @@ send command reconnect [router <router>] [node <node>]
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -3166,6 +3168,7 @@ send command reconnect disconnected [force]
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -3201,6 +3204,7 @@ send command restart [force] router <router> node <node>
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -3240,6 +3244,7 @@ send command rollback [force] {router <router> | resource-group <resource-group>
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -3279,6 +3284,7 @@ send command start [force] router <router> node <node>
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -3318,6 +3324,7 @@ send command stop [force] router <router> node <node>
 | [`send command restart`](#send-command-restart) | Restart an SSR node |
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -3327,6 +3334,47 @@ send command stop [force] router <router> node <node>
 #### Description
 
 _send command_ is only available within the PCLI of an SSR Conductor.
+
+## `send command sync`
+
+Transition an asset back to &#x27;connected&#x27; and perform a sync.
+
+#### Usage
+
+```
+send command sync [{router <router> | resource-group <resource-group>}] [force] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | A single &#x27;force&#x27; forces the synchronization by disabling the smart sync skip mechanism. A second &#x27;force&#x27; skips the confirmation prompt. This argument can be repeated up to 2 times |
+| node | The node to sync |
+| resource-group | The name of the resource group |
+| router | The router to sync (default: &lt;current router&gt;) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`migrate`](#migrate) | Migrate a SSR router to a new conductor |
+| [`send command download`](#send-command-download) | Download SSR software on a router |
+| [`send command reconnect`](#send-command-reconnect) | Attempt to reconnect an asset |
+| [`send command reconnect disconnected`](#send-command-reconnect-disconnected) | Attempt to reconnect all disconnected assets. |
+| [`send command restart`](#send-command-restart) | Restart a SSR node |
+| [`send command rollback`](#send-command-rollback) | Rollback a SSR router to the previously installed version |
+| [`send command start`](#send-command-start) | Start a SSR node |
+| [`send command stop`](#send-command-stop) | Stop a SSR node |
+| [`send command upgrade`](#send-command-upgrade) | Upgrade a SSR node |
+| [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
+| [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
+| [`show assets software`](#show-assets-software) | Shows assets software information. |
+| [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+
+#### Description
+
+Transition an asset back to &#x27;connected&#x27; and perform a sync. The sync operation ensures the asset is provisioned correctly and all plugin changes are applied.
 
 ## `send command upgrade`
 
@@ -3365,6 +3413,7 @@ send command upgrade [dry-run] [force] {router <router> | resource-group <resour
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -3404,6 +3453,7 @@ send command yum-cache-refresh [force] {router <router> | resource-group <resour
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -3552,114 +3602,7 @@ Configuration encryption was successfully disabled.
 | ------- | ----------------------------|
 | 4.5.0   | This feature was introduced |
 
-## set context node
 
-#### Usage
-
-```
-set context node <node>
-```
-
-##### Positional Arguments
-
-- **node**    the name of the node
-
-#### Description
-
-The _set context node_ command puts the PCLI into a mode where every subsequent command that is issued that can take a node (in the case of the SSR) as an argument will default to the context&#39;s values.
-
-#### Version History
-
-| Release | Modification             |
-| ------- | -------------------------|
-| 5.0.0   | This feature was removed |
-
-## set context router
-
-#### Usage
-
-```
-set context router <router>
-```
-
-##### Description
-
-The _set context router_ command can be used to set the PCLI into a mode where every subsequent command that is issued that can take a router (in the case of the SSR Conductor) or a node (in the case of the SSR) as an argument will default to the context&#39;s values.
-
-:::note
-This does _not_ "remote shell" into the router/node specified by the context&#39;s values, it merely uses these as default values for commands that (generally) display value. E.g., show stats, show flows, etc.
-:::
-
-When a context is set, the prompt changes to indicate the context as a parenthetical label at the beginning of each PCLI command.
-
-Setting the context to a router is only available within the PCLI of an SSR Conductor.
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| router | The name of the router |
-
-#### Example
-
-```
-admin@conductor1.labconductor# set context router beacon
-(beacon) admin@conductor1.labconductor#
-```
-
-#### See Also
-
-- [clear context node](#clear-context-node) Clear only the node context
-- [clear context router](#clear-context-router) Clear both the router context and node context
-- [set context stats start-time](#set-context-stats-start-time) Set the start time for show stats commands
-
-#### Version History
-
-| Release | Modification             |
-| ------- | -------------------------|
-| 5.0.0   | This feature was removed |
-
-## set context stats start-time
-
-#### Usage
-
-```
-set context start-time [<start-time>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| start-time | A timestamp string that can include date, time, or both. Special value "now" sets the start time point to the current time [type: timestamp or 'now'] (default: now) |
-
-#### Description
-
-_set context stats start-time_ lets administrators set a "zero time" for all statistics that the SSR has accumulated. While this _stats start-time_ context is set, all of the output for _show stats_ commands will reflect the accumulation of statistics since that time. This is very useful when troubleshooting issues, or after making configuration changes, to only show data relevant to the exercise at hand.
-
-The _set context stats start-time_ has a flexible parser and can accept many different forms of "time" strings that include date information, time information, or both. There&#39;s also a keyword "now" that sets the _stats start-time_ to the current SSR system clock. (The "now" behavior is the default, and thus the SSR will set the _stats start-time_ to the current clock time when no argument is supplied.)
-
-#### Example
-
-```
-admin@cnd1.conductor# set context stats start-time
-Stats start time set to: 2018-02-07 10:41:58
-
-admin@cnd1.conductor# set context stats start-time "December 25, 2017"
-Stats start time set to: 2017-12-25 00:00:00
-```
-
-#### See Also
-
-- [clear context node](#clear-context-node) Clear only the node context
-- [clear context router](#clear-context-router) Clear both the router context and node context
-- [set context router](#set-context-router) Set the context to a different router
-
-#### Version History
-
-| Release | Modification             |
-| ------- | -------------------------|
-| 5.0.0   | This feature was removed |
 
 ## `set dns resolution`
 
