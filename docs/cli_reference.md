@@ -4268,7 +4268,7 @@ Shows the contents of the ARP table on the specified node.
 #### Usage
 
 ```
-show arp [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+show arp [rows <rows>] [force] [node <node>] {router <router> | resource-group <resource-group>} [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -4280,6 +4280,12 @@ show arp [rows <rows>] [force] [node <node>] {router <router> | resource-group <
 | resource-group | The name of the resource group |
 | router | The router from which to retrieve arp entries |
 | rows | The number of arps to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ##### Subcommands
 
@@ -4295,7 +4301,8 @@ show arp [rows <rows>] [force] [node <node>] {router <router> | resource-group <
 
 #### Description
 
-The _show arp_ subcommand displays the ARP table (MAC address to IP address binding) for a given node. The number of lines of output may be controlled through the use of the optional _rows_ attribute. When not present, the SSR will default to displaying the first 50 rows of the specified node&#x27;s ARP table.
+The _show arp_ subcommand displays the ARP table (MAC address to IP address binding) for a given node. The number of lines of output may be controlled through the use of the optional _rows_ attribute. When not present, the SSR will default to displaying the first 50 rows of the specified node&#x27;s ARP table. Using `detail` displays additional information including time to next refresh (ms), retry count (if expired), and time of last resolved ARP.
+
 
 #### Example
 
@@ -4315,6 +4322,18 @@ Node: gouda
  wan           0   1.2.3.4           21:41:71:c1:99:c1   Valid
 
 Completed in 0.07 seconds
+
+admin@test1.Fabric128# show arp detail
+Thu 2023-02-23 16:00:01 UTC
+Retrieving arp entries...
+Node: test1.Fabric128 Page 1
+
+========== ====== ============== =================== ======= ====== ============= =====================
+ Dev Name   VLAN   IP             Dest MAC            State   Time   Retry Count   Last Time Resolved
+========== ====== ============== =================== ======= ====== ============= =====================
+       10      0   172.16.1.101   fa:16:3e:02:08:dc   Valid    144             0   2023-02-23 15:59:56
+
+Completed in 0.03 seconds
 ```
 
 #### Version History
@@ -4323,6 +4342,7 @@ Completed in 0.07 seconds
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 2.0.0   | Added requirement for use of &#39;node&#39; keyword when specifying a node name. |
+| 6.1.0   | Added `verbosity` subcommand |
 
 ## `show arp proxy`
 
