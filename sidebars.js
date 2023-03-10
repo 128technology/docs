@@ -222,6 +222,7 @@ module.exports = {
           "how_to_use_app_summary",
           "howto_extend_gui_nav",
           "howto_lte",
+          "config_bfd_tunnel",
           "howto_config_PPPoE",
           "howto_pppoe_vlan",
           "howto_maintenance_mode",
