@@ -7,10 +7,10 @@ import React from "react";
 export const releases = [
     {
     version: '5.6.7',
-    url:'/docs/release_notes_128t_5.6#release-567-2',
-    releaseDate: 'March 10, 2023',
-    endOfMaintenance: 'December 10, 2023',
-    endOfSupport: 'June 10, 2024',
+    url:'/docs/release_notes_128t_5.6#release-567-4',
+    releaseDate: 'March 16, 2023',
+    endOfMaintenance: 'December 16, 2023',
+    endOfSupport: 'June 16, 2024',
   },
   {
     version: '6.0.8',
@@ -30,8 +30,8 @@ export const releases = [
     version: '5.6.6',
     url:'/docs/release_notes_128t_5.6#release-566-7',
     releaseDate: 'January 18, 2023',
-    endOfMaintenance: 'December 10, 2023',
-    endOfSupport: 'June 10, 2024',
+    endOfMaintenance: 'December 16, 2023',
+    endOfSupport: 'June 16, 2024',
   },
   {
     version: '5.4.11',
@@ -44,8 +44,8 @@ export const releases = [
     version: '5.6.5',
     url:'/docs/release_notes_128t_5.6#release-565-5',
     releaseDate: 'December 28, 2022',
-    endOfMaintenance: 'December 10, 2023',
-    endOfSupport: 'June 10, 2024',
+    endOfMaintenance: 'December 16, 2023',
+    endOfSupport: 'June 16, 2024',
   },
   {
     version: '6.0.7',
@@ -65,8 +65,8 @@ export const releases = [
     version: '5.6.4',
     url:'/docs/release_notes_128t_5.6#release-564-3',
     releaseDate: 'November 18, 2022',
-    endOfMaintenance: 'December 10, 2023',
-    endOfSupport: 'June 10, 2024',
+    endOfMaintenance: 'December 16, 2023',
+    endOfSupport: 'June 16, 2024',
   },
   {
     version: '5.5.7',
@@ -79,8 +79,8 @@ export const releases = [
     version: '5.6.3',
     url:'/docs/release_notes_128t_5.6#release-563-6',
     releaseDate: 'November 7, 2022',
-    endOfMaintenance: 'December 10, 2023',
-    endOfSupport: 'June 10, 2024',
+    endOfMaintenance: 'December 16, 2023',
+    endOfSupport: 'June 16, 2024',
   },
   {
     version: '5.4.9',
@@ -114,8 +114,8 @@ export const releases = [
     version: '5.6.2',
     url:'/docs/release_notes_128t_5.6#release-562-7',
     releaseDate: 'October 4, 2022',
-    endOfMaintenance: 'December 10, 2023',
-    endOfSupport: 'June 10, 2024',
+    endOfMaintenance: 'December 16, 2023',
+    endOfSupport: 'June 16, 2024',
   },
   {
     version: '5.5.5',
@@ -170,8 +170,8 @@ export const releases = [
     version: '5.6.1',
     url:'/docs/release_notes_128t_5.6#release-561-18',
     releaseDate: 'August 1, 2022',
-    endOfMaintenance: 'December 10, 2023',
-    endOfSupport: 'June 10, 2024',
+    endOfMaintenance: 'December 16, 2023',
+    endOfSupport: 'June 16, 2024',
    },
    {
     version: '6.0.0',
@@ -212,8 +212,8 @@ export const releases = [
     version: '5.6.0',
     url:'/docs/release_notes_128t_5.6',
     releaseDate: 'May 20, 2022',
-    endOfMaintenance: 'December 10, 2023',
-    endOfSupport: 'June 10, 2024',
+    endOfMaintenance: 'December 16, 2023',
+    endOfSupport: 'June 16, 2024',
    },
    {
     version: '5.2.3',
