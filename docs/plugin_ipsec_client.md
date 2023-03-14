@@ -218,7 +218,6 @@ exit
 | `interval` | Duration (in seconds) of how often to perform an ICMP probe test to the probe-address. |
 | `tunnel-monitor-nat-network` | The subnet where traffic originates. The corresponding ingress KNI's fourth octet is used. By default, the subnet `10.128.128.0/28` is used. |
 
-
 ### Configuring services for tunnel traffic
 The user can define up to four `ipsec-client > remote` endpoints per node. In addition, the user must also define the necessary service and service-routes to route the tunnel traffic over the desired WAN interface.
 
@@ -310,8 +309,36 @@ exit
 
 The `service-route > next-hop > interface` must point to the corresponding `ipsec-client > remote > name`-intf to route the traffic through the tunnel. All available SSR routing techniques including using vectors, service-policy, etc., can be leveraged to define how the untrusted traffic is sent over the tunnels, and how to route the traffic. The SSR routes the packets through the appropriate IPSec tunnels and manages the failover as per the policy. On the return path, the encrypted traffic is processed, decrypted, and send back to the client that originated the session.
 
+### Redundancy
+
+By default both nodes of an HA pair will create and maintain the tunnels configured for them.
+
+##### Version History
+
+| Release  | Modification              |
+| -------- | ------------------------- |
+| 3.5.0    | Introduced Active-Standby |
+
+#### Active-Standby
+
+This mode of operation can be configured on a per router basis under `router > ipsec`.
+
+| Config   | Description                          |
+| -------- | ------------------------------------ |
+| `redundancy-enabled` | Turns on the active-standby mode of operation. The default is false. |
+| `redundancy-interval` | How often to check for a failover when in active-standby mode (in seconds). The default is 1 second. |
+
 ## Thirdparty Software & Licenses
-- Libreswan v3.23-5.el7_5 (GNU GPLv2)
+
+##### Version History
+
+| Release  | Modification     |
+| -------- | ---------------- |
+| 3.5.0    | libreswan-3.28-1 |
+| 1.0.0    | libreswan-3.23-5 |
+
+
+- Libreswan v3.28-1.el7_5 (GNU GPLv2)
 
 
 ## Troubleshooting
@@ -328,6 +355,12 @@ Configuration and pillar generation logs can be found on the conductor under `/v
 Salt status can be found on the conductor by utilizing the PCLI’s `show assets` and `show assets <asset-id>` commands.
 
 ### PCLI Enhancements
+##### Version History
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.5.0    | Enhanced output |
+
 To check the status of the IPsec tunnels for a given ingress KNI, extra IPsec tunnel related output will be found in the `show device-interface` command as well as the `show plugin state` command.
 
 Example output for a healthy tunnel:
@@ -357,15 +390,25 @@ Tue 2020-06-30 16:44:39 UTC
  out-errors:                         11
 
  IPSec:
-     Tunnel Status:   Up
-     Tunnel Details:
-         Name:        ipsec-client-tunnel-secondary-rem2
-         Remote id:   172.16.5.4
-         SA creation time:
-           2020-06-30 16:37:50
-         In bytes:    0
-         Out bytes:   336
-     SA Count:        1
+     rem2:
+         Tunnel Status:Up
+         Tunnel Details:
+             Name:    ipsec-client-tunnel-secondary-rem2
+             Remote Host:172.16.5.4
+             Remote id:172.16.5.4
+             SA Details:
+                 Add time:2023-03-14 18:05:03
+                 In bytes:0
+                 Out bytes:0
+             Ingress Bytes:3846598
+             Ingress Packets:85732
+             Egress Bytes:5344740
+             Egress Packets:85857
+             IKE Version:2
+             IKE Algorithm Elected:AES_CBC_128-HMAC_SHA1-MODP1024
+             ESP Algorithm Elected:NULL_000-HMAC_MD5_96
+         SA Count:    1
+         Up Since:    2023-03-10 04:04:08.768292
 
 Completed in 0.12 seconds
 ```
@@ -394,7 +437,12 @@ Example output for a tunnel that is down:
  out-errors:                          6
 
  IPSec:
-   Tunnel Status:     Down
+     rem1:
+         Tunnel Status:Down
+         Tunnel Details:
+             Name:    ipsec-client-tunnel-primary-rem1
+             Remote Host:172.16.4.3
+         Down Reason: No response from Remote Host
 ```
 
 #### Tunnel Monitor State
@@ -403,22 +451,57 @@ If tunnel monitoring is enabled for a remote, corresponding tunnel monitoring st
 
 ```
  IPSec:
-     Tunnel Status:   Up
-     Tunnel Details:
-         Name:        ipsec-client-tunnel-primary-rem1
-         Remote id:   172.16.4.3
-         SA Details:
-             Add time:2022-02-14 15:41:15
-             In bytes:60
-             Out bytes:60
-         Ingress Total (bytes):60
-         Egress Total (bytes):60
-     SA Count:        1
-     Tunnel Monitoring:
-           Destination:8.8.8.8
-           Status:    up
-           Last Attempt:2022-02-14 15:42:34
-           Last Restart:2022-02-14 15:41:15
+     rem2:
+         Tunnel Status:Up
+         Tunnel Details:
+             Name:    ipsec-client-tunnel-secondary-rem2
+             Remote Host:172.16.5.4
+             Remote id:172.16.5.4
+             SA Details:
+                 Add time:2023-03-14 18:05:03
+                 In bytes:0
+                 Out bytes:0
+             Ingress Bytes:3846598
+             Ingress Packets:85732
+             Egress Bytes:5344740
+             Egress Packets:85857
+             IKE Version:2
+             IKE Algorithm Elected:AES_CBC_128-HMAC_SHA1-MODP1024
+             ESP Algorithm Elected:NULL_000-HMAC_MD5_96
+         SA Count:    1
+         Up Since:    2023-03-10 04:04:08.768292
+         Tunnel Monitoring:
+             Destination:8.8.8.8
+             Status:    up
+             Last Attempt:2022-02-14 15:42:34
+             Last Restart:2022-02-14 15:41:15
+```
+
+### Metrics
+
+Non-persistent metrics were added for the ingress/egress packets/bytes of the tunnels.
+
+```
+# show stats ipsec-client
+Tue 2023-03-14 18:50:47 UTC
+✔ Retrieving statistics...
+
+IPSec Client Metrics
+--------------------
+
+================== ============ ======== =========
+ Metric             Node         Remote     Value
+================== ============ ======== =========
+ received bytes     combo-west   rem1           0
+                    combo-west   rem2     3854998
+ received packets   combo-west   rem1           0
+                    combo-west   rem2       85932
+ sent bytes         combo-west   rem1        9662
+                    combo-west   rem2     5356740
+ sent packets       combo-west   rem1         136
+                    combo-west   rem2       86057
+
+Completed in 0.12 seconds
 ```
 
 ### Commands
@@ -686,6 +769,52 @@ exit
 ```
 
 ## Release Notes
+
+### Release 3.5.0
+
+**Release Date:** Mar 17, 2023
+
+**Router Version** 128T-ipsec-2.3.0-3
+
+#### New Features and Improvements
+- **WAN-1298** Upgrade libreswan version
+
+Upgraded from 3.23-5 to 3.28-1.
+
+- **PLUGIN-1906** Support DNS Proxy integration
+
+The plugin now automatically adds the configured ipsec tenant to dns-proxy services.
+
+- **PLUGIN-1981** Enhance the plugin state output for better insights into the tunnels
+
+The plugin now supports more helpful plugin state output such as:
+* Down reason
+* Chosen ike proposal
+* Chosen ipsec proposal
+* More accurate uptime
+* More accurate ingress/egress bytes/packets
+* Ike version
+
+Example output can be found [here](plugin_ipsec_client.md#pcli-enhancements).
+
+- **PLUGIN-1911** Support an active-standby HA mode
+
+The plugin now supports `redundancy-enabled` [configuration option](plugin_ipsec_client.md#redundancy) which will ensure that tunnels are only being created by one node at a time. The default behavior will continue to be active-active.
+
+- **PLUGIN-1913** Add metrics for tunnel statistics
+
+The plugin now supports non-persisted metrics for tunnels. More details and examples can be found [here](plugin_ipsec_client.md#metrics).
+
+- **PLUGIN-1996** WAN Assurance 1.0 will display conductor managed ipsec tunnels
+
+When using the 128T-ipsec-client and 128T-mist-wan-assurance plugins together, ipsec tunnel details will show up in the Mist UI.
+
+#### Issues Fixed
+
+- **PLUGIN-1999** Tunnels failed to come up because of DNS not working at salt application time
+
+  _**Resolution:**_ The salt application no longer requires DNS to generate libreswan configuration.
+
 
 ### Release 3.4.0
 
