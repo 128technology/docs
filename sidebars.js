@@ -7,6 +7,7 @@ module.exports = {
       "about_support_policy",
       "about_supported_platforms",
       "about_certified_platforms",
+      "about_ssr_compliance",
       "about_security_policy",
       "CONTRIBUTING",
     ],
