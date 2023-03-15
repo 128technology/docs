@@ -88,6 +88,8 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-49604 Alarm when a node is disconnected:** An alarm is now raised when a node is disconnected from the internal synchronization database.
 ------
+- **I95-49633 Static assignment config is in multiple places locations:** This is as designed, however cross-validation has been added to prevent adding different IP addresses.
+------
 - **I95-49655 Cutting and pasting the output of `show flat` does not work for OSPF:** Resolved the issue that prevented editing the OSPF list.
 ------
 - **I95-49722 Event filter does not work on HA router nodes:** Resolved issues with filtering by node, and an incorrect value was displayed for the node column in the GUI.
@@ -99,6 +101,8 @@ and there are established flows for any of these services, a link flap triggerin
 - **I95-50014 Hitting Buffer Overflow during configuration changes:** Reolved an issue where a config change request may not make it to a managed router, and returns a buffer overflow error.
 ------
 - **I95-50034 Issues with stuck sessions in load balancer:** Resolved an issue with session modify, where gateway changes on the same egress interface can fail due to a missing ARP.
+------
+- **I95-50050 VRRP High Availability gets stuck in Active/Active:** The DPDK version has been updated to resolve this issue. 
 ------
 - **I95-50058 Performance regression in Running Config APIs:** Resolved a constant cache miss for a specific set of the running config APIs.
 ------
