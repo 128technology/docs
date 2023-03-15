@@ -119,7 +119,7 @@ The main config properties of a remote endpoint are as follows.
 | profile           | reference | The name of the profile to be used for this remote endpoint. |
 | remote-id         | string    | The optional remote identifier used during authentication. |
 | subnet            | ip-prefix | The remote subnet behind the tunnel. |
-| tunnel-monitor    | container | Properties for monitoring the phase-2 connection. See [Tunnel Monitoring](plugin_ipsec_client.md#tunnel-monitoring) for more information. |
+| tunnel-monitor    | container | Properties for monitoring the phase-2 connection. See [Tunnel Monitoring](#tunnel-monitoring) for more information. |
 
 Example:
 ```
@@ -174,7 +174,7 @@ Only one `ipsec-client` can be configured per node, but two `remote`s can be con
 :::
 
 :::warning
-The `ipsec-client > name` cannot start with `ipsec` or `mast`. See notes [here](plugin_ipsec_client.md#release-340).
+The `ipsec-client > name` cannot start with `ipsec` or `mast`. See notes [here](#release-340).
 :::
 
 Each `remote` represents a unique tunnel destination and can be used to route traffic in/out of the tunnels. Typically each node has two tunnels to act as primary and backup.
@@ -781,10 +781,6 @@ exit
 
 Upgraded from 3.23-5 to 3.28-1.
 
-- **PLUGIN-1906** Support DNS Proxy integration
-
-The plugin now automatically adds the configured ipsec tenant to dns-proxy services.
-
 - **PLUGIN-1981** Enhance the plugin state output for better insights into the tunnels
 
 The plugin now supports more helpful plugin state output such as:
@@ -795,15 +791,15 @@ The plugin now supports more helpful plugin state output such as:
 * More accurate ingress/egress bytes/packets
 * Ike version
 
-Example output can be found [here](plugin_ipsec_client.md#pcli-enhancements).
+Example output can be found in the [PCLI Enhancements](#pcli-enhancements) section.
 
 - **PLUGIN-1911** Support an active-standby HA mode
 
-The plugin now supports `redundancy-enabled` [configuration option](plugin_ipsec_client.md#redundancy) which will ensure that tunnels are only being created by one node at a time. The default behavior will continue to be active-active.
+The plugin now supports the `redundancy-enabled` [configuration option](#redundancy). This ensures that tunnels are being created by only one node at a time. The default behavior remains active-active.
 
 - **PLUGIN-1913** Add metrics for tunnel statistics
 
-The plugin now supports non-persisted metrics for tunnels. More details and examples can be found [here](plugin_ipsec_client.md#metrics).
+The plugin now supports non-persisted metrics for tunnels. More details and examples can be found in the [Metrics](#metrics) section.
 
 - **PLUGIN-1996** WAN Assurance 1.0 will display conductor managed ipsec tunnels
 
@@ -811,10 +807,17 @@ When using the 128T-ipsec-client and 128T-mist-wan-assurance plugins together, i
 
 #### Issues Fixed
 
-- **PLUGIN-1999** Tunnels failed to come up because of DNS not working at salt application time
+- **PLUGIN-1999** Tunnels failed to come up because of unresolvable DNS during startup
 
   _**Resolution:**_ The salt application no longer requires DNS to generate libreswan configuration.
 
+- **PLUGIN-1906** DNS Proxy services were not being used for ipsec hostname resolution
+
+  _**Resolution**_ The plugin now automatically adds the configured ipsec tenant to dns-proxy services.
+
+- **PLUGIN-1782** Removing destinations from tunnel monitoring config causes invalid configuration
+
+  _**Resolution**_ The configuration validation now accepts this configuration flow
 
 ### Release 3.4.0
 
