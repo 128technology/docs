@@ -151,7 +151,7 @@ Before upgrading, ensure that there is at least one user on each 128T system tha
 ------
 - **I95-36102** `compare config` now defaults to `compare config running candidate` when no additional arguments are supplied.
 ------
-- **I95-36525** TLS 1.0 is no longer supported.
+- **I95-36525** Due to known vulnerabilities, only TLS versions 1.2 and 1.3 are supported. We do not support TLS 1.0 and 1.1.
 
 ## Caveats
 
