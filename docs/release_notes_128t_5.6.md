@@ -54,7 +54,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 and there are established flows for any of these services, a link flap triggering a flow invalidation (changes to FIB) will induce a crash in the highway process of the SSR. This issue exists in versions 5.6.3 through 5.6.6, and is resolved in 5.6.7.
 :::
 
-- **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48643, I95-48859, I95-48907, I95-47079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
+- **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48643, I95-48859, I95-48907, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
 ------
 - **I95-48054 STEP not working in Core Network:** Resolved an issue where processing STEP route updates can cause modification of unrelated FIB entries, potentially interrupting existing sessions.
 ------
