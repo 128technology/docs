@@ -289,115 +289,6 @@ clear bgp [{in | out | soft}] [vrf <vrf>] [force] {router <router> | resource-gr
 | ------- | ----------- |
 | [`show bgp`](#show-bgp) | Displays information about the state of the BGP process on the SSR. |
 
-## clear context router
-
-#### Usage
-```
-clear context router
-```
-
-#### Description
-Clear both the router context and node context.
-
-#### Version History
-| Release | Modification                  |
-| ------- | ----------------------------- |
-| 5.0.0   | This feature has been removed |
-
-#### See Also
-- [clear context node](#clear-context-node) Clear only the node context
-- [set context router](#set-context-router) Set the context to a different router
-- [set context stats start-time](#set-context-stats-start-time) Set the start time for show stats commands
-
-## clear context stats start-time
-
-#### Usage
-```
-clear context stats start-time
-```
-
-#### Description
-Clears the start time for show stats commands.
-
-#### Version History
-| Release | Modification                  |
-| ------- | ----------------------------- |
-| 5.0.0   | This feature has been removed |
-
-## clear events admin
-
-#### Usage
-```
-clear events admin
-```
-
-#### Description
-Clears admin event records.
-
-#### Version History
-| Release | Modification                  |
-| ------- | ----------------------------- |
-| 4.5.0   | This feature has been removed |
-
-## clear events alarm
-
-#### Usage
-```
-clear events alarm
-```
-
-#### Description
-Clears alarm event records.
-
-#### Version History
-| Release | Modification                  |
-| ------- | ----------------------------- |
-| 4.5.0   | This feature has been removed |
-
-## clear events all
-
-#### Usage
-```
-clear events all
-```
-
-#### Description
-Clears all event records.
-
-#### Version History
-| Release | Modification                  |
-| ------- | ----------------------------- |
-| 4.5.0   | This feature has been removed |
-
-## clear events system
-
-#### Usage
-```
-clear events system
-```
-
-#### Description
-Clears system event records.
-
-#### Version History
-| Release | Modification                  |
-| ------- | ----------------------------- |
-| 4.5.0   | This feature has been removed |
-
-## clear events traffic
-
-#### Usage
-```
-clear events traffic
-```
-
-#### Description
-Clears traffic event records.
-
-#### Version History
-| Release | Modification                  |
-| ------- | ----------------------------- |
-| 4.5.0   | This feature has been removed |
 
 ## `clear history`
 
@@ -2277,6 +2168,7 @@ request idp restart [force] [rebuild] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
@@ -2297,6 +2189,7 @@ Initiate a restart of the underlying IDP engine.
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.4   | This feature was introduced |
+| 6.1.0   | `show idp application details` added |
 
 ## `request idp signature-query`
 
@@ -3921,6 +3814,51 @@ set system software image <image>
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.0   | This feature was introduced |
+## `set time`
+
+Set the system date and time.
+
+#### Usage
+
+```
+set time [force] <date>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| date | The date to be used for the system date |
+
+#### Description
+
+`date` can be in almost any common format. It can contain month names, time zones, **AM** and **PM**, yesterday, etc. 
+For example,
+
+```
+set time 2020-07-21 14:19:13.489392193 +0530
+```
+
+specifies the instant of time that is 489,392,193 nanoseconds after July 21, 2020 at 2:19:13 PM in a time zone that is 5 hours and 30 minutes east of UTC.
+
+Relative times can also be used. 
+For example,
+```
+set time +2 hours
+
+set time -5 min
+```
+the first adds two hours to the current time and the second moves the clock back by five minutes.
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.1.0   | This feature was introduced |
 
 ## `shell`
 
@@ -4375,6 +4313,7 @@ show assets [{router <router> | resource-group <resource-group>}] [force] [node 
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
@@ -4500,6 +4439,7 @@ show assets software [{router <router> | resource-group <resource-group>}] [forc
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -4576,6 +4516,7 @@ show assets summary [{router <router> | resource-group <resource-group>}] [force
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -6250,6 +6191,44 @@ admin@gouda.novigrad# show history
  470   show history
 ```
 
+## `show idp application details`
+
+Show IDP engine details.
+
+#### Usage
+
+```
+show idp application details [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The node for which engine started |
+| resource-group | The name of the resource group |
+| router | The router for which engine started |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
+| [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
+| [`show idp details`](#show-idp-details) | Show IDP details. |
+| [`show idp events`](#show-idp-events) | Show all IDP events |
+| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP event by application |
+| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type |
+| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level |
+| [`show idp network`](#show-idp-network) | Show IDP networks |
+| [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
+| [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
+| [`show stats idp`](STATS.md#show-stats-idp) | Metrics about IDP |
+
+#### Description
+
+Query and display the IDP engine details.
 ## `show idp application status`
 
 Show underlying IDP application status.
@@ -6693,7 +6672,7 @@ show load-balancer [service <service>] [agent <agent>] [rows <rows>] [force] [no
 
 #### Description
 
-The _show load-balancer_ command provides feedback on the SSR&#x27;s load balancing behavior, when configured to balance traffic (via a service-policy).
+The `show load-balancer` command provides feedback on the SSR&#x27;s load balancing behavior, when configured to balance traffic (via a service-policy).
 
 This command, when issued without any filters (agent, node, or service) will display all agents, nodes, and services that are subject to load balancing. (The output can be quite verbose.) These filters may be combined to &quot;hone in&quot; on specific agents/nodes/services selectively.
 
@@ -10336,27 +10315,32 @@ trace [verbose] [verbose] [verbose] [no-logs] <command> [<command> ...]
 
 The `trace` command is used when attempting to determine what SSR services need to be inspected during troubleshooting.
 
-## traceroute
+## `traceroute`
 
-#### Usage 
+Print the route packets take to network host.
+
+#### Usage
+
 ```
-traceroute [peer-name <peer-name>][source-ip <source-ip>] [service <service>] [tenant <tenant>] destination-ip <destination-ip>
+traceroute [max-hops <max-hops>] [source-ip <source-ip>] [service <service>] [tenant <tenant>] router <router> node <node> <destination-ip>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
-| peer-name | The name of the SVR peer to probe (default is empty) |
-| service | The service for the traceroute command (default is empty) |
-| source-ip | The source address for the traceroute command (default: 0.0.0.0) |
-| tenant | The tenant name for the traceroute command (default is empty) |
+| max-hops | The maximum number of hops before the operation is terminated [type: int] |
+| node | The node on which to start the traceroute |
+| router | The router on which to start the traceroute |
+| service | The service for the traceroute command |
+| source-ip | The source address [type: IP address] (default: 0.0.0.0) |
+| tenant | The tenant name for the traceroute command |
 
-##### Postitional Arguments
+##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| destination-ip | The destination IP address for the traceroute command |
+| destination-ip | The destination address [type: IP address] |
 
 #### Description
 
