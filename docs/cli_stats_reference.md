@@ -61,8 +61,10 @@ show stats [since <since>] [force] [router <router>] [<verbosity>]
 | [`external-protocols`](#show-stats-external-protocols) | Stats pertaining to external protocols |
 | [`highway`](#show-stats-highway) | Stats pertaining to the highway manager |
 | [`icmp`](#show-stats-icmp) | Stats pertaining to ICMP packets |
+| [`idp`](#show-stats-idp) | Metrics about IDP |
 | [`interface`](#show-stats-interface) | Stats pertaining to Ethernet Interface |
 | [`ipfix`](#show-stats-ipfix) | Stats pertaining to IPFIX export |
+| [`mars`](#show-stats-mars) | Metrics about the MARS process |
 | [`memory`](#show-stats-memory) | Memory usage information |
 | [`metrics`](#show-stats-metrics) | Measurements reflecting metrics library performance by client process |
 | [`mtu-discovery`](#show-stats-mtu-discovery) | Stats pertaining to MTU discovery. |
@@ -72,6 +74,7 @@ show stats [since <since>] [force] [router <router>] [<verbosity>]
 | [`path-tree`](#show-stats-path-tree) | Metrics tracking PathTree server and client behavior |
 | [`performance-monitoring`](#show-stats-performance-monitoring) | Stats pertaining to SSR peer path performance monitoring |
 | [`process`](#show-stats-process) | Metrics about SSR processes |
+| [`queue`](#show-stats-queue) | Metrics tracking the TANK queue production and consumption |
 | [`redis-server-manager`](#show-stats-redis-server-manager) | Stats pertaining to the Redis Server Manager |
 | [`redundancy`](#show-stats-redundancy) | Stats pertaining to the highway manager redundancy |
 | [`registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
@@ -82,6 +85,7 @@ show stats [since <since>] [force] [router <router>] [<verbosity>]
 | [`source-nat`](#show-stats-source-nat) | Stats pertaining to source-nat port allocation in highway manager |
 | [`source-tenant`](#show-stats-source-tenant) | Stats pertaining to source-tenant table management |
 | [`ssc`](#show-stats-ssc) | Metrics pertaining to the SSC |
+| [`traceroute`](#show-stats-traceroute) | Stats pertaining to traceroute troubleshooting |
 | [`traffic-eng`](#show-stats-traffic-eng) | Stats pertaining to packets enqueued for traffic engineering |
 | [`traffic-export`](#show-stats-traffic-export) | Stats pertaining to exported traffic events |
 | [`waypoint`](#show-stats-waypoint) | Stats pertaining to waypoint allocation in highway manager |
@@ -237,135 +241,132 @@ show stats aggregate-session by-device-interface [device-interface <device-inter
 | [`bandwidth`](#show-stats-aggregate-session-by-device-interface-bandwidth) | Total bandwidth of active sessions (bytes per second) |
 | [`bandwidth-other-protocol`](#show-stats-aggregate-session-by-device-interface-bandwidth-other-protocol) | Total bandwidth for other protocols (bytes per second) |
 | [`bandwidth-received`](#show-stats-aggregate-session-by-device-interface-bandwidth-received) | Total received bandwidth (bytes per second) |
-| [`bandwidth-received-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-forward) | Total received bandwidth in the forward direction (bytes per second) |
+| [`bandwidth-received-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-forward) | Total received bandwidth in the forward direction (bytes per second) (in-memory) |
 | [`bandwidth-received-other-protocol`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-other-protocol) | Total bandwidth received for other protocols (bytes per second) |
-| [`bandwidth-received-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-other-protocol-forward) | Total bandwidth received in the forward direction for other protocols (bytes per second) |
-| [`bandwidth-received-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-other-protocol-reverse) | Total bandwidth received in the reverse direction for other protocols (bytes per second) |
-| [`bandwidth-received-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-reverse) | Total received bandwidth in the reverse direction (bytes per second) |
+| [`bandwidth-received-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-other-protocol-forward) | Total bandwidth received in the forward direction for other protocols (bytes per second) (in-memory) |
+| [`bandwidth-received-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-other-protocol-reverse) | Total bandwidth received in the reverse direction for other protocols (bytes per second) (in-memory) |
+| [`bandwidth-received-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-reverse) | Total received bandwidth in the reverse direction (bytes per second) (in-memory) |
 | [`bandwidth-received-tcp`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-tcp) | Total TCP bandwidth received (bytes per second) |
-| [`bandwidth-received-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-tcp-forward) | Total TCP bandwidth received in the forward direction (bytes per second) |
-| [`bandwidth-received-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-tcp-reverse) | Total TCP bandwidth received in the reverse direction (bytes per second) |
+| [`bandwidth-received-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-tcp-forward) | Total TCP bandwidth received in the forward direction (bytes per second) (in-memory) |
+| [`bandwidth-received-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-tcp-reverse) | Total TCP bandwidth received in the reverse direction (bytes per second) (in-memory) |
 | [`bandwidth-received-udp`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-udp) | Total UDP bandwidth received (bytes per second) |
-| [`bandwidth-received-udp-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-udp-forward) | Total UDP bandwidth received in the forward direction (bytes per second) |
-| [`bandwidth-received-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-udp-reverse) | Total UDP bandwidth received in the reverse direction (bytes per second) |
+| [`bandwidth-received-udp-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-udp-forward) | Total UDP bandwidth received in the forward direction (bytes per second) (in-memory) |
+| [`bandwidth-received-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-received-udp-reverse) | Total UDP bandwidth received in the reverse direction (bytes per second) (in-memory) |
 | [`bandwidth-tcp`](#show-stats-aggregate-session-by-device-interface-bandwidth-tcp) | Total TCP bandwidth (bytes per second) |
 | [`bandwidth-transmitted`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted) | Total sent bandwidth (bytes per second) |
-| [`bandwidth-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-forward) | Total sent bandwidth in the forward direction (bytes per second) |
+| [`bandwidth-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-forward) | Total sent bandwidth in the forward direction (bytes per second) (in-memory) |
 | [`bandwidth-transmitted-other-protocol`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-other-protocol) | Total bandwidth sent for other protocols (bytes per second) |
-| [`bandwidth-transmitted-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-other-protocol-forward) | Total bandwidth sent in the forward direction for other protocols (bytes per second) |
-| [`bandwidth-transmitted-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-other-protocol-reverse) | Total bandwidth sent in the reverse direction for other protocols (bytes per second) |
-| [`bandwidth-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-reverse) | Total sent bandwidth in the reverse direction (bytes per second) |
+| [`bandwidth-transmitted-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-other-protocol-forward) | Total bandwidth sent in the forward direction for other protocols (bytes per second) (in-memory) |
+| [`bandwidth-transmitted-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-other-protocol-reverse) | Total bandwidth sent in the reverse direction for other protocols (bytes per second) (in-memory) |
+| [`bandwidth-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-reverse) | Total sent bandwidth in the reverse direction (bytes per second) (in-memory) |
 | [`bandwidth-transmitted-tcp`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-tcp) | Total TCP bandwidth sent (bytes per second) |
-| [`bandwidth-transmitted-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-tcp-forward) | Total TCP bandwidth sent in the forward direction (bytes per second) |
-| [`bandwidth-transmitted-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-tcp-reverse) | Total TCP bandwidth sent in the reverse direction (bytes per second) |
+| [`bandwidth-transmitted-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-tcp-forward) | Total TCP bandwidth sent in the forward direction (bytes per second) (in-memory) |
+| [`bandwidth-transmitted-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-tcp-reverse) | Total TCP bandwidth sent in the reverse direction (bytes per second) (in-memory) |
 | [`bandwidth-transmitted-udp`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-udp) | Total UDP bandwidth sent (bytes per second) |
-| [`bandwidth-transmitted-udp-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-udp-forward) | Total UDP bandwidth sent in the forward direction (bytes per second) |
-| [`bandwidth-transmitted-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-udp-reverse) | Total UDP bandwidth sent in the reverse direction (bytes per second) |
+| [`bandwidth-transmitted-udp-forward`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-udp-forward) | Total UDP bandwidth sent in the forward direction (bytes per second) (in-memory) |
+| [`bandwidth-transmitted-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bandwidth-transmitted-udp-reverse) | Total UDP bandwidth sent in the reverse direction (bytes per second) (in-memory) |
 | [`bandwidth-udp`](#show-stats-aggregate-session-by-device-interface-bandwidth-udp) | Total UDP bandwidth (bytes per second) |
-| [`bytes`](#show-stats-aggregate-session-by-device-interface-bytes) | Total bytes |
-| [`bytes-dropped-forward`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-forward) | Total bytes dropped in error for active sessions in the forward direction |
-| [`bytes-dropped-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-other-protocol-forward) | Total bytes dropped for active sessions using other protocols in the forward direction |
-| [`bytes-dropped-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-other-protocol-reverse) | Total bytes dropped for active sessions using other protocols in the reverse direction |
-| [`bytes-dropped-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-reverse) | Total bytes dropped in error for active sessions in the reverse direction |
-| [`bytes-dropped-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-tcp-forward) | Total TCP bytes dropped in error for active sessions in the forward direction |
-| [`bytes-dropped-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-tcp-reverse) | Total TCP bytes dropped in error for active sessions in the reverse direction |
-| [`bytes-dropped-udp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-udp-forward) | Total UDP bytes dropped in error for active sessions in the forward direction |
-| [`bytes-dropped-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-udp-reverse) | Total UDP bytes dropped in error for active sessions in the reverse direction |
-| [`bytes-other-protocol`](#show-stats-aggregate-session-by-device-interface-bytes-other-protocol) | Total bytes for active sessions using other protocols |
-| [`bytes-received`](#show-stats-aggregate-session-by-device-interface-bytes-received) | Total bytes received for active sessions |
-| [`bytes-received-forward`](#show-stats-aggregate-session-by-device-interface-bytes-received-forward) | Total bytes received for active sessions in the forward direction |
-| [`bytes-received-other-protocol`](#show-stats-aggregate-session-by-device-interface-bytes-received-other-protocol) | Total bytes received for active sessions using other protocols |
-| [`bytes-received-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bytes-received-other-protocol-forward) | Total bytes received for active sessions using other protocols in the forward direction |
-| [`bytes-received-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-received-other-protocol-reverse) | Total bytes received for active sessions using other protocols in the reverse direction |
-| [`bytes-received-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-received-reverse) | Total bytes received for active sessions in the reverse direction |
-| [`bytes-received-tcp`](#show-stats-aggregate-session-by-device-interface-bytes-received-tcp) | Total TCP bytes received for active sessions |
-| [`bytes-received-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-received-tcp-forward) | Total TCP bytes received for active sessions in the forward direction |
-| [`bytes-received-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-received-tcp-reverse) | Total TCP bytes received for active sessions in the reverse direction |
-| [`bytes-received-udp`](#show-stats-aggregate-session-by-device-interface-bytes-received-udp) | Total UDP bytes received for active sessions |
-| [`bytes-received-udp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-received-udp-forward) | Total UDP bytes received for active sessions in the forward direction |
-| [`bytes-received-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-received-udp-reverse) | Total UDP bytes received for active sessions in the reverse direction |
-| [`bytes-tcp`](#show-stats-aggregate-session-by-device-interface-bytes-tcp) | Total TCP bytes for active sessions |
-| [`bytes-transmitted`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted) | Total bytes sent for active sessions |
-| [`bytes-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-forward) | Total bytes sent for active sessions in the forward direction |
-| [`bytes-transmitted-other-protocol`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-other-protocol) | Total bytes sent for active sessions using other protocols |
-| [`bytes-transmitted-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-other-protocol-forward) | Total bytes sent for active sessions using other protocols in the forward direction |
-| [`bytes-transmitted-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-other-protocol-reverse) | Total bytes sent for active sessions using other protocols in the reverse direction |
-| [`bytes-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-reverse) | Total bytes sent for active sessions in the reverse direction |
-| [`bytes-transmitted-tcp`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-tcp) | Total TCP bytes sent for active sessions |
-| [`bytes-transmitted-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-tcp-forward) | Total TCP bytes sent for active sessions in the forward direction |
-| [`bytes-transmitted-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-tcp-reverse) | Total TCP bytes sent for active sessions in the reverse direction |
-| [`bytes-transmitted-udp`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-udp) | Total UDP bytes sent for active sessions |
-| [`bytes-transmitted-udp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-udp-forward) | Total UDP bytes sent for active sessions in the forward direction |
-| [`bytes-transmitted-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-udp-reverse) | Total UDP bytes sent for active sessions in the reverse direction |
-| [`bytes-udp`](#show-stats-aggregate-session-by-device-interface-bytes-udp) | Total UDP bytes for active sessions |
+| [`bytes`](#show-stats-aggregate-session-by-device-interface-bytes) | Total bytes (in-memory) |
+| [`bytes-dropped-forward`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-forward) | Total bytes dropped in error for active sessions in the forward direction (in-memory) |
+| [`bytes-dropped-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-other-protocol-forward) | Total bytes dropped for active sessions using other protocols in the forward direction (in-memory) |
+| [`bytes-dropped-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-other-protocol-reverse) | Total bytes dropped for active sessions using other protocols in the reverse direction (in-memory) |
+| [`bytes-dropped-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-reverse) | Total bytes dropped in error for active sessions in the reverse direction (in-memory) |
+| [`bytes-dropped-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-tcp-forward) | Total TCP bytes dropped in error for active sessions in the forward direction (in-memory) |
+| [`bytes-dropped-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-tcp-reverse) | Total TCP bytes dropped in error for active sessions in the reverse direction (in-memory) |
+| [`bytes-dropped-udp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-udp-forward) | Total UDP bytes dropped in error for active sessions in the forward direction (in-memory) |
+| [`bytes-dropped-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-dropped-udp-reverse) | Total UDP bytes dropped in error for active sessions in the reverse direction (in-memory) |
+| [`bytes-other-protocol`](#show-stats-aggregate-session-by-device-interface-bytes-other-protocol) | Total bytes for active sessions using other protocols (in-memory) |
+| [`bytes-received`](#show-stats-aggregate-session-by-device-interface-bytes-received) | Total bytes received for active sessions (in-memory) |
+| [`bytes-received-forward`](#show-stats-aggregate-session-by-device-interface-bytes-received-forward) | Total bytes received for active sessions in the forward direction (in-memory) |
+| [`bytes-received-other-protocol`](#show-stats-aggregate-session-by-device-interface-bytes-received-other-protocol) | Total bytes received for active sessions using other protocols (in-memory) |
+| [`bytes-received-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bytes-received-other-protocol-forward) | Total bytes received for active sessions using other protocols in the forward direction (in-memory) |
+| [`bytes-received-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-received-other-protocol-reverse) | Total bytes received for active sessions using other protocols in the reverse direction (in-memory) |
+| [`bytes-received-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-received-reverse) | Total bytes received for active sessions in the reverse direction (in-memory) |
+| [`bytes-received-tcp`](#show-stats-aggregate-session-by-device-interface-bytes-received-tcp) | Total TCP bytes received for active sessions (in-memory) |
+| [`bytes-received-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-received-tcp-forward) | Total TCP bytes received for active sessions in the forward direction (in-memory) |
+| [`bytes-received-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-received-tcp-reverse) | Total TCP bytes received for active sessions in the reverse direction (in-memory) |
+| [`bytes-received-udp`](#show-stats-aggregate-session-by-device-interface-bytes-received-udp) | Total UDP bytes received for active sessions (in-memory) |
+| [`bytes-received-udp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-received-udp-forward) | Total UDP bytes received for active sessions in the forward direction (in-memory) |
+| [`bytes-received-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-received-udp-reverse) | Total UDP bytes received for active sessions in the reverse direction (in-memory) |
+| [`bytes-tcp`](#show-stats-aggregate-session-by-device-interface-bytes-tcp) | Total TCP bytes for active sessions (in-memory) |
+| [`bytes-transmitted`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted) | Total bytes sent for active sessions (in-memory) |
+| [`bytes-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-forward) | Total bytes sent for active sessions in the forward direction (in-memory) |
+| [`bytes-transmitted-other-protocol`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-other-protocol) | Total bytes sent for active sessions using other protocols (in-memory) |
+| [`bytes-transmitted-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-other-protocol-forward) | Total bytes sent for active sessions using other protocols in the forward direction (in-memory) |
+| [`bytes-transmitted-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-other-protocol-reverse) | Total bytes sent for active sessions using other protocols in the reverse direction (in-memory) |
+| [`bytes-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-reverse) | Total bytes sent for active sessions in the reverse direction (in-memory) |
+| [`bytes-transmitted-tcp`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-tcp) | Total TCP bytes sent for active sessions (in-memory) |
+| [`bytes-transmitted-tcp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-tcp-forward) | Total TCP bytes sent for active sessions in the forward direction (in-memory) |
+| [`bytes-transmitted-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-tcp-reverse) | Total TCP bytes sent for active sessions in the reverse direction (in-memory) |
+| [`bytes-transmitted-udp`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-udp) | Total UDP bytes sent for active sessions (in-memory) |
+| [`bytes-transmitted-udp-forward`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-udp-forward) | Total UDP bytes sent for active sessions in the forward direction (in-memory) |
+| [`bytes-transmitted-udp-reverse`](#show-stats-aggregate-session-by-device-interface-bytes-transmitted-udp-reverse) | Total UDP bytes sent for active sessions in the reverse direction (in-memory) |
+| [`bytes-udp`](#show-stats-aggregate-session-by-device-interface-bytes-udp) | Total UDP bytes for active sessions (in-memory) |
 | [`packets`](#show-stats-aggregate-session-by-device-interface-packets) | Total packets (packets per second) |
-| [`packets-dropped-forward`](#show-stats-aggregate-session-by-device-interface-packets-dropped-forward) | Total packets dropped in error for active sessions in the forward direction (packets per second) |
-| [`packets-dropped-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-packets-dropped-other-protocol-forward) | Total packets dropped for active sessions using other protocols in the forward direction (packets per second) |
-| [`packets-dropped-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-packets-dropped-other-protocol-reverse) | Total packets dropped for active sessions using other protocols in the reverse direction (packets per second) |
-| [`packets-dropped-reverse`](#show-stats-aggregate-session-by-device-interface-packets-dropped-reverse) | Total packets dropped in error for active sessions in the reverse direction (packets per second) |
-| [`packets-dropped-tcp-forward`](#show-stats-aggregate-session-by-device-interface-packets-dropped-tcp-forward) | Total TCP packets dropped in error for active sessions in the forward direction (packets per second) |
-| [`packets-dropped-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-dropped-tcp-reverse) | Total TCP packets dropped in error for active sessions in the reverse direction (packets per second) |
-| [`packets-dropped-udp-forward`](#show-stats-aggregate-session-by-device-interface-packets-dropped-udp-forward) | Total UDP packets dropped in error for active sessions in the forward direction (packets per second) |
-| [`packets-dropped-udp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-dropped-udp-reverse) | Total UDP packets dropped in error for active sessions in the reverse direction (packets per second) |
+| [`packets-dropped-forward`](#show-stats-aggregate-session-by-device-interface-packets-dropped-forward) | Total packets dropped in error for active sessions in the forward direction (packets per second) (in-memory) |
+| [`packets-dropped-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-packets-dropped-other-protocol-forward) | Total packets dropped for active sessions using other protocols in the forward direction (packets per second) (in-memory) |
+| [`packets-dropped-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-packets-dropped-other-protocol-reverse) | Total packets dropped for active sessions using other protocols in the reverse direction (packets per second) (in-memory) |
+| [`packets-dropped-reverse`](#show-stats-aggregate-session-by-device-interface-packets-dropped-reverse) | Total packets dropped in error for active sessions in the reverse direction (packets per second) (in-memory) |
+| [`packets-dropped-tcp-forward`](#show-stats-aggregate-session-by-device-interface-packets-dropped-tcp-forward) | Total TCP packets dropped in error for active sessions in the forward direction (packets per second) (in-memory) |
+| [`packets-dropped-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-dropped-tcp-reverse) | Total TCP packets dropped in error for active sessions in the reverse direction (packets per second) (in-memory) |
+| [`packets-dropped-udp-forward`](#show-stats-aggregate-session-by-device-interface-packets-dropped-udp-forward) | Total UDP packets dropped in error for active sessions in the forward direction (packets per second) (in-memory) |
+| [`packets-dropped-udp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-dropped-udp-reverse) | Total UDP packets dropped in error for active sessions in the reverse direction (packets per second) (in-memory) |
 | [`packets-other-protocol`](#show-stats-aggregate-session-by-device-interface-packets-other-protocol) | Total packets for active sessions using other protocols (packets per second) |
 | [`packets-received`](#show-stats-aggregate-session-by-device-interface-packets-received) | Total packets received for active sessions (packets per second) |
-| [`packets-received-forward`](#show-stats-aggregate-session-by-device-interface-packets-received-forward) | Total packets received for active sessions in the forward direction (packets per second) |
+| [`packets-received-forward`](#show-stats-aggregate-session-by-device-interface-packets-received-forward) | Total packets received for active sessions in the forward direction (packets per second) (in-memory) |
 | [`packets-received-other-protocol`](#show-stats-aggregate-session-by-device-interface-packets-received-other-protocol) | Total packets received for active sessions using other protocols (packets per second) |
-| [`packets-received-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-packets-received-other-protocol-forward) | Total packets received for active sessions using other protocols in the forward direction (packets per second) |
-| [`packets-received-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-packets-received-other-protocol-reverse) | Total packets received for active sessions using other protocols in reverse direction (packets per second) |
-| [`packets-received-reverse`](#show-stats-aggregate-session-by-device-interface-packets-received-reverse) | Total packets received for active sessions in the reverse direction (packets per second) |
+| [`packets-received-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-packets-received-other-protocol-forward) | Total packets received for active sessions using other protocols in the forward direction (packets per second) (in-memory) |
+| [`packets-received-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-packets-received-other-protocol-reverse) | Total packets received for active sessions using other protocols in reverse direction (packets per second) (in-memory) |
+| [`packets-received-reverse`](#show-stats-aggregate-session-by-device-interface-packets-received-reverse) | Total packets received for active sessions in the reverse direction (packets per second) (in-memory) |
 | [`packets-received-tcp`](#show-stats-aggregate-session-by-device-interface-packets-received-tcp) | Total TCP packets received for active sessions (packets per second) |
-| [`packets-received-tcp-forward`](#show-stats-aggregate-session-by-device-interface-packets-received-tcp-forward) | Total TCP packets received for active sessions in the forward direction (packets per second) |
-| [`packets-received-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-received-tcp-reverse) | Total TCP packets received for active sessions in the reverse direction (packets per second) |
+| [`packets-received-tcp-forward`](#show-stats-aggregate-session-by-device-interface-packets-received-tcp-forward) | Total TCP packets received for active sessions in the forward direction (packets per second) (in-memory) |
+| [`packets-received-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-received-tcp-reverse) | Total TCP packets received for active sessions in the reverse direction (packets per second) (in-memory) |
 | [`packets-received-udp`](#show-stats-aggregate-session-by-device-interface-packets-received-udp) | Total UDP packets received for active sessions (packets per second) |
-| [`packets-received-udp-forward`](#show-stats-aggregate-session-by-device-interface-packets-received-udp-forward) | Total UDP packets received for active sessions in the forward direction (packets per second) |
-| [`packets-received-udp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-received-udp-reverse) | Total UDP packets received for active sessions in the reverse direction (packets per second) |
+| [`packets-received-udp-forward`](#show-stats-aggregate-session-by-device-interface-packets-received-udp-forward) | Total UDP packets received for active sessions in the forward direction (packets per second) (in-memory) |
+| [`packets-received-udp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-received-udp-reverse) | Total UDP packets received for active sessions in the reverse direction (packets per second) (in-memory) |
 | [`packets-tcp`](#show-stats-aggregate-session-by-device-interface-packets-tcp) | Total TCP packets for active sessions (packets per second) |
 | [`packets-transmitted`](#show-stats-aggregate-session-by-device-interface-packets-transmitted) | Total packets sent for active sessions (packets per second) |
-| [`packets-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-forward) | Total packets sent for active sessions in the forward direction (packets per second) |
+| [`packets-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-forward) | Total packets sent for active sessions in the forward direction (packets per second) (in-memory) |
 | [`packets-transmitted-other-protocol`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-other-protocol) | Total packets sent for active sessions using other protocols (packets per second) |
-| [`packets-transmitted-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-other-protocol-forward) | Total packets sent for active sessions using other protocols in the forward direction (packets per second) |
-| [`packets-transmitted-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-other-protocol-reverse) | Total packets sent for active sessions using other protocols in the reverse direction (packets per second) |
-| [`packets-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-reverse) | Total packets sent for active sessions in the reverse direction (packets per second) |
+| [`packets-transmitted-other-protocol-forward`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-other-protocol-forward) | Total packets sent for active sessions using other protocols in the forward direction (packets per second) (in-memory) |
+| [`packets-transmitted-other-protocol-reverse`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-other-protocol-reverse) | Total packets sent for active sessions using other protocols in the reverse direction (packets per second) (in-memory) |
+| [`packets-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-reverse) | Total packets sent for active sessions in the reverse direction (packets per second) (in-memory) |
 | [`packets-transmitted-tcp`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-tcp) | Total TCP packets sent for active sessions (packets per second) |
-| [`packets-transmitted-tcp-forward`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-tcp-forward) | Total TCP packets sent for active sessions in the forward direction (packets per second) |
-| [`packets-transmitted-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-tcp-reverse) | Total TCP packets sent for active sessions in the reverse direction (packets per second) |
+| [`packets-transmitted-tcp-forward`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-tcp-forward) | Total TCP packets sent for active sessions in the forward direction (packets per second) (in-memory) |
+| [`packets-transmitted-tcp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-tcp-reverse) | Total TCP packets sent for active sessions in the reverse direction (packets per second) (in-memory) |
 | [`packets-transmitted-udp`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-udp) | Total UDP packets sent for active sessions (packets per second) |
-| [`packets-transmitted-udp-forward`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-udp-forward) | Total UDP packets sent for active sessions in the forward direction (packets per second) |
-| [`packets-transmitted-udp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-udp-reverse) | Total UDP packets sent for active sessions in the reverse direction (packets per second) |
+| [`packets-transmitted-udp-forward`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-udp-forward) | Total UDP packets sent for active sessions in the forward direction (packets per second) (in-memory) |
+| [`packets-transmitted-udp-reverse`](#show-stats-aggregate-session-by-device-interface-packets-transmitted-udp-reverse) | Total UDP packets sent for active sessions in the reverse direction (packets per second) (in-memory) |
 | [`packets-udp`](#show-stats-aggregate-session-by-device-interface-packets-udp) | Total UDP packets for active sessions (packets per second) |
 | [`session-arrival-rate`](#show-stats-aggregate-session-by-device-interface-session-arrival-rate) | Rate of arrival for new sessions per unit time (sessions per second) |
 | [`session-count`](#show-stats-aggregate-session-by-device-interface-session-count) | Total number of active sessions |
 | [`session-departure-rate`](#show-stats-aggregate-session-by-device-interface-session-departure-rate) | Rate of departure for terminated sessions per unit time (session departures per second) |
-| [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) |
-| [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) |
-| [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) |
-| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-device-interface-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) |
-| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-device-interface-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) |
-| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) |
-| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) |
-| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) |
-| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) |
-| [`tcp-out-of-order`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-order) | Total number of TCP data received for active sessions that was out of order (packets per second) |
-| [`tcp-out-of-order-forward`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-order-forward) | Total number of TCP data received for active sessions that was out of order in the forward direction (packets per second) |
-| [`tcp-out-of-order-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-order-reverse) | Total number of TCP data received for active sessions that was out of order in the reverse direction (packets per second) |
-| [`tcp-out-of-window`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-window) | Total number of TCP data received for active sessions that was out of window (packets per second) |
-| [`tcp-out-of-window-forward`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-window-forward) | Total number of TCP data received for active sessions that was out of window in the forward direction (packets per second) |
-| [`tcp-out-of-window-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-window-reverse) | Total number of TCP data received for active sessions that was out of window in the reverse direction (packets per second) |
-| [`tcp-resets`](#show-stats-aggregate-session-by-device-interface-tcp-resets) | Total TCP resets for active sessions (resets per second) |
-| [`tcp-resets-received`](#show-stats-aggregate-session-by-device-interface-tcp-resets-received) | Total TCP resets received for active sessions (resets per second) |
-| [`tcp-resets-received-forward`](#show-stats-aggregate-session-by-device-interface-tcp-resets-received-forward) | Total TCP resets received for active sessions in the forward direction (resets per second) |
-| [`tcp-resets-received-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-resets-received-reverse) | Total TCP resets received for active sessions in the reverse direction (resets per second) |
-| [`tcp-resets-transmitted`](#show-stats-aggregate-session-by-device-interface-tcp-resets-transmitted) | Total TCP resets sent for active sessions (resets per second) |
-| [`tcp-resets-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) |
-| [`tcp-resets-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) |
-| [`tcp-retransmissions`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions) | Total TCP data retransmissions for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-received) | Total number of TCP data retransmissions received for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions received for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions received for active sessions in the reverse direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions sent for active sessions (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions sent for active sessions in the forward direction (retransmissions per second) |
-| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions sent for active sessions in the reverse direction (retransmissions per second) |
+| [`tcp-bad-flag-combinations`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations) | Total number of TCP bad flag combinations received for active sessions (packets per second) (in-memory) |
+| [`tcp-bad-flag-combinations-forward`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations-forward) | Total number of TCP bad flag combinations received for active sessions in the forward direction (packets per second) (in-memory) |
+| [`tcp-bad-flag-combinations-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-bad-flag-combinations-reverse) | Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) (in-memory) |
+| [`tcp-duplicate-acks`](#show-stats-aggregate-session-by-device-interface-tcp-duplicate-acks) | Total number of TCP duplicate ACKs and window updates for active sessions (packets per second) (in-memory) |
+| [`tcp-duplicate-acks-forward`](#show-stats-aggregate-session-by-device-interface-tcp-duplicate-acks-forward) | Total number of TCP duplicate ACKs and window updates for active sessions in the forward direction (packets per second) (in-memory) |
+| [`tcp-duplicate-acks-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-duplicate-acks-reverse) | Total number of TCP duplicate ACKs and window updates for active sessions in the reverse direction (packets per second) (in-memory) |
+| [`tcp-invalid-state-transitions`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions) | Total TCP invalid state transitions detected for active sessions (packets per second) (in-memory) |
+| [`tcp-invalid-state-transitions-forward`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-forward) | Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) (in-memory) |
+| [`tcp-invalid-state-transitions-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-invalid-state-transitions-reverse) | Total TCP invalid state transitions detected for active sessions in the reverse direction (packets per second) (in-memory) |
+| [`tcp-out-of-window`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-window) | Total number of TCP data received for active sessions that was out of window (packets per second) (in-memory) |
+| [`tcp-out-of-window-forward`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-window-forward) | Total number of TCP data received for active sessions that was out of window in the forward direction (packets per second) (in-memory) |
+| [`tcp-out-of-window-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-out-of-window-reverse) | Total number of TCP data received for active sessions that was out of window in the reverse direction (packets per second) (in-memory) |
+| [`tcp-resets`](#show-stats-aggregate-session-by-device-interface-tcp-resets) | Total TCP resets for active sessions (resets per second) (in-memory) |
+| [`tcp-resets-received`](#show-stats-aggregate-session-by-device-interface-tcp-resets-received) | Total TCP resets received for active sessions (resets per second) (in-memory) |
+| [`tcp-resets-received-forward`](#show-stats-aggregate-session-by-device-interface-tcp-resets-received-forward) | Total TCP resets received for active sessions in the forward direction (resets per second) (in-memory) |
+| [`tcp-resets-received-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-resets-received-reverse) | Total TCP resets received for active sessions in the reverse direction (resets per second) (in-memory) |
+| [`tcp-resets-transmitted`](#show-stats-aggregate-session-by-device-interface-tcp-resets-transmitted) | Total TCP resets sent for active sessions (resets per second) (in-memory) |
+| [`tcp-resets-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-tcp-resets-transmitted-forward) | Total number of TCP resets sent for active sessions in the forward direction (resets per second) (in-memory) |
+| [`tcp-resets-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-resets-transmitted-reverse) | Total number of TCP resets sent for active sessions in the reverse direction (resets per second) (in-memory) |
+| [`tcp-retransmissions`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions) | Total TCP data retransmissions and out of order packets for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-received) | Total number of TCP data retransmissions and out of order packets received for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-received-forward`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-received-forward) | Total number of TCP data retransmissions and out of order packets received for active sessions in the forward direction (retransmissions per second) (in-memory) |
+| [`tcp-retransmissions-received-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-received-reverse) | Total number of TCP data retransmissions and out of order packets received for active sessions in the reverse direction (retransmissions per second) (in-memory) |
+| [`tcp-retransmissions-transmitted`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-transmitted) | Total number of TCP data retransmissions and out of order packets sent for active sessions (retransmissions per second) |
+| [`tcp-retransmissions-transmitted-forward`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-transmitted-forward) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the forward direction (retransmissions per second) (in-memory) |
+| [`tcp-retransmissions-transmitted-reverse`](#show-stats-aggregate-session-by-device-interface-tcp-retransmissions-transmitted-reverse) | Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second) (in-memory) |
 
 ## `show stats aggregate-session by-device-interface bandwidth`
 
@@ -444,7 +445,7 @@ show stats aggregate-session by-device-interface bandwidth-received [device-inte
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-forward`
 
-Total received bandwidth in the forward direction (bytes per second)
+Total received bandwidth in the forward direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -466,6 +467,10 @@ show stats aggregate-session by-device-interface bandwidth-received-forward [dev
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-other-protocol`
 
@@ -494,7 +499,7 @@ show stats aggregate-session by-device-interface bandwidth-received-other-protoc
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-other-protocol-forward`
 
-Total bandwidth received in the forward direction for other protocols (bytes per second)
+Total bandwidth received in the forward direction for other protocols (bytes per second) (in-memory)
 
 #### Usage
 
@@ -517,9 +522,13 @@ show stats aggregate-session by-device-interface bandwidth-received-other-protoc
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
+
 ## `show stats aggregate-session by-device-interface bandwidth-received-other-protocol-reverse`
 
-Total bandwidth received in the reverse direction for other protocols (bytes per second)
+Total bandwidth received in the reverse direction for other protocols (bytes per second) (in-memory)
 
 #### Usage
 
@@ -542,9 +551,13 @@ show stats aggregate-session by-device-interface bandwidth-received-other-protoc
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
+
 ## `show stats aggregate-session by-device-interface bandwidth-received-reverse`
 
-Total received bandwidth in the reverse direction (bytes per second)
+Total received bandwidth in the reverse direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -566,6 +579,9 @@ show stats aggregate-session by-device-interface bandwidth-received-reverse [dev
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-tcp`
 
@@ -594,7 +610,7 @@ show stats aggregate-session by-device-interface bandwidth-received-tcp [device-
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-tcp-forward`
 
-Total TCP bandwidth received in the forward direction (bytes per second)
+Total TCP bandwidth received in the forward direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -617,9 +633,12 @@ show stats aggregate-session by-device-interface bandwidth-received-tcp-forward 
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-device-interface bandwidth-received-tcp-reverse`
 
-Total TCP bandwidth received in the reverse direction (bytes per second)
+Total TCP bandwidth received in the reverse direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -641,6 +660,9 @@ show stats aggregate-session by-device-interface bandwidth-received-tcp-reverse 
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-udp`
 
@@ -669,7 +691,7 @@ show stats aggregate-session by-device-interface bandwidth-received-udp [device-
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-udp-forward`
 
-Total UDP bandwidth received in the forward direction (bytes per second)
+Total UDP bandwidth received in the forward direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -692,9 +714,12 @@ show stats aggregate-session by-device-interface bandwidth-received-udp-forward 
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-device-interface bandwidth-received-udp-reverse`
 
-Total UDP bandwidth received in the reverse direction (bytes per second)
+Total UDP bandwidth received in the reverse direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -716,6 +741,10 @@ show stats aggregate-session by-device-interface bandwidth-received-udp-reverse 
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-tcp`
 
@@ -769,7 +798,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted [device-i
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-forward`
 
-Total sent bandwidth in the forward direction (bytes per second)
+Total sent bandwidth in the forward direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -791,6 +820,9 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-forward [
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-other-protocol`
 
@@ -819,7 +851,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-other-pro
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-other-protocol-forward`
 
-Total bandwidth sent in the forward direction for other protocols (bytes per second)
+Total bandwidth sent in the forward direction for other protocols (bytes per second) (in-memory)
 
 #### Usage
 
@@ -842,9 +874,12 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-other-pro
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-other-protocol-reverse`
 
-Total bandwidth sent in the reverse direction for other protocols (bytes per second)
+Total bandwidth sent in the reverse direction for other protocols (bytes per second) (in-memory)
 
 #### Usage
 
@@ -867,9 +902,12 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-other-pro
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-reverse`
 
-Total sent bandwidth in the reverse direction (bytes per second)
+Total sent bandwidth in the reverse direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -891,6 +929,9 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-reverse [
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-tcp`
 
@@ -919,7 +960,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-tcp [devi
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-tcp-forward`
 
-Total TCP bandwidth sent in the forward direction (bytes per second)
+Total TCP bandwidth sent in the forward direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -942,9 +983,12 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-tcp-forwa
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-tcp-reverse`
 
-Total TCP bandwidth sent in the reverse direction (bytes per second)
+Total TCP bandwidth sent in the reverse direction (bytes per second) (in-memory)
 
 #### Usage
 
@@ -966,6 +1010,9 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-tcp-rever
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metircs](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-udp`
 
@@ -994,7 +1041,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-udp [devi
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-udp-forward`
 
-Total UDP bandwidth sent in the forward direction (bytes per second)
+Total UDP bandwidth sent in the forward direction (bytes per second) (in-memory)
 
 #### Usage
 
