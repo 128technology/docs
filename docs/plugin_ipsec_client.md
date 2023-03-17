@@ -774,7 +774,7 @@ exit
 
 **Release Date:** Mar 17, 2023
 
-**Router Version** 128T-ipsec-2.3.0-3
+**Router Version** 128T-ipsec-2.3.0-4
 
 #### New Features and Improvements
 - **WAN-1298** Upgrade libreswan version
