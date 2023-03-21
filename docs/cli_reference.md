@@ -4187,7 +4187,7 @@ show arp [rows <rows>] [force] [node <node>] {router <router> | resource-group <
 
 #### Description
 
-The _show arp_ subcommand displays the ARP table (MAC address to IP address binding) for a given node. The number of lines of output may be controlled through the use of the optional _rows_ attribute. When not present, the SSR will default to displaying the first 50 rows of the specified node&#x27;s ARP table. Using `detail` displays additional information including time to next refresh (ms), retry count (if expired), and time of last resolved ARP.
+The _show arp_ subcommand displays the ARP table (MAC address to IP address binding) for a given node. The number of lines of output is controlled through the use of the optional _rows_ attribute. When the *rows* command is not present, the SSR will default to displaying the first 50 rows of the specified node's ARP table. Using `detail` displays additional information including time to next refresh (ms), retry count (if expired), and time of last resolved ARP.
 
 
 #### Example
@@ -4209,17 +4209,19 @@ Node: gouda
 
 Completed in 0.07 seconds
 
-admin@test1.Fabric128# show arp detail
-Thu 2023-02-23 16:00:01 UTC
-Retrieving arp entries...
-Node: test1.Fabric128 Page 1
+admin@node1.aws# show arp detail 
+Tue 2023-01-17 20:58:15 UTC 
+Node: node1.aws Page 1 
 
-========== ====== ============== =================== ======= ====== ============= =====================
- Dev Name   VLAN   IP             Dest MAC            State   Time   Retry Count   Last Time Resolved
-========== ====== ============== =================== ======= ====== ============= =====================
-       10      0   172.16.1.101   fa:16:3e:02:08:dc   Valid    144             0   2023-02-23 15:59:56
+========== ====== ===== ====== ======= ======== ========= ====================== 
 
-Completed in 0.03 seconds
+ Dev Name   VLAN   IP    Mac    State   Expiry   Retries   Last Resolved 
+
+========== ====== ===== ====== ======= ======== ========= ====================== 
+ wan           0   1     a      Valid   324         -      2023-01-23T10:20:32 
+ mgmt          0   2     b      Valid   400         -      2023-01-23T10:20:32 
+ lan           0   3     0      Refresh 732         2      2023-01-23T08:11:54 
+ lan           0   4     0      Refresh 520         2      --- 
 ```
 
 #### Version History

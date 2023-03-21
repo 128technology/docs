@@ -32299,7 +32299,7 @@ show stats app-id applications expiration [since <since>] [force] [router <route
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications expiration next-hop`
 
@@ -32345,7 +32345,7 @@ show stats app-id applications expiration next-hop [netintf <netintf>] [applicat
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications expiration next-hop creation-timestamp`
 
@@ -32381,7 +32381,7 @@ show stats app-id applications expiration next-hop creation-timestamp [netintf <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32421,7 +32421,7 @@ show stats app-id applications expiration next-hop timer-cleared [netintf <netin
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32461,7 +32461,7 @@ show stats app-id applications expiration next-hop timer-cleared-timestamp [neti
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32501,7 +32501,7 @@ show stats app-id applications expiration next-hop timer-set [netintf <netintf>]
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32541,7 +32541,7 @@ show stats app-id applications expiration next-hop timer-set-timestamp [netintf 
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32576,7 +32576,7 @@ show stats app-id applications expiration timer-cleared [since <since>] [force] 
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32611,7 +32611,7 @@ show stats app-id applications expiration timer-set [since <since>] [force] [rou
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 #### Description
 
@@ -32646,7 +32646,7 @@ show stats app-id applications next-hops-added [since <since>] [force] [router <
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications next-hops-removed`
 
@@ -32677,7 +32677,7 @@ show stats app-id applications next-hops-removed [since <since>] [force] [router
 
 | command | description |
 | ------- | ----------- |
-| [`clear app-id stats`](README.md#clear-app-id-stats) | Clear inactive app-id stats |
+| [`clear app-id stats`](cli_reference.md#clear-app-id-stats) | Clear inactive app-id stats |
 
 ## `show stats app-id applications packets-received-reverse`
 
@@ -65982,7 +65982,7 @@ show stats process memory allocated [process-name <process-name>] [since <since>
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory heap-size`
 
@@ -66014,7 +66014,7 @@ show stats process memory heap-size [process-name <process-name>] [since <since>
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory rss`
 
@@ -66087,7 +66087,7 @@ show stats process memory tc-malloc [process-name <process-name>] [since <since>
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory tc-malloc current-total-thread-cache`
 
@@ -66119,7 +66119,7 @@ show stats process memory tc-malloc current-total-thread-cache [process-name <pr
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory tc-malloc max-total-thread-cache`
 
@@ -66151,7 +66151,7 @@ show stats process memory tc-malloc max-total-thread-cache [process-name <proces
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory tc-malloc page-heap-free`
 
@@ -66183,7 +66183,7 @@ show stats process memory tc-malloc page-heap-free [process-name <process-name>]
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory tc-malloc page-heap-unmapped`
 
@@ -66215,7 +66215,7 @@ show stats process memory tc-malloc page-heap-unmapped [process-name <process-na
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process memory vsz`
 
@@ -66327,7 +66327,7 @@ For more information regarding in-memory metrics, please refer to [Configuring I
 
 ## `show stats process thread`
 
-Metrics about threads in 128T processes
+Metrics about threads in SSR processes
 
 #### Usage
 
@@ -66356,19 +66356,19 @@ show stats process thread [process-name <process-name>] [thread-name <thread-nam
 
 | command | description |
 | ------- | ----------- |
-| [`cpu`](#show-stats-process-thread-cpu) | Metrics about CPU usage of threads in 128T processes |
-| [`queue`](#show-stats-process-thread-queue) | Metrics about queues in threads in 128T processes |
-| [`task`](#show-stats-process-thread-task) | Metrics about tasks in threads in 128T processes |
+| [`cpu`](#show-stats-process-thread-cpu) | Metrics about CPU usage of threads in SSR processes |
+| [`queue`](#show-stats-process-thread-queue) | Metrics about queues in threads in SSR processes |
+| [`task`](#show-stats-process-thread-task) | Metrics about tasks in threads in SSR processes |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu`
 
-Metrics about CPU usage of threads in 128T processes
+Metrics about CPU usage of threads in SSR processes
 
 #### Usage
 
@@ -66406,7 +66406,7 @@ show stats process thread cpu [process-name <process-name>] [thread-name <thread
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu iowait`
 
@@ -66439,7 +66439,7 @@ show stats process thread cpu iowait [process-name <process-name>] [thread-name 
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu system-usage`
 
@@ -66472,7 +66472,7 @@ show stats process thread cpu system-usage [process-name <process-name>] [thread
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu usage`
 
@@ -66505,7 +66505,7 @@ show stats process thread cpu usage [process-name <process-name>] [thread-name <
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread cpu user-usage`
 
@@ -66538,11 +66538,11 @@ show stats process thread cpu user-usage [process-name <process-name>] [thread-n
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread queue`
 
-Metrics about queues in threads in 128T processes
+Metrics about queues in threads in SSR processes
 
 #### Usage
 
@@ -66579,7 +66579,7 @@ show stats process thread queue [process-name <process-name>] [thread-name <thre
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread queue delay`
 
@@ -66614,7 +66614,7 @@ show stats process thread queue delay [process-name <process-name>] [thread-name
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -66651,7 +66651,7 @@ show stats process thread queue depth [process-name <process-name>] [thread-name
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -66689,7 +66689,7 @@ show stats process thread queue total [process-name <process-name>] [thread-name
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -66697,7 +66697,7 @@ For more information regarding in-memory metrics, please refer to [Configuring I
 
 ## `show stats process thread task`
 
-Metrics about tasks in threads in 128T processes
+Metrics about tasks in threads in SSR processes
 
 #### Usage
 
@@ -66735,7 +66735,7 @@ show stats process thread task [process-name <process-name>] [thread-name <threa
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 ## `show stats process thread task errors`
 
@@ -66768,7 +66768,7 @@ show stats process thread task errors [process-name <process-name>] [thread-name
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -66807,7 +66807,7 @@ show stats process thread task execution-time [process-name <process-name>] [thr
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -66844,7 +66844,7 @@ show stats process thread task timeouts [process-name <process-name>] [thread-na
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
@@ -66882,7 +66882,7 @@ show stats process thread task total [process-name <process-name>] [thread-name 
 
 | command | description |
 | ------- | ----------- |
-| [`show system processes`](README.md#show-system-processes) | Display a table summarizing the statuses of processes. |
+| [`show system processes`](cli_reference.md#show-system-processes) | Display a table summarizing the statuses of processes. |
 
 #### Description
 
