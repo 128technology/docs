@@ -199,6 +199,10 @@ Filter the traffic to the `lab.` tenant to avoid a deluge of unnecessary traffic
 
 #### IPFIX Field Formats
 
+:::note
+The 128Technology Enterprise number is 29035. 
+:::
+
 ##### Standard Fields
 | Field | ID |
 | --- | --- |
