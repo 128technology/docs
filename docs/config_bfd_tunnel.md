@@ -49,8 +49,9 @@ exit
 ```
 
 ### How It Works
-
-Both peers must be running the version of the SSR software that supports this feature, and have the same overlay model (`bfd-tunnel`) for BFD overlay to work correctly. 
+:::note
+Both peers must be running the version of the SSR software that supports this feature, and have the same `bfd-tunnel` overlay model. 
+:::
 
 An attribute is added to the unencrypted metadata of UDP packets going over the BFD connection to distinguish this traffic from other BFD traffic. New sessions are established with additional metadata. Sessions continue to allocate waypoints, and are used to create individual flows. These waypoints are carried in the metadata and used locally on each router. 
 
