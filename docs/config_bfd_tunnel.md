@@ -15,6 +15,8 @@ Use the path described above to access the Neighborhood configuration. After nam
 - **svr**: The original SVR overlay connection method. This is the default method for bidirectional connectivity. 
 - **bfd-tunnel**: Outbound only connection method; enables the BFD Overlay over SVR feature. 
 
+![BFD Tunnel on Neighborhood](/img/config_bfd_tunnel_gui.png)
+
 These options are the same for the PCLI.
 
 #### From the PCLI
@@ -59,5 +61,5 @@ An attribute is added to the unencrypted metadata of UDP packets going over the 
 
  Use the following `show stats` metrics to view and troubleshoot issues encountered with BFD Overlay over SVR:
 
-- `/stats/packet-processing/action/success/tunnel/bfd/encapsulate` 
-- `/stats/packet-processing/action/success/tunnel/bfd/decapsulate`
+- [`show stats packet-processing action success tunnel bfd encapsulate`](cli_stats_reference.md#show-stats-packet-processing-action-success-tunnel-bfd-encapsulate)
+- [`show stats packet-processing action success tunnel bfd decapsulate`](cli_stats_reference.md#show-stats-packet-processing-action-success-tunnel-bfd-decapsulate)
