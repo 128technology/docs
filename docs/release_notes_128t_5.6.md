@@ -64,7 +64,7 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-48590 ACK RTT Improvements:** Resolved an issue where the stats were not resetting properly, and added supporting sampling to ACK RTT tracking.    
 ------
-- **I95-48927 Audit log disc failure mode:** Added a Failure Notification parameter and failure mode to inform users that the `auditd.conf` log disc is nearing capacity, or has reached capacity, and that action is required.
+- **I95-48927 Audit log disk failure mode:** Added a Failure Notification parameter and failure mode to inform users that the `auditd.conf` log disk is nearing capacity, or has reached capacity, and that action is required.
 ------
 - **I95-48942 Routing policy filter condition reference type not validated:** Added a check to verify that when a routing policy condition references a filter, the condition type and filter type match. 
 ------
@@ -74,7 +74,7 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-49350 BFD echo generating latency overhead:** BFD echo tests are now staggered to minimize application latency's contribution to overall peer path latency.
 ------
-- **I95-49377 Sessions established, but not seen by next-hop:** Added hooks to the NIC driver to resolve this issue. 
+- **I95-49377 Sessions established, packet counters incremented, seen in device-capture, but not seen by next-hop:** Added hooks for NIC driver to trigger an unrecoverable event and invoke the Highway lockup detector mechanism. 
 ------
 - **I95-49431 Unable to edit or add static route config from Conductor GUI:** When editing configuration on the stand-by node of an HA pair, creating a list item with a slash, /, such as specifying the destination-address of a static-route, caused an error. This has been resolved.
 ------
