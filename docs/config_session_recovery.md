@@ -9,7 +9,7 @@ sidebar_label: Session Recovery Detection
 | --- | --- |
 | 6.1.0 | Feature introduced |
 
-When SSR routers are peered, forward and reverse flows are exchanged between devices. However, in a case where there is a service interruption on one node and the session no longer exists, that node can no longer process the flows sent from the peered SSR. The interrupted node sends a message to the peer to enable metadata, which which may falsely indicate that the SSR is listening and responding to wayports. 
+When SSR routers are peered, forward and reverse flows are exchanged between devices. However, in a case where there is a service interruption on one node and the session no longer exists, that node can no longer process the flows sent from the peered SSR. The interrupted node sends a message to the peer to enable metadata, which may falsely indicate that the SSR is listening and responding to wayports. 
 
 To resolve this issue and keep the session alive, the `session-recovery-detection` feature has been added. The feature has two modes, the default `packet-based` detection, and `inactivity-based` detection which has a configurable timeout. When `inactivity-based` detection is enabled, the originating node monitors activity on the return flow. If no activity is detected for the specified time, the originator will add an additional metadata attribute called `session-health-check` to the next packet. The `session-health-check` attribute is validated by the receiving node. If the flow on the receiving node does not exist, it generates an `enable-metadata` message back to the originator. 
 
@@ -31,22 +31,45 @@ Session Recovery Detection has two modes:
 - `inactivity-based` This has a configurable `inactivity-timeout` with a default of 5 seconds.
 
 :::important
-Because this feature uses a request/response mechanism, **all** SSR's must be upgraded before using/enabling this feature.
+Because this feature uses a request/response mechanism, **all** SSR's using this feature must be upgraded.
 :::
+
+#### PCLI Configuration
+
+```
+config
+    authority        
+        session-recovery-detection
+            mode                inactivity-based
+            inactivity-timeout  1
+        exit
+    exit
+exit
+```
 
 ### Show Stats Commands
 
-The following `show stats packet-processing` commands provide insight into session information. For additional details for each stat, refer to **[show stats packet-processing action(add-link-here).** 
+The following `show stats` commands provide insight into session information. For additional details, select the link for each stat. 
 
-```
-/stats/packet-processing/action/failure/metadata/session-health-check-buffer-allocation
-/stats/packet-processing/action/failure/metadata/session-health-check-timeout
-/stats/packet-processing/action/failure/metadata/session-health-check-timeout-forward-pinhole-flow
-/stats/packet-processing/action/failure/metadata/session-health-check-timeout-reverse-pinhole-flow
-/stats/packet-processing/action/success/metadata/added-session-health-check
-/stats/packet-processing/action/success/metadata/generated-session-health-check-acknowledgement
-/stats/packet-processing/action/success/metadata/received-session-health-check-acknowledgement
-/stats/packet-processing/action/success/metadata/received-stale-session-health-check-acknowledgement
-/stats/packet-processing/action/success/metadata/sent-session-health-check-acknowledgement
-/stats/service-area/received/reverse-packets-for-stuck-pinhole-session
-```
+- [show stats packet-processing action failure metadata session-health-check-buffer-allocation](cli_stats_reference.md#show-stats-packet-processing-action-failure-metadata-session-health-check-buffer-allocation)
+
+- [show stats packet-processing action failure metadata session-health-check-timeout](cli_stats_reference.md#show-stats-packet-processing-action-failure-metadata-session-health-check-timeout)
+
+- [show stats packet-processing action failure metadata session-health-check-timeout-forward-pinhole-flow](cli_stats_reference.md#show-stats-packet-processing-action-failure-metadata-session-health-check-timeout-forward-pinhole-flow)
+
+- [show stats packet-processing action failure metadata session-health-check-timeout-reverse-pinhole-flow](cli_stats_reference.md#show-stats-packet-processing-action-failure-metadata-session-health-check-timeout-reverse-pinhole-flow)
+
+- [show stats packet-processing action success metadata added-session-health-check](cli_stats_reference.md#show-stats-packet-processing-action-success-metadata-added-session-health-check)
+
+- [show stats packet-processing action success metadata generated-session-health-check-acknowledgement](cli_stats_reference.md#show-stats-packet-processing-action-success-metadata-generated-session-health-check-acknowledgement)
+
+- [show stats packet-processing action success metadata received-session-health-check-acknowledgement](cli_stats_reference.md#show-stats-packet-processing-action-success-metadata-received-session-health-check-acknowledgement)
+
+- [show stats packet-processing action success metadata received-stale-session-health-check-acknowledgement](cli_stats_reference.md#show-stats-packet-processing-action-success-metadata-received-stale-session-health-check-acknowledgement)
+
+- [show stats packet-processing action success metadata sent-session-health-check-acknowledgement](cli_stats_reference.md#show-stats-packet-processing-action-success-metadata-sent-session-health-check-acknowledgement)
+
+- [show stats service-area received reverse-packets-for-stuck-pinhole-session](cli_stats_reference.md#show-stats-service-area-received-reverse-packets-for-stuck-pinhole-session)
+
+
+
