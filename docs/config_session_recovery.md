@@ -31,8 +31,21 @@ Session Recovery Detection has two modes:
 - `inactivity-based` This has a configurable `inactivity-timeout` with a default of 5 seconds.
 
 :::important
-Because this feature uses a request/response mechanism, **all** SSR's must be upgraded before using/enabling this feature.
+Because this feature uses a request/response mechanism, **all** SSR's using this feature must be upgraded.
 :::
+
+#### PCLI Configuration
+
+```
+config
+    authority        
+        session-recovery-detection
+            mode                inactivity-based
+            inactivity-timeout  1
+        exit
+    exit
+exit
+```
 
 ### Show Stats Commands
 
@@ -40,7 +53,7 @@ The following `show stats` commands provide insight into session information. Fo
 
 - [show stats packet-processing action failure metadata session-health-check-buffer-allocation](cli_stats_reference.md#show-stats-packet-processing-action-failure-metadata-session-health-check-buffer-allocation)
 
-- [show stats packet-processing action failure metadata session-health-check-timeout](cli_stats_reference#show-stats-packet-processing-action-failure-metadata-session-health-check-timeout)
+- [show stats packet-processing action failure metadata session-health-check-timeout](cli_stats_reference.md#show-stats-packet-processing-action-failure-metadata-session-health-check-timeout)
 
 - [show stats packet-processing action failure metadata session-health-check-timeout-forward-pinhole-flow](cli_stats_reference.md#show-stats-packet-processing-action-failure-metadata-session-health-check-timeout-forward-pinhole-flow)
 
