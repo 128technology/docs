@@ -6226,7 +6226,7 @@ show idp application details [force] [node <node>] {router <router> | resource-g
 | [`show idp network`](#show-idp-network) | Show IDP networks |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
-| [`show stats idp`](STATS.md#show-stats-idp) | Metrics about IDP |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
 
 #### Description
 
