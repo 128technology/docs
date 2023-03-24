@@ -76975,7 +76975,7 @@ show stats ssc transmitted retransmitted-responses [since <since>] [force] [rout
 | command | description |
 | ------- | ----------- |
 | [`show stats registered-services`](#show-stats-registered-services) | Stats pertaining to Registered Services |
-| [`show system registry`](ç.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
+| [`show system registry`](cli_reference.md#show-system-registry) | Shows registered services from the system services coordinator for the specified process, node or router. |
 
 ## `show stats traceroute`
 
