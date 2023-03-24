@@ -28,6 +28,90 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.6.7-4
+
+**Release Date:** March 16, 2023
+
+### New Features
+
+- **I95-48928 Set Time using PCLI command:** Add a new PCLI command `set time` which allows an admin to bootstrap a system without NTP connectivity. The PCLI uses the date(1) shell command and accepts a wide variety of inputs. To see more documentation about the date format see setting the time or the -d option on options for date.
+------
+- **I95-49354 Display SSD smartctl info in `show platform disk`:** We now display the following disk info, if supported by the disk, in `show platform disk`:
+	- Lifetime used
+	- Power On Hours
+	- TBW (Terabyte Written)
+	- TBW per year
+------
+- **I95-50072 Support for ConnectX-6 Lx PCIe device:** Support has been added for this device. 
+
+### Resolved Issues 
+
+:::important
+- **I95-49594 Highway Crash:** In a system where any of the following are configured:
+	- `application-identification` is enabled, 
+	- a service is defined with `domain-name child services`, or 
+	- a `service address` is configured as a `domain`
+and there are established flows for any of these services, a link flap triggering a flow invalidation (changes to FIB) will induce a crash in the highway process of the SSR. This issue exists in versions 5.6.3 through 5.6.6, and is resolved in 5.6.7.
+:::
+
+- **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48643, I95-48859, I95-48907, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
+------
+- **I95-48054 STEP not working in Core Network:** Resolved an issue where processing STEP route updates can cause modification of unrelated FIB entries, potentially interrupting existing sessions.
+------
+- **I95-48232 Ability to ping lost after failover:** We now prevent unnecessary FIB changes (which may lead to a short traffic interruption) when new routes are added to the RIB that are more specific than some configured service IP prefixes.
+------
+- **I95-48485 Broadcom NIC (NetXtreme) fails to initialize properly:** Resolved an issue with initization errors during memzone creation. 
+------
+- **I95-48590 ACK RTT Improvements:** Resolved an issue where the stats were not resetting properly, and added supporting sampling to ACK RTT tracking.    
+------
+- **I95-48927 Audit log disk failure mode:** Added a Failure Notification parameter and failure mode to inform users that the `auditd.conf` log disk is nearing capacity, or has reached capacity, and that action is required.
+------
+- **I95-48942 Routing policy filter condition reference type not validated:** Added a check to verify that when a routing policy condition references a filter, the condition type and filter type match. 
+------
+- **I95-49118 HA LTE Interfaces go down and impact BGPoSVR and Conductor:** The handling of FIB updates due to interface state changes has been optimized to avoid possible traffic loss for unaffected FIB entries.
+------
+- **I95-49242 When HMAC is disabled, the automatic MSS adjustment calculation for `enforced-mss = automatic` may be wrong:** The Automatic MSS adjustment calculation has been corrected (expanded). 
+------
+- **I95-49350 BFD echo generating latency overhead:** BFD echo tests are now staggered to minimize application latency's contribution to overall peer path latency.
+------
+- **I95-49377 Sessions established, packet counters incremented, seen in device-capture, but not seen by next-hop:** Added hooks for NIC driver to trigger an unrecoverable event and invoke the Highway lockup detector mechanism. 
+------
+- **I95-49431 Unable to edit or add static route config from Conductor GUI:** When editing configuration on the stand-by node of an HA pair, creating a list item with a slash, /, such as specifying the destination-address of a static-route, caused an error. This has been resolved.
+------
+- **I95-49447 Conditional BGP advertisement is not respected:** Resolved an issue that if a peer went down and came back up, the conditional advertisement was no longer respected. 
+------
+- **I95-49454 Error while creating a new Radius user from the GUI:** The create user API now rejects requests with invalid input parameters. 
+------
+- **I95-49514 Linux interfaces bounced on startup:** Resolved an issue where all Linux interfaces managed by 128T are bounced once on 128T startup.
+------
+- **I95-49564 Reduce volume of logs during pending lookups:** The error logs during a pending lookup has been changed to a muted error log with a stat.
+------
+- **I95-49604 Alarm when a node is disconnected:** An alarm is now raised when a node is disconnected from the internal synchronization database.
+------
+- **I95-49633 Validation not strict for static assignment within DHCP server configuration:** Configuration for static addresses within DHCP server exists in multiple locations per design. Cross-validation has been added to prevent the same ip-address from being configured and assigned to multiple dhcp-clients.
+------
+- **I95-49655 Cutting and pasting the output of `show flat` does not work for OSPF:** Resolved the issue that prevented editing the OSPF list.
+------
+- **I95-49722 Event filter does not work on HA router nodes:** Resolved issues with filtering by node, and an incorrect value was displayed for the node column in the GUI.
+------
+- **I95-49756 RDP sessions failure over peer path:** Resolved an issue that caused RDP traffic to fail when adaptive encryption and AppId are both enabled.
+------
+- **I95-49778 Conductor GUI not showing data metrics for routers running:** Resolved an issue where API keys were not properly synced down to the managed routers which caused certain router data to not show up on the GUI.
+------
+- **I95-50014 Hitting Buffer Overflow during configuration changes:** Reolved an issue where a config change request may not make it to a managed router, and returns a buffer overflow error.
+------
+- **I95-50034 Issues with stuck sessions in load balancer:** Resolved an issue with session modify, where gateway changes on the same egress interface can fail due to a missing ARP.
+------
+- **I95-50050 VRRP High Availability gets stuck in Active/Active:** The DPDK version has been updated to resolve this issue. 
+------
+- **I95-50058 Performance regression in Running Config APIs:** Resolved a constant cache miss for a specific set of the running config APIs.
+------
+- **I95-50076 EthResource descriptor calcs don't account for variable defaults:** Resolved an issue where Mellanox ConnectX-5 and ConnectX-6 could be initialized with insufficient packet receive capacity.
+------
+- **I95-50139 Include PID in User-Agent header:** Added a debugging aid to identify which process is sending requests.
+------
+- **I95-50172 Download error not cleared until next successful download:** Resolved an issue where failed download errors are not cleared when a new download starts.
+
 ## Release 5.6.6-7
 
 **Release Date:** January 18, 2023
@@ -44,7 +128,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 - **I95-46336 Peer connection not established after AWS upgrade:** Resolved an issue where an AWS C5 instance size can fail to initialize when more than one accelerated network interface is configured.
 ------
-- **I95-48352 Application ID is not identifying MS-Teams correctly:** Resolved an issue where sessions with IP addresses as their domain names were not classified correctly. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.
+- **I95-48352 Application ID is not identifying MS-Teams correctly:** Resolved an issue where sessions with IP addresses as their domain names were not classified correctly when the information was received via HTTP web proxy. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.
 ------
 - **I95-48447 JWTs signing does not meet stringent security standards:** Changed how JWTs are signed to increase security posture.
 ------
@@ -102,7 +186,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 ------
 - **I95-48656 Reduce TSI service log limit:** The size of the Tech Support Info journal has been restricted to prevent excessive resource consumption.
 ------
-- **i95-48684 SSR not answering ARP requests:** Increased `internal-application traffic-engineering` rates for ARP traffic which was being dropped in a multiple packet-processing core environment incorrectly due to an over aggressive traffic engineering profile.
+- **I95-48684 SSR not answering ARP requests:** Increased `internal-application traffic-engineering` rates for ARP traffic which was being dropped in a multiple packet-processing core environment incorrectly due to an over aggressive traffic engineering profile.
 ------
 - **I95-48685 GUI and/or PCLI unresponsive:** Resolved an issue where on an HA conductor the user interface would become unresponsive if a managed router was offline or unreachable.
 ------

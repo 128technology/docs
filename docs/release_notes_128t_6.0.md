@@ -28,6 +28,115 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 6.0.8-20
+
+**Release Date:** March 7, 2023
+
+### New Features
+
+- **I95-47947 Increase max CoreDump size to 4GB:** The maximum size of coredumps now defaults to 4G. This value can be configured in environment config by modifying the `maxCoredumpSize` field of the new `crashReporting` object. Any manual modifications to `coredump.conf` will be overwritten whenever the service is started. 
+
+:::important
+Upgrading to this release version will cause `coredump.conf` to be re-written with 4G limits for coredumps even if `coredump.conf` had been updated manually for a higher value!
+:::
+------
+- **I95-48571 IDP Topology User Experience Improvements:** The SSR will include the auto-generated IDP mode when enabled as a part of `show idp application status`. Additionally, enabling `hub` mode will not result in engine bring-up errors.
+------
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** I95-48464, I95-48859, I95-48907, I95-49039, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
+------
+- **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
+------
+- **I95-44926 Configuration validation for `as-path` incorrect for certain values:** Resolved an issue where a subset of 4-byte BGP private AS numbers was not accepted inside AS path specifications for routing policy `modify-as-path` actions.
+------
+- **I95-46336 Peer connection not established after AWS upgrade:** Resolved an issue where an AWS C5 instance size can fail to initialize when more than one accelerated network interface is configured.
+------
+- **I95-47797 Packet duplication does not interoperate well with outbound-only adjacencies:** When utilizing the packet-duplication feature (`service-policy -> session-resiliency = packet-duplication`), any peer adjacencies marked as `outbound-only` are no longer used. Packets are only duplicated along bidirectional paths.
+------
+- **I95-47992 HTTP service not working in WAN Assurance:** Resolved an issue where HTTP traffic is dropped when using a combination of application-identification, adaptive-encryption, and spoke-to-hub-to-spoke topology (outbound-only peer-connectivity).
+------
+- **I95-48054 STEP not working in Core Network:** Resolved an issue where processing STEP route updates can cause modification of unrelated FIB entries, potentially interrupting existing sessions.
+------
+- **I95-48061 DHCP server not starting after upgrade:** Resolved an issue where existing DHCP servers were not coming back up after upgrading from pre-6.0.X to post-6.0.X SSR software.
+------
+- **I95-48107 EoSVR sessions not stable:** Resolved an issue with loss of connectivity to STEP EoSVR peer. The STEP route is now held in place and available when STEP connectivity is restored. 
+------
+- **I95-48163 Only services with load-balanced paths are shown in `show services`:** Resolved an issue where services without load-balanced paths were missing from show services output.
+------
+- **I95-48232 Ability to ping lost after failover:** We now prevent unnecessary FIB changes (which may lead to a short traffic interruption) when new routes are added to the RIB that are more specific than some configured service IP prefixes.
+------
+- **I95-48324 Application Identification not parsing domain names:** The App-ID parsing mode has been updated to correctly parse domain names.
+------
+- **I95-48352 Application ID is not identifying MS-Teams correctly:** Resolved an issue where sessions with IP addresses as their domain names were not classified correctly. Sessions with IP addresses as their domain name are now verified against the IP tree, and not the domain name database.
+------
+- **I95-48396 `show-rib` limited to 512 entries:** The `show rib` count maximum has been increased.
+------
+- **I95-48447 JWTs signing does not meet stringent security standards:** Changed how JWTs are signed to increase security posture.
+------
+- **I95-48580 Application summary classification fails for hub-to-spoke sessions:** The spoke now learns application names for sessions when receiving packets from a hub with application identification disabled.
+------
+- **I95-48581 Missing entry timestamp for `show app-id cache`:** Additional timing information has been added to `show app-id cache` to help identify the oldest entry.
+------
+- **I95-48582 `show bfd` command ignoring parameters:** The query parameters are now passed to the REST endpoint to be used byt the `show bfd` command.
+------
+- **I95-48590 ACK RTT Improvements:** Resolved an issue where the stats were not resetting properly, and added supporting sampling to ACK RTT tracking.    
+------
+- **I95-48641 Recreating BFD flow when an outbound-only session is reset:** Flow creation is now deferred until a reverse packet arrives from the peer, similar to the initial creation case.
+------
+- **I95-48684 SSR not answering ARP requests:** Increased `internal-application traffic-engineering` rates for ARP traffic which was being dropped in a multiple packet-processing core environment incorrectly due to an over aggressive traffic engineering profile.
+------
+- **I95-48689 Top Sessions not displaying source address:** Restored the **Source** column in the Top Sessions table. 
+------
+- **I95-48723 HA metrics sync not running after systems reconnect:** Historical metrics and events are synced between HA nodes after extended downtime.
+------
+- **I95-48869 Validation for idp-policy incorrectly permits mixing modes across access-policies (e.g., `strict` and `alert`):** The default IDP policy is now handled as `IDP off` in all cases.
+------
+- **I95-48872 `show sessions by-id` doesn't correctly display tcp state or retransmission counts:** `show sessions by-id` now correctly display `tcp state` and `retransmissions` when `udp-transform` is enabled for a session.
+------
+- **I95-48897 Adaptive encryption breaks after flow move:** Resolved an issue where the session breaks during failover when adaptive encryption is enabled.
+------
+- **I95-48904 Stuck pinhole session after flow invalidation:** Resolved an issue with a stuck session that was setup from hub to HA spoke after a routing change.
+------
+- **I95-48927 Audit log disc failure mode:** Added a Failure Notification parameter and failure mode to inform users that the `auditd.conf` log disc is nearing capacity, or has reached capacity, and that action is required.
+------
+- **I95-48942 Routing policy filter condition reference type not validated:** Added a check to verify that when a routing policy condition references a filter, the condition type and filter type match. 
+------
+- **I95-48950 Application identification modify packet is dropped:** Packets with `inline-modify` that traverse the BFD pinhole are now handled correctly.
+------
+- **I95-48988 High CPU for packet processing core:** Resolved an issue where the CPU can spike to 100% after a failover from internode/interrouter path to local breakout when failover is enabled for local breakout.
+------
+- **I95-49106 Degradation in performance during file rotation:** This issue has been resolved.
+------
+- **I95-49118 HA LTE Interfaces go down and impact BGPoSVR and Conductor:** The handling of FIB updates due to interface state changes has been optimized to avoid possible traffic loss for unaffected FIB entries.
+------
+- **I95-49134 DHCP server does not work when device IDs on HA interface do not match:** Resolved an issue where a DHCP server interface may instead forward DHCP requests through the `service-area` and out to the WAN.
+------
+- **I95-49166 OSPF is not configurable using the GUI:** This issue has been resolved.
+------
+- **I95-49225 Packets containing only path-metrics metadata are dropped:** Resolved an issue where FPM calculations caused these packets to be dropped when flows were affected due to routing changes.
+------
+- **I95-49242 When HMAC is disabled, the automatic MSS adjustment calculation for `enforced-mss = automatic` may be wrong:** The Automatic MSS adjustment calculation has been corrected (expanded). 
+------
+- **I95-49341 BGP next hop exception being thrown:** Resolved an issue where a duplicate BGP next hop resulted in an exception.
+------
+- **I95-49451 Secondary conductor failed to synchronize after upgrade:** This issue was resolved by re-ordering the start up process for the 128T service.
+------
+- **I95-49454 Error while creating a new Radius user from the GUI:** The create user API now rejects requests with invalid input parameters. 
+------
+- **I95-49655 Cutting and pasting the output of `show flat` does not work for OSPF:** Resolved the issue that prevented editing the OSPF list.
+------
+- **I95-49722 Event filter does not work on HA router nodes:** Resolved issues with filtering by node, and an incorrect value was displayed for the node column in the GUI.
+------
+- **I95-49756 RDP sessions failure over peer path:** Resolved an issue that caused RDP traffic to fail when adaptive encryption and AppId are both enabled.
+------
+- **I95-49778 Conductor GUI not showing data metrics for routers running:** Resolved an issue where API keys were not properly synced down to the managed routers which caused certain router data to not show up on the GUI.
+------
+- **I95-50058 Performance regression in Running Config APIs:** Resolved a constant cache miss for a specific set of the running config APIs.
+------
+- **WAN-1598 IDP Policies not set on the SSR:** This issue has been resolved. 
+
 ## Release 6.0.7-8
 
 **Release Date:** December 5, 2022
