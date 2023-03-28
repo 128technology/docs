@@ -2570,6 +2570,27 @@ When `inactivity-based` detection is enabled, the originating node monitors acti
 | --- | --- |
 | 6.1.0 | Feature introduced |
 
+## session-setup-scaling
+
+#### Path:
+
+authority > router > node 
+
+#### Description
+
+The `session-setup-scaling` feature improves the session setup rate by enabling multi-threaded processing. Setting this feature to `true` allows the SSR to automatically determine the number of threads needed to optimize session setup. Session setup scaling is enabled on the node of the router. 
+
+| Element | Type | Description |
+| --- | --- | --- |
+| session-setup-scaling | boolean | Values: true or false (default). When true, enables multi-threaded processing to improve the session setup rate. | 
+
+#### Version History
+
+| Release | Modification |
+| --- | --- |
+| 6.1.0 | Feature introduced |
+
+
 ## session-type
 
 #### Path:
