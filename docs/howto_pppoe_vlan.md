@@ -3,6 +3,12 @@ title: VLAN Support on a PPPoE Interface
 sidebar_label: VLAN Support on PPPoE
 ---
 
+#### History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 5.6.0  | PPPoE VLAN support introduced |
+
 VLAN support on a PPPoE interface is enabled by configuring the `target-interface` as `<base-eth-interface>.<vlan-id>`.  For example, if the DSL modem is connected to the Ethernet interface `eth0` on the system, and the ISP requires using VLAN tag 1 for the PPPoE connection, the `target-interface` to configure is `eth0.1`.
 
 #### Example Configuration:
