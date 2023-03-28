@@ -3,6 +3,13 @@ title: Configuring PPPoE
 sidebar_label: Configuring PPPoE
 ---
 
+#### History
+
+| Release | Modification                |
+| ------- | --------------------------- |
+| 3.2.0   | Support introduced |
+| 5.0.2   | Multi-PPPoE support added |
+
 ## Configuration
 
 Use the following examples to configure PPPoE.
