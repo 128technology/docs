@@ -20,7 +20,7 @@ Steps 2 and 3 then repeat themselves in perpetuity throughout the lifecycle of t
 The sections that follow will outline the techniques, tools, and strategies for successfully managing application discovery with the SSR.
 
 ### Create Coarse Routes
-The notion of creating "coarse routes" – that is, broad routes that knowingly convey many different bundled applications – is to set up the SSR to allow for communication between clients and the applications, to have a platform for subsequent analysis. Said another way: if you don't give clients the ability to talk to applications – even before you understand the traffic flows, traffic patterns, and application dependencies – then you will have no traffic to analyze. While this does philosophically subvert the SSR notion of "deny by default," it does establish a structural framework for experimentation.
+The notion of creating "coarse routes" – that is, broad routes that knowingly convey many different bundled applications – is to set up the SSR to allow for communication between clients and the applications, to have a platform for subsequent analysis. Said another way: if you don't give clients the ability to talk to applications – even before you understand the traffic flows, traffic patterns, and application dependencies – then you will have no traffic to analyze. While this does philosophically subvert the SSR notion of "deny by default," it does establish a structural framework for experimentation.
 
 #### Initial Bootstrapping
 The term _initial bootstrapping_ refers to the basic configuration applied to the SSR to allow it to forward traffic. Generally speaking this entails creating a "default route" (i.e., a service with an address of `0.0.0.0/0`, representing all possible IP destinations). The default route is the most primitive of bootstrapping, and is the starting point for virtually every SSR deployment.
@@ -82,11 +82,11 @@ With an end goal of creating specific `service` configuration elements for the v
 Try to define the service as concisely as possible, but always bear in mind that there will be opportunities for refinement in the future. It is better to be more broad with IP addresses and port ranges than it is to miss some. (Things can get weird and difficult to troubleshoot if some but not all of your application traffic hits a `service`, but other flows use the default route.)
 :::
 
-#### Tools of the Trade
+## Tools of the Trade
 
 The SSR software has a number of built-in tools to help faciliate the application discovery workflow. In general, these are used in conjunction to provide multiple proof points.
 
-##### SSR's Session Table
+### SSR's Session Table
 
 The SSR maintains a list of all active sessions for all traffic it is forwarding, and makes that available to administrators via the PCLI command `show sessions` and in the GUI in the Sessions view. Much of the data identified in the [Pertinent Application Data](#pertinent-application-data) section is available in the Session Table. 
 
@@ -98,7 +98,7 @@ admin@labsystem1.fiedler# show sessions router newton | grep lab.guest
 
 This shows the active sessions for the `lab.guest` tenant. Each of the session table entries will include the destination IP address, port, and protocol. This is quick and easy when dealing with long-lived sessions. However, if you have very short-lived sessions (particularly if there are short-lived [application dependencies](#application-dependencies) like DNS transactions) then it is easy to miss them by only monitoring the `show sessions` table, since the session table entries are torn down after observing a TCP socket close or based on protocol-specific timers. While this is a good initial port of call, it should not be the only tool used for this reason.
 
-##### Packet Capture
+### Packet Capture
 
 Each `device-interface` within the SSR allows for packet capture using the Berkeley Packet Filter (BPF) syntax familiar to users of the Wireshark application. During discovery, and particularly if you've limited your egress route to one specific interface, applying a packet capture filter to that egress device-interface (even a broad filter such as `len>0`) lets you capture the traffic for postmortem analysis. Unlike session table entries, which are transient and will be created and destroyed as traffic flows through the system, this provides a permanent record for the traffic sent from that system. The PCAP file, located on the SSR's filesystem within `/var/log/128technology/128T_interfaceName.pcap`, can be copied off and dissected using Wireshark, tcpdump, etc.
 
@@ -108,7 +108,7 @@ Working through packet captures is an involved process, but will provide unequiv
 Copy off capture files periodically and label them with the tests performed. This can become a sort of permanent record of the sunny day behavior of the applications, as tested.
 :::
 
-##### DNS-based Packet Capture
+### DNS-based Packet Capture
 
 A variant on the packet-capture technique described previously is to apply a filter on the SSR to only capture DNS transactions. Since DNS is generally a prerequisite for all network transactions, capturing DNS will typically give a deep insight into the locations that LAN-side clients are accessing, with the added benefit that the names are human readable.
 
@@ -136,7 +136,7 @@ dnsanon -i 128T_LAN.pcap -c none -f 128T -p q
 
 This will create a file named `128T.question.fsdb`, which contains all of the hostnames that clients requested during the capture period.
 
-##### SSR's Built-in Application Identification
+### SSR's Built-in Application Identification
 
 The SSR networking platform can passively observe information exchanged during TLS connections and scrape application information from server-side X.509 certificates. This is done by setting the `application-identification` on a given router to use `mode tls`. Below is a configuration excerpt:
 
@@ -162,7 +162,7 @@ With this configuration in place, the router will harvest the *Common Name* info
 
 While this is the easiest technique to employ for application identification, it is limited to only work with services that leverage TLS.
 
-##### IPFIX
+### IPFIX
 
 Internet Protocol Flow Information Export, or IPFIX, is an IETF protocol for that standardizes the way networking equipment reports on the flows it processes, for billing, management, accounting, etc. The SSR supports IPFIX, and it is possible to leverage IPFIX records to investigate traffic traversing an SSR.
 
@@ -197,7 +197,46 @@ Once the IPFIX collector is confirmed up and operational and harvesting records 
 Filter the traffic to the `lab.` tenant to avoid a deluge of unnecessary traffic, and to be able to ratchet the `sampling-percentage` to 100.
 :::
 
-##### Audit Logging
+#### IPFIX Field Formats
+
+:::note
+The 128Technology Enterprise number is 29035. 
+:::
+
+##### Standard Fields
+| Field | ID |
+| --- | --- |
+| Octet Delta | 1 |
+| Packet Delta | 2 |
+| Protocol | 4 |
+| Source Port | 7 |
+| Source IPV4 | 8 |
+| Ingress Interface | 10 |
+| Destination Port | 11 |
+| Destination IPV4 | 12 |
+| Egress Interface | 14 |
+| Interface Name (Ingress) | 82 |
+| Selector Name | 335 |
+
+##### Vendor Specific Fields
+
+| Field | ID | Type | Description |
+| --- | --- | --- | --- |
+| Record Type | 1 | uint16 | Whether this is an End or Interim record |
+| Session Type | 6 | string | The type of session |
+| Start Time | 7 |uint32 | The time when the session was initiated (seconds since epoch) |
+| End Time | 8 | uint32 | The time when the session was exported (seconds since epoch) |
+| Total Bytes | 9 | uint64 | Total bytes sent |
+| Total Packets | 10 | uint64 | Total packets sent |
+| TCP Retransmissions | 11 | uint64 | Total TCP retransmissions (0 if UDP) |
+| Service Name | 12 | string | The name of the associated service |
+| Service Class | 13 | string | The name of the associated service class |
+| Session ID | 14 | string | The ID of the session as bytes (substitute for uint128) |
+| Service Group | 15 | string | The service group being consumed |
+| Tenant | 16 | string | The name of the associated tenant |
+| Router Name | 17 | string | The name of the exporting router |
+
+### Audit Logging
 
 The SSR also has a facility for recording all traffic flows as part of its _audit log_ functionality. Enabled on a per-router basis, the traffic logs will show all connections that are established and rejected for every source address.
 
@@ -249,7 +288,7 @@ This can be scripted, filtered, imported into Excel, etc. to glean information p
 Run iterations of tests, pull down the audit logs, and label the files to indicate which activities are captured within the logs.
 :::
 
-##### Dropped Packets
+### Dropped Packets
 
 Akin to the audit logging capabilities of the SSR, _Dropped Packets_, a GUI only feature, can be helpful to identify those sessions that are not established due to the current policy configured on the SSR. After logging into the SSR platform, navigate to the router under discovery. From there, navigate to the _Debug_ page which can be found on the right hand side of the page.  The debug page provides access to some of the same information available in the PCLI - `show fib`, `show sessions`, etc. Select the right-most tab for Dropped Packets.
 
@@ -264,19 +303,19 @@ Expand your current policies or service definitions to include IP destinations o
 :::
 
 
-#### Application Dependencies
+## Application Dependencies
 
 _Application dependencies_ are prerequisites that must be satisfied before an application transaction is successful. Most applications are dependent on DNS, for example – successfully resolving a domain name is a prerequisite for sending a HTTPS request to a web site on the internet. But application dependencies can take all forms; some applications require a separate authentication transaction to a AAA server, some web sites need to transact to back end database servers, etc.
 
 While much of the application discovery process is focused on a client in a branch location accessing applications at a corporate data center or on the internet, creating a dependency map will not only help design the SSR configuration in an effective manner, it will greatly benefit post-deployment troubleshooting when the application is not performant or functioning properly. (E.g., if a point of sale device needs to authenticate to an LDAP server in one data center, but transact with back-end inventory management servers in another data center, it will be vital knowledge when troubleshooting a customer report with the POS.)
 
-### Create Specific Configuration and Test
+## Create Specific Configuration and Test
 
 Once you've identified candidates to peel out of the broader service definition, create more specific services for each of them. During discovery, set the `access-policy` on the service to specify the `lab.` versions of your tenants, to avoid any impact to production traffic until your discovery process is complete. Because `service` definitions are global within an authority by default, it may also be important to specifically isolate the service to the lab device under test and whichever head end system(s) that service needs to traverse. This is done through the `applies-to` field within the `service` definition. Doing this mitigates the risk of the new service definition hijacking production traffic on other devices managed by the same conductor.
 
 Once the service definitions have been committed, re-execute the same tests and validate that the new service is being leveraged; you can follow the same methodology during verification as you did during discovery, but this time the exercise should be simpler (typically just looking at the output of `show sessions` is enough, since you can quickly identify the appearance of any new services in the list using `grep`).
 
-#### Documenting the Results
+### Documenting the Results
 
 Now that the service has been identified properly, we can assign the appropriate policy to it. While design of service policy is beyond the scope of this guide, it is important to document the policy to assist in troubleshooting and knowledge transfer.
 
@@ -291,7 +330,7 @@ We recommend documenting services with the following attributes, at a minimum:
 - Dependencies (related services or protocols)
 - Notes, including references to packet captures or audit logs, lessons learned, etc.
 
-### Pushing the Services into Production
+## Pushing the Services into Production
 
 Once you're satisfied with your changes, schedule time to push the changes into production using your change control process. The recommended best practice is to:
 
