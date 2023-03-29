@@ -8,7 +8,7 @@ sidebar_label: Traceroute
 | ------- | ------------ |
 | 6.1.0   | This feature was introduced. |
 
-Traceroute is implemented as a troubleshooting tool, allowing you to debug  connectivity from point to point.
+Traceroute is implemented as a troubleshooting tool, allowing you to debug connectivity from point to point.
 
 Network administrators frequently make use of Linux traceroute as a complement to ping when isolating intermediate connectivity issues and troubleshooting MTU, and TTL issues. Traceroute provides information on the intermediate connectivity on a hop-by-hop basis between a source and destination. The SSR Traceroute commands provide the ability to detect failure points in connectivity along the network traffic flow. With the routing model and distributed nature of the SSR, traceroute behaves differently depending on the use case.
 

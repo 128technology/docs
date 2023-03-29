@@ -6207,26 +6207,26 @@ show idp application details [force] [node <node>] {router <router> | resource-g
 
 | name | description |
 | ---- | ----------- |
-| force | Skip confirmation prompt. Only required when targeting all routers |
-| node | The node for which engine started |
-| resource-group | The name of the resource group |
-| router | The router for which engine started |
+| force | Skip confirmation prompt. Only required when targeting all routers. |
+| node | The node for which engine started. |
+| resource-group | The name of the resource group. |
+| router | The router for which engine started. |
 
 ##### See Also
 
 | command | description |
 | ------- | ----------- |
-| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
-| [`show idp events`](#show-idp-events) | Show all IDP events |
-| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP event by application |
-| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type |
-| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level |
-| [`show idp network`](#show-idp-network) | Show IDP networks |
+| [`show idp events`](#show-idp-events) | Show all IDP events. |
+| [`show idp events by-application`](#show-idp-events-by-application) | Show IDP event by application. |
+| [`show idp events by-attack`](#show-idp-events-by-attack) | Show IDP event by attack type. |
+| [`show idp events by-severity`](#show-idp-events-by-severity) | Show IDP event by severity level. |
+| [`show idp network`](#show-idp-network) | Show IDP networks. |
 | [`show idp platform`](#show-idp-platform) | Show IDP platform data. |
 | [`show idp signatures`](#show-idp-signatures) | Show IDP signature package details. |
-| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP |
+| [`show stats idp`](cli_stats_reference.md#show-stats-idp) | Metrics about IDP. |
 
 #### Description
 
