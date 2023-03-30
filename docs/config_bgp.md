@@ -229,7 +229,20 @@ admin@branchoffice1.seattlesite1#
 
 Use this option to generate a full-mesh BGP over SVR configuration, where all spokes learn the routes from other spokes via the reflector. In this configuration, the hub is a route reflector and all spokes are SVR peers, having been placed in the same mesh neighborhood. The BGP next hop is the originating spoke, and traffic is passed via SVR directly between the spokes. 
 
-Because this feature builds a full mesh between SSRs, the total number of routers will have an impact on scalability. Is is suggested to keep this in mind as the time needed to construct the topology will increase as the router numbers increase. 
+To use this feature, the following configuration must be in place:
+
+- BGP must be configured with one or more route reflectors.
+    - On the router to be used as a route reflector, configure `routing-protocol bgp neighbor <ip-addr> address-family ipv4-unicast route-reflector client  true`.
+- The route-reflector is configured to connect via BGP over SVR to multiple clients.
+- The route-reflector clients are configured to have a full mesh of SVR peering relationships with each other - this is done by putting them all in the same mesh neighborhood.
+
+After verifying the router configurations are correct, use the GUI or the pcli to set `route-reflector-client-mesh` to `true`. The conductor then generates the service-routes to allow direct SVR communication between the clients, based on the BGP routes they learn from each other via the reflector.
+
+#### Version History
+
+| Release | Modification |
+| ------- | ------------ |
+| 6.1.0   | This feature was introduced. |
 
 ### Security Policy and Service Policy
 
@@ -250,6 +263,12 @@ config
     exit
 exit
 ```
+
+#### Version History
+
+| Release | Modification |
+| ------- | ------------ |
+| 6.1.0   | This feature was introduced. |
 
 ### Verifying the BGP Configuration
 Use `show bgp` to see the overview of the BGP routing process on the SSR:

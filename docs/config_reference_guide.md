@@ -2578,7 +2578,12 @@ authority > router > node
 
 #### Description
 
-The `session-setup-scaling` feature improves the session setup rate by enabling multi-threaded processing. Setting this feature to `true` allows the SSR to automatically determine the number of threads needed to optimize session setup. Session setup scaling is enabled on the node of the router. 
+:::note
+This feature is currently in beta. Automatic scaling is not currently supported.
+Please contact your sales engineer for help with configuring this feature.
+:::
+
+The `session-setup-scaling` feature improves the session setup rate by enabling multi-threaded processing. Setting this feature to `true` enables this feature. Session setup scaling is enabled on the node of the router. 
 
 | Element | Type | Description |
 | --- | --- | --- |

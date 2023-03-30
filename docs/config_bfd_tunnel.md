@@ -3,7 +3,7 @@ title: BFD Overlay over SVR
 sidebar_label: BFD Overlay over SVR
 ---
 
-In deployments where the number of SVR sessions between SSRs are limited due to carrier settings, the established BFD channel is leveraged to encapsulate SVR sessions. When enabled, the SSR transforms each packet in the SVR session to a UDP packet, matching the IP/Port tuples of the BFD peer connection. The carrier does not see any additional sessions between the SSRs beyond the initial BFD peer connection. 
+In deployments where the number of SVR sessions between SSRs are limited due to provider settings, the established BFD channel is leveraged to encapsulate SVR sessions. When enabled, the SSR transforms each packet in the SVR session to a UDP packet, matching the IP/Port tuples of the BFD peer connection. The carrier does not see any additional sessions between the SSRs beyond the initial BFD peer connection. 
 
 ## Configuration
 
