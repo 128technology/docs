@@ -48893,10 +48893,6 @@ show stats mtu-discovery peer-path sent arp-failure [peer-name <peer-name>] [pee
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
-#### Description
-
-For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md) 
-
 ## `show stats mtu-discovery peer-path sent buffer-allocation-failure`
 
 MTU discovery packets buffer allocation failure on the peer path. (in-memory)

@@ -3,7 +3,7 @@ title: Troubleshooting IDP
 sidebar_label: Troubleshooting IDP
 ---
 
-[`show idp application status`](cli_reference.md#show-idp-application-status) and its sub-commands provide information about the running state of the IDP engine. 
+[`show idp application status`](cli_reference.md#show-idp-application-status) and its sub-commands provide information about the running state of the IDP engine.
 
 ```
 admin@node.idp # show idp application status
@@ -11,7 +11,7 @@ Thu 2022-05-19 04:45:49 UTC
 ✔ Retrieving IDP application status...
 
 ======================
- node.idp 
+ node.idp
 ======================
  Engine:     on
  Last:       starting
@@ -22,7 +22,7 @@ Thu 2022-05-19 04:45:49 UTC
 ```
 ## Show Commands
 
-Each of the commands listed below, and the subcommands for each, provide additional details for IDP visibility. Use the links to learn more about each command. 
+Each of the commands listed below, and the subcommands for each, provide additional details for IDP visibility. Use the links to learn more about each command.
 
 | command | description |
 | ------- | ----------- |
@@ -40,21 +40,21 @@ Each of the commands listed below, and the subcommands for each, provide additio
 
 ### Additional Commands
 
-The following commands are visible only in the Advanced view, and should only be run when instructed to do so by Juniper technical support. 
+The following commands are visible only in the Advanced view, and should only be run when instructed to do so by Juniper technical support.
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild IDP Command. |
+| [`request idp restart rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild IDP Command. |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
 
 ## Stats
 
-The [`show stats idp`](cli_stats_reference.md#show-stats-idp) display metrics for attacks, bytes received and transmitted, and packets dropped, processed, received, and transmitted, as well as by indiviual protocol. 
+The [`show stats idp`](cli_stats_reference.md#show-stats-idp) display metrics for attacks, bytes received and transmitted, and packets dropped, processed, received, and transmitted, as well as by indiviual protocol.
 
 - [`attacks`](#show-stats-idp-attacks)
 - [`bytes`](#show-stats-idp-bytes)
 - [`packets`](#show-stats-idp-packets)
 
-## Logs 
+## Logs
 
-The `save tech-support` info contains the relevant logs and journals associated with the IDP engine. A log category of `IDP` is available to increase the level of IDP info logged. IDP function logs are stored here: `/var/logs/128technology/idp/*`.
+The `save tech-support` info contains the relevant logs and journals associated with the IDP engine. A log category of `IDP` is available to increase the level of IDP info logged. IDP function logs are stored here: `/var/log/128technology/idp/*`.
