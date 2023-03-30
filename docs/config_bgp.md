@@ -225,6 +225,32 @@ admin@branchoffice1.seattlesite1 (authority)# exit
 admin@branchoffice1.seattlesite1#
 ```
 
+### Service-route Mesh For Route Reflector Clients
+
+Use this option to generate a full-mesh BGP over SVR configuration, where all spokes learn the routes from other spokes via the reflector. In this configuration, the hub is a route reflector and all spokes are SVR peers, having been placed in the same mesh neighborhood. The BGP next hop is the originating spoke, and traffic is passed via SVR directly between the spokes. 
+
+Because this feature builds a full mesh between SSRs, the total number of routers will have an impact on scalability. Is is suggested to keep this in mind as the time needed to construct the topology will increase as the router numbers increase. 
+
+### Security Policy and Service Policy
+
+The Security and Service Policy configuration options are provided for specifying the policy to be used for generated BGP-over-SVR services. 
+
+![BGP Service Generation Settings](/img/config_bgp_serv_gen_settings.png)
+
+To access these settings from the pcli:
+
+```
+config
+    authority
+        bgp-service-generation
+        security-policy                 internal
+        service-policy                  prefer-path1
+        route-reflector-client-mesh     true
+        exit
+    exit
+exit
+```
+
 ### Verifying the BGP Configuration
 Use `show bgp` to see the overview of the BGP routing process on the SSR:
 
