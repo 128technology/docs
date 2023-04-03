@@ -42873,7 +42873,7 @@ show stats idp [since <since>] [force] [router <router>] [node <node>] [<verbosi
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
+| [`request idp restart rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
@@ -42922,7 +42922,7 @@ show stats idp attacks [since <since>] [force] [router <router>] [node <node>] [
 
 | command | description |
 | ------- | ----------- |
-| [`request idp rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
+| [`request idp restart rebuild`](cli_reference.md#request-idp-rebuild) | Rebuild Idp Command |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart Idp Command |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show underlying IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show underlying IDP details. |
