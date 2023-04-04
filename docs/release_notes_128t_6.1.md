@@ -16,9 +16,9 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_considerations.md) and the [**Rolling Back Software**](intro_rollback.md) pages. Several modifications have been made to the process for verifying configurations, which will impact existing configurations.
 :::
 
-- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is highly recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
+- **I95-43243/IN-460 Upgrade and Rollback:** Upgrading or rolling back a system (conductor peer or router) with the interactive installer `install128t`, that is managed by a conductor may result in the system becoming unresponsive. It is recommended that upgrades be performed through the conductor UI. Manual upgrades and rollbacks may not be resilient to failures. See [Rolling Back Software](intro_rollback.md) for more information on these operations.
 ------
-- **I95-42452 Conductor Upgrade Time:** Upgrades can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
+- **I95-42542 Conductor Upgrade Time:** Upgrades can take up to 40 minutes due to the number of rpms being upgraded. Please plan accordingly.
 ------
 - **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4 and above, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. The Installer typically prompts you update when a new version is available. Select **Update** when prompted.
 ------
@@ -105,9 +105,6 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-45220 Managed routers do not connect to newly added HA conductor:** Resolved an issue when transitioning a conductor from standalone to HA, the managed routers were not automatically connecting to the newly added conductor node.
 ------
-- **I95-45348 Update salt master and minion to 3002.8:** This update resolves several CVE's and requires that the conductor must be running this release containing these fixes **before** upgrading a router. 
-**Important** Please see the Caveat below for additional important information about HA upgrades.
-------
 - **I95-45489 `ifcfg` custom options are not real-time configurable:** Resolved an issue where interface `ifcfg` option changes were not being processed.
 ------
 - **I95-45541 LDAP users are unable to login to the PCLI due to permission errors:** This issue has been resolved.
@@ -168,15 +165,4 @@ B) if the connection is not critical, terminate the application that owns the de
 ------
 - **I95-50409 Audit Log Collector cleanup:** Templates have been applied to Audit Log Event processing to reduce code duplication.
 
-### Caveats (Please advise if this is still necessary for 6.1)
-
-- **I95-45348: Update salt master and minion to 3002.8:** When upgrading an HA pair to version **5.5.1**, please be aware of the following: While updating the conductors in an HA pair, the upgraded conductor node asset state will remain DISCONNECTED if the active `automatedProvisioner` is not running a corrected version (see table below). When performing an HA conductor upgrade the node running the oldest software assumes leadership. However, the older version will not be able to talk to the new software on the upgraded conductor. 
-  
-The active `automatedProvisioner` can be determined by running the command `show system processes`. Once the upgrade begins on the old node, the newly upgraded conductor takes over.
-
-#### Corrected Versions
-
-| Router Software Version | Minimum Required Conductor Version |
-| --- | --- |
-| ?.?.? | ?.?.? |
 
