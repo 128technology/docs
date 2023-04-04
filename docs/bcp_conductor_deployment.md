@@ -86,14 +86,14 @@ When deploying conductor on the internet, Juniper recommends limiting access to 
 
 1. Creating a specific firewalld **zone**; e.g., `conductor`
 2. Creating a firewalld **service** for the conductor's salt-master, containing TCP ports 4505, 4506; e.g., `salt-master`
-3. Creating a firewalld **service** for the conductor's NETCONF connection, containing TCP port 930; e.g., `netconf`
-4. Adding the "salt-master" and "netconf" services to the `conductor` zone
+3. Creating a firewalld **service** for the conductor's IPC connection, containing TCP port 930; e.g., `ipc`
+4. Adding the "salt-master" and "ipc" services to the `conductor` zone
 5. Set the public address to be in the `conductor` zone
 
 Juniper has developed some salt states to assist with these common configuration steps. Refer to our [public Github repo](https://github.com/128technology/salt-states/blob/master/setup-firewalld-t128-zone.sls) for some samples you can use to tune your system accordingly.
 
 :::note
->>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls in versions 5.1 and later, with no loss of functionality.
+>>> The `ipc` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls in versions 5.1 and later, with no loss of functionality.
 :::
 
 ## Design Patterns
