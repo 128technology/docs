@@ -28,6 +28,23 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+
+## Release 6.0.9-3
+
+**Release Date:** April 3, 2023
+
+### Resolved Issues 
+
+:::important
+- **I95-49594 Highway Crash:** In a system where any of the following are configured:
+	- `application-identification` is enabled, 
+	- a service is defined with `domain-name child services`, or 
+	- a `service address` is configured as a `domain`
+and there are established flows for any of these services, a link flap triggering a flow invalidation (changes to FIB) will induce a crash in the highway process of the SSR. This issue exists in versions 5.6.3 through 5.6.6, and is resolved in 5.6.7.
+:::
+
+- **I95-50543 SSR may not start after upgrade:** A race condition during startup may cause some services to start out of order, causing the SSR to not start. A reboot is required to start the system normally. 
+
 ## Release 6.0.8-20
 
 **Release Date:** March 7, 2023
