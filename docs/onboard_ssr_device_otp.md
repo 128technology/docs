@@ -3,9 +3,7 @@ title: Onboard an SSR Device using OTP
 sidebar_label: Onboard an SSR Device using OTP
 ---
 
-The steps in this section describe the process of onboarding an SSR 1x0/0 to a Conductor using the OTP process. The SSR must be re-imaged with an OTP compatible software version. 
-
-This process is to be followed for SSR devices that **will not** use Mist for onboarding, telemetry, or WAN Assurance. 
+The steps in this section describe the process of re-imaging an SSR 1x0/0 for onboarding to a Conductor using the OTP process. This process is for SSR devices that **will not** use Mist for onboarding, telemetry, or WAN Assurance. 
 
 :::note
 For information about WAN Assurance offerings;
@@ -17,18 +15,18 @@ For information about WAN Assurance offerings;
 
 #### High Level Process:
 
-Re-image the SSR Device with an OTP-compatible SSR software release (anything but 5.4.4-9, preferably an image-based install). The image shipped on the device was designed to connect with Mist and Mist WAN Assurance.
+Re-image the SSR Device with an OTP-compatible SSR software release (anything but 5.4.4/9, but must be package-based). The image shipped on the device was designed to connect with Mist and Mist WAN Assurance.
 
 Important: to successfully onboard an SSR using OTP, you must already have a Conductor up and running in the network where the SSR router can connect and receive configuration information. The conductor **must have** a software version equal to or greater than the version that will be installed on the routers using OTP. 
 
-- if the SSR device is to be used as a Conductor, it must first be converted into a Conductor. See [Conductor Conversion](conductor_conversion.md) for more information. 
+- If the SSR device is to be used as a Conductor, it must first be converted into a Conductor. See [Conductor Conversion](conductor_conversion.md) for more information. 
 
 	*Questions*
 	If the routers are converted to OTP, they will likely have a newer version of SSR software. Conductors must have the same or higher versions of software than the routers they manage. Which is the better workflow for Conductor conversion and upgrading to a new software version; Convert first then upgrade, or upgrade then provision as a conductor? (two different procedures)
 
 - If the device is to be used as an SSR Router, do this:
 
-1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download and create a bootable USB. Once you have completed that step, continue below. 
+1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
 2. Connect the RJ45/USB cable to the console port on the SSR1x0/0.
 3. Connect the USB end of the cable to your pc/mac using the serial adapter provided with the SSR device.
 4. Connect the power input to the back of the SSR1x0/0, but do not power it up. 
