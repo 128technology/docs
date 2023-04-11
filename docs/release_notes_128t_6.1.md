@@ -28,9 +28,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 6.1.0-47
+## Release 6.1.0-52
 
-**Release Date:** April 7, 2023
+**Release Date:** April 14, 2023
 
 ### New Features
 
@@ -147,6 +147,8 @@ B) if the connection is not critical, terminate the application that owns the de
 ------
 - **I95-49925 GRE tunnel health-check not migrating sessions when path is down:** The GRE tunnel manager now removes all sessions before adding new ones rather than modifying the existing sessions. 
 ------
+- **I95-49974 Stuck flow is not clearing when the reverse metadata is incomplete:** Added the source tenant to the reverse metadata to prevent the metadata parsing exception. 
+------
 - **I95-50047 Conductor config unable to pass local validation on one of the routers:** Resolved an issue where a router missing the `reachability-profile` configuration may pass validation on conductor.
 ------
 - **I95-50247 Duplicate peer path alarms:** Resolved an issue where both BFD and the path MTU feature were generating alarms for the same peer path being down. The criteria for which peerPath state changes can trigger peer path events has been tightened.
@@ -164,5 +166,17 @@ B) if the connection is not critical, terminate the application that owns the de
 - **I95-50376 Failure to make config changes after rollback:** Resolved an issue where commits would not take effect after rolling back an HA router, because of older/newer version conflicts. 
 ------
 - **I95-50409 Audit Log Collector cleanup:** Templates have been applied to Audit Log Event processing to reduce code duplication.
+------
+- **I95-50445 i40e and ice devices reporting malicious descriptor detection events:** Resolved an issue where fragmented packet chains larger than 8 buffers were discarded causing a malicious descriptor event. 
+------
+- **I95-50534 Race condition between NetworkInterfaceManager and FastLane:** Resolved a race condition caused by adding and deleting the same network interface in a very short window of time, potentially causing a system crash.
+------
+- **I95-50554 Dynamically create symlinks to salt file roots:** Resolved an issue where it was necessary to restart 128T on the Conductor in order for the Conductor to recognize newly added repositories and sync them down to the assets.
+------
+- **I95-50699 Upgrade process to 6.0.8 failure:** Mist-managed systems with low available memory could fail to upgrade. An updated dependency and fix for these Mist-managed systems has been published via the cloud and will be absorbed the next time a customer attempts an upgrade.
+------
+- **I95-50574 Recurring issue with NodeA in a high availability setup:** Resolved a crash due to a race condition when `service ping icmp-request` is matched against a partially installed flow.
+
+
 
 

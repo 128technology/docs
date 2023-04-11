@@ -7,10 +7,10 @@ import React from "react";
 export const releases = [
   {
     version: '6.1.0',
-    url: 'release_notes_128t_6.1#release-610-47',
-    releaseDate: 'April 7, 2023',
-    endOfMaintenance: 'January 7, 2024',
-    endOfSupport: 'July 7, 2024',
+    url: 'release_notes_128t_6.1#release-610-52',
+    releaseDate: 'April 14, 2023',
+    endOfMaintenance: 'January 14, 2024',
+    endOfSupport: 'July 14, 2024',
   },
   {
     version: '6.0.9',
