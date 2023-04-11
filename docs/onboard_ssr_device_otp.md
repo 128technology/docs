@@ -3,28 +3,33 @@ title: Onboard an SSR Device using OTP
 sidebar_label: Onboard an SSR Device using OTP
 ---
 
-The steps in this section describe the process of re-imaging an SSR 1x0/0 for onboarding to a Conductor using the OTP process. This process is for SSR devices that **will not** use Mist for onboarding, telemetry, or WAN Assurance. 
+The steps in this section describe the process of **re-imaging an SSR 1x0/0** for onboarding to a Conductor using the OTP process. This process is for SSR devices that **can not** use Mist for onboarding, telemetry, or WAN Assurance. 
 
-:::note
-For information about WAN Assurance offerings;
-
-- See [Cloud Telemetry](config_wan_assurance.md) for information about conductor-managed deployments with access to Mist Telemetry data.
-- See [Mist WAN Assurance](https://www.juniper.net/documentation/product/us/en/mist-wan-assurance/) for information about Mist-managed deployments.
-- See [Onboarding and SSR Device to a Conductor](onboard_ssr_to_conductor.md) to onboard an SSR Device using the Mist-redirect ZTP process. 
+:::important
+For customers or partners who can access Mist and are not in an "air-gap" network, the easiest way to onboard an SSR Device is to configure an account on Mist, and onboard to a conductor using ZTP. This provides a simple conductor onboarding process, and does not require access to Mist after the onboarding. See [ZTP Onboarding to a Conductor.](config_wan_assurance.md) This process provides the ability to do conductor-managed onboarding for customers who will not be using Mist Telemetry or WAN Assurance.  
 :::
 
-#### High Level Process:
+## Re-Imaging Process
 
-Re-image the SSR Device with an OTP-compatible SSR software release (anything but 5.4.4/9, but must be package-based). The image shipped on the device was designed to connect with Mist and Mist WAN Assurance.
+The image shipped on the SSR Devices is designed to connect with Mist and Mist WAN Assurance. For use in a conductor-managed environment that does not have access to Mist, re-image the SSR Device with a generally available, package-based, OTP-compatible SSR software release. 
 
-Important: to successfully onboard an SSR using OTP, you must already have a Conductor up and running in the network where the SSR router can connect and receive configuration information. The conductor **must have** a software version equal to or greater than the version that will be installed on the routers using OTP. 
+:::note
+Use of non-GA, unofficial software releases will void the Juniper device warranty.
+:::
 
-- If the SSR device is to be used as a Conductor, it must first be converted into a Conductor. See [Conductor Conversion](conductor_conversion.md) for more information. 
+### Prerequisites
 
-	*Questions*
-	If the routers are converted to OTP, they will likely have a newer version of SSR software. Conductors must have the same or higher versions of software than the routers they manage. Which is the better workflow for Conductor conversion and upgrading to a new software version; Convert first then upgrade, or upgrade then provision as a conductor? (two different procedures)
+- To successfully onboard an SSR using OTP, you must already have a Conductor up and running in the network where the SSR router can connect and receive configuration information. 
 
-- If the device is to be used as an SSR Router, do this:
+- The conductor **must have** a software version equal to or greater than the version that will be installed on the routers using OTP. 
+
+- To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.md#general-availability). 
+
+- If the SSR 1x0/0 device is to be used as a Conductor, it must first be converted into a Conductor. See [Conductor Conversion](conductor_conversion.md) for more information. 
+
+## OTP Re-Image Process
+
+Use the following procedure to re-image both the Conductor and Routers:
 
 1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
 2. Connect the RJ45/USB cable to the console port on the SSR1x0/0.
@@ -40,6 +45,6 @@ press enter.
 11. Insert your USB with the new ISO image into the serial port of the SSR1x0/0.
 12. From the boot menu, select the USB Boot device and press Enter.
 13. If there are multiple images on the USB device, select the appropriate image for your install.
-14. Follow the [Installing SSR Using OTP] instructions to complete the installation process.
+14. Follow the [Installation Using OTP](intro_otp_iso_install.md) instructions to complete the installation process.
 
 

@@ -1,9 +1,11 @@
 ---
-title: Enable Cloud Telemetry
-sidebar_label: Enable Cloud Telemetry
+title: ZTP Onboarding to a Conductor
+sidebar_label: ZTP Onboarding to a Conductor
 ---
 
-SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. However, for software versions prior to SSR Version 6.0 router adoption relies on an on-premise conductor to assist in the onboarding. **This document explains the process of enabling WAN Assurance Telemetry and ZTP for conductor-managed deployments.** This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
+**This document explains the process of using ZTP to onboard routers and enable WAN Assurance Telemetry for conductor-managed deployments.** 
+
+SSR software can run on Juniper branded appliances, whitebox hardware (certified or self-evaluated), or virtual environments. However, for software versions prior to SSR Version 6.0 router adoption relies on an on-premise conductor to assist in the onboarding. This procedure assumes you do not already have an account, organization, or sites configured on the Mist portal. These items are required for SSR/Mist WAN Assurance.
 
 :::note
 Conductor-managed WAN Assurance may be run on SSR deployments using software releases 5.4.4 and above. 6.x introduces the availability of SSR integration to a Mist Managed environment.
