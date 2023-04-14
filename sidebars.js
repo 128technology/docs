@@ -54,7 +54,6 @@ module.exports = {
     "Supporting Install Information - Appendix": [
       "intro_installation_installer",
       "install_qcow2_deployment",
-      "onboard_ssr_device_otp",
       "legacy_OTP_install",
     ],
     "Concepts": [
