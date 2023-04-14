@@ -9,7 +9,7 @@ Juniper Networks distributes the SSR software in a number of forms for different
 
 For small deployments or a proof of concept, each ISO image can be loaded on to a bootable USB to install the operating system and SSR software.
 
-### Creating a Bootable ISO: Linux and MacOS
+### Creating a Bootable ISO: Linux, MacOS and Windows
 
 Creating a bootable ISO from Linux, Windows or MacOS is straightforward. The best way to get started is with a tool that makes creating bootable USBs easy for any platform. 
 
