@@ -21,7 +21,7 @@ You will be prompted for your username and token to access the web page listing 
 See [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso) for important information about the download process.
 
 :::note
-Use of non-GA, unofficial software releases will void the Juniper device warranty. Refer to [SSR Releases - General Availability](about_releases.md#general-availability) for the list of GA releases.
+Use of non-GA, unofficial software releases will void the Juniper device warranty. Refer to [SSR Releases - General Availability](about_releases.mdx#general-availability) for the list of GA releases.
 :::
 
 ### Prerequisites
@@ -30,7 +30,7 @@ Use of non-GA, unofficial software releases will void the Juniper device warrant
 
 - The conductor **must have** a software version equal to or greater than the version that will be installed on the routers using OTP. 
 
-- To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.md#general-availability). 
+- To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.mdx#general-availability). 
 
 - If the SSR device is to be used as a Conductor, it must first be converted into a Conductor. See [Conductor Conversion](conductor_conversion.md) for more information. 
 
@@ -63,7 +63,7 @@ press enter.
 13. If there are multiple images on the USB device, select the appropriate image for your install.
 14. After the re-installation completes, follow the [Installation Using OTP](intro_otp_iso_install.mdx) instructions to complete the installation process.
 
-For Windows PC's, use the following procedure:
+For a Windows PC, use the following procedure:
 
 1. I need
 2. this procedure
