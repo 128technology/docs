@@ -451,7 +451,7 @@ The active `automatedProvisioner` can be determined by running the command `show
 
 | Router Software Version | Minimum Required Conductor Version |
 | --- | --- |
-| 5.5.1 | 5.5.1, 5.6.0 |
+| 5.5.1 | 5.5.1, 5.6.0 or later |
 
 ## Release 5.5.0-43
 
