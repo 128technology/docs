@@ -301,7 +301,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 	| Router Software Version | Minimum Required Conductor Version |
 	| --- | --- |
-	| 5.4.6 | 5.4.6, 5.5.1, 5.6.0 |
+	| 5.4.6 | 5.4.6, 5.5.1, 5.6.0 or later |
 
 ## Release 5.4.5-8
 

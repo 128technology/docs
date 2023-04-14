@@ -90,7 +90,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 	| Router Software Version | Minimum Required Conductor Version |
 	| --- | --- |
-	| 5.2.4 | 5.2.4, 5.4.6, 5.5.1, 5.6.0 |
+	| 5.2.4 | 5.2.4, 5.4.6, 5.5.1, 5.6.0 or later |
 
 
 ## Release 5.2.3
