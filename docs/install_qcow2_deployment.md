@@ -12,7 +12,7 @@ https://software.128technology.com/artifactory/list/generic-128t-images-release-
 
 ## Using cloud-init to bootstrap SSR connection to Conductor
 
-The simplest method for onboarding a new SSR to an existing conductor is to initialize the system as a router node and provide the addresses for any conductor nodes. The manual initialization process can be automated by providing an [initializer preferences](initializer_preferences.md) file. This can be automated throuch cloud-init cloud-config by providing a cloud-init capable hypervisor with user-data similar to what is shown below.
+The simplest method for onboarding a new SSR to an existing conductor is to initialize the system as a router node and provide the addresses for any conductor nodes. The manual initialization process can be automated by providing an [initializer preferences](initializer_preferences.md) file. This can be automated through `cloud-init cloud-config` by providing a user-data to a cloud-init capable hypervisor similar to what is shown below.
 
 ```
 #cloud-config
@@ -25,10 +25,10 @@ runcmd:
 - initialize128t -p /root/initializer-preferences.json
 ```
 
-This will case this device's salt-minion to attempt to connect to the Conductor at IP address `10.10.10.10`. The device, by default, will set its asset-id to match the hostname provided by the hypervisor's cloud-init metadata. If this unique asset-id is associated with a node in the Conductor's configuration, the Conductor's Automated Provisioner process will reinitialize this device with the appropriate router and node name and the system will be able to pull a full configuration.
+This causes this device's salt-minion to attempt to connect to the Conductor at IP address `10.10.10.10`. The device, by default, will set its `asset-id` to match the hostname provided by the hypervisor's cloud-init metadata. If this unique asset-id is associated with a node in the Conductor's configuration, the Conductor's Automated Provisioner process will reinitialize this device with the appropriate router and node name, allowing the system to pull a full configuration.
 
 :::note
-The example above assumes that the system will be able obtain an IP address via DHCP on the first network interface which will provide connectivity to the Conductor. If this is not the case, additional configuration can be provided to cloud-init to assist in provisioning network interfaces. However, the details of this are beyond the scope of this document. Please consult the official cloud-init documentation and the documentation of your particular hypervisor for further guidance.
+The example above assumes that the system will be able obtain an IP address via DHCP on the first network interface, which provides connectivity to the Conductor. If this is not the case, additional configuration can be provided to cloud-init to assist in provisioning network interfaces. However, these details are beyond the scope of this document. Please consult the official cloud-init documentation and the documentation for your particular hypervisor for further guidance.
 :::
 
 ## Using NoCloud to provide cloud-init meta-data and user-data
