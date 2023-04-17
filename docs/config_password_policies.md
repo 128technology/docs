@@ -14,8 +14,8 @@ sidebar_label: Username and Password Policies
 The SSR password policies have been updated to provide a more secure experience. When creating passwords and password policies for users, the following parameters are enforced.
 
 1. Password must contain 1 capital, 1 lower case, 1 number and 1 special character.
-2. Password must be between 8 and 15 characters.
-3. Minimum and maximum password length are configurable.
+2. Password must be at least 9 characters.
+3. Minimum password length is configurable (greater than 9).
 4. When a password is changed, characters must be changed in at least eight of the positions within the password.
 5. The minimum password lifetime is 24 hours/1 day.
 6. There is a 60-day maximum password lifetime restriction.
