@@ -30,29 +30,39 @@ Use of non-GA, unofficial software releases will void the Juniper device warrant
 
 - The conductor **must have** a software version equal to or greater than the version that will be installed on the routers using OTP. 
 
-- To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.mdx#general-availability). 
+- To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.mdx#general-availability), and a version equal to or greater than the version shipped on the device. 
 
-- If the SSR device is to be used as a Conductor, it must first be converted into a Conductor. See [Conductor Conversion](conductor_conversion.md) for more information. 
+- An SSR1x0/1x00 may not be converted for use as a conductor. 
+<!----
+- If the SSR device is to be used as a Conductor, it must first be converted into a Conductor. See [Conductor Conversion](conductor_conversion.md) for more information. --->
 
-## OTP Re-Image Process - Mac
+## OTP Re-Image Process
 
-Use the following procedure on a Mac to re-image both the Conductor and Routers:
+Although the overall process is similar, there are variations in commands and output based on the SSR device and whether you are using a Mac or a Windows PC. Those differences are noted inline.
+
+Use the following procedure to re-image SSR1x0/1x00 Routers:
 
 1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
 2. Connect the RJ45/USB cable to the console port on the SSR1x0/1x00.
 3. Connect the USB end of the cable to your mac.
 4. Connect the power input to the back of the SSR1x0/1x00, but do not power it up. 
 5. Open a terminal window.
-6. Run `ls -al /dev/*usb*` to identify the USB port.
+6. Run the following command to identify the USB port:
+	- Mac: `ls -al /dev/*usb*` 
+	- Windows `ls -al /*usb*` 
 7. Copy the serial port information.
-8. In the terminal window, type `screen`, paste the serial port info, and add the baud rate. 
+8. In the **Mac terminal** window, type `screen`, paste the serial port info, and add the baud rate. 
 
 	screen /dev/cu.usbserial-A50285BI 115200
+
+	In a **Windows terminal**, paste the serial port info, and add the baud rate.
+
+	 /cu.usbserial-A50285BI 115200
 
 9. Press Enter.
 10. Insert your USB with the new ISO image into the USB port of the SSR1x0/1x00.
 11. Power up the SSR device. 
-12. At the instruction in the terminal window: `Press ESC for the boot menu`, do so. 
+12. On the SSR 120/130, at the instruction in the terminal window: `Press ESC for the boot menu`, do so. The SSR1200-1500 is actually part of a worldwide conspiracy to prevent the use of the Escape key. Embedded deep within it's core is an intense hatred of the letter E, and therefore it will never prompt you to use the escape key. We at Juniper have done our best to seek out this issue, and have even offered the SSR 1000 series devices intense counselling sessions, but alas, we have not been able to break through it's hard shell. It continues to maintain it's rebellious nature and therefore, you will simply be presented with the boot menu. Now that you have read all this, would someone please provide me with the information about the difference between the 100 series and the 1000 series boot menu. Thank you. 
 
 	![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
 
@@ -62,39 +72,5 @@ Use the following procedure on a Mac to re-image both the Conductor and Routers:
 
 14. If there are multiple images on the USB device, select the appropriate image for your install.
 15. After the re-installation completes, follow the [Installation Using OTP](intro_otp_iso_install.mdx) instructions to complete the installation process.
-
-## OTP Re-Image Process - Windows 
-*this is a rough DRAFT procedure, and may not be correct. It is still in progress and I will take any feedback you have.*
-
-Use the following procedure on a Windows system to re-image both the Conductor and Routers:
-
-1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
-2. Connect the RJ45/USB cable to the console port on the SSR1x0/1x00.
-3. Connect the USB end of the cable to your mac.
-4. Connect the power input to the back of the SSR1x0/1x00, but do not power it up. 
-5. Open a terminal window.
-6. Run `ls -al /*usb*` to identify the USB port. **get correct path for Windows**
-7. Copy the serial port information.
-8. In a terminal window, paste the serial port info, and add the baud rate.
-
-	cu.usbserial-A50285BI 115200
-
-9. Press Return.
-10. Insert your USB with the new ISO image into the USB port of the SSR1x0/1x00.
-11. Power up the SSR device. 
-12. At the instruction in the terminal window: `Press ESC for the boot menu`, do so. 
-
-	![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
-
-13. From the boot menu, select the USB Boot device and press Enter; or enter the boot device number and press Enter.
-
-	![Select Boot Device](/img/onboard_otp_boot_device.png)
-
-14. If there are multiple images on the USB device, select the appropriate image for your install.
-15. After the re-installation completes, follow the [Installation Using OTP](intro_otp_iso_install.mdx) instructions to complete the installation process.
-
-
-
-
 
 
