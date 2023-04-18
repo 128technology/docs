@@ -33,8 +33,6 @@ Use of non-GA, unofficial software releases will void the Juniper device warrant
 - To retain a valid warranty, the software used to re-image the SSR device must be an [**official Juniper GA Release of the SSR Software**](about_releases.mdx#general-availability), and a version equal to or greater than the version shipped on the device. 
 
 - An SSR1x0/1x00 may not be converted for use as a conductor. 
-<!----
-- If the SSR device is to be used as a Conductor, it must first be converted into a Conductor. See [Conductor Conversion](conductor_conversion.md) for more information. --->
 
 ## OTP Re-Image Process
 
