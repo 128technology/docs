@@ -650,3 +650,9 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 The active `automatedProvisioner` can be determined by running the command `show system processes`. Once the upgrade begins on the old node, the newly upgraded conductor takes over.
 
+#### Corrected Versions
+
+| Router Software Version | Minimum Required Conductor Version |
+| --- | --- |
+| 5.6.0 | 5.6.0 or later |
+

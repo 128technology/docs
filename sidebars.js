@@ -122,7 +122,7 @@ module.exports = {
           "config_basics",
           "config_templates",
           "config_asset_connection_resiliency",
-
+          "config_session_recovery",
           "config_dscp_steering",
           "config_dscp_preservation",
           "config_vrf_learning",
@@ -222,6 +222,7 @@ module.exports = {
           "how_to_use_app_summary",
           "howto_extend_gui_nav",
           "howto_lte",
+          "config_bfd_tunnel",
           "howto_config_PPPoE",
           "howto_pppoe_vlan",
           "howto_maintenance_mode",
@@ -244,6 +245,7 @@ module.exports = {
           "ts_packet_capture",
           "ts_serial_console_tsing",
           "ts_t1_troubleshooting",
+          "ts_traceroute",
           "ts_troubleshooting_vrf",
         ],
       },
@@ -303,6 +305,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_6.1",
           "release_notes_128t_6.0",
           "release_notes_128t_5.6",
           "release_notes_128t_5.5",

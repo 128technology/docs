@@ -2549,6 +2549,53 @@ This controls whether the SSR will attempt to detect when session-optimization i
 | --- | --- | --- |
 | enable-detection | boolean | Default: true. When `true`, the SSR will track latency for traffic on the interface to identify the need for session-optimization. When `false`, no session-optimization will occur for traffic on this interface. |
 
+## session-recovery-detection
+
+#### Path
+
+authority > session-recovery-detection
+
+#### Description
+
+When `inactivity-based` detection is enabled, the originating node monitors activity on the return flow. If no activity is detected for the specified time, the originator will add an additional metadata attribute called `session-health-check` to the next packet. The `session-health-check` attribute is validated by the receiving node. If the flow on the receiving node does not exist, it generates an `enable-metadata` message back to the originator.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| mode | enumeration | Valid values: packet-based (default), inactivity-based. | 
+| inactivity-timeout | uint64 | Expressed in seconds. The inactivity timer for sessions. Default value is 5 seconds. |
+
+#### Version History
+
+| Release | Modification |
+| --- | --- |
+| 6.1.0 | Feature introduced |
+
+## session-setup-scaling
+
+#### Path:
+
+authority > router > node 
+
+#### Description
+
+:::note
+This feature is currently in beta. Automatic scaling is not currently supported.
+Please contact your sales engineer for help with configuring this feature.
+:::
+
+The `session-setup-scaling` feature improves the session setup rate by enabling multi-threaded processing. Setting this feature to `true` enables this feature. Session setup scaling is enabled on the node of the router. 
+
+| Element | Type | Description |
+| --- | --- | --- |
+| session-setup-scaling | boolean | Values: true or false (default). When true, enables multi-threaded processing to improve the session setup rate. | 
+
+#### Version History
+
+| Release | Modification |
+| --- | --- |
+| 6.1.0 | Feature introduced |
+
+
 ## session-type
 
 #### Path:
