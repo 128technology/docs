@@ -222,10 +222,3 @@ The connection between the router and conductor is refreshed every five seconds 
 The Dynamic Peer Update (DPU) process supplies dynamic IP address information from a router to conductor, which will then propagate that information down to all routers that create adjacencies to that address. When a `network-interface` that uses dynamic addressing (e.g., DHCP, PPPoE) acquires an address for the first time or changes its address, that information is sent to conductor via DPU.
 
 The status of the DPU exchange is shown in the output of the PCLI command `show dynamic-peer-update`.
-
-### NETCONF
-| Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval          | Notes                                                        |
-| ------------- | ---------- | ---------------------- | ---------------------- | ------------------------- | ------------------------------------------------------------ |
-| bidirectional | 830/TCP    | Variable                    | Variable                    | Variable | Amount of data exchanged based on size of configuration requested, added, or modified. |
-
-If you are using a version earlier than 5.3 and managing the conductor using NETCONF, it may also be necessary to open port 830/TCP.
