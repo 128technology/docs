@@ -41,7 +41,7 @@ should be changed to:
 ```
 
 Note that only the relevant section of `local.init` is shown for clarity. All other settings should be left the same.
-The change should be made on both nodes of an HA system. If a conductor is already running 6.0.0 or later it will be necessary to `systemctlf restart 128T` on each node after making this change. If the modification is made prior to upgrade it is not necessary to restart 128T service as this will be performed during the upgrade. Making this change on versions earlier than 6.0.0 will not affect operation, and will not require a restart. 
+The change should be made on both nodes of an HA system. If a conductor is already running 6.0.0 or later it will be necessary to `systemctl restart 128T` on each node after making this change. If the modification is made prior to upgrade it is not necessary to restart 128T service as this will be performed during the upgrade. Making this change on versions earlier than 6.0.0 will not affect operation, and will not require a restart. 
 
 This issue will be corrected in an upcoming release.
 
