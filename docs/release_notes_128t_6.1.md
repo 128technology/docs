@@ -49,6 +49,14 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 6.1.1-55
+
+**Release Date:** April 28, 2023
+
+### Resolved Issues
+
+- **I95-51052 Packets appearing on the wrong service-area thread:** 
+
 ## Release 6.1.0-55
 
 **Release Date:** April 14, 2023
