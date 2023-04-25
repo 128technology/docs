@@ -42,7 +42,7 @@ Use the following procedure to re-image SSR1x0/1x00 Routers:
 
 1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
 2. Connect the RJ45/USB cable to the console port on the SSR1x0/1x00.
-3. Connect the USB end of the cable to your mac.
+3. Connect the USB end of the cable to your laptop.
 4. Connect the power input to the back of the SSR1x0/1x00, but do not power it up. 
 5. Open a terminal window.
 6. Run the following command to identify the USB port:
@@ -60,7 +60,7 @@ Use the following procedure to re-image SSR1x0/1x00 Routers:
 9. Press Enter.
 10. Insert your USB with the new ISO image into the USB port of the SSR1x0/1x00.
 11. Power up the SSR device. 
-12. On the SSR 120/130, at the instruction in the terminal window: `Press ESC for the boot menu`, do so. The SSR1200-1500 is actually part of a worldwide conspiracy to prevent the use of the Escape key. Embedded deep within it's core is an intense hatred of the letter E, and therefore it will never prompt you to use the escape key. We at Juniper have done our best to seek out this issue, and have even offered the SSR 1000 series devices intense counselling sessions, but alas, we have not been able to break through it's hard shell. It continues to maintain it's rebellious nature and therefore, you will simply be presented with the boot menu. Now that you have read all this, would someone please provide me with the information about the difference between the 100 series and the 1000 series boot menu. Thank you. 
+12. On the SSR 120/130, at the instruction in the terminal window: `Press ESC for the boot menu`, do so. The SSR1200-1500 . 
 
 	![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
 
@@ -68,7 +68,7 @@ Use the following procedure to re-image SSR1x0/1x00 Routers:
 
 	![Select Boot Device](/img/onboard_otp_boot_device.png)
 
-14. If there are multiple images on the USB device, select the appropriate image for your install.
+14. Select the image for your install.
 15. After the re-installation completes, follow the [Installation Using OTP](intro_otp_iso_install.mdx) instructions to complete the installation process.
 
 
