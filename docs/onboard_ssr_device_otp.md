@@ -36,8 +36,6 @@ Use of non-GA, unofficial software releases will void the Juniper device warrant
 
 ## OTP Re-Image Process
 
-Although the overall process is similar, there are variations in commands and output based on the SSR device and whether you are using a Mac or a Windows PC. Those differences are noted inline.
-
 Use the following procedure to re-image SSR1x0/1x00 Routers:
 
 1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
@@ -45,22 +43,18 @@ Use the following procedure to re-image SSR1x0/1x00 Routers:
 3. Connect the USB end of the cable to your laptop.
 4. Connect the power input to the back of the SSR1x0/1x00, but do not power it up. 
 5. Open a terminal window.
-6. Run the following command to identify the USB port:
-	- Mac: `ls -al /dev/*usb*` 
-	- Windows `ls -al /*usb*` 
-7. Copy the serial port information.
-8. In the **Mac terminal** window, type `screen`, paste the serial port info, and add the baud rate. 
+6. Run the following command to identify the USB port: 
+
+	ls -al /dev/*usb*
+
+8. In the terminal window, type `screen`, paste the serial port info, and add the baud rate. 
 
 	screen /dev/cu.usbserial-A50285BI 115200
-
-	In a **Windows terminal**, paste the serial port info, and add the baud rate.
-
-	 /cu.usbserial-A50285BI 115200
 
 9. Press Enter.
 10. Insert your USB with the new ISO image into the USB port of the SSR1x0/1x00.
 11. Power up the SSR device. 
-12. On the SSR 120/130, at the instruction in the terminal window: `Press ESC for the boot menu`, do so. The SSR1200-1500 . 
+12. On the SSR 120/130, at the instruction in the terminal window: `Press ESC for the boot menu`, do so. 
 
 	![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
 
