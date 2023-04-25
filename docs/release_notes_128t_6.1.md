@@ -55,11 +55,9 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **I95-51052 `session-scaling` regression generating high number of `wrong-thread` error messages:** The following regression has been resolved: If `outbound-only` or `nat-traversal mode` is used between SSR routers, and a NAT between the routers causes an address and/or port change for existing TCP or UDP sessions between them, the SSR did not automatically recover those sessions if they were idle or had one-way traffic.
+- **I95-51052 NAT changes in network cause sessions to fail:** If `session-scaling` is set to `enabled` with `outbound-only` or `nat-traversal` mode used between SSR routers, and a NAT between the routers causes an address and/or port change for existing TCP or UDP sessions between them, the SSR will not automatically recover those sessions if they were idle or had one-way traffic.
 
-Those types of sessions would have failed and timed out when all packets for the failed sessions stopped. New sessions were not impacted by the regression, nor were any pre-existing sessions with regular bi-directional traffic.
-
-This fixed regression only affected the SSR with `session-scaling` enabled and `outbound-only` or `nat-traversal`. By default, the SSR does not have `session-scaling` enabled, and did not have a regression for this functionality in 6.1.0.
+The impacted sessions will time out when all packets for the failed sessions stop. New sessions are not impacted, nor are any pre-existing sessions with regular bi-directional traffic.
 
 ## Release 6.1.0-55
 
