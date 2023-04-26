@@ -2,7 +2,7 @@
 title: WAN Assurance Plugin 3.7 Release Notes
 sidebar_label: '3.7'
 ---
-## Release 3.7.1
+## Release 3.7.2
 **Release Date:** Apr 26, 2023
 
 ### New Features
