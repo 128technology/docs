@@ -49,12 +49,14 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 6.1.1-5
+## Release 6.1.1-6
 
 **Release Date:** April 28, 2023
 
 ### Resolved Issues
 
+- **I95-48965, I95-50070, I95-50086 Highway Crashes:** Resolved an issue where a routing change that affects the `forwarding-table` can incur a race condition with sessions completing and being removed, which could lead to a highway crash and restart.
+------
 - **I95-51052 NAT changes in network may cause sessions to fail:** If `session-scaling` is set to `enabled` with `outbound-only`, and a NAT between the routers causes an address and/or port change for existing TCP or UDP sessions between them, the SSR may not automatically recover idle or one-way traffic sessions. <br/>
 The impacted sessions will time out when all packets for the failed sessions stop. New sessions are not impacted, nor are any pre-existing sessions with regular bi-directional traffic.
 ------
