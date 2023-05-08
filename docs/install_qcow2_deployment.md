@@ -20,7 +20,7 @@ ssh_pwauth: True
 write_files:
 - path: /root/initializer-preferences.json
   content: |
-    {"node-role": "combo", "node-ip": "127.0.0.1", "node-name": "dummy-node", "router-name": "dummy-router", "admin-password": "$6$W2wtGSOP7lT4vqLj$zG3eYb9/QAWD/0PqiN/I6vVLtDhBzhecx.aBpdweIx4D.0NJzxIUGVRRBQPmO9K8LlU/Jj8iBaL3OS7aa75KD1", "conductor": {"primary": "10.10.10.10"}}
+    {"node-role": "combo", "node-ip": "127.0.0.1", "node-name": "dummy-node", "router-name": "dummy-router", "admin-password": "$6$W2wtGSOP7lT4vqLj$zG3eYb9/QAWD/0PqiN/I6vVLtDhBzhecx.aBpdweIx4D.0NJzxIUGVRRBQPmO9K8LlU/Jj8iBaL3OS7aa75KD1", "conductor": {"primary": {"ip": "10.10.10.10"}}}
 runcmd:
 - initialize128t -p /root/initializer-preferences.json
 ```
