@@ -49,6 +49,59 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 6.1.2-4
+
+**Release Date:** May 12, 2023
+
+### New Features
+
+- **I95-50510 New fields for IPFIX:** **The SSR IPFIX implementation was not sending the industry standard fields of `flowStartMilliseconds` and `flowEndMilliseconds`. In the new implementation, all IPFIX records will include the fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate record, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end record, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see [IPFIX](concepts_application_discovery#ipfix). 
+
+---
+- **I95-50571 Add packet buffer tracking to help analyze buffer exhaustion:** The following features have been added to help diagnose frequent packet buffer pool depletions in customer environments:
+  - Track packet buffer locations. 
+  - Enforce setting of packet location.
+  - Add the ability to walk packet buffer pools, count the locations, and display. 
+------
+
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** I95-50535, 
+------
+- **I95-47776 Tank CLI hostname parsing errors:** Resolved two issues in the Tank instance where the localhost could not resolve to an IP address, and Tank was not identifying non-default ports. These issues have been resolved. 
+------
+- **I95-48518 Application Identification not recognizing Apps:** Resolved an issue where the GUI was only pulling Application data from one node in an HA configuration. Application ID Summary display now aggregates data from both nodes.
+------
+- **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes. 
+------
+- **I95-49594 Highway Crash:** Resolved an issue for systems where any of the following are configured:
+  - `application-identification` is enabled, 
+  - a service is defined with `domain-name child services`, or 
+  - a `service address` is configured as a `domain`
+and there are established flows for any of these services, a link flap triggering a flow invalidation (changes to FIB) will induce a crash in the highway process of the SSR. This issue exists in versions 6.1.0 and 6.1.1, and is resolved in 6.1.2.
+------
+- **I95-49603 Process Manager crash:** When a long running process was being cleaned up by the subprocess, the cleanup would fail causing a crash. Long running processes are now clearly terminated, which allows the cleanup subprocess to complete correctly. 
+------
+- **I95-49754 :** Resolved a case where when way points are nearly exhausted they are being reused within a short time frame. This condition caused errors when installing reverse flows.
+------
+- **I95-49969 Permission Denied error when attempting to self-generate a webserver certificate:** Resolved an issue that prevented users with the admin role from creating a new self-signed web certificate via the PCLI command create certificate self-signed webserver.
+------
+- **I95-49974 Stuck flow not cleared when reverse metadata is incomplete:** Resolved an issue where reverse metadata is coming through incomplete - without the source tenant. The source tenant has been added to the reverse metadata.
+------
+- **I95-50363 MOS Metrics not refreshing:** Resolved an issue where the SLA and MOS values were not being updated in the stats (or PeerPathTable) when a BFD session was brought down. The SLA and MOS stats are now set to 0 when the BFD session is brought down.
+------
+- **I95-50543 systemd unable to start 128T after upgrade:** This issue has been resolved by ensuring that the netfilter kernel is installed.
+------
+- **I95-50710 Detect reverse time jumps in the SychronizationAgent:** Implemented time detection for configurations using a future time that is corrected upon commit. This resulted in an mtime older than what is in the datastore, and the configurations were rejected.
+------
+ 
+
+
+
+
+
+
 ## Release 6.1.1-6
 
 **Release Date:** April 28, 2023
