@@ -49,25 +49,22 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 6.1.2-4
+## Release 6.1.2-8
 
 **Release Date:** May 12, 2023
 
 ### New Features
 
-- **I95-50510 New fields for IPFIX:** **The SSR IPFIX implementation was not sending the industry standard fields of `flowStartMilliseconds` and `flowEndMilliseconds`. In the new implementation, all IPFIX records will include the fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate record, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end record, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see [IPFIX](concepts_application_discovery#ipfix). 
-
+- **I95-50510 New fields for IPFIX:** The SSR IPFIX implementation was not sending the industry standard fields of `flowStartMilliseconds` and `flowEndMilliseconds`. In the new implementation, all IPFIX records will include the fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate record, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end record, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see [IPFIX](concepts_application_discovery#ipfix). 
 ---
 - **I95-50571 Add packet buffer tracking to help analyze buffer exhaustion:** The following features have been added to help diagnose frequent packet buffer pool depletions in customer environments:
   - Track packet buffer locations. 
   - Enforce setting of packet location.
   - Add the ability to walk packet buffer pools, count the locations, and display. 
-------
-
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-50535, 
+- **The following CVE's have been identified and addressed in this release:** I95-50535, I95-50790,
 ------
 - **I95-47776 Tank CLI hostname parsing errors:** Resolved two issues in the Tank instance where the localhost could not resolve to an IP address, and Tank was not identifying non-default ports. These issues have been resolved. 
 ------
@@ -95,12 +92,31 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-50710 Detect reverse time jumps in the SychronizationAgent:** Implemented time detection for configurations using a future time that is corrected upon commit. This resulted in an mtime older than what is in the datastore, and the configurations were rejected.
 ------
- 
-
-
-
-
-
+- **I95-50736 SSH key change not propogated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes. 
+------
+- **I95-50778 Event History filter not working:** Resolved an issue where searching on the Event History page didn't show matching results when the search string is only found in the **Details** column.
+------
+- **I95-50823 Support for time-offset DHCP option:** `int-32 encoded-type` has been added to provide support for the time-offset DHCP option.
+------
+- **I95-50834 NodeMonitor crash on 128T startup when hardware interface is missing:** Resolved a NodeMonitor crash when configuration objects are not present. 
+------
+- **I95-50967 SSR is not allowing other DHCP relay traffic to pass through:** When the SSR acts as a DHCP Relay, it will no longer drop packets received from other relay agents on the network. Instead the packets will be routed appropriately as per the configured policies.
+------
+- **I95-50977 Installer fails to download software when squid proxy is enabled:** Resolved an issue where when the squid proxy is on, DNF transactions to the conductor repo go through the squid proxy, despite the repo pointing to a local tunnel to the conductor. These transactions now go through the proper tunnel. 
+------
+- **I95-50979 Routers remain in connected state:** Resolved an issue where assets will perform a new highstate unnecessarily if a commit occurs while a highstate is already in progress, causing assets to take a long time to get to the running state.
+------
+- **I95-51006 Nodes stuck in connected state after upgrade:** On an HA conductor, if the user is performing an upgrade on the first conductor node and that user makes a config commit during the upgrade, then the configuration's modified time will become out of sync between the two conductor nodes. When the conductor first node is finished upgrading the result is a loop where the configuration keeps getting committed by each node back and forth until a new commit is made. This issue has been resolved by allowing the peer conductor node to accept the config despite the perceived version disparity. Please note performing a commit mid upgrade is not supported. 
+------
+- **I95-51007 cpusetOrchestrator isolating and pinning cores on the Conductor:** The cpuProperties cores setting in /etc/128technology/local.init was erroneously isolating cores on conductor nodes when set, even though this setting is intended for a router. This would cause a reduction in available processing cores for normal conductor operations. This setting will now be ignored on the conductor.
+------
+- **I95-51021 Package to Image conversion fails on FIPS enabled SSR:** Conversion of package-based to image-based is now supported for systems with FIPS 140-2 mode enabled.
+------
+- **I95-51044 Hide forwarding-core-mode on conductor:** Disabled the forwarding-core-mode setting on conductor nodes, since this setting doesn't apply to conductor.
+------
+- **I95-51086 Highway Crash on Headend:** Resolved an issue where a routing change that affects the `forwarding-table` can incur a race condition with sessions completing and being removed, which could lead to highway crashing and restarting.
+------
+- **I95-51093 Segfault in Highway when using multithreaded ServiceArea:** Resolved an issue when `session-scaling` is set to `enabled` together with `outbound-only`, whereby a race condition can cause a crash and restart of the highway process in the SSR.
 
 ## Release 6.1.1-6
 
