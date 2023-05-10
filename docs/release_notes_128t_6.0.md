@@ -50,6 +50,65 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 :::
 
 
+## Release 6.0.10-5
+
+**Release Date:** May 12, 2023
+
+### New Featurees
+
+- **I95-49354 Display SSD smartctl info in `show platform disk`:** We now display the following disk info, if supported by the disk, in `show platform disk`:
+	- Lifetime used
+	- Power On Hours
+	- TBW (Terabyte Written)
+	- TBW per year
+------
+- **I95-49824 BFD Overlay over SVR** In deployments where the number of SVR sessions between SSRs are limited due to carrier settings, the established BFD channel is leveraged to encapsulate SVR sessions. For details about using this feature, see [BFD Overlay over SVR.](config_bfd_tunnel.md)
+------
+
+### Resolved Issues 
+
+- **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48448, I95-48643, I95-49079, I95-49445, I95-49456, I95-49745, I95-49746, I95-49747, I95-49748, I95-49912, I95-49913, I95-49914, 
+------
+- **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
+:::important
+Please refer to [Password Policies](config_password_policies.md) for updated password requirements.
+:::
+------
+- **I95-42379 BGP over SVR global service policy:** [Security and Service Policy](config_bgp.md#security-policy-and-service-policy) configuration options are provided for specifying the policy to be used for generated BGP-over-SVR services.
+------
+- **I95-48485 Broadcom NIC (NetXtreme) fails to initialize properly:** Resolved an issue with initization errors during memzone creation.
+------
+- **I95-48518 Application Identification not recognizing Apps:** Resolved an issue where the GUI was only pulling Application data from one node in an HA configuration. Application ID Summary display now aggregates data from both nodes.
+------
+- **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes.
+------
+- **I95-49340 
+
+------
+-  **I95-49350 BFD echo generating latency overhead:** BFD echo tests are now staggered to minimize application latency's contribution to overall peer path latency.
+------
+- **I95-49377 Sessions established, packet counters incremented, seen in device-capture, but not seen by next-hop:** Added hooks for NIC driver to trigger an unrecoverable event and invoke the Highway lockup detector mechanism. 
+------
+- **I95-49447 Conditional BGP advertisement is not respected:** Resolved an issue that if a peer went down and came back up, the conditional advertisement was no longer respected. 
+------
+- **I95-49514 Linux interfaces bounced on startup:** Resolved an issue where all Linux interfaces managed by 128T are bounced once on 128T startup.
+------
+- **I95-49564 Reduce volume of logs during pending lookups:** The error logs during a pending lookup has been changed to a muted error log with a stat.
+------
+- **I95-49603 Process Manager crash:** When a long running process was being cleaned up by the subprocess, the cleanup would fail causing a crash. Long running processes are now clearly terminated, which allows the cleanup subprocess to complete correctly.
+------
+- **I95-49604 Alarm when a node is disconnected:** An alarm is now raised when a node is disconnected from the internal synchronization database.
+------
+- **I95-49633 Validation not strict for static assignment within DHCP server configuration:** Configuration for static addresses within DHCP server exists in multiple locations per design. Cross-validation has been added to prevent the same ip-address from being configured and assigned to multiple dhcp-clients.
+------
+- **I95-49675 Incorrect path in console help message for `export config running`:** The help message now correctly identifies the export path: `Exported files are stored in /etc/128technology/config-exports/ and are stored as GZIP compressed files.`
+------
+- **I95-49754 Way point re-use causing duplicate reverse flows:** Resolved a case where when way points are nearly exhausted they are being reused within a short time frame. This condition caused errors when installing reverse flows.
+------
+
+
+
+
 ## Release 6.0.9-3
 
 **Release Date:** April 3, 2023
