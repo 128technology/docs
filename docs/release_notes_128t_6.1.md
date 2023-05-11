@@ -98,7 +98,7 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-50823 Support for time-offset DHCP option:** `int-32 encoded-type` has been added to provide support for the time-offset DHCP option.
 ------
-- **I95-50834 NodeMonitor crash on 128T startup when hardware interface is missing:** Resolved a NodeMonitor crash when the interface configuration is not present. 
+- **I95-50834 NodeMonitor crash on 128T startup when hardware interface is missing:** Resolved a `NodeMonitor` crash when the interface configuration is not present. 
 ------
 - **I95-50967 SSR is not allowing other DHCP relay traffic to pass through:** When the SSR acts as a DHCP Relay, it will no longer drop packets received from other relay agents on the network. Instead the packets will be routed appropriately as per the configured policies.
 ------
@@ -110,7 +110,7 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-51007 Conductor is incorrectly honoring core pinning:** The cpuProperties cores setting in /etc/128technology/local.init was erroneously isolating cores on conductor nodes when set, even though this setting is intended for a router. This would cause a reduction in available processing cores for normal conductor operations. This setting will now be ignored on the conductor.
 ------
-- **I95-51021 Package to Image conversion fails on FIPS enabled SSR:** Conversion of package-based to image-based is now supported for systems with FIPS 140-2 mode enabled.
+- **I95-51021 Package to Image conversion fails on FIPS enabled SSR:** Conversion of `package-based` to `image-based` is now supported for systems with FIPS 140-2 mode enabled.
 ------
 - **I95-51044 Hide `forwarding-core-mode` on conductor:** Disabled the `forwarding-core-mode` setting on conductor nodes, since this setting doesn't apply to conductor.
 ------
@@ -122,7 +122,7 @@ and there are established flows for any of these services, a link flap triggerin
 
 - **I95-51087 SSR fails to download firmware after upgrading the conductor:** An issue has been identified where the first time a conductor is upgraded and **conductor-only** is selected in the software-update settings. The proxy service on the conductor does not work correctly, and downloads attempted by the router will fail. This issue will be resolved in the next release. 
 
-**_Workaround:_** Make a simple configuration change and commit the change. Any configuration change is sufficient to start the internal proxy service. Once this commit has been made this will no longer be an issue.
+  **_Workaround:_** Make a simple configuration change and commit the change. Any configuration change is sufficient to start the internal proxy service. Once this commit has been made this will no longer be an issue.
 
 ## Release 6.1.1-6
 
