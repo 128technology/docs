@@ -78,7 +78,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues 
 
-- **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48448, I95-48643, I95-49079, I95-49445, I95-49456, I95-49745, I95-49746, I95-49747, I95-49748, I95-49912, I95-49913, I95-49914, I95-50358, I95-50359, I95-50506, I95-50508, I95-50523, I95-50535, I95-50790,
+- **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48448, I95-48643, I95-49079, I95-49445, I95-49456, I95-49745, I95-49746, I95-49747, I95-49748, I95-49912, I95-49913, I95-49914, I95-50358, I95-50359, I95-50506, I95-50508, I95-50523, I95-50535, I95-50790.
 ------
 - **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
 :::important
@@ -93,8 +93,7 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes.
 ------
-- **I95-49340 
-
+ - **I95-49340 Crash when the unexpected input of `tenant-prefix` with no `source-address` is committed:** Validation has been added to restrict the `tenant-prefix source-address` to a minimum of one.
 ------
 -  **I95-49350 BFD echo generating latency overhead:** BFD echo tests are now staggered to minimize application latency's contribution to overall peer path latency.
 ------
@@ -158,15 +157,15 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-50699 Upgrade process to 6.0.8 failure:** Mist-managed systems with low available memory could fail to upgrade. An updated dependency and fix for these Mist-managed systems has been published via the cloud and will be absorbed the next time a customer attempts an upgrade.
 ------
-- **I95-50710 Configuration cannot be applied to router when its time is ahead of the conductor:** Implemented time detection for configurations using a future time that is corrected upon commit. This resulted in an mtime older than what is in the datastore, and the configurations were rejected.
+- **I95-50710 Configuration cannot be applied to router when its time is ahead of the conductor:** Implemented time detection for configurations using a future time that is corrected upon commit. This resulted in an `mtime` older than what is in the datastore, and the configurations were rejected.
 ------
-- **I95-50736 SSH key change not propogated to secondary conductor:** Resolved an issue where an SSH key change to /etc/128technology/ssh/pdc_ssh_key was not automatically detected and resynced between peer node and conductor nodes.
+- **I95-50736 SSH key change not propogated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes.
 ------
 - **I95-50754 Race condition between icmp ping request and a reverse flow:** Resolved a crash due to a race condition when `service ping icmp-request` is matched against a partially installed flow.
 ------
 - **I95-50778 Event History filter not working:** Resolved an issue where searching on the Event History page didn't show matching results when the search string is only found in the Details column.
 ------
-- **I95-50787 Rebooting the OS from the conductor throws error code 400:** Resolved an issue in the GUI with the reboot button on the Router page. When trying to reboot a router, the button would fail and display "Error: EOF"; this has been resolved. 
+- **I95-50787 Rebooting the OS from the conductor throws error code 400:** Resolved an issue in the GUI with the reboot button on the Router page. When trying to reboot a router, the button would fail and display **Error: EOF**. 
 ------
 - **I95-50823 Support for time-offset DHCP option:** `int-32 encoded-type` has been added to provide support for the time-offset DHCP option.
 ------
@@ -174,13 +173,22 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-50967 SSR is not allowing other DHCP relay traffic to pass through:** When the SSR acts as a DHCP Relay, it will no longer drop packets received from other relay agents on the network. Instead the packets will be routed appropriately as per the configured policies.
 ------
-- **I95-50977 Installer fails to download software when squid proxy is enabled:** Resolved an issue where when the Conductor software proxy is being used, DNF transactions to the conductor repo go through the proxy, despite the repo pointing to a local tunnel to the conductor. These transactions now go through the proper tunnel.
+- **I95-50977 Installer fails to download software when the Conductor software proxy is enabled:** Resolved an issue where when the Conductor software proxy is being used, DNF transactions to the conductor repo go through the proxy, despite the repo pointing to a local tunnel to the conductor. These transactions now go through the proper tunnel.
 ------
 - **I95-50979 Routers remain in connected state:** Resolved an issue where assets will perform a new highstate unnecessarily if a commit occurs while a highstate is already in progress, causing assets to take a long time to get to the running state.
+------
+- **I95-51006 Nodes stuck in connected state after upgrade:** On an HA conductor, if the user is performing an upgrade on the first conductor node and that user makes a config commit during the upgrade, then the configuration's modified time will become out of sync between the two conductor nodes. When the conductor first node is finished upgrading the result is a loop where the configuration keeps getting committed by each node back and forth until a new commit is made. This issue has been resolved by allowing the peer conductor node to accept the config despite the perceived version disparity. Please note performing a commit mid-upgrade is not supported.
+------
+- **I95-51007 Conductor is incorrectly honoring core pinning:** The `cpuProperties` cores setting in `/etc/128technology/local.init` was erroneously isolating cores on conductor nodes when set, even though this setting is intended for a router. This would cause a reduction in available processing cores for normal conductor operations. This setting will now be ignored on the conductor.
+------
+- **I95-51021 Package to Image conversion fails on FIPS enabled SSR:** Conversion of package-based to image-based is now supported for systems with FIPS 140-2 mode enabled.
+------
+- **I95-51044 Hide forwarding-core-mode on conductor:** Disabled the f`orwarding-core-mode` setting on conductor nodes, since this setting doesn't apply to conductor.
 
+### Caveats
+- **I95-51087 SSR fails to download firmware after upgrading the conductor:** An issue has been identified where the first time a conductor is upgraded and `conductor-only` is selected in the `software-update` settings. The proxy service on the conductor does not work correctly, and downloads attempted by the router will fail. This issue will be resolved in the next release.
 
-
-
+  **_Workaround:_** Make a simple configuration change and commit the change. Any configuration change is sufficient to start the internal proxy service. Once this commit has been made this will no longer be an issue.
 
 ## Release 6.0.9-3
 
