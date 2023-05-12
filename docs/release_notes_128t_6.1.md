@@ -114,9 +114,6 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-51044 Hide `forwarding-core-mode` on conductor:** Disabled the `forwarding-core-mode` setting on conductor nodes, since this setting doesn't apply to conductor.
 ------
-- **I95-51086 Highway Crash on Headend:** Resolved an issue where a routing change that affects the `forwarding-table` can incur a race condition with sessions completing and being removed, which could lead to highway crashing and restarting.
-------
-- **I95-51093 Segfault in Highway when using multi-threaded ServiceArea:** Resolved an issue when `session-scaling` is set to `enabled` together with `outbound-only`, whereby a race condition can cause a crash and restart of the highway process in the SSR.
 
 ### Caveats
 
