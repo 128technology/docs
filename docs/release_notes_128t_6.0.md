@@ -56,6 +56,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### New Features
 
+- **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes.
+------
 - **I95-49354 Display SSD smartctl info in `show platform disk`:** We now display the following disk info, if supported by the disk, in `show platform disk`:
 	- Lifetime used
 	- Power On Hours
@@ -68,13 +70,10 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-50510 New fields for IPFIX:** The SSR IPFIX implementation was not sending the industry standard fields of flowStartMilliseconds and flowEndMilliseconds. In the new implementation, all IPFIX records include these fields. The start time is set to the start time of the flow, and the end time is always set to the time the last packet was received on the flow. For intermediate records, this indicates that the flow is still ongoing but provides the last activity timestamp. For the end records, this indicates when the last packet was received on the flow prior to the session terminating. For additional information, see [IPFIX](concepts_application_discovery.md#ipfix).
 ------
-- **I95-50571 Add packet buffer tracking to help analyze buffer exhaustion:** The following features have been added to help diagnose frequent packet buffer pool depletions in customer environments:
+- **I95-50571 Add packet buffer tracking to help analyze buffer exhaustion:** The following features have been added to help diagnose packet buffer pool depletions in certain environments:
 - Track packet buffer locations.
 - Enforce setting of packet location.
 - Add the ability to walk packet buffer pools, count the locations, and display.
-------
-
-
 
 ### Resolved Issues 
 
@@ -91,13 +90,11 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-48518 Application Identification not recognizing Apps:** Resolved an issue where the GUI was only pulling Application data from one node in an HA configuration. Application ID Summary display now aggregates data from both nodes.
 ------
-- **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes.
-------
  - **I95-49340 Crash when the unexpected input of `tenant-prefix` with no `source-address` is committed:** Validation has been added to restrict the `tenant-prefix source-address` to a minimum of one.
 ------
 -  **I95-49350 BFD echo generating latency overhead:** BFD echo tests are now staggered to minimize application latency's contribution to overall peer path latency.
 ------
-- **I95-49377 Sessions established, packet counters incremented, seen in device-capture, but not seen by next-hop:** Added hooks for NIC driver to trigger an unrecoverable event and invoke the Highway lockup detector mechanism. 
+- **I95-49377 Transmit packets dropped by NIC for established sessions - packet counters are incrementing and can be seen in packet capture, but not seen by next-hop:** Added hooks for NIC driver to trigger an unrecoverable event and invoke the Highway lockup detector mechanism. 
 ------
 - **I95-49447 Conditional BGP advertisement is not respected:** Resolved an issue that if a peer went down and came back up, the conditional advertisement was no longer respected. 
 ------
@@ -119,7 +116,7 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-49925 GRE tunnel health-check not migrating sessions when path is down:** The GRE tunnel manager now removes all sessions before adding new ones rather than modifying the existing sessions.
 ------
-- **I95-49969 Permission Denied error when attempting to self-generate a webserver certificate:** Resolved an issue that prevented users with the admin role from creating a new self-signed web certificate via the PCLI command create certificate self-signed webserver.
+- **I95-49969 Permission Denied error when attempting to self-generate a webserver certificate:** Resolved an issue that prevented users with the admin role from creating a new self-signed web certificate via the PCLI command `create certificate self-signed webserver`.
 ------
 - **I95-49974 Stuck flow not cleared when reverse metadata is incomplete:** Resolved an issue where reverse metadata is coming through incomplete - without the source tenant. The source tenant has been added to the reverse metadata.
 ------
@@ -135,7 +132,7 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-50260 `show idp events` does not honor the `router` or `node` arguments:** Resolved an issue where `show idp events` did not honor the `router` and `node` arguments and always executed against the local node. The command is now executed correctly, using the specified arguments.
 ------
-- **I95-50262 Unconnected routers not rotating logs often enough:** Resolved an issue where a managed router was not able to pull down the configuration from the Conductor - which includes the log rotation config. The default salt log rotation configuration has been improved, preventing the log from growing too large before the connection to the Conductor can be established. 
+- **I95-50262 Routers disconnected from their conductor may have incorrect log rotation settings:** Resolved an issue where a managed router was not able to pull down the configuration from the Conductor - which includes the log rotation config. The default salt log rotation configuration has been improved, preventing the log from growing too large before the connection to the Conductor can be established. 
 ------
 - **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software (pre-4.4).
 ------
@@ -183,7 +180,7 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-51021 Package to Image conversion fails on FIPS enabled SSR:** Conversion of package-based to image-based is now supported for systems with FIPS 140-2 mode enabled.
 ------
-- **I95-51044 Hide forwarding-core-mode on conductor:** Disabled the f`orwarding-core-mode` setting on conductor nodes, since this setting doesn't apply to conductor.
+- **I95-51044 Hide forwarding-core-mode on conductor:** Disabled the `forwarding-core-mode` setting on conductor nodes, since this setting does not apply to a conductor.
 
 ### Caveats
 - **I95-51087 SSR fails to download firmware after upgrading the conductor:** An issue has been identified where the first time a conductor is upgraded and `conductor-only` is selected in the `software-update` settings. The proxy service on the conductor does not work correctly, and downloads attempted by the router will fail. This issue will be resolved in the next release.
