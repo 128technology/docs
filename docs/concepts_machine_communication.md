@@ -62,7 +62,7 @@ In many common deployment scenarios, the SSR software is deployed as "hub-and-sp
 ### Firewall Detector
 | Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
 | ------------- | ---------- | ---------------------- | ---------------------- | ---------------- | ------------------------------------------------------------ |
-| bidirectional | 1280/TCP   | 6516                   | 6516                   | 300s             | Rate can be adjusted by setting `udp-transform/detect-interval` or disabled by setting `udp-transform/mode` to `always-transform`. |
+| bidirectional | 1280 and 1283/TCP   | 6516                   | 6516                   | 300s             | Rate can be adjusted by setting `udp-transform/detect-interval` or disabled by setting `udp-transform/mode` to `always-transform`. |
 
 Each SSR periodically sends _firewall detector_ packets on each peer path to determine if stateful firewalls exist on the peer path. Firewalls between SSR devices can interfere with SVR behavior; because of this, the firewall detector is used to automatically trigger a _UDP transform_ feature, to carry SVR over UDP when firewalls would otherwise block TCP. The status of the firewall detector is show in the PCLI in the output of `show udp-transform`:
 

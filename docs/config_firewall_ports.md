@@ -20,7 +20,7 @@ Enable the following on your firewall for SSR to SSR connectivity:
 
 - [SSR IP address]
 - Port 1280/UDP
-- Port 1280/TCP
+- Ports 1280 and 1283/TCP
 - Ports in the range 16,385-65,353 TCP/UDP
 - rp.cloud.threatseeker.com on port 443/TCP; this is required for Web Filtering
 
