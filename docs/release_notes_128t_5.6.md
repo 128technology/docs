@@ -28,7 +28,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.6.8-x
+## Release 5.6.8-8
 
 **Release Date:** May 18, 2023
 
@@ -48,11 +48,11 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 	- Added new metrics for tracking utilization of packet pools.
 	- Provide more diagnostic information, when possible.
 ------
-- **I95-51316 Add Resynchronization state:** Transition an asset into the `resynchronizing` state instead of `connected` when a configuration change is made, or when the user executes the `send command sync` command from the PCLI.
+- **I95-51316 Add Resynchronization state:** Transition an asset into the `Resynchronizing` state instead of `Connected` when a configuration change is made, or when the user executes the `send command sync` command from the PCLI. This better identifies the actions being performed within the SSR, and is not an indicator of the device health. Previously when an asset required a highstate due to a config change or running the `sync` command, the device would transition to `Connected` from `Running`, which caused concern with users.  
 ------
 - **I95-51378 Improve metrics for REST API performance:** Performance improvements have been made in metrics REST APIs to alleviate intermittent metrics graphs on heavily loaded systems.
 ------
-- **WAN-1954 MistAnalytics Update:** Updated the stats path to `128T-Cloud-intel-agent` and updated the `Event now` code to capture device time.
+- **WAN-1954 Mist Analytics Update:** Updated the stats path to `128T-Cloud-intel-agent` and updated the `Event now` code to capture device time.
 
 ### Resolved Issues
 
@@ -93,11 +93,11 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-50050 VRRP High Availability gets stuck in Active/Active:** The DPDK version has been updated to resolve this issue.
 ------
-- **I95-50247 Duplicate peer path alarms:** Resolved an issue where both BFD and the path MTU feature were generating alarms for the same peer path being down. The criteria for which peerPath state changes can trigger peer path events has been tightened.
+- **I95-50247 Duplicate peer path alarms:** Resolved an issue where both BFD and the path MTU feature were generating alarms for the same peer path being down. The criteria for which peer path state changes can trigger peer path events has been tightened.
 ------
 - **I95-50262 Routers disconnected from their conductor may have incorrect log rotation settings:** Resolved an issue where a managed router was not able to pull down the configuration from the Conductor - which includes the log rotation config. The default salt log rotation configuration has been improved, preventing the log from growing too large before the connection to the Conductor can be established. 
 ------
-- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software (pre-4.4).
+- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software (SSR Software </= version 4.4).
 ------
 - **I95-50286 Rebooting a node of an HA pair from Linux breaks routing:** Resolved an issue where a delay in the shutdown process caused a node to take over a VRRP interface, creating routing issues. 
 ------
@@ -107,7 +107,12 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-50376 Failure to make config changes after rollback:** Resolved an issue where commits would not take effect after rolling back an HA router, because of older/newer version conflicts. 
 ------
-- **I95-50445 i40e and ice devices enter malicious descriptor detection state, preventing forwarding of traffic:** Resolved an issue where fragmented packet chains larger than 8 buffers were discarded causing a malicious descriptor event. 
+- **I95-50445 i40e and ice devices enter malicious descriptor detection state, preventing forwarding of traffic:** Resolved an issue where fragmented packet chains larger than 8 buffers were discarded causing a malicious descriptor event. The below `dpdk.log` snippet provides an example of the event:
+```
+[DPDK| -- ] ERROR (00007f03ec18e700) i40e_dev_alarm_handler(): ICR0: malicious programming detected
+[DPDK| -- ] WARN  (00007f03ec18e700) i40e_handle_mdd_event(): Malicious Driver Detection event 0x02 on TX queue 6 PF number 0x01 VF number 0x00 device 0000:08:00.1
+[DPDK| -- ] WARN  (00007f03ec18e700) i40e_handle_mdd_event(): TX driver issue detected on PF
+```
 ------
 - **I95-50534 Race condition between NetworkInterfaceManager and FastLane:** Resolved a race condition caused by adding and deleting the same network interface in a very short window of time, potentially causing a system crash.
 ------
@@ -133,17 +138,11 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-51006 Nodes stuck in connected state after upgrade:** On an HA conductor, if the user is performing an upgrade on the first conductor node and that user makes a config commit during the upgrade, then the configuration's modified time will become out of sync between the two conductor nodes. When the conductor first node is finished upgrading the result is a loop where the configuration keeps getting committed by each node back and forth until a new commit is made. This issue has been resolved by allowing the peer conductor node to accept the config despite the perceived version disparity. Please note performing a commit mid-upgrade is not supported.
 ------
-- **I95-51006 Nodes stuck in connected state after upgrade:** On an HA conductor, if the user is performing an upgrade on the first conductor node and that user makes a config commit during the upgrade, then the configuration's modified time will become out of sync between the two conductor nodes. When the conductor first node is finished upgrading the result is a loop where the configuration keeps getting committed by each node back and forth until a new commit is made. This issue has been resolved by allowing the peer conductor node to accept the config despite the perceived version disparity. Please note performing a commit mid upgrade is not supported. 
-------
 - **I95-51007 Conductor is incorrectly honoring core pinning:** The cpuProperties cores setting in /etc/128technology/local.init was erroneously isolating cores on conductor nodes when set, even though this setting is intended for a router. This would cause a reduction in available processing cores for normal conductor operations. This setting will now be ignored on the conductor.
 ------
 - **I95-51044 Hide `forwarding-core-mode` on conductor:** Disabled the `forwarding-core-mode` setting on conductor nodes, since this setting doesn't apply to conductor.
 ------
 - **I95-51087 SSR fails to download firmware after upgrading the conductor:** Resolved an issue where the first time a conductor is upgraded and **conductor-only** is selected in the software-update settings, the proxy service on the conductor does not work correctly, and downloads fail. The downloads no longer fail. 
-
-
-
-
 
 ## Release 5.6.7-4
 
