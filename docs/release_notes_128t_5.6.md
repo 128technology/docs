@@ -28,9 +28,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.6.8-8
+## Release 5.6.8-9
 
-**Release Date:** May 18, 2023
+**Release Date:** May 23, 2023
 
 ### New Features
 
@@ -51,8 +51,6 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 - **I95-51316 Add Resynchronization state:** Transition an asset into the `Resynchronizing` state instead of `Connected` when a configuration change is made, or when the user executes the `send command sync` command from the PCLI. This better identifies the actions being performed within the SSR, and is not an indicator of the device health. Previously when an asset required a highstate due to a config change or running the `sync` command, the device would transition to `Connected` from `Running`, which caused concern with users.  
 ------
 - **I95-51378 Improve metrics for REST API performance:** Performance improvements have been made in metrics REST APIs to alleviate intermittent metrics graphs on heavily loaded systems.
-------
-- **WAN-1954 Mist Analytics Update:** Updated the stats path to `128T-Cloud-intel-agent` and updated the `Event now` code to capture device time.
 
 ### Resolved Issues
 
@@ -97,7 +95,7 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-50262 Routers disconnected from their conductor may have incorrect log rotation settings:** Resolved an issue where a managed router was not able to pull down the configuration from the Conductor - which includes the log rotation config. The default salt log rotation configuration has been improved, preventing the log from growing too large before the connection to the Conductor can be established. 
 ------
-- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software (SSR Software </= version 4.4).
+- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software (SSR Software equal to, or greater than version 4.4).
 ------
 - **I95-50286 Rebooting a node of an HA pair from Linux breaks routing:** Resolved an issue where a delay in the shutdown process caused a node to take over a VRRP interface, creating routing issues. 
 ------
