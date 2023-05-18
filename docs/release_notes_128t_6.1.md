@@ -49,6 +49,22 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 6.1.3-3
+
+**Release Date:** May 19, 2023
+
+### Resolved Issues
+
+- **I95-48931 Service area Highway crash:** Now prevent crashing in SSR's highway process in unusual race conditions when a session's flow is removed before the session is fully established.
+------
+- **I95-50722 Highway crashes during SSR migration:** Resolved a crash in the SSR's highway process, due to a race condition between configuration changes and BFD sessions.
+------
+- **I95-51364 Highway crash on both nodes of an HA system:** Resolved a crash that can occur in the highway process of the SSR when deployed in HA mode, due to spurious redundancy database errors.
+------
+- **I95-51378 REST API improvements:** Performance improvements have been made in the metrics REST APIs to alleviate issues with intermittent metrics graphs on heavily loaded systems.
+------
+- **WAN-1958 Mist agent crashes:** Increased internal file system limits which were preventing some services from starting correctly at boot. Limits were raised based on expected system usage. 
+
 ## Release 6.1.2-7
 
 **Release Date:** May 12, 2023
