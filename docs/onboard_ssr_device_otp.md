@@ -42,7 +42,7 @@ The process varies based on the SSR Device, as well as Mac and Windows.
 
 1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
 2. Connect the RJ45/USB cable to the console port on the SSR1x0/1x00.
-3. Connect the USB end of the cable to your laptop.
+3. Connect the USB end of the cable to your computer.
 4. Connect the power input to the back of the SSR1x0/1x00, but do not power it up. 
 5. Open a terminal window.
 6. Run the following command to identify the USB port: 
