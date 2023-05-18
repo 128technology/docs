@@ -55,7 +55,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **I95-48931 Service area Highway crash:** Now prevent crashing in SSR's highway process in unusual race conditions when a session's flow is removed before the session is fully established.
+- **I95-48931 Service area Highway crash:** Now prevents crashing in SSR's highway process in unusual race conditions when a session's flow is removed before the session is fully established.
 ------
 - **I95-50722 Highway crashes during SSR migration:** Resolved a crash in the SSR's highway process, due to a race condition between configuration changes and BFD sessions.
 ------
