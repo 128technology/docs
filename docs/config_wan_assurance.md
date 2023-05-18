@@ -38,7 +38,7 @@ For detailed information about Mist WAN Assurance, please refer to the [Mist WAN
 
     ![Organization Panel](/img/wan_create_org.png)
 
-    For additional information about creating an Organization, please refer to the Mist [Organization Config documentation](https://www.mist.com/documentation/category/organization-config/).
+    For additional information about creating an Organization, please refer to the Mist [Organization Config documentation](https://www.mist.com/documentation/create-mist-org/).
 
 #### 3. Create one Site for each physical location for onboarding the SSRs.
 
@@ -60,7 +60,7 @@ Create a unique site for each physical (or logical) location in the network. For
 
     ![Session Smart Conductor Address](/img/wanas_conductor_ip_mist.png)
 
-    For information about the fields used to create a site, please refer to the Mist [Site Configuration documentation](https://www.mist.com/documentation/category/site-configuration/).
+    For information about the fields used to create a site, please refer to the Mist [Site Configuration documentation](https://www.mist.com/documentation/mist-edge-getting-started-guide-2/#Create_a_Site_for_Campus_Branches).
 
 :::note
 For existing deployments of Conductor-managed Session Smart Networking, the Conductor IP address is pre-populated.
