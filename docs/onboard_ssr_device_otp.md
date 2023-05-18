@@ -11,7 +11,7 @@ For customers or partners who can access Mist and are not in an "air-gap" networ
 
 ## Re-Imaging Process
 
-The image shipped on the SSR Devices is designed to connect with Mist and Mist WAN Assurance. To use these devices in a conductor-managed environment that does not have access to Mist, re-image the SSR Device with a generally available, package-based, OTP-compatible SSR software release. The minimum requirement for re-imaging is SSR Version 5.4.9. OTP software images are located at the following location:
+The image shipped on the SSR Devices is designed to connect with Mist and Mist WAN Assurance. To use these devices in a conductor-managed environment that does not have access to Mist, re-image the SSR Device with a generally available, package-based, OTP-compatible SSR software release. The minimum requirement for this re-imaging process is SSR Version 5.4.9. OTP software images are located at the following link:
 
 <!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
@@ -21,7 +21,7 @@ You will be prompted for your username and token to access the web page listing 
 See [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso) for important information about the download process.
 
 :::note
-Use of a non-GA software release will void the Juniper device warranty. Refer to [SSR Releases - General Availability](about_releases.mdx#general-availability) for the list of GA releases.
+Use of a non-GA software release will void the Juniper device warranty. Refer to [**SSR Releases - General Availability**](about_releases.mdx#general-availability) for the list of GA releases.
 :::
 
 ### Prerequisites
@@ -61,7 +61,7 @@ The process varies based on the SSR Device, as well as Mac and Windows.
 
 #### SSR1x0 Devices
 
-1. At the instruction in the terminal window: `Press ESC for the boot menu`, do so. 
+1. At the instruction in the terminal window: `Press ESC for boot menu`, do so. 
 
 	![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
 

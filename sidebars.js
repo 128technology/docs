@@ -26,6 +26,7 @@ module.exports = {
       "intro_otp_iso_install",
       "intro_install_quickstart_otpiso",
       "onboard_ssr_to_conductor",
+      "onboard_ssr_device_otp",
     ],
     "Conductor Installation": [
       "install_conductor_overview",
