@@ -49,9 +49,9 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 6.1.3-3
+## Release 6.1.3-4
 
-**Release Date:** May 19, 2023
+**Release Date:** May 22, 2023
 
 ### Resolved Issues
 
