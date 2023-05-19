@@ -3199,6 +3199,14 @@ Enables and configures URL filtering. In order to configure web-filtering, appli
 | timeout | seconds | Default: 5. The amount of time the SSR will wait for a response from Websense. |
 | retries | uint8 | Default: 3. The max attempts to the Websense server when no response is received within the timeout duration. |
 
+:::note
+Increasing the value of the `max-retransmission-attempts-before-allow` should be made with similar increases to the following settings:
+- `authority/session-type/HTTP/intial-timeout` for TCP port 80 sessions
+- `authority/session-type/HTTPS/intial-timeout` for TCP port 443 sessions
+
+The default timeout for these sessions is 10 seconds. Increases to the `max-retransmission-attempts-before-allow` will likely increase overall transmission time. This may cause premature TCP resets to be sent to the client, despite the TCP handshake having completed. 
+:::
+
 ## webserver
 
 #### Path:
