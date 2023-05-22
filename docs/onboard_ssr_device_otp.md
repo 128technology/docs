@@ -3,7 +3,7 @@ title: Onboard an SSR Device using OTP
 sidebar_label: Onboard an SSR Device using OTP
 ---
 
-The steps in this section describe the process of **re-imaging an SSR100 or SSR100 series device** for onboarding to a Conductor using the OTP process. This process is for SSR devices that **cannot** use Mist for onboarding, telemetry, or WAN Assurance. 
+The steps in this section describe the process of **re-imaging an SSR100 or SSR1000 series device** for onboarding to a Conductor using the OTP process. This process is for SSR devices that **cannot** use Mist for onboarding, telemetry, or WAN Assurance. 
 
 :::important
 For customers or partners who can access Mist and are not in an "air-gap" network, the easiest way to onboard an SSR device is to configure an account on Mist (this is free), and onboard to a conductor using ZTP. This provides a simple conductor onboarding process, and does not require access to Mist after the onboarding. See [ZTP Onboarding to a Conductor.](config_wan_assurance.md) **This process provides the ability to perform conductor-managed onboarding for customers who will not be using Mist Telemetry or WAN Assurance.**  
@@ -20,8 +20,9 @@ You will be prompted for your username and token to access the web page listing 
 
 See [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso) for important information about the download process.
 
-:::note
-Use of a non-GA software release will void the Juniper device warranty. Refer to [**SSR Releases - General Availability**](about_releases.mdx#general-availability) for the list of GA releases.
+:::info
+- Use of a non-GA software release will void the Juniper device warranty. Refer to [**SSR Releases - General Availability**](about_releases.mdx#general-availability) for the list of GA releases.
+- During the re-imaging process, the claim information that is integrated into the ODM image shipped with the device is removed. If the SSR device is later onboarded into Mist, it will not be identified as a Juniper SSR device because of the missing claim information, but will be seen as a whitebox device running SSR software. 
 :::
 
 ### Prerequisites

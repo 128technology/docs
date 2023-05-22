@@ -11,7 +11,7 @@ For details about WAN Assurance offerings;
 - See [Mist WAN Assurance](https://www.juniper.net/documentation/product/us/en/mist-wan-assurance/) for information about Mist-managed deployments.
 
 :::note
-The Mist-redirect ZTP process for Conductor-managed deployments is only supported on Juniper branded hardware devices - SSR1x0/1x00.
+The Mist-redirect ZTP process for Conductor-managed deployments is only supported on Juniper SSR100 or SSR1000 series devices.
 :::
 
 #### High Level Steps:
