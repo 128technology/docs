@@ -3,7 +3,7 @@ title: Onboard an SSR Device to a Conductor
 sidebar_label: Onboard an SSR Device to a Conductor
 ---
 
-The steps in this section describe the process of onboarding an SSR1x0/1x00 to a Conductor using the Mist-redirect ZTP (Zero Touch Provisioning) process, without Cloud Telemetry (WAN Assurance Telemetry) integration. This procedure requires an account, organization, and sites configured on the Mist portal, and provides steps to configure those items.
+The steps in this section describe the process of onboarding SSR100 or SSR1000 series devices to a Conductor using the Mist-redirect ZTP (Zero Touch Provisioning) process, without Cloud Telemetry (WAN Assurance Telemetry) integration. This procedure requires an account, organization, and sites configured on the Mist portal, and provides steps to configure those items.
 
 For details about WAN Assurance offerings; 
 
@@ -25,9 +25,9 @@ The Mist-redirect ZTP process for Conductor-managed deployments is only supporte
 
 ## Conductor Provisioning
 
-The SSR Device must have a configuration provisioned on the managing Conductor **before** powering up and onboarding the SSR device. That can include either importing a configuration, or manually generating the configuration on the conductor. 
+The SSR device must have a configuration provisioned on the managing Conductor **before** powering up and onboarding the SSR device. That can include either importing a configuration, or manually generating the configuration on the conductor. 
 
-Additionally, the conductor uses the asset ID to recognize the SSR device and associate it to a logically configured router. For the SSR to be onboarded to the conductor, this match has to be made for the appropriate router in the configuration. It is crucial to verify the Asset ID for the SSR Device when provisioning the router configuration on the conductor. 
+Additionally, the conductor uses the asset ID to recognize the SSR device and associate it to a logically configured router. For the SSR to be onboarded to the conductor, this match has to be made for the appropriate router in the configuration. It is crucial to verify the Asset ID for the SSR device when provisioning the router configuration on the conductor. 
 
 It is strongly recommended to configure the SSR WAN and LAN interfaces to match the ports identified as the WAN and LAN ports in the documentation (see below).
 
@@ -83,7 +83,7 @@ When onboarding an SSR device to an existing Conductor-managed deployment, the e
 Before powering on the SSR, it is important to verify that the Conductor this SSR will be connecting to **has a valid configuration** for the SSR to download. See Provisioning Notes above.
 :::
 
-Once the conductor IP address has been configured, it is time to connect and power up your SSR Device.
+Once the conductor IP address has been configured, it is time to connect and power up your SSR device.
 
 ![Device Connections](/img/intro_wa_ssr120_quickstart_1.png)
 

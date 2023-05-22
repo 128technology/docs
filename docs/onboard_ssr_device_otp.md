@@ -3,15 +3,15 @@ title: Onboard an SSR Device using OTP
 sidebar_label: Onboard an SSR Device using OTP
 ---
 
-The steps in this section describe the process of **re-imaging an SSR1x0 or SSR1x00** for onboarding to a Conductor using the OTP process. This process is for SSR devices that **cannot** use Mist for onboarding, telemetry, or WAN Assurance. 
+The steps in this section describe the process of **re-imaging an SSR100 or SSR100 series device** for onboarding to a Conductor using the OTP process. This process is for SSR devices that **cannot** use Mist for onboarding, telemetry, or WAN Assurance. 
 
 :::important
-For customers or partners who can access Mist and are not in an "air-gap" network, the easiest way to onboard an SSR Device is to configure an account on Mist (this is free), and onboard to a conductor using ZTP. This provides a simple conductor onboarding process, and does not require access to Mist after the onboarding. See [ZTP Onboarding to a Conductor.](config_wan_assurance.md) **This process provides the ability to perform conductor-managed onboarding for customers who will not be using Mist Telemetry or WAN Assurance.**  
+For customers or partners who can access Mist and are not in an "air-gap" network, the easiest way to onboard an SSR device is to configure an account on Mist (this is free), and onboard to a conductor using ZTP. This provides a simple conductor onboarding process, and does not require access to Mist after the onboarding. See [ZTP Onboarding to a Conductor.](config_wan_assurance.md) **This process provides the ability to perform conductor-managed onboarding for customers who will not be using Mist Telemetry or WAN Assurance.**  
 :::
 
 ## Re-Imaging Process
 
-The image shipped on the SSR Devices is designed to connect with Mist and Mist WAN Assurance. To use these devices in a conductor-managed environment that does not have access to Mist, re-image the SSR Device with a generally available, package-based, OTP-compatible SSR software release. The minimum requirement for this re-imaging process is SSR Version 5.4.9. OTP software images are located at the following link:
+The image shipped on the SSR devices is designed to connect with Mist and Mist WAN Assurance. To use these devices in a conductor-managed environment that does not have access to Mist, re-image the SSR device with a generally available, package-based, OTP-compatible SSR software release. The minimum requirement for this re-imaging process is SSR Version 5.4.9. OTP software images are located at the following link:
 
 <!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
@@ -34,16 +34,16 @@ Use of a non-GA software release will void the Juniper device warranty. Refer to
 
 ## OTP Re-Imaging Process
 
-The process varies based on the SSR Device, as well as Mac and Windows. 
+The process varies based on the SSR device, as well as Mac and Windows. 
 
 ### Mac Re-Imaging Process
 
 #### Use the following procedure to re-image SSR Devices:
 
 1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
-2. Connect the RJ45/USB cable to the console port on the SSR1x0/1x00.
+2. Connect the RJ45/USB cable to the console port on the SSR device.
 3. Connect the USB end of the cable to your computer.
-4. Connect the power input to the back of the SSR1x0/1x00, but do not power it up. 
+4. Connect the power input to the back of the SSR device, but do not power it up. 
 5. Open a terminal window.
 6. Run the following command to identify the USB port: 
 ```
@@ -57,9 +57,9 @@ The process varies based on the SSR Device, as well as Mac and Windows.
 9. Press Enter.
 10. Insert your USB with the new ISO image into the USB port of the SSR device.
 11. Power up the SSR device. 
-12. Use the instructions below appropriate for your device (SSR1x0 or SSR1x00) to complete the re-imaging process.
+12. Use the instructions below appropriate for your device (SSR100 or SSR1000 series) to complete the re-imaging process.
 
-#### SSR1x0 Devices
+#### SSR100 Series Devices
 
 1. At the instruction in the terminal window: `Press ESC for boot menu`, do so. 
 
@@ -72,7 +72,7 @@ The process varies based on the SSR Device, as well as Mac and Windows.
 3. Select the image for your install.
 4. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.mdx#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
 
-#### SSR1x00 Devices
+#### SSR1000 Series Devices
 
 1. At the instruction in the terminal window: `Press <Tab> or <DEL> to enter Setup`, do so.
 
@@ -89,18 +89,18 @@ The process varies based on the SSR Device, as well as Mac and Windows.
 ### Windows Re-Imaging Process
 
  1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
-2. Connect the RJ45/USB cable to the console port on the SSR1x0/1x00.
+2. Connect the RJ45/USB cable to the console port on the SSR device.
 3. Connect the USB end of the cable to your laptop.
-4. Connect the power input to the back of the SSR1x0/1x00, but do not power it up. 
+4. Connect the power input to the back of the SSR device, but do not power it up. 
 5. From the Windows Device Manager, open a [PuTTY](https://www.putty.org/) session, and select the serial port and baud rate.
 	
 	![PuTTY window](/img/putty-window.png)
 
-6. Insert your USB with the new ISO image into the USB port of the SSR1x0/1x00.
+6. Insert your USB with the new ISO image into the USB port of the SSR device.
 7. Power up the SSR device. 
-8. Use the instructions below appropriate for your device (SSR1x0 or SSR1x00) to complete the re-imaging process.
+8. Use the instructions below appropriate for your device (SSR100 or SSR1000 series) to complete the re-imaging process.
 
-#### SSR1x0 Devices:
+#### SSR100 Series Devices:
 
 1. At the instruction in the terminal window: `Press ESC for the boot menu`, do so. 
 
@@ -109,7 +109,7 @@ The process varies based on the SSR Device, as well as Mac and Windows.
 2. From the boot menu, type the boot device number and press Enter.
 3. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.mdx#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
 
-#### SSR1x00 Devices
+#### SSR1000 Series Devices
 
 1. At the instruction in the terminal window: `Press <Tab> or <DEL> to enter Setup`, do so.
 
