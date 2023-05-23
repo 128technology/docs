@@ -3204,7 +3204,7 @@ Increasing the value of the `max-retransmission-attempts-before-allow` should be
 - `authority/session-type/HTTP/intial-timeout` for TCP port 80 sessions
 - `authority/session-type/HTTPS/intial-timeout` for TCP port 443 sessions
 
-The default timeout for these sessions is 10 seconds. Increases to the `max-retransmission-attempts-before-allow` will likely increase overall transmission time. This may cause premature TCP resets to be sent to the client, despite the TCP handshake having completed. 
+The default timeout for these sessions is 10 seconds. Increases to the `max-retransmission-attempts-before-allow` will likely increase overall transmission time in the presence of classification failures. This may cause premature TCP resets to be sent to the client, despite the TCP handshake having completed. 
 :::
 
 ## webserver
