@@ -35,11 +35,9 @@ See [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso) for import
 
 ## OTP Re-Imaging Process
 
-The process varies based on the SSR device, as well as Mac and Windows. 
+The process varies based on the SSR device, as well as Mac and Windows. Use the following procedures for the serial connection and set up and device specific re-imaging.
 
-### Mac Re-Imaging Process
-
-#### Use the following procedure to re-image SSR Devices:
+### Mac Serial Connection and Set-up
 
 1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
 2. Connect the RJ45/USB cable to the console port on the SSR device.
@@ -60,73 +58,42 @@ The process varies based on the SSR device, as well as Mac and Windows.
 11. Power up the SSR device. 
 12. Use the instructions below appropriate for your device (SSR100 or SSR1000 series) to complete the re-imaging process.
 
+### Windows Serial Connection and Set-up 
+
+1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
+2. Connect the RJ45/USB cable to the console port on the SSR device.
+3. Connect the USB end of the cable to your laptop.
+4. Connect the power input to the back of the SSR device, but do not power it up. 
+5. From the Windows Device Manager, open a [PuTTY](https://www.putty.org/) session, and select the serial port and baud rate.
+ ![PuTTY window](/img/putty-window.png)
+6. Insert your USB with the new ISO image into the USB port of the SSR device.
+7. Power up the SSR device. 
+8. Use the instructions below appropriate for your device (SSR100 or SSR1000 series) to complete the re-imaging process.
+
+### Device Re-imaging
+
+Use the process specific to your device to complete the re-imaging process. 
+
 #### SSR100 Series Devices
 
 1. At the instruction in the terminal window: `Press ESC for boot menu`, do so. 
+ ![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
+2. From the boot menu, select the USB Boot device and press Enter; or enter the boot device number and press Enter. 
 
-	![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
-
-2. From the boot menu, select the USB Boot device and press Enter; or enter the boot device number and press Enter.
-
-	![Select Boot Device](/img/onboard_otp_boot_device.png)
-
+ ![Select Boot Device](/img/onboard_otp_boot_device.png)
 3. Select the image for your install.
 4. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.mdx#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
 
 #### SSR1000 Series Devices
 
 1. At the instruction in the terminal window: `Press <Tab> or <DEL> to enter Setup`, do so.
-
-	![Setup Menu Prompt](/img/1x00_setup_menu.png)
-
+ ![Setup Menu Prompt](/img/1x00_setup_menu.png)
 2. When the Setup Utility window appears, use the left and right arrow keys to navigate to the `Save & Exit` tab.
+
+ ![Setup Utility](/img/setup-menu-prompt.png)
 3. Use the up and down arrow keys to highlight the boot device in the the Boot Override list.
 
-	![Boot Override list](/img/1x00_boot-override.png)
-
+ ![Boot Override list](/img/1x00_boot-override.png)
 4. Press Enter to confirm boot from the USB device.
 5. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.mdx#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
-
-### Windows Re-Imaging Process
-
- 1. Use the procedure [Creating a Bootable USB from an ISO](intro_creating_bootable_usb.md) to download the package-based ISO and create a bootable USB. Once you have completed that step, continue below. 
-2. Connect the RJ45/USB cable to the console port on the SSR device.
-3. Connect the USB end of the cable to your laptop.
-4. Connect the power input to the back of the SSR device, but do not power it up. 
-5. From the Windows Device Manager, open a [PuTTY](https://www.putty.org/) session, and select the serial port and baud rate.
-	
-	![PuTTY window](/img/putty-window.png)
-
-6. Insert your USB with the new ISO image into the USB port of the SSR device.
-7. Power up the SSR device. 
-8. Use the instructions below appropriate for your device (SSR100 or SSR1000 series) to complete the re-imaging process.
-
-#### SSR100 Series Devices:
-
-1. At the instruction in the terminal window: `Press ESC for the boot menu`, do so. 
-
-	![Boot Menu prompt](/img/onboard_otp_boot_device.png)
-
-2. From the boot menu, type the boot device number and press Enter.
-3. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.mdx#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
-
-#### SSR1000 Series Devices
-
-1. At the instruction in the terminal window: `Press <Tab> or <DEL> to enter Setup`, do so.
-
-	![Setup Menu Prompt](/img/1x00_setup_menu.png)
-
-2. When the Setup Utility window appears, use the left and right arrow keys to navigate to the `Save & Exit` tab.
-	
-	![Setup Utility](/img/setup-menu-prompt.png)
-
-3. Use the up and down arrow keys to highlight the boot device in the the Boot Override list.
-
-	![Boot Override list](/img/1x00_boot-override.png)
-
-4. Press Enter to confirm boot from the USB device.
-5. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.mdx#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
-
-
-
 
