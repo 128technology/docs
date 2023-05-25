@@ -43,18 +43,16 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 	- Enforce setting of packet location.
 	- Add the ability to walk packet buffer pools, count the locations, and display.
 ------
-- **I95-51169 Buffer tracking improvements:** The following improvements have been made to Buffer Tracking:
+- **I95-51169, I95-51173 Buffer tracking improvements:** The following improvements have been made to Buffer Tracking:
 	- Refined packet buffer location tracking to better identify buffers in use for `TSI` collection.
 	- Added new metrics for tracking utilization of packet pools.
 	- Provide more diagnostic information, when possible.
 ------
 - **I95-51316 Add Resynchronization state:** Transition an asset into the `Resynchronizing` state instead of `Connected` when a configuration change is made, or when the user executes the `send command sync` command from the PCLI. This better identifies the actions being performed within the SSR, and is not an indicator of the device health. Previously when an asset required a highstate due to a config change or running the `sync` command, the device would transition to `Connected` from `Running`, which caused concern with users.  
-------
-- **I95-51378 Improve metrics for REST API performance:** Performance improvements have been made in metrics REST APIs to alleviate intermittent metrics graphs on heavily loaded systems.
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-48448, I95-49456, I95-50506, I95-50508, I95-50535, I95-50790.
+- **The following CVE's have been identified and addressed in this release:** I95-48448, I95-49456, I95-50358, I95-50359, I95-50506, I95-50508, I95-50535, I95-50790.
 ------
 - **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
 :::important
@@ -116,6 +114,8 @@ and there are established flows for any of these services, a link flap triggerin
 ------
 - **I95-50554 No dynamic synchronization of repos to the routers:** Resolved an issue where it was necessary to restart 128T on the Conductor in order for the Conductor to recognize newly added repositories and sync them down to the assets. Authenticated repos are now automatically synchronized when repos are added to the conductor.
 ------
+- **I95-50656 Improve metrics for REST API performance:** Performance improvements have been made in metrics REST APIs to alleviate intermittent metrics graphs on heavily loaded systems.
+------
 - **I95-50710 Configuration cannot be applied to router when its time is ahead of the conductor:** Implemented time detection for configurations using a future time that is corrected upon commit. This resulted in an `mtime` older than what is in the datastore, and the configurations were rejected.
 ------
 - **I95-50736 SSH key change not propogated to secondary conductor:** Resolved an issue where an SSH key change to `/etc/128technology/ssh/pdc_ssh_key` was not automatically detected and resynced between peer node and conductor nodes.
@@ -141,6 +141,8 @@ and there are established flows for any of these services, a link flap triggerin
 - **I95-51044 Hide `forwarding-core-mode` on conductor:** Disabled the `forwarding-core-mode` setting on conductor nodes, since this setting doesn't apply to conductor.
 ------
 - **I95-51087 SSR fails to download firmware after upgrading the conductor:** Resolved an issue where the first time a conductor is upgraded and **conductor-only** is selected in the software-update settings, the proxy service on the conductor does not work correctly, and downloads fail. The downloads no longer fail. 
+------
+- **WAN-1958 Mist agent crashes:** Increased internal file system limits which were preventing some services from starting correctly at boot. Limits were raised based on expected system usage.
 
 ## Release 5.6.7-4
 
