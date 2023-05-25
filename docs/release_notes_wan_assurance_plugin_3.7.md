@@ -2,6 +2,32 @@
 title: WAN Assurance Plugin 3.7 Release Notes
 sidebar_label: '3.7'
 ---
+## Release 3.7.3
+**Release Date:** May 25, 2023
+
+### New Features
+- **WAN-965 Support sending URL filtering block events to MIST cloud**
+
+- **WAN-1751 Support fast updates for interface and peer path status on the MIST UI**
+
+### Resolved Issues
+
+- **WAN-1816 Mist agent monitoring fails and mist agent does not restart**
+
+  _**Resolution:**_ The logic to inspect the failure of monitoring agent service was made more robust.
+
+- **WAN-1883 Application summary data is not visible on the MIST UI due to negative values in the data**
+
+  _**Resolution:**_ Handle errors in the application summary document more gracefully by dropping negative value samples.
+
+- **WAN-1914 Packet capture feature on MIST UI is not capturing any packets with reason "Backend could not process"**
+
+  _**Resolution:**_ Handle multiple ongoing PCAPs more gracefully when the process restarts in the middle of a previous capture.
+
+- **WAN-1932 SSR stops sending stats and events but stays connected**
+
+  _**Resolution:**_ Prevent a dead lock condition while sending events when cloud connection transitions from disconnect to connect.
+
 ## Release 3.7.2
 **Release Date:** Apr 26, 2023
 
