@@ -46,11 +46,11 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 - **I95-51169, I95-51173 Buffer tracking improvements:** The following improvements have been made to Buffer Tracking:
 	- Refined packet buffer location tracking to better identify buffers in use for `TSI` collection.
 	- Provide more diagnostic information, when possible.
-	- Added the following new metrics for tracking utilization of packet pools:
-		- `FastLanePacketPool`
-		- `GenPktMbufPool`
-		- `TcpProxyMbufPool`
-		- `RightLanePacketPool`
+	- The following new metrics have been added for tracking utilization of packet pools. These can be found under `show stats packet-processing pool-utilization`. 
+		- `fastlane-generated-packet-pool`
+		- `host-packet-pool`
+		- `network-packet-pool`
+		- `tcp-proxy-packet-pool`
 ------
 - **I95-51316 Add Resynchronization state:** Transition an asset into the `Resynchronizing` state instead of `Connected` when a configuration change is made, or when the user executes the `send command sync` command from the PCLI. This better identifies the actions being performed within the SSR, and is not an indicator of the device health. Previously when an asset required a highstate due to a config change or running the `sync` command, the device would transition to `Connected` from `Running`, which caused concern with users.  
 
