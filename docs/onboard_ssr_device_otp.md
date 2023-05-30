@@ -77,7 +77,7 @@ Use the process specific to your device to complete the re-imaging process.
 
 1. At the instruction in the terminal window: `Press ESC for boot menu`, do so. 
  ![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
-2. From the boot menu, enter the boot device number and press Enter. 
+2. From the boot menu, enter the boot device number corresponding to the USB, and press Enter. 
 
  ![Select Boot Device](/img/onboard_otp_boot_device.png)
 3. When the USB installer boot menu is displayed, follow the [Installing SSR Using OTP](intro_otp_iso_install.mdx#installing-ssr-using-one-touch-provisioning-otp) instructions to complete the installation process.
