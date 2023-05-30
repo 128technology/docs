@@ -215,15 +215,15 @@ The 128Technology Enterprise number is 29035.
 | Destination Port | 11 |
 | Destination IPV4 | 12 |
 | Egress Interface | 14 |
-| vlanId | 58 |
-| postVlanId | 59 |
+| Ingress Interface VLAN ID | 58 |
+| Egress Interface VLAN ID | 59 |
 | Interface Name (Ingress) | 82 |
-| flowStartMilliseconds | 152 |
-| flowEndMilliseconds | 153 |
+| First Packet Flow Timestamp | 152 |
+| Last Packet Flow Timestamp | 153 |
 | Selector Name | 335 |
 
 :::note
-The standard fields for `vlanId`, `postVlanId`, `flowStartMilliseconds`, and `flowEndMilliseconds` have been added to the following software streams:
+The standard fields for `Ingress Interface VLAN ID`, `Egress Interface VLAN ID`, `First Packet Flow Timestamp`, and `Last Packet Flow Timestamp` have been added to the following software streams:
 - 5.6.x: Beginning with 5.6.8
 - 6.1.x: Beginning with 6.1.2
 ::: 
