@@ -1,6 +1,6 @@
 ---
-title: "SNMP: User defined metrics"
-sidebar_label: "SNMP: User defined metrics"
+title: "SNMP - User defined metrics"
+sidebar_label: "SNMP - User defined metrics"
 ---
 Because of the large numbers of metrics available in the SSR platform and because only a fraction of these are useful for a functional Network Management System (NMS) the t128MetricsTable is only populated with a few metrics by default. If required, any SSR metric can be provided in this table via a user configurable JSON file.
 

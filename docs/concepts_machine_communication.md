@@ -62,7 +62,7 @@ In many common deployment scenarios, the SSR software is deployed as "hub-and-sp
 ### Firewall Detector
 | Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
 | ------------- | ---------- | ---------------------- | ---------------------- | ---------------- | ------------------------------------------------------------ |
-| bidirectional | 1280/TCP   | 6516                   | 6516                   | 300s             | Rate can be adjusted by setting `udp-transform/detect-interval` or disabled by setting `udp-transform/mode` to `always-transform`. |
+| bidirectional | 1280 and 1283/TCP   | 6516                   | 6516                   | 300s             | Rate can be adjusted by setting `udp-transform/detect-interval` or disabled by setting `udp-transform/mode` to `always-transform`. |
 
 Each SSR periodically sends _firewall detector_ packets on each peer path to determine if stateful firewalls exist on the peer path. Firewalls between SSR devices can interfere with SVR behavior; because of this, the firewall detector is used to automatically trigger a _UDP transform_ feature, to carry SVR over UDP when firewalls would otherwise block TCP. The status of the firewall detector is show in the PCLI in the output of `show udp-transform`:
 
@@ -222,10 +222,3 @@ The connection between the router and conductor is refreshed every five seconds 
 The Dynamic Peer Update (DPU) process supplies dynamic IP address information from a router to conductor, which will then propagate that information down to all routers that create adjacencies to that address. When a `network-interface` that uses dynamic addressing (e.g., DHCP, PPPoE) acquires an address for the first time or changes its address, that information is sent to conductor via DPU.
 
 The status of the DPU exchange is shown in the output of the PCLI command `show dynamic-peer-update`.
-
-### NETCONF
-| Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval          | Notes                                                        |
-| ------------- | ---------- | ---------------------- | ---------------------- | ------------------------- | ------------------------------------------------------------ |
-| bidirectional | 830/TCP    | Variable                    | Variable                    | Variable | Amount of data exchanged based on size of configuration requested, added, or modified. |
-
-If you are using a version earlier than 5.3 and managing the conductor using NETCONF, it may also be necessary to open port 830/TCP.
