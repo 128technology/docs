@@ -22,7 +22,6 @@ See [Downloading an ISO](intro_downloading_iso.md#downloading-an-iso) for import
 
 :::info
 - Use of a non-GA software release will void the Juniper device warranty. Refer to [**SSR Releases - General Availability**](about_releases.mdx#general-availability) for the list of GA releases.
-- During the re-imaging process, the claim information that is integrated into the ODM image shipped with the device is removed. If the SSR device is later onboarded into Mist, it will not be identified as a Juniper SSR device because of the missing claim information, but will be seen as a whitebox device running SSR software. 
 :::
 
 ### Prerequisites
