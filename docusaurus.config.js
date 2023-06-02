@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   title: 'SSN Docs',
   tagline: 'The documentation source for the Session Smart Networking Platform',
