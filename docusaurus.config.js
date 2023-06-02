@@ -3,7 +3,7 @@ module.exports = {
   tagline: 'The documentation source for the Session Smart Networking Platform',
   url: 'https://docs.128technology.com',
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
   organizationName: '128technology', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
@@ -20,17 +20,17 @@ module.exports = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'Session Smart',
+      title: '',
       logo: {
         alt: 'Juniper Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo.png',
         srcDark: 'img/logo_dark.png',
       },
       items: [
         {to: 'docs/intro_getting_started', label: 'Docs', position: 'right'},
         {
           href: 'https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c',
-          label: 'Session Smart Community',
+          label: 'Community',
           position: 'right',
         },
         {
