@@ -13,7 +13,7 @@ The `idp-policy` has three profiles that can be applied to an `access-policy`; A
 
 In the following example, all internet traffic originating from the `corporate` tenant identified as malicious or threatening receives a `strict` policy enforcement. Traffic originating from the `guest` tenant that is identified as malicious or threatening only triggers an alert. This means that the same threat entering two different network segments receives different treatment, allowing the administrator to enforce the right level of protection based on corporate policies.
 
-### Configuration
+## Configuration
 
 In the following example configuration, three access policies are defined for the service `internet`.
 
@@ -46,7 +46,7 @@ exit
 
 ```
 
-### Tenant Configuration
+## Tenant Configuration
 
 IDP requires clear association of subnet to tenant; it is best to define the association as tenant-prefix:
 
@@ -99,4 +99,38 @@ config
 
 The IDP engine runs on each node of the system. Traffic is always sent to the IDP instance on the first node - per the order in configuration. Upon failover, the existing sessions do not gracefully failover; the TCP sessions are reset, and new sessions must be established by the client. For UDP sessions, the same best effort behavior can be expected from the IDP engine.
 
+## Custom IDP Policies and Rules
 
+The following is an example workflow:
+- An IDP policy is put in place.
+- Security events are triggered because traffic typical for that network configuration is considered a risk.
+- Create a custom IDP profile in the Authority Settings configuration that can be referenced in the `access-policy`. 
+
+### Configuration
+
+1. Navigate to the IDP Profile feature. 
+    Authority>Authority Settings>IDP Profiles
+![Add IDP Profile](/img/auth-settings-idp-profiles.png)
+
+2. Click ADD.
+3. Enter a Profile Name and click Save. The IDP Profiles configuration screen opens.
+![Configure the IDP Profile](/img/idp-profiles.png)
+
+4. In the Base Policy, select an existing policy to customize. 
+5. To add custom rules, select ADD in the Rules field. 
+6. Name the New item and click Save. This opens the settings for the new rule.
+7. Identify the following items that will be compared for a match:
+
+:::note
+To populate the Rules fields shown below, use the information available on the Security Events screen or from the [`show idp-events`](concepts_ssr_idp.md#security-events-dashboard) command.
+:::
+- Client IP Address prefix
+- Destination IP Address
+- Vulnerability 
+- Severity
+- Action Options 
+
+![New Rule Settings](/img/idp-profiles-rules.png)
+After creating the custom ruleset, use the `access-policy` as shown in the [Configuration section above](#configuration) to define the IDP policy where this custom ruleset is used. 
+
+**still need PCLI example of configuration, for consistency**
