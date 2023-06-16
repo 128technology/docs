@@ -1,23 +1,13 @@
 ---
-Title: Multicast
-Sidebar_label: Multicast
+title: Multicast
+sidebar_label: Multicast
 ---
 
-The following Multicast overview is a condensed collection of information from the [Juniper Multicast Overview](https://www.juniper.net/documentation/us/en/software/junos/multicast/topics/concept/multicast-ip-overview.html). Please refer to that document for more in-depth information about Multicast. 
-
-## Overview 
-Multicast is a one-to-many distribution of traffic; from one source to multiple destinations that have expressed an interest in receiving the traffic. Multicast traffic streams typically contain video, audio, or both, between a single server source and many client receivers.
-
-A multicast address is used to send a datagram to a set of hosts that can be on different subnetworks and are configured as members of a **multicast group**.
-
-Individual hosts can join or leave a multicast group at any time. There are no restrictions on the physical location or the number of members in a multicast group. A host can be a member of more than one multicast group at any time. A host does not have to belong to a group to send packets to members of a group.
-Routers use a group membership protocol to learn about the presence of group members on directly attached subnetworks. When a host joins a multicast group, it transmits a group membership protocol message for the group or groups that it wants to receive and sets its IP process and network interface card to receive frames addressed to the multicast group.
-
-Multicast traffic lies between the extremes of unicast (one source, one destination) and broadcast (one source, all destinations). Multicast is a “one source, many destinations” method of traffic distribution, meaning only the destinations that explicitly indicate their need to receive the information from a particular source receive the traffic stream.
+Multicast is a “one source, many destinations” method of traffic distribution, meaning only the destinations that explicitly indicate their need to receive the information from a particular source receive the traffic stream.
 
 Network applications that can function with unicast but are better suited for multicast include collaborative groupware, teleconferencing, periodic or “push” data delivery (stock quotes, sports scores, magazines, newspapers, and advertisements), server or website replication, and distributed interactive simulation (DIS) such as war simulations or virtual reality. Any IP network concerned with reducing network resource overhead for one-to-many or many-to-many data or multimedia applications with multiple receivers benefits from multicast.
 
-A single source of multicast packets finds its way to every interested receiver. As with broadcast, the transmitting host generates only a single stream of IP packets, so the load remains constant whether there is one receiver or one million. The network routing devices replicate the packets and deliver the packets to the proper receivers, but only the replication role is a new one for routing devices. The links leading to subnets consisting of entirely uninterested receivers carry no multicast traffic. Multicast minimizes the burden placed on sender, network, and receiver.
+Please refer to the [Juniper Multicast Overview](https://www.juniper.net/documentation/us/en/software/junos/multicast/topics/concept/multicast-ip-overview.html) for more in-depth information about Multicast. 
 
 ## Multicast on the SSR 
 
@@ -30,11 +20,11 @@ Multicast on the SSR supports the following protocols and topology:
 
 ### Multicast Configuration
 
-The following components are necessary to configure multicast on the SSR. Configuration for each of the components is provided below, and a full example configuration is provided at the end of this process. 
-
 :::note
-BGPoSVR is a prerequisite for Multicast over SVR.
+BGP over SVR is a prerequisite for Multicast over SVR.
 :::
+
+The following components are necessary to configure multicast on the SSR. Configuration for each of the components is provided below, and a full example configuration is provided at the end of this process. 
 
 - Routing Interface: Specify the BGP over SVR interface
 - BGP over SVR: See [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) for configuration details. 
@@ -50,7 +40,7 @@ BGPoSVR is a prerequisite for Multicast over SVR.
 
 Use the following steps to generate a simple Multicast configuration. 
 
-1. Routing default interface 
+1. Define the routing default interface.
 ``` 
            routing               default-instance
                 type              default-instance
@@ -60,7 +50,7 @@ Use the following steps to generate a simple Multicast configuration.
                     ip-address  10.5.0.1
                 exit
 ```
-2. [BGP over SVR](config_bgp#bgp-over-svr-bgposvr) 
+2. [BGP over SVR](config_bgp#bgp-over-svr-bgposvr). 
 ```
                 routing-protocol  bgp
                     type            bgp
@@ -97,12 +87,12 @@ Use the following steps to generate a simple Multicast configuration.
                     exit
                 exit
 ```
-3. Routing protocol (igmp) that defines an interface and igmp version, as well as the IGMP Joined Group.
+3. Add the routing protocol (IGMP) that defines an interface and IGMP version, as well as the IGMP Joined Group.
 ```
 				    igmp
 
-                    interface  T280_DUT5 lan1
-                        node       T280_DUT5
+                    interface  Boston lan1
+                        node       Boston
                         interface  lan1
 
                         join       226.0.0.10
@@ -131,8 +121,8 @@ Use the following steps to generate a simple Multicast configuration.
                         exit
                     exit
 
-                    interface  T280_DUT5 lan2
-                        node       T280_DUT5
+                    interface  Boston lan2
+                        node       Boston
                         interface  lan2
 
                         join       226.0.0.10
@@ -154,13 +144,13 @@ Use the following steps to generate a simple Multicast configuration.
 ```
                 pim
 
-                    interface  T280_DUT5 lan1
-                        node       T280_DUT5
+                    interface  Boston lan1
+                        node       Boston
                         interface  lan1
                     exit
 
-                    interface  T280_DUT5 lan2
-                        node       T280_DUT5
+                    interface  Boston lan2
+                        node       Boston
                         interface  lan2
                     exit
 
@@ -176,13 +166,13 @@ Use the following steps to generate a simple Multicast configuration.
                 exit
             exit
 ```
-5. Define the Multicast Tenant
+5. Define the Multicast Tenant.
 ```
         tenant             multicast
             name  multicast
         exit
 ```
-6. Create the Service 
+6. Create the Service. 
 ```
         service            customerA-mc
             name                     customerA-mc
@@ -195,7 +185,7 @@ Use the following steps to generate a simple Multicast configuration.
                 source  customerB
             exit
 ```
-8. Multicast sender policy: Name the policy, and indicate the source
+8. Multicast sender policy: Name the policy, and indicate the source.
 ```
             multicast-sender-policy  multicast
                 source  multicast
@@ -204,20 +194,23 @@ Use the following steps to generate a simple Multicast configuration.
 ```
 
 ## Show Commands
+
 Each of the commands listed below and the subcommands for each, provide additional details for multicast visibility. Use the links to learn more about each command.
 
-| command | description |
+| Command | Description |
 | ------- | ----------- |
-| show igmp interface | Display the igmp interfaces | 
-| show igmp groups  |  | 
-| show pim mroute [A.B.C.D [A.B.C.D] |   | 
-| show pim interface |   | 
-| show pim join |   | 
-| show pim neighbor |   | 
-| show pim rp-info |   | 
-| show pim state |   | 
+| [show igmp interface](cli_reference.md#show-igmp-interface) | Display the igmp interfaces | 
+| [show igmp groups](cli_reference.md#show-igmp-groups) | Display the igmp groups | 
+| [show pim mroute](cli_reference.md#show-pim-mroute) | Display the PIM mroute | 
+| [show pim interface](cli_reference.md#show-pim-interface) | Display the PIM interface | 
+| [show pim join](cli_reference.md#show-pim-join) | Display the PIM Joins | 
+| [show pim neighbor](cli_reference.md#show-pim-neighbor) | Display the PIM neighbor |
+| [show pim rp-info](cli_reference.md#show-pim-rp-info) | Display the PIM RP info | 
+| [show pim state](cli_reference.md#show-pim-state) | Display the PIM state | 
 
-Note that each show command allows a vrf option:
+:::note
+Each show command allows a vrf option:
 `show ip igmp [vrf <vrfname>]` 
+:::
 
 
