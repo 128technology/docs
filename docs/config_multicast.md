@@ -31,7 +31,7 @@ The following components are necessary to configure multicast on the SSR. Config
 - Routing protocol such as IGMPv2/v3
 - PIM
 - RP
-- Tenant: defined as multicast. For additional info about Tenants, see [Tenants](config_tenants/md)
+- Tenant: defined as multicast. For additional info about Tenants, see [Tenants](config_tenants.md)
 - Service: Services are created for the multicast traffic, and defined for the Group address.
 - Access Policy: Allows receivers on the outgoing interfaces
 - Multicast sender policy: Allows the sources to send for the Multicast Group (clarify this) 
@@ -50,7 +50,7 @@ Use the following steps to generate a simple Multicast configuration.
                     ip-address  10.5.0.1
                 exit
 ```
-2. [BGP over SVR](config_bgp#bgp-over-svr-bgposvr). 
+2. [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr). 
 ```
                 routing-protocol  bgp
                     type            bgp
