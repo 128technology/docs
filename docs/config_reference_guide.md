@@ -1992,7 +1992,7 @@ Enables and configures Q-in-Q encapsulation on the interface.
 #### Version History:
 | Release | Modification |
 | --- | --- |
-| 6.1.4-R2 | Introduced |
+| 4.5.1 | Introduced |
 
 ## reachability-detection
 
@@ -3255,7 +3255,7 @@ Enables and configures VRRP use on the interface.
 #### Version History:
 | Release | Modification |
 | --- | --- |
-| 6.1.4-R2 | Introduced |
+| 5.4.0 | Introduced |
 
 ## web-filtering
 
