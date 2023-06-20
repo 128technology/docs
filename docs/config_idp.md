@@ -108,8 +108,7 @@ The following is an example workflow:
 
 ### Configuration
 
-1. Navigate to the IDP Profile feature. 
-    Authority>Authority Settings>IDP Profiles
+1. Navigate to the IDP Profile feature.
 ![Add IDP Profile](/img/auth-settings-idp-profiles.png)
 
 2. Click ADD.
@@ -133,4 +132,36 @@ To populate the Rules fields shown below, use the information available on the S
 ![New Rule Settings](/img/idp-profiles-rules.png)
 After creating the custom ruleset, use the `access-policy` as shown in the [Configuration section above](#configuration) to define the IDP policy where this custom ruleset is used. 
 
-**still need PCLI example of configuration, for consistency**
+:::note
+After creating a new ruleset for IDP, the traffic will initially be routed "around" that particular set of rules until it is fully loaded into the IDP engine. Use the `show idp application status` to verify the traffic status affected by the new rule.
+:::
+
+#### PCLI Configuration Example
+
+```
+        idp-profile      corp-idp-allowed
+            name         corp-idp-allowed
+            base-policy  standard
+
+            rule         allowed-exceptions-corpidp
+                name     allowed-exceptions-corpidp
+                  description    Rule to allow traffic exceptions
+
+                match
+                    client-address  192.168.10.11/24
+                exit
+
+                match
+                    vulnerability  PORTMAPPER:INFO:DUMP_PROC
+                exit
+
+                outcome
+                    action alert
+                    severity minor
+                exit
+            exit
+         exit
+```         
+
+
+
