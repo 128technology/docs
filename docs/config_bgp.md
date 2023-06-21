@@ -327,6 +327,170 @@ admin@branchoffice1.seattlesite1#
 As shown in the header, the routes that start with **B** are contributed by BGP.
 :::
 
+## BGP over SVR Inter-Hub Steering
+
+Path based BGP over SVR Routing responds to changes in peer adjacency, operational status, or SLA. It adds the ability to select and advertise BGP routes between BGP over SVR neighbors. It does this by monitoring the peer paths between BGP over SVR peers and dynamically adjusting the BGP neighbor inbound and outbound policy on those peers to reflect the priority and SLA of the peer paths. 
+
+The user configures the service-policy which provides the criteria for picking the best path. With this information, the BGP neighbors are prioritized. To ensure that BGP uses the best path and not the least desirable path, we configure the `set path based as-path prepend` to a value, typically an AS number. The prepend value is applied to the less desirable path, forcing additional hops. This forces BGP over a particular path, based on the path quality requirements. 
+
+However, in cases where failover or connection issues force the use of a less desirable path, the software will recognize the (lesser) path as "in use" and will not prepend the AS-path. When the path returns to the best path, the value is prepended to the less desirable path. 
+
+This changes dynamically over time: If the preferred path (based on the `service-policy`) changes, the system adjusts the routing policy on the fly. The same criteria is applied to any changes to the path choice.
+
+## Configuration
+
+Starting with a BGP over SVR configuration that has multiple BGP over SVR neighbors. 
+
+The following configuration process assumes that we are starting with a BGP over SVR configuration that has multiple BGP over SVR neighbors.
+
+1. Configure the network interface neighborhoods so that each SVR adjacency is identified by a unique vector. If a particular network interface has multiple adjacencies, configure multiple neighborhoods on that interface. 
+
+```
+router hub1
+
+
+        network-interface mpls 
+            neighborhood mpls-hub1-spoke 
+             vector mpls-hub1-spoke
+         exit
+
+        network-interface lte 
+            neighborhood lte-hub1-spoke 
+            vector lte-hub1-spoke 
+        exit
+    exit
+
+router hub2
+
+
+        network-interface mpls 
+            neighborhood mpls-hub2-spoke 
+             vector mpls-hub2-spoke
+         exit
+
+        network-interface lte 
+            neighborhood lte-hub2-spoke 
+            vector lte-hub2-spoke 
+        exit
+    exit
+
+
+router spoke1
+
+
+        network-interface mpls 
+            neighborhood mpls-hub1-spoke 
+             vector mpls-hub1-spoke
+         exit
+
+        network-interface mpls 
+            neighborhood mpls-hub2-spoke 
+             vector mpls-hub2-spoke 
+        exit
+    exit
+
+        network-interface lte 
+            neighborhood lte-hub1-spoke 
+            vector lte-hub1-spoke 
+        exit
+
+        network-interface lte 
+            neighborhood lte-hub2-spoke 
+            vector lte-hub2-spoke
+        exit
+    exit
+```
+
+
+
+2. Configure a service policy that maps the adjacency vectors to a priority. 
+```
+service-policy prefer-mpls-hub1 
+    vector mpls-hub1-spoke 
+    priority 1
+    exit
+ service-policy prefer-mpls-hub1 
+    vector mpls-hub2-spoke 
+    priority 2
+    exit
+ service-policy prefer-mpls-hub1 
+    vector lte-hub1-spoke 
+    priority 3
+    exit
+ service-policy prefer-mpls-hub1 
+    vector lte-hub2-spoke 
+    priority 4
+    exit
+exit
+```
+
+3. Configure a routing policy that includes the new routing policy path-based action. 
+
+```
+policy spoke-to-hubs statement 1 
+    action set-path-based-as-path prepend 65000
+policy spoke-to-hubs statement 1 
+    action set-path-based-as-path service-policy prefer-mpls-hub1 
+```
+
+4. Configure the BGP over SVR neighbor policies: Configure inbound and outbound policy on the spoke to select received BGP routes with the hub that has the most preferred adjacency.
+
+
+```
+router spoke 
+    routing default-instance 
+        routing-protocol bgp 
+        neighbor <hub1> 
+            neighbor-policy inbound-policy spoke-to-hubs
+        exit
+    exit
+
+router spoke 
+    routing default-instance 
+        routing-protocol bgp 
+        neighbor <hub1> 
+            neighbor-policy outbound-policy spoke-to-hubs
+        exit
+
+router spoke 
+     routing default-instance 
+        routing-protocol bgp 
+        neighbor <hub2> 
+            neighbor-policy inbound-policy spoke-to-hubs
+        exit
+
+router spoke 
+    routing default-instance 
+        routing-protocol bgp 
+        neighbor <hub2> 
+            neighbor-policy outbound-policy spoke-to-hubs 
+        exit
+    exit
+exit
+```
+
+The service policy in the new routing policy path-based action determines the best BGP peer using the adjacency vectors. Per peer routing policies are dynamically modified as the best paths to the BGP over SVR neighbors changes.
+
+### How it Works
+
+On the spoke, the best adjacency is to hub1 (via mpls1). The BGP hub1 inbound policy uses the primary routing policy; there is no `as-path prepend`. The BGP hub2 inbound policy uses the shadow inbound policy that sets an `as-path prepend` making the received routes less preferred.
+When the adjacency from spoke to hub1 over mpls goes down, the best adjacency is hub2 (via mpls2). The hub1 inbound policy changes to use the shadow, and the hub2 inbound policy uses the primary. Route updates from hub2 are now preferred.
+
+### BGP Conditional Advertisement 
+
+Path-based BGP can be used in combination with BGP conditional advertisement. Path-based BGP sets the BGP selected route using the inbound policy. BGP conditional advertisement only considers the BGP selected route. BGP conditional advertisement will always override the neighbor outbound policy. If a BGP prefix matches both the BGP outbound policy and the BGP conditional advertisement advertise-policy, the conditional advertisement takes precedence. 
+
+## PCLI Configuration Commands
+```
+set-path-based-as-path 
+    prepend <as-path> 
+    service-policy <service-policy-name>
+```
+
+## Troubleshooting 
+
+The PCLI command **Need the command** displays the current best peer for each group of peers sharing the same service policy. Information includes the last time the best peer changed for the group, and the number of times the best peer changed. The current `show bgp` commands, along with the `show peers` and logging messages can also help debug this feature. 
+
 ## VRF BGP Over SVR
 
 The establishment of a BGP session over SVR is achieved by the conductor auto-generating the necessary services and service-routes. The introduction of the VRF feature allows for configuring BGP instances within a VRF, and establishing BGP sessions with neighbors within the same VRF. 
