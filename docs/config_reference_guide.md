@@ -1083,6 +1083,7 @@ The `ldap-server` element lets you configure an external server that is used to 
 ## lldp
 
 #### Path:
+
 authority > router > node > device-interface > lldp
 
 #### Description:
@@ -1090,14 +1091,14 @@ authority > router > node > device-interface > lldp
 The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. Additionally, users can configure the frequency with which advertisements are sent, and the advertisement interval. 
 
 The following information is provided to devices in the LLDP packets:
-- Chassis ID (Device MAC address)
-- Port ID (Device's configured name)
-- Time To Live (time to remain in device cache)
-- Port Description (Device's configured description)
+- Chassis ID: Device MAC address
+- Port ID: Device's configured name
+- Time To Live: Time to remain in device cache
+- Port Description: Device's configured description
 
 | Element | Type | Description |
 | --- | --- | --- |
-| mode | enumeration | Default: `disabled`. The mode in which LLDP operates on the interface. Options are `disabled` (default). `enabled` - allows sending and receiving LLDP packets. `receive-only` - receive and process incoming LLDP packets. | 
+| mode | enumeration | Default: `disabled`. The mode in which LLDP operates on the interface. Options are: `disabled` (default). `enabled` - allows sending and receiving LLDP packets. `receive-only` - receive and process incoming LLDP packets. | 
 | advertisement-interval | uint32 | Range: 1-86400 seconds. Default: 120. The frequency of sending LLDP advertisements. |
 | hold-multiplier | uint8 | Range: 2-10, default: 4. The multiplier to apply to the advertisement-interval when setting the LLDP TTL. | 
 
