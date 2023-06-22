@@ -1091,10 +1091,13 @@ authority > router > node > device-interface > lldp
 The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. Additionally, users can configure the frequency with which advertisements are sent, and the advertisement interval. 
 
 The following information is provided to devices in the LLDP packets:
+
 - Chassis ID: Device MAC address
 - Port ID: Device's configured name
 - Time To Live: Time to remain in device cache
 - Port Description: Device's configured description
+- System Name: Router name 
+- System Description: Juniper Networks, Inc. Session Smart Router
 
 | Element | Type | Description |
 | --- | --- | --- |
