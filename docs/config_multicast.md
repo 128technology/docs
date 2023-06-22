@@ -14,6 +14,7 @@ Please refer to the [Juniper Multicast Overview](https://www.juniper.net/documen
 Multicast on the SSR supports the following protocols and topology: 
 
 - PIM Sparse-Mode
+- PIM Source-Specific Multicast (PIM-SSM)
 - Static Configuration of RP
 - IGMP v2/v3
 - Multicast over SVR in Hub and Spoke topology
@@ -21,20 +22,20 @@ Multicast on the SSR supports the following protocols and topology:
 ### Multicast Configuration
 
 :::note
-BGP over SVR is a prerequisite for Multicast over SVR.
+In order to support Multicast over SVR, the BGP over SVR configuration is used in conjunction with the PIM configuration to generate auto-provisioned services and service-paths. BGP over SVR must be provisioned to support the Multicast feature. See [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) for configuration details. 
 :::
 
-The following components are necessary to configure multicast on the SSR. Configuration for each of the components is provided below, and a full example configuration is provided at the end of this process. 
+The following are the components necessary to configure multicast over SVR on the SSR. Configuration for each of the components is provided below, and a full example configuration is provided at the end of this process. 
 
 - Routing Interface: Specify the BGP over SVR interface
 - BGP over SVR: See [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) for configuration details. 
 - Routing protocol such as IGMPv2/v3
 - PIM
 - RP
-- Tenant: defined as multicast. For additional info about Tenants, see [Tenants](config_tenants.md)
+- Tenant: Defined as multicast. For additional info about Tenants, see [Tenants](config_tenants.md)
 - Service: Services are created for the multicast traffic, and defined for the Group address.
-- Access Policy: Allows receivers on the outgoing interfaces
-- Multicast sender policy: Allows the sources to send for the Multicast Group (clarify this) 
+- Access Policy: Configures the tenants that are allowed to be receivers for the Multicast Service.
+- Multicast Sender Policy: Configures the tenants that are allowed for the Multicast service. 
 
 ### Configuration Process
 
@@ -89,7 +90,7 @@ Use the following steps to generate a simple Multicast configuration.
 ```
 3. Add the routing protocol (IGMP) that defines an interface and IGMP version, as well as the IGMP Joined Group.
 ```
-				    igmp
+                routing-protocol  igmp
 
                     interface  Boston lan1
                         node       Boston
