@@ -329,9 +329,9 @@ As shown in the header, the routes that start with **B** are contributed by BGP.
 
 ## BGP over SVR Inter-Hub Steering
 
-Path based BGP over SVR Routing responds to changes in peer adjacency, operational status, or SLA. It adds the ability to select and advertise BGP routes between BGP over SVR neighbors. It does this by monitoring the peer paths between BGP over SVR peers and dynamically adjusting the BGP neighbor inbound and outbound policy on those peers to reflect the priority and SLA of the peer paths. 
+Path based BGP over SVR Routing responds to changes in peer adjacency, operational status, or SLA. It adds the ability to select and advertise BGP routes between BGP over SVR neighbors. It does this by monitoring the peer paths between BGP over SVR peers and dynamically adjusting the BGP neighbor inbound and outbound policy on those peers to reflect the priority and SLA of the peer paths.
 
-The user configures the service-policy which provides the criteria for picking the best path. With this information, the BGP neighbors are prioritized. To ensure that BGP uses the best path and not the least desirable path, we configure the `set path based as-path prepend` to a value, typically an AS number. The prepend value is applied to the less desirable path, forcing additional hops. This forces BGP over a particular path, based on the path quality requirements. 
+The user configures the service-policy which provides the criteria for picking the best path. With this information, the BGP neighbors are prioritized. To ensure that BGP uses the best path, we configure the `set path based as-path prepend` to an AS path, which is a sequence of AS numbers. The prepend value is applied to BGP routes matched by the policy, making the BGP route AS path longer and thus less preferred. This forces BGP over a particular path, based on the path quality requirements. 
 
 However, in cases where failover or connection issues force the use of a less desirable path, the software will recognize the (lesser) path as "in use" and will not prepend the AS-path. When the path returns to the best path, the value is prepended to the less desirable path. 
 
@@ -401,8 +401,6 @@ router spoke1
     exit
 ```
 
-
-
 2. Configure a service policy that maps the adjacency vectors to a priority. 
 ```
 service-policy prefer-mpls-hub1 
@@ -434,7 +432,6 @@ policy spoke-to-hubs statement 1
 ```
 
 4. Configure the BGP over SVR neighbor policies: Configure inbound and outbound policy on the spoke to select received BGP routes with the hub that has the most preferred adjacency.
-
 
 ```
 router spoke 
@@ -489,7 +486,7 @@ set-path-based-as-path
 
 ## Troubleshooting 
 
-The PCLI command **Need the command** displays the current best peer for each group of peers sharing the same service policy. Information includes the last time the best peer changed for the group, and the number of times the best peer changed. The current `show bgp` commands, along with the `show peers` and logging messages can also help debug this feature. 
+The PCLI command `show bgp path-based-policy` displays the current best peer for each group of peers sharing the same service policy. Information includes the last time the best peer changed for the group, and the number of times the best peer changed. The current `show bgp` commands, along with the `show peers` and logging messages can also help debug this feature. 
 
 ## VRF BGP Over SVR
 
