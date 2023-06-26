@@ -339,8 +339,6 @@ This changes dynamically over time: If the preferred path (based on the `service
 
 ## Configuration
 
-Starting with a BGP over SVR configuration that has multiple BGP over SVR neighbors. 
-
 The following configuration process assumes that we are starting with a BGP over SVR configuration that has multiple BGP over SVR neighbors.
 
 1. Configure the network interface neighborhoods so that each SVR adjacency is identified by a unique vector. If a particular network interface has multiple adjacencies, configure multiple neighborhoods on that interface. 
@@ -407,22 +405,22 @@ service-policy prefer-mpls-hub1
     vector mpls-hub1-spoke 
     priority 1
     exit
- service-policy prefer-mpls-hub1 
+service-policy prefer-mpls-hub1 
     vector mpls-hub2-spoke 
     priority 2
     exit
- service-policy prefer-mpls-hub1 
+service-policy prefer-mpls-hub1 
     vector lte-hub1-spoke 
     priority 3
     exit
- service-policy prefer-mpls-hub1 
+service-policy prefer-mpls-hub1 
     vector lte-hub2-spoke 
     priority 4
     exit
 exit
 ```
 
-3. Configure a routing policy that includes the new routing policy path-based action. 
+3. Configure a routing policy that includes the new routing policy `path-based` action. 
 
 ```
 policy spoke-to-hubs statement 1 
@@ -431,14 +429,14 @@ policy spoke-to-hubs statement 1
     action set-path-based-as-path service-policy prefer-mpls-hub1 
 ```
 
-4. Configure the BGP over SVR neighbor policies: Configure inbound and outbound policy on the spoke to select received BGP routes with the hub that has the most preferred adjacency.
+4. Configure the BGP over SVR neighbor policies: Inbound and Outbound policies are configured on the spoke to select a BGP route containing the hub with the most preferred adjacency. 
 
 ```
 router spoke 
     routing default-instance 
         routing-protocol bgp 
         neighbor <hub1> 
-            neighbor-policy inbound-policy spoke-to-hubs
+            neighbor-policy inbound-policy spoke-to-hub
         exit
     exit
 
@@ -446,21 +444,21 @@ router spoke
     routing default-instance 
         routing-protocol bgp 
         neighbor <hub1> 
-            neighbor-policy outbound-policy spoke-to-hubs
+            neighbor-policy outbound-policy spoke-to-hub
         exit
 
 router spoke 
      routing default-instance 
         routing-protocol bgp 
         neighbor <hub2> 
-            neighbor-policy inbound-policy spoke-to-hubs
+            neighbor-policy inbound-policy spoke-to-hub
         exit
 
 router spoke 
     routing default-instance 
         routing-protocol bgp 
         neighbor <hub2> 
-            neighbor-policy outbound-policy spoke-to-hubs 
+            neighbor-policy outbound-policy spoke-to-hub 
         exit
     exit
 exit
@@ -470,8 +468,9 @@ The service policy in the new routing policy path-based action determines the be
 
 ### How it Works
 
-On the spoke, the best adjacency is to hub1 (via mpls1). The BGP hub1 inbound policy uses the primary routing policy; there is no `as-path prepend`. The BGP hub2 inbound policy uses the shadow inbound policy that sets an `as-path prepend` making the received routes less preferred.
-When the adjacency from spoke to hub1 over mpls goes down, the best adjacency is hub2 (via mpls2). The hub1 inbound policy changes to use the shadow, and the hub2 inbound policy uses the primary. Route updates from hub2 are now preferred.
+On the spoke, the best adjacency is to `hub1` (via mpls1). The BGP `hub1` inbound policy uses the primary routing policy which has no `as-path prepend`. The BGP `hub2` inbound policy uses the shadow inbound policy that sets an `as-path prepend` making the received routes less preferred.
+
+When the adjacency from spoke to `hub1` over mpls goes down, the best adjacency is now `hub2` (via mpls2). The `hub1` inbound policy changes to use the shadow, and the `hub2` inbound policy uses the primary. Route updates from `hub2` are now preferred.
 
 ### BGP Conditional Advertisement 
 
