@@ -487,6 +487,51 @@ set-path-based-as-path
 
 The PCLI command `show bgp path-based-policy` displays the current best peer for each group of peers sharing the same service policy. Information includes the last time the best peer changed for the group, and the number of times the best peer changed. The current `show bgp` commands, along with the `show peers` and logging messages can also help debug this feature. 
 
+The following is an example output from `show bgp path-based-policy`:
+
+```
+admin@node0.02000101ffc5# show bgp path-based-policy
+Mon 2023-06-26 19:24:04 UTC
+\u2714 Getting BGP path-based-policy information...
+
+========================= ============= ============= =================== ==============
+ Routing Policy            Num Changes   Last Change   Service Policy      Primary Peer
+========================= ============= ============= =================== ==============
+ prefer_wan2-from-hub                1   13s           prefer_wan2-s0-sp   hub2
+ prefer_wan2-towards-hub             1   13s           prefer_wan2-s0-sp   hub2
+
+Successfully retrieved BGP path-based-policy information.
+Completed in 0.19 seconds
+
+
+admin@node0.02000101ffc5# show bgp path-based-policy detail
+Mon 2023-06-26 19:24:10 UTC
+\u2714 Getting BGP path-based-policy information...
+
+============================================================
+ Information
+============================================================
+ Path Based Policy:
+   Peers:                        hub1, hub2
+   Time Since Update Millisec:   18976
+   Routing Policy:               prefer_wan2-from-hub
+   Service Policy:
+     Primary Peers:              hub2
+     Policy:                     prefer_wan2-s0-sp
+   Changes:                      1
+ Path Based Policy:
+   Peers:                        hub1, hub2
+   Time Since Update Millisec:   18949
+   Routing Policy:               prefer_wan2-towards-hub
+   Service Policy:
+     Primary Peers:              hub2
+     Policy:                     prefer_wan2-s0-sp
+   Changes:                      1
+
+Successfully retrieved BGP path-based-policy information.
+Completed in 0.04 seconds
+```
+
 ## VRF BGP Over SVR
 
 The establishment of a BGP session over SVR is achieved by the conductor auto-generating the necessary services and service-routes. The introduction of the VRF feature allows for configuring BGP instances within a VRF, and establishing BGP sessions with neighbors within the same VRF. 
