@@ -159,6 +159,7 @@ module.exports = {
           "config_bgp",
           "config_ospf",
           "config_bfd",
+          "config_lacp",
         ],
       },
       {
