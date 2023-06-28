@@ -55,7 +55,9 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### New Features
 
-- **I95-10141 LLDP Support:**
+- **I95-466 LAG/LACP Support:** 
+------
+- **I95-10141 LLDP Support:** 
 ------
 - **I95-20864 Support for Multicast:**
 ------
@@ -71,34 +73,83 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-50810 IDP Custom Rules:**
 ------
+- **I95-50949 Create PCLI command for `show packet-buffer location`:** A PCLI command for buffer tracking has been created. For more information, see [`show packet-buffer location`](addlinkhere).
+------
 - **I95-50973 DSCP Steering with BGP over SVR:**  if you configure a child service with DSCP steering, and identify that parent and child service in Application steering, DSCP steering over BGP happens
 ------
+- **I95-51296 Show `Time in Status` in the `show assets` detail view:** Added the asset `Time in Status` field to the detail view. 
 
 ### Resolved Issues
 
 - **I95-35069 Disallow changing the role of a node:** Once set, changing the role of a node cannot be changed. The configuration validation process has been updated to not allow this change. 
 ------
+- **I95-46895 Teams traffic classified as Azure:** Improvements made to the application database  `ip-protocol-port lookup` during session classification. 
+------
 - **I95-47960 Incorrect progress message for `show dns resolutions`:** The progress message for this command now correctly displays `Retrieving dns resolutions...`.
-------
-- **I95-48128 App-steering crash on `session-modify`:** Resolved an issue where a forward flow was invalidated because of a config chnage. 
-------
-- **I95-48300**
 ------
 - **I95-48792 Encryption on Multicast not working correctly:** Encryption actions have been enhanced on all service paths. (I don't understand how a customer can report an issue with this, when we haven't released the feature yet)
 ------
-- **I95-48965, I95-50070, I95-51086 Race condition with routing updates inducing crash in highway process:** Resolved an issue where a routing change that affects the `forwarding-table` can incur a race condition with sessions completing and being removed, which could lead to a highway crash and restart.
+- **I95-48965 Race condition with routing updates inducing crash in highway process:** Resolved an issue where a routing change that affects the `forwarding-table` can incur a race condition with sessions completing and being removed, which could lead to a highway crash and restart.
 ------
 - **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions has been optimized to accurately identify the correct service.
 ------
 - **I95-49598 Automatically choose the number of session-processor threads:** If session-setup-scaling is provisioned to true, the SSR will now automatically determine the number of threads to use for session processing.
 ------
-- **I95-49791 Audit rules to track modification of config files:**  
- 
+- **I95-49791 Audit rules to track modification of config files:** Added rules to track the modification of grub configuration files, to aid in troubleshooting. 
+------
+- **I95-50338 About this System link on GUI not working:** The link target is no longer valid, and the link has been removed from the GUI. 
+------
+- **I95-51003 `show stats process queue depth` command is redundant:** The redundant `process/queue/depth` statistic has been removed. It is superseded by `process/thread/queue/depth` and the information available using `show stats process thread queue depth` and related commands.
+------
+- **I95-51053 ESP session stuck in Incomplete state:** Resolved an issue with DSCP session modification. We now avoid throwing an exception if the FIB is not found.
+------
+- **I95-51081 `bgp-service-generation service-policy` is being filtered on the conductor:** The `bgp-service-generation service-policy` is now marked as authority wide so it is not filtered. This prevents managed routers from rejecting configurations containing `bgp-service-generation` and getting out of sync with the conductor.
+------
+- **I95-51167 Unable to override auto-generated peer service-route:** Updated StepTopology to not override modified auto-generated peer service-route.
+------
+- **I95-51177 Ethernet over SVR setting wrong egress MAC address:** Ethernet over SVR now correctly sets the egress MAC address when using `outbound-only` mode.
+------
+- **I95-51178 Increase default `juteMaxBufferSize`:** The default `juteMaxBufferSize` has been increased to 10MB.
+------
+- **I95-51201 Autocompletion in `adopt` command generates invalid organization name:** When using tab-completion to enter the site name from the `adopt` command in the PCLI, it will add quotations around the site name if there are whitespaces in the name. The PCLI now properly handles quotes and whitespace in organization names when running the PCLI adopt command.
+------
+- **I95-51203 Update stats retention periods:** Some of the `process/thread/queue` and `process/thread/task` statistics are now recorded for a longer time period, and are available in custom charts and tables on the Conductor platform.
+------
+- **I95-51284 Routers remain in the connected state:** Updated the dependencies within the salt minion to resolve an issue where an asset is stuck in the connected state, displaying the error; `Error getting asset's public key: 'ssh.set_auth_key', retrying...`.
+------
+- **I95-51359 Unable to set the OSPF MTU:** Added the ability for users to set the MTU to a non-default value.
+------
+- **I95-51403 GUI displays download in progress even after the download is complete:** Resolved an issue where a download success event is never created even though the version shows up as downloaded in the software versions. 
+------
+- **I95-51427 GUI not displaying all the version information:** The GUI About page now displays additional version information previously only displayed in the PCLI `show system version detail`.
+------
+- **I95-51629 `ingress-source-nat-pool` should not display non-SVR traffic:** Previously, the `ingress-source-nat-pool` configured under `network-interface` applied to both SVR and non-SVR sessions, now it only applies to SVR sessions.
+------
+- **I95-51650 `log-category PCLI` command not working:** Resolved an issue that disallowed setting `config authority router <name> system log-category PCLI`. now also allow configuring the following log categories:
+  - CFGD
+  - SNMP
+  - HTTP
+------
+- **I95-51658 Allow `sync` command in resynchronizing state:** Resolved an issue where the user received an error when executing the `send command sync` command while an asset was in the `resynchronizing` state.
+------
+- **I95-51714 Adding and deleting a domain-name in the same operation causes an error:** Resolved an issue in the configuration validation that generated an error when duplicate domain-names are removed from and added to the service configuration.
+------
+- **I95-51734 Remove duplicate transport port-ranges from modules before adding to service:** Resolved an issue where FIB entries are not installed when app-id modules have conflicting or overlapping port-ranges, and are being placed into one service.
+------
 
-
-
-
-
+- **I95-51788 Path index is not displayed correctly for `show sessions by-id`:** `show sessions by-id` has been updated to display MTU and PathIndex.
+------
+- **I95-51792 Low MTU threshold causing metadata fragmentation:** Fixed the incorrect handling of packets where metadata is fragmented due to unreasonably low MTU, causing the packet buffers to become exhausted.
+-----
+- **I95-51793 Path MTU discovery dropping very low:** Fixed PMTU discovery from ever resolving to an unreasonably low MTU, which could previously occur during a link flap event.
+------
+- **I95-51794 IBU Crash/Core dump on Lenovo SR-650:** Resolved an issue where the SR-650 was crashing due to uninitialized flags field. Support has been added for these devices. 
+------
+- **I95-51915
+------
+- **I95-51964 Make the loopback-address available on the conductor:** The loopback-address configuration  is now accessible on the conductor, and allows for a per node user defined address to be configured for overlay management traffic.
+------
+- **WAN-1471 Cannot distinguish between an SSR installed with OTP ISO and IBU image:** The `show system version` PCLI command now clarifies image-based or ISO in the summary view as well as the detail view.
 
 ## Release 6.1.3-4
 
