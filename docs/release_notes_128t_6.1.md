@@ -55,29 +55,36 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### New Features
 
-- **I95-466 LAG/LACP Support:** 
+NOTE FOR REVIEWERS: **The links in the New Features section will not work. The documents are all in separate PRs to be merged Thursday or Friday.**
+
+- **I95-466 LAG/LACP Support:** Link Aggregation Groups are formed by connecting multiple ports in parallel between two devices. LACP is the protocol that defines how the group of interfaces operates. Users define the LAG interface and then configure the member device interfaces. For more information, see [Link Aggregation and LACP](config_lacp.md).
 ------
-- **I95-10141 LLDP Support:** 
+- **I95-10141 LLDP Support:** The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. For information about configuring LLDP, see [`lldp`](config_reference_guide.md#lldp).
 ------
-- **I95-20864 Support for Multicast:**
+- **I95-20864 Support for Multicast:** Multicast over SVR is now supported, and is a “one source, many destinations” method of traffic distribution. For more information, see [Multicast](config_multicast.md).
 ------
-- **I95-44473 Application Steering:**
+- **I95-44473 Application Steering:** Application Steering provides the ability to configure unique steering policies for individual applications based on the application name, category, application signatures, URLs, and domains. Once the traffic has been classified, it can be steered across the available paths. For more information, see [Application Steering](config_application_steering.md).
 ------
-- **I95-48922 Common Criteria Certification - Network Device Protection Profile:** 
+- **I95-48922 Common Criteria Certification - Network Device Protection Profile:** Waiting for Max's input on this.
 ------
-- **I95-49681 Extensible Alarms:**
+- **I95-49928 BGP over SVR Inter-Hub Steering:** Path based BGP over SVR Routing responds to changes in peer adjacency, operational status, or SLA. It adds the ability to select and advertise BGP routes between BGP over SVR neighbors. It does this by monitoring the peer paths between BGP over SVR peers and dynamically adjusting the BGP neighbor inbound and outbound policy on those peers to reflect the priority and SLA of the peer paths. For more information, see [BGP over SVR Inter-Hub Steering](config_bgp.md#bgp-over-svr-inter-hub-steering).
 ------
-- **I95-49928 Spoke Inter-Hub Steering:**
+- **I95-50571 Add packet buffer tracking to help analyze buffer exhaustion:** Packet buffer location tracking has been added, and includes the following:
+  - Tracks packet buffer locations inside packet `mbuf`
+  - Enforces the setting of packet location
+  - Provides the ability to walk packet buffer pools, count locations, and display information
 ------
-- **I95-50167 IDP Blackhole Avoidance:**
+- **I95-50632 Add Buffer tracking monitoring to lockup detector:** LockupDetector is now able to identify and take corrective action should a network packet pool buffer exhaustion event occur. 
 ------
-- **I95-50810 IDP Custom Rules:**
+- **I95-50810 IDP Custom Rules and Policies:** Users can customize an existing base IDP policy by creating exception-based rules. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. See [IDP Custom Rules](concepts_ssr_idp.md#idp-custom-rules) for overview information, and refer to [Custom IDP Policies and Rules](config_idp.md#custom-idp-policies-and-rules) for configuration information.
 ------
-- **I95-50949 Create PCLI command for `show packet-buffer location`:** A PCLI command for buffer tracking has been created. For more information, see [`show packet-buffer location`](addlinkhere).
+- **I95-50973 DSCP Steering with BGP over SVR:** Need clarification from Markus how BGP operates with DSCP steering.
 ------
-- **I95-50973 DSCP Steering with BGP over SVR:**  if you configure a child service with DSCP steering, and identify that parent and child service in Application steering, DSCP steering over BGP happens
+- **I95-51296 Show `Time in Status` in the `show assets` detail view:** The asset `Time in Status` field has been added to the Detail view. 
 ------
-- **I95-51296 Show `Time in Status` in the `show assets` detail view:** Added the asset `Time in Status` field to the detail view. 
+- **I95-51039 / I95-50949 Create PCLI commands for buffer tracking tools:** The following PCLI commands have been created for buffer tracking. 
+  - `show packet-buffer locations`
+  - `save packet-buffer snapshot`
 
 ### Resolved Issues
 
@@ -101,7 +108,11 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51003 `show stats process queue depth` command is redundant:** The redundant `process/queue/depth` statistic has been removed. It is superseded by `process/thread/queue/depth` and the information available using `show stats process thread queue depth` and related commands.
 ------
-- **I95-51053 ESP session stuck in Incomplete state:** Resolved an issue with DSCP session modification. We now avoid throwing an exception if the FIB is not found.
+- **I95-51039 PCLI commands for buffer tracking tools:** Added the follwoing show commands to 
+  - show packet-buffer locations
+  - save packet-buffer snapshot
+------
+- **I95-51053 ESP session stuck in Incomplete state:** Resolved an issue with DSCP session modification. An exception is no longer thrown if the FIB is not found.
 ------
 - **I95-51081 `bgp-service-generation service-policy` is being filtered on the conductor:** The `bgp-service-generation service-policy` is now marked as authority wide so it is not filtered. This prevents managed routers from rejecting configurations containing `bgp-service-generation` and getting out of sync with the conductor.
 ------
@@ -136,7 +147,6 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51734 Remove duplicate transport port-ranges from modules before adding to service:** Resolved an issue where FIB entries are not installed when app-id modules have conflicting or overlapping port-ranges, and are being placed into one service.
 ------
-
 - **I95-51788 Path index is not displayed correctly for `show sessions by-id`:** `show sessions by-id` has been updated to display MTU and PathIndex.
 ------
 - **I95-51792 Low MTU threshold causing metadata fragmentation:** Fixed the incorrect handling of packets where metadata is fragmented due to unreasonably low MTU, causing the packet buffers to become exhausted.
@@ -145,7 +155,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51794 IBU Crash/Core dump on Lenovo SR-650:** Resolved an issue where the SR-650 was crashing due to uninitialized flags field. Support has been added for these devices. 
 ------
-- **I95-51915
+- **I95-51915 Report KNI buffer alloc failures to watchdog:** `alloc-failure` stats are now gathered per KNI device and included in the device stats, allowing the watchdog to detect a failure and respond.
 ------
 - **I95-51964 Make the loopback-address available on the conductor:** The loopback-address configuration  is now accessible on the conductor, and allows for a per node user defined address to be configured for overlay management traffic.
 ------
