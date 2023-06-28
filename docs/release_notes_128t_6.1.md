@@ -49,6 +49,57 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 6.1.4-R2
+
+**Release Date:** June 30, 2023
+
+### New Features
+
+- **I95-10141 LLDP Support:**
+------
+- **I95-20864 Support for Multicast:**
+------
+- **I95-44473 Application Steering:**
+------
+- **I95-48922 Common Criteria Certification - Network Device Protection Profile:** 
+------
+- **I95-49681 Extensible Alarms:**
+------
+- **I95-49928 Spoke Inter-Hub Steering:**
+------
+- **I95-50167 IDP Blackhole Avoidance:**
+------
+- **I95-50810 IDP Custom Rules:**
+------
+- **I95-50973 DSCP Steering with BGP over SVR:**  if you configure a child service with DSCP steering, and identify that parent and child service in Application steering, DSCP steering over BGP happens
+------
+
+### Resolved Issues
+
+- **I95-35069 Disallow changing the role of a node:** Once set, changing the role of a node cannot be changed. The configuration validation process has been updated to not allow this change. 
+------
+- **I95-47960 Incorrect progress message for `show dns resolutions`:** The progress message for this command now correctly displays `Retrieving dns resolutions...`.
+------
+- **I95-48128 App-steering crash on `session-modify`:** Resolved an issue where a forward flow was invalidated because of a config chnage. 
+------
+- **I95-48300**
+------
+- **I95-48792 Encryption on Multicast not working correctly:** Encryption actions have been enhanced on all service paths. (I don't understand how a customer can report an issue with this, when we haven't released the feature yet)
+------
+- **I95-48965, I95-50070, I95-51086 Race condition with routing updates inducing crash in highway process:** Resolved an issue where a routing change that affects the `forwarding-table` can incur a race condition with sessions completing and being removed, which could lead to a highway crash and restart.
+------
+- **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions has been optimized to accurately identify the correct service.
+------
+- **I95-49598 Automatically choose the number of session-processor threads:** If session-setup-scaling is provisioned to true, the SSR will now automatically determine the number of threads to use for session processing.
+------
+- **I95-49791 Audit rules to track modification of config files:**  
+ 
+
+
+
+
+
+
 ## Release 6.1.3-4
 
 **Release Date:** May 22, 2023
