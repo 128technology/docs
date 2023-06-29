@@ -99,12 +99,14 @@ config
 
 The IDP engine runs on each node of the system. Traffic is always sent to the IDP instance on the first node - per the order in configuration. Upon failover, the existing sessions do not gracefully failover; the TCP sessions are reset, and new sessions must be established by the client. For UDP sessions, the same best effort behavior can be expected from the IDP engine.
 
-## Custom IDP Policies and Rules
+## Modify IDP Policies and Rules
 
 The following is an example workflow:
 - An IDP policy is put in place.
 - Security events are triggered because traffic typical for that network configuration is considered a risk.
 - Create a custom IDP profile in the Authority Settings configuration that can be referenced in the `access-policy`. 
+
+Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network, for example, modifying the severity or the action. Changes are implemented from the SSR GUI or PCLI, and validated as part of the existing configuration workflow. 
 
 ### Configuration
 
@@ -115,13 +117,13 @@ The following is an example workflow:
 3. Enter a Profile Name and click Save. The IDP Profiles configuration screen opens.
 ![Configure the IDP Profile](/img/idp-profiles.png)
 
-4. In the Base Policy, select an existing policy to customize. 
-5. To add custom rules, select ADD in the Rules field. 
+4. In the Base Policy, select an existing policy to modify. 
+5. To add exceptions to the rules, select ADD in the Rules field. 
 6. Name the New item and click Save. This opens the settings for the new rule.
 7. Identify the following items that will be compared for a match:
 
 :::note
-To populate the Rules fields shown below, use the information available on the Security Events screen or from the [`show idp-events`](concepts_ssr_idp.md#security-events-dashboard) command.
+To populate and modify the Rules fields shown below, use the information available on the Security Events screen or from the [`show idp-events`](concepts_ssr_idp.md#security-events-dashboard) command.
 :::
 - Client IP Address prefix
 - Destination IP Address
