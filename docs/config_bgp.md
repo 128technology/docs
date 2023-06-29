@@ -422,14 +422,16 @@ service-policy prefer-mpls-hub1
 exit
 ```
 
-3. Configure a routing policy that includes the new routing policy `path-based` action. See [Configuration Commands](#configuration-commands) below for additional information.
+3. Configure a routing policy that includes the new routing policy `set-path-based-as-path` action. See [Configuration Commands](#configuration-commands) below for additional information.
 
 ```
-policy spoke-to-hub  statement 1
-    action set-path-based-as-path 
-        type             set-path-based-as-path
-        prepend          65000
-        service-policy   prefer-mpls-hub1 
+policy spoke-to-hub  
+    statement 1
+        action set-path-based-as-path 
+            type             set-path-based-as-path
+            prepend          65000
+            service-policy   prefer-mpls-hub1 
+        exit
     exit
 exit
 ```
