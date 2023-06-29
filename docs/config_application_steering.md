@@ -12,9 +12,7 @@ Application Steering provides the ability to configure unique steering policies 
 
 ### Define the Application in the Service
 
-During the service configuration, applications are simply identified by name, for example `Facebook`. If the application is not in the application database, an error is generated.
-
-By default, the SSR automatically downloads domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [`application-identification` in the Element Reference section.](config_reference_guide.md#application-identification)
+During the service configuration, applications are simply identified by name, for example `Facebook`. By default, the SSR automatically downloads domain and application datatsets weekly. The defaults (shown below) can be adjusted as necessary using the Application Data Updates panel or from the PCLI for each router. For additional information, see [`application-identification` in the Element Reference section.](config_reference_guide.md#application-identification)
 
 ![Application Data Updates](/img/dbwf_app-id_updates.png)
 
