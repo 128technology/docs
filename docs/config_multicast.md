@@ -32,10 +32,11 @@ The following are the components necessary to configure multicast over SVR on th
 - Routing protocol such as IGMPv2/v3
 - PIM
 - RP: The Rendezvous Point. In the current implementation, the RP must be external to the SSR. 
-- Tenants: Two types of tenants that are necessary; the access-policy tenant is the tenant allowed to receive the multicast traffic via IGMP joins at routers in the network. The multicast-sender-policy defines the tenant that is allowed to be the source of the multicast stream. For additional info about Tenants, see [Tenants](config_tenants.md)
 - Service: Services are created for the multicast traffic, and defined for the Group address.
-- Access Policy: Configures the tenants that are allowed to be receivers for the Multicast Service.
-- Multicast Sender Policy: Configures the tenants that are allowed for the Multicast service. 
+- Multicast-sender-policy: Defines the tenant that is allowed to be the source of the multicast stream.
+- Access Policy: Configures the tenants allowed to receive the multicast traffic via IGMP joins at routers in the network. 
+
+Refer to [Tenants](config_tenants.md) for more information on configuring Tenants.
 
 ### Configuration Process
 
