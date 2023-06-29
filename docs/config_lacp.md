@@ -18,7 +18,7 @@ The LAG is created by defining a device interface as a `bond`. The `bond` interf
 Keep in mind the following LAG/LACP requirements:
 
 - LAG/LACP must be configured on the devices on each end of the link.
-- A `bond` must have at least one member; At least one `device-interface` that references the `bond` as it’s `parent-bond`.
+- A `bond` must have between 1 and 8 members. Members are device-interface's that reference the `bond` interface as their `parent-bond`.
 - A `bond` can have a maximum of 8 members. This is verified during the configuration validation step.
 - All members of the `bond` must be of the type `ethernet`.
 - All members of the `bond` must be the same speed and support full duplex.
@@ -26,6 +26,8 @@ Keep in mind the following LAG/LACP requirements:
 ## Configuring LAG and LACP
 
 LACP is enabled by default on the `bond` device interface, and must be configured on each end of the link. The following device interface configuration shows a `bond` interface and `lacp-enabled` as true (default). The interfaces that are part of the LAG are configured as ethernet interfaces and the `parent-bond` is identified as the name of the `bond` interface. 
+
+Please note that after any configuration changes to LAG or LACP settings, an SSR restart is required. 
 
 ### Configuration using the PCLI 
 
@@ -62,6 +64,7 @@ LACP is enabled by default on the `bond` device interface, and must be configure
 ```
 3. Configure at least one device interface to be part of the LAG.
     - Be sure to configure the `parent-bond` with the device name of the `bond` interface.
+    - The only configuration allowed on the bond-members are `pci-address` and `parent-bond`. All other settings must be configured on the `bond` interface.
 
 ```
              device-interface  ge-0-1
@@ -78,6 +81,8 @@ LACP is enabled by default on the `bond` device interface, and must be configure
                     parent-bond  bond0
              exit
 ```
+
+
 
 ### Configuration using the GUI
 
@@ -96,6 +101,7 @@ These same settings are accessed from the GUI at the Authority > Router > Node >
 
 3. Configure at least one device interface to be part of the LAG.
     - Be sure to configure the `parent-bond` with the device name of the `bond` interface.
+    - The only configuration allowed on the bond-members are `pci-address` and `parent-bond`. All other settings must be configured on the `bond` interface.
 
 ![Configure LAG devices](/img/config_lacp_dev-inf-parent-bond.png)
 
