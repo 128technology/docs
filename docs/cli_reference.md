@@ -1906,7 +1906,7 @@ manage plugin remove [node <node>] <name>
 
 ## `migrate`
 
-Migrate an SSR to a new conductor. For more details on the SSR rotuer migration read the [How to: Conductor Migration](howto_conductor_migration.md).
+Migrate an SSR to a new conductor. For more details on the SSR router migration refer to [How to: Conductor Migration](howto_conductor_migration.md).
 
 #### Usage
 
@@ -1934,6 +1934,7 @@ migrate [skip-validation] [force] conductor <address> [<address>] router <router
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -2616,6 +2617,28 @@ In this example you can see that what was previously named highwayManager.4.log 
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
+
+## `save packet-buffer-snapshot`
+
+Gathers packet buffer pool information and stores it in a logfile.
+
+#### Usage
+
+```
+save packet-buffer-snapshot [filename <filename>] router <router> node <node>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| filename | Filename to save the buffer pool snapshot (default: packetBuffers.log) |
+| node | The name of the node |
+| router | The name of the router |
+
+#### Description
+
+This command saves a snapshot of the packet buffer pool information in a logfile at /var/log/128technology.
 
 ## `save runtime-stats`
 
@@ -3622,6 +3645,7 @@ The category can be any of the following:
 | Category Name | Long Name | Description |
 | ------------- | --------- | ----------- |
 | ATCS | Analytics | Components related to the SSR Analytics Engine. |
+| CFGD | Config Director | Components related to the 128T Configuration Engine. |
 | DATA | Metadata Database | Components related to the configuration and state databases. |
 | DISC | Discovery | Discovery-based components (except BFD). Today this is DHCP and ARP. |
 | USER | User | User-created log messages, generated via the &#x27;write&#x27; command. |
@@ -3634,6 +3658,7 @@ The category can be any of the following:
 | PLUG | Plugin Components | Components related to plugin management. |
 | RDB | Redundancy Database | The subsystem responsible for synchronizing data between nodes. |
 | RTG | Routing | Components related to the routing engine. |
+| SNMP | Simple Network Management Protocol. | Components related to the SNMP engine. |
 | SATF | Session Processing Thread Failures | Failures related to multi-threaded session setup. |
 | SESS | Session Startup | Components related to session setup. |
 | STEP | STEP | Components related to STEP. |
@@ -3641,6 +3666,7 @@ The category can be any of the following:
 | UTIL | Utility | Components related to utility libraries. |
 | DPDK | DPDK | Components related to DPDK. |
 | DNS | Domain Name System | Components related to DNS. |
+| HTTP | HTTP | Components related to HTTP request/response processing. |
 | PCLI | PCLI | All the PCLI&#x27;s log messages. |
 | BONS | Configuration Database | Components related to the configuration database. |
 | LDAP | LDAP | All the System Security Services Daemon logs. |
@@ -8360,6 +8386,29 @@ Fri 2020-04-17 19:33:29 UTC
 Completed in 0.35 seconds
 ```
 
+## `show packet-buffer-locations`
+
+Display the packet buffer pool locations.
+
+#### Usage
+
+```
+show packet-buffer-locations [pool <pool>] router <router> node <node>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | Node for which to display packet-buffer pool information |
+| pool | Display the location details of the packet buffer pools (default: all) |
+| router | Router for which to display packet-buffer pool information |
+
+#### Description
+
+This command displays the total number of allocated buffers, capacity and their buffer pool location in the highway.
+
+
 ## `show peers`
 
 Display peer information.
@@ -9263,6 +9312,7 @@ show service-path [{service-name <name> | hierarchy-service-name <name> | contai
 | contains-service-name | The partial substring match for which to display the service path |
 | detail | Display detail info of service path |
 | hierarchy-service-name | The hierarchy root for which to display the service path |
+| idp | Display idp related service-paths |
 | node | The node for which to display service path |
 | router | The router for which to display the service path |
 | rows | The number of service paths to display at once [type: int or &#x27;all&#x27;] (default: 50) |
