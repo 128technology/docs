@@ -13,7 +13,7 @@ For a deeper look at LAG and LACP, see [Aggregated Ethernet Interfaces](https://
 
 ## How It Works
 
-The LAG is created by configuring a `bond` device interface. It is populated as other device interfaces are configured with the `parent-bond` option identified as the `bond` device interface. Because LACP is enabled by default on the `bond` interface, the LAG allows the exchange of information mentioned earlier.
+The LAG is created by defining a device interface as a `bond`. The `bond` interface is configured with a network-interface. Members of the `bond` are configured as ethernet device interfaces, and have the `parent-bond` setting defined as the `bond` device interface. `bond` members (the device interfaces) are not allowed to be configured with their own network-interfaces.
 
 Keep in mind the following LAG/LACP requirements:
 
@@ -21,6 +21,7 @@ Keep in mind the following LAG/LACP requirements:
 - A `bond` must have at least one member; At least one `device-interface` that references the `bond` as it’s `parent-bond`.
 - A `bond` can have a maximum of 8 members. This is verified during the configuration validation step.
 - All members of the `bond` must be of the type `ethernet`.
+- All members of the `bond` must be the same speed and support full duplex.
 
 ## Configuring LAG and LACP
 
@@ -98,25 +99,7 @@ These same settings are accessed from the GUI at the Authority > Router > Node >
 
 ![Configure LAG devices](/img/config_lacp_dev-inf-parent-bond.png)
 
-### Configuring LLDP 
 
-LLDP allows other devices in the network to discover the SSR. It is not required for LACP, but when enabled it provides information about the LAG interface in the network. It should be noted that when enabled as part of LACP, it is configured for the entirety of the bond, not on the individual interfaces within the group. For additional information about using the LLDP command, see [`lldp`](config_reference_guide.md#lldp)
-
-```
-              device-interface  bond0
-                    name               bond0
-                    type               bond
-
-                    bond-settings
-                        lacp-enable  true
-                    exit
-
-                    lldp mode        enabled
-                    exit
-            exit         
-```
-
-![Configuring LLDP mode](/img/config_lldp_lacp.png)
 
 ### Show Commands 
 
