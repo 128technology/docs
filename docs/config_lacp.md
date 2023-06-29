@@ -2,6 +2,9 @@
 title: Link Aggregation and LACP
 sidebar_label: Link Aggregation and LACP
 ---
+:::important
+This feature is currently a Beta feature. Some components are not fully tested. Refer to [Caveats](#caveats) for more details.
+:::
 
 A Link Aggregation Group (LAG) enables the grouping Ethernet interfaces to form a single link layer interface. LAGs are formed by connecting multiple ports in parallel between two devices. As more links are added between the two devices, bandwidth expands. Traffic is automatically load-balanced, and in a network failure scenario, there is link-level redundancy. 
 
@@ -22,6 +25,11 @@ Keep in mind the following LAG/LACP requirements:
 - A `bond` can have a maximum of 8 members. This is verified during the configuration validation step.
 - All members of the `bond` must be of the type `ethernet`.
 - All members of the `bond` must be the same speed and support full duplex.
+
+### Caveats
+
+The following issues have been identified and workarounds provided here.
+
 
 ## Configuring LAG and LACP
 
@@ -82,9 +90,7 @@ Please note that after any configuration changes to LAG or LACP settings, an SSR
              exit
 ```
 
-
-
-### Configuration using the GUI
+### Configuration Using the GUI
 
 These same settings are accessed from the GUI at the Authority > Router > Node > Device Interface level. 
 
@@ -104,8 +110,6 @@ These same settings are accessed from the GUI at the Authority > Router > Node >
     - The only configuration allowed on the bond-members are `pci-address` and `parent-bond`. All other settings must be configured on the `bond` interface.
 
 ![Configure LAG devices](/img/config_lacp_dev-inf-parent-bond.png)
-
-
 
 ### Show Commands 
 
