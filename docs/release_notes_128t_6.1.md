@@ -61,7 +61,7 @@ NOTE FOR REVIEWERS: **The links in the New Features section will not work. The d
 ------
 - **I95-10141 LLDP Support:** The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. For information about configuring LLDP, see [`lldp`](config_reference_guide.md#lldp).
 ------
-- **I95-20864 Support for Multicast:** Multicast over SVR is now supported, and is a “one source, many destinations” method of traffic distribution. For more information, see [Multicast](config_multicast.md). Note that an earlier issue (I95-48792) with Encryption on the original version of Multicast not working correctly has been resolved in this release. 
+- **I95-20864 Support for Multicast:** Multicast is a “one source, many destinations” method of traffic distribution. For more information, see [Multicast](config_multicast.md). Note that an earlier issue (I95-48792) with Encryption on the original version of Multicast not working correctly has been resolved in this release. 
 ------
 - **I95-44473 Application Steering:** Application Steering provides the ability to configure unique steering policies for individual applications based on the application name, category, application signatures, URLs, and domains. Once the traffic has been classified, it can be steered across the available paths. For more information, see [Application Steering](config_application_steering.md).
 ------
@@ -69,18 +69,15 @@ NOTE FOR REVIEWERS: **The links in the New Features section will not work. The d
 ------
 - **I95-49928 BGP over SVR Inter-Hub Steering:** Path based BGP over SVR Routing responds to changes in peer adjacency, operational status, or SLA. It adds the ability to select and advertise BGP routes between BGP over SVR neighbors. It does this by monitoring the peer paths between BGP over SVR peers and dynamically adjusting the BGP neighbor inbound and outbound policy on those peers to reflect the priority and SLA of the peer paths. For more information, see [BGP over SVR Inter-Hub Steering](config_bgp.md#bgp-over-svr-inter-hub-steering).
 ------
-- **I95-50571 Add packet buffer tracking to help analyze buffer exhaustion:** Packet buffer location tracking has been added.
-------
-
-- **I95-50810 IDP Custom Rules and Policies:** Users can customize an existing base IDP policy by creating exception-based rules. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. See [IDP Custom Rules](concepts_ssr_idp.md#idp-custom-rules) for overview information, and refer to [Custom IDP Policies and Rules](config_idp.md#custom-idp-policies-and-rules) for configuration information.
-------
-- **I95-50973 DSCP Steering with BGP over SVR:** Need clarification from Markus how BGP operates with DSCP steering.
-------
-- **I95-51296 Show `Time in Status` in the `show assets` detail view:** The asset `Time in Status` field has been added to the Detail view. 
-------
-- **I95-51039 / I95-50949 Create PCLI commands for buffer tracking tools:** The following PCLI commands have been created for buffer tracking. 
+- **I95-50571/I95-50949/I95-51039 Add packet buffer tracking to help analyze buffer exhaustion:** Packet buffer location tracking has been added, and the following PCLI commands have been created for buffer tracking. 
   - `show packet-buffer locations`
   - `save packet-buffer snapshot`
+------
+- **I95-50810 IDP Custom Rules and Policies:** Users can customize an existing base IDP policy by creating exception-based rules. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. See [IDP Custom Rules](concepts_ssr_idp.md#idp-custom-rules) for overview information, and refer to [Custom IDP Policies and Rules](config_idp.md#custom-idp-policies-and-rules) for configuration information.
+------
+- **I95-50973 DSCP Steering with BGP over SVR:** DSCP steering is now supported on BGP over SVR.
+------
+- **I95-51296 Show `Time in Status` in the `show assets` detail view:** The asset `Time in Status` field has been added to the Detail view. 
 
 ### Resolved Issues
 
@@ -96,7 +93,7 @@ NOTE FOR REVIEWERS: **The links in the New Features section will not work. The d
 ------
 - **I95-49791 Audit rules to track modification of config files:** Added rules to track the modification of grub configuration files, to aid in troubleshooting. 
 ------
-- **I95-50338 About this System link on GUI not working:** The link target is no longer valid, and the link has been removed from the GUI. 
+- **I95-50338 "About this System" link on GUI not working:** The link target is no longer valid, and the link has been removed from the GUI. 
 ------
 - **I95-50632 Add Buffer tracking monitoring to lockup detector:** LockupDetector is now able to identify and take corrective action should a network packet pool buffer exhaustion event occur. 
 ------
@@ -110,7 +107,7 @@ NOTE FOR REVIEWERS: **The links in the New Features section will not work. The d
 ------
 - **I95-51177 Ethernet over SVR setting wrong egress MAC address:** Ethernet over SVR now correctly sets the egress MAC address when using `outbound-only` mode.
 ------
-- **I95-51178 Increase default `juteMaxBufferSize`:** The default `juteMaxBufferSize` has been increased to 10MB.
+- **I95-51178 Increase default `juteMaxBufferSize`:** The default `juteMaxBufferSize` has been increased to 10MB, which addresses issues where the device is unable to commit very large configurations.
 ------
 - **I95-51201 Autocompletion in `adopt` command generates invalid organization name:** When using tab-completion to enter the site name from the `adopt` command in the PCLI, it will add quotations around the site name if there are whitespaces in the name. The PCLI now properly handles quotes and whitespace in organization names when running the PCLI adopt command.
 ------
