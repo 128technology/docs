@@ -422,10 +422,10 @@ service-policy prefer-mpls-hub1
 exit
 ```
 
-3. Configure a routing policy that includes the new routing policy `path-based` action. 
+3. Configure a routing policy that includes the new routing policy `path-based` action. See [Configuration Commands](#configuration-commands) below for additional information.
 
 ```
-policy spoke-to-hub  
+policy spoke-to-hub  statement 1
     action set-path-based-as-path 
         type             set-path-based-as-path
         prepend          65000
@@ -481,13 +481,13 @@ When the adjacency from spoke to `hub1` over mpls goes down, the best adjacency 
 
 Path-based BGP can be used in combination with BGP conditional advertisement. Path-based BGP sets the BGP selected route using the inbound policy. BGP conditional advertisement only considers the BGP selected route. BGP conditional advertisement will always override the neighbor outbound policy. If a BGP prefix matches both the BGP outbound policy and the BGP conditional advertisement advertise-policy, the conditional advertisement takes precedence. 
 
-## PCLI Configuration Commands
+### Configuration Commands
 
-The configuration command to set the path based AS path is an action configured within a routing policy:
+The configuration for `set-path-based-as-path` is performed under the routing policy, as an action within a statement: 
 
 ```
-action  set-path-based-as-path 
-    type             set set-path-based-as-path
+action set-path-based-as-path 
+    type             set-path-based-as-path
     prepend          <as-path> 
     service-policy   <service-policy-name>
 ```
