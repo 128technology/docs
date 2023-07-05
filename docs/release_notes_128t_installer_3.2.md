@@ -11,4 +11,4 @@ sidebar_label: '3.2'
 
 ### Resolved Issues
 
-- **IN-533 `import-iso` must check package signatures:** The installer now verifies the integrity of all packages in the ISOs during the import process.
+- **IN-533 Check package signatures on import:** The installer now verifies the integrity of all packages in the ISOs during the import process.
