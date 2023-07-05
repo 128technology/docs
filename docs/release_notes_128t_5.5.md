@@ -58,7 +58,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues:
 
-- **The following CVE's have been addressed:** I95-47497, I95-48445, I95-48859, I95-49079, I95-49455, I95-49745, I95-49746, I95-49747, I95-49748, I95-50358, I95-50359, I95-50506, I95-50508. 
+- **The following CVE's have been addressed:** I95-47497, I95-48445, I95-48859, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748, I95-50358, I95-50359, I95-50506, I95-50508. 
 ------
 - **I95-48485 Broadcom NIC (NetXtreme) fails to initialize properly:** Resolved an issue with initization errors during memzone creation.
 ------
