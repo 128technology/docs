@@ -329,6 +329,7 @@ module.exports = {
         "type": "category",
         "label": "SSR Installer",
         "items": [
+          "release_notes_128t_installer_3.2",
           "release_notes_128t_installer_3.1",
           "release_notes_128t_installer_3.0",
           "release_notes_128t_installer_2.7",
