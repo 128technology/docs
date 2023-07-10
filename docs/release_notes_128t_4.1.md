@@ -669,7 +669,7 @@ The 4.1.2 release requires the 128T-installer 2.3.0 or greater. By default, the 
 
 ### New Features and Improvements
 
-- **I95-18018** Upgrade SSR-OS to 7.5
+- **I95-18018** Upgrade SSR-OS
 ------
 - **I95-18889** GUI Dashboard with Improved Navigation
 ------

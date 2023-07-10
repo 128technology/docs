@@ -57,7 +57,7 @@ sidebar_label: 2.3
   To diagnose the problem, try running: `rpm -Va --nofiles --nodigest`.
   If this is a corrupted RPMDB, running `rpm --rebuilddb` may address the issue.
 
-  _**Cause:**_ Installed version of the RPM's come from a later version of the Supported SSR OS version. SSR Versions 3.2.8, 4.0.0 and 4.0.1 are supported on SSR-OS 7.4. Version 4.1.0 is supported on SSR-OS 7.5.
+  _**Cause:**_ Installed version of the RPM's come from a later version of the Supported SSR OS version.
 
   _**Corrective Action:**_ For the offending RPM that comes from a different version of the OS than is installed and running, perform either operation:
 
@@ -68,6 +68,6 @@ sidebar_label: 2.3
 
   _**Symptom:**_ Install fails with the following error: "Error executing DNF command (code: -11)"
 
-  _**Cause:**_ DNF uses the SSR-OS curl functions, in SSR-OS 7.3/7.4 the curl libraries may exhibit this issue.
+  _**Cause:**_ DNF uses the curl functions, in earlier versions of SSR-OS the curl libraries may exhibit this issue.
 
   _**Corrective Action:**_ If SSR 4.1.0 or greater is installed this is not an issue. If upgrading from a previous version and using the Conductor, the Conductor will perform retries to work around this issue. If using the local installer for installation, re-execute the installer to work around this issue.     
