@@ -51,7 +51,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ## Release 6.1.4-R2
 
-**Release Date:** June 30, 2023
+**Release Date:** July 14, 2023
 
 ### New Features
 
@@ -87,7 +87,7 @@ NOTE FOR REVIEWERS: **The links in the New Features section will not work. The d
 ------
 - **I95-47960 Incorrect progress message for `show dns resolutions`:** The progress message for this command now correctly displays `Retrieving dns resolutions...`.
 ------
-- **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions has been optimized to accurately identify the correct service.
+- **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions now accurately identifies the correct service.
 ------
 - **I95-49598 Automatically choose the number of session-processor threads:** If session-setup-scaling is provisioned to true, the SSR will now automatically determine the number of threads to use for session processing.
 ------
@@ -103,7 +103,7 @@ NOTE FOR REVIEWERS: **The links in the New Features section will not work. The d
 ------
 - **I95-51081 `bgp-service-generation service-policy` is being filtered on the conductor:** The `bgp-service-generation service-policy` is now marked as authority wide so it is not filtered. This prevents managed routers from rejecting configurations containing `bgp-service-generation` and getting out of sync with the conductor.
 ------
-- **I95-51167 Unable to override auto-generated peer service-route:** The user can now provision a `service-route` with the same `name` as an automatically-generated one. The user's `service-route` takes precedence and will be used instead of generating one.
+- **I95-51167 Unable to override auto-generated peer service-route:** The user can now provision a `service-route` with the same `name` as an automatically-generated one. The user's `service-route` takes precedence and will be used instead of the generated one.
 ------
 - **I95-51177 Ethernet over SVR setting wrong egress MAC address:** Ethernet over SVR now correctly sets the egress MAC address when using `outbound-only` mode.
 ------
@@ -123,7 +123,7 @@ NOTE FOR REVIEWERS: **The links in the New Features section will not work. The d
 ------
 - **I95-51629 `ingress-source-nat-pool` should not display non-SVR traffic:** Previously, the `ingress-source-nat-pool` configured under `network-interface` applied to both SVR and non-SVR sessions, now it only applies to SVR sessions.
 ------
-- **I95-51650 `log-category PCLI` command not working:** Resolved an issue that disallowed setting `config authority router <name> system log-category PCLI`. now also allow configuring the following log categories:
+- **I95-51650 `log-category PCLI` command not working:** Resolved an issue that disallowed setting `config authority router <name> system log-category PCLI`. We now also allow configuring the following log categories:
   - CFGD
   - SNMP
   - HTTP
@@ -142,7 +142,7 @@ NOTE FOR REVIEWERS: **The links in the New Features section will not work. The d
 ------
 - **I95-51794 IBU Crash/Core dump on Lenovo SR-650:** Resolved an issue where the SR-650 was crashing due to uninitialized flags field. Support has been added for these devices. 
 ------
-- **I95-51915 Report KNI buffer alloc failures to watchdog:** `alloc-failure` stats are now gathered per KNI device and included in the device stats, allowing the watchdog to detect a failure and respond.
+- **I95-51915 Report buffer allocaction failures to watchdog:** `alloc-failure` stats are now gathered per KNI device and included in the device stats, allowing the watchdog to detect a failure and respond.
 ------
 - **I95-51964 Make the loopback-address available on the conductor:** The loopback-address configuration  is now accessible on the conductor, and allows for a per node user defined address to be configured for overlay management traffic.
 ------
