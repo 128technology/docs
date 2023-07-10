@@ -32,7 +32,7 @@ sidebar_label: 2.6
 
 ## Special Considerations
 
-- **IN-261** - Installation using a CentOS 7.3 base is no longer supported.
+- **IN-261** - Installation using a SSR-OS 7.3 base is no longer supported.
 
 ## Caveats
 
@@ -47,7 +47,7 @@ sidebar_label: 2.6
 
   ```
   Cancelling upgrade of the second node on the router due to failure on this node:
-  Failed to install 128T-manifest-0:4.1.0.1.el7.centos-1.x86_64:
+  Failed to install 128T-manifest-0:4.1.0.1.el7:
   Error: transaction check vs depsolve:
   iptables = 1.4.21-28.el7 is needed by iptables-services-1.4.21-28.el7.x86_64
   ```
@@ -55,9 +55,9 @@ sidebar_label: 2.6
   To diagnose the problem, try running: `rpm -Va --nofiles --nodigest`.
   If this is a corrupted RPMDB, running `rpm --rebuilddb` may address the issue.
 
-  _**Cause:**_ Installed version of the RPM's coming from a later version of the Supported SSR OS version. SSR Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
+  _**Cause:**_ Installed version of the RPM's coming from a later version of the Supported SSR OS version. SSR Versions 3.2.8, 4.0.0 and 4.0.1 are supported on SSR-OS 7.4. Version 4.1.0 is supported on SSR-OS 7.5.
 
   _**Corrective Action:**_ For the offending RPM that comes from a different version of the OS than is installed and running, perform either operation:
 
   1. Remove the offending rpm (in the example above "iptables-services-1.4.21-28.el7.x86_64" would be removed
-  2. Setup a new repo pointing to the support CentOS vault version and downgrade the related rpms
+  2. Setup a new repo pointing to the support SSR-OS vault version and downgrade the related rpms

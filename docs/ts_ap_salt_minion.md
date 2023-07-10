@@ -40,7 +40,7 @@ Mon 2019-08-26 19:45:12 EDT
 =============================================================================
  Router:                  my-router
  Node:                    node1
- Current Version:         4.1.4-1.el7.centos
+ Current Version:         4.1.4-1.el7
  Status:                  running
  Failed Status:           running
 
