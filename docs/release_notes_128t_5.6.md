@@ -28,23 +28,23 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.6.9-1
+## Release 5.6.9-2
 
-**Release Date:** July 13, 2023
+**Release Date:** July 17, 2023
 
 ### Resolved Issues
 
 - **I95-47960 Incorrect progress message for `show dns resolutions`:** The progress message for this command now correctly displays `Retrieving dns resolutions...`.
 ------
-- **I95-48931 Service area Highway crash:** Now prevent crashing in SSR's highway process in unusual race conditions when a session's flow is removed before the session is fully established.
+- **I95-48931 Service area Highway crash:** Now prevent crashing in SSR's highway process in rare race conditions when a session's flow is removed before the session is fully established.
 ------
-- **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions has been optimized to accurately identify the correct service.
+- **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions now accurately identifies the correct service.
 ------
 - **I95-50722 Highway crashes during session migration:** Resolved a crash in the SSR's highway process, due to a race condition between configuration changes and BFD sessions.
 ------
 - **I95-51053 ESP session stuck in Incomplete state:** Resolved an issue where SVR sessions from network-interfaces with dscp-steering enabled can be stuck in an incomplete state.
 ------
-- **I95-51167 Unable to override auto-generated peer service-route:** The user can now provision a service-route with the same name as an automatically-generated one. The user's service-route takes precedence and will be used instead of generating one.
+- **I95-51167 Unable to override auto-generated peer service-route:** The user can now provision a service-route with the same name as an automatically-generated one. The user's service-route takes precedence and will be used instead of the generated one.
 ------
 - **I95-51177 Ethernet over SVR setting wrong egress MAC address:** Ethernet over SVR now correctly sets the egress MAC address when using outbound-only mode.
 ------
@@ -81,7 +81,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51865 NTP not syncing for HA nodes:** Added the ability to configure the orphan stratum for the HA peer node. This was previously hard-coded to 5 but this change allows an HA peer to be able to sync when the upstream server is of a lower stratum, if so desired by the user.
 ------
-- **I95-51915 Report KNI buffer alloc failures to watchdog:** `alloc-failure` stats are now gathered per KNI device and included in the device stats, allowing the watchdog to detect a failure and respond.
+- **I95-51915 Report buffer allocation failures to watchdog:** `alloc-failure` stats are now gathered per KNI device and included in the device stats, allowing the watchdog to detect a failure and respond.
 ------
 - **I95 52105 Permissions error when attempting to `delete certificate webserver`:** Resolved an issue where `delete certificate webserver` and `create cerificate webserver` with an existing certificate were failing. On older versions of software this can be worked around by running `sudo rm -rf /etc/128technology/pki/webserver.pem`. 
 
