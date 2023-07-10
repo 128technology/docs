@@ -60,7 +60,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51427 GUI not displaying all the version information:** The GUI About page now displays additional version information previously only displayed in the PCLI `show system version detail.`
 ------
-- **I95-51621 Provide a way for the user to display the history of configuration stored on disk:** Users can now use the `show diskcache` command to retrieve metadata information about the current running configuration as well as the cached configurations that are still present on the system.
+- **I95-51621 Provide a way for the user to display the history of configuration stored on disk:** Users can now use the `show config disk-cache` command to retrieve metadata information about the current running configuration as well as the cached configurations that are still present on the system.
 ------
 - **I95-51650 `log-category PCLI` command not working:** Resolved an issue that disallowed setting `config authority router <name> system log-category PCLI`. We now also allow configuring the following log categories:
 	- CFGD
