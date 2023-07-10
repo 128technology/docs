@@ -28,6 +28,63 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.6.9-1
+
+**Release Date:** July 13, 2023
+
+### Resolved Issues
+
+- **I95-47960 Incorrect progress message for `show dns resolutions`:** The progress message for this command now correctly displays `Retrieving dns resolutions...`.
+------
+- **I95-48931 Service area Highway crash:** Now prevent crashing in SSR's highway process in unusual race conditions when a session's flow is removed before the session is fully established.
+------
+- **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions has been optimized to accurately identify the correct service.
+------
+- **I95-50722 Highway crashes during session migration:** Resolved a crash in the SSR's highway process, due to a race condition between configuration changes and BFD sessions.
+------
+- **I95-51053 ESP session stuck in Incomplete state:** Resolved an issue where SVR sessions from network-interfaces with dscp-steering enabled can be stuck in an incomplete state.
+------
+- **I95-51167 Unable to override auto-generated peer service-route:** The user can now provision a service-route with the same name as an automatically-generated one. The user's service-route takes precedence and will be used instead of generating one.
+------
+- **I95-51177 Ethernet over SVR setting wrong egress MAC address:** Ethernet over SVR now correctly sets the egress MAC address when using outbound-only mode.
+------
+- **I95-51178 Increase default juteMaxBufferSize:** The default juteMaxBufferSize has been increased to 10MB, which addresses issues where the device is unable to commit very large configurations.
+------
+- **I95-51284 Routers remain in the connected state:** Updated the dependencies within the salt minion to resolve an issue where an asset is stuck in the connected state, displaying the error; `Error getting asset's public key: 'ssh.set_auth_key', retrying....`
+------
+- **I95-51296 Show Time in Status in the show assets detail view:** The asset Time in Status field has been added to the Detail view.
+------
+- **I95-51359 Unable to set the OSPF MTU:** Added the ability for users to set the MTU to a non-default value.
+------
+- **I95-51403 GUI displays download in progress even after the download is complete:** Resolved an issue where a download success event is never created even though the version shows as downloaded in the software versions.
+------
+- **I95-51427 GUI not displaying all the version information:** The GUI About page now displays additional version information previously only displayed in the PCLI `show system version detail.`
+------
+- **I95-51621 Provide a way for the user to display the history of configuration stored on disk:** Users can now use the `show diskcache` command to retrieve metadata information about the current running configuration as well as the cached configurations that are still present on the system.
+------
+- **I95-51650 `log-category PCLI` command not working:** Resolved an issue that disallowed setting `config authority router <name> system log-category PCLI`. We now also allow configuring the following log categories:
+	- CFGD
+	- SNMP
+	- HTTP
+------
+- **I95-51658 Allow sync command in resynchronizing state:** Resolved an issue where the user received an error when executing the send command sync command while an asset was in the resynchronizing state.
+------
+- **I95-51734 Remove duplicate transport port-ranges from modules before adding to service:** Resolved an issue where FIB entries are not installed when app-id modules have conflicting or overlapping port-ranges, and are being placed into one service.
+------
+- **I95-51788 Path index is not displayed correctly for `show sessions by-id`:** `show sessions by-id` has been updated to display MTU and PathIndex.
+------
+- **I95-51792 Low MTU threshold causing metadata fragmentation:** Fixed the incorrect handling of packets where metadata is fragmented due to unreasonably low MTU, causing the packet buffers to become exhausted.
+------
+- **I95-51793 Path MTU discovery dropping very low:** Fixed PMTU discovery from ever resolving to an unreasonably low MTU, which could previously occur during a link flap event.
+------
+- **I95-51794 IBU Crash/Core dump on Lenovo SR-650:** Resolved an issue where the SR-650 was crashing due to uninitialized flags field. Support has been added for these devices.
+------
+- **I95-51865 NTP not syncing for HA nodes:** Added the ability to configure the orphan stratum for the HA peer node. This was previously hard-coded to 5 but this change allows an HA peer to be able to sync when the upstream server is of a lower stratum, if so desired by the user.
+------
+- **I95-51915 Report KNI buffer alloc failures to watchdog:** `alloc-failure` stats are now gathered per KNI device and included in the device stats, allowing the watchdog to detect a failure and respond.
+------
+- **I95 52105 Permissions error when attempting to `delete certificate webserver`:** Resolved an issue where `delete certificate webserver` and `create cerificate webserver` with an existing certificate were failing. On older versions of software this can be worked around by running `sudo rm -rf /etc/128technology/pki/webserver.pem`. 
+
 ## Release 5.6.8-9
 
 **Release Date:** May 25, 2023
