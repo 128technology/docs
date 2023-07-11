@@ -64,7 +64,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 	- TBW (Terabyte Written)
 	- TBW per year
 ------
-- **I95-49824 SVR Transport Reuse** In deployments where the number of SVR sessions between SSRs are limited due to carrier settings, the established BFD channel is leveraged to encapsulate SVR sessions. For details about using this feature, see [SVR Transport Reuse.](config_bfd_tunnel.md)
+- **I95-49824 SVR Transport Reuse** In deployments where the number of SVR sessions between SSRs are limited due to carrier settings, the established BFD transport session is reused to carry SVR sessions. For details about using this feature, see [SVR Transport Reuse.](config_bfd_tunnel.md)
 ------
 - **I95-50072 Support for ConnectX-6 Lx PCIe device:** Support has been added for this device.
 ------
