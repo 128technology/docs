@@ -30,6 +30,13 @@ Keep in mind the following LAG/LACP requirements:
 
 The following issues have been identified and workarounds provided here.
 
+- Dynamic Reconfiguration: This feature has not been fully implemented. Therefore, any time changes are made to a bond configuration, reboot the node/router/128t service (???).
+- VRRP with LAG has not been fully tested, and may not be fully functional. 
+- Shared physical addresses are not allowed.
+- High Availability has not been fully tested. 
+- LAG is supported on the following platforms: 
+    - 
+
 
 ## Configuring LAG and LACP
 
@@ -110,6 +117,24 @@ These same settings are accessed from the GUI at the Authority > Router > Node >
     - The only configuration allowed on the bond-members are `pci-address` and `parent-bond`. All other settings must be configured on the `bond` interface.
 
 ![Configure LAG devices](/img/config_lacp_dev-inf-parent-bond.png)
+
+### Configuring LLDP
+
+LLDP allows other devices in the network to discover the SSR. It is not required for LAG, but when enabled it provides information about the LAG interface in the network. It should be noted that when enabled as part of LAG, it is configured for the entirety of the `bond`, not on the individual interfaces within the group. For additional information about using the LLDP command, see [`lldp`](config_reference_guide.md#lldp)
+
+```
+              device-interface  bond0
+                    name               bond0
+                    type               bond
+                    bond-settings
+                        lacp-enable  true
+                    exit
+                    lldp mode        enabled
+                    exit
+            exit         
+```
+
+![Configuring LLDP mode](/img/config_lldp_lacp.png)
 
 ### Show Commands 
 
