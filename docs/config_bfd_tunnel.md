@@ -1,9 +1,9 @@
 ---
-title: BFD Overlay over SVR
-sidebar_label: BFD Overlay over SVR
+title: SVR Transport Reuse
+sidebar_label: SVR Transport Reuse
 ---
 
-In deployments where the number of SVR sessions between SSRs are limited due to provider settings, the established BFD channel is leveraged to encapsulate SVR sessions. When enabled, the SSR transforms each packet in the SVR session to a UDP packet, matching the IP/Port tuples of the BFD peer connection. The carrier does not see any additional sessions between the SSRs beyond the initial BFD peer connection. 
+In deployments where the number of SVR sessions between SSRs are limited due to provider settings, the established BFD transport session is reused to carry SVR sessions. When enabled, the SSR transforms each packet in the SVR session to a UDP packet, matching the IP/Port tuples of the BFD peer connection. The carrier does not see any additional sessions between the SSRs beyond the initial BFD peer connection. 
 
 ## Configuration
 
@@ -13,7 +13,7 @@ This feature is accessed from Authority > Router > Node > Device > Network Inter
 Use the path described above to access the Neighborhood configuration. After naming the neighborhood, choose the `spoke` topology type. This opens the Peer Path Overlay field. The following options are available:
 
 - **svr**: The original SVR overlay connection method. This is the default method for bidirectional connectivity. 
-- **bfd-tunnel**: Outbound only connection method; enables the BFD Overlay over SVR feature. 
+- **bfd-tunnel**: Outbound only connection method; enables the SVR Transport Reuse feature. 
 
 ![BFD Tunnel on Neighborhood](/img/config_bfd_tunnel_gui.png)
 
@@ -59,7 +59,7 @@ An attribute is added to the unencrypted metadata of UDP packets going over the 
 
  ## Troubleshooting
 
- Use the following `show stats` metrics to view and troubleshoot issues encountered with BFD Overlay over SVR:
+ Use the following `show stats` metrics to view and troubleshoot issues encountered with SVR Transport Reuse:
 
 - [`show stats packet-processing action success tunnel bfd encapsulate`](cli_stats_reference.md#show-stats-packet-processing-action-success-tunnel-bfd-encapsulate)
 - [`show stats packet-processing action success tunnel bfd decapsulate`](cli_stats_reference.md#show-stats-packet-processing-action-success-tunnel-bfd-decapsulate)
