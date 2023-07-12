@@ -364,7 +364,7 @@ The 4.2.5 release is a superset of the 4.2.4 release. Features and corrections i
 
   _**Symptoms:**_ show asset summary provides errors for an asset and does not perform high-state operations. The error `error: db5 error` would be seen in `/var/log/salt/minion.log` file
 
-  _**Conditions:**_ When the centos rpmdb has been corrupted.
+  _**Conditions:**_ When the SSR-OS rpmdb has been corrupted.
 
   Until the system is upgraded to 4.2.5, run the following commands on the target asset `mv /var/lib/rpm/__db* /tmp; yum clean all; dnf clean all`
 ------

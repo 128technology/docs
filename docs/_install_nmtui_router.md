@@ -4,6 +4,6 @@ When the system boots from the `Install 128T Routing Software...` Interactive In
 
 ![128T NetManager TUI Start](/img/Initializer_Serial0.png)
 
-Selecting `Yes` launches the CentOS NMTUI application to perform an initial network interface setup.
+Selecting `Yes` launches the NMTUI application to perform an initial network interface setup.
 
 ![128T NetManager TUI Option](/img/Initializer_Serial1.png)

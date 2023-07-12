@@ -6,7 +6,7 @@ sidebar_label: 2.2
 ## Release 2.2.0
 
 ### New Features and Improvements
-- **IN-55** Installer supports and installs CentOS 7.5 for 128T Software 
+- **IN-55** Installer upgrades SSR-OS for 128T Software 
 
 ### Caveats
 - **IN-106** - Installer fails due to presense of .repodata
