@@ -103,7 +103,7 @@ The IDP engine runs on each node of the system. Traffic is always sent to the ID
 
 Starting with SSR 6.1.4-R2, users can customize an existing IDP policy, creating exception-based rules. The following is an example workflow:
 
-- A standard IDP policy is put in place.
+- A **strict** `idp-policy` is initially configured for the service below.
 
 ```
         service      test-app
@@ -130,9 +130,10 @@ Wed 2023-07-12 14:19:00 UTC
         6   2023-07-12 14:17:54.659000+00:00   MEDIUM   HTTP          HTTP:EXTRA_CONTROL_CHARACTERS   TCP        CLOSE
 ```
 
-- Use an existing IDP policy to create a custom IDP profile in the Authority Settings configuration that can be referenced in the `access-policy`. 
-- Modify the profile to allow the specific traffic to flow as expected within the network, for example, modifying the action to alert/allow. Changes are implemented from the SSR GUI or PCLI (in this example the PCLI is used), and validated as part of the existing configuration workflow. 
+- The user has identified the attack `HTTP:EXTRA_CONTROL_CHARACTERS` to be of minimal risk to this network and would like to create a rule to change this event to be **alert** only. 
+- The user creates an `idp-profile` based on the original **strict** policy, modifying the outcome and action to alert/allow. By creating an exception for the attack, the specific traffic flows as desired within the network. 
 
+Changes are implemented from the SSR GUI or PCLI (in this example the PCLI is used), and validated as part of the existing configuration workflow. 
 
 ```
         idp-profile  strict-but-alert
@@ -194,7 +195,7 @@ Wed 2023-07-12 14:25:19 UTC
    IDP policy compiling, waiting to finish
 
 ``` 
-When the config changes have been compiled, the following message will appear under `show idp application status`: 
+Once the engine has applied the new policies, the compilation message disappears. 
 
 ```
 Retrieved IDP state data.
