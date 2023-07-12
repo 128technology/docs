@@ -99,7 +99,7 @@ config
 
 The IDP engine runs on each node of the system. Traffic is always sent to the IDP instance on the first node - per the order in configuration. Upon failover, the existing sessions do not gracefully failover; the TCP sessions are reset, and new sessions must be established by the client. For UDP sessions, the same best effort behavior can be expected from the IDP engine.
 
-## Modifing IDP Policies
+## Modifying IDP Policies
 
 Starting with SSR 6.1.4-R2, users can customize an existing IDP policy, creating exception-based rules. The following is an example workflow:
 

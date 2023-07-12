@@ -73,7 +73,7 @@ NOTE FOR REVIEWERS: **The links in the New Features section will not work. The d
   - `show packet-buffer locations`
   - `save packet-buffer snapshot`
 ------
-- **I95-50810 IDP Custom Rules and Policies:** Users can customize an existing base IDP policy by creating exception-based rules. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. See [IDP Custom Rules](concepts_ssr_idp.md#idp-custom-rules) for overview information, and refer to [Custom IDP Policies and Rules](config_idp.md#custom-idp-policies-and-rules) for configuration information.
+- **I95-50810 IDP Custom Rules and Policies:** Users can customize an existing base IDP policy by creating exception-based rules. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. See [IDP Custom Rules](concepts_ssr_idp.md#idp-custom-rules) for overview information, and refer to [Modifying IDP Policies](config_idp.md#modifying-idp-policies) for configuration information.
 ------
 - **I95-50973 DSCP Steering with BGP over SVR:** DSCP steering is now supported on BGP over SVR.
 ------
