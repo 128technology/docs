@@ -160,7 +160,7 @@ The impacted sessions will time out when all packets for the failed sessions sto
 ------
 - **I95-38746 [`show arp [<verbosity>]`](cli_reference.md#show-arp):** Added the `<verbosity>` subcommand to provide additional information, including time to next refresh (ms), retry count (if expired), and time of last resolved ARP.
 ------
-- **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to that of CentOS 8.4 to address several CVEs and provide support for the i225 NIC, Wireguard, and Cordoba. 
+- **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to address several CVEs and provide support for the i225 NIC, Wireguard, and Cordoba. 
 ------
 - **I95-40130 Create factory defaults for all router-conductor communication:** SaltStack, Conductor, and IKE default session-types have been added. For new deployments, SIP, SIPS, and IPSEC-NAT use NAT Keep Alive by default, and the timeout for IPSEC-NAT is now 5 seconds.
 ------
@@ -178,7 +178,7 @@ The impacted sessions will time out when all packets for the failed sessions sto
 ------
 - **I95-47259 Session Setup Scaling:** The [`session-setup-scaling`](config_reference_guide.md#session-setup-scaling) feature improves the session setup rate by enabling multi-threaded processing. 
 ------
-- **I95-49824 BFD Overlay over SVR** In deployments where the number of SVR sessions between SSRs are limited due to carrier settings, the established BFD channel is leveraged to encapsulate SVR sessions. For details about using this feature, see [BFD Overlay over SVR.](config_bfd_tunnel.md)
+- **I95-49824 SVR Transport Reuse** In deployments where the number of SVR sessions between SSRs are limited due to carrier settings, the established BFD transport session is reused to carry SVR sessions. For details about using this feature, see [SVR Transport Reuse.](config_bfd_tunnel.md)
 ------
 - **I95-50159 Automatic mesh created for route-reflector topology:** Enables the generation of additional BGP service-routes for creating mesh connectivity between all clients of a route reflector. See [Service-route Mesh For Route Reflector Clients](config_bgp.md#service-route-mesh-for-route-reflector-clients) for additional information. 
 

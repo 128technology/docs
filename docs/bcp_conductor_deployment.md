@@ -79,7 +79,7 @@ Because Juniper _does not_ recommend hyperthreading for nodes running SSR softwa
 :::
 
 #### Linux OS Tuning
-This section is specifically geared toward end users that want to build their own conductor nodes on top of a base CentOS operating system. For users that install their conductor software using a Juniper-provided ISO, these settings will be set already.
+This section is specifically geared toward end users that want to build their own conductor nodes on top of the SSR operating system. For users that install their conductor software using a Juniper-provided ISO, these settings will be set already.
 
 ##### Configuring firewalld
 When deploying conductor on the internet, Juniper recommends limiting access to the system using *firewalld*. (The [*firewalld* system daemon](https://firewalld.org/) is a managed firewall application within Linux.) The basic premise is to restrict inbound access to the public-facing addresses to only allow ports 4505/TCP, 4506/TCP, and 930/TCP. This is generally done by:

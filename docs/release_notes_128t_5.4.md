@@ -347,7 +347,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-44591 Paste-config does not allow small config snippets to be posted:** Resolved an issue where the list keys were not being passed in as part of the `value` in the transaction.
 ------
-- **I95-44618 CentOS package update:** This package has been updated to resolve a CVE issue.
+- **I95-44618 OS package update:** This package has been updated to resolve a CVE issue.
 ------
 - **I95-44722 Time based HMAC failure after HA reboot:** Resolved a buffering issue where device interfaces are now flushed upon becoming active to avoid handling of inactive packets.
 ------
@@ -413,7 +413,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 - **I95-25630 Gateway IP is required:** When creating or changing a service-route with a next-hop of a static IP net-int, a gateway IP is required. If no gateway IP has been specified, the network-interface gateway will be used. 
 ------
-- **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to that of CentOS 8.4 to address several CVEs and provide support for Wireguard and Cordoba. 
+- **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to address several CVEs and provide support for Wireguard and Cordoba. 
 ------
 - **I95-44224 Autocomplete for Resource Groups:** Autocomplete has been added to the pcli when configuring resource groups. 
 
