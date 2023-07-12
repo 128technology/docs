@@ -20,6 +20,14 @@ Thu 2022-05-19 04:45:49 UTC
  Docker:     running
 
 ```
+## IDP Start-up
+
+Beginning with SSR version 6.1.4-R2, traffic destined for IDP will temporarily bypass the IDP engine until it completes the startup process. This will take place at initial start up of the device, upgrade, or restart. An alarm is triggered on the device to indicate this is taking place, and is visible using the `show idp events` command. Once the IDP engine is fully booted, traffic is appropriately routed through IDP. Earlier versions routed traffic to the IDP engine before it was fully engaged, resulting in the loss of traffic. With `bypass-enabled` set to `true` (this is the default) traffic temporarily bypasses the IDP.
+
+![Advanced IDP Setting](/img/adv-idp-settings.png) 
+
+Additionally, services configured for IDP and their status (passing through IDP or not, and why), and when the IDP will be operational are reported in the `show idp application status` command.
+
 ## Show Commands
 
 Each of the commands listed below, and the subcommands for each, provide additional details for IDP visibility. Use the links to learn more about each command.
