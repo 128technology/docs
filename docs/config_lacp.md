@@ -18,7 +18,7 @@ For a deeper look at LAG and LACP, see [Aggregated Ethernet Interfaces](https://
 
 The LAG is created by defining a device interface as a `bond`. The `bond` interface is configured with a network-interface. Members of the `bond` are configured as ethernet device interfaces, and have the `parent-bond` setting defined as the `bond` device interface. `bond` members (the device interfaces) are not allowed to be configured with their own network-interfaces.
 
-Keep in mind the following LAG/LACP requirements:
+LAG/LACP has the following requirements:
 
 - LAG/LACP must be configured on the devices on each end of the link.
 - A `bond` must have between 1 and 8 members. Members are device-interface's that reference the `bond` interface as their `parent-bond`.
@@ -30,13 +30,12 @@ Keep in mind the following LAG/LACP requirements:
 
 The following issues have been identified and workarounds provided here.
 
-- Dynamic Reconfiguration: This feature has not been fully implemented. Therefore, any time changes are made to a bond configuration, reboot the node/router/128t service (???).
+- Dynamic Reconfiguration: This feature has not been fully implemented. Therefore, any time changes are made to a bond configuration, it is recommended to reboot the device.
 - VRRP with LAG has not been fully tested, and may not be fully functional. 
+- High Availability has not been fully tested, and may not be fully functional. 
 - Shared physical addresses are not allowed.
-- High Availability has not been fully tested. 
 - LAG is supported on the following platforms: 
     - 
-
 
 ## Configuring LAG and LACP
 
