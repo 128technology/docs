@@ -124,14 +124,14 @@ When deploying a conductor behind a firewall, open 930/TCP and 4505-4506/TCP (us
 Because there is little difference from each deployed router's perspective between this and the previous design pattern, the configuration provided in [Appendix A](#appendix-a-public-conductor) is representative of this design as well. All NAT awareness exists outside of the SSR's configuration.
 
 ### Conductor Behind SSR
-Oftentimes a conductor is hosted within a data center that has a SSR head end router at its edge. In these topologies, the design is a hybrid of the previous two (conductor behind NAT, split horizon conductor). From the remote routers' perspective (i.e., the branch locations not resident at this data center and other data center routers), the conductor is only reachable through the head end SSR router. That same SSR head end router will typically communicate with conductor using a private address.
+At times a conductor must be hosted within a data center that has a SSR head end router at its edge. This is generally not best practice as it can greatly increase the complexity of the deployment. It is strongly advised to validate this design in a lab environment before attempting to configure this in a deployment. In these topologies, the design is a hybrid of the previous two (conductor behind NAT, split horizon conductor). From the remote routers' perspective (i.e., the branch locations not resident at this data center and other data center routers), the conductor is only reachable through the head end SSR router. That same SSR head end router will typically communicate with conductor using a private address.
 
 - The head end fronting the conductor must perform NAT/NAPT to forward 4505-4506/TCP (used for salt), and 930/TCP to the conductor on the data center LAN. The authority-wide `conductor-address` is an IP address that is resolved/routed to that head end router.
 - The head end router overrides the `conductor-address` with specific configuration to reference the local address.
 - The head end router uses `management-config-generated` set to `proxy` requests received on its WAN interface (from remote branch sites) to the internal conductor's address.
 
 #### Remote Routers: to SVR or not to SVR?
-When deploying your conductor behind another SSR at a data center, it opens the possibility of using Secure Vector Routing to reach the conductor using peer paths between a branch and the data center. However, Juniper *does not recommend* using SVR between systems for several reasons:
+When deploying your conductor behind another SSR at a data center, it opens the question of using Secure Vector Routing to reach the conductor using SVR peer paths between a branch and the data center. However, using SVR for conductor communicatin is not supported for several reasons:
 
 1. It exacerbates the Jekyll/Hyde problem (described below), by virtue of being both at the branch and the data center
 2. Certain upgrade workflows or maintenance activities will cause remote sites to toggle between SVR and natural routing, which is suboptimal
