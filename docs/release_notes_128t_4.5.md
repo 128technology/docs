@@ -224,7 +224,7 @@ OR
 ------
 - **I95-38500 CVE Medium: binutils (CESA-2018:3032), binutils (CESA-2019:2075):** Added binutils to deprecated packages.
 ------
-- **I95-38649 CVE High: CentOS 7 : kernel (CESA-2020:5437):** Update Kernel to 3.10.0-1160.11.1.
+- **I95-38649 CVE High: SSR-OS: kernel (CESA-2020:5437):** Update Kernel to 3.10.0-1160.11.1.
 ------
 - **I95-38666 Management Services and routes may not be generated for PPPoE:** Resolved an issue where `management-over-forwarding` was not generating service or service-route config for PPPoE interfaces.
 ------

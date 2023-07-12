@@ -91,7 +91,7 @@ When the system boots from the Interactive Installation work flow, the system pr
 
 ![128T NetManager TUI Start](/img/Initializer_Serial0.png)
 
-Select `Yes` to launch the CentOS NMTUI application and perform an initial network interface setup. 
+Select `Yes` to launch the NMTUI application and perform an initial network interface setup. 
 
 ![128T NetManager TUI Option](/img/Initializer_Serial1.png)
 

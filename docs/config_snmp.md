@@ -15,7 +15,7 @@ SSR provdes MIB files that describe the SSR SNMP objects and traps available on 
 /usr/share/snmp/128technology/
 ```
 
-A Network Management System (NMS) can import these MIBs when managing the SSR appliance. On a Centos based NMS the latest mibs can be optionally installed by downloading the latest "128T-mibs" package from the SSR yum repoisitory.
+A Network Management System (NMS) can import these MIBs when managing the SSR appliance. The latest mibs can be optionally installed by downloading the latest "128T-mibs" package from the SSR yum repoisitory.
 ```
 dnf install 128T-mibs
 ```

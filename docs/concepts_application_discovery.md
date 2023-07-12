@@ -120,7 +120,7 @@ After running tests, retrieve the file from the system for post-processing. We h
 The `dnsanon` tool is open source software and is not supported. Use at your own risk.
 :::
 
-Install dnsanon onto a CentOS system using the following commands:
+Install dnsanon onto a SSR using the following commands:
 
 ```
 sudo dnf copr enable johnh/dnsanon

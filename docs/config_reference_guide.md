@@ -1835,7 +1835,7 @@ When an SSR sends *vectored sessions* to another SSR (that is, when it uses its 
 | Element | Type | Description |
 | --- | --- | --- |
 | end-port | l4-port | The ending port for the range. |
-| start-port | l4-port | Key field. Valid values: 1025-16383. The starting port for the range. |
+| start-port | l4-port | Key field. Valid values: 1025-65535. The starting port for the range. |
 
 #### Version History:
 | Release | Modification |
