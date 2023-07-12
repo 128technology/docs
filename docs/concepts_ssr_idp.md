@@ -80,7 +80,7 @@ For information about changing the settings, see [Application Identification Mod
 
 ## IDP Custom Rules
 
-Starting with SSR 6.1.4-R2, users can customize an existing base IDP policy, adding new or exception-based rules. For example, consider a case where an IDP policy is put in place, but security events are triggered because traffic typical for that network is considered a risk. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. Changes are implemented from the SSR GUI or PCLI, and validated as part of the existing configuration workflow. 
+Starting with SSR 6.1.4-R2, users can customize an existing IDP policy, creating exception-based rules. For example, consider a case where an IDP policy is put in place, but security events are triggered because traffic typical for that network is considered a risk. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. Changes are implemented from the SSR GUI or PCLI, and validated as part of the existing configuration workflow. For more information, see [Modifying IDP Policies](config_idp.md#modifing-idp-policies)
 
 ## Core Requirements 
 

@@ -99,16 +99,124 @@ config
 
 The IDP engine runs on each node of the system. Traffic is always sent to the IDP instance on the first node - per the order in configuration. Upon failover, the existing sessions do not gracefully failover; the TCP sessions are reset, and new sessions must be established by the client. For UDP sessions, the same best effort behavior can be expected from the IDP engine.
 
-## Modify IDP Policies and Rules
+## Modifing IDP Policies
 
-The following is an example workflow:
-- An IDP policy is put in place.
-- Security events are triggered because traffic typical for that network configuration is considered a risk.
-- Create a custom IDP profile in the Authority Settings configuration that can be referenced in the `access-policy`. 
+Starting with SSR 6.1.4-R2, users can customize an existing IDP policy, creating exception-based rules. The following is an example workflow:
 
-Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network, for example, modifying the severity or the action. Changes are implemented from the SSR GUI or PCLI, and validated as part of the existing configuration workflow. 
+- A standard IDP policy is put in place.
 
-### Configuration
+```
+        service      test-app
+            name                  test-app
+            address               172.16.2.0/24
+
+            access-policy         lan
+                idp-policy  strict
+                source      lan
+            exit
+            share-service-routes  false
+        exit
+
+```
+
+- Security events are triggered because traffic typical for that network configuration is considered a risk. The Attack is blocked with the Action CLOSE. 
+
+```
+admin@node.cadillac# show idp events since 2m
+Wed 2023-07-12 14:19:00 UTC
+========== ================================== ======== ============= =============================== ========== ========
+ Severity   Time                               Threat   Application   Attack                          Protocol   Action
+========== ================================== ======== ============= =============================== ========== ========
+        6   2023-07-12 14:17:54.659000+00:00   MEDIUM   HTTP          HTTP:EXTRA_CONTROL_CHARACTERS   TCP        CLOSE
+```
+
+- Use an existing IDP policy to create a custom IDP profile in the Authority Settings configuration that can be referenced in the `access-policy`. 
+- Modify the profile to allow the specific traffic to flow as expected within the network, for example, modifying the action to alert/allow. Changes are implemented from the SSR GUI or PCLI (in this example the PCLI is used), and validated as part of the existing configuration workflow. 
+
+
+```
+        idp-profile  strict-but-alert
+            name         strict-but-alert
+            base-policy  strict
+
+            rule         alert-chunk-overflow
+                name     alert-chunk-overflow
+
+                match
+                    vulnerability  HTTP:EXTRA_CONTROL_CHARACTERS
+                exit
+
+                outcome
+                    action  alert
+                exit
+            exit
+        exit
+
+```
+The new service configuration uses the `idp-profile` instead of the `idp-policy`.
+
+```
+        service      test-app
+            name                  test-app
+            address               172.16.2.0/24
+
+            access-policy         lan
+                idp-profile  strict-but-alert
+                source       lan
+            exit
+            share-service-routes  false
+        exit
+```
+
+:::note
+After creating a new ruleset for IDP, the traffic will initially be routed "around" that particular set of rules until it is fully loaded into the IDP engine. Use the `show idp application status` to verify the traffic status affected by the new rule.
+:::
+
+When the modified profile is applied to the configuration, the following state message appears while it compiles:
+
+```
+admin@node.cadillac# show idp application status
+Wed 2023-07-12 14:25:19 UTC
+✔ Retrieving IDP state data...
+
+===============================================
+ node.cadillac
+===============================================
+ Mode:                    spoke
+ Engine:                  on
+ Pod:                     active
+ Engine Started:          2023-07-11T14:39:55Z
+ Up Time:                 23h 45m 24s
+ Last Commit:             2023-07-12T13:55:00Z
+ Last:                    starting
+
+ Engine Message:
+   IDP policy compiling, waiting to finish
+
+``` 
+When the config changes have been compiled, the following message will appear under `show idp application status`: 
+
+```
+Retrieved IDP state data.
+Completed in 0.02 seconds
+
+```
+
+Now when the vulnerability is matched, the event is logged, and traffic is allowed to pass:
+
+```
+admin@node.cadillac# show idp events since 2m
+Wed 2023-07-12 14:27:45 UTC
+========== ================================== ======== ============= =============================== ========== ========
+ Severity   Time                               Threat   Application   Attack                          Protocol   Action
+========== ================================== ======== ============= =============================== ========== ========
+        6   2023-07-12 14:27:02.777000+00:00   MEDIUM   HTTP          HTTP:EXTRA_CONTROL_CHARACTERS   TCP        NONE
+
+```
+
+### GUI Configuration 
+
+The following steps show how to use the GUI to use an existing IDP policy to create a modified IDP Profile. 
 
 1. Navigate to the IDP Profile feature.
 ![Add IDP Profile](/img/auth-settings-idp-profiles.png)
@@ -123,7 +231,7 @@ Using an existing IDP policy, you can modify the profile to allow the specific t
 7. Identify the following items that will be compared for a match:
 
 :::note
-To populate and modify the Rules fields shown below, use the information available on the Security Events screen or from the [`show idp-events`](concepts_ssr_idp.md#security-events-dashboard) command.
+ The information available on the Security Events screen or the [**`show idp-events`**](concepts_ssr_idp.md#security-events-dashboard) command can be used to populate and modify the Rules fields shown below.
 :::
 - Client IP Address prefix
 - Destination IP Address
@@ -132,38 +240,12 @@ To populate and modify the Rules fields shown below, use the information availab
 - Action Options 
 
 ![New Rule Settings](/img/idp-profiles-rules.png)
-After creating the custom ruleset, use the `access-policy` as shown in the [Configuration section above](#configuration) to define the IDP policy where this custom ruleset is used. 
+After creating the custom ruleset, use the `access-policy` as shown in the workflow above to define the IDP policy where this custom ruleset is used. 
 
 :::note
 After creating a new ruleset for IDP, the traffic will initially be routed "around" that particular set of rules until it is fully loaded into the IDP engine. Use the `show idp application status` to verify the traffic status affected by the new rule.
 :::
 
-#### PCLI Configuration Example
-
-```
-        idp-profile      corp-idp-allowed
-            name         corp-idp-allowed
-            base-policy  standard
-
-            rule         allowed-exceptions-corpidp
-                name     allowed-exceptions-corpidp
-                  description    Rule to allow traffic exceptions
-
-                match
-                    client-address  192.168.10.11/24
-                exit
-
-                match
-                    vulnerability  PORTMAPPER:INFO:DUMP_PROC
-                exit
-
-                outcome
-                    action alert
-                    severity minor
-                exit
-            exit
-         exit
-```         
 
 
 
