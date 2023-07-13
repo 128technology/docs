@@ -3,7 +3,7 @@ title: Link Aggregation and LACP
 sidebar_label: Link Aggregation and LACP
 ---
 :::important
-This feature is currently a Beta feature. Some components are not fully tested. Refer to [Caveats](#caveats) for more details.
+This feature is currently in Beta. Support for LAG has been added for a limited number of use cases. Please refer to the [Caveats](#caveats) section for details.
 :::
 
 A Link Aggregation Group (LAG) enables the grouping Ethernet interfaces to form a single link layer interface. LAGs are formed by connecting multiple ports in parallel between two devices. As more links are added between the two devices, bandwidth expands. Traffic is automatically load-balanced, and in a network failure scenario, there is link-level redundancy. 
@@ -37,7 +37,7 @@ LAG is currently supported on the following platforms:
 
 The following caveats have been identified:
 
-- Dynamic reconfiguration is supported for changing LACP settings on the `bond` device, however adding or removing bonds and/or bond members from the LAG is not currently supported. Any time these changes are made, you must reboot the device.
+- Dynamic reconfiguration is supported for changing LACP settings on the `bond` device, however adding or removing bonds and/or bond members from the LAG is not currently supported. Any time these changes are made, you must restart the 128T service.
 - High Availability has not been fully tested, and may not be fully functional. 
     - VRRP with LAG is not supported
     - Shared physical addresses are not allowed.
@@ -46,7 +46,7 @@ The following caveats have been identified:
 
 LACP is enabled by default on the `bond` device interface, and must be configured on each end of the link. The following device interface configuration shows a `bond` interface and `lacp-enabled` as true (default). The interfaces that are part of the LAG are configured as ethernet interfaces and the `parent-bond` is identified as the name of the `bond` interface. 
 
-Please note that after any changes to the LAG configuration, it is recommended to reboot the device. 
+Please note that after any changes to the LAG configuration, you must restart the 128T service. 
 
 ### Configuration using the PCLI 
 
