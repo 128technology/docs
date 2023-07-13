@@ -161,6 +161,7 @@ module.exports = {
           "config_ospf",
           "config_bfd",
           "config_multicast",
+          "config_lacp",
         ],
       },
       {
