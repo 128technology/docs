@@ -83,6 +83,8 @@ NOTE FOR REVIEWERS: **All links EXCEPT for LAG/LACP/LLDP are connected.**
 
 ### Resolved Issues
 
+- **The following issues have been resolved as part of our ongoing security certification-related initiative:** I95-48924, I95-48927, I95-48928, I95-48943, I95-49912, I95-49913, I95-49914, I95-50535, I95-51397, IN-533
+------
 - **I95-35069 Disallow changing the role of a node:** Once set, changing the role of a node cannot be changed. The configuration validation process has been updated to not allow this change. 
 ------
 - **I95-46895 Teams traffic classified as Azure:** Improvements made to the application database `ip-protocol-port lookup` during session classification. 
