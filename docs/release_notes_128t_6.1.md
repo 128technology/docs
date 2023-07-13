@@ -55,8 +55,6 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### New Features
 
-NOTE FOR REVIEWERS: **All links EXCEPT for LAG/LACP/LLDP are connected.**
-
 - **I95-466 LAG/LACP Support:** Link Aggregation Groups are formed by connecting multiple ports in parallel between two devices. LACP is the protocol that defines how the group of interfaces operates. Users define the LAG interface and then configure the member device interfaces. For more information, a list of supported devices, and caveats, see [Link Aggregation and LACP](config_lacp.md).
 ------
 - **I95-10141 LLDP Support:** The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. For information about configuring LLDP, see [`lldp`](config_reference_guide.md#lldp).
