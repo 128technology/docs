@@ -131,7 +131,7 @@ At times a conductor must be hosted within a data center that has a SSR head end
 - The head end router uses `management-config-generated` set to `proxy` requests received on its WAN interface (from remote branch sites) to the internal conductor's address.
 
 #### Remote Routers: to SVR or not to SVR?
-When deploying your conductor behind another SSR at a data center, it opens the question of using Secure Vector Routing to reach the conductor using SVR peer paths between a branch and the data center. However, using SVR for conductor communicatin is not supported for several reasons:
+When deploying your conductor behind another SSR at a data center, it opens the question of using Secure Vector Routing to reach the conductor using SVR peer paths between a branch and the data center. However, using SVR for conductor communication is not supported for several reasons:
 
 1. It exacerbates the Jekyll/Hyde problem (described below), by virtue of being both at the branch and the data center
 2. Certain upgrade workflows or maintenance activities will cause remote sites to toggle between SVR and natural routing, which is suboptimal
