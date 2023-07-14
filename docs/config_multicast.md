@@ -46,9 +46,9 @@ The following diagram represents a simple multicast configuration. A Client send
 
 Key points in the rtr2 configuration:
 * BGP is configured with the external router, 192.168.22.2
-* BGP over SVR will be configured with two spokes
+* BGP over SVR is configured with two spokes
 * PIM is configured on the LAN interface towards the external router
-* The tenant edsel is configured on the LAN interface
+* The tenant `edsel` is configured on the LAN interface
 
 
 #### Configuration for rtr2
@@ -127,7 +127,8 @@ Key points for the Spoke configuration - this applies to each spoke, since the c
 * BGP over SVR configured to the hub
 * PIM configured with the same RP on the LAN interface
 * IGMP configured on the LAN interface
-* Using tenant studebaker on the LAN where the IGMP joins will come from 
+* Using tenant `studebaker` on the LAN where the IGMP joins originate
+
 ```
 config
     authority
@@ -256,7 +257,7 @@ exit
 ``` 
 #### Configure the Service 
 
-The service allows the traffic to flow. It allows the tenant from the hub edsel to send the multicast stream, and the tenants studebaker on each spoke can join and receive the multicast stream.   
+The service allows the traffic to flow. It allows the tenant from the hub `edsel` to send the multicast stream, and the tenants `studebaker` on each spoke can join and receive the multicast stream.   
 
 ```
 config
@@ -277,6 +278,7 @@ exit
 #### Other Considerations
 
 While this configuration example uses one RP for the multicast range, you can use different RPs for different multicast addresses or ranges. The same can be done for the service; smaller services for more specific ranges of multicast with different senders and receivers as needed.
+
 ## Show Commands
 
 Each of the commands listed below and the subcommands for each, provide additional details for multicast visibility. Use the links to learn more about each command.

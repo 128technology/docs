@@ -55,7 +55,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### New Features
 
-- **I95-466 LAG/LACP Support:** Link Aggregation Groups are formed by connecting multiple ports in parallel between two devices. LACP is the protocol that defines how the group of interfaces operates. Users define the LAG interface and then configure the member device interfaces. For more information, a list of supported devices, and caveats, see [Link Aggregation and LACP](config_lacp.md).
+- **I95-466 LAG/LACP Support:** Link Aggregation Groups are formed by connecting multiple ports in parallel between two devices. LACP is the protocol that defines how the group of interfaces operates. Users define the LAG interface and then configure the member device interfaces. For more information, a list of supported devices and caveats, see [Link Aggregation and LACP](config_lacp.md).
 ------
 - **I95-10141 LLDP Support:** The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. For information about configuring LLDP, see [`lldp`](config_reference_guide.md#lldp).
 ------
@@ -123,13 +123,13 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51359 Unable to set the OSPF MTU:** Added the ability for users to set the MTU to a non-default value.
 ------
-- **I95-51403 GUI displays download in progress even after the download is complete:** Resolved an issue where a download success event is never created even though the version shows up as downloaded in the software versions. 
+- **I95-51403 GUI displays "Download in Progress" even after the download is complete:** Resolved an issue where a download success event is not created after the version shows up as downloaded in the Software Versions. 
 ------
 - **I95-51427 GUI not displaying all the version information:** The GUI About page now displays additional version information previously only displayed in the PCLI `show system version detail`.
 ------
-- **I95-51629 `ingress-source-nat-pool` should not display non-SVR traffic:** Previously, the `ingress-source-nat-pool` configured under `network-interface` applied to both SVR and non-SVR sessions, now it only applies to SVR sessions.
+- **I95-51629 `ingress-source-nat-pool` should not display non-SVR traffic:** Previously, the `ingress-source-nat-pool` configured under `network-interface` applied to both SVR and non-SVR sessions. Now it only applies to SVR sessions.
 ------
-- **I95-51635 `traceroute` command unable to resolve an endpoint:** Resolved a scenario where an aborted `traceroute` command that could not resolve could result in a highway process crash.
+- **I95-51635 `traceroute` command unable to resolve an endpoint:** Resolved a scenario where an aborted `traceroute` command that was not able to resolve could result in a highway process crash.
 ------
 - **I95-51650 `log-category PCLI` command not working:** Resolved an issue that disallowed setting `config authority router <name> system log-category PCLI`. We now also allow configuring the following log categories:
   - CFGD
@@ -138,7 +138,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51658 Allow `sync` command in resynchronizing state:** Resolved an issue where the user received an error when executing the `send command sync` command while an asset was in the `resynchronizing` state.
 ------
-- **I95-51714 Adding and deleting a domain-name in the same operation causes an error:** Resolved an issue in the configuration validation that generated an error when duplicate domain-names are removed from and added to the service configuration.
+- **I95-51714 Adding and deleting a `domain-name` in the same operation causes an error:** Resolved an issue in the configuration validation that generated an error when duplicate domain-names are removed from and added to the service configuration.
 ------
 - **I95-51734 Remove duplicate transport port-ranges from modules before adding to service:** Resolved an issue where FIB entries are not installed when app-id modules have conflicting or overlapping port-ranges, and are being placed into one service.
 ------
@@ -150,9 +150,9 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51794 IBU Crash/Core dump on Lenovo SR-650:** Resolved an issue where the SR-650 was crashing due to uninitialized flags field. Support has been added for these devices. 
 ------
-- **I95-51865 NTP not syncing for HA nodes:** Added the ability to configure the orphan stratum for the HA peer node. This was previously hard-coded to 5 but this change allows an HA peer to be able to sync when the upstream server is of a lower stratum, if so desired by the user.
+- **I95-51865 NTP not syncing for HA nodes:** Added the ability to configure the orphan stratum for the HA peer node. This was previously hard-coded to 5 but this change allows an HA peer to sync when the upstream server is of a lower stratum, if so desired by the user.
 ------
-- **I95-51915 Report buffer allocaction failures to watchdog:** `alloc-failure` stats are now gathered per KNI device and included in the device stats, allowing the watchdog to detect a failure and respond.
+- **I95-51915 Report buffer allocaction failures:** `alloc-failure` stats are now gathered per KNI device and included in the device stats, allowing the watchdog to detect a failure and respond.
 ------
 - **I95-51951 Packets not being properly encapsulated in BFD:** PathMetrics drop packets are now properly encapsulated when SVR over BFD feature is enabled.
 ------

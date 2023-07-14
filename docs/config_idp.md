@@ -170,7 +170,7 @@ The new service configuration uses the `idp-profile` instead of the `idp-policy`
 ```
 
 :::note
-After creating a new ruleset for IDP, the traffic will initially be routed "around" that particular set of rules until it is fully loaded into the IDP engine. Use the `show idp application status` to verify the traffic status affected by the new rule.
+After creating a new ruleset for IDP, the traffic will initially be routed "around" that particular set of rules until it is fully loaded into the IDP engine. Use `show idp application status` to verify the traffic status affected by the new rule.
 :::
 
 When the modified profile is applied to the configuration, the following state message appears while it compiles:
@@ -244,7 +244,7 @@ The following steps show how to use the GUI to use an existing IDP policy to cre
 After creating the custom ruleset, use the `access-policy` as shown in the workflow above to define the IDP policy where this custom ruleset is used. 
 
 :::note
-After creating a new ruleset for IDP, the traffic will initially be routed "around" that particular set of rules until it is fully loaded into the IDP engine. Use the `show idp application status` to verify the traffic status affected by the new rule.
+After creating a new ruleset for IDP, the traffic will initially be routed "around" that particular set of rules until it is fully loaded into the IDP engine. Use `show idp application status` to verify the traffic status affected by the new rule.
 :::
 
 
