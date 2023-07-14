@@ -49,17 +49,17 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 6.1.4-23.r2.v1
+## Release 6.1.4-23.r2
 
 **Release Date:** July 14, 2023
 
 ### New Features
 
-- **I95-466 LAG/LACP Support:** Link Aggregation Groups are formed by connecting multiple ports in parallel between two devices. LACP is the protocol that defines how the group of interfaces operates. Users define the LAG interface and then configure the member device interfaces. For more information, a list of supported devices and caveats, see [Link Aggregation and LACP](config_lacp.md).
+- **I95-466 LAG/LACP Support:** Link Aggregation Groups are formed by connecting multiple ports in parallel between two devices. LACP is the protocol that defines how the group of interfaces operates. Users define the LAG interface and then configure the member device interfaces. This feature is currently in Beta; for more information, a list of supported devices and caveats, see [Link Aggregation and LACP](config_lacp.md).
 ------
 - **I95-10141 LLDP Support:** The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. For information about configuring LLDP, see [`lldp`](config_reference_guide.md#lldp).
 ------
-- **I95-20864 Support for Multicast:** Multicast is a “one source, many destinations” method of traffic distribution. For more information, see [Multicast](config_multicast.md). Note that an earlier issue (I95-48792) with Encryption on the original version of Multicast not working correctly has been resolved in this release. 
+- **I95-20864 Support for Multicast:** Multicast is a “one source, many destinations” method of traffic distribution. For more information, see [Multicast](config_multicast.md). The previous implementation of multicast has been replaced by this new version and is no longer supported. The issue relating to encryption (I95-48792) is addressed in the new implementation. 
 ------
 - **I95-44473 Application Steering:** Application Steering provides the ability to configure unique steering policies for individual applications based on the application name, category, application signatures, URLs, and domains. Once the traffic has been classified, it can be steered across the available paths. For more information, see [Application Steering](config_application_steering.md).
 ------
@@ -71,9 +71,9 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-50810 IDP Custom Rules and Policies:** Users can customize an existing base IDP policy by creating exception-based rules. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. See [IDP Custom Rules](concepts_ssr_idp.md#idp-custom-rules) for overview information, and refer to [Modifying IDP Policies](config_idp.md#modifying-idp-policies) for configuration information.
 ------
-- **I95-50973 DSCP Steering with BGP over SVR:** DSCP steering is now supported on BGP over SVR.
+- **I95-50973 DSCP Steering with BGP over SVR:** [DSCP steering](config_dscp_steering.md) is now supported on BGP over SVR.
 ------
-- **I95-51105 Options added to the import operation to enable or disable checking the signatures of RPMs:** The `import iso` command now optionally verifies the signatures of all imported rpms. This behavior can be enabled or disabled from the PCLI by passing in the `check-rpm-signature {required | allow-unsigned | disabled}` option to require that all rpms are signed and verified, allow importing isos with unsigned rpms but verify those that are signed, or to disable the signature checking altogether.
+- **I95-51105 Options added to the import operation to enable or disable checking the signatures of RPMs:** The `import iso` command now verifies the signatures of all imported RPMs. This is controlled from the PCLI by passing in the `check-rpm-signature {required | allow-unsigned | disabled}` option to require that all RPMs are signed and verified, allow importing ISOs with unsigned RPMs and verify those that are signed, or to disable the signature checking altogether.
 ------
 - **I95-51296 Show `Time in Status` in the `show assets` detail view:** The asset `Time in Status` field has been added to the Detail view. 
 ------
@@ -152,13 +152,13 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51865 NTP not syncing for HA nodes:** Added the ability to configure the orphan stratum for the HA peer node. This was previously hard-coded to 5 but this change allows an HA peer to sync when the upstream server is of a lower stratum, if so desired by the user.
 ------
-- **I95-51915 Report buffer allocaction failures:** `alloc-failure` stats are now gathered per KNI device and included in the device stats, allowing the watchdog to detect a failure and respond.
+- **I95-51915 Report buffer allocaction failures:** `alloc-failure` stats are now gathered per device and included in the device stats, allowing the watchdog to detect a failure and respond.
 ------
-- **I95-51951 Packets not being properly encapsulated in BFD:** PathMetrics drop packets are now properly encapsulated when SVR over BFD feature is enabled.
+- **I95-51951 Packets not being properly encapsulated in BFD:** Path metrics drop packets are now properly encapsulated when SVR over BFD feature is enabled.
 ------
 - **I95-51964 Make the loopback-address available on the conductor:** The loopback-address configuration  is now accessible on the conductor, and allows for a per node user defined address to be configured for overlay management traffic.
 ------
-- **I95-52083 Race condition with `application-identification`:** Resolved a race condition on low-end systems running `application-identification` resulting in a failure of packet forwarding.
+- **I95-52083 Race condition with `application-identification`:** Resolved a race condition on systems with 4 cores and 8GB RAM running `application-identification` resulting in a failure of packet forwarding.
 ------
 - **WAN-1471 Cannot distinguish between an SSR installed with OTP ISO and IBU image:** The `show system version` PCLI command now clarifies image-based or ISO in the summary view as well as the detail view.
 
