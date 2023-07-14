@@ -49,6 +49,119 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 6.1.4-23.r2
+
+**Release Date:** July 14, 2023
+
+### New Features
+
+- **I95-466 LAG/LACP Support:** Link Aggregation Groups are formed by connecting multiple ports in parallel between two devices. LACP is the protocol that defines how the group of interfaces operates. Users define the LAG interface and then configure the member device interfaces. This feature is currently in Beta; for more information, a list of supported devices and caveats, see [Link Aggregation and LACP](config_lacp.md).
+------
+- **I95-10141 LLDP Support:** The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. For information about configuring LLDP, see [`lldp`](config_reference_guide.md#lldp).
+------
+- **I95-20864 Support for Multicast:** Multicast is a “one source, many destinations” method of traffic distribution. For more information, see [Multicast](config_multicast.md). The previous implementation of multicast has been replaced by this new version and is no longer supported. The issue relating to encryption (I95-48792) is addressed in the new implementation. 
+------
+- **I95-44473 Application Steering:** Application Steering provides the ability to configure unique steering policies for individual applications based on the application name, category, application signatures, URLs, and domains. Once the traffic has been classified, it can be steered across the available paths. For more information, see [Application Steering](config_application_steering.md).
+------
+- **I95-49928 BGP over SVR Inter-Hub Steering:** Path based BGP over SVR Routing responds to changes in peer adjacency, operational status, or SLA. It adds the ability to select and advertise BGP routes between BGP over SVR neighbors. It does this by monitoring the peer paths between BGP over SVR peers and dynamically adjusting the BGP neighbor inbound and outbound policy on those peers to reflect the priority and SLA of the peer paths. For more information, see [BGP over SVR Inter-Hub Steering](config_bgp.md#bgp-over-svr-inter-hub-steering).
+------
+- **I95-50571/I95-50949/I95-51039 Add packet buffer tracking to help analyze buffer exhaustion:** Packet buffer location tracking has been added, and the following PCLI commands have been created for buffer tracking. 
+  - `show packet-buffer locations`
+  - `save packet-buffer snapshot`
+------
+- **I95-48014 IDP Custom Rules and Policies:** Users can customize an existing base IDP policy by creating exception-based rules. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. See [IDP Custom Rules](concepts_ssr_idp.md#idp-custom-rules) for overview information, and refer to [Modifying IDP Policies](config_idp.md#modifying-idp-policies) for configuration information.
+------
+- **I95-50973 DSCP Steering with BGP over SVR:** [DSCP steering](config_dscp_steering.md) is now supported on BGP over SVR.
+------
+- **I95-51105 Options added to the import operation to enable or disable checking the signatures of RPMs:** The `import iso` command now verifies the signatures of all imported RPMs. This is controlled from the PCLI by passing in the `check-rpm-signature {required(default) | allow-unsigned | disabled}` option to require that all RPMs are signed and verified, allow importing ISOs with unsigned RPMs and verify those that are signed, or to disable the signature checking altogether. 
+------
+- **I95-51296 Show `Time in Status` in the `show assets` detail view:** The asset `Time in Status` field has been added to the Detail view. 
+------
+- **I95-51946 Add LAG related TLVs to LLDP:** Support for LLDP on LAG interfaces has been added.
+
+### Resolved Issues
+
+- **The following issues have been resolved as part of our ongoing security certification-related initiative:** I95-48924, I95-48927, I95-48928, I95-48943, I95-49912, I95-49913, I95-49914, I95-50535, I95-51397, IN-533
+------
+- **I95-35069 Disallow changing the role of a node:** Once set, changing the role of a node cannot be changed. The configuration validation process has been updated to not allow this change. 
+------
+- **I95-46895 Teams traffic classified as Azure:** Improvements made to the application database `ip-protocol-port lookup` during session classification. 
+------
+- **I95-47960 Incorrect progress message for `show dns resolutions`:** The progress message for this command now correctly displays `Retrieving dns resolutions...`.
+------
+- **I95-49587 ICMP session classification improvement:** The application lookup for ICMP sessions now accurately identifies the correct service.
+------
+- **I95-49598 Automatically choose the number of session-processor threads:** If session-setup-scaling is provisioned to true, the SSR will now automatically determine the number of threads to use for session processing.
+------
+- **I95-49791 Audit rules to track modification of config files:** Added rules to track the modification of grub configuration files, to aid in troubleshooting. 
+------
+- **I95-50338 "About this System" link on GUI not working:** The link target is no longer valid, and the link has been removed from the GUI. 
+------
+- **I95-50632 Add Buffer tracking monitoring to lockup detector:** LockupDetector is now able to identify and take corrective action should a network packet pool buffer exhaustion event occur. 
+------
+- **I95-51003 `show stats process queue depth` command is redundant:** The redundant `process/queue/depth` statistic has been removed. It is superseded by `process/thread/queue/depth` and the information available using `show stats process thread queue depth` and related commands.
+------
+- **I95-51053 ESP session stuck in Incomplete state:** Resolved an issue where SVR sessions from network-interfaces with `dscp-steering enabled` can be stuck in an incomplete state.
+------
+- **I95-51081 `bgp-service-generation service-policy` is being filtered on the conductor:** The `bgp-service-generation service-policy` is now marked as authority wide so it is not filtered. This prevents managed routers from rejecting configurations containing `bgp-service-generation` and getting out of sync with the conductor.
+------
+- **I95-51167 Unable to override auto-generated peer service-route:** The user can now provision a `service-route` with the same `name` as an automatically-generated one. The user's `service-route` takes precedence and will be used instead of the generated one.
+------
+- **I95-51177 Ethernet over SVR setting wrong egress MAC address:** Ethernet over SVR now correctly sets the egress MAC address when using `outbound-only` mode.
+------
+- **I95-51178 Increase default `juteMaxBufferSize`:** The default `juteMaxBufferSize` has been increased to 10MB, which addresses issues where the device is unable to commit very large configurations.
+------
+- **I95-51201 Autocompletion in `adopt` command generates invalid organization name:** When using tab-completion to enter the site name from the `adopt` command in the PCLI, it will add quotations around the site name if there are whitespaces in the name. The PCLI now properly handles quotes and whitespace in organization names when running the PCLI adopt command.
+------
+- **I95-51203 Update stats retention periods:** Some of the `process/thread/queue`  statistics are now recorded for a longer time period, and are available in custom charts and tables on the Conductor.
+------
+- **I95-51235 Remove service-address overlap warning:** Configuration validation warnings for overlapping IP addresses within the same service are no longer generated, because they are valid in certain scenarios. A new warning has been added when a service address of only "0.0.0.0" (without the trailing prefix /0) is provisioned.
+------
+- **I95-51284 Routers remain in the connected state:** Updated the dependencies within the salt minion to resolve an issue where an asset is stuck in the connected state, displaying the error; `Error getting asset's public key: 'ssh.set_auth_key', retrying...`.
+------
+- **I95-51296 Show Time in Status in the show assets detail view:** The asset Time in Status field has been added to the Detail view.
+------
+- **I95-51359 Unable to set the OSPF MTU:** Added the ability for users to set the MTU to a non-default value.
+------
+- **I95-51403 GUI displays "Download in Progress" even after the download is complete:** Resolved an issue where a download success event is not created after the version shows up as downloaded in the Software Versions. 
+------
+- **I95-51427 GUI not displaying all the version information:** The GUI About page now displays additional version information previously only displayed in the PCLI `show system version detail`.
+------
+- **I95-51629 `ingress-source-nat-pool` should not display non-SVR traffic:** Previously, the `ingress-source-nat-pool` configured under `network-interface` applied to both SVR and non-SVR sessions. Now it only applies to SVR sessions.
+------
+- **I95-51635 `traceroute` command unable to resolve an endpoint:** Resolved a scenario where an aborted `traceroute` command that was not able to resolve could result in a highway process crash.
+------
+- **I95-51650 `log-category PCLI` command not working:** Resolved an issue that disallowed setting `config authority router <name> system log-category PCLI`. We now also allow configuring the following log categories:
+  - CFGD
+  - SNMP
+  - HTTP
+------
+- **I95-51658 Allow `sync` command in resynchronizing state:** Resolved an issue where the user received an error when executing the `send command sync` command while an asset was in the `resynchronizing` state.
+------
+- **I95-51714 Adding and deleting a `domain-name` in the same operation causes an error:** Resolved an issue in the configuration validation that generated an error when duplicate domain-names are removed from and added to the service configuration.
+------
+- **I95-51734 Remove duplicate transport port-ranges from modules before adding to service:** Resolved an issue where FIB entries are not installed when app-id modules have conflicting or overlapping port-ranges, and are being placed into one service.
+------
+- **I95-51788 Path index is not displayed correctly for `show sessions by-id`:** `show sessions by-id` has been updated to display MTU and PathIndex.
+------
+- **I95-51792 Low MTU threshold causing metadata fragmentation:** Fixed the incorrect handling of packets where metadata is fragmented due to unreasonably low MTU, causing the packet buffers to become exhausted.
+-----
+- **I95-51793 Path MTU discovery dropping very low:** Fixed PMTU discovery from ever resolving to an unreasonably low MTU, which could previously occur during a link flap event.
+------
+- **I95-51794 IBU Crash/Core dump on Lenovo SR-650:** Resolved an issue where the SR-650 was crashing due to uninitialized flags field. Support has been added for these devices. 
+------
+- **I95-51865 NTP not syncing for HA nodes:** Added the ability to configure the orphan stratum for the HA peer node. This was previously hard-coded to 5 but this change allows an HA peer to sync when the upstream server is of a lower stratum, if so desired by the user.
+------
+- **I95-51915 Report buffer allocaction failures:** `alloc-failure` stats are now gathered per device and included in the device stats, allowing the watchdog to detect a failure and respond.
+------
+- **I95-51951 Packets not being properly encapsulated in BFD:** Path metrics drop packets are now properly encapsulated when SVR over BFD feature is enabled.
+------
+- **I95-51964 Make the loopback-address available on the conductor:** The loopback-address configuration  is now accessible on the conductor, and allows for a per node user defined address to be configured for overlay management traffic.
+------
+- **I95-52083 Race condition with `application-identification`:** Resolved a race condition on systems with 4 cores and 8GB RAM running `application-identification` resulting in a failure of packet forwarding.
+------
+- **WAN-1471 Cannot distinguish between an SSR installed with OTP ISO and IBU image:** The `show system version` PCLI command now clarifies image-based or ISO in the summary view as well as the detail view.
+
 ## Release 6.1.3-4
 
 **Release Date:** May 22, 2023

@@ -3345,7 +3345,7 @@ show stats aggregate-session by-device-interface tcp-duplicate-acks-reverse [dev
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-device-interface tcp-invalid-state-transitions`
 
-Total TCP invalid state transitions detected for active sessions (packets per second)
+Total TCP invalid state transitions detected for active sessions (packets per second) (in-memory)
 
 #### Usage
 
@@ -3585,7 +3585,7 @@ show stats aggregate-session by-device-interface tcp-out-of-window-reverse [devi
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-device-interface tcp-resets`
 
-Total TCP resets for active sessions (resets per second)
+Total TCP resets for active sessions (resets per second) (in-memory)
 
 #### Usage
 
@@ -3940,7 +3940,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-transmitted
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-transmitted-reverse`
 
-Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second)
+Total number of TCP data retransmissions and out of order packets sent for active sessions in the reverse direction (retransmissions per second) (in-memory)
 
 #### Usage
 
@@ -7131,7 +7131,7 @@ show stats aggregate-session by-network-interface tcp-invalid-state-transitions 
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-network-interface tcp-invalid-state-transitions-forward`
 
-Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second)
+Total TCP invalid state transitions detected for active sessions in the forward direction (packets per second) (in-memory)
 
 #### Usage
 
@@ -7343,7 +7343,7 @@ show stats aggregate-session by-network-interface tcp-out-of-window-reverse [net
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-network-interface tcp-resets`
 
-Total TCP resets for active sessions (resets per second)
+Total TCP resets for active sessions (resets per second) (in-memory)
 
 #### Usage
 
@@ -9751,7 +9751,7 @@ show stats aggregate-session by-node packets-dropped-other-protocol-forward [sin
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-node packets-dropped-other-protocol-reverse`
 
-Total packets dropped for active sessions using other protocols in the reverse direction (packets per second)
+Total packets dropped for active sessions using other protocols in the reverse direction (packets per second) (in-memory)
 
 #### Usage
 
@@ -9807,7 +9807,7 @@ show stats aggregate-session by-node packets-dropped-reverse [since <since>] [fo
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-node packets-dropped-tcp-forward`
 
-Total TCP packets dropped in error for active sessions in the forward direction (packets per second)
+Total TCP packets dropped in error for active sessions in the forward direction (packets per second) (in-memory)
 
 #### Usage
 
@@ -10773,7 +10773,7 @@ show stats aggregate-session by-node tcp-bad-flag-combinations-forward [since <s
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 ## `show stats aggregate-session by-node tcp-bad-flag-combinations-reverse`
 
-Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second)
+Total number of TCP bad flag combinations received for active sessions in the reverse direction (packets per second) (in-memory)
 
 #### Usage
 
@@ -43104,6 +43104,7 @@ show stats external-protocols agent errors [since <since>] [force] [router <rout
 | [`inbound-from-internal-interface-drop`](#show-stats-external-protocols-agent-errors-inbound-from-internal-interface-drop) | The number of inbound packets from the Fast Lane to the External Protocol Manager that came from the internal interface and were therefore dropped |
 | [`outbound-drop`](#show-stats-external-protocols-agent-errors-outbound-drop) | The number of packets outbound from the Control that were dropped due to any error |
 | [`outbound-l2-resolution-reply-drop`](#show-stats-external-protocols-agent-errors-outbound-l2-resolution-reply-drop) | The number of outbound packets from the External Protocol Manager that were an ARP or Neighbor Discovery reply and were therefore dropped |
+| [`pim-over-svr-drops`](#show-stats-external-protocols-agent-errors-pim-over-svr-drops) | The number of outbound PIM packets from the External Protocol Manager that were not successfully injected into the service area and were therefore dropped (in-memory) |
 | [`session-collision`](#show-stats-external-protocols-agent-errors-session-collision) | The number of packets going through the External Protocol Agent that should have created a session but which collided with another process while creating the session and therefore were dropped |
 
 ## `show stats external-protocols agent errors bgp-over-svr-drops`
@@ -43431,6 +43432,35 @@ show stats external-protocols agent errors outbound-l2-resolution-reply-drop [si
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats external-protocols agent errors pim-over-svr-drops`
+
+The number of outbound PIM packets from the External Protocol Manager that were not successfully injected into the service area and were therefore dropped (in-memory)
+
+#### Usage
+
+```
+show stats external-protocols agent errors pim-over-svr-drops [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md).
+
 ## `show stats external-protocols agent errors session-collision`
 
 The number of packets going through the External Protocol Agent that should have created a session but which collided with another process while creating the session and therefore were dropped
@@ -43487,7 +43517,8 @@ show stats external-protocols agent packets [since <since>] [force] [router <rou
 | ------- | ----------- |
 | [`inbound`](#show-stats-external-protocols-agent-packets-inbound) | The number of packets inbound from the Fast Lane received. These may be dropped and therefore inbound minus inbound-drop equals the number of successfully sent packets |
 | [`outbound`](#show-stats-external-protocols-agent-packets-outbound) | The number of packets outbound from the Control received. These may be dropped and therefore outbound minus outbound-drop equals the number of successfully sent packets |
-| [`secure-vector-routed`](#show-stats-external-protocols-agent-packets-secure-vector-routed) | The number of packets outbound from the Control that were sent over a secure vector route |
+| [`pim-secure-vector-routed`](#show-stats-external-protocols-agent-packets-pim-secure-vector-routed) | The number of PIM packets outbound from the Control that were sent over a secure vector route (in-memory) |
+| [`secure-vector-routed`](#show-stats-external-protocols-agent-packets-secure-vector-routed) | The number of BGP packets outbound from the Control that were sent over a secure vector route |
 
 ## `show stats external-protocols agent packets inbound`
 
@@ -43539,9 +43570,38 @@ show stats external-protocols agent packets outbound [since <since>] [force] [ro
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats external-protocols agent packets pim-secure-vector-routed`
+
+The number of PIM packets outbound from the Control that were sent over a secure vector route (in-memory)
+
+#### Usage
+
+```
+show stats external-protocols agent packets pim-secure-vector-routed [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
 ## `show stats external-protocols agent packets secure-vector-routed`
 
-The number of packets outbound from the Control that were sent over a secure vector route
+The number of BGP packets outbound from the Control that were sent over a secure vector route
 
 #### Usage
 
@@ -45858,6 +45918,7 @@ show stats icmp reachability-probe [since <since>] [force] [router <router>] [no
 | command | description |
 | ------- | ----------- |
 | [`request`](#show-stats-icmp-reachability-probe-request) | The number of ICMP Destination Unreachable Messages dropped |
+| [`service-routes`](#show-stats-icmp-reachability-probe-service-routes) | Stats pertaining to ICMP Probe per Service Route |
 | [`sla`](#show-stats-icmp-reachability-probe-sla) | ICMP Reachability Probe SLA |
 
 ## `show stats icmp reachability-probe request`
@@ -45967,6 +46028,176 @@ show stats icmp reachability-probe request timeout [since <since>] [force] [rout
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats icmp reachability-probe service-routes`
+
+Stats pertaining to ICMP Probe per Service Route
+
+#### Usage
+
+```
+show stats icmp reachability-probe service-routes [probe-profile-name <probe-profile-name>] [probe-address <probe-address>] [netintf <netintf>] [next-hop-gateway <next-hop-gateway>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop-gateway | The next hop&#x27;s gateway for a service route (comma-separated list) |
+| node | The name of the node generating this metric |
+| probe-address | The target address for a ICMP probe (comma-separated list) |
+| probe-profile-name | The profile name for an ICMP probe (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`jitter`](#show-stats-icmp-reachability-probe-service-routes-jitter) | Jitter in milliseconds for the service route. (in-memory) |
+| [`latency`](#show-stats-icmp-reachability-probe-service-routes-latency) | Latency in milliseconds for the service route. (in-memory) |
+| [`loss`](#show-stats-icmp-reachability-probe-service-routes-loss) | Packet loss percentange for the service route. (in-memory) |
+| [`updated`](#show-stats-icmp-reachability-probe-service-routes-updated) | The unix timestamp (seconds) when the service route&#x27;s values were last updated. (in-memory) |
+
+## `show stats icmp reachability-probe service-routes jitter`
+
+Jitter in milliseconds for the service route. (in-memory)
+
+#### Usage
+
+```
+show stats icmp reachability-probe service-routes jitter [probe-profile-name <probe-profile-name>] [probe-address <probe-address>] [netintf <netintf>] [next-hop-gateway <next-hop-gateway>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop-gateway | The next hop&#x27;s gateway for a service route (comma-separated list) |
+| node | The name of the node generating this metric |
+| probe-address | The target address for a ICMP probe (comma-separated list) |
+| probe-profile-name | The profile name for an ICMP probe (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats icmp reachability-probe service-routes latency`
+
+Latency in milliseconds for the service route. (in-memory)
+
+#### Usage
+
+```
+show stats icmp reachability-probe service-routes latency [probe-profile-name <probe-profile-name>] [probe-address <probe-address>] [netintf <netintf>] [next-hop-gateway <next-hop-gateway>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop-gateway | The next hop&#x27;s gateway for a service route (comma-separated list) |
+| node | The name of the node generating this metric |
+| probe-address | The target address for a ICMP probe (comma-separated list) |
+| probe-profile-name | The profile name for an ICMP probe (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats icmp reachability-probe service-routes loss`
+
+Packet loss percentange for the service route. (in-memory)
+
+#### Usage
+
+```
+show stats icmp reachability-probe service-routes loss [probe-profile-name <probe-profile-name>] [probe-address <probe-address>] [netintf <netintf>] [next-hop-gateway <next-hop-gateway>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop-gateway | The next hop&#x27;s gateway for a service route (comma-separated list) |
+| node | The name of the node generating this metric |
+| probe-address | The target address for a ICMP probe (comma-separated list) |
+| probe-profile-name | The profile name for an ICMP probe (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats icmp reachability-probe service-routes updated`
+
+The unix timestamp (seconds) when the service route&#x27;s values were last updated. (in-memory)
+
+#### Usage
+
+```
+show stats icmp reachability-probe service-routes updated [probe-profile-name <probe-profile-name>] [probe-address <probe-address>] [netintf <netintf>] [next-hop-gateway <next-hop-gateway>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| netintf | The network interface for which this metric was generated (comma-separated list) |
+| next-hop-gateway | The next hop&#x27;s gateway for a service route (comma-separated list) |
+| node | The name of the node generating this metric |
+| probe-address | The target address for a ICMP probe (comma-separated list) |
+| probe-profile-name | The profile name for an ICMP probe (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
 
 ## `show stats icmp reachability-probe sla`
 
@@ -46677,6 +46908,7 @@ show stats idp attacks missed [since <since>] [force] [router <router>] [node <n
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -46865,6 +47097,7 @@ show stats idp bytes [netintf <netintf>] [since <since>] [force] [router <router
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -46907,6 +47140,7 @@ show stats idp bytes received [netintf <netintf>] [since <since>] [force] [route
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -46949,6 +47183,7 @@ show stats idp bytes transmitted [netintf <netintf>] [since <since>] [force] [ro
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47000,6 +47235,7 @@ show stats idp packets [since <since>] [force] [router <router>] [node <node>] [
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47041,6 +47277,7 @@ show stats idp packets dropped [since <since>] [force] [router <router>] [node <
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47086,6 +47323,7 @@ show stats idp packets processed [since <since>] [force] [router <router>] [node
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47139,6 +47377,7 @@ show stats idp packets protocol [since <since>] [force] [router <router>] [node 
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47180,6 +47419,7 @@ show stats idp packets protocol icmp [since <since>] [force] [router <router>] [
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47225,6 +47465,7 @@ show stats idp packets protocol other [since <since>] [force] [router <router>] 
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47270,6 +47511,7 @@ show stats idp packets protocol tcp [since <since>] [force] [router <router>] [n
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47315,6 +47557,7 @@ show stats idp packets protocol udp [since <since>] [force] [router <router>] [n
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47360,6 +47603,7 @@ show stats idp packets received [netintf <netintf>] [since <since>] [force] [rou
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -47402,6 +47646,7 @@ show stats idp packets transmitted [netintf <netintf>] [since <since>] [force] [
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](cli_reference.md#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](cli_reference.md#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](cli_reference.md#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](cli_reference.md#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](cli_reference.md#show-idp-details) | Show IDP details. |
@@ -48755,7 +49000,9 @@ show stats mtu-discovery [since <since>] [force] [router <router>] [node <node>]
 | command | description |
 | ------- | ----------- |
 | [`peer-path`](#show-stats-mtu-discovery-peer-path) | Stats pertaining to BFD per peer path |
+| [`probe-timeout`](#show-stats-mtu-discovery-probe-timeout) | MTU discovery probe timeouts in total. |
 | [`received`](#show-stats-mtu-discovery-received) | MTU discovery packets received in total. |
+| [`received-icmp-fragmentation-needed`](#show-stats-mtu-discovery-received-icmp-fragmentation-needed) | MTU discovery ICMP Fragmentation-Needed packets received in total. |
 | [`sent`](#show-stats-mtu-discovery-sent) | MTU discovery packets sent in total. |
 
 ## `show stats mtu-discovery peer-path`
@@ -48791,8 +49038,43 @@ show stats mtu-discovery peer-path [peer-name <peer-name>] [peer-host <peer-host
 
 | command | description |
 | ------- | ----------- |
+| [`probe-timeout`](#show-stats-mtu-discovery-peer-path-probe-timeout) | MTU discovery probe timeouts per peer path. (in-memory) |
 | [`received`](#show-stats-mtu-discovery-peer-path-received) | MTU discovery packets received on the peer path. (in-memory) |
+| [`received-icmp-fragmentation-needed`](#show-stats-mtu-discovery-peer-path-received-icmp-fragmentation-needed) | MTU discovery ICMP Fragmentation-Needed packets received per peer path. (in-memory) |
 | [`sent`](#show-stats-mtu-discovery-peer-path-sent) | MTU discovery packets sent on the peer path. |
+
+## `show stats mtu-discovery peer-path probe-timeout`
+
+MTU discovery probe timeouts per peer path. (in-memory)
+
+#### Usage
+
+```
+show stats mtu-discovery peer-path probe-timeout [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
 
 ## `show stats mtu-discovery peer-path received`
 
@@ -48826,6 +49108,38 @@ show stats mtu-discovery peer-path received [peer-name <peer-name>] [peer-host <
 #### Description
 
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md) 
+## `show stats mtu-discovery peer-path received-icmp-fragmentation-needed`
+
+MTU discovery ICMP Fragmentation-Needed packets received per peer path. (in-memory)
+
+#### Usage
+
+```
+show stats mtu-discovery peer-path received-icmp-fragmentation-needed [peer-name <peer-name>] [peer-host <peer-host>] [device-name <device-name>] [vlan <vlan>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| device-name | The name of the device port for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| peer-host | The host of the peer generating this metric (comma-separated list) |
+| peer-name | The name of the peer generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+| vlan | The vlan for which this metrics was generated (comma-separated list) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
 
 ## `show stats mtu-discovery peer-path sent`
 
@@ -48893,6 +49207,10 @@ show stats mtu-discovery peer-path sent arp-failure [peer-name <peer-name>] [pee
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
+
 ## `show stats mtu-discovery peer-path sent buffer-allocation-failure`
 
 MTU discovery packets buffer allocation failure on the peer path. (in-memory)
@@ -48959,6 +49277,31 @@ show stats mtu-discovery peer-path sent success [peer-name <peer-name>] [peer-ho
 
 For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md) 
 
+## `show stats mtu-discovery probe-timeout`
+
+MTU discovery probe timeouts in total.
+
+#### Usage
+
+```
+show stats mtu-discovery probe-timeout [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats mtu-discovery received`
 
 MTU discovery packets received in total.
@@ -48967,6 +49310,31 @@ MTU discovery packets received in total.
 
 ```
 show stats mtu-discovery received [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats mtu-discovery received-icmp-fragmentation-needed`
+
+MTU discovery ICMP Fragmentation-Needed packets received in total.
+
+#### Usage
+
+```
+show stats mtu-discovery received-icmp-fragmentation-needed [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -49547,6 +49915,7 @@ show stats packet-processing [core <core>] [since <since>] [force] [router <rout
 | [`flow-action`](#show-stats-packet-processing-flow-action) | Summary of stats pertaining to packet processing actions after flow table hit |
 | [`fragmentation`](#show-stats-packet-processing-fragmentation) | Stats pertaining to fragmentation and reassembly |
 | [`lookup`](#show-stats-packet-processing-lookup) | Stats pertaining to packet table lookups |
+| [`pool-utilization`](#show-stats-packet-processing-pool-utilization) | Stats pertaining Packet Pools |
 | [`received`](#show-stats-packet-processing-received) | Stats pertaining to packets received for processing |
 | [`sent`](#show-stats-packet-processing-sent) | Statistics for &#x27;sent&#x27; |
 
@@ -49630,6 +49999,7 @@ show stats packet-processing action failure [core <core>] [since <since>] [force
 | [`retransmission-handler`](#show-stats-packet-processing-action-failure-retransmission-handler) | Statistics for &#x27;retransmission-handler&#x27; |
 | [`tcp-proxy`](#show-stats-packet-processing-action-failure-tcp-proxy) | Statistics for &#x27;tcp-proxy&#x27; |
 | [`tcp-state`](#show-stats-packet-processing-action-failure-tcp-state) | Statistics for &#x27;tcp-state&#x27; |
+| [`tcp-stitch`](#show-stats-packet-processing-action-failure-tcp-stitch) | Statistics for &#x27;tcp-stitch&#x27; |
 | [`ttl-validate`](#show-stats-packet-processing-action-failure-ttl-validate) | The number of packets dropped due to expired TTL |
 | [`tunnel`](#show-stats-packet-processing-action-failure-tunnel) | Statistics for &#x27;tunnel&#x27; |
 | [`udp-transform`](#show-stats-packet-processing-action-failure-udp-transform) | Statistics for &#x27;udp-transform&#x27; |
@@ -51492,6 +51862,7 @@ show stats packet-processing action failure metadata [core <core>] [port <port>]
 | [`cached-attributes-not-found`](#show-stats-packet-processing-action-failure-metadata-cached-attributes-not-found) | The number of metadata propagate add failures due to missing cached attributes |
 | [`detected-reverse-metadata-on-forward-flow`](#show-stats-packet-processing-action-failure-metadata-detected-reverse-metadata-on-forward-flow) | Number of reverse metadata packets received for an existing forward flow |
 | [`detected-session-collision`](#show-stats-packet-processing-action-failure-metadata-detected-session-collision) | Number of metadata packets received for an existing session with a conflicting session id |
+| [`detected-session-collision-for-invalidated-flow`](#show-stats-packet-processing-action-failure-metadata-detected-session-collision-for-invalidated-flow) | Number of metadata packets received for an existing session with a conflicting session id for a flow that has been invalidated |
 | [`enable-metadata-flow-miss`](#show-stats-packet-processing-action-failure-metadata-enable-metadata-flow-miss) | The number of times enable-metadata packet was not processed due to missing reverse flow |
 | [`flow-move-buffer-allocation`](#show-stats-packet-processing-action-failure-metadata-flow-move-buffer-allocation) | The number of times flow-move acknowledgement packet was not sent due to a lack of buffers |
 | [`get-length`](#show-stats-packet-processing-action-failure-metadata-get-length) | The number of packets dropped because the metadata length could not be determined |
@@ -51597,6 +51968,33 @@ Number of metadata packets received for an existing session with a conflicting s
 
 ```
 show stats packet-processing action failure metadata detected-session-collision [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action failure metadata detected-session-collision-for-invalidated-flow`
+
+Number of metadata packets received for an existing session with a conflicting session id for a flow that has been invalidated
+
+#### Usage
+
+```
+show stats packet-processing action failure metadata detected-session-collision-for-invalidated-flow [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -52753,6 +53151,358 @@ show stats packet-processing action failure tcp-state invalid-state-transition [
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats packet-processing action failure tcp-stitch`
+
+Statistics for &#x27;tcp-stitch&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`allocation-failure`](#show-stats-packet-processing-action-failure-tcp-stitch-allocation-failure) | The number of data packets unable to be saved due to an allocation failure (in-memory) |
+| [`client-reset-before-establish`](#show-stats-packet-processing-action-failure-tcp-stitch-client-reset-before-establish) | The number of sessions which were reset by the client before the server connection could be established (in-memory) |
+| [`discarded-after-reset`](#show-stats-packet-processing-action-failure-tcp-stitch-discarded-after-reset) | The number of packets discarded after a client reset (in-memory) |
+| [`failed-to-establish`](#show-stats-packet-processing-action-failure-tcp-stitch-failed-to-establish) | The number of sessions that failed to re-establish (in-memory) |
+| [`injection-failure`](#show-stats-packet-processing-action-failure-tcp-stitch-injection-failure) | The number of times a server connection failed to establish because of an injection failure (in-memory) |
+| [`mss-mismatch`](#show-stats-packet-processing-action-failure-tcp-stitch-mss-mismatch) | The number of stitched sessions whose stitched MSS is lower than the original (in-memory) |
+| [`server-sack-disabled`](#show-stats-packet-processing-action-failure-tcp-stitch-server-sack-disabled) | The number of stitched sessions that went from Selective ACK permitted to not permitted (in-memory) |
+| [`unexpected-packet`](#show-stats-packet-processing-action-failure-tcp-stitch-unexpected-packet) | The number of unexpected packets received on a session setting up stitching (in-memory) |
+| [`window-rounded-up`](#show-stats-packet-processing-action-failure-tcp-stitch-window-rounded-up) | The number of packets whose windows needed to be rounded up after shifting the window scale (in-memory) |
+| [`window-truncated`](#show-stats-packet-processing-action-failure-tcp-stitch-window-truncated) | The number of packets whose windows were truncated after shifting the window scale (in-memory) |
+
+## `show stats packet-processing action failure tcp-stitch allocation-failure`
+
+The number of data packets unable to be saved due to an allocation failure (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch allocation-failure [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action failure tcp-stitch client-reset-before-establish`
+
+The number of sessions which were reset by the client before the server connection could be established (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch client-reset-before-establish [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action failure tcp-stitch discarded-after-reset`
+
+The number of packets discarded after a client reset (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch discarded-after-reset [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action failure tcp-stitch failed-to-establish`
+
+The number of sessions that failed to re-establish (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch failed-to-establish [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action failure tcp-stitch injection-failure`
+
+The number of times a server connection failed to establish because of an injection failure (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch injection-failure [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action failure tcp-stitch mss-mismatch`
+
+The number of stitched sessions whose stitched MSS is lower than the original (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch mss-mismatch [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action failure tcp-stitch server-sack-disabled`
+
+The number of stitched sessions that went from Selective ACK permitted to not permitted (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch server-sack-disabled [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action failure tcp-stitch unexpected-packet`
+
+The number of unexpected packets received on a session setting up stitching (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch unexpected-packet [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action failure tcp-stitch window-rounded-up`
+
+The number of packets whose windows needed to be rounded up after shifting the window scale (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch window-rounded-up [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action failure tcp-stitch window-truncated`
+
+The number of packets whose windows were truncated after shifting the window scale (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action failure tcp-stitch window-truncated [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
 ## `show stats packet-processing action failure ttl-validate`
 
 The number of packets dropped due to expired TTL
@@ -53040,6 +53790,7 @@ show stats packet-processing action success [core <core>] [since <since>] [force
 | [`retransmission-handler`](#show-stats-packet-processing-action-success-retransmission-handler) | Statistics for &#x27;retransmission-handler&#x27; |
 | [`tcp-proxy`](#show-stats-packet-processing-action-success-tcp-proxy) | Statistics for &#x27;tcp-proxy&#x27; |
 | [`tcp-state`](#show-stats-packet-processing-action-success-tcp-state) | Number of packets validated by the TCP state machine |
+| [`tcp-stitch`](#show-stats-packet-processing-action-success-tcp-stitch) | Statistics for &#x27;tcp-stitch&#x27; |
 | [`ttl-validate`](#show-stats-packet-processing-action-success-ttl-validate) | The number of packets with valid TTL |
 | [`tunnel`](#show-stats-packet-processing-action-success-tunnel) | Statistics for &#x27;tunnel&#x27; |
 | [`udp-transform`](#show-stats-packet-processing-action-success-udp-transform) | Statistics for &#x27;udp-transform&#x27; |
@@ -53523,12 +54274,73 @@ show stats packet-processing action success bfd remote-session-requested [core <
 
 ## `show stats packet-processing action success detour`
 
-The number of packets successfully processed for detour
+Statistics for &#x27;detour&#x27;
 
 #### Usage
 
 ```
 show stats packet-processing action success detour [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`rate-limit-drop`](#show-stats-packet-processing-action-success-detour-rate-limit-drop) | The number of packets dropped due to rate limiting |
+| [`sent`](#show-stats-packet-processing-action-success-detour-sent) | The number of packets successfully processed for detour |
+
+## `show stats packet-processing action success detour rate-limit-drop`
+
+The number of packets dropped due to rate limiting
+
+#### Usage
+
+```
+show stats packet-processing action success detour rate-limit-drop [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success detour sent`
+
+The number of packets successfully processed for detour
+
+#### Usage
+
+```
+show stats packet-processing action success detour sent [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -55243,6 +56055,7 @@ show stats packet-processing action success metadata [core <core>] [port <port>]
 | [`add-not-required`](#show-stats-packet-processing-action-success-metadata-add-not-required) | Adding of metadata is not required |
 | [`added`](#show-stats-packet-processing-action-success-metadata-added) | Metadata successfully added |
 | [`added-session-health-check`](#show-stats-packet-processing-action-success-metadata-added-session-health-check) | Number of packets with session health check attribute added |
+| [`consolidated-into-first-buffer`](#show-stats-packet-processing-action-success-metadata-consolidated-into-first-buffer) | Metadata packets that were successfully consolidated into first buffer |
 | [`flow-move-send-not-required`](#show-stats-packet-processing-action-success-metadata-flow-move-send-not-required) | Number of Flow Move packets not sent |
 | [`generated-session-health-check-acknowledgement`](#show-stats-packet-processing-action-success-metadata-generated-session-health-check-acknowledgement) | Number of session health check acknowledgements generated |
 | [`inline-modify`](#show-stats-packet-processing-action-success-metadata-inline-modify) | Statistics for &#x27;inline-modify&#x27; |
@@ -55252,6 +56065,8 @@ show stats packet-processing action success metadata [core <core>] [port <port>]
 | [`received-disable-forward-metadata`](#show-stats-packet-processing-action-success-metadata-received-disable-forward-metadata) | Number of packets purposefully dropped after disabling forward metadata |
 | [`received-divert-icmp-flow-miss`](#show-stats-packet-processing-action-success-metadata-received-divert-icmp-flow-miss) | Number of divert ICMP metadata packets received that was not associated with an existing flow |
 | [`received-enable-metadata`](#show-stats-packet-processing-action-success-metadata-received-enable-metadata) | Number of Enable Metadata packets received and purposefully dropped |
+| [`received-flow-invalidated-session-health-check-acknowledgement`](#show-stats-packet-processing-action-success-metadata-received-flow-invalidated-session-health-check-acknowledgement) | Number of flow miss metadata packets with session health check acknowledgement and additional metadata |
+| [`received-flow-miss-session-health-check-acknowledgement`](#show-stats-packet-processing-action-success-metadata-received-flow-miss-session-health-check-acknowledgement) | Number of flow miss metadata packets with session health check acknowledgement and additional metadata |
 | [`received-flow-move`](#show-stats-packet-processing-action-success-metadata-received-flow-move) | Number of Flow Move packets received and purposefully dropped |
 | [`received-flow-move-acknowledgement`](#show-stats-packet-processing-action-success-metadata-received-flow-move-acknowledgement) | Number of Flow Move acknowledgement packets received and purposefully dropped |
 | [`received-keep-alive`](#show-stats-packet-processing-action-success-metadata-received-keep-alive) | Number of keep-alive packets received and purposefully dropped |
@@ -55360,6 +56175,33 @@ Number of packets with session health check attribute added
 
 ```
 show stats packet-processing action success metadata added-session-health-check [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success metadata consolidated-into-first-buffer`
+
+Metadata packets that were successfully consolidated into first buffer
+
+#### Usage
+
+```
+show stats packet-processing action success metadata consolidated-into-first-buffer [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -55692,6 +56534,60 @@ Number of Enable Metadata packets received and purposefully dropped
 
 ```
 show stats packet-processing action success metadata received-enable-metadata [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success metadata received-flow-invalidated-session-health-check-acknowledgement`
+
+Number of flow miss metadata packets with session health check acknowledgement and additional metadata
+
+#### Usage
+
+```
+show stats packet-processing action success metadata received-flow-invalidated-session-health-check-acknowledgement [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing action success metadata received-flow-miss-session-health-check-acknowledgement`
+
+Number of flow miss metadata packets with session health check acknowledgement and additional metadata
+
+#### Usage
+
+```
+show stats packet-processing action success metadata received-flow-miss-session-health-check-acknowledgement [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -57327,6 +58223,198 @@ show stats packet-processing action success tcp-state [core <core>] [port <port>
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats packet-processing action success tcp-stitch`
+
+Statistics for &#x27;tcp-stitch&#x27;
+
+#### Usage
+
+```
+show stats packet-processing action success tcp-stitch [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`established-server-connection`](#show-stats-packet-processing-action-success-tcp-stitch-established-server-connection) | Number of sessions that have established a new server connection (in-memory) |
+| [`initiated-server-connection`](#show-stats-packet-processing-action-success-tcp-stitch-initiated-server-connection) | Number of sessions that have initiated a new server connection (in-memory) |
+| [`packets-updated`](#show-stats-packet-processing-action-success-tcp-stitch-packets-updated) | Number of packets that have had their TCP headers updated (in-memory) |
+| [`server-response-received`](#show-stats-packet-processing-action-success-tcp-stitch-server-response-received) | Number of sessions that have heard back from the new server (in-memory) |
+| [`syn-retransmits`](#show-stats-packet-processing-action-success-tcp-stitch-syn-retransmits) | Number of times syns have been retransmitted (in-memory) |
+
+## `show stats packet-processing action success tcp-stitch established-server-connection`
+
+Number of sessions that have established a new server connection (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action success tcp-stitch established-server-connection [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action success tcp-stitch initiated-server-connection`
+
+Number of sessions that have initiated a new server connection (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action success tcp-stitch initiated-server-connection [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action success tcp-stitch packets-updated`
+
+Number of packets that have had their TCP headers updated (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action success tcp-stitch packets-updated [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action success tcp-stitch server-response-received`
+
+Number of sessions that have heard back from the new server (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action success tcp-stitch server-response-received [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
+## `show stats packet-processing action success tcp-stitch syn-retransmits`
+
+Number of times syns have been retransmitted (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing action success tcp-stitch syn-retransmits [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
+
 ## `show stats packet-processing action success ttl-validate`
 
 The number of packets with valid TTL
@@ -57980,6 +59068,7 @@ show stats packet-processing classifier received [core <core>] [port <port>] [si
 | [`non-ip-protocol-allowed`](#show-stats-packet-processing-classifier-received-non-ip-protocol-allowed) | The number of non-IP packets allowed |
 | [`ospf`](#show-stats-packet-processing-classifier-received-ospf) | The number of packets received and classified as OSPF |
 | [`other-layer-4-protocol`](#show-stats-packet-processing-classifier-received-other-layer-4-protocol) | The number of packets received that did not fall into one of the other counted transport-layer types |
+| [`pim`](#show-stats-packet-processing-classifier-received-pim) | Stats pertaining to PIM processing |
 | [`q-in-q`](#show-stats-packet-processing-classifier-received-q-in-q) | The number of packets received and classified as Q-in-Q |
 | [`router-advertisement`](#show-stats-packet-processing-classifier-received-router-advertisement) | The number of packets received and classified as Router Advertisement |
 | [`sctp`](#show-stats-packet-processing-classifier-received-sctp) | The number of packets received and classified as SCTP |
@@ -59218,6 +60307,70 @@ show stats packet-processing classifier received other-layer-4-protocol [core <c
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing classifier received pim`
+
+Stats pertaining to PIM processing
+
+#### Usage
+
+```
+show stats packet-processing classifier received pim [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`total`](#show-stats-packet-processing-classifier-received-pim-total) | The number of packets received and classified as PIM (in-memory) |
+
+## `show stats packet-processing classifier received pim total`
+
+The number of packets received and classified as PIM (in-memory)
+
+#### Usage
+
+```
+show stats packet-processing classifier received pim total [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to this retention document - <https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/>
 
 ## `show stats packet-processing classifier received q-in-q`
 
@@ -62637,6 +63790,140 @@ show stats packet-processing lookup wayport-range-miss-fib-table-miss [core <cor
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats packet-processing pool-utilization`
+
+Stats pertaining Packet Pools
+
+#### Usage
+
+```
+show stats packet-processing pool-utilization [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`fastlane-generated-packet-pool`](#show-stats-packet-processing-pool-utilization-fastlane-generated-packet-pool) | Current percentage of fastlane generated packet buffer pool |
+| [`host-packet-pool`](#show-stats-packet-processing-pool-utilization-host-packet-pool) | Current percentage of host application packet buffer pool |
+| [`network-packet-pool`](#show-stats-packet-processing-pool-utilization-network-packet-pool) | Current percentage of network packet buffer pool |
+| [`tcp-proxy-packet-pool`](#show-stats-packet-processing-pool-utilization-tcp-proxy-packet-pool) | Current percentage of TCP Proxy packet buffer pool |
+
+## `show stats packet-processing pool-utilization fastlane-generated-packet-pool`
+
+Current percentage of fastlane generated packet buffer pool
+
+#### Usage
+
+```
+show stats packet-processing pool-utilization fastlane-generated-packet-pool [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing pool-utilization host-packet-pool`
+
+Current percentage of host application packet buffer pool
+
+#### Usage
+
+```
+show stats packet-processing pool-utilization host-packet-pool [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing pool-utilization network-packet-pool`
+
+Current percentage of network packet buffer pool
+
+#### Usage
+
+```
+show stats packet-processing pool-utilization network-packet-pool [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing pool-utilization tcp-proxy-packet-pool`
+
+Current percentage of TCP Proxy packet buffer pool
+
+#### Usage
+
+```
+show stats packet-processing pool-utilization tcp-proxy-packet-pool [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats packet-processing received`
 
 Stats pertaining to packets received for processing
@@ -62672,9 +63959,19 @@ show stats packet-processing received [core <core>] [port <port>] [since <since>
 | [`control-success`](#show-stats-packet-processing-received-control-success) | Number of control packets recieved |
 | [`injected-success`](#show-stats-packet-processing-received-injected-success) | The number of packets injected into the fast lane |
 | [`injected-timeout`](#show-stats-packet-processing-received-injected-timeout) | The number of injected packets dropped in fastlane due to excessive queue time |
+| [`interface-empty-head`](#show-stats-packet-processing-received-interface-empty-head) | The number of empty head packets received from the interface |
+| [`interface-invalid-chain`](#show-stats-packet-processing-received-interface-invalid-chain) | The number of invalid chain packets received from the interface |
+| [`interface-invalid-metadata-length`](#show-stats-packet-processing-received-interface-invalid-metadata-length) | The number of packets received from the interface having metadata with an invalid length |
+| [`interface-sanitized`](#show-stats-packet-processing-received-interface-sanitized) | The number of sanitized packets received from the interface |
 | [`interface-standby`](#show-stats-packet-processing-received-interface-standby) | The number of packets received on the interface while in standby mode. |
 | [`interface-standby-drop`](#show-stats-packet-processing-received-interface-standby-drop) | The number of packets dropped because the interface is in standby mode. |
+| [`interface-standby-empty-head`](#show-stats-packet-processing-received-interface-standby-empty-head) | The number of empty head packets received from the standby interface. |
+| [`interface-standby-invalid-chain`](#show-stats-packet-processing-received-interface-standby-invalid-chain) | The number of invalid chain packets received from the standby interface |
+| [`interface-standby-invalid-metadata-length`](#show-stats-packet-processing-received-interface-standby-invalid-metadata-length) | The number of invalid metadata length packets received from the standby interface |
+| [`interface-standby-sanitized`](#show-stats-packet-processing-received-interface-standby-sanitized) | The number of sanitized packets received from the interface while in standby mode. |
+| [`interface-standby-unhandled-exception`](#show-stats-packet-processing-received-interface-standby-unhandled-exception) | The number of packets received from the standby interface which encountered an unhandled exception |
 | [`interface-success`](#show-stats-packet-processing-received-interface-success) | The number of packets received from the interface |
+| [`interface-unhandled-exception`](#show-stats-packet-processing-received-interface-unhandled-exception) | The number of packets received from the interface which encountered an unhandled exception |
 | [`max-burst`](#show-stats-packet-processing-received-max-burst) | Maximum-Sized Receive Bursts Per Interface |
 
 ## `show stats packet-processing received burst-size`
@@ -62930,6 +64227,114 @@ show stats packet-processing received injected-timeout [core <core>] [port <port
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats packet-processing received interface-empty-head`
+
+The number of empty head packets received from the interface
+
+#### Usage
+
+```
+show stats packet-processing received interface-empty-head [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing received interface-invalid-chain`
+
+The number of invalid chain packets received from the interface
+
+#### Usage
+
+```
+show stats packet-processing received interface-invalid-chain [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing received interface-invalid-metadata-length`
+
+The number of packets received from the interface having metadata with an invalid length
+
+#### Usage
+
+```
+show stats packet-processing received interface-invalid-metadata-length [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing received interface-sanitized`
+
+The number of sanitized packets received from the interface
+
+#### Usage
+
+```
+show stats packet-processing received interface-sanitized [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats packet-processing received interface-standby`
 
 The number of packets received on the interface while in standby mode.
@@ -62984,6 +64389,141 @@ show stats packet-processing received interface-standby-drop [core <core>] [port
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
 
+## `show stats packet-processing received interface-standby-empty-head`
+
+The number of empty head packets received from the standby interface.
+
+#### Usage
+
+```
+show stats packet-processing received interface-standby-empty-head [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing received interface-standby-invalid-chain`
+
+The number of invalid chain packets received from the standby interface
+
+#### Usage
+
+```
+show stats packet-processing received interface-standby-invalid-chain [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing received interface-standby-invalid-metadata-length`
+
+The number of invalid metadata length packets received from the standby interface
+
+#### Usage
+
+```
+show stats packet-processing received interface-standby-invalid-metadata-length [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing received interface-standby-sanitized`
+
+The number of sanitized packets received from the interface while in standby mode.
+
+#### Usage
+
+```
+show stats packet-processing received interface-standby-sanitized [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing received interface-standby-unhandled-exception`
+
+The number of packets received from the standby interface which encountered an unhandled exception
+
+#### Usage
+
+```
+show stats packet-processing received interface-standby-unhandled-exception [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
 ## `show stats packet-processing received interface-success`
 
 The number of packets received from the interface
@@ -62992,6 +64532,33 @@ The number of packets received from the interface
 
 ```
 show stats packet-processing received interface-success [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing received interface-unhandled-exception`
+
+The number of packets received from the interface which encountered an unhandled exception
+
+#### Usage
+
+```
+show stats packet-processing received interface-unhandled-exception [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -63164,6 +64731,9 @@ show stats packet-processing sent [core <core>] [port <port>] [since <since>] [f
 | [`interface-standby-drop`](#show-stats-packet-processing-sent-interface-standby-drop) | The number of packets not transmitted because the interface is in standby mode |
 | [`interface-success`](#show-stats-packet-processing-sent-interface-success) | The number of packets transmitted out this interface |
 | [`interface-unconfigured-drop`](#show-stats-packet-processing-sent-interface-unconfigured-drop) | The number of packets received and dropped because the interface has not been configured. |
+| [`to-wire-empty-head`](#show-stats-packet-processing-sent-to-wire-empty-head) | The number of empty head packets destined to wire |
+| [`to-wire-invalid-chain`](#show-stats-packet-processing-sent-to-wire-invalid-chain) | The number of invalid chain packets destined to wire |
+| [`to-wire-sanitized`](#show-stats-packet-processing-sent-to-wire-sanitized) | The number of sanitized packets destined to wire |
 
 ## `show stats packet-processing sent interface-failure`
 
@@ -63308,6 +64878,87 @@ The number of packets received and dropped because the interface has not been co
 
 ```
 show stats packet-processing sent interface-unconfigured-drop [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing sent to-wire-empty-head`
+
+The number of empty head packets destined to wire
+
+#### Usage
+
+```
+show stats packet-processing sent to-wire-empty-head [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing sent to-wire-invalid-chain`
+
+The number of invalid chain packets destined to wire
+
+#### Usage
+
+```
+show stats packet-processing sent to-wire-invalid-chain [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| core | The core number for which this metric was generated (comma-separated list) |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| port | The device interface for which this metric was generated (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats packet-processing sent to-wire-sanitized`
+
+The number of sanitized packets destined to wire
+
+#### Usage
+
+```
+show stats packet-processing sent to-wire-sanitized [core <core>] [port <port>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -65328,13 +66979,13 @@ show stats performance-monitoring peer-path [peer-name <peer-name>] [peer-host <
 
 | command | description |
 | ------- | ----------- |
-| [`jitter`](#show-stats-performance-monitoring-peer-path-jitter) | Jitter in milliseconds for the SSR peer path. |
-| [`latency`](#show-stats-performance-monitoring-peer-path-latency) | Latency in milliseconds for the SSR peer path. |
-| [`loss`](#show-stats-performance-monitoring-peer-path-loss) | Aggregate packet loss percentange for the SSR peer path. |
-| [`mos`](#show-stats-performance-monitoring-peer-path-mos) | MOS value calculated for the SSR peer path. (hundreths of a decimal) |
+| [`jitter`](#show-stats-performance-monitoring-peer-path-jitter) | Jitter in milliseconds for the 128T peer path. (in-memory) |
+| [`latency`](#show-stats-performance-monitoring-peer-path-latency) | Latency in milliseconds for the 128T peer path. (in-memory) |
+| [`loss`](#show-stats-performance-monitoring-peer-path-loss) | Aggregate packet loss percentange for the 128T peer path. (in-memory) |
+| [`mos`](#show-stats-performance-monitoring-peer-path-mos) | MOS value calculated for the 128T peer path. (hundreths of a decimal) (in-memory) |
 | [`received`](#show-stats-performance-monitoring-peer-path-received) | Statistics for &#x27;received&#x27; |
 | [`transmit`](#show-stats-performance-monitoring-peer-path-transmit) | Statistics for &#x27;transmit&#x27; |
-| [`updated`](#show-stats-performance-monitoring-peer-path-updated) | The unix timestamp (seconds) when the peer path&#x27;s values were last updated. |
+| [`updated`](#show-stats-performance-monitoring-peer-path-updated) | The unix timestamp (seconds) when the peer path&#x27;s values were last updated. (in-memory) |
 
 ## `show stats performance-monitoring peer-path jitter`
 
@@ -65724,6 +67375,10 @@ show stats performance-monitoring peer-path transmit marked-packets [peer-name <
 | name | description |
 | ---- | ----------- |
 | verbosity | detail \| summary \| debug (default: detail) |
+
+#### Description
+
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path transmit marked-packets-acknowledged`
 
@@ -66396,7 +68051,7 @@ show stats process thread cpu [process-name <process-name>] [thread-name <thread
 | [`iowait`](#show-stats-process-thread-cpu-iowait) | Percentage of time used in a thread waiting for input/output (percentage) |
 | [`system-usage`](#show-stats-process-thread-cpu-system-usage) | System-level CPU percentage used in a thread |
 | [`usage`](#show-stats-process-thread-cpu-usage) | CPU percentage used in a thread for both user and system |
-| [`user-usage`](#show-stats-process-thread-cpu-user-usage) | User-level CPUpercentage used in a thread |
+| [`user-usage`](#show-stats-process-thread-cpu-user-usage) | User-level CPU percentage used in a thread |
 
 ##### See Also
 
@@ -66567,9 +68222,9 @@ show stats process thread queue [process-name <process-name>] [thread-name <thre
 
 | command | description |
 | ------- | ----------- |
-| [`delay`](#show-stats-process-thread-queue-delay) | The running-average delay for tasks of the given type in the thread-queue (us) (in-memory) |
-| [`depth`](#show-stats-process-thread-queue-depth) | The number of tasks in the thread-queue waiting to be executed (in-memory) |
-| [`total`](#show-stats-process-thread-queue-total) | The lifetime total number of tasks of the given type sent through the thread-queue (in-memory) |
+| [`delay`](#show-stats-process-thread-queue-delay) | The running-average delays for tasks in the thread-queue (us) |
+| [`depth`](#show-stats-process-thread-queue-depth) | The number of tasks in the thread-queue waiting to be executed |
+| [`total`](#show-stats-process-thread-queue-total) | The lifetime total number of tasks sent through the thread-queue (in-memory) |
 
 ##### See Also
 
@@ -66579,12 +68234,12 @@ show stats process thread queue [process-name <process-name>] [thread-name <thre
 
 ## `show stats process thread queue delay`
 
-The running-average delay for tasks of the given type in the thread-queue (us) (in-memory)
+The running-average delays for tasks in the thread-queue (us)
 
 #### Usage
 
 ```
-show stats process thread queue delay [process-name <process-name>] [thread-name <thread-name>] [task-type <task-type>] [average-type-name <average-type-name>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+show stats process thread queue delay [process-name <process-name>] [thread-name <thread-name>] [average-type-name <average-type-name>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -66660,7 +68315,7 @@ The lifetime total number of tasks of the given type sent through the thread-que
 #### Usage
 
 ```
-show stats process thread queue total [process-name <process-name>] [thread-name <thread-name>] [task-type <task-type>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+show stats process thread queue total [process-name <process-name>] [thread-name <thread-name>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -69299,6 +70954,7 @@ show stats routing [process <process>] [since <since>] [force] [router <router>]
 | command | description |
 | ------- | ----------- |
 | [`errors`](#show-stats-routing-errors) | Stats pertaining to routing errors |
+| [`multicast`](#show-stats-routing-multicast) | Stats pertaining to multicast routing |
 | [`route-updates`](#show-stats-routing-route-updates) | Stats pertaining to updating the routing table |
 | [`routes`](#show-stats-routing-routes) | The number of active routes |
 
@@ -69342,6 +70998,209 @@ The number of client connection errors within the route manager
 
 ```
 show stats routing errors connection [process <process>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| process | The name of the process generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats routing multicast`
+
+Stats pertaining to multicast routing
+
+#### Usage
+
+```
+show stats routing multicast [process <process>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| process | The name of the process generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`route-updates`](#show-stats-routing-multicast-route-updates) | Stats pertaining to updating the multicast routing table |
+| [`routes`](#show-stats-routing-multicast-routes) | The number of multicast active routes |
+
+## `show stats routing multicast route-updates`
+
+Stats pertaining to updating the multicast routing table
+
+#### Usage
+
+```
+show stats routing multicast route-updates [process <process>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| process | The name of the process generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`received`](#show-stats-routing-multicast-route-updates-received) | Stats pertaining to received multicast routing updates |
+
+## `show stats routing multicast route-updates received`
+
+Stats pertaining to received multicast routing updates
+
+#### Usage
+
+```
+show stats routing multicast route-updates received [process <process>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| process | The name of the process generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`add`](#show-stats-routing-multicast-route-updates-received-add) | Number of Multicast add routes received |
+| [`delete`](#show-stats-routing-multicast-route-updates-received-delete) | Number of multicast delete routes received |
+| [`modify`](#show-stats-routing-multicast-route-updates-received-modify) | Number of Multicast modify routes received |
+
+## `show stats routing multicast route-updates received add`
+
+Number of Multicast add routes received
+
+#### Usage
+
+```
+show stats routing multicast route-updates received add [process <process>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| process | The name of the process generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats routing multicast route-updates received delete`
+
+Number of multicast delete routes received
+
+#### Usage
+
+```
+show stats routing multicast route-updates received delete [process <process>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| process | The name of the process generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats routing multicast route-updates received modify`
+
+Number of Multicast modify routes received
+
+#### Usage
+
+```
+show stats routing multicast route-updates received modify [process <process>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| process | The name of the process generating this metric (comma-separated list) |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats routing multicast routes`
+
+The number of multicast active routes
+
+#### Usage
+
+```
+show stats routing multicast routes [process <process>] [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
@@ -74083,8 +75942,122 @@ show stats service-area received url-filtering service-update application-direct
 
 | command | description |
 | ------- | ----------- |
+| [`child-service`](#show-stats-service-area-received-url-filtering-service-update-application-director-child-service) | Statistics for &#x27;child-service&#x27; |
 | [`domain`](#show-stats-service-area-received-url-filtering-service-update-application-director-domain) | Number of times app-id service updated from an application-director domain classification (updates) |
 | [`url`](#show-stats-service-area-received-url-filtering-service-update-application-director-url) | Number of times app-id service updated from an application-director URL classification (updates) |
+
+## `show stats service-area received url-filtering service-update application-director child-service`
+
+Statistics for &#x27;child-service&#x27;
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update application-director child-service [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`address-lookup`](#show-stats-service-area-received-url-filtering-service-update-application-director-child-service-address-lookup) | Statistics for &#x27;address-lookup&#x27; |
+
+## `show stats service-area received url-filtering service-update application-director child-service address-lookup`
+
+Statistics for &#x27;address-lookup&#x27;
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update application-director child-service address-lookup [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`app-hit`](#show-stats-service-area-received-url-filtering-service-update-application-director-child-service-address-lookup-app-hit) | The number of times a child service was found from application from ip-port-protocol lookup |
+| [`category-hit`](#show-stats-service-area-received-url-filtering-service-update-application-director-child-service-address-lookup-category-hit) | The number of times a child service was found from category/subcategory from ip-port-protocol lookup |
+
+## `show stats service-area received url-filtering service-update application-director child-service address-lookup app-hit`
+
+The number of times a child service was found from application from ip-port-protocol lookup
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update application-director child-service address-lookup app-hit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area received url-filtering service-update application-director child-service address-lookup category-hit`
+
+The number of times a child service was found from category/subcategory from ip-port-protocol lookup
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update application-director child-service address-lookup category-hit [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received url-filtering service-update application-director domain`
 
@@ -74165,8 +76138,34 @@ show stats service-area received url-filtering service-update configuration [sin
 
 | command | description |
 | ------- | ----------- |
+| [`application-name`](#show-stats-service-area-received-url-filtering-service-update-configuration-application-name) | Number of times app-id service updated from a configured application-name (updates) |
 | [`domain`](#show-stats-service-area-received-url-filtering-service-update-configuration-domain) | Number of times app-id service updated from a configured domain (updates) |
 | [`url`](#show-stats-service-area-received-url-filtering-service-update-configuration-url) | Number of times app-id service updated from a configured URL (updates) |
+
+## `show stats service-area received url-filtering service-update configuration application-name`
+
+Number of times app-id service updated from a configured application-name (updates)
+
+#### Usage
+
+```
+show stats service-area received url-filtering service-update configuration application-name [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
 
 ## `show stats service-area received url-filtering service-update configuration domain`
 
@@ -74477,7 +76476,8 @@ show stats service-area sent [since <since>] [force] [router <router>] [node <no
 | [`arp-resolve-success`](#show-stats-service-area-sent-arp-resolve-success) | Number of packets sent after successful ARP resolution |
 | [`delete-stuck-session`](#show-stats-service-area-sent-delete-stuck-session) | Number of packets with metadata to indicate deletion of a stuck session sent |
 | [`success`](#show-stats-service-area-sent-success) | Number of packets successfully forwarded to the Fast Lane |
-| [`tcp-reset-for-adaptive-encryption-failure`](#show-stats-service-area-sent-tcp-reset-for-adaptive-encryption-failure) | Number of tcp packets sent due to adaptive encryption setup failure |
+| [`tcp-reset-for-adaptive-encryption-failure`](#show-stats-service-area-sent-tcp-reset-for-adaptive-encryption-failure) | Number of TCP packets sent due to adaptive encryption setup failure |
+| [`tcp-server-reset-for-app-steering`](#show-stats-service-area-sent-tcp-server-reset-for-app-steering) | Number of TCP reset packets sent to server after application steering |
 
 ## `show stats service-area sent arp-resolve-failure`
 
@@ -74606,12 +76606,37 @@ show stats service-area sent success [since <since>] [force] [router <router>] [
 
 ## `show stats service-area sent tcp-reset-for-adaptive-encryption-failure`
 
-Number of tcp packets sent due to adaptive encryption setup failure
+Number of TCP packets sent due to adaptive encryption setup failure
 
 #### Usage
 
 ```
 show stats service-area sent tcp-reset-for-adaptive-encryption-failure [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node generating this metric |
+| router | The router for which to display stats (default: &lt;current router&gt;) |
+| since | The displayed stats will be calculated as a delta from the given time. The given time can either be a timestamp or a delta, such as 45m, 1d, or 1mo. Providing &quot;launch&quot; ensures that no start time for the delta is set [type: timestamp] |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary \| debug (default: detail) |
+
+## `show stats service-area sent tcp-server-reset-for-app-steering`
+
+Number of TCP reset packets sent to server after application steering
+
+#### Usage
+
+```
+show stats service-area sent tcp-server-reset-for-app-steering [since <since>] [force] [router <router>] [node <node>] [<verbosity>]
 ```
 
 ##### Keyword Arguments
