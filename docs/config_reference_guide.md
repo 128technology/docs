@@ -648,20 +648,27 @@ A *device-interface* is what maps a physical interface (the "hardware-name") to 
 | description | string | A field for containing human-readable information. Has no impact on packet forwarding. |
 | enabled | boolean | Default value: true. Setting this to *false* will administratively disable this device interface. |
 | forwarding | boolean | Default value: true. This controls whether the SSR will consider this interface as viable for packet forwarding. |
+| lldp | sub-element | Link Layer Description Protocol settings. |
 | link-settings | enumeration | Valid values: auto, 10Mbps-half, 10Mbps-full, 100Mbps-half, 100Mbps-full. Default: auto. This lets administrators configure the speed and duplex for this interface (only configurable when *type* is *ethernet*). |
 | load-balancing | sub-element | This contains parameters related to maximum link utilization before it is considered eligible/ineligible for new sessions by the SSR load balancing algorithm. |
 | lte | sub-element | Container for properties related to the SSR's support for LTE interfaces. This field is only configurable when the *type* of the interface is set to *lte*. |
+| mist-wan-assurance | enumeration | Configures the role of the device interface in the Mist WAN Assurance topology. Valid values are auto, lan, wan, control, or management. |
 | mode | enumeration | Valid values: host, bridged. Only configurable when type is *kni*. \[These modes are superseded in software version 3.1 in favor of the values *host* and *bridged* under *type*. |
 | name | string | Key field. A text string that uniquely represents this interface, used to reference it in other parts of the SSR's configuration. |
 | network-interface | sub-element | The list of network interfaces associated with this device interface. |
 | pci-address | string | The PCI bus address of the physical, or virtual interface as it is known by the underlying operating system. |
 | pppoe | sub-element | Container for properties related to the SSR's support for PPP over Ethernet (PPPoE). This field is only configurable when the *type* of the interface is set to *pppoe*. |
 | promiscuous-mode | boolean | Default: false. When set to `true`, the SSR will accept and process packets that it receives that do not have its MAC address as the destination address. This is used in conjunction with the `tap-multiplexing` feature, when the SSR is the target of port-mirrored traffic that it needs to forward over SVR. |
+| q-in-q | sub-element | Enables Q-in-Q encapsulation. |
+| session-optimization | boolean | Default value: true. Enables session optimization detection on the device interface. |
 | shared-phys-address | string | The virtual MAC address that the interface will use (part of an interface's redundancy) |
+| sriov-vlan-filter | boolean | Default value: false. Enables VLAN filtering on supported SR-IOV devices. |
 | strip-vlan | boolean | Default: false. Set this to *true* when the system needs to strip a VLAN tag on packets ingressing this router. (Common in some cloud deployment models.) |
 | target-interface | string | Only configurable when type is *kni* and mode is *bridged*. This is set to the name of the operating system's interface, which "bridges" this KNI interface to an interface known by the operating system. (This is used when setting up an SSR in a cloud provider's network, for example.) |
 | traffic-engineering | sub-element | This sub-element is where administrators set the traffic engineering properties (e.g., a bandwidth limiter) for this device-interface. |
 | type | enumeration | Valid values: ethernet, kni, pppoe, host, bridged, lte, t1. |
+| vmbus-uuid | string | The VMBus UUID of the network device. Only relevant if type is ethernet. Hyper-V Environment only. |
+| vrrp | sub-element | Parameters for Interface Redundancy using Virtual Router Redundancy Protocol (VRRP). |
 
 #### Version History:
 | Release | Modification |
@@ -1073,6 +1080,36 @@ The `ldap-server` element lets you configure an external server that is used to 
 #### See Also
 [Configuring LDAP](config_ldap.md)
 
+## lldp
+
+#### Path:
+
+authority > router > node > device-interface > lldp
+
+#### Description:
+
+The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. Additionally, users can configure the frequency with which advertisements are sent, and the advertisement interval. 
+
+The following information is provided to devices in the LLDP packets:
+
+- Chassis ID: Device MAC address
+- Port ID: Device's configured name
+- Time To Live: Time to remain in device cache
+- Port Description: Device's configured description
+- System Name: Router name 
+- System Description: Juniper Networks, Inc. Session Smart Router
+
+| Element | Type | Description |
+| --- | --- | --- |
+| mode | enumeration | Default: `disabled`. The mode in which LLDP operates on the interface. Options are: `disabled` (default). `enabled` - allows sending and receiving LLDP packets. `receive-only` - receive and process incoming LLDP packets. | 
+| advertisement-interval | uint32 | Range: 1-86400 seconds. Default: 120. The frequency of sending LLDP advertisements. |
+| hold-multiplier | uint8 | Range: 2-10, default: 4. The multiplier to apply to the advertisement-interval when setting the LLDP TTL. | 
+
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 6.1.4-R2 | Introduced |
+
 ## load-balancing
 
 #### Path:
@@ -1110,7 +1147,7 @@ The *local-login* configuration lets administrators control the number of concur
 | netconf | sub-element | Controls around the number of concurrent NETCONF sessions. |
 
 :::note
->>> The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls, with no loss of functionality.
+The `netconf` configuration is not applicable to version 5.3 and later. NETCONF controls have been replaced with REST API controls, with no loss of functionality.
 :::
 
 ## log-category
@@ -1939,6 +1976,27 @@ This configuration element governs the number of prefixes that will be accepted 
 | Release | Modification |
 | --- | --- |
 | 1.0.0 | Introduced |
+
+## q-in-q
+
+#### Path: 
+
+authority > router > node > device-interface
+
+#### Description:
+
+Enables and configures Q-in-Q encapsulation on the interface.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| enable | boolean | Default: false. Enable Q-in-Q encapsulation. |
+| outer-ethertype | string | Hex-string value of the ethertype for the outer VLAN tag. |  
+| outer-vlan | uint16 | Range: 1-4094. Add an outer VLAN tag to all non-zero VLAN interfaces. | 
+
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 4.5.1 | Introduced |
 
 ## reachability-detection
 
@@ -3180,6 +3238,28 @@ The *vector* sub-element lets administrators choose cost values for the vector l
 | Release | Modification |
 | --- | --- |
 | 3.2.0 | Introduced |
+
+## vrrp
+
+#### Path:
+
+authority > router > node > device-interface 
+
+#### Description:
+Enables and configures VRRP use on the interface. 
+
+| Element | Type | Description |
+| --- | --- | --- |
+| advertisement-interval| uint16 | Range: 100-40950 milliseconds. Default: 1000 How frequently (in milliseconds) advertisements should be sent. |
+| enabled | boolean | Default: false. Whether or not this interface should participate in VRRP. |
+| priority | uint8 | Default: 100 The priority of this interface within the virtual router pair. |
+| vlan | uint16 | VLAN identifier of the network-interface that will represent this device. 0 for no vlan, range 1-4094. |
+| vrid | uint8 | Range 1-255. The Virtual Router ID. This value must be mirrored by the redundant interface. |
+
+#### Version History:
+| Release | Modification |
+| --- | --- |
+| 5.4.0 | Introduced |
 
 ## web-filtering
 

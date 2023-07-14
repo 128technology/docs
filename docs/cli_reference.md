@@ -3,7 +3,7 @@ title: Command Line Reference
 sidebar_label: Command Line Reference
 ---
 
-The Command Line Reference guide is better understood if you know the basics of operating the programmable command line interface (PCLI). Commands and actions such as clear, edit, delete, restore, and show, for example, are described here. If you have not used the PCLI before, please refer to [About the PCLI](concepts_pcli.md) for an explanation of how it works.
+The Command Line Reference guide is better understood if you know the basics of operating the programmable command line interface (PCLI). Commands and actions such as clear, edit, delete, restore, and show, for example, are described here. If you have not used the PCLI before, please refer to [About the PCLI](concepts_pcli.md) for an explanation of how it works. 
 
 ## `adopt`
 
@@ -305,6 +305,25 @@ clear history
 | command | description |
 | ------- | ----------- |
 | [`show history`](#show-history) | Show PCLI command history for the current user. |
+
+## `clear pim mroute`
+
+Clears all multicast routes.
+
+#### Usage
+
+```
+clear pim mroute [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The name of the router for which to clear multicast routes |
+| vrf | VRF name |
 
 ## clone
 
@@ -1887,7 +1906,7 @@ manage plugin remove [node <node>] <name>
 
 ## `migrate`
 
-Migrate an SSR to a new conductor. For more details on the SSR rotuer migration read the [How to: Conductor Migration](howto_conductor_migration.md).
+Migrate an SSR to a new conductor. For more details on the SSR router migration refer to [How to: Conductor Migration](howto_conductor_migration.md).
 
 #### Usage
 
@@ -1915,6 +1934,7 @@ migrate [skip-validation] [force] conductor <address> [<address>] router <router
 | [`send command rollback`](#send-command-rollback) | Rollback an SSR to the previously installed version |
 | [`send command start`](#send-command-start) | Start an SSR node |
 | [`send command stop`](#send-command-stop) | Stop an SSR node |
+| [`send command sync`](#send-command-sync) | Transition an asset back to &#x27;connected&#x27; and perform a sync. |
 | [`send command upgrade`](#send-command-upgrade) | Upgrade an SSR node |
 | [`send command yum-cache-refresh`](#send-command-yum-cache-refresh) | Refresh the yum cache as well as the SSR software versions available for download and upgrade. |
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
@@ -2168,6 +2188,7 @@ request idp restart [force] [rebuild] router <router> node <node>
 
 | command | description |
 | ------- | ----------- |
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
@@ -2218,6 +2239,8 @@ Query and display the IDP signature database connectivity details.
 
 | command | description |
 | ------- | ----------- |
+| [`request idp restart`](#request-idp-restart) | Restart IDP Command |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
@@ -2594,6 +2617,28 @@ In this example you can see that what was previously named highwayManager.4.log 
 | Release | Modification                |
 | ------- | ----------------------------|
 | 2.0.0   | This feature was introduced |
+
+## `save packet-buffer-snapshot`
+
+Gathers packet buffer pool information and stores it in a logfile.
+
+#### Usage
+
+```
+save packet-buffer-snapshot [filename <filename>] router <router> node <node>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| filename | Filename to save the buffer pool snapshot (default: packetBuffers.log) |
+| node | The name of the node |
+| router | The name of the router |
+
+#### Description
+
+This command saves a snapshot of the packet buffer pool information in a logfile at /var/log/128technology.
 
 ## `save runtime-stats`
 
@@ -3600,6 +3645,7 @@ The category can be any of the following:
 | Category Name | Long Name | Description |
 | ------------- | --------- | ----------- |
 | ATCS | Analytics | Components related to the SSR Analytics Engine. |
+| CFGD | Config Director | Components related to the 128T Configuration Engine. |
 | DATA | Metadata Database | Components related to the configuration and state databases. |
 | DISC | Discovery | Discovery-based components (except BFD). Today this is DHCP and ARP. |
 | USER | User | User-created log messages, generated via the &#x27;write&#x27; command. |
@@ -3612,15 +3658,19 @@ The category can be any of the following:
 | PLUG | Plugin Components | Components related to plugin management. |
 | RDB | Redundancy Database | The subsystem responsible for synchronizing data between nodes. |
 | RTG | Routing | Components related to the routing engine. |
+| SNMP | Simple Network Management Protocol. | Components related to the SNMP engine. |
+| SATF | Session Processing Thread Failures | Failures related to multi-threaded session setup. |
 | SESS | Session Startup | Components related to session setup. |
 | STEP | STEP | Components related to STEP. |
 | TEST | Test | Components related to testing. |
 | UTIL | Utility | Components related to utility libraries. |
 | DPDK | DPDK | Components related to DPDK. |
 | DNS | Domain Name System | Components related to DNS. |
+| HTTP | HTTP | Components related to HTTP request/response processing. |
 | PCLI | PCLI | All the PCLI&#x27;s log messages. |
 | BONS | Configuration Database | Components related to the configuration database. |
 | LDAP | LDAP | All the System Security Services Daemon logs. |
+| RIB | RIB | Components related to routing changes. |
 | IDP | IDP | Components related to IDP. |
 
 #### Version History
@@ -4020,6 +4070,23 @@ show app-id categories [router <router>] [node <node>] [<name>]
 | name | description |
 | ---- | ----------- |
 | name | Display the subcategories for category &#x27;name&#x27; |
+
+## `show app-id web-filtering`
+
+Show web-filtering state
+
+#### Usage
+
+```
+show app-id web-filtering router <router> node <node>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | The node from which to retrieve |
+| router | The router from which to retrieve |
 
 ## `show application modules registration`
 
@@ -4608,6 +4675,7 @@ show bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <re
 | command | description |
 | ------- | ----------- |
 | [`neighbors`](#show-bgp-neighbors) | Displays information about the state of the BGP neighbors on the SSR. |
+| [`path-based-policy`](#show-bgp-path-based-policy) | Show the current BGP path-based-policy summary from the routing manager. |
 | [`summary`](#show-bgp-summary) | Show the current BGP summary from the routing manager. |
 
 ##### See Also
@@ -4719,6 +4787,35 @@ link
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 5.1.0 | Added VFR support |
+## `show bgp path-based-policy`
+
+Show the current BGP path-based-policy summary from the routing manager.
+
+#### Usage
+
+```
+show bgp path-based-policy [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The name of the router for which to display the BGP path-based-policy |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+#### Description
+
+The _show bgp path-based-policy_ gives administrators a summary table of the current state of path based BGP.
+
+The _show bgp path-based-policy detail_ gives the additional information of all peers.
 
 ## `show bgp summary`
 
@@ -6217,6 +6314,7 @@ show idp application details [force] [node <node>] {router <router> | resource-g
 | command | description |
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command. |
+| [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
@@ -6256,6 +6354,7 @@ show idp application status [force] [node <node>] {router <router> | resource-gr
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
@@ -6301,6 +6400,7 @@ show idp details [force] [node <node>] {router <router> | resource-group <resour
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show underlying IDP application status. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
@@ -6351,6 +6451,7 @@ show idp events [{from <from> | since <since>}] [to <to>] [verbose] [rows <rows>
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events by-application`](#show-idp-events-by-application) | Show IDP events by application. |
@@ -6396,6 +6497,7 @@ show idp events by-application [{from <from> | since <since>}] [to <to>] [verbos
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
@@ -6446,6 +6548,7 @@ show idp events by-attack [{from <from> | since <since>}] [to <to>] [verbose] [n
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
@@ -6495,6 +6598,7 @@ show idp events by-severity [{from <from> | since <since>}] [to <to>] [verbose] 
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
@@ -6540,6 +6644,7 @@ show idp network [force] [node <node>] {router <router> | resource-group <resour
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
@@ -6585,6 +6690,7 @@ show idp platform [force] [node <node>] {router <router> | resource-group <resou
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
@@ -6630,6 +6736,7 @@ show idp signatures [force] [node <node>] {router <router> | resource-group <res
 | ------- | ----------- |
 | [`request idp restart`](#request-idp-restart) | Restart IDP Command.|
 | [`request idp signature-query`](#request-idp-signature-query) | Request IDP signature database connectivity. |
+| [`show idp application details`](#show-idp-application-details) | Show IDP engine details. |
 | [`show idp application status`](#show-idp-application-status) | Show IDP application status. |
 | [`show idp details`](#show-idp-details) | Show IDP details. |
 | [`show idp events`](#show-idp-events) | Show all IDP events. |
@@ -6649,6 +6756,61 @@ Query and display the IDP signature package details.
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.4   | This feature was introduced. |
+
+## `show igmp groups`
+
+Show IGMP groups
+
+#### Usage
+
+```
+show igmp groups [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual IGMP group [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request IGMP information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show igmp interface`
+
+Show IGMP interface
+
+#### Usage
+
+```
+show igmp interface [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual Interface [type: IP address] |
+| name | Specify name to see individual IGMP interface |
+| resource-group | The name of the resource group |
+| router | The router to request IGMP information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ## `show load-balancer`
 
@@ -8224,6 +8386,29 @@ Fri 2020-04-17 19:33:29 UTC
 Completed in 0.35 seconds
 ```
 
+## `show packet-buffer-locations`
+
+Display the packet buffer pool locations.
+
+#### Usage
+
+```
+show packet-buffer-locations [pool <pool>] router <router> node <node>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| node | Node for which to display packet-buffer pool information |
+| pool | Display the location details of the packet buffer pools (default: all) |
+| router | Router for which to display packet-buffer pool information |
+
+#### Description
+
+This command displays the total number of allocated buffers, capacity and their buffer pool location in the highway.
+
+
 ## `show peers`
 
 Display peer information.
@@ -8369,6 +8554,169 @@ Fri 2020-04-17 19:16:15 UTC
 
 Completed in 0.24 seconds
 ```
+## `show pim interface`
+
+Show PIM interface
+
+#### Usage
+
+```
+show pim interface [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual PIM Interface [type: IP address] |
+| name | The global interface to fetch PIM information for |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pim join`
+
+Show PIM join
+
+#### Usage
+
+```
+show pim join [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual PIM group [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pim mroute`
+
+Show PIM mroute
+
+#### Usage
+
+```
+show pim mroute [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | The Source or Group [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pim neighbor`
+
+Show PIM neighbor
+
+#### Usage
+
+```
+show pim neighbor [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [name <name>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual PIM Neighbor [type: IP address] |
+| name | See all neighbors for this interface |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pim rp-info`
+
+Show PIM rp-info
+
+#### Usage
+
+```
+show pim rp-info [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual PIM RP [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show pim state`
+
+Show PIM state
+
+#### Usage
+
+```
+show pim state [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify group address to see individual PIM group [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request PIM information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ## `show platform`
 
@@ -8964,6 +9312,7 @@ show service-path [{service-name <name> | hierarchy-service-name <name> | contai
 | contains-service-name | The partial substring match for which to display the service path |
 | detail | Display detail info of service path |
 | hierarchy-service-name | The hierarchy root for which to display the service path |
+| idp | Display idp related service-paths |
 | node | The node for which to display service path |
 | router | The router for which to display the service path |
 | rows | The number of service paths to display at once [type: int or &#x27;all&#x27;] (default: 50) |
