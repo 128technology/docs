@@ -69,11 +69,11 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
   - `show packet-buffer locations`
   - `save packet-buffer snapshot`
 ------
-- **I95-50810 IDP Custom Rules and Policies:** Users can customize an existing base IDP policy by creating exception-based rules. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. See [IDP Custom Rules](concepts_ssr_idp.md#idp-custom-rules) for overview information, and refer to [Modifying IDP Policies](config_idp.md#modifying-idp-policies) for configuration information.
+- **I95-48014 IDP Custom Rules and Policies:** Users can customize an existing base IDP policy by creating exception-based rules. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. See [IDP Custom Rules](concepts_ssr_idp.md#idp-custom-rules) for overview information, and refer to [Modifying IDP Policies](config_idp.md#modifying-idp-policies) for configuration information.
 ------
 - **I95-50973 DSCP Steering with BGP over SVR:** [DSCP steering](config_dscp_steering.md) is now supported on BGP over SVR.
 ------
-- **I95-51105 Options added to the import operation to enable or disable checking the signatures of RPMs:** The `import iso` command now verifies the signatures of all imported RPMs. This is controlled from the PCLI by passing in the `check-rpm-signature {required | allow-unsigned | disabled}` option to require that all RPMs are signed and verified, allow importing ISOs with unsigned RPMs and verify those that are signed, or to disable the signature checking altogether.
+- **I95-51105 Options added to the import operation to enable or disable checking the signatures of RPMs:** The `import iso` command now verifies the signatures of all imported RPMs. This is controlled from the PCLI by passing in the `check-rpm-signature {required(default) | allow-unsigned | disabled}` option to require that all RPMs are signed and verified, allow importing ISOs with unsigned RPMs and verify those that are signed, or to disable the signature checking altogether. 
 ------
 - **I95-51296 Show `Time in Status` in the `show assets` detail view:** The asset `Time in Status` field has been added to the Detail view. 
 ------
