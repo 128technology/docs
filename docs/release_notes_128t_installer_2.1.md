@@ -12,11 +12,7 @@ sidebar_label: 2.1
 
 ### Caveats
 - **IN-126** - Installation does not fully complete but returns Success
-  _**Symptom:**_ When performing an upgrade, the installer will complete however not all packages will be updated and the following Error can be seen in the log:
-  ```
-Curl error (6): Couldn't resolve host name for https://mirrors.128technology.com/reposnaps/Mirrors/11_01_2018/CentOS/7.5.1804/updates/x86_64/mirror-list.html
-[Could not resolve host: mirrors.128technology.com; Unknown error]
-  ```
+  _**Symptom:**_ When performing an upgrade, the installer will complete however not all packages will be updated.
 
   _**Cause:**_ The router node could not resolve the SSR software repository
 
@@ -29,16 +25,16 @@ Error: transaction check vs depsolve:
   ```
   example:
   ```
-Cancelling upgrade of the second node on the router due to failure on this node: Failed to install 128T-manifest-0:4.1.0.1.el7.centos-1.x86_64:
+Cancelling upgrade of the second node on the router due to failure on this node: Failed to install 128T-manifest-0:4.1.0.1.el7:
         Error: transaction check vs depsolve:
         iptables = 1.4.21-28.el7 is needed by iptables-services-1.4.21-28.el7.x86_64
   ```
   To diagnose the problem, try running: 'rpm -Va --nofiles --nodigest'.
   You probably have corrupted RPMDB, running 'rpm --rebuilddb' might fix the issue."
 
-  _**Cause:**_ Installed version of the RPM's come from a later version of the Supported SSR OS version. SSR Versions 3.2.8, 4.0.0 and 4.0.1 are supported on CentOS 7.4. Version 4.1.0 is supported on CentOS 7.5.
+  _**Cause:**_ Installed version of the RPM's come from a later version of the Supported SSR OS version.
      
   _**Corrective Action:**_ For the offending RPM that comes from a different version of the OS than is installed and running, perform either operation:
   1. Remove the offending rpm (in the example above "iptables-services-1.4.21-28.el7.x86_64" would be removed
-  2. Setup a new repo pointing to the support CentOS vault version and downgrade the related rpms
+  2. Setup a new repo pointing to the support SSR-OS vault version and downgrade the related rpms
          

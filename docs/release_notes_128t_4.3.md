@@ -585,7 +585,7 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 
   _**Symptoms:**_ show asset summary provides errors for an asset and does not perform high-state operations. The error `error: db5 error` would be seen in `/var/log/salt/minion.log` file
 
-  _**Conditions:**_ When the centos rpmdb has been corrupted.
+  _**Conditions:**_ When the SSR-OS rpmdb has been corrupted.
 
   Until the system is upgraded to 4.3.2, run the following commands on the target asset `mv /var/lib/rpm/__db* /tmp; yum clean all; dnf clean all`
 ------
@@ -605,12 +605,12 @@ Mar 03 09:25:10.813 [HWMC| – ] WARN (icmpManager ) Base Exception: failed to a
 ------
 - **I95-34421** Lenovo onboard Intel X722 NIC is not recognized by 128T and cannot be used as a forwarding interface
 ------
-- **I95-34498** Erroneous centos-release-yum4 errors in `/var/log/salt/minion` log file
+- **I95-34498** Erroneous yum4 errors in `/var/log/salt/minion` log file
 
   _**Symptom:**_ Log messages appear in salt minion file
 
   ```
-2020-03-25 17:59:37,893 [salt.loader.12.230.70.246.int.module.cmdmod][ERROR ][18140] stdout: package centos-release-yum4 is not installed
+2020-03-25 17:59:37,893 [salt.loader.12.230.70.246.int.module.cmdmod][ERROR ][18140] stdout: package yum4 is not installed
   ```
 
   _**Conditions:**_ Automated Provisioner performs a software version query
@@ -783,7 +783,7 @@ systemctl restart salt-minion
 ------
 - **I95-36033** 4.3.8 does not enforce the 128T-installer-2.6.0 version that deprecates rpms for CVE corrections
 
-  _**Syptom:**_ Deprecated RPM's installed by base CentOS that may have CVE corrections will not be removed.
+  _**Syptom:**_ Deprecated RPM's installed by base SSR-OS that may have CVE corrections will not be removed.
 
   _**Conditions:**_ When the 128T-installer is not updated to 2.6.0.
 

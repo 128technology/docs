@@ -78,6 +78,10 @@ For information about changing the settings, see [Application Identification Mod
 
 ![App ID Update Frequency](/img/idp_app-id-data-update.jpg)
 
+## IDP Custom Rules
+
+Starting with SSR 6.1.4-R2, users can customize an existing IDP policy, creating exception-based rules. For example, consider a case where an IDP policy is put in place, but security events are triggered because traffic typical for that network is considered a risk. Using an existing IDP policy, you can modify the profile to allow the specific traffic to flow as expected within the network. Changes are implemented from the SSR GUI or PCLI, and validated as part of the existing configuration workflow. For more information, see [Modifying IDP Policies](config_idp.md#modifying-idp-policies)
+
 ## Core Requirements 
 
 The SSR IDP engine requires a dedicated core. When the SSR is configured with `forwarding-core-mode` as automatic, the system automatically assigns cores based on the hardware type, as well as an additional core for IDP. 

@@ -25,7 +25,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ## New Features
 
-- **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to that of CentOS 8.4 to address several CVEs and provide support for Wireguard and Cordoba. 
+- **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to address several CVEs and provide support for Wireguard and Cordoba. 
 
 ## Resolved Issues
 
@@ -87,7 +87,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-41802/I95-43264 CVE Issues:** The latest Security vulnerabilities have been identified and addressed.
 ------
-- **I95-41876/I95-43624 CVE on CentOS 7:** The latest CentOS 7 security vulnerabilities have been identified and addressed.
+- **I95-41876/I95-43624 CVE within SSR-OS:** The latest security vulnerabilities have been identified and addressed.
 ------
 - **I95-42364 `off-subnet-reverse-arp-mac-learning` does not work when `outbound-only` is configured:** The learned MAC is now saved in the reverse flow placeholder for use when the flow is established. 
 ------
