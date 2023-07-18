@@ -1,17 +1,21 @@
-/**
- * Copyright (c) Facebook, Inc. and its affiliates.
+/* Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {useState, useRef, useCallback, useMemo} from 'react';
+import React, {useState, useRef, useCallback, useMemo, useEffect} from 'react';
+import lunr from 'lunr';
+import searchIndex from './searchIndex.json';
 import {createPortal} from 'react-dom';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {useHistory} from '@docusaurus/router';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import {DocSearchButton, useDocSearchKeyboardEvents} from '@docsearch/react';
 import {translate} from '@docusaurus/Translate';
+import data from './data.json';
+
+
 
 function SearchBar() {
   const history = useHistory();
@@ -32,6 +36,7 @@ function SearchBar() {
 
   const onOpen = useCallback(() => {
     setIsOpen(true);
+    console.log("This is being called");
   }, [setIsOpen]);
 
   const onClose = useCallback(() => {
@@ -59,7 +64,7 @@ function SearchBar() {
     description: 'The ARIA label and placeholder for search button',
   });
 
-  return (
+ return (
     <React.Fragment>
       <DocSearchButton
         onClick={onOpen}
@@ -71,9 +76,10 @@ function SearchBar() {
       />
 
       {isOpen &&
-        createPortal(<Modal onClose={onClose} />, searchContainer.current)}
+        (console.log("searchContainer.current: ", searchContainer.current),
+        createPortal(<Modal onClose={onClose} />, searchContainer.current))}
     </React.Fragment>
-  );
+  ); 
 }
 
 function MergeBaseUrl({path, alternateText, description}) {
@@ -88,60 +94,153 @@ function Modal({onClose}) {
   const [isLoading, setIsLoading] = React.useState(false);
   const [hoveredIdx, setHoveredIdx] = useState(-1);
 
-  const searchOptions = siteConfig.customFields.marvisSearch;
+  const idx = useMemo(() => lunr.Index.load(searchIndex), []);
 
+  const [showContent, setShowContent] = useState(false);
+  const [selectedContent, setSelectedContent] = useState("");
+  const [selectedTitle, setSelectedTitle] = useState("");
+  const [highlightedSentence, setHighlightedSentence] = useState("");
+
+  const {documents} = data;
+
+  
   React.useEffect(() => {
     const existing = document.body.style.overflowY;
     document.body.style.overflowY = 'hidden';
     return () => (document.body.style.overflowY = existing);
   }, []);
-
-  React.useEffect(() => {
+  
+  useEffect(() => {
     if (!search) {
       setResult(undefined);
       return;
     }
-
-    const abort = new AbortController();
-
+    console.log("Search", search);
+    //const results = idx.search(search).map(({ ref }) => searchIndex[ref]);
+    //const matchedDocs = results.map(({ ref }) => {
+      // find the document in the 'documents' array using the ref ID
+      //return searchIndex[ref];;
+    //});
     const t = setTimeout(() => {
       setIsLoading(true);
+      const results = idx.search(search + '*').map(({ ref }) => {
+        const doc = documents.find(doc => doc.id === ref);
+        let highlightedSentence = "";
+        if (doc) {
+          const sentences = doc.content.split('. ');
+          const regex = new RegExp(`\\b${search}\\b`, 'i');
+          highlightedSentence = sentences.find(sentence => regex.test(sentence)) || "";
+        }
+        return { ref, title: doc ? doc.title : "", highlightedSentence };
+      });
+      //const formattedResults = results.map(({ ref }) => searchIndex[ref]);
+      setResult(results);
+      //setResult(formattedResults)
+      setIsLoading(false);
+      setHoveredIdx(-1);
+     console.log("Result", results);
+  }, 500);
 
-      fetch(`${searchOptions.proxyURL}`, {
-        method: 'POST',
-        body: JSON.stringify({
-          query: search,
-          count: searchOptions.numResults,
-          doc_source: `${searchOptions.docSource}`,
-        }),
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-        },
-        signal: abort.signal,
-      })
-        .then((x) => x.json())
-        .then((x) => x.data)
-        .catch((err) => (console.error(err), undefined))
-        .then((x) => {
-          setResult(x);
-          setIsLoading(false);
-          setHoveredIdx(-1);
-        });
-    }, 500);
+  return () => {
+    clearTimeout(t);
+  };
+}, [search]); 
 
-    return () => {
-      clearTimeout(t);
-      abort.abort();
-    };
-  }, [search]);
+/* useEffect(() => {
+  if (!search) {
+    setResult(undefined);
+    return;
+  }
+  console.log("Search", search);
+  const t = setTimeout(() => {
+    setIsLoading(true);
+    try {
+      const results = idx.search(search + '*').map(({ ref, matchData }) => {
+        const doc = documents.find(doc => doc.id === ref);
+        let highlightedSentence = "";
+        let highlightedPositions = {};
+        if (doc) {
+          console.log("doc.content", doc.content);  // Debug
+          const sentences = doc.content.split('. ');
+          console.log(matchData.metadata)
+          highlightedPositions = matchData.metadata[search]?.content?.position;
+          console.log("highlightedPositions", highlightedPositions);  // Debug
+          if (highlightedPositions && highlightedPositions.length > 0) {
+            const [start] = highlightedPositions[0];
+            for(let sentence of sentences){
+              const sentenceStart = doc.content.indexOf(sentence);
+              const sentenceEnd = sentenceStart + sentence.length;
+              if (start >= sentenceStart && start < sentenceEnd){
+                highlightedSentence = sentence;
+                break;
+              }
+            }
+          }
+        }
+        return { ref, title: doc ? doc.title : "", highlightedSentence, highlightedPositions };
+      });
+      setResult(results);
+      setIsLoading(false);
+      setHoveredIdx(-1);
+      console.log("Result", results);
+    } catch (e) {
+      console.error(e);  // Log the error to the console
+      setIsLoading(false);  // Make sure to stop the loading even if there's an error
+    }
+  }, 500);
 
-  const items = result === undefined ? [] : result.docs;
-  const id = result === undefined ? '' : result.id;
+  return () => {
+    clearTimeout(t);
+  };
+}, [search]) */;
+
+
+
+  
+  const items = result === undefined ? [] : result;
+  //const id = result === undefined ? '' : result.id;
+
+  const highlightContent = (content, search) => {
+    const sentences = content.split('. ');
+    const regex = new RegExp(`\\b${search}\\b`, 'i');
+    const highlightedSentences = sentences.map(sentence => 
+        regex.test(sentence) ? `<mark>${sentence}</mark>` : sentence
+    );
+    return highlightedSentences.join('. ');
+  };
+
+
 
   const onClick = (index, e) => {
-    const data = {feedback: {id, index}};
-    navigator.sendBeacon(searchOptions.proxyURL, JSON.stringify(data));
-  };
+    e.preventDefault();
+    setShowContent(true);
+    const docu = documents.find(doc => doc.id === index);
+    if (docu) {
+      const highlightedContent = highlightContent(docu.content, search);
+      setSelectedContent(highlightedContent);
+      setSelectedTitle(docu.title);
+    } else {
+      setSelectedContent("");
+    }
+  }; 
+
+  /*const onInput = useCallback(
+    (event) => {
+      const newSearchValue = event.currentTarget.value;
+      console.log("New search value", newSearchValue)
+      const results = idx.search(newSearchValue)
+      //.map(({ ref }) => searchIndex[ref]);
+      //const matchedDocs = results.map(({ ref }) => {
+        // find the document in the 'documents' array using the ref ID
+        //return searchIndex[ref];;
+      //});
+      setSearch(newSearchValue);
+      console.log("New search", search);
+      setResult(results);
+      console.log("New Result", results);
+    },
+    [setSearch, idx],
+  ); */
 
   return (
     <div
@@ -215,43 +314,42 @@ function Modal({onClose}) {
                     fillRule="evenodd"
                     strokeLinecap="round"
                     strokeLinejoin="round"></path>
-                </svg>
-              </button>
-            )}
-          </div>
-        </header>
-        {items.length === 0 && <div style={{height: 12}} />}
-        {items.length > 0 && (
-          <div className="DocSearch-Dropdown">
-            <div className="DocSearch-Dropdown-Container">
-              <section className="DocSearch-Hits">
-                <div className="DocSearch-Hit-source">Results</div>
-                <ul
-                  role="listbox"
-                  aria-labelledby="docsearch-label"
-                  id="docsearch-list">
-                  {items.map((x, idx) => (
-                    <li
-                      key={idx}
-                      className="DocSearch-Hit"
-                      id="docsearch-item-0"
-                      role="option"
-                      onMouseEnter={() => setHoveredIdx(idx)}
-                      aria-selected={hoveredIdx === idx}>
-                      <a href={x.url} onClick={(e) => onClick(x.index, e)}>
-                        <div className="DocSearch-Hit-Container">
-                          <div className="DocSearch-Hit-content-wrapper">
-                            <span className="DocSearch-Hit-title">
-                              {x.title}
-                            </span>
-                            <span className="DocSearch-Hit-path">
-                              {x.snippet}
-                            </span>
-                            <span className="DocSearch-Hit-path url">
-                              {x.url}
-                            </span>
-                          </div>
-                          <div className="DocSearch-Hit-action">
+                  </svg>
+                </button>
+              )}
+            </div>
+          </header>
+          {items.length === 0 && <div style={{height: 12}} />}
+          {items.length > 0 && (
+            <div className="DocSearch-Dropdown">
+              <div className="DocSearch-Dropdown-Container">
+                <section className="DocSearch-Hits">
+                  <div className="DocSearch-Hit-source">Results</div>
+                  {showContent ? 
+                    <div dangerouslySetInnerHTML={{__html: selectedContent}} /> : 
+                  <ul
+                    role="listbox"
+                    aria-labelledby="docsearch-label"
+                    id="docsearch-list">
+                    {items.map((x, score) => (
+                      <li
+                        key={score}
+                        className="DocSearch-Hit"
+                        id="docsearch-item-0"
+                        role="option"
+                        onMouseEnter={() => setHoveredIdx(score)}
+                        aria-selected={hoveredIdx === score}>
+                        <a href={`/docs/${x.ref}`} target="_blank" rel="noopener noreferrer">   
+                          <div className="DocSearch-Hit-Container">
+                            <div className="DocSearch-Hit-content-wrapper">
+                              <span className="DocSearch-Hit-title">
+                                {x.title}
+                                </span>
+                              <span className="DocSearch-Hit-path">
+                                {x.highlightedSentence}
+                              </span>
+                            </div>
+                            <div className="DocSearch-Hit-action">
                             <svg
                               className="DocSearch-Hit-Select-Icon"
                               width="20"
@@ -273,32 +371,32 @@ function Modal({onClose}) {
                     </li>
                   ))}
                 </ul>
+                }
               </section>
             </div>
           </div>
-        )}
-
-        <footer className="DocSearch-Footer">
-          <div className="DocSearch-Logo">
-            <span className="DocSearch-Label">Search by</span>
-            <MergeBaseUrl
-              path="img/marvis.svg"
-              alternateText="Marvis"
-              description="Search results generated by Marvis"
-            />
-          </div>
-          <ul className="DocSearch-Commands">
-            <li>
-              <span className="DocSearch-Commands-Key">
-                <svg width="15" height="15">
-                  <g
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.2">
-                    <path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path>
-                  </g>
+        )}                 
+          <footer className="DocSearch-Footer">
+            <div className="DocSearch-Logo">
+              <span className="DocSearch-Label">Search by</span>
+              <MergeBaseUrl
+                path="img/marvis.svg"
+                alternateText="Marvis"
+                description="Search results generated by Marvis"
+              />
+            </div>
+            <ul className="DocSearch-Commands">
+              <li>
+                <span className="DocSearch-Commands-Key">
+                  <svg width="15" height="15">
+                    <g
+                      fill="none"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1.2">
+                      <path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-1.4376v-.5c0-.8128.5646-1.4376 1.7073-1.4376.7344 0 1.2808.2819 1.5443.876M1 11.5c.2672.6929 1.0731 1.1 1.916 1.1s1.6488-.4071 1.916-1.1M5.9727 2.6s-.0237-.2739.2415-.2739c.2652 0 .2126.2739.2126.2739" />
+                    </g>
                 </svg>
               </span>
               <span className="DocSearch-Label">to close</span>
@@ -311,3 +409,6 @@ function Modal({onClose}) {
 }
 
 export default SearchBar;
+
+
+

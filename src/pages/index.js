@@ -5,6 +5,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+import { useEffect, useState } from 'react';
 
 const features = [
   {
@@ -109,6 +110,44 @@ function MergeBaseUrl({path, description}) {
   );
 }
 
+function Banner() {
+  return (
+    <div className={classnames('banner', styles.banner)}>
+      <p>
+        You are viewing a local version of this documentation. For the most up-to-date information, 
+        please visit the <a href='https://docs.128technology.com/'>online documentation</a>.
+      </p>
+    </div>
+  );
+}
+
+function CheckSSR() {
+  const [isLocalSSR, setIsLocalSSR] = useState(false);
+
+  useEffect(() => {
+    fetch("/ssrflag.json")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`status ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(json => {
+        setIsLocalSSR(json.isLocalSSR);
+      }).catch(e => {
+        console.log("Error: " + e);
+        setIsLocalSSR(false);
+      });
+  }, []);
+
+  return (
+    <>
+      {isLocalSSR ? <Banner /> : null}
+    </>
+  );
+}
+
+
 function Home() {
   const context = useDocusaurusContext();
   const {siteConfig = {}} = context;
@@ -116,6 +155,7 @@ function Home() {
     <Layout
       title={`${siteConfig.title}`}
       description="The source for documentation of the Juniper Session Smart Routing Platform.">
+      <CheckSSR />
       <header className={classnames('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <div className="heroTitle">Session Smart Router</div>
