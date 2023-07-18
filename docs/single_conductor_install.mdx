@@ -7,7 +7,8 @@ import Prerequisites from './_install_prereqs.md';
 import InstallationType from './_install_installtype.md'; 
 import FIPSmode from './_install_fipsmode.md'; 
 import LinuxComplete from './_install_linux_complete.md'; 
-import InitialBoot from './_install_nmtui_router.md'; 
+import InitialBoot from './_install_nmtui_router.md';
+import ConductorIP from './_install_nmtui_conductor.md'; 
 import VerifyInstall from './_install_verify_install.md';
 
 
@@ -24,6 +25,9 @@ import VerifyInstall from './_install_verify_install.md';
 
 ### Initial Boot and NMTUI
 <InitialBoot/>
+
+### Set the Conductor IP Address
+<ConductorIP/>
 
 ### Initialize the SSR Node
 
@@ -80,6 +84,14 @@ There are three different types of conductor installations;
 ## Configure the Token
 
 To save repository access credentials, use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
+
+### Manually Upgrade the Token
+
+Use the following procedure to either add or update the username/token:
+
+1. Update the username/token with the [`install128t repo authenticate -u <user> -t <token>`](#repo) process on BOTH conductors.
+
+2. Restart the primary conductor with `systemctl restart 128T` and wait for the conductor to be fully operational (can be up to 5 minutes).
 
 ## FIPS Enforcement Mode
 <FIPSmode/>
