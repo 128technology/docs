@@ -9,7 +9,7 @@ import FIPSmode from './_install_fipsmode.md';
 import LinuxComplete from './_install_linux_complete.md'; 
 import InitialBoot from './_install_nmtui_router.md';
 import ConductorIP from './_install_nmtui_conductor.md'; 
-import VerifyInstall from './_install_verify_install.md';
+import VerifyConductorInstall from './_install_verify_conductor_install.md';
 
 
 <InteractiveOverview/>
@@ -18,6 +18,10 @@ import VerifyInstall from './_install_verify_install.md';
 <Prerequisites/>
 
 ## Choose the Installation Type
+
+:::note
+Conductor installations are not supported by the OTP Install process. Please use the Interactive Install on either the VGA or the Serial console.
+:::
 <InstallationType/>
 
 ## Conductor Installation
@@ -26,7 +30,7 @@ import VerifyInstall from './_install_verify_install.md';
 ### Initial Boot and NMTUI
 <InitialBoot/>
 
-### Set the Conductor IP Address
+### Configure the Network Interface 
 <ConductorIP/>
 
 ### Initialize the SSR Node
@@ -44,15 +48,15 @@ There are three different types of conductor installations;
 
   ![SSR Role](/img/initializer_Serial2.png)
 
-2. When asked _What kind of Router/Conductor node is this?_, select **Standalone** from the following options:
+2. When asked _What kind of Conductor node is this?_, select **Standalone** from the following options:
 
   ![Identify the Node](/img/initializer_standalone.png)
 
-- **Standalone:** This router/conductor has no highly available peer, and is not currently planned for high availability.
+- **Standalone:** This conductor has no highly available peer, and is not currently planned for high availability.
 
 3. Enter the following system properties on the **Node Info** screen:
 
-    ![Node Information](/img/initializer_Serial5.png)
+    ![Node Information](/img/initializer_Serial5a.png)
 
     - **Node Name:** The name of the system within your Conductor, for example, _conductor-node1_. By default this field uses the Linux system's hostname. The node name identifies the conductor node under the **Conductor** element in the Authority. 
 
@@ -74,24 +78,57 @@ There are three different types of conductor installations;
 
   ![Initializer Complete](/img/initializer_complete.png)
 
-  :::note
-  A system reboot is required.
-  :::
-
 ## Verify the Installation
-<VerifyInstall/>
+<VerifyConductorInstall/>
 
 ## Configure the Token
 
 To save repository access credentials, use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
 
-### Manually Upgrade the Token
+From the root user in the workflow above, run the `pcli` command to access the PCLI and configure the token.
 
-Use the following procedure to either add or update the username/token:
+```
+[root@test-conductor ~]# pcli
+Starting the PCLI...
+root@node1.test-conductor# set software access-token <username> <password>
+Saving...
+Waiting for process to complete
+...(messages removed for brevity)...
+Making the DNF cache
+No further operation requested. Exiting
+Installer complete
+Successfully saved credentials.
+root@node1.test-conductor#
+```
+## Add the Conductor to the Authority
 
-1. Update the username/token with the [`install128t repo authenticate -u <user> -t <token>`](#repo) process on BOTH conductors.
+Log into the Conductor GUI to complete the following operations. 
 
-2. Restart the primary conductor with `systemctl restart 128T` and wait for the conductor to be fully operational (can be up to 5 minutes).
+1. Select the **Conductor** from the Authority menu on the left side of the GUI. 
+2. Select the gear icon in the top right corner of the GUI.
+3. Select the node for the conductor - in this example it is `node1`.
+4. Under **Associated Asset ID** select the hostname for the conductor.
+5. Validate and Commit the changes to the configuration. 
+
+
+### Set the Conductor IP Address
+
+1. Return to the Authority level
+2. Select the Authority Settings.
+3. Under Conductor Addresses, select ADD.
+4. In the **New Conductor Address** window, enter the conductor public IP address.
+5. Click Validate and Commit. Warnings will appear, advising you of the change.  
+
+### Set the Authority Name
+
+Defining the Authority name (why do I want to do this??)
+
+1. In the Authority Settings, Under Basic Information, enter the new Authority name.
+2. Validate and Commit.
+
+### Next Steps - Router Configuration
+
+A simple router configuration is available as a [template](config_templates.md#default-templates). This is a great place to start the configuration process. 
 
 ## FIPS Enforcement Mode
 <FIPSmode/>

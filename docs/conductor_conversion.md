@@ -5,14 +5,14 @@ sidebar_label: Conductor Conversion
 
 An SSR device (SSR1xx or SSR1xxx) shipped with SSR 5.4.x Routing software may be reinitialized as a conductor for use in an existing network. The conductor can be used with or without Cloud Telemetry for devices running pre 6.0.x SSR software.
 
-Use the following procedure to reinitialize an SSR 1xx/1xxx as a conductor.
+Use the following procedure to reinitialize an SSR1xx or SSR1xxx as a conductor.
 
-1. To start the Initializer, run the `initialize128t` command. `initialize128t` must always be run as the root user, or with `sudo initialize128t`.
+1. Run the `initialize128t` command to start the initializer. `initialize128t` must always be run as the root user, or with `sudo initialize128t`.
 
 :::note
 The SSR softare must not be running during initialization. The Initializer will detect when the SSR is running and exit with this message:
 
-```txt
+```
 SSR is running; cannot launch Initializer
 ```
 
@@ -20,21 +20,21 @@ To stop the SSR, follow the steps shown in the
 [Installation Guide](intro_installation.md#stopping-the-128t-routing-software).
 :::
 
-2. In the SSR Initializer wizard, use the space bar to select the **Conductor**role for the SSR node, and press the **Enter** key to select **OK**.
+2. On the SSR Initializer wizard screen, use the space bar to select the **Conductor** role for the SSR node, and press the **Enter** key to select **OK**.
 
   ![SSR Role](/img/initializer_Serial2.png)
 
-3. When asked _What kind of Router/Conductor node is this?_, select **Standalone** from the following options:
+3. When asked _What kind of Conductor node is this?_, select **Standalone** from the following options:
 
  ![Identify the Node](/img/initializer_standalone.png)
 
-- **Standalone:** This router/conductor has no highly available peer, and is not currently planned for high availability.
+- **Standalone:** This conductor has no highly available peer, and is not currently planned for high availability.
 
 4. Enter the following system properties on the **Node Info** screen:
 
   ![Node Information](/img/initializer_Serial5.png)
 
-  - **Node Name:** The name of the system within your SSR Router or Conductor, for example, _conductor_. By default this field uses the Linux system's hostname. The node name identifies the conductor node under the **Conductor** element in the Authority. 
+  - **Node Name:** The name of the system within your SSR Conductor, for example, _conductor_. By default this field uses the Linux system's hostname. The node name identifies the conductor node under the **Conductor** element in the Authority. 
 
   :::note
   Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).
