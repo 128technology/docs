@@ -102,33 +102,53 @@ root@node1.test-conductor#
 ```
 ## Add the Conductor to the Authority
 
-Log into the Conductor GUI to complete the following operations. 
+Take this opportunity to log into the Conductor GUI to complete the following operations. This will provide validation that the installation was successful, and familiarize you with GUI operations. 
 
 1. Select the **Conductor** from the Authority menu on the left side of the GUI. 
-2. Select the gear icon in the top right corner of the GUI.
+
+ ![Configuration menu](/img/config_menu_gui.png)
+
+2. Select the **Configure** icon.
+
+ ![Conductor Configuration Icon](/img/conductor_config_icon.png)
+
 3. Select the node for the conductor - in this example it is `node1`.
+
+ ![Conductor Node](/img/conductor_node.png) 
+
 4. Under **Associated Asset ID** select the hostname for the conductor.
+
+ ![Asset ID](/img/conductor_asset-id.png)
+
 5. Validate and Commit the changes to the configuration. 
-
-
-### Set the Conductor IP Address
-
-1. Return to the Authority level
-2. Select the Authority Settings.
-3. Under Conductor Addresses, select ADD.
-4. In the **New Conductor Address** window, enter the conductor public IP address.
-5. Click Validate and Commit. Warnings will appear, advising you of the change.  
 
 ### Set the Authority Name
 
-Defining the Authority name (why do I want to do this??)
+The authority represents the complete set of all SSRs managed under a single organizational entity.
 
-1. In the Authority Settings, Under Basic Information, enter the new Authority name.
-2. Validate and Commit.
+1. Return to the Authority level
+2. Select the Authority Settings.
+
+ ![Authority Settings](/img/conductor_authority_name.png)
+
+3. Under Basic Information, enter the new Authority name.
+
+ ![Basic Information](/img/conductor_authority_name2.png)
+
+### Set the Conductor IP Address
+
+1. Under Conductor Addresses, select ADD.
+2. In the **New Conductor Address** window, enter the conductor public IP address.
+
+![Conductor Address](/img/conductor_address.png)
+
+3. Click Validate and Commit. Warnings will appear, advising you of the change.  
 
 ### Next Steps - Router Configuration
 
-A simple router configuration is available as a [template](config_templates.md#default-templates). This is a great place to start the configuration process. 
+Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process. Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
+
+A sample branch router configuration is available as a [**template**](config_templates.md#default-templates) on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top level resources. For more information, see [Configuration Templates](config_templates.md). 
 
 ## FIPS Enforcement Mode
 <FIPSmode/>
