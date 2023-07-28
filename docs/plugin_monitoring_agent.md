@@ -1871,7 +1871,7 @@ The `t128_lte_metric` collector will look for and report SNR signal strength if 
 
 
 #### Issues Fixed
-- **MON-125** `t128_metrics` default bfd config doesn't work with 4.3
+- **MON-125** `t128_metrics` default bfd config doesn't work 
 
   _**Resolution:**_ The new default config for metrics have the correct parameters for BFD metrics
 

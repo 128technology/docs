@@ -172,7 +172,7 @@ install128t download
 The `--128T-version` option is used to specify a version to download:
 
 ```sh
-install128t download --128T-version 4.5.7
+install128t download --128T-version 6.1.4
 ```
 
 :::tip
@@ -181,7 +181,7 @@ Version requirements of the same format as the preference file may be used for
 this option:
 
 ```sh
-install128t download --128T-version ">= 4.5.1"
+install128t download --128T-version ">= 5.6.8"
 ```
 
 :::
@@ -209,7 +209,7 @@ With this option, the Installer will attempt to mount and import packages from
 the ISO file specified.
 
 ```sh
-install128t import --iso-path /root/128T-4.5.1-1.el7.v1.x86_64.iso
+install128t import --iso-path /root/128T-5.6.8-9.el7.v1.x86_64.iso
 ```
 
 <!-- TODO: IN-322 reword once restriction is removed

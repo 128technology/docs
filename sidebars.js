@@ -318,12 +318,6 @@ module.exports = {
           "release_notes_128t_5.2",
           "release_notes_128t_5.1",
           "release_notes_128t_5.0",
-          "release_notes_128t_4.5",
-          "release_notes_128t_4.4",
-          "release_notes_128t_4.3",
-          "release_notes_128t_4.2",
-          "release_notes_128t_4.1",
-          "release_notes_128t_4.0",
         ],
       },
       {

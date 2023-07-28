@@ -31,8 +31,6 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 ## Release 5.0.0
 **Release Date:** December 18, 2020
 
-**Includes changes from:** [Version 4.5.4 December 16, 2020](release_notes_128t_4.5.md#release-454)  
-
 :::warning
 SSH Root Login is not permitted. 
 

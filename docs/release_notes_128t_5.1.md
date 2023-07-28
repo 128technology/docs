@@ -244,7 +244,7 @@ This release replaces the existing `5.1.6-1` release.
 
 ### Caveats
 
-- **I95-41574 Conductor Rollback:** In a High Availability configuration where 5.1.6 has been installed and a rollback is necessary (to version 4.5.x), both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
+- **I95-41574 Conductor Rollback:** In a High Availability configuration where 5.1.6 has been installed and a rollback is necessary, both conductors must be rolled back before access to the PCLI is available from one HA conductor to the other - both must be running the same software version. 
 
 ## Release 5.1.5
 **Release Date:** August 13, 2021
@@ -416,8 +416,6 @@ This release replaces the existing `5.1.6-1` release.
 ## Release 5.1.2
 **Release Date:** April 30, 2021 
 
-**Includes changes from:** [Version 4.5.8 April 28, 2021](release_notes_128t_4.5.md#release-458).
-
 ### Resolved Issues
 
 - **I95-29583 Default Language Setting:** Changes to the default language are now saved per user, not per system.
@@ -498,8 +496,6 @@ This release replaces the existing `5.1.6-1` release.
 ## Release 5.1.0
 
 **Release Date:** April 12, 2021
-
-**Includes changes from:** [Version 4.5.5 February 10, 2021](release_notes_128t_4.5.md#release-455)
 
 ### New Features and Improvements 
 
