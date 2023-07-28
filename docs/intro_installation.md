@@ -24,7 +24,7 @@ Installation is done from the SSR ISOs, typically from a bootable image on a fla
 - [Download the ISOs](intro_downloading_iso.md)
 - [Create Bootable Media](intro_creating_bootable_usb.md)
 - [Perform the Interactive ISO installation](intro_installation_bootable_media.mdx) 
-- [Install a Conductor](single_conductor_install.mdx)
+- [Install a Conductor](install_conductor_overview.md)
 - [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
 - [Install the Router using the OTP ISO](intro_otp_iso_install.mdx) or [Install the Router using the Interactive Installation](intro_installation_bootable_media.mdx)
 
@@ -45,13 +45,13 @@ The Image-Based Installation process supports Mist WAN Assurance; the Mist-manag
 
 For customers with conductor-managed deployments, the [package-based installation](intro_installation_bootable_media.mdx) continues to be used for upgrades and new installations.
 
-### Regarding Upgrades
+## Upgrades
 
 Please refer to [Upgrade Considerations](intro_upgrade_considerations.md) before upgrading. Additional prerequisites include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
 
 For full details and instructions refer to [Upgrading the SSR Networking Platform.](intro_upgrading.md)
 
-### Version Dependencies
+## Version Dependencies
 
 The conductor Major.Minor version must be greater than or equal to the router version. The router version can not exceed the conductors major.minor version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) contract can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support contract *may* work, but are not guaranteed to do so.  
 

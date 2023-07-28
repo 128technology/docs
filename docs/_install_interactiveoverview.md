@@ -8,4 +8,4 @@ The steps in this section describe the *interactive conductor installation* from
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
 :::
 
-To install a router **after** installing and configuring the Conductor, use the [SSR Installation](intro_installation_bootable_media.mdx#initialize-the-ssr-node). The [Router Installation Using OTP](intro_otp_iso_install.mdx) procedure can be used to install more complex router configurations. 
+To install a router **after** installing and configuring the Conductor, use the [SSR Installation](intro_installation_bootable_media.mdx). The [Router Installation Using OTP](intro_otp_iso_install.mdx) procedure can be used to install more complex router configurations. 
