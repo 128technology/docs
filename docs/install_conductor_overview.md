@@ -17,3 +17,8 @@ The following Conductor installation processes are covered in this guide:
 - [Conversion of an SSR Router to a Conductor](single_conductor_install#conductor-conversion)
 
 Cloud deployments are not covered in this guide. Please see [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md) for more information.
+
+
+Please review the [Prerequsites](single_conductor_install#prerequisites)
+
+[another test here](single_conductor_install#initial-boot-and-nmtui)
