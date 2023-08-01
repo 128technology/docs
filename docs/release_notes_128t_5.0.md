@@ -4,7 +4,7 @@ sidebar_label: '5.0'
 ---
 
 :::info
-Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
+Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically. 
 
 If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
 

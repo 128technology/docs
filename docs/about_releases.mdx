@@ -8,6 +8,10 @@ import { columns, releases, moduleTests } from "./releases.table";
 
 :::info
 Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically. 
+
+For example, issues resolved in `4.3.12`, which was released on 3/12/2021, are resolved in `4.5.6`, which was released on 3/26/2021 and also resolved in `5.1.0`, which was released on 3/15/2021, and so on.
+
+However, issues resolved in `4.3.12`, which was released on 3/12/2021 are not addressed in `4.5.5` because `4.5.5` was released on 2/10/2021. Even though `4.5.5` is lexicographically higher than `4.3.12`, it is chronologically older than 4.3.12.
 :::
 
 The SSR software follows a semantic versioning scheme. Semantic versioning is a simple scheme built around the `name-X.Y.Z-build` concept. `X` is incremented for every major release. A major release can be the introduction of major features or when backwards compatibility may be broken. `Y` is a minor release with solely non-breaking feature additions. `Z` is designated for bug fixes in previous releases. `-build` is used to denote the incremental process of development until the culmination in the final release.
@@ -39,6 +43,13 @@ Version `6.1.0` introduces changes to the SSR software release model. Every six 
 | Release 5.2 | May 10, 2021 | November 10, 2021 | May 10, 2022 |
 | Release 5.1 | May 17, 2021 | August 24, 2022 | February 24, 2023 |
 | Release 5.0 | December 18, 2020 | June 18, 2021 | December 18, 2021 |
+| Release 4.5 | July 23, 2020 | April 15, 2021 | October 15, 2021 |
+| Release 4.4 | May 19, 2020 | April 19, 2021 | September 19, 2021 |
+| Release 4.3 | February 8, 2020 | December 24, 2020 | September 26, 2021 |
+| Release 4.2 | November 21, 2019 | October 8, 2020 | April 8, 2021 |
+| Release 4.1 | February 7, 2019 | July 8, 2020 | January 8, 2021 |
+| Release 4.0 | December 18, 2018 | September 18, 2019 | March 18, 2020 |
+| Release 3.2 | March 15, 2018 | December 15, 2018 | June 15, 2019 |
 
 
 Please refer to the [Software Support Policy](about_support_policy.md) page to understand the lifecycle of SSR releases.
