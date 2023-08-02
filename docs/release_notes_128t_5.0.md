@@ -4,7 +4,7 @@ sidebar_label: '5.0'
 ---
 
 :::info
-Issues resolved in a release are merged into subsequent releases chronologically AND numerically. 
+Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically. 
 
 If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR / 128T Software is provided.
 
@@ -30,8 +30,6 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 
 ## Release 5.0.0
 **Release Date:** December 18, 2020
-
-**Includes changes from:** [Version 4.5.4 December 16, 2020](release_notes_128t_4.5.md#release-454)  
 
 :::warning
 SSH Root Login is not permitted. 

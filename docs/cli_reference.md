@@ -4531,20 +4531,20 @@ Fri 2020-04-24 13:25:52 UTC
 =========== ===================== ================================== ========================================== ============= ============
  Router      Node                  Installed                          Available                                  Downloading   Downloaded
 =========== ===================== ================================== ========================================== ============= ============
- burl-corp   burl-corp-primary     4.2.6-1.el7                        4.3.0-1.el7
-                                                                      4.3.1-1.el7
-                                                                      4.3.2-1.el7
-                                                                      4.3.3-1.el7
-             burl-corp-secondary   4.2.6-1.el7                        4.3.0-1.el7
-                                                                      4.3.1-1.el7
-                                                                      4.3.2-1.el7
-                                                                      4.3.3-1.el7
- tp-colo     tp-colo-primary       4.4.0-1.el7
-             tp-colo-secondary     4.4.0-1.el7
- tp-cond     tp-cond-primary       4.4.0-1.el7
-             tp-cond-secondary     4.4.0-1.el7
- tp-lab      tp-lab-primary        4.3.3-1.el7                        4.4.0-1.el7
-             tp-lab-secondary      4.3.3-1.el7                        4.4.0-1.el7
+ burl-corp   burl-corp-primary     5.6.1-18.el7                       5.6.2-7.el7
+                                                                      5.6.3-6.el7
+                                                                      5.6.4-3.el7
+                                                                      5.6.5-5.el7
+             burl-corp-secondary   5.6.1-18.el7                       5.6.2-7.el7
+                                                                      5.6.3-6.el7
+                                                                      5.6.4-3.el7
+                                                                      5.6.5-5.el7
+ tp-colo     tp-colo-primary       5.6.9-3.el7
+             tp-colo-secondary     5.6.9-3.el7
+ tp-cond     tp-cond-primary       5.6.9-3.el7
+             tp-cond-secondary     5.6.9-3.el7
+ tp-lab      tp-lab-primary        5.6.8-9.el7                        5.6.9-3.el7
+             tp-lab-secondary      5.6.8-9.el7                        5.6.9-3.el7
 
 Completed in 0.65 seconds
 ```

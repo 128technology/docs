@@ -37,7 +37,7 @@ sidebar_label: 2.3
 
   _**Cause:**_ The router node could not resolve the SSR software repository
 
-  _**Corrective Action:**_ When performing the upgrade from less than 4.1.0 to 4.1.0, ensure internet or Conductor access (where Conducted hosted services are enabled)
+  _**Corrective Action:**_ When performing the upgrade ensure internet or Conductor access (where Conducted hosted services are enabled)
 
 - **IN-141** - Unsupported installed rpms result in Canceled upgrade
   _**Symptom:**_ GUI presents a failure on upgrade with the following text provided:
