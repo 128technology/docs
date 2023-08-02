@@ -14,7 +14,7 @@ This guide is for network engineers and architects using their Session Smart Rou
 While the techniques described here apply to any MPLS connection, they will be most valuable when engineering branch office (i.e., smaller) MPLS links, due to the higher likelihood of congestion.
 :::
 
-This document is intended to be a companion guide to the *AT&T Network-Based Class of Service Customer Router Configuration Guide*. At the time of this writing, the latest version is Release 4.0, December 2016.
+This document is intended to be a companion guide to the *AT&T Network-Based Class of Service Customer Router Configuration Guide*. 
 
 ## AT&T Service Classes
 
