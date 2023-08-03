@@ -26,7 +26,7 @@ sidebar_label: 2.4
 
   _**Cause:**_ The router node could not resolve the SSR software repository
 
-  _**Corrective Action:**_ When performing the upgrade from less than 4.1.0 to 4.1.0, ensure internet or Conductor access (where Conducted hosted services are enabled)
+  _**Corrective Action:**_ When performing the upgrade ensure internet or Conductor access (where Conducted hosted services are enabled)
 
 - **IN-141** - Unsupported installed rpms result in Canceled upgrade
   _**Symptom:**_ GUI presents a failure on upgrade with the following text provided:
@@ -60,4 +60,4 @@ sidebar_label: 2.4
 
   _**Cause:**_ DNF uses the curl functions, in earlier versions of SSR-OS the curl libraries may exhibit this issue.
 
-  _**Corrective Action:**_ If SSR 4.1.0 or greater is installed this is not an issue. If upgrading from a previous version and using the Conductor, the Conductor will perform retries to work around this issue. If using the local installer for installation, re-execute the installer to work around this issue.     
+  _**Corrective Action:**_ When installing supported versions of the SSR software this is not an issue. 

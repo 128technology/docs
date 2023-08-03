@@ -3,7 +3,7 @@ title: SSR 5.5 Release Notes
 sidebar_label: '5.5'
 ---
 :::info
-Issues resolved in a release are merged into subsequent releases chronologically AND numerically.
+Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically. 
 
 If you do not see an issue listed below, it may have been resolved in another recently released version. A link to the Release Notes for the most recent chronological release of SSR Software is provided.
 
@@ -27,6 +27,55 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 :::note
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
+
+## Release 5.5.10-6
+
+**Release Date:** July 31, 2023
+
+### New Features
+
+- **I95-50949 Add packet buffer tracking to help analyze buffer exhaustion:** Packet buffer location tracking has been added, and the following PCLI commands have been created for buffer tracking.
+	- `show packet-buffer locations`
+	- `save packet-buffer snapshot`
+------
+- **I95-51450 Support for 100/Full Speed/Duplex on Intel I225-V Driver NICs:** The DPDK driver has been updated to allow fixed speed and duplex configuration to work with IGC i225 NICs.
+
+### Resolved Issues
+
+- **I95-47960 Incorrect progress message for `show dns resolutions`:** The progress message for this command now correctly displays `Retrieving dns resolutions...`.
+------
+- **I95-50965 System not seeing the downloading version:** Resolved a rare case where the system begins the process of importing the ISO, but does not wait for it to complete before moving to the next step of the download/install process.
+------
+- **I95-51178 Increase default juteMaxBufferSize:** The default juteMaxBufferSize has been increased to 10MB, which addresses issues where the device is unable to commit very large configurations.
+------
+- **I95-51284 Routers remain in the connected state:** Updated the dependencies within the salt minion to resolve an issue where an asset is stuck in the connected state, displaying the error: `Error getting asset's public key: 'ssh.set_auth_key', retrying....`
+------
+- **I95-51359 Unable to set the OSPF MTU:** Added the ability for users to set the MTU to a non-default value.
+------
+- **I95-51378 REST API improvements:** Performance improvements have been made in the metrics REST APIs to alleviate issues with intermittent metrics graphs on heavily loaded systems.
+------
+- **I95-51650 `log-category PCLI` command not working:** Resolved an issue that disallowed setting `config authority router <name> system log-category PCLI`. We now also allow configuring the following log categories:
+	- CFGD
+	- SNMP
+	- HTTP
+------
+- **I95-51734 Remove duplicate transport port-ranges from modules before adding to service:** Resolved an issue where FIB entries are not installed when app-id modules have conflicting or overlapping port-ranges, and are being placed into one service.
+------
+- **I95-51788 Path index is not displayed correctly for `show sessions by-id`:** `show sessions by-id` has been updated to display MTU and PathIndex.
+------
+- **I95-51792 Low MTU threshold causing metadata fragmentation:** Fixed the incorrect handling of packets where metadata is fragmented due to unreasonably low MTU, causing the packet buffers to become exhausted.
+------
+- **I95-51793 Path MTU discovery dropping very low:** Fixed PMTU discovery from ever resolving to an unreasonably low MTU, which could previously occur during a link flap event.
+------
+- **I95-51794 Core dump on systems with greater than 10 physical interfaces, such as Lenovo SR-650:** Resolved an issue where the SR-650 was crashing due to uninitialized flags field. Support has been added for these devices.
+------
+- **I95-51915 Report buffer allocation failures to watchdog:** `alloc-failure` stats are now gathered per device and included in the device stats, allowing the watchdog to detect a failure and respond.
+------
+- **I95-52104 URI escape characters handled incorrectly:** The `lookup application by-domain` and `clear app-id cache-entry url` were handling url parameters incorrectly, in lookup, creating and clearing cache entries. This has been resolved and each command now performs the correct operation. 
+------
+- **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_domain-based_web_filter/#service-matching-order)
+------
+- **WAN-2090 Conductor managed SSR Applications in WAN Insights Showing up as Numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
 ## Release 5.5.9-4
 
@@ -106,7 +155,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-50262 Routers disconnected from their conductor may have incorrect log rotation settings:** Resolved an issue where a managed router was not able to pull down the configuration from the Conductor - which includes the log rotation config. The default salt log rotation configuration has been improved, preventing the log from growing too large before the connection to the Conductor can be established. 
 ------
-- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software (SSR Software equal to, or greater than version 4.4).
+- **I95-50269 Router clone operation fails:** Implemented checks to prevent cloning obsolete elements and internal lists/containers on legacy versions of the SSR software.
 ------
 - **I95-50286 Rebooting a node of an HA pair from Linux breaks routing:** Resolved an issue where a delay in the shutdown process caused a node to take over a VRRP interface, creating routing issues. 
 ------

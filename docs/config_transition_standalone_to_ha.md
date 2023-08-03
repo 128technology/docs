@@ -14,9 +14,9 @@ Wed 2019-12-04 18:27:59 UTC
 =========== =========== =========== ============== ========= ========
  Router      Node        Asset Id    SSR Version   Status    Errors
 =========== =========== =========== ============== ========= ========
- Conductor   T104_DUT1   T104_DUT1   4.2.0-2.el7    running        0
- Router      T104_DUT3   T104_DUT3   4.2.0-2.el7    running        0
-             T104_DUT4   T104_DUT4   4.2.0-2.el7    running        0
+ Conductor   T104_DUT1   T104_DUT1   5.6.9-3.el7    running        0
+ Router      T104_DUT3   T104_DUT3   5.6.9-3.el7    running        0
+             T104_DUT4   T104_DUT4   5.6.9-3.el7    running        0
 
 Completed in 0.14 seconds
 ```
@@ -324,8 +324,8 @@ Wed 2019-12-04 19:00:17 UTC
 =========== =========== =========== ============== ============== ========
  Router      Node        Asset Id    SSR Version   Status         Errors
 =========== =========== =========== ============== ============== ========
- Conductor   T104_DUT1   T104_DUT1   4.2.0-2.el7    running             0
-             T104_DUT2   T104_DUT2   4.2.0-2.el7    running             0
+ Conductor   T104_DUT1   T104_DUT1   5.6.9-3.el7    running             0
+             T104_DUT2   T104_DUT2   5.6.9-3.el7    running             0
  Router      T104_DUT3   T104_DUT3   None           connected           0
              T104_DUT4   T104_DUT4   None           connected           0
 
@@ -341,10 +341,10 @@ Wed 2019-12-04 19:01:59 UTC
 =========== =========== =========== ============== ============== ========
  Router      Node        Asset Id    SSR Version   Status         Errors
 =========== =========== =========== ============== ============== ========
- Conductor   T104_DUT1   T104_DUT1   4.2.0-2.el7    running             0
-             T104_DUT2   T104_DUT2   4.2.0-2.el7    running             0
- Router      T104_DUT3   T104_DUT3   4.2.0-2.el7    running             0
-             T104_DUT4   T104_DUT4   4.2.0-2.el7    running             0
+ Conductor   T104_DUT1   T104_DUT1   5.6.9-3.el7    running             0
+             T104_DUT2   T104_DUT2   5.6.9-3.el7    running             0
+ Router      T104_DUT3   T104_DUT3   5.6.9-3.el7    running             0
+             T104_DUT4   T104_DUT4   5.6.9-3.el7    running             0
 
 Completed in 0.16 seconds
 ```
