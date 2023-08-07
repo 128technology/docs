@@ -14,7 +14,6 @@ The following Conductor installation processes are covered in this guide:
 - [High Availability](ha_conductor_install.mdx)
 - [Import Configurations to the Conductor](single_conductor_config.md)
 - [Conductor Software Upgrades](conductor_upgrade.md)
-<!-- markdown-link-check-disable-next-line -->
-- [Conversion of an SSR Router to a Conductor](single_conductor_install#conductor-conversion)
+- [Conversion of an SSR Router to a Conductor](single_conductor_install.mdx#conductor-conversion)
 
 Cloud deployments are not covered in this guide. Please see [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md) for more information.

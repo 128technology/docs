@@ -36,7 +36,7 @@ Conductor installations are not supported by the OTP Install process. Please use
 ### Configure the Network Interface 
 <ConductorIP/>
 
-### Initialize the SSR Node
+### Initialize the Conductor Node
 
 The SSR Initializer tunes your operating system, prepares the platform to run the SSR software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot.
 
@@ -45,7 +45,7 @@ There are three different types of conductor installations;
 - [Conductor High Availability](ha_conductor_install.mdx)
 - [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md)
 
-### Standalone Conductor
+## Standalone Conductor
 
 1. On the SSR Initializer wizard screen, use the space bar to select the **Conductor** role for the SSR node, and press the **Enter** key to select **OK**.
 
@@ -81,12 +81,14 @@ There are three different types of conductor installations;
 
   ![Initializer Complete](/img/initializer_complete.png)
 
-## Verify the Installation
+### Verify the Installation
 <VerifyConductorInstall/>
 
-## Configure the Token
+### Configure the Token
 
-To save repository access credentials, use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
+Once the system has been setup for the first time, the next step is to provision credentials for SSR software access on the conductor. Provisioning the software credentials on the conductor propagates those settings down to all of the managed routers.
+
+Use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
 
 From the root user in the workflow above, run the `pcli` command to access the PCLI and configure the token.
 
@@ -134,7 +136,7 @@ The authority represents the complete set of all SSRs managed under a single org
 
  ![Authority Settings](/img/conductor_authority_name.png)
 
-3. Under Basic Information, enter the new Authority name.
+3. Under Basic Information, enter the new Authority name. For example, a good name for the Authority would be the name of the business, e.g., Acme Corp. 
 
  ![Basic Information](/img/conductor_authority_name2.png)
 
@@ -146,6 +148,8 @@ The authority represents the complete set of all SSRs managed under a single org
 ![Conductor Address](/img/conductor_address.png)
 
 3. Click Validate and Commit. Warnings will appear, advising you of the change.  
+
+The steps during initialization setup the management IP. The conductor IP address is the public IP address to which the managed routers connect. It is not necessary to manually associate this IP address with a network interface; the interactions between the SSR software and Linux will identify and assign the IP address to the network interface. 
 
 ### Next Steps - Router Configuration
 
