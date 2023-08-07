@@ -75,7 +75,7 @@ authority
 The configuration above will add a static route of `8.8.8.8/32` for the `dns` service and `172.16.101.10/32` for the `_conductor_1_` service. Since the `other_service` does not allow the `_internal_` tenant it will not be considered for adding the static routes towards `kni254`. All prefixes learned through this method will get the same configured metric in Linux. For example both the routes will get a metric of `128` in the above example.
 
 :::note
-When the SSR is running software version 4.3.0 or greater, the learning mode will automatically react to new services being committed to the SSR configuration and keep the Linux host routes in sync.
+The SSR learning mode will automatically react to new services being committed to the SSR configuration and keep the Linux host routes in sync.
 :::
 
 ### Configuring static-route

@@ -7,8 +7,6 @@ sidebar_label: 2.5
 
 ### New Features and Improvements
 
-- Support for SSR version 4.4, the 2.5 installer version is required for upgrading to the SSR 4.4 version.
-
 - **IN-206** - Support for Offline ISO importing
 
 ## Special Considerations
