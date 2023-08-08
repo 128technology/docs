@@ -2,7 +2,6 @@
 title: High Availability Conductor Installation
 sidebar_label: High Availability Conductor Installation
 ---
-
 import InteractiveOverview from './_install_interactiveoverview.md';
 import Prerequisites from './_install_prereqs.md'; 
 import ConductorConversion from './_conductor_conversion.md';
@@ -11,7 +10,11 @@ import LinuxComplete from './_install_linux_complete.md';
 import InitialBoot from './_install_nmtui_router.md';
 import ConductorIP from './_install_nmtui_conductor.md';
 import VerifyConductorInstall from './_install_verify_conductor_install.md';
-import FIPSmode from './_install_fipsmode.md'; 
+import FIPSmode from './_install_fipsmode.md';
+import ConfigureToken from './_configure_token.md';
+import ConductorAuthority from './_conductor_to_authority.md';
+import AuthorityName from './_set_authority_name.md';
+import SetConductorIP from './_set_conductor_ip.md';
 
 
 <InteractiveOverview/>
@@ -96,6 +99,21 @@ There are three different types of conductor installations;
   If installing the SSR software for the first time, a system reboot is required.
   :::
 
+### Verify the Installation
+<VerifyConductorInstall/>
+
+### Configure the Token
+<ConfigureToken/>
+
+### Add the Conductor to the Authority
+<ConductorAuthority/>
+
+### Set the Authority Name
+<AuthorityName/>
+
+### Set the Conductor IP Address for each Node
+<SetConductorIP/>
+
 ## Install the Second Conductor HA Node
 
 For the second node for Conductor HA, install the system using the same process beginning with [Installing the ISO](intro_installation_bootable_media.mdx#installing-the-iso) and ending at [Initialize SSR](intro_installation_bootable_media.mdx#initialize-the-128t-node) step 2. From step 2, perform the following:
@@ -108,7 +126,7 @@ For the second node for Conductor HA, install the system using the same process 
 
   ![2nd HA Peer IP](/img/initializer_Serial4dHANode.png)
 
-3. Enter the **HA Peer Credentials**. This is a one time operation for the initialization of the second HA Node with the first HA Peer. The `t128` user can be used for this operation.
+3. Enter the **HA Peer Credentials**. This is a one time operation for the initialization of the second HA Node with the first HA Peer. The `t128` user is a good choice for this operation, using the default username and password. Be sure to change this password after the installation of the second HA node.
 
 :::note
 This operation has no impact on future changes to users and passwords. Once HA is established between conductor nodes, security keys are exchanged for secure communication.
@@ -126,74 +144,22 @@ This operation has no impact on future changes to users and passwords. Once HA i
 
   ![Initializer Complete](/img/initializer_complete.png)
 
-
-## Verify the Installation
+### Verify the Installation
 <VerifyConductorInstall/>
 
-## Configure the Token
+### Change the Default Passwords
+<ChangeDefaultPasswords/>
 
-To save repository access credentials, use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
+### Configure the Token
+<ConfigureToken/>
 
-From the root user in the workflow above, run the `pcli` command to access the PCLI and configure the token.
-
-```
-[root@test-conductor ~]# pcli
-Starting the PCLI...
-root@node1.test-conductor# set software access-token <username> <password>
-Saving...
-Waiting for process to complete
-...(messages removed for brevity)...
-Making the DNF cache
-No further operation requested. Exiting
-Installer complete
-Successfully saved credentials.
-root@node1.test-conductor#
-```
-## Add the Conductor to the Authority
-
-Take this opportunity to log into the Conductor GUI to complete the following operations. This will provide validation that the installation was successful, and familiarize you with GUI operations. 
-
-1. Select the **Conductor** from the Authority menu on the left side of the GUI. 
-
- ![Configuration menu](/img/config_menu_gui.png)
-
-2. Select the **Configure** icon.
-
- ![Conductor Configuration Icon](/img/conductor_config_icon.png)
-
-3. Select the node for the conductor - in this example it is `node1`.
-
- ![Conductor Node](/img/conductor_node.png) 
-
-4. Under **Associated Asset ID** select the hostname for the conductor.
-
- ![Asset ID](/img/conductor_asset-id.png)
-
-5. Validate and Commit the changes to the configuration. 
-
-### Set the Authority Name
-
-The authority represents the complete set of all SSRs managed under a single organizational entity.
-
-1. Return to the Authority level
-2. Select the Authority Settings.
-
- ![Authority Settings](/img/conductor_authority_name.png)
-
-3. Under Basic Information, enter the new Authority name.
-
- ![Basic Information](/img/conductor_authority_name2.png)
+### Add the Conductor to the Authority
+<ConductorAuthority/>
 
 ### Set the Conductor IP Address for each Node
+<SetConductorIP/>
 
-1. Under Conductor Addresses, select ADD.
-2. In the **New Conductor Address** window, enter the conductor public IP address.
-
-![Conductor Address](/img/conductor_address.png)
-
-3. Click Validate and Commit. Warnings will appear, advising you of the change.  
-
-### Next Steps - Router Configuration
+## Next Steps - Router Configuration
 
 Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process. Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
 

@@ -10,7 +10,12 @@ import LinuxComplete from './_install_linux_complete.md';
 import InitialBoot from './_install_nmtui_router.md';
 import ConductorIP from './_install_nmtui_conductor.md'; 
 import VerifyConductorInstall from './_install_verify_conductor_install.md';
-import FIPSmode from './_install_fipsmode.md'; 
+import FIPSmode from './_install_fipsmode.md';
+import ConfigureToken from './_configure_token.md';
+import ConductorAuthority from './_conductor_to_authority.md';
+import AuthorityName from './_set_authority_name.md';
+import SetConductorIP from './_set_conductor_ip.md';
+import ChangeDefaultPasswords from './_change_def_passwords.md';
 
 <InteractiveOverview/> 
 
@@ -84,74 +89,22 @@ There are three different types of conductor installations;
 ### Verify the Installation
 <VerifyConductorInstall/>
 
+### Change the Default Passwords
+<ChangeDefaultPasswords/>
+
 ### Configure the Token
+<ConfigureToken/>
 
-Once the system has been setup for the first time, the next step is to provision credentials for SSR software access on the conductor. Provisioning the software credentials on the conductor propagates those settings down to all of the managed routers.
-
-Use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
-
-From the root user in the workflow above, run the `pcli` command to access the PCLI and configure the token.
-
-```
-[root@test-conductor ~]# pcli
-Starting the PCLI...
-root@node1.test-conductor# set software access-token <username> <password>
-Saving...
-Waiting for process to complete
-...(messages removed for brevity)...
-Making the DNF cache
-No further operation requested. Exiting
-Installer complete
-Successfully saved credentials.
-root@node1.test-conductor#
-```
-## Add the Conductor to the Authority
-
-Take this opportunity to log into the Conductor GUI to complete the following operations. This will provide validation that the installation was successful, and familiarize you with GUI operations. 
-
-1. Select the **Conductor** from the Authority menu on the left side of the GUI. 
-
- ![Configuration menu](/img/config_menu_gui.png)
-
-2. Select the **Configure** icon.
-
- ![Conductor Configuration Icon](/img/conductor_config_icon.png)
-
-3. Select the node for the conductor - in this example it is `node1`.
-
- ![Conductor Node](/img/conductor_node.png) 
-
-4. Under **Associated Asset ID** select the hostname for the conductor.
-
- ![Asset ID](/img/conductor_asset-id.png)
-
-5. Validate and Commit the changes to the configuration. 
+### Add the Conductor to the Authority
+<ConductorAuthority/>
 
 ### Set the Authority Name
-
-The authority represents the complete set of all SSRs managed under a single organizational entity.
-
-1. Return to the Authority level
-2. Select the Authority Settings.
-
- ![Authority Settings](/img/conductor_authority_name.png)
-
-3. Under Basic Information, enter the new Authority name. For example, a good name for the Authority would be the name of the business, e.g., Acme Corp. 
-
- ![Basic Information](/img/conductor_authority_name2.png)
+<AuthorityName/>
 
 ### Set the Conductor IP Address
+<SetConductorIP/>
 
-1. Under Conductor Addresses, select ADD.
-2. In the **New Conductor Address** window, enter the conductor public IP address.
-
-![Conductor Address](/img/conductor_address.png)
-
-3. Click Validate and Commit. Warnings will appear, advising you of the change.  
-
-The steps during initialization setup the management IP. The conductor IP address is the public IP address to which the managed routers connect. It is not necessary to manually associate this IP address with a network interface; the interactions between the SSR software and Linux will identify and assign the IP address to the network interface. 
-
-### Next Steps - Router Configuration
+## Next Steps - Router Configuration
 
 Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process. Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
 
