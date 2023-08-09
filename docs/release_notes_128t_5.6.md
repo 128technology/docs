@@ -40,11 +40,11 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 - **The following CVE's have been identified and addressed in this release:** I95-51758, I95-52495, I95-52497, I95-52509.
 ------
-- **I95-51336 App-ID stats entry leaked in some session building exceptions:** Resolved an issue where the `app-id stats` entry was not added to the `Expiring` list to be cleaned up.
+- **I95-51336 App-ID memory leak for some uncommon cases, such as duplicate flow:** Resolved an issue where the `app-id stats` entry was not added to the `Expiring` list to be cleaned up.
 ------
 - **I95-51800 Radius authentication failure - Incorrect NAS IP address:** The ability to specify the NAS-IP-Address and NAS-Identifier has been added to the data model for configuring these Radius options per node. This can be used in cases where the Radius server is configured to use an identifier, or in cases where it is necessary to match the source IP address of the Radius requests behind SSR or NAT.
 ------
-- **I9552208 Queries return incomplete data with FIPS enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
+- **I95-52208 Metrics queries return incomplete data when FIPS is enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
 ------
 - **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_domain-based_web_filter/#service-matching-order)
 ------
