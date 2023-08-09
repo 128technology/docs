@@ -32,10 +32,27 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 **Release Date:** August 10, 2023
 
+### New Features
+
+- **I95-52198 Handle incoming public keys from peer conductor node:** Added functionality to allow conductor nodes to share the authorized keys of managed routers between each other. If the SSH public key is retrieved from a managed router by one conductor node then it will be automatically shared with it's conductor peer node.
+
 ### Resolved Issues
 
-**I95-51336 App-ID stats entry leaked in some session building exceptions:** 
-
+- **The following CVE's have been identified and addressed in this release:** I95-51758, I95-52495, I95-52497, I95-52509.
+------
+- **I95-51336 App-ID stats entry leaked in some session building exceptions:** Resolved an issue where the `app-id stats` entry was not added to the `Expiring` list to be cleaned up.
+------
+- **I95-51800 Radius authentication failure - Incorrect NAS IP address:** The ability to specify the NAS-IP-Address and NAS-Identifier has been added to the data model for configuring these Radius options per node. This can be used in cases where the Radius server is configured to use an identifier, or in cases where it is necessary to match the source IP address of the Radius requests behind SSR or NAT.
+------
+- **I9552208 Queries return incomplete data with FIPS enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
+------
+- **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_domain-based_web_filter/#service-matching-order)
+------
+- **I95-52305 Compacting rate limit exceeded:** Resolved memory and CPU issues resulting from attempting to compact very large application identification documents.
+------
+- **I95-52402 Router stuck in `Upgrading` state:** Resolved an issue with `conductor-only` mode, where the conductor was attempting to download the installer before the software access proxies were in place, preventing an update to the installer.
+------  
+- **WAN-2090 Conductor managed SSR Applications in WAN Insights Showing up as Numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
 ## Release 5.6.9-3
 
