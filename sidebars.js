@@ -157,6 +157,7 @@ module.exports = {
         "label": "Optimizing Routing Protocols",
         "items": [
           "howto_tune_bfd",
+          "config_session_optimization",
           "config_bgp",
           "config_ospf",
           "config_bfd",

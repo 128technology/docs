@@ -2583,6 +2583,7 @@ This represents the set of system services offered by the SSR platform.
 #### Path:
 
 authority > router > node > device-interface > network-interface > adjacency > session-optimization
+
 authority > router > node > device-interface > network-interface > neighborhood > session-optimization
 
 #### Description:
