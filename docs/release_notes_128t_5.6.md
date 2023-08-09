@@ -28,6 +28,15 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.6.10-2
+
+**Release Date:** August 10, 2023
+
+### Resolved Issues
+
+**I95-51336 App-ID stats entry leaked in some session building exceptions:** 
+
+
 ## Release 5.6.9-3
 
 **Release Date:** July 19, 2023
