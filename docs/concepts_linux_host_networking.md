@@ -47,17 +47,17 @@ Traffic originating from Linux and traveling through a KNI interface will have a
 :::
 
 ### Advanced Configuration
-If you want to selectively forward via SSR, you can edit  `/etc/sysconfig/network-scripts/route-kni254` from its default route of  `0.0.0.0/0` with any address/prefix you wish. Additionally, you can edit the `route-kni254` file to contain as many individual route statements as you like; it is important to only edit this file while SSR is stopped, however, since SSR will cache the contents of the file when it starts, and restore the copy it cached when software is stopped.
+If you want to selectively forward via SSR, you can edit  `/etc/sysconfig/network-scripts/route-kni254` from its default route of  `0.0.0.0/0` with any address/prefix you wish. Additionally, you can edit the `route-kni254` file to contain as many individual route statements as you like; it is important to only edit this file while the SSR is stopped, however, since it will cache the contents of the file when it starts, and restore the copy it cached when software is stopped.
 
-1. Stop SSR software on a given router. There are many ways to accomplish this, one of which is to type `sudo systemctl stop SSR` from the Linux shell prompt.
+1. Stop the SSR software on the router. There are many ways to accomplish this, one of which is to type `sudo systemctl stop 128T` from the Linux shell prompt.
 :::note
-You must ensure you are in a position to access the Linux subsystem on a SSR router even when SSR software is not running.
+You must ensure you are in a position to access the Linux subsystem on an SSR router even when the SSR software is not running.
 :::
 2. Add a route to the internet in a route file associated with `kni254` (the following should all be typed on one line):
   ```
 sudo echo 0.0.0.0/0 via 169.254.127.126 dev kni254 metric 200 > /etc/sysconfig/network-scripts/route-kni254
   ```
-3. Start SSR software: `sudo systemctl start SSR`
+3. Start the SSR software: `sudo systemctl start 128T`
 
 
 :::info
