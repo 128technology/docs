@@ -15,7 +15,7 @@ import ConfigureToken from './_configure_token.md';
 import ConductorAuthority from './_conductor_to_authority.md';
 import AuthorityName from './_set_authority_name.md';
 import SetConductorIP from './_set_conductor_ip.md';
-
+import NextStepsConfig from './_conductor_install_nextsteps.md';
 
 <InteractiveOverview/>
 
@@ -51,6 +51,10 @@ There are three different types of conductor installations;
 - [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md)
 
 ## Install the First Conductor HA Node 
+
+Use the following diagram as a reference during the HA installation.
+
+![SSR1300 HA Config](/img/conductor_ha_install.png)
 
 1. On the SSR Initializer wizard screen, use the space bar to select the **Conductor** role for the SSR node, and press the **Enter** key to select **OK**.
 
@@ -160,10 +164,7 @@ This operation has no impact on future changes to users and passwords. Once HA i
 <SetConductorIP/>
 
 ## Next Steps - Router Configuration
-
-Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process. Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
-
-A sample branch router configuration is available as a [**template**](config_templates.md#default-templates) on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top level resources. For more information, see [Configuration Templates](config_templates.md). 
+<NextStepsConfig/>
 
 ## FIPS Enforcement Mode
 <FIPSmode/>
