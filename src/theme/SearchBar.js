@@ -116,11 +116,7 @@ function Modal({onClose}) {
       return;
     }
     console.log("Search", search);
-    //const results = idx.search(search).map(({ ref }) => searchIndex[ref]);
-    //const matchedDocs = results.map(({ ref }) => {
-      // find the document in the 'documents' array using the ref ID
-      //return searchIndex[ref];;
-    //});
+   
     const t = setTimeout(() => {
       setIsLoading(true);
       const results = idx.search(search + '*').map(({ ref }) => {
@@ -133,9 +129,9 @@ function Modal({onClose}) {
         }
         return { ref, title: doc ? doc.title : "", highlightedSentence };
       });
-      //const formattedResults = results.map(({ ref }) => searchIndex[ref]);
+      
       setResult(results);
-      //setResult(formattedResults)
+     
       setIsLoading(false);
       setHoveredIdx(-1);
      console.log("Result", results);
@@ -146,59 +142,11 @@ function Modal({onClose}) {
   };
 }, [search]); 
 
-/* useEffect(() => {
-  if (!search) {
-    setResult(undefined);
-    return;
-  }
-  console.log("Search", search);
-  const t = setTimeout(() => {
-    setIsLoading(true);
-    try {
-      const results = idx.search(search + '*').map(({ ref, matchData }) => {
-        const doc = documents.find(doc => doc.id === ref);
-        let highlightedSentence = "";
-        let highlightedPositions = {};
-        if (doc) {
-          console.log("doc.content", doc.content);  // Debug
-          const sentences = doc.content.split('. ');
-          console.log(matchData.metadata)
-          highlightedPositions = matchData.metadata[search]?.content?.position;
-          console.log("highlightedPositions", highlightedPositions);  // Debug
-          if (highlightedPositions && highlightedPositions.length > 0) {
-            const [start] = highlightedPositions[0];
-            for(let sentence of sentences){
-              const sentenceStart = doc.content.indexOf(sentence);
-              const sentenceEnd = sentenceStart + sentence.length;
-              if (start >= sentenceStart && start < sentenceEnd){
-                highlightedSentence = sentence;
-                break;
-              }
-            }
-          }
-        }
-        return { ref, title: doc ? doc.title : "", highlightedSentence, highlightedPositions };
-      });
-      setResult(results);
-      setIsLoading(false);
-      setHoveredIdx(-1);
-      console.log("Result", results);
-    } catch (e) {
-      console.error(e);  // Log the error to the console
-      setIsLoading(false);  // Make sure to stop the loading even if there's an error
-    }
-  }, 500);
-
-  return () => {
-    clearTimeout(t);
-  };
-}, [search]) */;
-
 
 
   
   const items = result === undefined ? [] : result;
-  //const id = result === undefined ? '' : result.id;
+ 
 
   const highlightContent = (content, search) => {
     const sentences = content.split('. ');
@@ -224,23 +172,6 @@ function Modal({onClose}) {
     }
   }; 
 
-  /*const onInput = useCallback(
-    (event) => {
-      const newSearchValue = event.currentTarget.value;
-      console.log("New search value", newSearchValue)
-      const results = idx.search(newSearchValue)
-      //.map(({ ref }) => searchIndex[ref]);
-      //const matchedDocs = results.map(({ ref }) => {
-        // find the document in the 'documents' array using the ref ID
-        //return searchIndex[ref];;
-      //});
-      setSearch(newSearchValue);
-      console.log("New search", search);
-      setResult(results);
-      console.log("New Result", results);
-    },
-    [setSearch, idx],
-  ); */
 
   return (
     <div
