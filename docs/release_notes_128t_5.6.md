@@ -28,9 +28,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.6.10-3
+## Release 5.6.10-5
 
-**Release Date:** August 11, 2023
+**Release Date:** August 13, 2023
 
 ### New Features
 
@@ -38,7 +38,9 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-51758, I95-52495, I95-52497, I95-52509.
+- **The following CVE's have been identified and addressed in this release:** I95-51758, I95-52495, I95-52496, I95-52497, I95-52509, I95-52625. 
+------
+- **I95-41386/I95-52114 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved an issue where zookeepper enters a leaderless state when a disconnection occurs right after an electorate ephemeral node is created, and before running a success callback.
 ------
 - **I95-51336 App-ID memory leak for some uncommon cases, such as duplicate flow:** Resolved an issue where the `app-id stats` entry was not added to the `Expiring` list to be cleaned up.
 ------
@@ -51,7 +53,11 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 - **I95-52305 Compacting rate limit exceeded:** Resolved memory and CPU issues resulting from attempting to compact very large application identification documents.
 ------
 - **I95-52402 Router stuck in `Upgrading` state:** Resolved an issue with `conductor-only` mode, where the conductor was attempting to download the installer before the software access proxies were in place, preventing an update to the installer.
-------  
+------
+- **I95-52626 Ring push exception causing a packet buffer leak:** Resolved a condition where backpressure from fastlane caused the messaging mechanism between highway manager and fastlane to get stuck. Increased the messaging capacity as part of the resolution. 
+------
+- **I95-52650 Create a cache of the common file root hash calculation:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
+------
 - **WAN-2090 Conductor managed SSR Applications in WAN Insights Showing up as Numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
 ## Release 5.6.9-3
