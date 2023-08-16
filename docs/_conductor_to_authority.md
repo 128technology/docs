@@ -2,6 +2,10 @@
 
 Take this opportunity to log into the Conductor GUI to complete the following operations. This will provide validation that the installation was successful, and familiarize you with GUI operations. 
 
+#### Connecting the Conductor to the Network
+
+To make sure the conductor is on a network and accessible via GUI, the IP address on the interface must be in the same subnet as the VLAN on the switch port. Use `https://<interface IP address>` for GUI login.
+
 1. Select the **Conductor** from the Authority menu on the left side of the GUI. 
 
  ![Configuration menu](/img/config_menu_gui.png)

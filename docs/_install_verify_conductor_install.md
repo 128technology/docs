@@ -4,12 +4,29 @@ After installing the SSR Software it is important to verify that the installatio
 
 ### To Verify the SSR Installation:
 
-1. Launch a command prompt window.
+After starting the Conductor, the login screen appears. 
 
-2. Execute the command:
+1. Login using the Admin credentials.
 
-  ```
-  sudo systemctl status 128T
-  ```
+```
+CentOS Linux 7 (Core)
+Kernel 4.18.0-425.10.1.el8_7.x86_64 on an x86_64
 
-3. When the service is listed as _Active_, log into the system as Admin using the system default password. By logging into the system, you have verified the installation. 
+test-conductor login: admin
+Password:
+
+```
+  ![Conductor Admin Login](/img/conductor_install1.png)
+
+2. Enter the Linux shell:
+
+  a. Type `exit` to exit the PCLI.
+
+  b. Type `shell` and press `Enter` to enter the linux shell.
+
+3. Log into the command window as `root`.
+4. Execute the command: `sudo systemctl status 128T`
+
+![Linux Shell](/img/conductor_install2.png)
+
+5. When the service is listed as _Active_, log into the system using the system default password. By logging into the system, you have verified the installation. 

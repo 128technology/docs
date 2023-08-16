@@ -67,12 +67,12 @@ There are three different types of conductor installations;
 
     ![Node Information](/img/initializer_Serial5a.png)
 
-    - **Node Name:** The name of the system within your Conductor, for example, _conductor-node1_. By default this field uses the Linux system's hostname. The node name identifies the conductor node under the **Conductor** element in the Authority. 
+    - **Node Name:** The name of the system within your Conductor, in this example, _test-conductor_. By default this field uses the Linux system's hostname. The node name identifies the conductor node under the **Conductor** element in the Authority. 
 
     :::note
     Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).
     :::
-    - **Conductor Name:** The name of the Conductor system as a whole. When referring to a running SSR software instance, it is identifiable by the full name; e.g., `conductor-node1.conductor`. The full system name is reflected in the PCLI prompt.
+    - **Conductor Name:** The name of the Conductor system as a whole. When referring to a running SSR software instance, it is identifiable by the full name; e.g., `test-conductor.conductor`. The full system name is reflected in the PCLI prompt.
 
 4. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. 
   :::note
