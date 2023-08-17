@@ -34,7 +34,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **I95-52626 Ring push exception causing a packet buffer leak:** Resolved a condition where backpressure from fastlane caused the messaging mechanism between highway manager and fastlane to get stuck. Increased the messaging capacity as part of the resolution.
+- **I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure from fastlane caused the messaging mechanism between highway manager and fastlane to drop mbufs. Proper handling of exception now prevents buffer leaks. Additionally, increased the control buffer capacity to better handle bursts as part of the resolution.
 
 ## Release 5.5.10-6
 
