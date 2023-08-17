@@ -30,7 +30,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ## Release 5.6.10-5
 
-**Release Date:** August 13, 2023
+**Release Date:** August 31, 2023
 
 ### New Features
 
@@ -54,7 +54,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-52402 Router stuck in `Upgrading` state:** Resolved an issue with `conductor-only` mode, where the conductor was attempting to download the installer before the software access proxies were in place, preventing an update to the installer.
 ------
-- **I95-52626 Ring push exception causing a packet buffer leak:** Resolved a condition where backpressure from fastlane caused the messaging mechanism between highway manager and fastlane to get stuck. Increased the messaging capacity as part of the resolution. 
+- **I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure from fastlane caused the messaging mechanism between highway manager and fastlane to drop mbufs. Proper handling of exception now prevents buffer leaks. Additionally, increased the control buffer capacity to better handle bursts as part of the resolution.
 ------
 - **I95-52650 Create a cache of the common file root hash calculation:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
 ------
