@@ -30,7 +30,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ## Release 5.5.11-4
 
-**Release Date:** August 18, 2023
+**Release Date:** August 21, 2023
 
 ### Resolved Issues
 

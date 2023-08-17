@@ -8,7 +8,7 @@ export const releases = [
   {
     version: '5.5.11',
     url:'/docs/release_notes_128t_5.5#release-5511-4',
-    releaseDate: 'August 18, 2023',
+    releaseDate: 'August 21, 2023',
   },
   {
     version: '5.5.10',
