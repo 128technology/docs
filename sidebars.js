@@ -127,8 +127,7 @@ module.exports = {
           "config_dscp_steering",
           "config_dscp_preservation",
           "config_vrf_learning",
-          "config_audit_event",
-          "config_dhcp",
+          "config_audit_event", 
           "config_dns_proxy",
           "config_forward_error_correction",
           "config_management_over_forwarding",
@@ -162,6 +161,7 @@ module.exports = {
           "config_bfd",
           "config_multicast",
           "config_lacp",
+          "config_dhcp",
         ],
       },
       {
@@ -271,6 +271,7 @@ module.exports = {
       "bcp_service_and_service_policy_design",
       "bcp_service-policy_defaults",
       "bcp_tenants",
+      "bcp_dhcp_relay_overview",
     ],
     "CLI and Element Reference": [
       "cli_reference",
