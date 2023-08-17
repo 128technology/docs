@@ -28,6 +28,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.5.11-4
+
+**Release Date:** August 18, 2023
+
+### Resolved Issues
+
+- **I95-52626 Ring push exception causing a packet buffer leak:** Resolved a condition where backpressure from fastlane caused the messaging mechanism between highway manager and fastlane to get stuck. Increased the messaging capacity as part of the resolution.
+
 ## Release 5.5.10-6
 
 **Release Date:** July 31, 2023
