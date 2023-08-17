@@ -6,15 +6,11 @@ After installing the SSR Software it is important to verify that the installatio
 
 After starting the Conductor, the login screen appears. 
 
-1. Login using the Admin credentials.
+1. Login using the admin credentials.
 
 ```
-CentOS Linux 7 (Core)
-Kernel 4.18.0-425.10.1.el8_7.x86_64 on an x86_64
-
 test-conductor login: admin
 Password:
-
 ```
   ![Conductor Admin Login](/img/conductor_install1.png)
 
