@@ -39,7 +39,7 @@ The following characteristics define the standard model where DHCP Relay is impl
 
 ## DHCP Relay with SVR
 
-Most basic deployments utilize DHCP relay with SVR only, where DHCP relay is implemented in its simplest form. The key elements to configure are tenants, services, and then service-routes. The final step is to tag the branch office’s network interface with the tenant. This will be the interface receiving DHCP broadcasts.
+Most basic deployments utilize DHCP relay with SVR only, where DHCP relay is implemented in its simplest form. The key elements to configure are tenants, services, and service-routes. The final step is to tag the branch office’s network interface with the tenant. This will be the interface receiving DHCP broadcasts.
 
 ### Tenant
 
@@ -104,7 +104,7 @@ exit
 
 ### Network Interface
 
-On the router identified (branch 2) to relay DHCP requests, the unique tenant created must be applied to the network-interface. DHCP requests broadcasted here are tagged by the tenant and associated with the `dhcp-relay service`.
+On the router identified to relay DHCP requests (branch 2), the unique tenant created must be applied to the network-interface. DHCP requests broadcasted here are tagged by the tenant and associated with the `dhcp-relay service`.
 
 ```
 config
@@ -122,7 +122,7 @@ config
                     network-interface   lan1
                         name            		 lan1
                         global-id       		 6
-                        tenant          		 dhcp
+                        tenant          		 dhcp.demo
                         inter-router-security    internal
                         source-nat               true
 
@@ -219,8 +219,8 @@ config
 		name 	lan
 	exit
 
-	tenant 	dhcp
-		name 	dhcp
+	tenant 	dhcp.demo
+		name 	dhcp.demo
 	exit
 
 	service 	internet
@@ -262,7 +262,7 @@ config
         router 		Router1
             name 		Router1
 
-            service-route        dhcp-relay_route
+            service-route        dhcp-relay_route1
                 name             dhcp-relay_route1
                 service-name     dhcp-relay
                 nat-target       172.16.1.3
@@ -353,7 +353,7 @@ config
 			exit 
 		exit
 
-		service-route 	dhcp-relay_route
+		service-route 	dhcp-relay_route1
 			name			dhcp-relay_route1 
 			service-name	dhcp_relay
 			nat-target		172.16.1.3
@@ -378,8 +378,8 @@ config
 		name 	lan
 	exit
 
-	tenant 	dhcp
-		name 	dhcp
+	tenant 	dhcp.demo
+		name 	dhcp.demo
 	exit
 
 	service 	internet
@@ -453,9 +453,9 @@ exit
 
 ### Service Routes
 
-On the branch 1 SSR Router:
+On the Branch 1 SSR Router:
 
-1.	Create a `service-route` for this service with a `nat-target` of the DHCP server, and perform a commit. The conductor auto-generate` an additional DHCP service.
+1.	Create a `service-route` for this service with a `nat-target` of the DHCP server, and perform a commit. The conductor auto-generates an additional DHCP service.
 
 ```
 config
@@ -478,7 +478,7 @@ config
 exit
 ```
 
-2.	Change the configuration of the auto-generated DHCP service to `generated=false` and `share- service-routes=false`.
+2.	**Change the configuration of the auto-generated DHCP service** to `generated=false` and `share-service-routes=false`.
 
 ```
 config
@@ -666,6 +666,7 @@ config
 			access-policy 	dhcp.demo
 				source 		dhcp.demo
 			exit
+
 			share-service-routes 	false
 			application-type 		dhcp-relay
 		exit
@@ -688,6 +689,7 @@ config
 					end-port 	67
 				exit
 			exit
+
 			address 	172.16.1.3/32
 			generate-categories 	false
 			access-policy-generated false
@@ -696,6 +698,7 @@ config
 				source 			dhcp.demo
 				permission 		allow
 			exit
+
 			share-service-routes 	false
 			source-nat 				disabled
 			application-type generic
@@ -704,7 +707,8 @@ config
 			session-record
 				include-hierarchical-services 	true
 			exit
-			generated 		true
+
+			generated 		true <---- IS THIS SUPPOSED TO BE FALSE PER THE INSTRUCTIONS? PLEASE ADVISE.
 		exit
 	exit
 exit
