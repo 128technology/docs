@@ -14,9 +14,9 @@ Use the following procedure to enable FIPS enforcement.
 
   ![Bios Install](/img/56fips_BIOSinstall_1.png)
 
-2. Press TAB to edit the config.
+2. Press TAB to edit the configuration.
 
-3. Add `fips=1` to the end of the vmlinuz parameters.
+3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
   ![FIPS Parameter](/img/56fips_BIOSinstall_2.png)
 
