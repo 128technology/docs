@@ -79,13 +79,13 @@ exit
 
 ### Service Route
 
-A service-route is configured on the branch 1 and Enterprise DC routers referencing the DHCP relay service, with a service-agent next-hop pointing to the real DHCP server.
+A service-route is configured on the Branch1 and Enterprise DC routers referencing the DHCP relay service, with a service-agent next-hop pointing to the real DHCP server.
 
 ```
 config
     authority
-        router 		Router1
-            name 		Router1
+        router 		Branch1
+            name 		Branch1
 
             service-route        dhcp_relay_service-route
                 name             dhcp_relay_service-route
@@ -104,19 +104,19 @@ exit
 
 ### Network Interface
 
-On the router identified to relay DHCP requests (branch 2), the unique tenant created must be applied to the network-interface. DHCP requests broadcasted here are tagged by the tenant and associated with the `dhcp-relay service`.
+On the router identified to relay DHCP requests (Branch 2), the unique tenant created must be applied to the network-interface `lan1`. DHCP requests broadcast here are tagged by the tenant and associated with the `dhcp-relay` service.
 
 ```
 config
     authority
-        router    Router1
-            name 	Router1
+        router    Branch1
+            name 	Branch1
 
             node    node1
                 name                node1
 
-                device-interface    lan1-dpdk1
-                    name                lan1-dpdk1
+                device-interface    red-lan1
+                    name                red-lan1
                     pci-address         0000:00:04.0
 
                     network-interface   lan1
@@ -146,8 +146,8 @@ config
 
     authority
 		conductor-address	192.168.1.7
-			router				Router1 
-				name				Router1
+			router				Branch1 
+				name				Branch1
 				router-group		all_routers
 
 			node		node1
@@ -185,8 +185,8 @@ config
 				exit
 			exit
 
-			device-interface  	lan1-dpdk1 
-				name				lan1-dpdk1
+			device-interface  	red-lan1 
+				name				red-lan1
 				pci-address			0000:00:04.0
 
 				network-interface 	lan1
@@ -248,19 +248,19 @@ exit
 
 ## DHCP Relay and Multiple DHCP Servers
 
-To achieve redundancy, more than one DHCP is deployed. The SSR accommodates multiple severs by configuring additional service-route elements referencing the same service. When ingress traffic on the SSR is tagged by the network-interface with the tenant associated with dhcp_relay service, the SSR broadcasts DHCP requests to all next-hops within the service-route's next-hop. 
+To achieve redundancy, more than one DHCP server is deployed. **The SSR accommodates multiple severs by configuring additional service-route elements referencing the same service.** When ingress traffic on the SSR is tagged by the network-interface with the tenant associated with `dhcp_relay` service, the SSR broadcasts DHCP requests to all next-hops within the service-route's next-hop. 
 
 The fastest server wins.
 
 ### Adding Service-Routes
 
-Continuing from our configuration in **DHCP Relay with SVR**, we need to create additional service-routes on the branch 1 and DC routers for each additional DHCP server that reference the tenant `dhcp.demo`. 
+Building upon the earlier configuration and the information above, all that is needed to add additional DHCP servers is an additional **service-route** for each DHCP server. In our example configuration, we will be adding a second service route (`dhcp-relay_route2`)to the Branch1 router. 
 
 ```
 config
     authority
-        router 		Router1
-            name 		Router1
+        router 		Branch1
+            name 		Branch1
 
             service-route        dhcp-relay_route1
                 name             dhcp-relay_route1
@@ -295,8 +295,8 @@ config
 
     authority
 		conductor-address	192.168.1.7
-			router				Router1 
-				name				Router1
+			router				Branch1 
+				name				Branch1
 				router-group		all_routers
 
 			node	node1
@@ -334,8 +334,8 @@ config
 				exit
 			exit
 
-			device-interface  	lan1-dpdk1 
-				name			lan1-dpdk1
+			device-interface  	red-lan1 
+				name			red-lan1
 				pci-address		0000:00:04.0
 
 				network-interface 	lan1
@@ -460,8 +460,8 @@ On the Branch 1 SSR Router:
 ```
 config
     authority
-        router 		Router1
-            name 		Router1
+        router 		Branch1
+            name 		Branch1
 
             service-route        dhcp_relay_service-route
                 name             dhcp_relay_service-route
@@ -525,8 +525,8 @@ exit
 ```
 config
 	authority
-		router 	Router1
-			name 		Router1
+		router 	Branch1
+			name 		Branch1
 			service-route 		_dhcp_relay_dhcp_relay_service-route
 				name 			_dhcp_relay_dhcp_relay_service-route
 				service-name 	_dhcp_relay_5_172.16.1.3
@@ -538,14 +538,14 @@ config
 	exit
 exit
 ```
-4.	RIB/FIB should show the service for BGP as the path for `dhcp_relay`. In this case, the SSR on branch 2 has a path for `dhcp_relay` to the SSR on branch 1 over BGP.
+4.	RIB/FIB should show the service for BGP as the path for `dhcp_relay`. In this case, the SSR on Branch2 has a path for `dhcp_relay` to the SSR on Branch1 over BGP.
 
 ### RIB/FIB/BGP Show Commands
 
 #### SSR Branch 1
 
 ```
-admin@node1.Router1# show bgp summary
+admin@node1.Branch1# show bgp summary
 Thu 2022-03-31 20:24:49 UTC
 IPv4 Unicast Summary:
 BGP router identifier 2.2.2.1, local AS number 64512 vrf-id 0
@@ -560,7 +560,7 @@ Neighbor    V 		AS 		MsgRcvd 	MsgSent 	TblVer 	InQ 	OutQ 	Up/Down 	State/PfxRcd 
 
 Total number of neighbors 2
 Completed in 0.20 seconds
-admin@node1.Router1# show bgp
+admin@node1.Branch1# show bgp
 Thu 2022-03-31 20:24:51 UTC
 BGP table version is 3, local router ID is 2.2.2.1, vrf id 0
 Default local pref 100, local AS 64512
@@ -577,7 +577,7 @@ Origin codes: i - IGP, e - EGP, ? - incomplete
 Displayed 3 routes and 3 total paths
 Completed in 0.22 seconds
 
-admin@node1.Router1# show fib service-name _bgp_Router1_R1
+admin@node1.Branch1# show fib service-name _bgp_Branch1_R1
 Thu 2022-03-31 20:31:42 UTC
 
 Entry Count: 109
@@ -586,10 +586,10 @@ Capacity: 23387
 ============ ====== ======= =============== ===== ================= ============= ======== ======
 IP Prefix 	  Port 	 Proto 	 Tenant 		 VRF 	Service 		Next Hops 	  Vector 	Cost
 ============ ====== ======= =============== ===== ================= ============= ======== ======
-2.2.2.1/32 	  179 	  TCP 	_bgp_speaker_ 	  -	  _bgp_Router1_R1 	0-None.4095 	- 		 0
+2.2.2.1/32 	  179 	  TCP 	_bgp_speaker_ 	  -	  _bgp_Branch1_R1 	0-None.4095 	- 		 0
 
 Completed in 0.05 seconds
-admin@node1.Router1# show fib service-name _dhcp_relay_5_172.16.1.3
+admin@node1.Branch1# show fib service-name _dhcp_relay_5_172.16.1.3
 Thu 2022-03-31 20:31:45 UTC
 
 Entry Count: 109
@@ -618,7 +618,7 @@ Origin codes: i - IGP, e - EGP, ? - incomplete
 Displayed 3 routes and 3 total paths
 Completed in 0.40 seconds
 
-admin@node1.Router3# show bgp summary
+admin@node1.Branch2# show bgp summary
 Thu 2022-03-31 20:32:25 UTC
 
 IPv4 Unicast Summary:
@@ -633,7 +633,7 @@ Neighbor    V 		AS 		MsgRcvd 	MsgSent 	TblVer 	InQ 	OutQ 	Up/Down 	State/PfxRcd 
 
 Total number of neighbors 1 Completed in 0.18 seconds
 
-admin@node1.Router3# show fib service-name _dhcp_relay_5_172.16.1.3 Thu 2022-03-31 20:32:38 UTC
+admin@node1.Branch2# show fib service-name _dhcp_relay_5_172.16.1.3 Thu 2022-03-31 20:32:38 UTC
 
 Entry Count: 112
 Capacity:	23387
@@ -645,7 +645,7 @@ IP Prefix 		Port 	Proto 	Tenant 	  VRF   Service 				  Next Hops   Vector   Cost
 
 Completed in 0.15 seconds
 
-admin@node1.Router3# show fib service-name _bgp_Router1_R1 Thu 2022-03-31 20:33:05 UTC
+admin@node1.Branch2# show fib service-name _bgp_Branch1_R1 Thu 2022-03-31 20:33:05 UTC
 
 Entry Count: 112
 Capacity:	23387
@@ -653,7 +653,7 @@ Capacity:	23387
 =============== ====== ======= ============= ===== ========================== =========== ======== ======
 IP Prefix 		Port 	Proto 	Tenant 	  	 VRF    Service 				  Next Hops   Vector   Cost
 =============== ====== ======= ============= ===== ========================== =========== ======== ======
-2.2.2.1/32		179		TCP	   _bgp_speaker_   -	_bgp_Router1_R1			  192.168.1.9	 -		  0
+2.2.2.1/32		179		TCP	   _bgp_speaker_   -	_bgp_Branch1_R1			  192.168.1.9	 -		  0
 ```
 
 ### Sample Configuration
@@ -715,8 +715,8 @@ exit
 
 config
 	authority
-		router 		Router1
-			name 			Router1
+		router 		Branch1
+			name 			Branch1
 			service-route 	dhcp_relay_service-route
 				name 			dhcp_relay_service-route
 				service-name 	dhcp_relay
@@ -732,8 +732,8 @@ exit
 
 config
 	authority
-		router 	Router1
-			name 	Router1
+		router 	Branch1
+			name 	Branch1
 			service-route 	_dhcp_relay_dhcp_relay_service-route
 				name 			_dhcp_relay_dhcp_relay_service-route
 				service-name 	_dhcp_relay_5_172.16.1.3

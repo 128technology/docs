@@ -263,16 +263,16 @@ module.exports = {
     "Best Practices": [
       "bcp_att_avpn_configuration",
       "bcp_using_128T_as_ntp_server",
-      "bcp_per-adjacency_traffic_engineering",
+      "bcp_dhcp_relay_overview",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
+      "bcp_per-adjacency_traffic_engineering",
       "bcp_salt_pillars",
       "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",
       "bcp_service-policy_defaults",
       "bcp_tenants",
-      "bcp_dhcp_relay_overview",
     ],
     "CLI and Element Reference": [
       "cli_reference",
