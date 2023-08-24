@@ -1,0 +1,149 @@
+---
+title: Installing in VMWare
+sidebar_label: Installing in VMWare
+---
+
+import InitialBoot from './_install_nmtui_router.md'; 
+
+
+This guide describes the process for deploying a Session Smart Conductor or a Session Smart Router (SSR) in VMWare ESXi. The process consists of the following steps:
+
+- Download the SSR package-based or image-based ISO. Refer to [Downloading ISOs](intro_downloading_iso.md)
+- Log into VMware ESXi with Administrative rights
+- Create a new Virtual Machine and configure
+- Boot Virtual Machine to run the Juniper SSR ISO and install software
+
+## VMWare Configuration
+
+In order to perform the configuration and installation of the SSR software, you must have a properly installed and working configuration of VMware ESXi. This documentation references VMware ESXi version 7.0.0, however, the software has been tested on earlier versions. Additoinally, you must have administrator access to the ESXi platform.
+
+## Procedure
+
+1. Log in to your VMWare ESXi instance as the Administrator. 
+
+	![Login](/img/vmware_login.jpg)
+
+2. Load the SSR ISO into the ESXi Data Store. 
+
+	- From the ESXi Navigator in the left hand pane, select Storage.
+	- Select the **Datastore Browser** button. 
+	![ESXi Datastore](/img/vmware_datastore.jpg)
+	- From the Datastore Browser window, select **Upload**.
+	![Datastore Browser](/img/vmware_datastorebrowser.jpg)
+	- Navigate to the directory containing the Juniper SSR ISO. 
+	- Select the ISO and click **Open**. The Datastore browser now shows the ISO.
+	![SSR ISO](/img/vmware_ssr-iso.jpg)
+	-  Click **Close** to continue.
+
+3. From the ESXi Navigator select **Virtual Machines**.
+
+### Define the Virtual Machine
+
+1. Click on **Create / Register VM**.
+2. Select **Create a new virtual machine** and click **Next**. 
+
+	![Register VM](/img/vmware_registervm.jpg)
+
+#### Virtual Machine Name and OS
+
+1. Enter a name for the virtual machine. The name should indicate whether the instance is a router or conductor, and provide other information such as the physical location.
+2. Set compatibility to **ESXi 5.5 virtual machine**.
+3. Set the Guest OS family to: `Linux`.
+4. Set the Guest OS version to: `CentOS 4/5/6/7 (64-bit)` and click **Next**. 
+
+	![Name the VM](/img/vmware_name-os.png)
+
+#### Storage Type
+
+5. Select the storage type and datastore to be used and then click **Next**. 
+
+	![Storage Type](/img/vmware_storage.jpg)
+
+#### Customize Settings
+
+6. Select **Virtual Hardware**.
+7. Expand the CPU selection, and configure the following settings:
+
+	- Set the number of CPU’s to at least 4.
+	- Update the **Scheduling Affinity** to `0-3`.
+
+	Close the CPU list and configure the following under Virtual Hardware:
+
+	- Set memory to a minimum of 8GB.
+	- Set hard disk 1 to a minimum of 26GB.
+	- Set the SCSI Controller 0 to `LSI Logic SAS`. 
+
+	![Virtual Hardware settings](/img/vmware_virt_hdwr.jpg)
+
+#### Configure Network Adapters
+
+8. Click the **Add network adapter** button two times, so you have a total of three network adapters available. 
+
+	- Expand each network adapter by clicking the small triangle and set the **Adapter Type** on each network adapter to be **E1000e**. 
+
+	![Network Adapter](/img/vmware_net_adapter.jpg)
+
+#### Configure CD (ISO) **(is this really still a CD option?)**
+
+9. Expand the CD/DVD Media selection.
+10. In the CD/DVD Drive 1 dropdown, select **Datastore ISO file** and select **Connect**.
+11. The **Datastore browser** will appear. Select the SSR ISO file and click Select.
+
+	![CD ISO Selected](/img/vmware_cd-iso2.jpg)
+
+	![Select CD/ISO](/img/vmware_cd-iso.jpg)
+
+#### Configure VM Options
+
+12. Click on the VM Options button at the top of the screen.
+
+	![VM Options](/img/vmware_vmoptions1.jpg)
+
+- Expand **Boot Options**.
+- Set firmware to **EFI**.
+- **Disable** Enable UEFI secure boot (no check mark).
+- Click Next.
+
+	![Boot Options](/img/vmware_vmoptions2.jpg)
+
+#### Ready to Complete
+
+Take a minute to review the summary of the new virtual machine configuration. Verify all settings. Click **Back** if you need to modify anything. If everything is correct, click **Next** to finalize the setup of the new virtual machine.
+
+![Summary Screen](/img/vmware_complete.png)
+
+## Launch the VM and Begin the Install
+
+After creating a new virtual machine, the screen returns to the VMware navigator. 
+
+![VM Complete](/img/vmware_finish.png)
+
+Ensure that the new virtual machine is selected and click the “Play” icon or the “Power on” button.
+
+![Power On](/img/vmware_pwr-on.png)
+
+The virtual machine boots into the Juniper Install menu. Select **Install 128T Routing Software VGA Console**. If you do not make a selection, the system will default to booting into the **Serial Console** mode.
+
+![VGA Boot with Interactive Install](/img/install_select_interactive.png)
+
+During the install process, the status is displayed on the screen.
+
+![Status screen](/img/vmware_install_status.png)
+
+After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (approximately 20 minutes). After the installation has completed, the following screen is displayed: Select “Yes” and press enter. 
+
+![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
+
+### Initial Boot and Next Steps
+
+From the VMware Navigator, select the new virtual machine and click the **Play** icon or the **Power on** button to launch the virtual machine. 
+
+<InitialBoot/>
+
+If you are installing a Conductor, please refer to the following documentation to complete the Linux configuration and Conductor initialization. 
+
+- [Single Conductor Interactive Install](single_conductor_install.mdx)
+- [High Availability Conductor Installation](ha_conductor_install.mdx)
+
+For Router installation information, see [Router Interactive Installation](intro_installation_bootable_media.md).
+
