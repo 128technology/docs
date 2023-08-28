@@ -28,19 +28,21 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.6.10-5
+## Release 5.6.10-6
 
-**Release Date:** August 31, 2023
+**Release Date:** August 30, 2023
 
 ### New Features
 
-- **I95-52198 Handle incoming public keys from peer conductor node:** Added functionality to allow conductor nodes to share the authorized keys of managed routers between each other. If the SSH public key is retrieved from a managed router by one conductor node then it will be automatically shared with it's conductor peer node.
+- **I95-52198 Handle incoming public keys from peer conductor node:** Added functionality to allow conductor nodes to share the authorized keys of managed routers between each other. If the SSH public key is retrieved from a managed router by one conductor node, then it is automatically shared with its conductor peer node.
+------
+- **I95-52517 Allow the ability to throttle the OSPF SPF timers:** Support for user-configured values for SPF delay has been added. Users can now specify values for spf delay, hold-time, and maximum-hold-time. 
 
 ### Resolved Issues
 
 - **The following CVE's have been identified and addressed in this release:** I95-51758, I95-52495, I95-52496, I95-52497, I95-52509, I95-52625. 
 ------
-- **I95-41386/I95-52114 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved an issue where zookeepper enters a leaderless state when a disconnection occurs right after an electorate ephemeral node is created, and before running a success callback.
+- **I95-41386/I95-52114 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved a race condition where a disconnection occurs right after an electorate ephemeral node is created, and before running a success callback.
 ------
 - **I95-51336 App-ID memory leak for some uncommon cases, such as duplicate flow:** Resolved an issue where the `app-id stats` entry was not added to the `Expiring` list to be cleaned up.
 ------
@@ -52,11 +54,15 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-52305 Compacting rate limit exceeded:** Resolved memory and CPU issues resulting from attempting to compact very large application identification documents.
 ------
+- **I95-52316 Enhancements to Overlapping FIB Services:** When creating FIB entries, we now consider services that match the route update but do not have the best match service address.
+------
 - **I95-52402 Router stuck in `Upgrading` state:** Resolved an issue with `conductor-only` mode, where the conductor was attempting to download the installer before the software access proxies were in place, preventing an update to the installer.
 ------
-- **I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure from fastlane caused the messaging mechanism between highway manager and fastlane to drop mbufs. Proper handling of exception now prevents buffer leaks. Additionally, increased the control buffer capacity to better handle bursts as part of the resolution.
+- **I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure caused the messaging mechanism to develop buffer leaks. Proper handling of exceptions now prevents buffer leaks. Additionally, increased the control buffer capacity to better handle bursts as part of the resolution.
 ------
-- **I95-52650 Create a cache of the common file root hash calculation:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
+- **I95-52650 Asset state transition on conductor is slow for deployments with greater than 250 routers:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
+------
+- **I95-52816 Config Validation may generate errors in the wrong field:** Resolved an issue during the validation of BGP graceful-restart configuration settings that could lead to generating incorrect errors/warnings during configuration validation.
 ------
 - **WAN-2090 Conductor managed SSR Applications in WAN Insights Showing up as Numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
