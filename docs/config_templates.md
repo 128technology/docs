@@ -5,26 +5,6 @@ sidebar_label: 'Configuration Templates'
 
 Configuration templates allow administrators to automate the configuration of top level resources (e.g. Routers, Tenants, Services, etc). There are two modes of templating configuration: **Basic** and **Advanced**. Basic mode is intended for simple templates that don't require complex logic. Advanced mode, on the other hand, exposes the full power of the underlying templating language to the administrator.
 
-## Creating a Template
-
-To create a template, begin by navigating to the **Configuration** page of the SSR Networking Platform. Next, click on the **Templates** button in the top right action area of the page: ![navigate_to_templates](/img/templates_navigate.png)
-
-On the templates page you will see a list of your current templates, or a button to create a new one if none exist. Click the **Create A Template** button to create a new template: ![templates_hero](/img/templates_hero.png)
-
-Next fill out the information for your template and click **Save**: ![templates_new](/img/templates_new.png)
-
-### Adding Help for a Template
-
-The Help field allows you to add help information to your configuration template. This is optional, and can be simple user instructions or detailed steps. Enter text, or use Markdown to format the text. Click **Save** when you are done. 
-
-You are returned to the list of templates to see your newly created template. Cicking into the template displays the message "_Template is empty, copy configuration into the template to populate it._". Follow the steps in [Copying Configuration into a Template](#copying-configuration-into-a-template) to populate the template.
-
-## Copying Configuration into a Template
-
-Instead of starting a template from scratch, it is often useful to copy existing or new configuration objects into the template body. The following button on top-level configuration object's pages can be used to copy the object into an existing template: 
-
-![templates_copy](/img/templates_copy.png)
-
 ## Default Templates
 
 Beginning with SSR Version 5.4.0, a default Standalone Branch configuration template has been provided to streamline the configuration process. This template provides a basic configuration for a list of Juniper supported hardware. 
@@ -50,6 +30,26 @@ To use the default template:
 5. Select the device that will power the router. Select one from the drop down. For additional information about the devices, click the help button (?) in the upper right corner of the window. 
 
 5. Once the configuration template is complete, click the **Generate Configuration** button in the top right corner of the panel, next to the help button. 
+
+## Creating a Template
+
+To create a template, begin by navigating to the **Configuration** page of the SSR Networking Platform. Next, click on the **Templates** button in the top right action area of the page: ![navigate_to_templates](/img/templates_navigate.png)
+
+On the templates page you will see a list of your current templates, or a button to create a new one if none exist. Click the **Create A Template** button to create a new template: ![templates_hero](/img/templates_hero.png)
+
+Next fill out the information for your template and click **Save**: ![templates_new](/img/templates_new.png)
+
+### Adding Help for a Template
+
+The Help field allows you to add help information to your configuration template. This is optional, and can be simple user instructions or detailed steps. Enter text, or use Markdown to format the text. Click **Save** when you are done. 
+
+You are returned to the list of templates to see your newly created template. Cicking into the template displays the message "_Template is empty, copy configuration into the template to populate it._". Follow the steps in [Copying Configuration into a Template](#copying-configuration-into-a-template) to populate the template.
+
+## Copying Configuration into a Template
+
+Instead of starting a template from scratch, it is often useful to copy existing or new configuration objects into the template body. The following button on top-level configuration object's pages can be used to copy the object into an existing template: 
+
+![templates_copy](/img/templates_copy.png)
 
 ## Basic Mode
 
