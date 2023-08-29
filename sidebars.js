@@ -275,6 +275,7 @@ module.exports = {
     ],
     "CLI and Element Reference": [
       "cli_reference",
+      "config_command_guide",
       "config_reference_guide",
       "cli_stats_reference",
     ],
