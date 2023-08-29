@@ -849,7 +849,8 @@ configure authority fib-service-match [<enumeration>]
 
 | name | description |
 | ---- | ----------- |
-| enumeration | The value to set for this field |
+| best-match-only| Consider only the best matching prefix length. |
+| any-match | Consider services that match the route update but do not have the best match service address. |
 
 ## `configure authority forward-error-correction-profile`
 
