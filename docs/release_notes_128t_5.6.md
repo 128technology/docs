@@ -28,6 +28,46 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.6.10-6
+
+**Release Date:** August 29, 2023
+
+### New Features
+
+- **I95-52198 Handle incoming public keys from peer conductor node:** Added functionality to allow conductor nodes to share the authorized keys of managed routers between each other. If the SSH public key is retrieved from a managed router by one conductor node, then it is automatically shared with its conductor peer node.
+------
+- **I95-52316 Enhancements to Overlapping FIB Services:** The [`fib-service-match`](config_command_guide.md#configure-authority-fib-service-match) command allows you to configure either `best-match-only` or `any-match`. 
+	- `best-match-only` considers the best matching prefix length. In cases of transport overlap, services are visited in alphabetical order.
+	- Using `any-match` will consider all services that match the route update but do not have the best match service address when creating FIB entries, minimizing missed entries. The transports from the service with the longest prefix are considered first.
+------
+- **I95-52517 Allow users the ability to configure the OSPF SPF timers:** Support for user-configured values for SPF delay has been added. Users can now specify values for spf delay, hold-time, and maximum-hold-time. For additional information, see [OSPF SPF Timers](config_command_guide.md#configure-authority-router-routing-ospf-timers-spf).
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** I95-51758, I95-52495, I95-52496, I95-52497, I95-52509, I95-52625. 
+------
+- **I95-41386/I95-52114 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved a race condition when selecting the active components between HA nodes.
+------
+- **I95-51336 App-ID memory leak for some uncommon cases, such as duplicate flow:** Resolved an issue where the `app-id stats` entry was not added to the `Expiring` list to be cleaned up.
+------
+- **I95-51800 Radius authentication failure - Incorrect NAS IP address:** The ability to specify the NAS-IP-Address and NAS-Identifier has been added to the data model for configuring these Radius options per node. This can be used in cases where the Radius server is configured to use an identifier, or in cases where it is necessary to match the source IP address of the Radius requests behind SSR or NAT.
+------
+- **I95-52208 Metrics queries return incomplete data when FIPS is enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
+------
+- **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](config_domain-based_web_filter.md/#service-matching-order)
+------
+- **I95-52305 Compacting rate limit exceeded:** Resolved memory and CPU issues resulting from attempting to compact very large application identification documents.
+------
+- **I95-52402 Router stuck in `Upgrading` state:** Resolved an issue with `conductor-only` mode, where the conductor was attempting to download the installer before the software access proxies were in place, preventing an update to the installer.
+------
+- **I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure caused the messaging mechanism to develop buffer leaks. Proper handling of exceptions now prevents buffer leaks. The control buffer capacity has been increased to better handle bursts as part of the resolution.
+------
+- **I95-52650 Asset state transition on conductor is slow for deployments with greater than 250 routers:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
+------
+- **I95-52816 Config Validation may generate errors in the wrong field:** Resolved an issue during the validation of BGP graceful-restart configuration settings that could lead to generating incorrect errors/warnings during configuration validation.
+------
+- **WAN-2090 Conductor managed SSR Applications in WAN Insights Showing up as Numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
+
 ## Release 5.6.9-3
 
 **Release Date:** July 19, 2023
@@ -39,7 +79,6 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 	- `save packet-buffer snapshot`
 ------
 - **I95-51450 Support for 100/Full Speed/Duplex on Intel I225-V Driver NICs:** The DPDK driver has been updated to allow fixed speed and duplex configuration to work with IGC i225 NICs.
-
 
 ### Resolved Issues
 

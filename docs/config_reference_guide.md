@@ -1772,6 +1772,7 @@ The configuration in the *ospf* hierarchy is used to control the behavior of the
 | instance | uint8 | Key field. A unique identifier for the OSPF instance. |
 | redistribute | sub-element | Controls which routes get redistributed into OSPF by this SSR. |
 | router-id | dotted-quad | As defined in RFC 2328, a 32-bit number expressed as a dotted quad (four octets separated by `.`, akin to an IPv4 address). |
+| timers | sub-element | Specify SPF timers | 
 
 ## path-mtu-discovery
 
@@ -3014,9 +3015,11 @@ This sub-element allows administrators to control various BGP timers used when c
 
 #### Path:
 
-authority > router > routing > routing-protocol (bgp) > timers
+authority > router > routing > routing-protocol (bgp/ospf) > timers
 
 #### Description:
+
+**BGP**
 
 This sub-element allows administrators to control the default BGP timers the SSR will use when connecting to any neighbor.
 
@@ -3025,10 +3028,24 @@ This sub-element allows administrators to control the default BGP timers the SSR
 | hold-time | uint16 | The hold time is the amount of time a connection is considered active, when no messages (keepalive or otherwise) are received from a neighbor. This timer is reset upon each message received from a neighbor. The typical and recommended configuration is three times the keepalive-interval. |
 | keepalive-interval | uint16 | The time interval (in seconds) that governs how often the SSR sends keepalive messages to a neighbor. |
 
+**OSPF**
+
+authority > router > routing > routing-protocol ospf > timers > spf
+
+This sub-element allows administrators to control the SPF delay, hold-time, and max hold-time timers.
+
+| Element | Type | Description |
+| --- | --- | --- |
+| [delay](config_command_guide.md#configure-authority-router-routing-ospf-timers-spf-delay) | uint32 | Initial SPF delay in milliseconds. |
+| [hold-time](config_command_guide.md#configure-authority-router-routing-ospf-timers-spf-hold-time) | uint32 | Adaptive hold-time in millisecconds. |
+| [maximum hold-time](config_command_guide.md#configure-authority-router-routing-ospf-timers-spf-maximum-hold-time) | uint32 | Maximum hold-time in milliseconds. |
+
 #### Version History:
+
 | Release | Modification |
 | --- | --- |
 | 1.0.0 | Introduced |
+| 5.6.10 | SPF timers added | 
 
 ## traffic
 
