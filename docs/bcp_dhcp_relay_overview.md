@@ -65,7 +65,7 @@ config
             security 		internal
 
             access-policy 	dhcp.demo
-            	source 		dhcp
+            	source 		dhcp.demo
             exit
             application-type 	dhcp-relay
         exit
@@ -76,7 +76,7 @@ exit
 
 ### Service Route
 
-A service-route is configured on the Branch1 and Enterprise DC routers referencing the DHCP relay service, with a service-agent next-hop pointing to the IP address of the DHCP server (`nat-target` in the example below).
+A service-route is configured on the Branch1 or Enterprise DC routers referencing the DHCP relay service, with a `service-agent next-hop` pointing to the IP address of the DHCP server (`nat-target` in the example below).
 
 ```
 config
@@ -101,19 +101,19 @@ exit
 
 ### Network Interface
 
-On the router processing the DHCP relay requests (Branch 2), the unique tenant created must be applied to the network-interface `lan1`. DHCP requests broadcast here are tagged by the tenant and associated with the `dhcp-relay` service.
+On the router processing the DHCP relay requests (Branch 2), the unique tenant created must be applied to the network-interface receiving the DHCP broadcasts. These DHCP request broadcasts are tagged by the tenant and associated with the `dhcp-relay` service. After the association is made, the SSR will convert the broadcast into a unicast and forward it to the IP of the DHCP servers.
 
 ```
 config
     authority
-        router    Branch1
-            name 	Branch1
+        router    Branch2
+            name 	Branch2
 
             node    node1
                 name                node1
 
-                device-interface    red-lan1
-                    name                red-lan1
+                device-interface    blue-lan1
+                    name                blue-lan1
                     pci-address         0000:00:04.0
 
                     network-interface   lan1
@@ -123,10 +123,10 @@ config
                         inter-router-security    internal
                         source-nat               true
 
-                        address 				 172.16.1.15
-                            ip-address 			 172.16.1.15
+                        address 				 172.26.2.25
+                            ip-address 			 172.26.2.25
                             prefix-length 		 24
-                            gateway 			 172.16.1.1
+                            gateway 			 172.26.2.2
                         exit
                     exit
                 exit
@@ -187,7 +187,7 @@ config
 				network-interface 	lan1
 					name				lan1
 					global-id			6
-					tenant				dhcp.demo
+					tenant				lan
 					inter-router-security	internal
 					source-nat			true
 					address				172.16.1.15
@@ -208,7 +208,33 @@ config
 				interface 		lan1
 			exit 
 		exit
-	exit
+			router    Branch2
+            	name 	Branch2
+
+            node    node1
+                name                node1
+
+                device-interface    blue-lan1
+                    name                blue-lan1
+                    pci-address         0000:00:04.0
+
+                    network-interface   lan1
+                        name            		 lan1
+                        global-id       		 6
+                        tenant          		 dhcp.demo
+                        inter-router-security    internal
+                        source-nat               true
+
+                        address 				 172.26.2.25
+                            ip-address 			 172.26.2.25
+                            prefix-length 		 24
+                            gateway 			 172.26.2.2
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
 
 	tenant 	lan
 		name 	lan
@@ -336,7 +362,7 @@ config
 				network-interface 	lan1
 					name				lan1
 					global-id			6
-					tenant				dhcp.demo
+					tenant				lan
 					inter-router-security		internal
 					source-nat			true
 					address				172.16.1.15
@@ -367,7 +393,33 @@ config
 				interface 		lan1
 			exit 
 		exit
-	exit
+			router    Branch2
+            	name 	Branch2
+
+            node    node1
+                name                node1
+
+                device-interface    blue-lan1
+                    name                blue-lan1
+                    pci-address         0000:00:04.0
+
+                    network-interface   lan1
+                        name            		 lan1
+                        global-id       		 6
+                        tenant          		 dhcp.demo
+                        inter-router-security    internal
+                        source-nat               true
+
+                        address 				 172.26.2.25
+                            ip-address 			 172.26.2.25
+                            prefix-length 		 24
+                            gateway 			 172.26.2.2
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
 
 	tenant 	lan
 		name 	lan
@@ -421,7 +473,7 @@ exit
 
 ## DHCP Relay with BGP over SVR
 
-By default, the SSR will auto-generate service-routes and services for each DHCP server on the connected branch. This is good for SVR without BGP. To make DHCP relay work with BGP over SVR, we need to make additional changes to the auto-generated configuration **after** the auto-generation of configuration objects is complete. 
+By default, the SSR will auto-generate service-routes and services for each DHCP server. This is good for SVR without BGP. To make DHCP relay work with BGP over SVR, we need to make additional changes to the auto-generated configuration **after** the auto-generation of configuration objects is complete. 
 
 Please review DHCP Relay with SVR for tenant and network-interface configurations.
 
@@ -509,7 +561,7 @@ config
 			session-record
 				include-hierarchical-services 	true
 			exit
-			generated 		true <---- IS THIS SUPPOSED TO BE FALSE PER THE INSTRUCTIONS? PLEASE ADVISE.
+			generated 		false
 		exit
 	exit
 exit
@@ -703,7 +755,7 @@ config
 				include-hierarchical-services 	true
 			exit
 
-			generated 		true <---- IS THIS SUPPOSED TO BE FALSE PER THE INSTRUCTIONS? PLEASE ADVISE.
+			generated 		false
 		exit
 	exit
 exit
