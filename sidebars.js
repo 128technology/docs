@@ -288,7 +288,6 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_intro",
-      "plugin_aws_tgw_connect",
       "plugin_bgp_community_services",
       "plugin_cloud_ha",
       "plugin_dns_app_id",
