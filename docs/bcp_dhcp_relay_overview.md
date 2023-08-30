@@ -29,13 +29,10 @@ A high-level overview of the architecture used for testing is shown in the diagr
 
 ### Site Types
 
-The following characteristics define the model where DHCP Relay is implemented:
+The following characteristics define the common models where DHCP Relay is deployed:
 
-- Enterprise DC and Branch 1
-- SSR and DHCP server listening on LAN
-- Branch 2
-- DHCP clients
-- SSR Site2 relay listening on LAN and relayed
+- Enterprise DC to Branch relay (DHCP server lives on the DC LAN)
+- Branch to Branch relay (DHCP server lives on one of the branch LANs)
 
 ## DHCP Relay with SVR
 
