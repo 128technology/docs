@@ -29,7 +29,7 @@ A high-level overview of the architecture used for testing is shown in the diagr
 
 ### Site Types
 
-The following characteristics define the standard model where DHCP Relay is implemented:
+The following characteristics define the model where DHCP Relay is implemented:
 
 - Enterprise DC and Branch 1
 - SSR and DHCP server listening on LAN
@@ -79,7 +79,7 @@ exit
 
 ### Service Route
 
-A service-route is configured on the Branch1 and Enterprise DC routers referencing the DHCP relay service, with a service-agent next-hop pointing to the real DHCP server.
+A service-route is configured on the Branch1 and Enterprise DC routers referencing the DHCP relay service, with a service-agent next-hop pointing to the IP address of the DHCP server (`nat-target` in the example below).
 
 ```
 config
@@ -90,7 +90,7 @@ config
             service-route        dhcp_relay_service-route
                 name             dhcp_relay_service-route
                 service-name     dhcp-relay
-                nat-target       172.16.3.1
+                nat-target       172.16.1.3
 
                 next-hop         node1 lan1
                     node-name    node1
@@ -104,7 +104,7 @@ exit
 
 ### Network Interface
 
-On the router identified to relay DHCP requests (Branch 2), the unique tenant created must be applied to the network-interface `lan1`. DHCP requests broadcast here are tagged by the tenant and associated with the `dhcp-relay` service.
+On the router processing the DHCP relay requests (Branch 2), the unique tenant created must be applied to the network-interface `lan1`. DHCP requests broadcast here are tagged by the tenant and associated with the `dhcp-relay` service.
 
 ```
 config
@@ -131,8 +131,6 @@ config
                             prefix-length 		 24
                             gateway 			 172.16.1.1
                         exit
-                        reverse-arp-mac-learning 				true
-                        off-subnet-reverse-arp-mac-learning 	true
                     exit
                 exit
             exit
@@ -254,7 +252,7 @@ The fastest server wins.
 
 ### Adding Service-Routes
 
-Building upon the earlier configuration and the information above, all that is needed to add additional DHCP servers is an additional **service-route** for each DHCP server. In our example configuration, we will be adding a second service route (`dhcp-relay_route2`)to the Branch1 router. 
+Building upon the earlier configuration and the information above, all that is needed to add additional DHCP servers is an additional **service-route** for each DHCP server. In our example configuration, we will be adding a second service route (`dhcp-relay_route2`) to the Branch1 router with the new DHCP Server IP address - `nat-target` 172.16.1.4.
 
 ```
 config
@@ -426,7 +424,7 @@ exit
 
 ## DHCP Relay with BGP over SVR
 
-By default, the SSR will auto-generate service-routes and services for each DHCP server on the connected branch. This is good for SVR without BGP. To make DHCP relay work for with BGP over SVR, we need to deviate from the typical configuration **after** the auto generation of configuration objects is complete. 
+By default, the SSR will auto-generate service-routes and services for each DHCP server on the connected branch. This is good for SVR without BGP. To make DHCP relay work with BGP over SVR, we need to make additional changes to the auto-generated configuration **after** the auto-generation of configuration objects is complete. 
 
 Please review DHCP Relay with SVR for tenant and network-interface configurations.
 
@@ -518,7 +516,7 @@ config
 		exit
 	exit
 exit
-````
+```
 
 3. Go into the auto-generated service-route and change `generated` to `false`, change type to `use-learned-routes`, and perform one last commit.
 
