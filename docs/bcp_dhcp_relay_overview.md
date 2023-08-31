@@ -138,20 +138,18 @@ config
 
 ```
 config
-
     authority
-		conductor-address	192.168.1.7
-			router				Branch1 
-				name				Branch1
+		router				Branch1 
+			name				Branch1
 				router-group		all_routers
 
 			node		node1
 				name			node1
 				asset-id		t220-dut1.openstacklocal
 
-				device-interface  	wan-eth0 
-					name				wan-eth0
-					pci-address			0000:00:03.0
+			device-interface  	wan-eth0 
+				name				wan-eth0
+				pci-address			0000:00:03.0
 
 				network-interface 	wan
 					name				wan
@@ -214,21 +212,19 @@ config
             node    node1
                 name                node1
 
-                device-interface    blue-lan1
-                    name                blue-lan1
-                    pci-address         0000:00:04.0
+            device-interface    blue-lan1
+                name                blue-lan1
+                pci-address         0000:00:04.0
 
-                    network-interface   lan1
-                        name            		 lan1
-                        global-id       		 6
-                        tenant          		 dhcp.demo
-                        inter-router-security    internal
-                        source-nat               true
-
-                        address 				 172.26.2.25
-                            ip-address 			 172.26.2.25
-                            prefix-length 		 24
-                            gateway 			 172.26.2.1
+                network-interface   lan1
+                    name            		 lan1
+                    global-id       		 6
+                    tenant          		 dhcp.demo
+                    inter-router-security    internal
+                    address 				 172.26.2.25
+                        ip-address 			 172.26.2.25
+                        prefix-length 		 24
+                        gateway 			 172.26.2.1
                         exit
                     exit
                 exit
@@ -313,11 +309,9 @@ exit
 
 ```
 config
-
     authority
-		conductor-address	192.168.1.7
-			router				Branch1 
-				name				Branch1
+		router				Branch1 
+			name				Branch1
 				router-group		all_routers
 
 			node	node1
@@ -393,27 +387,28 @@ config
 				interface 		lan1
 			exit 
 		exit
-			router    Branch2
-            	name 	Branch2
+
+		router    Branch2
+            name 	Branch2
 
             node    node1
                 name                node1
 
-                device-interface    blue-lan1
-                    name                blue-lan1
-                    pci-address         0000:00:04.0
+            device-interface    blue-lan1
+                name                blue-lan1
+                pci-address         0000:00:04.0
 
-                    network-interface   lan1
-                        name            		 lan1
-                        global-id       		 6
-                        tenant          		 dhcp.demo
-                        inter-router-security    internal
-                        source-nat               true
+                network-interface   lan1
+                    name            		 lan1
+                    global-id       		 6
+                    tenant          		 dhcp.demo
+                    inter-router-security    internal
+                    source-nat               true
 
-                        address 				 172.26.2.25
-                            ip-address 			 172.26.2.25
-                            prefix-length 		 24
-                            gateway 			 172.26.2.1
+                    address 				 172.26.2.25
+                        ip-address 			 172.26.2.25
+                        prefix-length 		 24
+                        gateway 			 172.26.2.1
                         exit
                     exit
                 exit
