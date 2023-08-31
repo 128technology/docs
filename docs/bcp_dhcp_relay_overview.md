@@ -126,7 +126,7 @@ config
                         address 				 172.26.2.25
                             ip-address 			 172.26.2.25
                             prefix-length 		 24
-                            gateway 			 172.26.2.2
+                            gateway 			 172.26.2.1
                         exit
                     exit
                 exit
@@ -228,7 +228,7 @@ config
                         address 				 172.26.2.25
                             ip-address 			 172.26.2.25
                             prefix-length 		 24
-                            gateway 			 172.26.2.2
+                            gateway 			 172.26.2.1
                         exit
                     exit
                 exit
@@ -413,7 +413,7 @@ config
                         address 				 172.26.2.25
                             ip-address 			 172.26.2.25
                             prefix-length 		 24
-                            gateway 			 172.26.2.2
+                            gateway 			 172.26.2.1
                         exit
                     exit
                 exit
