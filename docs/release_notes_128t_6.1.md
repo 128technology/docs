@@ -162,6 +162,14 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **WAN-1471 Cannot distinguish between an SSR installed with OTP ISO and IBU image:** The `show system version` PCLI command now clarifies image-based or ISO in the summary view as well as the detail view.
 
+### Caveats
+
+- **I95-52426 Incorrect behavior when configuring an IDP custom rule definition:** In a case where a user is modifying a rule to **decrease** the action type, for example, the action `close-tcp-connection` is downgraded to `alert`, this may impact other rules, and some attacks may pass through undetected. 
+
+**Example:** If `HTTP:SQL:INJ:HEADER-1` is excluded from the ruleset, some other `HTTP` attacks may pass through undetected. **This behavior only occurs when decreasing the action type in the rule;** i.e.; the action `close-tcp-connection` is downgraded to `alert`.
+
+This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend avoiding this configuration and waiting for the SSR 6.1.5 patch release. 
+
 ## Release 6.1.3-4
 
 **Release Date:** May 22, 2023
