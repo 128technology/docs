@@ -141,124 +141,126 @@ config
     authority
 		router				Branch1 
 			name				Branch1
-				router-group		all_routers
 
 			node		node1
 				name			node1
 				asset-id		t220-dut1.openstacklocal
 
-			device-interface  	wan-eth0 
-				name				wan-eth0
-				pci-address			0000:00:03.0
+				device-interface  	wan-eth0 
+					name				wan-eth0
+					pci-address			0000:00:03.0
 
-				network-interface 	wan
-					name				wan
-					global-id			1
-					conductor			true
-					default-route		true
+					network-interface 	wan
+						name				wan
+						global-id			1
+						conductor			true
+						default-route		true
 
-					neighborhood	Broadband 
-						name			Broadband
-						topology 		mesh 
+						neighborhood	Broadband 
+							name			Broadband
+							topology 		mesh 
+						exit
+						inter-router-security 	internal 
+						source-nat				true
+						management				true
+
+						management-vector 
+							name		mgmt 
+							priority 	5
+						exit
+
+						address			192.168.1.9
+							ip-address		192.168.1.9
+							prefix-length 	24
+							gateway			192.168.1.1
+						exit 
 					exit
-					inter-router-security 	internal 
-					source-nat				true
-					management				true
-
-					management-vector 
-						name		mgmt 
-						priority 	5
-					exit
-
-					address			192.168.1.9
-						ip-address		192.168.1.9
-						prefix-length 	24
-						gateway			192.168.1.1
-					exit 
 				exit
+
+				device-interface  	red-lan1 
+					name				red-lan1
+					pci-address			0000:00:04.0
+
+					network-interface 	lan1
+						name				lan1
+						global-id			6
+						tenant				lan
+						inter-router-security	internal
+						source-nat			true
+						address				172.16.1.15
+							ip-address			172.16.1.15
+							prefix-length 		24
+							gateway				172.16.1.1
+						exit 
+					exit
+				exit 
 			exit
 
-			device-interface  	red-lan1 
-				name				red-lan1
-				pci-address			0000:00:04.0
-
-				network-interface 	lan1
-					name				lan1
-					global-id			6
-					tenant				lan
-					inter-router-security	internal
-					source-nat			true
-					address				172.16.1.15
-						ip-address			172.16.1.15
-						prefix-length 		24
-						gateway				172.16.1.1
-					exit 
-				exit
-			exit 
+			service-route 	dhcp-relay_route
+				name			dhcp-relay_route 
+				service-name	dhcp_relay
+				nat-target		172.16.1.3
+				next-hop		node1 lan1 
+					node-name 		node1 
+					interface 		lan1
+				exit 
+			exit
 		exit
-
-		service-route 	dhcp-relay_route
-			name			dhcp-relay_route 
-			service-name	dhcp_relay
-			nat-target		172.16.1.3
-			next-hop		node1 lan1 
-				node-name 		node1 
-				interface 		lan1
-			exit 
-		exit
-			router    Branch2
-            	name 	Branch2
+			
+		router    Branch2
+            name 	Branch2
 
             node    node1
                 name                node1
 
-            device-interface    blue-lan1
-                name                blue-lan1
-                pci-address         0000:00:04.0
+	            device-interface    blue-lan1
+	                name                blue-lan1
+	                pci-address         0000:00:04.0
 
-                network-interface   lan1
-                    name            		 lan1
-                    global-id       		 6
-                    tenant          		 dhcp.demo
-                    inter-router-security    internal
-                    address 				 172.26.2.25
-                        ip-address 			 172.26.2.25
-                        prefix-length 		 24
-                        gateway 			 172.26.2.1
-                        exit
-                    exit
-                exit
-            exit
-        exit
-    exit
+	                network-interface   lan1
+	                    name            		 lan1
+	                    global-id       		 6
+	                    tenant          		 dhcp.demo
+	                    inter-router-security    internal
+	                    address 				 172.26.2.25
+	                        ip-address 			 172.26.2.25
+	                        prefix-length 		 24
+	                        gateway 			 172.26.2.1
+	                        exit
+	                    exit
+	                exit
+	            exit
+	        exit
+	    exit
 
-	tenant 	lan
-		name 	lan
-	exit
-
-	tenant 	dhcp.demo
-		name 	dhcp.demo
-	exit
-
-	service 	internet
-		name 	internet
-		address 	0.0.0.0/0
-
-		access-policy 	lan
-			source 			lan
-		exit
-	exit
-
-	service 	dhcp_relay
-		name 		dhcp_relay
-		security 	internal
-
-		access-policy 	dhcp.demo
-			source 			dhcp.demo
+		tenant 	lan
+			name 	lan
 		exit
 
-		service-policy 		dhcp_relay
-		application-type 	dhcp-relay
+		tenant 	dhcp.demo
+			name 	dhcp.demo
+		exit
+
+		service 	internet
+			name 	internet
+			address 	0.0.0.0/0
+
+			access-policy 	lan
+				source 			lan
+			exit
+		exit
+
+		service 	dhcp_relay
+			name 		dhcp_relay
+			security 	internal
+
+			access-policy 	dhcp.demo
+				source 			dhcp.demo
+			exit
+
+			service-policy 		dhcp_relay
+			application-type 	dhcp-relay
+		exit
 	exit
 exit
 ```
@@ -312,7 +314,6 @@ config
     authority
 		router				Branch1 
 			name				Branch1
-				router-group		all_routers
 
 			node	node1
 				name	node1
@@ -322,71 +323,70 @@ config
 					name				wan-eth0
 					pci-address			0000:00:03.0
 
-				network-interface 	wan
-					name				wan
-					global-id			1
-					conductor			true
-					default-route		true
+					network-interface 	wan
+						name				wan
+						global-id			1
+						conductor			true
+						default-route		true
 
-					neighborhood	Broadband 
-						name			Broadband
-						topology 		mesh 
+						neighborhood	Broadband 
+							name			Broadband
+							topology 		mesh 
+						exit
+						inter-router-security 	internal 
+						source-nat				true
+						management				true
+
+						management-vector 
+							name		mgmt 
+							priority 	5
+						exit
+
+						address			192.168.1.9
+							ip-address		192.168.1.9
+							prefix-length 	24
+							gateway			192.168.1.1
+						exit 
 					exit
-					inter-router-security 	internal 
-					source-nat				true
-					management				true
+				exit
 
-					management-vector 
-						name		mgmt 
-						priority 	5
+				device-interface  	red-lan1 
+					name			red-lan1
+					pci-address		0000:00:04.0
+
+					network-interface 	lan1
+						name				lan1
+						global-id			6
+						tenant				lan
+						inter-router-security		internal
+						source-nat			true
+						address				172.16.1.15
+							ip-address		172.16.1.15
+							prefix-length 	24
+							gateway			172.16.1.1
+						exit 
 					exit
+				exit 
 
-					address			192.168.1.9
-						ip-address		192.168.1.9
-						prefix-length 	24
-						gateway			192.168.1.1
+				service-route 	dhcp-relay_route1
+					name			dhcp-relay_route1 
+					service-name	dhcp_relay
+					nat-target		172.16.1.3
+					next-hop		node1 lan1 
+						node-name 		node1 
+						interface 		lan1
 					exit 
 				exit
-			exit
 
-			device-interface  	red-lan1 
-				name			red-lan1
-				pci-address		0000:00:04.0
-
-				network-interface 	lan1
-					name				lan1
-					global-id			6
-					tenant				lan
-					inter-router-security		internal
-					source-nat			true
-					address				172.16.1.15
-						ip-address		172.16.1.15
-						prefix-length 	24
-						gateway			172.16.1.1
+				service-route 	dhcp-relay_route2
+					name			dhcp-relay_route2 
+					service-name	dhcp_relay
+					nat-target		172.16.1.4
+					next-hop		node1 lan1 
+						node-name 		node1 
+						interface 		lan1
 					exit 
 				exit
-			exit 
-		exit
-
-		service-route 	dhcp-relay_route1
-			name			dhcp-relay_route1 
-			service-name	dhcp_relay
-			nat-target		172.16.1.3
-			next-hop		node1 lan1 
-				node-name 		node1 
-				interface 		lan1
-			exit 
-		exit
-
-		service-route 	dhcp-relay_route2
-			name			dhcp-relay_route2 
-			service-name	dhcp_relay
-			nat-target		172.16.1.4
-			next-hop		node1 lan1 
-				node-name 		node1 
-				interface 		lan1
-			exit 
-		exit
 
 		router    Branch2
             name 	Branch2
@@ -394,74 +394,75 @@ config
             node    node1
                 name                node1
 
-            device-interface    blue-lan1
-                name                blue-lan1
-                pci-address         0000:00:04.0
+	            device-interface    blue-lan1
+	                name                blue-lan1
+	                pci-address         0000:00:04.0
 
-                network-interface   lan1
-                    name            		 lan1
-                    global-id       		 6
-                    tenant          		 dhcp.demo
-                    inter-router-security    internal
-                    source-nat               true
+	                network-interface   lan1
+	                    name            		 lan1
+	                    global-id       		 6
+	                    tenant          		 dhcp.demo
+	                    inter-router-security    internal
+	                    source-nat               true
 
-                    address 				 172.26.2.25
-                        ip-address 			 172.26.2.25
-                        prefix-length 		 24
-                        gateway 			 172.26.2.1
-                        exit
-                    exit
-                exit
-            exit
-        exit
-    exit
+	                    address 				 172.26.2.25
+	                        ip-address 			 172.26.2.25
+	                        prefix-length 		 24
+	                        gateway 			 172.26.2.1
+	                        exit
+	                    exit
+	                exit
+	            exit
+        	exit
+    	exit
 
-	tenant 	lan
-		name 	lan
-	exit
-
-	tenant 	dhcp.demo
-		name 	dhcp.demo
-	exit
-
-	service 	internet
-		name 		internet
-		address 	0.0.0.0/0
-
-		access-policy 	lan
-			source 		lan
-		exit
-	exit
-	service			local-lan-summary_router1
-		name		local-lan-summary_router1
-		security	internal
-		address		172.16.1.12/32
-
-		access-policy 	lan 
-			source 		lan
-		exit 
-	exit
-
-	service		local-lan-summary_router3
-		name		local-lan-summary_router3
-		security	internal
-		address		172.16.1.12/32
-
-		access-policy 	wan 
-			source 		wan
-		exit 
-	exit
-
-	service 	dhcp_relay
-		name 		dhcp_relay
-		security 	internal
-
-		access-policy 	dhcp.demo
-			source 		dhcp.demo
+		tenant 	lan
+			name 	lan
 		exit
 
-		service-policy 		dhcp_relay
-		application-type 	dhcp-relay
+		tenant 	dhcp.demo
+			name 	dhcp.demo
+		exit
+
+		service 	internet
+			name 		internet
+			address 	0.0.0.0/0
+
+			access-policy 	lan
+				source 		lan
+			exit
+		exit
+		service			local-lan-summary_router1
+			name		local-lan-summary_router1
+			security	internal
+			address		172.16.1.12/32
+
+			access-policy 	lan 
+				source 		lan
+			exit 
+		exit
+
+		service		local-lan-summary_router3
+			name		local-lan-summary_router3
+			security	internal
+			address		172.16.1.12/32
+
+			access-policy 	wan 
+				source 		wan
+			exit 
+		exit
+
+		service 	dhcp_relay
+			name 		dhcp_relay
+			security 	internal
+
+			access-policy 	dhcp.demo
+				source 		dhcp.demo
+			exit
+
+			service-policy 		dhcp_relay
+			application-type 	dhcp-relay
+		exit
 	exit
 exit
 ```
