@@ -168,8 +168,6 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 **Example:** If `HTTP:SQL:INJ:HEADER-1` is excluded from the ruleset, some other `HTTP` attacks may pass through undetected. **This behavior only occurs when decreasing the action type in the rule;** i.e.; the action `close-tcp-connection` is downgraded to `alert`.
 
-If the rule that is being downgraded is a terminal rule, this action may allow some attacks to pass through undetected. For more information on Terminal Rules, please see [Understanding Terminal Rules](https://www.juniper.net/documentation/us/en/software/junos/idp-policy/topics/topic-map/security-idp-policy-rules-and-rulebases.html#id-understanding-idp-terminal-rules).
-
 This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend avoiding this configuration and waiting for the SSR 6.1.5 patch release. 
 
 ## Release 6.1.3-4
