@@ -129,8 +129,7 @@ module.exports = {
           "config_dscp_steering",
           "config_dscp_preservation",
           "config_vrf_learning",
-          "config_audit_event",
-          "config_dhcp",
+          "config_audit_event", 
           "config_dns_proxy",
           "config_forward_error_correction",
           "config_management_over_forwarding",
@@ -164,6 +163,7 @@ module.exports = {
           "config_bfd",
           "config_multicast",
           "config_lacp",
+          "config_dhcp",
         ],
       },
       {
@@ -264,10 +264,11 @@ module.exports = {
     "Best Practices": [
       "bcp_att_avpn_configuration",
       "bcp_using_128T_as_ntp_server",
-      "bcp_per-adjacency_traffic_engineering",
+      "bcp_dhcp_relay_overview",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
+      "bcp_per-adjacency_traffic_engineering",
       "bcp_salt_pillars",
       "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",
@@ -288,7 +289,6 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_intro",
-      "plugin_aws_tgw_connect",
       "plugin_bgp_community_services",
       "plugin_cloud_ha",
       "plugin_dns_app_id",
