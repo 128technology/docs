@@ -8,14 +8,14 @@ import InitialBoot from './_install_nmtui_router.md';
 
 This guide describes the process for deploying a Session Smart Conductor or a Session Smart Router (SSR) in VMWare ESXi. The process consists of the following steps:
 
-- Download the SSR package-based or image-based ISO. Refer to [Downloading ISOs](intro_downloading_iso.md)
+- Download the SSR package-based ISO. Refer to [Downloading ISOs](intro_downloading_iso.md)
 - Log into VMware ESXi with Administrative rights
 - Create a new Virtual Machine and configure
 - Boot Virtual Machine to run the Juniper SSR ISO and install software
 
 ## VMWare Configuration
 
-In order to perform the configuration and installation of the SSR software, you must have a properly installed and working configuration of VMware ESXi. This documentation references VMware ESXi version 7.0.0, however, the software has been tested on earlier versions. Additoinally, you must have administrator access to the ESXi platform.
+In order to perform the configuration and installation of the SSR software, you must have a properly installed and working configuration of VMware ESXi. This documentation references VMware ESXi version 7.0.0, however, the software has been tested on earlier versions. Additionally, you must have administrator access to the ESXi platform.
 
 ## Procedure
 
@@ -62,7 +62,7 @@ In order to perform the configuration and installation of the SSR software, you 
 #### Customize Settings
 
 6. Select **Virtual Hardware**.
-7. Expand the CPU selection, and configure the following settings:
+7. Expand the CPU selection, and configure the following settings. Refer to the [Minimum Platform Specifications](about_supported_platforms.me#minimum-platform-specifications) and the Scaling Guidelines for additional requirements.
 
 	- Set the number of CPU’s to at least 4.
 	- Update the **Scheduling Affinity** to `0-3`.
@@ -70,16 +70,16 @@ In order to perform the configuration and installation of the SSR software, you 
 	Close the CPU list and configure the following under Virtual Hardware:
 
 	- Set memory to a minimum of 8GB.
-	- Set hard disk 1 to a minimum of 26GB.
+	- Set hard disk 1 to a minimum of 120GB.
 	- Set the SCSI Controller 0 to `LSI Logic SAS`. 
 
 	![Virtual Hardware settings](/img/vmware_virt_hdwr.jpg)
 
 #### Configure Network Adapters
 
-8. Click the **Add network adapter** button two times, so you have a total of three network adapters available. 
+8. Click the **Add network adapter** button twice. You should have a minimum of three network adapters available. Configure as many as necessary for your deployment.  
 
-	- Expand each network adapter by clicking the small triangle and set the **Adapter Type** on each network adapter to be **E1000e**. 
+	- Expand each network adapter by clicking the small triangle and set the **Adapter Type** on each network adapter to be **VMXNet3**. 
 
 	![Network Adapter](/img/vmware_net_adapter.jpg)
 
