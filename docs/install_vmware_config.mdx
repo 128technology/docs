@@ -26,13 +26,14 @@ In order to perform the configuration and installation of the SSR software, you 
 2. Load the SSR ISO into the ESXi Data Store. 
 
 	- From the ESXi Navigator in the left hand pane, select Storage.
+	![Navigator Storage](/img/vmware_storage.png)
 	- Select the **Datastore Browser** button. 
-	![ESXi Datastore](/img/vmware_datastore.jpg)
+	![ESXi Datastore](/img/vmware_datastore_browser_button.png)
 	- From the Datastore Browser window, select **Upload**.
-	![Datastore Browser](/img/vmware_datastorebrowser.jpg)
+	![Datastore Browser](/img/vmware_datastorebrowser.png)
 	- Navigate to the directory containing the Juniper SSR ISO. 
 	- Select the ISO and click **Open**. The Datastore browser now shows the ISO.
-	![SSR ISO](/img/vmware_ssr-iso.jpg)
+	![SSR ISO](/img/vmware_ssr-iso.png)
 	-  Click **Close** to continue.
 
 3. From the ESXi Navigator select **Virtual Machines**.
@@ -42,14 +43,14 @@ In order to perform the configuration and installation of the SSR software, you 
 1. Click on **Create / Register VM**.
 2. Select **Create a new virtual machine** and click **Next**. 
 
-	![Register VM](/img/vmware_registervm.jpg)
+	![Register VM](/img/vmware_registervm.png)
 
 #### Virtual Machine Name and OS
 
 1. Enter a name for the virtual machine. The name should indicate whether the instance is a router or conductor, and provide other information such as the physical location.
-2. Set compatibility to **ESXi 5.5 virtual machine**.
+2. Set compatibility to **ESXi 7.0 U2 virtual machine**.
 3. Set the Guest OS family to: `Linux`.
-4. Set the Guest OS version to: `CentOS 4/5/6/7 (64-bit)` and click **Next**. 
+4. Set the Guest OS version to: `CentOS 7 (64-bit)` and click **Next**. 
 
 	![Name the VM](/img/vmware_name-os.png)
 
@@ -57,7 +58,7 @@ In order to perform the configuration and installation of the SSR software, you 
 
 5. Select the storage type and datastore to be used and then click **Next**. 
 
-	![Storage Type](/img/vmware_storage.jpg)
+	![Storage Type](/img/vmware_storage_type.png)
 
 #### Customize Settings
 
@@ -71,46 +72,44 @@ In order to perform the configuration and installation of the SSR software, you 
 
 	- Set memory to a minimum of 8GB.
 	- Set hard disk 1 to a minimum of 120GB.
-	- Set the SCSI Controller 0 to `LSI Logic SAS`. 
+	- Set the SCSI Controller 0 to `LSI Logic SAS`. `I used VMWare Paravirtual - it was the default. Should this be changed? PLEASE ADVISE`
 
-	![Virtual Hardware settings](/img/vmware_virt_hdwr.jpg)
+	![Virtual Hardware settings](/img/vmware_virt_hdwr.png)
 
 #### Configure Network Adapters
 
-8. Click the **Add network adapter** button twice. You should have a minimum of three network adapters available. Configure as many as necessary for your deployment.  
+8. Click the **Add network adapter** button twice to define three network adapters. It is a best practice to have a minimum of three network adapters available. Configure as many as necessary for your deployment.  
 
 	- Expand each network adapter by clicking the small triangle and set the **Adapter Type** on each network adapter to be **VMXNet3**. 
 
-	![Network Adapter](/img/vmware_net_adapter.jpg)
+	![Network Adapter](/img/vmware_net_adapter.png)
 
-#### Configure CD (ISO) **(is this really still a CD option?)**
+#### Configure the CD/DVD Media (ISO)
 
 9. Expand the CD/DVD Media selection.
-10. In the CD/DVD Drive 1 dropdown, select **Datastore ISO file** and select **Connect**.
-11. The **Datastore browser** will appear. Select the SSR ISO file and click Select.
+10. In the CD/DVD Drive 1 dropdown, select **Datastore ISO file** and select **Connect**. The **Datastore browser** appears.
+11. Choose the SSR ISO file you uploaded earlier, and click Select.
 
 	![CD ISO Selected](/img/vmware_cd-iso2.jpg)
 
-	![Select CD/ISO](/img/vmware_cd-iso.jpg)
+	![Select CD/ISO](/img/vmware_cd-iso.png)
 
 #### Configure VM Options
 
 12. Click on the VM Options button at the top of the screen.
 
-	![VM Options](/img/vmware_vmoptions1.jpg)
+	![VM Options](/img/vmware_vmoptions1.png)
 
 - Expand **Boot Options**.
 - Set firmware to **EFI**.
 - **Disable** Enable UEFI secure boot (no check mark).
 - Click Next.
 
-	![Boot Options](/img/vmware_vmoptions2.jpg)
+	![Boot Options](/img/vmware_vmoptions2.png)
 
 #### Ready to Complete
 
 Take a minute to review the summary of the new virtual machine configuration. Verify all settings. Click **Back** if you need to modify anything. If everything is correct, click **Next** to finalize the setup of the new virtual machine.
-
-![Summary Screen](/img/vmware_complete.png)
 
 ## Launch the VM and Begin the Install
 
@@ -122,9 +121,9 @@ Ensure that the new virtual machine is selected and click the “Play” icon or
 
 ![Power On](/img/vmware_pwr-on.png)
 
-The virtual machine boots into the Juniper Install menu. Select **Install 128T Routing Software VGA Console**. If you do not make a selection, the system will default to booting into the **Serial Console** mode.
+The virtual machine boots into the Juniper Install menu. Click in the Play window to expand it, and click in the window to activate the up and down arrows. Use the arrows to select **VGA: Interactive Install 128T (your version number)**. If you do not make a selection, the system will default to booting into the **Serial Console** mode.
 
-![VGA Boot with Interactive Install](/img/install_select_interactive.png)
+![VGA Boot with Interactive Install](/img/install_select_interactive_vmware.png)
 
 During the install process, the status is displayed on the screen.
 
@@ -134,11 +133,21 @@ After the Linux installation completes, the SSR software installation begins. No
 
 ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
 
+If the Installed Packages screen does not automatically display, select the window and press the Enter key. 
+
 ### Initial Boot and Next Steps
 
 From the VMware Navigator, select the new virtual machine and click the **Play** icon or the **Power on** button to launch the virtual machine. 
 
-<InitialBoot/>
+![VMWare Power On](/img/vmware_pwr-on.png)
+
+When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.
+
+![128T NetManager TUI Start](/img/vmware_initializer1.png)
+
+Selecting `Yes` launches the NMTUI application to perform an initial network interface setup.
+
+![128T NetManager TUI Option](/img/vmware_initializer2.png))
 
 If you are installing a Conductor, please refer to the following documentation to complete the Linux configuration and Conductor initialization. 
 
