@@ -53,11 +53,78 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 **Release Date:** September 7, 2023
 
+### New Features
+
+- **I95-52163 Handle incoming public keys from peer conductor node:** Added functionality to allow conductor nodes to share the authorized keys of managed routers between each other. If the SSH public key is retrieved from a managed router by one conductor node, then it is automatically shared with its conductor peer node.
+------
+- **I95-52316 Enhancements to Overlapping FIB Services:** The [`fib-service-match`](config_command_guide.md#configure-authority-fib-service-match) command allows you to configure either `best-match-only` or `any-match`. 
+  - `best-match-only` considers the best matching prefix length. In cases of transport overlap, services are visited in alphabetical order.
+  - Using `any-match` will consider all services that match the route update but do not have the best match service address when creating FIB entries, minimizing missed entries. The transports from the service with the longest prefix are considered first.
+------
+- **I95-52517 Allow users the ability to configure the OSPF SPF timers:** Support for user-configured values for SPF delay has been added. Users can now specify values for spf delay, hold-time, and maximum-hold-time. For additional information, see [OSPF SPF Timers](config_command_guide.md#configure-authority-router-routing-ospf-timers-spf).
+
 ### Resolved Issues
 
-- **I95-52289 Sychronize use of SSH keys between internal systems:** Newly provisioned systems now use the same SSH key for 128T and the salt-minion. This allows the Conductor to establish connectivity to the asset upon the first salt connection instead of requiring the asset to get to the running state before connecting.
+- **The following CVEs have been resolved in this release:** I95-51431, I95-51758, I95-52495, I95-52496, I95-52497, I95-52509, I95-52554, I95-52625, I95-52645, I95-52956, 
+
+- **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
 ------
-- **I95-52290 Enable the Minion Connector by default:** Asset connection resiliency has been enabled by default to help with deploying systems in environments with poor connectivity. 
+- **I95-50671 Office365 traffic is not recognized by SVR Routers:** Resolved an issue where application module traffic was being miscategorized and therefore not fully qualified. Module traffic ingressing over SVR is no longer miscategorized as an internet service when the module is present on both sides.
+------
+- **I95-50708 Significant decrease in memory usage for the salt_master process:** 
+------
+- **I95-51336 App-ID stats entry not getting cleaned up after expiration:** In some cases, a session may not have installed correctly, preventing the expired App-ID stats from being removed. The App-ID stats entries are now cleaned up appropriately.
+------
+- **I95-51450 Support for 100/Full Speed/Duplex on Intel I225-V Driver NICs:** The DPDK driver has been updated to allow fixed speed and duplex configuration to work with IGC i225 NICs.
+------
+- **I95-51492 Password expiration not working:** This issue has been resolved. Adminstrators must use the global setting `configure authority password-policy lifetime N ` to indicate that all user passwords must be changed every `N` days.
+------
+- **I95-51638 Traceroute does not complete over SSR, but does using linux:** The traceroute command was unable to resolve through some network elements. The default 128T traceroute UDP port number has been changed to a more common/recognized port.
+------
+- **I95-51766 Enable TX lockup detector for bond interfaces:** The datapath lockup detection mechanism has been re-enabled to run on bond interfaces. 
+------
+- **I95-51800 Radius authentication failure - Incorrect NAS IP address:** The ability to specify the NAS-IP-Address and NAS-Identifier has been added to the data model for configuring these Radius options per node. This can be used in cases where the Radius server is configured to use an identifier, or in cases where it is necessary to match the source IP address of the Radius requests behind SSR or NAT.
+------
+- **I95-51801 The SSR is unable to see DHCP ACK for the DHCP Request sent by an EX4100:** Added an `authoritative` field for DHCP servers to enable/disable `authoritative` mode, which allows the server to send a NAK in response to unknown clients. This field is set to `true`  by default.
+------
+- **I95-51992 Multi-queue support for Bond interfaces:** Support for a bond `device-interface` to use multiple RX/TX queues has been added. 
+------
+- **I95-52104 URI escape characters handled incorrectly:** The `lookup application by-domain` and `clear app-id cache-entry url` were handling url parameters incorrectly, in lookup, creating and clearing cache entries. This has been resolved and each command now performs the correct operation.
+------
+- **I95 52105 Permissions error when attempting to `delete certificate webserver`:** Resolved an issue where `delete certificate webserver` and `create cerificate webserver` with an existing certificate were failing. On older versions of software this can be worked around by running `sudo rm -rf /etc/128technology/pki/webserver.pem`.
+------
+- **I95-52113 Application Director consumes a full core:** Resolved an overrun bug that was causing the Application Director to enter an endless loop when loading port ranges. This issue has been resolved.
+------
+- **I95-52147 Bond interface throws an exception when reconfiguring a bond interface with the same name:** When a bond device-interface was deleted the normal teardown was not properly deleting all information. When the bond interface was re-added using the same name it would fail. This fix fully deletes the earlier information and adds support for re-adding a bond device-interface (of the same name) that was previously deleted.
+------
+- **I95-52158 Spoke is rejecting hub BFD packets, and peering is unable to come up over LTE:** In a corner case where the spoke private LTE IP changes before BFD is up and the public/hub-received IP stays the same, the hub gets stuck in the init state. 
+This issue has been resolved; the LTE IP change is now handled it as a source-nat change, where the flows and actions can be recreated with the updated LTE private IP.
+------
+- **I95-52208 Metrics queries return incomplete data when FIPS is enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
+------
+- **I95-52279 Prevent VRRP Virtual MACs from being dropped by Bond PMD in LACP mode:**  Packets with VRRP virtual dest MACs are now processed by the Bond PMD when using LACP.
+------
+- **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](config_domain-based_web_filter.md/#service-matching-order)
+------
+- **I95-52305 Compacting rate limit exceeded:** Resolved memory and CPU issues resulting from attempting to compact very large application identification documents.
+------
+- **I95-52402 Router stuck in `Upgrading` state:** Resolved an issue with `conductor-only` mode, where the conductor was attempting to download the installer before the software access proxies were in place, preventing an update to the installer.
+------
+- **I95-52480 Conductor shows alarms when applications are added to the router configuration:** A condition has been added that verifies whether the node is a router or conductor before running application update and generating alarms on a conductor.
+------
+- **I95-52491 Crash in `metadata propagate egress` with indications that the PacketControlBlock was corrupted:** Resolved an issue when metadata is segmented across two packet buffers, a function used in `metadata propagate egress` discarded the packet buffer which housed all of the relevant PacketControlBlock data. the segmented packets are no longer discarded and the dataplane no longer crashes when processing a packet comprised of segmented metadata.
+------
+- **I
+
+
+
+### Caveats
+
+- **I95-52426 Incorrect behavior when configuring an IDP custom rule definition:** In a case where a user is modifying a rule to **decrease** the action type to an `alert`, alerts for that vulnerability will not work. The attack will be allowed to pass through undetected. For example, if the action `close-tcp-connection` is downgraded to `alert`, the attacks will pass through undetected. 
+
+**This behavior only occurs when decreasing the action type in the rule;** i.e.; the action `close-tcp-connection` is downgraded to `alert`.
+
+This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend avoiding this configuration and waiting for the next SSR patch release.
 
 ## Release 6.1.4-23.r2
 
