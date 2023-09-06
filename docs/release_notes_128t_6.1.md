@@ -49,6 +49,16 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 6.1.5
+
+**Release Date:** September 7, 2023
+
+### Resolved Issues
+
+- **I95-52289 Sychronize use of SSH keys between internal systems:** Newly provisioned systems now use the same SSH key for 128T and the salt-minion. This allows the Conductor to establish connectivity to the asset upon the first salt connection instead of requiring the asset to get to the running state before connecting.
+------
+- **I95-52290 Enable the Minion Connector by default:** Asset connection resiliency has been enabled by default to help with deploying systems in environments with poor connectivity. 
+
 ## Release 6.1.4-23.r2
 
 **Release Date:** July 14, 2023
