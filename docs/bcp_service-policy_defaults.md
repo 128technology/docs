@@ -3,7 +3,7 @@ title: Service Policy Baseline Configurations
 sidebar_label: Service Policy Baseline Defaults
 ---
 
-ne of the most powerful aspects of the SSR data model is the flexibility offered by a `service-policy`. Giving customers the ability to configure thresholds for when traffic should migrate from path to path based on current network status is a daunting task, however; most customers – and even application developers – are unaware of the sensitivity of their service to latency, loss, and jitter.
+One of the most powerful aspects of the SSR data model is the flexibility offered by a `service-policy`. Giving customers the ability to configure thresholds for when traffic should migrate from path to path based on current network status is a daunting task, however; most customers – and even application developers – are unaware of the sensitivity of their service to latency, loss, and jitter.
 
 This document recommends several base class `service-policy` definitions for common types of traffic. These can be used as sane starting points for configuring the SSR. Administrators should derive their own policies from these base definitions, adding in administrative preference for path selection using vectors.
 

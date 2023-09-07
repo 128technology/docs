@@ -8,7 +8,7 @@ sidebar_label: Configuration Command Guide
 
 ## `configure authority`
 
-Authority configuration is the top-most level in the 128T router configuration hierarchy.
+Authority configuration is the top-most level in the SSR configuration hierarchy.
 
 ##### Subcommands
 
@@ -45,7 +45,7 @@ Authority configuration is the top-most level in the 128T router configuration h
 | [`resource-group`](#configure-authority-resource-group) | Collect objects into a management group. |
 | [`router`](#configure-authority-router) | The router configuration element serves as a container for holding the nodes of a single deployed router, along with their policies. |
 | [`routing`](#configure-authority-routing) | authority level routing configuration |
-| [`security`](#configure-authority-security) | The security elements represent security policies for governing how and when the 128T router encrypts and/or authenticates packets. |
+| [`security`](#configure-authority-security) | The security elements represent security policies for governing how and when the SSR encrypts and/or authenticates packets. |
 | [`service`](#configure-authority-service) | The service configuration is where you define the services that reside within the authority&#x27;s tenants as well as the policies to apply to those services. |
 | [`service-class`](#configure-authority-service-class) | Defines the association between DSCP value and a priority queue. |
 | [`service-policy`](#configure-authority-service-policy) | A service policy, which defines parameters applied to services that reference the policy |
@@ -2498,17 +2498,17 @@ configure authority router <name>
 | [`icmp-probe-profile`](#configure-authority-router-icmp-probe-profile) | Profile for active ICMP probes for reachability-detection enforcement |
 | [`idp`](#configure-authority-router-idp) | Advanced IDP configuration. |
 | [`inter-node-security`](#configure-authority-router-inter-node-security) | The name of the security policy used for inter node communication between router interfaces |
-| [`location`](#configure-authority-router-location) | A descriptive location for this 128T router. |
+| [`location`](#configure-authority-router-location) | A descriptive location for this SSR. |
 | [`location-coordinates`](#configure-authority-router-location-coordinates) | The geolocation of this router in ISO 6709 format. Some examples: (1) Degrees only: +50.20361-074.00417/ (2) Degrees and minutes: +5012.22-07400.25/ or (3) Degrees, minutes, and seconds: +501213.1-0740015.1/ |
 | [`maintenance-mode`](#configure-authority-router-maintenance-mode) | When enabled, the router will be in maintenance mode and alarms related to this router will be shelved. |
 | [`management-service-generation`](#configure-authority-router-management-service-generation) | Configure Management Service Generation |
 | [`max-inter-node-way-points`](#configure-authority-router-max-inter-node-way-points) | Maximum number of way points to be allocated on inter-node path. |
 | [`name`](#configure-authority-router-name) | An identifier for the router. |
 | [`nat-pool`](#configure-authority-router-nat-pool) | A pool of shared NAT ports. |
-| [`node`](#configure-authority-router-node) | List of one or two 128T software instances, comprising a 128T router. |
+| [`node`](#configure-authority-router-node) | List of one or two SSR software instances, comprising an SSR. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`path-mtu-discovery`](#configure-authority-router-path-mtu-discovery) | Automatic path MTU discovery between nodes within the router. |
-| [`peer`](#configure-authority-router-peer) | Defines the properties associated with peer 128T routers. The peer may be another router in the same authority or a router in a different authority |
+| [`peer`](#configure-authority-router-peer) | Defines the properties associated with peer SSRs. The peer may be another router in the same authority or a router in a different authority |
 | [`rate-limit-policy`](#configure-authority-router-rate-limit-policy) | Configuration for rate limiting policy for all associated service traffic across all interfaces on a given node, when configured within a service-class. |
 | [`reachability-profile`](#configure-authority-router-reachability-profile) | Defines a traffic profile for reachability-detection enforcement |
 | [`redundancy-group`](#configure-authority-router-redundancy-group) | A group of redundant interfaces which will fail over together if one goes down for any reason. |
@@ -2516,12 +2516,12 @@ configure authority router <name>
 | [`reverse-flow-enforcement`](#configure-authority-router-reverse-flow-enforcement) | When to enforce biflow reverse fib entry check |
 | [`reverse-packet-session-resiliency`](#configure-authority-router-reverse-packet-session-resiliency) | Parameters for setting session failover behavior without presence of forward traffic. |
 | [`router-group`](#configure-authority-router-router-group) | Logical group of routers for filtering services. |
-| [`routing`](#configure-authority-router-routing) | A router-level container for all of the routing policies associated with a given 128T router deployment. Each routing element may have one and only one routing-instance. |
+| [`routing`](#configure-authority-router-routing) | A router-level container for all of the routing policies associated with a given SSR deployment. Each routing element may have one and only one routing-instance. |
 | [`service-route`](#configure-authority-router-service-route) | Defines a route for a service or an instance of a service (server or service agent). |
 | [`service-route-policy`](#configure-authority-router-service-route-policy) | Used to define the properties of service routes. These capabilities influence route selection when determining the optimal path for establishing new sessions. |
 | `show` | Show configuration data for &#x27;router&#x27; |
 | [`static-hostname-mapping`](#configure-authority-router-static-hostname-mapping) | Map hostnames to ip-address resolutions. These entries will be put in /etc/hosts. This will prevent DNS requests from being sent for these hostnames. |
-| [`system`](#configure-authority-router-system) | System group configuration. Lets administrators configure system-wide properties for their 128T router deployment. |
+| [`system`](#configure-authority-router-system) | System group configuration. Lets administrators configure system-wide properties for their SSR deployment. |
 | [`udp-transform`](#configure-authority-router-udp-transform) | UDP transform settings for interoperating with stateful TCP firewalls for nodes within the router. |
 
 ## `configure authority router administrative-group`
@@ -3726,7 +3726,7 @@ configure authority router inter-node-security [<security-ref>]
 
 ## `configure authority router location`
 
-A descriptive location for this 128T router.
+A descriptive location for this SSR.
 
 #### Usage
 
@@ -4014,7 +4014,7 @@ configure authority router nat-pool name [<string>]
 
 ## `configure authority router node`
 
-List of one or two 128T software instances, comprising a 128T router.
+List of one or two SSR software instances, comprising an SSR.
 
 #### Usage
 
@@ -4032,8 +4032,8 @@ configure authority router node <name>
 
 | command | description |
 | ------- | ----------- |
-| [`asset-id`](#configure-authority-router-node-asset-id) | A unique identifier of a 128T node used for automated provisioning |
-| [`asset-validation-enabled`](#configure-authority-router-node-asset-validation-enabled) | Validate that the asset is suitable to run 128T. |
+| [`asset-id`](#configure-authority-router-node-asset-id) | A unique identifier of an SSR node used for automated provisioning |
+| [`asset-validation-enabled`](#configure-authority-router-node-asset-validation-enabled) | Validate that the asset is suitable to run SSR. |
 | `clone` | Clone a list item |
 | `delete` | Delete configuration data |
 | [`description`](#configure-authority-router-node-description) | A description about the node. |
@@ -4050,7 +4050,7 @@ configure authority router node <name>
 | [`power-saver`](#configure-authority-router-node-power-saver) | Allow the traffic forwarding cores to sleep when there is no traffic to process |
 | [`radius`](#configure-authority-router-node-radius) | Radius authentication parameters for this node. |
 | [`reachability-detection`](#configure-authority-router-node-reachability-detection) | Layer 2 reachability detection |
-| [`role`](#configure-authority-router-node-role) | The node&#x27;s role in the 128T system. |
+| [`role`](#configure-authority-router-node-role) | The node&#x27;s role in the SSR system. |
 | [`session-processor-count`](#configure-authority-router-node-session-processor-count) | The number of threads to use for session processing when using &#x27;manual&#x27; session-processor mode. |
 | [`session-processor-mode`](#configure-authority-router-node-session-processor-mode) | The method by which the number of threads used for session processing should be determined. |
 | [`session-setup-scaling`](#configure-authority-router-node-session-setup-scaling) | Whether or not to enable session setup scaling. |
@@ -4060,7 +4060,7 @@ configure authority router node <name>
 
 ## `configure authority router node asset-id`
 
-A unique identifier of a 128T node used for automated provisioning
+A unique identifier of an SSR node used for automated provisioning
 
 #### Usage
 
@@ -4076,7 +4076,7 @@ configure authority router node asset-id [<asset-id>]
 
 ## `configure authority router node asset-validation-enabled`
 
-Validate that the asset is suitable to run 128T.
+Validate that the asset is suitable to run SSR.
 
 #### Usage
 
@@ -12494,7 +12494,7 @@ Units: seconds
 
 ## `configure authority router node role`
 
-The node&#x27;s role in the 128T system.
+The node&#x27;s role in the SSR system.
 
 #### Usage
 
@@ -13124,7 +13124,7 @@ Units: seconds
 
 ## `configure authority router peer`
 
-Defines the properties associated with peer 128T routers. The peer may be another router in the same authority or a router in a different authority
+Defines the properties associated with peer SSRs. The peer may be another router in the same authority or a router in a different authority
 
 #### Usage
 
@@ -14146,7 +14146,7 @@ configure authority router router-group [<name-id>]
 
 ## `configure authority router routing`
 
-A router-level container for all of the routing policies associated with a given 128T router deployment. Each routing element may have one and only one routing-instance.
+A router-level container for all of the routing policies associated with a given SSR deployment. Each routing element may have one and only one routing-instance.
 
 #### Usage
 
@@ -14177,7 +14177,7 @@ configure authority router routing <type>
 | [`routing-protocol`](#configure-authority-router-routing-routing-protocol) | Each entry contains configuration of a routing protocol instance. |
 | [`service-admin-distance`](#configure-authority-router-routing-service-admin-distance) | Administrative distance for routes generated from services. |
 | `show` | Show configuration data for &#x27;routing&#x27; |
-| [`static-route`](#configure-authority-router-routing-static-route) | A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the 128T router&#x27;s Routing Information Base (RIB). |
+| [`static-route`](#configure-authority-router-routing-static-route) | A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR&#x27;s Routing Information Base (RIB). |
 | [`type`](#configure-authority-router-routing-type) | The type of the routing instance. |
 | [`vrf`](#configure-authority-router-routing-vrf) | A list of virtual router and forward instances (VRF&#x27;s). |
 
@@ -17752,7 +17752,7 @@ configure authority router routing service-admin-distance [<uint8>]
 
 ## `configure authority router routing static-route`
 
-A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the 128T router&#x27;s Routing Information Base (RIB).
+A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR&#x27;s Routing Information Base (RIB).
 
 #### Usage
 
@@ -17951,7 +17951,7 @@ configure authority router routing vrf <name>
 | [`routing-protocol`](#configure-authority-router-routing-vrf-routing-protocol) | Each entry contains configuration of a routing protocol instance. |
 | [`service-admin-distance`](#configure-authority-router-routing-vrf-service-admin-distance) | Administrative distance for routes generated from services. |
 | `show` | Show configuration data for &#x27;vrf&#x27; |
-| [`static-route`](#configure-authority-router-routing-vrf-static-route) | A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the 128T router&#x27;s Routing Information Base (RIB). |
+| [`static-route`](#configure-authority-router-routing-vrf-static-route) | A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR&#x27;s Routing Information Base (RIB). |
 | [`tenant-name`](#configure-authority-router-routing-vrf-tenant-name) | List of tenants in this VRF. |
 
 ## `configure authority router routing vrf description`
@@ -21064,7 +21064,7 @@ configure authority router routing vrf service-admin-distance [<uint8>]
 
 ## `configure authority router routing vrf static-route`
 
-A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the 128T router&#x27;s Routing Information Base (RIB).
+A list of static routes. The sub-element that allows administrators to configure static routes, that will be entered into the SSR&#x27;s Routing Information Base (RIB).
 
 #### Usage
 
@@ -22197,7 +22197,7 @@ configure authority router static-hostname-mapping static-entry move ip-address 
 
 ## `configure authority router system`
 
-System group configuration. Lets administrators configure system-wide properties for their 128T router deployment.
+System group configuration. Lets administrators configure system-wide properties for their SSR deployment.
 
 ##### Subcommands
 
@@ -22210,16 +22210,16 @@ System group configuration. Lets administrators configure system-wide properties
 | `delete` | Delete configuration data |
 | [`inactivity-timer`](#configure-authority-router-system-inactivity-timer) | The amount of time a user is allowed to be idle before being automatically disconnected from the system. |
 | [`local-login`](#configure-authority-router-system-local-login) | Configure Local Login |
-| [`log-category`](#configure-authority-router-system-log-category) | Log category configuration lets administrators configure the 128T router&#x27;s log level for specific log categories, overriding the default log-level setting. |
-| [`log-level`](#configure-authority-router-system-log-level) | The log level is the degree to which the 128T router writes information into its log files, by default. WARNING: using the &#x27;trace&#x27; level will significantly impact system performance and is not recommended for production environments. The &#x27;log-category&#x27; configuration should be used instead for &#x27;trace&#x27; level of specific categories. |
-| [`metrics`](#configure-authority-router-system-metrics) | Parameters controlling metric configuration and collection. Governs various aspects of the 128T router&#x27;s data sampling for analytics purposes. |
+| [`log-category`](#configure-authority-router-system-log-category) | Log category configuration lets administrators configure the SSR&#x27;s log level for specific log categories, overriding the default log-level setting. |
+| [`log-level`](#configure-authority-router-system-log-level) | The log level is the degree to which the SSR writes information into its log files, by default. WARNING: using the &#x27;trace&#x27; level will significantly impact system performance and is not recommended for production environments. The &#x27;log-category&#x27; configuration should be used instead for &#x27;trace&#x27; level of specific categories. |
+| [`metrics`](#configure-authority-router-system-metrics) | Parameters controlling metric configuration and collection. Governs various aspects of the SSR&#x27;s data sampling for analytics purposes. |
 | [`ntp`](#configure-authority-router-system-ntp) | NTP configuration lets administrators configure information about the NTP servers within their management network. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | [`remote-login`](#configure-authority-router-system-remote-login) | Configure Remote Login |
 | [`services`](#configure-authority-router-system-services) | Address information for internal services |
 | `show` | Show configuration data for &#x27;system&#x27; |
-| [`software-update`](#configure-authority-router-system-software-update) | Configuration for 128T software updates. Supported on managed assets only. |
-| [`syslog`](#configure-authority-router-system-syslog) | Syslog configuration lets administrators configure the 128T router&#x27;s interaction with external syslog services. |
+| [`software-update`](#configure-authority-router-system-software-update) | Configuration for SSR software updates. Supported on managed assets only. |
+| [`syslog`](#configure-authority-router-system-syslog) | Syslog configuration lets administrators configure the SSR&#x27;s interaction with external syslog services. |
 
 ## `configure authority router system asset-connection-resiliency`
 
@@ -22281,7 +22281,7 @@ Configure Administration
 | `delete` | Delete configuration data |
 | [`enabled`](#configure-authority-router-system-audit-administration-enabled) | Enable/disable logging of administration events |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`persist`](#configure-authority-router-system-audit-administration-persist) | Enable/disable persistence of administration events by 128T |
+| [`persist`](#configure-authority-router-system-audit-administration-persist) | Enable/disable persistence of administration events by SSR |
 | `show` | Show configuration data for &#x27;administration&#x27; |
 
 ## `configure authority router system audit administration enabled`
@@ -22302,7 +22302,7 @@ configure authority router system audit administration enabled [<boolean>]
 
 ## `configure authority router system audit administration persist`
 
-Enable/disable persistence of administration events by 128T
+Enable/disable persistence of administration events by SSR
 
 #### Usage
 
@@ -22417,7 +22417,7 @@ Configure Security
 | `delete` | Delete configuration data |
 | [`enabled`](#configure-authority-router-system-audit-security-enabled) | Enable/disable logging of security events |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`persist`](#configure-authority-router-system-audit-security-persist) | Enable/disable persistence of security events by 128T |
+| [`persist`](#configure-authority-router-system-audit-security-persist) | Enable/disable persistence of security events by SSR |
 | `show` | Show configuration data for &#x27;security&#x27; |
 
 ## `configure authority router system audit security enabled`
@@ -22438,7 +22438,7 @@ configure authority router system audit security enabled [<boolean>]
 
 ## `configure authority router system audit security persist`
 
-Enable/disable persistence of security events by 128T
+Enable/disable persistence of security events by SSR
 
 #### Usage
 
@@ -22463,7 +22463,7 @@ Configuration for system events
 | `delete` | Delete configuration data |
 | [`enabled`](#configure-authority-router-system-audit-system-enabled) | Enable/disable logging of system events |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`persist`](#configure-authority-router-system-audit-system-persist) | Enable/disable persistence of system events by 128T |
+| [`persist`](#configure-authority-router-system-audit-system-persist) | Enable/disable persistence of system events by SSR |
 | `show` | Show configuration data for &#x27;system&#x27; |
 
 ## `configure authority router system audit system enabled`
@@ -22484,7 +22484,7 @@ configure authority router system audit system enabled [<boolean>]
 
 ## `configure authority router system audit system persist`
 
-Enable/disable persistence of system events by 128T
+Enable/disable persistence of system events by SSR
 
 #### Usage
 
@@ -22509,7 +22509,7 @@ Configuration for traffic requests
 | `delete` | Delete configuration data |
 | [`enabled`](#configure-authority-router-system-audit-traffic-enabled) | Enable/disable logging of traffic requests |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`persist`](#configure-authority-router-system-audit-traffic-persist) | Enable/disable persistence of traffic events by 128T |
+| [`persist`](#configure-authority-router-system-audit-traffic-persist) | Enable/disable persistence of traffic events by SSR |
 | `show` | Show configuration data for &#x27;traffic&#x27; |
 
 ## `configure authority router system audit traffic enabled`
@@ -22530,7 +22530,7 @@ configure authority router system audit traffic enabled [<boolean>]
 
 ## `configure authority router system audit traffic persist`
 
-Enable/disable persistence of traffic events by 128T
+Enable/disable persistence of traffic events by SSR
 
 #### Usage
 
@@ -22641,7 +22641,7 @@ configure authority router system local-login netconf session-limit-action [<enu
 
 ## `configure authority router system log-category`
 
-Log category configuration lets administrators configure the 128T router&#x27;s log level for specific log categories, overriding the default log-level setting.
+Log category configuration lets administrators configure the SSR&#x27;s log level for specific log categories, overriding the default log-level setting.
 
 #### Usage
 
@@ -22699,7 +22699,7 @@ configure authority router system log-category name [<log-category>]
 
 ## `configure authority router system log-level`
 
-The log level is the degree to which the 128T router writes information into its log files, by default. WARNING: using the &#x27;trace&#x27; level will significantly impact system performance and is not recommended for production environments. The &#x27;log-category&#x27; configuration should be used instead for &#x27;trace&#x27; level of specific categories.
+The log level is the degree to which the SSR writes information into its log files, by default. WARNING: using the &#x27;trace&#x27; level will significantly impact system performance and is not recommended for production environments. The &#x27;log-category&#x27; configuration should be used instead for &#x27;trace&#x27; level of specific categories.
 
 #### Usage
 
@@ -22715,7 +22715,7 @@ configure authority router system log-level [<log-level>]
 
 ## `configure authority router system metrics`
 
-Parameters controlling metric configuration and collection. Governs various aspects of the 128T router&#x27;s data sampling for analytics purposes.
+Parameters controlling metric configuration and collection. Governs various aspects of the SSR&#x27;s data sampling for analytics purposes.
 
 ##### Subcommands
 
@@ -23551,7 +23551,7 @@ configure authority router system services webserver server node-name [<leafref>
 
 ## `configure authority router system software-update`
 
-Configuration for 128T software updates. Supported on managed assets only.
+Configuration for SSR software updates. Supported on managed assets only.
 
 ##### Subcommands
 
@@ -23648,7 +23648,7 @@ configure authority router system software-update repository source-type [<enume
 
 ## `configure authority router system syslog`
 
-Syslog configuration lets administrators configure the 128T router&#x27;s interaction with external syslog services.
+Syslog configuration lets administrators configure the SSR&#x27;s interaction with external syslog services.
 
 ##### Subcommands
 
@@ -24940,7 +24940,7 @@ configure authority routing resource-group [<resource-group-ref>]
 
 ## `configure authority security`
 
-The security elements represent security policies for governing how and when the 128T router encrypts and/or authenticates packets.
+The security elements represent security policies for governing how and when the SSR encrypts and/or authenticates packets.
 
 #### Usage
 
@@ -26282,13 +26282,13 @@ configure authority service-policy <name>
 | [`move`](#configure-authority-service-policy-move) | Move list items |
 | [`name`](#configure-authority-service-policy-name) | An arbitrary, unique name for the service policy. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`packet-resiliency`](#configure-authority-service-policy-packet-resiliency) | Types of packet resiliency govern how the 128T router provides resilience for packets in the event of network loss. |
+| [`packet-resiliency`](#configure-authority-service-policy-packet-resiliency) | Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss. |
 | [`path-quality-filter`](#configure-authority-service-policy-path-quality-filter) | Enable/disable filtering out paths that exceed maximum quality limits. |
 | [`peer-path-resiliency`](#configure-authority-service-policy-peer-path-resiliency) | Whether or not session resiliency failover occurs among multiple peers. |
 | [`qp-preference`](#configure-authority-service-policy-qp-preference) | Preference for ordering interfaces by QP values. |
 | [`required-qp`](#configure-authority-service-policy-required-qp) | Minimum quality points required on network interface. |
 | [`service-class`](#configure-authority-service-policy-service-class) | A reference to the name of the service class to use. |
-| [`session-resiliency`](#configure-authority-service-policy-session-resiliency) | Types of session resiliency govern how the 128T router provides resilience for sessions in the event of network issues that would cause it to choose a new path for active traffic processing. |
+| [`session-resiliency`](#configure-authority-service-policy-session-resiliency) | Types of session resiliency govern how the SSR provides resilience for sessions in the event of network issues that would cause it to choose a new path for active traffic processing. |
 | `show` | Show configuration data for &#x27;service-policy&#x27; |
 | [`transport-state-enforcement`](#configure-authority-service-policy-transport-state-enforcement) | The level of enforcement applied to the transport layer. Governs the behavior of the TCP state machine when processing packets. |
 | [`vector`](#configure-authority-service-policy-vector) | List of vectors to prefer/avoid for the service. |
@@ -26609,7 +26609,7 @@ configure authority service-policy name [<service-policy-name>]
 
 ## `configure authority service-policy packet-resiliency`
 
-Types of packet resiliency govern how the 128T router provides resilience for packets in the event of network loss.
+Types of packet resiliency govern how the SSR provides resilience for packets in the event of network loss.
 
 #### Usage
 
@@ -26714,7 +26714,7 @@ configure authority service-policy service-class [<service-class-ref>]
 
 ## `configure authority service-policy session-resiliency`
 
-Types of session resiliency govern how the 128T router provides resilience for sessions in the event of network issues that would cause it to choose a new path for active traffic processing.
+Types of session resiliency govern how the SSR provides resilience for sessions in the event of network issues that would cause it to choose a new path for active traffic processing.
 
 #### Usage
 
