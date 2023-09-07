@@ -294,9 +294,6 @@ path-quality-filter  false
 [delay-limits]
 Suznjevic, M. and Saldana, J., "Delay Limits for Real-Time Services", [draft-suznjevic-tsvwg-delay-limits-00](https://www.ietf.org/archive/id/draft-suznjevic-tsvwg-delay-limits-00.txt), June 2016.
 
-[voip-mechanic]
-"Measuring MOS for VoIP Test", [MOS - Mean Opinion Score for VoIP](https://www.voipmechanic.com/mos-mean-opinion-score.htm).
-
 [RFC 4594]
 Babiarz, J., et. al., "Configuration Guidelines for DiffServ Service Classes", [RFC 4594](https://tools.ietf.org/html/rfc4594), August 2006.
 
