@@ -71,7 +71,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-50671 Office365 traffic is not recognized by SVR Routers:** Resolved an issue where application module traffic was being miscategorized and therefore not fully qualified. Module traffic ingressing over SVR is no longer miscategorized as an internet service when the module is present on both sides.
 ------
-- **I95-50708 Significant decrease in memory usage for the salt_master process:** **NEED INFO FROM DEV ON THIS - STILL WAITING**
+- **I95-50708 Significant decrease in memory usage for the salt_master process:** Resolved a data collection issue to provide clear and accurate data reporting. 
 ------
 - **I95-51336 App-ID stats entry not getting cleaned up after expiration:** In some cases, a session may not have installed correctly, preventing the expired App-ID stats from being removed. The App-ID stats entries are now cleaned up appropriately.
 ------
@@ -122,7 +122,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-52650 Asset state transition on conductor is slow for deployments with greater than 250 routers:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
 ------
-- **I95-52783 Bond devices with X710 NIC members failing to intitialize:** The X710 NIC devices use a 52-byte RSS key, and the current default is a 40-byte key. The default RSS key size has been increased to 52-bytes to resolve this issue. 
+- **I95-52783 Bond devices with X710 NIC members failing to intitialize:** Bonding interfaces were not using a large enough default RSS key to satisfy the X710 NIC devices which use a 52-byte RSS key. The default 40-byte key size has been increased to 52 bytes.
 ------
 - **I95-52816 Config Validation may generate errors in the wrong field:** Resolved an issue during the validation of BGP graceful-restart configuration settings that could lead to generating incorrect errors/warnings during configuration validation.
 ------
@@ -136,11 +136,9 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 
 ### Caveats
 
-- **I95-52426 Incorrect behavior when configuring an IDP custom rule definition:** In a case where a user is modifying a rule to **decrease** the action type to an `alert`, alerts for that vulnerability will not work. The attack will be allowed to pass through undetected. For example, if the action `close-tcp-connection` is downgraded to `alert`, the attacks will pass through undetected. 
+- **I95-52426 Incorrect behavior when configuring an IDP custom rule definition:** In a case where a user is modifying a rule to **decrease** the action type to an `alert`, alerts for that vulnerability will not work. The attack will be allowed to pass through undetected. For example, if the action `close-tcp-connection` is downgraded to `alert`, the attacks will pass through undetected.
 
-**This behavior only occurs when decreasing the action type in the rule;** i.e.; the action `close-tcp-connection` is downgraded to `alert`.
-
-This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend avoiding this configuration and waiting for the next SSR patch release.
+This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend creating a custom exception rule specifying the source and destination IP address, along with the vulnerability name, rather than downgrading a vulnerability to an `alert`. 
 
 ## Release 6.1.4-23.r2
 

@@ -3,7 +3,7 @@ title: Service Policy Baseline Configurations
 sidebar_label: Service Policy Baseline Defaults
 ---
 
-One of the most powerful aspects of the SSR data model is the flexibility offered by a `service-policy`. Giving customers the ability to configure thresholds for when traffic should migrate from path to path based on current network status is a daunting task, however; most customers – and even application developers – are unaware of the sensitivity of their service to latency, loss, and jitter.
+ne of the most powerful aspects of the SSR data model is the flexibility offered by a `service-policy`. Giving customers the ability to configure thresholds for when traffic should migrate from path to path based on current network status is a daunting task, however; most customers – and even application developers – are unaware of the sensitivity of their service to latency, loss, and jitter.
 
 This document recommends several base class `service-policy` definitions for common types of traffic. These can be used as sane starting points for configuring the SSR. Administrators should derive their own policies from these base definitions, adding in administrative preference for path selection using vectors.
 
@@ -48,7 +48,7 @@ best-effort          true
 max-latency          250
 ```
 
-VoIP media, on the other hand, is very sensitive to latency, loss, and jitter. The SSR software calculates "MOS" ([Mean Opinion Score](https://en.wikipedia.org/wiki/Mean_opinion_score)) for every peer path, as a composite metric derived by BFD metric data exchanged across the path. MOS is a "Quality of Experience" measurement, which assigns a single scalar value between 1 and 5 to an interactive session. Our benchmark for reasonable quality for VoIP media will be 3.6, which is the threshold below which many users will be disastisfied [[voip-mechanic]](https://www.voipmechanic.com/mos-mean-opinion-score.htm).
+VoIP media, on the other hand, is very sensitive to latency, loss, and jitter. The SSR software calculates "MOS" ([Mean Opinion Score](https://en.wikipedia.org/wiki/Mean_opinion_score)) for every peer path, as a composite metric derived by BFD metric data exchanged across the path. MOS is a "Quality of Experience" measurement, which assigns a single scalar value between 1 and 5 to an interactive session. Our benchmark for reasonable quality for VoIP media will be 3.6, which is the threshold below which many users will be disastisfied [MOS Estimation Using Quality Models](https://en.wikipedia.org/wiki/Mean_opinion_score#MOS_estimation_using_quality_models.
 
 Because voice and video calls are transient, we *strongly discourage* using `revertible-failover` as the `session-resiliency` setting. This can cause traffic to "ping pong" between two links during congestion or periods of "brown outs," degrading the overall quality of experience for the caller.
 
