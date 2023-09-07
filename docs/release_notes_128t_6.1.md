@@ -51,7 +51,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ## Release 6.1.5
 
-**Release Date:** September 7, 2023
+**Release Date:** September 8, 2023
 
 ### New Features
 
@@ -71,7 +71,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-50671 Office365 traffic is not recognized by SVR Routers:** Resolved an issue where application module traffic was being miscategorized and therefore not fully qualified. Module traffic ingressing over SVR is no longer miscategorized as an internet service when the module is present on both sides.
 ------
-- **I95-50708 Significant decrease in memory usage for the salt_master process:** 
+- **I95-50708 Significant decrease in memory usage for the salt_master process:** **NEED INFO FROM DEV ON THIS - STILL WAITING**
 ------
 - **I95-51336 App-ID stats entry not getting cleaned up after expiration:** In some cases, a session may not have installed correctly, preventing the expired App-ID stats from being removed. The App-ID stats entries are now cleaned up appropriately.
 ------
@@ -114,9 +114,25 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-52491 Crash in `metadata propagate egress` with indications that the PacketControlBlock was corrupted:** Resolved an issue when metadata is segmented across two packet buffers, a function used in `metadata propagate egress` discarded the packet buffer which housed all of the relevant PacketControlBlock data. the segmented packets are no longer discarded and the dataplane no longer crashes when processing a packet comprised of segmented metadata.
 ------
-- **I
-
-
+- **I95-52547 Unable to set DHCP option 160:** Resolved an issue where DHCP option 160 was being treated as a standard option and was unavailable to be defined as an option. When it was set, it would prevent the DHCP server from starting. This has been corrected. 
+------
+- **I95-52599 Conductors display different assets on different HA nodes:** If the state table of an inactive HA node becomes out of sync with the active HA node, then some assets were being skipped when parsing the asset state response. This issue has been resolved through the reporting of asset IDs from the active node state table. 
+------
+- **I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure caused the messaging mechanism to develop buffer leaks. Proper handling of exceptions now prevents buffer leaks. The control buffer capacity has been increased to better handle bursts as part of the resolution.
+------
+- **I95-52650 Asset state transition on conductor is slow for deployments with greater than 250 routers:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
+------
+- **I95-52783 Bond devices with X710 NIC members failing to intitialize:** The X710 NIC devices use a 52-byte RSS key, and the current default is a 40-byte key. The default RSS key size has been increased to 52-bytes to resolve this issue. 
+------
+- **I95-52816 Config Validation may generate errors in the wrong field:** Resolved an issue during the validation of BGP graceful-restart configuration settings that could lead to generating incorrect errors/warnings during configuration validation.
+------
+- **I95-52822 ARP fails to resolve:** An earlier change caused ports on an X553 that use SFPs to no longer correctly report link status. This issue has been resolved and the link status is now reported accurately. 
+------
+- **I95-52968 Configuration template not being applied by the conductor to a router during upgrade:** Resolved an issue where a managed router would silently fail to apply a configuration from a conductor with a greater software version if the configuration contained features that the router's earlier SSR version did not understand. Specifically, if a config field such as an enumeration, that the router was aware of, had new values added to it in the conductor's version of software then the configuration would not be applied.
+------
+- **I95-52971 Inconsistent hash and signing of RPM files:** Some small number of RPM files did not usen the `sha256` hash for sigining. This has been corrected and all RPM packages on the distribution ISO are digest sha256 for Common Criteria.
+------
+- **WAN-2090 Conductor managed SSR Applications in WAN Insights Showing up as Numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
 ### Caveats
 
