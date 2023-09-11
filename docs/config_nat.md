@@ -60,6 +60,71 @@ When multiple addresses are configured, utilizing `source-nat`, the second addre
 ## Destination NAT
 Static desination network address translation can be performed by configuring a `service-route > nat-target`. It is common to leverage the public address of the router for internal services, such as VPN. Traffic destined to the SSR, configured as a _service_ with an _address_ that matches that of the public-facing network-interface is then NATed to an internal private address on the LAN for the application. This setting only performs address translation and does not modify the port.
 
+## Static NAT
+
+SSR supports source NAT pool configurations at interface and service-route level as described in [Static NAT Bindings](#static-nat-bindings). However, this is not always sufficient to enable simple configuration for static bidirectional NAT on a pool of IP addresses. 
+
+Static NAT defines a one-to-one mapping from one IP subnet to another IP subnet. The mapping includes destination IP address translation in one direction and source IP address translation in the reverse direction. In cases where IP address overlapping is found, such as when merging networks (for example, a corporate acquisition and merger) this simple configuration change is significantly less work than changing all the local IP addresses. The diagram below illustrates this example. 
+
+![Static Nat Diagram](/img/static_nat_example.png)
+
+The `spk-lan2` network-interface is not routable (cannot send or receive traffic) in the `Corp` and `Internet` networks. The Client in `spk-lan2` has local IP of `192.168.1.0`, and overlaps with the client from `Corp` in `spk-lan1`. This will cause problems for any sessions between `hub-lan1` or `spk-lan1` to `spk-lan2`. By applying a static NAT configuration that maps `192.18.1.0/24` to `172.16.128.0/24`, sessions destined to `spk-lan2` and arriving from`Corp` or `Internet` are routed to their destination.
+
+The same process must be applied to `spk-lan1`, in this example using the remote IP address `172.16.129.0`.
+
+#### Example
+
+```
+config
+    authority
+        router      spoke
+            node       node1-spoke
+                device-interface    spk-lan2
+                    network-interface    spk-lan2
+                        bidirectional-nat    192.168.1.0/24
+                            local-ip         192.168.1.0/24
+                            remote-ip        172.16.128.0/24
+                        exit 
+                    exit
+                exit
+                
+                device-interface    spk-lan1
+                    network-interface   spk-lan1
+                        bidirectional-nat    192.168.1.0/24
+                            local-ip         192.168.1.0/24
+                            remote-ip        172.16.129.0/24
+                        exit 
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit 
+
+```
+
+### Using the GUI
+
+Set the local and remote IP addresses under Authority > Router > Node > Device Interface > Network Interface.
+
+![Network Interface](/img/static_nat_gui_net-intf.png)
+
+![Bidirectional NAT Config](/img/static_nat_gui_nat-config.png)
+
+### Show Commands
+
+For details about command output, refer to the [`show sessions`](cli_reference.md#show-sessions) and [`show sessions by-id`](cli_reference#.mdshow-sessions-by-id) commands.
+
+#### Source NAT
+- On the session ingress node, the `show sessions by-id` output has an Ingress Source NAT field where the source-nat type, NAT’d source address, NAT’d port, and protocol are displayed.
+- On the session egress node the `show sessions by-id` output has an Ingress Source NAT field where the source-nat type, NAT’d source address, NAT’d port, and protocol are displayed.
+- The `show sessions` output has `NAT IP` and `NAT Port` columns where the NAT’d source address and NAT’d source port are displayed.
+
+#### Destination NAT
+
+- On the session egress node the `show sessions by-id` output shows the NAT’d destination address in the Forward Flow `NextHop` and Reverse Flow `src ip` fields.
+- The `show sessions` output reverse flow `src ip `column also shows the NAT’d destination address.
+
 ## NAT Pools
 
 NAT pools are a construct that allow for the use of IP and port ranges to be shared across one or more network-interfaces for either source or destination NATing capabilies.
