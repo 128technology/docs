@@ -113,7 +113,7 @@ Set the local and remote IP addresses under Authority > Router > Node > Device I
 
 ### Show Commands
 
-For details about command output, refer to the [`show sessions`](cli_reference.md#show-sessions) and [`show sessions by-id`](cli_reference#.mdshow-sessions-by-id) commands.
+For details about command output, refer to the [`show sessions`](cli_reference.md#show-sessions) and [`show sessions by-id`](cli_reference.md#show-sessions-by-id) commands.
 
 #### Source NAT
 - On the session ingress node, the `show sessions by-id` output has an Ingress Source NAT field where the source-nat type, NAT’d source address, NAT’d port, and protocol are displayed.
