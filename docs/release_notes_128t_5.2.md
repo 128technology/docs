@@ -164,7 +164,7 @@ Contains fixes from: [Release 5.1.5, August 13, 2021](release_notes_128t_5.1.md#
 
 Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#release-514)
 
-###  Resolved Issues Requiring Configuration Changes and Improvements
+###  Resolved Issues Requiring Configuration Changes
 
 - **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
 ------

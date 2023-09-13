@@ -479,7 +479,7 @@ This release replaces the existing `5.1.6-1` release.
 ## Release 5.1.1
 **Release Date:** April 12, 2021
 
-### Resolved Issues Requiring Configuration Changes and Improvements
+### Resolved Issues Requiring Configuration Changes
 
 - **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.mdx). 
 
