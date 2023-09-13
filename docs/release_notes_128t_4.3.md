@@ -381,7 +381,7 @@ init[5720]: [dh00000001 | dhcp-server-ns-1:1073742075] Command "/usr/sbin/ip net
 
 ## Release 4.3.3
 
-### New Features and Improvements
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-22789** Dual LTE Support
   For information on how to configure the 128T with two LTE interfaces, please read the [How To: LTE](howto_lte.md) guide.

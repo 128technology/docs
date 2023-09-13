@@ -14,7 +14,7 @@ Alternatively, refer to the **[List of Releases](about_releases.mdx)** page for 
 ## Release 5.0.1
 **Release Date:** April 12, 2021 
 
-### New Features and Improvements
+### Resolved Issues Requiring Configuration Changes and Improvements
 
 - **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.mdx). 
 

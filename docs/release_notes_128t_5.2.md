@@ -22,7 +22,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date:** July 7, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-44769 Add Linux system logs to the Tech Support Information data:** This patch allows for customizations of the systemd journal content included in the `tech-support-info` bundle, and includes additional default content.
 ------
@@ -131,7 +131,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 **Release Date:** August 24, 2021
 Contains fixes from: [Release 5.1.5, August 13, 2021](release_notes_128t_5.1.md#release-515)
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-26075 Generate PCAP directly from Session table:** A button has been added to both the Session Debug table and the Top Sessions table that allows the user to create a PCAP file containing the specific row data from each table.
 
@@ -164,7 +164,7 @@ Contains fixes from: [Release 5.1.5, August 13, 2021](release_notes_128t_5.1.md#
 
 Contains fixes from: [Release 5.1.4, June 28, 2021](release_notes_128t_5.1.md#release-514)
 
-###  New Features and Improvements
+###  Resolved Issues Requiring Configuration Changes and Improvements
 
 - **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
 ------

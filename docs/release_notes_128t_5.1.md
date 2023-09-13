@@ -23,7 +23,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date:** March 16, 2022
 
-## New Features
+## Resolved Issues Requiring Configuration Changes
 
 - **I95-40660 Kernel Upgrade:** The OS kernel has been upgraded to address several CVEs and provide support for Wireguard and Cordoba. 
 
@@ -77,7 +77,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date:** January 18, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-39193 Extend Timeout after completion of three way handshake:** The TCP timer for the `initial-timeout` is now configurable per session-type.
 
@@ -123,7 +123,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 **Release Date:** December 9, 2021
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-35654 Improved Upgrade Workflow (GUI):** Added `Select Operation` to the router upgrade workflow, allowing users to see which versions are available based on the desired operation (either Download or Upgrade).
 ------
@@ -192,7 +192,7 @@ This release replaces the existing `5.1.6-1` release.
 
 **Release Date:** October 6, 2021
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-26075 Generate PCAP directly from Session table:** A button has been added to both the Session Debug table and the Top Sessions table that allows the user to create a PCAP file containing the specific row data from each table.
 ------
@@ -249,7 +249,7 @@ This release replaces the existing `5.1.6-1` release.
 ## Release 5.1.5
 **Release Date:** August 13, 2021
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-31265 Software Management Button on Router Page:** Users are now able to upgrade a single router from the Router Page using a button located at the top of the Router Page.
 ------
@@ -308,7 +308,7 @@ This release replaces the existing `5.1.6-1` release.
 ## Release 5.1.4
 **Release Date:** July 7, 2021
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-35414 Refresh actions now available for individual sections on the Router Page:** The Device interface, Network Interface, and Peer Paths table sections now can be refreshed independently.
 ------
@@ -383,7 +383,7 @@ This release replaces the existing `5.1.6-1` release.
 ## Release 5.1.3
 **Release Date:** May 14, 2021
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-40046 Support for [BGP over SVR on VRF](config_bgp.md#vrf-bgp-over-svr):** BGP over SVR is now supported on BGP instances inside a VRF.
 
@@ -479,7 +479,7 @@ This release replaces the existing `5.1.6-1` release.
 ## Release 5.1.1
 **Release Date:** April 12, 2021
 
-### New Features and Improvements
+### Resolved Issues Requiring Configuration Changes and Improvements
 
 - **Support for Installer 3.0, providing token-based software access.** For Installation and Upgrade information, refer to [Conductor Interactive Installation](intro_installation_bootable_media.mdx). 
 
