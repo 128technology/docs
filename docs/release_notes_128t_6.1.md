@@ -51,9 +51,9 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ## Release 6.1.5-11
 
-**Release Date:** September 13, 2023
+**Release Date:** September 14, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
 ------
@@ -131,6 +131,8 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 - **I95-52968 Configuration template not being applied by the conductor to a router during upgrade:** Resolved an issue where a managed router would silently fail to apply a configuration from a conductor with a greater software version if the configuration contained features that the router's earlier SSR version did not understand. Specifically, if a config field such as an enumeration, that the router was aware of, had new values added to it in the conductor's version of software then the configuration would not be applied.
 ------
 - **I95-52971 Inconsistent hash and signing of RPM files:** Some small number of RPM files did not usen the `sha256` hash for sigining. This has been corrected and all RPM packages on the distribution ISO are digest sha256 for Common Criteria.
+------
+- **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked. 
 ------
 - **WAN-2090 Conductor managed SSR applications in WAN Insights showing up as numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
