@@ -147,7 +147,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 
 **Release Date:** July 14, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-466 LAG/LACP Support:** Link Aggregation Groups are formed by connecting multiple ports in parallel between two devices. LACP is the protocol that defines how the group of interfaces operates. Users define the LAG interface and then configure the member device interfaces. This feature is currently in Beta; for more information, a list of supported devices and caveats, see [Link Aggregation and LACP](config_lacp.md).
 ------
@@ -284,7 +284,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 
 **Release Date:** May 12, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes. 
 ------
