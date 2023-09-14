@@ -108,7 +108,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 **Release Date: October 11, 2022**
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-41072 Enhanced Web Filtering:** Web Filtering allows administrators to limit or prevent user access to internet content. These limitations may be based on company or organization policies, or because a domain may be know to contain malicious, inappropriate, or dangerous content. Individual services and service policies can be configured on the SSR to allow or deny access to an entire domain category, or specific domains within a category. For more information, see [Web Filtering.](config_domain-based_web_filter.md)
 ------
@@ -168,7 +168,7 @@ With release 5.4.7-7 (and greater) the iso name format has changed from using `O
 
 - 128T-5.4.7-7.el7.ISO.v1.x86_64.iso
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-40195 LDAP does not allow search base to be configured correctly:** Search base parameters, filter generation, certificate assurance, and logging enhancements have been added to the `ldap-server` configuration. See [LDAP](config_ldap.md) for more information.
 ------
@@ -215,7 +215,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 **Release Date: June 28, 2022**
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-44863 Automatic Core Assignment after Reboot:** On systems where `forwarding-core-mode` is set to `automatic`, if the CPU core count changes the software will automatically recalculate the core count and allocation at reboot.
 ------
@@ -307,7 +307,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 **Release Date: May 11, 2022**
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-44847 PCLI Typo Corrections:** When a user incorrectly types a PCLI command or the name of a router or node, the error message now contains a suggestion of what command they might've wanted to run. These suggestions are seen in the form of `Did you mean ... ?`
 
@@ -409,7 +409,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 **Release Date:** February 18, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-25630 Gateway IP is required:** When creating or changing a service-route with a next-hop of a static IP net-int, a gateway IP is required. If no gateway IP has been specified, the network-interface gateway will be used. 
 ------
@@ -471,7 +471,7 @@ I95-40268, I95-41591, I95-41794, I95-41863, I95-42448, I95-43258, I95-43260, I95
 
 **Release Date:** January 27, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-39193 Extend Timeout after completion of three way handshake:** The TCP timer for the `initial-timeout` is now configurable per session-type.
 
