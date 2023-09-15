@@ -58,19 +58,22 @@ If support for more than 49,150 concurrent sessions per interface is needed, you
 When multiple addresses are configured, utilizing `source-nat`, the second address configured will only be utilized once the first is fully exhausted; so on and so forth.  Once the next configured address starts being utilized, it will remain in use until exhausted.
 
 ## Destination NAT
+
 Static desination network address translation can be performed by configuring a `service-route > nat-target`. It is common to leverage the public address of the router for internal services, such as VPN. Traffic destined to the SSR, configured as a _service_ with an _address_ that matches that of the public-facing network-interface is then NATed to an internal private address on the LAN for the application. This setting only performs address translation and does not modify the port.
 
 ## Static NAT
 
-SSR supports source NAT pool configurations at interface and service-route level as described in [Static NAT Bindings](#static-nat-bindings). However, this is not always sufficient to enable simple configuration for static bidirectional NAT on a pool of IP addresses. 
+SSR supports source NAT pool configurations at interface and service-route level as described in [Static NAT Bindings](#static-nat-bindings). However, this is not always sufficient to enable simple configuration for static bidirectional NAT between two same-sized subnets.
 
-Static NAT defines a one-to-one mapping from one IP subnet to another IP subnet. The mapping includes destination IP address translation in one direction and source IP address translation in the reverse direction. In cases where IP address overlapping is found, such as when merging networks (for example, a corporate acquisition and merger) this simple configuration change is significantly less work than changing all the local IP addresses. The diagram below illustrates this example. 
+Static NAT defines a one-to-one mapping from one IP subnet to another IP subnet. The mapping includes source IP address translation in one direction and destination IP address translation in the reverse direction. In cases where IP address overlapping is found, such as when merging networks (for example, a corporate acquisition and merger) this simple configuration change is significantly less work than changing all the local IP addresses. The diagram below illustrates this example. 
 
 ![Static Nat Diagram](/img/static_nat_example.png)
 
-The `spk-lan2` network-interface is not routable (cannot send or receive traffic) in the `Corp` and `Internet` networks. The Client in `spk-lan2` has local IP of `192.168.1.0`, and overlaps with the client from `Corp` in `spk-lan1`. This will cause problems for any sessions between `hub-lan1` or `spk-lan1` to `spk-lan2`. By applying a static NAT configuration that maps `192.18.1.0/24` to `172.16.128.0/24`, sessions destined to `spk-lan2` and arriving from`Corp` or `Internet` are routed to their destination.
+The `spk-lan2` network-interface is not routable (cannot send or receive traffic) in the `Corp` and `Internet` networks. The client in `spk-lan2` has a local IP within the `192.168.1.0/24` subnet and overlaps with another client from `Corp` in `spk-lan1`. This will cause problems for any sessions between `hub-lan1` or `spk-lan1` to `spk-lan2`. By configuring `bidirectional-nat` on `spk-lan1` and `spk-lan2`, the two `192.168.1.0/24` subnets are mapped to `172.16.128.0/24` and `172.16.129.0/24` respectively and differentiate themselves on the hub router.
 
-The same process must be applied to `spk-lan1`, in this example using the remote IP address `172.16.129.0`.
+`bidirectional-nat` provides value in two ways:
+- NAT an unroutable private IP to a routable public IP
+- NAT duplicate private IPs (on different routers/networks) to different public IPs to provide differentiation on the receiving end
 
 #### Example
 
@@ -117,13 +120,32 @@ For details about command output, refer to the [`show sessions`](cli_reference.m
 
 #### Source NAT
 - On the session ingress node, the `show sessions by-id` output has an Ingress Source NAT field where the source-nat type, NAT’d source address, NAT’d port, and protocol are displayed.
-- On the session egress node the `show sessions by-id` output has an Ingress Source NAT field where the source-nat type, NAT’d source address, NAT’d port, and protocol are displayed.
-- The `show sessions` output has `NAT IP` and `NAT Port` columns where the NAT’d source address and NAT’d source port are displayed.
+
+![Session Ingress](/img/source-nat1.png)
+
+- On the session egress node the `show sessions by-id` output has an Ingress Source NAT field where the source-nat type, NAT’d source address, NAT’d port, and protocol are displayed. 
+
+![Session Egress](/img/source-nat2.png)
+
+- The `show sessions` output has `NAT IP` and `NAT Port` columns where the NAT’d source address and NAT’d source port are displayed. 
+
+![NAT IP and Port](/img/source-nat3.png)
 
 #### Destination NAT
 
-- On the session egress node the `show sessions by-id` output shows the NAT’d destination address in the Forward Flow `NextHop` and Reverse Flow `src ip` fields.
+- On the session egress node the `show sessions by-id` output shows the NAT’d destination address in the Forward Flow `NextHop` and Reverse Flow `src ip` fields. 
+
+![Destination forward flow](/img/dest-nat1.png)
+
 - The `show sessions` output reverse flow `src ip `column also shows the NAT’d destination address.
+
+![Destination Reverse Flow Source IP](/img/dest-nat2.png)
+
+#### Version History
+
+| Release | Modification |
+| ------- | ------------ |
+| 6.2.0   | Static NAT Feature Introduced   |
 
 ## NAT Pools
 
