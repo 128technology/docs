@@ -5,7 +5,7 @@ sidebar_label: Configuring DSCP Steering
 
 When traffic is traversing an IPSec encrypted tunnel, every flow within that tunnel shares the same layer 3 headers, making them difficult to identify. 
 
-To provide identification and aid in load balancing and traffic engineering, DSCP values can be set at the tunnel endpoint. When the traffic reaches the SSR, the DSCP value is used for both traffic engineering priority and path priority for DSCP traffic steering. There are currently two IPSec tunnel types supported by the SSR; NAT traversal (NatT) and ESP.
+To provide identification and aid in load balancing and traffic engineering, DSCP values can be set at the tunnel endpoint. When the traffic reaches the SSR, the DSCP value is used for both traffic engineering priority and path priority for DSCP traffic steering.
 
 Beginning with SSR version 6.1.4, DSCP Steering is now enabled for BGP over SVR tunnels. Using the configuration below, and [configuring BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr), the child service configured for DSCP steering is now recognized and steered appropriately. 
 
@@ -107,6 +107,10 @@ network-interface foo
     exit
 exit   
 ```
+
+:::info
+DSCP steering was designed with IPSec use cases in mind. Traditionally IPSec uses ESP or UDP (for NAT-T) as transport, and the examples provided are the recommended configuration. In use cases beyond IPSec where DSCP steering may be useful, other transports such as `icmp`, `tcp`, and `gre` can be configured for DSCP Steering treatment as well.
+:::
 
 ### Service Configuration
 

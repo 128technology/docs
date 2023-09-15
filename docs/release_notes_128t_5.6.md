@@ -32,7 +32,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 **Release Date:** August 29, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-52198 Handle incoming public keys from peer conductor node:** Added functionality to allow conductor nodes to share the authorized keys of managed routers between each other. If the SSH public key is retrieved from a managed router by one conductor node, then it is automatically shared with its conductor peer node.
 ------
@@ -72,7 +72,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 **Release Date:** July 19, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-50949 Add packet buffer tracking to help analyze buffer exhaustion:** Packet buffer location tracking has been added, and the following PCLI commands have been created for buffer tracking.
 	- `show packet-buffer locations`
@@ -137,7 +137,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 **Release Date:** May 25, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes. 
 ------
@@ -259,7 +259,7 @@ and there are established flows for any of these services, a link flap triggerin
 
 **Release Date:** March 16, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-48928 Set Time using PCLI command:** Add a new PCLI command `set time` which allows an admin to bootstrap a system without NTP connectivity. The PCLI uses the date(1) shell command and accepts a wide variety of inputs. To see more documentation about the date format see setting the time or the -d option on options for date.
 ------
@@ -343,7 +343,7 @@ and there are established flows for any of these services, a link flap triggerin
 
 **Release Date:** January 18, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-47947 Increase max CoreDump size to 4GB:** The maximum size of coredumps now defaults to 4G. This value can be configured in environment config by modifying the `maxCoredumpSize` field of the new `crashReporting` object. Any manual modifications to `coredump.conf` will be overwritten whenever the service is started. 
 
@@ -445,7 +445,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 **Release Date:** November 18, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-48223 Add Application-specific information to `show sessions by-id`:** The following information has been added to `show sessions by-id`: 
 	- domainName
@@ -551,7 +551,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 **Release Date:** October 4, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-35571 Enhanced Syslog:** The SSR can be configured to send system generated events over a secure TLS or TCP connection to a remote-logging server for analysis and storage. For more information, see [Secure Syslog Transport](config_audit_event.md#secure-syslog-transport)
 ------
@@ -637,7 +637,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 **Release Date:** August 1, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-35610 Session Failover without a Forward Packet:** A keep-alive mechanism has been added for flow moves. When flow move is triggered, the SSR detects inactivity in forward traffic and generates a keep-alive packet in the forward direction.
 ------
