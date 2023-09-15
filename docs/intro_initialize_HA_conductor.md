@@ -32,7 +32,7 @@ Click on the link of the public cloud provider where you want to perform the Ses
 
 ## Deploying the Primary Node Conductor – Node A
 
-If the SSR software is not already installed on the Node A VM, launch the SSR installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer.md). After the installation is complete, the system will restart and the initializer will launch automatically.
+If the SSR software is not already installed on the Node A VM, launch the SSR installer using the command `install128t` and follow the installation procedure. After the installation is complete, the system will restart and the initializer will launch automatically.
 
 If the software is already installed, launch the initializer from the command line using `initialize128t`.
 
@@ -80,7 +80,7 @@ Node A is now ready to allow access to Node B in order to form the HA pair. The 
 
 ## Deploying the Secondary Node Conductor – Node B
 
-Log in to the Node B VM. If the SSR software is not already installed, launch the SSR installer using the command `install128t` and follow the [Installation Procedure](intro_installation_installer.md). After the installation is complete, the system will restart and the initializer will launch automatically.
+Log in to the Node B VM. If the SSR software is not already installed, launch the SSR installer using the command `install128t` and follow the installation procedure. After the installation is complete, the system will restart and the initializer will launch automatically.
 If the software is already installed, launch the initializer from the command line using `initialize128t.`
 
 1. On the SSR Initializer Wizard, use the space bar to select the Conductor role for the SSR node and press the Enter key to select OK.

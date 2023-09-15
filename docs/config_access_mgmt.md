@@ -28,8 +28,6 @@ From the terminal window:
 	- `ctrl+a`
 	- `d`
 
-For additional information about the manual installation process with Screen, please refer to [Manually Installing the SSR](intro_installation_installer.md).
-
 ### Additional SSH Parameters
 - SSH Mode Verification performs strict mode checking of home directory configuration files, as well as user-specific SSH configuration files to prevent one user from logging on to the system as another user.
 - SSH logon by a non-certificate-trusted host is not allowed. 
