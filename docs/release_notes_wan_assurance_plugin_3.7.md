@@ -6,13 +6,18 @@ sidebar_label: '3.7'
 **Release Date:** Aug 20, 2023
 
 ### New Features
-- **WAN-2005 MARVIS actions for known device failures**
+- **WAN-1079 Report tunnel status events for IPSec tunnels**
 
-For known device failures such as Malicious Driver Detection and Buffer Pool Exhaustion, the SSR router will send notification about those events to the MIST cloud for alerting. In addition, older firmware versions without the fix for these issues will automatically restart the system to mitigate the problem along with notifying the MIST cloud.
+The system will report the tunnel status events along with reason for tunnel down for routers running the [IPSec plugin version 3.5.0](plugin_ipsec_client.md#release-350) or higher.
 
 - **WAN-1851 Report path health metrics for local breakout paths**
 
 SSR will report health metrics such as latency, loss and jitter for the individual WAN paths which can be accessed via MIST org level WAN metric APIs.
+
+- **WAN-2005 MARVIS actions for known device failures**
+
+For known device failures such as Malicious Driver Detection and Buffer Pool Exhaustion, the SSR router will send notification about those events to the MIST cloud for alerting. In addition, older firmware versions without the fix for these issues will automatically restart the system to mitigate the problem along with notifying the MIST cloud.
+
 
 ### Resolved Issues
 

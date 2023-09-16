@@ -31,13 +31,13 @@ module.exports = {
       "conductor_upgrade",
       "howto_conductor_migration",
     ],
-    "Router Installation": [  
+    "Router Installation": [
       "intro_installation_bootable_media",
       "intro_basic_router_config",
       "intro_otp_iso_install",
       "intro_install_quickstart_otpiso",
       "onboard_ssr_to_conductor",
-      "onboard_ssr_device_otp",  
+      "onboard_ssr_device_otp",
     ],
     "Image-Based Installation": [
       "intro_installation_image",
@@ -128,7 +128,7 @@ module.exports = {
           "config_dscp_steering",
           "config_dscp_preservation",
           "config_vrf_learning",
-          "config_audit_event", 
+          "config_audit_event",
           "config_dns_proxy",
           "config_forward_error_correction",
           "config_management_over_forwarding",
@@ -275,7 +275,7 @@ module.exports = {
       "bcp_tenants",
     ],
     "CLI and Element Reference": [
-      "cli_reference",
+      // "cli_reference",
       "config_command_guide",
       "config_reference_guide",
       "cli_stats_reference",
