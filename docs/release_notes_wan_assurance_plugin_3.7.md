@@ -2,6 +2,65 @@
 title: WAN Assurance Plugin 3.7 Release Notes
 sidebar_label: '3.7'
 ---
+## Release 3.7.4
+**Release Date:** Aug 20, 2023
+
+### New Features
+- **WAN-2005 MARVIS actions for known device failures**
+
+For known device failures such as Malicious Driver Detection and Buffer Pool Exhaustion, the SSR router will send notification about those events to the MIST cloud for alerting. In addition, older firmware versions without the fix for these issues will automatically restart the system to mitigate the problem along with notifying the MIST cloud.
+
+- **WAN-1851 Report path health metrics for local breakout paths**
+
+SSR will report health metrics such as latency, loss and jitter for the individual WAN paths which can be accessed via MIST org level WAN metric APIs.
+
+### Resolved Issues
+
+- **WAN-1634 The mist-agent is logging stack traces with retries**
+
+  _**Resolution:**_ Cleaned up some left over debugging code which was causing the stack trace to be logged on the system.
+
+- **WAN-1744 DHCP Usage Statistics Leased IPs and Available IPs show impossible values**
+
+  _**Resolution:**_ Better handling of the negative value conditions when leases have been reclaimed by the DHCP server which resulted in the negative values to be reported.
+
+- **WAN-1753 The cloud-intel-agent service is running even when MIST WAN assurance is not enabled**
+
+  _**Resolution:**_ The service will no longer be launched on system startup automatically unless the WAN assurance plugin is enabled.
+
+- **WAN-1817 Releasing conductor managed SSR from MIST wipes config**
+
+  _**Resolution:**_ The system will now skip factory reset for a conductor managed greenfield device .
+
+- **WAN-1879 DHCP events are clobbered when same DHCP server name is used for multiple device interfaces**
+
+  _**Resolution:**_ The interface name is made part of the key for tracking DHCP server events to allow both events to be sent.
+
+- **WAN-1933 The URL filtering status is not getting updated in MIST for conductor managed devices**
+
+  _**Resolution:**_ Added support for sending the URL filtering status for routers running SSR version < 6.1.0.
+
+- **WAN-1944 The cloud-intel agent does not honor the configured log level**
+
+  _**Resolution:**_ The log-level configuration setting is correctly propagated to teh cloud-intel-agent.
+
+- **WAN-2051 The DHCP client reports as unresolved even after a valid lease is acquired**
+
+  _**Resolution:**_ SSR generates multiple events during some transition states which are now better accounted for when sending the data to MIST cloud.
+
+- **WAN-2128 Router is not showing MIST stats after a site power outage**
+
+  _**Resolution:**_ Two separate processes were doing cleanup and config generation for generating metrics in the same disk location causing one of the config files to get erased. The interaction between the two services has been made more seamless to avoid this race condition.
+
+- **WAN-2244 Mist agent crash during onboarding of greenfield devices**
+
+  _**Resolution:**_ The underlying crash has been fix by adding better error handling during the greenfield onboarding of SSR devices.
+
+- **WAN-2291 Mist agent crash when performing health check for whitebox devices**
+
+  _**Resolution:**_ The logic to perform the health check has been made more robust to prevent the underlying crash.
+
+
 ## Release 3.7.3
 **Release Date:** May 25, 2023
 
