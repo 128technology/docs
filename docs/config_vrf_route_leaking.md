@@ -21,9 +21,7 @@ The Route Distinguisher (RD) is an identification number, used to create a disti
 ### Route Target
 The Route Target (RT) identifies one or more routers that may receive a set of routes carried by BGP. There should be an understanding between the routers what the RT represents. In the example below, we use the local AS number (65000 from the private AS number space), and append a logical value; 1 for `vrfA` and 2 for `vrfB`. This construction makes it fairly easy to understand.  
 
-This architecture depends on an underlying MPLS transport network, so that traffic from different VRFs (with overlapping IP address space) can be tunneled through the network.
-The SSR does not have MPLS support. 
-Instead of MPLS tunneling, the SSR will use SVR and the tenant concept to enable tunnel-free forwarding of VPN traffic. The tenant identifies the VRF and provides functionality similar to the VPN label in the RFC 4364 architecture. 
+The RFC 4364 architecture for VPN route exchange via BGP depends on an underlying MPLS transport network, so that traffic from different VRFs (with overlapping IP address space) can be tunneled through the network. The SSR does not use MPLS for this purpose. Instead of MPLS tunneling, the SSR uses SVR and the tenant concept to enable tunnel-free forwarding of VPN traffic. The tenant identifies the VRF and provides functionality similar to the VPN label in the RFC 4364 architecture. 
 
 ## Configuration
 
@@ -51,7 +49,6 @@ config
                     routing-protocol    bgp
                         type            bgp
                         local-as        65000
-                        router-id       router-boston
                         address-family     ipv4-unicast
                             afi-safi       ipv4-unicast
                             vpn-export
@@ -60,6 +57,9 @@ config
                             exit
                             vpn-import
                                 vpn-import-route-target    65000:2
+                            exit
+                            redistribute     connected
+                                protocol     connected
                             exit
                         exit
                         address-family       ipv6-unicast
@@ -71,9 +71,9 @@ config
                             vpn-import
                                  vpn-import-route-target     65000:2
                             exit
-                        exit
-                        redistribute connected
-                            protocol connected
+                            redistribute     connected
+                                protocol     connected
+                            exit
                         exit
                     exit
                 exit
@@ -91,7 +91,6 @@ config
                         routing-protocol    bgp
                             type bgp
                             local-as     65000
-                            router-id    router-boston
                             address-family    ipv4-unicast
                                 afi-safi      ipv4-unicast
                                 vpn-export
@@ -101,6 +100,9 @@ config
                                 vpn-import
                                     vpn-import-route-target   65000:1
                                 exit
+                                redistribute     connected
+                                    protocol     connected
+                                exit                                
                             exit
                             address-family     ipv6-unicast
                                 afi-safi       ipv6-unicast
@@ -174,42 +176,8 @@ Use the following configuration process to allow routes from VRF A on SSR-MZ to 
                exit
 
 ```
-3. Configure the VPN address family on each BGP neighbor. This allows vrfA on SSR-DZ to import the shared routes.
 
-```
-            router SSR-MZ
-                routing default-instance
-                    type default-instance
-                    interface loopback
-	            		name loopback
-		                ip-address SSR-MZ
-	                exit
-	                routing-protocol bgp
-		                type bgp
-		                local-as 65000
-		                router-id 16.0.0.2
-		                exit
-		                neighbor SSR-DZ
-		                    neighbor-address SSR-MZ
-			                neighbor-as 65000
-			                transport
-			                    local-address
-		                        routing-interface loopback
-		                    exit
-	                    exit
-	                    address-family ipv4-vpn
-	                        afi-safi ipv4-vpn
-		                    next-hop-self true
-	                    exit
-	                    address-family ipv6-vpn
-	                        afi-safi ipv6-vpn
-	                        next-hop-self true
-	                    exit
-	                    exit
-	                exit
-```
-
-4. Configure the route import from the VPN RIB into vrfA on SSR-DZ
+3. Configure the route import from the VPN RIB into vrfA on SSR-DZ
 - Select what routes to import by specifying the same RT as in the previous steps
 - Optionally specify an import policy. (more steps)
 
@@ -236,24 +204,25 @@ Use the following configuration process to allow routes from VRF A on SSR-MZ to 
 			                address-family ipv6-unicast
 			                	redistribute connected
 			                		protocol connected
+		                        exit
+		                        afi-safi ipv6-unicast
+		                        vpn-export
+			                        route-distinguisher 16.0.0.3:201
+			                        vpn-export-route-target 65000:1
+		                        exit
+		                	    vpn-import
+		                            vpn-import-route-target 65000:1
+		                        exit
 		                    exit
-		                    afi-safi ipv6-unicast
-		                    vpn-export
-			                    route-distinguisher 16.0.0.3:201
-			                    vpn-export-route-target 65000:1
-		                    exit
-		                	vpn-import
-		                        vpn-import-route-target 65000:1
-		                    exit
-		                exit
-	                    redistribute connected
-	                        protocol connected
+	                        redistribute connected
+	                            protocol connected
+                            exit
 	                    exit
 	                exit
 	            exit
 ```
 
-5. Configure the exchange of BGP VPN routes between SSR-MZ and SSR-DZ. Configure the VPN address family on each BGP neighbor. If the routers are direct BGP neighbors, the BGP peering is done using each router’s default VRF, where the VPN RIB is located. The result is the exchange of routes between SSR-MZ and SSR-DZ from the VPN RIB, allowing the BGP policy mechanisms to be available to select the subset of the VPN routes for exchange, and for modifying their attributes.
+4. Configure the exchange of BGP VPN routes between SSR-MZ and SSR-DZ. Configure the VPN address family on each BGP neighbor. If the routers are direct BGP neighbors, the BGP peering is done using each router’s default VRF, where the VPN RIB is located. The result is the exchange of routes between SSR-MZ and SSR-DZ from the VPN RIB, allowing the BGP policy mechanisms to be available to select the subset of the VPN routes for exchange, and for modifying their attributes.
 
 ```
 		router SSR-DZ
@@ -384,9 +353,7 @@ The following commands are used to configure VRF Route Sharing.
 #### `address-family ipv4-vpn`
 
 `address-family ipv4-vpn` can only be specified for BGP neighbors in the default VRF. All the configuration elements under `address-family ipv4-vpn` are the same as under the existing `address-family ipv4-unicast` configuration element. When this address family is configured and the BGP neighbor router has an equivalent configuration, the VPN RIB routes will be exchanged with the neighbor.
-Additionally, the presence of this address family does influence the BGP service generation on the conductor: if this is a BGP-over-SVR neighbor, then the generated BGP service for this router will have additional access-policy entries to allow all VRF BGP speaker tenants of the neighbor router.
 
 #### `address-family ipv6-vpn`
 
 `address-family ipv6-vpn` can only be specified for BGP neighbors in the default VRF. All the configuration elements under `address-family ipv6-vpn` are the same as under the existing `address-family ipv4-unicast` configuration element. When this address family is configured and the BGP neighbor router has an equivalent configuration, the VPN RIB routes will be exchanged with the neighbor.
-Additionally, the presence of this address family does influence the BGP service generation on the conductor: if this is a BGP-over-SVR neighbor, then the generated BGP service for this router will have additional access-policy entries to allow all VRF BGP speaker tenants of the neighbor router.
