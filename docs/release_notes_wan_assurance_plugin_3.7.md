@@ -3,7 +3,8 @@ title: WAN Assurance Plugin 3.7 Release Notes
 sidebar_label: '3.7'
 ---
 ## Release 3.7.4
-**Release Date:** Aug 20, 2023
+
+**Release Date:** September 20, 2023
 
 ### New Features
 - **WAN-1079 Report tunnel status events for IPSec tunnels**
