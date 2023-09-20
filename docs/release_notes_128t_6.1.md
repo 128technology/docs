@@ -51,7 +51,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ## Release 6.1.5-11
 
-**Release Date:** September 14, 2023
+**Release Date:** September 22, 2023
 
 ### Resolved Issues Requiring Configuration Changes
 
@@ -95,8 +95,6 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-52113 Application Identification on the SSR runs at 100% CPU utilization:** Resolved an overrun bug that was causing the SSR to enter a loop when loading port ranges. This issue has been resolved.
 ------
-- **I95-52147 Bond interface throws an exception when reconfiguring a bond interface with the same name:** When a bond device-interface was deleted the normal teardown was not properly deleting all information. When the bond interface was re-added using the same name it would fail. This fix fully deletes the earlier information and adds support for re-adding a bond device-interface (of the same name) that was previously deleted.
-------
 - **I95-52158 Spoke is rejecting hub BFD packets, and peering is unable to come up over LTE:** In a corner case where the spoke private LTE IP changes before BFD is up and the public/hub-received IP stays the same, the hub gets stuck in the init state. 
 This issue has been resolved; the LTE IP change is now handled it as a source-nat change, where the flows and actions can be recreated with the updated LTE private IP.
 ------
@@ -121,8 +119,6 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 - **I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure caused the messaging mechanism to develop buffer leaks. Proper handling of exceptions now prevents buffer leaks. The control buffer capacity has been increased to better handle bursts as part of the resolution.
 ------
 - **I95-52650 Asset state transition on conductor is slow for deployments with greater than 250 routers:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
-------
-- **I95-52783 Bond devices with X710 NIC members failing to intitialize:** Bonding interfaces were not using a large enough default RSS key to satisfy the X710 NIC devices which use a 52-byte RSS key. The default 40-byte key size has been increased to 52 bytes.
 ------
 - **I95-52816 Config Validation may generate errors in the wrong field:** Resolved an issue during the validation of BGP graceful-restart configuration settings that could lead to generating incorrect errors/warnings during configuration validation.
 ------
