@@ -9,15 +9,17 @@ The word "leak" implies a break or a breach, and in some cases, route leaking ca
 
 ## How It Works
 
-To exchange routes between a VRF on one SSR and a VRF on another SSR, a dedicated BGP session must be configured between the VRF BGP instances of each SSR. This configuration  allows each VRF to share and copy the designated routes.
+The exchange of routes between a VRF on one SSR and a VRF on another SSR is achieved using a single BGP session in the default VRF, where the VPN address family carries the routes for multiple VRFs via that one BGP session. This configuration allows each VRF to share and copy the designated routes.
+
+achieved with a single BGP session in the default VRF, using the VPN address family to carry the routes for multiple VRFs via that one BGP session.
 
 Only one instance of the BGP VPN RIB route table exists on a router within the default VRF. It can be modified to hold routes from multiple VRFs using a combination of the IP prefix and an 8-byte Route Distinguisher (RD). The RD must be configured for each VRF that is meant to export routes into the VPN table. To identify which VPN routes are imported to a VRF, a Route Target (RT) is identified. The RT is a BGP extended community attribute that identifies both the VPN RIB where the routes will be shared, and is used to identify the routes to be imported to a VRF.  
 
 ### Route Distinguisher
-The Route Distinguisher is simply an identification number, used to create a distinct route to a common IPv4 address prefix. It does not have or need to have any inherent value. In the example below, we use the router-ID and a vlan-id from the VRF. 
+The Route Distinguisher (RD) is an identification number, used to create a distinct route to a common IPv4 address prefix. In the example below, we use the router-ID and a vlan-id from the VRF, but any number or name can be used.  
 
 ### Route Target
-The Route Target identifies one or more routers that may receive a set of routes carried by BGP. There should be an understanding between the routers what the RT represents. In the example below, we use the local AS number (65000 from the private AS number space), and append a logical value; 1 for `vrfA` and 2 for `vrfB`. This construction makes it fairly easy to understand.  
+The Route Target (RT) identifies one or more routers that may receive a set of routes carried by BGP. There should be an understanding between the routers what the RT represents. In the example below, we use the local AS number (65000 from the private AS number space), and append a logical value; 1 for `vrfA` and 2 for `vrfB`. This construction makes it fairly easy to understand.  
 
 This architecture depends on an underlying MPLS transport network, so that traffic from different VRFs (with overlapping IP address space) can be tunneled through the network.
 The SSR does not have MPLS support. 
@@ -27,11 +29,11 @@ Instead of MPLS tunneling, the SSR will use SVR and the tenant concept to enable
 
 Route leaking can be configured for any of the following scenarios.
 
-### VRF Route Sharing within a Router
+### VRF Route Sharing Within a Router
 
 To share routes between VRF A and VRF B on the same SSR, use the following process:
 
-1. Configure an RD for VRF A.
+1. Configure a `route-distinguisher` for VRF A.
 2. Configure the route export from VRF A into the VPN RIB 
 - Specify the RT to attach to the exported routes 
 - Optionally specify an export policy. 
@@ -48,7 +50,7 @@ config
                     tenant-name      tenantA
                     routing-protocol    bgp
                         type            bgp
-                        local-as        ${BGP_AS}
+                        local-as        65000
                         router-id       router-boston
                         address-family     ipv4-unicast
                             afi-safi       ipv4-unicast
@@ -77,7 +79,6 @@ config
                 exit
 ```
 
-
 3. Configure an RD for VRF B.
 4. Configure the route import from the VPN RIB into VRF B 
 - Specify the RT to attach to the exported routes 
@@ -89,7 +90,7 @@ config
                     tenant-name         tenantB
                         routing-protocol    bgp
                             type bgp
-                            local-as     ${BGP_AS}
+                            local-as     65000
                             router-id    router-boston
                             address-family    ipv4-unicast
                                 afi-safi      ipv4-unicast
@@ -128,7 +129,7 @@ config
 - Route leaking is only allowed with BGP routes, however, BGP neighbors do not need to be configured. If static, connected, or OSPF routes of a VRF are to be shared, they first need to be redistributed into BGP. 
 
 
-### VRF Route Sharing between different Routers
+### VRF Route Sharing Between Different Routers
 Use the following configuration process to allow routes from VRF A on SSR-MZ to appear in VRF A on SSR-DZ. 
 
 1. Configure VRF A on SSR-MZ, and identify the RD and RT.
@@ -144,7 +145,7 @@ Use the following configuration process to allow routes from VRF A on SSR-MZ to 
                    tenant-name tenantA
                    routing-protocol bgp
                        type bgp
-                       local-as ${BGP_AS}
+                       local-as 65000
                        router-id 16.0.0.2
                        address-family ipv4-unicast
                            afi-safi ipv4-unicast
@@ -185,20 +186,12 @@ Use the following configuration process to allow routes from VRF A on SSR-MZ to 
 	                exit
 	                routing-protocol bgp
 		                type bgp
-		                local-as ${BGP_AS}
+		                local-as 65000
 		                router-id 16.0.0.2
-		                graceful-restart
-		                    restart-time ${BGP_GRACEFUL_RESTART_TIME}
-			                stale-routes-time ${BGP_STALE_ROUTES_TIME}
 		                exit
 		                neighbor SSR-DZ
 		                    neighbor-address SSR-MZ
-			                neighbor-as ${BGP_AS}
-			                timers
-			                    hold-time ${BGP_HOLD_TIME}
-				                keepalive-interval ${BGP_KEEPALIVE_INTERVAL}
-				                minimum-advertisement-interval 0
-			                exit
+			                neighbor-as 65000
 			                transport
 			                    local-address
 		                        routing-interface loopback
@@ -228,7 +221,7 @@ Use the following configuration process to allow routes from VRF A on SSR-MZ to 
                     tenant-name tenantA
                     routing-protocol bgp
                     	type bgp
-	                    local-as ${BGP_AS}
+	                    local-as 65000
 	                	router-id 16.0.0.3
 		                    address-family ipv4-unicast
 			                	afi-safi ipv4-unicast
@@ -272,21 +265,12 @@ Use the following configuration process to allow routes from VRF A on SSR-MZ to 
 					exit
 					routing-protocol bgp
 						type bgp
-		                local-as ${BGP_AS}
+		                local-as 65000
 		                router-id 16.0.0.3
-			            graceful-restart
-			                restart-time ${BGP_GRACEFUL_RESTART_TIME}
-				            stale-routes-time ${BGP_STALE_ROUTES_TIME}
-		                exit
-		                neighbor SSR-MZ
+			            neighbor SSR-MZ
 		                    neighbor-address ${DUT2_ROUTER_ID}
-			                    neighbor-as ${BGP_AS}
-				                timers
-				                    hold-time ${BGP_HOLD_TIME}
-				                    keepalive-interval ${BGP_KEEPALIVE_INTERVAL}
-					                minimum-advertisement-interval 0
-					            exit
-								transport
+			                    neighbor-as 65000
+				                transport
 									local-address
 										routing-interface loopback
 									exit
