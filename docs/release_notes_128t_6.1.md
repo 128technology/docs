@@ -49,7 +49,7 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 6.1.5-11
+## Release 6.1.5-14
 
 **Release Date:** September 22, 2023
 
@@ -100,8 +100,6 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-52208 Metrics queries return incomplete data when FIPS is enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
 ------
-- **I95-52279 Prevent VRRP Virtual MACs from being dropped by Bond interface in LACP mode:**  Packets with VRRP virtual dest MACs are now processed by the Bond interface when using LACP.
-------
 - **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](config_domain-based_web_filter.md/#service-matching-order)
 ------
 - **I95-52305 High CPU and memory utilization when Application Identification is enabled:** Resolved memory and CPU issues resulting from attempting to compact very large application identification documents.
@@ -137,7 +135,13 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 - **I95-52426 Incorrect behavior when configuring an IDP custom rule definition:** In a case where a user is modifying a rule to **decrease** the action type to an `alert`, alerts for that vulnerability will not work. The attack will be allowed to pass through undetected. For example, if the action `close-tcp-connection` is downgraded to `alert`, the attacks will pass through undetected.
 This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend creating a custom exception rule specifying the source and destination IP address, along with the vulnerability name, rather than downgrading a vulnerability to an `alert`. 
 ------
+- **I95-52977 Mellanox NIC Port Appropriation:** Port 4791 is an IANA reserved port for ROCEv2 and should not be used for user traffic. 
+------
 - **I95-53124 Sessions destined to private IP address (RFC1918) are incorrectly reported using the application name as the service name:** We have identified an issue where sessions destined to private IP address (RFC1918), are incorrectly reported with the application name as the service name, even if the traffic is HTTP/HTTPS. Session traffic continues to follow the appropriate service / routing profile, but the stats reported may not accurately reflect the learned applications. This is actively being addressed and will be resolved in a future patch.
+
+### Known Issues
+
+- **I95-52977 Mellanox NIC Port Appropriation:** Port 4791 is an IANA reserved port for ROCEv2 and should not be used for user traffic. 
 
 ## Release 6.1.4-23.r2
 
