@@ -19,6 +19,9 @@ SSR will report health metrics such as latency, loss and jitter for the individu
 
 For known device failures such as Malicious Driver Detection and Buffer Pool Exhaustion, the SSR router will send notification about those events to the MIST cloud for alerting. In addition, older firmware versions without the fix for these issues will automatically restart the system to mitigate the problem along with notifying the MIST cloud.
 
+- **WAN-2369 Add support for upcoming AWS Australia and GCP UK cloud environments**
+
+Support for onboarding to the upcoming AWS Australia and GCP UK environments was added.
 
 ### Resolved Issues
 
