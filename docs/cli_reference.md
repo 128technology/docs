@@ -516,7 +516,9 @@ admin@labsystem1.fiedler#
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
 | [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -746,7 +748,9 @@ Forces re-generation of all automatically generated configuration items, and sta
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
 | [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -1015,7 +1019,9 @@ delete config exported [force] <name>
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
 | [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -1604,7 +1610,9 @@ export config <datastore> <export-name>
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
 | [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -1703,7 +1711,9 @@ import config [force] <name>
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
 | [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -1734,13 +1744,14 @@ Import SSR ISO to the local repository
 #### Usage
 
 ```
-import iso [force] [verbose] {hunt | filepath <filepath>}
+import iso [check-rpm-signature <check-rpm-signature>] [force] [verbose] {hunt | filepath <filepath>}
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| check-rpm-signature |  (default: required) |
 | filepath | The absolute filepath to the ISO |
 | force | Skip confirmation prompt |
 | hunt | Find and import all ISOs from the filesystem |
@@ -2347,7 +2358,9 @@ restore config factory-default [force]
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
 | [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -2403,7 +2416,9 @@ restore config running [force] [<username>]
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -2681,7 +2696,7 @@ Gather system information for technical support.
 #### Usage
 
 ```
-save tech-support-info [force] [manifest <manifest>] [router <router>] [node <node>] [<prefix>]
+save tech-support-info [force] [manifest <manifest>] [since <since>] [router <router>] [node <node>] [<prefix>]
 ```
 
 ##### Keyword Arguments
@@ -2692,6 +2707,7 @@ save tech-support-info [force] [manifest <manifest>] [router <router>] [node <no
 | manifest | The manifest describing the commands and logs to collect (default: summary) |
 | node | The name of the node |
 | router | The name of the router (default: &lt;current router&gt;) |
+| since | Only collect logs created after the provided time. Can either be a timestamp or a delta, such as 45m, 1d, or 1mo [type: timestamp] (default: 1d) |
 
 ##### Positional Arguments
 
@@ -3491,7 +3507,9 @@ set config encryption [{router <router> | resource-group <resource-group>}] [for
 | [`import config`](#import-config) | Import a configuration as the candidate config. |
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -3545,6 +3563,77 @@ Configuration encryption was successfully disabled.
 | ------- | ----------------------------|
 | 4.5.0   | This feature was introduced |
 
+## `set config local-override`
+
+This command enables the local config override mode on an SSR Managed Router.
+
+#### Description
+
+Engaging local config override mode allows the user to make changes to the local configuration that will not be overwritten by the Conductor until local config override mode is disabled.
+
+
+#### Usage
+
+```
+set config local-override [force] router <router>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| router | The router for which to enable local override |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`disabled`](#set-config-local-override-disabled) | This command disables the local config override mode on an SSR Managed Router. |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`compare config`](#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
+| [`show config version`](#show-config-version) | Display running configuration version. |
+| [`show stats config`](STATS.md#show-stats-config) | Metrics pertaining to the get-config RPC |
+
+#### Description
+
+Engaging local config override mode allows the user to make changes to the local configuration that will not be overwritten by the Conductor until local config override mode is disabled.
+
+## `set config local-override disabled`
+
+This command disables the local config override mode on an SSR Managed Router.
+
+#### Usage
+
+```
+set config local-override disabled [force] router <router>
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt |
+| router | The router on which to disable local override |
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.2.0   | This feature was introduced |
 
 
 ## `set dns resolution`
@@ -4674,7 +4763,10 @@ show bgp [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <re
 
 | command | description |
 | ------- | ----------- |
-| [`neighbors`](#show-bgp-neighbors) | Displays information about the state of the BGP neighbors on the SSR. |
+| [`ipv4-vpn`](#show-bgp-ipv4-vpn) | Displays information about the state of the BGP IPv4 vpn table on the SSR router. |
+| [`ipv6`](#show-bgp-ipv6) | Displays information about the state of the BGP IPv6 routes on the SSR router. |
+| [`ipv6-vpn`](#show-bgp-ipv6-vpn) | Displays information about the state of the BGP IPv6 vpn table on the SSR router. |
+| [`neighbors`](#show-bgp-neighbors) | Displays information about the state of the BGP neighbors on the SSR router. |
 | [`path-based-policy`](#show-bgp-path-based-policy) | Show the current BGP path-based-policy summary from the routing manager. |
 | [`summary`](#show-bgp-summary) | Show the current BGP summary from the routing manager. |
 
@@ -4728,6 +4820,95 @@ Paths: (1 available, best #1, table Default-IP-Routing-Table)
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced |
 | 5.1.0 | Added VFR support |
+## `show bgp ipv4-vpn`
+
+Displays information about the state of the BGP IPv4 vpn table on the SSR router.
+
+#### Usage
+
+```
+show bgp ipv4-vpn [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<rd>] [<prefix>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The name of the router for which to display the BGP IPv4 vpn table |
+| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rd | route distinguisher, ip prefix, ip address, or route distinguisher and ip prefix |
+| prefix | ip prefix |
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.2.0   | This feature was introduced |
+
+## `show bgp ipv6`
+
+Displays information about the state of the BGP IPv6 routes on the SSR router.
+
+#### Usage
+
+```
+show bgp ipv6 [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<route>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The name of the router for which to display BGP IPv6 routes |
+| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| route | route ip-prefix [type: IP prefix] |
+
+## `show bgp ipv6-vpn`
+
+Displays information about the state of the BGP IPv6 vpn table on the SSR router.
+
+#### Usage
+
+```
+show bgp ipv6-vpn [rows <rows>] [force] {router <router> | resource-group <resource-group>} [<rd>] [<prefix>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The name of the router for which to display the BGP IPv6 vpn table |
+| rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| rd | route distinguisher, ip prefix, ip address, or route distinguisher and ip prefix |
+| prefix | ip prefix |
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.2.0   | This feature was introduced |
 
 ## `show bgp neighbors`
 
@@ -4736,7 +4917,7 @@ Displays information about the state of the BGP neighbors on the SSR.
 #### Usage
 
 ```
-show bgp neighbors [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<neighbor-ip>] [<option>]
+show bgp neighbors [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<neighbor-ip>] [<option>] [<family>]
 ```
 
 ##### Keyword Arguments
@@ -4755,6 +4936,7 @@ show bgp neighbors [rows <rows>] [vrf <vrf>] [force] {router <router> | resource
 | ---- | ----------- |
 | neighbor-ip | The IP address of the neighbor [type: IP address] |
 | option | advertised-routes \| received-routes |
+| family | ipv4 \| ipv6 \| ipv4-vpn \| ipv6-vpn \| all |
 
 #### Description
 
@@ -4824,7 +5006,7 @@ Show the current BGP summary from the routing manager.
 #### Usage
 
 ```
-show bgp summary [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>}
+show bgp summary [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<family>]
 ```
 
 ##### Keyword Arguments
@@ -4836,6 +5018,12 @@ show bgp summary [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-g
 | router | The name of the router for which to display the BGP summary |
 | rows | The number of bgp entries to display at once [type: int or &#x27;all&#x27;] (default: 50) |
 | vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| family | ipv4 \| ipv6 \| ipv4-vpn \| ipv6-vpn \| all |
 
 #### Description
 
@@ -5098,6 +5286,30 @@ config
 | ------- | ----------------------------|
 | 1.0.0   | This feature was introduced as "show candidate-config" |
 | 2.0.0   | Renamed and reorganized as "show config candidate". _flat_, _verbose_, and configuration branch arguments added |
+## `show config disk-cache`
+
+Display table of cached disk configurations and their metadata
+
+#### Usage
+
+```
+show config disk-cache [{router <router> | resource-group <resource-group>}] [force] [node <node>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| node | The name of the node |
+| resource-group | The name of the resource group |
+| router | The name of the router (default: &lt;current router&gt;) |
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.2.0   | This feature was introduced |
 
 ## `show config exports`
 
@@ -5134,6 +5346,8 @@ The _show config exports_ command has two optional flags: _name_ and _flat_. Use
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
 | [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
@@ -5201,6 +5415,52 @@ admin@conductor-east-1.RTR_EAST_CONDUCTOR#
 | ------- | ----------------------------|
 | 3.0.0   | This feature was introduced |
 | 5.1.0   | Added the _name_ flag, allowing you to identify a specific configuration to display. |
+
+## `show config local-override`
+
+Display local config override status.
+
+#### Description
+
+This command displays the local config override mode status for a Managed SSR Router. Engaging local config override mode allows the user to make changes to the local configuration that will not be overwritten by the Conductor until local config override mode is disabled.
+
+#### Usage
+
+```
+show config local-override [{router <router> | resource-group <resource-group>}] [force]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The router for which to display alarms (default: all) |
+
+##### See Also
+
+| command | description |
+| ------- | ----------- |
+| [`compare config`](#compare-config) | Display the differences between two configurations. |
+| [`create config autogenerated`](#create-config-autogenerated) | Run configuration generation. |
+| [`delete config exported`](#delete-config-exported) | Delete an exported configuration from disk. |
+| [`export config`](#export-config) | Export a copy of the current running or candidate config. |
+| [`import config`](#import-config) | Import a configuration as the candidate config. |
+| [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
+| [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
+| [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
+| [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config version`](#show-config-version) | Display running configuration version. |
+| [`show stats config`](STATS.md#show-stats-config) | Metrics pertaining to the get-config RPC |
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.2.0   | This feature was introduced |
+
 
 ## `show config locally-modified`
 
@@ -5330,7 +5590,9 @@ show config version [{router <router> | resource-group <resource-group>}] [force
 | [`restore config factory-default`](#restore-config-factory-default) | Restore the candidate config to the factory defaults. |
 | [`restore config running`](#restore-config-running) | Discard uncommitted changes from the candidate config. |
 | [`set config encryption`](#set-config-encryption) | Sets the encryption key for the SSR configuration |
+| [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
+| [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show events config commit`](#show-events-config-commit) | Shows events related to running config change |
 | [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
@@ -7169,6 +7431,103 @@ show mist [{router <router> | resource-group <resource-group>}] [force] [node <n
 | Release | Modification                |
 | ------- | ----------------------------|
 | 5.5.2   | This feature was introduced |
+## `show msdp mesh-group`
+
+Show MSDP mesh-groups
+
+#### Usage
+
+```
+show msdp mesh-group [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The router to request MSDP information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.2.0   | This feature was introduced |
+
+## `show msdp peer`
+
+Show MSDP Peer
+
+#### Usage
+
+```
+show msdp peer [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual peer [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request MSDP information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.2.0   | This feature was introduced |
+
+## `show msdp sa`
+
+Show MSDP SA (Source-Active)
+
+#### Usage
+
+```
+show msdp sa [rows <rows>] [vrf <vrf>] [ip-address <ip-address>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| ip-address | Specify address to see individual SA [type: IP address] |
+| resource-group | The name of the resource group |
+| router | The router to request MSDP information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.2.0   | This feature was introduced |
 
 ## `show network-interface`
 
@@ -10673,19 +11032,22 @@ Print the route packets take to network host.
 #### Usage
 
 ```
-traceroute [max-hops <max-hops>] [source-ip <source-ip>] [service <service>] [tenant <tenant>] router <router> node <node> <destination-ip>
+traceroute [max-hops <max-hops>] [wait-time <wait-time>] [egress-interface <egress-interface>] [source-ip <source-ip>] [gateway-ip <gateway-ip>] [service <service>] [tenant <tenant>] router <router> node <node> <destination-ip>
 ```
 
 ##### Keyword Arguments
 
 | name | description |
 | ---- | ----------- |
+| egress-interface | Network interface on which to originate the traceroute session |
+| gateway-ip | The gateway address on the egress interface [type: IP address] |
 | max-hops | The maximum number of hops before the operation is terminated [type: int] |
 | node | The node on which to start the traceroute |
 | router | The router on which to start the traceroute |
 | service | The service for the traceroute command |
 | source-ip | The source address [type: IP address] (default: 0.0.0.0) |
 | tenant | The tenant name for the traceroute command |
+| wait-time | The maximum time, in seconds, to wait for a response to each probe (default 3s) [type: int] |
 
 ##### Positional Arguments
 
