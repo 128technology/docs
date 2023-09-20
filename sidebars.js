@@ -275,7 +275,7 @@ module.exports = {
       "bcp_tenants",
     ],
     "CLI and Element Reference": [
-      // "cli_reference",
+      "cli_reference",
       "config_command_guide",
       "config_reference_guide",
       "cli_stats_reference",

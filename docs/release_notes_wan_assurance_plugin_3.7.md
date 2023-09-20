@@ -35,7 +35,7 @@ For known device failures such as Malicious Driver Detection and Buffer Pool Exh
 
 - **WAN-1817 Releasing conductor managed SSR from MIST wipes config**
 
-  _**Resolution:**_ The system will now skip factory reset for a conductor managed greenfield device .
+  _**Resolution:**_ The system will now skip factory reset for a conductor managed greenfield device.
 
 - **WAN-1879 DHCP events are clobbered when same DHCP server name is used for multiple device interfaces**
 
@@ -47,7 +47,7 @@ For known device failures such as Malicious Driver Detection and Buffer Pool Exh
 
 - **WAN-1944 The cloud-intel agent does not honor the configured log level**
 
-  _**Resolution:**_ The log-level configuration setting is correctly propagated to teh cloud-intel-agent.
+  _**Resolution:**_ The log-level configuration setting is correctly propagated to the cloud-intel agent.
 
 - **WAN-2051 The DHCP client reports unresolved event even after a valid lease is acquired**
 
