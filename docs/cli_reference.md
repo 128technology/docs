@@ -3606,7 +3606,7 @@ set config local-override [force] router <router>
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config local-override`](#show-config-local-override) | Display local config override status. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show stats config`](STATS.md#show-stats-config) | Metrics pertaining to the get-config RPC |
+| [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Description
 
@@ -5453,7 +5453,7 @@ show config local-override [{router <router> | resource-group <resource-group>}]
 | [`set config local-override`](#set-config-local-override) | This command enables the local config override mode on an SSR Managed Router. |
 | [`show config exports`](#show-config-exports) | Display configuration exports. |
 | [`show config version`](#show-config-version) | Display running configuration version. |
-| [`show stats config`](STATS.md#show-stats-config) | Metrics pertaining to the get-config RPC |
+| [`show stats config`](cli_stats_reference.md#show-stats-config) | Metrics pertaining to the get-config RPC |
 
 #### Version History
 
