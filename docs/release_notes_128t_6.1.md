@@ -102,8 +102,6 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-52208 Metrics queries return incomplete data when FIPS is enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
 ------
-- **I95-52279 Bond interface using LACP and VRRP would not process packets with virtual destination MAC addresses. This issue has ben resolved.
-------
 - **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](config_domain-based_web_filter.md/#service-matching-order)
 ------
 - **I95-52305 High CPU and memory utilization when Application Identification is enabled:** Resolved memory and CPU issues resulting from attempting to compact very large application identification documents.
