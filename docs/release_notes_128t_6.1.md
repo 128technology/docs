@@ -95,10 +95,14 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-52113 Application Identification on the SSR runs at 100% CPU utilization:** Resolved an overrun bug that was causing the SSR to enter a loop when loading port ranges. This issue has been resolved.
 ------
+- **I95-52147 Adding and deleting bond interfaces with the same name would leave the interface in a down state. This issue has been resolved.
+------
 - **I95-52158 Spoke is rejecting hub BFD packets, and peering is unable to come up over LTE:** In a corner case where the spoke private LTE IP changes before BFD is up and the public/hub-received IP stays the same, the hub gets stuck in the init state. 
 This issue has been resolved; the LTE IP change is now handled it as a source-nat change, where the flows and actions can be recreated with the updated LTE private IP.
 ------
 - **I95-52208 Metrics queries return incomplete data when FIPS is enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
+------
+- **I95-52279 Bond interface using LACP and VRRP would not process packets with virtual destination MAC addresses. This issue has ben resolved.
 ------
 - **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](config_domain-based_web_filter.md/#service-matching-order)
 ------
@@ -127,6 +131,8 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 - **I95-52971 Inconsistent hash and signing of RPM files:** Some small number of RPM files did not usen the `sha256` hash for sigining. This has been corrected and all RPM packages on the distribution ISO are digest sha256 for Common Criteria.
 ------
 - **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked. 
+------
+- **I95-53285 Changing an SSR router name would result in failed HTTP requests until 128T service was restarted. This issue has ben resolved.
 ------
 - **WAN-2090 Conductor managed SSR applications in WAN Insights showing up as numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
