@@ -11,7 +11,7 @@ Use the command `set config local-override` to prevent conductor generated confi
 
 ## Configuration
 
-Use the command `set config local-override` to engage or disengage the `config local-override` mode. This command is issued at the `router` level, and cannot target individual nodes or a Conductor.
+Use the command `set config local-override` to engage or disengage the `config local-override` mode. This command is issued at the `router` level, for a router, and cannot target individual nodes or a Conductor.
 ```
 config
 	authority
@@ -22,19 +22,53 @@ config
 	exit
 ```
 
+The commands can be run on the router, or on the conductor targeting a router. Attempting to run the command targeting a conductor will return an error.
+
+**Enable/Disable on a Router:**
+```
+admin@combo-east-1.RTR_EAST_COMBO# set config local-override
+```
+```
+admin@combo-east-1.RTR_EAST_COMBO# set config local-override disabled
+```
+
+**Enable/Disable from a Conductor targeting a Router:** 
+
+```
+admin@conductor-east-1.RTR_EAST_CONDUCTOR# set config local-override router RTR_EAST_COMBO
+```
+```
+admin@conductor-east-1.RTR_EAST_CONDUCTOR# set config local-override disabled router RTR_EAST_COMBO
+```
+
+:::info
+If you are making configuration changes directly on a router and `config local-override` is not enabled, a message is displayed notifying you of the option to enable it.
+```
+admin@combo-east-1.RTR_EAST_COMBO# configure authority router RTR_EAST_COMBO
+% Warning: You are about to make configuration changes to a router that is managed by a Conductor. These changes could be overwritten at
+any time by the Conductor. Consider enabling config local override mode to prevent the conductor from overwriting the local changes by
+running 'set config local-override'.
+Are you sure you want to edit 'description'? [y/N]:
+```
+:::
+
+### Comparing Configurations
+
 Using `set config local-override` puts the managed router's configuration in local override mode. This prevents configuration updates from the Conductor from overwriting the current router configuration. However, configuration updates from the conductor are saved on the router as an exported config named `last-seen-conductor-config`. 
 
-When local override mode is engaged, copy of the router config is saved at that time and named `at-local-override`. This is saved as a baseline for the original router config.
+When local override mode is engaged, copy of the router configuration is saved as an exported configuration on the router named `at-local-override`. This is saved as a baseline for the original router config.
 
-The user can diff the router current config against either the latest conductor config (last seen conductor config), or the original router config before changes were made.
+The user can diff the router current config against either the `last-seen-conductor-config`, or the original router config `at-local-override` before changes were made. It is important to note that any changes made to the local router while in local override mode **will not** be sync'ed to the conductor.
 
-- To compare the running config against the config when local override mode was engaged use: 'compare config at-local-override'
+- To compare the running config against the config when local override mode was engaged use: `compare config at-local-override`.
 
-- To compare running config against the last seen conductor config use: 'compare config last-seen-conductor-config'
+- To compare running config against the last seen conductor config use: `compare config last-seen-conductor-config`.
+
+- To revert to the original configuration when local override mode was engaged, use: `import config at-local-override`.
 
 ### Disabling Local Override Mode
 
-Use the command `set config local-override disable` to disable the local override mode. The router fetches the latest configuration from the conductor and applies it to the local configuration. Any changes made that were made to the router locally will be lost.  
+Use the command `set config local-override disable` to disable the local override mode. The router fetches the latest configuration from the conductor and applies it to the local configuration. Any changes that were made to the local router while in local override mode will be lost. If you wish to keep the router local configuration changes, they must be made on the conductor prior to disabling local override mode.   
 
 ### Show Commands
 
@@ -75,7 +109,7 @@ Retrieving configuration version...
 ============= ============================= ============================= ================
  Burbank       Sat 1970-04-11 09:48:20.000   Sat 1970-04-11 09:48:20.000   True
  LosAngeles    Sat 1970-04-11 09:48:20.000   Sat 1970-04-11 09:48:20.000   False
-````
+```
 
 `show config local-override`
 
