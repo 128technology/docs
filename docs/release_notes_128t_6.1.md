@@ -69,7 +69,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 - **The following CVEs have been resolved in this release:** I95-51431, I95-51758, I95-52495, I95-52496, I95-52497, I95-52509, I95-52554, I95-52625, I95-52645, I95-52956.
 ------
-- **I95-41386 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved a race condition when selecting the active components between HA nodes.
+- **I95-41386/I95-52114 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved a race condition when selecting the active components between HA nodes.
 ------
 - **I95-50671 Office365 traffic is not recognized:** Resolved an issue where Office365 traffic was being miscategorized and therefore not fully qualified. O365 traffic, when traversing over SVR, is no longer miscategorized.
 ------
