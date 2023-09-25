@@ -470,7 +470,7 @@ show stats aggregate-session by-device-interface bandwidth-received-forward [dev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-other-protocol`
 
@@ -524,7 +524,7 @@ show stats aggregate-session by-device-interface bandwidth-received-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-other-protocol-reverse`
 
@@ -553,7 +553,7 @@ show stats aggregate-session by-device-interface bandwidth-received-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-reverse`
 
@@ -582,7 +582,7 @@ show stats aggregate-session by-device-interface bandwidth-received-reverse [dev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-tcp`
 
@@ -636,7 +636,7 @@ show stats aggregate-session by-device-interface bandwidth-received-tcp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-tcp-reverse`
 
@@ -665,7 +665,7 @@ show stats aggregate-session by-device-interface bandwidth-received-tcp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-udp`
 
@@ -719,7 +719,7 @@ show stats aggregate-session by-device-interface bandwidth-received-udp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-received-udp-reverse`
 
@@ -748,7 +748,7 @@ show stats aggregate-session by-device-interface bandwidth-received-udp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-tcp`
 
@@ -827,7 +827,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-forward [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-other-protocol`
 
@@ -881,7 +881,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-other-pro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-other-protocol-reverse`
 
@@ -910,7 +910,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-other-pro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-reverse`
 
@@ -939,7 +939,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-reverse [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-tcp`
 
@@ -993,7 +993,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-tcp-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-tcp-reverse`
 
@@ -1022,7 +1022,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-tcp-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-udp`
 
@@ -1076,7 +1076,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-udp-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-transmitted-udp-reverse`
 
@@ -1105,7 +1105,7 @@ show stats aggregate-session by-device-interface bandwidth-transmitted-udp-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bandwidth-udp`
 
@@ -1159,7 +1159,7 @@ show stats aggregate-session by-device-interface bytes [device-interface <device
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-dropped-forward`
 
@@ -1188,7 +1188,7 @@ show stats aggregate-session by-device-interface bytes-dropped-forward [device-i
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-dropped-other-protocol-forward`
 
@@ -1217,7 +1217,7 @@ show stats aggregate-session by-device-interface bytes-dropped-other-protocol-fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-dropped-other-protocol-reverse`
 
@@ -1246,7 +1246,7 @@ show stats aggregate-session by-device-interface bytes-dropped-other-protocol-re
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-dropped-reverse`
 
@@ -1275,7 +1275,7 @@ show stats aggregate-session by-device-interface bytes-dropped-reverse [device-i
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-dropped-tcp-forward`
 
@@ -1304,7 +1304,7 @@ show stats aggregate-session by-device-interface bytes-dropped-tcp-forward [devi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-dropped-tcp-reverse`
 
@@ -1333,7 +1333,7 @@ show stats aggregate-session by-device-interface bytes-dropped-tcp-reverse [devi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-dropped-udp-forward`
 
@@ -1362,7 +1362,7 @@ show stats aggregate-session by-device-interface bytes-dropped-udp-forward [devi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-dropped-udp-reverse`
 
@@ -1391,7 +1391,7 @@ show stats aggregate-session by-device-interface bytes-dropped-udp-reverse [devi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-other-protocol`
 
@@ -1420,7 +1420,7 @@ show stats aggregate-session by-device-interface bytes-other-protocol [device-in
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received`
 
@@ -1449,7 +1449,7 @@ show stats aggregate-session by-device-interface bytes-received [device-interfac
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-forward`
 
@@ -1478,7 +1478,7 @@ show stats aggregate-session by-device-interface bytes-received-forward [device-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-other-protocol`
 
@@ -1507,7 +1507,7 @@ show stats aggregate-session by-device-interface bytes-received-other-protocol [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-other-protocol-forward`
 
@@ -1536,7 +1536,7 @@ show stats aggregate-session by-device-interface bytes-received-other-protocol-f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-other-protocol-reverse`
 
@@ -1565,7 +1565,7 @@ show stats aggregate-session by-device-interface bytes-received-other-protocol-r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-reverse`
 
@@ -1594,7 +1594,7 @@ show stats aggregate-session by-device-interface bytes-received-reverse [device-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-tcp`
 
@@ -1623,7 +1623,7 @@ show stats aggregate-session by-device-interface bytes-received-tcp [device-inte
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-tcp-forward`
 
@@ -1652,7 +1652,7 @@ show stats aggregate-session by-device-interface bytes-received-tcp-forward [dev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-tcp-reverse`
 
@@ -1681,7 +1681,7 @@ show stats aggregate-session by-device-interface bytes-received-tcp-reverse [dev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-udp`
 
@@ -1710,7 +1710,7 @@ show stats aggregate-session by-device-interface bytes-received-udp [device-inte
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-udp-forward`
 
@@ -1739,7 +1739,7 @@ show stats aggregate-session by-device-interface bytes-received-udp-forward [dev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-received-udp-reverse`
 
@@ -1768,7 +1768,7 @@ show stats aggregate-session by-device-interface bytes-received-udp-reverse [dev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-tcp`
 
@@ -1797,7 +1797,7 @@ show stats aggregate-session by-device-interface bytes-tcp [device-interface <de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted`
 
@@ -1826,7 +1826,7 @@ show stats aggregate-session by-device-interface bytes-transmitted [device-inter
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-forward`
 
@@ -1855,7 +1855,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-forward [devi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-other-protocol`
 
@@ -1884,7 +1884,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-other-protoco
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-other-protocol-forward`
 
@@ -1913,7 +1913,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-other-protoco
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-other-protocol-reverse`
 
@@ -1942,7 +1942,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-other-protoco
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-reverse`
 
@@ -1971,7 +1971,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-reverse [devi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-tcp`
 
@@ -2000,7 +2000,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-tcp [device-i
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-tcp-forward`
 
@@ -2029,7 +2029,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-tcp-forward [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-tcp-reverse`
 
@@ -2058,7 +2058,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-tcp-reverse [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-udp`
 
@@ -2087,7 +2087,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-udp [device-i
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-udp-forward`
 
@@ -2116,7 +2116,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-udp-forward [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-transmitted-udp-reverse`
 
@@ -2145,7 +2145,7 @@ show stats aggregate-session by-device-interface bytes-transmitted-udp-reverse [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface bytes-udp`
 
@@ -2174,7 +2174,7 @@ show stats aggregate-session by-device-interface bytes-udp [device-interface <de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets`
 
@@ -2228,7 +2228,7 @@ show stats aggregate-session by-device-interface packets-dropped-forward [device
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-dropped-other-protocol-forward`
 
@@ -2257,7 +2257,7 @@ show stats aggregate-session by-device-interface packets-dropped-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-dropped-other-protocol-reverse`
 
@@ -2286,7 +2286,7 @@ show stats aggregate-session by-device-interface packets-dropped-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-dropped-reverse`
 
@@ -2315,7 +2315,7 @@ show stats aggregate-session by-device-interface packets-dropped-reverse [device
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-dropped-tcp-forward`
 
@@ -2344,7 +2344,7 @@ show stats aggregate-session by-device-interface packets-dropped-tcp-forward [de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-dropped-tcp-reverse`
 
@@ -2373,7 +2373,7 @@ show stats aggregate-session by-device-interface packets-dropped-tcp-reverse [de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-dropped-udp-forward`
 
@@ -2402,7 +2402,7 @@ show stats aggregate-session by-device-interface packets-dropped-udp-forward [de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-dropped-udp-reverse`
 
@@ -2431,7 +2431,7 @@ show stats aggregate-session by-device-interface packets-dropped-udp-reverse [de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-other-protocol`
 
@@ -2510,7 +2510,7 @@ show stats aggregate-session by-device-interface packets-received-forward [devic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-received-other-protocol`
 
@@ -2564,7 +2564,7 @@ show stats aggregate-session by-device-interface packets-received-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-received-other-protocol-reverse`
 
@@ -2593,7 +2593,7 @@ show stats aggregate-session by-device-interface packets-received-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-received-reverse`
 
@@ -2622,7 +2622,7 @@ show stats aggregate-session by-device-interface packets-received-reverse [devic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-received-tcp`
 
@@ -2676,7 +2676,7 @@ show stats aggregate-session by-device-interface packets-received-tcp-forward [d
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-received-tcp-reverse`
 
@@ -2705,7 +2705,7 @@ show stats aggregate-session by-device-interface packets-received-tcp-reverse [d
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-received-udp`
 
@@ -2759,7 +2759,7 @@ show stats aggregate-session by-device-interface packets-received-udp-forward [d
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-received-udp-reverse`
 
@@ -2788,7 +2788,7 @@ show stats aggregate-session by-device-interface packets-received-udp-reverse [d
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-tcp`
 
@@ -2867,7 +2867,7 @@ show stats aggregate-session by-device-interface packets-transmitted-forward [de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-transmitted-other-protocol`
 
@@ -2921,7 +2921,7 @@ show stats aggregate-session by-device-interface packets-transmitted-other-proto
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-transmitted-other-protocol-reverse`
 
@@ -2950,7 +2950,7 @@ show stats aggregate-session by-device-interface packets-transmitted-other-proto
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-transmitted-reverse`
 
@@ -2979,7 +2979,7 @@ show stats aggregate-session by-device-interface packets-transmitted-reverse [de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-transmitted-tcp`
 
@@ -3033,7 +3033,7 @@ show stats aggregate-session by-device-interface packets-transmitted-tcp-forward
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-transmitted-tcp-reverse`
 
@@ -3062,7 +3062,7 @@ show stats aggregate-session by-device-interface packets-transmitted-tcp-reverse
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-transmitted-udp`
 
@@ -3116,7 +3116,7 @@ show stats aggregate-session by-device-interface packets-transmitted-udp-forward
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-transmitted-udp-reverse`
 
@@ -3145,7 +3145,7 @@ show stats aggregate-session by-device-interface packets-transmitted-udp-reverse
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface packets-udp`
 
@@ -3274,7 +3274,7 @@ show stats aggregate-session by-device-interface tcp-bad-flag-combinations [devi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-bad-flag-combinations-forward`
 
@@ -3303,7 +3303,7 @@ show stats aggregate-session by-device-interface tcp-bad-flag-combinations-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-bad-flag-combinations-reverse`
 
@@ -3332,7 +3332,7 @@ show stats aggregate-session by-device-interface tcp-bad-flag-combinations-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-duplicate-acks`
 
@@ -3361,7 +3361,7 @@ show stats aggregate-session by-device-interface tcp-duplicate-acks [device-inte
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-duplicate-acks-forward`
 
@@ -3390,7 +3390,7 @@ show stats aggregate-session by-device-interface tcp-duplicate-acks-forward [dev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-duplicate-acks-reverse`
 
@@ -3419,7 +3419,7 @@ show stats aggregate-session by-device-interface tcp-duplicate-acks-reverse [dev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-invalid-state-transitions`
 
@@ -3448,7 +3448,7 @@ show stats aggregate-session by-device-interface tcp-invalid-state-transitions [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-invalid-state-transitions-forward`
 
@@ -3477,7 +3477,7 @@ show stats aggregate-session by-device-interface tcp-invalid-state-transitions-f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-invalid-state-transitions-reverse`
 
@@ -3506,7 +3506,7 @@ show stats aggregate-session by-device-interface tcp-invalid-state-transitions-r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-out-of-window`
 
@@ -3535,7 +3535,7 @@ show stats aggregate-session by-device-interface tcp-out-of-window [device-inter
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-out-of-window-forward`
 
@@ -3564,7 +3564,7 @@ show stats aggregate-session by-device-interface tcp-out-of-window-forward [devi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-out-of-window-reverse`
 
@@ -3593,7 +3593,7 @@ show stats aggregate-session by-device-interface tcp-out-of-window-reverse [devi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-resets`
 
@@ -3622,7 +3622,7 @@ show stats aggregate-session by-device-interface tcp-resets [device-interface <d
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-resets-received`
 
@@ -3651,7 +3651,7 @@ show stats aggregate-session by-device-interface tcp-resets-received [device-int
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-resets-received-forward`
 
@@ -3680,7 +3680,7 @@ show stats aggregate-session by-device-interface tcp-resets-received-forward [de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-resets-received-reverse`
 
@@ -3709,7 +3709,7 @@ show stats aggregate-session by-device-interface tcp-resets-received-reverse [de
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-resets-transmitted`
 
@@ -3738,7 +3738,7 @@ show stats aggregate-session by-device-interface tcp-resets-transmitted [device-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-resets-transmitted-forward`
 
@@ -3767,7 +3767,7 @@ show stats aggregate-session by-device-interface tcp-resets-transmitted-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-resets-transmitted-reverse`
 
@@ -3796,7 +3796,7 @@ show stats aggregate-session by-device-interface tcp-resets-transmitted-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions`
 
@@ -3875,7 +3875,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-received-fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-received-reverse`
 
@@ -3904,7 +3904,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-received-re
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-transmitted`
 
@@ -3958,7 +3958,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-transmitted
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-device-interface tcp-retransmissions-transmitted-reverse`
 
@@ -3987,7 +3987,7 @@ show stats aggregate-session by-device-interface tcp-retransmissions-transmitted
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface`
 
@@ -4250,7 +4250,7 @@ show stats aggregate-session by-network-interface bandwidth-received-forward [ne
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-received-other-protocol`
 
@@ -4304,7 +4304,7 @@ show stats aggregate-session by-network-interface bandwidth-received-other-proto
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-received-other-protocol-reverse`
 
@@ -4333,7 +4333,7 @@ show stats aggregate-session by-network-interface bandwidth-received-other-proto
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-received-reverse`
 
@@ -4362,7 +4362,7 @@ show stats aggregate-session by-network-interface bandwidth-received-reverse [ne
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-received-tcp`
 
@@ -4416,7 +4416,7 @@ show stats aggregate-session by-network-interface bandwidth-received-tcp-forward
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-received-tcp-reverse`
 
@@ -4445,7 +4445,7 @@ show stats aggregate-session by-network-interface bandwidth-received-tcp-reverse
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-received-udp`
 
@@ -4499,7 +4499,7 @@ show stats aggregate-session by-network-interface bandwidth-received-udp-forward
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-received-udp-reverse`
 
@@ -4528,7 +4528,7 @@ show stats aggregate-session by-network-interface bandwidth-received-udp-reverse
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-tcp`
 
@@ -4607,7 +4607,7 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted-other-protocol`
 
@@ -4661,7 +4661,7 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-other-pr
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted-other-protocol-reverse`
 
@@ -4690,7 +4690,7 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-other-pr
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted-reverse`
 
@@ -4719,7 +4719,7 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted-tcp`
 
@@ -4773,7 +4773,7 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-tcp-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted-tcp-reverse`
 
@@ -4802,7 +4802,7 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-tcp-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted-udp`
 
@@ -4856,7 +4856,7 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-udp-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-transmitted-udp-reverse`
 
@@ -4885,7 +4885,7 @@ show stats aggregate-session by-network-interface bandwidth-transmitted-udp-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bandwidth-udp`
 
@@ -4939,7 +4939,7 @@ show stats aggregate-session by-network-interface bytes [network-interface <netw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-dropped-forward`
 
@@ -4968,7 +4968,7 @@ show stats aggregate-session by-network-interface bytes-dropped-forward [network
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-dropped-other-protocol-forward`
 
@@ -4997,7 +4997,7 @@ show stats aggregate-session by-network-interface bytes-dropped-other-protocol-f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-dropped-other-protocol-reverse`
 
@@ -5026,7 +5026,7 @@ show stats aggregate-session by-network-interface bytes-dropped-other-protocol-r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-dropped-reverse`
 
@@ -5055,7 +5055,7 @@ show stats aggregate-session by-network-interface bytes-dropped-reverse [network
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-dropped-tcp-forward`
 
@@ -5084,7 +5084,7 @@ show stats aggregate-session by-network-interface bytes-dropped-tcp-forward [net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-dropped-tcp-reverse`
 
@@ -5113,7 +5113,7 @@ show stats aggregate-session by-network-interface bytes-dropped-tcp-reverse [net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-dropped-udp-forward`
 
@@ -5142,7 +5142,7 @@ show stats aggregate-session by-network-interface bytes-dropped-udp-forward [net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-dropped-udp-reverse`
 
@@ -5171,7 +5171,7 @@ show stats aggregate-session by-network-interface bytes-dropped-udp-reverse [net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-other-protocol`
 
@@ -5200,7 +5200,7 @@ show stats aggregate-session by-network-interface bytes-other-protocol [network-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received`
 
@@ -5229,7 +5229,7 @@ show stats aggregate-session by-network-interface bytes-received [network-interf
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-forward`
 
@@ -5258,7 +5258,7 @@ show stats aggregate-session by-network-interface bytes-received-forward [networ
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-other-protocol`
 
@@ -5287,7 +5287,7 @@ show stats aggregate-session by-network-interface bytes-received-other-protocol 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-other-protocol-forward`
 
@@ -5316,7 +5316,7 @@ show stats aggregate-session by-network-interface bytes-received-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-other-protocol-reverse`
 
@@ -5345,7 +5345,7 @@ show stats aggregate-session by-network-interface bytes-received-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-reverse`
 
@@ -5374,7 +5374,7 @@ show stats aggregate-session by-network-interface bytes-received-reverse [networ
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-tcp`
 
@@ -5403,7 +5403,7 @@ show stats aggregate-session by-network-interface bytes-received-tcp [network-in
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-tcp-forward`
 
@@ -5432,7 +5432,7 @@ show stats aggregate-session by-network-interface bytes-received-tcp-forward [ne
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-tcp-reverse`
 
@@ -5461,7 +5461,7 @@ show stats aggregate-session by-network-interface bytes-received-tcp-reverse [ne
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-udp`
 
@@ -5490,7 +5490,7 @@ show stats aggregate-session by-network-interface bytes-received-udp [network-in
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-udp-forward`
 
@@ -5519,7 +5519,7 @@ show stats aggregate-session by-network-interface bytes-received-udp-forward [ne
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-received-udp-reverse`
 
@@ -5548,7 +5548,7 @@ show stats aggregate-session by-network-interface bytes-received-udp-reverse [ne
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-tcp`
 
@@ -5577,7 +5577,7 @@ show stats aggregate-session by-network-interface bytes-tcp [network-interface <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted`
 
@@ -5606,7 +5606,7 @@ show stats aggregate-session by-network-interface bytes-transmitted [network-int
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-forward`
 
@@ -5635,7 +5635,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-forward [net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-other-protocol`
 
@@ -5664,7 +5664,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-other-protocol-forward`
 
@@ -5693,7 +5693,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-other-protocol-reverse`
 
@@ -5722,7 +5722,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-reverse`
 
@@ -5751,7 +5751,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-reverse [net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-tcp`
 
@@ -5780,7 +5780,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-tcp [network
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-tcp-forward`
 
@@ -5809,7 +5809,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-tcp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-tcp-reverse`
 
@@ -5838,7 +5838,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-tcp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-udp`
 
@@ -5867,7 +5867,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-udp [network
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-udp-forward`
 
@@ -5896,7 +5896,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-udp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-transmitted-udp-reverse`
 
@@ -5925,7 +5925,7 @@ show stats aggregate-session by-network-interface bytes-transmitted-udp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface bytes-udp`
 
@@ -5954,7 +5954,7 @@ show stats aggregate-session by-network-interface bytes-udp [network-interface <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets`
 
@@ -6008,7 +6008,7 @@ show stats aggregate-session by-network-interface packets-dropped-forward [netwo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-dropped-other-protocol-forward`
 
@@ -6037,7 +6037,7 @@ show stats aggregate-session by-network-interface packets-dropped-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-dropped-other-protocol-reverse`
 
@@ -6066,7 +6066,7 @@ show stats aggregate-session by-network-interface packets-dropped-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-dropped-reverse`
 
@@ -6095,7 +6095,7 @@ show stats aggregate-session by-network-interface packets-dropped-reverse [netwo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-dropped-tcp-forward`
 
@@ -6124,7 +6124,7 @@ show stats aggregate-session by-network-interface packets-dropped-tcp-forward [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-dropped-tcp-reverse`
 
@@ -6153,7 +6153,7 @@ show stats aggregate-session by-network-interface packets-dropped-tcp-reverse [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-dropped-udp-forward`
 
@@ -6182,7 +6182,7 @@ show stats aggregate-session by-network-interface packets-dropped-udp-forward [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-dropped-udp-reverse`
 
@@ -6211,7 +6211,7 @@ show stats aggregate-session by-network-interface packets-dropped-udp-reverse [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-other-protocol`
 
@@ -6290,7 +6290,7 @@ show stats aggregate-session by-network-interface packets-received-forward [netw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-received-other-protocol`
 
@@ -6344,7 +6344,7 @@ show stats aggregate-session by-network-interface packets-received-other-protoco
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-received-other-protocol-reverse`
 
@@ -6373,7 +6373,7 @@ show stats aggregate-session by-network-interface packets-received-other-protoco
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-received-reverse`
 
@@ -6402,7 +6402,7 @@ show stats aggregate-session by-network-interface packets-received-reverse [netw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-received-tcp`
 
@@ -6456,7 +6456,7 @@ show stats aggregate-session by-network-interface packets-received-tcp-forward [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-received-tcp-reverse`
 
@@ -6485,7 +6485,7 @@ show stats aggregate-session by-network-interface packets-received-tcp-reverse [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-received-udp`
 
@@ -6539,7 +6539,7 @@ show stats aggregate-session by-network-interface packets-received-udp-forward [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-received-udp-reverse`
 
@@ -6568,7 +6568,7 @@ show stats aggregate-session by-network-interface packets-received-udp-reverse [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-tcp`
 
@@ -6647,7 +6647,7 @@ show stats aggregate-session by-network-interface packets-transmitted-forward [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-transmitted-other-protocol`
 
@@ -6701,7 +6701,7 @@ show stats aggregate-session by-network-interface packets-transmitted-other-prot
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-transmitted-other-protocol-reverse`
 
@@ -6730,7 +6730,7 @@ show stats aggregate-session by-network-interface packets-transmitted-other-prot
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-transmitted-reverse`
 
@@ -6759,7 +6759,7 @@ show stats aggregate-session by-network-interface packets-transmitted-reverse [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-transmitted-tcp`
 
@@ -6813,7 +6813,7 @@ show stats aggregate-session by-network-interface packets-transmitted-tcp-forwar
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-transmitted-tcp-reverse`
 
@@ -6842,7 +6842,7 @@ show stats aggregate-session by-network-interface packets-transmitted-tcp-revers
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-transmitted-udp`
 
@@ -6896,7 +6896,7 @@ show stats aggregate-session by-network-interface packets-transmitted-udp-forwar
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-transmitted-udp-reverse`
 
@@ -6925,7 +6925,7 @@ show stats aggregate-session by-network-interface packets-transmitted-udp-revers
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface packets-udp`
 
@@ -7054,7 +7054,7 @@ show stats aggregate-session by-network-interface tcp-bad-flag-combinations [net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-bad-flag-combinations-forward`
 
@@ -7083,7 +7083,7 @@ show stats aggregate-session by-network-interface tcp-bad-flag-combinations-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-bad-flag-combinations-reverse`
 
@@ -7112,7 +7112,7 @@ show stats aggregate-session by-network-interface tcp-bad-flag-combinations-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-duplicate-acks`
 
@@ -7141,7 +7141,7 @@ show stats aggregate-session by-network-interface tcp-duplicate-acks [network-in
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-duplicate-acks-forward`
 
@@ -7170,7 +7170,7 @@ show stats aggregate-session by-network-interface tcp-duplicate-acks-forward [ne
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-duplicate-acks-reverse`
 
@@ -7199,7 +7199,7 @@ show stats aggregate-session by-network-interface tcp-duplicate-acks-reverse [ne
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-invalid-state-transitions`
 
@@ -7228,7 +7228,7 @@ show stats aggregate-session by-network-interface tcp-invalid-state-transitions 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-invalid-state-transitions-forward`
 
@@ -7257,7 +7257,7 @@ show stats aggregate-session by-network-interface tcp-invalid-state-transitions-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-invalid-state-transitions-reverse`
 
@@ -7286,7 +7286,7 @@ show stats aggregate-session by-network-interface tcp-invalid-state-transitions-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-out-of-window`
 
@@ -7315,7 +7315,7 @@ show stats aggregate-session by-network-interface tcp-out-of-window [network-int
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-out-of-window-forward`
 
@@ -7344,7 +7344,7 @@ show stats aggregate-session by-network-interface tcp-out-of-window-forward [net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-out-of-window-reverse`
 
@@ -7373,7 +7373,7 @@ show stats aggregate-session by-network-interface tcp-out-of-window-reverse [net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-resets`
 
@@ -7402,7 +7402,7 @@ show stats aggregate-session by-network-interface tcp-resets [network-interface 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-resets-received`
 
@@ -7431,7 +7431,7 @@ show stats aggregate-session by-network-interface tcp-resets-received [network-i
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-resets-received-forward`
 
@@ -7460,7 +7460,7 @@ show stats aggregate-session by-network-interface tcp-resets-received-forward [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-resets-received-reverse`
 
@@ -7489,7 +7489,7 @@ show stats aggregate-session by-network-interface tcp-resets-received-reverse [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-resets-transmitted`
 
@@ -7518,7 +7518,7 @@ show stats aggregate-session by-network-interface tcp-resets-transmitted [networ
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-resets-transmitted-forward`
 
@@ -7547,7 +7547,7 @@ show stats aggregate-session by-network-interface tcp-resets-transmitted-forward
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-resets-transmitted-reverse`
 
@@ -7576,7 +7576,7 @@ show stats aggregate-session by-network-interface tcp-resets-transmitted-reverse
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions`
 
@@ -7655,7 +7655,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-received-f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-received-reverse`
 
@@ -7684,7 +7684,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-received-r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-transmitted`
 
@@ -7738,7 +7738,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-transmitte
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-network-interface tcp-retransmissions-transmitted-reverse`
 
@@ -7767,7 +7767,7 @@ show stats aggregate-session by-network-interface tcp-retransmissions-transmitte
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node`
 
@@ -8031,7 +8031,7 @@ show stats aggregate-session by-node bandwidth-received-forward [since <since>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-received-other-protocol`
 
@@ -8085,7 +8085,7 @@ show stats aggregate-session by-node bandwidth-received-other-protocol-forward [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-received-other-protocol-reverse`
 
@@ -8114,7 +8114,7 @@ show stats aggregate-session by-node bandwidth-received-other-protocol-reverse [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-received-reverse`
 
@@ -8143,7 +8143,7 @@ show stats aggregate-session by-node bandwidth-received-reverse [since <since>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-received-tcp`
 
@@ -8197,7 +8197,7 @@ show stats aggregate-session by-node bandwidth-received-tcp-forward [since <sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-received-tcp-reverse`
 
@@ -8226,7 +8226,7 @@ show stats aggregate-session by-node bandwidth-received-tcp-reverse [since <sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-received-udp`
 
@@ -8280,7 +8280,7 @@ show stats aggregate-session by-node bandwidth-received-udp-forward [since <sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-received-udp-reverse`
 
@@ -8309,7 +8309,7 @@ show stats aggregate-session by-node bandwidth-received-udp-reverse [since <sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-tcp`
 
@@ -8388,7 +8388,7 @@ show stats aggregate-session by-node bandwidth-transmitted-forward [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-transmitted-other-protocol`
 
@@ -8442,7 +8442,7 @@ show stats aggregate-session by-node bandwidth-transmitted-other-protocol-forwar
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-transmitted-other-protocol-reverse`
 
@@ -8471,7 +8471,7 @@ show stats aggregate-session by-node bandwidth-transmitted-other-protocol-revers
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-transmitted-reverse`
 
@@ -8500,7 +8500,7 @@ show stats aggregate-session by-node bandwidth-transmitted-reverse [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-transmitted-tcp`
 
@@ -8554,7 +8554,7 @@ show stats aggregate-session by-node bandwidth-transmitted-tcp-forward [since <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-transmitted-tcp-reverse`
 
@@ -8583,7 +8583,7 @@ show stats aggregate-session by-node bandwidth-transmitted-tcp-reverse [since <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-transmitted-udp`
 
@@ -8637,7 +8637,7 @@ show stats aggregate-session by-node bandwidth-transmitted-udp-forward [since <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-transmitted-udp-reverse`
 
@@ -8666,7 +8666,7 @@ show stats aggregate-session by-node bandwidth-transmitted-udp-reverse [since <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bandwidth-udp`
 
@@ -8720,7 +8720,7 @@ show stats aggregate-session by-node bytes [since <since>] [force] [router <rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-dropped-forward`
 
@@ -8749,7 +8749,7 @@ show stats aggregate-session by-node bytes-dropped-forward [since <since>] [forc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-dropped-other-protocol-forward`
 
@@ -8778,7 +8778,7 @@ show stats aggregate-session by-node bytes-dropped-other-protocol-forward [since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-dropped-other-protocol-reverse`
 
@@ -8807,7 +8807,7 @@ show stats aggregate-session by-node bytes-dropped-other-protocol-reverse [since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-dropped-reverse`
 
@@ -8836,7 +8836,7 @@ show stats aggregate-session by-node bytes-dropped-reverse [since <since>] [forc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-dropped-tcp-forward`
 
@@ -8865,7 +8865,7 @@ show stats aggregate-session by-node bytes-dropped-tcp-forward [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-dropped-tcp-reverse`
 
@@ -8894,7 +8894,7 @@ show stats aggregate-session by-node bytes-dropped-tcp-reverse [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-dropped-udp-forward`
 
@@ -8923,7 +8923,7 @@ show stats aggregate-session by-node bytes-dropped-udp-forward [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-dropped-udp-reverse`
 
@@ -8952,7 +8952,7 @@ show stats aggregate-session by-node bytes-dropped-udp-reverse [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-other-protocol`
 
@@ -8981,7 +8981,7 @@ show stats aggregate-session by-node bytes-other-protocol [since <since>] [force
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received`
 
@@ -9010,7 +9010,7 @@ show stats aggregate-session by-node bytes-received [since <since>] [force] [rou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-forward`
 
@@ -9039,7 +9039,7 @@ show stats aggregate-session by-node bytes-received-forward [since <since>] [for
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-other-protocol`
 
@@ -9068,7 +9068,7 @@ show stats aggregate-session by-node bytes-received-other-protocol [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-other-protocol-forward`
 
@@ -9097,7 +9097,7 @@ show stats aggregate-session by-node bytes-received-other-protocol-forward [sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-other-protocol-reverse`
 
@@ -9126,7 +9126,7 @@ show stats aggregate-session by-node bytes-received-other-protocol-reverse [sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-reverse`
 
@@ -9155,7 +9155,7 @@ show stats aggregate-session by-node bytes-received-reverse [since <since>] [for
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-tcp`
 
@@ -9184,7 +9184,7 @@ show stats aggregate-session by-node bytes-received-tcp [since <since>] [force] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-tcp-forward`
 
@@ -9213,7 +9213,7 @@ show stats aggregate-session by-node bytes-received-tcp-forward [since <since>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-tcp-reverse`
 
@@ -9242,7 +9242,7 @@ show stats aggregate-session by-node bytes-received-tcp-reverse [since <since>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-udp`
 
@@ -9271,7 +9271,7 @@ show stats aggregate-session by-node bytes-received-udp [since <since>] [force] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-udp-forward`
 
@@ -9300,7 +9300,7 @@ show stats aggregate-session by-node bytes-received-udp-forward [since <since>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-received-udp-reverse`
 
@@ -9329,7 +9329,7 @@ show stats aggregate-session by-node bytes-received-udp-reverse [since <since>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-tcp`
 
@@ -9358,7 +9358,7 @@ show stats aggregate-session by-node bytes-tcp [since <since>] [force] [router <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted`
 
@@ -9387,7 +9387,7 @@ show stats aggregate-session by-node bytes-transmitted [since <since>] [force] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-forward`
 
@@ -9416,7 +9416,7 @@ show stats aggregate-session by-node bytes-transmitted-forward [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-other-protocol`
 
@@ -9445,7 +9445,7 @@ show stats aggregate-session by-node bytes-transmitted-other-protocol [since <si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-other-protocol-forward`
 
@@ -9474,7 +9474,7 @@ show stats aggregate-session by-node bytes-transmitted-other-protocol-forward [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-other-protocol-reverse`
 
@@ -9503,7 +9503,7 @@ show stats aggregate-session by-node bytes-transmitted-other-protocol-reverse [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-reverse`
 
@@ -9532,7 +9532,7 @@ show stats aggregate-session by-node bytes-transmitted-reverse [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-tcp`
 
@@ -9561,7 +9561,7 @@ show stats aggregate-session by-node bytes-transmitted-tcp [since <since>] [forc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-tcp-forward`
 
@@ -9590,7 +9590,7 @@ show stats aggregate-session by-node bytes-transmitted-tcp-forward [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-tcp-reverse`
 
@@ -9619,7 +9619,7 @@ show stats aggregate-session by-node bytes-transmitted-tcp-reverse [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-udp`
 
@@ -9648,7 +9648,7 @@ show stats aggregate-session by-node bytes-transmitted-udp [since <since>] [forc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-udp-forward`
 
@@ -9677,7 +9677,7 @@ show stats aggregate-session by-node bytes-transmitted-udp-forward [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-transmitted-udp-reverse`
 
@@ -9706,7 +9706,7 @@ show stats aggregate-session by-node bytes-transmitted-udp-reverse [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node bytes-udp`
 
@@ -9735,7 +9735,7 @@ show stats aggregate-session by-node bytes-udp [since <since>] [force] [router <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node gross-entitlement`
 
@@ -9814,7 +9814,7 @@ show stats aggregate-session by-node packets-dropped-forward [since <since>] [fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-dropped-other-protocol-forward`
 
@@ -9843,7 +9843,7 @@ show stats aggregate-session by-node packets-dropped-other-protocol-forward [sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-dropped-other-protocol-reverse`
 
@@ -9872,7 +9872,7 @@ show stats aggregate-session by-node packets-dropped-other-protocol-reverse [sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-dropped-reverse`
 
@@ -9901,7 +9901,7 @@ show stats aggregate-session by-node packets-dropped-reverse [since <since>] [fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-dropped-tcp-forward`
 
@@ -9930,7 +9930,7 @@ show stats aggregate-session by-node packets-dropped-tcp-forward [since <since>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-dropped-tcp-reverse`
 
@@ -9959,7 +9959,7 @@ show stats aggregate-session by-node packets-dropped-tcp-reverse [since <since>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-dropped-udp-forward`
 
@@ -9988,7 +9988,7 @@ show stats aggregate-session by-node packets-dropped-udp-forward [since <since>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-dropped-udp-reverse`
 
@@ -10017,7 +10017,7 @@ show stats aggregate-session by-node packets-dropped-udp-reverse [since <since>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-other-protocol`
 
@@ -10096,7 +10096,7 @@ show stats aggregate-session by-node packets-received-forward [since <since>] [f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-received-other-protocol`
 
@@ -10150,7 +10150,7 @@ show stats aggregate-session by-node packets-received-other-protocol-forward [si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-received-other-protocol-reverse`
 
@@ -10179,7 +10179,7 @@ show stats aggregate-session by-node packets-received-other-protocol-reverse [si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-received-reverse`
 
@@ -10208,7 +10208,7 @@ show stats aggregate-session by-node packets-received-reverse [since <since>] [f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-received-tcp`
 
@@ -10262,7 +10262,7 @@ show stats aggregate-session by-node packets-received-tcp-forward [since <since>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-received-tcp-reverse`
 
@@ -10291,7 +10291,7 @@ show stats aggregate-session by-node packets-received-tcp-reverse [since <since>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-received-udp`
 
@@ -10345,7 +10345,7 @@ show stats aggregate-session by-node packets-received-udp-forward [since <since>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-received-udp-reverse`
 
@@ -10374,7 +10374,7 @@ show stats aggregate-session by-node packets-received-udp-reverse [since <since>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-tcp`
 
@@ -10453,7 +10453,7 @@ show stats aggregate-session by-node packets-transmitted-forward [since <since>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-transmitted-other-protocol`
 
@@ -10507,7 +10507,7 @@ show stats aggregate-session by-node packets-transmitted-other-protocol-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-transmitted-other-protocol-reverse`
 
@@ -10536,7 +10536,7 @@ show stats aggregate-session by-node packets-transmitted-other-protocol-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-transmitted-reverse`
 
@@ -10565,7 +10565,7 @@ show stats aggregate-session by-node packets-transmitted-reverse [since <since>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-transmitted-tcp`
 
@@ -10619,7 +10619,7 @@ show stats aggregate-session by-node packets-transmitted-tcp-forward [since <sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-transmitted-tcp-reverse`
 
@@ -10648,7 +10648,7 @@ show stats aggregate-session by-node packets-transmitted-tcp-reverse [since <sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-transmitted-udp`
 
@@ -10702,7 +10702,7 @@ show stats aggregate-session by-node packets-transmitted-udp-forward [since <sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-transmitted-udp-reverse`
 
@@ -10731,7 +10731,7 @@ show stats aggregate-session by-node packets-transmitted-udp-reverse [since <sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node packets-udp`
 
@@ -10860,7 +10860,7 @@ show stats aggregate-session by-node tcp-bad-flag-combinations [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-bad-flag-combinations-forward`
 
@@ -10889,7 +10889,7 @@ show stats aggregate-session by-node tcp-bad-flag-combinations-forward [since <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-bad-flag-combinations-reverse`
 
@@ -10918,7 +10918,7 @@ show stats aggregate-session by-node tcp-bad-flag-combinations-reverse [since <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-duplicate-acks`
 
@@ -10947,7 +10947,7 @@ show stats aggregate-session by-node tcp-duplicate-acks [since <since>] [force] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-duplicate-acks-forward`
 
@@ -10976,7 +10976,7 @@ show stats aggregate-session by-node tcp-duplicate-acks-forward [since <since>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-duplicate-acks-reverse`
 
@@ -11005,7 +11005,7 @@ show stats aggregate-session by-node tcp-duplicate-acks-reverse [since <since>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-invalid-state-transitions`
 
@@ -11034,7 +11034,7 @@ show stats aggregate-session by-node tcp-invalid-state-transitions [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-invalid-state-transitions-forward`
 
@@ -11063,7 +11063,7 @@ show stats aggregate-session by-node tcp-invalid-state-transitions-forward [sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-invalid-state-transitions-reverse`
 
@@ -11092,7 +11092,7 @@ show stats aggregate-session by-node tcp-invalid-state-transitions-reverse [sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-out-of-window`
 
@@ -11121,7 +11121,7 @@ show stats aggregate-session by-node tcp-out-of-window [since <since>] [force] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-out-of-window-forward`
 
@@ -11150,7 +11150,7 @@ show stats aggregate-session by-node tcp-out-of-window-forward [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-out-of-window-reverse`
 
@@ -11179,7 +11179,7 @@ show stats aggregate-session by-node tcp-out-of-window-reverse [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-resets`
 
@@ -11208,7 +11208,7 @@ show stats aggregate-session by-node tcp-resets [since <since>] [force] [router 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-resets-received`
 
@@ -11237,7 +11237,7 @@ show stats aggregate-session by-node tcp-resets-received [since <since>] [force]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-resets-received-forward`
 
@@ -11266,7 +11266,7 @@ show stats aggregate-session by-node tcp-resets-received-forward [since <since>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-resets-received-reverse`
 
@@ -11295,7 +11295,7 @@ show stats aggregate-session by-node tcp-resets-received-reverse [since <since>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-resets-transmitted`
 
@@ -11324,7 +11324,7 @@ show stats aggregate-session by-node tcp-resets-transmitted [since <since>] [for
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-resets-transmitted-forward`
 
@@ -11353,7 +11353,7 @@ show stats aggregate-session by-node tcp-resets-transmitted-forward [since <sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-resets-transmitted-reverse`
 
@@ -11382,7 +11382,7 @@ show stats aggregate-session by-node tcp-resets-transmitted-reverse [since <sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-retransmissions`
 
@@ -11461,7 +11461,7 @@ show stats aggregate-session by-node tcp-retransmissions-received-forward [since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-retransmissions-received-reverse`
 
@@ -11490,7 +11490,7 @@ show stats aggregate-session by-node tcp-retransmissions-received-reverse [since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-retransmissions-transmitted`
 
@@ -11544,7 +11544,7 @@ show stats aggregate-session by-node tcp-retransmissions-transmitted-forward [si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-node tcp-retransmissions-transmitted-reverse`
 
@@ -11573,7 +11573,7 @@ show stats aggregate-session by-node tcp-retransmissions-transmitted-reverse [si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service`
 
@@ -11838,7 +11838,7 @@ show stats aggregate-session by-service bandwidth-received-forward [service <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-received-other-protocol`
 
@@ -11894,7 +11894,7 @@ show stats aggregate-session by-service bandwidth-received-other-protocol-forwar
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-received-other-protocol-reverse`
 
@@ -11924,7 +11924,7 @@ show stats aggregate-session by-service bandwidth-received-other-protocol-revers
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-received-reverse`
 
@@ -11954,7 +11954,7 @@ show stats aggregate-session by-service bandwidth-received-reverse [service <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-received-tcp`
 
@@ -12009,7 +12009,7 @@ show stats aggregate-session by-service bandwidth-received-tcp-forward [service 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-received-tcp-reverse`
 
@@ -12039,7 +12039,7 @@ show stats aggregate-session by-service bandwidth-received-tcp-reverse [service 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-received-udp`
 
@@ -12094,7 +12094,7 @@ show stats aggregate-session by-service bandwidth-received-udp-forward [service 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-received-udp-reverse`
 
@@ -12124,7 +12124,7 @@ show stats aggregate-session by-service bandwidth-received-udp-reverse [service 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-tcp`
 
@@ -12204,7 +12204,7 @@ show stats aggregate-session by-service bandwidth-transmitted-forward [service <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-transmitted-other-protocol`
 
@@ -12260,7 +12260,7 @@ show stats aggregate-session by-service bandwidth-transmitted-other-protocol-for
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-transmitted-other-protocol-reverse`
 
@@ -12290,7 +12290,7 @@ show stats aggregate-session by-service bandwidth-transmitted-other-protocol-rev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-transmitted-reverse`
 
@@ -12320,7 +12320,7 @@ show stats aggregate-session by-service bandwidth-transmitted-reverse [service <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-transmitted-tcp`
 
@@ -12375,7 +12375,7 @@ show stats aggregate-session by-service bandwidth-transmitted-tcp-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-transmitted-tcp-reverse`
 
@@ -12405,7 +12405,7 @@ show stats aggregate-session by-service bandwidth-transmitted-tcp-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-transmitted-udp`
 
@@ -12460,7 +12460,7 @@ show stats aggregate-session by-service bandwidth-transmitted-udp-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-transmitted-udp-reverse`
 
@@ -12490,7 +12490,7 @@ show stats aggregate-session by-service bandwidth-transmitted-udp-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bandwidth-udp`
 
@@ -12544,7 +12544,7 @@ show stats aggregate-session by-service bytes [service <service>] [since <since>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-dropped-forward`
 
@@ -12574,7 +12574,7 @@ show stats aggregate-session by-service bytes-dropped-forward [service <service>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-dropped-other-protocol-forward`
 
@@ -12604,7 +12604,7 @@ show stats aggregate-session by-service bytes-dropped-other-protocol-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-dropped-other-protocol-reverse`
 
@@ -12634,7 +12634,7 @@ show stats aggregate-session by-service bytes-dropped-other-protocol-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-dropped-reverse`
 
@@ -12664,7 +12664,7 @@ show stats aggregate-session by-service bytes-dropped-reverse [service <service>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-dropped-tcp-forward`
 
@@ -12694,7 +12694,7 @@ show stats aggregate-session by-service bytes-dropped-tcp-forward [service <serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-dropped-tcp-reverse`
 
@@ -12724,7 +12724,7 @@ show stats aggregate-session by-service bytes-dropped-tcp-reverse [service <serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-dropped-udp-forward`
 
@@ -12754,7 +12754,7 @@ show stats aggregate-session by-service bytes-dropped-udp-forward [service <serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-dropped-udp-reverse`
 
@@ -12784,7 +12784,7 @@ show stats aggregate-session by-service bytes-dropped-udp-reverse [service <serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-other-protocol`
 
@@ -12814,7 +12814,7 @@ show stats aggregate-session by-service bytes-other-protocol [service <service>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received`
 
@@ -12843,7 +12843,7 @@ show stats aggregate-session by-service bytes-received [service <service>] [sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-forward`
 
@@ -12873,7 +12873,7 @@ show stats aggregate-session by-service bytes-received-forward [service <service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-other-protocol`
 
@@ -12903,7 +12903,7 @@ show stats aggregate-session by-service bytes-received-other-protocol [service <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-other-protocol-forward`
 
@@ -12933,7 +12933,7 @@ show stats aggregate-session by-service bytes-received-other-protocol-forward [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-other-protocol-reverse`
 
@@ -12963,7 +12963,7 @@ show stats aggregate-session by-service bytes-received-other-protocol-reverse [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-reverse`
 
@@ -12993,7 +12993,7 @@ show stats aggregate-session by-service bytes-received-reverse [service <service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-tcp`
 
@@ -13022,7 +13022,7 @@ show stats aggregate-session by-service bytes-received-tcp [service <service>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-tcp-forward`
 
@@ -13052,7 +13052,7 @@ show stats aggregate-session by-service bytes-received-tcp-forward [service <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-tcp-reverse`
 
@@ -13082,7 +13082,7 @@ show stats aggregate-session by-service bytes-received-tcp-reverse [service <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-udp`
 
@@ -13111,7 +13111,7 @@ show stats aggregate-session by-service bytes-received-udp [service <service>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-udp-forward`
 
@@ -13141,7 +13141,7 @@ show stats aggregate-session by-service bytes-received-udp-forward [service <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-received-udp-reverse`
 
@@ -13171,7 +13171,7 @@ show stats aggregate-session by-service bytes-received-udp-reverse [service <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-tcp`
 
@@ -13200,7 +13200,7 @@ show stats aggregate-session by-service bytes-tcp [service <service>] [since <si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted`
 
@@ -13229,7 +13229,7 @@ show stats aggregate-session by-service bytes-transmitted [service <service>] [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-forward`
 
@@ -13259,7 +13259,7 @@ show stats aggregate-session by-service bytes-transmitted-forward [service <serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-other-protocol`
 
@@ -13289,7 +13289,7 @@ show stats aggregate-session by-service bytes-transmitted-other-protocol [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-other-protocol-forward`
 
@@ -13319,7 +13319,7 @@ show stats aggregate-session by-service bytes-transmitted-other-protocol-forward
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-other-protocol-reverse`
 
@@ -13349,7 +13349,7 @@ show stats aggregate-session by-service bytes-transmitted-other-protocol-reverse
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-reverse`
 
@@ -13379,7 +13379,7 @@ show stats aggregate-session by-service bytes-transmitted-reverse [service <serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-tcp`
 
@@ -13408,7 +13408,7 @@ show stats aggregate-session by-service bytes-transmitted-tcp [service <service>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-tcp-forward`
 
@@ -13438,7 +13438,7 @@ show stats aggregate-session by-service bytes-transmitted-tcp-forward [service <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-tcp-reverse`
 
@@ -13468,7 +13468,7 @@ show stats aggregate-session by-service bytes-transmitted-tcp-reverse [service <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-udp`
 
@@ -13497,7 +13497,7 @@ show stats aggregate-session by-service bytes-transmitted-udp [service <service>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-udp-forward`
 
@@ -13527,7 +13527,7 @@ show stats aggregate-session by-service bytes-transmitted-udp-forward [service <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-transmitted-udp-reverse`
 
@@ -13557,7 +13557,7 @@ show stats aggregate-session by-service bytes-transmitted-udp-reverse [service <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service bytes-udp`
 
@@ -13586,7 +13586,7 @@ show stats aggregate-session by-service bytes-udp [service <service>] [since <si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets`
 
@@ -13641,7 +13641,7 @@ show stats aggregate-session by-service packets-dropped-forward [service <servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-dropped-other-protocol-forward`
 
@@ -13671,7 +13671,7 @@ show stats aggregate-session by-service packets-dropped-other-protocol-forward [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-dropped-other-protocol-reverse`
 
@@ -13701,7 +13701,7 @@ show stats aggregate-session by-service packets-dropped-other-protocol-reverse [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-dropped-reverse`
 
@@ -13731,7 +13731,7 @@ show stats aggregate-session by-service packets-dropped-reverse [service <servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-dropped-tcp-forward`
 
@@ -13761,7 +13761,7 @@ show stats aggregate-session by-service packets-dropped-tcp-forward [service <se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-dropped-tcp-reverse`
 
@@ -13791,7 +13791,7 @@ show stats aggregate-session by-service packets-dropped-tcp-reverse [service <se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-dropped-udp-forward`
 
@@ -13821,7 +13821,7 @@ show stats aggregate-session by-service packets-dropped-udp-forward [service <se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-dropped-udp-reverse`
 
@@ -13851,7 +13851,7 @@ show stats aggregate-session by-service packets-dropped-udp-reverse [service <se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-other-protocol`
 
@@ -13932,7 +13932,7 @@ show stats aggregate-session by-service packets-received-forward [service <servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-received-other-protocol`
 
@@ -13988,7 +13988,7 @@ show stats aggregate-session by-service packets-received-other-protocol-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-received-other-protocol-reverse`
 
@@ -14018,7 +14018,7 @@ show stats aggregate-session by-service packets-received-other-protocol-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-received-reverse`
 
@@ -14048,7 +14048,7 @@ show stats aggregate-session by-service packets-received-reverse [service <servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-received-tcp`
 
@@ -14103,7 +14103,7 @@ show stats aggregate-session by-service packets-received-tcp-forward [service <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-received-tcp-reverse`
 
@@ -14133,7 +14133,7 @@ show stats aggregate-session by-service packets-received-tcp-reverse [service <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-received-udp`
 
@@ -14188,7 +14188,7 @@ show stats aggregate-session by-service packets-received-udp-forward [service <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-received-udp-reverse`
 
@@ -14218,7 +14218,7 @@ show stats aggregate-session by-service packets-received-udp-reverse [service <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-tcp`
 
@@ -14298,7 +14298,7 @@ show stats aggregate-session by-service packets-transmitted-forward [service <se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-transmitted-other-protocol`
 
@@ -14354,7 +14354,7 @@ show stats aggregate-session by-service packets-transmitted-other-protocol-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-transmitted-other-protocol-reverse`
 
@@ -14384,7 +14384,7 @@ show stats aggregate-session by-service packets-transmitted-other-protocol-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-transmitted-reverse`
 
@@ -14414,7 +14414,7 @@ show stats aggregate-session by-service packets-transmitted-reverse [service <se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-transmitted-tcp`
 
@@ -14469,7 +14469,7 @@ show stats aggregate-session by-service packets-transmitted-tcp-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-transmitted-tcp-reverse`
 
@@ -14499,7 +14499,7 @@ show stats aggregate-session by-service packets-transmitted-tcp-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-transmitted-udp`
 
@@ -14554,7 +14554,7 @@ show stats aggregate-session by-service packets-transmitted-udp-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-transmitted-udp-reverse`
 
@@ -14584,7 +14584,7 @@ show stats aggregate-session by-service packets-transmitted-udp-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service packets-udp`
 
@@ -14714,7 +14714,7 @@ show stats aggregate-session by-service tcp-bad-flag-combinations [service <serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-bad-flag-combinations-forward`
 
@@ -14744,7 +14744,7 @@ show stats aggregate-session by-service tcp-bad-flag-combinations-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-bad-flag-combinations-reverse`
 
@@ -14774,7 +14774,7 @@ show stats aggregate-session by-service tcp-bad-flag-combinations-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-duplicate-acks`
 
@@ -14804,7 +14804,7 @@ show stats aggregate-session by-service tcp-duplicate-acks [service <service>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-duplicate-acks-forward`
 
@@ -14834,7 +14834,7 @@ show stats aggregate-session by-service tcp-duplicate-acks-forward [service <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-duplicate-acks-reverse`
 
@@ -14864,7 +14864,7 @@ show stats aggregate-session by-service tcp-duplicate-acks-reverse [service <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-invalid-state-transitions`
 
@@ -14894,7 +14894,7 @@ show stats aggregate-session by-service tcp-invalid-state-transitions [service <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-invalid-state-transitions-forward`
 
@@ -14924,7 +14924,7 @@ show stats aggregate-session by-service tcp-invalid-state-transitions-forward [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-invalid-state-transitions-reverse`
 
@@ -14954,7 +14954,7 @@ show stats aggregate-session by-service tcp-invalid-state-transitions-reverse [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-out-of-window`
 
@@ -14984,7 +14984,7 @@ show stats aggregate-session by-service tcp-out-of-window [service <service>] [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-out-of-window-forward`
 
@@ -15014,7 +15014,7 @@ show stats aggregate-session by-service tcp-out-of-window-forward [service <serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-out-of-window-reverse`
 
@@ -15044,7 +15044,7 @@ show stats aggregate-session by-service tcp-out-of-window-reverse [service <serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-resets`
 
@@ -15073,7 +15073,7 @@ show stats aggregate-session by-service tcp-resets [service <service>] [since <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-resets-received`
 
@@ -15102,7 +15102,7 @@ show stats aggregate-session by-service tcp-resets-received [service <service>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-resets-received-forward`
 
@@ -15132,7 +15132,7 @@ show stats aggregate-session by-service tcp-resets-received-forward [service <se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-resets-received-reverse`
 
@@ -15162,7 +15162,7 @@ show stats aggregate-session by-service tcp-resets-received-reverse [service <se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-resets-transmitted`
 
@@ -15191,7 +15191,7 @@ show stats aggregate-session by-service tcp-resets-transmitted [service <service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-resets-transmitted-forward`
 
@@ -15221,7 +15221,7 @@ show stats aggregate-session by-service tcp-resets-transmitted-forward [service 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-resets-transmitted-reverse`
 
@@ -15251,7 +15251,7 @@ show stats aggregate-session by-service tcp-resets-transmitted-reverse [service 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-retransmissions`
 
@@ -15331,7 +15331,7 @@ show stats aggregate-session by-service tcp-retransmissions-received-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-retransmissions-received-reverse`
 
@@ -15361,7 +15361,7 @@ show stats aggregate-session by-service tcp-retransmissions-received-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-retransmissions-transmitted`
 
@@ -15416,7 +15416,7 @@ show stats aggregate-session by-service tcp-retransmissions-transmitted-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service tcp-retransmissions-transmitted-reverse`
 
@@ -15446,7 +15446,7 @@ show stats aggregate-session by-service tcp-retransmissions-transmitted-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class`
 
@@ -15711,7 +15711,7 @@ show stats aggregate-session by-service-class bandwidth-received-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-received-other-protocol`
 
@@ -15767,7 +15767,7 @@ show stats aggregate-session by-service-class bandwidth-received-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-received-other-protocol-reverse`
 
@@ -15797,7 +15797,7 @@ show stats aggregate-session by-service-class bandwidth-received-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-received-reverse`
 
@@ -15827,7 +15827,7 @@ show stats aggregate-session by-service-class bandwidth-received-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-received-tcp`
 
@@ -15882,7 +15882,7 @@ show stats aggregate-session by-service-class bandwidth-received-tcp-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-received-tcp-reverse`
 
@@ -15912,7 +15912,7 @@ show stats aggregate-session by-service-class bandwidth-received-tcp-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-received-udp`
 
@@ -15967,7 +15967,7 @@ show stats aggregate-session by-service-class bandwidth-received-udp-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-received-udp-reverse`
 
@@ -15997,7 +15997,7 @@ show stats aggregate-session by-service-class bandwidth-received-udp-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-tcp`
 
@@ -16077,7 +16077,7 @@ show stats aggregate-session by-service-class bandwidth-transmitted-forward [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted-other-protocol`
 
@@ -16133,7 +16133,7 @@ show stats aggregate-session by-service-class bandwidth-transmitted-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted-other-protocol-reverse`
 
@@ -16163,7 +16163,7 @@ show stats aggregate-session by-service-class bandwidth-transmitted-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted-reverse`
 
@@ -16193,7 +16193,7 @@ show stats aggregate-session by-service-class bandwidth-transmitted-reverse [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted-tcp`
 
@@ -16248,7 +16248,7 @@ show stats aggregate-session by-service-class bandwidth-transmitted-tcp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted-tcp-reverse`
 
@@ -16278,7 +16278,7 @@ show stats aggregate-session by-service-class bandwidth-transmitted-tcp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted-udp`
 
@@ -16333,7 +16333,7 @@ show stats aggregate-session by-service-class bandwidth-transmitted-udp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-transmitted-udp-reverse`
 
@@ -16363,7 +16363,7 @@ show stats aggregate-session by-service-class bandwidth-transmitted-udp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bandwidth-udp`
 
@@ -16417,7 +16417,7 @@ show stats aggregate-session by-service-class bytes [service-class <service-clas
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-dropped-forward`
 
@@ -16447,7 +16447,7 @@ show stats aggregate-session by-service-class bytes-dropped-forward [service-cla
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-dropped-other-protocol-forward`
 
@@ -16477,7 +16477,7 @@ show stats aggregate-session by-service-class bytes-dropped-other-protocol-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-dropped-other-protocol-reverse`
 
@@ -16507,7 +16507,7 @@ show stats aggregate-session by-service-class bytes-dropped-other-protocol-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-dropped-reverse`
 
@@ -16537,7 +16537,7 @@ show stats aggregate-session by-service-class bytes-dropped-reverse [service-cla
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-dropped-tcp-forward`
 
@@ -16567,7 +16567,7 @@ show stats aggregate-session by-service-class bytes-dropped-tcp-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-dropped-tcp-reverse`
 
@@ -16597,7 +16597,7 @@ show stats aggregate-session by-service-class bytes-dropped-tcp-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-dropped-udp-forward`
 
@@ -16627,7 +16627,7 @@ show stats aggregate-session by-service-class bytes-dropped-udp-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-dropped-udp-reverse`
 
@@ -16657,7 +16657,7 @@ show stats aggregate-session by-service-class bytes-dropped-udp-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-other-protocol`
 
@@ -16687,7 +16687,7 @@ show stats aggregate-session by-service-class bytes-other-protocol [service-clas
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received`
 
@@ -16716,7 +16716,7 @@ show stats aggregate-session by-service-class bytes-received [service-class <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-forward`
 
@@ -16746,7 +16746,7 @@ show stats aggregate-session by-service-class bytes-received-forward [service-cl
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-other-protocol`
 
@@ -16776,7 +16776,7 @@ show stats aggregate-session by-service-class bytes-received-other-protocol [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-other-protocol-forward`
 
@@ -16806,7 +16806,7 @@ show stats aggregate-session by-service-class bytes-received-other-protocol-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-other-protocol-reverse`
 
@@ -16836,7 +16836,7 @@ show stats aggregate-session by-service-class bytes-received-other-protocol-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-reverse`
 
@@ -16866,7 +16866,7 @@ show stats aggregate-session by-service-class bytes-received-reverse [service-cl
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-tcp`
 
@@ -16895,7 +16895,7 @@ show stats aggregate-session by-service-class bytes-received-tcp [service-class 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-tcp-forward`
 
@@ -16925,7 +16925,7 @@ show stats aggregate-session by-service-class bytes-received-tcp-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-tcp-reverse`
 
@@ -16955,7 +16955,7 @@ show stats aggregate-session by-service-class bytes-received-tcp-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-udp`
 
@@ -16984,7 +16984,7 @@ show stats aggregate-session by-service-class bytes-received-udp [service-class 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-udp-forward`
 
@@ -17014,7 +17014,7 @@ show stats aggregate-session by-service-class bytes-received-udp-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-received-udp-reverse`
 
@@ -17044,7 +17044,7 @@ show stats aggregate-session by-service-class bytes-received-udp-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-tcp`
 
@@ -17073,7 +17073,7 @@ show stats aggregate-session by-service-class bytes-tcp [service-class <service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted`
 
@@ -17102,7 +17102,7 @@ show stats aggregate-session by-service-class bytes-transmitted [service-class <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-forward`
 
@@ -17132,7 +17132,7 @@ show stats aggregate-session by-service-class bytes-transmitted-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-other-protocol`
 
@@ -17162,7 +17162,7 @@ show stats aggregate-session by-service-class bytes-transmitted-other-protocol [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-other-protocol-forward`
 
@@ -17192,7 +17192,7 @@ show stats aggregate-session by-service-class bytes-transmitted-other-protocol-f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-other-protocol-reverse`
 
@@ -17222,7 +17222,7 @@ show stats aggregate-session by-service-class bytes-transmitted-other-protocol-r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-reverse`
 
@@ -17252,7 +17252,7 @@ show stats aggregate-session by-service-class bytes-transmitted-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-tcp`
 
@@ -17281,7 +17281,7 @@ show stats aggregate-session by-service-class bytes-transmitted-tcp [service-cla
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-tcp-forward`
 
@@ -17311,7 +17311,7 @@ show stats aggregate-session by-service-class bytes-transmitted-tcp-forward [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-tcp-reverse`
 
@@ -17341,7 +17341,7 @@ show stats aggregate-session by-service-class bytes-transmitted-tcp-reverse [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-udp`
 
@@ -17370,7 +17370,7 @@ show stats aggregate-session by-service-class bytes-transmitted-udp [service-cla
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-udp-forward`
 
@@ -17400,7 +17400,7 @@ show stats aggregate-session by-service-class bytes-transmitted-udp-forward [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-transmitted-udp-reverse`
 
@@ -17430,7 +17430,7 @@ show stats aggregate-session by-service-class bytes-transmitted-udp-reverse [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class bytes-udp`
 
@@ -17459,7 +17459,7 @@ show stats aggregate-session by-service-class bytes-udp [service-class <service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets`
 
@@ -17514,7 +17514,7 @@ show stats aggregate-session by-service-class packets-dropped-forward [service-c
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-dropped-other-protocol-forward`
 
@@ -17544,7 +17544,7 @@ show stats aggregate-session by-service-class packets-dropped-other-protocol-for
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-dropped-other-protocol-reverse`
 
@@ -17574,7 +17574,7 @@ show stats aggregate-session by-service-class packets-dropped-other-protocol-rev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-dropped-reverse`
 
@@ -17604,7 +17604,7 @@ show stats aggregate-session by-service-class packets-dropped-reverse [service-c
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-dropped-tcp-forward`
 
@@ -17634,7 +17634,7 @@ show stats aggregate-session by-service-class packets-dropped-tcp-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-dropped-tcp-reverse`
 
@@ -17664,7 +17664,7 @@ show stats aggregate-session by-service-class packets-dropped-tcp-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-dropped-udp-forward`
 
@@ -17694,7 +17694,7 @@ show stats aggregate-session by-service-class packets-dropped-udp-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-dropped-udp-reverse`
 
@@ -17724,7 +17724,7 @@ show stats aggregate-session by-service-class packets-dropped-udp-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-other-protocol`
 
@@ -17805,7 +17805,7 @@ show stats aggregate-session by-service-class packets-received-forward [service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-received-other-protocol`
 
@@ -17861,7 +17861,7 @@ show stats aggregate-session by-service-class packets-received-other-protocol-fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-received-other-protocol-reverse`
 
@@ -17891,7 +17891,7 @@ show stats aggregate-session by-service-class packets-received-other-protocol-re
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-received-reverse`
 
@@ -17921,7 +17921,7 @@ show stats aggregate-session by-service-class packets-received-reverse [service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-received-tcp`
 
@@ -17976,7 +17976,7 @@ show stats aggregate-session by-service-class packets-received-tcp-forward [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-received-tcp-reverse`
 
@@ -18006,7 +18006,7 @@ show stats aggregate-session by-service-class packets-received-tcp-reverse [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-received-udp`
 
@@ -18061,7 +18061,7 @@ show stats aggregate-session by-service-class packets-received-udp-forward [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-received-udp-reverse`
 
@@ -18091,7 +18091,7 @@ show stats aggregate-session by-service-class packets-received-udp-reverse [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-tcp`
 
@@ -18171,7 +18171,7 @@ show stats aggregate-session by-service-class packets-transmitted-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-transmitted-other-protocol`
 
@@ -18227,7 +18227,7 @@ show stats aggregate-session by-service-class packets-transmitted-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-transmitted-other-protocol-reverse`
 
@@ -18257,7 +18257,7 @@ show stats aggregate-session by-service-class packets-transmitted-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-transmitted-reverse`
 
@@ -18287,7 +18287,7 @@ show stats aggregate-session by-service-class packets-transmitted-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-transmitted-tcp`
 
@@ -18342,7 +18342,7 @@ show stats aggregate-session by-service-class packets-transmitted-tcp-forward [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-transmitted-tcp-reverse`
 
@@ -18372,7 +18372,7 @@ show stats aggregate-session by-service-class packets-transmitted-tcp-reverse [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-transmitted-udp`
 
@@ -18427,7 +18427,7 @@ show stats aggregate-session by-service-class packets-transmitted-udp-forward [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-transmitted-udp-reverse`
 
@@ -18457,7 +18457,7 @@ show stats aggregate-session by-service-class packets-transmitted-udp-reverse [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class packets-udp`
 
@@ -18587,7 +18587,7 @@ show stats aggregate-session by-service-class tcp-bad-flag-combinations [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-bad-flag-combinations-forward`
 
@@ -18617,7 +18617,7 @@ show stats aggregate-session by-service-class tcp-bad-flag-combinations-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-bad-flag-combinations-reverse`
 
@@ -18647,7 +18647,7 @@ show stats aggregate-session by-service-class tcp-bad-flag-combinations-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-duplicate-acks`
 
@@ -18677,7 +18677,7 @@ show stats aggregate-session by-service-class tcp-duplicate-acks [service-class 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-duplicate-acks-forward`
 
@@ -18707,7 +18707,7 @@ show stats aggregate-session by-service-class tcp-duplicate-acks-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-duplicate-acks-reverse`
 
@@ -18737,7 +18737,7 @@ show stats aggregate-session by-service-class tcp-duplicate-acks-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-invalid-state-transitions`
 
@@ -18767,7 +18767,7 @@ show stats aggregate-session by-service-class tcp-invalid-state-transitions [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-invalid-state-transitions-forward`
 
@@ -18797,7 +18797,7 @@ show stats aggregate-session by-service-class tcp-invalid-state-transitions-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-invalid-state-transitions-reverse`
 
@@ -18827,7 +18827,7 @@ show stats aggregate-session by-service-class tcp-invalid-state-transitions-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-out-of-window`
 
@@ -18857,7 +18857,7 @@ show stats aggregate-session by-service-class tcp-out-of-window [service-class <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-out-of-window-forward`
 
@@ -18887,7 +18887,7 @@ show stats aggregate-session by-service-class tcp-out-of-window-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-out-of-window-reverse`
 
@@ -18917,7 +18917,7 @@ show stats aggregate-session by-service-class tcp-out-of-window-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-resets`
 
@@ -18946,7 +18946,7 @@ show stats aggregate-session by-service-class tcp-resets [service-class <service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-resets-received`
 
@@ -18975,7 +18975,7 @@ show stats aggregate-session by-service-class tcp-resets-received [service-class
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-resets-received-forward`
 
@@ -19005,7 +19005,7 @@ show stats aggregate-session by-service-class tcp-resets-received-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-resets-received-reverse`
 
@@ -19035,7 +19035,7 @@ show stats aggregate-session by-service-class tcp-resets-received-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-resets-transmitted`
 
@@ -19064,7 +19064,7 @@ show stats aggregate-session by-service-class tcp-resets-transmitted [service-cl
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-resets-transmitted-forward`
 
@@ -19094,7 +19094,7 @@ show stats aggregate-session by-service-class tcp-resets-transmitted-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-resets-transmitted-reverse`
 
@@ -19124,7 +19124,7 @@ show stats aggregate-session by-service-class tcp-resets-transmitted-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions`
 
@@ -19204,7 +19204,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-received-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-received-reverse`
 
@@ -19234,7 +19234,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-received-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-transmitted`
 
@@ -19289,7 +19289,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-transmitted-fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-class tcp-retransmissions-transmitted-reverse`
 
@@ -19319,7 +19319,7 @@ show stats aggregate-session by-service-class tcp-retransmissions-transmitted-re
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group`
 
@@ -19584,7 +19584,7 @@ show stats aggregate-session by-service-group bandwidth-received-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-received-other-protocol`
 
@@ -19640,7 +19640,7 @@ show stats aggregate-session by-service-group bandwidth-received-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-received-other-protocol-reverse`
 
@@ -19670,7 +19670,7 @@ show stats aggregate-session by-service-group bandwidth-received-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-received-reverse`
 
@@ -19700,7 +19700,7 @@ show stats aggregate-session by-service-group bandwidth-received-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-received-tcp`
 
@@ -19755,7 +19755,7 @@ show stats aggregate-session by-service-group bandwidth-received-tcp-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-received-tcp-reverse`
 
@@ -19785,7 +19785,7 @@ show stats aggregate-session by-service-group bandwidth-received-tcp-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-received-udp`
 
@@ -19840,7 +19840,7 @@ show stats aggregate-session by-service-group bandwidth-received-udp-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-received-udp-reverse`
 
@@ -19870,7 +19870,7 @@ show stats aggregate-session by-service-group bandwidth-received-udp-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-tcp`
 
@@ -19950,7 +19950,7 @@ show stats aggregate-session by-service-group bandwidth-transmitted-forward [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted-other-protocol`
 
@@ -20006,7 +20006,7 @@ show stats aggregate-session by-service-group bandwidth-transmitted-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted-other-protocol-reverse`
 
@@ -20036,7 +20036,7 @@ show stats aggregate-session by-service-group bandwidth-transmitted-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted-reverse`
 
@@ -20066,7 +20066,7 @@ show stats aggregate-session by-service-group bandwidth-transmitted-reverse [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted-tcp`
 
@@ -20121,7 +20121,7 @@ show stats aggregate-session by-service-group bandwidth-transmitted-tcp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted-tcp-reverse`
 
@@ -20151,7 +20151,7 @@ show stats aggregate-session by-service-group bandwidth-transmitted-tcp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted-udp`
 
@@ -20206,7 +20206,7 @@ show stats aggregate-session by-service-group bandwidth-transmitted-udp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-transmitted-udp-reverse`
 
@@ -20236,7 +20236,7 @@ show stats aggregate-session by-service-group bandwidth-transmitted-udp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bandwidth-udp`
 
@@ -20290,7 +20290,7 @@ show stats aggregate-session by-service-group bytes [service-group <service-grou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-dropped-forward`
 
@@ -20320,7 +20320,7 @@ show stats aggregate-session by-service-group bytes-dropped-forward [service-gro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-dropped-other-protocol-forward`
 
@@ -20350,7 +20350,7 @@ show stats aggregate-session by-service-group bytes-dropped-other-protocol-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-dropped-other-protocol-reverse`
 
@@ -20380,7 +20380,7 @@ show stats aggregate-session by-service-group bytes-dropped-other-protocol-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-dropped-reverse`
 
@@ -20410,7 +20410,7 @@ show stats aggregate-session by-service-group bytes-dropped-reverse [service-gro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-dropped-tcp-forward`
 
@@ -20440,7 +20440,7 @@ show stats aggregate-session by-service-group bytes-dropped-tcp-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-dropped-tcp-reverse`
 
@@ -20470,7 +20470,7 @@ show stats aggregate-session by-service-group bytes-dropped-tcp-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-dropped-udp-forward`
 
@@ -20500,7 +20500,7 @@ show stats aggregate-session by-service-group bytes-dropped-udp-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-dropped-udp-reverse`
 
@@ -20530,7 +20530,7 @@ show stats aggregate-session by-service-group bytes-dropped-udp-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-other-protocol`
 
@@ -20560,7 +20560,7 @@ show stats aggregate-session by-service-group bytes-other-protocol [service-grou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received`
 
@@ -20589,7 +20589,7 @@ show stats aggregate-session by-service-group bytes-received [service-group <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-forward`
 
@@ -20619,7 +20619,7 @@ show stats aggregate-session by-service-group bytes-received-forward [service-gr
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-other-protocol`
 
@@ -20649,7 +20649,7 @@ show stats aggregate-session by-service-group bytes-received-other-protocol [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-other-protocol-forward`
 
@@ -20679,7 +20679,7 @@ show stats aggregate-session by-service-group bytes-received-other-protocol-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-other-protocol-reverse`
 
@@ -20709,7 +20709,7 @@ show stats aggregate-session by-service-group bytes-received-other-protocol-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-reverse`
 
@@ -20739,7 +20739,7 @@ show stats aggregate-session by-service-group bytes-received-reverse [service-gr
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-tcp`
 
@@ -20768,7 +20768,7 @@ show stats aggregate-session by-service-group bytes-received-tcp [service-group 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-tcp-forward`
 
@@ -20798,7 +20798,7 @@ show stats aggregate-session by-service-group bytes-received-tcp-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-tcp-reverse`
 
@@ -20828,7 +20828,7 @@ show stats aggregate-session by-service-group bytes-received-tcp-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-udp`
 
@@ -20857,7 +20857,7 @@ show stats aggregate-session by-service-group bytes-received-udp [service-group 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-udp-forward`
 
@@ -20887,7 +20887,7 @@ show stats aggregate-session by-service-group bytes-received-udp-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-received-udp-reverse`
 
@@ -20917,7 +20917,7 @@ show stats aggregate-session by-service-group bytes-received-udp-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-tcp`
 
@@ -20946,7 +20946,7 @@ show stats aggregate-session by-service-group bytes-tcp [service-group <service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted`
 
@@ -20975,7 +20975,7 @@ show stats aggregate-session by-service-group bytes-transmitted [service-group <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-forward`
 
@@ -21005,7 +21005,7 @@ show stats aggregate-session by-service-group bytes-transmitted-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-other-protocol`
 
@@ -21035,7 +21035,7 @@ show stats aggregate-session by-service-group bytes-transmitted-other-protocol [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-other-protocol-forward`
 
@@ -21065,7 +21065,7 @@ show stats aggregate-session by-service-group bytes-transmitted-other-protocol-f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-other-protocol-reverse`
 
@@ -21095,7 +21095,7 @@ show stats aggregate-session by-service-group bytes-transmitted-other-protocol-r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-reverse`
 
@@ -21125,7 +21125,7 @@ show stats aggregate-session by-service-group bytes-transmitted-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-tcp`
 
@@ -21154,7 +21154,7 @@ show stats aggregate-session by-service-group bytes-transmitted-tcp [service-gro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-tcp-forward`
 
@@ -21184,7 +21184,7 @@ show stats aggregate-session by-service-group bytes-transmitted-tcp-forward [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-tcp-reverse`
 
@@ -21214,7 +21214,7 @@ show stats aggregate-session by-service-group bytes-transmitted-tcp-reverse [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-udp`
 
@@ -21243,7 +21243,7 @@ show stats aggregate-session by-service-group bytes-transmitted-udp [service-gro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-udp-forward`
 
@@ -21273,7 +21273,7 @@ show stats aggregate-session by-service-group bytes-transmitted-udp-forward [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-transmitted-udp-reverse`
 
@@ -21303,7 +21303,7 @@ show stats aggregate-session by-service-group bytes-transmitted-udp-reverse [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group bytes-udp`
 
@@ -21332,7 +21332,7 @@ show stats aggregate-session by-service-group bytes-udp [service-group <service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets`
 
@@ -21387,7 +21387,7 @@ show stats aggregate-session by-service-group packets-dropped-forward [service-g
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-dropped-other-protocol-forward`
 
@@ -21417,7 +21417,7 @@ show stats aggregate-session by-service-group packets-dropped-other-protocol-for
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-dropped-other-protocol-reverse`
 
@@ -21447,7 +21447,7 @@ show stats aggregate-session by-service-group packets-dropped-other-protocol-rev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-dropped-reverse`
 
@@ -21477,7 +21477,7 @@ show stats aggregate-session by-service-group packets-dropped-reverse [service-g
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-dropped-tcp-forward`
 
@@ -21507,7 +21507,7 @@ show stats aggregate-session by-service-group packets-dropped-tcp-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-dropped-tcp-reverse`
 
@@ -21537,7 +21537,7 @@ show stats aggregate-session by-service-group packets-dropped-tcp-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-dropped-udp-forward`
 
@@ -21567,7 +21567,7 @@ show stats aggregate-session by-service-group packets-dropped-udp-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-dropped-udp-reverse`
 
@@ -21597,7 +21597,7 @@ show stats aggregate-session by-service-group packets-dropped-udp-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-other-protocol`
 
@@ -21678,7 +21678,7 @@ show stats aggregate-session by-service-group packets-received-forward [service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-received-other-protocol`
 
@@ -21734,7 +21734,7 @@ show stats aggregate-session by-service-group packets-received-other-protocol-fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-received-other-protocol-reverse`
 
@@ -21764,7 +21764,7 @@ show stats aggregate-session by-service-group packets-received-other-protocol-re
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-received-reverse`
 
@@ -21794,7 +21794,7 @@ show stats aggregate-session by-service-group packets-received-reverse [service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-received-tcp`
 
@@ -21849,7 +21849,7 @@ show stats aggregate-session by-service-group packets-received-tcp-forward [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-received-tcp-reverse`
 
@@ -21879,7 +21879,7 @@ show stats aggregate-session by-service-group packets-received-tcp-reverse [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-received-udp`
 
@@ -21934,7 +21934,7 @@ show stats aggregate-session by-service-group packets-received-udp-forward [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-received-udp-reverse`
 
@@ -21964,7 +21964,7 @@ show stats aggregate-session by-service-group packets-received-udp-reverse [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-tcp`
 
@@ -22044,7 +22044,7 @@ show stats aggregate-session by-service-group packets-transmitted-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-transmitted-other-protocol`
 
@@ -22100,7 +22100,7 @@ show stats aggregate-session by-service-group packets-transmitted-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-transmitted-other-protocol-reverse`
 
@@ -22130,7 +22130,7 @@ show stats aggregate-session by-service-group packets-transmitted-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-transmitted-reverse`
 
@@ -22160,7 +22160,7 @@ show stats aggregate-session by-service-group packets-transmitted-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-transmitted-tcp`
 
@@ -22215,7 +22215,7 @@ show stats aggregate-session by-service-group packets-transmitted-tcp-forward [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-transmitted-tcp-reverse`
 
@@ -22245,7 +22245,7 @@ show stats aggregate-session by-service-group packets-transmitted-tcp-reverse [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-transmitted-udp`
 
@@ -22300,7 +22300,7 @@ show stats aggregate-session by-service-group packets-transmitted-udp-forward [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-transmitted-udp-reverse`
 
@@ -22330,7 +22330,7 @@ show stats aggregate-session by-service-group packets-transmitted-udp-reverse [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group packets-udp`
 
@@ -22460,7 +22460,7 @@ show stats aggregate-session by-service-group tcp-bad-flag-combinations [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-bad-flag-combinations-forward`
 
@@ -22490,7 +22490,7 @@ show stats aggregate-session by-service-group tcp-bad-flag-combinations-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-bad-flag-combinations-reverse`
 
@@ -22520,7 +22520,7 @@ show stats aggregate-session by-service-group tcp-bad-flag-combinations-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-duplicate-acks`
 
@@ -22550,7 +22550,7 @@ show stats aggregate-session by-service-group tcp-duplicate-acks [service-group 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-duplicate-acks-forward`
 
@@ -22580,7 +22580,7 @@ show stats aggregate-session by-service-group tcp-duplicate-acks-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-duplicate-acks-reverse`
 
@@ -22610,7 +22610,7 @@ show stats aggregate-session by-service-group tcp-duplicate-acks-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-invalid-state-transitions`
 
@@ -22640,7 +22640,7 @@ show stats aggregate-session by-service-group tcp-invalid-state-transitions [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-invalid-state-transitions-forward`
 
@@ -22670,7 +22670,7 @@ show stats aggregate-session by-service-group tcp-invalid-state-transitions-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-invalid-state-transitions-reverse`
 
@@ -22700,7 +22700,7 @@ show stats aggregate-session by-service-group tcp-invalid-state-transitions-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-out-of-window`
 
@@ -22730,7 +22730,7 @@ show stats aggregate-session by-service-group tcp-out-of-window [service-group <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-out-of-window-forward`
 
@@ -22760,7 +22760,7 @@ show stats aggregate-session by-service-group tcp-out-of-window-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-out-of-window-reverse`
 
@@ -22790,7 +22790,7 @@ show stats aggregate-session by-service-group tcp-out-of-window-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-resets`
 
@@ -22819,7 +22819,7 @@ show stats aggregate-session by-service-group tcp-resets [service-group <service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-resets-received`
 
@@ -22848,7 +22848,7 @@ show stats aggregate-session by-service-group tcp-resets-received [service-group
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-resets-received-forward`
 
@@ -22878,7 +22878,7 @@ show stats aggregate-session by-service-group tcp-resets-received-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-resets-received-reverse`
 
@@ -22908,7 +22908,7 @@ show stats aggregate-session by-service-group tcp-resets-received-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-resets-transmitted`
 
@@ -22937,7 +22937,7 @@ show stats aggregate-session by-service-group tcp-resets-transmitted [service-gr
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-resets-transmitted-forward`
 
@@ -22967,7 +22967,7 @@ show stats aggregate-session by-service-group tcp-resets-transmitted-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-resets-transmitted-reverse`
 
@@ -22997,7 +22997,7 @@ show stats aggregate-session by-service-group tcp-resets-transmitted-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions`
 
@@ -23077,7 +23077,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-received-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-received-reverse`
 
@@ -23107,7 +23107,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-received-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-transmitted`
 
@@ -23162,7 +23162,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-transmitted-fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-group tcp-retransmissions-transmitted-reverse`
 
@@ -23192,7 +23192,7 @@ show stats aggregate-session by-service-group tcp-retransmissions-transmitted-re
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route`
 
@@ -23457,7 +23457,7 @@ show stats aggregate-session by-service-route bandwidth-received-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-received-other-protocol`
 
@@ -23513,7 +23513,7 @@ show stats aggregate-session by-service-route bandwidth-received-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-received-other-protocol-reverse`
 
@@ -23543,7 +23543,7 @@ show stats aggregate-session by-service-route bandwidth-received-other-protocol-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-received-reverse`
 
@@ -23573,7 +23573,7 @@ show stats aggregate-session by-service-route bandwidth-received-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-received-tcp`
 
@@ -23628,7 +23628,7 @@ show stats aggregate-session by-service-route bandwidth-received-tcp-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-received-tcp-reverse`
 
@@ -23658,7 +23658,7 @@ show stats aggregate-session by-service-route bandwidth-received-tcp-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-received-udp`
 
@@ -23713,7 +23713,7 @@ show stats aggregate-session by-service-route bandwidth-received-udp-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-received-udp-reverse`
 
@@ -23743,7 +23743,7 @@ show stats aggregate-session by-service-route bandwidth-received-udp-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-tcp`
 
@@ -23823,7 +23823,7 @@ show stats aggregate-session by-service-route bandwidth-transmitted-forward [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted-other-protocol`
 
@@ -23879,7 +23879,7 @@ show stats aggregate-session by-service-route bandwidth-transmitted-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted-other-protocol-reverse`
 
@@ -23909,7 +23909,7 @@ show stats aggregate-session by-service-route bandwidth-transmitted-other-protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted-reverse`
 
@@ -23939,7 +23939,7 @@ show stats aggregate-session by-service-route bandwidth-transmitted-reverse [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted-tcp`
 
@@ -23994,7 +23994,7 @@ show stats aggregate-session by-service-route bandwidth-transmitted-tcp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted-tcp-reverse`
 
@@ -24024,7 +24024,7 @@ show stats aggregate-session by-service-route bandwidth-transmitted-tcp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted-udp`
 
@@ -24079,7 +24079,7 @@ show stats aggregate-session by-service-route bandwidth-transmitted-udp-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-transmitted-udp-reverse`
 
@@ -24109,7 +24109,7 @@ show stats aggregate-session by-service-route bandwidth-transmitted-udp-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bandwidth-udp`
 
@@ -24163,7 +24163,7 @@ show stats aggregate-session by-service-route bytes [service-route <service-rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-dropped-forward`
 
@@ -24193,7 +24193,7 @@ show stats aggregate-session by-service-route bytes-dropped-forward [service-rou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-dropped-other-protocol-forward`
 
@@ -24223,7 +24223,7 @@ show stats aggregate-session by-service-route bytes-dropped-other-protocol-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-dropped-other-protocol-reverse`
 
@@ -24253,7 +24253,7 @@ show stats aggregate-session by-service-route bytes-dropped-other-protocol-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-dropped-reverse`
 
@@ -24283,7 +24283,7 @@ show stats aggregate-session by-service-route bytes-dropped-reverse [service-rou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-dropped-tcp-forward`
 
@@ -24313,7 +24313,7 @@ show stats aggregate-session by-service-route bytes-dropped-tcp-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-dropped-tcp-reverse`
 
@@ -24343,7 +24343,7 @@ show stats aggregate-session by-service-route bytes-dropped-tcp-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-dropped-udp-forward`
 
@@ -24373,7 +24373,7 @@ show stats aggregate-session by-service-route bytes-dropped-udp-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-dropped-udp-reverse`
 
@@ -24403,7 +24403,7 @@ show stats aggregate-session by-service-route bytes-dropped-udp-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-other-protocol`
 
@@ -24433,7 +24433,7 @@ show stats aggregate-session by-service-route bytes-other-protocol [service-rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received`
 
@@ -24462,7 +24462,7 @@ show stats aggregate-session by-service-route bytes-received [service-route <ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-forward`
 
@@ -24492,7 +24492,7 @@ show stats aggregate-session by-service-route bytes-received-forward [service-ro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-other-protocol`
 
@@ -24522,7 +24522,7 @@ show stats aggregate-session by-service-route bytes-received-other-protocol [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-other-protocol-forward`
 
@@ -24552,7 +24552,7 @@ show stats aggregate-session by-service-route bytes-received-other-protocol-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-other-protocol-reverse`
 
@@ -24582,7 +24582,7 @@ show stats aggregate-session by-service-route bytes-received-other-protocol-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-reverse`
 
@@ -24612,7 +24612,7 @@ show stats aggregate-session by-service-route bytes-received-reverse [service-ro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-tcp`
 
@@ -24641,7 +24641,7 @@ show stats aggregate-session by-service-route bytes-received-tcp [service-route 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-tcp-forward`
 
@@ -24671,7 +24671,7 @@ show stats aggregate-session by-service-route bytes-received-tcp-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-tcp-reverse`
 
@@ -24701,7 +24701,7 @@ show stats aggregate-session by-service-route bytes-received-tcp-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-udp`
 
@@ -24730,7 +24730,7 @@ show stats aggregate-session by-service-route bytes-received-udp [service-route 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-udp-forward`
 
@@ -24760,7 +24760,7 @@ show stats aggregate-session by-service-route bytes-received-udp-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-received-udp-reverse`
 
@@ -24790,7 +24790,7 @@ show stats aggregate-session by-service-route bytes-received-udp-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-tcp`
 
@@ -24819,7 +24819,7 @@ show stats aggregate-session by-service-route bytes-tcp [service-route <service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted`
 
@@ -24848,7 +24848,7 @@ show stats aggregate-session by-service-route bytes-transmitted [service-route <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-forward`
 
@@ -24878,7 +24878,7 @@ show stats aggregate-session by-service-route bytes-transmitted-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-other-protocol`
 
@@ -24908,7 +24908,7 @@ show stats aggregate-session by-service-route bytes-transmitted-other-protocol [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-other-protocol-forward`
 
@@ -24938,7 +24938,7 @@ show stats aggregate-session by-service-route bytes-transmitted-other-protocol-f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-other-protocol-reverse`
 
@@ -24968,7 +24968,7 @@ show stats aggregate-session by-service-route bytes-transmitted-other-protocol-r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-reverse`
 
@@ -24998,7 +24998,7 @@ show stats aggregate-session by-service-route bytes-transmitted-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-tcp`
 
@@ -25027,7 +25027,7 @@ show stats aggregate-session by-service-route bytes-transmitted-tcp [service-rou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-tcp-forward`
 
@@ -25057,7 +25057,7 @@ show stats aggregate-session by-service-route bytes-transmitted-tcp-forward [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-tcp-reverse`
 
@@ -25087,7 +25087,7 @@ show stats aggregate-session by-service-route bytes-transmitted-tcp-reverse [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-udp`
 
@@ -25116,7 +25116,7 @@ show stats aggregate-session by-service-route bytes-transmitted-udp [service-rou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-udp-forward`
 
@@ -25146,7 +25146,7 @@ show stats aggregate-session by-service-route bytes-transmitted-udp-forward [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-transmitted-udp-reverse`
 
@@ -25176,7 +25176,7 @@ show stats aggregate-session by-service-route bytes-transmitted-udp-reverse [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route bytes-udp`
 
@@ -25205,7 +25205,7 @@ show stats aggregate-session by-service-route bytes-udp [service-route <service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets`
 
@@ -25260,7 +25260,7 @@ show stats aggregate-session by-service-route packets-dropped-forward [service-r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-dropped-other-protocol-forward`
 
@@ -25290,7 +25290,7 @@ show stats aggregate-session by-service-route packets-dropped-other-protocol-for
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-dropped-other-protocol-reverse`
 
@@ -25320,7 +25320,7 @@ show stats aggregate-session by-service-route packets-dropped-other-protocol-rev
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-dropped-reverse`
 
@@ -25350,7 +25350,7 @@ show stats aggregate-session by-service-route packets-dropped-reverse [service-r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-dropped-tcp-forward`
 
@@ -25380,7 +25380,7 @@ show stats aggregate-session by-service-route packets-dropped-tcp-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-dropped-tcp-reverse`
 
@@ -25410,7 +25410,7 @@ show stats aggregate-session by-service-route packets-dropped-tcp-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-dropped-udp-forward`
 
@@ -25440,7 +25440,7 @@ show stats aggregate-session by-service-route packets-dropped-udp-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-dropped-udp-reverse`
 
@@ -25470,7 +25470,7 @@ show stats aggregate-session by-service-route packets-dropped-udp-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-other-protocol`
 
@@ -25551,7 +25551,7 @@ show stats aggregate-session by-service-route packets-received-forward [service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-received-other-protocol`
 
@@ -25607,7 +25607,7 @@ show stats aggregate-session by-service-route packets-received-other-protocol-fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-received-other-protocol-reverse`
 
@@ -25637,7 +25637,7 @@ show stats aggregate-session by-service-route packets-received-other-protocol-re
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-received-reverse`
 
@@ -25667,7 +25667,7 @@ show stats aggregate-session by-service-route packets-received-reverse [service-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-received-tcp`
 
@@ -25722,7 +25722,7 @@ show stats aggregate-session by-service-route packets-received-tcp-forward [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-received-tcp-reverse`
 
@@ -25752,7 +25752,7 @@ show stats aggregate-session by-service-route packets-received-tcp-reverse [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-received-udp`
 
@@ -25807,7 +25807,7 @@ show stats aggregate-session by-service-route packets-received-udp-forward [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-received-udp-reverse`
 
@@ -25837,7 +25837,7 @@ show stats aggregate-session by-service-route packets-received-udp-reverse [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-tcp`
 
@@ -25917,7 +25917,7 @@ show stats aggregate-session by-service-route packets-transmitted-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-transmitted-other-protocol`
 
@@ -25973,7 +25973,7 @@ show stats aggregate-session by-service-route packets-transmitted-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-transmitted-other-protocol-reverse`
 
@@ -26003,7 +26003,7 @@ show stats aggregate-session by-service-route packets-transmitted-other-protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-transmitted-reverse`
 
@@ -26033,7 +26033,7 @@ show stats aggregate-session by-service-route packets-transmitted-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-transmitted-tcp`
 
@@ -26088,7 +26088,7 @@ show stats aggregate-session by-service-route packets-transmitted-tcp-forward [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-transmitted-tcp-reverse`
 
@@ -26118,7 +26118,7 @@ show stats aggregate-session by-service-route packets-transmitted-tcp-reverse [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-transmitted-udp`
 
@@ -26173,7 +26173,7 @@ show stats aggregate-session by-service-route packets-transmitted-udp-forward [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-transmitted-udp-reverse`
 
@@ -26203,7 +26203,7 @@ show stats aggregate-session by-service-route packets-transmitted-udp-reverse [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route packets-udp`
 
@@ -26333,7 +26333,7 @@ show stats aggregate-session by-service-route tcp-bad-flag-combinations [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-bad-flag-combinations-forward`
 
@@ -26363,7 +26363,7 @@ show stats aggregate-session by-service-route tcp-bad-flag-combinations-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-bad-flag-combinations-reverse`
 
@@ -26393,7 +26393,7 @@ show stats aggregate-session by-service-route tcp-bad-flag-combinations-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-duplicate-acks`
 
@@ -26423,7 +26423,7 @@ show stats aggregate-session by-service-route tcp-duplicate-acks [service-route 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-duplicate-acks-forward`
 
@@ -26453,7 +26453,7 @@ show stats aggregate-session by-service-route tcp-duplicate-acks-forward [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-duplicate-acks-reverse`
 
@@ -26483,7 +26483,7 @@ show stats aggregate-session by-service-route tcp-duplicate-acks-reverse [servic
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-invalid-state-transitions`
 
@@ -26513,7 +26513,7 @@ show stats aggregate-session by-service-route tcp-invalid-state-transitions [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-invalid-state-transitions-forward`
 
@@ -26543,7 +26543,7 @@ show stats aggregate-session by-service-route tcp-invalid-state-transitions-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-invalid-state-transitions-reverse`
 
@@ -26573,7 +26573,7 @@ show stats aggregate-session by-service-route tcp-invalid-state-transitions-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-out-of-window`
 
@@ -26603,7 +26603,7 @@ show stats aggregate-session by-service-route tcp-out-of-window [service-route <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-out-of-window-forward`
 
@@ -26633,7 +26633,7 @@ show stats aggregate-session by-service-route tcp-out-of-window-forward [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-out-of-window-reverse`
 
@@ -26663,7 +26663,7 @@ show stats aggregate-session by-service-route tcp-out-of-window-reverse [service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-resets`
 
@@ -26692,7 +26692,7 @@ show stats aggregate-session by-service-route tcp-resets [service-route <service
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-resets-received`
 
@@ -26721,7 +26721,7 @@ show stats aggregate-session by-service-route tcp-resets-received [service-route
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-resets-received-forward`
 
@@ -26751,7 +26751,7 @@ show stats aggregate-session by-service-route tcp-resets-received-forward [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-resets-received-reverse`
 
@@ -26781,7 +26781,7 @@ show stats aggregate-session by-service-route tcp-resets-received-reverse [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-resets-transmitted`
 
@@ -26810,7 +26810,7 @@ show stats aggregate-session by-service-route tcp-resets-transmitted [service-ro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-resets-transmitted-forward`
 
@@ -26840,7 +26840,7 @@ show stats aggregate-session by-service-route tcp-resets-transmitted-forward [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-resets-transmitted-reverse`
 
@@ -26870,7 +26870,7 @@ show stats aggregate-session by-service-route tcp-resets-transmitted-reverse [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions`
 
@@ -26950,7 +26950,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-received-forwa
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-received-reverse`
 
@@ -26980,7 +26980,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-received-rever
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-transmitted`
 
@@ -27035,7 +27035,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-transmitted-fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-service-route tcp-retransmissions-transmitted-reverse`
 
@@ -27065,7 +27065,7 @@ show stats aggregate-session by-service-route tcp-retransmissions-transmitted-re
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant`
 
@@ -27330,7 +27330,7 @@ show stats aggregate-session by-tenant bandwidth-received-forward [tenant <tenan
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-received-other-protocol`
 
@@ -27386,7 +27386,7 @@ show stats aggregate-session by-tenant bandwidth-received-other-protocol-forward
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-received-other-protocol-reverse`
 
@@ -27416,7 +27416,7 @@ show stats aggregate-session by-tenant bandwidth-received-other-protocol-reverse
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-received-reverse`
 
@@ -27446,7 +27446,7 @@ show stats aggregate-session by-tenant bandwidth-received-reverse [tenant <tenan
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-received-tcp`
 
@@ -27501,7 +27501,7 @@ show stats aggregate-session by-tenant bandwidth-received-tcp-forward [tenant <t
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-received-tcp-reverse`
 
@@ -27531,7 +27531,7 @@ show stats aggregate-session by-tenant bandwidth-received-tcp-reverse [tenant <t
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-received-udp`
 
@@ -27586,7 +27586,7 @@ show stats aggregate-session by-tenant bandwidth-received-udp-forward [tenant <t
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-received-udp-reverse`
 
@@ -27616,7 +27616,7 @@ show stats aggregate-session by-tenant bandwidth-received-udp-reverse [tenant <t
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-tcp`
 
@@ -27696,7 +27696,7 @@ show stats aggregate-session by-tenant bandwidth-transmitted-forward [tenant <te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted-other-protocol`
 
@@ -27752,7 +27752,7 @@ show stats aggregate-session by-tenant bandwidth-transmitted-other-protocol-forw
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted-other-protocol-reverse`
 
@@ -27782,7 +27782,7 @@ show stats aggregate-session by-tenant bandwidth-transmitted-other-protocol-reve
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted-reverse`
 
@@ -27812,7 +27812,7 @@ show stats aggregate-session by-tenant bandwidth-transmitted-reverse [tenant <te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted-tcp`
 
@@ -27867,7 +27867,7 @@ show stats aggregate-session by-tenant bandwidth-transmitted-tcp-forward [tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted-tcp-reverse`
 
@@ -27897,7 +27897,7 @@ show stats aggregate-session by-tenant bandwidth-transmitted-tcp-reverse [tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted-udp`
 
@@ -27952,7 +27952,7 @@ show stats aggregate-session by-tenant bandwidth-transmitted-udp-forward [tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-transmitted-udp-reverse`
 
@@ -27982,7 +27982,7 @@ show stats aggregate-session by-tenant bandwidth-transmitted-udp-reverse [tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bandwidth-udp`
 
@@ -28036,7 +28036,7 @@ show stats aggregate-session by-tenant bytes [tenant <tenant>] [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-dropped-forward`
 
@@ -28066,7 +28066,7 @@ show stats aggregate-session by-tenant bytes-dropped-forward [tenant <tenant>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-dropped-other-protocol-forward`
 
@@ -28096,7 +28096,7 @@ show stats aggregate-session by-tenant bytes-dropped-other-protocol-forward [ten
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-dropped-other-protocol-reverse`
 
@@ -28126,7 +28126,7 @@ show stats aggregate-session by-tenant bytes-dropped-other-protocol-reverse [ten
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-dropped-reverse`
 
@@ -28156,7 +28156,7 @@ show stats aggregate-session by-tenant bytes-dropped-reverse [tenant <tenant>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-dropped-tcp-forward`
 
@@ -28186,7 +28186,7 @@ show stats aggregate-session by-tenant bytes-dropped-tcp-forward [tenant <tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-dropped-tcp-reverse`
 
@@ -28216,7 +28216,7 @@ show stats aggregate-session by-tenant bytes-dropped-tcp-reverse [tenant <tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-dropped-udp-forward`
 
@@ -28246,7 +28246,7 @@ show stats aggregate-session by-tenant bytes-dropped-udp-forward [tenant <tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-dropped-udp-reverse`
 
@@ -28276,7 +28276,7 @@ show stats aggregate-session by-tenant bytes-dropped-udp-reverse [tenant <tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-other-protocol`
 
@@ -28306,7 +28306,7 @@ show stats aggregate-session by-tenant bytes-other-protocol [tenant <tenant>] [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received`
 
@@ -28335,7 +28335,7 @@ show stats aggregate-session by-tenant bytes-received [tenant <tenant>] [since <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-forward`
 
@@ -28365,7 +28365,7 @@ show stats aggregate-session by-tenant bytes-received-forward [tenant <tenant>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-other-protocol`
 
@@ -28395,7 +28395,7 @@ show stats aggregate-session by-tenant bytes-received-other-protocol [tenant <te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-other-protocol-forward`
 
@@ -28425,7 +28425,7 @@ show stats aggregate-session by-tenant bytes-received-other-protocol-forward [te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-other-protocol-reverse`
 
@@ -28455,7 +28455,7 @@ show stats aggregate-session by-tenant bytes-received-other-protocol-reverse [te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-reverse`
 
@@ -28485,7 +28485,7 @@ show stats aggregate-session by-tenant bytes-received-reverse [tenant <tenant>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-tcp`
 
@@ -28514,7 +28514,7 @@ show stats aggregate-session by-tenant bytes-received-tcp [tenant <tenant>] [sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-tcp-forward`
 
@@ -28544,7 +28544,7 @@ show stats aggregate-session by-tenant bytes-received-tcp-forward [tenant <tenan
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-tcp-reverse`
 
@@ -28574,7 +28574,7 @@ show stats aggregate-session by-tenant bytes-received-tcp-reverse [tenant <tenan
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-udp`
 
@@ -28603,7 +28603,7 @@ show stats aggregate-session by-tenant bytes-received-udp [tenant <tenant>] [sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-udp-forward`
 
@@ -28633,7 +28633,7 @@ show stats aggregate-session by-tenant bytes-received-udp-forward [tenant <tenan
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-received-udp-reverse`
 
@@ -28663,7 +28663,7 @@ show stats aggregate-session by-tenant bytes-received-udp-reverse [tenant <tenan
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-tcp`
 
@@ -28692,7 +28692,7 @@ show stats aggregate-session by-tenant bytes-tcp [tenant <tenant>] [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted`
 
@@ -28721,7 +28721,7 @@ show stats aggregate-session by-tenant bytes-transmitted [tenant <tenant>] [sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-forward`
 
@@ -28751,7 +28751,7 @@ show stats aggregate-session by-tenant bytes-transmitted-forward [tenant <tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-other-protocol`
 
@@ -28781,7 +28781,7 @@ show stats aggregate-session by-tenant bytes-transmitted-other-protocol [tenant 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-other-protocol-forward`
 
@@ -28811,7 +28811,7 @@ show stats aggregate-session by-tenant bytes-transmitted-other-protocol-forward 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-other-protocol-reverse`
 
@@ -28841,7 +28841,7 @@ show stats aggregate-session by-tenant bytes-transmitted-other-protocol-reverse 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-reverse`
 
@@ -28871,7 +28871,7 @@ show stats aggregate-session by-tenant bytes-transmitted-reverse [tenant <tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-tcp`
 
@@ -28900,7 +28900,7 @@ show stats aggregate-session by-tenant bytes-transmitted-tcp [tenant <tenant>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-tcp-forward`
 
@@ -28930,7 +28930,7 @@ show stats aggregate-session by-tenant bytes-transmitted-tcp-forward [tenant <te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-tcp-reverse`
 
@@ -28960,7 +28960,7 @@ show stats aggregate-session by-tenant bytes-transmitted-tcp-reverse [tenant <te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-udp`
 
@@ -28989,7 +28989,7 @@ show stats aggregate-session by-tenant bytes-transmitted-udp [tenant <tenant>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-udp-forward`
 
@@ -29019,7 +29019,7 @@ show stats aggregate-session by-tenant bytes-transmitted-udp-forward [tenant <te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-transmitted-udp-reverse`
 
@@ -29049,7 +29049,7 @@ show stats aggregate-session by-tenant bytes-transmitted-udp-reverse [tenant <te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant bytes-udp`
 
@@ -29078,7 +29078,7 @@ show stats aggregate-session by-tenant bytes-udp [tenant <tenant>] [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets`
 
@@ -29133,7 +29133,7 @@ show stats aggregate-session by-tenant packets-dropped-forward [tenant <tenant>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-dropped-other-protocol-forward`
 
@@ -29163,7 +29163,7 @@ show stats aggregate-session by-tenant packets-dropped-other-protocol-forward [t
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-dropped-other-protocol-reverse`
 
@@ -29193,7 +29193,7 @@ show stats aggregate-session by-tenant packets-dropped-other-protocol-reverse [t
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-dropped-reverse`
 
@@ -29223,7 +29223,7 @@ show stats aggregate-session by-tenant packets-dropped-reverse [tenant <tenant>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-dropped-tcp-forward`
 
@@ -29253,7 +29253,7 @@ show stats aggregate-session by-tenant packets-dropped-tcp-forward [tenant <tena
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-dropped-tcp-reverse`
 
@@ -29283,7 +29283,7 @@ show stats aggregate-session by-tenant packets-dropped-tcp-reverse [tenant <tena
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-dropped-udp-forward`
 
@@ -29313,7 +29313,7 @@ show stats aggregate-session by-tenant packets-dropped-udp-forward [tenant <tena
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-dropped-udp-reverse`
 
@@ -29343,7 +29343,7 @@ show stats aggregate-session by-tenant packets-dropped-udp-reverse [tenant <tena
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-other-protocol`
 
@@ -29424,7 +29424,7 @@ show stats aggregate-session by-tenant packets-received-forward [tenant <tenant>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-received-other-protocol`
 
@@ -29480,7 +29480,7 @@ show stats aggregate-session by-tenant packets-received-other-protocol-forward [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-received-other-protocol-reverse`
 
@@ -29510,7 +29510,7 @@ show stats aggregate-session by-tenant packets-received-other-protocol-reverse [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-received-reverse`
 
@@ -29540,7 +29540,7 @@ show stats aggregate-session by-tenant packets-received-reverse [tenant <tenant>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-received-tcp`
 
@@ -29595,7 +29595,7 @@ show stats aggregate-session by-tenant packets-received-tcp-forward [tenant <ten
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-received-tcp-reverse`
 
@@ -29625,7 +29625,7 @@ show stats aggregate-session by-tenant packets-received-tcp-reverse [tenant <ten
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-received-udp`
 
@@ -29680,7 +29680,7 @@ show stats aggregate-session by-tenant packets-received-udp-forward [tenant <ten
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-received-udp-reverse`
 
@@ -29710,7 +29710,7 @@ show stats aggregate-session by-tenant packets-received-udp-reverse [tenant <ten
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-tcp`
 
@@ -29790,7 +29790,7 @@ show stats aggregate-session by-tenant packets-transmitted-forward [tenant <tena
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-transmitted-other-protocol`
 
@@ -29846,7 +29846,7 @@ show stats aggregate-session by-tenant packets-transmitted-other-protocol-forwar
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-transmitted-other-protocol-reverse`
 
@@ -29876,7 +29876,7 @@ show stats aggregate-session by-tenant packets-transmitted-other-protocol-revers
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-transmitted-reverse`
 
@@ -29906,7 +29906,7 @@ show stats aggregate-session by-tenant packets-transmitted-reverse [tenant <tena
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-transmitted-tcp`
 
@@ -29961,7 +29961,7 @@ show stats aggregate-session by-tenant packets-transmitted-tcp-forward [tenant <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-transmitted-tcp-reverse`
 
@@ -29991,7 +29991,7 @@ show stats aggregate-session by-tenant packets-transmitted-tcp-reverse [tenant <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-transmitted-udp`
 
@@ -30046,7 +30046,7 @@ show stats aggregate-session by-tenant packets-transmitted-udp-forward [tenant <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-transmitted-udp-reverse`
 
@@ -30076,7 +30076,7 @@ show stats aggregate-session by-tenant packets-transmitted-udp-reverse [tenant <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant packets-udp`
 
@@ -30206,7 +30206,7 @@ show stats aggregate-session by-tenant tcp-bad-flag-combinations [tenant <tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-bad-flag-combinations-forward`
 
@@ -30236,7 +30236,7 @@ show stats aggregate-session by-tenant tcp-bad-flag-combinations-forward [tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-bad-flag-combinations-reverse`
 
@@ -30266,7 +30266,7 @@ show stats aggregate-session by-tenant tcp-bad-flag-combinations-reverse [tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-duplicate-acks`
 
@@ -30296,7 +30296,7 @@ show stats aggregate-session by-tenant tcp-duplicate-acks [tenant <tenant>] [sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-duplicate-acks-forward`
 
@@ -30326,7 +30326,7 @@ show stats aggregate-session by-tenant tcp-duplicate-acks-forward [tenant <tenan
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-duplicate-acks-reverse`
 
@@ -30356,7 +30356,7 @@ show stats aggregate-session by-tenant tcp-duplicate-acks-reverse [tenant <tenan
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-invalid-state-transitions`
 
@@ -30386,7 +30386,7 @@ show stats aggregate-session by-tenant tcp-invalid-state-transitions [tenant <te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-invalid-state-transitions-forward`
 
@@ -30416,7 +30416,7 @@ show stats aggregate-session by-tenant tcp-invalid-state-transitions-forward [te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-invalid-state-transitions-reverse`
 
@@ -30446,7 +30446,7 @@ show stats aggregate-session by-tenant tcp-invalid-state-transitions-reverse [te
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-out-of-window`
 
@@ -30476,7 +30476,7 @@ show stats aggregate-session by-tenant tcp-out-of-window [tenant <tenant>] [sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-out-of-window-forward`
 
@@ -30506,7 +30506,7 @@ show stats aggregate-session by-tenant tcp-out-of-window-forward [tenant <tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-out-of-window-reverse`
 
@@ -30536,7 +30536,7 @@ show stats aggregate-session by-tenant tcp-out-of-window-reverse [tenant <tenant
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-resets`
 
@@ -30565,7 +30565,7 @@ show stats aggregate-session by-tenant tcp-resets [tenant <tenant>] [since <sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-resets-received`
 
@@ -30594,7 +30594,7 @@ show stats aggregate-session by-tenant tcp-resets-received [tenant <tenant>] [si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-resets-received-forward`
 
@@ -30624,7 +30624,7 @@ show stats aggregate-session by-tenant tcp-resets-received-forward [tenant <tena
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-resets-received-reverse`
 
@@ -30654,7 +30654,7 @@ show stats aggregate-session by-tenant tcp-resets-received-reverse [tenant <tena
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-resets-transmitted`
 
@@ -30683,7 +30683,7 @@ show stats aggregate-session by-tenant tcp-resets-transmitted [tenant <tenant>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-resets-transmitted-forward`
 
@@ -30713,7 +30713,7 @@ show stats aggregate-session by-tenant tcp-resets-transmitted-forward [tenant <t
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-resets-transmitted-reverse`
 
@@ -30743,7 +30743,7 @@ show stats aggregate-session by-tenant tcp-resets-transmitted-reverse [tenant <t
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions`
 
@@ -30823,7 +30823,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-received-forward [ten
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-received-reverse`
 
@@ -30853,7 +30853,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-received-reverse [ten
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-transmitted`
 
@@ -30908,7 +30908,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-transmitted-forward [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats aggregate-session by-tenant tcp-retransmissions-transmitted-reverse`
 
@@ -30938,7 +30938,7 @@ show stats aggregate-session by-tenant tcp-retransmissions-transmitted-reverse [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id`
 
@@ -31094,7 +31094,7 @@ show stats app-id application-director cache hit [since <since>] [force] [router
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id application-director cache miss`
 
@@ -31135,7 +31135,7 @@ show stats app-id application-director cache miss [since <since>] [force] [route
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id application-director cache size`
 
@@ -31176,7 +31176,7 @@ show stats app-id application-director cache size [since <since>] [force] [route
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id application-director lookup`
 
@@ -31238,7 +31238,7 @@ show stats app-id application-director lookup failure [since <since>] [force] [r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id application-director lookup miss`
 
@@ -31267,7 +31267,7 @@ show stats app-id application-director lookup miss [since <since>] [force] [rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id application-director lookup success`
 
@@ -31296,7 +31296,7 @@ show stats app-id application-director lookup success [since <since>] [force] [r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications`
 
@@ -31491,7 +31491,7 @@ show stats app-id applications acknowledgement-round-trip forward count [netintf
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications acknowledgement-round-trip forward max`
 
@@ -31532,7 +31532,7 @@ show stats app-id applications acknowledgement-round-trip forward max [netintf <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications acknowledgement-round-trip forward min`
 
@@ -31573,7 +31573,7 @@ show stats app-id applications acknowledgement-round-trip forward min [netintf <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications acknowledgement-round-trip forward total`
 
@@ -31614,7 +31614,7 @@ show stats app-id applications acknowledgement-round-trip forward total [netintf
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications acknowledgement-round-trip reverse`
 
@@ -31701,7 +31701,7 @@ show stats app-id applications acknowledgement-round-trip reverse count [netintf
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications acknowledgement-round-trip reverse max`
 
@@ -31742,7 +31742,7 @@ show stats app-id applications acknowledgement-round-trip reverse max [netintf <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications acknowledgement-round-trip reverse min`
 
@@ -31783,7 +31783,7 @@ show stats app-id applications acknowledgement-round-trip reverse min [netintf <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications acknowledgement-round-trip reverse total`
 
@@ -31824,7 +31824,7 @@ show stats app-id applications acknowledgement-round-trip reverse total [netintf
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications bytes-received-reverse`
 
@@ -31864,7 +31864,7 @@ show stats app-id applications bytes-received-reverse [netintf <netintf>] [appli
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications bytes-transmitted-forward`
 
@@ -31904,7 +31904,7 @@ show stats app-id applications bytes-transmitted-forward [netintf <netintf>] [ap
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications capacity-limits`
 
@@ -31977,7 +31977,7 @@ show stats app-id applications capacity-limits quad-zero-client-used [since <sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications capacity-limits untracked`
 
@@ -32012,7 +32012,7 @@ show stats app-id applications capacity-limits untracked [since <since>] [force]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications expiration`
 
@@ -32137,7 +32137,7 @@ show stats app-id applications expiration next-hop creation-timestamp [netintf <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications expiration next-hop timer-cleared`
 
@@ -32177,7 +32177,7 @@ show stats app-id applications expiration next-hop timer-cleared [netintf <netin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications expiration next-hop timer-cleared-timestamp`
 
@@ -32217,7 +32217,7 @@ show stats app-id applications expiration next-hop timer-cleared-timestamp [neti
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications expiration next-hop timer-set`
 
@@ -32257,7 +32257,7 @@ show stats app-id applications expiration next-hop timer-set [netintf <netintf>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications expiration next-hop timer-set-timestamp`
 
@@ -32297,7 +32297,7 @@ show stats app-id applications expiration next-hop timer-set-timestamp [netintf 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications expiration timer-cleared`
 
@@ -32332,7 +32332,7 @@ show stats app-id applications expiration timer-cleared [since <since>] [force] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications expiration timer-set`
 
@@ -32367,7 +32367,7 @@ show stats app-id applications expiration timer-set [since <since>] [force] [rou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications next-hops-added`
 
@@ -32469,7 +32469,7 @@ show stats app-id applications packets-received-reverse [netintf <netintf>] [app
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications packets-transmitted-forward`
 
@@ -32509,7 +32509,7 @@ show stats app-id applications packets-transmitted-forward [netintf <netintf>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications sessions`
 
@@ -32593,7 +32593,7 @@ show stats app-id applications sessions active [netintf <netintf>] [application 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications sessions close-before-establishment`
 
@@ -32634,7 +32634,7 @@ show stats app-id applications sessions close-before-establishment [netintf <net
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications sessions failed`
 
@@ -32672,7 +32672,7 @@ show stats app-id applications sessions failed [netintf <netintf>] [application 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications sessions length`
 
@@ -32759,7 +32759,7 @@ show stats app-id applications sessions length count [netintf <netintf>] [protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications sessions length max`
 
@@ -32800,7 +32800,7 @@ show stats app-id applications sessions length max [netintf <netintf>] [protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications sessions length min`
 
@@ -32841,7 +32841,7 @@ show stats app-id applications sessions length min [netintf <netintf>] [protocol
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications sessions length total`
 
@@ -32882,7 +32882,7 @@ show stats app-id applications sessions length total [netintf <netintf>] [protoc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications sessions success`
 
@@ -32922,7 +32922,7 @@ show stats app-id applications sessions success [netintf <netintf>] [application
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-bad-flag-combinations-forward`
 
@@ -32962,7 +32962,7 @@ show stats app-id applications tcp-bad-flag-combinations-forward [netintf <netin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-bad-flag-combinations-reverse`
 
@@ -33002,7 +33002,7 @@ show stats app-id applications tcp-bad-flag-combinations-reverse [netintf <netin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-duplicate-acks-forward`
 
@@ -33042,7 +33042,7 @@ show stats app-id applications tcp-duplicate-acks-forward [netintf <netintf>] [a
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-duplicate-acks-reverse`
 
@@ -33082,7 +33082,7 @@ show stats app-id applications tcp-duplicate-acks-reverse [netintf <netintf>] [a
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-invalid-state-transitions-forward`
 
@@ -33122,7 +33122,7 @@ show stats app-id applications tcp-invalid-state-transitions-forward [netintf <n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-invalid-state-transitions-reverse`
 
@@ -33162,7 +33162,7 @@ show stats app-id applications tcp-invalid-state-transitions-reverse [netintf <n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-out-of-window-forward`
 
@@ -33202,7 +33202,7 @@ show stats app-id applications tcp-out-of-window-forward [netintf <netintf>] [ap
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-out-of-window-reverse`
 
@@ -33242,7 +33242,7 @@ show stats app-id applications tcp-out-of-window-reverse [netintf <netintf>] [ap
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-resets-received-forward`
 
@@ -33282,7 +33282,7 @@ show stats app-id applications tcp-resets-received-forward [netintf <netintf>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-resets-received-reverse`
 
@@ -33322,7 +33322,7 @@ show stats app-id applications tcp-resets-received-reverse [netintf <netintf>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-resets-transmitted-forward`
 
@@ -33362,7 +33362,7 @@ show stats app-id applications tcp-resets-transmitted-forward [netintf <netintf>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-resets-transmitted-reverse`
 
@@ -33402,7 +33402,7 @@ show stats app-id applications tcp-resets-transmitted-reverse [netintf <netintf>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-retransmission-packets-received-forward`
 
@@ -33442,7 +33442,7 @@ show stats app-id applications tcp-retransmission-packets-received-forward [neti
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-retransmission-packets-received-reverse`
 
@@ -33482,7 +33482,7 @@ show stats app-id applications tcp-retransmission-packets-received-reverse [neti
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-retransmission-packets-transmitted-forward`
 
@@ -33522,7 +33522,7 @@ show stats app-id applications tcp-retransmission-packets-transmitted-forward [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tcp-retransmission-packets-transmitted-reverse`
 
@@ -33562,7 +33562,7 @@ show stats app-id applications tcp-retransmission-packets-transmitted-reverse [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications time-to-first-data-packet`
 
@@ -33649,7 +33649,7 @@ show stats app-id applications time-to-first-data-packet count [netintf <netintf
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications time-to-first-data-packet max`
 
@@ -33690,7 +33690,7 @@ show stats app-id applications time-to-first-data-packet max [netintf <netintf>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications time-to-first-data-packet min`
 
@@ -33731,7 +33731,7 @@ show stats app-id applications time-to-first-data-packet min [netintf <netintf>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications time-to-first-data-packet total`
 
@@ -33772,7 +33772,7 @@ show stats app-id applications time-to-first-data-packet total [netintf <netintf
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id applications tracked-next-hops`
 
@@ -34160,7 +34160,7 @@ show stats app-id subcategory-lookup hit [service <service>] [since <since>] [fo
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id subcategory-lookup miss`
 
@@ -34190,7 +34190,7 @@ show stats app-id subcategory-lookup miss [service <service>] [since <since>] [f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id subcategory-lookup service-not-applicable`
 
@@ -34219,7 +34219,7 @@ show stats app-id subcategory-lookup service-not-applicable [since <since>] [for
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id url-lookup`
 
@@ -34282,7 +34282,7 @@ show stats app-id url-lookup hit [service <service>] [since <since>] [force] [ro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id url-lookup miss`
 
@@ -34312,7 +34312,7 @@ show stats app-id url-lookup miss [service <service>] [since <since>] [force] [r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats app-id url-lookup service-not-applicable`
 
@@ -34341,7 +34341,7 @@ show stats app-id url-lookup service-not-applicable [since <since>] [force] [rou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director`
 
@@ -34468,7 +34468,7 @@ show stats application-director classify-session cache request [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session cache success`
 
@@ -34497,7 +34497,7 @@ show stats application-director classify-session cache success [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session classified`
 
@@ -34560,7 +34560,7 @@ show stats application-director classify-session classified domain [since <since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session classified ip`
 
@@ -34589,7 +34589,7 @@ show stats application-director classify-session classified ip [since <since>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session classified transport`
 
@@ -34618,7 +34618,7 @@ show stats application-director classify-session classified transport [since <si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session classified url`
 
@@ -34647,7 +34647,7 @@ show stats application-director classify-session classified url [since <since>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session unclassified`
 
@@ -34710,7 +34710,7 @@ show stats application-director classify-session unclassified domain [since <sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session unclassified ip`
 
@@ -34739,7 +34739,7 @@ show stats application-director classify-session unclassified ip [since <since>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session unclassified transport`
 
@@ -34768,7 +34768,7 @@ show stats application-director classify-session unclassified transport [since <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session unclassified url`
 
@@ -34797,7 +34797,7 @@ show stats application-director classify-session unclassified url [since <since>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session websense`
 
@@ -34859,7 +34859,7 @@ show stats application-director classify-session websense request [status <statu
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director classify-session websense success`
 
@@ -34888,7 +34888,7 @@ show stats application-director classify-session websense success [since <since>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-director requests`
 
@@ -34919,7 +34919,7 @@ show stats application-director requests [endpoint <endpoint>] [status <status>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats application-framework`
 
@@ -36502,7 +36502,7 @@ show stats audit events produced [collector <collector>] [type <type>] [subtype 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd`
 
@@ -37007,7 +37007,7 @@ show stats bfd by-peer-path async received miss [peer-name <peer-name>] [peer-ho
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path async received success`
 
@@ -37047,7 +37047,7 @@ show stats bfd by-peer-path async received success [peer-name <peer-name>] [peer
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path async sent`
 
@@ -37131,7 +37131,7 @@ show stats bfd by-peer-path async sent arp-failure [peer-name <peer-name>] [peer
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path async sent buffer-allocation-failure`
 
@@ -37171,7 +37171,7 @@ show stats bfd by-peer-path async sent buffer-allocation-failure [peer-name <pee
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path async sent success`
 
@@ -37211,7 +37211,7 @@ show stats bfd by-peer-path async sent success [peer-name <peer-name>] [peer-hos
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path average-latency`
 
@@ -37330,7 +37330,7 @@ show stats bfd by-peer-path dynamic-damping current-hold-down-time [peer-name <p
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path dynamic-damping hold-down-link-flaps`
 
@@ -37370,7 +37370,7 @@ show stats bfd by-peer-path dynamic-damping hold-down-link-flaps [peer-name <pee
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path echo`
 
@@ -37453,7 +37453,7 @@ show stats bfd by-peer-path echo received [peer-name <peer-name>] [peer-host <pe
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path echo sent`
 
@@ -37537,7 +37537,7 @@ show stats bfd by-peer-path echo sent arp-failure [peer-name <peer-name>] [peer-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path echo sent buffer-allocation-failure`
 
@@ -37577,7 +37577,7 @@ show stats bfd by-peer-path echo sent buffer-allocation-failure [peer-name <peer
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path echo sent success`
 
@@ -37617,7 +37617,7 @@ show stats bfd by-peer-path echo sent success [peer-name <peer-name>] [peer-host
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path jitter`
 
@@ -37774,7 +37774,7 @@ show stats bfd by-peer-path link-down local-oper-down [peer-name <peer-name>] [p
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path link-down remote-admin-down`
 
@@ -37814,7 +37814,7 @@ show stats bfd by-peer-path link-down remote-admin-down [peer-name <peer-name>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path link-down remote-down`
 
@@ -37854,7 +37854,7 @@ show stats bfd by-peer-path link-down remote-down [peer-name <peer-name>] [peer-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path link-down timer-expiry`
 
@@ -37894,7 +37894,7 @@ show stats bfd by-peer-path link-down timer-expiry [peer-name <peer-name>] [peer
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path link-up`
 
@@ -37934,7 +37934,7 @@ show stats bfd by-peer-path link-up [peer-name <peer-name>] [peer-host <peer-hos
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path local-source-nat-change`
 
@@ -37974,7 +37974,7 @@ show stats bfd by-peer-path local-source-nat-change [peer-name <peer-name>] [pee
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path local-source-nat-reset`
 
@@ -38014,7 +38014,7 @@ show stats bfd by-peer-path local-source-nat-reset [peer-name <peer-name>] [peer
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path loss`
 
@@ -38169,7 +38169,7 @@ show stats bfd by-peer-path neighbor failover [peer-name <peer-name>] [peer-host
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd by-peer-path neighbor source-nat-change`
 
@@ -38209,7 +38209,7 @@ show stats bfd by-peer-path neighbor source-nat-change [peer-name <peer-name>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd dynamic-damping`
 
@@ -38283,7 +38283,7 @@ show stats bfd dynamic-damping hold-down-link-flaps [since <since>] [force] [rou
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd echo`
 
@@ -39135,7 +39135,7 @@ show stats bfd received-invalid hostname-collision-with-static-ip [since <since>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats bfd received-invalid local-discriminator`
 
@@ -40791,7 +40791,7 @@ show stats conflux messages write rate [pipeline <pipeline>] [source <source>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux messages write success`
 
@@ -40849,7 +40849,7 @@ show stats conflux messages write total [pipeline <pipeline>] [source <source>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream`
 
@@ -40918,7 +40918,7 @@ show stats conflux stream continue [pipeline <pipeline>] [source <source>] [sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream delay`
 
@@ -40949,7 +40949,7 @@ show stats conflux stream delay [pipeline <pipeline>] [source <source>] [since <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream end`
 
@@ -40980,7 +40980,7 @@ show stats conflux stream end [pipeline <pipeline>] [source <source>] [since <si
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream requests`
 
@@ -41011,7 +41011,7 @@ show stats conflux stream requests [pipeline <pipeline>] [source <source>] [sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream responses`
 
@@ -41077,7 +41077,7 @@ show stats conflux stream responses empty [pipeline <pipeline>] [source <source>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream responses error`
 
@@ -41143,7 +41143,7 @@ show stats conflux stream responses error boundary [pipeline <pipeline>] [source
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream responses error connection`
 
@@ -41174,7 +41174,7 @@ show stats conflux stream responses error connection [pipeline <pipeline>] [sour
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream responses error other`
 
@@ -41205,7 +41205,7 @@ show stats conflux stream responses error other [pipeline <pipeline>] [source <s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream responses nonempty`
 
@@ -41236,7 +41236,7 @@ show stats conflux stream responses nonempty [pipeline <pipeline>] [source <sour
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats conflux stream start`
 
@@ -41267,7 +41267,7 @@ show stats conflux stream start [pipeline <pipeline>] [source <source>] [since <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats cpu`
 
@@ -43357,7 +43357,7 @@ show stats external-protocols agent errors pim-over-svr-drops [since <since>] [f
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats external-protocols agent errors session-collision`
 
@@ -43495,7 +43495,7 @@ show stats external-protocols agent packets pim-secure-vector-routed [since <sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats external-protocols agent packets secure-vector-routed`
 
@@ -44159,7 +44159,7 @@ show stats highway destination-reachability icmp established [service <service>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability icmp time-to-establishment`
 
@@ -44229,7 +44229,7 @@ show stats highway destination-reachability icmp time-to-establishment max [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability icmp time-to-establishment mean`
 
@@ -44262,7 +44262,7 @@ show stats highway destination-reachability icmp time-to-establishment mean [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability icmp time-to-establishment min`
 
@@ -44295,7 +44295,7 @@ show stats highway destination-reachability icmp time-to-establishment min [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability icmp timeout-before-establishment`
 
@@ -44328,7 +44328,7 @@ show stats highway destination-reachability icmp timeout-before-establishment [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability icmp unreachable`
 
@@ -44361,7 +44361,7 @@ show stats highway destination-reachability icmp unreachable [service <service>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability other`
 
@@ -44432,7 +44432,7 @@ show stats highway destination-reachability other established [service <service>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability other time-to-establishment`
 
@@ -44502,7 +44502,7 @@ show stats highway destination-reachability other time-to-establishment max [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability other time-to-establishment mean`
 
@@ -44535,7 +44535,7 @@ show stats highway destination-reachability other time-to-establishment mean [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability other time-to-establishment min`
 
@@ -44568,7 +44568,7 @@ show stats highway destination-reachability other time-to-establishment min [ser
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability other timeout-before-establishment`
 
@@ -44601,7 +44601,7 @@ show stats highway destination-reachability other timeout-before-establishment [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability other unreachable`
 
@@ -44634,7 +44634,7 @@ show stats highway destination-reachability other unreachable [service <service>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tcp`
 
@@ -44706,7 +44706,7 @@ show stats highway destination-reachability tcp close-before-establishment [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tcp established`
 
@@ -44739,7 +44739,7 @@ show stats highway destination-reachability tcp established [service <service>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tcp time-to-establishment`
 
@@ -44809,7 +44809,7 @@ show stats highway destination-reachability tcp time-to-establishment max [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tcp time-to-establishment mean`
 
@@ -44842,7 +44842,7 @@ show stats highway destination-reachability tcp time-to-establishment mean [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tcp time-to-establishment min`
 
@@ -44875,7 +44875,7 @@ show stats highway destination-reachability tcp time-to-establishment min [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tcp timeout-before-establishment`
 
@@ -44908,7 +44908,7 @@ show stats highway destination-reachability tcp timeout-before-establishment [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tcp unreachable`
 
@@ -44941,7 +44941,7 @@ show stats highway destination-reachability tcp unreachable [service <service>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tls`
 
@@ -45012,7 +45012,7 @@ show stats highway destination-reachability tls close-before-establishment [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tls established`
 
@@ -45045,7 +45045,7 @@ show stats highway destination-reachability tls established [service <service>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tls time-to-establishment`
 
@@ -45115,7 +45115,7 @@ show stats highway destination-reachability tls time-to-establishment max [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tls time-to-establishment mean`
 
@@ -45148,7 +45148,7 @@ show stats highway destination-reachability tls time-to-establishment mean [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tls time-to-establishment min`
 
@@ -45181,7 +45181,7 @@ show stats highway destination-reachability tls time-to-establishment min [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability tls timeout-before-establishment`
 
@@ -45214,7 +45214,7 @@ show stats highway destination-reachability tls timeout-before-establishment [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability udp`
 
@@ -45285,7 +45285,7 @@ show stats highway destination-reachability udp established [service <service>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability udp time-to-establishment`
 
@@ -45355,7 +45355,7 @@ show stats highway destination-reachability udp time-to-establishment max [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability udp time-to-establishment mean`
 
@@ -45388,7 +45388,7 @@ show stats highway destination-reachability udp time-to-establishment mean [serv
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability udp time-to-establishment min`
 
@@ -45421,7 +45421,7 @@ show stats highway destination-reachability udp time-to-establishment min [servi
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability udp timeout-before-establishment`
 
@@ -45454,7 +45454,7 @@ show stats highway destination-reachability udp timeout-before-establishment [se
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway destination-reachability udp unreachable`
 
@@ -45487,7 +45487,7 @@ show stats highway destination-reachability udp unreachable [service <service>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats highway firewall-detector`
 
@@ -45996,7 +45996,7 @@ show stats icmp reachability-probe service-routes jitter [probe-profile-name <pr
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats icmp reachability-probe service-routes latency`
 
@@ -46029,7 +46029,7 @@ show stats icmp reachability-probe service-routes latency [probe-profile-name <p
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats icmp reachability-probe service-routes loss`
 
@@ -46062,7 +46062,7 @@ show stats icmp reachability-probe service-routes loss [probe-profile-name <prob
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats icmp reachability-probe service-routes updated`
 
@@ -46095,7 +46095,7 @@ show stats icmp reachability-probe service-routes updated [probe-profile-name <p
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats icmp reachability-probe sla`
 
@@ -46820,7 +46820,7 @@ show stats idp attacks missed [since <since>] [force] [router <router>] [node <n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp attacks mist-sent`
 
@@ -46866,7 +46866,7 @@ show stats idp attacks mist-sent [since <since>] [force] [router <router>] [node
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp attacks received`
 
@@ -46912,7 +46912,7 @@ show stats idp attacks received [since <since>] [force] [router <router>] [node 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp attacks total`
 
@@ -46958,7 +46958,7 @@ show stats idp attacks total [since <since>] [force] [router <router>] [node <no
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp bytes`
 
@@ -47192,7 +47192,7 @@ show stats idp packets dropped [since <since>] [force] [router <router>] [node <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp packets processed`
 
@@ -47238,7 +47238,7 @@ show stats idp packets processed [since <since>] [force] [router <router>] [node
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp packets protocol`
 
@@ -47335,7 +47335,7 @@ show stats idp packets protocol icmp [since <since>] [force] [router <router>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp packets protocol other`
 
@@ -47381,7 +47381,7 @@ show stats idp packets protocol other [since <since>] [force] [router <router>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp packets protocol tcp`
 
@@ -47427,7 +47427,7 @@ show stats idp packets protocol tcp [since <since>] [force] [router <router>] [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp packets protocol udp`
 
@@ -47473,7 +47473,7 @@ show stats idp packets protocol udp [since <since>] [force] [router <router>] [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats idp packets received`
 
@@ -48238,7 +48238,7 @@ show stats ipfix dropped invalid-interface [since <since>] [force] [router <rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats ipfix dropped session-not-established`
 
@@ -48267,7 +48267,7 @@ show stats ipfix dropped session-not-established [since <since>] [force] [router
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats ipfix enqueue`
 
@@ -48327,7 +48327,7 @@ show stats ipfix enqueue attempts [since <since>] [force] [router <router>] [nod
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats ipfix record-export-rate`
 
@@ -48356,7 +48356,7 @@ show stats ipfix record-export-rate [since <since>] [force] [router <router>] [n
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats ipfix time-per-export`
 
@@ -48385,7 +48385,7 @@ show stats ipfix time-per-export [since <since>] [force] [router <router>] [node
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats ipfix time-per-session`
 
@@ -48414,7 +48414,7 @@ show stats ipfix time-per-session [since <since>] [force] [router <router>] [nod
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats ipfix total-generation-time`
 
@@ -48443,7 +48443,7 @@ show stats ipfix total-generation-time [since <since>] [force] [router <router>]
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats ipfix total-records`
 
@@ -48472,7 +48472,7 @@ show stats ipfix total-records [since <since>] [force] [router <router>] [node <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats mars`
 
@@ -48567,7 +48567,7 @@ show stats mars requests bad-response [process-name <process-name>] [since <sinc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats mars requests count`
 
@@ -48599,7 +48599,7 @@ show stats mars requests count [process-name <process-name>] [status <status>] [
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats memory`
 
@@ -49004,7 +49004,7 @@ show stats mtu-discovery peer-path probe-timeout [peer-name <peer-name>] [peer-h
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats mtu-discovery peer-path received`
 
@@ -49037,7 +49037,7 @@ show stats mtu-discovery peer-path received [peer-name <peer-name>] [peer-host <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats mtu-discovery peer-path received-icmp-fragmentation-needed`
 
@@ -49070,7 +49070,7 @@ show stats mtu-discovery peer-path received-icmp-fragmentation-needed [peer-name
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats mtu-discovery peer-path sent`
 
@@ -49140,7 +49140,7 @@ show stats mtu-discovery peer-path sent arp-failure [peer-name <peer-name>] [pee
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats mtu-discovery peer-path sent buffer-allocation-failure`
 
@@ -49173,7 +49173,7 @@ show stats mtu-discovery peer-path sent buffer-allocation-failure [peer-name <pe
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats mtu-discovery peer-path sent success`
 
@@ -49206,7 +49206,7 @@ show stats mtu-discovery peer-path sent success [peer-name <peer-name>] [peer-ho
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats mtu-discovery probe-timeout`
 
@@ -49488,7 +49488,7 @@ show stats network-interface received bytes [port <port>] [netintf <netintf>] [s
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats network-interface received packets`
 
@@ -49519,7 +49519,7 @@ show stats network-interface received packets [port <port>] [netintf <netintf>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats network-interface sent`
 
@@ -49584,7 +49584,7 @@ show stats network-interface sent bytes [port <port>] [netintf <netintf>] [since
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats network-interface sent packets`
 
@@ -49615,7 +49615,7 @@ show stats network-interface sent packets [port <port>] [netintf <netintf>] [sin
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-capture`
 
@@ -49698,7 +49698,7 @@ show stats packet-capture cloud-send-failure [core <core>] [port <port>] [since 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-capture cloud-send-success`
 
@@ -49737,7 +49737,7 @@ show stats packet-capture cloud-send-success [core <core>] [port <port>] [since 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-capture success`
 
@@ -51009,7 +51009,7 @@ show stats packet-processing action failure fec add allocation [core <core>] [po
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure fec add buffer-expansion`
 
@@ -51040,7 +51040,7 @@ show stats packet-processing action failure fec add buffer-expansion [core <core
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure fec remove`
 
@@ -51108,7 +51108,7 @@ show stats packet-processing action failure fec remove completed-round [core <co
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure fec remove invalid-payload-length`
 
@@ -51139,7 +51139,7 @@ show stats packet-processing action failure fec remove invalid-payload-length [c
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure fec remove out-of-order`
 
@@ -51170,7 +51170,7 @@ show stats packet-processing action failure fec remove out-of-order [core <core>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure fec remove parity-discard`
 
@@ -51201,7 +51201,7 @@ show stats packet-processing action failure fec remove parity-discard [core <cor
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure fec remove unexpected-parity`
 
@@ -51232,7 +51232,7 @@ show stats packet-processing action failure fec remove unexpected-parity [core <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure flow-move`
 
@@ -51297,7 +51297,7 @@ show stats packet-processing action failure flow-move buffer-allocation [core <c
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure flow-move disable-forward-metadata-discards`
 
@@ -52136,7 +52136,7 @@ show stats packet-processing action failure metadata received-invalid-forced-dro
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure metadata received-unknown-forced-drop-reason`
 
@@ -53153,7 +53153,7 @@ show stats packet-processing action failure tcp-stitch allocation-failure [core 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure tcp-stitch client-reset-before-establish`
 
@@ -53184,7 +53184,7 @@ show stats packet-processing action failure tcp-stitch client-reset-before-estab
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure tcp-stitch discarded-after-reset`
 
@@ -53215,7 +53215,7 @@ show stats packet-processing action failure tcp-stitch discarded-after-reset [co
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure tcp-stitch failed-to-establish`
 
@@ -53246,7 +53246,7 @@ show stats packet-processing action failure tcp-stitch failed-to-establish [core
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure tcp-stitch injection-failure`
 
@@ -53277,7 +53277,7 @@ show stats packet-processing action failure tcp-stitch injection-failure [core <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure tcp-stitch mss-mismatch`
 
@@ -53308,7 +53308,7 @@ show stats packet-processing action failure tcp-stitch mss-mismatch [core <core>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure tcp-stitch server-sack-disabled`
 
@@ -53339,7 +53339,7 @@ show stats packet-processing action failure tcp-stitch server-sack-disabled [cor
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure tcp-stitch unexpected-packet`
 
@@ -53370,7 +53370,7 @@ show stats packet-processing action failure tcp-stitch unexpected-packet [core <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure tcp-stitch window-rounded-up`
 
@@ -53401,7 +53401,7 @@ show stats packet-processing action failure tcp-stitch window-rounded-up [core <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure tcp-stitch window-truncated`
 
@@ -53432,7 +53432,7 @@ show stats packet-processing action failure tcp-stitch window-truncated [core <c
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action failure ttl-validate`
 
@@ -54993,7 +54993,7 @@ show stats packet-processing action success fec add parity-sent [core <core>] [p
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success fec add trailer-added`
 
@@ -55024,7 +55024,7 @@ show stats packet-processing action success fec add trailer-added [core <core>] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success fec remove`
 
@@ -55093,7 +55093,7 @@ show stats packet-processing action success fec remove completed-round [core <co
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success fec remove out-of-order`
 
@@ -55124,7 +55124,7 @@ show stats packet-processing action success fec remove out-of-order [core <core>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success fec remove regenerated-packet`
 
@@ -55155,7 +55155,7 @@ show stats packet-processing action success fec remove regenerated-packet [core 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success fec remove resync`
 
@@ -55186,7 +55186,7 @@ show stats packet-processing action success fec remove resync [core <core>] [por
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success fec remove trailer-removed`
 
@@ -55217,7 +55217,7 @@ show stats packet-processing action success fec remove trailer-removed [core <co
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success fec remove unnecessary-parity`
 
@@ -55248,7 +55248,7 @@ show stats packet-processing action success fec remove unnecessary-parity [core 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success flow-move`
 
@@ -55344,7 +55344,7 @@ show stats packet-processing action success flow-move generated-keep-alive [core
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success flow-move generated-keep-alive-retransmission`
 
@@ -55375,7 +55375,7 @@ show stats packet-processing action success flow-move generated-keep-alive-retra
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success flow-move packets-enqueued`
 
@@ -55432,7 +55432,7 @@ show stats packet-processing action success flow-move sessions-closed [core <cor
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success flow-move sessions-install-rate`
 
@@ -55488,7 +55488,7 @@ show stats packet-processing action success flow-move sessions-opened [core <cor
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success forward`
 
@@ -58186,7 +58186,7 @@ show stats packet-processing action success tcp-stitch established-server-connec
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success tcp-stitch initiated-server-connection`
 
@@ -58217,7 +58217,7 @@ show stats packet-processing action success tcp-stitch initiated-server-connecti
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success tcp-stitch packets-updated`
 
@@ -58248,7 +58248,7 @@ show stats packet-processing action success tcp-stitch packets-updated [core <co
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success tcp-stitch server-response-received`
 
@@ -58279,7 +58279,7 @@ show stats packet-processing action success tcp-stitch server-response-received 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success tcp-stitch syn-retransmits`
 
@@ -58310,7 +58310,7 @@ show stats packet-processing action success tcp-stitch syn-retransmits [core <co
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing action success ttl-validate`
 
@@ -60323,7 +60323,7 @@ show stats packet-processing classifier received pim total [core <core>] [port <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats packet-processing classifier received q-in-q`
 
@@ -66917,7 +66917,7 @@ show stats performance-monitoring peer-path jitter [peer-name <peer-name>] [peer
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path latency`
 
@@ -66952,7 +66952,7 @@ show stats performance-monitoring peer-path latency [peer-name <peer-name>] [pee
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path loss`
 
@@ -66987,7 +66987,7 @@ show stats performance-monitoring peer-path loss [peer-name <peer-name>] [peer-h
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path mos`
 
@@ -67022,7 +67022,7 @@ show stats performance-monitoring peer-path mos [peer-name <peer-name>] [peer-ho
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path received`
 
@@ -67096,7 +67096,7 @@ show stats performance-monitoring peer-path received loss [peer-name <peer-name>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path received marked-packets`
 
@@ -67131,7 +67131,7 @@ show stats performance-monitoring peer-path received marked-packets [peer-name <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path received marked-packets-acknowledged`
 
@@ -67166,7 +67166,7 @@ show stats performance-monitoring peer-path received marked-packets-acknowledged
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path transmit`
 
@@ -67240,7 +67240,7 @@ show stats performance-monitoring peer-path transmit loss [peer-name <peer-name>
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path transmit marked-packets`
 
@@ -67275,7 +67275,7 @@ show stats performance-monitoring peer-path transmit marked-packets [peer-name <
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path transmit marked-packets-acknowledged`
 
@@ -67310,7 +67310,7 @@ show stats performance-monitoring peer-path transmit marked-packets-acknowledged
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats performance-monitoring peer-path updated`
 
@@ -67345,7 +67345,7 @@ show stats performance-monitoring peer-path updated [peer-name <peer-name>] [pee
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats process`
 
@@ -68154,7 +68154,7 @@ show stats process thread queue total [process-name <process-name>] [thread-name
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats process thread task`
 
@@ -68233,7 +68233,7 @@ show stats process thread task errors [process-name <process-name>] [thread-name
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats process thread task execution-time`
 
@@ -68272,7 +68272,7 @@ show stats process thread task execution-time [process-name <process-name>] [thr
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats process thread task timeouts`
 
@@ -68309,7 +68309,7 @@ show stats process thread task timeouts [process-name <process-name>] [thread-na
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats process thread task total`
 
@@ -68347,7 +68347,7 @@ show stats process thread task total [process-name <process-name>] [thread-name 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats queue`
 
@@ -68443,7 +68443,7 @@ show stats queue consumed bytes [topic <topic>] [since <since>] [force] [router 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats queue consumed messages`
 
@@ -68473,7 +68473,7 @@ show stats queue consumed messages [topic <topic>] [since <since>] [force] [rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats queue produced`
 
@@ -68536,7 +68536,7 @@ show stats queue produced bytes [topic <topic>] [since <since>] [force] [router 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats queue produced messages`
 
@@ -68566,7 +68566,7 @@ show stats queue produced messages [topic <topic>] [since <since>] [force] [rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats redis-server-manager`
 
@@ -73798,7 +73798,7 @@ show stats service-area mist-events failed [since <since>] [force] [router <rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats service-area mist-events sent`
 
@@ -73827,7 +73827,7 @@ show stats service-area mist-events sent [since <since>] [force] [router <router
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats service-area received`
 
@@ -75086,7 +75086,7 @@ show stats service-area received packets-with-stale-flow-move-keep-alive [since 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats service-area received packets-with-stale-reverse-metadata`
 
@@ -79280,7 +79280,7 @@ show stats traffic-eng device-interface peer-path dequeue-cycle-count [peer-name
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path enqueue-cycle-count`
 
@@ -79313,7 +79313,7 @@ show stats traffic-eng device-interface peer-path enqueue-cycle-count [peer-name
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path packets-queued`
 
@@ -79346,7 +79346,7 @@ show stats traffic-eng device-interface peer-path packets-queued [peer-name <pee
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class`
 
@@ -79429,7 +79429,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class buffer-capac
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class buffer-capacity-exceeded-packets`
 
@@ -79463,7 +79463,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class buffer-capac
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-aqm-drop-bytes`
 
@@ -79497,7 +79497,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-aqm-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-aqm-drop-packets`
 
@@ -79531,7 +79531,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-aqm-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-max-latency-drop-bytes`
 
@@ -79565,7 +79565,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-max-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-max-latency-drop-packets`
 
@@ -79599,7 +79599,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-max-
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-success-bytes`
 
@@ -79633,7 +79633,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-succ
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class dequeue-success-packets`
 
@@ -79667,7 +79667,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class dequeue-succ
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-failure-bandwidth`
 
@@ -79701,7 +79701,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-fai
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-failure-bytes`
 
@@ -79735,7 +79735,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-fai
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-failure-packets`
 
@@ -79769,7 +79769,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-fai
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-success-bandwidth`
 
@@ -79803,7 +79803,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-suc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-success-bytes`
 
@@ -79837,7 +79837,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-suc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path per-traffic-class schedule-success-packets`
 
@@ -79871,7 +79871,7 @@ show stats traffic-eng device-interface peer-path per-traffic-class schedule-suc
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-eng device-interface peer-path scheduler-reset`
 
@@ -80822,7 +80822,7 @@ show stats traffic-export enqueue-failure [core <core>] [since <since>] [force] 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-export error-enqueue-failure`
 
@@ -80851,7 +80851,7 @@ show stats traffic-export error-enqueue-failure [since <since>] [force] [router 
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-export rate-limit-exceeded`
 
@@ -80880,7 +80880,7 @@ show stats traffic-export rate-limit-exceeded [since <since>] [force] [router <r
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-export transmit`
 
@@ -80942,7 +80942,7 @@ show stats traffic-export transmit batches [since <since>] [force] [router <rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-export transmit failure`
 
@@ -80971,7 +80971,7 @@ show stats traffic-export transmit failure [since <since>] [force] [router <rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats traffic-export transmit success`
 
@@ -81000,7 +81000,7 @@ show stats traffic-export transmit success [since <since>] [force] [router <rout
 
 #### Description
 
-For more information regarding in-memory metrics, please refer to this retention document - https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_in-memory_metrics/
+For more information regarding in-memory metrics, please refer to [Configuring In-Memory Metrics](config_in-memory_metrics.md)
 
 ## `show stats waypoint`
 
