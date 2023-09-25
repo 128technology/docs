@@ -99,6 +99,7 @@ Configuring SNMP on the SSR is done on a per-router basis, and is done within th
 snmp-server
     enabled     true
     version     v3
+    port        161
     engine-id   testEngineId
 
     vacm
@@ -148,9 +149,13 @@ The view-based access control (VACM) configuration is used to define a list of v
 
 Strict mode is enabled by default. The SSR publishes a set of MIBS that define the OIDS available to query and evaluates the include and exclude lists to ensure each OID exists in the available SSR MIBS. If they are not, the configuration is rejected. This serves to restrict the NMS from querying OIDS that may be supported by the underlying operating system of the SSR.
 
+:::note
+Support of system MIBS may vary between SSR versions. Bypassing these checks by disabling strict mode may allow access to MIBs that are no longer supported. Disabling Strict mode is only recommended for advanced users. 
+:::
+
 ### Access Configuration
 
-With SNMPv3 enabled, access configuration allows you to define a User Based Security Model (USM) (as per RFC 3414). The access configuration isconfigured from within access-control in the snmp-server element, and has three components:
+With SNMPv3 enabled, access configuration allows you to define a User-Based Security Model (USM) as per RFC 3414. The access configuration is configured from within `access-control` in the snmp-server element, and has three components:
 
 - **Name**: Unique name given to the access configuration element (this is the key for the configuration, to uniquely identify an allowlisted SNMP source)
 - **USM**: The user based security model settings
@@ -160,6 +165,16 @@ With SNMPv3 enabled, access configuration allows you to define a User Based Secu
     - Privacy: Encryption algorithm (DES or AES)
     - Privacy-key: Encryption password
 - **View**: Restrict user access to the pre-configured view
+
+#### Authentication and Encryption
+
+The SSR combinations of authentication and privacy as defined in the USM configuration are translated into an SNMPv3 security level for use by `net-snmp`. 
+
+- noAuthNoPriv: When both authentication and privacy are set to `None` 
+- authNoPriv: When authentication is set to either MD5 or SHA, but privacy is set to `None` 
+- authPriv: When both authentication and privacy are set to anything other than `None` 
+
+These security levels are necessary when performing SNMPv3 operations, and the NMS is responsible for mapping the SSR USM configuration to these security levels.
 
 ### Notification Receiver Configuration
 
