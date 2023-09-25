@@ -28,6 +28,39 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.6.11-2
+
+**Release Date:** September 26, 2023
+
+### Resolved Issues Requiring Configuration Changes
+
+- **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
+------
+- **I95-51181 Improve `save-tech-support-info` command:** The PCLI command save tech-support-info now has a since argument that limits log collection to only logs generated after that given point. The since argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
+------
+- **I95-52406 Add ability to download MIBs from GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for 128T.
+
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** I95-51431, I95-52554, I95-52644, I95-52645
+------
+- **I95-42466 Changing the physical linux address of an HA interface breaks the configuration:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address.
+------
+- **I95-50671 Office365 traffic is not recognized:** Resolved an issue where Office365 traffic was being miscategorized and therefore not fully qualified. O365 traffic, when traversing over SVR, is no longer miscategorized.
+------
+- **I95-50708 Time series data for memory of the salt_master process periodically significantly decreases:** Incorrect method for polling application memory data; this resulted in dips in application memory being presented. This issue has been resolved.
+------
+- **I95-51864 Ethernet Over SVR (EoSVR) Not Working:** When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse the middle node. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.
+------
+- **I95-52491 Crash in highway process due to segmented metadata:** Resolved an issue processing metadata that is segmented across two packet buffers. The segmented packets are no longer discarded and the dataplane no longer crashes when processing a packet comprised of segmented metadata.
+------
+- **I95-52599 Conductors display different assets on different HA nodes:** If the state table of an inactive HA node becomes out of sync with the active HA node, then some assets were being skipped when parsing the asset state response. This issue has been resolved through the reporting of asset IDs from the active node state table.
+------
+
+
+
+
 ## Release 5.6.10-6
 
 **Release Date:** August 29, 2023
