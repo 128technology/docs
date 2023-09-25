@@ -11,8 +11,6 @@ The word "leak" implies a break or a breach, and in some cases, route leaking ca
 
 The exchange of routes between a VRF on one SSR and a VRF on another SSR is achieved using a single BGP session in the default VRF, where the VPN address family carries the routes for multiple VRFs via that one BGP session. This configuration allows each VRF to share and copy the designated routes.
 
-achieved with a single BGP session in the default VRF, using the VPN address family to carry the routes for multiple VRFs via that one BGP session.
-
 Only one instance of the BGP VPN RIB route table exists on a router within the default VRF. It can be modified to hold routes from multiple VRFs using a combination of the IP prefix and an 8-byte Route Distinguisher (RD). The RD must be configured for each VRF that is meant to export routes into the VPN table. To identify which VPN routes are imported to a VRF, a Route Target (RT) is identified. The RT is a BGP extended community attribute that identifies both the VPN RIB where the routes will be shared, and is used to identify the routes to be imported to a VRF.  
 
 ### Route Distinguisher
@@ -116,9 +114,6 @@ config
                                 redistribute     connected
                                     protocol     connected
                                 exit
-                            exit
-                            redistribute     connected
-                                protocol     connected
                             exit
                         exit
                     exit
@@ -237,7 +232,7 @@ Use the following configuration process to allow routes from VRF A on SSR-MZ to 
 		                local-as 65000
 		                router-id 16.0.0.3
 			            neighbor SSR-MZ
-		                    neighbor-address ${DUT2_ROUTER_ID}
+		                    neighbor-address 16.0.0.2
 			                    neighbor-as 65000
 				                transport
 									local-address
@@ -257,6 +252,38 @@ Use the following configuration process to allow routes from VRF A on SSR-MZ to 
 ```
 
 If SSR-MZ and SSR-DZ are not direct BGP neighbors, there must be some set of other BGP peers between them, configured to propagate the VPN address family routes from SSR-MZ and ultimately send them to SSR-DZ.
+
+```
+        router SSR-MZ
+            routing default-instance
+                type default-instance
+                    interface loopback
+                        name loopback
+                        ip-address 16.0.0.2
+                    exit
+                    routing-protocol bgp
+                        type bgp
+                        local-as 65000
+                        router-id 16.0.0.2
+                        neighbor SSR-DZ
+                            neighbor-address 16.0.0.3
+                                neighbor-as 65000
+                                transport
+                                    local-address
+                                        routing-interface loopback
+                                    exit
+                                exit
+                                address-family ipv4-vpn
+                                    afi-safi ipv4-vpn
+                                    next-hop-self true
+                                exit
+                                address-family ipv6-vpn
+                                    afi-safi ipv6-vpn
+                                    next-hop-self true
+                                exit
+                            exit
+                        exit
+```
 
 ### Sharing Routes from Multiple VRFs via a Single BGP Session
 
@@ -322,7 +349,7 @@ Import and export policies can be applied to the route leaking configuration. Th
 This policy is then applied to both routing targets (configured earlier) as shown here:
 
 ```
-             router ${DUT2_ROUTER}
+             router SSR-MZ
                  routing default-instance
                      vrf vrfA
                          routing-protocol bgp
