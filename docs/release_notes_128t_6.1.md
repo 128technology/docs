@@ -69,6 +69,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 - **The following CVEs have been resolved in this release:** I95-51431, I95-51758, I95-52495, I95-52496, I95-52497, I95-52509, I95-52554, I95-52625, I95-52645, I95-52956.
 ------
+- **I95-41386 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved a race condition when selecting the active components between HA nodes.
+------
 - **I95-50671 Office365 traffic is not recognized:** Resolved an issue where Office365 traffic was being miscategorized and therefore not fully qualified. O365 traffic, when traversing over SVR, is no longer miscategorized.
 ------
 - **I95-50708 Time series data for memory of the salt_master process periodically significantly decreases:** Incorrect method for polling application memory data; this resulted in dips in application memory being presented. This issue has been resolved.
@@ -116,7 +118,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-52599 Conductors display different assets on different HA nodes:** If the state table of an inactive HA node becomes out of sync with the active HA node, then some assets were being skipped when parsing the asset state response. This issue has been resolved through the reporting of asset IDs from the active node state table. 
 ------
-- **I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure caused the messaging mechanism to develop buffer leaks. Proper handling of exceptions now prevents buffer leaks. The control buffer capacity has been increased to better handle bursts as part of the resolution.
+- **I95-50562 / I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure caused the messaging mechanism to develop buffer leaks. Proper handling of exceptions now prevents buffer leaks. The control buffer capacity has been increased to better handle bursts as part of the resolution.
 ------
 - **I95-52650 Asset state transition on conductor is slow for deployments with greater than 250 routers:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
 ------
