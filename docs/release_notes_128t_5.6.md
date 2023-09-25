@@ -38,12 +38,11 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51181 Improve `save-tech-support-info` command:** The PCLI command save tech-support-info now has a since argument that limits log collection to only logs generated after that given point. The since argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
 ------
-- **I95-52406 Add ability to download MIBs from GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for 128T.
-
+- **I95-52406 Add ability to download MIBs from GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-51431, I95-52554, I95-52644, I95-52645
+- **The following CVE's have been identified and addressed in this release:** I95-51431, I95-52554, I95-52644, I95-52645, I95-52956.
 ------
 - **I95-42466 Changing the physical linux address of an HA interface breaks the configuration:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address.
 ------
@@ -57,9 +56,33 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-52599 Conductors display different assets on different HA nodes:** If the state table of an inactive HA node becomes out of sync with the active HA node, then some assets were being skipped when parsing the asset state response. This issue has been resolved through the reporting of asset IDs from the active node state table.
 ------
-
-
-
+- **I95-52822 ARP fails to resolve:** An earlier change caused ports on an X553 that use SFPs to no longer correctly report link status. This issue has been resolved and the link status is now reported accurately.
+------
+- **I95-52855 DHCP Relay stopped functioning after removing disabled DHCP Servers:** When a number of disabled DHCP servers were deleted from the configuration, the server interface mappings were deleted as well. Updates have been made to re-enable DHCP relay when a DHCP server or interface is removed. 
+------
+- **I95-52859 ENCS issue moving MPLS cable between chassis:** When swapping physical cable from active node to standby node, the customer experienced low rate packet loss on traffic-engineering enabled device-interfaces. To resolve this issue, the `traffic-engineering transmit-cap` is no longer ignored on device-interfaces which have unresolved link-speed. 
+------
+- **I95-52994 Routers continue to request the conductor configuration:** Resolved an issue where a managed router would keep asking a conductor for configuration even if it could not apply that configuration due to a validation or datamodel incompatibility issue.
+------
+- **I95-53000 process highway disconnected messages caused by NIC driver bug:** The DPDK driver code for the Broadcom NICs had a bug which caused the querying of the extended statistic to fail, in non-deterministic ways. The DPDK driver code has been upgraded and the issue resolved.
+------
+- **I95-53002 NTP setup check fails on startup:** Resolved an issue in the exec startup script `ntpSetupCheck.sh`. It had the incorrect path for the NTP configuration template.
+------
+- **I95-53015 Highway log has large number of unnecessary INFO messages:** Resolved an issue when the `icmp unreachable action` is attempting to generate an ICMP response, but the session is destined for no forward action, but detour (such as BFD) the error is suppressed. The error is now correctly logged under `DEBUG`.
+------
+- **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked.
+------
+- **I95-53105 Conductor to router API RBAC rules not being followed:** Resolved an issue where the user is getting elevated to admin on the managed router, thus returning more data than necessary.
+------
+- **I95-53114 Broadcom interfaces stuck in `admin down` after upgrade:** Resolved an issue where device-interfaces on Broadcom NICs wouldn't come up properly if initially configured with `enabled false`.
+------
+- **I95-53185 Rare race condition causing highway crash:** Resolved a rare race condition between flow install and flow lookup causing a highway crash.
+------
+- **I95-53253 Include `dmesg` and `systemd journal unit` in TSI:** Include output from `dmesg` and `systemd journal` unit in TSI in order to assist in debugging future platform related issues.
+------
+- **I95-53285 User datastore issue when renaming a router:** Resolved an issue where HTTP requests would stop working to a router after the router's name was changed, but before the SSR was restarted.
+------
+- **I95-53321 Syslog datamodel is limited:** Added the following configurable syslog facility values `auth`, `authpriv`, `cron`, `daemon`, `kern`, `lpr`, `mail`, `news`, `syslog`, `user`, and `uucp`.
 
 ## Release 5.6.10-6
 
