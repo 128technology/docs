@@ -30,7 +30,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ## Release 5.6.11-2
 
-**Release Date:** September 26, 2023
+**Release Date:** September 28, 2023
 
 ### Resolved Issues Requiring Configuration Changes
 
@@ -50,7 +50,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-50708 Time series data for memory of the salt_master process periodically significantly decreases:** Incorrect method for polling application memory data; this resulted in dips in application memory being presented. This issue has been resolved.
 ------
-- **I95-51864 Ethernet Over SVR (EoSVR) Not Working:** When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse the middle node. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.
+- **I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:** When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse the middle node. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.
 ------
 - **I95-52491 Crash in highway process due to segmented metadata:** Resolved an issue processing metadata that is segmented across two packet buffers. The segmented packets are no longer discarded and the dataplane no longer crashes when processing a packet comprised of segmented metadata.
 ------
@@ -60,17 +60,17 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-52855 DHCP Relay stopped functioning after removing disabled DHCP Servers:** When a number of disabled DHCP servers were deleted from the configuration, the server interface mappings were deleted as well. Updates have been made to re-enable DHCP relay when a DHCP server or interface is removed. 
 ------
-- **I95-52859 ENCS issue moving MPLS cable between chassis:** When swapping physical cable from active node to standby node, the customer experienced low rate packet loss on traffic-engineering enabled device-interfaces. To resolve this issue, the `traffic-engineering transmit-cap` is no longer ignored on device-interfaces which have unresolved link-speed. 
+- **I95-52859 Issue moving interface between chassis of hypervisor platforms running SSR (e.g., ENCS):** When swapping physical cable from active node to standby node, the customer experienced low rate packet loss on traffic-engineering enabled device-interfaces. To resolve this issue, the `traffic-engineering transmit-cap` is no longer ignored on device-interfaces which have unresolved link-speed. 
 ------
-- **I95-52994 Routers continue to request the conductor configuration:** Resolved an issue where a managed router would keep asking a conductor for configuration even if it could not apply that configuration due to a validation or datamodel incompatibility issue.
+- **I95-52994 Routers continue to request the conductor configuration:** Resolved an issue where a managed router continued to request the configuration from the conductor even after a validation or datamodel incompatibility issue.
 ------
-- **I95-53000 process highway disconnected messages caused by NIC driver bug:** The DPDK driver code for the Broadcom NICs had a bug which caused the querying of the extended statistic to fail, in non-deterministic ways. The DPDK driver code has been upgraded and the issue resolved.
+- **I95-53000 process highway disconnected messages caused by NIC driver bug:** The DPDK driver code for the Broadcom NICs contained a bug that caused the querying of the extended statistic to fail. The Broadcom NIC driver has been upgraded to resolve the issue.
 ------
-- **I95-53002 NTP setup check fails on startup:** Resolved an issue in the exec startup script `ntpSetupCheck.sh`. It had the incorrect path for the NTP configuration template.
+- **I95-53002 NTP setup check fails on startup:** Resolved an issue in the NTP startup sequence, due to an incorrect path for the NTP configuration.
 ------
-- **I95-53015 Highway log has large number of unnecessary INFO messages:** Resolved an issue when the `icmp unreachable action` is attempting to generate an ICMP response, but the session is destined for no forward action, but detour (such as BFD) the error is suppressed. The error is now correctly logged under `DEBUG`.
+- **I95-53015 Highway log has large number of unnecessary INFO messages:** A previous log message of icmp response packet failed was incorrectly logged at INFO level. It is neither an error nor actually informational, and has now been downgraded to DEBUG level.
 ------
-- **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked.
+- **I95-53017 Some files incorrectly marked as executable:** While strengthening the security posture of the platform, some files with superfluous executable bits set have been identified and correctly marked.
 ------
 - **I95-53105 Conductor to router API RBAC rules not being followed:** Resolved an issue where the user is getting elevated to admin on the managed router, thus returning more data than necessary.
 ------
