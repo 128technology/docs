@@ -168,7 +168,7 @@ With SNMPv3 enabled, access configuration allows you to define a User-Based Secu
 
 #### Authentication and Encryption
 
-The SSR combinations of authentication and privacy as defined in the USM configuration are translated into an SNMPv3 security level for use by `net-snmp`. 
+The SSR combinations of authentication and privacy as defined in the USM configuration are translated into an SNMPv3 security level:
 
 - noAuthNoPriv: When both authentication and privacy are set to `None` 
 - authNoPriv: When authentication is set to either MD5 or SHA, but privacy is set to `None` 
