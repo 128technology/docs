@@ -64,6 +64,8 @@ The user can diff the router current config against either the `last-seen-conduc
 
 - To compare running config against the last seen conductor config use: `compare config last-seen-conductor-config`.
 
+- To compare all changes made by the conductor since local override mode was enabled use: `compare config at-local-override last-seen-conductor-config` This is the best comparison to view any new conductor changes and determine whether to manually apply them to the local configuration.
+
 - To revert to the original configuration when local override mode was engaged, use: `import config at-local-override`.
 
 ### Disabling Local Override Mode
