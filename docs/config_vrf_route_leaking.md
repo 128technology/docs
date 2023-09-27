@@ -370,17 +370,17 @@ In this example, the vpn-import action imports both routes from vrfA and vrfB, b
 
 The following commands are used to configure VRF Route Sharing.
 
-#### `vpn-export`
+#### [`vpn-export`](config_command_guide.md#configure-authority-router-routing-routing-protocol-address-family-vpn-export)
 `vpn-export` is specified under `routing-protocol bgp > address-family ipv4-unicast` (or `ipv6-unicast`) in the VRF. When the `vpn-export` configuration is present, IPv4 (or IPv6) BGP routes are exported from the VRF into the VPN RIB. The `route-distinguisher` and `route-target` attributes are mandatory and need to be specified. The `export-policy` attribute is optional and must reference an existing routing policy. When specified, this routing policy is applied when exporting the routes into the VPN RIB.
 
-#### `vpn-import`
+#### [`vpn-import`](config_command_guide.md#configure-authority-router-routing-routing-protocol-address-family-vpn-import)
 
 `vpn-import` is specified under `routing-protocol bgp > address-family ipv4-unicast` (or `ipv6-unicast`) in the VRF. When the `vpn-import` configuration is present, IPv4 (or IPv6) BGP routes are imported from the VPN RIB into the VRF. The `route-target` attribute is mandatory; at least one must be specified. Multiple route targets may be specified. The `import-policy` attribute is optional and must reference an existing routing policy. When specified, this routing policy is applied when importing the routes from the VPN RIB.
 
-#### `address-family ipv4-vpn`
+#### [`address-family ipv4-vpn`](config_command_guide.md#configure-authority-router-routing-routing-protocol-address-family-afi-safi)
 
 `address-family ipv4-vpn` can only be specified for BGP neighbors in the default VRF. All the configuration elements under `address-family ipv4-vpn` are the same as under the existing `address-family ipv4-unicast` configuration element. When this address family is configured and the BGP neighbor router has an equivalent configuration, the VPN RIB routes will be exchanged with the neighbor.
 
-#### `address-family ipv6-vpn`
+#### [`address-family ipv6-vpn`](config_command_guide.md#configure-authority-router-routing-routing-protocol-address-family-afi-safi)
 
 `address-family ipv6-vpn` can only be specified for BGP neighbors in the default VRF. All the configuration elements under `address-family ipv6-vpn` are the same as under the existing `address-family ipv4-unicast` configuration element. When this address family is configured and the BGP neighbor router has an equivalent configuration, the VPN RIB routes will be exchanged with the neighbor.
