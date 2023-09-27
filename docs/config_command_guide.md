@@ -16380,10 +16380,17 @@ configure authority router routing routing-protocol address-family afi-safi [<id
 
 | name | description |
 | ---- | ----------- |
-| ipv4-unicast | Identifies the address type |
-| ipv4-vpn | Identifies the address type |
-| ipv6-unicast | Identifies the address type |
-| ipv6-vpn | The value to set for this field |
+| afi-safi | Address family type |
+
+`identityref`
+A value as defined below:
+
+| name | description |
+| ---- | ----------- |
+| ipv4-unicast | IPv4 unicast (AFI,SAFI = 1,1) |
+| ipv6-unicast | IPv6 unicast (AFI,SAFI = 2,1) |
+| ipv4-vpn | IPv4 vpn (AFI,SAFI = 1,128) |
+| ipv6-vpn | IPv6 vpn (AFI,SAFI = 2,128) |
 
 ## `configure authority router routing routing-protocol address-family aggregate-address`
 
@@ -17189,7 +17196,17 @@ configure authority router routing routing-protocol neighbor address-family afi-
 
 | name | description |
 | ---- | ----------- |
-| identityref | The value to set for this field |
+| afi-safi | Address family type |
+
+`identityref`
+A value as defined below:
+
+| name | description |
+| ---- | ----------- |
+| ipv4-unicast | IPv4 unicast (AFI,SAFI = 1,1) |
+| ipv6-unicast | IPv6 unicast (AFI,SAFI = 2,1) |
+| ipv4-vpn | IPv4 vpn (AFI,SAFI = 1,128) |
+| ipv6-vpn | IPv6 vpn (AFI,SAFI = 2,128) |
 
 ## `configure authority router routing routing-protocol neighbor address-family as-path-options`
 
@@ -20117,7 +20134,17 @@ configure authority router routing vrf routing-protocol address-family afi-safi 
 
 | name | description |
 | ---- | ----------- |
-| identityref | The value to set for this field |
+| afi-safi | Address family type |
+
+`identityref`
+A value as defined below:
+
+| name | description |
+| ---- | ----------- |
+| ipv4-unicast | IPv4 unicast (AFI,SAFI = 1,1) |
+| ipv6-unicast | IPv6 unicast (AFI,SAFI = 2,1) |
+| ipv4-vpn | IPv4 vpn (AFI,SAFI = 1,128) |
+| ipv6-vpn | IPv6 vpn (AFI,SAFI = 2,128) |
 
 ## `configure authority router routing vrf routing-protocol address-family aggregate-address`
 
@@ -20923,7 +20950,17 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 
 | name | description |
 | ---- | ----------- |
-| identityref | The value to set for this field |
+| afi-safi | Address family type |
+
+`identityref`
+A value as defined below:
+
+| name | description |
+| ---- | ----------- |
+| ipv4-unicast | IPv4 unicast (AFI,SAFI = 1,1) |
+| ipv6-unicast | IPv6 unicast (AFI,SAFI = 2,1) |
+| ipv4-vpn | IPv4 vpn (AFI,SAFI = 1,128) |
+| ipv6-vpn | IPv6 vpn (AFI,SAFI = 2,128) |
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family as-path-options`
 
