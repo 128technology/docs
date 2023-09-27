@@ -35,18 +35,38 @@ The example above assumes that the system will be able obtain an IP address via 
 
 ## Using NoCloud to provide cloud-init meta-data, user-data, and network-config
 
-Even when using a hypervisor that does not directly provide a cloud-init metadata service, it is possible to use NoCloud to seed the required data to cloud-init. On first boot, if the cloud-init process finds an attached disk with the volume label `cidata`, it will look on this disk for the configuration data that is typically provided by a hypervisor's metadata service. There are three specific configuration files that may be supplied for different purposes: `meta-data`, `user-data`, and `network-config`.
+Even when using a hypervisor that does not directly provide a cloud-init metadata service, it is possible to use NoCloud to seed the required data to cloud-init. On first boot, if the cloud-init process finds an attached disk with the volume label `cidata`, it looks on this disk for configuration data that is typically provided by a hypervisor's metadata service. 
 
-Instance meta-data must be provided. This will set the system's hostname which will also, by default, be used as the SSR's asset-id. An example of this data is shown below.
+There are three specific configuration files that may be supplied for different purposes: 
+- `meta-data` 
+- `user-data` 
+- `network-config`
+
+### `meta-data`
+
+Instance meta-data must be provided to sets the system hostname. By default it is used as the SSR's asset-id. An example of this data is shown below.
 
 ```
 instance-id: ssr1
 local-hostname: ssr1
 ```
 
-As discussed in the previous section, the user-data is very useful for automating onboarding of the VM by a Conductor. Additional considerations should be made for persistent interface naming when using NoCloud. When network configuration is provided by a hypervisor's metadata service it maps the interface names to MAC addresses to provide this persistence. It is typically not feasible to have this information in advance in scenarios where NoCloud is used for automation. Instead, the NICs of the system should be mapped by PCI address to interface names. To obtain the list of PCI addresses of the NIC interfaces, a sample VM containing all required interfaces for the deployment should be booted on the hypervisor. As root, run the command `lshw -c net -businfo` on this VM to obtain this list of PCI addresses and substitute them in the example user-data shown below. It may take some experimentation to identify which PCI address maps to the appropriate interface on the VM in the order they are added. Also, please note that Linux will run into issues renaming the devices to the standard `ethX` naming convention, a different interface naming convention must be used. It is suggested to use the convention `ge-0-X`.
+### `user-data`
 
-Below is an example user-data which will achieve persistent interface mapping as well as initialize a router to connect to a Conductor at address `10.10.10.10`. The file containing the configuration to map the new interface names to PCI address is written, along with the initializer preference file. Then, the system is initialized, the legacy `ifcfg-eth0` file that is no longer valid is removed, and finally the system is rebooted so that the new interface naming is applied.
+The user-data is very useful for automating the onboarding of the VM by a Conductor. Additional considerations should be made for persistent interface naming when using NoCloud. When network configuration is provided by a hypervisor's metadata service, it maps the interface names to MAC addresses to provide this persistence. In scenarios where NoCloud is used for automation it is not feasible to have this information in advance. Instead, the NICs on the system should be mapped by PCI address to interface names. To obtain the list of PCI addresses of the NIC interfaces, use the following steps.
+
+1. Boot a sample VM containing all required interfaces for the deployment on the hypervisor. 
+2. As root, run the command `lshw -c net -businfo` on this VM to obtain this list of PCI addresses.
+3. Using the example user-data below, substitute the PCI addresses using the naming convention `ge-0-X` as Linux will run into issues renaming the devices to the standard `ethX` naming convention. 
+
+It may take some experimentation to identify which PCI address maps to the appropriate interface on the VM in the order they are added. 
+
+The example user-data below will achieve persistent interface mapping, as well as initialize a router to connect to a Conductor at address `10.10.10.10`. The subsequent initialization process is as follows:
+
+- The file containing the configuration to map the new interface names to PCI address is written, along with the initializer preference file. 
+- The system is initialized. 
+- The legacy `ifcfg-eth0` file (that is no longer valid) is removed.
+- The system is rebooted and the new interface naming is applied.
 
 ```
 #cloud-config
@@ -71,7 +91,11 @@ runcmd:
 - /usr/bin/sync;/usr/bin/sync;/usr/sbin/shutdown -r
 ```
 
-NoCloud supports optionally supplying network configuration via an additional `network-config` script which can be useful for configuring interfaces. On the initial boot, the system will use legacy interface naming. Therefore, we will put in a basic configuration for eth0 that will remove DHCP from the existing interface configuration, which may cause a delay in the initial boot. We will also create a configuration for the interface after it is renamed on ensuing boots. The interface will not be found on the first boot and therefore will be skipped, but will apply to all ensuing boots. This example can be tweaked to provide a different Linux networking configuration including static addressing as needed. Please consult cloud-init documentation on network-config version 1 for additional details.
+### `network-config`
+
+NoCloud supports optionally supplying network configuration via an additional `network-config` script, which can be used to configure interfaces. 
+
+On the initial boot, the system uses legacy interface naming. The `network-config` file provided below creates a basic configuration for eth0 that removes DHCP from the existing interface configuration. This may cause a delay in the initial boot. We also create a configuration for the interface after it is renamed on ensuing boots. The interface will not be found on the first boot and therefore will be skipped, but will apply to all ensuing boots. This example can be tweaked as needed to provide a different Linux networking configuration, including static addressing. Please consult the `cloud-init` documentation on **network-config version 1** for additional details.
 
 ```
 version: 1
@@ -83,5 +107,14 @@ config:
   subnets:
   - type: dhcp
 ```
+### `cidata`
 
-To create an ISO image with these configuration files and the volume label `cidata` on a Linux system, place the user-data in a file named `user-data`, the meta-data in a file named `meta-data`, and the network-config in a file named `network-config` and run the command `genisoimage -output cidata.iso -V cidata -r -J user-data meta-data network-config`. This ISO should be attached to the SSR VM when booted and the cloud-init process on the system will find the data and perform the desired actions.
+To create an ISO image containing these configuration files and the volume label `cidata` on a Linux system:
+
+1. Place the user-data in a file named `user-data`, 
+2. Place the meta-data in a file named `meta-data`, and 
+3. Place the network-config in a file named `network-config`.
+4. Run the command `genisoimage -output cidata.iso -V cidata -r -J user-data meta-data network-config`. 
+
+This ISO should be attached to the SSR VM when booted. **Is this a user action or does the attachment happen as a result of creating the image??** The cloud-init process on the system will find the data during first boot, and perform the desired actions.
+
