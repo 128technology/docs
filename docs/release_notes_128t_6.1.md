@@ -132,7 +132,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked. 
 ------
-- **I95-53285 Changing an SSR router name would result in failed HTTP requests until 128T service was restarted. This issue has ben resolved.
+- **I95-53285 User datastore issue when renaming a router:** Resolved an issue where HTTP requests would stop working to a router after the router's name was changed, but before the SSR was restarted.
 ------
 - **WAN-2090 Conductor managed SSR applications in WAN Insights showing up as numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
