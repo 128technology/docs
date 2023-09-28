@@ -225,6 +225,7 @@ module.exports = {
         "label": "How To",
         "items": [
           "how_to_use_app_summary",
+          "how_to_local_config_override",
           "howto_extend_gui_nav",
           "howto_lte",
           "config_bfd_tunnel",
