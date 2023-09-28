@@ -2,9 +2,6 @@
 title: Configuration Command Guide 
 sidebar_label: Configuration Command Guide
 ---
-<!-- markdownlint-disable line-length -->
-<!-- markdownlint-disable fenced-code-language -->
-<!-- markdownlint-disable heading-increment -->
 
 ## `configure authority`
 
