@@ -21413,12 +21413,10 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 `identityref`
 A value as defined below:
 
-| name | description |
+| name | description | 
 | ---- | ----------- |
 | ipv4-unicast | IPv4 unicast (AFI,SAFI = 1,1) |
 | ipv6-unicast | IPv6 unicast (AFI,SAFI = 2,1) |
-| ipv4-vpn | IPv4 vpn (AFI,SAFI = 1,128) |
-| ipv6-vpn | IPv6 vpn (AFI,SAFI = 2,128) |
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family as-path-options`
 
