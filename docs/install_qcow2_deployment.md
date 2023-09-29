@@ -63,7 +63,8 @@ It may take some experimentation to identify which PCI address maps to the appro
 
 The example user-data below will achieve persistent interface mapping, as well as initialize a router to connect to a Conductor at address `10.10.10.10`. The subsequent initialization process is as follows:
 
-- The file containing the configuration to map the new interface names to PCI address is written, along with the initializer preference file. 
+- The file containing the configuration to map the new interface names to PCI address is written to /etc/udev/rules.d/70-persistent-net.rules.
+- The initializer preferences file is written to /root/initializer-preferences.json. 
 - The system is initialized. 
 - The legacy `ifcfg-eth0` file (that is no longer valid) is removed.
 - The system is rebooted and the new interface naming is applied.
