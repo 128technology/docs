@@ -13,13 +13,13 @@ sidebar_label: '3.7'
 
   _**Resolution:**_ In some scenarios data for IMSI, Carrier and other information may not be available. The fix is to include what is available in the update to MIST cloud.
 
-- **WAN-2375 Collect cia monitoring journal**
+- **WAN-2375 Collect cloud-intel-agent monitoring journal**
 
   _**Resolution:**_ For better troubleshooting, additional journal logs were included in the tech-support info.
 
 - **WAN-2399 User initiated PCAPs are getting deleted**
 
-  _**Resolution:**_ The internally generated PCAPs and the user configured PCAPs will not coexist more seamlessly on the same system.
+  _**Resolution:**_ The internally generated PCAPs and the user configured PCAPs will now coexist more seamlessly on the same system.
 
 ## Release 3.7.4
 
