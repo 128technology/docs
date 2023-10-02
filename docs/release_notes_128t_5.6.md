@@ -42,7 +42,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-51431, I95-52554, I95-52644, I95-52645, I95-52956.
+- **The following CVE have been identified and addressed in this release:** I95-51431, I95-52554, I95-52644, I95-52645, I95-52956.
 ------
 - **I95-42466 Changing the physical linux address of an HA interface breaks the configuration:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address.
 ------
@@ -100,7 +100,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-51758, I95-52495, I95-52496, I95-52497, I95-52509, I95-52625. 
+- **The following CVE have been identified and addressed in this release:** I95-51758, I95-52495, I95-52496, I95-52497, I95-52509, I95-52625. 
 ------
 - **I95-41386/I95-52114 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved a race condition when selecting the active components between HA nodes.
 ------
@@ -217,7 +217,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** I95-48448, I95-49456, I95-50358, I95-50359, I95-50506, I95-50508, I95-50535, I95-50790.
+- **The following CVE have been identified and addressed in this release:** I95-48448, I95-49456, I95-50358, I95-50359, I95-50506, I95-50508, I95-50535, I95-50790.
 ------
 - **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
 :::important
@@ -337,7 +337,7 @@ and there are established flows for any of these services, a link flap triggerin
 and there are established flows for any of these services, a link flap triggering a flow invalidation (changes to FIB) will induce a crash in the highway process of the SSR. This issue exists in versions 5.6.3 through 5.6.6, and is resolved in 5.6.7.
 :::
 
-- **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48643, I95-48859, I95-48907, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
+- **The following CVE have been identified and addressed in this release:** I95-48445, I95-48643, I95-48859, I95-48907, I95-49079, I95-49445, I95-49745, I95-49746, I95-49747, I95-49748.
 ------
 - **I95-48054 STEP not working in Core Network:** Resolved an issue where processing STEP route updates can cause modification of unrelated FIB entries, potentially interrupting existing sessions.
 ------
@@ -437,7 +437,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 ### Resolved Issues
 
-- **The following CVE's have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653, I95-49039.
+- **The following CVE have been addressed and resolved:** I95-48644, I95-48648, I95-48650, I95-48653, I95-49039.
 ------
 - **I95-34384 Rotated datastores with different permissions:** Resolved an issue where some rotated datastore files had different permissions.
 ------
@@ -619,7 +619,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 ### Resolved Issues
 
-- **The following CVE's have been addressed and resolved:** I95-45056, I95-45059, I95-45060, I95-45123, I95-45165, I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049. 
+- **The following CVE have been addressed and resolved:** I95-45056, I95-45059, I95-45060, I95-45123, I95-45165, I95-47482, I95-47483, I95-47484, I95-47485, I95-47805, I95-48048, I95-48049. 
 ------
 - **I95-39454 Created User cannot access PCLI operations:** Resolved an issue where in rare cases, during bulk user additions, it was possible for the operation to fail, leaving the new user created but unable to login.
 ------
@@ -722,7 +722,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 ### Resolved Issues
 
-- **The following CVE's have been addressed and resolved:** I95-45054, I9-45056, I95-45059, I95-45060, I95-45165, I95-46020, I95-46359. 
+- **The following CVE have been addressed and resolved:** I95-45054, I9-45056, I95-45059, I95-45060, I95-45165, I95-46020, I95-46359. 
 ------
 - **I95-35228 DHCP waypoint addresses not displayed on standby node in UI:** Resolved an issue where the PCLI logic was not matching the GUI Network Interface table.
 ------
@@ -900,7 +900,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 ------
 - **I95-45268 Third-party-drivers rpm install hung:** Resolved an issue where the installation hangs when running a post-install scriptlet. The script is not necessary at that stage and has been disabled.
 ------
-- **I95-45348 Update salt master and minion to 3002.8:** This update resolves several CVE's and requires that the conductor must be running this release containing these fixes **before** upgrading a router. 
+- **I95-45348 Update salt master and minion to 3002.8:** This update resolves several CVE and requires that the conductor must be running this release containing these fixes **before** upgrading a router. 
 **Important** Please see the Caveat below for additional important information about HA upgrades.
 ------
 - **I95-45374 Router Dropping SIP traffic:** A warning is displayed if users configure a service-class to rate-limit but don't set max-flow-burst/max-flow-rate values (default is set to 0).
