@@ -13,16 +13,16 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | ------- | ----------- |
 | [`access-management`](#configure-authority-access-management) | Role Based Access Control (RBAC) configuration. |
 | [`asset-connection-resiliency`](#configure-authority-asset-connection-resiliency) | Configure Asset Connection Resiliency |
-| [`backwards-compatible-vrf-bgp-tenants`](#configure-authority-backwards-compatible-vrf-bgp-tenants) | When generating tenant names for VRF BGP over SVR, do not use leading or trailing underscores. This enables backwards compatibility with router versions smaller than 5.1.3 |
-| [`bgp-service-generation`](#configure-authority-bgp-service-generation) | Configure Bgp Service Generation |
-| [`cli-messages`](#configure-authority-cli-messages) | Configure Cli Messages |
+| [`backwards-compatible-vrf-bgp-tenants`](#configure-authority-backwards-compatible-vrf-bgp-tenants) | When generating tenant names for VRF BGP over SVR, do not use leading or trailing underscores. This enables backwards compatibility with router versions earlier than 5.1.3 |
+| [`bgp-service-generation`](#configure-authority-bgp-service-generation) | Configure BGP Service Generation |
+| [`cli-messages`](#configure-authority-cli-messages) | Configure CLI Messages |
 | [`client-certificate`](#configure-authority-client-certificate) | The client-certificate configuration contains client certificate content. |
 | `clone` | Clone a list item |
 | [`conductor-address`](#configure-authority-conductor-address) | IP address or FQDN of the conductor |
 | [`currency`](#configure-authority-currency) | Local monetary unit. |
 | `delete` | Delete configuration data |
 | [`district`](#configure-authority-district) | Districts in the authority. |
-| [`dscp-map`](#configure-authority-dscp-map) | Configure Dscp Map |
+| [`dscp-map`](#configure-authority-dscp-map) | Configure DSCP Map |
 | [`dynamic-hostname`](#configure-authority-dynamic-hostname) | Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: {interface-id} for Network Interface Global Identifier {router-name} for Router Name {authority-name} for Authority Name For example, &#x27;interface-{interface-id}.{router-name}.{authority-name}&#x27;. |
 | [`fib-service-match`](#configure-authority-fib-service-match) | When creating FIB entries by matching route updates to service addresses, consider the specified service addresses. |
 | [`forward-error-correction-profile`](#configure-authority-forward-error-correction-profile) | A profile for Forward Error Correection parameters, describing how often to send parity packets. |
