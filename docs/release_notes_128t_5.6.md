@@ -36,7 +36,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 - **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
 ------
-- **I95-51181 Improve `save-tech-support-info` command:** The PCLI command save tech-support-info now has a since argument that limits log collection to only logs generated after that given point. The since argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
+- **I95-51181 Improve `save-tech-support-info` command:** The PCLI command `save tech-support-info` now has a default of one day. Additionally, a `since` argument has been added that limits log collection to only logs generated after the specified value. The `since` argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
 ------
 - **I95-52406 Add ability to download MIBs from GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
 
@@ -79,6 +79,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 - **I95-53185 Rare race condition causing highway crash:** Resolved a rare race condition between flow install and flow lookup causing a highway crash.
 ------
 - **I95-53253 Include `dmesg` and `systemd journal unit` in TSI:** Include output from `dmesg` and `systemd journal` unit in TSI in order to assist in debugging future platform related issues.
+------
+- **I95-53259 Initialization time out may result in SSR failing to start:** Resolved an issue where SSR may fail to start. An example of this would be unreachable audit server was configured that would delay the startup initialization causing SSR to exceed the timeout and fail to start.
 ------
 - **I95-53285 User datastore issue when renaming a router:** Resolved an issue where HTTP requests would stop working to a router after the router's name was changed, but before the SSR was restarted.
 ------
