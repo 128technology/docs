@@ -104,7 +104,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-52208 Metrics queries return incomplete data when FIPS is enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
 ------
-- **I95-52279 Bond configured with VRRP not receiving UDP traffic when LACP is enabled:** Resolved an issue where VRRP Virtual MACs are being silently dropped by Bond PMD in LACP mode. Packets with VRRP virtual destination MACs are now correctly processed by the Bond PMD when using LACP.
+- **I95-52279 Bond configured with VRRP not receiving UDP traffic when LACP is enabled:** Resolved an issue on the SSR120/SSR130 where VRRP Virtual MACs are being silently dropped by Bond PMD in LACP mode. Packets with VRRP virtual destination MACs are now correctly processed by the Bond PMD when using LACP on the SSR120/SSR130. This issue will be resolved on the SSR1200/1300/1400/1500 in an upcoming release.
 
 - **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](config_domain-based_web_filter.md/#service-matching-order)
 ------
@@ -134,7 +134,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked. 
 ------
-- **I95-53285 Changing an SSR router name would result in failed HTTP requests until 128T service was restarted:** This issue has ben resolved.
+- **I95-53285 Changing an SSR router name would result in failed HTTP requests until 128T service was restarted:** This issue has been resolved.
 ------
 - **WAN-2090 Conductor managed SSR applications in WAN Insights showing up as numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
 
