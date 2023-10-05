@@ -158,6 +158,7 @@ module.exports = {
         "items": [
           "howto_tune_bfd",
           "config_bgp",
+          "config_vrf_route_leaking",
           "config_ospf",
           "config_bfd",
           "config_multicast",
