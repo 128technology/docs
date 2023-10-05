@@ -116,6 +116,6 @@ To create an ISO image containing these configuration files and the volume label
 2. Place the meta-data in a file named `meta-data`, and 
 3. Place the network-config in a file named `network-config`.
 4. Run the command `genisoimage -output cidata.iso -V cidata -r -J user-data meta-data network-config`. 
-
-This ISO should be attached to the SSR VM when booted, please consult the documentation for your specific hypervisor for details on how to do this. The cloud-init process on the system will find the data during first boot, and perform the desired actions.
+5. Attach the ISO to the SSR VM. Please refer to your hypervisor documentation for these instructions.
+6. The cloud-init process on the system will locate the data during first boot and perform the desired actions.
 
