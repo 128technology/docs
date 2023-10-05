@@ -49,11 +49,111 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 6.1.5-14
+
+**Release Date:** September 22, 2023
+
+### Resolved Issues Requiring Configuration Changes
+
+- **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
+------
+- **I95-52163 Handle incoming public keys from peer conductor node:** Added functionality to allow conductor nodes to share the authorized keys of managed routers between each other. If the SSH public key is retrieved from a managed router by one conductor node, then it is automatically shared with its conductor peer node.
+------
+- **I95-52316 Enhancements to Overlapping FIB Services:** The [`fib-service-match`](config_command_guide.md#configure-authority-fib-service-match) command allows you to configure either `best-match-only` or `any-match`. 
+  - `best-match-only` considers the best matching prefix length. In cases of transport overlap, services are visited in alphabetical order.
+  - Using `any-match` will consider all services that match the route update but do not have the best match service address when creating FIB entries, minimizing missed entries. The transports from the service with the longest prefix are considered first.
+------
+- **I95-52517 Allow users the ability to configure the OSPF SPF timers:** Support for user-configured values for SPF delay has been added. Users can now specify values for spf delay, hold-time, and maximum-hold-time. For additional information, see [OSPF SPF Timers](config_command_guide.md#configure-authority-router-routing-ospf-timers-spf).
+
+### Resolved Issues
+
+- **The following CVEs have been resolved in this release:** I95-51431, I95-51758, I95-52495, I95-52496, I95-52497, I95-52509, I95-52554, I95-52625, I95-52645, I95-52956.
+------
+- **I95-41386/I95-52114 HA pair device interface's redundancy status stays non-redundant even though the interface operational status is up:** Resolved a race condition when selecting the active components between HA nodes.
+------
+- **I95-50671 Office365 traffic is not recognized:** Resolved an issue where Office365 traffic was being miscategorized and therefore not fully qualified. O365 traffic, when traversing over SVR, is no longer miscategorized.
+------
+- **I95-50708 Time series data for memory of the salt_master process periodically significantly decreases:** Incorrect method for polling application memory data; this resulted in dips in application memory being presented. This issue has been resolved.
+------
+- **I95-51336 App-ID stats entry not getting cleaned up after expiration:** In some cases, a session may not have installed correctly, preventing the expired App-ID stats from being removed. The App-ID stats entries are now cleaned up appropriately.
+------
+- **I95-51450 Support for 100/Full Speed/Duplex on Intel I225-V Driver NICs:** The DPDK driver has been updated to allow fixed speed and duplex configuration to work with IGC i225 NICs.
+------
+- **I95-51492 Password expiration not working:** This issue has been resolved. Adminstrators must use the global setting `configure authority password-policy lifetime N ` to indicate that all user passwords must be changed every `N` days.
+------
+- **I95-51638 Traceroute does not complete over SSR, but does using linux:** The traceroute command was unable to resolve through some network elements. The default SSR traceroute UDP port number has been changed to a more common/recognized port.
+------
+- **I95-51766 TX lockup detector not enabled for LAG/bonded interfaces:** The datapath lockup detection mechanism has been re-enabled to run on bond interfaces. 
+------
+- **I95-51800 Radius authentication failure - Incorrect NAS IP address:** The ability to specify the NAS-IP-Address and NAS-Identifier has been added to the data model for configuring these Radius options per node. This can be used in cases where the Radius server is configured to use an identifier, or in cases where it is necessary to match the source IP address of the Radius requests behind SSR or NAT.
+------
+- **I95-51801 The SSR is unable to see DHCP ACK for the DHCP Request sent by an EX4100:** Added an `authoritative` field for DHCP servers to enable/disable `authoritative` mode, which allows the server to send a NAK in response to unknown clients. This field is set to `true` by default.
+------
+- **I95-51992 Multi-queue support for Bond interfaces:** Support for a bond `device-interface` to use multiple RX/TX queues has been added. 
+------
+- **I95-52104 URI escape characters handled incorrectly:** The `lookup application by-domain` and `clear app-id cache-entry url` were handling url parameters incorrectly, in lookup, creating and clearing cache entries. This has been resolved and each command now performs the correct operation.
+------
+- **I95 52105 Permissions error when attempting to `delete certificate webserver`:** Resolved an issue where `delete certificate webserver` and `create cerificate webserver` with an existing certificate were failing. On older versions of software this can be worked around by running `sudo rm -rf /etc/128technology/pki/webserver.pem`.
+------
+- **I95-52113 Application Identification on the SSR runs at 100% CPU utilization:** Resolved an overrun bug that was causing the SSR to enter a loop when loading port ranges. This issue has been resolved.
+------
+- **I95-52147 Adding and deleting bond interfaces with the same name would leave the interface in a down state:** This issue has been resolved.
+------
+- **I95-52158 Spoke is rejecting hub BFD packets, and peering is unable to come up over LTE:** In a corner case where the spoke private LTE IP changes before BFD is up and the public/hub-received IP stays the same, the hub gets stuck in the init state. 
+This issue has been resolved; the LTE IP change is now handled it as a source-nat change, where the flows and actions can be recreated with the updated LTE private IP.
+------
+- **I95-52208 Metrics queries return incomplete data when FIPS is enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
+------
+- **I95-52279 Bond configured with VRRP not receiving UDP traffic when LACP is enabled:** Resolved an issue on the SSR120/SSR130 where VRRP Virtual MACs are being silently dropped by Bond PMD in LACP mode. Packets with VRRP virtual destination MACs are now correctly processed by the Bond PMD when using LACP on the SSR120/SSR130. This issue will be resolved on the SSR1200/1300/1400/1500 in an upcoming release.
+
+- **I95-52283 Correct the Domain Matching order:** When using web filtering, the SSR now properly enforces the [Service Matching Order.](config_domain-based_web_filter.md/#service-matching-order)
+------
+- **I95-52305 High CPU and memory utilization when Application Identification is enabled:** Resolved memory and CPU issues resulting from attempting to compact very large application identification documents.
+------
+- **I95-52402 Router stuck in `Upgrading` state:** Resolved an issue with `conductor-only` mode, where the conductor was attempting to download the installer before the software access proxies were in place, preventing an update to the installer.
+------
+- **I95-52480 Conductor shows alarms when applications are added to the router configuration:** A condition has been added that verifies whether the node is a router or conductor before running application update and generating alarms on a conductor.
+------
+- **I95-52491 Crash in highway process due to segmented metadata:** Resolved an issue processing metadata that is segmented across two packet buffers. The segmented packets are no longer discarded and the dataplane no longer crashes when processing a packet comprised of segmented metadata.
+------
+- **I95-52547 Unable to set DHCP option 160:** Resolved an issue where DHCP option 160 was being treated as a standard option and was unavailable to be defined as an option. When it was set, it would prevent the DHCP server from starting. This has been corrected. 
+------
+- **I95-52599 Conductors display different assets on different HA nodes:** If the state table of an inactive HA node becomes out of sync with the active HA node, then some assets were being skipped when parsing the asset state response. This issue has been resolved through the reporting of asset IDs from the active node state table. 
+------
+- **I95-50562 / I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure caused the messaging mechanism to develop buffer leaks. Proper handling of exceptions now prevents buffer leaks. The control buffer capacity has been increased to better handle bursts as part of the resolution.
+------
+- **I95-52650 Asset state transition on conductor is slow for deployments with greater than 250 routers:** An optimization was made to an internal calculation and improve the speed at which synchronization requests are processed.
+------
+- **I95-52816 Config Validation may generate errors in the wrong field:** Resolved an issue during the validation of BGP graceful-restart configuration settings that could lead to generating incorrect errors/warnings during configuration validation.
+------
+- **I95-52822 ARP fails to resolve:** An earlier change caused ports on an X553 that use SFPs to no longer correctly report link status. This issue has been resolved and the link status is now reported accurately. 
+------
+- **I95-52968 Configuration template not being applied by the conductor to a router during upgrade:** Resolved an issue where a managed router would silently fail to apply a configuration from a conductor with a greater software version if the configuration contained features that the router's earlier SSR version did not understand. Specifically, if a config field such as an enumeration, that the router was aware of, had new values added to it in the conductor's version of software then the configuration would not be applied.
+------
+- **I95-52971 Inconsistent hash and signing of RPM files:** Some small number of RPM files did not usen the `sha256` hash for sigining. This has been corrected and all RPM packages on the distribution ISO are digest sha256 for Common Criteria.
+------
+- **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked. 
+------
+- **I95-53285 Changing an SSR router name would result in failed HTTP requests until 128T service was restarted:** This issue has been resolved.
+------
+- **WAN-2090 Conductor managed SSR applications in WAN Insights showing up as numbers:** Resolved an issue with stats APIs, which were not properly handling some internal service names.
+
+### Caveats
+
+- **I95-52426 Incorrect behavior when configuring an IDP custom rule definition:** In a case where a user is modifying a rule to **decrease** the action type to an `alert`, alerts for that vulnerability will not work. The attack will be allowed to pass through undetected. For example, if the action `close-tcp-connection` is downgraded to `alert`, the attacks will pass through undetected.
+This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend creating a custom exception rule specifying the source and destination IP address, along with the vulnerability name, rather than downgrading a vulnerability to an `alert`. 
+------
+- **I95-53124 Sessions destined to private IP address (RFC1918) are incorrectly reported using the application name as the service name:** We have identified an issue where sessions destined to private IP address (RFC1918), are incorrectly reported with the application name as the service name, even if the traffic is HTTP/HTTPS. Session traffic continues to follow the appropriate service / routing profile, but the stats reported may not accurately reflect the learned applications. This is actively being addressed and will be resolved in a future patch.
+
+### Known Issues
+
+- **I95-52977 Mellanox NIC Port Appropriation:** Port 4791 is an IANA reserved port for ROCEv2 and should not be used for user traffic. 
+
 ## Release 6.1.4-23.r2
 
 **Release Date:** July 14, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-466 LAG/LACP Support:** Link Aggregation Groups are formed by connecting multiple ports in parallel between two devices. LACP is the protocol that defines how the group of interfaces operates. Users define the LAG interface and then configure the member device interfaces. This feature is currently in Beta; for more information, a list of supported devices and caveats, see [Link Aggregation and LACP](config_lacp.md).
 ------
@@ -190,7 +290,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 
 **Release Date:** May 12, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes. 
 ------

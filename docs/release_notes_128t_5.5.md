@@ -34,13 +34,13 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure from fastlane caused the messaging mechanism between highway manager and fastlane to drop mbufs. Proper handling of exception now prevents buffer leaks. Additionally, increased the control buffer capacity to better handle bursts as part of the resolution.
+- **I95-50562 / I95-52626 Forwarding plane control message bursts create exception, causing a packet buffer leak:** Resolved a condition where backpressure from fastlane caused the messaging mechanism between highway manager and fastlane to drop mbufs. Proper handling of exception now prevents buffer leaks. Additionally, increased the control buffer capacity to better handle bursts as part of the resolution.
 
 ## Release 5.5.10-6
 
 **Release Date:** July 31, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-50949 Add packet buffer tracking to help analyze buffer exhaustion:** Packet buffer location tracking has been added, and the following PCLI commands have been created for buffer tracking.
 	- `show packet-buffer locations`
@@ -89,7 +89,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 **Release Date:** June 2, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-47409 Enhance tracking around Application ID expirations:** The following enhancements have been made to provide additonal insight to Application Identification:
 	- Track next hop additions and removals separately for more insight
@@ -218,7 +218,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 **Release Date:** February 1, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-47947 Increase max CoreDump size to 4GB:** The maximum size of coredumps now defaults to 4G. This value can be configured in environment config by modifying the `maxCoredumpSize` field of the new `crashReporting` object. Any manual modifications to `coredump.conf` will be overwritten whenever the service is started. 
 
@@ -298,7 +298,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 **Release Date:** November 15, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-48223 Add Application-specific information to `show sessions by-id`:** The following information has been added to `show sessions by-id`: 
 	- domainName
@@ -416,8 +416,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 Release 5.5.4-8 has been withdrawn from the Release Repository due to an issue identified shortly after release. This issue is being resolved and a new patch release will be forthcoming. 
 :::
 
-
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-47418 Audit Events for Plugin Install/Remove:** There is a new audit event that tracks when a plugin is installed or uninstalled. This can be viewed on the Audit History page in the GUI or in the PCLI by running `show events type admin.plugin`
 
@@ -453,7 +452,7 @@ Release 5.5.4-8 has been withdrawn from the Release Repository due to an issue i
 
 **Release Date:** August 11, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-41561 EoSVR Active / Standby:** EoSVR Active Standby configuration gives you the ability to configure two different endpoints on the P2P L2 service, while making sure only one is active at a time. For more information, see [Configuring Ethernet Over SVR for Active/Standby](config_EthoSVR_activestandby.md).
 ------
@@ -495,7 +494,7 @@ Release 5.5.4-8 has been withdrawn from the Release Repository due to an issue i
 
 **Release Date:** June 30, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-40195 LDAP does not allow search base to be configured correctly:** Search base parameters, filter generation, certificate assurance, and logging enhancements have been added to the `ldap-server` configuration. See [LDAP](config_ldap.md) for more information.
 ------
@@ -544,7 +543,7 @@ PCLI: The PCLI command `save tech-support-info` can now collect logs from anothe
 
 **Release Date:** June 1, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-37417 Additional factory default session-type configuration:** Added factory-default session-types for NetBIOS Name Service, NTP, and LDAP over UDP.
 ------
