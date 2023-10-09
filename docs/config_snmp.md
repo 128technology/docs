@@ -134,7 +134,11 @@ exit
 
 ### Protocol Configuration
 
-The protocol configuration requires three settings: setting `enabled` to `true` enables the SNMP agent on your SSR. Set the protocol to v3. Finally, configure the port on which the SNMP agent will listen for inbound requests; this is typically 161, the well-known port for SNMP agent requests. With SNMP v3, an optional engine-id parameter is available, to uniquely identify the SNMP engine.
+The protocol configuration requires three settings: 
+
+- Set `enabled` to `true`. Enables the SNMP agent on your SSR. 
+- Set the protocol to v3.  
+- Configure the port on which the SNMP agent will listen for inbound requests; this is typically 161, the well-known port for SNMP agent requests. With SNMP v3, an optional `engine-id` parameter is available, to uniquely identify the SNMP engine.
 
 ### View Configuration
 
@@ -180,13 +184,13 @@ These security levels are necessary when performing SNMPv3 operations, and the N
 
 The notification receiver configuration defines where the SSR sends SNMP information in the event of a system issue. This is configured under `notification-receiver` in the snmp-server element. For SNMPv3, there are four configuration elements:
 
-- **ip-address**: Address of your trap receiver
+- **`ip-address`**: Address of your trap receiver
 
-- **port**: UDP listening port on the trap receiver (typically 162)
+- **`port`**: UDP listening port on the trap receiver (typically 162)
 
-- **type**: Trap or Inform. Defines whether the SSR sends Traps or Inform Requests to the receiver
+- **`type`**: Trap or Inform. Defines whether the SSR sends Traps or Inform Requests to the receiver
 
-- **Access-control**: References the pre-configured access-control to use, identifies which configured user should handle the notifications, which ensures the appropriate authentication and encryption are used for the communication.
+- **`access-control`**: References the pre-configured access-control to use, identifies which configured user should handle the notifications, which ensures the appropriate authentication and encryption are used for the communication.
 
 Because the traps/informRequests are sent by the snmpd process running on the host Linux operating system, it is crucial that the host's routing table is capable of reaching the notification-receiver via the appropriate egress interface. Use the Linux command `ip r` to review the host's routing table to confirm that it meets your requirements.
 

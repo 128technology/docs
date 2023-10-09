@@ -1,6 +1,6 @@
 ---
-title: Configuration Command Guide 
-sidebar_label: Configuration Command Guide
+title: Configuration Command Reference Guide
+sidebar_label: Configuration Command Reference Guide
 ---
 
 ## `configure authority`
@@ -12050,6 +12050,22 @@ configure authority router node device-interface vrrp priority [<uint8>]
 | name | description |
 | ---- | ----------- |
 | uint8 | The value to set for this field |
+
+## `configure authority router node device-interface vrrp use-physical-address`
+
+Use the physical mac address of the device instead of the VRRP virtual mac.
+
+#### Usage
+
+```
+configure authority router node device-interface vrrp use-physical-address [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
 
 ## `configure authority router node device-interface vrrp vlan`
 

@@ -1,6 +1,6 @@
 ---
-title: SSR 6.1 Release Notes
-sidebar_label: '6.1'
+title: SSR 6.2 Release Notes
+sidebar_label: '6.2'
 ---
 :::info
 Issues resolved in a release are merged into subsequent releases chronologically AND lexicographically. 
@@ -49,35 +49,35 @@ This issue will be corrected in an upcoming release.
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 6.2.0-21
+## Release 6.2.0-27
 
-**Release Date:** October 10, 2023
+**Release Date:** October 13, 2023
 
 ### New Features
 
-- **I95-15554 IPv6 Support for BGP:**
+- **I95-15554 IPv6 Support for BGP:** The SSR now supports BGP using IPv6 addressing. IPv6 can be used alone, combined with IPv4, or IPv4 can continue to be used without IPv6. For more information, see [IPv6 Addressing](config_bgp.md#ipv6-addressing).
 ------
-- **I95-17284 SNMPv3:** 
+- **I95-17284 SNMPv3:** Support for SNMPv3 has been added. For configuration details, see [SNMPv3 Basic Configuration](config_snmp.md#snmp-v3-basic-configuration).
 ------
-- **I95-43657 Static NAT:**
+- **I95-43657 Static NAT:** Static NAT address mapping is supported by the SSR. For supporting information about this feature, see [Static NAT](config_nat.md#static-nat).
 ------
-- **I95-46537 Azure Mini-R Platform Support:**
+- **I95-46537 Azure Mini-R Platform Support:** The Azure Mini-R is now a supported platform for the SSR software. 
 ------
-- **I95-46671 VRF Route Leaking:**
+- **I95-46671 VRF Route Leaking:** VRF Route Leaking allows the intentinoal sharing of route information across VRF instances. For a more detailed explanation and configuration information please refer to [VRF Route Leaking](config_vrf_route_leaking.md).
 ------
-- **I95-47133 Local Configuration Override:**
+- **I95-47133 Local Configuration Override:** Administrators can now make configuration changes to a local router without access to the conductor, and prevent the conductor from overriding those changes. For more information about using this feature, see [Local Configuration Override](how_to_local_config_override.md).
 ------
 - **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
 ------
-- **I95-50071 Productize Lenovo SR650 platform as a 100G ports solution:** 
+- **I95-50071 Lenovo SR650 platform support as a 100G ports solution:** WAITING TO FINALIZE
 ------
-- **I95-51181 Improve save-tech-support-info command:** The PCLI command save tech-support-info now has a since argument that limits log collection to only logs generated after that given point. The since argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
+- **I95-51181 Improve save-tech-support-info command:** The PCLI command `save tech-support-info` now has a `since` argument that limits log collection to only logs generated after a specified time. The `since` argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
 ------
-- **I95-51194 Multicast Support for MSDP, RP, SSM:**
+- **I95-51194 Support for Multicast Source Discovery Protocol (MSDP), and the SSR as a Rendezvous Point (RP):** MSDP support has been added, allowing the RP's to share active Multicast Sources. For detailed configuration information, see [Multicast Source Discovery Protocol (MSDP)](config_multicast.md#multicast-source-discovery-protocol-msdp).
 ------
 - **I95-51450 Support for 100/Full Speed/Duplex on Intel I225-V Driver NICs:** The DPDK driver has been updated to allow fixed speed and duplex configuration to work with IGC i225 NICs.
 ------
-- **I95-52406 Add ability to download MIBs from GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
+- **I95-52406 Download MIBs from the GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
 ------
 - **I95-52703 Tenancy consideration in Application ID lookup:** Application Identification service lookups now consider the source tenant. This allows matches to be specific to certain networks/users. See [AppID and Tenancy](concepts_appid.md#appid-and-tenancy) for more information.
 
