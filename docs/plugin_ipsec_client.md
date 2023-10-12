@@ -814,11 +814,11 @@ exit
 
 - **WAN-2815** Improve the memory and cpu consumption of the IPsec plugin on the router
 
-For the ipsec plugin, several individual processes were consolidated into a single controller process providing an overall reduction in CPU and memory when the plugin is enabled on a SSR.
+For the IPsec plugin, several individual processes were consolidated into a single controller process providing an overall reduction in CPU and memory when the plugin is enabled on an SSR.
 
 - **I95-50410** SSR VPN to Azure interface not working due to a stuck session
 
-The new version adds support for automatically detecting egress tunnel sessions that are not able to communicate with the IPsec remote server anymore. The recovery happens in form of automatically deleting those session allowing new egress tunnel sessions to be formed. Please refer to the [session-record](#session-record) section on how to enable this new feature.
+The new version adds support for automatically detecting egress tunnel sessions that are not able to communicate with the IPsec remote server anymore. The recovery happens in the form of automatically deleting those sessions allowing new egress tunnel sessions to be formed. Please refer to the [session-record](#session-record) section on how to enable this new feature.
 
 - **WAN-2361** Include the egress wan interface being used for ipsec tunnel for better tunnel insights
 
