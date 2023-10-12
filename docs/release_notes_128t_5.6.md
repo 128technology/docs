@@ -86,6 +86,10 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-53321 Syslog datamodel is limited:** Added the following configurable syslog facility values `auth`, `authpriv`, `cron`, `daemon`, `kern`, `lpr`, `mail`, `news`, `syslog`, `user`, and `uucp`.
 
+### Caveats
+
+- **I95-53833 Timeout prevents startup:** 5.6.11 introduced a regression in the SSR reboot startup logic. If any of the processes take longer than 30 seconds to complete, the startup sequence is abandoned and renders the platform inoperable. The system can be recovered by manually restarting the SSR software. This issue is tracked by I95-53833.
+
 ## Release 5.6.10-6
 
 **Release Date:** August 29, 2023
