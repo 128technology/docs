@@ -834,6 +834,10 @@ The new version simplifies the configuration for specifying a source ip to be us
 
   _**Resolution:**_ The `mtu` configuration is not correctly reflected on the tunnel KNIs as well as the underlying libreswan config.
 
+- **I95-49643** Tunnel has been flapping constantly and dropping traffic.
+
+  _**Resolution:**_ When dead-peer detection triggers on an IPsec connection using multiple left and/or right subnets the tunnels will be automatically restarted to avoid an issue encountered with the third-party code.
+
 ### Release 3.5.0
 
 **Release Date:** Mar 17, 2023
