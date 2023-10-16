@@ -699,6 +699,8 @@ This release replaces the existing `5.4.0-104` release.
 ------
 - **I95-41319 Reachability metrics not updating:** The reachability metrics for the min & max time to establishment now reset and report correctly.
 ------
+- **I95-41369 TCP sessions are not established when adaptive encryption is enabled on a router in Azure:** Resolved an issue where the Firewall detector was not identifying links that require UDP transform. The firewall discovery was enhanced to use an additional TCP port 1283 to the detection mechanism.
+------
 - **I95-41601 NAT Keep-alive metric incrementing on the wrong interface:** The metrics now use egress interface to track keep-alive packets.
 ------
 - **I95-41619 Templating breaks on unicode characters:** This issue has been resolved.

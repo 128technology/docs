@@ -665,6 +665,8 @@ The active `automatedProvisioner` can be determined by running the command `show
 - **The following CVE issues have been addressed and resolved with this release:**
 I95-40268, I95-41591, I95-42448, I95-43261, I95-43471, I95-43625, I95-44087, I95-44088, I95-44206
 ------
+- **I95-41369 TCP sessions are not established when adaptive encryption is enabled on a router in Azure:** Resolved an issue where the Firewall detector was not identifying links that require UDP transform. The firewall discovery was enhanced to use an additional TCP port 1283 to the detection mechanism.
+------
 - **I95-42339 `show stats traffic-eng internal-application` not handling spaces:** This issue has been resolved. 
 ------
 - **I95-42689 Missing config validation for `ethernet-over-svr` on HA routers:** Validation for EoSVR on HA routers has been added.
