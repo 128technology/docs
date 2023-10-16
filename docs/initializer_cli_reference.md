@@ -5,7 +5,7 @@ sidebar_label: Initializer Command Line Reference
 
 This is a reference document for the SSR Initializer command line interface.
 For a guide to basic usage, see the initialization section of the
-[Router Interacrive Installation](intro_installation_bootable_media.mdx#initialize-the-ssr-node.
+[Router Interactive Installation](intro_installation_bootable_media.mdx#initialize-the-ssr-node).
 
 ## Running the Initializer
 
@@ -34,7 +34,6 @@ of 0. If any error was encountered during the operation, the return code will
 be non-zero.
 
 :::note
-
 The SSR must not be running during initialization. The Initializer will
 detect when SSR is running and exit with this message:
 
@@ -42,9 +41,7 @@ detect when SSR is running and exit with this message:
 SSR is running; cannot launch Initializer
 ```
 
-To stop SSR, follow the steps shown in the
-[Installation Guide](intro_installation.md#stopping-the-128t-routing-software).
-
+To stop the SSR, follow the steps shown in the [Installation Guide](intro_installation.md#stopping-the-128t-routing-software).
 :::
 
 ### Interactive Mode
@@ -56,10 +53,7 @@ SSR.
 initialize128t
 ```
 
-Follow the on-screen prompts to complete the initialization process. Step-by-step
-instructions for the Initializer can be found in the
-the initialization section of the
-[Router Interacrive Installation](intro_installation_bootable_media.mdx#initialize-the-ssr-node.
+Follow the on-screen prompts to complete the initialization process. Step-by-step instructions for the Initializer can be found in the initialization section of the [Router Interactive Installation](intro_installation_bootable_media.mdx#initialize-the-ssr-node).
 
 ### Automated Mode
 
