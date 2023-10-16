@@ -210,7 +210,7 @@ This release replaces the existing `5.1.6-1` release.
 ------
 - **I95-41109 GO REST API Handlers contain extra information:** The GO REST API journals have been pared down to provide relevant information. 
 ------
-- **I95-41369 TCP sessions are not established when adaptive encryption is enabled on a router in Azure:** Resolved an issue where the Firewall detector was not identifying links that require UDP transform. 
+- **I95-41369 TCP sessions are not established when adaptive encryption is enabled on a router in Azure:** Resolved an issue where the Firewall detector was not identifying links that require UDP transform. The firewall discovery was enhanced to use an additional TCP port 1283 to the detection mechanism.
 ------
 - **I95-41634 `show udp-transform` not displaying the network interface of each peer path:** The `show udp-transform` command has been updated to fully display peer path info on the network interface. 
 ------
