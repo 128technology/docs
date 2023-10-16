@@ -105,6 +105,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-42193 salt minion fails to connect to conductor:** `asset-connection-resiliency` has been enhanced to ensure all communication channels are operational.
 ------
+- **I95-41369 TCP sessions are not established when adaptive encryption is enabled on a router in Azure:** Resolved an issue where the Firewall detector was not identifying links that require UDP transform. The firewall discovery was enhanced to use an additional TCP port 1283 to the detection mechanism.
+------
 - **I95-42396 Highway crash after receiving a bad packet:** Resolved an issue in the DPDK internal storage space.
 ------
 - **I95-42608 BGP over SVR not able to open BGP session when routingManager is active on different node than interface:** This has been resolved by sending the packet to the node where routingManager is active via the inter node path.
