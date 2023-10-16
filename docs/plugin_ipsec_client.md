@@ -186,6 +186,7 @@ Each `remote` represents a unique tunnel destination and can be used to route tr
 | Release  | Modification                         |
 | -------- | ------------------------------------ |
 | 3.2.0    | `remote > tunnel-monitor` introduced |
+| 3.6.0    | `remote > tunnel-monitor > source` introduced |
 
 Tunnel monitoring is a way to monitor the health of individual tunnels and have them automatically restart if they become unhealthy. An ICMP ping is used for the traffic. For each `remote`, you can specify a destination, interval, timeout, and the number of max retries for each interval.
 
@@ -212,6 +213,7 @@ exit
 | Config   | Description                          |
 | -------- | ------------------------------------ |
 | `enabled` | Allows you to switch tunnel monitoring on and off for a `remote`. |
+| `source` | Optional source-ip to be used for originating the tunnel monitoring pings. |
 | `address` | The IP or hostname where traffic is sent. This address must be reachable after traversing the  tunnel. |
 | `timeout` | Duration (in seconds) within which to reach the destination. Each attempt will be made in this duration / `max-retries` interval. |
 | `max-retries` | Number of consecutive missed ICMP ping responses from the destination within the interval before deciding that the tunnel is unhealthy. |
@@ -221,7 +223,7 @@ exit
 ### Configuring services for tunnel traffic
 The user can define up to four `ipsec-client > remote` endpoints per node. In addition, the user must also define the necessary service and service-routes to route the tunnel traffic over the desired WAN interface.
 
-The following example shows a configuration for capturing the tunnel traffic and allows the `ipsec` tenant as defined in `router > ipsec-client > tenant` config above.
+The following example shows a configuration for capturing the egress tunnel traffic and allows the `ipsec` tenant as defined in `router > ipsec-client > tenant` config above.
 
 ```
 config
@@ -255,6 +257,37 @@ exit
 ```
 
 The `<remote-address-1>` and `<remote-address-2>` represent the `node > ipsec-client > remote > host` address. The `ipsec` tenant is allowed as per the tenant defined under `ipsec-client > tenant`. The user can split the tunnels into separate services per the routing requirements.
+
+#### Session Record
+
+| Release  | Modification                         |
+| -------- | ------------------------------------ |
+| 3.6.0    | Support for leveraging session-record was introduced |
+
+Various features introduced as part of the [3.6.0](#release-360) version require the user to enable session records on the egress tunnel services such as `ipsec-tunnel` shown above. The following sample config shows the recommend profile that can be configured and associated with the egress tunnel service.
+
+``` console
+config
+
+    authority
+        session-record-profile          ipsec-profile
+            name                   ipsec-profile
+            include-start-record   true
+            include-modify-record  true
+        exit
+
+        service  ipsec-tunnel
+            name           ipsec-tunnel
+            session-record
+                profile  ipsec-profile
+            exit
+        exit
+
+    exit
+exit
+```
+
+Once enabled, the records will allow the IPsec controller to perform additional functions such as detecting and remediating stuck egress tunnel sessions and reporting the name of the WAN interface being used for the tunnel.
 
 ### Directing traffic through the tunnel
 The user can leverage standard SSR service and service-route to direct intended traffic over the ipsec tunnel. In the example below, all guest internet traffic is sent over the ipsec tunnel for break and inspect. This can be accomplished as follows:
@@ -327,6 +360,7 @@ This mode of operation can be configured on a per router basis under `router > i
 | -------- | ------------------------------------ |
 | `redundancy-enabled` | Turns on the active-standby mode of operation. The default is false. |
 | `redundancy-interval` | How often to check for a failover when in active-standby mode (in seconds). The default is 1 second. |
+
 
 ## Thirdparty Software & Licenses
 
@@ -769,6 +803,40 @@ exit
 ```
 
 ## Release Notes
+
+### Release 3.6.0
+
+**Release Date:** Oct 13, 2023
+
+**Router Version** 128T-ipsec-2.4.0-4
+
+#### New Features and Improvements
+
+- **WAN-2815** Improve the memory and cpu consumption of the IPsec plugin on the router
+
+For the IPsec plugin, several individual processes were consolidated into a single controller process providing an overall reduction in CPU and memory when the plugin is enabled on an SSR.
+
+- **I95-50410** SSR VPN to Azure interface not working due to a stuck session
+
+The new version adds support for automatically detecting egress tunnel sessions that are not able to communicate with the IPsec remote server anymore. The recovery happens in the form of automatically deleting those sessions allowing new egress tunnel sessions to be formed. Please refer to the [session-record](#session-record) section on how to enable this new feature.
+
+- **WAN-2361** Include the egress wan interface being used for ipsec tunnel for better tunnel insights
+
+Please refer to the [session-record](#session-record) section on how to enable this new feature.
+
+- **WAN-1847** Support for custom source-ip for tunnel-monitoring
+
+The new version simplifies the configuration for specifying a source ip to be used for the tunnel-monitoring feature.
+
+#### Issues Fixed
+
+- **PLUGIN-1999** MTU and auto-mss adjustment not working for IPsec tunnel KNIs.
+
+  _**Resolution:**_ The `mtu` configuration is not correctly reflected on the tunnel KNIs as well as the underlying libreswan config.
+
+- **I95-49643** Tunnel has been flapping constantly and dropping traffic.
+
+  _**Resolution:**_ When dead-peer detection triggers on an IPsec connection using multiple left and/or right subnets the tunnels will be automatically restarted to avoid an issue encountered with the third-party code.
 
 ### Release 3.5.0
 
