@@ -28,6 +28,14 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.6.12-1
+
+**Release Date:** October 19, 2023
+
+### Resolved Issues
+
+- **I95-47859 3G signal strength displayed in `show lte` command:** Resolved an issue where the `show lte` command displayed the first value it encountered. The code now checks for the correct lte stat.
+
 ## Release 5.6.11-4
 
 **Release Date:** October 2, 2023
