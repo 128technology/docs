@@ -145,7 +145,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 ------
 - **I95-53124 Sessions destined to private IP address (RFC1918) are incorrectly reported using the application name as the service name:** We have identified an issue where sessions destined to private IP address (RFC1918), are incorrectly reported with the application name as the service name, even if the traffic is HTTP/HTTPS. Session traffic continues to follow the appropriate service / routing profile, but the stats reported may not accurately reflect the learned applications. This is actively being addressed and will be resolved in a future patch.
 ------
-- **I95-53878 Dynamic Reconfiguration with LAG/LACP:** Dynamic reconfiguration is supported for changing LACP settings on the `bond` device, however adding or removing bonds and/or bond members from the LAG is not currently supported. Any time configuration changes are made to the LAG, you must restart the 128T service.
+- **I95-53878 Dynamic Reconfiguration with LAG/LACP:** Any changes to the LAG configuration require a restart of the 128T service. Configuration changes to the LAG should be performed during a maintenance window, as the changes may disrupt traffic flow. 
 
 ### Known Issues
 
