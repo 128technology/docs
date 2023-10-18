@@ -34,7 +34,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **I95-47859 3G signal strength displayed in `show lte` command:** Resolved an issue where the `show lte` command displayed the first value it encountered. The code now checks for the correct lte stat.
+
+- **I95-53833 Timeout prevents startup:** Resolved a regression introduced in 5.6.11 in the SSR reboot startup logic. If any of the processes took longer than 30 seconds to complete, the startup sequence was abandoned and renders the platform inoperable. This issue has been resolved.
 
 ## Release 5.6.11-4
 
