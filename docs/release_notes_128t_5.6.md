@@ -30,12 +30,12 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ## Release 5.6.12-1
 
-**Release Date:** October 19, 2023
+**Release Date:** October 20, 2023
 
 ### Resolved Issues
 
 
-- **I95-53833 Timeout prevents startup:** Resolved a regression introduced in 5.6.11 in the SSR reboot startup logic. If any of the processes took longer than 30 seconds to complete, the startup sequence was abandoned and renders the platform inoperable. This issue has been resolved.
+- **I95-53833 Timeout prevents startup:** Resolved a regression introduced in 5.6.11 in the SSR reboot startup logic. If any of the processes took longer than 30 seconds to complete, the startup sequence was abandoned and rendered the platform inoperable. This issue has been resolved.
 
 ## Release 5.6.11-4
 
