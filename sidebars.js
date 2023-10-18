@@ -250,6 +250,7 @@ module.exports = {
           "ts_mac_uniqueness",
           "ts_packet_capture",
           "ts_serial_console_tsing",
+          "ts_session_processing",
           "ts_t1_troubleshooting",
           "ts_traceroute",
           "ts_troubleshooting_vrf",
