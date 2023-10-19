@@ -18,7 +18,7 @@ Connections per second deal with how quickly the SSR can create, modify and stor
 
 The session processing thread is responsible for session setup and modify operations. Modify operations are performed for a flow move (peer path failure or SLA violation) or with the use of application identification which updates the session after DPI. The session processing thread has a buffer queue for handling bursts of traffic or when the thread is “backed up”. As the queue fills up, latency increases for all packets in the queue. This will translate into end-to-end latency within the network. The system should be scaled with ample headroom to handle peak session processing load.
 
-Ideally the SSR should be operating at no more than 80% utilization of its session processing threads so that it can handle bursty conditions that would be triggered as a result of path migrations. When a path failures occur, or a service is no longer within SLA, the SSR needs to modify existing sessions to ensure they are traversing the optimal pathway. For systems carrying considerable load, this could be many thousands of sessions that need to be updated.
+The SSR should be operating at no more than 80% utilization of its session processing threads so that it can handle bursty conditions that would be triggered as a result of path migrations. When a path failures occur, or a service is no longer within SLA, the SSR needs to modify existing sessions to ensure they are traversing the optimal pathway. For systems carrying considerable load, this could be many thousands of sessions that need to be updated.
 
 
 ### Enabling Multi-Threading
@@ -33,11 +33,11 @@ config authority router <router-name> node <node-name> session-setup-scaling   t
 config authority router <router-name> node <node-name> session-processor-mode  automatic
 ```
 
-Once the configuration changes have been made and committed, a restart of the SSR is required for the changes to take effect.
+Once the configuration changes have been made and committed, a restart of the SSR service is required for the changes to take effect.
 
 
 ### Examining Utilization of Session Processing Threads
-In general, viewing average host CPU utilization alone will be an inaccurate view of session processing utilization. This is due to the OS scheduler and the business of all other threads. Instead, one must look at the individual session processing threads.
+To view and understand host CPU usage requires looking at the individual session processing threads _as well as_ the other threads in the system. This is due to how the OS scheduler works, distributing compute cycles to available CPUs.
 
 #### SSR version < 6.1
 In software versions prior to 6.1, examining the utilization of the “PacketProcessing” thread can be achieved by viewing the output of the command `top -H d 1.0 | grep PacketProcess` from the OS shell, as seen below.
@@ -57,7 +57,7 @@ In software versions prior to 6.1, examining the utilization of the “PacketPro
 ```
 
 #### SSR version >= 6.1
-In software versions 6.1 and greater, the session processing thread(s) will have the name `Session-Prox-XX` where `XX` is a zero-based index of the number of threads allocated to session processing. An easy way to view the number of threads allocated to session processing as well as seeing current utilization can be accomplished by running the command `show stats process thread process-name highway | grep SessionProc | grep "cpu usage"`.
+In software versions 6.1 and greater, the session processing thread(s) will have the name `Session-Proc-XX` where `XX` is a zero-based index of the number of threads allocated to session processing. An easy way to view the number of threads allocated to session processing as well as seeing current utilization can be accomplished by running the command `show stats process thread process-name highway | grep SessionProc | grep "cpu usage"`.
 
 ```
 admin@test1.combo1# show stats process thread process-name highway | grep SessionProc | grep "cpu usage"
@@ -83,7 +83,7 @@ Top can be used as well to follow the session processing threads:
 
 ### Understanding CLI Output
 
-The "Service Area" is the colloquial name given to the business logic responsible for session processing. The set of stats related to `internal-application` of Service Area processing are valuable to understand system behavior. These stats are monotonically increasing scalar values, so one would need to compare deltas over two periods of time to get an accurate view of rate. In particular, `schedule-failure` and `sent-tmeout` are signs that the session processing is unable to keep up with load or unable to handle the entirety of bursty traffic patterns.
+The "Service Area" is the colloquial name given to the business logic responsible for session processing. The set of stats related to `internal-application` of Service Area processing are valuable to understand system behavior. These stats are monotonically increasing scalar values, so one would need to compare deltas over two periods of time to get an accurate view of rate. In particular, `schedule-failure` and `sent-timeout` are signs that the session processing is unable to keep up with load or unable to handle the entirety of bursty traffic patterns.
 
 ```
 admin@test1.combo1# show stats traffic-eng internal-application internal-application "Service Area"
@@ -159,31 +159,30 @@ Time series graphs of per-thread utilization are only available on SSR software 
 The following graph will show time series thread utilization of session processing threads. This graph needs to be customized per router, per node, per process, and each SessionProc thread.
 When building this graph, make sure to include each of the running `SessionProc` threads.
 ![Session Processing Thread Utilization](/img/ts_sp_session_processing_thread_utilization.png)
-`process/thread/cpu/usage`
-`Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionProc-XX'`
+**Metric:** `process/thread/cpu/usage` <br/>
+**Series:** `Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionProc-XX'`
 
-As noted earlier, while monitoring session processing utilization is important it is not sufficient. Looking at the utilization of all other threads is important to understand how the CPU is scheduling work across all host processors. This is valuable to determine if other processes are starving out the session processing threads.
+To ensure a holistic view of session processing along with the stated above, looking that the utilization of all the other threads is important. It is valuable to determine if other processes are starving out the session processing threads.
 ![Host CPU Utilization - All Threads](/img/ts_sp_host_cpu_thread_utilization.png)
-`process/thread/cpu/usage`
-`All for Selected Router`
+**Metric:** `process/thread/cpu/usage` <br/>
+**Series:** `All for Selected Router`
 
 On a production system there will be a non-zero value of packets waiting in a queue to be processed by the session processing threads. When this value increases steadily and remains at a steady state, this is indicative of the system being unable to keep up with load. The following graph will demonstrate the queue depth for all packets destined for session processing. Note that this graph requires a custom series with the router, node, process and thread name specified according to the image below.
 ![Session Processing Queue Depth](/img/ts_sp_session_processing_queue_depth.png)
-`process/thread/queue/depth`
-`Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionPipeline'`
+**Metric:** `process/thread/queue/depth` <br/>
+**Series:** `Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionPipeline'`
 
 Queue delay represents the average amount of time (in microseconds) packets are waiting to be processed. When this value is steadily increasing, this is indicative of the system being unable to keep up with load. The following graph will demonstrate the average time packets are waiting to be processed. Note that this graph requires a custom series with the router, node, process and thread name specified according to the image below.
 ![Session Processing Queue Delay](/img/ts_sp_session_processing_queue_delay.png)
-`process/thread/queue/delay`
-`Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionPipeline'`
+**Metric:** `process/thread/queue/delay` <br/>
+**Series:** `Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionPipeline'`
+
+The Session Processing threads operate on packets that either create or modify a session. In a steady-state environment, the majority of packets arriving to the "Service Area" are "first packets" that create a session. A KPI valuable for determining (at least partial) load of the session processing threads is `session-arrival-rate`, or the rate at which new sessions are being setup.
+![Session Arrival Rate](/img/ts_sp_session_arrival_rate.png)
+**Metric:** `aggregate-session/node/session-arrival-rate` <br/>
+**Series:** `All for Selected Router`
 
 When the session processing queue overflows or packets exceed their maximum time waiting in the queue, they are dropped so that clients can re-transmit the packet. Timeouts on their own are not indicative of an overloaded SSR as bursts will always happen in a network during network churn. However, if this value is steadily increasing this can be indicative of the SSR being unable to keep up with session processing load.
 ![Service Area Scheduling Timeouts](/img/ts_sp_service_area_schedule_timeouts.png)
-`traffic-eng/internal-application/sent-timeout`
-`All for Selected Router`
-
-When the session processing queue is full and no additional packets can be scheduled for session setup or modification, these packets are dropped so that clients can re-transmit the packet with an effort to be processed during the next iteration. Scheduling failures on their own are not indicative of an overloaded SSR as bursts will always happen in a network during network churn. However, if this value is steadily increasing this can be indicative of the SSR being unable to keep up with session processing load.
-![Service Area Scheduling Failures](/img/ts_sp_service_area_schedule_failures.png)
-`traffic-eng/internal-application/schedule-failure`
-`All for Selected Router`
-
+**Metric:** `traffic-eng/internal-application/sent-timeout` <br/>
+**Series:** `All for Selected Router`
