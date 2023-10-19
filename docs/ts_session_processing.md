@@ -3,29 +3,29 @@ title: Troubleshooting Session Processing
 sidebar_label: Session Processing
 ---
 
+Session Smart Routers behave as both a firewall and a router. It is in its name – to be session smart – where the platform can apply a surgical amount of policy, treatment, and offer a rich amount of application data for use in understanding network performance.
+
 ## Session Processing on the Session Smart Router
 
-Session Smart Routers behave as both a firewall and a router. It is in its name – to be session smart – where the platform can apply a surgical amount of policy, treatment and offer a rich amount of application data for use in understanding network performance.
-
-When it comes to determining proper performance and utilization of a SSR, one must minimally look at three characteristics:
+When it comes to determining proper performance and utilization of an SSR, you must look at three characteristics:
 * Throughput
 * Session Capacity
 * Connections per second (CPS)
 
-This document will focus on the last of these three factors, CPS, and how to understand its utilization as it relates to the SSR's ability to process sessions.
+This document focuses on the last of these three factors, CPS, and understanding its utilization related to the SSR's ability to process sessions.
 
-Connections per second deal with how quickly the SSR can create, modify and store a new session accepted by its configured policy. Every system has a maximum session processing rate that is governed by the platform on which it runs. In SSR software versions prior to 6.1, session processing is single-threaded and is rate-limited by CPU clock speed and overall CPU business (as the OS scheduler affords compute cycles to this task). In software versions 6.1 and beyond, session processing is multi-threaded and can take advantage of additional host cores. The SSR uses a RSS hashing mechanism to distribute traffic into the session processing threads based on the five tuples of packet (source IP, source port, destination IP, destination port, protocol).
+Connections per second deal with how quickly the SSR can create, modify, and store a new session accepted (**what is being accepted?**) by its configured policy. Every system has a maximum session processing rate that is governed by the platform on which it runs. In SSR software versions prior to 6.1, session processing is single-threaded and is rate-limited by CPU clock speed and overall CPU busy-ness (as the OS scheduler delegates compute cycles to this task). In software versions 6.1 and beyond, session processing is multi-threaded and can take advantage of additional host cores. The SSR uses an RSS hashing mechanism to distribute traffic into the session processing threads based on the five tuples of packet (source IP, source port, destination IP, destination port, protocol).
 
-The session processing thread is responsible for session setup and modify operations. Modify operations are performed for a flow move (peer path failure or SLA violation) or with the use of application identification which updates the session after DPI. The session processing thread has a buffer queue for handling bursts of traffic or when the thread is “backed up”. As the queue fills up, latency increases for all packets in the queue. This will translate into end-to-end latency within the network. The system should be scaled with ample headroom to handle peak session processing load.
+The session processing thread is responsible for session setup and modify operations. Modify operations are performed for a flow move (peer path failure or SLA violation) or with the use of application identification which updates the session after DPI. The session processing thread has a buffer queue for handling bursts of traffic or when the thread is “backed up”. As the queue fills up, latency increases for all packets in the queue. This will translate into end-to-end latency within the network. Always scale the system with ample headroom to handle peak session processing load.
 
-The SSR should be operating at no more than 80% utilization of its session processing threads so that it can handle bursty conditions that would be triggered as a result of path migrations. When a path failures occur, or a service is no longer within SLA, the SSR needs to modify existing sessions to ensure they are traversing the optimal pathway. For systems carrying considerable load, this could be many thousands of sessions that need to be updated.
+The SSR should be operating at no more than 80% utilization of its session processing threads, allowing it to handle bursty conditions that are triggered as a result of path migrations. When a path failure occurs, or a service is no longer within SLA, the SSR modifies existing sessions to ensure they are traversing the optimal pathway. For systems carrying considerable load, this could be many thousands of sessions that need to be updated.
 
 
 ### Enabling Multi-Threading
-While SSR software versions 6.1 have support for multi-threading for session processing, it is not enabled by default. Reference the [config reference guide](config_reference_guide.md#session-setup-scaling) for details on the configuration parameters. Note that this feature must be enabled on both nodes if operating in a HA cluster.
+While SSR software versions 6.1.x support multi-threading for session processing, it is not enabled by default. Reference the [Configuration Element Reference guide](config_reference_guide.md#session-setup-scaling) for details on the configuration parameters. Note that this feature must be enabled on both nodes if operating in a HA cluster.
 
 :::warning
-It is not recommended to set `session-processor-mode` to `manual` unless instructed by a member of Juniper support or engineering teams to ensure that this value is right-sized for the environment.
+It is not recommended to set `session-processor-mode` to `manual` unless instructed by a member of Juniper support or the engineering team to ensure that this value is right-sized for the environment.
 :::
 
 ```
@@ -37,10 +37,10 @@ Once the configuration changes have been made and committed, a restart of the SS
 
 
 ### Examining Utilization of Session Processing Threads
-To view and understand host CPU usage requires looking at the individual session processing threads _as well as_ the other threads in the system. This is due to how the OS scheduler works, distributing compute cycles to available CPUs.
+To view and understand host CPU usage, you must look at the individual session processing threads _as well as_ the other threads in the system. This is due to how the OS scheduler works, distributing compute cycles to available CPUs.
 
-#### SSR version < 6.1
-In software versions prior to 6.1, examining the utilization of the “PacketProcessing” thread can be achieved by viewing the output of the command `top -H d 1.0 | grep PacketProcess` from the OS shell, as seen below.
+#### SSR Versions < 6.1
+In software versions prior to 6.1, examine the utilization of the **PacketProcessing** thread by viewing the output of the command `top -H d 1.0 | grep PacketProcess` from the OS shell, as seen below.
 
 ```
 [centos@SOL-DL360-DUT1 ~]$ top -H d 1.0 | grep PacketProcess
@@ -56,8 +56,8 @@ In software versions prior to 6.1, examining the utilization of the “PacketPro
  8590 root      20   0  265.2g   7.2g 113312 R 61.8  2.9 177:30.12 PacketProcessin
 ```
 
-#### SSR version >= 6.1
-In software versions 6.1 and greater, the session processing thread(s) will have the name `Session-Proc-XX` where `XX` is a zero-based index of the number of threads allocated to session processing. An easy way to view the number of threads allocated to session processing as well as seeing current utilization can be accomplished by running the command `show stats process thread process-name highway | grep SessionProc | grep "cpu usage"`.
+#### SSR Versions >= 6.1
+In software versions 6.1 and greater, the session processing thread(s) are named `Session-Proc-XX` where `XX` is a zero-based index of the number of threads allocated to session processing. An easy way to view the number of threads allocated to session processing as well as seeing current utilization is to run the command `show stats process thread process-name highway | grep SessionProc | grep "cpu usage"`.
 
 ```
 admin@test1.combo1# show stats process thread process-name highway | grep SessionProc | grep "cpu usage"
@@ -70,7 +70,7 @@ admin@test1.combo1# show stats process thread process-name highway | grep Sessio
  cpu usage             test1   highway        SessionProc-05           20
 ```
 
-Top can be used as well to follow the session processing threads:
+`Top` can be used to follow the session processing threads:
 ```
 [centos@SOL-DL360-DUT1 ~]$ top -H d 1.0 | grep SessionProc
  7532 root      20   0  266.9g   8.8g 120940 S 60.0  3.5  39:48.64 SessionProc-00                                                                 
@@ -83,7 +83,7 @@ Top can be used as well to follow the session processing threads:
 
 ### Understanding CLI Output
 
-The "Service Area" is the colloquial name given to the business logic responsible for session processing. The set of stats related to `internal-application` of Service Area processing are valuable to understand system behavior. These stats are monotonically increasing scalar values, so one would need to compare deltas over two periods of time to get an accurate view of rate. In particular, `schedule-failure` and `sent-timeout` are signs that the session processing is unable to keep up with load or unable to handle the entirety of bursty traffic patterns.
+The **Service Area** is the informal name given to the business logic responsible for session processing. The set of stats related to `internal-application` of Service Area processing are valuable to understand system behavior. These stats are monotonically increasing scalar values; you will need to compare deltas over two periods of time to get an accurate view of rate. In particular, `schedule-failure` and `sent-timeout` are signs that the session processing is unable to keep up with load or unable to handle bursty traffic patterns.
 
 ```
 admin@test1.combo1# show stats traffic-eng internal-application internal-application "Service Area"
@@ -112,7 +112,7 @@ Internal Application Traffic Engineering Stats
 Completed in 0.03 seconds
 ```
 
-SSR software versions 6.1 introduces the thread-specific metrics `show stats process thread process-name highway thread-name`.
+SSR software version 6.1 introduces the thread-specific metrics `show stats process thread process-name highway thread-name`.
 
 ```
 admin@test1.combo1# show stats process thread process-name highway thread-name SessionProc-00
@@ -142,22 +142,30 @@ Completed in 0.02 seconds
 The units for `queue delay` and `task execution-time` are in microseconds.
 All values are rolling averages, except for `queue total` and `task total` which are counters.
  
-The values `cpu system-usage`, `cpu usage`, and `cpu user-usage` are based out of 100% and indicate utilization of the service area thread performing session setup.
+The values `cpu system-usage`, `cpu usage`, and `cpu user-usage` are percentages and indicate utilization of the service area thread performing session setup.
  
 High values for queue depth and queue delay, coupled with high CPU usage values, are indicative of the service area threads not keeping up.
 
 
 ### Creating a Dashboard for Active Monitoring
-Creating a `Custom Report` on the Conductor is strongly recommended for each head-end router in an authority. Head-ends are central aggregation points for traffic and therefore typically have the highest utilization and blast radius.
+Creating a `Custom Report` on the Conductor is strongly recommended for each head-end router in an authority. Head-ends are central aggregation points for traffic and typically have the highest utilization and blast radius.
 
-On the Conductor GUI, navigate to `CUSTOM REPORTS`, then click on `NEW` in the top-right corner. Select `New Empty Report` and give it the name: `Session Processing Utilization - <Router Name>` (where `<Router Name>` is the name of the router on which these reports will be customized).
+To create a custom report, use the following procedure:
+
+1. On the Conductor GUI, navigate to `CUSTOM REPORTS`.
+2. Click on `NEW` in the top-right corner. 
+3. Select `New Empty Report`. 
+4. Name the report. For example: `Session Processing Utilization - <Router Name>` (where `<Router Name>` is the name of the router on which these reports will be customized).
 
 :::note
 Time series graphs of per-thread utilization are only available on SSR software starting with 6.1.
 :::
 
-The following graph will show time series thread utilization of session processing threads. This graph needs to be customized per router, per node, per process, and each SessionProc thread.
+The graph shows time series thread utilization of session processing threads. This graph can be customized per router, per node, per process, and each SessionProc thread.
 When building this graph, make sure to include each of the running `SessionProc` threads.
+
+**All images should have white backgrounds in docs**
+
 ![Session Processing Thread Utilization](/img/ts_sp_session_processing_thread_utilization.png)
 **Metric:** `process/thread/cpu/usage` <br/>
 **Series:** `Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionProc-XX'`
@@ -167,22 +175,22 @@ To ensure a holistic view of session processing along with the stated above, loo
 **Metric:** `process/thread/cpu/usage` <br/>
 **Series:** `All for Selected Router`
 
-On a production system there will be a non-zero value of packets waiting in a queue to be processed by the session processing threads. When this value increases steadily and remains at a steady state, this is indicative of the system being unable to keep up with load. The following graph will demonstrate the queue depth for all packets destined for session processing. Note that this graph requires a custom series with the router, node, process and thread name specified according to the image below.
+On a production system there will be a non-zero value of packets waiting in a queue to be processed by the session processing threads. When this value increases steadily and remains at a steady state, this indicates that the system is unable to keep up with load. The following graph shows the queue depth for all packets destined for session processing. Note that this graph requires a custom series with the router, node, process and thread name specified according to the image below.
 ![Session Processing Queue Depth](/img/ts_sp_session_processing_queue_depth.png)
 **Metric:** `process/thread/queue/depth` <br/>
 **Series:** `Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionPipeline'`
 
-Queue delay represents the average amount of time (in microseconds) packets are waiting to be processed. When this value is steadily increasing, this is indicative of the system being unable to keep up with load. The following graph will demonstrate the average time packets are waiting to be processed. Note that this graph requires a custom series with the router, node, process and thread name specified according to the image below.
+Queue delay represents the average amount of time (in microseconds) packets are waiting to be processed. When this value is steadily increasing, this indicates that the system is unable to keep up with load. The following graph shows the average time packets are waiting to be processed. Note that this graph requires a custom series with the router, node, process and thread name specified according to the image below.
 ![Session Processing Queue Delay](/img/ts_sp_session_processing_queue_delay.png)
 **Metric:** `process/thread/queue/delay` <br/>
 **Series:** `Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionPipeline'`
 
-The Session Processing threads operate on packets that either create or modify a session. In a steady-state environment, the majority of packets arriving to the "Service Area" are "first packets" that create a session. A KPI valuable for determining (at least partial) load of the session processing threads is `session-arrival-rate`, or the rate at which new sessions are being setup.
+The Session Processing threads operate on packets that either create or modify a session. In a steady-state environment, the majority of packets arriving to the **Service Area** are *first packets* that create a session. A KPI valuable for determining (at least partial) load of the session processing threads is `session-arrival-rate`, or the rate at which new sessions are being setup.
 ![Session Arrival Rate](/img/ts_sp_session_arrival_rate.png)
 **Metric:** `aggregate-session/node/session-arrival-rate` <br/>
 **Series:** `All for Selected Router`
 
-When the session processing queue overflows or packets exceed their maximum time waiting in the queue, they are dropped so that clients can re-transmit the packet. Timeouts on their own are not indicative of an overloaded SSR as bursts will always happen in a network during network churn. However, if this value is steadily increasing this can be indicative of the SSR being unable to keep up with session processing load.
+When the session processing queue overflows or packets exceed their maximum time waiting in the queue, they are dropped so that clients can re-transmit the packet. Timeouts on their own do not indicate an overloaded SSR as bursts always happen in a network during network churn. However, if this value is steadily increasing it can mean that the SSR is unable to keep up with session processing load.
 ![Service Area Scheduling Timeouts](/img/ts_sp_service_area_schedule_timeouts.png)
 **Metric:** `traffic-eng/internal-application/sent-timeout` <br/>
 **Series:** `All for Selected Router`
