@@ -14,7 +14,7 @@ When it comes to determining proper performance and utilization of an SSR, you m
 
 This document focuses on the last of these three factors, CPS, and understanding its utilization related to the SSR's ability to process sessions.
 
-Connections per second deal with how quickly the SSR can create, modify, and store a new session accepted (**what is being accepted?**) by its configured policy. Every system has a maximum session processing rate that is governed by the platform on which it runs. In SSR software versions prior to 6.1, session processing is single-threaded and is rate-limited by CPU clock speed and overall CPU busy-ness (as the OS scheduler delegates compute cycles to this task). In software versions 6.1 and beyond, session processing is multi-threaded and can take advantage of additional host cores. The SSR uses an RSS hashing mechanism to distribute traffic into the session processing threads based on the five tuples of packet (source IP, source port, destination IP, destination port, protocol).
+Connections per second influence how quickly the SSR can create, modify, and store a new session. Every system has a maximum session processing rate that is governed by the platform on which it runs. In SSR software versions prior to 6.1, session processing is single-threaded and is rate-limited by CPU clock speed and overall CPU busy-ness (as the OS scheduler delegates compute cycles to this task). In software versions 6.1 and beyond, session processing is multi-threaded and can take advantage of additional host cores. The SSR uses an RSS hashing mechanism to distribute traffic into the session processing threads based on the five tuples of packet (source IP, source port, destination IP, destination port, protocol).
 
 The session processing thread is responsible for session setup and modify operations. Modify operations are performed for a flow move (peer path failure or SLA violation) or with the use of application identification which updates the session after DPI. The session processing thread has a buffer queue for handling bursts of traffic or when the thread is “backed up”. As the queue fills up, latency increases for all packets in the queue. This will translate into end-to-end latency within the network. Always scale the system with ample headroom to handle peak session processing load.
 
@@ -163,9 +163,6 @@ Time series graphs of per-thread utilization are only available on SSR software 
 
 The graph shows time series thread utilization of session processing threads. This graph can be customized per router, per node, per process, and each SessionProc thread.
 When building this graph, make sure to include each of the running `SessionProc` threads.
-
-**All images should have white backgrounds in docs**
-
 ![Session Processing Thread Utilization](/img/ts_sp_session_processing_thread_utilization.png)
 **Metric:** `process/thread/cpu/usage` <br/>
 **Series:** `Router <router-name> Node <node-name> Process Name 'highway' Thread Name 'SessionProc-XX'`
