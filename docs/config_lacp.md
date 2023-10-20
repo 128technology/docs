@@ -46,7 +46,9 @@ The following caveats have been identified:
 
 LACP is enabled by default on the `bond` device interface, and must be configured on each end of the link. The following device interface configuration shows a `bond` interface and `lacp-enabled` as true (default). The interfaces that are part of the LAG are configured as ethernet interfaces and the `parent-bond` is identified as the name of the `bond` interface. 
 
+:::important
 Please note that after any changes to the LAG configuration, you must restart the 128T service. 
+:::
 
 ### Configuration using the PCLI 
 
