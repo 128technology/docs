@@ -69,7 +69,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
 ------
-- **I95-50071 Lenovo SR650 platform support as a 100G ports solution:** WAITING TO FINALIZE
+- **I95-50071 Lenovo SR650 platform support as a 100G ports solution: WAITING TO FINALIZE
+
 ------
 - **I95-51181 Improve save-tech-support-info command:** The PCLI command `save tech-support-info` now has a `since` argument that limits log collection to only logs generated after a specified time. The `since` argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
 ------
@@ -89,7 +90,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-47838 SSR does not remove networks on stop:** Resolved an issue where the SSR does not remove networks on stop. This has been corrected and the SSR now will cleanup networks on container stop and create them on restart to optimize start/restart process. 
 ------
-- **I95-50539 Common Criteria - SSR not handling and logging Multicast packets correctly:** Per Common Criteria guidelines, the SSR now filters and drops packets if the source address is a multicast source IP address. 
+- **I95-50539 SSR not handling and logging Multicast packets correctly:** Per security best practices, the SSR now filters and drops packets if the source address is a multicast source IP address. 
 ------
 - **I95-50671 Office365 traffic is not recognized:** Resolved an issue where Office365 traffic was being miscategorized and therefore not fully qualified. O365 traffic, when traversing over SVR, is no longer miscategorized.
 ------
@@ -120,7 +121,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-52279 Bond interface configured with VRRP not receiving UDP traffic when LACP is enabled:** An issue where VRRP Virtual MACs from being silently dropped has been resolved. Packets with VRRP virtual dest MACs are now processed by the Bond PMD when using LACP.
 ------
-- **I95-52414 User seeing other user's FIB entries and messages:** Resolved an issue where `show fib` included entries that the current user did not have permission to view.
+- **I95-52414 RBAC not being honored for `show fib` output:** Resolved an issue where `show fib` included entries that the current user did not have permission to view.
 ------
 - **I95-52480 Conductor shows alarms when applications are added to the router configuration:** A condition has been added that verifies whether the node is a router or conductor before running application update and generating alarms on a conductor.
 ------
@@ -130,7 +131,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-52547 Unable to set DHCP option 160:** Resolved an issue where DHCP option 160 was being treated as a standard option and was unavailable to be defined as an option. When it was set, it would prevent the DHCP server from starting. This has been corrected. 
 ------
-- **I95-52889 Highway crash caused by a false negative waypoint exhaustion check:** Waypoint ports reinitialization that is triggered by a false negative exhaustion check can lead to duplicate waypoints and reverse flows on two sessionsresulting in a highway crash. This issue has been resolved.
+- **I95-52889 Highway crash caused by a false negative waypoint exhaustion check:** Waypoint ports reinitialization that is triggered by a false negative exhaustion check can lead to duplicate waypoints and reverse flows on two sessions resulting in a highway crash. This issue has been resolved.
 
 - **I95-52599 Conductors display different assets on different HA nodes:** If the state table of an inactive HA node becomes out of sync with the active HA node, then some assets were being skipped when parsing the asset state response. This issue has been resolved through the reporting of asset IDs from the active node state table. 
 ------
@@ -150,7 +151,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-53002 NTP setup check fails on startup:** Resolved an issue in the NTP startup sequence, due to an incorrect path for the NTP configuration.
 ------ 
-- **I95-53009 Common Criteria - RPM Verification:** Compliance verification for all ISO RPMs has been added.
+- **I95-53009 RPM signature verification missing for all artifacts:** Verification for all ISO RPMs has been added.
 ------
 - **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked. 
 ------
@@ -176,7 +177,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 -----
 - **I95-53344 Exception on device interface tear down terminates process:** Resolved a rare case where Highway process can terminate and core during config changes if there is an underlying exception to a device-interface on removal.
 ------
-- **I95-53393 Common Criteria - Allow empty password attempts via SSH:** The SSR counts login attempts with an empty password as failed login attempts. These  contribute to locking a user account if they reach the threshold (the value configured in `configure authority password-policy deny`,) within a short time window. 
+- **I95-53393 Empty password attempts not counting towards user lockout:** The SSR counts login attempts with an empty password as failed login attempts. These  contribute to locking a user account if they reach the threshold (the value configured in `configure authority password-policy deny`,) within a short time window. 
 ------
 - **I95-53583 `show service-path` on hub always shows ADDR_UNKNOWN IP address for the peers:** Add remote host name to `show service-path [detail]` . This resolves an issue where hub routers interacting with dynamic spoke interfaces do not show information in `show service-path detail` to identify those individual paths. 
 ------
