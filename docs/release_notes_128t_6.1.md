@@ -161,7 +161,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 ------
 - **I95-10141 LLDP Support:** The LLDP mode and parameters allow users to configure the device interface to disable LLDP advertisements, set a `receive-only` mode, or enable sending and receiving LLDP packets. For information about configuring LLDP, see [`lldp`](config_reference_guide.md#lldp).
 ------
-- **I95-20864 Support for Multicast:** Multicast is a “one source, many destinations” method of traffic distribution. For more information, see [Multicast](config_multicast.md). The previous implementation of multicast has been replaced by this new version and is no longer supported. The issue relating to encryption (I95-48792) is addressed in the new implementation. 
+- **I95-20864 Support for Multicast:** Multicast is a “one source, many destinations” method of traffic distribution. For more information, see [Multicast](config_multicast.md). The previous implementation of multicast has been replaced by this new version and is no longer supported. The issue relating to encryption (I95-48792) is addressed in the new implementation. Note that this feature is currently in Beta; refer to the Caveats section for additional information. 
 ------
 - **I95-44473 Application Steering:** Application Steering provides the ability to configure unique steering policies for individual applications based on the application name, category, application signatures, URLs, and domains. Once the traffic has been classified, it can be steered across the available paths. For more information, see [Application Steering](config_application_steering.md).
 ------
@@ -268,9 +268,11 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 
 - **I95-52426 Incorrect behavior when configuring an IDP custom rule definition:** In a case where a user is modifying a rule to **decrease** the action type, for example, the action `close-tcp-connection` is downgraded to `alert`, this may impact other rules, and some attacks may pass through undetected. 
 
-**Example:** If `HTTP:SQL:INJ:HEADER-1` is excluded from the ruleset, some other `HTTP` attacks may pass through undetected. **This behavior only occurs when decreasing the action type in the rule;** i.e.; the action `close-tcp-connection` is downgraded to `alert`.
+  **Example:** If `HTTP:SQL:INJ:HEADER-1` is excluded from the ruleset, some other `HTTP` attacks may pass through undetected. **This behavior only occurs when decreasing the action type in the rule;** i.e.; the action `close-tcp-connection` is downgraded to `alert`. 
 
-This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend avoiding this configuration and waiting for the SSR 6.1.5 patch release. 
+  This issue is actively being addressed, and will be resolved in an upcoming patch release. If you need to use this specific functionality, we recommend avoiding this configuration and waiting for the SSR 6.1.5 patch release.
+------
+- **I95-53777 Multicast traffic not passing after HA Failover:** This feature is currently in Beta; High Availability with Multicast has not been fully tested and may not be fully functional. Drop or complete loss of traffic may be seen when the primary node resumes traffic after a node failure and failover. 
 
 ## Release 6.1.3-4
 
