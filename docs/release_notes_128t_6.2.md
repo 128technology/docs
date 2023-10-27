@@ -132,7 +132,7 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 - **I95-52547 Unable to set DHCP option 160:** Resolved an issue where DHCP option 160 was being treated as a standard option and was unavailable to be defined as an option. When it was set, it would prevent the DHCP server from starting. This has been corrected. 
 ------
 - **I95-52889 Highway crash caused by a false negative waypoint exhaustion check:** Waypoint ports reinitialization that is triggered by a false negative exhaustion check can lead to duplicate waypoints and reverse flows on two sessions resulting in a highway crash. This issue has been resolved.
-
+------
 - **I95-52599 Conductors display different assets on different HA nodes:** If the state table of an inactive HA node becomes out of sync with the active HA node, then some assets were being skipped when parsing the asset state response. This issue has been resolved through the reporting of asset IDs from the active node state table. 
 ------
 - **I95-52822 ARP fails to resolve:** An earlier change caused ports on an X553 that use SFPs to no longer correctly report link status. This issue has been resolved and the link status is now reported accurately. 
@@ -197,3 +197,5 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 - **I95-52426 Alerts not issued when decreasing the action type on an IDP custom rule definition:** In a case where a user is modifying a rule to **decrease** the action type to an `alert`, alerts for that vulnerability will not be reported. The attack will be allowed to pass through undetected. For example, if the action `close-tcp-connection` is downgraded to `alert`, the attacks will pass through undetected.
 ------
 - **I95-53777 Multicast traffic not passing after HA Failover:** This feature is currently in Beta; High Availability with Multicast has not been fully tested and may not be fully functional. Drop or complete loss of traffic may be seen when the primary node resumes traffic after a node failure and failover. 
+------
+- **I95-53878 Dynamic Reconfiguration Issues with LAG:** Dynamic reconfiguration is not currently supported. Changes in LAG configuration require a 128T service restart and may result in service disruption. Any changes to LAG configuration should be performed during a maintenance window.
