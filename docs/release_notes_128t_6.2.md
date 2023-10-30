@@ -23,35 +23,10 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-42624 Upgrade Installer:** Before **upgrading to, or installing** version 5.4 and above, update the Installer to at least version 3.1.0. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time. The Installer typically prompts you update when a new version is available. Select **Update** when prompted.
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
-------
-- **I95-51007 Conductor only - cpuProperties-core value isolating cores:** *In SSR software versions 6.0.0 and greater*, the `cpuProperties-cores` setting in `/etc/128technology/local.init` is erroneously isolating cores on conductor nodes when set. Because the conductor does not forward packets, there should be no traffic cores allocated to or isolated on the conductor for packet forwarding. This setting was previously ignored on the conductor, but while resolving an earlier issue with the installer and initializer that allocated CPU cores for traffic, that is no longer the case. 
 
-It is recommended that prior to upgrading the conductor that the user modify local.init to set this setting to `0`. For example, a setting like this in `/etc/128technology/local.init`:
+## Release 6.2.0-37
 
-```
-  "cpuProperties" : {
-    "cores" : 4
-  },
-``` 
-should be changed to:
-```
-  "cpuProperties" : {
-    "cores" : 0
-  },
-```
-
-Note that only the relevant section of `local.init` is shown for clarity. All other settings should be left the same.
-The change should be made on both nodes of an HA system. If a conductor is already running 6.0.0 or later it will be necessary to `systemctl restart 128T` on each node after making this change. If the modification is made prior to upgrade it is not necessary to restart 128T service as this will be performed during the upgrade. Making this change on versions earlier than 6.0.0 will not affect operation, and will not require a restart. 
-
-This issue will be corrected in an upcoming release.
-
-:::note
-The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
-:::
-
-## Release 6.2.0-33
-
-**Release Date:** October 27, 2023
+**Release Date:** October 31, 2023
 
 ### New Features
 
@@ -69,8 +44,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-48174 Expand supported values for DHCP option:** DHCP option 43 is now a supported option, as well as a binary encoded-type (hex/byte) support. Valid examples are `0xabcdef` and `0x123456`.
 ------
-- **I95-50071 Lenovo SR650 platform support as a 100G ports solution: WAITING TO FINALIZE
-
+- **I95-50071 Lenovo SR650 platform support as a 100G ports solution:** The Lenovo SR650 has been added as a Juniper-certified platfform to provide 100G port connectivity. 
 ------
 - **I95-51181 Improve save-tech-support-info command:** The PCLI command `save tech-support-info` now has a `since` argument that limits log collection to only logs generated after a specified time. The `since` argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
 ------
@@ -78,13 +52,15 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-51450 Support for 100/Full Speed/Duplex on Intel I225-V Driver NICs:** The DPDK driver has been updated to allow fixed speed and duplex configuration to work with IGC i225 NICs.
 ------
+- **I95-51544 Add the option to use the physical source MAC on VRRP interfaces:** The coommand [`use-physical-address`](config_command_guide#configure-authority-router-node-device-interface-vrrp-use-physical-address) has been added to the device-interface configuration. This allows VRRP to use the physical MAC rather than the virtual MAC and prevents platforms that reject the virtual MAC from dropping traffic. 
+------
 - **I95-52406 Download MIBs from the GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
 ------
 - **I95-52703 Tenancy consideration in Application ID lookup:** Application Identification service lookups now consider the source tenant. This allows matches to be specific to certain networks/users. See [AppID and Tenancy](concepts_appid.md#appid-and-tenancy) for more information.
 
 ### Resolved Issues 
 
-- **The following CVEs have been resolved in this release:** I95-52554, I95-52644, I95-52645, I95-52956, I95-53476, I95-53477, I95-53622.
+- **The following CVEs have been resolved in this release:** CVE-2023-2828, CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049.
 ------
 - **I95-42466 Changing the physical linux address of an HA interface breaks the configuration:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address.
 ------
