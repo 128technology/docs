@@ -77,7 +77,9 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues 
 
-- **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48448, I95-48643, I95-49079, I95-49445, I95-49456, I95-49745, I95-49746, I95-49747, I95-49748, I95-49912, I95-49913, I95-49914, I95-50358, I95-50359, I95-50506, I95-50508, I95-50523, I95-50535, I95-50790.
+- **The following CVE's have been identified and addressed in this release:** CESA-2023:0291, CESA-2023:0203, CESA-2023:0402, CESA-2023:0403, CVE-2021-44531, CVE-2021-44532, CVE-2021-44533, CVE-2021-44906, CVE-2022-35256, CVE-2022-21824, CVE-2022-28733, CVE-2022-2964, CVE-2022-4139, CVE-2023-22809, CVE-2023-21830, CVE-2023-21843, CVE-2022-4254, CVE-2021-25220 CVE-2022-2795, CVE-2022-38023, CVE-2022-37434, CVE-2023-0286, CVE-2023-0767, CVE-2023-0286, I95-50535, CVE-2023-23918, CVE-2023-23920, ELSA-2023:0101, RHSA-2022:7044, RHSA-2022:8900.
+------
+- **The following issues have been identified during penetration testing and addressed in this release:** I95-48445, I95-48448, I95-49456, I95-49912, I95-49913, I95-49914.
 ------
 - **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
 :::important
