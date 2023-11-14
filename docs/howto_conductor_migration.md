@@ -1,35 +1,70 @@
 ---
-title: Conductor Migration
+title: Conductor Backup and Migration
+slidebar_label: Conductor Backup and Migration
 ---
 
-Before going through this document, it is beneficial to first understand the [best practices for deploying your conductor](bcp_conductor_deployment.md).
+This guide provides the steps to migrate a conductor and it's routers to a new conductor using the original conductor's configuration files, as well as the procedure to migrate existing routers to a new conductor when the original conductor is no longer accessible.
 
-The purpose of this guide is to provide an overview and walkthrough the process of migrating the routers and their conductor configurations to a newly installed SSR Conductor
+Before going through this process, it is beneficial to understand the [best practices for deploying your conductor](bcp_conductor_deployment.md).
 
-## Prerequisites
+## Conductor Backup and Migration
 
-This document presumes that the reader has already installed a new conductor and wants to migrate the routers in the network along with their configurations. If you have not yet setup your SSR nodes, you can follow the [installation guide](intro_installation.md) to walk you through that process.
+The following process desribes the steps to migrate your conductor and router configurations using a copy / migrate process. Once the conductor configuration has been copied, the full configuration is migrated to the new conductor. The copy process is also useful for disaster recovery.
+
+1. Create a new conductor with the **same conductor and router node names, and the same IP address**. If you do not use the same information the migration will fail. For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.md).
+
+2. Run the Initializer on the new conductor. 
+```
+initialize128t
+```
+
+3. Run the following command to stop 128T:
+```
+systemctl stop 128T
+```
+4. Copy the following files from the old conductor to the new conductor:
+
+ - /var/lib/128technology/t128-running.json
+ - /var/lib/128technology/user-running.json
+ - /etc/128technology/salt/pki/master/master.pem
+ - /etc/128technology/salt/pki/master/master.pub
+ - /etc/128technology/global.init
+ - /etc/128technology/local.init
+
+5. Restart the new conductor. The conductor will automatically reboot twice. After the second restart, the routers will attempt to connect to the conductor and begin operation. 
+
+:::important
+If the salt-master keys are not copied over correctly, you will need to access each SSR and delete the old master public and private keys from the router. This forces the router to reconnect and authenticate with the new conductor. 
+:::
 
 ## Migration Process
 
-Before proceeding with the migration of the router, ensure that you have exported the configurations from the existing Conductor and import them to the new Conductor.
-
-While importing the configurations to the Conductor, we will need to *“commit”* the changes from the PCLI as long as the candidate configuration is valid. A restart will be required and then we can proceed with the migration.
+The following process is used when the old conductor is no longer accessible, i.e., cannot copy the files above but you have the router configurations. While importing the configurations to the conductor, you have to `commit` the validated configuration from the PCLI. A restart is required, and then you can proceed with the migration.
 
 :::important
 It is extremely important that the conductor configurations are exported/imported correctly to avoid losing the configuration.
 :::
 
-Once the new conductor is set up, we can go on with migrating the routers one at a time. The below commands have to be run on the PCLI on every router and should be repeated for all the routers individually.
+For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.md). 
 
-For standalone conductor, on the router use the command: `migrate conductor <address1>`
+1. After the new conductor configuration is complete, copy the router configuration to the new conductor.
+2. Commit the router configuration.
+3. Run the appropriate command **on each router to be migrated**. 
 
-For HA conductor, on the routers use the command: `migrate conductor <address1> <address2>` 
+ - For a standalone conductor, use the following command on each router: `migrate conductor <address1>`
+
+ - For an HA conductor, use the following command on each router: `migrate conductor <address1> <address2>`
+
+:::note
+**This information needs to be broken out in this doc. Based on the Conductor Backup and Migration above and feedback I received while writing it, this note does not make complete sense to me.** 
+
+The `migrate conductor` PCLI command uses WAN IP(s) to migrate a router from one conductor to another. Because the command uses WAN IPs, it is not possible to use it when both the old and new conductor are behind the same head-end router and use dest-nat or SVR to reach the conductor. In this case, the WAN IP will be the same for both conductors, so the command has no impact.
+:::
 
 ## Verify Migration
 
-If any router does not get migrated successfully, it will show an error or else the migration will proceed smoothly.
+After the migration runs successfully, the routers are shown as **Running** from the new conductor. If a router does not migrate successfully, an error is displayed. 
 
-- Make sure that the TCP ports 930, 4505 and 4506 on the Conductor are enabled, as the routers will require to access these ports in order for them and the new Conductor to communicate.
-- These TCP ports have to be added open on any firewalls in front of the conductor. (In reference to the public connections a Conductor runs, and the firewall required to allow those connections)
-- After the migration runs successfully, all the assets will show “running” from the new Conductor.
+- Verify that the TCP ports 930, 4505 and 4506 on the conductor are enabled. The routers use these ports to communicate with the conductor.
+- If there is a firewall in front of the conductor, these same TCP ports must be enabled.
+
