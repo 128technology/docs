@@ -3,7 +3,7 @@ title: WAN Assurance Plugin 3.7 Release Notes
 sidebar_label: '3.7'
 ---
 
-## Release 3.7.5
+## Release 3.7.6
 
 **Release Date:** November 17, 2023
 
@@ -14,9 +14,9 @@ Support for the [Application Path Insights](https://www.mist.com/documentation/s
 
 ### Resolved Issues
 
-- **WAN-2545 Config wiped out after enabling WAN assurance plugin on a router**
+- **WAN-2545 Router configuration reset during WAN Assurance onboarding**
 
-  _**Resolution:**_ When using MIST redirect onboarding for a router an additional initialization step caused the existing router to be reset causing the configuration to get wiped out. The code paths have been made more smart about the current conductor onboarding status to avoid the un-necessary re-initialization in this scenario.
+  _**Resolution:**_ When using MIST redirect onboarding for a router, an additional initialization step caused the existing router to be reset and the configuration removed. Conductor onboarding has been made more robust, avoiding unnecessary reinitialization.
 
 ## Release 3.7.5
 
