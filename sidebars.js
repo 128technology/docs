@@ -198,6 +198,7 @@ module.exports = {
         "label": "Security",
         "items": [
           "sec_adaptive_encrypt",
+          "sec_security_policy",
         ],
       },
       {
