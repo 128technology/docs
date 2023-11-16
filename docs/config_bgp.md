@@ -270,6 +270,72 @@ exit
 | ------- | ------------ |
 | 6.1.0   | This feature was introduced. |
 
+### IPv6 Addressing
+
+The SSR supports BGP using IPv6 addressing. IPv6 can be used alone, combined with IPv4, or IPv4 can continue to be used without IPv6. The functionality is broken out as follows:
+- BGP IPv6 transport – BGP neighbors configured with IPv6 addresses
+- BGP IPv6 unicast address family – BGP instances and neighbors support IPv6 unicast and IPv4 unicast
+- BGP over SVR IPv6 
+
+#### BGP IPv6 Transport
+
+The command `routing-protocol bgp neighbor-address` accepts either an IPv4 or IPv6 address. 
+```
+routing-protocol bgp neighbor fc00::3 
+```
+
+#### IPv6 Unicast 
+
+The commands `routing-protocol bgp address-family` and `routing-protocol bgp neighbor address-family` now accept ipv6-unicast and ipv4-unicast addresses.
+
+```
+routing-protocol bgp address-family ipv6-unicast  
+routing-protocol bgp neighbor fc00::3 address-family ipv6-unicast 
+```
+
+Any combination of address families can be configured on a BGP instance or BGP neighbor.  The neighbor IP address does not influence the neighbor address family configuration. IPv4 is the default address family; in situations where only IPv6 is or will be used for the neighbor, disable IPv4 using the following command:
+```
+routing-protocol bgp neighbor <> address-family ipv4-unicast activate false  
+```
+
+BGP protocol redistribution is address family specific. The command `routing-protocol bgp redistribute` applies to the ipv4-unicast address family only. Use the following command for IPv6 unicast redistribution:
+```
+routing-protocol bgp address-family ipv6-unicast redistribute static
+```
+Service addresses can be distributed into both the IPv4 and IPv6 unicast address families. 
+
+#### BGP over SVR IPv6 
+
+An IPv6 address can be configured on a routing interface. The restriction of a single IP address per routing interface remains, but support for multiple routing interfaces is provided. 
+
+To auto-generate BGP over SVR IPv6 services: 
+Configure the IP address of the remote routing interface for the neighbor, and set the neighbor transport to use a local routing interface. 
+
+IPv4 and IPv6  BGP over SVR peering sessions can be mixed, including connecting to the same peer with both an IPv4 and IPv6 address; however, the local routing interfaces must have the same IP address types as any remote IP BGP over SVR addresses.
+
+#### Troubleshooting
+
+Use the following show commands to gather route, alarm, event, and log information.
+
+`show bgp ipv6 <route>`: Displays IPv6 specific routes. 
+(add example here)
+
+`show bgp neighbors <addr> received-routes | advertised-routes [<family>]` 
+The valid values for `family` include `all      ipv4     ipv4-vpn ipv6     ipv6-vpn`
+(add example here)
+
+`show bgp summary [<family>]`  
+The valid values for `family` include `all      ipv4     ipv4-vpn ipv6     ipv6-vpn`
+(add example here)
+
+The remaining PCLI BGP commands are not address family specific. 
+
+#### Version History
+
+| Release | Modification |
+| ------- | ------------ |
+| 6.2.0   | This feature was introduced. |
+
 ### Verifying the BGP Configuration
 Use `show bgp` to see the overview of the BGP routing process on the SSR:
 
