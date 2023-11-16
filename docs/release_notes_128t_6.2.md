@@ -165,13 +165,13 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 ------
 - **I95-53641 BGP between peers does not immediately transition to the Connected state:** A change has been made to reduce the time that BGP routes learned from a BGP over SVR neighbor are withdrawn when we lose all peer paths to the neighbor.
 ------
-- **I95-53894 DNS cache-service does not start:** Resolved an issue that resulted in a stack trace in the logs which starts with message `No TimeoutQueue:`. 
+- **I95-53894 DNS cache-service does not start:** Resolved a race condition that causes the DNS process to fail to start. The log message `No TimeoutQueue:` can be seen in the logs during this condition.
 ------
 - **I95-53916 Stale Teams interfaces conflict with HA interfaces:** In some cases a stale teams interface could conflict with a new configuration pushed down from MIST. Resolved an issue where the use of non-standard HA ports could result in non-functional HA after a factory reset.
 ------
 - **I95-54030 Node sending ARP requests to the wrong MAC:** After an SFP hot swap, node1 was sending ARP requests to the wrong MAC. An issue where E810 interfaces with default MTU configuration could potentially transmit corrupt ARP response packets has been resolved.
 ------
-- **I95-54086 Conductor memory exceeded:** In certain cases the salt master on the conductor could grow indefinitely in memory. An update to the `salt-128tech` package has been made to resolve this issue.
+- **I95-54086 Conductor memory exceeded:** In certain cases the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the `asset-connection-resiliency` feature. An update to the salt package has been made to resolve this issue.
 ------
 - **WAN-1323 Remove bootstrapper interfaces after Mist Onboarding:** The bridge interface used for bootstrapping in the default linux environment is now removed.
 ------
