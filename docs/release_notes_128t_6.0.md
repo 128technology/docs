@@ -115,8 +115,6 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-49913 Some Login/Logout events not logged in Audit Logs:** All login and logout events are now logged in the audit logs.
 ------
-- **I95-49914 List of cryptographic algorithms does not match:** A discrepancy between algorithms claimed and those offered was found. This issue has been addressed and the list of claimed and offered algorithms is now complete.
-------
 - **I95-49925 GRE tunnel health-check not migrating sessions when path is down:** The GRE tunnel manager now removes all sessions before adding new ones rather than modifying the existing sessions.
 ------
 - **I95-49969 Permission Denied error when attempting to self-generate a webserver certificate:** Resolved an issue that prevented users with the admin role from creating a new self-signed web certificate via the PCLI command `create certificate self-signed webserver`.
