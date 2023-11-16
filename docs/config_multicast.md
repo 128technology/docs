@@ -9,6 +9,13 @@ Network applications that can function with unicast but are better suited for mu
 
 Please refer to the [Juniper Multicast Overview](https://www.juniper.net/documentation/us/en/software/junos/multicast/topics/concept/multicast-ip-overview.html) for more in-depth information about Multicast. 
 
+#### Version History
+
+| Release | Modification                |
+| ------- | ----------------------------|
+| 6.1.0   | This feature was introduced |
+| 6.2.0   | Added support for MSDP, SSR as RP |
+
 ## Multicast on the SSR 
 
 Multicast on the SSR supports the following protocols and topology: 
@@ -31,7 +38,7 @@ The following are the components necessary to configure multicast over SVR on th
 - BGP over SVR: See [BGP over SVR](config_bgp.md#bgp-over-svr-bgposvr) for configuration details. 
 - Routing protocol such as IGMPv2/v3
 - PIM
-- RP: The Rendezvous Point. In the current implementation, the RP must be external to the SSR. 
+- RP: The Rendezvous Point. In the initial implementation (v6.1.x), the RP must be external to the SSR. This has been revised and the configuration below offers both configurations. 
 - Service: Services are created for the multicast traffic, and defined for the Group address.
 - Multicast-sender-policy: Defines the tenant that is allowed to be the source of the multicast stream.
 - Access Policy: Configures the tenants allowed to receive the multicast traffic via IGMP joins at routers in the network. 
@@ -119,6 +126,30 @@ config
                         group-range  224.0.0.0/4
                     exit
                 exit
+```
+To use `rtr2` as the Rendezvous Point, the existing static RP configuration takes the IP address of the RP. This address should be a routable address configured on `rtr2`. The SSR detects this address as one of its local interfaces and assumes the role of RP. It is recommended to create a routing-interface (unrelated to BGPoSVR configuration) to be a routable address of the local RP. This routing interface must be advertised in the routing protocol. To do this either enable OSPF on the interface, or advertise the address using a BGP network command. For example:
+
+**Create the Routing Interface:**
+
+```
+           routing      default-instance
+                type    default-instance
+                interface       loopback-rp
+                    name        loopback-rp
+                    ip-address  192.168.128.0
+                exit
+```
+**Advertise the Address using BGP:**
+
+```
+               routing-protocol     bgp
+                    type            bgp
+                    address-family      ipv4-unicast
+                        afi-safi        ipv4-unicast
+                        network         192.168.128.0/32
+                            network-address     192.168.128.0/32
+                        exit
+                    exit
 ```
 
 #### Configuration for Spoke 1 (rtr0)
@@ -279,6 +310,56 @@ exit
 
 While this configuration example uses one RP for the multicast range, you can use different RPs for different multicast addresses or ranges. The same can be done for the service; smaller services for more specific ranges of multicast with different senders and receivers as needed.
 
+## Multicast Source Discovery Protocol (MSDP) 
+
+MSDP is used to allow RPs to share the active Multicast Sources. Messages are sent as Source-Active (SA) messages between MSDP peers. In normal MSDP operation, an MSDP peer is received from one peer and forwarded to the other MSDP peers. To ensure there are no loops, RPF checks have been put in place.
+
+MSDP can also be configured as a `mesh-group`. In this mode, the SA messages received from a peer are not forwarded to the other members of the mesh-group, since all the peers are configured as part of the mesh. This is commonly used with Anycast RPs, where the same RP address is configured on multiple routers in the network. The Anycast RP routers use an MSDP mesh-group to distribute the active source information to the other anycast RPs. This provides redundancy in the network, in case an RP fails.
+
+### Configuration
+
+MSDP can be configured on the router as follows:
+
+```
+authority
+    router A
+        routing default-instance
+            msdp
+                peer 10.10.10.2 source 16.0.0.2
+            exit
+        exit
+```
+
+Alternatively, MSDP can be configured with a `mesh-group`. A mesh-group is similar to an IBGP peering relationship, in that the received SA messages are not forwarded to other members of the mesh-group.
+
+```
+authority
+    router A
+        routing default-instance
+            msdp
+                peer 10.10.10.2 source 16.0.0.2
+                mesh-group myMesh 
+                    source 16.0.0.2
+                    member 11.11.11.1
+                exit
+            exit
+        exit
+```
+
+MSDP can also be enabled in a VRF:
+
+```
+authority
+    router A
+        routing default-instance
+            vrf     vrfA
+                msdp
+                    peer     10.10.10.2 source 16.0.0.2
+                exit
+            exit
+        exit
+```
+
 ## Show Commands
 
 Each of the commands listed below and the subcommands for each, provide additional details for multicast visibility. Use the links to learn more about each command.
@@ -287,6 +368,9 @@ Each of the commands listed below and the subcommands for each, provide addition
 | ------- | ----------- |
 | [show igmp interface](cli_reference.md#show-igmp-interface) | Display the igmp interfaces | 
 | [show igmp groups](cli_reference.md#show-igmp-groups) | Display the igmp groups | 
+| [show msdp peer](cli_reference.md#show-msdp-peer) | Display MSDP peer information |
+| [show msdp mesh-group](cli_reference.md#show-msdp-mesh-group) | Display MSDP mesh-group details |
+| [show msdp sa](cli_reference.md#show-msdp-sa) | Display MSDP source active |
 | [show pim mroute](cli_reference.md#show-pim-mroute) | Display the PIM mroute | 
 | [show pim interface](cli_reference.md#show-pim-interface) | Display the PIM interface | 
 | [show pim join](cli_reference.md#show-pim-join) | Display the PIM Joins | 

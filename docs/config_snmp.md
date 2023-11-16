@@ -10,7 +10,7 @@ Simple Network Management Protocol (SNMP) is an internet standard protocol for c
 The SSR implementation of SNMP relies on the *snmpd* process running within the host operating system. All configuration for SNMP, however, is done within the SSR's data model via its administrative interfaces (e.g., PCLI, GUI, etc.).
 
 ## MIB Definitions
-SSR provdes MIB files that describe the SSR SNMP objects and traps available on the SSR device and how they are encoded. For ease of use, these are installed on the device itself in this location
+SSR provdes MIB files that describe the SSR SNMP objects and traps available on the SSR device and how they are encoded. For ease of use, these are installed on the device itself in this location:
 ```
 /usr/share/snmp/128technology/
 ```
@@ -25,7 +25,8 @@ In order to install the SSR MIBS on another platform, a valid certificate and yu
 
 The specific objects available in the MIB are described in more details in the the section [MIB Layout](#mib-layout).
 
-## Basic Configuration
+## SNMP v2c Basic Configuration
+
 Configuring SNMP on the SSR is done on a per-router basis, and is done within the `router > system settings > snmp-server` branch of the configuration hierarchy. There are three areas of configuration required: the *protocol* configuration, the *access* configuration, and the *notification receiver* configuration.
 
 ### Sample Configuration (Basic)
@@ -52,7 +53,7 @@ exit
 
 ### Protocol Configuration
 
-The protocol configuration requires three settings: setting `enabled` to `true` enables the SNMP agent on your SSR. You must also set the `protocol` to `v2c` (SNMPv2c is the only version of SNMP supported by SSR). Finally, configure the `port` on which the SNMP agent will listen for inbound requests; this is typically `161`, the well-known port for SNMP agent requests.
+The protocol configuration requires three settings: setting `enabled` to `true` enables the SNMP agent on your SSR. Set the `protocol` to `v2c`. Finally, configure the `port` on which the SNMP agent will listen for inbound requests; this is typically `161`, the well-known port for SNMP agent requests.
 
 ### Access Configuration
 
@@ -87,6 +88,119 @@ The notification receiver configuration defines where the SSR will send SNMP inf
 - **type**: either `trap` or `inform`. This determines whether the SSR will send traps or informRequests to the receiver
 
 Because the traps/informRequests are sent by the snmpd process running on the host Linux operating system, it is crucial that the host's routing table is capable of reaching the `notification-receiver` via the appropriate egress interface. Use the Linux command `ip r` to review the host's routing table to confirm that it meets your requirements.
+
+## SNMP v3 Basic Configuration
+
+Configuring SNMP on the SSR is done on a per-router basis, and is done within the `router > system settings > snmp-server` branch of the configuration hierarchy. For SNMPv3 there are now four areas of configuration required: the protocol configuration, the view configuration, the access configuration, and the notification receiver configuration.
+
+### Sample Configuration
+
+```
+snmp-server
+    enabled     true
+    version     v3
+    port        161
+    engine-id   testEngineId
+
+    vacm
+
+        view    unrestricted
+            name        unrestricted
+            included    .1
+        exit
+    exit
+
+    access-control  Public
+        name        Public
+
+        usm
+            user-name           testUser
+            authentication      sha
+            authentication-key  (removed)
+            privacy             aes
+            privacy-key         (removed)
+        exit
+        view    unrestricted
+    exit
+
+    notification-receiver       172.18.0.230 162 trap
+        ip-address              172.18.0.230
+        port                    162
+        type                    trap
+        access-control          Public
+    exit
+exit
+```
+
+### Protocol Configuration
+
+The protocol configuration requires three settings: 
+
+- Set `enabled` to `true`. Enables the SNMP agent on your SSR. 
+- Set the protocol to v3.  
+- Configure the port on which the SNMP agent will listen for inbound requests; this is typically 161, the well-known port for SNMP agent requests. With SNMP v3, an optional `engine-id` parameter is available, to uniquely identify the SNMP engine.
+
+### View Configuration
+
+The view-based access control (VACM) configuration is used to define a list of views which serve as the mechanism to allow or restrict which OIDS a user may have access to. Each view has three components, and one hidden component:
+
+- **Name**: the view name
+- **Included**: a list of OIDS which are allowed
+- **Excluded**: a list of OIDS which are not allowed
+- (hidden) **Strict**: This is a hidden field. A boolean that defines the use of strict mode when parsing the include and exclude lists. It is set to true by default.
+
+#### Strict Mode
+
+Strict mode is enabled by default. The SSR publishes a set of MIBS that define the OIDS available to query and evaluates the include and exclude lists to ensure each OID exists in the available SSR MIBS. If they are not, the configuration is rejected. This serves to restrict the NMS from querying OIDS that may be supported by the underlying operating system of the SSR.
+
+:::note
+Support of system MIBS may vary between SSR versions. Bypassing these checks by disabling strict mode may allow access to MIBs that are no longer supported. Disabling Strict mode is only recommended for advanced users. 
+:::
+
+### Access Configuration
+
+With SNMPv3 enabled, access configuration allows you to define a User-Based Security Model (USM) as per RFC 3414. The access configuration is configured from within `access-control` in the snmp-server element, and has three components:
+
+- **Name**: Unique name given to the access configuration element (this is the key for the configuration, to uniquely identify an allowlisted SNMP source)
+- **USM**: The user based security model settings
+    - User-name: Name given to the user
+    - Authentication: Authentication protocol to use (MD5 or SHA)
+    - Authentication-key: Authentication password
+    - Privacy: Encryption algorithm (DES or AES)
+    - Privacy-key: Encryption password
+- **View**: Restrict user access to the pre-configured view
+
+#### Authentication and Encryption
+
+The SSR combinations of authentication and privacy as defined in the USM configuration are translated into an SNMPv3 security level:
+
+- noAuthNoPriv: When both authentication and privacy are set to `None` 
+- authNoPriv: When authentication is set to either MD5 or SHA, but privacy is set to `None` 
+- authPriv: When both authentication and privacy are set to anything other than `None` 
+
+These security levels are necessary when performing SNMPv3 operations, and the NMS is responsible for mapping the SSR USM configuration to these security levels.
+
+### Notification Receiver Configuration
+
+The notification receiver configuration defines where the SSR sends SNMP information in the event of a system issue. This is configured under `notification-receiver` in the snmp-server element. For SNMPv3, there are four configuration elements:
+
+- **`ip-address`**: Address of your trap receiver
+
+- **`port`**: UDP listening port on the trap receiver (typically 162)
+
+- **`type`**: Trap or Inform. Defines whether the SSR sends Traps or Inform Requests to the receiver
+
+- **`access-control`**: References the pre-configured access-control to use, identifies which configured user should handle the notifications, which ensures the appropriate authentication and encryption are used for the communication.
+
+Because the traps/informRequests are sent by the snmpd process running on the host Linux operating system, it is crucial that the host's routing table is capable of reaching the notification-receiver via the appropriate egress interface. Use the Linux command `ip r` to review the host's routing table to confirm that it meets your requirements.
+
+### Traps vs Informs in SNMPv3
+
+The use of the `engine-id` parameter is specific to SNMPv3 and traps/informs. SNMP protocol dictates that for traps, the sender (in this case, the SSR) is authoritative, which is to say, the `engine-id` in use by the SSR will be placed in the messages, and that the companion NMS software will need to define the USM for the sending user with the engine-id of the SSR. In the case of net-snmp being the NMS, the following is an example of how to define SNMPv3 users. This would be placed in the snmptrapd.conf configuration file:
+
+`createUser -e <hex encoded engine ID in use by net-snmp on the SSR> testUser SHA password1 AES password2`
+
+In the case of Informs, the NMS is authoritative. In this case, the inform message passes along the `engine-id` of the NMS so that the SSR automatically uses it when sending responses. The SSR will not need to be configured with or have pre-shared knowledge of the engine-id of the NMS.
 
 ## Polling SNMP
 

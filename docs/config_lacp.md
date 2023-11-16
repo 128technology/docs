@@ -37,7 +37,7 @@ LAG is currently supported on the following platforms:
 
 The following caveats have been identified:
 
-- Dynamic reconfiguration is supported for changing LACP settings on the `bond` device, however adding or removing bonds and/or bond members from the LAG is not currently supported. Any time these changes are made, you must restart the 128T service.
+- Dynamic reconfiguration is not currently supported. Changes in LAG configuration require a 128T service restart and may result in service disruption. Any changes to LAG configuration should be performed during a maintenance window.
 - High Availability has not been fully tested, and may not be fully functional. 
     - VRRP with LAG is not supported
     - Shared physical addresses are not allowed.
