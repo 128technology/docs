@@ -5,7 +5,7 @@ sidebar_label: '3.7'
 
 ## Release 3.7.6
 
-**Release Date:** November 17, 2023
+**Release Date:** November 20, 2023
 
 ### New Features
 - **WAN-2423 Application Path Insights for conductor managed routers**
