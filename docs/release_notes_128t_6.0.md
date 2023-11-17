@@ -45,11 +45,6 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
-:::note
-The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
-:::
-
-
 ## Release 6.0.10-5
 
 **Release Date:** May 12, 2023
@@ -79,6 +74,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 - **The following CVE's have been identified and addressed in this release:** CVE-2021-44531, CVE-2021-44532, CVE-2021-44533, CVE-2021-44906, CVE-2022-35256, CVE-2022-21824, CVE-2022-28733, CVE-2022-2964, CVE-2022-4139, CVE-2023-22809, CVE-2023-21830, CVE-2023-21843, CVE-2022-4254, CVE-2021-25220 CVE-2022-2795, CVE-2022-38023, CVE-2022-37434, CVE-2023-0286, CVE-2023-0767, CVE-2023-0286, I95-50535, CVE-2023-23918, CVE-2023-23920.
 ------
+- **The following issues have been identified during penetration testing and addressed in this release:** I95-48445, I95-48448. 
+------
 - **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
 :::important
 Please refer to [Password Policies](config_password_policies.md) for updated password requirements.
@@ -96,6 +93,8 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-49447 Conditional BGP advertisement is not respected:** Resolved an issue that if a peer went down and came back up, the conditional advertisement was no longer respected. 
 ------
+- **I95-49456 Ensure password requirements are configured:** Password requirements are verified as configured.
+------
 - **I95-49514 Linux interfaces bounced on startup:** Resolved an issue where all Linux interfaces managed by 128T are bounced once on 128T startup.
 ------
 - **I95-49564 Reduce volume of logs during pending lookups:** The error logs during a pending lookup has been changed to a muted error log with a stat.
@@ -111,6 +110,10 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 - **I95-49754 Waypoint re-use causing duplicate reverse flows:** Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.
 ------
 - **I95-49791 Add audit rules to track modification of grub config files:** Added rules to log notifications in case of changes to grub configuration files.
+------
+- **I95-49912 Login banner not displayed on serial console:** The login banner is now displayed on the serial console.
+------
+- **I95-49913 Some Login/Logout events not logged in Audit Logs:** All login and logout events are now logged in the audit logs.
 ------
 - **I95-49925 GRE tunnel health-check not migrating sessions when path is down:** The GRE tunnel manager now removes all sessions before adding new ones rather than modifying the existing sessions.
 ------
