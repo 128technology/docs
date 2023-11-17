@@ -20,7 +20,7 @@ Copy the following files into a tarball (a `*.tar.gz` file) on the existing cond
  /etc/128technology/global.init
  /etc/128technology/local.init
 ```
- - If you have created custom salt states, copy the contents of `/svr/salt` with the above files.
+ - If you have created custom salt states, copy the contents of `/svr/salt` along with the above files.
 
  - It is also recommended to copy and save the router public keys stored in `/etc/128technology/salt/pki/master/minions/`. Migrating these files prevents a router that may have the same `minion_id` as a previously accepted router from being accepted after migration.
 
@@ -33,7 +33,15 @@ tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%d-%d')
 For example:
 
 ```
-tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%d-%d').tar.gz /var/lib/128technology/t128-running.json /var/lib/128technology/user-running.json /etc/128technology/salt/pki/master/master.pem /etc/128technology/salt/pki/master/master.pub /etc/128technology/salt/pki/master/minions/ /etc/128technology/global.init /etc/128technology/local.init /svr/salt
+tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%d-%d').tar.gz \
+/var/lib/128technology/t128-running.json \ 
+/var/lib/128technology/user-running.json \ 
+/etc/128technology/salt/pki/master/master.pem \ 
+/etc/128technology/salt/pki/master/master.pub\ 
+/etc/128technology/salt/pki/master/minions/ \ 
+/etc/128technology/global.init \ 
+/etc/128technology/local.init \ 
+/svr/salt
  ```
 The tarball can then be copied from the old conductor, placed on the new conductor, and extracted there. The procedures below describe the Migration and Restoration processes.
 
@@ -43,7 +51,10 @@ This process is used to migrate an existing conductor and router configuration t
 
 1. Create a new conductor with the same conductor and router node names, but a **different IP address**. For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.mdx).
 2. Import and Commit the router configurations to the new conductor.
-**---->What are the commands associated with this<----**
+
+	```
+	tar -C / -xzvf conductor-backup-<hostname>-<timestamp>.tar.gz
+	```
 3. From the conductor, run the appropriate command **on each router to be migrated**. 
  - For a standalone conductor, use the following command on each router: `migrate conductor <address1>`
  - For an HA conductor, use the following command on each router: `migrate conductor <address1> <address2>`
@@ -56,31 +67,33 @@ This process is used to create a new conductor on the same network when the old 
 2. Shut down and remove the old conductor from the network to prevent routers from reconnecting there rather than the new conductor.
 3. Create a new conductor with the **same conductor and router node names, and the same IP address**. For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.mdx).
 4.  Run the Initializer on the new conductor. 
-```
-initialize128t
-```
+	```
+	initialize128t
+	```
 5. Run the following command to stop 128T:
-```
-systemctl stop 128T
-```
+	```
+	systemctl stop 128T
+	```
 6. Copy the conductor backup tarball onto the new conductor and extract the files.
 
-**---> Need the command example here <----**
+	```
+	tar -C / -xzvf conductor-backup-<hostname>-<timestamp>.tar.gz
+	```
 
 7. Restart 128T on the new conductor. 
-```
-systemctl start 128T
-```
+	```
+	systemctl start 128T
+	```
 
 After the restart, the routers will attempt to connect to the conductor and begin operation. You will see a **Connected** state on the conductor showing the migration was successful, and the routers will transition to **Running** after a few minutes. If a router does not migrate successfully, an error is displayed. 
 
-:::important
-If the salt-master public and private keys (`master_minion.pub`) are not copied over correctly or are overwritten, the routers will not be able to authenticate. You will need to access each SSR and delete the existing master public and private keys from the router. This forces the router to reconnect and authenticate with the new conductor. 
-:::
+If the salt-master public key (`master_minion.pub`) is not copied over correctly or is overwritten, the routers will not be able to authenticate. You will need to access each SSR and delete the existing master public key from the router. This forces the router to reconnect and authenticate with the new conductor. 
 
-### Re-Authentication Process
+Use the following command on each router to delete the master pubkey:
 
-**I need the steps for deleting the salt-master public and private keys**
+```
+rm -rf /etc/salt/pki/minion/minion_master.pub
+```
 
 ## Verify Migration
 
