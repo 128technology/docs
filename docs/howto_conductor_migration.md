@@ -1,35 +1,104 @@
 ---
-title: Conductor Migration
+title: Conductor Backup and Migration
+slidebar_label: Conductor Backup and Migration
 ---
 
-Before going through this document, it is beneficial to first understand the [best practices for deploying your conductor](bcp_conductor_deployment.md).
+This guide provides the steps to migrate a conductor and the associated routers to a new conductor using the original conductor's configuration files, as well as the procedure to migrate existing routers to a new conductor when the original conductor is no longer accessible.
 
-The purpose of this guide is to provide an overview and walkthrough the process of migrating the routers and their conductor configurations to a newly installed SSR Conductor
+Before going through this process, it is beneficial to understand the [best practices for deploying your conductor](bcp_conductor_deployment.md).
 
-## Prerequisites
+## Conductor Backup
 
-This document presumes that the reader has already installed a new conductor and wants to migrate the routers in the network along with their configurations. If you have not yet setup your SSR nodes, you can follow the [installation guide](intro_installation.md) to walk you through that process.
+Use the following process to backup your conductor and router configurations from your existing conductor. It is a Juniper recommended best practice to perform this process (or create a script to perform the process) on a regular schedule. The files in the tarball are used to recover the network/node configuration to a new conductor. The process is also useful to mitigate disaster recovery.
 
-## Migration Process
+Copy the following files into a tarball (a `*.tar.gz` file) on the existing conductor:
+```
+ /var/lib/128technology/t128-running.json
+ /var/lib/128technology/user-running.json
+ /etc/128technology/salt/pki/master/master.pem
+ /etc/128technology/salt/pki/master/master.pub
+ /etc/128technology/global.init
+ /etc/128technology/local.init
+```
+ - If you have created custom salt states, copy the contents of `/svr/salt` along with the above files.
 
-Before proceeding with the migration of the router, ensure that you have exported the configurations from the existing Conductor and import them to the new Conductor.
+ - It is also recommended to copy and save the router public keys stored in `/etc/128technology/salt/pki/master/minions/`. Migrating these files prevents a router that may have the same `minion_id` as a previously accepted router from being accepted after migration.
 
-While importing the configurations to the Conductor, we will need to *“commit”* the changes from the PCLI as long as the candidate configuration is valid. A restart will be required and then we can proceed with the migration.
+Use the following command to create the `*.tar.gz` file. 
 
-:::important
-It is extremely important that the conductor configurations are exported/imported correctly to avoid losing the configuration.
-:::
+```
+tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%d-%d').tar.gz <list of files>
+```
 
-Once the new conductor is set up, we can go on with migrating the routers one at a time. The below commands have to be run on the PCLI on every router and should be repeated for all the routers individually.
+For example:
 
-For standalone conductor, on the router use the command: `migrate conductor <address1>`
+```
+tar -czf /var/log/128technology/conductor-backup-$(hostname)-$(date '+%Y-%d-%d').tar.gz \
+/var/lib/128technology/t128-running.json \ 
+/var/lib/128technology/user-running.json \ 
+/etc/128technology/salt/pki/master/master.pem \ 
+/etc/128technology/salt/pki/master/master.pub\ 
+/etc/128technology/salt/pki/master/minions/ \ 
+/etc/128technology/global.init \ 
+/etc/128technology/local.init \ 
+/svr/salt
+ ```
+The tarball can then be copied from the old conductor, placed on the new conductor, and extracted there. The procedures below describe the Migration and Restoration processes.
 
-For HA conductor, on the routers use the command: `migrate conductor <address1> <address2>` 
+## Migrating to a New Conductor
+
+This process is used to migrate an existing conductor and router configuration to a new infrastructure where the new conductor has a new IP address. It assumes that the old and the new conductors are both available, but have separate IP addresses
+
+1. Create a new conductor with the same conductor and router node names, but a **different IP address**. For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.mdx).
+2. Import and Commit the router configurations to the new conductor.
+
+	```
+	tar -C / -xzvf conductor-backup-<hostname>-<timestamp>.tar.gz
+	```
+3. From the conductor, run the appropriate command **on each router to be migrated**. 
+ - For a standalone conductor, use the following command on each router: `migrate conductor <address1>`
+ - For an HA conductor, use the following command on each router: `migrate conductor <address1> <address2>`
+
+## Recover the Configuration from a Damaged or Corrupt Conductor
+
+This process is used to create a new conductor on the same network when the old conductor has been corrupted or is otherwise unusable, but a backup tarball has been or is able to be created.
+
+1. If a conductor backup tarball has not been created, and the old conductor is accessible, create the tarball as described in the [Conductor Backup](#conductor-backup) procedure. 
+2. Shut down and remove the old conductor from the network to prevent routers from reconnecting there rather than the new conductor.
+3. Create a new conductor with the **same conductor and router node names, and the same IP address**. For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.mdx).
+4.  Run the Initializer on the new conductor. 
+	```
+	initialize128t
+	```
+5. Run the following command to stop 128T:
+	```
+	systemctl stop 128T
+	```
+6. Copy the conductor backup tarball onto the new conductor and extract the files.
+
+	```
+	tar -C / -xzvf conductor-backup-<hostname>-<timestamp>.tar.gz
+	```
+
+7. Restart 128T on the new conductor. 
+	```
+	systemctl start 128T
+	```
+
+After the restart, the routers will attempt to connect to the conductor and begin operation. You will see a **Connected** state on the conductor showing the migration was successful, and the routers will transition to **Running** after a few minutes. If a router does not migrate successfully, an error is displayed. 
+
+If the salt-master public key (`master_minion.pub`) is not copied over correctly or is overwritten, the routers will not be able to authenticate. You will need to access each SSR and delete the existing master public key from the router. This forces the router to reconnect and authenticate with the new conductor. 
+
+Use the following command on each router to delete the master pubkey:
+
+```
+rm -rf /etc/salt/pki/minion/minion_master.pub
+```
 
 ## Verify Migration
 
-If any router does not get migrated successfully, it will show an error or else the migration will proceed smoothly.
+After the migration command is run, you will see a “connected” state on the conductor showing the migration was successful, and the routers will transition to running after a few minutes. If a router does not migrate successfully, an error is displayed. 
 
-- Make sure that the TCP ports 930, 4505 and 4506 on the Conductor are enabled, as the routers will require to access these ports in order for them and the new Conductor to communicate.
-- These TCP ports have to be added open on any firewalls in front of the conductor. (In reference to the public connections a Conductor runs, and the firewall required to allow those connections)
-- After the migration runs successfully, all the assets will show “running” from the new Conductor.
+- Verify that the TCP ports 930, 4505 and 4506 on the conductor are enabled. The routers use these ports to communicate with the conductor.
+- If there is a firewall in front of the conductor, these same TCP ports must be enabled.
+
