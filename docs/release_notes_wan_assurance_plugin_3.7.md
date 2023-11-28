@@ -3,6 +3,21 @@ title: WAN Assurance Plugin 3.7 Release Notes
 sidebar_label: '3.7'
 ---
 
+## Release 3.7.6
+
+**Release Date:** November 20, 2023
+
+### New Features
+- **WAN-2423 Application Path Insights for conductor managed routers**
+
+Support for the [Application Path Insights](https://www.mist.com/documentation/september-28th-2023-updates/) feature in MIST has been extended to conductor managed routers as part of this release. The feature is enabled on all spoke routers by default upon installing the plugin. The feature can be turned off at the authority and router level if needed.
+
+### Resolved Issues
+
+- **WAN-2545 Router configuration reset during WAN Assurance onboarding**
+
+  _**Resolution:**_ When using MIST redirect onboarding for a router, an additional initialization step caused the existing router to be reset and the configuration removed. Conductor onboarding has been made more robust, avoiding unnecessary reinitialization.
+
 ## Release 3.7.5
 
 **Release Date:** September 29, 2023
