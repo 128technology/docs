@@ -108,9 +108,7 @@ exit
 
 ### Non-SVR Traffic
 
-The `ingress-source-nat-pool` and the `source-nat` settings of `bidirectional-nat` are both `ingress source-nat` that are intended for SVR traffic targeted towards an inter-router peer. In this situation, the NAT will be applied on the ingress router rather than the final egress router.
-
-If you want to configure `ingress source-nat` for non-SVR traffic, for example LAN-to-LAN traffic traversing a single SSR router, you can use the configuration above. However, you must also disable `egress source-nat` at the service level by setting `service->source-nat` to `disabled` as shown below:
+In order for non-SVR traffic (for example, LAN-to-LAN traffic traversing a single SSR) to take advantage of static-NAT addressing, you must disable egress source-nat at the service level by setting `service > source-nat` to `disabled` as shown below. 
 
 ```
 authority
