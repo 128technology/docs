@@ -95,6 +95,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 - **I95-53896 `nodeMonitor` failed to get data for `show platform disk`:** Some of the dynamic access for `smartctl` objects were not protected. A check for the object existence has been added before attempting to read it.
 ------
 - **I95-54086 Conductor memory exceeded:** In certain cases, the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the asset-connection-resiliency feature. An update to the salt package has been made to resolve this issue.
+------
+- **WAN-2547 Invalid memory access producing incorrect bandwidth values:** Implemented a resolution that identifies the invalid memory access, and drops values that are out of scope or otherwise invalid. 
 
 ## Release 5.5.11-4
 
