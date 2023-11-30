@@ -106,6 +106,27 @@ exit
 
 ```
 
+### Non-SVR Traffic
+
+In order for non-SVR traffic (for example, LAN-to-LAN traffic traversing a single SSR) to take advantage of static-NAT addressing, you must disable egress source-nat at the service level by setting `service > source-nat` to `disabled` as shown below. 
+
+```
+authority
+    service LAN-to-LAN
+        name LAN-to-LAN
+        description "LAN-to-LAN non-SVR traffic traversing a single SSR router"
+        source-nat disabled
+        scope private
+        security aes1
+        address <dest-lan-subnet>
+        access-policy <src-lan-subnet>
+            source <src-lan-subnet>
+            permission allow
+        exit
+    exit
+exit
+```
+
 ### Using the GUI
 
 Set the local and remote IP addresses under Authority > Router > Node > Device Interface > Network Interface.
@@ -149,17 +170,17 @@ For details about command output, refer to the [`show sessions`](cli_reference.m
 
 ## NAT Pools
 
-NAT pools are a construct that allow for the use of IP and port ranges to be shared across one or more network-interfaces for either source or destination NATing capabilies.
+NAT pools are a construct that allow for the use of IP and port ranges to be shared across one or more network-interfaces for either source or destination NATing capabilities.
 
 ### Static NAT bindings
 A static NAT binding can be configured by creating an `authority > router > nat-pool` object and assigning it to a network-interface.  The following rules and constraints will apply to this configuration:
 
-* The _nat-pool_ prefix is used to create a N:M mapping. Where each source IP (from ingress interface) is hashed to an IP address in the nat pool.
+* The _nat-pool_ prefix is used to create a N:M mapping. Where each source IP (from an ingress interface) is hashed to an IP address in the nat pool.
 * The static _nat-pool_ can only be configured as:
   * _ingress-nat-pool_ on a _network-interface_ when peering with another SSR
-  * egress-nat-pool on a _network-interface_ when not performing SVR
+  * *egress-nat-pool* on a _network-interface_ when not performing SVR
   * _source-nat-pool_ on a _service-route / next-hop_
-* SSR software will not reply to ARP requests on the pool prefix on the associated interface.  Therefore the SSR relies on the pool to be routed to the SSR gateway interface by another mechanism (e.g. static-routes, BGP, etc.) by the _next-hop_ in the network.
+* SSR software will not reply to ARP requests on the pool prefix on the associated interface.  Therefore the SSR relies on the pool to be routed to the SSR gateway interface by another mechanism such as static-routes, BGP, etc., by the _next-hop_ in the network.
 * Changes to the pool configuration will not affect the existing sessions as it has the potential of cascading effect on the network. These changes will resolve over time as the existing sessions naturally expire.
 
 The static NAT pool will simply hash the source IP address of incoming packets to the corresponding IP address in the pool.
