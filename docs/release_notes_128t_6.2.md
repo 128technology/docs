@@ -188,6 +188,8 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 
 - **I95-52426 Alerts not issued when decreasing the action type on an IDP custom rule definition:** In a case where a user is modifying a rule to **decrease** the action type to an `alert`, alerts for that vulnerability will not be reported. The attack will be allowed to pass through undetected. For example, if the action `close-tcp-connection` is downgraded to `alert`, the attacks will pass through undetected.
 ------
+- **I95-53274 PIM scaling above 1500 (Source,Group) sessions:** The SSR cannot maintain more than 1400 active (Source,Group) sessions. Juniper recommends a limit of 1400 (Source,Group) sessions to prevent a loss of traffic. 
+------
 - **I95-53777 Multicast traffic not passing after HA Failover:** High Availability with Multicast is not fully supported. Drop or complete loss of traffic may be seen when the primary node resumes traffic after a node failure and failover.
 ------
 - **I95-53878 Dynamic Reconfiguration Issues with LAG:** Dynamic reconfiguration is not currently supported. Changes in LAG configuration require a 128T service restart and may result in service disruption. Any changes to LAG configuration should be performed during a maintenance window.

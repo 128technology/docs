@@ -45,6 +45,10 @@ The following are the components necessary to configure multicast over SVR on th
 
 Refer to [Tenants](config_tenants.md) for more information on configuring Tenants.
 
+:::note
+Multicast Source Discovery Protocol (MSDP) is a protocol that allows inter-domain multicast communication. MSDP is only valid for the Any-Source Multicast (ASM) model. If the Source-Specific Multicast (SSM) model is used, MSDP will not send Source-Active (SA) messages to indicate an active source.
+:::
+
 ### Configuration Process
 
 The following diagram represents a simple multicast configuration. A Client sends a multicast to address 225.1.1.1. Location1 and Location2 want to receive this multicast stream. The network is setup to use an external, non-SSR Rendezvous Point (RP) at 20.20.20.20 for all multicast traffic. This router is 192.168.22.2 and is configured for BGP with SSR rtr2. It advertises 20.20.20.20 as the RP for multicast into BGP,  allowing the SSR network to identify the path to the RP.
