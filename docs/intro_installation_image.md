@@ -49,7 +49,7 @@ Use the instructions [Creating a Bootable ISO](intro_creating_bootable_usb.md) t
 
 	![Select Mode](/img/install_imagebased_1.png)
 
-3. In the Installer window, select 2 for the ZTP Install Mode. This is the default mode for image-based installation.  
+3. In the Installer window, select 2 for the ZTP Install Mode. This mode supports the image-based installation. OTP and Interactive modes are not supported for image-based install.  
 
 	![Select Install Mode](/img/install_imagebased_2.png)
 
