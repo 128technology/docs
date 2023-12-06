@@ -3,7 +3,7 @@ title: Customizable Firewall Rules and Filters
 sidebar_label: Customizable Firewall Rules and Filters
 ---
 
-This section describes a bunch of stuff. Here is some of it. 
+The following enhancements have been made to the SSR to provide more complete protection as a firewall. 
 
 ## Packet Filtering
 
@@ -16,30 +16,30 @@ Authority > Router > Node > device-interface > network-interface
 
 1. Scroll to Filter Rule.
 
-[Network interface filter configuration](/img/bpf_image1.png)
+![Network interface filter configuration](/img/bpf_image1.png)
 
 2. Click Add.
 
 3. In the New Item window, name the rule and click SAVE.
 
-[New filter name](/img/bpf_image2.png)
+![New filter name](/img/bpf_image2.png)
 
 4. In the Filter Rule window, define:
 - The action - Deny discards any matching packets (what do they match? you haven't set any packet information in this filter). Permit allows packets that match the rule to bypass any additional rules, and passes the traffic.  
 - The Filter type - BPF is currently the only option. 
 - Berkeley Packet Filter - Identifies the filter to be applied. Validation confirms proper BPF syntax.
 
-[BPF Filter Rule](/img/bpf_image4.png)
+![BPF Filter Rule](/img/bpf_image4.png)
 
 5. Click Validate and Commit. From the authority drop down, select the network interface to return to the Filter list.
 
 6. Configuration of permit rules follows the same process. 
 
-[Permit rule configuration](/img/bpf_image5.png) 
+![Permit rule configuration](/img/bpf_image5.png) 
 
 7. After the Filter Rule list has been created, you can reorder the rules using the drop down menu to the left of the filter name. 
 
-[Reorder menu](/img/bpf_image6.png)
+![Reorder menu](/img/bpf_image6.png)
 
 This list determines the order in which filter rules are applied. 
 
@@ -84,24 +84,39 @@ exit
 ```
 
 ## ICMP 
-**Need graphic and pcli example
+
+ICMP attributes have been updated for firewall protection. 
 
 #### Discard ICMP Echo Replies With No Request
 
 ICMP Echo Replies that arrive at the SSR are dropped if no corresponding request has been seen and the ICMP Aysnc Reply is set to drop. This is the new default behavior; no change in configuration is necessary.
 
-#### ICMP Type As A Session Attribute
+#### ICMP Type as a Session Attribute
 
 By default, the SSR does not use ICMP codes as a session attribute. However, the SSR does match ICMP error packets with the sessions that generated them, and only accepts those ICMP packets when they match an existing session. For instance, if a TCP packet generates a `Destination Unreachable`, upon receipt of the `Destination Unreachable` the SSR uses the code to interpret the packet and match it to an existing session. If a match is found, the packet is forwarded to the end host. If a match is not found, the packet is rejected.
 
-To enable ICMP type as a session attribute, change the `ICMP Session Match` to `identifier and type`.  This is not the default behavior, and a configuration change is necessary to enable this behavior.
+To enable ICMP type as a session attribute:
+
+1. At the Authority level, select the Authority Settings button. 
+
+![Authority Settings button](/img/ipv4_option_filter1.png)
+
+2. Change the `ICMP Session Match` to `identifier and type`. 
+
+![ICMP Control pane](/img/icmp_type_attribute1.png)
+
+Changes take effect after the configuration has been committed. 
+
+#### From the Command Line
+
+```
+*admin@conductor.conductor# configure authority icmp-control icmp-async-reply drop
+*admin@conductor.conductor# configure authority icmp-control icmp-session-match identifier-and-type
+```
 
 ## IPv4 Option Filtering
 
-------
-Currently in the SSR, only basic checking is done for both IPv4 options and IPv6 extension headers verifying the validity of these extra headers. The SSR now has the ability to go further than this basic check and inspect these additional headers and make necessary decisions as to whether these packets should be allowed or dropped and logged.
-There are various IPv4 options that should have a default behavior of drop when packets arrive at the SSR. However, due to existing behavior within the SSR, these options should not be dropped by default should none of the provided configuration exist within the running configuration. This is to prevent any disruption in an existing deployment when upgrading to an image that supports IPv4 option filtering.
-------
+The SSR now has the ability to go deeper than the basic IPv4 header options check and inspect the options to make necessary decisions whether the packets are allowed or dropped and logged.
 
 By default, all IPv4 options are allowed traffic. To configure the dropping of specific IPv4 options, you must first enable `drop-all`. This reveals the Drop Exclusions list, where you can define IPv4 options to exclude from the drop action. 
 
@@ -158,16 +173,18 @@ Packets with broadcast or multicast source L2 addresses will now be dropped by d
 
 ## Transport State Enforcement
 
-------
-By default, the SSR checks and follows the TCP sequence numbers of all the sessions passing through it. However, no action has been taken based on it, aside from incrementing metrics. Part of the certification testing is looking at whether or not the SSR is actually dropping packets that have sequence numbers that don’t fit the stream. Now, the configured field transport-state-enforcement has a Strict mode that enables this new enforcement along with the others.
+By default, the SSR checks and follows the TCP sequence numbers of all the sessions passing through, and increments the associated metrics. Setting the Transport State Enforcement field to Strict ensures any packets in the TCP stream that fall outside of the sequence number stream will be dropped. 
 
-Under the Service Policy (which is under Authority), you will find a field called Transport State Enforcement. This field defaults to “reset”, which preserves the existing default behavior.
+1. Under Authority, scroll to Service Policies, and select a service policy.
+2. In the Basic Information panel, click on the Transport State Enforcement drop down and select Strict.
 
 ![service policy](/img/transport_state_enforce1.png)
 
-Change that to “strict” to enable dropping packets in the TCP stream which fall outside of the window. This will apply to any service that has this service policy configured.
+Any packets in the TCP stream that fall outside of the sequence number stream will be dropped. This will apply to any service that has this service policy configured.
 
 ![service](/img/transport_state_enforce2.png)
+
+#### From the Command Line
 
 ```
 *admin@conductor.conductor# configure authority service-policy prefer-path-2 transport-
@@ -175,19 +192,77 @@ state-enforcement strict
 *admin@conductor.conductor#
 ```
 
+## TCP Half-Open Connection Limit
 
-## TCP SYN Limitation
-------
-The SSR provides the ability to limit half-open TCP connections to a configurable limit.  Half-open TCP connections are those where the handshake has started but not completed.  A SYN flood is a type of distributed denial of service (DDoS) attack that opens as many connections with a server as possible without completing them to force the server to run out of session contexts and deny future requests.
-The certification process is looking to address this by limiting the number of half-open connections on the SSR to a configurable limit and drop any new session requests above that.  The SSR can now do just that, tracking how many half-open sessions there are based on existing TCP session state.
-New configuration has been added for this feature.  At the router level, there is a new field called half-open-connection-limit which defaults to unlimited but be configurable with a number.
+Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections. This provides protection against SYN flood DDoS attacks.
 
+The connection limit is configured at the router level (Authority > Router), and is unlimited by default. To set a limit, enter a numerical value in the `Half-Open Connection Limit` field in the Router Basic Information panel. When configured, the SSR tracks how many half-open sessions there are based on existing TCP session state and will deny any new TCP sessions once the limit has been reached.
 
+![TCP Connection Limit](/img/tcp_conx_limit.png)
+
+#### From the Command Line
 
 ```
 *admin@conductor.conductor#
 *admin@conductor.conductor# configure authority router 128t-west half-open-connection-l
 imit 100000
 ```
+
+## Correlating Interfaces in Audit Events
+
+To correlate an interface with an audit event, the internal ID of the interface is visible in the `show device-interface` command.
+
+```
+admin@test1.Fabric128# show device-interface
+Fri 2023-10-27 10:06:30 EDT
+✔ Retrieving device interface information...
+
+========================================
+ test1:10
+========================================
+ Type:                ethernet
+ Internal ID:         1
+ Forwarding:          true
+ PCI Address:         0000:00:04.0
+ MAC Address:         fa:16:3e:88:8d:c1
+
+ Admin Status:        up
+ Operational Status:  up
+ Provisional Status:  up
+ Redundancy Status:   non-redundant
+ Speed:               10 Gb/s
+ Duplex:              full
+
+ in-octets:                         360
+ in-unicast-pkts:                     4
+ in-errors:                           0
+ out-octets:                          0
+ out-unicast-pkts:                    0
+ out-errors:                          0
+
+ Plugin Info:         unavailable
+
+```
+
+Use this information to match an interface ID for an audit log using the `show events` command.
+
+```
+==================================================================
+ 2023-10-27T02:56:51.513Z Traffic request violates access policy.
+==================================================================
+ Type:               traffic.denied
+ Node:               test1
+ Denied Reason:      access
+ Destination Address:172.16.2.201
+ Destination Port:   443
+ Ingress Interface:  1.0
+ Ip Protocol:        udp
+ Permitted:          False
+ Source Address:     172.16.1.201
+ Source Port:        10000
+
+```
+
+
 
 
