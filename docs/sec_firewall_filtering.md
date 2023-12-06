@@ -12,20 +12,20 @@ Filters are configured and applied on the receiving network-interface.
 
 #### Configure using the GUI: 
 
-Authority > Router > Node > device-interface > network-interface
-
-1. Scroll to Filter Rule.
+1. At the Authority level, select the router, then the node, the device interface, and the network interface where the filters will be configured.
 
 ![Network interface filter configuration](/img/bpf_image1.png)
 
-2. Click Add.
+2. Scroll down to the Filter Rule panel. 
 
-3. In the New Item window, name the rule and click SAVE.
+3. Click Add.
+
+4. In the New Item window, name the rule and click SAVE.
 
 ![New filter name](/img/bpf_image2.png)
 
-4. In the Filter Rule window, define:
-- The action - Deny discards any matching packets (what do they match? you haven't set any packet information in this filter). Permit allows packets that match the rule to bypass any additional rules, and passes the traffic.  
+5. In the Filter Rule window, define:
+- The Action - `Deny` discards any matching packets (what do they match? you haven't set any packet information in this filter). `Permit` allows packets that match the rule to bypass any additional rules, and passes the traffic.  
 - The Filter type - BPF is currently the only option. 
 - Berkeley Packet Filter - Identifies the filter to be applied. Validation confirms proper BPF syntax.
 
@@ -37,14 +37,12 @@ Authority > Router > Node > device-interface > network-interface
 
 ![Permit rule configuration](/img/bpf_image5.png) 
 
-7. After the Filter Rule list has been created, you can reorder the rules using the drop down menu to the left of the filter name. 
+7. After the Filter Rule list has been created, you can reorder the rules using the drop down menu to the left of the filter name. This list determines the order in which filter rules are applied.
 
 ![Reorder menu](/img/bpf_image6.png)
 
-This list determines the order in which filter rules are applied. 
-
 :::note
-The number of rules and the filtering operation is resource heavy and may impact performance.
+The number of rules and the filtering operation is resource intensive and may impact performance.
 :::
 
 #### Configure from the PCLI:
@@ -169,7 +167,7 @@ exit
 
 ### Broadcast and Multicast Source Addresses
 
-Packets with broadcast or multicast source L2 addresses will now be dropped by default.
+Packets with broadcast or multicast source L2 addresses are now dropped by default.
 
 ## Transport State Enforcement
 
@@ -194,7 +192,7 @@ state-enforcement strict
 
 ## TCP Half-Open Connection Limit
 
-Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections. This provides protection against SYN flood DDoS attacks.
+Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections. This provides protection against SYN flood Distributed Denial of Service (DDoS) attacks.
 
 The connection limit is configured at the router level (Authority > Router), and is unlimited by default. To set a limit, enter a numerical value in the `Half-Open Connection Limit` field in the Router Basic Information panel. When configured, the SSR tracks how many half-open sessions there are based on existing TCP session state and will deny any new TCP sessions once the limit has been reached.
 
