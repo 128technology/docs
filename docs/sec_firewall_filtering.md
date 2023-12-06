@@ -3,7 +3,13 @@ title: Customizable Firewall Rules and Filters
 sidebar_label: Customizable Firewall Rules and Filters
 ---
 
-The following enhancements have been made to the SSR to provide more complete protection as a firewall. 
+As part of the security hardening and certification process, the SSR has implemented the following firewall features to provide a more secure platform for network traffic. Steps for configuration from both the GUI and the PCLI are provided. 
+
+#### Revision History
+
+| Release | Modification |
+| --- | --- | 
+| 6.2.3-R2 | Features introduced | 
 
 ## Packet Filtering
 
@@ -25,7 +31,7 @@ Filters are configured and applied on the receiving network-interface.
 ![New filter name](/img/bpf_image2.png)
 
 5. In the Filter Rule window, define:
-- The Action - `Deny` discards any matching packets (what do they match? you haven't set any packet information in this filter). `Permit` allows packets that match the rule to bypass any additional rules, and passes the traffic.  
+- The Action - `Deny` discards any packets matching the filter applied. `Permit` allows packets that match the rule to bypass any additional rules, and passes the traffic.  
 - The Filter type - BPF is currently the only option. 
 - Berkeley Packet Filter - Identifies the filter to be applied. Validation confirms proper BPF syntax.
 
@@ -42,7 +48,7 @@ Filters are configured and applied on the receiving network-interface.
 ![Reorder menu](/img/bpf_image6.png)
 
 :::note
-The number of rules and the filtering operation is resource intensive and may impact performance.
+The number and complexity of rules will have an impact on forwarding performance.
 :::
 
 #### Configure from the PCLI:
@@ -70,7 +76,7 @@ name         intf30
 
 filter-rule  PermitIPaddress
     name    PermitIPaddress
-    bpf     host
+    bpf     "host 192.168.0.0"
     action  permit
 exit
 
@@ -81,13 +87,13 @@ filter-rule  DropUDP_Port400
 exit
 ```
 
+:::note
+Detailed information about Berkeley Packet Filters is outside of the scope of this documentation, but is readily available on the internet.
+:::
+
 ## ICMP 
 
 ICMP attributes have been updated for firewall protection. 
-
-#### Discard ICMP Echo Replies With No Request
-
-ICMP Echo Replies that arrive at the SSR are dropped if no corresponding request has been seen and the ICMP Aysnc Reply is set to drop. This is the new default behavior; no change in configuration is necessary.
 
 #### ICMP Type as a Session Attribute
 
@@ -112,11 +118,15 @@ Changes take effect after the configuration has been committed.
 *admin@conductor.conductor# configure authority icmp-control icmp-session-match identifier-and-type
 ```
 
+#### Discard ICMP Echo Replies With No Request
+
+ICMP Echo Replies that arrive at the SSR are dropped if no corresponding request has been seen and the ICMP Aysnc Reply is set to drop, as configured above. 
+
 ## IPv4 Option Filtering
 
-The SSR now has the ability to go deeper than the basic IPv4 header options check and inspect the options to make necessary decisions whether the packets are allowed or dropped and logged.
+The SSR has the ability to go deeper than the basic IPv4 header options check and inspect the options to make necessary decisions whether the packets are allowed or dropped and logged.
 
-By default, all IPv4 options are allowed traffic. To configure the dropping of specific IPv4 options, you must first enable `drop-all`. This reveals the Drop Exclusions list, where you can define IPv4 options to exclude from the drop action. 
+By default, all IPv4 packets with options are allowed. To configure the dropping of specific IPv4 options, you must first enable `drop-all`. This reveals the Drop Exclusions list, where you can define IPv4 options to exclude from the drop action. 
 
 1. At the Authority level, select the Authority Settings button. 
 
@@ -130,7 +140,7 @@ By default, all IPv4 options are allowed traffic. To configure the dropping of s
 
 ![IPv4 Option Filter window](/img/ipv4_option_filter3.png)
 
-If you do not want any allowed options, you do not have to proceed any farther. Return to the Authority level and continue with other configuration activities. 
+If you do not want any allowed options, you can stop here. Return to the Authority level and continue with other configuration activities. 
 
 4. In the Drop Exclusion field, select **ADD**. 
 
@@ -167,7 +177,7 @@ exit
 
 ### Broadcast and Multicast Source Addresses
 
-Packets with broadcast or multicast source L2 addresses are now dropped by default.
+Packets with broadcast or multicast source IP and MAC addresses are now dropped by default.
 
 ## Transport State Enforcement
 
@@ -192,9 +202,13 @@ state-enforcement strict
 
 ## TCP Half-Open Connection Limit
 
-Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections. This provides protection against SYN flood Distributed Denial of Service (DDoS) attacks.
+Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections. 
 
-The connection limit is configured at the router level (Authority > Router), and is unlimited by default. To set a limit, enter a numerical value in the `Half-Open Connection Limit` field in the Router Basic Information panel. When configured, the SSR tracks how many half-open sessions there are based on existing TCP session state and will deny any new TCP sessions once the limit has been reached.
+The connection limit is configured at the router level (Authority > Router), and is unlimited by default. To set a limit, enter a numerical value in the `Half-Open Connection Limit` field in the Router Basic Information panel. When configured, the SSR tracks how many half-open sessions there are based on existing TCP session state **and will deny any new TCP sessions once the limit has been reached**.
+
+:::warning
+When the SSR approaches the configured limit of half-open TCP connections, the establishment of **healthy** TCP sessions may be significantly impacted. Please ensure that this value is set appropriately for your network. More importantly, attempt to identify the devices that are creating half-open sessions.
+:::
 
 ![TCP Connection Limit](/img/tcp_conx_limit.png)
 
