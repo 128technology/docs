@@ -58,21 +58,129 @@ If support for more than 49,150 concurrent sessions per interface is needed, you
 When multiple addresses are configured, utilizing `source-nat`, the second address configured will only be utilized once the first is fully exhausted; so on and so forth.  Once the next configured address starts being utilized, it will remain in use until exhausted.
 
 ## Destination NAT
+
 Static desination network address translation can be performed by configuring a `service-route > nat-target`. It is common to leverage the public address of the router for internal services, such as VPN. Traffic destined to the SSR, configured as a _service_ with an _address_ that matches that of the public-facing network-interface is then NATed to an internal private address on the LAN for the application. This setting only performs address translation and does not modify the port.
+
+## Static NAT
+
+SSR supports source NAT pool configurations at interface and service-route level as described in [Static NAT Bindings](#static-nat-bindings). However, this is not always sufficient to enable simple configuration for static bidirectional NAT between two same-sized subnets.
+
+Static NAT defines a one-to-one mapping from one IP subnet to another IP subnet. The mapping includes source IP address translation in one direction and destination IP address translation in the reverse direction. In cases where IP address overlapping is found, such as when merging networks (for example, a corporate acquisition and merger) this simple configuration change is significantly less work than changing all the local IP addresses. The diagram below illustrates this example. 
+
+![Static Nat Diagram](/img/static_nat_example.png)
+
+The `spk-lan2` network-interface is not routable (cannot send or receive traffic) in the `Corp` and `Internet` networks. The client in `spk-lan2` has a local IP within the `192.168.1.0/24` subnet and overlaps with another client from `Corp` in `spk-lan1`. This will cause problems for any sessions between `hub-lan1` or `spk-lan1` to `spk-lan2`. By configuring `bidirectional-nat` on `spk-lan1` and `spk-lan2`, the two `192.168.1.0/24` subnets are mapped to `172.16.128.0/24` and `172.16.129.0/24` respectively and differentiate themselves on the hub router.
+
+`bidirectional-nat` provides value in two ways:
+- NAT an unroutable private IP to a routable public IP
+- NAT duplicate private IPs (on different routers/networks) to different public IPs to provide differentiation on the receiving end
+
+#### Example
+
+```
+config
+    authority
+        router      spoke
+            node       node1-spoke
+                device-interface    spk-lan2
+                    network-interface    spk-lan2
+                        bidirectional-nat    192.168.1.0/24
+                            local-ip         192.168.1.0/24
+                            remote-ip        172.16.128.0/24
+                        exit 
+                    exit
+                exit
+                
+                device-interface    spk-lan1
+                    network-interface   spk-lan1
+                        bidirectional-nat    192.168.1.0/24
+                            local-ip         192.168.1.0/24
+                            remote-ip        172.16.129.0/24
+                        exit 
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit 
+
+```
+
+### Non-SVR Traffic
+
+In order for non-SVR traffic (for example, LAN-to-LAN traffic traversing a single SSR) to take advantage of static-NAT addressing, you must disable egress source-nat at the service level by setting `service > source-nat` to `disabled` as shown below. 
+
+```
+authority
+    service LAN-to-LAN
+        name LAN-to-LAN
+        description "LAN-to-LAN non-SVR traffic traversing a single SSR router"
+        source-nat disabled
+        scope private
+        security aes1
+        address <dest-lan-subnet>
+        access-policy <src-lan-subnet>
+            source <src-lan-subnet>
+            permission allow
+        exit
+    exit
+exit
+```
+
+### Using the GUI
+
+Set the local and remote IP addresses under Authority > Router > Node > Device Interface > Network Interface.
+
+![Network Interface](/img/static_nat_gui_net-intf.png)
+
+![Bidirectional NAT Config](/img/static_nat_gui_nat-config.png)
+
+### Show Commands
+
+For details about command output, refer to the [`show sessions`](cli_reference.md#show-sessions) and [`show sessions by-id`](cli_reference.md#show-sessions-by-id) commands.
+
+#### Source NAT
+- On the session ingress node, the `show sessions by-id` output has an Ingress Source NAT field where the source-nat type, NAT’d source address, NAT’d port, and protocol are displayed.
+
+![Session Ingress](/img/source-nat1.png)
+
+- On the session egress node the `show sessions by-id` output has an Ingress Source NAT field where the source-nat type, NAT’d source address, NAT’d port, and protocol are displayed. 
+
+![Session Egress](/img/source-nat2.png)
+
+- The `show sessions` output has `NAT IP` and `NAT Port` columns where the NAT’d source address and NAT’d source port are displayed. 
+
+![NAT IP and Port](/img/source-nat3.png)
+
+#### Destination NAT
+
+- On the session egress node the `show sessions by-id` output shows the NAT’d destination address in the Forward Flow `NextHop` and Reverse Flow `src ip` fields. 
+
+![Destination forward flow](/img/dest-nat1.png)
+
+- The `show sessions` output reverse flow `src ip `column also shows the NAT’d destination address.
+
+![Destination Reverse Flow Source IP](/img/dest-nat2.png)
+
+#### Version History
+
+| Release | Modification |
+| ------- | ------------ |
+| 6.2.0   | Static NAT Feature Introduced   |
 
 ## NAT Pools
 
-NAT pools are a construct that allow for the use of IP and port ranges to be shared across one or more network-interfaces for either source or destination NATing capabilies.
+NAT pools are a construct that allow for the use of IP and port ranges to be shared across one or more network-interfaces for either source or destination NATing capabilities.
 
 ### Static NAT bindings
 A static NAT binding can be configured by creating an `authority > router > nat-pool` object and assigning it to a network-interface.  The following rules and constraints will apply to this configuration:
 
-* The _nat-pool_ prefix is used to create a N:M mapping. Where each source IP (from ingress interface) is hashed to an IP address in the nat pool.
+* The _nat-pool_ prefix is used to create a N:M mapping. Where each source IP (from an ingress interface) is hashed to an IP address in the nat pool.
 * The static _nat-pool_ can only be configured as:
   * _ingress-nat-pool_ on a _network-interface_ when peering with another SSR
-  * egress-nat-pool on a _network-interface_ when not performing SVR
+  * *egress-nat-pool* on a _network-interface_ when not performing SVR
   * _source-nat-pool_ on a _service-route / next-hop_
-* SSR software will not reply to ARP requests on the pool prefix on the associated interface.  Therefore the SSR relies on the pool to be routed to the SSR gateway interface by another mechanism (e.g. static-routes, BGP, etc.) by the _next-hop_ in the network.
+* SSR software will not reply to ARP requests on the pool prefix on the associated interface.  Therefore the SSR relies on the pool to be routed to the SSR gateway interface by another mechanism such as static-routes, BGP, etc., by the _next-hop_ in the network.
 * Changes to the pool configuration will not affect the existing sessions as it has the potential of cascading effect on the network. These changes will resolve over time as the existing sessions naturally expire.
 
 The static NAT pool will simply hash the source IP address of incoming packets to the corresponding IP address in the pool.
