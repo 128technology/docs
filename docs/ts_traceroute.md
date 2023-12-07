@@ -7,6 +7,7 @@ sidebar_label: Traceroute
 | Release | Modification |
 | ------- | ------------ |
 | 6.1.0   | This feature was introduced. |
+| 6.2.3-R2 | Updates and improvements made to the keyword arguments |
 
 Traceroute is implemented as a troubleshooting tool, allowing you to debug connectivity from point to point.
 
@@ -18,7 +19,7 @@ The following types of traceroute are available:
 - `service traceroute`: Analogous to the service-ping functionality. Useful to debug test traffic as defined in the deployment.
 - `peer traceroute`: Performs traceroute between two adjacent SSRs. Useful for diagnosing peering issues.
 
-## How it Works
+## How It Works
 
 Discovery packets are sent from the originating SSR to a single the destination port with varying time-to-live (TTL) values. For each iteration, the TTL is increased by 1, and a 3 packet burst is transmitted. This process is repeated until the originating SSR receives a suitable ‘terminating’ packet from the final destination, or until an upper-limit is reached for hop counts. 
 
@@ -28,24 +29,48 @@ For service-traceroute and peer-traceroute, ICMP echo requests are the default d
 
 ```
 admin@combo-west-a.combo-west# traceroute
-usage: traceroute [peer-name <peer-name>][source-ip <source-ip>] [service <service>] [tenant <tenant>] destination-ip <destination-ip>
+usage: traceroute [max-hops <max-hops>] [wait-time <wait-time>] [egress-interface <egress-interface>] [source-ip <source-ip>] [gateway-ip <gateway-ip>] [service <service>] [tenant <tenant>] [peer <peer>] router <router> node <node> <destination-ip>
 ```
 
 The `traceroute` command creates a traceroute context for probing the path to a specified endpoint. Traceroute targets can be specified as SVR peers, service/tenant defined endpoints, or targets reachable by routing.
 
+#### Keyword Arguments
+
+| Element | Type | Description |
+| ---- | ---- | ----------- |
+| egress-interface | string | Network interface on which to originate the traceroute session |
+| gateway-ip | IP address | The gateway address on the egress interface |
+| max-hops | integer | The maximum number of hops before the operation is terminated |
+| node | string | The node on which to start the traceroute |
+| peer | string | The peer name for the traceroute command (default is empty) |
+| router | string | The router on which to start the traceroute |
+| service | string | The service for the traceroute command (default is empty) |
+| source-ip | IP address | The source address. Optional if the matching service utilizes a source-nat (default: 127.0.0.1) |
+| tenant | string | The tenant name for the traceroute command (default is empty) |
+| wait-time | integer | The maximum time, in seconds, to wait for a response to each probe (default 3s) |
+
+#### Positional Arguments
+
 | Element | Type | Description |
 | --- | --- | --- |
-| destination-ip | positional | The destination IP address for the traceroute command |
-| peer-name | string | The name of the SVR peer to probe (default is empty) |
-| service | string | The service for the traceroute command (default is empty) |
-| source-ip | IP address | The source address for the traceroute command (default: 0.0.0.0) |
-| tenant | string | The tenant name for the traceroute command (default is empty) |
+| destination-ip | IP address | The destination address |
 
-To define each of the traceroute types, enter the following parameters:
+To define each of the traceroute types, enter at least the following parameters:
 
-- Service traceroute: Enter the service name, tenant, and destination-ip.
+- Service traceroute: Enter the service name and destination-ip. (Additional arguments are optional)
+ ```
+ traceroute service <service-name> tenant <tenant-name> source-ip <address> <destination-ip>
+ ```
+ The `source-ip` is only required if there is no `source-nat` configured. If you omit the `source-ip` without `source-nat` configured, then you will get an error requesting to either apply `source-nat,` or provide a `source-ip`.
+
 - Routed traceroute: Enter the destination-ip.
-- Peer traceroute: Enter the peer name and destination-ip.
+ ```
+ traceroute <destination-ip>
+ ```
+- Peer traceroute: Enter the peer name and destination-ip. (Additional arguments are optional)
+ ```
+ traceroute peer <peer> egress-interface <interface-name> <destination-ip>
+ ```
 
 Example of a Service Traceroute:
 ```
@@ -57,6 +82,8 @@ traceroute to 172.16.1.201, 64 hops max
 3. 172.16.4.1 42ms 5ms 6ms
 4. 172.16.1.201 4ms 4ms 3ms
 ```
+
+
 
 ### Show Command
 
