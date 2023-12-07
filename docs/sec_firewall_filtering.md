@@ -200,6 +200,8 @@ state-enforcement strict
 *admin@conductor.conductor#
 ```
 
+For a detailed description of Transport State Enforcement, refer to [Transport State Enforcement](bcp_service_and_service_policy_design.md#transport-state-enforcement). For additional configuration information, see the [transport-state-enforcement](config_reference_guide.md#service-policy) parameter. 
+
 ## TCP Half-Open Connection Limit
 
 Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections. 
@@ -209,6 +211,10 @@ The connection limit is configured at the router level (Authority > Router), and
 :::warning
 When the SSR approaches the configured limit of half-open TCP connections, the establishment of **healthy** TCP sessions may be significantly impacted. Please ensure that this value is set appropriately for your network. More importantly, attempt to identify the devices that are creating half-open sessions.
 :::
+
+Additionally, if you require a limit for half-open TCP sessions, it may be helpful to consider the TCP session timeout value. The default timer is 1900000ms (roughly 31 minutes). If an application establishes a TCP socket that remains idle (without any keepalives) for longer than this value, the SSR will remove the session from the session table. 
+
+An awareness of these two values (half-open limit and TCP session timer) may mitigate the impact of limiting the establishment of **healthy** TCP sessions.
 
 ![TCP Connection Limit](/img/tcp_conx_limit.png)
 
