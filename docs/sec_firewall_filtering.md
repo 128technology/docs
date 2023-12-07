@@ -9,7 +9,7 @@ As part of the security hardening and certification process, the SSR has impleme
 
 | Release | Modification |
 | --- | --- | 
-| 6.2.3-R2 | Features introduced | 
+| 6.2.3-R2 | Features and settings described here introduced | 
 
 ## Packet Filtering
 
