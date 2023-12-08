@@ -23,7 +23,7 @@ The following types of traceroute are available:
 
 Discovery packets are sent from the originating SSR to a single the destination port with varying time-to-live (TTL) values. For each iteration, the TTL is increased by 1, and a 3 packet burst is transmitted. This process is repeated until the originating SSR receives a suitable ‘terminating’ packet from the final destination, or until an upper-limit is reached for hop counts. 
 
-For service-traceroute and peer-traceroute, ICMP echo requests are the default discovery packets. To support instances where ICMP replies are disabled at the destination or disallowed by firewall rules, UDP is also supported.
+For service-traceroute and routed-traceroute, ICMP echo requests are the default discovery packets. Peer-traceroute uses BFD packets as the default. To support instances where ICMP replies are disabled at the destination or disallowed by firewall rules, UDP is also supported.
 
 ## Command Information
 
@@ -57,22 +57,37 @@ The `traceroute` command creates a traceroute context for probing the path to a 
 
 To define each of the traceroute types, enter at least the following parameters:
 
-- Service traceroute: Enter the service name and destination-ip. (Additional arguments are optional)
- ```
- traceroute service <service-name> tenant <tenant-name> source-ip <address> <destination-ip>
- ```
+- **Service Traceroute**: Enter the service name and destination-ip. (Additional arguments are optional)
+
+ `traceroute service <service-name> tenant <tenant-name> source-ip <address> <destination-ip>`
+
  The `source-ip` is only required if there is no `source-nat` configured. If you omit the `source-ip` without `source-nat` configured, then you will get an error requesting to either apply `source-nat,` or provide a `source-ip`.
 
-- Routed traceroute: Enter the destination-ip.
+- **Routed Traceroute**: Enter the destination-ip. By specifying the optional arguments `egress-interface` and `gateway-ip`, routed traceroute will bypass the service, tenant, and routing table. 
+
+ `traceroute <destination-ip> egress-interface <interface-name> <gateway-ip>`
+
+- **Peer Traceroute**: Enter the peer name, egress-interface, and destination-ip. (Additional arguments are optional)
+
+ `traceroute peer <peer> egress-interface <interface-name> <destination-ip>`
+
+ Peer name, egress-interface, and destination IP can be found using the `show peers` command:
+
  ```
- traceroute <destination-ip>
- ```
-- Peer traceroute: Enter the peer name and destination-ip. (Additional arguments are optional)
- ```
- traceroute peer <peer> egress-interface <interface-name> <destination-ip>
+ admin@combo-west-a.combo-west# show peers
+ Fri 2023-12-08 18:29:26 UTC
+ ✔ Retrieving peer paths...
+ 
+ ========= ========= =================== ================ ======== ============= ==========
+  Peer      Node      Network Interface   Destination      Status   Hostname      Path MTU
+ ========= ========= =================== ================ ======== ============= ==========
+  test-3    runner    intf1               192.168.128.2    up       unavailable       1500
+
+ Completed in 0.11 seconds
  ```
 
-Example of a Service Traceroute:
+#### Example Service Traceroute:
+
 ```
 admin@combo-west-a.combo-west# traceroute service east tenant red 172.16.1.201
 Running traceroute...
@@ -82,8 +97,6 @@ traceroute to 172.16.1.201, 64 hops max
 3. 172.16.4.1 42ms 5ms 6ms
 4. 172.16.1.201 4ms 4ms 3ms
 ```
-
-
 
 ### Show Command
 
