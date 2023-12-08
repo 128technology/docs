@@ -23,14 +23,30 @@ When creating a new security policy within the SSR, the SSR will automatically g
 
 There are three locations where security policies can be defined:
 * The security policy defined in the `service > security-policy` serves to encrypt and decrypt the payload of packets within a session. The encryption keys and algorithms defined at the service are always symmetric between SSR nodes.
-* A security policy can be defined in `network-interface > inter-router-security`. This security policy defines how metadata and HMAC are **decrypted** for SVR traffic received on the respective interface.
-* A security policy can be defined on `network-interface > adjacency > inter-router-security`. The security policy associated with the adjacency defines what keys and **encryption** algorithms are used for encrypting traffic sent to an SVR peer.
-* A security policy can be defined in `router > inter-node-security`. This security policy defines the encryption for HA interfaces used for inter node communication.
+* A security policy can be defined in `network-interface > inter-router-security`. This security policy defines how metadata are **decrypted** for SVR traffic received on the respective interface.
+* A security policy can be defined on `network-interface > adjacency > inter-router-security`. The security policy associated with the adjacency defines what keys and **encryption** algorithms are used for encrypting metadata (and hmac signing packets) sent to an SVR peer.
+* A security policy can be defined in `router > inter-node-security`. This security policy defines the encryption of metadata (and hmac signing packets) for HA interfaces used for inter-node communication.
 
 ### Best Practices
 The SSR affords you the ability to provision a unique security policy per service. However, in a typical hub-and-spoke topology, a single security policy can be shared among all services, with a separate security policy used for metadata encryption and authentication.
 
-HA interfaces between SSR nodes are directly connected between nodes and therefore pose no risk of interception. Given the additional computational cost of encrypting and decrypting traffic, it is recommended to not apply any security policy to `inter-node-security`.
+HA interfaces between SSR nodes are directly connected between nodes and therefore pose no risk of interception. Given the additional computational cost of encrypting and decrypting traffic, it is recommended to apply a security policy to `inter-node-security` with encryption and hmac disabled for this purpose.
+
+Example:
+```
+        security  encrypt-hmac-disabled
+            name                 encrypt-hmac-disabled
+            description          "Encryption and message authentication disabled"
+            hmac-cipher          sha256
+            hmac-key             (removed)
+            encryption-cipher    aes-cbc-128
+            encryption-key       (removed)
+            encryption-iv        (removed)
+            encrypt              false
+            hmac-mode            disabled
+            adaptive-encryption  false
+        exit
+```
 
 ## Changing a Security Policy
 Changing a security policy is a service impacting event as it is not possible to alter security keys and encryption ciphers for existing flows. Care must be taken to understand the blast radius of these changes. It goes without saying, you must understand the security policy that needs to change and how it is being used for services and peer paths. If altering the global security policy that is used for all services, all traffic will be impacted. Changing a security policy should always be performed during a maintenance window after fully understanding the overall impact to the environment. Due to the fact that sessions are not terminated on security policy change, the best course of action is to **reboot all the routers where traffic flows through the SSR with a security policy change has been made**.
