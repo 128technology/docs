@@ -16,10 +16,10 @@ The installation consists of the following steps:
 	- [Download](#download)
 	- [Create a Bootable USB](#create-a-bootable-usb)
 - [Installation](#installation)
-- [Default Port Identification](wan_onboarding_whitebox.md#device-default-port-identification)
-- [Associate the Device with Mist Using the GUI](wan_onboarding_whitebox.md#associate-the-router-with-mist)
+- [Default Port Identification](hdwr_whitebox_port_layout.md)
+- [Associate the Device with Mist Using the GUI](wan_onboarding_whitebox.md#gui-adoption)
 	- OR
-- [Adopt the device using the PCLI](wan_onboarding_whitebox.md#adopt-the-router-from-the-ssr-pcli)
+- [Adopt the device using the PCLI](wan_onboarding_whitebox.md#cli-adoption)
 
 ## Staging
 
