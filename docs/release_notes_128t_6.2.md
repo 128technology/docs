@@ -38,7 +38,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-47041 Selection of Mist Cloud instance during whitebox onboarding:** The onboarding interface now silently queries all Mist Instances and provides a drop down selector to allow login to the appropriate Mist instance (Global01, Global03, EU, etc.).
 ------
-- **I95-47253 Sessions detection and repair for Source NAT enabled sessions:** Insert Doc Reference here.
+- **I95-47253 Stuck Session Detection:** In situations where forward traffic is received, but there is no reverse traffic; for example, when the local IP of an interface performing source-nat changes, or when the local IP of an interface changes while sending traffic over SVR to a waypoint, the SSR will now mark the session for a flow-move with new reverse flow needed. If the criteria is met, the source-NAT or waypoint  will be updated with the correct information on the next forward packet.
 ------
 - **I95-51614 Common Criteria Certification - Firewall Protection Profile :** Several updates to existing functionality have been made to address Common Criteria Certification. For additional information, see [Customizable Firewall Rules and Filters](sec_firewall_filtering.md). 
 ------
@@ -53,8 +53,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **The following CVEs have been resolved in this release:**
 
 ------
-
-
 
 
 
@@ -92,6 +90,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-52406 Download MIBs from the GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
 ------
 - **I95-52703 Tenancy consideration in Application ID lookup:** Application Identification service lookups now consider the source tenant. This allows matches to be specific to certain networks/users. See [AppID and Tenancy](concepts_appid.md#appid-and-tenancy) for more information.
+------
+**WAN-1728 SSR1000 series Out of band management improvements:** The following improvements have been made to enhance the management functionality in Mist Managed environments:
+ - NTP sync
+ - MIST & conductor connectivity
+ - Other host services  
+ - Support for static IP address (including VLAN)
+ - Failover support between the management and WAN interface
 
 ### Resolved Issues 
 
@@ -209,13 +214,6 @@ This issue has been resolved; the LTE IP change is now handled it as a source-na
 - **I95-54086 Conductor memory exceeded:** In certain cases the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the `asset-connection-resiliency` feature. An update to the salt package has been made to resolve this issue.
 ------
 - **WAN-1323 Remove bootstrapper interfaces after Mist Onboarding:** The bridge interface used for bootstrapping in the default linux environment is now removed.
-------
-**WAN-1728 SSR1000 series Out of band management improvements:** The following improvements have been made to enhance the management functionality in Mist Managed environments:
- - NTP sync
- - MIST & conductor connectivity
- - Other host services  
- - Support for static IP address (including VLAN)
- - Failover support between the management and WAN interface
 ------
 - **WAN-1735 Set log levels on SSR:** Added new `log_level` and `log_category` fields in the `root_override` section of the intent config.
 
