@@ -200,6 +200,7 @@ module.exports = {
         "items": [
           "sec_adaptive_encrypt",
           "sec_firewall_filtering",
+          "sec_security_policy",
         ],
       },
       {
