@@ -24,7 +24,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **Plugin Upgrades:** If you are running with plugins, updates are required for some plugins **before** upgrading the conductor to SSR version 5.4.0 or higher. Please review the [Plugin Configuration Generation Changes](intro_upgrade_considerations.md#plugin-configuration-generation-changes) for additional information.
 
-## Release 6.2.3-R2
+## Release 6.2.3-13r2
 
 **Release Date:** December 15, 2023
 
@@ -32,23 +32,27 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-28073 Support for OSPFv3:** Support for OSPF v3 routing protocol for IPv6 networks. See [OSPF](config_ospf.md) for additional information and command information.
 ------
-- **I95-46049 Peer Traceroute enhancements:** Additional support has been added to the traceroute command. For more information, refer to [Traceroute](ts_traceroute.md).
+- **I95-46049 Peer Traceroute enhancements:** Additional support has been added to the traceroute command to provide more robust peer, service, and routed traceroute functionality. For more information, refer to [Traceroute](ts_traceroute.md).
 ------
 - **I95-46120 HA Fabric Warning message supression in Azure:** In Azure, it is not possible to configure a non-forwarding fabric interface on the SSR, thus this error will be present on every commit. This message is now supressed.
 ------
-- **I95-47041 Selection of Mist Cloud instance during whitebox onboarding:** The onboarding interface now silently queries all Mist Instances to allow login to the appropriate Mist instance (Global01, Global03, EU, etc.).
+- **I95-47041 Selection of Mist Cloud instance during whitebox onboarding:** The onboarding interface now silently queries all Mist Instances and provides a drop down selector to allow login to the appropriate Mist instance (Global01, Global03, EU, etc.).
 ------
 - **I95-47253 Sessions detection and repair for Source NAT enabled sessions:** Insert Doc Reference here.
 ------
-- **I95-51614 Common Criteria Certification - Firewall Protection Profile :** Several updates to existing functionality have been made to address Common Criteria Certification. For additional information, see Customizable Firewall Rules and Filters. 
+- **I95-51614 Common Criteria Certification - Firewall Protection Profile :** Several updates to existing functionality have been made to address Common Criteria Certification. For additional information, see [Customizable Firewall Rules and Filters](sec_firewall_filtering.md). 
 ------
 - **I95-51648 Application ID Database Memory Improvements:** Internal improvements have been made reduce memory consumption of the Application Identification IP database.
 ------ 
 - **I95-53045 Increase default redundancy and capacity settings:** The default values have been adjusted for deployments with large configurations and potentially high latency between nodes. 
 ------
-- **I95-53820 MD5 Authentication for MSDP:** An `auth` password option has been added to MSDP peers and the `mesh-group` feature to support MD5 authentication. For more information, refer to the [MSDP command]((config_command_guide.md/#configure-authority-router-routing-msdp)) documentation. 
+- **I95-53820 MD5 Authentication for MSDP:** An `auth` password option has been added to the [`msdp peer`](config_command_guide.md#configure-authority-router-routing-msdp-peer) and the [`msdp mesh-group`](config_command_guide.md#configure-authority-router-routing-msdp-mesh-group) configurations to support MD5 authentication. For more information, refer to the MSDP command documentation linked above. 
 
 ### Resolved Issues
+
+- **The following CVEs have been resolved in this release:**
+
+------
 
 
 
