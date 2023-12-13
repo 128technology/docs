@@ -1613,8 +1613,8 @@ One `t128_pass` processor is composed of multiple `conditions`. The `conditions`
 **Release Date:** Dec 14, 2023
 
 **Router Version**
-- 128T-monitoring-agent-plugin-router-1.1.9-1
-- 128T-monitoring-agent-3.8.8-4
+- 128T-monitoring-agent-plugin-router-1.1.10-2
+- 128T-monitoring-agent-3.8.9-1
 
 #### New Features and Improvements:
 
