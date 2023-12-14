@@ -212,7 +212,7 @@ The connection limit is configured at the router level (Authority > Router), and
 When the SSR approaches the configured limit of half-open TCP connections, the establishment of **healthy** TCP sessions may be significantly impacted. Please ensure that this value is set appropriately for your network. More importantly, attempt to identify the devices that are creating half-open sessions.
 :::
 
-Additionally, if you require a limit for half-open TCP sessions, it may be helpful to consider the TCP session timeout value. The default timer is 1900000ms (roughly 31 minutes). If an application establishes a TCP socket that remains idle (without any keepalives) for longer than this value, the SSR will remove the session from the session table. 
+Additionally, if you require a limit for half-open TCP sessions, it may be helpful to consider the initial TCP session timeout value. The default timer is 10 seconds. If an application fails to establish a TCP socket, the sessions that are in that state will still remain on the SSR for that initial timeout. 
 
 An awareness of these two values (half-open limit and TCP session timer) may mitigate the impact of limiting the establishment of **healthy** TCP sessions.
 

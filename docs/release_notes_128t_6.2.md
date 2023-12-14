@@ -32,7 +32,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 - **I95-28073 Support for OSPFv3:** Support for OSPF v3 routing protocol for IPv6 networks. See [OSPF](config_ospf.md) for additional information and command information.
 ------
-- **I95-40184 SSR Device Configuration Templates:** Fourteen individual templates for each SSR 1x00/SSR1x00 and Juniper certified device are now provided to simplify configuration. Templates are available from the Templates menu in the GUI.
+- **I95-40184 SSR Device Configuration Templates:** For conductor-based deployments, fourteen individual templates (for SSR 1x00/SSR1x00 and Juniper certified device) are now provided to simplify configuration. Templates are available from the Templates menu in the GUI.
 ------
 - **I95-46049 Peer Traceroute enhancements:** Additional support has been added to the traceroute command to provide more robust peer, service, and routed traceroute functionality. For more information, refer to [Traceroute](ts_traceroute.md).
 ------
@@ -51,6 +51,8 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-51648 Application ID Database Memory Improvements:** Internal improvements have been made reduce memory consumption of the Application Identification IP database.
 ------ 
+- **I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:** Add a "Lock Status" column to the User table as well as the User Details pane, with more details availble on hover. The `show user` command now includes two new rows, "Lock Status" and "Last Failed Login". For command details, please see [`show user lock-status`](cli_reference.md#show-user-lock-status).
+------
 - **I95-53045 Increase default redundancy and capacity settings:** The default values have been adjusted for deployments with large configurations and potentially high latency between nodes. 
 ------
 - **I95-53820 MD5 Authentication for MSDP:** An `auth` password option has been added to the [`msdp peer`](config_command_guide.md#configure-authority-router-routing-msdp-peer) and the [`msdp mesh-group`](config_command_guide.md#configure-authority-router-routing-msdp-mesh-group) configurations to support MD5 authentication. For more information, refer to the MSDP command documentation linked above. 
@@ -71,12 +73,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-51191 BFD metrics not cleaned up properly:** The BFDAgent holds onto the stats for peer paths; If the config is changed on a router, new stats are made but the old ones were not being deleted. The old BFD by-peer-path stats are now deleted when a VLAN configuration change is made.
 ------
-- **I95-52540 :** NEED INFO - STILL IN PROGRESS
-
+- **I95-52540 Bandwidth Metrics Issues:** Reduce resource consumption by metrics infrastructure; stats for generated services, service routes, and tenants will be hidden. 
 ------
 - **I95-52615 Set TTL multi-hop range correctly:** The TTL multi-hop field allowed a value of 0, but had no impact. The range has been corrected to 1-255, and no longer accepts a value of 0.
-------
-- **I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:** Add a "Lock Status" column to the User table as well as the User Details pane, with more details availble on hover. The `show user` command now includes two new rows, "Lock Status" and "Last Failed Login". For command details, please see [`show user lock-status`](cli_reference.md#show-user-lock-status).
 ------
 - **I95-53358 Disable/enable of LACP takes the Bond interface down:** Dynamic reconfiguration has been enhanced to support LACP enable/disable while traffic flows by removing the dedicated queue flow (for LACP) when removing a member from bond. 
 ------
@@ -96,7 +95,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-53915 Removing an X710/X722 port from SSR can cause high RX latency:** Deleting an SSR interface from an X710/722 NIC which is part of a multi-port device introduces RX latency into sibling ports until the SSR is restarted. This has been resolved by enabling the i40e “multi-driver” mode to preserve global registers that are shared across ports. 
 ------
-- **II95-53896 nodeMonitor failed to get data for show platform disk:** Some of the dynamic access for smartctl objects were not protected. A check for the object existence has been added before attempting to read it.
+- **I95-53896 nodeMonitor failed to get data for show platform disk:** Some of the dynamic access for smartctl objects were not protected. A check for the object existence has been added before attempting to read it.
 ------
 - **I95-54051 Broadcom driver causing memory corruption, leading to a system fault:** Updated the driver support for BNXT NICs.
 ------
@@ -118,11 +117,15 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-54398 ASM - Prune flag set incorrectly:** Resolved an issue with how outgoing interfaces in the mroute entry are reported. If the outgoing interface list only contains PIM SVR interfaces, the P flag was displayed incorrectly. The outgoing interface list is populated correctly, and the P flag now shows correctly.
 ------
-- **I95-54434 MistPCAP failure - inverted commands observed by the device:** In rare cases where captures are created and deleted too quickly, a delete command may be received by the device before the create command. These timing issues have been resolved.
+- **I95-54434 Mist PCAP failure - inverted commands observed by the device:** In rare cases where captures are created and deleted too quickly, a delete command may be received by the device before the create command. These timing issues have been resolved.
 ------
 - **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH nodeIdentifier so that this is accessible for admin users.
 ------
 - **WAN-1958 Mist agent crashes:** Increased internal file system limits which were preventing some services from starting correctly at boot. Limits were raised based on expected system usage.
+
+### Caveats
+
+- **I95-54780 Forwarding Utilization stats are missing:** This issue is the result of the fix in place for the `stats default retention short` setting was not being honored (I95-53875). This will be resolved in the next patch release. 
 
 ## Release 6.2.0-39
 
