@@ -13,7 +13,7 @@ As part of the security hardening and certification process, the SSR has impleme
 
 ## Packet Filtering
 
-The SSR uses Berkeley Packet Filters (BPF) to create customizable firewall filters. This filtering solution can be used to prevent packet level attacks. Packets can be filtered by any known packet field, and the order in which filters are applied can be set by the user. 
+The SSR uses Berkeley Packet Filters (BPF) to create customizable firewall filters. This filtering solution can be a key tool to prevent packet level attacks and aid with intrusion detection and prevention. Using BPF, packets on the SSR can be filtered by any known packet field, and the order in which filters are applied can be set by the user. 
 Filters are configured and applied on the receiving network-interface. 
 
 #### Configure using the GUI: 
@@ -93,11 +93,11 @@ Detailed information about Berkeley Packet Filters is outside of the scope of th
 
 ## ICMP 
 
-ICMP attributes have been updated for firewall protection. 
+Because ICMP can be an attack vector for a network or used to discover your network topology, ICMP attributes have been updated for firewall protection. 
 
 #### ICMP Type as a Session Attribute
 
-By default, the SSR does not use ICMP codes as a session attribute. However, the SSR does match ICMP error packets with the sessions that generated them, and only accepts those ICMP packets when they match an existing session. For instance, if a TCP packet generates a `Destination Unreachable`, upon receipt of the `Destination Unreachable` the SSR uses the code to interpret the packet and match it to an existing session. If a match is found, the packet is forwarded to the end host. If a match is not found, the packet is rejected.
+By default, the SSR does not use ICMP codes as a session attribute. However, the SSR does match ICMP error packets with the sessions that generated them, and only accepts those ICMP packets when they match an existing session. For instance, to protect against ICMP attacks from using a barrage of `Destination Unreachable` messages, if a TCP packet generates a `Destination Unreachable`, upon receipt of the `Destination Unreachable` the SSR uses the code to interpret the packet and match it to an existing session. If a match is found, the packet is forwarded to the end host. If a match is not found, the packet is rejected.
 
 To enable ICMP type as a session attribute:
 
@@ -120,11 +120,11 @@ Changes take effect after the configuration has been committed.
 
 #### Discard ICMP Echo Replies With No Request
 
-ICMP Echo Replies that arrive at the SSR are dropped if no corresponding request has been seen and the ICMP Aysnc Reply is set to drop, as configured above. 
+When you configure the ICMP Async Reply as `drop` (shown above), any ICMP Echo Replies that arrive at the SSR are dropped if no corresponding request has been seen. This helps to prevent DoS (Denial of Service) attacks such as an ICMP Ping flood. 
 
 ## IPv4 Option Filtering
 
-The SSR has the ability to go deeper than the basic IPv4 header options check and inspect the options to make necessary decisions whether the packets are allowed or dropped and logged.
+Attackers sometimes configure IPv4 options incorrectly, producing either incomplete or malformed fields. These malformed packets can be used to compromise hosts on the network. IPv4 Options Filtering provides a mechanism to determine what to do with network data packets based on the options field of the packets. The SSR will inspect the IPv4 header options, compare them to a user defined exclusiont list, and make necessary decisions whether the packets are allowed or dropped and logged.
 
 By default, all IPv4 packets with options are allowed. To configure the dropping of specific IPv4 options, you must first enable `drop-all`. This reveals the Drop Exclusions list, where you can define IPv4 options to exclude from the drop action. 
 
@@ -177,11 +177,11 @@ exit
 
 ### Broadcast and Multicast Source Addresses
 
-Packets with broadcast or multicast source IP and MAC addresses are now dropped by default.
+To prevent DoS attacks, packets with broadcast or multicast source IP and MAC addresses are now dropped by default. Otherwise the traffic is propogated across the entire network, flooding the network.
 
 ## Transport State Enforcement
 
-By default, the SSR checks and follows the TCP sequence numbers of all the sessions passing through, and increments the associated metrics. Setting the Transport State Enforcement field to Strict ensures any packets in the TCP stream that fall outside of the sequence number stream will be dropped. 
+This functionality sets the action on how the TCP state machine should process unexpected TCP packets. This is important because in some cases where these unexpected packets arrive, it may indicate a TCP Reset attack. By default, the SSR checks and follows the TCP sequence numbers of all the sessions passing through, and increments the associated metrics. Setting the Transport State Enforcement field to Strict ensures any packets in the TCP stream that fall outside of the sequence number stream will be dropped. 
 
 1. Under Authority, scroll to Service Policies, and select a service policy.
 2. In the Basic Information panel, click on the Transport State Enforcement drop down and select Strict.
@@ -204,7 +204,9 @@ For a detailed description of Transport State Enforcement, refer to [Transport S
 
 ## TCP Half-Open Connection Limit
 
-Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections. 
+Half-open TCP connections are those where the handshake has started but not completed. An attacker will initiate the handshake in order to take over all available TCP connections, known as a SYN Flood attack or distributed denial of service  (DDoS) attack. This prevents service to legitimate traffic and potentially bring down the network.
+
+The SSR provides the ability to configure a limit to these half-open TCP connections. 
 
 The connection limit is configured at the router level (Authority > Router), and is unlimited by default. To set a limit, enter a numerical value in the `Half-Open Connection Limit` field in the Router Basic Information panel. When configured, the SSR tracks how many half-open sessions there are based on existing TCP session state **and will deny any new TCP sessions once the limit has been reached**.
 
