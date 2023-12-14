@@ -31,13 +31,13 @@ module.exports = {
       "conductor_upgrade",
       "howto_conductor_migration",
     ],
-    "Router Installation": [  
+    "Router Installation": [
       "intro_installation_bootable_media",
       "intro_basic_router_config",
       "intro_otp_iso_install",
       "intro_install_quickstart_otpiso",
       "onboard_ssr_to_conductor",
-      "onboard_ssr_device_otp",  
+      "onboard_ssr_device_otp",
     ],
     "Image-Based Installation": [
       "intro_installation_image",
@@ -46,7 +46,8 @@ module.exports = {
       "supported_cloud_platforms",
       "intro_installation_quickstart_aws",
       "intro_installation_azure",
-      "intro_initialize_HA_conductor",
+      "install_vmware_config",
+      "intro_initialize_HA_conductor",      
     ],
     "Upgrades and Rollback": [
       "intro_upgrade_considerations",
@@ -90,8 +91,6 @@ module.exports = {
           "wan_assurance_ssr1300_quickstart",
           "wan_assurance_ssr1400_quickstart",
           "wan_assurance_ssr1500_quickstart",
-          "intro_wa_quickstart_1_networks",
-          "intro_wa_quickstart_2_apps",
           "intro_wa_quickstart_3_templates",
           "intro_wa_quickstart_4_siteassign",
           ],
@@ -129,7 +128,6 @@ module.exports = {
           "config_dscp_preservation",
           "config_vrf_learning",
           "config_audit_event",
-          "config_dhcp",
           "config_dns_proxy",
           "config_forward_error_correction",
           "config_management_over_forwarding",
@@ -160,10 +158,12 @@ module.exports = {
           "howto_tune_bfd",
           "config_session_optimization",
           "config_bgp",
+          "config_vrf_route_leaking",
           "config_ospf",
           "config_bfd",
           "config_multicast",
           "config_lacp",
+          "config_dhcp",
         ],
       },
       {
@@ -200,6 +200,7 @@ module.exports = {
         "label": "Security",
         "items": [
           "sec_adaptive_encrypt",
+          "sec_security_policy",
         ],
       },
       {
@@ -226,6 +227,7 @@ module.exports = {
         "label": "How To",
         "items": [
           "how_to_use_app_summary",
+          "how_to_local_config_override",
           "howto_extend_gui_nav",
           "howto_lte",
           "config_bfd_tunnel",
@@ -250,6 +252,7 @@ module.exports = {
           "ts_mac_uniqueness",
           "ts_packet_capture",
           "ts_serial_console_tsing",
+          "ts_session_processing",
           "ts_t1_troubleshooting",
           "ts_traceroute",
           "ts_troubleshooting_vrf",
@@ -264,10 +267,11 @@ module.exports = {
     "Best Practices": [
       "bcp_att_avpn_configuration",
       "bcp_using_128T_as_ntp_server",
-      "bcp_per-adjacency_traffic_engineering",
+      "bcp_dhcp_relay_overview",
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
+      "bcp_per-adjacency_traffic_engineering",
       "bcp_salt_pillars",
       "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",
@@ -276,6 +280,7 @@ module.exports = {
     ],
     "CLI and Element Reference": [
       "cli_reference",
+      "config_command_guide",
       "config_reference_guide",
       "cli_stats_reference",
     ],
@@ -287,7 +292,6 @@ module.exports = {
     ],
     "Plugins": [
       "plugin_intro",
-      "plugin_aws_tgw_connect",
       "plugin_bgp_community_services",
       "plugin_cloud_ha",
       "plugin_dns_app_id",
@@ -311,6 +315,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_6.2",
           "release_notes_128t_6.1",
           "release_notes_128t_6.0",
           "release_notes_128t_5.6",

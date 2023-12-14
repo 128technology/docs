@@ -37,7 +37,7 @@ LAG is currently supported on the following platforms:
 
 The following caveats have been identified:
 
-- Dynamic reconfiguration is supported for changing LACP settings on the `bond` device, however adding or removing bonds and/or bond members from the LAG is not currently supported. Any time these changes are made, you must restart the 128T service.
+- Dynamic reconfiguration is not currently supported. Changes in LAG configuration require a 128T service restart and may result in service disruption. Any changes to LAG configuration should be performed during a maintenance window.
 - High Availability has not been fully tested, and may not be fully functional. 
     - VRRP with LAG is not supported
     - Shared physical addresses are not allowed.
@@ -46,7 +46,9 @@ The following caveats have been identified:
 
 LACP is enabled by default on the `bond` device interface, and must be configured on each end of the link. The following device interface configuration shows a `bond` interface and `lacp-enabled` as true (default). The interfaces that are part of the LAG are configured as ethernet interfaces and the `parent-bond` is identified as the name of the `bond` interface. 
 
+:::important
 Please note that after any changes to the LAG configuration, you must restart the 128T service. 
+:::
 
 ### Configuration using the PCLI 
 

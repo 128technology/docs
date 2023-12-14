@@ -276,5 +276,5 @@ The following requirements apply to the scripts:
 * Some scripts such as `monitoring`, `state` and `info` are expected to produce output on `stdout`. The format of this output depends on the type of the script.
 
 ## References
-* [Kernel NIC Interface](https://doc.dpdk.org/guides/prog_guide/kernel_nic_interface.html)
+* [Kernel NIC Interface](https://doc.dpdk.org/guides-21.11/prog_guide/kernel_nic_interface.html)
 * [Linux Interpreter Shebang](https://en.wikipedia.org/wiki/Shebang_(Unix))

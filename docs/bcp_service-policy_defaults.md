@@ -48,7 +48,7 @@ best-effort          true
 max-latency          250
 ```
 
-VoIP media, on the other hand, is very sensitive to latency, loss, and jitter. The SSR software calculates "MOS" ([Mean Opinion Score](https://en.wikipedia.org/wiki/Mean_opinion_score)) for every peer path, as a composite metric derived by BFD metric data exchanged across the path. MOS is a "Quality of Experience" measurement, which assigns a single scalar value between 1 and 5 to an interactive session. Our benchmark for reasonable quality for VoIP media will be 3.6, which is the threshold below which many users will be disastisfied [[voip-mechanic]](https://www.voipmechanic.com/mos-mean-opinion-score.htm).
+VoIP media, on the other hand, is very sensitive to latency, loss, and jitter. The SSR software calculates "MOS" ([Mean Opinion Score](https://en.wikipedia.org/wiki/Mean_opinion_score)) for every peer path, as a composite metric derived by BFD metric data exchanged across the path. MOS is a "Quality of Experience" measurement, which assigns a single scalar value between 1 and 5 to an interactive session. Our benchmark for reasonable quality for VoIP media will be 3.6, which is the threshold below which many users will be disastisfied [MOS Estimation Using Quality Models](https://en.wikipedia.org/wiki/Mean_opinion_score#MOS_estimation_using_quality_models.
 
 Because voice and video calls are transient, we *strongly discourage* using `revertible-failover` as the `session-resiliency` setting. This can cause traffic to "ping pong" between two links during congestion or periods of "brown outs," degrading the overall quality of experience for the caller.
 
@@ -293,9 +293,6 @@ path-quality-filter  false
 
 [delay-limits]
 Suznjevic, M. and Saldana, J., "Delay Limits for Real-Time Services", [draft-suznjevic-tsvwg-delay-limits-00](https://www.ietf.org/archive/id/draft-suznjevic-tsvwg-delay-limits-00.txt), June 2016.
-
-[voip-mechanic]
-"Measuring MOS for VoIP Test", [MOS - Mean Opinion Score for VoIP](https://www.voipmechanic.com/mos-mean-opinion-score.htm).
 
 [RFC 4594]
 Babiarz, J., et. al., "Configuration Guidelines for DiffServ Service Classes", [RFC 4594](https://tools.ietf.org/html/rfc4594), August 2006.

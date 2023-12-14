@@ -5,7 +5,7 @@ sidebar_label: Whitebox Onboarding
 
 Use the following information to access the management port and begin the onboarding process.
 
-- [Connect to the Device](#device-default-port-identification)
+- [Connect to the Device](hdwr_whitebox_port_layout.md)
 - Adopt the Router into the Mist Cloud
 	- [GUI](#gui-adoption)
 	- [CLI](#cli-adoption)

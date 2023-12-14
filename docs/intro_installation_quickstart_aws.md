@@ -73,24 +73,22 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the AWS Console:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
-Click on the “Continue to Subscribe” button and accept the terms and conditions.
-Click on the “Continue to Configuration” button.
-In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
-Click on the "Continue to Launch" button.
-In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
-
-Answer the following 3 questions to launch the deployment of a Conductor (additional information [here](#launch-the-template)):
-* What name do you want to give it?  
-Provide it in the "Stack name" field (for example: Conductor).
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
+2. Click on the “Continue to Subscribe” button and accept the terms and conditions.
+3. Click on the “Continue to Configuration” button.
+4. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
+5. Click on the "Continue to Launch" button.
+6. In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
+7. Answer the following 3 questions to launch the deployment of a Conductor. For additional information, refer to [Launch the Template](#launch-the-template).
+* What name do you want to give it? 
+  * Enter the name in the "Stack name" field (for example: Conductor).
 * Where do you want to deploy it?
- * Select the VPC in the region.
- * Select the subnet within the VPC.
+  * Select the VPC in the region.
+  * Select the subnet within the VPC.
 * Who is going to be the administrator?
-Select the IAM user key.
-
-Click the "Next" button.
-Click on the "Create stack" button to launch the deployment.
+  * Select the IAM user key.
+8. Click the "Next" button.
+9. Click on the "Create stack" button to launch the deployment.
 
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
@@ -106,15 +104,15 @@ Be sure to change the password that conforms to your business' password requirem
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
-Click on the “Continue to Subscribe” button and accept the terms and conditions.
-Click on the “Continue to Configuration” button.
-In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
-Click on the "Continue to Launch" button.
-In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
-Copy to the clipboard the URL of the template located in the field "Amazon S3 URL".
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
+2. Click on the “Continue to Subscribe” button and accept the terms and conditions.
+3. Click on the “Continue to Configuration” button.
+4. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
+5. Click on the "Continue to Launch" button.
+6. In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
+7. Copy the URL of the template located in the field "Amazon S3 URL" to the clipboard.
 
-Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For additional information please click [here](#launch-the-template).
+Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For additional information, refer to [Launch the Template](#launch-the-template).
 
 Once the deployment completes, information is provided in the Outputs tab:
 * If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
@@ -176,26 +174,24 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the AWS Console:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
-Click on the “Continue to Subscribe” button and accept the terms and conditions.
-Click on the “Continue to Configuration” button.
-In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
-Click on the "Continue to Launch" button.
-In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
-
-Answer the following 4 questions to launch the deployment of an SSR (additional information [here](#launch-the-template)):
-* What name do you want to give it?  
-Provide it in the "Stack name" field (for example: 128TRouter).
-* Where do you want to deploy it?
- * Select the VPC in the region.
- * Select the public, private and management subnets within the VPC.
-* Which Session Smart Conductor is going to manage it?  
-Provide the IP address of the primary node of Conductor in the "Conductor Primary Control IP" field, and only if the Conductor is highly available then provide the IP address of the secondary node of Conductor in the "Conductor Secondary Control IP" field. Please check the public IP address assigned to the Session Smart Conductor deployed in the previous section.
-* Who is going to be the administrator?
-Select the IAM user key.
-
-Click the "Next" button.
-Click on the "Create stack" button to launch the deployment.
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
+2. Click on the “Continue to Subscribe” button and accept the terms and conditions.
+3. Click on the “Continue to Configuration” button.
+4. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
+5. Click on the "Continue to Launch" button.
+6. In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
+7. Answer the following 4 questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template).
+- What name do you want to give it? 
+  - Provide it in the "Stack name" field (for example: 128TRouter).
+- Where do you want to deploy it?
+  - Select the VPC in the region.
+  - Select the public, private and management subnets within the VPC.
+- Which Session Smart Conductor is going to manage it?
+  Provide the IP address of the primary node of Conductor in the "Conductor Primary Control IP" field. If the Conductor is highly available, provide the IP address of the secondary conductor node in the "Conductor Secondary Control IP" field. Please check the public IP address assigned to the Conductor deployed in the previous section.
+- Who is going to be the administrator?
+  - Select the IAM user key.
+8. Click the "Next" button.
+9. Click on the "Create stack" button to launch the deployment.
 
 ![Plans](/img/platforms_aws_deployment_complete.png)
 
@@ -207,15 +203,15 @@ Once the deployment completes, information is provided in the Outputs tab:
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
-Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
-Click on the “Continue to Subscribe” button and accept the terms and conditions.
-Click on the “Continue to Configuration” button.
-In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
-Click on the "Continue to Launch" button.
-In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
-Copy to the clipboard the URL of the template located in the field "Amazon S3 URL".
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
+2. Click on the “Continue to Subscribe” button and accept the terms and conditions.
+3. Click on the “Continue to Configuration” button.
+4. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
+5. Click on the "Continue to Launch" button.
+6. In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
+7. Copy to the clipboard the URL of the template located in the field "Amazon S3 URL".
 
-Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For additional information please click [here](#launch-the-template).
+Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For additional information please refer to [Launch the Template](#launch-the-template).
 
 Once the deployment completes, information is provided in the Outputs tab:
 * If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
@@ -235,18 +231,33 @@ The _Session Smart Router Template_ deploys an EC2 instance for the SSR with thr
 
 The following are the high level steps to configure a device interface on a SSR running in the AWS cloud.
 
-Determine the Device Interface Layout
-Configure and Assign the PCI Address Identifier to a Device Interface
-Configure the IP Addressing for every Network interface
-Configuration for every Network Interface with a Public IP Address (if a public IP address is associated to any of the network interfaces)
-Verify Connectivity
+- Disable Source / Destination Checking 
+- Determine the Device Interface Layout
+- Configure and Assign the PCI Address Identifier to a Device Interface
+- Configure the IP Addressing for every Network interface 
+- Configuration for every Network Interface with a Public IP Address (if a public IP address is associated to any of the network interfaces)
+- Verify Connectivity
+
+#### Source / Destination Check
+
+Disabling Source / Destination checking allows the SSR AWS instance to send and receive traffic when it is not the source or destination. This feature is enabled by default. Perform the following steps to disable Source / Destination checking.
+
+1. On the Instances page, select the **Launch Instances** dropdown. 
+2. Select **Networking**.
+
+![AWS Instances page](/img/AWS-bootstrap1.png)
+
+3. From the pull out menu, select **Change source/destination check**.
+4. In the Change Source / Destination Check window, select **Stop**, and **Save**.
+
+![Source/Destination Check](/img/AWS-bootstrap2.png)
 
 #### Determine the Device Interface Layout
 
 Perform the following steps to identify the correct PCI address for each network interface attached to the EC2 instance:
 
-Login via SSH to the EC2 corresponding to the SSR.
-Run the following command in Linux: `sudo dpdk-devbind.py --status`
+1. Login via SSH to the EC2 corresponding to the SSR.
+2. Run the following command in Linux: `sudo dpdk-devbind.py --status`
 
 The PCI address is the first column under **Network devices using kernel driver**. The network interfaces are listed in the order in which they are attached to the EC2 instance.
 
@@ -339,13 +350,13 @@ commit
 
 4. Confirm AWS gateways reply to ping successfully.
 
-## Annexes
+## Appendix
 
 ### Launch the Template
 
 This section describes how to fill out and launch the template via the AWS marketplace and programmatically to deploy a Session Smart Conductor and SSR.
 
-#### Session Smart Conductor
+### Session Smart Conductor
 
 This section describes the parameters to fill out the template to deploy a Session Smart Conductor as well as how to launch it via the portal and programmatically.
 
@@ -361,7 +372,7 @@ A description of the parameters of the template are listed in the following tabl
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.                                                                                                                 |
 | Admin Allowed CIDR   | It allows for restricting reachability to the control interface of the Conductor to a well known source IP address CIDR range for management purposes. It is common to set this field to 0.0.0.0/0 (accepting traffic from all source IP addresses) for now, as the source IP address/es where the Conductor will be administered from may not be known at this time. However, once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Conductor will be administered.                                                                                                                                                                                     |
 
-##### AWS Console
+### AWS Console
 
 Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
@@ -389,7 +400,7 @@ If a template of the Bring Your Own License image was used, SSH to the EC2 insta
 If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
-##### AWS CLI 
+### AWS CLI 
 
 Alternatively, it is possible to launch the template programmatically. Please adjust the content of the JSON file below to match the input of each template.
 
@@ -435,7 +446,7 @@ If a template of the Bring Your Own License image was used, SSH to the EC2 insta
 If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
-#### Session Smart Router
+### Session Smart Router
 
 This section describes the parameters to fill out the template to deploy an SSR as well as how to launch it via the portal and programmatically.
 
@@ -456,7 +467,7 @@ A description of the parameters of the template are listed in the following tabl
 | Instance size        | Size of the EC2 instance.                                                                                                                                                          |
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.                                                                                                                 |
 
-##### AWS Console
+#### AWS Console
 
 Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
@@ -482,7 +493,7 @@ If a template of the Bring Your Own License image was used, SSH to the EC2 insta
 If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
-##### AWS CLI 
+#### AWS CLI 
 
 Alternatively, it is possible to launch the template programmatically. Please adjust the content of the JSON file below to match the input of each template.
 

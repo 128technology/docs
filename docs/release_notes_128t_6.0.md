@@ -45,16 +45,11 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
-:::note
-The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
-:::
-
-
 ## Release 6.0.10-5
 
 **Release Date:** May 12, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-48862 Load balance sessions across BGP RIB Entries with multiple paths:** Resolved an issue when BGP was used to build a routing table, only the first next hop was used. All next hops are now used, and load balancing occurs over all routing protocol routes.
 ------
@@ -77,7 +72,9 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues 
 
-- **The following CVE's have been identified and addressed in this release:** I95-48445, I95-48448, I95-48643, I95-49079, I95-49445, I95-49456, I95-49745, I95-49746, I95-49747, I95-49748, I95-49912, I95-49913, I95-49914, I95-50358, I95-50359, I95-50506, I95-50508, I95-50523, I95-50535, I95-50790.
+- **The following CVE's have been identified and addressed in this release:** CVE-2021-44531, CVE-2021-44532, CVE-2021-44533, CVE-2021-44906, CVE-2022-35256, CVE-2022-21824, CVE-2022-28733, CVE-2022-2964, CVE-2022-4139, CVE-2023-22809, CVE-2023-21830, CVE-2023-21843, CVE-2022-4254, CVE-2021-25220 CVE-2022-2795, CVE-2022-38023, CVE-2022-37434, CVE-2023-0286, CVE-2023-0767, CVE-2023-0286, I95-50535, CVE-2023-23918, CVE-2023-23920.
+------
+- **The following issues have been identified during penetration testing and addressed in this release:** I95-48445, I95-48448. 
 ------
 - **I95-37833 Apply password policy more consistently:** The password policy for SSR users has been updated, and now requires passwords to have a special character in addition to previous requirements. 
 :::important
@@ -96,6 +93,8 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 ------
 - **I95-49447 Conditional BGP advertisement is not respected:** Resolved an issue that if a peer went down and came back up, the conditional advertisement was no longer respected. 
 ------
+- **I95-49456 Ensure password requirements are configured:** Password requirements are verified as configured.
+------
 - **I95-49514 Linux interfaces bounced on startup:** Resolved an issue where all Linux interfaces managed by 128T are bounced once on 128T startup.
 ------
 - **I95-49564 Reduce volume of logs during pending lookups:** The error logs during a pending lookup has been changed to a muted error log with a stat.
@@ -111,6 +110,10 @@ Please refer to [Password Policies](config_password_policies.md) for updated pas
 - **I95-49754 Waypoint re-use causing duplicate reverse flows:** Resolved a case where when the waypoint pool is nearly depleted, released waypoints were reused prematurely causing errors when installing reverse flows.
 ------
 - **I95-49791 Add audit rules to track modification of grub config files:** Added rules to log notifications in case of changes to grub configuration files.
+------
+- **I95-49912 Login banner not displayed on serial console:** The login banner is now displayed on the serial console.
+------
+- **I95-49913 Some Login/Logout events not logged in Audit Logs:** All login and logout events are now logged in the audit logs.
 ------
 - **I95-49925 GRE tunnel health-check not migrating sessions when path is down:** The GRE tunnel manager now removes all sessions before adding new ones rather than modifying the existing sessions.
 ------
@@ -212,7 +215,7 @@ and there are established flows for any of these services, a link flap triggerin
 
 **Release Date:** March 7, 2023
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-47947 Increase max CoreDump size to 4GB:** The maximum size of coredumps now defaults to 4G. This value can be configured in environment config by modifying the `maxCoredumpSize` field of the new `crashReporting` object. Any manual modifications to `coredump.conf` will be overwritten whenever the service is started. 
 
@@ -321,7 +324,7 @@ Upgrading to this release version will cause `coredump.conf` to be re-written wi
 
 **Release Date:** December 5, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-47222 Add a Cleanup boot function for brownfield conversions:** Added a function that removes all kernels and unmatched `initramfs` files, as well as removing the copies of the saved files post-conversion from their original location.
 ------
@@ -450,7 +453,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 **Release Date:** October 14, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-47795 Serial and VGA rescue boot options:** from the IBU ISO A "Maintenance Operations" submenu has been added to the image-based ISO, and VGA and serial rescue mode options along with a reboot option have been added to the menu.
 
@@ -536,7 +539,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 **Release Date:** September 12, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-35571 Enhanced Syslog:** Beginning with Version 6.0.4, the SSR can be configured to send system generated events over a secure TLS or TCP connection to a remote-logging server for analysis and storage. For more information, see [Secure Syslog Transport](config_audit_event.md#secure-syslog-transport)
 ------
@@ -590,7 +593,7 @@ For immediate resolution on the impacted releases, contact Juniper Technical Sup
 
 **Release Date:** August 15, 2022
 
-### New Features
+### Resolved Issues Requiring Configuration Changes
 
 - **I95-46387 New Service Route Type for BGP over SVR:** Added a new service route type that indicates to the Routing Agent that local service routes and BGP over SVR routes should be merged together when creating local balanced paths.
 ------

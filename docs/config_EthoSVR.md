@@ -9,6 +9,17 @@ Use the following procedures to configure an SSR network to use Ethernet over SV
 When configuring EoSVR on a STEP-enabled router, it is a best practice to clear all existing sessions so the routers begin using the STEP-based routes. This is especially important for EoSVR configurations, to prevent stuck flows and traffic from being dropped. Use the command `delete sessions service <eosvr-service-name>` to clear sessions.
 :::
 
+### Interface Redundancy on Ethernet over SVR
+
+:::important
+**Important Configuration Note for EoSVR Interface Redundancy**
+:::
+
+When configuring EOSVR for interface redundancy, it is crucial to set the `ethernet-over-svr encapsulate-all-traffic` field to `true`. Failure to enable this mode may result in continued traffic transmission to the old active interface from the switch during an interface or node failover. This may continue until the ARP times out on the switch side.
+
+Enabling the `encapsulate-all-traffic` mode ensures that the reverse traffic from the remote peer utilizes a separate session from the forward traffic. This mechanism allows the reverse flow to rectify the ARP entries in the switch and resume normal operation.
+Juniper recommends verifying `ethernet-over-svr encapsulate-all-traffic` is set to `true` to ensure seamless interface redundancy.
+
 ### Configure an Ethernet over SVR Bridge
 
 1. On the Configuration home screen, select a Router.

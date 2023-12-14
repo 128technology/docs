@@ -12,18 +12,18 @@
 | ge-1-1 | Port 1/1 | WAN 2 network interface | 0000:44:00.1 | 1000 | WAN |
 | ge-1-2 | Port 1/2 | WAN 3 network interface | 0000:44:00.2 | 1000 | WAN |
 | ge-1-3 | Port 1/3 | HA Sync network interface | 0000:44:00.3 | 1000 | HASync |
-| xe-2-0 | Port 2/0 | HA Fabric network interface | 0000:42:00.0 | 10000 | HAFabric |
-| xe-2-1 | Port 2/1 | LAN 1 network interface | 0000:42:00.1 | 10000 | LAN |
-| xe-2-2 | Port 2/2 | LAN 2 network interface | 0000:42:00.2 | 10000 | LAN |
-| xe-2-3 | Port 2/3 | LAN 3 network interface | 0000:42:00.3 | 10000 | LAN |
-| xe-3-0 | Port 3/0 | LAN 4 network interface | 0000:81:00.0 | 10000 | LAN |
-| xe-3-1 | Port 3/1 | LAN 5 network interface | 0000:81:00.1 | 10000 | LAN |
-| xe-3-2 | Port 3/2 | LAN 6 network interface | 0000:81:00.2 | 10000 | LAN |
-| xe-3-3 | Port 3/3 | LAN 7 network interface | 0000:81:00.3 | 10000 | LAN |
-| xe-4-0 | Port 4/0 | LAN 8 network interface | 0000:c1:00.0 | 10000 | LAN |
-| xe-4-1 | Port 4/1 | LAN 9 network interface | 0000:c1:00.1 | 10000 | LAN |
-| xe-4-2 | Port 4/2 | LAN 10 network interface | 0000:c1:00.2 | 10000 | LAN |
-| xe-4-3 | Port 4/3 | LAN 11 network interface | 0000:c1:00.3 | 10000 | LAN |
+| xe-2-0 | Port 2/0 | HA Fabric network interface | 0000:42:00.0 | 1/10/25GB | HAFabric |
+| xe-2-1 | Port 2/1 | LAN 1 network interface | 0000:42:00.1 | 1/10/25GB | LAN |
+| xe-2-2 | Port 2/2 | LAN 2 network interface | 0000:42:00.2 | 1/10/25GB | LAN |
+| xe-2-3 | Port 2/3 | LAN 3 network interface | 0000:42:00.3 | 1/10/25GB | LAN |
+| xe-3-0 | Port 3/0 | LAN 4 network interface | 0000:81:00.0 | 1/10/25GB | LAN |
+| xe-3-1 | Port 3/1 | LAN 5 network interface | 0000:81:00.1 | 1/10/25GB | LAN |
+| xe-3-2 | Port 3/2 | LAN 6 network interface | 0000:81:00.2 | 1/10/25GB | LAN |
+| xe-3-3 | Port 3/3 | LAN 7 network interface | 0000:81:00.3 | 1/10/25GB | LAN |
+| xe-4-0 | Port 4/0 | LAN 8 network interface | 0000:c1:00.0 | 1/10/25GB | LAN |
+| xe-4-1 | Port 4/1 | LAN 9 network interface | 0000:c1:00.1 | 1/10/25GB | LAN |
+| xe-4-2 | Port 4/2 | LAN 10 network interface | 0000:c1:00.2 | 1/10/25GB | LAN |
+| xe-4-3 | Port 4/3 | LAN 11 network interface | 0000:c1:00.3 | 1/10/25GB | LAN |
 
 Your SSR device uses Port 1/0 (`ge-1-0 `) as a default WAN port to contact Mist for zero-touch provisioning (ZTP). You will also be setting up Port 2/1 (`xe-2-1`) with a LAN network.
 

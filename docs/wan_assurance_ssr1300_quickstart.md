@@ -5,7 +5,8 @@ sidebar_label: SSR1300 Device Onboarding
 
 Congratulations on your new Session Smart Routing (SSR) WAN Edge device!
 
-Let's get it set up in the Mist cloud with WAN Assurance.
+Let's get it set up in the Mist cloud with WAN Assurance. This guide walks you through the simple steps to get a new cloud-ready Juniper Networks® SSR1300 router up and running in the Juniper Mist™ cloud portal. You can onboard a single device using your mobile phone, or one or more devices using your computer. Once onboarded, we'll walk you through the steps to create a basic configuration.
+You'll need your Juniper Mist WAN Assurance subscription and your login credentials for the Juniper Mist portal. If you have not already activated your subscriptions and set up your organization and sites, please follow the steps in [Create a Mist Account and Organization](https://www.juniper.net/documentation/us/en/quick-start/software/mist/quick-start/mist-quick-start/product-quick-start/topics/topic-map/step-1-begin.html). 
 
 ## Connect Your Device to the Cloud
 
@@ -69,4 +70,4 @@ When a device is assigned to a site and set to be managed by Mist, upon first co
 
 ## Onboarding Complete!
 
-Fantastic, your device is in your inventory! To provision your SSR device with ZTP, log into Mist and **[continue to WAN configuration.](intro_wa_quickstart_1_networks.md)**
+Fantastic, your device is in your inventory! To provision your SSR device with ZTP, log into Mist and **[configure a template](intro_wa_quickstart_3_templates.md)** for your SSR.

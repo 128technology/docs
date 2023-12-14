@@ -16,10 +16,10 @@
 | ge-1-1 | Port 1/1 | LAN 2 network interface | 0000:19:00.1 | 1000 | LAN |
 | ge-1-2 | Port 1/2 | LAN 3 network interface | 0000:19:00.2 | 1000 | LAN |
 | ge-1-3 | Port 1/3 | LAN 4 network interface | 0000:19:00.3 | 1000 | LAN |
-| xe-2-0 | Port 2/0 | LAN 5 network interface | 0000:1b:00.0 | 10000 | LAN |
-| xe-2-1 | Port 2/1 | LAN 6 network interface | 0000:1b:00.1 | 10000 | LAN |
-| xe-2-2 | Port 2/2 | LAN 7 network interface | 0000:1b:00.2 | 10000 | LAN |
-| xe-2-3 | Port 2/3 | HA Fabric network interface | 0000:1b:00.3 | 10000 | HAFabric |
+| xe-2-0 | Port 2/0 | LAN 5 network interface | 0000:1b:00.0 | 1/10/25GB | LAN |
+| xe-2-1 | Port 2/1 | LAN 6 network interface | 0000:1b:00.1 | 1/10/25GB | LAN |
+| xe-2-2 | Port 2/2 | LAN 7 network interface | 0000:1b:00.2 | 1/10/25GB | LAN |
+| xe-2-3 | Port 2/3 | HA Fabric network interface | 0000:1b:00.3 | 1/10/25GB | HAFabric |
 
 Your SSR device uses Port 0/0 (`xe-0-0 `) as a default WAN port to contact Mist for zero-touch provisioning (ZTP). You will also be setting up Port 0/3 (`xe-0-3`) with a LAN network.
 
