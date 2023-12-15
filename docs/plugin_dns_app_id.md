@@ -112,7 +112,7 @@ The `.` character bears special meaning within regular expressions, and matches 
 
 :::important
 If you configure invalid regex patterns, you will see the log message `invalid pattern for {name}, will never match!`. This means the pattern you configured is not a valid regex therefore the pattern matching will fail for the app until the configuration is fixed.
-::::
+:::
 
 ### Automatic Service Generation
 
@@ -340,6 +340,16 @@ exit
 :::warning
 The plugin must be updated to version 3.1.3 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
+
+### Release 3.3.0
+
+**Release Date:** Dec 15, 2023
+
+#### New Features and Improvements
+
+- **PLUGIN-1842** Pillar data scaling
+
+Use pillar data files for improved performance at scale.
 
 ### Release 3.2.0
 

@@ -217,6 +217,16 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 The plugin must be updated to version 3.2.1 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
+### Release 3.5.0
+
+**Release Date:** Dec 15, 2023
+
+#### New Features and Improvements
+
+- **PLUGIN-1842** Pillar data scaling
+
+Use pillar data files for improved performance at scale.
+
 ### Release 3.4.0
 
 **Release Date:** May 13, 2022
