@@ -49,7 +49,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 	* **Transport State Enforcement:** By default, the SSR checks and follows the TCP sequence numbers of all the sessions passing through, and increments the associated metrics. Setting the Transport State Enforcement field to Strict ensures any packets in the TCP stream that fall outside of the sequence number stream will be dropped.
 	* **TCP Half-open Connection Limit:** Half-open TCP connections are those where the handshake has started but not completed. The SSR provides the ability to configure a limit to these half-open TCP connections.
 ------
-- **I95-51648 Application ID Database Memory Improvements:** Internal improvements have been made reduce memory consumption of the Application Identification IP database.
+- **I95-51648 Application ID Database Memory Improvements:** Internal improvements have been made to reduce memory consumption of the Application Identification IP database.
 ------ 
 - **I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:** Add a "Lock Status" column to the User table as well as the User Details pane, with more details availble on hover. The `show user` command now includes two new rows, "Lock Status" and "Last Failed Login". For command details, please see [`show user lock-status`](cli_reference.md#show-user-lock-status).
 ------
@@ -96,8 +96,6 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-53907 SSR readvertising SA to MSDP mesh peers:** Resolved an issue where MSDP SA's received from a mesh-group peer were being re-advertised to the mesh-group. This issue has been resolved by verifying sender of the SA.
 ------
 - **I95-53915 Removing an X710/X722 port from SSR can cause high RX latency:** Deleting an SSR interface from an X710/722 NIC which is part of a multi-port device introduces RX latency into sibling ports until the SSR is restarted. This has been resolved by enabling the i40e “multi-driver” mode to preserve global registers that are shared across ports. 
-------
-- **I95-53896 nodeMonitor failed to get data for show platform disk:** Some of the dynamic access for smartctl objects were not protected. A check for the object existence has been added before attempting to read it.
 ------
 - **I95-54051 Broadcom driver causing memory corruption, leading to a system fault:** Updated the driver support for BNXT NICs.
 ------
