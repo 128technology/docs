@@ -5,7 +5,7 @@ sidebar_label: Configuration Command Reference Guide
 
 ## `configure authority`
 
-Authority configuration is the top-most level in the SSR configuration hierarchy. 
+Authority configuration is the top-most level in the SSR configuration hierarchy.
 
 ##### Subcommands
 
@@ -13,21 +13,23 @@ Authority configuration is the top-most level in the SSR configuration hierarchy
 | ------- | ----------- |
 | [`access-management`](#configure-authority-access-management) | Role Based Access Control (RBAC) configuration. |
 | [`asset-connection-resiliency`](#configure-authority-asset-connection-resiliency) | Configure Asset Connection Resiliency |
-| [`backwards-compatible-vrf-bgp-tenants`](#configure-authority-backwards-compatible-vrf-bgp-tenants) | When generating tenant names for VRF BGP over SVR, do not use leading or trailing underscores. This enables backwards compatibility with router versions earlier than 5.1.3 |
-| [`bgp-service-generation`](#configure-authority-bgp-service-generation) | Configure BGP Service Generation |
-| [`cli-messages`](#configure-authority-cli-messages) | Configure CLI Messages |
+| [`backwards-compatible-vrf-bgp-tenants`](#configure-authority-backwards-compatible-vrf-bgp-tenants) | When generating tenant names for VRF BGP over SVR, do not use leading or trailing underscores. This enables backwards compatibility with router versions smaller than 5.1.3 |
+| [`bgp-service-generation`](#configure-authority-bgp-service-generation) | Configure Bgp Service Generation |
+| [`cli-messages`](#configure-authority-cli-messages) | Configure Cli Messages |
 | [`client-certificate`](#configure-authority-client-certificate) | The client-certificate configuration contains client certificate content. |
 | `clone` | Clone a list item |
 | [`conductor-address`](#configure-authority-conductor-address) | IP address or FQDN of the conductor |
 | [`currency`](#configure-authority-currency) | Local monetary unit. |
 | `delete` | Delete configuration data |
 | [`district`](#configure-authority-district) | Districts in the authority. |
-| [`dscp-map`](#configure-authority-dscp-map) | Configure DSCP Map |
+| [`dscp-map`](#configure-authority-dscp-map) | Configure Dscp Map |
 | [`dynamic-hostname`](#configure-authority-dynamic-hostname) | Hostname format for interfaces with dynamic addresses. It is a template with subsitution variables used to generate a unique hostname corresponding to Network Interfaces that have dynamically learned IP addresses. Uses the following substitution variables: {interface-id} for Network Interface Global Identifier {router-name} for Router Name {authority-name} for Authority Name For example, &#x27;interface-{interface-id}.{router-name}.{authority-name}&#x27;. |
 | [`fib-service-match`](#configure-authority-fib-service-match) | When creating FIB entries by matching route updates to service addresses, consider the specified service addresses. |
 | [`forward-error-correction-profile`](#configure-authority-forward-error-correction-profile) | A profile for Forward Error Correection parameters, describing how often to send parity packets. |
+| [`icmp-control`](#configure-authority-icmp-control) | Settings for ICMP packet handling |
 | [`idp-profile`](#configure-authority-idp-profile) | User defined IDP profiles. |
 | [`ipfix-collector`](#configure-authority-ipfix-collector) | Configuration for IPFIX record export. |
+| [`ipv4-option-filter`](#configure-authority-ipv4-option-filter) | Configure Ipv 4 Option Filter |
 | [`ldap-server`](#configure-authority-ldap-server) | LDAP Servers against which to authenticate user credentials. |
 | [`management-service-generation`](#configure-authority-management-service-generation) | Configure Management Service Generation |
 | [`metrics-profile`](#configure-authority-metrics-profile) | A collection of metrics |
@@ -989,6 +991,52 @@ configure authority forward-error-correction-profile ratio [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
+## `configure authority icmp-control`
+
+Settings for ICMP packet handling
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| `delete` | Delete configuration data |
+| [`icmp-async-reply`](#configure-authority-icmp-control-icmp-async-reply) | Whether to allow ICMP replies to be forwarded without corresponding requests. |
+| [`icmp-session-match`](#configure-authority-icmp-control-icmp-session-match) | How to differentiate ICMP sessions. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;icmp-control&#x27; |
+
+## `configure authority icmp-control icmp-async-reply`
+
+Whether to allow ICMP replies to be forwarded without corresponding requests.
+
+#### Usage
+
+```
+configure authority icmp-control icmp-async-reply [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+## `configure authority icmp-control icmp-session-match`
+
+How to differentiate ICMP sessions.
+
+#### Usage
+
+```
+configure authority icmp-control icmp-session-match [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
 ## `configure authority idp-profile`
 
 User defined IDP profiles.
@@ -1105,6 +1153,7 @@ The options to use for matching.
 | `delete` | Delete configuration data |
 | [`destination-address`](#configure-authority-idp-profile-rule-match-destination-address) | Destination address prefix to match in the rule. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`severities`](#configure-authority-idp-profile-rule-match-severities) | List of severity to match in the rule. |
 | [`severity`](#configure-authority-idp-profile-rule-match-severity) | Match vulnerabilities only with severity mentioned or above. |
 | `show` | Show configuration data for &#x27;match&#x27; |
 | [`vulnerability`](#configure-authority-idp-profile-rule-match-vulnerability) | List of custom vulnerabilities to match in the rule. |
@@ -1140,6 +1189,22 @@ configure authority idp-profile rule match destination-address [<ip-prefix>]
 | name | description |
 | ---- | ----------- |
 | ip-prefix | Value to add to this list |
+
+## `configure authority idp-profile rule match severities`
+
+List of severity to match in the rule.
+
+#### Usage
+
+```
+configure authority idp-profile rule match severities [<idp-severity>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| idp-severity | Value to add to this list |
 
 ## `configure authority idp-profile rule match severity`
 
@@ -1419,6 +1484,52 @@ configure authority ipfix-collector tenant [<tenant-ref>]
 | name | description |
 | ---- | ----------- |
 | tenant-ref | Value to add to this list |
+
+## `configure authority ipv4-option-filter`
+
+Configure Ipv 4 Option Filter
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`action`](#configure-authority-ipv4-option-filter-action) | How packets containing option headers are treated when being processed. |
+| `delete` | Delete configuration data |
+| [`drop-exclusion`](#configure-authority-ipv4-option-filter-drop-exclusion) | Option headers that will not cause the packet to be dropped when present. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;ipv4-option-filter&#x27; |
+
+## `configure authority ipv4-option-filter action`
+
+How packets containing option headers are treated when being processed.
+
+#### Usage
+
+```
+configure authority ipv4-option-filter action [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+## `configure authority ipv4-option-filter drop-exclusion`
+
+Option headers that will not cause the packet to be dropped when present.
+
+#### Usage
+
+```
+configure authority ipv4-option-filter drop-exclusion [<uint8>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| uint8 | Value to add to this list |
 
 ## `configure authority ldap-server`
 
@@ -2492,6 +2603,7 @@ configure authority router <name>
 | [`district-settings`](#configure-authority-router-district-settings) | Per-district settings for the router. |
 | [`dns-config`](#configure-authority-router-dns-config) | Configure Dns Config |
 | [`entitlement`](#configure-authority-router-entitlement) | Project configuration for entitlement reporting. |
+| [`half-open-connection-limit`](#configure-authority-router-half-open-connection-limit) | A limit on half-open TCP sessions. |
 | [`icmp-probe-profile`](#configure-authority-router-icmp-probe-profile) | Profile for active ICMP probes for reachability-detection enforcement |
 | [`idp`](#configure-authority-router-idp) | Advanced IDP configuration. |
 | [`inter-node-security`](#configure-authority-router-inter-node-security) | The name of the security policy used for inter node communication between router interfaces |
@@ -2555,9 +2667,11 @@ Configure Application Identification
 | [`max-capacity`](#configure-authority-router-application-identification-max-capacity) | The maximum capacity for resolved next-hops under a client |
 | [`mode`](#configure-authority-router-application-identification-mode) | Application learning modes. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| [`per-app-metrics`](#configure-authority-router-application-identification-per-app-metrics) | Enable per app classification metrics |
 | `show` | Show configuration data for &#x27;application-identification&#x27; |
 | [`summary-retention`](#configure-authority-router-application-identification-summary-retention) | Configure Summary Retention |
 | [`summary-tracking`](#configure-authority-router-application-identification-summary-tracking) | Enable session stats tracking by applications |
+| [`use-application-director-in-memory-db`](#configure-authority-router-application-identification-use-application-director-in-memory-db) | Use in-memory db |
 | [`web-filtering`](#configure-authority-router-application-identification-web-filtering) | Enhanced application identification with URL based filtering |
 | [`write-interval`](#configure-authority-router-application-identification-write-interval) | Interval to define how often analytics are calculated |
 
@@ -2706,6 +2820,22 @@ configure authority router application-identification mode [<enumeration>]
 | ---- | ----------- |
 | enumeration | Value to add to this list |
 
+## `configure authority router application-identification per-app-metrics`
+
+Enable per app classification metrics
+
+#### Usage
+
+```
+configure authority router application-identification per-app-metrics [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
 ## `configure authority router application-identification summary-retention`
 
 Configure Summary Retention
@@ -2760,6 +2890,22 @@ Enable session stats tracking by applications
 
 ```
 configure authority router application-identification summary-tracking [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
+
+## `configure authority router application-identification use-application-director-in-memory-db`
+
+Use in-memory db
+
+#### Usage
+
+```
+configure authority router application-identification use-application-director-in-memory-db [<boolean>]
 ```
 
 ##### Positional Arguments
@@ -3366,7 +3512,7 @@ configure authority router dns-config move address [force] <value> <position> [<
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router entitlement`
@@ -3435,6 +3581,22 @@ configure authority router entitlement max-bandwidth [<uint64>]
 #### Description
 
 Units: bits/second
+
+## `configure authority router half-open-connection-limit`
+
+A limit on half-open TCP sessions.
+
+#### Usage
+
+```
+configure authority router half-open-connection-limit [<union>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| union | The value to set for this field |
 
 ## `configure authority router icmp-probe-profile`
 
@@ -3990,7 +4152,7 @@ configure authority router nat-pool move address-pool <address> <position> [<rel
 | name | description |
 | ---- | ----------- |
 | address | IP Prefix for the pool of NAT ports. |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to-address | Key of item before or after which to move |
 
 ## `configure authority router nat-pool name`
@@ -4308,6 +4470,7 @@ Link Layer Description Protocol settings
 | ------- | ----------- |
 | [`advertisement-interval`](#configure-authority-router-node-device-interface-lldp-advertisement-interval) | The frequency of sending LLDP advertisements. |
 | `delete` | Delete configuration data |
+| [`enabled`](#configure-authority-router-node-device-interface-lldp-enabled) | Whether or not LLDP sending and receiving is enabled on this device. |
 | [`hold-multiplier`](#configure-authority-router-node-device-interface-lldp-hold-multiplier) | The multiplier to apply to the advertisement-interval when setting the LLDP TTL. |
 | [`mode`](#configure-authority-router-node-device-interface-lldp-mode) | The mode in which LLDP operates on the interface |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
@@ -4332,6 +4495,22 @@ configure authority router node device-interface lldp advertisement-interval [<u
 #### Description
 
 Units: seconds
+
+## `configure authority router node device-interface lldp enabled`
+
+Whether or not LLDP sending and receiving is enabled on this device.
+
+#### Usage
+
+```
+configure authority router node device-interface lldp enabled [<boolean>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| boolean | The value to set for this field |
 
 ## `configure authority router node device-interface lldp hold-multiplier`
 
@@ -4364,6 +4543,10 @@ configure authority router node device-interface lldp mode [<enumeration>]
 | name | description |
 | ---- | ----------- |
 | enumeration | The value to set for this field |
+
+#### Description
+
+Warning: &#x27;mode&#x27; is deprecated and will be removed in a future software version
 
 ## `configure authority router node device-interface load-balancing`
 
@@ -4586,6 +4769,7 @@ configure authority router node device-interface network-interface <name>
 | [`egress-source-nat-pool`](#configure-authority-router-node-device-interface-network-interface-egress-source-nat-pool) | Indicates whether source address and port translation (NAPT) is performed for flows egressing the interface to the final destination. |
 | [`enforced-mss`](#configure-authority-router-node-device-interface-network-interface-enforced-mss) | Maximum allowed value for maximum segment size (MSS) on this interface. |
 | [`ethernet-over-svr`](#configure-authority-router-node-device-interface-network-interface-ethernet-over-svr) | L2 Bridge this network interface is assigned to. |
+| [`filter-rule`](#configure-authority-router-node-device-interface-network-interface-filter-rule) | A rule for dropping packets. |
 | [`global-id`](#configure-authority-router-node-device-interface-network-interface-global-id) | Global Interface Id (GIID) used in next-hop egress interface for routing data. All instances of a redundant interface will have the same GIID. |
 | [`host-service`](#configure-authority-router-node-device-interface-network-interface-host-service) | The host-service configuration is a service hosted by a router node. |
 | [`hostname`](#configure-authority-router-node-device-interface-network-interface-hostname) | Hostname for the interface. This is an optional fully-qualified domain name (FQDN). |
@@ -4905,7 +5089,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool custom quantity`
@@ -5025,7 +5209,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool move ntp-server`
@@ -5049,7 +5233,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool move pop-server`
@@ -5073,7 +5257,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool move router`
@@ -5097,7 +5281,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool move smtp-server`
@@ -5121,7 +5305,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool ntp-server`
@@ -5394,7 +5578,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment custom quantity`
@@ -5530,7 +5714,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move ntp-server`
@@ -5554,7 +5738,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move pop-server`
@@ -5578,7 +5762,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move router`
@@ -5602,7 +5786,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment move smtp-server`
@@ -5626,7 +5810,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment ntp-server`
@@ -5884,7 +6068,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-identifying-vendor-specific-information quantity`
@@ -6018,7 +6202,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool static-assignment vendor-specific-information quantity`
@@ -6244,7 +6428,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-identifying-vendor-specific-information quantity`
@@ -6378,7 +6562,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service address-pool vendor-specific-information quantity`
@@ -6412,22 +6596,6 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | string | Value to add to this list |
-
-## `configure authority router node device-interface network-interface address host-service authoritative`
-
-Whether this is the authoritative DHCP server in the network. If true, server will respond to requests with NAK where appropriate according to RFC 2131
-
-#### Usage
-
-```
-configure authority router node device-interface network-interface address host-service authoritative [<boolean>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| boolean | The value to set for this field |
 
 ## `configure authority router node device-interface network-interface address host-service authoritative`
 
@@ -6735,7 +6903,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment custom quantity`
@@ -6871,7 +7039,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment move ntp-server`
@@ -6895,7 +7063,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment move pop-server`
@@ -6919,7 +7087,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment move router`
@@ -6943,7 +7111,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment move smtp-server`
@@ -6967,7 +7135,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment ntp-server`
@@ -7225,7 +7393,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-identifying-vendor-specific-information quantity`
@@ -7359,7 +7527,7 @@ configure authority router node device-interface network-interface address host-
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router node device-interface network-interface address host-service static-assignment vendor-specific-information quantity`
@@ -9346,6 +9514,81 @@ configure authority router node device-interface network-interface ethernet-over
 | ---- | ----------- |
 | leafref | The value to set for this field |
 
+## `configure authority router node device-interface network-interface filter-rule`
+
+A rule for dropping packets.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface filter-rule <name>
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | A unique name to identify this rule. |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`action`](#configure-authority-router-node-device-interface-network-interface-filter-rule-action) | Action to be taken when a packet matches the filter rule. |
+| [`bpf`](#configure-authority-router-node-device-interface-network-interface-filter-rule-bpf) | Berkeley Packet Filter to be applied as a rule |
+| `delete` | Delete configuration data |
+| [`name`](#configure-authority-router-node-device-interface-network-interface-filter-rule-name) | A unique name to identify this rule. |
+| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
+| `show` | Show configuration data for &#x27;filter-rule&#x27; |
+
+## `configure authority router node device-interface network-interface filter-rule action`
+
+Action to be taken when a packet matches the filter rule.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface filter-rule action [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
+## `configure authority router node device-interface network-interface filter-rule bpf`
+
+Berkeley Packet Filter to be applied as a rule
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface filter-rule bpf [<string>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| string | The value to set for this field |
+
+## `configure authority router node device-interface network-interface filter-rule name`
+
+A unique name to identify this rule.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface filter-rule name [<name-id>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name-id | The value to set for this field |
+
 ## `configure authority router node device-interface network-interface global-id`
 
 Global Interface Id (GIID) used in next-hop egress interface for routing data. All instances of a redundant interface will have the same GIID.
@@ -9783,6 +10026,24 @@ configure authority router node device-interface network-interface management-ve
 | ---- | ----------- |
 | uint32 | The value to set for this field |
 
+## `configure authority router node device-interface network-interface move filter-rule`
+
+A rule for dropping packets.
+
+#### Usage
+
+```
+configure authority router node device-interface network-interface move filter-rule <name> <position> [<relative-to-name>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | A unique name to identify this rule. |
+| position | first \| last \| before \| after |
+| relative-to-name | Key of item before or after which to move |
+
 ## `configure authority router node device-interface network-interface move neighborhood`
 
 The neighborhoods to which this interface belongs.
@@ -9798,7 +10059,7 @@ configure authority router node device-interface network-interface move neighbor
 | name | description |
 | ---- | ----------- |
 | name | The neighborhood to which this interface belongs. |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to-name | Key of item before or after which to move |
 
 ## `configure authority router node device-interface network-interface mtu`
@@ -12235,185 +12496,6 @@ configure authority router node name [<reserved-name-id>]
 #### Description
 
 Warning: a restart is required if name is created or deleted
-
-## `configure authority router node port-forwarding`
-
-Configuration for establishing local port-forwarding to remote server.
-
-#### Usage
-
-```
-configure authority router node port-forwarding <local-address> <local-port> <local-interface>
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| local-address | The local address to forward from |
-| local-port | The local port to forward from |
-| local-interface | The local interface to forward from |
-
-##### Subcommands
-
-| command | description |
-| ------- | ----------- |
-| `delete` | Delete configuration data |
-| [`local-address`](#configure-authority-router-node-port-forwarding-local-address) | The local address to forward from |
-| [`local-interface`](#configure-authority-router-node-port-forwarding-local-interface) | The local interface to forward from |
-| [`local-port`](#configure-authority-router-node-port-forwarding-local-port) | The local port to forward from |
-| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`remote-host`](#configure-authority-router-node-port-forwarding-remote-host) | The remote host to connect to from server |
-| [`remote-interface`](#configure-authority-router-node-port-forwarding-remote-interface) | The remote interface to connect via on server |
-| [`remote-port`](#configure-authority-router-node-port-forwarding-remote-port) | The remote port to connect to from server |
-| [`server-address`](#configure-authority-router-node-port-forwarding-server-address) | The server at the host address |
-| [`server-destination`](#configure-authority-router-node-port-forwarding-server-destination) | The server at known destination |
-| [`server-port`](#configure-authority-router-node-port-forwarding-server-port) | The port to connect to on the server |
-| `show` | Show configuration data for &#x27;port-forwarding&#x27; |
-
-## `configure authority router node port-forwarding local-address`
-
-The local address to forward from
-
-#### Usage
-
-```
-configure authority router node port-forwarding local-address [<ip-address>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| ip-address | The value to set for this field |
-
-## `configure authority router node port-forwarding local-interface`
-
-The local interface to forward from
-
-#### Usage
-
-```
-configure authority router node port-forwarding local-interface [<device-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| device-name | The value to set for this field |
-
-## `configure authority router node port-forwarding local-port`
-
-The local port to forward from
-
-#### Usage
-
-```
-configure authority router node port-forwarding local-port [<l4-port>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| l4-port | The value to set for this field |
-
-## `configure authority router node port-forwarding remote-host`
-
-The remote host to connect to from server
-
-#### Usage
-
-```
-configure authority router node port-forwarding remote-host [<host>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| host | The value to set for this field |
-
-## `configure authority router node port-forwarding remote-interface`
-
-The remote interface to connect via on server
-
-#### Usage
-
-```
-configure authority router node port-forwarding remote-interface [<device-name>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| device-name | The value to set for this field |
-
-## `configure authority router node port-forwarding remote-port`
-
-The remote port to connect to from server
-
-#### Usage
-
-```
-configure authority router node port-forwarding remote-port [<l4-port>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| l4-port | The value to set for this field |
-
-## `configure authority router node port-forwarding server-address`
-
-The server at the host address
-
-#### Usage
-
-```
-configure authority router node port-forwarding server-address [<host>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| host | The value to set for this field |
-
-## `configure authority router node port-forwarding server-destination`
-
-The server at known destination
-
-#### Usage
-
-```
-configure authority router node port-forwarding server-destination [<enumeration>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| enumeration | The value to set for this field |
-
-## `configure authority router node port-forwarding server-port`
-
-The port to connect to on the server
-
-#### Usage
-
-```
-configure authority router node port-forwarding server-port [<l4-port>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| l4-port | The value to set for this field |
 
 ## `configure authority router node port-forwarding`
 
@@ -15068,156 +15150,6 @@ configure authority router routing igmp interface version [<uint8>]
 | ---- | ----------- |
 | uint8 | The value to set for this field |
 
-## `configure authority router routing igmp`
-
-IGMP configuration
-
-##### Subcommands
-
-| command | description |
-| ------- | ----------- |
-| `clone` | Clone a list item |
-| `delete` | Delete configuration data |
-| [`interface`](#configure-authority-router-routing-igmp-interface) | List of IGMP interfaces |
-| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| `show` | Show configuration data for &#x27;igmp&#x27; |
-
-## `configure authority router routing igmp interface`
-
-List of IGMP interfaces
-
-#### Usage
-
-```
-configure authority router routing igmp interface <node> <interface>
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| node | Interface node name |
-| interface | Network interface name |
-
-##### Subcommands
-
-| command | description |
-| ------- | ----------- |
-| `clone` | Clone a list item |
-| `delete` | Delete configuration data |
-| [`interface`](#configure-authority-router-routing-igmp-interface-interface) | Network interface name |
-| [`join`](#configure-authority-router-routing-igmp-interface-join) | List of Groups to join |
-| [`node`](#configure-authority-router-routing-igmp-interface-node) | Interface node name |
-| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| `show` | Show configuration data for &#x27;interface&#x27; |
-| [`version`](#configure-authority-router-routing-igmp-interface-version) | IGMP Version |
-
-## `configure authority router routing igmp interface interface`
-
-Network interface name
-
-#### Usage
-
-```
-configure authority router routing igmp interface interface [<leafref>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| leafref | The value to set for this field |
-
-## `configure authority router routing igmp interface join`
-
-List of Groups to join
-
-#### Usage
-
-```
-configure authority router routing igmp interface join <group>
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| group | IPv4 address of the Group to Join |
-
-##### Subcommands
-
-| command | description |
-| ------- | ----------- |
-| `delete` | Delete configuration data |
-| [`group`](#configure-authority-router-routing-igmp-interface-join-group) | IPv4 address of the Group to Join |
-| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| `show` | Show configuration data for &#x27;join&#x27; |
-| [`source`](#configure-authority-router-routing-igmp-interface-join-source) | IPv4 address of the Source to Join |
-
-## `configure authority router routing igmp interface join group`
-
-IPv4 address of the Group to Join
-
-#### Usage
-
-```
-configure authority router routing igmp interface join group [<multicast-ipv4-address>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| multicast-ipv4-address | The value to set for this field |
-
-## `configure authority router routing igmp interface join source`
-
-IPv4 address of the Source to Join
-
-#### Usage
-
-```
-configure authority router routing igmp interface join source [<unicast-ipv4-address>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| unicast-ipv4-address | The value to set for this field |
-
-## `configure authority router routing igmp interface node`
-
-Interface node name
-
-#### Usage
-
-```
-configure authority router routing igmp interface node [<leafref>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| leafref | The value to set for this field |
-
-## `configure authority router routing igmp interface version`
-
-IGMP Version
-
-#### Usage
-
-```
-configure authority router routing igmp interface version [<uint8>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| uint8 | The value to set for this field |
-
 ## `configure authority router routing interface`
 
 Internal loopback interface used for routing protocols
@@ -15370,12 +15302,29 @@ configure authority router routing msdp mesh-group <name>
 
 | command | description |
 | ------- | ----------- |
+| [`auth-password`](#configure-authority-router-routing-msdp-mesh-group-auth-password) | Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups. |
 | `delete` | Delete configuration data |
 | [`member`](#configure-authority-router-routing-msdp-mesh-group-member) | IPv4 address of the Mesh-group member |
 | [`name`](#configure-authority-router-routing-msdp-mesh-group-name) | Name of the Mesh-Group |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;mesh-group&#x27; |
 | [`source`](#configure-authority-router-routing-msdp-mesh-group-source) | Source Address for the mesh-group |
+
+## `configure authority router routing msdp mesh-group auth-password`
+
+Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups.
+
+#### Usage
+
+```
+configure authority router routing msdp mesh-group auth-password [<password>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| password | The value to set for this field |
 
 ## `configure authority router routing msdp mesh-group member`
 
@@ -15446,6 +15395,7 @@ configure authority router routing msdp peer <address>
 | command | description |
 | ------- | ----------- |
 | [`address`](#configure-authority-router-routing-msdp-peer-address) | IPv4 address of the Peer |
+| [`auth-password`](#configure-authority-router-routing-msdp-peer-auth-password) | Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups. |
 | `delete` | Delete configuration data |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;peer&#x27; |
@@ -15466,6 +15416,22 @@ configure authority router routing msdp peer address [<unicast-ipv4-address>]
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
+
+## `configure authority router routing msdp peer auth-password`
+
+Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups.
+
+#### Usage
+
+```
+configure authority router routing msdp peer auth-password [<password>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| password | The value to set for this field |
 
 ## `configure authority router routing msdp peer source`
 
@@ -15514,6 +15480,7 @@ configure authority router routing ospf <instance>
 | [`router-id`](#configure-authority-router-routing-ospf-router-id) | Defined in RFC 2328. A 32-bit number that uniquely identifies the router |
 | `show` | Show configuration data for &#x27;ospf&#x27; |
 | [`timers`](#configure-authority-router-routing-ospf-timers) | OSPF Timers |
+| [`version`](#configure-authority-router-routing-ospf-version) | OSPF version |
 
 ## `configure authority router routing ospf advertise-default`
 
@@ -16168,14 +16135,14 @@ Summarization prefix
 #### Usage
 
 ```
-configure authority router routing ospf area summary-range prefix [<ipv4-prefix>]
+configure authority router routing ospf area summary-range prefix [<ip-prefix>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| ipv4-prefix | The value to set for this field |
+| ip-prefix | The value to set for this field |
 
 ## `configure authority router routing ospf area type`
 
@@ -16468,6 +16435,22 @@ configure authority router routing ospf timers spf maximum-hold-time [<uint32>]
 
 Units: milliseconds
 
+## `configure authority router routing ospf version`
+
+OSPF version
+
+#### Usage
+
+```
+configure authority router routing ospf version [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
 ## `configure authority router routing pim`
 
 PIM configuration
@@ -16725,17 +16708,7 @@ configure authority router routing routing-protocol address-family afi-safi [<id
 
 | name | description |
 | ---- | ----------- |
-| afi-safi | Address family type |
-
-`identityref`
-A value as defined below:
-
-| name | description |
-| ---- | ----------- |
-| ipv4-unicast | IPv4 unicast (AFI,SAFI = 1,1) |
-| ipv6-unicast | IPv6 unicast (AFI,SAFI = 2,1) |
-| ipv4-vpn | IPv4 vpn (AFI,SAFI = 1,128) |
-| ipv6-vpn | IPv6 vpn (AFI,SAFI = 2,128) |
+| identityref | The value to set for this field |
 
 ## `configure authority router routing routing-protocol address-family aggregate-address`
 
@@ -17541,17 +17514,7 @@ configure authority router routing routing-protocol neighbor address-family afi-
 
 | name | description |
 | ---- | ----------- |
-| afi-safi | Address family type |
-
-`identityref`
-A value as defined below:
-
-| name | description |
-| ---- | ----------- |
-| ipv4-unicast | IPv4 unicast (AFI,SAFI = 1,1) |
-| ipv6-unicast | IPv6 unicast (AFI,SAFI = 2,1) |
-| ipv4-vpn | IPv4 vpn (AFI,SAFI = 1,128) |
-| ipv6-vpn | IPv6 vpn (AFI,SAFI = 2,128) |
+| identityref | The value to set for this field |
 
 ## `configure authority router routing routing-protocol neighbor address-family as-path-options`
 
@@ -19108,12 +19071,29 @@ configure authority router routing vrf msdp mesh-group <name>
 
 | command | description |
 | ------- | ----------- |
+| [`auth-password`](#configure-authority-router-routing-vrf-msdp-mesh-group-auth-password) | Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups. |
 | `delete` | Delete configuration data |
 | [`member`](#configure-authority-router-routing-vrf-msdp-mesh-group-member) | IPv4 address of the Mesh-group member |
 | [`name`](#configure-authority-router-routing-vrf-msdp-mesh-group-name) | Name of the Mesh-Group |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;mesh-group&#x27; |
 | [`source`](#configure-authority-router-routing-vrf-msdp-mesh-group-source) | Source Address for the mesh-group |
+
+## `configure authority router routing vrf msdp mesh-group auth-password`
+
+Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups.
+
+#### Usage
+
+```
+configure authority router routing vrf msdp mesh-group auth-password [<password>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| password | The value to set for this field |
 
 ## `configure authority router routing vrf msdp mesh-group member`
 
@@ -19184,6 +19164,7 @@ configure authority router routing vrf msdp peer <address>
 | command | description |
 | ------- | ----------- |
 | [`address`](#configure-authority-router-routing-vrf-msdp-peer-address) | IPv4 address of the Peer |
+| [`auth-password`](#configure-authority-router-routing-vrf-msdp-peer-auth-password) | Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups. |
 | `delete` | Delete configuration data |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
 | `show` | Show configuration data for &#x27;peer&#x27; |
@@ -19204,6 +19185,22 @@ configure authority router routing vrf msdp peer address [<unicast-ipv4-address>
 | name | description |
 | ---- | ----------- |
 | unicast-ipv4-address | The value to set for this field |
+
+## `configure authority router routing vrf msdp peer auth-password`
+
+Configures an MD5 authentication password for use with MSDP peers and Mesh-Groups.
+
+#### Usage
+
+```
+configure authority router routing vrf msdp peer auth-password [<password>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| password | The value to set for this field |
 
 ## `configure authority router routing vrf msdp peer source`
 
@@ -19268,6 +19265,7 @@ configure authority router routing vrf ospf <instance>
 | [`router-id`](#configure-authority-router-routing-vrf-ospf-router-id) | Defined in RFC 2328. A 32-bit number that uniquely identifies the router |
 | `show` | Show configuration data for &#x27;ospf&#x27; |
 | [`timers`](#configure-authority-router-routing-vrf-ospf-timers) | OSPF Timers |
+| [`version`](#configure-authority-router-routing-vrf-ospf-version) | OSPF version |
 
 ## `configure authority router routing vrf ospf advertise-default`
 
@@ -19922,14 +19920,14 @@ Summarization prefix
 #### Usage
 
 ```
-configure authority router routing vrf ospf area summary-range prefix [<ipv4-prefix>]
+configure authority router routing vrf ospf area summary-range prefix [<ip-prefix>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| ipv4-prefix | The value to set for this field |
+| ip-prefix | The value to set for this field |
 
 ## `configure authority router routing vrf ospf area type`
 
@@ -20222,6 +20220,22 @@ configure authority router routing vrf ospf timers spf maximum-hold-time [<uint3
 
 Units: milliseconds
 
+## `configure authority router routing vrf ospf version`
+
+OSPF version
+
+#### Usage
+
+```
+configure authority router routing vrf ospf version [<enumeration>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| enumeration | The value to set for this field |
+
 ## `configure authority router routing vrf pim`
 
 PIM VRF configuration
@@ -20301,137 +20315,6 @@ configure authority router routing vrf pim interface hello-interval [<uint8>]
 #### Description
 
 Units: seconds
-
-## `configure authority router routing vrf pim interface interface`
-
-Network interface name
-
-#### Usage
-
-```
-configure authority router routing vrf pim interface interface [<leafref>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| leafref | The value to set for this field |
-
-## `configure authority router routing vrf pim interface node`
-
-Interface node name
-
-#### Usage
-
-```
-configure authority router routing vrf pim interface node [<leafref>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| leafref | The value to set for this field |
-
-## `configure authority router routing vrf pim rp`
-
-PIM RP Configuration
-
-#### Usage
-
-```
-configure authority router routing vrf pim rp <group-range>
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| group-range | Multicast Group address range for this RP |
-
-##### Subcommands
-
-| command | description |
-| ------- | ----------- |
-| [`address`](#configure-authority-router-routing-vrf-pim-rp-address) | IPv4 address of the RP |
-| `delete` | Delete configuration data |
-| [`group-range`](#configure-authority-router-routing-vrf-pim-rp-group-range) | Multicast Group address range for this RP |
-| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| `show` | Show configuration data for &#x27;rp&#x27; |
-
-## `configure authority router routing vrf pim rp address`
-
-IPv4 address of the RP
-
-#### Usage
-
-```
-configure authority router routing vrf pim rp address [<unicast-ipv4-address>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| unicast-ipv4-address | The value to set for this field |
-
-## `configure authority router routing vrf pim rp group-range`
-
-Multicast Group address range for this RP
-
-#### Usage
-
-```
-configure authority router routing vrf pim rp group-range [<multicast-ipv4-prefix>]
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| multicast-ipv4-prefix | The value to set for this field |
-
-## `configure authority router routing vrf pim`
-
-PIM VRF configuration
-
-##### Subcommands
-
-| command | description |
-| ------- | ----------- |
-| `clone` | Clone a list item |
-| `delete` | Delete configuration data |
-| [`interface`](#configure-authority-router-routing-vrf-pim-interface) | List of PIM interfaces in the VRF |
-| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`rp`](#configure-authority-router-routing-vrf-pim-rp) | PIM RP Configuration |
-| `show` | Show configuration data for &#x27;pim&#x27; |
-
-## `configure authority router routing vrf pim interface`
-
-List of PIM interfaces in the VRF
-
-#### Usage
-
-```
-configure authority router routing vrf pim interface <node> <interface>
-```
-
-##### Positional Arguments
-
-| name | description |
-| ---- | ----------- |
-| node | Interface node name |
-| interface | Network interface name |
-
-##### Subcommands
-
-| command | description |
-| ------- | ----------- |
-| [`interface`](#configure-authority-router-routing-vrf-pim-interface-interface) | Network interface name |
-| [`node`](#configure-authority-router-routing-vrf-pim-interface-node) | Interface node name |
-| `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| `show` | Show configuration data for &#x27;interface&#x27; |
 
 ## `configure authority router routing vrf pim interface interface`
 
@@ -20610,17 +20493,7 @@ configure authority router routing vrf routing-protocol address-family afi-safi 
 
 | name | description |
 | ---- | ----------- |
-| afi-safi | Address family type |
-
-`identityref`
-A value as defined below:
-
-| name | description |
-| ---- | ----------- |
-| ipv4-unicast | IPv4 unicast (AFI,SAFI = 1,1) |
-| ipv6-unicast | IPv6 unicast (AFI,SAFI = 2,1) |
-| ipv4-vpn | IPv4 vpn (AFI,SAFI = 1,128) |
-| ipv6-vpn | IPv6 vpn (AFI,SAFI = 2,128) |
+| identityref | The value to set for this field |
 
 ## `configure authority router routing vrf routing-protocol address-family aggregate-address`
 
@@ -21426,15 +21299,7 @@ configure authority router routing vrf routing-protocol neighbor address-family 
 
 | name | description |
 | ---- | ----------- |
-| afi-safi | Address family type |
-
-`identityref`
-A value as defined below:
-
-| name | description | 
-| ---- | ----------- |
-| ipv4-unicast | IPv4 unicast (AFI,SAFI = 1,1) |
-| ipv6-unicast | IPv6 unicast (AFI,SAFI = 2,1) |
+| identityref | The value to set for this field |
 
 ## `configure authority router routing vrf routing-protocol neighbor address-family as-path-options`
 
@@ -22818,7 +22683,7 @@ configure authority router service-route host move target-address [force] <value
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router service-route host node-name`
@@ -22970,7 +22835,7 @@ configure authority router service-route next-hop move target-address [force] <v
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router service-route next-hop node-name`
@@ -23640,7 +23505,7 @@ configure authority router static-hostname-mapping static-entry move ip-address 
 | name | description |
 | ---- | ----------- |
 | value | Value to move |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to | Value before or after which to move |
 
 ## `configure authority router system`
@@ -23711,7 +23576,7 @@ Configuration for audit events
 | `delete` | Delete configuration data |
 | [`disk-full-action`](#configure-authority-router-system-audit-disk-full-action) | Action to take when disk is full. |
 | `override-generated` | Force auto-generated configuration and any modifications to it to persist on commit |
-| [`remote-logging-server`](#configure-authority-router-system-audit-remote-logging-server) | Audit remote logging server. |
+| [`remote-logging-server`](#configure-authority-router-system-audit-remote-logging-server) | Audit remote logging server using the auditd remote protocol. For standard syslog servers use the syslog server config instead. |
 | [`retention`](#configure-authority-router-system-audit-retention) | How long events should be persisted. This includes the explicit events here as well as the the implicit alarm and provisioning events |
 | [`security`](#configure-authority-router-system-audit-security) | Configure Security |
 | `show` | Show configuration data for &#x27;audit&#x27; |
@@ -23782,7 +23647,7 @@ configure authority router system audit disk-full-action [<enumeration>]
 
 ## `configure authority router system audit remote-logging-server`
 
-Audit remote logging server.
+Audit remote logging server using the auditd remote protocol. For standard syslog servers use the syslog server config instead.
 
 #### Usage
 
@@ -25313,14 +25178,14 @@ The address of the Conductor to use as a proxy to the Internet.
 #### Usage
 
 ```
-configure authority router system software-update repository address [<string>]
+configure authority router system software-update repository address [<host>]
 ```
 
 ##### Positional Arguments
 
 | name | description |
 | ---- | ----------- |
-| string | The value to set for this field |
+| host | The value to set for this field |
 
 ## `configure authority router system software-update repository offline-mode`
 
@@ -25642,7 +25507,7 @@ configure authority routing filter move rule <name> <position> [<relative-to-nam
 | name | description |
 | ---- | ----------- |
 | name | An arbitrary identifying name |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to-name | Key of item before or after which to move |
 
 ## `configure authority routing filter name`
@@ -25880,7 +25745,7 @@ configure authority routing policy move statement <name> <position> [<relative-t
 | name | description |
 | ---- | ----------- |
 | name | An arbitrary identifying name |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to-name | Key of item before or after which to move |
 
 ## `configure authority routing policy name`
@@ -25960,6 +25825,7 @@ configure authority routing policy statement action <type>
 | [`exclude`](#configure-authority-routing-policy-statement-action-exclude) | The AS(s) to exclude from the as-path |
 | [`ip-address`](#configure-authority-routing-policy-statement-action-ip-address) | The new next hop IP address to set |
 | [`local-preference`](#configure-authority-routing-policy-statement-action-local-preference) | The local preference value |
+| [`no-extended-communities`](#configure-authority-routing-policy-statement-action-no-extended-communities) | Remove all extended communities |
 | [`none`](#configure-authority-routing-policy-statement-action-none) | Remove all communities |
 | [`origin`](#configure-authority-routing-policy-statement-action-origin) | The BGP origin value |
 | [`originator-id`](#configure-authority-routing-policy-statement-action-originator-id) | The new originator id to set |
@@ -26146,6 +26012,16 @@ configure authority routing policy statement action local-preference [<uint32>]
 | name | description |
 | ---- | ----------- |
 | uint32 | The value to set for this field |
+
+## `configure authority routing policy statement action no-extended-communities`
+
+Remove all extended communities
+
+#### Usage
+
+```
+configure authority routing policy statement action no-extended-communities
+```
 
 ## `configure authority routing policy statement action none`
 
@@ -28296,7 +28172,7 @@ configure authority service-policy move vector <name> <position> [<relative-to-n
 | name | description |
 | ---- | ----------- |
 | name | Name of the vector. |
-| position | first \| after \| before \| last |
+| position | first \| last \| before \| after |
 | relative-to-name | Key of item before or after which to move |
 
 ## `configure authority service-policy name`
