@@ -1,0 +1,283 @@
+---
+title: Conductor Installation - FIPS
+sidebar_label: Conductor Installation - FIPS 
+---
+
+This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
+
+The steps in this section describe the *interactive conductor installation* from the packaged-based ISO. The section [Initialize the Conductor](#initialize-the-conductor-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO.
+
+:::note
+The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
+:::
+
+To install a FIPS-compliant router **after** installing and configuring the Conductor, use the [SSR Installation](cc_fips_router_install.md). The [Router Installation Using OTP](intro_otp_iso_install.mdx) procedure can be used for whitebox and air-gap, conductor-managed network installations. 
+
+## Prerequisites
+
+- Ensure that the platform you are installing on meets the [SSR hardware requirements](about_supported_platforms.md#minimum-platform-specifications).
+- Verify that the boot priority of the USB drive is properly listed in the system BIOS.
+- Local console connectivity to the device/VM. 
+
+## FIPS Mode
+
+Use this process to install a FIPS-compliant SSR Conductor. 
+
+To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
+
+
+Use the following procedure to enable FIPS enforcement.
+
+1. Use up/down keys to highlight the desired install mode. 
+
+  ![Bios Install](/img/56fips_BIOSinstall_1.png)
+
+2. Press TAB to edit the configuration.
+
+3. Add `fips=1` to the end of the `vmlinuz` parameters.
+
+  ![FIPS Parameter](/img/56fips_BIOSinstall_2.png)
+
+4. Press Enter to start the install. 
+
+## Conductor Installation 
+
+After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (approximately 20 minutes). After the installation has completed, the following screen is displayed:
+
+![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
+
+Select `<Yes>` to shut down the system. Remove the bootable media, then power the system up to complete the installation process. 
+
+### Initial Boot and NMTUI
+
+When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.
+
+![128T NetManager TUI Start](/img/Initializer_Serial0.png)
+
+Selecting `Yes` launches the NMTUI application to perform an initial network interface setup.
+
+![128T NetManager TUI Option](/img/Initializer_Serial1.png)
+
+### Configure the Network Interface 
+
+Configure the IP address that will be used to manage the network routers.  
+
+1. Select the device ethernet interface that corresponds to the management port for your Conductor and select `<Edit>`
+
+<img src="/img/nmtui-linux-a.png" alt="Configure the Ethernet port" width="192" height="243" />
+
+2. In the Edit Connection screen, configure the following:
+- The IP address for the port
+- the Gateway IP address
+- DNS server addresses
+
+<img src="/img/nmtui-linux-b-static-ipv4-config.png" alt="Edit Connection" width="654" height="394" />
+
+3. Scroll to the bottom of the screen and select `Automatically Connect` and `Available to All Users`, then select OK. 
+
+<img src="/img/nmtui-linux-c-static-ipv4-autoconx.png" alt="Edit Connection" width="654" height="394" />
+
+4. From the NMTUI screen, select `Set system hostname`, and `<OK>`.
+
+<img src="/img/nmtui-linux-set-hostname.png" alt="Select Hostname" width="354" height="381" />
+
+5. Enter the hostname and select `<OK>`. Note that the hostname will be used as the Asset ID.
+
+<img src="/img/nmtui-linux-set-hostname2.png" alt="Add Hostname" width="354" height="381" />
+
+6. From the NMTUI screen, select `Activate a connection`, and `<OK>`.
+
+7. Select the port, and `<Activate>`. 
+
+<img src="/img/nmtui-linux-activate-port.png" alt="Activate port" width="379" height="378" />
+
+ When the port has been activated, an asterisk will appear next to the port name.
+
+```
+Ethernet (enp2s0f0)
+* enp2s0f0
+```
+8. Select `<Back>` and then `<Quit>` NMTUI.
+
+The Initializer process starts automatically.
+
+### Initialize the Conductor Node
+
+The SSR Initializer tunes your operating system, prepares the platform to run the SSR software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot.
+
+There are three different types of conductor installations; 
+- Standalone Conductor 
+- [Conductor High Availability](ha_conductor_install.mdx)
+- [Conductor High Availability for Cloud Deployments](intro_initialize_HA_conductor.md)
+
+## Standalone Conductor
+
+1. On the SSR Initializer wizard screen, use the space bar to select the **Conductor** role for the SSR node, and press the **Enter** key to select **OK**.
+
+  ![SSR Role](/img/initializer_Serial2.png)
+
+2. When asked _What kind of Conductor node is this?_, select **Standalone** from the following options:
+
+  ![Identify the Node](/img/initializer_standalone.png)
+
+- **Standalone:** This conductor has no highly available peer, and is not currently planned for high availability.
+
+3. Enter the following system properties on the **Node Info** screen:
+
+    ![Node Information](/img/initializer_Serial5a.png)
+
+    - **Node Name:** The name of the system within your Conductor, in this example, _test-conductor_. By default this field uses the Linux system's hostname. The node name identifies the conductor node under the **Conductor** element in the Authority. 
+
+    :::note
+    Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).
+    :::
+    - **Conductor Name:** The name of the Conductor system as a whole. When referring to a running SSR software instance, it is identifiable by the full name; e.g., `test-conductor.conductor`. The full system name is reflected in the PCLI prompt.
+
+4. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. 
+  :::note
+  Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
+  :::
+
+  ![Password Setup](/img/initializer_Serial6.png)
+
+5. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact Juniper Technical Support.
+
+6. When prompted, select `<Yes>` to start the conductor. 
+
+  ![Initializer Complete](/img/initializer_complete.png)
+
+### Verify the Installation
+
+After installing the SSR Software it is important to verify that the installation was completed successfully.
+
+### To Verify the SSR Installation:
+
+After starting the Conductor, the login screen appears. 
+
+1. Login using the admin credentials.
+
+```
+test-conductor login: admin
+Password:
+```
+  ![Conductor Admin Login](/img/conductor_install1.png)
+
+2. Enter the Linux shell:
+
+  a. Type `exit` to exit the PCLI.
+
+  b. Type `shell` and press `Enter` to enter the linux shell.
+
+3. Log into the command window as `root`.
+4. Execute the command: `sudo systemctl status 128T`
+
+![Linux Shell](/img/conductor_install2.png)
+
+5. When the service is listed as _Active_, log into the system using the system default password. By logging into the system, you have verified the installation. 
+
+### Change the Default Passwords
+
+The following user accounts and passwords are created during the ISO installation process:
+
+| Username | Password   |
+| -------- | ---------- |
+| root     | 128tRoutes |
+| t128     | 128tRoutes |
+
+It is *strongly recommended* that you change these passwords immediately. Use the `passwd` command from the UNIX window.
+
+```
+[t128@test-conductor ~]$ passwd
+Changing password for user t128
+Changing password for t128
+(current)UNIX password:
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[t128@test-conductor ~]$ su - 
+Password:
+[root@test-conductor ~]# passwd
+Changing password for user root.
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@test-conductor ~]#
+```
+
+### Configure the Token
+
+Once the system has been setup for the first time, the next step is to provision credentials for SSR software access on the conductor. Provisioning the software credentials on the conductor propagates those settings down to all of the managed routers.
+
+Use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](cli_reference.md#set-software-access-token).
+
+From the root user in the workflow above, run the `pcli` command to access the PCLI and configure the token.
+
+```
+[root@test-conductor ~]# pcli
+Starting the PCLI...
+root@node1.test-conductor# set software access-token <username> <password>
+Saving...
+Waiting for process to complete
+...(messages removed for brevity)...
+Making the DNF cache
+No further operation requested. Exiting
+Installer complete
+Successfully saved credentials.
+root@node1.test-conductor#
+```
+
+### Add the Conductor to the Authority
+
+Take this opportunity to log into the Conductor GUI to complete the following operations. This will provide validation that the installation was successful, and familiarize you with GUI operations. 
+
+#### Connecting the Conductor to the Network
+
+To make sure the conductor is on a network and accessible via GUI, the IP address on the interface must be in the same subnet as the VLAN on the switch port. Use `https://<interface IP address>` for GUI login.
+
+1. Select the **Conductor** from the Authority menu on the left side of the GUI. 
+
+ ![Configuration menu](/img/config_menu_gui.png)
+
+2. Select the **Configure** icon.
+
+ ![Conductor Configuration Icon](/img/conductor_config_icon.png)
+
+3. Select the node for the conductor - in this example it is `node1`.
+
+ ![Conductor Node](/img/conductor_node.png) 
+
+4. Under **Associated Asset ID** select the hostname for the conductor.
+
+ ![Asset ID](/img/conductor_asset-id.png)
+
+5. Validate and Commit the changes to the configuration. 
+
+### Set the Authority Name
+
+The authority represents the complete set of all SSRs managed under a single organizational entity.
+
+1. Return to the Authority level.
+2. Select the Authority Settings.
+
+ ![Authority Settings](/img/conductor_authority_name.png)
+
+3. Under Basic Information, enter the new Authority name. For example, a good name for the Authority would be the name of the business, e.g., Acme Corp. 
+
+ ![Basic Information](/img/conductor_authority_name2.png)
+
+### Set the Conductor IP Address
+
+1. Under Conductor Addresses, select ADD.
+2. In the **New Conductor Address** window, enter the conductor public IP address.
+
+![Conductor Address](/img/conductor_address.png)
+
+3. Click Validate and Commit. Warnings will appear, advising you of the change.  
+
+The steps during initialization setup the management IP. The conductor IP address is the public IP address to which the managed routers connect. It is not necessary to manually associate this IP address with a network interface; the interactions between the SSR software and Linux will identify and assign the IP address to the network interface. 
+
+## Next Steps - Router Configuration
+
+Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process. Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
+
+A sample branch router configuration is available as a [**template**](config_templates.md#default-templates) on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top level resources. For more information, see [Configuration Templates](config_templates.md). 
