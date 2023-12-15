@@ -79,11 +79,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-53358 Disable/enable of LACP takes the Bond interface down:** Dynamic reconfiguration has been enhanced to support LACP enable/disable while traffic flows by removing the dedicated queue flow (for LACP) when removing a member from bond. 
 ------
-- **I95-53666 Unable to create webserver certificate request:** This issue has been resolved by providing ACL permissions for the webserver to the certificate directory.   
+- **I95-53666 Unable to create webserver certificate request:** This issue has been resolved by providing ACL permissions for the webserver to the certificate directory.  
 ------
 - **I95-53777 Multicast traffic not passing after an HA failover:** Resolved an issue where the multicast service next hops were not reloading on a configuration change. 
 ------
 - **I95-53787 Stats not present on conductor:** Running show device-interface router all on a conductor caused stats (in-octets, in-unicast-pkts, etc...) to be incorrectly displayed as "n/a" instead of the correct value. This issue has been resolved.
+------
+- **I95-53851 DHCP server scripts return false positive:** During the creation process, the DHCP scripts check the server name for an existing namespace. The script would return a false positive if the configured name was a substing of an existing name. Resolved an issue where a DHCP server won't come up if the device port is a substring of another device port that is also configured as a DHCP server.
 ------
 - **I95-53852 host-service snmp-server blocks SVR pings to a network-interface owned address:** Ping traffic was hitting the generated (wildcarded) snmp-server service. The session could not setup due to security policy conflicts. This issue has been resolved; the generated service from an snmp-server host-service now has a UDP transport.
 ------
@@ -125,7 +127,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 
 ### Caveats
 
-- **I95-54780 Forwarding Utilization stats are missing:** This issue is the result of the fix in place for the `stats default retention short` setting was not being honored (I95-53875). This will be resolved in the next patch release. 
+- **I95-54780 Forwarding Utilization stats are not retained beyond one hour:** This issue is the result of the fix in place for the `stats default retention short` setting was not being honored (I95-53875). This will be resolved in the next patch release. 
 
 ## Release 6.2.0-39
 
