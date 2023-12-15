@@ -85,7 +85,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-53787 Stats not present on conductor:** Running show device-interface router all on a conductor caused stats (in-octets, in-unicast-pkts, etc...) to be incorrectly displayed as "n/a" instead of the correct value. This issue has been resolved.
 ------
-- **I95-53851 DHCP server scripts return false positive:** During the creation process, the DHCP scripts check the server name for an existing namespace. The script would return a false positive if the configured name was a substing of an existing name. Resolved an issue where a DHCP server won't come up if the device port is a substring of another device port that is also configured as a DHCP server.
+- **I95-53851 DHCP server scripts return false positive:** During the creation process, the DHCP scripts check the server name for an existing namespace. The script would return a false positive if the configured name was a substring of an existing name. Resolved an issue where a DHCP server won't come up if the device port is a substring of another device port that is also configured as a DHCP server.
 ------
 - **I95-53852 host-service snmp-server blocks SVR pings to a network-interface owned address:** Ping traffic was hitting the generated (wildcarded) snmp-server service. The session could not setup due to security policy conflicts. This issue has been resolved; the generated service from an snmp-server host-service now has a UDP transport.
 ------
