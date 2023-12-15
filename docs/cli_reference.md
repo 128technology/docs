@@ -1751,7 +1751,7 @@ import iso [check-rpm-signature <check-rpm-signature>] [force] [verbose] {hunt |
 
 | name | description |
 | ---- | ----------- |
-| check-rpm-signature |  (default: required) |
+| check-rpm-signature | required \| allow-unsigned \| disabled (default: required) |
 | filepath | The absolute filepath to the ISO |
 | force | Skip confirmation prompt |
 | hunt | Find and import all ISOs from the filesystem |
@@ -8745,6 +8745,183 @@ Fri 2020-04-17 19:33:29 UTC
 Completed in 0.35 seconds
 ```
 
+## `show ospfv3`
+
+Show general information about OSPFv3.
+
+#### Usage
+
+```
+show ospfv3 [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The router to request OSPFv3 information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`database`](#show-ospfv3-database) | Show OSPFv3 database information. |
+| [`interfaces`](#show-ospfv3-interfaces) | Show OSPFv3 interfaces |
+| [`neighbors`](#show-ospfv3-neighbors) | Show information about OSPFv3 neighbors. |
+| [`routes`](#show-ospfv3-routes) | Show information about the OSPFv3 routes. |
+
+## `show ospfv3 database`
+
+Show OSPFv3 database information.
+
+#### Usage
+
+```
+show ospfv3 database [rows <rows>] [vrf <vrf>] [self-originate] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The router to request OSPFv3 information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| self-originate | Retrieve only self-originated LSA information |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+##### Subcommands
+
+| command | description |
+| ------- | ----------- |
+| [`lsa`](#show-ospfv3-database-lsa) | Show OSPFv3 database LSA information. |
+
+## `show ospfv3 database lsa`
+
+Show OSPFv3 database LSA information.
+
+#### Usage
+
+```
+show ospfv3 database lsa [{self-originate}] [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} lsa-type <type> [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| lsa-type | The LSA type to retrieve |
+| resource-group | The name of the resource group |
+| router | The router to request OSPFv3 information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| self-originate | Retrieve only self-originated LSA information |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show ospfv3 interfaces`
+
+Show OSPFv3 interfaces
+
+#### Usage
+
+```
+show ospfv3 interfaces [rows <rows>] [vrf <vrf>] [interface <interface>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| interface | The interface to fetch OSPFv3 information for |
+| resource-group | The name of the resource group |
+| router | The router to request OSPFv3 information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show ospfv3 neighbors`
+
+Show information about OSPFv3 neighbors.
+
+#### Usage
+
+```
+show ospfv3 neighbors [rows <rows>] [vrf <vrf>] [neighbor <ip>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| neighbor | The neighbor IP address for which to fetch OSPFv3 information |
+| resource-group | The name of the resource group |
+| router | The router to request OSPFv3 information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+## `show ospfv3 routes`
+
+Show information about the OSPFv3 routes.
+
+#### Usage
+
+```
+show ospfv3 routes [rows <rows>] [vrf <vrf>] [force] {router <router> | resource-group <resource-group>} [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| resource-group | The name of the resource group |
+| router | The router to request OSPFv3 information from |
+| rows | The number of items to display at once [type: int or &#x27;all&#x27;] (default: 50) |
+| vrf | VRF name |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
+
+
 ## `show packet-buffer-locations`
 
 Display the packet buffer pool locations.
@@ -9888,8 +10065,7 @@ show sessions by-id [node <node>] router <router> <id> [<verbosity>]
 | name | description |
 | ---- | ----------- |
 | id | Unique identifier of a session to be displayed |
-| verbosity | detail |
-| summary | (default: detail) |
+| verbosity | detail \| summary (default: detail) |
 
 #### Example
 
@@ -10768,6 +10944,7 @@ show user [<username>]
 | command | description |
 | ------- | ----------- |
 | [`activity`](#show-user-activity) | Show the most recent usage of SSR. |
+| [`lock-status`](#show-user-lock-status) | Display failed login attempts. |
 
 ##### See Also
 
@@ -10866,6 +11043,28 @@ show user activity [from <from>] [to <to>] [rows <rows>] [<username>]
 | [`show roles`](#show-roles) | Display all configured roles |
 | [`show user`](#show-user) | Display information for user accounts. |
 
+## `show user lock-status`
+
+Display failed login attempts.
+
+#### Usage
+
+```
+show user lock-status [<username>]
+```
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| username | the name of the account to display (default: all) |
+
+#### Description
+
+Display information from the `faillock` database about failed login attempts, whether the account is locked, and when the user will be allowed to attempt another password-based login.
+
+User&#x27;s can become locked out of the system if they are in violation of the password-policy that is specified in `configure authority password-policy`. The policy allows an administrator to configure the maximum number of password attempts (`deny`,) and the amount of time that the account must remain locked until the next valid attempt may be allowed (`unlock-time`.)
+
 ## `show vrf`
 
 Show VRF name, tenants, and interfaces
@@ -10891,8 +11090,7 @@ Provides details about all configured VRF’s including name, tenants, network-i
 
 | name | description |
 | ---- | ----------- |
-| verbosity | detail |
-| summary | (default: summary) |
+| verbosity | detail \| summary (default: summary) |
 
 #### Example
 
@@ -11032,7 +11230,7 @@ Print the route packets take to network host.
 #### Usage
 
 ```
-traceroute [max-hops <max-hops>] [wait-time <wait-time>] [egress-interface <egress-interface>] [source-ip <source-ip>] [gateway-ip <gateway-ip>] [service <service>] [tenant <tenant>] router <router> node <node> <destination-ip>
+traceroute [max-hops <max-hops>] [wait-time <wait-time>] [egress-interface <egress-interface>] [source-ip <source-ip>] [gateway-ip <gateway-ip>] [service <service>] [tenant <tenant>] [peer <peer>] router <router> node <node> <destination-ip>
 ```
 
 ##### Keyword Arguments
@@ -11043,9 +11241,10 @@ traceroute [max-hops <max-hops>] [wait-time <wait-time>] [egress-interface <egre
 | gateway-ip | The gateway address on the egress interface [type: IP address] |
 | max-hops | The maximum number of hops before the operation is terminated [type: int] |
 | node | The node on which to start the traceroute |
+| peer | The peer name for the traceroute command |
 | router | The router on which to start the traceroute |
 | service | The service for the traceroute command |
-| source-ip | The source address [type: IP address] (default: 0.0.0.0) |
+| source-ip | The source address. Optional if the matching service utilizes a source-nat [type: IP address] (default: 127.0.0.1) |
 | tenant | The tenant name for the traceroute command |
 | wait-time | The maximum time, in seconds, to wait for a response to each probe (default 3s) [type: int] |
 
@@ -11057,11 +11256,22 @@ traceroute [max-hops <max-hops>] [wait-time <wait-time>] [egress-interface <egre
 
 #### Description
 
-The `traceroute` command creates a traceroute context for probing the path to a specified endpoint. Traceroute targets can be specified as SVR peers, service/tenant defined endpoints, or targets reachable by routing. To define each of the traceroute types, enter the following parameters:
+The Internet is a large and complex aggregation of network hardware, connected together by gateways. Tracking the route one&#x27;s packets follow (or finding the miscreant gateway that&#x27;s discarding your packets) can be difficult. Traceroute utilizes the IP protocol &#x27;time to live&#x27; field and attempts to elicit an ICMP TIME_EXCEEDED response from each gateway along the path to some host.
+Each iteration of the traceroute algorithm will execute three probes. The maximum time that the entire algorithm can take is 3 x wait-time x max-hops.
 
-- Service traceroute: Enter the service name, tenant, and destination-ip.
-- Routed traceroute: Enter the destination-ip.
-- Peer traceroute: Enter the peer name and destination-ip.
+- **Service Traceroute**: Enter the service name and destination-ip. (Additional arguments are optional)
+
+ `traceroute service <service-name> tenant <tenant-name> source-ip <address> <destination-ip>`
+
+ The `source-ip` is only required if there is no `source-nat` configured. If you omit the `source-ip` without `source-nat` configured, then you will get an error requesting to either apply `source-nat,` or provide a `source-ip`.
+
+- **Routed Traceroute**: Enter the destination-ip. By specifying the optional arguments `egress-interface` and `gateway-ip`, routed traceroute will bypass the service, tenant, and routing table. 
+
+ `traceroute <destination-ip> egress-interface <interface-name> <gateway-ip>`
+
+- **Peer Traceroute**: Enter the peer name, egress-interface, and destination-ip. (Additional arguments are optional)
+
+ `traceroute peer <peer> egress-interface <interface-name> <destination-ip>`
 
 #### Example
 
@@ -11079,6 +11289,7 @@ traceroute to 172.16.1.201, 64 hops max
 | Release | Modification |
 | --- | --- |
 | 6.1.0 | Introduced | 
+| 6.2.3-R2 | Updates and improvements made to the keyword arguments |
 
 ## `validate`
 
