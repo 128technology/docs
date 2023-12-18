@@ -28,19 +28,17 @@ Use the following procedure to enable FIPS enforcement.
 
 1. Use up/down keys to highlight the desired install mode. 
 
-  ![Bios Install](/img/56fips_BIOSinstall_1.png)
+  ![Bios Install](/img/cc_fips_BIOSinstall_1.png)
 
 2. Press TAB to edit the configuration.
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
-  ![FIPS Parameter](/img/56fips_BIOSinstall_2.png)
+  ![FIPS Parameter](/img/ccfips_BIOSinstall_2.png)
 
 4. Press Enter to start the install. 
 
-## SSR Installation
-
-## Conductor Installation 
+## Router Installation
 
 After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (approximately 20 minutes). After the installation has completed, the following screen is displayed:
 
