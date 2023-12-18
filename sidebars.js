@@ -17,6 +17,14 @@ module.exports = {
       "intro_system_reqs",
       "config_firewall_ports",
     ],
+    "Common Criteria and FIPS": [
+      "cc_fips_titlepage",
+      "cc_fips_intro",
+      "cc_fips_conductor_install",
+      "cc_fips_router_install",
+      "cc_fips_config_password_policies",
+      "cc_fips_sec_firewall_filtering",
+    ],
     "Installation Process": [
       "intro_installation",
       "intro_downloading_iso",
