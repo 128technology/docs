@@ -25,7 +25,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
 To install using the Interactive Installation, use the arrow keys to select either `Install 128T Routing Software Serial Console` or **`Install 128T Routing Software VGA Console`**. As noted earlier, this guide describes the Conductor installation process using the Interactive Installation, specifically using the VGA console.
 
-![VGA Boot with Interactive Install](/img/cc_install_select_interactive.png)
+![VGA Boot with Interactive Install](/img/cc_install_conductor_interactive.png)
 
 :::note
 Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
@@ -37,8 +37,6 @@ Selecting the wrong type of console (Serial or VGA) may result in garbled charac
 
 Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
 
-![Serial Install Selection](/img/install_select_interactive2.png)
-
 For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
 
 #### Install via VGA Console
@@ -49,16 +47,11 @@ The procedure that follows here is the **Interactive Install on the VGA Console*
 
 ## FIPS Mode
 
-Use this process to install a FIPS-compliant SSR Conductor. 
-
 To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
-
-
-Use the following procedure to enable FIPS enforcement.
 
 1. Use up/down keys to highlight the desired install mode. 
 
-  ![Bios Install](/img/cc_fips_BIOSinstall_1.png)
+  ![Bios Install](/img/cc_install_conductor_interactive.png)
 
 2. Press TAB to edit the configuration.
 
@@ -66,7 +59,19 @@ Use the following procedure to enable FIPS enforcement.
 
   ![FIPS Parameter](/img/ccfips_BIOSinstall_2.png)
 
-4. Press Enter to start the install. 
+4. Press Enter to start the install.
+
+### Serial Console
+
+1. Use up/down keys to highlight the desired install mode. 
+
+  ![Serial Install Selection](/img/install_serial_conductor_interactive1.png)
+
+2. For FIPS press `e` to edit and append `fips=1`.
+
+  ![FIPS Parameter](/img/cc_fips_serial_conductor.png)
+
+3. Press Enter to start the install. 
 
 ## Conductor Installation 
 
