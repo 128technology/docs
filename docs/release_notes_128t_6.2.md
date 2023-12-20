@@ -126,6 +126,31 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ### Caveats
 
 - **I95-54780 Forwarding Utilization stats are not retained beyond one hour:** This issue is the result of the fix in place for the `stats default retention short` setting was not being honored (I95-53875). This will be resolved in the next patch release. 
+------
+- **I95-54856 Rollback issue after upgrade to 6.2 from versions 6.1 or earlier:** If the SSR is upgraded from 6.1 (or older) to 6.2 and you have BGP neighbors with address family configuration, and then try to downgrade to a version prior to 6.2, the downgrade will fail.
+
+That configuration looks like this:
+```
+		neighbor 172.16.0.1
+    		neighbor-as 300
+        		address-family ipv4-unicast
+             		<anything>
+```
+
+The downgrade fails because a new default `disable` value for the `remove-private-as` option was added under the neighbor address family. This value is present in the configuration under `neighbor address-family` even if it was not explicitly configured.
+
+**Workaround Options:**
+
+Delete the `neighbor address-family` container from the configuration before the downgrade. **It is recommended to make a copy of the `neighbor address-family` configuration**, because you will need to add it back after the downgrade.
+
+Explicitly configure `remove-private-as` to one of the other valid values. It is recommended to review your BGP configuration before making any of the below changes, as they may have an impact. 
+
+Valid values for `remove-as-path`:
+
+- `all`: Remove all private AS in the AS path.
+- `replace-all`: Replace all private AS with the local AS.
+- `only`: Remove private AS only if the AS path contains just private AS.
+- `replace-only`: Replace private AS with the local AS only if the AS path contains just private AS.
 
 ## Release 6.2.0-39
 
