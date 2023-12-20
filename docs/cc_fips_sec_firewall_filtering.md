@@ -16,42 +16,23 @@ As part of the security hardening and certification process, the SSR has impleme
 The SSR uses Berkeley Packet Filters (BPF) to create customizable firewall filters. This filtering solution can be a key tool to prevent packet level attacks and aid with intrusion detection and prevention. Using BPF, packets on the SSR can be filtered by any known packet field, and the order in which filters are applied can be set by the user. 
 Filters are configured and applied on the receiving network-interface. 
 
-#### Configure using the GUI: 
+#### Configuration 
 
-1. At the Authority level, select the router, then the node, the device interface, and the network interface where the filters will be configured.
+1. At the Authority level, define the router, then the node, the device interface, and the network interface where the filters will be configured.
 
-![Network interface filter configuration](/img/bpf_image1.png)
+2. Under `filter-rule`, define:
+- The `action` - `deny` discards any packets matching the filter applied. `permit` allows packets that match the rule to bypass any additional rules, and passes the traffic.  
+- The filter type - `bpf` (Berkeley Packet Filter) is currently the only option. This identifies the filter to be applied. Validation confirms proper BPF syntax.
 
-2. Scroll down to the Filter Rule panel. 
+3. Configuration of permit rules follows the same process.  
 
-3. Click Add.
-
-4. In the New Item window, name the rule and click SAVE.
-
-![New filter name](/img/bpf_image2.png)
-
-5. In the Filter Rule window, define:
-- The Action - `Deny` discards any packets matching the filter applied. `Permit` allows packets that match the rule to bypass any additional rules, and passes the traffic.  
-- The Filter type - BPF is currently the only option. 
-- Berkeley Packet Filter - Identifies the filter to be applied. Validation confirms proper BPF syntax.
-
-![BPF Filter Rule](/img/bpf_image4.png)
-
-5. Click Validate and Commit. From the authority drop down, select the network interface to return to the Filter list.
-
-6. Configuration of permit rules follows the same process. 
-
-![Permit rule configuration](/img/bpf_image5.png) 
-
-7. After the Filter Rule list has been created, you can reorder the rules using the drop down menu to the left of the filter name. This list determines the order in which filter rules are applied.
-
-![Reorder menu](/img/bpf_image6.png)
+4. After the Filter Rule list has been created, you can reorder the rules using the `move` command. This list determines the order in which filter rules are applied.
 
 :::note
 The number and complexity of rules will have an impact on forwarding performance.
 :::
 
-#### Configure from the PCLI:
+#### Configuration Example:
 
 ```
 *admin@conductor.conductor# configure authority router 128t-west
@@ -95,30 +76,27 @@ Detailed information about Berkeley Packet Filters is outside of the scope of th
 
 Because ICMP can be an attack vector for a network or used to discover your network topology, ICMP attributes have been updated for firewall protection. 
 
-#### ICMP Type as a Session Attribute
+### ICMP Type as a Session Attribute
 
 By default, the SSR does not use ICMP codes as a session attribute. However, the SSR does match ICMP error packets with the sessions that generated them, and only accepts those ICMP packets when they match an existing session. For instance, to protect against ICMP attacks from using a barrage of `Destination Unreachable` messages, if a TCP packet generates a `Destination Unreachable`, upon receipt of the `Destination Unreachable` the SSR uses the code to interpret the packet and match it to an existing session. If a match is found, the packet is forwarded to the end host. If a match is not found, the packet is rejected.
 
 To enable ICMP type as a session attribute:
 
-1. At the Authority level, select the Authority Settings button. 
+1. From the Authority level, configure `icmp-control`. 
 
-![Authority Settings button](/img/ipv4_option_filter1.png)
 
-2. Change the `ICMP Session Match` to `identifier and type`. 
+2. Set `icmp-async-reply` to `drop`.
 
-![ICMP Control pane](/img/icmp_type_attribute1.png)
+3. Set `icmp-session-match` to `identifier and type`. 
 
-Changes take effect after the configuration has been committed. 
-
-#### From the Command Line
+#### Configuration Example
 
 ```
 *admin@conductor.conductor# configure authority icmp-control icmp-async-reply drop
 *admin@conductor.conductor# configure authority icmp-control icmp-session-match identifier-and-type
 ```
 
-#### Discard ICMP Echo Replies With No Request
+### Discard ICMP Echo Replies With No Request
 
 When you configure the ICMP Async Reply as `drop` (shown above), any ICMP Echo Replies that arrive at the SSR are dropped if no corresponding request has been seen. This helps to prevent DoS (Denial of Service) attacks such as an ICMP Ping flood. 
 
@@ -128,33 +106,13 @@ Attackers sometimes configure IPv4 options incorrectly, producing either incompl
 
 By default, all IPv4 packets with options are allowed. To configure the dropping of specific IPv4 options, you must first enable `drop-all`. This reveals the Drop Exclusions list, where you can define IPv4 options to exclude from the drop action. 
 
-1. At the Authority level, select the Authority Settings button. 
+1. At the Authority level, configure `ipv4-option-filter action drop-all`. 
 
-![Authority Settings button](/img/ipv4_option_filter1.png)
+2. To configure allowed options, `ipv4-option-filter drop-exclusion 11`. 
 
-2. Scroll down to the IPv4 Option Filter button, and select it.
+3. Enter the Option type/number from the [IPv4 Parameters](https://www.iana.org/assignments/ip-parameters/ip-parameters.xhtml#ip-parameters-1).
 
-![IPv4 Option Filter button](/img/ipv4_option_filter2.png)
-
-3. The IPv4 Options Filter window opens, indicating the `allow-all` action. Open the drop down and select `drop-all`.
-
-![IPv4 Option Filter window](/img/ipv4_option_filter3.png)
-
-If you do not want any allowed options, you can stop here. Return to the Authority level and continue with other configuration activities. 
-
-4. In the Drop Exclusion field, select **ADD**. 
-
-![Drop Exclusion field](/img/ipv4_option_filter4.png)
-
-5. Enter the Option type/number from the [IPv4 Parameters](https://www.iana.org/assignments/ip-parameters/ip-parameters.xhtml#ip-parameters-1) and click Save.
-
-![Drop Exclusion Option number](/img/ipv4_option_filter5.png)
-
-6. The new exclusion is listed in the Drop Exclusions table. Click ADD to configure more exclusions. 
-
-![Drop Exclusion Option table](/img/ipv4_option_filter6.png)
-
-#### Using the PCLI
+#### Configuration Example
 
 ```
 *admin@conductor.conductor# configure authority ipv4-option-filter action drop-all
@@ -183,16 +141,9 @@ To prevent DoS attacks, packets with broadcast or multicast source IP and MAC ad
 
 This functionality sets the action on how the TCP state machine should process unexpected TCP packets. This is important because in some cases where these unexpected packets arrive, it may indicate a TCP Reset attack. By default, the SSR checks and follows the TCP sequence numbers of all the sessions passing through, and increments the associated metrics. Setting the Transport State Enforcement field to Strict ensures any packets in the TCP stream that fall outside of the sequence number stream will be dropped. 
 
-1. Under Authority, scroll to Service Policies, and select a service policy.
-2. In the Basic Information panel, click on the Transport State Enforcement drop down and select Strict.
-
-![service policy](/img/transport_state_enforce1.png)
-
 Any packets in the TCP stream that fall outside of the sequence number stream will be dropped. This will apply to any service that has this service policy configured.
 
-![service](/img/transport_state_enforce2.png)
-
-#### From the Command Line
+#### Configuration Example
 
 ```
 *admin@conductor.conductor# configure authority service-policy prefer-path-2 transport-
@@ -218,9 +169,7 @@ Additionally, if you require a limit for half-open TCP sessions, it may be helpf
 
 An awareness of these two values (half-open limit and TCP session timer) may mitigate the impact of limiting the establishment of **healthy** TCP sessions.
 
-![TCP Connection Limit](/img/tcp_conx_limit.png)
-
-#### From the Command Line
+#### Configuration Example
 
 ```
 *admin@conductor.conductor#

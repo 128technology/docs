@@ -20,6 +20,7 @@ module.exports = {
     "Common Criteria and FIPS": [
       "cc_fips_titlepage",
       "cc_fips_intro",
+      "cc_fips_compliance_guidelines",
       "cc_fips_conductor_install",
       "cc_fips_router_install",
       "cc_fips_config_password_policies",

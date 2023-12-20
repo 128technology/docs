@@ -43,23 +43,23 @@ For serial console issues please refer to [Serial Console Troubleshooting](ts_se
 
 Use this option when running on hardware that has onboard graphics chipsets. This installs SSR software using the GUI installer.
 
-The procedure that follows here is the **Interactive Install on the VGA Console**.
-
 ## FIPS Mode
 
 To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
+
+### VGA Console
 
 1. Use up/down keys to highlight the desired install mode. 
 
   ![Bios Install](/img/cc_install_conductor_interactive.png)
 
-2. Press TAB to edit the configuration.
+2. Press **TAB** to edit the configuration.
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
   ![FIPS Parameter](/img/ccfips_BIOSinstall_2.png)
 
-4. Press Enter to start the install.
+4. Press **Enter** to start the install.
 
 ### Serial Console
 
@@ -71,11 +71,11 @@ To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1`
 
   ![FIPS Parameter](/img/cc_fips_serial_conductor.png)
 
-3. Press Enter to start the install. 
+3. Press **Enter** to start the install. 
 
 ## Conductor Installation 
 
-After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (approximately 20 minutes). After the installation has completed, the following screen is displayed:
+After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the installation has completed, the following screen is displayed:
 
 ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
 
@@ -258,56 +258,6 @@ Installer complete
 Successfully saved credentials.
 root@node1.test-conductor#
 ```
-
-### Add the Conductor to the Authority
-
-Take this opportunity to log into the Conductor GUI to complete the following operations. This will provide validation that the installation was successful, and familiarize you with GUI operations. 
-
-#### Connecting the Conductor to the Network
-
-To make sure the conductor is on a network and accessible via GUI, the IP address on the interface must be in the same subnet as the VLAN on the switch port. Use `https://<interface IP address>` for GUI login.
-
-1. Select the **Conductor** from the Authority menu on the left side of the GUI. 
-
- ![Configuration menu](/img/config_menu_gui.png)
-
-2. Select the **Configure** icon.
-
- ![Conductor Configuration Icon](/img/conductor_config_icon.png)
-
-3. Select the node for the conductor - in this example it is `node1`.
-
- ![Conductor Node](/img/conductor_node.png) 
-
-4. Under **Associated Asset ID** select the hostname for the conductor.
-
- ![Asset ID](/img/conductor_asset-id.png)
-
-5. Validate and Commit the changes to the configuration. 
-
-### Set the Authority Name
-
-The authority represents the complete set of all SSRs managed under a single organizational entity.
-
-1. Return to the Authority level.
-2. Select the Authority Settings.
-
- ![Authority Settings](/img/conductor_authority_name.png)
-
-3. Under Basic Information, enter the new Authority name. For example, a good name for the Authority would be the name of the business, e.g., Acme Corp. 
-
- ![Basic Information](/img/conductor_authority_name2.png)
-
-### Set the Conductor IP Address
-
-1. Under Conductor Addresses, select ADD.
-2. In the **New Conductor Address** window, enter the conductor public IP address.
-
-![Conductor Address](/img/conductor_address.png)
-
-3. Click Validate and Commit. Warnings will appear, advising you of the change.  
-
-The steps during initialization setup the management IP. The conductor IP address is the public IP address to which the managed routers connect. It is not necessary to manually associate this IP address with a network interface; the interactions between the SSR software and Linux will identify and assign the IP address to the network interface. 
 
 ## Next Steps - Router Configuration
 
