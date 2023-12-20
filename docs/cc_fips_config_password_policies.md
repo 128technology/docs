@@ -9,6 +9,8 @@ sidebar_label: Username and Password Policies
 | 6.0.1   | Added Max failed login attempts and User lock time. |
 | 6.0.4   | Added Username requirements. |
 
+Username and password requirements are listed below. For a list of the commands and how they are used to configure and enforce requirements, please refer to [`configure authority password-policy`](config_command_guide.md#configure-authority-password-policy).
+
 ### Password Requirements
 
 The SSR password policies have been updated to provide a more secure experience. When creating passwords and password policies for users, the following parameters are enforced.

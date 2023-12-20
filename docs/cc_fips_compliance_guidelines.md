@@ -11,17 +11,21 @@ For compliance, the following configuration considerations must be made:
 - When installing a router, the [ICMP Session Match](cc_fips_sec_firewall_filtering.md#from-the-command-line) must be set to `identifier-and-type`.
 - Configure the [TCP Half-Open Connections Limit](cc_fips_sec_firewall_filtering.md#tcp-half-open-connection-limit) for firewall.
 - The `password-policy` must define the minimum password length and maximum number of permitted login attempts per user. Please refer to [`configure authority password-policy`](config_command_guide.md#configure-authority-password-policy) for pcli commands and context for assigning these values.
-- Traffic logging must be enabled by setting the following command to `true`: 
+- The `admin` account must be given `sudo` privileges allowing it to use the shell for some management capabilities. Edit the `/etc/sudoers` file as `root` using the `visudo` command. This allows you to add an entry for `admin` which will persist across reboots.
+- Traffic logging must be enabled by setting the following command to `true`: `configure authority router router system audit traffic enabled true`
+ This is a resource intensive setting. Not more than a few sessions are expected to run while collecting traffic events.
 
- `configure authority router router system audit traffic enabled true`
 - Any services that are used to enforce evaluated firewall functionality must have a service-policy attached that applies strict transport state enforcement:
  `configure authority service-policy <service_policy> transport-state-enforcement strict`
+ This feature must be configured on services where the evaluated firewall capabilities are expected to be enforced. For services that fall outside of the need for firewall security functionality, such as an HA configuration where the states are not synced across devices, setting this feature to strict may have an impact on traffic flow. It is up to your discretion whether to apply the same restrictions on the service. 
 
  For overview information about service policies, please see [Service and Service Policy Design](bcp_service_and_service_policy_design.md). 
 
  For information about configuration baselines, please see [Service Policy Baseline Configuration](bcp_service-policy_defaults.md)
 
-<!---It was once mentioned that sometimes clients may not want to enforce this, especially in HA configurations as the states are not synced across devices. It should be made clear to users that this feature must be configured on services where the evaluated firewall capabilities are expected to be enforced. It is up to the users whether to enable this or not if they have no need to enforce the firewall security functionality on the relevant service.--->
+:::note
+An example configuration has been provided in the [Appendix](cc_fips_appendix.md).
+:::
 
 ## Out of Scope Features
 
@@ -29,7 +33,7 @@ The following functionality and platforms are not supported under Common Criteri
 
 - Non-Juniper branded hardware platforms and Juniper branded hardware platforms not explicitly included.
 - Juniper SSR Software for virtual platforms.
-- HTTPS/TLS, IPSec, SNMP, RADIUS.
+- HTTPS/TLS, IPSec, SNMP, RADIUS, LDAP.
 - X.509 certificate management, validation or verification.
 - Virtual Private Network (VPN) and Intrusion Prevention System (IPS) functions.
 - Graphical User Interface (GUI) and Juniper MIST.
@@ -48,3 +52,4 @@ Installation is done from the SSR ISOs, typically from a bootable image on a fla
 - [Install the Router using the OTP ISO](cc_fips_router_install.md) 
 
 For the compliant installation process and configuration parameters please refer to the specific [Conductor](cc_fips_conductor_install.md) or [Router](cc_fips_router_install.md) Installation and Configuration procedure.
+

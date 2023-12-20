@@ -1,6 +1,6 @@
 ---
-title: Conductor Installation - FIPS
-sidebar_label: Conductor Installation - FIPS 
+title: Conductor Installation
+sidebar_label: Conductor Installation 
 ---
 
 This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
@@ -263,4 +263,4 @@ root@node1.test-conductor#
 
 Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process. Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
 
-A sample branch router configuration is available as a [**template**](config_templates.md#default-templates) on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top level resources. For more information, see [Configuration Templates](config_templates.md). 
+For an example configuration, refer to the [Appendix](cc_fips_appendix.md).
