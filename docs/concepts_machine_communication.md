@@ -95,7 +95,7 @@ By using SVR, the SSR creates sessions to transport directional, encrypted, tunn
 
 | Direction     | Port/Proto | Client Payload (bytes) | Server Payload (bytes) | Default Interval | Notes                                                        |
 | ------------- | ---------- | ---------------------- | ---------------------- | ---------------- | ------------------------------------------------------------ |
-| bidirectional | 16385-65,353 <br /> TCP/UDP | -- | -- | -- | Native TCP sessions use TCP for transport. UDP is used for all other session types. Use `udp-transform` to force UDP transport. |
+| bidirectional | 16385-65,533 <br /> TCP/UDP | -- | -- | -- | Native TCP sessions use TCP for transport. UDP is used for all other session types. Use `udp-transform` to force UDP transport. |
 
 #### Protocol
 
