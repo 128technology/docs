@@ -13,7 +13,9 @@ The Conductor installation must be completed before installing a Session Smart R
 
 ## Prerequisites
 
-- Ensure that the platform you are installing on meets the [SSR hardware requirements](about_supported_platforms.md#minimum-platform-specifications).
+- Ensure that the platform you are installing on is an approved Common Criteria platform:
+    - SSR 120, SSR 130
+    - SSR 1200, SSR 1300, SSR 1400, SSR 1500
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 - Local console connectivity to the device/VM. 
 
@@ -23,27 +25,17 @@ After imaging the ISO onto removable media, insert it into the SSR device and po
 
 Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
 
-![Select Serial Install](/img/cc_fips_serial_install1.png)
+1. Use the Up/Down keys to select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer.
 
-Select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
+  ![Select Serial Install](/img/cc_fips_serial_install1.png)
 
-For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
+  Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 
-:::note
-Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
-
-Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
-::: 
-
-## FIPS Mode
-
-To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
-
-1. Use the up/down keys to highlight the desired install mode. 
-
-  ![Serial Install Selection](/img/cc_fips_serial_install1.png)
+  For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
 
 2. Press the TAB key to edit the configuration.
+
+  To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
@@ -90,12 +82,12 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
   ![Node Information](/img/initializer_Serial5.png)
 
-  - **Node Name:** The name of the system within your SSR Router or Conductor, for example, _boston_router_. By default this field uses the Linux system's hostname.
+  - **Node Name:** The name of the system within your SSR Router, for example, _boston_router_. By default this field uses the Linux system's hostname.
 
   :::note
-  Both routers and conductors can consist of one node (for standalone systems) or two nodes (for highly available systems).
+  Routers can consist of one node (for standalone systems) or two nodes (for highly available systems).
     :::
-  - **Router/Conductor Name:** The name of the router system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `boston_router-node1.router`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
+  - **Router Name:** The name of the router system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `boston_router-node1.router`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
 5. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
   :::note
@@ -134,25 +126,21 @@ This diagram is one possible topology for a standalone SSR deployed at the edge 
 
 ![QuickStart network diagram](/img/intro_ztp_quickstart_network_diagram.png)
 
-Select the `OTP Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
+## Installation
 
-For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
+Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
 
-:::note
-Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
-
-Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
-::: 
-
-## Enable FIPS Mode 
-
-To enable FIPS Enforcement and install the Router using the OTP workflow add the `fips=1` kernel option to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
-
-1. Use the up/down keys to highlight the desired install mode. 
+1. Use the Up/Down keys to select the `OTP Install 128T Routing Software Serial Console` option. This is a supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
 
   ![Serial Install Selection](/img/cc_fips_otp_serial.png)
 
+  Selecting the wrong type of console may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
+
+  For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
+
 2. Press the TAB key to edit the configuration.
+
+  To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 

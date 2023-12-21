@@ -29,7 +29,7 @@ An example configuration has been provided in the [Appendix](cc_fips_appendix.md
 
 ## Out of Scope Features
 
-The following functionality and platforms are not allowed under Common Criteria.
+The following functionality and platforms are not certified under Common Criteria.
 
 - Non-Juniper branded hardware platforms and Juniper branded hardware platforms not explicitly included.
 - Juniper SSR Software for virtual platforms.
@@ -43,14 +43,8 @@ The SSR Hardware has no physical restrictions for Common Criteria certification,
 
 ## Installation Process Overview
 
-Installation of the SSR network devices should follow the following high-level process:
-
-Installation is done from the SSR ISOs, typically from a bootable image on a flash drive or disk. The install process is as follows:
+Installation is done from the SSR ISO, typically from a bootable image on a flash drive or disk. The install process is as follows:
 - [Download the OTP ISO](intro_downloading_iso.md)
 - [Create Bootable Media](intro_creating_bootable_usb.md)
 - [Install a Conductor](cc_fips_conductor_install.md)
-- [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
-- [Install the Router using the OTP ISO](cc_fips_router_install.md) 
-
-For the compliant installation process and configuration parameters please refer to the specific [Conductor](cc_fips_conductor_install.md) or [Router](cc_fips_router_install.md) Installation and Configuration procedure.
-
+- [Install the Router](cc_fips_router_install.md) 

@@ -5,7 +5,7 @@ sidebar_label: Conductor Installation
 
 This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
-The steps in this section describe the *interactive conductor installation* from the packaged-based ISO, using the serial console. The section [Initialize the Conductor](#initialize-the-conductor-node) describes using the Initializer to configure the system as a Conductor after installing from the interactive installation.
+The steps in this section describe the interactive conductor installation from the packaged-based ISO, using the serial console. The section [Initialize the Conductor](#initialize-the-conductor-node) describes using the Initializer to configure the system as a Conductor after installing from the interactive installation.
 
 :::note
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
@@ -23,35 +23,23 @@ After imaging the ISO onto removable media, insert it into the SSR device and po
 
 Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
 
-![Select Serial Install](/img/cc_fips_serial_install1.png)
+1. Use the Up/Down keys to select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer.
 
-Select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
+  ![Select Serial Install](/img/cc_fips_serial_install1.png)
 
-For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
+  Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 
-:::note
-Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
-
-Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
-::: 
-
-## FIPS Mode
-
-To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
-
-1. Use the up/down keys to highlight the desired install mode. 
-
-  ![Serial Install Selection](/img/cc_fips_serial_install1.png)
+  For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
 
 2. Press the TAB key to edit the configuration.
+
+  To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
   ![FIPS Parameter](/img/cc_fips_serial_install2.png)
 
 4. Press **Enter** to start the install. 
-
-## Conductor Installation 
 
 After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the process has completed, the following screen is displayed:
 
