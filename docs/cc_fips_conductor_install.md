@@ -5,7 +5,7 @@ sidebar_label: Conductor Installation
 
 This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
 
-The steps in this section describe the *interactive conductor installation* from the packaged-based ISO. The section [Initialize the Conductor](#initialize-the-conductor-node) describes using the Initializer to configure the system as a Conductor after installing from the Interactive ISO.
+The steps in this section describe the *interactive conductor installation* from the packaged-based ISO, using the serial console. The section [Initialize the Conductor](#initialize-the-conductor-node) describes using the Initializer to configure the system as a Conductor after installing from the interactive installation.
 
 :::note
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
@@ -17,15 +17,17 @@ The Conductor installation must be completed before installing a Session Smart R
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 - Local console connectivity to the device/VM. 
 
-## Installation Type
+## Installation
 
 After imaging the ISO onto removable media, insert it into the SSR device and power it on.
 
-Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment. 
+Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
 
-To install using the Interactive Installation, use the arrow keys to select either `Install 128T Routing Software Serial Console` or **`Install 128T Routing Software VGA Console`**. As noted earlier, this guide describes the Conductor installation process using the Interactive Installation, specifically using the VGA console.
+![Select Serial Install](/img/cc_fips_serial_install1.png)
 
-![VGA Boot with Interactive Install](/img/cc_install_conductor_interactive.png)
+Select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
+
+For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
 
 :::note
 Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
@@ -33,49 +35,25 @@ Because not all hardware has video support, booting to the serial console 115200
 Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 ::: 
 
-#### Install via Serial Console
-
-Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
-
-For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
-
-#### Install via VGA Console
-
-Use this option when running on hardware that has onboard graphics chipsets. This installs SSR software using the GUI installer.
-
 ## FIPS Mode
 
 To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
-### VGA Console
+1. Use the up/down keys to highlight the desired install mode. 
 
-1. Use up/down keys to highlight the desired install mode. 
+  ![Serial Install Selection](/img/cc_fips_serial_install1.png)
 
-  ![Bios Install](/img/cc_install_conductor_interactive.png)
-
-2. Press **TAB** to edit the configuration.
+2. Press the TAB key to edit the configuration.
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
-  ![FIPS Parameter](/img/ccfips_BIOSinstall_2.png)
+  ![FIPS Parameter](/img/cc_fips_serial_install2.png)
 
-4. Press **Enter** to start the install.
-
-### Serial Console
-
-1. Use up/down keys to highlight the desired install mode. 
-
-  ![Serial Install Selection](/img/install_serial_conductor_interactive1.png)
-
-2. For FIPS press `e` to edit and append `fips=1`.
-
-  ![FIPS Parameter](/img/cc_fips_serial_conductor.png)
-
-3. Press **Enter** to start the install. 
+4. Press **Enter** to start the install. 
 
 ## Conductor Installation 
 
-After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the installation has completed, the following screen is displayed:
+After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the process has completed, the following screen is displayed:
 
 ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
 
@@ -217,7 +195,7 @@ The following user accounts and passwords are created during the ISO installatio
 | root     | 128tRoutes |
 | t128     | 128tRoutes |
 
-It is *strongly recommended* that you change these passwords immediately. Use the `passwd` command from the UNIX window.
+Change these passwords immediately. Use the `passwd` command from the UNIX window.
 
 ```
 [t128@test-conductor ~]$ passwd
@@ -261,6 +239,27 @@ root@node1.test-conductor#
 
 ## Next Steps - Router Configuration
 
-Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process. Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
+Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process. 
 
-For an example configuration, refer to the [Appendix](cc_fips_appendix.md).
+Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
+
+If you will be using the OTP Quickstart router installation process, use the conductor GUI to generate a basic configuration and quickstart file for router installation. When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
+
+Instructions for generating the quickstart file are found at [QuickStart From the OTP ISO](cc_fips_install_quickstart_otpiso.md)
+
+If you are installing routers using the Interactive Installation, continue with [Router Installation](cc_fips_router_install.md).
+
+To see an example router configuration, refer to the [Appendix](cc_fips_appendix.md).
+
+
+
+
+
+
+
+
+
+
+
+
+

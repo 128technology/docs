@@ -17,35 +17,39 @@ The Conductor installation must be completed before installing a Session Smart R
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 - Local console connectivity to the device/VM. 
 
-## Interactive Installation 
+## Installation
+
+After imaging the ISO onto removable media, insert it into the SSR device and power it on.
+
+Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
+
+![Select Serial Install](/img/cc_fips_serial_install1.png)
+
+Select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
+
+For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
+
+:::note
+Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
+
+Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
+::: 
+
+## FIPS Mode
 
 To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
-### VGA Console
+1. Use the up/down keys to highlight the desired install mode. 
 
-1. Use up/down keys to highlight the desired install mode. 
+  ![Serial Install Selection](/img/cc_fips_serial_install1.png)
 
-  ![Bios Install](/img/cc_install_conductor_interactive.png)
-
-2. Press **TAB** to edit the configuration.
+2. Press the TAB key to edit the configuration.
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
-  ![FIPS Parameter](/img/ccfips_BIOSinstall_2.png)
+  ![FIPS Parameter](/img/cc_fips_serial_install2.png)
 
-4. Press **Enter** to start the install.
-
-### Serial Console
-
-1. Use up/down keys to highlight the desired install mode. 
-
-  ![Serial Install Selection](/img/install_serial_conductor_interactive1.png)
-
-2. For FIPS press `e` to edit and append `fips=1`.
-
-  ![FIPS Parameter](/img/cc_fips_serial_conductor.png)
-
-3. Press **Enter** to start the install. 
+4. Press **Enter** to start the install. 
 
 After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the installation has completed, the following screen is displayed:
 
@@ -130,33 +134,31 @@ This diagram is one possible topology for a standalone SSR deployed at the edge 
 
 ![QuickStart network diagram](/img/intro_ztp_quickstart_network_diagram.png)
 
-Not all hardware has video support. Booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
+Select the `OTP Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. 
 
-Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed, and if left to continue will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
+For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
 
-#### SSR System via Serial Console
+:::note
+Because not all hardware has video support, booting to the serial console 115200 baud is the default, and is automatically selected after 30 seconds. When using the serial console, the terminal size is 80x25 - anything smaller may result in abnormal navigation behavior.
 
-Use this option when running on hardware with no video chipset. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer. For serial console issues please refer to [Serial Console Troubleshooting](intro_installation_bootable_media.mdx#serial-console-troubleshooting).
-
-#### SSR System with VGA Console
-
-Use this option when running on hardware that has onboard graphics chipsets. This installs the SSR using the GUI installer.
+Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
+::: 
 
 ## Enable FIPS Mode 
 
 To enable FIPS Enforcement and install the Router using the OTP workflow add the `fips=1` kernel option to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
-1. Use the up/down keys to highlight the desired install mode - use **OTP Install 128T Routing Software VGA Console**. 
+1. Use the up/down keys to highlight the desired install mode. 
 
-  ![Bios Install](/img/cc_fips_BIOSinstall_1.png)
+  ![Serial Install Selection](/img/cc_fips_otp_serial.png)
 
-2. Press TAB to edit the configuration.
+2. Press the TAB key to edit the configuration.
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
-  ![FIPS Parameter](/img/ccfips_BIOSinstall_2.png)
+  ![FIPS Parameter](/img/cc_fips_serial_install2.png)
 
-4. Press Enter to start the install. 
+4. Press **Enter** to start the install. 
 
 ### SSR Installation
 

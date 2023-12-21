@@ -22,6 +22,7 @@ module.exports = {
       "cc_fips_intro",
       "cc_fips_compliance_guidelines",
       "cc_fips_conductor_install",
+      "cc_fips_install_quickstart_otpiso",
       "cc_fips_router_install",
       "cc_fips_config_password_policies",
       "cc_fips_sec_firewall_filtering",

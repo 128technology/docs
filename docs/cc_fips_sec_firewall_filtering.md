@@ -3,7 +3,7 @@ title: Customizable Firewall Rules and Filters
 sidebar_label: Customizable Firewall Rules and Filters
 ---
 
-As part of the security hardening and certification process, the SSR has implemented the following firewall features to provide a more secure platform for network traffic. Steps for configuration from both the GUI and the PCLI are provided. 
+As part of the security hardening and certification process, the SSR has implemented the following firewall features to provide a more secure platform for network traffic.  
 
 #### Revision History
 

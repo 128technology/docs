@@ -6,7 +6,7 @@ sidebar_label: Common Criteria Compliance Guidelines
 For compliance, the following configuration considerations must be made:
  
 - FIPS mode must be enabled **during installation**.
-- All configuration procedures must be performed from the PCLI; use of the GUI is not part of the approved use case.
+- Except during installation, all configuration procedures must be performed from the PCLI; use of the GUI is not part of the approved use case. Configuring the router OTP Quickstart file from the Conductor GUI is acceptable under the Common Criteria guidelines.
 - When installing a router, the [IPv4 Option Filter](cc_fips_sec_firewall_filtering.md#ipv4-option-filtering) must be set to `drop-all`.
 - When installing a router, the [ICMP Session Match](cc_fips_sec_firewall_filtering.md#from-the-command-line) must be set to `identifier-and-type`.
 - Configure the [TCP Half-Open Connections Limit](cc_fips_sec_firewall_filtering.md#tcp-half-open-connection-limit) for firewall.
@@ -29,7 +29,7 @@ An example configuration has been provided in the [Appendix](cc_fips_appendix.md
 
 ## Out of Scope Features
 
-The following functionality and platforms are not supported under Common Criteria.
+The following functionality and platforms are not allowed under Common Criteria.
 
 - Non-Juniper branded hardware platforms and Juniper branded hardware platforms not explicitly included.
 - Juniper SSR Software for virtual platforms.
@@ -37,6 +37,7 @@ The following functionality and platforms are not supported under Common Criteri
 - X.509 certificate management, validation or verification.
 - Virtual Private Network (VPN) and Intrusion Prevention System (IPS) functions.
 - Graphical User Interface (GUI) and Juniper MIST.
+- SSR Plugins, particularly Wireshark, are excluded from Common Criteria certification. 
 
 The SSR Hardware has no physical restrictions for Common Criteria certification, however, there is an assumption of physical security.
 

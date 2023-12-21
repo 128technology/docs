@@ -11,8 +11,6 @@ config
     authority
         conductor-address   10.0.0.2
 
-
-
         router              conductor
             name    conductor
 
