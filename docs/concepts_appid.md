@@ -13,11 +13,13 @@ The SSR has three built-in techniques for affiliating named applications to serv
 2. Using the `application-identification` mode `tls`
 3. Using the `application-identification` mode `module`
 
+Additionally, [web filtering](config_domain-based_web_filter.md#overview) provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs. 
+
 ### DNS-based Services
 
 Generally, when configuring a `service` on a SSR, administrators use the `address` field to identify the IP address(es)/CIDR block(s) that the SSR should use to match to inbound traffic. However, the `address` field will also accept hostnames, such as `www.128technology.com`. When a service uses a hostname in the `address` field, it is referred to as a *DNS-based service*.
 
-For every DNS-based service, the SSR will use its local DNS to resolve the hostnames; for every IP address that is returned the SSR will treat that as though it were configured in the `address` field, and install FIB entries accordingly. It will also refresh these FIB entries based on the time-to-live (TTL) returned by the DNS server. Here is a sample configuration for reference:
+For every DNS-based service, the SSR will use the host system's local DNS capabilities to resolve hostnames; for every IP address that is returned the SSR will treat that as though it were configured in the `address` field, and install FIB entries accordingly. It will also refresh these FIB entries based on the time-to-live (TTL) returned by the DNS server. Here is a sample configuration for reference:
 
 ```
 admin@labsystem1.fiedler# show config running authority service interchange
@@ -109,64 +111,7 @@ Certificate:
 This sample certificate was supplied by [FM4DD](http://www.fm4dd.com/openssl/certexamples.htm).
 :::
 
-About a third of the way through the output you can see that the *Common Name* (listed as `CN` in the `Subject` line) is `www.example.com`. This is what SSR will parse and subsequently retain as the "application name" for this destination. Assuming this matches a configured `application-name` within a `service`, a FIB entry is installed with this server's IP address and associated with the `service`.
-
-To enable application identification based on TLS, configure the `application-identification` element within the `router` context as seen here:
-
-```
-admin@labsystem1.fiedler# show config running authority router burlington application-identification
-
-config
-
-    authority
-
-        router  burlington
-            name                        burlington
-
-            application-identification
-                mode  tls
-            exit
-        exit
-    exit
-exit
-```
-
-For reference, here's a `service` that would leverage the X.509 certificate shown above:
-
-```
-admin@labsystem1.fiedler# show config running authority service example
-
-config
-
-    authority
-
-        service  example
-            name                  example
-            description           "www.example.com website"
-            application-name      www.example.com
-
-            access-policy         trusted
-                source      trusted
-                permission  allow
-            exit
-            service-policy        NO-LTE
-            share-service-routes  false
-        exit
-    exit
-exit
-```
-
-Here we can see the `application-name` set to `www.example.com`, which matches the Common Name from the X.509 certificate in our example. Assuming we had a `service`/`service-route` capable of reaching `www.example.com` to begin with, the TLS handshake would see the server's X.509 certificate returned back to the client through the SSR. The SSR parses the certificate, recognizes `www.example.com` as belonging to the service named `example` and installs a FIB entry for it with the server's IP address.
-
-:::note
-The `example` service needs to have its own `service-route` in order for traffic to be forwarded.
-:::
-
-With the TLS-based application identification technique, the `application-name` can include a wildcard such as `*.example.com`, which is not possible with the DNS-based approach. This gives administrators a bit more flexibility in defining which traffic to match to services when parsing the X.509 certificates.
-
-#### Update for SSR version 5.0
-
-Starting with SSR version 5.0, a FIB entry is no longer installed as part of DPI. Instead, domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
+About a third of the way through the output you can see that the *Common Name* (listed as `CN` in the `Subject` line) is `www.example.com`. This is what SSR will parse and subsequently retain as the "application name" for this destination. Domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
 
 ```
 config
@@ -258,7 +203,7 @@ Scripts are placed on the router's filesystem at `/etc/128technology/application
 
 #### Systemd-Based Module Setup
 
-Beginning with the 5.2 release, `systemd` may be used to manage the execution of application identification modules. JSON output produced by the module is passed directly to the highway REST API instead of being written to disk.
+`systemd` may be used to manage the execution of application identification modules. JSON output produced by the module is passed directly to the highway REST API instead of being written to disk.
 
 Using this approach, modules are registered by creating a file at `/etc/128technology/application-modules/services/<module-name>`. This file lists the systemd units of the module and specifies if and how SSR should interact with them.
 - `reload-service`: When the highway process starts, reload the systemd unit. This is a signal to POST the JSON to highway again as module data is not saved through process restarts.
@@ -286,7 +231,7 @@ For more information about using timers with the systemd service, refer to [Arch
 
 #### Viewing Modules
 
-Beginning with the 5.2 release, module registration and detailed module status (including a full list of ip-prefix/ports/protocol) can be accessed via a REST API or from the CLI. Please refer to the API documentation available from the GUI, and the [`show application modules status`](cli_reference.md#show-application-modules-status) and [`show application modules registration`](cli_reference.md#show-application-modules-registration) for full details.
+Module registration and detailed module status (including a full list of ip-prefix/ports/protocol) can be accessed via a REST API or from the CLI. Please refer to the API documentation available from the GUI, and the [`show application modules status`](cli_reference.md#show-application-modules-status) and [`show application modules registration`](cli_reference.md#show-application-modules-registration) for full details.
 
 #### Referencing Modules in Configuration
 
