@@ -156,6 +156,7 @@ module.exports = {
         "label": "Optimizing Routing Protocols",
         "items": [
           "howto_tune_bfd",
+          "config_session_optimization",
           "config_bgp",
           "config_vrf_route_leaking",
           "config_ospf",
@@ -199,6 +200,8 @@ module.exports = {
         "label": "Security",
         "items": [
           "sec_adaptive_encrypt",
+          "sec_firewall_filtering",
+          "sec_security_policy",
         ],
       },
       {

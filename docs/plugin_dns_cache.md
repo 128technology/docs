@@ -217,12 +217,20 @@ Verify that the dns-cache network interface (default `dns-cache-intf`) is UP.
 The plugin must be updated to version 3.2.1 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
+### Release 3.5.0
+
+**Release Date:** Dec 21, 2023
+
+#### New Features and Improvements
+- **PLUGIN-1842** Reduce Conductor CPU time to apply salt states in large scale deployments
+
+By using Saltstack data files, the time to apply high states across all assets is significantly reduced
+
 ### Release 3.4.0
 
 **Release Date:** May 13, 2022
 
 #### New Features and Improvements
-
 - **PLUGIN-1611** Improve HA support for DNS based app-id
 
 The DNS cache plugin is enhanced to synchronize the cache between HA nodes to allow the DNS app-id plugin to consume and process DNS records on both nodes.
@@ -232,7 +240,6 @@ The DNS cache plugin is enhanced to synchronize the cache between HA nodes to al
 **Release Date:** Apr 29, 2022
 
 #### New Features and Improvements
-
 - **PLUGIN-1208** Enhance DNS Cache Plugin with An Advanced field
 
 Added support for new custom dnsmasq options that are otherwise not provided via direct configuration.
@@ -282,7 +289,6 @@ Added support for new custom dnsmasq options that are otherwise not provided via
 ### Release 1.1.0, 2.1.0
 
 #### New Features and Improvements
-
 - **PLUGIN-641** Provide support for redirecting and blocking domains
 
 Added support for redirecting domains to a different upstream domain server. In addition, added support for blocking domains that the user should not be able to access.
