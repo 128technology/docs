@@ -423,7 +423,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 ------
 - **I95-50722 Highway crashes during session migration:** Resolved a crash in the SSR's highway process, due to a race condition between configuration changes and BFD sessions.
 ------
-- **I95-51364 Highway crash on both nodes of an HA system:** Resolved a crash that can occur in the highway process of the SSR when deployed in HA mode, due to spurious redundancy database errors.
+- **I95-51364 Highway crash on both nodes of an HA system:** Resolved a crash that can occur in the highway process of the SSR, due to spurious redundancy database errors. This redundancy database is present on all SSR instances, and may contain an unexpected IP address of 0.0.0.0 (such as netbios) due to session traffic, which can generate errors and ultimately cause a highway crash. The exception causing the errors is now caught and the issue has been resolved.
 ------
 - **I95-51378 REST API improvements:** Performance improvements have been made in the metrics REST APIs to alleviate issues with intermittent metrics graphs on heavily loaded systems.
 ------
