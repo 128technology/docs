@@ -7,28 +7,30 @@ This process is used to migrate an existing conductor-managed router to a new co
 
 ### PCLI
 
-1. Export the router configuration from the old conductor, and import and commit the router configurations to the new conductor. Alternatively, you may be able to simply copy and paste the configuration to the new conductor. 
-2. Run the `migrate` command as follows: 
+The `migrate` command automates the process of migrating a router to a new conductor. 
+
+Run the `migrate` command as follows: 
  - From the old conductor: `migrate conductor <new-address> router <router>`
  - From the router: `migrate conductor <new_address>`
+
+Alternatively, you can export the router configuration from the old conductor, and import and commit the router configurations to the new conductor. Or depending on the complexity of the configuration, you may be able to simply copy and paste the router configuration to the new conductor. 
 
 ### GUI
 
 When using the GUI, a **Migrate** button is visible for Routers that are possible to migrate. 
 
-1. Export the router configuration from the old conductor, and import and commit the router configurations to the new conductor. Alternatively, you may be able to simply copy and paste the configuration to the new conductor.
-2. From the Authority menu, select Routers.
-3. On the Routers page, choose the router to migrate.
-4. At the top of the Router page, select the **More** list (three vertical dots) to display the Migrate button.
+1. From the Authority menu, select Routers.
+2. On the Routers page, choose the router to migrate.
+3. At the top of the Router page, select the **More** list (three vertical dots) to display the Migrate button.
 
  ![Migrate Button](/img/howto_migrate_router_button.png)
 
-5. Click the button to display the Migrate Router dialog.
+4. Click the button to display the Migrate Router dialog.
 
  ![Migrate Dialog](/img/howto_migrate_router_dialog.png)
 
-6. Enter the new Conductor address(es). You can also choose to rollback to the existing configuration if there is a failure (recommended), or to force the configuration change regardless of errors.
-7. Click **Migrate**.
+5. Enter the new Conductor address(es). You can also choose to rollback to the existing configuration if there is a failure (recommended), or to force the configuration change regardless of errors.
+6. Click **Migrate**.
 
 ### Verify Migration
 
