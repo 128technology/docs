@@ -111,7 +111,7 @@ Certificate:
 This sample certificate was supplied by [FM4DD](http://www.fm4dd.com/openssl/certexamples.htm).
 :::
 
-About a third of the way through the output you can see that the *Common Name* (listed as `CN` in the `Subject` line) is `www.example.com`. This is what SSR will parse and subsequently retain as the "application name" for this destination. Domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
+About a third of the way through the output you can see that the *Common Name* (listed as `CN` in the `Subject` line) is `www.example.com`. This is what SSR will parse and subsequently retain as the domain-name for this destination. Domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
 
 ```
 config
