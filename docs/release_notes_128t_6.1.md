@@ -47,7 +47,7 @@ This issue will be corrected in an upcoming release.
 
 ## Release 6.1.6-7
 
-**Release Date:** December 29, 2023
+**Release Date:** January 2, 2024
 
 ### Resolved Issues Requiring Configuration Changes
 
@@ -85,7 +85,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:** When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse the middle node. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.
 ------
-- **II95-52018 Overlapping IP Prefix validation may be incorrect, causing a false configuration warning:** Configuration validation for IP Prefixes has been corrected.
+- **I95-52018 Overlapping IP Prefix validation may be incorrect, causing a false configuration warning:** Configuration validation for IP Prefixes has been corrected.
 ------
 - **I95-52414 RBAC not being honored for `show fib` output:** Resolved an issue where `show fib` included entries that the current user did not have permission to view.
 ------
