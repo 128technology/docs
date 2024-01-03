@@ -9,10 +9,23 @@ This process is used to migrate an existing conductor-managed router to a new co
 
 The `migrate` command automates the process of migrating a router to a new conductor. 
 
-1. Export the router configuration from the old conductor, and import and commit the router configurations to the new conductor. Depending on the complexity of the configuration, you may be able to simply copy and paste the router configuration to the new conductor.
-2. Run either of the following `migrate` commands:
- - From the old conductor: `migrate conductor <new-address> router <router>`
- - From the router: `migrate conductor <new_address>`
+1. Export the router configuration from the old conductor, and import and commit the router configuration to the new conductor. 
+
+ A.) From the **router PCLI** (this will include only configuration for the specific router), run `show config running flat > /tmp/router_config.txt`. The router configuration is exported to the temp directory as a text file.
+
+ B.) Open the `router_config.txt` file and remove the `conductor-address` from the configuration. This prevents the import operation from overwriting the new conductor address with the old one. Adjust any routing configuration necessary for the router to reach the new conductor.
+
+ C.) From the PCLI of the new conductor, import `/tmp/router_config.txt`.
+
+ `< /tmp/router_config.txt`
+
+ D.) Perform migration using the migrate command as shown in step 2 below.
+
+2. Run the `migrate` command from the old conductor: 
+
+ `migrate conductor <new-address> router <router>`
+
+ In some situations, such as debugging or for monitoring purposes, the `migrate` command can be run from the router: `migrate conductor <new_address>`. However, it is recommended to execute the command from the conductor. 
 
 ### GUI
 
