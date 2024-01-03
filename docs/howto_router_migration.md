@@ -25,7 +25,11 @@ The `migrate` command automates the process of migrating a router to a new condu
 
  `migrate conductor <new-address> router <router>`
 
- In some situations, such as debugging or for monitoring purposes, the `migrate` command can be run from the router: `migrate conductor <new_address>`. However, it is recommended to execute the command from the conductor. 
+:::note
+The `migrate conductor` command uses WAN IP(s) to migrate a router from one conductor to another. Because of this, the command cannot be used when both the old and new conductor are behind the same head-end router and use `dest-nat` or SVR to reach the Conductor. In this case, the WAN IP will be the same for both conductors and the migration will not work.
+:::
+
+In some situations, such as debugging or for monitoring purposes, the `migrate` command can be run from the router: `migrate conductor <new_address>`. However, it is recommended to execute the command from the conductor. 
 
 ### GUI
 
