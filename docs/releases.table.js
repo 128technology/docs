@@ -6,6 +6,11 @@ import React from "react";
 // ----------------------------------------------------------------------------
 export const releases = [
   {
+    version: '5.6.13',
+    url:'/docs/release_notes_128t_5.6#release-5613-4',
+    releaseDate: 'January 11, 2024',
+  },  
+  {
     version: '6.2.3',
     url: 'release_notes_128t_6.2#release-623-14r2',
     releaseDate: 'December 15, 2023',
