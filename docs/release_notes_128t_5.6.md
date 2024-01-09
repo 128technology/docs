@@ -28,7 +28,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.6.13-4
+## Release 5.6.13-3
 
 **Release Date:** January 11, 2024
 
@@ -105,6 +105,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 - **I95-54512 SSR130 moved into an HA cluster does not come up properly:** Resolved an issue where the generation of an improper configuration could lead to a crash loop in the NodeMonitor process.
 ------
 - **I95-54803 Control packets are treated with equal priority in overload conditions, causing drops:** Control packets now have preferential treatment under overload conditions, reducing the drop rate. 
+------
+- **I95-55002 Password reset loop:** Resolved an issue that caused users created with the **Require password change on first login?** set to `yes` to get stuck in an infinite loop of password changes when logging in using the GUI.
 ------
 - **WAN-2486 SSR data reporting values that are unrealistically high:** When capturing application usage for application summary learned apps, we sometimes observe really high values for bandwidth and other metrics.
 Resolution: The high value was due to an internal corruption when the metrics for these learned applications were removed and added. During such transition we sometimes end up with memory corruption resulting in the bogus high value. The part of the solution is to ensure the transition happens more gracefully.
