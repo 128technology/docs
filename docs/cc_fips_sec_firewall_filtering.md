@@ -151,7 +151,7 @@ state-enforcement strict
 *admin@conductor.conductor#
 ```
 
-For a detailed description of Transport State Enforcement, refer to [Transport State Enforcement](bcp_service_and_service_policy_design.md#transport-state-enforcement). For additional configuration information, see the [transport-state-enforcement](config_reference_guide.md#service-policy) parameter. 
+For a detailed description of Transport State Enforcement, refer to [Transport State Enforcement](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/bcp_service_and_service_policy_design.md#transport-state-enforcement). For additional configuration information, see the [transport-state-enforcement](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_reference_guide.md#service-policy) parameter. 
 
 ## TCP Half-Open Connection Limit
 

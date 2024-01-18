@@ -7,7 +7,7 @@ Use this procedure to set up a typical standalone branch router leveraging the Q
 
 ### SSR Configuration
 
-The SSR router will need to be provisioned on the conductor.  This procedure presumes you are familiar with the [concepts](concepts_glossary.md) and [configuration](config_basics.md) of the SSR platform.
+The SSR router will need to be provisioned on the conductor.  This procedure presumes you are familiar with the [concepts](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_glossary.md) and [configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_basics.md) of the SSR platform.
 
 When a router configuration has been added to the conductor, but the device has not yet connected, in place of device-specific information, QuickStart instructions will be displayed.
 

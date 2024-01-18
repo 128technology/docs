@@ -3,7 +3,7 @@ title: Router Installation
 sidebar_label: Router Installation 
 --- 
 
-This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](intro_downloading_iso.md) and [Creating a Bootable USB](intro_creating_bootable_usb.md).
+This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_downloading_iso.md) and [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb.md).
 
 Router installation can be performed using either the Interactive Installation, or the OTP process. The steps in this section describes both methods.
 
@@ -31,7 +31,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
   Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 
-  For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
+  For serial console issues please refer to [Serial Console Troubleshooting](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing.md).
 
 2. Press the TAB key to edit the configuration.
 
@@ -68,9 +68,9 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
   ![SSR Role](/img/initializer_Serial2a.png)
 
 2. For SSR routers, you will be prompted for the IP address(es) of the conductor. If you have a conductor, enter the administrative IP address and the node will retrieve the configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
-3. When asked _What kind of Router/Conductor node is this?_, select from the following options:
+3. When asked _What kind of Router node is this?_, select from the following options:
 
-  ![Identify the Node](/img/initializer_Serial3.png)
+  ![Identify the Node](/img/initializer_Serial3a.png)
 
 - **Standalone:** This router has no highly available peer, and is not currently planned for high availability.
 
@@ -80,14 +80,14 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 4. Enter the following system properties on the **Node Info** screen:
 
-  ![Node Information](/img/initializer_Serial5.png)
+  ![Node Information](/img/initializer_Serial5cc.png)
 
-  - **Node Name:** The name of the system within your SSR Router, for example, _boston_router_. By default this field uses the Linux system's hostname.
+  - **Node Name:** The name of the system within your SSR Router, for example, **boston-router**. By default this field uses the Linux system's hostname.
 
   :::note
   Routers can consist of one node (for standalone systems) or two nodes (for highly available systems).
     :::
-  - **Router Name:** The name of the router system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `boston_router-node1.router`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
+  - **Router Name:** The name of the router system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `boston-router-node1.boston1`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
 5. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
   :::note
@@ -108,7 +108,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 ## OTP Router Installation
 
-The simplest deployment of the OTP solution is highly automated and leverages just two components, the Conductor and at least one SSR. For many customers, the SSR platform is ordered and delivered as a pre-integrated, off-the-shelf solution through the Juniper SSR partner network. An image leveraging QuickStart provisioning can also be deployed into a VM or cloud environment, though consideration must be made to the mechanism of injecting the file. Virtual environments may be better suited for cloud automation tools to assist in automated, dynamic deployment.
+The simplest deployment of the OTP solution is highly automated and leverages just two components, the Conductor and at least one SSR. For many customers, the SSR platform is ordered and delivered as a pre-integrated, off-the-shelf solution through the Juniper SSR partner network. 
 
 The OTP installation process produces a Router installed with SSR software set to factory defaults. Upon completing the OTP installation process, the default behavior is to provision the device to be configured with a DHCP client on the first ethernet port and DHCP server listening on all other ports. A user then connects to the SSR via ethernet cable and use the QuickStart file generated by the Conductor to finalize the SSR configuration. After performing the QuickStart operation, the SSR will have connectivity to its Conductor and can download the latest configuration (if necessary) and begin operation. These defaults [can be changed](#quickstart-location) to suit your needs.
 
@@ -136,7 +136,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
   Selecting the wrong type of console may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 
-  For serial console issues please refer to [Serial Console Troubleshooting](ts_serial_console_tsing.md).
+  For serial console issues please refer to [Serial Console Troubleshooting](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing.md).
 
 2. Press the TAB key to edit the configuration.
 
