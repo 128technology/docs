@@ -183,7 +183,7 @@ module.exports = {
         "type": "category",
         "label": "Traffic Engineering",
         "items": [
-          "concepts_traffic_engineering"
+          "concepts_traffic_engineering",
           "config_traffic_engineering",
           "bcp_per-adjacency_traffic_engineering",
         ],
