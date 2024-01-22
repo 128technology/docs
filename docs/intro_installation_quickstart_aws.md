@@ -73,14 +73,14 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the AWS Console:
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami).
 2. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 3. Click on the “Continue to Configuration” button.
 4. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
 5. Click on the "Continue to Launch" button.
 6. In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
 7. Answer the following 3 questions to launch the deployment of a Conductor. For additional information, refer to [Launch the Template](#launch-the-template).
-* What name do you want to give it? 
+* What name do you want to give it?
   * Enter the name in the "Stack name" field (for example: Conductor).
 * Where do you want to deploy it?
   * Select the VPC in the region.
@@ -104,7 +104,7 @@ Be sure to change the password that conforms to your business' password requirem
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami).
 2. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 3. Click on the “Continue to Configuration” button.
 4. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Conductor" and select the desired region.
@@ -126,7 +126,7 @@ Be sure to change the password that conforms to your business' password requirem
 
 If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, then the token credentials will be entered during the software installation process. However, if the **Session Smart Networking Platform** offering selected for the deployment was a **Private AMI** or an **Hourly AMI**, then add the token credentials:
 
-1. SSH to the EC2 intance of Conductor (Linux). 
+1. SSH to the EC2 intance of Conductor (Linux).
 2. Run in Linux the following command to add a token credential:
 
 ```
@@ -145,12 +145,19 @@ Proceed to the next section [Session Smart Router Deployment](#session-smart-rou
 
 The following infrastructure must exist in your AWS account:
 * A VPC where the Session Smart Router will be deployed.
-* The existing VPC is segmented with at least three subnets. The role of each subnet is described below:
-  * Public subnet. The expectation is that this subnet provides connectivity to enable communication with external/remote SSR peers.
-  * Private subnet. The expectation is that this subnet provides connectivity to internal workloads within the cloud.
-  * Management subnet. The expectation is that this subnet meets the following capabilities:
-    * The subnet is reachable for SSH for administration purposes.
-    * The interface of the Conductor that is going to manage this router must be reachable from this subnet.
+* The existing VPC is segmented with at least three subnets. The role of each subnet is described below
+
+#### Public Subnet
+The expectation is that this subnet provides connectivity to enable communication with external/remote SSR peers. For MIST managed deployment, this subnet should also provide access to the MIST cloud infrastructure.
+
+
+#### Private subnet
+The expectation is that this subnet provides connectivity to internal workloads within the cloud.
+
+#### Management subnet
+This subnet is most useful for conductor managed deployments. The expectation is that this subnet meets the following capabilities:
+* The subnet is reachable for SSH for administration purposes.
+* The interface of the Conductor that is going to manage this router must be reachable from this subnet.
 
 :::important
 Please note that deploying Session Smart Routers without a valid token or certificate will be limited to deployments within the cloud only. If your use case requires the deployment of an SSR on your premises as well, please contact your Juniper Sales representative.
@@ -162,7 +169,7 @@ A Session Smart Router can be deployed manually via the [AWS Console](https://co
 
 When deploying the Session Smart Router using the templates referenced in this section, the following infrastructure elements are created automatically to assist with the deployment process:
 * EC2 instance using a Session Smart image available in the marketplace.
-* The router is deployed with three network interfaces: public, private and management interfaces.
+* The router is deployed with appropriate network interfaces as described [here](#requirements-1)
 * Each network interface has a network security group associated. The network security groups are configured in accordance with the requirements to deploy a fabric with Session Smart Networking software.
 * The public and management interfaces have a unique and static public IP address associated.
 
@@ -174,20 +181,27 @@ The following image shows the infrastructure elements deployed:
 
 To deploy the Session Smart Networking software via the AWS Console:
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami).
 2. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 3. Click on the “Continue to Configuration” button.
 4. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
 5. Click on the "Continue to Launch" button.
 6. In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
 7. Answer the following 4 questions to launch the deployment of an SSR. For additional information refer to [Launch the Template](#launch-the-template).
-- What name do you want to give it? 
+- What name do you want to give it?
   - Provide it in the "Stack name" field (for example: 128TRouter).
 - Where do you want to deploy it?
   - Select the VPC in the region.
-  - Select the public, private and management subnets within the VPC.
+  - Select the public, private (and management) subnets within the VPC.
+
+For conductor managed deployments:
 - Which Session Smart Conductor is going to manage it?
   Provide the IP address of the primary node of Conductor in the "Conductor Primary Control IP" field. If the Conductor is highly available, provide the IP address of the secondary conductor node in the "Conductor Secondary Control IP" field. Please check the public IP address assigned to the Conductor deployed in the previous section.
+
+For MIST managed deployments:
+- Which MIST org is going to manage it?
+  Provide the [registration code](wan_onboarding_whitebox.md#manual-adoption) for the MIST org.
+
 - Who is going to be the administrator?
   - Select the IAM user key.
 8. Click the "Next" button.
@@ -199,11 +213,12 @@ Once the deployment completes, information is provided in the Outputs tab:
 * If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually. To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
+
 #### AWS CLI
 
 To deploy the Session Smart Networking software via the AWS CLI:
 
-1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami). 
+1. Click on the **Session Smart Networking Platform** offering selected during the previous section [Selecting the AMI](#selecting-the-ami).
 2. Click on the “Continue to Subscribe” button and accept the terms and conditions.
 3. Click on the “Continue to Configuration” button.
 4. In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
@@ -213,11 +228,13 @@ To deploy the Session Smart Networking software via the AWS CLI:
 
 Launch the deployment with the corresponding AWS CLI commands making use of the S3 URL of the template identified previously. For additional information please refer to [Launch the Template](#launch-the-template).
 
-Once the deployment completes, information is provided in the Outputs tab:
+### Conductor Managed Setup
+
 * If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
 * If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. Then, login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually. To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
-### Network Interfaces Layout
+
+#### Network Interfaces Layout
 
 The _Session Smart Router Template_ deploys an EC2 instance for the SSR with three network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Management, Public, and Private. The network interfaces are mapped as follows:
 
@@ -227,32 +244,18 @@ The _Session Smart Router Template_ deploys an EC2 instance for the SSR with thr
 | eth1                   | Public           | 0000:00:06.0    |
 | eth2                   | Private          | 0000:00:07.0    |
 
-### Configuring a Device Interface
+#### Configuring a Device Interface
 
 The following are the high level steps to configure a device interface on a SSR running in the AWS cloud.
 
-- Disable Source / Destination Checking 
+- Disable Source / Destination Checking
 - Determine the Device Interface Layout
 - Configure and Assign the PCI Address Identifier to a Device Interface
-- Configure the IP Addressing for every Network interface 
+- Configure the IP Addressing for every Network interface
 - Configuration for every Network Interface with a Public IP Address (if a public IP address is associated to any of the network interfaces)
 - Verify Connectivity
 
-#### Source / Destination Check
-
-Disabling Source / Destination checking allows the SSR AWS instance to send and receive traffic when it is not the source or destination. This feature is enabled by default. Perform the following steps to disable Source / Destination checking.
-
-1. On the Instances page, select the **Launch Instances** dropdown. 
-2. Select **Networking**.
-
-![AWS Instances page](/img/AWS-bootstrap1.png)
-
-3. From the pull out menu, select **Change source/destination check**.
-4. In the Change Source / Destination Check window, select **Stop**, and **Save**.
-
-![Source/Destination Check](/img/AWS-bootstrap2.png)
-
-#### Determine the Device Interface Layout
+##### Determine the Device Interface Layout
 
 Perform the following steps to identify the correct PCI address for each network interface attached to the EC2 instance:
 
@@ -271,7 +274,7 @@ For cloud deployments the recommendation is not to configure the management inte
 
 Assign the PCI Address Identifier to a device interface using the Conductor CLI or GUI.
 
-1. Login to the CLI on the Conductor. 
+1. Login to the CLI on the Conductor.
 2. Run the following commands to configure a device interface with a PCI Address for every forwarding interface (e.g. WAN and LAN) of the router:
 
 ```
@@ -294,7 +297,7 @@ commit
 
 By default, AWS assigns a private IP address to each network interface attached to an EC2 instance. Therefore, the recommendation is to enable DHCP on every network interface managed by the SSR.
 
-1. Login to the CLI on the Conductor. 
+1. Login to the CLI on the Conductor.
 2. Run the following commands to configure a network interface with DHCP on a router:
 
 ```
@@ -317,9 +320,9 @@ If setting static private IP address is a requirement, note that for every subne
 
 #### Configuration for every Network Interface with a Public IP Address
 
-When AWS associates a Public IP address with the elastic network interface of an EC2 instance, AWS does a 1:1 mapping betwen the Public IP address and the Private IP address for that elastic network interface. In other words, every network interface attached to the EC2 instance sits behind that Public IP, and all traffic destined to the Public IP is NATted and forwarded to the corresponding private IP address. Therefore, for every elastic network interface which has a Public IP address associated (e.g. the WAN interface), the Neighborhood has to be configured accordingly so that the SSR is aware that forwarding is behind NAT.
+When AWS associates a Public IP address with the elastic network interface of an EC2 instance, AWS does a 1:1 mapping between the Public IP address and the Private IP address for that elastic network interface. In other words, every network interface attached to the EC2 instance sits behind that Public IP, and all traffic destined to the Public IP is NATted and forwarded to the corresponding private IP address. Therefore, for every elastic network interface which has a Public IP address associated (e.g. the WAN interface), the Neighborhood has to be configured accordingly so that the SSR is aware that forwarding is behind NAT.
 
-1. Login to the CLI on the Conductor. 
+1. Login to the CLI on the Conductor.
 2. Run the following commands to configure the external-nat-address in the Neighborhood for every network interface with a Public IP address on a router:
 
 ```
@@ -338,21 +341,76 @@ commit
 
 #### Verify Connectivity
 
-1. Login via SSH to the EC2 instance of each router running on AWS. 
+1. Login via SSH to the EC2 instance of each router running on AWS.
 
 2. Login to the SSR CLI.
-	
+
 	`su admin`
 
 3. Ping the gateway of each device interface.
-	
+
 	`ping <gateway IP address>`
 
 4. Confirm AWS gateways reply to ping successfully.
 
-## Appendix
 
-### Launch the Template
+### Mist Managed Setup
+Once the EC2 instance is launched with the correct registration-code, the device should self onboard to appropriate MIST org. The process can take up to 5 minutes and the device will be visible as Unassigned in the MIST org once onboarding is complete.
+
+TODO: ADD A NOTE ABOUT HOW TO DEBUG AN INCOMPLETE ONBOARDING
+
+#### Network Interfaces Layout
+
+The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, and Private. The network interfaces to be used in MIST configuration are as follows:
+
+| Network interface name | Subnet           | MIST config name     |
+| ---------------------- | ---------------- | ----------------|
+| eth1                   | Public           | ge-0/0/0    |
+| eth2                   | Private          | ge-0/0/1    |
+
+#### Interface Tagging
+In addition to using the cloud formation template, the admin can use tag the interface with the key `SSR-ROLE`. The possible values are as follows:
+
+| Tag Value | Meaning |
+| --------- | ------- |
+| WAN       | Interface is marked as WAN for onboarding purposes and is assumed to have connectivity to MIST cloud infrastructure. |
+| LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
+
+:::note
+The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging.
+:::
+
+#### Cloud init onboarding
+When launching AWS EC2 instance using automation the following user-data section can be leveraged to setup the onboarding data for the instance
+
+```
+#cloud-config
+write_files:
+  - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
+    content: |
+      { "name": "<router-name>", "registration-code": "<regcode>", "version": "2.0", "mode": "mist-managed", "cloud-provider": "aws"}
+```
+
+| Option | Meaning |
+| ------ | ------- |
+| name | The name of the router to use for MIST onboarding. By default, the instance name will be used |
+| registration-code | The MIST registration used for adoption of the EC2 instance to a MIST org. |
+
+## Source / Destination Check
+
+Disabling Source / Destination checking allows the SSR AWS instance to send and receive traffic when it is not the source or destination. This feature is enabled by default. Perform the following steps to disable Source / Destination checking.
+
+1. On the Instances page, select the **Launch Instances** dropdown.
+2. Select **Networking**.
+
+![AWS Instances page](/img/AWS-bootstrap1.png)
+
+3. From the pull out menu, select **Change source/destination check**.
+4. In the Change Source / Destination Check window, select **Stop**, and **Save**.
+
+![Source/Destination Check](/img/AWS-bootstrap2.png)
+
+## Launch the Template
 
 This section describes how to fill out and launch the template via the AWS marketplace and programmatically to deploy a Session Smart Conductor and SSR.
 
@@ -372,7 +430,7 @@ A description of the parameters of the template are listed in the following tabl
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.                                                                                                                 |
 | Admin Allowed CIDR   | It allows for restricting reachability to the control interface of the Conductor to a well known source IP address CIDR range for management purposes. It is common to set this field to 0.0.0.0/0 (accepting traffic from all source IP addresses) for now, as the source IP address/es where the Conductor will be administered from may not be known at this time. However, once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Conductor will be administered.                                                                                                                                                                                     |
 
-### AWS Console
+#### AWS Console
 
 Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
 Click on the “Continue to Subscribe” button and accept the terms and conditions.
@@ -400,7 +458,7 @@ If a template of the Bring Your Own License image was used, SSH to the EC2 insta
 If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
-### AWS CLI 
+#### AWS CLI
 
 Alternatively, it is possible to launch the template programmatically. Please adjust the content of the JSON file below to match the input of each template.
 
@@ -446,7 +504,7 @@ If a template of the Bring Your Own License image was used, SSH to the EC2 insta
 If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
-### Session Smart Router
+### Session Smart Conductor Managed Router
 
 This section describes the parameters to fill out the template to deploy an SSR as well as how to launch it via the portal and programmatically.
 
@@ -460,7 +518,7 @@ A description of the parameters of the template are listed in the following tabl
 | Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet.                                     |
 | Private Subnet ID    | ID of the private subnet within the VPC.                                                                                                                          |
 | Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet.                                     |
-| Management Subnet ID    | ID of the management subnet within the VPC.                                                                                                                          |               
+| Management Subnet ID    | ID of the management subnet within the VPC.                                                                                                                          |
 | Admin Allowed CIDR   | It allows for restricting reachability to the control interface of the Conductor to a well known source IP address CIDR range for management purposes. It is common to set this field to 0.0.0.0/0 (accepting traffic from all source IP addresses) for now, as the source IP address/es where the Conductor will be administered from may not be known at this time. However, once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Conductor will be administered.                                                                                                                                                                                  |
 | Conductor Primary Control IP   | If a Session Smart  Conductor has already been deployed, fill out the field Conductor Primary Control IP with the IP address of the control interface of the primary node of Session Smart  Conductor. The IP address of the control interface of Conductor should be reachable from the Management subnet selected above. It must be a valid IP address of the form x.x.x.x. If no Session Smart Conductor has been deployed yet or the intention is simply deploying an unmanaged router please refrain from entering any value in this field.                                                                                        |
 | Conductor Secondary Control IP | If there is an existing Session Smart  Conductor already deployed and the deployment of the Conductor is Highly Available, please enter the IP address of the control interface of the secondary node of Session Smart  Conductor in the field Conductor Secondary Control IP. If the existing deployment of the Session Smart  Conductor is not Highly Available, in other words if the Conductor is standalone, please refrain from entering any value in this field.    |
@@ -493,7 +551,7 @@ If a template of the Bring Your Own License image was used, SSH to the EC2 insta
 If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
-#### AWS CLI 
+#### AWS CLI
 
 Alternatively, it is possible to launch the template programmatically. Please adjust the content of the JSON file below to match the input of each template.
 
@@ -544,6 +602,31 @@ If a template of the Bring Your Own License image was used, SSH to the EC2 insta
 If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
 :::
 
+
+### Session Smart MIST Managed Router
+
+This section describes the parameters to fill out the template to deploy an SSR as well as how to launch it via the portal and programmatically.
+
+A description of the parameters of the template are listed in the following table:
+
+| Parameter            | Description |
+| -------------------- | ----------- |
+| Stack name           | Fill out the Instance Name field to provide a name to the VM for the Conductor.|
+| VPC ID               | ID of the existing VPC where the Conductor is going to be deployed to. |
+| Public Subnet ID     | ID of the public subnet within the VPC. |
+| Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
+| Private Subnet ID    | ID of the private subnet within the VPC. |
+| Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
+| Admin Allowed CIDR   | It allows for restricting reachability to the control interface of the Conductor to a well known source IP address CIDR range for management purposes. It is common to set this field to 0.0.0.0/0 (accepting traffic from all source IP addresses) for now, as the source IP address/es where the Conductor will be administered from may not be known at this time. However, once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Conductor will be administered. |
+| Registration Code   | The MIST registration used for adoption of the EC2 instance to a MIST org. |
+| Instance size        | Size of the EC2 instance.|
+| Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
+
+
+TODO: ADD SECTION FOR AWS CONSOLE
+
+TODO: ADD SECTION FOR AWS CLI
+
 ### Deploying a Conductor or Router without using the templates
 
 1. Launch a web browser and navigate to https://aws.amazon.com/
@@ -553,8 +636,8 @@ If a Conductor template of a Private or Hourly image was used, you can login to 
    :::
 3. Click **EC2 Dashboard** and select your deployment region from the drop down list.
 4. Click **Launch Instance**.
-5. On the _Step 1: Choose an Amazon Machine Image (AMI)_ page, select the **Amazon Marketplace** tab and enter 128 Technology in the search bar.
-6. Locate the 128 Technology image and click **Select**. 
+5. On the _Step 1: Choose an Amazon Machine Image (AMI)_ page, select the **Amazon Marketplace** tab and enter Session Smart Networking in the search bar.
+6. Locate the SSR image and click **Select**.
 7. On the _Step 2: Choose and Instance Type_ page, choose an instance type.
 8. On the _Step 3: Configure Instance Details_ page, click **Subnet** and select the desired subnet and retain the default values for the other fields.
    :::note
@@ -566,27 +649,28 @@ If a Conductor template of a Private or Hourly image was used, you can login to 
    :::
    Select **Yes, I want to continue with this change** and click **Next**.
 10. On the _Step 4: Add Storage_ page, ensure the size is 128 GB (default value).
-11. Click **Next: Add Tags**.
-12. On the the _Step 5: Add Tags_ page, click **Add Tags**. 
+11. Click **Next: Add Tags**. See [this section](#interface-tagging) for additional tag config.
+12. On the the _Step 5: Add Tags_ page, click **Add Tags**.
 13. Click inside the Key column and select **Name**. Under the Value column enter the name for your instance.
 14. Click **Next: Configure Security Group**.
 15. On the _Step 6: Configure Security Group_ page, click **select an existing security group** and choose one from the list.
     :::note
     If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
     :::
-16. Select **Review and Launch**.
-17. In the _Boot from General Purpose_ window, select **Continue** and then click **Next**.
-18. On the _Step 7: Review Instance Launch_ page, click **Launch** to finalize the instance.
-19. In the _Select an existing key pair or create a new key pair_ dialog box, select **Choose an existing key pair** and select the desired key pair from the list.
+16. For MIST managed routers, expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired MIST org, you can add cloud-init user-data per instructions [here](#cloud-init-onboarding).
+17. Select **Review and Launch**.
+18. In the _Boot from General Purpose_ window, select **Continue** and then click **Next**.
+19. On the _Step 7: Review Instance Launch_ page, click **Launch** to finalize the instance.
+20. In the _Select an existing key pair or create a new key pair_ dialog box, select **Choose an existing key pair** and select the desired key pair from the list.
     :::note
     If the desired key pair is not listed click **Create a new key pair**, enter a name in the Key pair name field and click **Download Key Pair**.
     :::
-20. Check the acknowledgment check box and then click **Launch Instances**.
-21. On the _Launch Status_ page, click **View Instances**.
-22. Record the instances IP address.
-23. Launch a command window prompt.
-24. Enter the IP address of the instance. **Result:** The interactive SSR Installer application launches.
-25. When prompted by the installer, press the **Enter** key to select Begin.
+21. Check the acknowledgment check box and then click **Launch Instances**.
+22. On the _Launch Status_ page, click **View Instances**.
+23. Record the instances IP address.
+24. Launch a command window prompt.
+25. Enter the IP address of the instance. **Result:** The interactive SSR Installer application launches.
+26. When prompted by the installer, press the **Enter** key to select Begin.
 
 ### Configuring a default route to an Internet Gateway
 
