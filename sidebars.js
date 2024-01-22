@@ -38,6 +38,7 @@ module.exports = {
       "intro_install_quickstart_otpiso",
       "onboard_ssr_to_conductor",
       "onboard_ssr_device_otp",
+      "howto_router_migration",
     ],
     "Image-Based Installation": [
       "intro_installation_image",
@@ -154,7 +155,9 @@ module.exports = {
         "label": "Optimizing Routing Protocols",
         "items": [
           "howto_tune_bfd",
+          "config_session_optimization",
           "config_bgp",
+          "config_vrf_route_leaking",
           "config_ospf",
           "config_bfd",
           "config_multicast",
@@ -196,6 +199,8 @@ module.exports = {
         "label": "Security",
         "items": [
           "sec_adaptive_encrypt",
+          "sec_firewall_filtering",
+          "sec_security_policy",
         ],
       },
       {
@@ -222,6 +227,7 @@ module.exports = {
         "label": "How To",
         "items": [
           "how_to_use_app_summary",
+          "how_to_local_config_override",
           "howto_extend_gui_nav",
           "howto_lte",
           "config_bfd_tunnel",
@@ -309,6 +315,7 @@ module.exports = {
         "type": "category",
         "label": "SSR",
         "items": [
+          "release_notes_128t_6.2",
           "release_notes_128t_6.1",
           "release_notes_128t_6.0",
           "release_notes_128t_5.6",

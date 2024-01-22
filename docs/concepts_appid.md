@@ -201,6 +201,29 @@ config
 exit
 ```
 
+### AppID and Tenancy
+
+Application Identification service lookups now consider the source tenant. This allows matches to be specific to certain networks/users. For example, the following configuration will now properly classify by tenancy:
+
+```
+service internet
+   address 0.0.0.0/0
+   access-policy tenant1 allow
+   access-policy tenant2 allow
+
+service app1.internet
+   application-name WorkApp
+   access-policy tenant1 allow
+
+service app2.internet
+   application-name WorkApp
+   access-policy tenant2 allow
+```
+
+Traffic learned for WorkApp using `tenant1` will match to `app1.internet`, whereas that using `tenant2` will match to `app2.internet`. This is true for all types of AppId services.
+
+Additionally, AppId child services no longer merge in access-policy entries from the parent service if an access-policy is provisioned on the AppId child. If no access-policy is provisioned, then the parent's policies are inherited.
+
 ### AppID using Modules
 
 The last, and arguably most powerful built-in technique for performing application identification is to use a *module* – effectively, a script that is resident on the SSR's host operating system that will generate a JSON file that contains dynamic, ingestible routes. This is extremely flexible, but requires some programming expertise.
