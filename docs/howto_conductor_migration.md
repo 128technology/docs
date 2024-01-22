@@ -47,7 +47,7 @@ The tarball can then be copied from the old conductor, placed on the new conduct
 
 ## Migrating to a New Conductor
 
-This process is used to migrate an existing conductor and router configuration to a new infrastructure where the new conductor has a new IP address. It assumes that the old and the new conductors are both available, but have separate IP addresses
+This process is used to migrate an existing conductor and router configuration to a new infrastructure where the new conductor has a new IP address. It assumes that the old and the new conductors are both available, but have separate IP addresses.
 
 1. Create a new conductor with the same conductor and router node names, but a **different IP address**. For steps to install a conductor, see [Single Conductor Interactive Installation](single_conductor_install.mdx).
 2. Import and Commit the router configurations to the new conductor.

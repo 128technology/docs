@@ -45,9 +45,146 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
-:::note
-The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
-:::
+## Release 6.1.6-7
+
+**Release Date:** January 2, 2024
+
+### Resolved Issues Requiring Configuration Changes
+
+- **I95-46120 HA Fabric Warning message supression in Azure:** In Azure, it is not possible to configure a non-forwarding fabric interface on the SSR, thus this error will be present on every commit. This message is now supressed.
+------
+- **I95-51181 Improve `save-tech-support-info` command:** The PCLI command `save tech-support-info` now has a default collection period of one day. Additionally, a `since` argument has been added that limits log collection to only logs generated after the specified value. The `since` argument can be a relative time delta or an absolute timestamp. The GUI's About and Logs pages has the same functionality with a drop down that allows limiting the time window for the displayed/downloaded logs/tech-support-info.
+------
+- **I95-52406 Download MIBs from the GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
+------
+- **I95-52703 Tenancy consideration in Application ID lookup:** Application Identification service lookups now consider the source tenant. This allows matches to be specific to certain networks/users. See [AppID and Tenancy](concepts_appid.md#appid-and-tenancy) for more information.
+------
+- **I95-52799 Display Lock Status/Failed Login Attempts in the PCLI and GUI:** Add a "Lock Status" column to the User table as well as the User Details pane, with more details availble on hover. The `show user` command now includes two new rows, "Lock Status" and "Last Failed Login". For command details, please see [`show user lock-status`](cli_reference.md#show-user-lock-status).
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2020-12321, CVE-2022-41742, CVE-2022-41741, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-46847.
+------
+- **I95-38188 Re-Homing an SSR in certain circumstances leaves residual services:** If an SSR is rehomed from an HA conductor to a standalone conductor, the services pointing to the second node of the HA conductor were not removed. Resolved the issue where the reverse SSH tunnels from a managed router to the second HA conductor node were not cleaned up if the conductor was converted back to a standalone conductor.
+------
+- **I95-42466 Changing the PCI address of an HA interface breaks HA:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address.
+------
+- **I95-48783 Conductor process logs are unbounded, risking storage exhaustion:** `auditd` logs consuming the disk space when the node monitor is in a disconnected state and the audit logs are left unconsumed. There was a limit to the log file size, but not the number of files. The number of files is now limited.
+------
+- **I95-50493 Memory calculation for alarms is confusing:** This alarm was designed to trigger when memory usage went above 90% and clear only when memory usage went below 80%, causing confusion. The memory usage alarm no longer requires memory usage to go below 80% to clear; it will clear when memory usage goes below 90%.
+------
+- **I95-50537 Detect and log invalid TCP establishment flags:** TCP packets with illegal flag combinations are dropped before they can set up a session, rather than after. 
+------
+- **I95-50540 Denied traffic events not displaying in the GUI or PCLI:** Resolved an issue that prevented displaying denied traffic events in the `show events` PCLI command and in the GUI. Users would see `% Error: Unhandled TypeError: list indices must be integers or slices` in the PCLI, and `An unknown traffic event occurred` in the GUI. 
+------
+- **I95-51191 BFD metrics not cleaned up properly:** The BFDAgent holds onto the stats for peer paths; If the config is changed on a router, new stats are made but the old ones were not being deleted. The old BFD by-peer-path stats are now deleted when a VLAN configuration change is made.
+------
+- **I95-51459 Logs and exception pcaps are periodically filled with error logs and truncated packets:** Resolved an issue where ICMP error respond packets for encapsulated traffic caused `PacketBufferDataNotFound: Could not find specified data in packet` error logs to be generated, or truncated packets to arrive in the FastLane exceptions pcap. 
+------
+- **I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:** When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse the middle node. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.
+------
+- **I95-52018 Overlapping IP Prefix validation may be incorrect, causing a false configuration warning:** Configuration validation for IP Prefixes has been corrected.
+------
+- **I95-52414 RBAC not being honored for `show fib` output:** Resolved an issue where `show fib` included entries that the current user did not have permission to view.
+------
+- **I95-52498 AppID allows session when it should be blocked:** When utilizing the Application Identification functionality, a TCP reset is now sent to clients to correct this behavior.
+------- 
+- **I95-52615 Set TTL multi-hop range correctly:** The TTL multi-hop field allowed a value of 0, but had no impact. The range has been corrected to 1-255, and no longer accepts a value of 0.
+------
+- **I95-52855 DHCP Relay stopped functioning after removing disabled DHCP Servers:** When a number of disabled DHCP servers were deleted from the configuration, the server interface mappings were deleted as well. Updates have been made to re-enable DHCP relay when a DHCP server or interface is removed.
+------
+- **I95-52859 Issue moving interface between chassis of hypervisor platforms running SSR (e.g., ENCS):** When swapping physical cable from active node to standby node, the customer experienced low rate packet loss on traffic-engineering enabled device-interfaces. To resolve this issue, the traffic-engineering transmit-cap is no longer ignored on device-interfaces which have unresolved link-speed.
+------
+- **I95-52889 Highway crash caused by a false negative waypoint exhaustion check:** Waypoint ports reinitialization that is triggered by a false negative exhaustion check can lead to duplicate waypoints and reverse flows on two sessions resulting in a highway crash. This issue has been resolved.
+------
+- **I95-52994 Routers continue to request the conductor configuration:** Resolved an issue where a managed router continued to request the configuration from the conductor even after a validation or datamodel incompatibility issue.
+------
+- **I95-52999 Package-based Interactive Install does not recognize Mellanox CX6 LX (10/25G) interfaces:** Resolved a rare case where NICs with kernel drivers that exist in EL8 but not in EL7 will not be enumerated during Interactive ISO installation. 
+------
+- **I95-53000 Process highway disconnected messages caused by NIC driver bug:** The DPDK driver code for the Broadcom NICs contained a bug that caused the querying of the extended statistic to fail. The Broadcom NIC driver has been upgraded to resolve the issue.
+------
+- **I95-53002 NTP setup check fails on startup:** Resolved an issue in the NTP startup sequence, due to an incorrect path for the NTP configuration.
+------ 
+- **I95-53009 RPM signature verification missing for all artifacts:** Verification for all ISO RPMs has been added.
+------
+- **I95-53015 Highway log fills with `INFO (divertedPackeTP) icmp response packet failed` messages when the BFD peer is down:** This message is informational and is now logged appropriately.
+------
+- **I95-53105 Conductor to router API RBAC rules not being followed:** Resolved an issue where the user is getting elevated to admin on the managed router, thus returning more data than necessary.
+------
+- **I95-53114 Broadcom interfaces stuck in `admin down` after upgrade:** Resolved an issue where device-interfaces on Broadcom NICs wouldn't come up properly if initially configured with `enabled false`.
+------
+- **I95-53130 Errors seen on Q-in-Q enabled interface after upgrade:** Interfaces were unable to receive jumbo packets unless MTU is configured to be large enough. This resolution allows the reception of jumbo packets regardless of the MTU setting.
+------
+- **I95-53185 Rare race condition causing highway crash:** Resolved a rare race condition between flow install and flow lookup causing a highway crash.
+------
+- **I95-53253 Include dmesg and systemd journal unit in TSI:** Include output from dmesg and systemd journal unit in TSI in order to assist in debugging future platform related issues.
+------
+- **I95-53259 Initialization time out may result in SSR failing to start:** Resolved an issue where SSR may fail to start. An example of this would be unreachable audit server was configured that would delay the startup initialization causing SSR to exceed the timeout and fail to start.
+------
+- **I95-53262 VRRP status shows active for both nodes when dual node ha redundancy is configured on bond interface:** Bonded X710 devices were unable to receive VRRP from each other, resulting in active-active scenario. This resolution disables source pruning by default on these devices.
+------
+- **I95-53288 Fetching detailed bond info from the conductor for routers fails:** The conductor was incorrectly posting a `JSONDecodeError` when trying to parse bond information that was missing from the router response. This issue has been resolved.
+------
+- **I95-53321 Syslog datamodel is limited:** Added the following configurable syslog facility values `auth`, `authpriv`, `cron`, `daemon`, `kern`, `lpr`, `mail`, `news`, `syslog`, `user`, and `uucp`.
+-----
+- **I95-53344 Exception on device interface tear down terminates process:** Resolved a rare case where Highway process can terminate and core during config changes if there is an underlying exception to a device-interface on removal.
+------
+- **I95-53358 Disable/enable of LACP takes the Bond interface down:** Dynamic reconfiguration has been enhanced to support LACP enable/disable while traffic flows by removing the dedicated queue flow (for LACP) when removing a member from bond. 
+------
+- **I95-53393 Empty password attempts not counting towards user lockout:** The SSR counts login attempts with an empty password as failed login attempts. These  contribute to locking a user account if they reach the threshold (the value configured in `configure authority password-policy deny`,) within a short time window. 
+------
+- **I95-53472 Service Routes passing validation on conductor but then failing on local router:** The validation process on the conductor has been updated to identify service-routes with deleted or empty destination lists as invalid.  
+------
+- **I95-53538 Custom audit rules not preserved on SSR upgrade:** Resolved an issue where the image-based upgrade (IBU) was not preserving audit rules or `dnf.conf`.
+------
+- **I95-53641 BGP routes between peers do not immediately transition to the Connected state:** A change has been made to reduce the time that BGP routes learned from a BGP over SVR neighbor are withdrawn when the peer paths are lost to the neighbor.
+------
+- **I95-53787 Stats not present on conductor:** Running `show device-interface router all` on a conductor caused stats (in-octets, in-unicast-pkts, etc...) to be incorrectly displayed as "n/a" instead of the correct value. This issue has been resolved.
+------
+- **I95-53852 `host-service snmp-server` blocks SVR pings to a `network-interface` owned address:** Ping traffic was hitting the generated (wildcarded) snmp-server service. The session could not setup due to security policy conflicts. This issue has been resolved; the generated service from an snmp-server host-service now has a UDP transport.
+------
+- **I95-53858 Active sessions counter continuously incrementing:** The SSC active sessions counter has been updated to correctly handle session removal. 
+------
+- **I95-53875 The `show stats service-area sent success` metric was retained longer than needed:** Resolved an issue where the `stats default retention short` setting was not being honored.
+------
+- **I95-53894 DNS cache-service does not start:** Resolved a race condition that causes the DNS process to fail to start. The log message `No TimeoutQueue:` can be seen in the logs during this condition.
+------
+- **I95-53907 SSR readvertising SA to MSDP mesh peers:** Resolved an issue where MSDP SA's received from a mesh-group peer were being re-advertised to the mesh-group. This issue has been resolved by verifying sender of the SA.
+------
+- **I95-53915 Removing an X710/X722 port from SSR can cause high RX latency:** Deleting an SSR interface from an X710/722 NIC which is part of a multi-port device introduces RX latency into sibling ports until the SSR is restarted. This has been resolved by enabling the i40e “multi-driver” mode to preserve global registers that are shared across ports.
+------
+- **I95-53916 Pre-existing Teams interfaces conflict with HA interfaces:** In a Mist-managed HA configuration where an HA node has been configured with non-default HA interfaces, performing a release operation on a node in an HA pair leaves the pre-configured HA interfaces in place, and creates a conflict when a new configuration is pushed down from Mist. This would prevent the HA node from operating correctly and forming its HA connections again. This issue has been resolved, and the release operation now removes any pre-existing HA interfaces.
+------
+- **I95-53986 `nodeMonitor` failed to get data for `show platform disk`:** Some of the dynamic access for `smartctl` objects were not protected. A check for the object existence has been added before attempting to read it.
+------
+- **I95-54030 Node sending ARP requests to the wrong MAC:** After an SFP hot swap, node1 was sending ARP requests to the wrong MAC. An issue where E810 interfaces with default MTU configuration could potentially transmit corrupt ARP response packets has been resolved. 
+------
+- **I95-54051 Broadcom driver causing memory corruption, leading to a system fault:** Updated the driver support for BNXT NICs. 
+------
+- **I95-54086 Conductor memory exceeded:** In certain cases the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the `asset-connection-resiliency` feature. An update to the salt package has been made to resolve this issue.
+------
+- **I95-54091 Software Lifecycle History page does not load:** A time selector has been added to allow the user to provide parameters around the amount of data that is loaded. 
+------
+- **I95-54126 VRRP HA - EoSVR to VRRP HA - EoSVR not recovering after failure:** When EoSVR is enabled, VRRP packets (which are multicast frames) are not detected as destined for the SSR and are being classified as non-IP frames that should be encapsulated for EoSVR. To resolve this issue, detection/classification enhancements have been made to recognize VRRP packets that match the configured VRID and not forward them in the EoSVR tunnel.
+------
+- **I95-54133 IDP severity grouping mislabeled:** Resolved an issue where minor severity levels were labeled incorrectly.
+------
+- **I95-54155 nodeMonitor coredump on secondary node after upgrade:** During an upgrade where `deviceType` was `LTE` the attempt to get a linux interface name (not supported) failed. This issue has been resolved by implemting a device interface type verification.
+------
+- **I95-54180 Unable to fetch reports from Conductor GUI:** A refactor moved the connectivity check exception, which prevented a service restart. This has been resolved, and the stats now being written to the database and GUI tables.
+------
+- **I95-54199 Image based installation hangs in Azure:** Resolved a dependency issue causing a race condition between Azure and the SSR setup; azure agent requires networking, but `t128-firstboot-setup.sh` must run before network startup to configure the NIC names. The dependencies have been correctly sequenced.
+------
+- **I95-54265 Schema not included in API response for a template:** The `schema` object has been added to the API. 
+------
+- **I95-54294 Unable to delete capture-filter created with `&&` operator:** Resolved an issue that disallowed deleting capture-filters containing `&&`. Customers on older versions of software can work around this by creating capture-filters using `and` instead of `&&`.
+------
+- **I95-54398 ASM - Prune flag set incorrectly:** Resolved an issue with how outgoing interfaces in the mroute entry are reported. If the outgoing interface list only contains PIM SVR interfaces, the P flag was displayed incorrectly. The outgoing interface list is populated correctly, and the P flag now shows correctly.
+------
+- **I95-54434 Mist PCAP failure - inverted commands observed by the device:** In rare cases where captures are created and deleted too quickly, a delete command may be received by the device before the create command. These timing issues have been resolved.
+------
+- **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH nodeIdentifier so that this is accessible for admin users.
+------
 
 ## Release 6.1.5-14
 
@@ -284,7 +421,7 @@ This issue is actively being addressed, and will be resolved in an upcoming patc
 ------
 - **I95-50722 Highway crashes during session migration:** Resolved a crash in the SSR's highway process, due to a race condition between configuration changes and BFD sessions.
 ------
-- **I95-51364 Highway crash on both nodes of an HA system:** Resolved a crash that can occur in the highway process of the SSR when deployed in HA mode, due to spurious redundancy database errors.
+- **I95-51364 Highway crash on both nodes of an HA system:** Resolved a crash that can occur in the highway process of the SSR, due to spurious redundancy database errors. This redundancy database is present on all SSR instances, and may contain an unexpected IP address of 0.0.0.0 (such as netbios) due to session traffic, which can generate errors and ultimately cause a highway crash. The exception causing the errors is now caught and the issue has been resolved.
 ------
 - **I95-51378 REST API improvements:** Performance improvements have been made in the metrics REST APIs to alleviate issues with intermittent metrics graphs on heavily loaded systems.
 ------

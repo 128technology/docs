@@ -7,6 +7,18 @@ sidebar_label: '3.2'
 **Upgrade Installer:** Before **upgrading to, or installing** SSR version 5.4, update the Installer to the latest version. Failing to upgrade the installer may result in a rollback failure, should a rollback be necessary at any time.
 :::
 
+## Release 3.2.1
+
+### Resolved Issues
+
+- **IN-543 Security fixes for CVE-2019-3817:** Updates made to `libcomps` and `python2-libcomps`.
+------
+- **IN-544 Import GPG keys as part of `import iso` installer workflow:** Previously, GPG keys were only imported during repo authentication. If repo authentication had not yet been performed, the RPMs or ISOs could not be imported. The issue has been resolved, and the Installer now imports the GPG keys during the import step, even if repo authentication has not been performed.
+------
+- **IN-545 Misleading Import ISO failure message when using the PCLI:** The `import iso` failure message has been clarified when running the operation from the PCLI.
+------
+- **IN-546 Create DNF cache after GPG key import:** The DNF cache is now created when importing the GPG keys. 
+
 ## Release 3.2.0
 
 ### Resolved Issues
