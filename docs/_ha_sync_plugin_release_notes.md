@@ -3,6 +3,14 @@
 The plugin must be updated to version 1.1.0 or later prior to [upgrading the conductor to SSR version 5.4.0.](intro_upgrade_considerations.md#plugin-config-generation-changes)
 :::
 
+### Release 1.1.3
+
+#### Issues Fixed
+
+- **PLUGIN-2233**  VLAN ID cannot be modified
+
+  _**Resolution:**_ Add new configuration field to modify the default VLAN ID used for the interface
+
 ### Release 1.1.2
 
 #### Issues Fixed
