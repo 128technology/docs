@@ -63,7 +63,7 @@ The process varies based on the SSR device, and whether Mac or Windows is used a
 2. Connect the RJ45/USB cable to the console port on the SSR device.
 3. Connect the USB end of the cable to your Windows PC.
 4. Connect the power input to the back of the SSR device, but do not power it up. 
-5. From the Windows Device Manager, open a [PuTTY](https://www.putty.org/) session, and select the serial port and baud rate.
+5. From the Windows Device Manager, open a [PuTTY](https://www.ssh.com/academy/ssh/putty) session, and select the serial port and baud rate.
  ![PuTTY window](/img/putty-window.png)
 6. Insert your USB with the new ISO image into the USB port of the SSR device.
 7. Power up the SSR device. 

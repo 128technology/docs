@@ -49,6 +49,7 @@ module.exports = {
       "intro_install_quickstart_otpiso",
       "onboard_ssr_to_conductor",
       "onboard_ssr_device_otp",
+      "howto_router_migration",
     ],
     "Image-Based Installation": [
       "intro_installation_image",
