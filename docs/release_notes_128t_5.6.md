@@ -28,9 +28,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.6.13-3
+## Release 5.6.13-5
 
-**Release Date:** January 11, 2024
+**Release Date:** January 25, 2024
 
 ### Resolved Issues
 
