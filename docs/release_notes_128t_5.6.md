@@ -28,13 +28,13 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.6.13-5
+## Release 5.6.13-6
 
-**Release Date:** January 25, 2024
+**Release Date:** January 26, 2024
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2022-41741, CVE-2022-41742, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-46847, CVE-2021-43975, CVE-2022-28388, CVE-2022-3594, CVE-2022-3640, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2022-4744, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-23455, CVE-2023-2513, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-3141, CVE-2023-31436, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732, CVE-2022-45884, CVE-2022-45886, CVE-2022-45919, CVE-2023-1192, CVE-2023-2163, CVE-2023-3812, CVE-2023-5178.
+- **The following CVE's have been identified and addressed in this release:** CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2022-41741, CVE-2022-41742, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-46847, CVE-2021-43975, CVE-2022-28388, CVE-2022-3594, CVE-2022-3640, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2022-4744, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-23455, CVE-2023-2513, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-3141, CVE-2023-31436, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732, CVE-2022-45884, CVE-2022-45886, CVE-2022-45919, CVE-2023-1192, CVE-2023-2163, CVE-2023-3812, CVE-2023-5178, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235.
 ------
 - **I95-38188 Re-Homing an SSR in certain circumstances leaves residual services:** If an SSR is rehomed from an HA conductor to a standalone conductor, the services pointing to the second node of the HA conductor were not removed. Resolved the issue where the reverse SSH tunnels from a managed router to the second HA conductor node were not cleaned up if the conductor was converted back to a standalone conductor.
 ------
@@ -97,6 +97,8 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 - **I95-54271 Race condition after a configuration change related to the source nat:** Resolved a rare condition wherethe SharedNatPool was being reset while it was accessed for session setup. This caused a race condition that led to a highway process crash. 
 ------
 - **I95-54294 Unable to delete capture-filter created with `&&` operator:** Resolved an issue that disallowed deleting capture-filters containing `&&`. Customers on older versions of software can work around this by creating capture-filters using `and` instead of `&&`.
+------
+- **I95-54340 Hub-to-spoke sessions break when failing over from outbound-only Path:** When a session modify occurs due to an ingress change (inter-node -> inter-router) AND an egress change is also detected, the incorrect security was being looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved. 
 ------
 - **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH nodeIdentifier so that this is accessible for admin users.
 ------

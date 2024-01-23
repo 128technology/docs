@@ -184,7 +184,6 @@ This issue will be corrected in an upcoming release.
 - **I95-54434 Mist PCAP failure - inverted commands observed by the device:** In rare cases where captures are created and deleted too quickly, a delete command may be received by the device before the create command. These timing issues have been resolved.
 ------
 - **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH nodeIdentifier so that this is accessible for admin users.
-------
 
 ## Release 6.1.5-14
 
