@@ -5,7 +5,7 @@ sidebar_label: Common Criteria Compliance Guidelines
 
 For compliance, the following configuration considerations must be made:
  
-- FIPS mode must be enabled **during installation**.
+- FIPS mode must be enabled **during installation**. Use of anything other than FIPS mode is not compliant with Common Criteria certification.
 - Except during installation, all configuration procedures must be performed from the PCLI; use of the GUI is not part of the approved use case. Configuring the router OTP Quickstart file from the Conductor GUI is acceptable under the Common Criteria guidelines.
 - When installing a router, the [IPv4 Option Filter](cc_fips_sec_firewall_filtering.md#ipv4-option-filtering) must be set to `drop-all`.
 - When installing a router, the [ICMP Session Match](cc_fips_sec_firewall_filtering.md#from-the-command-line) must be set to `identifier-and-type`.
