@@ -1,3 +1,4 @@
+
 ---
 title: Installing in AWS
 sidebar_label: Installing in AWS
@@ -19,6 +20,11 @@ There are different AMIs (images) available for the Juniper Session Smart Networ
 
 * Private: For cases where there is no access to the SSR repositories (no internet connection) from the AWS environment where the software will be deployed, a Private Offer can be issued to your AWS account via the AWS Marketplace. To request access to a private offer, refer to [Requesting access to a Private offer](#requesting-access-to-a-private-offer) for additional information.
 * Hourly: This provides a free trial period for 30 days and an hourly software cost after the trial expires. This plan is recommended for Proof of Concepts and Trials only. Software upgrades and deployments outside of the cloud, (on premises) require a token or certificate. The software can not be purchased via the marketplace. Refer to the [Session Smart Networking Platform (PAYG)](https://aws.amazon.com/marketplace/pp/prodview-l5kwn7puwvt3g?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) offering.
+
+| Version | Supported Modes |
+| ------- | --------------- |
+| < 6.2   | Conductor, Conductor Managed Router |
+| 6.2.3   | Mist Managed Router |
 
 Once you have selected the AMI that better suits the needs of your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
@@ -378,9 +384,11 @@ commit
 
 ### Mist Managed Setup
 
-After the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate MIST org. The process can take up to 5 minutes. The device is visible as Unassigned in the MIST org once onboarding is complete.
+Once the EC2 instance is launched with the correct registration-code, the device will self-onboard to appropriate MIST org. The process can take up to 5 minutes. The device is visible as Unassigned in the MIST org once onboarding is complete.
 
-TODO: ADD A NOTE ABOUT HOW TO DEBUG AN INCOMPLETE ONBOARDING
+If the device does not show up in the MIST org after 5 minutes, ssh into the instance. First try going into the pcli `su admin` and running `show mist`.
+
+If that doesn't make the problem clear, drop back to the linux shell and look at the journal for the bootstrapper `journalctl -u 128T-hardware-bootstrapper` and the mist agent `journalctl -u 128T-mist-agent`.
 
 #### Network Interfaces Layout
 
@@ -641,10 +649,84 @@ A description of the parameters of the template are listed in the following tabl
 | Public Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's public interface in the public subnet. |
 | Private Subnet ID    | ID of the private subnet within the VPC. |
 | Private Subnet Allowed CIDR | The IP CIDR range of the endpoints allowed to originate traffic to the Router's private interface in the private subnet. |
-| Admin Allowed CIDR   | It allows for restricting reachability to the control interface of the Mist-managed router to a well known source IP address CIDR range for management purposes. It is common to set this field to 0.0.0.0/0 (accepting traffic from all source IP addresses) for now, as the source IP address/es where the Mist-managed router will be administered from may not be known at this time. However, once the deployment completes, it is highly recommended to update the configuration of the network security group to allow only access from the source IP address/es where the Mist-managed router will be administered. |
+| Admin Allowed CIDR   | The IP CIDR range of the endpoints allowed to SSH to the EC2 instance as well as login to the Router's GUI. |
 | Registration Code   | The MIST registration used for adoption of the EC2 instance to a MIST org. |
 | Instance size        | Size of the EC2 instance.|
 | Key Name             | IAM user key (SSH public key) to login to the EC2 instance (Linux) via SSH.|
+
+#### AWS Console
+
+Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
+Click on the “Continue to Subscribe” button and accept the terms and conditions.
+Click on the “Continue to Configuration” button.
+In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
+Click on the "Continue to Launch" button.
+In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
+Click the "Next" button.
+Fill out the template. Review the section above to understand the parameters of the template.
+Continue clicking the "Next" button.
+Click **Create Stack** to start the deployment.
+
+Once the deployment of the template is complete, information about the new router deployment is provided in the Output tab.
+
+The information listed in the Outputs tab is the following:
+* Instance ID of the Router EC2 instance.
+* Public IP address of the public interface for administration purposes.
+* SSH command to login to the Linux VM. Please continue to the end of this section below for more information regarding the credentials to login.
+
+:::important
+When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
+If a template of the Bring Your Own License image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
+:::
+
+#### AWS CLI
+
+Alternatively, it is possible to launch the template programmatically. Please adjust the content of the JSON file below to match the input of each template.
+
+Create the parameters file router.parameters.json with the following command:
+
+```
+vi router.parameters.json
+```
+
+and paste the following JSON content, please adjust the values to your specific environment:
+
+```
+{
+  "StackName": "<instance name>",
+  "VpcId": "<ID of the VPC>",
+  "PublicSubnet": "<ID of the public subnet within the VPC>",
+  "PublicSubnetAllowedCidr": "0.0.0.0/0",
+  "PrivateSubnet": "<ID of the public subnet within the VPC>",
+  "PrivateSubnetAllowedCidr": "0.0.0.0/0",
+  "AdminAllowedCidr": "0.0.0.0/0",
+  "RegistrationCode": "<Registration code>",
+  "InstanceType": "c5.xlarge",
+  "KeyName": "<username>"
+}
+```
+
+Go to the **Session Smart Networking Platform** offering following the steps described in the section [Selecting the AMI](#selecting-the-ami).
+Click on the “Continue to Subscribe” button and accept the terms and conditions.
+Click on the “Continue to Configuration” button.
+In the "Fulfillment Option" drop down box select "CloudFormation Template", select the template "Juniper Session Smart Router" and select the desired region.
+Click on the "Continue to Launch" button.
+In the "Choose Action" box, select "Launch CloudFormation" and click on the button "Launch".
+Copy to the clipboard the URL of the template located in the field "Amazon S3 URL".
+
+Launch the template running the following command:
+
+```
+aws ec2 create-launch-template \
+  --launch-template-name <template-file> \
+  --launch-template-data file://router.parameters.json
+```
+
+:::important
+When logging to the Linux instance via SSH use `t128` as the username and the SSH public key of the IAM user provided in the template.
+If a template of the Bring Your Own License image was used, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
+If a Conductor template of a Private or Hourly image was used, you can login to the application via HTTPs as indicated in the `HTTPSLogin` fields respectively, the username is "admin" and the password is 128Tadmin.
+:::
 
 
 TODO: ADD SECTION FOR AWS CONSOLE
@@ -693,7 +775,7 @@ TODO: ADD SECTION FOR AWS CLI
 22. On the _Launch Status_ page, click **View Instances**.
 23. Record the instances IP address.
 24. Launch a command window prompt.
-25. Enter the IP address of the instance. **Result:** The interactive SSR Installer application launches.
+25. Enter the IP address of the instance. **Result:** If the device is not a Mist Managed Router, the interactive SSR Installer application launches.
 26. When prompted by the installer, press the **Enter** key to select Begin.
 
 ### Configuring a Default Route to an Internet Gateway
