@@ -729,10 +729,6 @@ If a Conductor template of a Private or Hourly image was used, you can login to 
 :::
 
 
-TODO: ADD SECTION FOR AWS CONSOLE
-
-TODO: ADD SECTION FOR AWS CLI
-
 ### Deploying a Conductor or Router without Templates
 
 1. Launch a web browser and navigate to https://aws.amazon.com/
