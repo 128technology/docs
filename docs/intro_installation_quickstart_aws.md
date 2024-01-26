@@ -7,7 +7,7 @@ sidebar_label: Installing in AWS
 
 This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in AWS. 
 
-Mist-managed SSR installations are now available through AWS. **However, SSR Version 6.2.3 installed as an AWS image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in AWS](intro_installation_qiuckstart_mist_aws.md) for details. 
+Mist-managed SSR installations are now available through AWS. **However, SSR Version 6.2.3 installed as an AWS image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in AWS](intro_installation_quickstart_mist_aws.md) for details. 
 
 :::important
 If you wish to install SSR Version 6.2.3 on a conductor and conductor-managed router in AWS, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor. 
