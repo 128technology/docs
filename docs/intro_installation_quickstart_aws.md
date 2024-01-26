@@ -5,12 +5,12 @@ sidebar_label: Installing in AWS
 
 ## Introduction
 
-This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in AWS. 
+This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in AWS.
 
-Mist-managed SSR installations are now available through AWS. **However, SSR Version 6.2.3 installed as an AWS image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in AWS](intro_installation_qiuckstart_mist_aws.md) for details. 
+Mist-managed SSR installations are now available through AWS. **However, SSR Version 6.2.3 installed as an AWS image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in AWS](intro_installation_quickstart_mist_aws.md) for details.
 
 :::important
-If you wish to install SSR Version 6.2.3 on a conductor and conductor-managed router in AWS, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor. 
+If you wish to install SSR Version 6.2.3 on a conductor and conductor-managed router in AWS, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor.
 :::
 
 The process for deploying Conductor-managed networks consists of the following steps:
@@ -145,7 +145,7 @@ Be sure to change the password that conforms to your business' password requirem
 
 Adding a token to your deployment enables on-premises upgrades and deployments. If the **Session Smart Networking Platform** selected for the deployment was a **Private AMI** or an **Hourly AMI**, then use the following steps to add the token credentials.
 
-If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, then the token credentials will be entered during the software installation process. 
+If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, then the token credentials will be entered during the software installation process.
 
 1. SSH to the EC2 intance of Conductor (Linux).
 2. Run in Linux the following command to add a token credential:
@@ -227,7 +227,7 @@ To deploy the Session Smart Networking software via the AWS Console:
 Once the deployment completes, information is provided in the Outputs tab:
 
 * If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
-* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. 
+* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, and IP address/es to an existing Conductor have been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration.
 
  Login to the Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually. To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
@@ -248,7 +248,7 @@ Launch the deployment with the corresponding AWS CLI commands making use of the 
 ### Conductor Managed Setup
 
 * If the **Session Smart Networking Platform** offering selected for the deployment was the **BYOL**, SSH to the EC2 instance using `t128` as the username as indicated in the `SSHLogin` field. Launch the software installation process with the command `sudo install-ssr`.
-* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, and IP address/es to an existing Conductor has been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration. 
+* If the **Session Smart Networking Platform** offering selected for the deployment is a **Private AMI** or an **Hourly AMI**, and IP address/es to an existing Conductor has been provided in the template, the non-interactive, Zero Touch Provisioning (ZTP) method is triggered. After the VM is deployed, an additional 2-3 minutes are required before the ZTP process initializes. When the ZTP process is ready, there will be an asset in the Conductor to be associated with the router configuration.
 
  Login to Conductor via HTTPs to associate the pending asset with the configuration of the router. If the asset is not associated with a router, an unmanaged router will be deployed, and must be initialized manually. To login to the instance via SSH, use `t128` as the username and the SSH public key of the IAM user provided in the template.
 
@@ -277,7 +277,7 @@ The following are the high level steps to configure a device interface on a SSR 
 
 Disabling Source / Destination checking allows the SSR AWS instance to send and receive traffic when it is not the source or destination. This feature is enabled by default. Perform the following steps to disable Source / Destination checking.
 
-1. On the Instances page, select the **Launch Instances** dropdown. 
+1. On the Instances page, select the **Launch Instances** dropdown.
 2. Select **Networking**.
 
 ![AWS Instances page](/img/AWS-bootstrap1.png)
@@ -689,5 +689,5 @@ If the EC2 instance deployed for the Session Smart software does not have access
 7. On the _Internet Gateways_ page, click **Attach to VPC** and assign the Internet Gateway to your VPC.
 8. From the VPC Dashboard pane, select **Route Tables** and click **Edit**.
 9. Click **Add Another Route**.
-10. In the 0.0.0.0/0 row, click the empty cell under the Target column and the local name automatically appears as a selectable option. 
+10. In the 0.0.0.0/0 row, click the empty cell under the Target column and the local name automatically appears as a selectable option.
 11. Select it and click **Save**.
