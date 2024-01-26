@@ -25,6 +25,7 @@ module.exports = {
       "cc_fips_conductor_install",
       "cc_fips_install_quickstart_otpiso",
       "cc_fips_router_install",
+      "cc_fips_ssr_as_ntp_server",
       "cc_fips_config_password_policies",
       "cc_fips_sec_firewall_filtering",
       "cc_fips_appendix",

@@ -89,7 +89,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
     :::
   - **Router Name:** The name of the router system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `boston-router-node1.boston1`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
-5. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
+5. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 9 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
@@ -105,6 +105,35 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
   :::note
   A system reboot is required.
   :::
+
+### Change the Default Passwords after Installation
+
+The following user accounts and passwords are created during the ISO installation process:
+
+| Username | Password   |
+| -------- | ---------- |
+| root     | 128tRoutes |
+| t128     | 128tRoutes |
+
+Change these passwords immediately. Use the `passwd` command from the UNIX window.
+
+```
+[t128@test-router ~]$ passwd
+Changing password for user t128
+Changing password for t128
+(current)UNIX password:
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[t128@test-router ~]$ su - 
+Password:
+[root@test-router ~]# passwd
+Changing password for user root.
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@test-router ~]#
+```
 
 ## OTP Router Installation
 
@@ -211,3 +240,31 @@ After reboot, the SSR service will be configured and running.
 It is important to note that after the OS installation the dhclient is configured across all network interfaces until the platform has completed Bootstrapping.
 :::
 
+### Change the Default Passwords after Installation
+
+The following user accounts and passwords are created during the ISO installation process:
+
+| Username | Password   |
+| -------- | ---------- |
+| root     | 128tRoutes |
+| t128     | 128tRoutes |
+
+Change these passwords immediately. Use the `passwd` command from the UNIX window.
+
+```
+[t128@test-router ~]$ passwd
+Changing password for user t128
+Changing password for t128
+(current)UNIX password:
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[t128@test-router ~]$ su - 
+Password:
+[root@test-router ~]# passwd
+Changing password for user root.
+New password:
+Retype new password: 
+passwd: all authentication tokens updated successfully.
+[root@test-router ~]#
+```
