@@ -7,10 +7,10 @@ sidebar_label: Installing in AWS
 
 This guide describes the process for deploying a Session Smart Conductor and a Session Smart Router (SSR) in AWS.
 
-Mist-managed SSR installations are now available through AWS. **However, SSR Version 6.2.3 installed as an AWS image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in AWS](intro_installation_quickstart_mist_aws.md) for details.
+Mist-managed SSR installations are now available through AWS. **However, SSR Version 6.x installed as an AWS image will only support Mist-managed routers. It will not support a conductor-managed deployment.** See [Installing a Mist-Managed Router in AWS](intro_installation_quickstart_mist_aws.md) for details.
 
 :::important
-If you wish to install SSR Version 6.2.3 on a conductor and conductor-managed router in AWS, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor.
+If you wish to install SSR Version 6.x on a conductor and conductor-managed router in AWS, the suggested procedure is to first install an earlier version of SSR software such as 5.x.x, and upgrade through the conductor.
 :::
 
 The process for deploying Conductor-managed networks consists of the following steps:
@@ -171,7 +171,7 @@ The following infrastructure must exist in your AWS account:
 * The existing VPC is segmented with at least three subnets. The role of each subnet is described below
 
 #### Public Subnet
-This subnet must provide connectivity to enable communication with external/remote SSR peers. For MIST managed deployments, this subnet should also provide access to the MIST cloud infrastructure.
+This subnet must provide connectivity to enable communication with external/remote SSR peers. For Mist managed deployments, this subnet should also provide access to the Mist cloud infrastructure.
 
 #### Private Subnet
 This subnet must provide connectivity to internal workloads within the cloud.
@@ -387,41 +387,12 @@ commit
 
 #### Network Interfaces Layout
 
-The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, and Private. The network interfaces to be used in MIST configuration are as follows:
+The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, and Private. The network interfaces to be used in Mist configuration are as follows:
 
-| Network interface name | Subnet           | MIST config name     |
+| Network Interface Name | Subnet           | Mist Config Name     |
 | ---------------------- | ---------------- | ----------------|
 | eth1                   | Public           | ge-0/0/0    |
 | eth2                   | Private          | ge-0/0/1    |
-
-#### Interface Tagging
-
-In addition to using the cloud formation template, the admin can tag the interface with the key `SSR-ROLE`. The possible values are as follows:
-
-| Tag Value | Meaning |
-| --------- | ------- |
-| WAN       | Interface is marked as WAN for onboarding purposes and is assumed to have connectivity to MIST cloud infrastructure. |
-| LAN       | Interface is marked as LAN and is assumed to be used as a private network for internal workflows. |
-
-:::note
-The EC2 instance must be assigned the IAM role containing the `ec2_describeNetwork` permission to leverage the interface tagging.
-:::
-
-#### Cloud-init Onboarding
-When launching an AWS EC2 instance using automation the following user-data section can be leveraged to setup the onboarding data for the instance.
-
-```
-#cloud-config
-write_files:
-  - path: /etc/128T-hardware-bootstrapper/onboarding-config.json
-    content: |
-      { "name": "<router-name>", "registration-code": "<regcode>", "version": "2.0", "mode": "mist-managed", "cloud-provider": "aws"}
-```
-
-| Option | Meaning |
-| ------ | ------- |
-| name | The name of the router to use for MIST onboarding. By default, the instance name will be used. |
-| registration-code | The MIST registration used for adoption of the EC2 instance to a MIST org. |
 
 ## Source / Destination Check
 
@@ -659,7 +630,7 @@ If a Conductor template of a Private or Hourly image was used, you can login to 
     :::note
     If the desired security group is not listed you can create your own by selecting **Create a new security group** and following the prompts.
     :::
-16. For MIST managed routers, expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired MIST org, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
+16. For Mist managed routers, expand the _Advanced Details_ and scroll down to the **User data** section. To onboard the router to the desired Mist org, you can add cloud-init user-data using the steps in the [Cloud-init Onboarding](#cloud-init-onboarding) section.
 17. Select **Review and Launch**.
 18. In the _Boot from General Purpose_ window, select **Continue** and then click **Next**.
 19. On the _Step 7: Review Instance Launch_ page, click **Launch** to finalize the instance.
