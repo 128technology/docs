@@ -19,11 +19,25 @@ The Conductor installation must be completed before installing a Session Smart R
 
 ## Installation
 
-After imaging the ISO onto removable media, insert it into the SSR device and power it on.
+After imaging the ISO onto removable media, connect a computer to the SSR, then insert the imaged drive into the SSR device and power it on.
 
-Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
+### Connect the SSR to a Management Console
 
-1. Use the Up/Down keys to select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer.
+Ensure that you have an RJ-45 to DB-9 rollover cable available. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
+
+:::note
+If your laptop or PC does not have a DB-9 pin contact and you want to connect your laptop or PC directly to the SSR130, use a combination of the RJ-45 cable, an RJ-45 to DB-9 adapter, and a USB to DB-9 plug adapter. 
+:::
+
+1. Connect one end of the Ethernet cable to the console port (labeled CONSOLE).
+
+2. Connect the other end of the Ethernet cable into the console server or management console.
+
+**Open an SSH console. When do we do this? What do we do next to be SECURE?**
+
+3. Power on the SSR. Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
+
+4. Use the Up/Down keys to select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer.
 
   ![Select Serial Install](/img/cc_fips_serial_install1.png)
 
@@ -31,15 +45,15 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
   For serial console issues please refer to [Serial Console Troubleshooting](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing.md).
 
-2. Press the TAB key to edit the configuration.
+5. Press the TAB key to edit the configuration.
 
   To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
-3. Add `fips=1` to the end of the `vmlinuz` parameters.
+6. Add `fips=1` to the end of the `vmlinuz` parameters.
 
   ![FIPS Parameter](/img/cc_fips_serial_install2.png)
 
-4. Press **Enter** to start the install. 
+7. Press **Enter** to start the install. 
 
 After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the process has completed, the following screen is displayed:
 

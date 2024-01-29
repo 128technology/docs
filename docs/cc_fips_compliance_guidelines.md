@@ -40,11 +40,3 @@ The following functionality and platforms are not certified under Common Criteri
 - SSR Plugins, particularly Wireshark, are excluded from Common Criteria certification. 
 
 The SSR Hardware has no physical restrictions for Common Criteria certification, however, there is an assumption of physical security.
-
-## Installation Process Overview
-
-Installation is done from the SSR ISO, typically from a bootable image on a flash drive or disk. The install process is as follows:
-- [Download the OTP ISO](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_downloading_iso)
-- [Create Bootable Media](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb)
-- [Install a Conductor](cc_fips_conductor_install.md)
-- [Install the Router](cc_fips_router_install.md) 
