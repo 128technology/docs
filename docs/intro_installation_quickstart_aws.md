@@ -23,8 +23,8 @@ Proceed to the next section [Selecting the AMI](#selecting-the-ami).
 
 | Version | Supported Modes |
 | ------- | --------------- |
-| < 6.2   | Conductor, Conductor-Managed Router |
-| 6.2.3   | Mist-Managed Router |
+| 5.x   | Conductor and Conductor-Managed Router |
+| 6.x   | Mist-Managed Router |
 
 ### Selecting the AMI
 
@@ -36,7 +36,7 @@ There are different AMIs (images) available for the Juniper Session Smart Networ
 Once you have selected the AMI that better suits the needs of your deployment, proceed to the section [Session Smart Conductor Deployment](#session-smart-conductor-deployment) to deploy a Session Smart Conductor, or proceed to the section [Session Smart Router Deployment](#session-smart-router-deployment) to deploy a Session Smart Router.
 
 :::important
-**SSR Version 6.2.3 installed as an AWS image will only support Mist-managed routers. It will not support a conductor-managed deployment.**
+**SSR Version 6.x installed as an AWS image will only support Mist-managed routers. It will not support a conductor-managed deployment.**
 :::
 
 ### Requesting access to a Private Offer

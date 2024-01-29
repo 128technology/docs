@@ -5,7 +5,7 @@ sidebar_label: Installing Mist-Managed Router in AWS
 
 ## Introduction
 
-This guide describes the process for deploying a Mist-managed instance through AWS. SSR Version 6.2.3 installed as an AWS image only supports Mist-managed routers. The process consists of the following steps:
+This guide describes the process for deploying a Mist-managed instance through AWS. SSR Version 6.x installed as an AWS image only supports Mist-managed routers. The process consists of the following steps:
 
 1. [Selecting the AMI](#selecting-the-ami).
 2. Deploying a [Session Smart Router](#session-smart-router-deployment).
