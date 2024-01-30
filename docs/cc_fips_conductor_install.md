@@ -3,7 +3,7 @@ title: Conductor Installation
 sidebar_label: Conductor Installation 
 ---
 
-This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_downloading_iso.md) and [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb.md).
+This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_downloading_iso) and [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb).
 
 The steps in this section describe the interactive conductor installation from the packaged-based ISO, using the serial console. The section [Initialize the Conductor](#initialize-the-conductor-node) describes using the Initializer to configure the system as a Conductor after installing from the interactive installation.
 
@@ -13,7 +13,7 @@ The Conductor installation must be completed before installing a Session Smart R
 
 ## Prerequisites
 
-- Ensure that the platform you are installing on meets the [SSR hardware requirements](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/about_supported_platforms.md#minimum-platform-specifications).
+- Ensure that the platform you are installing on meets the [SSR hardware requirements](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/about_supported_platforms#minimum-platform-specifications).
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 - Local console connectivity to the device/VM. 
 - **The SSH Root login is not permitted.** When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
@@ -44,7 +44,7 @@ If your laptop or PC does not have a DB-9 pin contact and you want to connect yo
 
   Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 
-  For serial console issues please refer to [Serial Console Troubleshooting](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing.md).
+  For serial console issues please refer to [Serial Console Troubleshooting](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing).
 
 5. Press the TAB key to edit the configuration.
 
@@ -125,7 +125,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
 There are two different types of conductor installations supported; 
 - Standalone Conductor 
-- [Conductor High Availability](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ha_conductor_install.mdx)
+- [Conductor High Availability](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ha_conductor_install)
 Conductor High Availability for Cloud Deployments is not supported under Common Criteria.
 
 ## Standalone Conductor
@@ -226,7 +226,7 @@ passwd: all authentication tokens updated successfully.
 
 Once the system has been setup for the first time, the next step is to provision credentials for SSR software access on the conductor. Provisioning the software credentials on the conductor propagates those settings down to all of the managed routers.
 
-Use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference.md#set-software-access-token).
+Use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#set-software-access-token).
 
 From the root user in the workflow above, run the `pcli` command to access the PCLI and configure the token.
 

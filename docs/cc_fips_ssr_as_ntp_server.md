@@ -145,7 +145,7 @@ config
 exit
 ```
 
-This `service-route` leverages [Linux host networking](concepts_linux_host_networking.md) to send packets to `ntpd` using the `kni254` interface present on all SSR devices.
+This `service-route` leverages [Linux host networking](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_linux_host_networking) to send packets to `ntpd` using the `kni254` interface present on all SSR devices.
 
 ## Conclusion
 

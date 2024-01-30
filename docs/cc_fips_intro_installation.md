@@ -27,18 +27,18 @@ Installation is done from the SSR ISO, typically from a bootable image on a flas
 - [Download the OTP ISO](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_downloading_iso)
 - [Create Bootable Media](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb)
 - [Install a Conductor](cc_fips_conductor_install.md)
-- [Create the Router configuration with the Conductor](intro_basic_router_config.md) or [Import a Configuration](single_conductor_config.md)
+- [Create the Router configuration with the Conductor](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_basic_router_config) or [Import a Configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/single_conductor_config)
 - [Install the Router](cc_fips_router_install.md) 
 
 ## Upgrades
 
-Use this information if you upgrading to a software version after having **installed** SSR Version 6.2.3-14R2. Please refer to [Upgrade Considerations](intro_upgrade_considerations.md) before upgrading. Additional prerequisites include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
+Use this information if you upgrading to a software version after having **installed** SSR Version 6.2.3-14R2. Please refer to [Upgrade Considerations](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrade_considerations) before upgrading. Additional prerequisites include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
 
-For full details and instructions refer to [Upgrading the SSR Networking Platform.](intro_upgrading.md)
+For full details and instructions refer to [Upgrading the SSR Networking Platform.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrading)
 
 ## Version Dependencies
 
-The conductor Major.Minor version must be greater than or equal to the router version. The router version can not exceed the conductors major.minor version, but it can have a greater patch version. All [versions currently under support](about_support_policy.md) contract can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support contract *may* work, but are not guaranteed to do so.  
+The conductor Major.Minor version must be greater than or equal to the router version. The router version can not exceed the conductors major.minor version, but it can have a greater patch version. All [versions currently under support](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/about_support_policy) contract can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support contract *may* work, but are not guaranteed to do so.  
 
 Examples:
 - Conductor running version 6.0.5, managing Routers running version 6.0.1: Supported.
