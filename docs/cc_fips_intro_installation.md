@@ -15,6 +15,12 @@ Before you begin the installation and configuration of an SSR Networking Plaform
 The examples listed in this guide generally prefer running commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 
 :::
 
+### SSR Software Version
+
+The SSR devices ship with an older version of SSR software that is not Common Criteria and FIPS compliant. It is required that you install the SSR 6.2.3-14R2 version of software on the device to configure and run Common Criteria and FIPS compliant instances.
+
+The installation process is the most efficient way to achieve compliant software. The upgrade process may be used for later updates to SSR 6.2.3-14R2 software.
+
 ## Installation Process Overview
 
 Installation is done from the SSR ISO, typically from a bootable image on a flash drive or disk. The install process is as follows:
@@ -26,7 +32,7 @@ Installation is done from the SSR ISO, typically from a bootable image on a flas
 
 ## Upgrades
 
-Please refer to [Upgrade Considerations](intro_upgrade_considerations.md) before upgrading. Additional prerequisites include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
+Use this information if you upgrading to a software version after having **installed** SSR Version 6.2.3-14R2. Please refer to [Upgrade Considerations](intro_upgrade_considerations.md) before upgrading. Additional prerequisites include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
 
 For full details and instructions refer to [Upgrading the SSR Networking Platform.](intro_upgrading.md)
 

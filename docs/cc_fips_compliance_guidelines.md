@@ -6,7 +6,7 @@ sidebar_label: Common Criteria Compliance Guidelines
 For compliance, the following configuration considerations must be made:
  
 - FIPS mode must be enabled **during installation**. Use of anything other than FIPS mode is not compliant with Common Criteria certification.
-- Except during installation, all configuration procedures must be performed from the PCLI; use of the GUI is not part of the approved use case. Configuring the router OTP Quickstart file from the Conductor GUI is acceptable under the Common Criteria guidelines.
+- **Except during installation**, all configuration procedures must be performed from the PCLI; use of the GUI is not part of the approved use case. Configuring the router OTP Quickstart file from the Conductor GUI **is acceptable under the Common Criteria guidelines**.
 - When installing a router, the [IPv4 Option Filter](cc_fips_sec_firewall_filtering.md#ipv4-option-filtering) must be set to `drop-all`.
 - When installing a router, the [ICMP Session Match](cc_fips_sec_firewall_filtering.md#from-the-command-line) must be set to `identifier-and-type`.
 - Configure the [TCP Half-Open Connections Limit](cc_fips_sec_firewall_filtering.md#tcp-half-open-connection-limit) for firewall.
@@ -21,7 +21,11 @@ For compliance, the following configuration considerations must be made:
 
  For overview information about service policies, please see [Service and Service Policy Design](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/bcp_service_and_service_policy_design). 
 
- For information about configuration baselines, please see [Service Policy Baseline Configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/bcp_service-policy_defaults)
+ For information about configuration baselines, please see [Service Policy Baseline Configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/bcp_service-policy_defaults).
+
+- Common Criteria Compliance assessment includes all SSR interfaces.
+- Security functionality called out in this guide is required for Common Criteria compliance. Other security features available with the SSR will not jeapordize the compliance certification, but are not compliance requirements. 
+- The use of SSH is necessary for installation and configuration. Use of SSH on the SSR after FIPS mode has been enabled during install is secure, and compliant with Common Criteria.   
 
 :::note
 An example configuration has been provided in the [Appendix](cc_fips_appendix.md).

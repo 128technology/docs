@@ -37,6 +37,10 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
   To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
+  :::important
+  FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.
+  :::
+
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
   ![FIPS Parameter](/img/cc_fips_serial_install2.png)
@@ -170,6 +174,10 @@ Upon boot, the following screen is displayed. The default selection is booting t
 2. Press the TAB key to edit the configuration.
 
   To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
+
+  :::important
+  FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.
+  :::
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 

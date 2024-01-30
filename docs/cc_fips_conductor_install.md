@@ -16,6 +16,7 @@ The Conductor installation must be completed before installing a Session Smart R
 - Ensure that the platform you are installing on meets the [SSR hardware requirements](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/about_supported_platforms.md#minimum-platform-specifications).
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 - Local console connectivity to the device/VM. 
+- **The SSH Root login is not permitted.** When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
 
 ## Installation
 
@@ -48,6 +49,10 @@ If your laptop or PC does not have a DB-9 pin contact and you want to connect yo
 5. Press the TAB key to edit the configuration.
 
   To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
+
+  :::important
+  FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.
+  :::
 
 6. Add `fips=1` to the end of the `vmlinuz` parameters.
 
