@@ -385,15 +385,6 @@ commit
 
 4. Confirm AWS gateways reply to ping successfully.
 
-#### Network Interfaces Layout
-
-The _Session Smart Router Template_ deploys an EC2 instance for the SSR with two network interfaces. The template attaches the network interfaces to the EC2 instance in the following order: Public, and Private. The network interfaces to be used in Mist configuration are as follows:
-
-| Network Interface Name | Subnet           | Mist Config Name     |
-| ---------------------- | ---------------- | ----------------|
-| eth1                   | Public           | ge-0/0/0    |
-| eth2                   | Private          | ge-0/0/1    |
-
 ## Source / Destination Check
 
 Disabling Source / Destination checking allows the SSR AWS instance to send and receive traffic when it is not the source or destination. This feature is enabled by default. Perform the following steps to disable Source / Destination checking.
