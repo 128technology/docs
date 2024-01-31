@@ -7,7 +7,7 @@ This guide provides installation and configuration information for using SSR Con
 
 Supported Software version: 
 - Version 6.2.3-14-R2
-- Release Date: December 15, 2024
+- Release Date: March 15, 2024
 
 Supported Hardware (must be upgraded to run Software version 6.2.3-14-R2):
 - SSR 120, SSR 130
@@ -17,4 +17,5 @@ Supported Hardware (must be upgraded to run Software version 6.2.3-14-R2):
 
 | Software Release | Modification | Date |
 | --- | --- | --- |
-|6.2.3-R2 | Documentation Created for Common Criteria | December 31, 2023 |
+| 6.2.3-R2 | Documentation Created for Common Criteria | December 31, 2023 |
+| Doc Version 0.2 | Revision with Teron Feedback | February 2, 2024 |

@@ -33,7 +33,7 @@ An example configuration has been provided in the [Appendix](cc_fips_appendix.md
 
 ## Out of Scope Features
 
-The following functionality and platforms are not certified under Common Criteria.
+The following functionality and platforms **are not certified** under Common Criteria.
 
 - Non-Juniper branded hardware platforms and Juniper branded hardware platforms not explicitly included.
 - Juniper SSR Software for virtual platforms.
@@ -44,3 +44,8 @@ The following functionality and platforms are not certified under Common Criteri
 - SSR Plugins, particularly Wireshark, are excluded from Common Criteria certification. 
 
 The SSR Hardware has no physical restrictions for Common Criteria certification, however, there is an assumption of physical security.
+
+### Additional Information Related to Common Criteria
+
+Common Criteria certification uses FIPS mode to provide cryptopgraphic support. Without FIPS mode enabled during installation, the SSR is not compliant. FIPS mode provides all secure cyphers, and therefore **no additional cryptographic keys are used**. 
+

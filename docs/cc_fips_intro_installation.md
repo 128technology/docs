@@ -12,7 +12,7 @@ Before you begin the installation and configuration of an SSR Networking Plaform
 - Have an entry in /etc/sudoers allowing you to execute Linux shell commands as root (via sudo). Failure to do so may result in the loss of remote management connectivity to the router. 
 
 :::note
-The examples listed in this guide generally prefer running commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 
+The examples listed in this guide generally run commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 
 :::
 
 ### SSR Software Version
@@ -32,9 +32,14 @@ Installation is done from the SSR ISO, typically from a bootable image on a flas
 
 ## Upgrades
 
-Use this information if you upgrading to a software version after having **installed** SSR Version 6.2.3-14R2. Please refer to [Upgrade Considerations](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrade_considerations) before upgrading. Additional prerequisites include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
+Use this information if you upgrading to a software version **after having installed** SSR Version 6.2.3-14R2. The SSR Software packages are available from our public servers using the **username and token provided to you.** During the upgrade process, your SSR uses this information to securely access the download location. Depending on your upgrade selection, the following locations are accessed by the upgrade process at the following location:
 
-For full details and instructions refer to [Upgrading the SSR Networking Platform.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrading)
+<!-- markdown-link-check-disable-next-line -->
+- https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
+
+Please refer to [Upgrade Considerations](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrade_considerations) before upgrading. Additional prerequisites include configuring a user with super user (sudo) privileges. **The SSH Root login is not permitted.** If the existing version allows SSH Root login, it will be disabled during the upgrade. When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
+
+To perform an upgrade on either a conductor or router, refer to the detailed instructions at [Upgrading the SSR Networking Platform.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrading)
 
 ## Version Dependencies
 

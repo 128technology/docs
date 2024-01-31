@@ -26,27 +26,22 @@ After imaging the ISO onto removable media, connect a computer to the SSR, then 
 
 Ensure that you have an RJ-45 to DB-9 rollover cable available. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
 
-:::note
-If your laptop or PC does not have a DB-9 pin contact and you want to connect your laptop or PC directly to the SSR130, use a combination of the RJ-45 cable, an RJ-45 to DB-9 adapter, and a USB to DB-9 plug adapter. 
-:::
+1. Connect the RJ45/USB cable to the console port on the SSR device.
+2. Connect the USB end of the cable to your Mac.
+3. Connect the power input to the back of the SSR device
+4. Insert your USB with the new ISO image into the USB port of the SSR device.
 
-1. Connect one end of the Ethernet cable to the console port (labeled CONSOLE).
+5. Power on the SSR. Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
 
-2. Connect the other end of the Ethernet cable into the console server or management console.
+ ![Select Serial Install](/img/cc_fips_serial_install1.png)
 
-**Open an SSH console. When do we do this? What do we do next to be SECURE?**
-
-3. Power on the SSR. Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
-
-4. Use the Up/Down keys to select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer.
-
-  ![Select Serial Install](/img/cc_fips_serial_install1.png)
+6. Use the Up/Down keys to select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer.
 
   Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 
   For serial console issues please refer to [Serial Console Troubleshooting](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing).
 
-5. Press the TAB key to edit the configuration.
+7. Press the TAB key to edit the configuration.
 
   To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
@@ -54,11 +49,11 @@ If your laptop or PC does not have a DB-9 pin contact and you want to connect yo
   FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.
   :::
 
-6. Add `fips=1` to the end of the `vmlinuz` parameters.
+8. Add `fips=1` to the end of the `vmlinuz` parameters.
 
   ![FIPS Parameter](/img/cc_fips_serial_install2.png)
 
-7. Press **Enter** to start the install. 
+9. Press **Enter** to start the install. 
 
 After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the process has completed, the following screen is displayed:
 
@@ -123,9 +118,10 @@ The Initializer process starts automatically.
 
 The SSR Initializer tunes your operating system, prepares the platform to run the SSR software, and creates the bootstrapping files necessary to load the software. The Initializer is launched on first boot.
 
-There are two different types of conductor installations supported; 
+There are two different types of conductor installations supported: 
 - Standalone Conductor 
 - [Conductor High Availability](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ha_conductor_install)
+
 Conductor High Availability for Cloud Deployments is not supported under Common Criteria.
 
 ## Standalone Conductor
