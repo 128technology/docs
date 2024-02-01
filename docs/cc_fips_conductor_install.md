@@ -147,7 +147,7 @@ Conductor High Availability for Cloud Deployments is not supported under Common 
     :::
     - **Conductor Name:** The name of the Conductor system as a whole. When referring to a running SSR software instance, it is identifiable by the full name; e.g., `test-conductor.conductor`. The full system name is reflected in the PCLI prompt.
 
-4. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 8 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. 
+4. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 9 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer, and the password must be entered twice. For supporting password information, see [Username and Password Policies](#cc_fips_config_password_policies.md).
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
@@ -218,13 +218,26 @@ passwd: all authentication tokens updated successfully.
 [root@test-conductor ~]#
 ```
 
+#### Add Admin User
+
+Add the Admin user to the `sudo` config.
+
+Continuing in the UNIX window above, use `visudo` command to add the Admin user to the `sudo` configuration. 
+
+```
+[root@test-conductor ~]# visudo
+"admin ALL=(ALL)  ALL"
+:wq
+[root@test-conductor ~]#
+```
+
 ### Configure the Token
 
 Once the system has been setup for the first time, the next step is to provision credentials for SSR software access on the conductor. Provisioning the software credentials on the conductor propagates those settings down to all of the managed routers.
 
-Use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#set-software-access-token).
-
 From the root user in the workflow above, run the `pcli` command to access the PCLI and configure the token.
+
+Use the PCLI command `set software access-token`. For information on this command, see [`set software access-token`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#set-software-access-token).
 
 ```
 [root@test-conductor ~]# pcli
@@ -240,11 +253,22 @@ Successfully saved credentials.
 root@node1.test-conductor#
 ```
 
+### PCLI Access Post Install
+
+Use the following procedure to access the pcli at any time after installation. 
+
+1. Open a terminal window and ssh to the conductor's IP address. 
+2. Use your login credentials to log in to the conductor, and run the `pcli` command to start the SSR PCLI. 
+
+Common Criteria certification does not require any restrictions on executing commands. See the [Configuration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage.
+
 ## Next Steps - Router Configuration
 
 Congratulations, you have successfully installed and configured a conductor! The next step is to optimize the router onboarding process. 
 
 Creating router configurations on the conductor allows individual routers to download the necessary configuration to get up and running smoothly. 
+
+A sample branch router configuration is available as a [**template**](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates#default-templates) on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top level resources. For more information, see [Configuration Templates](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates). 
 
 If you will be using the OTP Quickstart router installation process, use the conductor GUI to generate a basic configuration and quickstart file for router installation. When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
 

@@ -139,6 +139,15 @@ passwd: all authentication tokens updated successfully.
 [root@test-router ~]#
 ```
 
+### PCLI Access Post Install
+
+Use the following procedure to access the pcli at any time after installation. 
+
+1. Open a terminal window and ssh to the conductor's IP address. 
+2. Use your login credentials to log in to the conductor, and run the `pcli` command to start the SSR PCLI. 
+
+Common Criteria certification does not require any restrictions on executing commands. See the [Configuration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage.
+
 ## OTP Router Installation
 
 The simplest deployment of the OTP solution is highly automated and leverages just two components, the Conductor and at least one SSR. For many customers, the SSR platform is ordered and delivered as a pre-integrated, off-the-shelf solution through the Juniper SSR partner network. 
@@ -276,3 +285,12 @@ Retype new password:
 passwd: all authentication tokens updated successfully.
 [root@test-router ~]#
 ```
+
+### PCLI Access Post Install
+
+Use the following procedure to access the pcli at any time after installation. 
+
+1. Open a terminal window and ssh to the conductor's IP address. 
+2. Use your login credentials to log in to the conductor, and run the `pcli` command to start the SSR PCLI. 
+
+Common Criteria certification does not require any restrictions on executing commands. See the [Configuration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage.

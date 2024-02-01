@@ -17,14 +17,17 @@ The examples listed in this guide generally run commands as a non-root user, exc
 
 ### SSR Software Version
 
-The SSR devices ship with an older version of SSR software that is not Common Criteria and FIPS compliant. It is required that you install the SSR 6.2.3-14R2 version of software on the device to configure and run Common Criteria and FIPS compliant instances.
+The SSR devices ship with an older version of SSR software that is not Common Criteria and FIPS compliant. It is required that you install SSR 6.2.3-14R2 software on the device to configure and run Common Criteria and FIPS compliant instances.
 
-The installation process is the most efficient way to achieve compliant software. The upgrade process may be used for later updates to SSR 6.2.3-14R2 software.
+The installation process is the most efficient way to achieve compliant software. The upgrade process may be used for updates to SSR 6.2.3-14R2 software.
+
+Access to the SSR Software packages available for downloand from our software repositories is provided using the username and token provided to you.
 
 ## Installation Process Overview
 
-Installation is done from the SSR ISO, typically from a bootable image on a flash drive or disk. The install process is as follows:
-- [Download the OTP ISO](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_downloading_iso)
+Installation is done from the SSR ISO, typically from a bootable image on a flash drive or disk. 
+The install process is as follows:
+- [Download the OTP ISO](cc_fips_downloading_iso.md)
 - [Create Bootable Media](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb)
 - [Install a Conductor](cc_fips_conductor_install.md)
 - [Create the Router configuration with the Conductor](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_basic_router_config) or [Import a Configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/single_conductor_config)
@@ -32,7 +35,13 @@ Installation is done from the SSR ISO, typically from a bootable image on a flas
 
 ## Upgrades
 
-Use this information if you upgrading to a software version **after having installed** SSR Version 6.2.3-14R2. The SSR Software packages are available from our public servers using the **username and token provided to you.** During the upgrade process, your SSR uses this information to securely access the download location. Depending on your upgrade selection, the following locations are accessed by the upgrade process at the following location:
+To determine the current version of software running on your Conductor or Router, run the following command from the Conductor PCLI:
+
+[`show system version`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/cli_reference#show-system-version)
+
+Use this information if you upgrading to a software version **after having installed** SSR Version 6.2.3-14R2. 
+
+The SSR Software packages are available from our public servers using the **username and token provided to you.** During the upgrade process, your SSR uses this information to securely access the download location. Depending on your upgrade selection, the following locations are accessed by the upgrade process at the following location:
 
 <!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
