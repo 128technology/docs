@@ -270,23 +270,13 @@ Creating router configurations on the conductor allows individual routers to dow
 
 A sample branch router configuration is available as a [**template**](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates#default-templates) on the conductor. This is a great place to start the configuration process. Additionally, you can create configuration templates that allow administrators to automate the configuration of top level resources. For more information, see [Configuration Templates](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_templates). 
 
+To see an example router configuration, refer to the [Appendix](cc_fips_appendix.md).
+
+After completing the router configuration on the conductor, please return to this guide to continue the (Common Criteria compliant) router installation.
+
 If you will be using the OTP Quickstart router installation process, use the conductor GUI to generate a basic configuration and quickstart file for router installation. When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
 
 Instructions for generating the quickstart file are found at [QuickStart From the OTP ISO](cc_fips_install_quickstart_otpiso.md)
 
 If you are installing routers using the Interactive Installation, continue with [Router Installation](cc_fips_router_install.md).
-
-To see an example router configuration, refer to the [Appendix](cc_fips_appendix.md).
-
-
-
-
-
-
-
-
-
-
-
-
 

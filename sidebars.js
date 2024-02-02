@@ -21,6 +21,7 @@ module.exports = {
       "cc_fips_titlepage",
       "cc_fips_intro",
       "cc_fips_compliance_guidelines",
+      "cc_fips_ssr_security_scope",
       "cc_fips_secure_deliver",
       "cc_fips_intro_installation",
       "cc_fips_downloading_iso",

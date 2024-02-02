@@ -27,21 +27,32 @@ For compliance, the following configuration considerations must be made:
 - Security functionality called out in this guide is required for Common Criteria compliance. Other security features available with the SSR will not jeapordize the compliance certification, but are not compliance requirements. 
 - The use of SSH is necessary for installation and configuration. Use of SSH on the SSR after FIPS mode has been enabled during install is secure, and compliant with Common Criteria.   
 
-:::note
-An example configuration has been provided in the [Appendix](cc_fips_appendix.md).
-:::
+## Compliant SSR Hardware
+
+The following table provides a complete list of compliant hardware. 
+
+| PLATFORM | CPU | MICROPROCESSOR | NETWORKING |
+| --- | --- | --- | --- |
+| SSR120 | 4-core Intel Atom 8G | Denverton | 2 x 1GbE combo RJ45/SFP <br/>4 x 1GbE RJ4 |
+| SSR130 | 8-core Intel Atom 16G | Denverton | 2 x 1GbE combo RJ45/SFP <br/>6 x 1GbE RJ45 |
+| SSR1200 | 8-core AMD | Snowy Owl | 8 x 1GBe RJ45 <br/>4 x 1/10 GbE SFP+ |
+| SSR1300 | 16-core Intel Xeon | Cascade Lake | 6 x RJ-45 <br/>4 x 10GbE SFP+ <br/>3 x 1/10GBe SFP+ <br/>4 x 1GBe Ethernet |
+| SSR1400 | 24-core Intel Xeon | Cascade Lake | 6 x 1G RJ-45 <br/>4 x 10G SFP+ <br/>4 x 1/10/25G SFP28 |
+| SSR1500 | 64-core AMD | Milan | 6 x 1G RJ-45 |
 
 ## Out of Scope Features
 
 The following functionality and platforms **are not certified** under Common Criteria.
 
-- Non-Juniper branded hardware platforms and Juniper branded hardware platforms not explicitly included.
+- Non-Juniper branded hardware platforms running SSR Software
+- Juniper branded hardware platforms not explicitly included
 - Juniper SSR Software for virtual platforms.
-- HTTPS/TLS, IPSec, SNMP, RADIUS, LDAP.
-- X.509 certificate management, validation or verification.
-- Virtual Private Network (VPN) and Intrusion Prevention System (IPS) functions.
-- Graphical User Interface (GUI) and Juniper MIST.
-- SSR Plugins, particularly Wireshark, are excluded from Common Criteria certification. 
+- SSR Graphical User Interface (GUI) 
+- Juniper MIST
+- HTTPS/TLS, IPSec, SNMP, RADIUS, LDAP
+- X.509 certificate management, validation or verification
+- Virtual Private Network (VPN) and Intrusion Prevention System (IPS) functions
+- SSR Plugins, particularly Wireshark, are excluded from Common Criteria certification 
 
 The SSR Hardware has no physical restrictions for Common Criteria certification, however, there is an assumption of physical security.
 
