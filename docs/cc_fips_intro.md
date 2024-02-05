@@ -18,7 +18,7 @@ The family of Juniper SSR appliances consists of the Session Smark Networking so
 - SSR 120, SSR 130
 - SSR 1200, SSR 1300, SSR 1400, SSR 1500
 
-The software is Juniper SSR software v6.2.3-14R2. The software is deployed in an ISO package file, which includes CentOS 7.5 Linux operating system with kernel version 4.18.0.
+The software is Juniper SSR software v6.2.3-14R2. The software is deployed in an ISO package file, which includes Enterprise Linux 7.9 with kernel version 4.18.0.
 
 The SSR security guidance documentation (this guide, the SSR Common Criteria Installation and User Guide V1.0) is delivered to all users. To achieve Common Critieria compliance, the SSR network must at all times deployed and operated in accordance with it. The SSR Common Criteria Installation and User Guide V1.0 is a Common Criteria Guidance Supplement which extends the existing manuals and other product documentation. The SSR Common Criteria Installation and User Guide applies to the above listed hardware. 
 
@@ -32,7 +32,7 @@ The SSR implements all the security functions of a network device, as well as a 
 
 ### Additional Software Details
 
-The SSR runs OpenSSL version 1.0.2l and OpenSSL version 1.0.2k. The two OpenSSL libraries are used for a different implementation of OpenSSH. 
+The SSR runs OpenSSL version 1.0.2zi and OpenSSL version 1.0.2k. The two OpenSSL libraries are used for a different implementation of OpenSSH. 
 
 - Remote Administration is implemented using SSH on Port 22 using OpenSSH v7.4, which includes OpenSSL v1.0.2k. 
 
