@@ -1,21 +1,19 @@
-# .github/workflows/main.yml
-
-name: GitHub Pages
+name: Release
 
 on:
   push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+    tags:
+      - '*'
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    name: Build and Test
+    name: Build and Release
+
+    permissions:
+      contents: write
 
     steps:
       - uses: actions/checkout@v2
@@ -36,30 +34,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Build Bundle
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
         run: npm run build
+
+      - name: Zip Bundle
+        run: zip -qr build build/
 
       - name: Build Offline Bundle
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
         run: npm run build:offline
 
-      - name: Broken Link Checker Action
-        uses: gaurav-nelson/github-action-markdown-link-check@v1
-        with:
-          use-verbose-mode: 'yes'
-          folder-path: 'docs'
+      - name: Zip Offline Bundle
+        run: zip -qr offline-docs offline-docs/
 
-      - name: Deploy
-        if: github.event_name != 'pull_request'
-        uses: peaceiris/actions-gh-pages@v3.7.3
+      - name: Publish Release
+        uses: ncipollo/release-action@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build
-          cname: 'docs.128technology.com'
-
-      - name: Event
-        if: github.event_name == 'workflow_dispatch'
-        run: echo "Triggered by Workflow Action"
+          tag: "${{ github.ref_name }}"
+          body: 'SSR ${{ github.ref_name }} Documentation'
+          artifacts: "*.zip"
+          prerelease: true
+          allowUpdates: true
+          artifactErrorsFailBuild: true
