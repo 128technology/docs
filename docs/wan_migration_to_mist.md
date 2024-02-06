@@ -7,228 +7,112 @@ This document explains the process of migrating a Conductor-managed router to a 
 
 ## Prerequisites
 
-- The conductor and router are running version x.x.x or newer of the Mist WAN Assurance plugin **I see no indication in the docs for the WA Plugin - Yikes!**
-
+- The conductor and router are running version x.x.x or newer of the [Mist WAN Assurance plugin](link-to-install-doc). 
 - The router was previously onboarded and connected to the Mist cloud using the [ZTP Onboarding to a Conductor workflow](config_wan_assurance.md). 
 - For HA routers, each node should have a direct connection to the Mist cloud.
 - The router must be online and connected to the cloud for the migration process to be initiated.
-- The router is running a cloud-ready, image-based installation of SSR software, such as V6.0.0 or greater. Conductor-managed instances often are package-based installations. For upgrade instructions, please see [Image-Based Installation](intro_installation_image.md).
+- The router is running a cloud-ready installation of SSR software, such as V6.0.0 or greater. 
 - The router configuration must be re-created on the Mist cloud.
 - The Mist cloud configuration should have the necessary components for establishing a successful cloud connection post migration.
-- While still connected to the conductor, the system environment has to be prepared for migration to the Mist cloud.
-- For a use case involving in-band management, the Mist config template must allow access to the conductor via SSH. This will ensure connectivity during the migration.
 
 :::warning
-- The migration operation will be service impacting.
+The migration operation will be service impacting.
 :::
 
 :::note
-- After upgrading to an image based software version, verify that the `mist-agent` is running. Use [Mist Agent Startup](add-link-here) to verify operation. 
+After upgrading to an image based software version, verify that the `mist-agent` is running. Use [Mist Agent Startup](add-link-here) to verify operation. 
 :::
 
-## Router Migration
+## Migrating a Standalone Router
 
 Use the following preparation and configuration steps to complete migration. 
 
-### Device Map Generation
+### Migration Process
 
-While conductor-managed routers allow the user to configure the device-interface via PCI mapping, Mist management relies on name mapping instead. In order to create a compatible device map, use the following procedure.
-
-**AdD StEPs HeRe**
-
-### Update the Mist Site
-
-The site where the new router will be assigned must be updated to indicate that it will be Mist-managed. 
-
-1. Unassign the device from the previous conductor-managed site.
-2. Assign the device to the new site with the Managed by Mist flag set.
-3. Make sure the site is associated with the appropriate template.
-
-The following error will appear in the mist-agent logs.
+1. Login to the Conductor as root. 
+2. SSH to the router from the conductor.
+3. Use the `harware-bootstrapper migrator` to perform the migration process. The options for using the script are shown below:
 
 ```
-Mar 28 05:16:25 t129-dut2.openstacklocal 128T-mist-agent[17634]: ERR unsupported combination of onboarding and management mode: brownfield, cloud-managed
+Usage: python -m hardware-bootstrapper migrator [OPTIONS]
+
+  migrate the device from conductor managed to mist managed
+
+Options:
+  -v, --verbosity LVL  Either CRITICAL, ERROR, WARNING, INFO or DEBUG
+  -l, --log-dir PATH   Log directory
+  --verify             Only verify if device is migratable
+  --dry-run            Perform a dry run. Log instead of making changes
+  -f, --force          Skip confirmation
+  --help               Show this message and exit.
+```
+#### 1. Run the Compatibility Check
+
+This check verifies that the router is compatible for migration to Mist.
 
 ```
-
-### Update init Files for Mist-Management
-
-Care must be taken when modifying the `init` files for Mist-managemnt. Changes to the `init` files impact internal operations of the SSR software. 
-
-1. Create a backup of the init files
-
-```
-cp -v /etc/128technology/global.init /etc/128technology/global.init.conductor
-cp -v /etc/128technology/local.init /etc/128technology/local.init.conductor
+[root@t133-dut2 centos]# /usr/libexec/hardwareBootstrapper128t migrator --verify
+Verifying 128T is up
+Validing reverse ssh
+Validing mist agent state
+only verify flag present. Exiting
 ```
 
-2. Remove the conductor from the global.init. 
+#### 2. Run the Migrator
 
-**HoW iS tHiS dOnE? ThErE aRe No StEpS.**
+Once you initiate this command, expect a loss of connectivity to the router from the conductor. The migrator will run some system checks, and then ask whether to proceed. 
 
-An example of the changed init file:
-
-```
-{
-    "init": {
-        "routerName": "t129-dut1",
-        "control": {
-            "node1": {
-                "host": "127.0.0.1"
-            }
-        },
-        "conductor": {}
-    }
-}
-``` 
-
-3. Disable and stop `salt-minion` on the router. 
+- Run the command `/usr/libexec/hardwareBootstrapper128t migrator`
+- The migrator will run system checks, and then ask whether to proceed. 
+- Enter Y to proceed. 
 
 ```
-systemctl disable salt-minion
-systemctl stop salt-minion
+[root@t133-dut2 centos]# /usr/libexec/hardwareBootstrapper128t migrator
+Verifying 128T is up
+Validing reverse ssh
+Validing mist agent state
+WARNING: This tool could break connection to your conductor and/or MIST. Only run this command if you know what you are doing.
+Proceed? (y/n)
+Cleaning migration backup directory
+Backing up file: /etc/128technology/global.init to /etc/128T-hardware-bootstrapper/migration-backups
+Backing up file: /etc/128technology/local.init to /etc/128T-hardware-bootstrapper/migration-backups
+Backing up file: /etc/128T-hardware-bootstrapper/config.json to /etc/128T-hardware-bootstrapper/migration-backups
+Backing up file: /etc/udev/rules.d/128-persistent-net.rules to /etc/128T-hardware-bootstrapper/migration-backups
+invalid format returned for interfaces: 17
+unable to find device map. using default: {'ethernet': [{'type': 'WAN', 'name': 'ge-0-0', 'description': '', 'bcpNetwork': {'standaloneBranch': {'name': 'lan1'}}, 'pciAddress': '0000:00:03.0', 'vmbusId': None}, {'type': 'LAN', 'name': 'ge-0-1', 'description': '', 'bcpNetwork': {'standaloneBranch': {'name': 'lan2'}}, 'pciAddress': '0000:00:04.0', 'vmbusId': None}, {'type': 'HASync', 'name': 'ge-0-2', 'description': '', 'bcpNetwork': {'standaloneBranch': {'name': 'lan3'}}, 'pciAddress': '0000:00:05.0', 'vmbusId': None}, {'type': 'HAFabric', 'name': 'ge-0-3', 'description': '', 'bcpNetwork': {'standaloneBranch': {'name': 'lan4'}}, 'pciAddress': '0000:00:06.0', 'vmbusId': None}]}
+invalid format returned for interfaces: 17
+Writing linux udev rules
+Removing conductor address from global.init
+Stopping and disabling salt-minion service
+Populating Hardware Config
+Restarting 128T-mist-agent service
 ```
 
-4. Verify that the reverse SSH service is enabled and still running.
+#### 3. Unassign the Router from the Mist Site
 
-```
-systemctl status reverse-ssh_conductor1_login
-systemctl is-enabled reverse-ssh_conductor1_login
-```
+1. Log in to your Mist Org.
+2. Go to WAN Edges Inventory.
+![Show Device](/img/mist-migration-unassign1.png)
+3. Select your device.
+4. From the More dropdown, select Assign to Site.
+![Assign to Site](/img/mist-migration-unassign3.png)
+5. In the Assign WAN Edges dialog, use the Site dropdown to select Unassigned. This unassigns your router from your conductor managed site. 
+![Select Unassigned](/img/mist-migration-unassign4.png)
+6. Select the Organization, and choose WAN Edge Templates from the pull out menu. 
+7. Select the `Standalone_SSR_Migration` template from the list.
+8. Click the Assign to Sites button.
+9. Select your site from the list of sites, and click apply.
+![Assign to Site](/img/mist-migration2.png)
+10. From the Organization menu, select Inventory.
+11. Choose your site.
+12. Assign the device for migration back to your site and select `Manage configuration with Mist`.
+![Manage with Mist](/img/mist-migration-unassign6.png)
 
-:::important
-Make sure to keep the `salt-minion` disabled. If `salt` connects to conductor, it will attempt to re-initialize the router as conductor-managed.
-:::
+#### 4. Installation
 
-### Migrate the Site to Mist-Managed
+The device will start installing the necessary cloud components ato become a Mist-managed device. The SSR will restart several times during the process. 
 
-This involves converting the router to whitebox mode, restarting the Mist-agent, and restarting the router. 
+You will be able to remote SSH into the device from the conductor until the migration is complete. 
 
-1. Convert the system from Brownfield to Whitebox mode. 
- - Use the `show-mist` to display the Mist configuration of the router.
- - Copy the router registration code, name, and type.
- - Create a file at `/etc/128T-hardware-bootstrapper/config.json` and paste in the information you just copied from the show mist command. 
- - Set the `type` to `whitebox`. The result should look like this:
-
-```
-{
-    "registration_code": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJvcmdfaWQiOiIwNDhkODhjMS0wZWEyLTQyYWEtYjk3Ni1mYzI1Y2ZjYjdlN2MiLCJzdmMiOiIxMjhyb3V0ZXIiLCJwcm92aWRlciI6ImF3cyIsImVudiI6InN0YWdpbmciLCJlcHRlcm1fdXJsIjoid3NzOi8vZXAtdGVybWluYXRvci1zdGFnaW5nLm1pc3RzeXMubmV0L3dzIiwiaWF0IjoxNjc5OTc1MjY3LCJleHAiOjE3MTE1MTEyNjd9.NmuH8kbRcYPvExlMxxklKSN-6xqMsxvyKlqEHHxfeeo",
-    "router_name": "t129-dut2",
-    "type": "whitebox"
-}
-```
-
-2. Restart the `128T-mist-agent`. The following error appears in the `mist-agent` logs
- ```
- Mar 28 05:45:29 t129-dut2.openstacklocal 128T-mist-agent[17634]: ERR unsupported combination of onboarding and management mode: brownfield, cloud-managed
- ```
-3. Run `systemctl restart 128T-mist-agent` to re-load the agent in the correct mode for this operation.
-
- ```
- systemctl enable 128T-mist-agent
- systemctl restart 128T-mist-agent
- ```
-
-:::important
-The process to download the first intent config will reinitialize the SSR to be Mist-managed. This requires a 128T restart and may take some time. Be patient!
-:::
-
-## Verifying the Migration
-
-To veriy the successful migration, SSH to the router via the conductor. Check the following locations for a successful operation.
-
-- The `/etc/128technology/local.init` indicates a `managementMode` of `mistCloud.`
-
-- Use `show mist` to check the status of the onboarding process. 
- - Verify the router is assigned and up.
- - Verify the following output matches the settings entered earlier.
-
-```
-admin@node0.020001fe8cf7# show mist detail | grep onboarding
-✔ Piping output...
-     onboarding-mode:                          whitebox
-admin@node0.020001fe8cf7# show mist detail | grep manage
-✔ Piping output...
-     management-mode:                          cloud-managed
-admin@node0.020001fe8cf7#
-```
-If these checks are all verified, the router is now Mist-managed, and ready for traffic validation!
-
-### Other Notes
-- Once the router becomes MIST managed, `salt` stops and there is no connectivity to the conductor.
-- The `reverse-ssh_conductor1_login.service` was running during the migration, which allows you to reverse ssh from the conductor.
-- The `show mist` command does not work from the conductor.
-
-```
-admin@node1.conductor-t129# show mist router t129-dut1 detail
-Tue 2023-03-28 04:42:13 UTC
-⚠ Retrieving mist state 0/0 targets complete...
-
-================= ==============
- Target            Message
-================= ==============
- node1.t129-dut1   Disconnected
-
-Failed to retrieve mist state. 0 targets failed, 1 target is disconnected, and 0 succeeded.
-Completed in 0.03 seconds
-admin@node1.conductor-t129# connect router t129-dut1 node node1 username centos
-✔ Validating target...
-Connecting...
-centos@127.127.0.1's password:
-FIPS mode initialized. SSH client running in FIPS 140-2 mode
-Last login: Tue Mar 28 04:21:20 2023 from ::1
-+---------------------------------------+
-|                                       |
-|    Welcome to:                        |
-|                                       |
-|     | .   . ,---. . ,---. ,---. ,--.  |
-|     | |   | |   | | |---' |---' |     |
-|     | `---' '   ' ' '     `---' '     |
-|  ---'                                 |
-|        __ ___       __   __       __  |
-|  |\ | |_   |  |  | /  \ |__) |_/ (_   |
-|  | \| |__  |  |/\| \__/ | \  | \ __)  |
-|                                       |
-| Session Smart Networking Platform ... |
-+---------------------------------------+
-[centos@i-004fcc39 ~]$ sudo su
-[root@i-004fcc39 centos]# su - admin
-Last login: Tue Mar 28 04:29:39 UTC 2023 on pts/1
-admin@node0.0200012d64df#
-```
-
-## Post Migration Cleanup
-After a successful Mist migration, it is strongly recommeded that the following cleanup steps be taken from the conductor.
-
-- Remove salt SSH keys (**WhErE?**)
-- Remove SSH keys for 930 connection (**WhErE?**)
-- Delete the asset-id for the migrated node. Once this change is committed, you will no longer be able to SSH to the device.
-- Remove the conductor services from the MIST configuration.
-
-```
-admin@node1.conductor-t129# connect router t129-dut2 node node1 username centos
-✔ Validating target...
-Connecting...
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
-Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-It is also possible that a host key has just been changed.
-The fingerprint for the RSA key sent by the remote host is
-SHA256:cMh8ry+JZhhO2yYkWAXO+PDYAp8UZhDZ4UFQrFzN3pQ.
-Please contact your system administrator.
-Add correct host key in /home/admin/.ssh/known_hosts to get rid of this message.
-Offending RSA key in /home/admin/.ssh/known_hosts:1
-RSA host key for [127.127.0.1]:16386 has changed and you have requested strict checking.
-Known host key verification failed.
-% Error: Known host verification failed
-admin@node1.conductor-t129#
-```
-
-
-
-
-
-
+If the SSR is currently running a package-based 6.x install, it will not be converted to image-based until the next upgrade.
 
