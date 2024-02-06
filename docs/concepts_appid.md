@@ -69,7 +69,7 @@ Use DNS-based services when your destination uses a small set of non-volatile IP
 The SSR can also *learn about named destinations* by inspecting the traffic that traverses it. This is done by inspecting the client hello TLS message sent by a client during the TLS handshake process. Importantly: *this presupposes that the SSR can route packets to that destination for the  purposes of retrieving the clients's message*. Thus, when using AppID based on TLS, it is important to ensure that there is a `service` and `service-route` capable of reaching that server in addition to the one you'll configure for the named application.
 
 :::note
-Normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be. Please refer to [**Configuring Web Filtering using the PCLI**](config_domain-based_web_filter#configuring-web-filtering-using-the-pcli) for detailed configuration steps.
+Normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be. Please refer to [**Configuring Web Filtering using the PCLI**](config_domain-based_web_filter.md#configuring-web-filtering-using-the-pcli) for detailed configuration steps.
 :::
 
 The `Client Hello` message typically includes a `server_name` extension, which represents the domain-name being accessed by the client. For example:
