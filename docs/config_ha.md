@@ -500,7 +500,7 @@ Below is a sample, minimal configuration for which shows the inclusion of both a
 :::important
 When configuring shared-MAC failover, it is important to use a **locally administered MAC address**, as shown in the updated configuration below. The use of a universally administered MAC causes inconsistent session establishment issues. These can be difficult to troubleshoot.
 
-For more information about locally and universally administered MAC addresses, please see [MAC Addresses.](https://en.wikipedia.org/wiki/MAC_address#Universal_vs._local_(U/L_bit)
+For more information about locally and universally administered MAC addresses, please see [MAC Addresses](https://en.wikipedia.org/wiki/MAC_address#Universal_vs._local_(U/L_bit))
 :::
 
 This is an example of a **pre-5.4 configuration** using the shared-mac failover. 
