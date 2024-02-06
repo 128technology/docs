@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "docusaurus start --host 0.0.0.0",
+    "serve": "docusaurus serve",
     "build": "docusaurus build",
+    "build:offline": "OFFLINE_DOCS=1 docusaurus build --out-dir=offline-docs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "ci": "yarn lint && yarn prettier:diff",
