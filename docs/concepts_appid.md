@@ -13,7 +13,7 @@ The SSR has three built-in techniques for affiliating named applications to serv
 2. Using the `application-identification` mode `tls`
 3. Using the `application-identification` mode `module`
 
-Additionally, [web filtering](config_domain-based_web_filter.md#overview) provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs.
+Additionally, [Web Filtering](config_domain-based_web_filter.md#overview) provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs.
 
 ### DNS-based Services
 
@@ -61,7 +61,7 @@ The names used in the `address` field must be DNS-resolvable names. You cannot u
 This technique relies on your SSR getting the same answers from DNS that your clients get. Take for example a massive SaaS provider such as `www.salesforce.com`. Their web site resolves to hundreds or thousands of IP addresses distributed across the globe. When the SSR resolves that hostname, it will get a handful of answers; if a client does the same DNS query and gets a different set of answers, then the traffic the client sends will not match the FIB entries that the SSR has created.
 
 :::tip Key to success
-Use DNS-based services when your destination uses a small set of nonvolatile IP addresses. This technique is perfect for small, hosted services. The effectiveness of using DNS-based services diminishes rapidly when referencing names that resolve to dozens of address or more.
+Use DNS-based services when your destination uses a small set of non-volatile IP addresses. This technique is perfect for small, hosted services. The effectiveness of using DNS-based services diminishes rapidly when referencing names that resolve to dozens of address or more.
 :::
 
 ### AppID based on TLS
@@ -69,10 +69,10 @@ Use DNS-based services when your destination uses a small set of nonvolatile IP 
 The SSR can also *learn about named destinations* by inspecting the traffic that traverses it. This is done by inspecting the client hello TLS message sent by a client during the TLS handshake process. Importantly: *this presupposes that the SSR can route packets to that destination for the  purposes of retrieving the clients's message*. Thus, when using AppID based on TLS, it is important to ensure that there is a `service` and `service-route` capable of reaching that server in addition to the one you'll configure for the named application.
 
 :::note
-Normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be. Please refer to [this document](config_domain-based_web_filter/#configuring-web-filtering-using-the-pcli) for detailed config guide.
+Normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be. Please refer to [**Configuring Web Filtering using the PCLI**](config_domain-based_web_filter#configuring-web-filtering-using-the-pcli) for detailed configuration steps.
 :::
 
-Within the `Client Hello` message it typically includes a `server_name` extension, which represents the domain-name being accessed by the client. One such example snippet is as follows:
+The `Client Hello` message typically includes a `server_name` extension, which represents the domain-name being accessed by the client. For example:
 
 ``` console {15-18}
 TLSv1.3 Record Layer: Handshake Protocol: Client Hello
@@ -98,7 +98,7 @@ TLSv1.3 Record Layer: Handshake Protocol: Client Hello
         Extension: psk_key_exchange_modes (len=2)
 ```
 
-The `server_name` extension as shown above with value of `www.example.com` represent the domain in this example. This is what SSR will parse and subsequently retain as the domain-name for this destination. Domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
+The `server_name` extension shown above with the value `www.example.com` represents the domain in this example. This is what SSR will parse and subsequently retain as the domain-name for this destination. Domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
 
 ```
 config
