@@ -13,7 +13,7 @@ The SSR has three built-in techniques for affiliating named applications to serv
 2. Using the `application-identification` mode `tls`
 3. Using the `application-identification` mode `module`
 
-Additionally, [web filtering](config_domain-based_web_filter.md#overview) provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs. 
+Additionally, [web filtering](config_domain-based_web_filter.md#overview) provides domain classification using third party data sources to generate a comprehensive, real time, and up-to-date worldwide database for categorizing domains and URLs.
 
 ### DNS-based Services
 
@@ -66,52 +66,39 @@ Use DNS-based services when your destination uses a small set of nonvolatile IP 
 
 ### AppID based on TLS
 
-The SSR can also *learn about named destinations* by inspecting the traffic that traverses it. This is done by inspecting the X.509 certificate sent by a server during the TLS handshake process. Importantly: *this presupposes that the SSR can route packets to that destination for the purposes of retrieving the server's certificate*. Thus, when using AppID based on TLS, it is important to ensure that there is a `service` and `service-route` capable of reaching that server in addition to the one you'll configure for the named application.
+The SSR can also *learn about named destinations* by inspecting the traffic that traverses it. This is done by inspecting the client hello TLS message sent by a client during the TLS handshake process. Importantly: *this presupposes that the SSR can route packets to that destination for the  purposes of retrieving the clients's message*. Thus, when using AppID based on TLS, it is important to ensure that there is a `service` and `service-route` capable of reaching that server in addition to the one you'll configure for the named application.
 
 :::note
-Normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be.
+Normally this is done by having a "catch-all" service for `0.0.0.0/0` to route traffic out to the internet, but it does not need to be. Please refer to [this document](config_domain-based_web_filter/#configuring-web-filtering-using-the-pcli) for detailed config guide.
 :::
 
-Within the `Server Hello` message sent by a server will include its X.509 certificate, which is decipherable by the client to include information about the server. One such example is here:
+Within the `Client Hello` message it typically includes a `server_name` extension, which represents the domain-name being accessed by the client. One such example snippet is as follows:
 
-```
-[ptimmons@labsystem1 ~]$ openssl x509 -in /tmp/512b-rsa-example-cert.pem -text -noout
-Certificate:
-    Data:
-        Version: 1 (0x0)
-        Serial Number: 3578 (0xdfa)
-    Signature Algorithm: sha1WithRSAEncryption
-        Issuer: C=JP, ST=Tokyo, L=Chuo-ku, O=Frank4DD, OU=WebCert Support, CN=Frank4DD Web CA/emailAddress=support@frank4dd.com
-        Validity
-            Not Before: Aug 22 05:26:54 2012 GMT
-            Not After : Aug 21 05:26:54 2017 GMT
-        Subject: C=JP, ST=Tokyo, O=Frank4DD, CN=www.example.com
-        Subject Public Key Info:
-            Public Key Algorithm: rsaEncryption
-                Public-Key: (512 bit)
-                Modulus:
-                    00:9b:fc:66:90:79:84:42:bb:ab:13:fd:2b:7b:f8:
-                    de:15:12:e5:f1:93:e3:06:8a:7b:b8:b1:e1:9e:26:
-                    bb:95:01:bf:e7:30:ed:64:85:02:dd:15:69:a8:34:
-                    b0:06:ec:3f:35:3c:1e:1b:2b:8f:fa:8f:00:1b:df:
-                    07:c6:ac:53:07
-                Exponent: 65537 (0x10001)
-    Signature Algorithm: sha1WithRSAEncryption
-         14:b6:4c:bb:81:79:33:e6:71:a4:da:51:6f:cb:08:1d:8d:60:
-         ec:bc:18:c7:73:47:59:b1:f2:20:48:bb:61:fa:fc:4d:ad:89:
-         8d:d1:21:eb:d5:d8:e5:ba:d6:a6:36:fd:74:50:83:b6:0f:c7:
-         1d:df:7d:e5:2e:81:7f:45:e0:9f:e2:3e:79:ee:d7:30:31:c7:
-         20:72:d9:58:2e:2a:fe:12:5a:34:45:a1:19:08:7c:89:47:5f:
-         4a:95:be:23:21:4a:53:72:da:2a:05:2f:2e:c9:70:f6:5b:fa:
-         fd:df:b4:31:b2:c1:4a:9c:06:25:43:a1:e6:b4:1e:7f:86:9b:
-         16:40
+``` console {15-18}
+TLSv1.3 Record Layer: Handshake Protocol: Client Hello
+    Content Type: Handshake (22)
+    Version: TLS 1.0 (0x0301)
+    Length: 562
+    Handshake Protocol: Client Hello
+        Handshake Type: Client Hello (1)
+        Length: 558
+        Version: TLS 1.2 (0x0303)
+        Random: a625da0d64ec96bbf35a2422a5a10816812e978b7f90db592e50be120c0fa9a4
+        Cipher Suites Length: 32
+        Cipher Suites (16 suites)
+        Compression Methods Length: 1
+        Compression Methods (1 method)
+        Extensions Length: 453
+        Extension: server_name (len=20) name=www.example.com
+            Type: server_name (0)
+            Length: 20
+            Server Name Indication extension
+        Extension: compress_certificate (len=3)
+        Extension: application_settings (len=5)
+        Extension: psk_key_exchange_modes (len=2)
 ```
 
-:::note
-This sample certificate was supplied by [FM4DD](http://www.fm4dd.com/openssl/certexamples.htm).
-:::
-
-About a third of the way through the output you can see that the *Common Name* (listed as `CN` in the `Subject` line) is `www.example.com`. This is what SSR will parse and subsequently retain as the domain-name for this destination. Domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
+The `server_name` extension as shown above with value of `www.example.com` represent the domain in this example. This is what SSR will parse and subsequently retain as the domain-name for this destination. Domain-names and IP addresses are learned from TLS and mapped to hierarchical services using the `domain-name` field.
 
 ```
 config
