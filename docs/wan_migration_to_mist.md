@@ -7,7 +7,7 @@ This document explains the process of migrating a Conductor-managed router to a 
 
 ## Prerequisites
 
-- The conductor and router are running version x.x.x or newer of the [Mist WAN Assurance plugin](link-to-install-doc). 
+- The conductor and router are running version 3.7.0 or newer of the [Mist WAN Assurance plugin](release_notes_wan_assurance_plugin_3.7.md). 
 - The router was previously onboarded and connected to the Mist cloud using the [ZTP Onboarding to a Conductor workflow](config_wan_assurance.md). 
 - For HA routers, each node should have a direct connection to the Mist cloud.
 - The router must be online and connected to the cloud for the migration process to be initiated.
@@ -17,10 +17,6 @@ This document explains the process of migrating a Conductor-managed router to a 
 
 :::warning
 The migration operation will be service impacting.
-:::
-
-:::note
-After upgrading to an image based software version, verify that the `mist-agent` is running. Use [Mist Agent Startup](add-link-here) to verify operation. 
 :::
 
 ## Migrating a Standalone Router
