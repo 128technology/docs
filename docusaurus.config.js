@@ -29,7 +29,11 @@ module.exports = {
         srcDark: 'img/logo_dark.png',
       },
       items: [
-        {to: 'docs/intro_getting_started', label: 'Docs', position: 'right'},
+        {
+          to: 'docs/intro_getting_started',
+          label: 'Docs',
+          position: 'right',
+        },
         {
           href: 'https://community.juniper.net/answers/communities/community-home?CommunityKey=310d1a41-12fa-4627-9a99-880145a7c87c',
           label: 'Community',
@@ -61,14 +65,25 @@ module.exports = {
       },
     ],
   ],
-  plugins: [
-    './src/plugins/release-notes-api.js',
-  ],
+  plugins: ['./src/plugins/release-notes-api.js'],
   customFields: {
     marvisSearch: {
-      docSource: "128t",
+      docSource: '128t',
       numResults: 15,
-      proxyURL: 'https://raq48a0wrg.execute-api.us-east-1.amazonaws.com/prod/marvis_docs_api_proxy',
+      proxyURL:
+        'https://raq48a0wrg.execute-api.us-east-1.amazonaws.com/prod/marvis_docs_api_proxy',
     },
   },
 };
+
+if (process.env.OFFLINE_DOCS) {
+  module.exports.themeConfig.announcementBar = {
+    id: 'offline_docs',
+    content:
+      'You are viewing a local version of this documentation. ' +
+      'For the most up-to-date information please visit the <a target="_blank" href="https://docs.128technology.com/">online documentation</a>',
+    backgroundColor: '#eed202',
+    textColor: '#000',
+    isCloseable: true,
+  };
+}
