@@ -21,7 +21,7 @@ The migration operation will be service impacting.
 
 ## Migrating a Standalone Router
 
-Use the following preparation and configuration steps to complete migration. 
+Use the following steps to complete migration. 
 
 ### Migration Process
 
@@ -88,20 +88,29 @@ Restarting 128T-mist-agent service
 
 1. Log in to your Mist Org.
 2. Go to WAN Edges Inventory.
+
 ![Show Device](/img/mist-migration-unassign1.png)
+
 3. Select your device.
 4. From the More dropdown, select Assign to Site.
+
 ![Assign to Site](/img/mist-migration-unassign3.png)
+
 5. In the Assign WAN Edges dialog, use the Site dropdown to select Unassigned. This unassigns your router from your conductor managed site. 
+
 ![Select Unassigned](/img/mist-migration-unassign4.png)
+
 6. Select the Organization, and choose WAN Edge Templates from the pull out menu. 
 7. Select the `Standalone_SSR_Migration` template from the list.
 8. Click the Assign to Sites button.
 9. Select your site from the list of sites, and click apply.
+
 ![Assign to Site](/img/mist-migration2.png)
+
 10. From the Organization menu, select Inventory.
 11. Choose your site.
 12. Assign the device for migration back to your site and select `Manage configuration with Mist`.
+
 ![Manage with Mist](/img/mist-migration-unassign6.png)
 
 #### 4. Installation
