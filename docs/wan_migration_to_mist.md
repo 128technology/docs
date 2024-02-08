@@ -21,11 +21,11 @@ The migration operation will be service impacting.
 
 ## Migrating a Standalone Router
 
-Use the following steps to complete migration. 
+Use the following steps to perform the migration. 
 
-### Migration Process
+#### 1. Login 
 
-1. Login to the Conductor as root. 
+1. Login to the Conductor as `root`. 
 2. SSH to the router from the conductor.
 3. Use the `harware-bootstrapper migrator` to perform the migration process. The options for using the script are shown below:
 
@@ -42,7 +42,7 @@ Options:
   -f, --force          Skip confirmation
   --help               Show this message and exit.
 ```
-#### 1. Run the Compatibility Check
+#### 2. Run the Compatibility Check
 
 This check verifies that the router is compatible for migration to Mist.
 
@@ -54,13 +54,13 @@ Validing mist agent state
 only verify flag present. Exiting
 ```
 
-#### 2. Run the Migrator
+#### 3. Run the Migrator
 
-Once you initiate this command, expect a loss of connectivity to the router from the conductor. The migrator will run some system checks, and then ask whether to proceed. 
+Once you initiate this command, expect a loss of connectivity to the router from the conductor. The migrator runs system checks, and then asks whether to proceed. 
 
-- Run the command `/usr/libexec/hardwareBootstrapper128t migrator`
-- The migrator will run system checks, and then ask whether to proceed. 
-- Enter Y to proceed. 
+1. Run the command `/usr/libexec/hardwareBootstrapper128t migrator`
+2. The migrator runs system checks, and then asks whether to proceed. 
+3. Enter Y to proceed. 
 
 ```
 [root@t133-dut2 centos]# /usr/libexec/hardwareBootstrapper128t migrator
@@ -84,7 +84,7 @@ Populating Hardware Config
 Restarting 128T-mist-agent service
 ```
 
-#### 3. Unassign the Router from the Mist Site
+#### 4. Unassign the Router from the Mist Site
 
 1. Log in to your Mist Org.
 2. Go to WAN Edges Inventory.
@@ -101,6 +101,9 @@ Restarting 128T-mist-agent service
 ![Select Unassigned](/img/mist-migration-unassign4.png)
 
 6. Select the Organization, and choose WAN Edge Templates from the pull out menu. 
+
+![WAN Edge Templates](/img/mist-migration-unassign5.png)
+
 7. Select the `Standalone_SSR_Migration` template from the list.
 8. Click the Assign to Sites button.
 9. Select your site from the list of sites, and click apply.
@@ -113,11 +116,11 @@ Restarting 128T-mist-agent service
 
 ![Manage with Mist](/img/mist-migration-unassign6.png)
 
-#### 4. Installation
+#### 5. Installation
 
-The device will start installing the necessary cloud components ato become a Mist-managed device. The SSR will restart several times during the process. 
+The device starts installing the necessary cloud components to become a Mist-managed device. The SSR restarts several times during the process. 
 
-You will be able to remote SSH into the device from the conductor until the migration is complete. 
+You are not able to remote SSH into the device from the conductor until the migration is complete. 
 
 If the SSR is currently running a package-based 6.x install, it will not be converted to image-based until the next upgrade.
 
