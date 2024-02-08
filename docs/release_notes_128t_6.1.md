@@ -45,6 +45,49 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
+## Release 6.1.7-3
+
+**Release Date:** February 8, 2024
+
+### Resolved Issues Requiring Configuration Changes
+
+- **I95-54729 Marking of packets for Performance Monitoring:** Performance monitoring now prefers to mark non-metadata packets on established sessions instead of packets which already contain metadata, such as first packets or packets which have had metadata turned on due to a session change event.
+------
+
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2020-22218, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235.
+------
+- **I95-50697 Private RFC1918 Web Applications ignored by Mist when collecting SLE data:** Initial implementation of RFC1918 handling let the DPI modify reclassify like any other case however, the classification information returned from a private domain lookup may not be useful and cause undesirable clumping of session stats. With the new behavior, when a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will only be reclassified if the classification data reflects a positive classification change.
+------
+- **I95-51663 TCP port reuse causing application steering crashes:** Resolved an issue where backwards state transitions was causing an issue with the TCP client reusing ports.
+------
+- **I95-52250 Security Package Update:** Updates have been made to the SSR Security Package.
+------
+- **I95-52500 SVR Multi Hop Failover:** Added a session lookup by session-ID to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic.  
+------
+- **I95-53216 "Unable to change password" message showing for remote users:** Resolved an issue that caused a "Password Change" dialog to appear for remotely authenticated users.
+------
+- **I95-53920 Password expiration mistakenly applied to remote users:** Resolved an issue that incorrectly enforced password expiration (configure authority password-policy lifetime) to RADIUS users.
+------
+- **I95-54127 Users not locally created on managed routers cannot get TSI:** Resolved an issue that did not provide a home directory for custom roles, which prevented LDAP users from viewing the systemd journal.
+------
+- **I95-54271 Race condition after a configuration change related to the source nat:** Resolved a rare condition wherethe SharedNatPool was being reset while it was accessed for session setup. This caused a race condition that led to a highway process crash.
+------
+- **I95-54340 Hub-to-spoke sessions break when failing over from outbound-only Path:** When a session modify occurs due to an ingress change (inter-node -> inter-router) AND an egress change is also detected, the incorrect security was being looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved. 
+------
+- **I95-54512 SSR130 moved into an HA cluster does not come up properly:** Resolved an issue where the generation of an improper configuration could lead to a crash loop in the NodeMonitor process.
+------
+- **I95-54726 Duplicate service-routes for IDP being created:**  
+
+------
+
+
+
+
+
+
 ## Release 6.1.6-7
 
 **Release Date:** January 2, 2024
