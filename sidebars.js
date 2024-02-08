@@ -26,6 +26,7 @@ module.exports = {
       "cc_fips_intro_installation",
       "cc_fips_downloading_iso",
       "cc_fips_conductor_install",
+      "cc_fips_otp_router_install",
       "cc_fips_install_quickstart_otpiso",
       "cc_fips_router_install",
       "cc_fips_access_mgmt",

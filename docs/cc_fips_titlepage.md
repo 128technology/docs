@@ -3,7 +3,7 @@ title: SSR Common Criteria Installation and User Guide
 sidebar_label: SSR Common Criteria Installation and User Guide
 ---
 
-This guide provides installation and configuration information for using SSR Conductors and Routers in a certified Common Criteria and FIPS environment. For the features described in this document, the following platforms are supported:
+This guide provides installation and configuration information for using SSR Conductors and Routers in a certified Common Criteria environment. For the features described in this document, the following platforms are supported:
 
 Supported Software version: 
 - Version 6.2.3-14-R2

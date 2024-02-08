@@ -50,12 +50,3 @@ Please refer to [Upgrade Considerations](https://www.juniper.net/documentation/u
 
 To perform an upgrade on either a conductor or router, refer to the detailed instructions at [Upgrading the SSR Networking Platform.](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_upgrading)
 
-## Version Dependencies
-
-The conductor Major.Minor version must be greater than or equal to the router version. The router version can not exceed the conductors major.minor version, but it can have a greater patch version. All [versions currently under support](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/about_support_policy) contract can be run on a router and managed by the conductor, provided that the conductor version is greater. Versions of software not under support contract *may* work, but are not guaranteed to do so.  
-
-Examples:
-- Conductor running version 6.0.5, managing Routers running version 6.0.1: Supported.
-- Conductor running version 5.4.8, managing Routers running version 5.4.10: Supported.
-- Conductor running version 6.0.5, managing Routers running version 5.5.7: Supported.
-- Conductor running version 5.1.9, managing Routers running version 5.0.1; Not supported, but *may* work.

@@ -187,7 +187,7 @@ Password:
 
 ![Linux Shell](/img/conductor_install2.png)
 
-5. When the service is listed as _Active_, log into the system using the system default password. By logging into the system, you have verified the installation. 
+5. When the service is listed as _Active_, log into the system. By logging into the system, you have verified the installation. 
 
 ### Change the Default Passwords
 
@@ -272,11 +272,11 @@ A sample branch router configuration is available as a [**template**](https://ww
 
 To see an example router configuration, refer to the [Appendix](cc_fips_appendix.md).
 
-After completing the router configuration on the conductor, please return to this guide to continue the (Common Criteria compliant) router installation.
+After completing the router configuration on the conductor, please return to this guide to continue the Common Criteria compliant router installation.
 
-If you will be using the OTP Quickstart router installation process, use the conductor GUI to generate a basic configuration and quickstart file for router installation. When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
+If you will be using the OTP Quickstart router installation process, proceed to the [OTP Router Install Process](cc_fips_otp_router_install.md) next, and then use the [QuickStart From the OTP ISO](cc_fips_install_quickstart_otpiso.md) steps togenerate a basic configuration and quickstart file for router installation. 
 
-Instructions for generating the quickstart file are found at [QuickStart From the OTP ISO](cc_fips_install_quickstart_otpiso.md)
+When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
 
-If you are installing routers using the Interactive Installation, continue with [Router Installation](cc_fips_router_install.md).
+If you choose to install routers using the Interactive Installation, continue with [Router Interactive Installation](cc_fips_router_install.md).
 
