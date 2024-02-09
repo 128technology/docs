@@ -59,8 +59,9 @@ install128t
 ```
 
 Follow the on-screen prompts to complete the installation and initialization process.
-Step-by-step instructions for the Installer wizard can be found in the
-[Installation Guide](intro_installation_installer.md#install-using-128t-installer).
+Step-by-step instructions for the Installer can be found starting in the
+the initialization section of the
+[Router Interacrive Installation](intro_installation_bootable_media.mdx#initialize-the-ssr-node.
 
 ## Automated Mode
 
