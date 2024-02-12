@@ -5,20 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {useState, useRef, useCallback, useMemo} from 'react';
+import React, {useState, useRef, useCallback} from 'react';
 import {createPortal} from 'react-dom';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import {useHistory} from '@docusaurus/router';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import {usePluginData} from '@docusaurus/useGlobalData';
 import {DocSearchButton, useDocSearchKeyboardEvents} from '@docsearch/react';
 import {translate} from '@docusaurus/Translate';
+import lunr from 'lunr';
 
 function SearchBar() {
-  const history = useHistory();
   const searchContainer = useRef(null);
   const searchButtonRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [initialQuery, setInitialQuery] = useState(null);
 
   React.useEffect(() => {
     import('@docsearch/react/style');
@@ -81,24 +80,72 @@ function MergeBaseUrl({path, alternateText, description}) {
   return <img src={ref} alt={alternateText} title={description} />;
 }
 
-function Modal({onClose}) {
-  const {siteConfig, siteMetadata} = useDocusaurusContext();
-  const [search, setSearch] = React.useState('');
-  const [result, setResult] = React.useState(undefined);
+function useOfflineIndex(setIsLoading) {
+  const searchIndex = usePluginData('search-index');
+  const [result, setResult] = React.useState({});
+
+  const load = () => {
+    setIsLoading(true);
+
+    const {index, ...rest} = searchIndex;
+    const idx = lunr.Index.load(index);
+    setResult({idx, ...rest});
+
+    setIsLoading(false);
+  };
+
+  React.useMemo(() => load(), [searchIndex]);
+
+  return [result];
+}
+
+function useOfflineSearch(term, siteConfig, setHoveredIdx) {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [hoveredIdx, setHoveredIdx] = useState(-1);
+  const [result, setResult] = React.useState([]);
+
+  const [index] = useOfflineIndex(setIsLoading);
+
+  React.useEffect(() => {
+    if (!term) {
+      setResult([]);
+      return;
+    }
+
+    const t = setTimeout(() => {
+      setIsLoading(true);
+
+      const result = index.idx.search(term + '*').map(({ref}) => {
+        const doc = index.documents.find((doc) => doc.id === ref);
+
+        return {
+          url: `${siteConfig.baseUrl}docs/${ref}`,
+          title: doc ? doc.title : '',
+          snippet: doc.content,
+        };
+      });
+
+      setResult(result);
+      setIsLoading(false);
+      setHoveredIdx(-1);
+    }, 500);
+
+    return () => {
+      clearTimeout(t);
+    };
+  }, [term, index, setHoveredIdx]);
+
+  return [result, isLoading];
+}
+
+function useMarvisSearch(term, siteConfig, setHoveredIdx) {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [result, setResult] = React.useState([]);
 
   const searchOptions = siteConfig.customFields.marvisSearch;
 
   React.useEffect(() => {
-    const existing = document.body.style.overflowY;
-    document.body.style.overflowY = 'hidden';
-    return () => (document.body.style.overflowY = existing);
-  }, []);
-
-  React.useEffect(() => {
-    if (!search) {
-      setResult(undefined);
+    if (!term) {
+      setResult([]);
       return;
     }
 
@@ -110,7 +157,7 @@ function Modal({onClose}) {
       fetch(`${searchOptions.proxyURL}`, {
         method: 'POST',
         body: JSON.stringify({
-          query: search,
+          query: term,
           count: searchOptions.numResults,
           doc_source: `${searchOptions.docSource}`,
         }),
@@ -123,25 +170,68 @@ function Modal({onClose}) {
         .then((x) => x.data)
         .catch((err) => (console.error(err), undefined))
         .then((x) => {
-          setResult(x);
-          setIsLoading(false);
-          setHoveredIdx(-1);
+          if (x === undefined) {
+            setResult([]);
+            return;
+          }
+
+          const onClick = (index, e) => {
+            const data = {feedback: {id: x.id, index}};
+            navigator.sendBeacon(searchOptions.proxyURL, JSON.stringify(data));
+          };
+
+          const result = x.docs.map((item) => ({onClick, ...item}));
+          setResult(result);
         });
+
+      setIsLoading(false);
+      setHoveredIdx(-1);
     }, 500);
 
     return () => {
       clearTimeout(t);
       abort.abort();
     };
-  }, [search]);
+  }, [term, siteConfig, setHoveredIdx]);
 
-  const items = result === undefined ? [] : result.docs;
-  const id = result === undefined ? '' : result.id;
+  return [result, isLoading];
+}
 
-  const onClick = (index, e) => {
-    const data = {feedback: {id, index}};
-    navigator.sendBeacon(searchOptions.proxyURL, JSON.stringify(data));
-  };
+function SearchFooterIcon() {
+  const {siteConfig} = useDocusaurusContext();
+
+  /** @type boolean */
+  const offlineDocs = siteConfig.customFields.offlineDocs;
+
+  return offlineDocs ? (
+    <div alt="computer" title="Search results generated by your computer">
+      &#128187;
+    </div>
+  ) : (
+    <MergeBaseUrl
+      path="img/marvis.svg"
+      alternateText="Marvis"
+      description="Search results generated by Marvis"
+    />
+  );
+}
+
+function Modal({onClose}) {
+  const {siteConfig} = useDocusaurusContext();
+  const [hoveredIdx, setHoveredIdx] = useState(-1);
+  const [term, setSearchTerm] = React.useState('');
+
+  /** @type boolean */
+  const offlineDocs = siteConfig.customFields.offlineDocs;
+  const useSearch = offlineDocs ? useOfflineSearch : useMarvisSearch;
+
+  const [results, isLoading] = useSearch(term, siteConfig, setHoveredIdx);
+
+  React.useEffect(() => {
+    const existing = document.body.style.overflowY;
+    document.body.style.overflowY = 'hidden';
+    return () => (document.body.style.overflowY = existing);
+  }, []);
 
   return (
     <div
@@ -199,9 +289,9 @@ function Modal({onClose}) {
               maxLength="64"
               type="search"
               autoFocus
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}></input>
-            {search && (
+              value={term}
+              onChange={(e) => setSearchTerm(e.target.value)}></input>
+            {term && (
               <button
                 type="reset"
                 title="Clear the query"
@@ -220,8 +310,8 @@ function Modal({onClose}) {
             )}
           </div>
         </header>
-        {items.length === 0 && <div style={{height: 12}} />}
-        {items.length > 0 && (
+        {results.length === 0 && <div style={{height: 12}} />}
+        {results.length > 0 && (
           <div className="DocSearch-Dropdown">
             <div className="DocSearch-Dropdown-Container">
               <section className="DocSearch-Hits">
@@ -230,7 +320,7 @@ function Modal({onClose}) {
                   role="listbox"
                   aria-labelledby="docsearch-label"
                   id="docsearch-list">
-                  {items.map((x, idx) => (
+                  {results.map((x, idx) => (
                     <li
                       key={idx}
                       className="DocSearch-Hit"
@@ -238,7 +328,7 @@ function Modal({onClose}) {
                       role="option"
                       onMouseEnter={() => setHoveredIdx(idx)}
                       aria-selected={hoveredIdx === idx}>
-                      <a href={x.url} onClick={(e) => onClick(x.index, e)}>
+                      <a href={x.url} onClick={x.onClick}>
                         <div className="DocSearch-Hit-Container">
                           <div className="DocSearch-Hit-content-wrapper">
                             <span className="DocSearch-Hit-title">
@@ -281,11 +371,7 @@ function Modal({onClose}) {
         <footer className="DocSearch-Footer">
           <div className="DocSearch-Logo">
             <span className="DocSearch-Label">Search by</span>
-            <MergeBaseUrl
-              path="img/marvis.svg"
-              alternateText="Marvis"
-              description="Search results generated by Marvis"
-            />
+            <SearchFooterIcon />
           </div>
           <ul className="DocSearch-Commands">
             <li>
@@ -297,7 +383,7 @@ function Modal({onClose}) {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="1.2">
-                    <path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"></path>
+                    <path d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-1.4376v-.5c0-.8128.5646-1.4376 1.7073-1.4376.7344 0 1.2808.2819 1.5443.876M1 11.5c.2672.6929 1.0731 1.1 1.916 1.1s1.6488-.4071 1.916-1.1M5.9727 2.6s-.0237-.2739.2415-.2739c.2652 0 .2126.2739.2126.2739" />
                   </g>
                 </svg>
               </span>
