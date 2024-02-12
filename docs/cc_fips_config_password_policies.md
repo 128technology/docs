@@ -3,12 +3,6 @@ title: Username and Password Policies
 sidebar_label: Username and Password Policies
 ---
 
-| Release | Modification |
-| ------- | ------------ |
-| 5.6.0   | Feature introduced |
-| 6.0.1   | Added Max failed login attempts and User lock time. |
-| 6.0.4   | Added Username requirements. |
-
 Username and password requirements are listed below. For a list of the commands and how they are used to configure and enforce requirements, please refer to [`configure authority password-policy`](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide#configure-authority-password-policy).
 
 ### Password Requirements
@@ -35,7 +29,3 @@ The SSR password policies have been updated to provide a more secure experience.
 4. Fully numeric usernames and usernames beginning with `.` are not recommended. 
 5. Usernames may only be up to 32 characters long.
 6. The `.` character is allowed within a username: `firstname.lastname`.
-
-:::important
-After upgrading to a release with new username pattern support, users can add a username using the above requirements. However, after rolling back a node to the previous release, the username delete will fail because the old user data model does not support the new format. Usernames that do not support the **old** username pattern should be deleted before rolling back nodes. If they are not, those users cannot be deleted after the rollback.
-:::

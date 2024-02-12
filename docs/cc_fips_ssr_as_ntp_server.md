@@ -5,7 +5,7 @@ sidebar_label: Using SSR as an NTP Server
 In many hub-and-spoke deployments, devices at the spoke locations are accustomed to using either public services (such as `time.nist.gov` or `pool.ntp.org`) or self-hosted NTP services as their clock source. Rather than carry this traffic on the WAN, this document demonstrates how an SSR can provide NTP services for devices at the branch, avoiding unnecessary WAN traffic, and ensuring that all branch devices use a consistent clock source.
 
 :::note
-All of the recommendations in this document presume that the administrator has already set up the SSR to clock off of an upstream source.
+All of the recommendations in this section presume that the administrator has already set up the SSR to clock off of an upstream source.
 :::
 
 ## Overview

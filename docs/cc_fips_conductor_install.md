@@ -20,8 +20,6 @@ The Conductor installation must be completed before installing a Session Smart R
 
 ## Installation
 
-After imaging the ISO onto removable media, connect a computer to the SSR, then insert the imaged drive into the SSR device and power it on.
-
 ### Connect the SSR to a Management Console
 
 Ensure that you have an RJ-45 to DB-9 rollover cable available. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
@@ -30,18 +28,47 @@ Ensure that you have an RJ-45 to DB-9 rollover cable available. The SSR has a co
 2. Connect the USB end of the cable to your Mac.
 3. Connect the power input to the back of the SSR device
 4. Insert your USB with the new ISO image into the USB port of the SSR device.
+5. Power on the SSR. 
 
-5. Power on the SSR. Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
+### Boot from the USB
+
+Use the steps appropriate for your device to direct the device to boot from the USB. 
+
+#### SSR100 Series Devices
+
+1. At the instruction in the terminal window: `Press ESC for boot menu`, do so. 
+ ![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
+2. From the boot menu, enter the boot device number corresponding to the USB, and press Enter. 
+
+ ![Select Boot Device](/img/onboard_otp_boot_device.png)
+3. When the USB installer boot menu is displayed, continue with the [Conductor Installation](#conductor-installation).
+
+#### SSR1000 Series Devices
+
+1. At the instruction in the terminal window: `Press <Tab> or <DEL> to enter Setup`, do so.
+ ![Setup Menu Prompt](/img/1x00_setup_menu.png)
+2. When the Setup Utility window appears, use the left and right arrow keys to navigate to the `Save & Exit` tab.
+
+ ![Setup Utility](/img/setup-menu-prompt.png)
+3. Use the up and down arrow keys to highlight the boot device in the the Boot Override list.
+
+ ![Boot Override list](/img/1x00_boot-override.png)
+4. Press Enter to confirm boot from the USB device.
+5. When the USB installer boot menu is displayed, continue with the [Conductor Installation](#conductor-installation).
+
+### Conductor Installation
+
+Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
 
  ![Select Serial Install](/img/cc_fips_serial_install1.png)
 
-6. Use the Up/Down keys to select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer.
+1. Use the Up/Down keys to select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer.
 
   Selecting the wrong type of console (Serial or VGA) may result in garbled characters being displayed. If allowed to continue it will result in an incorrect installation. If the wrong console is selected, reboot the target system and select the correct line for the target hardware.
 
   For serial console issues please refer to [Serial Console Troubleshooting](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ts_serial_console_tsing).
 
-7. Press the TAB key to edit the configuration.
+2. Press the TAB key to edit the configuration.
 
   To enable FIPS Enforcement for SSR software version 6.2.3-14R2, add the `fips=1` kernel option  to the kernel command line during system installation as shown in the steps below. This ensures that key generation is done with FIPS approved algorithms and continuous monitoring tests in place.
 
@@ -49,11 +76,11 @@ Ensure that you have an RJ-45 to DB-9 rollover cable available. The SSR has a co
   FIPS mode is required for Common Criteria compliance. Failure to configure FIPS mode, or the use of any other cryptographic engine nullifies compliance.
   :::
 
-8. Add `fips=1` to the end of the `vmlinuz` parameters.
+3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
   ![FIPS Parameter](/img/cc_fips_serial_install2.png)
 
-9. Press **Enter** to start the install. 
+4. Press **Enter** to start the install. 
 
 After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the process has completed, the following screen is displayed:
 

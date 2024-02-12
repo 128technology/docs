@@ -23,6 +23,34 @@ The Conductor installation must be completed before installing a Session Smart R
 
 After imaging the ISO onto removable media, insert it into the SSR device and power it on.
 
+### Booting from the USB
+
+Use the steps appropriate for your device to direct the device to boot from the USB for installation. 
+
+#### SSR100 Series Devices
+
+1. At the instruction in the terminal window: `Press ESC for boot menu`, do so. 
+ ![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
+2. From the boot menu, enter the boot device number corresponding to the USB, and press Enter. 
+
+ ![Select Boot Device](/img/onboard_otp_boot_device.png)
+3. When the USB installer boot menu is displayed, continue with the [Router Installation](#router-installation).
+
+#### SSR1000 Series Devices
+
+1. At the instruction in the terminal window: `Press <Tab> or <DEL> to enter Setup`, do so.
+ ![Setup Menu Prompt](/img/1x00_setup_menu.png)
+2. When the Setup Utility window appears, use the left and right arrow keys to navigate to the `Save & Exit` tab.
+
+ ![Setup Utility](/img/setup-menu-prompt.png)
+3. Use the up and down arrow keys to highlight the boot device in the the Boot Override list.
+
+ ![Boot Override list](/img/1x00_boot-override.png)
+4. Press Enter to confirm boot from the USB device.
+5. When the USB installer boot menu is displayed, continue with the [Router Installation](#router-installation).
+
+### Router Installation
+
 Upon boot, the following screen is displayed. The default selection is booting to the serial console (115200 baud). You must manually choose the installation process suited for your environment.
 
 1. Use the Up/Down keys to select the `Install 128T Routing Software Serial Console` option. This is the supported installation option for Common Criteria. It uses `/dev/ttyS0` 115200 baud as the serial console for interacting with the installer.
@@ -90,7 +118,7 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
 
   :::note
   Routers can consist of one node (for standalone systems) or two nodes (for highly available systems).
-    :::
+  :::
   - **Router Name:** The name of the router system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `boston-router-node1.boston1`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
 
 5. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 9 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.

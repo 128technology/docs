@@ -12,7 +12,7 @@ To permit root access to the SSR system, ensure that there is at least one user 
 Prerequisites for installation and upgrades now include configuring a super user in /etc/sudoers that is allowed to execute Linux shell commands as root (sudo privileges).
 During an upgrade, if the existing version allows SSH Root login, it will be disabled. When a system is installed using the OTP ISO, a "t128" user is automatically configured with sudo privileges. 
 
-### Additional SSH Parameters
+### Additional SSH Information
 
 - Idle SSH sessions are logged out after 60 minutes of inactivity.
 - SSH Mode Verification performs strict mode checking of home directory configuration files, as well as user-specific SSH configuration files to prevent one user from logging on to the system as another user.

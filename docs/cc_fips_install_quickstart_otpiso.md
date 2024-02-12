@@ -15,7 +15,7 @@ After the configuration has been added to the authority on the conductor:
 
 - On the Conductor, go to the UI to start the QuickStart process for the newly created SSR Router by accessing “Routers” -> “Router Name” -> “QUICKSTART LINK”
 
-![QuickStart Generate QuickStart Link](/img/intro_ztp_quickstart_server_2.png)
+![QuickStart Generate QuickStart Link](/img/cc_fips_quickstart_server_2.png)
 
 Clicking on the generate "QuickStart Link" will present you with a dialog box confirming some basic information about the target platform. Notably the *router name*, *node name*, and *asset ID*.
 
@@ -23,7 +23,7 @@ The *device host address* is the IP address that is assigned to the SSR router d
 
 A password is used to encrypt the contents of the QuickStart file.  This password will be required when applying the file to the target platform.
 
-![QuickStart Link Generation](/img/intro_ztp_quickstart_server_3.png)
+![QuickStart Link Generation](/img/cc_fips_quickstart_server_3.png)
 
 - Copy the auto generated “Password” (this can be set to a different value)
 - Follow step 1 to download the QuickStart file locally by selecting the “Click Here” link
