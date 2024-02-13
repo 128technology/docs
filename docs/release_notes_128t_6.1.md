@@ -79,8 +79,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-54512 SSR130 moved into an HA cluster does not come up properly:** Resolved an issue where the generation of an improper configuration could lead to a crash loop in the NodeMonitor process.
 ------
-- **I95-54726 Duplicate service-routes for IDP being created:**  
-
+- **I95-54726 Duplicate service-routes for IDP being created:** Resolved an issue where duplicate routes were being created in `hub` mode because the service-name field was being used rather than the name field. This issue has been corrected.  
 ------
 
 
