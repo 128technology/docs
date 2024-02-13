@@ -13,8 +13,8 @@ config
 
 
 
-        router             conductor1
-            name  conductor1
+        router             conductor
+            name  test-conductor
 
             node  node1
                 name              node1
@@ -42,8 +42,8 @@ config
             exit
         exit
 
-        router             router1
-            name                 router1
+        router             router
+            name                 test-router
             inter-node-security  internal
 
             system
