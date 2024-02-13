@@ -125,19 +125,13 @@ Configure the IP address that will be used to manage the network routers.
 
 <img src="/img/nmtui-linux-set-hostname2.png" alt="Add Hostname" width="354" height="381" />
 
-6. From the NMTUI screen, select `Activate a connection`, and `<OK>`.
-
-7. Select the port, and `<Activate>`. 
-
-<img src="/img/nmtui-linux-activate-port.png" alt="Activate port" width="379" height="378" />
-
  When the port has been activated, an asterisk will appear next to the port name.
 
 ```
 Ethernet (enp2s0f0)
 * enp2s0f0
 ```
-8. Select `<Back>` and then `<Quit>` NMTUI.
+6. Select `<Back>` and then `<Quit>` NMTUI.
 
 The Initializer process starts automatically.
 
@@ -203,14 +197,9 @@ Password:
 ```
   ![Conductor Admin Login](/img/conductor_install1.png)
 
-2. Enter the Linux shell:
+2. Enter the Linux shell: Type `exit` to exit the PCLI and enter the Linux shell.
 
-  a. Type `exit` to exit the PCLI.
-
-  b. Type `shell` and press `Enter` to enter the linux shell.
-
-3. Log into the command window as `root`.
-4. Execute the command: `sudo systemctl status 128T`
+3. Execute the command: `sudo systemctl status 128T`
 
 ![Linux Shell](/img/conductor_install2.png)
 
@@ -242,19 +231,6 @@ Changing password for user root.
 New password:
 Retype new password: 
 passwd: all authentication tokens updated successfully.
-[root@test-conductor ~]#
-```
-
-#### Add Admin User
-
-Add the Admin user to the `sudo` config.
-
-Continuing in the UNIX window above, use `visudo` command to add the Admin user to the `sudo` configuration. 
-
-```
-[root@test-conductor ~]# visudo
-"admin ALL=(ALL)  ALL"
-:wq
 [root@test-conductor ~]#
 ```
 
