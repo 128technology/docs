@@ -47,17 +47,17 @@ This issue will be corrected in an upcoming release.
 
 ## Release 6.1.7-3
 
-**Release Date:** February 8, 2024
+**Release Date:** February 17, 2024
 
 ### Resolved Issues Requiring Configuration Changes
 
 - **I95-54729 Marking of packets for Performance Monitoring:** Performance monitoring now prefers to mark non-metadata packets on established sessions instead of packets which already contain metadata, such as first packets or packets which have had metadata turned on due to a session change event.
 ------
-
+- **I95-54909 Alarm when websense connection is down:** An alarm has been added to indicate that the connection to the Websense URL is down or responds with a 5xx error. 
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** CVE-2020-22218, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235.
+- **The following CVE's have been identified and addressed in this release:** CVE-2020-22218, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2021-43975, CVE-2022-28388, CVE-2022-3594, CVE-2022-3640, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2022-4744, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-23455, CVE-2023-2513, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-3141, CVE-2023-31436, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732.
 ------
 - **I95-50697 Private RFC1918 Web Applications ignored by Mist when collecting SLE data:** Initial implementation of RFC1918 handling let the DPI modify reclassify like any other case however, the classification information returned from a private domain lookup may not be useful and cause undesirable clumping of session stats. With the new behavior, when a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will only be reclassified if the classification data reflects a positive classification change.
 ------
@@ -81,11 +81,31 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-54726 Duplicate service-routes for IDP being created:** Resolved an issue where duplicate routes were being created in `hub` mode because the service-name field was being used rather than the name field. This issue has been corrected.  
 ------
-
-
-
-
-
+- **I95-54740 Upgrade Kernel to 8.9:** The kernel has been updated to address multiple CVE's (Listed in the CVE note above).
+------
+- **I95-54867 SSR 1300 baud rate set incorrectly:** Resolved an issue where the incorrect baud rate was allowed. The only allowed baud rate for the SSR is now 115200. This is the default rate. 
+------
+- **I95-54927 Receiver can join stream without any tenant assigned to interface:** This issue has been resolved. Multicast boundaries have been added to block all multicast addresses on interfaces that do not match the multicast service access-policy.
+------
+- **I95-55002 Password reset loop:** Resolved an issue that caused users created with the **Require password change on first login?** set to `yes` to get stuck in an infinite loop of password changes when logging in using the GUI.
+------
+- **I95-55069 One HA node is missing from the Mist GUI:** REsolved an issue where a managed router had an empty product version config metadata field, which resulted in the conductor version metadata field being cleared.
+------
+- **I95-55208 `state.apply` hangs and device does not get to the `running` state:** In certain cases the `highstate` prevents `rpm -q` from running. This issue has been resolved by instituting a timeout for `rpm -q` in highstate.
+------
+- **I95-55244 Unable to initialize DPDK:** Resolved an issue with the way the initializer identified the amount of memory in the processor. The initializer is now more NUMA aware when sizing the number of hugepages on a system.
+------
+- **I95-55261 Only run `validate` for plugins on the Conductor:** Resolved an issue where the plugin validator was running on routers. 
+------
+- **I95-55270 DHCP server not coming up:** Resolved an issue where a network namespace was using a namespace ID that was not cleaned up properly after removal.
+------
+- **I95-55359 IDP log disk usage:** Resolved an issue where IDP TSI files persisted too long, using too much disk space.
+------
+- **I95-55360 Modules becoming un-sync'ed during upgrade:** Resolved an issue during an HA upgrade when the conductor running the lower software version re-syncs modules after the initial synchronization by the higher software version conductor. 
+------
+- **I95-55378 Matching SSH keys cause resync loop:** Resolved an issue when there was interference with the process of inserting keys into the authorized keys file. The keys are now only inserted into the authorized keys or known hosts file if the key does not exist. 
+------
+- **I95-55389 Queries for private domains with Websense classified as Miscellaneous:** Domains categorized by Websense as Uncategorized are now classified as Uncategorized/Uncategorized, rather than Miscellaneous/Uncategorized.
 
 ## Release 6.1.6-7
 
