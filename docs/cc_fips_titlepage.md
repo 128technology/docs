@@ -15,7 +15,9 @@ Supported Hardware (must be upgraded to run Software version 6.2.3-14-R2):
 
 #### Revision History
 
+This documentation is maintained and generated separately from the SSR documenation. Any and all revisions to this documentation set are recorded below.
+
 | Software Release | Modification | Date |
 | --- | --- | --- |
 | 6.2.3-R2 | Documentation Created for Common Criteria | December 31, 2023 |
-| Doc Version 0.2 | Revision with Teron Feedback | February 2, 2024 |
+| Doc Version 0.2 | Revision with Teron Feedback | February 15, 2024 |

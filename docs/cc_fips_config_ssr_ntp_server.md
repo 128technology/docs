@@ -2,7 +2,7 @@
 title: Configure the SSR as an NTP Server
 sidebar_label: Configure the SSR as an NTP Server
 ---
-In many hub-and-spoke deployments, devices at the spoke locations are accustomed to using either public services (such as `time.nist.gov` or `pool.ntp.org`) or self-hosted NTP services as their clock source. Rather than carry this traffic on the WAN, this section describes how to use a branch SSR as the NTP server, by issuing the SSR's address as the NTP server in DHCP repsonses, or configuring devices to use the SSR's LAN interface as an NTP server.
+In many hub-and-spoke deployments, devices at the spoke locations are accustomed to using either public services (such as `time.nist.gov` or `pool.ntp.org`) or self-hosted NTP services as their clock source. Rather than carry this traffic on the WAN, this section describes how to use a branch SSR as the NTP server.
 
 ### Configuring Devices to use the SSR as an NTP Server
 

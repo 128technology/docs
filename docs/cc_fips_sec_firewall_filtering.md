@@ -7,12 +7,6 @@ As part of the security hardening and certification process, the SSR has impleme
 
 The SSR implements a stateful packet filtering firewall which allows you to define rules for filtering traffic. The rules may be defined for IPv4, IPv6, ICMP, TCP and UDP traffic. Only traffic explicitly identified in the traffic filtering rules as allowed is forwarded by the SSR. All other traffic is dropped. Firewall rules may be applied to each network interface separately, and the order of the rules is defined by the user. The TOE traverses the rule base for each network connection and implements the first rule that matches the traffic. The SSR inspects each packet independently, and no residual information for previously inspected packets influences the inspection.
 
-#### Revision History
-
-| Release | Modification |
-| --- | --- | 
-| 6.2.3-R2 | Features and settings described here introduced | 
-
 ## Packet Filtering
 
 The SSR uses Berkeley Packet Filters (BPF) to create customizable firewall filters. This filtering solution can be a key tool to prevent packet level attacks and aid with intrusion detection and prevention. Using BPF, packets on the SSR can be filtered by any known packet field, and the order in which filters are applied can be set by the user. 
