@@ -89,7 +89,7 @@ This issue will be corrected in an upcoming release.
 ------
 - **I95-55002 Password reset loop:** Resolved an issue that caused users created with the **Require password change on first login?** set to `yes` to get stuck in an infinite loop of password changes when logging in using the GUI.
 ------
-- **I95-55069 One HA node is missing from the Mist GUI:** REsolved an issue where a managed router had an empty product version config metadata field, which resulted in the conductor version metadata field being cleared.
+- **I95-55069 One HA node is missing from the Mist GUI:** Resolved an issue where a managed router had an empty product version config metadata field, which resulted in the conductor version metadata field being cleared.
 ------
 - **I95-55208 `state.apply` hangs and device does not get to the `running` state:** In certain cases the `highstate` prevents `rpm -q` from running. This issue has been resolved by instituting a timeout for `rpm -q` in highstate.
 ------
