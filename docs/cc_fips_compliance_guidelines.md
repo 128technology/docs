@@ -52,7 +52,7 @@ The following functionality and platforms **are not certified** under Common Cri
 - HTTPS/TLS, IPSec, SNMP, RADIUS, LDAP
 - X.509 certificate management, validation or verification
 - Virtual Private Network (VPN) and Intrusion Prevention System (IPS) functions
-- SSR Plugins, particularly Wireshark, are excluded from Common Criteria certification 
+- SSR Plugins, particularly Wireguard, are excluded from Common Criteria certification 
 
 The SSR Hardware has no physical restrictions for Common Criteria certification, however, there is an assumption of physical security.
 

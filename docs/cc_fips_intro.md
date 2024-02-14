@@ -24,7 +24,7 @@ The SSR security guidance documentation (this guide, the SSR Common Criteria Ins
 
 SSR devices are provisioned and configured by the user as a Session Smart Router (SSR) or into a Session Smart Conductor (Conductor). The Router implements the data plane and control plane functions and performs most functions. The Conductor implements a centralized management and policy engine allowing provisioning and management of several Routers. A Conductor also acts as an information aggregation repository. 
 
-The conductor manages the associated routers. To do this, the Administrator establishes a local or remote management connection to the Conductor. The Router and Conductor establish an SSH connection between each other. management commands are issued on the conductor, and relayed to the Router over the SSH connection. The SSH connection uses public-key authentication using cryptographic keys stored in the local file system. The SSR implements both SSH Client and Server.
+The conductor manages the associated routers. To do this, the Administrator establishes a local or remote management connection to the Conductor. The Router and Conductor establish an SSH connection between each other. Management commands are issued on the conductor, and relayed to the Router over the SSH connection. The SSH connection uses public-key authentication using cryptographic keys stored in the local file system. The SSR implements both SSH Client and Server.
 
 Each SSR can be administered individually; the administrator connects locally from console or remotely from a remote management station and issues commands through the Command Line Interface (CLI). For local administration, the administrator authenticates with a username and a password. With remote administration, the remote management workstation establishes an SSH connection and the Administrator authenticates with a username and password.
 
@@ -32,13 +32,13 @@ The SSR implements all the security functions of a network device, as well as a 
 
 ### Additional Software Details
 
-The SSR runs OpenSSL version 1.0.2zi and OpenSSL version 1.0.2k. The two OpenSSL libraries are used for a different implementation of OpenSSH. 
+The SSR runs OpenSSL version 1.0.2zl and OpenSSL version 1.0.2k. The two OpenSSL libraries are used for a different implementation of OpenSSH. 
 
 - Remote Administration is implemented using SSH on Port 22 using OpenSSH v7.4, which includes OpenSSL v1.0.2k. 
 
-- Communication between the Conductor and Routers is done using SSH over Port 930 and is implemented with OpenSSH v7.8 which includes OpenSSL v1.0.2l. 
+- Communication between the Conductor and Routers is done using SSH over Port 930 and is implemented with OpenSSH v7.8 which includes OpenSSL v1.0.2zl. 
 
-All implementations of cryptographic algorithms are certified under the Cryptographic Algorithm Validation program (CAVP).
+All implementations of cryptographic algorithms are certified under the Cryptographic Algorithm Validation Program (CAVP).
 
 All software used as part of the SSR is implemented to minimize the attack surface and only allow the minimum number of connections with outside users and products. 
 

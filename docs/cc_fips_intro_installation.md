@@ -19,7 +19,7 @@ The examples listed in this guide generally run commands as a non-root user, exc
 
 The SSR devices ship with an older version of SSR software that is not Common Criteria and FIPS compliant. It is required that you install SSR 6.2.3-14R2 software on the device to configure and run Common Criteria and FIPS compliant instances.
 
-The installation process is the most efficient way to achieve compliant software. The upgrade process may be used for updates to SSR 6.2.3-14R2 software.
+The installation process is the most efficient way to achieve compliant software. The upgrade process may be used for updates after having installed SSR 6.2.3-14R2 software.
 
 Access to the SSR Software packages available for downloand from our software repositories is provided using the username and token provided to you.
 
