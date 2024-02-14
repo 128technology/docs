@@ -10,7 +10,7 @@ The DHCP protocol provides a mechanism for unprovisioned hosts to request an IP-
 When running in a HA configuration with two nodes, only one of the nodes will actively operate as a DHCP server for those intererfaces that are shared between both systems. Client lease information is sychronized between nodes to ensure that upon link or node failure, the newly active DHCP server will operate with the same information.
 
 :::important
-- The same interface configured as a DHCP server cannot also be configured for DHCP relay.
+- Configuring an interface for DHCP server while the interface’s tenant (or a parent tenant) is configured for access to a DHCP relay service is an unsupported configuration and may result in unpredictable behavior.
 
 - The DHCP server cannot itself reside on an interface that is configured as a DHCP client.
 :::

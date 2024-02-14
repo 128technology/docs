@@ -65,8 +65,11 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['./src/plugins/release-notes-api.js'],
+  plugins: process.env.OFFLINE_DOCS
+    ? ['./src/plugins/release-notes-api.js', './src/plugins/search-index.js']
+    : ['./src/plugins/release-notes-api.js'],
   customFields: {
+    offlineDocs: process.env.OFFLINE_DOCS === '1',
     marvisSearch: {
       docSource: '128t',
       numResults: 15,
