@@ -21,7 +21,15 @@ The Conductor installation must be completed before installing a Session Smart R
 
 ## Installation
 
-After imaging the ISO onto removable media, insert it into the SSR device and power it on.
+### Connect the SSR to a Management Console
+
+Ensure that you have an appropriate rollover cable available to connect to you computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
+
+1. Connect the RJ45 rollover cable to the console port on the SSR device.
+2. Connect the other end of the cable to your computer.
+3. Insert your USB with the new ISO image into the USB port of the SSR device.
+4. Connect the power input to the SSR device
+5. Power on the SSR. 
 
 ### Booting from the USB
 
@@ -49,7 +57,7 @@ Use the steps appropriate for your device to direct the device to boot from the 
 
  ![Setup Utility](/img/setup-menu-prompt.png)
 
-3. Use the up and down arrow keys to highlight the boot device in the the Boot Override list.
+3. Use the up and down arrow keys to highlight the USB device in the the Boot Override list.
 
  ![Boot Override list](/img/1x00_boot-override.png)
 
@@ -88,7 +96,7 @@ After the Linux installation completes, the SSR software installation begins. No
 
 Select `<Yes>` to shut down the system. Remove the bootable media, then power the system up to complete the installation process. 
 
-### Initial Boot and NMTUI
+### Initial Boot and Management Network Configuration
 
 When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.
 
@@ -107,37 +115,19 @@ The SSR Initializer tunes your operating system, prepares the platform to run th
   ![SSR Role](/img/initializer_Serial2a.png)
 
 2. For SSR routers, you will be prompted for the IP address(es) of the conductor. If you have a conductor, enter the administrative IP address and the node will retrieve the configuration from the conductor. If you have only one conductor (i.e., a standalone conductor), leave the field labeled 2nd Conductor Address blank. If you have no conductors, choose **Skip**.
-3. When asked _What kind of Router node is this?_, select from the following options:
 
-  ![Identify the Node](/img/initializer_Serial3a.png)
+ ![Conductor Info](/img/cc_fips_router_install_ip.png)
 
-- **Standalone:** This router has no highly available peer, and is not currently planned for high availability.
-
-- **1st HA Node:** This router is the first node of a high availability pair. You will be prompted to provide the local IP address for this node. The 2nd HA node will contact this node at the address provided to synchronize state. Note: The 1st Node IP address must be reachable by the 2nd HA Node.
-  
-- **2nd HA Node:** This router is the second node of a high availability pair, where the first node has been initialized. You will be prompted to provide the 1st Node IP address for this 2nd node that will be used to synchronize state. Note: The 2nd Node IP address must be reachable by the 1st HA Node.
-
-4. Enter the following system properties on the **Node Info** screen:
-
-  ![Node Information](/img/initializer_Serial5cc.png)
-
-  - **Node Name:** The name of the system within your SSR Router, for example, **boston-router**. By default this field uses the Linux system's hostname.
-
-  :::note
-  Routers can consist of one node (for standalone systems) or two nodes (for highly available systems).
-  :::
-  - **Router Name:** The name of the router system as a whole. When referring to a running SSR software instance, it is identifiable by the full name of `nodeName.routerName`; e.g., `boston-router-node1.boston1`. The full system name is reflected in the PCLI prompt as discussed in the Document Conventions section of this document.
-
-5. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 9 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
+3. On the **Password Setup** screen, create a password for the SSR Admin user. The administrator password must be at least 9 characters long, contain at least 1 uppercase letter, at least 1 lowercase letter, at least 1 number, cannot contain the username in any form, and cannot repeat characters more than 3 times. This operation is only performed on the standalone or first node in the HA peer.
   :::note
   Resetting a password requires entering the old password. If a password is lost or forgotten and the account is inaccessible, the account cannot be recovered. Please keep password records accessible and secure. 
   :::
 
   ![Password Setup](/img/initializer_Serial6.png)
 
-6. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact Juniper Technical Support.
+4. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact Juniper Technical Support.
 
-7. When prompted, select Yes to start the SSR.
+5. When prompted, select Yes to start the SSR.
 
   ![Initializer Complete](/img/initializer_complete.png)
 
@@ -154,7 +144,7 @@ The following user accounts and passwords are created during the ISO installatio
 | root     | 128tRoutes |
 | t128     | 128tRoutes |
 
-Change these passwords immediately. Use the `passwd` command from the UNIX window.
+Change these passwords immediately. Use the `passwd` command from the Linux shell.
 
 ```
 [t128@test-router ~]$ passwd
@@ -176,7 +166,7 @@ passwd: all authentication tokens updated successfully.
 
 ### PCLI Access Post Install
 
-Use the following procedure to access the pcli at any time after installation. 
+Use the following procedure to access the PCLI at any time after installation. 
 
 1. Open a terminal window and ssh to the conductor's IP address. 
 2. Use your login credentials to log in to the conductor, and run the `pcli` command to start the SSR PCLI. 

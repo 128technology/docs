@@ -42,7 +42,7 @@ All implementations of cryptographic algorithms are certified under the Cryptogr
 
 All software used as part of the SSR is implemented to minimize the attack surface and only allow the minimum number of connections with outside users and products. 
 
-Administration of the SSR is only certified when performed through the CLI. 
+Administration of the SSR is only Common Criteria-certified when performed through the CLI. 
 
 The SSR implements a number of security mechanisms to protect itself and any critical data, and to ensure that attempts to tamper with the SSR or data are detected.
 

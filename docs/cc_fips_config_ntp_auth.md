@@ -1,16 +1,18 @@
 ---
-title: NTP Authentication
-sidebar_label: NTP Authentication
+title: Configure NTP Client Authentication
+sidebar_label: Configure NTP Client NTP Authentication
 ---
 
-Support for NTP authentication allows external NTP servers to be authenticated using an `md5` or `sha1` hash, allowing the SSR to verify the identity of the server being used for NTP time synchronization.
+Support for NTP authentication allows external NTP servers to be authenticated using a `sha1` hash, allowing the SSR to verify the identity of the server being used for NTP time synchronization.
+
+Authentication using `md5` is not supported by FIPS mode or Common Criteria. 
 
 To allow the NTP client to synchronize with an authenticated server the following information must be provided:
 
 - **Server ip-address:** This is required.
 - **Key-number:** The specific number used by the server to identify the key. Range is 1-65534. The number configured on the device must match the key number expected by the server.
-- **Authentication type:** Either `md5` or `sha1` (recomended)
-- **Shared key from the server:** 20 characters long for `md5`. 40 characters long for `sha1`.
+- **Authentication type:** `sha1` (required)
+- **Shared key from the server:** 40 characters long for `sha1`.
 
 Example config:
 
@@ -25,8 +27,8 @@ authority
                     ip-address  1.1.1.1
                     authentication-key
                         key-number 1
-                        type md5
-                        value ay4SZtX$VuooRx9XD+d+
+                        type sha1
+                        value ay4SZtX$VuooRx9XD+d+8chLS+95eJtV23+$cjTg
                     exit
                 exit
             exit

@@ -27,7 +27,7 @@ A password is used to encrypt the contents of the QuickStart file.  This passwor
 
 - Copy the auto generated “Password” (this can be set to a different value)
 - Follow step 1 to download the QuickStart file locally by selecting the “Click Here” link
-- Plug in the computer that contains the QuickStart file to any ethernet port except for port 1 on the router. Ensure DHCP is enabled on the computer connecting to the router.
+- Plug in the computer that contains the QuickStart file to any ethernet port except for port 1 on the router. Ensure DHCP client is enabled on the computer connecting to the router.
 - Follow step 2 and click the link to start the QuickStart URL process
 - Login locally to the new router with the default username `admin` and password `128Tadmin`
 - Drag and drop the QuickStart file and click “Proceed”

@@ -25,13 +25,17 @@ Basic configuration parameters are encoded within an encrypted file. For each no
 
 Before beginning the Router installation, you must have a Conductor operationally deployed and reachable by the router.
 
-This diagram is one possible topology for a standalone SSR deployed at the edge of the network.
-
-![QuickStart network diagram](/img/intro_ztp_quickstart_network_diagram.png)
-
 ## Installation
 
-After imaging the ISO onto removable media, insert it into the SSR device and power it on.
+### Connect the SSR to a Management Console
+
+Ensure that you have an appropriate rollover cable available to connect to you computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
+
+1. Connect the RJ45 rollover cable to the console port on the SSR device.
+2. Connect the other end of the cable to your computer.
+3. Insert your USB with the new ISO image into the USB port of the SSR device.
+4. Connect the power input to the SSR device
+5. Power on the SSR. 
 
 ### Booting from the USB
 
@@ -43,7 +47,7 @@ Use the steps appropriate for your device to direct the device to boot from the 
 
  ![Boot Menu prompt](/img/onboard_otp_boot_menu.png)
 
-2. From the boot menu, enter the boot device number corresponding to the USB, and press Enter. 
+2. From the boot menu, enter the device number corresponding to the USB, and press Enter. 
 
  ![Select Boot Device](/img/onboard_otp_boot_device.png)
 
@@ -59,7 +63,7 @@ Use the steps appropriate for your device to direct the device to boot from the 
 
  ![Setup Utility](/img/setup-menu-prompt.png)
 
-3. Use the up and down arrow keys to highlight the boot device in the the Boot Override list.
+3. Use the up and down arrow keys to highlight the USB device in the the Boot Override list.
 
  ![Boot Override list](/img/1x00_boot-override.png)
  
@@ -88,7 +92,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
 3. Add `fips=1` to the end of the `vmlinuz` parameters.
 
-  ![FIPS Parameter](/img/cc_fips_serial_install2.png)
+  ![FIPS Parameter](/img/cc_fips_otp_serial2.png)
 
 4. Press **Enter** to start the install. 
 
@@ -105,7 +109,7 @@ The following user accounts and passwords are created during the ISO installatio
 | root     | 128tRoutes |
 | t128     | 128tRoutes |
 
-Change these passwords immediately. Use the `passwd` command from the UNIX window.
+Change these passwords immediately. Power on the SSR and login to the router. Use the `passwd` command from the Linux shell.
 
 ```
 [t128@test-router ~]$ passwd
@@ -127,7 +131,7 @@ passwd: all authentication tokens updated successfully.
 
 ### PCLI Access Post Install
 
-Use the following procedure to access the pcli at any time after installation. 
+Use the following procedure to access the PCLI at any time after installation. 
 
 1. Open a terminal window and ssh to the conductor's IP address. 
 2. Use your login credentials to log in to the conductor, and run the `pcli` command to start the SSR PCLI. 

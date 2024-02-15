@@ -3,17 +3,15 @@ title: Conductor Installation
 sidebar_label: Conductor Installation 
 ---
 
-This process assumes you have already created a bootable device using a USB. Instructions for downloading and creating a bootable device are available in [Downloading an SSR ISO](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_downloading_iso) and [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb).
+After downloading the ISO, use the procedure in [Creating a Bootable USB](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/intro_creating_bootable_usb) to create a bootable USB. 
 
 The steps in this section describe the interactive conductor installation from the packaged-based ISO, using the serial console. The section [Initialize the Conductor](#initialize-the-conductor-node) describes using the Initializer to configure the system as a Conductor after installing from the interactive installation.
 
-:::note
 The Conductor installation must be completed before installing a Session Smart Router or routers using the ISO. The same ISO is used for both installations.
-:::
 
 ## Prerequisites
 
-- Ensure that the platform you are installing on meets the [SSR hardware requirements](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/about_supported_platforms#minimum-platform-specifications).
+- Installation is performed on a compliant platform; see [Compliant SSR Hardware](cc_fips_compliance_guidelines.md#compliant-ssr-hardware). 
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
 - Local console connectivity to the device/VM. 
 - **The SSH Root login is not permitted.** When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
@@ -22,12 +20,12 @@ The Conductor installation must be completed before installing a Session Smart R
 
 ### Connect the SSR to a Management Console
 
-Ensure that you have an RJ-45 to DB-9 rollover cable available. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
+Ensure that you have an appropriate rollover cable available to connect to you computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
 
-1. Connect the RJ45/USB cable to the console port on the SSR device.
-2. Connect the USB end of the cable to your Mac.
-3. Connect the power input to the back of the SSR device
-4. Insert your USB with the new ISO image into the USB port of the SSR device.
+1. Connect the RJ45 rollover cable to the console port on the SSR device.
+2. Connect the other end of the cable to your computer.
+3. Insert your USB with the new ISO image into the USB port of the SSR device.
+4. Connect the power input to the SSR device
 5. Power on the SSR. 
 
 ### Boot from the USB
@@ -50,7 +48,7 @@ Use the steps appropriate for your device to direct the device to boot from the 
 2. When the Setup Utility window appears, use the left and right arrow keys to navigate to the `Save & Exit` tab.
 
  ![Setup Utility](/img/setup-menu-prompt.png)
-3. Use the up and down arrow keys to highlight the boot device in the the Boot Override list.
+3. Use the up and down arrow keys to highlight the USB device in the the Boot Override list.
 
  ![Boot Override list](/img/1x00_boot-override.png)
 4. Press Enter to confirm boot from the USB device.
@@ -86,9 +84,9 @@ After the Linux installation completes, the SSR software installation begins. No
 
 ![Installation Complete](/img/intro_installation_bootable_media_install_complete.png)
 
-Select `<Yes>` to shut down the system. Remove the bootable media, then power the system up to complete the installation process. 
+Select `<Yes>` to shut down the system. Remove the USB device, then power the system up to complete the installation process. 
 
-### Initial Boot and NMTUI
+### Initial Boot and Management Network Configuration
 
 When the system boots from the `Install 128T Routing Software...` Interactive Installation work flow, the system asks whether to configure initial Linux Networking before the SSR Initializer is started.
 
@@ -143,11 +141,15 @@ There are two different types of conductor installations supported:
 - Standalone Conductor 
 - [Conductor High Availability](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/ha_conductor_install)
 
+:::note
+All High Availability configurations must be run and managed over private connections.
+:::
+
 Conductor High Availability for Cloud Deployments is not supported under Common Criteria.
 
 ## Standalone Conductor
 
-1. On the SSR Initializer wizard screen, use the space bar to select the **Conductor** role for the SSR node, and press the **Enter** key to select **OK**.
+1. On the SSR Initializer wizard screen, use the down arrow on the keyboard, or press "C" to select the **Conductor** role for the SSR node, and press the **Enter** key to select **OK**.
 
   ![SSR Role](/img/initializer_Serial2.png)
 
@@ -175,7 +177,7 @@ Conductor High Availability for Cloud Deployments is not supported under Common 
 
   ![Password Setup](/img/initializer_Serial6.png)
 
-5. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. The compatibility check may fail due to warnings or failure notices, which are displayed in the output script. If no failures are present, you can choose to continue with the installation even if multiple warnings exist. For information on why a specific test may have failed or generated a warning, contact Juniper Technical Support.
+5. Press the **Enter** key to select **OK**. The Initializer performs a hardware compatibility check. 
 
 6. When prompted, select `<Yes>` to start the conductor. 
 
@@ -214,7 +216,7 @@ The following user accounts and passwords are created during the ISO installatio
 | root     | 128tRoutes |
 | t128     | 128tRoutes |
 
-Change these passwords immediately. Use the `passwd` command from the UNIX window.
+Change these passwords immediately. Use the `passwd` command from the Linux shell.
 
 ```
 [t128@test-conductor ~]$ passwd
@@ -258,9 +260,9 @@ root@node1.test-conductor#
 
 ### PCLI Access Post Install
 
-Use the following procedure to access the pcli at any time after installation. 
+Use the following procedure to access the PCLI at any time after installation. 
 
-1. Open a terminal window and ssh to the conductor's IP address. 
+1. Open a terminal window and SSH to the conductor's IP address. 
 2. Use your login credentials to log in to the conductor, and run the `pcli` command to start the SSR PCLI. 
 
 Common Criteria certification does not require any restrictions on executing commands. See the [Configuration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage.
@@ -277,7 +279,7 @@ To see an example router configuration, refer to the [Appendix](cc_fips_appendix
 
 After completing the router configuration on the conductor, please return to this guide to continue the Common Criteria compliant router installation.
 
-If you will be using the OTP Quickstart router installation process, proceed to the [OTP Router Install Process](cc_fips_otp_router_install.md) next, and then use the [QuickStart From the OTP ISO](cc_fips_install_quickstart_otpiso.md) steps togenerate a basic configuration and quickstart file for router installation. 
+If you will be using the OTP Quickstart router installation process, proceed to the [OTP Router Install Process](cc_fips_otp_router_install.md) next, and then use the [QuickStart From the OTP ISO](cc_fips_install_quickstart_otpiso.md) steps to generate a basic configuration and quickstart file for router installation. 
 
 When configuring and installing a router in an environment operating under the Common Criteria guidelines, it is acceptable to provision this file using the GUI. Other uses of the SSR GUI are not supported under the Common Criteria guidelines.
 
