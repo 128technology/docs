@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "start": "docusaurus start --host 0.0.0.0",
+    "start:offline": "OFFLINE_DOCS=1 docusaurus start --host 0.0.0.0",
+    "serve": "docusaurus serve",
     "build": "docusaurus build",
+    "build:offline": "OFFLINE_DOCS=1 docusaurus build --out-dir=offline-docs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "ci": "yarn lint && yarn prettier:diff",
@@ -18,6 +21,7 @@
     "@docusaurus/preset-classic": "^2.3.1",
     "broken-link-checker-local": "^0.2.1",
     "classnames": "^2.2.6",
+    "lunr": "^2.3.9",
     "mermaid": "^9.3.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -34,6 +38,7 @@
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.26.0",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "gray-matter": "^4.0.3",
     "prettier": "^2.4.1"
   },
   "browserslist": {

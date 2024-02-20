@@ -46,6 +46,7 @@ module.exports = {
     "Cloud Installations": [
       "supported_cloud_platforms",
       "intro_installation_quickstart_aws",
+      "intro_installation_quickstart_mist_aws",
       "intro_installation_azure",
       "install_vmware_config",
       "intro_initialize_HA_conductor",      
@@ -62,7 +63,6 @@ module.exports = {
     ],
     "Concepts": [
       "concepts_application_discovery",
-      "concepts_appid",
       "concepts_EthOverSVR",
       "concepts_ha_theoryofoperation",
       "concepts_interface_types",
@@ -132,7 +132,6 @@ module.exports = {
           "config_dns_proxy",
           "config_forward_error_correction",
           "config_management_over_forwarding",
-          "config_app_ident",
           "config_domain-based_web_filter",
           "config_application_steering",
           "config_EthoSVR",
@@ -150,6 +149,15 @@ module.exports = {
           "config_static_hostname_mapping",
           "config_tenants",
           "config_transport_encryption",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Application Identification",
+        "items": [
+          "concepts_appid",
+          "config_app_ident",
+          "how_to_use_app_summary",
         ],
       },
       {
@@ -228,7 +236,6 @@ module.exports = {
         "type": "category",
         "label": "How To",
         "items": [
-          "how_to_use_app_summary",
           "how_to_local_config_override",
           "howto_extend_gui_nav",
           "howto_lte",

@@ -45,6 +45,66 @@ The change should be made on both nodes of an HA system. If a conductor is alrea
 
 This issue will be corrected in an upcoming release.
 
+## Release 6.1.7-3
+
+**Release Date:** February 17, 2024
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2020-22218, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235, CVE-2021-43975, CVE-2022-28388, CVE-2022-3594, CVE-2022-3640, CVE-2022-38457, CVE-2022-40133, CVE-2022-40982, CVE-2022-42895, CVE-2022-45869, CVE-2022-45887, CVE-2022-4744, CVE-2023-0458, CVE-2023-0590, CVE-2023-0597, CVE-2023-1073, CVE-2023-1074, CVE-2023-1075, CVE-2023-1079, CVE-2023-1118, CVE-2023-1206, CVE-2023-1252, CVE-2023-1382, CVE-2023-1855, CVE-2023-1989, CVE-2023-1998, CVE-2023-23455, CVE-2023-2513, CVE-2023-26545, CVE-2023-28328, CVE-2023-28772, CVE-2023-30456, CVE-2023-31084, CVE-2023-3141, CVE-2023-31436, CVE-2023-3161, CVE-2023-3212, CVE-2023-3268, CVE-2023-33203, CVE-2023-33951, CVE-2023-33952, CVE-2023-35823, CVE-2023-35824, CVE-2023-35825, CVE-2023-3609, CVE-2023-3611, CVE-2023-3772, CVE-2023-4128, CVE-2023-4132, CVE-2023-4155, CVE-2023-4206, CVE-2023-4207, CVE-2023-4208, CVE-2023-4732.
+------
+- **I95-50697 Private RFC1918 Web Applications ignored by Mist when collecting SLE data:** Handling of RFC1918 traffic classification returned a private domain causing an undesirable clumping of session stats. With the new behavior, when a session destined for a private IP (RFC1918) experiences an App-ID modify, the session will only be reclassified if the classification data reflects a positive classification change.
+------
+- **I95-51663 TCP port reuse causes crash during application steering:** Resolved an issue where TCP state transitions was causing an issue with the client reusing ports.
+------
+- **I95-52250 Security Package Update:** Updates have been made to Intrusion Detection and Prevention (IDP).
+------
+- **I95-52500 SVR Multi Hop Failover:** Added a session lookup by session-ID to resolve a situation where sessions failing between multi-hop SVR and direct SVR connections may lead to duplicate flow exceptions and dropped traffic.  
+------
+- **I95-53216 "Unable to change password" message showing for remote users:** Resolved an issue that caused a "Password Change" dialog to appear for remotely authenticated users.
+------
+- **I95-53920 Password expiration mistakenly applied to remote users:** Resolved an issue that incorrectly enforced password expiration (configure authority password-policy lifetime) to RADIUS users.
+------
+- **I95-54127 Users not locally created on managed routers cannot get TSI:** Resolved an issue that did not provide a home directory for custom roles, which prevented LDAP users from viewing the systemd journal.
+------
+- **I95-54271 Race condition during a configuration change related to source NAT leading to crash:** Resolved a rare condition where the NAT pool was being reset while it was accessed for session setup. This caused a race condition that led to a highway process crash.
+------
+- **I95-54340 Hub-to-spoke sessions break when failing over from outbound-only path:** When a session modify occurs due to an ingress change (inter-node -> inter-router) AND an egress change is also detected, the incorrect security was being looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved. 
+------
+- **I95-54512 SSR-130 reconfigured to join an HA cluster does not come up properly:** Resolved an issue where the generation of an improper configuration could lead to a crash loop in the NodeMonitor process.
+------
+- **I95-54726 Duplicate service-routes for IDP being created:** Resolved an issue where duplicate routes were being created in `hub` mode because the service-name field was being used rather than the name field. This issue has been corrected.  
+------
+- **I95-54729 Marking of packets for Performance Monitoring:** Performance monitoring now prefers to mark non-metadata packets on established sessions instead of packets which already contain metadata, such as first packets or packets which have had metadata turned on due to a session change event.
+------
+- **I95-54740 Upgrade Kernel to 8.9:** The kernel has been updated to address multiple CVE's (Listed in the CVE note above).
+------
+- **I95-54867 SSR-1300 baud rate set incorrectly:** Resolved an issue where the incorrect baud rate was allowed. The only allowed baud rate for the SSR is now 115200. This is the default rate. 
+------
+- **I95-54909 Alarm when websense connection is down:** An alarm has been added to indicate that the connection to the Websense URL is down or responds with a 5xx error. 
+------
+- **I95-54927 Receiver can join stream without any tenant assigned to interface:** This issue has been resolved. Multicast boundaries have been added to block all multicast addresses on interfaces that do not match the multicast service access-policy.
+------
+- **I95-55002 Password reset loop:** Resolved an issue that caused users created with the **Require password change on first login?** set to `yes` to get stuck in an infinite loop of password changes when logging in using the GUI.
+------
+- **I95-55069 One HA node is missing from the Mist GUI:** Resolved an issue where a managed router had an empty product version config metadata field, which resulted in the conductor version metadata field being cleared.
+------
+- **I95-55208 `state.apply` hangs and device does not get to the `running` state:** In certain cases the `highstate` prevents `rpm -q` from running. This issue has been resolved by instituting a timeout for `rpm -q` in highstate.
+------
+- **I95-55244 Unable to initialize DPDK; SSR does not start:** Resolved an issue with the way the initializer identified the amount of memory in the processor. The initializer is now more NUMA aware when sizing the number of hugepages on a system.
+------
+- **I95-55261 Only run `validate` for plugins on the Conductor:** Resolved an issue where the plugin validator was running on routers. 
+------
+- **I95-55270 DHCP server not coming up:** Resolved an issue where a network namespace was using a namespace ID that was not cleaned up properly after removal.
+------
+- **I95-55359 IDP log disk usage:** Resolved an issue where IDP TSI files persisted too long, using too much disk space.
+------
+- **I95-55360 Modules becoming un-sync'ed during upgrade:** Resolved an issue during an HA upgrade when the conductor running the lower software version re-syncs modules after the initial synchronization by the higher software version conductor. 
+------
+- **I95-55378 Matching SSH keys cause resync loop:** Resolved an issue when there was interference with the process of inserting keys into the authorized keys file. The keys are now only inserted into the authorized keys or known hosts file if the key does not exist. 
+------
+- **I95-55389 Queries for private domains with Websense classified as Miscellaneous:** Domains categorized by Websense as Uncategorized are now classified as Uncategorized/Uncategorized, rather than Miscellaneous/Uncategorized.
+
 ## Release 6.1.6-7
 
 **Release Date:** January 2, 2024
@@ -184,7 +244,6 @@ This issue will be corrected in an upcoming release.
 - **I95-54434 Mist PCAP failure - inverted commands observed by the device:** In rare cases where captures are created and deleted too quickly, a delete command may be received by the device before the create command. These timing issues have been resolved.
 ------
 - **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH nodeIdentifier so that this is accessible for admin users.
-------
 
 ## Release 6.1.5-14
 
