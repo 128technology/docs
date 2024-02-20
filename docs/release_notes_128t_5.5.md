@@ -28,9 +28,9 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
-## Release 5.5.12-4
+## Release 5.5.12-9
 
-**Release Date:** December 1, 2023
+**Release Date:** February 22, 2024
 
 ### Resolved Issues Requiring Configuration Changes
 
@@ -38,7 +38,7 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 
 ### Resolved Issues
 
-- **The following CVE's have been identified and addressed in this release:** CVE-2022-2873, CVE-2022-41222, CVE-2022-43945, CVE-2022-4269, CVE-2022-4378, CVE-2023-0266, CVE-2023-0386, CVE-2021-26341, CVE-2021-33655, CVE-2021-33656, CVE-2022-1462, CVE-2022-1679, CVE-2022-1789, CVE-2022-20141, CVE-2022-2196, CVE-2022-25265, CVE-2022-2663, CVE-2022-3028, CVE-2022-30594, CVE-2022-3239, CVE-2022-3522, CVE-2022-3524, CVE-2022-3564, CVE-2022-3566, CVE-2022-3567, CVE-2022-3619, CVE-2022-3623, CVE-2022-3625, CVE-2022-3628, CVE-2022-3707, CVE-2022-39188, CVE-2022-39189, CVE-2022-41218, CVE-2022-4129, CVE-2022-41674, CVE-2022-42703, CVE-2022-42720, CVE-2022-42721, CVE-2022-42722, CVE-2022-43750, CVE-2022-47929, CVE-2023-0394, CVE-2023-0461, CVE-2023-1195, CVE-2023-1582, CVE-2023-23454, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-24329, CVE-2023-32067, CVE-2023-24329, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-2828, CVE-2023-38408, CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934. 
+- **The following CVE's have been identified and addressed in this release:** CVE-2022-2873, CVE-2022-41222, CVE-2022-43945, CVE-2022-4269, CVE-2022-4378, CVE-2023-0266, CVE-2023-0386, CVE-2021-26341, CVE-2021-33655, CVE-2021-33656, CVE-2022-1462, CVE-2022-1679, CVE-2022-1789, CVE-2022-20141, CVE-2022-2196, CVE-2022-25265, CVE-2022-2663, CVE-2022-3028, CVE-2022-30594, CVE-2022-3239, CVE-2022-3522, CVE-2022-3524, CVE-2022-3564, CVE-2022-3566, CVE-2022-3567, CVE-2022-3619, CVE-2022-3623, CVE-2022-3625, CVE-2022-3628, CVE-2022-3707, CVE-2022-39188, CVE-2022-39189, CVE-2022-41218, CVE-2022-4129, CVE-2022-41674, CVE-2022-42703, CVE-2022-42720, CVE-2022-42721, CVE-2022-42722, CVE-2022-43750, CVE-2022-47929, CVE-2023-0394, CVE-2023-0461, CVE-2023-1195, CVE-2023-1582, CVE-2023-23454, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-24329, CVE-2023-32067, CVE-2023-24329, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-2828, CVE-2023-38408, CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235. 
 ------
 - **I95-42466 Changing the physical linux address of an HA interface breaks the configuration:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address. 
 ------
@@ -92,9 +92,16 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-53916 Pre-existing teams interfaces conflict with HA interfaces:** In a Mist-managed HA configuration where an HA node has been configured with non-default HA interfaces, performing a release operation on a node in an HA pair leaves the pre-configured HA interfaces in place, and creates a conflict when a new configuration is pushed down from Mist. This would prevent the HA node from operating correctly and forming its HA connections again. This issue has been resolved, and the release operation now removes any pre-existing HA interfaces.
 ------
-- **I95-53896 `nodeMonitor` failed to get data for `show platform disk`:** Some of the dynamic access for `smartctl` objects were not protected. A check for the object existence has been added before attempting to read it.
+- **I95-53986 `nodeMonitor` failed to get data for `show platform disk`:** Some of the dynamic access for `smartctl` objects were not protected. A check for the object existence has been added before attempting to read it.
 ------
 - **I95-54086 Conductor memory exceeded:** In certain cases, the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the asset-connection-resiliency feature. An update to the salt package has been made to resolve this issue.
+------
+- **I95-54155 nodeMonitor coredump on secondary node after upgrade:** During an upgrade where `deviceType` was `LTE` the attempt to get a linux interface name (not supported) failed. This issue has been resolved by implemting a device interface type verification.
+------
+- **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH nodeIdentifier so that this is accessible for admin users.
+------
+- **WAN-2486 SSR data reporting values that are unrealistically high:** When capturing application usage for application summary learned apps, we sometimes observe really high values for bandwidth and other metrics.
+Resolution: The high value was due to an internal corruption when the metrics for these learned applications were removed and added. During such transition we sometimes end up with memory corruption resulting in the bogus high value. The part of the solution is to ensure the transition happens more gracefully.
 ------
 - **WAN-2547 Invalid memory access producing incorrect bandwidth values:** Implemented a resolution that identifies the invalid memory access, and drops values that are out of scope or otherwise invalid. 
 
