@@ -96,12 +96,12 @@ The Juniper SSR team does not publicly disclose known or resolved CVEs in our pu
 ------
 - **I95-54086 Conductor memory exceeded:** In certain cases, the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the asset-connection-resiliency feature. An update to the salt package has been made to resolve this issue.
 ------
-- **I95-54155 nodeMonitor coredump on secondary node after upgrade:** During an upgrade where `deviceType` was `LTE` the attempt to get a linux interface name (not supported) failed. This issue has been resolved by implemting a device interface type verification.
+- **I95-54155 nodeMonitor coredump on secondary node after upgrade:** During an upgrade where `deviceType` was `LTE` the attempt to get a linux interface name (not supported) failed. This issue has been resolved by implementing a device interface type verification.
 ------
-- **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH nodeIdentifier so that this is accessible for admin users.
+- **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH so that this is accessible for admin users.
 ------
 - **WAN-2486 SSR data reporting values that are unrealistically high:** When capturing application usage for application summary learned apps, we sometimes observe really high values for bandwidth and other metrics.
-Resolution: The high value was due to an internal corruption when the metrics for these learned applications were removed and added. During such transition we sometimes end up with memory corruption resulting in the bogus high value. The part of the solution is to ensure the transition happens more gracefully.
+Resolution: The high value was due to an internal corruption when the metrics for these learned applications were removed and added. During such transition there may be memory corruption resulting in the bogus high value. The part of the solution is to ensure the transition happens more gracefully.
 ------
 - **WAN-2547 Invalid memory access producing incorrect bandwidth values:** Implemented a resolution that identifies the invalid memory access, and drops values that are out of scope or otherwise invalid. 
 
