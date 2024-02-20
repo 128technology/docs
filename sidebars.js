@@ -46,6 +46,7 @@ module.exports = {
     "Cloud Installations": [
       "supported_cloud_platforms",
       "intro_installation_quickstart_aws",
+      "intro_installation_quickstart_mist_aws",
       "intro_installation_azure",
       "install_vmware_config",
       "intro_initialize_HA_conductor",      
