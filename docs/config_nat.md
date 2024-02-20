@@ -168,6 +168,84 @@ For details about command output, refer to the [`show sessions`](cli_reference.m
 | ------- | ------------ |
 | 6.2.0   | Static NAT Feature Introduced   |
 
+## Dynamic Source NAT
+
+Dynamic Source NAT translates multiple source IP addresses into a smaller pool of translated addresses and dynamic ports, which conserves public IP address space and provides the flexibility to source NAT a specific IP range. This supports scaling up sessions for the internal service. For example, in a corporate office with a SIP phone service, where all phones have different IPs on port 5060, these internal IP addresses are source NAT’ed to a single external IP address. It may also provide solutions for IP address conflicts, but because it is not mapping NAT one-to-one, it is not required to facilitate the destination NAT mapping for network connections from the external client to the internal client.
+
+Consider the following table and diagram, similar to the example earlier focusing on a company acquisition, where spk-lan2 network, is overlapping, or not routable in Corp and Internet. 
+
+The Dynamic Source NAT challenge is illustrated in scenarios #2 and #4, where multiple clients of IP subnet 192.168.1.0/24, from spk-lan2 are running same application on port 1111, but given only one IP address, 172.16.128.10, to source NAT out. 
+
+images here
+
+By applying Dynamic Source NAT configuration to the spk-lan2 interface, the 192.168.1.0/24 subnet can be mapped to the single IP address subnet 172.16.128.10/32, with dynamically allocated ports. This allows the SSR to dynamically build a many-to-one source NAT mapping.  
+
+Examples:
+In scenario #2 above, sessions from an application using port 1111 are initiated from multiple clients of the spk-lan2 interface, to a client of hub-lan1 on 10.10.10.10. The first client at host 192.168.1.10 and port 1111 is assigned a source NAT of 172.16.128.10:1653 where port 1653 is allocated dynamically. The second client at 192.168.1.11 with port 1111 is allocated a dynamic source NAT of 172.16.128.10:1654. 
+
+Scenario #4 above is similar, except the target connections are to the client at the spk-lan2 interface using 172.16.129.10  which has been mapped by Static NAT. The same Dynamic Source NAT processes from Senario #2 are applied here.
+
+The following is the PCLI router configuration for both the above use cases. Packets going through spk-lan2 within the 192.168.1.0/24 domain will be source-natted to 172.16.128.10/32. 
+
+```
+config
+    authority
+         router  spoke
+            node  node1-spoke
+                device-interface  spk-lan2
+                    network-interface  spk-lan2
+                        dynamic-source-nat  192.168.1.0/24
+                            local-ip   192.168.1.0/24
+                            remote-ip  172.16.128.10/32
+                        exit
+                    exit
+                exit
+            exit
+        exit
+    exit
+exit 
+```
+
+Sample GUI Configuration:
+`network-interface` 
+
+`dynamic-source-nat` 
+
+Commands
+
+network-interface has the following commands added: 
+
+`dynamic-source-nat`: Defines the prefixes that need to be dynamically source natted for packets ingressing this interface. 
+    `local-ip`: For packets ingressing this interface, the IP which will be source natted to remote-ip IP. 
+    `remote-ip`: For packets ingressing this interface, the IP to which the local-ip IP will be source natted. 
+ 
+`show network-interface source-nat-rules <interface-name> detail`(router)
+
+```
+admin@combo-east-1.RTR_EAST_COMBO# show network-interface source-nat-rules name ingress-intf detail
+Thu 2024-02-08 18:54:48 UTC
+✔ Retrieving source NAT rules...
+
+=========== =============== ================= ================== ========== ======================== ========= ============= ============= ============== ================ ==============
+ Direction   Type            From              To                 Protocol   Key                      State     Total Ports   Ports In Db   Ports In Mem   Ports Released   Ports In Use
+=========== =============== ================= ================== ========== ======================== ========= ============= ============= ============== ================ ==============
+ ingress     dynamic         172.16.1.0/24     192.168.5.120/32   tcp        2/1/1/192.168.5.120/6    Standby         49151         48151           1000                0              0
+ ingress     dynamic         172.16.1.0/24     192.168.5.120/32   udp        2/1/1/192.168.5.120/17   Standby         49151         48151            999                0              1
+ ingress     dynamic         172.16.1.0/24     192.168.5.120/32   icmp       2/1/1/192.168.5.120/1    Standby         49151         48151           1000                0              0
+ ingress     dynamic         172.16.1.202/31   192.168.6.202/32   tcp        2/1/1/192.168.6.202/6    Standby         49151         48151           1000                0              0
+ ingress     dynamic         172.16.1.202/31   192.168.6.202/32   udp        2/1/1/192.168.6.202/17   Standby         49151         48151            998                0              2
+ ingress     dynamic         172.16.1.202/31   192.168.6.202/32   icmp       2/1/1/192.168.6.202/1    Standby         49151         48151           1000                0              0
+ ingress     dynamic         172.16.1.204/31   192.168.7.204/32   tcp        2/1/1/192.168.7.204/6    Standby         49151         48151           1000                0              0
+ ingress     dynamic         172.16.1.204/31   192.168.7.204/32   udp        2/1/1/192.168.7.204/17   Standby         49151         48151            998                0              2
+ ingress     dynamic         172.16.1.204/31   192.168.7.204/32   icmp       2/1/1/192.168.7.204/1    Standby         49151         48151           1000                0              0
+ ingress     dynamic         172.16.1.206/31   192.168.8.206/32   tcp        2/1/1/192.168.8.206/6    Standby         49151         48151           1000                0              0
+ ingress     dynamic         172.16.1.206/31   192.168.8.206/32   udp        2/1/1/192.168.8.206/17   Standby         49151         48151            999                0              1
+ ingress     dynamic         172.16.1.206/31   192.168.8.206/32   icmp       2/1/1/192.168.8.206/1    Standby         49151         48151           1000                0              0
+ ingress     bidirectional   172.16.1.204/30   192.168.9.200/30   n/a        n/a                      n/a               n/a           n/a            n/a              n/a            n/a
+
+Completed in 0.05 seconds 
+```
+
 ## NAT Pools
 
 NAT pools are a construct that allow for the use of IP and port ranges to be shared across one or more network-interfaces for either source or destination NATing capabilities.
