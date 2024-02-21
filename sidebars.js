@@ -139,7 +139,6 @@ module.exports = {
           "config_flow_perf_mon",
           "config_gre_tunnel",
           "config_in-memory_metrics",
-          "config_nat",
           "config_rate_limiting",
           "config_RBAC",
           "config_service_health",
@@ -173,6 +172,17 @@ module.exports = {
           "config_multicast",
           "config_lacp",
           "config_dhcp",
+        ],
+      },
+      {
+        "type": "category",
+        "label": "Network Address Translation (NAT)",
+        "items": [
+          "config_source-dest_nat",
+          "config_static_nat",
+          "config_dnat",
+          "config_nat_pools",
+          "ts_nat_troubleshooting",
         ],
       },
       {
