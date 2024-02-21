@@ -65,13 +65,12 @@ Dynamic Source NAT Configuration
 
 Dynamic Source NAT is configured from the network-interface using the following commands: 
 
-`dynamic-source-nat`: Defines the prefixes that need to be dynamically source natted for packets ingressing this interface. 
+[`dynamic-source-nat`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat): Defines the prefixes that need to be dynamically source natted for packets ingressing this interface. 
 
-- `local-ip`: For packets ingressing this interface, the IP that is source NAT'ed to the `remote-ip`. 
-- `remote-ip`: For packets ingressing this interface, the IP where the `local-ip` will be source NAT'ed. 
-
-For additional information refer to [`dynamic-source-nat`] in the Configuration Command Reference Guide.
+- [`local-ip`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-local-ip): For packets ingressing this interface, the IP that is source NAT'ed to the `remote-ip`. 
+- [`remote-ip`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-remote-ip): For packets ingressing this interface, the IP where the `local-ip` will be source NAT'ed. 
 
 ### Show Commands
  
-The `show network-interface source-nat-rules <interface-name> detail` is available on the router or the conductor and will display brief or detailed information for NAT configurations. Please see the [NAT Troubleshooting](ts_nat_troubleshooting) pages for information about the `source-nat-rules` subcommand. 
+The [`show network-interface source-nat-rules`](cli_reference.md#show-network-interface-source-nat-rules) can be run from the router or the conductor to display brief or detailed information for NAT configurations. Please see the [NAT Troubleshooting](ts_nat_troubleshooting) pages for information about the `source-nat-rules` subcommand. 
+

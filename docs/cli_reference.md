@@ -12,7 +12,7 @@ Assign the current router to a Mist organization.
 #### Usage
 
 ```
-adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [router-name <router-name>]
+adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [router-name <router-name>] [mist-instance <mist-instance>]
 ```
 
 ##### Keyword Arguments
@@ -20,6 +20,7 @@ adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [route
 | name | description |
 | ---- | ----------- |
 | force | Skip confirmation prompt. |
+| mist-instance | Global01 \| Global02 \| Global03 \| Global04 \| Global05 \| EMEA01 \| EMEA02 \| EMEA03 \| APAC01 \| APAC02 \| APAC03 \| APAC04 \| APAC05 \| USGov01 (default: Global01) |
 | org-id | The ID of the Mist organization where the router is assigned. |
 | registration-code | The registration code used to assign this router to an organization. |
 | router-name | Assign a name to the router. |
@@ -34,9 +35,14 @@ adopt [{org-id <org-id> | registration-code <registration-code>}] [force] [route
 
 If you know the ID of the organization in Mist, or the registration code for the router, you can use the optional `org-id` or `registration-code` arguments. Otherwise, use the interactive dialog to walk through entering Mist credentials and assigning the router to an organization.
 
+:::note
+This command can only be run on a Router.
+:::
+
 | Release | Modification                |
 | ------- | ----------------------------|
 | 6.0.0   | This feature was introduced |
+| 6.3.0 | Added `mist-instance` |
 
 ## `clear app-id cache`
 
@@ -611,6 +617,12 @@ connect [username <username>] router <router> node <node>
 | node | The node to connect to |
 | router | The router to connect to |
 | username | Username to use for login to the Managed Router (default: &lt;current user&gt;) |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `create capture-filter`
 
@@ -1884,6 +1896,12 @@ manage plugin install [node <node>] <name> [<version>]
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `manage plugin remove`
 
 Remove an installed plugin.
@@ -1914,6 +1932,12 @@ manage plugin remove [node <node>] <name>
 | [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `migrate`
 
@@ -3129,6 +3153,12 @@ send command reconnect disconnected [force]
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `send command restart`
 
 Restart an SSR node
@@ -3167,7 +3197,9 @@ send command restart [force] router <router> node <node>
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command rollback`
 
@@ -3207,7 +3239,9 @@ send command rollback [force] {router <router> | resource-group <resource-group>
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command start`
 
@@ -3247,7 +3281,9 @@ send command start [force] router <router> node <node>
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command stop`
 
@@ -3287,7 +3323,9 @@ send command stop [force] router <router> node <node>
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command sync`
 
@@ -3329,6 +3367,10 @@ send command sync [{router <router> | resource-group <resource-group>}] [force] 
 #### Description
 
 Transition an asset back to **connected** and perform a sync. The sync operation ensures the asset is provisioned correctly and all plugin changes are applied.
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 #### Version History
 | Release | Modification                |
@@ -3380,7 +3422,9 @@ send command upgrade [dry-run] [force] {router <router> | resource-group <resour
 
 #### Description
 
-_send command_ is only available within the PCLI of an SSR Conductor.
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `send command yum-cache-refresh`
 
@@ -3417,6 +3461,12 @@ send command yum-cache-refresh [force] {router <router> | resource-group <resour
 | [`show assets`](#show-assets) | Shows the automated provisioning status of SSR nodes. |
 | [`show assets software`](#show-assets-software) | Shows assets software information. |
 | [`show assets summary`](#show-assets-summary) | A summary of assets connected to the Conductor. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `service-ping`
 
@@ -4019,6 +4069,10 @@ shell [<command> ...]
 
 The shell command allows administrators to execute a bash shell, or to execute a command within the context of a bash shell (specified as a series of optional parameters to the _shell_ command).
 
+:::note
+This command can only be run by users that are a part of the &#x27;admin&#x27; group.
+:::
+
 #### Example
 
 ```
@@ -4481,6 +4535,10 @@ show assets [{router <router> | resource-group <resource-group>}] [force] [node 
 
 The _show assets_ command displays the automated provisioning status of the SSR nodes within an Authority. With SSR&#x27;s automated provisioning feature set, each &quot;asset&quot; represents a platform into which the SSR software is installed, updated, managed, etc. The _show assets_ command allows administrators to see, at a glance, the state of all assets – including which software versions have been installed on which nodes, what their router and node identifiers are, etc.
 
+:::note
+This command can only be run on a Conductor.
+:::
+
 #### Example
 
 ```
@@ -4546,6 +4604,10 @@ show assets errors [{router <router> | resource-group <resource-group>}] [force]
 
 _show assets errors_ will display all assets with at least one automated provisioner related error.
 
+:::note
+This command can only be run on a Conductor.
+:::
+
 #### Example
 
 ```
@@ -4610,6 +4672,10 @@ Displays software related information for each managed asset. The following info
 - Versions available for download and the repository where they are located. 
 - Software versions currently being downloaded.
 - Previously downloaded versions that can be used to upgrade the platform.
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 #### Example
 
@@ -4683,6 +4749,10 @@ show assets summary [{router <router> | resource-group <resource-group>}] [force
 #### Description
 
 _show assets summary_ will display a total of all assets in each state.
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 #### Example
 
@@ -5472,6 +5542,12 @@ Display all routers with a locally modified config version.
 show config locally-modified
 ```
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `show config out-of-sync`
 
 Display all routers with a config version that is out of sync with the conductor.
@@ -5481,6 +5557,12 @@ Display all routers with a config version that is out of sync with the conductor
 ```
 show config out-of-sync
 ```
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `show config running`
 
@@ -6117,6 +6199,12 @@ show dynamic-peer-update [{router <router> | resource-group <resource-group>}] [
 | [`show stats dynamic-peer-update`](cli_stats_reference.md#show-stats-dynamic-peer-update) | Stats pertaining to dynamic peer update processes |
 | [`sync peer addresses`](#sync-peer-addresses) | Synchronize dynamic addresses (DHCP and PPPoE) between routers and a conductor. |
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `show entitlement`
 
 Displays entitlement utilized.
@@ -6391,7 +6479,7 @@ show fib [{service-name <name> | hierarchy-service-name <name> | contains-servic
 | name | description |
 | ---- | ----------- |
 | contains-service-name | The partial substring match to show for the fib |
-| force | Skip confirmation prompt. Only required when targeting all routers. |
+| force | Skip confirmation prompt. Only required when targeting all routers |
 | hierarchy-service-name | The hierarchy root to show for the fib |
 | match-service-name | The regex to match service names to show for the fib |
 | node | The node from which to retrieve fib entries |
@@ -7554,6 +7642,8 @@ show network-interface [name <name>] [force] [node <node>] {router <router> | re
 | command | description |
 | ------- | ----------- |
 | [`application`](#show-network-interface-application) | Display application data info for network-interfaces. |
+| [`redundancy`](#show-network-interface-redundancy) | Display redundancy info for network-interfaces. |
+| [`source-nat-rules`](#show-network-interface-source-nat-rules) | Display source NAT rules on a network-interface. Source NAT ports usage is available in the detail view for dynamic rules. |
 
 #### Description
 
@@ -7671,6 +7761,53 @@ Tue 2020-04-21 15:26:19 UTC
 
 Completed in 0.76 seconds
 ```
+## `show network-interface redundancy`
+
+Display redundancy info for network-interfaces.
+
+#### Usage
+
+```
+show network-interface redundancy [name <name>] [force] [node <node>] {router <router> | resource-group <resource-group>}
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| force | Skip confirmation prompt. Only required when targeting all routers |
+| name | Network interface to display (if omitted, all will be displayed) |
+| node | The node for which to display redundancy data |
+| resource-group | The name of the resource group |
+| router | The router for which to display redundancy data |
+
+#### Description
+
+The command _show network-interface redundancy_ can be used to display information regarding network-interface redundancy status
+
+## `show network-interface source-nat-rules`
+
+Display source NAT rules on a network-interface. Source NAT ports usage is available in the detail view for dynamic rules.
+
+#### Usage
+
+```
+show network-interface source-nat-rules name <name> router <router> node <node> [<verbosity>]
+```
+
+##### Keyword Arguments
+
+| name | description |
+| ---- | ----------- |
+| name | The network-interface where the source NAT rules are configured |
+| node | The node on which to run show source-nat-rules |
+| router | The router on which to run show source-nat-rules |
+
+##### Positional Arguments
+
+| name | description |
+| ---- | ----------- |
+| verbosity | detail \| summary (default: summary) |
 
 ## `show ntp`
 
@@ -9076,6 +9213,10 @@ show peers hostnames [{router <router> | resource-group <resource-group>}] [forc
 | resource-group | The name of the resource group |
 | router | The router on which to display peer hostnames (default: all) |
 
+:::note
+This command can only be run on a Conductor.
+:::
+
 #### Example
 
 ```
@@ -9349,6 +9490,12 @@ show plugins available [{name <name> | category <category>}] [node <node>]
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
 
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
+
 ## `show plugins categories`
 
 Shows all possible plugin categories.
@@ -9367,6 +9514,12 @@ show plugins categories
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
 | [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
 | [`show plugins installed`](#show-plugins-installed) | Shows installed plugins. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `show plugins installed`
 
@@ -9393,6 +9546,12 @@ show plugins installed [category <category>] [node <node>]
 | [`manage plugin remove`](#manage-plugin-remove) | Remove an installed plugin. |
 | [`show plugins available`](#show-plugins-available) | Shows latest verison of plugins available for install. |
 | [`show plugins categories`](#show-plugins-categories) | Shows all possible plugin categories. |
+
+#### Description
+
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `show plugins state`
 
@@ -10292,7 +10451,11 @@ show step-repo clients [<verbosity>]
 | ---- | ----------- |
 | verbosity | detail \| summary (default: summary) |
 
+#### Description
 
+:::note
+This command can only be run on a Conductor.
+:::
 
 ## `show system`
 
@@ -11144,6 +11307,10 @@ sync peer addresses [{router <router> | resource-group <resource-group>}] [force
 #### Description
 
 This command will force a network element (or group of network elements) to synchronize any dynamically-learned IP addresses to its conductor. (The conductor will redistribute these dynamic addresses to other members of the Authority as necessary.)
+
+:::note
+This command can only be run on a Conductor, or a Router that is managed by a Conductor.
+:::
 
 #### Example
 

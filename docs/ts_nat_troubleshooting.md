@@ -3,7 +3,7 @@ title: NAT Troubleshooting
 sidebar_label: NAT Troubleshooting
 ---
 
-A new `source-nat-rules` subcommand was added to `show network-interface` to display source NAT rules under a given network interface. A network-interface name is required and can be issued from a conductor with targeted router and node. The rules are organized in the following columns.
+Use [`show network-interface source-nat-rules`](cli_reference.md#show-network-interface-source-nat-rules) to display source NAT rules under a given network interface. A network-interface name is required and can be issued from a conductor with targeted router and node. The rules are organized in the following columns.
 
 #### Direction
 - Ingress
