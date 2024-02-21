@@ -53,7 +53,7 @@ config
 exit
 ```
 
-If support for more than 49,150 concurrent sessions per interface is needed, you can configure a [NAT Pool](config_nat_pools) or add additional `addresses` to the `network-interface`, expanding the source NAT capacity.
+If support for more than 49,150 concurrent sessions per interface is needed, you can configure a [NAT Pool](config_nat_pools.md) or add additional `addresses` to the `network-interface`, expanding the source NAT capacity.
 
 When multiple addresses are configured using `source-nat`, the next configured address is utilized **only after the first is fully exhausted**. Each configured address is used until it is exhausted.
 

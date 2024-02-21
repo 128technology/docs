@@ -72,5 +72,5 @@ Dynamic Source NAT is configured from the network-interface using the following 
 
 ### Show Commands
  
-The [`show network-interface source-nat-rules`](cli_reference.md#show-network-interface-source-nat-rules) can be run from the router or the conductor to display brief or detailed information for NAT configurations. Please see the [NAT Troubleshooting](ts_nat_troubleshooting) pages for information about the `source-nat-rules` subcommand. 
+The [`show network-interface source-nat-rules`](cli_reference.md#show-network-interface-source-nat-rules) can be run from the router or the conductor to display brief or detailed information for NAT configurations. Please see the [NAT Troubleshooting](ts_nat_troubleshooting.md) pages for information about the `source-nat-rules` subcommand. 
 
