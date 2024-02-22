@@ -85,7 +85,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-54086 Conductor memory exceeded:** In certain cases the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the `asset-connection-resiliency` feature. An update to the salt package has been made to resolve this issue.
 ------
-- **I95-54155 nodeMonitor coredump on secondary node after upgrade:** During an upgrade where `deviceType` was `LTE` the attempt to get a linux interface name (not supported) failed. This issue has been resolved by implemting a device interface type verification.
+- **I95-54155 nodeMonitor coredump on secondary node after upgrade:** During an upgrade where `deviceType` was `LTE` the attempt to get a linux interface name (not supported) failed. This issue has been resolved by implementing a device interface type verification.
 ------
 - **I95-54180 Unable to fetch reports from Conductor GUI:** A refactor moved the connectivity check exception, which prevented a service restart. This has been resolved, and the stats now being written to the database and GUI tables.
 ------
@@ -97,7 +97,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 ------
 - **I95-54340 Hub-to-spoke sessions break when failing over from outbound-only Path:** When a session modify occurs due to an ingress change (inter-node -> inter-router) AND an egress change is also detected, the incorrect security was being looked up for the old flow, causing an exception to be thrown and the modify to fail. This would present itself as dropped packets and in logs as a SecurityNotFound error. This issue has been resolved. 
 ------
-- **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH nodeIdentifier so that this is accessible for admin users.
+- **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH so that this is accessible for admin users.
 ------
 - **I95-54512 SSR130 moved into an HA cluster does not come up properly:** Resolved an issue where the generation of an improper configuration could lead to a crash loop in the NodeMonitor process.
 ------
@@ -106,7 +106,7 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 - **I95-55002 Password reset loop:** Resolved an issue that caused users created with the **Require password change on first login?** set to `yes` to get stuck in an infinite loop of password changes when logging in using the GUI.
 ------
 - **WAN-2486 SSR data reporting values that are unrealistically high:** When capturing application usage for application summary learned apps, we sometimes observe really high values for bandwidth and other metrics.
-Resolution: The high value was due to an internal corruption when the metrics for these learned applications were removed and added. During such transition we sometimes end up with memory corruption resulting in the bogus high value. The part of the solution is to ensure the transition happens more gracefully.
+Resolution: The high value was due to an internal corruption when the metrics for these learned applications were removed and added. During such transition there may be memory corruption resulting in the bogus high value. The part of the solution is to ensure the transition happens more gracefully.
 ------
 - **WAN-2547 Invalid memory access producing incorrect bandwidth values:** Implemented a resolution that identifies the invalid memory access, and drops values that are out of scope or otherwise invalid.
 
