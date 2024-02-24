@@ -2,6 +2,47 @@
 title: WAN Assurance Plugin 3.7 Release Notes
 sidebar_label: '3.7'
 ---
+## Release 3.7.7
+
+**Release Date:** TBD
+
+### Resolved Issues
+
+- **WAN-2240 WAN bandwidth graph is blank for couple minutes when user adds new WAN interfaces, oc-stats from SSR is missing some interfaces**
+
+  _**Resolution**_ The logic to include configured interfaces in the oc-stats and validating data for completeness was made more robust ensuring accurate data is sent for new config changes.
+
+- **WAN-2121 Port down events are not seen on the insights page after a cable disconnect**
+
+  _**Resolution**_ When a cable was disconnected on interface with active MIST connection, some events were getting dropped. The mechanism is now made more robust to handle the reconnect scenario more gracefully.
+
+- **WAN-2518 _internal_ network showing up on the Networks dropdown for Application Policy Insights**
+
+  _**Resolution**_ The internal network will not be included in the data reported for the feature.
+
+- **WAN-2478 Disabling WAN Assurance plugin doesn't stop mist-agent service**
+
+  _**Resolution**_ When WAN Assurance plugin is disabled on a router, all relevant services will now be stopped.
+
+- **WAN-2678 MIST onboarding on HA routers failing with mutual authentication failed error**
+
+  _**Resolution**_ The condition to check for completion of HA formation has been made more robust to avoid the authentication failure error and complete the MIST onboarding process.
+
+- **WAN-2754 No peer path up events seen for interfaces on the Insights page**
+
+  _**Resolution**_ The handling of cached peer path events has been corrected to no longer crash on the condition.
+
+- **WAN-2748 MIST org sees too many LTE ARP interface flaps**
+
+  _**Resolution**_ ARP event generation for bad LTE connections has been made more robust to prevent false positives.
+
+- **WAN-2858 LLDP client information not send when router running 6.2.3 or above**
+
+  _**Resolution**_ The logic to check for LLDP enabled now covers the new mechanism used in 6.2.3 software allowing the LLDP client information to be successfully sent to the MIST cloud.
+
+- **WAN-2861 LTE_stats received from device but missing in UI**
+
+  _**Resolution**_ LTE devices with no peer paths was incorrectly being reported as LAN interface. LTE interfaces will now always be reported as WAN interfaces.
 
 ## Release 3.7.6
 
