@@ -7,7 +7,7 @@ sidebar_label: Dynamic Source NAT
 
 Dynamic Source NAT translates multiple source IP addresses into a smaller pool of translated addresses and dynamic ports, which conserves public IP address space and provides the flexibility to source NAT a specific IP range. This supports scaling up sessions for an internal service. For example, in a corporate office with a SIP phone service where all phones have different IPs on port 5060, these internal IP addresses are source NAT’ed to a single external IP address. 
 
-Dynamic Source NAT may also provide solutions for IP address conflicts, but because it is not mapping NAT one-to-one, it is not required to facilitate the destination NAT mapping for network connections from the external client to the internal client.
+Dynamic Source NAT may also provide solutions for IP address conflicts, but the IP mapping is not one-to-one and does NOT provide destination NAT in the reverse direction. To facilitate the destination NAT mapping for network connections from the external client to the internal client, use [`bidirectional-nat`](config_static_nat.md). 
 
 Consider the following scenario, similar to the Static NAT example focusing on a company acquisition, where the `spk-lan2` network is overlapping and not routable in `Corp` and `Internet`. 
 
@@ -68,7 +68,7 @@ Dynamic Source NAT is configured from the network-interface using the following 
 [`dynamic-source-nat`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat): Defines the prefixes that need to be dynamically source natted for packets ingressing this interface. 
 
 - [`local-ip`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-local-ip): For packets ingressing this interface, the IP that is source NAT'ed to the `remote-ip`. 
-- [`remote-ip`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-remote-ip): For packets ingressing this interface, the IP where the `local-ip` will be source NAT'ed. 
+- [`remote-ip`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-dynamic-source-nat-remote-ip): For packets ingressing this interface, the IP where the `local-ip` will be source NAT'ed. `remote-ip` must use the /32 prefix.
 
 ### Show Commands
  

@@ -1,6 +1,6 @@
 ---
-title: Static NAT
-sidebar_label: Static NAT
+title: Static Bi-directional NAT
+sidebar_label: Static Bi-directional NAT
 ---
 
 SSR supports source NAT pool configurations at interface and service-route level as described in [Static NAT Bindings](config_nat_pools.md#static-nat-bindings). However, this is not always sufficient to enable simple configuration for static bidirectional NAT between two same-sized subnets.
@@ -48,7 +48,11 @@ exit
 
 ### Non-SVR Traffic
 
-In order for non-SVR traffic (for example, LAN-to-LAN traffic traversing a single SSR) to take advantage of static-NAT addressing, you must disable egress source-nat at the service level by setting `service > source-nat` to `disabled` as shown below. 
+In order for non-SVR traffic (for example, LAN-to-LAN traffic traversing a single SSR) to take advantage of static-NAT addressing, you must disable egress source-nat. This is done in the following locations within the configuration
+
+#### Service Level
+
+Disable `egress source-nat` at the service level by setting `service > source-nat` to `disabled` as shown below. 
 
 ```
 authority
@@ -66,6 +70,50 @@ authority
     exit
 exit
 ```
+
+##### Network Interface Level
+
+Disable `egress source-nat` at the network-interface level by setting `network-interface > source-nat` to `false` and not configuring `network-interface > egress-source-nat-pool`.
+
+```
+authority
+    router SSR-router
+        name SSR-router
+        node SSR-node
+            name SSR-node
+            device-interface egress-LAN
+                name egress-LAN
+                network-interface egress-LAN
+                    name egress-LAN
+                    source-nat false
+                    egress-source-nat-pool <DON'T CONFIGURE>
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
+#### Service Route Level
+
+Disable `egress source-nat` at the service-route level by **not** configuring `service-route > next-hop > source-nat-pool`.
+
+```
+authority
+    router SSR
+        service-route LAN-to-LAN-route
+            name LAN-to-LAN-route
+            service-name LAN-to-LAN
+            next-hop node egress-LAN
+                node-name SSR-node
+                interface egress-LAN
+                source-nat-pool <DON'T CONFIGURE>
+            exit
+        exit
+    exit
+exit
+```
+
 
 ### Using the GUI
 
