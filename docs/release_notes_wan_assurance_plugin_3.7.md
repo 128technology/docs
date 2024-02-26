@@ -8,41 +8,41 @@ sidebar_label: '3.7'
 
 ### Resolved Issues
 
-- **WAN-2240 WAN bandwidth graph is blank for couple minutes when user adds new WAN interfaces, oc-stats from SSR is missing some interfaces**
+- **WAN-2240 WAN bandwidth graph is blank after the user adds new WAN interfaces: oc-stats from the SSR is missing some interfaces**
 
-  _**Resolution**_ The logic to include configured interfaces in the oc-stats and validating data for completeness was made more robust ensuring accurate data is sent for new config changes.
+  _**Resolution**_ The logic to include configured interfaces in the `oc-stats` and validating data for completeness is more robust, ensuring that accurate data is sent for new configuration changes.
 
-- **WAN-2121 Port down events are not seen on the insights page after a cable disconnect**
+- **WAN-2121 Port down events are not seen on the Insights page after a cable disconnect**
 
-  _**Resolution**_ When a cable was disconnected on interface with active MIST connection, some events were getting dropped. The mechanism is now made more robust to handle the reconnect scenario more gracefully.
+  _**Resolution**_ When a cable was disconnected on an interface with an active MIST connection, some events were getting dropped. The mechanism is now more robust and handles the reconnect scenario more gracefully.
 
 - **WAN-2518 _internal_ network showing up on the Networks dropdown for Application Policy Insights**
 
   _**Resolution**_ The internal network will not be included in the data reported for the feature.
 
-- **WAN-2478 Disabling WAN Assurance plugin doesn't stop mist-agent service**
+- **WAN-2478 Disabling WAN Assurance plugin does not stop the mist-agent service**
 
-  _**Resolution**_ When WAN Assurance plugin is disabled on a router, all relevant services will now be stopped.
+  _**Resolution**_ When the WAN Assurance plugin is disabled on a router, all relevant services are now stopped.
 
-- **WAN-2678 MIST onboarding on HA routers failing with mutual authentication failed error**
+- **WAN-2678 MIST onboarding for HA routers fails with a `mutual authentication failed` error**
 
-  _**Resolution**_ The condition to check for completion of HA formation has been made more robust to avoid the authentication failure error and complete the MIST onboarding process.
+  _**Resolution**_ The condition that checks for the completeness of the HA configuration has been made more robust, preventing an authentication failure error. This allows the completion of the MIST onboarding process.
 
 - **WAN-2754 No peer path up events seen for interfaces on the Insights page**
 
-  _**Resolution**_ The handling of cached peer path events has been corrected to no longer crash on the condition.
+  _**Resolution**_ The handling of cached peer path events has been corrected to no longer crash.
 
 - **WAN-2748 MIST org sees too many LTE ARP interface flaps**
 
   _**Resolution**_ ARP event generation for bad LTE connections has been made more robust to prevent false positives.
 
-- **WAN-2858 LLDP client information not send when router running 6.2.3 or above**
+- **WAN-2858 LLDP client information not send for routers running version 6.2.3 software**
 
-  _**Resolution**_ The logic to check for LLDP enabled now covers the new mechanism used in 6.2.3 software allowing the LLDP client information to be successfully sent to the MIST cloud.
+  _**Resolution**_ The logic to check for `LLDP enabled` now covers the new mechanism used in 6.2.3 software allowing the LLDP client information to be successfully sent to the MIST cloud.
 
-- **WAN-2861 LTE_stats received from device but missing in UI**
+- **WAN-2861 LTE_stats are received from the device but are missing in the GUI**
 
-  _**Resolution**_ LTE devices with no peer paths was incorrectly being reported as LAN interface. LTE interfaces will now always be reported as WAN interfaces.
+  _**Resolution**_ LTE devices with no peer paths were incorrectly being reported as a LAN interface. LTE interfaces will now always be reported as WAN interfaces.
 
 ## Release 3.7.6
 
