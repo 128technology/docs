@@ -24,3 +24,32 @@ Additionally, there are several checks that can be performed to ensure that the 
 - Compare the carrier tracking number of the Juniper Networks order number listed in the Juniper Networks shipping notification with the tracking number on the package received.
 - Log on to the Juniper Networks online customer support portal at https://support.juniper.net/support to view the order status. 
 - Compare the carrier tracking number or the Juniper Networks order number listed in the Juniper Networks shipment notification with the tracking number on the package received.
+
+### Software Verification
+
+Post-software image installation integrity scanning of all installed binaries has been implemented per Common Criteria requirements. After the installation has completed, run the `systemctl start 128T-rpm-verify` as `root` from the linux shell. 
+
+The self-test scan is intiated and takes approximately two minutes to complete. Upon completion, run: 
+
+`systemctl status 128T-rpm-verify` 
+
+Successful completion displays the following message:
+
+`PASS: All RPM file digests verified`
+
+**Use the `show system version detail` command to view the associated verification details.**
+
+If the result displays the following:
+
+`FAIL: RPM file digest mismatch detected`
+
+The failure must be resolved before continuing to ensure compliance. 
+
+### How?
+
+
+After the self-test scan test has succeed, enable the automatic self-test by executing the `enable` command in the linux shell:
+
+`systemctl enable 128T-rpm-verify`
+
+This enables the self-test on every subsequent reboot. If the self-test fails, the 128T service will not start.

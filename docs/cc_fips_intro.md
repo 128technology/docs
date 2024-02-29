@@ -32,11 +32,11 @@ The SSR implements all the security functions of a network device, as well as a 
 
 ### Additional Software Details
 
-The SSR runs OpenSSL version 1.0.2zl and OpenSSL version 1.0.2k. The two OpenSSL libraries are used for a different implementation of OpenSSH. 
+The SSR runs OpenSSL version 1.0.2zi and OpenSSL version 1.0.2k. The two OpenSSL libraries are used for a different implementation of OpenSSH. 
 
 - Remote Administration is implemented using SSH on Port 22 using OpenSSH v7.4, which includes OpenSSL v1.0.2k. 
 
-- Communication between the Conductor and Routers is done using SSH over Port 930 and is implemented with OpenSSH v7.8 which includes OpenSSL v1.0.2zl. 
+- Communication between the Conductor and Routers is done using SSH over Port 930 and is implemented with OpenSSH v7.8 which includes OpenSSL v1.0.2zi. 
 
 All implementations of cryptographic algorithms are certified under the Cryptographic Algorithm Validation Program (CAVP).
 

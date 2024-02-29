@@ -13,14 +13,14 @@ The Conductor installation must be completed before installing a Session Smart R
 
 - Installation is performed on a compliant platform; see [Compliant SSR Hardware](cc_fips_compliance_guidelines.md#compliant-ssr-hardware). 
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
-- Local console connectivity to the device/VM. 
+- Local console connectivity to the device. 
 - **The SSH Root login is not permitted.** When a system is installed using the OTP ISO, a "t128" user is configured with sudo privileges. 
 
 ## Installation
 
 ### Connect the SSR to a Management Console
 
-Ensure that you have an appropriate rollover cable available to connect to you computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
+Ensure that you have an appropriate rollover cable available to connect to your computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
 
 1. Connect the RJ45 rollover cable to the console port on the SSR device.
 2. Connect the other end of the cable to your computer.
@@ -78,7 +78,7 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
   ![FIPS Parameter](/img/cc_fips_serial_install2.png)
 
-4. Press **Enter** to start the install. 
+4. Press **Enter** to start the installation. 
 
 After the Linux installation completes, the SSR software installation begins. Note that this may take several minutes to complete (up to 40 minutes). After the process has completed, the following screen is displayed:
 

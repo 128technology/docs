@@ -23,7 +23,7 @@ The SSR Software packages are available from our servers using the username and 
 <!-- markdown-link-check-disable-next-line -->
 - https://software.128technology.com/artifactory/list/generic-128t-isos-release-local
 
-You will be prompted for your username and token to access the web page listing the software versions, and will be able to download directly from the page.
+You will be prompted for your username and token to access the web page listing the software versions and will be able to download directly from the page.
 
 Files available for download are:
 

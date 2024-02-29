@@ -17,7 +17,7 @@ The Conductor installation must be completed before installing a Session Smart R
     - SSR 120, SSR 130
     - SSR 1200, SSR 1300, SSR 1400, SSR 1500
 - Verify that the boot priority of the USB drive is properly listed in the system BIOS.
-- Local console connectivity to the device/VM. 
+- Local console connectivity to the device. 
 
 ## Installation
 

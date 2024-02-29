@@ -50,7 +50,7 @@ The following functionality and platforms **are not certified** under Common Cri
 - Juniper SSR Software for virtual platforms.
 - SSR Graphical User Interface (GUI) 
 - Juniper MIST
-- HTTPS/TLS, IPSec, SNMP, RADIUS, LDAP
+- HTTPS/TLS, IPSec, SNMP, RADIUS, LDAP, syslog/TLS
 - X.509 certificate management, validation or verification
 - Virtual Private Network (VPN) and Intrusion Prevention System (IPS) functions
 - SSR Plugins, particularly Wireguard, are excluded from Common Criteria certification 
@@ -60,4 +60,8 @@ The SSR Hardware has no physical restrictions for Common Criteria certification,
 ### Additional Information Related to Common Criteria
 
 Common Criteria certification uses FIPS mode to provide cryptopgraphic support. Without FIPS mode enabled during installation, the SSR is not compliant. FIPS mode provides all secure cyphers, and therefore **no additional cryptographic keys are used**. 
+
+:::important
+The use of non-evaluated cryptographic engines or use without FIPS mode enabled does not conform to the Common Criteria compliance guidelines and is not certified.
+::: 
 

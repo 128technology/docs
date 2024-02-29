@@ -10,13 +10,13 @@ The SSR provides an audit function to gather a rich set of detailed audit record
 
 ## Cryptography
 
-The SSR implements cryptographic functions allowing secure communication with external devices and other instances of the SSR. The SSR implements a random bit generator to generate cryptographic keys, key agreement mechanisms, public key cryptographic functions, symmetric cryptographic functions, secure hash functions, and keyed hash-based MAC functions providing protection of data and communication. Cryptographic keys and Critical Security Parameters (CSP) are destroyed by the SSR when no longer required.
+The SSR implements cryptographic functions allowing secure communication with external devices. The SSR implements a random bit generator to generate cryptographic keys, key agreement mechanisms, public key cryptographic functions, symmetric cryptographic functions, secure hash functions, and keyed hash-based MAC functions providing protection of data and communication. Cryptographic keys and Critical Security Parameters (CSP) are destroyed by the SSR when no longer required.
 
 All cryptographic algorithms are validated through the Cryptographic Algorithm Validation Program (CAVP) to ensure correct functioning.
 
 ## SSH 
 
-The SSR implements an SSH Client and an SSH Server for secure communication between the SSR, external devices (such as an audit server or remote management device), and other instances of an SSR. Communication between the SSR and external devices uses Port 22. When communication is between two SSRs, Port 930 is used. The SSR implements public-key based authentication between itself and other devices, including other instances of the SSR. The public keys are stored in key containers. The SSR does not implement X.509 certificate-based authentication mechanisms. Once the SSH connection between the SSR and a remote management device is established, the user is authenticated with a username and password. 
+The SSR implements an SSH Client and an SSH Server for secure communication between the SSR and external devices such as an audit server or remote management device. Communication between the SSR and external devices uses Port 22. The SSR implements public-key based authentication between itself and other devices. The public keys are stored in key containers. The SSR does not implement X.509 certificate-based authentication mechanisms. Once the SSH connection between the SSR and a remote management device is established, the user is authenticated with a username and password. 
 
 The Command Line Interface (CLI) is used for the management of the SSR. The CLI may be accessed by successfully authenticated Administrators locally from console, or remotely over SSH. Once authenticated, the Administrator uses the Conductor to manage one or more SSRs (routers). Management communication is also protected by SSH.
 
