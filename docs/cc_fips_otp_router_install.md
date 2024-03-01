@@ -29,7 +29,7 @@ Before beginning the Router installation, you must have a Conductor operationall
 
 ### Connect the SSR to a Management Console
 
-Ensure that you have an appropriate rollover cable available to connect to you computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
+Ensure that you have an appropriate rollover cable available to connect to your computer. The SSR has a console port (CONSOLE) with an RJ-45 connector. Use the console port to connect the appliance to a management console or to a console server. The default baud rate of the console port is 115200 bps.
 
 1. Connect the RJ45 rollover cable to the console port on the SSR device.
 2. Connect the other end of the cable to your computer.
@@ -100,7 +100,26 @@ Upon boot, the following screen is displayed. The default selection is booting t
 
 This installation process is an automated workflow which does not require user interaction after selecting and initiating the OTP menu option. The system will power off after installation.
 
-### Change the Default Passwords after Installation
+### Root Access
+To permit root access to the SSR system, ensure that there is at least one user configured on each system with super user (sudo) privileges. Failure to do so may result in the loss of management connectivity to the router. 
+**SSH Root login is not permitted.**
+
+Prerequisites for installation and upgrades now include configuring a super user in /etc/sudoers that is allowed to execute Linux shell commands as root (sudo privileges).
+During an upgrade, if the existing version allows SSH Root login, it will be disabled. When a system is installed using the OTP ISO, a "t128" user is automatically configured with sudo privileges. 
+
+1. Login using the admin credentials. 
+2. Enter the Linux shell: Type `shell` to suspend the PCLI and enter the Linux shell. 
+3. Type `su` and enter the default root password. 
+4. Use the following command to grant sudo privilege to the `admin` user account: 
+ `/usr/sbin/visudo` 
+5. Add an entry for admin as follows: 
+ ```
+ admin    ALL=(ALL)      ALL
+ ```
+6. Save the file and exit from `visudo`.
+7. Type `exit` to leave the `su` prompt. 
+
+### Change the Default Passwords
 
 The following user accounts and passwords are created during the ISO installation process:
 
@@ -109,31 +128,116 @@ The following user accounts and passwords are created during the ISO installatio
 | root     | 128tRoutes |
 | t128     | 128tRoutes |
 
-Change these passwords immediately. Power on the SSR and login to the router. Use the `passwd` command from the Linux shell.
+Change these passwords immediately. Use the `passwd` command from the Linux shell to individually set the password for each username. 
 
 ```
-[t128@test-router ~]$ passwd
+[admin@localhost ~]$ sudo passwd t128
 Changing password for user t128
-Changing password for t128
-(current)UNIX password:
 New password:
 Retype new password: 
 passwd: all authentication tokens updated successfully.
-[t128@test-router ~]$ su - 
-Password:
-[root@test-router ~]# passwd
+[admin@localhost ~]$ sudo passwd root 
 Changing password for user root.
 New password:
 Retype new password: 
 passwd: all authentication tokens updated successfully.
-[root@test-router ~]#
+[admin@localhost ~]$
 ```
+
+:::note
+The root account will not be used for day-to-day access, but the root account password should be stored securely off-box so that it can be used for admin account recovery if required. 
+:::
+
+### Software Compliance Validation
+
+After installing the SSR Software it is important to verify that the installation was completed successfully, and that the system is running in the FIPS enforcing mode required for Common Criteria compliance. After starting the SSR router or conductor, the login screen appears on the console. 
+Alternatively you may ssh to the SSR management IP address using the admin account. 
+
+1. Login using the admin credentials. 
+2. Use `show system version`  to verify the correct software release is running: 
+
+```
+Last login: Thu Dec 14 13:28:36 UTC 2023 on pts/0
+admin@conductor.conductor# show system version
+Fri 2024-03-01 16:23:37 UTC
+✔ Retrieving system version 1/1 targets complete...
+
+=========== =========== ========= ======== ====================== =====================
+ Router      Node        Version   Status   Build Date             Package
+=========== =========== ========= ======== ====================== =====================
+ 128t-east   128t-east   6.2.3     r2       2023-12-11T16:51:25Z   128T-6.2.3-14.r2.el
+                                                                   7 (package based)
+
+Completed in 0.05 seconds
+admin@conductor.conductor#
+```
+ It should report Version 6.2.3 and Status r2.
+ 
+3. Type `shell` to suspend the PCLI and enter the Linux shell. 
+4. Execute the command `sudo systemctl status 128T` and verify the service is listed as `active (running)`.
+
+```
+[root@conductor-test admin]# sudo systemctl status 128T -l
+ 128T.service - 128T service
+  Loaded: loaded (usr/lib/systemd/system/128T.service; enabled; vendor preset: disabled)
+  Active: active (running) since Mon 2023-7-31 18:04:29 UTC; 50min ago
+ Main PID: 23317 (processManager)
+```
+ 
+5. Perform the following steps to verify the software integrity and protect against future tampering: 
+ 
+- `sudo systemctl start 128T-rpm-verify` 
+ 
+- The self-test scan is intiated and takes approximately two minutes to complete. Upon completion, run: 
+
+ `systemctl status 128T-rpm-verify` 
+
+ Successful completion displays the following message:
+
+ `PASS: All RPM file digests verified`
+ 
+- If the result displays the following:
+
+ `FAIL: RPM file digest mismatch detected`
+
+ The failure must be resolved before continuing to ensure compliance. The full path to each file having a self-check digest mismatch is reported as part of the `status` output. 
+ 
+- After the self-test scan test has succeed, enable the automatic self-test by executing the `enable` command in the linux shell:
+
+ `systemctl enable 128T-rpm-verify`
+
+ The self-test is enabled on every subsequent reboot. If the self-test fails, the 128T service will not start.  
+ 
+6. Perform the following steps to verify that FIPS security enforcment mode is enabled in the OS:
+ `openssl md5 /dev/null` 
+ Expected result:  `digital envelope routines … Disabled for fips` 
+
+7. Run the following command to verify that FIPS security enforcing mode is enabled in the kernel: 
+ `cat /proc/sys/crypto/fips_enabled` 
+ Expected result:  `1`  
+
+8. Type `exit` to leave the Linux shell and return to the PCLI. 
+9. Type `quit` to log out from PCLI. 
+
+You have now completed security validation of the installation. 
 
 ### PCLI Access Post Install
 
 Use the following procedure to access the PCLI at any time after installation. 
 
-1. Open a terminal window and ssh to the conductor's IP address. 
-2. Use your login credentials to log in to the conductor, and run the `pcli` command to start the SSR PCLI. 
+1. Open a terminal window and SSH to the SSR's IP address. 
+2. Use your login credentials to log in to the SSR 
+ 
+ - If using an account other than admin, type `pcli` to start the SSR PCLI. 
 
-Common Criteria certification does not require any restrictions on executing commands. See the [Configuration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage.
+ - Type `shell` to suspend the PCLI and enter the Linux shell.  
+
+To terminate an active session: 
+
+- Type `exit` to return from the Linux shell to the PCLI. 
+
+- Type `quit` to log out from PCLI.
+
+- If using an account other than admin, type `exit` to end the login session. 
+
+Common Criteria certiﬁcation does not require any restrictions on executing commands. See the [Conﬁguration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage. 

@@ -31,11 +31,11 @@ module.exports = {
       "cc_fips_router_install",
       "cc_fips_access_mgmt",
       "cc_fips_config_ntp_auth",
-      "cc_fips_config_ssr_ntp_server",
       "cc_fips_config_password_policies",
       "cc_fips_config_audit_event",
       "cc_fips_sec_firewall_filtering",
       "cc_fips_banners",
+      "cc_fips_software_upgrades",
       "cc_fips_appendix",
     ],
     "Installation Process": [

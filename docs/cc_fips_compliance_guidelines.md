@@ -44,7 +44,7 @@ The following table provides a complete list of compliant hardware.
 
 The following functionality and platforms **are not certified** under Common Criteria.
 
-- SSR Software versions prior to V6.2.3-14R2 are not supported, and do not have the functionality required for compliance. 
+- SSR Software versions other than V6.2.3-14R2. 
 - Non-Juniper branded hardware platforms running SSR Software
 - Juniper branded hardware platforms not explicitly included
 - Juniper SSR Software for virtual platforms.

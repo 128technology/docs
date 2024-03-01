@@ -6,10 +6,10 @@ sidebar_label: Secure Installation Overview
 Welcome to Session Smart Routing - the first software-based routing solution designed to be both session-oriented and service-centric through the application of Secure Vector Routing. The purpose of this guide is to provide an overview and installation walkthrough for the SSR Router and Conductor products into a Linux operating system environment. This product suite is collectively known as SSR Software.
 
 ## Before You Begin
-Before you begin the installation and configuration of an SSR Networking Plaform, you must:
+Before you begin the installation and configuration of an SSR Networking Platform, you must:
 - Be familiar with Linux fundamentals, basic network addressing, and IP networking terminology. 
 - Be a system administrator to perform the installation and configuration.
-- Have an entry in /etc/sudoers allowing you to execute Linux shell commands as root (via sudo). Failure to do so may result in the loss of remote management connectivity to the router. 
+- Have an entry in `/etc/sudoers` allowing you to execute Linux shell commands as root (via sudo). Failure to do so may result in the loss of remote management connectivity to the router. 
 
 :::note
 The examples listed in this guide generally run commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 

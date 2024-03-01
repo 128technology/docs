@@ -2,7 +2,7 @@
 title: Configuring Audit Events and Logging
 sidebar_label: Audit Events and Logging
 ---
-The Session Smart Router can be configured to maintain a history of several different class of events in its *event log* , which can subsequently be used to support compliance audits, forensics on network issues related to configuration (misapplied or otherwise), and traceability. This document covers:
+The Session Smart Router can be configured to maintain a history of several different class of events in the *event log* , which can subsequently be used to support compliance audits, forensics on network issues related to configuration (misapplied or otherwise), and traceability. This document covers:
 - Types of events available on the router
 - Enabling the Audit events
 
@@ -153,68 +153,28 @@ config
     exit
 exit
 ```
-### Secure Syslog Transport
+### Syslog Transport
 
-The SSR can be configured to send system generated events over a secure TLS or TCP connection to a remote-logging server for analysis and storage. The current default is a UDP connection.
+The SSR can be configured to send system generated events over a TCP connection to a remote-logging server for analysis and storage. The current default is a UDP connection.
 
-A new configuration element, `protocol`, has been added to the syslog configuration under `authority/router/system` to configure the protocol that the SSR uses to open communication with the syslog server. 
+Use the `protocol` arguement to configure TCP as the protocol the SSR uses to open communication with the syslog server. 
 
-#### Certificates
-
-Use `config authority` to configure a certificate for use when opening the TLS connection, and to encrypt packets sent to the syslog server.
-
-- Configure a Trusted CA Certificate on the SSR 
-
-Copy the content of the trusted CA certificate into the configuration.
-```
-    admin@test1.Fabric128 (trusted-ca-certificate[name=server-ca])# show
-        name     server-ca
-        content  (text/plain) <-- contents of the server certificate.
-```
-
-- Configure a Client Certificate on the SSR
-
-Copy the content of the client certificate into the configuration.
-```
-    admin@test1.Fabric128 (client-certificate[name=ABC])# show
-        name     ABC
-        content  (text/plain) <---- contents of the client certificate.
-```
-See [Adding a Trusted Certificate](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/howto_trusted_ca_certificate) for more information.
-
-#### TLS and TCP Transport
-
-To provide secure transport for the system generated events, the SSR can be configured to use TLS to open an encrypted communication channel with the syslog server.
-
-```
-    admin@test1.Fabric128 (syslog)# show
-        severity        info
-        facility        any
-        protocol        tls
-        client-certificate-name  ABC <-- client certificate already configured under authority/client-certificate
-
-        server          172.18.2.183 514
-            ip-address  172.18.2.183
-            port        514
-    exit
-```
-
-##### TCP Transport
+#### TCP Transport
 
 Configure the SSR to use TCP for transport to syslog server.
 
-:::important
-Although using TCP guarantees events are transmitted to the destination syslog server, it is not considered secure because TCP without TLS transmits data in clear text.
-:::
-
 ```
-    admin@test1.Fabric128 (syslog)# show
-        severity        info
-        facility        any
-        protocol        tcp
-
-        server          172.18.2.183 514
-            ip-address  172.18.2.183
-            port        514
+config
+    authority
+        router  Fabric128
+            name    Fabric128
+            system
+                syslog
+                    protocol        tcp
+                    exit
+                exit
+            exit
+        exit
     exit
+exit
 ```

@@ -9,15 +9,16 @@ Supported Software version:
 - Version 6.2.3-14-R2
 - Release Date: March 15, 2024
 
-Supported Hardware (must be upgraded to run Software version 6.2.3-14-R2):
+Supported Hardware (must have Software Version 6.2.3-14-R2 installed):
 - SSR 120, SSR 130
 - SSR 1200, SSR 1300, SSR 1400, SSR 1500
 
 #### Revision History
 
-All revisions to this documentation set are recorded below.
+This Common Criteria document is maintained separately from the SSR documentation. All revisions to this documentation set are recorded below.
 
-| Software Release | Modification | Date |
+| Document Revision | Modification | Date |
 | --- | --- | --- |
-| 6.2.3-R2 | Documentation Created for Common Criteria | December 31, 2023 |
-| Doc Version 0.2 | Revision with Teron Feedback | February 15, 2024 |
+| 0.1 | Initial version for 6.2.3-R2 Common Criteria | December 31, 2023 |
+| 0.2 | Revision with Teron feedback EFT-T036-EOR-AGD 1.0 | February 15, 2024 |
+| 0.3 | Updated with Teron feedback EFT-T036-EOR-AGD 1.1 | February 29, 2024 |

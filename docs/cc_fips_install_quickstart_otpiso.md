@@ -7,7 +7,7 @@ Use this procedure to set up a typical standalone branch router leveraging the Q
 
 ### SSR Configuration
 
-The SSR router will need to be provisioned on the conductor.  This procedure presumes you are familiar with the [concepts](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_glossary) and [configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_basics) of the SSR platform.
+The SSR router will need to be provisioned on the conductor. This procedure assumes you are familiar with the [concepts](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/concepts_glossary) and [configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_basics) of the SSR platform.
 
 When a router configuration has been added to the conductor, but the device has not yet connected, in place of device-specific information, QuickStart instructions will be displayed.
 
@@ -59,4 +59,4 @@ The SSR router will have connected to the conductor.  The Router page that was p
 
 ![QuickStart Verification](/img/intro_ztp_quickstart_verification.png)
 
-Congratulations, you have setup your SSR router. Use the [OTP Router Installation](cc_fips_router_install.md#otp-router-installation) procedure to complete the OTP Quickstart process.
+Congratulations, you have setup your SSR router. 

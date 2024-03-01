@@ -157,7 +157,7 @@ The SSR provides the ability to configure a limit to these half-open TCP connect
 
 The connection limit is configured at the router level (Authority > Router), and is unlimited by default. To set a limit, enter a numerical value in the `Half-Open Connection Limit` field in the Router Basic Information panel. When configured, the SSR tracks how many half-open sessions there are based on existing TCP session state **and will deny any new TCP sessions once the limit has been reached**.
 
-:::warning
+:::caution
 When the SSR approaches the configured limit of half-open TCP connections, the establishment of **healthy** TCP sessions may be significantly impacted. Please ensure that this value is set appropriately for your network. More importantly, attempt to identify the devices that are creating half-open sessions.
 :::
 

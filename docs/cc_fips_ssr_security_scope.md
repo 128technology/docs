@@ -26,9 +26,9 @@ Platform management is performed by the administrator from the PCLI on the Condu
 
 ### Identification, Authentication, and Access Management
 
-Each user is identified with a username and password, and upon successful verification of the password, a user is assigned to a role defined defined in the user configuration. Users are allowed to change their passwords within the parameters defined on the SSR. The passwords are stored in a secure file preventing unauthorized access. Passwords entered remotely are not echoed to ensure unauthorized parties may not learn passwords of legitimate Administrators. 
+Each user is identified with a username and password, and upon successful verification of the password, a user is assigned to a role defined in the user configuration. Users are allowed to change their passwords within the parameters defined on the SSR. The passwords are stored in a secure file preventing unauthorized access. Passwords entered remotely are not echoed to ensure unauthorized parties may not learn passwords of legitimate Administrators. 
 
-Each user may terminate their own session. The SSR also maintains an inactivity timer for each user. When the administrator-defined limit is reached, the SSR terminates that session. Additionally, a counter records unsuccessful consecutive authentication attempts for local and remote users. Protective action is taken when the defined maximum value is exceeded. Authentication window can be configured to display a banner informing the users of the sensitive nature of the SSR, and of the sanctions resulting from misuse or abuse of the SSR.
+Each user may terminate their own session. The SSR also maintains an inactivity timer for each user. When the administrator-defined limit is reached, the SSR terminates that session. Additionally, a counter records unsuccessful consecutive authentication attempts for local and remote users. Protective action is taken when the defined maximum value is exceeded. The Authentication window can be configured to display a banner informing the users of the sensitive nature of the SSR, and of the sanctions resulting from misuse or abuse of the SSR.
 
 ### SSR Protection
 
