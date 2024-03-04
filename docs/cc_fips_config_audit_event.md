@@ -157,7 +157,7 @@ exit
 
 The SSR can be configured to send system generated events over a TCP connection to a remote-logging server for analysis and storage. The current default is a UDP connection.
 
-Use the `protocol` arguement to configure TCP as the protocol the SSR uses to open communication with the syslog server. 
+Use the `protocol` argument to configure TCP as the protocol the SSR uses to open communication with the syslog server. 
 
 #### TCP Transport
 

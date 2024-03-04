@@ -104,8 +104,7 @@ The `config import` functionality has the following constraints:
 
 ## Software Compliance Validation
 
-After installing the SSR Software it is important to verify that the installation was completed successfully, and that the system is running in the FIPS enforcing mode required for Common Criteria compliance. After starting the SSR router or conductor, the login screen appears on the console. 
-Alternatively you may ssh to the SSR management IP address using the admin account. 
+After installing the SSR Software, it is important to verify that the installation successfully  completed and that the system is running in the FIPS enforcememt mode required for Common Criteria compliance. After starting the SSR router or conductor, the login screen appears on the console. Alternatively you may `ssh` to the SSR management IP address using the admin account. 
 
 1. Login using the admin credentials. 
 2. Use `show system version`  to verify the correct software release is running: 
@@ -140,13 +139,15 @@ admin@conductor.conductor#
  
 5. Perform the following steps to verify the software integrity and protect against future tampering: 
  
-- `sudo systemctl start 128T-rpm-verify` 
+- Execute the self-test scan `sudo systemctl start 128T-rpm-verify` 
  
-- The self-test scan is intiated and takes approximately two minutes to complete. Upon completion, run: 
+ The self-test scan is intiated and takes approximately two minutes to complete. Upon completion, run: 
 
  `systemctl status 128T-rpm-verify` 
 
- Successful completion displays the following message:
+ The scan validates all executable files on the system against the `sha256` digest hash recorded in the signed RPMs from which they were installed. This ensures that no files have been replaced or tampered with. 
+
+- Run `systemctl status 128T-rpm-verify` to confirm that the service shows:
 
  `PASS: All RPM file digests verified`
  
@@ -158,7 +159,7 @@ admin@conductor.conductor#
  
 - After the self-test scan test has succeed, enable the automatic self-test by executing the `enable` command in the linux shell:
 
- `systemctl enable 128T-rpm-verify`
+ `sudo systemctl enable 128T-rpm-verify`
 
  The self-test is enabled on every subsequent reboot. If the self-test fails, the 128T service will not start.  
  

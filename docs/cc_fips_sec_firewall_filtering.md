@@ -5,7 +5,11 @@ sidebar_label: Customizable Firewall Rules and Filters
 
 As part of the security hardening and certification process, the SSR has implemented the following firewall features to provide a more secure platform for network traffic.  
 
-The SSR implements a stateful packet filtering firewall which allows you to define rules for filtering traffic. The rules may be defined for IPv4, IPv6, ICMP, TCP and UDP traffic. Only traffic explicitly identified in the traffic filtering rules as allowed is forwarded by the SSR. All other traffic is dropped. Firewall rules may be applied to each network interface separately, and the order of the rules is defined by the user. The TOE traverses the rule base for each network connection and implements the first rule that matches the traffic. The SSR inspects each packet independently, and no residual information for previously inspected packets influences the inspection.
+The SSR implements a packet filtering firewall which allows you to define rules for filtering traffic. The rules may be defined for specific traffic or all  traffic. 
+
+When Firewall filtering rules are defined, only the traffic identified in the traffic filtering rules is filtered. All other traffic is allowed. If no firewall rules are configured, traffic flows normally subject to the SSR configuration. 
+
+Firewall rules may be applied to each network interface separately, and are applied in the order defined by the user. The SSR follows the rule base for each network connection and implements the first rule that matches the traffic. The SSR inspects each packet independently, and no residual information for previously inspected packets influences the inspection.
 
 ## Packet Filtering
 
@@ -173,9 +177,9 @@ An awareness of these two values (half-open limit and TCP session timer) may mit
 imit 100000
 ```
 
-## Correlating Interfaces in Audit Events
+## Firewall Audit Events
 
-To correlate an interface with an audit event, the internal ID of the interface is visible in the `show device-interface` command.
+To correlate an interface with a firewall audit event, use the internal ID of the interface, which is visible in the `show device-interface` command.
 
 ```
 admin@test1.Fabric128# show device-interface
@@ -209,9 +213,13 @@ Fri 2023-10-27 10:06:30 EDT
 
 ```
 
-Use this information to match an interface ID for an audit log using the `show events` command.
+Using the `show events` command and the interface ID, the `traffic.denied` firewall audit event is displayed. **(please verify the command context)**
 
 ```
+admin@test1.Fabric128# show events interface id 1 type traffic.denied
+Fri 2023-10-27 10:06:55 EDT
+✔ Retrieving event information...
+
 ==================================================================
  2023-10-27T02:56:51.513Z Traffic request violates access policy.
 ==================================================================
@@ -228,6 +236,47 @@ Use this information to match an interface ID for an audit log using the `show e
 
 ```
 
+The `traffic.denied` event is the single type of firewall audit event. The **variable fields** will display relevant information about the event. Using this event as an example for all audit events, we can see the variable information:
+
+```
+==================================================================
+ 2023-10-27T02:56:51.513Z Traffic request violates access policy.
+==================================================================
+
+
+
+ Destination Address:  172.16.2.201
+ Destination Port:     443
+ Ingress Interface:    1.0
+ IP Protocol:          udp
+
+ Source Address:       172.16.1.201
+ Source Port:          10000
+```
+
+This information is different for each audit event.
+
+The static information is shown below:
+
+```
+==================================================================
+ 2023-10-27T02:56:51.513Z Traffic request violates access policy.
+==================================================================
+ Type:               traffic.denied
+ Node:               test1
+ Denied Reason:      access
+
+ Permitted:          False
+```
+
+### Discarded Traffic
+
+When firewall filtering is enabled, and rules are configured, any traffic that does not match the configured policies will be discarded/dropped. Additionally, any traffic meeting the following conditions will be discarded:
+
+- Any malformed packets.
+- If the source address of the network packet is defined as being on a broadcast network.
+- If the source address of the network packet is defined as being on a multicast network.
+- Any packets with the following IP options: Loose Source Routing, Strict Source Routing, or Record Route.
 
 
 

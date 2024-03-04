@@ -20,7 +20,7 @@ The family of Juniper SSR appliances consists of the Session Smart Networking so
 
 The software is Juniper SSR software v6.2.3-14R2. The software is deployed in an ISO package file, which includes Enterprise Linux 7.9 with kernel version 4.18.0.
 
-The SSR security guidance documentation (this guide, the SSR Common Criteria Installation and User Guide V1.0) is delivered to all users. To achieve Common Criteria compliance, the SSR network must at all times be deployed and operated in accordance with this document. The SSR Common Criteria Installation and User Guide V1.0 is a Common Criteria Guidance Supplement which extends the existing manuals and other product documentation. The SSR Common Criteria Installation and User Guide applies to the above listed hardware. 
+The SSR security guidance documentation (this guide, the SSR Common Criteria Installation and User Guide V1.0) is delivered to all users. To achieve Common Criteria compliance, the SSR must at all times be deployed and operated in accordance with this document. The SSR Common Criteria Installation and User Guide V1.0 is a Common Criteria Guidance Supplement which extends the existing manuals and other product documentation. The SSR Common Criteria Installation and User Guide applies to the above listed hardware. 
 
 SSR devices are provisioned and configured by the user as a Session Smart Router (SSR) or into a Session Smart Conductor (Conductor). The Router implements the data plane and control plane functions and performs most functions. The Conductor implements a centralized management and policy engine allowing provisioning and management of several Routers. A Conductor also acts as an information aggregation repository. 
 
@@ -39,7 +39,7 @@ Each SSR has multiple network interfaces.
 
 A non-forwarding interface is always serviced by the Linux network stack. It is used for management purposes such as configuration, command, and control only. Forwarding interfaces carry SVR traffic between external networks.
 
-Although the SSR software permits forwarding interfaces to also be configured for management access, these *management over forwarding* operations are prohibited for Common Criteria deployments. SSH management connections to the SSR must only be configured for non-forwarding interfaces. Refer to the Appendix for an example where management interfaces are correctly configures as `forwarding = false`.
+Although the SSR software permits forwarding interfaces to also be configured for management access, these *management over forwarding* operations are non-compliant for Common Criteria deployments. SSH management connections to the SSR must only be configured for non-forwarding interfaces. Refer to the Appendix for an example where management interfaces are correctly configures as `forwarding = false`.
 
 For Common Criteria compliance, a dedicated, out-of-band network must be used to provide the management connection security between Conductor and Router instances. SSR software does not currently provide any evaluated security assurances for this link. This dedicated network interface must be privately routed, and must not be exposed publicly.
 

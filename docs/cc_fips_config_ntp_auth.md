@@ -1,6 +1,6 @@
 ---
 title: Configure NTP Client Authentication
-sidebar_label: Configure NTP Client NTP Authentication
+sidebar_label: Configure NTP Client Authentication
 ---
 
 Support for NTP authentication allows external NTP servers to be authenticated using a `sha1` hash, allowing the SSR to verify the identity of the server being used for NTP time synchronization.

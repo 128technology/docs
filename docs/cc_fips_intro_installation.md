@@ -9,7 +9,6 @@ Welcome to Session Smart Routing - the first software-based routing solution des
 Before you begin the installation and configuration of an SSR Networking Platform, you must:
 - Be familiar with Linux fundamentals, basic network addressing, and IP networking terminology. 
 - Be a system administrator to perform the installation and configuration.
-- Have an entry in `/etc/sudoers` allowing you to execute Linux shell commands as root (via sudo). Failure to do so may result in the loss of remote management connectivity to the router. 
 
 :::note
 The examples listed in this guide generally run commands as a non-root user, except as noted, and prepend commands that must be run as a superuser with sudo. **The SSH Root login is not permitted.** 
@@ -23,7 +22,7 @@ The SSR devices ship with an older version of SSR software that is not Common Cr
 The installation process is the only way to achieve compliant software. The upgrade process may only be used for subsequent updates after the initial installation of the SSR 6.2.3-14R2 software.
 :::
 
-Access to the SSR Software packages available for download from our software repositories is allowed using the username and token provided to you.
+Access to the SSR Software packages available for download from our software repositories is authenticated using the username and token provided to you.
 
 ## Installation Process Overview
 

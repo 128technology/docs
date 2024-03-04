@@ -24,7 +24,7 @@ For compliance, the following configuration considerations must be made:
  For information about configuration baselines, please see [Service Policy Baseline Configuration](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/bcp_service-policy_defaults).
 
 - Common Criteria Compliance assessment includes all SSR interfaces.
-- Security functionality called out in this guide is required for Common Criteria compliance. Other security features available with the SSR will not jeapordize the compliance certification, but are not compliance requirements. 
+- Security functionality called out in this guide is required for Common Criteria compliance. Other security features available with the SSR will not jeopardize the compliance certification, but are not compliance requirements. 
 - The use of SSH is necessary for installation and configuration. Use of SSH on the SSR after FIPS mode has been enabled during install is secure, and compliant with Common Criteria.   
 
 ## Compliant SSR Hardware
@@ -55,11 +55,13 @@ The following functionality and platforms **are not certified** under Common Cri
 - Virtual Private Network (VPN) and Intrusion Prevention System (IPS) functions
 - SSR Plugins, particularly Wireguard, are excluded from Common Criteria certification 
 
-The SSR Hardware has no physical restrictions for Common Criteria certification, however, there is an assumption of physical security.
+### Physical Security
+
+The SSR Hardware has no physical restrictions for Common Criteria certification, however, there is an assumption of physical security. The Administrator should ensure that physical security, commensurate with the value of the SSR and the data it contains, is provided by the environment into which SSR is deployed. 
 
 ### Additional Information Related to Common Criteria
 
-Common Criteria certification uses FIPS mode to provide cryptopgraphic support. Without FIPS mode enabled during installation, the SSR is not compliant. FIPS mode provides all secure cyphers, and therefore **no additional cryptographic keys are used**. 
+Common Criteria certification uses FIPS mode to provide cryptographic support. Without FIPS mode enabled during installation, the SSR is not compliant. FIPS mode provides all secure cyphers, and therefore **no additional cryptographic keys are used**. 
 
 :::important
 The use of non-evaluated cryptographic engines or use without FIPS mode enabled does not conform to the Common Criteria compliance guidelines and is not certified.
