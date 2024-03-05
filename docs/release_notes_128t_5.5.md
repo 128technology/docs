@@ -28,6 +28,83 @@ Before upgrading please review the [**Upgrade Considerations**](intro_upgrade_co
 The Juniper SSR team does not publicly disclose known or resolved CVEs in our public documentation but instead utilizes our internal bug tracking IDs. Customers can obtain the actual CVE numbers by contacting Juniper Support.
 :::
 
+## Release 5.5.12-9
+
+**Release Date:** February 22, 2024
+
+### Resolved Issues Requiring Configuration Changes
+
+- **I95-52406 Download MIBs from the GUI:** A button has been added to the GUI, in the Documentation pane of the About Page, to download the SNMP MIB definitions for SSR.
+
+### Resolved Issues
+
+- **The following CVE's have been identified and addressed in this release:** CVE-2022-2873, CVE-2022-41222, CVE-2022-43945, CVE-2022-4269, CVE-2022-4378, CVE-2023-0266, CVE-2023-0386, CVE-2021-26341, CVE-2021-33655, CVE-2021-33656, CVE-2022-1462, CVE-2022-1679, CVE-2022-1789, CVE-2022-20141, CVE-2022-2196, CVE-2022-25265, CVE-2022-2663, CVE-2022-3028, CVE-2022-30594, CVE-2022-3239, CVE-2022-3522, CVE-2022-3524, CVE-2022-3564, CVE-2022-3566, CVE-2022-3567, CVE-2022-3619, CVE-2022-3623, CVE-2022-3625, CVE-2022-3628, CVE-2022-3707, CVE-2022-39188, CVE-2022-39189, CVE-2022-41218, CVE-2022-4129, CVE-2022-41674, CVE-2022-42703, CVE-2022-42720, CVE-2022-42721, CVE-2022-42722, CVE-2022-43750, CVE-2022-47929, CVE-2023-0394, CVE-2023-0461, CVE-2023-1195, CVE-2023-1582, CVE-2023-23454, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-24329, CVE-2023-32067, CVE-2023-24329, CVE-2023-21930, CVE-2023-21937, CVE-2023-21938, CVE-2023-21939, CVE-2023-21954, CVE-2023-21967, CVE-2023-21968, CVE-2023-2828, CVE-2023-38408, CVE-2022-42896, CVE-2023-1281, CVE-2023-1829, CVE-2023-2124, CVE-2023-2194, CVE-2023-2235, CVE-2023-20569, CVE-2023-20593, CVE-2023-38802, CVE-2022-41974, CVE-2023-32360, CVE-2023-22045, CVE-2023-22049, CVE-2020-12321, CVE-2023-2650, CVE-2023-3446, CVE-2023-3817, CVE-2023-3341, CVE-2023-22081, CVE-2022-0934, CVE-2023-38406, CVE-2023-38407, CVE-2023-47234, CVE-2023-47235. 
+------
+- **I95-42466 Changing the physical linux address of an HA interface breaks the configuration:** Resolved an issue where moving a non-forwarding fabric HA sync device-interface from one PCI address to another PCI address would not properly clean up the team interface from the old PCI address. 
+------
+- **I95-50493 Memory calculation for alarms is confusing:** This alarm was designed to trigger when memory usage went above 90% and clear only when memory usage went below 80%, causing confusion. Memory usage alarm no longer requires memory usage to go below 80% to clear; it will clear when memory usage goes below 90%.
+------
+- **I95-50671 Office365 traffic is not recognized:** Resolved an issue where Office365 traffic was being miscategorized and therefore not fully qualified. O365 traffic, when traversing over SVR, is no longer miscategorized.
+------
+- **I95-51191 BFD metrics not cleaned up properly:** The BFDAgent holds onto the stats for peer paths; If the config is changed on a router, new stats are made but the old ones were not being deleted. The old BFD by-peer-path stats are now deleted when a VLAN configuration change is made.
+------
+- **I95-51459 Logs and exception pcaps are periodically filled with error logs and truncated packets:** Resolved an issue where ICMP error response packets for encapsulated traffic caused `PacketBufferDataNotFound: Could not find specified data in packet error logs` to be generated, or truncated packets to arrive in the FastLane exceptions pcap.
+------
+- **I95-51864 Ethernet Over SVR (EoSVR) not working for multi-hop SVR scenarios:** When EoSVR traffic traverses over a dogleg path in a HA node topology, traffic failed to traverse intermediate nodes. EoSVR packets are no longer incorrectly dropped when routed over an inter-node path when coming from an SVR path.
+------
+- **I95-52208 Metrics queries return incomplete data when FIPS is enabled:** Resolved an issue where a FIPS-incompatible hashing function was causing missing or incomplete metrics data. 
+------
+- **I95-52491 Crash in highway process due to segmented metadata:** Resolved an issue processing metadata that is segmented across two packet buffers. The segmented packets are no longer discarded and the dataplane no longer crashes when processing a packet comprised of segmented metadata.
+------
+- **I95-52599 Conductors display different assets on different HA nodes:** If the state table of an inactive HA node becomes out of sync with the active HA node, then some assets were being skipped when parsing the asset state response. This issue has been resolved through the reporting of asset IDs from the active node state table.
+------
+- **I95-52816 Config Validation may generate errors in the wrong field:** Resolved an issue during the validation of BGP graceful-restart configuration settings that could lead to generating incorrect errors/warnings during configuration validation.
+------
+- **I95-52822 ARP fails to resolve:** An earlier change caused ports on an X553 that use SFPs to no longer correctly report link status. This issue has been resolved and the link status is now reported accurately. 
+------
+-  **I95-52859 Issue moving interface between chassis of hypervisor platforms running SSR (e.g., ENCS):** When swapping physical cable from active node to standby node, the customer experienced low rate packet loss on traffic-engineering enabled device-interfaces. To resolve this issue, the `traffic-engineering transmit-cap` is no longer ignored on device-interfaces which have unresolved link-speed.
+------
+- **I95-52889 Highway crash caused by a false negative waypoint exhaustion check:** Waypoint ports reinitialization that is triggered by a false negative exhaustion check can lead to duplicate waypoints and reverse flows on two sessions resulting in a highway crash. This issue has been resolved.
+------
+- **I95-52968 Configuration template not being applied by the conductor to a router during upgrade:** Resolved an issue where a managed router would silently fail to apply a configuration from a conductor with a greater software version if the configuration contained features that the router's earlier SSR version did not understand. Specifically, if a config field such as an enumeration, that the router was aware of, had new values added to it in the conductor's version of software then the configuration would not be applied.
+------
+- **I95-52994 Routers continue to request the conductor configuration:** Resolved an issue where a managed router continued to request the configuration from the conductor even after a validation or datamodel incompatibility issue.
+------
+- **I95-53002 NTP setup check fails on startup:** Resolved an issue in the NTP startup sequence, due to an incorrect path for the NTP configuration.
+------
+- **I95-53017 Some files incorrectly marked as executable:** Some cache files were incorrectly marked as executable, and were flagged as part of the Common Criteria validation. These files have been correctly identified and marked.
+------
+- **I95-53185 Rare race condition causing highway crash:** Resolved a rare race condition between flow install and flow lookup causing a highway crash.
+------
+- **I95-53253 Include `dmesg` and `systemd journal unit` in TSI:** Include output from `dmesg` and `systemd journal` unit in TSI in order to assist in debugging future platform related issues.
+------
+- **I95-53285 User datastore issue when renaming a router:** Resolved an issue where HTTP requests would stop working to a router after the router's name was changed, but before the SSR was restarted.
+------
+- **I95-53344 Exception on device interface tear down terminates process:** Resolved a rare case where Highway process can terminate and core during config changes if there is an underlying exception to a device-interface on removal.
+------
+- **I95-53472 Service Routes passing validation on conductor but then failing on local router:** The validation process on the conductor has been updated to identify service-routes with deleted or empty destination lists as invalid. 
+------
+- **I95-53538 Custom audit rules not preserved on SSR upgrade:** Resolved an issue where the image-based upgrade (IBU) was not preserving audit rules or `dnf.conf`.
+------
+- **I95-53858 Active sessions counter continuously incrementing:** The SSC active sessions counter has been updated to correctly handle session removal.
+------
+- **I95-53894 DNS cache-service does not start:** Resolved a race condition that caused the DNS process to fail to start. The log message `No TimeoutQueue:` can be seen in the logs during this condition.
+------
+- **I95-53916 Pre-existing teams interfaces conflict with HA interfaces:** In a Mist-managed HA configuration where an HA node has been configured with non-default HA interfaces, performing a release operation on a node in an HA pair leaves the pre-configured HA interfaces in place, and creates a conflict when a new configuration is pushed down from Mist. This would prevent the HA node from operating correctly and forming its HA connections again. This issue has been resolved, and the release operation now removes any pre-existing HA interfaces.
+------
+- **I95-53986 `nodeMonitor` failed to get data for `show platform disk`:** Some of the dynamic access for `smartctl` objects were not protected. A check for the object existence has been added before attempting to read it.
+------
+- **I95-54086 Conductor memory exceeded:** In certain cases, the salt master on the conductor could grow indefinitely in memory. This may be related to situations with both poor connectivity and the use of the asset-connection-resiliency feature. An update to the salt package has been made to resolve this issue.
+------
+- **I95-54155 nodeMonitor coredump on secondary node after upgrade:** During an upgrade where `deviceType` was `LTE` the attempt to get a linux interface name (not supported) failed. This issue has been resolved by implementing a device interface type verification.
+------
+- **I95-54490 Permission denied when trying to open a user config file:** Resolved a permissions issue for the `connect router` command by adding ACLs for reverse SSH so that this is accessible for admin users.
+------
+- **WAN-2486 SSR data reporting values that are unrealistically high:** When capturing application usage for application summary learned apps, sometimes very high values for bandwidth and other metrics are observed.
+Resolution: The high value was due to an internal corruption when the metrics for these learned applications were removed and subsequently re-added. During such transition, it is possible to result in an incorrect high value.
+------
+- **WAN-2547 Invalid memory access producing incorrect bandwidth values:** Implemented a resolution that identifies the invalid memory access, and drops values that are out of scope or otherwise invalid. 
+
 ## Release 5.5.11-4
 
 **Release Date:** August 21, 2023
