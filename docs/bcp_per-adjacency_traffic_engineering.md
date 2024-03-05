@@ -1,13 +1,13 @@
 ---
-title: Per Adjacency Traffic Engineering
-sidebar_label: Per Adjacency Traffic Engineering
+title: Adjacency Traffic Engineering
+sidebar_label: Adjacency Traffic Engineering
 ---
 
-Packet loss due to congestion in networks, particularly over WAN links, is inevitable. Depending on where drops occur, it can have a major impact on perceived quality of experience. Packet loss due to exceeding transmit caps between instances of SSR should be avoided. Per-adjacency traffic engineering can be enabled to regulate the upload and download rates between peers.  
+ Adjacency traffic engineering can be enabled to regulate the upload and download rates between peers.  
 
 ## Overview 
 
-Per-adjacency traffic engineering provides targeted traffic engineering for both directions on a bandwidth restricted link between two SSR instances. Traffic engineering on the device interface continues to be associated with the upload rate of a connected link; the `transmit-cap`. Traffic engineering at the adjacency level is associated with the download limit of the adjacent SSR instance; the `receive-cap`.  
+Adjacency traffic engineering provides targeted traffic engineering for both directions on a bandwidth restricted link between two SSR instances. While device interface traffic engineering is associated with the upload rate of a connected link, the `transmit-cap`, traffic engineering at the adjacency level is associated with the download limit of the adjacent SSR instance; the `receive-cap`.  
 
 For example, in the following hub and spoke diagram the Datacenter router has 5 adjacencies off of the individual device interface with a `transmit-cap` upload speed configured at 50Mb. The adjacent branch routers have 10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb configured as their device interface transmit caps. With such a large `transmit-cap` at the Datacenter, traffic rates exceeding the allowed download speeds (10Mb, 5Mb, 1Mb, 5Mb, and 2.5Mb) on each of the paths to the branch routers will result in traffic being dropped by the ISP. 
 

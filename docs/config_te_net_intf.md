@@ -5,13 +5,13 @@ sidebar_label: Network Interface Traffic Engineering
 
 Network interface traffic engineering allows you to impose traffic limitations on all traffic egressing a specific network-interface. This configuration also applies to all associated adjacencies of the network-interface, but does not impact other traffic that is egressing the same device-interface but belongs to different network-interfaces.
 
-How It (Network Interface Traffic Engineering) Works
+## How It Works
 
 For network-interface traffic-engineering to make a scheduling decision, the egress VLAN ID of a packet is queried to determine whether that packet has scheduling enabled. If so, the packet is enqueued into a scheduler specific for that network-interface. If not, the packet continues with normal packet processing. 
 
-Configuration
+## Configuration
 
-Network-interface traffic-engineering is configured on the network-interface of a device-interface. It does not have any impact on other device-interfaces or network-interfaces belonging to the same device-interface but impacts associated adjacencies.
+Network interface traffic engineering is configured under the `device-interface`. It does not have any impact on other device interfaces, or to other network interfaces belonging to the same device interface, but it does impact associated adjacencies.
 
 ```
 device-interface foo
@@ -34,4 +34,72 @@ device-interface foo
 exit 
 ```
 
-From the GUI interface, configuration specific to network-interface traffic-engineering can be found in the network-interface section under the “Traffic Engineering Settings” section. 
+In the GUI, configuration specific to network-interface traffic engineering is located in the network-interface section under the “Traffic Engineering Settings” section. (need a new screenshot)
+
+![Traffic Engineering Settings](/img/config_interface_te.png)
+
+### Limitations
+
+Network interface traffic engineering includes a performance impact to the packet-per-second processing rate of the worker cores. When used in conjunction with either device-interface or adjacency traffic engineering (or both), performance is further impacted since each level of traffic engineering requires buffering for their scheduled objects. 
+
+## Troubleshooting and Statistics
+
+Given the packet performance nature of the scheduler, no logs exist at the per-packet level to monitor traffic-engineering performance. The statistics described below are the best source of information about performance. The `success-bandwidth` and `failure-bandwidth` meters are good indicators of how well the scheduler is handling packets. For failure-bandwidth, additional statistics can be used to determine the reason for loss. Some examples are a queue full scenario resulting from an unhandled burst, or packets being dropped due to excessive time spent within the scheduler. 
+
+Statistics for network-interface traffic engineering can be viewed from the `show stats traffic-eng network-interface` command. Use the following statistics to help analyze network-interface behavior when traffic-engineering is configured. 
+
+The general statistics apply to the scheduler as a whole. Per-traffic-class statistics are maintained for all the available traffic-classes (high, medium, low, best-effort). 
+
+#### Network-Interface Traffic Engineering Stats (General Statistics) 
+
+```
+show stats traffic-eng network-interface 
+==================================================== ============== =========== ================= 
+Metric                                               Node           Netintf               Value 
+==================================================== ============== =========== ================= 
+dequeue-cycle-count                                  combo-east-a   intf10.10   182178691841637 
+enqueue-cycle-count                                  combo-east-a   intf10.10   182178691841637 
+packets-queued                                       combo-east-a   intf10.10                 0 
+per-traffic-class buffer-capacity-exceeded-bytes     combo-east-a   intf10.10                 0 
+per-traffic-class buffer-capacity-exceeded-packets   combo-east-a   intf10.10                 0 
+per-traffic-class dequeue-aqm-drop-bytes             combo-east-a   intf10.10                 0 
+per-traffic-class dequeue-aqm-drop-packets           combo-east-a   intf10.10                 0 
+```
+ 
+#### Network-Interface Traffic Engineering Statistics per Traffic Class
+
+```
+show stats traffic-eng network-interface per-traffic-class  
+================================== ============== =========== =============== ============ 
+Metric                             Node           Netintf     Traffic-class        Value 
+================================== ============== =========== =============== ============ 
+buffer-capacity-exceeded-bytes     combo-east-a   intf10.10   best-effort              0 
+                                   combo-east-a   intf10.10   high                     0 
+                                   combo-east-a   intf10.10   low                      0 
+                                   combo-east-a   intf10.10   medium                   0 
+buffer-capacity-exceeded-packets   combo-east-a   intf10.10   best-effort              0 
+```
+### Statistics Descriptions
+
+To gather information about network interface traffic engineering, query the following statistics using the `show stats traffic-eng network-interface` command. These statistics are specific to the network interface and provide insight into how the schedulers are operating. 
+
+- `enqueue-cycle-count`: The current enqueue cycle count in traffic engineering for this network-interface. This statistic refers to the last time (in cycles) that a packet was enqueued into the scheduler. 
+- `dequeue-cycle-count`: The current dequeue cycle count in traffic engineering for this network-interface. This statistic refers to the last time (in cycles) that the scheduler attempted to dequeue a packet. 
+- `packets-queued`: The current number of packets queued in traffic engineering for this network-interface. 
+- `scheduler-reset`: The number of times the scheduler was reset due to encountering an processing error. 
+- `per-traffic-class schedule-success-bytes`: The number of bytes successfully scheduled for transmission for this network-interface.  
+- `per-traffic-class schedule-success-packets`: The number of packets successfully scheduled for transmission for this network-interface.  
+- `per-traffic-class schedule-failure-bytes`: The number of bytes failed to be scheduled for transmission due to bandwidth oversubscription for this network-interface.
+- `per-traffic-class schedule-failure-packets`: The number of packets failed to be scheduled for transmission due to bandwidth oversubscription for this network-interface.  
+- `per-traffic-class dequeue-success-bytes`: The number of bytes successfully dequeued from the scheduler for transmission for this network-interface.  
+- `per-traffic-class dequeue-success-packets`: The number of packets successfully dequeued from the scheduler for transmission for this network-interface.  
+- `per-traffic-class dequeue-max-latency-drop-bytes`: The number of bytes scheduled for transmission that were dropped due to excessive latency for this network-interface. 
+- `per-traffic-class dequeue-max-latency-drop-packets`: The number of packets scheduled for transmission that were dropped due to excessive latency for this network-interface. 
+- `per-traffic-class dequeue-aqm-drop-bytes`: The number of bytes scheduled for transmission that were dropped due to Active Queue Management for this network-interface. 
+- `per-traffic-class dequeue-aqm-drop-packets`: The number of packets scheduled for transmission that were dropped due to Active Queue Management for this network-interface. 
+- `per-traffic-class buffer-capacity-exceeded-bytes`: The number of bytes failed to be scheduled for transmission due to exceeded buffer capacity for this network-interface. 
+- `per-traffic-class buffer-capacity-exceeded-packets`: The number of packets failed to be scheduled for transmission due to exceeded buffer capacity for this network-interface. 
+- `per-traffic-class schedule-success-bandwidth`: Traffic bandwidth in bytes per second successfully scheduled for transmission for this network-interface.  
+- `per-traffic-class schedule-failure-bandwidth`: Traffic bandwidth in bytes per second that failed to be scheduled or was dropped due to active queue managment for this network-interface. 
+
+

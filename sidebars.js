@@ -199,6 +199,16 @@ module.exports = {
       },
       {
         "type": "category",
+        "label": "Traffic Engineering",
+        "items": [
+          "concepts_traf_eng",
+          "bcp_per-adjacency_traffic_engineering",
+          "config_te_net_intf",
+          "config_dev_intf_traf_eng",
+        ]
+      },
+      {
+        "type": "category",
         "label": "Access Management and Authentication",
         "items": [
           "config_access_mgmt",
@@ -290,7 +300,6 @@ module.exports = {
       "bcp_qos_msft_expressroute",
       "bcp_lte_peering",
       "bcp_monitoring_headends",
-      "bcp_per-adjacency_traffic_engineering",
       "bcp_salt_pillars",
       "bcp_sdwan_design_guide",
       "bcp_service_and_service_policy_design",
