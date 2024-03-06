@@ -43,7 +43,7 @@ For the certified SSR platforms, all software and configuration reside on the SS
 
 1. Log in to the local serial console as the root user 
 
-2. nter the following to gracefully shut down SSR service: 
+2. Enter the following to gracefully shut down SSR service: 
  
  `systemctl stop 128T` 
 

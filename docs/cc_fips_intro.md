@@ -26,7 +26,7 @@ SSR devices are provisioned and configured by the user as a Session Smart Router
 
 The conductor manages the associated routers. To do this, the Administrator establishes a local or remote management connection to the Conductor.
 
-Each SSR can be administered individually; the administrator connects locally from console or remotely from a remote management station and issues commands through the Command Line Interface (CLI). For local administration, the administrator authenticates with a username and a password. With remote administration, the user's remote management workstation establishes an SSH connection, and the Administrator authenticates with a username and password or a pre-installed certificate.
+Each SSR can be administered individually; the administrator connects locally from console or remotely from a remote management station and issues commands through the Command Line Interface (CLI). For local administration, the administrator authenticates with a username and a password or via public-key authentication using cryptographic keys stored in the local ﬁle system. The Administrator’s credentials (private key) used to access the system via SSH must be protected on any other platform on which they reside.
 
 The SSR implements all the security functions of a network device, as well as a stateful traffic filtering firewall to guard access to the protected network. Routers are deployed in various data centers, branches, and other facilities to protect the network connection. These Routers are associated to a Conductor for configuration management, information aggregation, and life-cycle management. 
 

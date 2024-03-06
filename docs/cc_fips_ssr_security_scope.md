@@ -49,7 +49,11 @@ The SSR is protected from tampering and unauthorized access by both active and p
 
 ## Firewall
 
-The SSR implements a stateful packet filtering firewall which allows you to define rules for filtering traffic. The rules may be defined for IPv4, IPv6, ICMP, TCP and UDP traffic. Only traffic explicitly identified in the traffic filtering rules as allowed is forwarded by the SSR. All other traffic is dropped. Firewall rules may be applied to each network interface separately, and the order of the rules is defined by the user. The SSR traverses the rule base for each network connection and implements the first rule that matches the traffic. The SSR inspects each packet independently, and no residual information for previously inspected packets influences the inspection.
+The SSR implements a packet filtering firewall which allows you to define rules for filtering traffic. The rules may be defined for specific traffic or all  traffic. 
+
+When Firewall filtering rules are defined, only the traffic identified in the traffic filtering rules is filtered. All other traffic is allowed. If no firewall rules are configured, traffic flows normally subject to the SSR configuration. 
+
+Firewall rules may be applied to each network interface separately, and are applied in the order defined by the user. The SSR follows the rule base for each network connection and implements the first rule that matches the traffic. The SSR inspects each packet independently, and no residual information for previously inspected packets influences the inspection.
 
 ## Security Events
 
@@ -71,21 +75,27 @@ When a user account is added, changed, or deleted, a security event is recorded 
 
 ### Audit Trail Overflow 
 
-When audit logs exceed 8MB, the current log file will be closed and a new file opened. After 5 files have been rotated in this manner, the oldest file will be deleted. No further action is required by the administrator. 
+The `Auditd` retention policy is configured for 8MB logs, with five copies. When audit logs exceed 8MB, the current log file will be closed and a new file opened. After 5 files have been rotated in this manner, the oldest file will be deleted. No further action is required by the administrator. 
 
+A `disk space remaining` action is configured and set to 100MB.  If the system disk contains less than 100MB free space a warning message is written in syslog allowing the administrator to take recovery steps as required. Recovery steps include transfer of the audit logs off of the system, or removing  non-critical files such as core dumps to free sufficient space on the disk. If the warning is ignored, the disk may eventually fill completely, impacting SSR service.
 
+The system configuration `disk-full-action` is set to `halt`. The system shuts down when audit logs can no longer be written due to disk space being exhausted. Recovery requires manual intervention during the boot process, allowing you to temporarily start the system in single-user maintenance mode with audit disabled. At this time stale files can be deleted from the disk.
 
+If the system halted due to audit disk full, proceed as follows:
+1. Connect to the serial console port.
+2. Boot the system. 
+3. During the GRUB2 boot menu countdown, press `e` to edit.
 
+![Press E](/img/cc_fips_audit_trail3.png)
 
+4. Scroll down and append “audit=0 S” to the end of the vmlinuz kernel line.
 
+![Add audit=0](/img/cc_fips_audit_trail4.png)
 
+5. Press Ctrl-x to boot the system into Single User mode.
+6. Enter the root password when prompted, to access maintenance mode.
+7. Remove stale logs and crash dump files to free space on the disk.
 
+![Remove logs](/img/cc_fips_audit_trail7.png)
 
-
-
-
-
-
-
-
-
+8. When complete, type `reboot` to boot back into normal SSR service.
