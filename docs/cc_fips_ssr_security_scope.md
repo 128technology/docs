@@ -53,7 +53,7 @@ The SSR implements a stateful packet filtering firewall which allows you to defi
 
 ## Security Events
 
-#### System Crashes 
+### System Crashes 
 
 The SSR `processManager` automatically restarts the failed processes based on system policy. Core files should be considered to contain customer confidential data and be handled with appropriate security. Core files are stored in `/var/lib/system/coredump` and can be removed by the administrator if not required. 
 
@@ -63,13 +63,13 @@ The `coredumpctl list` command is used from the Linux shell to display crash his
 
 ![System Crash Coredump](/img/cc_fips_system_crashes.png)
 
-#### Updates to User Accounts 
+### Updates to User Accounts 
 
 When a user account is added, changed, or deleted, a security event is recorded in `accessManager.log`. This is for information only; no further action is required by the administrator. 
 
 ![Account Updates](/img/cc_fips_account_updates.png)
 
-#### Audit trail overflow 
+### Audit Trail Overflow 
 
 When audit logs exceed 8MB, the current log file will be closed and a new file opened. After 5 files have been rotated in this manner, the oldest file will be deleted. No further action is required by the administrator. 
 

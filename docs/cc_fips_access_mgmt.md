@@ -24,27 +24,6 @@ During an upgrade, if the existing version allows SSH Root login, it will be dis
 6. Save the file and exit from `visudo`.
 7. Type `exit` to leave the `su` prompt.
 
-## PCLI Access Post Install
-
-Use the following procedure to access the PCLI at any time after installation. 
-
-1. Open a terminal window and SSH to the SSR's IP address. 
-2. Use your login credentials to log in to the SSR 
- 
- - If using an account other than admin, type `pcli` to start the SSR PCLI. 
-
- - Type `shell` to suspend the PCLI and enter the Linux shell.  
-
-To terminate an active session: 
-
-- Type `exit` to return from the Linux shell to the PCLI. 
-
-- Type `quit` to log out from PCLI.
-
-- If using an account other than admin, type `exit` to end the login session. 
-
-Common Criteria certiﬁcation does not require any restrictions on executing commands. See the [Conﬁguration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage. 
-
 ## Change the Default Passwords
 
 The following user accounts and passwords are created during the ISO installation process:
@@ -72,6 +51,42 @@ passwd: all authentication tokens updated successfully.
 
 :::note
 The root account will not be used for day-to-day access, but the root account password should be stored securely off-box so that it can be used for admin account recovery if required. 
+:::
+
+## SSH Key-based Authentication
+
+To configure authentication by public key, use the `scp` command from a Linux/Unix based machine or another SCP client to write the file `/home/<username>/.ssh/authorized_keys` to the SSR.  
+ 
+The contents of this file are the public key of the public/private key pair. To use multiple keys, specify the public key of each of the multiple keys on separate lines of the `authorized_keys` file.  
+ 
+To remove access for a specific key, replace `authorized_keys` with a file that no longer contains the public part of that key. This can also be accomplished by writing an empty file to remove all keys. 
+ 
+#### Example: 
+
+If the `t128` user wants to use public key authentication, the `/home/t128/.ssh` directory must be created first and have permissions set using the following commands: 
+``` 
+mkdir /home/t128/.ssh 
+chmod u=rwx,g=,o= /home/t128/.ssh 
+``` 
+Then use the directions for uploading an `authorized_keys` file via `scp`, or manually edit `/home/t128/.ssh/authorized_keys` directly. 
+
+## SSH Server Cryptographic Algorithms 
+ 
+The following SSH parameter lists are hard-coded as the system defaults: 
+ 
+```
+KexAlgorithms diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256 
+HostKeyAlgorithms rsa-sha2-512,rsa-sha2-256,ssh-rsa 
+Ciphers aes256-ctr,aes128-ctr 
+MACs hmac-sha2-512,hmac-sha2-256 
+```
+
+These default SSH parameters are defined by the template file `/usr/lib/128technology/sshd/config.template.fips`: 
+ 
+If these lists are changed, the `128T` service must be restarted with `systemctl restart 128T`.  
+ 
+:::important
+The template file will be overwritten when newer versions of `128T` software are installed. Changes to this file must be persisted elsewhere and compared to versions from new software. 
 :::
 
 ### Additional SSH Information
@@ -104,7 +119,7 @@ The `config import` functionality has the following constraints:
 
 ## Software Compliance Validation
 
-After installing the SSR Software, it is important to verify that the installation successfully  completed and that the system is running in the FIPS enforcememt mode required for Common Criteria compliance. After starting the SSR router or conductor, the login screen appears on the console. Alternatively you may `ssh` to the SSR management IP address using the admin account. 
+After installing the SSR Software, it is important to verify that the installation completed successfully and that the system is running in FIPS enforcement mode as required for Common Criteria compliance. After starting the SSR router or conductor, the login screen appears on the console. Alternatively you may `ssh` to the SSR management IP address using the admin account. 
 
 1. Login using the admin credentials. 
 2. Use `show system version`  to verify the correct software release is running: 
@@ -176,6 +191,27 @@ admin@conductor.conductor#
 
 You have now completed security validation of the installation. 
 
+## PCLI Access Post Install
+
+Use the following procedure to access the PCLI at any time after installation. 
+
+1. Open a terminal window and SSH to the SSR's IP address. 
+2. Use your login credentials to log in to the SSR 
+ 
+ - If using an account other than admin, type `pcli` to start the SSR PCLI. 
+
+ - Type `shell` to suspend the PCLI and enter the Linux shell.  
+
+To terminate an active session: 
+
+- Type `exit` to return from the Linux shell to the PCLI. 
+
+- Type `quit` to log out from PCLI.
+
+- If using an account other than admin, type `exit` to end the login session. 
+
+Common Criteria certiﬁcation does not require any restrictions on executing commands. See the [Conﬁguration Command Reference Guide](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/config_command_guide) for command information and usage. 
+
 ## Additional Software Self-Tests
 
 In addition to the 128T-rpm-verify RPM binary validation self-test described in the previous section, the SSR software also runs FIPS power-on self-tests at every boot. These are split into three main functional areas: 
@@ -231,7 +267,8 @@ In summary:
 - OpenSSL a set of periodic runtime re-validation tests, which may be triggered during rekeying or other activities. 
 - No external logs are exposed from OpenSSL during this activity, but the failure to start OpenSSL applications such as OpenSSH are logged by the respective application. 
 
-### Recovery Action for All Self-test Failures: 
+### Recovery Action for All Self-test Failures
+
 Regardless which functional area triggers a self-test failure, the recovery process is the same: 
  
 1. Power off the SSR hardware 

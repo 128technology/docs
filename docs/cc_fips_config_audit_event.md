@@ -25,7 +25,7 @@ All the SSR alarms generate an add event when the alarm is raised and a clear ev
 The provisioning events are generated for software download and upgrades as well as for configuration changes that are processed on the router. For configuration changes the event contains a diff of the configuration change that triggered the event. These are implicit events and cannot be disabled via configuration.
 
 ## Basic Configuration
-The configuration for audit logging is performed within the `system > audit` branch within a `router` hierarchy. In most cases, the only configuration required for enabling audit logging is adding it to the `router` element for your Authority's conductor. For cases where an SSR router is not managed by a conductor, its audit logging configuration is similarly added to the `system > audit` branch of its `router` hierarchy.
+The configuration for audit logging is performed under the `system > audit` branch in the `router` hierarchy. In most cases, the only configuration required for enabling audit logging is adding it to the `router` element for your Authority's conductor. For cases where an SSR router is not managed by a conductor, audit logging configuration is added to the `system > audit` branch of the `router` hierarchy.
 
 If `auditd` fails to start or is prevented from running, an immediate, real-time message is displayed to all users indicating that the audit logging capability is impacted. This message persists until the failure is resolved.
 
@@ -54,8 +54,30 @@ config
 exit
 ```
 
+### Set the Disk Full Action
+
+Common Criteria compliance does not permit the system to be operated without audit logging enabled. Configuring the `disk-full-action` as `halt` ensures that the system automatically shuts down when the disk has no free space remaining to write audit logs. 
+
+```
+config
+    authority
+        router  my-router
+            name    my-router
+            system
+                audit
+                    disk-full-action halt
+                exit
+            exit
+        exit
+    exit
+exit
+```
+
 ### Storing Events for Short Durations
-By default the SSR routers store all events except traffic events for up to six months on the local disk. In some cases it might be desirable to shorten the length of time for these events to minimize the impact on the local disk. This can be accomplished as follows:
+
+By default the SSR routers store all events except traffic events for up to six months on the local disk. In some cases it might be desirable to shorten the length of time for these events to minimize the impact on the local disk.
+
+In the following example, all the events available on the SSR router are retained for one day. The `retention` is of type duration and can take values in hours and days; for example, 24h or 1d.
 
 ```
 config
@@ -71,9 +93,8 @@ config
 exit
 ```
 
-In the above example all the events available on the SSR router are only retained for one day. The `retention` is of type duration and can take values in hours and days; for example, 24h or 1d.
-
 ### Sending Traffic Events to a Syslog Server
+
 Traffic events are disabled and not persisted by default because they can produce a large volume of data. However, in situations where the traffic events need to be sent off-box for storage, such as a syslog server, they can be enabled but not persisted to local storage. The following snippet provides an example of that configuration.
 
 ```
@@ -93,7 +114,7 @@ config
 ```
 
 :::note
-For in-depth explanations of how to configure the Monitoring Agent to handle audit events, refer to the [SSR Monitoring Agent](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/plugin_monitoring_agent) documentation.
+For a detailed explanation of configuring the Monitoring Agent to handle audit events, refer to the [SSR Monitoring Agent](https://www.juniper.net/documentation/us/en/software/session-smart-router/docs/plugin_monitoring_agent) documentation.
 :::
 
 #### Basic Input and Output Configurations
@@ -151,30 +172,123 @@ config
             exit
         exit
     exit
-exit
-```
-### Syslog Transport
-
-The SSR can be configured to send system generated events over a TCP connection to a remote-logging server for analysis and storage. The current default is a UDP connection.
-
-Use the `protocol` argument to configure TCP as the protocol the SSR uses to open communication with the syslog server. 
-
-#### TCP Transport
-
-Configure the SSR to use TCP for transport to syslog server.
 
 ```
-config
-    authority
-        router  Fabric128
-            name    Fabric128
-            system
-                syslog
-                    protocol        tcp
-                    exit
-                exit
-            exit
-        exit
-    exit
-exit
+
+## Secure Audit Logs Transport 
+
+The SSR can be configured to send audit logs to a remote-logging server via SSH.  
+
+1. Configure port forwarding to connect a port on the SSR (port 7777) to a port on the remote-logging server (port 9999).
+
 ```
+config 
+    authority 
+        router combo1 
+            node test1 
+                name test1 
+                port-forwarding 127.0.0.1 7777 lo0 
+                    local-address 127.0.0.1 
+                    local-port 7777 
+                    local-interface lo0 
+                    remote-host 127.0.0.1 
+                    remote-port 9999 
+                    server-address 172.18.4.99 
+                    server-port 22 
+                exit 
+            exit     
+        exit 
+    exit 
+
+```
+2. Configure the remote-logging server using the port-forwarding local address and port. 
+
+```
+config 
+    authority 
+        router combo1 
+            system 
+                audit 
+                    remote-logging-server 127.0.0.1 7777 
+                        address 127.0.0.1 
+                        port 7777 
+                    exit 
+                exit 
+            exit 
+        exit 
+    exit 
+
+```
+
+3. Use the information in [SSH Key-based Authentication](cc_fips_access_mgmt.md#ssh-key-based-authentication) to copy the SSR public key to the authorized key file onto the remote-logging server.
+
+### Example Audit Logs
+
+#### SSH Session Establishment Failure
+
+```
+type=USER_AUTH msg=audit(1709742862.344:2320): pid=13394 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=? acct="?" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=failed'
+
+type=USER_AUTH msg=audit(1709742864.269:2321): pid=13394 uid=0 auid=4294967295 ses=4294967295 msg='op=password acct="(unknown)" exe="/usr/sbin/sshd" hostname=? addr=172.18.4.99 terminal=ssh res=failed' 
+```
+
+#### SSH Session Establishment Success
+
+```
+type=USER_AUTH msg=audit(1709742929.672:2335): pid=13700 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:authentication grantors=pam_faillock,pam_unix acct="centos" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=success' 
+
+type=USER_ACCT msg=audit(1709742929.674:2336): pid=13700 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:accounting grantors=pam_faillock,pam_unix,pam_localuser acct="centos" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709742929.676:2337): pid=13700 uid=0 auid=4294967295 ses=4294967295 msg='op=destroy kind=session fp=? direction=both spid=13701 suid=74 rport=52572 laddr=192.168.1.10 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.18.4.99 terminal=? res=success' 
+
+type=USER_AUTH msg=audit(1709742929.678:2338): pid=13700 uid=0 auid=4294967295 ses=4294967295 msg='op=success acct="centos" exe="/usr/sbin/sshd" hostname=? addr=172.18.4.99 terminal=ssh res=success' 
+
+type=CRED_ACQ msg=audit(1709742929.678:2339): pid=13700 uid=0 auid=4294967295 ses=4294967295 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="centos" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=success' 
+
+type=LOGIN msg=audit(1709742929.678:2340): pid=13700 uid=0 old-auid=4294967295 auid=1000 tty=(none) old-ses=4294967295 ses=36 res=1 
+
+type=SYSCALL msg=audit(1709742929.678:2340): arch=c000003e syscall=1 success=yes exit=4 a0=4 a1=7ffe4754f5c0 a2=4 a3=3 items=0 ppid=2007 pid=13700 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=36 comm="sshd" exe="/usr/sbin/sshd" key=(null) 
+
+type=PROCTITLE msg=audit(1709742929.678:2340): proctitle=737368643A2063656E746F73205B707269765D 
+
+type=USER_START msg=audit(1709742929.686:2341): pid=13700 uid=0 auid=1000 ses=36 msg='op=PAM:session_open grantors=pam_selinux,pam_loginuid,pam_selinux,pam_namespace,pam_keyinit,pam_keyinit,pam_limits,pam_systemd,pam_unix,pam_lastlog acct="centos" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709742929.687:2342): pid=13734 uid=0 auid=1000 ses=36 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=13734 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709742929.687:2343): pid=13734 uid=0 auid=1000 ses=36 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=13734 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709742929.688:2344): pid=13734 uid=0 auid=1000 ses=36 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=13734 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success' 
+
+type=CRED_ACQ msg=audit(1709742929.688:2345): pid=13734 uid=0 auid=1000 ses=36 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="centos" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=success' 
+
+type=USER_LOGIN msg=audit(1709742929.730:2346): pid=13700 uid=0 auid=1000 ses=36 msg='op=login id=1000 exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=/dev/pts/1 res=success' 
+
+type=USER_START msg=audit(1709742929.730:2347): pid=13700 uid=0 auid=1000 ses=36 msg='op=login id=1000 exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=/dev/pts/1 res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709742929.732:2348): pid=13700 uid=0 auid=1000 ses=36 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=13735 suid=1000  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success' 
+
+type=SYSCALL msg=audit(1709742940.326:2349): arch=c000003e syscall=159 success=yes exit=0 a0=55e40cbbf980 a1=1 a2=0 a3=55e40e52326c items=0 ppid=1 pid=6697 auid=4294967295 uid=38 gid=38 euid=38 suid=38 fsuid=38 egid=38 sgid=38 fsgid=38 tty=(none) ses=4294967295 comm="ntpd" exe="/usr/sbin/ntpd" key="128T" 
+```
+
+#### SSH Session Termination
+
+```
+type=USER_END msg=audit(1709743019.474:2350): pid=13700 uid=0 auid=1000 ses=36 msg='op=login id=1000 exe="/usr/sbin/sshd" hostname=? addr=? terminal=/dev/pts/1 res=success' 
+
+type=USER_LOGOUT msg=audit(1709743019.474:2351): pid=13700 uid=0 auid=1000 ses=36 msg='op=login id=1000 exe="/usr/sbin/sshd" hostname=? addr=? terminal=/dev/pts/1 res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709743019.475:2352): pid=13700 uid=0 auid=1000 ses=36 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=13734 suid=1000  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709743019.475:2353): pid=13700 uid=0 auid=1000 ses=36 msg='op=destroy kind=session fp=? direction=both spid=13734 suid=1000 rport=52572 laddr=192.168.1.10 lport=22  exe="/usr/sbin/sshd" hostname=? addr=172.18.4.99 terminal=? res=success' 
+
+type=USER_END msg=audit(1709743019.478:2354): pid=13700 uid=0 auid=1000 ses=36 msg='op=PAM:session_close grantors=pam_selinux,pam_loginuid,pam_selinux,pam_namespace,pam_keyinit,pam_keyinit,pam_limits,pam_systemd,pam_unix,pam_lastlog acct="centos" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=success' 
+
+type=CRED_DISP msg=audit(1709743019.478:2355): pid=13700 uid=0 auid=1000 ses=36 msg='op=PAM:setcred grantors=pam_faillock,pam_unix acct="centos" exe="/usr/sbin/sshd" hostname=172.18.4.99 addr=172.18.4.99 terminal=ssh res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709743019.479:2356): pid=13700 uid=0 auid=1000 ses=36 msg='op=destroy kind=server fp=SHA256:f7:68:dd:06:e8:30:8b:1b:3e:73:db:60:e6:34:9b:30:c5:0c:b4:b0:3d:7c:1b:20:d3:c2:84:05:4f:fa:d5:7f direction=? spid=13700 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709743019.479:2357): pid=13700 uid=0 auid=1000 ses=36 msg='op=destroy kind=server fp=SHA256:4c:2a:c1:e0:b9:fd:ce:16:c3:f0:89:16:f6:2a:70:40:ca:84:13:9c:02:58:91:4d:2a:1a:14:bc:f0:e6:f2:3c direction=? spid=13700 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success' 
+
+type=CRYPTO_KEY_USER msg=audit(1709743019.479:2358): pid=13700 uid=0 auid=1000 ses=36 msg='op=destroy kind=server fp=SHA256:a7:25:1c:27:28:d9:a9:cc:7f:2b:6e:c4:e0:61:28:cf:31:15:8d:c5:e5:9b:e5:c5:03:24:46:23:ab:42:04:c1 direction=? spid=13700 suid=0  exe="/usr/sbin/sshd" hostname=? addr=? terminal=? res=success'
+```
+

@@ -316,7 +316,7 @@ Use the PCLI command `set software access-token`. For information on this comman
 ```
 [root@test-conductor ~]# pcli
 Starting the PCLI...
-root@node1.test-conductor# set software access-token <username> <password>
+admin@node1.test-conductor# set software access-token <username> <password>
 Saving...
 Waiting for process to complete
 ...(messages removed for brevity)...
@@ -324,7 +324,7 @@ Making the DNF cache
 No further operation requested. Exiting
 Installer complete
 Successfully saved credentials.
-root@node1.test-conductor#
+admin@node1.test-conductor#
 ```
 
 ### PCLI Access Post Install

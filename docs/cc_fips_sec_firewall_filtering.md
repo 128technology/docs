@@ -179,7 +179,58 @@ imit 100000
 
 ## Firewall Audit Events
 
-To correlate an interface with a firewall audit event, use the internal ID of the interface, which is visible in the `show device-interface` command.
+Use the `show events type traffic` to display the two types of traffic events. 
+
+Use the `show events type traffic.denied` or the `show events type traffic.permitted` to display the  firewall audit events.
+
+```
+admin@combo-east-a.combo-east# show events type traffic.denied
+Wed 2024-03-06 21:00:24 UTC
+==================================================================
+ 2024-03-06T21:00:23.956Z Traffic request violates access policy.
+==================================================================
+ Type:               traffic.denied
+ Node:               combo-east-a
+ Denied Reason:      access
+ Destination Address:172.16.2.40
+ Destination Port:   1024
+ Ingress Interface:  1.10
+ Ip Protocol:        udp
+ Permitted:          False
+ Source Address:     172.16.1.40
+ Source Port:        1024
+```
+
+```
+admin@combo-east-a.combo-east# show events type traffic.permitted
+Wed 2024-03-06 21:12:25 UTC
+=====================================================
+ 2024-03-06T21:11:18.014Z Traffic request permitted.
+=====================================================
+ Type:               traffic.permitted
+ Node:               combo-east-a
+ Destination Address:172.16.1.40
+ Destination Port:   1024
+ Ingress Interface:  5.0
+ Ip Protocol:        udp
+ Permitted:          True
+ Source Address:     172.16.2.40
+ Source Port:        1024
+
+=====================================================
+ 2024-03-06T21:08:57.335Z Traffic request permitted.
+=====================================================
+ Type:               traffic.permitted
+ Node:               combo-east-a
+ Destination Address:172.16.1.2
+ Icmp Type:          8
+ Ingress Interface:  1.10
+ Ip Protocol:        icmp
+ Permitted:          True
+ Source Address:     172.16.1.40
+``` 
+
+To correlate an interface with a firewall audit event, use the internal ID of the interface to undrestand which interface generated the event. This is visible in the `show device-interface` command as the `Internal ID: 1`. 
 
 ```
 admin@test1.Fabric128# show device-interface
@@ -187,7 +238,7 @@ Fri 2023-10-27 10:06:30 EDT
 ✔ Retrieving device interface information...
 
 ========================================
- test1:10
+ test1:LAN
 ========================================
  Type:                ethernet
  Internal ID:         1
@@ -211,62 +262,6 @@ Fri 2023-10-27 10:06:30 EDT
 
  Plugin Info:         unavailable
 
-```
-
-Using the `show events` command and the interface ID, the `traffic.denied` firewall audit event is displayed. **(please verify the command context)**
-
-```
-admin@test1.Fabric128# show events interface id 1 type traffic.denied
-Fri 2023-10-27 10:06:55 EDT
-✔ Retrieving event information...
-
-==================================================================
- 2023-10-27T02:56:51.513Z Traffic request violates access policy.
-==================================================================
- Type:               traffic.denied
- Node:               test1
- Denied Reason:      access
- Destination Address:172.16.2.201
- Destination Port:   443
- Ingress Interface:  1.0
- Ip Protocol:        udp
- Permitted:          False
- Source Address:     172.16.1.201
- Source Port:        10000
-
-```
-
-The `traffic.denied` event is the single type of firewall audit event. The **variable fields** will display relevant information about the event. Using this event as an example for all audit events, we can see the variable information:
-
-```
-==================================================================
- 2023-10-27T02:56:51.513Z Traffic request violates access policy.
-==================================================================
-
-
-
- Destination Address:  172.16.2.201
- Destination Port:     443
- Ingress Interface:    1.0
- IP Protocol:          udp
-
- Source Address:       172.16.1.201
- Source Port:          10000
-```
-
-This information is different for each audit event.
-
-The static information is shown below:
-
-```
-==================================================================
- 2023-10-27T02:56:51.513Z Traffic request violates access policy.
-==================================================================
- Type:               traffic.denied
- Node:               test1
- Denied Reason:      access
-
- Permitted:          False
 ```
 
 ### Discarded Traffic
