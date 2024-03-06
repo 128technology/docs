@@ -109,7 +109,7 @@ exit
 ```
 
 :::info
-DSCP steering was designed with IPSec use cases in mind. Traditionally IPSec uses ESP or UDP (for NAT-T) as transport, and the examples provided are the recommended configuration. In use cases beyond IPSec where DSCP steering may be useful, other transports such as `icmp`, `tcp`, and `gre` can be configured for DSCP Steering treatment as well.
+DSCP steering was designed with IPSec use cases in mind. Traditionally IPSec uses ESP or UDP (for NAT-T) as transport, and the examples provided are the recommended configuration.
 :::
 
 ### Service Configuration
