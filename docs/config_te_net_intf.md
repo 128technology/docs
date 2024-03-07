@@ -11,19 +11,11 @@ For network-interface traffic-engineering to make a scheduling decision, the egr
 
 ## Configuration
 
-Network interface traffic engineering is configured under the `device-interface`. It does not have any impact on other device interfaces, or to other network interfaces belonging to the same device interface, but it does impact associated adjacencies.
+Network interface traffic engineering is configured as part of the [`network-interface`](config_command_guide.md#configure-authority-router-node-device-interface-network-interface-traffic-engineering), under the `device-interface`. It does not have any impact on other device interfaces, or to other network interfaces belonging to the same device interface, but it does impact associated adjacencies.
 
 ```
-device-interface foo
-    network-interface foo.20
-        vlan 20         
-        traffic-engineering             
-            enabled true              
-            transmit-cap 1000000              
-            traffic-profile example-profile-1          
-        exit      
-    exit      
-    network-interface foo.30          
+device-interface 2      
+    network-interface east-inet          
         vlan 30          
         traffic-engineering              
             enabled true              
@@ -34,7 +26,11 @@ device-interface foo
 exit 
 ```
 
-In the GUI, configuration specific to network-interface traffic engineering is located in the network-interface section under the “Traffic Engineering Settings” section. (need a new screenshot)
+- `enabled`: Creates the scheduler to be used on egress for the interface
+- `transmit-cap`: The effective port rate of the interface in bits per second. This value is matched internally to the link speed of the device.
+- `traffic-profile`: Identifies the traffic-profile to be used when determining the traffic class distributions.
+
+In the GUI, configuration specific to network-interface traffic engineering is located in the network-interface section under **Traffic Engineering Settings**.
 
 ![Traffic Engineering Settings](/img/config_interface_te.png)
 
@@ -44,13 +40,13 @@ Network interface traffic engineering includes a performance impact to the packe
 
 ## Troubleshooting and Statistics
 
-Given the packet performance nature of the scheduler, no logs exist at the per-packet level to monitor traffic-engineering performance. The statistics described below are the best source of information about performance. The `success-bandwidth` and `failure-bandwidth` meters are good indicators of how well the scheduler is handling packets. For failure-bandwidth, additional statistics can be used to determine the reason for loss. Some examples are a queue full scenario resulting from an unhandled burst, or packets being dropped due to excessive time spent within the scheduler. 
+Given the packet performance nature of the scheduler, no logs exist at the per-packet level to monitor traffic-engineering performance. The statistics described below are the best source of information about performance. The `success-bandwidth` and `failure-bandwidth` meters are good indicators of how well the scheduler is handling packets. For `failure-bandwidth`, additional statistics can be used to determine the reason for loss. Some examples are a queue full scenario resulting from an unhandled burst, or packets being dropped due to excessive time spent within the scheduler. 
 
 Statistics for network-interface traffic engineering can be viewed from the `show stats traffic-eng network-interface` command. Use the following statistics to help analyze network-interface behavior when traffic-engineering is configured. 
 
 The general statistics apply to the scheduler as a whole. Per-traffic-class statistics are maintained for all the available traffic-classes (high, medium, low, best-effort). 
 
-#### Network-Interface Traffic Engineering Stats (General Statistics) 
+#### Network-Interface Traffic Engineering Stats 
 
 ```
 show stats traffic-eng network-interface 

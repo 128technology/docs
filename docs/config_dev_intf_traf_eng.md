@@ -17,13 +17,13 @@ During the initial SSR deployment, the customer was passing approximately 80Mbps
 
 To prevent dropped traffic, the customer has to enable Traffic Engineering on the Egress device-interface that is connected to ISP, and then has to configure a transmit-cap of 150Mbps to match bandwidth provided by the ISP.
 
-Device interface traffic engineering is configured under the `device-interface`.  
+Device interface traffic engineering is configured under the [`device-interface`](config_command_guide.md#configure-authority-router-node-device-interface-traffic-engineering).  
 
 ```
 authority
     router
         node
-            device-interface foo
+            device-interface 2
                 traffic-engineering             
                 enabled true              
                 transmit-cap 1500000              
@@ -37,7 +37,7 @@ authority
 - `transmit-cap`: The effective port rate of the device interfaces in bits per second. This value is matched internally to the link speed of the device.
 - `traffic-profile`: Identifies the traffic-profile to be used when determining the traffic class distributions.
 
-![Traffic Engineering Settings](/img/config_interface_te.png)
+![Traffic Engineering Settings](/img/config_dev_interface_te.png)
 
 ## Troubleshooting and Statistics
 
