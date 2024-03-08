@@ -4,7 +4,7 @@ sidebar_label: '3.7'
 ---
 ## Release 3.7.7
 
-**Release Date:** TBD
+**Release Date:** March 29, 2024
 
 ### Resolved Issues
 
@@ -23,6 +23,10 @@ sidebar_label: '3.7'
 - **WAN-2518 _internal_ network showing up on the Networks dropdown for Application Policy Insights**
 
   _**Resolution**_ The internal network will not be included in the data reported for the feature.
+
+- **WAN-2647 Peer path status is displayed incorrectly under Topology Details view for HA routers**
+
+  _**Resolution**_ For VRRP based redundancy, the active/standby status will be reported correctly.
 
 - **WAN-2678 MIST onboarding for HA routers fails with a `mutual authentication failed` error**
 
